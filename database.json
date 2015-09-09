@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": {"ENV": "USER"},
+    "password": "",
+    "host": "localhost",
+    "database": "pubsweet",
+    "template": "template0"
+  }
+}
+
