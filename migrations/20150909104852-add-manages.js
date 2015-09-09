@@ -3,7 +3,7 @@ var type = dbm.dataType;
 
 exports.up = function(db, callback) {
   db.createTable("manages", {
-    id: { type: "int" , primaryKey: true },
+    id: { type: "serial" , primaryKey: true },
     data: "jsonb"
   }, callback)
 };
