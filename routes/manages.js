@@ -3,8 +3,8 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL;
 
-/* GET manages listing. */
 
+// POST (create)
 router.post('/', function(req, res, next) {
   var results = [];
 
@@ -13,29 +13,112 @@ router.post('/', function(req, res, next) {
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
-
-      // SQL Query > Insert Data
-      client.query("INSERT INTO manages(data) values($1)", [data]);
-
-      // SQL Query > Select Data
-      var query = client.query("SELECT * FROM manages ORDER BY id ASC");
-
-      // Stream results back one row at a time
-      query.on('row', function(row) {
-          results.push(row);
+      // Insert a manage
+    client.query('INSERT INTO manages(data) values($1) RETURNING id, data', [data],
+      function(err, result) {
+        if(err) {
+          console.log(err)
+        } else {
+          done();
+          return res.status(201).json(result.rows[0]);
+        }
       });
 
-      // After all data is returned, close connection and return results
-      query.on('end', function() {
-          client.end();
-          return res.json(results);
+    // Handle Errors
+    if(err) {
+      console.log(err);
+    }
+  });
+});
+
+// GET (index)
+router.get('/', function(req, res) {
+  var results = [];
+
+  pg.connect(connectionString, function(err, client, done) {
+    var query = client.query('SELECT * FROM manages ORDER BY id ASC;');
+
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      client.end();
+      return res.json(results);
+    });
+
+    if(err) {
+      console.log(err);
+    }
+  });
+});
+
+// GET (show)
+router.get('/:manage_id', function(req, res) {
+  var id = req.params.manage_id;
+
+  pg.connect(connectionString, function(err, client, done) {
+    var query = client.query('SELECT * FROM manages WHERE id = ($1)', [id],
+      function(err, result) {
+        done();
+        if(err) {
+          return console.error(err);
+        }
+        return res.json(result.rows[0]);
       });
 
-      // Handle Errors
-      if(err) {
-        console.log(err);
+    if(err) {
+      console.error(err);
+    }
+  });
+});
+
+// PUT (update)
+router.put('/:manage_id', function(req, res) {
+  var id = req.params.manage_id;
+  var data = req.body.data;
+
+  pg.connect(connectionString, function(err, client, done) {
+    client.query('UPDATE manages SET data=($1) WHERE id=($2) RETURNING id, data',
+      [data, id],
+      function (err, result) {
+        done();
+        if(err) {
+          return console.error(err);
+        }
+        return res.json(result.rows[0]);
       }
+    );
 
+    // Handle Errors
+    if(err) {
+      console.log(err);
+    }
+  });
+});
+
+// DELETE (...)
+
+router.delete('/:manages_id', function(req, res) {
+  var id = req.params.manages_id;
+
+  pg.connect(connectionString, function(err, client, done) {
+    client.query('DELETE FROM manages WHERE id=($1)', [id],
+      function(err, result) {
+        done();
+        if(err) {
+          console.error(err)
+        } else {
+          res.sendStatus(200);
+        }
+      });
+
+    // Handle Errors
+    if(err) {
+      console.error(err);
+    }
   });
 });
 
