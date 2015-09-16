@@ -1,7 +1,8 @@
 import Iso from 'iso';
+import { RoutingContext, match } from 'react-router';
+import createLocation from 'history/lib/createLocation';
 import React from 'react';
-import Router from 'react-router';
-import Location from 'react-router/lib/Location';
+import { renderToString } from 'react-dom/server'
 
 import alt from 'altInstance';
 import routes from 'routes.jsx';
@@ -15,14 +16,20 @@ import html from 'base.html';
  */
 const renderToMarkup = (alt, state, req, res) => {
   let markup;
-  let location = new Location(req.path, req.query);
+  let location = createLocation(req.originalUrl);
   alt.bootstrap(state);
-  Router.run(routes, location, (error, initialState, transition) => {
-    if (transition.isCancelled) {
-      return res.redirect(302, transition.redirectInfo.pathname);
+
+  match({ routes, location }, (error, redirectLocation, renderProps) => {
+    if (redirectLocation)
+      res.redirect(301, redirectLocation.pathname + redirectLocation.search)
+    else if (error)
+      res.send(500, error.message)
+    else if (renderProps == null)
+      res.send(404, 'Not found')
+    else {
+      let content = renderToString(<RoutingContext {...renderProps}/>);
+      markup = Iso.render(content, alt.flush());
     }
-    let content = React.renderToString(<Router {...initialState} />);
-    markup = Iso.render(content, alt.flush());
   });
 
   return markup;

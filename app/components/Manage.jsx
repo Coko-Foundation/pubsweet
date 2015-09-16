@@ -1,20 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import MainSection from 'components/ManageList';
+import ManageList from 'components/ManageList'
+import ManageCreate from 'components/ManageCreate'
 
-import styles from 'scss/components/_vote';
+import styles from 'scss/components/_vote'
 
 export default class Manage extends React.Component {
 
-  render() {
+  render () {
     return (
       <div className={styles.vote}>
-        <MainSection topics={this.props.ManageStore.manages} />
+        <ManageCreate manage={this.props.ManageStore.newManage} />
+        <ManageList manages={this.props.ManageStore.manages} />
       </div>
-    );
+    )
   }
 }
 
 Manage.propTypes = {
   ManageStore: React.PropTypes.object
-};
+}

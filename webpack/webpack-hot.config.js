@@ -3,22 +3,20 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack");
 
 var assetsPath = path.join(__dirname, "..", "public", "assets");
-var publicPath = "assets/";
+var publicPath = "http://localhost:3001/assets/";
+
+var WEBPACK_HOST = "localhost";
+var WEBPACK_PORT = 3001;
 
 var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
-    loader: "babel-loader?stage=0",
-    include: path.join(__dirname, "..",  "app")
+    loaders: ["react-hot", "babel-loader?stage=0"],
+    include: path.join(__dirname, "..", "app")
   },
   { test: /\.png$/, loader: "url-loader" },
   { test: /\.jpg$/, loader: "file-loader" },
-  { test: /\.html$/, loader: "html-loader" },
-  { test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css?module&localIdentName=[local]__[hash:base64:5]' +
-      '&sourceMap!sass?sourceMap&outputStyle=expanded' +
-      '&includePaths[]=' + (path.resolve(__dirname, '../node_modules')))
-  }
+  { test: /\.html$/, loader: "html-loader" }
 ];
 
 module.exports = [
@@ -46,7 +44,9 @@ module.exports = [
      */
     context: path.join(__dirname, "..", "app"),
     entry: {
-      app: "./client"
+      app:[ 'webpack-dev-server/client?http://' + WEBPACK_HOST + ":" + WEBPACK_PORT,
+       'webpack/hot/dev-server',
+        "./client" ]
     },
     output: {
       // The output directory as absolute path
@@ -57,14 +57,19 @@ module.exports = [
       publicPath: publicPath
 
     },
-    devtool: "source-map",
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
         exclude: /node_modules/,
-        loaders: ["eslint"]
+        loaders: ["eslint-loader"]
       }],
-      loaders: commonLoaders
+      loaders: commonLoaders.concat([
+          { test: /\.scss$/,
+            loader: 'style!css?module&localIdentName=[local]__[hash:base64:5]' +
+              '&sourceMap!sass?sourceMap&outputStyle=expanded' +
+              '&includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
+          }
+      ])
     },
     resolve: {
       extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
@@ -73,9 +78,8 @@ module.exports = [
       ]
     },
     plugins: [
-        // extract inline css from modules into separate files
-        new ExtractTextPlugin("styles/main.css"),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ]
   }, {
     // The configuration for the server-side rendering
@@ -95,26 +99,21 @@ module.exports = [
       publicPath: publicPath,
       libraryTarget: "commonjs2"
     },
-    externals: [
-      {
-        'alt/AltContainer': true,
-        'react/addons': true
-      },
-      /^[a-z\-0-9]+$/
-    ],
+    externals: /^[a-z\-0-9]+$/,
     module: {
-      loaders: commonLoaders
+      loaders: commonLoaders.concat([
+          { test: /\.scss$/,
+            loader: 'css/locals?module&localIdentName=[local]__[hash:base64:5]' +
+              '&sourceMap!sass?sourceMap&outputStyle=expanded' +
+              '&includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
+          }
+      ])
     },
     resolve: {
       extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
       modulesDirectories: [
         "app", "node_modules"
       ]
-    },
-    plugins: [
-        // extract inline css from modules into separate files
-        new ExtractTextPlugin("styles/main.css"),
-        new webpack.optimize.UglifyJsPlugin()
-    ]
+    }
   }
 ];

@@ -1,9 +1,9 @@
-import React from 'react';
-import AltContainer from 'alt/AltContainer';
-import ManageStore from 'stores/ManageStore';
-import Navigation from 'components/Navigation';
+import React from 'react'
+import AltContainer from 'alt/AltContainer'
+import ManageStore from 'stores/ManageStore'
+import Navigation from 'components/Navigation'
 
-import 'scss/main';
+import 'scss/main'
 
 /*
  * This component operates as a "Controller-View". It listens for changes in the
@@ -22,7 +22,7 @@ import 'scss/main';
  */
 
 export default class App extends React.Component {
-  render() {
+  render () {
     return (
       <AltContainer stores={{
         ManageStore: ManageStore
@@ -30,8 +30,8 @@ export default class App extends React.Component {
         <Navigation />
         {this.props.children}
       </AltContainer>
-    );
+    )
   }
 }
 
-App.propTypes = { children: React.PropTypes.object };
+App.propTypes = { children: React.PropTypes.object }

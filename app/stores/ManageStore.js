@@ -1,7 +1,7 @@
-import Immutable from 'immutable';
-import ManageActions from 'actions/ManageActions';
-import { fromJSOrdered } from 'utils/immutableHelpers';
-import alt from 'altInstance';
+import Immutable from 'immutable'
+import manageActions from 'actions/ManageActions'
+import { fromJSOrdered } from 'utils/immutableHelpers'
+import alt from 'altInstance'
 
 /**
  * Flux Explanation of Store:
@@ -31,68 +31,68 @@ class ManageStore {
    * The constructor of your store definition receives the alt instance as its first and only argument. All instance variables,
    * values assigned to `this`, in any part of the StoreModel will become part of state.
    */
-  constructor() {
+  constructor () {
     // Instance variables defined anywhere in the store will become the state. You can initialize these in the constructor and
     // then update them directly in the prototype methods
-    this.manages = Immutable.OrderedMap({});
+    this.manages = Immutable.OrderedMap({})
     // Do not think we need an Immutable object here
-    this.newManage = '';
+    this.newManage = ''
 
     // (lifecycleMethod: string, handler: function): undefined
     // on: This method can be used to listen to Lifecycle events. Normally they would set up in the constructor
-    this.on('init', this.bootstrap);
-    this.on('bootstrap', this.bootstrap);
+    this.on('init', this.bootstrap)
+    this.on('bootstrap', this.bootstrap)
     // (listenersMap: object): undefined
     // bindListeners accepts an object where the keys correspond to the method in your
     // StoreModel and the values can either be an array of action symbols or a single action symbol.
     // Remember: alt generates uppercase constants for us to reference
     this.bindListeners({
-      handlePublish: ManageActions.PUBLISH,
-      handleUnpublish: ManageActions.UNPUBLISH,
-      handleCreate: ManageActions.CREATE,
-      handleDestroy: ManageActions.DESTROY,
-      handleTyping: ManageActions.TYPING
-    });
+      handlePublish: manageActions.PUBLISH,
+      handleUnpublish: manageActions.UNPUBLISH,
+      handleCreate: manageActions.CREATE,
+      handleDestroy: manageActions.DESTROY,
+      handleTyping: manageActions.TYPING
+    })
   }
 
-  bootstrap() {
+  bootstrap () {
     if (!Immutable.OrderedMap.isOrderedMap(this.manages)) {
-      this.manages = fromJSOrdered(this.manages);
+      this.manages = fromJSOrdered(this.manages)
     }
-    this.newManage = '';
+    this.newManage = ''
   }
 
-  handlePublish(id) {
-    const manage = this.manages.get(id);
-    this.manages = this.manages.set(id, manage.set('status', 'published'));
-    this.emitChange();
+  handlePublish (id) {
+    const manage = this.manages.get(id)
+    this.manages = this.manages.set(id, manage.set('status', 'published'))
+    this.emitChange()
   }
 
-  handleUnpublish(id) {
-    const manage = this.manages.get(id);
-    this.manages = this.manages.set(id, manage.set('status', 'unpublished'));
-    this.emitChange();
+  handleUnpublish (id) {
+    const manage = this.manages.get(id)
+    this.manages = this.manages.set(id, manage.set('status', 'unpublished'))
+    this.emitChange()
   }
 
-  handleCreate(data) {
-    const id = data.id;
-    this.manages = this.manages.set(id, Immutable.fromJS(data));
-    this.emitChange();
+  handleCreate (data) {
+    const id = data.id
+    this.manages = this.manages.set(id, Immutable.fromJS(data))
+    this.emitChange()
   }
 
-  handleDestroy(id) {
-    this.manages = this.manages.delete(id);
-    this.emitChange();
+  handleDestroy (id) {
+    this.manages = this.manages.delete(id)
+    this.emitChange()
   }
 
-  handleTyping(data) {
+  handleTyping (data) {
     // Check if it already exists
-    this.newManage = data;
-    this.emitChange();
+    this.newManage = data
+    this.emitChange()
     // otherwise, it is unchanged.
   }
 
 }
 
 // Export our newly created Store
-export default alt.createStore(ManageStore, 'ManageStore');
+export default alt.createStore(ManageStore, 'ManageStore')
