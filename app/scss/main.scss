@@ -1,6 +1,10 @@
 /*
 Style Guide Lines. Remove if you prefer your own library
  */
+
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
+
 body {
 	font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
   	font-weight: normal;

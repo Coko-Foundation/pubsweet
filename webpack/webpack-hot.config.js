@@ -15,7 +15,7 @@ var commonLoaders = [
     include: path.join(__dirname, "..", "app")
   },
   { test: /\.png$/, loader: "url-loader" },
-  { test: /\.jpg$/, loader: "file-loader" },
+  { test: /\.(jpg|woff|woff2|eot|ttf|svg)$/, loader: "file-loader" },
   { test: /\.html$/, loader: "html-loader" }
 ];
 
