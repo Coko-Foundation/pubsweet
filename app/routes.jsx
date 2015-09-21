@@ -6,8 +6,6 @@ import About from 'components/About'
 import Dashboard from 'components/Dashboard'
 import Manage from 'components/Manage'
 
-// import ManageStore from 'stores/ManageStore'
-
 export default (
   <Route path='/admin' component={App}>
     <Route path='manage' component={Manage} />

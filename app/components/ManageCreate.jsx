@@ -22,7 +22,7 @@ export default class ManageCreate extends React.Component {
   render () {
     return (
       <div className={styles.entrybox}>
-        <h1 className={styles.entrybox__header}>Create a new manage</h1>
+        <h1 className={styles.entrybox__header}>Create a new blog post</h1>
         <ManageTextInput className={styles.entrybox__input} value={this.props.manage} placeholder="What's your next content?" onChange={this._onChange} onSave={this._onSave} />
       </div>
     )

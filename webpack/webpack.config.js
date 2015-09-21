@@ -22,6 +22,28 @@ var commonLoaders = [
 ];
 
 module.exports = [
+  // To generate the Bootstrap CSS
+  {
+    entry: {
+      "bootstrap" : "./app/scss/bootstrap.scss"
+    },
+    name: "bootstrap",
+    output: {
+      path: assetsPath,
+      filename: "bootstrap.css",
+      publicPath: publicPath
+    },
+    module: {
+      loaders: [
+        { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: "file-loader" },
+        { test: /bootstrap.scss$/,
+          loader: 'css!sass' +
+            '?includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
+        }
+
+      ]
+    },
+  },
   {
     // The configuration for the client
     name: "browser",
@@ -73,9 +95,9 @@ module.exports = [
       ]
     },
     plugins: [
-        // extract inline css from modules into separate files
-        new ExtractTextPlugin("styles/main.css"),
-        new webpack.optimize.UglifyJsPlugin()
+      // extract inline css from modules into separate files
+      new ExtractTextPlugin("styles/main.css"),
+      new webpack.optimize.UglifyJsPlugin()
     ]
   }, {
     // The configuration for the server-side rendering
@@ -112,9 +134,9 @@ module.exports = [
       ]
     },
     plugins: [
-        // extract inline css from modules into separate files
-        new ExtractTextPlugin("styles/main.css"),
-        new webpack.optimize.UglifyJsPlugin()
+      // extract inline css from modules into separate files
+      new ExtractTextPlugin("styles/main.css"),
+      new webpack.optimize.UglifyJsPlugin()
     ]
   }
 ];

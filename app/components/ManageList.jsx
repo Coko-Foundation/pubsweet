@@ -11,7 +11,7 @@ export default class ManageList extends React.Component {
     }).toArray()
     return (
       <div className={styles['main-section']}>
-        <h3 className={styles['main-section__header']}>Manage</h3>
+        <h3 className={styles['main-section__header']}>Blog posts</h3>
         <ul className={styles['main-section__list']}>{manages}</ul>
       </div>
     )
