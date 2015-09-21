@@ -1,7 +1,7 @@
 import React from 'react'
 import ManageActions from 'actions/ManageActions'
-
-import styles from 'scss/components/_vote'
+import { Button, Row, Col } from 'react-bootstrap'
+import styles from 'scss/components/_manageItem'
 
 export default class ManageItem extends React.Component {
   constructor (props) {
@@ -26,12 +26,15 @@ export default class ManageItem extends React.Component {
 
   render () {
     return (
-      <li className={styles['manage-item']} key={this.props.id}>
-        <span className={styles['manage-item__manage']}>{this.props.title}</span>
-        <button className={styles['manage-item__button'] + ' ' + styles['manage-item__button--increment']} onClick={this._onPublish}>+</button>
-        <button className={styles['manage-item__button'] + ' ' + styles['manage-item__button--decrement']} onClick={this._onUnpublish}>-</button>
-        <button className={styles['manage-item__button'] + ' ' + styles['manage-item__button--destroy']} onClick={this._onDestroyClick}>{String.fromCharCode(215)}</button>
-      </li>
+      <Row className={styles['manage-item']} key={this.props.id}>
+        <Col xs={12} md={8}><span className={styles['manage-item__manage']}>{this.props.title}</span></Col>
+        <Col xs={12} md={4}>
+          <Button bsStyle='primary'>Edit</Button>&nbsp;
+          <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
+          <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
+          <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>
+        </Col>
+      </Row>
     )
   }
 }

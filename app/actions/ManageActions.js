@@ -23,12 +23,14 @@ class ManageActions {
     }).catch(function (err) {
       console.error(err)
     })
-      // .done(function success() {
-      //   // We might not need to do anything it successfully added due to optimistic updates.
-      // })
-      // .fail(function failure() {
-      //   // dispatch an event if fails to notify user that it has failed
-      // })
+  }
+
+  update (id, data) {
+    ManageAPI.updateManage(id, data).then(function (data) {
+      that.dispatch(data)
+    }).catch(function (err) {
+      console.error(err)
+    })
   }
 
   destroy (id) {

@@ -2,7 +2,7 @@ import React from 'react'
 import Immutable from 'immutable'
 import ManageItem from 'components/ManageItem'
 
-import styles from 'scss/components/_vote'
+import styles from 'scss/components/_manageList'
 
 export default class ManageList extends React.Component {
   render () {
@@ -12,7 +12,7 @@ export default class ManageList extends React.Component {
     return (
       <div className={styles['main-section']}>
         <h3 className={styles['main-section__header']}>Blog posts</h3>
-        <ul className={styles['main-section__list']}>{manages}</ul>
+        {manages}
       </div>
     )
   }
