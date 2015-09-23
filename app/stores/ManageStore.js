@@ -1,6 +1,5 @@
 import Immutable from 'immutable'
 import manageActions from 'actions/ManageActions'
-import { fromJSOrdered } from 'utils/immutableHelpers'
 import alt from 'altInstance'
 
 /**
@@ -47,8 +46,7 @@ class ManageStore {
     // StoreModel and the values can either be an array of action symbols or a single action symbol.
     // Remember: alt generates uppercase constants for us to reference
     this.bindListeners({
-      handlePublish: manageActions.PUBLISH,
-      handleUnpublish: manageActions.UNPUBLISH,
+      handleUpdate: manageActions.UPDATE,
       handleCreate: manageActions.CREATE,
       handleDestroy: manageActions.DESTROY,
       handleTyping: manageActions.TYPING
@@ -57,31 +55,25 @@ class ManageStore {
 
   bootstrap () {
     if (!Immutable.OrderedMap.isOrderedMap(this.manages)) {
-      this.manages = fromJSOrdered(this.manages)
+      this.manages = Immutable.fromJS(this.manages).toOrderedMap()
     }
     this.newManage = ''
   }
 
-  handlePublish (id) {
-    const manage = this.manages.get(id)
-    this.manages = this.manages.set(id, manage.set('status', 'published'))
-    this.emitChange()
-  }
-
-  handleUnpublish (id) {
-    const manage = this.manages.get(id)
-    this.manages = this.manages.set(id, manage.set('status', 'unpublished'))
+  handleUpdate (data) {
+    const id = data.id.toString()
+    this.manages = this.manages.set(id, Immutable.fromJS(data))
     this.emitChange()
   }
 
   handleCreate (data) {
-    const id = data.id
+    const id = data.id.toString()
     this.manages = this.manages.set(id, Immutable.fromJS(data))
     this.emitChange()
   }
 
   handleDestroy (id) {
-    this.manages = this.manages.delete(id)
+    this.manages = this.manages.delete(id.toString())
     this.emitChange()
   }
 

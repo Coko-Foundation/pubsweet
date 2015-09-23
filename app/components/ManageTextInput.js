@@ -34,7 +34,6 @@ export default class ManageTextInput extends React.Component {
   }
 
   _onChange (event) {
-    this.props.onChange(this.state.value)
     this.setState({
       value: event.target.value
     })
@@ -52,6 +51,5 @@ ManageTextInput.propTypes = {
   id: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   onSave: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func,
   value: React.PropTypes.string
 }

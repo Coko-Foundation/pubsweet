@@ -29,7 +29,7 @@ const utils = {
           } else {
             resolve(res.body)
           }
-      })
+        })
     })
   },
 

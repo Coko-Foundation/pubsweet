@@ -7,7 +7,7 @@ import styles from 'scss/components/_manageList'
 export default class ManageList extends React.Component {
   render () {
     const manages = this.props.manages.toKeyedSeq().map((manage, key) => {
-      return (<ManageItem id={key} key={key} title={manage.getIn(['data', 'title'])} />)
+      return (<ManageItem key={manage.get('id')} id={manage.get('id')} title={manage.getIn(['data', 'title'])} status={manage.getIn(['data', 'status'])}/>)
     }).toArray()
     return (
       <div className={styles['main-section']}>

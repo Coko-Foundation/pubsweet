@@ -15,9 +15,9 @@ var commonLoaders = [
   { test: /\.jpg$/, loader: "file-loader" },
   { test: /\.html$/, loader: "html-loader" },
   { test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css?module&localIdentName=[local]__[hash:base64:5]' +
+    loader: 'css/locals?module&localIdentName=[local]__[hash:base64:5]' +
       '&sourceMap!sass?sourceMap&outputStyle=expanded' +
-      '&includePaths[]=' + (path.resolve(__dirname, '../node_modules')))
+      '&includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
   }
 ];
 
@@ -71,12 +71,12 @@ module.exports = [
       modulesDirectories: [
         "app", "node_modules"
       ]
-    },
-    plugins: [
-      // extract inline css from modules into separate files
-      new ExtractTextPlugin("styles/main.css"),
-      new webpack.optimize.UglifyJsPlugin()
-    ]
+    }
+    // plugins: [
+    //   // extract inline css from modules into separate files
+    //   new ExtractTextPlugin("styles/main.css"),
+    //   new webpack.optimize.UglifyJsPlugin()
+    // ]
   }, {
     // The configuration for the server-side rendering
     name: "server-side rendering",
@@ -110,11 +110,11 @@ module.exports = [
       modulesDirectories: [
         "app", "node_modules"
       ]
-    },
-    plugins: [
-      // extract inline css from modules into separate files
-      new ExtractTextPlugin("styles/main.css"),
-      new webpack.optimize.UglifyJsPlugin()
-    ]
+    }
+    // plugins: [
+    //   // extract inline css from modules into separate files
+    //   new ExtractTextPlugin("styles/main.css"),
+    //   new webpack.optimize.UglifyJsPlugin()
+    // ]
   }
 ];

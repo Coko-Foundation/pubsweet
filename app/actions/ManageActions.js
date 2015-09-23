@@ -2,11 +2,6 @@ import alt from 'altInstance'
 import ManageAPI from 'utils/ManageAPI'
 
 class ManageActions {
-  publish (id) {
-  }
-
-  unpublish (id) {
-  }
 
   create (title) {
     const that = this
@@ -26,6 +21,8 @@ class ManageActions {
   }
 
   update (id, data) {
+    const that = this
+
     ManageAPI.updateManage(id, data).then(function (data) {
       that.dispatch(data)
     }).catch(function (err) {
