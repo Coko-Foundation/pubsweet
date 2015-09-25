@@ -29,4 +29,4 @@ $ npm run db-migrate up
 $ npm run hot
 ```
 
-Point your browser to: http://localhost:3001
+Point your browser to: http://localhost:3000
