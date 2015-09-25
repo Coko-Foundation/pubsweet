@@ -1,21 +1,18 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({mergeParams: true})
 const pg = require('pg')
 const connectionString = process.env.DATABASE_URL
-
-// Nested resource for "create" bucket items
-const createsRouter = require('./creates')
-router.use('/:manageId/creates', createsRouter)
 
 // POST (create)
 router.post('/', function(req, res) {
   // Grab data from http request
+  const manageId = req.params.manageId
   const data = req.body.data
 
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
       // Insert a manage
-    client.query('INSERT INTO manages(data) values($1) RETURNING id, data', [data],
+    client.query('INSERT INTO creates(manage_id, data) VALUES($1, $2) RETURNING id, manage_id, data', [manageId, data],
       function(err, result) {
         if (err) {
           console.log(err)
@@ -35,9 +32,9 @@ router.post('/', function(req, res) {
 // GET (index)
 router.get('/', function(req, res) {
   const results = []
-
+  const manageId = req.params.manageId
   pg.connect(connectionString, function(err, client, done) {
-    const query = client.query('SELECT * FROM manages ORDER BY id ASC')
+    const query = client.query('SELECT * FROM creates WHERE manage_id = $1 ORDER BY id ASC', [manageId])
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -57,11 +54,11 @@ router.get('/', function(req, res) {
 })
 
 // GET (show)
-router.get('/:manageId', function(req, res) {
-  const id = req.params.manageId
+router.get('/:createId', function(req, res) {
+  const id = req.params.createId
 
   pg.connect(connectionString, function(err, client, done) {
-    client.query('SELECT * FROM manages WHERE id = ($1)', [id],
+    client.query('SELECT * FROM creates WHERE id = ($1)', [id],
       function(err, result) {
         done()
         if (err) {
@@ -77,12 +74,12 @@ router.get('/:manageId', function(req, res) {
 })
 
 // PUT (update)
-router.put('/:manageId', function(req, res) {
-  const id = req.params.manageId
+router.put('/:createId', function(req, res) {
+  const id = req.params.createId
   const data = req.body.data
 
   pg.connect(connectionString, function(err, client, done) {
-    client.query('UPDATE manages SET data=($1) WHERE id=($2) RETURNING id, data',
+    client.query('UPDATE creates SET data=($1) WHERE id=($2) RETURNING id, manage_id, data',
       [data, id],
       function(err, result) {
         done()
@@ -101,12 +98,11 @@ router.put('/:manageId', function(req, res) {
 })
 
 // DELETE (...)
-
-router.delete('/:manageId', function(req, res) {
-  const id = req.params.manageId
+router.delete('/:createId', function(req, res) {
+  const id = req.params.createId
 
   pg.connect(connectionString, function(err, client, done) {
-    client.query('DELETE FROM manages WHERE id=($1)', [id],
+    client.query('DELETE FROM creates WHERE id=($1)', [id],
       function(err) {
         done()
         if (err) {
