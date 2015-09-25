@@ -10,24 +10,36 @@ const App = require('../public/assets/app.server');
 // If you were indeed doing this in production, you should instead only
 // query the Manages on a page that has manages
 router.get('*', function(req, res, next) {
-  var results = [];
+  var manages = []
+  var creates = []
+
   pg.connect(connectionString, function(err, client, done) {
     const query = client.query('SELECT * FROM manages ORDER BY id ASC;');
 
-    // Stream results back one row at a time
     query.on('row', function(row) {
-      results.push(row);
+      manages.push(row);
     });
 
-    // After all data is returned, close connection and return results
     query.on('end', function() {
-      done();
-      const manages = _.indexBy(results, 'id');
-      res.locals.data = {
-        ManageStore: { manages: manages }
-      }
-      next();
-    });
+      const subquery = client.query('SELECT * FROM creates ORDER BY id ASC;');
+
+      subquery.on('row', function(row) {
+        creates.push(row)
+      })
+
+      subquery.on('end', function() {
+        done()
+
+        const manages = _.indexBy(manages, 'id')
+        const creates = _.indexBy(creates, 'id');
+
+        res.locals.data = {
+          ManageStore: { manages: manages },
+          CreateStore: { creates: creates }
+        }
+        next();
+      })
+    })
 
     if (err) {
       res.status(500).send(err);

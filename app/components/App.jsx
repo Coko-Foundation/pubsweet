@@ -25,7 +25,8 @@ export default class App extends React.Component {
   render () {
     return (
       <AltContainer stores={{
-        ManageStore: ManageStore
+        ManageStore: ManageStore,
+        CreateStore: CreateStore
       }}>
         <Navigation />
         {this.props.children}

@@ -8,7 +8,8 @@ import Manage from 'components/Manage'
 
 export default (
   <Route path='/admin' component={App}>
-    <Route path='manage' component={Manage} />
+    <Route path='manages' component={Manage} />
+    <Route path='manages/:manage_id/creates/:create_id' component={Create}>
     <Route path='dashboard' component={Dashboard} />
     <Route path='about' component={About} />
   </Route>
