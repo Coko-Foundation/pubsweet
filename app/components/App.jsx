@@ -1,6 +1,8 @@
 import React from 'react'
 import AltContainer from 'alt/AltContainer'
 import ManageStore from 'stores/ManageStore'
+import CreateStore from 'stores/CreateStore'
+
 import Navigation from 'components/Navigation'
 
 import 'scss/main'

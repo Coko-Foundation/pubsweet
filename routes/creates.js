@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
       // Insert a manage
-    client.query('INSERT INTO creates(manage_id, data) VALUES($1, $2) RETURNING id, manage_id, data', [manageId, data],
+    client.query('INSERT INTO creates(data) VALUES($1, $2) RETURNING id, data', [data],
       function(err, result) {
         if (err) {
           console.log(err)
@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
   const results = []
   const manageId = req.params.manageId
   pg.connect(connectionString, function(err, client, done) {
-    const query = client.query('SELECT * FROM creates WHERE manage_id = $1 ORDER BY id ASC', [manageId])
+    const query = client.query('SELECT * FROM creates ORDER BY id ASC')
 
     // Stream results back one row at a time
     query.on('row', function(row) {
@@ -79,7 +79,7 @@ router.put('/:createId', function(req, res) {
   const data = req.body.data
 
   pg.connect(connectionString, function(err, client, done) {
-    client.query('UPDATE creates SET data=($1) WHERE id=($2) RETURNING id, manage_id, data',
+    client.query('UPDATE creates SET data=($1) WHERE id=($2) RETURNING id, data',
       [data, id],
       function(err, result) {
         done()

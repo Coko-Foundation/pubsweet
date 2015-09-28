@@ -1,5 +1,4 @@
 var path = require("path");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack");
 
 var assetsPath = path.join(__dirname, "..", "public", "assets");
@@ -71,8 +70,10 @@ module.exports = [
       modulesDirectories: [
         "app", "node_modules"
       ]
-    }
-    // plugins: [
+    },
+    plugins: [
+      new webpack.ProvidePlugin({React: 'react'})
+    ]
     //   // extract inline css from modules into separate files
     //   new ExtractTextPlugin("styles/main.css"),
     //   new webpack.optimize.UglifyJsPlugin()
@@ -110,7 +111,10 @@ module.exports = [
       modulesDirectories: [
         "app", "node_modules"
       ]
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({React: 'react'})
+    ]
     // plugins: [
     //   // extract inline css from modules into separate files
     //   new ExtractTextPlugin("styles/main.css"),

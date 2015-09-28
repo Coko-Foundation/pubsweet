@@ -3,10 +3,6 @@ const router = express.Router()
 const pg = require('pg')
 const connectionString = process.env.DATABASE_URL
 
-// Nested resource for "create" bucket items
-const createsRouter = require('./creates')
-router.use('/:manageId/creates', createsRouter)
-
 // POST (create)
 router.post('/', function(req, res) {
   // Grab data from http request

@@ -1,10 +1,10 @@
 var request = require('superagent')
 
 const utils = {
-  getCreate: (manageId, id) => {
+  getCreate: (id) => {
     return new Promise(function (resolve, reject) {
       request
-        .get(`/manages/${manageId}/creates/${id}`)
+        .get(`/creates/${id}`)
         .end(function (err, res) {
           if (err) {
             console.error(err)
@@ -19,7 +19,7 @@ const utils = {
   addCreate: (manageId, create) => {
     return new Promise(function (resolve, reject) {
       request
-        .post(`/manages/${manageId}/creates`)
+        .post(`/creates`)
         .send({ data: create })
         .end(function (err, res) {
           if (err) {
@@ -32,10 +32,10 @@ const utils = {
     })
   },
 
-  updateCreate: (manageId, id, create) => {
+  updateCreate: (id, create) => {
     return new Promise(function (resolve, reject) {
       request
-        .put(`/manages/${manageId}/creates/${id}`)
+        .put(`/creates/${id}`)
         .send({ data: create })
         .end(function (err, res) {
           if (err) {
@@ -47,9 +47,9 @@ const utils = {
     })
   },
 
-  deleteCreate: (manageId, id) => {
+  deleteCreate: (id) => {
     request
-      .del(`/manages/${manageId}/creates/${id}`)
+      .del(`/creates/${id}`)
       .end(function (err, res) {
         if (err) {
           return console.error(err)

@@ -3,10 +3,12 @@ var expect = require('expect.js')
 var app = require('../app')
 
 var fixture = {
-  "content": "<p>Test</p>"
+  manageId: 1,
+  content: "<p>Test</p>"
 };
 
 var updatedFixture = {
+  manageId: 1,
   content: "<p>Updated test</p>"
 }
 
@@ -16,7 +18,7 @@ describe('api for create objects', function(){
 
   it('creates a create object', function(done){
     request(app)
-      .post('/manages/1/creates')
+      .post('/creates')
       .send({ data: fixture })
       .expect(function(res) {
         expect(res.body.data).to.eql(fixture);
@@ -28,11 +30,10 @@ describe('api for create objects', function(){
 
   it('gets a create object', function(done){
     request(app)
-      .get('/manages/1/creates/'+id)
+      .get('/creates/'+id)
       .expect('Content-Type', /json/)
       .expect(200, {
         id: id,
-        manage_id: 1,
         data: fixture
       })
       .end(done);
@@ -40,20 +41,19 @@ describe('api for create objects', function(){
 
   it('gets all create objects', function(done){
     request(app)
-      .get('/manages/1/creates')
+      .get('/creates')
       .expect(200, [
-        {id: id, manage_id: 1, data: fixture}
+        {id: id, data: fixture}
       ])
       .end(done)
   })
 
   it('updates a create object', function(done){
     request(app)
-      .put('/manages/1/creates/'+id)
+      .put('/creates/'+id)
       .send({data: updatedFixture})
       .expect(200, {
         id: id,
-        manage_id: 1,
         data: updatedFixture
       })
       .end(done);
@@ -61,7 +61,7 @@ describe('api for create objects', function(){
 
   it('deletes a create object', function(done){
     request(app)
-      .del('/manages/1/creates/'+id)
+      .del('/creates/'+id)
       .expect(200, done);
   })
 })

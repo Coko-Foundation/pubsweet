@@ -1,60 +1,55 @@
 var React = require('react')
-var ReactPropTypes = React.PropTypes
-
-var ScienceWriter = require("lens-writer")
+var LensWriter = require('lens-writer')
 var CrossrefSearch = require('lens-writer/lib/article/bib/crossref_search')
-var NotificationService = require("lens-writer/app/notification_service")
-var PaperStore = require("../stores/PaperStore");
+var NotificationService = require('lens-writer/app/notification_service')
+var CreateStore = require('../stores/CreateStore')
+var CreateActions = require('../actions/CreateActions')
 var notifications = new NotificationService()
 
-var Backend = {
-  getDocument: function(paperId, cb) {
-    var paper = PaperStore.getPaper(paperId);
-    if (!paper) {
-      return cb("No with id " + paperId);
+const Backend = {
+  getDocument: function (id, cb) {
+    var doc = CreateStore.creates.get(id)
+    if (!doc) {
+      return cb(`No document with id ${id}`)
     } else {
-      cb(null, paper);
+      cb(null, doc)
     }
   },
 
-  saveDocument: function(doc, cb) {
-    var id = doc.id;
-    ScienceBloggerActions.savePaper(id);
-    cb();
+  saveDocument: function (doc, cb) {
+    CreateActions.updateCreate(doc.id, doc)
+    cb()
   },
 
-  uploadFigure: function(file, cb) {
-    var objectURL = window.URL.createObjectURL(file);
-    cb(null, objectURL);
+  uploadFigure: function (file, cb) {
+    var objectURL = window.URL.createObjectURL(file)
+    cb(null, objectURL)
   }
-
 }
 
-export default class LensWriter extends React.Component {
-
-  static childContextTypes = {
-    backend: React.PropTypes.object,
-    notifications: React.PropTypes.object,
-    bibSearchEngines: React.PropTypes.array
-  }
+export default class Editor extends React.Component {
 
   getChildContext () {
     return {
       backend: Backend,
       bibSearchEngines: [new CrossrefSearch()],
-      notifications: notifications,
+      notifications: notifications
     }
   }
 
   render () {
     return (
-      <ScienceWriter
-        documentId={this.props.paperId}
-      />
+      <LensWriter documentId={this.props.createId} />
     )
   }
 }
 
-Manage.propTypes = {
-  paperId: React.PropTypes.object.isRequired
+Editor.childContextTypes = {
+  backend: React.PropTypes.object,
+  notifications: React.PropTypes.object,
+  bibSearchEngines: React.PropTypes.array
+}
+
+Editor.propTypes = {
+  createId: React.PropTypes.object.isRequired
 }

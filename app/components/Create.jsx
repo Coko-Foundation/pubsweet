@@ -1,24 +1,21 @@
-import React from 'react'
-import { Grid } from 'react-bootstrap'
-import ManageList from 'components/ManageList'
-import ManageCreate from 'components/ManageCreate'
+// import React from 'react'
 
-import styles from 'scss/components/_manage'
+var React = window.React = require('react')
+import Editor from 'components/Editor'
+// import styles from 'scss/components/_create'
 
-export default class Manage extends React.Component {
-
+export default class Create extends React.Component {
   render () {
     return (
-      <Grid>
-        <div className={styles.vote}>
-          <ManageCreate manage={this.props.ManageStore.newManage} />
-          <ManageList manages={this.props.ManageStore.manages} />
-        </div>
-      </Grid>
+      <Editor createId={this.props.params.createId}/>
     )
   }
 }
 
-Manage.propTypes = {
-  ManageStore: React.PropTypes.object
+Create.propTypes = {
+  params: {
+    createId: React.PropTypes.number
+  }
+
 }
+
