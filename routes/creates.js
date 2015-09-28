@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, function(err, client, done) {
       // Insert a manage
-    client.query('INSERT INTO creates(data) VALUES($1, $2) RETURNING id, data', [data],
+    client.query('INSERT INTO creates(data) VALUES($1) RETURNING id, data', [data],
       function(err, result) {
         if (err) {
           console.log(err)
