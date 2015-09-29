@@ -70,9 +70,9 @@ export default class ManageItem extends React.Component {
           {input}
         </Col>
         <Col xs={12} md={4}>
-          <LinkContainer to={`/creates/this.props.id}`}>
-            <Button bsStyle='primary'>Edit</Button>&nbsp;
-          </LinkContainer>
+          <LinkContainer to={`/admin/creates/${this.props.id}`}>
+            <Button bsStyle='primary'>Edit</Button>
+          </LinkContainer>&nbsp;
           <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
           <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
           <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>

@@ -3,22 +3,18 @@ import CreateAPI from 'utils/CreateAPI'
 
 class CreateActions {
 
-  get (manageId, id) {
+  get (manageId) {
     const that = this
 
-    CreateAPI.getCreate(id).then(function (data) {
+    CreateAPI.getCreate(manageId).then(function (data) {
       that.dispatch(data)
     }).catch(function (err) {
       console.error(err)
     })
   }
 
-  create (content) {
+  create (data) {
     const that = this
-
-    const data = {
-      content: content
-    }
 
     CreateAPI.addCreate(data).then(function (data) {
       that.dispatch(data)

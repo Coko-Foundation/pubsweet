@@ -16,10 +16,10 @@ const utils = {
     })
   },
 
-  addCreate: (manageId, create) => {
+  addCreate: (create) => {
     return new Promise(function (resolve, reject) {
       request
-        .post(`/creates`)
+        .post('/creates')
         .send({ data: create })
         .end(function (err, res) {
           if (err) {

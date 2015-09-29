@@ -1,55 +1,31 @@
-var React = require('react')
-var LensWriter = require('lens-writer')
-var CrossrefSearch = require('lens-writer/lib/article/bib/crossref_search')
-var NotificationService = require('lens-writer/app/notification_service')
-var CreateStore = require('../stores/CreateStore')
-var CreateActions = require('../actions/CreateActions')
-var notifications = new NotificationService()
+import React from 'react'
+import ReactQuill from 'react-quill'
 
-const Backend = {
-  getDocument: function (id, cb) {
-    var doc = CreateStore.creates.get(id)
-    if (!doc) {
-      return cb(`No document with id ${id}`)
-    } else {
-      cb(null, doc)
-    }
-  },
-
-  saveDocument: function (doc, cb) {
-    CreateActions.updateCreate(doc.id, doc)
-    cb()
-  },
-
-  uploadFigure: function (file, cb) {
-    var objectURL = window.URL.createObjectURL(file)
-    cb(null, objectURL)
-  }
-}
+import 'scss/components/_editor'
 
 export default class Editor extends React.Component {
+  constructor (props) {
+    super(props)
+    this._onChange = this._onChange.bind(this)
 
-  getChildContext () {
-    return {
-      backend: Backend,
-      bibSearchEngines: [new CrossrefSearch()],
-      notifications: notifications
+    this.state = {
+      value: this.props.value || ''
     }
+  }
+
+  _onChange (value) {
+    this.setState({value: value})
+    this.props.onChange(value)
   }
 
   render () {
     return (
-      <LensWriter documentId={this.props.createId} />
+      <ReactQuill theme='snow' value={this.state.value} onChange={this._onChange} />
     )
   }
 }
 
-Editor.childContextTypes = {
-  backend: React.PropTypes.object,
-  notifications: React.PropTypes.object,
-  bibSearchEngines: React.PropTypes.array
-}
-
 Editor.propTypes = {
-  createId: React.PropTypes.object.isRequired
+  onChange: React.PropTypes.func,
+  value: React.PropTypes.string
 }

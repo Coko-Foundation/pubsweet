@@ -1,5 +1,7 @@
 import Immutable from 'immutable'
 import createActions from 'actions/CreateActions'
+import manageActions from 'actions/ManageActions'
+
 import alt from 'altInstance'
 
 class CreateStore {
@@ -16,8 +18,8 @@ class CreateStore {
     this.on('bootstrap', this.bootstrap)
 
     this.bindListeners({
+      handleManageCreate: manageActions.CREATE,
       handleUpdate: [createActions.UPDATE, createActions.GET],
-      handleCreate: createActions.CREATE,
       handleDestroy: createActions.DESTROY
     })
   }
@@ -26,16 +28,21 @@ class CreateStore {
     if (!Immutable.OrderedMap.isOrderedMap(this.creates)) {
       this.creates = Immutable.fromJS(this.creates).toOrderedMap()
     }
-    this.newManage = ''
+    this.newCreate = ''
   }
 
-  handleUpdate (data) {
-    const id = data.id.toString()
-    this.creates = this.creates.set(id, Immutable.fromJS(data))
+  // Create the dependent relationship
+  handleManageCreate (manage) {
+    const create = {
+      manageId: manage.id,
+      content: manage.data.title
+    }
+    createActions.create(create)
+    this.creates = this.creates.set(manage.id.toString(), Immutable.fromJS(create))
     this.emitChange()
   }
 
-  handleCreate (data) {
+  handleUpdate (data) {
     const id = data.id.toString()
     this.creates = this.creates.set(id, Immutable.fromJS(data))
     this.emitChange()
