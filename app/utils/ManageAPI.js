@@ -5,7 +5,7 @@ const utils = {
   addManage: (manage) => {
     return new Promise(function (resolve, reject) {
       request
-        .post('/manages')
+        .post('/api/manages')
         .send({ data: manage })
         .end(function (err, res) {
           if (err) {
@@ -21,7 +21,7 @@ const utils = {
   updateManage: (id, manage) => {
     return new Promise(function (resolve, reject) {
       request
-        .put('/manages/' + id)
+        .put('/api/manages/' + id)
         .send({ data: manage })
         .end(function (err, res) {
           if (err) {
@@ -35,7 +35,7 @@ const utils = {
 
   deleteManage: (id) => {
     request
-      .del('/manages/' + id)
+      .del('/api/manages/' + id)
       .end(function (err, res) {
         if (err) {
           return console.error(err)

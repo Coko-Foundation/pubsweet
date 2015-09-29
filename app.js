@@ -1,41 +1,41 @@
-require('dotenv').config({path: '.env.' + process.env.NODE_ENV});
+require('dotenv').config({path: '.env.' + process.env.NODE_ENV})
 
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const routes = require('./routes/index');
-const manages = require('./routes/manages');
-const creates = require('./routes/creates');
-const admin = require('./routes/admin');
+const express = require('express')
+const path = require('path')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const index = require('./routes/index')
+const manages = require('./routes/manages')
+const creates = require('./routes/creates')
+const admin = require('./routes/admin')
 
-// const favicon = require('serve-favicon');
-const app = express();
+// const favicon = require('serve-favicon')
+const app = express()
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', routes);
-app.use('/manages', manages);
-app.use('/admin', admin);
-app.use('/creates', creates);
+app.use('/api/manages', manages)
+app.use('/api/creates', creates)
+app.use('/admin', admin)
+app.use('/', index)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
+})
 
 // error handlers
 
@@ -43,23 +43,23 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res) {
-    res.status(err.status || 500);
+    res.status(err.status || 500)
     res.render('error', {
       message: err.message,
       error: err,
-    });
-  });
+    })
+  })
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res) {
-  res.status(err.status || 500);
+  res.status(err.status || 500)
   res.render('error', {
     message: err.message,
     error: {},
-  });
-});
+  })
+})
 
 
-module.exports = app;
+module.exports = app

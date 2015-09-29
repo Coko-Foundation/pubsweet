@@ -11,6 +11,9 @@ export default class Navigation extends React.Component {
           <LinkContainer to='/admin/manages'>
             <NavItem>Manage</NavItem>
           </LinkContainer>
+          <LinkContainer to='/'>
+            <NavItem>Share</NavItem>
+          </LinkContainer>
           <LinkContainer to='/admin/about'>
             <NavItem>About</NavItem>
           </LinkContainer>

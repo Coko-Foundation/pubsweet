@@ -4,7 +4,7 @@ const utils = {
   getCreate: (id) => {
     return new Promise(function (resolve, reject) {
       request
-        .get(`/creates/${id}`)
+        .get(`/api/creates/${id}`)
         .end(function (err, res) {
           if (err) {
             console.error(err)
@@ -19,7 +19,7 @@ const utils = {
   addCreate: (create) => {
     return new Promise(function (resolve, reject) {
       request
-        .post('/creates')
+        .post('/api/creates')
         .send({ data: create })
         .end(function (err, res) {
           if (err) {
@@ -35,7 +35,7 @@ const utils = {
   updateCreate: (id, create) => {
     return new Promise(function (resolve, reject) {
       request
-        .put(`/creates/${id}`)
+        .put(`/api/creates/${id}`)
         .send({ data: create })
         .end(function (err, res) {
           if (err) {
@@ -49,7 +49,7 @@ const utils = {
 
   deleteCreate: (id) => {
     request
-      .del(`/creates/${id}`)
+      .del(`/api/creates/${id}`)
       .end(function (err, res) {
         if (err) {
           return console.error(err)
