@@ -1,6 +1,7 @@
 import React from 'react'
 import ManageActions from 'actions/ManageActions'
 import { Button, Row, Col } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import ManageTextInput from 'components/ManageTextInput'
 import styles from 'scss/components/_manageItem'
 
@@ -69,7 +70,9 @@ export default class ManageItem extends React.Component {
           {input}
         </Col>
         <Col xs={12} md={4}>
-          <Button bsStyle='primary'>Edit</Button>&nbsp;
+          <LinkContainer to={`/admin/creates/${this.props.id}`}>
+            <Button bsStyle='primary'>Edit</Button>
+          </LinkContainer>&nbsp;
           <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
           <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
           <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>

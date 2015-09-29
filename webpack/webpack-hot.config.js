@@ -65,9 +65,7 @@ module.exports = [
       }],
       loaders: commonLoaders.concat([
           { test: /\.scss$/,
-            loader: 'style!css?module&localIdentName=[local]__[hash:base64:5]' +
-              '&sourceMap!sass?sourceMap&outputStyle=expanded' +
-              '&includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
+            loader: 'style!css!sass'
           }
       ])
     },

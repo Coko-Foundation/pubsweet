@@ -1,12 +1,10 @@
 var request = require('superagent')
 
 const utils = {
-
-  addManage: (manage) => {
+  getCreate: (id) => {
     return new Promise(function (resolve, reject) {
       request
-        .post('/api/manages')
-        .send({ data: manage })
+        .get(`/api/creates/${id}`)
         .end(function (err, res) {
           if (err) {
             console.error(err)
@@ -18,11 +16,27 @@ const utils = {
     })
   },
 
-  updateManage: (id, manage) => {
+  addCreate: (create) => {
     return new Promise(function (resolve, reject) {
       request
-        .put('/api/manages/' + id)
-        .send({ data: manage })
+        .post('/api/creates')
+        .send({ data: create })
+        .end(function (err, res) {
+          if (err) {
+            console.error(err)
+            reject(err)
+          } else {
+            resolve(res.body)
+          }
+        })
+    })
+  },
+
+  updateCreate: (id, create) => {
+    return new Promise(function (resolve, reject) {
+      request
+        .put(`/api/creates/${id}`)
+        .send({ data: create })
         .end(function (err, res) {
           if (err) {
             reject(err)
@@ -33,9 +47,9 @@ const utils = {
     })
   },
 
-  deleteManage: (id) => {
+  deleteCreate: (id) => {
     request
-      .del('/api/manages/' + id)
+      .del(`/api/creates/${id}`)
       .end(function (err, res) {
         if (err) {
           return console.error(err)

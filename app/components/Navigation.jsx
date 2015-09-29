@@ -8,8 +8,11 @@ export default class Navigation extends React.Component {
     return (
       <Navbar brand='PubSweet'>
         <Nav>
-          <LinkContainer to='/admin/manage'>
+          <LinkContainer to='/admin/manages'>
             <NavItem>Manage</NavItem>
+          </LinkContainer>
+          <LinkContainer to='/'>
+            <NavItem>Share</NavItem>
           </LinkContainer>
           <LinkContainer to='/admin/about'>
             <NavItem>About</NavItem>
