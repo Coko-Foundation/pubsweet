@@ -1,4 +1,5 @@
 import React from 'react'
+require('expose?React!react')
 import AltContainer from 'alt/AltContainer'
 import ManageStore from 'stores/ManageStore'
 import CreateStore from 'stores/CreateStore'

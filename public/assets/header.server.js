@@ -35,7 +35,7 @@ module.exports =
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost:3001/assets/";
+/******/ 	__webpack_require__.p = "assets/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -44,8 +44,6 @@ module.exports =
 /******/ ([
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	'use strict';
 
@@ -67,13 +65,13 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactHelmet = __webpack_require__(366);
+	var _reactHelmet = __webpack_require__(348);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
 	var _reactDomServer = __webpack_require__(7);
 
-	var _helmconfigJs = __webpack_require__(367);
+	var _helmconfigJs = __webpack_require__(349);
 
 	var _helmconfigJs2 = _interopRequireDefault(_helmconfigJs);
 
@@ -105,8 +103,6 @@ module.exports =
 
 	exports['default'] = header;
 	module.exports = exports['default'];
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Header.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 1 */,
@@ -18668,34 +18664,14 @@ module.exports =
 /* 345 */,
 /* 346 */,
 /* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */
+/* 348 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-helmet");
 
 /***/ },
-/* 367 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	/*
 	 * Based on the template in Web Starter Kit : https://github.com/google/web-starter-kit/blob/master/app/index.html
@@ -18717,19 +18693,19 @@ module.exports =
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _fileImagesChromeNinja192PrecomposedPng = __webpack_require__(368);
+	var _fileImagesChromeNinja192PrecomposedPng = __webpack_require__(350);
 
 	var _fileImagesChromeNinja192PrecomposedPng2 = _interopRequireDefault(_fileImagesChromeNinja192PrecomposedPng);
 
-	var _fileImagesAppleNinja152PrecomposedPng = __webpack_require__(369);
+	var _fileImagesAppleNinja152PrecomposedPng = __webpack_require__(351);
 
 	var _fileImagesAppleNinja152PrecomposedPng2 = _interopRequireDefault(_fileImagesAppleNinja152PrecomposedPng);
 
-	var _fileImagesMsNinja144PrecomposedPng = __webpack_require__(370);
+	var _fileImagesMsNinja144PrecomposedPng = __webpack_require__(352);
 
 	var _fileImagesMsNinja144PrecomposedPng2 = _interopRequireDefault(_fileImagesMsNinja144PrecomposedPng);
 
-	var _fileImagesFaviconPng = __webpack_require__(371);
+	var _fileImagesFaviconPng = __webpack_require__(353);
 
 	var _fileImagesFaviconPng2 = _interopRequireDefault(_fileImagesFaviconPng);
 
@@ -18763,28 +18739,26 @@ module.exports =
 	exports['default'] = config;
 	module.exports = exports['default'];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "helmconfig.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
 /***/ },
-/* 368 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "3f1998aca65909c0bd077ca705e7d25c.png"
 
 /***/ },
-/* 369 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "ddaf6d6ec871786ec6ee85b2869447b0.png"
 
 /***/ },
-/* 370 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "751390a95ba609212014ff3c73ebf976.png"
 
 /***/ },
-/* 371 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "356c1266f93ade08f69d3e954c0e5fc9.png"

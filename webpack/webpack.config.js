@@ -51,10 +51,11 @@ module.exports = [
       modulesDirectories: [
         "app", "node_modules"
       ]
-    },
-    plugins: [
-      new webpack.ProvidePlugin({React: 'react'})
-    ]
+    }
+    // },
+    // plugins: [
+    //   new webpack.ProvidePlugin({React: 'react'})
+    // ]
     //   // extract inline css from modules into separate files
     //   new ExtractTextPlugin("styles/main.css"),
     //   new webpack.optimize.UglifyJsPlugin()
