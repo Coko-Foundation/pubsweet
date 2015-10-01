@@ -41,7 +41,7 @@ module.exports = function() {
       "Access-Control-Allow-Origin": "http://localhost:3000",
       "Access-Control-Allow-Headers": "X-Requested-With"
     },
-    stats: "verbose",
+    stats: "minimal",
 
     // Set this as true if you want to access dev server from arbitrary url.
     // This is handy if you are using a html5 router.

@@ -2,7 +2,7 @@ import React from 'react'
 import LensWriter from 'lens-writer'
 import CrossrefSearch from 'lens-writer/lib/article/bib/crossref_search'
 import NotificationService from 'lens-writer/app/notification_service'
-
+import Article from 'lens-writer/lib/article/article'
 import 'scss/components/_editor'
 
 const notifications = new NotificationService()
@@ -30,11 +30,16 @@ export default class SubstanceEditor extends React.Component {
   backend () {
     return {
       getDocument: function (id, callback) {
-        callback(null, this.state.value)
+        try {
+          callback(null, Article.fromHtml(this.state.value))
+        } catch (e) {
+          callback(null, Article.fromXml(Article.ARTICLE_XML_TEMPLATE))
+        }
       }.bind(this),
-      saveDocument: function (value, callback) {
-        this.setState({value: value})
-        this.props.onChange(value)
+      saveDocument: function (doc, callback) {
+        const html = doc.toHtml()
+        this.setState({value: html})
+        this.props.onChange(html)
         callback()
       }.bind(this),
       uploadFigure: function (file, callback) {
@@ -51,7 +56,7 @@ export default class SubstanceEditor extends React.Component {
 
   render () {
     return (
-      <LensWriter documentId='' />
+      <LensWriter documentId='test' />
     )
   }
 }

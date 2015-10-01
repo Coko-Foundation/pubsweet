@@ -1,5 +1,12 @@
-import React from 'react'
+// TODO: Hacks for Substance
+
 require('expose?React!react')
+require('expose?$!jquery')
+require('expose?i18n!utils/i18n')
+
+//
+
+import React from 'react'
 import AltContainer from 'alt/AltContainer'
 import ManageStore from 'stores/ManageStore'
 import CreateStore from 'stores/CreateStore'
