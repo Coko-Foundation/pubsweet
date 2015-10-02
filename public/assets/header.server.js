@@ -67,13 +67,13 @@ module.exports =
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactHelmet = __webpack_require__(520);
+	var _reactHelmet = __webpack_require__(521);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
 	var _reactDomServer = __webpack_require__(7);
 
-	var _helmconfigJs = __webpack_require__(521);
+	var _helmconfigJs = __webpack_require__(522);
 
 	var _helmconfigJs2 = _interopRequireDefault(_helmconfigJs);
 
@@ -18840,13 +18840,14 @@ module.exports =
 /* 517 */,
 /* 518 */,
 /* 519 */,
-/* 520 */
+/* 520 */,
+/* 521 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-helmet");
 
 /***/ },
-/* 521 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -18871,19 +18872,19 @@ module.exports =
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _fileImagesChromeNinja192PrecomposedPng = __webpack_require__(522);
+	var _fileImagesChromeNinja192PrecomposedPng = __webpack_require__(523);
 
 	var _fileImagesChromeNinja192PrecomposedPng2 = _interopRequireDefault(_fileImagesChromeNinja192PrecomposedPng);
 
-	var _fileImagesAppleNinja152PrecomposedPng = __webpack_require__(523);
+	var _fileImagesAppleNinja152PrecomposedPng = __webpack_require__(524);
 
 	var _fileImagesAppleNinja152PrecomposedPng2 = _interopRequireDefault(_fileImagesAppleNinja152PrecomposedPng);
 
-	var _fileImagesMsNinja144PrecomposedPng = __webpack_require__(524);
+	var _fileImagesMsNinja144PrecomposedPng = __webpack_require__(525);
 
 	var _fileImagesMsNinja144PrecomposedPng2 = _interopRequireDefault(_fileImagesMsNinja144PrecomposedPng);
 
-	var _fileImagesFaviconPng = __webpack_require__(525);
+	var _fileImagesFaviconPng = __webpack_require__(526);
 
 	var _fileImagesFaviconPng2 = _interopRequireDefault(_fileImagesFaviconPng);
 
@@ -18920,25 +18921,25 @@ module.exports =
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/juretriglav/src/coko/backend-node/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "helmconfig.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 522 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "3f1998aca65909c0bd077ca705e7d25c.png"
 
 /***/ },
-/* 523 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "ddaf6d6ec871786ec6ee85b2869447b0.png"
 
 /***/ },
-/* 524 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "751390a95ba609212014ff3c73ebf976.png"
 
 /***/ },
-/* 525 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "356c1266f93ade08f69d3e954c0e5fc9.png"

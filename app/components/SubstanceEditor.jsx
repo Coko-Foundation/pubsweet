@@ -3,7 +3,10 @@ import LensWriter from 'lens-writer'
 import CrossrefSearch from 'lens-writer/lib/article/bib/crossref_search'
 import NotificationService from 'lens-writer/app/notification_service'
 import Article from 'lens-writer/lib/article/article'
-import 'scss/components/_editor'
+
+// Styles
+import 'lens-writer/app/app.scss'
+import 'scss/components/_substanceEditor'
 
 const notifications = new NotificationService()
 
