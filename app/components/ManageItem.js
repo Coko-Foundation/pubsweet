@@ -3,7 +3,7 @@ import ManageActions from 'actions/ManageActions'
 import { Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import ManageTextInput from 'components/ManageTextInput'
-import styles from 'scss/components/_manageItem'
+import 'scss/components/_manageItem'
 
 export default class ManageItem extends React.Component {
   constructor (props) {
@@ -62,22 +62,24 @@ export default class ManageItem extends React.Component {
         />
     }
     return (
-      <Row className={styles['manage-item']} key={this.props.id}>
-        <Col xs={12} md={8}>
-          <label onDoubleClick={this._onDoubleClick}>
-            {this.props.title} ({this.props.status})
-          </label>
-          {input}
-        </Col>
-        <Col xs={12} md={4}>
-          <LinkContainer to={`/admin/creates/${this.props.id}`}>
-            <Button bsStyle='primary'>Edit</Button>
-          </LinkContainer>&nbsp;
-          <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
-          <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
-          <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>
-        </Col>
-      </Row>
+      <div className='manage-item'>
+        <Row key={this.props.id}>
+          <Col xs={12} md={8}>
+            <label onDoubleClick={this._onDoubleClick}>
+              {this.props.title} ({this.props.status})
+            </label>
+            {input}
+          </Col>
+          <Col xs={12} md={4}>
+            <LinkContainer to={`/admin/creates/${this.props.id}`}>
+              <Button bsStyle='primary'>Edit</Button>
+            </LinkContainer>&nbsp;
+            <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
+            <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
+            <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }
