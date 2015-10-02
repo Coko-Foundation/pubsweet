@@ -54,7 +54,7 @@
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.12.3",
     "substance": "substance/substance-legacy#193d87259fae45a0f546bdb133a9fc7f34d87b52",
-    "substance-ui": "substance/ui",
+    "substance-ui": "substance/ui#7a6cb53b1d6a1e55fa022c2b69a1b8f938f5ae4f",
     "superagent": "^1.3.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.2"

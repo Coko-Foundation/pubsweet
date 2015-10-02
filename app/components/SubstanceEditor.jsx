@@ -16,10 +16,15 @@ export default class SubstanceEditor extends React.Component {
     this._onChange = this._onChange.bind(this)
     this.backend = this.backend.bind(this)
     this.getChildContext = this.getChildContext.bind(this)
+    this.componentWillUnmount = this.componentWillUnmount.bind(this)
 
     this.state = {
       value: this.props.value || ''
     }
+  }
+
+  componentWillUnmount () {
+    // TODO: Save document here
   }
 
   getChildContext () {
@@ -34,15 +39,15 @@ export default class SubstanceEditor extends React.Component {
     return {
       getDocument: function (id, callback) {
         try {
-          callback(null, Article.fromHtml(this.state.value))
+          callback(null, Article.fromXml(this.state.value))
         } catch (e) {
           callback(null, Article.fromXml(Article.ARTICLE_XML_TEMPLATE))
         }
       }.bind(this),
       saveDocument: function (doc, callback) {
-        const html = doc.toHtml()
-        this.setState({value: html})
-        this.props.onChange(html)
+        const xml = doc.toXml()
+        this.setState({value: xml})
+        this.props.onChange(xml)
         callback()
       }.bind(this),
       uploadFigure: function (file, callback) {
