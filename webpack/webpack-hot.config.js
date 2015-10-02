@@ -76,9 +76,12 @@ module.exports = [
       ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+    ],
+    node: {
+      fs: 'empty'
+    }
   }, {
     // The configuration for the server-side rendering
     name: "server-side rendering",

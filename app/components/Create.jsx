@@ -1,5 +1,5 @@
 import React from 'react'
-import Editor from 'components/Editor'
+import Editor from 'components/SubstanceEditor'
 import CreateActions from 'actions/CreateActions'
 import { Grid, Row, Col } from 'react-bootstrap'
 // import styles from 'scss/components/_create'

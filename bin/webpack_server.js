@@ -37,7 +37,6 @@ module.exports = function() {
     // Note: this does _not_ add the `HotModuleReplacementPlugin` like the CLI option does.
     hot: true,
 
-
     headers: {
       "Access-Control-Allow-Origin": "http://localhost:3000",
       "Access-Control-Allow-Headers": "X-Requested-With"
