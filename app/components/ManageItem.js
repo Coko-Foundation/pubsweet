@@ -1,9 +1,10 @@
 import React from 'react'
-import ManageActions from 'actions/ManageActions'
 import { Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import ManageTextInput from 'components/ManageTextInput'
-import 'scss/components/_manageItem'
+
+import ManageActions from '../actions/ManageActions'
+import ManageTextInput from './ManageTextInput'
+import '../scss/components/_manageItem'
 
 export default class ManageItem extends React.Component {
   constructor (props) {
@@ -13,8 +14,6 @@ export default class ManageItem extends React.Component {
     this._onUnpublish = this._onUnpublish.bind(this)
     this._onDestroyClick = this._onDestroyClick.bind(this)
     this._onDoubleClick = this._onDoubleClick.bind(this)
-
-    this.hello.call('ab')
 
     // this.render = this.render.bind(this)
 

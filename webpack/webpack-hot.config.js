@@ -111,10 +111,10 @@ module.exports = [
       ])
     },
     resolve: {
-      extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
-      modulesDirectories: [
-        "app", "node_modules"
-      ]
+      extensions: ['', '.react.js', '.js', '.jsx', '.scss'] //,
+      // modulesDirectories: [
+      //   "app", "node_modules"
+      // ]
     }
   }
 ];

@@ -1,5 +1,5 @@
-import alt from 'altInstance'
-import ManageAPI from 'utils/ManageAPI'
+import alt from '../altInstance'
+import ManageAPI from '../utils/ManageAPI'
 
 class ManageActions {
 

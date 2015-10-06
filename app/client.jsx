@@ -3,8 +3,8 @@ import Iso from 'iso'
 import createHistory from 'history/lib/createBrowserHistory'
 import { Router } from 'react-router'
 
-import alt from 'altInstance'
-import routes from 'routes.jsx'
+import alt from './altInstance'
+import routes from './routes.jsx'
 
 const history = createHistory()
 

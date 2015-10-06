@@ -4,9 +4,9 @@ import createLocation from 'history/lib/createLocation';
 import React from 'react';
 import { renderToString } from 'react-dom/server'
 
-import alt from 'altInstance';
-import routes from 'routes.jsx';
-import html from 'base.html';
+import alt from './altInstance';
+import routes from './routes.jsx';
+import html from './base.html';
 
 /*
  * @param {AltObject} an instance of the Alt object

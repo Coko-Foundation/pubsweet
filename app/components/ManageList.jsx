@@ -1,8 +1,8 @@
 import React from 'react'
 import Immutable from 'immutable'
-import ManageItem from 'components/ManageItem'
+import ManageItem from './ManageItem'
 
-import styles from 'scss/components/_manageList'
+import styles from '../scss/components/_manageList'
 
 export default class ManageList extends React.Component {
   render () {

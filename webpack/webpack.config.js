@@ -89,10 +89,10 @@ module.exports = [
       loaders: commonLoaders
     },
     resolve: {
-      extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
-      modulesDirectories: [
-        "app", "node_modules"
-      ]
+      extensions: ['', '.react.js', '.js', '.jsx', '.scss']
+      // modulesDirectories: [
+      //   "app", "node_modules"
+      // ]
     },
     plugins: [
       new webpack.ProvidePlugin({React: 'react'})

@@ -1,5 +1,5 @@
-import alt from 'altInstance'
-import CreateAPI from 'utils/CreateAPI'
+import alt from '../altInstance'
+import CreateAPI from '../utils/CreateAPI'
 
 class CreateActions {
 

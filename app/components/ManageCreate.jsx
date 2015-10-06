@@ -1,8 +1,8 @@
 import React from 'react'
-import ManageActions from 'actions/ManageActions'
-import ManageTextInput from 'components/ManageTextInput'
+import ManageActions from '../actions/ManageActions'
+import ManageTextInput from './ManageTextInput'
 
-import styles from 'scss/components/_manageCreate'
+import styles from '../scss/components/_manageCreate'
 
 export default class ManageCreate extends React.Component {
   constructor (props) {

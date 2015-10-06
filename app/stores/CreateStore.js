@@ -1,8 +1,8 @@
 import Immutable from 'immutable'
-import createActions from 'actions/CreateActions'
-import manageActions from 'actions/ManageActions'
+import createActions from '../actions/CreateActions'
+import manageActions from '../actions/ManageActions'
 
-import alt from 'altInstance'
+import alt from '../altInstance'
 
 class CreateStore {
 

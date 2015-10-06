@@ -2,27 +2,32 @@ import React from 'react'
 import LensWriter from 'lens-writer/react'
 
 // Styles
-import 'lens-writer/app/app.scss'
-import 'scss/components/_substanceEditor'
+import '../../node_modules/lens-writer/app/app.scss'
+import '../scss/components/_substanceEditor'
 
 export default class SubstanceEditor extends React.Component {
   constructor (props) {
     super(props)
-    this._onChange = this._onChange.bind(this)
+    this._onSave = this._onSave.bind(this)
+    this._onMessage = this._onMessage.bind(this)
 
     this.state = {
-      value: this.props.value || ''
+      value: this.props.value || undefined
     }
   }
 
-  _onChange (value) {
-    this.setState({value: value})
+  _onSave (value, callback) {
     this.props.onChange(value)
+    callback(null)
+  }
+
+  _onMessage (message) {
+
   }
 
   render () {
     return (
-      <LensWriter content={this.state.value} />
+      <LensWriter content={this.state.value} onSave={this._onSave} onMessage={this._onMessage} />
     )
   }
 }
