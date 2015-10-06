@@ -14,6 +14,8 @@ export default class ManageItem extends React.Component {
     this._onDestroyClick = this._onDestroyClick.bind(this)
     this._onDoubleClick = this._onDoubleClick.bind(this)
 
+    this.hello.call('ab')
+
     // this.render = this.render.bind(this)
 
     this.state = {
@@ -72,7 +74,7 @@ export default class ManageItem extends React.Component {
           </Col>
           <Col xs={12} md={4}>
             <LinkContainer to={`/admin/creates/${this.props.id}`}>
-              <Button bsStyle='primary'>Edit</Button>
+              <Button bsStyle='primary'>Edit this</Button>
             </LinkContainer>&nbsp;
             <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
             <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
