@@ -16,7 +16,8 @@ var commonLoaders = [
   },
   { test: /\.png$/, loader: "url-loader" },
   { test: /\.(jpg|woff|woff2|eot|ttf|svg)$/, loader: "file-loader" },
-  { test: /\.html$/, loader: "html-loader" }
+  { test: /\.html$/, loader: "html-loader" },
+  { test: /\.json$/, loader: "json-loader" }
 ];
 
 module.exports = [
@@ -38,7 +39,7 @@ module.exports = [
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
-    devtool: "source-map",
+    devtool: "eval-source-map",
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
@@ -52,12 +53,7 @@ module.exports = [
       ])
     },
     resolve: {
-      extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
-      // packageAlias: "browser"
-      // ],
-      // alias: {
-      //   "cheerio": "jquery"
-      // }
+      extensions: ['', '.js', '.jsx', '.json', '.scss']
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -84,8 +80,10 @@ module.exports = [
       publicPath: publicPath,
       libraryTarget: "commonjs2"
     },
-    externals: /^[a-z\-0-9]+$/,
-    devtool: "source-map",
+    externals: [
+      "superagent"
+    ],
+    devtool: "eval-source-map",
     module: {
       loaders: commonLoaders.concat([
           { test: /\.scss$/,
@@ -96,10 +94,7 @@ module.exports = [
       ])
     },
     resolve: {
-      extensions: ['', '.react.js', '.js', '.jsx', '.scss'] //,
-      // modulesDirectories: [
-      //   "app", "node_modules"
-      // ]
+      extensions: ['', '.js', '.jsx', '.json', '.scss']
     }
   }
 ];
