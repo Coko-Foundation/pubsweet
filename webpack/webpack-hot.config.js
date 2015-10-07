@@ -23,25 +23,7 @@ module.exports = [
   {
     // The configuration for the client
     name: "browser",
-    /* The entry point of the bundle
-     * Entry points for multi page app could be more complex
-     * A good example of entry points would be:
-     * entry: {
-     *   pageA: "./pageA",
-     *   pageB: "./pageB",
-     *   pageC: "./pageC",
-     *   adminPageA: "./adminPageA",
-     *   adminPageB: "./adminPageB",
-     *   adminPageC: "./adminPageC"
-     * }
-     *
-     * We can then proceed to optimize what are the common chunks
-     * plugins: [
-     *  new CommonsChunkPlugin("admin-commons.js", ["adminPageA", "adminPageB"]),
-     *  new CommonsChunkPlugin("common.js", ["pageA", "pageB", "admin-commons.js"], 2),
-     *  new CommonsChunkPlugin("c-commons.js", ["pageC", "adminPageC"]);
-     * ]
-     */
+    target: "web",
     context: path.join(__dirname, "..", "app"),
     entry: {
       app:[ 'webpack-dev-server/client?http://' + WEBPACK_HOST + ":" + WEBPACK_PORT,
@@ -55,8 +37,8 @@ module.exports = [
       filename: "[name].js",
       // The output path from the view of the Javascript
       publicPath: publicPath
-
     },
+    devtool: "source-map",
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
@@ -71,9 +53,11 @@ module.exports = [
     },
     resolve: {
       extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
-      modulesDirectories: [
-        "app", "node_modules"
-      ]
+      // packageAlias: "browser"
+      // ],
+      // alias: {
+      //   "cheerio": "jquery"
+      // }
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -101,6 +85,7 @@ module.exports = [
       libraryTarget: "commonjs2"
     },
     externals: /^[a-z\-0-9]+$/,
+    devtool: "source-map",
     module: {
       loaders: commonLoaders.concat([
           { test: /\.scss$/,
