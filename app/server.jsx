@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server'
 
 import alt from './altInstance';
 import routes from './routes.jsx';
-import html from './base.html';
+import html from './index.prerender.html';
 
 /*
  * @param {AltObject} an instance of the Alt object

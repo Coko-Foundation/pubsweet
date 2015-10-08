@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node bin/www",
-    "dev": "NODE_ENV=dev node bin/www",
-    "hot": "npm run buildHot && NODE_ENV=dev LOADER=hot node bin/www",
-    "build": "webpack --colors --config ./webpack/webpack.config.js",
-    "buildHot": "webpack --colors --config ./webpack/webpack-hot.config.js",
-    "watch": "webpack --watch --config ./webpack/webpack.config.js",
+    "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
+    "dev": "npm run buildDev && NODE_ENV=dev LOADER=hot node bin/www",
+    "buildDev": "webpack --colors --config ./webpack/webpack.dev.config.js",
     "db-migrate": "db-migrate",
     "test": "make test",
     "eslint": "eslint"

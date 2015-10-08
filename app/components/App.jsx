@@ -1,14 +1,12 @@
-// TODO: Hacks for Substance
-require('expose?$!jquery')
-//
-
 import React from 'react'
 import AltContainer from 'alt/AltContainer'
 import ManageStore from '../stores/ManageStore'
 import CreateStore from '../stores/CreateStore'
-
+import CreateAPI from '../utils/CreateAPI'
+import ManageAPI from '../utils/ManageAPI'
 import Navigation from '../components/Navigation'
-
+import alt from '../altInstance'
+import _ from 'lodash'
 import '../scss/main'
 
 /*
@@ -28,6 +26,22 @@ import '../scss/main'
  */
 
 export default class App extends React.Component {
+  componentWillMount () {
+    let manages = ManageAPI.getManages()
+    let creates = CreateAPI.getCreates()
+
+    Promise.all([manages, creates]).then(function (results) {
+      results[0] = _.indexBy(results[0], 'id')
+      results[1] = _.indexBy(results[1], function (object) {
+        return object.data.manageId
+      })
+      alt.bootstrap(JSON.stringify({
+        ManageStore: { manages: results[0] },
+        CreateStore: { creates: results[1] }
+      }))
+    })
+  }
+
   render () {
     return (
       <AltContainer stores={{
