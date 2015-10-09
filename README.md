@@ -30,3 +30,25 @@ $ npm run hot
 ```
 
 Point your browser to: http://localhost:3000
+
+# Roadmap (9th of October, 2015)
+
+Next two weeks (12-23 October):
+
+1. Backend and data structure
+  1. Collections and Fragments
+  2. API
+  3. No front end dev
+  4. Tests
+  5. Navigation
+
+Week after that (26-30 October):
+
+2. Integrate next version of Substance
+  1. Evaluate backend API in this context
+
+And the week after that (2-7th of November):
+
+3. Share component collaboration
+  1. Substance sans editing
+  2. System share integration
