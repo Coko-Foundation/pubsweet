@@ -47,7 +47,7 @@ Week after that (26-30 October):
 2. Integrate next version of Substance
   1. Evaluate backend API in this context
 
-And the week after that (2-7th of November):
+And the week after that (2-7 November):
 
 3. Share component collaboration
   1. Substance sans editing
