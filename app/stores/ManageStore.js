@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
-import manageActions from 'actions/ManageActions'
-import alt from 'altInstance'
+import manageActions from '../actions/ManageActions'
+import alt from '../altInstance'
 
 /**
  * Flux Explanation of Store:

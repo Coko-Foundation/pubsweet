@@ -1,9 +1,9 @@
 import React from 'react'
 import { Grid } from 'react-bootstrap'
-import ManageList from 'components/ManageList'
-import ManageCreate from 'components/ManageCreate'
+import ManageList from './ManageList'
+import ManageCreate from './ManageCreate'
 
-import styles from 'scss/components/_manage'
+import styles from '../scss/components/_manage'
 
 export default class Manage extends React.Component {
 

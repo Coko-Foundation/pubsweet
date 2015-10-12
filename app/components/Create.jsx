@@ -1,7 +1,7 @@
 import React from 'react'
-import Editor from 'components/SubstanceEditor'
-import CreateActions from 'actions/CreateActions'
-import { Grid, Row, Col } from 'react-bootstrap'
+import Editor from './SubstanceEditor'
+import CreateActions from '../actions/CreateActions'
+// import { Grid, Row, Col } from 'react-bootstrap'
 // import styles from 'scss/components/_create'
 
 export default class Create extends React.Component {
@@ -23,9 +23,7 @@ export default class Create extends React.Component {
   render () {
     let value = this.state.create.getIn(['data', 'content'])
     return (
-      <Grid><Row><Col xs={12}>
-        <Editor value={value} onChange={this._onChange} />
-      </Col></Row></Grid>
+      <Editor value={value} onChange={this._onChange} />
     )
   }
 }

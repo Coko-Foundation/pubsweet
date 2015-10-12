@@ -1,16 +1,16 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import App from 'components/App'
+import App from './components/App'
 
 // Admin
-import About from 'components/About'
-import Dashboard from 'components/Dashboard'
-import Manage from 'components/Manage'
-import Create from 'components/Create'
+import About from './components/About'
+import Dashboard from './components/Dashboard'
+import Manage from './components/Manage'
+import Create from './components/Create'
 
 // Public
-import Share from 'components/Share'
+import Share from './components/Share'
 
 export default (
   <Route component={App}>

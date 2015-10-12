@@ -1,19 +1,19 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 
 export default class Navigation extends React.Component {
 
   render () {
     return (
-      <Navbar brand='PubSweet'>
+      <Navbar brand='Science Blogger'>
         <Nav>
           <LinkContainer to='/admin/manages'>
             <NavItem>Manage</NavItem>
           </LinkContainer>
-          <LinkContainer to='/'>
+          <IndexLinkContainer to='/'>
             <NavItem>Share</NavItem>
-          </LinkContainer>
+          </IndexLinkContainer>
           <LinkContainer to='/admin/about'>
             <NavItem>About</NavItem>
           </LinkContainer>

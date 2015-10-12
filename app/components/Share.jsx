@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import ShareItem from 'components/ShareItem'
+import ShareItem from './ShareItem'
 
 export default class Share extends React.Component {
 

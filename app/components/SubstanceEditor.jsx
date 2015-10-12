@@ -1,78 +1,35 @@
 import React from 'react'
-import LensWriter from 'lens-writer'
-import CrossrefSearch from 'lens-writer/lib/article/bib/crossref_search'
-import NotificationService from 'lens-writer/app/notification_service'
-import Article from 'lens-writer/lib/article/article'
+import LensWriter from 'lens-writer/react'
 
 // Styles
-import 'lens-writer/app/app.scss'
-import 'scss/components/_substanceEditor'
-
-const notifications = new NotificationService()
+import '../../node_modules/lens-writer/app/app.scss'
+import '../scss/components/_substanceEditor'
 
 export default class SubstanceEditor extends React.Component {
   constructor (props) {
     super(props)
-    this._onChange = this._onChange.bind(this)
-    this.backend = this.backend.bind(this)
-    this.getChildContext = this.getChildContext.bind(this)
-    this.componentWillUnmount = this.componentWillUnmount.bind(this)
+    this._onSave = this._onSave.bind(this)
+    this._onMessage = this._onMessage.bind(this)
 
     this.state = {
-      value: this.props.value || ''
+      value: this.props.value || undefined
     }
   }
 
-  componentWillUnmount () {
-    // TODO: Save document here
-  }
-
-  getChildContext () {
-    return {
-      backend: this.backend(),
-      bibSearchEngines: [new CrossrefSearch()],
-      notifications: notifications
-    }
-  }
-
-  backend () {
-    return {
-      getDocument: function (id, callback) {
-        try {
-          callback(null, Article.fromXml(this.state.value))
-        } catch (e) {
-          callback(null, Article.fromXml(Article.ARTICLE_XML_TEMPLATE))
-        }
-      }.bind(this),
-      saveDocument: function (doc, callback) {
-        const xml = doc.toXml()
-        this.setState({value: xml})
-        this.props.onChange(xml)
-        callback()
-      }.bind(this),
-      uploadFigure: function (file, callback) {
-        var objectURL = window.URL.createObjectURL(file)
-        callback(null, objectURL)
-      }
-    }
-  }
-
-  _onChange (value) {
-    this.setState({value: value})
+  _onSave (value, callback) {
     this.props.onChange(value)
+    callback(null)
+  }
+
+  _onMessage (message) {
+
   }
 
   render () {
     return (
-      <LensWriter documentId='test' />
+      <LensWriter content={this.state.value} onSave={this._onSave} onMessage={this._onMessage} />
     )
   }
-}
-
-SubstanceEditor.childContextTypes = {
-  backend: React.PropTypes.object,
-  notifications: React.PropTypes.object,
-  bibSearchEngines: React.PropTypes.array
 }
 
 SubstanceEditor.propTypes = {
