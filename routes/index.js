@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const pg = require('pg')
 const connectionString = process.env.DATABASE_URL
 const _ = require('lodash')
 const Header = require('../public/assets/header.server')

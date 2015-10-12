@@ -1,22 +1,22 @@
-import React from 'react';
-import Helmet from 'react-helmet';
+import React from 'react'
+import Helmet from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 
-import config from '../helmconfig.js';
+import config from '../helmconfig.js'
 
 class Header extends React.Component {
-  render() {
+  render () {
     return (
       <Helmet
-        title="PubSweet"
+        title='PubSweet'
         meta={config.meta}
         link={config.link}
       />
-    );
+    )
   }
 }
 
-renderToString(<Header />);
-let header = Helmet.rewind();
+renderToString(<Header />)
+let header = Helmet.rewind()
 
-export default header;
+export default header

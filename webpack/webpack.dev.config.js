@@ -12,7 +12,11 @@ var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
     loaders: ["react-hot", "babel-loader?stage=0"],
-    include: path.join(__dirname, "..", "app")
+    include: [
+      path.join(__dirname, "..", "app"),
+      path.join(__dirname, "..", "routes"),
+      path.join(__dirname, "..", "app.js")
+    ]
   },
   { test: /\.png$/, loader: "url-loader" },
   { test: /\.(jpg|woff|woff2|eot|ttf|svg)$/, loader: "file-loader" },
@@ -85,6 +89,11 @@ module.exports = [
     ],
     devtool: "eval-source-map",
     module: {
+      preLoaders: [{
+        test: /\.js$|\.jsx$/,
+        exclude: /node_modules/,
+        loaders: ["eslint-loader"]
+      }],
       loaders: commonLoaders.concat([
           { test: /\.scss$/,
             loader: 'css/locals?module&localIdentName=[local]__[hash:base64:5]' +

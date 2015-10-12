@@ -82,8 +82,7 @@ module.exports = [
       {
         'alt/AltContainer': true,
         'react/addons': true
-      },
-      /^[a-z\-0-9]+$/
+      }
     ],
     module: {
       loaders: commonLoaders
