@@ -1,10 +1,10 @@
 const request = require('supertest')
 const expect = require('expect.js')
-const app = require('../app')
+
 const _ = require('lodash')
 const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
-
+const PouchDB = require('pouchdb')
 const collectionFixture = {
   "type": "collection",
   "title": "Science Blogger posts",
@@ -16,6 +16,7 @@ const fragmentFixture = {
   "presentation": "<p></p>"
 }
 
+var app
 var updatedFragmentFixture = {
   "source": "<blog><title>Updated</title></blog>",
   "presentation": "<p><h1>Updated</h1></p>"
@@ -26,7 +27,9 @@ describe('api', function(){
   var fragmentId
 
   before(function() {
-    return dbCleaner
+    return dbCleaner.then(function () {
+       app = require('../app')
+    })
   })
 
   it('creates a collection', function(done){
