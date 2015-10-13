@@ -1,9 +1,22 @@
 const express = require('express')
 const objectAssign = require('object-assign')
 const api = express.Router()
+
 const PouchDB = require('pouchdb')
-const db = new PouchDB('./db' + process.env.NODE_ENV)
+PouchDB.plugin(require('pouchdb-find'));
 PouchDB.debug.enable('*')
+const db = new PouchDB('./db' + process.env.NODE_ENV)
+
+// Idempotently create indexes in datastore
+db.createIndex({
+  index: {
+    fields: ['type']
+  }
+}).then(function (result) {
+  // yo, a result
+}).catch(function (err) {
+  // ouch, an error
+})
 
 // POST (create collection)
 api.post('/collection', function(req, res) {
@@ -21,14 +34,14 @@ api.post('/collection', function(req, res) {
 })
 
 // GET (index)
-api.get('/', function(req, res) {
-  db.find({}, function (err, found) {
-    if (err) {
-      console.error(err)
-      return res.status(503)
-    }
-
-    return res.status(200).json(found)
+api.get('/collection', function(req, res) {
+  db.find({
+    selector: {type: 'collection'}
+  }).then(function (collection) {
+    return res.status(200).json(collection.docs[0])
+  }).catch(function (error) {
+    console.error(err)
+    return res.status(503)
   })
 })
 

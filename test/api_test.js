@@ -2,6 +2,7 @@ const request = require('supertest')
 const expect = require('expect.js')
 const app = require('../app')
 const _ = require('lodash')
+const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
 
 const collectionFixture = {
@@ -34,8 +35,7 @@ describe('api', function(){
       .send(collectionFixture)
       .expect(function(res) {
         console.log(res)
-        var body = _.omit(res.body, ['_id', 'ok'])
-        expect(body).to.eql(collectionFixture)
+        expect(res.body.ok).to.eql(true)
         // Store collectionId for later tests
         collectionId = res.body.id
       })
@@ -46,11 +46,8 @@ describe('api', function(){
     request(app)
       .get('/api/collection')
       .expect('Content-Type', /json/)
-      .expect(200, {
-        id: collectionId,
-        data: fixture
-      })
-      .end(done);
+      .expect(200, objectAssign({_id: collectionId}, collectionFixture))
+      .end(done)
   })
 
   it('creates a fragment within the collection', function(done) {
