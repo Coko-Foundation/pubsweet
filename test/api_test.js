@@ -57,7 +57,7 @@ describe('api', function (){
       .expect(200, done);
   })
 
-  it('gets the collection', function(done){
+  it('gets the collection', function (done){
     request(app)
       .get('/api/collection')
       .expect('Content-Type', /json/)
@@ -90,17 +90,31 @@ describe('api', function (){
       .expect(200, done)
   })
 
-  it('updates a fragment', function(done){
+  it('updates a fragment', function (done){
     request(app)
-      .put('/api/fragments/'+fragmentId)
-      .send(updatedFragmentFixture)
-      .expect(200, Object.assign({id: id}, updatedFragmentFixture))
+      .put('/api/collection/fragment')
+      .send(Object.assign({_id: fragmentId}, updatedFragmentFixture))
+      .expect(function (res) {
+        expect(res.body.ok).to.eql(true)
+      })
       .end(done)
   })
 
-  it('deletes a fragment', function(done){
+  it('get a specific fragments', function (done){
     request(app)
-      .del('/api/fragments/'+fragmentId)
+      .get('/api/collection/fragment/' + fragmentId)
+      .expect(function (res) {
+        expect(_.omit(res.body, '_rev'))
+          .to.eql(objectAssign({_id: fragmentId}, updatedFragmentFixture))
+      })
+      .expect(200, done)
+  })
+
+
+  it('deletes a fragment', function (done){
+    request(app)
+      .del('/api/collection/fragment')
+      .send(objectAssign({_id: fragmentId}, fragmentFixture))
       .expect(200, done);
   })
 

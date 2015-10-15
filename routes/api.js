@@ -111,35 +111,39 @@ api.get('/collection/fragments', function(req, res) {
     return res.status(200).json(fragments)
   }).catch(function (err) {
     console.error(err)
-    return res.status(503)
+    return res.status(500)
   })
 })
 
-// PUT (update)
-api.put('/:id', function(req, res) {
-  const id = req.params.id
-  const data = req.body
-
-  db.update({_id: id}, data, function (err, found) {
-    if (err) {
-      console.error(err)
-      return res.status(503)
-    }
-
-    return res.status(200).json(found)
+api.get('/collection/fragment/:id', function (req, res){
+  db.get(req.params.id).then(function (result) {
+    return res.status(200).json(result)
+  }).catch(function (err) {
+    return res.status(500)
   })
 })
 
-// DELETE (...)
-api.delete('/:id', function(req, res) {
-  const id = req.params.id
-  db.remove({_id: id}, {}, function (err, numRemoved) {
-    if (err) {
-      console.error(err)
-      return res.status(503)
-    }
+// Update a fragment
+api.put('/collection/fragment', function(req, res) {
+  db.get(req.body._id).then(function (result) {
+    return db.put(objectAssign({_rev: result._rev}, req.body))
+  }).then(function (result) {
+    return res.status(200).json(result)
+  }).catch(function (err) {
+    console.error(err)
+    return res.status(500)
+  })
+})
 
-    return res.status(200).json(numRemoved)
+// Delete a fragment
+api.delete('/collection/fragment', function(req, res) {
+  db.get(req.body._id).then(function (result) {
+    return db.remove(result)
+  }).then(function (result) {
+    return res.status(200).json(result)
+  }).catch(function (err) {
+    console.error(err)
+    return res.status(500)
   })
 })
 
