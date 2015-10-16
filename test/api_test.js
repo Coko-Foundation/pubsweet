@@ -115,7 +115,15 @@ describe('api', function (){
     request(app)
       .del('/api/collection/fragment')
       .send(objectAssign({_id: fragmentId}, fragmentFixture))
-      .expect(200, done);
+      .expect(200)
+      .end(function () {
+        request(app)
+          .get('/api/collection')
+          .expect(function (res) {
+            expect(res.body.fragments).to.eql([])
+          })
+          .expect(200, done)
+      })
   })
 
   it('deletes the collection', function (done) {

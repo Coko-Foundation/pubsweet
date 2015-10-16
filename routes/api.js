@@ -140,6 +140,11 @@ api.delete('/collection/fragment', function(req, res) {
   db.get(req.body._id).then(function (result) {
     return db.remove(result)
   }).then(function (result) {
+    return findCollection()
+  }).then(function (collection){
+    collection.fragments = _.without(collection.fragments, req.body._id)
+    return db.put(collection)
+  }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
     console.error(err)
