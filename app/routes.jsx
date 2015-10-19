@@ -6,7 +6,7 @@ import App from './components/App'
 // Admin
 import About from './components/About'
 import Dashboard from './components/Dashboard'
-import Manage from './components/Manage'
+import Manage from './components/BlogManager'
 import Create from './components/Create'
 
 // Public

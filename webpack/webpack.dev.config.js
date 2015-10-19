@@ -84,9 +84,6 @@ module.exports = [
       publicPath: publicPath,
       libraryTarget: "commonjs2"
     },
-    externals: [
-      "superagent"
-    ],
     devtool: "eval-source-map",
     module: {
       preLoaders: [{

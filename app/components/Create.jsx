@@ -1,6 +1,6 @@
 import React from 'react'
 import Editor from './SubstanceEditor'
-import CreateActions from '../actions/CreateActions'
+
 // import { Grid, Row, Col } from 'react-bootstrap'
 // import styles from 'scss/components/_create'
 
@@ -16,8 +16,7 @@ export default class Create extends React.Component {
   }
 
   _onChange (value) {
-    const data = this.state.create.setIn(['data', 'content'], value).toJS()
-    CreateActions.update(data.id, data.data)
+
   }
 
   render () {

@@ -1,7 +1,7 @@
 import React from 'react'
 const ENTER_KEY_CODE = 13
 
-export default class ManageTextInput extends React.Component {
+export default class TextInput extends React.Component {
   constructor (props) {
     super(props)
     this._save = this._save.bind(this)
@@ -46,7 +46,7 @@ export default class ManageTextInput extends React.Component {
   }
 }
 
-ManageTextInput.propTypes = {
+TextInput.propTypes = {
   className: React.PropTypes.string,
   id: React.PropTypes.string,
   placeholder: React.PropTypes.string,

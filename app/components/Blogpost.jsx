@@ -2,11 +2,10 @@ import React from 'react'
 import { Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-import ManageActions from '../actions/ManageActions'
-import ManageTextInput from './ManageTextInput'
-import '../scss/components/_manageItem'
+import TextInput from './TextInput'
+import '../scss/components/_blogpost'
 
-export default class ManageItem extends React.Component {
+export default class Blogpost extends React.Component {
   constructor (props) {
     super(props)
     this._onSave = this._onSave.bind(this)
@@ -15,37 +14,25 @@ export default class ManageItem extends React.Component {
     this._onDestroyClick = this._onDestroyClick.bind(this)
     this._onDoubleClick = this._onDoubleClick.bind(this)
 
-    // this.render = this.render.bind(this)
-
     this.state = {
       isEditing: false
     }
   }
 
   _onSave (title) {
-    ManageActions.update(this.props.id, {
-      title: title,
-      status: this.props.status
-    })
-    this.setState({isEditing: false})
+
   }
 
   _onPublish () {
-    ManageActions.update(this.props.id, {
-      title: this.props.title,
-      status: 'published'
-    })
+
   }
 
   _onUnpublish () {
-    ManageActions.update(this.props.id, {
-      title: this.props.title,
-      status: 'unpublished'
-    })
+
   }
 
   _onDestroyClick () {
-    ManageActions.destroy(this.props.id)
+
   }
 
   _onDoubleClick () {
@@ -56,14 +43,14 @@ export default class ManageItem extends React.Component {
     var input
     if (this.state.isEditing) {
       input =
-        <ManageTextInput
+        <TextInput
           className='edit'
           onSave={this._onSave}
           value={this.props.title}
         />
     }
     return (
-      <div className='manage-item'>
+      <div className='blogpost'>
         <Row key={this.props.id}>
           <Col xs={12} md={8}>
             <label onDoubleClick={this._onDoubleClick}>
@@ -85,7 +72,7 @@ export default class ManageItem extends React.Component {
   }
 }
 
-ManageItem.propTypes = {
+Blogpost.propTypes = {
   id: React.PropTypes.number,
   title: React.PropTypes.string,
   status: React.PropTypes.string

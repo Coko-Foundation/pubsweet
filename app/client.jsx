@@ -1,17 +1,17 @@
 import React from 'react'
-import Iso from 'iso'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import createHistory from 'history/lib/createBrowserHistory'
 import { Router } from 'react-router'
-
-import alt from './altInstance'
 import routes from './routes.jsx'
+import store from './store'
+let store = createStore(store)
 
 const history = createHistory()
 
-/*
- * Client side bootstrap with iso and alt
- */
-Iso.bootstrap((state, _, container) => {
-  alt.bootstrap(state)
-  React.render(<Router history={history} children={routes} />, container)
-})
+React.render(
+  <Provider store={store}>
+    <Router history={history} children={routes} />
+  </Provider>,
+  container
+)
