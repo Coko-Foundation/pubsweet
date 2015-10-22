@@ -6,7 +6,7 @@
     "start": "NODE_ENV=production node bin/www",
     "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
     "dev": "npm run buildDev && NODE_ENV=dev LOADER=hot node bin/www",
-    "buildDev": "webpack --colors --config ./webpack/webpack.dev.config.js",
+    "buildDev": "webpack --no-info --colors --config ./webpack/webpack.dev.config.js",
     "db-migrate": "db-migrate",
     "test": "make test",
     "eslint": "eslint"
@@ -30,7 +30,6 @@
     "immutable": "^3.7.4",
     "jade": "~1.11.0",
     "jquery": "^2.1.4",
-    "keymirror": "^0.1.1",
     "lodash": "^3.9.3",
     "morgan": "~1.6.1",
     "node-sass": "^3.1.2",
@@ -41,10 +40,13 @@
     "react-dom": "^0.14.0-rc1",
     "react-helmet": "^1.0.1",
     "react-quill": "jure/react-quill",
-    "react-router": "rackt/react-router",
+    "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.0",
     "react-redux": "^4.0.0",
-    "sass-loader": "^2.0.1",
+    "redux-logger": "^2.0.2",
+    "redux-router": "^1.0.0-beta3",
+    "redux-thunk": "^0.1.0",
+    "sass-loader": "^3.0.0",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.12.3",
     "lens-writer": "substance/lens-writer#edge",
@@ -69,7 +71,10 @@
     "react-hot-loader": "^1.2.8",
     "supertest": "^1.1.0",
     "warning": "^2.0.0",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-server": "^1.10.1",
+    "redux-devtools": "^3.0.0-beta-3",
+    "redux-devtools-dock-monitor": "^1.0.0-beta-3",
+    "redux-devtools-log-monitor": "^1.0.0-beta-3"
   },
   "standard": {
     "parser": "babel-eslint"

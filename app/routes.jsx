@@ -1,12 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import App from './components/App'
+import App from './containers/App'
 
 // Admin
 import About from './components/About'
+import Manage from './containers/BlogManager'
+
 import Dashboard from './components/Dashboard'
-import Manage from './components/BlogManager'
 import Create from './components/Create'
 
 // Public

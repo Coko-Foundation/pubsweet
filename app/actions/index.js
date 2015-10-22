@@ -1,13 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
+// Actions on collection
+
 export const REQUEST_COLLECTION = 'REQUEST_COLLECTION'
 export const RECEIVE_COLLECTION = 'RECEIVE_COLLECTION'
-
-export const REQUEST_FRAGMENTS = 'REQUEST_FRAGMENTS'
-export const RECEIVE_FRAGMENTS = 'RECEIVE_FRAGMENTS'
-
-export const SEND_FRAGMENT_UPDATE = 'SEND_FRAGMENT_UPDATE'
-export const COMPLETE_FRAGMENT_UPDATE = 'COMPLETE_FRAGMENT_UPDATE'
 
 export function requestCollection () {
   return {
@@ -32,6 +28,11 @@ export function fetchCollection () {
   }
 }
 
+// Actions on fragments
+
+export const REQUEST_FRAGMENTS = 'REQUEST_FRAGMENTS'
+export const RECEIVE_FRAGMENTS = 'RECEIVE_FRAGMENTS'
+
 export function requestFragments () {
   return {
     type: REQUEST_FRAGMENTS
@@ -52,5 +53,17 @@ export function fetchFragments () {
     return fetch('http://localhost:3000/api/collection/fragments')
       .then(response => response.json())
       .then(json => dispatch(receiveFragments(json)))
+  }
+}
+
+export const SEND_FRAGMENT_UPDATE = 'SEND_FRAGMENT_UPDATE'
+export const COMPLETE_FRAGMENT_UPDATE = 'COMPLETE_FRAGMENT_UPDATE'
+
+export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
+
+// Resets the currently visible error message.
+export function resetErrorMessage () {
+  return {
+    type: RESET_ERROR_MESSAGE
   }
 }

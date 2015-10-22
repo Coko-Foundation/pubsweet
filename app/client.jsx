@@ -1,17 +1,11 @@
 import React from 'react'
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import createHistory from 'history/lib/createBrowserHistory'
-import { Router } from 'react-router'
-import routes from './routes.jsx'
-import store from './store'
-let store = createStore(store)
+import { createStore } from 'redux'
+import configureStore from './store/configureStore'
+import Root from './containers/Root'
 
-const history = createHistory()
+let store = createStore(configureStore)
 
 React.render(
-  <Provider store={store}>
-    <Router history={history} children={routes} />
-  </Provider>,
-  container
+  <Root store={store} />,
+  document.getElementById('root')
 )
