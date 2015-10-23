@@ -1,4 +1,4 @@
-import { routerStateReducer } from 'redux-router'
+import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../actions'
 
@@ -49,7 +49,7 @@ function reducer (state = initialState, action) {
 const rootReducer = combineReducers({
   reducer,
   errorMessage,
-  routerStateReducer
+  router
 })
 
 export default rootReducer

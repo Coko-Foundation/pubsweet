@@ -37,7 +37,7 @@ module.exports = [
     entry: {
       app: ['webpack-dev-server/client?http://' + WEBPACK_HOST + ':' + WEBPACK_PORT,
        'webpack/hot/dev-server',
-        './client' ]
+        './index' ]
     },
     output: {
       // The output directory as absolute path
@@ -70,42 +70,6 @@ module.exports = [
     ],
     node: {
       fs: 'empty'
-    }
-  }, {
-    // The configuration for the server-side rendering
-    name: 'server-side rendering',
-    context: path.join(__dirname, '..', 'app'),
-    entry: {
-      app: './server',
-      header: './elements/Header'
-    },
-    target: 'node',
-    output: {
-      // The output directory as absolute path
-      path: assetsPath,
-      // The filename of the entry chunk as relative path inside the output.path directory
-      filename: '[name].server.js',
-      // The output path from the view of the Javascript
-      publicPath: publicPath,
-      libraryTarget: 'commonjs2'
-    },
-    devtool: 'eval-source-map',
-    module: {
-      preLoaders: [{
-        test: /\.js$|\.jsx$/,
-        exclude: /node_modules/,
-        loaders: ['eslint-loader']
-      }],
-      loaders: commonLoaders.concat([
-          { test: /\.scss$/,
-            loader: 'css/locals?module&localIdentName=[local]__[hash:base64:5]' +
-              '&sourceMap!sass?sourceMap&outputStyle=expanded' +
-              '&includePaths[]=' + (path.resolve(__dirname, '../node_modules'))
-          }
-      ])
-    },
-    resolve: {
-      extensions: ['', '.js', '.jsx', '.json', '.scss']
     }
   }
 ]
