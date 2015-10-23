@@ -37,7 +37,7 @@ module.exports = [
     entry: {
       app: ['webpack-dev-server/client?http://' + WEBPACK_HOST + ':' + WEBPACK_PORT,
        'webpack/hot/dev-server',
-        './index' ]
+        './client' ]
     },
     output: {
       // The output directory as absolute path
