@@ -29,7 +29,7 @@ BlogManager.propTypes = {
 
 function mapStateToProps (state) {
   return {
-    blog: state.collection[0],
+    blog: state.collections[0],
     blogposts: state.fragments
   }
 }

@@ -14,7 +14,7 @@ import Create from './components/Create'
 import Share from './components/Share'
 
 export default (
-  <Route path='/' component={App}>
+  <Route component={App}>
     <Route path='/' component={Share}/>
     <Route path='/admin'>
       <Route path='manages' component={Manage} />

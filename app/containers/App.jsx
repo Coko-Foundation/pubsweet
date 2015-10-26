@@ -7,20 +7,6 @@ import '../scss/main'
 class App extends Component {
   constructor (props) {
     super(props)
-    this.handleDismissClick = this.handleDismissClick.bind(this)
-  }
-
-  renderErrorMessage () {
-    const { errorMessage } = this.props
-    if (!errorMessage) {
-      return null
-    }
-
-    return (
-      <p>
-        <b>{errorMessage}</b>
-      </p>
-    )
   }
 
   render () {
@@ -30,7 +16,6 @@ class App extends Component {
         <p>{collection.title}</p>
         <Navigation />
         <hr />
-        {this.renderErrorMessage()}
         {children}
       </div>
     )
@@ -42,7 +27,6 @@ App.propTypes = {
   collection: PropTypes.object,
   // Injected by React Redux
   errorMessage: PropTypes.string,
-  resetErrorMessage: PropTypes.func.isRequired,
   pushState: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   // Injected by React Router
@@ -51,7 +35,7 @@ App.propTypes = {
 
 function mapStateToProps (state) {
   return {
-    collection: state.collection[0],
+    collection: state.collections[0],
     errorMessage: state.errorMessage,
     inputValue: state.router.location.pathname.substring(1)
   }

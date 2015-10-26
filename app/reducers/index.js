@@ -2,30 +2,32 @@ import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../actions'
 
-const initialState = {
-  collections: [{
-    title: 'Something',
-    author: 'Jure',
-    fragments: [1, 2, 3]
-  }],
-  fragments: [
-    {
-      id: 1,
-      title: 'one',
-      source: 'hello'
-    },
-    {
-      id: 2,
-      title: 'two',
-      source: 'hellohi'
-    },
-    {
-      id: 3,
-      title: 'three',
-      source: 'hellothere'
-    }
-  ]
-}
+const initialCollections = [{
+  title: 'Something',
+  author: 'Jure',
+  fragments: [1, 2, 3]
+}]
+
+const initialFragments = [
+  {
+    id: 1,
+    title: 'one',
+    source: 'hello',
+    status: 'published'
+  },
+  {
+    id: 2,
+    title: 'two',
+    source: 'hellohi',
+    status: 'unpublished'
+  },
+  {
+    id: 3,
+    title: 'three',
+    source: 'hellothere',
+    status: 'published'
+  }
+]
 
 // Updates error message to notify about the failed fetches.
 function errorMessage (state = null, action) {
@@ -40,14 +42,17 @@ function errorMessage (state = null, action) {
   return state
 }
 
-function reducer (state = initialState, action) {
-  // For now, don’t handle any actions
-  // and just return the state given to us.
+function collections (state = initialCollections, action) {
+  return state
+}
+
+function fragments (state = initialFragments, action) {
   return state
 }
 
 const rootReducer = combineReducers({
-  reducer,
+  collections,
+  fragments,
   errorMessage,
   router
 })

@@ -1,21 +1,22 @@
 import React from 'react'
-import Immutable from 'immutable'
 import Blogpost from './Blogpost'
 
 import styles from '../scss/components/_blogpostList'
 
 export default class BlogpostList extends React.Component {
   render () {
-    const blogposts = this.props.manages.toKeyedSeq().map((manage, key) => {
-      return (<Blogpost key={manage.get('id')} id={manage.get('id')} title={manage.getIn(['data', 'title'])} status={manage.getIn(['data', 'status'])}/>)
-    }).toArray()
+    const blogposts = this.props.blogposts.map((blogpost, key) => {
+      return (<Blogpost key={blogpost.id} id={blogpost.id} title={blogpost.title} status={blogpost.status}/>)
+    })
     return (
-      <div className={styles['main-section']}>
-        <h3 className={styles['main-section__header']}>Blog posts</h3>
+      <div className={styles['list']}>
+        <h3 className={styles['header']}>Blog posts</h3>
         {blogposts}
       </div>
     )
   }
 }
 
-BlogpostList.propTypes = { manages: React.PropTypes.instanceOf(Immutable.OrderedMap) }
+BlogpostList.propTypes = {
+  blogposts: React.PropTypes.array
+}

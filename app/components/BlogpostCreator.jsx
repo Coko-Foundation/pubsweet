@@ -24,5 +24,5 @@ export default class BlogpostCreator extends React.Component {
 }
 
 BlogpostCreator.propTypes = {
-  create: React.PropTypes.function
+  create: React.PropTypes.func
 }
