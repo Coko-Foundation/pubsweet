@@ -13,7 +13,7 @@ class BlogManager extends React.Component {
     return (
       <Grid>
         <div blog={blog} className={styles.vote}>
-          <BlogpostCreator />
+          <BlogpostCreator create={actions.createFragment} />
           <BlogpostList actions={actions} blogposts={blogposts} />
         </div>
       </Grid>

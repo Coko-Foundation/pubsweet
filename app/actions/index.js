@@ -59,6 +59,39 @@ export function fetchFragments () {
 export const SEND_FRAGMENT_UPDATE = 'SEND_FRAGMENT_UPDATE'
 export const COMPLETE_FRAGMENT_UPDATE = 'COMPLETE_FRAGMENT_UPDATE'
 
+export const START_CREATE_FRAGMENT = 'START_CREATE_FRAGMENT'
+export const FINISH_CREATE_FRAGMENT = 'FINISH_CREATE_FRAGMENT'
+
+export function startCreateFragment (fragment) {
+  return {
+    type: START_CREATE_FRAGMENT,
+    fragment: fragment
+  }
+}
+
+export function finishCreateFragment (fragment) {
+  return {
+    type: FINISH_CREATE_FRAGMENT,
+    fragment: fragment,
+    receivedAt: Date.now()
+  }
+}
+
+export function createFragment (fragment) {
+  return dispatch => {
+    dispatch(startCreateFragment(fragment))
+    return fetch('http://localhost:3000/api/collection/fragment', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fragment)})
+      .then(response => response.json())
+      .then(json => dispatch(receiveFragments(json)))
+  }
+}
+
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
 
 // Resets the currently visible error message.

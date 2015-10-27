@@ -4,30 +4,29 @@ const expect = require('expect.js')
 const _ = require('lodash')
 const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
-const PouchDB = require('pouchdb')
 
 const collectionFixture = {
-  "type": "collection",
-  "title": "Science Blogger posts",
+  'type': 'collection',
+  'title': 'Science Blogger posts'
 }
 
 const fragmentFixture = {
-  "type": "blogpost",
-  "source": "<blog></blog>",
-  "presentation": "<p></p>"
+  'type': 'blogpost',
+  'source': '<blog></blog>',
+  'presentation': '<p></p>'
 }
 
 var app
 var updatedFragmentFixture = {
-  "source": "<blog><title>Updated</title></blog>",
-  "presentation": "<p><h1>Updated</h1></p>"
+  'source': '<blog><title>Updated</title></blog>',
+  'presentation': '<p><h1>Updated</h1></p>'
 }
 
-describe('api', function (){
+describe('api', function () {
   var collectionId
   var fragmentId
 
-  before(function() {
+  before(function () {
     return dbCleaner.then(function () {
        // We load the app here to ensure that the database is cleaned before
        // creating a new one
@@ -35,16 +34,16 @@ describe('api', function (){
     })
   })
 
-  it('creates a collection', function (done){
+  it('creates a collection', function (done) {
     request(app)
       .post('/api/collection')
       .send(collectionFixture)
-      .expect(function(res) {
+      .expect(function (res) {
         expect(res.body.ok).to.eql(true)
         // Store collectionId for later tests
         collectionId = res.body.id
       })
-      .expect(201, done);
+      .expect(201, done)
   })
 
   it('returns existing collection if you try creating it again', function (done) {
@@ -54,10 +53,10 @@ describe('api', function (){
       .expect(function(res) {
         expect(res.body._id).to.eql(collectionId)
       })
-      .expect(200, done);
+      .expect(200, done)
   })
 
-  it('gets the collection', function (done){
+  it('gets the collection', function (done) {
     request(app)
       .get('/api/collection')
       .expect('Content-Type', /json/)
@@ -79,10 +78,10 @@ describe('api', function (){
       .expect(201, done)
   })
 
-  it('gets all fragments', function (done){
+  it('gets all fragments', function (done) {
     request(app)
       .get('/api/collection/fragments')
-      .expect(function(res) {
+      .expect(function (res) {
         expect(res.body.length).to.eql(1)
         expect(_.omit(res.body[0], '_rev'))
           .to.eql(objectAssign({_id: fragmentId}, fragmentFixture))
@@ -90,7 +89,7 @@ describe('api', function (){
       .expect(200, done)
   })
 
-  it('updates a fragment', function (done){
+  it('updates a fragment', function (done) {
     request(app)
       .put('/api/collection/fragment')
       .send(Object.assign({_id: fragmentId}, updatedFragmentFixture))
@@ -100,7 +99,7 @@ describe('api', function (){
       .end(done)
   })
 
-  it('get a specific fragments', function (done){
+  it('get a specific fragments', function (done) {
     request(app)
       .get('/api/collection/fragment/' + fragmentId)
       .expect(function (res) {
@@ -110,8 +109,7 @@ describe('api', function (){
       .expect(200, done)
   })
 
-
-  it('deletes a fragment', function (done){
+  it('deletes a fragment', function (done) {
     request(app)
       .del('/api/collection/fragment')
       .send(objectAssign({_id: fragmentId}, fragmentFixture))

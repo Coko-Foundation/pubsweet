@@ -10,12 +10,17 @@ export default class BlogpostCreator extends React.Component {
   }
 
   _onSave (text) {
-    this.props.create(text)
+    this.props.create({
+      type: 'blogpost',
+      title: text,
+      status: 'unpublished',
+      source: '<p></p>'
+    })
   }
 
   render () {
     return (
-      <div className={styles.entrybox}>
+      <div>
         <h1 className={styles.entrybox__header}>Create a new blog post</h1>
         <TextInput className={styles.entrybox__input} placeholder='Title' onSave={this._onSave} />
       </div>

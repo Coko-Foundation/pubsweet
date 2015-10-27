@@ -1,14 +1,13 @@
 const express = require('express')
 const objectAssign = require('object-assign')
 const api = express.Router()
-
+const _ = require('lodash')
 const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'));
-PouchDB.debug.enable('*')
+PouchDB.plugin(require('pouchdb-find'))
 
 const db = new PouchDB('./db' + process.env.NODE_ENV)
 
-function findCollection() {
+function findCollection () {
   // Idempotently create indexes in datastore
   return db.createIndex({
     index: {
@@ -24,13 +23,13 @@ function findCollection() {
 }
 
 // Create collection
-api.post('/collection', function(req, res) {
+api.post('/collection', function (req, res) {
   const data = req.body
 
   const collection = objectAssign({_id: new Date().toISOString()}, data)
 
   findCollection().then(function (existingCollection) {
-    if(existingCollection) {
+    if (existingCollection) {
       return res.status(200).json(existingCollection)
     } else {
       return db.put(collection).then(function (response) {
@@ -44,21 +43,21 @@ api.post('/collection', function(req, res) {
 })
 
 // Get collection
-api.get('/collection', function(req, res) {
+api.get('/collection', function (req, res) {
   db.find({
     selector: {type: 'collection'}
   }).then(function (collection) {
     return res.status(200).json(collection.docs[0])
   }).catch(function (error) {
-    console.error(err)
+    console.error(error)
     return res.status(503)
   })
 })
 
 // Destroy collection
-api.delete('/collection', function(req, res) {
+api.delete('/collection', function (req, res) {
   findCollection().then(function (existingCollection) {
-    if(existingCollection) {
+    if (existingCollection) {
       return db.remove(existingCollection).then(function (response) {
         return res.status(200).json(response)
       })
@@ -72,19 +71,22 @@ api.delete('/collection', function(req, res) {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collection/fragment', function(req, res) {
+api.post('/collection/fragment', function (req, res) {
   var collection
   var fragment = objectAssign({_id: new Date().toISOString()}, req.body)
-  var dbFragment = db.put(fragment)
+  console.log(req.body)
+  console.log(fragment)
 
-  var dbCollection = findCollection()
+  findCollection()
     .then(function (existingCollection) {
+      console.log(existingCollection)
       collection = existingCollection
-      return dbFragment
+      return db.put(fragment)
     })
     .then(function (result) {
+      console.log(result)
       fragment = result
-      if(collection.fragments) {
+      if (collection.fragments) {
         collection.fragments.push(fragment.id)
       } else {
         collection.fragments = [fragment.id]
@@ -92,16 +94,17 @@ api.post('/collection/fragment', function(req, res) {
       return db.put(collection)
     })
     .then(function (collection) {
+      console.log(collection)
       return res.status(201).json(fragment)
     })
-    .catch(function(err) {
+    .catch(function (err) {
+      console.error(err)
       return res.status(500)
-      return console.error(err)
     })
 })
 
 // Get all fragments
-api.get('/collection/fragments', function(req, res) {
+api.get('/collection/fragments', function (req, res) {
   findCollection().then(function (collection) {
     var fragments = collection.fragments.map(function (id) {
       return db.get(id)
@@ -115,16 +118,17 @@ api.get('/collection/fragments', function(req, res) {
   })
 })
 
-api.get('/collection/fragment/:id', function (req, res){
+api.get('/collection/fragment/:id', function (req, res) {
   db.get(req.params.id).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
+    console.error(err)
     return res.status(500)
   })
 })
 
 // Update a fragment
-api.put('/collection/fragment', function(req, res) {
+api.put('/collection/fragment', function (req, res) {
   db.get(req.body._id).then(function (result) {
     return db.put(objectAssign({_rev: result._rev}, req.body))
   }).then(function (result) {
@@ -136,12 +140,12 @@ api.put('/collection/fragment', function(req, res) {
 })
 
 // Delete a fragment
-api.delete('/collection/fragment', function(req, res) {
+api.delete('/collection/fragment', function (req, res) {
   db.get(req.body._id).then(function (result) {
     return db.remove(result)
   }).then(function (result) {
     return findCollection()
-  }).then(function (collection){
+  }).then(function (collection) {
     collection.fragments = _.without(collection.fragments, req.body._id)
     return db.put(collection)
   }).then(function (result) {

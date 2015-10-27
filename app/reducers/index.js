@@ -1,6 +1,7 @@
 import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
 import * as ActionTypes from '../actions'
+import _ from 'lodash'
 
 const initialCollections = [{
   title: 'Something',
@@ -47,6 +48,14 @@ function collections (state = initialCollections, action) {
 }
 
 function fragments (state = initialFragments, action) {
+  let fragments = _.clone(initialFragments)
+  switch (action.type) {
+    case ActionTypes.START_CREATE_FRAGMENT:
+      fragments.push(action.fragment)
+      return fragments
+    case ActionTypes.FINISH_CREATE_FRAGMENT:
+      return fragments
+  }
   return state
 }
 
