@@ -6,7 +6,12 @@ import styles from '../scss/components/_blogpostList'
 export default class BlogpostList extends React.Component {
   render () {
     const blogposts = this.props.blogposts.map((blogpost, key) => {
-      return (<Blogpost key={blogpost.id} id={blogpost.id} title={blogpost.title} status={blogpost.status}/>)
+      return (<Blogpost
+        key={blogpost._id}
+        blogpost={blogpost}
+        delete={this.props.delete}
+        update={this.props.update}
+      />)
     })
     return (
       <div className={styles['list']}>
@@ -18,5 +23,7 @@ export default class BlogpostList extends React.Component {
 }
 
 BlogpostList.propTypes = {
+  update: React.PropTypes.func,
+  delete: React.PropTypes.func,
   blogposts: React.PropTypes.array
 }

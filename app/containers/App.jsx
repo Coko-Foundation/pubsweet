@@ -3,19 +3,20 @@ import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
 import Navigation from '../components/Navigation'
 import '../scss/main'
+import * as Actions from '../actions'
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
   constructor (props) {
     super(props)
+    this.props.actions.hydrate()
   }
 
   render () {
-    const { children, collection } = this.props
+    const { children } = this.props
     return (
       <div>
-        <p>{collection.title}</p>
         <Navigation />
-        <hr />
         {children}
       </div>
     )
@@ -30,7 +31,8 @@ App.propTypes = {
   pushState: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   // Injected by React Router
-  children: PropTypes.node
+  children: PropTypes.node,
+  actions: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
@@ -41,6 +43,14 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, {
-  pushState
-})(App)
+function mapDispatchToProps (dispatch) {
+  return {
+    pushState: pushState,
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

@@ -8,13 +8,20 @@ import styles from '../scss/components/_manage'
 import * as Actions from '../actions'
 
 class BlogManager extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+
   render () {
     const { blog, blogposts, actions } = this.props
     return (
       <Grid>
         <div blog={blog} className={styles.vote}>
           <BlogpostCreator create={actions.createFragment} />
-          <BlogpostList actions={actions} blogposts={blogposts} />
+          <BlogpostList
+            update={actions.updateFragment}
+            delete={actions.deleteFragment}
+            blogposts={blogposts} />
         </div>
       </Grid>
     )

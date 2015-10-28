@@ -20,19 +20,25 @@ export default class Blogpost extends React.Component {
   }
 
   _onSave (title) {
-
+    this.props.update(Object.assign(this.props.blogpost, {
+      title: title
+    }))
   }
 
   _onPublish () {
-
+    this.props.update(Object.assign(this.props.blogpost, {
+      status: 'published'
+    }))
   }
 
   _onUnpublish () {
-
+    this.props.update(Object.assign(this.props.blogpost, {
+      status: 'unpublished'
+    }))
   }
 
   _onDestroyClick () {
-
+    this.props.delete(this.props.blogpost)
   }
 
   _onDoubleClick () {
@@ -40,26 +46,27 @@ export default class Blogpost extends React.Component {
   }
 
   render () {
+    const { blogpost } = this.props
     var input
     if (this.state.isEditing) {
       input =
         <TextInput
           className='edit'
           onSave={this._onSave}
-          value={this.props.title}
+          value={blogpost.title}
         />
     }
     return (
       <div className='blogpost'>
-        <Row key={this.props.id}>
+        <Row key={blogpost._id}>
           <Col xs={12} md={8}>
             <label onDoubleClick={this._onDoubleClick}>
-              {this.props.title} ({this.props.status})
+              {blogpost.title} ({blogpost.status})
             </label>
             {input}
           </Col>
           <Col xs={12} md={4}>
-            <LinkContainer to={`/admin/creates/${this.props.id}`}>
+            <LinkContainer to={`/admin/creates/${blogpost._id}`}>
               <Button bsStyle='primary'>Edit this</Button>
             </LinkContainer>&nbsp;
             <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
@@ -73,7 +80,7 @@ export default class Blogpost extends React.Component {
 }
 
 Blogpost.propTypes = {
-  id: React.PropTypes.number,
-  title: React.PropTypes.string,
-  status: React.PropTypes.string
+  blogpost: React.PropTypes.object,
+  delete: React.PropTypes.func,
+  update: React.PropTypes.func
 }
