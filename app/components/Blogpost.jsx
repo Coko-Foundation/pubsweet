@@ -66,7 +66,7 @@ export default class Blogpost extends React.Component {
             {input}
           </Col>
           <Col xs={12} md={4}>
-            <LinkContainer to={`/admin/creates/${blogpost._id}`}>
+            <LinkContainer to={`/admin/editor/${blogpost._id}`}>
               <Button bsStyle='primary'>Edit this</Button>
             </LinkContainer>&nbsp;
             <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;

@@ -5,10 +5,8 @@ import App from './containers/App'
 
 // Admin
 import About from './components/About'
-import Manage from './containers/BlogManager'
-
-import Dashboard from './components/Dashboard'
-import Create from './components/Create'
+import BlogManager from './containers/BlogManager'
+import Editor from './components/Editor'
 
 // Public
 import Share from './components/Share'
@@ -17,9 +15,8 @@ export default (
   <Route component={App}>
     <Route path='/' component={Share}/>
     <Route path='/admin'>
-      <Route path='manages' component={Manage} />
-      <Route path='creates/:createId' component={Create} />
-      <Route path='dashboard' component={Dashboard} />
+      <Route path='manager' component={BlogManager} />
+      <Route path='editor/:id' component={Editor} />
       <Route path='about' component={About} />
     </Route>
   </Route>
