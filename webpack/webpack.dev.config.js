@@ -55,9 +55,8 @@ module.exports = [
         loaders: ['eslint-loader']
       }],
       loaders: commonLoaders.concat([
-          { test: /\.scss$/,
-            loader: 'style!css!sass?includePaths[]=' +
-              path.resolve(__dirname, '../node_modules/lens-writer/app/assets/fonts/')
+          { test: /\.scss$|\.css$/,
+            loader: 'style!css!sass'
           }
       ])
     },
