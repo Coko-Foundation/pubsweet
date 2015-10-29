@@ -6,7 +6,7 @@ import App from './containers/App'
 // Admin
 import About from './components/About'
 import BlogManager from './containers/BlogManager'
-import Editor from './components/TrixEditor'
+import Editor from './components/MarkdownEditor'
 
 // Public
 import Share from './components/Share'
