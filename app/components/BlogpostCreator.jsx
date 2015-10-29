@@ -14,7 +14,7 @@ export default class BlogpostCreator extends React.Component {
       type: 'blogpost',
       title: text,
       status: 'unpublished',
-      source: '<p></p>'
+      source: ''
     })
   }
 

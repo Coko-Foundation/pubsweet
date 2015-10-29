@@ -48,7 +48,7 @@
     "sass-loader": "^3.0.0",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.12.3",
-    "lens-writer": "substance/lens-writer#edge",
+    "lens-writer": "substance/lens#master",
     "webpack": "^1.12.2",
     "pouchdb": "^5.0.0",
     "leveldown": "^1.4.1",
