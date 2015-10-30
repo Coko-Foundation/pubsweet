@@ -1,43 +1,52 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
-import Navigation from '../components/Navigation'
+
 import '../scss/main'
 import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
-class App extends Component {
+import Blogpost from '../components/BlogRoll/Blogpost'
+
+class BlogRoll extends React.Component {
   constructor (props) {
     super(props)
     this.props.actions.hydrate()
   }
 
   render () {
-    const { children } = this.props
+    var fragments = this.props.fragments.map(function (blogpost) {
+      if (blogpost.status === 'published') {
+        return (<Blogpost
+          key={blogpost._id}
+          blogpost={blogpost}
+        />)
+      }
+    })
     return (
       <div>
-        <Navigation />
-        {children}
+        {fragments}
       </div>
     )
   }
 }
 
-App.propTypes = {
+BlogRoll.propTypes = {
   // Data
-  collection: PropTypes.object,
+  collection: React.PropTypes.object,
+  fragments: React.PropTypes.array,
   // Injected by React Redux
-  errorMessage: PropTypes.string,
-  pushState: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
+  errorMessage: React.PropTypes.string,
+  pushState: React.PropTypes.func.isRequired,
+  inputValue: React.PropTypes.string.isRequired,
   // Injected by React Router
-  children: PropTypes.node,
   actions: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
   return {
     collection: state.collections[0],
+    fragments: state.fragments,
     errorMessage: state.errorMessage,
     inputValue: state.router.location.pathname.substring(1)
   }
@@ -53,4 +62,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(BlogRoll)

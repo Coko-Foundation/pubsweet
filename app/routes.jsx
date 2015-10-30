@@ -1,20 +1,19 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import App from './containers/App'
-
 // Admin
-import About from './components/About'
+import Admin from './containers/Admin'
+import About from './components/Admin/About'
 import BlogManager from './containers/BlogManager'
-import Editor from './components/SubstanceEditor'
+import Editor from './components/Admin/MarkdownEditor'
 
 // Public
-import Share from './components/Share'
+import BlogRoll from './containers/BlogRoll'
 
 export default (
-  <Route component={App}>
-    <Route path='/' component={Share}/>
-    <Route path='/admin'>
+  <Route>
+    <Route path='/' component={BlogRoll}/>
+    <Route path='/admin' component={Admin}>
       <Route path='manager' component={BlogManager} />
       <Route path='editor/:id' component={Editor} />
       <Route path='about' component={About} />

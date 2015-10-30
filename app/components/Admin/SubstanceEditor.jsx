@@ -2,12 +2,12 @@ import React from 'react'
 import LensWriter from 'lens/ReactLensWriter'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from '../actions'
+import * as Actions from '../../actions'
 import _ from 'lodash'
 
 // Styles
-import '../../node_modules/lens-writer/app/app.scss'
-import '../scss/components/_substanceEditor'
+import '../../../node_modules/lens-writer/app/app.scss'
+import '../../scss/components/_substanceEditor'
 
 export default class SubstanceEditor extends React.Component {
   constructor (props) {

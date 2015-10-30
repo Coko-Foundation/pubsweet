@@ -1,7 +1,7 @@
 import React from 'react'
 import TextInput from './TextInput'
 
-import styles from '../scss/components/_blogpostCreator'
+import styles from '../../scss/components/_blogpostCreator'
 
 export default class BlogpostCreator extends React.Component {
   constructor (props) {

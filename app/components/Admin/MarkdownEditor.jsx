@@ -2,12 +2,12 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-require('script!../../node_modules/simplemde/dist/simplemde.min.js')
-import * as Actions from '../actions'
+require('script!../../../node_modules/simplemde/dist/simplemde.min.js')
+import * as Actions from '../../actions'
 import _ from 'lodash'
 
 // Styles
-import '../../node_modules/simplemde/dist/simplemde.min.css'
+import '../../../node_modules/simplemde/dist/simplemde.min.css'
 // import '../scss/components/_markdownEditor'
 
 export default class MarkdownEditor extends React.Component {
