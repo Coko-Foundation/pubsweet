@@ -5,7 +5,7 @@ import { Route } from 'react-router'
 import Admin from './containers/Admin'
 import About from './components/Admin/About'
 import BlogManager from './containers/BlogManager'
-import Editor from './components/Admin/MarkdownEditor'
+import Editor from './components/Admin/SubstanceEditor'
 
 // Public
 import BlogRoll from './containers/BlogRoll'
