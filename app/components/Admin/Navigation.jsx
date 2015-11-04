@@ -1,21 +1,23 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import BurgerMenu from 'react-burger-menu'
+
+import '../../scss/components/_navigation'
 
 export default class Navigation extends React.Component {
 
   render () {
+    const Menu = BurgerMenu['slide']
     return (
-      <Navbar brand='Science Blogger'>
-        <Nav>
-          <LinkContainer to='/admin/manager'>
-            <NavItem>Manager</NavItem>
-          </LinkContainer>
-          <LinkContainer to='/admin/about'>
-            <NavItem>About</NavItem>
-          </LinkContainer>
-        </Nav>
-      </Navbar>
+      <Menu>
+        <p>Science Blogger</p>
+        <LinkContainer to='/admin/manager'>
+          <span>Manager</span>
+        </LinkContainer>
+        <LinkContainer to='/admin/about'>
+          <span>About</span>
+        </LinkContainer>
+      </Menu>
     )
   }
 }
