@@ -6,7 +6,7 @@ import '../scss/main'
 import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
-import Blogpost from '../components/BlogRoll/LensBlogpost'
+import Blogpost from '../components/BlogRoll/LensBlogpostSummary'
 
 class BlogRoll extends React.Component {
   constructor (props) {

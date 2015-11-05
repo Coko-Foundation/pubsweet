@@ -9,6 +9,7 @@ import Editor from './components/Admin/SubstanceEditor'
 
 // Public
 import BlogRoll from './containers/BlogRoll'
+import Blogpost from './components/BlogRoll/LensBlogpost'
 
 export default (
   <Route>
@@ -18,5 +19,6 @@ export default (
       <Route path='editor/:id' component={Editor} />
       <Route path='about' component={About} />
     </Route>
+    <Route path='/:id' component={Blogpost}/>
   </Route>
 )

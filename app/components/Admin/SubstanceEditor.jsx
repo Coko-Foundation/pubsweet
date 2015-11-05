@@ -6,7 +6,7 @@ import * as Actions from '../../actions'
 import _ from 'lodash'
 
 // Styles
-import '../../../node_modules/lens-writer/app/app.scss'
+import '../../../node_modules/lens/styles/lens-writer.scss'
 import '../../scss/components/_substanceEditor'
 
 export default class SubstanceEditor extends React.Component {

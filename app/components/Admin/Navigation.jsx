@@ -6,8 +6,8 @@ export default class Navigation extends React.Component {
 
   render () {
     return (
-      <Navbar brand='Science Blogger'>
-        <Nav>
+      <Navbar brand='Science Blogger' toggleNavKey={0}>
+        <Nav eventKey={0}>
           <LinkContainer to='/admin/manager'>
             <NavItem>Manager</NavItem>
           </LinkContainer>
