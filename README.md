@@ -1,18 +1,6 @@
 # Preconditions
 
-Have Postgres 9.x installed, and Node 0.12.7.
-
-Postgres you can install via `brew install postgres`. Run it via.
-
-```bash
-$ postgres -D /usr/local/var/postgres
-```
-
-Now create a db `pubsweet`.
-
-```bash
-$ createdb pubsweet
-```
+Node.js is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
 
 # Install
 
@@ -20,35 +8,21 @@ $ createdb pubsweet
 $ git clone git@gitlab.coko.foundation:jure/backend-node.git
 $ cd backend-node
 $ npm install
-$ npm run db-migrate up
 ```
 
 # Start the server
 
 ```bash
-$ npm run hot
+$ npm run dev
+$ ./bin/init.sh
 ```
 
 Point your browser to: http://localhost:3000
 
-# Roadmap (9th of October, 2015)
+# Roadmap (23rd of November, 2015)
 
-Next two weeks (12-23 October):
+Next week (23-27 November):
 
-1. Backend and data structure
-  1. Collections and Fragments
-  2. API
-  3. No front end dev
-  4. Tests
-  5. Navigation
-
-Week after that (26-30 October):
-
-2. Integrate next version of Substance
-  1. Evaluate backend API in this context
-
-And the week after that (2-7 November):
-
-3. Share component collaboration
-  1. Substance sans editing
-  2. System share integration
+1. Simple auth
+2. A proper abstract display on the front page
+3. Last write wins strategy for document updates

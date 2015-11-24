@@ -1,12 +1,11 @@
 import React from 'react'
-import createHistory from 'history/lib/createBrowserHistory'
-import { Router } from 'react-router'
-import routes from './routes.jsx'
-const history = createHistory()
+import { render } from 'react-dom'
+import configureStore from './store/configureStore'
+import Root from './containers/Root'
 
-/*
- * Client side bootstrap with iso and alt
- */
+let store = configureStore()
 
-React.render(<Router history={history} children={routes} />, document.getElementById('app'))
-
+render(
+  <Root store={store} />,
+  document.getElementById('root')
+)

@@ -3,7 +3,7 @@
 {
   "extends": ["standard", "standard-react"],
   "ecmaFeatures": {
-        "jsx": true
+    "jsx": true
   },
   "plugins": [
     "react"
