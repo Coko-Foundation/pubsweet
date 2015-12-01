@@ -32,8 +32,8 @@ export default class SubstanceEditor extends React.Component {
     let editor
     let content
     if (this.props.fragment.source === '') {
-      content = '<article xmlns="http://substance.io/science-article/0.1.0" lang="en"><meta><title>' +
-      this.props.fragment.title + '</title><abstract>hello</abstract></meta><resources></resources>' +
+      content = '<article xmlns="http://substance.io/science-article/0.1.0" lang="en"><metadata><title>' +
+      this.props.fragment.title + '</title><abstract>hello</abstract></metadata><resources></resources>' +
       '<body><p id="p1">test</p></body></article>'
     } else {
       content = this.props.fragment.source
