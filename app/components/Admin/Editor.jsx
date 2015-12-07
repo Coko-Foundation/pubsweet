@@ -1,12 +1,12 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from '../actions'
+import * as Actions from '../../actions'
 import _ from 'lodash'
 
 import React from 'react'
 import ReactQuill from 'react-quill'
 
-import '../scss/components/_editor'
+import '../../scss/components/_editor'
 
 class Editor extends React.Component {
   constructor (props) {
