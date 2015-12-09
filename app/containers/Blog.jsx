@@ -6,9 +6,9 @@ import '../scss/main'
 import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
-import Blogpost from '../components/BlogRoll/LensBlogpostSummary'
+import BlogpostSummary from 'pubsweet-substance-components/Summary'
 
-class BlogRoll extends React.Component {
+class Blog extends React.Component {
   constructor (props) {
     super(props)
     this.props.actions.hydrate()
@@ -17,9 +17,9 @@ class BlogRoll extends React.Component {
   render () {
     var fragments = this.props.fragments.map(function (blogpost) {
       if (blogpost.status === 'published') {
-        return (<Blogpost
+        return (<BlogpostSummary
           key={blogpost._id}
-          blogpost={blogpost}
+          fragment={blogpost}
         />)
       }
     })
@@ -31,7 +31,7 @@ class BlogRoll extends React.Component {
   }
 }
 
-BlogRoll.propTypes = {
+Blog.propTypes = {
   // Data
   collection: React.PropTypes.object,
   fragments: React.PropTypes.array,
@@ -62,4 +62,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BlogRoll)
+)(Blog)

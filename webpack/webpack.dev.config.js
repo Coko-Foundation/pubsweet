@@ -8,6 +8,8 @@ var publicPath = 'http://localhost:3001/assets/'
 var WEBPACK_HOST = 'localhost'
 var WEBPACK_PORT = 3001
 
+// We're including JSX components from our components package,
+// but excluding its node_modules.
 var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
@@ -15,7 +17,20 @@ var commonLoaders = [
     include: [
       path.join(__dirname, '..', 'app'),
       path.join(__dirname, '..', 'routes'),
-      path.join(__dirname, '..', 'app.js')
+      path.join(__dirname, '..', 'app.js'),
+      path.join(__dirname,
+        '..',
+        'node_modules',
+        'pubsweet-substance-components'
+      )
+    ],
+    exclude: [
+      path.join(__dirname,
+        '..',
+        'node_modules',
+        'pubsweet-substance-components',
+        'node_modules'
+      )
     ]
   },
   { test: /\.png$/, loader: 'url-loader' },
@@ -47,7 +62,7 @@ module.exports = [
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
-    devtool: 'eval-source-map',
+    devtool: 'inline-source-map',
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,

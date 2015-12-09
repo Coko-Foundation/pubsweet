@@ -3,7 +3,7 @@ import { Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
-import '../../scss/components/_blogpost'
+import '../../scss/components/Admin/blogpost'
 
 export default class Blogpost extends React.Component {
   constructor (props) {

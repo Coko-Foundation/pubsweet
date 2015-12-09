@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid } from 'react-bootstrap'
-import BlogpostList from '../components/Admin/BlogpostList'
-import BlogpostCreator from '../components/Admin/BlogpostCreator'
+import BlogpostList from '../../components/Admin/BlogpostList'
+import BlogpostCreator from '../../components/Admin/BlogpostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../scss/components/_manage'
-import * as Actions from '../actions'
+import styles from '../../scss/components/_manage'
+import * as Actions from '../../actions'
 
 class BlogManager extends React.Component {
   constructor (props) {
