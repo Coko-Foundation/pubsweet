@@ -21,7 +21,9 @@ export default class EditorWrapper extends React.Component {
 
     fetch('/api/upload', { method: 'POST', body: form })
       .then(function (res) {
-        return callback(null, null)
+        return res.text()
+      }).then(function (text) {
+        return callback(null, text)
       })
   }
   render () {

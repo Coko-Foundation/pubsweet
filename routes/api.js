@@ -163,7 +163,8 @@ var upload = multer({
   limits: {fileSize: 1000000, files: 1}
 })
 api.post('/upload', upload.single('file'), function (req, res, next) {
-  return req.file.path
+  console.log(req.file)
+  return res.send(req.file.path.replace(/^public/, ''))
 })
 
 module.exports = api
