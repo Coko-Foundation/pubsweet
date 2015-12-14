@@ -27,6 +27,7 @@ export default class Blogpost extends React.Component {
 
   _onPublish () {
     this.props.update(Object.assign(this.props.blogpost, {
+      published_at: new Date(),
       status: 'published'
     }))
   }
@@ -56,6 +57,22 @@ export default class Blogpost extends React.Component {
           value={blogpost.title}
         />
     }
+
+    var changePublished
+    if (blogpost.status === 'unpublished') {
+      changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' onClick={this._onPublish}>
+          <i className='fa fa-chain'></i>
+        </Button>
+    } else {
+      changePublished = <Button title='Unpublish' aria-label='Unpublish' bsStyle='warning' onClick={this._onUnpublish}>
+          <i className='fa fa-chain-broken'></i>
+        </Button>
+    }
+
+    if (blogpost.published_at) {
+      blogpost.published_at = new Date(blogpost.published_at).toDateString()
+    }
+
     return (
       <tr className='blogpost' key={blogpost.key}>
         <td>
@@ -75,11 +92,14 @@ export default class Blogpost extends React.Component {
         </td>
         <td>
           <LinkContainer to={`/admin/editor/${blogpost._id}`}>
-            <Button bsStyle='primary'>Edit this</Button>
+            <Button bsStyle='primary' title='Edit' aria-label='Edit'>
+              <i className='fa fa-pencil'></i>
+            </Button>
           </LinkContainer>&nbsp;
-          <Button bsStyle='success' onClick={this._onPublish}>Publish</Button>&nbsp;
-          <Button bsStyle='warning' onClick={this._onUnpublish}>Unpublish</Button>&nbsp;
-          <Button bsStyle='danger' onClick={this._onDestroyClick}>Delete</Button>
+          {changePublished}&nbsp;
+          <Button bsStyle='danger' onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
+            <i className='fa fa-trash-o'></i>
+          </Button>
         </td>
       </tr>
     )
