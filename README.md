@@ -17,7 +17,7 @@ To start the JS compilation and webserver, run:
 $ npm run dev
 ```
 
-And then initialize your blog by running:
+And then open another terminal window in the same directory and initialize your blog by running:
 ```bash
 $ ./bin/init.sh
 ```
