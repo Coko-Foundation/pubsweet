@@ -1,16 +1,15 @@
 import React from 'react'
-import LensReader from 'lens/ReactLensReader'
-import '../../scss/components/_blogpost'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
-import * as Actions from '../../actions'
+import * as Actions from '../actions'
 
-// Styles
-import '../../../node_modules/lens/styles/lens-reader.scss'
+// Which reader to use?
+import Blogpost from 'pubsweet-substance-components/Reader'
+// import Blogpost from 'pubsweet-components/QuillReader'
 
-export default class LensBlogpost extends React.Component {
+class BlogpostWrapper extends React.Component {
   constructor (props) {
     super(props)
     this.props.actions.hydrate()
@@ -22,7 +21,7 @@ export default class LensBlogpost extends React.Component {
     if (blogpost) {
       return (
         <div className='blogpost'>
-          <LensReader content={blogpost.source} />
+          <Blogpost content={blogpost.source} />
         </div>
       )
     } else {
@@ -33,7 +32,7 @@ export default class LensBlogpost extends React.Component {
   }
 }
 
-LensBlogpost.propTypes = {
+BlogpostWrapper.propTypes = {
   // Data
   blogpost: React.PropTypes.object,
   // Injected by React Redux
@@ -64,4 +63,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LensBlogpost)
+)(BlogpostWrapper)

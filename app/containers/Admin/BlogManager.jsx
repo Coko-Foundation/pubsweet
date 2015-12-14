@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid } from 'react-bootstrap'
-import BlogpostList from '../components/Admin/BlogpostList'
-import BlogpostCreator from '../components/Admin/BlogpostCreator'
+import BlogpostList from '../../components/Admin/BlogpostList'
+import BlogpostCreator from '../../components/Admin/BlogpostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../scss/components/_manage'
-import * as Actions from '../actions'
+import styles from '../../scss/components/_manage'
+import * as Actions from '../../actions'
 
 class BlogManager extends React.Component {
   constructor (props) {
@@ -15,15 +15,17 @@ class BlogManager extends React.Component {
   render () {
     const { blog, blogposts, actions } = this.props
     return (
-      <Grid>
-        <div blog={blog} className={styles.vote}>
-          <BlogpostCreator create={actions.createFragment} />
-          <BlogpostList
-            update={actions.updateFragment}
-            delete={actions.deleteFragment}
-            blogposts={blogposts} />
-        </div>
-      </Grid>
+      <div className='bootstrap'>
+        <Grid>
+          <div blog={blog} className={styles.vote}>
+            <BlogpostList
+              update={actions.updateFragment}
+              delete={actions.deleteFragment}
+              blogposts={blogposts} />
+            <BlogpostCreator create={actions.createFragment} />
+          </div>
+        </Grid>
+      </div>
     )
   }
 }

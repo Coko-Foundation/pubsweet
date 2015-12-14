@@ -2,8 +2,6 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-import '../../scss/components/_blogpost'
-
 export default class Blogpost extends React.Component {
   render () {
     const { blogpost } = this.props

@@ -1,28 +1,52 @@
 import React from 'react'
-import TextInput from './TextInput'
-
-import styles from '../../scss/components/_blogpostCreator'
+// import TextInput from './TextInput'
+import { Input, Button } from 'react-bootstrap'
 
 export default class BlogpostCreator extends React.Component {
   constructor (props) {
     super(props)
-    this._onSave = this._onSave.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
-  _onSave (text) {
+  onSave (text) {
     this.props.create({
       type: 'blogpost',
-      title: text,
+      title: this.state.title,
+      author: this.state.author,
       status: 'unpublished',
       source: ''
+    })
+  }
+
+  onChange () {
+    this.setState({
+      title: this.refs.title.getValue(),
+      author: this.refs.author.getValue()
     })
   }
 
   render () {
     return (
       <div>
-        <h1 className={styles.entrybox__header}>Create a new blog post</h1>
-        <TextInput className={styles.entrybox__input} placeholder='Title' onSave={this._onSave} />
+        <h3>Create a new blog post</h3>
+        <Input
+          type='text'
+          placeholder='One fine day...'
+          label='Title'
+          ref='title'
+          onChange={this.onChange}
+        />
+        <Input
+          type='text'
+          placeholder='Benjamin Franklin'
+          label='Author'
+          ref='author'
+          onChange={this.onChange}
+        />
+        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
+            <i className='fa fa-plus'></i> Create
+        </Button>
       </div>
     )
   }

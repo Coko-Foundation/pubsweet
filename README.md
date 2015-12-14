@@ -1,6 +1,6 @@
 # Preconditions
 
-Node.js is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
+Node.js, version above or equal to 4.22, is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
 
 # Install
 
@@ -12,17 +12,23 @@ $ npm install
 
 # Start the server
 
+To start the JS compilation and webserver, run:
 ```bash
 $ npm run dev
+```
+
+And then initialize your blog by running:
+```bash
 $ ./bin/init.sh
 ```
 
-Point your browser to: http://localhost:3000
+Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost for the blog landing page.
 
-# Roadmap (23rd of November, 2015)
+# Roadmap (14th of December, 2015)
 
-Next week (23-27 November):
+Next two weeks (until 1st of January 2016):
 
-1. Simple auth
-2. A proper abstract display on the front page
-3. Last write wins strategy for document updates
+Permissions, roles and authentication.
+
+January: Collaboration, multiple concurrent users
+

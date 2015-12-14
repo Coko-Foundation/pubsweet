@@ -16,7 +16,9 @@ class Admin extends Component {
     const { children } = this.props
     return (
       <div>
-        <Navigation />
+        <div className='bootstrap'>
+          <Navigation/>
+        </div>
         {children}
       </div>
     )

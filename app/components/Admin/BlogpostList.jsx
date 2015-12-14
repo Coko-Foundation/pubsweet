@@ -7,6 +7,7 @@ export default class BlogpostList extends React.Component {
   render () {
     const blogposts = this.props.blogposts.map((blogpost, key) => {
       return (<Blogpost
+        number={key + 1}
         key={blogpost._id}
         blogpost={blogpost}
         delete={this.props.delete}
@@ -16,7 +17,20 @@ export default class BlogpostList extends React.Component {
     return (
       <div className={styles['list']}>
         <h3 className={styles['header']}>Blog posts</h3>
-        {blogposts}
+        <table className='table table-hover'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {blogposts}
+            </tbody>
+        </table>
       </div>
     )
   }
