@@ -15,16 +15,17 @@ class BlogManager extends React.Component {
   render () {
     const { blog, blogposts, actions } = this.props
     return (
-      <Grid>
-        <div blog={blog} className={styles.vote}>
-          <BlogpostList
-            update={actions.updateFragment}
-            delete={actions.deleteFragment}
-            blogposts={blogposts} />
-          <BlogpostCreator create={actions.createFragment} />
-
-        </div>
-      </Grid>
+      <div className='bootstrap'>
+        <Grid>
+          <div blog={blog} className={styles.vote}>
+            <BlogpostList
+              update={actions.updateFragment}
+              delete={actions.deleteFragment}
+              blogposts={blogposts} />
+            <BlogpostCreator create={actions.createFragment} />
+          </div>
+        </Grid>
+      </div>
     )
   }
 }
