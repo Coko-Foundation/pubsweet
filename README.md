@@ -5,8 +5,8 @@ Node.js, version above or equal to 4.22, is a requirement, read about how to ins
 # Install
 
 ```bash
-$ git clone git@gitlab.coko.foundation:jure/backend-node.git
-$ cd backend-node
+$ git clone git@gitlab.coko.foundation:pubsweet/core.git
+$ cd core
 $ npm install
 ```
 
