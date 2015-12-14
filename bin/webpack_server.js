@@ -11,20 +11,7 @@ var webpackConfig = require('../webpack/webpack.dev.config.js')
 
 module.exports = function () {
   // Fire up webpack and pass in the configuration file we created
-  var bundleStart = null
   var compiler = webpack(webpackConfig)
-
-  // Give notice to the terminal when it starts bundling
-  // and set the time it started
-  compiler.plugin('compile', function () {
-    console.log('Bundling ...')
-    bundleStart = Date.now()
-  })
-
-  // Give notice when it is done compiling, including the time it took.
-  compiler.plugin('done', function () {
-    console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!')
-  })
 
   var bundler = new webpackDevServer(compiler, {
     // Tell webpack to serve our bundled application from the build path. When proxying:
