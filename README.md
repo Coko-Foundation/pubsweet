@@ -22,7 +22,7 @@ And then initialize your blog by running:
 $ ./bin/init.sh
 ```
 
-Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost for the blog landing page.
+Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost:3000 for the blog landing page.
 
 # Roadmap (14th of December, 2015)
 
