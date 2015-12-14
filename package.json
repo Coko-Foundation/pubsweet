@@ -10,6 +10,7 @@
     "test": "NODE_ENV=test ./node_modules/.bin/mocha test/*.js -R nyan",
     "eslint": "eslint"
   },
+  "engines" : { "node" : ">=4.2.2" },
   "dependencies": {
     "babel-core": "^5.5.4",
     "babel-loader": "^5.1.4",
@@ -38,7 +39,7 @@
     "object-assign": "^4.0.1",
     "pouchdb": "^5.0.0",
     "pouchdb-find": "^0.5.0",
-    "pubsweet-substance-components": "git+ssh://git@gitlab.coko.foundation/pubsweet/substance-components#master",
+    "pubsweet-substance-components": "git+ssh://git@git.coko.foundation/pubsweet/substance-components#master",
     "react": "^0.14.0",
     "react-bootstrap": "^0.25.100-react-pre.1",
     "react-dom": "^0.14.0-rc1",
