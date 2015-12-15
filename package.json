@@ -39,7 +39,7 @@
     "object-assign": "^4.0.1",
     "pouchdb": "^5.0.0",
     "pouchdb-find": "^0.5.0",
-    "pubsweet-substance-components": "git+ssh://git@gitlab.coko.foundation/pubsweet/substance-components#master",
+    "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#3f76a3ade487a7cbb71e5a57631cc597472fe300",
     "react": "^0.14.0",
     "react-bootstrap": "^0.25.100-react-pre.1",
     "react-dom": "^0.14.0-rc1",
