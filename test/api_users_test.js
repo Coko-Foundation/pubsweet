@@ -8,7 +8,8 @@ const dbCleaner = require('./helpers/db_cleaner')
 const userFixture = {
   'type': 'user',
   'name': 'test user',
-  'email': 'test@example.com'
+  'email': 'test@example.com',
+  'password': 'test'
 }
 
 var updatedUserFixture = {

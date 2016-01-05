@@ -28,9 +28,9 @@ describe('api', function () {
 
   before(function () {
     return dbCleaner.then(function () {
-       // We load the app here to ensure that the database is cleaned before
-       // creating a new one
-       app = require('../app')
+      // We load the app here to ensure that the database is cleaned before
+      // creating a new one
+      app = require('../app')
     })
   })
 

@@ -1,4 +1,6 @@
-import PouchDB from 'pouchdb'
+'use strict';
+
+const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB('../db/db' + process.env.NODE_ENV)
 
@@ -30,4 +32,7 @@ class Base {
   }
 }
 
-export default Base
+module.exports = {
+  db: db,
+  Base: Base
+}

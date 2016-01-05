@@ -1,10 +1,11 @@
 const express = require('express')
 const objectAssign = require('object-assign')
-const api = express.Router()
 const _ = require('lodash')
+const users = require('./api_users')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
+const api = express.Router()
 const db = new PouchDB('./db' + process.env.NODE_ENV)
 
 function findCollection () {
@@ -166,5 +167,8 @@ api.post('/upload', upload.single('file'), function (req, res, next) {
   console.log(req.file)
   return res.send(req.file.path.replace(/^public/, ''))
 })
+
+// Users API
+api.use('/users', users)
 
 module.exports = api

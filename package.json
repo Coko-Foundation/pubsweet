@@ -7,10 +7,12 @@
     "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
     "dev": "npm run buildDev && NODE_ENV=dev LOADER=hot node bin/www",
     "buildDev": "webpack --no-info --colors --config ./webpack/webpack.dev.config.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha test/*.js -R nyan",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony test/*.js -R nyan",
     "eslint": "eslint"
   },
-  "engines" : { "node" : ">=4.2.2" },
+  "engines": {
+    "node": ">=4.2.2"
+  },
   "dependencies": {
     "babel-core": "^5.5.4",
     "babel-loader": "^5.1.4",
@@ -37,6 +39,8 @@
     "multer": "^1.1.0",
     "node-sass": "^3.1.2",
     "object-assign": "^4.0.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pouchdb": "^5.0.0",
     "pouchdb-find": "^0.5.0",
     "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#3f76a3ade487a7cbb71e5a57631cc597472fe300",

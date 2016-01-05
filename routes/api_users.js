@@ -1,15 +1,40 @@
-import express from 'express'
-import objectAssign from 'object-assign'
-// import _ from 'lodash'
-import User from './models/user'
-import PouchDB from 'pouchdb'
+'use strict'
+const express = require('express')
+const objectAssign = require('object-assign')
+// const _ = require('lodash')
+const User = require('../models/user')
+const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
-const api = express.Router()
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
+// Passport.js configuration (auth)
+passport.use(new LocalStrategy(
+  {
+    usernameField: 'email'
+  },
+  function (email, password, done) {
+    User.findByEmail({ email: email }).then(function (user) {
+      if (!user) {
+        return done(null, false, { message: 'Wrong email.' })
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Wrong password.' })
+      }
+      return done(null, user)
+    }).catch(function (err) {
+      if (err) { return done(err) }
+    })
+  }
+))
+
+const users = express.Router()
 const db = new PouchDB('../db/db' + process.env.NODE_ENV)
 
 // Create user
-api.post('/users', function (req, res) {
+users.post('/', function (req, res) {
+
   const data = req.body
   const user = new User(objectAssign({_id: new Date().toISOString()}, data))
 
@@ -22,7 +47,7 @@ api.post('/users', function (req, res) {
 })
 
 // Get user
-api.get('/users/:id', function (req, res) {
+users.get('/:id', function (req, res) {
   User.findById(req.params.id).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (error) {
@@ -32,7 +57,7 @@ api.get('/users/:id', function (req, res) {
 })
 
 // Destroy a user
-api.delete('/users/:id', function (req, res) {
+users.delete('/:id', function (req, res) {
   User.findById(req.params.id).delete().then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
@@ -42,7 +67,7 @@ api.delete('/users/:id', function (req, res) {
 })
 
 // Update a fragment
-api.put('/users/:id', function (req, res) {
+users.put('/:id', function (req, res) {
   let user = User.findById(req.params.id)
   user = objectAssign(user, req.body)
 
@@ -54,4 +79,4 @@ api.put('/users/:id', function (req, res) {
   })
 })
 
-module.exports = api
+module.exports = users
