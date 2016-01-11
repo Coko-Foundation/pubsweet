@@ -11,7 +11,8 @@
     "eslint": "eslint"
   },
   "engines": {
-    "node": ">=4.2.2"
+    "node": ">=4.2.2 <5.0.0",
+    "npm": ">=2.14 <3.0.0"
   },
   "dependencies": {
     "babel-core": "^5.5.4",
