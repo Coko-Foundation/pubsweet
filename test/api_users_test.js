@@ -34,6 +34,7 @@ describe('api', function () {
       .post('/api/users')
       .send(userFixture)
       .expect(function (res) {
+        console.log(res.body)
         expect(res.body.ok).to.eql(true)
         // Store userId for later
         userId = res.body.id

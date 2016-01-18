@@ -5,7 +5,11 @@ const db = require('./base').db
 class User extends Base {
   constructor (properties) {
     super()
-    this.properties = properties
+    this.type = 'user'
+    this.email = properties.email
+    this._id = properties._id
+    this.password = properties.password // Bad, m'kay.
+    this.name = properties.name
   }
 
   validPassword (password) {
@@ -22,6 +26,7 @@ class User extends Base {
         fields: ['email', 'type']
       }
     }).then(function (result) {
+      console.log(result)
       return db.find({selector: {
         type: 'user',
         email: email
