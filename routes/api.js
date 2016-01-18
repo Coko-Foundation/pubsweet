@@ -6,7 +6,7 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
 const api = express.Router()
-const db = new PouchDB('./db' + process.env.NODE_ENV)
+const db = new PouchDB('./db/' + process.env.NODE_ENV)
 
 function findCollection () {
   // Idempotently create indexes in datastore

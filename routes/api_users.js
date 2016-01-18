@@ -5,7 +5,6 @@ const objectAssign = require('object-assign')
 const User = require('../models/user')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
@@ -30,11 +29,10 @@ passport.use(new LocalStrategy(
 ))
 
 const users = express.Router()
-const db = new PouchDB('../db/db' + process.env.NODE_ENV)
+const db = new PouchDB('./db/' + process.env.NODE_ENV)
 
 // Create user
 users.post('/', function (req, res) {
-
   const data = req.body
   const user = new User(objectAssign({_id: new Date().toISOString()}, data))
 
@@ -66,7 +64,7 @@ users.delete('/:id', function (req, res) {
   })
 })
 
-// Update a fragment
+// Update a user
 users.put('/:id', function (req, res) {
   let user = User.findById(req.params.id)
   user = objectAssign(user, req.body)

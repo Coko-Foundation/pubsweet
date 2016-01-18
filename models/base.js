@@ -1,8 +1,7 @@
-'use strict';
 
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-const db = new PouchDB('../db/db' + process.env.NODE_ENV)
+const db = new PouchDB('./db/' + process.env.NODE_ENV)
 
 class Base {
   constructor (properties) {
@@ -10,8 +9,8 @@ class Base {
   }
 
   save () {
-    db.put(this).then(function (response) {
-      console.log(response)
+    return db.put(this).then(function (response) {
+      return response
     })
   }
 
