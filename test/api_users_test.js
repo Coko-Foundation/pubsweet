@@ -13,7 +13,9 @@ const userFixture = {
 }
 
 var updatedUserFixture = {
-  'name': 'changed user'
+  'name': 'changed user',
+  'email': 'changed@email.com',
+  'password': 'changed'
 }
 
 var app
@@ -70,16 +72,29 @@ describe('api', function () {
       .end(done)
   })
 
+  it('persists the updated user', function (done) {
+    request(app)
+      .get('/api/users/' + userId)
+      .expect('Content-Type', /json/)
+      .expect(function (res) {
+        expect(_.omit(res.body, '_rev'))
+          .to.eql(objectAssign(
+            {_id: userId, type: 'user'}, updatedUserFixture)
+          )
+      })
+      .expect(200, done)
+  })
+
   it('deletes a user', function (done) {
     request(app)
-      .del('/api/users' + userId)
+      .del('/api/users/' + userId)
       .send(objectAssign({_id: userId}, userFixture))
       .expect(200)
       .end(function () {
         request(app)
           .get('/api/users')
           .expect(function (res) {
-            expect(res.body.users).to.eql([])
+            expect(res.body).to.eql([])
           })
           .expect(200, done)
       })

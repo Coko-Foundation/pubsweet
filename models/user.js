@@ -39,4 +39,6 @@ class User extends Base {
   }
 }
 
+User.type = 'user'
+
 module.exports = User

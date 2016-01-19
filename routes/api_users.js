@@ -44,19 +44,29 @@ users.post('/', function (req, res) {
   })
 })
 
+users.get('/', function (req, res) {
+  User.all().then(function (users) {
+    console.log(users)
+    return res.status(200).json(users)
+  })
+})
+
 // Get user
 users.get('/:id', function (req, res) {
   User.findById(req.params.id).then(function (user) {
+    console.log('User:', user)
     return res.status(200).json(user)
   }).catch(function (error) {
-    console.error(error)
+    console.error('Error:', error)
     return res.status(503)
   })
 })
 
 // Destroy a user
 users.delete('/:id', function (req, res) {
-  User.findById(req.params.id).delete().then(function (user) {
+  User.findById(req.params.id).then(function (user) {
+    return user.delete()
+  }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
     console.error(err)
@@ -66,11 +76,12 @@ users.delete('/:id', function (req, res) {
 
 // Update a user
 users.put('/:id', function (req, res) {
-  let user = User.findById(req.params.id)
-  user = objectAssign(user, req.body)
-
-  return db.put(user).then(function (result) {
-    return res.status(200).json(result)
+  User.findById(req.params.id).then(function (user) {
+    Object.assign(user, req.body)
+    console.log(user)
+    return db.put(user)
+  }).then(function (user) {
+    return res.status(200).json(user)
   }).catch(function (err) {
     console.error(err)
     return res.status(500)
