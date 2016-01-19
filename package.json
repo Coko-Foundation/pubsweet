@@ -44,7 +44,7 @@
     "passport-local": "^1.0.0",
     "pouchdb": "^5.0.0",
     "pouchdb-find": "^0.5.0",
-    "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components#e5f35b5",
+    "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#10d9d88",
     "react": "^0.14.0",
     "react-bootstrap": "^0.25.100-react-pre.1",
     "react-dom": "^0.14.0-rc1",
