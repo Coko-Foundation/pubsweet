@@ -27,7 +27,7 @@ $ ./bin/init.sh
 
 Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost:3000 for the blog landing page.
 
-# Roadmap (18th of February, 2016)
+# Roadmap (18th of January, 2016)
 
 Until 1st of February 2016:
 
