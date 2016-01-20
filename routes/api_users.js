@@ -7,6 +7,7 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const Acl = require('node_acl_pouchdb')
 
 // Passport.js configuration (auth)
 passport.use(new LocalStrategy(
@@ -30,6 +31,7 @@ passport.use(new LocalStrategy(
 
 const users = express.Router()
 const db = new PouchDB('./db/' + process.env.NODE_ENV)
+var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
 // Create user
 users.post('/', function (req, res) {
@@ -37,6 +39,7 @@ users.post('/', function (req, res) {
   const user = new User(objectAssign({_id: new Date().toISOString()}, data))
 
   user.save().then(function (response) {
+    console.log('User created', response)
     return res.status(201).json(response)
   }).catch(function (err) {
     console.error(err)
