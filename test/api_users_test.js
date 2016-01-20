@@ -5,18 +5,9 @@ const _ = require('lodash')
 const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
 
-const userFixture = {
-  'type': 'user',
-  'name': 'test user',
-  'email': 'test@example.com',
-  'password': 'test'
-}
-
-var updatedUserFixture = {
-  'name': 'changed user',
-  'email': 'changed@email.com',
-  'password': 'changed'
-}
+const fixtures = require('./fixtures/fixtures')
+const userFixture = fixtures.user
+const updatedUserFixture = fixtures.updatedUser
 
 var app
 

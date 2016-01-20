@@ -5,22 +5,12 @@ const _ = require('lodash')
 const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
 
-const collectionFixture = {
-  'type': 'collection',
-  'title': 'Science Blogger posts'
-}
-
-const fragmentFixture = {
-  'type': 'blogpost',
-  'source': '<blog></blog>',
-  'presentation': '<p></p>'
-}
+const fixtures = require('./fixtures/fixtures')
+const collectionFixture = fixtures.collection
+const fragmentFixture = fixtures.fragment
+const updatedFragmentFixture = fixtures.updatedFragment
 
 var app
-var updatedFragmentFixture = {
-  'source': '<blog><title>Updated</title></blog>',
-  'presentation': '<p><h1>Updated</h1></p>'
-}
 
 describe('api', function () {
   var collectionId
