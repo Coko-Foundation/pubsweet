@@ -3,15 +3,17 @@
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB('./db/' + process.env.NODE_ENV)
+const uuid = require('node-uuid')
 
 class Base {
   constructor (properties) {
     Object.assign(this, properties)
+    this._id = Base.uuid()
   }
 
   save () {
     return db.put(this).then(function (response) {
-      return response
+      return this
     })
   }
 
@@ -22,6 +24,10 @@ class Base {
     }).then(function (result) {
       console.log('Deleted: ', result)
     })
+  }
+
+  static uuid () {
+    return uuid.v4()
   }
 
   static all () {

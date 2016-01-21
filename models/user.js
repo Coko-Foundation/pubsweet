@@ -7,7 +7,6 @@ class User extends Base {
     super()
     this.type = 'user'
     this.email = properties.email
-    this._id = properties._id
     this.password = properties.password // Bad, m'kay.
     this.name = properties.name
   }
