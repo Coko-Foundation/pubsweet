@@ -14,7 +14,7 @@ class Base {
   save () {
     return db.put(this).then(function (response) {
       return this
-    })
+    }.bind(this))
   }
 
   delete () {

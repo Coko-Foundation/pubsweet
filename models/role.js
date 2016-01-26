@@ -1,6 +1,6 @@
 'use strict'
-const db = require('./base').db
 
+const db = require('./base').db
 const AclPouchDb = require('node_acl_pouchdb')
 var acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
@@ -19,18 +19,24 @@ class Role {
           console.error(err)
           reject(err)
         } else {
-          resolve()
+          console.log('Saving', this.type)
+          resolve(this)
         }
-      })
-    })
+      }.bind(this))
+    }.bind(this))
   }
 
   addUser (user) {
-    return acl.addUserRoles(user, this.name, function (err) {
-      if (err) {
-        console.error(err)
-        throw err
-      }
+    return acl.addUserRoles(user, this.name).catch(function (err) {
+      console.error(err)
+      throw err
+    })
+  }
+
+  static addUserRoles (username, role) {
+    return acl.addUserRoles(username, role).catch(function (err) {
+      console.error(err)
+      throw err
     })
   }
 

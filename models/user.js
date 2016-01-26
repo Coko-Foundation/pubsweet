@@ -1,6 +1,7 @@
 'use strict'
 const Base = require('./base').Base
 const db = require('./base').db
+const Role = require('./role')
 
 class User extends Base {
   constructor (properties) {
@@ -8,7 +9,7 @@ class User extends Base {
     this.type = 'user'
     this.email = properties.email
     this.password = properties.password // Bad, m'kay.
-    this.name = properties.name
+    this.username = properties.username
   }
 
   validPassword (password) {
@@ -17,6 +18,10 @@ class User extends Base {
     } else {
       return false
     }
+  }
+
+  addRole (role) {
+    return Role.addUserRoles(this.username, 'admin')
   }
 
   static findByEmail (email) {
@@ -36,6 +41,8 @@ class User extends Base {
       console.error(err)
     })
   }
+
+
 }
 
 User.type = 'user'
