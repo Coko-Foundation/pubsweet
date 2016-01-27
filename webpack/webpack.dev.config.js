@@ -49,7 +49,7 @@ module.exports = [
     entry: {
       app: ['webpack-dev-server/client?http://localhost:3001',
        'webpack/hot/dev-server',
-        './index' ]
+        './app' ]
     },
     output: {
       // The output directory as absolute path

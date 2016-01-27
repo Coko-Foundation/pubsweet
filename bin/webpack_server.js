@@ -17,7 +17,6 @@ module.exports = function () {
     // Tell webpack to serve our bundled application from the build path. When proxying:
     // http://localhost:3000/assets -> http://localhost:3001/assets
     publicPath: '/assets/',
-
     // Enable special support for Hot Module Replacement
     // Page is no longer updated, but a 'webpackHotUpdate' message is send to the content
     // Use 'webpack/hot/dev-server' as additional module in your entry point
@@ -29,7 +28,7 @@ module.exports = function () {
       'Access-Control-Allow-Headers': 'X-Requested-With'
     },
     stats: {
-      assets: false,
+      assets: true,
       colors: true,
       version: false,
       hash: false,

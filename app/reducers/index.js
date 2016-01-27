@@ -1,5 +1,6 @@
 import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
+import { authStateReducer as auth } from 'redux-auth'
 import * as ActionTypes from '../actions'
 import _ from 'lodash'
 
@@ -68,7 +69,8 @@ const rootReducer = combineReducers({
   collections,
   fragments,
   errorMessage,
-  router
+  router,
+  auth
 })
 
 export default rootReducer

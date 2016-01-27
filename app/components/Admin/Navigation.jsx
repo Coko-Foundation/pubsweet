@@ -14,6 +14,9 @@ export default class Navigation extends React.Component {
           <LinkContainer to='/admin/about'>
             <NavItem>About</NavItem>
           </LinkContainer>
+          <LinkContainer to='/signin'>
+            <NavItem>Sign In</NavItem>
+          </LinkContainer>
         </Nav>
       </Navbar>
     )
