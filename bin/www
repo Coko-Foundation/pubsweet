@@ -7,7 +7,7 @@ var path = require('path')
  * Module dependencies.
  */
 
-var app = require('../app')
+var app = require('../api/api')
 var debug = require('debug')('backend-node:server')
 var http = require('http')
 
