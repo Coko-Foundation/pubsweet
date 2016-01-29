@@ -10,7 +10,7 @@ const collectionFixture = fixtures.collection
 const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
-var app
+var api
 
 describe('api', function () {
   var collectionId
@@ -18,14 +18,14 @@ describe('api', function () {
 
   before(function () {
     return dbCleaner.then(function () {
-      // We load the app here to ensure that the database is cleaned before
+      // We load the api here to ensure that the database is cleaned before
       // creating a new one
-      app = require('../app')
+      api = require('../api')
     })
   })
 
   it('creates a collection', function (done) {
-    request(app)
+    request(api)
       .post('/api/collection')
       .send(collectionFixture)
       .expect(function (res) {
@@ -37,7 +37,7 @@ describe('api', function () {
   })
 
   it('returns existing collection if you try creating it again', function (done) {
-    request(app)
+    request(api)
       .post('/api/collection')
       .send(collectionFixture)
       .expect(function(res) {
@@ -47,7 +47,7 @@ describe('api', function () {
   })
 
   it('gets the collection', function (done) {
-    request(app)
+    request(api)
       .get('/api/collection')
       .expect('Content-Type', /json/)
       .expect(function (res) {
@@ -58,7 +58,7 @@ describe('api', function () {
   })
 
   it('creates a fragment within the collection', function (done) {
-    request(app)
+    request(api)
       .post('/api/collection/fragment')
       .send(fragmentFixture)
       .expect(function (res) {
@@ -69,7 +69,7 @@ describe('api', function () {
   })
 
   it('gets all fragments', function (done) {
-    request(app)
+    request(api)
       .get('/api/collection/fragments')
       .expect(function (res) {
         expect(res.body.length).to.eql(1)
@@ -80,7 +80,7 @@ describe('api', function () {
   })
 
   it('updates a fragment', function (done) {
-    request(app)
+    request(api)
       .put('/api/collection/fragment')
       .send(Object.assign({_id: fragmentId}, updatedFragmentFixture))
       .expect(function (res) {
@@ -90,7 +90,7 @@ describe('api', function () {
   })
 
   it('get a specific fragments', function (done) {
-    request(app)
+    request(api)
       .get('/api/collection/fragment/' + fragmentId)
       .expect(function (res) {
         expect(_.omit(res.body, '_rev'))
@@ -100,12 +100,12 @@ describe('api', function () {
   })
 
   it('deletes a fragment', function (done) {
-    request(app)
+    request(api)
       .del('/api/collection/fragment')
       .send(objectAssign({_id: fragmentId}, fragmentFixture))
       .expect(200)
       .end(function () {
-        request(app)
+        request(api)
           .get('/api/collection')
           .expect(function (res) {
             expect(res.body.fragments).to.eql([])
@@ -115,7 +115,7 @@ describe('api', function () {
   })
 
   it('deletes the collection', function (done) {
-    request(app)
+    request(api)
       .del('/api/collection')
       .expect(200, done)
   })

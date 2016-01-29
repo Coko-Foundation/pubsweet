@@ -20,13 +20,13 @@ const updatedFragment = {
 
 const user = {
   'type': 'user',
-  'name': 'testuser',
+  'username': 'testuser',
   'email': 'test@example.com',
   'password': 'test'
 }
 
 const updatedUser = {
-  'name': 'changeduser',
+  'username': 'changeduser',
   'email': 'changed@email.com',
   'password': 'changed'
 }

@@ -11,7 +11,7 @@ import Editor from './containers/Admin/EditorWrapper'
 import Blog from './containers/Blog'
 import Blogpost from './containers/BlogpostWrapper'
 
-import SignIn from './components/SignIn'
+import Login from './components/Login'
 
 export default (
   <Route>
@@ -20,8 +20,8 @@ export default (
       <Route path='manager' component={BlogManager} />
       <Route path='editor/:id' component={Editor} />
       <Route path='about' component={About} />
+      <Route path='login' component={Login} />
     </Route>
-    <Route path='/signin' component={SignIn}/>
     <Route path='/:id' component={Blogpost}/>
   </Route>
 )

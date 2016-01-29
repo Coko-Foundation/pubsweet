@@ -2,7 +2,7 @@
 
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-const db = new PouchDB('./db/' + process.env.NODE_ENV)
+const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const uuid = require('node-uuid')
 
 class Base {

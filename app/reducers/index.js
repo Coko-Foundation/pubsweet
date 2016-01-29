@@ -1,7 +1,7 @@
 import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
-import { authStateReducer as auth } from 'redux-auth'
 import * as ActionTypes from '../actions'
+import auth from './auth'
 import _ from 'lodash'
 
 const initialCollections = []

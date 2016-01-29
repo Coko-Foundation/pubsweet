@@ -6,6 +6,7 @@ import routes from '../routes'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
+// import api from '../middleware/api'
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),

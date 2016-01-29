@@ -8,16 +8,17 @@ PouchDB.plugin(require('pouchdb-find'))
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Acl = require('node_acl_pouchdb')
+const jwt = require('jsonwebtoken')
+const config = require('../../config')
 
 // Passport.js configuration (auth)
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'email'
-  },
-  function (email, password, done) {
-    User.findByEmail({ email: email }).then(function (user) {
+passport.use(new LocalStrategy({},
+  function (username, password, done) {
+    console.log('User finding', username, password)
+    User.findByUsername({ username: username }).then(function (user) {
+      console.log('User found', user)
       if (!user) {
-        return done(null, false, { message: 'Wrong email.' })
+        return done(null, false, { message: 'Wrong username.' })
       }
       if (!user.validPassword(password)) {
         return done(null, false, { message: 'Wrong password.' })
@@ -29,14 +30,21 @@ passport.use(new LocalStrategy(
   }
 ))
 
+function createToken (user) {
+  return jwt.sign(
+    {username: user.username},
+    config.secret,
+    { expiresInMinutes: 60 * 5 })
+}
+
 const users = express.Router()
-const db = new PouchDB('./db/' + process.env.NODE_ENV)
+const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
 // Create user
 users.post('/', function (req, res) {
   const data = req.body
-  const user = new User(objectAssign({_id: new Date().toISOString()}, data))
+  const user = new User(data)
 
   user.save().then(function (response) {
     console.log('User created', response)
@@ -91,4 +99,26 @@ users.put('/:id', function (req, res) {
   })
 })
 
+// Session
+users.post('/session', function (req, res) {
+  console.log('Session', req.body)
+
+  var username = req.body.username
+  var password = req.body.password
+
+  console.log('User finding', username, password)
+  User.findByUsername(username).then(function (user) {
+    console.log('User found', user)
+    if (!user) {
+      return res.status(401).json({ message: 'Wrong username.' })
+    }
+    if (!user.validPassword(password)) {
+      return res.status(401).json({ message: 'Wrong password.' })
+    }
+    return res.status(201).json({id_token: createToken(user)})
+  }).catch(function (err) {
+    console.log(err)
+    if (err) { return res.send(400) }
+  })
+})
 module.exports = users

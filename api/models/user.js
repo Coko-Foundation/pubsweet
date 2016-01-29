@@ -42,7 +42,27 @@ class User extends Base {
     })
   }
 
-
+  static findByUsername (username) {
+    return db.createIndex({
+      index: {
+        fields: ['username', 'type']
+      }
+    }).then(function (result) {
+      console.log(result)
+      console.log(username)
+      return db.find({selector: {
+        type: 'user',
+        username: username
+      }}).then(function (results) {
+        var user = results.docs[0]
+        console.log('FindByUsername', user)
+        return new this(user)
+      }.bind(this))
+    }.bind(this)).catch(function (err) {
+      console.log('EerrOR')
+      console.error(err)
+    })
+  }
 }
 
 User.type = 'user'

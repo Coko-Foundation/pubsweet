@@ -1,17 +1,17 @@
 import fetch from 'isomorphic-fetch'
-
+import { API_ENDPOINT } from '../../config.json'
 // Actions on collection
 
 export const REQUEST_COLLECTION = 'REQUEST_COLLECTION'
 export const RECEIVE_COLLECTION = 'RECEIVE_COLLECTION'
 
-export function requestCollection () {
+function requestCollection () {
   return {
     type: REQUEST_COLLECTION
   }
 }
 
-export function receiveCollection (collection) {
+function receiveCollection (collection) {
   return {
     type: RECEIVE_COLLECTION,
     collection: collection,
@@ -22,7 +22,7 @@ export function receiveCollection (collection) {
 export function fetchCollection () {
   return dispatch => {
     dispatch(requestCollection())
-    return fetch('http://localhost:3000/api/collection')
+    return fetch(API_ENDPOINT + '/collection')
       .then(response => response.json())
       .then(collection => dispatch(receiveCollection(collection)))
   }
@@ -33,7 +33,7 @@ export function fetchCollection () {
 export const REQUEST_FRAGMENTS = 'REQUEST_FRAGMENTS'
 export const RECEIVE_FRAGMENTS = 'RECEIVE_FRAGMENTS'
 
-export function requestFragments () {
+function requestFragments () {
   return {
     type: REQUEST_FRAGMENTS
   }
@@ -41,13 +41,14 @@ export function requestFragments () {
 
 export function fetchFragments () {
   return dispatch => {
-    dispatch(requestCollection())
-    return fetch('http://localhost:3000/api/collection/fragments')
+    dispatch(requestFragments())
+    return fetch(API_ENDPOINT + '/collection/fragments')
       .then(response => response.json())
       .then(fragments => dispatch(receiveFragments(fragments)))
   }
 }
-export function receiveFragments (fragments) {
+
+function receiveFragments (fragments) {
   return {
     type: RECEIVE_FRAGMENTS,
     fragments: fragments,
@@ -68,7 +69,7 @@ export function startCreateFragment (fragment) {
 export function createFragment (fragment) {
   return dispatch => {
     dispatch(startCreateFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
+    return fetch(API_ENDPOINT + '/collection/fragment', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -101,7 +102,7 @@ export function startUpdateFragment (fragment) {
 export function updateFragment (fragment) {
   return dispatch => {
     dispatch(startUpdateFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
+    return fetch(API_ENDPOINT + '/collection/fragment', {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -134,7 +135,7 @@ export function startDeleteFragment (fragment) {
 export function deleteFragment (fragment) {
   return dispatch => {
     dispatch(startDeleteFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
+    return fetch(API_ENDPOINT + '/collection/fragment', {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -171,3 +172,7 @@ export function hydrate () {
     dispatch(fetchFragments())
   }
 }
+
+// Actions for auth
+export { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, loginUser } from './auth'
+
