@@ -11,35 +11,36 @@ const Acl = require('node_acl_pouchdb')
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
 
+const users = express.Router()
+const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
+var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
+
 // Passport.js configuration (auth)
-passport.use(new LocalStrategy({},
-  function (username, password, done) {
-    console.log('User finding', username, password)
-    User.findByUsername({ username: username }).then(function (user) {
-      console.log('User found', user)
-      if (!user) {
-        return done(null, false, { message: 'Wrong username.' })
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Wrong password.' })
-      }
-      return done(null, user)
-    }).catch(function (err) {
-      if (err) { return done(err) }
-    })
-  }
-))
+passport.use(new LocalStrategy(function (username, password, done) {
+  console.log('User finding', username, password)
+  User.findByUsername(username).then(function (user) {
+    console.log('User found', user)
+    if (!user) {
+      return done(null, false, { message: 'Wrong username.' })
+    }
+    if (!user.validPassword(password)) {
+      return done(null, false, { message: 'Wrong password.' })
+    }
+    console.log('User returned', user)
+    return done(null, user)
+  }).catch(function (err) {
+    console.log('ERRRORRRR')
+    if (err) { return done(err) }
+  })
+}))
 
 function createToken (user) {
+  console.log('Creating token', user)
   return jwt.sign(
     {username: user.username},
     config.secret,
     { expiresInMinutes: 60 * 5 })
 }
-
-const users = express.Router()
-const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
-var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
 // Create user
 users.post('/', function (req, res) {
@@ -100,25 +101,10 @@ users.put('/:id', function (req, res) {
 })
 
 // Session
-users.post('/session', function (req, res) {
-  console.log('Session', req.body)
 
-  var username = req.body.username
-  var password = req.body.password
-
-  console.log('User finding', username, password)
-  User.findByUsername(username).then(function (user) {
-    console.log('User found', user)
-    if (!user) {
-      return res.status(401).json({ message: 'Wrong username.' })
-    }
-    if (!user.validPassword(password)) {
-      return res.status(401).json({ message: 'Wrong password.' })
-    }
-    return res.status(201).json({id_token: createToken(user)})
-  }).catch(function (err) {
-    console.log(err)
-    if (err) { return res.send(400) }
-  })
+users.post('/authenticate', passport.authenticate('local', { session: false }), function (req, res) {
+  return res.status(201).json(
+    { id_token: createToken(req.user) }
+  )
 })
 module.exports = users

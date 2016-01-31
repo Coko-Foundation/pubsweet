@@ -77,9 +77,9 @@ describe('api', function () {
       .expect(200, done)
   })
 
-  it('logs a user in', function (done) {
+  it('authenticates a user', function (done) {
     request(api)
-      .post('/api/users/session')
+      .post('/api/users/authenticate')
       .send({
         username: updatedUserFixture.username,
         password: updatedUserFixture.password
