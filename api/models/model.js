@@ -8,12 +8,11 @@ const uuid = require('node-uuid')
 class Model {
   constructor (properties) {
     this._id = Model.uuid()
-    console.log('first', this._id)
-    console.log('second', properties)
     Object.assign(this, properties)
   }
 
   save () {
+    console.log(this)
     return db.get(this._id).then(function (doc) {
       console.log('responses for save', doc)
       return doc._rev

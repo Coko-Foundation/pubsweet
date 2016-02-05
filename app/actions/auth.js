@@ -24,7 +24,7 @@ function receiveLogin (user) {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    id_token: user.id_token
+    token: user.token
   }
 }
 
@@ -85,7 +85,7 @@ export function loginUser (credentials) {
           return Promise.reject(user)
         } else {
           // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token)
+          localStorage.setItem('token', user.token)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }
@@ -97,7 +97,7 @@ export function loginUser (credentials) {
 export function logoutUser () {
   return dispatch => {
     dispatch(requestLogout())
-    localStorage.removeItem('id_token')
+    localStorage.removeItem('token')
     dispatch(receiveLogout())
   }
 }

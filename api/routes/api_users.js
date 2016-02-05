@@ -39,7 +39,7 @@ function createToken (user) {
   return jwt.sign(
     {username: user.username},
     config.secret,
-    { expiresInMinutes: 60 * 5 })
+    { expiresIn: 5 * 3600 })
 }
 
 // Create user
@@ -104,7 +104,7 @@ users.put('/:id', function (req, res) {
 
 users.post('/authenticate', passport.authenticate('local', { session: false }), function (req, res) {
   return res.status(201).json(
-    { id_token: createToken(req.user) }
+    { token: createToken(req.user) }
   )
 })
 module.exports = users

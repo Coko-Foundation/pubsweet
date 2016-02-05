@@ -10,7 +10,7 @@ import {
 // we would also want a util to check if the token is expired.
 export default function auth (state = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('id_token') !== null
+  isAuthenticated: localStorage.getItem('token') !== null
 }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
