@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('./base').db
+const db = require('./model').db
 const AclPouchDb = require('node_acl_pouchdb')
 var acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 

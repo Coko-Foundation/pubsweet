@@ -1,11 +1,11 @@
 'use strict'
-const Base = require('./base').Base
-const db = require('./base').db
+const Model = require('./model').Model
+const db = require('./model').db
 const Role = require('./role')
 
-class User extends Base {
+class User extends Model {
   constructor (properties) {
-    super()
+    super(properties)
     this.type = 'user'
     this.email = properties.email
     this.password = properties.password // Bad, m'kay.

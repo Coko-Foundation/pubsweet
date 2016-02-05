@@ -5,20 +5,35 @@ PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const uuid = require('node-uuid')
 
-class Base {
+class Model {
   constructor (properties) {
+    this._id = Model.uuid()
+    console.log('first', this._id)
+    console.log('second', properties)
     Object.assign(this, properties)
-    this._id = Base.uuid()
   }
 
   save () {
-    return db.put(this).then(function (response) {
-      return this
+    return db.get(this._id).then(function (doc) {
+      console.log('responses for save', doc)
+      return doc._rev
+    }).then(function (_rev) {
+      this._rev = _rev
+      return db.put(this).then(function (response) {
+        return this
+      }.bind(this))
+    }.bind(this)).catch(function (error) {
+      console.log(error)
+      if (error.status === 404) {
+        return db.put(this).then(function (response) {
+          return this
+        }.bind(this))
+      }
     }.bind(this))
   }
 
   delete () {
-    return db.get(this.id).then(function (result) {
+    return db.get(this._id).then(function (result) {
       console.log('Deleting:', result)
       return db.remove(result)
     }).then(function (result) {
@@ -53,7 +68,7 @@ class Base {
     // Idempotently create indexes in datastore
     return db.get(id).then(function (result) {
       console.log(result)
-      return new Base(result)
+      return new Model(result)
     }).catch(function (err) {
       console.error(err)
       return err
@@ -63,5 +78,5 @@ class Base {
 
 module.exports = {
   db: db,
-  Base: Base
+  Model: Model
 }

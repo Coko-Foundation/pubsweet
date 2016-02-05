@@ -12,7 +12,7 @@ const updatedFragmentFixture = fixtures.updatedFragment
 
 var api
 
-describe('api', function () {
+describe('unauthenticated api without roles or users', function () {
   var collectionId
   var fragmentId
 
@@ -24,22 +24,16 @@ describe('api', function () {
     })
   })
 
-  describe('free for all, no roles or users', function () {
-    it('creates a collection', function (done) {
-      request(api)
-        .post('/api/collection')
-        .send(collectionFixture)
-        .expect(function (res) {
-          expect(res.body.ok).to.eql(true)
-          // Store collectionId for later tests
-          collectionId = res.body.id
-        })
-        .expect(201, done)
-    })
-
+  it('creates a collection', function (done) {
+    request(api)
+      .post('/api/collection')
+      .send(collectionFixture)
+      .expect(function (res) {
+        // Store collectionId for later tests
+        collectionId = res.body._id
+      })
+      .expect(201, done)
   })
-
-
 
   it('returns existing collection if you try creating it again', function (done) {
     request(api)
@@ -67,8 +61,8 @@ describe('api', function () {
       .post('/api/collection/fragment')
       .send(fragmentFixture)
       .expect(function (res) {
-        expect(res.body.ok).to.eql(true)
-        fragmentId = res.body.id
+        expect(res.body.source).to.eql(fragmentFixture.source)
+        fragmentId = res.body._id
       })
       .expect(201, done)
   })
@@ -78,7 +72,7 @@ describe('api', function () {
       .get('/api/collection/fragments')
       .expect(function (res) {
         expect(res.body.length).to.eql(1)
-        expect(_.omit(res.body[0], '_rev'))
+        expect(_.omit(res.body[0], '_rev', 'type'))
           .to.eql(objectAssign({_id: fragmentId}, fragmentFixture))
       })
       .expect(200, done)
@@ -89,16 +83,16 @@ describe('api', function () {
       .put('/api/collection/fragment')
       .send(Object.assign({_id: fragmentId}, updatedFragmentFixture))
       .expect(function (res) {
-        expect(res.body.ok).to.eql(true)
+        expect(res.body.source).to.eql(updatedFragmentFixture.source)
       })
-      .end(done)
+      .expect(200, done)
   })
 
   it('get a specific fragments', function (done) {
     request(api)
       .get('/api/collection/fragment/' + fragmentId)
       .expect(function (res) {
-        expect(_.omit(res.body, '_rev'))
+        expect(_.omit(res.body, '_rev', 'type'))
           .to.eql(objectAssign({_id: fragmentId}, updatedFragmentFixture))
       })
       .expect(200, done)
