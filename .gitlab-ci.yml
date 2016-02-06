@@ -9,4 +9,4 @@ before_script:
 
 test:
     script:
-        - npm test
+        - sudo npm test
