@@ -4,6 +4,8 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const uuid = require('node-uuid')
+const AclPouchDb = require('node_acl_pouchdb')
+var acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
 class Model {
   constructor (properties) {
@@ -36,7 +38,19 @@ class Model {
       console.log('Deleting:', result)
       return db.remove(result)
     }).then(function (result) {
-      console.log('Deleted: ', result)
+      console.log('Deleted:', result)
+    })
+  }
+
+  authorized (user, action) {
+    return acl.isAllowed(user, this._id, action, function (err, res) {
+      if (res) {
+        console.log('User', user, 'is allowed to', action, this.type, this._id)
+        return res
+      } else {
+        console.error(err)
+        return false
+      }
     })
   }
 
@@ -71,6 +85,18 @@ class Model {
     }).catch(function (err) {
       console.error(err)
       return err
+    })
+  }
+
+  static authorized (user, data, action) {
+    return acl.isAllowed(user, data, action, function (err, res) {
+      if (res) {
+        console.log('User', user, 'is allowed to', action, data)
+        return res
+      } else {
+        console.error(err)
+        return false
+      }
     })
   }
 }
