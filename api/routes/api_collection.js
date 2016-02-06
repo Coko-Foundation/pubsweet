@@ -4,8 +4,27 @@ const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const _ = require('lodash')
 const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')
+const User = require('../models/user')
+
 const express = require('express')
 const api = express.Router()
+
+const jwt = require('jsonwebtoken')
+const passport = require('passport')
+const BearerStrategy = require('passport-http-bearer').Strategy
+const config = require('../../config')
+
+passport.use(new BearerStrategy(
+  function (token, done) {
+    jwt.verify(token, config.secret, function (err, decoded) {
+      if (!err) {
+        return done(null, decoded.username)
+      } else {
+        return done(null)
+      }
+    })
+  }
+))
 
 // Create collection
 api.post('/collection', function (req, res) {
@@ -53,7 +72,8 @@ api.delete('/collection', function (req, res) {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collection/fragment', function (req, res) {
+api.post('/collection/fragment', passport.authenticate('bearer', { session: false }), function (req, res) {
+  console.log('hellooo', req.user)
   var collection
   var fragment = new Fragment(req.body)
   console.log(req.body)

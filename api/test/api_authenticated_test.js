@@ -29,7 +29,7 @@ describe('authenticated api', function () {
   })
 
   it('creates a fragment in the protected collection if authenticated', function () {
-    request(api)
+    return request(api)
       .post('/api/users/authenticate')
       .send({
         username: userFixture.username,
@@ -59,6 +59,5 @@ describe('authenticated api', function () {
       .send(fragmentFixture)
       .set('Authorization', 'Bearer ' + 'wrong')
       .expect(401)
-    })
   })
 })
