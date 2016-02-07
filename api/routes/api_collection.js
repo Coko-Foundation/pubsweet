@@ -5,7 +5,7 @@ const _ = require('lodash')
 const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')
 const User = require('../models/user')
-
+const AuthorizationError = require('../errors/authorization_error')
 const express = require('express')
 const api = express.Router()
 
@@ -84,7 +84,7 @@ api.post('/collection/fragment', passport.authenticate('bearer', { session: fals
       return Collection.get()
     } else {
       console.log(req.user, ' is not allowed to create a fragment', res)
-      throw new Error('401')
+      throw new AuthorizationError(req.user + ' not allowed')
     }
   }).then(function (existingCollection) {
     console.log(existingCollection)
@@ -107,8 +107,8 @@ api.post('/collection/fragment', passport.authenticate('bearer', { session: fals
   })
   .catch(function (err) {
     console.error('Error:', err)
-    if (err.message === '401') {
-      return res.sendStatus(401)
+    if (err.name === 'AuthorizationError') {
+      return res.status(401).json(err.message)
     } else {
       return res.status(500)
     }
