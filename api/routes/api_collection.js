@@ -73,36 +73,46 @@ api.delete('/collection', function (req, res) {
 
 // Create a fragment and update the collection with the fragment
 api.post('/collection/fragment', passport.authenticate('bearer', { session: false }), function (req, res) {
-  console.log('hellooo', req.user)
   var collection
   var fragment = new Fragment(req.body)
   console.log(req.body)
   console.log(fragment)
 
-  Collection.get()
-    .then(function (existingCollection) {
-      console.log(existingCollection)
-      collection = existingCollection
-      return fragment.save()
-    })
-    .then(function (result) {
-      console.log(result)
-      fragment = result
-      if (collection.fragments) {
-        collection.fragments.push(fragment._id)
-      } else {
-        collection.fragments = [fragment._id]
-      }
-      return collection.save()
-    })
-    .then(function (collection) {
-      console.log(collection)
-      return res.status(201).json(fragment)
-    })
-    .catch(function (err) {
-      console.error(err)
+  Fragment.authorized(req.user, fragment, 'create').then(function (res) {
+    if (res) {
+      console.log(req.user, ' is allowed to create a fragment', res)
+      return Collection.get()
+    } else {
+      console.log(req.user, ' is not allowed to create a fragment', res)
+      throw new Error('401')
+    }
+  }).then(function (existingCollection) {
+    console.log(existingCollection)
+    collection = existingCollection
+    return fragment.save()
+  })
+  .then(function (result) {
+    console.log(result)
+    fragment = result
+    if (collection.fragments) {
+      collection.fragments.push(fragment._id)
+    } else {
+      collection.fragments = [fragment._id]
+    }
+    return collection.save()
+  })
+  .then(function (collection) {
+    console.log(collection)
+    return res.status(201).json(fragment)
+  })
+  .catch(function (err) {
+    console.error('Error:', err)
+    if (err.message === '401') {
+      return res.sendStatus(401)
+    } else {
       return res.status(500)
-    })
+    }
+  })
 })
 
 // Get all fragments

@@ -11,7 +11,7 @@ class Setup {
       console.log('Created initial collection: ', collection)
       return new Role({
         name: 'admin',
-        resources: 'collections',
+        resources: ['users', 'collections', 'fragments'],
         permissions: '*'
       }).save()
     }).then(function () {

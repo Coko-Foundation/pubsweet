@@ -89,15 +89,23 @@ class Model {
   }
 
   static authorized (user, data, action) {
-    return acl.isAllowed(user, data, action, function (err, res) {
-      if (res) {
-        console.log('User', user, 'is allowed to', action, data)
-        return res
-      } else {
-        console.error(err)
-        return false
+    console.log('Authorizing user:', user)
+    console.log('Authorizing data:', data)
+    console.log('Authorizing action:', action)
+
+    var resource = data.type + 's'
+    acl.allowedPermissions(user, resource, function (err, permissions) {
+      if (err) {
+        console.log(err)
       }
+      console.log('Permissions for user', user, resource, permissions)
     })
+
+    acl.userRoles(user).then(function (roles) {
+      console.log('Roles for user', user, roles)
+    })
+
+    return acl.isAllowed(user, resource, action)
   }
 }
 
