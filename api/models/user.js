@@ -21,7 +21,11 @@ class User extends Model {
   }
 
   addRole (role) {
-    return Role.addUserRoles(this.username, 'admin')
+    return Role.addUserRoles(this.username, role)
+  }
+
+  removeRole (role) {
+    return Role.removeUserRoles(this.username, role)
   }
 
   static findByEmail (email) {
@@ -59,8 +63,7 @@ class User extends Model {
         return new this(user)
       }.bind(this))
     }.bind(this)).catch(function (err) {
-      console.log('EerrOR')
-      console.error(err)
+      console.error('Error', err)
     })
   }
 }

@@ -40,6 +40,13 @@ class Role {
     })
   }
 
+  static removeUserRoles (username, role) {
+    return acl.removeUserRoles(username, role).catch(function (err) {
+      console.error(err)
+      throw err
+    })
+  }
+
   static findByName (name) {
     return acl.whatResources(name, function (resources) {
       return new this({

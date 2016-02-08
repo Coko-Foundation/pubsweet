@@ -137,7 +137,7 @@ api.get('/collection/fragment/:id', function (req, res) {
 })
 
 // Update a fragment
-api.put('/collection/fragment', function (req, res) {
+api.put('/collection/fragment/:id', function (req, res) {
   var fragment = new Fragment(req.body)
   fragment.save().then(function (fragment) {
     return res.status(200).json(fragment)
@@ -148,13 +148,13 @@ api.put('/collection/fragment', function (req, res) {
 })
 
 // Delete a fragment
-api.delete('/collection/fragment', function (req, res) {
-  db.get(req.body._id).then(function (result) {
+api.delete('/collection/fragment/:id', function (req, res) {
+  db.get(req.params.id).then(function (result) {
     return db.remove(result)
   }).then(function (result) {
     return Collection.get()
   }).then(function (collection) {
-    collection.fragments = _.without(collection.fragments, req.body._id)
+    collection.fragments = _.without(collection.fragments, req.params.id)
     return db.put(collection)
   }).then(function (result) {
     return res.status(200).json(result)
