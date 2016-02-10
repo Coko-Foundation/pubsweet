@@ -75,15 +75,16 @@ api.delete('/collection', function (req, res) {
 api.post('/collection/fragment', passport.authenticate('bearer', { session: false }), function (req, res) {
   var collection
   var fragment = new Fragment(req.body)
+  fragment.owner = req.user // He who creates it, owns it
   console.log(req.body)
   console.log(fragment)
 
-  Fragment.authorized(req.user, fragment, 'create').then(function (res) {
+  fragment.authorized(req.user, 'create').then(function (res) {
     if (res) {
-      console.log(req.user, ' is allowed to create a fragment', res)
+      console.log(req.user, 'is allowed to create a fragment', res)
       return Collection.get()
     } else {
-      console.log(req.user, ' is not allowed to create a fragment', res)
+      console.log(req.user, 'is not allowed to create a fragment', res)
       throw new AuthorizationError(req.user + ' not allowed')
     }
   }).then(function (existingCollection) {
@@ -137,13 +138,20 @@ api.get('/collection/fragment/:id', function (req, res) {
 })
 
 // Update a fragment
-api.put('/collection/fragment/:id', function (req, res) {
-  var fragment = new Fragment(req.body)
-  fragment.save().then(function (fragment) {
+api.put('/collection/fragment/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+  Fragment.findById(req.params.id).then(function (fragment) {
+    return fragment.updateProperties(req.body)
+  }).then(function (fragment) {
+    return fragment.save(req.user)
+  }).then(function (fragment) {
     return res.status(200).json(fragment)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    if (err.name === 'AuthorizationError') {
+      return res.status(401).json(err.message)
+    } else {
+      console.error('Error', err)
+      return res.sendStatus(500)
+    }
   })
 })
 
@@ -159,8 +167,8 @@ api.delete('/collection/fragment/:id', function (req, res) {
   }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    console.error('Error', err)
+    return res.sendStatus(500)
   })
 })
 

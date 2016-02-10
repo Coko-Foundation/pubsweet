@@ -6,6 +6,7 @@ const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const uuid = require('node-uuid')
 const AclPouchDb = require('node_acl_pouchdb')
 var acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
+const AuthorizationError = require('../errors/authorization_error')
 
 class Model {
   constructor (properties) {
@@ -13,23 +14,48 @@ class Model {
     Object.assign(this, properties)
   }
 
-  save () {
+  save (username) {
     console.log(this)
+    if (this.owner) {
+      console.log('Owner during save', this.owner)
+    }
+    // First get the document to get its latest revision
     return db.get(this._id).then(function (doc) {
-      console.log('responses for save', doc)
+      console.log('Found an existing version, this is an update of:', doc)
       return doc._rev
     }).then(function (_rev) {
       this._rev = _rev
-      return db.put(this).then(function (response) {
-        return this
-      }.bind(this))
+      // Then update the document with the latest revision
+      return this._putWithAuthorization(username, 'update')
     }.bind(this)).catch(function (error) {
-      console.log(error)
-      if (error.status === 404) {
-        return db.put(this).then(function (response) {
-          return this
-        }.bind(this))
+      if (error && error.status === 404) {
+        console.log('No existing object found, creating a new one:', error)
+        // If it doesn't exist, create
+        return this._putWithAuthorization(username, 'create')
+      } else {
+        console.log('Unhandled error', error)
+        throw error
       }
+    }.bind(this))
+  }
+
+  _putWithAuthorization (username, action) {
+    if (!username) {
+      return this._put()
+    }
+    return this.authorized(username, action).then(function (res) {
+      console.log(action, this.type, this._id, 'and rev', this._rev)
+      if (res) {
+        return this._put()
+      } else {
+        throw new AuthorizationError(username + ' not allowed to', action)
+      }
+    }.bind(this))
+  }
+
+  _put () {
+    return db.put(this).then(function (response) {
+      return this
     }.bind(this))
   }
 
@@ -42,16 +68,15 @@ class Model {
     })
   }
 
-  authorized (user, action) {
-    return acl.isAllowed(user, this._id, action, function (err, res) {
-      if (res) {
-        console.log('User', user, 'is allowed to', action, this.type, this._id)
-        return res
-      } else {
-        console.error(err)
-        return false
-      }
-    })
+  authorized (username, action) {
+    return this.constructor.authorized(username, this, action)
+  }
+
+  updateProperties (newProperties) {
+    console.log('Updating properties to', newProperties)
+    // Should we screen/filter updates here?
+    Object.assign(this, newProperties)
+    return this
   }
 
   static uuid () {
@@ -81,31 +106,38 @@ class Model {
     // Idempotently create indexes in datastore
     return db.get(id).then(function (result) {
       console.log(result)
-      return new Model(result)
-    }).catch(function (err) {
+      console.log('Current model class', this)
+      return new this(result)
+    }.bind(this)).catch(function (err) {
       console.error(err)
       return err
     })
   }
 
-  static authorized (user, data, action) {
-    console.log('Authorizing user:', user)
+  static authorized (username, data, action) {
+    console.log('Authorizing user:', username)
     console.log('Authorizing data:', data)
     console.log('Authorizing action:', action)
 
     var resource = data.type + 's'
-    acl.allowedPermissions(user, resource, function (err, permissions) {
+    acl.allowedPermissions(username, resource, function (err, permissions) {
       if (err) {
         console.log(err)
       }
-      console.log('Permissions for user', user, resource, permissions)
+      console.log('Permissions for user', username, resource, permissions)
     })
 
-    acl.userRoles(user).then(function (roles) {
-      console.log('Roles for user', user, roles)
+    acl.userRoles(username).then(function (roles) {
+      console.log('Roles for user', username, roles)
     })
 
-    return acl.isAllowed(user, resource, action)
+    if (action === 'delete' || action === 'update') {
+      if (data.owner && username === data.owner) {
+        return Promise.resolve(true)
+      }
+    }
+
+    return acl.isAllowed(username, resource, action)
   }
 }
 

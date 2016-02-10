@@ -16,7 +16,7 @@ describe('authenticated api', function () {
   var otherUser
   var fragmentId
 
-  before(function () {
+  beforeEach(function () {
     return dbCleaner.then(function () {
       const Setup = require('../setup-base')
       return Setup.setup(
@@ -57,7 +57,7 @@ describe('authenticated api', function () {
       })
   })
 
-  it('fails to create a fragment in a protected collection if authenticated as another user', function () {
+  it('fails to create a fragment in a protected collection if authenticated as user without permissions', function () {
     return request(api)
       .post('/api/users/authenticate')
       .send({
@@ -78,12 +78,11 @@ describe('authenticated api', function () {
   describe('a non-admin user with a contributor role', function () {
     var otherFragmentId
 
-    before(function () {
+    beforeEach(function () {
       return otherUser.addRole('contributor')
     })
 
-
-    after(function () {
+    afterEach(function () {
       return otherUser.removeRole('contributor')
     })
 
@@ -107,7 +106,80 @@ describe('authenticated api', function () {
         })
     })
 
-    it('updates a fragment in a protected collection if an owner', function () {
+    describe('actions on a fragment owned by the same user', function () {
+      var fragment
+
+      beforeEach(function () {
+        const Fragment = require('../models/fragment')
+        fragment = new Fragment(fragmentFixture)
+        fragment.owner = otherUserFixture.username
+        return fragment.save()
+      })
+
+      afterEach(function () {
+        return fragment.delete()
+      })
+
+      it('updates a fragment in a protected collection if an owner', function () {
+        return request(api)
+          .post('/api/users/authenticate')
+          .send({
+            username: otherUserFixture.username,
+            password: otherUserFixture.password
+          })
+          .expect(201)
+          .then(function (res) {
+            var token = res.body.token
+            return request(api)
+              .put('/api/collection/fragment/' + fragment._id)
+              .send(updatedFragmentFixture)
+              .set('Authorization', 'Bearer ' + token)
+              .expect(200)
+          })
+      })
+
+    })
+
+    describe('actions on a fragment owned by a different user', function () {
+      var fragment
+
+      beforeEach(function () {
+        const Fragment = require('../models/fragment')
+        fragment = new Fragment(fragmentFixture)
+        fragment.owner = userFixture.username
+        return fragment.save()
+      })
+
+      afterEach(function () {
+        return fragment.delete()
+      })
+
+      it('cannot update a fragment in a protected collection if not an owner', function () {
+        return request(api)
+          .post('/api/users/authenticate')
+          .send({
+            username: otherUserFixture.username,
+            password: otherUserFixture.password
+          })
+          .expect(201)
+          .then(function (res) {
+            var token = res.body.token
+            return request(api)
+              .put('/api/collection/fragment/' + fragment._id)
+              .send(updatedFragmentFixture)
+              .set('Authorization', 'Bearer ' + token)
+              .expect(401)
+          })
+      })
+    })
+  })
+
+  describe('a non-admin user with a reader role', function () {
+    before(function () {
+      return otherUser.addRole('reader')
+    })
+
+    it('can not create a fragment', function () {
       return request(api)
         .post('/api/users/authenticate')
         .send({
@@ -118,29 +190,32 @@ describe('authenticated api', function () {
         .then(function (res) {
           var token = res.body.token
           return request(api)
-            .put('/api/collection/fragment/' + otherFragmentId)
-            .send(updatedFragmentFixture)
+            .post('/api/collection/fragment')
+            .send(fragmentFixture)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(401)
+        })
+    })
+
+    it('can read a fragment', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: otherUserFixture.username,
+          password: otherUserFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .get('/api/collection/fragment/' + fragmentId)
             .set('Authorization', 'Bearer ' + token)
             .expect(200)
         })
     })
 
-    it('cannot update a fragment in a protected collection if not an owner', function () {
-      return request(api)
-        .post('/api/users/authenticate')
-        .send({
-          username: otherUserFixture.username,
-          password: otherUserFixture.password
-        })
-        .expect(201)
-        .then(function (res) {
-          var token = res.body.token
-          return request(api)
-            .put('/api/collection/fragment/' + fragmentId)
-            .send(updatedFragmentFixture)
-            .set('Authorization', 'Bearer ' + token)
-            .expect(401)
-        })
+    after(function () {
+      return otherUser.removeRole('reader')
     })
   })
 
