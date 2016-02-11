@@ -26,7 +26,11 @@ class Model {
     }).then(function (_rev) {
       this._rev = _rev
       // Then update the document with the latest revision
-      return this._putWithAuthorization(username, 'update')
+      if (this._deleted) {
+        return this._putWithAuthorization(username, 'delete')
+      } else {
+        return this._putWithAuthorization(username, 'update')
+      }
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
         console.log('No existing object found, creating a new one:', error)
@@ -59,13 +63,9 @@ class Model {
     }.bind(this))
   }
 
-  delete () {
-    return db.get(this._id).then(function (result) {
-      console.log('Deleting:', result)
-      return db.remove(result)
-    }).then(function (result) {
-      console.log('Deleted:', result)
-    })
+  delete (username) {
+    this._deleted = true
+    return this.save(username)
   }
 
   authorized (username, action) {
@@ -131,8 +131,11 @@ class Model {
       console.log('Roles for user', username, roles)
     })
 
+    // A user can delete or update owned objects and itself
     if (action === 'delete' || action === 'update') {
-      if (data.owner && username === data.owner) {
+      if ((data.owner && username === data.owner) ||
+          (data.type === 'user' && data.username === username)
+        ) {
         return Promise.resolve(true)
       }
     }

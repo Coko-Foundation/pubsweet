@@ -1,4 +1,4 @@
-const request = require('supertest')
+const request = require('supertest-as-promised')
 const expect = require('expect.js')
 
 const _ = require('lodash')
@@ -8,32 +8,76 @@ const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 const updatedUserFixture = fixtures.updatedUser
-
+const otherUserFixture = fixtures.otherUser
+const collectionFixture = fixtures.collection
 var api
 
-describe('api', function () {
+describe('users api', function () {
   var userId
+  var otherUser
 
-  before(function () {
+  beforeEach(function () {
     return dbCleaner.then(function () {
-       // We load the api here to ensure that the database is cleaned before
-       // creating a new one
-       api = require('../api')
+      const Setup = require('../setup-base')
+      return Setup.setup(
+        userFixture.username,
+        userFixture.email,
+        userFixture.password,
+        collectionFixture.title)
+    }).then(function (user) {
+      userId = user._id
+      api = require('../api')
     })
   })
 
-  it('creates a user', function (done) {
-    request(api)
-      .post('/api/users')
-      .send(userFixture)
-      .expect(function (res) {
-        // Store userId for later
-        userId = res.body._id
-        console.log('User id', userId)
-        console.log('Response body', res.body)
-        expect(res.body.ok).to.eql(true)
-      })
-      .expect(201, done)
+  describe.only('unauthenticated user', function () {
+    var otherUserId
+
+    it('creates a user', function () {
+      request(api)
+        .post('/api/users')
+        .send(otherUserFixture)
+        .expect(201)
+        .then(function (res) {
+          // Store userId for later
+          otherUserId = res.body._id
+          expect(res.body.username).to.eql(otherUserFixture.username)
+        })
+    })
+
+    it('can not delete other users', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: otherUserFixture.username,
+          password: otherUserFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .delete('/api/users/' + userId)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(401)
+        })
+    })
+
+    it('user can delete itself', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: otherUserFixture.username,
+          password: otherUserFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .delete('/api/users/' + otherUserId)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+        })
+    })
   })
 
   it('can not create a user if no permissions and user exists', function (done) {

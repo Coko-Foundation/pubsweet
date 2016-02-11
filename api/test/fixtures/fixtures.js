@@ -32,6 +32,12 @@ const updatedUser = {
   'password': 'changed'
 }
 
+const otherUser = {
+  'username': 'anotheruser',
+  'email': 'another@com.nz',
+  'password': 'rubgy'
+}
+
 const userRole = {
   'user': user.name,
   'role': 'sysadmin'
@@ -50,6 +56,7 @@ module.exports = {
   updatedFragment: updatedFragment,
   user: user,
   updatedUser: updatedUser,
+  otherUser: otherUser,
   role: role,
   userRole: userRole
 }

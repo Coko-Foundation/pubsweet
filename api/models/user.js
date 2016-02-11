@@ -21,7 +21,9 @@ class User extends Model {
   }
 
   addRole (role) {
-    return Role.addUserRoles(this.username, role)
+    return Role.addUserRoles(this.username, role).then(function () {
+      return this
+    }.bind(this))
   }
 
   removeRole (role) {

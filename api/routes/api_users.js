@@ -7,6 +7,8 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const BearerStrategy = require('passport-http-bearer').Strategy
+
 const Acl = require('node_acl_pouchdb')
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
@@ -15,6 +17,17 @@ const users = express.Router()
 const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
+passport.use(new BearerStrategy(
+  function (token, done) {
+    jwt.verify(token, config.secret, function (err, decoded) {
+      if (!err) {
+        return done(null, decoded.username)
+      } else {
+        return done(null)
+      }
+    })
+  }
+))
 // Passport.js configuration (auth)
 passport.use(new LocalStrategy(function (username, password, done) {
   console.log('User finding', username, password)
@@ -75,14 +88,18 @@ users.get('/:id', function (req, res) {
 })
 
 // Destroy a user
-users.delete('/:id', function (req, res) {
+users.delete('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
   User.findById(req.params.id).then(function (user) {
-    return user.delete()
+    return user.delete(req.user)
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    if (err.name === 'AuthorizationError') {
+      return res.status(401).json(err.message)
+    } else {
+      console.error('Error', err)
+      return res.sendStatus(500)
+    }
   })
 })
 

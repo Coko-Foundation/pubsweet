@@ -21,7 +21,8 @@ class Setup {
       console.log('Created user: ', user)
       return user.addRole('admin')
     }).then(function (user) {
-      console.log('Added user', username, 'to admin role.')
+      console.log('Added user', user, 'to admin role.')
+      return user
     }).catch(function (error) {
       console.error(error)
     })
