@@ -8,6 +8,14 @@ export default class Navigation extends React.Component {
 
   render () {
     const { actions, auth } = this.props
+    let loginOrLogoutButton
+    if (auth.isAuthenticated) {
+      loginOrLogoutButton = <Logout username={auth.username} onLogoutClick={() => actions.logoutUser() } />
+    } else {
+      loginOrLogoutButton = <LinkContainer to='/admin/login'>
+          <NavItem>Log In</NavItem>
+        </LinkContainer>
+    }
     return (
       <Navbar brand='Science Blogger' toggleNavKey={0}>
         <Nav eventKey={0}>
@@ -17,15 +25,7 @@ export default class Navigation extends React.Component {
           <LinkContainer to='/admin/about'>
             <NavItem>About</NavItem>
           </LinkContainer>
-          { auth.isAuthenticated &&
-            <Logout onLogoutClick={() => actions.logoutUser() } />
-          }
-          { !auth.isAuthenticated &&
-            <LinkContainer to='/admin/login'>
-              <NavItem>Log In</NavItem>
-            </LinkContainer>
-          }
-
+          { loginOrLogoutButton }
         </Nav>
       </Navbar>
     )

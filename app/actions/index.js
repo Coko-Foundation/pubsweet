@@ -164,15 +164,19 @@ export function resetErrorMessage () {
   }
 }
 
-export const HYDRATE = 'HYDRATE'
+// Actions for auth
+import { fetchUser } from './auth'
+export { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, USER_SUCCESS, LOGOUT_SUCCESS, loginUser, logoutUser, fetchUser } from './auth'
 
+// Hydrate hydrates the store from a persistent store, the backend.
+// It gets collections, fragments and user data (via token).
+
+export const HYDRATE = 'HYDRATE'
 export function hydrate () {
   return dispatch => {
     dispatch(fetchCollection())
     dispatch(fetchFragments())
+    dispatch(fetchUser())
   }
 }
-
-// Actions for auth
-export { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, loginUser } from './auth'
 

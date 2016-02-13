@@ -2,7 +2,7 @@
 const localStorage = window.localStorage || undefined
 
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST, USER_SUCCESS
 } from '../actions'
 
 // The auth reducer. The starting state sets authentication
@@ -17,7 +17,7 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: true,
         isAuthenticated: false,
-        user: action.creds
+        username: action.credentials.username
       })
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
@@ -33,8 +33,19 @@ export default function auth (state = {
       })
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: false,
         isAuthenticated: false
+      })
+    case LOGOUT_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false
+      })
+    case USER_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: true,
+        username: action.username
       })
     default:
       return state

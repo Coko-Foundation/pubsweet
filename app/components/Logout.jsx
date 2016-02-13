@@ -3,11 +3,11 @@ import React, { Component, PropTypes } from 'react'
 export default class Logout extends Component {
 
   render () {
-    const { onLogoutClick } = this.props
+    const { onLogoutClick, username } = this.props
 
     return (
-      <button onClick={() => onLogoutClick()} className='btn btn-primary'>
-        Logout
+      <button onClick={() => onLogoutClick()} className='btn btn-default'>
+        Logout, { username }
       </button>
     )
   }
@@ -15,5 +15,6 @@ export default class Logout extends Component {
 }
 
 Logout.propTypes = {
-  onLogoutClick: PropTypes.func.isRequired
+  onLogoutClick: PropTypes.func.isRequired,
+  username: PropTypes.string
 }

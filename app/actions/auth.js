@@ -10,12 +10,12 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
-function requestLogin (creds) {
+function requestLogin (credentials) {
   return {
     type: LOGIN_REQUEST,
     isFetching: true,
     isAuthenticated: false,
-    creds
+    credentials
   }
 }
 
@@ -73,7 +73,7 @@ export function loginUser (credentials) {
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(credentials))
-    return fetch(API_ENDPOINT + '/users/session', config)
+    return fetch(API_ENDPOINT + '/users/authenticate', config)
       .then(response =>
         response.json()
         .then(user => ({ user, response }))
@@ -99,5 +99,56 @@ export function logoutUser () {
     dispatch(requestLogout())
     localStorage.removeItem('token')
     dispatch(receiveLogout())
+  }
+}
+
+export const USER_REQUEST = 'USER_REQUEST'
+export const USER_SUCCESS = 'USER_SUCCESS'
+export const USER_FAILURE = 'USER_FAILURE'
+
+function requestUser () {
+  return {
+    type: USER_REQUEST,
+    isFetching: true
+  }
+}
+
+function receiveUser (user) {
+  return {
+    type: USER_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    username: user.username
+  }
+}
+
+function userError (message) {
+  return {
+    type: USER_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    message
+  }
+}
+
+export function fetchUser () {
+  let config = {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + localStorage.token }
+  }
+
+  return dispatch => {
+    dispatch(requestUser())
+    return fetch(API_ENDPOINT + '/users/authenticate', config)
+      .then(response =>
+        response.json().then(user => ({ user, response }))
+      ).then(({ user, response }) => {
+        if (!response.ok) {
+          dispatch(userError(user.message))
+          return Promise.reject(user)
+        } else {
+          dispatch(receiveUser(user))
+        }
+      }).catch(err => console.log('Error: ', err))
   }
 }

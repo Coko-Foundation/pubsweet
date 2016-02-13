@@ -17,8 +17,9 @@ const users = express.Router()
 const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
-passport.use(new BearerStrategy(
+passport.use('bearer', new BearerStrategy(
   function (token, done) {
+    console.log('Token', token)
     jwt.verify(token, config.secret, function (err, decoded) {
       if (!err) {
         return done(null, decoded.username)
@@ -28,8 +29,9 @@ passport.use(new BearerStrategy(
     })
   }
 ))
+
 // Passport.js configuration (auth)
-passport.use(new LocalStrategy(function (username, password, done) {
+passport.use('local', new LocalStrategy(function (username, password, done) {
   console.log('User finding', username, password)
   User.findByUsername(username).then(function (user) {
     console.log('User found', user)
@@ -42,7 +44,7 @@ passport.use(new LocalStrategy(function (username, password, done) {
     console.log('User returned', user)
     return done(null, user)
   }).catch(function (err) {
-    console.log('ERRRORRRR')
+    console.log('Error', err)
     if (err) { return done(err) }
   })
 }))
@@ -54,6 +56,16 @@ function createToken (user) {
     config.secret,
     { expiresIn: 5 * 3600 })
 }
+
+// Token issuing
+users.post('/authenticate', passport.authenticate('local', { session: false }), function (req, res) {
+  return res.status(201).json({ token: createToken(req.user) })
+})
+
+// Token verify
+users.get('/authenticate', passport.authenticate('bearer', { session: false }), function (req, res) {
+  return res.status(200).json({ username: req.user })
+})
 
 // Create user
 users.post('/', function (req, res) {
@@ -117,11 +129,4 @@ users.put('/:id', function (req, res) {
   })
 })
 
-// Session
-
-users.post('/authenticate', passport.authenticate('local', { session: false }), function (req, res) {
-  return res.status(201).json(
-    { token: createToken(req.user) }
-  )
-})
 module.exports = users
