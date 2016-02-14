@@ -2,8 +2,9 @@
 const localStorage = window.localStorage || undefined
 
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST, USER_SUCCESS
-} from '../actions'
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST,
+  GET_USER_SUCCESS
+} from '../actions/types'
 
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,
@@ -12,6 +13,7 @@ export default function auth (state = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('token') !== null
 }, action) {
+  console.log(action)
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
@@ -41,7 +43,7 @@ export default function auth (state = {
         isFetching: false,
         isAuthenticated: false
       })
-    case USER_SUCCESS:
+    case GET_USER_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,

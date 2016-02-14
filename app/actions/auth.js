@@ -1,36 +1,33 @@
 import fetch from 'isomorphic-fetch'
 import { API_ENDPOINT } from '../../config'
+import * as T from './types'
 
 // TODO: This will break when rendered on a server
 const localStorage = window.localStorage || undefined
 
 // There are three possible states for our login
 // process and we need actions for each of them
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-
-function requestLogin (credentials) {
+function loginRequest (credentials) {
   return {
-    type: LOGIN_REQUEST,
+    type: T.LOGIN_REQUEST,
     isFetching: true,
     isAuthenticated: false,
     credentials
   }
 }
 
-function receiveLogin (user) {
+function loginSuccess (user) {
   return {
-    type: LOGIN_SUCCESS,
+    type: T.LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     token: user.token
   }
 }
 
-function loginError (message) {
+function loginFailure (message) {
   return {
-    type: LOGIN_FAILURE,
+    type: T.LOGIN_FAILURE,
     isFetching: false,
     isAuthenticated: false,
     message
@@ -41,21 +38,17 @@ function loginError (message) {
 // Since we are using JWTs, we just need to remove the token
 // from localStorage. These actions are more useful if we
 // were calling the API to log the user out
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
-
-function requestLogout () {
+function logoutRequest () {
   return {
-    type: LOGOUT_REQUEST,
+    type: T.LOGOUT_REQUEST,
     isFetching: true,
     isAuthenticated: true
   }
 }
 
-function receiveLogout () {
+function logoutSuccess () {
   return {
-    type: LOGOUT_SUCCESS,
+    type: T.LOGOUT_SUCCESS,
     isFetching: false,
     isAuthenticated: false
   }
@@ -71,8 +64,8 @@ export function loginUser (credentials) {
   }
 
   return dispatch => {
-    // We dispatch requestLogin to kickoff the call to the API
-    dispatch(requestLogin(credentials))
+    // We dispatch loginRequest to kickoff the call to the API
+    dispatch(loginRequest(credentials))
     return fetch(API_ENDPOINT + '/users/authenticate', config)
       .then(response =>
         response.json()
@@ -81,13 +74,13 @@ export function loginUser (credentials) {
         if (!response.ok) {
           // If there was a problem, we want to
           // dispatch the error condition
-          dispatch(loginError(user.message))
+          dispatch(loginFailure(user.message))
           return Promise.reject(user)
         } else {
           // If login was successful, set the token in local storage
           localStorage.setItem('token', user.token)
           // Dispatch the success action
-          dispatch(receiveLogin(user))
+          dispatch(loginSuccess(user))
         }
       }).catch(err => console.log('Error: ', err))
   }
@@ -96,58 +89,100 @@ export function loginUser (credentials) {
 // Logs the user out
 export function logoutUser () {
   return dispatch => {
-    dispatch(requestLogout())
+    dispatch(logoutRequest())
     localStorage.removeItem('token')
-    dispatch(receiveLogout())
+    dispatch(logoutSuccess())
   }
 }
 
-export const USER_REQUEST = 'USER_REQUEST'
-export const USER_SUCCESS = 'USER_SUCCESS'
-export const USER_FAILURE = 'USER_FAILURE'
-
-function requestUser () {
+function getUserRequest () {
   return {
-    type: USER_REQUEST,
+    type: T.GET_USER_REQUEST,
     isFetching: true
   }
 }
 
-function receiveUser (user) {
+function getUserSuccess (user) {
   return {
-    type: USER_SUCCESS,
+    type: T.GET_USER_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     username: user.username
   }
 }
 
-function userError (message) {
+function getUserFailure (message) {
   return {
-    type: USER_FAILURE,
+    type: T.GET_USER_FAILURE,
     isFetching: false,
     isAuthenticated: false,
     message
   }
 }
 
-export function fetchUser () {
+export function getUser () {
   let config = {
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + localStorage.token }
   }
 
   return dispatch => {
-    dispatch(requestUser())
+    dispatch(getUserRequest())
     return fetch(API_ENDPOINT + '/users/authenticate', config)
       .then(response =>
         response.json().then(user => ({ user, response }))
       ).then(({ user, response }) => {
         if (!response.ok) {
-          dispatch(userError(user.message))
+          dispatch(getUserFailure(user.message))
           return Promise.reject(user)
         } else {
-          dispatch(receiveUser(user))
+          dispatch(getUserSuccess(user))
+        }
+      }).catch(err => console.log('Error: ', err))
+  }
+}
+
+function signupRequest () {
+  return {
+    type: T.SIGNUP_REQUEST,
+    isFetching: true
+  }
+}
+
+function signupSuccess (user) {
+  return {
+    type: T.SIGNUP_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    username: user.username
+  }
+}
+
+function signupFailure (message) {
+  return {
+    type: T.SIGNUP_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    message
+  }
+}
+
+export function signupUser () {
+  let config = {
+    method: 'POST'
+  }
+
+  return dispatch => {
+    dispatch(signupRequest())
+    return fetch(API_ENDPOINT + '/users', config)
+      .then(response =>
+        response.json().then(user => ({ user, response }))
+      ).then(({ user, response }) => {
+        if (!response.ok) {
+          dispatch(signupFailure(user.message))
+          return Promise.reject(user)
+        } else {
+          dispatch(signupSuccess(user))
         }
       }).catch(err => console.log('Error: ', err))
   }
