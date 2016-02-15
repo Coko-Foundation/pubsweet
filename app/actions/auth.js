@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
+import { pushState } from 'redux-router'
 
 // TODO: This will break when rendered on a server
 const localStorage = window.localStorage || undefined
@@ -56,7 +57,7 @@ function logoutSuccess () {
 
 // Calls the API to get a token and
 // dispatches actions along the way
-export function loginUser (credentials) {
+export function loginUser (credentials, redirectTo) {
   let config = {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -81,6 +82,10 @@ export function loginUser (credentials) {
           localStorage.setItem('token', user.token)
           // Dispatch the success action
           dispatch(loginSuccess(user))
+          // Only redirect if we want to
+          if (redirectTo) {
+            dispatch(pushState(null, redirectTo))
+          }
         }
       }).catch(err => console.log('Error: ', err))
   }

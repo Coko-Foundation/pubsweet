@@ -5,6 +5,11 @@ import { loginUser } from '../actions'
 import React, { Component, PropTypes } from 'react'
 
 class Login extends Component {
+  constructor (props) {
+    super(props)
+    this.redirectTo = this.props.location.query.next || '/login'
+  }
+
   render () {
     return (
       <div>
@@ -22,13 +27,13 @@ class Login extends Component {
       username: this.refs.username.value,
       password: this.refs.password.value
     }
-    this.props.actions.loginUser(credentials)
+    this.props.actions.loginUser(credentials, this.redirectTo)
   }
 }
 
 Login.propTypes = {
-    // Dispatch
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  location: PropTypes.object
 }
 
 function mapState (state) {
