@@ -84,7 +84,7 @@ users.post('/', function (req, res) {
 users.get('/', function (req, res) {
   User.all().then(function (users) {
     console.log(users)
-    return res.status(200).json(users)
+    return res.status(200).json({users: users})
   })
 })
 

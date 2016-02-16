@@ -152,9 +152,11 @@ export function resetErrorMessage () {
 import { getUser } from './auth'
 export { loginUser, logoutUser, getUser } from './auth'
 
+// Actions for users management
+export { getUsers } from './users'
+
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
-
 export function hydrate () {
   return dispatch => {
     dispatch(getCollection())

@@ -37,6 +37,10 @@ describe('authenticated api', function () {
     })
   })
 
+  after(function () {
+    return dbCleaner
+  })
+
   it('creates a fragment in the protected collection if authenticated', function () {
     return request(api)
       .post('/api/users/authenticate')

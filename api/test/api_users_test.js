@@ -30,10 +30,27 @@ describe('users api', function () {
     })
   })
 
-  describe.only('unauthenticated user', function () {
+  after(function () {
+    return dbCleaner.then(function (response) {
+      console.log('After test cleaning')
+    })
+  })
+
+  describe('admin', function () {
+    it('can get a list of users', function () {
+      request(api)
+        .get('/api/users')
+        .expect(200)
+        .then(function (res) {
+          expect(res.body.users.length).to.eql(1)
+        })
+    })
+  })
+
+  describe('unauthenticated user', function () {
     var otherUserId
 
-    it('creates a user', function () {
+    it('can sign up', function () {
       request(api)
         .post('/api/users')
         .send(otherUserFixture)
@@ -42,6 +59,23 @@ describe('users api', function () {
           // Store userId for later
           otherUserId = res.body._id
           expect(res.body.username).to.eql(otherUserFixture.username)
+        })
+    })
+
+    it('can not get a list of users', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: otherUserFixture.username,
+          password: otherUserFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .get('/api/users')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(401)
         })
     })
 

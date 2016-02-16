@@ -24,6 +24,10 @@ describe('unauthenticated api without roles or users', function () {
     })
   })
 
+  after(function () {
+    return dbCleaner
+  })
+
   it('creates a collection', function (done) {
     request(api)
       .post('/api/collection')

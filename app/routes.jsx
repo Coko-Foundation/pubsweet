@@ -7,6 +7,7 @@ import Admin from './containers/Admin'
 import About from './components/Admin/About'
 import BlogManager from './containers/Admin/BlogManager'
 import Editor from './containers/Admin/EditorWrapper'
+import UsersManager from './containers/Admin/UsersManager'
 
 // Public
 import Blog from './containers/Blog'
@@ -21,6 +22,7 @@ export default (
     <Route path='/admin' component={requireAuthentication(Admin)}>
       <Route path='manager' component={BlogManager} />
       <Route path='editor/:id' component={Editor} />
+      <Route path='users' component={UsersManager} />
       <Route path='about' component={About} />
     </Route>
     <Route path='login' component={Login} />

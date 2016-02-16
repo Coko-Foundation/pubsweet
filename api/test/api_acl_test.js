@@ -23,6 +23,10 @@ describe('api', function () {
     })
   })
 
+  after(function () {
+    return dbCleaner
+  })
+
   it('can assign an access control entity to a collection', function () {
     request(api)
       .post('/api/users') // Create a user
