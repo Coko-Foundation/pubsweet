@@ -12,12 +12,22 @@ class Login extends Component {
 
   render () {
     return (
-      <div>
-        <input type='text' ref='username' className='form-control' placeholder='Username'/>
-        <input type='password' ref='password' className='form-control' placeholder='Password'/>
-        <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
-          Login
-        </button>
+      <div className='bootstrap'>
+        <form>
+          <div className='form-group'>
+            <label htmlFor='username'>Username</label>
+            <input type='text' ref='username' className='form-control' placeholder='Username'/>
+          </div>
+
+          <div className='form-group'>
+            <label htmlFor='password'>Password</label>
+            <input type='password' ref='password' className='form-control' placeholder='Password'/>
+          </div>
+
+          <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
+            Login
+          </button>
+        </form>
       </div>
     )
   }
