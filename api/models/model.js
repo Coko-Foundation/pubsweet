@@ -2,10 +2,11 @@
 
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
-const uuid = require('node-uuid')
+global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const AclPouchDb = require('node_acl_pouchdb')
-var acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
+global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
+
+const uuid = require('node-uuid')
 const AuthorizationError = require('../errors/authorization_error')
 
 class Model {
@@ -106,7 +107,6 @@ class Model {
     // Idempotently create indexes in datastore
     return db.get(id).then(function (result) {
       console.log(result)
-      console.log('Current model class', this)
       return new this(result)
     }.bind(this)).catch(function (err) {
       console.error(err)
@@ -144,7 +144,4 @@ class Model {
   }
 }
 
-module.exports = {
-  db: db,
-  Model: Model
-}
+module.exports = Model

@@ -1,10 +1,7 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
 
-// const _ = require('lodash')
-// const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
-
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 const collectionFixture = fixtures.collection
@@ -16,7 +13,7 @@ var api
 
 describe('api', function () {
   before(function () {
-    return dbCleaner.then(function () {
+    return dbCleaner().then(function () {
        // We load the api here to ensure that the database is cleaned before
        // creating a new one
        api = require('../api')

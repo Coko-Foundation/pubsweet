@@ -14,7 +14,8 @@ var db = db1.put({_id: '1', type: 'hi', test: '1'}).then(function () {
   db1 = new PouchDB(dbName)
   return db1.put({_id: '2', type: 'hi', test: '2'})
 }).then(function (response) {
-  return db1.allDocs()
+  var db2 = new PouchDB(dbName)
+  return db2.put({_id: '3', type: 'hi', test: '3'})
 }).then(function (docs) {
   console.log(docs)
 }).then(function () {

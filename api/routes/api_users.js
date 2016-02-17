@@ -3,19 +3,14 @@ const express = require('express')
 const objectAssign = require('object-assign')
 // const _ = require('lodash')
 const User = require('../models/user')
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
 
-const Acl = require('node_acl_pouchdb')
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
 
 const users = express.Router()
-const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
-var acl = new Acl(new Acl.pouchdbBackend(db, 'acl'))
 
 passport.use('bearer', new BearerStrategy(
   function (token, done) {

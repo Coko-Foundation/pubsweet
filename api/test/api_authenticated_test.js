@@ -17,7 +17,7 @@ describe('authenticated api', function () {
   var fragmentId
 
   beforeEach(function () {
-    return dbCleaner.then(function () {
+    return dbCleaner().then(function () {
       const Setup = require('../setup-base')
       return Setup.setup(
         userFixture.username,

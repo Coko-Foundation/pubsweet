@@ -1,6 +1,6 @@
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-const db = new PouchDB('./api/db/' + process.env.NODE_ENV)
+
 const _ = require('lodash')
 const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')

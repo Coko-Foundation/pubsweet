@@ -17,8 +17,8 @@ describe('users api', function () {
   var otherUser
 
   beforeEach(function () {
-    return dbCleaner.then(function () {
-      const Setup = require('../setup-base')
+    return dbCleaner().then(function () {
+      var Setup = require('../setup-base')
       return Setup.setup(
         userFixture.username,
         userFixture.email,
@@ -27,14 +27,17 @@ describe('users api', function () {
     }).then(function (user) {
       userId = user._id
       api = require('../api')
+    }).catch(function (err) {
+      console.log(err)
     })
   })
 
-  after(function () {
-    return dbCleaner.then(function (response) {
-      console.log('After test cleaning')
-    })
-  })
+  // after(function () {
+  //   return dbCleaner().then(function (response) {
+  //     console.log('After test cleaning')
+  //     return response
+  //   })
+  // })
 
   describe('admin', function () {
     it('can get a list of users', function () {

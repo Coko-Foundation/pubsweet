@@ -17,7 +17,7 @@ describe('unauthenticated api without roles or users', function () {
   var fragmentId
 
   before(function () {
-    return dbCleaner.then(function () {
+    return dbCleaner().then(function () {
       // We load the api here to ensure that the database is cleaned before
       // creating a new one
       api = require('../api')
