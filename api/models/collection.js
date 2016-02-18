@@ -17,6 +17,14 @@ class Collection extends Model {
     return Promise.all(fragments)
   }
 
+  addFragment (fragment) {
+    if (this.fragments) {
+      this.fragments.push(fragment._id)
+    } else {
+      this.fragments = [fragment._id]
+    }
+  }
+
   static get () {
   // Idempotently create indexes in datastore
     return db.createIndex({

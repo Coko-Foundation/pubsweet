@@ -1,8 +1,6 @@
 'use strict'
 
 const Model = require('./model')
-const AclPouchDb = require('node_acl_pouchdb')
-global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
 class Role {
   constructor (properties) {

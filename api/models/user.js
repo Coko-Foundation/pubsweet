@@ -2,6 +2,8 @@
 const Model = require('./model')
 const Role = require('./role')
 
+const ConflictError = require('../errors/ConflictError')
+
 class User extends Model {
   constructor (properties) {
     super(properties)
@@ -29,39 +31,49 @@ class User extends Model {
     return Role.removeUserRoles(this.username, role)
   }
 
+  isUniq () {
+    return User.findByEmail(this.email).then(function (user) {
+      throw new ConflictError('User exists')
+    }).catch(function (err) {
+      if (err.name === 'not_found') {
+        return User.findByUsername(this.username)
+      } else {
+        throw err
+      }
+    }).then(function (user) {
+      throw new ConflictError('User exists')
+    })
+  }
+
   static findByEmail (email) {
     return db.createIndex({
       index: {
         fields: ['email', 'type']
       }
     }).then(function (result) {
-      console.log(result)
       return db.find({selector: {
         type: 'user',
         email: email
-      }}).then(function (user) {
-        return new this(user)
-      })
-    }).catch(function (err) {
-      console.error(err)
+      }})
+    }).then(function (results) {
+      return new this(results.docs[0])
+    }.bind(this)).catch(function (err) {
+      console.error('Error', err)
     })
   }
 
   static findByUsername (username) {
+    console.log('findByUsername')
     return db.createIndex({
       index: {
         fields: ['username', 'type']
       }
     }).then(function (result) {
-      console.log(result)
-      console.log(username)
       return db.find({selector: {
         type: 'user',
         username: username
       }}).then(function (results) {
-        var user = results.docs[0]
-        console.log('FindByUsername', user)
-        return new this(user)
+        return new this(results.docs[0])
       }.bind(this))
     }.bind(this)).catch(function (err) {
       console.error('Error', err)

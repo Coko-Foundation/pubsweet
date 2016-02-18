@@ -6,6 +6,7 @@ const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')
 const User = require('../models/user')
 const AuthorizationError = require('../errors/authorization_error')
+const Authorize = require('../models/authorize')
 const express = require('express')
 const api = express.Router()
 
@@ -26,19 +27,22 @@ passport.use(new BearerStrategy(
   }
 ))
 
+const authentication = passport.authenticate('bearer', { session: false })
+
 // Create collection
-api.post('/collection', function (req, res) {
+api.post('/collection', authentication, function (req, res) {
   const collection = new Collection(req.body)
+  collection.owner(req.user)
 
   Collection.get().then(function (existingCollection) {
     if (existingCollection) {
-      return res.status(200).json(existingCollection)
+      res.status(200).json(existingCollection)
     } else {
-      return collection.save().then(function (response) {
-        console.log(response)
-        return res.status(201).json(response)
-      })
+      return collection.save(req.user)
     }
+  }).then(function (response) {
+    console.log(response.body)
+    return res.status(201).json(response)
   }).catch(function (err) {
     console.error(err)
     return res.status(500)
@@ -95,11 +99,7 @@ api.post('/collection/fragment', passport.authenticate('bearer', { session: fals
   .then(function (result) {
     console.log(result)
     fragment = result
-    if (collection.fragments) {
-      collection.fragments.push(fragment._id)
-    } else {
-      collection.fragments = [fragment._id]
-    }
+    collection.addFragment(fragment)
     return collection.save()
   })
   .then(function (collection) {
@@ -128,12 +128,18 @@ api.get('/collection/fragments', function (req, res) {
   })
 })
 
-api.get('/collection/fragment/:id', function (req, res) {
-  db.get(req.params.id).then(function (result) {
+api.get('/collection/fragment/:id', authentication, function (req, res) {
+  Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+    return Fragment.findById(req.params.id)
+  }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    if (err.name === 'AuthorizationError') {
+      return res.status(401).json(err.message)
+    } else {
+      console.error('Error', err)
+      return res.sendStatus(500)
+    }
   })
 })
 

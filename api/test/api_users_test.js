@@ -117,11 +117,11 @@ describe('users api', function () {
     })
   })
 
-  it('can not create a user if no permissions and user exists', function (done) {
+  it('can not create a user if user exists', function (done) {
     request(api)
       .post('/api/users')
       .send(userFixture)
-      .expect(401, done)
+      .expect(409, done)
   })
 
   it('gets the user', function (done) {

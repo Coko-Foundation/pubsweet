@@ -15,7 +15,7 @@ class Model {
     Object.assign(this, properties)
   }
 
-  save (username) {
+  save () {
     console.log(this)
     if (this.owner) {
       console.log('Owner during save', this.owner)
@@ -26,34 +26,13 @@ class Model {
       return doc._rev
     }).then(function (_rev) {
       this._rev = _rev
-      // Then update the document with the latest revision
-      if (this._deleted) {
-        return this._putWithAuthorization(username, 'delete')
-      } else {
-        return this._putWithAuthorization(username, 'update')
-      }
+      return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
         console.log('No existing object found, creating a new one:', error)
-        // If it doesn't exist, create
-        return this._putWithAuthorization(username, 'create')
-      } else {
-        console.log('Unhandled error', error)
-        throw error
-      }
-    }.bind(this))
-  }
-
-  _putWithAuthorization (username, action) {
-    if (!username) {
-      return this._put()
-    }
-    return this.authorized(username, action).then(function (res) {
-      console.log(action, this.type, this._id, 'and rev', this._rev)
-      if (res) {
         return this._put()
       } else {
-        throw new AuthorizationError(username + ' not allowed to', action)
+        throw error
       }
     }.bind(this))
   }
@@ -84,7 +63,8 @@ class Model {
     return uuid.v4()
   }
 
-  static all () {
+  static all (type) {
+    type = type || this.type
     return db.createIndex({
       index: {
         fields: ['type']
@@ -92,7 +72,7 @@ class Model {
     }).then(function (result) {
       console.log(result)
       return db.find({selector: {
-        type: this.type
+        type: type
       }}).then(function (results) {
         return results.docs.map(function (result) {
           return new this(result)
@@ -112,35 +92,6 @@ class Model {
       console.error(err)
       return err
     })
-  }
-
-  static authorized (username, data, action) {
-    console.log('Authorizing user:', username)
-    console.log('Authorizing data:', data)
-    console.log('Authorizing action:', action)
-
-    var resource = data.type + 's'
-    acl.allowedPermissions(username, resource, function (err, permissions) {
-      if (err) {
-        console.log(err)
-      }
-      console.log('Permissions for user', username, resource, permissions)
-    })
-
-    acl.userRoles(username).then(function (roles) {
-      console.log('Roles for user', username, roles)
-    })
-
-    // A user can delete or update owned objects and itself
-    if (action === 'delete' || action === 'update') {
-      if ((data.owner && username === data.owner) ||
-          (data.type === 'user' && data.username === username)
-        ) {
-        return Promise.resolve(true)
-      }
-    }
-
-    return acl.isAllowed(username, resource, action)
   }
 }
 

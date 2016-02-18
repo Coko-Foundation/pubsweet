@@ -67,12 +67,16 @@ users.post('/', function (req, res) {
   const data = req.body
   const user = new User(data)
 
-  user.save().then(function (response) {
-    console.log('User created', response)
+  return user.isUniq().then(function (response) {
+    return user.save()
+  }).then(function (response) {
     return res.status(201).json(response)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    if (err.name === 'ConflictError') {
+      return res.status(409).json(err.message)
+    } else {
+      throw err
+    }
   })
 })
 

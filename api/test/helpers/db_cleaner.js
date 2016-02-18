@@ -18,4 +18,5 @@ let dbCleaner = function () {
     return err
   })
 }
+
 module.exports = dbCleaner
