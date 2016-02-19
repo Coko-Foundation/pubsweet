@@ -7,7 +7,7 @@ const AclPouchDb = require('node_acl_pouchdb')
 global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
 const uuid = require('node-uuid')
-const AuthorizationError = require('../errors/authorization_error')
+const NotFoundError = require('../errors/NotFoundError')
 
 class Model {
   constructor (properties) {
@@ -17,9 +17,6 @@ class Model {
 
   save () {
     console.log(this)
-    if (this.owner) {
-      console.log('Owner during save', this.owner)
-    }
     // First get the document to get its latest revision
     return db.get(this._id).then(function (doc) {
       console.log('Found an existing version, this is an update of:', doc)
@@ -39,13 +36,14 @@ class Model {
 
   _put () {
     return db.put(this).then(function (response) {
+      console.log('Actually _put', this)
       return this
     }.bind(this))
   }
 
-  delete (username) {
+  delete () {
     this._deleted = true
-    return this.save(username)
+    return this.save()
   }
 
   authorized (username, action) {
@@ -89,8 +87,37 @@ class Model {
       console.log(result)
       return new this(result)
     }.bind(this)).catch(function (err) {
-      console.error(err)
-      return err
+      if (err.name === 'not_found') {
+        console.log('Trying to delete a missing object', err)
+      }
+      throw err
+    })
+  }
+
+  static findByField (field, value) {
+    console.log('Finding', field, value)
+    return db.createIndex({
+      index: {
+        fields: [field, 'type']
+      }
+    }).then(function (result) {
+      var selector = {selector: {
+        type: this.type
+      }}
+      selector.selector[field] = value
+      return db.find(selector)
+    }.bind(this)).then(function (results) {
+      if (results.docs.length === 0) {
+        throw new NotFoundError()
+      } else {
+        return new this(results.docs[0])
+      }
+    }.bind(this)).catch(function (err) {
+      if (err.name !== 'NotFoundError') {
+        console.error('Error', err)
+      } else {
+        throw err
+      }
     })
   }
 }

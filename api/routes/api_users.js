@@ -1,48 +1,16 @@
 'use strict'
 const express = require('express')
-const objectAssign = require('object-assign')
 // const _ = require('lodash')
 const User = require('../models/user')
+const Authorize = require('../models/authorize')
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const BearerStrategy = require('passport-http-bearer').Strategy
-
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
 
 const users = express.Router()
 
-passport.use('bearer', new BearerStrategy(
-  function (token, done) {
-    console.log('Token', token)
-    jwt.verify(token, config.secret, function (err, decoded) {
-      if (!err) {
-        return done(null, decoded.username)
-      } else {
-        return done(null)
-      }
-    })
-  }
-))
-
-// Passport.js configuration (auth)
-passport.use('local', new LocalStrategy(function (username, password, done) {
-  console.log('User finding', username, password)
-  User.findByUsername(username).then(function (user) {
-    console.log('User found', user)
-    if (!user) {
-      return done(null, false, { message: 'Wrong username.' })
-    }
-    if (!user.validPassword(password)) {
-      return done(null, false, { message: 'Wrong password.' })
-    }
-    console.log('User returned', user)
-    return done(null, user)
-  }).catch(function (err) {
-    console.log('Error', err)
-    if (err) { return done(err) }
-  })
-}))
+const authLocal = passport.authenticate('local', { session: false })
+const authBearer = passport.authenticate('bearer', { session: false })
 
 function createToken (user) {
   console.log('Creating token', user)
@@ -53,19 +21,18 @@ function createToken (user) {
 }
 
 // Token issuing
-users.post('/authenticate', passport.authenticate('local', { session: false }), function (req, res) {
+users.post('/authenticate', authLocal, function (req, res) {
   return res.status(201).json({ token: createToken(req.user) })
 })
 
 // Token verify
-users.get('/authenticate', passport.authenticate('bearer', { session: false }), function (req, res) {
+users.get('/authenticate', authBearer, function (req, res) {
   return res.status(200).json({ username: req.user })
 })
 
 // Create user
-users.post('/', function (req, res) {
-  const data = req.body
-  const user = new User(data)
+users.post('/', function (req, res, next) {
+  const user = new User(req.body)
 
   return user.isUniq().then(function (response) {
     return user.save()
@@ -75,42 +42,41 @@ users.post('/', function (req, res) {
     if (err.name === 'ConflictError') {
       return res.status(409).json(err.message)
     } else {
-      throw err
+      next(err)
     }
   })
 })
 
-users.get('/', function (req, res) {
-  User.all().then(function (users) {
+users.get('/', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return User.all()
+  }).then(function (users) {
     console.log(users)
     return res.status(200).json({users: users})
+  }).catch(function (err) {
+    next(err)
   })
 })
 
 // Get user
-users.get('/:id', function (req, res) {
-  User.findById(req.params.id).then(function (user) {
-    console.log('User:', user)
+users.get('/:id', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return User.findById(req.params.id)
+  }).then(function (user) {
     return res.status(200).json(user)
-  }).catch(function (error) {
-    console.error('Error:', error)
-    return res.status(503)
+  }).catch(function (err) {
+    next(err)
   })
 })
 
 // Destroy a user
-users.delete('/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
-  User.findById(req.params.id).then(function (user) {
+users.delete('/:id', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (user) {
     return user.delete(req.user)
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
-    if (err.name === 'AuthorizationError') {
-      return res.status(401).json(err.message)
-    } else {
-      console.error('Error', err)
-      return res.sendStatus(500)
-    }
+    next(err)
   })
 })
 

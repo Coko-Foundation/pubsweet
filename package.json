@@ -37,6 +37,7 @@
     "json-loader": "^0.5.3",
     "jsonwebtoken": "^5.5.4",
     "lodash": "^3.9.3",
+    "minimatch": "^3.0.0",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
     "node-acl": "0.0.2",

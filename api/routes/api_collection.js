@@ -4,28 +4,11 @@ PouchDB.plugin(require('pouchdb-find'))
 const _ = require('lodash')
 const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')
-const User = require('../models/user')
-const AuthorizationError = require('../errors/authorization_error')
+const AuthorizationError = require('../errors/AuthorizationError')
 const Authorize = require('../models/authorize')
 const express = require('express')
 const api = express.Router()
-
-const jwt = require('jsonwebtoken')
 const passport = require('passport')
-const BearerStrategy = require('passport-http-bearer').Strategy
-const config = require('../../config')
-
-passport.use(new BearerStrategy(
-  function (token, done) {
-    jwt.verify(token, config.secret, function (err, decoded) {
-      if (!err) {
-        return done(null, decoded.username)
-      } else {
-        return done(null)
-      }
-    })
-  }
-))
 
 const authentication = passport.authenticate('bearer', { session: false })
 

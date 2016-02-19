@@ -33,6 +33,7 @@ const updatedUser = {
 }
 
 const otherUser = {
+  'type': 'user',
   'username': 'anotheruser',
   'email': 'another@com.nz',
   'password': 'rubgy'

@@ -33,18 +33,18 @@ class Setup {
   static createRoles () {
     return new Role({
       name: 'admin',
-      resources: ['users', 'collections', 'fragments'],
+      resources: ['/api/users', '/api/collection', '/api/collection/fragments'],
       permissions: '*'
     }).save().then(function () {
       return new Role({
         name: 'contributor',
-        resources: ['fragments'],
+        resources: ['/api/collection/fragments'],
         permissions: 'create'
       }).save()
     }).then(function () {
       return new Role({
         name: 'reader',
-        resources: ['fragments'],
+        resources: ['/api/collection/fragments'],
         permissions: 'read'
       })
     })
