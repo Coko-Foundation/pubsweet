@@ -81,16 +81,17 @@ users.delete('/:id', authBearer, function (req, res, next) {
 })
 
 // Update a user
-users.put('/:id', function (req, res) {
-  User.findById(req.params.id).then(function (user) {
+users.put('/:id', function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+    return User.findById(req.params.id)
+  }).then(function (user) {
     Object.assign(user, req.body)
     console.log(user)
     return db.put(user)
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    next(err)
   })
 })
 

@@ -1,7 +1,5 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
-const _ = require('lodash')
-const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
@@ -10,9 +8,12 @@ const collectionFixture = fixtures.collection
 const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
+const Fragment = require('../models/fragment')
+const User = require('../models/user')
+
 var api
 
-describe('authenticated api', function () {
+describe.only('authenticated api', function () {
   var otherUser
   var fragmentId
 
@@ -25,7 +26,6 @@ describe('authenticated api', function () {
         userFixture.password,
         collectionFixture.title)
     }).then(function () { // Create another user without any roles
-      const User = require('../models/user')
       otherUser = new User({
         username: otherUserFixture.username,
         email: otherUserFixture.email,
@@ -48,11 +48,12 @@ describe('authenticated api', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .post('/api/collection/fragment')
+          .post('/api/collection/fragments')
           .send(fragmentFixture)
           .set('Authorization', 'Bearer ' + token)
           .expect(201)
       }).then(function (res) {
+        expect(res.body.source).to.eql(fragmentFixture.source)
         fragmentId = res.body._id
       })
   })
@@ -68,10 +69,10 @@ describe('authenticated api', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .post('/api/collection/fragment')
+          .post('/api/collection/fragments')
           .send(fragmentFixture)
           .set('Authorization', 'Bearer ' + token)
-          .expect(401)
+          .expect(403)
       })
   })
 
@@ -97,7 +98,7 @@ describe('authenticated api', function () {
         .then(function (res) {
           var token = res.body.token
           return request(api)
-            .post('/api/collection/fragment')
+            .post('/api/collection/fragments')
             .send(fragmentFixture)
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
@@ -106,11 +107,10 @@ describe('authenticated api', function () {
         })
     })
 
-    describe('actions on a fragment owned by the same user', function () {
+    describe('a fragment owned by the same user', function () {
       var fragment
 
       beforeEach(function () {
-        const Fragment = require('../models/fragment')
         fragment = new Fragment(fragmentFixture)
         fragment.owner = otherUserFixture.username
         return fragment.save()
@@ -131,13 +131,12 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragment/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment._id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
               .expect(200)
           })
       })
-
     })
 
     describe('actions on a fragment owned by a different user', function () {
@@ -165,10 +164,10 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragment/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment._id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
-              .expect(401)
+              .expect(403)
           })
       })
     })
@@ -190,10 +189,10 @@ describe('authenticated api', function () {
         .then(function (res) {
           var token = res.body.token
           return request(api)
-            .post('/api/collection/fragment')
+            .post('/api/collection/fragments')
             .send(fragmentFixture)
             .set('Authorization', 'Bearer ' + token)
-            .expect(401)
+            .expect(403)
         })
     })
 
@@ -221,14 +220,14 @@ describe('authenticated api', function () {
 
   it('fails to create a fragment in the protected collection if not authenticated', function () {
     return request(api)
-      .post('/api/collection/fragment')
+      .post('/api/collection/fragments')
       .send(fragmentFixture)
       .expect(401)
   })
 
   it('fails to create a fragment in the protected collection if authentication wrong', function () {
     return request(api)
-      .post('/api/collection/fragment')
+      .post('/api/collection/fragments')
       .send(fragmentFixture)
       .set('Authorization', 'Bearer ' + 'wrong')
       .expect(401)

@@ -10,10 +10,10 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 
-const authentication = passport.authenticate('bearer', { session: false })
+const authBearer = passport.authenticate('bearer', { session: false })
 
 // Create collection
-api.post('/collection', authentication, function (req, res) {
+api.post('/collection', authBearer, function (req, res) {
   const collection = new Collection(req.body)
   collection.owner(req.user)
 
@@ -59,43 +59,26 @@ api.delete('/collection', function (req, res) {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collection/fragment', passport.authenticate('bearer', { session: false }), function (req, res) {
+api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
   var fragment = new Fragment(req.body)
   fragment.owner = req.user // He who creates it, owns it
-  console.log(req.body)
-  console.log(fragment)
 
-  fragment.authorized(req.user, 'create').then(function (res) {
-    if (res) {
-      console.log(req.user, 'is allowed to create a fragment', res)
-      return Collection.get()
-    } else {
-      console.log(req.user, 'is not allowed to create a fragment', res)
-      throw new AuthorizationError(req.user + ' not allowed')
-    }
+  return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
+    return Collection.get()
   }).then(function (existingCollection) {
-    console.log(existingCollection)
     collection = existingCollection
     return fragment.save()
   })
   .then(function (result) {
-    console.log(result)
     fragment = result
     collection.addFragment(fragment)
     return collection.save()
   })
   .then(function (collection) {
-    console.log(collection)
     return res.status(201).json(fragment)
-  })
-  .catch(function (err) {
-    console.error('Error:', err)
-    if (err.name === 'AuthorizationError') {
-      return res.status(401).json(err.message)
-    } else {
-      return res.status(500)
-    }
+  }).catch(function (err) {
+    next(err)
   })
 })
 
@@ -111,53 +94,46 @@ api.get('/collection/fragments', function (req, res) {
   })
 })
 
-api.get('/collection/fragment/:id', authentication, function (req, res) {
-  Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
     return Fragment.findById(req.params.id)
   }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
-    if (err.name === 'AuthorizationError') {
-      return res.status(401).json(err.message)
-    } else {
-      console.error('Error', err)
-      return res.sendStatus(500)
-    }
+    next(err)
   })
 })
 
 // Update a fragment
-api.put('/collection/fragment/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
-  Fragment.findById(req.params.id).then(function (fragment) {
+api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+    return Fragment.findById(req.params.id)
+  }).then(function (fragment) {
     return fragment.updateProperties(req.body)
   }).then(function (fragment) {
-    return fragment.save(req.user)
+    return fragment.save()
   }).then(function (fragment) {
     return res.status(200).json(fragment)
   }).catch(function (err) {
-    if (err.name === 'AuthorizationError') {
-      return res.status(401).json(err.message)
-    } else {
-      console.error('Error', err)
-      return res.sendStatus(500)
-    }
+    next(err)
   })
 })
 
 // Delete a fragment
-api.delete('/collection/fragment/:id', function (req, res) {
-  db.get(req.params.id).then(function (result) {
-    return db.remove(result)
-  }).then(function (result) {
+api.delete('/collection/fragments/:id', function (req, res, next) {
+  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+    return Fragment.findById(req.params.id)
+  }).then(function (fragment) {
+    return fragment.delete()
+  }).then(function () {
     return Collection.get()
   }).then(function (collection) {
     collection.fragments = _.without(collection.fragments, req.params.id)
-    return db.put(collection)
+    return collection.save()
   }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
-    console.error('Error', err)
-    return res.sendStatus(500)
+    next(err)
   })
 })
 
