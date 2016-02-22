@@ -13,7 +13,7 @@ const User = require('../models/user')
 
 var api
 
-describe.only('authenticated api', function () {
+describe('authenticated api', function () {
   var otherUser
   var fragmentId
 

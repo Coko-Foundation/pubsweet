@@ -81,7 +81,7 @@ users.delete('/:id', authBearer, function (req, res, next) {
 })
 
 // Update a user
-users.put('/:id', function (req, res, next) {
+users.put('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
     return User.findById(req.params.id)
   }).then(function (user) {
