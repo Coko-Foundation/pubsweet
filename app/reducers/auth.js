@@ -25,6 +25,7 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
+        token: action.token,
         errorMessage: ''
       })
     case LOGIN_FAILURE:
@@ -47,7 +48,8 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        username: action.username
+        username: action.username,
+        token: action.token
       })
     default:
       return state

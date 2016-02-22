@@ -1,6 +1,20 @@
 import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
-import * as ActionTypes from '../actions'
+import {
+  // GET_COLLECTION_REQUEST,
+  GET_COLLECTION_SUCCESS,
+  // GET_COLLECTION_FAILURE,
+  // GET_FRAGMENTS_REQUEST,
+  GET_FRAGMENTS_SUCCESS,
+  CREATE_FRAGMENT_REQUEST,
+  CREATE_FRAGMENT_SUCCESS,
+  UPDATE_FRAGMENT_REQUEST,
+  UPDATE_FRAGMENT_SUCCESS,
+  DELETE_FRAGMENT_REQUEST,
+  // DELETE_FRAGMENT_SUCCESS,
+  RESET_ERROR_MESSAGE
+} from '../actions/types'
+
 import auth from './auth'
 import _ from 'lodash'
 
@@ -11,7 +25,7 @@ const initialFragments = []
 function errorMessage (state = null, action) {
   const { type, error } = action
 
-  if (type === ActionTypes.RESET_ERROR_MESSAGE) {
+  if (type === RESET_ERROR_MESSAGE) {
     return null
   } else if (error) {
     return action.error
@@ -23,7 +37,7 @@ function errorMessage (state = null, action) {
 function collections (state = initialCollections, action) {
   let collections = _.clone(state)
   switch (action.type) {
-    case ActionTypes.RECEIVE_COLLECTION:
+    case GET_COLLECTION_SUCCESS:
       collections = [action.collection]
       return collections
   }
@@ -33,32 +47,32 @@ function collections (state = initialCollections, action) {
 function fragments (state = initialFragments, action) {
   let fragments = _.clone(state)
   switch (action.type) {
-    case ActionTypes.RECEIVE_FRAGMENTS:
+    case GET_FRAGMENTS_SUCCESS:
       fragments = action.fragments
       return fragments
-    case ActionTypes.START_CREATE_FRAGMENT:
+    case CREATE_FRAGMENT_REQUEST:
       fragments.push(action.fragment)
       return fragments
-    case ActionTypes.FINISH_CREATE_FRAGMENT:
+    case CREATE_FRAGMENT_SUCCESS:
       let lastIndex = fragments.length - 1
       fragments[lastIndex] = Object.assign(fragments[lastIndex], {
-        _id: action.fragment.id,
-        _rev: action.fragment.rev
+        _id: action.fragment._id,
+        _rev: action.fragment._rev
       })
       return fragments
-    case ActionTypes.START_UPDATE_FRAGMENT:
+    case UPDATE_FRAGMENT_REQUEST:
       let index = _.findIndex(fragments, function (f) {
         return f._id === action.fragment._id
       })
       fragments[index] = action.fragment
       return fragments
-    case ActionTypes.FINISH_UPDATE_FRAGMENT:
+    case UPDATE_FRAGMENT_SUCCESS:
       index = _.findIndex(fragments, function (f) {
-        return f._id === action.fragment.id
+        return f._id === action.fragment._id
       })
-      fragments[index]._rev = action.fragment.rev
+      fragments[index]._rev = action.fragment._rev
       return fragments
-    case ActionTypes.START_DELETE_FRAGMENT:
+    case DELETE_FRAGMENT_REQUEST:
       fragments = _.without(fragments, action.fragment)
       return fragments
   }

@@ -112,7 +112,8 @@ function getUserSuccess (user) {
     type: T.GET_USER_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    username: user.username
+    username: user.username,
+    token: user.token
   }
 }
 
@@ -141,6 +142,7 @@ export function getUser () {
           dispatch(getUserFailure(user.message))
           return Promise.reject(user)
         } else {
+          user.token = localStorage.token
           dispatch(getUserSuccess(user))
         }
       }).catch(err => console.log('Error: ', err))
