@@ -3,36 +3,42 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { loginUser } from '../actions'
 import React, { Component, PropTypes } from 'react'
+import { Row, Col } from 'react-bootstrap'
 
 class Login extends Component {
   constructor (props) {
     super(props)
-    this.redirectTo = this.props.location.query.next || '/login'
+    this.redirectTo = this.props.location.query.next || '/admin/manager'
   }
 
   render () {
     return (
       <div className='bootstrap'>
-        <form>
-          <div className='form-group'>
-            <label htmlFor='username'>Username</label>
-            <input type='text' ref='username' className='form-control' placeholder='Username'/>
-          </div>
+        <Row>
+          <Col xs={12} md={6} mdOffset={3}>
+            <form>
+              <div className='form-group'>
+                <label htmlFor='username'>Username</label>
+                <input type='text' ref='username' className='form-control' placeholder='Username'/>
+              </div>
 
-          <div className='form-group'>
-            <label htmlFor='password'>Password</label>
-            <input type='password' ref='password' className='form-control' placeholder='Password'/>
-          </div>
+              <div className='form-group'>
+                <label htmlFor='password'>Password</label>
+                <input type='password' ref='password' className='form-control' placeholder='Password'/>
+              </div>
 
-          <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
-            Login
-          </button>
-        </form>
+              <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
+                Login
+              </button>
+            </form>
+          </Col>
+        </Row>
       </div>
     )
   }
 
   handleClick (event) {
+    event.preventDefault()
     const credentials = {
       username: this.refs.username.value,
       password: this.refs.password.value
