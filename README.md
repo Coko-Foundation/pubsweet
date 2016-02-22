@@ -1,3 +1,7 @@
+# Build status
+
+[![build status](https://gitlab.coko.foundation/ci/projects/1/status.png?ref=master)](https://gitlab.coko.foundation/ci/projects/1?ref=master)
+
 # Preconditions
 
 Node.js, version above or equal to 4.22, is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
@@ -27,10 +31,16 @@ $ ./bin/init.sh
 
 Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost:3000 for the blog landing page.
 
-# Roadmap (18th of January, 2016)
+# Roadmap (2nd of February, 2016)
 
-Until 1st of February 2016:
+Until 5th of February 2016:
 
-Permissions, roles and authentication. Ongoing in the `auth` branch.
+- Reading the (JWT) token's signed values in the API (username)
+- Getting all of the user's roles via username
+- Determining read, write, create and destroy permissions based on found roles
+- Linking helper on Collection/Fragment/User models to permissions (e.g. user.save())
+- Executing an action, or returning an error if permissions are lacking
+- Simple UI for role management for the admin role (User dashboard)
+  - Assign read/write/create/destroy permissions to collections, fragments and users
 
-February: Collaboration, multiple concurrent users.
+Rest of February: Collaboration, multiple concurrent users.
