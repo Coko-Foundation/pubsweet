@@ -2,5 +2,8 @@ language: node_js
 before_install:
   - export JOBS=max
 node_js:
+  - "4.0"
+  - "4"
+  - "5"
   - "stable"
 sudo: false
