@@ -14,6 +14,10 @@ const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
 var api
 
+function clean (user) {
+  return _.omit(user, ['_rev', 'password', 'passwordHash'])
+}
+
 describe('users api', function () {
   var userId
   var otherUserId
@@ -175,8 +179,8 @@ describe('users api', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(200)
         }).then(function (res) {
-          expect(_.omit(res.body, '_rev'))
-            .to.eql(Object.assign({_id: otherUserId}, otherUserFixture))
+          expect(clean(res.body))
+            .to.eql(Object.assign({_id: otherUserId}, clean(otherUserFixture)))
         })
     })
 
@@ -224,8 +228,8 @@ describe('users api', function () {
             .expect('Content-Type', /json/)
             .expect(200)
         }).then(function (res) {
-          expect(_.omit(res.body, '_rev')).to.eql(Object.assign(
-              {_id: otherUserId, type: 'user'}, updatedUserFixture)
+          expect(clean(res.body)).to.eql(Object.assign(
+              {_id: otherUserId, type: 'user'}, clean(updatedUserFixture))
             )
         })
     })

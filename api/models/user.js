@@ -3,23 +3,27 @@ const Model = require('./model')
 const Role = require('./role')
 
 const ConflictError = require('../errors/ConflictError')
-const NotFoundError = require('../errors/NotFoundError')
+// const NotFoundError = require('../errors/NotFoundError')
+// const config = require('../../config.json')
+const bcrypt = require('bcryptjs')
 
 class User extends Model {
   constructor (properties) {
     super(properties)
+
+    // Hash and delete the password if it's set
+    if (properties.password) {
+      this.passwordHash = bcrypt.hashSync(properties.password)
+      delete this.password
+    }
+
     this.type = 'user'
     this.email = properties.email
-    this.password = properties.password // Bad, m'kay.
     this.username = properties.username
   }
 
   validPassword (password) {
-    if (this.password === password) {
-      return true
-    } else {
-      return false
-    }
+    return bcrypt.compareSync(password, this.passwordHash)
   }
 
   addRole (role) {

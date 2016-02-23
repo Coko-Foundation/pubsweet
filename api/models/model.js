@@ -115,6 +115,7 @@ class Model {
     }.bind(this)).catch(function (err) {
       if (err.name !== 'NotFoundError') {
         console.error('Error', err)
+        throw err
       } else {
         throw err
       }

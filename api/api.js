@@ -52,6 +52,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       return done(null, false, { message: 'Wrong username.' })
     }
     if (!user.validPassword(password)) {
+      console.log('invalid password', password, user.passwordHash)
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
