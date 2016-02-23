@@ -12,12 +12,11 @@ function getUsersRequest () {
   }
 }
 
-function getUsersSuccess (user) {
+function getUsersSuccess (users) {
   return {
     type: T.GET_USERS_SUCCESS,
     isFetching: false,
-    isAuthenticated: true,
-    username: user.username
+    users: users
   }
 }
 
@@ -25,7 +24,6 @@ function getUsersFailure (message) {
   return {
     type: T.GET_USERS_FAILURE,
     isFetching: false,
-    isAuthenticated: false,
     message
   }
 }
@@ -40,13 +38,13 @@ export function getUsers () {
     dispatch(getUsersRequest())
     return fetch(API_ENDPOINT + '/users', config)
       .then(response =>
-        response.json().then(user => ({ user, response }))
-      ).then(({ user, response }) => {
+        response.json().then(users => ({ users, response }))
+      ).then(({ users, response }) => {
         if (!response.ok) {
-          dispatch(getUsersFailure(user.message))
-          return Promise.reject(user)
+          dispatch(getUsersFailure(users.message))
+          return Promise.reject(users)
         } else {
-          dispatch(getUsersSuccess(user))
+          dispatch(getUsersSuccess(users.users))
         }
       }).catch(err => console.log('Error: ', err))
   }

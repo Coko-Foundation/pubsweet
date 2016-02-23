@@ -7,14 +7,18 @@ import * as Actions from '../../actions'
 class UsersManager extends React.Component {
   constructor (props) {
     super(props)
-    this.actions.getUsers()
+    this.props.actions.getUsers()
   }
 
   render () {
     let { users } = this.props
-    users = users.map((user, key) => {
-      return <li>{user}</li>
-    })
+    if (users) {
+      users = users.map((user, key) => {
+        return (<li key={key}>{JSON.stringify(user)}</li>)
+      })
+    } else {
+      users = <div>Loading users...</div>
+    }
 
     return (
       <div className='bootstrap'>
@@ -29,13 +33,13 @@ class UsersManager extends React.Component {
 }
 
 UsersManager.propTypes = {
-  users: React.PropTypes.object.isRequired,
+  users: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    users: state.users
+    users: state.users.users
   }
 }
 

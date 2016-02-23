@@ -16,6 +16,8 @@ import {
 } from '../actions/types'
 
 import auth from './auth'
+import users from './users'
+
 import _ from 'lodash'
 
 const initialCollections = []
@@ -82,6 +84,7 @@ function fragments (state = initialFragments, action) {
 const rootReducer = combineReducers({
   collections,
   fragments,
+  users,
   errorMessage,
   router,
   auth
