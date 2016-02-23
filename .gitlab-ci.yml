@@ -5,6 +5,7 @@ before_script:
     - source /root/.bashrc
     - nvm install v4.2.2
     - nvm use v4.2.2
+    - npm install -g node-gyp
     - npm install --silent && npm install -g mocha
 
 test:
