@@ -1,42 +1,7 @@
-#!/usr/bin/env node
-
-var express = require('express')
-var path = require('path')
-
-/**
- * Module dependencies.
- */
-
-var app = require('../app')
-var debug = require('debug')('backend-node:server')
+var api = require('../api/api')
 var http = require('http')
 
-/**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort(process.env.PORT || '3000')
-app.set('port', port)
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app)
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
+function normalizePort (val) {
   var port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -52,57 +17,39 @@ function normalizePort(val) {
   return false
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
+// Get port from environment and store in Express.
+var port = normalizePort(process.env.PORT || '3000')
+api.set('port', port)
 
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error
-  }
+var server = http.createServer(api)
+server.listen(port)
+server.on('error', onError)
+server.on('listening', onListening)
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
-      process.exit(1)
-      break
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
-      process.exit(1)
-      break
-    default:
-      throw error
-  }
+function onError (error) {
+  throw error
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
+function onListening () {
   var addr = server.address()
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  console.log('ScienceBlogger listening on ' + bind)
+  console.log('PubSweet is listening on ' + bind)
 }
 
 // We only run this workflow when not in Production && require a hot-loader
-if(process.env.LOADER === 'hot') {
+if (process.env.LOADER === 'hot') {
   // We require the bundle inside the if block because
   // it is only needed in a development environment.
   var webpackServer = require('./webpack_server')
   webpackServer()
 
   // Any request to localhost:3000 is proxied to webpack-dev-server
-  app.all('/assets/*', function(req, res) {
+  api.all('/assets/*', function (req, res) {
+    console.log('proxy')
     proxy.web(req, res, {
-        target: 'http://localhost:3001'
+      target: 'http://localhost:3001'
     })
   })
 }

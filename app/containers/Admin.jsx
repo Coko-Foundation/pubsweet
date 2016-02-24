@@ -13,11 +13,14 @@ class Admin extends Component {
   }
 
   render () {
-    const { children } = this.props
+    const { children, auth, actions } = this.props
     return (
       <div>
         <div className='bootstrap'>
-          <Navigation/>
+          <Navigation
+            auth={auth}
+            actions={actions}
+            />
         </div>
         {children}
       </div>
@@ -26,6 +29,10 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
+  // Dispatch
+  dispatch: PropTypes.func.isRequired,
+  // Auth
+  auth: PropTypes.object,
   // Data
   collection: PropTypes.object,
   // Injected by React Redux
@@ -37,15 +44,16 @@ Admin.propTypes = {
   actions: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps (state) {
+function mapState (state) {
   return {
+    auth: state.auth,
     collection: state.collections[0],
     errorMessage: state.errorMessage,
     inputValue: state.router.location.pathname.substring(1)
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatch (dispatch) {
   return {
     pushState: pushState,
     actions: bindActionCreators(Actions, dispatch)
@@ -53,6 +61,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapState,
+  mapDispatch
 )(Admin)

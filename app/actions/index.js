@@ -1,173 +1,202 @@
 import fetch from 'isomorphic-fetch'
+import { API_ENDPOINT } from '../../config.json'
+import * as T from './types'
 
 // Actions on collection
 
-export const REQUEST_COLLECTION = 'REQUEST_COLLECTION'
-export const RECEIVE_COLLECTION = 'RECEIVE_COLLECTION'
-
-export function requestCollection () {
+function getCollectionRequest () {
   return {
-    type: REQUEST_COLLECTION
+    type: T.GET_COLLECTION_REQUEST
   }
 }
 
-export function receiveCollection (collection) {
+function getCollectionSuccess (collection) {
   return {
-    type: RECEIVE_COLLECTION,
+    type: T.GET_COLLECTION_SUCCESS,
     collection: collection,
     receivedAt: Date.now()
   }
 }
 
-export function fetchCollection () {
+export function getCollection () {
   return dispatch => {
-    dispatch(requestCollection())
-    return fetch('http://localhost:3000/api/collection')
+    dispatch(getCollectionRequest())
+    return fetch(API_ENDPOINT + '/collection')
       .then(response => response.json())
-      .then(collection => dispatch(receiveCollection(collection)))
+      .then(collection => dispatch(getCollectionSuccess(collection)))
   }
 }
 
 // Actions on fragments
-
-export const REQUEST_FRAGMENTS = 'REQUEST_FRAGMENTS'
-export const RECEIVE_FRAGMENTS = 'RECEIVE_FRAGMENTS'
-
-export function requestFragments () {
+function getFragmentsRequest () {
   return {
-    type: REQUEST_FRAGMENTS
+    type: T.GET_FRAGMENTS_REQUEST
   }
 }
 
-export function fetchFragments () {
-  return dispatch => {
-    dispatch(requestCollection())
-    return fetch('http://localhost:3000/api/collection/fragments')
-      .then(response => response.json())
-      .then(fragments => dispatch(receiveFragments(fragments)))
-  }
-}
-export function receiveFragments (fragments) {
+function getFragmentsSuccess (fragments) {
   return {
-    type: RECEIVE_FRAGMENTS,
+    type: T.GET_FRAGMENTS_SUCCESS,
     fragments: fragments,
     receivedAt: Date.now()
   }
 }
 
-export const START_CREATE_FRAGMENT = 'START_CREATE_FRAGMENT'
-export const FINISH_CREATE_FRAGMENT = 'FINISH_CREATE_FRAGMENT'
+export function getFragments () {
+  return (dispatch, getState) => {
+    dispatch(getFragmentsRequest())
+    const { auth: { token } } = getState()
 
-export function startCreateFragment (fragment) {
+    return fetch(API_ENDPOINT + '/collection/fragments', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return Promise.reject(response)
+      }
+    })
+    .then(fragments => dispatch(getFragmentsSuccess(fragments)))
+    .catch(err => console.log('Error', err))
+  }
+}
+
+export function createFragmentRequest (fragment) {
   return {
-    type: START_CREATE_FRAGMENT,
+    type: T.CREATE_FRAGMENT_REQUEST,
     fragment: fragment
   }
 }
 
 export function createFragment (fragment) {
-  return dispatch => {
-    dispatch(startCreateFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
+  return (dispatch, getState) => {
+    dispatch(createFragmentRequest(fragment))
+    const { auth: { token } } = getState()
+
+    return fetch(API_ENDPOINT + '/collection/fragments', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(fragment)})
-      .then(response => response.json())
-      .then(fragment => dispatch(finishCreateFragment(fragment)))
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          return Promise.reject(response)
+        }
+      })
+      .then(fragment => dispatch(createFragmentSuccess(fragment)))
+      .catch(err => console.log('Error', err))
   }
 }
 
-export function finishCreateFragment (fragment) {
+export function createFragmentSuccess (fragment) {
   return {
-    type: FINISH_CREATE_FRAGMENT,
+    type: T.CREATE_FRAGMENT_SUCCESS,
     fragment: fragment,
     receivedAt: Date.now()
   }
 }
 
-export const START_UPDATE_FRAGMENT = 'START_UPDATE_FRAGMENT'
-export const FINISH_UPDATE_FRAGMENT = 'FINISH_UPDATE_FRAGMENT'
-
-export function startUpdateFragment (fragment) {
+export function updateFragmentRequest (fragment) {
   return {
-    type: START_UPDATE_FRAGMENT,
+    type: T.UPDATE_FRAGMENT_REQUEST,
     fragment: fragment
   }
 }
 
 export function updateFragment (fragment) {
-  return dispatch => {
-    dispatch(startUpdateFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
+  return (dispatch, getState) => {
+    dispatch(updateFragmentRequest(fragment))
+    const { auth: { token } } = getState()
+
+    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment._id, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(fragment)})
-      .then(response => response.json())
-      .then(fragment => dispatch(finishUpdateFragment(fragment)))
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          return Promise.reject(response)
+        }
+      })
+      .then(fragment => dispatch(updateFragmentSuccess(fragment)))
+      .catch(err => console.log('Error', err))
   }
 }
 
-export function finishUpdateFragment (fragment) {
+export function updateFragmentSuccess (fragment) {
   return {
-    type: FINISH_UPDATE_FRAGMENT,
+    type: T.UPDATE_FRAGMENT_SUCCESS,
     fragment: fragment,
     receivedAt: Date.now()
   }
 }
 
-export const START_DELETE_FRAGMENT = 'START_DELETE_FRAGMENT'
-export const FINISH_DELETE_FRAGMENT = 'FINISH_DELETE_FRAGMENT'
-
-export function startDeleteFragment (fragment) {
+export function deleteFragmentRequest (fragment) {
   return {
-    type: START_DELETE_FRAGMENT,
+    type: T.DELETE_FRAGMENT_REQUEST,
     fragment: fragment
   }
 }
 
-export function deleteFragment (fragment) {
-  return dispatch => {
-    dispatch(startDeleteFragment(fragment))
-    return fetch('http://localhost:3000/api/collection/fragment', {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(fragment)})
-      .then(response => response.json())
-      .then(fragment => dispatch(finishDeleteFragment(fragment)))
-  }
-}
-
-export function finishDeleteFragment (fragment) {
+export function deleteFragmentSuccess (fragment) {
   return {
-    type: FINISH_DELETE_FRAGMENT,
+    type: T.DELETE_FRAGMENT_SUCCESS,
     fragment: fragment,
     receivedAt: Date.now()
   }
 }
 
-export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
+export function deleteFragment (fragment) {
+  return (dispatch, getState) => {
+    const { auth: { token } } = getState()
+    dispatch(deleteFragmentRequest(fragment))
+
+    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment._id, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(fragment)})
+      .then(response => response.json())
+      .then(fragment => dispatch(deleteFragmentSuccess(fragment)))
+  }
+}
 
 // Resets the currently visible error message.
 export function resetErrorMessage () {
   return {
-    type: RESET_ERROR_MESSAGE
+    type: T.RESET_ERROR_MESSAGE
   }
 }
 
-export const HYDRATE = 'HYDRATE'
+// Actions for auth
+import { getUser } from './auth'
+export { loginUser, logoutUser, getUser } from './auth'
 
+// Actions for users management
+export { getUsers } from './users'
+
+// Hydrate hydrates the store from a persistent store, the backend.
+// It gets collections, fragments and user data (via token).
 export function hydrate () {
   return dispatch => {
-    dispatch(fetchCollection())
-    dispatch(fetchFragments())
+    dispatch(getCollection())
+    dispatch(getFragments())
+    dispatch(getUser())
   }
 }
+

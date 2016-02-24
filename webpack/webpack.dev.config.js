@@ -1,12 +1,9 @@
 var path = require('path')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var webpack = require('webpack')
+// var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = 'http://localhost:3001/assets/'
-
-var WEBPACK_HOST = 'localhost'
-var WEBPACK_PORT = 3001
 
 // We're including JSX components from our components package,
 // but excluding its node_modules.
@@ -46,13 +43,13 @@ var commonLoaders = [
 module.exports = [
   {
     // The configuration for the client
-    name: 'browser',
+    name: 'app',
     target: 'web',
     context: path.join(__dirname, '..', 'app'),
     entry: {
-      app: ['webpack-dev-server/client?http://' + WEBPACK_HOST + ':' + WEBPACK_PORT,
+      app: ['webpack-dev-server/client?http://localhost:3001',
        'webpack/hot/dev-server',
-        './index' ]
+        './app' ]
     },
     output: {
       // The output directory as absolute path
