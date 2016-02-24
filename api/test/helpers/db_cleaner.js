@@ -6,10 +6,11 @@ const AclPouchDb = require('node_acl_pouchdb')
 const dbName = './api/db/' + process.env.NODE_ENV
 
 let dbCleaner = function () {
-  return new PouchDB(dbName).destroy().then(function (response) {
+
+  return global.db.destroy().then(function (response) {
     global.db = new PouchDB(dbName)
     global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
-    return db.info()
+    return db.allDocs()
   }).then(function (response) {
     console.log('Cleaning database', response)
     return response
