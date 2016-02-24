@@ -9,15 +9,11 @@ const roleFixture = fixtures.role
 const userRoleFixture = fixtures.userRole
 const fragmentFixture = fixtures.fragment
 
-var api
+var api = require('../api')
 
 describe('api', function () {
   before(function () {
-    return dbCleaner().then(function () {
-       // We load the api here to ensure that the database is cleaned before
-       // creating a new one
-       api = require('../api')
-    })
+    return dbCleaner()
   })
 
   after(function () {
