@@ -12,7 +12,7 @@ const userFixture = fixtures.user
 const updatedUserFixture = fixtures.updatedUser
 const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
-var api
+var api = require('../api')
 
 function clean (user) {
   return _.omit(user, ['_rev', 'password', 'passwordHash'])
@@ -32,9 +32,9 @@ describe('users api', function () {
         collectionFixture.title)
     }).then(function (user) {
       userId = user._id
-      api = require('../api')
     }).catch(function (err) {
       console.log(err)
+      throw err
     })
   })
 
@@ -252,10 +252,10 @@ describe('users api', function () {
     })
   })
 
-  it('can not create a user if user exists', function (done) {
-    request(api)
+  it('can not create a user if user exists', function () {
+    return request(api)
       .post('/api/users')
       .send(userFixture)
-      .expect(409, done)
+      .expect(409)
   })
 })

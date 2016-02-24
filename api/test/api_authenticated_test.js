@@ -10,8 +10,7 @@ const updatedFragmentFixture = fixtures.updatedFragment
 
 const Fragment = require('../models/fragment')
 const User = require('../models/user')
-
-var api
+var api = require('../api')
 
 describe('authenticated api', function () {
   var otherUser
@@ -32,8 +31,6 @@ describe('authenticated api', function () {
         password: otherUserFixture.password
       })
       return otherUser.save()
-    }).then(function () {
-      api = require('../api')
     })
   })
 
