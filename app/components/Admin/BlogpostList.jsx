@@ -25,11 +25,11 @@ export default class BlogpostList extends React.Component {
               <th>Author</th>
               <th>Status</th>
               <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {blogposts}
-            </tbody>
+            </tr>
+          </thead>
+          <tbody>
+            {blogposts}
+          </tbody>
         </table>
       </div>
     )

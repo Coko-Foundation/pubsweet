@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
 
+import User from '../../components/Admin/User'
+
 class UsersManager extends React.Component {
   constructor (props) {
     super(props)
@@ -12,19 +14,32 @@ class UsersManager extends React.Component {
 
   render () {
     let { users } = this.props
+
     if (users) {
       users = users.map((user, key) => {
-        return (<li key={key}>{JSON.stringify(user)}</li>)
+        user.key = key
+        return (<User user={user}/>)
       })
-    } else {
-      users = <div>Loading users...</div>
     }
 
     return (
       <div className='bootstrap'>
         <Grid>
           <div>
-            { users }
+            <table className='table'>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Roles</th>
+                  <th>Permissions</th>
+                </tr>
+              </thead>
+              <tbody>
+                { users }
+              </tbody>
+            </table>
           </div>
         </Grid>
       </div>
