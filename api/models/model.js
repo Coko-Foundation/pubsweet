@@ -62,8 +62,11 @@ class Model {
     return uuid.v4()
   }
 
-  static all (type) {
-    type = type || this.type
+  // Find all of a certain type e.g.
+  // User.all()
+  // User.all({include: ['roles']})
+  static all (options) {
+    options = options = {}
     return db.createIndex({
       index: {
         fields: ['type']
@@ -71,10 +74,11 @@ class Model {
     }).then(function (result) {
       console.log(result)
       return db.find({selector: {
-        type: type
+        type: this.type
       }}).then(function (results) {
         return results.docs.map(function (result) {
-          return new this(result)
+          // Hacky and not performant, what is a better way to do this?
+          return this.find(result._id, options)
         }.bind(this))
       }.bind(this))
     }.bind(this)).catch(function (err) {
