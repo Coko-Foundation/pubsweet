@@ -96,7 +96,7 @@ api.get('/collection/fragments', function (req, res) {
 
 api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
-    return Fragment.findById(req.params.id)
+    return Fragment.find(req.params.id)
   }).then(function (result) {
     return res.status(200).json(result)
   }).catch(function (err) {
@@ -107,7 +107,7 @@ api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
-    return Fragment.findById(req.params.id)
+    return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
   }).then(function (fragment) {
@@ -122,7 +122,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 // Delete a fragment
 api.delete('/collection/fragments/:id', function (req, res, next) {
   return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
-    return Fragment.findById(req.params.id)
+    return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.delete()
   }).then(function () {

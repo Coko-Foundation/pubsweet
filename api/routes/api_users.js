@@ -1,21 +1,24 @@
 'use strict'
-const express = require('express')
-// const _ = require('lodash')
-const User = require('../models/user')
-const Authorize = require('../models/authorize')
+
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
+const express = require('express')
+const User = require('../models/user')
+const Authorize = require('../models/authorize')
 const config = require('../../config')
-
-const users = express.Router()
+const roles = require('./api_roles')
 
 const authLocal = passport.authenticate('local', { session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
+const users = express.Router()
+
+// Roles
+users.use('/', roles)
 
 function createToken (user) {
   console.log('Creating token', user)
   return jwt.sign(
-    {username: user.username},
+    { username: user.username },
     config.secret,
     { expiresIn: 5 * 3600 })
 }
@@ -61,7 +64,7 @@ users.get('/', authBearer, function (req, res, next) {
 // Get user
 users.get('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
-    return User.findById(req.params.id)
+    return User.find(req.params.id, {include: ['roles']})
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
@@ -83,7 +86,7 @@ users.delete('/:id', authBearer, function (req, res, next) {
 // Update a user
 users.put('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
-    return User.findById(req.params.id)
+    return User.find(req.params.id)
   }).then(function (user) {
     Object.assign(user, req.body)
     console.log(user)

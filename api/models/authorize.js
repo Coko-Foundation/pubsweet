@@ -45,7 +45,7 @@ class Authorize {
         break
     }
 
-    return Model.findById(id).then(function (thing) {
+    return Model.find(id).then(function (thing) {
       resource = thing
       // A user can delete or update owned objects and itself
       if ((thing.owner && username === thing.owner) ||

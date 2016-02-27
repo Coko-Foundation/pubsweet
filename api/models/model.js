@@ -1,5 +1,6 @@
 'use strict'
 
+const _ = require('lodash')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
@@ -81,14 +82,36 @@ class Model {
     })
   }
 
-  static findById (id) {
-    // Idempotently create indexes in datastore
+  // Find by id e.g.
+  // User.find('394')
+  // User.find('394', {include: ['roles']})
+  static find (id, options) {
+    options = options || {}
     return db.get(id).then(function (result) {
       console.log(result)
-      return new this(result)
-    }.bind(this)).catch(function (err) {
+      result = new this(result)
+      if (options.include) {
+        var included = options.include.map(function (include) {
+          return result[include]()
+        })
+        included.push(result)
+        return Promise.all(included)
+      } else {
+        return result
+      }
+    }.bind(this)).then(function (final_result) {
+      if (options.include) {
+        var result = final_result.pop()
+        _.each(options.include, function (value, index) {
+          result[value] = final_result[index]
+        })
+        return result
+      } else {
+        return final_result
+      }
+    }).catch(function (err) {
       if (err.name === 'not_found') {
-        console.log('Trying to delete a missing object', err)
+        console.log('Object not found', err)
       }
       throw err
     })

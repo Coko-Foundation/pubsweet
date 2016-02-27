@@ -1,7 +1,6 @@
 const express = require('express')
 
 const users = require('./api_users')
-const acl = require('./api_acl')
 const collection = require('./api_collection')
 
 const api = express.Router()
@@ -22,8 +21,5 @@ api.post('/upload', upload.single('file'), function (req, res, next) {
 
 // Users API
 api.use('/users', users)
-
-// ACL API
-api.use('/acl', acl)
 
 module.exports = api

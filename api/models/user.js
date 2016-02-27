@@ -26,6 +26,10 @@ class User extends Model {
     return bcrypt.compareSync(password, this.passwordHash)
   }
 
+  roles () {
+    return Role.userRoles(this.username)
+  }
+
   addRole (role) {
     return Role.addUserRoles(this.username, role).then(function () {
       return this

@@ -49,7 +49,7 @@ describe('users api', function () {
     })
 
     after(function () {
-      return User.findById(otherUser._id).then(function (user) {
+      return User.find(otherUser._id).then(function (user) {
         return user.delete()
       }).catch(function (err) {
         console.log(err)
@@ -179,8 +179,10 @@ describe('users api', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(200)
         }).then(function (res) {
-          expect(clean(res.body))
-            .to.eql(Object.assign({_id: otherUserId}, clean(otherUserFixture)))
+          var cleaned = clean(res.body)
+          expect(cleaned.roles).to.eql([])
+          expect(cleaned._id).to.eql(otherUserId)
+          expect(cleaned.username).to.eql(otherUserFixture.username)
         })
     })
 
@@ -229,7 +231,8 @@ describe('users api', function () {
             .expect(200)
         }).then(function (res) {
           expect(clean(res.body)).to.eql(Object.assign(
-              {_id: otherUserId, type: 'user'}, clean(updatedUserFixture))
+              {_id: otherUserId, type: 'user', roles: []},
+              clean(updatedUserFixture))
             )
         })
     })

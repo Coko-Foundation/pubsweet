@@ -31,6 +31,10 @@ class Role {
     })
   }
 
+  static userRoles (username) {
+    return acl.userRoles(username)
+  }
+
   static addUserRoles (username, role) {
     return acl.addUserRoles(username, role).catch(function (err) {
       console.error(err)
