@@ -53,7 +53,7 @@
     "pouchdb-find": "^0.9.0",
     "prompt": "^0.2.14",
     "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#e50f66a8",
-    "react": "^0.14.0",
+    "react": "^0.14.7",
     "react-bootstrap": "^0.25.100-react-pre.1",
     "react-dom": "^0.14.0-rc1",
     "react-helmet": "^1.0.1",
@@ -71,7 +71,7 @@
     "style-loader": "^0.12.3",
     "supertest-as-promised": "^2.0.2",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.14"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.3",
@@ -93,7 +93,7 @@
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "supertest": "^1.1.0",
     "warning": "^2.0.0",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-server": "^1.14.1"
   },
   "standard": {
     "parser": "babel-eslint"
