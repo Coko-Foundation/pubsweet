@@ -36,7 +36,7 @@ export function requireAuthentication (Component) {
   AuthenticatedComponent.propTypes = {
     dispatch: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
-    location: PropTypes.string,
+    location: PropTypes.object,
     username: PropTypes.string
   }
 

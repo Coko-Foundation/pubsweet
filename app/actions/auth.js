@@ -135,16 +135,19 @@ export function getUser () {
   return dispatch => {
     dispatch(getUserRequest())
     return fetch(API_ENDPOINT + '/users/authenticate', config)
-      .then(response =>
-        response.json().then(user => ({ user, response }))
-      ).then(({ user, response }) => {
+      .then(function (response) {
         if (!response.ok) {
-          dispatch(getUserFailure(user.message))
-          return Promise.reject(user)
+          dispatch(getUserFailure(response.status))
+          return Promise.reject(response)
         } else {
-          user.token = localStorage.token
-          dispatch(getUserSuccess(user))
+          return response
         }
+      }).then(function (response) {
+        return response.json()
+      }).then(user => ({ user }))
+      .then(({ user, response }) => {
+        user.token = localStorage.token
+        dispatch(getUserSuccess(user))
       }).catch(err => console.log('Error: ', err))
   }
 }
