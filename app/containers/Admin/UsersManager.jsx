@@ -35,7 +35,6 @@ class UsersManager extends React.Component {
                   <th>Username</th>
                   <th>Email</th>
                   <th>Roles</th>
-                  <th>Permissions</th>
                 </tr>
               </thead>
               <tbody>

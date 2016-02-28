@@ -38,9 +38,6 @@ class User extends React.Component {
             onChange={this.logChange}
           />
         </td>
-        <td>
-          {user.permissions}
-        </td>
       </tr>
     )
   }

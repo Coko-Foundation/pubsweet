@@ -35,6 +35,7 @@ users.get('/authenticate', authBearer, function (req, res) {
 
 // Create user
 users.post('/', function (req, res, next) {
+  console.log(req.body)
   const user = new User(req.body)
 
   return user.isUniq().then(function (response) {

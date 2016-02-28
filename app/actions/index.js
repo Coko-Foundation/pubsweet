@@ -185,7 +185,7 @@ export function resetErrorMessage () {
 
 // Actions for auth
 import { getUser } from './auth'
-export { loginUser, logoutUser, getUser } from './auth'
+export { loginUser, logoutUser, getUser, signupUser } from './auth'
 
 // Actions for users management
 export { getUsers } from './users'
