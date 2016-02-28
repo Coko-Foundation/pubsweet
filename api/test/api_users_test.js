@@ -2,7 +2,6 @@ const request = require('supertest-as-promised')
 const expect = require('expect.js')
 
 const _ = require('lodash')
-const objectAssign = require('object-assign')
 const dbCleaner = require('./helpers/db_cleaner')
 
 const User = require('../models/user')
@@ -71,6 +70,7 @@ describe('users api', function () {
             .expect(200)
         }).then(function (res) {
           expect(res.body.users.length).to.eql(2)
+          expect(res.body.users[0].username).to.eql(userFixture.username)
         })
     })
 

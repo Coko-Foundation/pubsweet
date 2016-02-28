@@ -1,16 +1,27 @@
 import React from 'react'
+import Select from 'react-select'
+import 'react-select/dist/react-select.css'
 
 class User extends React.Component {
   constructor (props) {
     super(props)
   }
 
+  logChange (val) {
+    console.log('Selected: ' + val)
+  }
+
   render () {
-    let { user } = this.props
+    let { user, number } = this.props
+
+    let options = user.roles.map(function (role) {
+      return { value: role, label: role }
+    })
+
     return (
-      <tr className='user' key={user.key}>
+      <tr className='user'>
         <td>
-          {user.key}
+          {number}
         </td>
         <td>
           {user.username}
@@ -19,7 +30,13 @@ class User extends React.Component {
           {user.email}
         </td>
         <td>
-          {user.roles}
+          <Select
+            name='form-field-name'
+            multi='true'
+            value={user.roles.join(',')}
+            options={options}
+            onChange={this.logChange}
+          />
         </td>
         <td>
           {user.permissions}
@@ -30,7 +47,8 @@ class User extends React.Component {
 }
 
 User.propTypes = {
-  user: React.PropTypes.object.isRequired
+  user: React.PropTypes.object.isRequired,
+  number: React.PropTypes.number
 }
 
 export default User

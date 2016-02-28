@@ -9,6 +9,9 @@ import User from '../../components/Admin/User'
 class UsersManager extends React.Component {
   constructor (props) {
     super(props)
+  }
+
+  componentWillMount () {
     this.props.actions.getUsers()
   }
 
@@ -17,8 +20,7 @@ class UsersManager extends React.Component {
 
     if (users) {
       users = users.map((user, key) => {
-        user.key = key
-        return (<User user={user}/>)
+        return (<User number={key + 1} key={user._id} user={user}/>)
       })
     }
 

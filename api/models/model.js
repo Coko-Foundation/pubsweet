@@ -66,7 +66,7 @@ class Model {
   // User.all()
   // User.all({include: ['roles']})
   static all (options) {
-    options = options = {}
+    options = options || {}
     return db.createIndex({
       index: {
         fields: ['type']
@@ -76,10 +76,11 @@ class Model {
       return db.find({selector: {
         type: this.type
       }}).then(function (results) {
-        return results.docs.map(function (result) {
+        var promises = results.docs.map(function (result) {
           // Hacky and not performant, what is a better way to do this?
           return this.find(result._id, options)
         }.bind(this))
+        return Promise.all(promises)
       }.bind(this))
     }.bind(this)).catch(function (err) {
       console.error(err)
