@@ -12,7 +12,8 @@ const userRoleFixture = fixtures.userRole
 var api = require('../api')
 
 describe('roles', function () {
-  var userId
+  var admin
+  var contributor
   var otherUser
 
   before(function () {
@@ -24,14 +25,15 @@ describe('roles', function () {
         userFixture.password,
         collectionFixture.title)
     }).then(function (user) {
-      userId = user._id
-
+      admin = user
       otherUser = new User({
         username: otherUserFixture.username,
         email: otherUserFixture.email,
         password: otherUserFixture.password
       })
       return otherUser.save()
+    }).then(function (user) {
+      contributor = user
     }).catch(function (err) {
       console.log(err)
       throw err
@@ -49,44 +51,31 @@ describe('roles', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .get('/api/users/' + userId + '/roles')
+          .get('/api/users/' + admin._id + '/roles')
           .set('Authorization', 'Bearer ' + token)
           .expect(200)
+      }).then(function (res) {
+        expect(res.body).to.eql(['admin'])
       })
   })
 
   it('admin can assign a role to the user', function () {
-    // return request(api)
-    //   .post('/api/users/authenticate')
-    //   .send({
-    //     username: userFixture.username,
-    //     password: userFixture.password
-    //   })
-    //   .expect(201)
-    //   .then(function (res) {
-
-    //   })
-    //   .post('/api/acl')
-    //   .send(userFixture)
-    //   .then(function (res) {
-    //     console.log('Creating a collection')
-    //     return request(api)
-    //       .post('/api/collection') // Create a collection
-    //       .send(collectionFixture)
-    //   }).then(function (res) {
-    //     console.log('Creating admin role')
-    //     var collectionId = res.body.id
-    //     return request(api)
-    //       .post('/api/acl/roles') // Create an admin role for the collection
-    //       .send(Object.assign(roleFixture, {resource: collectionId}))
-    //       .expect(201)
-    //   }).then(function (res) {
-    //     console.log('Assigning user to role')
-    //     return request(api)
-    //       .post('/api/acl/ace') // Assign the user to the role
-    //       .send(userRoleFixture)
-    //   }).catch(function (err) {
-    //     console.log(err)
-    //   })
+    return request(api)
+      .post('/api/users/authenticate')
+      .send({
+        username: userFixture.username,
+        password: userFixture.password
+      })
+      .expect(201)
+      .then(function (res) {
+        var token = res.body.token
+        return request(api)
+          .put('/api/users/' + contributor._id + '/roles')
+          .send(['contributor'])
+          .set('Authorization', 'Bearer ' + token)
+          .expect(200)
+      }).then(function (res) {
+        expect(res.body).to.eql(['contributor'])
+      })
   })
 })

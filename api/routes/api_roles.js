@@ -22,4 +22,16 @@ api.get('/:id/roles', authBearer, function (req, res, next) {
   })
 })
 
+api.put('/:id/roles', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+    return User.find(req.params.id)
+  }).then(function (user) {
+    return user.setRoles(req.body)
+  }).then(function (roles) {
+    return res.status(200).json(roles)
+  }).catch(function (err) {
+    next(err)
+  })
+})
+
 module.exports = api

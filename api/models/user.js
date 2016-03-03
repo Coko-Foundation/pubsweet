@@ -6,6 +6,7 @@ const ConflictError = require('../errors/ConflictError')
 // const NotFoundError = require('../errors/NotFoundError')
 // const config = require('../../config.json')
 const bcrypt = require('bcryptjs')
+const _ = require('lodash')
 
 class User extends Model {
   constructor (properties) {
@@ -38,6 +39,31 @@ class User extends Model {
 
   removeRole (role) {
     return Role.removeUserRoles(this.username, role)
+  }
+
+  // e.g. user.setRoles(['admin', 'contributor'])
+  setRoles (newRoles) {
+    var existingRoles
+    return this.roles().then(function (roles) {
+      existingRoles = roles
+      return _.difference(newRoles, existingRoles)
+    }).then(function (rolesToAdd) {
+      var promises = rolesToAdd.map(function (role) {
+        return this.addRole(role)
+      }.bind(this))
+      return Promise.all(promises)
+    }.bind(this)).then(function () {
+      return _.difference(existingRoles, newRoles)
+    }).then(function (rolesToRemove) {
+      var promises = rolesToRemove.map(function (role) {
+        return this.removeRole(role)
+      }.bind(this))
+      return Promise.all(promises)
+    }.bind(this)).then(function () {
+      return newRoles
+    }).catch(function (err) {
+      throw err
+    })
   }
 
   isUniq () {
