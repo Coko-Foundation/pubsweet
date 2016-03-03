@@ -25,16 +25,16 @@ class User extends Model {
 
   updateProperties (properties) {
     // Roles are updates separately in an async manner
-    if (properties.roles) {
-      var roles = properties['roles']
-      delete properties['roles']
-      super.updateProperties(properties)
+    var roles = properties.roles
+    delete properties['roles']
+    super.updateProperties(properties)
+
+    if (roles) {
       return this.setRoles(roles).then(function () {
         this.roles = roles
         return this
       }.bind(this))
     } else {
-      super.updateProperties(properties)
       return this
     }
   }
@@ -112,5 +112,6 @@ class User extends Model {
 }
 
 User.type = 'user'
+User.async = ['roles']
 
 module.exports = User

@@ -7,16 +7,20 @@ class User extends React.Component {
     super(props)
   }
 
-  logChange (val) {
+  update (val) {
     console.log('Selected: ' + val)
+    var user = Object.assign(this.props.user, { roles: val.split(',') })
+    this.props.update(user)
   }
 
   render () {
     let { user, number } = this.props
 
-    let options = user.roles.map(function (role) {
-      return { value: role, label: role }
-    })
+    let options = [
+      { value: 'admin', label: 'admin' },
+      { value: 'contributor', label: 'contributor' },
+      { value: 'reader', label: 'reader' }
+    ]
 
     return (
       <tr className='user'>
@@ -32,10 +36,10 @@ class User extends React.Component {
         <td>
           <Select
             name='form-field-name'
-            multi='true'
+            multi
             value={user.roles.join(',')}
             options={options}
-            onChange={this.logChange}
+            onChange={this.update.bind(this)}
           />
         </td>
       </tr>
@@ -45,7 +49,8 @@ class User extends React.Component {
 
 User.propTypes = {
   user: React.PropTypes.object.isRequired,
-  number: React.PropTypes.number
+  number: React.PropTypes.number,
+  update: React.PropTypes.func.isRequired
 }
 
 export default User

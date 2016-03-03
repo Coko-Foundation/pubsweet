@@ -1,12 +1,12 @@
 import {
   GET_USERS_REQUEST,
-  GET_USERS_SUCCESS
+  GET_USERS_SUCCESS,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS
 } from '../actions/types'
 
-// The auth reducer. The starting state sets authentication
-// based on a token being in local storage. In a real app,
-// we would also want a util to check if the token is expired.
-export default function auth (state = {
+// The users reducer.
+export default function users (state = {
   isFetching: false
 }, action) {
   console.log(action)
@@ -19,6 +19,22 @@ export default function auth (state = {
     case GET_USERS_REQUEST:
       return Object.assign({}, state, {
         isFetching: true
+      })
+    case UPDATE_USER_REQUEST:
+      var users = state.users.map(function (user) {
+        if (user._id === action.user) {
+          return Object.assign(user, action.user)
+        } else {
+          return user
+        }
+      })
+      return Object.assign({}, state, {
+        isFetching: true,
+        users: users
+      })
+    case UPDATE_USER_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false
       })
     default:
       return state

@@ -36,6 +36,13 @@ class Model {
   }
 
   _put () {
+    // Don't save async properties as they are saved elsewhere
+    if (this.constructor.async) {
+      this.constructor.async.map(function (property) {
+        this && delete this[property]
+      })
+    }
+
     return db.put(this).then(function (response) {
       console.log('Actually _put', this)
       return this

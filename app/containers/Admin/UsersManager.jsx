@@ -16,11 +16,16 @@ class UsersManager extends React.Component {
   }
 
   render () {
-    let { users } = this.props
+    let { users, actions } = this.props
 
     if (users) {
       users = users.map((user, key) => {
-        return (<User number={key + 1} key={user._id} user={user}/>)
+        return (<User
+          number={key + 1}
+          key={user._id}
+          user={user}
+          update={actions.updateUser}
+        />)
       })
     }
 
