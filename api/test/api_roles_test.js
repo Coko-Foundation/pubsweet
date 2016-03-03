@@ -78,4 +78,22 @@ describe('roles', function () {
         expect(res.body).to.eql(['contributor'])
       })
   })
+
+  it('contributor can not assign a role to admin', function () {
+    return request(api)
+      .post('/api/users/authenticate')
+      .send({
+        username: otherUserFixture.username,
+        password: otherUserFixture.password
+      })
+      .expect(201)
+      .then(function (res) {
+        var token = res.body.token
+        return request(api)
+          .put('/api/users/' + admin._id + '/roles')
+          .send(['admin', 'contributor'])
+          .set('Authorization', 'Bearer ' + token)
+          .expect(403)
+      })
+  })
 })
