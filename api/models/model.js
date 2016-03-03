@@ -51,10 +51,10 @@ class Model {
     return this.constructor.authorized(username, this, action)
   }
 
-  updateProperties (newProperties) {
-    console.log('Updating properties to', newProperties)
+  updateProperties (properties) {
+    console.log('Updating properties to', properties)
     // Should we screen/filter updates here?
-    Object.assign(this, newProperties)
+    Object.assign(this, properties)
     return this
   }
 

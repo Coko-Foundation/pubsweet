@@ -23,6 +23,22 @@ class User extends Model {
     this.username = properties.username
   }
 
+  updateProperties (properties) {
+    // Roles are updates separately in an async manner
+    if (properties.roles) {
+      var roles = properties['roles']
+      delete properties['roles']
+      super.updateProperties(properties)
+      return this.setRoles(roles).then(function () {
+        this.roles = roles
+        return this
+      }.bind(this))
+    } else {
+      super.updateProperties(properties)
+      return this
+    }
+  }
+
   validPassword (password) {
     return bcrypt.compareSync(password, this.passwordHash)
   }

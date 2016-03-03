@@ -96,4 +96,25 @@ describe('roles', function () {
           .expect(403)
       })
   })
+
+  it('admin can assign a role to the user via updating the user directly', function () {
+    return request(api)
+      .post('/api/users/authenticate')
+      .send({
+        username: userFixture.username,
+        password: userFixture.password
+      })
+      .expect(201)
+      .then(function (res) {
+        var token = res.body.token
+        return request(api)
+          .put('/api/users/' + otherUser._id)
+          .send({roles: ['contributor', 'reader']})
+          .set('Authorization', 'Bearer ' + token)
+          .expect(200)
+      }).then(function (res) {
+        console.log(res.body)
+        expect(res.body.roles).to.eql(['contributor', 'reader'])
+      })
+  })
 })
