@@ -24,12 +24,12 @@ To start the JS compilation and webserver, run:
 $ npm run dev
 ```
 
-And then open another terminal window in the same directory and initialize your blog by running:
+And then open another terminal window in the same directory and initialize your blog by running and going through the setup process:
 ```bash
-$ ./bin/init.sh
+$ NODE_ENV=dev node api/setup.js
 ```
 
-Point your browser to: http://localhost:3000/admin/manager and all should be well. Visit http://localhost:3000 for the blog landing page.
+Point your browser to: http://localhost:3000/admin/manager and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
 # Roadmap (2nd of February, 2016)
 
