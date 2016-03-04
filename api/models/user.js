@@ -24,7 +24,7 @@ class User extends Model {
   }
 
   updateProperties (properties) {
-    // Roles are updates separately in an async manner
+    // Roles are updated separately in an async manner
     var roles = properties.roles
     delete properties['roles']
     super.updateProperties(properties)
@@ -112,6 +112,6 @@ class User extends Model {
 }
 
 User.type = 'user'
-User.async = ['roles']
+User.relations = ['roles']
 
 module.exports = User

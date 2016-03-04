@@ -114,7 +114,9 @@ describe('roles', function () {
           .expect(200)
       }).then(function (res) {
         console.log(res.body)
-        expect(res.body.roles).to.eql(['contributor', 'reader'])
+        expect(res.body.roles).to.have.length(2)
+        expect(res.body.roles).to.contain('contributor')
+        expect(res.body.roles).to.contain('reader')
       })
   })
 })

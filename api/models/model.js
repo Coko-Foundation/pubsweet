@@ -37,10 +37,10 @@ class Model {
 
   _put () {
     // Don't save async properties as they are saved elsewhere
-    if (this.constructor.async) {
-      this.constructor.async.map(function (property) {
-        this && delete this[property]
-      })
+    if (this.constructor.relations) {
+      this.constructor.relations.forEach(function (property) {
+        delete this[property]
+      }, this)
     }
 
     return db.put(this).then(function (response) {
