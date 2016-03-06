@@ -74,8 +74,6 @@ describe('authenticated api', function () {
   })
 
   describe('a non-admin user with a contributor role', function () {
-    var otherFragmentId
-
     beforeEach(function () {
       return otherUser.addRole('contributor')
     })
@@ -99,8 +97,6 @@ describe('authenticated api', function () {
             .send(fragmentFixture)
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
-        }).then(function (res) {
-          otherFragmentId = res.body._id
         })
     })
 
@@ -150,7 +146,26 @@ describe('authenticated api', function () {
         return fragment.delete()
       })
 
-      it('cannot update a fragment in a protected collection if not an owner', function () {
+      it('cannot read a fragment in a protected collection if it is not published', function () {
+        return request(api)
+          .post('/api/users/authenticate')
+          .send({
+            username: otherUserFixture.username,
+            password: otherUserFixture.password
+          })
+          .expect(201)
+          .then(function (res) {
+            var token = res.body.token
+            return request(api)
+              .get('/api/collection/fragments')
+              .set('Authorization', 'Bearer ' + token)
+              .expect(200)
+          }).then(function (res) {
+            expect(res.body).to.eql([])
+          })
+      })
+
+      it('cannot update a fragment in a protected collection', function () {
         return request(api)
           .post('/api/users/authenticate')
           .send({

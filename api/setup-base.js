@@ -29,7 +29,12 @@ class Setup {
   }
 
   // Creates the basic roles: admin, contributor, reader
+  // Admin:       can do everything
+  // Contributor: can create new fragments and read public objects
+  // Reader:      can read public objects
+
   // There's an additional implicit role: owner
+  // Owner:       can do everything on objects they own
   static createRoles () {
     return new Role({
       name: 'admin',
@@ -39,7 +44,7 @@ class Setup {
       return new Role({
         name: 'contributor',
         resources: ['/api/collection/fragments'],
-        permissions: 'create'
+        permissions: ['create', 'read']
       }).save()
     }).then(function () {
       return new Role({

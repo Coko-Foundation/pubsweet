@@ -27,9 +27,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 app.use(passport.initialize())
 
 // Passport strategies
-
-const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
+const AnonymousStrategy = require('passport-anonymous').Strategy
+const LocalStrategy = require('passport-local').Strategy
 
 passport.use('bearer', new BearerStrategy(
   function (token, done) {
@@ -43,7 +43,8 @@ passport.use('bearer', new BearerStrategy(
   }
 ))
 
-// Passport.js configuration (auth)
+passport.use(new AnonymousStrategy())
+
 passport.use('local', new LocalStrategy(function (username, password, done) {
   console.log('User finding', username, password)
   User.findByUsername(username).then(function (user) {

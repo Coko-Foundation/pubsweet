@@ -4,13 +4,13 @@ PouchDB.plugin(require('pouchdb-find'))
 const _ = require('lodash')
 const Collection = require('../models/collection')
 const Fragment = require('../models/fragment')
-const AuthorizationError = require('../errors/AuthorizationError')
 const Authorize = require('../models/authorize')
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 
 const authBearer = passport.authenticate('bearer', { session: false })
+const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
 // Create collection
 api.post('/collection', authBearer, function (req, res) {
@@ -83,15 +83,26 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 })
 
 // Get all fragments
-api.get('/collection/fragments', function (req, res) {
-  Collection.get().then(function (collection) {
-    return collection.getFragments()
-  }).then(function (fragments) {
-    return res.status(200).json(fragments)
-  }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
-  })
+api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
+  if (req.user) {
+    return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+      return Collection.get()
+    }).then(function (collection) {
+      return collection.getFragments()
+    }).then(function (fragments) {
+      return res.status(200).json(fragments)
+    }).catch(function (err) {
+      next(err)
+    })
+  } else {
+    return Collection.get().then(function (collection) {
+      return collection.getFragments({filter: 'published'})
+    }).then(function (fragments) {
+      return res.status(200).json(fragments)
+    }).catch(function (err) {
+      next(err)
+    })
+  }
 })
 
 api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
@@ -106,7 +117,7 @@ api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
 
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.path, 'update').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
@@ -121,7 +132,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 
 // Delete a fragment
 api.delete('/collection/fragments/:id', function (req, res, next) {
-  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.path, 'delete').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.delete()
