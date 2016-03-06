@@ -31,16 +31,14 @@ $ NODE_ENV=dev node api/setup.js
 
 Point your browser to: http://localhost:3000/admin/manager and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
-# Roadmap (2nd of February, 2016)
+# Roadmap (6th of March, 2016)
 
-Until 5th of February 2016:
+Until 13th of March 2016:
 
-- Reading the (JWT) token's signed values in the API (username)
-- Getting all of the user's roles via username
-- Determining read, write, create and destroy permissions based on found roles
-- Linking helper on Collection/Fragment/User models to permissions (e.g. user.save())
-- Executing an action, or returning an error if permissions are lacking
-- Simple UI for role management for the admin role (User dashboard)
-  - Assign read/write/create/destroy permissions to collections, fragments and users
+- Public API endpoints (Bearer authentication with anonymous/public fallback that filters objects based on a boolean value such as {published: true}).
+- Public UI flow (visit blog, read blogposts)
+- Contributor role UI flow (signup as a new user, be given a contributor role by an admin, be able to create a blog post)
 
-Rest of February: Collaboration, multiple concurrent users.
+Until 20th of March 2016:
+
+- Collaboration hub in collaboration with Substance.
