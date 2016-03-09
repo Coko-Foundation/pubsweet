@@ -34,25 +34,54 @@ describe('authenticated api', function () {
     })
   })
 
-  it('creates a fragment in the protected collection if authenticated', function () {
-    return request(api)
-      .post('/api/users/authenticate')
-      .send({
-        username: userFixture.username,
-        password: userFixture.password
-      })
-      .expect(201)
-      .then(function (res) {
-        var token = res.body.token
-        return request(api)
-          .post('/api/collection/fragments')
-          .send(fragmentFixture)
-          .set('Authorization', 'Bearer ' + token)
-          .expect(201)
-      }).then(function (res) {
-        expect(res.body.source).to.eql(fragmentFixture.source)
-        fragmentId = res.body._id
-      })
+  describe('admin user', function () {
+    var fragment
+
+    before(function () {
+      const Fragment = require('../models/fragment')
+      fragment = new Fragment(fragmentFixture)
+      fragment.owner = otherUserFixture.username
+      return fragment.save()
+    })
+
+    it('creates a fragment in the protected collection if authenticated', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: userFixture.username,
+          password: userFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .post('/api/collection/fragments')
+            .send(fragmentFixture)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(201)
+        }).then(function (res) {
+          expect(res.body.source).to.eql(fragmentFixture.source)
+          fragmentId = res.body._id
+        })
+    })
+
+    it('updates a fragment owned by someone else', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: userFixture.username,
+          password: userFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .put('/api/collection/fragments/' + fragment._id)
+            .send(updatedFragmentFixture)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+        })
+    })
   })
 
   it('fails to create a fragment in a protected collection if authenticated as user without permissions', function () {
