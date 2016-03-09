@@ -194,9 +194,9 @@ export { getUsers, updateUser } from './users'
 // It gets collections, fragments and user data (via token).
 export function hydrate () {
   return dispatch => {
+    dispatch(getUser())
     dispatch(getCollection())
     dispatch(getFragments())
-    dispatch(getUser())
   }
 }
 

@@ -18,15 +18,17 @@ class Collection extends Model {
       return db.get(id)
     })
 
-    if (options.filter) {
-      return Promise.all(fragments).then(function (fragments) {
+    return Promise.all(fragments).then(function (fragments) {
+      if (options.filter) {
         return fragments.filter(function (fragment) {
           if (fragment[options.filter] === true) {
             return fragment
           }
         })
-      })
-    }
+      } else {
+        return fragments
+      }
+    })
   }
 
   addFragment (fragment) {

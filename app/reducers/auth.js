@@ -3,7 +3,7 @@ const localStorage = window.localStorage || undefined
 
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST,
-  GET_USER_SUCCESS, GET_USER_FAILURE
+  GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
 } from '../actions/types'
 
 // The auth reducer. The starting state sets authentication
@@ -11,9 +11,18 @@ import {
 // we would also want a util to check if the token is expired.
 export default function auth (state = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('token') !== null
+  roles: [],
+  isAuthenticated: localStorage.getItem('token') !== null,
+  token: localStorage.getItem('token')
 }, action) {
   switch (action.type) {
+    case SIGNUP_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: true,
+        roles: [],
+        username: action.username
+      })
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
@@ -25,6 +34,7 @@ export default function auth (state = {
         isFetching: false,
         isAuthenticated: true,
         token: action.token,
+        roles: action.roles,
         errorMessage: ''
       })
     case LOGIN_FAILURE:
@@ -48,7 +58,8 @@ export default function auth (state = {
         isFetching: false,
         isAuthenticated: true,
         username: action.username,
-        token: action.token
+        token: action.token,
+        roles: action.roles
       })
     case GET_USER_FAILURE:
       return Object.assign({}, state, {

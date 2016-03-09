@@ -84,8 +84,9 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 
 // Get all fragments
 api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
+  console.log('HERE BE USER', req.user)
   if (req.user) {
-    return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+    return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
       return Collection.get()
     }).then(function (collection) {
       return collection.getFragments()
@@ -95,6 +96,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
       next(err)
     })
   } else {
+    console.log('Falling back to anonymous')
     return Collection.get().then(function (collection) {
       return collection.getFragments({filter: 'published'})
     }).then(function (fragments) {
@@ -106,7 +108,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
 })
 
 api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.path, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (result) {
     return res.status(200).json(result)
@@ -117,7 +119,7 @@ api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
 
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.path, 'update').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'update').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
@@ -132,7 +134,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 
 // Delete a fragment
 api.delete('/collection/fragments/:id', function (req, res, next) {
-  return Authorize.it(req.user, req.path, 'delete').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.delete()

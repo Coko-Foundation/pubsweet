@@ -19,6 +19,12 @@ export function requireAuthentication (Component) {
         this.props
           .dispatch(pushState(null, `/login?next=${redirectAfterLogin}`))
       }
+
+      if (this.props.roles.indexOf('admin')) {
+        console.log(this)
+      } else if (this.props.roles.indexOf('contributor')) {
+        console.log(this)
+      }
     }
 
     render () {
@@ -37,13 +43,15 @@ export function requireAuthentication (Component) {
     dispatch: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     location: PropTypes.object,
-    username: PropTypes.string
+    username: PropTypes.string,
+    roles: PropTypes.array
   }
 
   const mapStateToProps = (state) => ({
     token: state.auth.token,
     username: state.auth.username,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    roles: state.auth.roles
   })
 
   return connect(mapStateToProps)(AuthenticatedComponent)

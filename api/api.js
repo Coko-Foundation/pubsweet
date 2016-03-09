@@ -35,7 +35,7 @@ passport.use('bearer', new BearerStrategy(
   function (token, done) {
     jwt.verify(token, config.secret, function (err, decoded) {
       if (!err) {
-        return done(null, decoded.username)
+        return done(null, decoded.username, {id: decoded.id})
       } else {
         return done(null)
       }
@@ -43,7 +43,7 @@ passport.use('bearer', new BearerStrategy(
   }
 ))
 
-passport.use(new AnonymousStrategy())
+passport.use('anonymous', new AnonymousStrategy())
 
 passport.use('local', new LocalStrategy(function (username, password, done) {
   console.log('User finding', username, password)
@@ -57,7 +57,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
-    return done(null, user)
+    return done(null, user, {id: user._id})
   }).catch(function (err) {
     console.log('User not found', err)
     if (err) { return done(err) }
