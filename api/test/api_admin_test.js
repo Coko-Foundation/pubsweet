@@ -12,7 +12,7 @@ const Fragment = require('../models/fragment')
 const User = require('../models/user')
 var api = require('../api')
 
-describe.only('admin api', function () {
+describe('admin api', function () {
   var otherUser
   var fragment
 

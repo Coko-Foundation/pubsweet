@@ -2,35 +2,51 @@ import React, { PropTypes } from 'react'
 import {connect} from 'react-redux'
 import {pushState} from 'redux-router'
 
+import * as Actions from '../actions'
+import { bindActionCreators } from 'redux'
+
+import WaitingRoom from '../components/WaitingRoom'
+// import Admin from './containers/Admin'
+// import Contributor from './containers/Contributor'
+
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {
 
     componentWillMount () {
-      this.checkAuth(this.props.isAuthenticated)
+      this.props.actions.hydrate().then(() => {
+        this.checkAuth(this.props.auth.isAuthenticated)
+      })
     }
 
     componentWillReceiveProps (nextProps) {
-      this.checkAuth(nextProps.isAuthenticated)
+      // this.checkAuth(nextProps.isAuthenticated)
     }
 
     checkAuth (isAuthenticated) {
       if (!isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname
-        this.props
-          .dispatch(pushState(null, `/login?next=${redirectAfterLogin}`))
+        this.props.pushState(null, `/login?next=${redirectAfterLogin}`)
       }
 
-      if (this.props.roles.indexOf('admin')) {
-        console.log(this)
-      } else if (this.props.roles.indexOf('contributor')) {
-        console.log(this)
+      // Ugh, hacky hacky. So hacky.
+      if (this.props.roles.indexOf('admin') !== -1 &&
+        this.props.location.pathname.substring(0, 6) !== '/admin') {
+        console.log('Admin logging in, redirecting to the admin pages')
+        this.props.pushState(null, '/admin/manager')
+      } else if (this.props.roles.indexOf('contributor') !== -1 &&
+        this.props.location.pathname.substring(0, 12) !== '/contributor') {
+        console.log('Contributor logging in, redirecting to the contributor pages')
+        this.props.pushState(null, '/contributor/manager')
+      } else if (this.props.roles.length === 0) {
+        console.log('No suitable role found, showing the waiting room')
+        Component = WaitingRoom
       }
     }
 
     render () {
       return (
         <div>
-          {this.props.isAuthenticated === true
+          {this.props.auth.isAuthenticated === true
               ? <Component {...this.props}/>
               : null
           }
@@ -40,19 +56,27 @@ export function requireAuthentication (Component) {
   }
 
   AuthenticatedComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
     location: PropTypes.object,
     username: PropTypes.string,
-    roles: PropTypes.array
+    roles: PropTypes.array,
+    actions: React.PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    pushState: PropTypes.func.isRequired
   }
 
-  const mapStateToProps = (state) => ({
-    token: state.auth.token,
-    username: state.auth.username,
-    isAuthenticated: state.auth.isAuthenticated,
-    roles: state.auth.roles
-  })
+  function mapState (state) {
+    return {
+      roles: state.auth.roles,
+      auth: state.auth
+    }
+  }
 
-  return connect(mapStateToProps)(AuthenticatedComponent)
+  function mapDispatch (dispatch) {
+    return {
+      pushState: bindActionCreators(pushState, dispatch),
+      actions: bindActionCreators(Actions, dispatch)
+    }
+  }
+
+  return connect(mapState, mapDispatch)(AuthenticatedComponent)
 }

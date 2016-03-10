@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-// Admin
 import { requireAuthentication } from './containers/AuthenticatedComponent'
+
+// Admin
 import Admin from './containers/Admin'
 import About from './components/Admin/About'
 import BlogManager from './containers/Admin/BlogManager'

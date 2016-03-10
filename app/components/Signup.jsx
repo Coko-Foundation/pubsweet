@@ -11,6 +11,7 @@ class Signup extends Component {
       <div className='bootstrap'>
         <Row>
           <Col xs={12} md={6} mdOffset={3}>
+            <h1>Signup</h1>
             <form>
               <div className='form-group'>
                 <label htmlFor='username'>Username</label>
