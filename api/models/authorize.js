@@ -17,6 +17,7 @@ class Authorize {
     console.log('_global', username, resource, action)
     return acl.isAllowed(username, resource, action).then(function (res) {
       if (res) {
+        console.log(username, 'is allowed to', action, resource)
         return true
       } else {
         throw new AuthorizationError(username +
@@ -80,8 +81,11 @@ class Authorize {
   // Checks for permissions and resolves with the thing asked about,
   // if it makes sense (for reading, updating, deleting single objects)
   static it (username, thing, action) {
-    console.log('Finding out if', username, 'can', action, thing)
+    if (!username) {
+      return Promise.reject(new AuthorizationError())
+    }
 
+    console.log('Finding out if', username, 'can', action, thing)
     // Debug
     // acl.allowedPermissions(username, thing, function (err, permissions) {
     //   if (err) {

@@ -44,13 +44,13 @@ class Setup {
       return new Role({
         name: 'contributor',
         resources: ['/api/collection/fragments'],
-        permissions: ['create', 'read']
+        permissions: ['create', 'read:public']
       }).save()
     }).then(function () {
       return new Role({
         name: 'reader',
         resources: ['/api/collection/fragments'],
-        permissions: 'read'
+        permissions: 'read:public'
       })
     })
   }

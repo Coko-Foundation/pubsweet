@@ -83,37 +83,56 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 })
 
 // Get all fragments
-api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
-  console.log('HERE BE USER', req.user)
-  if (req.user) {
-    return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
-      return Collection.get()
-    }).then(function (collection) {
-      return collection.getFragments()
-    }).then(function (fragments) {
-      return res.status(200).json(fragments)
-    }).catch(function (err) {
-      next(err)
-    })
-  } else {
-    console.log('Falling back to anonymous')
-    return Collection.get().then(function (collection) {
-      return collection.getFragments({filter: 'published'})
-    }).then(function (fragments) {
-      return res.status(200).json(fragments)
-    }).catch(function (err) {
-      next(err)
-    })
-  }
-})
 
-api.get('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
-    return Fragment.find(req.params.id)
-  }).then(function (result) {
-    return res.status(200).json(result)
+api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
+  var fallback = Collection.get().then(function (collection) {
+    console.log('Falling back to anonymous')
+    return collection.getFragments({filter: 'published'})
+  }).then(function (fragments) {
+    return res.status(200).json(fragments)
   }).catch(function (err) {
     next(err)
+  })
+
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+    return Collection.get()
+  }).then(function (collection) {
+    return collection.getFragments()
+  }).then(function (fragments) {
+    return res.status(200).json(fragments)
+  }).catch(function (err) {
+    if (err.name === 'AuthorizationError') {
+      console.error(err)
+      return fallback
+    } else {
+      next(err)
+    }
+  })
+})
+
+api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, next) {
+  var fallback = Fragment.find(req.params.id).then(function (fragment) {
+    if (fragment.published) {
+      return fragment
+    } else {
+      throw new Error('Not Found')
+    }
+  })
+
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+    return Fragment.find(req.params.id)
+  }).then(function (fragment) {
+    return res.status(200).json(fragment)
+  }).catch(function (err) {
+    if (err.name === 'AuthorizationError') {
+      fallback.then(function (fragment) {
+        return res.status(200).json(fragment)
+      }).catch(function (err) {
+        return res.status(404).json(err.message)
+      })
+    } else {
+      next(err)
+    }
   })
 })
 

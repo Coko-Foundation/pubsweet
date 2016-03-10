@@ -69,13 +69,19 @@ describe('unauthenticated/public api', function () {
       return fragment.delete()
     })
 
-    it('can not read a fragment in a protected collection if it is not published', function () {
+    it('can not list unpublished fragments in a protected collection', function () {
       return request(api)
         .get('/api/collection/fragments')
         .expect(200)
         .then(function (res) {
           expect(res.body).to.eql([])
         })
+    })
+
+    it('can not find a fragment in a protected collection', function () {
+      return request(api)
+        .get('/api/collection/fragments/' + fragment._id)
+        .expect(404)
     })
   })
 })
