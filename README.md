@@ -31,6 +31,49 @@ $ NODE_ENV=dev node api/setup.js
 
 Point your browser to: http://localhost:3000/admin/manager and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
+# Production installation
+
+These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.
+
+First [install node](https://github.com/nodesource/distributions#debinstall)
+
+```bash
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+Then clone the repository:
+
+```bash
+git clone https://gitlab.coko.foundation/pubsweet/core.git
+```
+
+Install the required npm modules:
+
+```bash
+npm install
+```
+
+Build the production JS:
+
+```bash
+npm run build
+```
+
+Configure your admin account:
+
+```bash
+npm run setup
+```
+
+Start the server:
+
+```bash
+npm run start
+```
+
+The application should now be accessible through port 80 on your server.
+
 # Roadmap (6th of March, 2016)
 
 Until 13th of March 2016:
