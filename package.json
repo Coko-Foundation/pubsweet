@@ -54,7 +54,7 @@
     "pouchdb": "^5.2.1",
     "pouchdb-find": "^0.9.0",
     "prompt": "^0.2.14",
-    "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#e50f66a8",
+    "pubsweet-substance-components": "git+https://gitlab.coko.foundation/pubsweet/substance-components.git#67eca97",
     "react": "^0.14.7",
     "react-bootstrap": "^0.25.100-react-pre.1",
     "react-dom": "^0.14.0-rc1",

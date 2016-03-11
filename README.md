@@ -35,7 +35,7 @@ Point your browser to: http://localhost:3000/admin/manager and login with the ch
 
 These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.
 
-First [install node](https://github.com/nodesource/distributions#debinstall)
+First [install node 4.x](https://github.com/nodesource/distributions#debinstall)
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -60,7 +60,7 @@ Build the production JS:
 npm run build
 ```
 
-Configure your admin account:
+Configure your initial admin account:
 
 ```bash
 npm run setup

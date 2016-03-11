@@ -37,18 +37,15 @@ export function requireAuthentication (Component) {
         this.props.location.pathname.substring(0, 12) !== '/contributor') {
         console.log('Contributor logging in, redirecting to the contributor pages')
         this.props.pushState(null, '/contributor/manager')
-      } else if (this.props.roles.length === 0) {
-        console.log('No suitable role found, showing the waiting room')
-        Component = WaitingRoom
       }
     }
 
     render () {
       return (
         <div>
-          {this.props.auth.isAuthenticated === true
+          {this.props.auth.isAuthenticated === true && this.props.roles.length !== 0
               ? <Component {...this.props}/>
-              : null
+              : WaitingRoom
           }
         </div>
       )
