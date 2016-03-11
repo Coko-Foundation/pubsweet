@@ -8,13 +8,27 @@ class Collection extends Model {
     this.title = properties.title
   }
 
-  getFragments () {
-    console.log('fragments', fragments)
+  // Gets fragments in a collection, supports filtering by boolean properties
+  // e.g. collection.getFragments({filter: 'published'})
+  getFragments (options) {
+    options = options || {}
+
+    if (!this.fragments) { return [] }
     var fragments = this.fragments.map(function (id) {
       return db.get(id)
     })
-    console.log('promises', fragments)
-    return Promise.all(fragments)
+
+    return Promise.all(fragments).then(function (fragments) {
+      if (options.filter) {
+        return fragments.filter(function (fragment) {
+          if (fragment[options.filter] === true) {
+            return fragment
+          }
+        })
+      } else {
+        return fragments
+      }
+    })
   }
 
   addFragment (fragment) {

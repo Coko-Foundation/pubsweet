@@ -27,15 +27,15 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 app.use(passport.initialize())
 
 // Passport strategies
-
-const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
+const AnonymousStrategy = require('passport-anonymous').Strategy
+const LocalStrategy = require('passport-local').Strategy
 
 passport.use('bearer', new BearerStrategy(
   function (token, done) {
     jwt.verify(token, config.secret, function (err, decoded) {
       if (!err) {
-        return done(null, decoded.username)
+        return done(null, decoded.username, {id: decoded.id})
       } else {
         return done(null)
       }
@@ -43,7 +43,8 @@ passport.use('bearer', new BearerStrategy(
   }
 ))
 
-// Passport.js configuration (auth)
+passport.use('anonymous', new AnonymousStrategy())
+
 passport.use('local', new LocalStrategy(function (username, password, done) {
   console.log('User finding', username, password)
   User.findByUsername(username).then(function (user) {
@@ -56,7 +57,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
-    return done(null, user)
+    return done(null, user, {id: user._id})
   }).catch(function (err) {
     console.log('User not found', err)
     if (err) { return done(err) }

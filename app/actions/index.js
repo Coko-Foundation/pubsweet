@@ -42,6 +42,13 @@ function getFragmentsSuccess (fragments) {
   }
 }
 
+function getFragmentsFailure (error) {
+  return {
+    type: T.GET_FRAGMENTS_FAILURE,
+    error: error
+  }
+}
+
 export function getFragments () {
   return (dispatch, getState) => {
     dispatch(getFragmentsRequest())
@@ -51,15 +58,19 @@ export function getFragments () {
       headers: {
         'Authorization': 'Bearer ' + token
       }
-    }).then(response => {
+    }).then(response =>
+      response.json().then(fragments => ({ fragments, response }))
+    ).then(({ fragments, response }) => {
       if (response.ok) {
-        return response.json()
+        return dispatch(getFragmentsSuccess(fragments))
       } else {
         return Promise.reject(response)
       }
     })
-    .then(fragments => dispatch(getFragmentsSuccess(fragments)))
-    .catch(err => console.log('Error', err))
+    .catch(err => {
+      dispatch(getFragmentsFailure(err))
+      console.log('Error', err)
+    })
   }
 }
 
@@ -193,10 +204,10 @@ export { getUsers, updateUser } from './users'
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
 export function hydrate () {
-  return dispatch => {
-    dispatch(getCollection())
+  return dispatch => Promise.all([
+    dispatch(getUser()),
+    dispatch(getCollection()),
     dispatch(getFragments())
-    dispatch(getUser())
-  }
+  ])
 }
 

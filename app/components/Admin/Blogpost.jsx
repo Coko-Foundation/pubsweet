@@ -28,13 +28,13 @@ export default class Blogpost extends React.Component {
   _onPublish () {
     this.props.update(Object.assign(this.props.blogpost, {
       published_at: new Date(),
-      status: 'published'
+      published: true
     }))
   }
 
   _onUnpublish () {
     this.props.update(Object.assign(this.props.blogpost, {
-      status: 'unpublished'
+      published: false
     }))
   }
 
@@ -59,7 +59,7 @@ export default class Blogpost extends React.Component {
     }
 
     var changePublished
-    if (blogpost.status === 'unpublished') {
+    if (!blogpost.published) {
       changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' onClick={this._onPublish}>
           <i className='fa fa-chain'></i>
         </Button>
@@ -88,7 +88,7 @@ export default class Blogpost extends React.Component {
           {blogpost.author}
         </td>
         <td>
-          {blogpost.published_at} ({blogpost.status})
+          {blogpost.published_at} ({blogpost.published ? 'published' : 'unpublished'})
         </td>
         <td>
           <LinkContainer to={`/admin/editor/${blogpost._id}`}>

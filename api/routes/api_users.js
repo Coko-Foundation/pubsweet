@@ -18,19 +18,29 @@ users.use('/', roles)
 function createToken (user) {
   console.log('Creating token', user)
   return jwt.sign(
-    { username: user.username },
+    {
+      username: user.username,
+      id: user._id
+    },
     config.secret,
     { expiresIn: 5 * 3600 })
 }
 
 // Token issuing
 users.post('/authenticate', authLocal, function (req, res) {
-  return res.status(201).json({ token: createToken(req.user) })
+  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
+    return res.status(201).json(Object.assign(
+      { token: createToken(req.user) },
+      user
+    ))
+  })
 })
 
 // Token verify
 users.get('/authenticate', authBearer, function (req, res) {
-  return res.status(200).json({ username: req.user })
+  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
+    return res.status(200).json(user)
+  })
 })
 
 // Create user
