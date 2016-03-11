@@ -19,7 +19,7 @@ export function requireAuthentication (Component) {
     }
 
     componentWillReceiveProps (nextProps) {
-      // this.checkAuth(nextProps.isAuthenticated)
+      this.checkAuth(nextProps.auth.isAuthenticated)
     }
 
     checkAuth (isAuthenticated) {

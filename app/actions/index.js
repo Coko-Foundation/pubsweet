@@ -58,15 +58,15 @@ export function getFragments () {
       headers: {
         'Authorization': 'Bearer ' + token
       }
-    }).then(response => response.json())
-    .then(response => {
+    }).then(response =>
+      response.json().then(fragments => ({ fragments, response }))
+    ).then(({ fragments, response }) => {
       if (response.ok) {
-        return response
+        return dispatch(getFragmentsSuccess(fragments))
       } else {
         return Promise.reject(response)
       }
     })
-    .then(fragments => dispatch(getFragmentsSuccess(fragments)))
     .catch(err => {
       dispatch(getFragmentsFailure(err))
       console.log('Error', err)

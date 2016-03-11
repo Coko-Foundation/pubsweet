@@ -88,8 +88,6 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
   var fallback = Collection.get().then(function (collection) {
     console.log('Falling back to anonymous')
     return collection.getFragments({filter: 'published'})
-  }).then(function (fragments) {
-    return res.status(200).json(fragments)
   }).catch(function (err) {
     next(err)
   })
@@ -103,7 +101,9 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
   }).catch(function (err) {
     if (err.name === 'AuthorizationError') {
       console.error(err)
-      return fallback
+      return fallback.then(function (fragments) {
+        res.status(200).json(fragments)
+      })
     } else {
       next(err)
     }
