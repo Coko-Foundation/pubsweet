@@ -1,24 +1,8 @@
 var api = require('../api/api')
 var http = require('http')
 
-function normalizePort (val) {
-  var port = parseInt(val, 10)
-
-  if (isNaN(port)) {
-    // named pipe
-    return val
-  }
-
-  if (port >= 0) {
-    // port number
-    return port
-  }
-
-  return false
-}
-
-// Get port from environment and store in Express.
-var port = normalizePort(process.env.PORT || '3000')
+// Get port from environment or default to 3000
+var port = process.env.PORT || '3000'
 api.set('port', port)
 
 var server = http.createServer(api)
@@ -32,10 +16,7 @@ function onError (error) {
 
 function onListening () {
   var addr = server.address()
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port
-  console.log('PubSweet is listening on ' + bind)
+  console.log('PubSweet is listening on ' + addr.port)
 }
 
 // We only run this workflow when not in Production && require a hot-loader

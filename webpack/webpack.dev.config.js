@@ -10,7 +10,7 @@ var publicPath = 'http://localhost:3001/assets/'
 var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
-    loaders: ['react-hot', 'babel-loader?stage=0'],
+    loaders: ['react-hot', 'babel-loader'],
     include: [
       path.join(__dirname, '..', 'app'),
       path.join(__dirname, '..', 'routes'),
@@ -35,7 +35,6 @@ var commonLoaders = [
     test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
     loader: 'url?prefix=font/&limit=10000'
   },
-  // { test: /\.(jpg|woff|woff2|eot|ttf|svg)$/, loader: 'file-loader' },
   { test: /\.html$/, loader: 'html-loader' },
   { test: /\.json$/, loader: 'json-loader' }
 ]
@@ -47,9 +46,7 @@ module.exports = [
     target: 'web',
     context: path.join(__dirname, '..', 'app'),
     entry: {
-      app: ['webpack-dev-server/client?http://localhost:3001',
-       'webpack/hot/dev-server',
-        './app' ]
+      app: [ './app' ]
     },
     output: {
       // The output directory as absolute path
