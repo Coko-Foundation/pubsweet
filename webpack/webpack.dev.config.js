@@ -46,7 +46,8 @@ module.exports = [
     target: 'web',
     context: path.join(__dirname, '..', 'app'),
     entry: {
-      app: [ './app' ]
+      app: [ 'webpack-dev-server/client?http://localhost:3001',
+      'webpack/hot/only-dev-server', './app' ]
     },
     output: {
       // The output directory as absolute path

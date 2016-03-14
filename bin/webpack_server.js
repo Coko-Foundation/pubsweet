@@ -3,24 +3,15 @@
  http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup
 */
 var webpack = require('webpack')
-var webpackDevServer = require('webpack-dev-server')
-var path = require('path')
-var fs = require('fs')
+var WebpackDevServer = require('webpack-dev-server')
 
 var webpackConfig = require('../webpack/webpack.dev.config.js')
 
 module.exports = function () {
-  // Fire up webpack and pass in the configuration file we created
-  var compiler = webpack(webpackConfig)
-
-  var bundler = new webpackDevServer(compiler, {
+  var server = new WebpackDevServer(webpack(webpackConfig), {
     // Tell webpack to serve our bundled application from the build path. When proxying:
     // http://localhost:3000/assets -> http://localhost:3001/assets
     publicPath: '/assets/',
-    // Enable special support for Hot Module Replacement
-    // Page is no longer updated, but a 'webpackHotUpdate' message is send to the content
-    // Use 'webpack/hot/dev-server' as additional module in your entry point
-    // Note: this does _not_ add the `HotModuleReplacementPlugin` like the CLI option does.
     hot: true,
 
     headers: {
@@ -42,9 +33,7 @@ module.exports = function () {
     historyApiFallback: true
   })
 
-  // We fire up the development server and give notice in the terminal
-  // that we are starting the initial bundle
-  bundler.listen(3001, 'localhost', function () {
+  server.listen(3001, 'localhost', function () {
     console.log('Bundling project, please wait...')
   })
 }
