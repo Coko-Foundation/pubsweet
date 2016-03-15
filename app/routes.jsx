@@ -7,7 +7,7 @@ import { requireAuthentication } from './containers/AuthenticatedComponent'
 import Admin from './containers/Admin'
 import About from './components/Admin/About'
 import BlogManager from './containers/Admin/BlogManager'
-import Editor from './containers/Admin/EditorWrapper'
+import Editor from './containers/Admin/SubstanceEditorWrapper'
 import UsersManager from './containers/Admin/UsersManager'
 
 // Contributor

@@ -13,7 +13,8 @@ import {
   UPDATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_REQUEST,
   // DELETE_FRAGMENT_SUCCESS,
-  RESET_ERROR_MESSAGE
+  RESET_ERROR_MESSAGE,
+  GET_SUBSTANCE_DOCUMENT_SUCCESS
 } from '../actions/types'
 
 import auth from './auth'
@@ -85,13 +86,22 @@ function fragments (state = initialFragments, action) {
   return state
 }
 
+function substance (state = {}, action) {
+  switch (action.type) {
+    case GET_SUBSTANCE_DOCUMENT_SUCCESS:
+      return action.document
+  }
+  return state
+}
+
 const rootReducer = combineReducers({
   collections,
   fragments,
   users,
   error,
   router,
-  auth
+  auth,
+  substance
 })
 
 export default rootReducer

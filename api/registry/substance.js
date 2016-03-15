@@ -39,12 +39,12 @@ substance.post('/documents', function (req, res) {
 })
 
 substance.get('/documents/:id', function (req, res, next) {
-  console.log('hi')
   documentEngine.getDocument({documentId: req.params.id}, function (err, result) {
     if (err) {
       return next(err)
     }
 
+    result.docId = req.params.id
     return res.json(result)
   })
 })
