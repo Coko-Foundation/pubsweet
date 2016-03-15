@@ -12,12 +12,12 @@ module.exports = function () {
     // Tell webpack to serve our bundled application from the build path. When proxying:
     // http://localhost:3000/assets -> http://localhost:3001/assets
     publicPath: '/assets/',
-    hot: true,
 
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3000',
       'Access-Control-Allow-Headers': 'X-Requested-With'
     },
+
     stats: {
       assets: true,
       colors: true,
