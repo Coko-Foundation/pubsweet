@@ -1,6 +1,7 @@
 var React = require('react');
 var LensWriter = require('lens/LensWriter');
 var Component = require('substance/ui/Component');
+var DocumentSession = require('substance/model/DocumentSession');
 var $$ = Component.$$;
 var LensArticleExporter = require('lens/model/LensArticleExporter');
 var LensArticleImporter = require('lens/model/LensArticleImporter');
@@ -36,8 +37,10 @@ var ReactLensWriter = React.createClass({
   // New props arrived, update the editor
   componentDidUpdate: function() {
     var doc = this.createDoc(this.props.content);
+    var documentSession = new DocumentSession(doc);
+
     this.writer.extendProps({
-      doc: doc
+      documentSession: documentSession
     });
   },
 
@@ -49,9 +52,10 @@ var ReactLensWriter = React.createClass({
   componentDidMount: function() {
     var el = React.findDOMNode(this);
     var doc = this.createDoc(this.props.content);
+    var documentSession = new DocumentSession(doc);
 
     this.writer = Component.mount(LensWriter, {
-      doc: doc,
+      documentSession: documentSession,
       onSave: this._onSave,
       onUploadFile: this._onUploadFile
     }, el);
