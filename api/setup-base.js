@@ -1,5 +1,7 @@
 'use strict'
 
+const config = require('../config')
+
 const Collection = require('./models/collection')
 const User = require('./models/user')
 const Role = require('./models/role')
@@ -28,31 +30,10 @@ class Setup {
     })
   }
 
-  // Creates the basic roles: admin, contributor, reader
-  // Admin:       can do everything
-  // Contributor: can create new fragments and read public objects
-  // Reader:      can read public objects
-
-  // There's an additional implicit role: owner
-  // Owner:       can do everything on objects they own
   static createRoles () {
-    return new Role({
-      name: 'admin',
-      resources: ['/api/users', '/api/collection', '/api/collection/fragments'],
-      permissions: '*'
-    }).save().then(function () {
-      return new Role({
-        name: 'contributor',
-        resources: ['/api/collection/fragments'],
-        permissions: ['create']
-      }).save()
-    }).then(function () {
-      return new Role({
-        name: 'reader',
-        resources: ['/api/collection/fragments'],
-        permissions: []
-      })
-    })
+    return Promise.all(config.roles.map(function (role) {
+      return new Role(role)
+    }))
   }
 }
 
