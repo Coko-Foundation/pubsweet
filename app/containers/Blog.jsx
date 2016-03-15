@@ -6,7 +6,7 @@ import '../scss/main'
 import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
-import BlogpostSummary from 'pubsweet-substance-components/Summary'
+import BlogpostSummary from '../registry/Substance/Summary'
 
 class Blog extends React.Component {
   constructor (props) {

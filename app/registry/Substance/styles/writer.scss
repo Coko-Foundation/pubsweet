@@ -1,0 +1,22 @@
+// .content-tools-component, .le-main, .le-workspace, .lc-writer {
+//   top: 52px;
+// }
+
+// .content-panel-component {
+//   top: 92px;
+// }
+
+// .panel-content-inner {
+//   z-index: 2;
+// }
+
+// .toc-panel-component, .le-resource {
+//   top: 92px;
+// }
+
+$fa-font-path: "~lens/node_modules/font-awesome/fonts";
+@import "~lens/styles/lens-writer.scss";
+
+.sc-controller.sc-lens-writer {
+  top: 52px;
+}

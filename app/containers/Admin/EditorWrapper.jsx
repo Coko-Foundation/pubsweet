@@ -6,8 +6,7 @@ import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 
 // Which editor component to import?
-import Editor from 'pubsweet-substance-components/Writer'
-// import Editor from '../../../node_modules/pubsweet-components/QuillEditor'
+import Editor from '../../registry/Substance/Writer'
 
 export default class EditorWrapper extends React.Component {
   constructor (props) {
