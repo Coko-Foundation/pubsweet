@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup": "NODE_ENV=production node api/setup.js",
+    "setup": "node api/setup.js",
     "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
     "start": "PORT=80 NODE_ENV=production node bin/www",
     "dev": "NODE_ENV=dev LOADER=hot node bin/www",
