@@ -3,22 +3,37 @@ var webpack = require('webpack')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
-var publicPath = 'http://localhost:3001/assets/'
+var publicPath = 'http://localhost:3000/assets/'
 
 // We're including JSX components from our components package,
 // but excluding its node_modules.
 var commonLoaders = [
   {
+    /*
+     * TC39 categorises proposals for babel in 4 stages
+     * Read more http://babeljs.io/docs/usage/experimental/
+     */
     test: /\.js$|\.jsx$/,
-    loaders: ['react-hot', 'babel-loader'],
-    include: [
-      path.join(__dirname, '..', 'app'),
-      path.join(__dirname, '..', 'routes'),
-      path.join(__dirname, '..', 'app.js')
-    ]
-    // exclude: [
-    // ]
+    loader: 'babel',
+    // Reason why we put this here instead of babelrc
+    // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
+    query: {
+      'presets': ['react-hmre', 'es2015', 'react', 'stage-0']
+    },
+    include: path.join(__dirname, '..', 'app'),
+    exclude: path.join(__dirname, '/node_modules/')
   },
+  // {
+  //   test: /\.js$|\.jsx$/,
+  //   loaders: ['react-hot', 'babel-loader'],
+  //   include: [
+  //     path.join(__dirname, '..', 'app'),
+  //     path.join(__dirname, '..', 'routes'),
+  //     path.join(__dirname, '..', 'app.js')
+  //   ]
+  //   // exclude: [
+  //   // ]
+  // },
   { test: /\.png$/, loader: 'url-loader' },
   {
     test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
@@ -37,8 +52,10 @@ module.exports = [
     target: 'web',
     context: path.join(__dirname, '..', 'app'),
     entry: {
-      app: [ 'webpack-dev-server/client?http://localhost:3001',
-      'webpack/hot/only-dev-server', './app' ]
+      app: [
+        './app',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
+      ]
     },
     output: {
       // The output directory as absolute path

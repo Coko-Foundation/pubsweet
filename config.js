@@ -1,4 +1,4 @@
-{
+module.exports = {
   "secret": "EXAMPLEDONTUSE",
   "API_ENDPOINT": "/api",
   // Creates the basic roles: admin, contributor, reader

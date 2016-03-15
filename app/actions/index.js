@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { API_ENDPOINT } from '../../config.json'
+import { API_ENDPOINT } from '../../config.js'
 import * as T from './types'
 
 // Actions on collection
