@@ -81,6 +81,22 @@ export function createFragmentRequest (fragment) {
   }
 }
 
+export function createFragmentSuccess (fragment) {
+  return {
+    type: T.CREATE_FRAGMENT_SUCCESS,
+    fragment: fragment,
+    receivedAt: Date.now()
+  }
+}
+
+export function createFragmentFailure (message) {
+  return {
+    type: T.CREATE_FRAGMENT_FAILURE,
+    isFetching: false,
+    error: message
+  }
+}
+
 export function createFragment (fragment) {
   return (dispatch, getState) => {
     dispatch(createFragmentRequest(fragment))
@@ -98,19 +114,13 @@ export function createFragment (fragment) {
         if (response.ok) {
           return response.json()
         } else {
-          return Promise.reject(response)
+          return response.json().then(response => {
+            dispatch(createFragmentFailure(response.message))
+            throw new Error(response.message)
+          })
         }
       })
-      .then(fragment => dispatch(createFragmentSuccess(fragment)))
-      .catch(err => console.log('Error', err))
-  }
-}
-
-export function createFragmentSuccess (fragment) {
-  return {
-    type: T.CREATE_FRAGMENT_SUCCESS,
-    fragment: fragment,
-    receivedAt: Date.now()
+      .catch(err => console.error(err))
   }
 }
 

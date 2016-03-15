@@ -24,7 +24,7 @@ module.exports = function () {
       version: false,
       hash: false,
       timings: false,
-      chunks: false,
+      chunks: true,
       chunkModules: false
     },
 

@@ -35,7 +35,6 @@ var commonLoaders = [
     test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
     loader: 'url?prefix=font/&limit=10000'
   },
-  // { test: /\.(jpg|woff|woff2|eot|ttf|svg)$/, loader: 'file-loader' },
   { test: /\.html$/, loader: 'html-loader' },
   { test: /\.json$/, loader: 'json-loader' }
 ]

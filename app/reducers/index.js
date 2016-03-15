@@ -8,6 +8,7 @@ import {
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_REQUEST,
   CREATE_FRAGMENT_SUCCESS,
+  CREATE_FRAGMENT_FAILURE,
   UPDATE_FRAGMENT_REQUEST,
   UPDATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_REQUEST,
@@ -24,7 +25,7 @@ const initialCollections = []
 const initialFragments = []
 
 // Updates error message to notify about the failed fetches.
-function errorMessage (state = null, action) {
+function error (state = null, action) {
   const { type, error } = action
 
   if (type === RESET_ERROR_MESSAGE) {
@@ -62,6 +63,9 @@ function fragments (state = initialFragments, action) {
         _rev: action.fragment._rev
       })
       return fragments
+    case CREATE_FRAGMENT_FAILURE:
+      fragments.pop()
+      return fragments
     case UPDATE_FRAGMENT_REQUEST:
       let index = _.findIndex(fragments, function (f) {
         return f._id === action.fragment._id
@@ -85,7 +89,7 @@ const rootReducer = combineReducers({
   collections,
   fragments,
   users,
-  errorMessage,
+  error,
   router,
   auth
 })

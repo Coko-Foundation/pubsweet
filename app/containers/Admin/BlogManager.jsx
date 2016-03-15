@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from 'react-bootstrap'
+import { Grid, Alert } from 'react-bootstrap'
 import BlogpostList from '../../components/Admin/BlogpostList'
 import BlogpostCreator from '../../components/Admin/BlogpostCreator'
 import { bindActionCreators } from 'redux'
@@ -13,10 +13,11 @@ class BlogManager extends React.Component {
   }
 
   render () {
-    const { blog, blogposts, actions } = this.props
+    const { blog, blogposts, actions, error } = this.props
     return (
       <div className='bootstrap'>
         <Grid>
+          { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
           <div blog={blog} className={styles.vote}>
             <BlogpostList
               update={actions.updateFragment}
@@ -33,13 +34,15 @@ class BlogManager extends React.Component {
 BlogManager.propTypes = {
   blog: React.PropTypes.object.isRequired,
   blogposts: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
+  error: React.PropTypes.object
 }
 
 function mapStateToProps (state) {
   return {
     blog: state.collections[0],
-    blogposts: state.fragments
+    blogposts: state.fragments,
+    error: state.error
   }
 }
 
