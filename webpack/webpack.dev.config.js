@@ -14,21 +14,10 @@ var commonLoaders = [
     include: [
       path.join(__dirname, '..', 'app'),
       path.join(__dirname, '..', 'routes'),
-      path.join(__dirname, '..', 'app.js'),
-      path.join(__dirname,
-        '..',
-        'node_modules',
-        'pubsweet-substance-components'
-      )
-    ],
-    exclude: [
-      path.join(__dirname,
-        '..',
-        'node_modules',
-        'pubsweet-substance-components',
-        'node_modules'
-      )
+      path.join(__dirname, '..', 'app.js')
     ]
+    // exclude: [
+    // ]
   },
   { test: /\.png$/, loader: 'url-loader' },
   {
@@ -36,7 +25,9 @@ var commonLoaders = [
     loader: 'url?prefix=font/&limit=10000'
   },
   { test: /\.html$/, loader: 'html-loader' },
-  { test: /\.json$/, loader: 'json-loader' }
+  { test: /\.json$/, loader: 'json-loader' },
+  { test: /\.css$|\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+
 ]
 
 module.exports = [
@@ -64,17 +55,14 @@ module.exports = [
         exclude: /node_modules/,
         loaders: ['eslint-loader']
       }],
-      loaders: commonLoaders.concat([
-          { test: /\.scss$|\.css$/,
-            loader: 'style!css!sass'
-          }
-      ])
+      loaders: commonLoaders
     },
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss']
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()
     ],
     node: {
