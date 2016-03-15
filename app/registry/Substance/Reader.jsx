@@ -1,5 +1,5 @@
 import React from 'react'
-import LensReader from 'lens/ReactLensReader'
+import LensReader from './ReactLensReader'
 
 // Styles
 import './styles/reader.scss'

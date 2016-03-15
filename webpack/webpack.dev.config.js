@@ -52,7 +52,7 @@ module.exports = [
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /coko\/lens/],
         loaders: ['eslint-loader']
       }],
       loaders: commonLoaders

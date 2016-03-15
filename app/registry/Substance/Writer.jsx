@@ -1,5 +1,5 @@
 import React from 'react'
-import LensWriter from 'lens/ReactLensWriter'
+import LensWriter from './ReactLensWriter'
 
 // Styles
 import './styles/writer.scss'
