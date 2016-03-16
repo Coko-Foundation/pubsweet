@@ -15,26 +15,15 @@ var commonLoaders = [
      * Read more http://babeljs.io/docs/usage/experimental/
      */
     test: /\.js$|\.jsx$/,
-    loader: 'happypack/loader',
+    loader: 'babel',
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
-    // query: {
-    //   'presets': ['react-hmre', 'es2015', 'react']
-    // },
+    query: {
+      'presets': ['react-hmre', 'es2015', 'react']
+    },
     include: path.join(__dirname, '..', 'app'),
     exclude: path.join(__dirname, '/node_modules/')
   },
-  // {
-  //   test: /\.js$|\.jsx$/,
-  //   loaders: ['react-hot', 'babel-loader'],
-  //   include: [
-  //     path.join(__dirname, '..', 'app'),
-  //     path.join(__dirname, '..', 'routes'),
-  //     path.join(__dirname, '..', 'app.js')
-  //   ]
-  //   // exclude: [
-  //   // ]
-  // },
   { test: /\.png$/, loader: 'url-loader' },
   {
     test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
@@ -42,7 +31,7 @@ var commonLoaders = [
   },
   { test: /\.html$/, loader: 'html-loader' },
   { test: /\.json$/, loader: 'json-loader' },
-  { test: /\.css$|\.scss$/, loader: 'style-loader!raw-loader!sass-loader' }
+  { test: /\.css$|\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
 
 ]
 
@@ -81,17 +70,7 @@ module.exports = [
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
-      new webpack.NoErrorsPlugin(),
-      new HappyPack({
-        id: 'js',
-        loaders: [
-          {
-            path: path.resolve(__dirname, '..', 'node_modules/babel-loader/index.js'),
-            query: '?presets[]=react-hmre,presets[]=es2015,presets[]=react'
-          }
-        ]
-        // customize as needed, see Configuration below
-      })
+      new webpack.NoErrorsPlugin()
     ],
     node: {
       fs: 'empty'
