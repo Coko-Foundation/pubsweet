@@ -73,7 +73,7 @@
     "script-loader": "^0.6.1",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.12.3",
-    "substance": "github:substance/substance#fcc5dbb5dcadb12aeef8db3ccef5805a2f07bf06",
+    "substance": "github:substance/substance#d5ca2b73841d12fa9a4b2c9b88ad61a162bce13b",
     "supertest-as-promised": "^2.0.2",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14"
