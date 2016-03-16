@@ -4,8 +4,9 @@ const Model = require('./model')
 class Fragment extends Model {
   constructor (properties) {
     super(properties)
-    this.type = 'fragment'
+    this.type = this.type || 'fragment'
     this.title = properties.title
+    debugger
   }
 }
 

@@ -30,7 +30,7 @@ class Writer extends React.Component {
 
     if (this.props.document.data) {
       editor = <LensWriter
-        docId={this.props.document.docId}
+        documentId={this.props.document._id}
         version={this.props.document.version}
         content={this.props.document.data}
         onSave={this.save}

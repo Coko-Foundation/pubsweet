@@ -4,29 +4,21 @@ const substance = express.Router()
 
 const defaultLensArticle = require('lens/model/defaultLensArticle')
 
-const ChangeStore = require('substance/collab/ChangeStore')
-const DocumentStore = require('substance/collab/DocumentStore')
+const ChangeStore = require('./ChangeStore')
+const DocumentStore = require('./DocumentStore')
 const DocumentEngine = require('substance/collab/DocumentEngine')
 
 const CollabServer = require('substance/collab/CollabServer')
 const WebSocketServer = require('ws').Server
 const wss = new WebSocketServer({ port: 8080 })
 
-var store = new DocumentStore().seed({
-  'test-doc': {
-    documentId: 'test-doc',
-    schemaName: 'lens-article',
-    schemaVersion: '3.0.0',
-    version: 1 // document has one change = version 1
-  }
-})
+var documentStore = new DocumentStore()
+var changeStore = new ChangeStore()
 
-var changeStore = new ChangeStore().seed({
-  'test-doc': defaultLensArticle.createChangeset()
-})
+const Fragment = require('../models/Fragment')
 
 var documentEngine = new DocumentEngine({
-  documentStore: store,
+  documentStore: documentStore,
   changeStore: changeStore,
   schemas: {
     'lens-article': {
@@ -47,8 +39,21 @@ var collabServer = new CollabServer({
 })
 collabServer.bind(wss)
 
-substance.post('/documents', function (req, res) {
-
+substance.post('/documents', function (req, res, next) {
+  documentEngine.createDocument({
+    documentId: 'N/A',
+    schemaName: 'lens-article',
+    info: req.body
+  }, function (err, doc) {
+    if (err) { return next(err) }
+    return Fragment.find(doc.documentId).then(function (fragment) {
+      fragment.data = doc.data
+      return fragment.save()
+    }).then(function (fragment) {
+      console.log(fragment)
+      return res.json(fragment)
+    })
+  })
 })
 
 substance.get('/documents/:id', function (req, res, next) {
@@ -56,9 +61,9 @@ substance.get('/documents/:id', function (req, res, next) {
     if (err) {
       return next(err)
     }
-
-    result.docId = req.params.id
-    return res.json(result)
+    return Fragment.find(req.params.id).then(function (fragment) {
+      return res.json(fragment)
+    })
   })
 })
 

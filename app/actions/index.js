@@ -74,23 +74,6 @@ export function getFragments () {
   }
 }
 
-// GET substance document
-export function getSubstanceDocument () {
-  return (dispatch, getState) => {
-    return fetch(API_ENDPOINT + '/substance/documents/test-doc')
-      .then(response => response.json())
-      .then(document => dispatch(getSubstanceDocumentSuccess(document)))
-  }
-}
-
-// GET substance document success
-function getSubstanceDocumentSuccess (document) {
-  return {
-    type: T.GET_SUBSTANCE_DOCUMENT_SUCCESS,
-    document: document
-  }
-}
-
 export function createFragmentRequest (fragment) {
   return {
     type: T.CREATE_FRAGMENT_REQUEST,
@@ -227,6 +210,8 @@ export { loginUser, logoutUser, getUser, signupUser } from './auth'
 
 // Actions for users management
 export { getUsers, updateUser } from './users'
+
+export { createSubstanceDocument, getSubstanceDocument } from './substance'
 
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).

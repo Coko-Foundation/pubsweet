@@ -11,7 +11,8 @@ import Editor from '../../registry/Substance/Writer'
 export default class EditorWrapper extends React.Component {
   constructor (props) {
     super(props)
-    this.props.actions.getSubstanceDocument()
+
+    this.props.actions.getSubstanceDocument(this.props.id)
   }
 
   uploadFile (file, callback) {
@@ -50,12 +51,14 @@ export default class EditorWrapper extends React.Component {
 
 EditorWrapper.propTypes = {
   document: React.PropTypes.object,
-  actions: React.PropTypes.object
+  actions: React.PropTypes.object,
+  id: React.PropTypes.string.isRequired
 }
 
 function mapStateToProps (state) {
   console.log(state)
   return {
+    id: state.router.params.id,
     document: state.substance
   }
 }

@@ -23,7 +23,7 @@ class BlogManager extends React.Component {
               update={actions.updateFragment}
               delete={actions.deleteFragment}
               blogposts={blogposts} />
-            <BlogpostCreator create={actions.createFragment} />
+            <BlogpostCreator create={actions.createSubstanceDocument} />
           </div>
         </Grid>
       </div>

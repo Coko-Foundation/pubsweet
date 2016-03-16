@@ -8,7 +8,7 @@ const collectionFixture = fixtures.collection
 const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
-const Fragment = require('../models/fragment')
+const Fragment = require('../models/Fragment')
 const User = require('../models/user')
 var api = require('../api')
 
@@ -115,7 +115,7 @@ describe('authenticated api', function () {
       var fragment
 
       beforeEach(function () {
-        const Fragment = require('../models/fragment')
+        const Fragment = require('../models/Fragment')
         fragment = new Fragment(fragmentFixture)
         fragment.owner = userFixture.username
         return fragment.save()

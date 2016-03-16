@@ -17,7 +17,7 @@ class Role {
           console.error(err)
           reject(err)
         } else {
-          console.log('Saving', this.type)
+          console.log('Saving', this.type, this.name)
           resolve(this)
         }
       }.bind(this))

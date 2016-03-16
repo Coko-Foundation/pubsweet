@@ -46,7 +46,7 @@ var ReactLensWriter = React.createClass({
       wsUrl: 'ws://localhost:8080'
     })
     var documentSession = new CollabSession(doc, {
-      docId: this.props.docId,
+      docId: this.props.documentId,
       docVersion: this.props.version,
       collabClient: collabClient
     })
@@ -98,7 +98,7 @@ var ReactLensWriter = React.createClass({
 
 ReactLensWriter.propTypes = {
   format: React.PropTypes.string,
-  docId: React.PropTypes.string,
+  documentId: React.PropTypes.string,
   content: React.PropTypes.object,
   version: React.PropTypes.number
 };

@@ -3,7 +3,7 @@ PouchDB.plugin(require('pouchdb-find'))
 
 const _ = require('lodash')
 const Collection = require('../models/collection')
-const Fragment = require('../models/fragment')
+const Fragment = require('../models/Fragment')
 const Authorize = require('../models/authorize')
 const express = require('express')
 const api = express.Router()
