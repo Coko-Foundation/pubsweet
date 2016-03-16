@@ -1,5 +1,5 @@
 import React from 'react'
-// import LensWriter from './ReactLensWriter'
+import LensWriter from './ReactLensWriter'
 
 // Styles
 import './styles/writer.scss'
@@ -25,22 +25,24 @@ class Writer extends React.Component {
   }
 
   render () {
-    // let editor
+    let editor
     // let content
 
-    console.log(this.document)
-
-    //   editor = <LensWriter
-    //     content={content}
-    //     onSave={this.save}
-    //     onUploadFile={this.uploadFile}
-    //   />
-    // } else {
-    //   editor = <p>Loading</p>
-    // }
+    if (this.props.document.data) {
+      editor = <LensWriter
+        docId={this.props.document.docId}
+        version={this.props.document.version}
+        content={this.props.document.data}
+        onSave={this.save}
+        format='json'
+        onUploadFile={this.uploadFile}
+        />
+    } else {
+      editor = <p>Loading</p>
+    }
 
     return (
-      <div>{JSON.stringify(this.props.document)}</div>
+      <div>{editor}</div>
     )
   }
 }

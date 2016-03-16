@@ -55,7 +55,7 @@ module.exports = [
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'inline-source-map',
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
