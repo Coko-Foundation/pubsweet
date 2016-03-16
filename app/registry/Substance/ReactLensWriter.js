@@ -1,7 +1,9 @@
 var React = require('react');
 var LensWriter = require('lens/LensWriter');
 var Component = require('substance/ui/Component');
-var DocumentSession = require('substance/model/DocumentSession');
+var CollabSession = require('substance/collab/CollabSession');
+var CollabClient = require('substance/collab/CollabClient');
+
 var $$ = Component.$$;
 
 // var LensArticleExporter = require('lens/model/LensArticleExporter');
@@ -38,10 +40,22 @@ var ReactLensWriter = React.createClass({
     return xml;
   },
 
+  createDocumentSession: function () {
+    var doc = this.createDoc(this.props.content, this.props.format)
+    var collabClient = new CollabClient({
+      wsUrl: 'ws://localhost:8080'
+    })
+    var documentSession = new CollabSession(doc, {
+      docId: this.props.docId,
+      docVersion: this.props.version,
+      collabClient: collabClient
+    })
+    return documentSession
+  },
+
   // New props arrived, update the editor
   componentDidUpdate: function() {
-    var doc = this.createDoc(this.props.content, this.props.format)
-    var documentSession = new DocumentSession(doc);
+    var documentSession = this.createDocumentSession()
 
     this.writer.extendProps({
       documentSession: documentSession
@@ -62,8 +76,7 @@ var ReactLensWriter = React.createClass({
 
   componentDidMount: function() {
     var el = React.findDOMNode(this);
-    var doc = this.createDoc(this.props.content, this.props.format);
-    var documentSession = new DocumentSession(doc);
+    var documentSession = this.createDocumentSession()
 
     this.writer = Component.mount(LensWriter, {
       documentSession: documentSession,

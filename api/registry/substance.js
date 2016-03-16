@@ -8,7 +8,9 @@ const ChangeStore = require('substance/collab/ChangeStore')
 const DocumentStore = require('substance/collab/DocumentStore')
 const DocumentEngine = require('substance/collab/DocumentEngine')
 
-// global.$ = require('substance/util/jquery')
+const CollabServer = require('substance/collab/CollabServer')
+const WebSocketServer = require('ws').Server
+const wss = new WebSocketServer({ port: 8080 })
 
 var store = new DocumentStore().seed({
   'test-doc': {
@@ -33,6 +35,17 @@ var documentEngine = new DocumentEngine({
       documentFactory: defaultLensArticle
     }
   }})
+
+var collabServer = new CollabServer({
+  documentEngine: documentEngine // ,
+  // authenticate: function (req, cb) {
+
+  // },
+  // enhanceCollaborator: function (req, cb) {
+
+  // }
+})
+collabServer.bind(wss)
 
 substance.post('/documents', function (req, res) {
 

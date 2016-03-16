@@ -1,11 +1,11 @@
-var api = require('../api/api')
-var http = require('http')
-
+const api = require('../api/api')
+const http = require('http')
 // Get port from environment or default to 3000
 var port = process.env.PORT || '3000'
 api.set('port', port)
 
 var server = http.createServer(api)
+
 server.listen(port)
 server.on('error', onError)
 server.on('listening', onListening)

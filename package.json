@@ -76,7 +76,8 @@
     "substance": "github:substance/substance#d5ca2b73841d12fa9a4b2c9b88ad61a162bce13b",
     "supertest-as-promised": "^2.0.2",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "ws": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.3",
