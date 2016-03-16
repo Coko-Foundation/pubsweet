@@ -1,6 +1,5 @@
 var api = require('../api/api')
 var http = require('http')
-var webpack = require('webpack')
 
 // Get port from environment or default to 3000
 var port = process.env.PORT || '3000'
@@ -19,15 +18,3 @@ function onListening () {
   var addr = server.address()
   console.log('PubSweet is listening on ' + addr.port)
 }
-
-if (process.env.NODE_ENV === 'dev') {
-  var config = require('../webpack/webpack.dev.config.js')
-  var compiler = webpack(config)
-  api.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: '/assets/'
-  }))
-
-  api.use(require('webpack-hot-middleware')(compiler))
-}
-

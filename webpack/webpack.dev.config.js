@@ -1,9 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
+var HappyPack = require('happypack')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
-var publicPath = 'http://localhost:3000/assets/'
+var publicPath = '/assets/'
 
 // We're including JSX components from our components package,
 // but excluding its node_modules.
@@ -14,12 +15,12 @@ var commonLoaders = [
      * Read more http://babeljs.io/docs/usage/experimental/
      */
     test: /\.js$|\.jsx$/,
-    loader: 'babel',
+    loader: 'happypack/loader',
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
-    query: {
-      'presets': ['react-hmre', 'es2015', 'react', 'stage-0']
-    },
+    // query: {
+    //   'presets': ['react-hmre', 'es2015', 'react']
+    // },
     include: path.join(__dirname, '..', 'app'),
     exclude: path.join(__dirname, '/node_modules/')
   },
@@ -41,7 +42,7 @@ var commonLoaders = [
   },
   { test: /\.html$/, loader: 'html-loader' },
   { test: /\.json$/, loader: 'json-loader' },
-  { test: /\.css$|\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+  { test: /\.css$|\.scss$/, loader: 'style-loader!raw-loader!sass-loader' }
 
 ]
 
@@ -65,11 +66,11 @@ module.exports = [
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-eval-source-map',
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
-        exclude: [/node_modules/, /\/lens/, /\/substance/],
+        exclude: [/\/node_modules/, /\/lens/, /\/substance/],
         loaders: ['eslint-loader']
       }],
       loaders: commonLoaders
@@ -80,7 +81,17 @@ module.exports = [
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new HappyPack({
+        id: 'js',
+        loaders: [
+          {
+            path: path.resolve(__dirname, '..', 'node_modules/babel-loader/index.js'),
+            query: '?presets[]=react-hmre,presets[]=es2015,presets[]=react'
+          }
+        ]
+        // customize as needed, see Configuration below
+      })
     ],
     node: {
       fs: 'empty'

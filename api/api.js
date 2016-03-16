@@ -3,6 +3,7 @@ const path = require('path')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const webpack = require('webpack')
 
 const index = require('./routes/index')
 const api = require('./routes/api')
@@ -24,9 +25,21 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use(passport.initialize())
+// Webpack development support
+if (process.env.NODE_ENV === 'dev') {
+  var webpackConfig = require('../webpack/webpack.dev.config.js')
+  var compiler = webpack(webpackConfig)
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: '/assets/'
+  }))
+
+  app.use(require('webpack-hot-middleware')(compiler))
+}
 
 // Passport strategies
+app.use(passport.initialize())
 const BearerStrategy = require('passport-http-bearer').Strategy
 const AnonymousStrategy = require('passport-anonymous').Strategy
 const LocalStrategy = require('passport-local').Strategy
@@ -65,7 +78,6 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
 }))
 
 // Main APIs
-
 app.use('/api', api)
 app.use('/admin', admin)
 app.use('/', index)
@@ -76,8 +88,8 @@ app.use(function (req, res, next) {
   err.status = 404
   next(err)
 })
-// error handlers
 
+// error handlers
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development' || app.get('env') === 'test') {
