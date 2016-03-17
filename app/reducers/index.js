@@ -13,7 +13,7 @@ import {
   UPDATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_REQUEST,
   // DELETE_FRAGMENT_SUCCESS,
-  RESET_ERROR_MESSAGE,
+  // RESET_ERROR_MESSAGE,
   GET_SUBSTANCE_DOCUMENT_SUCCESS
 } from '../actions/types'
 
@@ -27,12 +27,12 @@ const initialFragments = []
 
 // Updates error message to notify about the failed fetches.
 function error (state = null, action) {
-  const { type, error } = action
+  const { error } = action
 
-  if (type === RESET_ERROR_MESSAGE) {
+  if (error) {
+    return error
+  } else {
     return null
-  } else if (error) {
-    return action.error
   }
 
   return state

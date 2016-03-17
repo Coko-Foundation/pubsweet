@@ -1,9 +1,11 @@
 // import { Field } from 'react-redux-form'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { loginUser } from '../actions'
 import React, { Component, PropTypes } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
+
+import { loginUser } from '../actions'
+import styles from '../scss/components/Login.local.scss'
 
 class Login extends Component {
   constructor (props) {
@@ -12,10 +14,12 @@ class Login extends Component {
   }
 
   render () {
+    const { error } = this.props
     return (
-      <div className='bootstrap'>
+      <div className={styles.login + ' bootstrap'}>
         <Row>
-          <Col xs={12} md={6} mdOffset={3}>
+          <Col xs={12} md={2} mdOffset={5}>
+            { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
             <h1>Login</h1>
             <form>
               <div className='form-group'>
@@ -28,9 +32,11 @@ class Login extends Component {
                 <input type='password' ref='password' className='form-control' placeholder='Password'/>
               </div>
 
-              <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
+              <button onClick={(event) => this.handleClick(event)}
+                className={styles.button + ' btn btn-block btn-primary'}>
                 Login
               </button>
+              <p>Don't have an account? <a href='/signup'>Sign Up Here</a></p>
             </form>
           </Col>
         </Row>
@@ -50,11 +56,15 @@ class Login extends Component {
 
 Login.propTypes = {
   actions: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  error: PropTypes.string
 }
 
 function mapState (state) {
-  return { auth: state.auth }
+  return {
+    auth: state.auth,
+    error: state.error
+  }
 }
 
 function mapDispatch (dispatch) {

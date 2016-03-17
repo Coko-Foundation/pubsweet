@@ -1,17 +1,21 @@
 // import { Field } from 'react-redux-form'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signupUser } from '../actions'
 import React, { Component, PropTypes } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Alert, Row, Col } from 'react-bootstrap'
+
+import { signupUser } from '../actions'
+import styles from '../scss/components/Login.local.scss'
 
 class Signup extends Component {
   render () {
+    const { error } = this.props
     return (
-      <div className='bootstrap'>
+      <div className={styles.signup + ' bootstrap'}>
         <Row>
-          <Col xs={12} md={6} mdOffset={3}>
-            <h1>Signup</h1>
+          <Col xs={12} md={2} mdOffset={5}>
+            { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
+            <h1>Sign up</h1>
             <form>
               <div className='form-group'>
                 <label htmlFor='username'>Username</label>
@@ -25,9 +29,10 @@ class Signup extends Component {
                 <label htmlFor='password'>Password</label>
                 <input type='password' ref='password' className='form-control' placeholder='Password'/>
               </div>
-              <button onClick={(event) => this.handleClick(event)} className='btn btn-primary'>
+              <button onClick={(event) => this.handleClick(event)} className={styles.button + ' btn btn-block btn-primary'}>
                 Sign up
               </button>
+              <p>Already have an account? <a href='/login'>Log in here</a></p>
             </form>
           </Col>
         </Row>
@@ -47,11 +52,15 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  error: PropTypes.string
 }
 
 function mapState (state) {
-  return { auth: state.auth }
+  return {
+    auth: state.auth,
+    error: state.error
+  }
 }
 
 function mapDispatch (dispatch) {

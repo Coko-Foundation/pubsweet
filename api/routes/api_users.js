@@ -8,7 +8,7 @@ const Authorize = require('../models/authorize')
 const config = require('../../config')
 const roles = require('./api_roles')
 
-const authLocal = passport.authenticate('local', { session: false })
+const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const users = express.Router()
 

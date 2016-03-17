@@ -34,14 +34,13 @@ export default function auth (state = {
         isFetching: false,
         isAuthenticated: true,
         token: action.token,
-        roles: action.roles,
-        errorMessage: ''
+        roles: action.roles
       })
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message
+        error: action.message
       })
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {

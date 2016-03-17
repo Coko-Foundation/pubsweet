@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var HappyPack = require('happypack')
+// var HappyPack = require('happypack')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
@@ -31,7 +31,14 @@ var commonLoaders = [
   },
   { test: /\.html$/, loader: 'html-loader' },
   { test: /\.json$/, loader: 'json-loader' },
-  { test: /\.css$|\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+  { test: /\.css$|\.scss$/,
+    exclude: /\.local\.s?css$/, // Exclude local styles from global
+    loader: 'style-loader!css-loader!sass-loader'
+  },
+  { test: /\.css$|\.scss$/,
+    include: /\.local\.s?css/, // Local styles
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
+  }
 
 ]
 
