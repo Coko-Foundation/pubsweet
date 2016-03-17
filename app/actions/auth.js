@@ -82,7 +82,6 @@ export function loginUser (credentials, redirectTo) {
           // If login was successful, set the token in local storage
           localStorage.setItem('token', user.token)
           // Dispatch the success action
-          dispatch()
           dispatch(loginSuccess(user))
           // Only redirect if we want to
           if (redirectTo) {

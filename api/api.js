@@ -92,7 +92,7 @@ app.use(function (req, res, next) {
 // error handlers
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development' || app.get('env') === 'test') {
+if (app.get('env') === 'dev' || app.get('env') === 'test') {
   app.use(function (err, req, res, next) {
     console.log(err.stack)
     if (err.name === 'AuthorizationError') {

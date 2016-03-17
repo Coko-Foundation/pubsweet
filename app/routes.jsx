@@ -6,6 +6,8 @@ import { requireAuthentication } from './containers/AuthenticatedComponent'
 // Admin
 import Admin from './containers/Admin'
 import About from './components/Admin/About'
+import Debug from './components/Admin/Debug'
+
 import BlogManager from './containers/Admin/BlogManager'
 import Editor from './containers/Admin/SubstanceEditorWrapper'
 import UsersManager from './containers/Admin/UsersManager'
@@ -29,6 +31,7 @@ export default (
       <Route path='editor/:id' component={Editor} />
       <Route path='users' component={UsersManager} />
       <Route path='about' component={About} />
+      <Route path='debug' component={Debug} />
     </Route>
 
     <Route path='/contributor' component={requireAuthentication(Contributor)}>

@@ -14,7 +14,8 @@ import {
   DELETE_FRAGMENT_REQUEST,
   // DELETE_FRAGMENT_SUCCESS,
   // RESET_ERROR_MESSAGE,
-  GET_SUBSTANCE_DOCUMENT_SUCCESS
+  GET_SUBSTANCE_DOCUMENT_SUCCESS,
+  GET_DEBUG_INFO_SUCCESS
 } from '../actions/types'
 
 import auth from './auth'
@@ -94,6 +95,14 @@ function substance (state = {}, action) {
   return state
 }
 
+function debug (state = [], action) {
+  switch (action.type) {
+    case GET_DEBUG_INFO_SUCCESS:
+      return action.debugs
+  }
+  return state
+}
+
 const rootReducer = combineReducers({
   collections,
   fragments,
@@ -101,7 +110,8 @@ const rootReducer = combineReducers({
   error,
   router,
   auth,
-  substance
+  substance,
+  debug
 })
 
 export default rootReducer

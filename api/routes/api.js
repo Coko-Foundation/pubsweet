@@ -22,4 +22,21 @@ api.post('/upload', upload.single('file'), function (req, res, next) {
 // Users API
 api.use('/users', users)
 
+// Debug API
+if (process.env.NODE_ENV === 'dev') {
+  api.get('/debug', function (req, res, next) {
+    db.allDocs({
+      include_docs: true,
+      attachments: true
+    }).then(function (result) {
+      var documents = result.rows.map(function (result) {
+        return result.doc
+      })
+      return res.json(documents)
+    }).catch(function (err) {
+      console.log(err)
+    })
+  })
+}
+
 module.exports = api

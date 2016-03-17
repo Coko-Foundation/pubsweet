@@ -204,6 +204,28 @@ export function resetErrorMessage () {
   }
 }
 
+function getDebugInfoSuccess (debugs) {
+  return {
+    type: T.GET_DEBUG_INFO_SUCCESS,
+    debugs: debugs
+  }
+}
+
+export function getDebugInfo (fragment) {
+  return (dispatch, getState) => {
+    return fetch(API_ENDPOINT + '/debug')
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          return Promise.reject(response)
+        }
+      })
+      .then(debugs => dispatch(getDebugInfoSuccess(debugs)))
+      .catch(err => console.log('Error', err))
+  }
+}
+
 // Actions for auth
 import { getUser } from './auth'
 export { loginUser, logoutUser, getUser, signupUser } from './auth'
