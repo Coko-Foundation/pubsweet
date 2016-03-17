@@ -88,12 +88,12 @@ class ChangeStore {
   }
 
   _getVersion (documentId) {
-    return this._getChanges(documentId).then(function (changes) {
-      return changes.length
-    }).catch(function () {
-      console.log('NOTHING FOUND DEFAULTING TO 0')
-      return 0
-    })
+    if (global.versions[documentId]) {
+      return global.versions[documentId]
+    } else {
+      global.versions[documentId] = 0
+      return global.versions[documentId]
+    }
   }
 
   _getChanges (documentId) {
@@ -110,27 +110,29 @@ class ChangeStore {
   }
 
   _addChange (documentId, change) {
-    var version
-    return this._getVersion(documentId).then(function (result) {
-      console.log('VERSIONNNN', result)
-      version = result
-      if (version === 0) {
-        version = version + 1
-        var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
+    if (this._getVersion(documentId) === 0) {
+      global.versions[documentId] = 1
+      var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
+      fragment.subtype = 'change'
+      console.log('THIS IS DOCUMENTID', documentId)
+      fragment._id = documentId + '-' + global.versions[documentId]
+      fragment.documentId = documentId
+      return fragment.save().then(function () {
+        global.versions[documentId] += 1
+        var fragment = new Fragment({change: change})
         fragment.subtype = 'change'
-        console.log('THIS IS DOCUMENTID', documentId)
-        fragment._id = documentId + '-' + version
+        fragment._id = documentId + '-' + (global.versions[documentId])
         fragment.documentId = documentId
         return fragment.save()
-      }
-    }).then(function () {
-      var fragment = new Fragment({change: change})
+      })
+    } else {
+      global.versions[documentId] += 1
+      fragment = new Fragment({change: change})
       fragment.subtype = 'change'
-      fragment._id = documentId + '-' + (version + 1)
+      fragment._id = documentId + '-' + (global.versions[documentId])
       fragment.documentId = documentId
-
       return fragment.save()
-    })
+    }
   }
 }
 
