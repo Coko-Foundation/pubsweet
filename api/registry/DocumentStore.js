@@ -1,18 +1,28 @@
 'use strict'
 
 const Fragment = require('../models/Fragment')
+const Collection = require('../models/Collection')
+
 class DocumentStore {
   constructor (properties) {
 
   }
 
   createDocument (props, cb) {
+    var collection
     var fragment = new Fragment(props.info)
     fragment.data = props.data
     fragment.version = 1
-    return fragment.save().then(function (fragment) {
-      fragment.documentId = fragment._id
-      cb(null, fragment)
+    return Collection.get().then(function (result) {
+      collection = result
+      return fragment.save()
+    }).then(function (result) {
+      console.log('ASDOFKOSAD', result)
+      fragment.documentId = result._id
+      collection.addFragment(fragment)
+      return collection.save()
+    }).then(function (collection) {
+      return cb(null, fragment)
     })
   }
 

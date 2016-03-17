@@ -10,7 +10,7 @@ export default class BlogpostCreator extends React.Component {
 
   onSave (text) {
     this.props.create({
-      type: 'blogpost',
+      kind: 'blogpost',
       title: this.refs.title.getValue(),
       author: this.refs.author.getValue(),
       status: 'unpublished',

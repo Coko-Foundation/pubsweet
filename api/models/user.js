@@ -103,11 +103,15 @@ class User extends Model {
   }
 
   static findByEmail (email) {
-    return this.findByField('email', email)
+    return this.findByField('email', email).then(function (users) {
+      return users[0]
+    })
   }
 
   static findByUsername (username) {
-    return this.findByField('username', username)
+    return this.findByField('username', username).then(function (users) {
+      return users[0]
+    })
   }
 }
 

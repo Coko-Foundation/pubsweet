@@ -141,13 +141,15 @@ class Model {
       }}
       selector.selector[field] = value
       return db.find(selector)
-    }.bind(this)).then(function (results) {
+    }.bind(this)).then(results => {
       if (results.docs.length === 0) {
         throw new NotFoundError()
       } else {
-        return new this(results.docs[0])
+        return results.docs.map(result => {
+          return new this(result)
+        })
       }
-    }.bind(this)).catch(function (err) {
+    }).catch(function (err) {
       if (err.name !== 'NotFoundError') {
         console.error('Error', err)
         throw err

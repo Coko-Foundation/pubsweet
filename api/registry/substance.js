@@ -46,18 +46,20 @@ substance.post('/documents', function (req, res, next) {
     info: req.body
   }, function (err, doc) {
     if (err) { return next(err) }
+    console.log(err)
     return Fragment.find(doc.documentId).then(function (fragment) {
       fragment.data = doc.data
+      console.log('THE FRAGMENT 1', fragment)
       return fragment.save()
     }).then(function (fragment) {
-      console.log(fragment)
+      console.log('THE FRAGMENT', fragment)
       return res.json(fragment)
     })
   })
 })
 
 substance.get('/documents/:id', function (req, res, next) {
-  documentEngine.getDocument({documentId: req.params.id}, function (err, result) {
+  return documentEngine.getDocument({documentId: req.params.id}, function (err, result) {
     if (err) {
       return next(err)
     }

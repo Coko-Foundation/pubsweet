@@ -2,6 +2,8 @@
 
 const defaultLensArticle = require('lens/model/defaultLensArticle')
 const Err = require('substance/util/Error')
+const Fragment = require('../models/Fragment')
+const filter = require('lodash/filter')
 
 class ChangeStore {
 
@@ -10,27 +12,35 @@ class ChangeStore {
   }
 
   getChanges (args, cb) {
-    var changes = this._getChanges(args.documentId)
-    var version = this._getVersion(args.documentId)
-    var res
+    return this._getChanges(args.documentId).then(function (changes) {
+      console.log('sdjfoiasdfj', JSON.stringify(changes, null, 2))
+      var version = changes.length
+      console.log(changes, 'VERSION', version)
+      var res
+      if (args.sinceVersion === 0) {
+        console.log('asodkf')
+        res = {
+          version: version,
+          changes: changes
+        }
+        cb(null, res)
+      } else if (args.sinceVersion > 0) {
+        console.log('maojO', args.sinceVersion)
 
-    if (args.sinceVersion === 0) {
-      res = {
-        version: version,
-        changes: changes
+        res = {
+          version: version,
+          changes: changes.slice(args.sinceVersion)
+        }
+        cb(null, res)
+      } else {
+        console.log('WHAOJO')
+        cb(new Err('ChangeStore.ReadError', {
+          message: 'Illegal argument "sinceVersion":' + args.sinceVersion
+        }))
       }
-      cb(null, res)
-    } else if (args.sinceVersion > 0) {
-      res = {
-        version: version,
-        changes: changes.slice(args.sinceVersion)
-      }
-      cb(null, res)
-    } else {
-      cb(new Err('ChangeStore.ReadError', {
-        message: 'Illegal argument "sinceVersion":' + args.sinceVersion
-      }))
-    }
+    }).catch(function (err) {
+      console.log(err.stack)
+    })
   }
 
   addChange (args, cb) {
@@ -46,9 +56,11 @@ class ChangeStore {
       }))
     }
 
-    this._addChange(args.documentId, args.change)
-    var newVersion = this._getVersion(args.documentId)
-    cb(null, newVersion)
+    this._addChange(args.documentId, args.change).then(change => {
+      return this._getVersion(args.documentId)
+    }).then(version => {
+      cb(null, version)
+    })
   }
 
   deleteChanges (documentId, cb) {
@@ -76,20 +88,49 @@ class ChangeStore {
   }
 
   _getVersion (documentId) {
-    var changes = this._changes[documentId]
-    return changes ? changes.length : 0
+    return this._getChanges(documentId).then(function (changes) {
+      return changes.length
+    }).catch(function () {
+      console.log('NOTHING FOUND DEFAULTING TO 0')
+      return 0
+    })
   }
 
   _getChanges (documentId) {
-    return this._changes[documentId] || defaultLensArticle.createChangeset()
+    return Fragment.findByField('subtype', 'change').then(function (changes) {
+      return filter(changes, function (change) {
+        return change.documentId === documentId
+      }).map(function (change) {
+        return change.change
+      })
+    }).catch(function (err) {
+      console.log('MISTEJKA', err)
+      throw err
+    })
   }
 
   _addChange (documentId, change) {
-    debugger
-    if (!this._changes[documentId]) {
-      this._changes[documentId] = defaultLensArticle.createChangeset()
-    }
-    this._changes[documentId].push(change)
+    var version
+    return this._getVersion(documentId).then(function (result) {
+      console.log('VERSIONNNN', result)
+      version = result
+      if (version === 0) {
+        version = version + 1
+        var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
+        fragment.subtype = 'change'
+        console.log('THIS IS DOCUMENTID', documentId)
+        fragment._id = documentId + '-' + version
+        fragment.documentId = documentId
+        return fragment.save()
+      }
+    }).then(function () {
+      var fragment = new Fragment({change: change})
+      fragment.subtype = 'change'
+      fragment._id = documentId + '-' + (version + 1)
+      fragment.documentId = documentId
+
+      return fragment.save()
+    })
   }
 }
 
