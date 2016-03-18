@@ -43,7 +43,7 @@ class ReactLensWriter {
   createDocumentSession () {
     var doc = this.createDoc(this.props.content, this.props.format)
     var collabClient = new CollabClient({
-      wsUrl: 'ws://localhost:8080'
+      wsUrl: 'ws://' + document.location.origin + ':8080'
     })
     var documentSession = new CollabSession(doc, {
       docId: this.props.documentId,
