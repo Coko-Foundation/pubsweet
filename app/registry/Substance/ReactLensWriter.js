@@ -1,16 +1,16 @@
-var React = require('react');
-var LensWriter = require('lens/LensWriter');
-var Component = require('substance/ui/Component');
-var CollabSession = require('substance/collab/CollabSession');
-var CollabClient = require('substance/collab/CollabClient');
+var React = require('react')
+var LensWriter = require('lens/LensWriter')
+var Component = require('substance/ui/Component')
+var CollabSession = require('substance/collab/CollabSession')
+var CollabClient = require('substance/collab/CollabClient')
 
-var $$ = Component.$$;
+// var $$ = Component.$$
 
-// var LensArticleExporter = require('lens/model/LensArticleExporter');
-// var LensArticleImporter = require('lens/model/LensArticleImporter');
+// var LensArticleExporter = require('lens/model/LensArticleExporter')
+// var LensArticleImporter = require('lens/model/LensArticleImporter')
 
-// var exporter = new LensArticleExporter();
-// var importer = new LensArticleImporter();
+// var exporter = new LensArticleExporter()
+// var importer = new LensArticleImporter()
 
 const JSONConverter = require('substance/model/JSONConverter')
 const defaultLensArticle = require('lens/model/defaultLensArticle')
@@ -18,29 +18,29 @@ const defaultLensArticle = require('lens/model/defaultLensArticle')
 // LensWriter wrapped in a React component
 // ------------------
 
-var ReactLensWriter = React.createClass({
+class ReactLensWriter {
 
-  getWriter: function() {
-    return this;
-  },
+  getWriter () {
+    return this
+  }
 
   // Delegators
-  _onSave: function(doc, changes, cb) {
-    var xml = exporter.exportDocument(doc);
-    this.props.onSave(xml, cb);
-  },
+  _onSave (doc, changes, cb) {
+    // var xml = exporter.exportDocument(doc)
+    // this.props.onSave(xml, cb)
+  }
 
-  _onUploadFile: function(file, cb) {
-    this.props.onUploadFile(file, cb);
-  },
+  _onUploadFile (file, cb) {
+    // this.props.onUploadFile(file, cb)
+  }
 
-  getContent: function() {
-    var doc = this.writer.getDocument();
-    var xml = exporter.exportDocument(doc);
-    return xml;
-  },
+  getContent () {
+    // var doc = this.writer.getDocument()
+    // var xml = exporter.exportDocument(doc)
+    // return xml
+  }
 
-  createDocumentSession: function () {
+  createDocumentSession () {
     var doc = this.createDoc(this.props.content, this.props.format)
     var collabClient = new CollabClient({
       wsUrl: 'ws://localhost:8080'
@@ -51,56 +51,57 @@ var ReactLensWriter = React.createClass({
       collabClient: collabClient
     })
     return documentSession
-  },
+  }
 
   // New props arrived, update the editor
-  componentDidUpdate: function() {
+  componentDidUpdate () {
     var documentSession = this.createDocumentSession()
 
     this.writer.extendProps({
       documentSession: documentSession
-    });
-  },
+    })
+  }
 
-  createDoc: function(content, format) {
+  createDoc (content, format) {
     var doc
 
-    switch(format) {
+    switch (format) {
       case 'json':
         var converter = new JSONConverter()
-        var doc = defaultLensArticle.createEmptyArticle()
+        doc = defaultLensArticle.createEmptyArticle()
         converter.importDocument(doc, content)
     }
-    return doc;
-  },
+    return doc
+  }
 
-  componentDidMount: function() {
-    var el = React.findDOMNode(this);
+  componentDidMount () {
+    var el = React.findDOMNode(this)
     var documentSession = this.createDocumentSession()
 
     this.writer = Component.mount(LensWriter, {
       documentSession: documentSession,
       onSave: this._onSave,
       onUploadFile: this._onUploadFile
-    }, el);
-  },
+    }, el)
+  }
 
-  componentWillUnmount: function() {
-    this.writer.dispose();
-  },
+  componentWillUnmount () {
+    this.writer.dispose()
+  }
 
-  render: function() {
+  render () {
     return React.DOM.div({
       className: 'lens-writer-wrapper'
-    });
+    })
   }
-});
+}
 
 ReactLensWriter.propTypes = {
+  onSave: React.PropTypes.func,
   format: React.PropTypes.string,
   documentId: React.PropTypes.string,
   content: React.PropTypes.object,
   version: React.PropTypes.number
-};
+}
 
-module.exports = ReactLensWriter;
+module.exports = ReactLensWriter

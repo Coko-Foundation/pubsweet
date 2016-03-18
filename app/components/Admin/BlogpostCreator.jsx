@@ -12,7 +12,6 @@ export default class BlogpostCreator extends React.Component {
     this.props.create({
       kind: 'blogpost',
       title: this.refs.title.getValue(),
-      author: this.refs.author.getValue(),
       status: 'unpublished',
       version: 1,
       data: ''
@@ -28,12 +27,6 @@ export default class BlogpostCreator extends React.Component {
           placeholder='One fine day...'
           label='Title'
           ref='title'
-        />
-        <Input
-          type='text'
-          placeholder='Benjamin Franklin'
-          label='Author'
-          ref='author'
         />
         <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
             <i className='fa fa-plus'></i> Create

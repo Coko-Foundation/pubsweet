@@ -17,6 +17,10 @@ var changeStore = new ChangeStore()
 
 const Fragment = require('../models/Fragment')
 
+const passport = require('passport')
+const authBearer = passport.authenticate('bearer', { session: false })
+const Authorize = require('../models/authorize')
+
 var documentEngine = new DocumentEngine({
   documentStore: documentStore,
   changeStore: changeStore,
@@ -39,25 +43,26 @@ var collabServer = new CollabServer({
 })
 collabServer.bind(wss)
 
-substance.post('/documents', function (req, res, next) {
-  documentEngine.createDocument({
-    documentId: 'N/A',
-    schemaName: 'lens-article',
-    info: req.body
-  }, function (err, doc) {
-    if (err) {
-      console.log('ohonoes', err)
-      return next(err)
-    }
-    console.log('apdsofkopasdkf', doc)
-    console.log(err)
-    return Fragment.find(doc.documentId).then(function (fragment) {
-      fragment.data = doc.data
-      console.log('THE FRAGMENT 1', fragment)
-      return fragment.save()
-    }).then(function (fragment) {
-      console.log('THE FRAGMENT', fragment)
-      return res.json(fragment)
+substance.post('/documents', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, '/api/collection/fragments', 'create').then(function () {
+    var info = req.body
+    info.owner = req.user
+
+    documentEngine.createDocument({
+      documentId: 'N/A',
+      schemaName: 'lens-article',
+      info: info
+    }, function (err, doc) {
+      if (err) {
+        return next(err)
+      }
+      console.log(err)
+      return Fragment.find(doc.documentId).then(function (fragment) {
+        fragment.data = doc.data
+        return fragment.save()
+      }).then(function (fragment) {
+        return res.json(fragment)
+      })
     })
   })
 })

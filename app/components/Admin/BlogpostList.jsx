@@ -6,9 +6,10 @@ import styles from '../../scss/components/_blogpostList'
 export default class BlogpostList extends React.Component {
   render () {
     const blogposts = this.props.blogposts.map((blogpost, key) => {
+      var id = blogpost._id ? blogpost._id : key + 1
       return (<Blogpost
         number={key + 1}
-        key={blogpost._id}
+        key={id}
         blogpost={blogpost}
         delete={this.props.delete}
         update={this.props.update}

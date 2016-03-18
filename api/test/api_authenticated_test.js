@@ -76,6 +76,8 @@ describe('authenticated api', function () {
             .send(fragmentFixture)
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
+        }).then(function (res) {
+          expect(res.body.owner).to.eql(otherUserFixture.username)
         })
     })
 

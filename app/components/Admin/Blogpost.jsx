@@ -85,7 +85,7 @@ export default class Blogpost extends React.Component {
           {input}
         </td>
         <td>
-          {blogpost.author}
+          {blogpost.owner}
         </td>
         <td>
           {blogpost.published_at} ({blogpost.published ? 'published' : 'unpublished'})

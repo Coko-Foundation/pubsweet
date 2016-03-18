@@ -60,10 +60,7 @@ function fragments (state = initialFragments, action) {
       return fragments
     case CREATE_FRAGMENT_SUCCESS:
       let lastIndex = fragments.length - 1
-      fragments[lastIndex] = Object.assign(fragments[lastIndex], {
-        _id: action.fragment._id,
-        _rev: action.fragment._rev
-      })
+      fragments[lastIndex] = Object.assign(fragments[lastIndex], action.fragment)
       return fragments
     case CREATE_FRAGMENT_FAILURE:
       fragments.pop()

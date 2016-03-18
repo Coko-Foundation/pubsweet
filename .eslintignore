@@ -1,5 +1,4 @@
 node_modules/*
 Makefile
 *.sublime-*
-app/registry/Substance/ReactLensWriter.js
 app/registry/Substance/ReactLensReader.js

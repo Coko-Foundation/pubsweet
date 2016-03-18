@@ -8,11 +8,12 @@ import { createFragmentSuccess, createFragmentRequest } from './index'
 export function createSubstanceDocument (document) {
   return (dispatch, getState) => {
     dispatch(createFragmentRequest(document))
-
+    const { auth: { token } } = getState()
     return fetch(API_ENDPOINT + '/substance/documents', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(document)})
