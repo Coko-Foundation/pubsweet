@@ -9,26 +9,19 @@ var publicPath = '/assets/'
 // but excluding its node_modules.
 var commonLoaders = [
   {
+    /*
+     * TC39 categorises proposals for babel in 4 stages
+     * Read more http://babeljs.io/docs/usage/experimental/
+     */
     test: /\.js$|\.jsx$/,
-    loaders: ['react-hot', 'babel-loader?stage=0'],
-    include: [
-      path.join(__dirname, '..', 'app'),
-      path.join(__dirname, '..', 'routes'),
-      path.join(__dirname, '..', 'app.js'),
-      path.join(__dirname,
-        '..',
-        'node_modules',
-        'pubsweet-substance-components'
-      )
-    ],
-    exclude: [
-      path.join(__dirname,
-        '..',
-        'node_modules',
-        'pubsweet-substance-components',
-        'node_modules'
-      )
-    ]
+    loader: 'babel',
+    // Reason why we put this here instead of babelrc
+    // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
+    query: {
+      'presets': ['es2015', 'react']
+    },
+    include: path.join(__dirname, '..', 'app'),
+    exclude: path.join(__dirname, '/node_modules/')
   },
   { test: /\.png$/, loader: 'url-loader' },
   {
@@ -36,7 +29,15 @@ var commonLoaders = [
     loader: 'url?prefix=font/&limit=10000'
   },
   { test: /\.html$/, loader: 'html-loader' },
-  { test: /\.json$/, loader: 'json-loader' }
+  { test: /\.json$/, loader: 'json-loader' },
+  { test: /\.css$|\.scss$/,
+    exclude: /\.local\.s?css$/, // Exclude local styles from global
+    loader: 'style-loader!css-loader!sass-loader'
+  },
+  { test: /\.css$|\.scss$/,
+    include: /\.local\.s?css/, // Local styles
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
+  }
 ]
 
 module.exports = [
@@ -59,14 +60,10 @@ module.exports = [
     module: {
       preLoaders: [{
         test: /\.js$|\.jsx$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /\/lens/, /\/substance/],
         loaders: ['eslint-loader']
       }],
-      loaders: commonLoaders.concat([
-          { test: /\.scss$|\.css$/,
-            loader: 'style!css!sass'
-          }
-      ])
+      loaders: commonLoaders
     },
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss']
