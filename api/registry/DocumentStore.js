@@ -17,12 +17,15 @@ class DocumentStore {
       collection = result
       return fragment.save()
     }).then(function (result) {
-      console.log('ASDOFKOSAD', result)
+      // console.log('ASDOFKOSAD', result)
       fragment.documentId = result._id
       collection.addFragment(fragment)
       return collection.save()
     }).then(function (collection) {
+      console.log('hohooh', fragment)
       return cb(null, fragment)
+    }).catch(function (err) {
+      console.log(err)
     })
   }
 

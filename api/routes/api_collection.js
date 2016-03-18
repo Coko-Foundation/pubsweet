@@ -155,7 +155,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 })
 
 // Delete a fragment
-api.delete('/collection/fragments/:id', function (req, res, next) {
+api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {

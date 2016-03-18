@@ -45,7 +45,11 @@ substance.post('/documents', function (req, res, next) {
     schemaName: 'lens-article',
     info: req.body
   }, function (err, doc) {
-    if (err) { return next(err) }
+    if (err) {
+      console.log('ohonoes', err)
+      return next(err)
+    }
+    console.log('apdsofkopasdkf', doc)
     console.log(err)
     return Fragment.find(doc.documentId).then(function (fragment) {
       fragment.data = doc.data

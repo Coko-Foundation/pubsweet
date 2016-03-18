@@ -5,6 +5,10 @@ const Err = require('substance/util/Error')
 const Fragment = require('../models/Fragment')
 const filter = require('lodash/filter')
 
+const async = require('async')
+
+global.queue = global.queue || {}
+
 class ChangeStore {
 
   constructor (properties) {
@@ -13,19 +17,19 @@ class ChangeStore {
 
   getChanges (args, cb) {
     return this._getChanges(args.documentId).then(function (changes) {
-      console.log('sdjfoiasdfj', JSON.stringify(changes, null, 2))
+      // console.log('sdjfoiasdfj', JSON.stringify(changes, null, 2))
       var version = changes.length
-      console.log(changes, 'VERSION', version)
+      // console.log(changes, 'VERSION', version)
       var res
       if (args.sinceVersion === 0) {
-        console.log('asodkf')
+        // console.log('asodkf')
         res = {
           version: version,
           changes: changes
         }
         cb(null, res)
       } else if (args.sinceVersion > 0) {
-        console.log('maojO', args.sinceVersion)
+        // console.log('maojO', args.sinceVersion)
 
         res = {
           version: version,
@@ -33,7 +37,7 @@ class ChangeStore {
         }
         cb(null, res)
       } else {
-        console.log('WHAOJO')
+        // console.log('WHAOJO')
         cb(new Err('ChangeStore.ReadError', {
           message: 'Illegal argument "sinceVersion":' + args.sinceVersion
         }))
@@ -56,10 +60,22 @@ class ChangeStore {
       }))
     }
 
-    this._addChange(args.documentId, args.change).then(change => {
-      return this._getVersion(args.documentId)
-    }).then(version => {
-      cb(null, version)
+    global.queue[args.documentId] = global.queue[args.documentId] || async.queue(function (args, callback) {
+      this._addChange(args.documentId, args.change).then(change => {
+        console.log('getting version')
+        return this._getVersion(args.documentId)
+      }).then(version => {
+        console.log('got version', version)
+        args.callback(null, version)
+        callback()
+      })
+    }.bind(this), 1)
+
+    args.callback = cb
+
+    global.queue[args.documentId].push(args, function (err) {
+      console.log(err)
+      console.log('finished processing foo')
     })
   }
 
@@ -104,32 +120,36 @@ class ChangeStore {
         return change.change
       })
     }).catch(function (err) {
-      console.log('MISTEJKA', err)
+      // console.log('MISTEJKA', err)
       throw err
     })
   }
 
   _addChange (documentId, change) {
+    var createdAt = new Date().toJSON()
     if (this._getVersion(documentId) === 0) {
+      console.log('VERSION 1')
       global.versions[documentId] = 1
       var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
       fragment.subtype = 'change'
-      console.log('THIS IS DOCUMENTID', documentId)
-      fragment._id = documentId + '-' + global.versions[documentId]
+      // console.log('THIS IS DOCUMENTID', documentId)
+      fragment._id = documentId + '-' + createdAt + '-' + global.versions[documentId]
       fragment.documentId = documentId
       return fragment.save().then(function () {
         global.versions[documentId] += 1
+        console.log('VERSION', global.versions[documentId])
         var fragment = new Fragment({change: change})
         fragment.subtype = 'change'
-        fragment._id = documentId + '-' + (global.versions[documentId])
+        fragment._id = documentId + '-' + createdAt + '-' + (global.versions[documentId])
         fragment.documentId = documentId
         return fragment.save()
       })
     } else {
       global.versions[documentId] += 1
+      console.log('VERSION', global.versions[documentId])
       fragment = new Fragment({change: change})
       fragment.subtype = 'change'
-      fragment._id = documentId + '-' + (global.versions[documentId])
+      fragment._id = documentId + '-' + createdAt + '-' + (global.versions[documentId])
       fragment.documentId = documentId
       return fragment.save()
     }
