@@ -17,6 +17,10 @@ class ChangeStore {
 
   getChanges (args, cb) {
     return this._getChanges(args.documentId).then(function (changes) {
+      return changes.map(function (change) {
+        return change.change
+      })
+    }).then(function (changes) {
       // console.log('sdjfoiasdfj', JSON.stringify(changes, null, 2))
       var version = changes.length
       // console.log(changes, 'VERSION', version)
@@ -85,7 +89,9 @@ class ChangeStore {
   }
 
   getVersion (id, cb) {
-    cb(null, this._getVersion(id))
+    return this._getVersion(id).then(function (version) {
+      cb(null, version)
+    })
   }
 
   seed (changes, cb) {
@@ -104,20 +110,19 @@ class ChangeStore {
   }
 
   _getVersion (documentId) {
-    if (global.versions[documentId]) {
-      return global.versions[documentId]
-    } else {
-      global.versions[documentId] = 0
-      return global.versions[documentId]
-    }
+    if (documentId === 'N/A') { return Promise.resolve(0) }
+    return this._getChanges(documentId).then(function (changes) {
+      return changes[changes.length - 1].version
+    }).catch(function (err) {
+      console.log(err)
+      return 0
+    })
   }
 
   _getChanges (documentId) {
     return Fragment.findByField('subtype', 'change').then(function (changes) {
       return filter(changes, function (change) {
         return change.documentId === documentId
-      }).map(function (change) {
-        return change.change
       })
     }).catch(function (err) {
       // console.log('MISTEJKA', err)
@@ -127,32 +132,35 @@ class ChangeStore {
 
   _addChange (documentId, change) {
     var createdAt = new Date().toJSON()
-    if (this._getVersion(documentId) === 0) {
-      console.log('VERSION 1')
-      global.versions[documentId] = 1
-      var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
-      fragment.subtype = 'change'
-      // console.log('THIS IS DOCUMENTID', documentId)
-      fragment._id = documentId + '-' + createdAt + '-' + global.versions[documentId]
-      fragment.documentId = documentId
-      return fragment.save().then(function () {
-        global.versions[documentId] += 1
-        console.log('VERSION', global.versions[documentId])
-        var fragment = new Fragment({change: change})
+    return this._getVersion(documentId).then(function (version) {
+      if (version === 0) {
+        console.log('VERSION 1')
+        var fragment = new Fragment({change: defaultLensArticle.createChangeset()[0]})
         fragment.subtype = 'change'
-        fragment._id = documentId + '-' + createdAt + '-' + (global.versions[documentId])
+        fragment._id = documentId + '-' + createdAt + '-' + 1
+        fragment.version = 1
         fragment.documentId = documentId
+        return fragment.save().then(function () {
+          console.log('VERSION 2')
+          var fragment = new Fragment({change: change})
+          fragment.subtype = 'change'
+          fragment.version = 2
+          fragment._id = documentId + '-' + createdAt + '-' + 2
+          fragment.documentId = documentId
+          return fragment.save()
+        })
+      } else {
+        fragment = new Fragment({change: change})
+        fragment.subtype = 'change'
+        console.log('TRYING TO ADD NEXT CHANGE')
+        version = version + 1
+        console.log('VERSION', version)
+        fragment._id = documentId + '-' + createdAt + '-' + version
+        fragment.documentId = documentId
+        fragment.version = version
         return fragment.save()
-      })
-    } else {
-      global.versions[documentId] += 1
-      console.log('VERSION', global.versions[documentId])
-      fragment = new Fragment({change: change})
-      fragment.subtype = 'change'
-      fragment._id = documentId + '-' + createdAt + '-' + (global.versions[documentId])
-      fragment.documentId = documentId
-      return fragment.save()
-    }
+      }
+    })
   }
 }
 
