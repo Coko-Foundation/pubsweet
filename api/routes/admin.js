@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path')
 
 if (process.env.NODE_ENV === 'production') {
-  var filename = path.join(__dirname, '../../public')
+  var filename = path.join(__dirname, '../../public/assets')
 } else {
   filename = path.join(__dirname, '../../app')
 }

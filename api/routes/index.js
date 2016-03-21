@@ -4,7 +4,7 @@ const path = require('path')
 
 /* GET the main React app page. */
 if (process.env.NODE_ENV === 'production') {
-  var filename = path.join(__dirname, '../../public')
+  var filename = path.join(__dirname, '../../public/assets')
 } else {
   filename = path.join(__dirname, '../../app')
 }
