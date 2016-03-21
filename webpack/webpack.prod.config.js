@@ -54,7 +54,7 @@ module.exports = [
       // The output directory as absolute path
       path: assetsPath,
       // The filename of the entry chunk as relative path inside the output.path directory
-      filename: '[name].js',
+      filename: '[name]-[hash].js',
       // The output path from the view of the Javascript
       publicPath: publicPath
     },
@@ -71,7 +71,7 @@ module.exports = [
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'Custom template',
+        title: 'PubSweet',
         template: '../app/index.ejs', // Load a custom template
         inject: 'body' // Inject all scripts into the body
       }),
