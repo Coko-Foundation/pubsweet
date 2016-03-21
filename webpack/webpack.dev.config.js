@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 // var HappyPack = require('happypack')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -75,6 +76,11 @@ module.exports = [
       extensions: ['', '.js', '.jsx', '.json', '.scss']
     },
     plugins: [
+      new HtmlWebpackPlugin({
+        title: 'PubSweet',
+        // template: '../app/index.ejs', // Load a custom template
+        inject: 'body' // Inject all scripts into the body
+      }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()

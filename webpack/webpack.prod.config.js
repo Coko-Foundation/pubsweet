@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
@@ -69,6 +70,11 @@ module.exports = [
       extensions: ['', '.js', '.jsx', '.json', '.scss']
     },
     plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Custom template',
+        template: '../app/index.ejs', // Load a custom template
+        inject: 'body' // Inject all scripts into the body
+      }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
