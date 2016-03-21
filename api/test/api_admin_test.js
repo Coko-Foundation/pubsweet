@@ -9,7 +9,7 @@ const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
 const Fragment = require('../models/Fragment')
-const User = require('../models/user')
+const User = require('../models/User')
 var api = require('../api')
 
 describe('admin api', function () {

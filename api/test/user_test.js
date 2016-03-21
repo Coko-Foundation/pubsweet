@@ -1,5 +1,5 @@
 const dbCleaner = require('./helpers/db_cleaner')
-const User = require('../models/user')
+const User = require('../models/User')
 const expect = require('expect.js')
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user

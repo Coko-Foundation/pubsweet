@@ -19,7 +19,7 @@ const Fragment = require('../models/Fragment')
 
 const passport = require('passport')
 const authBearer = passport.authenticate('bearer', { session: false })
-const Authorize = require('../models/authorize')
+const Authorize = require('../models/Authorize')
 
 var documentEngine = new DocumentEngine({
   documentStore: documentStore,

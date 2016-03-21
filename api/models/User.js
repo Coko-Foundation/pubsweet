@@ -1,6 +1,6 @@
 'use strict'
-const Model = require('./model')
-const Role = require('./role')
+const Model = require('./Model')
+const Role = require('./Role')
 
 const ConflictError = require('../errors/ConflictError')
 // const NotFoundError = require('../errors/NotFoundError')

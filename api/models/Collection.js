@@ -1,5 +1,5 @@
 'use strict'
-const Model = require('./model')
+const Model = require('./Model')
 
 class Collection extends Model {
   constructor (properties) {

@@ -2,8 +2,8 @@
 
 const express = require('express')
 const passport = require('passport')
-const Authorize = require('../models/authorize')
-const User = require('../models/user')
+const Authorize = require('../models/Authorize')
+const User = require('../models/User')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()

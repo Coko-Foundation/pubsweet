@@ -7,8 +7,8 @@ const collectionFixture = fixtures.collection
 const fragmentFixture = fixtures.fragment
 
 const Fragment = require('../models/Fragment')
-// const User = require('../models/user')
-const Collection = require('../models/collection')
+// const User = require('../models/User')
+const Collection = require('../models/Collection')
 
 var api = require('../api')
 

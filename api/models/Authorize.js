@@ -1,8 +1,8 @@
 'use strict'
 
-const User = require('./user')
+const User = require('./User')
 const Fragment = require('./Fragment')
-const Collection = require('./collection')
+const Collection = require('./Collection')
 
 const AuthorizationError = require('../errors/AuthorizationError')
 

@@ -12,7 +12,7 @@ const admin = require('./routes/admin')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
-const User = require('./models/user')
+const User = require('./models/User')
 
 // const favicon = require('serve-favicon')
 const app = express()

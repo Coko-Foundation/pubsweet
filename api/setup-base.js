@@ -1,9 +1,9 @@
 'use strict'
 
 // const config = require('../config')
-const Collection = require('./models/collection')
-const User = require('./models/user')
-const Role = require('./models/role')
+const Collection = require('./models/Collection')
+const User = require('./models/User')
+const Role = require('./models/Role')
 
 class Setup {
   static setup (username, email, password, collection) {

@@ -1,6 +1,6 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
-const User = require('../models/user')
+const User = require('../models/User')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user

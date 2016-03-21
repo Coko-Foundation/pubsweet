@@ -1,5 +1,5 @@
 'use strict'
-const Model = require('./model')
+const Model = require('./Model')
 
 class Fragment extends Model {
   constructor (properties) {

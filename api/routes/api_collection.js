@@ -2,15 +2,15 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
 const _ = require('lodash')
-const Collection = require('../models/collection')
+const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
-const Authorize = require('../models/authorize')
+const Authorize = require('../models/Authorize')
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 
 // Temporary extension mechanism
-const substance = require('../registry/substance')
+const substance = require('../registry/Substance')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
