@@ -5,7 +5,7 @@
   "scripts": {
     "setup": "node api/setup.js",
     "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
-    "start": "PORT=8300 NODE_ENV=production node bin/www",
+    "start": "PORT=80 NODE_ENV=production node bin/www",
     "dev": "NODE_ENV=dev LOADER=hot node bin/www",
     "buildDev": "webpack --no-info --colors --config ./webpack/webpack.dev.config.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js -R nyan",
