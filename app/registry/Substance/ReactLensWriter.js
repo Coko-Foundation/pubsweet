@@ -1,6 +1,6 @@
 var React = require('react')
 var LensWriter = require('lens/LensWriter')
-var Component = require('substance/ui/Component')
+var Component = require('lens/node_modules/substance/ui/Component')
 var CollabSession = require('substance/collab/CollabSession')
 var CollabClient = require('substance/collab/CollabClient')
 
