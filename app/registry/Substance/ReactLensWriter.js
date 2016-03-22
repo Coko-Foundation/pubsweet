@@ -18,7 +18,7 @@ const defaultLensArticle = require('lens/model/defaultLensArticle')
 // LensWriter wrapped in a React component
 // ------------------
 
-class ReactLensWriter {
+class ReactLensWriter extends React.Component {
 
   getWriter () {
     return this
