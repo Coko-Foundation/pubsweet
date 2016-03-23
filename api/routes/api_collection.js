@@ -102,6 +102,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
   }).then(function (fragments) {
     return res.status(200).json(fragments)
   }).catch(function (err) {
+    console.log(err)
     if (err.name === 'AuthorizationError') {
       console.error(err)
       return fallback.then(function (fragments) {
