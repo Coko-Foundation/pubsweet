@@ -17,7 +17,7 @@ export default class Reader extends React.Component {
 
 Reader.propTypes = {
   // Data
-  content: React.PropTypes.string
+  content: React.PropTypes.object
 }
 
 export default Reader

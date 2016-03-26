@@ -14,7 +14,7 @@ export default class BlogpostCreator extends React.Component {
       title: this.refs.title.getValue(),
       status: 'unpublished',
       version: 1,
-      data: ''
+      source: undefined
     })
   }
 

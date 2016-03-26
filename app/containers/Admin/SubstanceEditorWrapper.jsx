@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
-// import _ from 'lodash'
+import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 
 // Which editor component to import?
@@ -12,7 +12,7 @@ export default class EditorWrapper extends React.Component {
   constructor (props) {
     super(props)
 
-    this.props.actions.getSubstanceDocument(this.props.id)
+    // this.props.actions.getSubstanceDocument(this.props.id)
   }
 
   uploadFile (file, callback) {
@@ -34,7 +34,7 @@ export default class EditorWrapper extends React.Component {
     if (this.props.document) {
       editor = <Editor
         document={this.props.document}
-        // save={this.props.actions.updateFragment}
+        save={this.props.actions.updateFragment}
         uploadFile={this.uploadFile}
       />
     } else {
@@ -56,10 +56,11 @@ EditorWrapper.propTypes = {
 }
 
 function mapStateToProps (state) {
-  console.log(state)
   return {
     id: state.router.params.id,
-    document: state.substance
+    document: _.find(state.fragments, function (f) {
+      return f._id === state.router.params.id
+    })
   }
 }
 

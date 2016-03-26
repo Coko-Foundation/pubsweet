@@ -17,7 +17,6 @@ export default class BlogpostList extends React.Component {
     })
     return (
       <div className={styles['list']}>
-        <h3 className={styles['header']}>Blog posts</h3>
         <table className='table table-hover'>
           <thead>
             <tr>

@@ -22,7 +22,6 @@ class DocumentStore {
       collection.addFragment(fragment)
       return collection.save()
     }).then(function (collection) {
-      console.log('hohooh', fragment)
       return cb(null, fragment)
     }).catch(function (err) {
       console.log(err)

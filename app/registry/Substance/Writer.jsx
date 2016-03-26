@@ -11,39 +11,27 @@ class Writer extends React.Component {
     this.uploadFile = this.uploadFile.bind(this)
   }
 
-  save (content, callback) {
-    // let fragment = Object.assign(this.props.fragment, {
-    //   source: content,
-    //   presentation: content
-    // })
-    // this.props.save(fragment)
-    // callback(null, content)
+  save (source, callback) {
+    let doc = Object.assign(this.props.document, {
+      source: source
+    })
+    this.props.save(doc)
+    callback(null, source)
   }
 
   uploadFile (file, callback) {
-    // return this.props.uploadFile(file, callback)
+    return this.props.uploadFile(file, callback)
   }
 
   render () {
-    let editor
-    // let content
-
-    if (this.props.document.data) {
-      editor = <LensWriter
-        documentId={this.props.document._id}
-        version={this.props.document.version}
-        content={this.props.document.data}
-        onSave={this.save}
-        format='json'
-        onUploadFile={this.uploadFile}
-        />
-    } else {
-      editor = <p>Loading</p>
-    }
-
-    return (
-      <div>{editor}</div>
-    )
+    return <LensWriter
+      documentId={this.props.document._id}
+      version={this.props.document.version}
+      content={this.props.document.source}
+      onSave={this.save}
+      format='json'
+      onUploadFile={this.uploadFile}
+      />
   }
 }
 

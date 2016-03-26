@@ -18,13 +18,12 @@ class BlogManager extends React.Component {
       <div className='bootstrap'>
         <Grid>
           { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
-          <div blog={blog} className={styles.vote}>
-            <BlogpostList
-              update={actions.updateFragment}
-              delete={actions.deleteFragment}
-              blogposts={blogposts} />
-            <BlogpostCreator create={actions.createSubstanceDocument} />
-          </div>
+          <h3 className={styles['header']}>{blog && blog.title} blog posts</h3>
+          <BlogpostList
+            update={actions.updateFragment}
+            delete={actions.deleteFragment}
+            blogposts={blogposts} />
+          <BlogpostCreator create={actions.createFragment} />
         </Grid>
       </div>
     )
@@ -38,7 +37,7 @@ BlogManager.propTypes = {
   error: React.PropTypes.object
 }
 
-function mapStateToProps (state) {
+function mapState (state) {
   return {
     blog: state.collections[0],
     blogposts: state.fragments,
@@ -46,13 +45,13 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatch (dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
   }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapState,
+  mapDispatch
 )(BlogManager)

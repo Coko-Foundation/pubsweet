@@ -1,58 +1,57 @@
-var React = require('react');
-var LensReader = require('lens/LensReader');
-var Component = require('substance/ui/Component');
-var $$ = Component.$$;
-var LensArticleImporter = require('lens/model/LensArticleImporter');
-var importer = new LensArticleImporter();
+var React = require('react')
+var LensReader = require('lens/LensReader')
+var Component = require('lens/node_modules/substance/ui/Component')
+var DocumentSession = require('substance/model/DocumentSession')
+
+const JSONConverter = require('substance/model/JSONConverter')
+const defaultLensArticle = require('lens/model/defaultLensArticle')
 
 // LensReader wrapped in a React component
 // ------------------
 
-var ReactLensReader = React.createClass({
-
-  getReader: function() {
-    return this.reader;
-  },
-
-  getContent: function() {
-    return this.reader.getDocument().toXml();
-  },
+class ReactLensReader extends React.Component {
 
   // New props arrived, update the editor
-  componentDidUpdate: function() {
-    var doc = this.createDoc(this.props.content);
+  componentDidUpdate () {
+    var doc = this.createDoc(this.props.content)
     this.reader.extendProps({
       doc: doc
-    });
-  },
+    })
+  }
 
-  createDoc: function(xmlContent) {
-    var doc = importer.importDocument(xmlContent);
-    doc.updateCollections();
-    return doc;
-  },
+  createDocumentSession () {
+    var doc = this.createDoc(this.props.content)
+    return new DocumentSession(doc)
+  }
 
-  componentDidMount: function() {
-    var el = React.findDOMNode(this);
-    var doc = this.createDoc(this.props.content);
+  createDoc (source) {
+    var converter = new JSONConverter()
+    var doc = defaultLensArticle.createEmptyArticle()
+    converter.importDocument(doc, source)
+    return doc
+  }
+
+  componentDidMount () {
+    var el = React.findDOMNode(this)
+    var documentSession = this.createDocumentSession()
     this.reader = Component.mount(LensReader, {
-      doc: doc
-    }, el);
-  },
+      documentSession: documentSession
+    }, el)
+  }
 
-  componentWillUnmount: function() {
-    this.reader.dispose();
-  },
+  componentWillUnmount () {
+    this.reader.dispose()
+  }
 
-  render: function() {
+  render () {
     return React.DOM.div({
       className: 'lens-reader-wrapper'
-    });
+    })
   }
-});
+}
 
 ReactLensReader.propTypes = {
-  content: React.PropTypes.string // XML source of the document
-};
+  content: React.PropTypes.object // JSON source of the document
+}
 
-module.exports = ReactLensReader;
+module.exports = ReactLensReader

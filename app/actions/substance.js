@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch'
 import { API_ENDPOINT } from '../../config.js'
 import * as T from './types'
 
-import { createFragmentSuccess, createFragmentRequest } from './index'
+import { createFragmentFailure, createFragmentSuccess, createFragmentRequest } from './index'
 
 // CREATE substance document
 export function createSubstanceDocument (document) {
@@ -14,7 +14,7 @@ export function createSubstanceDocument (document) {
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(document)})
       .then(response => {

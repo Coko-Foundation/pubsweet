@@ -1,8 +1,9 @@
 var React = require('react')
 var LensWriter = require('lens/LensWriter')
 var Component = require('lens/node_modules/substance/ui/Component')
-var CollabSession = require('substance/collab/CollabSession')
-var CollabClient = require('substance/collab/CollabClient')
+var DocumentSession = require('substance/model/DocumentSession')
+// var CollabSession = require('substance/collab/CollabSession')
+// var CollabClient = require('substance/collab/CollabClient')
 
 // var $$ = Component.$$
 
@@ -24,32 +25,26 @@ class ReactLensWriter extends React.Component {
     return this
   }
 
-  // Delegators
-  _onSave (doc, changes, cb) {
-    // var xml = exporter.exportDocument(doc)
-    // this.props.onSave(xml, cb)
-  }
-
-  _onUploadFile (file, cb) {
-    // this.props.onUploadFile(file, cb)
-  }
-
-  getContent () {
-    // var doc = this.writer.getDocument()
-    // var xml = exporter.exportDocument(doc)
-    // return xml
-  }
-
   createDocumentSession () {
-    var doc = this.createDoc(this.props.content, this.props.format)
-    var collabClient = new CollabClient({
-      wsUrl: 'ws://' + document.location.hostname + ':8080'
-    })
-    var documentSession = new CollabSession(doc, {
-      docId: this.props.documentId,
-      docVersion: this.props.version,
-      collabClient: collabClient
-    })
+    var content = this.props.content ? this.props.content : {
+      'schema': {'name': 'lens-article', 'version': '3.0.0'},
+      'nodes': [
+        {'type': 'container', 'id': 'main', 'nodes': ['p1']},
+        {'type': 'article-meta', 'id': 'article-meta', 'title': 'Untitled', 'authors': [], 'abstract': 'Enter abstract'},
+        {'type': 'paragraph', 'id': 'p1', 'content': 'Enter text here'}
+      ]}
+    var format = this.props.format ? this.props.format : 'json'
+    var doc = this.createDoc(content, format)
+    // var collabClient = new CollabClient({
+    //   wsUrl: 'ws://' + document.location.hostname + ':8080'
+    // })
+    var documentSession = new DocumentSession(doc)
+
+    // var documentSession = new CollabSession(doc, {
+    //   docId: this.props.documentId,
+    //   docVersion: this.props.version,
+    //   collabClient: collabClient
+    // })
     return documentSession
   }
 
@@ -74,14 +69,19 @@ class ReactLensWriter extends React.Component {
     return doc
   }
 
+  save (source, changes, callback) {
+    var converter = new JSONConverter()
+    this.props.onSave(converter.exportDocument(source), callback)
+  }
+
   componentDidMount () {
     var el = React.findDOMNode(this)
     var documentSession = this.createDocumentSession()
 
     this.writer = Component.mount(LensWriter, {
       documentSession: documentSession,
-      onSave: this._onSave,
-      onUploadFile: this._onUploadFile
+      onSave: this.save.bind(this),
+      onUploadFile: this.props.onUploadFile
     }, el)
   }
 
@@ -98,6 +98,7 @@ class ReactLensWriter extends React.Component {
 
 ReactLensWriter.propTypes = {
   onSave: React.PropTypes.func,
+  onUploadFile: React.PropTypes.func,
   format: React.PropTypes.string,
   documentId: React.PropTypes.string,
   content: React.PropTypes.object,

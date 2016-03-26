@@ -112,7 +112,9 @@ export function createFragment (fragment) {
       body: JSON.stringify(fragment)})
       .then(response => {
         if (response.ok) {
-          return response.json()
+          return response.json().then(response => {
+            dispatch(createFragmentSuccess(response))
+          })
         } else {
           return response.json().then(response => {
             dispatch(createFragmentFailure(response.message))
