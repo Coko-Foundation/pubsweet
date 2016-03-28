@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react'
 import {connect} from 'react-redux'
 import {pushState} from 'redux-router'
-
-import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
+import * as Actions from '../actions'
 import WaitingRoom from '../components/WaitingRoom'
-// import Admin from './containers/Admin'
-// import Contributor from './containers/Contributor'
 
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {
@@ -32,11 +29,11 @@ export function requireAuthentication (Component) {
       if (this.props.roles.indexOf('admin') !== -1 &&
         this.props.location.pathname.substring(0, 6) !== '/admin') {
         console.log('Admin logging in, redirecting to the admin pages')
-        this.props.pushState(null, '/admin/manager')
+        this.props.pushState(null, '/admin/posts')
       } else if (this.props.roles.indexOf('contributor') !== -1 &&
         this.props.location.pathname.substring(0, 12) !== '/contributor') {
         console.log('Contributor logging in, redirecting to the contributor pages')
-        this.props.pushState(null, '/contributor/manager')
+        this.props.pushState(null, '/contributor/posts')
       }
     }
 

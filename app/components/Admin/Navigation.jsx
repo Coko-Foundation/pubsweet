@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, NavBrand } from 'react-bootstrap'
 
 import Logout from '../Logout'
 
@@ -8,25 +8,23 @@ export default class Navigation extends React.Component {
 
   render () {
     const { actions, auth } = this.props
-    let loginOrLogoutButton
+    let logoutButtonIfAuthenticated
     if (auth.isAuthenticated) {
-      loginOrLogoutButton = <Logout username={auth.username} onLogoutClick={() => actions.logoutUser() } />
-    } else {
-      loginOrLogoutButton = <LinkContainer to='/admin/login'>
-          <NavItem>Log In</NavItem>
-        </LinkContainer>
+      logoutButtonIfAuthenticated = <Logout username={auth.username} onLogoutClick={() => actions.logoutUser() } />
     }
     return (
-      <Navbar brand='Science Blogger' toggleNavKey={0}>
+      <Navbar>
+        <Navbar.Header>
+          <NavBrand>
+            <a href='#'>PubSweet Science Blogger</a>
+          </NavBrand>
+        </Navbar.Header>
         <Nav eventKey={0}>
-          <LinkContainer to='/admin/manager'>
-            <NavItem>Manager</NavItem>
+          <LinkContainer to='/admin/posts'>
+            <NavItem>Posts</NavItem>
           </LinkContainer>
           <LinkContainer to='/admin/users'>
             <NavItem>Users</NavItem>
-          </LinkContainer>
-          <LinkContainer to='/admin/about'>
-            <NavItem>About</NavItem>
           </LinkContainer>
           {
             process.env.NODE_ENV === 'dev' &&
@@ -34,8 +32,8 @@ export default class Navigation extends React.Component {
               <NavItem>Debug</NavItem>
             </LinkContainer>
           }
-          { loginOrLogoutButton }
         </Nav>
+        { logoutButtonIfAuthenticated }
       </Navbar>
     )
   }
