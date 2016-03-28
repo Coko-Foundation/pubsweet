@@ -9,9 +9,6 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 
-// Temporary extension mechanism
-const substance = require('../registry/Substance')
-
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
@@ -172,8 +169,5 @@ api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
     next(err)
   })
 })
-
-// TEMP EXTENSION API
-api.use('/substance', substance)
 
 module.exports = api

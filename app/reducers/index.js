@@ -14,7 +14,6 @@ import {
   DELETE_FRAGMENT_REQUEST,
   // DELETE_FRAGMENT_SUCCESS,
   // RESET_ERROR_MESSAGE,
-  GET_SUBSTANCE_DOCUMENT_SUCCESS,
   GET_DEBUG_INFO_SUCCESS
 } from '../actions/types'
 
@@ -84,14 +83,6 @@ function fragments (state = initialFragments, action) {
   return state
 }
 
-function substance (state = {}, action) {
-  switch (action.type) {
-    case GET_SUBSTANCE_DOCUMENT_SUCCESS:
-      return action.document
-  }
-  return state
-}
-
 function debug (state = [], action) {
   switch (action.type) {
     case GET_DEBUG_INFO_SUCCESS:
@@ -107,7 +98,6 @@ const rootReducer = combineReducers({
   error,
   router,
   auth,
-  substance,
   debug
 })
 

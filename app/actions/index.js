@@ -235,8 +235,6 @@ export { loginUser, logoutUser, getUser, signupUser } from './auth'
 // Actions for users management
 export { getUsers, updateUser } from './users'
 
-export { createSubstanceDocument, getSubstanceDocument } from './substance'
-
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
 export function hydrate () {

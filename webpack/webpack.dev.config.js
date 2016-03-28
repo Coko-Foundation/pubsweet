@@ -19,7 +19,8 @@ var commonLoaders = [
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
     query: {
-      'presets': ['react-hmre', 'es2015', 'react']
+      'presets': ['react-hmre', 'es2015', 'react'],
+      'cacheDirectory': true
     },
     include: path.join(__dirname, '..', 'app'),
     exclude: path.join(__dirname, '/node_modules/')

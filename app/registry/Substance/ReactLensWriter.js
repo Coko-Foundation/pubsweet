@@ -2,16 +2,6 @@ var React = require('react')
 var LensWriter = require('lens/LensWriter')
 var Component = require('lens/node_modules/substance/ui/Component')
 var DocumentSession = require('substance/model/DocumentSession')
-// var CollabSession = require('substance/collab/CollabSession')
-// var CollabClient = require('substance/collab/CollabClient')
-
-// var $$ = Component.$$
-
-// var LensArticleExporter = require('lens/model/LensArticleExporter')
-// var LensArticleImporter = require('lens/model/LensArticleImporter')
-
-// var exporter = new LensArticleExporter()
-// var importer = new LensArticleImporter()
 
 const JSONConverter = require('substance/model/JSONConverter')
 const defaultLensArticle = require('lens/model/defaultLensArticle')
@@ -33,18 +23,11 @@ class ReactLensWriter extends React.Component {
         {'type': 'article-meta', 'id': 'article-meta', 'title': 'Untitled', 'authors': [], 'abstract': 'Enter abstract'},
         {'type': 'paragraph', 'id': 'p1', 'content': 'Enter text here'}
       ]}
+
     var format = this.props.format ? this.props.format : 'json'
     var doc = this.createDoc(content, format)
-    // var collabClient = new CollabClient({
-    //   wsUrl: 'ws://' + document.location.hostname + ':8080'
-    // })
     var documentSession = new DocumentSession(doc)
 
-    // var documentSession = new CollabSession(doc, {
-    //   docId: this.props.documentId,
-    //   docVersion: this.props.version,
-    //   collabClient: collabClient
-    // })
     return documentSession
   }
 
