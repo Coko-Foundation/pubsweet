@@ -12,7 +12,7 @@ class Writer extends React.Component {
   }
 
   save (source, callback) {
-    let doc = Object.assign(this.props.document, {
+    let doc = Object.assign(this.props.fragment, {
       source: source
     })
     this.props.save(doc)
@@ -25,9 +25,9 @@ class Writer extends React.Component {
 
   render () {
     return <LensWriter
-      documentId={this.props.document._id}
-      version={this.props.document.version}
-      content={this.props.document.source}
+      documentId={this.props.fragment._id}
+      version={this.props.fragment.version}
+      content={this.props.fragment.source}
       onSave={this.save}
       format='json'
       onUploadFile={this.uploadFile}
@@ -36,7 +36,7 @@ class Writer extends React.Component {
 }
 
 Writer.propTypes = {
-  document: React.PropTypes.object,
+  fragment: React.PropTypes.object,
   save: React.PropTypes.func,
   uploadFile: React.PropTypes.func
 }

@@ -1,8 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-// var HappyPack = require('happypack')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
-
+var config = require('../config')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
 
@@ -73,7 +71,10 @@ module.exports = [
       loaders: commonLoaders
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.json', '.scss']
+      extensions: ['', '.js', '.jsx', '.json', '.scss'],
+      alias: {
+        'editor$': config.editor
+      }
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),

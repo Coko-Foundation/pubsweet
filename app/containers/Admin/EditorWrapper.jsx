@@ -5,8 +5,9 @@ import * as Actions from '../../actions'
 import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 
-// Which editor component to import?
-import Editor from '../../registry/Substance/Writer'
+// This is configured at build time via config.js: config.editor
+// Check out the relevant webpack config (webpack.dev.config.js in development)
+import Editor from 'editor'
 
 export default class EditorWrapper extends React.Component {
   constructor (props) {
@@ -25,6 +26,7 @@ export default class EditorWrapper extends React.Component {
         return callback(null, text)
       })
   }
+
   render () {
     let editor
 
@@ -48,12 +50,13 @@ export default class EditorWrapper extends React.Component {
 
 EditorWrapper.propTypes = {
   fragment: React.PropTypes.object,
-  actions: React.PropTypes.object
+  actions: React.PropTypes.object,
+  id: React.PropTypes.string.isRequired
 }
 
 function mapStateToProps (state) {
-  console.log(state)
   return {
+    id: state.router.params.id,
     fragment: _.find(state.fragments, function (f) {
       return f._id === state.router.params.id
     })
