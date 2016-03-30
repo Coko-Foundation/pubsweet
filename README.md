@@ -19,17 +19,17 @@ $ npm install
 
 # Start the server
 
+First, initialize your blog by running and going through the setup process:
+```bash
+$ NODE_ENV=dev node api/setup.js
+```
+
 To start the JS compilation and webserver, run:
 ```bash
 $ npm run dev
 ```
 
-And then open another terminal window in the same directory and initialize your blog by running and going through the setup process:
-```bash
-$ NODE_ENV=dev node api/setup.js
-```
-
-Point your browser to: http://localhost:3000/admin/manager and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
+Point your browser to: http://localhost:3000/admin/posts and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
 # Production installation
 
