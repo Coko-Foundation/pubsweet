@@ -1,6 +1,7 @@
 module.exports = {
-  'secret': 'EXAMPLEDONTUSE',
-  'API_ENDPOINT': '/api',
+  secret: 'EXAMPLEDONTUSE',
+  API_ENDPOINT: '/api',
   // editor: '../../registry/Substance/Writer.jsx'
-  editor: '../../registry/Quill/Editor.jsx'
+  editor: '../../registry/Quill/Editor.jsx',
+  theme: 'dark'
 }

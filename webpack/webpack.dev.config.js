@@ -32,11 +32,11 @@ var commonLoaders = [
   { test: /\.json$/, loader: 'json-loader' },
   { test: /\.css$|\.scss$/,
     exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader'
+    loader: 'style-loader!css-loader!sass-loader!theme-loader'
   },
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!theme-loader'
   }
 
 ]
@@ -70,6 +70,11 @@ module.exports = [
       }],
       loaders: commonLoaders
     },
+    resolveLoader: {
+      alias: {
+        'theme-loader': path.join(__dirname, './theme-loader')
+      }
+    },
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
@@ -77,6 +82,9 @@ module.exports = [
       }
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'THEME': JSON.stringify(config.theme)
+      }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()

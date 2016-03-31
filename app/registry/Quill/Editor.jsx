@@ -6,7 +6,30 @@ import _ from 'lodash'
 import React from 'react'
 import ReactQuill from 'react-quill'
 
-import '../../scss/components/_editor'
+// if(THEME === 'default') { //eslint-disable-line
+//   require(defaultTheme)
+// } else {
+//   try {
+//     require(theme)
+//   } catch (err) {
+//     console.error(err, 'Theme not found for', theme)
+//     require(defaultTheme)
+//   }
+// }
+
+var defaultTheme = './styles/Editor.scss'
+var theme = './styles/Editor-' + THEME + '.scss' //eslint-disable-line
+
+fs.stat(theme, function (err) { //eslint-disable-line
+  err && require('./styles/Editor.scss') || require(defaultTheme)
+})
+
+// switch (THEME) { //eslint-disable-line
+//   case 'dark':
+
+//     break
+//   default:
+// }
 
 class Editor extends React.Component {
   constructor (props) {
