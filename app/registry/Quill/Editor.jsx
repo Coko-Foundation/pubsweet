@@ -17,12 +17,14 @@ import ReactQuill from 'react-quill'
 //   }
 // }
 
-var defaultTheme = './styles/Editor.scss'
-var theme = './styles/Editor-' + THEME + '.scss' //eslint-disable-line
+import './styles/Editor.scss'
 
-fs.stat(theme, function (err) { //eslint-disable-line
-  err && require('./styles/Editor.scss') || require(defaultTheme)
-})
+// var defaultTheme = './styles/Editor.scss'
+// var theme = './styles/Editor-' + THEME + '.scss' //eslint-disable-line
+
+// fs.stat(theme, function (err) { //eslint-disable-line
+//   err && require('./styles/Editor.scss') || require(defaultTheme)
+// })
 
 // switch (THEME) { //eslint-disable-line
 //   case 'dark':

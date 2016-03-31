@@ -32,11 +32,11 @@ var commonLoaders = [
   { test: /\.json$/, loader: 'json-loader' },
   { test: /\.css$|\.scss$/,
     exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader!theme-loader'
+    loader: 'style-loader!css-loader!sass-loader!' + path.join(__dirname, './theme-loader') + '?what=true&theme=330' + config.theme
   },
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!theme-loader'
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
   }
 
 ]
