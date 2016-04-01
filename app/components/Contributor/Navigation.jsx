@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, NavItem, NavBrand } from 'react-bootstrap'
+import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
 import Logout from '../Logout'
 
@@ -15,9 +15,9 @@ export default class Navigation extends React.Component {
     return (
       <Navbar>
         <Navbar.Header>
-          <NavBrand>
+          <NavbarBrand>
             <a href='#'>Science Blogger</a>
-          </NavBrand>
+          </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
           <LinkContainer to='/contributor/posts'>

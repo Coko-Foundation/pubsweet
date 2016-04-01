@@ -197,6 +197,7 @@ export function signupUser (user) {
           return Promise.reject(user)
         } else {
           dispatch(signupSuccess(user))
+          dispatch(pushState(null, '/login'))
         }
       }).catch(err => console.log('Error: ', err))
   }

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Alert } from 'react-bootstrap'
+import { Link } from 'react-router'
 
 import { loginUser } from '../actions'
 import styles from '../scss/components/Login.local.scss'
@@ -36,7 +37,7 @@ class Login extends Component {
                 className={styles.button + ' btn btn-block btn-primary'}>
                 Login
               </button>
-              <p>Don't have an account? <a href='/signup'>Sign Up Here</a></p>
+              <p>Don't have an account? <Link to='/signup'>Sign Up Here</Link></p>
             </form>
           </Col>
         </Row>
