@@ -12,7 +12,8 @@ import {
   UPDATE_FRAGMENT_REQUEST,
   UPDATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_REQUEST,
-  // DELETE_FRAGMENT_SUCCESS,
+  DELETE_FRAGMENT_FAILURE,
+  DELETE_FRAGMENT_SUCCESS,
   // RESET_ERROR_MESSAGE,
   GET_DEBUG_INFO_SUCCESS
 } from '../actions/types'
@@ -77,7 +78,22 @@ function fragments (state = initialFragments, action) {
       fragments[index]._rev = action.fragment._rev
       return fragments
     case DELETE_FRAGMENT_REQUEST:
-      fragments = _.without(fragments, action.fragment)
+      index = _.findIndex(fragments, function (f) {
+        return f._id === action.fragment._id
+      })
+      fragments[index].deleted = true
+      return fragments
+    case DELETE_FRAGMENT_FAILURE:
+      index = _.findIndex(fragments, function (f) {
+        return f._id === action.id
+      })
+      fragments[index].deleted = undefined
+      return fragments
+    case DELETE_FRAGMENT_SUCCESS:
+      index = _.findIndex(fragments, function (f) {
+        return f._id === action.fragment._id
+      })
+      fragments = _.without(fragments, fragments[index])
       return fragments
   }
   return state
