@@ -2,7 +2,7 @@ import React from 'react'
 import LensReader from './ReactLensReader'
 
 // Styles
-import './styles/reader.scss'
+import './styles/Reader.scss'
 
 export default class Reader extends React.Component {
   render () {

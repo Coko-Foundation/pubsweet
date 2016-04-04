@@ -1,5 +1,6 @@
+import './styles/Summary.jsx'
+
 import React from 'react'
-import './styles/summary'
 import { Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
