@@ -82,9 +82,6 @@ module.exports = [
       }
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'THEME': JSON.stringify(config.theme)
-      }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()

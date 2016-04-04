@@ -2,7 +2,7 @@ import React from 'react'
 import LensWriter from './ReactLensWriter'
 
 // Styles
-import './styles/writer.scss'
+import './styles/Writer.scss'
 
 class Writer extends React.Component {
   constructor (props) {
