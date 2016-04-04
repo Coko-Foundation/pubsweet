@@ -1,4 +1,4 @@
-import './styles/Summary.jsx'
+import './styles/Summary.scss'
 
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
