@@ -70,7 +70,7 @@ function updateUserFailure (message) {
   return {
     type: T.UPDATE_USER_FAILURE,
     isFetching: false,
-    message
+    error: message
   }
 }
 
@@ -89,13 +89,19 @@ export function updateUser (user) {
     return fetch(API_ENDPOINT + '/users/' + user._id, config)
       .then(response => {
         if (response.ok) {
-          return response.json()
+          return response.json().then(user => {
+            dispatch(updateUserSuccess(user))
+          })
         } else {
-          dispatch(updateUserFailure(user.message))
-          return Promise.reject(response)
+          return response.json().then(response => {
+            dispatch(updateUserFailure(response.message))
+            throw new Error(response.message)
+          })
         }
-      }).then(user => dispatch(updateUserSuccess(user)))
-      .catch(err => console.log('Error: ', err))
+      }).catch(err => {
+        dispatch(updateUserFailure(err.message))
+        console.log('Error: ', err)
+      })
   }
 }
 
