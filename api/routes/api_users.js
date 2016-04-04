@@ -53,11 +53,7 @@ users.post('/', function (req, res, next) {
   }).then(function (response) {
     return res.status(201).json(response)
   }).catch(function (err) {
-    if (err.name === 'ConflictError') {
-      return res.status(409).json(err.message)
-    } else {
-      next(err)
-    }
+    next(err)
   })
 })
 

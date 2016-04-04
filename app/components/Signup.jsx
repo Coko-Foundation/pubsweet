@@ -6,9 +6,13 @@ import { Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
 import { signupUser } from '../actions'
-import styles from '../scss/components/Login.local.scss'
+import styles from '../scss/components/Signup.local.scss'
 
 class Signup extends Component {
+  constructor (props) {
+    super(props)
+  }
+
   render () {
     const { error } = this.props
     return (

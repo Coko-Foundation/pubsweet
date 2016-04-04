@@ -92,28 +92,18 @@ app.use(function (req, res, next) {
   next(err)
 })
 
-// error handlers
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'dev' || app.get('env') === 'test') {
-  app.use(function (err, req, res, next) {
-    console.log(err.stack)
-    if (err.name === 'AuthorizationError') {
-      res.status(403).json({message: err.message})
-    } else {
-      res.status(err.status || 500).json({message: err.message})
-    }
-  })
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-  console.log(err.stack)
-  if (err.name === 'AuthorizationError') {
-    res.status(403).json({message: err.message})
+  // development error handler, will print stacktrace
+  if (app.get('env') === 'dev' || app.get('env') === 'test') {
+    console.log(err.stack)
+  }
+
+  if (err.name === 'ConflictError') {
+    return res.status(409).json({ message: err.message })
+  } else if (err.name === 'AuthorizationError') {
+    res.status(403).json({ message: err.message })
   } else {
-    res.status(err.status || 500).json({message: err.message})
+    res.status(err.status || 500).json({ message: err.message })
   }
 })
 
