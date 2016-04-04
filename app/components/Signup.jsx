@@ -3,11 +3,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 import { Alert, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router'
 
 import { signupUser } from '../actions'
-import styles from '../scss/components/Login.local.scss'
+import styles from '../scss/components/Signup.local.scss'
 
 class Signup extends Component {
+  constructor (props) {
+    super(props)
+  }
+
   render () {
     const { error } = this.props
     return (
@@ -32,7 +37,7 @@ class Signup extends Component {
               <button onClick={(event) => this.handleClick(event)} className={styles.button + ' btn btn-block btn-primary'}>
                 Sign up
               </button>
-              <p>Already have an account? <a href='/login'>Log in here</a></p>
+              <p>Already have an account? <Link to='/login'>Log in here</Link></p>
             </form>
           </Col>
         </Row>

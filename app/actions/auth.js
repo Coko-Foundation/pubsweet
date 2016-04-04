@@ -88,7 +88,10 @@ export function loginUser (credentials, redirectTo) {
             dispatch(pushState(null, redirectTo))
           }
         }
-      }).catch(err => console.log('Error: ', err))
+      }).catch(err => {
+        console.log('Error: ', err)
+        dispatch(loginFailure(err.message))
+      })
   }
 }
 
@@ -150,7 +153,10 @@ export function getUser () {
       .then(({ user, response }) => {
         user.token = localStorage.token
         dispatch(getUserSuccess(user))
-      }).catch(err => console.log('Error: ', err))
+      }).catch(err => {
+        console.log('Error: ', err)
+        dispatch(getUserFailure(err.message))
+      })
   }
 }
 
@@ -175,7 +181,7 @@ function signupFailure (message) {
     type: T.SIGNUP_FAILURE,
     isFetching: false,
     isAuthenticated: false,
-    message
+    error: message
   }
 }
 
@@ -197,7 +203,11 @@ export function signupUser (user) {
           return Promise.reject(user)
         } else {
           dispatch(signupSuccess(user))
+          dispatch(pushState(null, '/login'))
         }
-      }).catch(err => console.log('Error: ', err))
+      }).catch(err => {
+        console.log('Error: ', err)
+        dispatch(signupFailure(err.message))
+      })
   }
 }

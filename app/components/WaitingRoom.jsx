@@ -8,7 +8,7 @@ export default class WaitingRoom extends React.Component {
         <Row>
           <Col xs={12} md={6} mdOffset={3}>
             <h1>Waiting Room</h1>
-            <p>This is the waiting room. You've been sent here because there are no roles associated with your account.</p>
+            <p>This is the waiting room. You've been sent here because there are no roles associated with your account. Please try again later.</p>
           </Col>
         </Row>
       </div>

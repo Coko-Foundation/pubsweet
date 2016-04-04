@@ -1,8 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-// var HappyPack = require('happypack')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
-
+var config = require('../config')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
 
@@ -19,7 +17,8 @@ var commonLoaders = [
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
     query: {
-      'presets': ['react-hmre', 'es2015', 'react']
+      'presets': ['react-hmre', 'es2015', 'react'],
+      'cacheDirectory': true
     },
     include: path.join(__dirname, '..', 'app'),
     exclude: path.join(__dirname, '/node_modules/')
@@ -33,11 +32,11 @@ var commonLoaders = [
   { test: /\.json$/, loader: 'json-loader' },
   { test: /\.css$|\.scss$/,
     exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader'
+    loader: 'style-loader!css-loader!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
   },
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
   }
 
 ]
@@ -71,10 +70,21 @@ module.exports = [
       }],
       loaders: commonLoaders
     },
+    resolveLoader: {
+      alias: {
+        'theme-loader': path.join(__dirname, './theme-loader')
+      }
+    },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.json', '.scss']
+      extensions: ['', '.js', '.jsx', '.json', '.scss'],
+      alias: {
+        'editor$': config.editor
+      }
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'THEME': JSON.stringify(config.theme)
+      }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()

@@ -6,8 +6,6 @@ const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
-const roleFixture = fixtures.role
-const userRoleFixture = fixtures.userRole
 
 var api = require('../api')
 

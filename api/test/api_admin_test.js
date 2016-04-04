@@ -1,5 +1,6 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
+
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
@@ -8,7 +9,6 @@ const collectionFixture = fixtures.collection
 const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
-const Fragment = require('../models/Fragment')
 const User = require('../models/User')
 var api = require('../api')
 

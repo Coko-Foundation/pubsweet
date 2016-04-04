@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from 'react-bootstrap'
+import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
@@ -16,7 +16,7 @@ class UsersManager extends React.Component {
   }
 
   render () {
-    let { users, actions } = this.props
+    let { users, actions, error } = this.props
 
     if (users) {
       users = users.map((user, key) => {
@@ -32,6 +32,7 @@ class UsersManager extends React.Component {
     return (
       <div className='bootstrap'>
         <Grid>
+          { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
           <div>
             <table className='table'>
               <thead>
@@ -55,12 +56,14 @@ class UsersManager extends React.Component {
 
 UsersManager.propTypes = {
   users: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
+  error: React.PropTypes.string
 }
 
 function mapStateToProps (state) {
   return {
-    users: state.users.users
+    users: state.users.users,
+    error: state.error
   }
 }
 

@@ -9,9 +9,6 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 
-// Temporary extension mechanism
-const substance = require('../registry/Substance')
-
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
@@ -157,9 +154,11 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 
 // Delete a fragment
 api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
+  var deletedFragment
   return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
+    deletedFragment = fragment
     return fragment.delete()
   }).then(function () {
     return Collection.get()
@@ -167,13 +166,10 @@ api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
     collection.fragments = _.without(collection.fragments, req.params.id)
     return collection.save()
   }).then(function (result) {
-    return res.status(200).json(result)
+    return res.status(200).json(deletedFragment)
   }).catch(function (err) {
     next(err)
   })
 })
-
-// TEMP EXTENSION API
-api.use('/substance', substance)
 
 module.exports = api

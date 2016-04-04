@@ -3,8 +3,6 @@ const Model = require('./Model')
 const Role = require('./Role')
 
 const ConflictError = require('../errors/ConflictError')
-// const NotFoundError = require('../errors/NotFoundError')
-// const config = require('../../config.json')
 const bcrypt = require('bcryptjs')
 const _ = require('lodash')
 
@@ -14,7 +12,7 @@ class User extends Model {
 
     // Hash and delete the password if it's set
     if (properties.password) {
-      this.passwordHash = bcrypt.hashSync(properties.password, 1)
+      this.passwordHash = bcrypt.hashSync(properties.password, 10)
       delete this.password
     }
 

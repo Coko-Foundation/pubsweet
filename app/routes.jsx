@@ -5,11 +5,10 @@ import { requireAuthentication } from './containers/AuthenticatedComponent'
 
 // Admin
 import Admin from './containers/Admin'
-import About from './components/Admin/About'
 import Debug from './components/Admin/Debug'
 
 import BlogManager from './containers/Admin/BlogManager'
-import Editor from './containers/Admin/SubstanceEditorWrapper'
+import Editor from './containers/Admin/EditorWrapper'
 import UsersManager from './containers/Admin/UsersManager'
 
 // Contributor
@@ -27,17 +26,15 @@ export default (
     <Route path='/' component={Blog}/>
 
     <Route path='/admin' component={requireAuthentication(Admin)}>
-      <Route path='manager' component={BlogManager} />
+      <Route path='posts' component={BlogManager} />
       <Route path='editor/:id' component={Editor} />
       <Route path='users' component={UsersManager} />
-      <Route path='about' component={About} />
       <Route path='debug' component={Debug} />
     </Route>
 
     <Route path='/contributor' component={requireAuthentication(Contributor)}>
-      <Route path='manager' component={BlogManager} />
+      <Route path='posts' component={BlogManager} />
       <Route path='editor/:id' component={Editor} />
-      <Route path='about' component={About} />
     </Route>
 
     <Route path='login' component={Login} />

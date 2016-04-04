@@ -3,8 +3,11 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const express = require('express')
+const _ = require('lodash')
+
 const User = require('../models/User')
 const Authorize = require('../models/Authorize')
+const AuthorizationError = require('../errors/AuthorizationError')
 const config = require('../../config')
 const roles = require('./api_roles')
 
@@ -53,11 +56,7 @@ users.post('/', function (req, res, next) {
   }).then(function (response) {
     return res.status(201).json(response)
   }).catch(function (err) {
-    if (err.name === 'ConflictError') {
-      return res.status(409).json(err.message)
-    } else {
-      next(err)
-    }
+    next(err)
   })
 })
 
@@ -97,6 +96,12 @@ users.delete('/:id', authBearer, function (req, res, next) {
 // Update a user
 users.put('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+    return User.find(req.authInfo.id, {include: ['roles']})
+  }).then(function (user) {
+    // Can only update roles if admin
+    if (req.body.roles && !_.includes(user.roles, 'admin')) {
+      throw new AuthorizationError('only admins can set roles')
+    }
     return User.find(req.params.id)
   }).then(function (user) {
     return user.updateProperties(req.body)

@@ -186,6 +186,24 @@ describe('users api', function () {
         })
     })
 
+    it('can not give itself roles', function () {
+      return request(api)
+        .post('/api/users/authenticate')
+        .send({
+          username: otherUserFixture.username,
+          password: otherUserFixture.password
+        })
+        .expect(201)
+        .then(function (res) {
+          var token = res.body.token
+          return request(api)
+            .put('/api/users/' + otherUserId)
+            .set('Authorization', 'Bearer ' + token)
+            .send(Object.assign({_id: otherUserId, roles: ['admin']}, otherUserFixture))
+            .expect(403)
+        })
+    })
+
     it('updates itself', function () {
       return request(api)
         .post('/api/users/authenticate')

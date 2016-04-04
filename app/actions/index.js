@@ -84,8 +84,7 @@ export function createFragmentRequest (fragment) {
 export function createFragmentSuccess (fragment) {
   return {
     type: T.CREATE_FRAGMENT_SUCCESS,
-    fragment: fragment,
-    receivedAt: Date.now()
+    fragment: fragment
   }
 }
 
@@ -176,8 +175,15 @@ export function deleteFragmentRequest (fragment) {
 export function deleteFragmentSuccess (fragment) {
   return {
     type: T.DELETE_FRAGMENT_SUCCESS,
-    fragment: fragment,
-    receivedAt: Date.now()
+    fragment: fragment
+  }
+}
+
+export function deleteFragmentFailure (message, fragmentId) {
+  return {
+    id: fragmentId,
+    type: T.DELETE_FRAGMENT_FAILURE,
+    error: message
   }
 }
 
@@ -194,8 +200,18 @@ export function deleteFragment (fragment) {
         'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(fragment)})
-      .then(response => response.json())
-      .then(fragment => dispatch(deleteFragmentSuccess(fragment)))
+      .then(response => {
+        if (response.ok) {
+          return response.json().then(response => {
+            dispatch(deleteFragmentSuccess(response))
+          })
+        } else {
+          return response.json().then(response => {
+            dispatch(deleteFragmentFailure(response.message, fragment._id))
+            throw new Error(response.message)
+          })
+        }
+      })
   }
 }
 
@@ -234,8 +250,6 @@ export { loginUser, logoutUser, getUser, signupUser } from './auth'
 
 // Actions for users management
 export { getUsers, updateUser } from './users'
-
-export { createSubstanceDocument, getSubstanceDocument } from './substance'
 
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
