@@ -246,7 +246,7 @@ export function getDebugInfo (fragment) {
 
 // Actions for auth
 import { getUser } from './auth'
-export { loginUser, logoutUser, getUser, signupUser, switchRole } from './auth'
+export { loginUser, logoutUser, getUser, signupUser } from './auth'
 
 // Actions for users management
 export { getUsers, updateUser } from './users'

@@ -211,10 +211,3 @@ export function signupUser (user) {
       })
   }
 }
-
-export function switchRole (role) {
-  return {
-    type: T.SWITCH_ROLE,
-    role: role
-  }
-}

@@ -65,10 +65,6 @@ export default function auth (state = {
         isFetching: false,
         isAuthenticated: false
       })
-    case SWITCH_ROLE:
-      return Object.assign({}, state, {
-        currentRole: action.role
-      })
     default:
       return state
   }
