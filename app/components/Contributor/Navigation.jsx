@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
-import Logout from '../Logout'
+import NavbarUser from '../NavbarUser'
 
 export default class Navigation extends React.Component {
 
@@ -10,8 +10,14 @@ export default class Navigation extends React.Component {
     const { actions, auth } = this.props
     let logoutButtonIfAuthenticated
     if (auth.isAuthenticated) {
-      logoutButtonIfAuthenticated = <Logout username={auth.username} onLogoutClick={() => actions.logoutUser() } />
+      logoutButtonIfAuthenticated = <NavbarUser
+        roles={auth.roles}
+        username={auth.username}
+        switchRole={actions.switchRole}
+        onLogoutClick={actions.logoutUser}
+      />
     }
+
     return (
       <Navbar>
         <Navbar.Header>

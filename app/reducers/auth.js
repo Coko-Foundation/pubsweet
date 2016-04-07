@@ -3,7 +3,7 @@ const localStorage = window.localStorage || undefined
 
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST,
-  GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
+  GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS, SWITCH_ROLE
 } from '../actions/types'
 
 // The auth reducer. The starting state sets authentication
@@ -64,6 +64,10 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false
+      })
+    case SWITCH_ROLE:
+      return Object.assign({}, state, {
+        currentRole: action.role
       })
     default:
       return state

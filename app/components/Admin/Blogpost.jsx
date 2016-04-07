@@ -91,7 +91,7 @@ export default class Blogpost extends React.Component {
           {blogpost.published_at} ({blogpost.published ? 'published' : 'unpublished'})
         </td>
         <td>
-          <LinkContainer to={`/admin/editor/${blogpost._id}`}>
+          <LinkContainer to={`editor/${blogpost._id}`}>
             <Button bsStyle='primary' title='Edit' aria-label='Edit'>
               <i className='fa fa-pencil'></i>
             </Button>
