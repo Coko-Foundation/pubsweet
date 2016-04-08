@@ -1,13 +1,13 @@
 import React from 'react'
 import { Grid, Alert } from 'react-bootstrap'
-import BlogpostList from '../../components/Admin/BlogpostList'
-import BlogpostCreator from '../../components/Admin/BlogpostCreator'
+import BlogpostList from '../components/BlogpostList'
+import BlogpostCreator from '../components/BlogpostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../../scss/components/_manage'
-import * as Actions from '../../actions'
+import styles from '../scss/components/_manage'
+import * as Actions from '../actions'
 
-class BlogManager extends React.Component {
+class PostsManager extends React.Component {
   constructor (props) {
     super(props)
   }
@@ -30,7 +30,7 @@ class BlogManager extends React.Component {
   }
 }
 
-BlogManager.propTypes = {
+PostsManager.propTypes = {
   blog: React.PropTypes.object.isRequired,
   blogposts: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired,
@@ -54,4 +54,4 @@ function mapDispatch (dispatch) {
 export default connect(
   mapState,
   mapDispatch
-)(BlogManager)
+)(PostsManager)

@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
 import * as Actions from '../actions'
 
-// Which reader to use?
-import Blogpost from '../registry/Substance/Reader'
-// import Blogpost from 'pubsweet-components/QuillReader'
+import Blogpost from 'reader'
 
 class BlogpostWrapper extends React.Component {
   constructor (props) {

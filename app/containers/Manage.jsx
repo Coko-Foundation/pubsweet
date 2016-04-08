@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import Navigation from '../components/Admin/Navigation'
+import Navigation from '../components/Navigation'
 
 import '../scss/main'
 
-class Admin extends Component {
+class Manage extends Component {
   constructor (props) {
     super(props)
   }
@@ -24,10 +24,10 @@ class Admin extends Component {
   }
 }
 
-Admin.propTypes = {
+Manage.propTypes = {
   auth: PropTypes.object,
   children: PropTypes.node,
   actions: React.PropTypes.object.isRequired
 }
 
-export default Admin
+export default Manage

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 
-import { getDebugInfo } from '../../actions'
+import { getDebugInfo } from '../actions'
 
 class Debug extends React.Component {
   constructor (props) {

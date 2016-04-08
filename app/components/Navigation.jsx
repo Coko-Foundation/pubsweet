@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
-import NavbarUser from '../NavbarUser'
+import NavbarUser from './NavbarUser'
 
 export default class Navigation extends React.Component {
 

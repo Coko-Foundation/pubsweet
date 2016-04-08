@@ -78,7 +78,8 @@ module.exports = [
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
-        'editor$': config.editor
+        'editor$': config.editor,
+        'reader$': config.reader
       }
     },
     plugins: [

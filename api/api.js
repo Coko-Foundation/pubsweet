@@ -7,7 +7,6 @@ const webpack = require('webpack')
 
 const index = require('./routes/index')
 const api = require('./routes/api')
-const admin = require('./routes/admin')
 
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
@@ -80,9 +79,11 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
   })
 }))
 
-// Main APIs
+// Main API
 app.use('/api', api)
-app.use('/admin', admin)
+
+// Serve the index page for front end
+app.use('/manage', index)
 app.use('/', index)
 
 // catch 404 and forward to error handler
