@@ -4,7 +4,7 @@ import BlogpostList from '../components/BlogpostList'
 import BlogpostCreator from '../components/BlogpostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../scss/components/_manage'
+import styles from '../scss/components/PostsManager'
 import * as Actions from '../actions'
 
 class PostsManager extends React.Component {

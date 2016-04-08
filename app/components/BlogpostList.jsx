@@ -1,7 +1,7 @@
 import React from 'react'
 import Blogpost from './Blogpost'
 
-import styles from '../scss/components/_blogpostList'
+import styles from '../scss/components/BlogpostList'
 
 export default class BlogpostList extends React.Component {
   render () {
