@@ -11,7 +11,7 @@ import styles from '../scss/components/Login.local.scss'
 class Login extends Component {
   constructor (props) {
     super(props)
-    this.redirectTo = this.props.location.query.next || '/admin/posts'
+    this.redirectTo = this.props.location.query.next || '/manage/posts'
   }
 
   render () {

@@ -24,16 +24,6 @@ export function requireAuthentication (Component) {
         let redirectAfterLogin = this.props.location.pathname
         this.props.pushState(null, `/login?next=${redirectAfterLogin}`)
       }
-
-      if (this.props.currentRole === 'admin' &&
-        this.props.location.pathname.substring(0, 6) !== '/admin') {
-        console.log('Admin role selected, redirecting to the admin pages')
-        this.props.pushState(null, '/admin/posts')
-      } else if (this.props.currentRole === 'contributor' &&
-        this.props.location.pathname.substring(0, 12) !== '/contributor') {
-        console.log('Contributor role selected, redirecting to the contributor pages')
-        this.props.pushState(null, '/contributor/posts')
-      }
     }
 
     render () {
@@ -52,7 +42,6 @@ export function requireAuthentication (Component) {
     location: PropTypes.object,
     username: PropTypes.string,
     roles: PropTypes.array,
-    currentRole: PropTypes.string,
     actions: React.PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     pushState: PropTypes.func.isRequired
@@ -60,7 +49,6 @@ export function requireAuthentication (Component) {
 
   function mapState (state) {
     return {
-      currentRole: state.auth.currentRole,
       roles: state.auth.roles,
       auth: state.auth
     }

@@ -7,11 +7,22 @@ class AuthHelper {
 
   }
 
-  showForUser (user, object, action = '*') {
+  static showForUser (user, object, action = '*') {
+    var allowed
     if (includes(user.roles, 'admin')) {
-      return true
+      allowed = AuthHelper.roles['admin'][object]
+      if (allowed && (allowed === '*' || includes(allowed, action))) {
+        return true
+      } else {
+        return false
+      }
     } else if (includes(user.roles, 'contributor')) {
-      return false
+      allowed = AuthHelper.roles['contributor'][object]
+      if (allowed && (allowed === '*' || includes(allowed, action))) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
