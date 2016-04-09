@@ -7,22 +7,35 @@ class AuthHelper {
 
   }
 
+  static _actionAllowed (action, permissions, object, user) {
+    if (permissions && permissions === '*') {
+      return true
+    } else if (typeof permissions === 'object') {
+      var actionPermission = permissions[action]
+      if (typeof actionPermission === 'function') {
+        return actionPermission(object, user)
+      } else {
+        return actionPermission
+      }
+    }
+  }
+
+  static _type (object) {
+    if (typeof object === 'string') {
+      return object
+    } else {
+      return object.type + 's'
+    }
+  }
+
   static showForUser (user, object, action = '*') {
-    var allowed
+    var permissions
     if (includes(user.roles, 'admin')) {
-      allowed = AuthHelper.roles['admin'][object]
-      if (allowed && (allowed === '*' || includes(allowed, action))) {
-        return true
-      } else {
-        return false
-      }
+      permissions = AuthHelper.roles['admin'][this._type(object)]
+      return this._actionAllowed(action, permissions, object, user)
     } else if (includes(user.roles, 'contributor')) {
-      allowed = AuthHelper.roles['contributor'][object]
-      if (allowed && (allowed === '*' || includes(allowed, action))) {
-        return true
-      } else {
-        return false
-      }
+      permissions = AuthHelper.roles['contributor'][this._type(object)]
+      return this._actionAllowed(action, permissions, object, user)
     }
   }
 }
@@ -34,7 +47,15 @@ AuthHelper.roles = {
     collection: '*',
     fragments: '*'
   }, contributor: {
-    fragments: ['create']
+    fragments: {
+      create: true,
+      edit: function (fragment, user) {
+        return fragment.owner === user.username
+      },
+      delete: function (fragment, user) {
+        return fragment.owner === user.username
+      }
+    }
   }
 }
 

@@ -13,6 +13,7 @@ export default class BlogpostList extends React.Component {
         blogpost={blogpost}
         delete={this.props.delete}
         update={this.props.update}
+        auth={this.props.auth}
       />)
     })
     return (
@@ -39,5 +40,6 @@ export default class BlogpostList extends React.Component {
 BlogpostList.propTypes = {
   update: React.PropTypes.func,
   delete: React.PropTypes.func,
-  blogposts: React.PropTypes.array
+  blogposts: React.PropTypes.array,
+  auth: React.PropTypes.object
 }

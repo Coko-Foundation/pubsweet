@@ -13,7 +13,7 @@ class PostsManager extends React.Component {
   }
 
   render () {
-    const { blog, blogposts, actions, error } = this.props
+    const { blog, blogposts, actions, error, auth } = this.props
     return (
       <div className='bootstrap'>
         <Grid>
@@ -22,7 +22,8 @@ class PostsManager extends React.Component {
           <BlogpostList
             update={actions.updateFragment}
             delete={actions.deleteFragment}
-            blogposts={blogposts} />
+            blogposts={blogposts}
+            auth={auth} />
           <BlogpostCreator create={actions.createFragment} />
         </Grid>
       </div>
@@ -34,14 +35,16 @@ PostsManager.propTypes = {
   blog: React.PropTypes.object.isRequired,
   blogposts: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired,
-  error: React.PropTypes.object
+  error: React.PropTypes.object,
+  auth: React.PropTypes.object
 }
 
 function mapState (state) {
   return {
     blog: state.collections[0],
     blogposts: state.fragments,
-    error: state.error
+    error: state.error,
+    auth: state.auth
   }
 }
 
