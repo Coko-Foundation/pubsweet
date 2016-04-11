@@ -87,7 +87,11 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
   var fallback = Collection.get().then(function (collection) {
     console.log('Falling back to anonymous')
-    return collection.getFragments({filter: 'published'})
+    if (req.user) {
+      return collection.getFragments({filter: {published: true, owner: req.user}})
+    } else {
+      return collection.getFragments({filter: {published: true}})
+    }
   }).catch(function (err) {
     next(err)
   })

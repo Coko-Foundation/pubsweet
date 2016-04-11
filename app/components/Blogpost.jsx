@@ -93,7 +93,7 @@ export default class Blogpost extends React.Component {
         </td>
         <td>
           { AuthHelper.showForUser(auth, blogpost, 'edit') &&
-            <LinkContainer to={`editor/${blogpost._id}`}>
+            <LinkContainer to={`/manage/editor/${blogpost._id}`}>
               <Button bsStyle='primary' title='Edit' aria-label='Edit'>
                 <i className='fa fa-pencil'></i>
               </Button>

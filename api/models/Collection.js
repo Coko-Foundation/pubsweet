@@ -1,4 +1,5 @@
 'use strict'
+const _ = require('lodash')
 const Model = require('./Model')
 
 class Collection extends Model {
@@ -12,22 +13,21 @@ class Collection extends Model {
   // e.g. collection.getFragments({filter: 'published'})
   getFragments (options) {
     options = options || {}
-
     if (!this.fragments) { return [] }
     var fragments = this.fragments.map(function (id) {
       return db.get(id)
     })
 
     return Promise.all(fragments).then(function (fragments) {
-      if (options.filter) {
-        return fragments.filter(function (fragment) {
-          if (fragment[options.filter] === true) {
-            return fragment
-          }
-        })
-      } else {
-        return fragments
-      }
+      return fragments.filter(function (fragment) {
+        if (options.filter) {
+          return _.some(_.map(options.filter, function (value, key) {
+            return fragment[key] === value
+          }))
+        } else {
+          return fragment
+        }
+      })
     })
   }
 
