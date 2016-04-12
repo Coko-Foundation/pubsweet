@@ -78,10 +78,14 @@ module.exports = [
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
-        'editor$': config.editor
+        'editor$': config.editor,
+        'reader$': config.reader
       }
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('dev')
+      }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),
       new webpack.NoErrorsPlugin()

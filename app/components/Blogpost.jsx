@@ -3,7 +3,8 @@ import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
-import '../../scss/components/Admin/blogpost'
+import '../scss/components/Blogpost'
+import AuthHelper from '../helpers/AuthHelper'
 
 export default class Blogpost extends React.Component {
   constructor (props) {
@@ -47,7 +48,7 @@ export default class Blogpost extends React.Component {
   }
 
   render () {
-    const { blogpost, number } = this.props
+    const { blogpost, number, auth } = this.props
     var input
     if (this.state.isEditing) {
       input =
@@ -91,15 +92,20 @@ export default class Blogpost extends React.Component {
           {blogpost.published_at} ({blogpost.published ? 'published' : 'unpublished'})
         </td>
         <td>
-          <LinkContainer to={`/admin/editor/${blogpost._id}`}>
-            <Button bsStyle='primary' title='Edit' aria-label='Edit'>
-              <i className='fa fa-pencil'></i>
+          { AuthHelper.showForUser(auth, blogpost, 'edit') &&
+            <LinkContainer to={`/manage/editor/${blogpost._id}`}>
+              <Button bsStyle='primary' title='Edit' aria-label='Edit'>
+                <i className='fa fa-pencil'></i>
+              </Button>
+            </LinkContainer>}
+
+          { AuthHelper.showForUser(auth, blogpost, 'edit') && changePublished }
+
+          { AuthHelper.showForUser(auth, blogpost, 'delete') &&
+            <Button bsStyle='danger' onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
+              <i className='fa fa-trash-o'></i>
             </Button>
-          </LinkContainer>&nbsp;
-          {changePublished}&nbsp;
-          <Button bsStyle='danger' onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
-            <i className='fa fa-trash-o'></i>
-          </Button>
+          }
         </td>
       </tr>
     )
@@ -110,5 +116,6 @@ Blogpost.propTypes = {
   number: React.PropTypes.number,
   blogpost: React.PropTypes.object,
   delete: React.PropTypes.func,
-  update: React.PropTypes.func
+  update: React.PropTypes.func,
+  auth: React.PropTypes.object
 }

@@ -11,7 +11,7 @@ api.use('/', collection)
 var multer = require('multer')
 var upload = multer({
   dest: 'public/uploads/',
-  limits: {fileSize: 1000000, files: 1}
+  limits: {fileSize: 10000000, files: 1}
 })
 
 api.post('/upload', upload.single('file'), function (req, res, next) {

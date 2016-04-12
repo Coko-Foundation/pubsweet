@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-// import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, NavItem } from 'react-bootstrap'
 
-export default class Logout extends Component {
+export default class NavbarUser extends Component {
+  constructor (props) {
+    super(props)
+  }
 
   render () {
     const { onLogoutClick, username } = this.props
@@ -10,14 +12,15 @@ export default class Logout extends Component {
     return (
       <Nav pullRight>
         <NavItem pullRight><i className='fa fa-user'/> {username}</NavItem>
-        <NavItem onClick={() => onLogoutClick()}>Logout</NavItem>
+        <NavItem onClick={onLogoutClick}>Logout</NavItem>
       </Nav>
     )
   }
 
 }
 
-Logout.propTypes = {
+NavbarUser.propTypes = {
   onLogoutClick: PropTypes.func.isRequired,
-  username: PropTypes.string
+  username: PropTypes.string,
+  roles: PropTypes.array
 }

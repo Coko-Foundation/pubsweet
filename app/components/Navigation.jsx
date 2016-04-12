@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
-import Logout from '../Logout'
+import AuthHelper from '../helpers/AuthHelper'
+import NavbarUser from './NavbarUser'
 
 export default class Navigation extends React.Component {
 
@@ -10,7 +11,12 @@ export default class Navigation extends React.Component {
     const { actions, auth } = this.props
     let logoutButtonIfAuthenticated
     if (auth.isAuthenticated) {
-      logoutButtonIfAuthenticated = <Logout username={auth.username} onLogoutClick={() => actions.logoutUser() } />
+      logoutButtonIfAuthenticated = <NavbarUser
+        roles={auth.roles}
+        username={auth.username}
+        switchRole={actions.switchRole}
+        onLogoutClick={actions.logoutUser}
+      />
     }
     return (
       <Navbar>
@@ -20,15 +26,16 @@ export default class Navigation extends React.Component {
           </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
-          <LinkContainer to='/admin/posts'>
+          <LinkContainer to='/manage/posts'>
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          <LinkContainer to='/admin/users'>
-            <NavItem>Users</NavItem>
-          </LinkContainer>
-          {
-            process.env.NODE_ENV === 'dev' &&
-            <LinkContainer to='/admin/debug'>
+          { AuthHelper.showForUser(auth, 'users') &&
+            <LinkContainer to='/manage/users'>
+              <NavItem>Users</NavItem>
+            </LinkContainer>
+          }
+          { process.env.NODE_ENV === 'dev' &&
+            <LinkContainer to='/manage/debug'>
               <NavItem>Debug</NavItem>
             </LinkContainer>
           }
