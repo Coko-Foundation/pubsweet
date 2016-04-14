@@ -74,14 +74,14 @@ npm run start
 
 The application should now be accessible through port 80 on your server.
 
-# Roadmap (6th of March, 2016)
+# Roadmap (14th of April, 2016)
 
-Until 13th of March 2016:
+Until 30th of April 2016:
 
-- Public API endpoints (Bearer authentication with anonymous/public fallback that filters objects based on a boolean value such as {published: true}).
-- Public UI flow (visit blog, read blogposts)
-- Contributor role UI flow (signup as a new user, be given a contributor role by an admin, be able to create a blog post)
+- Integrate Stencila Sheets as a component in PubSweet framework. This requires the development of a server extension system that we already began developing when we integrated Substance's collaboration hub.
 
-Until 20th of March 2016:
+3-4th of May 2016: csv,conf in Berlin, where we are presenting the Stencila Sheets integration
 
-- Collaboration hub in collaboration with Substance.
+7th of May onwards:
+
+- 0.3 development begins, backlog in our [kanban board](http://wekan.coko.foundation/b/fawY3QiLDhmY4Z9pf/pubsweet-core)
