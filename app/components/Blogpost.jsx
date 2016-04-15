@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
-import '../scss/components/Blogpost'
+import styles from '../scss/components/Blogpost.local'
 import AuthHelper from '../helpers/AuthHelper'
 
 export default class Blogpost extends React.Component {
@@ -61,11 +61,11 @@ export default class Blogpost extends React.Component {
 
     var changePublished
     if (!blogpost.published) {
-      changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' onClick={this._onPublish}>
+      changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' className={styles['button']} onClick={this._onPublish}>
           <i className='fa fa-chain'></i>
         </Button>
     } else {
-      changePublished = <Button title='Unpublish' aria-label='Unpublish' bsStyle='warning' onClick={this._onUnpublish}>
+      changePublished = <Button title='Unpublish' aria-label='Unpublish' bsStyle='warning' className={styles['button']} onClick={this._onUnpublish}>
           <i className='fa fa-chain-broken'></i>
         </Button>
     }
@@ -94,7 +94,7 @@ export default class Blogpost extends React.Component {
         <td>
           { AuthHelper.showForUser(auth, blogpost, 'edit') &&
             <LinkContainer to={`/manage/editor/${blogpost._id}`}>
-              <Button bsStyle='primary' title='Edit' aria-label='Edit'>
+              <Button bsStyle='primary' className={styles['button']} title='Edit' aria-label='Edit'>
                 <i className='fa fa-pencil'></i>
               </Button>
             </LinkContainer>}
@@ -102,7 +102,7 @@ export default class Blogpost extends React.Component {
           { AuthHelper.showForUser(auth, blogpost, 'edit') && changePublished }
 
           { AuthHelper.showForUser(auth, blogpost, 'delete') &&
-            <Button bsStyle='danger' onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
+            <Button bsStyle='danger' className={styles['button']} onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
               <i className='fa fa-trash-o'></i>
             </Button>
           }

@@ -1,0 +1,131 @@
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+
+
+// Solarized
+
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+
+// Grays
+$gray-darker: $base02;
+$gray-dark: $base01;
+$gray: $base1;
+$gray-light: $base2;
+$gray-lighter: $base3;
+
+
+// Brand Colors
+$brand-primary: $blue;
+$brand-success: $green;
+$brand-warning: $yellow;
+$brand-danger: $orange;
+$brand-info: $blue;
+
+
+// Scaffolding
+$body-bg: $base03;
+$text-color: $base0;
+$link-color: $brand-primary;
+$link-hover-color: darken($link-color, 15%);
+
+
+$headings-color: $base1;
+
+$btn-font-weight: normal;
+$btn-default-color: $base1;
+$btn-default-bg: $base02;
+$btn-default-border: $base01;
+$btn-primary-color: #fff;
+$btn-primary-bg: $brand-primary;
+$btn-primary-border: darken($btn-primary-bg, 5%);
+$btn-success-color: #fff;
+$btn-success-bg: $brand-success;
+$btn-success-border: darken($btn-success-bg, 5%);
+$btn-warning-color: #fff;
+$btn-warning-bg: $brand-warning;
+$btn-warning-border: darken($btn-warning-bg, 5%);
+$btn-danger-color: #fff;
+$btn-danger-bg: $brand-danger;
+$btn-danger-border: darken($btn-danger-bg, 5%);
+$btn-info-color: #fff;
+$btn-info-bg: $brand-info;
+$btn-info-border: darken($btn-info-bg, 5%);
+$btn-link-disabled-color: $gray-light;
+
+// Forms
+$input-bg: $base02;
+$input-bg-disabled: $base01;
+$input-color: $base2;
+$input-border: $base01;
+$input-color-placeholder: $gray-light;
+$legend-color: $gray-dark;
+$legend-border-color: #e5e5e5;
+$input-group-addon-bg: $base01;
+$input-group-addon-border-color: $input-border;
+
+$table-bg: transparent;
+$table-bg-accent: $base02;
+$table-bg-hover: $base02;
+$table-bg-active: $table-bg-hover;
+$table-border-color: $base01;
+
+// Navbar
+$navbar-default-color: $text-color;
+$navbar-default-bg: $body-bg;
+$navbar-default-border: $base01;
+$navbar-default-link-color: #777;
+$navbar-default-link-hover-color: #333;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-color: lighten(#555, 30%);
+$navbar-default-link-active-bg: lighten($navbar-default-bg, 6.5%);
+$navbar-default-link-disabled-color: #ccc;
+$navbar-default-link-disabled-bg: transparent;
+$navbar-default-brand-color: $navbar-default-link-color;
+$navbar-default-brand-hover-color: darken($navbar-default-link-color, 10%);
+$navbar-default-brand-hover-bg: transparent;
+$navbar-default-toggle-hover-bg: #ddd;
+$navbar-default-toggle-icon-bar-bg: #888;
+$navbar-default-toggle-border-color: #ddd;
+
+body, html {
+  overflow: normal;
+  background: $body-bg;
+}
+
+.bootstrap {
+  color: $text-color;
+  background-color: $body-bg;
+
+  @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+  .table th, .table td {
+    border: 1px solid lighten($base03, 3%);
+  }
+
+  .table th {
+
+    text-align: left;
+    background: lighten($base03, 3%);
+  }
+
+  nav.navbar {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+}

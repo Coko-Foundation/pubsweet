@@ -15,7 +15,7 @@ module.exports = function (defaultStyle) {
     pathWithTheme = pathWithoutFiletype + '-' + theme + '.scss'
   }
 
-  fs.readFile(pathWithTheme, function (err, style) {
+  fs.readFile(pathWithTheme, 'utf8', function (err, style) {
     if (err) {
       console.log('No theme found:', pathWithTheme, 'Loading default style.')
       callback(null, defaultStyle)
