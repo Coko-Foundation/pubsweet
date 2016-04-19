@@ -1,6 +1,6 @@
 {
   "name": "core",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "setup": "node api/setup.js",
