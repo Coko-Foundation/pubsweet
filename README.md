@@ -29,7 +29,7 @@ To start the JS compilation and webserver, run:
 $ npm run dev
 ```
 
-Point your browser to: http://localhost:3000/admin/posts and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
+Point your browser to: http://localhost:3000/manage/posts and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
 # Production installation
 
