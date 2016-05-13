@@ -31,6 +31,15 @@ $ npm run dev
 
 Point your browser to: http://localhost:3000/manage/posts and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
+# How to look into the database for debugging purposes
+
+Run a PouchDB server (comes with the app):
+```bash
+$ npm run pouchdb
+```
+
+And navigate to [http://localhost:5984/_utils/](http://localhost:5984/_utils/). Click "Add New Database" and enter "dev", to connect to the development database. You should now be able to run queries on your development database.
+ 
 # Production installation
 
 These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.

@@ -7,6 +7,8 @@
     "build": "webpack --colors --config ./webpack/webpack.prod.config.js",
     "start": "PORT=80 NODE_ENV=production node bin/www",
     "dev": "NODE_ENV=dev LOADER=hot node bin/www",
+    "pouchdb": "./node_modules/pouchdb-server/bin/pouchdb-server --level-prefix=./api/db/ -d ./api/db/
+",
     "buildDev": "webpack --no-info --colors --config ./webpack/webpack.dev.config.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js -R nyan",
     "eslint": "eslint"
@@ -30,6 +32,7 @@
     "debug": "~2.2.0",
     "dotenv": "^1.2.0",
     "express": "~4.13.1",
+    "express-pouchdb": "github:jure/express-pouchdb#upgrade_fauxton",
     "extract-text-webpack-plugin": "^0.8.1",
     "file-loader": "^0.8.4",
     "form-data": "^0.2.0",
@@ -57,6 +60,7 @@
     "passport-local": "^1.0.0",
     "pouchdb": "^5.2.1",
     "pouchdb-find": "^0.9.0",
+    "pouchdb-server": "^1.1.1",
     "prompt": "^0.2.14",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.4",
