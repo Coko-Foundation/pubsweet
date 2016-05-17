@@ -31,6 +31,10 @@ $ npm run dev
 
 Point your browser to: http://localhost:3000/manage/posts and login with the chosen admin username and password and all should be well. Visit http://localhost:3000 for the blog landing page.
 
+# Themes
+
+If you want to write a custom theme, set your theme in `config.js`. When you require a style from a component, using e.g. `import 'Signup.scss'`, we'll automatically find the right themed style (e.g. `Signup-dark.scss` if set theme is `dark`). You can then continue working on your themed styles as usual, and the page will hot-reload when you change anything.
+
 # Production installation
 
 These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.
