@@ -6,6 +6,15 @@ const fs = require('fs')
 var ThemeResolver = {
   apply: function (resolver) {
     resolver.plugin('file', function (request, callback) {
+      this.cache = this.cache || {}
+      const requestJson = JSON.stringify(request)
+
+      if(this.cache[requestJson] === true) {
+        return callback()
+      } else if (this.cache[requestJson] !== undefined) {
+        return this.doResolve(['file'], this.cache[requestJson], callback)
+      }
+
       if (config.theme !== 'default') {
         if (/\.local\.scss$/.test(request.request)) {
           var extension = '.local.scss'
@@ -17,6 +26,7 @@ var ThemeResolver = {
           extension = '.scss'
           pathWithoutFiletype = request.request
         } else {
+          this.cache[requestJson] = true
           return callback()
         }
 
@@ -25,13 +35,13 @@ var ThemeResolver = {
 
         fs.stat(pathWithoutTheme, function (err, stats) {
           if (err) {
-            console.log(pathWithoutTheme, 'does not exist')
+            // console.log(pathWithoutTheme, 'does not exist')
+            this.cache[requestJson] = true
             callback()
           } else {
-            console.log(pathWithTheme)
             fs.stat(pathWithTheme, function (err, stats) {
               if (err) {
-                console.log('No theme found:', pathWithTheme, 'Loading default style.')
+                // console.log('No theme found:', pathWithTheme, 'Loading default style.')
                 callback()
               } else {
                 console.log('Theme found:', pathWithTheme)
@@ -41,12 +51,14 @@ var ThemeResolver = {
                   query: request.query,
                   directory: request.directory
                 }
+                this.cache[requestJson] = obj
                 this.doResolve(['file'], obj, callback)
               }
             }.bind(this))
           }
         }.bind(this))
       } else {
+        this.cache[requestJson] = true
         callback()
       }
     })
