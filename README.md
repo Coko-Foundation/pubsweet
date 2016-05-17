@@ -4,7 +4,7 @@
 
 # Preconditions
 
-Node.js, version above or equal to 4.22, is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
+Node.js, version above or equal to 4.2.2, is a requirement, read about how to install it here: [https://nodejs.org/en/](https://nodejs.org/en/)
 
 Warning about `npm`: Because the newly released npm 3 changed the way npm installs nested dependencies (it flattens them), and we rely on previous behaviour (https://github.com/npm/npm/issues/9809) please use npm 2.x while we try to resolve this.
 
@@ -74,14 +74,26 @@ npm run start
 
 The application should now be accessible through port 80 on your server.
 
-# Roadmap (14th of April, 2016)
+# Roadmap (10th of May, 2016)
 
-Until 30th of April 2016:
+Until 13th of May 2016
+- Support for hot reloading with themes
+- Standalone debug tools for current PouchDB
 
-- Integrate Stencila Sheets as a component in PubSweet framework. This requires the development of a server extension system that we already began developing when we integrated Substance's collaboration hub.
+Until 20th of May 2016
+- How to transfer front-end locking by Yannis and Christos into other components?
+- Backend locking mechanisms exploration
+- Science Writer incoming from Michael and Oliver
 
-3-4th of May 2016: csv,conf in Berlin, where we are presenting the Stencila Sheets integration
+Until 27th of May 2016
+- 2nd iteration of PubSweet UI with Pepper
+- Explore one click deploys with Juan
 
-7th of May onwards:
+Until 3rd of June 2016
+- Implementation of new PubSweet interface by Juan
 
-- 0.3 development begins, backlog in our [kanban board](http://wekan.coko.foundation/b/fawY3QiLDhmY4Z9pf/pubsweet-core)
+10th of June
+- Release of Science Blogger 1.0
+
+
+- Backlog in our [kanban board](http://wekan.coko.foundation/b/fawY3QiLDhmY4Z9pf/pubsweet-core)
