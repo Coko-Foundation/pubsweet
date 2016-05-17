@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var config = require('../config')
+var ThemeResolver = require('./ThemeResolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
 
@@ -32,11 +33,11 @@ var commonLoaders = [
   { test: /\.json$/, loader: 'json-loader' },
   { test: /\.css$|\.scss$/,
     exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
+    loader: 'style-loader!css-loader!sass-loader'
   },
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
   }
 
 ]
@@ -83,6 +84,7 @@ module.exports = [
       }
     },
     plugins: [
+      new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('dev')
       }),
