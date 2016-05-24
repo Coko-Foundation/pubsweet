@@ -29,7 +29,7 @@ class Writer extends React.Component {
       version={this.props.fragment.version}
       content={this.props.fragment.source}
       onSave={this.save}
-      format='json'
+      format='xml'
       onUploadFile={this.uploadFile}
       />
   }

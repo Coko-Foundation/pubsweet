@@ -9,7 +9,7 @@ var ThemeResolver = {
       this.cache = this.cache || {}
       const requestJson = JSON.stringify(request)
 
-      if(this.cache[requestJson] === true) {
+      if (this.cache[requestJson] === true) {
         return callback()
       } else if (this.cache[requestJson] !== undefined) {
         return this.doResolve(['file'], this.cache[requestJson], callback)
