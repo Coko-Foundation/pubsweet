@@ -3,12 +3,41 @@
 const _ = require('lodash')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
+PouchDB.plugin(require('relational-pouch'))
+
 global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const AclPouchDb = require('node_acl_pouchdb')
 global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
 const uuid = require('node-uuid')
 const NotFoundError = require('../errors/NotFoundError')
+
+db.setSchema([
+  {
+    singular: 'collection',
+    plural: 'collections',
+    relations: {
+      fragments: {hasMany: 'fragment'},
+      user: {belongsTo: 'user'}
+    }
+  },
+  {
+    singular: 'fragment',
+    plural: 'fragments',
+    relations: {
+      collection: {belongsTo: 'collection'},
+      user: {belongsTo: 'user'}
+    }
+  },
+  {
+    singular: 'user',
+    plural: 'users',
+    relations: {
+      collections: {hasMany: 'collection'},
+      fragments: {hasMany: 'fragment'}
+    }
+  }
+])
 
 class Model {
   constructor (properties) {

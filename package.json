@@ -71,6 +71,7 @@
     "redux-logger": "^2.0.2",
     "redux-router": "^1.0.0-beta8",
     "redux-thunk": "^0.1.0",
+    "relational-pouch": "^1.4.2",
     "sass-loader": "^3.2.0",
     "script-loader": "^0.6.1",
     "serve-favicon": "~2.3.0",
