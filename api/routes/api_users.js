@@ -23,7 +23,7 @@ function createToken (user) {
   return jwt.sign(
     {
       username: user.username,
-      id: user._id
+      id: user.id
     },
     config.secret,
     { expiresIn: 5 * 3600 })
@@ -61,7 +61,7 @@ users.post('/', function (req, res, next) {
 })
 
 users.get('/', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
     return User.all({include: ['roles']})
   }).then(function (users) {
     console.log(users)
@@ -73,7 +73,7 @@ users.get('/', authBearer, function (req, res, next) {
 
 // Get user
 users.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
     return User.find(req.params.id, {include: ['roles']})
   }).then(function (user) {
     return res.status(200).json(user)
@@ -84,7 +84,7 @@ users.get('/:id', authBearer, function (req, res, next) {
 
 // Destroy a user
 users.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (user) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'delete').then(function (user) {
     return user.delete(req.user)
   }).then(function (user) {
     return res.status(200).json(user)
@@ -95,7 +95,7 @@ users.delete('/:id', authBearer, function (req, res, next) {
 
 // Update a user
 users.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'update').then(function () {
     return User.find(req.authInfo.id, {include: ['roles']})
   }).then(function (user) {
     // Can only update roles if admin

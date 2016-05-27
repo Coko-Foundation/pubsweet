@@ -38,8 +38,8 @@ class Role {
   static syncRoles (userId, User) {
     // Roles is a property on the User model that is synced with the ACL system
     let roles
-    return this.userRoles(userId).then(function (roles) {
-      roles = roles
+    return this.userRoles(userId).then(function (existingRoles) {
+      roles = existingRoles
       return User.find(userId)
     }).then(function (user) {
       user.roles = roles

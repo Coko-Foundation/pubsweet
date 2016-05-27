@@ -13,7 +13,7 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 
 // Create collection
 api.post('/collection', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'create').then(function () {
     return Collection.find(1)
   }).then(function (existingCollection) {
     if (existingCollection) {
@@ -32,7 +32,7 @@ api.post('/collection', authBearer, function (req, res, next) {
 
 // Get collection
 api.get('/collection', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
     return Collection.find(1)
   }).then(function (collection) {
     return res.status(200).json(collection)
@@ -43,7 +43,7 @@ api.get('/collection', authBearer, function (req, res, next) {
 
 // Destroy collection
 api.delete('/collection', function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
     return Collection.find(1)
   }).then(function (existingCollection) {
     if (existingCollection) {
@@ -62,8 +62,7 @@ api.delete('/collection', function (req, res, next) {
 api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
   var fragment
-
-  return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'create').then(function () {
     // Collection is a special case, always id 1 for single collections
     return Collection.find(1)
   }).then(function (existingCollection) {
@@ -97,7 +96,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
     next(err)
   })
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function (authorization) {
     return Collection.find(1)
   }).then(function (collection) {
     return collection.getFragments()
@@ -125,7 +124,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
     }
   })
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return res.status(200).json(fragment)
@@ -144,7 +143,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
 
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function (authorization) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'update').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
@@ -160,7 +159,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 // Delete a fragment
 api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
   var deletedFragment
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'delete').then(function (authorization) {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     deletedFragment = fragment

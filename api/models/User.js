@@ -60,11 +60,11 @@ class User extends Model {
 
     var promises = rolesToAdd.map(function (role) {
       return this.addRole(role)
-    })
+    }.bind(this))
 
     promises.concat(rolesToRemove.map(function (role) {
       return this.removeRole(role)
-    }))
+    }.bind(this)))
 
     return Promise.all(promises).then(function () {
       return newRoles

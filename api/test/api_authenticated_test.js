@@ -86,7 +86,7 @@ describe('authenticated api', function () {
 
       beforeEach(function () {
         fragment = new Fragment(fragmentFixture)
-        fragment.owner = otherUserFixture.username
+        fragment.owner = otherUser
         return fragment.save()
       })
 

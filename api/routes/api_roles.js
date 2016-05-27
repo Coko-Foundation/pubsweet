@@ -10,20 +10,17 @@ const api = express.Router()
 
 // Get user roles
 api.get('/:id/roles', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
     return User.find(req.params.id)
   }).then(function (user) {
-    return user.roles()
-  }).then(function (roles) {
-    console.log(roles)
-    return res.status(200).json(roles)
+    return res.status(200).json(user.roles)
   }).catch(function (err) {
     next(err)
   })
 })
 
 api.put('/:id/roles', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'update').then(function () {
     return User.find(req.params.id)
   }).then(function (user) {
     return user.setRoles(req.body)

@@ -49,7 +49,7 @@ describe('roles', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .get('/api/users/' + admin._id + '/roles')
+          .get('/api/users/' + admin.id + '/roles')
           .set('Authorization', 'Bearer ' + token)
           .expect(200)
       }).then(function (res) {
@@ -68,7 +68,7 @@ describe('roles', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .put('/api/users/' + contributor._id + '/roles')
+          .put('/api/users/' + contributor.id + '/roles')
           .send(['contributor'])
           .set('Authorization', 'Bearer ' + token)
           .expect(200)
@@ -88,7 +88,7 @@ describe('roles', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .put('/api/users/' + admin._id + '/roles')
+          .put('/api/users/' + admin.id + '/roles')
           .send(['admin', 'contributor'])
           .set('Authorization', 'Bearer ' + token)
           .expect(403)
@@ -106,7 +106,7 @@ describe('roles', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .put('/api/users/' + otherUser._id)
+          .put('/api/users/' + otherUser.id)
           .send({roles: ['contributor', 'reader']})
           .set('Authorization', 'Bearer ' + token)
           .expect(200)
