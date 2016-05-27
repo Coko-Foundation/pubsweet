@@ -35,6 +35,15 @@ Point your browser to: http://localhost:3000/manage/posts and login with the cho
 
 If you want to write a custom theme, set your theme in `config.js`. When you require a style from a component, using e.g. `import 'Signup.scss'`, we'll automatically find the right themed style (e.g. `Signup-dark.scss` if set theme is `dark`). You can then continue working on your themed styles as usual, and the page will hot-reload when you change anything.
 
+# How to look into the database for debugging purposes
+
+Run a PouchDB server (comes with the app):
+```bash
+$ npm run pouchdb
+```
+
+And navigate to [http://localhost:5984/_utils/](http://localhost:5984/_utils/). Click "Add New Database" and enter "dev", to connect to the development database. You should now be able to run queries on your development database.
+ 
 # Production installation
 
 These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.
