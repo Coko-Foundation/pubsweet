@@ -14,7 +14,7 @@ api.post('/collection', authBearer, function (req, res) {
   const collection = new Collection(req.body)
   collection.owner(req.user)
 
-  Collection.get().then(function (existingCollection) {
+  Collection.find(1).then(function (existingCollection) {
     if (existingCollection) {
       res.status(200).json(existingCollection)
     } else {
@@ -31,7 +31,7 @@ api.post('/collection', authBearer, function (req, res) {
 
 // Get collection
 api.get('/collection', function (req, res) {
-  Collection.get().then(function (collection) {
+  Collection.find(1).then(function (collection) {
     return res.status(200).json(collection)
   }).catch(function (error) {
     console.error(error)
@@ -41,7 +41,7 @@ api.get('/collection', function (req, res) {
 
 // Destroy collection
 api.delete('/collection', function (req, res) {
-  Collection.get().then(function (existingCollection) {
+  Collection.find(1).then(function (existingCollection) {
     if (existingCollection) {
       return existingCollection.delete().then(function (response) {
         return res.status(200).json(response)
@@ -58,14 +58,15 @@ api.delete('/collection', function (req, res) {
 // Create a fragment and update the collection with the fragment
 api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
-  var fragment = new Fragment(req.body)
-  fragment.owner = req.user.id // He who creates it, owns it
+  var fragment
 
   return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
     // Collection is a special case, always id 1 for single collections
     return Collection.find(1)
   }).then(function (existingCollection) {
     collection = existingCollection
+    fragment = new Fragment(req.body)
+    fragment.owner = req.user // Who creates it, owns it
     return fragment.save()
   })
   .then(function (result) {
@@ -81,9 +82,8 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 })
 
 // Get all fragments
-
 api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
-  var fallback = Collection.get().then(function (collection) {
+  var fallback = Collection.find(1).then(function (collection) {
     console.log('Falling back to anonymous')
     if (req.user) {
       return collection.getFragments({filter: {published: true, owner: req.user}})
@@ -95,7 +95,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
   })
 
   return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
-    return Collection.get()
+    return Collection.find(1)
   }).then(function (collection) {
     return collection.getFragments()
   }).then(function (fragments) {
@@ -163,7 +163,7 @@ api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
     deletedFragment = fragment
     return fragment.delete()
   }).then(function () {
-    return Collection.get()
+    return Collection.find(1)
   }).then(function (collection) {
     collection.fragments = _.without(collection.fragments, req.params.id)
     return collection.save()

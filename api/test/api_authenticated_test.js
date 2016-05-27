@@ -105,7 +105,7 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragments/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment.id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
               .expect(200)
@@ -157,7 +157,7 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragments/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment.id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
               .expect(403)

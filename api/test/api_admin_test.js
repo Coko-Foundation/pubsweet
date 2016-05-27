@@ -37,11 +37,11 @@ describe('admin api', function () {
   beforeEach(function () {
     const Fragment = require('../models/Fragment')
     fragment = new Fragment(fragmentFixture)
-    fragment.owner = otherUserFixture.username
+    fragment.owner = otherUser.id
     return fragment.save()
   })
 
-  it.only('creates a fragment in the protected collection if authenticated', function () {
+  it('creates a fragment in the protected collection if authenticated', function () {
     return request(api)
       .post('/api/users/authenticate')
       .send({
@@ -72,7 +72,7 @@ describe('admin api', function () {
       .then(function (res) {
         var token = res.body.token
         return request(api)
-          .put('/api/collection/fragments/' + fragment._id)
+          .put('/api/collection/fragments/' + fragment.id)
           .send(updatedFragmentFixture)
           .set('Authorization', 'Bearer ' + token)
           .expect(200)

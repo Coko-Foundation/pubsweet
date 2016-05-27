@@ -21,7 +21,7 @@ class Model {
         plural: 'collections',
         relations: {
           fragments: {hasMany: 'fragment'},
-          user: {belongsTo: 'user'}
+          owner: {belongsTo: 'user'}
         }
       },
       {
@@ -55,13 +55,12 @@ class Model {
   }
 
   save () {
-    return this.constructor.find(this.id).then(function (results) {
-      console.log(results)
-      let object = results[this.constructor.type + 's'][0]
-      console.log('Found an existing version, this is an update of:', object)
-      return object._rev
-    }.bind(this)).then(function (_rev) {
-      this._rev = _rev
+    console.log('Saving', this, this.id)
+    return this.constructor.find(this.id).then(function (result) {
+      console.log('Found an existing version, this is an update of:', result)
+      return result.rev
+    }).then(function (rev) {
+      this.rev = rev
       return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
@@ -75,13 +74,7 @@ class Model {
 
   _put () {
     return db.rel.save(this.constructor.type, this).then(function (response) {
-      console.log('Actually _put', response)
-      return this
-    }.bind(this))
-    .then(function () {
-      return db.allDocs()
-    }).then(function (results) {
-      console.log(results)
+      console.log('Actually _put', this)
       return this
     }.bind(this))
   }
@@ -119,13 +112,12 @@ class Model {
   static find (id, options) {
     let plural = this.type + 's'
     return db.rel.find(this.type, id).then(function (results) {
-      console.log(results)
       if (results[plural].length === 0) {
         throw new NotFoundError()
       } else {
         return new this(results[plural][0])
       }
-    }).catch(function (err) {
+    }.bind(this)).catch(function (err) {
       if (err.name === 'NotFoundError') {
         console.log('Object not found', err)
       }
@@ -135,14 +127,16 @@ class Model {
 
   static findByField (field, value) {
     console.log('Finding', field, value)
+    field = 'data.' + field
+    let type = 'data.type'
+
     return db.createIndex({
       index: {
-        fields: [field, 'type']
+        fields: [field, type]
       }
     }).then(function (result) {
-      var selector = {selector: {
-        type: this.type
-      }}
+      var selector = {selector: {}}
+      selector.selector[type] = this.type
       selector.selector[field] = value
       return db.find(selector)
     }.bind(this)).then(results => {
@@ -150,7 +144,11 @@ class Model {
         throw new NotFoundError()
       } else {
         return results.docs.map(result => {
-          return new this(result)
+          let id = db.rel.parseDocID(result._id).id
+          let foundObject = result.data
+          foundObject.id = id
+          foundObject.rev = result._rev
+          return new this(foundObject)
         })
       }
     }).catch(function (err) {

@@ -31,7 +31,7 @@ function createToken (user) {
 
 // Token issuing
 users.post('/authenticate', authLocal, function (req, res) {
-  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
+  return User.find(req.authInfo.id).then(function (user) {
     return res.status(201).json(Object.assign(
       { token: createToken(req.user) },
       user

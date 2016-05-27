@@ -34,9 +34,9 @@ class Collection extends Model {
 
   addFragment (fragment) {
     if (this.fragments) {
-      this.fragments.push(fragment._id)
+      this.fragments.push(fragment)
     } else {
-      this.fragments = [fragment._id]
+      this.fragments = [fragment]
     }
   }
 }

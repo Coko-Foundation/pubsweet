@@ -72,7 +72,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
-    return done(null, user, {id: user._id})
+    return done(null, user, {id: user.id})
   }).catch(function (err) {
     console.log('User not found', err)
     if (err) { return done(err) }
