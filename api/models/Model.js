@@ -4,6 +4,7 @@
 var PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('relational-pouch'))
+PouchDB.plugin(require('pouchdb-upsert'))
 
 global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
 const AclPouchDb = require('node_acl_pouchdb')
@@ -28,7 +29,7 @@ class Model {
         plural: 'fragments',
         relations: {
           collection: {belongsTo: 'collection'},
-          user: {belongsTo: 'user'}
+          owner: {belongsTo: 'user'}
         }
       },
       {
@@ -49,12 +50,12 @@ class Model {
       }
     ])
 
-    this._id = Model.uuid()
+    this.id = Model.uuid()
     Object.assign(this, properties)
   }
 
   save () {
-    return db.rel.find(this.constructor.type, this._id).then(function (results) {
+    return this.constructor.find(this.id).then(function (results) {
       console.log(results)
       let object = results[this.constructor.type + 's'][0]
       console.log('Found an existing version, this is an update of:', object)
@@ -74,7 +75,13 @@ class Model {
 
   _put () {
     return db.rel.save(this.constructor.type, this).then(function (response) {
-      console.log('Actually _put', this)
+      console.log('Actually _put', response)
+      return this
+    }.bind(this))
+    .then(function () {
+      return db.allDocs()
+    }).then(function (results) {
+      console.log(results)
       return this
     }.bind(this))
   }
@@ -110,13 +117,16 @@ class Model {
   // Find by id e.g.
   // User.find('394')
   static find (id, options) {
-    options = options || {}
-    return db.rel.find(this.type, id).then(function (result) {
-      console.log(result)
-      result = new this(result)
-      return result
+    let plural = this.type + 's'
+    return db.rel.find(this.type, id).then(function (results) {
+      console.log(results)
+      if (results[plural].length === 0) {
+        throw new NotFoundError()
+      } else {
+        return new this(results[plural][0])
+      }
     }).catch(function (err) {
-      if (err.name === 'not_found') {
+      if (err.name === 'NotFoundError') {
         console.log('Object not found', err)
       }
       throw err

@@ -7,6 +7,7 @@ class Collection extends Model {
     super(properties)
     this.type = 'collection'
     this.title = properties.title
+    this.id = 1
   }
 
   // Gets fragments in a collection, supports filtering by boolean properties
@@ -37,22 +38,6 @@ class Collection extends Model {
     } else {
       this.fragments = [fragment._id]
     }
-  }
-
-  static get () {
-  // Idempotently create indexes in datastore
-    return db.createIndex({
-      index: {
-        fields: ['type']
-      }
-    }).then(function (result) {
-      return db.find({selector: {type: 'collection'}}).then(function (results) {
-        console.log(results.docs[0])
-        return new this(results.docs[0])
-      }.bind(this))
-    }.bind(this)).catch(function (err) {
-      console.error(err)
-    })
   }
 }
 

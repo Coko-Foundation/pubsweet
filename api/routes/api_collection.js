@@ -1,6 +1,3 @@
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
-
 const _ = require('lodash')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
@@ -62,10 +59,11 @@ api.delete('/collection', function (req, res) {
 api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
   var fragment = new Fragment(req.body)
-  fragment.owner = req.user // He who creates it, owns it
+  fragment.owner = req.user.id // He who creates it, owns it
 
   return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
-    return Collection.get()
+    // Collection is a special case, always id 1 for single collections
+    return Collection.find(1)
   }).then(function (existingCollection) {
     collection = existingCollection
     return fragment.save()

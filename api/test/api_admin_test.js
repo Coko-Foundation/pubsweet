@@ -41,7 +41,7 @@ describe('admin api', function () {
     return fragment.save()
   })
 
-  it('creates a fragment in the protected collection if authenticated', function () {
+  it.only('creates a fragment in the protected collection if authenticated', function () {
     return request(api)
       .post('/api/users/authenticate')
       .send({
