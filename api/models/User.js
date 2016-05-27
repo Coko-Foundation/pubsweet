@@ -41,39 +41,32 @@ class User extends Model {
     return bcrypt.compareSync(password, this.passwordHash)
   }
 
-  roles () {
-    return Role.userRoles(this.username)
-  }
-
   addRole (role) {
-    return Role.addUserRoles(this.username, role).then(function () {
+    return Role.addUserRoles(this.id, role, User).then(function () {
       return this
     }.bind(this))
   }
 
   removeRole (role) {
-    return Role.removeUserRoles(this.username, role)
+    return Role.removeUserRoles(this.id, role, User).then(function () {
+      return this
+    }.bind(this))
   }
 
   // e.g. user.setRoles(['admin', 'contributor'])
   setRoles (newRoles) {
-    var existingRoles
-    return this.roles().then(function (roles) {
-      existingRoles = roles
-      return _.difference(newRoles, existingRoles)
-    }).then(function (rolesToAdd) {
-      var promises = rolesToAdd.map(function (role) {
-        return this.addRole(role)
-      }.bind(this))
-      return Promise.all(promises)
-    }.bind(this)).then(function () {
-      return _.difference(existingRoles, newRoles)
-    }).then(function (rolesToRemove) {
-      var promises = rolesToRemove.map(function (role) {
-        return this.removeRole(role)
-      }.bind(this))
-      return Promise.all(promises)
-    }.bind(this)).then(function () {
+    var rolesToAdd = _.difference(newRoles, this.roles)
+    var rolesToRemove = _.difference(this.roles, newRoles)
+
+    var promises = rolesToAdd.map(function (role) {
+      return this.addRole(role)
+    })
+
+    promises.concat(rolesToRemove.map(function (role) {
+      return this.removeRole(role)
+    }))
+
+    return Promise.all(promises).then(function () {
       return newRoles
     }).catch(function (err) {
       throw err

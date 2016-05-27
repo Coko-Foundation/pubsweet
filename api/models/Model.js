@@ -37,15 +37,7 @@ class Model {
         plural: 'users',
         relations: {
           collections: {hasMany: 'collection'},
-          fragments: {hasMany: 'fragment'},
-          roles: {hasMany: 'roles'}
-        }
-      },
-      {
-        singular: 'role',
-        plural: 'roles',
-        relations: {
-          users: {hasMany: 'users'}
+          fragments: {hasMany: 'fragment'}
         }
       }
     ])
