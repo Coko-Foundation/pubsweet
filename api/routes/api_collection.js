@@ -1,3 +1,5 @@
+'use strict'
+
 const _ = require('lodash')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
@@ -10,38 +12,40 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
 // Create collection
-api.post('/collection', authBearer, function (req, res) {
-  const collection = new Collection(req.body)
-  collection.owner(req.user)
-
-  Collection.find(1).then(function (existingCollection) {
+api.post('/collection', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
+    return Collection.find(1)
+  }).then(function (existingCollection) {
     if (existingCollection) {
       res.status(200).json(existingCollection)
     } else {
+      let collection = new Collection(req.body)
+      collection.owner(req.user)
       return collection.save(req.user)
     }
   }).then(function (response) {
-    console.log(response.body)
     return res.status(201).json(response)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    next(err)
   })
 })
 
 // Get collection
-api.get('/collection', function (req, res) {
-  Collection.find(1).then(function (collection) {
+api.get('/collection', authBearer, function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return Collection.find(1)
+  }).then(function (collection) {
     return res.status(200).json(collection)
-  }).catch(function (error) {
-    console.error(error)
-    return res.status(503)
+  }).catch(function (err) {
+    next(err)
   })
 })
 
 // Destroy collection
-api.delete('/collection', function (req, res) {
-  Collection.find(1).then(function (existingCollection) {
+api.delete('/collection', function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return Collection.find(1)
+  }).then(function (existingCollection) {
     if (existingCollection) {
       return existingCollection.delete().then(function (response) {
         return res.status(200).json(response)
@@ -50,8 +54,7 @@ api.delete('/collection', function (req, res) {
       return res.status(404)
     }
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    next(err)
   })
 })
 
