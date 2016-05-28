@@ -16,9 +16,10 @@ class PostsManager extends React.Component {
     const { blog, blogposts, actions, error, auth } = this.props
     return (
       <div className='bootstrap'>
-        <Grid>
+        <Grid className='blogposts'>
           { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
-          <h3 className={styles['header']}>{blog && blog.title} blog posts</h3>
+          <h2 className={styles['header']}>{blog && blog.title}</h2>
+          <h3 className={styles['header']}>blog posts</h3>
           <BlogpostList
             update={actions.updateFragment}
             delete={actions.deleteFragment}

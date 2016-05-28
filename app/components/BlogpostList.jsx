@@ -21,8 +21,8 @@ export default class BlogpostList extends React.Component {
         <table className='table table-hover'>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Title</th>
+              <th className='index'>#</th>
+              <th className='main'>Title</th>
               <th>Author</th>
               <th>Status</th>
               <th>Actions</th>

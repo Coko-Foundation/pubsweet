@@ -62,7 +62,7 @@ export default class Blogpost extends React.Component {
     var changePublished
     if (!blogpost.published) {
       changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' className={styles['button']} onClick={this._onPublish}>
-          <i className='fa fa-chain'></i>
+          <i className='fa fa-paper-plane-o'></i>
         </Button>
     } else {
       changePublished = <Button title='Unpublish' aria-label='Unpublish' bsStyle='warning' className={styles['button']} onClick={this._onUnpublish}>
@@ -75,11 +75,11 @@ export default class Blogpost extends React.Component {
     }
 
     return (
-      <tr className='blogpost' key={blogpost.key}>
-        <td>
+      <tr key={blogpost.key}>
+        <td className='index'>
           {number}
         </td>
-        <td>
+        <td className='main'>
           <label onDoubleClick={this._onDoubleClick}>
             {blogpost.title}
           </label>
@@ -88,8 +88,8 @@ export default class Blogpost extends React.Component {
         <td>
           {blogpost.owner}
         </td>
-        <td>
-          {blogpost.published_at} ({blogpost.published ? 'published' : 'unpublished'})
+        <td className={blogpost.published ? 'published' : 'unpublished'}>
+          <i className='fa fa-circle'></i> ({blogpost.published ? 'Published' : 'Unpublished'}) <br/>{blogpost.published_at}
         </td>
         <td>
           { AuthHelper.showForUser(auth, blogpost, 'edit') &&

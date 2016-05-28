@@ -12,7 +12,7 @@ export default class NavbarUser extends Component {
     return (
       <Nav pullRight>
         <NavItem pullRight><i className='fa fa-user'/> {username}</NavItem>
-        <NavItem onClick={onLogoutClick}>Logout</NavItem>
+        <NavItem onClick={onLogoutClick} className='logout'><i className='fa fa-power-off'/>&nbsp;Logout</NavItem>
       </Nav>
     )
   }
