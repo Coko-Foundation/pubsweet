@@ -50,7 +50,7 @@ passport.use('bearer', new BearerStrategy(
   function (token, done) {
     jwt.verify(token, config.secret, function (err, decoded) {
       if (!err) {
-        return done(null, decoded.username, {id: decoded.id})
+        return done(null, decoded.id, {username: decoded.username, id: decoded.id})
       } else {
         return done(null)
       }

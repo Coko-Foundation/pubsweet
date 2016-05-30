@@ -62,7 +62,7 @@ users.post('/', function (req, res, next) {
 
 users.get('/', authBearer, function (req, res, next) {
   return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
-    return User.all({include: ['roles']})
+    return User.all()
   }).then(function (users) {
     console.log(users)
     return res.status(200).json({users: users})

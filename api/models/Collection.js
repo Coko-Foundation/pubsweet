@@ -1,6 +1,7 @@
 'use strict'
 const _ = require('lodash')
 const Model = require('./Model')
+const Fragment = require('./Fragment')
 
 class Collection extends Model {
   constructor (properties) {
@@ -16,8 +17,10 @@ class Collection extends Model {
     options = options || {}
     if (!this.fragments) { return [] }
     var fragments = this.fragments.map(function (id) {
-      return db.get(id)
+      return Fragment.find(id)
     })
+
+    console.log('ASDFDU', fragments)
 
     return Promise.all(fragments).then(function (fragments) {
       return fragments.filter(function (fragment) {

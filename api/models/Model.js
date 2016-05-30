@@ -93,8 +93,8 @@ class Model {
     options = options || {}
     return db.rel.find(this.type)
       .then(function (results) {
-        return results
-      }).catch(function (err) {
+        return results[this.type + 's']
+      }.bind(this)).catch(function (err) {
         console.error(err)
       })
   }

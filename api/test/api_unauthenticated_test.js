@@ -32,7 +32,7 @@ describe('unauthenticated/public api', function () {
       fragment.published = true
 
       return fragment.save().then(function (fragment) {
-        return Collection.get()
+        return Collection.find(1)
       }).then(function (collection) {
         collection.addFragment(fragment)
         return collection.save()
@@ -48,7 +48,7 @@ describe('unauthenticated/public api', function () {
         .get('/api/collection/fragments')
         .expect(200)
         .then(function (res) {
-          expect(res.body[0]._id).to.eql(fragment._id)
+          expect(res.body[0].id).to.eql(fragment.id)
         })
     })
   })
@@ -58,7 +58,7 @@ describe('unauthenticated/public api', function () {
     beforeEach(function () {
       fragment = new Fragment(fragmentFixture)
       return fragment.save().then(function (fragment) {
-        return Collection.get()
+        return Collection.find(1)
       }).then(function (collection) {
         collection.addFragment(fragment)
         return collection.save()
