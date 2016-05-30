@@ -1,0 +1,255 @@
+@font-face {
+  font-family: 'karmillaregular';
+  src: url('fonts/karmilla-015/karmilla-regular-015-webfont.eot');
+  src: url('fonts/karmilla-015/karmilla-regular-015-webfont.eot?#iefix') format('embedded-opentype'),
+  url('fonts/karmilla-015/karmilla-regular-015-webfont.woff2') format('woff2'),
+  url('fonts/karmilla-015/karmilla-regular-015-webfont.woff') format('woff'),
+  url('fonts/karmilla-015/karmilla-regular-015-webfont.ttf') format('truetype'),
+  url('fonts/karmilla-015/karmilla-regular-015-webfont.svg#karmillaregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'karmillabold';
+  src: url('fonts/karmilla-015/karmilla-bold-015-webfont.eot');
+  src: url('fonts/karmilla-015/karmilla-bold-015-webfont.eot?#iefix') format('embedded-opentype'),
+  url('fonts/karmilla-015/karmilla-bold-015-webfont.woff2') format('woff2'),
+  url('fonts/karmilla-015/karmilla-bold-015-webfont.woff') format('woff'),
+  url('fonts/karmilla-015/karmilla-bold-015-webfont.ttf') format('truetype'),
+  url('fonts/karmilla-015/karmilla-bold-015-webfont.svg#karmillabold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+body, html {
+  overflow: hidden;
+  font-family: 'karmillaregular', Helvetica, Arial, sans-serif;
+}
+
+.bootstrap {
+  //overwrite bootstrap variables
+  $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+  $font-family-default:  'karmillaregular', Helvetica, Arial, sans-serif;
+  $font-family-base:        $font-family-default;
+  $border-radius-base:        0 !default;
+  $brand-primary: #844D9F;// purple
+  $link-color:       $brand-primary;
+
+  @import '~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss';
+  @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+  //$brand-primary: #844D9F;
+  $pink: #E50C79;
+  $teal: #51C2BD;
+  a{
+    color: $pink;//pink
+    text-decoration: underline;
+  }
+  h1, h2, h3{
+    font-family: 'karmillaregular';
+    color: $teal !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  h2{
+    font-weight: bold;
+  }
+  h3{
+    color: lighten($teal, 10%) !important;
+  }
+  .alert.alert-warning{
+    background-color: #EFD2DF;
+    margin-top: 50px;
+    border: 0;
+    color: black;
+  }
+
+  //form
+  legend{
+    //color: #43B1A9;//
+    color: $teal;//teal
+    border: 0;
+    font-weight: bold;
+  }
+  label{
+    color: #844D9F;
+    font-weight: lighter;
+  }
+
+  input[type="text"], input[type="text"].form-control,
+  input[type="password"].form-control{
+    border: 0;
+    border-width: 2px;
+    border-color: #BAB8B8;
+    border-style: solid;
+
+    &.error{
+      border-right: 4px solid $pink;
+
+    }
+
+    &.success{
+      border-right: 4px solid $brand-primary;
+    }
+  }
+
+  .btn-wide{
+    font-family: 'karmillaregular';
+    font-size: 21px;
+    padding: 5px 50px;
+  }
+
+  .form-group{
+    margin-bottom: 20px;
+  }
+
+  .btn-primary{
+    background-color: $brand-primary;
+    border-color: transparent;
+  }
+
+  @media (min-width: 768px){
+    .navbar-nav > li > a {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .navbar-default{
+    background-color: transparent;
+    border: 0;
+    font-weight: bold;
+    .container-fluid{
+      border-bottom: 4px $teal solid;
+      margin-right: 15px;
+      margin-left: 15px;
+      padding-right: 65px;
+    }
+    .navbar-brand {
+      height: 65px;
+      padding: 0 30px 5px 15px;
+      img{
+        height: 100%;
+      }
+    }
+    .navbar-nav{
+      > .active{
+        > a{
+          color: $pink;
+          background-color: transparent;
+          text-decoration: none;
+          font-weight: bold;
+        }
+      }
+      > li {
+        > a{
+          color: $brand-primary;
+          text-decoration: none;
+        }
+      }
+      .logout a{
+        color: $teal;
+      }
+    }
+  }
+
+  .table{
+
+    > thead{
+      > tr{
+        > th{
+          border: 0;
+          color: $brand-primary;
+          text-align: left;
+          background-color: transparent;
+        }
+      }
+    }
+    > tbody{
+      > tr:first-child{
+        > td{
+          border: 0;
+        }
+      }
+      > tr{
+        > td{
+          border: 0;
+          border-top: 1px $brand-primary solid;
+          padding-top: 20px;
+          padding-bottom: 20px;
+        }
+      }
+    }
+    td.index, th.index{
+      width: 5%;
+    }
+    td.main, th.main{
+      width: 50%;
+    }
+    .btn-primary{
+      background-color: $teal;
+      border: 0;
+      i{
+        margin-left: -2px;
+        margin-top: 2px;
+      }
+    }
+    .btn-success{
+      background-color: #4B8AC9;
+      border: 0;
+
+    }
+    .btn-danger{
+      background-color: #D13689;
+      border: 0;
+      i{
+        margin-left: -1px;
+      }
+    }
+  }
+
+  //custom elements
+  .login-logo{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: block;
+    img{
+      width: 100%;
+    }
+  }
+  .login{
+    border-right: 4px solid $teal;
+    border-left: 4px solid $brand-primary;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    h1, legend{
+      margin-left: -25px;
+    }
+  }
+
+  .blogposts{
+    border-left: 4px solid $brand-primary;
+    .dataset{
+      padding-right: 2em;
+    }
+    table{
+      margin-left: 3em;
+      label{
+        color: black;
+      }
+    }
+  }
+
+  .published .fa-circle{
+    color: $teal;
+  }
+  .unpublished .fa-circle{
+    color: $pink;
+  }
+}

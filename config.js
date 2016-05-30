@@ -5,5 +5,5 @@ module.exports = {
   // editor: '../registry/Quill/Editor.jsx',
   reader: '../registry/Substance/Reader.jsx',
   // reader: '../registry/Quill/Reader.jsx'
-  theme: 'default'
+  theme: 'pepper'
 }
