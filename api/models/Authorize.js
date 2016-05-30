@@ -11,16 +11,16 @@ class Authorize {
 
   }
 
-  // Check if permissions exist in a globals scope
+  // Check if permissions exist in a global scope
   // e.g. admin can delete all /api/users
-  static _global (username, resource, action) {
-    console.log('_global', username, resource, action)
-    return acl.isAllowed(username, resource, action).then(function (res) {
+  static _global (userId, resource, action) {
+    console.log('_global', userId, resource, action)
+    return acl.isAllowed(userId, resource, action).then(function (res) {
       if (res) {
-        console.log(username, 'is allowed to', action, resource)
+        console.log(userId, 'is allowed to', action, resource)
         return true
       } else {
-        throw new AuthorizationError(username +
+        throw new AuthorizationError(userId +
           ' is not allowed to ' +
           action + ' ' + resource
         )
@@ -30,8 +30,8 @@ class Authorize {
 
   // Check if permissions exist in a local scope, for a single
   // thing, e.g. contributor can edit fragment
-  static _local (username, thing, model, id, action) {
-    console.log('_local', username, thing, model, id, action)
+  static _local (userId, thing, model, id, action) {
+    console.log('_local', userId, thing, model, id, action)
     var resource
     var Model
     switch (model) {
@@ -49,8 +49,8 @@ class Authorize {
     return Model.find(id).then(function (thing) {
       resource = thing
       // A user can delete or update owned objects and itself
-      if ((thing.owner && username === thing.owner) ||
-          (thing.type === 'user' && thing.username === username)
+      if ((thing.owner && userId === thing.owner) ||
+          (thing.type === 'user' && thing.userId === userId)
         ) {
         return true
       } else {
@@ -61,16 +61,16 @@ class Authorize {
         return resource
       } else {
         if (model === 'collection/fragments') {
-          return this._global(username, '/api/collection/fragments', action)
+          return this._global(userId, '/api/collection/fragments', action)
         } else {
-          return this._global(username, '/api/' + model, action)
+          return this._global(userId, '/api/' + model, action)
         }
       }
     }.bind(this)).then(function (res) {
       if (res) {
         return resource
       } else {
-        throw new AuthorizationError(username +
+        throw new AuthorizationError(userId +
           ' is not allowed to ' +
           action + ' ' + thing
         )
@@ -80,22 +80,22 @@ class Authorize {
 
   // Checks for permissions and resolves with the thing asked about,
   // if it makes sense (for reading, updating, deleting single objects)
-  static it (username, thing, action) {
-    if (!username) {
+  static it (userId, thing, action) {
+    if (!userId) {
       return Promise.reject(new AuthorizationError())
     }
 
-    console.log('Finding out if', username, 'can', action, thing)
+    console.log('Finding out if', userId, 'can', action, thing)
     // Debug
-    // acl.allowedPermissions(username, thing, function (err, permissions) {
+    // acl.allowedPermissions(userId, thing, function (err, permissions) {
     //   if (err) {
     //     console.log(err)
     //   }
-    //   console.log('Permissions for user', username, thing, permissions)
+    //   console.log('Permissions for user', userId, thing, permissions)
     // })
 
-    // acl.userRoles(username).then(function (roles) {
-    //   console.log('Roles for user', username, roles)
+    // acl.userRoles(userId).then(function (roles) {
+    //   console.log('Roles for user', userId, roles)
     // })
     // End debug
 
@@ -111,12 +111,12 @@ class Authorize {
       }
 
       if (!id && model) {
-        return this._global(username, '/api/' + model, action)
+        return this._global(userId, '/api/' + model, action)
       } else {
-        return this._local(username, thing, model, id, action)
+        return this._local(userId, thing, model, id, action)
       }
     } else {
-      return this._global(username, thing, action)
+      return this._global(userId, thing, action)
     }
   }
 }

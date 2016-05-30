@@ -108,7 +108,7 @@ users.put('/:id', authBearer, function (req, res, next) {
   }).then(function (user) {
     return user.save()
   }).then(function (user) {
-    return User.find(user._id, {include: ['roles']})
+    return User.find(req.params.id, {include: ['roles']})
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {

@@ -61,14 +61,14 @@ passport.use('bearer', new BearerStrategy(
 passport.use('anonymous', new AnonymousStrategy())
 
 passport.use('local', new LocalStrategy(function (username, password, done) {
-  console.log('User finding', username, password)
+  console.log('User finding:', username)
   User.findByUsername(username).then(function (user) {
-    console.log('User found', user)
+    console.log('User found:', user)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
     }
     if (!user.validPassword(password)) {
-      console.log('invalid password', password, user.passwordHash)
+      console.log('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
