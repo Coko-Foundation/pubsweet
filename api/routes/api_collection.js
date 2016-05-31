@@ -31,10 +31,8 @@ api.post('/collection', authBearer, function (req, res, next) {
 })
 
 // Get collection
-api.get('/collection', authBearer, function (req, res, next) {
-  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
-    return Collection.find(1)
-  }).then(function (collection) {
+api.get('/collection', function (req, res, next) {
+  Collection.find(1).then(function (collection) {
     return res.status(200).json(collection)
   }).catch(function (err) {
     next(err)
@@ -43,7 +41,7 @@ api.get('/collection', authBearer, function (req, res, next) {
 
 // Destroy collection
 api.delete('/collection', function (req, res, next) {
-  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
     return Collection.find(1)
   }).then(function (existingCollection) {
     if (existingCollection) {
@@ -62,7 +60,7 @@ api.delete('/collection', function (req, res, next) {
 api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
   var fragment
-  return Authorize.it(req.authInfo.id, req.originalUrl, 'create').then(function () {
+  return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
     // Collection is a special case, always id 1 for single collections
     return Collection.find(1)
   }).then(function (existingCollection) {
