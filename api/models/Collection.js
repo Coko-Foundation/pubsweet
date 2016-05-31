@@ -20,8 +20,6 @@ class Collection extends Model {
       return Fragment.find(id)
     })
 
-    console.log('ASDFDU', fragments)
-
     return Promise.all(fragments).then(function (fragments) {
       return fragments.filter(function (fragment) {
         if (options.filter) {

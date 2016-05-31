@@ -96,7 +96,6 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
     next(err)
   })
 
-  console.log('DUUUUUUUDEEEEE', req.user)
   return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
     return Collection.find(1)
   }).then(function (collection) {
@@ -108,7 +107,6 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
     if (err.name === 'AuthorizationError') {
       console.error(err)
       return fallback.then(function (fragments) {
-        console.log('ASDOFKAOSDKF', fragments)
         res.status(200).json(fragments)
       })
     } else {

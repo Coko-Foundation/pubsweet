@@ -35,13 +35,11 @@ var ThemeResolver = {
 
         fs.stat(pathWithoutTheme, function (err, stats) {
           if (err) {
-            // console.log(pathWithoutTheme, 'does not exist')
             this.cache[requestJson] = true
             callback()
           } else {
             fs.stat(pathWithTheme, function (err, stats) {
               if (err) {
-                // console.log('No theme found:', pathWithTheme, 'Loading default style.')
                 callback()
               } else {
                 console.log('Theme found:', pathWithTheme)
