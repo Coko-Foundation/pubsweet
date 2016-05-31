@@ -75,6 +75,7 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
     return collection.save()
   })
   .then(function (collection) {
+    fragment.owner = req.authInfo.username // TODO
     return res.status(201).json(fragment)
   }).catch(function (err) {
     next(err)
@@ -148,6 +149,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
   }).then(function (fragment) {
     return fragment.save()
   }).then(function (fragment) {
+    fragment.owner = req.authInfo.username // TODO
     return res.status(200).json(fragment)
   }).catch(function (err) {
     next(err)
