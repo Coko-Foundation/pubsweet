@@ -48,8 +48,12 @@ class Model {
   }
 
   updateProperties (properties) {
+    // TODO: Owner can not be changed
+    delete properties.owner
+
     console.log('Updating properties to', properties)
-    // TODO: Should we screen/filter updates here?
+    // TODO: Should we screen/filter more properties here?
+
     Object.assign(this, properties)
     return this
   }

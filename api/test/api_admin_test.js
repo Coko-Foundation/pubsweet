@@ -61,6 +61,25 @@ describe('admin api', function () {
       })
   })
 
+  it('reads all fragments', function () {
+    return request(api)
+      .post('/api/users/authenticate')
+      .send({
+        username: userFixture.username,
+        password: userFixture.password
+      })
+      .expect(201)
+      .then(function (res) {
+        var token = res.body.token
+        return request(api)
+          .get('/api/collection/fragments')
+          .set('Authorization', 'Bearer ' + token)
+          .expect(200)
+      }).then(function (res) {
+        expect(res.body.length).to.eql(2)
+      })
+  })
+
   it('updates a fragment owned by someone else', function () {
     return request(api)
       .post('/api/users/authenticate')

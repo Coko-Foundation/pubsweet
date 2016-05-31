@@ -96,6 +96,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // development error handler, will print stacktrace
   if (app.get('env') === 'dev' || app.get('env') === 'test') {
+    console.log(err)
     console.log(err.stack)
   }
 

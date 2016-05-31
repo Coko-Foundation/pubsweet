@@ -77,7 +77,7 @@ describe('authenticated api', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
         }).then(function (res) {
-          expect(res.body.owner).to.eql(otherUser.id)
+          expect(res.body.owner).to.eql(otherUser.username)
         })
     })
 
