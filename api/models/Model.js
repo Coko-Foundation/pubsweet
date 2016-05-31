@@ -72,8 +72,10 @@ class Model {
   }
 
   delete () {
-    return db.rel.del(this.type, this).then(function () {
-      console.log('Deleted', this.type, this.id, this.rev)
+    return this.constructor.find(this.id).then(function (object) {
+      return db.rel.del(this.type, object)
+    }.bind(this)).then(function () {
+      console.log('Deleted', this.type, this.id)
       return this
     }.bind(this))
   }
