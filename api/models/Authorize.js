@@ -50,7 +50,7 @@ class Authorize {
       resource = thing
       // A user can delete or update owned objects and itself
       if ((thing.owner && userId === thing.owner) ||
-          (thing.type === 'user' && thing.userId === userId)
+          (thing.type === 'user' && thing.id === userId)
         ) {
         return true
       } else {

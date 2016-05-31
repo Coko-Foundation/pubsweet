@@ -17,6 +17,7 @@ class User extends Model {
     }
 
     this.type = 'user'
+    this.roles = properties.roles || []
     this.email = properties.email
     this.username = properties.username
   }

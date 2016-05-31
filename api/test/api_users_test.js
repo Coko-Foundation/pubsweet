@@ -92,6 +92,13 @@ describe('users api', function () {
         .expect(401)
     })
 
+    it('can not sign up as an admin directly', function () {
+      return request(api)
+        .post('/api/users')
+        .send(Object.assign({}, otherUserFixture, {roles: ['admin']}))
+        .expect(403)
+    })
+
     it('can sign up', function () {
       return request(api)
         .post('/api/users')
@@ -107,15 +114,6 @@ describe('users api', function () {
   })
 
   describe('new user', function () {
-    // var otherUser
-
-    // // before(function () {
-    // //   otherUser = new User(otherUserFixture)
-    // //   return otherUser.save().then(function (user) {
-    // //     otherUser = user
-    // //   })
-    // // })
-
     it('can not get a list of users', function () {
       return request(api)
         .post('/api/users/authenticate')

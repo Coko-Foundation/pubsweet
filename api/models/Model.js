@@ -72,8 +72,10 @@ class Model {
   }
 
   delete () {
-    this._deleted = true
-    return this.save()
+    return db.rel.del(this.type, this).then(function () {
+      console.log('Deleted', this.type, this.id, this.rev)
+      return this
+    }.bind(this))
   }
 
   updateProperties (properties) {
