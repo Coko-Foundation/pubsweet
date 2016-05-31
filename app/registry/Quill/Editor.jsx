@@ -5,33 +5,7 @@ import _ from 'lodash'
 
 import React from 'react'
 import ReactQuill from 'react-quill'
-
-// if(THEME === 'default') { //eslint-disable-line
-//   require(defaultTheme)
-// } else {
-//   try {
-//     require(theme)
-//   } catch (err) {
-//     console.error(err, 'Theme not found for', theme)
-//     require(defaultTheme)
-//   }
-// }
-
 import './styles/Editor.scss'
-
-// var defaultTheme = './styles/Editor.scss'
-// var theme = './styles/Editor-' + THEME + '.scss' //eslint-disable-line
-
-// fs.stat(theme, function (err) { //eslint-disable-line
-//   err && require('./styles/Editor.scss') || require(defaultTheme)
-// })
-
-// switch (THEME) { //eslint-disable-line
-//   case 'dark':
-
-//     break
-//   default:
-// }
 
 class Editor extends React.Component {
   constructor (props) {
@@ -75,7 +49,7 @@ function mapStateToProps (state) {
   console.log(state)
   return {
     fragment: _.find(state.fragments, function (f) {
-      return f._id === state.router.params.id
+      return f.id === state.router.params.id
     })
   }
 }

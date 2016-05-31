@@ -25,7 +25,7 @@ class Writer extends React.Component {
 
   render () {
     return <LensWriter
-      documentId={this.props.fragment._id}
+      documentId={this.props.fragment.id}
       version={this.props.fragment.version}
       content={this.props.fragment.source}
       onSave={this.save}

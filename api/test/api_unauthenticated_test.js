@@ -80,7 +80,7 @@ describe('unauthenticated/public api', function () {
 
     it('can not find a fragment in a protected collection', function () {
       return request(api)
-        .get('/api/collection/fragments/' + fragment._id)
+        .get('/api/collection/fragments/' + fragment.id)
         .expect(404)
     })
   })

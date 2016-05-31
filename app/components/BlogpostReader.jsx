@@ -8,11 +8,11 @@ export default class Blogpost extends React.Component {
 
     return (
       <div className='blogpost'>
-        <Row key={blogpost._id}>
+        <Row key={blogpost.id}>
           <Col xs={12} md={8} mdOffset={2}>
             <h2>{blogpost.title}</h2>
             <div dangerouslySetInnerHTML={{__html: blogpost.presentation}}></div>
-            <LinkContainer to={`/${blogpost._id}`}><a>Read more</a></LinkContainer>&nbsp;
+            <LinkContainer to={`/${blogpost.id}`}><a>Read more</a></LinkContainer>&nbsp;
           </Col>
         </Row>
       </div>

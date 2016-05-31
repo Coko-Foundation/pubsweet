@@ -86,7 +86,7 @@ export function updateUser (user) {
 
   return dispatch => {
     dispatch(updateUserRequest(user))
-    return fetch(API_ENDPOINT + '/users/' + user._id, config)
+    return fetch(API_ENDPOINT + '/users/' + user.id, config)
       .then(response => {
         if (response.ok) {
           return response.json().then(user => {
