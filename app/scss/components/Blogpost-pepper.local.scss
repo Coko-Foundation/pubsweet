@@ -1,0 +1,11 @@
+$roundDiameter: 36px;
+
+.button {
+  border-radius: $roundDiameter/2 !important;//the styles created this way often go down in the styles chain.
+  width: $roundDiameter;
+  height: $roundDiameter;
+  i{
+    font-size: 20px;
+    margin-left: -5px;
+  }
+}
