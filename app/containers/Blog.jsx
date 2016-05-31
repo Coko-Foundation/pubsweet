@@ -23,6 +23,11 @@ class Blog extends React.Component {
         />)
       }
     })
+
+    if (fragments.length === 0) {
+      fragments = <p>No blogpost has been published on {this.props.collection.title} yet.</p>
+    }
+
     return (
       <div>
         {fragments}
