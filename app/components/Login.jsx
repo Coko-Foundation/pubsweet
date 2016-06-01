@@ -17,30 +17,37 @@ class Login extends Component {
   render () {
     const { error } = this.props
     return (
-      <div className={styles.login + ' bootstrap'}>
+      <div className='bootstrap'>
         <Row>
-          <Col xs={12} md={2} mdOffset={5}>
-            { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
+          <Col md={2} mdOffset={5}>
+            <a href='#' className={styles.loginLogo}><img src='/pubsweet-rgb-small.jpg' alt='pubsweet-logo'/></a>
+          </Col>
+        </Row>
+        <div className='container'>
+        <Row>
+          <Col md={4}>{ error ? <Alert bsStyle='warning'><i className='fa fa-exclamation-circle'></i>&nbsp; {error}</Alert> : null}</Col>
+          <Col xs={12} md={4} className={styles.login}>
             <h1>Login</h1>
             <form>
               <div className='form-group'>
                 <label htmlFor='username'>Username</label>
-                <input type='text' ref='username' className='form-control' placeholder='Username'/>
+                <input type='text' ref='username' className={error ? 'form-control error' : 'form-control success'} placeholder='Username'/>
               </div>
 
               <div className='form-group'>
                 <label htmlFor='password'>Password</label>
-                <input type='password' ref='password' className='form-control' placeholder='Password'/>
+                <input type='password' ref='password' className={error ? 'form-control error' : 'form-control success'} placeholder='Password'/>
               </div>
 
               <button onClick={(event) => this.handleClick(event)}
-                className={styles.button + ' btn btn-block btn-primary'}>
+                className={styles.button + ' btn btn-wide btn-primary'}>
                 Login
               </button>
-              <p>Don't have an account? <Link to='/signup'>Sign Up Here</Link></p>
+              <p>Don't have an account?<br/><Link to='/signup'>Sign Up Here</Link></p>
             </form>
           </Col>
         </Row>
+        </div>
       </div>
     )
   }

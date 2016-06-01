@@ -19,10 +19,10 @@ export default class Navigation extends React.Component {
       />
     }
     return (
-      <Navbar>
+      <Navbar fluid>
         <Navbar.Header>
           <NavbarBrand>
-            <a href='#'>PubSweet Science Blogger</a>
+            <a href='#'><img src='/pubsweet-rgb-small.jpg' alt='pubsweet-logo'/></a>
           </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
