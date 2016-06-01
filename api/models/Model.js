@@ -1,29 +1,25 @@
 'use strict'
 
-const _ = require('lodash')
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
-global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
-const AclPouchDb = require('node_acl_pouchdb')
-global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
-
+const schema = require('./schema')
 const uuid = require('node-uuid')
 const NotFoundError = require('../errors/NotFoundError')
 
+schema()
+
 class Model {
   constructor (properties) {
-    this._id = Model.uuid()
+    schema()
+    this.id = Model.uuid()
     Object.assign(this, properties)
   }
 
   save () {
-    console.log(this)
-    // First get the document to get its latest revision
-    return db.get(this._id).then(function (doc) {
-      console.log('Found an existing version, this is an update of:', doc)
-      return doc._rev
-    }).then(function (_rev) {
-      this._rev = _rev
+    console.log('Saving', this, this.id)
+    return this.constructor.find(this.id).then(function (result) {
+      console.log('Found an existing version, this is an update of:', result)
+      return result.rev
+    }).then(function (rev) {
+      this.rev = rev
       return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
@@ -36,31 +32,28 @@ class Model {
   }
 
   _put () {
-    // Don't save async properties as they are saved elsewhere
-    if (this.constructor.relations) {
-      this.constructor.relations.forEach(function (property) {
-        delete this[property]
-      }, this)
-    }
-
-    return db.put(this).then(function (response) {
+    return db.rel.save(this.constructor.type, this).then(function (response) {
       console.log('Actually _put', this)
       return this
     }.bind(this))
   }
 
   delete () {
-    this._deleted = true
-    return this.save()
-  }
-
-  authorized (username, action) {
-    return this.constructor.authorized(username, this, action)
+    return this.constructor.find(this.id).then(function (object) {
+      return db.rel.del(this.type, object)
+    }.bind(this)).then(function () {
+      console.log('Deleted', this.type, this.id)
+      return this
+    }.bind(this))
   }
 
   updateProperties (properties) {
+    // TODO: Owner can not be changed
+    delete properties.owner
+
     console.log('Updating properties to', properties)
-    // Should we screen/filter updates here?
+    // TODO: Should we screen/filter more properties here?
+
     Object.assign(this, properties)
     return this
   }
@@ -71,58 +64,28 @@ class Model {
 
   // Find all of a certain type e.g.
   // User.all()
-  // User.all({include: ['roles']})
   static all (options) {
     options = options || {}
-    return db.createIndex({
-      index: {
-        fields: ['type']
-      }
-    }).then(function (result) {
-      console.log(result)
-      return db.find({selector: {
-        type: this.type
-      }}).then(function (results) {
-        var promises = results.docs.map(function (result) {
-          // Hacky and not performant, what is a better way to do this?
-          return this.find(result._id, options)
-        }.bind(this))
-        return Promise.all(promises)
-      }.bind(this))
-    }.bind(this)).catch(function (err) {
-      console.error(err)
-    })
+    return db.rel.find(this.type)
+      .then(function (results) {
+        return results[this.type + 's']
+      }.bind(this)).catch(function (err) {
+        console.error(err)
+      })
   }
 
   // Find by id e.g.
   // User.find('394')
-  // User.find('394', {include: ['roles']})
   static find (id, options) {
-    options = options || {}
-    return db.get(id).then(function (result) {
-      console.log(result)
-      result = new this(result)
-      if (options.include) {
-        var included = options.include.map(function (include) {
-          return result[include]()
-        })
-        included.push(result)
-        return Promise.all(included)
+    let plural = this.type + 's'
+    return db.rel.find(this.type, id).then(function (results) {
+      if (results[plural].length === 0) {
+        throw new NotFoundError()
       } else {
-        return result
+        return new this(results[plural][0])
       }
-    }.bind(this)).then(function (final_result) {
-      if (options.include) {
-        var result = final_result.pop()
-        _.each(options.include, function (value, index) {
-          result[value] = final_result[index]
-        })
-        return result
-      } else {
-        return final_result
-      }
-    }).catch(function (err) {
-      if (err.name === 'not_found') {
+    }.bind(this)).catch(function (err) {
+      if (err.name === 'NotFoundError') {
         console.log('Object not found', err)
       }
       throw err
@@ -131,14 +94,16 @@ class Model {
 
   static findByField (field, value) {
     console.log('Finding', field, value)
+    field = 'data.' + field
+    let type = 'data.type'
+
     return db.createIndex({
       index: {
-        fields: [field, 'type']
+        fields: [field, type]
       }
     }).then(function (result) {
-      var selector = {selector: {
-        type: this.type
-      }}
+      var selector = {selector: {}}
+      selector.selector[type] = this.type
       selector.selector[field] = value
       return db.find(selector)
     }.bind(this)).then(results => {
@@ -146,7 +111,11 @@ class Model {
         throw new NotFoundError()
       } else {
         return results.docs.map(result => {
-          return new this(result)
+          let id = db.rel.parseDocID(result._id).id
+          let foundObject = result.data
+          foundObject.id = id
+          foundObject.rev = result._rev
+          return new this(foundObject)
         })
       }
     }).catch(function (err) {

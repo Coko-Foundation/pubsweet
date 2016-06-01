@@ -1,5 +1,4 @@
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
+'use strict'
 
 const _ = require('lodash')
 const Collection = require('../models/Collection')
@@ -13,38 +12,38 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
 // Create collection
-api.post('/collection', authBearer, function (req, res) {
-  const collection = new Collection(req.body)
-  collection.owner(req.user)
-
-  Collection.get().then(function (existingCollection) {
+api.post('/collection', authBearer, function (req, res, next) {
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'create').then(function () {
+    return Collection.find(1)
+  }).then(function (existingCollection) {
     if (existingCollection) {
       res.status(200).json(existingCollection)
     } else {
+      let collection = new Collection(req.body)
+      collection.owner(req.user)
       return collection.save(req.user)
     }
   }).then(function (response) {
-    console.log(response.body)
     return res.status(201).json(response)
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    next(err)
   })
 })
 
 // Get collection
-api.get('/collection', function (req, res) {
-  Collection.get().then(function (collection) {
+api.get('/collection', function (req, res, next) {
+  Collection.find(1).then(function (collection) {
     return res.status(200).json(collection)
-  }).catch(function (error) {
-    console.error(error)
-    return res.status(503)
+  }).catch(function (err) {
+    next(err)
   })
 })
 
 // Destroy collection
-api.delete('/collection', function (req, res) {
-  Collection.get().then(function (existingCollection) {
+api.delete('/collection', function (req, res, next) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return Collection.find(1)
+  }).then(function (existingCollection) {
     if (existingCollection) {
       return existingCollection.delete().then(function (response) {
         return res.status(200).json(response)
@@ -53,29 +52,29 @@ api.delete('/collection', function (req, res) {
       return res.status(404)
     }
   }).catch(function (err) {
-    console.error(err)
-    return res.status(500)
+    next(err)
   })
 })
 
 // Create a fragment and update the collection with the fragment
 api.post('/collection/fragments', authBearer, function (req, res, next) {
   var collection
-  var fragment = new Fragment(req.body)
-  fragment.owner = req.user // He who creates it, owns it
-
+  var fragment
   return Authorize.it(req.user, req.originalUrl, 'create').then(function () {
-    return Collection.get()
+    // Collection is a special case, always id 1 for single collections
+    return Collection.find(1)
   }).then(function (existingCollection) {
     collection = existingCollection
+    fragment = new Fragment(req.body)
+    fragment.owner = req.user // Who creates it, owns it
     return fragment.save()
   })
-  .then(function (result) {
-    fragment = result
+  .then(function (fragment) {
     collection.addFragment(fragment)
     return collection.save()
   })
   .then(function (collection) {
+    fragment.owner = req.authInfo.username // TODO
     return res.status(201).json(fragment)
   }).catch(function (err) {
     next(err)
@@ -83,30 +82,29 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 })
 
 // Get all fragments
-
 api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
-  var fallback = Collection.get().then(function (collection) {
-    console.log('Falling back to anonymous')
-    if (req.user) {
-      return collection.getFragments({filter: {published: true, owner: req.user}})
-    } else {
-      return collection.getFragments({filter: {published: true}})
-    }
-  }).catch(function (err) {
-    next(err)
-  })
+  var fallback = function () {
+    return Collection.find(1).then(function (collection) {
+      console.log('Falling back to anonymous')
+      if (req.user) {
+        return collection.getFragments({filter: {published: true, owner: req.user}})
+      } else {
+        return collection.getFragments({filter: {published: true}})
+      }
+    }).catch(function (err) {
+      next(err)
+    })
+  }
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
-    return Collection.get()
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+    return Collection.find(1)
   }).then(function (collection) {
     return collection.getFragments()
   }).then(function (fragments) {
     return res.status(200).json(fragments)
   }).catch(function (err) {
-    console.log(err)
     if (err.name === 'AuthorizationError') {
-      console.error(err)
-      return fallback.then(function (fragments) {
+      return fallback().then(function (fragments) {
         res.status(200).json(fragments)
       })
     } else {
@@ -124,7 +122,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
     }
   })
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return res.status(200).json(fragment)
@@ -143,13 +141,14 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
 
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
   }).then(function (fragment) {
     return fragment.save()
   }).then(function (fragment) {
+    fragment.owner = req.authInfo.username // TODO
     return res.status(200).json(fragment)
   }).catch(function (err) {
     next(err)
@@ -159,13 +158,13 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 // Delete a fragment
 api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
   var deletedFragment
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'delete').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     deletedFragment = fragment
     return fragment.delete()
   }).then(function () {
-    return Collection.get()
+    return Collection.find(1)
   }).then(function (collection) {
     collection.fragments = _.without(collection.fragments, req.params.id)
     return collection.save()

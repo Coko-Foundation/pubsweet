@@ -50,7 +50,7 @@ passport.use('bearer', new BearerStrategy(
   function (token, done) {
     jwt.verify(token, config.secret, function (err, decoded) {
       if (!err) {
-        return done(null, decoded.username, {id: decoded.id})
+        return done(null, decoded.id, {username: decoded.username, id: decoded.id})
       } else {
         return done(null)
       }
@@ -61,18 +61,18 @@ passport.use('bearer', new BearerStrategy(
 passport.use('anonymous', new AnonymousStrategy())
 
 passport.use('local', new LocalStrategy(function (username, password, done) {
-  console.log('User finding', username, password)
+  console.log('User finding:', username)
   User.findByUsername(username).then(function (user) {
-    console.log('User found', user)
+    console.log('User found:', user)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
     }
     if (!user.validPassword(password)) {
-      console.log('invalid password', password, user.passwordHash)
+      console.log('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
     console.log('User returned', user)
-    return done(null, user, {id: user._id})
+    return done(null, user, {id: user.id})
   }).catch(function (err) {
     console.log('User not found', err)
     if (err) { return done(err) }
@@ -96,6 +96,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // development error handler, will print stacktrace
   if (app.get('env') === 'dev' || app.get('env') === 'test') {
+    console.log(err)
     console.log(err.stack)
   }
 

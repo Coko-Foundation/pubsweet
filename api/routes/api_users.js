@@ -23,7 +23,7 @@ function createToken (user) {
   return jwt.sign(
     {
       username: user.username,
-      id: user._id
+      id: user.id
     },
     config.secret,
     { expiresIn: 5 * 3600 })
@@ -31,7 +31,7 @@ function createToken (user) {
 
 // Token issuing
 users.post('/authenticate', authLocal, function (req, res) {
-  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
+  return User.find(req.authInfo.id).then(function (user) {
     return res.status(201).json(Object.assign(
       { token: createToken(req.user) },
       user
@@ -51,6 +51,10 @@ users.post('/', function (req, res, next) {
   console.log(req.body)
   const user = new User(req.body)
 
+  if (req.body.roles) {
+    throw new AuthorizationError('a role can only be given by an admin')
+  }
+
   return user.isUniq().then(function (response) {
     return user.save()
   }).then(function (response) {
@@ -61,8 +65,8 @@ users.post('/', function (req, res, next) {
 })
 
 users.get('/', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
-    return User.all({include: ['roles']})
+  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
+    return User.all()
   }).then(function (users) {
     console.log(users)
     return res.status(200).json({users: users})
@@ -74,7 +78,7 @@ users.get('/', authBearer, function (req, res, next) {
 // Get user
 users.get('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
-    return User.find(req.params.id, {include: ['roles']})
+    return User.find(req.params.id)
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
@@ -85,7 +89,7 @@ users.get('/:id', authBearer, function (req, res, next) {
 // Destroy a user
 users.delete('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'delete').then(function (user) {
-    return user.delete(req.user)
+    return user.delete()
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {
@@ -96,7 +100,7 @@ users.delete('/:id', authBearer, function (req, res, next) {
 // Update a user
 users.put('/:id', authBearer, function (req, res, next) {
   return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
-    return User.find(req.authInfo.id, {include: ['roles']})
+    return User.find(req.user)
   }).then(function (user) {
     // Can only update roles if admin
     if (req.body.roles && !_.includes(user.roles, 'admin')) {
@@ -108,7 +112,7 @@ users.put('/:id', authBearer, function (req, res, next) {
   }).then(function (user) {
     return user.save()
   }).then(function (user) {
-    return User.find(user._id, {include: ['roles']})
+    return User.find(req.params.id)
   }).then(function (user) {
     return res.status(200).json(user)
   }).catch(function (err) {

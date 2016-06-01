@@ -34,11 +34,6 @@ export default class Navigation extends React.Component {
               <NavItem>Users</NavItem>
             </LinkContainer>
           }
-          { process.env.NODE_ENV === 'dev' &&
-            <LinkContainer to='/manage/debug'>
-              <NavItem>Debug</NavItem>
-            </LinkContainer>
-          }
         </Nav>
         { logoutButtonIfAuthenticated }
       </Navbar>

@@ -137,7 +137,7 @@ export function updateFragment (fragment) {
     dispatch(updateFragmentRequest(fragment))
     const { auth: { token } } = getState()
 
-    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment._id, {
+    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment.id, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -192,7 +192,7 @@ export function deleteFragment (fragment) {
     const { auth: { token } } = getState()
     dispatch(deleteFragmentRequest(fragment))
 
-    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment._id, {
+    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment.id, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -207,7 +207,7 @@ export function deleteFragment (fragment) {
           })
         } else {
           return response.json().then(response => {
-            dispatch(deleteFragmentFailure(response.message, fragment._id))
+            dispatch(deleteFragmentFailure(response.message, fragment.id))
             throw new Error(response.message)
           })
         }

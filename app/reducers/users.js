@@ -22,7 +22,7 @@ export default function users (state = {
       })
     case UPDATE_USER_REQUEST:
       var users = state.users.map(function (user) {
-        if (user._id === action.user) {
+        if (user.id === action.user) {
           return Object.assign(user, action.user)
         } else {
           return user

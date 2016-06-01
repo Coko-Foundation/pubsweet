@@ -67,31 +67,31 @@ function fragments (state = initialFragments, action) {
       return fragments
     case UPDATE_FRAGMENT_REQUEST:
       let index = _.findIndex(fragments, function (f) {
-        return f._id === action.fragment._id
+        return f.id === action.fragment.id
       })
       fragments[index] = action.fragment
       return fragments
     case UPDATE_FRAGMENT_SUCCESS:
       index = _.findIndex(fragments, function (f) {
-        return f._id === action.fragment._id
+        return f.id === action.fragment.id
       })
       fragments[index]._rev = action.fragment._rev
       return fragments
     case DELETE_FRAGMENT_REQUEST:
       index = _.findIndex(fragments, function (f) {
-        return f._id === action.fragment._id
+        return f.id === action.fragment.id
       })
       fragments[index].deleted = true
       return fragments
     case DELETE_FRAGMENT_FAILURE:
       index = _.findIndex(fragments, function (f) {
-        return f._id === action.id
+        return f.id === action.id
       })
       fragments[index].deleted = undefined
       return fragments
     case DELETE_FRAGMENT_SUCCESS:
       index = _.findIndex(fragments, function (f) {
-        return f._id === action.fragment._id
+        return f.id === action.fragment.id
       })
       fragments = _.without(fragments, fragments[index])
       return fragments

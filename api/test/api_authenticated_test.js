@@ -77,7 +77,7 @@ describe('authenticated api', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
         }).then(function (res) {
-          expect(res.body.owner).to.eql(otherUserFixture.username)
+          expect(res.body.owner).to.eql(otherUser.username)
         })
     })
 
@@ -86,7 +86,7 @@ describe('authenticated api', function () {
 
       beforeEach(function () {
         fragment = new Fragment(fragmentFixture)
-        fragment.owner = otherUserFixture.username
+        fragment.owner = otherUser
         return fragment.save()
       })
 
@@ -105,7 +105,7 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragments/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment.id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
               .expect(200)
@@ -157,7 +157,7 @@ describe('authenticated api', function () {
           .then(function (res) {
             var token = res.body.token
             return request(api)
-              .put('/api/collection/fragments/' + fragment._id)
+              .put('/api/collection/fragments/' + fragment.id)
               .send(updatedFragmentFixture)
               .set('Authorization', 'Bearer ' + token)
               .expect(403)

@@ -5,7 +5,6 @@ import { requireAuthentication } from './containers/AuthenticatedComponent'
 
 // Manage
 import Manage from './containers/Manage'
-import Debug from './components/Debug'
 import PostsManager from './containers/PostsManager'
 import Editor from './containers/EditorWrapper'
 import UsersManager from './containers/UsersManager'
@@ -26,7 +25,6 @@ export default (
       <Route path='posts' component={PostsManager} />
       <Route path='editor/:id' component={Editor} />
       <Route path='users' component={UsersManager} />
-      <Route path='debug' component={Debug} />
     </Route>
 
     <Route path='/login' component={Login} />

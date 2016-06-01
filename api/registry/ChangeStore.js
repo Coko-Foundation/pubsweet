@@ -21,27 +21,21 @@ class ChangeStore {
         return change.change
       })
     }).then(function (changes) {
-      // console.log('sdjfoiasdfj', JSON.stringify(changes, null, 2))
       var version = changes.length
-      // console.log(changes, 'VERSION', version)
       var res
       if (args.sinceVersion === 0) {
-        // console.log('asodkf')
         res = {
           version: version,
           changes: changes
         }
         cb(null, res)
       } else if (args.sinceVersion > 0) {
-        // console.log('maojO', args.sinceVersion)
-
         res = {
           version: version,
           changes: changes.slice(args.sinceVersion)
         }
         cb(null, res)
       } else {
-        // console.log('WHAOJO')
         cb(new Err('ChangeStore.ReadError', {
           message: 'Illegal argument "sinceVersion":' + args.sinceVersion
         }))
@@ -125,7 +119,6 @@ class ChangeStore {
         return change.documentId === documentId
       })
     }).catch(function (err) {
-      // console.log('MISTEJKA', err)
       throw err
     })
   }

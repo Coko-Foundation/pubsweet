@@ -1,21 +1,15 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
 
-const _ = require('lodash')
 const dbCleaner = require('./helpers/db_cleaner')
-
 const User = require('../models/User')
-
 const fixtures = require('./fixtures/fixtures')
+var api = require('../api')
+
 const userFixture = fixtures.user
 const updatedUserFixture = fixtures.updatedUser
 const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
-var api = require('../api')
-
-function clean (user) {
-  return _.omit(user, ['_rev', 'password', 'passwordHash'])
-}
 
 describe('users api', function () {
   var userId
@@ -30,7 +24,7 @@ describe('users api', function () {
         userFixture.password,
         collectionFixture.title)
     }).then(function (user) {
-      userId = user._id
+      userId = user.id
     }).catch(function (err) {
       console.log(err)
       throw err
@@ -48,7 +42,7 @@ describe('users api', function () {
     })
 
     after(function () {
-      return User.find(otherUser._id).then(function (user) {
+      return User.find(otherUser.id).then(function (user) {
         return user.delete()
       }).catch(function (err) {
         console.log(err)
@@ -84,7 +78,7 @@ describe('users api', function () {
         .then(function (res) {
           var token = res.body.token
           return request(api)
-            .del('/api/users/' + otherUser._id)
+            .del('/api/users/' + otherUser.id)
             .set('Authorization', 'Bearer ' + token)
             .expect(200)
         })
@@ -98,14 +92,22 @@ describe('users api', function () {
         .expect(401)
     })
 
+    it('can not sign up as an admin directly', function () {
+      return request(api)
+        .post('/api/users')
+        .send(Object.assign({}, otherUserFixture, {roles: ['admin']}))
+        .expect(403)
+    })
+
     it('can sign up', function () {
       return request(api)
         .post('/api/users')
         .send(otherUserFixture)
         .expect(201)
         .then(function (res) {
+          console.log(res.body)
           // Store userId for later
-          otherUserId = res.body._id
+          otherUserId = res.body.id
           expect(res.body.username).to.eql(otherUserFixture.username)
         })
     })
@@ -179,10 +181,9 @@ describe('users api', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(200)
         }).then(function (res) {
-          var cleaned = clean(res.body)
-          expect(cleaned.roles).to.eql([])
-          expect(cleaned._id).to.eql(otherUserId)
-          expect(cleaned.username).to.eql(otherUserFixture.username)
+          expect(res.body.roles).to.eql([])
+          expect(res.body.id).to.eql(otherUserId)
+          expect(res.body.username).to.eql(otherUserFixture.username)
         })
     })
 
@@ -199,7 +200,7 @@ describe('users api', function () {
           return request(api)
             .put('/api/users/' + otherUserId)
             .set('Authorization', 'Bearer ' + token)
-            .send(Object.assign({_id: otherUserId, roles: ['admin']}, otherUserFixture))
+            .send(Object.assign({id: otherUserId, roles: ['admin']}, otherUserFixture))
             .expect(403)
         })
     })
@@ -217,7 +218,7 @@ describe('users api', function () {
           return request(api)
             .put('/api/users/' + otherUserId)
             .set('Authorization', 'Bearer ' + token)
-            .send(Object.assign({_id: otherUserId}, updatedUserFixture))
+            .send(Object.assign({id: otherUserId}, updatedUserFixture))
             .expect(200)
         })
     })
@@ -248,10 +249,9 @@ describe('users api', function () {
             .expect('Content-Type', /json/)
             .expect(200)
         }).then(function (res) {
-          expect(clean(res.body)).to.eql(Object.assign(
-              {_id: otherUserId, type: 'user', roles: []},
-              clean(updatedUserFixture))
-            )
+          expect(res.body.id).to.eql(otherUserId)
+          expect(res.body.roles).to.eql([])
+          expect(res.body.username).to.eql(updatedUserFixture.username)
         })
     })
 

@@ -18,11 +18,16 @@ class Blog extends React.Component {
     var fragments = this.props.fragments.map(function (blogpost) {
       if (blogpost.published === true) {
         return (<BlogpostSummary
-          key={blogpost._id}
+          key={blogpost.id}
           fragment={blogpost}
         />)
       }
     })
+
+    if (fragments.length === 0) {
+      fragments = <p>No blogpost has been published on {this.props.collection.title} yet.</p>
+    }
+
     return (
       <div>
         {fragments}

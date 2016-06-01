@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 'use strict'
 
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
 const Setup = require('./setup-base.js')
 
 var prompt = require('prompt')

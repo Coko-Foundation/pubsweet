@@ -22,7 +22,7 @@ class UsersManager extends React.Component {
       users = users.map((user, key) => {
         return (<User
           number={key + 1}
-          key={user._id}
+          key={user.id}
           user={user}
           update={actions.updateUser}
         />)

@@ -1,7 +1,5 @@
 'use strict'
 
-const Model = require('./Model')
-
 class Role {
   constructor (properties) {
     this.type = 'role'
@@ -24,26 +22,35 @@ class Role {
     }.bind(this))
   }
 
-  addUser (user) {
-    return acl.addUserRoles(user, this.name).catch(function (err) {
+  static userRoles (userId) {
+    return acl.userRoles(userId)
+  }
+
+  static addUserRoles (userId, role, User) {
+    return acl.addUserRoles(userId, role).then(function () {
+      return this.syncRoles(userId, User)
+    }.bind(this)).catch(function (err) {
       console.error(err)
       throw err
     })
   }
 
-  static userRoles (username) {
-    return acl.userRoles(username)
-  }
-
-  static addUserRoles (username, role) {
-    return acl.addUserRoles(username, role).catch(function (err) {
-      console.error(err)
-      throw err
+  static syncRoles (userId, User) {
+    // Roles is a property on the User model that is synced with the ACL system
+    let roles
+    return this.userRoles(userId).then(function (existingRoles) {
+      roles = existingRoles
+      return User.find(userId)
+    }).then(function (user) {
+      user.roles = roles
+      return user.save()
     })
   }
 
-  static removeUserRoles (username, role) {
-    return acl.removeUserRoles(username, role).catch(function (err) {
+  static removeUserRoles (userId, role, User) {
+    return acl.removeUserRoles(userId, role).then(function () {
+      return this.syncRoles(userId, User)
+    }.bind(this)).catch(function (err) {
       console.error(err)
       throw err
     })

@@ -44,7 +44,7 @@ BlogpostWrapper.propTypes = {
 function mapStateToProps (state) {
   return {
     blogpost: _.find(state.fragments, function (f) {
-      return f._id === state.router.params.id
+      return f.id === state.router.params.id
     }),
     errorMessage: state.errorMessage,
     inputValue: state.router.location.pathname.substring(1)

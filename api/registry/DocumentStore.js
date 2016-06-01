@@ -17,7 +17,6 @@ class DocumentStore {
       collection = result
       return fragment.save()
     }).then(function (result) {
-      // console.log('ASDOFKOSAD', result)
       fragment.documentId = result._id
       collection.addFragment(fragment)
       return collection.save()

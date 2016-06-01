@@ -22,7 +22,6 @@ describe('User', function () {
     return user.save().then(function (user) {
       return User.findByUsername(user.username)
     }).then(function (user) {
-      debugger
       expect(user.validPassword(userFixture.password)).to.eql(true)
       expect(user.validPassword('wrongpassword')).to.eql(false)
     })

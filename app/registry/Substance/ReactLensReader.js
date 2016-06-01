@@ -3,8 +3,7 @@ var LensReader = require('lens/LensReader')
 var Component = require('lens/node_modules/substance/ui/Component')
 var DocumentSession = require('substance/model/DocumentSession')
 
-const JSONConverter = require('substance/model/JSONConverter')
-const defaultLensArticle = require('lens/model/defaultLensArticle')
+const LensArticleImporter = require('lens/model/LensArticleImporter')
 
 // LensReader wrapped in a React component
 // ------------------
@@ -25,10 +24,8 @@ class ReactLensReader extends React.Component {
   }
 
   createDoc (source) {
-    var converter = new JSONConverter()
-    var doc = defaultLensArticle.createEmptyArticle()
-    converter.importDocument(doc, source)
-    return doc
+    var importer = new LensArticleImporter()
+    return importer.importDocument(source)
   }
 
   componentDidMount () {

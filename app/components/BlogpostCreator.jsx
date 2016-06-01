@@ -1,3 +1,4 @@
+
 import React from 'react'
 // import TextInput from './TextInput'
 import { Input, Button } from 'react-bootstrap'
@@ -9,13 +10,16 @@ export default class BlogpostCreator extends React.Component {
   }
 
   onSave (text) {
-    this.props.create({
-      kind: 'blogpost',
-      title: this.refs.title.getValue(),
-      status: 'unpublished',
-      version: 1,
-      source: undefined
-    })
+    var title = this.refs.title.getValue()
+    if (title !== '') {
+      this.props.create({
+        kind: 'blogpost',
+        title: title,
+        status: 'unpublished',
+        version: 1,
+        source: undefined
+      })
+    }
   }
 
   render () {
