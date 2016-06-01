@@ -18,7 +18,7 @@ class Blog extends React.Component {
   }
 
   render () {
-    var fragments = this.props.fragments.filter(function (blogpost) {
+    var fragments = this.props.fragments.map(function (blogpost) {
       if (blogpost.published === true) {
         return (<BlogpostSummary
           key={blogpost.id}
@@ -51,7 +51,7 @@ class Blog extends React.Component {
         <div className={styles.blogContainer}>
         {fragments}
         </div>
-        <Row className={styles.hero}>
+        <Row className={styles.blogFooter}>
           <Col md={8} mdOffset={2}>
             <p>Powered by <a href='https://gitlab.coko.foundation/pubsweet/core'>Science Blogger</a></p>
           </Col>
