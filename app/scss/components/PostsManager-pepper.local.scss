@@ -1,0 +1,15 @@
+@import "../variables";
+.container{
+  border-left: 4px solid $brand-primary;
+  margin-left: 100px;
+
+  .dataset{
+    padding-right: 2em;
+  }
+  table{
+    margin-left: 3em;
+    label{
+      color: black;
+    }
+  }
+}
