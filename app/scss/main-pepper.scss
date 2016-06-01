@@ -198,6 +198,7 @@ body, html {
     .btn-primary{
       background-color: $teal;
       border: 0;
+      margin-left: 5px;
       i{
         margin-left: -2px;
         margin-top: 2px;
@@ -206,11 +207,13 @@ body, html {
     .btn-success{
       background-color: #4B8AC9;
       border: 0;
+      margin-left: 5px;
 
     }
     .btn-danger{
       background-color: #D13689;
       border: 0;
+      margin-left: 5px;
       i{
         margin-left: -1px;
       }
