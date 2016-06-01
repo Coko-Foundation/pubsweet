@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import '../scss/main'
+import styles from '../scss/components/Blog.local.scss'
+
 import * as Actions from '../actions'
 import { bindActionCreators } from 'redux'
 
@@ -15,7 +18,7 @@ class Blog extends React.Component {
   }
 
   render () {
-    var fragments = this.props.fragments.map(function (blogpost) {
+    var fragments = this.props.fragments.filter(function (blogpost) {
       if (blogpost.published === true) {
         return (<BlogpostSummary
           key={blogpost.id}
@@ -24,14 +27,36 @@ class Blog extends React.Component {
       }
     })
 
-    if (fragments.length === 0) {
-      fragments = <p>No blogpost has been published on {this.props.collection.title} yet.</p>
+    if (fragments.length === 0 && this.props.collection) {
+      fragments = <Row>
+        <Col md={8} mdOffset={2}>
+          <p>No blogpost has been published on {this.props.collection.title} yet.</p>
+        </Col>
+      </Row>
     }
 
     return (
-      <div>
+      <div className='bootstrap'>
+        <div className={styles.heroBackground}>
+        <Grid>
+        <Row className={styles.hero}>
+          <Col md={8} mdOffset={2}>
+            <h1>Welcome to {this.props.collection && this.props.collection.title}</h1>
+            <p>Science for the Web</p>
+          </Col>
+        </Row>
+        </Grid>
+        </div>
+        <Grid>
         {fragments}
+        <Row className={styles.hero}>
+          <Col md={8} mdOffset={2}>
+            <p>Powered by <a href='https://gitlab.coko.foundation/pubsweet/core'>Science Blogger</a></p>
+          </Col>
+        </Row>
+        </Grid>
       </div>
+
     )
   }
 }
