@@ -3,3 +3,4 @@ npm-debug.log
 public/assets/*
 public/uploads/*
 .happypack
+.DS_Store
