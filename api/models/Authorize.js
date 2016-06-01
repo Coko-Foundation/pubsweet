@@ -15,6 +15,7 @@ class Authorize {
   // e.g. admin can delete all /api/users
   static _global (userId, resource, action) {
     console.log('_global', userId, resource, action)
+
     return acl.isAllowed(userId, resource, action).then(function (res) {
       if (res) {
         console.log(userId, 'is allowed to', action, resource)
@@ -86,18 +87,6 @@ class Authorize {
     }
 
     console.log('Finding out if', userId, 'can', action, thing)
-    // Debug
-    // acl.allowedPermissions(userId, thing, function (err, permissions) {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    //   console.log('Permissions for user', userId, thing, permissions)
-    // })
-
-    // acl.userRoles(userId).then(function (roles) {
-    //   console.log('Roles for user', userId, roles)
-    // })
-    // End debug
 
     if (action === 'delete' || action === 'update' || action === 'read') {
       var splitted = thing.split('/')

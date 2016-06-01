@@ -10,13 +10,16 @@ const fragmentFixture = fixtures.fragment
 const updatedFragmentFixture = fixtures.updatedFragment
 
 const User = require('../models/User')
+const Fragment = require('../models/Fragment')
+const Collection = require('../models/Collection')
+
 var api = require('../api')
 
 describe('admin api', function () {
   var otherUser
   var fragment
 
-  beforeEach(function () {
+  before(function () {
     return dbCleaner().then(function () {
       const Setup = require('../setup-base')
       return Setup.setup(
@@ -34,11 +37,15 @@ describe('admin api', function () {
     })
   })
 
-  beforeEach(function () {
-    const Fragment = require('../models/Fragment')
+  before(function () {
     fragment = new Fragment(fragmentFixture)
     fragment.owner = otherUser.id
-    return fragment.save()
+    return Collection.find(1).then(function (collection) {
+      return fragment.save().then(function (fragment) {
+        collection.addFragment(fragment)
+        return collection.save()
+      })
+    })
   })
 
   it('creates a fragment in the protected collection if authenticated', function () {

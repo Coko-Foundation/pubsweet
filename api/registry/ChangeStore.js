@@ -119,7 +119,6 @@ class ChangeStore {
         return change.documentId === documentId
       })
     }).catch(function (err) {
-      // console.log('MISTEJKA', err)
       throw err
     })
   }

@@ -69,8 +69,7 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
     fragment.owner = req.user // Who creates it, owns it
     return fragment.save()
   })
-  .then(function (result) {
-    fragment = result
+  .then(function (fragment) {
     collection.addFragment(fragment)
     return collection.save()
   })
@@ -84,18 +83,20 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 
 // Get all fragments
 api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
-  var fallback = Collection.find(1).then(function (collection) {
-    console.log('Falling back to anonymous')
-    if (req.user) {
-      return collection.getFragments({filter: {published: true, owner: req.user}})
-    } else {
-      return collection.getFragments({filter: {published: true}})
-    }
-  }).catch(function (err) {
-    next(err)
-  })
+  var fallback = function () {
+    return Collection.find(1).then(function (collection) {
+      console.log('Falling back to anonymous')
+      if (req.user) {
+        return collection.getFragments({filter: {published: true, owner: req.user}})
+      } else {
+        return collection.getFragments({filter: {published: true}})
+      }
+    }).catch(function (err) {
+      next(err)
+    })
+  }
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
     return Collection.find(1)
   }).then(function (collection) {
     return collection.getFragments()
@@ -103,7 +104,7 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
     return res.status(200).json(fragments)
   }).catch(function (err) {
     if (err.name === 'AuthorizationError') {
-      return fallback.then(function (fragments) {
+      return fallback().then(function (fragments) {
         res.status(200).json(fragments)
       })
     } else {
@@ -121,7 +122,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
     }
   })
 
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return res.status(200).json(fragment)
@@ -140,7 +141,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
 
 // Update a fragment
 api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
@@ -157,7 +158,7 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 // Delete a fragment
 api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
   var deletedFragment
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (authorization) {
+  return Authorize.it(req.user, req.originalUrl, 'delete').then(function () {
     return Fragment.find(req.params.id)
   }).then(function (fragment) {
     deletedFragment = fragment
