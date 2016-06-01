@@ -48,7 +48,9 @@ class Blog extends React.Component {
         </Grid>
         </div>
         <Grid>
+        <div className={styles.blogContainer}>
         {fragments}
+        </div>
         <Row className={styles.hero}>
           <Col md={8} mdOffset={2}>
             <p>Powered by <a href='https://gitlab.coko.foundation/pubsweet/core'>Science Blogger</a></p>
