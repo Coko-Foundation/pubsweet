@@ -31,19 +31,19 @@ body, html {
 
 .bootstrap {
   //overwrite bootstrap variables
-  $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-  $font-family-default:  'karmillaregular', Helvetica, Arial, sans-serif;
-  $font-family-base:        $font-family-default;
-  $border-radius-base:        0 !default;
-  $brand-primary: #844D9F;// purple
-  $link-color:       $brand-primary;
+  //$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+  //$font-family-default:  'karmillaregular', Helvetica, Arial, sans-serif;
+  //$font-family-base:        $font-family-default;
+  //$border-radius-base:        0 !default;
+  //$brand-primary: #844D9F;// purple
+  //$link-color:       $brand-primary;
+  //$pink: #E50C79;
+  //$teal: #51C2BD;
+  @import "variables";
 
   @import '~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss';
   @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
-  //$brand-primary: #844D9F;
-  $pink: #E50C79;
-  $teal: #51C2BD;
   a{
     color: $pink;//pink
     text-decoration: underline;
@@ -98,12 +98,6 @@ body, html {
     &.success{
       border-right: 4px solid $brand-primary;
     }
-  }
-
-  .btn-wide{
-    font-family: 'karmillaregular';
-    font-size: 21px;
-    padding: 5px 50px;
   }
 
   .form-group{
@@ -224,39 +218,10 @@ body, html {
   }
 
   //custom elements
-  .login-logo{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: block;
-    img{
-      width: 100%;
-    }
-  }
-  .login{
-    border-right: 4px solid $teal;
-    border-left: 4px solid $brand-primary;
-    padding-left: 70px;
-    padding-right: 70px;
-
-    h1, legend{
-      margin-left: -25px;
-    }
-  }
-
-  .blogposts{
-    border-left: 4px solid $brand-primary;
-    margin-top: 40px;
-    padding-left: 1.5em;
-    .dataset{
-      padding-right: 2em;
-    }
-    table{
-      margin-top: 15px;
-      margin-left: 3em;
-      label{
-        color: black;
-      }
-    }
+  .btn-wide{
+    font-family: 'karmillaregular';
+    font-size: 21px;
+    padding: 5px 50px;
   }
   .published .fa-circle{
     color: $teal;

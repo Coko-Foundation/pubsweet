@@ -4,7 +4,7 @@ import BlogpostList from '../components/BlogpostList'
 import BlogpostCreator from '../components/BlogpostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../scss/components/PostsManager'
+import styles from '../scss/components/PostsManager.scss'
 import * as Actions from '../actions'
 
 class PostsManager extends React.Component {
@@ -16,7 +16,8 @@ class PostsManager extends React.Component {
     const { blog, blogposts, actions, error, auth } = this.props
     return (
       <div className='bootstrap'>
-        <Grid className='blogposts'>
+        <div className={styles.container}>
+        <Grid>
           { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
           <h2 className={styles['header']}>{blog && blog.title}</h2>
           <h3 className={styles['header']}>blog posts</h3>
@@ -27,6 +28,7 @@ class PostsManager extends React.Component {
             auth={auth} />
           <BlogpostCreator create={actions.createFragment} />
         </Grid>
+        </div>
       </div>
     )
   }
