@@ -58,9 +58,11 @@ body, html {
   }
   h2{
     font-weight: bold;
+    font-size: 25px;
   }
   h3{
     color: lighten($teal, 10%) !important;
+    font-size: 20px;
   }
   .alert.alert-warning{
     background-color: #EFD2DF;
@@ -99,7 +101,8 @@ body, html {
   }
 
   .form-group{
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 
   .btn-primary{
@@ -108,6 +111,9 @@ body, html {
   }
 
   @media (min-width: 768px){
+    .navbar-nav {
+      margin: 10px;
+    }
     .navbar-nav > li > a {
       padding-top: 20px;
       padding-bottom: 20px;
@@ -127,6 +133,7 @@ body, html {
     .navbar-brand {
       height: 65px;
       padding: 0 30px 5px 15px;
+      margin-top: 10px;
       img{
         height: 100%;
       }
@@ -138,6 +145,9 @@ body, html {
           background-color: transparent;
           text-decoration: none;
           font-weight: bold;
+        }
+        :hover {
+          background-color: transparent;
         }
       }
       > li {
@@ -153,7 +163,7 @@ body, html {
   }
 
   .table{
-
+    margin-bottom: 10px;
     > thead{
       > tr{
         > th{
@@ -214,7 +224,6 @@ body, html {
     font-size: 21px;
     padding: 5px 50px;
   }
-
   .published .fa-circle{
     color: $teal;
   }
