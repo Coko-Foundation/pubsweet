@@ -25,6 +25,8 @@ class Blog extends React.Component {
           fragment={blogpost}
         />)
       }
+    }).filter(function (summary) {
+      if (summary) return true
     })
 
     if (fragments.length === 0 && this.props.collection) {
