@@ -71,11 +71,6 @@ module.exports = [
       }],
       loaders: commonLoaders
     },
-    resolveLoader: {
-      alias: {
-        'theme-loader': path.join(__dirname, './theme-loader')
-      }
-    },
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {

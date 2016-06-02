@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ThemeResolver = require('./ThemeResolver')
 var config = require('../config')
 
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
@@ -35,11 +36,11 @@ var commonLoaders = [
   { test: /\.json$/, loader: 'json-loader' },
   { test: /\.css$|\.scss$/,
     exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
+    loader: 'style-loader!css-loader!sass-loader'
   },
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader!' + path.join(__dirname, './theme-loader') + '?theme=' + config.theme
+    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
   }
 ]
 
@@ -68,11 +69,6 @@ module.exports = [
       }],
       loaders: commonLoaders
     },
-    resolveLoader: {
-      alias: {
-        'theme-loader': path.join(__dirname, './theme-loader')
-      }
-    },
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
@@ -81,6 +77,7 @@ module.exports = [
       }
     },
     plugins: [
+      new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new HtmlWebpackPlugin({
         title: 'PubSweet',
         template: '../app/index.ejs', // Load a custom template
