@@ -18,7 +18,7 @@ class Blog extends React.Component {
   }
 
   render () {
-    var fragments = this.props.fragments.filter(function (blogpost) {
+    var fragments = this.props.fragments.map(function (blogpost) {
       if (blogpost.published === true) {
         return (<BlogpostSummary
           key={blogpost.id}
