@@ -44,14 +44,16 @@ class Blog extends React.Component {
         <Row className={styles.hero}>
           <Col md={8} mdOffset={2}>
             <h1>Welcome to {this.props.collection && this.props.collection.title}</h1>
-            <p>Science for the Web</p>
+            <label>Science for the Web</label>
           </Col>
         </Row>
         </Grid>
         </div>
         <Grid>
+        <div className={styles.blogContainer}>
         {fragments}
-        <Row className={styles.hero}>
+        </div>
+        <Row className={styles.blogFooter}>
           <Col md={8} mdOffset={2}>
             <p>Powered by <a href='https://gitlab.coko.foundation/pubsweet/core'>Science Blogger</a></p>
           </Col>
