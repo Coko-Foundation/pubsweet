@@ -21,7 +21,7 @@ $ npm install
 
 First, initialize your blog by running and going through the setup process:
 ```bash
-$ NODE_ENV=dev node api/setup.js
+$ NODE_ENV=dev npm run setup
 ```
 
 To start the JS compilation and webserver, run:
@@ -43,7 +43,7 @@ $ npm run pouchdb
 ```
 
 And navigate to [http://localhost:5984/_utils/](http://localhost:5984/_utils/). Click "Add New Database" and enter "dev", to connect to the development database. You should now be able to run queries on your development database.
- 
+
 # Production installation
 
 These are instructions for Ubuntu 15.10, exact steps may vary from OS to OS so if you're using another system, please take this as general guidance only.
@@ -76,7 +76,7 @@ npm run build
 Configure your initial admin account:
 
 ```bash
-npm run setup
+NODE_ENV=production npm run setup
 ```
 
 Start the server:
