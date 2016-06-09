@@ -1,9 +1,7 @@
-
 import React from 'react'
-// import TextInput from './TextInput'
 import { Input, Button } from 'react-bootstrap'
 
-export default class BlogpostCreator extends React.Component {
+export default class PostCreator extends React.Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
@@ -40,6 +38,6 @@ export default class BlogpostCreator extends React.Component {
   }
 }
 
-BlogpostCreator.propTypes = {
+PostCreator.propTypes = {
   create: React.PropTypes.func
 }

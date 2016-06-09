@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, Alert } from 'react-bootstrap'
-import BlogpostList from '../components/BlogpostList'
-import BlogpostCreator from '../components/BlogpostCreator'
+import PostList from './PostList'
+import PostCreator from './PostCreator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import styles from '../scss/components/PostsManager.local.scss'
-import * as Actions from '../actions'
+import styles from './PostsManager.local.scss'
+import * as Actions from '../../actions'
 
 class PostsManager extends React.Component {
   constructor (props) {
@@ -21,12 +21,12 @@ class PostsManager extends React.Component {
           { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
           <h2 className={styles['header']}>{blog && blog.title}</h2>
           <h3 className={styles['header']}>blog posts</h3>
-          <BlogpostList
+          <PostList
             update={actions.updateFragment}
             delete={actions.deleteFragment}
             blogposts={blogposts}
             auth={auth} />
-          <BlogpostCreator create={actions.createFragment} />
+          <PostCreator create={actions.createFragment} />
         </Grid>
         </div>
       </div>

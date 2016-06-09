@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
-import styles from '../scss/components/Blogpost.local'
-import AuthHelper from '../helpers/AuthHelper'
+import styles from './Post.local'
+import AuthHelper from '../../helpers/AuthHelper'
 
 export default class Blogpost extends React.Component {
   constructor (props) {
@@ -93,7 +93,7 @@ export default class Blogpost extends React.Component {
         </td>
         <td>
           { AuthHelper.showForUser(auth, blogpost, 'edit') &&
-            <LinkContainer to={`/manage/editor/${blogpost.id}`}>
+            <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
               <Button bsStyle='primary' className={styles['button']} title='Edit' aria-label='Edit'>
                 <i className='fa fa-pencil'></i>
               </Button>

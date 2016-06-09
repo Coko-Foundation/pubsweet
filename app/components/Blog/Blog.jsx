@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
 import { Grid, Row, Col } from 'react-bootstrap'
 
-import '../scss/main'
-import styles from '../scss/components/Blog.local.scss'
+import '../../scss/main'
+import styles from './Blog.local.scss'
 
-import * as Actions from '../actions'
+import * as Actions from '../../actions'
 import { bindActionCreators } from 'redux'
 
-import BlogpostSummary from '../registry/Substance/Summary'
+import BlogpostSummary from './Summary'
 
 class Blog extends React.Component {
   constructor (props) {

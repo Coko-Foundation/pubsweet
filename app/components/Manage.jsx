@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Navigation from '../components/Navigation'
+import Navigation from './Navigation/Navigation'
 
 import '../scss/main'
 

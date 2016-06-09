@@ -5,8 +5,8 @@ import React, { Component, PropTypes } from 'react'
 import { Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
-import { signupUser } from '../actions'
-import styles from '../scss/components/Signup.local.scss'
+import { signupUser } from '../../actions'
+import styles from './Signup.local.scss'
 
 class Signup extends Component {
   constructor (props) {
