@@ -1,5 +1,5 @@
-const config = require('../config')
 const path = require('path')
+const config = require(path.resolve('.', 'config'))
 const fs = require('fs')
 
 // Theme Resolver
@@ -30,7 +30,14 @@ var ThemeResolver = {
           return callback()
         }
 
-        var pathWithTheme = path.resolve(request.path, pathWithoutFiletype) + '-' + config.theme + extension
+        var folders = request.path.split('/')
+        var componentName = folders.pop() // returns ScieneWriter in case of 'app/components/ScienceWriter'
+        if (folders.pop() !== 'components') { // Only PubSweet components can be themed
+          this.cache[requestJson] = true
+          return callback()
+        }
+
+        var pathWithTheme = path.resolve(request.path, '..', config.theme, componentName, pathWithoutFiletype) + extension
         var pathWithoutTheme = path.resolve(request.path, pathWithoutFiletype) + extension
 
         fs.stat(pathWithoutTheme, function (err, stats) {
@@ -44,8 +51,8 @@ var ThemeResolver = {
               } else {
                 console.log('Theme found:', pathWithTheme)
                 var obj = {
-                  path: request.path,
-                  request: pathWithTheme,
+                  path: path.dirname(pathWithTheme),
+                  request: request.request,
                   query: request.query,
                   directory: request.directory
                 }
