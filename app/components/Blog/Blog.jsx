@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { pushState } from 'redux-router'
 import { Grid, Row, Col } from 'react-bootstrap'
 
-import '../../scss/main'
+import './Blog.scss'
 import styles from './Blog.local.scss'
 
 import * as Actions from '../../actions'

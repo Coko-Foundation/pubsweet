@@ -4,7 +4,7 @@ import {pushState} from 'redux-router'
 import { bindActionCreators } from 'redux'
 
 import * as Actions from '../actions'
-import WaitingRoom from '../components/WaitingRoom'
+import WaitingRoom from '../components/WaitingRoom/WaitingRoom'
 
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {

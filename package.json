@@ -1,6 +1,6 @@
 {
-  "name": "core",
-  "version": "0.2.1",
+  "name": "pubsweet-core",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "setup": "node api/setup.js",

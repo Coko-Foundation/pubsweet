@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Navigation from 'navigation'
 
-import '../scss/main'
-
 class Manage extends Component {
   constructor (props) {
     super(props)
