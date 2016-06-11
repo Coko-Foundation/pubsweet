@@ -33,7 +33,7 @@ export default class ScienceWriter extends React.Component {
       })
   }
 
-  save (source, callback) {
+  save (source, changes, callback) {
     var exporter = new LensArticleExporter()
     source = exporter.exportDocument(source)
 
@@ -120,11 +120,11 @@ ScienceWriter.propTypes = {
   id: React.PropTypes.string.isRequired
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
-    id: state.router.params.id,
+    id: ownProps.params.id,
     fragment: _.find(state.fragments, function (f) {
-      return f.id === state.router.params.id
+      return f.id === ownProps.params.id
     })
   }
 }

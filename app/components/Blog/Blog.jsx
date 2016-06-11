@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { pushState } from 'redux-router'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import './Blog.scss'
@@ -71,8 +70,6 @@ Blog.propTypes = {
   fragments: React.PropTypes.array,
   // Injected by React Redux
   errorMessage: React.PropTypes.string,
-  pushState: React.PropTypes.func.isRequired,
-  inputValue: React.PropTypes.string.isRequired,
   // Injected by React Router
   actions: React.PropTypes.object.isRequired
 }
@@ -81,14 +78,12 @@ function mapStateToProps (state) {
   return {
     collection: state.collections[0],
     fragments: state.fragments,
-    errorMessage: state.errorMessage,
-    inputValue: state.router.location.pathname.substring(1)
+    errorMessage: state.errorMessage
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    pushState: pushState,
     actions: bindActionCreators(Actions, dispatch)
   }
 }

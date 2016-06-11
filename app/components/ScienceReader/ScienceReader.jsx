@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { pushState } from 'redux-router'
 import * as Actions from '../../actions'
 
 import './ScienceReader.scss'
@@ -20,25 +19,33 @@ class ScienceReader extends React.Component {
 
   // New props arrived, update the editor
   componentDidUpdate () {
-    var doc = this.createDoc(this.props.blogpost.source)
-    this.reader.extendProps({
-      doc: doc
-    })
+    if (this.reader) {
+      this.reader.extendProps({
+        documentSession: this.createDocumentSession()
+      })
+    } else {
+      this.initializeReader()
+    }
+  }
+
+  initializeReader () {
+    var el = React.findDOMNode(this)
+    this.reader = Component.mount(LensReader, {
+      documentSession: this.createDocumentSession()
+    }, el)
   }
 
   createDocumentSession () {
     var importer = new LensArticleImporter()
-    var content = importer.importDocument(this.props.blogpost.source)
-    var doc = this.createDoc(content)
+    var doc = importer.importDocument(this.props.blogpost.source)
     return new DocumentSession(doc)
   }
 
   componentDidMount () {
-    var el = React.findDOMNode(this)
-    var documentSession = this.createDocumentSession()
-    this.reader = Component.mount(LensReader, {
-      documentSession: documentSession
-    }, el)
+    if (this.props.blogpost) {
+      this.createDocumentSession()
+      this.initializeReader()
+    }
   }
 
   componentWillUnmount () {
@@ -67,25 +74,21 @@ ScienceReader.propTypes = {
   blogpost: React.PropTypes.object,
   // Injected by React Redux
   errorMessage: React.PropTypes.string,
-  pushState: React.PropTypes.func.isRequired,
-  inputValue: React.PropTypes.string.isRequired,
   // Injected by React Router
   actions: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     blogpost: _.find(state.fragments, function (f) {
-      return f.id === state.router.params.id
+      return f.id === ownProps.params.id
     }),
-    errorMessage: state.errorMessage,
-    inputValue: state.router.location.pathname.substring(1)
+    errorMessage: state.errorMessage
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    pushState: pushState,
     actions: bindActionCreators(Actions, dispatch)
   }
 }

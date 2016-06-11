@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import {connect} from 'react-redux'
-import {pushState} from 'redux-router'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
 import * as Actions from '../actions'
@@ -22,7 +22,7 @@ export function requireAuthentication (Component) {
     checkAuth (isAuthenticated) {
       if (!isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname
-        this.props.pushState(null, `/login?next=${redirectAfterLogin}`)
+        this.props.pushState(`/login?next=${redirectAfterLogin}`)
       }
     }
 
@@ -56,7 +56,7 @@ export function requireAuthentication (Component) {
 
   function mapDispatch (dispatch) {
     return {
-      pushState: bindActionCreators(pushState, dispatch),
+      pushState: bindActionCreators(push, dispatch),
       actions: bindActionCreators(Actions, dispatch)
     }
   }

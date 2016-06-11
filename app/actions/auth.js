@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
-import { pushState } from 'redux-router'
+import { push } from 'react-router-redux'
 
 // TODO: This will break when rendered on a server
 const localStorage = window.localStorage || undefined
@@ -85,7 +85,7 @@ export function loginUser (credentials, redirectTo) {
           dispatch(loginSuccess(user))
           // Only redirect if we want to
           if (redirectTo) {
-            dispatch(pushState(null, redirectTo))
+            dispatch(push(redirectTo))
           }
         }
       }).catch(err => {
@@ -203,7 +203,7 @@ export function signupUser (user) {
           return Promise.reject(user)
         } else {
           dispatch(signupSuccess(user))
-          dispatch(pushState(null, '/login'))
+          dispatch(push('/login'))
         }
       }).catch(err => {
         console.log('Error: ', err)
