@@ -73,11 +73,18 @@ Build the production JS:
 npm run build
 ```
 
-Configure your initial admin account:
+Configure your initial admin account, you have two options:
+Through an interactive prompt
 
 ```bash
 NODE_ENV=production npm run setup
 ```
+
+Manually passing the arguments
+```bash
+npm run setup [--] [--username="yourusername"] [--email="youremail"] [--password="yourpassword"] [--collecion="yourcollection"]
+```
+Note: `--` is required by npm to pass the arguments
 
 Start the server:
 
