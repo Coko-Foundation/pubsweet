@@ -72,10 +72,11 @@ module.exports = [
       loaders: commonLoaders
     },
     resolve: {
+      root: path.resolve(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
-        'editor$': config.editor,
-        'reader$': config.reader
+        'routes$': config.routes,
+        'navigation$': config.navigation
       }
     },
     plugins: [

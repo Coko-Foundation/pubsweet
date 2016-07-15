@@ -1,21 +1,28 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { reduxReactRouter } from 'redux-router'
-import DevTools from '../containers/DevTools'
-import createHistory from 'history/lib/createBrowserHistory'
-import routes from '../routes'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
-import rootReducer from '../reducers'
 
-const finalCreateStore = compose(
-  applyMiddleware(thunk),
-  reduxReactRouter({ routes, createHistory }),
-  applyMiddleware(createLogger()),
-  DevTools.instrument()
-)(createStore)
+import DevTools from '../components/DevTools'
+import * as reducers from '../reducers'
 
-export default function configureStore (initialState) {
-  const store = finalCreateStore(rootReducer, initialState)
+export default function configureStore (history, initialState) {
+  const reducer = combineReducers({
+    ...reducers,
+    routing: routerReducer
+  })
+
+  const store = createStore(
+    reducer,
+    initialState,
+    compose(
+      applyMiddleware(thunk),
+      applyMiddleware(createLogger()),
+      applyMiddleware(routerMiddleware(browserHistory)),
+      DevTools.instrument()
+    )
+  )
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

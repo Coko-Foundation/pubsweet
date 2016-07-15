@@ -27,7 +27,7 @@ app.use(cookieParser())
 
 // Webpack development support
 if (process.env.NODE_ENV === 'dev') {
-  var webpackConfig = require('../webpack/webpack.dev.config.js')
+  var webpackConfig = require(path.resolve('.', 'webpack/webpack.dev.config.js'))
   var compiler = webpack(webpackConfig)
 
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(require('webpack-hot-middleware')(compiler))
 }
 
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(express.static(path.resolve('.', 'public')))
 
 // Passport strategies
 app.use(passport.initialize())

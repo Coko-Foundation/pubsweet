@@ -1,5 +1,3 @@
-import { routerStateReducer as router } from 'redux-router'
-import { combineReducers } from 'redux'
 import {
   // GET_COLLECTION_REQUEST,
   GET_COLLECTION_SUCCESS,
@@ -18,16 +16,13 @@ import {
   GET_DEBUG_INFO_SUCCESS
 } from '../actions/types'
 
-import auth from './auth'
-import users from './users'
-
 import _ from 'lodash'
 
 const initialCollections = []
 const initialFragments = []
 
 // Updates error message to notify about the failed fetches.
-function error (state = null, action) {
+export function error (state = null, action) {
   const { error } = action
 
   if (error) {
@@ -39,7 +34,7 @@ function error (state = null, action) {
   return state
 }
 
-function collections (state = initialCollections, action) {
+export function collections (state = initialCollections, action) {
   let collections = _.clone(state)
   switch (action.type) {
     case GET_COLLECTION_SUCCESS:
@@ -49,7 +44,7 @@ function collections (state = initialCollections, action) {
   return state
 }
 
-function fragments (state = initialFragments, action) {
+export function fragments (state = initialFragments, action) {
   let fragments = _.clone(state)
   switch (action.type) {
     case GET_FRAGMENTS_SUCCESS:
@@ -99,7 +94,7 @@ function fragments (state = initialFragments, action) {
   return state
 }
 
-function debug (state = [], action) {
+export function debug (state = [], action) {
   switch (action.type) {
     case GET_DEBUG_INFO_SUCCESS:
       return action.debugs
@@ -107,14 +102,9 @@ function debug (state = [], action) {
   return state
 }
 
-const rootReducer = combineReducers({
-  collections,
-  fragments,
-  users,
-  error,
-  router,
-  auth,
-  debug
-})
+import auth from './auth'
+import users from './users'
 
-export default rootReducer
+export { auth as auth }
+export { users as users }
+
