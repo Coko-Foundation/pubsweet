@@ -4,25 +4,29 @@
 const Setup = require('./setup-base.js')
 
 var prompt = require('prompt')
+var argvs = require('minimist')(process.argv.slice(2));
+var colors = require('colors/safe');
+
+prompt.override = argvs;
 prompt.start()
 
-prompt.message = 'Question!'.rainbow
-prompt.delimiter = '><'.green
+prompt.message = colors.rainbow('Question!')
+prompt.delimiter = colors.green('><')
 
 // Get two properties from the user: admin email and password
 prompt.get({
   properties: {
     username: {
-      description: "What is the admin's username?".magenta
+      description: colors.magenta("What is the admin's username?")
     },
     email: {
-      description: "What is the admin's email?".yellow
+      description: colors.yellow("What is the admin's email?")
     },
     password: {
-      description: "What is the admin's password?".blue
+      description: colors.blue("What is the admin's password?")
     },
     collection: {
-      description: "What is the collection's name?".cyan
+      description: colors.cyan("What is the collection's name?")
     }
   }}, function (err, result) {
   if (err) {
@@ -36,7 +40,7 @@ prompt.get({
 
     // Setup
     Setup.setup(result.username, result.email, result.password, result.collection).then(function () {
-      console.log('Your PubSweet is now ready!'.rainbow)
+      console.log(colors.rainbow('Your PubSweet is now ready!'))
     })
   }
 })
