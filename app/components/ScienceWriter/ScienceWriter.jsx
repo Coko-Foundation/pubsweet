@@ -15,7 +15,7 @@ import DocumentSession from 'substance/model/DocumentSession'
 import LensArticleExporter from 'lens/model/LensArticleExporter'
 import LensArticleImporter from 'lens/model/LensArticleImporter'
 
-export default class ScienceWriter extends React.Component {
+class ScienceWriter extends React.Component {
   constructor (props) {
     super(props)
   }
