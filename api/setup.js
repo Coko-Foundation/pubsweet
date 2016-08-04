@@ -4,10 +4,10 @@
 const Setup = require('./setup-base.js')
 
 var prompt = require('prompt')
-var argvs = require('minimist')(process.argv.slice(2));
-var colors = require('colors/safe');
+var argvs = require('minimist')(process.argv.slice(2))
+var colors = require('colors/safe')
 
-prompt.override = argvs;
+prompt.override = argvs
 prompt.start()
 
 prompt.message = colors.rainbow('Question!')
