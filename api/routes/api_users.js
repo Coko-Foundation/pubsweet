@@ -65,7 +65,7 @@ users.post('/', function (req, res, next) {
 })
 
 users.get('/', authBearer, function (req, res, next) {
-  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
+  return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
     return User.all()
   }).then(function (users) {
     console.log(users)
@@ -77,7 +77,7 @@ users.get('/', authBearer, function (req, res, next) {
 
 // Get user
 users.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
+  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
     return User.find(req.params.id)
   }).then(function (user) {
     return res.status(200).json(user)
@@ -88,7 +88,7 @@ users.get('/:id', authBearer, function (req, res, next) {
 
 // Destroy a user
 users.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (user) {
+  return Authorize.can(req.user, 'delete', req.originalUrl).then(function (user) {
     return user.delete()
   }).then(function (user) {
     return res.status(200).json(user)
@@ -99,10 +99,9 @@ users.delete('/:id', authBearer, function (req, res, next) {
 
 // Update a user
 users.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
+  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
     return User.find(req.user)
   }).then(function (user) {
-    // Can only update roles if admin
     if (req.body.roles && !_.includes(user.roles, 'admin')) {
       throw new AuthorizationError('only admins can set roles')
     }

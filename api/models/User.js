@@ -1,6 +1,6 @@
 'use strict'
 const Model = require('./Model')
-const Role = require('./Role')
+const Team = require('./Team')
 
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcryptjs')

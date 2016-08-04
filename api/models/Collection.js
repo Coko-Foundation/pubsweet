@@ -36,7 +36,7 @@ class Collection extends Model {
       filteredFragments = fragments
 
       return Promise.all(fragments.map(function (fragment) {
-        return User.find(fragment.owner)
+        return User.find(fragment.owners[0])
       }))
     }).then(function (owners) {
       return owners.reduce(function (map, owner) {

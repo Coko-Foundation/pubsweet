@@ -2,15 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import Navigation from 'navigation'
 
 class Manage extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     const { children, auth, actions } = this.props
     return (
       <div>
-        <div className='bootstrap'>
+        <div className="bootstrap">
           <Navigation
             auth={auth}
             actions={actions}
