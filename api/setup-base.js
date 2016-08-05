@@ -9,9 +9,7 @@ class Setup {
     console.log('Starting setup')
     return new Collection({title: collection}).save().then(function (response) {
       console.log('Created initial collection: ', collection)
-      return this.createRoles()
-    }.bind(this)).then(function () {
-      console.log('Created initial roles.')
+
       return new User({
         username: username,
         email: email,
