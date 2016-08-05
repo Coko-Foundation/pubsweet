@@ -75,9 +75,11 @@
     "substance": "github:jure/substance#0c77c68205d5f36347bf9c99ced37551f4f2e949",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
-    "ws": "^1.0.1"
+    "ws": "^1.0.1",
+    "authsome": "*"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-2": "^6.5.0",
     "config": "^1.16.0",

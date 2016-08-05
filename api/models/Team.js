@@ -2,7 +2,7 @@
 
 const Model = require('./Model')
 
-export default class Team extends Model {
+class Team extends Model {
   constructor (properties) {
     super(properties)
 
@@ -12,3 +12,5 @@ export default class Team extends Model {
     this.object = properties.object
   }
 }
+
+module.exports = Team

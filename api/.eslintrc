@@ -2,5 +2,8 @@
   "globals": {
     "db": true,
     "acl": true
+  },
+  "env": {
+    "node": true
   }
 }
