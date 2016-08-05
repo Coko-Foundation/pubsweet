@@ -6,7 +6,7 @@ const Collection = require('./Collection')
 
 const Team = require('./Team')
 const Authsome = require('authsome')
-const { teams } = require('config')
+const config = require('../../config')
 
 const AuthorizationError = require('../errors/AuthorizationError')
 
@@ -14,6 +14,7 @@ class Authorize {
   static getObjectFromURL (resourceUrl) {
     let parts = resourceUrl.split('/')
 
+    console.log(parts)
     if (parts[4] === 'fragments' && parts[5]) { // e.g. /api/collections/1/fragments/1
       let id = parts[5]
       return Fragment.find(id)
@@ -29,22 +30,26 @@ class Authorize {
     }
   }
 
-  static * can (userId, operation, resourceUrl) {
+  static can (userId, operation, resourceUrl) {
     let authsome = new Authsome('blog', {
-      teams: teams
+      teams: config.teams
     })
 
-    let object = yield this.getObjectFromURL(resourceUrl)
-    let user = yield User.find(userId)
-    let permission = authsome.can(user, operation, object)
-
-    if (permission) {
-      return Promise.resolve(true)
-    } else {
-      throw new AuthorizationError(
-        'User ' + user.username + 'is not allowed to ' + operation + 'on ' + object.type + ' ' + object.id
-      )
-    }
+    return this.getObjectFromURL(resourceUrl).then(function (object) {
+      return object
+    }).then(function (object) {
+      return Promise.all([object, User.find(userId)])
+    }).then(function ([object, user]) {
+      return [object, user, authsome.can(user, operation, object)]
+    }).then(function ([object, user, permission]) {
+      if (permission) {
+        return true
+      } else {
+        throw new AuthorizationError(
+          'User ' + user.username + 'is not allowed to ' + operation + 'on ' + object.type + ' ' + object.id
+        )
+      }
+    })
   }
 }
 

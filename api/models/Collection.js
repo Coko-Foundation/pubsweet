@@ -9,7 +9,7 @@ class Collection extends Model {
     super(properties)
     this.type = 'collection'
     this.title = properties.title
-    this.id = 1
+    this.id = '1'
   }
 
   // Gets fragments in a collection, supports filtering by properties

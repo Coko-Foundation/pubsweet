@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Navigation from 'navigation'
+import Navigation from 'PubSweet-navigation'
 
 class Manage extends Component {
   render () {

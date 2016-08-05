@@ -75,8 +75,9 @@ module.exports = [
       root: path.resolve(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
-        'routes$': config.routes,
-        'navigation$': config.navigation
+        '../../config$': path.join(__dirname, '..', 'config.js'),
+        'PubSweet-routes$': config.routes,
+        'PubSweet-navigation$': config.navigation
       }
     },
     plugins: [

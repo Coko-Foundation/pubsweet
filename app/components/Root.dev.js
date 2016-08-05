@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router } from 'react-router'
 import { Provider } from 'react-redux'
-import routes from 'routes'
+import routes from 'PubSweet-routes'
 
 export default class Root extends React.Component {
   render () {
