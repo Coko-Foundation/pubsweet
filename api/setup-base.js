@@ -3,7 +3,6 @@
 // const config = require('../config')
 const Collection = require('./models/Collection')
 const User = require('./models/User')
-const Role = require('./models/Role')
 
 class Setup {
   static setup (username, email, password, collection) {
@@ -16,43 +15,13 @@ class Setup {
       return new User({
         username: username,
         email: email,
-        password: password
+        password: password,
+        admin: true
       }).save()
     }).then(function (user) {
-      console.log('Created user: ', user)
-      return user.addRole('admin')
-    }).then(function (user) {
-      console.log('Added user', user, 'to admin role.')
-      return user
+      console.log('Created admin user: ', user)
     }).catch(function (error) {
       console.error(error)
-    })
-  }
-
-  // Creates the basic roles: admin, contributor, reader
-  // Admin:       can do everything
-  // Contributor: can create new fragments and read public objects
-  // Reader:      can read public objects
-
-  // There's an additional implicit role: owner
-  // Owner:       can do everything on objects they own
-  static createRoles () {
-    return new Role({
-      name: 'admin',
-      resources: ['/api/users', '/api/collection', '/api/collection/fragments'],
-      permissions: '*'
-    }).save().then(function () {
-      return new Role({
-        name: 'contributor',
-        resources: ['/api/collection/fragments'],
-        permissions: ['create']
-      }).save()
-    }).then(function () {
-      return new Role({
-        name: 'reader',
-        resources: ['/api/collection/fragments'],
-        permissions: []
-      }).save()
     })
   }
 }
