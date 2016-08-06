@@ -82,6 +82,7 @@
     "babel-eslint": "^6.1.2",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-2": "^6.5.0",
+    "chai": "^3.5.0",
     "config": "^1.16.0",
     "eslint": "^3.2.2",
     "eslint-config-standard": "^5.3.5",
