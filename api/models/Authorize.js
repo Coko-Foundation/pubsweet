@@ -8,6 +8,8 @@ const Team = require('./Team')
 const Authsome = require('authsome')
 const config = require('../../config')
 
+const AuthorizationError = require('../errors/AuthorizationError')
+
 class Authorize {
   static getObjectFromURL (resourceUrl) {
     let parts = resourceUrl.split('/')
@@ -25,6 +27,8 @@ class Authorize {
     } else if (parts[2] === 'teams' && parts[3]) {
       let id = parts[3]
       return Team.find(id)
+    } else if (parts[2] === 'teams') {
+      return Team.all()
     }
   }
 
@@ -40,8 +44,15 @@ class Authorize {
     }).then(function ([object, user]) {
       return [object, user, authsome.can(user, operation, object)]
     }).then(function ([object, user, permission]) {
-      console.log('User', user.username, 'is', (permission ? null : 'not'), 'allowed to', operation, 'on', object.type, object.id)
-      return permission
+      console.log(
+        'User', user.username, 'is', (permission ? null : 'not'),
+        'allowed to', operation, 'on', object.type, object.id
+      )
+      if (permission) {
+        return permission
+      } else {
+        throw new AuthorizationError()
+      }
     })
   }
 }

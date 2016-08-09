@@ -13,4 +13,5 @@ class Team extends Model {
   }
 }
 
+Team.type = 'team'
 module.exports = Team

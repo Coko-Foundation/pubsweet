@@ -1,10 +1,8 @@
 const express = require('express')
 
-const users = require('./api_users')
-const collection = require('./api_collection')
-
 const api = express.Router()
 
+const collection = require('./api_collection')
 api.use('/', collection)
 
 // File upload API
@@ -20,7 +18,12 @@ api.post('/upload', upload.single('file'), function (req, res, next) {
 })
 
 // Users API
+const users = require('./api_users')
 api.use('/users', users)
+
+// Teams
+const teams = require('./api_teams')
+api.use('/', teams)
 
 // Debug API
 if (process.env.NODE_ENV === 'dev') {

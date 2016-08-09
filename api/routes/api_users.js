@@ -9,14 +9,10 @@ const User = require('../models/User')
 const Authorize = require('../models/Authorize')
 const AuthorizationError = require('../errors/AuthorizationError')
 const config = require('../../config')
-const roles = require('./api_roles')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const users = express.Router()
-
-// Roles
-users.use('/', roles)
 
 function createToken (user) {
   console.log('Creating token', user)

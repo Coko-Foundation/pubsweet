@@ -2,7 +2,12 @@ const dbCleaner = require('./helpers/db_cleaner')
 const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Authorize = require('../models/Authorize')
-const expect = require('chai').expect
+const AuthorizationError = require('../errors/AuthorizationError')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+chai.use(chaiAsPromised)
+const expect = chai.expect
+
 const fixtures = require('./fixtures/fixtures')
 
 const adminFixture = fixtures.adminUser
@@ -31,9 +36,7 @@ describe.only('Authorize', function () {
     it('can not create a fragment', function () {
       var user = new User(userFixture)
       return user.save().then(function (user) {
-        return Authorize.can(user.id, 'create', '/api/collections/1/fragments')
-      }).then(function (permission) {
-        expect(permission).to.equal(false)
+        expect(Authorize.can(user.id, 'create', '/api/collections/1/fragments')).to.be.rejectedWith(AuthorizationError)
       })
     })
   })

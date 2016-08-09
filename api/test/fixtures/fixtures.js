@@ -47,6 +47,15 @@ const adminUser = {
   'admin': true
 }
 
+const teamType = {
+  name: 'Contributors',
+  permissions: 'create'
+}
+
+const team = {
+  teamType: teamType
+}
+
 module.exports = {
   collection: collection,
   updatedCollection: updatedCollection,
@@ -55,6 +64,7 @@ module.exports = {
   user: user,
   updatedUser: updatedUser,
   otherUser: otherUser,
-  adminUser: adminUser
+  adminUser: adminUser,
+  team: team
 }
 
