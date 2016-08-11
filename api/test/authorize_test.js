@@ -14,7 +14,7 @@ const adminFixture = fixtures.adminUser
 const userFixture = fixtures.user
 const collectionFixture = fixtures.collection
 
-describe.only('Authorize', function () {
+describe('Authorize', function () {
   before(function () {
     return dbCleaner().then(function () {
       return new Collection(collectionFixture).save()

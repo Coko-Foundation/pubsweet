@@ -23,7 +23,7 @@ api.use('/users', users)
 
 // Teams
 const teams = require('./api_teams')
-api.use('/', teams)
+api.use('/teams', teams)
 
 // Debug API
 if (process.env.NODE_ENV === 'dev') {
