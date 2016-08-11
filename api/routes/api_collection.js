@@ -11,6 +11,12 @@ const passport = require('passport')
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
+// Teams
+const teams = require('./api_teams')
+
+api.use('/collections/:id/fragments/teams', teams)
+api.use('/collections/:id/teams', teams)
+
 // Create collection
 api.post('/collections', authBearer, function (req, res, next) {
   return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {

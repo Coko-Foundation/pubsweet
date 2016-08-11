@@ -31,6 +31,7 @@ api.post('/', function (req, res, next) {
 })
 
 api.get('/:id', authBearer, function (req, res, next) {
+
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
     return Team.find(req.params.id)
   }).then(function (team) {

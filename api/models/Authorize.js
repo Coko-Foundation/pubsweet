@@ -45,8 +45,8 @@ class Authorize {
       return [object, user, authsome.can(user, operation, object)]
     }).then(function ([object, user, permission]) {
       console.log(
-        'User', user.username, 'is', (permission ? null : 'not'),
-        'allowed to', operation, 'on', object.type, object.id
+        'User', user.username, 'is', (permission ? '' : 'not'),
+        'allowed to', operation, object.type, object.id
       )
       if (permission) {
         return permission

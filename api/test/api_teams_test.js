@@ -1,6 +1,7 @@
 const request = require('supertest-as-promised')
 const expect = require('expect.js')
 
+const Collection = require('../models/Collection')
 const User = require('../models/User')
 const Team = require('../models/Team')
 
@@ -10,12 +11,12 @@ const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 const adminFixture = fixtures.adminUser
 // const otherUserFixture = fixtures.otherUser
-// const collectionFixture = fixtures.collection
+const collectionFixture = fixtures.collection
 const teamFixture = fixtures.team
 
 var api = require('../api')
 
-describe('Teams API', function () {
+describe('Teams API - admin', function () {
   before(function () {
     return dbCleaner().then(function () {
       return new User(adminFixture).save()
@@ -83,112 +84,36 @@ describe('Teams API', function () {
   })
 })
 
-// describe('roles', function () {
-//   var admin
-//   var contributor
-//   var otherUser
+describe.only('Teams API - per collection or fragment', function () {
+  let collectionId
+  before(function () {
+    return dbCleaner().then(function () {
+      return new User(userFixture).save()
+    }).then(function (user) {
+      let collection = new Collection(collectionFixture)
+      collection.owners = [user]
+      return collection.save()
+    }).then(function (collection) {
+      collectionId = collection.id
+    })
+  })
 
-//   before(function () {
-//     return dbCleaner().then(function () {
-//       var Setup = require('../setup-base')
-//       return Setup.setup(
-//         userFixture.username,
-//         userFixture.email,
-//         userFixture.password,
-//         collectionFixture.title)
-//     }).then(function (user) {
-//       admin = user
-//       otherUser = new User({
-//         username: otherUserFixture.username,
-//         email: otherUserFixture.email,
-//         password: otherUserFixture.password
-//       })
-//       return otherUser.save()
-//     }).then(function (user) {
-//       contributor = user
-//     }).catch(function (err) {
-//       console.log(err)
-//       throw err
-//     })
-//   })
-
-//   it("can get user's roles", function () {
-//     return request(api)
-//       .post('/api/users/authenticate')
-//       .send({
-//         username: userFixture.username,
-//         password: userFixture.password
-//       })
-//       .expect(201)
-//       .then(function (res) {
-//         var token = res.body.token
-//         return request(api)
-//           .get('/api/users/' + admin.id + '/roles')
-//           .set('Authorization', 'Bearer ' + token)
-//           .expect(200)
-//       }).then(function (res) {
-//         expect(res.body).to.eql(['admin'])
-//       })
-//   })
-
-//   it('admin can assign a role to the user', function () {
-//     return request(api)
-//       .post('/api/users/authenticate')
-//       .send({
-//         username: userFixture.username,
-//         password: userFixture.password
-//       })
-//       .expect(201)
-//       .then(function (res) {
-//         var token = res.body.token
-//         return request(api)
-//           .put('/api/users/' + contributor.id + '/roles')
-//           .send(['contributor'])
-//           .set('Authorization', 'Bearer ' + token)
-//           .expect(200)
-//       }).then(function (res) {
-//         expect(res.body).to.eql(['contributor'])
-//       })
-//   })
-
-//   it('contributor can not assign a role to admin', function () {
-//     return request(api)
-//       .post('/api/users/authenticate')
-//       .send({
-//         username: otherUserFixture.username,
-//         password: otherUserFixture.password
-//       })
-//       .expect(201)
-//       .then(function (res) {
-//         var token = res.body.token
-//         return request(api)
-//           .put('/api/users/' + admin.id + '/roles')
-//           .send(['admin', 'contributor'])
-//           .set('Authorization', 'Bearer ' + token)
-//           .expect(403)
-//       })
-//   })
-
-//   it('admin can assign a role to the user via updating the user directly', function () {
-//     return request(api)
-//       .post('/api/users/authenticate')
-//       .send({
-//         username: userFixture.username,
-//         password: userFixture.password
-//       })
-//       .expect(201)
-//       .then(function (res) {
-//         var token = res.body.token
-//         return request(api)
-//           .put('/api/users/' + otherUser.id)
-//           .send({roles: ['contributor', 'reader']})
-//           .set('Authorization', 'Bearer ' + token)
-//           .expect(200)
-//       }).then(function (res) {
-//         console.log(res.body)
-//         expect(res.body.roles).to.have.length(2)
-//         expect(res.body.roles).to.contain('contributor')
-//         expect(res.body.roles).to.contain('reader')
-//       })
-//   })
-// })
+  it('should display an initially empty list of teams if user is owner of collection', function () {
+    return request(api)
+      .post('/api/users/authenticate')
+      .send({
+        username: userFixture.username,
+        password: userFixture.password
+      })
+      .expect(201)
+      .then(function (res) {
+        var token = res.body.token
+        return request(api)
+          .get('/api/collections/' + collectionId + '/teams')
+          .set('Authorization', 'Bearer ' + token)
+          .expect(200)
+      }).then(function (res) {
+        expect(res.body).to.eql([])
+      })
+  })
+})
