@@ -12,17 +12,11 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
 // Create collection
-api.post('/collection', authBearer, function (req, res, next) {
+api.post('/collections', authBearer, function (req, res, next) {
   return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
-    return Collection.find(1)
-  }).then(function (existingCollection) {
-    if (existingCollection) {
-      res.status(200).json(existingCollection)
-    } else {
-      let collection = new Collection(req.body)
-      collection.owner(req.user)
-      return collection.save(req.user)
-    }
+    let collection = new Collection(req.body)
+    collection.owner(req.user)
+    return collection.save()
   }).then(function (response) {
     return res.status(201).json(response)
   }).catch(function (err) {
@@ -30,7 +24,8 @@ api.post('/collection', authBearer, function (req, res, next) {
   })
 })
 
-// Get collection
+// Get first collection
+// TODO: Remove in favor of multiple collections
 api.get('/collection', function (req, res, next) {
   Collection.find(1).then(function (collection) {
     return res.status(200).json(collection)
@@ -39,42 +34,38 @@ api.get('/collection', function (req, res, next) {
   })
 })
 
-// Destroy collection
-api.delete('/collection', function (req, res, next) {
+api.get('/collections/:id', function (req, res, next) {
+  Collection.find(req.params.id).then(function (collection) {
+    return res.status(200).json(collection)
+  }).catch(function (err) {
+    next(err)
+  })
+})
+
+api.delete('/collections/:id', function (req, res, next) {
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Collection.find(1)
-  }).then(function (existingCollection) {
-    if (existingCollection) {
-      return existingCollection.delete().then(function (response) {
-        return res.status(200).json(response)
-      })
-    } else {
-      return res.status(404)
-    }
+    return Collection.find(req.params.id)
+  }).then(function (collection) {
+    return collection.delete()
+  }).then(function (collection) {
+    return res.status(200).json(collection)
   }).catch(function (err) {
     next(err)
   })
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collection/fragments', authBearer, function (req, res, next) {
-  var collection
-  var fragment
+api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
   return Authorize.can(req.user, 'create', req.originalUrl).then(function () {
-    // Collection is a special case, always id 1 for single collections
-    return Collection.find(1)
-  }).then(function (existingCollection) {
-    collection = existingCollection
-    fragment = new Fragment(req.body)
-    fragment.owner = req.user // Who creates it, owns it
-    return fragment.save()
-  })
-  .then(function (fragment) {
+    return Collection.find(req.params.id)
+  }).then(function (collection) {
+    let fragment = new Fragment(req.body)
+    fragment.owner = req.user
+    return [collection, fragment.save()]
+  }).then(function ([collection, fragment]) {
     collection.addFragment(fragment)
-    return collection.save()
-  })
-  .then(function (collection) {
-    fragment.owner = req.authInfo.username // TODO
+    return [collection.save(), fragment]
+  }).then(function ([collection, fragment]) {
     return res.status(201).json(fragment)
   }).catch(function (err) {
     next(err)
@@ -82,22 +73,19 @@ api.post('/collection/fragments', authBearer, function (req, res, next) {
 })
 
 // Get all fragments
-api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) {
+api.get('/collections/:id/fragments', authBearerAndPublic, function (req, res, next) {
   var fallback = function () {
-    return Collection.find(1).then(function (collection) {
-      console.log('Falling back to anonymous')
-      if (req.user) {
-        return collection.getFragments({filter: {published: true, owner: req.user}})
-      } else {
-        return collection.getFragments({filter: {published: true}})
-      }
+    return Collection.find(req.params.id).then(function (collection) {
+      return collection.getFragments({filter: function (fragment) {
+        return Authorize.can(req.user, 'read', fragment)
+      }})
     }).catch(function (err) {
       next(err)
     })
   }
 
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Collection.find(1)
+    return Collection.find(req.params.id)
   }).then(function (collection) {
     return collection.getFragments()
   }).then(function (fragments) {
@@ -113,8 +101,8 @@ api.get('/collection/fragments', authBearerAndPublic, function (req, res, next) 
   })
 })
 
-api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, next) {
-  var fallback = Fragment.find(req.params.id).then(function (fragment) {
+api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, function (req, res, next) {
+  var fallback = Fragment.find(req.params.fragmentId).then(function (fragment) {
     if (fragment.published) {
       return fragment
     } else {
@@ -123,7 +111,7 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
   })
 
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Fragment.find(req.params.id)
+    return Fragment.find(req.params.fragmentId)
   }).then(function (fragment) {
     return res.status(200).json(fragment)
   }).catch(function (err) {
@@ -140,15 +128,14 @@ api.get('/collection/fragments/:id', authBearerAndPublic, function (req, res, ne
 })
 
 // Update a fragment
-api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
+api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
   return Authorize.can(req.user, req.originalUrl, 'update').then(function () {
-    return Fragment.find(req.params.id)
+    return Fragment.find(req.params.fragmentId)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
   }).then(function (fragment) {
     return fragment.save()
   }).then(function (fragment) {
-    fragment.owner = req.authInfo.username // TODO
     return res.status(200).json(fragment)
   }).catch(function (err) {
     next(err)
@@ -156,20 +143,18 @@ api.put('/collection/fragments/:id', authBearer, function (req, res, next) {
 })
 
 // Delete a fragment
-api.delete('/collection/fragments/:id', authBearer, function (req, res, next) {
-  var deletedFragment
+api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
   return Authorize.can(req.user, req.originalUrl, 'delete').then(function () {
-    return Fragment.find(req.params.id)
+    return Fragment.find(req.params.fragmentId)
   }).then(function (fragment) {
-    deletedFragment = fragment
     return fragment.delete()
-  }).then(function () {
-    return Collection.find(1)
-  }).then(function (collection) {
-    collection.fragments = _.without(collection.fragments, req.params.id)
-    return collection.save()
-  }).then(function (result) {
-    return res.status(200).json(deletedFragment)
+  }).then(function (fragment) {
+    return [Collection.find(req.params.collectionId), fragment]
+  }).then(function ([collection, fragment]) {
+    collection.fragments = _.without(collection.fragments, req.params.fragmentId)
+    return [collection.save(), fragment]
+  }).then(function ([collection, fragment]) {
+    return res.status(200).json(fragment)
   }).catch(function (err) {
     next(err)
   })
