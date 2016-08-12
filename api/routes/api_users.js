@@ -37,7 +37,7 @@ users.post('/authenticate', authLocal, function (req, res) {
 
 // Token verify
 users.get('/authenticate', authBearer, function (req, res) {
-  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
+  return User.find(req.authInfo.id).then(function (user) {
     return res.status(200).json(user)
   })
 })
@@ -98,8 +98,9 @@ users.put('/:id', authBearer, function (req, res, next) {
   return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
     return User.find(req.user)
   }).then(function (user) {
-    if (req.body.roles && !_.includes(user.roles, 'admin')) {
-      throw new AuthorizationError('only admins can set roles')
+    // TODO: Move this to a validation step
+    if (req.body.admin && !user.admin) {
+      throw new AuthorizationError('only admins can set other admins')
     }
     return User.find(req.params.id)
   }).then(function (user) {

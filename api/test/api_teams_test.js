@@ -16,7 +16,20 @@ const teamFixture = fixtures.team
 
 var api = require('../api')
 
-describe('Teams API - admin', function () {
+function getToken (username, password) {
+  return request(api)
+    .post('/api/users/authenticate')
+    .send({
+      username: username,
+      password: password
+    })
+    .expect(201)
+    .then(function (res) {
+      return res.body.token
+    })
+}
+
+describe.only('Teams API - admin', function () {
   before(function () {
     return dbCleaner().then(function () {
       return new User(adminFixture).save()
@@ -26,35 +39,20 @@ describe('Teams API - admin', function () {
   })
 
   it('should display an initially empty list of teams if user is admin', function () {
-    return request(api)
-      .post('/api/users/authenticate')
-      .send({
-        username: adminFixture.username,
-        password: adminFixture.password
-      })
-      .expect(201)
-      .then(function (res) {
-        var token = res.body.token
-        return request(api)
-          .get('/api/teams')
-          .set('Authorization', 'Bearer ' + token)
-          .expect(200)
-      }).then(function (res) {
-        expect(res.body).to.eql([])
-      })
+    return getToken(adminFixture.username, adminFixture.password).then(function (token) {
+      return request(api)
+        .get('/api/teams')
+        .set('Authorization', 'Bearer ' + token)
+        .expect(200)
+    }).then(function (res) {
+      expect(res.body).to.eql([])
+    })
   })
 
   it('should display the existing teams if user is admin', function () {
     return new Team(teamFixture).save().then(function () {
-      return request(api)
-        .post('/api/users/authenticate')
-        .send({
-          username: adminFixture.username,
-          password: adminFixture.password
-        })
-        .expect(201)
-    }).then(function (res) {
-      var token = res.body.token
+      return getToken(adminFixture.username, adminFixture.password)
+    }).then(function (token) {
       return request(api)
         .get('/api/teams')
         .set('Authorization', 'Bearer ' + token)
@@ -67,20 +65,12 @@ describe('Teams API - admin', function () {
   })
 
   it('should not allow listing all teams if user is not an admin', function () {
-    return request(api)
-      .post('/api/users/authenticate')
-      .send({
-        username: userFixture.username,
-        password: userFixture.password
-      })
-      .expect(201)
-      .then(function (res) {
-        var token = res.body.token
-        return request(api)
-          .get('/api/teams')
-          .set('Authorization', 'Bearer ' + token)
-          .expect(403)
-      })
+    return getToken(userFixture.username, userFixture.password).then(function (token) {
+      return request(api)
+        .get('/api/teams')
+        .set('Authorization', 'Bearer ' + token)
+        .expect(403)
+    })
   })
 })
 
@@ -101,22 +91,18 @@ describe.only('Teams API - per collection or fragment', function () {
       })
 
       it('should display an initially empty list of teams if user is owner', function () {
-        return request(api)
-          .post('/api/users/authenticate')
-          .send({
-            username: userFixture.username,
-            password: userFixture.password
-          })
-          .expect(201)
-          .then(function (res) {
-            var token = res.body.token
-            return request(api)
+        return getToken(userFixture.username, userFixture.password).then(function (token) {
+          return request(api)
               .get('/api/collections/' + collectionId + '/teams')
               .set('Authorization', 'Bearer ' + token)
               .expect(200)
-          }).then(function (res) {
-            expect(res.body).to.eql([])
-          })
+        }).then(function (res) {
+          expect(res.body).to.eql([])
+        })
+      })
+
+      it('can add a team with a team member to a colletion', function () {
+
       })
     })
 
@@ -135,20 +121,12 @@ describe.only('Teams API - per collection or fragment', function () {
       })
 
       it('should fail if user is not owner of collection or admin', function () {
-        return request(api)
-          .post('/api/users/authenticate')
-          .send({
-            username: userFixture.username,
-            password: userFixture.password
-          })
-          .expect(201)
-          .then(function (res) {
-            var token = res.body.token
-            return request(api)
-              .get('/api/collections/' + collectionId + '/teams')
-              .set('Authorization', 'Bearer ' + token)
-              .expect(403)
-          })
+        return getToken(userFixture.username, userFixture.password).then(function (token) {
+          return request(api)
+            .get('/api/collections/' + collectionId + '/teams')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(403)
+        })
       })
     })
   })
