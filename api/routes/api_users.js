@@ -15,7 +15,7 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const users = express.Router()
 
 function createToken (user) {
-  console.log('Creating token', user)
+  console.log('Creating token for', user.username)
   return jwt.sign(
     {
       username: user.username,

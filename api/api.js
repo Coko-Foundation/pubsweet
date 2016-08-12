@@ -63,7 +63,7 @@ passport.use('anonymous', new AnonymousStrategy())
 passport.use('local', new LocalStrategy(function (username, password, done) {
   console.log('User finding:', username)
   User.findByUsername(username).then(function (user) {
-    console.log('User found:', user)
+    console.log('User found:', user.username)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
     }
@@ -71,7 +71,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       console.log('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
-    console.log('User returned', user)
+    console.log('User returned', user.username)
     return done(null, user, {id: user.id})
   }).catch(function (err) {
     console.log('User not found', err)

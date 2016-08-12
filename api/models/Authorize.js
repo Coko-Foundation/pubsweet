@@ -14,7 +14,6 @@ class Authorize {
   static getObjectFromURL (resourceUrl) {
     let parts = resourceUrl.split('/')
 
-    console.log(parts)
     if (parts[4] === 'fragments' && parts[5]) { // e.g. /api/collections/1/fragments/1
       let id = parts[5]
       return Fragment.find(id)

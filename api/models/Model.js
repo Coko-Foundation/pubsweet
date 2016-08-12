@@ -14,7 +14,7 @@ class Model {
   }
 
   save () {
-    console.log('Saving', this, this.id)
+    console.log('Saving', this.type, this.id)
     return this.constructor.find(this.id).then(function (result) {
       console.log('Found an existing version, this is an update of:', result)
       return result.rev
@@ -23,7 +23,7 @@ class Model {
       return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
-        console.log('No existing object found, creating a new one:', error)
+        console.log('No existing object found, creating a new one:', this.type, this.id)
         return this._put()
       } else {
         throw error
@@ -33,7 +33,7 @@ class Model {
 
   _put () {
     return db.rel.save(this.constructor.type, this).then(function (response) {
-      console.log('Actually _put', this)
+      console.log('Actually _put', this.type, this.id)
       return this
     }.bind(this))
   }
@@ -86,10 +86,10 @@ class Model {
       }
     }.bind(this)).catch(function (err) {
       if (err.name === 'NotFoundError') {
-        console.log('Object not found', err)
+        console.log('Object not found:', this.type, id)
       }
       throw err
-    })
+    }.bind(this))
   }
 
   static findByField (field, value) {
