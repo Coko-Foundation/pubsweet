@@ -85,35 +85,71 @@ describe('Teams API - admin', function () {
 })
 
 describe.only('Teams API - per collection or fragment', function () {
-  let collectionId
-  before(function () {
-    return dbCleaner().then(function () {
-      return new User(userFixture).save()
-    }).then(function (user) {
-      let collection = new Collection(collectionFixture)
-      collection.owners = [user]
-      return collection.save()
-    }).then(function (collection) {
-      collectionId = collection.id
-    })
-  })
+  describe('Collection teams', function () {
+    describe('owners', function () {
+      let collectionId
+      before(function () {
+        return dbCleaner().then(function () {
+          return new User(userFixture).save()
+        }).then(function (user) {
+          let collection = new Collection(collectionFixture)
+          collection.owners = [user]
+          return collection.save()
+        }).then(function (collection) {
+          collectionId = collection.id
+        })
+      })
 
-  it('should display an initially empty list of teams if user is owner of collection', function () {
-    return request(api)
-      .post('/api/users/authenticate')
-      .send({
-        username: userFixture.username,
-        password: userFixture.password
-      })
-      .expect(201)
-      .then(function (res) {
-        var token = res.body.token
+      it('should display an initially empty list of teams if user is owner', function () {
         return request(api)
-          .get('/api/collections/' + collectionId + '/teams')
-          .set('Authorization', 'Bearer ' + token)
-          .expect(200)
-      }).then(function (res) {
-        expect(res.body).to.eql([])
+          .post('/api/users/authenticate')
+          .send({
+            username: userFixture.username,
+            password: userFixture.password
+          })
+          .expect(201)
+          .then(function (res) {
+            var token = res.body.token
+            return request(api)
+              .get('/api/collections/' + collectionId + '/teams')
+              .set('Authorization', 'Bearer ' + token)
+              .expect(200)
+          }).then(function (res) {
+            expect(res.body).to.eql([])
+          })
       })
+    })
+
+    describe('non-owners', function () {
+      let collectionId
+      before(function () {
+        return dbCleaner().then(function () {
+          return new User(userFixture).save()
+        }).then(function (user) {
+          let collection = new Collection(collectionFixture)
+          collection.owners = []
+          return collection.save()
+        }).then(function (collection) {
+          collectionId = collection.id
+        })
+      })
+
+      it('should fail if user is not owner of collection or admin', function () {
+        return request(api)
+          .post('/api/users/authenticate')
+          .send({
+            username: userFixture.username,
+            password: userFixture.password
+          })
+          .expect(201)
+          .then(function (res) {
+            var token = res.body.token
+            return request(api)
+              .get('/api/collections/' + collectionId + '/teams')
+              .set('Authorization', 'Bearer ' + token)
+              .expect(403)
+          })
+      })
+    })
   })
 })
