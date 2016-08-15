@@ -4,14 +4,17 @@ module.exports = {
   routes: 'app/routes.jsx',
   navigation: 'app/components/Navigation/Navigation.jsx',
   theme: 'pepper',
-  teams: {
-    teamContributors: {
-      name: 'Contributors',
-      permissions: 'create'
-    },
-    teamCoauthors: {
-      name: 'Coauthors',
-      permissions: 'update'
+  authsome: {
+    mode: 'blog',
+    teams: {
+      teamContributors: {
+        name: 'Contributors',
+        permissions: 'create'
+      },
+      teamCoauthors: {
+        name: 'Coauthors',
+        permissions: 'update'
+      }
     }
   }
 }

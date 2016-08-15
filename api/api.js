@@ -71,7 +71,6 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       console.log('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
-    console.log('User returned', user.username)
     return done(null, user, {id: user.id})
   }).catch(function (err) {
     console.log('User not found', err)
@@ -88,7 +87,7 @@ app.use('/', index)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error('Not Found')
+  const err = new Error('Not` Found')
   err.status = 404
   next(err)
 })

@@ -3,7 +3,7 @@
   "version": "0.3.1",
   "private": true,
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js -R nyan",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js",
     "eslint": "eslint"
   },
   "engines": {

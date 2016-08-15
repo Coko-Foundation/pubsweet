@@ -39,7 +39,7 @@ module.exports = function () {
         singular: 'team',
         plural: 'teams',
         relations: {
-          users: {hasMany: 'users'}
+          members: {hasMany: 'users'}
         }
       }
     ])

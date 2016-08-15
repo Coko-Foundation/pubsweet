@@ -32,8 +32,8 @@ class Authorize {
   }
 
   static can (userId, operation, resourceUrl) {
-    let authsome = new Authsome('blog', {
-      teams: config.teams
+    let authsome = new Authsome(config.authsome.mode, {
+      teams: config.authsome.teams
     })
 
     return this.getObjectFromURL(resourceUrl).then(function (object) {
@@ -41,11 +41,24 @@ class Authorize {
     }).then(function (object) {
       return Promise.all([object, User.find(userId)])
     }).then(function ([object, user]) {
+      let teams = user.teams.map(function (teamId) {
+        return Team.find(teamId)
+      })
+      console.log('x1', teams)
+      return Promise.all([object, user, Promise.all(teams)])
+    }).then(function ([object, user, teams]) {
+      console.log('x2', teams)
+      user.teams = teams
+      return [object, user]
+    }).then(function ([object, user]) {
+      console.log('x3', user)
+      console.log('x4', object)
+
       return [object, user, authsome.can(user, operation, object)]
     }).then(function ([object, user, permission]) {
       console.log(
-        'User', user.username, 'is', (permission ? '' : 'not'),
-        'allowed to', operation, object.type, object.id
+        'User', user.username, (permission ? 'is' : 'is not'),
+        'allowed to', operation, 'on', object.type, object.id
       )
       if (permission) {
         return permission

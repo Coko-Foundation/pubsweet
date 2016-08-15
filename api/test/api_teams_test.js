@@ -10,9 +10,10 @@ const fixtures = require('./fixtures/fixtures')
 
 const userFixture = fixtures.user
 const adminFixture = fixtures.adminUser
-// const otherUserFixture = fixtures.otherUser
+const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
 const teamFixture = fixtures.team
+const fragmentFixture = fixtures.fragment
 
 var api = require('../api')
 
@@ -29,7 +30,7 @@ function getToken (username, password) {
     })
 }
 
-describe.only('Teams API - admin', function () {
+describe('Teams API - admin', function () {
   before(function () {
     return dbCleaner().then(function () {
       return new User(adminFixture).save()
@@ -74,10 +75,11 @@ describe.only('Teams API - admin', function () {
   })
 })
 
-describe.only('Teams API - per collection or fragment', function () {
+describe('Teams API - per collection or fragment', function () {
   describe('Collection teams', function () {
-    describe('owners', function () {
+    describe.only('owners', function () {
       let collectionId
+      let otherUserId
       before(function () {
         return dbCleaner().then(function () {
           return new User(userFixture).save()
@@ -87,22 +89,48 @@ describe.only('Teams API - per collection or fragment', function () {
           return collection.save()
         }).then(function (collection) {
           collectionId = collection.id
+        }).then(function () {
+          return new User(otherUserFixture).save()
+        }).then(function (otherUser) {
+          otherUserId = otherUser.id
         })
       })
 
-      it('should display an initially empty list of teams if user is owner', function () {
+      it('can display an initially empty list of teams', function () {
         return getToken(userFixture.username, userFixture.password).then(function (token) {
           return request(api)
-              .get('/api/collections/' + collectionId + '/teams')
-              .set('Authorization', 'Bearer ' + token)
-              .expect(200)
+            .get('/api/collections/' + collectionId + '/teams')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
         }).then(function (res) {
           expect(res.body).to.eql([])
         })
       })
 
-      it('can add a team with a team member to a colletion', function () {
+      it('can add a team with a team member to a collection and this team member can then create fragments', function () {
+        let team = teamFixture
 
+        return getToken(userFixture.username, userFixture.password).then(function (token) {
+          team.name = 'Test team'
+          team.members = [otherUserId]
+          team.objectId = collectionId
+
+          return request(api)
+            .post('/api/collections/' + collectionId + '/teams')
+            .send(team)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(201)
+        }).then(function (res) {
+          expect(res.body.name).to.eql(team.name)
+        }).then(function () {
+          return getToken(otherUserFixture.username, otherUserFixture.password)
+        }).then(function (token) {
+          return request(api)
+            .post('/api/collections/' + collectionId + '/fragments')
+            .send(fragmentFixture)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(201)
+        })
       })
     })
 
@@ -120,7 +148,7 @@ describe.only('Teams API - per collection or fragment', function () {
         })
       })
 
-      it('should fail if user is not owner of collection or admin', function () {
+      it('should not be authorized to see teams for a collection', function () {
         return getToken(userFixture.username, userFixture.password).then(function (token) {
           return request(api)
             .get('/api/collections/' + collectionId + '/teams')

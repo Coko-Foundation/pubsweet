@@ -47,8 +47,9 @@ users.post('/', function (req, res, next) {
   console.log(req.body)
   const user = new User(req.body)
 
-  if (req.body.roles) {
-    throw new AuthorizationError('a role can only be given by an admin')
+  // TODO: Move this to a validation step
+  if (req.body.admin && !user.admin) {
+    throw new AuthorizationError('only admins can set other admins')
   }
 
   return user.isUniq().then(function (response) {

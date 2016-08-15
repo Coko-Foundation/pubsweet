@@ -18,12 +18,14 @@ api.get('/', authBearer, function (req, res, next) {
   })
 })
 
-api.post('/', function (req, res, next) {
+api.post('/', authBearer, function (req, res, next) {
   let team = new Team(req.body)
 
+  console.log('WHAAAA', req.body)
   return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
     return team.save()
   }).then(function (response) {
+              console.log('WHOOOO', response)
     return res.status(201).json(response)
   }).catch(function (err) {
     next(err)
@@ -31,7 +33,6 @@ api.post('/', function (req, res, next) {
 })
 
 api.get('/:id', authBearer, function (req, res, next) {
-
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
     return Team.find(req.params.id)
   }).then(function (team) {
