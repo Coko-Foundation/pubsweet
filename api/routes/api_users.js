@@ -3,7 +3,6 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const express = require('express')
-const _ = require('lodash')
 
 const User = require('../models/User')
 const Authorize = require('../models/Authorize')
@@ -13,9 +12,10 @@ const config = require('../../config')
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const users = express.Router()
+const logger = require('../logger')
 
 function createToken (user) {
-  console.log('Creating token for', user.username)
+  logger.info('Creating token for', user.username)
   return jwt.sign(
     {
       username: user.username,
@@ -44,7 +44,7 @@ users.get('/authenticate', authBearer, function (req, res) {
 
 // Create user
 users.post('/', function (req, res, next) {
-  console.log(req.body)
+  logger.info(req.body)
   const user = new User(req.body)
 
   // TODO: Move this to a validation step
@@ -65,7 +65,7 @@ users.get('/', authBearer, function (req, res, next) {
   return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
     return User.all()
   }).then(function (users) {
-    console.log(users)
+    logger.info(users)
     return res.status(200).json({users: users})
   }).catch(function (err) {
     next(err)

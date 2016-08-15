@@ -3,7 +3,7 @@
 const schema = require('./schema')
 const uuid = require('node-uuid')
 const NotFoundError = require('../errors/NotFoundError')
-
+const logger = require('../logger')
 schema()
 
 class Model {
@@ -14,16 +14,16 @@ class Model {
   }
 
   save () {
-    console.log('Saving', this.type, this.id)
+    logger.info('Saving', this.type, this.id)
     return this.constructor.find(this.id).then(function (result) {
-      console.log('Found an existing version, this is an update of:', result)
+      logger.info('Found an existing version, this is an update of:', result)
       return result.rev
     }).then(function (rev) {
       this.rev = rev
       return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
-        console.log('No existing object found, creating a new one:', this.type, this.id)
+        logger.info('No existing object found, creating a new one:', this.type, this.id)
         return this._put()
       } else {
         throw error
@@ -33,7 +33,7 @@ class Model {
 
   _put () {
     return db.rel.save(this.constructor.type, this).then(function (response) {
-      console.log('Actually _put', this.type, this.id)
+      logger.info('Actually _put', this.type, this.id, this)
       return this
     }.bind(this))
   }
@@ -42,7 +42,7 @@ class Model {
     return this.constructor.find(this.id).then(function (object) {
       return db.rel.del(this.type, object)
     }.bind(this)).then(function () {
-      console.log('Deleted', this.type, this.id)
+      logger.info('Deleted', this.type, this.id)
       return this
     }.bind(this))
   }
@@ -51,7 +51,7 @@ class Model {
     // TODO: Owner can not be changed
     delete properties.owner
 
-    console.log('Updating properties to', properties)
+    logger.info('Updating properties to', properties)
     // TODO: Should we screen/filter more properties here?
 
     Object.assign(this, properties)
@@ -86,14 +86,14 @@ class Model {
       }
     }.bind(this)).catch(function (err) {
       if (err.name === 'NotFoundError') {
-        console.log('Object not found:', this.type, id)
+        logger.info('Object not found:', this.type, id)
       }
       throw err
     }.bind(this))
   }
 
   static findByField (field, value) {
-    console.log('Finding', field, value)
+    logger.info('Finding', field, value)
     field = 'data.' + field
     let type = 'data.type'
 

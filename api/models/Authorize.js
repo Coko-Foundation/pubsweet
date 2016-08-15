@@ -7,6 +7,7 @@ const Collection = require('./Collection')
 const Team = require('./Team')
 const Authsome = require('authsome')
 const config = require('../../config')
+const logger = require('../logger')
 
 const AuthorizationError = require('../errors/AuthorizationError')
 
@@ -44,19 +45,19 @@ class Authorize {
       let teams = user.teams.map(function (teamId) {
         return Team.find(teamId)
       })
-      console.log('x1', teams)
+      logger.info('x1', teams)
       return Promise.all([object, user, Promise.all(teams)])
     }).then(function ([object, user, teams]) {
-      console.log('x2', teams)
+      logger.info('x2', teams)
       user.teams = teams
       return [object, user]
     }).then(function ([object, user]) {
-      console.log('x3', user)
-      console.log('x4', object)
+      logger.info('x3', user)
+      logger.info('x4', object)
 
       return [object, user, authsome.can(user, operation, object)]
     }).then(function ([object, user, permission]) {
-      console.log(
+      logger.info(
         'User', user.username, (permission ? 'is' : 'is not'),
         'allowed to', operation, 'on', object.type, object.id
       )

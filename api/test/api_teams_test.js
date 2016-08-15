@@ -80,6 +80,9 @@ describe('Teams API - per collection or fragment', function () {
     describe.only('owners', function () {
       let collectionId
       let otherUserId
+      let teamId
+      let team = teamFixture
+
       before(function () {
         return dbCleaner().then(function () {
           return new User(userFixture).save()
@@ -108,8 +111,6 @@ describe('Teams API - per collection or fragment', function () {
       })
 
       it('can add a team with a team member to a collection and this team member can then create fragments', function () {
-        let team = teamFixture
-
         return getToken(userFixture.username, userFixture.password).then(function (token) {
           team.name = 'Test team'
           team.members = [otherUserId]
@@ -121,6 +122,7 @@ describe('Teams API - per collection or fragment', function () {
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
         }).then(function (res) {
+          teamId = res.body.id
           expect(res.body.name).to.eql(team.name)
         }).then(function () {
           return getToken(otherUserFixture.username, otherUserFixture.password)
@@ -130,6 +132,25 @@ describe('Teams API - per collection or fragment', function () {
             .send(fragmentFixture)
             .set('Authorization', 'Bearer ' + token)
             .expect(201)
+        })
+      })
+
+      it('can remove a team member and that removed team member can no longer create fragments', function () {
+        team.members = []
+        return getToken(userFixture.username, userFixture.password).then(function (token) {
+          return request(api)
+            .put('/api/collections/' + collectionId + '/teams/' + teamId)
+            .send(team)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+        }).then(function (res) {
+          return getToken(otherUserFixture.username, otherUserFixture.password)
+        }).then(function (token) {
+          return request(api)
+            .post('/api/collections/' + collectionId + '/fragments')
+            .send(fragmentFixture)
+            .set('Authorization', 'Bearer ' + token)
+            .expect(403)
         })
       })
     })

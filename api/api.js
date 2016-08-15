@@ -1,13 +1,11 @@
 const express = require('express')
 const path = require('path')
-const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const webpack = require('webpack')
-
 const index = require('./routes/index')
 const api = require('./routes/api')
-
+const logger = require('./logger')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
@@ -20,7 +18,9 @@ global.versions = {}
 
 // uncomment after placing your favicon in /public
 // app.use(favicon (path.join(__dirname, 'public', 'favicon.ico')))
-app.use(logger('dev'))
+
+app.use(require('morgan')('combined', { 'stream': logger.stream }))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -61,19 +61,19 @@ passport.use('bearer', new BearerStrategy(
 passport.use('anonymous', new AnonymousStrategy())
 
 passport.use('local', new LocalStrategy(function (username, password, done) {
-  console.log('User finding:', username)
+  logger.info('User finding:', username)
   User.findByUsername(username).then(function (user) {
-    console.log('User found:', user.username)
+    logger.info('User found:', user.username)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
     }
     if (!user.validPassword(password)) {
-      console.log('Invalid password for user:', username)
+      logger.info('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
     return done(null, user, {id: user.id})
   }).catch(function (err) {
-    console.log('User not found', err)
+    logger.info('User not found', err)
     if (err) { return done(err) }
   })
 }))
@@ -95,8 +95,8 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // development error handler, will print stacktrace
   if (app.get('env') === 'dev' || app.get('env') === 'test') {
-    console.log(err)
-    console.log(err.stack)
+    logger.error(err)
+    logger.error(err.stack)
   }
 
   if (err.name === 'ConflictError') {

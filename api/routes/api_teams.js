@@ -7,6 +7,7 @@ const Team = require('../models/Team')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
+const logger = require('../logger')
 
 api.get('/', authBearer, function (req, res, next) {
   return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
@@ -21,11 +22,11 @@ api.get('/', authBearer, function (req, res, next) {
 api.post('/', authBearer, function (req, res, next) {
   let team = new Team(req.body)
 
-  console.log('WHAAAA', req.body)
+  logger.info('WHAAAA', req.body)
   return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
     return team.save()
   }).then(function (response) {
-              console.log('WHOOOO', response)
+    logger.info('WHOOOOxXXXX', response)
     return res.status(201).json(response)
   }).catch(function (err) {
     next(err)

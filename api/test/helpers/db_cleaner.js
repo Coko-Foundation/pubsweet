@@ -4,16 +4,17 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
 const dbName = './api/db/' + process.env.NODE_ENV
+const logger = require('../../logger')
 
 let dbCleaner = function () {
   return global.db.destroy().then(function (response) {
     global.db = new PouchDB(dbName)
     return db.allDocs()
   }).then(function (response) {
-    console.log('Cleaning database', response)
+    logger.info('Cleaning database', response)
     return response
   }).catch(function (err) {
-    console.log('Error cleaning database', err)
+    logger.error('Error cleaning database', err)
     return err
   })
 }
