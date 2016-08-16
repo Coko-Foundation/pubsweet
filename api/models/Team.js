@@ -12,6 +12,10 @@ class Team extends Model {
     this.name = properties.name
     this.teamType = properties.teamType
     this.object = properties.object
+
+    if (!Array.isArray(this.members)) {
+      this.members = []
+    }
   }
 
   updateProperties (properties) {

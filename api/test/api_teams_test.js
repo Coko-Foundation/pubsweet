@@ -77,7 +77,7 @@ describe('Teams API - admin', function () {
 
 describe('Teams API - per collection or fragment', function () {
   describe('Collection teams', function () {
-    describe.only('owners', function () {
+    describe('owners', function () {
       let collectionId
       let otherUserId
       let teamId
