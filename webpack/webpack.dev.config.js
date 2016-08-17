@@ -77,14 +77,16 @@ module.exports = [
       alias: {
         '../../config$': path.join(__dirname, '..', 'config.js'),
         'PubSweet-routes$': config.routes,
-        'PubSweet-navigation$': config.navigation,
-        'AuthsomeConfig$': config.authsome
+        'PubSweet-navigation$': config.navigation
       }
     },
     plugins: [
       new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('dev')
+      }),
+      new webpack.ProvidePlugin({
+        'AuthsomeConfig': config.authsome
       }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),

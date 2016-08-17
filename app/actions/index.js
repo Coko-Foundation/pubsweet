@@ -21,7 +21,7 @@ function getCollectionSuccess (collection) {
 export function getCollection () {
   return dispatch => {
     dispatch(getCollectionRequest())
-    return fetch(API_ENDPOINT + '/collection')
+    return fetch(API_ENDPOINT + '/collections/1')
       .then(response => response.json())
       .then(collection => dispatch(getCollectionSuccess(collection)))
   }
@@ -54,7 +54,7 @@ export function getFragments () {
     dispatch(getFragmentsRequest())
     const { auth: { token } } = getState()
 
-    return fetch(API_ENDPOINT + '/collection/fragments', {
+    return fetch(API_ENDPOINT + '/collections/1/fragments', {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -101,7 +101,7 @@ export function createFragment (fragment) {
     dispatch(createFragmentRequest(fragment))
     const { auth: { token } } = getState()
 
-    return fetch(API_ENDPOINT + '/collection/fragments', {
+    return fetch(API_ENDPOINT + '/collections/1/fragments', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -137,7 +137,7 @@ export function updateFragment (fragment) {
     dispatch(updateFragmentRequest(fragment))
     const { auth: { token } } = getState()
 
-    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment.id, {
+    return fetch(API_ENDPOINT + '/collections/1/fragments/' + fragment.id, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -192,7 +192,7 @@ export function deleteFragment (fragment) {
     const { auth: { token } } = getState()
     dispatch(deleteFragmentRequest(fragment))
 
-    return fetch(API_ENDPOINT + '/collection/fragments/' + fragment.id, {
+    return fetch(API_ENDPOINT + '/collections/1/fragments/' + fragment.id, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',

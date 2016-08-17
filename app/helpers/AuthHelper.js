@@ -1,12 +1,12 @@
 'use strict'
 
 // import { includes } from 'lodash'
-import authsomeConfig from 'AuthsomeConfig'
+import config from '../../config'
 
 class AuthHelper {
 
   static showForUser (user, object, action = '*') {
-    console.log(authsomeConfig)
+    console.log(config) // eslint-disable-line
     return true
   }
 }

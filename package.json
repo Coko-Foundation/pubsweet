@@ -32,7 +32,7 @@
     "isomorphic-fetch": "^2.1.1",
     "json-loader": "^0.5.3",
     "jsonwebtoken": "^7.1.7",
-    "lens": "github:jure/lens#34ac7873f40506f56d0a31464240437db8c6a563",
+    "lens": "github:jure/lens#0ecac9677eb1a1f9f629164ed3ab70a0940293d4",
     "lodash": "^4.0.0",
     "minimatch": "^3.0.0",
     "minimist": "^1.2.0",
