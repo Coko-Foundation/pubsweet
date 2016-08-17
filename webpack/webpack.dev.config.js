@@ -77,7 +77,8 @@ module.exports = [
       alias: {
         '../../config$': path.join(__dirname, '..', 'config.js'),
         'PubSweet-routes$': config.routes,
-        'PubSweet-navigation$': config.navigation
+        'PubSweet-navigation$': config.navigation,
+        'Authsome-config$': config.authsome
       }
     },
     plugins: [

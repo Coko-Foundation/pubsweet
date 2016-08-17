@@ -76,7 +76,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "ws": "^1.0.1",
-    "authsome": "*"
+    "authsome": "git+https://gitlab.coko.foundation/pubsweet/authsome.git#master"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
