@@ -25,13 +25,13 @@ export default class PostCreator extends React.Component {
       <div>
         <h3>Create a new blog post</h3>
         <Input
-          type='text'
-          placeholder='One fine day...'
-          label='Title'
-          ref='title'
+          type="text"
+          placeholder="One fine day..."
+          label="Title"
+          ref="title"
         />
-        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
-            <i className='fa fa-plus'></i> Create
+        <Button bsStyle="primary" onClick={this.onSave} title="Create" aria-label="Create">
+          <i className="fa fa-plus" /> Create
         </Button>
       </div>
     )

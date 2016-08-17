@@ -30,8 +30,6 @@ export function error (state = null, action) {
   } else {
     return null
   }
-
-  return state
 }
 
 export function collections (state = initialCollections, action) {

@@ -8,26 +8,22 @@ import styles from './PostsManager.local.scss'
 import * as Actions from '../../actions'
 
 class PostsManager extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     const { blog, blogposts, actions, error, auth } = this.props
     return (
-      <div className='bootstrap'>
+      <div className="bootstrap">
         <div className={styles.container}>
-        <Grid>
-          { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
-          <h2 className={styles['header']}>{blog && blog.title}</h2>
-          <h3 className={styles['header']}>blog posts</h3>
-          <PostList
-            update={actions.updateFragment}
-            delete={actions.deleteFragment}
-            blogposts={blogposts}
-            auth={auth} />
-          <PostCreator create={actions.createFragment} />
-        </Grid>
+          <Grid>
+            { error ? <Alert bsStyle="warning">{error}</Alert> : null}
+            <h2 className={styles['header']}>{blog && blog.title}</h2>
+            <h3 className={styles['header']}>blog posts</h3>
+            <PostList
+              update={actions.updateFragment}
+              delete={actions.deleteFragment}
+              blogposts={blogposts}
+              auth={auth} />
+            <PostCreator create={actions.createFragment} />
+          </Grid>
         </div>
       </div>
     )

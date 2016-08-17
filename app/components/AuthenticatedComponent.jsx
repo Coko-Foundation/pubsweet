@@ -30,8 +30,8 @@ export function requireAuthentication (Component) {
       return (
         <div>
           {this.props.auth.isAuthenticated === true && this.props.roles.length !== 0
-              ? <Component {...this.props}/>
-              : <WaitingRoom/>
+              ? <Component {...this.props} />
+              : <WaitingRoom />
           }
         </div>
       )

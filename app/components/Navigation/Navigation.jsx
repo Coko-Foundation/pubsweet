@@ -22,15 +22,15 @@ export default class Navigation extends React.Component {
       <Navbar fluid>
         <Navbar.Header>
           <NavbarBrand>
-            <a href='#'><img src='/pubsweet-rgb-small.jpg' alt='pubsweet-logo'/></a>
+            <a href="#"><img src="/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
           </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
-          <LinkContainer to='/manage/posts'>
+          <LinkContainer to="/manage/posts">
             <NavItem>Posts</NavItem>
           </LinkContainer>
           { AuthHelper.showForUser(auth, 'users') &&
-            <LinkContainer to='/manage/users'>
+            <LinkContainer to="/manage/users">
               <NavItem>Users</NavItem>
             </LinkContainer>
           }

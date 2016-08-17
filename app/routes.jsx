@@ -19,7 +19,7 @@ import Signup from './components/Signup/Signup'
 
 export default (
   <Route>
-    <Route path="/" component={Blog}/>
+    <Route path="/" component={Blog} />
 
     <Route path="/manage" component={requireAuthentication(Manage)}>
       <Route path="posts" component={PostsManager} />
@@ -29,6 +29,6 @@ export default (
 
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
-    <Route path="/:id" component={ScienceReader}/>
+    <Route path="/:id" component={ScienceReader} />
   </Route>
 )

@@ -78,7 +78,7 @@ module.exports = [
         '../../config$': path.join(__dirname, '..', 'config.js'),
         'PubSweet-routes$': config.routes,
         'PubSweet-navigation$': config.navigation,
-        'Authsome-config$': config.authsome
+        'AuthsomeConfig$': config.authsome
       }
     },
     plugins: [

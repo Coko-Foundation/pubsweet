@@ -18,11 +18,11 @@ export default class PostList extends React.Component {
     })
     return (
       <div className={styles['list']}>
-        <table className='table table-hover'>
+        <table className="table table-hover">
           <thead>
             <tr>
-              <th className='index'>#</th>
-              <th className='main'>Title</th>
+              <th className="index">#</th>
+              <th className="main">Title</th>
               <th>Author</th>
               <th>Status</th>
               <th>Actions</th>

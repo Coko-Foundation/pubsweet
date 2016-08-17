@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 export default class WaitingRoom extends React.Component {
   render () {
     return (
-      <div className='bootstrap'>
+      <div className="bootstrap">
         <Row>
           <Col xs={12} md={6} mdOffset={3}>
             <h1>Waiting Room</h1>

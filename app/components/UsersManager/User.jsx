@@ -3,10 +3,6 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 class User extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   update (val) {
     console.log('Selected: ' + val)
     var user = Object.assign(this.props.user, { roles: val.split(',') })
@@ -23,7 +19,7 @@ class User extends React.Component {
     ]
 
     return (
-      <tr className='user'>
+      <tr className="user">
         <td>
           {number}
         </td>
@@ -35,11 +31,11 @@ class User extends React.Component {
         </td>
         <td>
           <Select
-            name='form-field-name'
+            name="form-field-name"
             multi
             value={user.roles.join(',')}
             options={options}
-            onChange={this.update.bind(this)}
+            onChange={this.update}
           />
         </td>
       </tr>

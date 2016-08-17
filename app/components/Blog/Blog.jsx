@@ -37,26 +37,26 @@ class Blog extends React.Component {
     }
 
     return (
-      <div className='bootstrap'>
+      <div className="bootstrap">
         <div className={styles.heroBackground}>
-        <Grid>
-        <Row className={styles.hero}>
-          <Col md={8} mdOffset={2}>
-            <h1>Welcome to {this.props.collection && this.props.collection.title}</h1>
-            <label>Science for the Web</label>
-          </Col>
-        </Row>
-        </Grid>
+          <Grid>
+            <Row className={styles.hero}>
+              <Col md={8} mdOffset={2}>
+                <h1>Welcome to {this.props.collection && this.props.collection.title}</h1>
+                <label>Science for the Web</label>
+              </Col>
+            </Row>
+          </Grid>
         </div>
         <Grid>
-        <div className={styles.blogContainer}>
-        {fragments}
-        </div>
-        <Row className={styles.blogFooter}>
-          <Col md={8} mdOffset={2}>
-            <p>Powered by <a href='https://gitlab.coko.foundation/pubsweet/core'>Science Blogger</a></p>
-          </Col>
-        </Row>
+          <div className={styles.blogContainer}>
+          {fragments}
+          </div>
+          <Row className={styles.blogFooter}>
+            <Col md={8} mdOffset={2}>
+              <p>Powered by <a href="https://gitlab.coko.foundation/pubsweet/core">Science Blogger</a></p>
+            </Col>
+          </Row>
         </Grid>
       </div>
 

@@ -7,10 +7,6 @@ import * as Actions from '../../actions'
 import User from './User'
 
 class UsersManager extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentWillMount () {
     this.props.actions.getUsers()
   }
@@ -30,11 +26,11 @@ class UsersManager extends React.Component {
     }
 
     return (
-      <div className='bootstrap'>
+      <div className="bootstrap">
         <Grid>
-          { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
+          { error ? <Alert bsStyle="warning">{error}</Alert> : null}
           <div>
-            <table className='table'>
+            <table className="table">
               <thead>
                 <tr>
                   <th>#</th>

@@ -9,17 +9,13 @@ import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 
 import LensWriter from 'lens/LensWriter'
-import Component from 'lens/node_modules/substance/ui/Component'
+import Component from 'substance/ui/Component'
 import DocumentSession from 'substance/model/DocumentSession'
 
 import LensArticleExporter from 'lens/model/LensArticleExporter'
 import LensArticleImporter from 'lens/model/LensArticleImporter'
 
 class ScienceWriter extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   uploadFile (file, callback) {
     var reader = new FileReader() //eslint-disable-line
     var form = new FormData() //eslint-disable-line
