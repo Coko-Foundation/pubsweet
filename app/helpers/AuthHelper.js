@@ -5,7 +5,7 @@ import config from '../../config'
 
 class AuthHelper {
 
-  static showForUser (user, object, action = '*') {
+  static can (user, object, action = '*') {
     console.log(config) // eslint-disable-line
     return true
   }
