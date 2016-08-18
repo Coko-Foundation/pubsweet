@@ -29,7 +29,7 @@ export function requireAuthentication (Component) {
     render () {
       return (
         <div>
-          {this.props.auth.isAuthenticated === true && this.props.roles.length !== 0
+          {this.props.auth.isAuthenticated === true
               ? <Component {...this.props} />
               : <WaitingRoom />
           }
@@ -49,7 +49,6 @@ export function requireAuthentication (Component) {
 
   function mapState (state) {
     return {
-      roles: state.auth.roles,
       auth: state.auth
     }
   }

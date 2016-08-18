@@ -11,6 +11,7 @@ import styles from './Login.local.scss'
 class Login extends Component {
   constructor (props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
     this.redirectTo = this.props.location.query.next || '/manage/posts'
   }
 
