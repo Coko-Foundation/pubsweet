@@ -97,7 +97,7 @@ export function fragments (state = {}, action) {
     case UPDATE_FRAGMENT_SUCCESS:
     case DELETE_FRAGMENT_REQUEST:
     case DELETE_FRAGMENT_FAILURE:
-    case CREATE_FRAGMENT_REQUEST: return setOne()
+    case CREATE_FRAGMENT_REQUEST: return updateOne()
     case CREATE_FRAGMENT_FAILURE:
     case DELETE_FRAGMENT_SUCCESS: return removeOne()
     case GET_FRAGMENTS_SUCCESS: return replaceAll()
