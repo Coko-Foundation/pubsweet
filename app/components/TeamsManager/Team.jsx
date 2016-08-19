@@ -5,7 +5,7 @@ import 'react-select/dist/react-select.css'
 class Team extends React.Component {
   update (val) {
     console.log('Selected: ' + val)
-    var team = Object.assign(this.props.team, { roles: val.split(',') })
+    var team = Object.assign(this.props.team, { teams: val.split(',') })
     this.props.update(team)
   }
 
@@ -27,7 +27,7 @@ class Team extends React.Component {
           {team.name}
         </td>
         <td>
-          {team.object}
+          {JSON.stringify(team.teamType)}
         </td>
         <td>
           {team.object}
@@ -36,7 +36,7 @@ class Team extends React.Component {
           <Select
             name="form-field-name"
             multi
-            value={team.roles.join(',')}
+            value={team.members.join(',')}
             options={options}
             onChange={this.update}
           />

@@ -12,11 +12,11 @@ function getTeamsRequest () {
   }
 }
 
-function getTeamsSuccess (users) {
+function getTeamsSuccess (teams) {
   return {
     type: T.GET_TEAMS_SUCCESS,
     isFetching: false,
-    users: users
+    teams: teams
   }
 }
 
@@ -44,7 +44,7 @@ export function getTeams () {
           dispatch(getTeamsFailure(teams.message))
           return Promise.reject(teams)
         } else {
-          dispatch(getTeamsSuccess(teams.teams))
+          dispatch(getTeamsSuccess(teams))
         }
       }).catch(err => console.log('Error: ', err))
   }

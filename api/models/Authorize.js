@@ -24,6 +24,8 @@ class Authorize {
     } else if (parts[2] === 'users' && parts[3]) {
       let id = parts[3]
       return User.find(id)
+    } else if (parts[2] === 'users') {
+      return User.all()
     } else if (parts[2] === 'teams' && parts[3]) {
       let id = parts[3]
       return Team.find(id)

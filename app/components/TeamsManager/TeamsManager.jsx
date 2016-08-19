@@ -37,6 +37,7 @@ class TeamsManager extends React.Component {
                   <th>Name</th>
                   <th>Type</th>
                   <th>Object</th>
+                  <th>Members</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,7 +59,7 @@ TeamsManager.propTypes = {
 
 function mapStateToProps (state) {
   return {
-    teams: state.users.users,
+    teams: state.teams.teams,
     error: state.error
   }
 }

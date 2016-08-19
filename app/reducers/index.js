@@ -102,7 +102,8 @@ export function debug (state = [], action) {
 
 import auth from './auth'
 import users from './users'
+import teams from './teams'
 
 export { auth as auth }
 export { users as users }
-
+export { teams as teams }

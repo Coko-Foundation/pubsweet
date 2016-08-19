@@ -3,7 +3,7 @@ import {
   GET_TEAMS_SUCCESS
 } from '../actions/types'
 
-export default function users (state = {
+export default function teams (state = {
   isFetching: false
 }, action) {
   console.log(action)
@@ -11,7 +11,7 @@ export default function users (state = {
     case GET_TEAMS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        users: action.users
+        teams: action.teams
       })
     case GET_TEAMS_REQUEST:
       return Object.assign({}, state, {
