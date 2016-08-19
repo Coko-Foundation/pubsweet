@@ -47,7 +47,7 @@ export function collections (state = [], action) {
     const collection = getCollection()
 
     const todel = action.fragments || [action.fragment]
-    collection.fragments = _.remove(collection.fragments, todel)
+    collection.fragments = _.difference(collection.fragments, todel)
     return collections
   }
 
