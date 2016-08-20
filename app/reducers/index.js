@@ -1,7 +1,6 @@
 import {
-  // GET_COLLECTION_REQUEST,
-  GET_COLLECTION_SUCCESS,
-  // GET_COLLECTION_FAILURE,
+  GET_COLLECTIONS_SUCCESS,
+  GET_COLLECTIONS_FAILURE,
   // GET_FRAGMENTS_FAILURE,
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_REQUEST,
@@ -18,9 +17,6 @@ import {
 
 import _ from 'lodash'
 
-const initialCollections = []
-const initialFragments = []
-
 // Updates error message to notify about the failed fetches.
 export function error (state = null, action) {
   const { error } = action
@@ -32,63 +28,81 @@ export function error (state = null, action) {
   }
 }
 
-export function collections (state = initialCollections, action) {
-  let collections = _.clone(state)
+export function collections (state = [], action) {
+  const collections = _.clone(state)
+
+  function getCollection () {
+    return _.find(collections, { id: action.collection.id })
+  }
+
+  function addFragments () {
+    const collection = getCollection()
+
+    const toadd = action.fragments || [action.fragment]
+    collection.fragments = _.union(collection.fragments, toadd)
+    return collections
+  }
+
+  function removeFragments () {
+    const collection = getCollection()
+
+    const todel = action.fragments || [action.fragment]
+    collection.fragments = _.difference(collection.fragments, todel)
+    return collections
+  }
+
   switch (action.type) {
-    case GET_COLLECTION_SUCCESS:
-      collections = [action.collection]
-      return collections
+    case GET_COLLECTIONS_SUCCESS: return _.clone(action.collections)
+    case GET_COLLECTIONS_FAILURE: return []
+    case DELETE_FRAGMENT_SUCCESS: return removeFragments()
+    case GET_FRAGMENTS_SUCCESS:
+    case CREATE_FRAGMENT_SUCCESS: return addFragments()
   }
   return state
 }
 
-export function fragments (state = initialFragments, action) {
-  let fragments = _.clone(state)
-  switch (action.type) {
-    case GET_FRAGMENTS_SUCCESS:
-      fragments = action.fragments
-      return fragments
-    case CREATE_FRAGMENT_REQUEST:
-      fragments.push(action.fragment)
-      return fragments
-    case CREATE_FRAGMENT_SUCCESS:
-      let lastIndex = fragments.length - 1
-      fragments[lastIndex] = Object.assign(fragments[lastIndex], action.fragment)
-      return fragments
-    case CREATE_FRAGMENT_FAILURE:
-      fragments.pop()
-      return fragments
-    case UPDATE_FRAGMENT_REQUEST:
-      let index = _.findIndex(fragments, function (f) {
-        return f.id === action.fragment.id
-      })
-      fragments[index] = action.fragment
-      return fragments
-    case UPDATE_FRAGMENT_SUCCESS:
-      index = _.findIndex(fragments, function (f) {
-        return f.id === action.fragment.id
-      })
-      fragments[index]._rev = action.fragment._rev
-      return fragments
-    case DELETE_FRAGMENT_REQUEST:
-      index = _.findIndex(fragments, function (f) {
-        return f.id === action.fragment.id
-      })
-      fragments[index].deleted = true
-      return fragments
-    case DELETE_FRAGMENT_FAILURE:
-      index = _.findIndex(fragments, function (f) {
-        return f.id === action.id
-      })
-      fragments[index].deleted = undefined
-      return fragments
-    case DELETE_FRAGMENT_SUCCESS:
-      index = _.findIndex(fragments, function (f) {
-        return f.id === action.fragment.id
-      })
-      fragments = _.without(fragments, fragments[index])
-      return fragments
+export function fragments (state = {}, action) {
+  const fragments = _.clone(state)
+
+  function replaceAll () {
+    _.unset(fragments, action.collection.fragments)
+    action.fragments.forEach((fragment) => {
+      fragments[fragment.id] = fragment
+    })
+    return fragments
   }
+
+  function updateOne () {
+    const oldfragment = fragments[action.fragment.id] || {}
+    const update = action.update || action.fragment
+
+    const newfragment = _.assign(oldfragment, update)
+    fragments[action.fragment.id] = newfragment
+
+    return fragments
+  }
+
+  function removeOne () {
+    _.unset(fragments, action.fragment.id)
+    return fragments
+  }
+
+  // choose the sword, and you will join me
+  // choose the ball, and you join your mother... in death
+  // you don't understand my words, but you must choose
+  // 拝 一刀 | Ogami Ittō
+  switch (action.type) {
+    case CREATE_FRAGMENT_SUCCESS:
+    case UPDATE_FRAGMENT_REQUEST:
+    case UPDATE_FRAGMENT_SUCCESS:
+    case DELETE_FRAGMENT_REQUEST:
+    case DELETE_FRAGMENT_FAILURE:
+    case CREATE_FRAGMENT_REQUEST: return updateOne()
+    case CREATE_FRAGMENT_FAILURE:
+    case DELETE_FRAGMENT_SUCCESS: return removeOne()
+    case GET_FRAGMENTS_SUCCESS: return replaceAll()
+  }
+
   return state
 }
 
@@ -107,3 +121,4 @@ import teams from './teams'
 export { auth as auth }
 export { users as users }
 export { teams as teams }
+

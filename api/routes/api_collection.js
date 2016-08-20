@@ -30,11 +30,10 @@ api.post('/collections', authBearer, function (req, res, next) {
   })
 })
 
-// Get first collection
-// TODO: Remove in favor of multiple collections
-api.get('/collection', function (req, res, next) {
-  Collection.find(1).then(function (collection) {
-    return res.status(200).json(collection)
+// List collections
+api.get('/collections', function (req, res, next) {
+  Collection.all().then(function (collections) {
+    return res.status(200).json(collections)
   }).catch(function (err) {
     next(err)
   })
