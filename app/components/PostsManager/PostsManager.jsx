@@ -8,6 +8,10 @@ import styles from './PostsManager.local.scss'
 import * as Actions from '../../actions'
 
 class PostsManager extends React.Component {
+  componentWillMount () {
+    return this.props.actions.getFragments(this.props.blog)
+  }
+
   render () {
     const { blog, blogposts, actions, error, auth } = this.props
     return (

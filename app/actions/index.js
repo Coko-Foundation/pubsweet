@@ -12,7 +12,7 @@ import { getUser } from './auth'
 export { loginUser, logoutUser, getUser, signupUser } from './auth'
 
 // Actions for collections and fragments
-import { getFragments, getCollections } from './collectionsFragments.js'
+import { getCollections } from './collectionsFragments.js'
 export { getCollections, getFragments, createFragment, updateFragment, deleteFragment } from './collectionsFragments.js'
 
 // Actions for users management
@@ -26,7 +26,6 @@ export { getTeams, createTeam, updateTeam, deleteTeam } from './teams'
 export function hydrate () {
   return dispatch => Promise.all([
     dispatch(getUser()),
-    dispatch(getCollections()),
-    dispatch(getFragments())
+    dispatch(getCollections())
   ])
 }
