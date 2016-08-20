@@ -2,17 +2,22 @@ import React from 'react'
 import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from '../../actions'
 
+import * as Actions from '../../actions'
 import Team from './Team'
+import TeamCreator from './TeamCreator'
+
+import config from '../../../config'
 
 class TeamsManager extends React.Component {
   componentWillMount () {
-    this.props.actions.getTeams()
+    this.props.actions.getUsers().then(() => {
+      this.props.actions.getTeams()
+    })
   }
 
   render () {
-    let { teams, actions, error } = this.props
+    let { teams, actions, error, users, collections, fragments } = this.props
 
     if (teams) {
       teams = teams.map((team, key) => {
@@ -21,6 +26,7 @@ class TeamsManager extends React.Component {
           key={team.id}
           team={team}
           update={actions.updateTeam}
+          users={users}
         />)
       })
     }
@@ -44,6 +50,12 @@ class TeamsManager extends React.Component {
                 { teams }
               </tbody>
             </table>
+            <TeamCreator
+              create={actions.createTeam}
+              collections={collections}
+              fragments={fragments}
+              types={config.authsome.teams}
+            />
           </div>
         </Grid>
       </div>
@@ -52,6 +64,9 @@ class TeamsManager extends React.Component {
 }
 
 TeamsManager.propTypes = {
+  collections: React.PropTypes.array.isRequired,
+  fragments: React.PropTypes.array.isRequired,
+  users: React.PropTypes.array.isRequired,
   teams: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired,
   error: React.PropTypes.string
@@ -59,7 +74,10 @@ TeamsManager.propTypes = {
 
 function mapStateToProps (state) {
   return {
+    collections: state.collections,
+    fragments: state.fragments,
     teams: state.teams.teams,
+    users: state.users.users,
     error: state.error
   }
 }

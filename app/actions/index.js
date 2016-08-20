@@ -68,7 +68,7 @@ export function getFragments () {
       }
     })
     .catch(err => {
-      dispatch(getFragmentsFailure(err))
+      dispatch(getFragmentsFailure(err.statusText))
       console.log('Error', err)
     })
   }

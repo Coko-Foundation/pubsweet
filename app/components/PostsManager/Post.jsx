@@ -92,16 +92,16 @@ export default class Blogpost extends React.Component {
           <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}
         </td>
         <td>
-          { AuthHelper.showForUser(auth, blogpost, 'edit') &&
+          { AuthHelper.can(auth, 'edit', blogpost) &&
             <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
               <Button bsStyle="primary" className={styles['button']} title="Edit" aria-label="Edit">
                 <i className="fa fa-pencil" />
               </Button>
             </LinkContainer>}
 
-          { AuthHelper.showForUser(auth, blogpost, 'edit') && changePublished }
+          { AuthHelper.can(auth, 'edit', blogpost) && changePublished }
 
-          { AuthHelper.showForUser(auth, blogpost, 'delete') &&
+          { AuthHelper.can(auth, 'delete', blogpost) &&
             <Button bsStyle="danger" className={styles['button']} onClick={this._onDestroyClick} title="Delete" aria-label="Delete">
               <i className="fa fa-trash-o" />
             </Button>

@@ -10,13 +10,11 @@ class Team extends React.Component {
   }
 
   render () {
-    let { team, number } = this.props
+    let { team, number, users } = this.props
 
-    let options = [
-      { value: 'admin', label: 'admin' },
-      { value: 'contributor', label: 'contributor' },
-      { value: 'reader', label: 'reader' }
-    ]
+    let options = users.map(function (user) {
+      return {value: user.id, label: user.username}
+    })
 
     return (
       <tr className="team">
@@ -27,10 +25,10 @@ class Team extends React.Component {
           {team.name}
         </td>
         <td>
-          {JSON.stringify(team.teamType)}
+          {team.teamType.name} ({team.teamType.permissions})
         </td>
         <td>
-          {team.object}
+          {team.objectId}
         </td>
         <td>
           <Select
@@ -49,7 +47,8 @@ class Team extends React.Component {
 Team.propTypes = {
   team: React.PropTypes.object.isRequired,
   number: React.PropTypes.number,
-  update: React.PropTypes.func.isRequired
+  update: React.PropTypes.func.isRequired,
+  users: React.PropTypes.array.isRequired
 }
 
 export default Team
