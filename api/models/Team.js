@@ -1,5 +1,7 @@
 'use strict'
 
+const _ = require('lodash')
+
 const Model = require('./Model')
 const User = require('./User')
 const logger = require('../logger')
@@ -9,9 +11,6 @@ class Team extends Model {
     super(properties)
 
     this.type = 'team'
-    this.name = properties.name
-    this.teamType = properties.teamType
-    this.object = properties.object
 
     if (!Array.isArray(this.members)) {
       this.members = []
@@ -22,9 +21,6 @@ class Team extends Model {
     let currentMembers = new Set(this.members)
     let newMembers = new Set(properties.members)
     let removedMembers = new Set([...currentMembers].filter(x => !newMembers.has(x)))
-    logger.info('x9 NEW PROPERTIES', properties)
-    logger.info('x8', newMembers)
-    logger.info('x5', removedMembers)
 
     let removes = [...removedMembers].map(userId => {
       return User.find(userId).then(user => {
@@ -44,6 +40,10 @@ class Team extends Model {
     return super.save()
   }
 
+  _superDelete () {
+    return super.delete()
+  }
+
   save () {
     let members = this.members.map(function (member) {
       return User.find(member).then(function (user) {
@@ -55,6 +55,19 @@ class Team extends Model {
     }.bind(this))
 
     return Promise.all(members).then(members => this._superSave())
+  }
+
+  delete () {
+    let members = this.members.map(function (member) {
+      return User.find(member).then(function (user) {
+        if (user.teams.includes(this.id)) {
+          user.teams = _.without(user.teams, this.id)
+          return user.save()
+        }
+      }.bind(this))
+    }.bind(this))
+
+    return Promise.all(members).then(members => this._superDelete())
   }
 }
 

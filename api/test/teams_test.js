@@ -6,6 +6,8 @@ chai.use(chaiAsPromised)
 const expect = chai.expect
 
 const Collection = require('../models/Collection')
+const Fragment = require('../models/Fragment')
+
 const User = require('../models/User')
 const Team = require('../models/Team')
 
@@ -25,6 +27,7 @@ describe.only('Teams model', function () {
   let adminId
   let userId
   let collectionId
+  let fragmentId
 
   beforeEach(function () {
     return dbCleaner().then(function () {
@@ -37,6 +40,9 @@ describe.only('Teams model', function () {
       return new Collection(collectionFixture).save()
     }).then(function (collection) {
       collectionId = collection.id
+      return new Fragment(fragmentFixture).save()
+    }).then(function (fragment) {
+      fragmentId = fragment.id
     })
   })
 
@@ -44,6 +50,7 @@ describe.only('Teams model', function () {
     let team = teamFixture
     team.name = 'Test team'
     team.objectId = collectionId
+    team.objectType = 'collection'
     team = new Team(team)
 
     return team.save().then(function (savedTeam) {
@@ -58,6 +65,7 @@ describe.only('Teams model', function () {
     let team = teamFixture
     team.name = 'Test team'
     team.objectId = collectionId
+    team.objectType = 'collection'
     team.members = [userId]
     team = new Team(team)
 
@@ -75,10 +83,34 @@ describe.only('Teams model', function () {
     })
   })
 
+  it('can save a team with members based around a fragment', function () {
+    let team = teamFixture
+    team.name = 'Test team'
+    team.objectId = fragmentId
+    team.objectType = 'fragment'
+    team.members = [userId]
+    team = new Team(team)
+
+    let teamId
+
+    return team.save().then(function (savedTeam) {
+      teamId = savedTeam.id
+      expect(savedTeam.members).to.eql([userId])
+      expect(savedTeam.objectId).to.eql(team.objectId)
+      expect(savedTeam.objectType).to.eql(team.objectType)
+      expect(savedTeam.teamType).to.eql(team.teamType)
+      expect(savedTeam.name).to.eql(team.name)
+      return User.find(userId)
+    }).then(function (user) {
+      expect(user.teams).to.eql([teamId])
+    })
+  })
+
   it('can update a team with members', function () {
     let team = teamFixture
     team.name = 'Test team'
     team.objectId = collectionId
+    team.objectType = 'collection'
     team.members = [userId]
     team = new Team(team)
 
@@ -111,6 +143,7 @@ describe.only('Teams model', function () {
     let team = teamFixture
     team.name = 'Test team'
     team.objectId = collectionId
+    team.objectType = 'collection'
     team.members = [userId]
     team = new Team(team)
 
