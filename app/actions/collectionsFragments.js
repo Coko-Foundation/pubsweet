@@ -1,11 +1,15 @@
-import fetch from 'isomorphic-fetch'
+import { fetch } from '../helpers/Utils'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
 
 // utilities
 
 const fragmentUrl = (collection, fragment) => {
-  return `${API_ENDPOINT}/collections/${collection.id}/fragments/${fragment.id}`
+  let url = `${API_ENDPOINT}/collections/${collection.id}/fragments`
+
+  if (fragment.id) url += `/${fragment.id}`
+
+  return url
 }
 
 const collectionUrl = (collection, suffix) => {
@@ -128,7 +132,7 @@ function createFragmentFailure (fragment, error) {
   }
 }
 
-export function createFragment (fragment, collection) {
+export function createFragment (collection, fragment) {
   return (dispatch, getState) => {
     dispatch(createFragmentRequest(fragment))
     const { auth: { token } } = getState()
@@ -148,7 +152,7 @@ export function createFragment (fragment, collection) {
       .then(
         response => response.json()
       ).then(
-        json => dispatch(createFragmentSuccess(collection, json)),
+        fragment => dispatch(createFragmentSuccess(collection, fragment)),
         err => dispatch(createFragmentFailure(fragment, err))
       )
   }

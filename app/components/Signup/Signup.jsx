@@ -9,6 +9,12 @@ import { signupUser } from '../../actions'
 import styles from './Signup.local.scss'
 
 class Signup extends Component {
+  constructor (props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   render () {
     const { error } = this.props
     return (

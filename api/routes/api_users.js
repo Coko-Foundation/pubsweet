@@ -38,6 +38,7 @@ users.post('/authenticate', authLocal, function (req, res) {
 // Token verify
 users.get('/authenticate', authBearer, function (req, res) {
   return User.find(req.authInfo.id).then(function (user) {
+    user.token = req.authInfo.token
     return res.status(200).json(user)
   })
 })

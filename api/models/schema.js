@@ -32,14 +32,14 @@ module.exports = function () {
         relations: {
           collections: {hasMany: 'collection'},
           fragments: {hasMany: 'fragment'},
-          teams: {hasMany: 'teams'}
+          teams: {hasMany: 'team'}
         }
       },
       {
         singular: 'team',
         plural: 'teams',
         relations: {
-          members: {hasMany: 'users'}
+          members: {hasMany: 'user'}
         }
       }
     ])

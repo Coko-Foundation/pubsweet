@@ -4,7 +4,7 @@ export function error (state = null, action) {
 
   if (error) {
     console.log(error)
-    return error
+    return error.message
   } else {
     return null
   }

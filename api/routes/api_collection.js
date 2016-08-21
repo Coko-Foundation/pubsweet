@@ -66,10 +66,10 @@ api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
   }).then(function (collection) {
     let fragment = new Fragment(req.body)
     fragment.owners = [req.user]
-    return [collection, fragment.save()]
+    return Promise.all([collection, fragment.save()])
   }).then(function ([collection, fragment]) {
     collection.addFragment(fragment)
-    return [collection.save(), fragment]
+    return Promise.all([collection.save(), fragment])
   }).then(function ([collection, fragment]) {
     return res.status(201).json(fragment)
   }).catch(function (err) {
@@ -154,10 +154,10 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, funct
   }).then(function (fragment) {
     return fragment.delete()
   }).then(function (fragment) {
-    return [Collection.find(req.params.collectionId), fragment]
+    return Promise.all([Collection.find(req.params.collectionId), fragment])
   }).then(function ([collection, fragment]) {
     collection.fragments = _.without(collection.fragments, req.params.fragmentId)
-    return [collection.save(), fragment]
+    return Promise.all([collection.save(), fragment])
   }).then(function ([collection, fragment]) {
     return res.status(200).json(fragment)
   }).catch(function (err) {

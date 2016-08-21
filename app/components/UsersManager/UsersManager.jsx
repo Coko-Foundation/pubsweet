@@ -23,6 +23,8 @@ class UsersManager extends React.Component {
           update={actions.updateUser}
         />)
       })
+    } else {
+      users = []
     }
 
     return (
@@ -51,7 +53,7 @@ class UsersManager extends React.Component {
 }
 
 UsersManager.propTypes = {
-  users: React.PropTypes.array.isRequired,
+  users: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
   error: React.PropTypes.string
 }

@@ -15,6 +15,7 @@ class Model {
 
   save () {
     logger.info('Saving', this.type, this.id)
+
     return this.constructor.find(this.id).then(function (result) {
       logger.info('Found an existing version, this is an update of:', result)
       return result.rev
@@ -48,9 +49,6 @@ class Model {
   }
 
   updateProperties (properties) {
-    // TODO: Owner can not be changed
-    delete properties.owner
-
     logger.info('Updating properties to', properties)
     // TODO: Should we screen/filter more properties here?
 
@@ -78,18 +76,19 @@ class Model {
   // User.find('394')
   static find (id, options) {
     let plural = this.type + 's'
-    return db.rel.find(this.type, id).then(function (results) {
-      if (results[plural].length === 0) {
+    return db.rel.find(this.type, id).then(results => {
+      let result = results[plural].find(result => result.id === id)
+      if (!result) {
         throw new NotFoundError()
       } else {
-        return new this(results[plural][0])
+        return new this(result)
       }
-    }.bind(this)).catch(function (err) {
+    }).catch(err => {
       if (err.name === 'NotFoundError') {
         logger.info('Object not found:', this.type, id)
       }
       throw err
-    }.bind(this))
+    })
   }
 
   static findByField (field, value) {

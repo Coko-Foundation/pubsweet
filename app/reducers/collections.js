@@ -18,7 +18,8 @@ export function collections (state = [], action) {
   function addFragments () {
     const collection = getCollection()
 
-    const toadd = action.fragments || [action.fragment]
+    let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)
+
     collection.fragments = _.union(collection.fragments, toadd)
     return collections
   }
@@ -26,7 +27,7 @@ export function collections (state = [], action) {
   function removeFragments () {
     const collection = getCollection()
 
-    const todel = action.fragments || [action.fragment]
+    const todel = (action.fragments || [action.fragment]).map(fragment => fragment.id)
     collection.fragments = _.difference(collection.fragments, todel)
     return collections
   }

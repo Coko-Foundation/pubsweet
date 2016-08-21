@@ -25,7 +25,6 @@ class Team extends Model {
     let removes = [...removedMembers].map(userId => {
       return User.find(userId).then(user => {
         user.teams = user.teams.filter(teamId => teamId !== this.id)
-        logger.info('x6', user.teams)
         return user.save()
       })
     })
@@ -45,27 +44,27 @@ class Team extends Model {
   }
 
   save () {
-    let members = this.members.map(function (member) {
-      return User.find(member).then(function (user) {
+    let members = this.members.map(member => {
+      return User.find(member).then(user => {
         if (!(user.teams).includes(this.id)) {
           user.teams.push(this.id)
           return user.save()
         }
-      }.bind(this))
-    }.bind(this))
+      })
+    })
 
     return Promise.all(members).then(members => this._superSave())
   }
 
   delete () {
-    let members = this.members.map(function (member) {
-      return User.find(member).then(function (user) {
+    let members = this.members.map(member => {
+      return User.find(member).then(user => {
         if (user.teams.includes(this.id)) {
           user.teams = _.without(user.teams, this.id)
           return user.save()
         }
-      }.bind(this))
-    }.bind(this))
+      })
+    })
 
     return Promise.all(members).then(members => this._superDelete())
   }

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styles from './PostsManager.local.scss'
 import * as Actions from '../../actions'
+import { fragmentsOfCollection } from '../../helpers/Utils'
 
 class PostsManager extends React.Component {
   componentWillMount () {
@@ -15,6 +16,8 @@ class PostsManager extends React.Component {
 
   render () {
     const { blog, blogposts, actions, error, auth } = this.props
+    let createBlogpost = (fragment) => { actions.createFragment(blog, fragment) }
+
     if (Array.isArray(blogposts)) {
       return (
         <div className="bootstrap">
@@ -28,7 +31,7 @@ class PostsManager extends React.Component {
                 delete={actions.deleteFragment}
                 blogposts={blogposts}
                 auth={auth} />
-              <PostCreator create={actions.createFragment} />
+              <PostCreator create={createBlogpost} />
             </Grid>
           </div>
         </div>
@@ -40,8 +43,8 @@ class PostsManager extends React.Component {
 }
 
 PostsManager.propTypes = {
-  blog: React.PropTypes.object.isRequired,
-  blogposts: React.PropTypes.array.isRequired,
+  blog: React.PropTypes.object,
+  blogposts: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
   error: React.PropTypes.object,
   auth: React.PropTypes.object
@@ -50,15 +53,11 @@ PostsManager.propTypes = {
 function mapState (state) {
   let blogposts
 
-  if (state.collections[0]) {
-    blogposts = state.collections[0].fragments.map(
-      (fragmentId) => state.fragments[fragmentId]
-    )
-  }
+  blogposts = fragmentsOfCollection(state.collections[0], state.fragments)
 
   return {
     blog: state.collections[0],
-    blogposts: blogposts || [],
+    blogposts: blogposts,
     error: state.error,
     auth: state.auth
   }

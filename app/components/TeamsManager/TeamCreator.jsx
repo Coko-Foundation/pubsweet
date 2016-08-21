@@ -7,23 +7,64 @@ export default class TeamCreator extends React.Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
+    this.onFragmentSelect = this.onFragmentSelect.bind(this)
+    this.onCollectionSelect = this.onCollectionSelect.bind(this)
+    this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
+
+    this.state = {
+      fragmentSelected: undefined,
+      collectionSelected: undefined
+    }
   }
 
-  onSave (text) {
-    var title = this.refs.title.getValue()
-    if (title !== '') {
+  onSave () {
+    let name = this.refs.name.getValue()
+    let teamType = this.state.teamTypeSelected
+
+    let objectId
+    let objectType
+
+    if (this.state.fragmentSelected) {
+      objectId = this.state.fragmentSelected
+      objectType = 'fragment'
+    } else if (this.state.collectionSelected) {
+      objectId = this.state.collectionSelected
+      objectType = 'collection'
+    }
+
+    if (name && teamType && objectId && objectType) {
       this.props.create({
-        name: 'blogpost',
-        title: title,
-        status: 'unpublished',
-        version: 1,
-        source: undefined
+        name: name,
+        teamType: this.props.types[teamType],
+        objectId: objectId,
+        objectType: objectType,
+        members: []
       })
     }
   }
 
+  onFragmentSelect (fragment) {
+    this.setState({fragmentSelected: fragment})
+  }
+
+  onCollectionSelect (collection) {
+    this.setState({collectionSelected: collection})
+  }
+
+  onTeamTypeSelect (teamType) {
+    this.setState({teamTypeSelected: teamType})
+  }
+
   render () {
     let { collections, fragments, types } = this.props
+
+    collections = collections.map(collection => ({value: collection.id, label: collection.title}))
+    types = Object.keys(types).map(type =>
+      ({value: type, label: (types[type].name + ' ' + types[type].permissions)})
+    )
+    fragments = Object.keys(fragments).map(id =>
+      ({value: id, label: fragments[id].title})
+    )
 
     return (
       <div>
@@ -38,19 +79,22 @@ export default class TeamCreator extends React.Component {
           <Col md={3}>
             <h4>Team type</h4>
             <Select
-              name="type"
-              options={Object.keys(types).map(type =>
-                ({value: types[type].name, label: (types[type].name + ' ' + types[type].permissions)})
-              )}
-              ref="type"
+              name="teamType"
+              options={types}
+              ref="teamType"
+              value={this.state.teamTypeSelected}
+              onChange={this.onTeamTypeSelect}
             />
           </Col>
           <Col md={4}>
             <h4>Fragment</h4>
             <Select
               name="fragment"
-              options={fragments.map(fragment => ({value: fragment.id, label: fragment.title}))}
-              ref="fragment"
+              options={fragments}
+              ref="fragmentId"
+              value={this.state.fragmentSelected}
+              onChange={this.onFragmentSelect}
+              disabled={!!this.state.collectionSelected}
             />
           </Col>
           <Col md={1}>
@@ -61,8 +105,11 @@ export default class TeamCreator extends React.Component {
             <h4>Collection</h4>
             <Select
               name="collection"
-              options={collections.map(collection => ({value: collection.id, label: collection.title}))}
-              ref="collection"
+              options={collections}
+              ref="collectionId"
+              value={this.state.collectionSelected}
+              onChange={this.onCollectionSelect}
+              disabled={!!this.state.fragmentSelected}
             />
           </Col>
         </Row>
@@ -77,7 +124,7 @@ export default class TeamCreator extends React.Component {
 
 TeamCreator.propTypes = {
   collections: React.PropTypes.array,
-  fragments: React.PropTypes.array,
+  fragments: React.PropTypes.object,
   types: React.PropTypes.object,
   create: React.PropTypes.func
 }

@@ -3,9 +3,14 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 class Team extends React.Component {
-  update (val) {
-    console.log('Selected: ' + val)
-    var team = Object.assign(this.props.team, { teams: val.split(',') })
+  constructor (props) {
+    super(props)
+    this.updateMembers = this.updateMembers.bind(this)
+  }
+
+  updateMembers (members) {
+    console.log('Selected: ' + members)
+    var team = Object.assign(this.props.team, { members: members.split(',') })
     this.props.update(team)
   }
 
@@ -28,15 +33,15 @@ class Team extends React.Component {
           {team.teamType.name} ({team.teamType.permissions})
         </td>
         <td>
-          {team.objectId}
+          {team.objectType} {team.objectId}
         </td>
         <td>
           <Select
-            name="form-field-name"
+            name="members"
             multi
             value={team.members.join(',')}
             options={options}
-            onChange={this.update}
+            onChange={this.updateMembers}
           />
         </td>
       </tr>

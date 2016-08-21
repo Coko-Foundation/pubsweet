@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import { fetch } from '../helpers/Utils'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
 import { push } from 'react-router-redux'

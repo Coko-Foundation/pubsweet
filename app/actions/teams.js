@@ -1,9 +1,14 @@
-import fetch from 'isomorphic-fetch'
+import { fetch } from '../helpers/Utils'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
 
-// TODO: This will break when rendered on a server
-const localStorage = window.localStorage || undefined
+const teamUrl = (team) => {
+  let url = `${API_ENDPOINT}/teams`
+
+  if (team) url += `/${team.id}`
+
+  return url
+}
 
 function getTeamsRequest () {
   return {
@@ -29,29 +34,121 @@ function getTeamsFailure (message) {
 }
 
 export function getTeams () {
-  let config = {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + localStorage.token }
-  }
+  return (dispatch, getState) => {
+    const { auth: { token } } = getState()
+    let config = {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + token }
+    }
 
-  return dispatch => {
     dispatch(getTeamsRequest())
-    return fetch(API_ENDPOINT + '/teams', config)
-      .then(response =>
-        response.json().then(teams => ({ teams, response }))
-      ).then(({ teams, response }) => {
-        if (!response.ok) {
-          dispatch(getTeamsFailure(teams.message))
-          return Promise.reject(teams)
-        } else {
-          dispatch(getTeamsSuccess(teams))
-        }
-      }).catch(err => console.log('Error: ', err))
+    return fetch(API_ENDPOINT + '/teams', config).then(
+        response => response.json()
+      ).then(
+        teams => dispatch(getTeamsSuccess(teams)),
+        err => dispatch(getTeamsFailure(err))
+      )
   }
 }
 
-export function createTeam () {}
-export function updateTeam () {}
+function createTeamRequest (team) {
+  return {
+    type: T.CREATE_TEAM_REQUEST,
+    team: team
+  }
+}
+
+function createTeamSuccess (team) {
+  return {
+    type: T.CREATE_TEAM_SUCCESS,
+    team: team
+  }
+}
+
+function createTeamFailure (team, error) {
+  return {
+    type: T.CREATE_TEAM_FAILURE,
+    isFetching: false,
+    team: team,
+    error: error
+  }
+}
+
+export function createTeam (team) {
+  return (dispatch, getState) => {
+    dispatch(createTeamRequest(team))
+    const { auth: { token } } = getState()
+
+    const url = teamUrl()
+    const opts = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(team)
+    }
+
+    return fetch(url, opts)
+      .then(
+        response => response.json()
+      ).then(
+        fragment => dispatch(createTeamSuccess(team)),
+        err => dispatch(createTeamFailure(team, err))
+      )
+  }
+}
+
+function updateTeamRequest (team) {
+  return {
+    type: T.UPDATE_TEAM_REQUEST,
+    team: team
+  }
+}
+
+function updateTeamSuccess (team) {
+  return {
+    type: T.UPDATE_TEAM_SUCCESS,
+    team: team
+  }
+}
+
+function updateTeamFailure (team, error) {
+  return {
+    type: T.UPDATE_TEAM_FAILURE,
+    isFetching: false,
+    team: team,
+    error: error
+  }
+}
+
+export function updateTeam (team) {
+  return (dispatch, getState) => {
+    dispatch(updateTeamRequest(team))
+    const { auth: { token } } = getState()
+
+    const url = teamUrl(team)
+    const opts = {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(team)
+    }
+
+    return fetch(url, opts)
+      .then(
+        response => response.json()
+      ).then(
+        fragment => dispatch(updateTeamSuccess(team)),
+        err => dispatch(updateTeamFailure(team, err))
+      )
+  }
+}
+
 export function deleteTeam () {}
 
 // function updateUserRequest (user) {
