@@ -5,6 +5,7 @@ import {
   CREATE_FRAGMENT_FAILURE,
   UPDATE_FRAGMENT_REQUEST,
   UPDATE_FRAGMENT_SUCCESS,
+  UPDATE_FRAGMENT_FAILURE,
   DELETE_FRAGMENT_REQUEST,
   DELETE_FRAGMENT_FAILURE,
   DELETE_FRAGMENT_SUCCESS
@@ -17,7 +18,8 @@ export function fragments (state = {}, action) {
 
   function replaceAll () {
     _.unset(fragments, action.collection.fragments)
-    action.fragments.forEach((fragment) => {
+    action.fragments.forEach((fragment, index) => {
+      fragment.index = index
       fragments[fragment.id] = fragment
     })
     return fragments
@@ -25,9 +27,8 @@ export function fragments (state = {}, action) {
 
   function updateOne () {
     const oldfragment = fragments[action.fragment.id] || {}
-    const update = action.update || action.fragment
+    const newfragment = _.assign(oldfragment, action.fragment)
 
-    const newfragment = _.assign(oldfragment, update)
     fragments[action.fragment.id] = newfragment
 
     return fragments
@@ -45,7 +46,8 @@ export function fragments (state = {}, action) {
   switch (action.type) {
     case CREATE_FRAGMENT_SUCCESS:
     case UPDATE_FRAGMENT_REQUEST:
-    case UPDATE_FRAGMENT_SUCCESS:
+    case UPDATE_FRAGMENT_SUCCESS: return updateOne()
+    case UPDATE_FRAGMENT_FAILURE:
     case DELETE_FRAGMENT_REQUEST:
     case DELETE_FRAGMENT_FAILURE:
     case CREATE_FRAGMENT_REQUEST: return updateOne()

@@ -4,15 +4,21 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
 import * as Actions from '../actions'
-import WaitingRoom from '../components/WaitingRoom/WaitingRoom'
 
 export function requireAuthentication (Component) {
   class AuthenticatedComponent extends React.Component {
 
     componentWillMount () {
-      this.props.actions.hydrate().then(() => {
-        this.checkAuth(this.props.auth.isAuthenticated)
-      })
+      this.props.actions.getUser().then(
+        () => {
+          console.log('HAHAHA')
+          return this.checkAuth(this.props.auth.isAuthenticated)
+        },
+        () => {
+          console.log('HOHOHO')
+          return this.checkAuth(this.props.auth.isAuthenticated)
+        }
+      )
     }
 
     componentWillReceiveProps (nextProps) {
@@ -29,10 +35,7 @@ export function requireAuthentication (Component) {
     render () {
       return (
         <div>
-          {this.props.auth.isAuthenticated === true
-              ? <Component {...this.props} />
-              : <WaitingRoom />
-          }
+          {this.props.auth.isAuthenticated === true && <Component {...this.props} />}
         </div>
       )
     }
@@ -41,7 +44,6 @@ export function requireAuthentication (Component) {
   AuthenticatedComponent.propTypes = {
     location: PropTypes.object,
     username: PropTypes.string,
-    roles: PropTypes.array,
     actions: React.PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     pushState: PropTypes.func.isRequired

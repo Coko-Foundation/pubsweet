@@ -9,28 +9,33 @@ import * as Actions from '../../actions'
 
 class PostsManager extends React.Component {
   componentWillMount () {
-    return this.props.actions.getFragments(this.props.blog)
+    this.props.actions.getCollections()
+      .then(result => this.props.actions.getFragments(result.collections[0]))
   }
 
   render () {
     const { blog, blogposts, actions, error, auth } = this.props
-    return (
-      <div className="bootstrap">
-        <div className={styles.container}>
-          <Grid>
-            { error ? <Alert bsStyle="warning">{error}</Alert> : null}
-            <h2 className={styles['header']}>{blog && blog.title}</h2>
-            <h3 className={styles['header']}>blog posts</h3>
-            <PostList
-              update={actions.updateFragment}
-              delete={actions.deleteFragment}
-              blogposts={blogposts}
-              auth={auth} />
-            <PostCreator create={actions.createFragment} />
-          </Grid>
+    if (Array.isArray(blogposts)) {
+      return (
+        <div className="bootstrap">
+          <div className={styles.container}>
+            <Grid>
+              { error ? <Alert bsStyle="warning">{error}</Alert> : null}
+              <h2 className={styles['header']}>{blog && blog.title}</h2>
+              <h3 className={styles['header']}>blog posts</h3>
+              <PostList
+                update={actions.updateFragment}
+                delete={actions.deleteFragment}
+                blogposts={blogposts}
+                auth={auth} />
+              <PostCreator create={actions.createFragment} />
+            </Grid>
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return false
+    }
   }
 }
 
@@ -43,9 +48,17 @@ PostsManager.propTypes = {
 }
 
 function mapState (state) {
+  let blogposts
+
+  if (state.collections[0]) {
+    blogposts = state.collections[0].fragments.map(
+      (fragmentId) => state.fragments[fragmentId]
+    )
+  }
+
   return {
     blog: state.collections[0],
-    blogposts: state.fragments,
+    blogposts: blogposts || [],
     error: state.error,
     auth: state.auth
   }

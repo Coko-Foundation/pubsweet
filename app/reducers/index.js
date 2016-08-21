@@ -3,6 +3,7 @@ export function error (state = null, action) {
   const { error } = action
 
   if (error) {
+    console.log(error)
     return error
   } else {
     return null

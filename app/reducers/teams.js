@@ -6,7 +6,6 @@ import {
 export default function teams (state = {
   isFetching: false
 }, action) {
-  console.log(action)
   switch (action.type) {
     case GET_TEAMS_SUCCESS:
       return Object.assign({}, state, {

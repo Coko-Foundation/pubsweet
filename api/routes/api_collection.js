@@ -65,7 +65,7 @@ api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
     return Collection.find(req.params.id)
   }).then(function (collection) {
     let fragment = new Fragment(req.body)
-    fragment.owner = req.user
+    fragment.owners = [req.user]
     return [collection, fragment.save()]
   }).then(function ([collection, fragment]) {
     collection.addFragment(fragment)

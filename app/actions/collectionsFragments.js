@@ -47,15 +47,12 @@ export function getCollections () {
 
     const url = collectionUrl()
 
-    return fetch(url)
-      .then(response => response.json())
-      .then(collections => {
-        dispatch(getCollectionsSuccess(collections))
-      })
-      .catch(err => {
-        dispatch(getCollectionsFailure(err))
-        console.log('Error', err)
-      })
+    return fetch(url).then(
+        response => response.json()
+      ).then(
+        collections => dispatch(getCollectionsSuccess(collections)),
+        err => dispatch(getCollectionsFailure(err))
+      )
   }
 }
 
@@ -86,7 +83,7 @@ function getFragmentsFailure (error) {
 
 export function getFragments (collection) {
   return (dispatch, getState) => {
-    dispatch(getFragmentsRequest())
+    dispatch(getFragmentsRequest(collection))
     const {
       auth: { token }
     } = getState()
@@ -98,21 +95,12 @@ export function getFragments (collection) {
       }
     }
 
-    return fetch(url, opts)
-      .then(response =>
-        response.json()
-          .then(fragments => ({ fragments, response }))
-      ).then(({ fragments, response }) => {
-        if (response.ok) {
-          return dispatch(getFragmentsSuccess(collection, fragments))
-        } else {
-          return Promise.reject(response)
-        }
-      })
-      .catch(err => {
-        dispatch(getFragmentsFailure(err.statusText))
-        console.log('Error', err)
-      })
+    return fetch(url, opts).then(
+        response => response.json()
+      ).then(
+        fragments => dispatch(getFragmentsSuccess(collection, fragments)),
+        err => dispatch(getFragmentsFailure(err))
+      )
   }
 }
 
@@ -157,19 +145,12 @@ export function createFragment (fragment, collection) {
     }
 
     return fetch(url, opts)
-      .then(response => {
-        if (response.ok) {
-          return response.json().then(response => {
-            dispatch(createFragmentSuccess(collection, response))
-          })
-        } else {
-          return response.json().then(response => {
-            dispatch(createFragmentFailure(fragment, response.message))
-            throw new Error(response.message)
-          })
-        }
-      })
-      .catch(err => console.error(err))
+      .then(
+        response => response.json()
+      ).then(
+        json => dispatch(createFragmentSuccess(collection, json)),
+        err => dispatch(createFragmentFailure(fragment, err))
+      )
   }
 }
 
@@ -180,12 +161,20 @@ function updateFragmentRequest (fragment) {
   }
 }
 
-function updateFragmentSuccess (collection, fragment) {
+function updateFragmentSuccess (fragment) {
   return {
     type: T.UPDATE_FRAGMENT_SUCCESS,
-    collection: collection,
     fragment: fragment,
     receivedAt: Date.now()
+  }
+}
+
+function updateFragmentFailure (fragment, error) {
+  return {
+    type: T.UPDATE_FRAGMENT_FAILURE,
+    isFetching: false,
+    fragment: fragment,
+    error: error
   }
 }
 
@@ -207,15 +196,12 @@ export function updateFragment (collection, fragment) {
     }
 
     return fetch(url, opts)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          return Promise.reject(response)
-        }
-      })
-      .then(fragment => dispatch(updateFragmentSuccess(collection, fragment)))
-      .catch(err => console.log('Error', err))
+      .then(
+        response => response.json()
+      ).then(
+        json => dispatch(updateFragmentSuccess(fragment)),
+        err => dispatch(updateFragmentFailure(fragment, err))
+      )
   }
 }
 
@@ -261,17 +247,11 @@ export function deleteFragment (fragment, collection) {
     }
 
     return fetch(url, opts)
-      .then(response => {
-        if (response.ok) {
-          return response.json().then(response => {
-            dispatch(deleteFragmentSuccess(collection, fragment))
-          })
-        } else {
-          return response.json().then(response => {
-            dispatch(deleteFragmentFailure(fragment, response.message))
-            throw new Error(response.message)
-          })
-        }
-      })
+      .then(
+        response => response.json()
+      ).then(
+        json => dispatch(deleteFragmentSuccess(collection, fragment)),
+        err => dispatch(deleteFragmentFailure(fragment, err))
+      )
   }
 }

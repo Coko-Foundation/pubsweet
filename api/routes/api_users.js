@@ -22,7 +22,7 @@ function createToken (user) {
       id: user.id
     },
     config.secret,
-    { expiresIn: 5 * 3600 })
+    { expiresIn: 24 * 3600 })
 }
 
 // Token issuing
