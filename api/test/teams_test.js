@@ -23,7 +23,7 @@ const fragmentFixture = fixtures.fragment
 
 const NotFoundError = require('../errors/NotFoundError')
 
-describe.only('Teams model', function () {
+describe('Teams model', function () {
   let adminId
   let userId
   let collectionId
