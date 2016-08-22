@@ -134,7 +134,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic,
 
 // Update a fragment
 api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, req.originalUrl, 'update').then(function () {
+  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
     return Fragment.find(req.params.fragmentId)
   }).then(function (fragment) {
     return fragment.updateProperties(req.body)
@@ -149,7 +149,7 @@ api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, function
 
 // Delete a fragment
 api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, req.originalUrl, 'delete').then(function () {
+  return Authorize.can(req.user, 'delete', req.originalUrl).then(function () {
     return Fragment.find(req.params.fragmentId)
   }).then(function (fragment) {
     return fragment.delete()
