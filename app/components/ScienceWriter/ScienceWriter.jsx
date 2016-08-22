@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import * as Actions from '../../actions'
 
 import './ScienceWriter.scss'
-
-import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 
 import LensWriter from 'lens/LensWriter'
@@ -37,7 +35,7 @@ class ScienceWriter extends React.Component {
       source: source
     })
 
-    this.props.actions.updateFragment(doc)
+    this.props.actions.updateFragment(this.props.blog, doc)
     callback(null, source)
   }
 
@@ -112,16 +110,16 @@ class ScienceWriter extends React.Component {
 
 ScienceWriter.propTypes = {
   fragment: React.PropTypes.object,
+  blog: React.PropTypes.object,
   actions: React.PropTypes.object,
   id: React.PropTypes.string.isRequired
 }
 
 function mapStateToProps (state, ownProps) {
   return {
+    blog: state.collections[0],
     id: ownProps.params.id,
-    fragment: _.find(state.fragments, function (f) {
-      return f.id === ownProps.params.id
-    })
+    fragment: state.fragments[ownProps.params.id]
   }
 }
 
