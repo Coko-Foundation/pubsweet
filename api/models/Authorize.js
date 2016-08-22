@@ -12,6 +12,14 @@ const logger = require('../logger')
 const AuthorizationError = require('../errors/AuthorizationError')
 
 class Authorize {
+  static getObject (resource) {
+    if (typeof resource === 'string') {
+      return this.getObjectFromURL(resource)
+    } else {
+      return Promise.resolve(resource)
+    }
+  }
+
   static getObjectFromURL (resourceUrl) {
     let parts = resourceUrl.split('/')
 
@@ -34,12 +42,12 @@ class Authorize {
     }
   }
 
-  static can (userId, operation, resourceUrl) {
+  static can (userId, operation, resource) {
     let authsome = new Authsome(config.authsome.mode, {
       teams: config.authsome.teams
     })
 
-    return this.getObjectFromURL(resourceUrl).then(function (object) {
+    return this.getObject(resource).then(function (object) {
       return object
     }).then(function (object) {
       return Promise.all([object, User.find(userId)])

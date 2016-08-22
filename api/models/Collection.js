@@ -11,8 +11,8 @@ class Collection extends Model {
     this.title = properties.title
   }
 
-  // Gets fragments in a collection, supports filtering by properties
-  // e.g. collection.getFragments({filter: {published: true, owner: req.user}})
+  // Gets fragments in a collection, supports filtering by function e.g.
+  // collection.getFragments({filter: fragment => {Authorize.can(req.user, 'read', fragment)})
   getFragments (options) {
     options = options || {}
     if (!this.fragments) { return [] }
@@ -20,33 +20,12 @@ class Collection extends Model {
       return Fragment.find(id)
     })
 
-    var filteredFragments
-
-    return Promise.all(fragments).then(function (fragments) {
-      return fragments.filter(function (fragment) {
-        if (options.filter) {
-          fragment = _.some(_.map(options.filter, function (value, key) {
-            return fragment[key] === value
-          }))
-        }
-        return fragment
-      })
-    }).then(function (fragments) {
-      filteredFragments = fragments
-
-      return Promise.all(fragments.map(function (fragment) {
-        return User.find(fragment.owners[0])
-      }))
-    }).then(function (owners) {
-      return owners.reduce(function (map, owner) {
-        map[owner.id] = owner.username
-        return map
-      }, {})
-    }).then(function (ownersById) {
-      return filteredFragments.map(function (fragment) {
-        fragment.owner = ownersById[fragment.owner]
-        return fragment
-      })
+    return Promise.all(fragments).then(fragments => {
+      if (options.filter) {
+        return fragments.filter(options.filter)
+      } else {
+        return fragments
+      }
     })
   }
 
