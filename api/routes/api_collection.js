@@ -80,11 +80,11 @@ api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
 // Get all fragments
 api.get('/collections/:id/fragments', authBearerAndPublic, function (req, res, next) {
   var fallback = function () {
-    return Collection.find(req.params.id).then(function (collection) {
-      return collection.getFragments({filter: function (fragment) {
+    return Collection.find(req.params.id).then(collection => {
+      return collection.getFragments({filter: fragment => {
         return Authorize.can(req.user, 'read', fragment)
       }})
-    }).catch(function (err) {
+    }).catch(err => {
       next(err)
     })
   }
@@ -107,19 +107,16 @@ api.get('/collections/:id/fragments', authBearerAndPublic, function (req, res, n
 })
 
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, function (req, res, next) {
-  var fallback = Fragment.find(req.params.fragmentId).then(function (fragment) {
-    if (fragment.published) {
-      return fragment
-    } else {
-      throw new Error('Not Found')
-    }
-  })
+  var fallback = function () {
+    return Authorize.can(undefined, 'read', req.originalUrl).then(
+        permission => Fragment.find(req.params.fragmentId)
+      ).catch(() => { throw new Error('Not Found') })
+  }
 
   return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
     return Fragment.find(req.params.fragmentId)
-  }).then(function (fragment) {
-    return res.status(200).json(fragment)
-  }).catch(function (err) {
+  }).then(fragment => res.status(200).json(fragment)
+  ).catch(err => {
     if (err.name === 'AuthorizationError') {
       fallback.then(function (fragment) {
         return res.status(200).json(fragment)
