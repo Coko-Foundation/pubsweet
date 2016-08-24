@@ -64,12 +64,17 @@ class Model {
   // User.all()
   static all (options) {
     options = options || {}
-    return db.rel.find(this.type)
-      .then(function (results) {
+    return db.rel.find(
+      this.type
+    ).then(
+      (results) => {
         return results[this.type + 's']
-      }.bind(this)).catch(function (err) {
+      }
+    ).catch(
+      (err) => {
         console.error(err)
-      })
+      }
+    )
   }
 
   // Find by id e.g.

@@ -12,7 +12,7 @@ var upload = multer({
   limits: {fileSize: 10000000, files: 1}
 })
 
-api.post('/upload', upload.single('file'), function (req, res, next) {
+api.post('/upload', upload.single('file'), (req, res, next) => {
   console.log(req.file)
   return res.send(req.file.path.replace(/^public/, ''))
 })
@@ -27,16 +27,16 @@ api.use('/teams', teams)
 
 // Debug API
 if (process.env.NODE_ENV === 'dev') {
-  api.get('/debug', function (req, res, next) {
+  api.get('/debug', (req, res, next) => {
     db.allDocs({
       include_docs: true,
       attachments: true
-    }).then(function (result) {
-      var documents = result.rows.map(function (result) {
+    }).then(result => {
+      var documents = result.rows.map(result => {
         return result.doc
       })
       return res.json(documents)
-    }).catch(function (err) {
+    }).catch(err => {
       console.log(err)
     })
   })

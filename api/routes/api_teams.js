@@ -9,64 +9,78 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
 const logger = require('../logger')
 
-api.get('/', authBearer, function (req, res, next) {
-  return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
-    return Team.all()
-  }).then(function (teams) {
-    return res.status(200).json(teams)
-  }).catch(function (err) {
-    next(err)
-  })
+api.get('/', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.authInfo.id, 'read', req.originalUrl
+  ).then(
+    () => {
+      return Team.all()
+    }
+  ).then(
+    teams => {
+      return res.status(200).json(teams)
+    }
+  ).catch(
+    err => {
+      next(err)
+    }
+  )
 })
 
-api.post('/', authBearer, function (req, res, next) {
+api.post('/', authBearer, (req, res, next) => {
   let team = new Team(req.body)
 
-  logger.info('WHAAAA', req.body)
-  return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
-    return team.save()
-  }).then(function (response) {
-    logger.info('WHOOOOxXXXX', response)
-    return res.status(201).json(response)
-  }).catch(function (err) {
-    next(err)
-  })
+  return Authorize.can(
+    req.authInfo.id, 'create', req.originalUrl
+  ).then(
+    () => {
+      return team.save()
+    }
+  ).then(
+    response => {
+      return res.status(201).json(response)
+    }
+  ).catch(
+    err => {
+      next(err)
+    }
+  )
 })
 
-api.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
+api.get('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(req.user, 'read', req.originalUrl).then(() => {
     return Team.find(req.params.id)
-  }).then(function (team) {
+  }).then(team => {
     return res.status(200).json(team)
-  }).catch(function (err) {
+  }).catch(err => {
     next(err)
   })
 })
 
-api.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'delete', req.originalUrl).then(function () {
+api.delete('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(req.user, 'delete', req.originalUrl).then(() => {
     return Team.find(req.params.id)
-  }).then(function (team) {
+  }).then(team => {
     return team.delete()
-  }).then(function (team) {
+  }).then(team => {
     return res.status(200).json(team)
-  }).catch(function (err) {
+  }).catch(err => {
     next(err)
   })
 })
 
-api.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
+api.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(req.user, 'update', req.originalUrl).then(() => {
     return Team.find(req.params.id)
-  }).then(function (team) {
+  }).then(team => {
     return team.updateProperties(req.body)
-  }).then(function (team) {
+  }).then(team => {
     return team.save()
-  }).then(function (team) {
+  }).then(team => {
     return Team.find(req.params.id)
-  }).then(function (team) {
+  }).then(team => {
     return res.status(200).json(team)
-  }).catch(function (err) {
+  }).catch(err => {
     next(err)
   })
 })

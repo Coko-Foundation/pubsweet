@@ -4,7 +4,6 @@ const _ = require('lodash')
 
 const Model = require('./Model')
 const User = require('./User')
-const logger = require('../logger')
 
 class Team extends Model {
   constructor (properties) {

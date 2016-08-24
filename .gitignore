@@ -4,3 +4,5 @@ public/assets/*
 public/uploads/*
 .happypack
 .DS_Store
+
+test.log

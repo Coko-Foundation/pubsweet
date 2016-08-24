@@ -47,8 +47,8 @@ const AnonymousStrategy = require('passport-anonymous').Strategy
 const LocalStrategy = require('passport-local').Strategy
 
 passport.use('bearer', new BearerStrategy(
-  function (token, done) {
-    jwt.verify(token, config.secret, function (err, decoded) {
+  (token, done) => {
+    jwt.verify(token, config.secret, (err, decoded) => {
       if (!err) {
         return done(null, decoded.id, {
           username: decoded.username,
@@ -64,9 +64,9 @@ passport.use('bearer', new BearerStrategy(
 
 passport.use('anonymous', new AnonymousStrategy())
 
-passport.use('local', new LocalStrategy(function (username, password, done) {
+passport.use('local', new LocalStrategy((username, password, done) => {
   logger.info('User finding:', username)
-  User.findByUsername(username).then(function (user) {
+  User.findByUsername(username).then((user) => {
     logger.info('User found:', user.username)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
@@ -76,7 +76,7 @@ passport.use('local', new LocalStrategy(function (username, password, done) {
       return done(null, false, { message: 'Wrong password.' })
     }
     return done(null, user, {id: user.id})
-  }).catch(function (err) {
+  }).catch((err) => {
     logger.info('User not found', err)
     if (err) { return done(err) }
   })
@@ -90,13 +90,13 @@ app.use('/manage', index)
 app.use('/', index)
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  const err = new Error('Not` Found')
+app.use((req, res, next) => {
+  const err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // development error handler, will print stacktrace
   if (app.get('env') === 'dev' || app.get('env') === 'test') {
     logger.error(err)
@@ -106,7 +106,7 @@ app.use(function (err, req, res, next) {
   if (err.name === 'ConflictError') {
     return res.status(409).json({ message: err.message })
   } else if (err.name === 'AuthorizationError') {
-    res.status(403).json({ message: err.message })
+    res.status(err.status).json({ message: err.message })
   } else {
     res.status(err.status || 500).json({ message: err.message })
   }

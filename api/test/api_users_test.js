@@ -105,7 +105,6 @@ describe('users api', function () {
         .send(otherUserFixture)
         .expect(201)
         .then(function (res) {
-          console.log(res.body)
           // Store userId for later
           otherUserId = res.body.id
           expect(res.body.username).to.eql(otherUserFixture.username)

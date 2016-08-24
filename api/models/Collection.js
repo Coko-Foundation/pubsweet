@@ -1,8 +1,6 @@
 'use strict'
-const _ = require('lodash')
 const Model = require('./Model')
 const Fragment = require('./Fragment')
-const User = require('./User')
 
 class Collection extends Model {
   constructor (properties) {
@@ -15,18 +13,24 @@ class Collection extends Model {
   // collection.getFragments({filter: fragment => {Authorize.can(req.user, 'read', fragment)})
   getFragments (options) {
     options = options || {}
-    if (!this.fragments) { return [] }
-    var fragments = this.fragments.map(function (id) {
-      return Fragment.find(id)
-    })
+    options.filter = options.filter || (() => Promise.resolve(true))
 
-    return Promise.all(fragments).then(fragments => {
-      if (options.filter) {
-        return fragments.filter(options.filter)
-      } else {
-        return fragments
+    if (!this.fragments) { return [] }
+
+    var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
+
+    return fragments.then(
+      fragments => {
+        let filters = Promise.all(
+          fragments.map(
+            fragment => options.filter(fragment).catch(() => false)
+          )
+        )
+        return Promise.all([fragments, filters])
       }
-    })
+    ).then(
+      ([fragments, filters]) => fragments.filter(fragment => filters.shift())
+    )
   }
 
   addFragment (fragment) {

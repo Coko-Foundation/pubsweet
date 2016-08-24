@@ -6,7 +6,7 @@ class AuthorizationError extends Error {
     Error.captureStackTrace(this, 'AuthorizationError')
     this.name = 'AuthorizationError'
     this.message = message
-    this.status = status || 401
+    this.status = status || 403
   }
 }
 
