@@ -6,7 +6,7 @@ import TextInput from './TextInput'
 import styles from './Post.local'
 import AuthHelper from '../../helpers/AuthHelper'
 
-export default class Blogpost extends React.Component {
+export default class Post extends React.Component {
   constructor (props) {
     super(props)
     this._onSave = this._onSave.bind(this)
@@ -21,26 +21,26 @@ export default class Blogpost extends React.Component {
   }
 
   _onSave (title) {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       title: title
     }))
   }
 
   _onPublish () {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       published_at: new Date(),
       published: true
     }))
   }
 
   _onUnpublish () {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       published: false
     }))
   }
 
   _onDestroyClick () {
-    this.props.delete(this.props.blogpost)
+    this.props.delete(this.props.blog, this.props.blogpost)
   }
 
   _onDoubleClick () {
@@ -112,8 +112,9 @@ export default class Blogpost extends React.Component {
   }
 }
 
-Blogpost.propTypes = {
+Post.propTypes = {
   number: React.PropTypes.number,
+  blog: React.PropTypes.object,
   blogpost: React.PropTypes.object,
   delete: React.PropTypes.func,
   update: React.PropTypes.func,

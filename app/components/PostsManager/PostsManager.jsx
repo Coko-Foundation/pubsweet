@@ -30,6 +30,7 @@ class PostsManager extends React.Component {
                 update={actions.updateFragment}
                 delete={actions.deleteFragment}
                 blogposts={blogposts}
+                blog={blog}
                 auth={auth} />
               <PostCreator create={createBlogpost} />
             </Grid>
@@ -46,7 +47,7 @@ PostsManager.propTypes = {
   blog: React.PropTypes.object,
   blogposts: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
-  error: React.PropTypes.object,
+  error: React.PropTypes.string,
   auth: React.PropTypes.object
 }
 

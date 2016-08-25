@@ -234,7 +234,7 @@ function deleteFragmentFailure (fragment, error) {
   }
 }
 
-export function deleteFragment (fragment, collection) {
+export function deleteFragment (collection, fragment) {
   return (dispatch, getState) => {
     const { auth: { token } } = getState()
     dispatch(deleteFragmentRequest(fragment))
