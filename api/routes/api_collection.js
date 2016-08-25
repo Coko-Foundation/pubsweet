@@ -1,6 +1,7 @@
 'use strict'
 
 const _ = require('lodash')
+const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
 const Authorize = require('../models/Authorize')
@@ -94,6 +95,10 @@ api.get('/collections/:id/fragments', authBearerAndPublic, function (req, res, n
   }).then(function (collection) {
     return collection.getFragments()
   }).then(function (fragments) {
+    return Promise.all(
+      fragments.map(fragment => User.ownersWithUsername(fragment))
+    )
+  }).then(function (fragments) {
     return res.status(200).json(fragments)
   }).catch(function (err) {
     if (err.name === 'AuthorizationError') {
@@ -137,6 +142,8 @@ api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, function
     return fragment.updateProperties(req.body)
   }).then(function (fragment) {
     return fragment.save()
+  }).then(function (fragment) {
+    return User.ownersWithUsername(fragment)
   }).then(function (fragment) {
     return res.status(200).json(fragment)
   }).catch(function (err) {

@@ -86,7 +86,7 @@ export default class Blogpost extends React.Component {
           {input}
         </td>
         <td>
-          {blogpost.owner}
+          {blogpost.owners.map(owner => owner.username).join(', ')}
         </td>
         <td className={blogpost.published ? 'published' : 'unpublished'}>
           <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}

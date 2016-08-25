@@ -38,7 +38,6 @@ class UsersManager extends React.Component {
                   <th>#</th>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Teams</th>
                 </tr>
               </thead>
               <tbody>

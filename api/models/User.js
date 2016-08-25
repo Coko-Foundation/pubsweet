@@ -9,7 +9,7 @@ class User extends Model {
 
     // Hash and delete the password if it's set
     if (properties.password) {
-      this.passwordHash = bcrypt.hashSync(properties.password, 1)
+      this.passwordHash = bcrypt.hashSync(properties.password, 10)
       delete this.password
     }
 
@@ -40,6 +40,17 @@ class User extends Model {
         throw err
       }
     })
+  }
+
+  // For API display/JSON purposes only
+  static ownersWithUsername (object) {
+    return Promise.all(object.owners.map(ownerId => this.find(ownerId)))
+      .then(owners => {
+        return owners.map(owner => ({id: owner.id, username: owner.username}))
+      }).then(owners => {
+        object.owners = owners
+        return object
+      })
   }
 
   static findByEmail (email) {
