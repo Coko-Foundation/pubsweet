@@ -8,7 +8,7 @@ const api = require('./helpers/api')
 
 const noop = () => {}
 
-describe.only('users api', () => {
+describe('users api', () => {
   let userId
 
   beforeEach(() => {
