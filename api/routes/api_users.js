@@ -65,10 +65,7 @@ users.get('/authenticate', authBearer, (req, res) => {
 users.post('/', (req, res, next) => {
   const user = new User(req.body)
 
-  // TODO: Move this to a validation step
-  if (req.body.admin && !user.admin) {
-    throw new AuthorizationError('only admins can set other admins')
-  }
+  if (req.body.admin) throw new ValidationError('invalid propery: admin')
 
   return user.isUniq().then(
     response => user.save()

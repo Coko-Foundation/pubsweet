@@ -72,7 +72,7 @@ describe('users api', () => {
       const fakeadmin = Object.assign(
         {}, fixtures.otherUser, { admin: true }
       )
-      return api.users.post(fakeadmin).expect(STATUS.FORBIDDEN)
+      return api.users.post(fakeadmin).expect(STATUS.INTERNAL_SERVER_ERROR)
     })
 
     it('can sign up', () => {
