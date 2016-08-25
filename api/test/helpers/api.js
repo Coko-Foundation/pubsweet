@@ -1,13 +1,16 @@
 const request = require('supertest-as-promised')
 const api = require('../../api')
 const STATUS = require('http-status-codes')
+const isString = require('lodash/isString')
 
 const fragments = {
   post: (fragment, collection, token) => {
+    const collectionId = isString(collection) ? collection : collection.id
+
     const req = request(
       api
     ).post(
-      '/api/collections/' + collection.id + '/fragments'
+      '/api/collections/' + collectionId + '/fragments'
     ).send(
       fragment
     )
@@ -70,23 +73,53 @@ const collections = {
 }
 
 const teams = {
-  get: (token) => {
+  get: (token, collection) => {
+    const collectionId = () => {
+      return isString(collection) ? collection : collection.id
+    }
+    const collectionpart = collection ? `/collections/${collectionId()}` : ''
+
+    const url = `/api${collectionpart}/teams`
+
     return request(
       api
     ).get(
-      '/api/teams'
+      url
     ).set(
       'Authorization', 'Bearer ' + token
     )
   },
   post: (team, collection, token) => {
-    const req = request(api)
+    const collectionId = () => {
+      return isString(collection) ? collection : collection.id
+    }
+    const collectionpart = collection ? `/collections/${collectionId()}` : ''
 
-    return (collection ? req.post(
-        `/api/collections/${collection.id}/teams`
-      ) : req.post(
-        '/api/teams'
-      )
+    const url = `/api${collectionpart}/teams`
+
+    return request(
+      api
+    ).post(
+      url
+    ).send(
+      team
+    ).set(
+      'Authorization', 'Bearer ' + token
+    )
+  },
+  put: (team, collection, teamId, token) => {
+    const collectionId = () => {
+      return isString(collection) ? collection : collection.id
+    }
+    const collectionpart = collection ? `/collections/${collectionId()}` : ''
+    const teampart = teamId ? `/${teamId}` : ''
+
+    const url = `/api${collectionpart}/teams${teampart}`
+
+    return request(
+      api
+    ).put(
+      url
     ).send(
       team
     ).set(
