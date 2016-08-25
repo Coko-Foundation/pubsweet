@@ -33,7 +33,7 @@ const fragments = {
     ) : req
   },
   get: (collection, token, fragmentId) => {
-    let url = '/api/collections/' + collection.id + '/fragments'
+    let url = `/api/collections/${collection.id}/fragments`
     if (fragmentId) url += '/' + fragmentId
 
     const req = request(api).get(url)
@@ -46,7 +46,7 @@ const fragments = {
 
 const users = {
   authenticate: {
-    post: (user) => {
+    post: user => {
       return request(
         api
       ).post(
@@ -61,10 +61,53 @@ const users = {
       ).then(
         res => res.body.token
       )
-    },
-    get: () => {
-
     }
+  },
+  post: user => {
+    return request(
+      api
+    ).post(
+      '/api/users'
+    ).send(
+      user
+    )
+  },
+  put: (userId, user, token) => {
+    const req = request(
+      api
+    ).put(
+      `/api/users/${userId}`
+    ).send(
+      user
+    )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
+  },
+  get: (userId, token) => {
+    const url = `/api/users${userId ? `/${userId}` : ''}`
+
+    const req = request(
+      api
+    ).get(
+      url
+    )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
+  },
+  del: (userId, token) => {
+    const req = request(
+      api
+    ).delete(
+      `/api/users/${userId}`
+    )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
   }
 }
 

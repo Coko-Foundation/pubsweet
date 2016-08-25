@@ -1,5 +1,6 @@
 'use strict'
 
+const STATUS = require('http-status-codes')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const express = require('express')
@@ -31,16 +32,15 @@ users.post('/authenticate', authLocal, (req, res) => {
   return User.find(
     req.authInfo.id
   ).then(
-    user => {
-      return res.status(201).json(Object.assign(
-        { token: createToken(req.user) },
-        user
-      ))
-    }
+    user => res.status(
+      STATUS.CREATED
+    ).json(
+      Object.assign({ token: createToken(req.user) }, user)
+    )
   ).catch(
     err => {
       if (err.name === 'NotFoundError') {
-        return res.status(401).json(Object.assign(
+        return res.status(STATUS.UNAUTHORIZED).json(Object.assign(
           { error: 'User not found' },
           req.authInfo
         ))
@@ -51,15 +51,18 @@ users.post('/authenticate', authLocal, (req, res) => {
 
 // Token verify
 users.get('/authenticate', authBearer, (req, res) => {
-  return User.find(req.authInfo.id).then(user => {
-    user.token = req.authInfo.token
-    return res.status(200).json(user)
-  })
+  return User.find(
+    req.authInfo.id
+  ).then(
+    user => {
+      user.token = req.authInfo.token
+      return res.status(STATUS.OK).json(user)
+    }
+  )
 })
 
 // Create user
 users.post('/', (req, res, next) => {
-  logger.info(req.body)
   const user = new User(req.body)
 
   // TODO: Move this to a validation step
@@ -67,69 +70,80 @@ users.post('/', (req, res, next) => {
     throw new AuthorizationError('only admins can set other admins')
   }
 
-  return user.isUniq().then(response => {
-    return user.save()
-  }).then(response => {
-    return res.status(201).json(response)
-  }).catch(err => {
-    next(err)
-  })
+  return user.isUniq().then(
+    response => user.save()
+  ).then(
+    response => res.status(STATUS.CREATED).json(response)
+  ).catch(
+    next
+  )
 })
 
 users.get('/', authBearer, (req, res, next) => {
-  return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(() => {
-    return User.all()
-  }).then(users => {
-    logger.info(users)
-    return res.status(200).json({users: users})
-  }).catch(err => {
-    next(err)
-  })
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.all()
+  ).then(
+    users => res.status(STATUS.OK).json({ users: users })
+  ).catch(
+    next
+  )
 })
 
 // Get user
 users.get('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(req.user, 'read', req.originalUrl).then(() => {
-    return User.find(req.params.id)
-  }).then(user => {
-    return res.status(200).json(user)
-  }).catch(err => {
-    next(err)
-  })
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Destroy a user
 users.delete('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(req.user, 'delete', req.originalUrl).then(user => {
-    return user.delete()
-  }).then(user => {
-    return res.status(200).json(user)
-  }).catch(err => {
-    next(err)
-  })
+  return Authorize.can(
+    req.user, 'delete', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => user.delete()
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Update a user
 users.put('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(req.user, 'update', req.originalUrl).then(() => {
-    return User.find(req.user)
-  }).then(user => {
-    // TODO: Move this to a validation step
-    if (req.body.admin && !user.admin) {
-      throw new AuthorizationError('only admins can set other admins')
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => User.find(req.user)
+  ).then(
+    user => {
+      // TODO: Move this to a validation step
+      if (req.body.admin && !user.admin) {
+        throw new AuthorizationError('only admins can set other admins')
+      }
+      return User.find(req.params.id)
     }
-    return User.find(req.params.id)
-  }).then(user => {
-    return user.updateProperties(req.body)
-  }).then(user => {
-    return user.save()
-  }).then(user => {
-    return User.find(req.params.id)
-  }).then(user => {
-    return res.status(200).json(user)
-  }).catch(err => {
-    next(err)
-  })
+  ).then(
+    user => user.updateProperties(req.body)
+  ).then(
+    user => user.save()
+  ).then(
+    user => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 module.exports = users
