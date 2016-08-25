@@ -36,11 +36,11 @@ users.post('/authenticate', authLocal, function (req, res) {
 })
 
 // Token verify
-users.get('/authenticate', authBearer, function (req, res) {
+users.get('/authenticate', authBearer, function (req, res, next) {
   return User.find(req.authInfo.id).then(function (user) {
     user.token = req.authInfo.token
     return res.status(200).json(user)
-  })
+  }).catch(next)
 })
 
 // Create user

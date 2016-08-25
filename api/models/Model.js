@@ -1,8 +1,11 @@
 'use strict'
 
-const schema = require('./schema')
 const uuid = require('node-uuid')
+const remove = require('lodash/remove')
+
+const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
+const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
 schema()
 
@@ -50,10 +53,42 @@ class Model {
 
   updateProperties (properties) {
     logger.info('Updating properties to', properties)
+
+    // These properties are modified through setters
+    delete properties.owners
     // TODO: Should we screen/filter more properties here?
 
     Object.assign(this, properties)
     return this
+  }
+
+  setOwners (owners) {
+    if (Array.isArray(owners)) {
+      let currentOwners = new Set(this.owners)
+      let newOwners = new Set(owners)
+      let removeOwners = new Set([...currentOwners].filter(x => !newOwners.has(x)))
+      let addOwners = new Set([...newOwners].filter(x => !currentOwners.has(x)))
+
+      Array.from(removeOwners).map(owner => this.removeOwner(owner))
+      Array.from(addOwners).map(owner => this.addOwner(owner))
+    } else {
+      throw new ValidationError('owners should be an array')
+    }
+  }
+
+  validateOwner (owner) {
+    if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
+  }
+
+  addOwner (owner) {
+    this.validateOwner(owner)
+    this.owners = this.owners || []
+    this.owners.push(owner)
+  }
+
+  removeOwner (owner) {
+    this.validateOwner(owner)
+    remove(this.owners, owner)
   }
 
   static uuid () {

@@ -74,7 +74,7 @@ class Authorize {
       if (permission) {
         return permission
       } else {
-        throw new AuthorizationError()
+        throw new AuthorizationError('no permissions')
       }
     })
   }

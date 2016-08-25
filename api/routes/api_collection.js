@@ -21,7 +21,7 @@ api.use('/collections/:id/teams', teams)
 api.post('/collections', authBearer, function (req, res, next) {
   return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
     let collection = new Collection(req.body)
-    collection.owner(req.user)
+    collection.setOwners([req.user])
     return collection.save()
   }).then(function (response) {
     return res.status(201).json(response)
@@ -65,7 +65,7 @@ api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
     return Collection.find(req.params.id)
   }).then(function (collection) {
     let fragment = new Fragment(req.body)
-    fragment.owners = [req.user]
+    fragment.setOwners([req.user])
     return Promise.all([collection, fragment.save()])
   }).then(function ([collection, fragment]) {
     collection.addFragment(fragment)
