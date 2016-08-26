@@ -1,5 +1,6 @@
 'use strict'
 
+const STATUS = require('http-status-codes')
 const _ = require('lodash')
 const User = require('../models/User')
 const Collection = require('../models/Collection')
@@ -19,154 +20,173 @@ api.use('/collections/:id/fragments/teams', teams)
 api.use('/collections/:id/teams', teams)
 
 // Create collection
-api.post('/collections', authBearer, function (req, res, next) {
-  return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
-    let collection = new Collection(req.body)
-    collection.setOwners([req.user])
-    return collection.save()
-  }).then(function (response) {
-    return res.status(201).json(response)
-  }).catch(function (err) {
-    next(err)
-  })
+api.post('/collections', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.authInfo.id, 'create', req.originalUrl
+  ).then(
+    () => {
+      let collection = new Collection(req.body)
+      collection.setOwners([req.user])
+      return collection.save()
+    }
+  ).then(
+    response => res.status(STATUS.CREATED).json(response)
+  ).catch(
+    next
+  )
 })
 
 // List collections
-api.get('/collections', function (req, res, next) {
-  Collection.all().then(function (collections) {
-    return res.status(200).json(collections)
-  }).catch(function (err) {
-    next(err)
-  })
+api.get('/collections', (req, res, next) => {
+  Collection.all().then(
+    collections => res.status(STATUS.OK).json(collections)
+  ).catch(
+    next
+  )
 })
 
-api.get('/collections/:id', function (req, res, next) {
-  Collection.find(req.params.id).then(function (collection) {
-    return res.status(200).json(collection)
-  }).catch(function (err) {
-    next(err)
-  })
+api.get('/collections/:id', (req, res, next) => {
+  Collection.find(
+    req.params.id
+  ).then(
+    collection => res.status(STATUS.OK).json(collection)
+  ).catch(
+    next
+  )
 })
 
-api.delete('/collections/:id', function (req, res, next) {
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Collection.find(req.params.id)
-  }).then(function (collection) {
-    return collection.delete()
-  }).then(function (collection) {
-    return res.status(200).json(collection)
-  }).catch(function (err) {
-    next(err)
-  })
+api.delete('/collections/:id', (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => Collection.find(req.params.id)
+  ).then(
+    collection => collection.delete()
+  ).then(
+    collection => res.status(STATUS.OK).json(collection)
+  ).catch(
+    next
+  )
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collections/:id/fragments', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'create', req.originalUrl).then(function () {
-    return Collection.find(req.params.id)
-  }).then(function (collection) {
-    let fragment = new Fragment(req.body)
-    fragment.setOwners([req.user])
-    return Promise.all([collection, fragment.save()])
-  }).then(function ([collection, fragment]) {
-    collection.addFragment(fragment)
-    return Promise.all([collection.save(), fragment])
-  }).then(function ([collection, fragment]) {
-    return res.status(201).json(fragment)
-  }).catch(function (err) {
-    next(err)
-  })
+api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
+  return Authorize.can(req.user, 'create', req.originalUrl).then(
+    () => Collection.find(req.params.id)
+  ).then(
+    collection => {
+      let fragment = new Fragment(req.body)
+      fragment.setOwners([req.user])
+      return Promise.all([collection, fragment.save()])
+    }
+  ).then(
+    ([collection, fragment]) => {
+      collection.addFragment(fragment)
+      return Promise.all([collection.save(), fragment])
+    }
+  ).then(
+    ([collection, fragment]) => User.ownersWithUsername(fragment)
+  ).then(
+    fragment => res.status(STATUS.CREATED).json(fragment)
+  ).catch(
+    next
+  )
 })
 
 // Get all fragments
-api.get('/collections/:id/fragments', authBearerAndPublic, function (req, res, next) {
-  var fallback = function () {
-    return Collection.find(req.params.id).then(collection => {
-      return collection.getFragments({filter: fragment => {
-        return Authorize.can(req.user, 'read', fragment)
-      }})
-    }).catch(err => {
-      next(err)
-    })
+api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
+  const fallback = () => {
+    return Collection.find(
+      req.params.id
+    ).then(
+      collection => collection.getFragments({
+        filter: fragment => Authorize.can(req.user, 'read', fragment)
+      })
+    ).then(
+      fragments => res.status(STATUS.OK).json(fragments)
+    ).catch(
+      next
+    )
   }
 
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Collection.find(req.params.id)
-  }).then(function (collection) {
-    return collection.getFragments()
-  }).then(function (fragments) {
-    return Promise.all(
-      fragments.map(fragment => User.ownersWithUsername(fragment))
-    )
-  }).then(function (fragments) {
-    return res.status(200).json(fragments)
-  }).catch(function (err) {
-    if (err.name === 'AuthorizationError') {
-      return fallback().then(function (fragments) {
-        res.status(200).json(fragments)
-      })
-    } else {
-      next(err)
-    }
-  })
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => Collection.find(req.params.id)
+  ).then(
+    collection => collection.getFragments()
+  ).then(
+    fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+  ).then(
+    fragments => res.status(STATUS.OK).json(fragments)
+  ).catch(
+    err => (err.name === 'AuthorizationError') ? fallback() : next(err)
+  )
 })
 
-api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, function (req, res, next) {
-  var fallback = function () {
-    return Authorize.can(undefined, 'read', req.originalUrl).then(
-        permission => Fragment.find(req.params.fragmentId)
-      ).catch(() => { throw new Error('Not Found') })
-  }
+api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, next) => {
+  const fallback = () => Authorize.can(
+    undefined, 'read', req.originalUrl
+  ).then(
+    permission => Fragment.find(req.params.fragmentId)
+  ).then(
+    fragment => res.status(STATUS.OK).json(fragment)
+  ).catch(
+    err => res.status(STATUS.NOT_FOUND).json(err.message)
+  )
 
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Fragment.find(req.params.fragmentId)
-  }).then(fragment => res.status(200).json(fragment)
-  ).catch(err => {
-    if (err.name === 'AuthorizationError') {
-      fallback.then(function (fragment) {
-        return res.status(200).json(fragment)
-      }).catch(function (err) {
-        return res.status(404).json(err.message)
-      })
-    } else {
-      next(err)
-    }
-  })
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => Fragment.find(req.params.fragmentId)
+  ).then(
+    fragment => res.status(STATUS.OK).json(fragment)
+  ).catch(
+    err => (err.name === 'AuthorizationError') ? fallback() : next(err)
+  )
 })
 
 // Update a fragment
-api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
-    return Fragment.find(req.params.fragmentId)
-  }).then(function (fragment) {
-    return fragment.updateProperties(req.body)
-  }).then(function (fragment) {
-    return fragment.save()
-  }).then(function (fragment) {
-    return User.ownersWithUsername(fragment)
-  }).then(function (fragment) {
-    return res.status(200).json(fragment)
-  }).catch(function (err) {
-    next(err)
-  })
+api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => Fragment.find(req.params.fragmentId)
+  ).then(
+    fragment => fragment.updateProperties(req.body)
+  ).then(
+    fragment => fragment.save()
+  ).then(
+    fragment => User.ownersWithUsername(fragment)
+  ).then(
+    fragment => res.status(STATUS.OK).json(fragment)
+  ).catch(
+    next
+  )
 })
 
 // Delete a fragment
-api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'delete', req.originalUrl).then(function () {
-    return Fragment.find(req.params.fragmentId)
-  }).then(function (fragment) {
-    return fragment.delete()
-  }).then(function (fragment) {
-    return Promise.all([Collection.find(req.params.collectionId), fragment])
-  }).then(function ([collection, fragment]) {
-    collection.fragments = _.without(collection.fragments, req.params.fragmentId)
-    return Promise.all([collection.save(), fragment])
-  }).then(function ([collection, fragment]) {
-    return res.status(200).json(fragment)
-  }).catch(function (err) {
-    next(err)
-  })
+api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'delete', req.originalUrl
+  ).then(
+    () => Fragment.find(req.params.fragmentId)
+  ).then(
+    fragment => fragment.delete()
+  ).then(
+    fragment => Promise.all(
+      [Collection.find(req.params.collectionId), fragment]
+    )
+  ).then(
+    ([collection, fragment]) => {
+      collection.fragments = _.without(collection.fragments, req.params.fragmentId)
+      return Promise.all([collection.save(), fragment])
+    }
+  ).then(
+    ([collection, fragment]) => res.status(STATUS.OK).json(fragment)
+  ).catch(
+    next
+  )
 })
 
 module.exports = api

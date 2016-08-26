@@ -1,5 +1,6 @@
 'use strict'
 
+const STATUS = require('http-status-codes')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const express = require('express')
@@ -7,6 +8,7 @@ const express = require('express')
 const User = require('../models/User')
 const Authorize = require('../models/Authorize')
 const AuthorizationError = require('../errors/AuthorizationError')
+const ValidationError = require('../errors/ValidationError')
 const config = require('../../config')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
@@ -22,100 +24,124 @@ function createToken (user) {
       id: user.id
     },
     config.secret,
-    { expiresIn: 24 * 3600 })
+    { expiresIn: 24 * 3600 }
+  )
 }
 
 // Token issuing
-users.post('/authenticate', authLocal, function (req, res) {
-  return User.find(req.authInfo.id).then(function (user) {
-    return res.status(201).json(Object.assign(
-      { token: createToken(req.user) },
-      user
-    ))
-  })
+users.post('/authenticate', authLocal, (req, res) => {
+  return User.find(
+    req.authInfo.id
+  ).then(
+    user => res.status(
+      STATUS.CREATED
+    ).json(
+      Object.assign({ token: createToken(req.user) }, user)
+    )
+  ).catch(
+    err => {
+      if (err.name === 'NotFoundError') {
+        return res.status(STATUS.UNAUTHORIZED).json(Object.assign(
+          { error: 'User not found' },
+          req.authInfo
+        ))
+      }
+    }
+  )
 })
 
 // Token verify
-users.get('/authenticate', authBearer, function (req, res, next) {
-  return User.find(req.authInfo.id).then(function (user) {
-    user.token = req.authInfo.token
-    return res.status(200).json(user)
-  }).catch(next)
+users.get('/authenticate', authBearer, (req, res, next) => {
+  return User.find(
+    req.authInfo.id
+  ).then(
+    user => {
+      user.token = req.authInfo.token
+      return res.status(STATUS.OK).json(user)
+    }
+  ).catch(next)
 })
 
 // Create user
-users.post('/', function (req, res, next) {
-  logger.info(req.body)
+users.post('/', (req, res, next) => {
   const user = new User(req.body)
 
-  // TODO: Move this to a validation step
-  if (req.body.admin && !user.admin) {
-    throw new AuthorizationError('only admins can set other admins')
-  }
+  if (req.body.admin) throw new ValidationError('invalid propery: admin')
 
-  return user.isUniq().then(function (response) {
-    return user.save()
-  }).then(function (response) {
-    return res.status(201).json(response)
-  }).catch(function (err) {
-    next(err)
-  })
+  return user.isUniq().then(
+    response => user.save()
+  ).then(
+    response => res.status(STATUS.CREATED).json(response)
+  ).catch(
+    next
+  )
 })
 
-users.get('/', authBearer, function (req, res, next) {
-  return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
-    return User.all()
-  }).then(function (users) {
-    logger.info(users)
-    return res.status(200).json({users: users})
-  }).catch(function (err) {
-    next(err)
-  })
+users.get('/', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.all()
+  ).then(
+    users => res.status(STATUS.OK).json({ users: users })
+  ).catch(
+    next
+  )
 })
 
 // Get user
-users.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+users.get('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Destroy a user
-users.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'delete', req.originalUrl).then(function (user) {
-    return user.delete()
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+users.delete('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'delete', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => user.delete()
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Update a user
-users.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
-    return User.find(req.user)
-  }).then(function (user) {
-    // TODO: Move this to a validation step
-    if (req.body.admin && !user.admin) {
-      throw new AuthorizationError('only admins can set other admins')
+users.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => User.find(req.user)
+  ).then(
+    user => {
+      // TODO: Move this to a validation step
+      if (req.body.admin && !user.admin) {
+        throw new AuthorizationError('only admins can set other admins')
+      }
+      return User.find(req.params.id)
     }
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return user.updateProperties(req.body)
-  }).then(function (user) {
-    return user.save()
-  }).then(function (user) {
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+  ).then(
+    user => user.updateProperties(req.body)
+  ).then(
+    user => user.save()
+  ).then(
+    user => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 module.exports = users

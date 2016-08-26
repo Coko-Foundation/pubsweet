@@ -1,26 +1,38 @@
 'use strict'
 
-// const config = require('../config')
 const Collection = require('./models/Collection')
 const User = require('./models/User')
 
+const logger = require('./logger')
+
 class Setup {
-  static setup (username, email, password, collectionTitle) {
-    console.log('Starting setup')
-    return new User({
-      username: username,
-      email: email,
-      password: password,
+  static setup (user, collection) {
+    logger.info('Starting setup')
+
+    const admin = new User({
+      username: user.username,
+      email: user.email,
+      password: user.password,
       admin: true
-    }).save().then(admin => {
-      console.log('Created admin user: ', admin)
-      let collection = new Collection({title: collectionTitle})
-      collection.setOwners([admin.id])
-      return collection.save()
-    }).then(
-      collection => console.log('Created initial collection: ', collection)
+    })
+
+    return admin.save().then(
+      (admin) => {
+        logger.info('Created admin user: ', admin)
+        collection = new Collection(collection)
+        collection.setOwners([admin.id])
+        return collection.save()
+      }
+    ).then(
+      (collection) => {
+        logger.info('Created initial collection: ', collection.title)
+        return {
+          user: admin,
+          collection: collection
+        }
+      }
     ).catch(
-      error => console.error(error)
+      logger.error
     )
   }
 }

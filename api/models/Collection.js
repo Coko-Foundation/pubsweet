@@ -16,18 +16,21 @@ class Collection extends Model {
     options.filter = options.filter || (() => Promise.resolve(true))
 
     if (!this.fragments) { return [] }
-    var fragments = Promise.all(this.fragments.map(function (id) {
-      return Fragment.find(id)
-    }))
 
-    return fragments.then(fragments => {
-      let filters = Promise.all(fragments.map(fragment => {
-        return options.filter(fragment).catch(() => false)
-      }))
-      return Promise.all([fragments, filters])
-    }).then(([fragments, filters]) => {
-      return fragments.filter(fragment => filters.shift())
-    })
+    var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
+
+    return fragments.then(
+      fragments => {
+        let filters = Promise.all(
+          fragments.map(
+            fragment => options.filter(fragment).catch(() => false)
+          )
+        )
+        return Promise.all([fragments, filters])
+      }
+    ).then(
+      ([fragments, filters]) => fragments.filter(fragment => filters.shift())
+    )
   }
 
   addFragment (fragment) {

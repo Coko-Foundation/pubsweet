@@ -47,13 +47,23 @@ const adminUser = {
   'admin': true
 }
 
-const teamType = {
-  name: 'Contributors',
-  permissions: 'create'
+const contribTeam = {
+  teamType: {
+    name: 'Contributors',
+    permissions: 'create'
+  }
+}
+
+const readerTeam = {
+  teamType: {
+    name: 'Readers',
+    permissions: 'read'
+  }
 }
 
 const team = {
-  teamType: teamType
+  contributors: contribTeam,
+  readers: readerTeam
 }
 
 module.exports = {
@@ -67,4 +77,3 @@ module.exports = {
   adminUser: adminUser,
   team: team
 }
-

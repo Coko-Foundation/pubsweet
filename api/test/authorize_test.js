@@ -1,6 +1,5 @@
-const dbCleaner = require('./helpers/db_cleaner')
+const cleanDB = require('./helpers/db_cleaner')
 const User = require('../models/User')
-const Collection = require('../models/Collection')
 const Authorize = require('../models/Authorize')
 const AuthorizationError = require('../errors/AuthorizationError')
 const chai = require('chai')
@@ -9,35 +8,48 @@ chai.use(chaiAsPromised)
 const expect = chai.expect
 
 const fixtures = require('./fixtures/fixtures')
+const createBasicCollection = require('./helpers/basic_collection')
 
 const adminFixture = fixtures.adminUser
 const userFixture = fixtures.user
-const collectionFixture = fixtures.collection
 
-describe('Authorize', function () {
-  before(function () {
-    return dbCleaner().then(function () {
-      return new Collection(collectionFixture).save()
-    })
+describe('Authorize', () => {
+  var collection
+
+  beforeEach(() => {
+    return cleanDB().then(
+      createBasicCollection
+    ).then(
+      userAndCol => { collection = userAndCol.collection }
+    )
   })
 
-  describe('admin user', function () {
-    it('can create fragments', function () {
+  describe('admin user', () => {
+    it('can create fragments', () => {
       var user = new User(adminFixture)
-      return user.save().then(function (user) {
-        return Authorize.can(user.id, 'create', '/api/collections/1/fragments')
-      }).then(function (permission) {
-        expect(permission).to.equal(true)
-      })
+      return user.save().then(
+        user => {
+          const url = `/api/collections/${collection.id}/fragments`
+          return Authorize.can(user.id, 'create', url)
+        }
+      ).then(
+        permission => expect(permission).to.equal(true)
+      )
     })
   })
 
-  describe('user without a team', function () {
-    it('can not create a fragment', function () {
+  describe('user without a team', () => {
+    it('can not create a fragment', () => {
       var user = new User(userFixture)
-      return user.save().then(function (user) {
-        expect(Authorize.can(user.id, 'create', '/api/collections/1/fragments')).to.be.rejectedWith(AuthorizationError)
-      })
+      return user.save().then(
+        user => {
+          const url = `/api/collections/${collection.id}/fragments`
+
+          expect(Authorize.can(
+            user.id, 'create', url
+          )).to.be.rejectedWith(AuthorizationError)
+        }
+      )
     })
   })
 })

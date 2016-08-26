@@ -9,7 +9,7 @@ class User extends Model {
 
     // Hash and delete the password if it's set
     if (properties.password) {
-      this.passwordHash = bcrypt.hashSync(properties.password, 10)
+      this.passwordHash = bcrypt.hashSync(properties.password, 1)
       delete this.password
     }
 

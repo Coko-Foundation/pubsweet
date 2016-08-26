@@ -1,5 +1,6 @@
 'use strict'
 
+const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
 const Authorize = require('../models/Authorize')
@@ -7,68 +8,75 @@ const Team = require('../models/Team')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
-const logger = require('../logger')
 
-api.get('/', authBearer, function (req, res, next) {
-  return Authorize.can(req.authInfo.id, 'read', req.originalUrl).then(function () {
-    return Team.all()
-  }).then(function (teams) {
-    return res.status(200).json(teams)
-  }).catch(function (err) {
-    next(err)
-  })
+api.get('/', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.authInfo.id, 'read', req.originalUrl
+  ).then(
+    () => Team.all()
+  ).then(
+    teams => res.status(STATUS.OK).json(teams)
+  ).catch(
+    next
+  )
 })
 
-api.post('/', authBearer, function (req, res, next) {
+api.post('/', authBearer, (req, res, next) => {
   let team = new Team(req.body)
 
-  logger.info('WHAAAA', req.body)
-  return Authorize.can(req.authInfo.id, 'create', req.originalUrl).then(function () {
-    return team.save()
-  }).then(function (response) {
-    logger.info('WHOOOOxXXXX', response)
-    return res.status(201).json(response)
-  }).catch(function (err) {
-    next(err)
-  })
+  return Authorize.can(
+    req.authInfo.id, 'create', req.originalUrl
+  ).then(
+    () => team.save()
+  ).then(
+    response => res.status(STATUS.CREATED).json(response)
+  ).catch(
+    next
+  )
 })
 
-api.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'read', req.originalUrl).then(function () {
-    return Team.find(req.params.id)
-  }).then(function (team) {
-    return res.status(200).json(team)
-  }).catch(function (err) {
-    next(err)
-  })
+api.get('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => Team.find(req.params.id)
+  ).then(
+    team => res.status(STATUS.OK).json(team)
+  ).catch(
+    next
+  )
 })
 
-api.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'delete', req.originalUrl).then(function () {
-    return Team.find(req.params.id)
-  }).then(function (team) {
-    return team.delete()
-  }).then(function (team) {
-    return res.status(200).json(team)
-  }).catch(function (err) {
-    next(err)
-  })
+api.delete('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'delete', req.originalUrl
+  ).then(
+    () => Team.find(req.params.id)
+  ).then(
+    team => team.delete()
+  ).then(
+    team => res.status(STATUS.OK).json(team)
+  ).catch(
+    next
+  )
 })
 
-api.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.can(req.user, 'update', req.originalUrl).then(function () {
-    return Team.find(req.params.id)
-  }).then(function (team) {
-    return team.updateProperties(req.body)
-  }).then(function (team) {
-    return team.save()
-  }).then(function (team) {
-    return Team.find(req.params.id)
-  }).then(function (team) {
-    return res.status(200).json(team)
-  }).catch(function (err) {
-    next(err)
-  })
+api.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => Team.find(req.params.id)
+  ).then(
+    team => team.updateProperties(req.body)
+  ).then(
+    team => team.save()
+  ).then(
+    team => Team.find(req.params.id)
+  ).then(
+    team => res.status(STATUS.OK).json(team)
+  ).catch(
+    next
+  )
 })
 
 module.exports = api

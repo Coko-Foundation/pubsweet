@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 logger.stream = {
-  write: function (message, encoding) {
+  write: (message, encoding) => {
     logger.info(message)
   }
 }

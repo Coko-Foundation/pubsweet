@@ -1,87 +1,52 @@
-const request = require('supertest-as-promised')
+const STATUS = require('http-status-codes')
 const expect = require('expect.js')
-const dbCleaner = require('./helpers/db_cleaner')
-const fixtures = require('./fixtures/fixtures')
-const userFixture = fixtures.user
-const collectionFixture = fixtures.collection
-const fragmentFixture = fixtures.fragment
 
-const Fragment = require('../models/Fragment')
-// const User = require('../models/User')
-const Collection = require('../models/Collection')
+var api = require('./helpers/api')
+const createBasicCollection = require('./helpers/basic_collection')
+const createFragment = require('./helpers/fragment')
+const cleanDB = require('./helpers/db_cleaner')
 
-var api = require('../api')
-
-describe('unauthenticated/public api', function () {
+describe('unauthenticated/public api', () => {
   var fragment
+  var collection
 
-  beforeEach(function () {
-    return dbCleaner().then(function () {
-      const Setup = require('../setup-base')
-      return Setup.setup(
-        userFixture.username,
-        userFixture.email,
-        userFixture.password,
-        collectionFixture.title)
+  afterEach(cleanDB)
+
+  const setNewFragment = (opts) => cleanDB().then(
+    createBasicCollection
+  ).then(
+    userAndCol => {
+      collection = userAndCol.collection
+      return createFragment(opts, collection)
+    }
+  ).then(
+    newfragment => { fragment = newfragment }
+  )
+
+  describe('published fragment', () => {
+    beforeEach(() => setNewFragment({ published: true }))
+
+    it('can read a fragment in a protected collection' +
+       ' if it is published', () => {
+      return api.fragments.get(collection).expect(STATUS.OK).then(
+        res => expect(res.body[0].id).to.eql(fragment.id)
+      )
     })
   })
 
-  describe('published fragment', function () {
-    beforeEach(function () {
-      fragment = new Fragment(fragmentFixture)
-      fragment.published = true
+  describe('unpublished fragment', () => {
+    beforeEach(() => setNewFragment({ published: false }))
 
-      return fragment.save().then(function (fragment) {
-        return Collection.find(1)
-      }).then(function (collection) {
-        collection.addFragment(fragment)
-        return collection.save()
-      })
+    it('can not list unpublished fragments in a protected collection', () => {
+      return api.fragments.get(collection).expect(STATUS.OK).then(
+        res => expect(res.body).to.eql([])
+      )
     })
 
-    afterEach(function () {
-      return fragment.delete()
-    })
-
-    it('can read a fragment in a protected collection if it is published', function () {
-      return request(api)
-        .get('/api/collection/fragments')
-        .expect(200)
-        .then(function (res) {
-          expect(res.body[0].id).to.eql(fragment.id)
-        })
-    })
-  })
-
-  describe('unpublished fragment', function () {
-    var fragment
-    beforeEach(function () {
-      fragment = new Fragment(fragmentFixture)
-      return fragment.save().then(function (fragment) {
-        return Collection.find(1)
-      }).then(function (collection) {
-        collection.addFragment(fragment)
-        return collection.save()
-      })
-    })
-
-    afterEach(function () {
-      return fragment.delete()
-    })
-
-    it('can not list unpublished fragments in a protected collection', function () {
-      return request(api)
-        .get('/api/collection/fragments')
-        .expect(200)
-        .then(function (res) {
-          expect(res.body).to.eql([])
-        })
-    })
-
-    it('can not find a fragment in a protected collection', function () {
-      return request(api)
-        .get('/api/collection/fragments/' + fragment.id)
-        .expect(404)
+    it('can not find a fragment in a protected collection', () => {
+      return api.fragments.get(
+        collection, null, fragment.id
+      ).expect(STATUS.NOT_FOUND)
     })
   })
 })
