@@ -94,7 +94,7 @@ export function createTeam (team) {
       .then(
         response => response.json()
       ).then(
-        fragment => dispatch(createTeamSuccess(team)),
+        team => dispatch(createTeamSuccess(team)),
         err => dispatch(createTeamFailure(team, err))
       )
   }
@@ -149,7 +149,54 @@ export function updateTeam (team) {
   }
 }
 
-export function deleteTeam () {}
+function deleteTeamRequest (team) {
+  return {
+    type: T.DELETE_TEAM_REQUEST,
+    team: team
+  }
+}
+
+function deleteTeamSuccess (team) {
+  return {
+    type: T.DELETE_TEAM_SUCCESS,
+    team: team
+  }
+}
+
+function deleteTeamFailure (team, error) {
+  return {
+    type: T.DELETE_TEAM_FAILURE,
+    isFetching: false,
+    team: team,
+    error: error
+  }
+}
+
+export function deleteTeam (team) {
+  return (dispatch, getState) => {
+    dispatch(deleteTeamRequest(team))
+    const { auth: { token } } = getState()
+
+    const url = teamUrl(team)
+    const opts = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(team)
+    }
+
+    return fetch(url, opts)
+      .then(
+        response => response.json()
+      ).then(
+        fragment => dispatch(deleteTeamSuccess(team)),
+        err => dispatch(deleteTeamFailure(team, err))
+      )
+  }
+}
 
 // function updateUserRequest (user) {
 //   return {

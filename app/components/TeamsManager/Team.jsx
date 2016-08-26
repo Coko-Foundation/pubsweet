@@ -1,17 +1,23 @@
 import React from 'react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import { Button } from 'react-bootstrap'
 
 class Team extends React.Component {
   constructor (props) {
     super(props)
     this.updateMembers = this.updateMembers.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
 
   updateMembers (members) {
     console.log('Selected: ' + members)
     var team = Object.assign(this.props.team, { members: members.split(',') })
     this.props.update(team)
+  }
+
+  onDelete () {
+    this.props.delete(this.props.team)
   }
 
   render () {
@@ -33,7 +39,7 @@ class Team extends React.Component {
           {team.teamType.name} ({team.teamType.permissions})
         </td>
         <td>
-          {team.objectType} {team.objectId}
+          {team.object.type} {team.object.id}
         </td>
         <td>
           <Select
@@ -44,6 +50,11 @@ class Team extends React.Component {
             onChange={this.updateMembers}
           />
         </td>
+        <td>
+          <Button bsStyle="danger" onClick={this.onDelete} title="Delete" aria-label="Delete">
+            <i className="fa fa-trash-o" />
+          </Button>
+        </td>
       </tr>
     )
   }
@@ -53,6 +64,7 @@ Team.propTypes = {
   team: React.PropTypes.object.isRequired,
   number: React.PropTypes.number,
   update: React.PropTypes.func.isRequired,
+  delete: React.PropTypes.func.isRequired,
   users: React.PropTypes.array.isRequired
 }
 

@@ -96,7 +96,7 @@ class Authorize {
       }
     ).catch(
       (err) => {
-        throw new AuthorizationError(err)
+        throw new AuthorizationError(err.message)
       }
     )
   }

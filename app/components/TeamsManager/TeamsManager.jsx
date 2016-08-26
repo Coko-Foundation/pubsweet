@@ -31,6 +31,7 @@ class TeamsManager extends React.Component {
           key={team.id}
           team={team}
           update={actions.updateTeam}
+          delete={actions.deleteTeam}
           users={users}
         />)
       })
@@ -50,6 +51,7 @@ class TeamsManager extends React.Component {
                     <th>Type</th>
                     <th>Object</th>
                     <th>Members</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -1,7 +1,8 @@
 import {
   GET_TEAMS_SUCCESS,
   CREATE_TEAM_SUCCESS,
-  UPDATE_TEAM_SUCCESS
+  UPDATE_TEAM_SUCCESS,
+  DELETE_TEAM_SUCCESS
 } from '../actions/types'
 
 import _ from 'lodash'
@@ -20,10 +21,17 @@ export default function teams (state = [], action) {
     return teams
   }
 
+  function removeTeams () {
+    const todel = (action.teams || [action.team])
+    let teams = _.difference(state, todel)
+    return teams
+  }
+
   switch (action.type) {
     case CREATE_TEAM_SUCCESS:
     case UPDATE_TEAM_SUCCESS: return updateOne()
     case GET_TEAMS_SUCCESS: return _.clone(action.teams)
+    case DELETE_TEAM_SUCCESS: return removeTeams()
   }
 
   return state
