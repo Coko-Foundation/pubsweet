@@ -49,13 +49,15 @@ describe('Teams model', function () {
   it('can save a team without members', function () {
     let team = teamFixture
     team.name = 'Test team'
-    team.objectId = collectionId
-    team.objectType = 'collection'
+    team.object = {
+      id: collectionId,
+      type: 'collection'
+    }
     team = new Team(team)
 
     return team.save().then(function (savedTeam) {
       expect(savedTeam.members).to.eql([])
-      expect(savedTeam.objectId).to.eql(team.objectId)
+      expect(savedTeam.object).to.eql(team.object)
       expect(savedTeam.teamType).to.eql(team.teamType)
       expect(savedTeam.name).to.eql(team.name)
     })
@@ -64,8 +66,10 @@ describe('Teams model', function () {
   it('can save a team with members', function () {
     let team = teamFixture
     team.name = 'Test team'
-    team.objectId = collectionId
-    team.objectType = 'collection'
+    team.object = {
+      id: collectionId,
+      type: 'collection'
+    }
     team.members = [userId]
     team = new Team(team)
 
@@ -74,7 +78,7 @@ describe('Teams model', function () {
     return team.save().then(function (savedTeam) {
       teamId = savedTeam.id
       expect(savedTeam.members).to.eql([userId])
-      expect(savedTeam.objectId).to.eql(team.objectId)
+      expect(savedTeam.object).to.eql(team.object)
       expect(savedTeam.teamType).to.eql(team.teamType)
       expect(savedTeam.name).to.eql(team.name)
       return User.find(userId)
@@ -86,8 +90,10 @@ describe('Teams model', function () {
   it('can save a team with members based around a fragment', function () {
     let team = teamFixture
     team.name = 'Test team'
-    team.objectId = fragmentId
-    team.objectType = 'fragment'
+    team.object = {
+      id: fragmentId,
+      type: 'fragment'
+    }
     team.members = [userId]
     team = new Team(team)
 
@@ -96,8 +102,7 @@ describe('Teams model', function () {
     return team.save().then(function (savedTeam) {
       teamId = savedTeam.id
       expect(savedTeam.members).to.eql([userId])
-      expect(savedTeam.objectId).to.eql(team.objectId)
-      expect(savedTeam.objectType).to.eql(team.objectType)
+      expect(savedTeam.object).to.eql(team.object)
       expect(savedTeam.teamType).to.eql(team.teamType)
       expect(savedTeam.name).to.eql(team.name)
       return User.find(userId)
@@ -109,8 +114,10 @@ describe('Teams model', function () {
   it('can update a team with members', function () {
     let team = teamFixture
     team.name = 'Test team'
-    team.objectId = collectionId
-    team.objectType = 'collection'
+    team.object = {
+      id: collectionId,
+      type: 'collection'
+    }
     team.members = [userId]
     team = new Team(team)
 
@@ -127,7 +134,7 @@ describe('Teams model', function () {
     }).then(function (savedTeam) {
       teamId = savedTeam.id
       expect(savedTeam.members).to.eql([userId, adminId])
-      expect(savedTeam.objectId).to.eql(team.objectId)
+      expect(savedTeam.object).to.eql(team.object)
       expect(savedTeam.teamType).to.eql(team.teamType)
       expect(savedTeam.name).to.eql(team.name)
       return User.find(userId)
@@ -142,8 +149,10 @@ describe('Teams model', function () {
   it('can delete a team with members', function () {
     let team = teamFixture
     team.name = 'Test team'
-    team.objectId = collectionId
-    team.objectType = 'collection'
+    team.object = {
+      id: collectionId,
+      type: 'collection'
+    }
     team.members = [userId]
     team = new Team(team)
 

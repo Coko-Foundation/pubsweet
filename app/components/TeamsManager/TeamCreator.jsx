@@ -36,8 +36,10 @@ export default class TeamCreator extends React.Component {
       this.props.create({
         name: name,
         teamType: this.props.types[teamType],
-        objectId: objectId,
-        objectType: objectType,
+        object: {
+          id: objectId,
+          type: objectType
+        },
         members: []
       })
     }
