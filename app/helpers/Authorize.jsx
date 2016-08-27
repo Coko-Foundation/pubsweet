@@ -9,6 +9,19 @@ import { connect } from 'react-redux'
 class Authorize extends React.Component {
   constructor (props) {
     super(props)
+
+    // TODO:
+    // Ah, this is because for the frontend, we supply the
+    // objects with owners in a different format than backend.
+    // And authsome operates with the backend way. Need to rethink.
+    this.object = Object.assign({}, this.props.object)
+    if (Array.isArray(this.object.owners)) {
+      this.object.owners = this.object.owners.map(
+        owner => owner ? owner.id : null
+      )
+    }
+    // /TODO
+
     this.authsome = new Authsome(
       config.authsome.mode,
       { teams: config.authsome.teams }
@@ -16,7 +29,8 @@ class Authorize extends React.Component {
   }
 
   render () {
-    let { currentUser, operation, object } = this.props
+    let { currentUser, operation } = this.props
+    let object = this.object
     let permissions
 
     try {
