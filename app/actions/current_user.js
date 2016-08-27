@@ -22,7 +22,8 @@ function loginSuccess (user) {
     type: T.LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    token: user.token
+    token: user.token,
+    user: user
   }
 }
 
@@ -99,7 +100,7 @@ function getUserSuccess (user) {
     type: T.GET_USER_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    username: user.username,
+    user: user,
     token: user.token
   }
 }
@@ -143,7 +144,7 @@ function signupSuccess (user) {
     type: T.SIGNUP_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    username: user.username
+    user: user
   }
 }
 

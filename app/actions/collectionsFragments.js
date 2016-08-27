@@ -89,7 +89,7 @@ export function getFragments (collection) {
   return (dispatch, getState) => {
     dispatch(getFragmentsRequest(collection))
     const {
-      auth: { token }
+      currentUser: { token }
     } = getState()
 
     const url = collectionUrl(collection, 'fragments')
@@ -135,7 +135,7 @@ function createFragmentFailure (fragment, error) {
 export function createFragment (collection, fragment) {
   return (dispatch, getState) => {
     dispatch(createFragmentRequest(fragment))
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
 
     const url = fragmentUrl(collection, fragment)
     const opts = {
@@ -186,7 +186,7 @@ export function updateFragment (collection, fragment) {
   return (dispatch, getState) => {
     dispatch(updateFragmentRequest(fragment))
 
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
 
     const url = fragmentUrl(collection, fragment)
     const opts = {
@@ -236,7 +236,7 @@ function deleteFragmentFailure (fragment, error) {
 
 export function deleteFragment (collection, fragment) {
   return (dispatch, getState) => {
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
     dispatch(deleteFragmentRequest(fragment))
 
     const url = fragmentUrl(collection, fragment)

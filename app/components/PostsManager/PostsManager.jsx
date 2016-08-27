@@ -15,7 +15,7 @@ class PostsManager extends React.Component {
   }
 
   render () {
-    const { blog, blogposts, actions, error, auth } = this.props
+    const { blog, blogposts, actions, error, currentUser } = this.props
     let createBlogpost = (fragment) => { actions.createFragment(blog, fragment) }
 
     if (Array.isArray(blogposts)) {
@@ -31,7 +31,7 @@ class PostsManager extends React.Component {
                 delete={actions.deleteFragment}
                 blogposts={blogposts}
                 blog={blog}
-                auth={auth} />
+                currentUser={currentUser} />
               <PostCreator create={createBlogpost} />
             </Grid>
           </div>
@@ -48,7 +48,7 @@ PostsManager.propTypes = {
   blogposts: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
   error: React.PropTypes.string,
-  auth: React.PropTypes.object
+  currentUser: React.PropTypes.object
 }
 
 function mapState (state) {
@@ -60,7 +60,7 @@ function mapState (state) {
     blog: state.collections[0],
     blogposts: blogposts,
     error: state.error,
-    auth: state.auth
+    currentUser: state.currentUser
   }
 }
 

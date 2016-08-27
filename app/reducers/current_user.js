@@ -6,7 +6,7 @@ import {
   GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
 } from '../actions/types'
 
-export default function auth (state = {
+export default function currentUser (state = {
   isFetching: false,
   isAuthenticated: false,
   token: localStorage.getItem('token')
@@ -16,7 +16,7 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: true,
         isAuthenticated: true,
-        username: action.username
+        user: action.user
       })
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
@@ -28,6 +28,7 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
+        user: action.user,
         token: action.token
       })
     case LOGIN_FAILURE:
@@ -50,7 +51,7 @@ export default function auth (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        username: action.username,
+        user: action.user,
         token: action.token
       })
     case GET_USER_FAILURE:

@@ -65,7 +65,6 @@ Signup.propTypes = {
 
 function mapState (state) {
   return {
-    auth: state.auth,
     error: state.error
   }
 }

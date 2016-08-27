@@ -103,6 +103,8 @@ api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
         filter: fragment => Authorize.can(req.user, 'read', fragment)
       })
     ).then(
+      fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+    ).then(
       fragments => res.status(STATUS.OK).json(fragments)
     ).catch(
       next

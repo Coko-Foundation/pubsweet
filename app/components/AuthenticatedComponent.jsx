@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
@@ -10,19 +10,12 @@ export function requireAuthentication (Component) {
 
     componentWillMount () {
       this.props.actions.getUser().then(
-        () => {
-          console.log('HAHAHA')
-          return this.checkAuth(this.props.auth.isAuthenticated)
-        },
-        () => {
-          console.log('HOHOHO')
-          return this.checkAuth(this.props.auth.isAuthenticated)
-        }
+        () => this.checkAuth(this.props.currentUser.isAuthenticated)
       )
     }
 
     componentWillReceiveProps (nextProps) {
-      this.checkAuth(nextProps.auth.isAuthenticated)
+      this.checkAuth(nextProps.currentUser.isAuthenticated)
     }
 
     checkAuth (isAuthenticated) {
@@ -35,23 +28,23 @@ export function requireAuthentication (Component) {
     render () {
       return (
         <div>
-          {this.props.auth.isAuthenticated === true && <Component {...this.props} />}
+          {this.props.currentUser.isAuthenticated === true && <Component {...this.props} />}
         </div>
       )
     }
   }
 
   AuthenticatedComponent.propTypes = {
-    location: PropTypes.object,
-    username: PropTypes.string,
+    location: React.PropTypes.object,
+    username: React.PropTypes.string,
     actions: React.PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    pushState: PropTypes.func.isRequired
+    currentUser: React.PropTypes.object.isRequired,
+    pushState: React.PropTypes.func.isRequired
   }
 
   function mapState (state) {
     return {
-      auth: state.auth
+      currentUser: state.currentUser
     }
   }
 

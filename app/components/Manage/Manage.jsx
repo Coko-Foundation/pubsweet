@@ -1,14 +1,14 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import Navigation from 'PubSweet-navigation'
 
-class Manage extends Component {
+class Manage extends React.Component {
   render () {
-    const { children, auth, actions } = this.props
+    const { children, currentUser, actions } = this.props
     return (
       <div>
         <div className="bootstrap">
           <Navigation
-            auth={auth}
+            currentUser={currentUser}
             actions={actions}
             />
         </div>
@@ -19,8 +19,8 @@ class Manage extends Component {
 }
 
 Manage.propTypes = {
-  auth: PropTypes.object,
-  children: PropTypes.node,
+  currentUser: React.PropTypes.object,
+  children: React.PropTypes.node,
   actions: React.PropTypes.object.isRequired
 }
 

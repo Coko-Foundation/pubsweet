@@ -35,7 +35,7 @@ function getTeamsFailure (message) {
 
 export function getTeams () {
   return (dispatch, getState) => {
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
     let config = {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + token }
@@ -77,7 +77,7 @@ function createTeamFailure (team, error) {
 export function createTeam (team) {
   return (dispatch, getState) => {
     dispatch(createTeamRequest(team))
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
 
     const url = teamUrl()
     const opts = {
@@ -126,7 +126,7 @@ function updateTeamFailure (team, error) {
 export function updateTeam (team) {
   return (dispatch, getState) => {
     dispatch(updateTeamRequest(team))
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
 
     const url = teamUrl(team)
     const opts = {
@@ -175,7 +175,7 @@ function deleteTeamFailure (team, error) {
 export function deleteTeam (team) {
   return (dispatch, getState) => {
     dispatch(deleteTeamRequest(team))
-    const { auth: { token } } = getState()
+    const { currentUser: { token } } = getState()
 
     const url = teamUrl(team)
     const opts = {

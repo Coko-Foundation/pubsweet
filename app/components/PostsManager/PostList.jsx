@@ -14,7 +14,7 @@ export default class PostList extends React.Component {
         blog={this.props.blog}
         delete={this.props.delete}
         update={this.props.update}
-        auth={this.props.auth}
+        currentUser={this.props.currentUser}
       />)
     })
     return (
@@ -43,5 +43,5 @@ PostList.propTypes = {
   delete: React.PropTypes.func,
   blogposts: React.PropTypes.array,
   blog: React.PropTypes.object,
-  auth: React.PropTypes.object
+  currentUser: React.PropTypes.object
 }

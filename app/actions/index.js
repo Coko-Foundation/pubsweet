@@ -7,9 +7,9 @@ export function resetErrorMessage () {
   }
 }
 
-// Actions for auth
-import { getUser } from './auth'
-export { loginUser, logoutUser, getUser, signupUser } from './auth'
+// Actions for current user
+import { getUser } from './current_user'
+export { loginUser, logoutUser, getUser, signupUser } from './current_user'
 
 // Actions for collections and fragments
 import { getCollections } from './collectionsFragments.js'

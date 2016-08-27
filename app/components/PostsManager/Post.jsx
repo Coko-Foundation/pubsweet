@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
 import styles from './Post.local'
-import AuthHelper from '../../helpers/AuthHelper'
+import Authorize from '../../helpers/Authorize'
 
 export default class Post extends React.Component {
   constructor (props) {
@@ -48,7 +48,7 @@ export default class Post extends React.Component {
   }
 
   render () {
-    const { blogpost, number, auth } = this.props
+    const { blogpost, number } = this.props
     var input
     if (this.state.isEditing) {
       input =
@@ -92,20 +92,23 @@ export default class Post extends React.Component {
           <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}
         </td>
         <td>
-          { AuthHelper.can(auth, 'edit', blogpost) &&
+          <Authorize operation="edit" object={blogpost}>
             <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
               <Button bsStyle="primary" className={styles['button']} title="Edit" aria-label="Edit">
                 <i className="fa fa-pencil" />
               </Button>
-            </LinkContainer>}
+            </LinkContainer>
+          </Authorize>
 
-          { AuthHelper.can(auth, 'edit', blogpost) && changePublished }
+          <Authorize operation="edit" object={blogpost}>
+            {changePublished}
+          </Authorize>
 
-          { AuthHelper.can(auth, 'delete', blogpost) &&
+          <Authorize operation="delete" object={blogpost}>
             <Button bsStyle="danger" className={styles['button']} onClick={this._onDestroyClick} title="Delete" aria-label="Delete">
               <i className="fa fa-trash-o" />
             </Button>
-          }
+          </Authorize>
         </td>
       </tr>
     )
@@ -118,5 +121,5 @@ Post.propTypes = {
   blogpost: React.PropTypes.object,
   delete: React.PropTypes.func,
   update: React.PropTypes.func,
-  auth: React.PropTypes.object
+  currentUser: React.PropTypes.object
 }

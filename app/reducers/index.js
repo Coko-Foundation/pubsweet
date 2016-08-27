@@ -12,13 +12,13 @@ export function error (state = null, action) {
 
 import { collections } from './collections'
 import { fragments } from './fragments'
-import auth from './auth'
+import currentUser from './current_user'
 import users from './users'
 import teams from './teams'
 
 export { collections as collections }
 export { fragments as fragments }
-export { auth as auth }
+export { currentUser as currentUser }
 export { users as users }
 export { teams as teams }
 
