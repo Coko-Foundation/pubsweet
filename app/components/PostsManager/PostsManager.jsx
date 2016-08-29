@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Alert } from 'react-bootstrap'
 import PostList from './PostList'
 import PostCreator from './PostCreator'
+import Authorize from '../../helpers/Authorize'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styles from './PostsManager.local.scss'
@@ -18,7 +19,8 @@ class PostsManager extends React.Component {
     const { blog, blogposts, actions, error, currentUser } = this.props
     let createBlogpost = (fragment) => { actions.createFragment(blog, fragment) }
 
-    if (Array.isArray(blogposts)) {
+    console.log('HAYOO', blog)
+    if (Array.isArray(blogposts) && blog) {
       return (
         <div className="bootstrap">
           <div className={styles.container}>
@@ -32,7 +34,9 @@ class PostsManager extends React.Component {
                 blogposts={blogposts}
                 blog={blog}
                 currentUser={currentUser} />
-              <PostCreator create={createBlogpost} />
+              <Authorize operation="create" object={blog}>
+                <PostCreator create={createBlogpost} />
+              </Authorize>
             </Grid>
           </div>
         </div>

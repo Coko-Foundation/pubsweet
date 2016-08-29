@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-core",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js",

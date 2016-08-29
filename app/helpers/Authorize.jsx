@@ -40,7 +40,6 @@ class Authorize extends React.Component {
     }
 
     if (permissions) {
-      console.log(this.props.children)
       return this.props.children
     } else {
       return null

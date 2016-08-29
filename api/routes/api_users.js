@@ -7,6 +7,7 @@ const express = require('express')
 
 const User = require('../models/User')
 const Authorize = require('../models/Authorize')
+const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
 const config = require('../../config')
@@ -57,6 +58,12 @@ users.get('/authenticate', authBearer, (req, res, next) => {
   ).then(
     user => {
       user.token = req.authInfo.token
+      let teams = user.teams.map((teamId) => Team.find(teamId))
+      return Promise.all([user, Promise.all(teams)])
+    }
+  ).then(
+    ([user, teams]) => {
+      user.teams = teams
       return res.status(STATUS.OK).json(user)
     }
   ).catch(next)

@@ -18,6 +18,8 @@ export default class Summary extends React.Component {
     }
     let publishDate = new Date(fragment.published_at).toDateString()
 
+    let owners = fragment.owners.map(owner => owner.username).join(', ')
+
     return (
       <div className="blogpost bootstrap">
         <Row key={fragment.id}>
@@ -25,7 +27,7 @@ export default class Summary extends React.Component {
             <h2>{fragment.title}</h2>
             <div dangerouslySetInnerHTML={{__html: summary}} />
             <LinkContainer to={`/${fragment.id}`}><a>Read more</a></LinkContainer>&nbsp;
-            <div><em>Published by {fragment.owner} on {publishDate}.</em></div>
+            <div><em>Published by {owners} on {publishDate}.</em></div>
           </Col>
         </Row>
       </div>

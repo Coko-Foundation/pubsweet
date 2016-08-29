@@ -60,12 +60,10 @@ class Authorize {
           ).then(
             ([object, user]) => {
               let teams = user.teams.map((teamId) => Team.find(teamId))
-              logger.info('x1', teams)
               return Promise.all([object, user, Promise.all(teams)])
             }
           ).then(
             ([object, user, teams]) => {
-              logger.info('x2', teams)
               user.teams = teams
               return [object, user]
             }
@@ -77,8 +75,6 @@ class Authorize {
       }
     ).then(
       ([object, user]) => {
-        logger.info('x3', user)
-        logger.info('x4', object)
         return [object, user, authsome.can(user, operation, object)]
       }
     ).then(
