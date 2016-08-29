@@ -3,32 +3,64 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
+import config from '../../config'
+import Authsome from 'authsome'
+
 import * as Actions from '../actions'
 
-export function requireAuthentication (Component) {
+export function requireAuthentication (Component, operation, selector) {
   class AuthenticatedComponent extends React.Component {
+    constructor (props) {
+      super(props)
+
+      this.authsome = new Authsome(
+        config.authsome.mode,
+        { teams: config.authsome.teams }
+      )
+
+      this.checkAuthorization = this.checkAuthorization.bind(this)
+      this.checkAuth = this.checkAuth.bind(this)
+    }
 
     componentWillMount () {
       this.props.actions.getUser().then(
-        () => this.checkAuth(this.props.currentUser.isAuthenticated)
+        () => this.props.actions.getCollections()
+      ).then(
+        () => this.checkAuth(this.props.currentUser)
       )
     }
 
     componentWillReceiveProps (nextProps) {
-      this.checkAuth(nextProps.currentUser.isAuthenticated)
+      this.checkAuth(nextProps.currentUser)
     }
 
-    checkAuth (isAuthenticated) {
-      if (!isAuthenticated) {
+    checkAuthorization () {
+      let currentUser = this.props.currentUser.user
+      let object = selector(this.props.state)
+
+      try {
+        if (this.authsome.can(currentUser, operation, object)) {
+          return <Component {...this.props} />
+        } else {
+          <span />
+        }
+      } catch (err) {
+        return <span />
+      }
+    }
+
+    checkAuth (currentUser) {
+      if (!currentUser.isFetching && !currentUser.isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname
         this.props.pushState(`/login?next=${redirectAfterLogin}`)
       }
+      this.checkAuthorization()
     }
 
     render () {
       return (
         <div>
-          {this.props.currentUser.isAuthenticated === true && <Component {...this.props} />}
+          { this.checkAuthorization() }
         </div>
       )
     }
@@ -39,12 +71,14 @@ export function requireAuthentication (Component) {
     username: React.PropTypes.string,
     actions: React.PropTypes.object.isRequired,
     currentUser: React.PropTypes.object.isRequired,
-    pushState: React.PropTypes.func.isRequired
+    pushState: React.PropTypes.func.isRequired,
+    state: React.PropTypes.object
   }
 
   function mapState (state) {
     return {
-      currentUser: state.currentUser
+      currentUser: state.currentUser,
+      state: state
     }
   }
 

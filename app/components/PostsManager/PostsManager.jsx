@@ -19,7 +19,6 @@ class PostsManager extends React.Component {
     const { blog, blogposts, actions, error, currentUser } = this.props
     let createBlogpost = (fragment) => { actions.createFragment(blog, fragment) }
 
-    console.log('HAYOO', blog)
     if (Array.isArray(blogposts) && blog) {
       return (
         <div className="bootstrap">

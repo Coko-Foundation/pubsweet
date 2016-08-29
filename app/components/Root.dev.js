@@ -10,7 +10,7 @@ export default class Root extends React.Component {
       <Provider store={store}>
         <div>
           <Router history={history}>
-            { routes }
+            { routes(store) }
           </Router>
         </div>
       </Provider>

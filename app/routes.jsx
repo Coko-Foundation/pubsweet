@@ -21,7 +21,7 @@ export default (
   <Route>
     <Route path="/" component={Blog} />
 
-    <Route path="/manage" component={requireAuthentication(Manage)}>
+    <Route path="/manage" component={requireAuthentication(Manage, 'create', (state) => state.collections[0])}>
       <Route path="posts" component={PostsManager} />
       <Route path="sciencewriter/:id" component={ScienceWriter} />
       <Route path="users" component={UsersManager} />

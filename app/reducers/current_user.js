@@ -3,7 +3,7 @@ const localStorage = window.localStorage || undefined
 
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST,
-  GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
+  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
 } from '../actions/types'
 
 export default function currentUser (state = {
@@ -45,6 +45,11 @@ export default function currentUser (state = {
     case LOGOUT_REQUEST:
       return Object.assign({}, state, {
         isFetching: false,
+        isAuthenticated: false
+      })
+    case GET_USER_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
         isAuthenticated: false
       })
     case GET_USER_SUCCESS:
