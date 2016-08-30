@@ -4,10 +4,8 @@ var PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('relational-pouch'))
 PouchDB.plugin(require('pouchdb-upsert'))
-const AclPouchDb = require('node_acl_pouchdb')
 
 global.db = new PouchDB('./api/db/' + process.env.NODE_ENV)
-global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
 
 module.exports = function () {
   if (!db.rel) {
@@ -17,7 +15,7 @@ module.exports = function () {
         plural: 'collections',
         relations: {
           fragments: {hasMany: 'fragment'},
-          owner: {belongsTo: 'user'}
+          owners: {hasMany: 'user'}
         }
       },
       {
@@ -25,7 +23,7 @@ module.exports = function () {
         plural: 'fragments',
         relations: {
           collection: {belongsTo: 'collection'},
-          owner: {belongsTo: 'user'}
+          owners: {hasMany: 'user'}
         }
       },
       {
@@ -33,7 +31,15 @@ module.exports = function () {
         plural: 'users',
         relations: {
           collections: {hasMany: 'collection'},
-          fragments: {hasMany: 'fragment'}
+          fragments: {hasMany: 'fragment'},
+          teams: {hasMany: 'team'}
+        }
+      },
+      {
+        singular: 'team',
+        plural: 'teams',
+        relations: {
+          members: {hasMany: 'user'}
         }
       }
     ])

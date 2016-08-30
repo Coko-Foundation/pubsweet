@@ -11,18 +11,19 @@ export default class PostList extends React.Component {
         number={key + 1}
         key={id}
         blogpost={blogpost}
+        blog={this.props.blog}
         delete={this.props.delete}
         update={this.props.update}
-        auth={this.props.auth}
+        currentUser={this.props.currentUser}
       />)
     })
     return (
       <div className={styles['list']}>
-        <table className='table table-hover'>
+        <table className="table table-hover">
           <thead>
             <tr>
-              <th className='index'>#</th>
-              <th className='main'>Title</th>
+              <th className="index">#</th>
+              <th className="main">Title</th>
               <th>Author</th>
               <th>Status</th>
               <th>Actions</th>
@@ -41,5 +42,6 @@ PostList.propTypes = {
   update: React.PropTypes.func,
   delete: React.PropTypes.func,
   blogposts: React.PropTypes.array,
-  auth: React.PropTypes.object
+  blog: React.PropTypes.object,
+  currentUser: React.PropTypes.object
 }

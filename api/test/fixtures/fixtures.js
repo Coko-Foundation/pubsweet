@@ -39,15 +39,31 @@ const otherUser = {
   'password': 'rubgy'
 }
 
-const userRole = {
-  'user': user.name,
-  'role': 'sysadmin'
+const adminUser = {
+  'type': 'user',
+  'username': 'admin',
+  'email': 'admin@admins.example.org',
+  'password': 'admin',
+  'admin': true
 }
 
-const role = {
-  'role': 'sysadmin',
-  'resource': 'fill in with e.g. collection id',
-  'permissions': '*'
+const contribTeam = {
+  teamType: {
+    name: 'Contributors',
+    permissions: 'create'
+  }
+}
+
+const readerTeam = {
+  teamType: {
+    name: 'Readers',
+    permissions: 'read'
+  }
+}
+
+const team = {
+  contributors: contribTeam,
+  readers: readerTeam
 }
 
 module.exports = {
@@ -58,7 +74,6 @@ module.exports = {
   user: user,
   updatedUser: updatedUser,
   otherUser: otherUser,
-  role: role,
-  userRole: userRole
+  adminUser: adminUser,
+  team: team
 }
-

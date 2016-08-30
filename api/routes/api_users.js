@@ -1,123 +1,154 @@
 'use strict'
 
+const STATUS = require('http-status-codes')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const express = require('express')
-const _ = require('lodash')
 
 const User = require('../models/User')
 const Authorize = require('../models/Authorize')
+const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
+const ValidationError = require('../errors/ValidationError')
 const config = require('../../config')
-const roles = require('./api_roles')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const users = express.Router()
-
-// Roles
-users.use('/', roles)
+const logger = require('../logger')
 
 function createToken (user) {
-  console.log('Creating token', user)
+  logger.info('Creating token for', user.username)
   return jwt.sign(
     {
       username: user.username,
       id: user.id
     },
     config.secret,
-    { expiresIn: 5 * 3600 })
+    { expiresIn: 24 * 3600 }
+  )
 }
 
 // Token issuing
-users.post('/authenticate', authLocal, function (req, res) {
-  return User.find(req.authInfo.id).then(function (user) {
-    return res.status(201).json(Object.assign(
-      { token: createToken(req.user) },
-      user
-    ))
-  })
+users.post('/authenticate', authLocal, (req, res) => {
+  return User.find(
+    req.authInfo.id
+  ).then(
+    user => res.status(
+      STATUS.CREATED
+    ).json(
+      Object.assign({ token: createToken(req.user) }, user)
+    )
+  ).catch(
+    err => {
+      if (err.name === 'NotFoundError') {
+        return res.status(STATUS.UNAUTHORIZED).json(Object.assign(
+          { error: 'User not found' },
+          req.authInfo
+        ))
+      }
+    }
+  )
 })
 
 // Token verify
-users.get('/authenticate', authBearer, function (req, res) {
-  return User.find(req.authInfo.id, {include: ['roles']}).then(function (user) {
-    return res.status(200).json(user)
-  })
+users.get('/authenticate', authBearer, (req, res, next) => {
+  return User.find(
+    req.authInfo.id
+  ).then(
+    user => {
+      user.token = req.authInfo.token
+      let teams = user.teams.map((teamId) => Team.find(teamId))
+      return Promise.all([user, Promise.all(teams)])
+    }
+  ).then(
+    ([user, teams]) => {
+      user.teams = teams
+      return res.status(STATUS.OK).json(user)
+    }
+  ).catch(next)
 })
 
 // Create user
-users.post('/', function (req, res, next) {
-  console.log(req.body)
+users.post('/', (req, res, next) => {
   const user = new User(req.body)
 
-  if (req.body.roles) {
-    throw new AuthorizationError('a role can only be given by an admin')
-  }
+  if (req.body.admin) throw new ValidationError('invalid propery: admin')
 
-  return user.isUniq().then(function (response) {
-    return user.save()
-  }).then(function (response) {
-    return res.status(201).json(response)
-  }).catch(function (err) {
-    next(err)
-  })
+  return user.isUniq().then(
+    response => user.save()
+  ).then(
+    response => res.status(STATUS.CREATED).json(response)
+  ).catch(
+    next
+  )
 })
 
-users.get('/', authBearer, function (req, res, next) {
-  return Authorize.it(req.authInfo.id, req.originalUrl, 'read').then(function () {
-    return User.all()
-  }).then(function (users) {
-    console.log(users)
-    return res.status(200).json({users: users})
-  }).catch(function (err) {
-    next(err)
-  })
+users.get('/', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.all()
+  ).then(
+    users => res.status(STATUS.OK).json({ users: users })
+  ).catch(
+    next
+  )
 })
 
 // Get user
-users.get('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'read').then(function () {
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+users.get('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'read', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Destroy a user
-users.delete('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'delete').then(function (user) {
-    return user.delete()
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+users.delete('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'delete', req.originalUrl
+  ).then(
+    () => User.find(req.params.id)
+  ).then(
+    user => user.delete()
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 // Update a user
-users.put('/:id', authBearer, function (req, res, next) {
-  return Authorize.it(req.user, req.originalUrl, 'update').then(function () {
-    return User.find(req.user)
-  }).then(function (user) {
-    // Can only update roles if admin
-    if (req.body.roles && !_.includes(user.roles, 'admin')) {
-      throw new AuthorizationError('only admins can set roles')
+users.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => User.find(req.user)
+  ).then(
+    user => {
+      // TODO: Move this to a validation step
+      if (req.body.admin && !user.admin) {
+        throw new AuthorizationError('only admins can set other admins')
+      }
+      return User.find(req.params.id)
     }
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return user.updateProperties(req.body)
-  }).then(function (user) {
-    return user.save()
-  }).then(function (user) {
-    return User.find(req.params.id)
-  }).then(function (user) {
-    return res.status(200).json(user)
-  }).catch(function (err) {
-    next(err)
-  })
+  ).then(
+    user => user.updateProperties(req.body)
+  ).then(
+    user => user.save()
+  ).then(
+    user => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
 })
 
 module.exports = users

@@ -2,22 +2,27 @@
 
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
-const AclPouchDb = require('node_acl_pouchdb')
 
 const dbName = './api/db/' + process.env.NODE_ENV
+const logger = require('../../logger')
 
-let dbCleaner = function () {
-  return global.db.destroy().then(function (response) {
-    global.db = new PouchDB(dbName)
-    global.acl = new AclPouchDb(new AclPouchDb.pouchdbBackend(db, 'acl'))
-    return db.allDocs()
-  }).then(function (response) {
-    console.log('Cleaning database', response)
-    return response
-  }).catch(function (err) {
-    console.log('Error cleaning database', err)
-    return err
-  })
+let dbCleaner = () => {
+  return global.db.destroy().then(
+    (response) => {
+      global.db = new PouchDB(dbName)
+      return db.allDocs()
+    }
+  ).then(
+    (response) => {
+      logger.info('Cleaning database', response)
+      return response
+    }
+  ).catch(
+    (err) => {
+      logger.error('Error cleaning database', err)
+      return err
+    }
+  )
 }
 
 module.exports = dbCleaner

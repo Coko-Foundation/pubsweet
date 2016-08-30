@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import { fetch } from '../helpers/Utils'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
 
@@ -36,17 +36,12 @@ export function getUsers () {
 
   return dispatch => {
     dispatch(getUsersRequest())
-    return fetch(API_ENDPOINT + '/users', config)
-      .then(response =>
-        response.json().then(users => ({ users, response }))
-      ).then(({ users, response }) => {
-        if (!response.ok) {
-          dispatch(getUsersFailure(users.message))
-          return Promise.reject(users)
-        } else {
-          dispatch(getUsersSuccess(users.users))
-        }
-      }).catch(err => console.log('Error: ', err))
+    return fetch(API_ENDPOINT + '/users', config).then(
+        response => response.json()
+      ).then(
+        users => dispatch(getUsersSuccess(users.users)),
+        err => dispatch(getUsersFailure(err))
+      )
   }
 }
 
@@ -87,21 +82,12 @@ export function updateUser (user) {
   return dispatch => {
     dispatch(updateUserRequest(user))
     return fetch(API_ENDPOINT + '/users/' + user.id, config)
-      .then(response => {
-        if (response.ok) {
-          return response.json().then(user => {
-            dispatch(updateUserSuccess(user))
-          })
-        } else {
-          return response.json().then(response => {
-            dispatch(updateUserFailure(response.message))
-            throw new Error(response.message)
-          })
-        }
-      }).catch(err => {
-        dispatch(updateUserFailure(err.message))
-        console.log('Error: ', err)
-      })
+      .then(
+        response => response.json()
+      ).then(
+        user => dispatch(updateUserSuccess(user)),
+        err => dispatch(updateUserFailure(err))
+      )
   }
 }
 

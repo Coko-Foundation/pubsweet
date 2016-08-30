@@ -1,10 +1,7 @@
 'use strict'
 const Model = require('./Model')
-const Role = require('./Role')
-
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcryptjs')
-const _ = require('lodash')
 
 class User extends Model {
   constructor (properties) {
@@ -17,61 +14,12 @@ class User extends Model {
     }
 
     this.type = 'user'
-    this.roles = properties.roles || []
     this.email = properties.email
     this.username = properties.username
   }
 
-  updateProperties (properties) {
-    // Roles are updated separately in an async manner
-    var roles = properties.roles
-    delete properties['roles']
-    super.updateProperties(properties)
-
-    if (roles) {
-      return this.setRoles(roles).then(function () {
-        this.roles = roles
-        return this
-      }.bind(this))
-    } else {
-      return this
-    }
-  }
-
   validPassword (password) {
     return bcrypt.compareSync(password, this.passwordHash)
-  }
-
-  addRole (role) {
-    return Role.addUserRoles(this.id, role, User).then(function () {
-      return this
-    }.bind(this))
-  }
-
-  removeRole (role) {
-    return Role.removeUserRoles(this.id, role, User).then(function () {
-      return this
-    }.bind(this))
-  }
-
-  // e.g. user.setRoles(['admin', 'contributor'])
-  setRoles (newRoles) {
-    var rolesToAdd = _.difference(newRoles, this.roles)
-    var rolesToRemove = _.difference(this.roles, newRoles)
-
-    var promises = rolesToAdd.map(function (role) {
-      return this.addRole(role)
-    }.bind(this))
-
-    promises.concat(rolesToRemove.map(function (role) {
-      return this.removeRole(role)
-    }.bind(this)))
-
-    return Promise.all(promises).then(function () {
-      return newRoles
-    }).catch(function (err) {
-      throw err
-    })
   }
 
   isUniq () {
@@ -92,6 +40,17 @@ class User extends Model {
         throw err
       }
     })
+  }
+
+  // For API display/JSON purposes only
+  static ownersWithUsername (object) {
+    return Promise.all(object.owners.map(ownerId => this.find(ownerId)))
+      .then(owners => {
+        return owners.map(owner => ({id: owner.id, username: owner.username}))
+      }).then(owners => {
+        object.owners = owners
+        return object
+      })
   }
 
   static findByEmail (email) {

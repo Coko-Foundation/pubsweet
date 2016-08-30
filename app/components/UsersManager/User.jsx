@@ -1,29 +1,11 @@
 import React from 'react'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
 
 class User extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
-  update (val) {
-    console.log('Selected: ' + val)
-    var user = Object.assign(this.props.user, { roles: val.split(',') })
-    this.props.update(user)
-  }
-
   render () {
     let { user, number } = this.props
 
-    let options = [
-      { value: 'admin', label: 'admin' },
-      { value: 'contributor', label: 'contributor' },
-      { value: 'reader', label: 'reader' }
-    ]
-
     return (
-      <tr className='user'>
+      <tr className="user">
         <td>
           {number}
         </td>
@@ -32,15 +14,6 @@ class User extends React.Component {
         </td>
         <td>
           {user.email}
-        </td>
-        <td>
-          <Select
-            name='form-field-name'
-            multi
-            value={user.roles.join(',')}
-            options={options}
-            onChange={this.update.bind(this)}
-          />
         </td>
       </tr>
     )

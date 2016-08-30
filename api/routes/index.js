@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   filename = path.join('.', 'app')
 }
 
-router.get('*', function (req, res, next) {
+router.get('*', (req, res, next) => {
   return res.sendFile('index.html', { root: filename })
 })
 

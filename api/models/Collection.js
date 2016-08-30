@@ -1,54 +1,36 @@
 'use strict'
-const _ = require('lodash')
 const Model = require('./Model')
 const Fragment = require('./Fragment')
-const User = require('./User')
 
 class Collection extends Model {
   constructor (properties) {
     super(properties)
     this.type = 'collection'
     this.title = properties.title
-    this.id = 1
   }
 
-  // Gets fragments in a collection, supports filtering by properties
-  // e.g. collection.getFragments({filter: {published: true, owner: req.user}})
+  // Gets fragments in a collection, supports filtering by function e.g.
+  // collection.getFragments({filter: fragment => {Authorize.can(req.user, 'read', fragment)})
   getFragments (options) {
     options = options || {}
+    options.filter = options.filter || (() => Promise.resolve(true))
+
     if (!this.fragments) { return [] }
-    var fragments = this.fragments.map(function (id) {
-      return Fragment.find(id)
-    })
 
-    var filteredFragments
+    var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
 
-    return Promise.all(fragments).then(function (fragments) {
-      return fragments.filter(function (fragment) {
-        if (options.filter) {
-          fragment = _.some(_.map(options.filter, function (value, key) {
-            return fragment[key] === value
-          }))
-        }
-        return fragment
-      })
-    }).then(function (fragments) {
-      filteredFragments = fragments
-
-      return Promise.all(fragments.map(function (fragment) {
-        return User.find(fragment.owner)
-      }))
-    }).then(function (owners) {
-      return owners.reduce(function (map, owner) {
-        map[owner.id] = owner.username
-        return map
-      }, {})
-    }).then(function (ownersById) {
-      return filteredFragments.map(function (fragment) {
-        fragment.owner = ownersById[fragment.owner]
-        return fragment
-      })
-    })
+    return fragments.then(
+      fragments => {
+        let filters = Promise.all(
+          fragments.map(
+            fragment => options.filter(fragment).catch(() => false)
+          )
+        )
+        return Promise.all([fragments, filters])
+      }
+    ).then(
+      ([fragments, filters]) => fragments.filter(fragment => filters.shift())
+    )
   }
 
   addFragment (fragment) {

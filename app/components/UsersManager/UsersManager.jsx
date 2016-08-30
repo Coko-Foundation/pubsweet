@@ -7,10 +7,6 @@ import * as Actions from '../../actions'
 import User from './User'
 
 class UsersManager extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentWillMount () {
     this.props.actions.getUsers()
   }
@@ -27,20 +23,21 @@ class UsersManager extends React.Component {
           update={actions.updateUser}
         />)
       })
+    } else {
+      users = []
     }
 
     return (
-      <div className='bootstrap'>
+      <div className="bootstrap">
         <Grid>
-          { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
+          { error ? <Alert bsStyle="warning">{error}</Alert> : null}
           <div>
-            <table className='table'>
+            <table className="table">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Roles</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,7 +52,7 @@ class UsersManager extends React.Component {
 }
 
 UsersManager.propTypes = {
-  users: React.PropTypes.array.isRequired,
+  users: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
   error: React.PropTypes.string
 }

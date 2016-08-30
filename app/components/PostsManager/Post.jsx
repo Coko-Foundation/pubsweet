@@ -4,9 +4,9 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
 import styles from './Post.local'
-import AuthHelper from '../../helpers/AuthHelper'
+import Authorize from '../../helpers/Authorize'
 
-export default class Blogpost extends React.Component {
+export default class Post extends React.Component {
   constructor (props) {
     super(props)
     this._onSave = this._onSave.bind(this)
@@ -21,26 +21,26 @@ export default class Blogpost extends React.Component {
   }
 
   _onSave (title) {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       title: title
     }))
   }
 
   _onPublish () {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       published_at: new Date(),
       published: true
     }))
   }
 
   _onUnpublish () {
-    this.props.update(Object.assign(this.props.blogpost, {
+    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
       published: false
     }))
   }
 
   _onDestroyClick () {
-    this.props.delete(this.props.blogpost)
+    this.props.delete(this.props.blog, this.props.blogpost)
   }
 
   _onDoubleClick () {
@@ -48,12 +48,12 @@ export default class Blogpost extends React.Component {
   }
 
   render () {
-    const { blogpost, number, auth } = this.props
+    const { blogpost, number } = this.props
     var input
     if (this.state.isEditing) {
       input =
         <TextInput
-          className='edit'
+          className="edit"
           onSave={this._onSave}
           value={blogpost.title}
         />
@@ -61,13 +61,13 @@ export default class Blogpost extends React.Component {
 
     var changePublished
     if (!blogpost.published) {
-      changePublished = <Button title='Publish' aria-label='Publish' bsStyle='success' className={styles['button']} onClick={this._onPublish}>
-          <i className='fa fa-paper-plane-o'></i>
-        </Button>
+      changePublished = <Button title="Publish" aria-label="Publish" bsStyle="success" className={styles['button']} onClick={this._onPublish}>
+        <i className="fa fa-paper-plane-o" />
+      </Button>
     } else {
-      changePublished = <Button title='Unpublish' aria-label='Unpublish' bsStyle='warning' className={styles['button']} onClick={this._onUnpublish}>
-          <i className='fa fa-chain-broken'></i>
-        </Button>
+      changePublished = <Button title="Unpublish" aria-label="Unpublish" bsStyle="warning" className={styles['button']} onClick={this._onUnpublish}>
+        <i className="fa fa-chain-broken" />
+      </Button>
     }
 
     if (blogpost.published_at) {
@@ -76,46 +76,50 @@ export default class Blogpost extends React.Component {
 
     return (
       <tr key={blogpost.key}>
-        <td className='index'>
+        <td className="index">
           {number}
         </td>
-        <td className='main'>
+        <td className="main">
           <label onDoubleClick={this._onDoubleClick}>
             {blogpost.title}
           </label>
           {input}
         </td>
         <td>
-          {blogpost.owner}
+          {blogpost.owners.map(owner => owner.username).join(', ')}
         </td>
         <td className={blogpost.published ? 'published' : 'unpublished'}>
-          <i className='fa fa-circle'></i> ({blogpost.published ? 'Published' : 'Unpublished'}) <br/>{blogpost.published_at}
+          <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}
         </td>
         <td>
-          { AuthHelper.showForUser(auth, blogpost, 'edit') &&
+          <Authorize operation="edit" object={blogpost}>
             <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
-              <Button bsStyle='primary' className={styles['button']} title='Edit' aria-label='Edit'>
-                <i className='fa fa-pencil'></i>
+              <Button bsStyle="primary" className={styles['button']} title="Edit" aria-label="Edit">
+                <i className="fa fa-pencil" />
               </Button>
-            </LinkContainer>}
+            </LinkContainer>
+          </Authorize>
 
-          { AuthHelper.showForUser(auth, blogpost, 'edit') && changePublished }
+          <Authorize operation="edit" object={blogpost}>
+            {changePublished}
+          </Authorize>
 
-          { AuthHelper.showForUser(auth, blogpost, 'delete') &&
-            <Button bsStyle='danger' className={styles['button']} onClick={this._onDestroyClick} title='Delete' aria-label='Delete'>
-              <i className='fa fa-trash-o'></i>
+          <Authorize operation="delete" object={blogpost}>
+            <Button bsStyle="danger" className={styles['button']} onClick={this._onDestroyClick} title="Delete" aria-label="Delete">
+              <i className="fa fa-trash-o" />
             </Button>
-          }
+          </Authorize>
         </td>
       </tr>
     )
   }
 }
 
-Blogpost.propTypes = {
+Post.propTypes = {
   number: React.PropTypes.number,
+  blog: React.PropTypes.object,
   blogpost: React.PropTypes.object,
   delete: React.PropTypes.func,
   update: React.PropTypes.func,
-  auth: React.PropTypes.object
+  currentUser: React.PropTypes.object
 }

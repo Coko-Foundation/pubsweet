@@ -1,59 +1,39 @@
 'use strict'
 
-// const config = require('../config')
 const Collection = require('./models/Collection')
 const User = require('./models/User')
-const Role = require('./models/Role')
+
+const logger = require('./logger')
 
 class Setup {
-  static setup (username, email, password, collection) {
-    console.log('Starting setup')
-    return new Collection({title: collection}).save().then(function (response) {
-      console.log('Created initial collection: ', collection)
-      return this.createRoles()
-    }.bind(this)).then(function () {
-      console.log('Created initial roles.')
-      return new User({
-        username: username,
-        email: email,
-        password: password
-      }).save()
-    }).then(function (user) {
-      console.log('Created user: ', user)
-      return user.addRole('admin')
-    }).then(function (user) {
-      console.log('Added user', user, 'to admin role.')
-      return user
-    }).catch(function (error) {
-      console.error(error)
-    })
-  }
+  static setup (user, collection) {
+    logger.info('Starting setup')
 
-  // Creates the basic roles: admin, contributor, reader
-  // Admin:       can do everything
-  // Contributor: can create new fragments and read public objects
-  // Reader:      can read public objects
-
-  // There's an additional implicit role: owner
-  // Owner:       can do everything on objects they own
-  static createRoles () {
-    return new Role({
-      name: 'admin',
-      resources: ['/api/users', '/api/collection', '/api/collection/fragments'],
-      permissions: '*'
-    }).save().then(function () {
-      return new Role({
-        name: 'contributor',
-        resources: ['/api/collection/fragments'],
-        permissions: ['create']
-      }).save()
-    }).then(function () {
-      return new Role({
-        name: 'reader',
-        resources: ['/api/collection/fragments'],
-        permissions: []
-      }).save()
+    const admin = new User({
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      admin: true
     })
+
+    return admin.save().then(
+      (admin) => {
+        logger.info('Created admin user: ', admin)
+        collection = new Collection(collection)
+        collection.setOwners([admin.id])
+        return collection.save()
+      }
+    ).then(
+      (collection) => {
+        logger.info('Created initial collection: ', collection.title)
+        return {
+          user: admin,
+          collection: collection
+        }
+      }
+    ).catch(
+      logger.error
+    )
   }
 }
 

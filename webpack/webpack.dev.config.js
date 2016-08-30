@@ -75,14 +75,18 @@ module.exports = [
       root: path.resolve(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
-        'routes$': config.routes,
-        'navigation$': config.navigation
+        '../../config$': path.join(__dirname, '..', 'config.js'),
+        'PubSweet-routes$': config.routes,
+        'PubSweet-navigation$': config.navigation
       }
     },
     plugins: [
       new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('dev')
+      }),
+      new webpack.ProvidePlugin({
+        'AuthsomeConfig': config.authsome
       }),
       new webpack.HotModuleReplacementPlugin(),
       // new ExtractTextPlugin('styles.css'),

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import { fetch } from '../helpers/Utils'
 import { API_ENDPOINT } from '../../config'
 import * as T from './types'
 import { push } from 'react-router-redux'
@@ -23,7 +23,7 @@ function loginSuccess (user) {
     isFetching: false,
     isAuthenticated: true,
     token: user.token,
-    roles: user.roles
+    user: user
   }
 }
 
@@ -36,10 +36,31 @@ function loginFailure (message) {
   }
 }
 
-// Three possible states for our logout process as well.
-// Since we are using JWTs, we just need to remove the token
-// from localStorage. These actions are more useful if we
-// were calling the API to log the user out
+// Calls the API to get a token and
+// dispatches actions along the way
+export function loginUser (credentials, redirectTo) {
+  let config = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=${credentials.username}&password=${credentials.password}`
+  }
+
+  return dispatch => {
+    dispatch(loginRequest(credentials))
+    return fetch(API_ENDPOINT + '/users/authenticate', config)
+      .then(
+        response => response.json()
+      ).then(
+        user => {
+          localStorage.setItem('token', user.token)
+          dispatch(loginSuccess(user))
+          if (redirectTo) dispatch(push(redirectTo))
+        },
+        err => dispatch(loginFailure(err))
+      )
+  }
+}
+
 function logoutRequest () {
   return {
     type: T.LOGOUT_REQUEST,
@@ -56,46 +77,9 @@ function logoutSuccess () {
   }
 }
 
-// Calls the API to get a token and
-// dispatches actions along the way
-export function loginUser (credentials, redirectTo) {
-  let config = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `username=${credentials.username}&password=${credentials.password}`
-  }
-
-  return dispatch => {
-    // We dispatch loginRequest to kickoff the call to the API
-    dispatch(loginRequest(credentials))
-    return fetch(API_ENDPOINT + '/users/authenticate', config)
-      .then(response =>
-        response.json()
-        .then(user => ({ user, response }))
-      ).then(({ user, response }) => {
-        if (!response.ok) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          dispatch(loginFailure(user.message))
-          return Promise.reject(user)
-        } else {
-          // If login was successful, set the token in local storage
-          localStorage.setItem('token', user.token)
-          // Dispatch the success action
-          dispatch(loginSuccess(user))
-          // Only redirect if we want to
-          if (redirectTo) {
-            dispatch(push(redirectTo))
-          }
-        }
-      }).catch(err => {
-        console.log('Error: ', err)
-        dispatch(loginFailure(err.message))
-      })
-  }
-}
-
 // Logs the user out
+// Since we are using JWTs, we just need to remove the token
+// from localStorage.
 export function logoutUser () {
   return dispatch => {
     dispatch(logoutRequest())
@@ -116,9 +100,8 @@ function getUserSuccess (user) {
     type: T.GET_USER_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    username: user.username,
-    token: user.token,
-    roles: user.roles
+    user: user,
+    token: user.token
   }
 }
 
@@ -127,7 +110,7 @@ function getUserFailure (message) {
     type: T.GET_USER_FAILURE,
     isFetching: false,
     isAuthenticated: false,
-    message
+    error: message
   }
 }
 
@@ -140,23 +123,12 @@ export function getUser () {
   return dispatch => {
     dispatch(getUserRequest())
     return fetch(API_ENDPOINT + '/users/authenticate', config)
-      .then(function (response) {
-        if (!response.ok) {
-          dispatch(getUserFailure(response.status))
-          return Promise.reject(response)
-        } else {
-          return response
-        }
-      }).then(function (response) {
-        return response.json()
-      }).then(user => ({ user }))
-      .then(({ user, response }) => {
-        user.token = localStorage.token
-        dispatch(getUserSuccess(user))
-      }).catch(err => {
-        console.log('Error: ', err)
-        dispatch(getUserFailure(err.message))
-      })
+      .then(
+        response => response.json()
+      ).then(
+        user => dispatch(getUserSuccess(user)),
+        err => dispatch(getUserFailure(err))
+      )
   }
 }
 
@@ -172,7 +144,7 @@ function signupSuccess (user) {
     type: T.SIGNUP_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    username: user.username
+    user: user
   }
 }
 
@@ -195,19 +167,14 @@ export function signupUser (user) {
   return dispatch => {
     dispatch(signupRequest())
     return fetch(API_ENDPOINT + '/users', config)
-      .then(response =>
-        response.json().then(user => ({ user, response }))
-      ).then(({ user, response }) => {
-        if (!response.ok) {
-          dispatch(signupFailure(user.message))
-          return Promise.reject(user)
-        } else {
+      .then(
+        response => response.json()
+      ).then(
+        user => {
           dispatch(signupSuccess(user))
           dispatch(push('/login'))
-        }
-      }).catch(err => {
-        console.log('Error: ', err)
-        dispatch(signupFailure(err.message))
-      })
+        },
+        err => dispatch(signupFailure(err))
+      )
   }
 }

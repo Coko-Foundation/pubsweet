@@ -9,7 +9,6 @@ import {
 export default function users (state = {
   isFetching: false
 }, action) {
-  console.log(action)
   switch (action.type) {
     case GET_USERS_SUCCESS:
       return Object.assign({}, state, {

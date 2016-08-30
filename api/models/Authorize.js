@@ -4,109 +4,97 @@ const User = require('./User')
 const Fragment = require('./Fragment')
 const Collection = require('./Collection')
 
+const Team = require('./Team')
+const Authsome = require('authsome')
+const config = require('../../config')
+const logger = require('../logger')
+
 const AuthorizationError = require('../errors/AuthorizationError')
 
 class Authorize {
-  constructor (properties) {
-
-  }
-
-  // Check if permissions exist in a global scope
-  // e.g. admin can delete all /api/users
-  static _global (userId, resource, action) {
-    console.log('_global', userId, resource, action)
-
-    return acl.isAllowed(userId, resource, action).then(function (res) {
-      if (res) {
-        console.log(userId, 'is allowed to', action, resource)
-        return true
-      } else {
-        throw new AuthorizationError(userId +
-          ' is not allowed to ' +
-          action + ' ' + resource
-        )
-      }
-    })
-  }
-
-  // Check if permissions exist in a local scope, for a single
-  // thing, e.g. contributor can edit fragment
-  static _local (userId, thing, model, id, action) {
-    console.log('_local', userId, thing, model, id, action)
-    var resource
-    var Model
-    switch (model) {
-      case 'collection':
-        Model = Collection
-        break
-      case 'collection/fragments':
-        Model = Fragment
-        break
-      case 'users':
-        Model = User
-        break
+  static getObject (resource) {
+    if (typeof resource === 'string') {
+      const object = this.getObjectFromURL(resource)
+      return object
+    } else {
+      return Promise.resolve(resource)
     }
+  }
 
-    return Model.find(id).then(function (thing) {
-      resource = thing
-      // A user can delete or update owned objects and itself
-      if ((thing.owner && userId === thing.owner) ||
-          (thing.type === 'user' && thing.id === userId)
-        ) {
-        return true
-      } else {
-        return false
-      }
-    }).then(function (owner) {
-      if (owner) {
-        return resource
-      } else {
-        if (model === 'collection/fragments') {
-          return this._global(userId, '/api/collection/fragments', action)
+  static getObjectFromURL (resourceUrl) {
+    let parts = resourceUrl.split('/')
+    if (parts[4] === 'fragments' && parts[5]) {
+      // e.g. /api/collections/1/fragments/1
+      let id = parts[5]
+      return Fragment.find(id)
+    } else if (parts[2] === 'collections' && parts[3]) {
+      let id = parts[3]
+      return Collection.find(id)
+    } else if (parts[2] === 'users' && parts[3]) {
+      let id = parts[3]
+      return User.find(id)
+    } else if (parts[2] === 'users') {
+      return User.all()
+    } else if (parts[2] === 'teams' && parts[3]) {
+      let id = parts[3]
+      return Team.find(id)
+    } else if (parts[2] === 'teams') {
+      return Team.all()
+    }
+  }
+
+  static can (userId, operation, resource) {
+    let authsome = new Authsome(
+      config.authsome.mode,
+      { teams: config.authsome.teams }
+    )
+
+    return this.getObject(
+      resource
+    ).then(
+      object => {
+        if (userId) {
+          // Fetch user and teams
+          return Promise.all(
+            [object, User.find(userId)]
+          ).then(
+            ([object, user]) => {
+              let teams = user.teams.map((teamId) => Team.find(teamId))
+              return Promise.all([object, user, Promise.all(teams)])
+            }
+          ).then(
+            ([object, user, teams]) => {
+              user.teams = teams
+              return [object, user]
+            }
+          )
         } else {
-          return this._global(userId, '/api/' + model, action)
+          // No user
+          return Promise.all([object, Promise.resolve(null)])
         }
       }
-    }.bind(this)).then(function (res) {
-      if (res) {
-        return resource
-      } else {
-        throw new AuthorizationError(userId +
-          ' is not allowed to ' +
-          action + ' ' + thing
-        )
+    ).then(
+      ([object, user]) => {
+        return [object, user, authsome.can(user, operation, object)]
       }
-    })
-  }
+    ).then(
+      ([object, user, permission]) => {
+        const name = user ? user.username : 'public'
+        const permstr = permission ? 'is' : 'is not'
+        const msg = `User ${name} ${permstr} allowed to ${operation} ${object.type} ${object.id}`
 
-  // Checks for permissions and resolves with the thing asked about,
-  // if it makes sense (for reading, updating, deleting single objects)
-  static it (userId, thing, action) {
-    if (!userId) {
-      return Promise.reject(new AuthorizationError())
-    }
-
-    console.log('Finding out if', userId, 'can', action, thing)
-
-    if (action === 'delete' || action === 'update' || action === 'read') {
-      var splitted = thing.split('/')
-      var id = splitted[3] // e.g. /api/users/1
-
-      if (id === 'fragments') { // e.g. /api/collection/fragments/1
-        var model = 'collection/fragments'
-        id = splitted[4]
-      } else {
-        model = splitted[2]
+        logger.info(msg)
+        if (permission) {
+          return permission
+        } else {
+          throw new AuthorizationError(msg)
+        }
       }
-
-      if (!id && model) {
-        return this._global(userId, '/api/' + model, action)
-      } else {
-        return this._local(userId, thing, model, id, action)
+    ).catch(
+      (err) => {
+        throw new AuthorizationError(err.message)
       }
-    } else {
-      return this._global(userId, thing, action)
-    }
+    )
   }
 }
 

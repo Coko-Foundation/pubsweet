@@ -1,9 +1,12 @@
 'use strict'
 
-const schema = require('./schema')
 const uuid = require('node-uuid')
-const NotFoundError = require('../errors/NotFoundError')
+const remove = require('lodash/remove')
 
+const schema = require('./schema')
+const NotFoundError = require('../errors/NotFoundError')
+const ValidationError = require('../errors/ValidationError')
+const logger = require('../logger')
 schema()
 
 class Model {
@@ -14,16 +17,17 @@ class Model {
   }
 
   save () {
-    console.log('Saving', this, this.id)
+    logger.info('Saving', this.type, this.id)
+
     return this.constructor.find(this.id).then(function (result) {
-      console.log('Found an existing version, this is an update of:', result)
+      logger.info('Found an existing version, this is an update of:', result)
       return result.rev
     }).then(function (rev) {
       this.rev = rev
       return this._put()
     }.bind(this)).catch(function (error) {
       if (error && error.status === 404) {
-        console.log('No existing object found, creating a new one:', error)
+        logger.info('No existing object found, creating a new one:', this.type, this.id)
         return this._put()
       } else {
         throw error
@@ -33,7 +37,7 @@ class Model {
 
   _put () {
     return db.rel.save(this.constructor.type, this).then(function (response) {
-      console.log('Actually _put', this)
+      logger.info('Actually _put', this.type, this.id, this)
       return this
     }.bind(this))
   }
@@ -42,20 +46,49 @@ class Model {
     return this.constructor.find(this.id).then(function (object) {
       return db.rel.del(this.type, object)
     }.bind(this)).then(function () {
-      console.log('Deleted', this.type, this.id)
+      logger.info('Deleted', this.type, this.id)
       return this
     }.bind(this))
   }
 
   updateProperties (properties) {
-    // TODO: Owner can not be changed
-    delete properties.owner
+    logger.info('Updating properties to', properties)
 
-    console.log('Updating properties to', properties)
+    // These properties are modified through setters
+    delete properties.owners
     // TODO: Should we screen/filter more properties here?
 
     Object.assign(this, properties)
     return this
+  }
+
+  setOwners (owners) {
+    if (Array.isArray(owners)) {
+      let currentOwners = new Set(this.owners)
+      let newOwners = new Set(owners)
+      let removeOwners = new Set([...currentOwners].filter(x => !newOwners.has(x)))
+      let addOwners = new Set([...newOwners].filter(x => !currentOwners.has(x)))
+
+      Array.from(removeOwners).map(owner => this.removeOwner(owner))
+      Array.from(addOwners).map(owner => this.addOwner(owner))
+    } else {
+      throw new ValidationError('owners should be an array')
+    }
+  }
+
+  validateOwner (owner) {
+    if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
+  }
+
+  addOwner (owner) {
+    this.validateOwner(owner)
+    this.owners = this.owners || []
+    this.owners.push(owner)
+  }
+
+  removeOwner (owner) {
+    this.validateOwner(owner)
+    remove(this.owners, owner)
   }
 
   static uuid () {
@@ -66,34 +99,40 @@ class Model {
   // User.all()
   static all (options) {
     options = options || {}
-    return db.rel.find(this.type)
-      .then(function (results) {
+    return db.rel.find(
+      this.type
+    ).then(
+      (results) => {
         return results[this.type + 's']
-      }.bind(this)).catch(function (err) {
+      }
+    ).catch(
+      (err) => {
         console.error(err)
-      })
+      }
+    )
   }
 
   // Find by id e.g.
   // User.find('394')
   static find (id, options) {
     let plural = this.type + 's'
-    return db.rel.find(this.type, id).then(function (results) {
-      if (results[plural].length === 0) {
+    return db.rel.find(this.type, id).then(results => {
+      let result = results[plural].find(result => result.id === id)
+      if (!result) {
         throw new NotFoundError()
       } else {
-        return new this(results[plural][0])
+        return new this(result)
       }
-    }.bind(this)).catch(function (err) {
+    }).catch(err => {
       if (err.name === 'NotFoundError') {
-        console.log('Object not found', err)
+        logger.info('Object not found:', this.type, id)
       }
       throw err
     })
   }
 
   static findByField (field, value) {
-    console.log('Finding', field, value)
+    logger.info('Finding', field, value)
     field = 'data.' + field
     let type = 'data.type'
 

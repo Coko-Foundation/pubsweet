@@ -7,7 +7,7 @@ import * as Actions from '../../actions'
 import './ScienceReader.scss'
 
 import LensReader from 'lens/LensReader'
-import Component from 'lens/node_modules/substance/ui/Component'
+import Component from 'substance/ui/Component'
 import DocumentSession from 'substance/model/DocumentSession'
 import LensArticleImporter from 'lens/model/LensArticleImporter'
 
@@ -57,13 +57,13 @@ class ScienceReader extends React.Component {
 
     if (blogpost) {
       return (
-        <div className='blogpost'>
-          <div className='lens-reader-wrapper'></div>
+        <div className="blogpost">
+          <div className="lens-reader-wrapper" />
         </div>
       )
     } else {
       return (
-        <div></div>
+        <div />
       )
     }
   }

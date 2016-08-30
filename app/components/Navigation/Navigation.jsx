@@ -2,19 +2,17 @@ import React, { PropTypes } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
-import AuthHelper from '../../helpers/AuthHelper'
+import Authorize from '../../helpers/Authorize'
 import NavbarUser from './NavbarUser'
 
 export default class Navigation extends React.Component {
 
   render () {
-    const { actions, auth } = this.props
+    const { actions, currentUser } = this.props
     let logoutButtonIfAuthenticated
-    if (auth.isAuthenticated) {
+    if (currentUser.isAuthenticated) {
       logoutButtonIfAuthenticated = <NavbarUser
-        roles={auth.roles}
-        username={auth.username}
-        switchRole={actions.switchRole}
+        user={currentUser.user}
         onLogoutClick={actions.logoutUser}
       />
     }
@@ -22,15 +20,15 @@ export default class Navigation extends React.Component {
       <Navbar fluid>
         <Navbar.Header>
           <NavbarBrand>
-            <a href='#'><img src='/pubsweet-rgb-small.jpg' alt='pubsweet-logo'/></a>
+            <a href="#"><img src="/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
           </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
-          <LinkContainer to='/manage/posts'>
+          <LinkContainer to="/manage/posts">
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          { AuthHelper.showForUser(auth, 'users') &&
-            <LinkContainer to='/manage/users'>
+          { Authorize.can(currentUser, 'users') &&
+            <LinkContainer to="/manage/users">
               <NavItem>Users</NavItem>
             </LinkContainer>
           }
@@ -43,5 +41,5 @@ export default class Navigation extends React.Component {
 
 Navigation.propTypes = {
   actions: PropTypes.object.isRequired,
-  auth: PropTypes.object
+  currentUser: PropTypes.object
 }

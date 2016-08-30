@@ -1,13 +1,11 @@
 const express = require('express')
 const path = require('path')
-const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const webpack = require('webpack')
-
 const index = require('./routes/index')
 const api = require('./routes/api')
-
+const logger = require('./logger')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
@@ -20,8 +18,11 @@ global.versions = {}
 
 // uncomment after placing your favicon in /public
 // app.use(favicon (path.join(__dirname, 'public', 'favicon.ico')))
-app.use(logger('dev'))
+
+
+app.use(require('morgan')('combined', { 'stream': logger.stream }))
 app.use(bodyParser.json({ limit: '50mb' }))
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
@@ -47,10 +48,14 @@ const AnonymousStrategy = require('passport-anonymous').Strategy
 const LocalStrategy = require('passport-local').Strategy
 
 passport.use('bearer', new BearerStrategy(
-  function (token, done) {
-    jwt.verify(token, config.secret, function (err, decoded) {
+  (token, done) => {
+    jwt.verify(token, config.secret, (err, decoded) => {
       if (!err) {
-        return done(null, decoded.id, {username: decoded.username, id: decoded.id})
+        return done(null, decoded.id, {
+          username: decoded.username,
+          id: decoded.id,
+          token: token
+        })
       } else {
         return done(null)
       }
@@ -60,21 +65,20 @@ passport.use('bearer', new BearerStrategy(
 
 passport.use('anonymous', new AnonymousStrategy())
 
-passport.use('local', new LocalStrategy(function (username, password, done) {
-  console.log('User finding:', username)
-  User.findByUsername(username).then(function (user) {
-    console.log('User found:', user)
+passport.use('local', new LocalStrategy((username, password, done) => {
+  logger.info('User finding:', username)
+  User.findByUsername(username).then((user) => {
+    logger.info('User found:', user.username)
     if (!user) {
       return done(null, false, { message: 'Wrong username.' })
     }
     if (!user.validPassword(password)) {
-      console.log('Invalid password for user:', username)
+      logger.info('Invalid password for user:', username)
       return done(null, false, { message: 'Wrong password.' })
     }
-    console.log('User returned', user)
     return done(null, user, {id: user.id})
-  }).catch(function (err) {
-    console.log('User not found', err)
+  }).catch((err) => {
+    logger.info('User not found', err)
     if (err) { return done(err) }
   })
 }))
@@ -87,23 +91,23 @@ app.use('/manage', index)
 app.use('/', index)
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   const err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // development error handler, will print stacktrace
   if (app.get('env') === 'dev' || app.get('env') === 'test') {
-    console.log(err)
-    console.log(err.stack)
+    logger.error(err)
+    logger.error(err.stack)
   }
 
   if (err.name === 'ConflictError') {
     return res.status(409).json({ message: err.message })
   } else if (err.name === 'AuthorizationError') {
-    res.status(403).json({ message: err.message })
+    res.status(err.status).json({ message: err.message })
   } else {
     res.status(err.status || 500).json({ message: err.message })
   }

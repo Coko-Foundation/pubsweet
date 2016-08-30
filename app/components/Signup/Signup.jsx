@@ -1,4 +1,3 @@
-// import { Field } from 'react-redux-form'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
@@ -11,6 +10,8 @@ import styles from './Signup.local.scss'
 class Signup extends Component {
   constructor (props) {
     super(props)
+
+    this.handleClick = this.handleClick.bind(this)
   }
 
   render () {
@@ -19,25 +20,25 @@ class Signup extends Component {
       <div className={styles.signup + ' bootstrap'}>
         <Row>
           <Col xs={12} md={2} mdOffset={5}>
-            { error ? <Alert bsStyle='warning'>{error}</Alert> : null}
+            { error ? <Alert bsStyle="warning">{error}</Alert> : null}
             <h1>Sign up</h1>
             <form>
-              <div className='form-group'>
-                <label htmlFor='username'>Username</label>
-                <input type='text' ref='username' className='form-control' placeholder='Username'/>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input type="text" ref="username" className="form-control" placeholder="Username" />
               </div>
-             <div className='form-group'>
-                <label htmlFor='email'>Email</label>
-                <input type='text' ref='email' className='form-control' placeholder='Email'/>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="text" ref="email" className="form-control" placeholder="Email" />
               </div>
-              <div className='form-group'>
-                <label htmlFor='password'>Password</label>
-                <input type='password' ref='password' className='form-control' placeholder='Password'/>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input type="password" ref="password" className="form-control" placeholder="Password" />
               </div>
-              <button onClick={(event) => this.handleClick(event)} className={styles.button + ' btn btn-block btn-primary'}>
+              <button onClick={this.handleClick} className={styles.button + ' btn btn-block btn-primary'}>
                 Sign up
               </button>
-              <p>Already have an account? <Link to='/login'>Log in here</Link></p>
+              <p>Already have an account? <Link to="/login">Log in here</Link></p>
             </form>
           </Col>
         </Row>
@@ -63,7 +64,6 @@ Signup.propTypes = {
 
 function mapState (state) {
   return {
-    auth: state.auth,
     error: state.error
   }
 }
