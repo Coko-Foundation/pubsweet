@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-core",
-  "version": "0.4.0",
+  "version": "0.4.0-alpha.1",
   "private": true,
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony api/test/*.js",
@@ -75,7 +75,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "ws": "^1.0.1",
-    "authsome": "git+https://gitlab.coko.foundation/pubsweet/authsome.git#master",
+    "authsome": "0.0.2",
     "http-status-codes": "^1.0.6"
   },
   "devDependencies": {
