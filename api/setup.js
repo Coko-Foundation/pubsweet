@@ -51,7 +51,7 @@ prompt.get(
 
     Setup.setup(
       admin,
-      {title: result.collection}
+      {title: result.collectionTitle}
     ).then(
       () => { logger.info(colors.rainbow('Your PubSweet is now ready!')) }
     )
