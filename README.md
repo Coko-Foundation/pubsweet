@@ -1,6 +1,6 @@
 # Build status
 
-[![build status](https://gitlab.coko.foundation/ci/projects/31/status.png?ref=master)](https://gitlab.coko.foundation/ci/projects/31?ref=master)
+[![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/builds)
 
 # Description
 
