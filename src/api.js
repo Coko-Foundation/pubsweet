@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const webpack = require('webpack')
 const index = require('./routes/index')
 const api = require('./routes/api')
 const logger = require('./logger')
@@ -25,19 +24,6 @@ app.use(bodyParser.json({ limit: '50mb' }))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-
-// Webpack development support
-if (process.env.NODE_ENV === 'dev') {
-  var webpackConfig = require(path.resolve('.', 'webpack/webpack.dev.config.js'))
-  var compiler = webpack(webpackConfig)
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: '/assets/'
-  }))
-
-  app.use(require('webpack-hot-middleware')(compiler))
-}
 
 app.use(express.static(path.resolve('.', 'public')))
 
