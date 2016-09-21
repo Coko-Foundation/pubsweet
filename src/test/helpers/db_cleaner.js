@@ -3,7 +3,7 @@
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
-const dbName = './api/db/' + process.env.NODE_ENV
+const dbName = './db/' + process.env.NODE_ENV
 const logger = require('../../logger')
 
 let dbCleaner = () => {
