@@ -1,0 +1,23 @@
+{
+  "name": "pubsweet",
+  "version": "0.0.0",
+  "description": "Pubsweet app generator and manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pubsweet",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "fs-extra": "^0.30.0",
+    "npm-programmatic": "0.0.6",
+    "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
+    "pubsweet-core": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
+    "winston": "^2.2.0"
+  }
+}
