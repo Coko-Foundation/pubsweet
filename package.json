@@ -14,7 +14,6 @@
     "fs-extra": "^0.30.0",
     "npm-programmatic": "0.0.6",
     "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
-    "pubsweet-core": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
     "winston": "^2.2.0"
   }
 }
