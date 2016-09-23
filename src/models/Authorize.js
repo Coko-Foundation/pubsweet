@@ -45,8 +45,8 @@ class Authorize {
 
   static can (userId, operation, resource) {
     let authsome = new Authsome(
-      config.authsome.mode,
-      { teams: config.authsome.teams }
+      config.get('authsome.mode'),
+      { teams: config.get('authsome.teams') }
     )
 
     return this.getObject(
