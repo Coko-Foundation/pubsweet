@@ -1,5 +1,6 @@
 module.exports = {
   secret: 'EXAMPLEDONTUSE',
+  dbPath: './db/',
   API_ENDPOINT: '/api',
   routes: 'app/routes.jsx',
   navigation: 'app/components/Navigation/Navigation.jsx',
