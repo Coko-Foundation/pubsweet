@@ -1,11 +1,12 @@
 'use strict'
 
-var PouchDB = require('pouchdb')
+const config = require('../../config')
+const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('relational-pouch'))
 PouchDB.plugin(require('pouchdb-upsert'))
 
-global.db = new PouchDB('./db/' + process.env.NODE_ENV)
+global.db = new PouchDB(config.dbPath + process.env.NODE_ENV)
 
 module.exports = function () {
   if (!db.rel) {
