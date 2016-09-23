@@ -7,8 +7,8 @@ const api = require('./routes/api')
 const logger = require('./logger')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
-const config = require('../config')
 const User = require('./models/User')
+const config = require('../config')
 
 // const favicon = require('serve-favicon')
 const app = express()
@@ -17,7 +17,6 @@ global.versions = {}
 
 // uncomment after placing your favicon in /public
 // app.use(favicon (path.join(__dirname, 'public', 'favicon.ico')))
-
 
 app.use(require('morgan')('combined', { 'stream': logger.stream }))
 app.use(bodyParser.json({ limit: '50mb' }))
@@ -35,7 +34,7 @@ const LocalStrategy = require('passport-local').Strategy
 
 passport.use('bearer', new BearerStrategy(
   (token, done) => {
-    jwt.verify(token, config.secret, (err, decoded) => {
+    jwt.verify(token, config.get('pubsweet-backend.secret'), (err, decoded) => {
       if (!err) {
         return done(null, decoded.id, {
           username: decoded.username,

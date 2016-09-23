@@ -1,21 +1,11 @@
-module.exports = {
-  secret: 'EXAMPLEDONTUSE',
+const config = require('config')
+
+// Config
+const defaultConfig = {
   dbPath: './db/',
-  API_ENDPOINT: '/api',
-  routes: 'app/routes.jsx',
-  navigation: 'app/components/Navigation/Navigation.jsx',
-  theme: 'pepper',
-  authsome: {
-    mode: 'blog',
-    teams: {
-      teamContributors: {
-        name: 'Contributors',
-        permissions: 'create'
-      },
-      teamCoauthors: {
-        name: 'Coauthors',
-        permissions: 'update'
-      }
-    }
-  }
+  secret: 'example'
 }
+
+config.util.setModuleDefaults('pubsweet-backend', defaultConfig)
+
+module.exports = config

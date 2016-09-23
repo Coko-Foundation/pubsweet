@@ -6,7 +6,7 @@ PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('relational-pouch'))
 PouchDB.plugin(require('pouchdb-upsert'))
 
-global.db = new PouchDB(config.dbPath + process.env.NODE_ENV)
+global.db = new PouchDB(config.get('pubsweet-backend.dbPath') + process.env.NODE_ENV)
 
 module.exports = function () {
   if (!db.rel) {

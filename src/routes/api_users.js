@@ -24,7 +24,7 @@ function createToken (user) {
       username: user.username,
       id: user.id
     },
-    config.secret,
+    config.get('pubsweet-backend.secret'),
     { expiresIn: 24 * 3600 }
   )
 }

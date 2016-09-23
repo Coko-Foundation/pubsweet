@@ -4,7 +4,7 @@ const config = require('../../../config')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
-const dbName = config.dbPath + process.env.NODE_ENV
+const dbName = config.get('pubsweet-backend.dbPath') + process.env.NODE_ENV
 const logger = require('../../logger')
 
 let dbCleaner = () => {
