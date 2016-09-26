@@ -1,0 +1,15 @@
+{
+  "name": "pubsweet-component-manage",
+  "version": "0.0.1",
+  "description": "Basic Manage (wrapper) component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT", 
+  "dependencies": {    
+  }
+}
+
+

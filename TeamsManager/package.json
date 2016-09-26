@@ -1,0 +1,15 @@
+{
+  "name": "pubsweet-component-teams-manager",
+  "version": "0.0.1",
+  "description": "Basic teams manager component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT", 
+  "dependencies": {    
+  }
+}
+
+
