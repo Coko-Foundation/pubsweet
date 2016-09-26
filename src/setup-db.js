@@ -1,6 +1,5 @@
 const colors = require('colors/safe')
 const logger = require('./logger')
-const path = require('path')
 
 const Collection = require('pubsweet-backend/src/models/Collection')
 const User = require('pubsweet-backend/src/models/User')
@@ -42,7 +41,8 @@ module.exports = options => {
     logger.info('Received the following answers:')
 
     for (var entry in result) {
-      logger.info(`  ${entry}: ${result[entry]}`)
+      const answer = entry === 'password' ? '<redacted>' : result[entry]
+      logger.info(`  ${entry}: ${answer}`)
     }
 
     const user = {
@@ -50,10 +50,6 @@ module.exports = options => {
       email: result.email,
       password: result.password
     }
-
-    process.env.PUBSWEET_DBDIR = path.join(
-      process.cwd(), 'api', 'db', options.dev ? 'dev' : 'production'
-    )
 
     setup(
       user, { title: result.collection }

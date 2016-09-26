@@ -1,4 +1,4 @@
-const exec = require('child_process').exec
+const spawn = require('child_process').spawn
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('./logger')
@@ -43,26 +43,22 @@ const copyapp = name => new Promise(
 const install = () => new Promise(
   (resolve, reject) => {
     logger.info('Installing app dependencies...')
-    return exec(
+    const child = spawn(
       'npm install',
-      { cwd: process.cwd() },
-      err => {
-        if (err) return reject(err)
-        logger.info('Dependencies installed')
-        return resolve()
-      }
+      { cwd: process.cwd(), stdio: 'inherit', shell: true }
     )
+    child.on('error', reject)
+    child.on('close', resolve)
   }
 )
 
 module.exports = name => {
-  fs.mkdirsSync(name)
-  process.chdir(name)
-
   return writepkgjson(
     name
   ).then(
     () => copyapp(name)
+  ).then(
+    require('./generate-config')
   ).then(
     install
   ).catch(

@@ -2,6 +2,8 @@
 
 const program = require('commander')
 const logger = require('../src/logger')
+const path = require('path')
+const fs = require('fs-extra')
 
 const properties = {
   username: {
@@ -31,6 +33,14 @@ program.parse(process.argv)
 process.env.NODE_ENV = program.dev ? 'dev' : 'production'
 
 const appname = program.args[0]
+
+fs.mkdirsSync(appname)
+process.chdir(appname)
+
+// this sets the NODE_CONFIG_DIR env var
+// it has to be run here so it supercedes any loading of node-config
+// that happens in dependencies
+require('../src/load-config')(path.join(process.cwd(), 'config'))
 
 logger.info('Generating new PubSweet app:', appname)
 

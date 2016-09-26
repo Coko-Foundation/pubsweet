@@ -10,10 +10,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "config": "^1.21.0",
+    "forever": "^0.15.2",
     "fs-extra": "^0.30.0",
+    "node-uuid": "^1.4.7",
     "npm-programmatic": "0.0.6",
     "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
+    "tmp": "0.0.29",
     "winston": "^2.2.0"
   }
 }
