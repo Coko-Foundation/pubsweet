@@ -3,11 +3,11 @@ import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as Actions from '../../actions'
+import * as Actions from 'pubsweet-frontend/src/actions'
 import Team from './Team'
 import TeamCreator from './TeamCreator'
 
-import config from '../../../config'
+import config from 'config'
 
 class TeamsManager extends React.Component {
   componentWillMount () {

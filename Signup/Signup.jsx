@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import { Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
-import { signupUser } from '../../actions'
+import { signupUser } from 'pubsweet-frontend/src/actions'
 import styles from './Signup.local.scss'
 
 class Signup extends Component {

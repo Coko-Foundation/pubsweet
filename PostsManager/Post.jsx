@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 import TextInput from './TextInput'
 import styles from './Post.local'
-import Authorize from '../../helpers/Authorize'
+import Authorize from 'pubsweet-frontend/src/helpers/Authorize'
 
 export default class Post extends React.Component {
   constructor (props) {
