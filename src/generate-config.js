@@ -11,7 +11,26 @@ const path = require('path')
 module.exports = {
   'pubsweet-backend': {
     dbPath: path.join(__dirname, '..', 'api', 'db'),
-    secret: '${uuid.v4()}'
+    secret: '${uuid.v4()}',
+    API_ENDPOINT: '/api'
+  },
+  'pubsweet-frontend': {
+    theme: 'PepperTheme',
+    routes: 'app/routes.jsx',
+    navigation: 'app/components/Navigation/Navigation.jsx'
+  },
+  authsome: {
+    mode: 'blog',
+    teams: {
+      teamContributors: {
+        name: 'Contributors',
+        permissions: 'create'
+      },
+      teamCoauthors: {
+        name: 'Coauthors',
+        permissions: 'update'
+      }
+    }
   }
 }
 `

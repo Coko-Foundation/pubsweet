@@ -11,7 +11,32 @@ const getpkgjson = name => {
     description: 'A new pubsweet app',
     dependencies: {
       'pubsweet-backend': gitlab('pubsweet/pubsweet-backend'),
-      'pubsweet-frontend': gitlab('pubsweet/pubsweet-frontend')
+      'pubsweet-frontend': gitlab('pubsweet/pubsweet-frontend'),
+      'bootstrap-sass': '^3.3.7',
+      'babel-core': '^6.14.0',
+      'babel-loader': '^6.2.5',
+      'babel-preset-es2015': '^6.14.0',
+      'babel-preset-react': '^6.11.1',
+      'babel-preset-stage-2': '^6.13.0',
+      'config': '^1.21.0',
+      'css-loader': '^0.25.0',
+      'file-loader': '^0.9.0',
+      'json-loader': '^0.5.4',
+      'sass-loader': '^4.0.2',
+      'script-loader': '^0.7.0',
+      'url-loader': '^0.5.7',
+      'extract-text-webpack-plugin': '^1.0.1',
+      'style-loader': '^0.13.1',
+      'webpack': '^1.13.2'
+    },
+    devDependencies: {
+      'eslint': '^3.6.0',
+      'eslint-config-standard': '^6.0.1',
+      'eslint-config-standard-react': '^4.0.2',
+      'eslint-loader': '^1.5.0',
+      'eslint-plugin-promise': '^2.0.1',
+      'eslint-plugin-react': '^6.3.0',
+      'eslint-plugin-standard': '^2.0.0'
     }
   }, null, 2)
 }

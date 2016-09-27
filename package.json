@@ -13,12 +13,22 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "config": "^1.21.0",
-    "forever": "^0.15.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "forever-monitor": "^1.7.0",
     "fs-extra": "^0.30.0",
+    "html-webpack-plugin": "^2.22.0",
     "node-uuid": "^1.4.7",
     "npm-programmatic": "0.0.6",
+    "prompt": "^1.0.0",
     "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
     "tmp": "0.0.29",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.2",
+    "webpack-hot-middleware": "^2.12.2",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.6.1",
+    "eslint-config-standard": "^6.1.0"
   }
 }
