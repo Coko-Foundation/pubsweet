@@ -4,7 +4,6 @@ const forever = require('forever-monitor')
 const program = require('commander')
 const logger = require('../src/logger')
 const path = require('path')
-const colors = require('colors/safe')
 
 program.option('--dev', 'Run app for development')
 
@@ -46,9 +45,8 @@ child.on(
   (process, data) => {
     logger.info(`App ${appname} started.`)
     logger.info('The app will be kept running, even if errors occur, until you stop it.')
-    logger.info(`To stop the app run: ${colors.bold(`pubsweet stop ${appname}`)}`)
-    logger.info(`To check the logs use: ${colors.bold(`pubsweet tail ${appname}`)}`)
-    logger.info(`Or find the log files in ${appname}/logs/${process.env.NODE_ENV}/{forever, stdout, stderr}.log`)
+    logger.info('To stop the app use ctrl-C')
+    logger.info(`Logs will be written to ${appname}/logs/${process.env.NODE_ENV}/{stdout, stderr}.log`)
   }
 )
 
@@ -59,12 +57,12 @@ child.on(
 
 child.on(
   'restart',
-  forever => logger.warn(`Forever restarting ${appname} for ${child.times} time`)
+  forever => logger.warn(`Restarting ${appname} for ${child.times} time`)
 )
 
 child.on(
   'exit:code',
-  code => logger.error(`Forever detected script exited with code ${code}`)
+  code => logger.error(`Detected ${appname} exited with code ${code}`)
 )
 
 child.on('error', logger.error)
