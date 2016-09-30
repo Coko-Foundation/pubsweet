@@ -7,11 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Collaborative Knowledge Foundation",
-  "license": "MIT", 
-  "dependencies": {    
+  "license": "MIT",
+  "dependencies": {
     "lens": "github:jure/lens#0ecac9677eb1a1f9f629164ed3ab70a0940293d4",
+    "lodash": "^4.16.2",
+    "react": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
     "substance": "github:jure/substance#0c77c68205d5f36347bf9c99ced37551f4f2e949"
   }
 }
-
-

@@ -20,7 +20,7 @@ class Signup extends Component {
       <div className={styles.signup + ' bootstrap'}>
         <Row>
           <Col xs={12} md={2} mdOffset={5}>
-            { error ? <Alert bsStyle="warning">{error}</Alert> : null}
+            {error ? <Alert bsStyle="warning">{error}</Alert> : null}
             <h1>Sign up</h1>
             <form>
               <div className="form-group">
