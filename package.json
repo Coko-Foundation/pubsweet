@@ -22,7 +22,7 @@
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "jsonwebtoken": "^7.1.7",
-    "lens": "github:jure/lens#0ecac9677eb1a1f9f629164ed3ab70a0940293d4",
+    "lens": "github:blahah/lens-1#patch-9",
     "lodash": "^4.0.0",
     "minimatch": "^3.0.0",
     "minimist": "^1.2.0",
