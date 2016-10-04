@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "react": "^15.3.2",
-    "pubsweet-component-navigation": "^0.0.1"
+    "pubsweet-component-navigation": "^0.0.2"
   },
   "repositories": [
     {
