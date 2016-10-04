@@ -11,5 +11,12 @@
   "dependencies": {
     "react": "^15.3.2",
     "pubsweet-component-navigation": "^0.0.1"
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+      "path": "Manage"
+    }
+  ]
 }

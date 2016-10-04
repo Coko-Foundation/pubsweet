@@ -15,5 +15,12 @@
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "substance": "github:jure/substance#0c77c68205d5f36347bf9c99ced37551f4f2e949"
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+      "path": "ScienceWriter"
+    }
+  ]
 }

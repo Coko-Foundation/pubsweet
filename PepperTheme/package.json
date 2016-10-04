@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Collaborative Knowledge Foundation",
-  "license": "MIT"
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+      "path": "PepperTheme"
+    }
+  ]
 }
