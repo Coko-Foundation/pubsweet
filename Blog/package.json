@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-blog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Basic blog component for PubSweet",
   "main": "index.js",
   "scripts": {

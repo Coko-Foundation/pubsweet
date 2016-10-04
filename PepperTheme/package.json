@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-pepper-theme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pepper's theme for PubSweet",
   "main": "index.js",
   "scripts": {
