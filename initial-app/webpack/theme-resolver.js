@@ -52,9 +52,6 @@ const ThemeResolver = {
       } else if (path.extname(request.request) === '.scss') {
         extension = '.scss'
         pathWithoutFiletype = path.dirname(request.request) + '/' + path.basename(request.request, extension)
-      } else if (path.extname(request.request) === '') {
-        extension = '.scss'
-        pathWithoutFiletype = request.request
       } else {
         self.cache[requestJson] = true
         return callback()
