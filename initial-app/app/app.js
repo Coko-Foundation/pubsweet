@@ -23,6 +23,7 @@ ReactDOM.render(
 if (module.hot) {
   module.hot.accept('pubsweet-frontend/src/components/Root', () => {
     const NextRoot = require('pubsweet-frontend/src/components/Root').default
+
     ReactDOM.render(
       <AppContainer>
         <NextRoot store={store} history={history} />

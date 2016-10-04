@@ -36,13 +36,14 @@ const child = new (forever.Monitor)(
     logFile: logpath('forever'),
     outFile: logpath('stdout'),
     errFile: logpath('stderr'),
-    cwd: process.cwd()
+    cwd: process.cwd(),
+    env: { NODE_ENV: process.env.NODE_ENV }
   }
 )
 
 child.on(
   'start',
-  (process, data) => {
+  (proc, data) => {
     logger.info(`App ${appname} started.`)
     logger.info('The app will be kept running, even if errors occur, until you stop it.')
     logger.info('To stop the app use ctrl-C')
@@ -52,7 +53,7 @@ child.on(
 
 child.on(
   'stop',
-  process => logger.info(`App ${appname} stopped (${process})`)
+  proc => logger.info(`App ${appname} stopped (${proc})`)
 )
 
 child.on(

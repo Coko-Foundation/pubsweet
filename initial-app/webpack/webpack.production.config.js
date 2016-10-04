@@ -19,7 +19,8 @@ var commonLoaders = [
     },
     include: [
       new RegExp(path.join(__dirname, '../node_modules/pubsweet-backend/src')),
-      new RegExp(path.join(__dirname, '../app'))
+      new RegExp(path.join(__dirname, '../app')),
+      new RegExp(path.join(__dirname, '../node_modules/pubsweet-component-.*'))
     ]
   },
   { test: /\.png$/, loader: 'url-loader' },

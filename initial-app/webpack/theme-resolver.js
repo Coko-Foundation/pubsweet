@@ -5,70 +5,99 @@ const config = require('config')
 
 const theme = config.get('pubsweet-frontend.theme')
 
+console.log('RESOLVING THEME', theme)
+
+const moduleName = component => {
+  const namepart = component
+    .replace(
+      /([A-Z])/g,
+      l => `-${l.toLowerCase()}`
+    )
+
+  return `pubsweet-component${namepart}`
+}
+
+const componentName = module => module
+  .replace('pubsweet-component-', '')
+  .split('-')
+  .map(w => `${w.slice(0, 1).toUpperCase()}${w.slice(1)}`)
+  .join('')
+
 // Theme Resolver
 const ThemeResolver = {
   apply: function (resolver) {
     resolver.plugin('file', function (request, callback) {
-      this.cache = this.cache || {}
+      const self = this
+      self.cache = self.cache || {}
       const requestJson = JSON.stringify(request)
 
-      if (this.cache[requestJson] === true) {
+      if (self.cache[requestJson] === true) {
         return callback()
-      } else if (this.cache[requestJson] !== undefined) {
-        return this.doResolve(['file'], this.cache[requestJson], callback)
+      } else if (self.cache[requestJson] !== undefined) {
+        return self.doResolve(['file'], self.cache[requestJson], callback)
       }
 
-      if (theme !== 'default') {
-        if (/\.local\.scss$/.test(request.request)) {
-          var extension = '.local.scss'
-          var pathWithoutFiletype = path.dirname(request.request) + '/' + path.basename(request.request, extension)
-        } else if (path.extname(request.request) === '.scss') {
-          extension = '.scss'
-          pathWithoutFiletype = path.dirname(request.request) + '/' + path.basename(request.request, extension)
-        } else if (path.extname(request.request) === '') {
-          extension = '.scss'
-          pathWithoutFiletype = request.request
-        } else {
-          this.cache[requestJson] = true
-          return callback()
-        }
+      const done = () => {
+        self.cache[requestJson] = true
+        return callback()
+      }
 
-        var folders = request.path.split('/')
-        var componentName = folders.pop() // returns ScieneWriter in case of 'app/components/ScienceWriter'
-        if (folders.pop() !== 'components') { // Only PubSweet components can be themed
-          this.cache[requestJson] = true
-          return callback()
-        }
+      if (theme === 'default') return done()
 
-        var pathWithTheme = path.resolve(request.path, '..', theme, componentName, pathWithoutFiletype) + extension
-        var pathWithoutTheme = path.resolve(request.path, pathWithoutFiletype) + extension
+      const themeModule = moduleName(theme)
 
-        fs.stat(pathWithoutTheme, function (err, stats) {
-          if (err) {
-            this.cache[requestJson] = true
-            callback()
-          } else {
-            fs.stat(pathWithTheme, function (err, stats) {
-              if (err) {
-                callback()
-              } else {
-                console.log('Theme found:', pathWithTheme)
-                var obj = {
-                  path: path.dirname(pathWithTheme),
-                  request: request.request,
-                  query: request.query,
-                  directory: request.directory
-                }
-                this.cache[requestJson] = obj
-                this.doResolve(['file'], obj, callback)
-              }
-            }.bind(this))
-          }
-        }.bind(this))
+      if (/\.local\.scss$/.test(request.request)) {
+        var extension = '.local.scss'
+        var pathWithoutFiletype = path.dirname(request.request) + '/' + path.basename(request.request, extension)
+      } else if (path.extname(request.request) === '.scss') {
+        extension = '.scss'
+        pathWithoutFiletype = path.dirname(request.request) + '/' + path.basename(request.request, extension)
+      } else if (path.extname(request.request) === '') {
+        extension = '.scss'
+        pathWithoutFiletype = request.request
       } else {
-        this.cache[requestJson] = true
-        callback()
+        self.cache[requestJson] = true
+        return callback()
       }
+
+      var folders = request.path.split('/')
+      var componentModule = folders.pop()
+
+      if (!(/pubsweet-component/.test(componentModule))) return done()
+
+      var pathWithTheme = path
+        .resolve(
+          request.path,
+          '..',
+          themeModule,
+          componentName(componentModule),
+          pathWithoutFiletype
+        ) + extension
+
+      var pathWithoutTheme = path
+        .resolve(
+          request.path,
+          pathWithoutFiletype
+        ) + extension
+
+      fs.stat(pathWithoutTheme, (err, stats) => {
+        if (err) return done()
+
+        fs.stat(pathWithTheme, (err, stats) => {
+          if (err) return callback()
+
+          console.log('** Theme found **:', pathWithTheme)
+          var obj = {
+            path: path.dirname(pathWithTheme),
+            request: request.request,
+            query: request.query,
+            directory: request.directory
+          }
+
+          self.cache[requestJson] = obj
+          self.doResolve(['file'], obj, callback)
+        })
+      })
     })
   }
 }
