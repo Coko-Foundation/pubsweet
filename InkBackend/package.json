@@ -1,0 +1,16 @@
+{
+  "name": "pubsweet-component-ink-backend",
+  "version": "0.0.1",
+  "description": "Backend INK component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "express-http-proxy": "^0.10.0"
+  }
+}
+
+
