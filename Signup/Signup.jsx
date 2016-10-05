@@ -15,7 +15,9 @@ class Signup extends Component {
   }
 
   render () {
-    const { error } = this.props
+    const self = this
+    const { error } = self.props
+    self.refs = {}
     return (
       <div className={styles.signup + ' bootstrap'}>
         <Row>
@@ -25,15 +27,18 @@ class Signup extends Component {
             <form>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" ref="username" className="form-control" placeholder="Username" />
+                <input type="text"
+                  ref={function (c) { self.refs.username = c }} className="form-control" placeholder="Username" />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="text" ref="email" className="form-control" placeholder="Email" />
+                <input type="text"
+                  ref={function (c) { self.refs.email = c }} className="form-control" placeholder="Email" />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" ref="password" className="form-control" placeholder="Password" />
+                <input type="password"
+                  ref={function (c) { self.refs.password = c }} className="form-control" placeholder="Password" />
               </div>
               <button onClick={this.handleClick} className={styles.button + ' btn btn-block btn-primary'}>
                 Sign up

@@ -3,19 +3,18 @@ import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router'
-
 import { loginUser } from 'pubsweet-frontend/src/actions'
 import styles from './Login.local.scss'
-
 class Login extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.redirectTo = this.props.location.query.next || '/manage/posts'
   }
-
   render () {
-    const { error } = this.props
+    const self = this
+    const { error } = self.props
+    self.refs = {}
     return (
       <div className="bootstrap">
         <Row>
@@ -25,20 +24,20 @@ class Login extends Component {
         </Row>
         <div className="container">
           <Row>
-            <Col md={4}>{ error ? <Alert bsStyle="warning"><i className="fa fa-exclamation-circle" />&nbsp; {error}</Alert> : null}</Col>
+            <Col md={4}>{error ? <Alert bsStyle="warning"><i className="fa fa-exclamation-circle" />&nbsp; {error}</Alert> : null}</Col>
             <Col xs={12} md={4} className={styles.login}>
               <h1>Login</h1>
               <form>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
-                  <input type="text" ref="username" className={error ? 'form-control error' : 'form-control success'} placeholder="Username" />
+                  <input type="text"
+                    ref={function (c) { self.refs.username = c }} className={error ? 'form-control error' : 'form-control success'} placeholder="Username" />
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password" ref="password" className={error ? 'form-control error' : 'form-control success'} placeholder="Password" />
+                  <input type="password"
+                    ref={function (c) { self.refs.password = c }} className={error ? 'form-control error' : 'form-control success'} placeholder="Password" />
                 </div>
-
                 <button onClick={this.handleClick}
                   className={styles.button + ' btn btn-wide btn-primary'}>
                   Login
@@ -51,7 +50,6 @@ class Login extends Component {
       </div>
     )
   }
-
   handleClick (event) {
     event.preventDefault()
     const credentials = {
@@ -61,25 +59,21 @@ class Login extends Component {
     this.props.actions.loginUser(credentials, this.redirectTo)
   }
 }
-
 Login.propTypes = {
   actions: PropTypes.object,
   location: PropTypes.object,
   error: PropTypes.string
 }
-
 function mapState (state) {
   return {
     error: state.error
   }
 }
-
 function mapDispatch (dispatch) {
   return {
     actions: bindActionCreators({ loginUser }, dispatch)
   }
 }
-
 export default connect(
   mapState, mapDispatch
 )(Login)

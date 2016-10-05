@@ -40,13 +40,18 @@ class ScienceWriter extends React.Component {
   }
 
   createDocumentSession () {
-    var content = (this.props.fragment && this.props.fragment.source) ? this.props.fragment.source : [
-      '<article xmlns="http://substance.io/science-article/0.1.0" lang="en">',
-      '<meta><title>Enter title</title><abstract>Enter abstract</abstract></meta>',
-      '<resources></resources>',
-      '<body><p id="p1">Enter your article here.</p></body>',
-      '</article>'
-    ].join('')
+    var content = (this.props.fragment && this.props.fragment.source) ? this.props.fragment.source : `
+      <article xmlns="http://substance.io/science-article/0.1.0" lang="en">
+        <meta>
+          <title>Enter title</title>
+          <abstract>Enter abstract</abstract>
+        </meta>
+        <resources></resources>
+        <body>
+          <p id="p1">Enter your article here.</p>
+        </body>
+      </article>
+    `
 
     var doc = this.createDoc(content, 'xml')
     var documentSession = new DocumentSession(doc)
