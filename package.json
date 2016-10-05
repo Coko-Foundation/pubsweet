@@ -22,7 +22,6 @@
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "jsonwebtoken": "^7.1.7",
-    "lens": "github:blahah/lens-1#patch-9",
     "lodash": "^4.0.0",
     "minimatch": "^3.0.0",
     "minimist": "^1.2.0",
@@ -44,7 +43,8 @@
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "redux-logger": "^2.0.2",
     "redux-thunk": "^0.1.0",
-    "substance": "github:jure/substance#0c77c68205d5f36347bf9c99ced37551f4f2e949"
+    "authsome": "0.0.2",
+    "http-status-codes": "^1.0.6"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
