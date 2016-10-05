@@ -17,14 +17,14 @@ class PostsManager extends React.Component {
 
   render () {
     const { blog, blogposts, actions, error, currentUser } = this.props
-    let createBlogpost = (fragment) => { actions.createFragment(blog, fragment) }
+    const createBlogpost = fragment => actions.createFragment(blog, fragment)
 
     if (Array.isArray(blogposts) && blog) {
       return (
         <div className="bootstrap">
           <div className={styles.container}>
             <Grid>
-              { error ? <Alert bsStyle="warning">{error}</Alert> : null}
+              {error ? <Alert bsStyle="warning">{error}</Alert> : null}
               <h2 className={styles['header']}>{blog && blog.title}</h2>
               <h3 className={styles['header']}>blog posts</h3>
               <PostList

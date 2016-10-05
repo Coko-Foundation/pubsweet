@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from 'react-bootstrap'
+import { FormControl, Button } from 'react-bootstrap'
 
 export default class PostCreator extends React.Component {
   constructor (props) {
@@ -15,7 +15,13 @@ export default class PostCreator extends React.Component {
         title: title,
         status: 'unpublished',
         version: 1,
-        source: undefined
+        source: [
+          '<article xmlns="http://substance.io/science-article/0.1.0" lang="en">',
+          '<meta><title>Enter title</title><abstract>Enter abstract</abstract></meta>',
+          '<resources></resources>',
+          '<body><p id="p1">Enter your article here.</p></body>',
+          '</article>'
+        ].join('')
       })
     }
   }
@@ -24,7 +30,7 @@ export default class PostCreator extends React.Component {
     return (
       <div>
         <h3>Create a new blog post</h3>
-        <Input
+        <FormControl
           type="text"
           placeholder="One fine day..."
           label="Title"
