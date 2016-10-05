@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-manage",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Basic Manage (wrapper) component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "react": "^15.3.2",
-    "pubsweet-component-navigation": "^0.0.2"
+    "react": "^15.3.2"
   },
   "repositories": [
     {

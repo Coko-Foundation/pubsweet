@@ -29,10 +29,9 @@ class ScienceReader extends React.Component {
   }
 
   initializeReader () {
-    var el = React.findDOMNode(this)
     this.reader = Component.mount(LensReader, {
       documentSession: this.createDocumentSession()
-    }, el)
+    }, this.el)
   }
 
   createDocumentSession () {
@@ -53,17 +52,18 @@ class ScienceReader extends React.Component {
   }
 
   render () {
-    const { blogpost } = this.props
+    const self = this
+    const { blogpost } = self.props
 
     if (blogpost) {
       return (
-        <div className="blogpost">
+        <div ref={function (c) { self.el = c }} className="blogpost">
           <div className="lens-reader-wrapper" />
         </div>
       )
     } else {
       return (
-        <div />
+        <div ref={function (c) { self.el = c }} />
       )
     }
   }
@@ -80,9 +80,7 @@ ScienceReader.propTypes = {
 
 function mapStateToProps (state, ownProps) {
   return {
-    blogpost: _.find(state.fragments, function (f) {
-      return f.id === ownProps.params.id
-    }),
+    blogpost: state.fragments[ownProps.params.id],
     errorMessage: state.errorMessage
   }
 }

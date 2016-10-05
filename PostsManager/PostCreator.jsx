@@ -6,7 +6,6 @@ export default class PostCreator extends React.Component {
     super(props)
     this.onSave = this.onSave.bind(this)
   }
-
   onSave (text) {
     var title = this.refs.title.getValue()
     if (title !== '') {
@@ -15,18 +14,24 @@ export default class PostCreator extends React.Component {
         title: title,
         status: 'unpublished',
         version: 1,
-        source: [
-          '<article xmlns="http://substance.io/science-article/0.1.0" lang="en">',
-          '<meta><title>Enter title</title><abstract>Enter abstract</abstract></meta>',
-          '<resources></resources>',
-          '<body><p id="p1">Enter your article here.</p></body>',
-          '</article>'
-        ].join('')
+        source: `
+          <article xmlns="http://substance.io/science-article/0.1.0" lang="en">
+            <meta>
+              <title>Enter title</title>
+              <abstract>Enter abstract</abstract>
+            </meta>
+            <resources></resources>
+            <body>
+              <p id="p1">Enter your article here.</p>
+            </body>
+          </article>
+        `
       })
     }
   }
-
   render () {
+    const self = this
+    self.refs = {}
     return (
       <div>
         <h3>Create a new blog post</h3>
@@ -34,7 +39,7 @@ export default class PostCreator extends React.Component {
           type="text"
           placeholder="One fine day..."
           label="Title"
-          ref="title"
+          ref={function (c) { self.refs.title = c }}
         />
         <Button bsStyle="primary" onClick={this.onSave} title="Create" aria-label="Create">
           <i className="fa fa-plus" /> Create
@@ -43,7 +48,6 @@ export default class PostCreator extends React.Component {
     )
   }
 }
-
 PostCreator.propTypes = {
   create: React.PropTypes.func
 }
