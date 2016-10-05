@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
 import Authorize from 'pubsweet-frontend/src/helpers/Authorize'
-import NavbarUser from './NavbarUser'
+import NavbarUser from 'pubsweet-components-navigation/NavbarUser'
 
 export default class Navigation extends React.Component {
 
@@ -20,18 +20,23 @@ export default class Navigation extends React.Component {
       <Navbar fluid>
         <Navbar.Header>
           <NavbarBrand>
-            <a href="#"><img src="/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
+            <a href='#'><img src='/pubsweet.jpg' alt='pubsweet' /></a>
           </NavbarBrand>
         </Navbar.Header>
         <Nav eventKey={0}>
-          <LinkContainer to="/manage/posts">
+          <LinkContainer to='/manage/posts'>
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          { Authorize.can(currentUser, 'users') &&
-            <LinkContainer to="/manage/users">
+          <Authorize operation='read' object='users'>
+            <LinkContainer to='/manage/users'>
               <NavItem>Users</NavItem>
             </LinkContainer>
-          }
+          </Authorize>
+          <Authorize operation='read' object='teams'>
+            <LinkContainer to='/manage/teams'>
+              <NavItem>Teams</NavItem>
+            </LinkContainer>
+          </Authorize>
         </Nav>
         { logoutButtonIfAuthenticated }
       </Navbar>
@@ -40,6 +45,6 @@ export default class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  actions: PropTypes.object.isRequired,
-  currentUser: PropTypes.object
+  actions: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object
 }
