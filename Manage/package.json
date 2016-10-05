@@ -9,7 +9,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "react": "^15.3.2"
+    "react": "^15.3.2",
+    "pubsweet-component-navigation": "^0.0.3"
   },
   "repositories": [
     {
