@@ -18,7 +18,7 @@ export default class TeamCreator extends React.Component {
   }
 
   onSave () {
-    let name = this.refs.name.getValue()
+    let name = this.refs.name.value
     let teamType = this.state.teamTypeSelected
 
     let objectId
