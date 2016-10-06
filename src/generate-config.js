@@ -47,6 +47,7 @@ const write = (path, content) => new Promise(
 )
 
 module.exports = () => {
+  fs.mkdirsSync(path.join(process.cwd(), 'config'))
   return write(
     configpath('dev'), configfile('dev')
   ).then(
