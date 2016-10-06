@@ -48,6 +48,7 @@ process.chdir(appname)
 // this sets the NODE_CONFIG_DIR env var
 // it has to be run here so it supercedes any loading of node-config
 // that happens in dependencies
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
 require('../src/load-config')(path.join(process.cwd(), 'config'))
 
 logger.info('Generating new PubSweet app:', appname)
