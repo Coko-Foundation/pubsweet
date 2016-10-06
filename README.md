@@ -38,7 +38,7 @@ pubsweet new myappname
 
 `pubsweet` will create a subdirectory with the name you supplied, and start generating the app inside. It'll ask you a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead.
 
-Running `pubsweet new` (or `pubsweet help new` or `pubsweet new --help`) shows you the available arguments for the command:
+Running `pubsweet help new` or `pubsweet new --help` shows you the available arguments for the command:
 
 ```
 Usage: pubsweet-new [options] [name]
