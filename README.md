@@ -1,6 +1,6 @@
-# PubSweet
+# PubSweet
 
-## Overview
+## Overview
 
 **PubSweet** allows you to build state-of-the-art publishing platforms. It's a modular and flexible framework consisting of:
 
