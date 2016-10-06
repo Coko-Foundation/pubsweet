@@ -23,6 +23,7 @@ const properties = {
   }
 }
 
+program.arguments('[name]')
 program.option('--dev', 'Setup app for development')
 
 for (var key in properties) {
