@@ -40,5 +40,8 @@ install(
 ).then(
   () => logger.info(`All ${components.length} components installed`)
 ).catch(
-  logger.error
+  err => {
+    logger.error(err.stack)
+    process.exit(1)
+  }
 )

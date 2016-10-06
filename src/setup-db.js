@@ -30,7 +30,10 @@ const setup = (user, collection) => {
       }
     }
   ).catch(
-    logger.error
+    err => {
+      logger.error(err.stack)
+      process.exit(1)
+    }
   )
 }
 
@@ -56,7 +59,10 @@ module.exports = options => {
     ).then(
       () => logger.info(colors.rainbow('Your PubSweet is now ready!'))
     ).catch(
-      logger.error
+      err => {
+        logger.error(err.stack)
+        process.exit(1)
+      }
     )
   }
 

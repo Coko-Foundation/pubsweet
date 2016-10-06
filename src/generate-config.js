@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const logger = require('./logger')
 const uuid = require('node-uuid')
 
@@ -58,6 +58,9 @@ module.exports = () => {
       require('config') // load config now so it uses the NODE_CONFIG_DIR we set
     }
   ).catch(
-    logger.error
+    err => {
+      logger.error(err.stack)
+      process.exit(1)
+    }
   )
 }

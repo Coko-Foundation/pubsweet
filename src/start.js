@@ -16,7 +16,10 @@ const webpackconfig = require(
 
 const runapp = (err, stats) => {
   console.log(err, stats)
-  if (err) throw err
+  if (err) {
+    logger.error(err.stack)
+    process.exit(1)
+  }
 
   if (process.env.NODE_ENV === 'dev') {
     const compiler = webpack(webpackconfig)
@@ -35,7 +38,10 @@ const runapp = (err, stats) => {
 
   const server = http.createServer(api)
 
-  const onError = err => { throw err }
+  const onError = err => {
+    logger.error(err.stack)
+    process.exit(1)
+  }
 
   const onListening = () => {
     const addr = server.address()

@@ -98,6 +98,9 @@ module.exports = name => {
   ).then(
     install
   ).catch(
-    logger.error
+    err => {
+      logger.error(err.stack)
+      process.exit(1)
+    }
   )
 }
