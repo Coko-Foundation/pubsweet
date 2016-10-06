@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-science-reader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ScienceReader component for PubSweet",
   "main": "index.js",
   "scripts": {
