@@ -31,6 +31,9 @@ module.exports = {
         permissions: 'update'
       }
     }
+  },
+  pubsweet: {
+    components: []
   }
 }
 `

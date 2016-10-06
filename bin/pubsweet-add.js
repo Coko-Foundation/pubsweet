@@ -5,7 +5,9 @@ const program = require('commander')
 const logger = require('../src/logger')
 const path = require('path')
 const colors = require('colors/safe')
+const fs = require('fs')
 
+program.arguments('<components>')
 program.parse(process.argv)
 
 let components = program.args
@@ -29,6 +31,33 @@ const install = names => new Promise(
   }
 )
 
+const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
+
+const updateconfig = names => new Promise(
+  (resolve, reject) => {
+    logger.info(`Adding ${components.length} components to config`)
+    const deployments = ['dev', 'production']
+
+    deployments.forEach(mode => {
+      const config = require(configpath(mode))
+
+      const old = config.pubsweet.components || []
+      config.pubsweet.components = old.concat(names)
+
+      configstr = `
+const path = require('path')
+
+module.exports = ${JSON.stringify(config, null, 2)}
+`
+      fs.writeFileSync(configpath(mode), configstr)
+    })
+
+    resolve()
+  }
+)
+
+const done = () => logger.info(`All ${components.length} components installed`)
+
 const resolvename = name => {
   return /$pubsweet-component/.test(name) ? name : `pubsweet-component-${name}`
 }
@@ -38,7 +67,9 @@ const names = components.map(resolvename).join(' ')
 install(
   names
 ).then(
-  () => logger.info(`All ${components.length} components installed`)
+  updateconfig(names)
+).then(
+  done
 ).catch(
   err => {
     logger.error(err.stack)

@@ -1,12 +1,12 @@
 const path = require('path')
 const http = require('http')
 
-const api = require('pubsweet-backend')
+const express = require('express')
 const webpack = require('webpack')
+const config = require('config')
+const pubsweet = require('pubsweet-backend')
 
 const logger = require('./logger')
-
-console.log('WORKING DIR:', process.cwd())
 
 const webpackconfig = require(
   path.join(
@@ -14,34 +14,46 @@ const webpackconfig = require(
   )
 )
 
+const onError = err => logger.error(err.stack) && process.exit(1)
+
+const registerDevtools = app => {
+  const compiler = webpack(webpackconfig)
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: '/assets/'
+  }))
+
+  app.use(require('webpack-hot-middleware')(compiler))
+}
+
+const registerComponents = app => {
+  const components = config.get('pubsweet.components')
+  components.forEach(name => {
+    const component = require(path.join(process.cwd(), 'node_modules', name))
+
+    if (component.backend) {
+      logger.info('Registered backend component', name)
+      component.backend(app)
+    }
+  })
+}
+
 const runapp = (err, stats) => {
-  console.log(err, stats)
-  if (err) {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  if (err) onError(err)
 
-  if (process.env.NODE_ENV === 'dev') {
-    const compiler = webpack(webpackconfig)
+  const rawapp = express()
 
-    api.use(require('webpack-dev-middleware')(compiler, {
-      noInfo: true,
-      publicPath: '/assets/'
-    }))
+  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp)
 
-    api.use(require('webpack-hot-middleware')(compiler))
-  }
+  const app = pubsweet(rawapp)
 
-  // Get port from environment or default to 3000
   const port = process.env.PORT || '3000'
-  api.set('port', port)
+  app.set('port', port)
 
-  const server = http.createServer(api)
+  registerComponents(app)
 
-  const onError = err => {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  const server = http.createServer(app)
 
   const onListening = () => {
     const addr = server.address()
