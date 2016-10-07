@@ -10,7 +10,7 @@ const getpkgjson = name => {
     name: name,
     description: 'A new pubsweet app',
     dependencies: {
-      'pubsweet-backend': gitlab('pubsweet/pubsweet-backend') + '#extensions',
+      'pubsweet-backend': gitlab('pubsweet/pubsweet-backend'),
       'pubsweet-frontend': gitlab('pubsweet/pubsweet-frontend'),
       'pubsweet-component-blog': '^0.0.7',
       'pubsweet-component-login': '^0.0.3',
