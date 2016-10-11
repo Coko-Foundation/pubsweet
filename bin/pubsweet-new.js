@@ -45,23 +45,15 @@ if (!appname || appname.length === 0) {
 fs.mkdirsSync(appname)
 process.chdir(appname)
 
-// this sets the NODE_CONFIG_DIR env var
-// it has to be run here so it supercedes any loading of node-config
-// that happens in dependencies
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
-require('../src/load-config')(path.join(process.cwd(), 'config'))
-
 logger.info('Generating new PubSweet app:', appname)
 
-const initialApp = require('../src/initial-app')
-const setupDB = require('../src/setup-db')
-
-initialApp(
-  appname
+require('../src/generate-config')(
+).then(
+  () => require('../src/initial-app')(appname)
 ).then(
   () => {
     logger.info('Running initial app setup...')
-    return setupDB({
+    return require('../src/setup-db')({
       properties: properties,
       override: program
     })

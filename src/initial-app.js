@@ -94,8 +94,6 @@ module.exports = name => {
   ).then(
     () => copyapp(name)
   ).then(
-    require('./generate-config')
-  ).then(
     install
   ).catch(
     err => {
