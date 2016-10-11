@@ -1,5 +1,5 @@
 const request = require('supertest-as-promised')
-const api = require('../../../src')
+const api = require('../../../src')()
 const STATUS = require('http-status-codes')
 const isString = require('lodash/isString')
 

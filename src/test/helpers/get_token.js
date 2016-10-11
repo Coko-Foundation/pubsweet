@@ -1,5 +1,5 @@
 const request = require('supertest-as-promised')
-const api = require('../../api')
+const api = require('../../src')()
 const STATUS = require('http-status-codes')
 
 module.exports = user => {
