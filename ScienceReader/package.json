@@ -9,7 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "lens": "github:jure/lens#0ecac9677eb1a1f9f629164ed3ab70a0940293d4",
+    "lens": "github:jure/lens#538b3197ff6bf667ada313ff8e826d2414a747bd",
     "lodash": "^4.16.2",
     "react": "^15.3.2",
     "react-redux": "^4.4.5",

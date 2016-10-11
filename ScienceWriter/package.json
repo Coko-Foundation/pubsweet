@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
-    "lens": "github:jure/lens#0ecac9677eb1a1f9f629164ed3ab70a0940293d4",
+    "lens": "github:jure/lens#538b3197ff6bf667ada313ff8e826d2414a747bd",
     "react": "^15.3.2",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
