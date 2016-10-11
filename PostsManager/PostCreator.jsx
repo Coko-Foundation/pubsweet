@@ -7,7 +7,8 @@ export default class PostCreator extends React.Component {
     this.onSave = this.onSave.bind(this)
   }
   onSave (text) {
-    var title = this.refs.title.getValue()
+    var title = this.refs.title.value
+
     if (title !== '') {
       this.props.create({
         kind: 'blogpost',

@@ -1,6 +1,5 @@
 import React from 'react'
-const config = require('config')
-import Navigation from config.get('pubsweet-frontend.navigation')
+import Navigation from 'pubsweet-component-navigation/Navigation'
 
 class Manage extends React.Component {
   render () {

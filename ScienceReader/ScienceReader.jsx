@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from 'pubsweet-frontend/src/actions'

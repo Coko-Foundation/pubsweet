@@ -71,14 +71,13 @@ class ScienceWriter extends React.Component {
   }
 
   componentDidMount () {
-    var el = React.findDOMNode(this)
     var documentSession = this.createDocumentSession()
 
     this.writer = Component.mount(LensWriter, {
       documentSession: documentSession,
       onSave: this.save.bind(this),
       onUploadFile: this.uploadFile
-    }, el)
+    }, this.el)
   }
 
   // New props arrived, update the editor
@@ -95,6 +94,7 @@ class ScienceWriter extends React.Component {
   }
 
   render () {
+    const self = this
     let editor
 
     if (this.props.fragment) {
@@ -106,7 +106,7 @@ class ScienceWriter extends React.Component {
     }
 
     return (
-      <div>
+      <div ref={function (c) { self.el = c }}>
         {editor}
       </div>
     )
