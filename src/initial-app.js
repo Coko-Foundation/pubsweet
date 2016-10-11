@@ -38,9 +38,8 @@ const getpkgjson = name => {
       'extract-text-webpack-plugin': '^1.0.1',
       'react-hot-loader': '^3.0.0-beta.5',
       'style-loader': '^0.13.1',
-      'webpack': '^1.13.2'
-    },
-    devDependencies: {
+      'webpack': '^1.13.2',
+      'html-webpack-plugin': '^2.12.0',
       'eslint': '^3.6.0',
       'eslint-config-standard': '^6.0.1',
       'eslint-config-standard-react': '^4.0.2',
