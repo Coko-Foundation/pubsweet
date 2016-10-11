@@ -14,7 +14,7 @@ const getpkgjson = name => {
       'pubsweet-frontend': gitlab('pubsweet/pubsweet-frontend'),
       'pubsweet-component-blog': '^0.0.7',
       'pubsweet-component-login': '^0.0.3',
-      'pubsweet-component-manage': '^0.0.6',
+      'pubsweet-component-manage': '^0.0.7',
       'pubsweet-component-posts-manager': '^0.0.4',
       'pubsweet-component-science-reader': '^0.0.4',
       'pubsweet-component-science-writer': '^0.0.5',
