@@ -65,6 +65,9 @@ module.exports = [
       }],
       loaders: commonLoaders
     },
+    sassLoader: {
+      includePaths: [path.join(__dirname, '..', 'node_modules')]
+    },
     resolve: {
       root: path.resolve(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
