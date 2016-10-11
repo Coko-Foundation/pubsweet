@@ -14,7 +14,7 @@ const getpkgjson = name => {
       'pubsweet-frontend': gitlab('pubsweet/pubsweet-frontend'),
       'pubsweet-component-blog': '^0.0.7',
       'pubsweet-component-login': '^0.0.3',
-      'pubsweet-component-manage': '^0.0.6',
+      'pubsweet-component-manage': '^0.0.7',
       'pubsweet-component-posts-manager': '^0.0.4',
       'pubsweet-component-science-reader': '^0.0.4',
       'pubsweet-component-science-writer': '^0.0.5',
@@ -38,9 +38,8 @@ const getpkgjson = name => {
       'extract-text-webpack-plugin': '^1.0.1',
       'react-hot-loader': '^3.0.0-beta.5',
       'style-loader': '^0.13.1',
-      'webpack': '^1.13.2'
-    },
-    devDependencies: {
+      'webpack': '^1.13.2',
+      'html-webpack-plugin': '^2.12.0',
       'eslint': '^3.6.0',
       'eslint-config-standard': '^6.0.1',
       'eslint-config-standard-react': '^4.0.2',
@@ -93,8 +92,6 @@ module.exports = name => {
     name
   ).then(
     () => copyapp(name)
-  ).then(
-    require('./generate-config')
   ).then(
     install
   ).catch(
