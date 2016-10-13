@@ -4,22 +4,41 @@ var config = require('config')
 var ThemeResolver = require('./theme-resolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
+var fs = require('fs')
 
 // We're including JSX components from our components package,
 // but excluding its node_modules.
+function getBabelIncludes () {
+  var babelIncludes = [
+    new RegExp(path.join(__dirname, '../node_modules/pubsweet-frontend/src')),
+    new RegExp(path.join(__dirname, '../app')),
+    new RegExp(path.join(__dirname, '../node_modules/pubsweet-component-.*'))
+  ]
+
+  let componentsDir = path.resolve(__dirname, '..', 'node_modules')
+  let componentsRegex = new RegExp(path.join(__dirname, '../node_modules/pubsweet-component-.*'))
+
+  let symlinkedComponents = fs.readdirSync(componentsDir).map(file => {
+    return path.resolve(componentsDir, file)
+  }).filter(file => {
+    return fs.lstatSync(file).isSymbolicLink() && componentsRegex.test(file)
+  }).map(function (componentSymlink) {
+    return new RegExp(fs.realpathSync(componentSymlink))
+  })
+
+  return babelIncludes.concat(symlinkedComponents)
+}
+
+console.log(getBabelIncludes())
 var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
     loader: 'babel',
     query: {
-      presets: ['es2015', 'react', 'stage-2'],
+      presets: ['babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2'].map(require.resolve),
       plugins: ['react-hot-loader/babel']
     },
-    include: [
-      new RegExp(path.join(__dirname, '../node_modules/pubsweet-frontend/src')),
-      new RegExp(path.join(__dirname, '../app')),
-      new RegExp(path.join(__dirname, '../node_modules/pubsweet-component-.*'))
-    ]
+    include: getBabelIncludes()
   },
   { test: /\.png$/, loader: 'url-loader' },
   {
@@ -73,13 +92,17 @@ module.exports = [
       includePaths: [path.join(__dirname, '..', 'node_modules')]
     },
     resolve: {
-      root: path.resolve(__dirname, '..'),
+      root: path.join(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
       alias: {
         'config$': 'config.js',
         'PubSweet-routes$': config.get('pubsweet-frontend.routes'),
         'PubSweet-navigation$': config.get('pubsweet-frontend.navigation')
-      }
+      },
+      fallback: [path.join(__dirname, '..', 'node_modules')]
+    },
+    resolveLoader: {
+      fallback: [path.join(__dirname, '..', 'node_modules')]
     },
     plugins: [
       new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
@@ -94,3 +117,4 @@ module.exports = [
     }
   }
 ]
+
