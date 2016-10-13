@@ -7,6 +7,10 @@ import createLogger from 'redux-logger'
 import DevTools from '../components/DevTools'
 import * as reducers from '../reducers'
 
+require('../components/external_reducers').forEach(
+  componentReducers => Object.assign(reducers, componentReducers)
+)
+
 export default function configureStore (history, initialState) {
   const reducer = combineReducers({
     ...reducers,
