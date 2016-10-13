@@ -16,9 +16,4 @@ import currentUser from './current_user'
 import users from './users'
 import teams from './teams'
 
-export { collections as collections }
-export { fragments as fragments }
-export { currentUser as currentUser }
-export { users as users }
-export { teams as teams }
-
+export { collections, fragments, currentUser, users, teams }
