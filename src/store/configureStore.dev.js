@@ -7,7 +7,7 @@ import createLogger from 'redux-logger'
 import DevTools from '../components/DevTools'
 import * as reducers from '../reducers'
 
-require('../components/external_reducers').forEach(
+require('../components/reducers').forEach(
   componentReducers => Object.assign(reducers, componentReducers)
 )
 
