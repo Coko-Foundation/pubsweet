@@ -2,7 +2,7 @@
 const localStorage = window.localStorage || undefined
 
 import {
-  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, SIGNUP_SUCCESS
+  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE
 } from '../actions/types'
 
 export default function currentUser (state = {
