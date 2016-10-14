@@ -11,12 +11,6 @@ export default function currentUser (state = {
   token: localStorage.getItem('token')
 }, action) {
   switch (action.type) {
-    case SIGNUP_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: true,
-        isAuthenticated: true,
-        user: action.user
-      })
     case GET_USER_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
