@@ -55,7 +55,10 @@ var commonLoaders = [
     include: /\.local\.s?css/, // Local styles
     loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
   }
-
+  // { test: /\.js$|\.jsx$/,
+  //   exclude: [/\/node_modules/],
+  //   loaders: ['eslint-loader']
+  // }
 ]
 
 module.exports = [
@@ -81,11 +84,6 @@ module.exports = [
     },
     devtool: 'inline-source-map',
     module: {
-      preLoaders: [{
-        test: /\.js$|\.jsx$/,
-        exclude: [/\/node_modules/, /\/lens/, /\/substance/],
-        loaders: ['eslint-loader']
-      }],
       loaders: commonLoaders
     },
     sassLoader: {

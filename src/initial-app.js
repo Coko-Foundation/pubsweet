@@ -41,11 +41,11 @@ const getpkgjson = name => {
       'webpack': '^1.13.2',
       'html-webpack-plugin': '^2.12.0',
       'eslint': '^3.6.0',
-      'eslint-config-standard': '^6.0.1',
-      'eslint-config-standard-react': '^4.0.2',
-      'eslint-loader': '^1.5.0',
+      'eslint-config-standard': '^6.2.0',
+      'eslint-config-standard-react': '^4.2.0',
+      'eslint-loader': '^1.6.0',
       'eslint-plugin-promise': '^2.0.1',
-      'eslint-plugin-react': '^6.3.0',
+      'eslint-plugin-react': '^6.4.1',
       'eslint-plugin-standard': '^2.0.0'
     }
   }, null, 2)
