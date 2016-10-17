@@ -23,7 +23,7 @@ function getBabelIncludes () {
   }).filter(file => {
     return fs.lstatSync(file).isSymbolicLink() && componentsRegex.test(file)
   }).map(function (componentSymlink) {
-    return new RegExp(fs.realpathSync(componentSymlink))
+    return new RegExp(path.join(fs.realpathSync(componentSymlink), '(?!node_modules)'))
   })
 
   return babelIncludes.concat(symlinkedComponents)
