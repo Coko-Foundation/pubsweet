@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-var config = require('config')
 var ThemeResolver = require('./theme-resolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
@@ -92,11 +91,6 @@ module.exports = [
     resolve: {
       root: path.join(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
-      alias: {
-        'config$': 'config.js',
-        'PubSweet-routes$': config.get('pubsweet-frontend.routes'),
-        'PubSweet-navigation$': config.get('pubsweet-frontend.navigation')
-      },
       fallback: [path.join(__dirname, '..', 'node_modules')]
     },
     resolveLoader: {

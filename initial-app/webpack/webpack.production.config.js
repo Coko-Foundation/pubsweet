@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-var config = require('config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ThemeResolver = require('./theme-resolver')
@@ -71,10 +70,6 @@ module.exports = [
     resolve: {
       root: path.resolve(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
-      alias: {
-        'routes$': config.get('pubsweet-frontend.routes'),
-        'navigation$': config.get('pubsweet-frontend.navigation')
-      }
     },
     plugins: [
       new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
