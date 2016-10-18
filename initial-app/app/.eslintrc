@@ -2,11 +2,5 @@
 // Copy this file, and add rule overrides as needed.
 
 {
-  "extends": ["standard", "standard-react"],
-  "ecmaFeatures": {
-    "jsx": true
-  },
-  "plugins": [
-    "react"
-  ]
+  "extends": ["standard", "standard-react"]
 }
