@@ -1,7 +1,6 @@
 'use strict'
 
 // import { includes } from 'lodash'
-import config from '../../config' // eslint-disable-line
 import Authsome from 'authsome'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -23,8 +22,8 @@ class Authorize extends React.Component {
     // /TODO
 
     this.authsome = new Authsome(
-      config.authsome.mode,
-      { teams: config.authsome.teams }
+      CONFIG.authsome.mode,
+      { teams: CONFIG.authsome.teams }
     )
   }
 

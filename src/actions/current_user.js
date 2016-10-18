@@ -1,6 +1,6 @@
 import { fetch } from '../helpers/Utils'
-const config = require('config')
-const API_ENDPOINT = config.get('pubsweet-backend.API_ENDPOINT')
+
+const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
 import * as T from './types'
 
 // TODO: This will break when rendered on a server

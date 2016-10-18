@@ -1,8 +1,6 @@
-const config = require('config')
+// const config = require('config')
 
-module.exports = config.get(
-  'pubsweet.components'
-).map(
+module.exports = CONFIG.pubsweet.components.map(
   require
 ).filter(
   component => component.frontend && component.frontend.actions

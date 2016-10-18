@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
-const config = require('config')
 import Authsome from 'authsome'
 
 import * as Actions from '../actions'
@@ -14,8 +13,8 @@ export function requireAuthentication (Component, operation, selector) {
       super(props)
 
       this.authsome = new Authsome(
-        config.get('authsome.mode'),
-        { teams: config.get('authsome.teams') }
+        CONFIG['authsome'].mode,
+        { teams: CONFIG['authsome'].teams }
       )
 
       this.checkAuthorization = this.checkAuthorization.bind(this)
