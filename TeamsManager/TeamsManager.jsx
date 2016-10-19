@@ -7,8 +7,6 @@ import * as Actions from 'pubsweet-frontend/src/actions'
 import Team from './Team'
 import TeamCreator from './TeamCreator'
 
-import config from 'config'
-
 class TeamsManager extends React.Component {
   componentWillMount () {
     this.props.actions.getUsers().then(
@@ -62,7 +60,7 @@ class TeamsManager extends React.Component {
                 create={actions.createTeam}
                 collections={collections}
                 fragments={fragments}
-                types={config.authsome.teams}
+                types={CONFIG.authsome.teams}
               />
             </div>
           </Grid>
