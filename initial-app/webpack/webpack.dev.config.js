@@ -1,13 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
-var config = require('config')
 var ThemeResolver = require('./theme-resolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
 var fs = require('fs')
 
-// We're including JSX components from our components package,
-// but excluding its node_modules.
+const CONFIG = Object.assign({}, {
+  'pubsweet-backend': config.get('pubsweet-backend'),
+  'pubsweet-frontend': config.get('pubsweet-frontend'),
+  'pubsweet': config.get('pubsweet'),
+  'authsome': config.get('authsome')
+})
+
 function getBabelIncludes () {
   var babelIncludes = [
     new RegExp(path.join(__dirname, '../node_modules/pubsweet-frontend/src')),
@@ -92,11 +96,6 @@ module.exports = [
     resolve: {
       root: path.join(__dirname, '..'),
       extensions: ['', '.js', '.jsx', '.json', '.scss'],
-      alias: {
-        'config$': 'config.js',
-        'PubSweet-routes$': config.get('pubsweet-frontend.routes'),
-        'PubSweet-navigation$': config.get('pubsweet-frontend.navigation')
-      },
       fallback: [path.join(__dirname, '..', 'node_modules')]
     },
     resolveLoader: {
@@ -105,7 +104,8 @@ module.exports = [
     plugins: [
       new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('dev')
+        'process.env.NODE_ENV': JSON.stringify('dev'),
+        'CONFIG': JSON.stringify(CONFIG)
       }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()

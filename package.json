@@ -21,7 +21,7 @@
     "node-uuid": "^1.4.7",
     "npm-programmatic": "0.0.6",
     "prompt": "^1.0.0",
-    "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
+    "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git#master",
     "tmp": "0.0.29",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.2",
