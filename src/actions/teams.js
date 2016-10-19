@@ -1,5 +1,5 @@
 import { fetch } from '../helpers/Utils'
-import { API_ENDPOINT } from '../../config'
+const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
 import * as T from './types'
 
 const teamUrl = (team) => {
@@ -252,4 +252,3 @@ export function deleteTeam (team) {
 //       })
 //   }
 // }
-
