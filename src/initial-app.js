@@ -19,7 +19,7 @@ const getpkgjson = name => {
       'pubsweet-component-science-reader': '^0.0.4',
       'pubsweet-component-science-writer': '^0.0.5',
       'pubsweet-component-signup': '^0.0.5',
-      'pubsweet-component-teams-manager': '^0.0.4',
+      'pubsweet-component-teams-manager': '^0.0.5',
       'pubsweet-component-users-manager': '^0.0.2',
       'pubsweet-component-pepper-theme': '^0.0.2',
       'bootstrap-sass': '^3.3.7',
