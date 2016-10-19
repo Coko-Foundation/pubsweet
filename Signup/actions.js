@@ -2,8 +2,7 @@ import { fetch } from 'pubsweet-frontend/helpers/Utils'
 import * as T from './types'
 import { push } from 'react-router-redux'
 
-const config = require('config')
-const API_ENDPOINT = config.get('pubsweet-backend.API_ENDPOINT')
+const API_ENDPOINT = CONFIG['pubsweet-backend']['API_ENDPOINT']
 
 function signupRequest () {
   return {
