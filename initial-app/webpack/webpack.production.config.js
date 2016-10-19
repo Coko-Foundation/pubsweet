@@ -1,13 +1,19 @@
 var path = require('path')
 var webpack = require('webpack')
+var config = require('config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ThemeResolver = require('./theme-resolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
 
-// We're including JSX components from our components package,
-// but excluding its node_modules.
+const CONFIG = Object.assign({}, {
+  'pubsweet-backend': config.get('pubsweet-backend'),
+  'pubsweet-frontend': config.get('pubsweet-frontend'),
+  'pubsweet': config.get('pubsweet'),
+  'authsome': config.get('authsome')
+})
+
 var commonLoaders = [
   {
     test: /\.js$|\.jsx$/,
@@ -79,7 +85,8 @@ module.exports = [
         inject: 'body' // Inject all scripts into the body
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        'process.env.NODE_ENV': JSON.stringify('production'),
+        'CONFIG': JSON.stringify(CONFIG)
       }),
       new ExtractTextPlugin('styles/main.css'),
       // new webpack.optimize.UglifyJsPlugin(),
