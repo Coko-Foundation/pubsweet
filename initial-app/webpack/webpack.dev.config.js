@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var config = require('config')
 var ThemeResolver = require('./theme-resolver')
 var assetsPath = path.join(__dirname, '..', 'public', 'assets')
 var publicPath = '/assets/'
