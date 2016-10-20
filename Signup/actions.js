@@ -1,4 +1,4 @@
-import { fetch } from 'pubsweet-frontend/helpers/Utils'
+import { fetch } from 'pubsweet-frontend/src/helpers/Utils'
 import * as T from './types'
 import { push } from 'react-router-redux'
 
