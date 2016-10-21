@@ -34,7 +34,7 @@ const getpkgjson = name => {
       'json-loader': '^0.5.4',
       'sass-loader': '^4.0.2',
       'script-loader': '^0.7.0',
-      'string-replace-loader', '^1.0.5',
+      'string-replace-loader': '^1.0.5',
       'url-loader': '^0.5.7',
       'extract-text-webpack-plugin': '^1.0.1',
       'react-hot-loader': '^3.0.0-beta.5',
