@@ -59,6 +59,15 @@ var commonLoaders = [
   { test: /\.css$|\.scss$/,
     include: /\.local\.s?css/, // Local styles
     loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
+  },
+  {
+    test: /\.js$|\.jsx$/,
+    loader: 'string-replace',
+    query: {
+      search: 'PUBSWEET_COMPONENTS',
+      replace: '[' + CONFIG.pubsweet.components.map(component => `require('${component}')`).join(', ') + ']'
+    },
+    include: getBabelIncludes()
   }
   // { test: /\.js$|\.jsx$/,
   //   exclude: [/\/node_modules/],

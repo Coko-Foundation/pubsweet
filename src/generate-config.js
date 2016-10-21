@@ -33,7 +33,7 @@ module.exports = {
     }
   },
   pubsweet: {
-    components: []
+    components: ['pubsweet-component-signup', 'pubsweet-component-login']
   }
 }
 `

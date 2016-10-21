@@ -30,11 +30,18 @@ const registerDevtools = app => {
 const registerComponents = app => {
   const components = config.get('pubsweet.components')
   components.forEach(name => {
-    const component = require(path.join(process.cwd(), 'node_modules', name))
+    try {
+      const component = require(path.join(process.cwd(), 'node_modules', name))
 
-    if (component.backend) {
-      logger.info('Registered backend component', name)
-      component.backend(app)
+      if (component.backend) {
+        logger.info('Registered backend component', name)
+        component.backend(app)
+      }
+    } catch (err) {
+      console.log(err)
+      console.log('Warning: Component', name, 'failed to require from Node.js. It\'s probably',
+        'a frontend component, and cannot be required in the current context (only backend components',
+        'can be required from Node.js). All is good in that case.')
     }
   })
 }
