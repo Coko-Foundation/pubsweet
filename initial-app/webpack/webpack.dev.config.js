@@ -41,7 +41,7 @@ var commonLoaders = [
     loader: 'babel',
     query: {
       presets: ['babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-2'].map(require.resolve),
-      plugins: ['react-hot-loader/babel']
+      plugins: ['react-hot-loader/babel'].map(require.resolve)
     },
     include: getBabelIncludes()
   },
@@ -125,4 +125,3 @@ module.exports = [
     }
   }
 ]
-
