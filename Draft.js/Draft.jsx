@@ -4,13 +4,13 @@ import _ from 'lodash'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from '../actions'
+import * as Actions from 'pubsweet-frontend/src/actions'
 
 class Draft extends React.Component {
   constructor (props) {
     super(props)
     let editorState
-    if (props.fragment) {
+    if (props.fragment && props.fragment.source) {
       editorState = EditorState.createWithContent(props.fragment)
     } else {
       editorState = EditorState.createEmpty()
@@ -35,11 +35,11 @@ Draft.propTypes = {
   actions: React.PropTypes.object
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   console.log(state)
   return {
     fragment: _.find(state.fragments, function (f) {
-      return f.id === state.router.params.id
+      return f.id === ownProps.params.id
     })
   }
 }
