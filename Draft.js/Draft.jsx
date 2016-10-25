@@ -1,6 +1,5 @@
 import React from 'react'
-import {Editor, EditorState} from 'draft-js'
-import _ from 'lodash'
+import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,17 +10,23 @@ class Draft extends React.Component {
     super(props)
     let editorState
     if (props.fragment && props.fragment.source) {
-      editorState = EditorState.createWithContent(props.fragment)
+      let content = convertFromRaw(props.fragment)
+      editorState = EditorState.createWithContent(content)
     } else {
       editorState = EditorState.createEmpty()
     }
 
     this.state = {editorState: editorState}
+    this.onChange = this.onChange.bind(this)
   }
 
   onChange (editorState) {
     this.setState({editorState})
-    this.props.actions.updateFragment(editorState.getCurrentContent())
+    let fragment = Object.assign(this.props.fragment, {
+      source: convertToRaw(editorState.getCurrentContent())
+    })
+
+    this.props.actions.updateFragment(this.props.blog, fragment)
   }
 
   render () {
@@ -31,6 +36,7 @@ class Draft extends React.Component {
 }
 
 Draft.propTypes = {
+  blog: React.PropTypes.object,
   fragment: React.PropTypes.object,
   actions: React.PropTypes.object
 }
@@ -38,9 +44,9 @@ Draft.propTypes = {
 function mapStateToProps (state, ownProps) {
   console.log(state)
   return {
-    fragment: _.find(state.fragments, function (f) {
-      return f.id === ownProps.params.id
-    })
+    blog: state.collections[0],
+    id: ownProps.params.id,
+    fragment: state.fragments[ownProps.params.id]
   }
 }
 
