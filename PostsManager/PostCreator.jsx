@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { FormControl, Button } from 'react-bootstrap'
 
 export default class PostCreator extends React.Component {
@@ -6,8 +7,9 @@ export default class PostCreator extends React.Component {
     super(props)
     this.onSave = this.onSave.bind(this)
   }
+
   onSave (text) {
-    var title = this.refs.title.value
+    var title = ReactDOM.findDOMNode(this.refs.title).value
 
     if (title !== '') {
       this.props.create({
@@ -15,35 +17,22 @@ export default class PostCreator extends React.Component {
         title: title,
         status: 'unpublished',
         version: 1,
-        source: `
-          <article xmlns="http://substance.io/science-article/0.1.0" lang="en">
-            <meta>
-              <title>Enter title</title>
-              <abstract>Enter abstract</abstract>
-            </meta>
-            <resources></resources>
-            <body>
-              <p id="p1">Enter your article here.</p>
-            </body>
-          </article>
-        `
+        source: undefined
       })
     }
   }
   render () {
-    const self = this
-    self.refs = {}
     return (
       <div>
         <h3>Create a new blog post</h3>
         <FormControl
-          type="text"
-          placeholder="One fine day..."
-          label="Title"
-          ref={function (c) { self.refs.title = c }}
+          type='text'
+          placeholder='One fine day...'
+          label='Title'
+          ref='title'
         />
-        <Button bsStyle="primary" onClick={this.onSave} title="Create" aria-label="Create">
-          <i className="fa fa-plus" /> Create
+        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
+          <i className='fa fa-plus' /> Create
         </Button>
       </div>
     )
