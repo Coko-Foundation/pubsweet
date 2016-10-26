@@ -42,7 +42,6 @@ Draft.propTypes = {
 }
 
 function mapStateToProps (state, ownProps) {
-  console.log(state)
   return {
     blog: state.collections[0],
     id: ownProps.params.id,
