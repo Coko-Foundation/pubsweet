@@ -1,59 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
-var config = require('config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ThemeResolver = require('./theme-resolver')
-var assetsPath = path.join(__dirname, '..', 'public', 'assets')
-var publicPath = '/assets/'
-
-const CONFIG = Object.assign({}, {
-  'pubsweet-backend': config.get('pubsweet-backend'),
-  'pubsweet-frontend': config.get('pubsweet-frontend'),
-  'pubsweet': config.get('pubsweet'),
-  'authsome': config.get('authsome')
-})
-
-var commonLoaders = [
-  {
-    test: /\.js$|\.jsx$/,
-    loader: 'babel',
-    query: {
-      presets: ['es2015', 'react', 'stage-2'],
-      plugins: ['react-hot-loader/babel']
-    },
-    include: [
-      new RegExp(path.join(__dirname, '../node_modules/pubsweet-backend/src')),
-      new RegExp(path.join(__dirname, '../app')),
-      new RegExp(path.join(__dirname, '../node_modules/pubsweet-component-.*'))
-    ]
-  },
-  { test: /\.png$/, loader: 'url-loader' },
-  {
-    test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
-    loader: 'url-loader?prefix=font/&limit=10000'
-  },
-  { test: /\.html$/, loader: 'html-loader' },
-  { test: /\.json$/, loader: 'json-loader' },
-  { test: /\.css$|\.scss$/,
-    exclude: /\.local\.s?css$/, // Exclude local styles from global
-    loader: 'style-loader!css-loader!sass-loader'
-  },
-  { test: /\.css$|\.scss$/,
-    include: /\.local\.s?css/, // Local styles
-    loader: 'style-loader!css-loader?modules&importLoaders=1!sass-loader'
-  },
-  {
-    test: /\.js$|\.jsx$/,
-    loader: 'string-replace',
-    query: {
-      search: 'PUBSWEET_COMPONENTS',
-      replace: '[' + CONFIG.pubsweet.components.map(component => `require('${component}')`).join(', ') + ']'
-    },
-    include: getBabelIncludes()
-  }
-
-]
 
 module.exports = [
   {
@@ -67,9 +15,9 @@ module.exports = [
       ]
     },
     output: {
-      path: assetsPath,
+      path: path.join(__dirname, '..', 'public', 'assets'),
       filename: '[name]-[hash].js',
-      publicPath: publicPath
+      publicPath: '/assets/'
     },
     module: {
       preLoaders: [{
@@ -77,17 +25,13 @@ module.exports = [
         exclude: [/\/node_modules/, /\/lens/, /\/substance/],
         loaders: ['eslint-loader']
       }],
-      loaders: commonLoaders
-    },
-    sassLoader: {
-      includePaths: [path.join(__dirname, '..', 'node_modules')]
+      rules: require('./common-rules')
     },
     resolve: {
-      root: path.resolve(__dirname, '..'),
-      extensions: ['', '.js', '.jsx', '.json', '.scss'],
+      modules: [path.resolve(__dirname, '..', 'node_modules')],
+      extensions: ['.js', '.jsx', '.json', '.scss']
     },
     plugins: [
-      new webpack.ResolverPlugin([ThemeResolver], ['normal', 'context', 'loader']),
       new HtmlWebpackPlugin({
         title: 'PubSweet app',
         template: '../app/index.ejs', // Load a custom template
@@ -95,7 +39,7 @@ module.exports = [
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
-        'CONFIG': JSON.stringify(CONFIG)
+        'CONFIG': JSON.stringify(require('./config-shim'))
       }),
       new ExtractTextPlugin('styles/main.css'),
       // new webpack.optimize.UglifyJsPlugin(),
