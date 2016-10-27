@@ -43,7 +43,9 @@ const getpkgjson = name => {
       'style-loader': '^0.13.1',
       'webpack': '^2.1.0-beta.25',
       'webpack-dev-middleware': '^1.8.4',
-      'webpack-hot-middleware': '^2.13.0'
+      'webpack-hot-middleware': '^2.13.0',
+      'autobind-decorator': '^1.3.4',
+      'babel-plugin-transform-decorators-legacy': '^1.3.4',
       'html-webpack-plugin': '^2.24.0',
       'eslint': '^3.6.0',
       'eslint-config-standard': '^6.2.0',

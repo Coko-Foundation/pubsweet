@@ -2,13 +2,16 @@ const path = require('path')
 const CONFIG = require('./config-shim')
 const babelIncludes = require('./babel-includes')
 
-const resolve = entry => {
+const resolve = (type, entry) => {
   if (typeof entry === 'string') {
-    return require.resolve(`babel-preset-${entry}`)
+    return require.resolve(`babel-${type}-${entry}`)
   } else {
-    return [require.resolve(`babel-preset-${entry[0]}`), entry[1]]
+    return [require.resolve(`babel-${type}-${entry[0]}`), entry[1]]
   }
 }
+
+const resolvePreset = entry => resolve('preset', entry)
+const resolvePlugin = entry => resolve('plugin', entry)
 
 module.exports = [
   {
@@ -19,8 +22,11 @@ module.exports = [
         ['es2015', { 'modules': 'commonjs' }],
         'react',
         'stage-2'
-      ].map(resolve),
-      plugins: ['react-hot-loader/babel']
+      ].map(resolvePreset),
+      plugins: [
+        'react-hot-loader/babel',
+        resolvePlugin('transform-decorators-legacy')
+      ]
     },
     include: babelIncludes
   },
