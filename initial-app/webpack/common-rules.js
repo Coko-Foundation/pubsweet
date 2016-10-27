@@ -2,6 +2,14 @@ const path = require('path')
 const CONFIG = require('./config-shim')
 const babelIncludes = require('./babel-includes')
 
+const resolve = entry => {
+  if (typeof entry === 'string') {
+    return require.resolve(`babel-preset-${entry}`)
+  } else {
+    return [require.resolve(`babel-preset-${entry[0]}`), entry[1]]
+  }
+}
+
 module.exports = [
   {
     test: /\.js$|\.jsx$/,
@@ -11,7 +19,7 @@ module.exports = [
         ['es2015', { 'modules': 'commonjs' }],
         'react',
         'stage-2'
-      ],
+      ].map(resolve),
       plugins: ['react-hot-loader/babel']
     },
     include: babelIncludes
