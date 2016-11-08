@@ -30,7 +30,7 @@ const logpath = type => path.join(
 const child = new (forever.Monitor)(
   path.join(__dirname, '../src/start.js'),
   {
-    command: 'node --preserve-symlinks',
+    command: 'node',
     silent: false,
     watch: false,
     max: 10,

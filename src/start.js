@@ -20,7 +20,7 @@ const registerDevtools = app => {
   const compiler = webpack(webpackconfig)
 
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
+    noInfo: false,
     publicPath: '/assets/'
   }))
 

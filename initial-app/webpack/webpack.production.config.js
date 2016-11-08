@@ -28,7 +28,12 @@ module.exports = [
       rules: require('./common-rules')
     },
     resolve: {
-      modules: [path.resolve(__dirname, '..', 'node_modules')],
+      symlinks: false,
+      modules: [
+        path.resolve(__dirname, '..'),
+        path.join(__dirname, '..', 'node_modules'),
+        'node_modules'
+      ],
       extensions: ['.js', '.jsx', '.json', '.scss']
     },
     plugins: [
