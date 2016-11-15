@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+var ThemePlugin = require('pubsweet-theme-plugin')
+var config = require('../config/dev')
 
 module.exports = [
   {
@@ -30,6 +32,7 @@ module.exports = [
         path.resolve(__dirname, '..', 'node_modules'),
         'node_modules'
       ],
+      plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)]
       extensions: ['.js', '.jsx', '.json', '.scss'],
       enforceExtension: false
     },
