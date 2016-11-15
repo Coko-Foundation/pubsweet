@@ -23,16 +23,16 @@ export default class Navigation extends React.Component {
             <a href='#'><img src='/pubsweet.jpg' alt='pubsweet' /></a>
           </NavbarBrand>
         </Navbar.Header>
-        <Nav eventKey={0}>
+        <Nav>
           <LinkContainer to='/manage/posts'>
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          <Authorize operation='read' object='users'>
+          <Authorize operation='read' object=currentUser.user>
             <LinkContainer to='/manage/users'>
               <NavItem>Users</NavItem>
             </LinkContainer>
           </Authorize>
-          <Authorize operation='read' object='teams'>
+          <Authorize operation='read' object={}>
             <LinkContainer to='/manage/teams'>
               <NavItem>Teams</NavItem>
             </LinkContainer>

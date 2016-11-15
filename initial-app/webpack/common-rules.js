@@ -1,5 +1,5 @@
 const path = require('path')
-const CONFIG = require('./config-shim')
+const config = require(`../config/${process.env.NODE_ENV}.js`)
 const babelIncludes = require('./babel-includes')
 
 const resolve = (type, entry) => {
@@ -16,7 +16,7 @@ const resolvePlugin = entry => resolve('plugin', entry)
 module.exports = [
   {
     test: /\.js$|\.jsx$/,
-    loader: 'babel',
+    loader: 'babel-loader',
     query: {
       presets: [
         ['es2015', { 'modules': 'commonjs' }],
@@ -85,10 +85,10 @@ module.exports = [
   },
   {
     test: /\.js$|\.jsx$/,
-    loader: 'string-replace',
+    loader: 'string-replace-loader',
     query: {
       search: 'PUBSWEET_COMPONENTS',
-      replace: '[' + CONFIG.pubsweet.components.map(component => `require('${component}')`).join(', ') + ']'
+      replace: '[' + config.pubsweet.components.map(component => `require('${component}')`).join(', ') + ']'
     },
     include: babelIncludes
   }

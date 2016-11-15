@@ -67,6 +67,6 @@ child.on(
   code => logger.error(`Detected ${appname} exited with code ${code}`)
 )
 
-child.on('error', logger.error)
+child.on('error', err => logger.error(err.stack))
 
 child.start()

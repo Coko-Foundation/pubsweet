@@ -7,6 +7,7 @@ const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 
 const configfile = mode => `
 const path = require('path')
+const blogmode = require('authsome/src/modes/blog')
 
 module.exports = {
   'pubsweet-backend': {
@@ -20,7 +21,7 @@ module.exports = {
     navigation: 'app/components/Navigation/Navigation.jsx'
   },
   authsome: {
-    mode: 'blog',
+    mode: blogmode,
     teams: {
       teamContributors: {
         name: 'Contributors',
