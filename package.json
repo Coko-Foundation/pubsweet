@@ -23,10 +23,12 @@
     "prompt": "^1.0.0",
     "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git#master",
     "tmp": "0.0.29",
-    "webpack": "^2.1.0-beta.25",
+    "webpack": "^2.1.0-beta.26",
     "webpack-dev-middleware": "^1.8.2",
-    "webpack-hot-middleware": "^2.13.0",
-    "winston": "^2.2.0"
+    "webpack-hot-middleware": "^2.13.2",
+    "pubsweet-theme-plugin": "^0.0.1",
+    "winston": "^2.2.0",
+    "enhanced-resolve": "git+https://github.com/jure/enhanced-resolve.git#fix_external_plugins"
   },
   "devDependencies": {
     "eslint": "^3.6.1",
