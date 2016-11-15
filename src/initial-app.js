@@ -30,7 +30,6 @@ const getpkgjson = name => {
       'babel-preset-es2015-native-modules': '^6.9.4',
       'babel-preset-react': '^6.11.1',
       'babel-preset-stage-2': '^6.13.0',
-      'config': '^1.21.0',
       'css-loader': '^0.25.0',
       'file-loader': '^0.9.0',
       'json-loader': '^0.5.4',
@@ -53,7 +52,8 @@ const getpkgjson = name => {
       'eslint-loader': '^1.6.0',
       'eslint-plugin-promise': '^2.0.1',
       'eslint-plugin-react': '^6.4.1',
-      'eslint-plugin-standard': '^2.0.0'
+      'eslint-plugin-standard': '^2.0.0',
+      'authsome': '^0.0.4'
     }
   }, null, 2)
 }

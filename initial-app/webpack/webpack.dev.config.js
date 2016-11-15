@@ -27,21 +27,27 @@ module.exports = [
       symlinks: false,
       modules: [
         path.resolve(__dirname, '..'),
-        path.join(__dirname, '..', 'node_modules'),
+        path.resolve(__dirname, '..', 'node_modules'),
         'node_modules'
       ],
-      extensions: ['.js', '.jsx', '.json', '.scss']
+      extensions: ['.js', '.jsx', '.json', '.scss'],
+      enforceExtension: false
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('dev'),
-        'CONFIG': JSON.stringify(require('./config-shim'))
+        'process.env': {
+          'NODE_ENV': JSON.stringify('dev')
+        }
       }),
+      new webpack.ProvidePlugin({
+        'CONFIG': path.resolve(__dirname, '..', 'config', 'dev.js')
+      })
     ],
     node: {
-      fs: 'empty'
+      fs: 'empty',
+      __dirname: true
     }
   }
 ]

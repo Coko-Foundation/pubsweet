@@ -3,8 +3,8 @@ const http = require('http')
 
 const express = require('express')
 const webpack = require('webpack')
-const config = require('config')
 const pubsweet = require('pubsweet-backend')
+const config = require(`${process.env.NODE_CONFIG_DIR}/${process.env.NODE_ENV}.js`)
 
 const logger = require('./logger')
 
@@ -20,7 +20,11 @@ const registerDevtools = app => {
   const compiler = webpack(webpackconfig)
 
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: false,
+    noInfo: true,
+    stats: {
+      colors: true,
+      chunks: false
+    },
     publicPath: '/assets/'
   }))
 
@@ -28,7 +32,7 @@ const registerDevtools = app => {
 }
 
 const registerComponents = app => {
-  const components = config.get('pubsweet.components')
+  const components = config.pubsweet.components
   components.forEach(name => {
     try {
       const component = require(path.join(process.cwd(), 'node_modules', name))
@@ -38,10 +42,7 @@ const registerComponents = app => {
         component.backend(app)
       }
     } catch (err) {
-      console.log(err)
-      console.log('Warning: Component', name, 'failed to require from Node.js. It\'s probably',
-        'a frontend component, and cannot be required in the current context (only backend components',
-        'can be required from Node.js). All is good in that case.')
+      logger.info('Deferred loading frontend component', name)
     }
   })
 }

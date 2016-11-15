@@ -43,15 +43,18 @@ module.exports = [
         inject: 'body' // Inject all scripts into the body
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-        'CONFIG': JSON.stringify(require('./config-shim'))
+        'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      new webpack.ProvidePlugin({
+        'CONFIG': path.resolve(__dirname, '..', 'config', 'production.js')
       }),
       new ExtractTextPlugin('styles/main.css'),
       // new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
     ],
     node: {
-      fs: 'empty'
+      fs: 'empty',
+      __dirname: true
     }
   }
 ]
