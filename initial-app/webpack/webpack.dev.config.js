@@ -32,7 +32,7 @@ module.exports = [
         path.resolve(__dirname, '..', 'node_modules'),
         'node_modules'
       ],
-      plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)]
+      plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)],
       extensions: ['.js', '.jsx', '.json', '.scss'],
       enforceExtension: false
     },
