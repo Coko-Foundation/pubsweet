@@ -20,11 +20,6 @@ module.exports = [
       publicPath: '/assets/'
     },
     module: {
-      preLoaders: [{
-        test: /\.js$|\.jsx$/,
-        exclude: [/\/node_modules/, /\/lens/, /\/substance/],
-        loaders: ['eslint-loader']
-      }],
       rules: require('./common-rules')
     },
     resolve: {
