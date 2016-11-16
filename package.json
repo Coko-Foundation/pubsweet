@@ -1,13 +1,13 @@
 {
   "name": "pubsweet",
-  "version": "0.0.0",
-  "description": "Pubsweet app generator and manager",
+  "version": "0.0.1",
+  "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "keywords": [
     "pubsweet",
     "cli"
   ],
-  "author": "",
+  "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
     "authsome": "0.0.4",
@@ -21,7 +21,7 @@
     "node-uuid": "^1.4.7",
     "npm-programmatic": "0.0.6",
     "prompt": "^1.0.0",
-    "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git#master",
+    "pubsweet-backend": "^0.5.0",
     "tmp": "0.0.29",
     "webpack": "^2.1.0-beta.26",
     "webpack-dev-middleware": "^1.8.2",
@@ -30,6 +30,10 @@
     "winston": "^2.2.0",
     "enhanced-resolve": "git+https://github.com/jure/enhanced-resolve.git#fix_external_plugins"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  }
   "devDependencies": {
     "eslint": "^3.6.1",
     "eslint-config-standard": "^6.1.0",

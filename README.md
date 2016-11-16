@@ -16,7 +16,7 @@ You can read more about the ideas behind PubSweet on [the Collaborative Knowledg
 ### Prerequisites
 
 - node v6+
-- npm v3+
+- npm v3+ (please do not use yarn yet, there is an known and unresolved issue with it in our case)
 
 ### Installation
 
