@@ -10,6 +10,4 @@ program
   .command('run [path]', 'start pubsweet app at [path] (default: current directory)')
   .command('add <components>', 'add one or more components to the app in the current working directory')
 
-program.on('--help', require('../src/header'))
-
 program.parse(process.argv)
