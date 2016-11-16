@@ -23,8 +23,10 @@ const properties = {
   }
 }
 
-program.arguments('[name]')
-program.option('--dev', 'Setup app for development')
+program
+  .arguments('[name]')
+  .description('Generate a new app in directory [name].')
+  .option('--dev', 'Setup app for development')
 
 for (var key in properties) {
   program.option(`--${key} [string]`, properties[key].description)

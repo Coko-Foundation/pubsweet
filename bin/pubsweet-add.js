@@ -7,8 +7,12 @@ const path = require('path')
 const colors = require('colors/safe')
 const fs = require('fs')
 
-program.arguments('<components>')
-program.parse(process.argv)
+program
+  .arguments('<components>')
+  .description(`Add component(s) to an app.
+
+  <components> - a space-separated list of one or more components.`)
+  .parse(process.argv)
 
 let components = program.args
 if (!components || components.length === 0) {

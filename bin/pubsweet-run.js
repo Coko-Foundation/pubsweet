@@ -5,9 +5,10 @@ const program = require('commander')
 const logger = require('../src/logger')
 const path = require('path')
 
-program.option('--dev', 'Run app for development')
-
-program.parse(process.argv)
+program
+  .option('--dev', 'Run in development mode')
+  .description('Run the app at [path].')
+  .parse(process.argv)
 
 process.env.NODE_ENV = program.dev ? 'dev' : 'production'
 
