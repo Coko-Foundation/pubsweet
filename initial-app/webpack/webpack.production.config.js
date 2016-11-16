@@ -2,6 +2,8 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ThemePlugin = require('pubsweet-theme-plugin')
+var config = require('../config/production')
 
 module.exports = [
   {
@@ -29,7 +31,8 @@ module.exports = [
         path.join(__dirname, '..', 'node_modules'),
         'node_modules'
       ],
-      extensions: ['.js', '.jsx', '.json', '.scss']
+      extensions: ['.js', '.jsx', '.json', '.scss'],
+      plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)]
     },
     plugins: [
       new HtmlWebpackPlugin({
