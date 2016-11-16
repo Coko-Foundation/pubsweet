@@ -33,7 +33,7 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
-  }
+  },
   "devDependencies": {
     "eslint": "^3.6.1",
     "eslint-config-standard": "^6.1.0",
