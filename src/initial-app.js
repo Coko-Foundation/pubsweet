@@ -23,6 +23,7 @@ const getpkgjson = name => {
       'pubsweet-component-teams-manager': '^0.0.5',
       'pubsweet-component-users-manager': '^0.0.2',
       'pubsweet-component-pepper-theme': '^0.0.2',
+      'pubsweet-theme-plugin': '^0.0.1',
       'bootstrap-sass': '^3.3.7',
       'babel-core': '^6.14.0',
       'babel-loader': '^6.2.5',

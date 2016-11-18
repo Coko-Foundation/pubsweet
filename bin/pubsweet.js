@@ -1,4 +1,4 @@
-#!/usr/bin/env node --preserve-symlinks
+#!/usr/bin/env node
 
 const program = require('commander')
 
