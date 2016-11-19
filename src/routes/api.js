@@ -8,13 +8,13 @@ api.use('/', collection)
 // File upload API
 var multer = require('multer')
 var upload = multer({
-  dest: 'public/uploads/',
+  dest: '_build/uploads/',
   limits: {fileSize: 10000000, files: 1}
 })
 
 api.post('/upload', upload.single('file'), (req, res, next) => {
   console.log(req.file)
-  return res.send(req.file.path.replace(/^public/, ''))
+  return res.send(req.file.path.replace(/^_build/, ''))
 })
 
 // Users API
