@@ -53,9 +53,7 @@ const write = (path, content) => new Promise(
 module.exports = () => {
   fs.mkdirsSync(path.join(process.cwd(), 'config'))
   return write(
-    configpath('dev'), configfile('dev')
-  ).then(
-    () => write(configpath('production'), configfile('production'))
+    configpath(process.env.NODE_ENV), configfile(process.env.NODE_ENV)
   ).catch(
     err => {
       logger.error(err.stack)
