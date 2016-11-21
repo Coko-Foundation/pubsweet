@@ -16,9 +16,7 @@ module.exports = {
     API_ENDPOINT: '/api'
   },
   'pubsweet-frontend': {
-    theme: 'PepperTheme',
-    routes: 'app/routes.jsx',
-    navigation: 'app/components/Navigation/Navigation.jsx'
+    theme: 'PepperTheme'
   },
   authsome: {
     mode: blogmode,
