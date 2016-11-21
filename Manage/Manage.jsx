@@ -1,5 +1,5 @@
 import React from 'react'
-import Navigation from 'pubsweet-component-navigation/Navigation'
+import Navigation from 'app/components/Navigation/Navigation.jsx'
 
 class Manage extends React.Component {
   render () {
