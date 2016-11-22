@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { FormControl, Button, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
@@ -18,7 +19,7 @@ export default class TeamCreator extends React.Component {
   }
 
   onSave () {
-    let name = this.refs.name.value
+    let name = ReactDOM.findDOMNode(this.refs.name).value
     let teamType = this.state.teamTypeSelected
 
     let objectId
@@ -46,21 +47,18 @@ export default class TeamCreator extends React.Component {
   }
 
   onFragmentSelect (fragment) {
-    this.setState({fragmentSelected: fragment})
+    this.setState({fragmentSelected: fragment.value})
   }
 
   onCollectionSelect (collection) {
-    this.setState({collectionSelected: collection})
+    this.setState({collectionSelected: collection.value})
   }
 
   onTeamTypeSelect (teamType) {
-    this.setState({teamTypeSelected: teamType})
+    this.setState({teamTypeSelected: teamType.value})
   }
 
   render () {
-    const self = this
-    self.refs = {}
-
     let { collections, fragments, types } = this.props
 
     collections = collections.map(collection => ({value: collection.id, label: collection.title}))
@@ -85,17 +83,17 @@ export default class TeamCreator extends React.Component {
       <div>
         <h3>Create a new team</h3>
         <FormControl
-          type="text"
-          placeholder="Team Awesome"
-          label="Name"
-          name="teamName"
-          ref={function (c) { self.refs.name = c }}
+          type='text'
+          placeholder='Team Awesome'
+          label='Name'
+          name='teamName'
+          ref='name'
         />
         <Row>
           <Col md={3}>
             <h4>Team type</h4>
             <Select
-              name="teamType"
+              name='teamType'
               options={types}
               value={this.state.teamTypeSelected}
               onChange={this.onTeamTypeSelect}
@@ -104,7 +102,7 @@ export default class TeamCreator extends React.Component {
           <Col md={4}>
             <h4>Fragment</h4>
             <Select
-              name="fragment"
+              name='fragment'
               options={fragments}
               value={this.state.fragmentSelected}
               onChange={this.onFragmentSelect}
@@ -118,7 +116,7 @@ export default class TeamCreator extends React.Component {
           <Col md={4}>
             <h4>Collection</h4>
             <Select
-              name="collection"
+              name='collection'
               options={collections}
               value={this.state.collectionSelected}
               onChange={this.onCollectionSelect}
@@ -127,8 +125,8 @@ export default class TeamCreator extends React.Component {
           </Col>
         </Row>
         <br />
-        <Button bsStyle="primary" onClick={this.onSave} title="Create" aria-label="Create">
-          <i className="fa fa-plus" /> Create
+        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
+          <i className='fa fa-plus' /> Create
         </Button>
       </div>
     )
@@ -141,3 +139,4 @@ TeamCreator.propTypes = {
   types: React.PropTypes.object,
   create: React.PropTypes.func
 }
+
