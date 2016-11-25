@@ -19,7 +19,7 @@ module.exports = (app = express()) => {
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
 
-  app.use(express.static(path.resolve('.', 'public')))
+  app.use(express.static(path.resolve('.', '_build')))
 
   // Passport strategies
   app.use(passport.initialize())

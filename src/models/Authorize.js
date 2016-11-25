@@ -83,7 +83,6 @@ class Authorize {
         const permstr = permission ? 'is' : 'is not'
         const msg = `User ${name} ${permstr} allowed to ${operation} ${object.type} ${object.id}`
 
-        logger.info(msg)
         if (permission) {
           return permission
         } else {
