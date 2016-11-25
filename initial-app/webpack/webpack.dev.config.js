@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var ThemePlugin = require('pubsweet-theme-plugin')
 var config = require('../config/dev')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = [
   {
@@ -17,7 +18,7 @@ module.exports = [
       ]
     },
     output: {
-      path: path.join(__dirname, '..', 'public', 'assets'),
+      path: path.join(__dirname, '..', '_build', 'assets'),
       filename: '[name].js',
       publicPath: '/assets/'
     },
@@ -46,7 +47,10 @@ module.exports = [
       }),
       new webpack.ProvidePlugin({
         'CONFIG': path.resolve(__dirname, '..', 'config', 'dev.js')
-      })
+      }),
+      new CopyWebpackPlugin([
+        { from: 'static' }
+      ])
     ],
     node: {
       fs: 'empty',
