@@ -43,7 +43,7 @@ const dbPath = path.join(appPath, 'api', 'db', process.env.NODE_ENV)
 const dbCheckPath = path.join(dbPath, 'CURRENT')
 
 if (!appPath || appPath.length === 0) {
-  const eg = colors.bold(`pubsweet new ${colors.italic('./myapp')}`)
+  const eg = colors.bold(`pubsweet setupdb ${colors.italic('./myapp')}`)
   logger.error(`You must specify an app path, e.g. ${eg}`)
   process.exit(1)
 }
