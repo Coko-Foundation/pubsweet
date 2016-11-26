@@ -7,6 +7,21 @@ const path = require('path')
 const colors = require('colors/safe')
 const fs = require('fs')
 
+// this regex matches all URL patterns and shortcuts accepted by npm
+// https://regex101.com/r/LWuC1E/1
+const isRepo = string => {
+  return /^((git\+?[^:]*:\/\/)|(github|gitlab|bitbucket|gist|))/.test(string)
+}
+
+const isPath = string => {
+  try {
+    fs.statSync(string)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 program
   .arguments('<components>')
   .description(`Add component(s) to an app.
@@ -63,6 +78,8 @@ module.exports = ${JSON.stringify(config, null, 2)}
 const done = () => logger.info(`All ${components.length} components installed`)
 
 const resolvename = name => {
+  if (isRepo(name)) return name
+  if (isPath(name)) return name
   return /$pubsweet-component/.test(name) ? name : `pubsweet-component-${name}`
 }
 
