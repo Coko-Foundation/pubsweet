@@ -9,6 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "config": "^1.24.0",
     "express-http-proxy": "^0.10.0"
   },
   "pubsweet": {
