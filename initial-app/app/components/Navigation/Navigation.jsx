@@ -27,7 +27,7 @@ export default class Navigation extends React.Component {
           <LinkContainer to='/manage/posts'>
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          <Authorize operation='read' object=currentUser.user>
+          <Authorize operation='read' object={currentUser.user}>
             <LinkContainer to='/manage/users'>
               <NavItem>Users</NavItem>
             </LinkContainer>
