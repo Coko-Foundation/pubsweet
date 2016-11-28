@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ThemePlugin = require('pubsweet-theme-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var config = require('../config/production')
 
 module.exports = [
@@ -17,7 +18,7 @@ module.exports = [
       ]
     },
     output: {
-      path: path.join(__dirname, '..', 'public', 'assets'),
+      path: path.join(__dirname, '..', '_build', 'assets'),
       filename: '[name]-[hash].js',
       publicPath: '/assets/'
     },
@@ -48,7 +49,10 @@ module.exports = [
       }),
       new ExtractTextPlugin('styles/main.css'),
       // new webpack.optimize.UglifyJsPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new CopyWebpackPlugin([
+        { from: '../static' }
+      ])
     ],
     node: {
       fs: 'empty',

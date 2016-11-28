@@ -31,6 +31,7 @@ const getpkgjson = name => {
       'babel-preset-react': '^6.11.1',
       'babel-preset-stage-2': '^6.13.0',
       'css-loader': '^0.25.0',
+      'copy-webpack-plugin': '^4.0.1',
       'file-loader': '^0.9.0',
       'json-loader': '^0.5.4',
       'sass-loader': '^4.0.2',
