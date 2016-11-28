@@ -6,8 +6,9 @@ const pkg = require('../package.json')
 
 program
   .version(pkg.version)
-  .command('new [name]', 'create and set up a new pubsweet app')
-  .command('run [path]', 'start pubsweet app at [path] (default: current directory)')
-  .command('setupdb [path]', 'generate the database for app at [path]')
-  .command('add <components>', 'add one or more components to the app in the current working directory')
+  .command('new', 'create and set up a new pubsweet app')
+  .command('run', 'start a pubsweet app')
+  .command('setupdb', 'generate a database for a pubsweet app')
+  .command('add', 'add one or more components to a pubsweet app')
+  .command('adduser', 'add a user to the database for a pubsweet app')
 program.parse(process.argv)
