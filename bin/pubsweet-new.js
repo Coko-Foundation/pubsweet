@@ -27,6 +27,7 @@ program
   .arguments('[name]')
   .description('Generate a new app in directory [name].')
   .option('--dev', 'Setup app for development')
+  .option('--clobber', 'Overwrite any existing files')
 
 for (var key in properties) {
   program.option(`--${key} [string]`, properties[key].description)
@@ -44,14 +45,42 @@ if (!appname || appname.length === 0) {
   process.exit(1)
 }
 
-fs.mkdirsSync(appname)
-process.chdir(appname)
+const checkNoApp = () => new Promise(
+  (resolve, reject) => {
+    fs.stat(appname, (err, stats) => {
+      if (err) return resolve()
+      if (stats.isDirectory() && fs.readdirSync(appname).length > 1) {
+        logger.info('Target directory exists aready and is non-empty')
+        if (program.clobber) {
+          logger.info('Overwriting any existing files due to --clobber flag')
+          return resolve()
+        } else {
+          logger.error('If you want to overwrite existing files, use --clobber')
+          process.exit(1)
+        }
+      } else {
+        return resolve()
+      }
+    })
+  }
+)
+
+const chdir = () => new Promise(
+  (resolve, reject) => {
+    fs.mkdirsSync(appname)
+    process.chdir(appname)
+    resolve()
+  }
+)
 
 logger.info('Generating new PubSweet app:', appname)
 
-require('../src/generate-config')(
+checkNoApp().then(
+  chdir
 ).then(
-  () => require('../src/initial-app')(appname)
+  () => require('../src/generate-config')()
+).then(
+  require('../src/initial-app')(appname)
 ).then(
   () => {
     logger.info('Running initial app setup...')
