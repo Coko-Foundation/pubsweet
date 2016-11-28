@@ -80,15 +80,12 @@ checkNoApp().then(
 ).then(
   () => require('../src/generate-config')()
 ).then(
-  require('../src/initial-app')(appname)
+  () => require('../src/initial-app')(appname)
 ).then(
-  () => {
-    logger.info('Running initial app setup...')
-    return require('../src/setup-db')({
-      properties: properties,
-      override: program
-    })
-  }
+  require('../src/setup-db')({
+    properties: properties,
+    override: program
+  })
 ).catch(
   err => {
     logger.error(err.stack)
