@@ -10,6 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "express-http-proxy": "^0.10.0"
+  },
+  "pubsweet": {
+    "type": "backend",
+    "dependencies": []
   }
 }
 
