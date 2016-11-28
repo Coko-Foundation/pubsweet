@@ -17,15 +17,17 @@ export default function configureStore (history, initialState) {
     routing: routerReducer
   })
 
+  const middleware = [
+    applyMiddleware(thunk),
+    process.env.REDUXLOG_OFF ? null : applyMiddleware(createLogger()),
+    applyMiddleware(routerMiddleware(browserHistory)),
+    DevTools.instrument()
+  ].filter(value => value !== null)
+
   const store = createStore(
     reducer,
     initialState,
-    compose(
-      applyMiddleware(thunk),
-      applyMiddleware(createLogger()),
-      applyMiddleware(routerMiddleware(browserHistory)),
-      DevTools.instrument()
-    )
+    compose(...middleware)
   )
 
   if (module.hot) {
