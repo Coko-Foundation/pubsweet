@@ -1,7 +1,8 @@
-const spawn = require('child_process').spawn
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('./logger')
+const Git = require('git-wrapper2-promise')
+const spawn = require('child-process-promise').spawn
 
 const gitlab = repo => `git+https://gitlab.coko.foundation/${repo}.git`
 
@@ -83,17 +84,37 @@ const copyapp = name => new Promise(
   )
 )
 
-const install = () => new Promise(
-  (resolve, reject) => {
-    logger.info('Installing app dependencies...')
-    const child = spawn(
-      'npm install',
-      { cwd: process.cwd(), stdio: 'inherit', shell: true }
-    )
-    child.on('error', reject)
-    child.on('close', resolve)
-  }
-)
+const install = () => {
+  logger.info('Installing app dependencies...')
+  return spawn(
+    'npm install',
+    { cwd: process.cwd(), stdio: 'inherit', shell: true }
+  )
+}
+
+const gitsetup = () => {
+  const git = new Git()
+
+  return git.exec('init').then(
+    () => git.add('.')
+  ).then(
+    () => spawn('git', [
+      'add',
+      '-f',
+     'api/db/dev/.gitkeep',
+     'api/db/production/.gitkeep',
+     'logs/dev/.gitkeep',
+     'logs/production/.gitkeep'
+    ])
+  ).then(
+    () => git.commit('Initial app commit')
+  ).then(
+    () => new Promise(done => {
+      logger.info('git repository set up in app directory with initial commit')
+      done()
+    })
+  ).catch(childProcess => logger.error('git setup failed:', childProcess.stderr))
+}
 
 module.exports = name => {
   return writepkgjson(
@@ -102,6 +123,8 @@ module.exports = name => {
     () => copyapp(name)
   ).then(
     install
+  ).then(
+    gitsetup
   ).catch(
     err => {
       logger.error(err.stack)

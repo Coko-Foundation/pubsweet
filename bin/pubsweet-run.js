@@ -8,16 +8,19 @@ const path = require('path')
 
 program
   .option('--dev', 'Run in development mode')
+  .option('--reduxlog-off', 'Switch off Redux logger')
   .description('Run the app at [path].')
   .parse(process.argv)
 
 process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+process.env.REDUXLOG_OFF = program.reduxlogOff
 
 let appname = program.args[0]
 if (!appname) appname = process.cwd()
 appname = path.resolve(appname)
+
 const dbCheckPath = path.join(appname, 'api', 'db', process.env.NODE_ENV, 'CURRENT')
-console.log(dbCheckPath)
+
 const checkExists = () => new Promise(
   (resolve, reject) => {
     fs.stat(appname, (err, stats) => {
@@ -74,7 +77,9 @@ checkExists().then(
         outFile: logpath('stdout'),
         errFile: logpath('stderr'),
         cwd: process.cwd(),
-        env: { NODE_ENV: process.env.NODE_ENV }
+        env: {
+          NODE_ENV: process.env.NODE_ENV,
+          REDUXLOG_OFF: process.env.REDUXLOG_OFF
       }
     )
 
