@@ -1,0 +1,7 @@
+node_modules
+pubsweet.log
+logs/production/*
+logs/dev/*
+api/db/*
+logs/*
+_build
