@@ -1,9 +1,9 @@
 module.exports = {
   frontend: {
     components: [
-      require('./Signup.jsx')
+      () => require('./Signup.jsx')
     ],
-    actions: require('./actions'),
-    reducers: require('./reducers')
+    actions: () => require('./actions'),
+    reducers: () => require('./reducers')
   }
 }
