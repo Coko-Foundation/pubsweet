@@ -34,15 +34,10 @@ const registerDevtools = app => {
 const registerComponents = app => {
   const components = config.pubsweet.components
   components.forEach(name => {
-    try {
-      const component = require(path.join(process.cwd(), 'node_modules', name))
-
-      if (component.backend) {
-        logger.info('Registered backend component', name)
-        component.backend()(app)
-      }
-    } catch (err) {
-      logger.info('Deferred loading frontend component', name)
+    const component = require(path.join(process.cwd(), 'node_modules', name))
+    if (component.backend) {
+      logger.info('Registered backend component', name)
+      component.backend()(app)
     }
   })
 }

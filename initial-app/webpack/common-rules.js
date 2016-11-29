@@ -12,6 +12,7 @@ const resolve = (type, entry) => {
 
 const resolvePreset = entry => resolve('preset', entry)
 const resolvePlugin = entry => resolve('plugin', entry)
+const frontendComponents = config.pubsweet.components.filter(name => require(name).frontend)
 
 module.exports = [
   {
@@ -88,7 +89,7 @@ module.exports = [
     loader: 'string-replace-loader',
     query: {
       search: 'PUBSWEET_COMPONENTS',
-      replace: '[' + config.pubsweet.components.map(component => `require('${component}')`).join(', ') + ']'
+      replace: '[' + frontendComponents.map(component => `require('${component}')`).join(', ') + ']'
     },
     include: babelIncludes
   }
