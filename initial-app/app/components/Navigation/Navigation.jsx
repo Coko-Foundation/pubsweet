@@ -27,12 +27,12 @@ export default class Navigation extends React.Component {
           <LinkContainer to='/manage/posts'>
             <NavItem>Posts</NavItem>
           </LinkContainer>
-          <Authorize operation='read' object={currentUser.user}>
+          <Authorize operation='read' object='users'>
             <LinkContainer to='/manage/users'>
               <NavItem>Users</NavItem>
             </LinkContainer>
           </Authorize>
-          <Authorize operation='read' object={}>
+          <Authorize operation='read' object='teams'>
             <LinkContainer to='/manage/teams'>
               <NavItem>Teams</NavItem>
             </LinkContainer>

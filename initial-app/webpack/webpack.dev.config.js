@@ -49,7 +49,7 @@ module.exports = [
         'CONFIG': path.resolve(__dirname, '..', 'config', 'dev.js')
       }),
       new CopyWebpackPlugin([
-        { from: 'static' }
+        { from: '../static' }
       ])
     ],
     node: {
