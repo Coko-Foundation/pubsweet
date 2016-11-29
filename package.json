@@ -1,7 +1,6 @@
 {
   "name": "pubsweet-frontend",
-  "version": "0.4.0-alpha.1",
-  "private": true,
+  "version": "0.5.1",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
     "eslint": "eslint"
@@ -10,6 +9,8 @@
     "node": ">=5.0.0",
     "npm": ">=3.0.0"
   },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
   "dependencies": {
     "authsome": "0.0.4",
     "babel-core": "^6.0.0",
@@ -90,5 +91,9 @@
       "xit",
       "xspecify"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-frontend"
   }
 }

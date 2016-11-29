@@ -10,9 +10,9 @@ actions.resetErrorMessage = () => {
 }
 
 // Actions for current user
-import { loginUser, logoutUser, getUser, signupUser } from './current_user'
+import { getUser } from './current_user'
 
-Object.assign(actions, { loginUser, logoutUser, getUser, signupUser })
+Object.assign(actions, { getUser })
 
 // Actions for collections and fragments
 import {
