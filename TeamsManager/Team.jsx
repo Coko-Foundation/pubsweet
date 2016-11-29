@@ -11,8 +11,8 @@ class Team extends React.Component {
   }
 
   updateMembers (members) {
-    console.log('Selected: ' + members)
-    var team = Object.assign(this.props.team, { members: members.split(',') })
+    var memberIds = members.map(member => member.value)
+    var team = Object.assign(this.props.team, { members: memberIds })
     this.props.update(team)
   }
 
@@ -28,7 +28,7 @@ class Team extends React.Component {
     })
 
     return (
-      <tr className="team">
+      <tr className='team'>
         <td>
           {number}
         </td>
@@ -43,7 +43,7 @@ class Team extends React.Component {
         </td>
         <td>
           <Select
-            name="members"
+            name='members'
             multi
             value={team.members.join(',')}
             options={options}
@@ -51,8 +51,8 @@ class Team extends React.Component {
           />
         </td>
         <td>
-          <Button bsStyle="danger" onClick={this.onDelete} title="Delete" aria-label="Delete">
-            <i className="fa fa-trash-o" />
+          <Button bsStyle='danger' onClick={this.onDelete} title='Delete' aria-label='Delete'>
+            <i className='fa fa-trash-o' />
           </Button>
         </td>
       </tr>
