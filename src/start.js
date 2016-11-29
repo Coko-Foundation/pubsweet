@@ -49,12 +49,13 @@ const runapp = (err, stats) => {
 
   if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp)
 
+  registerComponents(rawapp)
+
   const app = pubsweet(rawapp)
 
   const port = process.env.PORT || '3000'
   app.set('port', port)
 
-  registerComponents(app)
 
   const server = http.createServer(app)
 
