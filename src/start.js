@@ -39,7 +39,7 @@ const registerComponents = app => {
 
       if (component.backend) {
         logger.info('Registered backend component', name)
-        component.backend(app)
+        component.backend()(app)
       }
     } catch (err) {
       logger.info('Deferred loading frontend component', name)
