@@ -1,7 +1,7 @@
 module.exports = {
   frontend: {
     components: [
-      require('./Navigation.jsx')
+      () => require('./Navigation.jsx')
     ]
   }
 }

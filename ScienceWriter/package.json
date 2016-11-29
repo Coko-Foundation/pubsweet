@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-science-writer",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "ScienceWriter component for PubSweet",
   "main": "index.js",
   "scripts": {

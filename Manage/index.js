@@ -1,7 +1,7 @@
 module.exports = {
   frontend: {
     components: [
-      require('./Manage.jsx')
+      () => require('./Manage.jsx')
     ]
   }
 }
