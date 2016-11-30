@@ -1,4 +1,7 @@
 const path = require('path')
+const dotenvPath = path.join(process.cwd(), `.env.${process.env.NODE_ENV}`)
+require('dotenv').config({ path: dotenvPath })
+
 const http = require('http')
 
 const express = require('express')
