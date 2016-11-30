@@ -29,7 +29,7 @@ module.exports = (app = express()) => {
 
   passport.use('bearer', new BearerStrategy(
     (token, done) => {
-      jwt.verify(token, config.get('pubsweet-backend.secret'), (err, decoded) => {
+      jwt.verify(token, process.env.PUBSWEET_SECRET, (err, decoded) => {
         if (!err) {
           return done(null, decoded.id, {
             username: decoded.username,
