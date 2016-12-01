@@ -2,6 +2,8 @@ var proxy = require('express-http-proxy')
 var config = require('config')
 var rp = require('request-promise-native')
 var Busboy = require('busboy')
+var temp = require('temp').track()
+var fs = require('fs')
 
 let inkConfig = config.get('pubsweet-component-ink-backend')
 let inkEndpoint = inkConfig.inkEndpoint
@@ -37,7 +39,7 @@ let healthCheckRequest = function (auth) {
   }
 }
 
-let uploadRequest = function(file, auth) {
+let uploadRequest = function(data, auth) {
   return {
     uri: inkRecipe,
     method: 'POST',
@@ -47,17 +49,15 @@ let uploadRequest = function(file, auth) {
       'client': auth.client
     },
     formData: {
-      input_file: file
+      input_file: data
     }
   }
 }
 
 // Upload file to INK and execute the recipe
-let uploadToInk = function (file, auth) {
-  console.log(uploadRequest(file, auth))
-  return rp(uploadRequest(file, auth)).then(response => {
-    console.log('INK RESPONSE', response)
-    return response
+let uploadToInk = function (data, auth) {
+  return rp(uploadRequest(data, auth)).then(response => {
+    return [auth, response]
   })
 }
 
@@ -70,38 +70,104 @@ let getAuth = () => {
     }
   })
 }
+
 // Check if INK is alive and well
 let checkInk = (auth) => {
-  // return getAccessToken.then(accessToken => {
-  //   healthCheckRequest.headers['access-token'] = accessToken
-  //   console.log(healthCheckRequest)
   return rp(healthCheckRequest(auth)).then(response => {
     console.log('Health check complete')
     return auth
   })
 }
 
+let retryFor30SecondsUntil200 = (uri, auth) => {
+  let downloadRequest = {
+    method: 'GET',
+    uri: uri,
+    headers: {
+      'uid': email,
+      'access-token': auth.accessToken,
+      'client': auth.client
+    }
+  }
+
+  let wait = (time) => { return new Promise(resolve => setTimeout(resolve, time)) }
+
+  let doTry = function(max, timeout) {
+    console.log('ONE BEAR', max)
+
+    if (max <= 0) return Promise.reject('Maximum tries reached')
+
+    return rp(downloadRequest).then((response) => {
+      console.log('TWO BEAR', max)
+      return response
+    }).catch((err) => {
+      wait(timeout).then(() => doTry(max - 1, timeout))
+    })
+  }
+
+  return doTry(30, 1000)
+}
+
+
 var InkBackend = function(app) {
   app.use('/ink', function (req, res, next) {
-    var busboy = new Busboy({headers: req.headers})
+    var fileStream = new Busboy({headers: req.headers})
 
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      console.log('FILE', file)
+    fileStream.on('file', function(fieldname, file, filename, encoding, contentType) {
+      var stream = temp.createWriteStream()
+      file.pipe(stream)
 
-      getAuth()
-        .then((auth) => checkInk(auth))
-        .then((auth) => uploadToInk(file, auth))
-        .then(response => {
-          console.log('HERE I AM')
-        })
+      file.on('end', () => {
+        stream.end()
+        var file = {
+          value: fs.createReadStream(stream.path),
+          options: {
+            filename: filename,
+            contentType: contentType
+          }
+        }
+
+        getAuth()
+          .then((auth) => checkInk(auth))
+          .then((auth) => {
+            return uploadToInk(file, auth)
+          }).then(([auth, response]) => {
+            response = JSON.parse(response)
+            return retryFor30SecondsUntil200(response.process_chain.output_file_path, auth)
+          }).then(response => {
+            console.log('THREE BEAR', response)
+            res.send(response)
+          })
+      })
     })
 
-    busboy.on('error', function (err) {
+
+    fileStream.on('error', function (err) {
       console.log(err)
     })
 
-    req.pipe(busboy)
+    req.pipe(fileStream)
   })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = InkBackend
