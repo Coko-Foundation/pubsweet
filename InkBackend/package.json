@@ -9,8 +9,11 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "express-http-proxy": "^0.10.0"
+    "busboy": "^0.2.13",
+    "config": "^1.24.0",
+    "promise-retry": "^1.1.1",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3",
+    "temp": "^0.8.3"
   }
 }
-
-
