@@ -52,11 +52,14 @@ const getpkgjson = name => {
       'eslint-config-standard': '^6.2.0',
       'eslint-config-standard-react': '^4.2.0',
       'eslint-loader': '^1.6.0',
-      'eslint-plugin-promise': '^2.0.1',
+      'eslint-plugin-promise': '^3.3.0',
       'eslint-plugin-react': '^6.4.1',
       'eslint-plugin-standard': '^2.0.0',
-      'authsome': '^0.0.4'
-    }
+      'authsome': '^0.0.4',
+      'pouchdb-core': '6.0.7'
+    },
+    repository: 'put your repo here',
+    license: 'UNLICENSED'
   }, null, 2)
 }
 
