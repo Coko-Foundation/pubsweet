@@ -1,9 +1,10 @@
-var proxy = require('express-http-proxy')
-var config = require('config')
-var rp = require('request-promise-native')
-var Busboy = require('busboy')
-var temp = require('temp').track()
-var fs = require('fs')
+const proxy = require('express-http-proxy')
+const config = require('config')
+const rp = require('request-promise-native')
+const Busboy = require('busboy')
+const temp = require('temp').track()
+const fs = require('fs')
+const promiseRetry = require('promise-retry')
 
 let inkConfig = config.get('pubsweet-component-ink-backend')
 let inkEndpoint = inkConfig.inkEndpoint
@@ -90,24 +91,10 @@ let retryFor30SecondsUntil200 = (uri, auth) => {
     }
   }
 
-  let wait = (time) => { return new Promise(resolve => setTimeout(resolve, time)) }
-
-  let doTry = function(max, timeout) {
-    console.log('ONE BEAR', max)
-
-    if (max <= 0) return Promise.reject('Maximum tries reached')
-
-    return rp(downloadRequest).then((response) => {
-      console.log('TWO BEAR', max)
-      return response
-    }).catch((err) => {
-      wait(timeout).then(() => doTry(max - 1, timeout))
-    })
-  }
-
-  return doTry(30, 1000)
+  return promiseRetry((retry, number) => {
+    return rp(downloadRequest).catch(retry)
+  }, { retries: 10, maxTimeout: 60000 })
 }
-
 
 var InkBackend = function(app) {
   app.use('/ink', function (req, res, next) {
@@ -135,39 +122,18 @@ var InkBackend = function(app) {
             response = JSON.parse(response)
             return retryFor30SecondsUntil200(response.process_chain.output_file_path, auth)
           }).then(response => {
-            console.log('THREE BEAR', response)
             res.send(response)
-          })
+          }).catch(next)
       })
     })
 
 
     fileStream.on('error', function (err) {
-      console.log(err)
+      next(err)
     })
 
     req.pipe(fileStream)
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = InkBackend
