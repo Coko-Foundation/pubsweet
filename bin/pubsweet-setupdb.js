@@ -83,6 +83,12 @@ const checkNoDb = () => new Promise(
 const chdir = () => new Promise(
   (resolve, reject) => {
     process.chdir(appPath)
+    resolve()
+  }
+)
+
+const loadconfig = () => new Promise(
+  (resolve, reject) => {
     require('../src/load-config')(path.resolve('', './config'))
     resolve()
   }
@@ -94,6 +100,12 @@ checkExists().then(
   checkNoDb
 ).then(
   chdir
+).then(
+  require('../src/generate-config')
+).then(
+  require('../src/generate-env')
+).then(
+  loadconfig
 ).then(
   require('../src/setup-db')({
     properties: properties,
