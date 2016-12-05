@@ -16,9 +16,7 @@ const webpackconfig = require(
 
 const onError = err => logger.error(err.stack) && process.exit(1)
 
-const registerDevtools = app => {
-  const compiler = webpack(webpackconfig)
-
+const registerDevtools = (app, compiler) => {
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     stats: {
@@ -47,7 +45,9 @@ const runapp = (err, stats) => {
 
   const rawapp = express()
 
-  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp)
+  const compiler = webpack(webpackconfig)
+
+  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp, compiler)
 
   registerComponents(rawapp)
 
@@ -69,4 +69,4 @@ const runapp = (err, stats) => {
   server.on('listening', onListening)
 }
 
-webpack(webpackconfig, runapp)
+runapp()
