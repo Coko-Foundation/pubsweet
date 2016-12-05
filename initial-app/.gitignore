@@ -5,3 +5,4 @@ logs/dev/*
 api/db/*
 logs/*
 _build
+.env*
