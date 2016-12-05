@@ -6,9 +6,12 @@ const logger = require('../src/logger')
 const fs = require('fs')
 const path = require('path')
 
+const collect = (val, memo) => memo.push(val) && memo
+
 program
   .option('--dev', 'Run in development mode')
-  .option('--reduxlog-off', 'Switch off Redux logger')
+  .option('--reduxlog-off', 'Switch off Redux logger (dev only)')
+  .option('--watch [path]', 'Watch path for changes (dev only)', collect, [])
   .description('Run the app at [path].')
   .parse(process.argv)
 
@@ -49,6 +52,16 @@ const checkDb = () => new Promise(
   }
 )
 
+const makecmd = () => {
+  cmd = `node ${path.join(__dirname, '../src/start.js')}`
+  if (program.dev && program.watch && program.watch.length > 0) {
+    program.watch.forEach(path => {
+      cmd += ` --watch ${path}`
+    })
+  }
+  return cmd.split(' ')
+}
+
 checkExists().then(
   checkDb
 ).then(
@@ -66,10 +79,9 @@ checkExists().then(
       `${type}.log`
     )
 
-    const child = new (forever.Monitor)(
-      path.join(__dirname, '../src/start.js'),
+    const child = forever.start(
+      makecmd(),
       {
-        command: 'node',
         silent: false,
         watch: false,
         max: 10,
@@ -110,7 +122,5 @@ checkExists().then(
     )
 
     child.on('error', err => logger.error(err.stack))
-
-    child.start()
   }
 )
