@@ -29,9 +29,7 @@ const webpackconfig = require(
 
 const onError = err => logger.error(err.stack) && process.exit(1)
 
-const registerDevtools = app => {
-  const compiler = webpack(webpackconfig)
-
+const registerDevtools = (app, compiler) => {
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     stats: {
@@ -58,7 +56,6 @@ const registerComponents = app => {
 let watcher
 const startWatcher = () => {
   const chokidar = require('chokidar')
-  console.log('lets watch', process.cwd())
   watcher = chokidar.watch(process.cwd(), {
     ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack)/
   })
@@ -83,12 +80,15 @@ const startWatcher = () => {
   program.watch.forEach(watcher.add)
 }
 
+const compiler = webpack(webpackconfig)
+
 const runapp = (err, stats) => {
+
   if (err) onError(err)
 
   const rawapp = express()
 
-  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp)
+  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp, compiler)
 
   registerComponents(rawapp)
 
@@ -124,4 +124,4 @@ const reloadServer = () => {
   }
 }
 
-webpack(webpackconfig, runapp)
+runapp()
