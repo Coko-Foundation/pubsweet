@@ -56,7 +56,6 @@ const registerComponents = app => {
 let watcher
 const startWatcher = () => {
   const chokidar = require('chokidar')
-  console.log('lets watch', process.cwd())
   watcher = chokidar.watch(process.cwd(), {
     ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack)/
   })
@@ -81,12 +80,13 @@ const startWatcher = () => {
   program.watch.forEach(watcher.add)
 }
 
+const compiler = webpack(webpackconfig)
+
 const runapp = (err, stats) => {
+
   if (err) onError(err)
 
   const rawapp = express()
-
-  const compiler = webpack(webpackconfig)
 
   if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp, compiler)
 
