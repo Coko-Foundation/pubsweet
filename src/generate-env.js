@@ -1,0 +1,30 @@
+const path = require('path')
+const fs = require('fs-extra')
+const logger = require('./logger')
+const uuid = require('node-uuid')
+
+const envpath = mode => path.join(process.cwd(), `.env.${mode}`)
+
+const envfile = mode => `PUBSWEET_SECRET=${uuid.v4()}\n`
+
+const write = (path, content) => new Promise(
+  (resolve, reject) => fs.writeFile(
+    path,
+    content,
+    err => {
+      if (err) return reject(err)
+      return resolve()
+    }
+  )
+)
+
+module.exports = () => {
+  return write(
+    envpath(process.env.NODE_ENV), envfile(process.env.NODE_ENV)
+  ).catch(
+    err => {
+      logger.error(err.stack)
+      process.exit(1)
+    }
+  )
+}

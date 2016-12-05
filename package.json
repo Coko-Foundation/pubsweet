@@ -12,8 +12,10 @@
   "dependencies": {
     "authsome": "0.0.4",
     "child-process-promise": "^2.2.0",
+    "chokidar": "^1.6.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "dotenv": "^2.0.0",
     "enhanced-resolve": "git+https://github.com/jure/enhanced-resolve.git#fix_external_plugins",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",

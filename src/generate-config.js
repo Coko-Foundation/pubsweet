@@ -12,7 +12,6 @@ const blogmode = require('authsome/src/modes/blog')
 module.exports = {
   'pubsweet-backend': {
     dbPath: path.join(__dirname, '..', 'api', 'db'),
-    secret: '${uuid.v4()}',
     API_ENDPOINT: '/api'
   },
   'pubsweet-frontend': {

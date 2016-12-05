@@ -78,7 +78,9 @@ logger.info('Generating new PubSweet app:', appname)
 checkNoApp().then(
   chdir
 ).then(
-  () => require('../src/generate-config')()
+  require('../src/generate-config')
+).then(
+  require('../src/generate-env')
 ).then(
   () => require('../src/initial-app')(appname)
 ).then(
