@@ -1,10 +1,12 @@
+const blogmode = require('authsome/src/modes/blog')
+
 module.exports = {
   'pubsweet-backend': {
-    secret: 'TEST',
-    dbPath: './db/'
+    dbPath: './db/',
+    "API_ENDPOINT": "/api"
   },
   authsome: {
-    mode: 'blog',
+    mode: blogmode,
     teams: {
       teamContributors: {
         name: 'Contributors',
