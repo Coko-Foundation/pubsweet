@@ -25,7 +25,7 @@ const properties = {
 
 program
   .arguments('[path]')
-  .description('Set up database for Pubsweet app at [path].')
+  .description('[path] is the path to the root of your PubSweet app')
   .option('--dev', 'Generate development mode database')
   .option('--clobber', 'Overwrite any existing database')
 
