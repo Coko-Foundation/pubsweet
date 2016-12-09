@@ -1,0 +1,4 @@
+node_modules
+pubsweet.log
+_build
+.env*
