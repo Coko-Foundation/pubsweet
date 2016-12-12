@@ -1,4 +1,3 @@
-const proxy = require('express-http-proxy')
 const config = require('config')
 const rp = require('request-promise-native')
 const Busboy = require('busboy')
