@@ -20,7 +20,7 @@ export default class Navigation extends React.Component {
       <Navbar fluid>
         <Navbar.Header>
           <NavbarBrand>
-            <a href='#'><img src='/pubsweet.jpg' alt='pubsweet' /></a>
+            <a href='#'><img src='/assets/pubsweet.jpg' alt='pubsweet' /></a>
           </NavbarBrand>
         </Navbar.Header>
         <Nav>
