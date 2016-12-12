@@ -20,7 +20,7 @@ class Login extends Component {
       <div className="bootstrap">
         <Row>
           <Col md={2} mdOffset={5}>
-            <a href="#" className={styles.loginLogo}><img src="/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
+            <a href="#" className={styles.loginLogo}><img src="/assets/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
           </Col>
         </Row>
         <div className="container">
