@@ -57,7 +57,7 @@ let watcher
 const startWatcher = () => {
   const chokidar = require('chokidar')
   watcher = chokidar.watch(process.cwd(), {
-    ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log)/
+    ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log|app)/
   })
 
   update = (msg, reload) => {
