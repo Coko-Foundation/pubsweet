@@ -125,7 +125,7 @@ describe('authenticated api', function () {
       beforeEach(() => {
         const Fragment = require('../models/Fragment')
         fragment = new Fragment(fixtures.fragment)
-        fragment.owners = [fixtures.user.username]
+        fragment.setOwners([otherUser.id])
         return fragment.save()
       })
 
