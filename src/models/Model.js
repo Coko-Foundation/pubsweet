@@ -7,6 +7,8 @@ const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
+const Joi = require('joi')
+
 schema()
 
 class Model {
@@ -18,6 +20,14 @@ class Model {
 
   save () {
     logger.info('Saving', this.type, this.id)
+
+    if(this.constructor.schema) {
+      let validation = Joi.validate(this, this.constructor.schema)
+      if(validation.error) {
+        console.log(validation)
+        throw validation.error
+      }
+    }
 
     return this.constructor.find(this.id).then(function (result) {
       logger.info('Found an existing version, this is an update of:', result)
@@ -52,11 +62,10 @@ class Model {
   }
 
   updateProperties (properties) {
-    logger.info('Updating properties to', properties)
-
     // These properties are modified through setters
     delete properties.owners
-    // TODO: Should we screen/filter more properties here?
+
+    logger.info('Updating properties to', properties)
 
     Object.assign(this, properties)
     return this

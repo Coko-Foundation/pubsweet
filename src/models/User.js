@@ -2,14 +2,15 @@
 const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcryptjs')
+const Joi = require('joi')
 
 class User extends Model {
   constructor (properties) {
     super(properties)
 
     // Hash and delete the password if it's set
-    if (properties.password) {
-      this.passwordHash = bcrypt.hashSync(properties.password, 1)
+    if (this.password) {
+      this.hashPassword(this.password)
       delete this.password
     }
 
@@ -20,6 +21,20 @@ class User extends Model {
 
   validPassword (password) {
     return bcrypt.compareSync(password, this.passwordHash)
+  }
+
+  hashPassword (password) {
+    this.passwordHash = bcrypt.hashSync(password, 1)
+  }
+
+  updateProperties (properties) {
+    // Hash and delete the password if it needs to be updated
+    if (properties.password) {
+      this.hashPassword(properties.password)
+      delete properties.password
+    }
+
+    return super.updateProperties(properties)
   }
 
   isUniq () {
@@ -67,5 +82,18 @@ class User extends Model {
 }
 
 User.type = 'user'
+
+User.schema = Joi.object().keys({
+  id: Joi.string().guid().required(),
+  type: Joi.string(),
+  username: Joi.string().alphanum().required(),
+  email: Joi.string().email().required(),
+  passwordHash: Joi.string().required(),
+  admin: Joi.boolean(),
+  rev: Joi.string(),
+  fragments: Joi.array().items(Joi.string().guid()),
+  collections: Joi.array().items(Joi.string().guid()),
+  teams: Joi.array().items(Joi.string().guid())
+})
 
 module.exports = User
