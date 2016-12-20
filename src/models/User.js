@@ -8,7 +8,6 @@ class User extends Model {
   constructor (properties) {
     super(properties)
 
-    // Hash and delete the password if it's set
     if (this.password) {
       this.hashPassword(this.password)
       delete this.password
@@ -28,7 +27,6 @@ class User extends Model {
   }
 
   updateProperties (properties) {
-    // Hash and delete the password if it needs to be updated
     if (properties.password) {
       this.hashPassword(properties.password)
       delete properties.password
@@ -57,17 +55,6 @@ class User extends Model {
     })
   }
 
-  // For API display/JSON purposes only
-  static ownersWithUsername (object) {
-    return Promise.all(object.owners.map(ownerId => this.find(ownerId)))
-      .then(owners => {
-        return owners.map(owner => ({id: owner.id, username: owner.username}))
-      }).then(owners => {
-        object.owners = owners
-        return object
-      })
-  }
-
   static findByEmail (email) {
     return this.findByField('email', email).then(function (users) {
       return users[0]
@@ -78,6 +65,17 @@ class User extends Model {
     return this.findByField('username', username).then(function (users) {
       return users[0]
     })
+  }
+
+  // For API display/JSON purposes only
+  static ownersWithUsername (object) {
+    return Promise.all(object.owners.map(ownerId => this.find(ownerId)))
+      .then(owners => {
+        return owners.map(owner => ({id: owner.id, username: owner.username}))
+      }).then(owners => {
+        object.owners = owners
+        return object
+      })
   }
 }
 
