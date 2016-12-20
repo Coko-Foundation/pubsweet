@@ -3,9 +3,6 @@ import { fetch } from '../helpers/Utils'
 const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
 import * as T from './types'
 
-// TODO: This will break when rendered on a server
-const localStorage = window.localStorage || undefined
-
 function fileUploadRequest () {
   return {
     type: T.FILE_UPLOAD_REQUEST,
