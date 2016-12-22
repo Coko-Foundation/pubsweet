@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { FormControl, Button } from 'react-bootstrap'
+import { InputGroup, FormControl, Button } from 'react-bootstrap'
 
 export default class PostCreator extends React.Component {
   constructor (props) {
@@ -25,15 +25,19 @@ export default class PostCreator extends React.Component {
     return (
       <div>
         <h3>Create a new blog post</h3>
-        <FormControl
-          type='text'
-          placeholder='One fine day...'
-          label='Title'
-          ref='title'
-        />
-        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
-          <i className='fa fa-plus' /> Create
-        </Button>
+        <InputGroup>
+          <FormControl
+            type='text'
+            placeholder='One fine day...'
+            label='Title'
+            ref='title'
+          />
+          <InputGroup.Button>
+          <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
+            <i className='fa fa-plus' /> Create
+          </Button>
+          </InputGroup.Button>
+        </InputGroup>
       </div>
     )
   }
