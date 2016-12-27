@@ -23,7 +23,6 @@ Fragment.schema = Joi.object().keys({
   kind: Joi.string(),
   presentation: Joi.string(),
   published: Joi.boolean()
-
 })
 
 module.exports = Fragment

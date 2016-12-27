@@ -8,7 +8,8 @@ const Team = require('../models/Team')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
-const contributors = fixtures.team.contributors
+const contributors = fixtures.teams.contributors
+const teamFixture = fixtures.team
 const api = require('./helpers/api')
 
 describe('Teams API - admin', () => {
@@ -32,7 +33,7 @@ describe('Teams API - admin', () => {
 
   it('should display the existing teams if user is admin', () => {
     return new Team(
-      contributors
+      teamFixture
     ).save().then(
       () => api.users.authenticate.post(fixtures.adminUser)
     ).then(
@@ -40,7 +41,8 @@ describe('Teams API - admin', () => {
     ).then(
       res => {
         let team = res.body[0]
-        expect(team.teamType.name).to.eql(contributors.teamType.name)
+        console.log(team)
+        expect(team.teamType.name).to.eql(teamFixture.teamType.name)
         expect(team.members).to.eql([])
       }
     )
@@ -79,7 +81,7 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           otherUser => { otherUserId = otherUser.id }
         ).then(
-          () => { team = cloneDeep(contributors) }
+          () => { team = cloneDeep(teamFixture) }
         )
       })
 

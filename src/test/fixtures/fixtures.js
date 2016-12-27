@@ -47,23 +47,25 @@ const adminUser = {
   'admin': true
 }
 
-const contribTeam = {
-  teamType: {
-    name: 'Contributors',
-    permissions: 'create'
-  }
+const contribTeamType = {
+  name: 'Contributors',
+  permissions: 'create'
 }
 
-const readerTeam = {
-  teamType: {
-    name: 'Readers',
-    permissions: 'read'
-  }
+const readerTeamType = {
+  name: 'Readers',
+  permissions: 'read'
+}
+
+const teams = {
+  contributors: contribTeamType,
+  readers: readerTeamType
 }
 
 const team = {
-  contributors: contribTeam,
-  readers: readerTeam
+  name: 'My coauthors',
+  teamType: teams.contributors,
+  object: fragment
 }
 
 module.exports = {
@@ -75,5 +77,6 @@ module.exports = {
   updatedUser: updatedUser,
   otherUser: otherUser,
   adminUser: adminUser,
+  teams: teams,
   team: team
 }
