@@ -5,7 +5,7 @@ const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 
 describe('User', function () {
-  before(function () {
+  beforeAll(function () {
     return dbCleaner()
   })
 
