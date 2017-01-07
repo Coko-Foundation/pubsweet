@@ -1,4 +1,4 @@
-const request = require('supertest-as-promised')
+const request = require('supertest')
 const api = require('../../../src')()
 const STATUS = require('http-status-codes')
 const isString = require('lodash/isString')
@@ -171,9 +171,22 @@ const teams = {
   }
 }
 
+const upload = {
+  post: (file) => {
+    return request(
+      api
+    ).post(
+      '/api/upload'
+    ).attach(
+      'file', file
+    )
+  }
+}
+
 module.exports = {
   fragments: fragments,
   users: users,
   collections: collections,
-  teams: teams
+  teams: teams,
+  upload: upload
 }

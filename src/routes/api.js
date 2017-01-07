@@ -1,4 +1,7 @@
+const path = require('path')
+const crypto = require('crypto')
 const express = require('express')
+const multer = require('multer')
 
 const api = express.Router()
 
@@ -6,14 +9,24 @@ const collection = require('./api_collection')
 api.use('/', collection)
 
 // File upload API
-var multer = require('multer')
+var storage = multer.diskStorage({
+  destination: '_build/uploads/',
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err)
+
+      cb(null, raw.toString('hex') + path.extname(file.originalname))
+    })
+  }
+})
+
+
 var upload = multer({
-  dest: '_build/uploads/',
+  storage: storage,
   limits: {fileSize: 10000000, files: 1}
 })
 
 api.post('/upload', upload.single('file'), (req, res, next) => {
-  console.log(req.file)
   return res.send(req.file.path.replace(/^_build/, ''))
 })
 
