@@ -2,7 +2,7 @@
   "name": "pubsweet-backend",
   "version": "0.5.0",
   "scripts": {
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
+    "test": "(export PUBSWEET_SECRET=test NODE_ENV=test; ./node_modules/.bin/mocha --harmony src/test/*.js && ava test/api_file_upload_test.js)",
     "eslint": "eslint"
   },
   "engines": {
@@ -47,6 +47,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
+    "ava": "^0.17.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "eslint": "^3.2.2",
@@ -58,7 +59,6 @@
     "mocha": "^3.0.1",
     "standard": "^8.0.0-beta.5",
     "supertest": "^2.0.0",
-    "supertest-as-promised": "^3.2.0",
     "warning": "^3.0.0"
   },
   "standard": {

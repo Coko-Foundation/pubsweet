@@ -1,4 +1,4 @@
-const request = require('supertest-as-promised')
+const request = require('supertest')
 const api = require('../../src')()
 const STATUS = require('http-status-codes')
 
