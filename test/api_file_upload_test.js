@@ -1,10 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-
-import api from '../src/test/helpers/api'
+const fs = require('fs')
+const path = require('path')
+const api = require('./helpers/api')
 
 function file (name) {
-  return fs.createReadStream(path.join(__dirname, '..', 'src', 'test', 'fixtures', name))
+  return fs.createReadStream(path.join(__dirname, 'fixtures', name))
 }
 
 it('should upload a file and preserve the extension', () => {

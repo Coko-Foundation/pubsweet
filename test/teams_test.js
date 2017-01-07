@@ -5,11 +5,10 @@ const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-const Collection = require('../models/Collection')
-const Fragment = require('../models/Fragment')
-
-const User = require('../models/User')
-const Team = require('../models/Team')
+const Collection = require('../src/models/Collection')
+const Fragment = require('../src/models/Fragment')
+const User = require('../src/models/User')
+const Team = require('../src/models/Team')
 
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
@@ -21,7 +20,7 @@ const collectionFixture = fixtures.collection
 const teamFixture = fixtures.team
 const fragmentFixture = fixtures.fragment
 
-const NotFoundError = require('../errors/NotFoundError')
+const NotFoundError = require('../src/errors/NotFoundError')
 
 describe('Teams model', function () {
   let adminId

@@ -2,9 +2,9 @@ const STATUS = require('http-status-codes')
 const expect = require('expect.js')
 const cloneDeep = require('lodash/cloneDeep')
 
-const Collection = require('../models/Collection')
-const User = require('../models/User')
-const Team = require('../models/Team')
+const Collection = require('../src/models/Collection')
+const User = require('../src/models/User')
+const Team = require('../src/models/Team')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')

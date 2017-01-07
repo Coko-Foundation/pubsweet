@@ -2,7 +2,7 @@ const STATUS = require('http-status-codes')
 const expect = require('expect.js')
 
 const cleanDB = require('./helpers/db_cleaner')
-const User = require('../models/User')
+const User = require('../src/models/User')
 const fixtures = require('./fixtures/fixtures')
 const api = require('./helpers/api')
 
@@ -13,7 +13,7 @@ describe('users api', () => {
 
   beforeEach(() => {
     return cleanDB().then(
-      () => require('../setup-base').setup(fixtures.user, fixtures.collection)
+      () => require('../src/setup-base').setup(fixtures.user, fixtures.collection)
     ).then(
       user => { userId = user.id }
     )

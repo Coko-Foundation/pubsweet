@@ -11,8 +11,8 @@ const api = require('./helpers/api')
 const setTeamForCollection = require('./helpers/set_team')
 const fixtures = require('./fixtures/fixtures')
 
-const Fragment = require('../models/Fragment')
-const User = require('../models/User')
+const Fragment = require('../src/models/Fragment')
+const User = require('../src/models/User')
 
 describe('authenticated api', function () {
   var otherUser
@@ -123,7 +123,7 @@ describe('authenticated api', function () {
       var fragment
 
       beforeEach(() => {
-        const Fragment = require('../models/Fragment')
+        const Fragment = require('../src/models/Fragment')
         fragment = new Fragment(fixtures.fragment)
         fragment.owners = [fixtures.user.username]
         return fragment.save()
