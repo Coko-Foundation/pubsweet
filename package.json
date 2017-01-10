@@ -2,7 +2,8 @@
   "name": "pubsweet-frontend",
   "version": "0.6.2",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
+    "compile": "babel --presets es2015,react -d lib/ src/",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-core/register test/*.js",
     "eslint": "eslint"
   },
   "engines": {
@@ -47,7 +48,11 @@
     "redux-thunk": "^0.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-2": "^6.5.0",
     "chai": "^3.5.0",
@@ -62,6 +67,8 @@
     "expect.js": "^0.3.1",
     "expose-loader": "^0.7.0",
     "mocha": "^3.0.1",
+    "pubsweet": "0.0.5",
+    "require-dir": "^0.3.1",
     "standard": "^8.0.0-beta.5",
     "supertest": "^2.0.0",
     "supertest-as-promised": "^3.2.0",
