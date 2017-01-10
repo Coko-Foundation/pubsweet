@@ -37,14 +37,24 @@ module.exports = {
 `
 
 const write = (path, content) => new Promise(
-  (resolve, reject) => fs.writeFile(
-    path,
-    content,
-    err => {
-      if (err) return reject(err)
-      return resolve()
-    }
-  )
+  (resolve, reject) => {
+    fs.stat(appPath, (err, stats) => {
+      if (err) {
+        // file doesn't yet exist
+        fs.writeFile(
+          path,
+          content,
+          err => {
+            if (err) return reject(err)
+            return resolve(path)
+          }
+        )
+      } else {
+        // file already exists, don't clobber
+        return resolve(path)
+      }
+    })
+  }
 )
 
 module.exports = () => {
