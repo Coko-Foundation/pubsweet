@@ -71,3 +71,7 @@ pubsweet run
 ```bash
 pubsweet run path/to/myapp
 ```
+
+# Contributing
+
+Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet/blob/master/CONTRIBUTING) guide.
