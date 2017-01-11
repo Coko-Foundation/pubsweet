@@ -1,5 +1,6 @@
 const colors = require('colors/safe')
 const logger = require('./logger')
+const backend = require('./backend')
 
 const runPrompt = options => new Promise(
   (resolve, reject) => {
@@ -33,7 +34,7 @@ const logResult = result => new Promise(
 maybeaddowner = user => new Promise(
   (resolve, reject) => {
     if (user.admin) {
-      const Collection = require('pubsweet-backend/src/models/Collection')
+      const Collection = require(`${backend()}/src/models/Collection`)
       Collection.all().then(
         collections => {
           collections = collections.map(c => {
@@ -54,7 +55,7 @@ maybeaddowner = user => new Promise(
 
 const setup = options => {
   logger.info('Creating user')
-  const User = require('pubsweet-backend/src/models/User')
+  const User = require(`${backend()}/src/models/User')
   const newuser = new User(options)
   return newuser.save().then(maybeaddowner)
 }

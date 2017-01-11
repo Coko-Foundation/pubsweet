@@ -1,4 +1,5 @@
 const path = require('path')
+const backend = require('./backend')
 const dotenvPath = path.join(process.cwd(), `.env.${process.env.NODE_ENV}`)
 require('dotenv').config({ path: dotenvPath })
 
@@ -6,7 +7,7 @@ const http = require('http')
 
 const express = require('express')
 const webpack = require('webpack')
-const pubsweet = require('pubsweet-backend')
+const pubsweet = require(`${backend()}`)
 const config = require(`${process.env.NODE_CONFIG_DIR}/${process.env.NODE_ENV}.js`)
 
 const logger = require('./logger')

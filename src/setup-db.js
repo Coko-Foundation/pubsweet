@@ -2,6 +2,7 @@ process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')
+const backend = require('./backend')
 
 const runPrompt = options => new Promise(
   (resolve, reject) => {
@@ -45,8 +46,8 @@ const prepareEntities = result => {
 
 const setup = options => {
   logger.info('Starting setup')
-  const Collection = require('pubsweet-backend/src/models/Collection')
-  const User = require('pubsweet-backend/src/models/User')
+  const Collection = require(`${backend()}/src/models/Collection`)
+  const User = require(`${backend()}/src/models/User`)
 
   const admin = new User(options.user)
 
