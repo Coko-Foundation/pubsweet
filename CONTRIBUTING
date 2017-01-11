@@ -1,0 +1,9 @@
+# PRs - follow three simple rules
+
+1. Before a PR can be merged, it must pass the tests.
+2. Before a PR can be merged, it shouldn't reduce the test coverage.
+3. Bugfixes go in PRs and a bugfix PR shouldn't be merged without a regression test.
+
+# Releases - follow one simple rule:
+
+1. Tests must pass.
