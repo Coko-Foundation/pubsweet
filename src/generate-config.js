@@ -38,7 +38,7 @@ module.exports = {
 
 const write = (path, content) => new Promise(
   (resolve, reject) => {
-    fs.stat(appPath, (err, stats) => {
+    fs.stat(path, (err, stats) => {
       if (err) {
         // file doesn't yet exist
         fs.writeFile(
