@@ -1,5 +1,4 @@
 const STATUS = require('http-status-codes')
-const expect = require('expect.js')
 
 const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
@@ -41,14 +40,14 @@ describe('users api', () => {
     })
 
     it('can get a list of users', () => {
-      api.users.authenticate.post(
+      return api.users.authenticate.post(
         fixtures.user
       ).then(
         token => api.users.get(null, token).expect(STATUS.OK)
       ).then(
         res => {
-          expect(res.body.users.length).to.eql(2)
-          expect(res.body.users[0].username).to.not.eql(undefined)
+          expect(res.body.users.length).toBe(2)
+          expect(res.body.users[0].username).not.toBe(undefined)
         }
       )
     })
@@ -82,7 +81,7 @@ describe('users api', () => {
         STATUS.CREATED
       ).then(
         res => {
-          expect(res.body.username).to.eql(fixtures.otherUser.username)
+          expect(res.body.username).toBe(fixtures.otherUser.username)
         }
       )
     })
@@ -136,8 +135,8 @@ describe('users api', () => {
         token => api.users.get(otherUser.id, token).expect(STATUS.OK)
       ).then(
         res => {
-          expect(res.body.id).to.eql(otherUser.id)
-          expect(res.body.username).to.eql(fixtures.otherUser.username)
+          expect(res.body.id).toBe(otherUser.id)
+          expect(res.body.username).toBe(fixtures.otherUser.username)
         }
       )
     })
@@ -205,8 +204,8 @@ describe('users api', () => {
         token => api.users.get(otherUser.id, token).expect(STATUS.OK)
       ).then(
         res => {
-          expect(res.body.id).to.eql(otherUser.id)
-          expect(res.body.username).to.eql(fixtures.updatedUser.username)
+          expect(res.body.id).toBe(otherUser.id)
+          expect(res.body.username).toBe(fixtures.updatedUser.username)
         }
       )
     })

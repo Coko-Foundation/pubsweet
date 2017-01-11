@@ -1,5 +1,4 @@
 const STATUS = require('http-status-codes')
-const expect = require('expect.js')
 
 var api = require('./helpers/api')
 const createBasicCollection = require('./helpers/basic_collection')
@@ -29,7 +28,7 @@ describe('unauthenticated/public api', () => {
     it('can read a fragment in a protected collection' +
        ' if it is published', () => {
       return api.fragments.get(collection).expect(STATUS.OK).then(
-        res => expect(res.body[0].id).to.eql(fragment.id)
+        res => expect(res.body[0].id).toEqual(fragment.id)
       )
     })
   })
@@ -39,7 +38,7 @@ describe('unauthenticated/public api', () => {
 
     it('can not list unpublished fragments in a protected collection', () => {
       return api.fragments.get(collection).expect(STATUS.OK).then(
-        res => expect(res.body).to.eql([])
+        res => expect(res.body).toEqual([])
       )
     })
 

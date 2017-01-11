@@ -2,10 +2,6 @@ const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 const Authorize = require('../src/models/Authorize')
 const AuthorizationError = require('../src/errors/AuthorizationError')
-const chai = require('chai')
-const chaiAsPromised = require('chai-as-promised')
-chai.use(chaiAsPromised)
-const expect = chai.expect
 
 const fixtures = require('./fixtures/fixtures')
 const createBasicCollection = require('./helpers/basic_collection')
@@ -33,7 +29,7 @@ describe('Authorize', () => {
           return Authorize.can(user.id, 'create', url)
         }
       ).then(
-        permission => expect(permission).to.equal(true)
+        permission => expect(permission).toEqual(true)
       )
     })
   })
@@ -45,11 +41,14 @@ describe('Authorize', () => {
         user => {
           const url = `/api/collections/${collection.id}/fragments`
 
-          expect(Authorize.can(
-            user.id, 'create', url
-          )).to.be.rejectedWith(AuthorizationError)
+          return Authorize.can(user.id, 'create', url)
         }
-      )
+      ).catch(err => {
+        expect(err.name).toEqual('AuthorizationError')
+        if(err.name !== 'AuthorizationError') {
+          throw err
+        }
+      })
     })
   })
 })

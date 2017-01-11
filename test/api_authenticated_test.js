@@ -1,10 +1,5 @@
 const STATUS = require('http-status-codes')
 
-const chai = require('chai')
-const chaiAsPromised = require('chai-as-promised')
-chai.use(chaiAsPromised)
-const expect = chai.expect
-
 const createBasicCollection = require('./helpers/basic_collection')
 const dbCleaner = require('./helpers/db_cleaner')
 const api = require('./helpers/api')
@@ -80,7 +75,7 @@ describe('authenticated api', function () {
         }
       ).then(
         res => {
-          expect(res.body.owners).to.contain({
+          expect(res.body.owners).toContainEqual({
             id: otherUser.id,
             username: otherUser.username
           })
@@ -139,7 +134,7 @@ describe('authenticated api', function () {
         ).then(
           token => api.fragments.get(collection, token).expect(STATUS.OK)
         ).then(
-          res => expect(res.body).to.eql([])
+          res => expect(res.body).toEqual([])
         )
       })
 

@@ -1,5 +1,4 @@
 const STATUS = require('http-status-codes')
-const expect = require('expect.js')
 
 const createBasicCollection = require('./helpers/basic_collection')
 const cleanDB = require('./helpers/db_cleaner')
@@ -52,7 +51,7 @@ describe('admin api', () => {
     ).then(
       token => api.fragments.post(fixtures.fragment, collection, token)
     ).then(
-      res => expect(res.body.source).to.eql(fixtures.fragment.source)
+      res => expect(res.body.source).toEqual(fixtures.fragment.source)
     )
   })
 
@@ -62,7 +61,7 @@ describe('admin api', () => {
     ).then(
       token => api.fragments.get(collection, token)
     ).then(
-      res => expect(res.body.length).to.eql(1)
+      res => expect(res.body.length).toEqual(1)
     )
   })
 
@@ -70,11 +69,9 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => {
-        api.fragments.post(
-          fragment.id, fixtures.fragment, collection, token
-        ).expect(STATUS.OK)
-      }
+      token => api.fragments.put(
+        fragment.id, fixtures.fragment, collection, token
+      ).expect(STATUS.OK)
     )
   })
 })

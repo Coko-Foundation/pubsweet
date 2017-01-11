@@ -1,10 +1,5 @@
 const request = require('supertest')
 
-const chai = require('chai')
-const chaiAsPromised = require('chai-as-promised')
-chai.use(chaiAsPromised)
-const expect = chai.expect
-
 const Collection = require('../src/models/Collection')
 const Fragment = require('../src/models/Fragment')
 const User = require('../src/models/User')
@@ -55,10 +50,10 @@ describe('Teams model', function () {
     team = new Team(team)
 
     return team.save().then(function (savedTeam) {
-      expect(savedTeam.members).to.eql([])
-      expect(savedTeam.object).to.eql(team.object)
-      expect(savedTeam.teamType).to.eql(team.teamType)
-      expect(savedTeam.name).to.eql(team.name)
+      expect(savedTeam.members).toEqual([])
+      expect(savedTeam.object).toEqual(team.object)
+      expect(savedTeam.teamType).toEqual(team.teamType)
+      expect(savedTeam.name).toEqual(team.name)
     })
   })
 
@@ -76,13 +71,13 @@ describe('Teams model', function () {
 
     return team.save().then(function (savedTeam) {
       teamId = savedTeam.id
-      expect(savedTeam.members).to.eql([userId])
-      expect(savedTeam.object).to.eql(team.object)
-      expect(savedTeam.teamType).to.eql(team.teamType)
-      expect(savedTeam.name).to.eql(team.name)
+      expect(savedTeam.members).toEqual([userId])
+      expect(savedTeam.object).toEqual(team.object)
+      expect(savedTeam.teamType).toEqual(team.teamType)
+      expect(savedTeam.name).toEqual(team.name)
       return User.find(userId)
     }).then(function (user) {
-      expect(user.teams).to.eql([teamId])
+      expect(user.teams).toEqual([teamId])
     })
   })
 
@@ -100,13 +95,13 @@ describe('Teams model', function () {
 
     return team.save().then(function (savedTeam) {
       teamId = savedTeam.id
-      expect(savedTeam.members).to.eql([userId])
-      expect(savedTeam.object).to.eql(team.object)
-      expect(savedTeam.teamType).to.eql(team.teamType)
-      expect(savedTeam.name).to.eql(team.name)
+      expect(savedTeam.members).toEqual([userId])
+      expect(savedTeam.object).toEqual(team.object)
+      expect(savedTeam.teamType).toEqual(team.teamType)
+      expect(savedTeam.name).toEqual(team.name)
       return User.find(userId)
     }).then(function (user) {
-      expect(user.teams).to.eql([teamId])
+      expect(user.teams).toEqual([teamId])
     })
   })
 
@@ -132,16 +127,16 @@ describe('Teams model', function () {
       return team.save()
     }).then(function (savedTeam) {
       teamId = savedTeam.id
-      expect(savedTeam.members).to.eql([userId, adminId])
-      expect(savedTeam.object).to.eql(team.object)
-      expect(savedTeam.teamType).to.eql(team.teamType)
-      expect(savedTeam.name).to.eql(team.name)
+      expect(savedTeam.members).toEqual([userId, adminId])
+      expect(savedTeam.object).toEqual(team.object)
+      expect(savedTeam.teamType).toEqual(team.teamType)
+      expect(savedTeam.name).toEqual(team.name)
       return User.find(userId)
     }).then(function (user) {
-      expect(user.teams).to.eql([teamId])
+      expect(user.teams).toEqual([teamId])
       return User.find(adminId)
     }).then(function (admin) {
-      expect(admin.teams).to.eql([teamId])
+      expect(admin.teams).toEqual([teamId])
     })
   })
 
@@ -155,15 +150,19 @@ describe('Teams model', function () {
     team.members = [userId]
     team = new Team(team)
 
-    return team.save().then(function (savedTeam) {
-      return Team.find(savedTeam.id)
-    }).then(function (team) {
-      return team.delete()
-    }).then(function (deletedTeam) {
-      expect(Team.find(deletedTeam.id)).to.be.rejectedWith(NotFoundError)
-      return User.find(userId)
-    }).then(function (user) {
-      expect(user.teams).to.eql([])
-    })
+    return team.save().then(
+      savedTeam => Team.find(savedTeam.id)
+    ).then(
+      team => team.delete()
+    ).then(
+      deletedTeam => Team.find(deletedTeam.id)
+    ).catch(err => {
+      expect(err.name).toEqual("NotFoundError")
+      if(err.name !== "NotFoundError") throw err
+    }).then(
+      () => User.find(userId)
+    ).then(
+      user => expect(user.teams).toEqual([])
+    )
   })
 })
