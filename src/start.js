@@ -93,6 +93,7 @@ const runapp = (err, stats) => {
   const postcompile = (err, stats) => {
     if (err) {
       logger.error('Webpack compilation failed:', err)
+      process.exit(1)
     } else if (stats) {
       logger.info('Webpack compilation completed:', stats.toString({
         hash: false,
