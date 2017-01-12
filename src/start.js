@@ -30,7 +30,7 @@ const webpackconfig = require(
 
 const onError = err => logger.error(err.stack) && process.exit(1)
 
-const registerDevtools = (app, compiler) => {
+const registerDevtools = (app, compiler, cb) => {
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     stats: {
@@ -41,6 +41,8 @@ const registerDevtools = (app, compiler) => {
   }))
 
   app.use(require('webpack-hot-middleware')(compiler))
+
+  cb()
 }
 
 const registerComponents = app => {
@@ -89,28 +91,45 @@ const runapp = (err, stats) => {
 
   const rawapp = express()
 
-  if (process.env.NODE_ENV === 'dev') registerDevtools(rawapp, compiler)
+  const postcompile = (err, stats) => {
+    if (err) {
+      logger.error('Webpack compilation failed:', err)
+      process.exit(1)
+    } else if (stats) {
+      logger.info('Webpack compilation completed:', stats.toString({
+        hash: false,
+        chunks: false,
+        assets: false
+      }))
+    }
 
-  registerComponents(rawapp)
+    registerComponents(rawapp)
 
-  const app = pubsweet(rawapp)
+    const app = pubsweet(rawapp)
 
-  const port = process.env.PORT || '3000'
-  app.set('port', port)
+    const port = process.env.PORT || '3000'
+    app.set('port', port)
 
-  server = http.createServer(app)
+    server = http.createServer(app)
 
-  const onListening = () => {
-    serverListening = true
-    const addr = server.address()
-    logger.info(`PubSweet is listening on port ${addr.port}`)
+    const onListening = () => {
+      serverListening = true
+      const addr = server.address()
+      logger.info(`PubSweet is listening on port ${addr.port}`)
 
-    if (process.env.NODE_ENV === 'dev' && !watcher) startWatcher()
+      if (process.env.NODE_ENV === 'dev' && !watcher) startWatcher()
+    }
+
+    server.listen(port)
+    server.on('error', onError)
+    server.on('listening', onListening)
   }
 
-  server.listen(port)
-  server.on('error', onError)
-  server.on('listening', onListening)
+  if (process.env.NODE_ENV === 'dev') {
+    registerDevtools(rawapp, compiler, postcompile)
+  } else {
+    compiler.run(postcompile)
+  }
 }
 
 const reloadServer = () => {
