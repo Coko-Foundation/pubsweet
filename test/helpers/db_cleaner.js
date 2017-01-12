@@ -1,13 +1,14 @@
 'use strict'
 
-const config = require('../../../config')
+const config = require('../../config')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
-const dbName = config.get('pubsweet-backend.dbPath') + process.env.NODE_ENV
-const logger = require('../../logger')
+const logger = require('../../src/logger')
 
 let dbCleaner = () => {
+  let dbName = global.db._db_name
+
   return global.db.destroy().then(
     (response) => {
       global.db = new PouchDB(dbName)

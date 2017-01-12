@@ -1,10 +1,9 @@
 const STATUS = require('http-status-codes')
-const expect = require('expect.js')
 const cloneDeep = require('lodash/cloneDeep')
 
-const Collection = require('../models/Collection')
-const User = require('../models/User')
-const Team = require('../models/Team')
+const Collection = require('../src/models/Collection')
+const User = require('../src/models/User')
+const Team = require('../src/models/Team')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
@@ -26,7 +25,7 @@ describe('Teams API - admin', () => {
     ).then(
       token => api.teams.get(token).expect(STATUS.OK)
     ).then(
-      res => expect(res.body).to.eql([])
+      res => expect(res.body).toEqual([])
     )
   })
 
@@ -40,8 +39,8 @@ describe('Teams API - admin', () => {
     ).then(
       res => {
         let team = res.body[0]
-        expect(team.teamType.name).to.eql(contributors.teamType.name)
-        expect(team.members).to.eql([])
+        expect(team.teamType.name).toEqual(contributors.teamType.name)
+        expect(team.members).toEqual([])
       }
     )
   })
@@ -89,7 +88,7 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           token => api.teams.get(token, collectionId).expect(STATUS.OK)
         ).then(
-          res => expect(res.body).to.eql([])
+          res => expect(res.body).toEqual([])
         )
       })
 
@@ -112,7 +111,7 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           res => {
             teamId = res.body.id
-            expect(res.body.name).to.eql(team.name)
+            expect(res.body.name).toEqual(team.name)
           }
         ).then(
           () => api.users.authenticate.post(fixtures.updatedUser)

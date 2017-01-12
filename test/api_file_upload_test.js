@@ -1,17 +1,15 @@
-import test from 'ava'
-import fs from 'fs'
-import path from 'path'
-
-import api from '../src/test/helpers/api'
+const fs = require('fs')
+const path = require('path')
+const api = require('./helpers/api')
 
 function file (name) {
-  return fs.createReadStream(path.join(__dirname, '..', 'src', 'test', 'fixtures', name))
+  return fs.createReadStream(path.join(__dirname, 'fixtures', name))
 }
 
-test('should upload a file and preserve the extension', t => {
+it('should upload a file and preserve the extension', () => {
   return api.upload.post(file('fixture.jpg')).then(res => {
-    t.is(res.statusCode, 200)
-    t.is(path.extname(res.text), '.jpg')
+    expect(res.statusCode).toBe(200)
+    expect(path.extname(res.text)).toBe('.jpg')
   })
 })
 

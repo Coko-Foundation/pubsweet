@@ -1,18 +1,13 @@
 const STATUS = require('http-status-codes')
 
-const chai = require('chai')
-const chaiAsPromised = require('chai-as-promised')
-chai.use(chaiAsPromised)
-const expect = chai.expect
-
 const createBasicCollection = require('./helpers/basic_collection')
 const dbCleaner = require('./helpers/db_cleaner')
 const api = require('./helpers/api')
 const setTeamForCollection = require('./helpers/set_team')
 const fixtures = require('./fixtures/fixtures')
 
-const Fragment = require('../models/Fragment')
-const User = require('../models/User')
+const Fragment = require('../src/models/Fragment')
+const User = require('../src/models/User')
 
 describe('authenticated api', function () {
   var otherUser
@@ -80,7 +75,7 @@ describe('authenticated api', function () {
         }
       ).then(
         res => {
-          expect(res.body.owners).to.contain({
+          expect(res.body.owners).toContainEqual({
             id: otherUser.id,
             username: otherUser.username
           })
@@ -123,7 +118,7 @@ describe('authenticated api', function () {
       var fragment
 
       beforeEach(() => {
-        const Fragment = require('../models/Fragment')
+        const Fragment = require('../src/models/Fragment')
         fragment = new Fragment(fixtures.fragment)
         fragment.owners = [fixtures.user.username]
         return fragment.save()
@@ -139,7 +134,7 @@ describe('authenticated api', function () {
         ).then(
           token => api.fragments.get(collection, token).expect(STATUS.OK)
         ).then(
-          res => expect(res.body).to.eql([])
+          res => expect(res.body).toEqual([])
         )
       })
 
