@@ -17,12 +17,12 @@ Fragment.schema = Joi.object().keys({
   type: Joi.string().required(),
   title: Joi.string(),
   rev: Joi.string(),
-  owners: Joi.array().items(Joi.string().guid()),
+  owners: Joi.array().items(Joi.string().guid())
   // TODO: These are emergent, any way we can standardize?
-  source: Joi.string(),
-  kind: Joi.string(),
-  presentation: Joi.string(),
-  published: Joi.boolean()
+  // source: Joi.string(),
+  // kind: Joi.string(),
+  // presentation: Joi.string(),
+  // published: Joi.boolean()
 })
 
 module.exports = Fragment

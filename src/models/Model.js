@@ -2,12 +2,13 @@
 
 const uuid = require('uuid')
 const remove = require('lodash/remove')
+const Joi = require('joi')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
-const Joi = require('joi')
+const config = require('../../config')
 
 schema()
 
@@ -18,16 +19,29 @@ class Model {
     Object.assign(this, properties)
   }
 
-  save () {
-    logger.info('Saving', this.type, this.id)
-
+  validate () {
     if(this.constructor.schema) {
-      let validation = Joi.validate(this, this.constructor.schema)
+      let validationConfiguration = 'validations.' + this.constructor.type
+      let configurableValidations
+
+      if(config.has(validationConfiguration)) {
+        configurableValidations = config.get(validationConfiguration)
+      }
+
+      console.error(configurableValidations)
+      let schema = Object.assign({}, this.constructor.schema, configurableValidations)
+      let validation = Joi.validate(this, schema)
       if(validation.error) {
         console.log(validation)
         throw validation.error
       }
     }
+  }
+
+  save () {
+    logger.info('Saving', this.type, this.id)
+
+    this.validate()
 
     return this.constructor.find(this.id).then(function (result) {
       logger.info('Found an existing version, this is an update of:', result)
