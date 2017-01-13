@@ -2,7 +2,7 @@
   "name": "pubsweet-backend",
   "version": "0.5.0",
   "scripts": {
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
+    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
     "eslint": "eslint"
   },
   "engines": {
@@ -32,7 +32,6 @@
     "morgan": "~1.7.0",
     "multer": "^1.1.0",
     "node-sass": "^3.4.0",
-    "node-uuid": "^1.4.7",
     "object-assign": "^4.0.1",
     "passport": "^0.3.2",
     "passport-anonymous": "^1.0.1",
@@ -48,18 +47,14 @@
     "ws": "^1.0.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^5.3.0",
+    "jest": "^18.1.0",
     "eslint": "^3.2.2",
     "eslint-config-standard": "^5.3.5",
     "eslint-loader": "^1.2.0",
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
-    "expect.js": "^0.3.1",
-    "mocha": "^3.0.1",
     "standard": "^8.0.0-beta.5",
     "supertest": "^2.0.0",
-    "supertest-as-promised": "^3.2.0",
     "warning": "^3.0.0"
   },
   "standard": {
@@ -90,5 +85,10 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-backend"
+  },
+  "jest": {
+    "testRegex": "/test/.*test.js$",
+    "collectCoverage": true,
+    "collectCoverageFrom" : ["src/**/*.js"]
   }
 }

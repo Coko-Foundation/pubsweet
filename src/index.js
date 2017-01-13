@@ -20,6 +20,7 @@ module.exports = (app = express()) => {
   app.use(cookieParser())
 
   app.use(express.static(path.resolve('.', '_build')))
+  app.use('/uploads', express.static(path.resolve('.', 'uploads')))
 
   // Passport strategies
   app.use(passport.initialize())
