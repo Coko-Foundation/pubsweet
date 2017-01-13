@@ -27,7 +27,7 @@ var upload = multer({
 })
 
 api.post('/upload', upload.single('file'), (req, res, next) => {
-  return res.send(req.file.path)
+  return res.send('/' + req.file.path)
 })
 
 // Users API

@@ -180,6 +180,13 @@ const upload = {
     ).attach(
       'file', file
     )
+  },
+  get: (path) => {
+    return request(
+      api
+    ).get(
+      path
+    )
   }
 }
 
