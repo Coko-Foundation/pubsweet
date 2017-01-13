@@ -9,7 +9,7 @@ PouchDB.plugin(require('pouchdb-upsert'))
 
 let dbPath
 if (process.env.NODE_ENV === 'test') {
-  let uuid = require('node-uuid').v4()
+  let uuid = require('uuid').v4()
   dbPath = path.join(config.get('pubsweet-backend.dbPath'), process.env.NODE_ENV + uuid)
 } else {
   dbPath = path.join(config.get('pubsweet-backend.dbPath'), process.env.NODE_ENV)
