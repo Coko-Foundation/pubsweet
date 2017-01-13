@@ -10,7 +10,7 @@ api.use('/', collection)
 
 // File upload API
 var storage = multer.diskStorage({
-  destination: '_build/uploads/',
+  destination: 'uploads/',
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
       if (err) return cb(err)
@@ -27,7 +27,7 @@ var upload = multer({
 })
 
 api.post('/upload', upload.single('file'), (req, res, next) => {
-  return res.send(req.file.path.replace(/^_build/, ''))
+  return res.send('/' + req.file.path)
 })
 
 // Users API
