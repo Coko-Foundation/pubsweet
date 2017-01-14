@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === 'test') {
 
 global.db = new PouchDB(dbPath)
 
-
 module.exports = function () {
   if (!db.rel) {
     return db.setSchema([

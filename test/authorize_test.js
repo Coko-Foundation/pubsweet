@@ -1,7 +1,6 @@
 const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 const Authorize = require('../src/models/Authorize')
-const AuthorizationError = require('../src/errors/AuthorizationError')
 
 const fixtures = require('./fixtures/fixtures')
 const createBasicCollection = require('./helpers/basic_collection')
@@ -45,7 +44,7 @@ describe('Authorize', () => {
         }
       ).catch(err => {
         expect(err.name).toEqual('AuthorizationError')
-        if(err.name !== 'AuthorizationError') {
+        if (err.name !== 'AuthorizationError') {
           throw err
         }
       })

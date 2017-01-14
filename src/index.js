@@ -8,7 +8,6 @@ const logger = require('./logger')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const User = require('./models/User')
-const config = require('../config')
 
 module.exports = (app = express()) => {
   global.versions = {}

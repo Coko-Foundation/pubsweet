@@ -10,7 +10,6 @@ const Authorize = require('../models/Authorize')
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
-const config = require('../../config')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })

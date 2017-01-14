@@ -20,11 +20,11 @@ class Model {
   }
 
   validate () {
-    if(this.constructor.schema) {
+    if (this.constructor.schema) {
       let validationConfiguration = 'validations.' + this.constructor.type
       let configurableValidations
 
-      if(config.has(validationConfiguration)) {
+      if (config.has(validationConfiguration)) {
         configurableValidations = config.get(validationConfiguration)
       }
 
@@ -33,7 +33,7 @@ class Model {
       )
 
       let validation = Joi.validate(this, schema)
-      if(validation.error) {
+      if (validation.error) {
         console.log(validation)
         throw validation.error
       }

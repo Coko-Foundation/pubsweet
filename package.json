@@ -2,8 +2,8 @@
   "name": "pubsweet-backend",
   "version": "0.5.0",
   "scripts": {
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
-    "eslint": "eslint"
+    "test": "npm run eslint && PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
+    "eslint": "eslint src/ test/ config.js config/"
   },
   "engines": {
     "node": ">=5.0.0",

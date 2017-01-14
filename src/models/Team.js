@@ -79,7 +79,7 @@ Team.schema = {
   object: Joi.object().required(),
   teamType: Joi.object().required(),
   rev: Joi.string(),
-  members: Joi.array().items(Joi.string().guid()),
+  members: Joi.array().items(Joi.string().guid())
 }
 
 module.exports = Team

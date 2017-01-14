@@ -4,7 +4,7 @@ const Joi = require('joi')
 module.exports = {
   'pubsweet-backend': {
     dbPath: './db/',
-    "API_ENDPOINT": "/api"
+    'API_ENDPOINT': '/api'
   },
   validations: {
     fragment: {
