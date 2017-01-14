@@ -81,7 +81,7 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
     }
   ).then(
     ([collection, fragment]) => {
-      collection.addFragment(fragment)
+      collection.addFragment(fragment.id)
       return Promise.all([collection.save(), fragment])
     }
   ).then(

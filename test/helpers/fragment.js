@@ -8,7 +8,7 @@ module.exports = (opts, collection) => {
 
   return fragment.save().then(
     () => {
-      collection.addFragment(fragment)
+      collection.addFragment(fragment.id)
       return collection.save().then(
         () => fragment
       )

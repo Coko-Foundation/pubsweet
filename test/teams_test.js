@@ -12,7 +12,7 @@ const userFixture = fixtures.user
 const adminFixture = fixtures.adminUser
 const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
-const teamFixture = fixtures.team
+const teamFixture = fixtures.contributorTeam
 const fragmentFixture = fixtures.fragment
 
 const NotFoundError = require('../src/errors/NotFoundError')

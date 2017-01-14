@@ -35,7 +35,7 @@ describe('admin api', () => {
         fragment.setOwners([otherUser.id])
         return fragment.save().then(
           fragment => {
-            collection.addFragment(fragment)
+            collection.addFragment(fragment.id)
             return collection.save()
           }
         )

@@ -62,9 +62,15 @@ const teams = {
   readers: readerTeamType
 }
 
-const team = {
-  name: 'My coauthors',
+const contributorTeam = {
+  name: 'My contributors',
   teamType: teams.contributors,
+  object: fragment
+}
+
+const readerTeam = {
+  name: 'My readers',
+  teamType: teams.readers,
   object: fragment
 }
 
@@ -78,5 +84,6 @@ module.exports = {
   otherUser: otherUser,
   adminUser: adminUser,
   teams: teams,
-  team: team
+  contributorTeam: contributorTeam,
+  readerTeam: readerTeam
 }

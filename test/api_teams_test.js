@@ -8,7 +8,7 @@ const Team = require('../src/models/Team')
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 const contributors = fixtures.teams.contributors
-const teamFixture = fixtures.team
+const teamFixture = fixtures.contributorTeam
 const api = require('./helpers/api')
 
 describe('Teams API - admin', () => {
@@ -40,7 +40,7 @@ describe('Teams API - admin', () => {
     ).then(
       res => {
         let team = res.body[0]
-        expect(team.teamType.name).toEqual(contributors.teamType.name)
+        expect(team.teamType.name).toEqual(contributors.name)
         expect(team.members).toEqual([])
       }
     )
@@ -69,7 +69,7 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           user => {
             let collection = new Collection(fixtures.collection)
-            collection.owners = [user]
+            collection.setOwners([user.id])
             return collection.save()
           }
         ).then(

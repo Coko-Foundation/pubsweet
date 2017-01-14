@@ -50,7 +50,7 @@ describe('authenticated api', function () {
       return setTeamForCollection(
         [otherUser.id],
         collection,
-        fixtures.team.contributors
+        fixtures.contributorTeam
       )
     })
 
@@ -58,7 +58,7 @@ describe('authenticated api', function () {
       return setTeamForCollection(
         [],
         collection,
-        fixtures.team.contributors
+        fixtures.contributorTeam
       )
     })
 
@@ -159,7 +159,7 @@ describe('authenticated api', function () {
       return setTeamForCollection(
         [otherUser.id],
         collection,
-        fixtures.team.readers
+        fixtures.readerTeam
       )
     })
 
@@ -167,7 +167,7 @@ describe('authenticated api', function () {
       return setTeamForCollection(
         [],
         collection,
-        fixtures.team.readers
+        fixtures.readerTeam
       )
     })
 
