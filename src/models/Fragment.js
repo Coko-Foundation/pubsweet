@@ -12,17 +12,12 @@ class Fragment extends Model {
 
 Fragment.type = 'fragment'
 
-Fragment.schema = Joi.object().keys({
+Fragment.schema = {
   id: Joi.string().guid().required(),
   type: Joi.string().required(),
   title: Joi.string(),
   rev: Joi.string(),
   owners: Joi.array().items(Joi.string().guid())
-  // TODO: These are emergent, any way we can standardize?
-  // source: Joi.string(),
-  // kind: Joi.string(),
-  // presentation: Joi.string(),
-  // published: Joi.boolean()
-})
+}
 
 module.exports = Fragment

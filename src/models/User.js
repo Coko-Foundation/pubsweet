@@ -81,7 +81,7 @@ class User extends Model {
 
 User.type = 'user'
 
-User.schema = Joi.object().keys({
+User.schema = {
   id: Joi.string().guid().required(),
   type: Joi.string(),
   username: Joi.string().alphanum().required(),
@@ -92,6 +92,6 @@ User.schema = Joi.object().keys({
   fragments: Joi.array().items(Joi.string().guid()),
   collections: Joi.array().items(Joi.string().guid()),
   teams: Joi.array().items(Joi.string().guid())
-})
+}
 
 module.exports = User

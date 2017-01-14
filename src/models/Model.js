@@ -28,8 +28,10 @@ class Model {
         configurableValidations = config.get(validationConfiguration)
       }
 
-      console.error(configurableValidations)
-      let schema = Object.assign({}, this.constructor.schema, configurableValidations)
+      let schema = Joi.object().keys(
+        Object.assign({}, this.constructor.schema, configurableValidations)
+      )
+
       let validation = Joi.validate(this, schema)
       if(validation.error) {
         console.log(validation)

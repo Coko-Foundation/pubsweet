@@ -45,13 +45,13 @@ class Collection extends Model {
 
 Collection.type = 'collection'
 
-Collection.schema = Joi.object().keys({
+Collection.schema = {
   id: Joi.string().guid().required(),
   type: Joi.string().required(),
   title: Joi.string(),
   rev: Joi.string(),
   owners: Joi.array().items(Joi.string().guid()),
   fragments: Joi.array().items(Joi.string().guid())
-})
+}
 
 module.exports = Collection
