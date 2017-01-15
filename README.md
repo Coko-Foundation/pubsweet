@@ -1,5 +1,8 @@
 # PubSweet
 
+[![build status](https://gitlab.coko.foundation/pubsweet/pubsweet/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/commits/master)
+[![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/commits/master)
+
 ## Overview
 
 **PubSweet** allows you to build state-of-the-art publishing platforms. It's a modular and flexible framework consisting of:
