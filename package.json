@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-backend",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "scripts": {
     "test": "PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
     "eslint": "eslint"
