@@ -24,7 +24,7 @@ module.exports = actions => (key, opts, testFunctionality) => {
     const action = actions[key]
 
     it('returns a fetcher function', () => {
-      const returned = action(noobj, noobj)
+      const returned = action(empty, empty)
       expect(returned).to.be.a('function')
     })
 
