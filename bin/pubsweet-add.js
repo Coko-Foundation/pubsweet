@@ -6,6 +6,8 @@ const logger = require('../src/logger')
 const path = require('path')
 const colors = require('colors/safe')
 const fs = require('fs')
+const diff = require('lodash/difference')
+const after = require('lodash/after')
 
 // this regex matches all URL patterns and shortcuts accepted by npm
 // https://regex101.com/r/LWuC1E/1
@@ -41,37 +43,52 @@ require('../src/load-config')(path.resolve('', './config'))
 const install = names => new Promise(
   (resolve, reject) => {
     logger.info(`Installing ${components.length} components...`)
+    const pkg = JSON.parse(fs.readFileSync('./package.json'))
+    const oldmodules = Object.keys(pkg.dependencies)
     const child = spawn(
       `npm install --save ${names}`,
       { cwd: process.cwd(), stdio: 'inherit', shell: true }
     )
     child.on('error', reject)
-    child.on('close', resolve)
+    child.on('close', () => {
+      const newpkg = JSON.parse(fs.readFileSync('./package.json'))
+      const newmodules = Object.keys(newpkg.dependencies)
+      const diffmodules = diff(newmodules, oldmodules)
+      resolve(diffmodules)
+    })
   }
 )
 
 const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 
-const updateconfig = names => new Promise(
+const updateconfig = modules => new Promise(
   (resolve, reject) => {
     logger.info(`Adding ${components.length} components to config`)
+    logger.info(`Components being added: ${modules.join(' ')}`)
     const deployments = ['dev', 'production']
 
+    const doresolve = after(2, resolve)
+
     deployments.forEach(mode => {
-      const config = require(configpath(mode))
+      const configfile = configpath(mode)
 
-      const old = config.pubsweet.components || []
-      config.pubsweet.components = old.concat(names)
+      fs.stat(configfile, err => {
+        if (err) return doresolve()
+        logger.info(`Adding to ${mode} config`)
+        const config = require(configfile)
 
-      configstr = `
-const path = require('path')
+        const old = config.pubsweet.components || []
+        config.pubsweet.components = old.concat(modules)
 
-module.exports = ${JSON.stringify(config, null, 2)}
-`
-      fs.writeFileSync(configpath(mode), configstr)
+        configstr = `
+  const path = require('path')
+
+  module.exports = ${JSON.stringify(config, null, 2)}
+  `
+        fs.writeFileSync(configpath(mode), configstr)
+        doresolve()
+      })
     })
-
-    resolve()
   }
 )
 
@@ -88,7 +105,7 @@ const names = components.map(resolvename).join(' ')
 install(
   names
 ).then(
-  updateconfig(names)
+  modules => updateconfig(modules)
 ).then(
   done
 ).catch(
