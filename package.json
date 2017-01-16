@@ -16,7 +16,6 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "dotenv": "^2.0.0",
-    "enhanced-resolve": "git+https://github.com/jure/enhanced-resolve.git#fix_external_plugins",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "forever-monitor": "^1.7.0",
@@ -28,7 +27,7 @@
     "prompt": "^1.0.0",
     "pubsweet-theme-plugin": "^0.0.1",
     "tmp": "0.0.29",
-    "webpack": "^2.1.0-beta.26",
+    "webpack": "^v2.2.0-rc.7",
     "webpack-dev-middleware": "^1.8.2",
     "webpack-hot-middleware": "^2.13.2",
     "winston": "^2.2.0"
