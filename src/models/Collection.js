@@ -51,7 +51,7 @@ Collection.schema = {
   title: Joi.string(),
   rev: Joi.string(),
   owners: Joi.array().items(Joi.string().guid()),
-  fragments: Joi.array().items(Joi.string().guid())
+  fragments: Joi.array().items(Joi.object().type(Fragment))
 }
 
 module.exports = Collection

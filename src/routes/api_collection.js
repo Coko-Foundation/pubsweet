@@ -74,6 +74,10 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
   return Authorize.can(req.user, 'create', req.originalUrl).then(
     () => Collection.find(req.params.id)
   ).then(
+    collection => Promise.all([collection, collection.getFragments()])
+  ).then(
+    ([collection, fragments]) => Object.assign(collection, {fragments: fragments})
+  ).then(
     collection => {
       let fragment = new Fragment(req.body)
       fragment.setOwners([req.user])
@@ -81,7 +85,7 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
     }
   ).then(
     ([collection, fragment]) => {
-      collection.addFragment(fragment.id)
+      collection.addFragment(fragment)
       return Promise.all([collection.save(), fragment])
     }
   ).then(
