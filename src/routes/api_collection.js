@@ -74,13 +74,6 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
   return Authorize.can(req.user, 'create', req.originalUrl).then(
     () => Collection.find(req.params.id)
   ).then(
-    collection => Object.assign(
-      collection,
-      {fragments: collection.fragments.map(
-        fragmentId => new Fragment({id: fragmentId})
-      )}
-    )
-  ).then(
     collection => {
       let fragment = new Fragment(req.body)
       fragment.setOwners([req.user])

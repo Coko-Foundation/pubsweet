@@ -36,6 +36,9 @@ class Collection extends Model {
 
   addFragment (fragment) {
     if (this.fragments) {
+      this.fragments = this.fragments.map(
+        fragmentId => new Fragment({id: fragmentId})
+      )
       this.fragments.push(fragment)
     } else {
       this.fragments = [fragment]
