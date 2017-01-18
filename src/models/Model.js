@@ -1,7 +1,7 @@
 'use strict'
 
 const uuid = require('uuid')
-const remove = require('lodash/remove')
+const pull = require('lodash/pull')
 const Joi = require('joi')
 
 const schema = require('./schema')
@@ -113,7 +113,7 @@ class Model {
 
   removeOwner (owner) {
     this.validateOwner(owner)
-    remove(this.owners, owner)
+    pull(this.owners, owner)
   }
 
   static uuid () {
