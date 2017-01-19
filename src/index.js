@@ -46,21 +46,19 @@ module.exports = (app = express()) => {
   passport.use('anonymous', new AnonymousStrategy())
 
   passport.use('local', new LocalStrategy((username, password, done) => {
+    let errorMessage = 'Wrong username or password.'
     logger.info('User finding:', username)
 
     User.findByUsername(username).then((user) => {
       logger.info('User found:', user.username)
-      if (!user) {
-        return done(null, false, { message: 'Wrong username.' })
-      }
       if (!user.validPassword(password)) {
         logger.info('Invalid password for user:', username)
-        return done(null, false, { message: 'Wrong password.' })
+        return done(null, false, { message: errorMessage })
       }
       return done(null, user, {id: user.id})
     }).catch((err) => {
       logger.info('User not found', err)
-      if (err) { return done(err) }
+      if (err) { return done(null, false, { message: errorMessage }) }
     })
   }))
 
@@ -70,13 +68,6 @@ module.exports = (app = express()) => {
   // Serve the index page for front end
   app.use('/manage', index)
   app.use('/', index)
-
-  // catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found')
-    err.status = 404
-    next(err)
-  })
 
   app.use((err, req, res, next) => {
     // development error handler, will print stacktrace
@@ -88,9 +79,11 @@ module.exports = (app = express()) => {
     if (err.name === 'ConflictError') {
       return res.status(409).json({ message: err.message })
     } else if (err.name === 'AuthorizationError') {
-      res.status(err.status).json({ message: err.message })
+      return res.status(err.status).json({ message: err.message })
+    } else if (err.name === 'AuthenticationError') {
+      return res.status(401).json({ message: err.message })
     } else {
-      res.status(err.status || 500).json({ message: err.message })
+      return res.status(err.status || 500).json({ message: err.message })
     }
   })
 

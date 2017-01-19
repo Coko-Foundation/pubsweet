@@ -30,23 +30,10 @@ function createToken (user) {
 
 // Token issuing
 users.post('/authenticate', authLocal, (req, res) => {
-  return User.find(
-    req.authInfo.id
-  ).then(
-    user => res.status(
-      STATUS.CREATED
-    ).json(
-      Object.assign({ token: createToken(req.user) }, user)
-    )
-  ).catch(
-    err => {
-      if (err.name === 'NotFoundError') {
-        return res.status(STATUS.UNAUTHORIZED).json(Object.assign(
-          { error: 'User not found' },
-          req.authInfo
-        ))
-      }
-    }
+  return res.status(
+    STATUS.CREATED
+  ).json(
+    Object.assign({ token: createToken(req.user) }, req.user)
   )
 })
 
