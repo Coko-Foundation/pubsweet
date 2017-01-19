@@ -1,5 +1,3 @@
-const request = require('supertest')
-
 const Collection = require('../src/models/Collection')
 const Fragment = require('../src/models/Fragment')
 const User = require('../src/models/User')
@@ -10,12 +8,9 @@ const fixtures = require('./fixtures/fixtures')
 
 const userFixture = fixtures.user
 const adminFixture = fixtures.adminUser
-const otherUserFixture = fixtures.otherUser
 const collectionFixture = fixtures.collection
-const teamFixture = fixtures.team
+const teamFixture = fixtures.contributorTeam
 const fragmentFixture = fixtures.fragment
-
-const NotFoundError = require('../src/errors/NotFoundError')
 
 describe('Teams model', function () {
   let adminId
@@ -157,8 +152,8 @@ describe('Teams model', function () {
     ).then(
       deletedTeam => Team.find(deletedTeam.id)
     ).catch(err => {
-      expect(err.name).toEqual("NotFoundError")
-      if(err.name !== "NotFoundError") throw err
+      expect(err.name).toEqual('NotFoundError')
+      if (err.name !== 'NotFoundError') throw err
     }).then(
       () => User.find(userId)
     ).then(

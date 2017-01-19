@@ -104,6 +104,34 @@ describe('users api', () => {
       )
     })
 
+    it('cant log in with the wrong username', () => {
+      return api.users.authenticate.post({
+        username: 'wrongusername',
+        password: 'wrongpassword'
+      }, {
+        expect: false,
+        token: false
+      }).then(res => {
+        expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
+        console.log(res.body)
+      }
+      )
+    })
+
+    it('cant log in with the wrong password', () => {
+      return api.users.authenticate.post({
+        username: otherUser.username,
+        password: 'wrongpassword'
+      }, {
+        expect: false,
+        token: false
+      }).then(res => {
+        expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
+        console.log(res.body)
+      }
+      )
+    })
+
     it('can not get a list of users', () => {
       return api.users.authenticate.post(
         fixtures.otherUser

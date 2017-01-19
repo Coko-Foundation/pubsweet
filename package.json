@@ -2,8 +2,8 @@
   "name": "pubsweet-backend",
   "version": "0.6.0",
   "scripts": {
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
-    "eslint": "eslint"
+    "test": "npm run eslint && PUBSWEET_SECRET=test NODE_ENV=test jest test/.*test.js",
+    "eslint": "eslint src/ test/ config.js config/"
   },
   "engines": {
     "node": ">=5.0.0",
@@ -24,7 +24,7 @@
     "history": "^1.13.1",
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
-    "jest": "^18.1.0",
+    "joi": "^10.0.6",
     "jsonwebtoken": "^7.1.7",
     "lodash": "^4.0.0",
     "minimatch": "^3.0.0",
@@ -48,6 +48,7 @@
     "ws": "^1.0.1"
   },
   "devDependencies": {
+    "jest": "^18.1.0",
     "eslint": "^3.2.2",
     "eslint-config-standard": "^5.3.5",
     "eslint-loader": "^1.2.0",

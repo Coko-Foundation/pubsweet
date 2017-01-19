@@ -10,7 +10,6 @@ const Authorize = require('../models/Authorize')
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
-const config = require('../../config')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
@@ -31,23 +30,10 @@ function createToken (user) {
 
 // Token issuing
 users.post('/authenticate', authLocal, (req, res) => {
-  return User.find(
-    req.authInfo.id
-  ).then(
-    user => res.status(
-      STATUS.CREATED
-    ).json(
-      Object.assign({ token: createToken(req.user) }, user)
-    )
-  ).catch(
-    err => {
-      if (err.name === 'NotFoundError') {
-        return res.status(STATUS.UNAUTHORIZED).json(Object.assign(
-          { error: 'User not found' },
-          req.authInfo
-        ))
-      }
-    }
+  return res.status(
+    STATUS.CREATED
+  ).json(
+    Object.assign({ token: createToken(req.user) }, req.user)
   )
 })
 
@@ -75,9 +61,7 @@ users.post('/', (req, res, next) => {
 
   if (req.body.admin) throw new ValidationError('invalid propery: admin')
 
-  return user.isUniq().then(
-    response => user.save()
-  ).then(
+  return user.save().then(
     response => res.status(STATUS.CREATED).json(response)
   ).catch(
     next

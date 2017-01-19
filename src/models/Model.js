@@ -1,12 +1,14 @@
 'use strict'
 
 const uuid = require('uuid')
-const remove = require('lodash/remove')
+const Joi = require('joi')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
+const config = require('../../config')
+
 schema()
 
 class Model {
@@ -16,23 +18,48 @@ class Model {
     Object.assign(this, properties)
   }
 
+  validate () {
+    if (this.constructor.schema) {
+      let validationConfiguration = 'validations.' + this.constructor.type
+      let configurableValidations
+
+      if (config.has(validationConfiguration)) {
+        configurableValidations = config.get(validationConfiguration)
+      }
+
+      let schema = Joi.object().keys(
+        Object.assign({}, this.constructor.schema, configurableValidations)
+      )
+
+      let validation = Joi.validate(this, schema)
+      if (validation.error) {
+        logger.info(validation.error)
+        throw validation.error
+      }
+    }
+  }
+
   save () {
     logger.info('Saving', this.type, this.id)
 
-    return this.constructor.find(this.id).then(function (result) {
+    this.validate()
+
+    return this.constructor.find(this.id).then(result => {
       logger.info('Found an existing version, this is an update of:', result)
       return result.rev
-    }).then(function (rev) {
+    }).then(rev => {
       this.rev = rev
       return this._put()
-    }.bind(this)).catch(function (error) {
+    }).catch(error => {
       if (error && error.status === 404) {
-        logger.info('No existing object found, creating a new one:', this.type, this.id)
-        return this._put()
+        return this.isUniq ? this.isUniq() : true
       } else {
         throw error
       }
-    }.bind(this))
+    }).then(response => {
+      logger.info('No existing object found, creating a new one:', this.type, this.id)
+      return this._put()
+    })
   }
 
   _put () {
@@ -52,11 +79,10 @@ class Model {
   }
 
   updateProperties (properties) {
-    logger.info('Updating properties to', properties)
-
     // These properties are modified through setters
     delete properties.owners
-    // TODO: Should we screen/filter more properties here?
+
+    logger.info('Updating properties to', properties)
 
     Object.assign(this, properties)
     return this
@@ -64,13 +90,8 @@ class Model {
 
   setOwners (owners) {
     if (Array.isArray(owners)) {
-      let currentOwners = new Set(this.owners)
-      let newOwners = new Set(owners)
-      let removeOwners = new Set([...currentOwners].filter(x => !newOwners.has(x)))
-      let addOwners = new Set([...newOwners].filter(x => !currentOwners.has(x)))
-
-      Array.from(removeOwners).map(owner => this.removeOwner(owner))
-      Array.from(addOwners).map(owner => this.addOwner(owner))
+      owners.forEach(owner => this.validateOwner(owner))
+      this.owners = owners
     } else {
       throw new ValidationError('owners should be an array')
     }
@@ -80,34 +101,18 @@ class Model {
     if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
   }
 
-  addOwner (owner) {
-    this.validateOwner(owner)
-    this.owners = this.owners || []
-    this.owners.push(owner)
-  }
-
-  removeOwner (owner) {
-    this.validateOwner(owner)
-    remove(this.owners, owner)
-  }
-
   static uuid () {
     return uuid.v4()
   }
 
   // Find all of a certain type e.g.
   // User.all()
-  static all (options) {
-    options = options || {}
+  static all () {
     return db.rel.find(
       this.type
     ).then(
       (results) => {
         return results[this.type + 's']
-      }
-    ).catch(
-      (err) => {
-        console.error(err)
       }
     )
   }
@@ -156,13 +161,6 @@ class Model {
           foundObject.rev = result._rev
           return new this(foundObject)
         })
-      }
-    }).catch(function (err) {
-      if (err.name !== 'NotFoundError') {
-        console.error('Error', err)
-        throw err
-      } else {
-        throw err
       }
     })
   }

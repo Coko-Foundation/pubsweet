@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../../config')
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
 
@@ -12,7 +11,7 @@ let dbCleaner = () => {
   return global.db.destroy().then(
     (response) => {
       global.db = new PouchDB(dbName)
-      return db.allDocs()
+      return global.db.allDocs()
     }
   ).then(
     (response) => {

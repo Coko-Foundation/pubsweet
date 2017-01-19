@@ -46,8 +46,11 @@ const fragments = {
 
 const users = {
   authenticate: {
-    post: user => {
-      return request(
+    post: (user, opts = {}) => {
+      let expect = opts.expect === undefined ? true : opts.expect
+      let token = opts.token === undefined ? true : opts.token
+
+      let req = request(
         api
       ).post(
         '/api/users/authenticate'
@@ -56,11 +59,21 @@ const users = {
           username: user.username,
           password: user.password
         }
-      ).expect(
-        STATUS.CREATED
-      ).then(
-        res => res.body.token
       )
+
+      if (expect) {
+        req = req.expect(
+          STATUS.CREATED
+        )
+      }
+
+      if (token) {
+        return req.then(
+          res => res.body.token
+        )
+      } else {
+        return req
+      }
     }
   },
   post: user => {

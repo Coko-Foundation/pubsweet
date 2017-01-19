@@ -25,3 +25,8 @@ it('should upload a file and preserve the extension and serve the file', () => {
   })
 })
 
+it('should serve a 404 if the file does not exist', () => {
+  return api.upload.get('/uploads/nofilehere').then(res => {
+    expect(res.statusCode).toBe(404)
+  })
+})
