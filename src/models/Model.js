@@ -1,7 +1,6 @@
 'use strict'
 
 const uuid = require('uuid')
-const pull = require('lodash/pull')
 const Joi = require('joi')
 
 const schema = require('./schema')
@@ -89,13 +88,8 @@ class Model {
 
   setOwners (owners) {
     if (Array.isArray(owners)) {
-      let currentOwners = new Set(this.owners)
-      let newOwners = new Set(owners)
-      let removeOwners = new Set([...currentOwners].filter(x => !newOwners.has(x)))
-      let addOwners = new Set([...newOwners].filter(x => !currentOwners.has(x)))
-
-      Array.from(removeOwners).map(owner => this.removeOwner(owner))
-      Array.from(addOwners).map(owner => this.addOwner(owner))
+      owners.forEach(owner => this.validateOwner(owner))
+      this.owners = owners
     } else {
       throw new ValidationError('owners should be an array')
     }
@@ -103,17 +97,6 @@ class Model {
 
   validateOwner (owner) {
     if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
-  }
-
-  addOwner (owner) {
-    this.validateOwner(owner)
-    this.owners = this.owners || []
-    this.owners.push(owner)
-  }
-
-  removeOwner (owner) {
-    this.validateOwner(owner)
-    pull(this.owners, owner)
   }
 
   static uuid () {
