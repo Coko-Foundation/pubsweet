@@ -33,7 +33,7 @@ class Model {
 
       let validation = Joi.validate(this, schema)
       if (validation.error) {
-        console.log(validation)
+        logger.info(validation.error)
         throw validation.error
       }
     }
