@@ -34,6 +34,26 @@ describe('Model', function () {
     })
   })
 
+  it('raises an error if trying to find all on a destroyed database', () => {
+    return global.db.destroy().then(
+      () => User.all()
+    ).catch(err => {
+      expect(err.name).toEqual('Error')
+    }).then(() => {
+      global.db = new PouchDB(global.db._db_name)
+    })
+  })
+
+  it('raises an error if trying to save on a destroyed database', () => {
+    return global.db.destroy().then(
+      () => user.save()
+    ).catch(err => {
+      expect(err.name).toEqual('Error')
+    }).then(() => {
+      global.db = new PouchDB(global.db._db_name)
+    })
+  })
+
   it('can set the owners of a Collection', () => {
     var collection = new Collection(fixtures.collection)
     return collection.save().then((collection) => {
@@ -43,6 +63,13 @@ describe('Model', function () {
       expect(collection.owners.sort()).toEqual([user.id, otherUser.id].sort())
       collection.setOwners([user.id])
       expect(collection.owners).toEqual([user.id])
+
+      try {
+        collection.setOwners('notAnArray')
+      } catch (err) {
+        expect(err.name).toEqual('ValidationError')
+        expect(err.message).toEqual('owners should be an array')
+      }
     })
   })
 

@@ -74,9 +74,7 @@ users.post('/', (req, res, next) => {
 
   if (req.body.admin) throw new ValidationError('invalid propery: admin')
 
-  return user.isUniq().then(
-    response => user.save()
-  ).then(
+  return user.save().then(
     response => res.status(STATUS.CREATED).json(response)
   ).catch(
     next

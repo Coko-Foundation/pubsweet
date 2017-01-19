@@ -26,4 +26,12 @@ describe('User', function () {
       expect(user.validPassword('wrongpassword')).toEqual(false)
     })
   })
+
+  it('raises an error if trying to save a non-unique user', () => {
+    var user = new User(userFixture)
+
+    return user.save().catch(err => {
+      expect(err.name).toEqual('ConflictError')
+    })
+  })
 })

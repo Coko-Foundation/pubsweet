@@ -44,20 +44,22 @@ class Model {
 
     this.validate()
 
-    return this.constructor.find(this.id).then(function (result) {
+    return this.constructor.find(this.id).then(result => {
       logger.info('Found an existing version, this is an update of:', result)
       return result.rev
-    }).then(function (rev) {
+    }).then(rev => {
       this.rev = rev
       return this._put()
-    }.bind(this)).catch(function (error) {
+    }).catch(error => {
       if (error && error.status === 404) {
-        logger.info('No existing object found, creating a new one:', this.type, this.id)
-        return this._put()
+        return this.isUniq ? this.isUniq() : true
       } else {
         throw error
       }
-    }.bind(this))
+    }).then(response => {
+      logger.info('No existing object found, creating a new one:', this.type, this.id)
+      return this._put()
+    })
   }
 
   _put () {
@@ -105,17 +107,12 @@ class Model {
 
   // Find all of a certain type e.g.
   // User.all()
-  static all (options) {
-    options = options || {}
+  static all () {
     return db.rel.find(
       this.type
     ).then(
       (results) => {
         return results[this.type + 's']
-      }
-    ).catch(
-      (err) => {
-        console.error(err)
       }
     )
   }

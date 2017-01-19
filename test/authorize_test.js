@@ -6,7 +6,7 @@ const fixtures = require('./fixtures/fixtures')
 const createBasicCollection = require('./helpers/basic_collection')
 
 const adminFixture = fixtures.adminUser
-const userFixture = fixtures.user
+const userFixture = fixtures.updatedUser
 
 describe('Authorize', () => {
   var collection
@@ -21,11 +21,11 @@ describe('Authorize', () => {
 
   describe('admin user', () => {
     it('can create fragments', () => {
-      var user = new User(adminFixture)
-      return user.save().then(
+      var admin = new User(adminFixture)
+      return admin.save().then(
         user => {
           const url = `/api/collections/${collection.id}/fragments`
-          return Authorize.can(user.id, 'create', url)
+          return Authorize.can(admin.id, 'create', url)
         }
       ).then(
         permission => expect(permission).toEqual(true)
@@ -35,12 +35,12 @@ describe('Authorize', () => {
 
   describe('user without a team', () => {
     it('can not create a fragment', () => {
-      var user = new User(userFixture)
-      return user.save().then(
+      var userWithoutTeam = new User(userFixture)
+      return userWithoutTeam.save().then(
         user => {
           const url = `/api/collections/${collection.id}/fragments`
 
-          return Authorize.can(user.id, 'create', url)
+          return Authorize.can(userWithoutTeam.id, 'create', url)
         }
       ).catch(err => {
         expect(err.name).toEqual('AuthorizationError')
