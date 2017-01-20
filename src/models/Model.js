@@ -18,24 +18,26 @@ class Model {
     Object.assign(this, properties)
   }
 
+  static validations () {
+    let validationConfiguration = 'validations.' + this.type
+    let configurableValidations
+
+    if (config.has(validationConfiguration)) {
+      configurableValidations = config.get(validationConfiguration)
+    }
+
+    return Joi.object().keys(
+      Object.assign({}, this.schema, configurableValidations)
+    )
+  }
+
   validate () {
-    if (this.constructor.schema) {
-      let validationConfiguration = 'validations.' + this.constructor.type
-      let configurableValidations
-
-      if (config.has(validationConfiguration)) {
-        configurableValidations = config.get(validationConfiguration)
-      }
-
-      let schema = Joi.object().keys(
-        Object.assign({}, this.constructor.schema, configurableValidations)
-      )
-
-      let validation = Joi.validate(this, schema)
-      if (validation.error) {
-        logger.info(validation.error)
-        throw validation.error
-      }
+    let validation = Joi.validate(this, this.constructor.validations())
+    if (validation.error) {
+      logger.info(validation.error)
+      throw validation.error
+    } else {
+      return true
     }
   }
 
