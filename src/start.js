@@ -86,7 +86,6 @@ const startWatcher = () => {
 const compiler = webpack(webpackconfig)
 
 const runapp = (err, stats) => {
-
   if (err) onError(err)
 
   const rawapp = express()
