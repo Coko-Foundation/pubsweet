@@ -4,8 +4,6 @@ const logger = require('./logger')
 const Git = require('git-wrapper2-promise')
 const spawn = require('child-process-promise').spawn
 
-const gitlab = repo => `git+https://gitlab.coko.foundation/${repo}.git`
-
 const getpkgjson = name => {
   return JSON.stringify({
     name: name,

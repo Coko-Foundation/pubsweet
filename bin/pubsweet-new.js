@@ -2,7 +2,6 @@
 
 const program = require('commander')
 const logger = require('../src/logger')
-const path = require('path')
 const fs = require('fs-extra')
 const colors = require('colors/safe')
 
