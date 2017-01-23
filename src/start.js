@@ -63,7 +63,7 @@ const startWatcher = () => {
     ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log|app|uploads)/
   })
 
-  update = (msg, reload) => {
+  let update = (msg, reload) => {
     logger.info(`Detected filesystem change: ${msg}`)
     if (reload) reloadServer()
   }

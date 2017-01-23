@@ -2,7 +2,7 @@
 
 const winston = require('winston')
 
-var logger
+let logger
 
 if (process.env.NODE_ENV !== 'test') {
   logger = new (winston.Logger)({

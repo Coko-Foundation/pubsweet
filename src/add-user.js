@@ -22,7 +22,7 @@ const logResult = result => new Promise(
   resolve => {
     logger.info('Received the following answers:')
 
-    for (var entry in result) {
+    for (const entry in result) {
       const answer = entry === 'password' ? '<redacted>' : result[entry]
       logger.info(`  ${entry}: ${answer}`)
     }
@@ -31,7 +31,7 @@ const logResult = result => new Promise(
   }
 )
 
-maybeaddowner = user => new Promise(
+const maybeaddowner = user => new Promise(
   (resolve, reject) => {
     if (user.admin) {
       const Collection = require(`${backend()}/src/models/Collection`)
@@ -55,7 +55,7 @@ maybeaddowner = user => new Promise(
 
 const setup = options => {
   logger.info('Creating user')
-  const User = require(`${backend()}/src/models/User')
+  const User = require(`${backend()}/src/models/User`)
   const newuser = new User(options)
   return newuser.save().then(maybeaddowner)
 }

@@ -29,7 +29,7 @@ program
   .option('--dev', 'Generate development mode database')
   .option('--clobber', 'Overwrite any existing database')
 
-for (var key in properties) {
+for (const key in properties) {
   program.option(`--${key} [string]`, properties[key].description)
 }
 

@@ -80,7 +80,7 @@ const updateconfig = modules => new Promise(
         const old = config.pubsweet.components || []
         config.pubsweet.components = old.concat(modules)
 
-        configstr = `
+        const configstr = `
   const path = require('path')
 
   module.exports = ${JSON.stringify(config, null, 2)}

@@ -29,7 +29,7 @@ program
   .option('--dev', 'Setup app for development')
   .option('--clobber', 'Overwrite any existing files')
 
-for (var key in properties) {
+for (const key in properties) {
   program.option(`--${key} [string]`, properties[key].description)
 }
 
