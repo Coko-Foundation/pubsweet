@@ -11,7 +11,7 @@ export default class Summary extends React.Component {
     if (fragment.source) {
       var parser = new DOMParser() // eslint-disable-line
       var doc = parser.parseFromString(fragment.source, 'text/html')
-      summary = doc.getElementsByTagName('abstract')[0].innerText
+      summary = doc.getElementsByTagName('abstract').length > 0 ? doc.getElementsByTagName('abstract')[0].innerText : null
     }
     if (!summary) {
       summary = 'No summary available.'
