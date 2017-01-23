@@ -110,9 +110,9 @@ const gitsetup = () => {
   ).then(
     () => git.commit('Initial app commit')
   ).then(
-    () => new Promise(done => {
+    () => new Promise((resolve, reject) => {
       logger.info('git repository set up in app directory with initial commit')
-      done()
+      resolve()
     })
   ).catch(childProcess => logger.error('git setup failed:', childProcess.stderr))
 }
