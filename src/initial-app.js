@@ -11,10 +11,10 @@ const getpkgjson = name => {
     name: name,
     description: 'A new pubsweet app',
     dependencies: {
-      'pubsweet-backend': '^0.5.0',
+      'pubsweet-backend': '^0.6.0',
       'pubsweet-frontend': '^0.6.0',
       'pubsweet-component-blog': '^0.1.0',
-      'pubsweet-component-login': '^0.1.0',
+      'pubsweet-component-login': '^0.2.1',
       'pubsweet-component-posts-manager': '^0.1.0',
       'pubsweet-component-manage': '^0.1.0',
       'pubsweet-component-science-reader': '^0.1.0',
