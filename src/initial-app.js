@@ -104,10 +104,10 @@ const gitsetup = () => {
     () => spawn('git', [
       'add',
       '-f',
-     'api/db/dev/.gitkeep',
-     'api/db/production/.gitkeep',
-     'logs/dev/.gitkeep',
-     'logs/production/.gitkeep'
+      'api/db/dev/.gitkeep',
+      'api/db/production/.gitkeep',
+      'logs/dev/.gitkeep',
+      'logs/production/.gitkeep'
     ])
   ).then(
     () => git.commit('Initial app commit')
