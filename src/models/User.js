@@ -1,7 +1,7 @@
 'use strict'
 const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 class User extends Model {
