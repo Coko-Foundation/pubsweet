@@ -4,6 +4,8 @@ const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
+const BCRYPT_SALT_ROUNDS = 12
+
 class User extends Model {
   constructor (properties) {
     super(properties)
@@ -23,7 +25,7 @@ class User extends Model {
   }
 
   hashPassword (password) {
-    this.passwordHash = bcrypt.hashSync(password, 1)
+    this.passwordHash = bcrypt.hashSync(password, BCRYPT_SALT_ROUNDS)
   }
 
   updateProperties (properties) {
