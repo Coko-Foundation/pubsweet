@@ -4,8 +4,6 @@ const logger = require('./logger')
 const Git = require('git-wrapper2-promise')
 const spawn = require('child-process-promise').spawn
 
-const gitlab = repo => `git+https://gitlab.coko.foundation/${repo}.git`
-
 const getpkgjson = name => {
   return JSON.stringify({
     name: name,
@@ -104,17 +102,17 @@ const gitsetup = () => {
     () => spawn('git', [
       'add',
       '-f',
-     'api/db/dev/.gitkeep',
-     'api/db/production/.gitkeep',
-     'logs/dev/.gitkeep',
-     'logs/production/.gitkeep'
+      'api/db/dev/.gitkeep',
+      'api/db/production/.gitkeep',
+      'logs/dev/.gitkeep',
+      'logs/production/.gitkeep'
     ])
   ).then(
     () => git.commit('Initial app commit')
   ).then(
-    () => new Promise(done => {
+    () => new Promise((resolve, reject) => {
       logger.info('git repository set up in app directory with initial commit')
-      done()
+      resolve()
     })
   ).catch(childProcess => logger.error('git setup failed:', childProcess.stderr))
 }

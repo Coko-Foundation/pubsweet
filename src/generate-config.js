@@ -1,7 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
 const logger = require('./logger')
-const uuid = require('node-uuid')
 
 const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 

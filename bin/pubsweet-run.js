@@ -53,7 +53,7 @@ const checkDb = () => new Promise(
 )
 
 const makecmd = () => {
-  cmd = `node ${path.join(__dirname, '../src/start.js')}`
+  let cmd = `node ${path.join(__dirname, '../src/start.js')}`
   if (program.dev && program.watch && program.watch.length > 0) {
     program.watch.forEach(path => {
       cmd += ` --watch ${path}`

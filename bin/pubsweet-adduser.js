@@ -54,8 +54,6 @@ if (!appPath || appPath.length === 0) {
   process.exit(1)
 }
 
-const clobber = () => fs.emptyDirSync(dbPath)
-
 const checkExists = () => new Promise(
   (resolve, reject) => {
     fs.stat(appPath, (err, stats) => {

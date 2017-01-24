@@ -24,7 +24,7 @@ const logResult = result => new Promise(
   resolve => {
     logger.info('Received the following answers:')
 
-    for (var entry in result) {
+    for (const entry in result) {
       const answer = entry === 'password' ? '<redacted>' : result[entry]
       logger.info(`  ${entry}: ${answer}`)
     }
@@ -54,7 +54,7 @@ const setup = options => {
   return admin.save().then(
     admin => {
       logger.info('Created admin user: ', options.user.username)
-      collection = new Collection(options.collection)
+      let collection = new Collection(options.collection)
       collection.setOwners([admin.id])
       return collection.save()
     }

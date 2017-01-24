@@ -2,7 +2,6 @@
 
 const program = require('commander')
 const logger = require('../src/logger')
-const path = require('path')
 const fs = require('fs-extra')
 const colors = require('colors/safe')
 
@@ -29,7 +28,7 @@ program
   .option('--dev', 'Setup app for development')
   .option('--clobber', 'Overwrite any existing files')
 
-for (var key in properties) {
+for (const key in properties) {
   program.option(`--${key} [string]`, properties[key].description)
 }
 
