@@ -13,7 +13,7 @@ const ValidationError = require('../errors/ValidationError')
 
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
-const users = express.Router()
+const api = express.Router()
 const logger = require('../logger')
 
 function createToken (user) {
@@ -29,7 +29,7 @@ function createToken (user) {
 }
 
 // Token issuing
-users.post('/authenticate', authLocal, (req, res) => {
+api.post('/authenticate', authLocal, (req, res) => {
   return res.status(
     STATUS.CREATED
   ).json(
@@ -38,7 +38,7 @@ users.post('/authenticate', authLocal, (req, res) => {
 })
 
 // Token verify
-users.get('/authenticate', authBearer, (req, res, next) => {
+api.get('/authenticate', authBearer, (req, res, next) => {
   return User.find(
     req.authInfo.id
   ).then(
@@ -56,7 +56,7 @@ users.get('/authenticate', authBearer, (req, res, next) => {
 })
 
 // Create user
-users.post('/', (req, res, next) => {
+api.post('/', (req, res, next) => {
   const user = new User(req.body)
 
   if (req.body.admin) throw new ValidationError('invalid propery: admin')
@@ -68,7 +68,7 @@ users.post('/', (req, res, next) => {
   )
 })
 
-users.get('/', authBearer, (req, res, next) => {
+api.get('/', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'read', req.originalUrl
   ).then(
@@ -81,7 +81,7 @@ users.get('/', authBearer, (req, res, next) => {
 })
 
 // Get user
-users.get('/:id', authBearer, (req, res, next) => {
+api.get('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'read', req.originalUrl
   ).then(
@@ -94,7 +94,7 @@ users.get('/:id', authBearer, (req, res, next) => {
 })
 
 // Destroy a user
-users.delete('/:id', authBearer, (req, res, next) => {
+api.delete('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'delete', req.originalUrl
   ).then(
@@ -109,7 +109,7 @@ users.delete('/:id', authBearer, (req, res, next) => {
 })
 
 // Update a user
-users.put('/:id', authBearer, (req, res, next) => {
+api.put('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
@@ -135,4 +135,4 @@ users.put('/:id', authBearer, (req, res, next) => {
   )
 })
 
-module.exports = users
+module.exports = api
