@@ -5,7 +5,7 @@ const multer = require('multer')
 
 const api = express.Router()
 
-const collection = require('./api_collection')
+const collection = require('./api_collections')
 api.use('/collections', collection)
 
 // File upload API
