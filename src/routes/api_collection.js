@@ -20,7 +20,7 @@ api.use('/:id/fragments/teams', teams)
 api.use('/:id/teams', teams)
 
 // Create collection
-api.post('/collections', authBearer, (req, res, next) => {
+api.post('/', authBearer, (req, res, next) => {
   return Authorize.can(
     req.authInfo.id, 'create', req.originalUrl
   ).then(
@@ -37,7 +37,7 @@ api.post('/collections', authBearer, (req, res, next) => {
 })
 
 // List collections
-api.get('/collections', (req, res, next) => {
+api.get('/', (req, res, next) => {
   Collection.all().then(
     collections => res.status(STATUS.OK).json(collections)
   ).catch(
