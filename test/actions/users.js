@@ -1,16 +1,40 @@
-const expect = require('chai').expect
+const expect = require.requireActual('chai').expect
 
-const actions = require('../../src/actions/users')
-const describeAction = require('../helpers/action')(actions)
+const actions = require.requireActual('../../src/actions/users')
+const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const T = require('../../src/actions/types')
 
-describe('users', () => {
-
-  describeAction('getUsers', action => {
-    // TODO: test functionality here
+module.exports = app => {
+  describeAction('getUsers', {
+    types: {
+      request: T.GET_USERS_REQUEST,
+      success: T.GET_USERS_SUCCESS,
+      failure: T.GET_USERS_FAILURE
+    },
+    properties: {
+      request: ['team'],
+      success: ['team'],
+      failure: ['isFetching', 'team', 'error']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
 
-  describeAction('updateUser', action => {
-    // TODO: test functionality here
+  describeAction('updateUser', {
+    firstarg: app,
+    types: {
+      request: T.GET_USERS_REQUEST,
+      success: T.GET_USERS_SUCCESS,
+      failure: T.GET_USERS_FAILURE
+    },
+    properties: {
+      request: ['team'],
+      success: ['team'],
+      failure: ['isFetching', 'team', 'error']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
-
-})
+}

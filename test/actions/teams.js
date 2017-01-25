@@ -1,24 +1,75 @@
-const expect = require('chai').expect
+const expect = require.requireActual('chai').expect
 
-const actions = require('../../src/actions/teams')
-const describeAction = require('../helpers/action')(actions)
+const actions = require.requireActual('../../src/actions/teams')
+const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const T = require.requireActual('../../src/actions/types')
+const fixtures = require.requireActual('../fixtures')
 
-describe('teams', () => {
-
-  describeAction('getTeams', action => {
-    // TODO: test functionality here
+module.exports = app => {
+  describeAction('getTeams', {
+    types: {
+      request: T.GET_TEAMS_REQUEST,
+      success: T.GET_TEAMS_SUCCESS,
+      failure: T.GET_TEAMS_FAILURE
+    },
+    properties: {
+      request: ['isFetching'],
+      success: ['isFetching', 'teams'],
+      failure: ['isFetching', 'message']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
 
-  describeAction('createTeam', action => {
-    // TODO: test functionality here
+  describeAction('createTeam', {
+    firstarg: fixtures.readerTeam,
+    types: {
+      request: T.CREATE_TEAM_REQUEST,
+      success: T.CREATE_TEAM_SUCCESS,
+      failure: T.CREATE_TEAM_FAILURE
+    },
+    properties: {
+      request: ['team'],
+      success: ['team'],
+      failure: ['isFetching', 'team', 'error']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
 
-  describeAction('updateTeam', action => {
-    // TODO: test functionality here
+  describeAction('updateTeam', {
+    firstarg: fixtures.readerTeam,
+    types: {
+      request: T.UPDATE_TEAM_REQUEST,
+      success: T.UPDATE_TEAM_SUCCESS,
+      failure: T.UPDATE_TEAM_FAILURE
+    },
+    properties: {
+      request: ['team'],
+      success: ['team'],
+      failure: ['isFetching', 'team', 'error']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
 
-  describeAction('deleteTeam', action => {
-    // TODO: test functionality here
+  describeAction('deleteTeam', {
+    firstarg: fixtures.readerTeam,
+    types: {
+      request: T.DELETE_TEAM_REQUEST,
+      success: T.DELETE_TEAM_SUCCESS,
+      failure: T.DELETE_TEAM_FAILURE
+    },
+    properties: {
+      request: ['team'],
+      success: ['team'],
+      failure: ['isFetching', 'team', 'error']
+    },
+    user: () => app.user
+  }, action => {
+    // optional: more functionality tests here
   })
-
-})
+}
