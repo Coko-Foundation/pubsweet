@@ -16,11 +16,11 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 // Teams
 const teams = require('./api_teams')
 
-api.use('/collections/:id/fragments/teams', teams)
-api.use('/collections/:id/teams', teams)
+api.use('/:id/fragments/teams', teams)
+api.use('/:id/teams', teams)
 
 // Create collection
-api.post('/collections', authBearer, (req, res, next) => {
+api.post('/', authBearer, (req, res, next) => {
   return Authorize.can(
     req.authInfo.id, 'create', req.originalUrl
   ).then(
@@ -37,7 +37,7 @@ api.post('/collections', authBearer, (req, res, next) => {
 })
 
 // List collections
-api.get('/collections', (req, res, next) => {
+api.get('/', (req, res, next) => {
   Collection.all().then(
     collections => res.status(STATUS.OK).json(collections)
   ).catch(
@@ -45,7 +45,7 @@ api.get('/collections', (req, res, next) => {
   )
 })
 
-api.get('/collections/:id', (req, res, next) => {
+api.get('/:id', (req, res, next) => {
   Collection.find(
     req.params.id
   ).then(
@@ -55,7 +55,7 @@ api.get('/collections/:id', (req, res, next) => {
   )
 })
 
-api.delete('/collections/:id', (req, res, next) => {
+api.delete('/:id', (req, res, next) => {
   return Authorize.can(
     req.user, 'read', req.originalUrl
   ).then(
@@ -70,7 +70,7 @@ api.delete('/collections/:id', (req, res, next) => {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
+api.post('/:id/fragments', authBearer, (req, res, next) => {
   return Authorize.can(req.user, 'create', req.originalUrl).then(
     () => Collection.find(req.params.id)
   ).then(
@@ -94,7 +94,7 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
 })
 
 // Get all fragments
-api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
+api.get('/:id/fragments', authBearerAndPublic, (req, res, next) => {
   const fallback = () => {
     return Collection.find(
       req.params.id
@@ -126,7 +126,7 @@ api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
   )
 })
 
-api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, next) => {
+api.get('/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, next) => {
   const fallback = () => Authorize.can(
     undefined, 'read', req.originalUrl
   ).then(
@@ -149,7 +149,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic,
 })
 
 // Update a fragment
-api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+api.put('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
@@ -168,7 +168,7 @@ api.put('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, re
 })
 
 // Delete a fragment
-api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'delete', req.originalUrl
   ).then(

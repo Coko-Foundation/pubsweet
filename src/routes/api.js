@@ -6,7 +6,7 @@ const multer = require('multer')
 const api = express.Router()
 
 const collection = require('./api_collections')
-api.use('/', collection)
+api.use('/collections', collection)
 
 // File upload API
 var storage = multer.diskStorage({
