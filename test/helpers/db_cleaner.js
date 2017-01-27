@@ -2,6 +2,7 @@
 
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'))
+PouchDB.plugin(require('pouchdb-adapter-memory'))
 
 const logger = require('../../src/logger')
 
@@ -10,7 +11,7 @@ let dbCleaner = () => {
 
   return global.db.destroy().then(
     (response) => {
-      global.db = new PouchDB(dbName)
+      global.db = new PouchDB(dbName, { adapter: 'memory' })
       return global.db.allDocs()
     }
   ).then(
