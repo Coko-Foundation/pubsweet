@@ -7,7 +7,7 @@ const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
-const config = require('../../config')
+const validations = require('./validations')
 
 schema()
 
@@ -19,15 +19,7 @@ class Model {
   }
 
   static validations () {
-    let configurableValidations
-
-    if (config.validations && config.validations[this.type]) {
-      configurableValidations = config.validations[this.type]
-    }
-
-    return Joi.object().keys(
-      Object.assign({}, this.schema, configurableValidations)
-    )
+    return validations[this.type]
   }
 
   validate () {

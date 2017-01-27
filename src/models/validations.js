@@ -1,18 +1,70 @@
 'use strict'
 
 // This module is used for communicating validation requirements to the
-// frontend
+// frontend and backend, it sits pretty in the middle.
 
-const Fragment = require('./Fragment')
-const Collection = require('./Collection')
-const User = require('./User')
-const Team = require('./Team')
+const config = require('../../config')
+const Joi = require('joi')
+
+// These are fixed/required validations, they are combined with configurable
+// validations later
 
 let validations = {
-  fragment: Fragment.validations(),
-  collection: Collection.validations(),
-  user: User.validations(),
-  team: Team.validations()
+  fragment: {
+    id: Joi.string().guid().required(),
+    type: Joi.string().required(),
+    title: Joi.string(),
+    rev: Joi.string(),
+    owners: Joi.array().items(Joi.string().guid())
+  },
+  collection: {
+    id: Joi.string().guid().required(),
+    type: Joi.string().required(),
+    title: Joi.string(),
+    rev: Joi.string(),
+    owners: Joi.array().items(Joi.string().guid()),
+    fragments: Joi.array().items(Joi.object({
+      type: Joi.string().valid('fragment')
+    }).unknown(true))
+  },
+  user: {
+    id: Joi.string().guid().required(),
+    type: Joi.string(),
+    username: Joi.string().alphanum().required(),
+    email: Joi.string().email().required(),
+    passwordHash: Joi.string().required(),
+    admin: Joi.boolean(),
+    rev: Joi.string(),
+    fragments: Joi.array().items(Joi.string().guid()),
+    collections: Joi.array().items(Joi.string().guid()),
+    teams: Joi.array().items(Joi.string().guid())
+  },
+  team: {
+    id: Joi.string().guid().required(),
+    type: Joi.string().required(),
+    name: Joi.string().required(),
+    object: Joi.object().required(),
+    teamType: Joi.object().required(),
+    rev: Joi.string(),
+    members: Joi.array().items(Joi.string().guid())
+  }
 }
 
-module.exports = validations
+let allValidations = function (type) {
+  let configurableValidations
+
+  if (config.validations && config.validations[type]) {
+    configurableValidations = config.validations[type]
+  }
+
+  return Joi.object().keys(
+    Object.assign({}, validations[type], configurableValidations)
+  )
+}
+
+module.exports = {
+  fragment: allValidations('fragment'),
+  collection: allValidations('collection'),
+  user: allValidations('user'),
+  team: allValidations('team')
+}
