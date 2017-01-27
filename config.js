@@ -1,11 +1,14 @@
-const config = require('config')
-
 // Config
-const defaultConfig = {
-  dbPath: './db/',
-  secret: 'example'
+
+const path = require('path')
+const logger = require('./src/logger')
+
+let envs = ['test', 'dev', 'stage', 'production']
+
+if (!envs.includes(process.env.NODE_ENV)) {
+  logger.error('The current NODE_ENV value is invalid')
 }
 
-config.util.setModuleDefaults('pubsweet-backend', defaultConfig)
+let envConfig = require(path.join(__dirname, 'config', process.env.NODE_ENV + '.js'))
 
-module.exports = config
+module.exports = envConfig

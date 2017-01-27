@@ -3,10 +3,10 @@
 // This module is used for communicating validation requirements to the
 // frontend
 
-const Fragment = require('./fragment')
-const Collection = require('./collection')
-const User = require('./user')
-const Team = require('./team')
+const Fragment = require('./Fragment')
+const Collection = require('./Collection')
+const User = require('./User')
+const Team = require('./Team')
 
 let validations = {
   fragment: Fragment.validations(),

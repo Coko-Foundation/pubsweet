@@ -19,11 +19,10 @@ class Model {
   }
 
   static validations () {
-    let validationConfiguration = 'validations.' + this.type
     let configurableValidations
 
-    if (config.has(validationConfiguration)) {
-      configurableValidations = config.get(validationConfiguration)
+    if (config.validations && config.validations[this.type]) {
+      configurableValidations = config.validations[this.type]
     }
 
     return Joi.object().keys(

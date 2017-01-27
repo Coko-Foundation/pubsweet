@@ -21,7 +21,6 @@ describe('Validations export', function () {
       fragment.type = undefined
       fragment.validate()
     } catch (error) {
-      console.log(error)
       message = error.message
     }
 
