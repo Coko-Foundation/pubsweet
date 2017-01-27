@@ -9,6 +9,8 @@ if (!envs.includes(process.env.NODE_ENV)) {
   logger.error('The current NODE_ENV value is invalid')
 }
 
-let envConfig = require(path.join(__dirname, 'config', process.env.NODE_ENV + '.js'))
+let appDir = process.env.NODE_CONFIG_DIR || path.join(__dirname, 'config')
+
+let envConfig = require(path.join(appDir, process.env.NODE_ENV + '.js'))
 
 module.exports = envConfig
