@@ -78,15 +78,13 @@ class Authorize {
       }
     ).then(
       ([object, user, permission]) => {
+        if (permission) return permission
+
         const name = user ? user.username : 'public'
         const permstr = permission ? 'is' : 'is not'
         const msg = `User ${name} ${permstr} allowed to ${operation} ${object.type} ${object.id}`
 
-        if (permission) {
-          return permission
-        } else {
-          throw new AuthorizationError(msg)
-        }
+        throw new AuthorizationError(msg)
       }
     ).catch(
       (err) => {

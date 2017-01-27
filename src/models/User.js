@@ -1,8 +1,10 @@
 'use strict'
 const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const Joi = require('joi')
+
+const BCRYPT_COST = 12
 
 class User extends Model {
   constructor (properties) {
@@ -23,7 +25,7 @@ class User extends Model {
   }
 
   hashPassword (password) {
-    this.passwordHash = bcrypt.hashSync(password, 1)
+    this.passwordHash = bcrypt.hashSync(password, BCRYPT_COST)
   }
 
   updateProperties (properties) {

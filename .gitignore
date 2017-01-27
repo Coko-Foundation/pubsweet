@@ -3,3 +3,5 @@ db/
 npm-debug.log
 .DS_Store
 test.log
+uploads/
+coverage/
