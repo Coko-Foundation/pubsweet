@@ -1,6 +1,6 @@
-import 'babel-polyfill'
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 process.env.NODE_ENV = 'production'
+process.env.SILENT_NPM = 'true'
 global.PUBSWEET_COMPONENTS = []
 
 const expect = require.requireActual('chai').expect
@@ -19,10 +19,15 @@ let app = {
 }
 const getapp = () => new Promise(
   (resolve, reject) => {
-    if (app.server) return resolve(app)
-    else {
+    if (app.server) {
+      console.log('TEST APP ALREADY RUNNING')
+      return resolve(app)
+    } else {
+      console.log('EXISTING APP', app)
+      console.log('STARTING A NEW TEST APP')
       startnewapp().then(
         _app => {
+          console.log('SAVING APP', _app)
           app.user = _app.user
           app.collection = _app.collection
           app.server = _app.server
