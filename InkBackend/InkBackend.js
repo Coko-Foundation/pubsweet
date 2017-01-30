@@ -39,7 +39,7 @@ let healthCheckRequest = function (auth) {
   }
 }
 
-let uploadRequest = function(data, auth) {
+let uploadRequest = function (data, auth) {
   return {
     uri: inkRecipe,
     method: 'POST',
@@ -49,7 +49,7 @@ let uploadRequest = function(data, auth) {
       'client': auth.client
     },
     formData: {
-      input_file: data
+      input_files: [data]
     }
   }
 }
@@ -95,11 +95,11 @@ let retryFor30SecondsUntil200 = (uri, auth) => {
   }, { retries: 10, maxTimeout: 60000 })
 }
 
-var InkBackend = function(app) {
+var InkBackend = function (app) {
   app.use('/ink', function (req, res, next) {
     var fileStream = new Busboy({headers: req.headers})
 
-    fileStream.on('file', function(fieldname, file, filename, encoding, contentType) {
+    fileStream.on('file', function (fieldname, file, filename, encoding, contentType) {
       var stream = temp.createWriteStream()
       file.pipe(stream)
 
@@ -119,13 +119,18 @@ var InkBackend = function(app) {
             return uploadToInk(file, auth)
           }).then(([auth, response]) => {
             response = JSON.parse(response)
-            return retryFor30SecondsUntil200(response.process_chain.output_file_path, auth)
+            let url = inkEndpoint +
+              '/api/process_chains/' +
+              response.process_chain.id +
+              '/download_output_file?relative_path=' +
+              response.path.basename(response.process_chain.input_file_manifest[0].path, '.docx') +
+              '.html'
+            return retryFor30SecondsUntil200(url, auth)
           }).then(response => {
             res.send(response)
           }).catch(next)
       })
     })
-
 
     fileStream.on('error', function (err) {
       next(err)
