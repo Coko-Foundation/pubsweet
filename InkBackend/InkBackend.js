@@ -123,7 +123,7 @@ var InkBackend = function (app) {
               '/api/process_chains/' +
               response.process_chain.id +
               '/download_output_file?relative_path=' +
-              response.path.basename(response.process_chain.input_file_manifest[0].path, '.docx') +
+              path.basename(response.process_chain.input_file_manifest[0].path, '.docx') +
               '.html'
             return retryFor30SecondsUntil200(url, auth)
           }).then(response => {
