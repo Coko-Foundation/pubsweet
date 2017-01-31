@@ -27,22 +27,13 @@ class User extends Model {
   }
 
   validPassword (password) {
+    console.log('comparing password', password)
     return bcrypt.compare(password, this.passwordHash)
   }
 
   hashPassword (password) {
+    console.log('hasing password', password)
     return bcrypt.hash(password, BCRYPT_COST)
-  }
-
-  updateProperties (properties) {
-    if (properties.password) {
-      return this.hashPassword(properties.password).then(() => {
-        delete properties.password
-        return super.updateProperties(properties)
-      })
-    } else {
-      return super.updateProperties(properties)
-    }
   }
 
   isUniq () {
