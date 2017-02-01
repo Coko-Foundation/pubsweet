@@ -9,21 +9,18 @@ describe('User', function () {
     return dbCleaner()
   })
 
-  it('returns true if passwords match', function () {
-    var user = new User(userFixture)
-
-    expect(user.validPassword(userFixture.password)).toEqual(true)
-    expect(user.validPassword('wrongpassword')).toEqual(false)
-  })
-
   it('validates passwords correctly after saving to db', function () {
     var user = new User(userFixture)
 
     return user.save().then(function (user) {
       return User.findByUsername(user.username)
     }).then(function (user) {
-      expect(user.validPassword(userFixture.password)).toEqual(true)
-      expect(user.validPassword('wrongpassword')).toEqual(false)
+      return Promise.all([user, user.validPassword(userFixture.password)])
+    }).then(([user, isValid]) => {
+      expect(isValid).toEqual(true)
+      return Promise.all([user, user.validPassword('wrongpassword')])
+    }).then(([user, isValid]) => {
+      expect(isValid).toEqual(false)
     })
   })
 

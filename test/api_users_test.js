@@ -113,7 +113,6 @@ describe('users api', () => {
         token: false
       }).then(res => {
         expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
-        console.log(res.body)
       }
       )
     })
@@ -127,7 +126,6 @@ describe('users api', () => {
         token: false
       }).then(res => {
         expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
-        console.log(res.body)
       }
       )
     })

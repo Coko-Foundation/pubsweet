@@ -49,13 +49,16 @@ module.exports = (app = express()) => {
     let errorMessage = 'Wrong username or password.'
     logger.info('User finding:', username)
 
-    User.findByUsername(username).then((user) => {
+    User.findByUsername(username).then(user => {
       logger.info('User found:', user.username)
-      if (!user.validPassword(password)) {
+      return Promise.all([user, user.validPassword(password)])
+    }).then(([user, isValid]) => {
+      if (isValid) {
+        return done(null, user, {id: user.id})
+      } else {
         logger.info('Invalid password for user:', username)
         return done(null, false, { message: errorMessage })
       }
-      return done(null, user, {id: user.id})
     }).catch((err) => {
       logger.info('User not found', err)
       if (err) { return done(null, false, { message: errorMessage }) }
