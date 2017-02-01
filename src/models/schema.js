@@ -9,10 +9,10 @@ PouchDB.plugin(require('pouchdb-upsert'))
 
 if (process.env.NODE_ENV === 'test') {
   PouchDB.plugin(require('pouchdb-adapter-memory'))
-  const dbPath = path.join(config.get('pubsweet-backend.dbPath'), require('uuid')())
+  const dbPath = path.join(config['pubsweet-backend'].dbPath, require('uuid')())
   global.db = new PouchDB(dbPath, { adapter: 'memory' })
 } else {
-  const dbPath = path.join(config.get('pubsweet-backend.dbPath'), process.env.NODE_ENV)
+  const dbPath = path.join(config['pubsweet-backend'].dbPath, process.env.NODE_ENV)
   global.db = new PouchDB(dbPath)
 }
 
