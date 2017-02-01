@@ -78,11 +78,9 @@ describe('Model', function () {
     var user = new User(fixtures.user)
     user.email = 'notanemail'
 
-    try {
-      user.save()
-    } catch (err) {
+    user.save().catch(err => {
       expect(err.name).toEqual('ValidationError')
       expect(err.message).toEqual('child "email" fails because ["email" must be a valid email]')
-    }
+    })
   })
 })
