@@ -30,7 +30,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 
@@ -40,7 +40,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 
@@ -50,7 +50,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 

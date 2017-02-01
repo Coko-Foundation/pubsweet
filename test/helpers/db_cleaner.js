@@ -4,7 +4,7 @@ const PouchDB = require('../../src/db')
 const logger = require('../../src/logger')
 
 let dbCleaner = () => {
-  let dbName = global.db._db_name
+  let dbName = global.db.name
 
   return global.db.destroy().then(
     (response) => {
