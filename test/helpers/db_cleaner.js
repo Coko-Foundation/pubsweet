@@ -1,9 +1,6 @@
 'use strict'
 
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
-PouchDB.plugin(require('pouchdb-adapter-memory'))
-
+const PouchDB = require('../../src/db')
 const logger = require('../../src/logger')
 
 let dbCleaner = () => {
