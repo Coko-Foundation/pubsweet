@@ -3,37 +3,34 @@ const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
 
-const BCRYPT_COST = 12
+const BCRYPT_COST = process.env.NODE_ENV === 'test' ? 1 : 12
 
 class User extends Model {
   constructor (properties) {
     super(properties)
-
-    if (this.password) {
-      this.hashPassword(this.password)
-      delete this.password
-    }
 
     this.type = 'user'
     this.email = properties.email
     this.username = properties.username
   }
 
+  save () {
+    if (this.password) {
+      return this.hashPassword(this.password).then(hash => {
+        delete this.password
+        this.passwordHash = hash
+      }).then(() => super.save())
+    } else {
+      return super.save()
+    }
+  }
+
   validPassword (password) {
-    return bcrypt.compareSync(password, this.passwordHash)
+    return bcrypt.compare(password, this.passwordHash)
   }
 
   hashPassword (password) {
-    this.passwordHash = bcrypt.hashSync(password, BCRYPT_COST)
-  }
-
-  updateProperties (properties) {
-    if (properties.password) {
-      this.hashPassword(properties.password)
-      delete properties.password
-    }
-
-    return super.updateProperties(properties)
+    return bcrypt.hash(password, BCRYPT_COST)
   }
 
   isUniq () {

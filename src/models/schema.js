@@ -7,15 +7,14 @@ PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('relational-pouch'))
 PouchDB.plugin(require('pouchdb-upsert'))
 
-let dbPath
 if (process.env.NODE_ENV === 'test') {
-  let uuid = require('uuid').v4()
-  dbPath = path.join(config['pubsweet-backend'].dbPath, process.env.NODE_ENV + uuid)
+  PouchDB.plugin(require('pouchdb-adapter-memory'))
+  const dbPath = path.join(config.get('pubsweet-backend.dbPath'), require('uuid')())
+  global.db = new PouchDB(dbPath, { adapter: 'memory' })
 } else {
-  dbPath = path.join(config['pubsweet-backend'].dbPath, process.env.NODE_ENV)
+  const dbPath = path.join(config.get('pubsweet-backend.dbPath'), process.env.NODE_ENV)
+  global.db = new PouchDB(dbPath)
 }
-
-global.db = new PouchDB(dbPath)
 
 module.exports = function () {
   if (!db.rel) {

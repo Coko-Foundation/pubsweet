@@ -1,4 +1,5 @@
 const PouchDB = require('pouchdb')
+PouchDB.plugin(require('pouchdb-adapter-memory'))
 
 const Model = require('../src/models/Model')
 const User = require('../src/models/User')
@@ -30,7 +31,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name)
+      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
     })
   })
 
@@ -40,7 +41,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name)
+      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
     })
   })
 
@@ -50,7 +51,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name)
+      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
     })
   })
 
@@ -77,11 +78,9 @@ describe('Model', function () {
     var user = new User(fixtures.user)
     user.email = 'notanemail'
 
-    try {
-      user.save()
-    } catch (err) {
+    user.save().catch(err => {
       expect(err.name).toEqual('ValidationError')
       expect(err.message).toEqual('child "email" fails because ["email" must be a valid email]')
-    }
+    })
   })
 })
