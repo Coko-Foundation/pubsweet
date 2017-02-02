@@ -1,5 +1,5 @@
 const Fragment = require('../src/models/Fragment')
-const validations = require('../src/models/validations')
+const validations = require('../src/models/validations')('../config')
 
 describe('Validations export', function () {
   it('exports useable combined validations (static + configurable)', () => {

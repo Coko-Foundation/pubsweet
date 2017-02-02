@@ -1,9 +1,8 @@
 'use strict'
 
 // This module is used for communicating validation requirements to the
-// frontend and backend, it sits pretty in the middle.
+// frontend and backend, it sits in the middle.
 
-const config = require('../../config')
 const Joi = require('joi')
 
 // These are fixed/required validations, they are combined with configurable
@@ -50,7 +49,7 @@ let validations = {
   }
 }
 
-let allValidations = function (type) {
+let allValidations = function (type, config) {
   let configurableValidations
 
   if (config.validations && config.validations[type]) {
@@ -62,9 +61,11 @@ let allValidations = function (type) {
   )
 }
 
-module.exports = {
-  fragment: allValidations('fragment'),
-  collection: allValidations('collection'),
-  user: allValidations('user'),
-  team: allValidations('team')
+module.exports = function (config) {
+  return {
+    fragment: allValidations('fragment', config),
+    collection: allValidations('collection', config),
+    user: allValidations('user', config),
+    team: allValidations('team', config)
+  }
 }

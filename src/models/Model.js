@@ -7,7 +7,7 @@ const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('../logger')
-const validations = require('./validations')
+const validations = require('./validations')(require('../../config'))
 
 schema()
 
