@@ -5,38 +5,54 @@ import Joi from 'joi-browser'
 class PubSweetFormGroup extends React.Component {
   constructor (props) {
     super(props)
-    this.validationState = this.validationState.bind(this)
+    this.validateState = this.validateState.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      startedEditing: false
+    }
   }
 
-  validationState () {
+  validateState (state) {
+    if (!state.startedEditing) return null
+
     let [model, property] = this.props.modelProperty.split('.')
     let validation = Joi.reach(this.props.validations[model], property)
 
-    let result = Joi.validate(validation, this.state.value)
+    let result = validation.label(this.props.label).validate(state.value)
     if (result.error) {
-      this.setState({ validationMessage: result.details.message })
-      return 'error'
+      Object.assign(state, {
+        validation: 'error',
+        validationMessage: result.error.message
+      })
     } else {
-      this.setState({ validationMessage: '' })
-      return 'success'
+      Object.assign(state, {
+        validation: 'success',
+        validationMessage: ''
+      })
     }
   }
 
   handleChange (e) {
-    this.setState({ value: e.target.value })
+    let nextState = {
+      startedEditing: true,
+      value: e.target.value
+    }
+    this.validateState(nextState)
+    this.setState(nextState)
   }
 
   render () {
     return <FormGroup
       controlId={this.props.controlId}
-      validationState={this.validationState()}
+      validationState={this.state.validation}
     >
-      <ControlLabel>Working example with validation</ControlLabel>
+      <ControlLabel>{this.props.label}</ControlLabel>
       <FormControl
         type='text'
         value={this.state.value}
         placeholder={this.props.placeholder}
         onChange={this.handleChange}
+        inputRef={this.props.inputRef}
       />
       <FormControl.Feedback />
       <HelpBlock>{this.state.validationMessage}</HelpBlock>
@@ -45,11 +61,12 @@ class PubSweetFormGroup extends React.Component {
 }
 
 PubSweetFormGroup.propTypes = {
-  controlId: React.PropTypes.string.required,
+  controlId: React.PropTypes.string.isRequired,
   label: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   validations: React.PropTypes.object,
-  modelProperty: React.PropTypes.string
+  modelProperty: React.PropTypes.string,
+  inputRef: React.PropTypes.func
 }
 
 export default PubSweetFormGroup
