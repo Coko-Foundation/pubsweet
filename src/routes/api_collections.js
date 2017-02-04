@@ -16,19 +16,18 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 // Teams
 const teams = require('./api_teams')
 
-api.use('/:id/fragments/teams', teams)
+// api.use('/:collectionId/fragments/:fragmentId/teams', teams)
 api.use('/:id/teams', teams)
 
-// Create collection
+// Create a collection
 api.post('/', authBearer, (req, res, next) => {
+  let collection = new Collection(req.body)
+  collection.setOwners([req.user])
+
   return Authorize.can(
-    req.authInfo.id, 'create', req.originalUrl
+    req.authInfo.id, 'create', collection
   ).then(
-    () => {
-      let collection = new Collection(req.body)
-      collection.setOwners([req.user])
-      return collection.save()
-    }
+    () => collection.save()
   ).then(
     response => res.status(STATUS.CREATED).json(response)
   ).catch(
@@ -45,6 +44,7 @@ api.get('/', (req, res, next) => {
   )
 })
 
+// Retrieve a collection
 api.get('/:id', (req, res, next) => {
   Collection.find(
     req.params.id
@@ -55,6 +55,24 @@ api.get('/:id', (req, res, next) => {
   )
 })
 
+// Update a collection
+api.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => Collection.find(req.params.id)
+  ).then(
+    collection => collection.updateProperties(req.body)
+  ).then(
+    collection => collection.save()
+  ).then(
+    collection => res.status(STATUS.OK).json(collection)
+  ).catch(
+    next
+  )
+})
+
+// Delete a collection
 api.delete('/:id', (req, res, next) => {
   return Authorize.can(
     req.user, 'read', req.originalUrl
@@ -126,6 +144,7 @@ api.get('/:id/fragments', authBearerAndPublic, (req, res, next) => {
   )
 })
 
+// Retrieve a fragment
 api.get('/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, next) => {
   const fallback = () => Authorize.can(
     undefined, 'read', req.originalUrl

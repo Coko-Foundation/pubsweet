@@ -59,7 +59,7 @@ api.get('/authenticate', authBearer, (req, res, next) => {
 api.post('/', (req, res, next) => {
   const user = new User(req.body)
 
-  if (req.body.admin) throw new ValidationError('invalid propery: admin')
+  if (req.body.admin) throw new ValidationError('invalid property: admin')
 
   return user.save().then(
     response => res.status(STATUS.CREATED).json(response)

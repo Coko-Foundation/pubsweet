@@ -2,12 +2,25 @@
 const Model = require('./Model')
 const Fragment = require('./Fragment')
 const Joi = require('joi')
+const logger = require('../logger')
 
 class Collection extends Model {
   constructor (properties) {
     super(properties)
     this.type = 'collection'
     this.title = properties.title
+  }
+
+  updateProperties (properties) {
+    // These properties are modified through setters
+    delete properties.owners
+
+    // FIXME: need to protect any other properties?
+
+    logger.info('Updating properties to', properties)
+
+    Object.assign(this, properties)
+    return this
   }
 
   // Gets fragments in a collection, supports filtering by function e.g.
