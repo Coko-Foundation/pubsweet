@@ -73,9 +73,9 @@ api.put('/:id', authBearer, (req, res, next) => {
 })
 
 // Delete a collection
-api.delete('/:id', (req, res, next) => {
+api.delete('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
-    req.user, 'read', req.originalUrl
+    req.user, 'delete', req.originalUrl
   ).then(
     () => Collection.find(req.params.id)
   ).then(
