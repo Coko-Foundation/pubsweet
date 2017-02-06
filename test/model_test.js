@@ -58,12 +58,23 @@ describe('Model', function () {
   it('can set the owners of a Collection', () => {
     var collection = new Collection(fixtures.collection)
     return collection.save().then((collection) => {
+      expect(collection.isOwner(user)).toBe(false)
+      expect(collection.isOwner(otherUser)).toBe(false)
+
       collection.setOwners([otherUser.id])
       expect(collection.owners).toEqual([otherUser.id])
+      expect(collection.isOwner(user)).toBe(false)
+      expect(collection.isOwner(otherUser)).toBe(true)
+
       collection.setOwners([user.id, otherUser.id])
       expect(collection.owners.sort()).toEqual([user.id, otherUser.id].sort())
+      expect(collection.isOwner(user)).toBe(true)
+      expect(collection.isOwner(otherUser)).toBe(true)
+
       collection.setOwners([user.id])
       expect(collection.owners).toEqual([user.id])
+      expect(collection.isOwner(user)).toBe(true)
+      expect(collection.isOwner(otherUser)).toBe(false)
 
       try {
         collection.setOwners('notAnArray')
