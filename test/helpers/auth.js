@@ -4,7 +4,6 @@ const token = () => global.window.localStorage.getItem('token')
 
 const login = user => new Promise(
   (resolve, reject) => {
-    console.log('LOGIN AS USER:', user)
     const loginactions = require.requireActual('pubsweet-component-login/actions')
     const T = require.requireActual('pubsweet-component-login/types')
     loginactions.loginUser(user)(result => {

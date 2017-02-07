@@ -120,16 +120,19 @@ const describeAction = actions => (key, opts, testFunctionality) => {
         : ''
 
       it(`dispatches ${key}Failure ${propmsg}on failed response`, () => {
-        return action(get(opts.firstarg), get(opts.secondarg))(
-          typedmsg => new Promise(
-            (resolve, reject) => resolve(typedmsg)
-          ),
-          mockGetState
+        return auth.logout().then(
+          () => action(get(opts.firstarg), get(opts.secondarg))(
+            typedmsg => new Promise(
+              (resolve, reject) => resolve(typedmsg)
+            ),
+            mockGetState
+          )
         ).then(
           dispatched => {
             expect(dispatched).to.be.ok
             expect(dispatched.type).to.equal(opts.types.failure)
             console.log('DISPATCHED:', dispatched)
+            console.log('TOKEN:', auth.token())
             if (properties) {
               expect(Object.keys(dispatched)).to.include.members(properties)
             }
