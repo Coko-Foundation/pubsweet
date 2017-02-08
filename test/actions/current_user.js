@@ -15,7 +15,7 @@ module.exports = app => {
       failure: ['isAuthenticated', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
 
   })
 }

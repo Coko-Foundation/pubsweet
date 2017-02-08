@@ -16,9 +16,9 @@ const mockGetState = () => {
 
 const get = arg => typeof arg === 'function' ? arg() : arg
 
-const describeAction = actions => (key, opts, testFunctionality) => {
+const describeAction = actions => (key, opts, cb) => {
   if (typeof opts === 'function') {
-    testFunctionality = opts
+    cb = opts
     opts = {}
   }
 
@@ -31,6 +31,12 @@ const describeAction = actions => (key, opts, testFunctionality) => {
   })
 
   describe(key, () => {
+
+    const data = {}
+    let action
+
+    if (cb) afterAll(() => cb(action, data))
+
     // functional tests - no server required
     it('is exported from the file', () => {
       expect(actions).to.have.property(key)
@@ -40,7 +46,7 @@ const describeAction = actions => (key, opts, testFunctionality) => {
       expect(allactions).to.have.property(key)
     })
 
-    const action = actions[key]
+    action = actions[key]
 
     it('returns a fetcher function', () => {
       const returned = action(mockDispatch, mockGetState)
@@ -84,6 +90,8 @@ const describeAction = actions => (key, opts, testFunctionality) => {
         if (properties) {
           expect(Object.keys(dispatched)).to.include.members(properties)
         }
+
+        data[opts.types.request] = dispatched
       })
     }
 
@@ -108,6 +116,7 @@ const describeAction = actions => (key, opts, testFunctionality) => {
             if (properties) {
               expect(Object.keys(dispatched)).to.include.members(properties)
             }
+            data[opts.types.success] = dispatched
           }
         ).then(auth.logout)
       })
@@ -129,13 +138,18 @@ const describeAction = actions => (key, opts, testFunctionality) => {
           )
         ).then(
           dispatched => {
+            console.log('DISPATCHED:', dispatched)
+            console.log('TYPES:', {
+              actual: dispatched.type,
+              expected: opts.types.failure
+            })
+            console.log('TOKEN:', auth.token())
             expect(dispatched).to.be.ok
             expect(dispatched.type).to.equal(opts.types.failure)
-            console.log('DISPATCHED:', dispatched)
-            console.log('TOKEN:', auth.token())
             if (properties) {
               expect(Object.keys(dispatched)).to.include.members(properties)
             }
+            data[opts.types.failure] = dispatched
           }
         )
       })

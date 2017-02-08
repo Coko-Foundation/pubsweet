@@ -17,16 +17,16 @@ module.exports = app => {
       failure: ['isFetching', 'team', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('updateUser', {
     firstarg: app,
     types: {
-      request: T.GET_USERS_REQUEST,
-      success: T.GET_USERS_SUCCESS,
-      failure: T.GET_USERS_FAILURE
+      request: T.UPDATE_USERS_REQUEST,
+      success: T.UPDATE_USERS_SUCCESS,
+      failure: T.UPDATE_USERS_FAILURE
     },
     properties: {
       request: ['team'],
@@ -34,7 +34,7 @@ module.exports = app => {
       failure: ['isFetching', 'team', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 }

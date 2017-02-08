@@ -6,8 +6,8 @@ const auth = require('../helpers/auth')
 module.exports = app => {
   const mockcol = () => app.collection
 
-  const mockfrag = {
-    id: 'fake'
+  const storedData = {
+    fragment: {}
   }
 
   describeAction('getCollections', {
@@ -21,7 +21,7 @@ module.exports = app => {
       failure: ['error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
@@ -37,13 +37,16 @@ module.exports = app => {
       failure: ['error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('createFragment', {
     firstarg: mockcol,
-    secondarg: mockfrag,
+    secondarg: {
+      name: 'some name',
+      body: 'some text'
+    },
     types: {
       request: T.CREATE_FRAGMENT_REQUEST,
       success: T.CREATE_FRAGMENT_SUCCESS,
@@ -54,13 +57,19 @@ module.exports = app => {
       failure: ['fragment', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
+    Object.assign(storedData.fragment, data[T.CREATE_FRAGMENT_SUCCESS].fragment)
     // optional: more functionality tests here
   })
 
   describeAction('updateFragment', {
     firstarg: mockcol,
-    secondarg: mockfrag,
+    secondarg: () => {
+      return {
+        id: storedData.fragment.id,
+        name: 'new name'
+      }
+    },
     types: {
       request: T.UPDATE_FRAGMENT_REQUEST,
       success: T.UPDATE_FRAGMENT_SUCCESS,
@@ -71,13 +80,13 @@ module.exports = app => {
       failure: ['fragment', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('deleteFragment', {
     firstarg: mockcol,
-    secondarg: mockfrag,
+    secondarg: () => storedData.fragment,
     types: {
       request: T.DELETE_FRAGMENT_REQUEST,
       success: T.DELETE_FRAGMENT_SUCCESS,
@@ -89,7 +98,7 @@ module.exports = app => {
       failure: ['fragment', 'error', 'update']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 }

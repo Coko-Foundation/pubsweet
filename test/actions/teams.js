@@ -18,7 +18,7 @@ module.exports = app => {
       failure: ['isFetching', 'message']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
@@ -35,7 +35,7 @@ module.exports = app => {
       failure: ['isFetching', 'team', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
@@ -52,7 +52,7 @@ module.exports = app => {
       failure: ['isFetching', 'team', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 
@@ -69,7 +69,7 @@ module.exports = app => {
       failure: ['isFetching', 'team', 'error']
     },
     user: () => app.user
-  }, action => {
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 }
