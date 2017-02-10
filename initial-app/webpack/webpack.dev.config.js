@@ -33,6 +33,9 @@ module.exports = [
         path.resolve(__dirname, '..', 'node_modules'),
         'node_modules'
       ],
+      alias: {
+        joi: 'joi-browser'
+      },
       plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)],
       extensions: ['.js', '.jsx', '.json', '.scss'],
       enforceExtension: false

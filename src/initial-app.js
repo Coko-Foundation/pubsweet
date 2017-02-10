@@ -33,6 +33,7 @@ const getpkgjson = name => {
       'copy-webpack-plugin': '^4.0.1',
       'file-loader': '^0.9.0',
       'json-loader': '^0.5.4',
+      'joi-browser': '^10.0.6',
       'sass-loader': '^4.0.2',
       'script-loader': '^0.7.0',
       'string-replace-loader': '^1.0.5',
