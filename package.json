@@ -1,6 +1,7 @@
 {
   "name": "pubsweet-frontend",
   "version": "0.7.0",
+  "main": "src/index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
     "eslint": "eslint"
