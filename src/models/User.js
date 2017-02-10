@@ -2,7 +2,6 @@
 const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
-const Joi = require('joi')
 
 const BCRYPT_COST = process.env.NODE_ENV === 'test' ? 1 : 12
 
@@ -79,18 +78,5 @@ class User extends Model {
 }
 
 User.type = 'user'
-
-User.schema = {
-  id: Joi.string().guid().required(),
-  type: Joi.string(),
-  username: Joi.string().alphanum().required(),
-  email: Joi.string().email().required(),
-  passwordHash: Joi.string().required(),
-  admin: Joi.boolean(),
-  rev: Joi.string(),
-  fragments: Joi.array().items(Joi.string().guid()),
-  collections: Joi.array().items(Joi.string().guid()),
-  teams: Joi.array().items(Joi.string().guid())
-}
 
 module.exports = User

@@ -1,7 +1,6 @@
 'use strict'
 const Model = require('./Model')
 const Fragment = require('./Fragment')
-const Joi = require('joi')
 
 class Collection extends Model {
   constructor (properties) {
@@ -47,14 +46,5 @@ class Collection extends Model {
 }
 
 Collection.type = 'collection'
-
-Collection.schema = {
-  id: Joi.string().guid().required(),
-  type: Joi.string().required(),
-  title: Joi.string(),
-  rev: Joi.string(),
-  owners: Joi.array().items(Joi.string().guid()),
-  fragments: Joi.array().items(Joi.object().type(Fragment))
-}
 
 module.exports = Collection
