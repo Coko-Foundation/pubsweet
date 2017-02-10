@@ -16,7 +16,7 @@ class PubSweetFormGroup extends React.Component {
     if (!state.startedEditing) return null
 
     let [model, property] = this.props.modelProperty.split('.')
-    let validation = Joi.reach(this.props.validations[model], property)
+    let validation = Joi.reach(VALIDATIONS[model], property)
 
     let result = validation.label(this.props.label).validate(state.value)
     if (result.error) {
@@ -64,7 +64,6 @@ PubSweetFormGroup.propTypes = {
   controlId: React.PropTypes.string.isRequired,
   label: React.PropTypes.string,
   placeholder: React.PropTypes.string,
-  validations: React.PropTypes.object,
   modelProperty: React.PropTypes.string,
   inputRef: React.PropTypes.func
 }

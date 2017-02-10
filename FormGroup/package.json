@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "joi-browser": "^10.0.6",
-    "pubsweet-frontend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-frontend.git",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.7"
   },
