@@ -4,7 +4,6 @@ const _ = require('lodash')
 
 const Model = require('./Model')
 const User = require('./User')
-const Joi = require('joi')
 
 class Team extends Model {
   constructor (properties) {
@@ -71,15 +70,5 @@ class Team extends Model {
 }
 
 Team.type = 'team'
-
-Team.schema = {
-  id: Joi.string().guid().required(),
-  type: Joi.string().required(),
-  name: Joi.string().required(),
-  object: Joi.object().required(),
-  teamType: Joi.object().required(),
-  rev: Joi.string(),
-  members: Joi.array().items(Joi.string().guid())
-}
 
 module.exports = Team
