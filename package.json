@@ -1,6 +1,7 @@
 {
   "name": "pubsweet-frontend",
-  "version": "0.7.0",
+  "version": "0.8.0",
+  "main": "src/index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony src/test/*.js",
     "eslint": "eslint"
@@ -20,6 +21,7 @@
     "bootstrap-sass": "^3.3.7",
     "config": "^1.21.0",
     "debug": "~2.2.0",
+    "global": "^4.3.1",
     "history": "^1.13.1",
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
@@ -35,7 +37,7 @@
     "react-helmet": "^3.1.0",
     "react-hot-loader": "^3.0.0-beta.2",
     "react-quill": "^0.4.1",
-    "react-redux": "^4.0.0",
+    "react-redux": "^5.0.2",
     "react-router": "^2.6.1",
     "react-router-bootstrap": "^0.23.1",
     "react-router-redux": "^4.0.5",
