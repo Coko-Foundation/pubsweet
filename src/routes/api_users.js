@@ -13,7 +13,6 @@ const ValidationError = require('../errors/ValidationError')
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
-const logger = require('../logger')
 const authentication = require('../authentication')
 
 // Token issuing

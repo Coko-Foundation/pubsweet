@@ -55,7 +55,7 @@ const verifyPassword = (username, password, done) => {
 module.exports = {
   token: {
     create: createToken,
-    verify: verifyToken,
+    verify: verifyToken
   },
   strategies: {
     // no credentials
