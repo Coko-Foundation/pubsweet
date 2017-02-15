@@ -101,10 +101,8 @@ class Model {
     if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
   }
 
-  isOwner (user) {
-    if (!user) return false
-
-    return Array.isArray(this.owners) && this.owners.includes(user.id)
+  isOwner (userId) {
+    return Array.isArray(this.owners) && this.owners.includes(userId)
   }
 
   static uuid () {
