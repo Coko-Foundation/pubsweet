@@ -22,9 +22,9 @@ module.exports = (app = express()) => {
 
   // Passport strategies
   app.use(passport.initialize())
-  passport.use('bearer', authentication.bearer)
-  passport.use('anonymous', authentication.anonymous)
-  passport.use('local', authentication.local)
+  passport.use('bearer', authentication.strategies.bearer)
+  passport.use('anonymous', authentication.strategies.anonymous)
+  passport.use('local', authentication.strategies.local)
 
   // Main API
   app.use('/api', api)
