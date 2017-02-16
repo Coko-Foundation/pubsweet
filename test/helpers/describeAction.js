@@ -71,7 +71,7 @@ const describeAction = actions => (key, opts, cb) => {
     if (opts.types.request) {
       const properties = opts.properties.request
       const propmsg = properties
-        ? `with [ ${properties.join(', ')}] `
+        ? `with [${properties.join(', ')}] `
         : ''
       it(`dispatches ${key}Request ${propmsg}immediately`, () => {
         let dispatched
@@ -138,12 +138,6 @@ const describeAction = actions => (key, opts, cb) => {
           )
         ).then(
           dispatched => {
-            console.log('DISPATCHED:', dispatched)
-            console.log('TYPES:', {
-              actual: dispatched.type,
-              expected: opts.types.failure
-            })
-            console.log('TOKEN:', auth.token())
             expect(dispatched).to.be.ok
             expect(dispatched.type).to.equal(opts.types.failure)
             if (properties) {

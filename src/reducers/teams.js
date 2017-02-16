@@ -7,7 +7,7 @@ import {
 
 import _ from 'lodash'
 
-export default function teams (state = [], action) {
+export function teams (state = [], action) {
   const teams = _.clone(state)
 
   function updateOne () {

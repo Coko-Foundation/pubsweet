@@ -16,6 +16,7 @@ export function collections (state = [], action) {
   }
 
   function addFragments () {
+    console.log('ADDING FRAGMENTS')
     const collection = getCollection()
 
     let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)
@@ -39,5 +40,7 @@ export function collections (state = [], action) {
     case GET_FRAGMENTS_SUCCESS:
     case CREATE_FRAGMENT_SUCCESS: return addFragments()
   }
+
+  console.log('RETURNING STATE', state)
   return state
 }
