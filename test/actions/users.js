@@ -5,6 +5,8 @@ const describeAction = require.requireActual('../helpers/describeAction')(action
 const T = require('../../src/actions/types')
 
 module.exports = app => {
+  let user
+
   describeAction('getUsers', {
     types: {
       request: T.GET_USERS_REQUEST,
@@ -12,9 +14,8 @@ module.exports = app => {
       failure: T.GET_USERS_FAILURE
     },
     properties: {
-      request: ['team'],
-      success: ['team'],
-      failure: ['isFetching', 'team', 'error']
+      success: ['users'],
+      failure: ['isFetching', 'message']
     },
     user: () => app.user
   }, (action, data) => {
@@ -22,16 +23,16 @@ module.exports = app => {
   })
 
   describeAction('updateUser', {
-    firstarg: app,
+    firstarg: app.user,
+    secondarg: app.user,
     types: {
-      request: T.UPDATE_USERS_REQUEST,
-      success: T.UPDATE_USERS_SUCCESS,
-      failure: T.UPDATE_USERS_FAILURE
+      request: T.UPDATE_USER_REQUEST,
+      success: T.UPDATE_USER_SUCCESS,
+      failure: T.UPDATE_USER_FAILURE
     },
     properties: {
-      request: ['team'],
-      success: ['team'],
-      failure: ['isFetching', 'team', 'error']
+      success: ['users'],
+      failure: ['isFetching', 'error']
     },
     user: () => app.user
   }, (action, data) => {

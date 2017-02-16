@@ -5,8 +5,6 @@ global.PUBSWEET_COMPONENTS = []
 
 const expect = require.requireActual('chai').expect
 
-const startnewapp = require.requireActual('pubsweet/test/helpers/startnewapp')
-
 const collectionsFragments = require('./actions/collectionsFragments')
 const current_user = require('./actions/current_user')
 const teams = require('./actions/teams')
@@ -21,6 +19,4 @@ describe('ACTIONS', () => {
   describe('current user', () => current_user(app))
   describe('teams', () => teams(app))
   describe('users', () => users(app))
-
-  afterAll(() => process.kill(app.pid))
 })

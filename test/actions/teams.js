@@ -6,6 +6,8 @@ const T = require.requireActual('../../src/actions/types')
 const fixtures = require.requireActual('../fixtures')
 
 module.exports = app => {
+  let team
+
   describeAction('getTeams', {
     types: {
       request: T.GET_TEAMS_REQUEST,
@@ -36,11 +38,13 @@ module.exports = app => {
     },
     user: () => app.user
   }, (action, data) => {
+    team = data[T.CREATE_TEAM_SUCCESS].team
     // optional: more functionality tests here
   })
 
   describeAction('updateTeam', {
-    firstarg: fixtures.readerTeam,
+    firstarg: () => team,
+    secondard: fixtures.readerTeam,
     types: {
       request: T.UPDATE_TEAM_REQUEST,
       success: T.UPDATE_TEAM_SUCCESS,
@@ -57,7 +61,7 @@ module.exports = app => {
   })
 
   describeAction('deleteTeam', {
-    firstarg: fixtures.readerTeam,
+    firstarg: () => team,
     types: {
       request: T.DELETE_TEAM_REQUEST,
       success: T.DELETE_TEAM_SUCCESS,

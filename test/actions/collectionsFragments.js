@@ -13,12 +13,10 @@ module.exports = app => {
   describeAction('getCollections', {
     types: {
       request: T.GET_COLLECTIONS_REQUEST,
-      success: T.GET_COLLECTIONS_SUCCESS,
-      failure: T.GET_COLLECTIONS_FAILURE
+      success: T.GET_COLLECTIONS_SUCCESS
     },
     properties: {
-      success: ['collections'],
-      failure: ['error']
+      success: ['collections']
     },
     user: () => app.user
   }, (action, data) => {
@@ -29,12 +27,10 @@ module.exports = app => {
     firstarg: mockcol,
     types: {
       request: T.GET_FRAGMENTS_REQUEST,
-      success: T.GET_FRAGMENTS_SUCCESS,
-      failure: T.GET_FRAGMENTS_FAILURE
+      success: T.GET_FRAGMENTS_SUCCESS
     },
     properties: {
-      success: ['fragments'],
-      failure: ['error']
+      success: ['fragments']
     },
     user: () => app.user
   }, (action, data) => {
