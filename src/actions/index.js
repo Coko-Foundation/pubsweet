@@ -33,6 +33,11 @@ import { getTeams, createTeam, updateTeam, deleteTeam } from './teams'
 
 Object.assign(actions, { getTeams, createTeam, updateTeam, deleteTeam })
 
+// Actions for file upload
+import { fileUpload } from './fileUpload'
+
+Object.assign(actions, { fileUpload })
+
 // Actions from external components
 require('../components/actions').forEach(
   componentActions => Object.assign(actions, componentActions)
