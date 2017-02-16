@@ -7,9 +7,9 @@ const clone = require('lodash/clone')
 
 module.exports = app => describeReducerSet('collections', reducers, () => {
   const mockcol = app.collection
-  const mockfrag = { name: 'mock fragment' }
+  const mockfrag = { name: 'mock fragment', id: '1234' }
   const colwithfrag = clone(mockcol)
-  colwithfrag.fragments = [mockfrag]
+  colwithfrag.fragments = [mockfrag.id]
 
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'

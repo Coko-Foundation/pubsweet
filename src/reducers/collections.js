@@ -16,7 +16,6 @@ export function collections (state = [], action) {
   }
 
   function addFragments () {
-    console.log('ADDING FRAGMENTS')
     const collection = getCollection()
 
     let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)

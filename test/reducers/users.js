@@ -1,14 +1,14 @@
-const reducers = require.requireActual('../../src/reducers/teams')
+const reducers = require.requireActual('../../src/reducers/users')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
 
 const clone = require('lodash/clone')
 
-module.exports = app => describeReducerSet('teams', reducers, () => {
+module.exports = app => describeReducerSet('users', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['teams'])
+  )(reducers['users'])
 
   const user = app.user
   const usermod = clone(user)
@@ -17,7 +17,6 @@ module.exports = app => describeReducerSet('teams', reducers, () => {
   const mockstate = { users: [user] }
 
   describeReducer('getUsers success', {
-    state: {},
     action: {
       type: T.GET_USERS_SUCCESS,
       users: [user]
@@ -29,7 +28,6 @@ module.exports = app => describeReducerSet('teams', reducers, () => {
   })
 
   describeReducer('getUsers request', {
-    state: {},
     action: {
       type: T.GET_USERS_REQUEST
     },
@@ -42,15 +40,15 @@ module.exports = app => describeReducerSet('teams', reducers, () => {
       type: T.UPDATE_USER_REQUEST,
       user: usermod
     },
-    output: { users: [moduser] }
+    output: { users: [usermod], isFetching: true }
   })
 
   describeReducer('updateUser success', {
     state: mockstate,
     action: {
       type: T.UPDATE_USER_SUCCESS,
-      team: mockteam
+      user: usermod
     },
-    output: { isFetching: false }
+    output: { users: [user], isFetching: false }
   })
 })

@@ -2,8 +2,6 @@ const allreducers = require.requireActual('../../src/reducers')
 const expect = require.requireActual('chai').expect
 
 const describeReducerSet = (key, reducers, cb) => describe(key, () => {
-  console.log(reducers)
-
   it('is exported from the file', () => {
     expect(reducers).to.have.property(key)
   })
