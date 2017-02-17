@@ -7,6 +7,7 @@ const expect = require.requireActual('chai').expect
 
 const collectionsFragments = require('./actions/collectionsFragments')
 const current_user = require('./actions/current_user')
+const fileUpload = require('./actions/fileUpload')
 const teams = require('./actions/teams')
 const users = require('./actions/users')
 
@@ -17,6 +18,7 @@ describe('ACTIONS', () => {
 
   describe('collections and fragments', () => collectionsFragments(app))
   describe('current user', () => current_user(app))
+  describe('fileUpload', () => fileUpload(app))
   describe('teams', () => teams(app))
   describe('users', () => users(app))
 })

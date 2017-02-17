@@ -6,6 +6,7 @@ global.PUBSWEET_COMPONENTS = []
 const expect = require.requireActual('chai').expect
 
 const collections = require('./reducers/collections')
+const fileUpload = require('./reducers/fileUpload')
 const fragments = require('./reducers/fragments')
 const current_user = require('./reducers/current_user')
 const teams = require('./reducers/teams')
@@ -15,6 +16,7 @@ describe('REDUCERS', () => {
   const app = require('./helpers/mockapp.json')
 
   describe('collections', () => collections(app))
+  describe('fileUpload', () => fileUpload(app))
   describe('fragments', () => fragments(app))
   describe('current user', () => current_user(app))
   describe('teams', () => teams(app))
