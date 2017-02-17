@@ -2,7 +2,6 @@
 
 const STATUS = require('http-status-codes')
 const passport = require('passport')
-const jwt = require('jsonwebtoken')
 const express = require('express')
 
 const User = require('../models/User')
@@ -14,26 +13,14 @@ const ValidationError = require('../errors/ValidationError')
 const authLocal = passport.authenticate('local', { failWithError: true, session: false })
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
-const logger = require('../logger')
-
-function createToken (user) {
-  logger.info('Creating token for', user.username)
-  return jwt.sign(
-    {
-      username: user.username,
-      id: user.id
-    },
-    process.env.PUBSWEET_SECRET,
-    { expiresIn: 24 * 3600 }
-  )
-}
+const authentication = require('../authentication')
 
 // Token issuing
 api.post('/authenticate', authLocal, (req, res) => {
   return res.status(
     STATUS.CREATED
   ).json(
-    Object.assign({ token: createToken(req.user) }, req.user)
+    Object.assign({ token: authentication.token.create(req.user) }, req.user)
   )
 })
 
