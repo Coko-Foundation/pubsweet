@@ -1,5 +1,4 @@
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-adapter-memory'))
+const PouchDB = require('../src/db')
 
 const Model = require('../src/models/Model')
 const User = require('../src/models/User')
@@ -31,7 +30,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 
@@ -41,7 +40,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 
@@ -51,7 +50,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db._db_name, { adapter: 'memory' })
+      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
     })
   })
 

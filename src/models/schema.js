@@ -2,10 +2,8 @@
 
 const config = require('../../config')
 const path = require('path')
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'))
-PouchDB.plugin(require('relational-pouch'))
-PouchDB.plugin(require('pouchdb-upsert'))
+
+const PouchDB = require('../db')
 
 if (process.env.NODE_ENV === 'test') {
   PouchDB.plugin(require('pouchdb-adapter-memory'))
