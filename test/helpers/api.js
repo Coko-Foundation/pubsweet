@@ -3,6 +3,16 @@ const api = require('../../src')()
 const STATUS = require('http-status-codes')
 const isString = require('lodash/isString')
 
+const COLLECTIONS_ROOT = '/api/collections/'
+
+const authorizedRequest = (req, token) => {
+  if (token) {
+    req.set('Authorization', 'Bearer ' + token)
+  }
+
+  return req
+}
+
 const fragments = {
   post: (fragment, collection, token) => {
     const collectionId = isString(collection) ? collection : collection.id
@@ -125,7 +135,50 @@ const users = {
 }
 
 const collections = {
-
+  list: (token) => {
+    const req = request(api).get(COLLECTIONS_ROOT)
+    return authorizedRequest(req, token)
+  },
+  create: (collection, token) => {
+    const req = request(api).post(COLLECTIONS_ROOT)
+      .send(collection)
+    return authorizedRequest(req, token)
+  },
+  retrieve: (id, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + id)
+    return authorizedRequest(req, token)
+  },
+  update: (collection, token) => {
+    const req = request(api).put(COLLECTIONS_ROOT + collection.id)
+      .send(collection)
+    return authorizedRequest(req, token)
+  },
+  delete: (collection, token) => {
+    const req = request(api).delete(COLLECTIONS_ROOT + collection.id)
+    return authorizedRequest(req, token)
+  },
+  listFragments: (collection, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + collection.id + '/fragments')
+    return authorizedRequest(req, token)
+  },
+  createFragment: (collection, fragment, token) => {
+    const req = request(api).post(COLLECTIONS_ROOT + collection.id + '/fragments')
+      .send(fragment)
+    return authorizedRequest(req, token)
+  },
+  retrieveFragment: (collectionId, fragmentId, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+    return authorizedRequest(req, token)
+  },
+  updateFragment: (collection, fragment, token) => {
+    const req = request(api).put(COLLECTIONS_ROOT + collection.id + '/fragments/' + fragment.id)
+      .send(fragment)
+    return authorizedRequest(req, token)
+  },
+  deleteFragment: (collection, fragment, token) => {
+    const req = request(api).delete(COLLECTIONS_ROOT + collection.id + '/fragments/' + fragment.id)
+    return authorizedRequest(req, token)
+  }
 }
 
 const teams = {

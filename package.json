@@ -48,6 +48,7 @@
     "ws": "^1.0.1"
   },
   "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
     "eslint": "^3.2.2",
     "eslint-config-standard": "^5.3.5",
     "eslint-loader": "^1.2.0",
@@ -89,6 +90,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-backend"
   },
   "jest": {
+    "testEnvironment": "node",
     "testRegex": "/test/.*test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
