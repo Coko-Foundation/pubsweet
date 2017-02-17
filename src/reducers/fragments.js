@@ -11,13 +11,15 @@ import {
   DELETE_FRAGMENT_SUCCESS
 } from '../actions/types'
 
-import _ from 'lodash'
+import clone from 'lodash/clone'
+import assign from 'lodash/assign'
+import unset from 'lodash/unset'
 
 export function fragments (state = {}, action) {
-  const fragments = _.clone(state)
+  const fragments = clone(state)
 
   function replaceAll () {
-    _.unset(fragments, action.collection.fragments)
+    unset(fragments, action.collection.fragments)
     action.fragments.forEach((fragment) => {
       fragments[fragment.id] = fragment
     })
@@ -28,14 +30,14 @@ export function fragments (state = {}, action) {
     const oldfragment = fragments[action.fragment.id] || {}
     const update = action.update || action.fragment
 
-    const newfragment = _.assign(oldfragment, update)
+    const newfragment = assign(oldfragment, update)
     fragments[action.fragment.id] = newfragment
 
     return fragments
   }
 
   function removeOne () {
-    _.unset(fragments, action.fragment.id)
+    unset(fragments, action.fragment.id)
     return fragments
   }
 
