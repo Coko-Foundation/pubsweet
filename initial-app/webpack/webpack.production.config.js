@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ThemePlugin = require('pubsweet-theme-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var CompressionPlugin = require('compression-webpack-plugin')
 var config = require('../config/production')
 
 module.exports = [
@@ -51,11 +52,20 @@ module.exports = [
         'CONFIG': path.resolve(__dirname, '..', 'config', 'production.js')
       }),
       new ExtractTextPlugin('styles/main.css'),
-      // new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin(),
       new CopyWebpackPlugin([
         { from: '../static' }
-      ])
+      ]),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin(),
+      new CompressionPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
+      })
     ],
     node: {
       fs: 'empty',

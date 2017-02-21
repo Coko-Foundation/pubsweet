@@ -27,7 +27,12 @@ module.exports = [
       plugins: [
         'react-hot-loader/babel',
         resolvePlugin('transform-decorators-legacy')
-      ]
+      ],
+      env: {
+        production: {
+          presets: ['babili']
+        }
+      }
     },
     include: babelIncludes
   },
