@@ -20,7 +20,7 @@ module.exports = [
     loader: 'babel-loader',
     query: {
       presets: [
-        ['es2015', { 'modules': 'commonjs' }],
+        ['es2015', { 'modules': false }],
         'react',
         'stage-2'
       ].map(resolvePreset),

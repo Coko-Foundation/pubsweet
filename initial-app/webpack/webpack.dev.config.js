@@ -54,7 +54,16 @@ module.exports = [
       }),
       new CopyWebpackPlugin([
         { from: '../static' }
-      ])
+      ]),
+      new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new CompressionPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
+      })
     ],
     node: {
       fs: 'empty',

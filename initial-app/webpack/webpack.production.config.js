@@ -14,13 +14,11 @@ module.exports = [
     target: 'web',
     context: path.join(__dirname, '..', 'app'),
     entry: {
-      app: [
-        './app'
-      ]
+      app: ['./app']
     },
     output: {
       path: path.join(__dirname, '..', '_build', 'assets'),
-      filename: '[name]-[hash].js',
+      filename: "[name].[hash].js",
       publicPath: '/assets/'
     },
     module: {
@@ -52,13 +50,11 @@ module.exports = [
         'CONFIG': path.resolve(__dirname, '..', 'config', 'production.js')
       }),
       new ExtractTextPlugin('styles/main.css'),
-      new webpack.NoErrorsPlugin(),
       new CopyWebpackPlugin([
         { from: '../static' }
       ]),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new CompressionPlugin({
         asset: "[path].gz[query]",
         algorithm: "gzip",
