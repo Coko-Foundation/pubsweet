@@ -1,6 +1,7 @@
 import {
   GET_COLLECTIONS_SUCCESS,
   GET_COLLECTIONS_FAILURE,
+  CREATE_COLLECTION_SUCCESS,
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_SUCCESS
@@ -13,6 +14,12 @@ export function collections (state = [], action) {
 
   function getCollection () {
     return _.find(collections, { id: action.collection.id })
+  }
+
+  function addCollection () {
+    collections.push(action.collection)
+
+    return collections
   }
 
   function addFragments () {
@@ -35,6 +42,7 @@ export function collections (state = [], action) {
   switch (action.type) {
     case GET_COLLECTIONS_SUCCESS: return _.clone(action.collections)
     case GET_COLLECTIONS_FAILURE: return []
+    case CREATE_COLLECTION_SUCCESS: return addCollection()
     case DELETE_FRAGMENT_SUCCESS: return removeFragments()
     case GET_FRAGMENTS_SUCCESS:
     case CREATE_FRAGMENT_SUCCESS: return addFragments()

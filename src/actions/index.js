@@ -16,11 +16,11 @@ Object.assign(actions, { getUser })
 
 // Actions for collections and fragments
 import {
-  getCollections, getFragments, createFragment, updateFragment, deleteFragment
+  getCollections, createCollection, getFragments, createFragment, updateFragment, deleteFragment
 } from './collectionsFragments.js'
 
 Object.assign(actions, {
-  getCollections, getFragments, createFragment, updateFragment, deleteFragment
+  getCollections, createCollection, getFragments, createFragment, updateFragment, deleteFragment
 })
 
 // Actions for users management

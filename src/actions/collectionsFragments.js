@@ -60,6 +60,60 @@ export function getCollections () {
   }
 }
 
+function createCollectionRequest (collection) {
+  return {
+    type: T.CREATE_COLLECTION_REQUEST,
+    collection: collection
+  }
+}
+
+function createCollectionSuccess (collection) {
+  return {
+    type: T.CREATE_COLLECTION_SUCCESS,
+    collection: collection
+  }
+}
+
+function createCollectionFailure (collection, error) {
+  return {
+    type: T.CREATE_COLLECTION_FAILURE,
+    isFetching: false,
+    collection: collection,
+    error: error
+  }
+}
+
+export function createCollection (values) {
+  const collection = Object.assign(values, {
+    created_at: (new Date()).toISOString, // TODO: add this on the server
+    fragments: [] // TODO: add this on the server
+  })
+
+  return (dispatch, getState) => {
+    dispatch(createCollectionRequest(collection))
+    const {currentUser: {token}} = getState()
+
+    const url = collectionUrl()
+    const opts = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(collection)
+    }
+
+    return fetch(url, opts)
+      .then(
+        response => response.json()
+      ).then(
+        collection => dispatch(createCollectionSuccess(collection)),
+        err => dispatch(createCollectionFailure(collection, err))
+      )
+  }
+}
+
 // Actions on fragments
 
 function getFragmentsRequest (collection) {
