@@ -71,12 +71,7 @@ function createCollectionFailure (collection, error) {
   }
 }
 
-export function createCollection (values) {
-  const collection = Object.assign(values, {
-    created_at: (new Date()).toISOString, // TODO: add this on the server
-    fragments: [] // TODO: add this on the server
-  })
-
+export function createCollection (collection) {
   return (dispatch, getState) => {
     dispatch(createCollectionRequest(collection))
     const {currentUser: {token}} = getState()
@@ -147,7 +142,7 @@ export function patchCollection (collection, values) {
       .then(
         response => response.json()
       ).then(
-        json => dispatch(patchCollectionSuccess(collection)), // TODO: use `json`?
+        collection => dispatch(patchCollectionSuccess(collection)),
         err => dispatch(patchCollectionFailure(collection, err))
       )
   }
@@ -198,7 +193,7 @@ export function updateCollection (collection) {
       .then(
         response => response.json()
       ).then(
-        json => dispatch(updateCollectionSuccess(collection)),
+        collection => dispatch(updateCollectionSuccess(collection)),
         err => dispatch(updateCollectionFailure(collection, err))
       )
   }
