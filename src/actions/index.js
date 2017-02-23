@@ -14,14 +14,15 @@ import { getUser } from './current_user'
 
 Object.assign(actions, { getUser })
 
-// Actions for collections and fragments
-import {
-  getCollections, createCollection, getFragments, createFragment, updateFragment, deleteFragment
-} from './collectionsFragments.js'
+// Actions for collections
+import { getCollections, createCollection, updateCollection, patchCollection, deleteCollection } from './collections'
 
-Object.assign(actions, {
-  getCollections, createCollection, getFragments, createFragment, updateFragment, deleteFragment
-})
+Object.assign(actions, { getCollections, createCollection, updateCollection, patchCollection, deleteCollection })
+
+// Actions for fragments
+import { getFragments, createFragment, updateFragment, deleteFragment } from './fragments'
+
+Object.assign(actions, { getFragments, createFragment, updateFragment, deleteFragment })
 
 // Actions for users management
 import { getUsers, updateUser } from './users'

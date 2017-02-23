@@ -2,16 +2,6 @@ import { fetch } from '../helpers/Utils'
 const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
 import * as T from './types'
 
-// utilities
-
-const fragmentUrl = (collection, fragment) => {
-  let url = `${API_ENDPOINT}/collections/${collection.id}/fragments`
-
-  if (fragment.id) url += `/${fragment.id}`
-
-  return url
-}
-
 const collectionUrl = (collection, suffix) => {
   let url = `${API_ENDPOINT}/collections`
 
@@ -21,8 +11,6 @@ const collectionUrl = (collection, suffix) => {
 
   return url
 }
-
-// Listing collections
 
 function getCollectionsRequest () {
   return {
@@ -114,135 +102,88 @@ export function createCollection (values) {
   }
 }
 
-// Actions on fragments
-
-function getFragmentsRequest (collection) {
+function patchCollectionRequest (collection) {
   return {
-    type: T.GET_FRAGMENTS_REQUEST,
+    type: T.PATCH_COLLECTION_REQUEST,
     collection: collection
   }
 }
 
-function getFragmentsSuccess (collection, fragments) {
+function patchCollectionSuccess (collection) {
   return {
-    type: T.GET_FRAGMENTS_SUCCESS,
+    type: T.PATCH_COLLECTION_SUCCESS,
     collection: collection,
-    fragments: fragments,
     receivedAt: Date.now()
   }
 }
 
-function getFragmentsFailure (error) {
+function patchCollectionFailure (collection, error) {
   return {
-    type: T.GET_FRAGMENTS_FAILURE,
-    error: error
-  }
-}
-
-export function getFragments (collection) {
-  return (dispatch, getState) => {
-    dispatch(getFragmentsRequest(collection))
-    const {
-      currentUser: { token }
-    } = getState()
-
-    const url = collectionUrl(collection, 'fragments')
-    const opts = {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    }
-
-    return fetch(url, opts).then(
-        response => response.json()
-      ).then(
-        fragments => dispatch(getFragmentsSuccess(collection, fragments)),
-        err => dispatch(getFragmentsFailure(err))
-      )
-  }
-}
-
-function createFragmentRequest (fragment) {
-  return {
-    type: T.CREATE_FRAGMENT_REQUEST,
-    fragment: fragment
-  }
-}
-
-function createFragmentSuccess (collection, fragment) {
-  return {
-    type: T.CREATE_FRAGMENT_SUCCESS,
-    collection: collection,
-    fragment: fragment
-  }
-}
-
-function createFragmentFailure (fragment, error) {
-  return {
-    type: T.CREATE_FRAGMENT_FAILURE,
+    type: T.PATCH_COLLECTION_FAILURE,
     isFetching: false,
-    fragment: fragment,
+    collection: collection,
     error: error
   }
 }
 
-export function createFragment (collection, fragment) {
+export function patchCollection (collection, values) {
   return (dispatch, getState) => {
-    dispatch(createFragmentRequest(fragment))
-    const { currentUser: { token } } = getState()
+    dispatch(patchCollectionRequest(collection))
 
-    const url = fragmentUrl(collection, fragment)
+    const {currentUser: {token}} = getState()
+
+    const url = collectionUrl(collection)
     const opts = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify(fragment)
+      body: JSON.stringify(values)
     }
 
     return fetch(url, opts)
       .then(
         response => response.json()
       ).then(
-        fragment => dispatch(createFragmentSuccess(collection, fragment)),
-        err => dispatch(createFragmentFailure(fragment, err))
+        json => dispatch(patchCollectionSuccess(collection)), // TODO: use `json`?
+        err => dispatch(patchCollectionFailure(collection, err))
       )
   }
 }
 
-function updateFragmentRequest (fragment) {
+function updateCollectionRequest (collection) {
   return {
-    type: T.UPDATE_FRAGMENT_REQUEST,
-    fragment: fragment
+    type: T.UPDATE_COLLECTION_REQUEST,
+    collection: collection
   }
 }
 
-function updateFragmentSuccess (fragment) {
+function updateCollectionSuccess (collection) {
   return {
-    type: T.UPDATE_FRAGMENT_SUCCESS,
-    fragment: fragment,
+    type: T.UPDATE_COLLECTION_SUCCESS,
+    collection: collection,
     receivedAt: Date.now()
   }
 }
 
-function updateFragmentFailure (fragment, error) {
+function updateCollectionFailure (collection, error) {
   return {
-    type: T.UPDATE_FRAGMENT_FAILURE,
+    type: T.UPDATE_COLLECTION_FAILURE,
     isFetching: false,
-    fragment: fragment,
+    collection: collection,
     error: error
   }
 }
 
-export function updateFragment (collection, fragment) {
+export function updateCollection (collection) {
   return (dispatch, getState) => {
-    dispatch(updateFragmentRequest(fragment))
+    dispatch(updateCollectionRequest(collection))
 
-    const { currentUser: { token } } = getState()
+    const {currentUser: {token}} = getState()
 
-    const url = fragmentUrl(collection, fragment)
+    const url = collectionUrl(collection)
     const opts = {
       method: 'PUT',
       headers: {
@@ -250,66 +191,64 @@ export function updateFragment (collection, fragment) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify(fragment)
+      body: JSON.stringify(collection)
     }
 
     return fetch(url, opts)
       .then(
         response => response.json()
       ).then(
-        json => dispatch(updateFragmentSuccess(fragment)),
-        err => dispatch(updateFragmentFailure(fragment, err))
+        json => dispatch(updateCollectionSuccess(collection)),
+        err => dispatch(updateCollectionFailure(collection, err))
       )
   }
 }
 
-function deleteFragmentRequest (fragment) {
+function deleteCollectionRequest (collection) {
   return {
-    type: T.DELETE_FRAGMENT_REQUEST,
-    fragment: fragment,
-    update: { deleted: true }
-  }
-}
-
-function deleteFragmentSuccess (collection, fragment) {
-  return {
-    type: T.DELETE_FRAGMENT_SUCCESS,
+    type: T.DELETE_COLLECTION_REQUEST,
     collection: collection,
-    fragment: fragment
+    update: {deleted: true}
   }
 }
 
-function deleteFragmentFailure (fragment, error) {
+function deleteCollectionSuccess (collection) {
   return {
-    type: T.DELETE_FRAGMENT_FAILURE,
-    fragment: fragment,
-    update: { deleted: undefined },
+    type: T.DELETE_COLLECTION_SUCCESS,
+    collection: collection
+  }
+}
+
+function deleteCollectionFailure (collection, error) {
+  return {
+    type: T.DELETE_COLLECTION_FAILURE,
+    collection: collection,
+    update: {deleted: undefined},
     error: error
   }
 }
 
-export function deleteFragment (collection, fragment) {
+export function deleteCollection (collection) {
   return (dispatch, getState) => {
-    const { currentUser: { token } } = getState()
-    dispatch(deleteFragmentRequest(fragment))
+    const {currentUser: {token}} = getState()
+    dispatch(deleteCollectionRequest(collection))
 
-    const url = fragmentUrl(collection, fragment)
+    const url = collectionUrl(collection)
     const opts = {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(fragment)
+      }
     }
 
     return fetch(url, opts)
       .then(
         response => response.json()
       ).then(
-        json => dispatch(deleteFragmentSuccess(collection, fragment)),
-        err => dispatch(deleteFragmentFailure(fragment, err))
+        json => dispatch(deleteCollectionSuccess(collection)),
+        err => dispatch(deleteCollectionFailure(collection, err))
       )
   }
 }
