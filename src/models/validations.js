@@ -18,6 +18,7 @@ let validations = {
   },
   collection: {
     id: Joi.string().guid().required(),
+    created: Joi.date().default(Date.now, 'creation time'),
     type: Joi.string().required(),
     title: Joi.string(),
     rev: Joi.string(),
