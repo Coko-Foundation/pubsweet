@@ -24,7 +24,6 @@ api.post('/', authBearer, (req, res, next) => {
   let collection = new Collection(req.body)
   collection.created = Date.now()
   collection.setOwners([req.user])
-  collection.fragments = []
 
   return Authorize.can(
     req.authInfo.id, 'create', collection
