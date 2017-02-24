@@ -7,7 +7,7 @@ class Collection extends Model {
   constructor (properties) {
     super(properties)
     this.type = 'collection'
-    this.title = properties.title
+    this.fragments = this.fragments || []
   }
 
   updateProperties (properties) {
@@ -28,8 +28,6 @@ class Collection extends Model {
     options = options || {}
     options.filter = options.filter || (() => Promise.resolve(true))
 
-    if (!this.fragments) { return [] }
-
     var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
 
     return fragments.then(
@@ -47,14 +45,10 @@ class Collection extends Model {
   }
 
   addFragment (fragment) {
-    if (this.fragments) {
-      this.fragments = this.fragments.map(
-        fragmentId => new Fragment({id: fragmentId})
-      )
-      this.fragments.push(fragment)
-    } else {
-      this.fragments = [fragment]
-    }
+    this.fragments = this.fragments.map(
+      fragmentId => new Fragment({id: fragmentId})
+    )
+    this.fragments.push(fragment)
   }
 }
 
