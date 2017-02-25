@@ -8,8 +8,20 @@ const api = require('./routes/api')
 const logger = require('./logger')
 const authentication = require('./authentication')
 
+const User = require('./models/User')
+const Team = require('./models/Team')
+const Fragment = require('./models/Fragment')
+const Collection = require('./models/Collection')
+
 module.exports = (app = express()) => {
   global.versions = {}
+
+  app.locals.models = {
+    User: User,
+    Team: Team,
+    Fragment: Fragment,
+    Collection: Collection
+  }
 
   app.use(require('morgan')('combined', { 'stream': logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
