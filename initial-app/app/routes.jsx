@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router'
+import Route from 'react-router/src/Route'
 
 import { requireAuthentication } from 'pubsweet-frontend/src/components/AuthenticatedComponent'
 

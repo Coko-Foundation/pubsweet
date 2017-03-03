@@ -90,6 +90,12 @@ const runapp = (err, stats) => {
 
   const rawapp = express()
 
+  rawapp.get('*.js', function (req, res, next) {
+    req.url = req.url + '.gz'
+    res.set('Content-Encoding', 'gzip')
+    next()
+  })
+
   const postcompile = (err, stats) => {
     if (err) {
       logger.error('Webpack compilation failed:', err)
