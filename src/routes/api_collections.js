@@ -9,6 +9,7 @@ const Authorize = require('../models/Authorize')
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
+const sse = require('../sse')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
@@ -30,7 +31,10 @@ api.post('/', authBearer, (req, res, next) => {
   ).then(
     () => collection.save()
   ).then(
-    response => res.status(STATUS.CREATED).json(response)
+    collection => {
+      // sse.send('collection:create', { collection })
+      res.status(STATUS.CREATED).json(collection)
+    }
   ).catch(
     next
   )
@@ -67,7 +71,10 @@ api.put('/:id', authBearer, (req, res, next) => {
   ).then(
     collection => collection.save()
   ).then(
-    collection => res.status(STATUS.OK).json(collection)
+    collection => {
+      // sse.send('collection:replace', { collection })
+      res.status(STATUS.OK).json(collection)
+    }
   ).catch(
     next
   )
@@ -82,7 +89,10 @@ api.delete('/:id', authBearer, (req, res, next) => {
   ).then(
     collection => collection.delete()
   ).then(
-    collection => res.status(STATUS.OK).json(collection)
+    collection => {
+      // sse.send('collection:delete', { collection })
+      res.status(STATUS.OK).json(collection)
+    }
   ).catch(
     next
   )
@@ -92,22 +102,21 @@ api.delete('/:id', authBearer, (req, res, next) => {
 api.post('/:id/fragments', authBearer, (req, res, next) => {
   return Authorize.can(req.user, 'create', req.originalUrl).then(
     () => Collection.find(req.params.id)
-  ).then(
-    collection => {
-      let fragment = new Fragment(req.body)
-      fragment.setOwners([req.user])
-      return Promise.all([collection, fragment.save()])
-    }
-  ).then(
-    ([collection, fragment]) => {
+  ).then(collection => {
+    const fragment = new Fragment(req.body)
+    fragment.setOwners([req.user])
+
+    return fragment.save().then(fragment => {
       collection.addFragment(fragment)
-      return Promise.all([collection.save(), fragment])
-    }
-  ).then(
-    ([collection, fragment]) => User.ownersWithUsername(fragment)
-  ).then(
-    fragment => res.status(STATUS.CREATED).json(fragment)
-  ).catch(
+
+      return collection.save().then(collection => {
+        return User.ownersWithUsername(fragment).then(fragment => {
+          res.status(STATUS.CREATED).json(fragment)
+          sse.send({ action: 'fragment:create', data: { fragment, collection } })
+        })
+      })
+    })
+  }).catch(
     next
   )
 })
@@ -175,13 +184,17 @@ api.put('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => 
   ).then(
     () => Fragment.find(req.params.fragmentId)
   ).then(
+    // TODO: throw an exception if locked by another user
     fragment => fragment.updateProperties(req.body)
   ).then(
     fragment => fragment.save()
   ).then(
     fragment => User.ownersWithUsername(fragment)
   ).then(
-    fragment => res.status(STATUS.OK).json(fragment)
+    fragment => {
+      res.status(STATUS.OK).json(fragment)
+      sse.send({ action: 'fragment:replace', data: { fragment }})
+    }
   ).catch(
     next
   )
@@ -205,7 +218,10 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
       return Promise.all([collection.save(), fragment])
     }
   ).then(
-    ([collection, fragment]) => res.status(STATUS.OK).json(fragment)
+    ([collection, fragment]) => {
+      res.status(STATUS.OK).json(fragment)
+      sse.send({ action: 'fragment:delete', data: { fragment } })
+    }
   ).catch(
     next
   )
