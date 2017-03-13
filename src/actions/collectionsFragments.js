@@ -118,7 +118,7 @@ function createFragmentRequest (fragment) {
 function createFragmentSuccess (collection, fragment) {
   return {
     type: T.CREATE_FRAGMENT_SUCCESS,
-    collection: collection,
+    collection: collection, // TODO: unused?
     fragment: fragment
   }
 }
@@ -257,5 +257,49 @@ export function deleteFragment (collection, fragment) {
         json => dispatch(deleteFragmentSuccess(collection, fragment)),
         err => dispatch(deleteFragmentFailure(fragment, err))
       )
+  }
+}
+
+// call this when mounting/updating a fragment component
+export function subscribeFragment (collection, fragment) {
+  return (dispatch, getState) => {
+    const {currentUser: {token}} = getState()
+
+    // dispatch(subscribeFragmentFrequest(fragment))
+
+    // EventSource can't have Authorization header, so have to use query string
+    const url = fragmentUrl(collection, fragment) + '?access_token=' + encodeURIComponent(token)
+
+    const eventSource = new EventSource(url);
+
+    eventSource.onmessage = e => {
+      const { method, data } = JSON.parse(e.data)
+
+      console.log('event', method, data)
+
+      switch (method) {
+        case 'put':
+        case 'patch':
+          dispatch({type: T.UPDATE_FRAGMENT_SUCCESS, ...data})
+          break
+
+        case 'delete':
+          dispatch({type: T.DELETE_FRAGMENT_SUCCESS, ...data})
+          break
+
+        default:
+          break
+      }
+    }
+
+    eventSource.onerror = e => {
+      console.error(e)
+      // dispatch(subscribeFragmentFailure(collection, fragment))
+    }
+
+    // dispatch(subscribeFragmentSuccess(collection, fragment))
+
+    // TODO: call eventSource.close() when unmounting a fragment component
+    return eventSource
   }
 }
