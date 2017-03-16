@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-cli"
   },
   "devDependencies": {
     "eslint": "^3.6.1",
