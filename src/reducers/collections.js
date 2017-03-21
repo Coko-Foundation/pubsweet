@@ -10,18 +10,23 @@ import {
   DELETE_FRAGMENT_SUCCESS
 } from '../actions/types'
 
-import _ from 'lodash'
+import find from 'lodash/find'
+import union from 'lodash/union'
+import difference from 'lodash/difference'
+import clone from 'lodash/clone'
+import findIndex from 'lodash/findIndex'
+import without from 'lodash/without'
 
 export function collections (state = [], action) {
-  const collections = _.clone(state)
+  const collections = clone(state)
 
   // TODO: store entities as an object or immutable Map, with the id as the key
   function getCollection () {
-    return _.find(collections, { id: action.collection.id })
+    return find(collections, { id: action.collection.id })
   }
 
   function getCollectionIndex () {
-    return _.findIndex(collections, {id: action.collection.id})
+    return findIndex(collections, {id: action.collection.id})
   }
 
   function addCollection () {
@@ -39,7 +44,7 @@ export function collections (state = [], action) {
   function deleteCollection () {
     const collection = getCollection()
 
-    return _.without(collections, collection)
+    return without(collections, collection)
   }
 
   function addFragments () {
@@ -47,7 +52,7 @@ export function collections (state = [], action) {
 
     let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)
 
-    collection.fragments = _.union(collection.fragments, toadd)
+    collection.fragments = union(collection.fragments, toadd)
     return collections
   }
 
@@ -55,13 +60,13 @@ export function collections (state = [], action) {
     const collection = getCollection()
 
     const todel = (action.fragments || [action.fragment]).map(fragment => fragment.id)
-    collection.fragments = _.difference(collection.fragments, todel)
+    collection.fragments = difference(collection.fragments, todel)
     return collections
   }
 
   switch (action.type) {
     case GET_COLLECTIONS_SUCCESS:
-      return _.clone(action.collections)
+      return clone(action.collections)
 
     case GET_COLLECTIONS_FAILURE:
       return []
