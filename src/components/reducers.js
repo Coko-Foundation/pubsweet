@@ -8,8 +8,7 @@ module.exports = PUBSWEET_COMPONENTS.filter(
       var re = {}
       re[r.default.name] = r.default
       return re
-    }
-    else {
+    } else {
       return reducers.map(r => r())
     }
   }
