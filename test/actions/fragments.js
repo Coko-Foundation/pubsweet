@@ -1,7 +1,6 @@
-const actions = require.requireActual('../../src/actions/collectionsFragments')
+const actions = require.requireActual('../../src/actions/fragments')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
-const auth = require('../helpers/auth')
 
 module.exports = app => {
   const mockcol = () => app.collection
@@ -9,19 +8,6 @@ module.exports = app => {
   const storedData = {
     fragment: {}
   }
-
-  describeAction('getCollections', {
-    types: {
-      request: T.GET_COLLECTIONS_REQUEST,
-      success: T.GET_COLLECTIONS_SUCCESS
-    },
-    properties: {
-      success: ['collections']
-    },
-    user: () => app.user
-  }, (action, data) => {
-    // optional: more functionality tests here
-  })
 
   describeAction('getFragments', {
     firstarg: mockcol,

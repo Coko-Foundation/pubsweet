@@ -8,6 +8,8 @@ const mockdata = require(mockdatafile)
 
 const logfile = path.join(mockdata.server, 'logs', 'production', 'stderr.log')
 
+console.log(logfile)
+
 try {
   fs.statSync(logfile)
   console.log('APP ERROR LOG:')

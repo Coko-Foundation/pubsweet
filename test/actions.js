@@ -5,8 +5,9 @@ global.PUBSWEET_COMPONENTS = []
 
 const expect = require.requireActual('chai').expect
 
-const collectionsFragments = require('./actions/collectionsFragments')
-const current_user = require('./actions/current_user')
+const collections = require('./actions/collections')
+const fragments = require('./actions/fragments')
+const currentUser = require('./actions/current_user')
 const fileUpload = require('./actions/fileUpload')
 const teams = require('./actions/teams')
 const users = require('./actions/users')
@@ -16,8 +17,9 @@ describe('ACTIONS', () => {
 
   it('needs a running app', () => { expect(app.server).to.be.ok })
 
-  describe('collections and fragments', () => collectionsFragments(app))
-  describe('current user', () => current_user(app))
+  describe('collections', () => collections(app))
+  describe('fragments', () => fragments(app))
+  describe('current user', () => currentUser(app))
   describe('fileUpload', () => fileUpload(app))
   describe('teams', () => teams(app))
   describe('users', () => users(app))

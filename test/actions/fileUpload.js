@@ -3,21 +3,17 @@ process.env.NODE_ENV = 'production'
 process.env.SILENT_NPM = 'true'
 global.PUBSWEET_COMPONENTS = []
 
-const expect = require.requireActual('chai').expect
-
-global.FormData = require('formdata-polyfill')
-require('../helpers/blob')
+const FileAPI = require('file-api')
+const File = FileAPI.File
+global.FormData = FileAPI.FormData
 
 const actions = require.requireActual('../../src/actions/fileUpload')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-const uploadpath = require('path').resolve('.', 'fileUpload.js')
-console.log('uploadpath: ', uploadpath)
-
 module.exports = app => {
   describeAction('fileUpload', {
-    firstarg: uploadpath,
+    firstarg: new File('./fileUpload.js'),
     types: {
       request: T.FILE_UPLOAD_REQUEST,
       success: T.FILE_UPLOAD_SUCCESS,

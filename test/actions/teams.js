@@ -1,5 +1,3 @@
-const expect = require.requireActual('chai').expect
-
 const actions = require.requireActual('../../src/actions/teams')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require.requireActual('../../src/actions/types')
