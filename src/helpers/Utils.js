@@ -8,7 +8,7 @@ export function fetch (url, options) {
       return response
     } else {
       error = new Error(response.statusText || response.status)
-      return Promise.resolve(response.text())
+      return response.text()
     }
   }).then(response => {
     if (error) {

@@ -7,7 +7,7 @@ const expect = require.requireActual('chai').expect
 
 const collections = require('./actions/collections')
 const fragments = require('./actions/fragments')
-const currentUser = require('./actions/current_user')
+const currentUser = require('./actions/currentUser')
 const fileUpload = require('./actions/fileUpload')
 const teams = require('./actions/teams')
 const users = require('./actions/users')

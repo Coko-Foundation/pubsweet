@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "compile": "babel --presets es2015,react -d lib/ src/",
-    "test": "./test/helpers/setup.js && NODE_ENV=test jest; ./test/helpers/cleanup.js",
+    "test": "./test/helpers/setup.js && NODE_ENV=test node --inspect ./node_modules/bin/jest --runInBand; ./test/helpers/cleanup.js",
     "eslint": "eslint"
   },
   "engines": {
@@ -67,7 +67,7 @@
     "expose-loader": "^0.7.0",
     "file-api": "^0.10.4",
     "formdata-polyfill": "^1.0.4",
-    "jest": "^18.1.0",
+    "jest": "^19.0.1",
     "node-localstorage": "^1.3.0",
     "pubsweet": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-cli.git#testing",
     "pubsweet-component-login": "^0.1.0",

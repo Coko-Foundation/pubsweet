@@ -14,7 +14,7 @@ function fileUploadSuccess (file) {
   return {
     type: T.FILE_UPLOAD_SUCCESS,
     isFetching: false,
-    file: file,
+    file: file
   }
 }
 
