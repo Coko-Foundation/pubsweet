@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import Authsome from 'authsome'
 
-import * as Actions from '../actions'
+import Actions from '../actions'
 
 export function requireAuthentication (Component, operation, selector) {
   class AuthenticatedComponent extends React.Component {
