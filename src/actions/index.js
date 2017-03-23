@@ -1,4 +1,5 @@
 import * as T from './types'
+import componentActionsList from '../components/actions'
 
 const actions = {}
 
@@ -40,7 +41,7 @@ import { fileUpload } from './fileUpload'
 Object.assign(actions, { fileUpload })
 
 // Actions from external components
-require('../components/actions').forEach(
+componentActionsList.forEach(
   componentActions => Object.assign(actions, componentActions)
 )
 
@@ -53,4 +54,4 @@ actions.hydrate = () => {
   ])
 }
 
-module.exports = actions
+export default actions
