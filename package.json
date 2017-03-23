@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "compile": "babel --presets es2015,react -d lib/ src/",
-    "test": "./test/helpers/setup.js && NODE_ENV=test node --inspect ./node_modules/bin/jest --runInBand; ./test/helpers/cleanup.js",
+    "test": "./test/helpers/setup.js && NODE_ENV=test jest; ./test/helpers/cleanup.js",
     "eslint": "eslint"
   },
   "engines": {
