@@ -3,7 +3,7 @@ import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from 'pubsweet-frontend/src/actions'
+import Actions from 'pubsweet-frontend/src/actions'
 
 class Draft extends React.Component {
   constructor (props) {

@@ -6,7 +6,7 @@ import Authorize from 'pubsweet-frontend/src/helpers/Authorize'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styles from './PostsManager.local.scss'
-import * as Actions from 'pubsweet-frontend/src/actions'
+import Actions from 'pubsweet-frontend/src/actions'
 import { fragmentsOfCollection } from 'pubsweet-frontend/src/helpers/Utils'
 
 class PostsManager extends React.Component {
