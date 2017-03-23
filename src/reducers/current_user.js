@@ -1,14 +1,13 @@
-// TODO: This will break when rendered on a server
-const localStorage = window.localStorage || undefined
+const token = require('../helpers/authtoken')
 
 import {
   GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE
 } from '../actions/types'
 
-export default function currentUser (state = {
+export function currentUser (state = {
   isFetching: false,
   isAuthenticated: false,
-  token: localStorage.getItem('token')
+  token: token()
 }, action) {
   switch (action.type) {
     case GET_USER_REQUEST:
