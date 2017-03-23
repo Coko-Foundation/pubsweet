@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from 'pubsweet-frontend/src/actions'
+import Actions from 'pubsweet-frontend/src/actions'
 
 import User from './User'
 
