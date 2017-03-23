@@ -2,7 +2,7 @@ import { fetch } from '../helpers/Utils'
 const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
 import * as T from './types'
 
-const fragmentUrl = (collection, fragment) => {
+export const fragmentUrl = (collection, fragment) => {
   let url = `${API_ENDPOINT}/collections/${collection.id}/fragments`
 
   if (fragment.id) url += `/${fragment.id}`
@@ -10,7 +10,7 @@ const fragmentUrl = (collection, fragment) => {
   return url
 }
 
-const collectionUrl = (collection, suffix) => {
+export const collectionUrl = (collection, suffix) => {
   let url = `${API_ENDPOINT}/collections`
 
   if (collection) url += `/${collection.id}`
