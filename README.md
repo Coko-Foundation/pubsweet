@@ -1,11 +1,11 @@
 # Build status
 
-[![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/builds)
-[![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/commits/master)
+[![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-server/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-server/builds)
+[![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet-server/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-server/commits/master)
 
 # Description
 
-This is the PubSweet backend, to be used as a dependency in PubSweet apps.
+This is the PubSweet server, to be used as a dependency in PubSweet apps.
 
 # Development
-- Check out our GitLab repository: https://gitlab.coko.foundation/pubsweet/pubsweet-backend
+- Check out our GitLab repository: https://gitlab.coko.foundation/pubsweet/pubsweet-server
