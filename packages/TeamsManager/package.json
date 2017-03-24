@@ -12,13 +12,13 @@
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.2",
-    "react-select": "^1.0.0-rc.2"
+    "react-select": "^1.0.0-rc.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
-      "path": "TeamsManager"
-    }
-  ]
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "TeamsManager"
+  }
 }

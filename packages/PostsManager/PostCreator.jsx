@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { InputGroup, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup.jsx'
 import validations from 'pubsweet-backend/src/models/validations.js'
 

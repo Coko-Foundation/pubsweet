@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 
-import './Blog.scss'
+import 'pubsweet-component-manage/Manage.scss'
 import styles from './Blog.local.scss'
 
 import Actions from 'pubsweet-frontend/src/actions'

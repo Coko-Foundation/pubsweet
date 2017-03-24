@@ -12,14 +12,13 @@
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.6.0",
     "react-router": "^2.6.1"
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
-      "path": "Login"
-    }
-  ]
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "Login"
+  }
 }

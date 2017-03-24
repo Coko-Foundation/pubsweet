@@ -8,11 +8,9 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "git",
-      "url": "http://gitlab.coko.foundation/pubsweet-components.git",
-      "path": "PepperTheme"
-    }
-  ]
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "PepperTheme"
+  }
 }
