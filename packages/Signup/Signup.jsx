@@ -63,8 +63,8 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  actions: PropTypes.object,
-  error: PropTypes.string
+  actions: PropTypes.object
+  // error: PropTypes.string
 }
 
 function mapState (state) {

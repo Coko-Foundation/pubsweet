@@ -28,7 +28,7 @@ function inkFailure (message) {
 
 // Calls the API to get a token and
 // dispatches actions along the way
-export function ink(file) {
+export function ink (file) {
   var data = new FormData()
   data.append('file', file)
 

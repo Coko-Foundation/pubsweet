@@ -62,8 +62,8 @@ class Login extends Component {
 }
 Login.propTypes = {
   actions: PropTypes.object,
-  location: PropTypes.object,
-  error: PropTypes.string
+  location: PropTypes.object
+  // error: PropTypes.string
 }
 function mapState (state) {
   return {

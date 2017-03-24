@@ -84,10 +84,7 @@ body, html {
 
   input[type="text"], input[type="text"].form-control,
   input[type="password"].form-control{
-    border: 0;
-    border-width: 2px;
-    border-color: #BAB8B8;
-    border-style: solid;
+    border: 2px solid #BAB8B8;
 
     &.error{
       border-right: 4px solid $pink;

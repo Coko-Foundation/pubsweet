@@ -54,9 +54,7 @@ class ScienceWriter extends React.Component {
     `
 
     var doc = this.createDoc(content, 'xml')
-    var documentSession = new DocumentSession(doc)
-
-    return documentSession
+    return new DocumentSession(doc)
   }
 
   createDoc (content, format) {
@@ -116,8 +114,8 @@ class ScienceWriter extends React.Component {
 ScienceWriter.propTypes = {
   fragment: React.PropTypes.object,
   blog: React.PropTypes.object,
-  actions: React.PropTypes.object,
-  id: React.PropTypes.string.isRequired
+  actions: React.PropTypes.object
+  // id: React.PropTypes.string.isRequired
 }
 
 function mapStateToProps (state, ownProps) {

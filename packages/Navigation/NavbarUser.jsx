@@ -12,7 +12,6 @@ export default class NavbarUser extends Component {
       </Nav>
     )
   }
-
 }
 
 NavbarUser.propTypes = {

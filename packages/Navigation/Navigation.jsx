@@ -6,7 +6,6 @@ import Authorize from 'pubsweet-frontend/src/helpers/Authorize'
 import NavbarUser from './NavbarUser'
 
 export default class Navigation extends React.Component {
-
   render () {
     const { actions, currentUser } = this.props
     let logoutButtonIfAuthenticated

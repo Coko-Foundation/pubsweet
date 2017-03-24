@@ -72,15 +72,15 @@ ScienceReader.propTypes = {
   // Data
   blogpost: React.PropTypes.object,
   // Injected by React Redux
-  errorMessage: React.PropTypes.string,
+  // errorMessage: React.PropTypes.string,
   // Injected by React Router
   actions: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps (state, ownProps) {
   return {
-    blogpost: state.fragments[ownProps.params.id],
-    errorMessage: state.errorMessage
+    blogpost: state.fragments[ownProps.params.id]
+    // errorMessage: state.errorMessage
   }
 }
 

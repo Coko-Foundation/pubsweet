@@ -39,7 +39,7 @@ let healthCheckRequest = function (auth) {
   }
 }
 
-let uploadRequest = function(data, auth) {
+let uploadRequest = function (data, auth) {
   return {
     uri: inkRecipe,
     method: 'POST',
@@ -95,11 +95,11 @@ let retryFor30SecondsUntil200 = (uri, auth) => {
   }, { retries: 10, maxTimeout: 60000 })
 }
 
-var InkBackend = function(app) {
+var InkBackend = function (app) {
   app.use('/ink', function (req, res, next) {
     var fileStream = new Busboy({headers: req.headers})
 
-    fileStream.on('file', function(fieldname, file, filename, encoding, contentType) {
+    fileStream.on('file', function (fieldname, file, filename, encoding, contentType) {
       var stream = temp.createWriteStream()
       file.pipe(stream)
 
@@ -125,7 +125,6 @@ var InkBackend = function(app) {
           }).catch(next)
       })
     })
-
 
     fileStream.on('error', function (err) {
       next(err)

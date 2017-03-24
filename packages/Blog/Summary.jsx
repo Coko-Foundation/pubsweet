@@ -36,6 +36,6 @@ export default class Summary extends React.Component {
 }
 
 Summary.propTypes = {
-  fragment: React.PropTypes.object.isRequired,
-  blogpost: React.PropTypes.object
+  fragment: React.PropTypes.object.isRequired
+  // blogpost: React.PropTypes.object
 }

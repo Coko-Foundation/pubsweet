@@ -3,7 +3,7 @@ import {
 } from './types'
 
 export default function ink (state = {
-  isFetching: false,
+  isFetching: false
 }, action) {
   switch (action.type) {
     case INK_REQUEST:
@@ -13,7 +13,7 @@ export default function ink (state = {
     case INK_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        converted: action.converted,
+        converted: action.converted
       })
     case INK_FAILURE:
       return Object.assign({}, state, {

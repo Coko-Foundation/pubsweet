@@ -51,7 +51,7 @@ class Blog extends React.Component {
         </div>
         <Grid>
           <div className={styles.blogContainer}>
-          {posts}
+            {posts}
           </div>
           <Row className={styles.blogFooter}>
             <Col md={8} mdOffset={2}>
@@ -70,7 +70,7 @@ Blog.propTypes = {
   blog: React.PropTypes.object,
   posts: React.PropTypes.array,
   // Injected by React Redux
-  errorMessage: React.PropTypes.string,
+  // errorMessage: React.PropTypes.string,
   // Injected by React Router
   actions: React.PropTypes.object.isRequired
 }
@@ -79,8 +79,8 @@ function mapStateToProps (state) {
   let posts = fragmentsOfCollection(state.collections[0], state.fragments)
   return {
     blog: state.collections[0],
-    posts: posts,
-    errorMessage: state.errorMessage
+    posts: posts
+    // errorMessage: state.errorMessage
   }
 }
 

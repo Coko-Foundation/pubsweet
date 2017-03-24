@@ -120,6 +120,6 @@ Post.propTypes = {
   blog: React.PropTypes.object,
   blogpost: React.PropTypes.object,
   delete: React.PropTypes.func,
-  update: React.PropTypes.func,
-  currentUser: React.PropTypes.object
+  update: React.PropTypes.func
+  // currentUser: React.PropTypes.object
 }

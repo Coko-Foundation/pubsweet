@@ -139,4 +139,3 @@ TeamCreator.propTypes = {
   types: React.PropTypes.object,
   create: React.PropTypes.func
 }
-
