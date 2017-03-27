@@ -9,8 +9,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-backend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-backend.git",
-    "pubsweet-frontend": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-frontend.git",
+    "pubsweet-backend": "0.7.1",
+    "pubsweet-frontend": "0.8.0",
     "pubsweet-component-form-group": "0.0.1",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
