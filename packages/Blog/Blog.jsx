@@ -5,9 +5,9 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import 'pubsweet-component-manage/Manage.scss'
 import styles from './Blog.local.scss'
 
-import Actions from 'pubsweet-frontend/src/actions'
+import Actions from 'pubsweet-client/src/actions'
 import { bindActionCreators } from 'redux'
-import { fragmentsOfCollection } from 'pubsweet-frontend/src/helpers/Utils'
+import { fragmentsOfCollection } from 'pubsweet-client/src/helpers/Utils'
 import BlogpostSummary from './Summary'
 
 class Blog extends React.Component {

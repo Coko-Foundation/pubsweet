@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Actions from 'pubsweet-frontend/src/actions'
+import Actions from 'pubsweet-client/src/actions'
 
 import './ScienceWriter.scss'
 import fetch from 'isomorphic-fetch'

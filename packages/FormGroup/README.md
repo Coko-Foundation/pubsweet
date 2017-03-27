@@ -23,7 +23,7 @@ In a PubSweet application, you can use this text input field like so:
 />
 ```
 
-The `modelProperty` tells the component which model and property this input field is describing, for example, `user.name` or `collection.title`. Validations for the input field will then be based on the validations for that specific model and property (defined in `pubsweet-backend` and your configuration).
+The `modelProperty` tells the component which model and property this input field is describing, for example, `user.name` or `collection.title`. Validations for the input field will then be based on the validations for that specific model and property (defined in `pubsweet-server` and your configuration).
 
 You can then get the value like so:
 

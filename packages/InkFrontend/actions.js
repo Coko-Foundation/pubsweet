@@ -1,7 +1,7 @@
-import { fetch } from 'pubsweet-frontend/src/helpers/Utils'
+import { fetch } from 'pubsweet-client/src/helpers/Utils'
 import * as T from './types'
 
-const API_ENDPOINT = CONFIG['pubsweet-backend']['API_ENDPOINT']
+const API_ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT']
 
 function inkRequest () {
   return {

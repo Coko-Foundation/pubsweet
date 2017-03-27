@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
-    "pubsweet-frontend": "^0.8.0",
+    "pubsweet-client": "^0.8.0",
     "lens": "github:blahah/lens-1#patch-10",
     "react": "^15.3.2",
     "react-redux": "^4.4.5",

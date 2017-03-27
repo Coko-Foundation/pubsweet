@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup.jsx'
-import validations from 'pubsweet-backend/src/models/validations.js'
+import validations from 'pubsweet-server/src/models/validations.js'
 
 export default class PostCreator extends React.Component {
   constructor (props) {
