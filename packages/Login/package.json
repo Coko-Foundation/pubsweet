@@ -1,0 +1,24 @@
+{
+  "name": "pubsweet-component-login",
+  "version": "0.2.1",
+  "description": "Basic login component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-bootstrap": "^0.30.3",
+    "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.6.0",
+    "react-router": "^2.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "Login"
+  }
+}
