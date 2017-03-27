@@ -21,7 +21,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-frontend": "0.8.0",
+    "pubsweet-frontend": "^0.8.0",
     "escape-html": "^1.0.3",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",

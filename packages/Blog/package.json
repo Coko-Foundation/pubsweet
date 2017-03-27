@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "pubsweet-component-manage": "^0.0.7",
-    "pubsweet-frontend": "0.8.0",
+    "pubsweet-frontend": "^0.8.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-redux": "^4.4.5",
