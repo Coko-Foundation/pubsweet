@@ -1,5 +1,5 @@
 import { fetch } from '../helpers/Utils'
-const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
 
 const teamUrl = (team) => {
