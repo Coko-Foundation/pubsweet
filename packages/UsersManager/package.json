@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-users-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Basic navigation bar component for PubSweet",
   "main": "index.js",
   "scripts": {
