@@ -2,7 +2,7 @@ const blogmode = require('authsome/src/modes/blog')
 const Joi = require('joi')
 
 module.exports = {
-  'pubsweet-backend': {
+  'pubsweet-server': {
     dbPath: './db/',
     'API_ENDPOINT': '/api'
   },

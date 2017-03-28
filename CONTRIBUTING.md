@@ -5,7 +5,7 @@
 We maintain master as the production branch and tag it with release names. If you wish to contribute to PubSweet then you need to make a branch and then issue a pull request following this procedure:
 
 1. Create a user account on Coko GitLab : http://gitlab.coko.foundation
-2. Clone master with ```git clone git@gitlab.coko.foundation:pubsweet/pubsweet-backend.git```
+2. Clone master with ```git clone git@gitlab.coko.foundation:pubsweet/pubsweet-server.git```
 3. Create a new branch and work off that. Please name the branch which sensibly identifies the feature you are working on. You can push the branch to Coko Gitlab at anytime.
 
 ## Getting your contributions merged
@@ -21,6 +21,6 @@ We encourage feedback and discussion from as many people as possible on Merge Re
 ## Bug reports, feature requests, support questions
 This is all done through GitLab using their native issue tracker
 
-1. Visit [the issue tracker for pubsweet-backend](https://gitlab.coko.foundation/pubsweet/pubsweet-backend/issues).
+1. Visit [the issue tracker for pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server/issues).
 2. Add an issue.
 3. Tag the issue with 'support', 'bug', or 'feature' to identify the nature of your issue
