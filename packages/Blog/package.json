@@ -9,7 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-component-manage": "^0.0.7",
+    "pubsweet-component-manage": "^0.1.1",
     "pubsweet-client": "^0.8.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
