@@ -6,7 +6,7 @@ import {
 } from '../actions/types'
 
 // The users reducer.
-export function users (state = {
+export default function (state = {
   isFetching: false
 }, action) {
   switch (action.type) {

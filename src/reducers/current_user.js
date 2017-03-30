@@ -4,7 +4,7 @@ import {
   GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE
 } from '../actions/types'
 
-export function currentUser (state = {
+export default function (state = {
   isFetching: false,
   isAuthenticated: false,
   token: token()

@@ -3,7 +3,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 
-import * as reducers from '../reducers'
+import reducers from '../reducers'
 
 require('../components/reducers').forEach(
   componentReducers => Object.assign(reducers, componentReducers)

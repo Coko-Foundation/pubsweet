@@ -17,7 +17,7 @@ import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import without from 'lodash/without'
 
-export function collections (state = [], action) {
+export default function (state = [], action) {
   const collections = clone(state)
 
   // TODO: store entities as an object or immutable Map, with the id as the key
