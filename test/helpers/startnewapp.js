@@ -1,17 +1,17 @@
 const spawn = require('child-process').spawn
 const path = require('path')
 
-module.exports = () => require('pubsweet/test/helpers/working_dir')(
+module.exports = () => require('pubsweet-cli/test/helpers/working_dir')(
 ).then(
-  dir => require('pubsweet/src/generate-config')()
+  dir => require('pubsweet-cli/src/generate-config')()
 ).then(
-  require('pubsweet/src/generate-env')
+  require('pubsweet-cli/src/generate-env')
 ).then(
-  () => require('pubsweet/src/initial-app')('someapp')
+  () => require('pubsweet-cli/src/initial-app')('someapp')
 ).then(
-  require('pubsweet/src/setup-db')({
-    properties: require('pubsweet/src/db-properties'),
-    override: require('pubsweet/test/fixtures').dbconfig
+  require('pubsweet-cli/src/setup-db')({
+    properties: require('pubsweet-cli/src/db-properties'),
+    override: require('pubsweet-cli/test/fixtures').dbconfig
   })
 ).then(
   dbsetup => new Promise(
@@ -31,7 +31,7 @@ module.exports = () => require('pubsweet/test/helpers/working_dir')(
   )
 ).then(
   dbsetup => new Promise(
-    resolve => require('pubsweet/test/src/start')(server => {
+    resolve => require('pubsweet-cli/test/src/start')(server => {
       resolve({
         server: server,
         user: dbsetup.user,
