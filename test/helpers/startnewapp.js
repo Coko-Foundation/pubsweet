@@ -18,7 +18,7 @@ const run = async () => {
   await require('pubsweet-cli/src/initial-app')(appname)
   console.log('app generated')
 
-  await require('pubsweet-cli/src/setup-db')({
+  const app = await require('pubsweet-cli/src/setup-db')({
     properties: require('pubsweet-cli/src/db-properties'),
     override: require('pubsweet-cli/test/fixtures').dbconfig
   })
@@ -38,8 +38,8 @@ const run = async () => {
   )
 
   console.log('starting server')
-  require('pubsweet-cli/src/start')(_server => {
-    console.log('PARENT SHOULD DETACH')
+  return new Promise(resolve => {
+    require('pubsweet-cli/src/start')(() => resolve(app))
   })
 }
 
