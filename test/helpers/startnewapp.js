@@ -1,43 +1,46 @@
 const spawn = require('child_process').spawnSync
 const path = require('path')
+const fs = require('fs-extra')
 
-const tmpdir = await require('pubsweet-cli/test/helpers/working_dir')()
+const run = async () => {
+  const tmpdir = await require('pubsweet-cli/test/helpers/working_dir')()
 
-const appname = 'testapp'
-fs.mkdirsSync(path.join(tmpdir, appname))
-logger.info('created directory')
+  const appname = 'testapp'
+  fs.mkdirsSync(path.join(tmpdir, appname))
+  console.log('created directory')
 
-await require('pubsweet-cli/src/generate-config')()
-logger.info('config generated')
+  await require('pubsweet-cli/src/generate-config')()
+  console.log('config generated')
 
-await require('pubsweet-cli/src/generate-env')()
-logger.info('env generated')
+  await require('pubsweet-cli/src/generate-env')()
+  console.log('env generated')
 
-await require('pubsweet-cli/src/initial-app')(appname)
-logger.info('app generated')
+  await require('pubsweet-cli/src/initial-app')(appname)
+  console.log('app generated')
 
-await require('pubsweet-cli/src/setup-db')({
-  properties: require('pubsweet-cli/src/db-properties'),
-  override: dbconfig
-})
-logger.info('db created')
+  await require('pubsweet-cli/src/setup-db')({
+    properties: require('pubsweet-cli/src/db-properties'),
+    override: require('pubsweet-cli/test/fixtures').dbconfig
+  })
+  console.log('db created')
 
-require('pubsweet-cli/src/load-config')(path.resolve('', './config'))
-logger.info('config loaded')
+  require('pubsweet-cli/src/load-config')(path.resolve('', './config'))
+  console.log('config loaded')
 
-spawn(
-  'npm install',
-  [path.join(__dirname, '..', '..')],
-  {
-    cwd: process.cwd(),
-    stdio: 'ignore',
-    shell: true
-  }
-)
+  spawn(
+    'npm install',
+    [path.join(__dirname, '..', '..')],
+    {
+      cwd: process.cwd(),
+      stdio: 'ignore',
+      shell: true
+    }
+  )
 
-logger.info('starting server')
-require('pubsweet-cli/src/start')(_server => {
-  server = _server
-  logger.info('server started')
-  done()
-})
+  console.log('starting server')
+  require('pubsweet-cli/src/start')(_server => {
+    console.log('PARENT SHOULD DETACH')
+  })
+}
+
+module.exports = run
