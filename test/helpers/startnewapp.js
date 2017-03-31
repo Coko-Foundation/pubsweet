@@ -1,4 +1,4 @@
-const spawn = require('child-process').spawn
+const spawn = require('child_process').spawn
 const path = require('path')
 
 module.exports = () => require('pubsweet-cli/test/helpers/working_dir')(
