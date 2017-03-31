@@ -4,7 +4,9 @@
   "main": "src/index.js",
   "scripts": {
     "compile": "babel --presets es2015,react -d lib/ src/",
-    "test": "./test/helpers/setup.js && NODE_ENV=test jest; ./test/helpers/cleanup.js",
+    "test": "NODE_ENV=test ./test/helpers/setup.js && NODE_ENV=test jest; ./test/helpers/cleanup.js",
+    "testdocker": "NODE_ENV=test ./test/helpers/setup.js && NODE_ENV=test jest --runInBand --no-watchman --no-cache --verbose --forceExit; ./test/helpers/cleanup.js",
+    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
     "eslint": "eslint"
   },
   "engines": {
@@ -68,6 +70,7 @@
     "expose-loader": "^0.7.0",
     "file-api": "^0.10.4",
     "formdata-polyfill": "^1.0.4",
+    "isomorphic-form-data": "^1.0.0",
     "jest": "^19.0.1",
     "node-localstorage": "^1.3.0",
     "pubsweet": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-cli.git#testing",
