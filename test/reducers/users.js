@@ -8,7 +8,7 @@ const clone = require('lodash/clone')
 module.exports = app => describeReducerSet('users', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['users'])
+  )(reducers.default)
 
   const user = app.user
   const usermod = clone(user)

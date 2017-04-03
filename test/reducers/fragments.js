@@ -8,7 +8,7 @@ const clone = require('lodash/clone')
 module.exports = app => describeReducerSet('fragments', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['fragments'])
+  )(reducers.default)
 
   const mockcol = app.collection
   mockcol.fragments = []

@@ -6,7 +6,7 @@ const T = require('../../src/actions/types')
 module.exports = app => describeReducerSet('currentUser', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['currentUser'])
+  )(reducers.default)
 
   const mockuser = {
     name: 'jo johnson'

@@ -13,7 +13,7 @@ module.exports = app => describeReducerSet('collections', reducers, () => {
 
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['collections'])
+  )(reducers.default)
 
   describeReducer('getCollections success', {
     state: [mockcol],
