@@ -8,7 +8,7 @@ const clone = require('lodash/clone')
 module.exports = app => describeReducerSet('teams', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['teams'])
+  )(reducers.default)
 
   const mockteam = { name: 'someteam', id: '1234' }
   const mockstate = [mockteam]

@@ -3,7 +3,7 @@ import {
   FILE_UPLOAD_SUCCESS,
 } from '../actions/types'
 
-export function fileUpload (state = {
+export default function (state = {
   isFetching: false
 }, action) {
   switch (action.type) {

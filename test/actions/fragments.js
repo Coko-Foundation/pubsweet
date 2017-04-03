@@ -26,8 +26,9 @@ module.exports = app => {
   describeAction('createFragment', {
     firstarg: mockcol,
     secondarg: {
-      name: 'some name',
-      body: 'some text'
+      title: 'mock fragment',
+      type: 'some_fragment',
+      owners: []
     },
     types: {
       request: T.CREATE_FRAGMENT_REQUEST,
@@ -49,7 +50,9 @@ module.exports = app => {
     secondarg: () => {
       return {
         id: storedData.fragment.id,
-        name: 'new name'
+        title: 'modded fragment',
+        type: 'some_fragment',
+        owners: []
       }
     },
     types: {

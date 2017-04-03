@@ -15,7 +15,7 @@ import clone from 'lodash/clone'
 import assign from 'lodash/assign'
 import unset from 'lodash/unset'
 
-export function fragments (state = {}, action) {
+export default function (state = {}, action) {
   const fragments = clone(state)
 
   function replaceAll () {

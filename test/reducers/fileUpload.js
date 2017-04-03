@@ -8,7 +8,7 @@ const clone = require('lodash/clone')
 module.exports = app => describeReducerSet('fileUpload', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
-  )(reducers['fileUpload'])
+  )(reducers.default)
 
   describeReducer('fileUpload success', {
     action: {

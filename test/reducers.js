@@ -1,5 +1,4 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-process.env.NODE_ENV = 'production'
 process.env.SILENT_NPM = 'true'
 global.PUBSWEET_COMPONENTS = []
 
