@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const mockdatafile = path.join(__dirname, 'mockapp.json')
 
-const startnewapp = require('pubsweet/test/helpers/startnewapp')
+const startnewapp = require('./startnewapp')
 
 startnewapp().then(
   _app => {
