@@ -2,12 +2,21 @@
 
 TESTCMD=$1
 
-NODE_ENV=test ./test/helpers/setup.js
+export NODE_ENV=test
 
-`$TESTCMD`
+./test/helpers/setup.js
 
-STATUS=$?
+echo "running test command $TESTCMD"
 
-NODE_ENV=test ./test/helpers/cleanup.js
+$TESTCMD
 
-exit $STATUS
+if [ $? -eq 0 ]
+then
+  echo "test suite passed - cleaning up"
+  ./test/helpers/cleanup.js
+  exit 0
+else
+  echo "test suite failed - cleaning up"
+  ./test/helpers/cleanup.js
+  exit 1
+fi
