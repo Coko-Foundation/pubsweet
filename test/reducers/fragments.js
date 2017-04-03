@@ -13,11 +13,19 @@ module.exports = app => describeReducerSet('fragments', reducers, () => {
   const mockcol = app.collection
   mockcol.fragments = []
 
-  const mockfrag = { name: 'mock fragment', id: 'abcd' }
+  const mockfrag = {
+    title: 'mock fragment',
+    type: 'some_fragment',
+    owners: []
+  }
   const mockstate = {}
   mockstate[mockfrag.id] = mockfrag
 
-  const mockfragmod = { name: 'modded fragmemnt', id: 'abcd' }
+  const mockfragmod = {
+    title: 'modded fragment',
+    type: 'some_fragment',
+    owners: []
+  }
   mockstatemod = {}
   mockstatemod[mockfrag.id] = mockfragmod
 
