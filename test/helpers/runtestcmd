@@ -1,0 +1,13 @@
+#!/bin/sh
+
+TESTCMD=$1
+
+NODE_ENV=test ./test/helpers/setup.js
+
+`$TESTCMD`
+
+STATUS=$?
+
+NODE_ENV=test ./test/helpers/cleanup.js
+
+exit $STATUS
