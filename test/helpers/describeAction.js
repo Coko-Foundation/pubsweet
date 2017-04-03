@@ -85,8 +85,12 @@ const describeAction = actions => (key, opts, cb) => {
         )
 
         expect(dispatched).to.be.ok
-        expect(dispatched.type).to.equal(opts.types.request)
-
+        expect(
+          dispatched.type
+        ).to.equal(
+          opts.types.request,
+          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
+        )
         if (properties) {
           expect(Object.keys(dispatched)).to.include.members(properties)
         }
@@ -112,7 +116,12 @@ const describeAction = actions => (key, opts, cb) => {
         ).then(
           dispatched => {
             expect(dispatched).to.be.ok
-            expect(dispatched.type).to.equal(opts.types.success)
+            expect(
+              dispatched.type
+            ).to.equal(
+              opts.types.success,
+              `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
+            )
             if (properties) {
               expect(Object.keys(dispatched)).to.include.members(properties)
             }
@@ -139,7 +148,12 @@ const describeAction = actions => (key, opts, cb) => {
         ).then(
           dispatched => {
             expect(dispatched).to.be.ok
-            expect(dispatched.type).to.equal(opts.types.failure)
+            expect(
+              dispatched.type
+            ).to.equal(
+              opts.types.failure,
+              `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
+            )
             if (properties) {
               expect(Object.keys(dispatched)).to.include.members(properties)
             }
