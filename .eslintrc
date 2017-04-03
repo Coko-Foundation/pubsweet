@@ -5,7 +5,9 @@
   "extends": ["standard", "standard-react"],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true,
+    "jasmine": true
   }
 }
 
