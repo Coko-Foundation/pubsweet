@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 import DevTools from '../components/DevTools'
-import * as reducers from '../reducers'
+import reducers from '../reducers'
 
 require('../components/reducers').forEach(
   componentReducers => Object.assign(reducers, componentReducers)
