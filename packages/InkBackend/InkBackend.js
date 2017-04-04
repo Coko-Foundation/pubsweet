@@ -49,7 +49,7 @@ let uploadRequest = function (data, auth) {
       'client': auth.client
     },
     formData: {
-      input_file: data
+      input_files: [data]
     }
   }
 }
@@ -119,7 +119,13 @@ var InkBackend = function (app) {
             return uploadToInk(file, auth)
           }).then(([auth, response]) => {
             response = JSON.parse(response)
-            return retryFor30SecondsUntil200(response.process_chain.output_file_path, auth)
+            let url = inkEndpoint +
+              '/api/process_chains/' +
+              response.process_chain.id +
+              '/download_output_file?relative_path=' +
+              path.basename(response.process_chain.input_file_manifest[0].path, '.docx') +
+              '.html'
+            return retryFor30SecondsUntil200(url, auth)
           }).then(response => {
             res.send(response)
           }).catch(next)
