@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 global.URL = global.URL || global.webkitURL;
 
 if (global.Blob && global.URL) {
