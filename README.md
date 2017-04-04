@@ -4,10 +4,10 @@
 
 **PubSweet** allows you to build state-of-the-art publishing platforms. It's a modular and flexible framework consisting of:
 
-- [pubsweet-backend](https://gitlab.coko.foundation/pubsweet/pubsweet-backend): an extensible back-end API that runs on the server
-- [pubsweet-frontend](https://gitlab.coko.foundation/pubsweet/pubsweet-frontend): an extensible frontend app that runs in the browser
+- [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server): an extensible back-end API that runs on the server
+- [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client): an extensible frontend app that runs in the browser
 - [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components): pluggable extensions for both back- and frontend
-- [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli): a suite of command-line tools for building and managing your platform. `pubsweet` is the entry-point into the framework.
+- [pubsweet](https://gitlab.coko.foundation/pubsweet/pubsweet-cli): a suite of command-line tools for building and managing your platform. `pubsweet` is the entry-point into the framework.
 
 You can read more about the ideas behind PubSweet on [the Collaborative Knowledge Foundation blog](http://coko.foundation/blog.html#reimagine).
 
