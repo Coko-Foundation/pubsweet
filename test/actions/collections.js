@@ -50,18 +50,16 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
-  // TODO: updateCollection
-
-  describeAction('patchCollection', {
+  describeAction('updateCollection', {
     firstarg: () => newcol,
     secondarg: {
       type: 'testing',
-      title: 'this is a changed collection'
+      title: 'this is an updated collection'
     },
     types: {
-      request: T.PATCH_COLLECTION_REQUEST,
-      success: T.PATCH_COLLECTION_SUCCESS,
-      failure: T.PATCH_COLLECTION_FAILURE
+      request: T.UPDATE_COLLECTION_REQUEST,
+      success: T.UPDATE_COLLECTION_SUCCESS,
+      failure: T.UPDATE_COLLECTION_FAILURE
     },
     properties: {
       request: ['type', 'collection'],
@@ -71,10 +69,35 @@ module.exports = app => {
     user: () => app.user
   }, (action, data) => {
     expect(
-      data.CREATE_COLLECTION_SUCCESS.collection.title
-    ).to.not.equal(newcol.title)
+      data.UPDATE_COLLECTION_SUCCESS.collection.title
+    ).to.equal('this is an updated collection')
     // optional: more functionality tests here
   })
+
+  // NOTE: enable this once PATCH method is implemented on the server
+  // describeAction('patchCollection', {
+  //   firstarg: () => newcol,
+  //   secondarg: {
+  //     type: 'testing',
+  //     title: 'this is a patched collection'
+  //   },
+  //   types: {
+  //     request: T.PATCH_COLLECTION_REQUEST,
+  //     success: T.PATCH_COLLECTION_SUCCESS,
+  //     failure: T.PATCH_COLLECTION_FAILURE
+  //   },
+  //   properties: {
+  //     request: ['type', 'collection'],
+  //     success: ['type', 'collection'],
+  //     failure: ['type', 'isFetching', 'collection', 'error']
+  //   },
+  //   user: () => app.user
+  // }, (action, data) => {
+  //   expect(
+  //     data.PATCH_COLLECTION_SUCCESS.collection.title
+  //   ).to.equal('this is a patched collection')
+  //   // optional: more functionality tests here
+  // })
 
   describeAction('deleteCollection', {
     firstarg: () => newcol,
@@ -90,6 +113,9 @@ module.exports = app => {
     },
     user: () => app.user
   }, (action, data) => {
+    expect(
+      data.DELETE_COLLECTION_SUCCESS.collection.title
+    ).to.equal(newcol.collection.title)
     // optional: more functionality tests here
   })
 }
