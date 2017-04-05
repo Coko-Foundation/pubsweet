@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import configureStore from 'pubsweet-frontend/src/store/configureStore'
-import Root from 'pubsweet-frontend/src/components/Root'
+import configureStore from 'pubsweet-client/src/store/configureStore'
+import Root from 'pubsweet-client/src/components/Root'
 
 import { AppContainer } from 'react-hot-loader'
 import { browserHistory } from 'react-router'
@@ -21,8 +21,8 @@ ReactDOM.render(
 )
 
 if (module.hot) {
-  module.hot.accept('pubsweet-frontend/src/components/Root', () => {
-    const NextRoot = require('pubsweet-frontend/src/components/Root').default
+  module.hot.accept('pubsweet-client/src/components/Root', () => {
+    const NextRoot = require('pubsweet-client/src/components/Root').default
 
     ReactDOM.render(
       <AppContainer>

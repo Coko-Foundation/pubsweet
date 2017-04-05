@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs-extra')
-const logger = require('./logger')
 
 const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 
@@ -9,11 +8,11 @@ const path = require('path')
 const blogmode = require('authsome/src/modes/blog')
 
 module.exports = {
-  'pubsweet-backend': {
+  'pubsweet-server': {
     dbPath: path.join(__dirname, '..', 'api', 'db'),
     API_ENDPOINT: '/api'
   },
-  'pubsweet-frontend': {
+  'pubsweet-client': {
     theme: 'PepperTheme'
   },
   authsome: {
@@ -60,10 +59,5 @@ module.exports = () => {
   fs.mkdirsSync(path.join(process.cwd(), 'config'))
   return write(
     configpath(process.env.NODE_ENV), configfile(process.env.NODE_ENV)
-  ).catch(
-    err => {
-      logger.error(err.stack)
-      process.exit(1)
-    }
   )
 }

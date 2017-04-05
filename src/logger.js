@@ -1,25 +1,21 @@
 'use strict'
 
+const path = require('path')
 const winston = require('winston')
 
-let logger
-
-if (process.env.NODE_ENV !== 'test') {
-  logger = new (winston.Logger)({
-    transports: [
-      new (winston.transports.Console)({ colorize: true })
-    ]
-  })
-} else {
-  logger = new (winston.Logger)({
-    transports: [
-      new (winston.transports.File)({ filename: 'test.log' })
-    ]
-  })
-}
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.File)({
+      filename: path.join(__dirname, '..', 'logs', 'pubsweet_' + process.env.NODE_ENV + '.log')
+    }),
+    new (winston.transports.Console)({
+      colorize: true
+    })
+  ]
+})
 
 logger.stream = {
-  write: (message, encoding) => {
+  write: message => {
     logger.info(message)
   }
 }

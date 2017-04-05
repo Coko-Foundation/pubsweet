@@ -46,7 +46,7 @@ const install = names => new Promise(
     const pkg = JSON.parse(fs.readFileSync('./package.json'))
     const oldmodules = Object.keys(pkg.dependencies)
     const child = spawn(
-      `npm install --save ${names}`,
+      `yarn add ${names}`,
       { cwd: process.cwd(), stdio: 'inherit', shell: true }
     )
     child.on('error', reject)
@@ -109,8 +109,5 @@ install(
 ).then(
   done
 ).catch(
-  err => {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  require('../src/error-exit')
 )

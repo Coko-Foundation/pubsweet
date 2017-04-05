@@ -1,7 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const ThemePlugin = require('pubsweet-theme-plugin')
-const config = require('../config/dev')
+const config = require('../config/test')
+const CompressionPlugin = require('compression-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = [
@@ -22,7 +23,6 @@ module.exports = [
       filename: '[name].js',
       publicPath: '/assets/'
     },
-    devtool: 'cheap-module-source-map',
     module: {
       rules: require('./common-rules')
     },
@@ -45,12 +45,12 @@ module.exports = [
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
-          'NODE_ENV': JSON.stringify('dev'),
+          'NODE_ENV': JSON.stringify('test'),
           'REDUXLOG_OFF': process.env.REDUXLOG_OFF
         }
       }),
       new webpack.ProvidePlugin({
-        'CONFIG': path.resolve(__dirname, '..', 'config', 'dev.js')
+        'CONFIG': path.resolve(__dirname, '..', 'config', 'test.js')
       }),
       new CopyWebpackPlugin([
         { from: '../static' }

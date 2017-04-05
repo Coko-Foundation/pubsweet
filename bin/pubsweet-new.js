@@ -5,22 +5,7 @@ const logger = require('../src/logger')
 const fs = require('fs-extra')
 const colors = require('colors/safe')
 
-const properties = {
-  username: {
-    description: 'Admin username'
-  },
-  email: {
-    description: 'Admin email address'
-  },
-  password: {
-    description: 'Admin password',
-    hidden: true,
-    replace: '*'
-  },
-  collection: {
-    description: 'Initial collection title'
-  }
-}
+const properties = require('../src/db-properties')
 
 program
   .arguments('[name]')
@@ -88,8 +73,5 @@ checkNoApp().then(
     override: program
   })
 ).catch(
-  err => {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  require('../src/error-exit')
 )
