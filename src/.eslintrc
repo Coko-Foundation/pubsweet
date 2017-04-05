@@ -12,6 +12,9 @@
   },
   "plugins": [
     "react"
-  ]
+  ],
+  "globals": {
+    "CONFIG": false
+  }
 }
 
