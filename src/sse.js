@@ -24,7 +24,7 @@ class SSE extends EventEmitter {
     res.set({
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive',
+      'Connection': 'keep-alive'
     })
 
     this.setMaxListeners(this.getMaxListeners() + 1)
