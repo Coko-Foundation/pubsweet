@@ -74,13 +74,13 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // update the collection
-      collection.title = 'Updated title'
+      const title = 'Updated title'
 
-      const updatedCollection = await api.collections.update(collection, adminToken)
+      const result = await api.collections.update(collection.id, { title }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(updatedCollection.title).toEqual('Updated title')
+      expect(result.title).toEqual(title)
     })
 
     it('should allow an admin user to delete a collection', async () => {
@@ -92,7 +92,7 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // delete the collection
-      await api.collections.delete(collection, adminToken)
+      await api.collections.delete(collection.id, adminToken)
         .expect(STATUS.OK)
 
       // try to retrieve the deleted collection
@@ -109,7 +109,7 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // list fragments in this collection
-      const fragments = await api.collections.listFragments(collection, adminToken)
+      const fragments = await api.collections.listFragments(collection.id, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -125,7 +125,7 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // create a fragment in the collection
-      const fragment = await api.collections.createFragment(collection, fixtures.fragment, adminToken)
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -146,14 +146,14 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // create a fragment in the collection
-      const fragment = await api.collections.createFragment(collection, fixtures.fragment, adminToken)
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
-      fragment.source = '<blog>test</blog>'
+      const source = '<blog>test</blog>'
 
       // update the fragment
-      await api.collections.updateFragment(collection, fragment, adminToken)
+      await api.collections.updateFragment(collection.id, fragment.id, { source }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -162,7 +162,7 @@ describe('Collections API', () => {
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(retrievedFragment.source).toEqual('<blog>test</blog>')
+      expect(retrievedFragment.source).toEqual(source)
     })
 
     it('should allow an admin user to delete a fragment in a collection', async () => {
@@ -174,12 +174,12 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // create a fragment in the collection
-      const fragment = await api.collections.createFragment(collection, fixtures.fragment, adminToken)
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
       // delete the fragment
-      await api.collections.deleteFragment(collection, fragment, adminToken)
+      await api.collections.deleteFragment(collection.id, fragment.id, adminToken)
         .expect(STATUS.OK)
 
       // retrieve the updated fragment
@@ -244,13 +244,13 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // update the collection
-      collection.title = 'Updated title'
+      const title = 'Updated title'
 
-      const updatedCollection = await api.collections.update(collection, token)
+      const result = await api.collections.update(collection.id, { title }, token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(updatedCollection.title).toEqual('Updated title')
+      expect(result.title).toEqual(title)
     })
 
     it('should not allow a user to update a collection they do not own', async () => {
@@ -261,9 +261,9 @@ describe('Collections API', () => {
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
-      collection.title = 'Updated title'
+      const title = 'Updated title'
 
-      await api.collections.update(collection, userToken)
+      await api.collections.update(collection.id, { title }, userToken)
         .expect(STATUS.FORBIDDEN)
     })
 
@@ -276,7 +276,7 @@ describe('Collections API', () => {
 
       expect(collection.title).toEqual(fixtures.collection.title)
 
-      await api.collections.delete(collection, token)
+      await api.collections.delete(collection.id, token)
         .expect(STATUS.OK)
 
       await api.collections.retrieve(collection.id, token)
@@ -291,7 +291,7 @@ describe('Collections API', () => {
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
-      await api.collections.delete(collection, userToken)
+      await api.collections.delete(collection.id, userToken)
         .expect(STATUS.FORBIDDEN)
     })
   })
