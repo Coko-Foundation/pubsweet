@@ -1,6 +1,6 @@
 {
-  "name": "pubsweet-backend",
-  "version": "0.7.0",
+  "name": "pubsweet-server",
+  "version": "0.7.2",
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
@@ -87,7 +87,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-backend"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-server"
   },
   "jest": {
     "testEnvironment": "node",
