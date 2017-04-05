@@ -10,7 +10,7 @@ import findIndex from 'lodash/findIndex'
 import assign from 'lodash/assign'
 import difference from 'lodash/difference'
 
-export default function teams (state = [], action) {
+export default function (state = [], action) {
   const teams = clone(state)
 
   function updateOne () {

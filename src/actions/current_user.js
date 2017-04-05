@@ -1,10 +1,9 @@
 import { fetch } from '../helpers/Utils'
 
-const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
 
-// TODO: This will break when rendered on a server
-const localStorage = window.localStorage || undefined
+const token = require('../helpers/authtoken')
 
 function getUserRequest () {
   return {
@@ -35,17 +34,19 @@ function getUserFailure (message) {
 export function getUser () {
   let config = {
     method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + localStorage.token }
+    headers: { 'Authorization': 'Bearer ' + token() }
   }
 
   return dispatch => {
     dispatch(getUserRequest())
-    return fetch(API_ENDPOINT + '/users/authenticate', config)
-      .then(
-        response => response.json()
-      ).then(
-        user => dispatch(getUserSuccess(user)),
-        err => dispatch(getUserFailure(err))
-      )
+    return fetch(
+      API_ENDPOINT + '/users/authenticate', config
+    ).then(
+      response => response.json()
+    ).then(
+      user => dispatch(getUserSuccess(user))
+    ).catch(
+      err => dispatch(getUserFailure(err))
+    )
   }
 }

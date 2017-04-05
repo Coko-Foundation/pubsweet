@@ -1,6 +1,6 @@
 import { fetch } from '../helpers/Utils'
 
-const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
 
 function fileUploadRequest () {
@@ -14,7 +14,7 @@ function fileUploadSuccess (file) {
   return {
     type: T.FILE_UPLOAD_SUCCESS,
     isFetching: false,
-    file: file,
+    file: file
   }
 }
 

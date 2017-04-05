@@ -1,5 +1,5 @@
 import { fetch } from '../helpers/Utils'
-const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
 
 const teamUrl = (team) => {
@@ -197,58 +197,3 @@ export function deleteTeam (team) {
       )
   }
 }
-
-// function updateUserRequest (user) {
-//   return {
-//     type: T.UPDATE_USER_REQUEST,
-//     user: user,
-//     isFetching: true
-//   }
-// }
-
-// function updateUserSuccess (users) {
-//   return {
-//     type: T.UPDATE_USER_SUCCESS,
-//     isFetching: false,
-//     users: users
-//   }
-// }
-
-// function updateUserFailure (message) {
-//   return {
-//     type: T.UPDATE_USER_FAILURE,
-//     isFetching: false,
-//     error: message
-//   }
-// }
-
-// export function updateUser (user) {
-//   let config = {
-//     method: 'PUT',
-//     headers: {
-//       'Authorization': 'Bearer ' + localStorage.token,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(user)
-//   }
-
-//   return dispatch => {
-//     dispatch(updateUserRequest(user))
-//     return fetch(API_ENDPOINT + '/users/' + user.id, config)
-//       .then(response => {
-//         if (response.ok) {
-//           return response.json().then(user => {
-//             dispatch(updateUserSuccess(user))
-//           })
-//         } else {
-//           return response.json().then(response => {
-//             dispatch(updateUserFailure(response.message))
-//             throw new Error(response.message)
-//           })
-//         }
-//       }).catch(err => {
-//         dispatch(updateUserFailure(err.message))
-//         console.log('Error: ', err)
-//       })
-//   }
-// }

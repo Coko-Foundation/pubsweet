@@ -6,7 +6,7 @@ import {
 } from '../actions/types'
 
 // The users reducer.
-export default function users (state = {
+export default function (state = {
   isFetching: false
 }, action) {
   switch (action.type) {
@@ -21,7 +21,7 @@ export default function users (state = {
       })
     case UPDATE_USER_REQUEST:
       var users = state.users.map(function (user) {
-        if (user.id === action.user) {
+        if (user.id === action.user.id) {
           return Object.assign(user, action.user)
         } else {
           return user

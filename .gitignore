@@ -6,3 +6,5 @@ public/uploads/*
 .DS_Store
 
 test.log
+scratch
+coverage

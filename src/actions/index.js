@@ -1,4 +1,5 @@
 import * as T from './types'
+import componentActionsList from '../components/actions'
 
 const actions = {}
 
@@ -14,14 +15,15 @@ import { getUser } from './current_user'
 
 Object.assign(actions, { getUser })
 
-// Actions for collections and fragments
-import {
-  getCollections, getFragments, createFragment, updateFragment, deleteFragment
-} from './collectionsFragments.js'
+// Actions for collections
+import { getCollections, createCollection, updateCollection, patchCollection, deleteCollection } from './collections'
 
-Object.assign(actions, {
-  getCollections, getFragments, createFragment, updateFragment, deleteFragment
-})
+Object.assign(actions, { getCollections, createCollection, updateCollection, patchCollection, deleteCollection })
+
+// Actions for fragments
+import { getFragments, createFragment, updateFragment, deleteFragment } from './fragments'
+
+Object.assign(actions, { getFragments, createFragment, updateFragment, deleteFragment })
 
 // Actions for users management
 import { getUsers, updateUser } from './users'
@@ -39,7 +41,7 @@ import { fileUpload } from './fileUpload'
 Object.assign(actions, { fileUpload })
 
 // Actions from external components
-require('../components/actions').forEach(
+componentActionsList.forEach(
   componentActions => Object.assign(actions, componentActions)
 )
 
@@ -52,4 +54,4 @@ actions.hydrate = () => {
   ])
 }
 
-module.exports = actions
+export default actions

@@ -1,10 +1,8 @@
 import { fetch } from '../helpers/Utils'
-const API_ENDPOINT = CONFIG['pubsweet-backend'].API_ENDPOINT
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
 
-// utilities
-
-const fragmentUrl = (collection, fragment) => {
+export const fragmentUrl = (collection, fragment) => {
   let url = `${API_ENDPOINT}/collections/${collection.id}/fragments`
 
   if (fragment.id) url += `/${fragment.id}`
@@ -12,7 +10,7 @@ const fragmentUrl = (collection, fragment) => {
   return url
 }
 
-const collectionUrl = (collection, suffix) => {
+export const collectionUrl = (collection, suffix) => {
   let url = `${API_ENDPOINT}/collections`
 
   if (collection) url += `/${collection.id}`
@@ -21,46 +19,6 @@ const collectionUrl = (collection, suffix) => {
 
   return url
 }
-
-// Listing collections
-
-function getCollectionsRequest () {
-  return {
-    type: T.GET_COLLECTIONS_REQUEST
-  }
-}
-
-function getCollectionsFailure (error) {
-  return {
-    type: T.GET_COLLECTIONS_FAILURE,
-    error: error
-  }
-}
-
-function getCollectionsSuccess (collections) {
-  return {
-    type: T.GET_COLLECTIONS_SUCCESS,
-    collections: collections,
-    receivedAt: Date.now()
-  }
-}
-
-export function getCollections () {
-  return dispatch => {
-    dispatch(getCollectionsRequest())
-
-    const url = collectionUrl()
-
-    return fetch(url).then(
-        response => response.json()
-      ).then(
-        collections => dispatch(getCollectionsSuccess(collections)),
-        err => dispatch(getCollectionsFailure(err))
-      )
-  }
-}
-
-// Actions on fragments
 
 function getFragmentsRequest (collection) {
   return {
