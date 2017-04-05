@@ -149,7 +149,7 @@ export function updateFragment (collection, fragment) {
 
     const url = fragmentUrl(collection, fragment)
     const opts = {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
