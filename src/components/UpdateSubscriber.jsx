@@ -64,7 +64,7 @@ class UpdateSubscriber extends Component {
 
 UpdateSubscriber.propTypes = {
   currentUser: PropTypes.object,
-  storeUpdate: PropTypes.func,
+  storeUpdate: PropTypes.func
 }
 
 export default connect(
