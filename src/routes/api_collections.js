@@ -75,8 +75,6 @@ api.get('/:id', (req, res, next) => {
   )
 })
 
-// NOTE: no more `put` method
-
 // Update a collection
 api.patch('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
@@ -89,10 +87,10 @@ api.patch('/:id', authBearer, (req, res, next) => {
     collection => collection.save()
   ).then(
     collection => {
-      const patch = buildChangeData(req.body, collection)
+      const update = buildChangeData(req.body, collection)
 
-      res.status(STATUS.OK).json(patch)
-      sse.send({ action: 'collection:patch', data: { patch } })
+      res.status(STATUS.OK).json(update)
+      sse.send({ action: 'collection:patch', data: { collection: { id: collection.id }, update } })
     }
   ).catch(
     next
@@ -110,7 +108,7 @@ api.delete('/:id', authBearer, (req, res, next) => {
   ).then(
     collection => {
       res.status(STATUS.OK).json(collection)
-      sse.send({ action: 'collection:delete', data: { collection } })
+      sse.send({ action: 'collection:delete', data: { collection: { id: collection.id } } })
     }
   ).catch(
     next
@@ -131,7 +129,7 @@ api.post('/:id/fragments', authBearer, (req, res, next) => {
       return collection.save().then(collection => {
         return User.ownersWithUsername(fragment).then(fragment => {
           res.status(STATUS.CREATED).json(fragment)
-          sse.send({ action: 'fragment:create', data: { fragment, collection } })
+          sse.send({ action: 'fragment:create', data: { collection: { id: collection.id }, fragment } })
         })
       })
     })
@@ -196,8 +194,6 @@ api.get('/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, 
   )
 })
 
-// NOTE: no more `put` method
-
 // Update a fragment
 api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
@@ -212,10 +208,10 @@ api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) =
     fragment => User.ownersWithUsername(fragment)
   ).then(
     fragment => {
-      const patch = buildChangeData(req.body, fragment)
+      const update = buildChangeData(req.body, fragment)
 
-      res.status(STATUS.OK).json(patch)
-      sse.send({ action: 'fragment:patch', data: { patch } })
+      res.status(STATUS.OK).json(update)
+      sse.send({ action: 'fragment:patch', data: { fragment: { id: fragment.id }, update } })
     }
   ).catch(
     next
@@ -242,7 +238,7 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
   ).then(
     ([collection, fragment]) => {
       res.status(STATUS.OK).json(fragment)
-      sse.send({ action: 'fragment:delete', data: { fragment } })
+      sse.send({ action: 'fragment:delete', data: { collection: { id: collection.id }, fragment } })
     }
   ).catch(
     next
