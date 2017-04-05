@@ -3,10 +3,12 @@ import React, { Component, PropTypes } from 'react'
 import * as T from '../actions/types'
 
 const actionMap = {
+  'collection:create': T.CREATE_COLLECTION_SUCCESS,
+  'collection:patch': T.UPDATE_COLLECTION_SUCCESS,
+  'collection:delete': T.DELETE_COLLECTION_SUCCESS,
   'fragment:create': T.CREATE_FRAGMENT_SUCCESS,
-  'fragment:replace': T.UPDATE_FRAGMENT_SUCCESS,
-  'fragment:update': T.UPDATE_FRAGMENT_SUCCESS,
-  'fragment:delete': T.DELETE_FRAGMENT_SUCCESS,
+  'fragment:patch': T.UPDATE_FRAGMENT_SUCCESS,
+  'fragment:delete': T.DELETE_FRAGMENT_SUCCESS
 }
 
 class UpdateSubscriber extends Component {
@@ -67,7 +69,7 @@ UpdateSubscriber.propTypes = {
 
 export default connect(
   state => ({
-    currentUser: state.currentUser,
+    currentUser: state.currentUser
   }),
   dispatch => ({
     handleUpdate: (type, body) => dispatch({type, ...body})

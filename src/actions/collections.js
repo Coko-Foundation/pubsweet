@@ -104,10 +104,11 @@ function updateCollectionRequest (collection) {
   }
 }
 
-function updateCollectionSuccess (collection) {
+function updateCollectionSuccess (collection, update) {
   return {
     type: T.UPDATE_COLLECTION_SUCCESS,
     collection: collection,
+    update: update,
     receivedAt: Date.now()
   }
 }
@@ -129,7 +130,7 @@ export function updateCollection (collection) {
 
     const url = collectionUrl(collection)
     const opts = {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -142,7 +143,7 @@ export function updateCollection (collection) {
       .then(
         response => response.json()
       ).then(
-        collection => dispatch(updateCollectionSuccess(collection)),
+        update => dispatch(updateCollectionSuccess(collection, update)),
         err => dispatch(updateCollectionFailure(collection, err))
       )
   }
