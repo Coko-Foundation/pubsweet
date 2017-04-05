@@ -112,8 +112,5 @@ checkExists().then(
     override: program
   })
 ).catch(
-  err => {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  require('../src/error-exit')
 )

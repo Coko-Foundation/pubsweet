@@ -8,16 +8,13 @@ const http = require('http')
 const express = require('express')
 const webpack = require('webpack')
 const pubsweet = require(`${backend()}`)
-const config = require(`${process.env.NODE_CONFIG_DIR}/${process.env.NODE_ENV}.js`)
+const config = require(path.join(process.cwd(), `config/${process.env.NODE_ENV}`))
 
 const logger = require('./logger')
-const program = require('commander')
 
 const collect = (val, memo) => memo.push(val) && memo
 
-program
-  .option('--watch [path]', 'Watch path for changes', collect, [])
-  .parse(process.argv)
+let program
 
 let server
 let serverListening = false
@@ -27,6 +24,8 @@ const webpackconfig = require(
     process.cwd(), 'webpack', `webpack.${process.env.NODE_ENV}.config.js`
   )
 )
+
+if (process.env.NODE_ENV === 'test') webpackconfig.target = 'electron-main'
 
 const onError = err => logger.error(err.stack) && process.exit(1)
 
@@ -60,7 +59,7 @@ let watcher
 const startWatcher = () => {
   const chokidar = require('chokidar')
   watcher = chokidar.watch(process.cwd(), {
-    ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log|app|uploads)/
+    ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log|app|uploads|.idea)/
   })
 
   let update = (msg, reload) => {
@@ -77,7 +76,7 @@ const startWatcher = () => {
         .on('unlink', path => update(`File ${path} removed`, true))
         .on('addDir', path => update(`Directory ${path} added`, true))
         .on('unlinkDir', path => update(`Directory ${path} removed`, true))
-        .on('error', error => onError)
+        .on('error', onError)
     })
 
   program.watch.forEach(watcher.add)
@@ -85,16 +84,16 @@ const startWatcher = () => {
 
 const compiler = webpack(webpackconfig)
 
-const runapp = (err, stats) => {
+const runapp = (err, stats, cb) => {
   if (err) onError(err)
 
   const rawapp = express()
 
-  rawapp.get('*.js', function (req, res, next) {
-    req.url = req.url + '.gz'
-    res.set('Content-Encoding', 'gzip')
-    next()
-  })
+  // rawapp.get('*.js', function (req, res, next) {
+  //   req.url = req.url + '.gz'
+  //   res.set('Content-Encoding', 'gzip')
+  //   next()
+  // })
 
   const postcompile = (err, stats) => {
     if (err) {
@@ -109,25 +108,30 @@ const runapp = (err, stats) => {
     }
 
     registerComponents(rawapp)
+    logger.info(`Registered components`)
 
     const app = pubsweet(rawapp)
+    logger.info(`Setup app`)
 
-    const port = process.env.PORT || '3000'
+    const port = process.env.PORT || 3000
     app.set('port', port)
+    logger.info(`Using port ${port}`)
 
     server = http.createServer(app)
+    logger.info(`Created HTTP server`)
 
     const onListening = () => {
+      // logger.info(`PubSweet is listening on port ${server.address().port}`)
+      logger.info(`PubSweet is listening on port ${port}`)
       serverListening = true
-      const addr = server.address()
-      logger.info(`PubSweet is listening on port ${addr.port}`)
-
+      if (cb) cb(server) // used to enable testing
       if (process.env.NODE_ENV === 'dev' && !watcher) startWatcher()
     }
 
-    server.listen(port)
     server.on('error', onError)
     server.on('listening', onListening)
+
+    server.listen(port)
   }
 
   if (process.env.NODE_ENV === 'dev') {
@@ -149,4 +153,18 @@ const reloadServer = () => {
   }
 }
 
-runapp()
+if (require.main === module) {
+  // file is being executed
+  // console.log('start.js FILE IS BEING EXECUTED')
+  program = require('commander')
+
+  program
+    .option('--watch [path]', 'Watch path for changes', collect, [])
+    .parse(process.argv)
+
+  runapp()
+} else {
+  // file is being required - used to enable testing
+  // console.log('start.js FILE IS BEING REQUIRED')
+  module.exports = cb => runapp(null, null, cb)
+}

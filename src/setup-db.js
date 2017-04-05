@@ -1,24 +1,24 @@
-process.env.PUBSWEET_BACKEND_SILENT = true
+process.env.PUBSWEET_BACKEND_SILENT = false
 
 const colors = require('colors/safe')
 const logger = require('./logger')
 const backend = require('./backend')
 
-const runPrompt = options => new Promise(
-  (resolve, reject) => {
-    const prompt = require('prompt')
+const runPrompt = options => new Promise((resolve, reject) => {
+  logger.info('building prompt')
 
-    prompt.override = options.override
-    prompt.message = colors.cyan('question:')
-    prompt.delimiter = colors.green('><')
+  const prompt = require('prompt')
 
-    prompt.start()
-    prompt.get({ properties: options.properties }, (err, result) => {
-      if (err) reject(err)
-      else resolve(result)
-    })
-  }
-)
+  prompt.override = options.override
+  prompt.message = colors.cyan('question:')
+  prompt.delimiter = colors.green('><')
+
+  prompt.start()
+  prompt.get({ properties: options.properties }, (err, result) => {
+    if (err) return reject(err)
+    resolve(result)
+  })
+})
 
 const logResult = result => new Promise(
   resolve => {
@@ -44,37 +44,46 @@ const prepareEntities = result => {
   return Promise.resolve({ user, collection })
 }
 
-const setup = options => {
-  logger.info('Starting setup')
-  const Collection = require(`${backend()}/src/models/Collection`)
-  const User = require(`${backend()}/src/models/User`)
+const setup = options => new Promise(
+  (resolve, reject) => {
+    logger.info('Setting up DB models in', backend())
 
-  const admin = new User(options.user)
+    const Collection = require(`${backend()}/src/models/Collection`)
+    const User = require(`${backend()}/src/models/User`)
 
-  return admin.save().then(
-    admin => {
-      logger.info('Created admin user: ', options.user.username)
-      let collection = new Collection(options.collection)
-      collection.setOwners([admin.id])
-      return collection.save()
-    }
+    const admin = new User(options.user)
+
+    return admin.save()
+      .then(admin => {
+        logger.info('Saved admin user: ', options.user.username)
+        let collection = new Collection(options.collection)
+        collection.setOwners([admin.id])
+        return collection.save()
+      })
+      .then(collection => {
+        logger.info('Created initial collection: ', collection.title)
+
+        admin.password = options.user.password
+
+        resolve({
+          user: admin,
+          collection: collection
+        })
+      })
+      .catch(reject)
+  }
+)
+
+module.exports = options => {
+  logger.info('setting up the database')
+
+  return runPrompt(
+    options
   ).then(
-    collection => {
-      logger.info('Created initial collection: ', options.collection.title)
-      return {
-        user: admin,
-        collection: collection
-      }
-    }
+    logResult
+  ).then(
+    prepareEntities
+  ).then(
+    setup
   )
 }
-
-module.exports = options => () => runPrompt(
-  options
-).then(
-  logResult
-).then(
-  prepareEntities
-).then(
-  setup
-)

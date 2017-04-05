@@ -1,11 +1,8 @@
 import React from 'react'
-import LinkContainer from 'react-router-bootstrap/src/LinkContainer'
-import Navbar from 'react-bootstrap/src/Navbar'
-import Nav from 'react-bootstrap/src/Nav'
-import NavItem from 'react-bootstrap/src/NavItem'
-import NavbarBrand from 'react-bootstrap/src/NavbarBrand'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
-import Authorize from 'pubsweet-frontend/src/helpers/Authorize'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import NavbarUser from 'pubsweet-component-navigation/NavbarUser'
 
 export default class Navigation extends React.Component {

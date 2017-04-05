@@ -1,8 +1,10 @@
 {
-    "extends": "standard",
-    "env": {
-        "node": true,
-        "es6": true
-    },
-    "no-var": true
+  "extends": "standard",
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "jasmine": true
+  },
+  "no-var": true
 }

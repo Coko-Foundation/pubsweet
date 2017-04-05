@@ -1,11 +1,11 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ThemePlugin = require('pubsweet-theme-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var CompressionPlugin = require('compression-webpack-plugin')
-var config = require('../config/production')
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ThemePlugin = require('pubsweet-theme-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const config = require('../config/production')
 
 module.exports = [
   {
@@ -35,7 +35,7 @@ module.exports = [
         joi: 'joi-browser'
       },
       extensions: ['.js', '.jsx', '.json', '.scss'],
-      plugins: [new ThemePlugin(config['pubsweet-frontend'].theme)]
+      plugins: [new ThemePlugin(config['pubsweet-client'].theme)]
     },
     plugins: [
       new HtmlWebpackPlugin({

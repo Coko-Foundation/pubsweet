@@ -6,24 +6,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const colors = require('colors/safe')
 
-const properties = {
-  username: {
-    description: 'Username'
-  },
-  email: {
-    description: 'Email address'
-  },
-  password: {
-    description: 'Password',
-    hidden: true,
-    replace: '*'
-  },
-  admin: {
-    description: 'Give user admin privileges',
-    type: 'boolean',
-    default: 'true'
-  }
-}
+const properties = require('../src/user-properties')
 
 program
   .arguments('[path]')
@@ -102,8 +85,5 @@ checkExists().then(
     override: program
   })
 ).catch(
-  err => {
-    logger.error(err.stack)
-    process.exit(1)
-  }
+  require('../src/error-exit')
 )

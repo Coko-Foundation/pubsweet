@@ -39,7 +39,7 @@ const maybeaddowner = user => new Promise(
         collections => {
           collections = collections.map(c => {
             let col = new Collection(c)
-            col.addOwner(user.id)
+            col.setOwners([user.id])
             return col.save()
           })
           Promise.all(collections).then(
@@ -54,7 +54,6 @@ const maybeaddowner = user => new Promise(
 )
 
 const setup = options => {
-  logger.info('Creating user')
   const User = require(`${backend()}/src/models/User`)
   const newuser = new User(options)
   return newuser.save().then(maybeaddowner)

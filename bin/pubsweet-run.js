@@ -123,4 +123,6 @@ checkExists().then(
 
     child.on('error', err => logger.error(err.stack))
   }
+).catch(
+  require('../src/error-exit')
 )

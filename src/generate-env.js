@@ -1,7 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
-const logger = require('./logger')
-const uuid = require('node-uuid')
+const uuid = require('uuid')
 
 const envpath = mode => path.join(process.cwd(), `.env.${mode}`)
 
@@ -13,7 +12,7 @@ const write = (path, content) => new Promise(
     content,
     err => {
       if (err) return reject(err)
-      return resolve()
+      return resolve(path)
     }
   )
 )
@@ -21,10 +20,5 @@ const write = (path, content) => new Promise(
 module.exports = () => {
   return write(
     envpath(process.env.NODE_ENV), envfile(process.env.NODE_ENV)
-  ).catch(
-    err => {
-      logger.error(err.stack)
-      process.exit(1)
-    }
   )
 }

@@ -9,19 +9,25 @@ const getpkgjson = name => {
     name: name,
     description: 'A new pubsweet app',
     dependencies: {
-      'pubsweet-backend': '^0.6.0',
-      'pubsweet-frontend': '^0.6.0',
-      'pubsweet-component-blog': '^0.1.0',
-      'pubsweet-component-login': '^0.2.1',
-      'pubsweet-component-posts-manager': '^0.1.0',
+      'pubsweet-server': '^0.7.2',
+      'pubsweet-client': '^0.8.2',
+      'pubsweet-component-blog': '^0.1.1',
+      'pubsweet-component-login': '^0.2.2',
+      'pubsweet-component-posts-manager': '^0.1.1',
       'pubsweet-component-manage': '^0.1.0',
-      'pubsweet-component-science-reader': '^0.1.0',
-      'pubsweet-component-science-writer': '^0.1.0',
-      'pubsweet-component-signup': '^0.1.0',
-      'pubsweet-component-teams-manager': '^0.1.0',
-      'pubsweet-component-users-manager': '^0.1.0',
-      'pubsweet-component-pepper-theme': '^0.0.2',
+      'pubsweet-component-signup': '^0.1.1',
+      'pubsweet-component-teams-manager': '^0.1.2',
+      'pubsweet-component-users-manager': '^0.1.1',
+      'pubsweet-component-pepper-theme': '^0.0.3',
       'pubsweet-theme-plugin': '^0.0.1',
+      'react': '^15.4.2',
+      'react-dom': '^15.4.2',
+      'react-router': '^2.6.1',
+      'react-router-bootstrap': '^0.23.1',
+      'redux': '^3.6.0'
+    },
+    devDependencies: {
+      'node-sass': '^3.4.0',
       'bootstrap-sass': '^3.3.7',
       'babel-core': '^6.14.0',
       'babel-loader': '^6.2.5',
@@ -29,6 +35,7 @@ const getpkgjson = name => {
       'babel-preset-es2015-native-modules': '^6.9.4',
       'babel-preset-react': '^6.11.1',
       'babel-preset-stage-2': '^6.13.0',
+      'babili-webpack-plugin': '^0.0.11',
       'css-loader': '^0.25.0',
       'copy-webpack-plugin': '^4.0.1',
       'file-loader': '^0.9.0',
@@ -39,9 +46,10 @@ const getpkgjson = name => {
       'string-replace-loader': '^1.0.5',
       'url-loader': '^0.5.7',
       'extract-text-webpack-plugin': '^2.0.0-beta.4',
+      'compression-webpack-plugin': '0.3.1',
       'react-hot-loader': '^3.0.0-beta.5',
       'style-loader': '^0.13.1',
-      'webpack': '^2.1.0-beta.25',
+      'webpack': '^2.3.2',
       'webpack-dev-middleware': '^1.8.4',
       'webpack-hot-middleware': '^2.13.0',
       'autobind-decorator': '^1.3.4',
@@ -54,8 +62,7 @@ const getpkgjson = name => {
       'eslint-plugin-promise': '^3.3.0',
       'eslint-plugin-react': '^6.4.1',
       'eslint-plugin-standard': '^2.0.0',
-      'authsome': '^0.0.4',
-      'pouchdb-core': '6.0.7'
+      'pouchdb-adapter-memory': '^6.1.1'
     },
     repository: 'put your repo here',
     license: 'UNLICENSED'
@@ -86,12 +93,29 @@ const copyapp = name => new Promise(
   )
 )
 
+const findyarn = () => {
+  const thisdep = path.join(__dirname, '..', 'node_modules', 'yarn', 'bin', 'yarn')
+  const parentdep = path.join(__dirname, '..', '..', '..', 'node_modules', 'yarn', 'bin', 'yarn')
+  if (fs.existsSync(thisdep)) {
+    return thisdep
+  } else if (fs.existsSync(thisdep)) {
+    return parentdep
+  } else {
+    return 'yarn'
+  }
+}
+
 const install = () => {
   logger.info('Installing app dependencies...')
   return spawn(
-    'npm install',
-    { cwd: process.cwd(), stdio: 'inherit', shell: true }
-  )
+    'yarn',
+    ['--ignore-optional', '--no-progress'],
+    {
+      cwd: process.cwd(),
+      stdio: process.env.SILENT_INSTALL ? 'ignore' : 'inherit',
+      shell: true
+    }
+  ).catch(childProcess => logger.error('yarn install failed:', childProcess.stderr))
 }
 
 const gitsetup = () => {
@@ -127,10 +151,5 @@ module.exports = name => {
     install
   ).then(
     gitsetup
-  ).catch(
-    err => {
-      logger.error(err.stack)
-      process.exit(1)
-    }
   )
 }
