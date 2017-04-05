@@ -13,6 +13,8 @@ const authorizedRequest = (req, token) => {
   return req
 }
 
+// TODO: standardise parameter order of the "fragments" methods below
+
 const fragments = {
   post: (fragment, collection, token) => {
     const collectionId = isString(collection) ? collection : collection.id
@@ -29,10 +31,10 @@ const fragments = {
       'Authorization', 'Bearer ' + token
     ) : req
   },
-  put: (fragmentId, update, collection, token) => {
+  patch: (fragmentId, update, collection, token) => {
     const req = request(
       api
-    ).put(
+    ).patch(
       '/api/collections/' + collection.id + '/fragments/' + fragmentId
     ).send(
       update
@@ -144,25 +146,25 @@ const collections = {
       .send(collection)
     return authorizedRequest(req, token)
   },
-  retrieve: (id, token) => {
-    const req = request(api).get(COLLECTIONS_ROOT + id)
+  retrieve: (collectionId, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + collectionId)
     return authorizedRequest(req, token)
   },
-  update: (collection, token) => {
-    const req = request(api).put(COLLECTIONS_ROOT + collection.id)
-      .send(collection)
+  update: (collectionId, patch, token) => {
+    const req = request(api).patch(COLLECTIONS_ROOT + collectionId)
+      .send(patch)
     return authorizedRequest(req, token)
   },
-  delete: (collection, token) => {
-    const req = request(api).delete(COLLECTIONS_ROOT + collection.id)
+  delete: (collectionId, token) => {
+    const req = request(api).delete(COLLECTIONS_ROOT + collectionId)
     return authorizedRequest(req, token)
   },
-  listFragments: (collection, token) => {
-    const req = request(api).get(COLLECTIONS_ROOT + collection.id + '/fragments')
+  listFragments: (collectionId, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/fragments')
     return authorizedRequest(req, token)
   },
-  createFragment: (collection, fragment, token) => {
-    const req = request(api).post(COLLECTIONS_ROOT + collection.id + '/fragments')
+  createFragment: (collectionId, fragment, token) => {
+    const req = request(api).post(COLLECTIONS_ROOT + collectionId + '/fragments')
       .send(fragment)
     return authorizedRequest(req, token)
   },
@@ -170,13 +172,13 @@ const collections = {
     const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
     return authorizedRequest(req, token)
   },
-  updateFragment: (collection, fragment, token) => {
-    const req = request(api).put(COLLECTIONS_ROOT + collection.id + '/fragments/' + fragment.id)
-      .send(fragment)
+  updateFragment: (collectionId, fragmentId, patch, token) => {
+    const req = request(api).patch(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+      .send(patch)
     return authorizedRequest(req, token)
   },
-  deleteFragment: (collection, fragment, token) => {
-    const req = request(api).delete(COLLECTIONS_ROOT + collection.id + '/fragments/' + fragment.id)
+  deleteFragment: (collectionId, fragmentId, token) => {
+    const req = request(api).delete(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
     return authorizedRequest(req, token)
   }
 }
