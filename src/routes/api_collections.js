@@ -20,6 +20,21 @@ const teams = require('./api_teams')
 // api.use('/:collectionId/fragments/:fragmentId/teams', teams)
 api.use('/:id/teams', teams)
 
+// build an object containing only the fields of
+// the output object that were in the input object
+const buildChangeData = (input, output) => {
+  const data = {
+    id: output.id
+  }
+
+  Object.keys(input).forEach(key => {
+    // TODO: compare and only add if changed?
+    Object.assign(data, output[key])
+  })
+
+  return data
+}
+
 // Create a collection
 api.post('/', authBearer, (req, res, next) => {
   let collection = new Collection(req.body)
@@ -32,8 +47,8 @@ api.post('/', authBearer, (req, res, next) => {
     () => collection.save()
   ).then(
     collection => {
-      // sse.send('collection:create', { collection })
       res.status(STATUS.CREATED).json(collection)
+      sse.send({ action: 'collection:create', data: { collection } })
     }
   ).catch(
     next
@@ -60,8 +75,10 @@ api.get('/:id', (req, res, next) => {
   )
 })
 
+// NOTE: no more `put` method
+
 // Update a collection
-api.put('/:id', authBearer, (req, res, next) => {
+api.patch('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
@@ -72,8 +89,10 @@ api.put('/:id', authBearer, (req, res, next) => {
     collection => collection.save()
   ).then(
     collection => {
-      // sse.send('collection:replace', { collection })
-      res.status(STATUS.OK).json(collection)
+      const patch = buildChangeData(req.body, collection)
+
+      res.status(STATUS.OK).json(patch)
+      sse.send({ action: 'collection:patch', data: { patch } })
     }
   ).catch(
     next
@@ -90,8 +109,8 @@ api.delete('/:id', authBearer, (req, res, next) => {
     collection => collection.delete()
   ).then(
     collection => {
-      // sse.send('collection:delete', { collection })
       res.status(STATUS.OK).json(collection)
+      sse.send({ action: 'collection:delete', data: { collection } })
     }
   ).catch(
     next
@@ -177,14 +196,15 @@ api.get('/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, 
   )
 })
 
+// NOTE: no more `put` method
+
 // Update a fragment
-api.put('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
     () => Fragment.find(req.params.fragmentId)
   ).then(
-    // TODO: throw an exception if locked by another user
     fragment => fragment.updateProperties(req.body)
   ).then(
     fragment => fragment.save()
@@ -192,8 +212,10 @@ api.put('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => 
     fragment => User.ownersWithUsername(fragment)
   ).then(
     fragment => {
-      res.status(STATUS.OK).json(fragment)
-      sse.send({ action: 'fragment:replace', data: { fragment }})
+      const patch = buildChangeData(req.body, fragment)
+
+      res.status(STATUS.OK).json(patch)
+      sse.send({ action: 'fragment:patch', data: { patch } })
     }
   ).catch(
     next
