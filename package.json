@@ -59,9 +59,10 @@
   },
   "jest": {
     "testRegex": "/test/[^/]*\\.jsx?$",
-    "collectCoverage": false,
+    "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/*.js"
+      "src/*.js",
+      "bin/*.js"
     ],
     "modulePaths": [
       "<rootDir>/node_modules"
