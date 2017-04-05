@@ -20,16 +20,17 @@ const teams = require('./api_teams')
 // api.use('/:collectionId/fragments/:fragmentId/teams', teams)
 api.use('/:id/teams', teams)
 
-// build an object containing only the fields of
-// the output object that were in the input object
+// Build an object containing only the id
+const objectId = (object) => ({ id: object.id })
+
+// Build an object containing only the fields of `output` that were in `input`
+// TODO: build a real diff, in case other fields were updated indirectly?
 const buildChangeData = (input, output) => {
-  const data = {
-    id: output.id
-  }
+  const data = {}
 
   Object.keys(input).forEach(key => {
     // TODO: compare and only add if changed?
-    Object.assign(data, output[key])
+    data[key] = output[key]
   })
 
   return data
@@ -90,7 +91,7 @@ api.patch('/:id', authBearer, (req, res, next) => {
       const update = buildChangeData(req.body, collection)
 
       res.status(STATUS.OK).json(update)
-      sse.send({ action: 'collection:patch', data: { collection: { id: collection.id }, update } })
+      sse.send({ action: 'collection:patch', data: { collection: objectId(collection), update } })
     }
   ).catch(
     next
@@ -108,7 +109,7 @@ api.delete('/:id', authBearer, (req, res, next) => {
   ).then(
     collection => {
       res.status(STATUS.OK).json(collection)
-      sse.send({ action: 'collection:delete', data: { collection: { id: collection.id } } })
+      sse.send({ action: 'collection:delete', data: { collection: objectId(collection) } })
     }
   ).catch(
     next
@@ -129,7 +130,7 @@ api.post('/:id/fragments', authBearer, (req, res, next) => {
       return collection.save().then(collection => {
         return User.ownersWithUsername(fragment).then(fragment => {
           res.status(STATUS.CREATED).json(fragment)
-          sse.send({ action: 'fragment:create', data: { collection: { id: collection.id }, fragment } })
+          sse.send({ action: 'fragment:create', data: { collection: objectId(collection), fragment } })
         })
       })
     })
@@ -211,7 +212,7 @@ api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) =
       const update = buildChangeData(req.body, fragment)
 
       res.status(STATUS.OK).json(update)
-      sse.send({ action: 'fragment:patch', data: { fragment: { id: fragment.id }, update } })
+      sse.send({ action: 'fragment:patch', data: { fragment: objectId(fragment), update } })
     }
   ).catch(
     next
@@ -238,7 +239,7 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
   ).then(
     ([collection, fragment]) => {
       res.status(STATUS.OK).json(fragment)
-      sse.send({ action: 'fragment:delete', data: { collection: { id: collection.id }, fragment } })
+      sse.send({ action: 'fragment:delete', data: { collection: objectId(collection), fragment } })
     }
   ).catch(
     next
