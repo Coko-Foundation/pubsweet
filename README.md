@@ -1,77 +1,35 @@
 # PubSweet
 
+| ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?link=http://left&link=http://right?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) |
+| :----: |
+
 ## Overview
 
-**PubSweet** allows you to build state-of-the-art publishing platforms. It's a modular and flexible framework consisting of:
+**PubSweet** allows you to build state-of-the-art publishing platforms.
 
-- [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server): an extensible back-end API that runs on the server
-- [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client): an extensible frontend app that runs in the browser
-- [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components): pluggable extensions for both back- and frontend
-- [pubsweet](https://gitlab.coko.foundation/pubsweet/pubsweet-cli): a suite of command-line tools for building and managing your platform. `pubsweet` is the entry-point into the framework.
+It's a modular and flexible framework consisting of a **server** and **client** that work together, **components** that can modify or extend the functionality of the server and/or client, and a **command-line tool** that helps manage PubSweet apps.
 
-You can read more about the ideas behind PubSweet on [the Collaborative Knowledge Foundation blog](http://coko.foundation/blog.html#reimagine).
+### PubSweet modules
+
+| repository | description | latest version |
+| :-------- | :-------- | :---: |
+| [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible backend API that runs on the server |
+| [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible frontend app that runs in the browser |
+| [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
+| [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
 
 ## Getting started
 
-### Prerequisites
+The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli).
 
-- node v6+
-- npm v3+ (please do not use yarn yet, there is an known and unresolved issue with it in our case)
+## Support
 
-### Installation
+- **If you have a general query about PubSweet**, or want to discuss anything with us, come and [chat to us in our Mattermost channel](https://mattermost.coko.foundation/coko/channels/pubsweet).
 
-`pubsweet` can be installed from npm:
+- **Bug reports and feature requests** belong in the issues of the relevant repository:
+  - [`pubsweet-cli` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/issues)
+  - [`pubsweet-server` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-server/issues)
+  - [`pubsweet-client` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-client/issues)
+  - [`pubsweet-test-docker-baseimg` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-test-docker-baseimg/issues)
 
-```bash
-npm install --global pubsweet
-```
-
-### Generating an app (`pubsweet new`)
-
-The `new` subcommand generates a template PubSweet app for you to work from. This includes everything needed to run your publishing platform: dependencies, database setup, boilerplate code and configuration, and a set of initial components.
-
-To generate an app, just provide the name:
-
-```bash
-pubsweet new myappname
-```
-
-`pubsweet` will create a subdirectory with the name you supplied, and start generating the app inside. It'll ask you a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead.
-
-Running `pubsweet help new` or `pubsweet new --help` shows you the available arguments for the command:
-
-```
-Usage: pubsweet-new [options] [name]
-
-Options:
-
-  -h, --help             output usage information
-  --dev                  Setup app for development
-  --username [string]    Admin username
-  --email [string]       Admin email address
-  --password [string]    Admin password
-  --collection [string]  Initial collection title
-```
-
-### Running your app (`pubsweet run`)
-
-The `run` subcommand starts your app. It takes care of transpilation, module bundling and process management.
-
-To start your app:
-
-**either** use the `run` command from the app directory:
-
-```bash
-cd myappname
-pubsweet run
-```
-
-**or** provide the path to the `run` command:
-
-```bash
-pubsweet run path/to/myapp
-```
-
-# Contributing
-
-Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/blob/master/CONTRIBUTING) guide.
+- **If you're not sure where an issue belongs**, or to discuss the PubSweet ecosystem in general, [use the pubsweet/pubsweet issues](https://gitlab.coko.foundation/pubsweet/pubsweet/issues).
