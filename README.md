@@ -11,8 +11,8 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 ### PubSweet modules
 
-| repository | description | latest version |
-| :-------- | :-------- | :---: |
+| repository | description |
+| :-------- | :-------- |
 | [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible backend API that runs on the server |
 | [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible frontend app that runs in the browser |
 | [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
