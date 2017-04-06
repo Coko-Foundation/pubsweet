@@ -1,6 +1,6 @@
 # PubSweet
 
-| ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?link=http://left&link=http://right?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) |
+| ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) |
 | :----: |
 
 ## Overview
