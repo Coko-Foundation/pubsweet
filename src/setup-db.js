@@ -85,5 +85,9 @@ module.exports = options => {
     prepareEntities
   ).then(
     setup
-  )
+  ).catch(err => {
+    logger.error('Error setting up database:')
+    logger.error(err)
+    process.exit(1)
+  })
 }
