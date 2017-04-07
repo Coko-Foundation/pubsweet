@@ -1,31 +1,38 @@
-# PubSweet
+<div width="100%" align="center">
+  <h1>PubSweet CLI</h1>
+  <h2>command-line tools for managing PubSweet apps</h2>
+</div>
 
-[![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master)
-[![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master)
+| ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![npm](https://img.shields.io/npm/v/pubsweet.svg)](https://npmjs.com/package/pubsweet) [![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master) [![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master) [![code style standard](https://img.shields.io/badge/code%20style-standard-green.svg)](https://standardjs.com/) [![mattermost chat](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet)) |
+| :----: |
 
-## Overview
+## PubSweet overview
 
-**PubSweet** allows you to build state-of-the-art publishing platforms. It's a modular and flexible framework consisting of:
+**PubSweet** allows you to build state-of-the-art publishing platforms.
 
-- [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server): an extensible back-end API that runs on the server
-- [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client): an extensible frontend app that runs in the browser
-- [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components): pluggable extensions for both back- and frontend
-- [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli): a suite of tools for building and managing your platform. `pubsweet-cli` is generally the entry-point into the framework.
+It's a modular and flexible framework consisting of a **server** and **client** that work together, **components** that can modify or extend the functionality of the server and/or client, and a **command-line tool** that helps manage PubSweet apps.
 
-For a high-level overview of PubSweet , and to follow discussion and issues about the project as a whole, there's the [pubsweet](https://gitlab.coko.foundation/pubsweet/pubsweet) repository.
+### PubSweet modules
 
-You can read more about the ideas behind PubSweet on [the Collaborative Knowledge Foundation blog](http://coko.foundation/blog.html#reimagine).
+| repository | description |
+| :-------- | :-------- |
+| [pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible backend API that runs on the server |
+| [pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible frontend app that runs in the browser |
+| [pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
+| [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
 
-## Getting started
+# Getting started with PubSweet CLI
+
+## Getting PubSweet CLI
 
 ### Prerequisites
 
-- node v6+
-- npm v3+ or yarn v0.22+
+- node v7.6+
+- npm v3+ or yarn v0.21+
 
 ### Installation
 
-`pubsweet-cli` can be installed from npm or yarn:
+The PubSweet command-line tools can be installed from npm or yarn:
 
 ```bash
 npm install --global pubsweet
@@ -35,6 +42,39 @@ or
 
 ```bash
 yarn global add pubsweet
+```
+
+## Using PubSweet CLI
+
+### Displaying the commands (`pubsweet` or `pubsweet help`)
+
+Outputs:
+
+```
+Usage: pubsweet [options] [command]
+
+
+Commands:
+
+  new         create and set up a new pubsweet app
+  run         start a pubsweet app
+  setupdb     generate a database for a pubsweet app
+  add         add one or more components to a pubsweet app
+  adduser     add a user to the database for a pubsweet app
+  help [cmd]  display help for [cmd]
+
+Options:
+
+  -h, --help     output usage information
+  -V, --version  output the version number
+```
+
+For any command, you can see detailed usage help by running `pubsweet help cmd`, e.g.:
+
+```bash
+pubsweet help new
+pubsweet help run
+[...etc]
 ```
 
 ### Generating an app (`pubsweet new`)
@@ -47,21 +87,14 @@ To generate an app, just provide the name:
 pubsweet new myappname
 ```
 
-`pubsweet` will create a subdirectory with the name you supplied, and start generating the app inside. It'll ask you a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead.
+`pubsweet` will create a subdirectory with the name you supplied, and start generating the app inside. It'll ask you a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead:
 
-Running `pubsweet help new` or `pubsweet new --help` shows you the available arguments for the command:
-
-```
-Usage: pubsweet-new [options] [name]
-
-Options:
-
-  -h, --help             output usage information
-  --dev                  Setup app for development
-  --username [string]    Admin username
-  --email [string]       Admin email address
-  --password [string]    Admin password
-  --collection [string]  Initial collection title
+```bash
+pubsweet new myappname \
+  --username someuser \
+  --email some@email.com \
+  --password correct-horse-battery-staple \
+  --collection Articles
 ```
 
 ### Running your app (`pubsweet run`)
@@ -77,10 +110,76 @@ cd myappname
 pubsweet run
 ```
 
-**or** provide the path to the `run` command:
+**or** provide the app path to the `run` command:
 
 ```bash
 pubsweet run path/to/myapp
+```
+
+### Setting up the database (`pubsweet setupdb`)
+
+The `setupdb` subcommand creates the database for your app. It is usually used when you've cloned the source code of an existing app, or when you want to start over with a fresh database.
+
+To generate a database for an app that doesn't have one yet:
+
+```bash
+pubsweet setupdb ./path/to/app/dir
+```
+
+By default this will generate a **production** database only. To generate a **dev** database, run the command with `--dev`:
+
+```bash
+pubsweet setupdb --dev ./path/to/app/dir
+```
+
+If your app already has a database, `pubsweet setupdb` will not overwrite it by default. You can force it to delete an existing database and overwrite it with a new one using `--clobber`:
+
+```
+$ pubsweet setupdb ./path/to/app/dir
+info: Generating PubSweet app database at path api/db/production
+error: Database appears to already exist
+error: If you want to overwrite the database, use --clobber
+$ pubsweet setupdb --clobber ./path/to/app/dir
+info: Generating PubSweet app database at path api/db/production
+info: Database appears to already exist
+info: Overwriting existing database due to --clobber flag
+info: setting up the database
+info: building prompt
+question:><Admin username><
+[...etc]
+```
+
+As with `pubsweet new`, you can skip any or all of the interactive prompts by providing the user details with command-line flags:
+
+```bash
+pubsweet setupdb ./path/to/app/dir \
+  --username someuser \
+  --email some@email.com \
+  --password correct-horse-battery-staple \
+  --collection Articles
+```
+
+### Adding a user to the database (`pubsweet adduser`)
+
+You can add a user to an existing database:
+
+```bash
+pubsweet adduser ./path/to/app/dir
+```
+
+You can optionally make that user an admin:
+
+```bash
+pubsweet adduser --admin ./path/to/app/dir
+```
+
+As with `pubsweet new` and `pubsweet setupdb`, you can skip any or all of the interactive prompts by providing the user details with command-line flags:
+
+```bash
+pubsweet adduser ./path/to/app/dir \
+  --username someuser \
+  --email some@email.com \
+  --password correct-horse-battery-staple
 ```
 
 # Contributing
