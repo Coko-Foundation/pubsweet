@@ -1,4 +1,7 @@
-<div width="100%" align="center"><h1>PubSweet</h1></div>
+<div width="100%" align="center">
+  <h1>PubSweet</h1>
+  <h2>The open toolkit for building publishing platforms</h2>
+</div>
 
 | ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) |
 | :----: |
