@@ -5,7 +5,7 @@ const logger = require('./logger')
 const backend = require('./backend')
 
 const runPrompt = options => new Promise((resolve, reject) => {
-  logger.info('building prompt')
+  logger.info('Building prompt')
 
   const prompt = require('prompt')
 
@@ -75,7 +75,7 @@ const setup = options => new Promise(
 )
 
 module.exports = options => {
-  logger.info('setting up the database')
+  logger.info('Setting up the database')
 
   return runPrompt(
     options
