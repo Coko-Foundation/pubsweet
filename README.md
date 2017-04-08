@@ -53,4 +53,4 @@ The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli
 
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
-<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" /></a>
+<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
