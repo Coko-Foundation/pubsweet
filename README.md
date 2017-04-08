@@ -212,7 +212,7 @@ Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-
 
 `pubsweet-cli` is part of the PubSweet ecosystem.
 
-<img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/rgb-medium.jpg" width="300" />
+<a href="https://gitlab.coko.foundation/pubsweet/pubsweet"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/rgb-medium.jpg" width="300" /></a>
 
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
