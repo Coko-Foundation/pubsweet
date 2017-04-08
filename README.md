@@ -1,5 +1,5 @@
 <div width="100%" align="center">
-  <h1>PubSweet</h1>
+  <img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/rgb-medium.jpg" width="300" />
   <h2>The open toolkit for building publishing platforms</h2>
 </div>
 
