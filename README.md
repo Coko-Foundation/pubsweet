@@ -6,6 +6,18 @@
 | ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) |
 | :----: |
 
+# Contents
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+- [Overview](#overview)
+	- [PubSweet modules](#pubsweet-modules)
+- [Getting started](#getting-started)
+- [Support](#support)
+- [Credits](#credits)
+
+<!-- /TOC -->
+
 # Overview
 
 **PubSweet** allows you to build state-of-the-art publishing platforms.
