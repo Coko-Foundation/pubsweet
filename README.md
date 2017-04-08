@@ -49,6 +49,10 @@ The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli
 
 - **If you're not sure where an issue belongs**, or to discuss the PubSweet ecosystem in general, [use the pubsweet/pubsweet issues](https://gitlab.coko.foundation/pubsweet/pubsweet/issues).
 
+# Projects using PubSweet
+
+- [Editoria](https://gitlab.coko.foundation/yannisbarlas/editoria) - a book production platform built for University of California Press
+
 # Credits
 
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
