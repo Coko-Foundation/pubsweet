@@ -109,7 +109,7 @@ const run = async () => {
       override: program
     })
   } catch (e) {
-    equire('../src/error-exit')(e)
+    require('../src/error-exit')(e)
   }
 }
 
