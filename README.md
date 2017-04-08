@@ -6,13 +6,13 @@
 | ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) |
 | :----: |
 
-## Overview
+# Overview
 
 **PubSweet** allows you to build state-of-the-art publishing platforms.
 
 It's a modular and flexible framework consisting of a **server** and **client** that work together, **components** that can modify or extend the functionality of the server and/or client, and a **command-line tool** that helps manage PubSweet apps.
 
-### PubSweet modules
+## PubSweet modules
 
 | repository | description |
 | :-------- | :-------- |
@@ -21,11 +21,11 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 | [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
 | [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
 
-## Getting started
+# Getting started
 
 The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli).
 
-## Support
+# Support
 
 - **If you have a general query about PubSweet**, or want to discuss anything with us, come and [chat to us in our Mattermost channel](https://mattermost.coko.foundation/coko/channels/pubsweet).
 
@@ -36,3 +36,9 @@ The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli
   - [`pubsweet-test-docker-baseimg` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-test-docker-baseimg/issues)
 
 - **If you're not sure where an issue belongs**, or to discuss the PubSweet ecosystem in general, [use the pubsweet/pubsweet issues](https://gitlab.coko.foundation/pubsweet/pubsweet/issues).
+
+# Credits
+
+PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
+
+<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" /></a>
