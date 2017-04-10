@@ -13,7 +13,7 @@ const appname = 'testapp'
 
 const dbconfig = require('./fixtures').dbconfig
 
-const env = 'production'
+const env = process.env.NODE_ENV = 'production'
 
 describe('setup-db', () => {
   let appdir
@@ -43,6 +43,10 @@ describe('setup-db', () => {
     logger.info('db created')
 
     done()
+  })
+
+  afterAll(() => {
+    process.env.NODE_ENV = 'test'
   })
 
   it('creates the database',
