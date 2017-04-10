@@ -27,8 +27,8 @@ describe('start', () => {
 
   beforeAll(async (done) => {
     const tmpdir = await workingdir()
-    fs.mkdirsSync(path.join(tmpdir, appname))
-    process.chdir(appname)
+    const appdir = fs.mkdirsSync(path.join(tmpdir, appname))
+    process.chdir(appdir)
     logger.info('created directory')
 
     await require('../src/generate-config')()

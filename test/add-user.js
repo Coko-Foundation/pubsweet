@@ -10,35 +10,43 @@ const workingdir = require('./helpers/working_dir')
 const appname = 'testapp'
 
 const fixtures = require('./fixtures')
+const dbconfig = fixtures.dbconfig
 
 describe('add-user', () => {
   let appdir
   let User
 
-  beforeAll(() => workingdir().then(
-    tmpdir => {
-      appdir = path.join(tmpdir, appname)
-      fs.mkdirsSync(appdir)
-      process.chdir(appname)
 
-      const backend = require('../src/backend')
+  beforeAll(async (done) => {
+    const tmpdir = await workingdir()
+    appdir = path.join(tmpdir, appname)
+    fs.mkdirsSync(appdir)
+    process.chdir(appdir)
+    logger.info('created directory')
 
-      return require('../src/generate-config')().then(
-        require('../src/generate-env')
-      ).then(
-        () => require('../src/initial-app')(appname)
-      ).then(
-        require('../src/setup-db')({
-          properties: require('../src/db-properties'),
-          override: fixtures.dbconfig
-        })
-      ).then(
-        () => {
-          User = require(`${backend()}/src/models/User`)
-        }
-      )
-    }
-  ))
+    await require('../src/generate-config')()
+    logger.info('config generated')
+
+    await require('../src/generate-env')()
+    logger.info('env generated')
+
+    await require('../src/initial-app')(appname)
+    logger.info('app generated')
+
+    await require('../src/setup-db')({
+      properties: require('../src/db-properties'),
+      override: dbconfig
+    })
+    logger.info('db created')
+
+    require('../src/load-config')(path.resolve('', './config'))
+    logger.info('config loaded')
+
+    const backend = require('../src/backend')
+    User = require(`${backend()}/src/models/User`)
+
+    done()
+  })
 
   it('adds a regular user to the database',
     () => require('../src/add-user')({
