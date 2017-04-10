@@ -68,6 +68,9 @@
       "<rootDir>/node_modules"
     ],
     "testEnvironment": "node",
+    "unmockedModulePathPatterns": [
+      "\/src\/models"
+    ],
     "verbose": false
   }
 }

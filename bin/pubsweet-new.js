@@ -3,6 +3,7 @@
 const program = require('commander')
 const logger = require('../src/logger')
 const fs = require('fs-extra')
+const path = require('path')
 const colors = require('colors/safe')
 
 const properties = require('../src/db-properties')
@@ -59,19 +60,17 @@ const chdir = () => new Promise(
 
 logger.info('Generating new PubSweet app:', appname)
 
-checkNoApp().then(
-  chdir
-).then(
-  require('../src/generate-config')
-).then(
-  require('../src/generate-env')
-).then(
-  () => require('../src/initial-app')(appname)
-).then(
-  require('../src/setup-db')({
-    properties: properties,
+const run = async () => {
+  await checkNoApp()
+  await chdir()
+  await require('../src/generate-config')()
+  await require('../src/generate-env')()
+  await require('../src/initial-app')(appname)
+  require('../src/load-config')(path.resolve('', './config'))
+  await require('../src/setup-db')({
+    properties: require('../src/db-properties'),
     override: program
   })
-).catch(
-  require('../src/error-exit')
-)
+}
+
+run()

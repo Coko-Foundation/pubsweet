@@ -1,11 +1,5 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1200000
-
-// https://github.com/nodejs/node/issues/6379
-// https://github.com/nodejs/node/issues/6456
-const outputs = [process.stdout, process.stderr]
-outputs.forEach(s => {
-  s && s.isTTY && s._handle && s._handle.setBlocking && s._handle.setBlocking(true)
-})
+require('./helpers/fix_stdio')
 
 require('app-module-path').addPath(__dirname + '/../..')
 
@@ -27,8 +21,8 @@ describe('start', () => {
 
   beforeAll(async (done) => {
     const tmpdir = await workingdir()
-    fs.mkdirsSync(path.join(tmpdir, appname))
-    process.chdir(appname)
+    const appdir = fs.mkdirsSync(path.join(tmpdir, appname))
+    process.chdir(appdir)
     logger.info('created directory')
 
     await require('../src/generate-config')()

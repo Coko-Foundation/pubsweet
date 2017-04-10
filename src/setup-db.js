@@ -1,11 +1,11 @@
-process.env.PUBSWEET_BACKEND_SILENT = false
+process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')
 const backend = require('./backend')
 
 const runPrompt = options => new Promise((resolve, reject) => {
-  logger.info('building prompt')
+  logger.info('Building prompt')
 
   const prompt = require('prompt')
 
@@ -75,7 +75,7 @@ const setup = options => new Promise(
 )
 
 module.exports = options => {
-  logger.info('setting up the database')
+  logger.info('Setting up the database')
 
   return runPrompt(
     options
@@ -85,5 +85,9 @@ module.exports = options => {
     prepareEntities
   ).then(
     setup
-  )
+  ).catch(err => {
+    logger.error('Error setting up database:')
+    logger.error(err.message, err.stack)
+    // process.exit(1)
+  })
 }

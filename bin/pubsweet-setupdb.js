@@ -96,21 +96,21 @@ const loadconfig = () => new Promise(
 
 logger.info('Generating PubSweet app database at path', dbPath)
 
-checkExists().then(
-  checkNoDb
-).then(
-  chdir
-).then(
-  require('../src/generate-config')
-).then(
-  require('../src/generate-env')
-).then(
-  loadconfig
-).then(
-  require('../src/setup-db')({
-    properties: properties,
-    override: program
-  })
-).catch(
-  require('../src/error-exit')
-)
+const run = async () => {
+  try {
+    await checkExists()
+    await checkNoDb()
+    await chdir()
+    await require('../src/generate-config')()
+    await require('../src/generate-env')()
+    require('../src/load-config')(path.resolve('', './config'))
+    await require('../src/setup-db')({
+      properties: properties,
+      override: program
+    })
+  } catch (e) {
+    require('../src/error-exit')(e)
+  }
+}
+
+run()
