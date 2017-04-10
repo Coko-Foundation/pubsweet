@@ -1,11 +1,5 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1200000
-
-// https://github.com/nodejs/node/issues/6379
-// https://github.com/nodejs/node/issues/6456
-const outputs = [process.stdout, process.stderr]
-outputs.forEach(s => {
-  s && s.isTTY && s._handle && s._handle.setBlocking && s._handle.setBlocking(true)
-})
+require('./helpers/fix_stdio')
 
 require('app-module-path').addPath(__dirname + '/../..')
 
