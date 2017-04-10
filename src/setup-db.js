@@ -87,7 +87,7 @@ module.exports = options => {
     setup
   ).catch(err => {
     logger.error('Error setting up database:')
-    logger.error(err)
-    process.exit(1)
+    logger.error(err.message, err.stack)
+    // process.exit(1)
   })
 }
