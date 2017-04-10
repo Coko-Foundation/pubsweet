@@ -1,4 +1,4 @@
-process.env.PUBSWEET_BACKEND_SILENT = false
+process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')

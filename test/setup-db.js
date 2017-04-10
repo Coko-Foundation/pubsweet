@@ -36,6 +36,9 @@ describe('setup-db', () => {
     await require('../src/initial-app')(appname)
     logger.info('app generated')
 
+    require('../src/load-config')(path.resolve('', './config'))
+    logger.info('config loaded')
+
     await require('../src/setup-db')({
       properties: require('../src/db-properties'),
       override: dbconfig
