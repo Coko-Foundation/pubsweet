@@ -6,6 +6,7 @@ const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 const configfile = mode => `
 const path = require('path')
 const blogmode = require('authsome/src/modes/blog')
+const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
@@ -30,6 +31,12 @@ module.exports = {
   },
   pubsweet: {
     components: ['pubsweet-component-signup', 'pubsweet-component-login']
+  },
+  validations: {
+    fragment: {
+      kind: Joi.string().required(),
+      status: Joi.string().required()
+    }
   }
 }
 `
