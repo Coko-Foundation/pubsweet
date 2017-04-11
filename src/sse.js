@@ -8,6 +8,7 @@ class SSE extends EventEmitter {
 
     this.connect = this.connect.bind(this)
     this.messageId = 0
+    this.pulse()
   }
 
   connect (req, res) {
@@ -39,7 +40,6 @@ class SSE extends EventEmitter {
       res.write(`data: ${JSON.stringify(data.data)}\n\n`)
     }
 
-    // TODO: send a message on connection
     // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
 
     this.on('data', dataListener)
@@ -48,6 +48,12 @@ class SSE extends EventEmitter {
       this.removeListener('data', dataListener)
       this.setMaxListeners(this.getMaxListeners() - 1)
     })
+  }
+
+  pulse () {
+    setInterval(() => {
+      this.emit('data', { event: '❤', data: Date.now() })
+    }, 10000)
   }
 
   send (data, event) {
