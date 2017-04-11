@@ -93,18 +93,6 @@ const copyapp = name => new Promise(
   )
 )
 
-const findyarn = () => {
-  const thisdep = path.join(__dirname, '..', 'node_modules', 'yarn', 'bin', 'yarn')
-  const parentdep = path.join(__dirname, '..', '..', '..', 'node_modules', 'yarn', 'bin', 'yarn')
-  if (fs.existsSync(thisdep)) {
-    return thisdep
-  } else if (fs.existsSync(thisdep)) {
-    return parentdep
-  } else {
-    return 'yarn'
-  }
-}
-
 const install = () => {
   logger.info('Installing app dependencies...')
   return spawn(
