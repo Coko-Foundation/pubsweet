@@ -36,7 +36,7 @@ module.exports = {
     fragment: {
       kind: Joi.string().required(),
       published: Joi.bool(),
-      published_at: Joi.date().iso(),
+      published_at: Joi.date().allow(null),
       status: Joi.string().required()
     }
   }
