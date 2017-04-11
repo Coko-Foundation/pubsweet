@@ -35,6 +35,8 @@ module.exports = {
   validations: {
     fragment: {
       kind: Joi.string().required(),
+      published: Joi.bool(),
+      published_at: Joi.date().iso(),
       status: Joi.string().required()
     }
   }
