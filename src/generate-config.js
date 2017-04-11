@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 
 const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 
-const configfile = mode => `
+const configfile = () => `
 const path = require('path')
 const blogmode = require('authsome/src/modes/blog')
 
@@ -36,7 +36,7 @@ module.exports = {
 
 const write = (path, content) => new Promise(
   (resolve, reject) => {
-    fs.stat(path, (err, stats) => {
+    fs.stat(path, (err) => {
       if (err) {
         // file doesn't yet exist
         fs.writeFile(

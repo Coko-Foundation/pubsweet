@@ -38,8 +38,8 @@ const checkExists = () => new Promise(
 )
 
 const checkDb = () => new Promise(
-  (resolve, reject) => {
-    fs.stat(dbCheckPath, (err, stats) => {
+  (resolve) => {
+    fs.stat(dbCheckPath, (err) => {
       if (err) {
         logger.error('Database appears not to exist')
         logger.error('To create the database for an existing app, see `pubsweet help setupdb`')
@@ -98,7 +98,7 @@ checkExists().then(
 
     child.on(
       'start',
-      (proc, data) => {
+      () => {
         logger.info(`App ${appname} started.`)
         logger.info('The app will be kept running, even if errors occur, until you stop it.')
         logger.info('To stop the app use ctrl-C')
@@ -113,7 +113,7 @@ checkExists().then(
 
     child.on(
       'restart',
-      forever => logger.warn(`Restarting ${appname} for ${child.times} time`)
+      () => logger.warn(`Restarting ${appname} for ${child.times} time`)
     )
 
     child.on(

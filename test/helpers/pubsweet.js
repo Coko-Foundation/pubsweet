@@ -47,7 +47,7 @@ const newteamform = {
 }
 
 const editteamform = {
-  addmember: team => {
+  addmember: () => {
     return '#root > div > div > div > div:nth-child(2) table tbody tr:nth-child(1) > td:nth-child(5) .Select-input input'
   },
   memberchoice: (team, n) => {
@@ -148,12 +148,12 @@ module.exports = {
     .wait('input')
     .type(newpostform.title, post.title)
     .click(newteamform.submit),
-  publishpost: post => nightmare => nightmare
+  publishpost: () => nightmare => nightmare
     .use(gotoposts())
     .waitForUrl(/manage.posts/)
     .wait('input')
     .click(editpostform.publish),
-  unpublishpost: post => nightmare => nightmare
+  unpublishpost: () => nightmare => nightmare
     .use(gotoposts())
     .waitForUrl(/manage.posts/)
     .wait('input')
@@ -172,7 +172,7 @@ module.exports = {
     .type(writer.content, post.content)
     .click(writer.abstract).wait(200)
     .click(writer.save),
-  readpost: post => nightmare => nightmare
+  readpost: () => nightmare => nightmare
     .use(gohome())
     .waitForUrl(home)
     .wait('.blogpost')

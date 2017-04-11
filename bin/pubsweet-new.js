@@ -31,7 +31,7 @@ if (!appname || appname.length === 0) {
 }
 
 const checkNoApp = () => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     fs.stat(appname, (err, stats) => {
       if (err) return resolve()
       if (stats.isDirectory() && fs.readdirSync(appname).length > 1) {
@@ -51,7 +51,7 @@ const checkNoApp = () => new Promise(
 )
 
 const chdir = () => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     fs.mkdirsSync(appname)
     process.chdir(appname)
     resolve()

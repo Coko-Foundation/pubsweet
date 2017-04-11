@@ -62,7 +62,7 @@ const install = names => new Promise(
 const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
 
 const updateconfig = modules => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     logger.info(`Adding ${components.length} components to config`)
     logger.info(`Components being added: ${modules.join(' ')}`)
     const deployments = ['dev', 'production']
