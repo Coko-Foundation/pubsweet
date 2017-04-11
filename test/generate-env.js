@@ -8,14 +8,14 @@ const path = require('path')
 
 describe('generate-env', () => {
   it('returns a promise', () => workingdir().then(
-    dir => expect(generate()).to.be.a('promise'))
+    () => expect(generate()).to.be.a('promise'))
   )
 
   it('only generates .env for the current NODE_ENV', () => {
     const env = process.env.NODE_ENV
 
     return workingdir().then(
-      dir => generate().then(
+      () => generate().then(
         envpath => {
           const parsed = path.parse(envpath)
           expect(parsed.ext).to.equal(`.${env}`)

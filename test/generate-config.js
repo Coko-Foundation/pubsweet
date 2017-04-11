@@ -6,13 +6,13 @@ const path = require('path')
 
 describe.only('generate-config', () => {
   it('returns a promise', () => workingdir().then(
-    dir => expect(generate()).to.be.a('promise'))
+    () => expect(generate()).to.be.a('promise'))
   )
 
   it('only generates config for the current NODE_ENV', () => {
     const env = process.env.NODE_ENV
     return workingdir().then(
-      dir => generate().then(
+      () => generate().then(
         configpath => {
           const parsed = path.parse(configpath)
           expect(parsed.name).to.equal(env)
@@ -77,7 +77,7 @@ describe.only('generate-config', () => {
     it('does not clobber existing config', () => {
       const statbefore = fs.statSync(configpath)
       return generate().then(
-        _configpath => {
+        () => {
           const statafter = fs.statSync(configpath)
           expect(statbefore.mtime.getTime()).to.equal(statafter.mtime.getTime())
         }

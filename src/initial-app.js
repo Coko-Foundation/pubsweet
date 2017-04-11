@@ -81,7 +81,7 @@ const writepkgjson = name => new Promise(
   )
 )
 
-const copyapp = name => new Promise(
+const copyapp = () => new Promise(
   (resolve, reject) => fs.copy(
     path.join(__dirname, '..', 'initial-app'),
     process.cwd(),
@@ -135,7 +135,7 @@ const gitsetup = () => {
   ).then(
     () => git.commit('Initial app commit')
   ).then(
-    () => new Promise((resolve, reject) => {
+    () => new Promise((resolve) => {
       logger.info('git repository set up in app directory with initial commit')
       resolve()
     })

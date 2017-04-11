@@ -4,7 +4,7 @@ const uuid = require('uuid')
 
 const envpath = mode => path.join(process.cwd(), `.env.${mode}`)
 
-const envfile = mode => `PUBSWEET_SECRET=${uuid.v4()}\n`
+const envfile = () => `PUBSWEET_SECRET=${uuid.v4()}\n`
 
 const write = (path, content) => new Promise(
   (resolve, reject) => fs.writeFile(

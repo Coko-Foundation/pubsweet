@@ -63,8 +63,8 @@ const checkExists = () => new Promise(
 )
 
 const checkNoDb = () => new Promise(
-  (resolve, reject) => {
-    fs.stat(dbCheckPath, (err, stats) => {
+  (resolve) => {
+    fs.stat(dbCheckPath, (err) => {
       if (err) return resolve()
       if (program.clobber) {
         logger.info('Database appears to already exist')
@@ -81,15 +81,8 @@ const checkNoDb = () => new Promise(
 )
 
 const chdir = () => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     process.chdir(appPath)
-    resolve()
-  }
-)
-
-const loadconfig = () => new Promise(
-  (resolve, reject) => {
-    require('../src/load-config')(path.resolve('', './config'))
     resolve()
   }
 )

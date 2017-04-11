@@ -32,7 +32,7 @@ const logResult = result => new Promise(
 )
 
 const maybeaddowner = user => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     if (user.admin) {
       const Collection = require(`${backend()}/src/models/Collection`)
       Collection.all().then(
