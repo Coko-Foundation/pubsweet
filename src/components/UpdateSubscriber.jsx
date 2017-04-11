@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 import * as T from '../actions/types'
+import 'event-source-polyfill'
 
 const actionMap = {
   'collection:create': T.CREATE_COLLECTION_SUCCESS,
@@ -12,6 +13,14 @@ const actionMap = {
 }
 
 class UpdateSubscriber extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      connected: false
+    }
+  }
+
   componentDidMount () {
     this.subscribe(this.props)
   }
@@ -24,47 +33,110 @@ class UpdateSubscriber extends Component {
 
   componentWillUnmount () {
     if (this.eventSource) {
+      this.eventSource.removeAllListeners()
       this.eventSource.close()
       // delete this.eventSource
     }
+  }
+
+  // if haven't received a heartbeat for 5 seconds, try to reconnect
+  monitor (event) {
+    console.log(event)
+    if (this.heartbeat) {
+      window.clearTimeout(this.heartbeat)
+    }
+
+    this.heartbeat = window.setTimeout(() => {
+      console.log('no heartbeat - reconnecting…')
+      this.subscribe(this.props)
+    }, 5000)
   }
 
   subscribe (props) {
     const {currentUser, handleUpdate} = props
 
     if (currentUser) {
+      // ignore if not supported
+      if (!window.EventSource) return
+
+      // clear any existing heartbeat monitor
+      if (this.heartbeat) {
+        window.clearTimeout(this.heartbeat)
+      }
+
+      // close any existing connection
+      if (this.eventSource) {
+        this.eventSource.close()
+      }
+
       // EventSource can't have Authorization header, so have to use query string
       const url = '/updates?access_token=' + encodeURIComponent(currentUser.token)
 
-      this.eventSource = new EventSource(url)
+      this.eventSource = new window.EventSource(url)
 
-      this.eventSource.onerror = e => console.error(e)
+      this.eventSource.addEventListener('error', event => {
+        switch (this.eventSource.readyState) {
+          case window.EventSource.CONNECTING:
+            this.setState({connected: false})
+            break
 
-      this.eventSource.onmessage = e => {
-        const {action, data} = JSON.parse(e.data)
+          // case window.EventSource.OPEN:
+          //   this.setState({connected: true})
+          //   break
+
+          case window.EventSource.CLOSED:
+            this.setState({connected: false})
+            this.monitor() // try again if not connected
+            break
+        }
+      })
+
+      this.eventSource.addEventListener('close', event => {
+        this.setState({connected: false})
+        // this.monitor() // don't try to reconnect, as "close" without error is deliberate
+      })
+
+      this.eventSource.addEventListener('message', event => {
+        if (event.origin !== window.location.origin) {
+          console.error('Message from unexpected origin', event.origin)
+          return
+        }
+
+        console.log(event)
+
+        const {action, data} = JSON.parse(event.data)
 
         const actionType = actionMap[action]
 
         handleUpdate(actionType, data)
-      }
+      })
+
+      this.eventSource.addEventListener('open', event => {
+        this.setState({ connected: true })
+      })
+
+      // listen for a heartbeat message
+      this.eventSource.addEventListener('❤️', event => {
+        this.monitor(event)
+      })
     }
   }
 
   render () {
-    const {currentUser} = this.props
+    const {connected} = this.state
 
     // TODO: show if authenticated + connected
     // TODO: pass eventSource to another component for display?
 
     return (
-      <div>{ currentUser ? ':)' : '' }</div>
+      <div>{ connected ? 'connected' : 'not connected' }</div>
     )
   }
 }
 
 UpdateSubscriber.propTypes = {
   currentUser: PropTypes.object,
-  storeUpdate: PropTypes.func
+  handleUpdate: PropTypes.func
 }
 
 export default connect(
