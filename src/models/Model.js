@@ -40,17 +40,24 @@ class Model {
     return this.constructor.find(this.id).then(result => {
       logger.info('Found an existing version, this is an update of:', result)
       return result.rev
-    }).then(rev => {
-      this.rev = rev
-      return this._put()
     }).catch(error => {
+      // if this is a "not found" error, create a new object
       if (error && error.status === 404) {
-        return this.isUniq ? this.isUniq() : true
-      } else {
-        throw error
+        // check for uniqueness (if needed) before creating a new object
+        if (this.isUniq && this.isUniq()) {
+          throw error
+        }
+
+        logger.info('No existing object found, creating a new one:', this.type, this.id)
+        return false // false = don't set "rev" on the model
       }
-    }).then(response => {
-      logger.info('No existing object found, creating a new one:', this.type, this.id)
+
+      throw error
+    }).then(rev => {
+      if (rev) {
+        this.rev = rev
+      }
+
       return this._put()
     })
   }
