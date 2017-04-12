@@ -52,7 +52,7 @@ class SSE extends EventEmitter {
 
   pulse () {
     setInterval(() => {
-      this.emit('data', { event: '❤', data: Date.now() })
+      this.emit('data', { event: 'pulse', data: Date.now() })
     }, 10000)
   }
 
