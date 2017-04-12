@@ -40,16 +40,15 @@ class UpdateSubscriber extends Component {
   }
 
   // if haven't received a heartbeat for 5 seconds, try to reconnect
-  monitor (event) {
-    console.log(event)
+  monitor () {
     if (this.heartbeat) {
       window.clearTimeout(this.heartbeat)
     }
 
     this.heartbeat = window.setTimeout(() => {
-      console.log('no heartbeat - reconnecting…')
+      // console.log('no heartbeat - reconnecting…')
       this.subscribe(this.props)
-    }, 5000)
+    }, 30000)
   }
 
   subscribe (props) {
@@ -61,11 +60,13 @@ class UpdateSubscriber extends Component {
 
       // clear any existing heartbeat monitor
       if (this.heartbeat) {
+        // console.log('clearing timeout')
         window.clearTimeout(this.heartbeat)
       }
 
       // close any existing connection
       if (this.eventSource) {
+        // console.log('closing')
         this.eventSource.close()
       }
 
@@ -74,35 +75,35 @@ class UpdateSubscriber extends Component {
 
       this.eventSource = new window.EventSource(url)
 
-      this.eventSource.addEventListener('error', event => {
+      this.eventSource.addEventListener('error', () => {
+        // console.log('error', this.eventSource.readyState)
+
         switch (this.eventSource.readyState) {
-          case window.EventSource.CONNECTING:
+          case 0: // CONNECTING
             this.setState({connected: false})
             break
 
-          // case window.EventSource.OPEN:
-          //   this.setState({connected: true})
-          //   break
-
-          case window.EventSource.CLOSED:
+          case 2: // CLOSED
             this.setState({connected: false})
-            this.monitor() // try again if not connected
+            this.monitor() // try again in a while if not connected
             break
         }
       })
 
-      this.eventSource.addEventListener('close', event => {
+      this.eventSource.addEventListener('close', () => {
+        console.log('close')
+
         this.setState({connected: false})
         // this.monitor() // don't try to reconnect, as "close" without error is deliberate
       })
 
       this.eventSource.addEventListener('message', event => {
+        // console.log('message', event)
+
         if (event.origin !== window.location.origin) {
-          console.error('Message from unexpected origin', event.origin)
+          // console.error('Message from unexpected origin', event.origin)
           return
         }
-
-        console.log(event)
 
         const {action, data} = JSON.parse(event.data)
 
@@ -111,13 +112,15 @@ class UpdateSubscriber extends Component {
         handleUpdate(actionType, data)
       })
 
-      this.eventSource.addEventListener('open', event => {
+      this.eventSource.addEventListener('open', () => {
+        // console.log('open')
         this.setState({ connected: true })
       })
 
       // listen for a heartbeat message
-      this.eventSource.addEventListener('❤️', event => {
-        this.monitor(event)
+      this.eventSource.addEventListener('pulse', () => {
+        // console.log('❤️')
+        this.monitor()
       })
     }
   }
@@ -125,11 +128,10 @@ class UpdateSubscriber extends Component {
   render () {
     const {connected} = this.state
 
-    // TODO: show if authenticated + connected
-    // TODO: pass eventSource to another component for display?
-
     return (
-      <div>{ connected ? 'connected' : 'not connected' }</div>
+      <i className="fa fa-wifi" style={{
+        color: connected ? 'green' : 'gray'
+      }} />
     )
   }
 }
