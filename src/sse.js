@@ -20,7 +20,7 @@ class SSE extends EventEmitter {
     req.socket.setNoDelay(true)
     req.socket.setKeepAlive(true)
 
-    // res.statusCode = 200
+    res.statusCode = 200
 
     res.set({
       'Content-Type': 'text/event-stream',
