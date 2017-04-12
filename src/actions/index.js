@@ -1,5 +1,7 @@
-import * as T from './types'
+/* eslint-disable */
+
 import componentActionsList from '../components/actions'
+import * as T from './types'
 
 const actions = {}
 

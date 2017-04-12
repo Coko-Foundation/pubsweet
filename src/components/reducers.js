@@ -4,8 +4,8 @@ module.exports = PUBSWEET_COMPONENTS.filter(
   component => {
     const reducers = component.frontend.reducers
     if (typeof reducers === 'function') {
-      var r = reducers()
-      var re = {}
+      const r = reducers()
+      const re = {}
       re[r.default.name] = r.default
       return re
     } else {
@@ -13,4 +13,3 @@ module.exports = PUBSWEET_COMPONENTS.filter(
     }
   }
 )
-

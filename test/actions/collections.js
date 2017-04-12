@@ -3,11 +3,11 @@ const describeAction = require.requireActual('../helpers/describeAction')(action
 const T = require('../../src/actions/types')
 
 module.exports = app => {
-  const mockcol = () => app.collection
-
-  const storedData = {
-    fragment: {}
-  }
+  // const mockcol = () => app.collection
+  //
+  // const storedData = {
+  //   fragment: {}
+  // }
 
   describeAction('getCollections', {
     types: {

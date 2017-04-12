@@ -1,6 +1,6 @@
 import {
   FILE_UPLOAD_REQUEST,
-  FILE_UPLOAD_SUCCESS,
+  FILE_UPLOAD_SUCCESS
 } from '../actions/types'
 
 export default function (state = {

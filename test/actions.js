@@ -15,7 +15,9 @@ const users = require('./actions/users')
 describe('ACTIONS', () => {
   const app = require('./helpers/mockapp.json')
 
-  it('needs a running app', () => { expect(app.server).to.be.ok })
+  it('needs a running app', () => {
+    expect(app.server).to.be.ok
+  })
 
   describe('collections', () => collections(app))
   describe('fragments', () => fragments(app))

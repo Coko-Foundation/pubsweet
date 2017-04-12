@@ -26,7 +26,7 @@ module.exports = app => describeReducerSet('fragments', reducers, () => {
     type: 'some_fragment',
     owners: []
   }
-  mockstatemod = {}
+  const mockstatemod = {}
   mockstatemod[mockfrag.id] = mockfragmod
 
   const colwithfrag = clone(mockcol)

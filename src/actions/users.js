@@ -1,6 +1,7 @@
 import { fetch } from '../helpers/Utils'
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 import * as T from './types'
+
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 
 const token = require('../helpers/authtoken')
 
