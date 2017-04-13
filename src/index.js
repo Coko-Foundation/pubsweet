@@ -7,6 +7,7 @@ const index = require('./routes/index')
 const api = require('./routes/api')
 const logger = require('./logger')
 const authentication = require('./authentication')
+const sse = require('./sse')
 const models = require('./models')
 
 module.exports = (app = express()) => {
@@ -31,6 +32,9 @@ module.exports = (app = express()) => {
 
   // Main API
   app.use('/api', api)
+
+  // SSE update stream
+  app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
 
   // Serve the index page for front end
   app.use('/manage', index)
