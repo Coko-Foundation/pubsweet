@@ -34,7 +34,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
     action: {
       type: T.GET_USER_FAILURE
     },
-    output: { isFetching: false ,isAuthenticated: false }
+    output: { isFetching: false, isAuthenticated: false }
   })
 
   describeReducer('currentUser request', {
@@ -42,6 +42,6 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
     action: {
       type: T.GET_USER_REQUEST
     },
-    output: { isFetching: true ,isAuthenticated: false }
+    output: { isFetching: true, isAuthenticated: false }
   })
 })

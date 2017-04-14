@@ -1,11 +1,11 @@
-const expect = require.requireActual('chai').expect
+// const expect = require.requireActual('chai').expect
 
 const actions = require.requireActual('../../src/actions/users')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 module.exports = app => {
-  let user
+  // let user
 
   describeAction('getUsers', {
     types: {

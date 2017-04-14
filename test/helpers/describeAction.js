@@ -31,7 +31,6 @@ const describeAction = actions => (key, opts, cb) => {
   })
 
   describe(key, () => {
-
     const data = {}
     let action
 
