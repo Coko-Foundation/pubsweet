@@ -178,6 +178,11 @@ describe('Collections API', () => {
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
+      // create another fragment
+      await api.collections.createFragment(collection, fixtures.fragment, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
       // delete the fragment
       await api.collections.deleteFragment(collection, fragment, adminToken)
         .expect(STATUS.OK)
@@ -185,6 +190,13 @@ describe('Collections API', () => {
       // retrieve the updated fragment
       await api.collections.retrieveFragment(collection.id, fragment.id, adminToken)
         .expect(STATUS.NOT_FOUND)
+
+      // list fragments in this collection
+      const fragments = await api.collections.listFragments(collection, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragments).toHaveLength(1)
     })
   })
 

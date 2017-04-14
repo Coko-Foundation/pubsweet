@@ -201,7 +201,8 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
     )
   ).then(
     ([collection, fragment]) => {
-      collection.fragments = _.without(collection.fragments, req.params.fragmentId)
+      let fragments = _.without(collection.fragments, req.params.fragmentId)
+      collection.fragments = fragments.map(id => new Fragment({id: id}))
       return Promise.all([collection.save(), fragment])
     }
   ).then(
