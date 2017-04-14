@@ -2,9 +2,10 @@
 // Copy this file, and add rule overrides as needed.
 {
   "parser": "babel-eslint",
-  "extends": ["standard", "standard-react"],
+  "extends": ["standard"],
   "env": {
-    "es6": true
+    "es6": true,
+    "browser": true
   }
 }
 

@@ -1,18 +1,18 @@
 {
-  "extends": ["standard", "standard-react"],
-  "ecmaFeatures": {
-    "jsx": true
+  "extends": [
+    "standard",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "plugins": [
     "react"
   ],
-  "rules": {
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ]
-  },
   "globals": {
-    "PUBSWEET_COMPONENTS": true
+    "PUBSWEET_COMPONENTS": true,
+    "CONFIG": true
   }
 }

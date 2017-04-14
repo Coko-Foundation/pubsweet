@@ -57,7 +57,6 @@
     "babel-eslint": "^6.1.2",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
-    "eslint-config-standard-react": "^4.3.0",
     "eslint-plugin-react": "^6.10.3",
     "fs-extra": "^2.1.2",
     "isomorphic-form-data": "^1.0.0",
