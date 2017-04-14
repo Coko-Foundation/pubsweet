@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "standard",
     "plugin:react/recommended"
@@ -7,6 +8,10 @@
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "env": {
+    "es6": true,
+    "browser": true
   },
   "plugins": [
     "react"
