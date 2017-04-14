@@ -17,7 +17,7 @@ const login = user => new Promise(
 )
 
 const logout = () => new Promise(
-  (resolve, reject) => {
+  (resolve) => {
     const loginactions = require.requireActual('pubsweet-component-login/actions')
     const T = require.requireActual('pubsweet-component-login/types')
     loginactions.logoutUser()(result => {

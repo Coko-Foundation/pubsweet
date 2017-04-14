@@ -1,7 +1,7 @@
 import { fetch } from '../helpers/Utils'
+import * as T from './types'
 
 const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-import * as T from './types'
 
 function fileUploadRequest () {
   return {

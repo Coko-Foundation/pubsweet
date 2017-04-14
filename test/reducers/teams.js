@@ -3,7 +3,7 @@ const describeReducerSet = require.requireActual('../helpers/describeReducerSet'
 
 const T = require('../../src/actions/types')
 
-const clone = require('lodash/clone')
+// const clone = require('lodash/clone')
 
 module.exports = app => describeReducerSet('teams', reducers, () => {
   const describeReducer = require.requireActual(
