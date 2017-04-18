@@ -81,18 +81,16 @@ api.get('/:id', authBearer, (req, res, next) => {
 })
 
 // Destroy a user
-api.delete('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'delete', req.originalUrl
-  ).then(
-    () => User.find(req.params.id)
-  ).then(
-    user => user.delete()
-  ).then(
-    user => res.status(STATUS.OK).json(user)
-  ).catch(
-    next
-  )
+api.delete('/:id', authBearer, async (req, res, next) => {
+  try {
+    await Authorize.can(req.user, 'delete', req.originalUrl)
+    const user = await User.find(req.params.id)
+    const deletedUser = await user.delete()
+
+    res.status(STATUS.OK).json(deletedUser)
+  } catch (e) {
+    next(e)
+  }
 })
 
 // Update a user

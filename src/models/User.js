@@ -14,15 +14,13 @@ class User extends Model {
     this.username = properties.username
   }
 
-  save () {
+  async save () {
     if (this.password) {
-      return this.hashPassword(this.password).then(hash => {
-        delete this.password
-        this.passwordHash = hash
-      }).then(() => super.save())
-    } else {
-      return super.save()
+      this.passwordHash = await this.hashPassword(this.password)
+      delete this.password
     }
+
+    return Model.prototype.save.call(this)
   }
 
   validPassword (password) {
@@ -33,24 +31,24 @@ class User extends Model {
     return bcrypt.hash(password, BCRYPT_COST)
   }
 
-  isUniq () {
-    return User.findByEmail(this.email).then(function (user) {
-      throw new ConflictError('User exists')
-    }).catch(function (err) {
-      if (err.name === 'NotFoundError') {
-        return User.findByUsername(this.username)
-      } else {
-        throw err
-      }
-    }.bind(this)).then(function (user) {
-      throw new ConflictError('User exists')
-    }).catch(function (err) {
-      if (err.name === 'NotFoundError') {
-        return true
-      } else {
-        throw err
-      }
-    })
+  async isUniq (user) {
+    let result
+
+    const notNotFoundCatcher = e => {
+      if (e.name !== 'NotFoundError') throw e
+    }
+
+    result = await User.findByEmail(user.email).catch(notNotFoundCatcher)
+
+    if (result) {
+      throw new ConflictError('User already exists')
+    }
+
+    result = await User.findByUsername(user.email).catch(notNotFoundCatcher)
+
+    if (result) {
+      throw new ConflictError('User already exists')
+    }
   }
 
   static findByEmail (email) {

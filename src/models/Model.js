@@ -24,51 +24,51 @@ class Model {
 
   validate () {
     let validation = Joi.validate(this, this.constructor.validations())
+
     if (validation.error) {
       logger.info(validation.error)
       throw validation.error
-    } else {
-      return true
     }
+
+    return true
   }
 
-  save () {
+  async save () {
     logger.info('Saving', this.type, this.id)
 
     this.validate()
 
-    return this.constructor.find(this.id).then(result => {
-      logger.info('Found an existing version, this is an update of:', result)
-      return result.rev
-    }).then(rev => {
-      this.rev = rev
-      return this._put()
-    }).catch(error => {
-      if (error && error.status === 404) {
-        return this.isUniq ? this.isUniq() : true
-      } else {
+    try {
+      const existing = await this.constructor.find(this.id)
+      logger.info('Found an existing version, this is an update of:', existing)
+      this.rev = existing.rev
+    } catch (error) {
+      if (error.status !== 404) {
         throw error
       }
-    }).then(response => {
+
+      // creating a new object, so check for uniqueness
+      if (typeof this.isUniq === 'function') {
+        await this.isUniq(this) // throws an exception if not unique
+      }
+
       logger.info('No existing object found, creating a new one:', this.type, this.id)
-      return this._put()
-    })
+    }
+
+    return this._put()
   }
 
-  _put () {
-    return db.rel.save(this.constructor.type, this).then(function (response) {
-      logger.info('Actually _put', this.type, this.id, this)
-      return this
-    }.bind(this))
+  async _put () {
+    await db.rel.save(this.constructor.type, this)
+    logger.info('Actually _put', this.type, this.id, this)
+    return this
   }
 
-  delete () {
-    return this.constructor.find(this.id).then(function (object) {
-      return db.rel.del(this.type, object)
-    }.bind(this)).then(function () {
-      logger.info('Deleted', this.type, this.id)
-      return this
-    }.bind(this))
+  async delete () {
+    const object = await this.constructor.find(this.id)
+    await db.rel.del(this.type, object)
+    logger.info('Deleted', this.type, this.id)
+    return this
   }
 
   updateProperties (properties) {
@@ -104,61 +104,65 @@ class Model {
 
   // Find all of a certain type e.g.
   // User.all()
-  static all () {
-    return db.rel.find(
-      this.type
-    ).then(
-      (results) => {
-        return results[this.type + 's']
-      }
-    )
+  static async all () {
+    const results = await db.rel.find(this.type)
+
+    return results[this.type + 's']
   }
 
   // Find by id e.g.
   // User.find('394')
-  static find (id, options) {
+  static async find (id) {
     let plural = this.type + 's'
-    return db.rel.find(this.type, id).then(results => {
-      let result = results[plural].find(result => result.id === id)
-      if (!result) {
-        throw new NotFoundError()
-      } else {
-        return new this(result)
-      }
-    }).catch(err => {
+    let results
+
+    try {
+      results = await db.rel.find(this.type, id)
+    } catch (err) {
       if (err.name === 'NotFoundError') {
         logger.info('Object not found:', this.type, id)
       }
       throw err
-    })
+    }
+
+    let result = results[plural].find(result => result.id === id)
+
+    if (!result) {
+      throw new NotFoundError()
+    }
+
+    return new this(result)
   }
 
-  static findByField (field, value) {
+  static async findByField (field, value) {
     logger.info('Finding', field, value)
     field = 'data.' + field
+
     let type = 'data.type'
 
-    return db.createIndex({
+    await db.createIndex({
       index: {
         fields: [field, type]
       }
-    }).then(function (result) {
-      var selector = {selector: {}}
-      selector.selector[type] = this.type
-      selector.selector[field] = value
-      return db.find(selector)
-    }.bind(this)).then(results => {
-      if (results.docs.length === 0) {
-        throw new NotFoundError()
-      } else {
-        return results.docs.map(result => {
-          let id = db.rel.parseDocID(result._id).id
-          let foundObject = result.data
-          foundObject.id = id
-          foundObject.rev = result._rev
-          return new this(foundObject)
-        })
+    })
+
+    const results = await db.find({
+      selector: {
+        [type]: this.type,
+        [field]: value
       }
+    })
+
+    if (!results.docs.length) {
+      throw new NotFoundError()
+    }
+
+    return results.docs.map(result => {
+      let id = db.rel.parseDocID(result._id).id
+      let foundObject = result.data
+      foundObject.id = id
+      foundObject.rev = result._rev
+      return new this(foundObject)
     })
   }
 }
