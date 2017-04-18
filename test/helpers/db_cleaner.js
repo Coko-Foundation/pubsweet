@@ -3,25 +3,16 @@
 const PouchDB = require('../../src/db')
 const logger = require('../../src/logger')
 
-let dbCleaner = () => {
+let dbCleaner = async () => {
   let dbName = global.db.name
 
-  return global.db.destroy().then(
-    (response) => {
-      global.db = new PouchDB(dbName, { adapter: 'memory' })
-      return global.db.allDocs()
-    }
-  ).then(
-    (response) => {
-      logger.info('Cleaning database', response)
-      return response
-    }
-  ).catch(
-    (err) => {
-      logger.error('Error cleaning database', err)
-      return err
-    }
-  )
+  await global.db.destroy()
+
+  global.db = new PouchDB(dbName, { adapter: 'memory' })
+
+  const info = await global.db.info()
+
+  logger.info('Created database', info)
 }
 
 module.exports = dbCleaner

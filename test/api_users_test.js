@@ -1,11 +1,11 @@
+// jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000
+
 const STATUS = require('http-status-codes')
 
 const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 const fixtures = require('./fixtures/fixtures')
 const api = require('./helpers/api')
-
-const noop = () => {}
 
 describe('users api', () => {
   let userId
@@ -21,22 +21,17 @@ describe('users api', () => {
   afterEach(cleanDB)
 
   describe('admin', () => {
-    var otherUser
+    let otherUser
 
-    beforeEach(() => {
-      otherUser = new User(fixtures.otherUser)
-
-      return otherUser.save().then(
-        user => { otherUser = user }
-      )
+    beforeEach(async () => {
+      const user = new User(fixtures.otherUser)
+      otherUser = await user.save()
     })
 
     afterEach(() => {
-      return User.find(otherUser.id).then(
-        user => user.delete()
-      ).catch(
-        noop // we might have already delete the user
-      )
+      return User.find(otherUser.id)
+        .then(user => user.delete())
+        .catch(() => {}) // we might have already deleted the user
     })
 
     it('can get a list of users', () => {
@@ -90,18 +85,15 @@ describe('users api', () => {
   describe('new user', () => {
     let otherUser
 
-    beforeEach(() => {
-      return new User(fixtures.otherUser).save().then(
-        user => { otherUser = user }
-      )
+    beforeEach(async () => {
+      const user = new User(fixtures.otherUser)
+      otherUser = await user.save()
     })
 
     afterEach(() => {
-      return User.find(otherUser.id).then(
-        user => user.delete()
-      ).catch(
-        noop // we might have already delete the user
-      )
+      return User.find(otherUser.id)
+        .then(user => user.delete())
+        .catch(() => {}) // we might have already deleted the user
     })
 
     it('cant log in with the wrong username', () => {
@@ -197,20 +189,21 @@ describe('users api', () => {
       )
     })
 
-    it('authenticates an updated user', () => {
-      const newself = Object.assign({}, fixtures.updatedUser)
+    it('authenticates an updated user', async (done) => {
+      try {
+        // authenticate
+        const token = await api.users.authenticate.post(fixtures.otherUser)
 
-      return api.users.authenticate.post(
-        fixtures.otherUser
-      ).then(
-        token => api.users.put(
-          otherUser.id, newself, token
-        ).expect(
-          STATUS.OK
-        )
-      ).then(() =>
-        api.users.authenticate.post(fixtures.updatedUser)
-      )
+        // change the username, email and password
+        await api.users.put(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
+
+        // authenticate with the updated details
+        await api.users.authenticate.post(fixtures.updatedUser)
+
+        done()
+      } catch (e) {
+        done.fail(e)
+      }
     })
 
     it('persists an updated user', () => {
@@ -236,22 +229,24 @@ describe('users api', () => {
       )
     })
 
-    it('user can delete itself', () => {
-      const newself = Object.assign({}, fixtures.updatedUser)
+    it('user can delete itself', async (done) => {
+      try {
+        // authenticate
+        const otherUserToken = await api.users.authenticate.post(fixtures.otherUser)
 
-      return api.users.authenticate.post(
-        fixtures.otherUser
-      ).then(
-        token => api.users.put(
-          otherUser.id, newself, token
-        ).expect(
-          STATUS.OK
-        )
-      ).then(
-        () => api.users.authenticate.post(fixtures.updatedUser)
-      ).then(
-        token => api.users.del(otherUser.id, token).expect(STATUS.OK)
-      )
+        // change username, email and password
+        await api.users.put(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
+
+        // authenticate with updated details
+        const updatedUserToken = await api.users.authenticate.post(fixtures.updatedUser)
+
+        // delete the updated user
+        await api.users.del(otherUser.id, updatedUserToken).expect(STATUS.OK)
+
+        done()
+      } catch (e) {
+        done.fail(e)
+      }
     })
   })
 
