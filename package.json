@@ -54,6 +54,7 @@
     "chai-string": "^1.3.0",
     "eslint": "^3.19.0",
     "jest": "^19.0.2",
+    "joi": "^10.4.1",
     "nightmare": "^2.9.1",
     "nightmare-wait-for-url": "0.0.2",
     "standard": "^10.0.1"
@@ -70,7 +71,7 @@
     ],
     "testEnvironment": "node",
     "unmockedModulePathPatterns": [
-      "\/src\/models"
+      "/src/models"
     ],
     "verbose": false
   }
