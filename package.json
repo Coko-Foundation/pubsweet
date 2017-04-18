@@ -7,8 +7,7 @@
     "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose"
   },
   "engines": {
-    "node": ">=5.0.0",
-    "npm": ">=3.0.0"
+    "node": ">=7.6"
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
