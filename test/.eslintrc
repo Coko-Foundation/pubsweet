@@ -1,5 +1,14 @@
 {
+  "extends": [
+    "standard"
+  ],
   "env": {
-    "jest": true
+    "es6": true,
+    "node": true,
+    "jest": true,
+    "jasmine": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
   }
 }
