@@ -101,7 +101,7 @@ describe('authenticated api', function () {
           fixtures.updatedUser
         ).then(
           (token) => {
-            return api.fragments.put(
+            return api.fragments.patch(
               fragment.id,
               fixtures.updatedFragment,
               collection,
@@ -143,7 +143,7 @@ describe('authenticated api', function () {
           fixtures.updatedUser
         ).then(
           token => {
-            return api.fragments.put(
+            return api.fragments.patch(
               fixtures.updatedFragment, collection, token
             ).expect(
               STATUS.UNAUTHORIZED
