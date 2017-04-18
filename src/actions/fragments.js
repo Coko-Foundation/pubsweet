@@ -124,10 +124,11 @@ function updateFragmentRequest (fragment) {
   }
 }
 
-function updateFragmentSuccess (fragment) {
+function updateFragmentSuccess (fragment, update) {
   return {
     type: T.UPDATE_FRAGMENT_SUCCESS,
     fragment: fragment,
+    update: update,
     receivedAt: Date.now()
   }
 }
@@ -149,7 +150,7 @@ export function updateFragment (collection, fragment) {
 
     const url = fragmentUrl(collection, fragment)
     const opts = {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -162,7 +163,7 @@ export function updateFragment (collection, fragment) {
       .then(
         response => response.json()
       ).then(
-        json => dispatch(updateFragmentSuccess(fragment)),
+        update => dispatch(updateFragmentSuccess(fragment, update)),
         err => dispatch(updateFragmentFailure(fragment, err))
       )
   }
