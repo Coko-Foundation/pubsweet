@@ -10,8 +10,8 @@ const getpkgjson = name => {
     description: 'A new pubsweet app',
     dependencies: {
       'joi': '^10.4.1',
-      'pubsweet-server': '^0.7.2',
-      'pubsweet-client': '^0.8.2',
+      'pubsweet-server': '^0.8.0',
+      'pubsweet-client': '^0.9.0',
       'pubsweet-component-blog': '^0.1.1',
       'pubsweet-component-login': '^0.2.2',
       'pubsweet-component-posts-manager': '^0.1.1',
@@ -82,7 +82,7 @@ const writepkgjson = name => new Promise(
   )
 )
 
-const copyapp = name => new Promise(
+const copyapp = () => new Promise(
   (resolve, reject) => fs.copy(
     path.join(__dirname, '..', 'initial-app'),
     process.cwd(),
@@ -93,18 +93,6 @@ const copyapp = name => new Promise(
     }
   )
 )
-
-const findyarn = () => {
-  const thisdep = path.join(__dirname, '..', 'node_modules', 'yarn', 'bin', 'yarn')
-  const parentdep = path.join(__dirname, '..', '..', '..', 'node_modules', 'yarn', 'bin', 'yarn')
-  if (fs.existsSync(thisdep)) {
-    return thisdep
-  } else if (fs.existsSync(thisdep)) {
-    return parentdep
-  } else {
-    return 'yarn'
-  }
-}
 
 const install = () => {
   logger.info('Installing app dependencies...')
@@ -136,7 +124,7 @@ const gitsetup = () => {
   ).then(
     () => git.commit('Initial app commit')
   ).then(
-    () => new Promise((resolve, reject) => {
+    () => new Promise((resolve) => {
       logger.info('git repository set up in app directory with initial commit')
       resolve()
     })
