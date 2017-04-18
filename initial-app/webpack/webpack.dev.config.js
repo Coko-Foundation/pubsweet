@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const ThemePlugin = require('pubsweet-theme-plugin')
 const config = require('../config/dev')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = [
   {
