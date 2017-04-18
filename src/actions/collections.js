@@ -98,57 +98,6 @@ export function createCollection (collection) {
   }
 }
 
-function patchCollectionRequest (collection) {
-  return {
-    type: T.PATCH_COLLECTION_REQUEST,
-    collection: collection
-  }
-}
-
-function patchCollectionSuccess (collection) {
-  return {
-    type: T.PATCH_COLLECTION_SUCCESS,
-    collection: collection,
-    receivedAt: Date.now()
-  }
-}
-
-function patchCollectionFailure (collection, error) {
-  return {
-    type: T.PATCH_COLLECTION_FAILURE,
-    isFetching: false,
-    collection: collection,
-    error: error
-  }
-}
-
-export function patchCollection (collection, values) {
-  return (dispatch, getState) => {
-    dispatch(patchCollectionRequest(collection))
-
-    const {currentUser: {token}} = getState()
-
-    const url = collectionUrl(collection)
-    const opts = {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(values)
-    }
-
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        collection => dispatch(patchCollectionSuccess(collection)),
-        err => dispatch(patchCollectionFailure(collection, err))
-      )
-  }
-}
-
 function updateCollectionRequest (collection) {
   return {
     type: T.UPDATE_COLLECTION_REQUEST,
@@ -156,10 +105,11 @@ function updateCollectionRequest (collection) {
   }
 }
 
-function updateCollectionSuccess (collection) {
+function updateCollectionSuccess (collection, update) {
   return {
     type: T.UPDATE_COLLECTION_SUCCESS,
     collection: collection,
+    update: update,
     receivedAt: Date.now()
   }
 }
@@ -181,7 +131,7 @@ export function updateCollection (collection) {
 
     const url = collectionUrl(collection)
     const opts = {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -194,7 +144,7 @@ export function updateCollection (collection) {
       .then(
         response => response.json()
       ).then(
-        collection => dispatch(updateCollectionSuccess(collection)),
+        update => dispatch(updateCollectionSuccess(collection, update)),
         err => dispatch(updateCollectionFailure(collection, err))
       )
   }
