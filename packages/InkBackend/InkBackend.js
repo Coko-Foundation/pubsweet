@@ -3,6 +3,7 @@ const rp = require('request-promise-native')
 const Busboy = require('busboy')
 const temp = require('temp').track()
 const fs = require('fs')
+const path = require('path')
 const promiseRetry = require('promise-retry')
 
 let inkConfig = config.get('pubsweet-component-ink-backend')
