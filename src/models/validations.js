@@ -23,9 +23,14 @@ let validations = {
     title: Joi.string(),
     rev: Joi.string(),
     owners: Joi.array().items(Joi.string().guid()),
-    fragments: Joi.array().items(Joi.object({
-      type: Joi.string().valid('fragment')
-    }).unknown(true))
+    fragments: Joi.array().items(
+      Joi.alternatives().try(
+        // a fragment ID
+        Joi.string(),
+        // or a fragment object
+        Joi.object({ type: Joi.string().valid('fragment') }).unknown(true)
+      )
+    )
   },
   user: {
     id: Joi.string().guid().required(),
