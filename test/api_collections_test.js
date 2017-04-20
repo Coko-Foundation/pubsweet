@@ -83,6 +83,28 @@ describe('Collections API', () => {
       expect(result.title).toEqual(title)
     })
 
+    it('should allow an admin user to update a collection with some fragments', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create some fragments
+      await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
+      await api.collections.createFragment(collection.id, fixtures.updatedFragment, adminToken)
+
+      // update the collection
+      const title = 'Updated title'
+
+      const result = await api.collections.update(collection.id, { title }, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(result.title).toEqual(title)
+    })
+
     it('should allow an admin user to delete a collection', async () => {
       const adminToken = await authenticateAdmin()
 
