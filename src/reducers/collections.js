@@ -30,7 +30,10 @@ export default function (state = [], action) {
   }
 
   function addCollection () {
-    collections.push(action.collection)
+    // only add the collection if it hasn't already been added
+    if (!getCollection()) {
+      collections.push(action.collection)
+    }
 
     return collections
   }
