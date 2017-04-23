@@ -19,6 +19,8 @@ class UpdateSubscriber extends Component {
     this.state = {
       connected: false
     }
+
+    this.listeners = {}
   }
 
   componentDidMount () {
@@ -33,7 +35,7 @@ class UpdateSubscriber extends Component {
 
   componentWillUnmount () {
     if (this.eventSource) {
-      this.eventSource.removeAllListeners()
+      this.removeAllEventListeners()
       this.eventSource.close()
       // delete this.eventSource
     }
@@ -75,7 +77,7 @@ class UpdateSubscriber extends Component {
 
       this.eventSource = new window.EventSource(url)
 
-      this.eventSource.addEventListener('error', () => {
+      this.listeners.error = this.eventSource.addEventListener('error', () => {
         // console.log('error', this.eventSource.readyState)
 
         switch (this.eventSource.readyState) {
@@ -90,14 +92,14 @@ class UpdateSubscriber extends Component {
         }
       })
 
-      this.eventSource.addEventListener('close', () => {
+      this.listeners.close = this.eventSource.addEventListener('close', () => {
         console.log('close')
 
         this.setState({connected: false})
         // this.monitor() // don't try to reconnect, as "close" without error is deliberate
       })
 
-      this.eventSource.addEventListener('message', event => {
+      this.listeners.message = this.eventSource.addEventListener('message', event => {
         // console.log('message', event)
 
         if (event.origin !== window.location.origin) {
@@ -112,17 +114,23 @@ class UpdateSubscriber extends Component {
         handleUpdate(actionType, data)
       })
 
-      this.eventSource.addEventListener('open', () => {
+      this.listeners.open = this.eventSource.addEventListener('open', () => {
         // console.log('open')
         this.setState({ connected: true })
       })
 
       // listen for a heartbeat message
-      this.eventSource.addEventListener('pulse', () => {
+      this.listeners.pulse = this.eventSource.addEventListener('pulse', () => {
         // console.log('❤️')
         this.monitor()
       })
     }
+  }
+
+  removeAllEventListeners () {
+    Object.keys(this.listeners).forEach(key => {
+      this.eventSource.removeEventListener(key, this.listeners[key])
+    })
   }
 
   render () {
