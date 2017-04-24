@@ -40,7 +40,10 @@ const prepareEntities = result => {
     password: result.password,
     admin: true
   }
-  const collection = { title: result.collection }
+  const collection = {
+    title: result.collection,
+    created: Date.now()
+  }
   return Promise.resolve({ user, collection })
 }
 
