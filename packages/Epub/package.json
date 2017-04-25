@@ -1,0 +1,16 @@
+{
+  "name": "pubsweet-component-epub",
+  "version": "0.0.1",
+  "description": "Backend EPUB export component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "html-epub": "^0.0.3",
+    "pubsweet": "^0.3.0",
+    "pubsweet-server": "^0.8.1"
+  }
+}
