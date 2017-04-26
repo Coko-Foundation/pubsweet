@@ -1,14 +1,18 @@
 {
   "name": "pubsweet-sse",
   "description": "Broadcast server-sent events to connected Express clients",
-  "main": "lib/SSE.js",
+  "version": "0.1.0",
   "homepage": "https://gitlab.coko.foundation/pubsweet/pubsweet-sse",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-sse.git"
+    "url": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-sse.git"
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
+  "main": "lib/SSE.js",
+  "files": [
+    "lib"
+  ],
   "engines": {
     "node": ">= 6"
   },
@@ -20,6 +24,5 @@
     "parserOptions": {
       "ecmaVersion": 6
     }
-  },
-  "version": "0.1.0"
+  }
 }
