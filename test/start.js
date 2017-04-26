@@ -23,30 +23,30 @@ describe('start', () => {
     const tmpdir = await workingdir()
     const appdir = fs.mkdirsSync(path.join(tmpdir, appname))
     process.chdir(appdir)
-    logger.info('created directory')
+    logger.info('Created directory')
 
     await require('../src/generate-config')()
-    logger.info('config generated')
+    logger.info('Config generated')
 
     await require('../src/generate-env')()
-    logger.info('env generated')
+    logger.info('Env generated')
 
     await require('../src/initial-app')(appname)
-    logger.info('app generated')
+    logger.info('App generated')
 
     await require('../src/setup-db')({
       properties: require('../src/db-properties'),
       override: dbconfig
     })
-    logger.info('db created')
+    logger.info('DB created')
 
     require('../src/load-config')(path.resolve('', './config'))
-    logger.info('config loaded')
+    logger.info('Config loaded')
 
-    logger.info('starting server')
+    logger.info('Starting server')
     require('../src/start')(_server => {
       server = _server
-      logger.info('server started')
+      logger.info('Server started')
       done()
     })
   })
@@ -54,7 +54,7 @@ describe('start', () => {
   afterAll(done => {
     logger.info('stopping the server')
     server.close(() => {
-      logger.info('server stopped')
+      logger.info('Server stopped')
       done()
     })
   })

@@ -3,14 +3,15 @@ const path = require('path')
 const logger = require('./logger')
 const Git = require('git-wrapper2-promise')
 const spawn = require('child-process-promise').spawn
+const logthrow = require('./error-log-throw')
 
 const getpkgjson = name => {
   return JSON.stringify({
     name: name,
     description: 'A new pubsweet app',
     dependencies: {
-      'pubsweet-server': '^0.7.2',
-      'pubsweet-client': '^0.8.2',
+      'pubsweet-server': '^0.8.0',
+      'pubsweet-client': '^0.9.0',
       'pubsweet-component-blog': '^0.1.1',
       'pubsweet-component-login': '^0.2.2',
       'pubsweet-component-posts-manager': '^0.1.1',
@@ -95,15 +96,19 @@ const copyapp = () => new Promise(
 
 const install = () => {
   logger.info('Installing app dependencies...')
+  const env = Object.create(process.env)
+  env.NODE_ENV = 'dev'
+
   return spawn(
     'yarn',
     ['--ignore-optional', '--no-progress'],
     {
       cwd: process.cwd(),
       stdio: process.env.SILENT_INSTALL ? 'ignore' : 'inherit',
-      shell: true
+      shell: true,
+      env: env
     }
-  ).catch(childProcess => logger.error('yarn install failed:', childProcess.stderr))
+  )
 }
 
 const gitsetup = () => {
@@ -123,21 +128,21 @@ const gitsetup = () => {
   ).then(
     () => git.commit('Initial app commit')
   ).then(
-    () => new Promise((resolve) => {
+    () => new Promise(resolve => {
       logger.info('git repository set up in app directory with initial commit')
       resolve()
     })
-  ).catch(childProcess => logger.error('git setup failed:', childProcess.stderr))
-}
-
-module.exports = name => {
-  return writepkgjson(
-    name
-  ).then(
-    () => copyapp(name)
-  ).then(
-    install
-  ).then(
-    gitsetup
   )
 }
+
+module.exports = name => writepkgjson(
+  name
+).then(
+  () => copyapp(name)
+).then(
+  install
+).then(
+  gitsetup
+).catch(
+  logthrow('initial app setup failed')
+)

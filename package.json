@@ -4,14 +4,13 @@
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
-    "lint": "eslint bin src test",
+    "lint": "eslint bin src cli test",
     "pretest": "npm run lint",
-    "test": "NODE_ENV=test jest --runInBand --no-cache",
-    "testdocker": "NODE_ENV=test jest --runInBand --no-watchman --no-cache --verbose --forceExit",
+    "test": "NODE_ENV=test jest --runInBand --no-cache test/*.js test/cli/*.js",
+    "testdocker": "NODE_ENV=test jest --runInBand --no-watchman --no-cache --verbose --forceExit test/*.js test/cli/*.js",
     "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
-    "testchanged": "NODE_ENV=test jest -o",
-    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --verbose --env jest-environment-node-debug",
-    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
+    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --verbose --env jest-environment-node-debug test/*.js test/cli/*.js",
+    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest test/*.js test/cli/*.js"
   },
   "keywords": [
     "pubsweet",
@@ -41,7 +40,7 @@
     "webpack-dev-middleware": "^1.8.2",
     "webpack-hot-middleware": "^2.13.2",
     "winston": "^2.2.0",
-    "yarn": "0.22"
+    "yarn": "0.23.2"
   },
   "repository": {
     "type": "git",
@@ -51,27 +50,30 @@
     "app-module-path": "^2.2.0",
     "babel-eslint": "^7.2.1",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "chai-string": "^1.3.0",
+    "clear-require": "^2.0.0",
     "eslint": "^3.19.0",
     "jest": "^19.0.2",
     "nightmare": "^2.9.1",
     "nightmare-wait-for-url": "0.0.2",
+    "simple-get": "^2.5.1",
     "standard": "^10.0.1"
   },
   "jest": {
-    "testRegex": "/test/[^/]*\\.jsx?$",
+    "testRegex": "/test/.*\\.jsx?$",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/*.js",
-      "bin/*.js"
+      "cli/*.js"
     ],
     "modulePaths": [
       "<rootDir>/node_modules"
     ],
     "testEnvironment": "node",
     "unmockedModulePathPatterns": [
-      "\/src\/models"
+      "/src/models"
     ],
-    "verbose": false
+    "verbose": true
   }
 }
