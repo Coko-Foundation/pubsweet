@@ -6,8 +6,8 @@ const passport = require('passport')
 const index = require('./routes/index')
 const api = require('./routes/api')
 const logger = require('./logger')
+const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
-const sse = require('./sse')
 const models = require('./models')
 
 module.exports = (app = express()) => {
