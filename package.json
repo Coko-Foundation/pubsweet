@@ -1,6 +1,6 @@
 {
   "name": "pubsweet",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
@@ -55,6 +55,7 @@
     "clear-require": "^2.0.0",
     "eslint": "^3.19.0",
     "jest": "^19.0.2",
+    "joi": "^10.4.1",
     "nightmare": "^2.9.1",
     "nightmare-wait-for-url": "0.0.2",
     "simple-get": "^2.5.1",
