@@ -32,7 +32,7 @@ const logResult = result => new Promise(
   }
 )
 
-const prepareEntities = result => {
+const prepareEntities = result => new Promise(resolve => {
   const user = {
     username: result.username,
     email: result.email,
@@ -40,10 +40,10 @@ const prepareEntities = result => {
     admin: true
   }
   const collection = { title: result.collection }
-  return Promise.resolve({ user, collection })
-}
+  resolve({ user, collection })
+})
 
-const setupModels = options => {
+const setupModels = options => new Promise((resolve, reject) => {
   logger.info('Setting up DB models in', serverpath())
 
   const Collection = require(`${serverpath()}/src/models/Collection`)
@@ -61,18 +61,18 @@ const setupModels = options => {
   const resolvewithdata = collection => {
     logger.info('Created initial collection: ', collection.title)
     admin.password = options.user.password
-    return Promise.resolve({
+    resolve({
       user: admin,
       collection: collection
     })
   }
 
-  return admin.save().then(
+  admin.save().then(
     makecollection
   ).then(
     resolvewithdata
-  )
-}
+  ).catch(reject)
+})
 
 module.exports = options => {
   logger.info('Setting up the database')

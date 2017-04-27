@@ -1,11 +1,11 @@
 const path = require('path')
 
 module.exports = opts => async () => {
-  await require('../src/check-no-app')(opts)()
-  await require('../src/chdir')(opts.appPath)()
-  await require('../src/generate-config')()
-  await require('../src/generate-env')()
-  await require('../src/initial-app')(opts.appPath)
-  require('../src/load-config')(path.resolve('', './config'))
-  await require('../src/setup-db')(opts)
+  await require('./check-no-app')(opts)()
+  await require('./chdir')(opts.appPath)()
+  await require('./generate-config')()
+  await require('./generate-env')()
+  await require('./initial-app')(opts.appPath)
+  require('./load-config')(path.resolve('', './config'))
+  await require('./setup-db')(opts)
 }
