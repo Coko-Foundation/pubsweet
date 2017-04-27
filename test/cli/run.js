@@ -20,15 +20,18 @@ const answers = {
 }
 
 const expectrunning = child => new Promise(
-  resolve => setTimeout(
-    () => get('http://localhost:3000', (err, res) => {
+  resolve => {
+    let tries = 0
+    const dotry = () => get('http://localhost:3000', (err, res) => {
+      tries ++
+      if (err && tries < 7) return setTimeout(dotry, 5000)
       expect(err).to.not.exist
       expect(res.statusCode).to.equal(200)
       child.stop()
       resolve()
-    }),
-    30000
-  )
+    })
+    dotry()
+  }
 )
 
 const expectstopped = () => new Promise(
