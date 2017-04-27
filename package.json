@@ -7,6 +7,7 @@
     "lint": "eslint bin src cli test",
     "pretest": "npm run lint",
     "test": "NODE_ENV=test jest --runInBand --no-cache test/*.js test/cli/*.js",
+    "testonly": "NODE_ENV=test jest --runInBand --no-cache",
     "testdocker": "NODE_ENV=test jest --runInBand --no-watchman --no-cache --verbose --forceExit test/*.js test/cli/*.js",
     "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
     "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --verbose --env jest-environment-node-debug test/*.js test/cli/*.js",
