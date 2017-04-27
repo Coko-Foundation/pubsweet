@@ -24,7 +24,7 @@ const expectrunning = child => new Promise(
     let tries = 0
     const dotry = () => get('http://localhost:3000', (err, res) => {
       tries ++
-      if (err && tries < 7) return setTimeout(dotry, 5000)
+      if (err && tries < 12) return setTimeout(dotry, 5000)
       expect(err).to.not.exist
       expect(res.statusCode).to.equal(200)
       child.stop()
