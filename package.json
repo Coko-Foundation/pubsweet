@@ -41,7 +41,7 @@
     "webpack-dev-middleware": "^1.8.2",
     "webpack-hot-middleware": "^2.13.2",
     "winston": "^2.2.0",
-    "yarn": "0.22"
+    "yarn": "^0.23.2"
   },
   "repository": {
     "type": "git",
