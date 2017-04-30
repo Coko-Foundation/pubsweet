@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-signup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Basic signup form component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -13,9 +13,9 @@
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
-    "redux": "^3.6.0",
-    "react-router": "^2.6.1"
+    "redux": "^3.6.0"
   },
   "repository": {
     "type": "git",

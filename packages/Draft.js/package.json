@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-draft",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Basic Draft.js component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-client": ">=0.8.0",
     "draft-js": "^0.9.1",
+    "pubsweet-client": ">=0.8.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-redux": "^4.4.5",

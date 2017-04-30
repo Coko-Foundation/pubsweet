@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-blog",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Basic blog component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-component-manage": "^0.1.3",
     "pubsweet-client": ">=0.8.0",
+    "pubsweet-component-manage": "^0.1.4",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-redux": "^4.4.5",
