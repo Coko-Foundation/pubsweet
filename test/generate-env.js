@@ -1,5 +1,7 @@
 require('app-module-path').addPath(__dirname + '/..')
 
+process.env.NODE_ENV = 'test'
+
 const generate = require('../src/generate-env')
 const workingdir = require('./helpers/working_dir')
 const expect = require('chai').expect
