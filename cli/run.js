@@ -15,6 +15,8 @@ module.exports = args => {
 
   program.parse(args || process.argv)
 
+  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+
   const appPath = path.resolve(program.args[0] || process.cwd())
 
   logger.info('Starting PubSweet app:', appPath)
@@ -28,8 +30,6 @@ module.exports = args => {
     }
     return cmd.split(' ')
   }
-
-  logger.info('node env', process.env.NODE_ENV)
 
   const logpath = type => path.join(
     appPath,
@@ -48,10 +48,11 @@ module.exports = args => {
         logFile: logpath('forever'),
         outFile: logpath('stdout'),
         errFile: logpath('stderr'),
-        cwd: process.cwd(),
+        cwd: appPath,
         env: {
           NODE_ENV: process.env.NODE_ENV,
-          REDUXLOG_OFF: process.env.REDUXLOG_OFF
+          REDUXLOG_OFF: process.env.REDUXLOG_OFF,
+          NODE_CONFIG_DIR: path.join(appPath, 'config')
         }
       }
     )

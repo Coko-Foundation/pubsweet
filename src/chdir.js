@@ -5,7 +5,7 @@ module.exports = appPath => () => new Promise(
   resolve => {
     fs.mkdirsSync(appPath)
     process.chdir(appPath)
-    require('../src/load-config')(path.resolve('', './config'))
+    require('../src/load-config')(path.resolve(appPath, './config'))
     resolve()
   }
 )

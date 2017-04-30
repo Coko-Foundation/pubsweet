@@ -1,3 +1,4 @@
+require('app-module-path').addPath(process.cwd())
 const path = require('path')
 const serverpath = require('./server-path')
 const dotenvPath = path.join(process.cwd(), `.env.${process.env.NODE_ENV}`)
@@ -8,9 +9,10 @@ const http = require('http')
 const express = require('express')
 const webpack = require('webpack')
 const pubsweet = require(`${serverpath()}`)
-const config = require(path.join(process.cwd(), `config/${process.env.NODE_ENV}`))
 
 const logger = require('./logger')
+
+const config = require(path.join(process.cwd(), `config/${process.env.NODE_ENV}`))
 
 const collect = (val, memo) => memo.push(val) && memo
 
@@ -30,7 +32,9 @@ if (process.env.NODE_ENV === 'test') webpackconfig.target = 'electron-main'
 const onError = err => logger.error(err.stack) && process.exit(1)
 
 const registerDevtools = (app, compiler, cb) => {
-  app.use(require('webpack-dev-middleware')(compiler, {
+  app.use(require(
+    path.join(process.cwd(), 'node_modules', 'webpack-dev-middleware')
+  )(compiler, {
     noInfo: true,
     stats: {
       colors: true,
@@ -39,7 +43,11 @@ const registerDevtools = (app, compiler, cb) => {
     publicPath: '/assets/'
   }))
 
-  app.use(require('webpack-hot-middleware')(compiler))
+  app.use(
+    require(
+      path.join(process.cwd(), 'node_modules', 'webpack-hot-middleware')
+    )(compiler)
+  )
 
   cb()
 }
