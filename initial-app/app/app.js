@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import configureStore from 'pubsweet-client/src/store/configureStore'
-import Root from 'pubsweet-client/src/components/Root'
+import { configureStore, Root } from 'pubsweet-client'
 
 import { AppContainer } from 'react-hot-loader'
 import { browserHistory } from 'react-router'
