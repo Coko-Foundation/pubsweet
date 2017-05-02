@@ -9,7 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "joi-browser": "^10.0.6",
+    "joi-browser": "^10.0.6"
   },
   "peerDependencies": {
     "pubsweet-client": ">=0.9.0"
