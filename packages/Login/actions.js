@@ -81,10 +81,11 @@ function logoutSuccess () {
 // Logs the user out
 // Since we are using JWTs, we just need to remove the token
 // from localStorage.
-export function logoutUser () {
+export function logoutUser (redirectTo) {
   return dispatch => {
     dispatch(logoutRequest())
     localStorage.removeItem('token')
     dispatch(logoutSuccess())
+    if (redirectTo) dispatch(push(redirectTo))
   }
 }
