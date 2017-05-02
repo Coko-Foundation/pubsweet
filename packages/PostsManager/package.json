@@ -13,7 +13,7 @@
   },
   "peerDependencies": {
     "pubsweet-server": ">=0.8.1",
-    "pubsweet-client": ">=0.9.1",
+    "pubsweet-client": ">=0.9.1"
   },
   "repository": {
     "type": "git",
