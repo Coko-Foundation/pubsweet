@@ -1,11 +1,12 @@
 const path = require('path')
 const HTMLEPUB = require('html-epub')
-const Collection = require('pubsweet-server/src/models/Collection')
 const serverPath = require('pubsweet/src/backend')()
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
     try {
+      const Collection = app.locals.models.Collection
+
       const id = req.params.id
 
       res.attachment(`collection-${id}.epub`)
