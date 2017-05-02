@@ -9,12 +9,9 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "react": "^15.3.2",
-    "react-bootstrap": "^0.30.3",
-    "react-redux": "^4.4.5",
-    "react-router-redux": "^4.0.5",
-    "redux": "^3.6.0",
-    "react-router": "^2.6.1"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=0.9.0"
   },
   "repository": {
     "type": "git",
