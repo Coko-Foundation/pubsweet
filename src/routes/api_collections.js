@@ -9,7 +9,7 @@ const Authorize = require('../models/Authorize')
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
-const sse = require('../sse')
+const sse = require('pubsweet-sse')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
