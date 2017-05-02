@@ -9,7 +9,9 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "html-epub": "^0.0.3",
+    "html-epub": "^0.0.3"
+  },
+  "peerDependencies": {
     "pubsweet": "^0.3.0",
     "pubsweet-server": "^0.8.1"
   }
