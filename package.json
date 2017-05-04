@@ -20,6 +20,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "authsome": "0.0.4",
     "child-process-promise": "^2.2.1",
     "chokidar": "^1.6.1",
@@ -45,7 +46,6 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-cli"
   },
   "devDependencies": {
-    "app-module-path": "^2.2.0",
     "babel-eslint": "^7.2.1",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
