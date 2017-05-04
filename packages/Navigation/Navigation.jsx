@@ -6,6 +6,11 @@ import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import NavbarUser from './NavbarUser'
 
 export default class Navigation extends React.Component {
+  constructor (props) {
+    super(props)
+    this.logoutClick = this.logoutClick.bind(this)
+    this.redirectTo = CONFIG['pubsweet-client']['logout-redirect'] || '/'
+  }
   render () {
     const { actions, currentUser } = this.props
     let logoutButtonIfAuthenticated
@@ -40,6 +45,10 @@ export default class Navigation extends React.Component {
         { logoutButtonIfAuthenticated }
       </Navbar>
     )
+  }
+  logoutClick (event) {
+    event.preventDefault()
+    this.props.actions.logoutUser(this.redirectTo)
   }
 }
 
