@@ -51,7 +51,7 @@ module.exports = args => {
         cwd: appPath,
         env: {
           NODE_ENV: process.env.NODE_ENV,
-          REDUXLOG_OFF: process.env.REDUXLOG_OFF,
+          REDUXLOG_OFF: program.reduxlogOff,
           NODE_CONFIG_DIR: path.join(appPath, 'config')
         }
       }
