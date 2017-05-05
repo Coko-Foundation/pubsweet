@@ -47,15 +47,15 @@ export default class TeamCreator extends React.Component {
   }
 
   onFragmentSelect (fragment) {
-    this.setState({fragmentSelected: fragment.value})
+    this.setState({fragmentSelected: fragment ? fragment.value : null})
   }
 
   onCollectionSelect (collection) {
-    this.setState({collectionSelected: collection.value})
+    this.setState({collectionSelected: collection ? collection.value : null})
   }
 
   onTeamTypeSelect (teamType) {
-    this.setState({teamTypeSelected: teamType.value})
+    this.setState({teamTypeSelected: teamType ? teamType.value : null})
   }
 
   render () {
