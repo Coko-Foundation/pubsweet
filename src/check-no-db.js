@@ -11,11 +11,14 @@ module.exports = opts => () => new Promise(
       logger.info('Database appears to already exist')
       if (opts.override && opts.override.clobber) {
         logger.info('Overwriting existing database due to --clobber flag')
-        const dbdirs = fs.readdirSync(path.join(opts.appPath, 'api', 'db'))
+        const rootDbDir = path.join(opts.appPath, 'api', 'db')
+        const dbdirs = fs.readdirSync(rootDbDir)
         dbdirs.forEach(dbdir => {
           const parts = path.parse(dbdir)
           if ((new RegExp(process.env.NODE_ENV)).test(parts.base)) {
-            fs.removeSync(dbdir)
+            const removingDir = path.join(rootDbDir, dbdir)
+            logger.info('Removing', removingDir)
+            fs.removeSync(removingDir)
           }
         })
         return resolve()
