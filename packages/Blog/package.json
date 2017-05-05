@@ -1,0 +1,22 @@
+{
+  "name": "pubsweet-component-blog",
+  "version": "0.1.5",
+  "description": "Basic blog component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "pubsweet-component-manage": "^0.1.5"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "Blog"
+  }
+}

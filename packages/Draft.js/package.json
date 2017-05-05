@@ -1,0 +1,22 @@
+{
+  "name": "pubsweet-component-draft",
+  "version": "0.1.3",
+  "description": "Basic Draft.js component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "draft-js": "^0.9.1"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "Draft.js"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "pubsweet-component-ink-frontend",
+  "version": "0.0.3",
+  "description": "A frontend component that talks to the INK backend component (which talks to INK for file processing and conversion)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-components"
+  },
+  "keywords": [
+    "file",
+    "processing",
+    "conversion",
+    "frontend",
+    "pubsweet",
+    "ink"
+  ],
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "escape-html": "^1.0.3",
+    "pubsweet-client": ">=0.8.0",
+    "react": "^15.3.2",
+    "react-bootstrap": "^0.30.3",
+    "react-dropzone": "^3.7.3",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "pubsweet-component-manage",
+  "version": "0.1.5",
+  "description": "Basic Manage (wrapper) component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "pubsweet-component-navigation": "^0.2.2"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "Manage"
+  }
+}
