@@ -14,8 +14,7 @@ class TeamsManager extends React.Component {
     ).then(
       () => this.props.actions.getCollections()
     ).then(
-      // TODO: This will have to work for multiple collections
-      (result) => this.props.actions.getFragments(result.collections[0])
+      (result) => Promise.all(result.collections.map(collection => this.props.actions.getFragments(collection)))
     )
   }
 
@@ -37,7 +36,7 @@ class TeamsManager extends React.Component {
 
     if (teams && collections && fragments && users) {
       return (
-        <div className="bootstrap">
+        <div className="bootstrap pubsweet-component pubsweet-component-scroll">
           <Grid>
             { error ? <Alert bsStyle="warning">{error}</Alert> : null}
             <div>
