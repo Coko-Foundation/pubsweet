@@ -11,7 +11,8 @@ export default class PostCreator extends React.Component {
   }
 
   onSave (text) {
-    var title = ReactDOM.findDOMNode(this.title).value
+    var titlenode = ReactDOM.findDOMNode(this.title)
+    var title = titlenode.value
 
     if (title !== '') {
       this.props.create({
@@ -21,6 +22,8 @@ export default class PostCreator extends React.Component {
         source: undefined
       })
     }
+
+    titlenode.blur()
   }
   render () {
     return (
