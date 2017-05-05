@@ -39,7 +39,12 @@ const prepareEntities = result => new Promise(resolve => {
     password: result.password,
     admin: true
   }
-  const collection = { title: result.collection }
+
+  const collection = {
+    title: result.collection,
+    created: Date.now()
+  }
+
   resolve({ user, collection })
 })
 
