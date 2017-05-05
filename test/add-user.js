@@ -18,43 +18,43 @@ describe('add-user', () => {
   let appdir
   let User
 
-
   beforeAll(async (done) => {
     const tmpdir = await workingdir()
     appdir = path.join(tmpdir, appname)
     fs.mkdirsSync(appdir)
     process.chdir(appdir)
-    logger.info('created directory')
+    logger.info('Created directory')
 
     await require('../src/generate-config')()
-    logger.info('config generated')
+    logger.info('Config generated')
 
     await require('../src/generate-env')()
-    logger.info('env generated')
+    logger.info('Env generated')
 
     await require('../src/initial-app')(appname)
-    logger.info('app generated')
+    logger.info('App generated')
 
     await require('../src/setup-db')({
       properties: require('../src/db-properties'),
       override: dbconfig
     })
-    logger.info('db created')
+    logger.info('DB created')
 
     require('../src/load-config')(path.resolve('', './config'))
-    logger.info('config loaded')
+    logger.info('Config loaded')
 
-    const backend = require('../src/backend')
-    User = require(`${backend()}/src/models/User`)
+    const serverpath = require('../src/server-path')
+    User = require(`${serverpath()}/src/models/User`)
 
     done()
   })
 
   it('adds a regular user to the database',
     () => require('../src/add-user')({
+      appPath: appdir,
       properties: require('../src/user-properties'),
       override: fixtures.regularuser
-    })().then(
+    }).then(
       () => User.all()
     ).then(
       users => {
@@ -68,9 +68,10 @@ describe('add-user', () => {
 
   it('adds an admin user to the database',
     () => require('../src/add-user')({
+      appPath: appdir,
       properties: require('../src/user-properties'),
       override: fixtures.adminuser
-    })().then(
+    }).then(
       () => User.all()
     ).then(
       users => {

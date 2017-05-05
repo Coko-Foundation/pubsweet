@@ -1,8 +1,10 @@
+process.env.PUBSWEET_BACKEND_SILENT = true
+
 const colors = require('colors/safe')
 const logger = require('./logger')
-const backend = require('./backend')
+const serverpath = require('./server-path')
 
-const runPrompt = options => new Promise(
+const runPrompt = options => () => new Promise(
   (resolve, reject) => {
     const prompt = require('prompt')
 
@@ -18,7 +20,7 @@ const runPrompt = options => new Promise(
   }
 )
 
-const logResult = result => new Promise(
+const logInput = result => new Promise(
   resolve => {
     logger.info('Received the following answers:')
 
@@ -31,10 +33,18 @@ const logResult = result => new Promise(
   }
 )
 
+const logResult = result => new Promise(
+  resolve => {
+    logger.info(`Successfully added user: ${result.username}`)
+
+    resolve(result)
+  }
+)
+
 const maybeaddowner = user => new Promise(
-  (resolve) => {
+  resolve => {
     if (user.admin) {
-      const Collection = require(`${backend()}/src/models/Collection`)
+      const Collection = require(`${serverpath()}/src/models/Collection`)
       Collection.all().then(
         collections => {
           collections = collections.map(c => {
@@ -54,15 +64,23 @@ const maybeaddowner = user => new Promise(
 )
 
 const setup = options => {
-  const User = require(`${backend()}/src/models/User`)
+  const User = require(`${serverpath()}/src/models/User`)
   const newuser = new User(options)
   return newuser.save().then(maybeaddowner)
 }
 
-module.exports = options => () => runPrompt(
-  options
+module.exports = options => require('./check-exists')(
+  options.appPath
+)().then(
+  require('./check-db')(options.appPath)
 ).then(
-  logResult
+  require('./chdir')(options.appPath)
+).then(
+  runPrompt(options)
+).then(
+  logInput
 ).then(
   setup
+).then(
+  logResult
 )
