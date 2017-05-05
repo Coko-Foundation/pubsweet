@@ -9,6 +9,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "pubsweet-component-navigation": "^0.2.2"
   },
   "peerDependencies": {
