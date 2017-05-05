@@ -5,6 +5,8 @@ import {
   UPDATE_USER_SUCCESS
 } from '../actions/types'
 
+import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
+
 // The users reducer.
 export default function (state = {
   isFetching: false
@@ -35,6 +37,11 @@ export default function (state = {
       return Object.assign({}, state, {
         isFetching: false
       })
+
+    case LOGOUT_SUCCESS:
+      return {
+        isFetching: false
+      }
     default:
       return state
   }
