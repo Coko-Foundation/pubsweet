@@ -1,8 +1,8 @@
-const token = require('../helpers/authtoken')
-
 import {
   GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE
 } from '../actions/types'
+
+const token = require('../helpers/authtoken')
 
 export default function (state = {
   isFetching: false,

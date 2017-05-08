@@ -30,13 +30,18 @@ export default function (state = [], action) {
   }
 
   function addCollection () {
-    collections.push(action.collection)
+    // only add the collection if it hasn't already been added
+    if (!getCollection()) {
+      collections.push(action.collection)
+    }
 
     return collections
   }
 
   function updateCollection () {
-    collections[getCollectionIndex()] = action.collection
+    const index = getCollectionIndex()
+
+    collections[index] = Object.assign(collections[index], action.update)
 
     return collections
   }
@@ -50,6 +55,8 @@ export default function (state = [], action) {
   function addFragments () {
     const collection = getCollection()
 
+    if (!collection) return
+
     let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)
 
     collection.fragments = union(collection.fragments, toadd)
@@ -58,6 +65,8 @@ export default function (state = [], action) {
 
   function removeFragments () {
     const collection = getCollection()
+
+    if (!collection) return
 
     const todel = (action.fragments || [action.fragment]).map(fragment => fragment.id)
     collection.fragments = difference(collection.fragments, todel)
