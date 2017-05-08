@@ -1,6 +1,7 @@
 import './Summary.scss'
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -36,6 +37,5 @@ export default class Summary extends React.Component {
 }
 
 Summary.propTypes = {
-  fragment: React.PropTypes.object.isRequired
-  // blogpost: React.PropTypes.object
+  fragment: PropTypes.object.isRequired
 }

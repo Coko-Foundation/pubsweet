@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import { Button } from 'react-bootstrap'
@@ -61,11 +62,11 @@ class Team extends React.Component {
 }
 
 Team.propTypes = {
-  team: React.PropTypes.object.isRequired,
-  number: React.PropTypes.number,
-  update: React.PropTypes.func.isRequired,
-  delete: React.PropTypes.func.isRequired,
-  users: React.PropTypes.array.isRequired
+  team: PropTypes.object.isRequired,
+  number: PropTypes.number,
+  update: PropTypes.func.isRequired,
+  delete: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
 }
 
 export default Team

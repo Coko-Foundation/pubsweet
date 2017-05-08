@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Actions from 'pubsweet-client/src/actions'
@@ -70,17 +71,16 @@ class ScienceReader extends React.Component {
 
 ScienceReader.propTypes = {
   // Data
-  blogpost: React.PropTypes.object,
+  blogpost: PropTypes.object,
   // Injected by React Redux
-  // errorMessage: React.PropTypes.string,
+  // errorMessage: PropTypes.string,
   // Injected by React Router
-  actions: React.PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps (state, ownProps) {
   return {
     blogpost: state.fragments[ownProps.params.id]
-    // errorMessage: state.errorMessage
   }
 }
 

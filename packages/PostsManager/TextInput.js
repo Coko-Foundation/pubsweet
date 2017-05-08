@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 const ENTER_KEY_CODE = 13
 
 export default class TextInput extends React.Component {
@@ -47,9 +48,9 @@ export default class TextInput extends React.Component {
 }
 
 TextInput.propTypes = {
-  className: React.PropTypes.string,
-  id: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  onSave: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string
+  className: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  onSave: PropTypes.func.isRequired,
+  value: PropTypes.string
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 import Joi from 'joi-browser'
 
@@ -61,11 +62,11 @@ class PubSweetFormGroup extends React.Component {
 }
 
 PubSweetFormGroup.propTypes = {
-  controlId: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  modelProperty: React.PropTypes.string,
-  inputRef: React.PropTypes.func
+  controlId: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  modelProperty: PropTypes.string,
+  inputRef: PropTypes.func
 }
 
 export default PubSweetFormGroup

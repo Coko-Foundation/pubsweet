@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Post from './Post'
 
 import styles from './PostList.scss'
@@ -39,9 +40,9 @@ export default class PostList extends React.Component {
 }
 
 PostList.propTypes = {
-  update: React.PropTypes.func,
-  delete: React.PropTypes.func,
-  blogposts: React.PropTypes.array,
-  blog: React.PropTypes.object,
-  currentUser: React.PropTypes.object
+  update: PropTypes.func,
+  delete: PropTypes.func,
+  blogposts: PropTypes.array,
+  blog: PropTypes.object,
+  currentUser: PropTypes.object
 }

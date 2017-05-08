@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router'
 import { loginUser } from './actions'
@@ -60,21 +61,24 @@ class Login extends Component {
     this.props.actions.loginUser(credentials, this.redirectTo)
   }
 }
+
 Login.propTypes = {
   actions: PropTypes.object,
   location: PropTypes.object
-  // error: PropTypes.string
 }
+
 function mapState (state) {
   return {
     error: state.error
   }
 }
+
 function mapDispatch (dispatch) {
   return {
     actions: bindActionCreators({ loginUser }, dispatch)
   }
 }
+
 export default connect(
   mapState, mapDispatch
 )(Login)

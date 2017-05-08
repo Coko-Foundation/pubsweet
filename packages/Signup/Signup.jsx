@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
@@ -64,7 +65,6 @@ class Signup extends Component {
 
 Signup.propTypes = {
   actions: PropTypes.object
-  // error: PropTypes.string
 }
 
 function mapState (state) {

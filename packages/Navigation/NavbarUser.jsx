@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Nav, NavItem } from 'react-bootstrap'
 import UpdateSubscriber from 'pubsweet-client/src/components/UpdateSubscriber'
 

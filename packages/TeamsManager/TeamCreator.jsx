@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { FormControl, Button, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
@@ -134,8 +135,8 @@ export default class TeamCreator extends React.Component {
 }
 
 TeamCreator.propTypes = {
-  collections: React.PropTypes.array,
-  fragments: React.PropTypes.object,
-  types: React.PropTypes.object,
-  create: React.PropTypes.func
+  collections: PropTypes.array,
+  fragments: PropTypes.object,
+  types: PropTypes.object,
+  create: PropTypes.func
 }

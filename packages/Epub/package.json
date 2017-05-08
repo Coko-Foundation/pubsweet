@@ -12,7 +12,7 @@
     "html-epub": "^0.1.0"
   },
   "peerDependencies": {
-    "pubsweet": "^0.3.0",
-    "pubsweet-server": "^0.8.1"
+    "pubsweet": ">=0.3.2",
+    "pubsweet-server": ">=0.8.1"
   }
 }
