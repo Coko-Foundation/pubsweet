@@ -16,7 +16,9 @@ export default class TeamCreator extends React.Component {
     }
   }
 
-  onSave () {
+  onSave (event) {
+    event.preventDefault()
+
     let name = ReactDOM.findDOMNode(this.refs.name).value
     let teamType = this.state.teamTypeSelected
 
@@ -63,7 +65,7 @@ export default class TeamCreator extends React.Component {
     }))
 
     return (
-      <div>
+      <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
         <FormControl
           type='text'
@@ -71,7 +73,7 @@ export default class TeamCreator extends React.Component {
           label='Name'
           name='teamName'
           ref='name'
-        />
+          required />
         <Row>
           <Col md={3}>
             <h4>Team type</h4>
@@ -80,7 +82,7 @@ export default class TeamCreator extends React.Component {
               options={types}
               value={this.state.teamTypeSelected}
               onChange={this.onTeamTypeSelect}
-            />
+              required />
           </Col>
           <Col md={9}>
             <h4>Collection</h4>
@@ -89,14 +91,13 @@ export default class TeamCreator extends React.Component {
               options={collections}
               value={this.state.collectionSelected}
               onChange={this.onCollectionSelect}
-            />
+              required />
           </Col>
         </Row>
         <br />
-        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
-          <i className='fa fa-plus' /> Create
-        </Button>
-      </div>
+        <Button bsStyle='primary' type='submit' title='Create' aria-label='Create'>
+          <i className='fa fa-plus' /> Create</Button>
+      </form>
     )
   }
 }
