@@ -13,13 +13,11 @@ class TeamsManager extends React.Component {
       () => this.props.actions.getTeams()
     ).then(
       () => this.props.actions.getCollections()
-    ).then(
-      (result) => Promise.all(result.collections.map(collection => this.props.actions.getFragments(collection)))
     )
   }
 
   render () {
-    let { teams, actions, error, users, collections, fragments } = this.props
+    let { teams, actions, error, users, collections } = this.props
 
     if (teams) {
       teams = teams.map((team, key) => {
@@ -34,7 +32,7 @@ class TeamsManager extends React.Component {
       })
     }
 
-    if (teams && collections && fragments && users) {
+    if (teams && collections && users) {
       return (
         <div className="bootstrap pubsweet-component pubsweet-component-scroll">
           <Grid>
@@ -58,7 +56,6 @@ class TeamsManager extends React.Component {
               <TeamCreator
                 create={actions.createTeam}
                 collections={collections}
-                fragments={fragments}
                 types={CONFIG.authsome.teams}
               />
             </div>
@@ -73,7 +70,6 @@ class TeamsManager extends React.Component {
 
 TeamsManager.propTypes = {
   collections: React.PropTypes.array,
-  fragments: React.PropTypes.object,
   users: React.PropTypes.array,
   teams: React.PropTypes.array,
   actions: React.PropTypes.object.isRequired,
@@ -83,7 +79,6 @@ TeamsManager.propTypes = {
 function mapStateToProps (state) {
   return {
     collections: state.collections,
-    fragments: state.fragments,
     teams: state.teams,
     users: state.users.users,
     error: state.error

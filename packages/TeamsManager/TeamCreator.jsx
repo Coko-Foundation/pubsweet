@@ -8,12 +8,10 @@ export default class TeamCreator extends React.Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
-    this.onFragmentSelect = this.onFragmentSelect.bind(this)
     this.onCollectionSelect = this.onCollectionSelect.bind(this)
     this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
 
     this.state = {
-      fragmentSelected: undefined,
       collectionSelected: undefined
     }
   }
@@ -25,10 +23,7 @@ export default class TeamCreator extends React.Component {
     let objectId
     let objectType
 
-    if (this.state.fragmentSelected) {
-      objectId = this.state.fragmentSelected
-      objectType = 'fragment'
-    } else if (this.state.collectionSelected) {
+    if (this.state.collectionSelected) {
       objectId = this.state.collectionSelected
       objectType = 'collection'
     }
@@ -46,10 +41,6 @@ export default class TeamCreator extends React.Component {
     }
   }
 
-  onFragmentSelect (fragment) {
-    this.setState({fragmentSelected: fragment ? fragment.value : null})
-  }
-
   onCollectionSelect (collection) {
     this.setState({collectionSelected: collection ? collection.value : null})
   }
@@ -59,7 +50,7 @@ export default class TeamCreator extends React.Component {
   }
 
   render () {
-    let { collections, fragments, types } = this.props
+    let { collections, types } = this.props
 
     collections = collections.map(collection => ({
       value: collection.id,
@@ -91,28 +82,13 @@ export default class TeamCreator extends React.Component {
               onChange={this.onTeamTypeSelect}
             />
           </Col>
-          <Col md={4}>
-            <h4>Fragment</h4>
-            <Select
-              name='fragment'
-              options={fragments}
-              value={this.state.fragmentSelected}
-              onChange={this.onFragmentSelect}
-              disabled={!!this.state.collectionSelected}
-            />
-          </Col>
-          <Col md={1}>
-            <br /><br />
-            <h3>or</h3>
-          </Col>
-          <Col md={4}>
+          <Col md={9}>
             <h4>Collection</h4>
             <Select
               name='collection'
               options={collections}
               value={this.state.collectionSelected}
               onChange={this.onCollectionSelect}
-              disabled={!!this.state.fragmentSelected}
             />
           </Col>
         </Row>
@@ -127,7 +103,6 @@ export default class TeamCreator extends React.Component {
 
 TeamCreator.propTypes = {
   collections: React.PropTypes.array,
-  fragments: React.PropTypes.object,
   types: React.PropTypes.object,
   create: React.PropTypes.func
 }
