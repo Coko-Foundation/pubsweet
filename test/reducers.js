@@ -8,6 +8,7 @@ const fragments = require('./reducers/fragments')
 const currentUser = require('./reducers/currentUser')
 const teams = require('./reducers/teams')
 const users = require('./reducers/users')
+const error = require('./reducers/error')
 
 describe('REDUCERS', () => {
   const app = require('./helpers/mockapp.json')
@@ -18,4 +19,5 @@ describe('REDUCERS', () => {
   describe('current user', () => currentUser(app))
   describe('teams', () => teams(app))
   describe('users', () => users(app))
+  describe('error', () => error())
 })
