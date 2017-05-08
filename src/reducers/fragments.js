@@ -11,6 +11,8 @@ import {
   DELETE_FRAGMENT_SUCCESS
 } from '../actions/types'
 
+import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
+
 import clone from 'lodash/clone'
 import assign from 'lodash/assign'
 import unset from 'lodash/unset'
@@ -54,6 +56,7 @@ export default function (state = {}, action) {
     case CREATE_FRAGMENT_FAILURE:
     case DELETE_FRAGMENT_SUCCESS: return removeOne()
     case GET_FRAGMENTS_SUCCESS: return replaceAll()
+    case LOGOUT_SUCCESS: return {}
   }
 
   return state
