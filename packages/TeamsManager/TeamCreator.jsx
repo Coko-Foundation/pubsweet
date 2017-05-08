@@ -61,23 +61,15 @@ export default class TeamCreator extends React.Component {
   render () {
     let { collections, fragments, types } = this.props
 
-    collections = collections.map(collection => ({value: collection.id, label: collection.title}))
-    types = Object.keys(types).map(
-      type => (
-        {
-          value: type,
-          label: (types[type].name + ' ' + types[type].permissions)
-        }
-      )
-    )
-    fragments = Object.keys(fragments).map(
-      id => (
-        {
-          value: id,
-          label: fragments[id].title
-        }
-      )
-    )
+    collections = collections.map(collection => ({
+      value: collection.id,
+      label: collection.title
+    }))
+
+    types = Object.keys(types).map(type => ({
+      value: type,
+      label: `${types[type].name} (${types[type].permissions})`
+    }))
 
     return (
       <div>
