@@ -1,20 +1,23 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "standard",
-    "standard-react"
+    "plugin:react/recommended"
   ],
-  "ecmaFeatures": {
-    "jsx": true
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
-    "browser": true,
-    "node": true
+    "es6": true,
+    "browser": true
   },
   "plugins": [
     "react"
   ],
   "globals": {
-    "CONFIG": false
+    "PUBSWEET_COMPONENTS": true,
+    "CONFIG": true
   }
 }
-
