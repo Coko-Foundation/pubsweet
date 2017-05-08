@@ -240,21 +240,29 @@ const teams = {
 }
 
 const upload = {
-  post: (file) => {
-    return request(
+  post: (file, token) => {
+    const req = request(
       api
     ).post(
       '/api/upload'
     ).attach(
       'file', file
     )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
   },
-  get: (path) => {
-    return request(
+  get: (path, token) => {
+    const req = request(
       api
     ).get(
       path
     )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
   }
 }
 
