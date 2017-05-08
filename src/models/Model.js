@@ -107,7 +107,7 @@ class Model {
   static async all () {
     const results = await db.rel.find(this.type)
 
-    return results[this.type + 's']
+    return results[this.type + 's'].map(result => new this(result))
   }
 
   // Find by id e.g.
