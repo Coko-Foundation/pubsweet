@@ -3,6 +3,7 @@
 // import { includes } from 'lodash'
 import Authsome from 'authsome'
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class Authorize extends React.Component {
@@ -47,13 +48,13 @@ class Authorize extends React.Component {
 }
 
 Authorize.propTypes = {
-  currentUser: React.PropTypes.object,
-  operation: React.PropTypes.string,
-  object: React.PropTypes.object,
-  teams: React.PropTypes.array,
-  collections: React.PropTypes.array,
-  fragments: React.PropTypes.object,
-  children: React.PropTypes.node
+  currentUser: PropTypes.object,
+  operation: PropTypes.string,
+  object: PropTypes.object,
+  teams: PropTypes.array,
+  collections: PropTypes.array,
+  fragments: PropTypes.object,
+  children: PropTypes.node
 }
 
 function mapState (state) {
@@ -66,4 +67,3 @@ function mapState (state) {
 }
 
 export default connect(mapState)(Authorize)
-

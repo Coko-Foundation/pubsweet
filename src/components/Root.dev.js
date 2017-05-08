@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router } from 'react-router'
 import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
+
 import routes from 'app/routes.jsx'
 
 export default class Root extends React.Component {
@@ -19,6 +21,6 @@ export default class Root extends React.Component {
 }
 
 Root.propTypes = {
-  history: React.PropTypes.object.isRequired,
-  store: React.PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 }
