@@ -42,8 +42,8 @@ function loginFailure (message) {
 export function loginUser (credentials, redirectTo) {
   let config = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `username=${credentials.username}&password=${credentials.password}`
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(credentials)
   }
 
   return dispatch => {
