@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -73,12 +74,12 @@ class TeamsManager extends React.Component {
 }
 
 TeamsManager.propTypes = {
-  collections: React.PropTypes.array,
-  fragments: React.PropTypes.object,
-  users: React.PropTypes.array,
-  teams: React.PropTypes.array,
-  actions: React.PropTypes.object.isRequired,
-  error: React.PropTypes.string
+  collections: PropTypes.array,
+  fragments: PropTypes.object,
+  users: PropTypes.array,
+  teams: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+  error: PropTypes.string
 }
 
 function mapStateToProps (state) {

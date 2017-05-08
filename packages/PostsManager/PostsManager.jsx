@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
 import PostList from './PostList'
 import PostCreator from './PostCreator'
@@ -47,11 +48,11 @@ class PostsManager extends React.Component {
 }
 
 PostsManager.propTypes = {
-  blog: React.PropTypes.object,
-  blogposts: React.PropTypes.array,
-  actions: React.PropTypes.object.isRequired,
-  error: React.PropTypes.string,
-  currentUser: React.PropTypes.object
+  blog: PropTypes.object,
+  blogposts: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+  error: PropTypes.string,
+  currentUser: PropTypes.object
 }
 
 function mapState (state) {

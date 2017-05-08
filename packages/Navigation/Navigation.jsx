@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 
@@ -53,6 +54,6 @@ export default class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  actions: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object
+  actions: PropTypes.object.isRequired,
+  currentUser: PropTypes.object
 }

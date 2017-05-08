@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class User extends React.Component {
   render () {
@@ -21,9 +22,8 @@ class User extends React.Component {
 }
 
 User.propTypes = {
-  user: React.PropTypes.object.isRequired,
-  number: React.PropTypes.number
-  // update: React.PropTypes.func.isRequired
+  user: PropTypes.object.isRequired,
+  number: PropTypes.number
 }
 
 export default User

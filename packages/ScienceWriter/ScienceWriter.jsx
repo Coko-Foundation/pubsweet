@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Actions from 'pubsweet-client/src/actions'
@@ -112,10 +113,9 @@ class ScienceWriter extends React.Component {
 }
 
 ScienceWriter.propTypes = {
-  fragment: React.PropTypes.object,
-  blog: React.PropTypes.object,
-  actions: React.PropTypes.object
-  // id: React.PropTypes.string.isRequired
+  fragment: PropTypes.object,
+  blog: PropTypes.object,
+  actions: PropTypes.object
 }
 
 function mapStateToProps (state, ownProps) {

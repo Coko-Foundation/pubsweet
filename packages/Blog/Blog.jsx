@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 
@@ -67,12 +68,12 @@ class Blog extends React.Component {
 
 Blog.propTypes = {
   // Data
-  blog: React.PropTypes.object,
-  posts: React.PropTypes.array,
+  blog: PropTypes.object,
+  posts: PropTypes.array,
   // Injected by React Redux
-  // errorMessage: React.PropTypes.string,
+  // errorMessage: PropTypes.string,
   // Injected by React Router
-  actions: React.PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
