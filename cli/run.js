@@ -88,9 +88,9 @@ module.exports = args => {
   }
 
   const run = async () => {
-    await require('../src/check-exists')(appPath)
-    await require('../src/check-db')(appPath)
-    await require('../src/chdir')(appPath)
+    await require('../src/check-exists')(appPath)()
+    await require('../src/check-db')(appPath)()
+    await require('../src/chdir')(appPath)()
     return spawn()
   }
 
