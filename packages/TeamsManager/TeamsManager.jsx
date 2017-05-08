@@ -9,11 +9,9 @@ import TeamCreator from './TeamCreator'
 
 class TeamsManager extends React.Component {
   componentWillMount () {
-    this.props.actions.getUsers().then(
-      () => this.props.actions.getTeams()
-    ).then(
-      () => this.props.actions.getCollections()
-    )
+    this.props.actions.getUsers()
+    this.props.actions.getTeams()
+    this.props.actions.getCollections()
   }
 
   render () {
