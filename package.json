@@ -36,6 +36,7 @@
     "pouchdb-core": "^6.1.1",
     "pouchdb-find": "^0.10.3",
     "pouchdb-upsert": "^2.0.0",
+    "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
     "pubsweet-sse": "^0.1.1",
     "relational-pouch": "^1.4.5",
