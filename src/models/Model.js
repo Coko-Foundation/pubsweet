@@ -71,7 +71,7 @@ class Model {
     return this
   }
 
-  updateProperties (properties) {
+  async updateProperties (properties) {
     // These properties are modified through setters
     delete properties.owners
 
