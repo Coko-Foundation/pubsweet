@@ -1,4 +1,5 @@
 const PouchDB = require('../src/db')
+const range = require('lodash/range')
 
 const Model = require('../src/models/Model')
 const User = require('../src/models/User')
@@ -92,5 +93,15 @@ describe('Model', function () {
       expect(err.name).toEqual('ValidationError')
       expect(err.message).toEqual('child "email" fails because ["email" must be a valid email]')
     })
+  })
+
+  it('can save the same object multiple times', async (done) => {
+    try {
+      // save the user 100 times
+      await Promise.all(range(100).map(() => user.save()))
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
   })
 })
