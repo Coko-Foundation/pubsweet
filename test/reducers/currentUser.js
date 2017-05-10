@@ -2,6 +2,7 @@ const reducers = require.requireActual('../../src/reducers/current_user')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
+const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 module.exports = app => describeReducerSet('currentUser', reducers, () => {
   const describeReducer = require.requireActual(
@@ -43,5 +44,21 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
       type: T.GET_USER_REQUEST
     },
     output: { isFetching: true, isAuthenticated: false }
+  })
+
+  describeReducer('logout success', {
+    state: {
+      user: mockuser,
+      token: mocktoken
+    },
+    action: {
+      type: LOGOUT_SUCCESS
+    },
+    output: {
+      isFetching: false,
+      isAuthenticated: false,
+      user: null,
+      token: null
+    }
   })
 })

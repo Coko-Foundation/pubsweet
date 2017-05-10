@@ -2,6 +2,7 @@ const reducers = require.requireActual('../../src/reducers/collections')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
+const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
@@ -49,5 +50,13 @@ module.exports = app => describeReducerSet('collections', reducers, () => {
       fragment: mockfrag
     },
     output: [colwithfrag]
+  })
+
+  describeReducer('logout success', {
+    state: [colwithfrag],
+    action: {
+      type: LOGOUT_SUCCESS
+    },
+    output: []
   })
 })

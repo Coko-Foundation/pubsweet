@@ -2,6 +2,7 @@ const reducers = require.requireActual('../../src/reducers/users')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
+const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
@@ -50,5 +51,16 @@ module.exports = app => describeReducerSet('users', reducers, () => {
       user: usermod
     },
     output: { users: [user], isFetching: false }
+  })
+
+  describeReducer('logout success', {
+    state: mockstate,
+    action: {
+      type: LOGOUT_SUCCESS,
+      user: usermod
+    },
+    output: {
+      isFetching: false
+    }
   })
 })
