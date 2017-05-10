@@ -38,7 +38,7 @@
     "morgan": "~1.7.0",
     "multer": "^1.1.0",
     "prop-types": "^15.5.8",
-    "pubsweet-component-login": "^0.2.2",
+    "pubsweet-component-login": "^0.2.4",
     "react": "^15.4.4",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.5.4",
