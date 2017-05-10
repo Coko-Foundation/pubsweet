@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
