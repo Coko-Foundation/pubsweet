@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types'
 
 import Authsome from 'authsome'
 
@@ -69,13 +70,13 @@ export function requireAuthentication (Component, operation, selector) {
   }
 
   AuthenticatedComponent.propTypes = {
-    location: React.PropTypes.object,
-    username: React.PropTypes.string,
-    actions: React.PropTypes.object.isRequired,
-    currentUser: React.PropTypes.object.isRequired,
-    pushState: React.PropTypes.func.isRequired,
-    state: React.PropTypes.object
-  }
+    location: PropTypes.object,
+    username: PropTypes.string,
+    actions: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired,
+    pushState: PropTypes.func.isRequired,
+    state: PropTypes.object
+  } 
 
   function mapState (state) {
     return {

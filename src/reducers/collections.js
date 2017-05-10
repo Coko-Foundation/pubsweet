@@ -10,6 +10,8 @@ import {
   DELETE_FRAGMENT_SUCCESS
 } from '../actions/types'
 
+import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
+
 import find from 'lodash/find'
 import union from 'lodash/union'
 import difference from 'lodash/difference'
@@ -96,6 +98,9 @@ export default function (state = [], action) {
     case GET_FRAGMENTS_SUCCESS:
     case CREATE_FRAGMENT_SUCCESS:
       return addFragments()
+
+    case LOGOUT_SUCCESS:
+      return []
   }
 
   return state

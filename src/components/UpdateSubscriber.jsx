@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import * as T from '../actions/types'
 import 'event-source-polyfill'
 
@@ -17,7 +19,8 @@ class UpdateSubscriber extends Component {
     super(props)
 
     this.state = {
-      connected: false
+      connected: false,
+      visible: false
     }
 
     this.listeners = {}
@@ -25,6 +28,7 @@ class UpdateSubscriber extends Component {
 
   componentDidMount () {
     this.subscribe(this.props)
+    this.setState({visible: this.visible()})
   }
 
   componentWillReceiveProps (nextProps) {
@@ -39,6 +43,12 @@ class UpdateSubscriber extends Component {
       this.eventSource.close()
       // delete this.eventSource
     }
+  }
+
+  visible () {
+    const config = CONFIG['pubsweet-client']['update-subscriber']
+
+    return config && config.visible
   }
 
   // if haven't received a heartbeat for 5 seconds, try to reconnect
@@ -134,7 +144,9 @@ class UpdateSubscriber extends Component {
   }
 
   render () {
-    const {connected} = this.state
+    const {connected, visible} = this.state
+
+    if (!visible) return null
 
     return (
       <i className="fa fa-wifi" style={{

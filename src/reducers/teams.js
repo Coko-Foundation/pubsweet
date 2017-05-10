@@ -5,6 +5,8 @@ import {
   DELETE_TEAM_SUCCESS
 } from '../actions/types'
 
+import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
+
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import assign from 'lodash/assign'
@@ -35,6 +37,7 @@ export default function (state = [], action) {
     case UPDATE_TEAM_SUCCESS: return updateOne()
     case GET_TEAMS_SUCCESS: return clone(action.teams)
     case DELETE_TEAM_SUCCESS: return removeTeams()
+    case LOGOUT_SUCCESS: return []
   }
 
   return state
