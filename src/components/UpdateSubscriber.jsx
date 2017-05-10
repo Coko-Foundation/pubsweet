@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import * as T from '../actions/types'
 import 'event-source-polyfill'
 
