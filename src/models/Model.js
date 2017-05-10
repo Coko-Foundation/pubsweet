@@ -2,6 +2,7 @@
 
 const uuid = require('uuid')
 const Joi = require('joi')
+const Queue = require('promise-queue')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
@@ -10,6 +11,8 @@ const logger = require('../logger')
 const validations = require('./validations')(require('../../config'))
 
 schema()
+
+const saveQueue = new Queue(1, Infinity)
 
 class Model {
   constructor (properties) {
@@ -38,24 +41,26 @@ class Model {
 
     this.validate()
 
-    try {
-      const existing = await this.constructor.find(this.id)
-      logger.info('Found an existing version, this is an update of:', existing)
-      this.rev = existing.rev
-    } catch (error) {
-      if (error.status !== 404) {
-        throw error
+    return saveQueue.add(async () => {
+      try {
+        const existing = await this.constructor.find(this.id)
+        logger.info('Found an existing version, this is an update of:', existing)
+        this.rev = existing.rev
+      } catch (error) {
+        if (error.status !== 404) {
+          throw error
+        }
+
+        // creating a new object, so check for uniqueness
+        if (typeof this.isUniq === 'function') {
+          await this.isUniq(this) // throws an exception if not unique
+        }
+
+        logger.info('No existing object found, creating a new one:', this.type, this.id)
       }
 
-      // creating a new object, so check for uniqueness
-      if (typeof this.isUniq === 'function') {
-        await this.isUniq(this) // throws an exception if not unique
-      }
-
-      logger.info('No existing object found, creating a new one:', this.type, this.id)
-    }
-
-    return this._put()
+      return this._put()
+    })
   }
 
   async _put () {
