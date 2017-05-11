@@ -54,7 +54,7 @@ describe('CLI: pubsweet setupdb', () => {
 
     const dbPath = path.join(appPath, 'api', 'db')
 
-    const empty = await new Promise(
+    await new Promise(
       resolve => fs.emptyDir(dbPath, err => {
         if (err) throw err
         resolve()
