@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup.jsx'
@@ -45,5 +46,5 @@ export default class PostCreator extends React.Component {
   }
 }
 PostCreator.propTypes = {
-  create: React.PropTypes.func
+  create: PropTypes.func
 }

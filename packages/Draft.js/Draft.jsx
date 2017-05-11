@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 
 import { bindActionCreators } from 'redux'
@@ -36,9 +37,9 @@ class Draft extends React.Component {
 }
 
 Draft.propTypes = {
-  blog: React.PropTypes.object,
-  fragment: React.PropTypes.object,
-  actions: React.PropTypes.object
+  blog: PropTypes.object,
+  fragment: PropTypes.object,
+  actions: PropTypes.object
 }
 
 function mapStateToProps (state, ownProps) {

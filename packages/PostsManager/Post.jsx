@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -116,10 +117,9 @@ export default class Post extends React.Component {
 }
 
 Post.propTypes = {
-  number: React.PropTypes.number,
-  blog: React.PropTypes.object,
-  blogpost: React.PropTypes.object,
-  delete: React.PropTypes.func,
-  update: React.PropTypes.func
-  // currentUser: React.PropTypes.object
+  number: PropTypes.number,
+  blog: PropTypes.object,
+  blogpost: PropTypes.object,
+  delete: PropTypes.func,
+  update: PropTypes.func
 }

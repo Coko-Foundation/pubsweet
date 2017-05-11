@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -52,9 +53,9 @@ class UsersManager extends React.Component {
 }
 
 UsersManager.propTypes = {
-  users: React.PropTypes.array,
-  actions: React.PropTypes.object.isRequired,
-  error: React.PropTypes.string
+  users: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+  error: PropTypes.string
 }
 
 function mapStateToProps (state) {
