@@ -20,6 +20,7 @@ export function requireAuthentication (Component, operation, selector) {
 
       this.checkAuthorization = this.checkAuthorization.bind(this)
       this.checkAuth = this.checkAuth.bind(this)
+      this.failRedirect = CONFIG['authsome']['fail-redirect']
     }
 
     componentWillMount () {
@@ -41,6 +42,8 @@ export function requireAuthentication (Component, operation, selector) {
       try {
         if (this.authsome.can(currentUser, operation, object)) {
           return <Component {...this.props} />
+        } else if (this.failRedirect) {
+          return this.props.pushState(this.failRedirect)
         } else {
           <span />
         }
