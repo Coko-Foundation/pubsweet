@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint bin src cli test",
     "pretest": "npm run lint",
+    "pretestci": "npm run pretest",
     "test": "NODE_ENV=test jest --runInBand --no-cache test/*.js test/cli/*.js",
     "testonly": "NODE_ENV=test jest --runInBand --no-cache",
     "testdocker": "NODE_ENV=test jest --runInBand --no-watchman --no-cache --verbose --forceExit test/*.js test/cli/*.js",
