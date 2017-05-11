@@ -14,7 +14,8 @@ module.exports = {
     API_ENDPOINT: '/api'
   },
   'pubsweet-client': {
-    theme: 'PepperTheme'
+    theme: 'PepperTheme',
+    'login-redirect': '/manage/posts'
   },
   authsome: {
     mode: blogmode,
