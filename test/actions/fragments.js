@@ -23,6 +23,28 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
+  // get a list of collections, with the specified fields
+  describeAction('getFragments', {
+    firstarg: mockcol,
+    secondarg: {
+      fields: ['type', 'presentation']
+    },
+    types: {
+      request: T.GET_FRAGMENTS_REQUEST,
+      success: T.GET_FRAGMENTS_SUCCESS
+    },
+    properties: {
+      success: ['fragments']
+    },
+    user: () => app.user
+  }, (action, data) => {
+    const filteredFragment = data.GET_FRAGMENTS_SUCCESS.fragments[0]
+    expect(filteredFragment).toHaveProperty('id')
+    expect(filteredFragment).toHaveProperty('type')
+    expect(filteredFragment).toHaveProperty('presentation')
+    expect(filteredFragment).not.toHaveProperty('source')
+  })
+
   describeAction('createFragment', {
     firstarg: mockcol,
     secondarg: {
