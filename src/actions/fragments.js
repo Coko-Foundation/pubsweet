@@ -44,14 +44,19 @@ function getFragmentsFailure (error) {
   }
 }
 
-export function getFragments (collection) {
+export function getFragments (collection, options) {
   return (dispatch, getState) => {
     dispatch(getFragmentsRequest(collection))
     const {
       currentUser: { token }
     } = getState()
 
-    const url = collectionUrl(collection, 'fragments')
+    let url = collectionUrl(collection, 'fragments')
+
+    if (options && options.fields) {
+      url += '?fields=' + encodeURIComponent(options.fields.join(','))
+    }
+
     const opts = {
       headers: {
         'Authorization': 'Bearer ' + token
