@@ -18,8 +18,6 @@ const getpkgjson = name => {
       'pubsweet-component-posts-manager': '^0.1.3',
       'pubsweet-component-manage': '^0.1.5',
       'pubsweet-component-signup': '^0.1.3',
-      'pubsweet-component-teams-manager': '^0.1.3',
-      'pubsweet-component-users-manager': '^0.1.3',
       'pubsweet-component-pepper-theme': '^0.0.3',
       'pubsweet-theme-plugin': '^0.0.1',
       'react': '^15.4.2',
