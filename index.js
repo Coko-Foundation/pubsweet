@@ -85,7 +85,6 @@ ThemePlugin.prototype.apply = function (resolver) {
       fs.stat(pathWithTheme, (err, stats) => {
         if (err) return callback()
 
-        console.log('** Theme found **:', pathWithTheme)
         var obj = {
           path: path.dirname(pathWithTheme),
           request: request.request,
