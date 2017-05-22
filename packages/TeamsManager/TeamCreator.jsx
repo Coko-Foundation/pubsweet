@@ -9,27 +9,24 @@ export default class TeamCreator extends React.Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
-    this.onFragmentSelect = this.onFragmentSelect.bind(this)
     this.onCollectionSelect = this.onCollectionSelect.bind(this)
     this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
 
     this.state = {
-      fragmentSelected: undefined,
       collectionSelected: undefined
     }
   }
 
-  onSave () {
+  onSave (event) {
+    event.preventDefault()
+
     let name = ReactDOM.findDOMNode(this.refs.name).value
     let teamType = this.state.teamTypeSelected
 
     let objectId
     let objectType
 
-    if (this.state.fragmentSelected) {
-      objectId = this.state.fragmentSelected
-      objectType = 'fragment'
-    } else if (this.state.collectionSelected) {
+    if (this.state.collectionSelected) {
       objectId = this.state.collectionSelected
       objectType = 'collection'
     }
@@ -47,10 +44,6 @@ export default class TeamCreator extends React.Component {
     }
   }
 
-  onFragmentSelect (fragment) {
-    this.setState({fragmentSelected: fragment ? fragment.value : null})
-  }
-
   onCollectionSelect (collection) {
     this.setState({collectionSelected: collection ? collection.value : null})
   }
@@ -60,28 +53,20 @@ export default class TeamCreator extends React.Component {
   }
 
   render () {
-    let { collections, fragments, types } = this.props
+    let { collections, types } = this.props
 
-    collections = collections.map(collection => ({value: collection.id, label: collection.title}))
-    types = Object.keys(types).map(
-      type => (
-        {
-          value: type,
-          label: (types[type].name + ' ' + types[type].permissions)
-        }
-      )
-    )
-    fragments = Object.keys(fragments).map(
-      id => (
-        {
-          value: id,
-          label: fragments[id].title
-        }
-      )
-    )
+    collections = collections.map(collection => ({
+      value: collection.id,
+      label: collection.title
+    }))
+
+    types = Object.keys(types).map(type => ({
+      value: type,
+      label: `${types[type].name} (${types[type].permissions})`
+    }))
 
     return (
-      <div>
+      <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
         <FormControl
           type='text'
@@ -89,7 +74,7 @@ export default class TeamCreator extends React.Component {
           label='Name'
           name='teamName'
           ref='name'
-        />
+          required />
         <Row>
           <Col md={3}>
             <h4>Team type</h4>
@@ -98,45 +83,28 @@ export default class TeamCreator extends React.Component {
               options={types}
               value={this.state.teamTypeSelected}
               onChange={this.onTeamTypeSelect}
-            />
+              required />
           </Col>
-          <Col md={4}>
-            <h4>Fragment</h4>
-            <Select
-              name='fragment'
-              options={fragments}
-              value={this.state.fragmentSelected}
-              onChange={this.onFragmentSelect}
-              disabled={!!this.state.collectionSelected}
-            />
-          </Col>
-          <Col md={1}>
-            <br /><br />
-            <h3>or</h3>
-          </Col>
-          <Col md={4}>
+          <Col md={9}>
             <h4>Collection</h4>
             <Select
               name='collection'
               options={collections}
               value={this.state.collectionSelected}
               onChange={this.onCollectionSelect}
-              disabled={!!this.state.fragmentSelected}
-            />
+              required />
           </Col>
         </Row>
         <br />
-        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
-          <i className='fa fa-plus' /> Create
-        </Button>
-      </div>
+        <Button bsStyle='primary' type='submit' title='Create' aria-label='Create'>
+          <i className='fa fa-plus' /> Create</Button>
+      </form>
     )
   }
 }
 
 TeamCreator.propTypes = {
   collections: PropTypes.array,
-  fragments: PropTypes.object,
   types: PropTypes.object,
   create: PropTypes.func
 }
