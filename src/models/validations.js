@@ -42,7 +42,9 @@ let validations = {
     rev: Joi.string(),
     fragments: Joi.array().items(Joi.string().guid()),
     collections: Joi.array().items(Joi.string().guid()),
-    teams: Joi.array().items(Joi.string().guid())
+    teams: Joi.array().items(Joi.string().guid()),
+    passwordResetToken: Joi.string(),
+    passwordResetDate: Joi.date().timestamp('unix')
   },
   team: {
     id: Joi.string().guid().required(),
