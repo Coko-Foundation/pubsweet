@@ -27,16 +27,22 @@ function fileUploadFailure (message) {
 }
 
 export function fileUpload (file) {
-  var data = new FormData()
-  data.append('file', file)
-
-  let config = {
-    method: 'POST',
-    body: data
-  }
-
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(fileUploadRequest())
+
+    const {currentUser: {token}} = getState()
+
+    const data = new FormData()
+    data.append('file', file)
+
+    let config = {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      body: data
+    }
+
     return fetch(API_ENDPOINT + '/upload', config)
       .then(
         response => response.text()

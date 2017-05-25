@@ -23,14 +23,13 @@ module.exports = app => {
     firstarg: './test/helpers/mockapp.js',
     types: {
       request: T.FILE_UPLOAD_REQUEST,
-      success: T.FILE_UPLOAD_SUCCESS
-      // failure: T.FILE_UPLOAD_FAILURE
+      success: T.FILE_UPLOAD_SUCCESS,
+      failure: T.FILE_UPLOAD_FAILURE
     },
     properties: {
       request: ['isFetching'],
-      success: ['isFetching', 'file']
-      // Does not fail yet, because the upload endpoint doesn't have auth
-      // failure: ['isFetching', 'error']
+      success: ['isFetching', 'file'],
+      failure: ['isFetching', 'error']
     },
     user: app.user
   }, (action, data) => {
