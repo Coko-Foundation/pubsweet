@@ -71,7 +71,8 @@ const getpkgjson = name => {
     },
     scripts: {
       start: 'pubsweet run', // `npm start -- --dev` for dev mode
-      pubsweet: 'pubsweet' // `npm run pubsweet -- setupdb . --dev` to setup the dev db
+      setupdb: 'pubsweet setupdb .', // `npm run setupdb -- --dev` for dev mode
+      pubsweet: 'pubsweet'
     },
     repository: 'put your repo here',
     license: 'UNLICENSED'
