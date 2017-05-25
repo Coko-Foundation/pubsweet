@@ -170,6 +170,12 @@ class Model {
       return new this(foundObject)
     })
   }
+
+  async findOneByField (field, value) {
+    const results = await this.findByField(field, value)
+
+    return results.length ? results[0] : null
+  }
 }
 
 module.exports = Model
