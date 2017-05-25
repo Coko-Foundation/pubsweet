@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../cli/new')()().catch(require('../src/error-exit'))
+require('../cli/new')().catch(require('../src/error-exit'))

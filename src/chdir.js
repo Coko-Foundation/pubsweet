@@ -1,11 +1,9 @@
 const fs = require('fs-extra')
 const path = require('path')
+const loadConfig = require('../src/load-config')
 
-module.exports = appPath => () => new Promise(
-  resolve => {
-    fs.mkdirsSync(appPath)
-    process.chdir(appPath)
-    require('../src/load-config')(path.resolve(appPath, './config'))
-    resolve()
-  }
-)
+module.exports = async appPath => {
+  fs.ensureDirSync(appPath)
+  process.chdir(appPath)
+  loadConfig(path.resolve(appPath, './config'))
+}

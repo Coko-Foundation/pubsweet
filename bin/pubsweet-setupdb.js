@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../cli/setupdb')()().catch(require('../src/error-exit'))
+require('../cli/setupdb')().catch(require('../src/error-exit'))

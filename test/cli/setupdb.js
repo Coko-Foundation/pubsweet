@@ -1,13 +1,13 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('../helpers/fix_stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const fs = require('fs-extra')
-const path = require('path')
 const workingdir = require('../helpers/working_dir')
 const cmd = require('../helpers/cmd')
-const expect = require('chai').expect
+const expect = require('chai-as-promised').expect
 const spawn = require('child-process-promise').spawn
 
 const clidb = require('../../cli/setupdb')
@@ -43,7 +43,7 @@ describe('CLI: pubsweet setupdb', () => {
   afterAll(() => { process.env.NODE_ENV = 'test' })
 
   it('requires an app path', () => {
-    expect(() => clidb(cmd('setupdb'))).to.throw(/specify an app path/)
+    expect(() => clidb(cmd('setupdb'))).to.eventually.beRejectedWith(/specify an app path/)
   })
 
   it('creates a new database', async () => {
@@ -61,7 +61,7 @@ describe('CLI: pubsweet setupdb', () => {
       })
     )
 
-    await clidb(cmd(`setupdb ${appPath}`, dbanswers))()
+    await clidb(cmd(`setupdb ${appPath}`, dbanswers))
 
     const testfile = path.join(require('../../src/db-path')(appPath), 'CURRENT')
     expect(() => fs.statSync(testfile)).to.not.throw()

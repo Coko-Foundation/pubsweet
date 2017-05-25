@@ -7,7 +7,7 @@ const fs = require('fs-extra')
 
 describe.only('check-exists', () => {
   it('rejects if no app dir exists', () => expect(
-      checkexists('/__this_does_not_exist_probably__')()
+      checkexists('/__this_does_not_exist_probably__')
     ).to.be.rejectedWith()
   )
 
@@ -17,7 +17,7 @@ describe.only('check-exists', () => {
         const dbdir = require('../src/db-path')(dir)
         fs.mkdirsSync(dbdir)
         return expect(
-          checkexists(dir)()
+          checkexists(dir)
         ).to.eventually.equal()
       }
     )

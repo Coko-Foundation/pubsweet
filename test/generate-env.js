@@ -1,4 +1,5 @@
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 process.env.NODE_ENV = 'test'
 
@@ -6,7 +7,6 @@ const generate = require('../src/generate-env')
 const workingdir = require('./helpers/working_dir')
 const expect = require('chai').expect
 const fs = require('fs-extra')
-const path = require('path')
 
 describe('generate-env', () => {
   it('returns a promise', () => workingdir().then(

@@ -1,9 +1,9 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('../helpers/fix_stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
-
 const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
+
 const workingdir = require('../helpers/working_dir')
 const cmd = require('../helpers/cmd')
 const chai = require('chai')
@@ -40,6 +40,6 @@ describe('CLI: pubsweet adduser', () => {
 
     const addoneuser = () => cliusr(cmd(`adduser ${appPath}`, useranswers))
 
-    expect(addoneuser()).to.be.fulfilled
+    expect(addoneuser()).to.be.fulfilled()
   })
 })

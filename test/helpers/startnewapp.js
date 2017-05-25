@@ -1,7 +1,5 @@
 module.exports = () => require('./working_dir')(
 ).then(
-  () => require('pubsweet/src/generate-config')()
-).then(
   require('../../src/generate-env')
 ).then(
   () => require('../../src/initial-app')('someapp')

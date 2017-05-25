@@ -1,12 +1,12 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const generate = require('../src/initial-app')
 const workingdir = require('./helpers/working_dir')
 const expect = require('chai').expect
 const fs = require('fs-extra')
-const path = require('path')
 
 const appname = 'testapp'
 

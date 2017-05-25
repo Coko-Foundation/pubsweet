@@ -1,11 +1,11 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('./helpers/fix_stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const expect = require('chai').expect
 const fs = require('fs-extra')
-const path = require('path')
 const workingdir = require('./helpers/working_dir')
 const logger = require('../src/logger')
 
@@ -24,9 +24,6 @@ describe('add-user', () => {
     fs.mkdirsSync(appdir)
     process.chdir(appdir)
     logger.info('Created directory')
-
-    await require('../src/generate-config')()
-    logger.info('Config generated')
 
     await require('../src/generate-env')()
     logger.info('Env generated')

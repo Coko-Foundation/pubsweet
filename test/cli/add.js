@@ -1,9 +1,9 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('../helpers/fix_stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
-
 const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
+
 const workingdir = require('../helpers/working_dir')
 const cmd = require('../helpers/cmd')
 const chai = require('chai')
@@ -27,13 +27,13 @@ describe('CLI: pubsweet add', () => {
 
   it('adds a component', async () => {
     const dir = await workingdir()
-    await clinew(cmd('new testapp', answers))()
+    await clinew(cmd('new testapp', answers))
     const appPath = path.join(dir, 'testapp')
     process.chdir(appPath)
     require('app-module-path').addPath(appPath)
 
     const addbackend = () => cliadd(cmd('add ink-backend'))
 
-    expect(addbackend()).to.be.fulfilled
+    expect(addbackend()).to.be.fulfilled()
   })
 })

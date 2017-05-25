@@ -1,10 +1,10 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('../helpers/fix_stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const fs = require('fs')
-const path = require('path')
 const workingdir = require('../helpers/working_dir')
 const cmd = require('../helpers/cmd')
 const expect = require('chai').expect
