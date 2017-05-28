@@ -1,6 +1,6 @@
 const path = require('path')
 const HTMLEPUB = require('html-epub')
-const serverPath = require('pubsweet/src/backend')()
+const serverPath = require('pubsweet/src/server-path')()
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
