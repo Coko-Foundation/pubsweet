@@ -1,6 +1,14 @@
 {
-  "extends": ["standard", "standard-react"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "standard",
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
+    "ecmaVersion": 7,
     "ecmaFeatures": {
       "jsx": true
     }
@@ -8,9 +16,6 @@
   "env": {
     "browser": true,
     "node": true
-  },
-  "rules": {
-    "jsx-quotes": "off"
   },
   "globals": {
     "CONFIG": true,
