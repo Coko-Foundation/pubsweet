@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-teams-manager",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Basic teams manager component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "dependencies": {},
   "peerDependencies": {
     "pubsweet-client": ">=0.9.0"
   },
