@@ -56,7 +56,7 @@ class Blog extends React.Component {
           </div>
           <Row className={styles.blogFooter}>
             <Col md={8} mdOffset={2}>
-              <p>Powered by <a href="https://gitlab.coko.foundation/pubsweet/core">Science Blogger</a></p>
+              <p>Powered by <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a></p>
             </Col>
           </Row>
         </Grid>
