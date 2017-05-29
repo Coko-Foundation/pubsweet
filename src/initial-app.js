@@ -11,6 +11,7 @@ const getpkgjson = name => {
     description: 'A new pubsweet app',
     dependencies: {
       'joi': '^10.4.1',
+      'pubsweet': '^0.3.3',
       'pubsweet-server': '^0.9.2',
       'pubsweet-client': '^0.9.1',
       'pubsweet-component-blog': '^0.1.5',
@@ -65,6 +66,11 @@ const getpkgjson = name => {
       'webpack': '^2.4.1',
       'webpack-dev-middleware': '^1.10.2',
       'webpack-hot-middleware': '^2.18.0'
+    },
+    scripts: {
+      start: 'pubsweet run', // `npm start -- --dev` for dev mode
+      setupdb: 'pubsweet setupdb .', // `npm run setupdb -- --dev` for dev mode
+      pubsweet: 'pubsweet'
     },
     repository: 'put your repo here',
     license: 'UNLICENSED'
