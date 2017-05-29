@@ -2,6 +2,7 @@ const request = require('supertest')
 const api = require('../../src')()
 const STATUS = require('http-status-codes')
 const isString = require('lodash/isString')
+const querystring = require('querystring')
 
 const COLLECTIONS_ROOT = '/api/collections/'
 
@@ -137,8 +138,16 @@ const users = {
 }
 
 const collections = {
-  list: (token) => {
-    const req = request(api).get(COLLECTIONS_ROOT)
+  list: (token, options) => {
+    let url = COLLECTIONS_ROOT
+
+    if (options && options.fields) {
+      url += '?' + querystring.stringify({
+        fields: options.fields.join(',')
+      })
+    }
+
+    const req = request(api).get(url)
     return authorizedRequest(req, token)
   },
   create: (collection, token) => {
@@ -159,8 +168,16 @@ const collections = {
     const req = request(api).delete(COLLECTIONS_ROOT + collectionId)
     return authorizedRequest(req, token)
   },
-  listFragments: (collectionId, token) => {
-    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/fragments')
+  listFragments: (collectionId, token, options) => {
+    let url = COLLECTIONS_ROOT + collectionId + '/fragments'
+
+    if (options && options.fields) {
+      url += '?' + querystring.stringify({
+        fields: options.fields.join(',')
+      })
+    }
+
+    const req = request(api).get(url)
     return authorizedRequest(req, token)
   },
   createFragment: (collectionId, fragment, token) => {

@@ -36,6 +36,12 @@ const buildChangeData = (input, output) => {
   return data
 }
 
+const fieldSelector = req => {
+  const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
+
+  return item => fields ? _.pick(item, fields.concat('id')) : item
+}
+
 // Create a collection
 api.post('/', authBearer, (req, res, next) => {
   let collection = new Collection(req.body)
@@ -59,6 +65,8 @@ api.post('/', authBearer, (req, res, next) => {
 // List collections
 api.get('/', (req, res, next) => {
   Collection.all().then(
+    collections => collections.map(fieldSelector(req))
+  ).then(
     collections => res.status(STATUS.OK).json(collections)
   ).catch(
     next
@@ -151,6 +159,8 @@ api.get('/:id/fragments', authBearerAndPublic, (req, res, next) => {
     ).then(
       fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
     ).then(
+      fragments => fragments.map(fieldSelector(req))
+    ).then(
       fragments => res.status(STATUS.OK).json(fragments)
     ).catch(
       next
@@ -165,6 +175,8 @@ api.get('/:id/fragments', authBearerAndPublic, (req, res, next) => {
     collection => collection.getFragments()
   ).then(
     fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+  ).then(
+    fragments => fragments.map(fieldSelector(req))
   ).then(
     fragments => res.status(STATUS.OK).json(fragments)
   ).catch(
