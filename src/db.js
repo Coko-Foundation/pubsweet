@@ -1,4 +1,5 @@
 const uuid = require('uuid')
+const path = require('path')
 
 const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-find'))
@@ -7,22 +8,32 @@ const PouchDB = require('pouchdb-core')
 
 const config = require('../config')
 
-if (process.env.NODE_ENV === 'test') {
-  PouchDB.plugin(require('pouchdb-adapter-memory'))
+let name, adapter
 
-  module.exports = () => {
-    return new PouchDB(uuid(), { adapter: 'memory' })
-  }
-} else {
-  PouchDB
-    .plugin(require('pouchdb-adapter-http'))
-    .plugin(require('pouchdb-adapter-leveldb'))
+switch (process.env.NODE_ENV) {
+  case 'test':
+    PouchDB.plugin(require('pouchdb-adapter-memory'))
 
-  module.exports = () => {
+    adapter = 'memory'
+    name = uuid()
+
+    break
+
+  default:
+    PouchDB.plugin(require('pouchdb-adapter-http')).plugin(require('pouchdb-adapter-leveldb'))
+
     const dbPath = config['pubsweet-server']['dbPath']
 
-    return new PouchDB(dbPath, {
-      adapter: dbPath.match(/^http:/) ? 'http' : 'leveldb'
-    })
-  }
+    if (dbPath.match(/^http:/)) {
+      adapter = 'http'
+      name = dbPath
+    } else {
+      adapter = 'leveldb'
+      name = path.join(dbPath, process.env.NODE_ENV)
+    }
+    break
+}
+
+module.exports = () => {
+  return new PouchDB(name, { adapter })
 }
