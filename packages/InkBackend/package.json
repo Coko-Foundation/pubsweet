@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-ink-backend",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Backend INK component for PubSweet",
   "main": "index.js",
   "scripts": {
