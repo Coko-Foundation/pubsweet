@@ -1,4 +1,4 @@
-const PouchDB = require('../src/db')
+const createDb = require('../src/db')
 const range = require('lodash/range')
 
 const Model = require('../src/models/Model')
@@ -31,7 +31,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
+      global.db = createDb(global.db.name)
     })
   })
 
@@ -41,7 +41,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
+      global.db = createDb(global.db.name)
     })
   })
 
@@ -51,7 +51,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = new PouchDB(global.db.name, { adapter: 'memory' })
+      global.db = createDb(global.db.name)
     })
   })
 

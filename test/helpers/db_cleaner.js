@@ -1,6 +1,6 @@
 'use strict'
 
-const PouchDB = require('../../src/db')
+const createDb = require('../../src/db')
 const logger = require('../../src/logger')
 
 let dbCleaner = async () => {
@@ -8,7 +8,7 @@ let dbCleaner = async () => {
 
   await global.db.destroy()
 
-  global.db = new PouchDB(dbName, { adapter: 'memory' })
+  global.db = createDb(dbName)
 
   const info = await global.db.info()
 

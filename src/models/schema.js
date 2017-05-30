@@ -1,22 +1,6 @@
 'use strict'
 
-const config = require('../../config')
-const path = require('path')
-
-const PouchDB = require('../db')
-
-if (process.env.NODE_ENV === 'test') {
-  PouchDB.plugin(require('pouchdb-adapter-memory'))
-  const dbPath = path.join(config['pubsweet-server'].dbPath, require('uuid')())
-  global.db = new PouchDB(dbPath, { adapter: 'memory' })
-} else if (config['pubsweet-server'].dbUrl) {
-  PouchDB.plugin(require('pouchdb-adapter-http'))
-  const dbUrl = config['pubsweet-server'].dbUrl
-  global.db = new PouchDB(dbUrl, { adapter: 'http' })
-} else {
-  const dbPath = path.join(config['pubsweet-server'].dbPath, process.env.NODE_ENV)
-  global.db = new PouchDB(dbPath)
-}
+global.db = require('../db')()
 
 module.exports = function () {
   if (!db.rel) {

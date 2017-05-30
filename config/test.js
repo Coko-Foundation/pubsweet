@@ -3,7 +3,6 @@ const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
-    dbPath: './db/',
     'API_ENDPOINT': '/api'
   },
   validations: {
