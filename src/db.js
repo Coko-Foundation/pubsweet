@@ -10,7 +10,7 @@ const config = require('../config')
 if (process.env.NODE_ENV === 'test') {
   PouchDB.plugin(require('pouchdb-adapter-memory'))
 
-  module.exports = name => {
+  module.exports = () => {
     return new PouchDB(uuid(), { adapter: 'memory' })
   }
 } else {
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'test') {
     .plugin(require('pouchdb-adapter-http'))
     .plugin(require('pouchdb-adapter-leveldb'))
 
-  module.exports = name => {
+  module.exports = () => {
     const dbPath = config['pubsweet-server']['dbPath']
 
     return new PouchDB(dbPath, {

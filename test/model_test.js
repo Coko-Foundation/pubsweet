@@ -31,7 +31,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = createDb(global.db.name)
+      global.db = createDb()
     })
   })
 
@@ -41,7 +41,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = createDb(global.db.name)
+      global.db = createDb()
     })
   })
 
@@ -51,7 +51,7 @@ describe('Model', function () {
     ).catch(err => {
       expect(err.name).toEqual('Error')
     }).then(() => {
-      global.db = createDb(global.db.name)
+      global.db = createDb()
     })
   })
 
