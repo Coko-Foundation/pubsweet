@@ -6,22 +6,23 @@ const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-upsert'))
   .plugin(require('relational-pouch'))
 
-if (process.env.NODE_ENV === 'test') {
-  PouchDB.plugin(require('pouchdb-adapter-memory'))
-} else {
-  PouchDB.plugin(require('pouchdb-adapter-http')).plugin(require('pouchdb-adapter-leveldb'))
-}
+const config = require('../config')
 
-const dbPath = require('../config')['pubsweet-server']['dbPath']
-
-const dbAdapter = (dbPath) => {
-  // In-memory test db
-  if (process.env.NODE_ENV === 'test') return 'memory'
+const prepareAdapter = (dbPath) => {
+  // Always use in-memory databases for testing
+  if (process.env.NODE_ENV === 'test') {
+    PouchDB.plugin(require('pouchdb-adapter-memory'))
+    return 'memory'
+  }
 
   // HTTP URL, e.g. CouchDB
-  if (dbPath.match(/^http:/)) return 'http'
+  if (dbPath.match(/^http:/)) {
+    PouchDB.plugin(require('pouchdb-adapter-http'))
+    return 'http'
+  }
 
   // local file system
+  PouchDB.plugin(require('pouchdb-adapter-leveldb'))
   return 'leveldb'
 }
 
@@ -41,7 +42,9 @@ const dbName = (adapter) => {
   }
 }
 
-const adapter = dbAdapter(dbPath)
+const dbPath = config['pubsweet-server']['dbPath']
+
+const adapter = prepareAdapter(dbPath)
 
 module.exports = () => {
   return new PouchDB(dbName(adapter), { adapter })
