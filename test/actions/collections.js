@@ -37,7 +37,7 @@ module.exports = app => {
       success: T.GET_COLLECTIONS_SUCCESS
     },
     properties: {
-      request: ['type', 'title'],
+      request: ['type'],
       success: ['type', 'collections', 'receivedAt'],
       failure: ['type', 'error']
     },
