@@ -44,7 +44,8 @@ class Login extends Component {
                   className={styles.button + ' btn btn-wide btn-primary'}>
                   Login
                 </button>
-                <p>Don't have an account?<br /><Link to="/signup">Sign Up Here</Link></p>
+                <p>Don't have an account?<br/><Link to="/signup">Sign up here</Link></p>
+                <p>Forgot your password?<br/><Link to="/password-reset">Reset password</Link></p>
               </form>
             </Col>
           </Row>
