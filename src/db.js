@@ -28,12 +28,15 @@ const dbAdapter = (dbPath) => {
 const dbName = (adapter) => {
   switch (adapter) {
     case 'memory':
+      // a new database for each test
       return uuid()
 
     case 'http':
+      // use the full URL as configured
       return dbPath
 
     case 'leveldb':
+      // append the node environment to the configured directory path
       return path.join(dbPath, process.env.NODE_ENV)
   }
 }
