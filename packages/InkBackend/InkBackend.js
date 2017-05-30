@@ -10,6 +10,7 @@ let inkConfig = config.get('pubsweet-component-ink-backend')
 let inkEndpoint = inkConfig.inkEndpoint
 let email = inkConfig.email
 let password = inkConfig.password
+let maxRetries = inkConfig.maxRetries || 60
 
 let authRequest = {
   uri: inkEndpoint + '/api/auth/sign_in',
@@ -150,7 +151,7 @@ const retryFor30SecondsUntil200 = (uri, auth) => {
     (retry, number) => {
       return rp(downloadRequest).catch(retry)
     },
-    { retries: 20, maxTimeout: 60000 }
+    { retries: maxRetries, factor: 1, minTimeout: 3000 }
   )
 }
 
