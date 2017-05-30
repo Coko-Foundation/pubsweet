@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
-import DevTools from '../components/DevTools'
 import reducers from '../reducers'
 
 require('../components/reducers').forEach(
@@ -20,14 +19,16 @@ export default function configureStore (history, initialState) {
   const middleware = [
     applyMiddleware(thunk),
     process.env.REDUXLOG_OFF ? null : applyMiddleware(createLogger()),
-    applyMiddleware(routerMiddleware(browserHistory)),
-    DevTools.instrument()
+    applyMiddleware(routerMiddleware(browserHistory))
   ].filter(value => value !== null)
+
+  // https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   const store = createStore(
     reducer,
     initialState,
-    compose(...middleware)
+    composeEnhancers(...middleware)
   )
 
   if (module.hot) {
