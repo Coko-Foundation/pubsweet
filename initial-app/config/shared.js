@@ -4,7 +4,7 @@ const blogmode = require('authsome/src/modes/blog')
 
 module.exports = {
   'pubsweet-server': {
-    dbPath: path.join(__dirname, '..', 'api', 'db'),
+    dbPath: process.env.PUBSWEET_DB || path.join(__dirname, '..', 'api', 'db'),
     API_ENDPOINT: '/api'
   },
   'pubsweet-client': {
