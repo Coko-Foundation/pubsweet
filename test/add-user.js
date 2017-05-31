@@ -4,7 +4,6 @@ require('./helpers/fix_stdio')
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
-const expect = require('chai').expect
 const fs = require('fs-extra')
 const workingdir = require('./helpers/working_dir')
 const logger = require('../src/logger')
@@ -56,9 +55,9 @@ describe('add-user', () => {
     ).then(
       users => {
         let user = users.find(u => u.username === fixtures.regularuser.username)
-        expect(user).to.exist
-        expect(user.email).to.equal(fixtures.regularuser.email)
-        expect(user.admin).to.not.be.ok
+        expect(user).not.toBeNull()
+        expect(user.email).toBe(fixtures.regularuser.email)
+        expect(user.admin).toBe(true)
       }
     )
   )
@@ -73,9 +72,9 @@ describe('add-user', () => {
     ).then(
       users => {
         let user = users.find(u => u.username === fixtures.adminuser.username)
-        expect(user).to.exist
-        expect(user.email).to.equal(fixtures.adminuser.email)
-        expect(user.admin).to.be.ok
+        expect(user).not.toBeNull()
+        expect(user.email).toBe(fixtures.adminuser.email)
+        expect(user.admin).toBe(true)
       }
     )
   )
