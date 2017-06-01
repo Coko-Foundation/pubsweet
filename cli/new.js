@@ -10,9 +10,9 @@ module.exports = async args => {
     .option('--dev', 'Setup app for development')
     .option('--clobber', 'Overwrite any existing files')
 
-  for (const key in properties) {
+  Object.keys(properties).forEach(key => {
     program.option(`--${key} [string]`, properties[key].description)
-  }
+  })
 
   program.parse(args || process.argv)
 

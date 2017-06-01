@@ -11,8 +11,10 @@ module.exports = async ({ appPath, override = {} }) => {
   // the path to a db file within the db directory
   const dbCheckPath = path.join(dbPath, 'CURRENT')
 
+  logger.info('Checking that', dbCheckPath, 'does not exist')
+
   // if the file doesn't exist, that's fine
-  if (!fs.pathExistsSync(dbCheckPath)) return
+  if (!await fs.pathExists(dbCheckPath)) return
 
   logger.info('Database appears to already exist')
 
@@ -24,6 +26,6 @@ module.exports = async ({ appPath, override = {} }) => {
 
   // if there's a "clobber" setting, remove the existing database dir
   logger.info('Overwriting existing database due to --clobber flag')
-  fs.removeSync(dbPath)
+  await fs.remove(dbPath)
   logger.info('Removed', dbPath)
 }

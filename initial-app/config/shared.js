@@ -9,7 +9,7 @@ module.exports = {
   },
   'pubsweet-client': {
     theme: 'PepperTheme',
-    'login-redirect': '/'
+    'login-redirect': '/manage/posts'
   },
   authsome: {
     mode: blogmode,

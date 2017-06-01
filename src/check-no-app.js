@@ -2,16 +2,20 @@ const fs = require('fs-extra')
 const logger = require('./logger')
 
 module.exports = async ({ appPath, override = {} }) => {
+  logger.info('Checking that', appPath, 'does not exist')
+
   // if the path doesn't exist, everything is good
-  if (!fs.existsSync(appPath)) return
+  if (!await fs.exists(appPath)) return
+
+  const stats = await fs.statSync(appPath)
 
   // if the path is not a directory, that's a problem
-  if (!fs.statSync(appPath).isDirectory()) {
+  if (!stats.isDirectory()) {
     throw new Error('Target path exists and is not a directory')
   }
 
   // if the directory is empty, that's ok
-  if (!fs.readdirSync(appPath)) return
+  if (!await fs.readdir(appPath)) return
 
   logger.info('Target directory exists aready and is non-empty')
 

@@ -8,13 +8,19 @@ const logError = message => {
 }
 
 module.exports = async appPath => {
-  if (!fs.pathExistsSync(appPath)) {
+  logger.info('Checking that', appPath, 'exists')
+
+  if (!await fs.pathExists(appPath)) {
     logError('The path provided does not exist')
     throw new Error('The path provided does not exist')
   }
 
-  if (!fs.statSync(appPath).isDirectory()) {
+  const stats = await fs.stat(appPath)
+
+  if (!stats.isDirectory()) {
     logError('The path provided is not a directory')
     throw new Error('The path provided is not a directory')
   }
+
+  logger.info(appPath, 'exists')
 }

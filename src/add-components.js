@@ -18,6 +18,8 @@ const resolvename = name => {
 }
 
 const install = names => new Promise((resolve, reject) => {
+  logger.info('Adding components', names)
+
   require('../src/load-config')(path.resolve('', './config'))
 
   const child = spawn(`yarn add ${names}`, {
@@ -28,6 +30,8 @@ const install = names => new Promise((resolve, reject) => {
 
   child.on('close', resolve)
   child.on('error', reject)
+
+  logger.info('Finished adding components', names)
 })
 
 const updateConfig = async modules => {
@@ -48,20 +52,26 @@ const updateConfig = async modules => {
     `module.exports = ${JSON.stringify(config, null, 2)}`
   ].join('\n\n')
 
-  fs.writeFileSync(configFile, output)
+  await fs.writeFile(configFile, output)
+
+  logger.info('Finished updating config')
 }
 
-const dependencyNames = () => {
-  return fs.readJsonSync('./package.json').dependencies
+const dependencyNames = async () => {
+  logger.info('Reading dependencies')
+
+  const { dependencies } = await fs.readJson('./package.json')
+
+  return dependencies
 }
 
 module.exports = async components => {
   try {
     const names = components.map(resolvename).join(' ')
 
-    const oldModules = dependencyNames()
+    const oldModules = await dependencyNames()
     await install(names)
-    const newModules = dependencyNames()
+    const newModules = await dependencyNames()
 
     const addedModules = diff(newModules, oldModules)
     await updateConfig(addedModules)

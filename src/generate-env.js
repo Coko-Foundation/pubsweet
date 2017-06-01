@@ -1,12 +1,15 @@
 const path = require('path')
 const fs = require('fs-extra')
 const crypto = require('crypto')
+const logger = require('./logger')
 
 module.exports = async () => {
+  logger.info('Generating env files')
+
   const environments = ['dev', 'production', 'test']
 
   // generate an env file per environment
-  environments.forEach(env => {
+  const promises = environments.map(async env => {
     // generate a unique secret
     const conf = {
       PUBSWEET_SECRET: crypto.randomBytes(64).toString('hex')
@@ -21,6 +24,10 @@ module.exports = async () => {
     const envPath = path.join(process.cwd(), '.env.' + env)
 
     // write the data to the env file
-    fs.outputFileSync(envPath, output)
+    await fs.outputFile(envPath, output)
   })
+
+  await Promise.all(promises)
+
+  logger.info('Generated env files')
 }

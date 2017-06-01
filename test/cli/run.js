@@ -1,12 +1,11 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-require('../helpers/fix_stdio')
+require('../helpers/fix-stdio')
 
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
-const workingDir = require('../helpers/working_dir')
+const workingDir = require('../helpers/working-dir')
 const cmd = require('../helpers/cmd')
-const expect = require('chai').expect
 const get = require('simple-get')
 
 const clinew = require('../../cli/new')
@@ -25,8 +24,8 @@ const expectRunning = child => new Promise(resolve => {
   const dotry = () => get('http://localhost:3000', (err, res) => {
     tries++
     if (err && tries < 12) return setTimeout(dotry, 5000)
-    expect(err).to.not.exist()
-    expect(res.statusCode).to.equal(200)
+    expect(err).toBeNull()
+    expect(res.statusCode).toBe(200)
     child.stop()
     resolve()
   })
@@ -37,7 +36,7 @@ const expectRunning = child => new Promise(resolve => {
 const expectStopped = () => new Promise(resolve => {
   setTimeout(() => {
     get('http://localhost:3000', err => {
-      expect(err).to.be.an('error')
+      expect(err).toBeDefined()
       resolve()
     })
   }, 5000)
@@ -47,10 +46,10 @@ describe('CLI: pubsweet run', () => {
   it('adds a component', async () => {
     const dir = await workingDir()
 
-    await clinew(cmd('new testapp', answers))()
+    await clinew(cmd('new testapp', answers))
+
     const appPath = path.join(dir, 'testapp')
     process.chdir(appPath)
-
     require('app-module-path').addPath(appPath)
 
     const child = await clirun(cmd('run'))

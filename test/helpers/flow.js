@@ -16,12 +16,8 @@ Nightmare.action('gettext', function (selector, done) {
 
 const watch = process.env.WATCH_TESTS === 'true'
 
-module.exports = () => Nightmare(
-  {
-    show: watch,
-    openDevTools: false,
-    typeInterval: watch ? 200 : 10
-  }
-).viewport(
-  1600, 1200
-)
+module.exports = () => Nightmare({
+  show: watch,
+  openDevTools: false,
+  typeInterval: watch ? 200 : 10
+}).viewport(1600, 1200)

@@ -1,11 +1,19 @@
+// TODO: unused?
+
 const logger = require('../../src/logger')
 
 process.stdin.resume()
 
 const exitHandler = (options, err) => {
-  if (options.cleanup && !err) logger.info('Exiting without error')
+  if (options.cleanup && !err) {
+    logger.info('Exiting without error')
+  }
+
   if (options.exit) {
-    if (options.user) logger.info('Exiting at user request (ctrl-c)')
+    if (options.user) {
+      logger.info('Exiting at user request (ctrl-c)')
+    }
+
     process.exit()
   } else if (err) {
     logger.error('Uncaught error (exit prevented): ', err)

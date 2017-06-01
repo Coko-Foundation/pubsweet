@@ -5,6 +5,8 @@ const logger = require('./logger')
 const serverpath = require('./server-path')
 
 const runPrompt = async ({ properties, override }) => {
+  logger.info('Asking for user details')
+
   const prompt = require('prompt')
 
   prompt.override = override
@@ -22,7 +24,7 @@ const runPrompt = async ({ properties, override }) => {
 }
 
 const logInput = result => {
-  logger.info('Received the following answers:')
+  logger.info('Received the following answers:', result)
 
   Object.keys(result).forEach(entry => {
     const answer = entry === 'password' ? '<redacted>' : result[entry]
@@ -30,11 +32,9 @@ const logInput = result => {
   })
 }
 
-const logResult = result => {
-  logger.info(`Successfully added user: ${result.username}`)
-}
-
 const addAdminOwnerToAllCollections = async user => {
+  logger.info('Adding admin owner to collections')
+
   const Collection = require(`${serverpath()}/src/models/Collection`)
   const collections = await Collection.all()
 
@@ -46,6 +46,8 @@ const addAdminOwnerToAllCollections = async user => {
 }
 
 const createUser = async result => {
+  logger.info('Creating user', result.username)
+
   const User = require(`${serverpath()}/src/models/User`)
 
   const user = new User(result)
@@ -67,5 +69,5 @@ module.exports = async options => {
   logInput(result)
 
   const user = await createUser(result)
-  logResult(user)
+  logger.info(`Successfully added user: ${user.username}`)
 }

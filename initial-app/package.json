@@ -1,7 +1,6 @@
 {
   "description": "A new pubsweet app",
   "dependencies": {
-    "pubsweet": "^0.3.3",
     "pubsweet-server": "^0.9.2",
     "pubsweet-client": "^0.9.1",
     "pubsweet-component-blog": "^0.1.5",

@@ -5,6 +5,8 @@ const spawn = require('child-process-promise').spawn
 const logger = require('./logger')
 
 const copyInitialApp = async () => {
+  logger.info('Generating app structure')
+
   // the path to the source files
   const inputDir = path.join(__dirname, '..', 'initial-app')
 
@@ -13,18 +15,28 @@ const copyInitialApp = async () => {
 
   // copy files from the input to the output directory
   await fs.copy(inputDir, outputDir, {overwrite: false})
+
+  // TODO: set "name" in package.json?
+
+  logger.info('Finished generating app structure')
 }
 
 const installPackages = async () => {
+  logger.info('Installing packages')
+
   await spawn('yarn', ['--ignore-optional', '--no-progress'], {
     cwd: process.cwd(),
     stdio: process.env.SILENT_INSTALL ? 'ignore' : 'inherit',
     shell: true,
     env: Object.assign({}, process.env, {NODE_ENV: 'dev'})
   })
+
+  logger.info('Finished installing packages')
 }
 
 const initialGitCommit = async () => {
+  logger.info('Creating initial git commit')
+
   const git = new Git()
 
   // initialise the git repository
@@ -44,23 +56,21 @@ const initialGitCommit = async () => {
   ])
 
   await git.commit('Initial app commit')
+
+  logger.info('git repository set up in app directory with initial commit')
 }
 
 module.exports = async () => {
+  logger.info('Generating initial app')
+
   try {
     await copyInitialApp()
-    logger.info('Generated app structure')
-
-    // TODO: set "name" in package.json?
-
-    logger.info('Installing app dependencies...')
     await installPackages()
-    logger.info('Finished installing app dependencies')
-
     await initialGitCommit()
-    logger.info('git repository set up in app directory with initial commit')
   } catch (e) {
     logger.error('Initial app setup failed')
     throw e
   }
+
+  logger.info('Finished generating initial app')
 }

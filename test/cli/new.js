@@ -1,14 +1,12 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-require('../helpers/fix_stdio')
+require('../helpers/fix-stdio')
 
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
-const fs = require('fs')
-const workingdir = require('../helpers/working_dir')
+const fs = require('fs-extra')
+const workingdir = require('../helpers/working-dir')
 const cmd = require('../helpers/cmd')
-const expect = require('chai').expect
-
 const clinew = require('../../cli/new')
 
 const checkfiles = [
@@ -28,16 +26,22 @@ const answers = {
 }
 
 describe('CLI: pubsweet new', () => {
-  it('requires an app name', () => {
-    expect(() => clinew(cmd('new'))).to.throw(/specify an app name/)
+  it('requires an app name', async () => {
+    await expect(clinew(cmd('new'))).rejects
+      // .toMatch(/specify an app name/)
+      .toBeInstanceOf(Error)
   })
 
   it('creates a new app', async () => {
     const dir = await workingdir()
-    await clinew(cmd('new testapp', answers))()
-    checkfiles.forEach(file => {
+
+    await clinew(cmd('new testapp', answers))
+
+    const promises = checkfiles.map(async file => {
       const filepath = path.join(dir, 'testapp', file)
-      expect(() => fs.statSync(filepath)).to.not.throw()
+      await expect(fs.stat(filepath)).resolves.toBeInstanceOf(fs.Stats)
     })
+
+    await expect(Promise.all(promises)).resolves.toBeUndefined()
   })
 })

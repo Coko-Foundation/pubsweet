@@ -1,11 +1,11 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-require('./helpers/fix_stdio')
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 900000
+require('./helpers/fix-stdio')
 
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const fs = require('fs-extra')
-const workingdir = require('./helpers/working_dir')
+const workingdir = require('./helpers/working-dir')
 const logger = require('../src/logger')
 
 const appname = 'testapp'
@@ -18,64 +18,63 @@ describe('add-user', () => {
   let User
 
   beforeAll(async (done) => {
-    const tmpdir = await workingdir()
-    appdir = path.join(tmpdir, appname)
-    fs.mkdirsSync(appdir)
-    process.chdir(appdir)
-    logger.info('Created directory')
+    try {
+      const tmpdir = await workingdir()
+      appdir = path.join(tmpdir, appname)
+      await fs.mkdirs(appdir)
+      process.chdir(appdir)
+      logger.info('Created directory')
 
-    await require('../src/generate-env')()
-    logger.info('Env generated')
+      await require('../src/generate-env')()
 
-    await require('../src/initial-app')(appname)
-    logger.info('App generated')
+      await require('../src/initial-app')(appname)
 
-    await require('../src/setup-db')({
-      properties: require('../src/db-properties'),
-      override: dbconfig
-    })
-    logger.info('DB created')
+      await require('../src/setup-db')({
+        properties: require('../src/db-properties'),
+        override: dbconfig
+      })
 
-    require('../src/load-config')(path.resolve('', './config'))
-    logger.info('Config loaded')
+      require('../src/load-config')(path.resolve('', './config'))
+      logger.info('Config dir is', process.env.NODE_CONFIG_DIR)
 
-    const serverpath = require('../src/server-path')
-    User = require(`${serverpath()}/src/models/User`)
+      const serverpath = require('../src/server-path')
+      User = require(`${serverpath()}/src/models/User`)
 
-    done()
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
   })
 
-  it('adds a regular user to the database',
-    () => require('../src/add-user')({
+  it('adds a regular user to the database', async () => {
+    await require('../src/add-user')({
       appPath: appdir,
       properties: require('../src/user-properties'),
       override: fixtures.regularuser
-    }).then(
-      () => User.all()
-    ).then(
-      users => {
-        let user = users.find(u => u.username === fixtures.regularuser.username)
-        expect(user).not.toBeNull()
-        expect(user.email).toBe(fixtures.regularuser.email)
-        expect(user.admin).toBe(true)
-      }
-    )
-  )
+    })
 
-  it('adds an admin user to the database',
-    () => require('../src/add-user')({
+    // const user = await User.findOneByField('username', fixtures.regularuser.username)
+    const users = await User.all()
+    const user = users.find(user => user.username === fixtures.regularuser.username)
+
+    expect(user).not.toBeNull()
+    expect(user.email).toBe(fixtures.regularuser.email)
+    expect(user.admin).toBe(false)
+  })
+
+  it('adds an admin user to the database', async () => {
+    await require('../src/add-user')({
       appPath: appdir,
       properties: require('../src/user-properties'),
       override: fixtures.adminuser
-    }).then(
-      () => User.all()
-    ).then(
-      users => {
-        let user = users.find(u => u.username === fixtures.adminuser.username)
-        expect(user).not.toBeNull()
-        expect(user.email).toBe(fixtures.adminuser.email)
-        expect(user.admin).toBe(true)
-      }
-    )
-  )
+    })
+
+    // const user = await User.findOneByField('username', fixtures.adminuser.username)
+    const users = await User.all()
+    const user = users.find(user => user.username === fixtures.adminuser.username)
+
+    expect(user).not.toBeNull()
+    expect(user.email).toBe(fixtures.adminuser.email)
+    expect(user.admin).toBe(true)
+  })
 })

@@ -9,10 +9,14 @@ module.exports = async appPath => {
 
   const dbCheckPath = path.join(dbPath(appPath), 'CURRENT')
 
-  if (!fs.pathExistsSync(dbCheckPath)) {
+  logger.info('Checking that', dbCheckPath, 'exists')
+
+  if (!await fs.pathExists(dbCheckPath)) {
     logger.error('Database appears not to exist')
     logger.error('To create the database for an existing app, see `pubsweet help setupdb`')
     logger.error('To generate a new app, see `pubsweet help new`')
     throw new Error('Database appears not to exist')
   }
+
+  logger.info(dbCheckPath, 'exists')
 }

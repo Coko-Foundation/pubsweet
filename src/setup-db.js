@@ -22,8 +22,7 @@ const runPrompt = async ({ override, properties }) => {
 }
 
 const logResult = results => {
-  logger.info(results)
-  logger.info('Received the following answers:')
+  logger.info('Received the following answers:', results)
 
   Object.keys(results).forEach(key => {
     const answer = key === 'password' ? '<redacted>' : results[key]
@@ -31,7 +30,9 @@ const logResult = results => {
   })
 }
 
-const createUser = async data => {
+const createAdminUser = async data => {
+  logger.info('Creating the admin user')
+
   const User = require(`${serverPath()}/src/models/User`)
 
   // create and save an admin user
@@ -51,6 +52,8 @@ const createUser = async data => {
 }
 
 const createCollection = async (title, user) => {
+  logger.info('Creating the initial collection')
+
   const Collection = require(`${serverPath()}/src/models/Collection`)
 
   const created = Date.now()
@@ -76,12 +79,14 @@ module.exports = async options => {
     logResult(result)
 
     // create initial user
-    const user = await createUser(result)
+    const user = await createAdminUser(result)
 
     // create initial collection, if specified
-    const collection = result.collection ? createCollection(result.collection, user) : null
+    const collection = result.collection ? await createCollection(result.collection, user) : null
 
-    return { user, collection }
+    logger.info('Finished setting up the database')
+
+    return {user, collection}
   } catch (e) {
     logger.error('database setup failed')
     throw e

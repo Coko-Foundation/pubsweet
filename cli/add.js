@@ -14,6 +14,7 @@ module.exports = async args => {
   process.env.NODE_ENV = program.dev ? 'dev' : 'production'
 
   let components = program.args
+
   if (!components || components.length === 0) {
     const eg = colors.bold(`pubsweet add ${colors.italic('login signup blog')}`)
     throw new Error(`You must specify one or more components, e.g. ${eg}`)
@@ -22,5 +23,6 @@ module.exports = async args => {
   logger.info(`Installing ${components.length} components...`)
 
   await require('../src/add-components')(components)
-    .then(() => logger.info(`All ${components.length} components installed`))
+
+  logger.info(`All ${components.length} components installed`)
 }
