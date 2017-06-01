@@ -47,6 +47,18 @@ describe('users api', () => {
       )
     })
 
+    it('can get another user', () => {
+      return api.users.authenticate.post(
+        fixtures.user
+      ).then(
+        token => api.users.get(userId, token).expect(STATUS.OK)
+      ).then(
+        res => {
+          expect(res.body.username).not.toBe(undefined)
+        }
+      )
+    })
+
     it('deletes a user', () => {
       return api.users.authenticate.post(
         fixtures.user
