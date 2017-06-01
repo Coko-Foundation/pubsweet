@@ -55,6 +55,7 @@ api.post('/', (req, res, next) => {
   )
 })
 
+// List users
 api.get('/', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'read', req.originalUrl
