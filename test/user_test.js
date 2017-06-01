@@ -104,4 +104,39 @@ describe('User', function () {
       done.fail(e)
     }
   })
+
+  it('finds a list of users', async () => {
+    const users = [
+      { username: 'user1', email: 'user-1@example.com', password: 'foo1', admin: true },
+      { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
+      { username: 'user3', email: 'user-3@example.com', password: 'foo3' }
+    ]
+
+    await Promise.all(users.map(user => new User(user).save()))
+
+    const items = await User.findByField('admin', true)
+
+    expect(items).toHaveLength(1)
+    expect(items[0]).toBeInstanceOf(User)
+  })
+
+  it('finds a single user by field', async () => {
+    const users = [
+      { username: 'user1', email: 'user-1@example.com', password: 'foo1', admin: true },
+      { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
+      { username: 'user3', email: 'user-3@example.com', password: 'foo3' }
+    ]
+
+    await Promise.all(users.map(user => new User(user).save()))
+
+    const item = await User.findOneByField('admin', true)
+
+    expect(item).toBeInstanceOf(User)
+
+    expect(item).toEqual(expect.objectContaining({
+      username: 'user1',
+      email: 'user-1@example.com',
+      admin: true
+    }))
+  })
 })
