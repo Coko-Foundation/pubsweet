@@ -13,14 +13,13 @@ const appname = 'testapp'
 
 const dbconfig = require('./fixtures').dbconfig
 
-const env = process.env.NODE_ENV = 'production'
-
 describe('setup-db', () => {
   let appdir
   let dbdir
-  const dbfiles = env => fs.readdir(path.join(dbdir, env))
 
   beforeAll(async (done) => {
+    process.env.NODE_ENV = 'production'
+
     try {
       const tmpdir = await workingdir()
       appdir = await fs.mkdirs(path.join(tmpdir, appname))
@@ -51,9 +50,9 @@ describe('setup-db', () => {
   })
 
   it('creates the database', async () => {
-    await expect(fs.readdir(dbdir)).resolves.toContain(env)
+    await expect(fs.readdir(dbdir)).resolves.toContain('production')
 
-    const items = await dbfiles(env)
+    const items = await fs.readdir(path.join(dbdir, 'production'))
 
     expect(items).toContain('CURRENT')
     expect(items).toContain('LOG')
@@ -61,6 +60,8 @@ describe('setup-db', () => {
   })
 
   it('only creates the database for the current NODE_ENV', async () => {
-    await expect(dbfiles('dev')).resolves.not.toContain('CURRENT')
+    const items = await fs.readdir(path.join(dbdir, 'dev'))
+
+    expect(items).not.toContain('CURRENT')
   })
 })

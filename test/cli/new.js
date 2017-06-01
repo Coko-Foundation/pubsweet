@@ -42,6 +42,8 @@ describe('CLI: pubsweet new', () => {
       await expect(fs.stat(filepath)).resolves.toBeInstanceOf(fs.Stats)
     })
 
-    await expect(Promise.all(promises)).resolves.toBeUndefined()
+    await expect(Promise.all(promises)).resolves.toEqual(
+      expect.arrayContaining([undefined])
+    )
   })
 })

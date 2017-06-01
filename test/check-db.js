@@ -6,6 +6,8 @@ const dbPath = require('../src/db-path')
 
 describe.only('check-db', () => {
   let env
+
+  // temporarily set NODE_ENV to "production" so that checkdb runs
   beforeAll(() => {
     env = process.env.NODE_ENV
     process.env.NODE_ENV = 'production'
