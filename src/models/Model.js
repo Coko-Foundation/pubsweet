@@ -171,7 +171,7 @@ class Model {
     })
   }
 
-  async findOneByField (field, value) {
+  static async findOneByField (field, value) {
     const results = await this.findByField(field, value)
 
     return results.length ? results[0] : null
