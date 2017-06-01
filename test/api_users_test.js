@@ -51,7 +51,7 @@ describe('users api', () => {
       return api.users.authenticate.post(
         fixtures.user
       ).then(
-        token => api.users.get(userId, token).expect(STATUS.OK)
+        token => api.users.get(otherUser.id, token).expect(STATUS.OK)
       ).then(
         res => {
           expect(res.body.username).not.toBe(undefined)
