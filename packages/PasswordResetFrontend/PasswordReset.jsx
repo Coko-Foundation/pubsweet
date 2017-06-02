@@ -10,7 +10,11 @@ class PasswordReset extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
+    this.state = this.getInitialState()
+  }
+
+  getInitialState () {
+    return {
       username: '',
       emailSent: false,
       emailError: false,
@@ -25,18 +29,7 @@ class PasswordReset extends React.Component {
   }
 
   componentWillReceiveProps () {
-    this.setState({
-      username: '',
-      emailSent: false,
-      emailError: false,
-      emailErrorMessage: null,
-      emailSending: false,
-      password: '',
-      passwordChanged: false,
-      passwordError: false,
-      passwordErrorMessage: null,
-      passwordSending: false
-    })
+    this.setState(this.getInitialState())
   }
 
   post (data) {
