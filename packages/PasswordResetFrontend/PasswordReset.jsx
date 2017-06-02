@@ -168,7 +168,6 @@ class PasswordReset extends React.Component {
 
       if (token) {
         // TODO: validate token on page load?
-        // TODO: add username to the URL as well?
 
         return (
           <form onSubmit={this.handlePasswordSubmit}>
@@ -215,23 +214,28 @@ class PasswordReset extends React.Component {
     const buildError = (error) => {
       if (!error) return null
 
+      return (
+        <Alert bsStyle="warning">
+          <i className="fa fa-exclamation-circle"/> {buildErrorMessage(error)}
+        </Alert>
+      )
+    }
+
+    const buildErrorMessage = (error) => {
       if (error === 'expired') {
-        error = (
+        return (
           <span>The token is only valid for 24 hours, please <Link to="/password-reset">request a new password reset email</Link></span>
         )
       }
 
       if (error === 'invalid') {
-        error = (
-          <span>The token is no longer valid, please <Link to="/password-reset">request a new password reset email</Link></span>
+        return (
+          <span>The token is no longer valid, please <Link
+            to="/password-reset">request a new password reset email</Link></span>
         )
       }
 
-      return (
-        <Alert bsStyle="warning">
-          <i className="fa fa-exclamation-circle"/> {error}
-        </Alert>
-      )
+      return error
     }
 
     return (
