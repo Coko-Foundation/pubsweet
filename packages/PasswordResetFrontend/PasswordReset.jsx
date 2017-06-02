@@ -56,7 +56,7 @@ class PasswordReset extends React.Component {
     if (username) {
       this.initiatePasswordReset({username})
     } else {
-      this.setState({error: 'Please enter a username'})
+      this.setState({emailError: 'Please enter a username'})
     }
   }
 
@@ -72,7 +72,7 @@ class PasswordReset extends React.Component {
     if (password) {
       this.resetPassword({password, token, username})
     } else {
-      this.setState({error: 'Please enter a new password'})
+      this.setState({passwordError: 'Please enter a new password'})
     }
   }
 
