@@ -27,6 +27,29 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
+  // get a list of collections, with the specified fields
+  describeAction('getCollections', {
+    firstarg: {
+      fields: ['type', 'title']
+    },
+    types: {
+      request: T.GET_COLLECTIONS_REQUEST,
+      success: T.GET_COLLECTIONS_SUCCESS
+    },
+    properties: {
+      request: ['type'],
+      success: ['type', 'collections', 'receivedAt'],
+      failure: ['type', 'error']
+    },
+    user: () => app.user
+  }, (action, data) => {
+    const filteredCollection = data.GET_COLLECTIONS_SUCCESS.collections[0]
+    expect(filteredCollection).toHaveProperty('id')
+    expect(filteredCollection).toHaveProperty('type')
+    expect(filteredCollection).toHaveProperty('title')
+    expect(filteredCollection).not.toHaveProperty('created')
+  })
+
   let newcol
 
   describeAction('createCollection', {

@@ -34,11 +34,15 @@ function getCollectionsSuccess (collections) {
   }
 }
 
-export function getCollections () {
+export function getCollections (options) {
   return dispatch => {
     dispatch(getCollectionsRequest())
 
-    const url = collectionUrl()
+    let url = collectionUrl()
+
+    if (options && options.fields) {
+      url += '?fields=' + encodeURIComponent(options.fields.join(','))
+    }
 
     return fetch(url).then(
         response => response.json()
