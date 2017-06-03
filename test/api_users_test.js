@@ -10,12 +10,16 @@ const api = require('./helpers/api')
 describe('users api', () => {
   let userId
 
-  beforeEach(() => {
-    return cleanDB().then(
-      () => require('../src/setup-base').setup(fixtures.user, fixtures.collection)
-    ).then(
-      user => { userId = user.id }
-    )
+  beforeEach(async (done) => {
+    try {
+      await cleanDB()
+      const { user } = await require('../src/setup-base').setup(fixtures.user, fixtures.collection)
+      userId = user.id
+      expect(userId).not.toBeNull()
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
   })
 
   afterEach(cleanDB)
@@ -43,6 +47,19 @@ describe('users api', () => {
         res => {
           expect(res.body.users.length).toBe(2)
           expect(res.body.users[0].username).not.toBe(undefined)
+        }
+      )
+    })
+
+    it('can get another user', () => {
+      console.log('userId', userId)
+      return api.users.authenticate.post(
+        fixtures.user
+      ).then(
+        token => api.users.get(otherUser.id, token).expect(STATUS.OK)
+      ).then(
+        res => {
+          expect(res.body.username).toBe(otherUser.username)
         }
       )
     })
