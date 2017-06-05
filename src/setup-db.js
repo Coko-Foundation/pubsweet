@@ -86,6 +86,10 @@ module.exports = async options => {
 
     logger.info('Finished setting up the database')
 
+    // generate the env file when setting up the database
+    // TODO: should this be more explicit
+    await require('./generate-env')()
+
     return {user, collection}
   } catch (e) {
     logger.error('database setup failed')
