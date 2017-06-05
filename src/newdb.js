@@ -13,4 +13,8 @@ module.exports = async opts => {
   logger.info('Config dir is', process.env.NODE_CONFIG_DIR)
 
   await require('./setup-db')(opts)
+
+  // generate the env file when setting up the database
+  // TODO: should this be more explicit
+  await require('./generate-env')()
 }
