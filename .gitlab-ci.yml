@@ -3,4 +3,6 @@ before_script:
   - yarn
 test:
   script:
-    - xvfb-run --server-args "-screen 0 1024x768x24" npm run testdocker
+    - xvfb-run --server-args "-screen 0 1024x768x24" yarn run testdocker
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
