@@ -1,5 +1,7 @@
 const fs = require('fs-extra')
 
+process.env.NODE_ENV = 'test' // TODO: this shouldn't be needed
+
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
