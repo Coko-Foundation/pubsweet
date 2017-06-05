@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test jest --runInBand --no-cache",
     "testonly": "NODE_ENV=test jest --runInBand --no-cache",
     "testdocker": "NODE_ENV=test jest --color --runInBand --no-watchman --no-cache --forceExit",
-    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base",
+    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
     "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug",
     "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
   },
