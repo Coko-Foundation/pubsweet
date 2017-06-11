@@ -1,24 +1,30 @@
 const path = require('path')
 const fs = require('fs-extra')
-const uuid = require('uuid')
+const crypto = require('crypto')
+const logger = require('./logger')
 
-const envpath = mode => path.join(process.cwd(), `.env.${mode}`)
+const envDir = process.cwd() // TODO: require this from a module?
 
-const envfile = () => `PUBSWEET_SECRET=${uuid.v4()}\n`
+module.exports = async () => {
+  const env = process.env.NODE_ENV
 
-const write = (path, content) => new Promise(
-  (resolve, reject) => fs.writeFile(
-    path,
-    content,
-    err => {
-      if (err) return reject(err)
-      return resolve(path)
-    }
-  )
-)
+  logger.info('Generating env file for', env)
 
-module.exports = () => {
-  return write(
-    envpath(process.env.NODE_ENV), envfile(process.env.NODE_ENV)
-  )
+  // generate a unique secret
+  const conf = {
+    PUBSWEET_SECRET: crypto.randomBytes(64).toString('hex')
+  }
+
+  // generate the output string
+  const output = Object.keys(conf).map(key => {
+    return [key, conf[key]].join('=')
+  }).join('\n')
+
+  // env file per environment, inside the root dir
+  const envPath = path.join(envDir, '.env.' + env)
+
+  // write the data to the env file
+  await fs.outputFile(envPath, output)
+
+  logger.info('Generated env files')
 }

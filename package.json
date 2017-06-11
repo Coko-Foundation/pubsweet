@@ -7,12 +7,12 @@
     "lint": "eslint bin src cli test",
     "pretest": "npm run lint",
     "pretestci": "npm run pretest",
-    "test": "NODE_ENV=test jest --runInBand --no-cache test/*.js test/cli/*.js",
+    "test": "NODE_ENV=test jest --runInBand --no-cache",
     "testonly": "NODE_ENV=test jest --runInBand --no-cache",
-    "testdocker": "NODE_ENV=test jest --color --runInBand --no-watchman --no-cache --verbose --forceExit test/*.js test/cli/*.js",
+    "testdocker": "NODE_ENV=test jest --color --runInBand --no-watchman --no-cache --forceExit",
     "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
-    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --verbose --env jest-environment-node-debug test/*.js test/cli/*.js",
-    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest test/*.js test/cli/*.js"
+    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug",
+    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
   },
   "keywords": [
     "pubsweet",
@@ -34,13 +34,13 @@
     "git-wrapper2-promise": "^0.2.9",
     "html-webpack-plugin": "^2.24.0",
     "joi": "^10.4.1",
-    "prompt": "blahah/prompt",
+    "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
     "temp": "^0.8.3",
     "tmp": "0.0.29",
     "uuid": "^3.0.1",
     "webpack": "^2.3.2",
     "winston": "^2.2.0",
-    "yarn": "^0.23.2"
+    "yarn": "^0.24.6"
   },
   "repository": {
     "type": "git",
@@ -48,19 +48,19 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "chai-string": "^1.3.0",
     "clear-require": "^2.0.0",
     "eslint": "^3.19.0",
-    "jest": "^19.0.2",
+    "jest": "^20.0.4",
     "nightmare": "^2.9.1",
     "nightmare-wait-for-url": "0.0.2",
     "simple-get": "^2.5.1",
     "standard": "^10.0.1"
   },
   "jest": {
-    "testRegex": "/test/.*\\.jsx?$",
+    "testMatch": [
+      "**/test/*.js",
+      "**/test/cli/*.js"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/*.js",

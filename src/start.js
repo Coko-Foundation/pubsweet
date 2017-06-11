@@ -1,16 +1,17 @@
 require('app-module-path').addPath(process.cwd())
 const path = require('path')
+
 const serverpath = require('./server-path')
 const dotenvPath = path.join(process.cwd(), `.env.${process.env.NODE_ENV}`)
 require('dotenv').config({ path: dotenvPath })
 
 const http = require('http')
-
 const express = require('express')
 const webpack = require('webpack')
 const pubsweet = require(`${serverpath()}`)
 
 const logger = require('./logger')
+const onError = require('./error-exit')
 
 const config = require(path.join(process.cwd(), `config/${process.env.NODE_ENV}`))
 
@@ -21,15 +22,13 @@ let program
 let server
 let serverListening = false
 
-const webpackconfig = require(
-  path.join(
-    process.cwd(), 'webpack', `webpack.${process.env.NODE_ENV}.config.js`
-  )
-)
+const webpackconfig = require(path.join(
+  process.cwd(), 'webpack', `webpack.${process.env.NODE_ENV}.config.js`
+))
 
-if (process.env.NODE_ENV === 'test') webpackconfig.target = 'electron-main'
-
-const onError = err => logger.error(err.stack) && process.exit(1)
+if (process.env.NODE_ENV === 'test') {
+  webpackconfig.target = 'electron-main'
+}
 
 const registerDevtools = (app, compiler, cb) => {
   app.use(require(
@@ -53,12 +52,13 @@ const registerDevtools = (app, compiler, cb) => {
 }
 
 const registerComponents = app => {
-  const components = config.pubsweet.components
-  components.forEach(name => {
+  config.pubsweet.components.forEach(name => {
     const component = require(path.join(process.cwd(), 'node_modules', name))
+    logger.info('Registered component', name)
+
     if (component.backend) {
-      logger.info('Registered backend component', name)
       component.backend()(app)
+      logger.info('Registered backend component', name)
     }
   })
 }
@@ -66,6 +66,8 @@ const registerComponents = app => {
 let watcher
 const startWatcher = () => {
   const chokidar = require('chokidar')
+
+  // TODO: use a whitelist instead of a blacklist
   watcher = chokidar.watch(process.cwd(), {
     ignored: /(node_modules|_build|api\/db|.git|logs|static|webpack|pubsweet.log|app|uploads|.idea)/
   })
@@ -75,17 +77,17 @@ const startWatcher = () => {
     if (reload) reloadServer()
   }
 
-  watcher
-    .on('ready', () => {
-      logger.info('Watching for filesystem changes')
-      watcher
-        .on('add', path => update(`File ${path} added`, true))
-        .on('change', path => update(`File ${path} changed`, true))
-        .on('unlink', path => update(`File ${path} removed`, true))
-        .on('addDir', path => update(`Directory ${path} added`, true))
-        .on('unlinkDir', path => update(`Directory ${path} removed`, true))
-        .on('error', onError)
-    })
+  watcher.on('ready', () => {
+    logger.info('Watching for filesystem changes')
+
+    watcher
+      .on('add', path => update(`File ${path} added`, true))
+      .on('change', path => update(`File ${path} changed`, true))
+      .on('unlink', path => update(`File ${path} removed`, true))
+      .on('addDir', path => update(`Directory ${path} added`, true))
+      .on('unlinkDir', path => update(`Directory ${path} removed`, true))
+      .on('error', onError)
+  })
 
   program.watch.forEach(watcher.add)
 }

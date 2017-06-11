@@ -1,5 +1,4 @@
 const path = require('path')
-const fs = require('fs')
 
 module.exports = [
   new RegExp(path.join(__dirname, '../node_modules/pubsweet-client/src')),

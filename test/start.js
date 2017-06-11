@@ -1,11 +1,11 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1200000
-require('./helpers/fix_stdio')
+require('./helpers/fix-stdio')
 
-require('app-module-path').addPath(__dirname + '/../..')
+const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const fs = require('fs-extra')
-const path = require('path')
-const workingdir = require('./helpers/working_dir')
+const workingdir = require('./helpers/working-dir')
 const logger = require('../src/logger')
 
 const appname = 'testapp'
@@ -20,35 +20,33 @@ describe('start', () => {
   let server
 
   beforeAll(async (done) => {
-    const tmpdir = await workingdir()
-    const appdir = fs.mkdirsSync(path.join(tmpdir, appname))
-    process.chdir(appdir)
-    logger.info('Created directory')
+    try {
+      const tmpdir = await workingdir()
+      const appdir = await fs.mkdirs(path.join(tmpdir, appname))
+      process.chdir(appdir)
+      logger.info('Created directory', appdir)
 
-    await require('../src/generate-config')()
-    logger.info('Config generated')
+      await require('../src/generate-env')()
 
-    await require('../src/generate-env')()
-    logger.info('Env generated')
+      await require('../src/initial-app')(appname)
 
-    await require('../src/initial-app')(appname)
-    logger.info('App generated')
+      await require('../src/setup-db')({
+        properties: require('../src/db-properties'),
+        override: dbconfig
+      })
 
-    await require('../src/setup-db')({
-      properties: require('../src/db-properties'),
-      override: dbconfig
-    })
-    logger.info('DB created')
+      require('../src/load-config')(path.resolve('', './config'))
+      logger.info('Config dir is', process.env.NODE_CONFIG_DIR)
 
-    require('../src/load-config')(path.resolve('', './config'))
-    logger.info('Config loaded')
-
-    logger.info('Starting server')
-    require('../src/start')(_server => {
-      server = _server
-      logger.info('Server started')
-      done()
-    })
+      logger.info('Starting server')
+      require('../src/start')(_server => {
+        server = _server
+        logger.info('Server started')
+        done()
+      })
+    } catch (e) {
+      done.fail(e)
+    }
   })
 
   afterAll(done => {
@@ -65,58 +63,14 @@ describe('start', () => {
   // - login as the admin user
   // - visit the homepage
 
-  // call `done`/`done.fail` when complete
-  it('should allow admin to log in', done => {
-    return flow()
+  it('should allow admin to log in', async () => {
+    const promise = flow()
       .use(pubsweet.login(dbconfig))
       .waitForUrl(/manage.posts/)
       .wait('nav')
       .evaluate(() => document.querySelector('h2').innerText)
       .end()
-      .then(text => {
-        try {
-          expect(text).toBe(dbconfig.collection)
-          done()
-        } catch (e) {
-          done.fail()
-        }
-      })
+
+    await expect(promise).resolves.toBe(dbconfig.collection)
   })
-
-  // return a promise
-  // it('should allow admin to log in', () => {
-  //   return flow()
-  //     .use(pubsweet.login(dbconfig))
-  //     .waitForUrl(/manage.posts/)
-  //     .wait('nav')
-  //     .evaluate(() => document.querySelector('h2').innerText)
-  //     .end()
-  //     .then(text => {
-  //       expect(text).toBe(dbconfig.collection)
-  //     })
-  // })
-
-  // NOTE: disabled due to https://github.com/facebook/jest/issues/2059
-  // it('should allow admin to log in', async () => {
-  //   const text = await flow()
-  //     .use(pubsweet.login(dbconfig))
-  //     .waitForUrl(/manage.posts/)
-  //     .wait('nav')
-  //     .evaluate(() => document.querySelector('h2').innerText)
-  //     .end()
-  //
-  //   await expect(text).toBe(dbconfig.collection)
-  // })
-
-  // NOTE: use `resolves`, which requires Jest >= v20
-  // it('should allow admin to log in', () => {
-  //   const promise = flow()
-  //     .use(pubsweet.login(dbconfig))
-  //     .waitForUrl(/manage.posts/)
-  //     .wait('nav')
-  //     .evaluate(() => document.querySelector('h2').innerText)
-  //     .end()
-  //
-  //   return expect(promise).resolves.toBe(dbconfig.collection)
-  // })
 })

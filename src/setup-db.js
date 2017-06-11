@@ -2,95 +2,97 @@ process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')
-const serverpath = require('./server-path')
-const logthrow = require('./error-log-throw')
+const serverPath = require('./server-path')
 
-const runPrompt = options => new Promise((resolve, reject) => {
+const runPrompt = async ({ override, properties }) => {
   const prompt = require('prompt')
 
-  prompt.override = options.override
+  prompt.override = override
   prompt.message = colors.cyan('question:')
   prompt.delimiter = colors.green('><')
 
   prompt.start()
-  prompt.get({ properties: options.properties }, (err, result) => {
-    if (err) return reject(err)
-    resolve(result)
-  })
-})
 
-const logResult = result => new Promise(
-  resolve => {
-    logger.info('Received the following answers:')
-
-    for (const entry in result) {
-      const answer = entry === 'password' ? '<redacted>' : result[entry]
-      logger.info(`  ${entry}: ${answer}`)
-    }
-
-    resolve(result)
-  }
-)
-
-const prepareEntities = result => new Promise(resolve => {
-  const user = {
-    username: result.username,
-    email: result.email,
-    password: result.password,
-    admin: true
-  }
-
-  const collection = {
-    title: result.collection,
-    created: Date.now()
-  }
-
-  resolve({ user, collection })
-})
-
-const setupModels = options => new Promise((resolve, reject) => {
-  logger.info('Setting up DB models in', serverpath())
-
-  const Collection = require(`${serverpath()}/src/models/Collection`)
-  const User = require(`${serverpath()}/src/models/User`)
-
-  const admin = new User(options.user)
-
-  const makecollection = admin => {
-    logger.info('Saved admin user: ', options.user.username)
-    let collection = new Collection(options.collection)
-    collection.setOwners([admin.id])
-    return collection.save()
-  }
-
-  const resolvewithdata = collection => {
-    logger.info('Created initial collection: ', collection.title)
-    admin.password = options.user.password
-    resolve({
-      user: admin,
-      collection: collection
+  return new Promise((resolve, reject) => {
+    prompt.get({properties}, (err, result) => {
+      if (err) reject(err)
+      resolve(result)
     })
+  })
+}
+
+const logResult = results => {
+  logger.info('Received the following answers:', results)
+
+  Object.keys(results).forEach(key => {
+    const answer = key === 'password' ? '<redacted>' : results[key]
+    logger.info(`  ${key}: ${answer}`)
+  })
+}
+
+const createAdminUser = async data => {
+  logger.info('Creating the admin user')
+
+  const User = require(`${serverPath()}/src/models/User`)
+
+  // create and save an admin user
+  const user = new User({
+    username: data.username,
+    email: data.email,
+    password: data.password,
+    admin: true
+  })
+
+  await user.save()
+  logger.info('Saved admin user: ', user.username)
+
+  user.password = data.password
+
+  return user
+}
+
+const createCollection = async (title, user) => {
+  logger.info('Creating the initial collection')
+
+  const Collection = require(`${serverPath()}/src/models/Collection`)
+
+  const created = Date.now()
+
+  // create and save an initial collection
+  const collection = new Collection({ title, created })
+  collection.setOwners([user.id])
+
+  await collection.save()
+  logger.info('Created initial collection: ', collection.title)
+
+  return collection
+}
+
+module.exports = async options => {
+  try {
+    logger.info('Setting up the database')
+
+    // ask the user for input
+    const result = await runPrompt(options)
+
+    // log the result
+    logResult(result)
+
+    // create initial user
+    const user = await createAdminUser(result)
+
+    // create initial collection, if specified
+    const collection = result.collection ? await createCollection(result.collection, user) : null
+
+    logger.info('Finished setting up the database')
+
+    // generate the env file when setting up the database
+    // TODO: should this be more explicit
+    await require('./generate-env')()
+
+    return {user, collection}
+  } catch (e) {
+    logger.error('database setup failed')
+    throw e
   }
-
-  admin.save().then(
-    makecollection
-  ).then(
-    resolvewithdata
-  ).catch(reject)
-})
-
-module.exports = options => {
-  logger.info('Setting up the database')
-
-  return runPrompt(
-    options
-  ).then(
-    logResult
-  ).then(
-    prepareEntities
-  ).then(
-    setupModels
-  ).catch(
-    logthrow('database setup failed')
-  )
 }

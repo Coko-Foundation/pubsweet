@@ -1,99 +1,82 @@
-const spawn = require('child_process').spawn
-const logger = require('../src/logger')
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const diff = require('lodash/difference')
-const after = require('lodash/after')
-const logthrow = require('./error-log-throw')
+const spawn = require('child_process').spawn
+
+const logger = require('../src/logger')
 
 // this regex matches all URL patterns and shortcuts accepted by npm
 // https://regex101.com/r/LWuC1E/1
-const reporegex = /^((git\+?[^:]*:\/\/)|(github|gitlab|bitbucket|gist))/
 const isRepo = string => {
-  const is = reporegex.test(string)
-  return is
-}
-
-const isPath = string => {
-  try {
-    fs.statSync(string)
-    return true
-  } catch (e) {
-    return false
-  }
+  return /^((git\+?[^:]*:\/\/)|(github|gitlab|bitbucket|gist))/.test(string)
 }
 
 const resolvename = name => {
-  if (isPath(name)) return `file:${name}`
+  if (fs.pathExistsSync(name)) return `file:${name}`
   if (isRepo(name)) return name
-  return /$pubsweet-component/.test(name) ? name : `pubsweet-component-${name}`
+  return /^pubsweet-component/.test(name) ? name : `pubsweet-component-${name}`
 }
 
-const resolve = components => new Promise(
-  resolve => resolve(components.map(resolvename).join(' '))
-)
+const install = names => new Promise((resolve, reject) => {
+  logger.info('Adding components', names)
 
-const install = names => new Promise(
-  (resolve, reject) => {
-    require('../src/load-config')(path.resolve('', './config'))
+  require('../src/load-config')(path.resolve('', './config'))
 
-    const pkg = JSON.parse(fs.readFileSync('./package.json'))
-    const oldmodules = Object.keys(pkg.dependencies)
-    const child = spawn(
-      `yarn add ${names}`,
-      { cwd: process.cwd(), stdio: 'inherit', shell: true }
-    )
+  const child = spawn(`yarn add ${names}`, {
+    cwd: process.cwd(),
+    stdio: 'inherit',
+    shell: true
+  })
 
-    child.on('error', reject)
+  child.on('close', resolve)
+  child.on('error', reject)
 
-    child.on('close', () => {
-      const newpkg = JSON.parse(fs.readFileSync('./package.json'))
-      const newmodules = Object.keys(newpkg.dependencies)
-      const diffmodules = diff(newmodules, oldmodules)
-      resolve(diffmodules)
-    })
+  logger.info('Finished adding components', names)
+})
+
+const updateConfig = async modules => {
+  logger.info(`Adding ${modules.length} components to config`)
+  logger.info(`Components being added: ${modules.join(' ')}`)
+
+  const configFile = path.join(process.cwd(), 'config', `shared.js`)
+  if (!fs.pathExistsSync(configFile)) return
+
+  logger.info(`Adding components to config`)
+  const config = require(configFile)
+
+  // TODO: test that this works when empty/undefined
+  config.pubsweet.components = modules.concat(config.pubsweet.components)
+
+  const output = [
+    `const path = require('path')`,
+    `module.exports = ${JSON.stringify(config, null, 2)}`
+  ].join('\n\n')
+
+  await fs.writeFile(configFile, output)
+
+  logger.info('Finished updating config')
+}
+
+const dependencyNames = async () => {
+  logger.info('Reading dependencies')
+
+  const { dependencies } = await fs.readJson('./package.json')
+
+  return dependencies
+}
+
+module.exports = async components => {
+  try {
+    const names = components.map(resolvename).join(' ')
+
+    const oldModules = await dependencyNames()
+    await install(names)
+    const newModules = await dependencyNames()
+
+    const addedModules = diff(newModules, oldModules)
+    await updateConfig(addedModules)
+  } catch (e) {
+    logger.error('adding components failed')
+    throw e
   }
-)
-
-const configpath = mode => path.join(process.cwd(), 'config', `${mode}.js`)
-
-const updateconfig = modules => new Promise(
-  resolve => {
-    logger.info(`Adding ${modules.length} components to config`)
-    logger.info(`Components being added: ${modules.join(' ')}`)
-    const deployments = ['dev', 'production']
-
-    const doresolve = after(2, resolve)
-
-    deployments.forEach(mode => {
-      const configfile = configpath(mode)
-
-      fs.stat(configfile, err => {
-        if (err) return doresolve()
-        logger.info(`Adding to ${mode} config`)
-        const config = require(configfile)
-
-        const old = config.pubsweet.components || []
-        config.pubsweet.components = old.concat(modules)
-
-        const configstr = `
-  const path = require('path')
-
-  module.exports = ${JSON.stringify(config, null, 2)}
-  `
-        fs.writeFileSync(configpath(mode), configstr)
-        doresolve()
-      })
-    })
-  }
-)
-
-module.exports = components => resolve(
-  components
-).then(
-  install
-).then(
-  updateconfig
-).catch(
-  logthrow('database setup failed')
-)
+}

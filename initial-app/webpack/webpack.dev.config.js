@@ -59,8 +59,8 @@ module.exports = [
       new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new CompressionPlugin({
-        asset: "[path].gz[query]",
-        algorithm: "gzip",
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
         test: /\.js$|\.css$|\.html$/
       })
     ],

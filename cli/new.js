@@ -3,17 +3,16 @@ const colors = require('colors/safe')
 const program = require('commander')
 const properties = require('../src/db-properties')
 
-module.exports = args => {
+module.exports = async args => {
   program
-  
     .arguments('[name]')
     .description('Generate a new app in directory [name].')
     .option('--dev', 'Setup app for development')
     .option('--clobber', 'Overwrite any existing files')
 
-  for (const key in properties) {
+  Object.keys(properties).forEach(key => {
     program.option(`--${key} [string]`, properties[key].description)
-  }
+  })
 
   program.parse(args || process.argv)
 
@@ -28,7 +27,7 @@ module.exports = args => {
 
   logger.info('Generating new PubSweet app:', appname)
 
-  return require('../src/newapp')({
+  await require('../src/newapp')({
     appPath: appname,
     properties: require('../src/db-properties'),
     override: program

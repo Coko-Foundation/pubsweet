@@ -1,13 +1,13 @@
-const checkdb = require('../src/check-db')
-const workingdir = require('./helpers/working_dir')
-const chai = require('chai')
-const expect = chai.expect
-chai.use(require('chai-as-promised'))
 const fs = require('fs-extra')
 const path = require('path')
+const workingdir = require('./helpers/working-dir')
+const checkdb = require('../src/check-db')
+const dbPath = require('../src/db-path')
 
 describe.only('check-db', () => {
   let env
+
+  // temporarily set NODE_ENV to "production" so that checkdb runs
   beforeAll(() => {
     env = process.env.NODE_ENV
     process.env.NODE_ENV = 'production'
@@ -17,24 +17,18 @@ describe.only('check-db', () => {
     process.env.NODE_ENV = env
   })
 
-  it('rejects if no db exists', () => {
-    return workingdir().then(
-      dir => expect(
-        checkdb(dir)()
-      ).to.be.rejectedWith()
-    )
+  it('rejects if no db exists', async () => {
+    const dir = await workingdir()
+    await expect(checkdb(dir)).rejects.toBeInstanceOf(Error)
   })
 
-  it('resolves if db exists', () => {
-    return workingdir().then(
-      dir => {
-        const dbdir = require('../src/db-path')(dir)
-        fs.mkdirsSync(dbdir)
-        fs.writeFileSync(path.join(dbdir, 'CURRENT'), '')
-        return expect(
-          checkdb(dir)()
-        ).to.eventually.equal()
-      }
-    )
+  it('resolves if db exists', async () => {
+    const dir = await workingdir()
+
+    const dbdir = dbPath(dir)
+    await fs.mkdirs(dbdir)
+    await fs.writeFile(path.join(dbdir, 'CURRENT'), '')
+
+    await expect(checkdb(dir)).resolves.toBeUndefined()
   })
 })

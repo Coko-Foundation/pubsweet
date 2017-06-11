@@ -3,20 +3,21 @@ const colors = require('colors/safe')
 const program = require('commander')
 const properties = require('../src/user-properties')
 
-module.exports = args => {
+module.exports = async args => {
   program
     .arguments('[path]')
     .description('Add a user to the database for pubsweet app at [path].')
     .option('--dev', 'Add user to development mode database')
 
-  for (let key in properties) {
+  Object.keys(properties).forEach(key => {
     let value = properties[key]
+
     if (value.type && value.type === 'boolean') {
       program.option(`--${key}`, properties[key].description)
     } else {
       program.option(`--${key} [string]`, properties[key].description)
     }
-  }
+  })
 
   program.parse(args || process.argv)
 
@@ -31,7 +32,7 @@ module.exports = args => {
 
   logger.info('Adding user to database of the app at path', appPath)
 
-  return require('../src/add-user')({
+  await require('../src/add-user')({
     appPath: appPath,
     properties: require('../src/user-properties'),
     override: program

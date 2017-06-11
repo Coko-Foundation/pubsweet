@@ -1,48 +1,31 @@
-require('app-module-path').addPath(__dirname + '/../..')
-
-process.env.NODE_ENV = 'test'
-
-const generate = require('../src/generate-env')
-const workingdir = require('./helpers/working_dir')
-const expect = require('chai').expect
 const fs = require('fs-extra')
+
+process.env.NODE_ENV = 'test' // TODO: this shouldn't be needed
+
 const path = require('path')
+require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 describe('generate-env', () => {
-  it('returns a promise', () => workingdir().then(
-    () => expect(generate()).to.be.a('promise'))
-  )
-
-  it('only generates .env for the current NODE_ENV', () => {
-    const env = process.env.NODE_ENV
-
-    return workingdir().then(
-      () => generate().then(
-        envpath => {
-          const parsed = path.parse(envpath)
-          expect(parsed.ext).to.equal(`.${env}`)
-
-          const envfiles = fs.readdirSync(parsed.dir)
-          expect(envfiles).to.include(`.env.${env}`)
-          expect(envfiles).to.not.include('.env.dev')
-          expect(envfiles).to.not.include('.env.production')
-        }
-      )
-    )
+  beforeAll(async (done) => {
+    try {
+      await require('./helpers/working-dir')()
+      await require('../src/generate-env')()
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
   })
 
-  describe('generated env', () => {
-    let env
-    beforeAll(() => workingdir().then(generate).then(
-      envpath => {
-        env = fs.readFileSync(envpath)
-      })
-    )
+  it('only generates .env for the given environment', async () => {
+    const envfiles = await fs.readdir(process.cwd())
+    expect(envfiles).toContain('.env.test')
+    expect(envfiles).not.toContain('.env.dev')
+    expect(envfiles).not.toContain('.env.production')
+  })
 
-    it('configures PUBSWEET_SECRET',
-      () => {
-        expect(env).to.match(/PUBSWEET_SECRET=/)
-      }
-    )
+  it('configures PUBSWEET_SECRET', async () => {
+    const envPath = path.join(process.cwd(), '.env.test')
+    const data = await fs.readFile(envPath, 'utf-8')
+    expect(data).toMatch(/PUBSWEET_SECRET=/)
   })
 })
