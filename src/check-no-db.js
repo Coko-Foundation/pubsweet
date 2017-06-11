@@ -6,6 +6,8 @@ module.exports = async ({ appPath, override = {} }) => {
   // the path to the db directory
   const dbPath = require('./db-path')(appPath)
 
+  if (/^http/.test(dbPath)) return
+
   // TODO: check that the path is appropriate?
 
   // the path to a db file within the db directory

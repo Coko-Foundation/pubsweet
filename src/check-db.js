@@ -1,13 +1,17 @@
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('./logger')
-const dbPath = require('./db-path')
 
 module.exports = async appPath => {
   // skip this during tests, as we use an in-memory DB
   if (process.env.NODE_ENV === 'test') return
 
-  const dbCheckPath = path.join(dbPath(appPath), 'CURRENT')
+  const dbPath = require('./db-path')(appPath)
+
+  // skip this if the dbPath is set to an HTTP URL (couchdb)
+  if (/^http/.test(dbPath)) return
+
+  const dbCheckPath = path.join(dbPath, 'CURRENT')
 
   logger.info('Checking that', dbCheckPath, 'exists')
 
