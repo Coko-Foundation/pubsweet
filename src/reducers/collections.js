@@ -57,21 +57,26 @@ export default function (state = [], action) {
   function addFragments () {
     const collection = getCollection()
 
-    if (!collection) return
+    if (collection) {
+      collection.fragments = union(
+        collection.fragments,
+        (action.fragments || [action.fragment]).map(fragment => fragment.id)
+      )
+    }
 
-    let toadd = (action.fragments || [action.fragment]).map(fragment => fragment.id)
-
-    collection.fragments = union(collection.fragments, toadd)
     return collections
   }
 
   function removeFragments () {
     const collection = getCollection()
 
-    if (!collection) return
+    if (collection) {
+      collection.fragments = difference(
+        collection.fragments,
+        (action.fragments || [action.fragment]).map(fragment => fragment.id)
+      )
+    }
 
-    const todel = (action.fragments || [action.fragment]).map(fragment => fragment.id)
-    collection.fragments = difference(collection.fragments, todel)
     return collections
   }
 
