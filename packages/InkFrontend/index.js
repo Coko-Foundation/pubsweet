@@ -1,7 +1,7 @@
 module.exports = {
   frontend: {
     components: [
-      () => require('./InkFrontend.jsx')
+      () => require('./InkFrontend')
     ],
     actions: () => require('./actions'),
     reducers: () => require('./reducers')

@@ -1,7 +1,7 @@
 module.exports = {
   frontend: {
     components: [
-      () => require('./TeamsManager.jsx')
+      () => require('./TeamsManager')
     ]
   }
 }

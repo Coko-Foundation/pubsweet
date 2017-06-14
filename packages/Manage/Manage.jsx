@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Navigation from 'app/components/Navigation/Navigation.jsx'
+import Navigation from 'app/components/Navigation/Navigation'
 
 class Manage extends React.Component {
   render () {

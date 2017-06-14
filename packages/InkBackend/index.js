@@ -1,3 +1,3 @@
 module.exports = {
-  backend: () => app => require('./InkBackend.js')(app)
+  backend: () => app => require('./InkBackend')(app)
 }
