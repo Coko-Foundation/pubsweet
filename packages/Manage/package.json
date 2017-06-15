@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-manage",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Basic Manage (wrapper) component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "pubsweet-component-navigation": "^0.2.3"
+    "pubsweet-component-navigation": "^0.2.4"
   },
   "peerDependencies": {
     "pubsweet-client": ">=0.9.1"

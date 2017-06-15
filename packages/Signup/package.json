@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-signup",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Basic signup form component for PubSweet",
   "main": "index.js",
   "scripts": {
