@@ -4,6 +4,7 @@ public/assets/*
 public/uploads/*
 .happypack
 .DS_Store
+.idea
 
 test.log
 scratch
