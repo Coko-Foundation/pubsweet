@@ -10,7 +10,11 @@ class PasswordReset extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
+    this.state = this.getInitialState()
+  }
+
+  getInitialState () {
+    return {
       username: '',
       emailSent: false,
       emailError: false,
@@ -25,18 +29,7 @@ class PasswordReset extends React.Component {
   }
 
   componentWillReceiveProps () {
-    this.setState({
-      username: '',
-      emailSent: false,
-      emailError: false,
-      emailErrorMessage: null,
-      emailSending: false,
-      password: '',
-      passwordChanged: false,
-      passwordError: false,
-      passwordErrorMessage: null,
-      passwordSending: false
-    })
+    this.setState(this.getInitialState())
   }
 
   post (data) {
@@ -63,7 +56,7 @@ class PasswordReset extends React.Component {
     if (username) {
       this.initiatePasswordReset({username})
     } else {
-      this.setState({error: 'Please enter a username'})
+      this.setState({emailError: 'Please enter a username'})
     }
   }
 
@@ -79,7 +72,7 @@ class PasswordReset extends React.Component {
     if (password) {
       this.resetPassword({password, token, username})
     } else {
-      this.setState({error: 'Please enter a new password'})
+      this.setState({passwordError: 'Please enter a new password'})
     }
   }
 
@@ -175,7 +168,6 @@ class PasswordReset extends React.Component {
 
       if (token) {
         // TODO: validate token on page load?
-        // TODO: add username to the URL as well?
 
         return (
           <form onSubmit={this.handlePasswordSubmit}>
@@ -222,23 +214,28 @@ class PasswordReset extends React.Component {
     const buildError = (error) => {
       if (!error) return null
 
+      return (
+        <Alert bsStyle="warning">
+          <i className="fa fa-exclamation-circle"/> {buildErrorMessage(error)}
+        </Alert>
+      )
+    }
+
+    const buildErrorMessage = (error) => {
       if (error === 'expired') {
-        error = (
+        return (
           <span>The token is only valid for 24 hours, please <Link to="/password-reset">request a new password reset email</Link></span>
         )
       }
 
       if (error === 'invalid') {
-        error = (
-          <span>The token is no longer valid, please <Link to="/password-reset">request a new password reset email</Link></span>
+        return (
+          <span>The token is no longer valid, please <Link
+            to="/password-reset">request a new password reset email</Link></span>
         )
       }
 
-      return (
-        <Alert bsStyle="warning">
-          <i className="fa fa-exclamation-circle"/> {error}
-        </Alert>
-      )
+      return error
     }
 
     return (

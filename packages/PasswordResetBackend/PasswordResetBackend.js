@@ -42,7 +42,6 @@ const PasswordResetBackend = function (app) {
         }
 
         user.password = password
-        delete user.passwordResetDate
         delete user.passwordResetToken
         delete user.passwordResetTimestamp
 
