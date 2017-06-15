@@ -1,6 +1,6 @@
 {
   "name": "pubsweet",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
