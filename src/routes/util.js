@@ -1,3 +1,5 @@
+const pick = require('lodash/pick')
+
 module.exports = {
   // Build an object containing only the id
   objectId: object => ({ id: object.id }),
@@ -18,6 +20,6 @@ module.exports = {
   fieldSelector: req => {
     const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
 
-    return item => fields ? _.pick(item, fields.concat('id')) : item
+    return item => fields ? pick(item, fields.concat('id')) : item
   }
 }

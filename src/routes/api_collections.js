@@ -1,7 +1,7 @@
 'use strict'
 
 const STATUS = require('http-status-codes')
-const _ = require('lodash')
+const without = require('lodash/without')
 const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
@@ -224,7 +224,7 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
     )
   ).then(
     ([collection, fragment]) => {
-      let fragments = _.without(collection.fragments, req.params.fragmentId)
+      let fragments = without(collection.fragments, req.params.fragmentId)
       collection.fragments = fragments.map(id => new Fragment({id: id}))
       return Promise.all([collection.save(), fragment])
     }
