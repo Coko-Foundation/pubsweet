@@ -1,7 +1,7 @@
 'use strict'
 
 const STATUS = require('http-status-codes')
-const _ = require('lodash')
+const without = require('lodash/without')
 const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
@@ -10,6 +10,7 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
+const { objectId, buildChangeData, fieldSelector } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
@@ -19,28 +20,6 @@ const teams = require('./api_teams')
 
 // api.use('/:collectionId/fragments/:fragmentId/teams', teams)
 api.use('/:id/teams', teams)
-
-// Build an object containing only the id
-const objectId = (object) => ({ id: object.id })
-
-// Build an object containing only the fields of `output` that were in `input`
-// TODO: build a real diff, in case other fields were updated indirectly?
-const buildChangeData = (input, output) => {
-  const data = {}
-
-  Object.keys(input).forEach(key => {
-    // TODO: compare and only add if changed?
-    data[key] = output[key]
-  })
-
-  return data
-}
-
-const fieldSelector = req => {
-  const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
-
-  return item => fields ? _.pick(item, fields.concat('id')) : item
-}
 
 // Create a collection
 api.post('/', authBearer, (req, res, next) => {
@@ -245,7 +224,7 @@ api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) 
     )
   ).then(
     ([collection, fragment]) => {
-      let fragments = _.without(collection.fragments, req.params.fragmentId)
+      let fragments = without(collection.fragments, req.params.fragmentId)
       collection.fragments = fragments.map(id => new Fragment({id: id}))
       return Promise.all([collection.save(), fragment])
     }
