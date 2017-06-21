@@ -26,11 +26,7 @@ const request = function (path, options = {}) {
   // for backwards compatibility
   const url = path.match(/^https?:/) ? path : API_ENDPOINT + path
 
-  console.log('Fetching', url, options)
-
   return fetch(url, options).then(response => {
-    console.log(response.headers)
-
     if (!response.ok) {
       const error = new Error(response.statusText || response.status)
       error.response = response.text() // NOTE: this is a promise
