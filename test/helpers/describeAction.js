@@ -8,9 +8,7 @@ const empty = {}
 const mockDispatch = () => {}
 const mockGetState = () => {
   return {
-    currentUser: {
-      token: auth.token()
-    }
+    currentUser: {}
   }
 }
 

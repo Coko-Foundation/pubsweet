@@ -13,20 +13,16 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
     name: 'jo johnson'
   }
 
-  const mocktoken = 'abcd1234'
-
   describeReducer('currentUser success', {
     state: {},
     action: {
       type: T.GET_USER_SUCCESS,
-      user: mockuser,
-      token: mocktoken
+      user: mockuser
     },
     output: {
       isFetching: false,
       isAuthenticated: true,
-      user: mockuser,
-      token: mocktoken
+      user: mockuser
     }
   })
 
@@ -48,8 +44,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
 
   describeReducer('logout success', {
     state: {
-      user: mockuser,
-      token: mocktoken
+      user: mockuser
     },
     action: {
       type: LOGOUT_SUCCESS
@@ -57,8 +52,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
     output: {
       isFetching: false,
       isAuthenticated: false,
-      user: null,
-      token: null
+      user: null
     }
   })
 })

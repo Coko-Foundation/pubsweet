@@ -4,12 +4,9 @@ import {
 
 import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
-const token = require('../helpers/authtoken')
-
 export default function (state = {
   isFetching: false,
-  isAuthenticated: false,
-  token: token()
+  isAuthenticated: false
 }, action) {
   switch (action.type) {
     case GET_USER_REQUEST:
@@ -21,8 +18,7 @@ export default function (state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        user: action.user,
-        token: action.token
+        user: action.user
       })
     case GET_USER_FAILURE:
       return Object.assign({}, state, {
@@ -33,8 +29,7 @@ export default function (state = {
       return {
         isFetching: false,
         isAuthenticated: false,
-        user: null,
-        token: null
+        user: null
       }
     default:
       return state

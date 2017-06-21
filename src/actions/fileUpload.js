@@ -1,7 +1,5 @@
-import { fetch } from '../helpers/Utils'
+import request from '../helpers/api'
 import * as T from './types'
-
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 
 function fileUploadRequest () {
   return {
@@ -27,23 +25,22 @@ function fileUploadFailure (message) {
 }
 
 export function fileUpload (file) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(fileUploadRequest())
-
-    const {currentUser: {token}} = getState()
 
     const data = new FormData()
     data.append('file', file)
 
-    let config = {
+    let opts = {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Accept': 'text/plain' // the response is a URL
+        // TODO: set the Location header of the response instead
       },
       body: data
     }
 
-    return fetch(API_ENDPOINT + '/upload', config)
+    return request('/upload', opts)
       .then(
         response => response.text()
       ).then(

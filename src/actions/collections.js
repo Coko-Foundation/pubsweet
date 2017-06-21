@@ -1,10 +1,8 @@
-import { fetch } from '../helpers/Utils'
+import * as api from '../helpers/api'
 import * as T from './types'
 
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-
 const collectionUrl = (collection, suffix) => {
-  let url = `${API_ENDPOINT}/collections`
+  let url = '/collections'
 
   if (collection) url += `/${collection.id}`
 
@@ -44,12 +42,10 @@ export function getCollections (options) {
       url += '?fields=' + encodeURIComponent(options.fields.join(','))
     }
 
-    return fetch(url).then(
-        response => response.json()
-      ).then(
-        collections => dispatch(getCollectionsSuccess(collections)),
-        err => dispatch(getCollectionsFailure(err))
-      )
+    return api.get(url).then(
+      collections => dispatch(getCollectionsSuccess(collections)),
+      err => dispatch(getCollectionsFailure(err))
+    )
   }
 }
 
@@ -77,28 +73,15 @@ function createCollectionFailure (collection, error) {
 }
 
 export function createCollection (collection) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(createCollectionRequest(collection))
-    const {currentUser: {token}} = getState()
 
     const url = collectionUrl()
-    const opts = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(collection)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        collection => dispatch(createCollectionSuccess(collection)),
-        err => dispatch(createCollectionFailure(collection, err))
-      )
+    return api.create(url, collection).then(
+      collection => dispatch(createCollectionSuccess(collection)),
+      err => dispatch(createCollectionFailure(collection, err))
+    )
   }
 }
 
@@ -128,29 +111,15 @@ function updateCollectionFailure (collection, error) {
 }
 
 export function updateCollection (collection) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(updateCollectionRequest(collection))
 
-    const {currentUser: {token}} = getState()
-
     const url = collectionUrl(collection)
-    const opts = {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(collection)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        update => dispatch(updateCollectionSuccess(collection, update)),
-        err => dispatch(updateCollectionFailure(collection, err))
-      )
+    return api.update(url, collection).then(
+      update => dispatch(updateCollectionSuccess(collection, update)),
+      err => dispatch(updateCollectionFailure(collection, err))
+    )
   }
 }
 
@@ -179,26 +148,14 @@ function deleteCollectionFailure (collection, error) {
 }
 
 export function deleteCollection (collection) {
-  return (dispatch, getState) => {
-    const {currentUser: {token}} = getState()
+  return (dispatch) => {
     dispatch(deleteCollectionRequest(collection))
 
     const url = collectionUrl(collection)
-    const opts = {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        json => dispatch(deleteCollectionSuccess(collection)),
-        err => dispatch(deleteCollectionFailure(collection, err))
-      )
+    return api.remove(url).then(
+      () => dispatch(deleteCollectionSuccess(collection)),
+      err => dispatch(deleteCollectionFailure(collection, err))
+    )
   }
 }

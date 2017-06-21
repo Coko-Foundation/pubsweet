@@ -11,7 +11,7 @@ module.exports = app => {
     },
     properties: {
       request: ['isFetching'],
-      success: ['isAuthenticated', 'user', 'token'],
+      success: ['isAuthenticated', 'user'],
       failure: ['isAuthenticated', 'error']
     },
     user: () => app.user
