@@ -1,11 +1,18 @@
 'use strict'
+const config = require('../../config')
 
 const STATUS = require('http-status-codes')
 const without = require('lodash/without')
+const pickBy = require('lodash/pickBy')
+
 const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
-const Authorize = require('../models/Authorize')
+
+const Authsome = require('authsome')
+let authsome = new Authsome(config.authsome, { models: require('../models') })
+const AuthorizationError = require('../errors/AuthorizationError')
+
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
@@ -18,8 +25,49 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 // Teams
 const teams = require('./api_teams')
 
-// api.use('/:collectionId/fragments/:fragmentId/teams', teams)
+var authorizationError = function (username, operation, object) {
+  username = username || 'public'
+  const msg = `User ${username} is not allowed to ${operation} ${object}`
+  throw new AuthorizationError(msg)
+}
+
 api.use('/:id/teams', teams)
+
+// List collections
+api.get('/', (req, res, next) => {
+  // use authsome directly
+  authsome.can(req.user, req.method, req.path).then(permission => {
+    if (!permission) {
+      return authorizationError(req.user, req.method, req.route)
+    }
+
+    let collections = Collection.all()
+
+    // Filtering by object, e.g. only show collections that have .published === true
+    if (permission.filter) {
+      collections = collections.filter(permission.filter)
+    }
+
+    return collections
+  }).then(collections => {
+    return collections.map(collection => {
+      return authsome.can(req.user, req.method, collection).then(permission => {
+        // Filtering by properties, e.g. only show the title and id properties
+        if (permission.filter) {
+          collection = pickBy(collection, permission.filter)
+        }
+
+        return collection
+      })
+    })
+  }).then(
+    collections => collections.map(fieldSelector(req))
+  ).then(
+    collections => res.status(STATUS.OK).json(collections)
+  ).catch(
+    next
+  )
+})
 
 // Create a collection
 api.post('/', authBearer, (req, res, next) => {
@@ -41,16 +89,6 @@ api.post('/', authBearer, (req, res, next) => {
   )
 })
 
-// List collections
-api.get('/', (req, res, next) => {
-  Collection.all().then(
-    collections => collections.map(fieldSelector(req))
-  ).then(
-    collections => res.status(STATUS.OK).json(collections)
-  ).catch(
-    next
-  )
-})
 
 // Retrieve a collection
 api.get('/:id', (req, res, next) => {
