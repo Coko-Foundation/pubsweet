@@ -23,9 +23,9 @@ import { getCollections, createCollection, getCollection, updateCollection, patc
 Object.assign(actions, { getCollections, createCollection, getCollection, updateCollection, patchCollection, deleteCollection })
 
 // Actions for fragments
-import { getFragments, createFragment, updateFragment, deleteFragment } from './fragments'
+import { getFragments, createFragment, getFragment, updateFragment, deleteFragment } from './fragments'
 
-Object.assign(actions, { getFragments, createFragment, updateFragment, deleteFragment })
+Object.assign(actions, { getFragments, createFragment, getFragment, updateFragment, deleteFragment })
 
 // Actions for users management
 import { getUsers, updateUser } from './users'

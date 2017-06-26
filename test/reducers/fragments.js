@@ -33,6 +33,16 @@ module.exports = app => describeReducerSet('fragments', reducers, () => {
   const colwithfrag = clone(mockcol)
   colwithfrag.fragments = [mockfrag]
 
+  describeReducer('getOne success', {
+    state: {},
+    action: {
+      type: T.GET_FRAGMENT_SUCCESS,
+      collection: colwithfrag,
+      fragment: mockfragmod
+    },
+    output: mockstatemod
+  })
+
   describeReducer('updateOne success', {
     state: mockstate,
     action: {

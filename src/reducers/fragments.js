@@ -3,6 +3,7 @@ import {
   CREATE_FRAGMENT_REQUEST,
   CREATE_FRAGMENT_SUCCESS,
   CREATE_FRAGMENT_FAILURE,
+  GET_FRAGMENT_SUCCESS,
   UPDATE_FRAGMENT_REQUEST,
   UPDATE_FRAGMENT_SUCCESS,
   // UPDATE_FRAGMENT_FAILURE,
@@ -25,6 +26,12 @@ export default function (state = {}, action) {
     action.fragments.forEach((fragment) => {
       fragments[fragment.id] = fragment
     })
+    return fragments
+  }
+
+  function setOne () {
+    fragments[action.fragment.id] = action.fragment
+
     return fragments
   }
 
@@ -52,11 +59,21 @@ export default function (state = {}, action) {
     case DELETE_FRAGMENT_REQUEST:
     case DELETE_FRAGMENT_FAILURE:
     case CREATE_FRAGMENT_SUCCESS:
-    case CREATE_FRAGMENT_REQUEST: return updateOne()
+    case CREATE_FRAGMENT_REQUEST:
+      return updateOne()
+
+    case GET_FRAGMENT_SUCCESS:
+      return setOne()
+
     case CREATE_FRAGMENT_FAILURE:
-    case DELETE_FRAGMENT_SUCCESS: return removeOne()
-    case GET_FRAGMENTS_SUCCESS: return replaceAll()
-    case LOGOUT_SUCCESS: return {}
+    case DELETE_FRAGMENT_SUCCESS:
+      return removeOne()
+
+    case GET_FRAGMENTS_SUCCESS:
+      return replaceAll()
+
+    case LOGOUT_SUCCESS:
+      return {}
   }
 
   return state

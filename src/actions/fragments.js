@@ -122,6 +122,56 @@ export function createFragment (collection, fragment) {
   }
 }
 
+function getFragmentRequest (fragment) {
+  return {
+    type: T.GET_FRAGMENT_REQUEST,
+    fragment: fragment
+  }
+}
+
+function getFragmentSuccess (fragment) {
+  return {
+    type: T.GET_FRAGMENT_SUCCESS,
+    fragment: fragment,
+    receivedAt: Date.now()
+  }
+}
+
+function getFragmentFailure (fragment, error) {
+  return {
+    type: T.GET_FRAGMENT_FAILURE,
+    isFetching: false,
+    fragment: fragment,
+    error: error
+  }
+}
+
+export function getFragment (collection, fragment) {
+  return (dispatch, getState) => {
+    dispatch(getFragmentRequest(fragment))
+
+    const { currentUser: { token } } = getState()
+
+    const url = fragmentUrl(collection, fragment)
+
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    }
+
+    return fetch(url, opts)
+      .then(
+        response => response.json()
+      ).then(
+        fragment => dispatch(getFragmentSuccess(fragment)),
+        err => dispatch(getFragmentFailure(fragment, err))
+      )
+  }
+}
+
 function updateFragmentRequest (fragment) {
   return {
     type: T.UPDATE_FRAGMENT_REQUEST,
