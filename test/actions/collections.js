@@ -73,6 +73,22 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
+  describeAction('getCollection', {
+    types: {
+      request: T.GET_COLLECTION_REQUEST,
+      success: T.GET_COLLECTION_SUCCESS
+    },
+    properties: {
+      request: ['type'],
+      success: ['type', 'collection', 'receivedAt'],
+      failure: ['type', 'error']
+    },
+    user: () => app.user
+  }, (action, data) => {
+    const collection = data.GET_COLLECTION_SUCCESS.collection
+    expect(collection).toHaveProperty('id')
+  })
+
   describeAction('updateCollection', {
     firstarg: () => newcol,
     secondarg: {
