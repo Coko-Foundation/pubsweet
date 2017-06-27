@@ -74,14 +74,15 @@ module.exports = app => {
   })
 
   describeAction('getCollection', {
+    firstarg: { id: newcol.id },
     types: {
       request: T.GET_COLLECTION_REQUEST,
       success: T.GET_COLLECTION_SUCCESS
     },
     properties: {
-      request: ['type'],
+      request: ['type', 'collection'],
       success: ['type', 'collection', 'receivedAt'],
-      failure: ['type', 'error']
+      failure: ['type', 'isFetching', 'collection', 'error']
     },
     user: () => app.user
   }, (action, data) => {

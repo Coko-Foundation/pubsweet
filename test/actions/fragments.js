@@ -76,8 +76,9 @@ module.exports = app => {
       failure: T.GET_FRAGMENT_FAILURE
     },
     properties: {
+      request: ['fragment'],
       success: ['fragment', 'receivedAt'],
-      failure: ['fragment', 'error']
+      failure: ['isFetching', 'fragment', 'error']
     },
     user: () => app.user
   }, (action, data) => {
