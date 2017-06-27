@@ -18,11 +18,11 @@ class Login extends Component {
     const { error } = self.props
     self.refs = {}
     return (
-      <div className="bootstrap">
+      <div className="bootstrap" style={{marginTop: 20}}>
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo"/>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
 
@@ -31,7 +31,7 @@ class Login extends Component {
               {error && <Alert bsStyle="warning"><i className="fa fa-exclamation-circle" />&nbsp; {error}</Alert>}
             </Col>
 
-            <Col xs={12} md={4} className={styles.login}>
+            <Col xs={12} md={4}>
               <h1>Login</h1>
               <form>
                 <div className="form-group">

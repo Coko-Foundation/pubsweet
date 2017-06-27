@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
-
 import { signupUser } from './actions'
 import styles from './Signup.local.scss'
 
@@ -20,11 +19,11 @@ class Signup extends Component {
     const { error } = self.props
     self.refs = {}
     return (
-      <div className={styles.signup + ' bootstrap'}>
+      <div className="bootstrap" style={{marginTop: 20}}>
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo"/>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
 

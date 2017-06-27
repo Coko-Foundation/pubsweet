@@ -243,7 +243,7 @@ class PasswordReset extends React.Component {
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo"/>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
 
