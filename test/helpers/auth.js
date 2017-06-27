@@ -1,16 +1,9 @@
 const localStorage = require('./localStorage')()
-
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
+const api = require('../../src/helpers/api')
 
 const login = async credentials => {
-  const response = await fetch(API_ENDPOINT + '/users/authenticate', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(credentials)
-  })
-
+  const response = await api.create('/users/authenticate', credentials)
   const { token } = await response.json()
-
   localStorage.setItem('token', token)
 }
 
