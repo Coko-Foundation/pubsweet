@@ -1,35 +1,26 @@
-require('./localStorage')()
+const localStorage = require('./localStorage')()
 
-const token = () => global.window.localStorage.getItem('token')
+const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 
-const login = user => new Promise(
-  (resolve, reject) => {
-    const loginactions = require.requireActual('pubsweet-component-login/actions')
-    const T = require.requireActual('pubsweet-component-login/types')
-    loginactions.loginUser(user)(result => {
-      if (result.type === T.LOGIN_SUCCESS) {
-        resolve(result)
-      } else if (result.type === T.LOGIN_FAILURE) {
-        reject(result)
-      }
-    })
-  }
-)
+const login = async credentials => {
+  const response = await fetch(API_ENDPOINT + '/users/authenticate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(credentials)
+  })
 
-const logout = () => new Promise(
-  (resolve) => {
-    const loginactions = require.requireActual('pubsweet-component-login/actions')
-    const T = require.requireActual('pubsweet-component-login/types')
-    loginactions.logoutUser()(result => {
-      // set a mock token for basic unit tests
-      global.window.localStorage.setItem('token', 'mocktoken')
-      if (result.type === T.LOGOUT_SUCCESS) resolve()
-    })
-  }
-)
+  const { token } = await response.json()
+
+  localStorage.setItem('token', token)
+}
+
+const logout = async () => {
+  // set a mock token for basic unit tests
+  localStorage.setItem('token', 'mocktoken')
+}
 
 module.exports = {
-  token: token,
+  token: () => localStorage.getItem('token'),
   login: login,
   logout: logout
 }
