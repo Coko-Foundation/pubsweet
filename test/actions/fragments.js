@@ -68,8 +68,8 @@ module.exports = app => {
   })
 
   describeAction('getFragment', {
-    firstarg: { id: mockcol.id },
-    secondarg: { id: storedData.fragment.id },
+    firstarg: mockcol(),
+    secondarg: () => storedData.fragment,
     types: {
       request: T.GET_FRAGMENT_REQUEST,
       success: T.GET_FRAGMENT_SUCCESS,

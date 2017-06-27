@@ -74,7 +74,7 @@ module.exports = app => {
   })
 
   describeAction('getCollection', {
-    firstarg: { id: newcol.id },
+    firstarg: () => newcol,
     types: {
       request: T.GET_COLLECTION_REQUEST,
       success: T.GET_COLLECTION_SUCCESS
