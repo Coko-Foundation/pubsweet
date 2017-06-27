@@ -1,5 +1,5 @@
 // NOTE: deprecated - only retained for backwards compatibility
 
-import request from './api'
+import { deprecatedFetch } from './api'
 
-export const fetch = request
+export const fetch = deprecatedFetch

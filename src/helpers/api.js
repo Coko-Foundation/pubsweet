@@ -13,7 +13,7 @@ const parse = response => {
   return response
 }
 
-const request = function (path, options = {}) {
+const request = (url, options = {}) => {
   options.headers = options.headers || {}
   options.headers['Accept'] = options.headers['Accept'] || 'application/json'
 
@@ -23,8 +23,9 @@ const request = function (path, options = {}) {
     options.headers['Authorization'] = 'Bearer ' + token
   }
 
-  // for backwards compatibility
-  const url = path.match(/^https?:/) ? path : API_ENDPOINT + path
+  if (!url.match(/^https?:/)) {
+    url = API_ENDPOINT + url
+  }
 
   return fetch(url, options).then(response => {
     if (!response.ok) {
@@ -33,12 +34,18 @@ const request = function (path, options = {}) {
       throw error
     }
 
-    return parse(response)
+    return options.parse === false ? response : parse(response)
   })
   // .catch(error => {
   //   // TODO: handle network errors
   //   console.error(error)
   // })
+}
+
+// for backwards compatibility
+export const deprecatedFetch = (url, options = {}) => {
+  options.parse = false
+  return request(url, options)
 }
 
 export const get = (url) => request(url, {
