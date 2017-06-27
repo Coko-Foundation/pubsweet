@@ -3,17 +3,11 @@ const path = require('path')
 const fs = require('fs-extra')
 
 const run = async () => {
-  const tmpdir = await require('pubsweet/test/helpers/working_dir')()
+  const tmpdir = await require('pubsweet/test/helpers/working-dir')()
 
   const appname = 'testapp'
   fs.mkdirsSync(path.join(tmpdir, appname))
   console.log('created directory')
-
-  await require('pubsweet/src/generate-config')()
-  console.log('config generated')
-
-  await require('pubsweet/src/generate-env')()
-  console.log('env generated')
 
   await require('pubsweet/src/initial-app')(appname)
   console.log('app generated')
