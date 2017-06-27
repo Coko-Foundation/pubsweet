@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Alert, Row, Col } from 'react-bootstrap'
+import { Grid, Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
 import { signupUser } from './actions'
@@ -21,33 +21,44 @@ class Signup extends Component {
     self.refs = {}
     return (
       <div className={styles.signup + ' bootstrap'}>
-        <Row>
-          <Col xs={12} md={2} mdOffset={5}>
-            {error ? <Alert bsStyle="warning">{error}</Alert> : null}
-            <h1>Sign up</h1>
-            <form>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input type="text"
-                  ref={function (c) { self.refs.username = c }} className="form-control" placeholder="Username" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="text"
-                  ref={function (c) { self.refs.email = c }} className="form-control" placeholder="Email" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password"
-                  ref={function (c) { self.refs.password = c }} className="form-control" placeholder="Password" />
-              </div>
-              <button onClick={this.handleClick} className={styles.button + ' btn btn-block btn-primary'}>
-                Sign up
-              </button>
-              <p>Already have an account? <Link to="/login">Log in here</Link></p>
-            </form>
-          </Col>
-        </Row>
+        <Grid>
+          <Row>
+            <Col md={2} mdOffset={5}>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo"/>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={4}>
+              {error && <Alert bsStyle="warning"><i className="fa fa-exclamation-circle"/>&nbsp; {error}</Alert>}
+            </Col>
+
+            <Col xs={12} md={4} className={styles.signup}>
+              <h1>Sign up</h1>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="username">Username</label>
+                  <input type="text"
+                    ref={function (c) { self.refs.username = c }} className="form-control" placeholder="Username" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="text"
+                    ref={function (c) { self.refs.email = c }} className="form-control" placeholder="Email" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input type="password"
+                    ref={function (c) { self.refs.password = c }} className="form-control" placeholder="Password" />
+                </div>
+                <button onClick={this.handleClick} className={styles.button + ' btn btn-block btn-primary'}>
+                  Sign up
+                </button>
+                <p>Already have an account?<br/><Link to="/login">Log in here</Link></p>
+              </form>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     )
   }

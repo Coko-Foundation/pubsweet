@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router'
 import fetch from 'isomorphic-fetch'
 import PropTypes from 'prop-types'
-import { Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
+import { Grid, Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
 
 const API_ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT']
 
@@ -178,7 +178,7 @@ class PasswordReset extends React.Component {
             </FormGroup>
 
             <div>
-              <Button type="submit" bsStyle="primary" bsSize="large" disabled={passwordSending}>
+              <Button type="submit" bsStyle="primary" bsSize="block" disabled={passwordSending}>
                 {passwordSending ? 'Saving…' : 'Save new password'}
               </Button>
             </div>
@@ -203,7 +203,7 @@ class PasswordReset extends React.Component {
           </FormGroup>
 
           <div>
-            <Button type="submit" bsStyle="primary" bsSize="large" disabled={emailSending}>
+            <Button type="submit" bsStyle="primary" block disabled={emailSending}>
               {emailSending ? 'Sending…' : 'Send email'}
             </Button>
           </div>
@@ -240,7 +240,13 @@ class PasswordReset extends React.Component {
 
     return (
       <div className="bootstrap" style={{marginTop: 20}}>
-        <div className="container">
+        <Grid>
+          <Row>
+            <Col md={2} mdOffset={5}>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo"/>
+            </Col>
+          </Row>
+
           <Row>
             <Col md={4}>
               {buildError(emailErrorMessage)}
@@ -257,7 +263,7 @@ class PasswordReset extends React.Component {
               </div>
             </Col>
           </Row>
-        </div>
+        </Grid>
       </div>
     )
   }
