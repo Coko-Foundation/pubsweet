@@ -147,7 +147,7 @@ describe('Teams API - per collection or fragment', () => {
           ([res, token]) => {
             teamId = res.body.id
             team.members = []
-            return api.teams.put(
+            return api.teams.patch(
               team, collectionId, teamId, token
             ).expect(
               STATUS.OK

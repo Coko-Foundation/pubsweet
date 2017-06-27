@@ -98,10 +98,24 @@ const users = {
       user
     )
   },
+  // deprecated: use patch instead
   put: (userId, user, token) => {
     const req = request(
       api
     ).put(
+      `/api/users/${userId}`
+    ).send(
+      user
+    )
+
+    return token ? req.set(
+      'Authorization', 'Bearer ' + token
+    ) : req
+  },
+  patch: (userId, user, token) => {
+    const req = request(
+      api
+    ).patch(
       `/api/users/${userId}`
     ).send(
       user
@@ -235,6 +249,7 @@ const teams = {
       'Authorization', 'Bearer ' + token
     )
   },
+  // deprecated: use patch instead
   put: (team, collection, teamId, token) => {
     const collectionId = () => {
       return isString(collection) ? collection : collection.id
@@ -247,6 +262,25 @@ const teams = {
     return request(
       api
     ).put(
+      url
+    ).send(
+      team
+    ).set(
+      'Authorization', 'Bearer ' + token
+    )
+  },
+  patch: (team, collection, teamId, token) => {
+    const collectionId = () => {
+      return isString(collection) ? collection : collection.id
+    }
+    const collectionpart = collection ? `/collections/${collectionId()}` : ''
+    const teampart = teamId ? `/${teamId}` : ''
+
+    const url = `/api${collectionpart}/teams${teampart}`
+
+    return request(
+      api
+    ).patch(
       url
     ).send(
       team
