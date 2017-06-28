@@ -2,6 +2,7 @@ import {
   GET_COLLECTIONS_SUCCESS,
   GET_COLLECTIONS_FAILURE,
   CREATE_COLLECTION_SUCCESS,
+  GET_COLLECTION_SUCCESS,
   UPDATE_COLLECTION_SUCCESS,
   PATCH_COLLECTION_SUCCESS,
   DELETE_COLLECTION_SUCCESS,
@@ -35,6 +36,19 @@ export default function (state = [], action) {
     // only add the collection if it hasn't already been added
     if (!getCollection()) {
       collections.push(action.collection)
+    }
+
+    return collections
+  }
+
+  function setCollection () {
+    const index = getCollectionIndex()
+
+    // NOTE: this is necessary because the collections state is an array
+    if (index === -1) {
+      collections.push(action.collection)
+    } else {
+      collections[index] = action.collection
     }
 
     return collections
@@ -89,6 +103,9 @@ export default function (state = [], action) {
 
     case CREATE_COLLECTION_SUCCESS:
       return addCollection()
+
+    case GET_COLLECTION_SUCCESS:
+      return setCollection()
 
     case UPDATE_COLLECTION_SUCCESS:
     case PATCH_COLLECTION_SUCCESS:

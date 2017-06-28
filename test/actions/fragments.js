@@ -67,6 +67,24 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
+  describeAction('getFragment', {
+    firstarg: mockcol(),
+    secondarg: () => storedData.fragment,
+    types: {
+      request: T.GET_FRAGMENT_REQUEST,
+      success: T.GET_FRAGMENT_SUCCESS,
+      failure: T.GET_FRAGMENT_FAILURE
+    },
+    properties: {
+      request: ['fragment'],
+      success: ['fragment', 'receivedAt'],
+      failure: ['isFetching', 'fragment', 'error']
+    },
+    user: () => app.user
+  }, (action, data) => {
+    // optional: more functionality tests here
+  })
+
   describeAction('updateFragment', {
     firstarg: mockcol,
     secondarg: () => {

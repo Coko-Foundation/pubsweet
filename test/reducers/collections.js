@@ -25,11 +25,20 @@ module.exports = app => describeReducerSet('collections', reducers, () => {
     output: [mockcol]
   })
 
-  describeReducer('getCollection failure', {
+  describeReducer('getCollections failure', {
     action: {
       type: T.GET_COLLECTIONS_FAILURE
     },
     output: []
+  })
+
+  describeReducer('getCollection success', {
+    state: [],
+    action: {
+      type: T.GET_COLLECTION_SUCCESS,
+      collection: mockcol
+    },
+    output: [mockcol]
   })
 
   describeReducer('addFragments success', {

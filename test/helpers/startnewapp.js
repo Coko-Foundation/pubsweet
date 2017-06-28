@@ -22,7 +22,7 @@ const run = async () => {
   console.log('config loaded')
 
   spawn(
-    'npm install',
+    'yarn install',
     [path.join(__dirname, '..', '..')],
     {
       cwd: process.cwd(),

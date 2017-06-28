@@ -102,6 +102,53 @@ export function createCollection (collection) {
   }
 }
 
+function getCollectionRequest (collection) {
+  return {
+    type: T.GET_COLLECTION_REQUEST,
+    collection: collection
+  }
+}
+
+function getCollectionSuccess (collection, get) {
+  return {
+    type: T.GET_COLLECTION_SUCCESS,
+    collection: collection,
+    receivedAt: Date.now()
+  }
+}
+
+function getCollectionFailure (collection, error) {
+  return {
+    type: T.GET_COLLECTION_FAILURE,
+    isFetching: false,
+    collection: collection,
+    error: error
+  }
+}
+
+export function getCollection (collection) {
+  return (dispatch, getState) => {
+    const {currentUser: {token}} = getState()
+
+    dispatch(getCollectionRequest(collection))
+
+    const url = collectionUrl(collection)
+
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    }
+
+    return fetch(url, opts).then(
+      collection => dispatch(getCollectionSuccess(collection)),
+      err => dispatch(getCollectionFailure(collection, err))
+    )
+  }
+}
+
 function updateCollectionRequest (collection) {
   return {
     type: T.UPDATE_COLLECTION_REQUEST,
