@@ -35,6 +35,15 @@ module.exports = app => describeReducerSet('users', reducers, () => {
     output: { isFetching: true }
   })
 
+  describeReducer('getUser success', {
+    state: { users: [] },
+    action: {
+      type: T.GET_USER_SUCCESS,
+      user: user
+    },
+    output: {users: [user]}
+  })
+
   describeReducer('updateUser request', {
     state: mockstate,
     action: {

@@ -45,6 +45,49 @@ export function getUsers () {
   }
 }
 
+function getUserRequest (user) {
+  return {
+    type: T.GET_USER_REQUEST,
+    user
+  }
+}
+
+function getUserSuccess (user) {
+  return {
+    type: T.GET_USER_SUCCESS,
+    user
+  }
+}
+
+function getUserFailure (user, error) {
+  return {
+    type: T.GET_USER_FAILURE,
+    user,
+    error
+  }
+}
+
+export function getUser (user) {
+  return dispatch => {
+    dispatch(getUserRequest(user))
+
+    const config = {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token()
+      }
+    }
+
+    return fetch(API_ENDPOINT + '/users/' + user.id, config)
+      .then(
+        response => response.json()
+      ).then(
+        user => dispatch(getUserSuccess(user)),
+        err => dispatch(getUserFailure(err))
+      )
+  }
+}
+
 function updateUserRequest (user) {
   return {
     type: T.UPDATE_USER_REQUEST,
