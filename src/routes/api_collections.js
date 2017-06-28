@@ -105,7 +105,7 @@ api.get('/collections/:id', authBearerAndPublic, async (req, res, next) => {
 
   try {
     if (!permission) {
-      authorizationError(req.user, req.method, req.path)
+      authorizationError(req.user, req.method, collection)
     }
 
     if (permission.filter) {
