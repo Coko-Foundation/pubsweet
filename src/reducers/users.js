@@ -13,7 +13,7 @@ import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 const updatedUsers = (users, data) => {
   return users.map(user => {
     if (user.id === data.id) {
-      return Object.assign(user, data)
+      Object.assign(user, data)
     }
 
     return user
@@ -22,7 +22,8 @@ const updatedUsers = (users, data) => {
 
 // The users reducer.
 export default (state = {
-  isFetching: false
+  isFetching: false,
+  users: []
 }, action) => {
   switch (action.type) {
     case GET_USERS_REQUEST:
@@ -55,7 +56,8 @@ export default (state = {
 
     case LOGOUT_SUCCESS:
       return {
-        isFetching: false
+        isFetching: false,
+        users: []
       }
 
     default:
