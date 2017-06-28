@@ -109,7 +109,7 @@ function getCollectionRequest (collection) {
   }
 }
 
-function getCollectionSuccess (collection, get) {
+function getCollectionSuccess (collection) {
   return {
     type: T.GET_COLLECTION_SUCCESS,
     collection: collection,
@@ -143,6 +143,8 @@ export function getCollection (collection) {
     }
 
     return fetch(url, opts).then(
+      response => response.json()
+    ).then(
       collection => dispatch(getCollectionSuccess(collection)),
       err => dispatch(getCollectionFailure(collection, err))
     )
