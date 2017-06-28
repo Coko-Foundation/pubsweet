@@ -5,48 +5,45 @@ const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
 
 const token = require('../helpers/authtoken')
 
-function getUserRequest () {
+function getCurrentUserRequest () {
   return {
-    type: T.GET_USER_REQUEST,
-    isFetching: true
+    type: T.GET_CURRENT_USER_REQUEST
   }
 }
 
-function getUserSuccess (user) {
+function getCurrentUserSuccess (user) {
   return {
-    type: T.GET_USER_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
-    user: user,
-    token: user.token
+    type: T.GET_CURRENT_USER_SUCCESS,
+    user
   }
 }
 
-function getUserFailure (message) {
+function getCurrentUserFailure (error) {
   return {
-    type: T.GET_USER_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
-    error: message
+    type: T.GET_CURRENT_USER_FAILURE,
+    error
   }
 }
 
-export function getUser () {
-  let config = {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + token() }
-  }
-
+export function getCurrentUser () {
   return dispatch => {
-    dispatch(getUserRequest())
+    const config = {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token()
+      }
+    }
+
+    dispatch(getCurrentUserRequest())
+
     return fetch(
       API_ENDPOINT + '/users/authenticate', config
     ).then(
       response => response.json()
     ).then(
-      user => dispatch(getUserSuccess(user))
+      user => dispatch(getCurrentUserSuccess(user))
     ).catch(
-      err => dispatch(getUserFailure(err))
+      err => dispatch(getCurrentUserFailure(err))
     )
   }
 }

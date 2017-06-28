@@ -24,7 +24,7 @@ export function requireAuthentication (Component, operation, selector) {
     }
 
     componentWillMount () {
-      this.props.actions.getUser().then(
+      this.props.actions.getCurrentUser().then(
         () => this.props.actions.getCollections()
       ).then(
         () => this.checkAuth(this.props.currentUser)
@@ -76,7 +76,7 @@ export function requireAuthentication (Component, operation, selector) {
     currentUser: PropTypes.object.isRequired,
     pushState: PropTypes.func.isRequired,
     state: PropTypes.object
-  } 
+  }
 
   function mapState (state) {
     return {

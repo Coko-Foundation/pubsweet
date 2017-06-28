@@ -3,15 +3,15 @@ const describeAction = require.requireActual('../helpers/describeAction')(action
 const T = require('../../src/actions/types')
 
 module.exports = app => {
-  describeAction('getUser', {
+  describeAction('getCurrentUser', {
     types: {
-      request: T.GET_USER_REQUEST,
-      success: T.GET_USER_SUCCESS,
-      failure: T.GET_USER_FAILURE
+      request: T.GET_CURRENT_USER_REQUEST,
+      success: T.GET_CURRENT_USER_SUCCESS,
+      failure: T.GET_CURRENT_USER_FAILURE
     },
     properties: {
       request: ['isFetching'],
-      success: ['isAuthenticated', 'user', 'token'],
+      success: ['isAuthenticated', 'user'],
       failure: ['isAuthenticated', 'error']
     },
     user: () => app.user

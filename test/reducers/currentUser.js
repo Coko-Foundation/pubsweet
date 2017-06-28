@@ -9,18 +9,18 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
     '../helpers/describeReducer'
   )(reducers.default)
 
-  const mockuser = {
-    name: 'jo johnson'
-  }
-
   const mocktoken = 'abcd1234'
+
+  const mockuser = {
+    name: 'jo johnson',
+    token: mocktoken
+  }
 
   describeReducer('currentUser success', {
     state: {},
     action: {
-      type: T.GET_USER_SUCCESS,
-      user: mockuser,
-      token: mocktoken
+      type: T.GET_CURRENT_USER_SUCCESS,
+      user: mockuser
     },
     output: {
       isFetching: false,
@@ -33,7 +33,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
   describeReducer('currentUser failure', {
     state: {},
     action: {
-      type: T.GET_USER_FAILURE
+      type: T.GET_CURRENT_USER_FAILURE
     },
     output: { isFetching: false, isAuthenticated: false }
   })
@@ -41,7 +41,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
   describeReducer('currentUser request', {
     state: {},
     action: {
-      type: T.GET_USER_REQUEST
+      type: T.GET_CURRENT_USER_REQUEST
     },
     output: { isFetching: true, isAuthenticated: false }
   })

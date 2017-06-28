@@ -13,9 +13,9 @@ actions.resetErrorMessage = () => {
 }
 
 // Actions for current user
-import { getUser } from './current_user'
+import { getCurrentUser } from './current_user'
 
-Object.assign(actions, { getUser })
+Object.assign(actions, { getCurrentUser })
 
 // Actions for collections
 import { getCollections, createCollection, getCollection, updateCollection, patchCollection, deleteCollection } from './collections'
@@ -51,7 +51,7 @@ componentActionsList.forEach(
 // It gets collections, fragments and user data (via token).
 actions.hydrate = () => {
   return dispatch => Promise.all([
-    dispatch(getUser()),
+    dispatch(getCurrentUser()),
     dispatch(getCollections())
   ])
 }
