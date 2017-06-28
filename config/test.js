@@ -11,6 +11,9 @@ module.exports = {
       kind: Joi.string(),
       presentation: Joi.string(),
       published: Joi.boolean()
+    },
+    collection: {
+      published: Joi.boolean()
     }
   },
   authsome: {
