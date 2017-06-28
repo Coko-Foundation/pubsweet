@@ -1,6 +1,7 @@
 const collection = {
   'type': 'collection',
-  'title': 'Science Blogger posts'
+  'title': 'Science Blogger posts',
+  'published': true
 }
 
 const updatedCollection = {
@@ -9,6 +10,7 @@ const updatedCollection = {
 
 const fragment = {
   'kind': 'blogpost',
+  'title': 'Just your regular blogpost',
   'source': '<blog></blog>',
   'presentation': '<p></p>'
 }

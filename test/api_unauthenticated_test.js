@@ -7,6 +7,7 @@ const cleanDB = require('./helpers/db_cleaner')
 
 describe('unauthenticated/public api', () => {
   var fragment
+  var unpublishedFragment
   var collection
 
   afterEach(cleanDB)
@@ -20,15 +21,36 @@ describe('unauthenticated/public api', () => {
     }
   ).then(
     newfragment => { fragment = newfragment }
+  ).then(
+    () => createFragment({}, collection)
+  ).then(
+    fragment => { unpublishedFragment = fragment }
   )
 
   describe('published fragment', () => {
     beforeEach(() => setNewFragment({ published: true }))
 
-    it('can read a fragment in a protected collection' +
-       ' if it is published', () => {
+    it('can see a published fragment in a collection', () => {
       return api.fragments.get(collection).expect(STATUS.OK).then(
         res => expect(res.body[0].id).toEqual(fragment.id)
+      )
+    })
+
+    it('can only see the published fragment in a collection', () => {
+      return api.fragments.get(collection).expect(STATUS.OK).then(
+        res => expect(res.body.map(f => f.id)).not.toContain(unpublishedFragment.id)
+      )
+    })
+
+    it('can only see the filtered list of properties for a fragment', () => {
+      return api.collections.retrieveFragment(collection.id, fragment.id).expect(STATUS.OK).then(
+        res => expect(Object.keys(res.body)).toEqual(['id', 'title', 'source', 'presentation', 'owners'])
+      )
+    })
+
+    it('can only see the filtered list of properties for a collection', () => {
+      return api.collections.retrieve(collection.id).expect(STATUS.OK).then(
+        res => expect(Object.keys(res.body)).toEqual(['id', 'title', 'owners'])
       )
     })
   })

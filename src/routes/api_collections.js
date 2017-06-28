@@ -30,15 +30,17 @@ var authorizationError = function (username, operation, object) {
   const msg = `User ${username} is not allowed to ${operation} ${object}`
   throw new AuthorizationError(msg)
 }
+// TEMP
+const Authorize = ''
 
 api.use('/:id/teams', teams)
 
 // List collections
-api.get('/', (req, res, next) => {
+api.get('/collections', authBearerAndPublic, (req, res, next) => {
   // use authsome directly
-  authsome.can(req.user, req.method, req.path).then(permission => {
+  return authsome.can(req.user, req.method, req.path).then(permission => {
     if (!permission) {
-      return authorizationError(req.user, req.method, req.route)
+      return authorizationError(req.user, req.method, req.path)
     }
 
     let collections = Collection.all()
@@ -70,16 +72,23 @@ api.get('/', (req, res, next) => {
 })
 
 // Create a collection
-api.post('/', authBearer, (req, res, next) => {
-  let collection = new Collection(req.body)
-  collection.created = Date.now()
-  collection.setOwners([req.user])
+api.post('/collections', authBearer, (req, res, next) => {
+  return authsome.can(req.user, req.method, req.path).then(permission => {
+    if (!permission) {
+      return authorizationError(req.user, req.method, req.path)
+    }
 
-  return Authorize.can(
-    req.authInfo.id, 'create', collection
-  ).then(
-    () => collection.save()
-  ).then(
+    let collection = new Collection(req.body)
+
+    if (permission.filter) {
+      collection = pickBy(collection, permission.filter)
+    }
+
+    collection.created = Date.now()
+    collection.setOwners([req.user])
+
+    return collection.save()
+  }).then(
     collection => {
       res.status(STATUS.CREATED).json(collection)
       sse.send({ action: 'collection:create', data: { collection } })
@@ -89,20 +98,27 @@ api.post('/', authBearer, (req, res, next) => {
   )
 })
 
-
 // Retrieve a collection
-api.get('/:id', (req, res, next) => {
-  Collection.find(
-    req.params.id
-  ).then(
-    collection => res.status(STATUS.OK).json(collection)
-  ).catch(
-    next
-  )
+api.get('/collections/:id', authBearerAndPublic, async (req, res, next) => {
+  let collection = await Collection.find(req.params.id)
+  let permission = await authsome.can(req.user, req.method, collection)
+
+  try {
+    if (!permission) {
+      authorizationError(req.user, req.method, req.path)
+    }
+
+    if (permission.filter) {
+      collection = pickBy(collection, permission.filter)
+    }
+    return res.status(STATUS.OK).json(collection)
+  } catch (err) {
+    next(err)
+  }
 })
 
 // Update a collection
-api.patch('/:id', authBearer, (req, res, next) => {
+api.patch('/collections/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
@@ -124,7 +140,7 @@ api.patch('/:id', authBearer, (req, res, next) => {
 })
 
 // Delete a collection
-api.delete('/:id', authBearer, (req, res, next) => {
+api.delete('/collections/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'delete', req.originalUrl
   ).then(
@@ -142,11 +158,12 @@ api.delete('/:id', authBearer, (req, res, next) => {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/:id/fragments', authBearer, (req, res, next) => {
+api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
   return Authorize.can(req.user, 'create', req.originalUrl).then(
     () => Collection.find(req.params.id)
   ).then(collection => {
     const fragment = new Fragment(req.body)
+    fragment.collection = collection
     fragment.setOwners([req.user])
 
     return fragment.save().then(fragment => {
@@ -165,67 +182,66 @@ api.post('/:id/fragments', authBearer, (req, res, next) => {
 })
 
 // Get all fragments
-api.get('/:id/fragments', authBearerAndPublic, (req, res, next) => {
-  const fallback = () => {
-    return Collection.find(
-      req.params.id
-    ).then(
-      collection => collection.getFragments({
-        filter: fragment => Authorize.can(req.user, 'read', fragment)
-      })
-    ).then(
-      fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
-    ).then(
-      fragments => fragments.map(fieldSelector(req))
-    ).then(
-      fragments => res.status(STATUS.OK).json(fragments)
-    ).catch(
-      next
-    )
-  }
+api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
+  return authsome.can(
+    req.user,
+    req.method,
+    { path: req.route.path, id: req.params.id }
+  ).then(permission => {
+    if (!permission) {
+      return authorizationError(req.user, req.method, req.path)
+    }
 
-  return Authorize.can(
-    req.user, 'read', req.originalUrl
-  ).then(
-    () => Collection.find(req.params.id)
-  ).then(
-    collection => collection.getFragments()
-  ).then(
-    fragments => Promise.all(fragments.map(f => User.ownersWithUsername(f)))
-  ).then(
+    return Collection.find(req.params.id).then(
+      collection => collection.getFragments()
+    ).then(fragments => {
+      if (permission.filter) {
+        fragments = fragments.filter(permission.filter)
+      }
+      return Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+    }).then(
+      fragments => {
+        return Promise.all(fragments.map(fragment => {
+          return authsome.can(req.user, req.method, fragment).then(permission => {
+            if (permission.filter) {
+              return pickBy(fragment, permission.filter)
+            }
+            return fragment
+          })
+        }))
+      })
+  }).then(
     fragments => fragments.map(fieldSelector(req))
   ).then(
     fragments => res.status(STATUS.OK).json(fragments)
   ).catch(
-    err => (err.name === 'AuthorizationError') ? fallback() : next(err)
+    next
   )
 })
 
 // Retrieve a fragment
-api.get('/:collectionId/fragments/:fragmentId', authBearerAndPublic, (req, res, next) => {
-  const fallback = () => Authorize.can(
-    undefined, 'read', req.originalUrl
-  ).then(
-    permission => Fragment.find(req.params.fragmentId)
-  ).then(
-    fragment => res.status(STATUS.OK).json(fragment)
-  ).catch(
-    err => res.status(STATUS.NOT_FOUND).json(err.message)
-  )
+api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
+  let fragment = await Fragment.find(req.params.fragmentId)
+  let permission = await authsome.can(req.user, req.method, fragment)
 
-  return Authorize.can(
-    req.user, 'read', req.originalUrl
-  ).then(
-    () => Fragment.find(req.params.fragmentId)
-  ).then(
-    fragment => res.status(STATUS.OK).json(fragment)
-  ).catch(
-    err => (err.name === 'AuthorizationError') ? fallback() : next(err)
-  )
+  try {
+    if (!permission) {
+      return authorizationError(req.user, req.method, fragment)
+    }
+
+    return Fragment.find(req.params.fragmentId).then(fragment => {
+      if (permission.filter) {
+        fragment = pickBy(fragment, permission.filter)
+      }
+      return res.status(STATUS.OK).json(fragment)
+    })
+  } catch (err) {
+    res.status(STATUS.NOT_FOUND).json(err.message)
+  }
 })
 
 // Update a fragment
-api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
@@ -249,7 +265,7 @@ api.patch('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) =
 })
 
 // Delete a fragment
-api.delete('/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
+api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'delete', req.originalUrl
   ).then(
