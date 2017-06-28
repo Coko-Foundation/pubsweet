@@ -1,4 +1,4 @@
-const actions = require.requireActual('../../src/actions/current_user')
+const actions = require.requireActual('../../src/actions/currentUser')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 

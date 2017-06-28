@@ -1,4 +1,4 @@
-const reducers = require.requireActual('../../src/reducers/current_user')
+const reducers = require.requireActual('../../src/reducers/currentUser')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
