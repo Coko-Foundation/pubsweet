@@ -2,8 +2,8 @@ const express = require('express')
 const api = express.Router()
 
 // Collections
-const collection = require('./api_collections')
-api.use('/collections', collection)
+const collections = require('./api_collections')
+api.use(collections)
 
 // File upload API
 const upload = require('./api_upload')
