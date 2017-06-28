@@ -30,9 +30,9 @@ module.exports = app => {
       failure: T.GET_USER_FAILURE
     },
     properties: {
-      request: ['isFetching'],
-      success: ['isFetching', 'user'],
-      failure: ['isFetching', 'error']
+      request: ['user'],
+      success: ['user'],
+      failure: ['user', 'error']
     },
     user: () => app.user
   }, (action, data) => {
