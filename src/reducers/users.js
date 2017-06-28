@@ -11,13 +11,15 @@ import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 // TODO: store users as an object/map instead of an array
 
 const updatedUsers = (users, data) => {
-  return users.map(user => {
-    if (user.id === data.id) {
-      Object.assign(user, data)
-    }
+  const index = users.findIndex(user => user.id === data.id)
 
-    return user
-  })
+  if (index === -1) {
+    users.push(data)
+  } else {
+    users[index] = Object.assign(users[index], data)
+  }
+
+  return users
 }
 
 // The users reducer.
