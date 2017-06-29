@@ -182,41 +182,33 @@ api.post('/collections/:id/fragments', authBearer, (req, res, next) => {
 })
 
 // Get all fragments
-api.get('/collections/:id/fragments', authBearerAndPublic, (req, res, next) => {
-  return authsome.can(
-    req.user,
-    req.method,
-    { path: req.route.path, id: req.params.id }
-  ).then(permission => {
-    if (!permission) {
-      return authorizationError(req.user, req.method, req.path)
-    }
+api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next) => {
+  let collection = await Collection.find(req.params.id)
 
-    return Collection.find(req.params.id).then(
-      collection => collection.getFragments()
-    ).then(fragments => {
+  if (!collection) {
+    return res.status(STATUS.NOT_FOUND)
+  }
+
+  let fragments = await collection.getFragments()
+
+  // Filter by object
+  fragments = await Promise.all(fragments.map(fragment => {
+    return authsome.can(req.user, req.method, fragment).then(permission => {
       if (permission.filter) {
-        fragments = fragments.filter(permission.filter)
+        return pickBy(fragment, permission.filter)
+      } else if (permission) {
+        return fragment
       }
-      return Promise.all(fragments.map(f => User.ownersWithUsername(f)))
-    }).then(
-      fragments => {
-        return Promise.all(fragments.map(fragment => {
-          return authsome.can(req.user, req.method, fragment).then(permission => {
-            if (permission.filter) {
-              return pickBy(fragment, permission.filter)
-            }
-            return fragment
-          })
-        }))
-      })
-  }).then(
-    fragments => fragments.map(fieldSelector(req))
-  ).then(
-    fragments => res.status(STATUS.OK).json(fragments)
-  ).catch(
-    next
-  )
+    })
+  }))
+
+  fragments = fragments.filter(fragment => fragment !== undefined)
+
+  // Decorate owners with usernames
+  fragments = await Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+  fragments = fragments.map(fieldSelector(req))
+
+  return res.status(STATUS.OK).json(fragments)
 })
 
 // Retrieve a fragment
