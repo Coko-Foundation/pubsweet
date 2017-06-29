@@ -3,7 +3,7 @@
   "dependencies": {
     "pubsweet": "^0.3.3",
     "pubsweet-server": "^0.9.2",
-    "pubsweet-client": "^0.9.1",
+    "pubsweet-client": "^0.10.1",
     "pubsweet-component-blog": "^0.1.5",
     "pubsweet-component-login": "^0.2.3",
     "pubsweet-component-manage": "^0.1.5",
