@@ -32,6 +32,15 @@ module.exports = app => describeReducerSet('collections', reducers, () => {
     output: []
   })
 
+  describeReducer('getCollection request', {
+    state: [mockcol],
+    action: {
+      type: T.GET_COLLECTION_REQUEST,
+      collection: mockcol
+    },
+    output: []
+  })
+
   describeReducer('getCollection success', {
     state: [],
     action: {
