@@ -22,7 +22,8 @@ module.exports = {
         name: 'Coauthors',
         permissions: 'update'
       }
-    }
+    },
+    'fail-redirect': '/login'
   },
   pubsweet: {
     components: [
