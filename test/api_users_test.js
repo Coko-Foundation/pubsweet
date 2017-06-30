@@ -184,7 +184,7 @@ describe('users api', () => {
       return api.users.authenticate.post(
         fixtures.otherUser
       ).then(
-        token => api.users.put(
+        token => api.users.patch(
           otherUser.id, newself, token
         ).expect(
           STATUS.FORBIDDEN
@@ -198,7 +198,7 @@ describe('users api', () => {
       return api.users.authenticate.post(
         fixtures.otherUser
       ).then(
-        token => api.users.put(
+        token => api.users.patch(
           otherUser.id, newself, token
         ).expect(
           STATUS.OK
@@ -212,7 +212,7 @@ describe('users api', () => {
         const token = await api.users.authenticate.post(fixtures.otherUser)
 
         // change the username, email and password
-        await api.users.put(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
+        await api.users.patch(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
 
         // authenticate with the updated details
         await api.users.authenticate.post(fixtures.updatedUser)
@@ -229,7 +229,7 @@ describe('users api', () => {
       return api.users.authenticate.post(
         fixtures.otherUser
       ).then(
-        token => api.users.put(
+        token => api.users.patch(
           otherUser.id, newself, token
         ).expect(
           STATUS.OK
@@ -252,7 +252,7 @@ describe('users api', () => {
         const otherUserToken = await api.users.authenticate.post(fixtures.otherUser)
 
         // change username, email and password
-        await api.users.put(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
+        await api.users.patch(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
 
         // authenticate with updated details
         const updatedUserToken = await api.users.authenticate.post(fixtures.updatedUser)

@@ -95,7 +95,34 @@ api.delete('/:id', authBearer, async (req, res, next) => {
 })
 
 // Update a user
+// deprecated: use PATCH instead
 api.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => User.find(req.user)
+  ).then(
+    user => {
+      // TODO: Move this to a validation step
+      if (req.body.admin && !user.admin) {
+        throw new AuthorizationError('only admins can set other admins')
+      }
+      return User.find(req.params.id)
+    }
+  ).then(
+    user => user.updateProperties(req.body)
+  ).then(
+    user => user.save()
+  ).then(
+    user => User.find(req.params.id)
+  ).then(
+    user => res.status(STATUS.OK).json(user)
+  ).catch(
+    next
+  )
+})
+
+api.patch('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(
