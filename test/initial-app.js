@@ -49,6 +49,10 @@ describe('initial-app', () => {
   it('sets up the git environment', () => {
     expect(items).toContain('.git')
     expect(items).toContain('.gitignore')
-    expect(items).toContain('.npmignore')
+  })
+
+  it('renames protected files', () => {
+    expect(items).toContain('.gitignore')
+    expect(items).toContain('package.json')
   })
 })
