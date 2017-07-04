@@ -1,20 +1,14 @@
-const fs = require('fs-extra')
-const path = require('path')
+const PouchDB = require('pouchdb')
 const logger = require('./logger')
 
 module.exports = async ({ appPath, override = {} }) => {
-  // the path to the db directory
+  // skip this during tests, as we use an in-memory DB
+  if (process.env.NODE_ENV === 'test') return
+
   const dbPath = require('./db-path')(appPath)
+  const exists = await require('./db-exists')(dbPath)
 
-  // TODO: check that the path is appropriate?
-
-  // the path to a db file within the db directory
-  const dbCheckPath = path.join(dbPath, 'CURRENT')
-
-  logger.info('Checking that', dbCheckPath, 'does not exist')
-
-  // if the file doesn't exist, that's fine
-  if (!await fs.pathExists(dbCheckPath)) return
+  if (!exists) return
 
   logger.info('Database appears to already exist')
 
@@ -26,6 +20,6 @@ module.exports = async ({ appPath, override = {} }) => {
 
   // if there's a "clobber" setting, remove the existing database dir
   logger.info('Overwriting existing database due to --clobber flag')
-  await fs.remove(dbPath)
-  logger.info('Removed', dbPath)
+  await new PouchDB(dbPath).destroy()
+  logger.info('Removed DB at', dbPath)
 }
