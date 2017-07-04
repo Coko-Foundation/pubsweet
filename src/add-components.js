@@ -73,7 +73,7 @@ module.exports = async components => {
     await install(names)
     const newModules = await dependencyNames()
 
-    const addedModules = diff(newModules, oldModules)
+    const addedModules = diff(Object.keys(newModules), Object.keys(oldModules))
     await updateConfig(addedModules)
   } catch (e) {
     logger.error('adding components failed')
