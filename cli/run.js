@@ -12,7 +12,7 @@ module.exports = async args => {
 
   program.parse(args || process.argv)
 
-  const env = process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
 
   const appPath = path.resolve(program.args[0] || process.cwd())
 

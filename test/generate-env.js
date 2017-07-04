@@ -1,3 +1,6 @@
+require('./helpers/fix-stdio')
+require('./helpers/debug-exit')
+
 const fs = require('fs-extra')
 
 process.env.NODE_ENV = 'test' // TODO: this shouldn't be needed

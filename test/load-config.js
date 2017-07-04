@@ -1,3 +1,6 @@
+require('./helpers/fix-stdio')
+require('./helpers/debug-exit')
+
 describe('load-config', () => {
   it('sets the NODE_CONFIG_DIR', () => {
     const dir = 'some_example_dir'

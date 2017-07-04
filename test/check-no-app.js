@@ -1,3 +1,6 @@
+require('./helpers/fix-stdio')
+require('./helpers/debug-exit')
+
 const checknoapp = require('../src/check-no-app')
 const workingdir = require('./helpers/working-dir')
 const fs = require('fs-extra')
