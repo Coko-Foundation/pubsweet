@@ -21,18 +21,6 @@ module.exports = async args => {
   await require('../src/check-db')(appPath)
   await require('../src/chdir')(appPath)
 
-  return start(appPath)
-}
-
-const collect = (val, memo) => {
-  memo.push(val)
-  return memo
-}
-
-const start = async appPath => {
-  const env = process.env.NODE_ENV
-  const logPath = type => path.join(appPath, 'logs', env, type + '.log')
-
   const cmd = ['node', path.join(__dirname, '../src/start.js')]
 
   if (program.dev && program.watch) {
@@ -40,6 +28,20 @@ const start = async appPath => {
       cmd.push(`--watch ${path}`)
     })
   }
+
+  return start(appPath, cmd)
+}
+
+const collect = (val, memo) => {
+  memo.push(val)
+  return memo
+}
+
+const start = async (appPath, cmd) => {
+  const env = process.env.NODE_ENV
+  const logPath = type => path.join(
+    appPath, 'logs', env, type + '.log'
+  )
 
   const child = forever.start(cmd, {
     silent: false,
