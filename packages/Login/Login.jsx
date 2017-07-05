@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Alert } from 'react-bootstrap'
+import { Grid, Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router'
 import { loginUser } from './actions'
 import styles from './Login.local.scss'
@@ -18,16 +18,20 @@ class Login extends Component {
     const { error } = self.props
     self.refs = {}
     return (
-      <div className="bootstrap">
-        <Row>
-          <Col md={2} mdOffset={5}>
-            <a href="#" className={styles.loginLogo}><img src="/assets/pubsweet-rgb-small.jpg" alt="pubsweet-logo" /></a>
-          </Col>
-        </Row>
-        <div className="container">
+      <div className="bootstrap" style={{marginTop: 20}}>
+        <Grid>
           <Row>
-            <Col md={4}>{error ? <Alert bsStyle="warning"><i className="fa fa-exclamation-circle" />&nbsp; {error}</Alert> : null}</Col>
-            <Col xs={12} md={4} className={styles.login}>
+            <Col md={2} mdOffset={5}>
+              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={4}>
+              {error && <Alert bsStyle="warning"><i className="fa fa-exclamation-circle" />&nbsp; {error}</Alert>}
+            </Col>
+
+            <Col xs={12} md={4}>
               <h1>Login</h1>
               <form>
                 <div className="form-group">
@@ -41,7 +45,7 @@ class Login extends Component {
                     ref={function (c) { self.refs.password = c }} className={error ? 'form-control error' : 'form-control success'} placeholder="Password" />
                 </div>
                 <button onClick={this.handleClick}
-                  className={styles.button + ' btn btn-wide btn-primary'}>
+                  className={styles.button + ' btn btn-block btn-primary'}>
                   Login
                 </button>
                 <p>Don't have an account?<br/><Link to="/signup">Sign up here</Link></p>
@@ -49,7 +53,7 @@ class Login extends Component {
               </form>
             </Col>
           </Row>
-        </div>
+        </Grid>
       </div>
     )
   }
