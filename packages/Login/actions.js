@@ -1,8 +1,6 @@
-import { fetch } from 'pubsweet-client/src/helpers/Utils'
+import * as api from 'pubsweet-client/src/helpers/api'
 import * as T from './types'
 import { push } from 'react-router-redux'
-
-const API_ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT']
 
 // TODO: This will break when rendered on a server
 const localStorage = window.localStorage || undefined
@@ -40,25 +38,16 @@ function loginFailure (message) {
 // Calls the API to get a token and
 // dispatches actions along the way
 export function loginUser (credentials, redirectTo) {
-  let config = {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(credentials)
-  }
-
   return dispatch => {
     dispatch(loginRequest(credentials))
-    return fetch(API_ENDPOINT + '/users/authenticate', config)
-      .then(
-        response => response.json()
-      ).then(
-        user => {
-          localStorage.setItem('token', user.token)
-          dispatch(loginSuccess(user))
-          if (redirectTo) dispatch(push(redirectTo))
-        },
-        err => dispatch(loginFailure(err))
-      )
+    return api.create('/users/authenticate', credentials).then(
+      user => {
+        localStorage.setItem('token', user.token)
+        dispatch(loginSuccess(user))
+        if (redirectTo) dispatch(push(redirectTo))
+      },
+      err => dispatch(loginFailure(err))
+    )
   }
 }
 
