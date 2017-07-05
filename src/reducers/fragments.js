@@ -3,6 +3,7 @@ import {
   CREATE_FRAGMENT_REQUEST,
   CREATE_FRAGMENT_SUCCESS,
   CREATE_FRAGMENT_FAILURE,
+  GET_FRAGMENT_REQUEST,
   GET_FRAGMENT_SUCCESS,
   UPDATE_FRAGMENT_REQUEST,
   UPDATE_FRAGMENT_SUCCESS,
@@ -65,6 +66,7 @@ export default function (state = {}, action) {
     case GET_FRAGMENT_SUCCESS:
       return setOne()
 
+    case GET_FRAGMENT_REQUEST:
     case CREATE_FRAGMENT_FAILURE:
     case DELETE_FRAGMENT_SUCCESS:
       return removeOne()

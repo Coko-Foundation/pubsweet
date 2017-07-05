@@ -2,6 +2,7 @@ import {
   GET_COLLECTIONS_SUCCESS,
   GET_COLLECTIONS_FAILURE,
   CREATE_COLLECTION_SUCCESS,
+  GET_COLLECTION_REQUEST,
   GET_COLLECTION_SUCCESS,
   UPDATE_COLLECTION_SUCCESS,
   PATCH_COLLECTION_SUCCESS,
@@ -111,6 +112,7 @@ export default function (state = [], action) {
     case PATCH_COLLECTION_SUCCESS:
       return updateCollection()
 
+    case GET_COLLECTION_REQUEST:
     case DELETE_COLLECTION_SUCCESS:
       return deleteCollection()
 
