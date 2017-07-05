@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import * as T from '../actions/types'
 import 'event-source-polyfill'
+import token from '../helpers/token'
 
 const actionMap = {
   'collection:create': T.CREATE_COLLECTION_SUCCESS,
@@ -83,7 +84,7 @@ class UpdateSubscriber extends Component {
       }
 
       // EventSource can't have Authorization header, so have to use query string
-      const url = '/updates?access_token=' + encodeURIComponent(currentUser.token)
+      const url = '/updates?access_token=' + encodeURIComponent(token())
 
       this.eventSource = new window.EventSource(url)
 
