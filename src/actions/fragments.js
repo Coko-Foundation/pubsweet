@@ -121,28 +121,15 @@ function getFragmentFailure (fragment, error) {
 }
 
 export function getFragment (collection, fragment) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(getFragmentRequest(fragment))
-
-    const { currentUser: { token } } = getState()
 
     const url = fragmentUrl(collection, fragment)
 
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    }
-
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        fragment => dispatch(getFragmentSuccess(fragment)),
-        err => dispatch(getFragmentFailure(fragment, err))
-      )
+    return api.get(url).then(
+      fragment => dispatch(getFragmentSuccess(fragment)),
+      err => dispatch(getFragmentFailure(fragment, err))
+    )
   }
 }
 

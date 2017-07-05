@@ -110,24 +110,12 @@ function getCollectionFailure (collection, error) {
 }
 
 export function getCollection (collection) {
-  return (dispatch, getState) => {
-    const {currentUser: {token}} = getState()
-
+  return dispatch => {
     dispatch(getCollectionRequest(collection))
 
     const url = collectionUrl(collection)
 
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    }
-
-    return fetch(url, opts).then(
-      response => response.json()
-    ).then(
+    return api.get(url).then(
       collection => dispatch(getCollectionSuccess(collection)),
       err => dispatch(getCollectionFailure(collection, err))
     )
