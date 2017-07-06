@@ -1,4 +1,4 @@
-const reducers = require.requireActual('../../src/reducers/current_user')
+const reducers = require.requireActual('../../src/reducers/currentUser')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
 
 const T = require('../../src/actions/types')
@@ -16,7 +16,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
   describeReducer('currentUser success', {
     state: {},
     action: {
-      type: T.GET_USER_SUCCESS,
+      type: T.GET_CURRENT_USER_SUCCESS,
       user: mockuser
     },
     output: {
@@ -29,7 +29,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
   describeReducer('currentUser failure', {
     state: {},
     action: {
-      type: T.GET_USER_FAILURE
+      type: T.GET_CURRENT_USER_FAILURE
     },
     output: { isFetching: false, isAuthenticated: false }
   })
@@ -37,7 +37,7 @@ module.exports = app => describeReducerSet('currentUser', reducers, () => {
   describeReducer('currentUser request', {
     state: {},
     action: {
-      type: T.GET_USER_REQUEST
+      type: T.GET_CURRENT_USER_REQUEST
     },
     output: { isFetching: true, isAuthenticated: false }
   })

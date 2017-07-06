@@ -22,6 +22,23 @@ module.exports = app => {
     // optional: more functionality tests here
   })
 
+  describeAction('getUser', {
+    firstarg: { id: app.user.id },
+    types: {
+      request: T.GET_USER_REQUEST,
+      success: T.GET_USER_SUCCESS,
+      failure: T.GET_USER_FAILURE
+    },
+    properties: {
+      request: ['user'],
+      success: ['user'],
+      failure: ['user', 'error']
+    },
+    user: () => app.user
+  }, (action, data) => {
+    // optional: more functionality tests here
+  })
+
   describeAction('updateUser', {
     firstarg: app.user,
     secondarg: app.user,

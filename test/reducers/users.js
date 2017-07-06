@@ -32,7 +32,22 @@ module.exports = app => describeReducerSet('users', reducers, () => {
     action: {
       type: T.GET_USERS_REQUEST
     },
-    output: { isFetching: true }
+    output: {
+      isFetching: true,
+      users: []
+    }
+  })
+
+  describeReducer('getUser success', {
+    state: { users: [] },
+    action: {
+      type: T.GET_USER_SUCCESS,
+      user: user
+    },
+    output: {
+      users: [user],
+      isFetching: false
+    }
   })
 
   describeReducer('updateUser request', {
@@ -41,7 +56,10 @@ module.exports = app => describeReducerSet('users', reducers, () => {
       type: T.UPDATE_USER_REQUEST,
       user: usermod
     },
-    output: { users: [usermod], isFetching: true }
+    output: {
+      users: [user],
+      isFetching: true
+    }
   })
 
   describeReducer('updateUser success', {
@@ -50,7 +68,10 @@ module.exports = app => describeReducerSet('users', reducers, () => {
       type: T.UPDATE_USER_SUCCESS,
       user: usermod
     },
-    output: { users: [user], isFetching: false }
+    output: {
+      users: [usermod],
+      isFetching: false
+    }
   })
 
   describeReducer('logout success', {
@@ -60,6 +81,7 @@ module.exports = app => describeReducerSet('users', reducers, () => {
       user: usermod
     },
     output: {
+      users: [],
       isFetching: false
     }
   })

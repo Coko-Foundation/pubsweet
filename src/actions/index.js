@@ -1,59 +1,41 @@
-/* eslint-disable */
-
-import componentActionsList from '../components/actions'
+import componentActions from '../components/actions'
 import * as T from './types'
 
 const actions = {}
 
 // Resets the currently visible error message.
-actions.resetErrorMessage = () => {
-  return {
-    type: T.RESET_ERROR_MESSAGE
-  }
-}
+actions.resetErrorMessage = () => ({
+  type: T.RESET_ERROR_MESSAGE
+})
 
-// Actions for current user
-import { getUser } from './current_user'
+import * as currentUser from './currentUser'
+Object.assign(actions, currentUser)
 
-Object.assign(actions, { getUser })
+import * as collections from './collections'
+Object.assign(actions, collections)
 
-// Actions for collections
-import { getCollections, createCollection, getCollection, updateCollection, patchCollection, deleteCollection } from './collections'
+import * as fragments from './fragments'
+Object.assign(actions, fragments)
 
-Object.assign(actions, { getCollections, createCollection, getCollection, updateCollection, patchCollection, deleteCollection })
+import * as users from './users'
+Object.assign(actions, users)
 
-// Actions for fragments
-import { getFragments, createFragment, getFragment, updateFragment, deleteFragment } from './fragments'
+import * as teams from './teams'
+Object.assign(actions, teams)
 
-Object.assign(actions, { getFragments, createFragment, getFragment, updateFragment, deleteFragment })
-
-// Actions for users management
-import { getUsers, updateUser } from './users'
-
-Object.assign(actions, { getUsers, updateUser })
-
-// Actions for teams management
-import { getTeams, createTeam, updateTeam, deleteTeam } from './teams'
-
-Object.assign(actions, { getTeams, createTeam, updateTeam, deleteTeam })
-
-// Actions for file upload
-import { fileUpload } from './fileUpload'
-
-Object.assign(actions, { fileUpload })
+import * as fileUpload from './fileUpload'
+Object.assign(actions, fileUpload)
 
 // Actions from external components
-componentActionsList.forEach(
+componentActions.forEach(
   componentActions => Object.assign(actions, componentActions)
 )
 
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
-actions.hydrate = () => {
-  return dispatch => Promise.all([
-    dispatch(getUser()),
-    dispatch(getCollections())
-  ])
-}
+actions.hydrate = () => dispatch => Promise.all([
+  dispatch(currentUser.getCurrentUser()),
+  dispatch(collections.getCollections())
+])
 
 export default actions
