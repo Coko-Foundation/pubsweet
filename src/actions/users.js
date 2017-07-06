@@ -61,20 +61,10 @@ export function getUser (user) {
   return dispatch => {
     dispatch(getUserRequest(user))
 
-    const config = {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token()
-      }
-    }
-
-    return fetch(API_ENDPOINT + '/users/' + user.id, config)
-      .then(
-        response => response.json()
-      ).then(
-        user => dispatch(getUserSuccess(user)),
-        err => dispatch(getUserFailure(err))
-      )
+    return api.get('/users/' + user.id).then(
+      user => dispatch(getUserSuccess(user)),
+      err => dispatch(getUserFailure(err))
+    )
   }
 }
 
