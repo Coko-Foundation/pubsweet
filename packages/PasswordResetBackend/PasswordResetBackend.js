@@ -9,7 +9,7 @@ const transport = require('./transport')
 const passwordResetConfig = require('./passwordResetConfig')
 
 const PasswordResetBackend = function (app) {
-  app.post('/api/password-reset', bodyParser.json(), async function (req, res, next) {
+  app.post('/password-reset', bodyParser.json(), async function (req, res, next) {
     try {
       const { token, password, username } = req.body
 
