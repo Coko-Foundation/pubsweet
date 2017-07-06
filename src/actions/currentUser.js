@@ -1,9 +1,5 @@
-import { fetch } from '../helpers/Utils'
+import * as api from '../helpers/api'
 import * as T from './types'
-
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-
-const token = require('../helpers/authtoken')
 
 function getCurrentUserRequest () {
   return {
@@ -27,20 +23,9 @@ function getCurrentUserFailure (error) {
 
 export function getCurrentUser () {
   return dispatch => {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token()
-      }
-    }
-
     dispatch(getCurrentUserRequest())
 
-    return fetch(
-      API_ENDPOINT + '/users/authenticate', config
-    ).then(
-      response => response.json()
-    ).then(
+    return api.get('/users/authenticate').then(
       user => dispatch(getCurrentUserSuccess(user))
     ).catch(
       err => dispatch(getCurrentUserFailure(err))

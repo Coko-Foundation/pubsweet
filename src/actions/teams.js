@@ -1,10 +1,8 @@
-import { fetch } from '../helpers/Utils'
+import * as api from '../helpers/api'
 import * as T from './types'
 
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-
 const teamUrl = (team) => {
-  let url = `${API_ENDPOINT}/teams`
+  let url = '/teams'
 
   if (team) url += `/${team.id}`
 
@@ -35,20 +33,13 @@ function getTeamsFailure (message) {
 }
 
 export function getTeams () {
-  return (dispatch, getState) => {
-    const { currentUser: { token } } = getState()
-    let config = {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + token }
-    }
-
+  return (dispatch) => {
     dispatch(getTeamsRequest())
-    return fetch(API_ENDPOINT + '/teams', config).then(
-        response => response.json()
-      ).then(
-        teams => dispatch(getTeamsSuccess(teams)),
-        err => dispatch(getTeamsFailure(err))
-      )
+
+    return api.get(teamUrl()).then(
+      teams => dispatch(getTeamsSuccess(teams)),
+      err => dispatch(getTeamsFailure(err))
+    )
   }
 }
 
@@ -76,28 +67,15 @@ function createTeamFailure (team, error) {
 }
 
 export function createTeam (team) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(createTeamRequest(team))
-    const { currentUser: { token } } = getState()
 
     const url = teamUrl()
-    const opts = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(team)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        team => dispatch(createTeamSuccess(team)),
-        err => dispatch(createTeamFailure(team, err))
-      )
+    return api.create(url, team).then(
+      team => dispatch(createTeamSuccess(team)),
+      err => dispatch(createTeamFailure(team, err))
+    )
   }
 }
 
@@ -125,28 +103,15 @@ function updateTeamFailure (team, error) {
 }
 
 export function updateTeam (team) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(updateTeamRequest(team))
-    const { currentUser: { token } } = getState()
-
     const url = teamUrl(team)
-    const opts = {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(team)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        fragment => dispatch(updateTeamSuccess(team)),
-        err => dispatch(updateTeamFailure(team, err))
-      )
+    // TODO: remove "true" once the server supports PATCH for updates
+    return api.update(url, team, true).then(
+      fragment => dispatch(updateTeamSuccess(team)),
+      err => dispatch(updateTeamFailure(team, err))
+    )
   }
 }
 
@@ -174,27 +139,14 @@ function deleteTeamFailure (team, error) {
 }
 
 export function deleteTeam (team) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(deleteTeamRequest(team))
-    const { currentUser: { token } } = getState()
 
     const url = teamUrl(team)
-    const opts = {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(team)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        fragment => dispatch(deleteTeamSuccess(team)),
-        err => dispatch(deleteTeamFailure(team, err))
-      )
+    return api.remove(url).then(
+      fragment => dispatch(deleteTeamSuccess(team)),
+      err => dispatch(deleteTeamFailure(team, err))
+    )
   }
 }

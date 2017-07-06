@@ -1,9 +1,5 @@
-import { fetch } from '../helpers/Utils'
+import * as api from '../helpers/api'
 import * as T from './types'
-
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-
-const token = require('../helpers/authtoken')
 
 function getUsersRequest () {
   return {
@@ -29,19 +25,13 @@ function getUsersFailure (message) {
 }
 
 export function getUsers () {
-  let config = {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + token() }
-  }
-
   return dispatch => {
     dispatch(getUsersRequest())
-    return fetch(API_ENDPOINT + '/users', config).then(
-        response => response.json()
-      ).then(
-        users => dispatch(getUsersSuccess(users.users)),
-        err => dispatch(getUsersFailure(err))
-      )
+
+    return api.get('/users').then(
+      users => dispatch(getUsersSuccess(users.users)),
+      err => dispatch(getUsersFailure(err))
+    )
   }
 }
 
@@ -113,23 +103,15 @@ function updateUserFailure (message) {
 }
 
 export function updateUser (user) {
-  let config = {
-    method: 'PUT',
-    headers: {
-      'Authorization': 'Bearer ' + token(),
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  }
-
   return dispatch => {
     dispatch(updateUserRequest(user))
-    return fetch(API_ENDPOINT + '/users/' + user.id, config)
-      .then(
-        response => response.json()
-      ).then(
-        user => dispatch(updateUserSuccess(user)),
-        err => dispatch(updateUserFailure(err))
-      )
+
+    const url = '/users/' + user.id
+
+    // TODO: remove "true" once the server supports PATCH for updates
+    return api.update(url, user, true).then(
+      user => dispatch(updateUserSuccess(user)),
+      err => dispatch(updateUserFailure(err))
+    )
   }
 }

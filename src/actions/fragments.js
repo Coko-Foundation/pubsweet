@@ -1,10 +1,8 @@
-import { fetch } from '../helpers/Utils'
+import * as api from '../helpers/api'
 import * as T from './types'
 
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
-
 export const fragmentUrl = (collection, fragment) => {
-  let url = `${API_ENDPOINT}/collections/${collection.id}/fragments`
+  let url = `/collections/${collection.id}/fragments`
 
   if (fragment.id) url += `/${fragment.id}`
 
@@ -12,7 +10,7 @@ export const fragmentUrl = (collection, fragment) => {
 }
 
 export const collectionUrl = (collection, suffix) => {
-  let url = `${API_ENDPOINT}/collections`
+  let url = '/collections'
 
   if (collection) url += `/${collection.id}`
 
@@ -45,11 +43,8 @@ function getFragmentsFailure (error) {
 }
 
 export function getFragments (collection, options) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(getFragmentsRequest(collection))
-    const {
-      currentUser: { token }
-    } = getState()
 
     let url = collectionUrl(collection, 'fragments')
 
@@ -57,18 +52,10 @@ export function getFragments (collection, options) {
       url += '?fields=' + encodeURIComponent(options.fields.join(','))
     }
 
-    const opts = {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    }
-
-    return fetch(url, opts).then(
-        response => response.json()
-      ).then(
-        fragments => dispatch(getFragmentsSuccess(collection, fragments)),
-        err => dispatch(getFragmentsFailure(err))
-      )
+    return api.get(url).then(
+      fragments => dispatch(getFragmentsSuccess(collection, fragments)),
+      err => dispatch(getFragmentsFailure(err))
+    )
   }
 }
 
@@ -97,28 +84,15 @@ function createFragmentFailure (fragment, error) {
 }
 
 export function createFragment (collection, fragment) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(createFragmentRequest(fragment))
-    const { currentUser: { token } } = getState()
 
     const url = fragmentUrl(collection, fragment)
-    const opts = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(fragment)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        fragment => dispatch(createFragmentSuccess(collection, fragment)),
-        err => dispatch(createFragmentFailure(fragment, err))
-      )
+    return api.create(url, fragment).then(
+      fragment => dispatch(createFragmentSuccess(collection, fragment)),
+      err => dispatch(createFragmentFailure(fragment, err))
+    )
   }
 }
 
@@ -147,28 +121,15 @@ function getFragmentFailure (fragment, error) {
 }
 
 export function getFragment (collection, fragment) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(getFragmentRequest(fragment))
-
-    const { currentUser: { token } } = getState()
 
     const url = fragmentUrl(collection, fragment)
 
-    const opts = {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    }
-
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        fragment => dispatch(getFragmentSuccess(fragment)),
-        err => dispatch(getFragmentFailure(fragment, err))
-      )
+    return api.get(url).then(
+      fragment => dispatch(getFragmentSuccess(fragment)),
+      err => dispatch(getFragmentFailure(fragment, err))
+    )
   }
 }
 
@@ -198,29 +159,15 @@ function updateFragmentFailure (fragment, error) {
 }
 
 export function updateFragment (collection, fragment) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(updateFragmentRequest(fragment))
 
-    const { currentUser: { token } } = getState()
-
     const url = fragmentUrl(collection, fragment)
-    const opts = {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(fragment)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        update => dispatch(updateFragmentSuccess(fragment, update)),
-        err => dispatch(updateFragmentFailure(fragment, err))
-      )
+    return api.update(url, fragment).then(
+      update => dispatch(updateFragmentSuccess(fragment, update)),
+      err => dispatch(updateFragmentFailure(fragment, err))
+    )
   }
 }
 
@@ -250,27 +197,14 @@ function deleteFragmentFailure (fragment, error) {
 }
 
 export function deleteFragment (collection, fragment) {
-  return (dispatch, getState) => {
-    const { currentUser: { token } } = getState()
+  return (dispatch) => {
     dispatch(deleteFragmentRequest(fragment))
 
     const url = fragmentUrl(collection, fragment)
-    const opts = {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(fragment)
-    }
 
-    return fetch(url, opts)
-      .then(
-        response => response.json()
-      ).then(
-        json => dispatch(deleteFragmentSuccess(collection, fragment)),
-        err => dispatch(deleteFragmentFailure(fragment, err))
-      )
+    return api.remove(url).then(
+      json => dispatch(deleteFragmentSuccess(collection, fragment)),
+      err => dispatch(deleteFragmentFailure(fragment, err))
+    )
   }
 }
