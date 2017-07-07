@@ -1,15 +1,17 @@
-module.exports = PUBSWEET_COMPONENTS.filter(
-  component => component.frontend && component.frontend.reducers
-).map(
-  component => {
-    const reducers = component.frontend.reducers
+// const components = require('./components')
+const components = PUBSWEET_COMPONENTS
+
+module.exports = components
+  .filter(component => component.frontend.reducers)
+  .map(component => component.frontend.reducers)
+  .map(reducers => {
     if (typeof reducers === 'function') {
-      const r = reducers()
-      const re = {}
-      re[r.default.name] = r.default
-      return re
-    } else {
-      return reducers.map(r => r())
+      const reducer = reducers()
+
+      return {
+        [reducer.default.name]: reducer.default
+      }
     }
-  }
-)
+
+    return reducers.map(reducer => reducer())
+  })
