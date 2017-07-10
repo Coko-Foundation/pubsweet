@@ -1,5 +1,7 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
+
 require('../helpers/fix-stdio')
+require('../helpers/debug-exit')
 
 const path = require('path')
 require('app-module-path').addPath(path.join(__dirname, '..', '..'))

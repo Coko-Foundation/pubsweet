@@ -1,3 +1,6 @@
+require('./helpers/fix-stdio')
+require('./helpers/debug-exit')
+
 const checkexists = require('../src/check-exists')
 const workingdir = require('./helpers/working-dir')
 
