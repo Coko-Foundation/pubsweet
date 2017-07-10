@@ -1,4 +1,5 @@
+api
+logs
 node_modules
-pubsweet.log
+.env.*
 _build
-.env*

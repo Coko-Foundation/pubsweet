@@ -16,9 +16,24 @@ const copyInitialApp = async () => {
   // copy files from the input to the output directory
   await fs.copy(inputDir, outputDir, {overwrite: false})
 
-  // TODO: set "name" in package.json?
+  // rename files with protected names
+  await renameProtectedFiles(outputDir, [
+    '.gitignore',
+    'package.json'
+  ])
 
   logger.info('Finished generating app structure')
+}
+
+// some files get special treatment by npm,
+// so their filenames have been prefixed with an underscore
+const renameProtectedFiles = async (outputDir, files) => {
+  return Promise.all(files.map(file => {
+    return fs.rename(
+      path.join(outputDir, '_' + file),
+      path.join(outputDir, file)
+    )
+  }))
 }
 
 const installPackages = async () => {
