@@ -82,6 +82,7 @@ Commands:
   run         start a pubsweet app
   setupdb     generate a database for a pubsweet app
   add         add one or more components to a pubsweet app
+  remove      remove one or more components from a pubsweet app
   adduser     add a user to the database for a pubsweet app
   help [cmd]  display help for [cmd]
 
@@ -136,6 +137,26 @@ pubsweet run
 
 ```bash
 pubsweet run path/to/myapp
+```
+
+### Adding and removing components (`pubsweet add`)
+
+Components add pages, actions, and behaviors to pubsweet. There are many we've
+bundled by default, and you can create your own. To read more about components,
+[read the documentation](TODO!).
+
+```bash
+pubsweet add users-manager
+```
+
+Find all available components by typing:
+```bash
+pubsweet components 
+```
+
+To remove a component, simply type `remove` with one or more components:
+```bash
+pubsweet remove users-manager,teams-manager
 ```
 
 ### Setting up the database (`pubsweet setupdb`)

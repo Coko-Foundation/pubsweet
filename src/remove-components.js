@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const diff = require('lodash/difference')
+const pullAll = require('lodash/pullAll')
 const spawn = require('child_process').spawn
 
 const logger = require('../src/logger')
@@ -18,11 +19,11 @@ const resolvename = name => {
 }
 
 const install = names => new Promise((resolve, reject) => {
-  logger.info('Adding components', names)
+  logger.info('Removing components', names)
 
   require('../src/load-config')(path.resolve('', './config'))
 
-  const child = spawn(`yarn add ${names}`, {
+  const child = spawn(`yarn remove ${names}`, {
     cwd: process.cwd(),
     stdio: 'inherit',
     shell: true
@@ -31,21 +32,20 @@ const install = names => new Promise((resolve, reject) => {
   child.on('close', resolve)
   child.on('error', reject)
 
-  logger.info('Finished adding components', names)
+  logger.info('Finished removing components', names)
 })
 
 const updateConfig = async modules => {
-  logger.info(`Adding ${modules.length} components to config`)
-  logger.info(`Components being added: ${modules.join(' ')}`)
+  logger.info(`Removing ${modules.length} components from config`)
+  logger.info(`Components being removed: ${modules.join(' ')}`)
 
   const configFile = path.join(process.cwd(), 'config', `shared.js`)
   if (!fs.pathExistsSync(configFile)) return
 
-  logger.info(`Adding components to config`)
   const config = require(configFile)
 
   // TODO: test that this works when empty/undefined
-  config.pubsweet.components = modules.concat(config.pubsweet.components)
+  config.pubsweet.components = pullAll(config.pubsweet.components, modules)
 
   const output = [
     `const path = require('path')`,
@@ -73,10 +73,10 @@ module.exports = async components => {
     await install(names)
     const newModules = await dependencyNames()
 
-    const addedModules = diff(Object.keys(newModules), Object.keys(oldModules))
-    await updateConfig(addedModules)
+    const removedModules = diff(Object.keys(oldModules), Object.keys(newModules))
+    await updateConfig(removedModules)
   } catch (e) {
-    logger.error('adding components failed')
+    logger.error('removing components failed')
     throw e
   }
 }
