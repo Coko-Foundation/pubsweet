@@ -27,8 +27,12 @@ module.exports = {
   },
   pubsweet: {
     components: [
-      'pubsweet-component-signup',
-      'pubsweet-component-login'
+      'pubsweet-component-blog',
+      'pubsweet-component-login',
+      'pubsweet-component-manage',
+      'pubsweet-component-pepper-theme',
+      'pubsweet-component-posts-manager',
+      'pubsweet-component-signup'
     ]
   }
   // validations: {
