@@ -8,10 +8,8 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "dependencies": {
-    "joi-browser": "^10.0.6"
-  },
   "peerDependencies": {
+    "joi-browser": "^10.0.6",
     "pubsweet-client": ">=0.9.0"
   },
   "repository": {

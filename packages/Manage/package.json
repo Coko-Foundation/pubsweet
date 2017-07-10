@@ -9,11 +9,11 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "font-awesome": "^4.7.0",
     "pubsweet-component-navigation": "^0.2.4"
   },
   "peerDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "pubsweet-client": ">=0.9.1"
   },
   "repository": {
