@@ -1,9 +1,14 @@
-module.exports = PUBSWEET_COMPONENTS.filter(
-  component => component.frontend && component.frontend.actions
-).map(
-  component => {
-    const actions = component.frontend.actions
-    if (typeof actions === 'function') return actions()
-    else return actions.map(r => r())
-  }
-)
+// const components = require('./components')
+const components = PUBSWEET_COMPONENTS
+
+module.exports = components
+  .filter(component => component.frontend.actions)
+  .map(component => component.frontend.actions)
+  .map(actions => {
+    if (typeof actions === 'function') {
+      return actions()
+    }
+
+    return actions.map(action => action())
+  })
+  .reduce((output, actions) => ({...output, ...actions}), {})

@@ -2,9 +2,15 @@ import configureStore from './store/configureStore'
 import Root from './components/Root'
 import { requireAuthentication } from './components/AuthenticatedComponent'
 
-// Cross-platform global: https://www.contentful.com/blog/2017/01/17/the-global-object-in-javascript/
-(function (global) {
-  global.VALIDATIONS = require('pubsweet-server/src/models/validations')(CONFIG)
-}).call(this, typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {})
+import './globals'
 
-export { configureStore, Root, requireAuthentication }
+import actions from './actions'
+import reducers from './reducers'
+
+export {
+  actions,
+  configureStore,
+  reducers,
+  requireAuthentication,
+  Root
+}
