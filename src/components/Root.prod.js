@@ -3,7 +3,7 @@ import { Router } from 'react-router'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import routes from 'app/routes.jsx'
+import routes from 'app/routes'
 
 export default class Root extends React.Component {
   render () {
