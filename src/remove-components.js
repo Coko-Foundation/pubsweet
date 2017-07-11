@@ -35,24 +35,18 @@ const install = names => new Promise((resolve, reject) => {
   logger.info('Finished removing components', names)
 })
 
-const updateConfig = async modules => {
-  logger.info(`Removing ${modules.length} components from config`)
-  logger.info(`Components being removed: ${modules.join(' ')}`)
+const updateConfig = async dropcomponents => {
+  logger.info(`Removing ${dropcomponents.length} components from config`)
+  logger.info(`Components being removed: ${dropcomponents.join(' ')}`)
 
-  const configFile = path.join(process.cwd(), 'config', `shared.js`)
+  const configFile = path.join(process.cwd(), 'config', 'components.json')
   if (!fs.pathExistsSync(configFile)) return
 
-  const config = require(configFile)
+  const components = await fs.readJson(configFile)
 
-  // TODO: test that this works when empty/undefined
-  config.pubsweet.components = pullAll(config.pubsweet.components, modules)
+  components = pullAll(components, dropcomponents)
 
-  const output = [
-    `const path = require('path')`,
-    `module.exports = ${JSON.stringify(config, null, 2)}`
-  ].join('\n\n')
-
-  await fs.writeFile(configFile, output)
+  await fs.writeJson(configFile, components)
 
   logger.info('Finished updating config')
 }
