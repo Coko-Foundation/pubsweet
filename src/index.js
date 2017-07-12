@@ -9,6 +9,7 @@ const logger = require('./logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
+const config = require('../config')
 
 module.exports = (app = express()) => {
   global.versions = {}
@@ -34,7 +35,8 @@ module.exports = (app = express()) => {
   app.use('/api', api)
 
   // SSE update stream
-  app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
+  let sseConnect = config['pubsweet-server'].sse ? sse.connect : () => {}
+  app.get('/updates', passport.authenticate('bearer', { session: false }), sseConnect)
 
   // Serve the index page for front end
   app.use('/manage', index)
