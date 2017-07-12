@@ -42,7 +42,7 @@ const updateConfig = async dropcomponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
   if (!fs.pathExistsSync(configFile)) return
 
-  const components = await fs.readJson(configFile)
+  let components = await fs.readJson(configFile)
 
   components = pullAll(components, dropcomponents)
 

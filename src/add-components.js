@@ -43,7 +43,7 @@ const updateConfig = async newcomponents => {
   if (!fs.pathExistsSync(configFile)) return
 
   logger.info(`Adding components to config`)
-  const components = await fs.readJson(configFile)
+  let components = await fs.readJson(configFile)
 
   // TODO: test that this works when empty/undefined
   components = union(components, newcomponents)
