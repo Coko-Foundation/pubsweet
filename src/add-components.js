@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
+const union = require('lodash/union')
 const diff = require('lodash/difference')
 const spawn = require('child_process').spawn
 
@@ -34,25 +35,20 @@ const install = names => new Promise((resolve, reject) => {
   logger.info('Finished adding components', names)
 })
 
-const updateConfig = async modules => {
-  logger.info(`Adding ${modules.length} components to config`)
-  logger.info(`Components being added: ${modules.join(' ')}`)
+const updateConfig = async newcomponents => {
+  logger.info(`Adding ${newcomponents.length} components to config`)
+  logger.info(`Components being added: ${newcomponents.join(' ')}`)
 
-  const configFile = path.join(process.cwd(), 'config', `shared.js`)
+  const configFile = path.join(process.cwd(), 'config', 'components.json')
   if (!fs.pathExistsSync(configFile)) return
 
   logger.info(`Adding components to config`)
-  const config = require(configFile)
+  let components = await fs.readJson(configFile)
 
   // TODO: test that this works when empty/undefined
-  config.pubsweet.components = modules.concat(config.pubsweet.components)
+  components = union(components, newcomponents)
 
-  const output = [
-    `const path = require('path')`,
-    `module.exports = ${JSON.stringify(config, null, 2)}`
-  ].join('\n\n')
-
-  await fs.writeFile(configFile, output)
+  await fs.writeJson(configFile, components)
 
   logger.info('Finished updating config')
 }

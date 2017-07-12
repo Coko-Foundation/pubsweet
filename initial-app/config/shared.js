@@ -26,14 +26,7 @@ module.exports = {
     'fail-redirect': '/login'
   },
   pubsweet: {
-    components: [
-      'pubsweet-component-blog',
-      'pubsweet-component-login',
-      'pubsweet-component-manage',
-      'pubsweet-component-pepper-theme',
-      'pubsweet-component-posts-manager',
-      'pubsweet-component-signup'
-    ]
+    components: require('./components.json')
   }
   // validations: {
   //   fragment: {
