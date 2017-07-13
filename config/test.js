@@ -1,10 +1,11 @@
 const blogmode = require('authsome/src/modes/blog')
 const Joi = require('joi')
 
+console.log('SETTING is', global.SSE)
 module.exports = {
   'pubsweet-server': {
     'API_ENDPOINT': '/api',
-    sse: false
+    sse: global.SSE || false
   },
   validations: {
     fragment: {
