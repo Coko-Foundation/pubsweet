@@ -35,10 +35,9 @@ module.exports = (app = express()) => {
   app.use('/api', api)
 
   // SSE update stream
-  let sseConnect = config['pubsweet-server'].sse
-    ? sse.connect : (req, res) => res.sendStatus(404)
-
-  app.get('/updates', passport.authenticate('bearer', { session: false }), sseConnect)
+  if (config['pubsweet-server'].sse) {
+    app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
+  }
 
   // Serve the index page for front end
   app.use('/manage', index)
