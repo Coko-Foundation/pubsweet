@@ -8,5 +8,5 @@ This is the PubSweet client, to be used as a dependency in PubSweet apps, such a
 
 # Short-term roadmap
 
-- 0.8.0 - Current version
-- 0.9.0 - Simple realtime updates of fragments and collections
+- 1.0.0.alpha.1 - Current version
+- TBD after first PubSweet meeting on July 18, 2017
