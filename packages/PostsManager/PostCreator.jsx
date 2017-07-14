@@ -19,7 +19,7 @@ export default class PostCreator extends React.Component {
       this.props.create({
         kind: 'blogpost',
         title: title,
-        status: 'unpublished',
+        published: false,
         source: undefined
       })
     }
