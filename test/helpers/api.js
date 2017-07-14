@@ -322,5 +322,6 @@ module.exports = {
   users: users,
   collections: collections,
   teams: teams,
-  upload: upload
+  upload: upload,
+  api: api
 }

@@ -48,6 +48,7 @@
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "eslint": "^3.19.0",
+    "eventsource": "^1.0.4",
     "jest-cli": "^19.0.2",
     "pouchdb-adapter-memory": "^6.1.1",
     "standard": "^10.0.2",
