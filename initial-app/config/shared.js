@@ -28,10 +28,11 @@ module.exports = {
   },
   pubsweet: {
     components: require('./components.json')
+  },
+  validations: {
+    fragment: {
+      kind: Joi.string(),
+      status: Joi.string()
+    }
   }
-  // validations: {
-  //   fragment: {
-  //     published: Joi.bool()
-  //   }
-  // }
 }
