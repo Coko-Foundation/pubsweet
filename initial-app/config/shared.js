@@ -1,6 +1,6 @@
 const path = require('path')
 const blogmode = require('authsome/src/modes/blog')
-// const Joi = require('joi')
+const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
