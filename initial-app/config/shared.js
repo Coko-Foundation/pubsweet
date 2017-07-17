@@ -32,7 +32,8 @@ module.exports = {
   validations: {
     fragment: {
       kind: Joi.string(),
-      status: Joi.string()
+      published: Joi.bool(),
+      published_at: Joi.string()
     }
   }
 }
