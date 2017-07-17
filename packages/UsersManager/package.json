@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-users-manager",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Basic navigation bar component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "dependencies": {},
   "peerDependencies": {
     "pubsweet-client": ">=0.9.0"
   },
