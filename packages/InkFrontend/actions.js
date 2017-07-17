@@ -1,7 +1,7 @@
-import { fetch } from 'pubsweet-client/src/helpers/Utils'
+import request from 'pubsweet-client/src/helpers/api'
 import * as T from './types'
 
-const API_ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT']
+const ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT'].replace(/api$/, 'ink')
 
 function inkRequest () {
   return {
@@ -29,19 +29,14 @@ function inkFailure (message) {
 // Calls the API to get a token and
 // dispatches actions along the way
 export function ink (file) {
-  var data = new FormData()
+  const data = new FormData()
   data.append('file', file)
-
-  let config = {
-    method: 'POST',
-    body: data
-  }
 
   return dispatch => {
     dispatch(inkRequest())
-    return fetch(API_ENDPOINT.slice(0, -4) + '/ink', config)
+    return request(ENDPOINT, data, { parse: false })
       .then(
-        response => response.text()
+        response => response.text() // TODO: return JSON from the backend
       ).then(
         response => dispatch(inkSuccess(response))
       ).catch(err => dispatch(inkFailure(err)))

@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router'
-import fetch from 'isomorphic-fetch'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
-
-const API_ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT']
+import * as api from 'pubsweet-client/src/helpers/api'
 
 class PasswordReset extends React.Component {
   constructor (props) {
@@ -33,11 +31,7 @@ class PasswordReset extends React.Component {
   }
 
   post (data) {
-    return fetch(API_ENDPOINT + '/password-reset', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    })
+    return api.create('/password-reset', data)
   }
 
   handleUsernameChange = (e) => {
