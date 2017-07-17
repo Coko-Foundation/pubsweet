@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styles from './PostsManager.local.scss'
 import Actions from 'pubsweet-client/src/actions'
-import { fragmentsOfCollection } from 'pubsweet-client/src/helpers/Utils'
 
 class PostsManager extends React.Component {
   componentWillMount () {
@@ -56,9 +55,10 @@ PostsManager.propTypes = {
 }
 
 function mapState (state) {
-  let blogposts
+  let blog = state.collections[0]
 
-  blogposts = fragmentsOfCollection(state.collections[0], state.fragments)
+  let blogposts = blog ?
+    blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
 
   return {
     blog: state.collections[0],
