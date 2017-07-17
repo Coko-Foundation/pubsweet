@@ -8,7 +8,6 @@ import styles from './Blog.local.scss'
 
 import Actions from 'pubsweet-client/src/actions'
 import { bindActionCreators } from 'redux'
-import { fragmentsOfCollection } from 'pubsweet-client/src/helpers/Utils'
 import BlogpostSummary from './Summary'
 
 class Blog extends React.Component {
@@ -77,7 +76,9 @@ Blog.propTypes = {
 }
 
 function mapStateToProps (state) {
-  let posts = fragmentsOfCollection(state.collections[0], state.fragments)
+  let blog = state.collections[0]
+  let posts = blog ? blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
+
   return {
     blog: state.collections[0],
     posts: posts
