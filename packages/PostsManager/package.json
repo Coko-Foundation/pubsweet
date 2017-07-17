@@ -12,8 +12,8 @@
     "pubsweet-component-form-group": "^0.0.6"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=0.9.1",
-    "pubsweet-server": ">=0.8.1"
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "pubsweet-server": ">=1.0.0-alpha.1"
   },
   "repository": {
     "type": "git",
