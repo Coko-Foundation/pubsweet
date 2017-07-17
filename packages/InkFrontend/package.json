@@ -25,6 +25,6 @@
     "react-dropzone": "^3.7.3"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=0.9.0"
+    "pubsweet-client": ">=1.0.0-alpha.1"
   }
 }
