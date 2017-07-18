@@ -27,6 +27,7 @@ class MediumDraft extends React.Component {
     if (this.props.blog) {
       this.props.actions.getCollections().then(result =>
         this.props.actions.getFragment(this.props.blog, {id: this.props.fragmentId})
+      )
     }
 
     this.state = {editorState: editorState}
