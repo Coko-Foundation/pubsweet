@@ -1,6 +1,6 @@
 const path = require('path')
 const blogmode = require('authsome/src/modes/blog')
-// const Joi = require('joi')
+const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
@@ -28,10 +28,14 @@ module.exports = {
   },
   pubsweet: {
     components: require('./components.json')
+  },
+  validations: {
+    fragment: {
+      kind: Joi.string(),
+      published: Joi.bool(),
+      published_at: Joi.string(),
+      source: Joi.any(),
+      presentation: Joi.string()
+    }
   }
-  // validations: {
-  //   fragment: {
-  //     published: Joi.bool()
-  //   }
-  // }
 }
