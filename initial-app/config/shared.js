@@ -33,7 +33,9 @@ module.exports = {
     fragment: {
       kind: Joi.string(),
       published: Joi.bool(),
-      published_at: Joi.string()
+      published_at: Joi.string(),
+      source: Joi.any(),
+      presentation. Joi.string()
     }
   }
 }
