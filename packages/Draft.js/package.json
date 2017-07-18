@@ -9,10 +9,10 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "draft-js": "^0.9.1"
+    "draft-js": "^0.10.0"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=0.9.0"
+    "pubsweet-client": ">=1.0.0-alpha.1"
   },
   "repository": {
     "type": "git",
