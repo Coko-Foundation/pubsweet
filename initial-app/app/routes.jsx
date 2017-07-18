@@ -9,8 +9,12 @@ import PostsManager from 'pubsweet-component-posts-manager/PostsManager'
 import UsersManager from 'pubsweet-component-users-manager/UsersManager'
 import TeamsManager from 'pubsweet-component-teams-manager/TeamsManager'
 
+// Editor
+import MediumDraft from 'pubsweet-component-medium-draft/MediumDraft'
+
 // Public
 import Blog from 'pubsweet-component-blog/Blog'
+import HTML from 'pubsweet-component-html/HTML'
 
 // Authentication
 import Login from 'pubsweet-component-login/Login'
@@ -28,9 +32,10 @@ export default (
       <Route path='posts' component={PostsManager} />
       <Route path='users' component={UsersManager} />
       <Route path='teams' component={TeamsManager} />
+      <Route path='sciencewriter/:id' component={MediumDraft} />
     </Route>
-
     <Route path='/login' component={Login} />
     <Route path='/signup' component={Signup} />
+    <Route path='/:id' component={HTML} />
   </Route>
 )

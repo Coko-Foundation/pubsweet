@@ -18,7 +18,9 @@
     "pubsweet-component-posts-manager": "^0.3.0",
     "pubsweet-theme-plugin": "^0.0.1",
     "pubsweet-component-teams-manager": "^0.1.7",
-    "pubsweet-component-users-manager": "^0.1.6"
+    "pubsweet-component-users-manager": "^0.1.6",
+    "pubsweet-component-html": "^0.0.1",
+    "pubsweet-component-medium-draft": "^0.0.1"
   },
   "devDependencies": {
     "app-module-path": "^2.2.0",
