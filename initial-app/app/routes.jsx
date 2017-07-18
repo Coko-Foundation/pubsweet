@@ -6,6 +6,8 @@ import { requireAuthentication } from 'pubsweet-client/src/components/Authentica
 // Manage
 import Manage from 'pubsweet-component-manage/Manage'
 import PostsManager from 'pubsweet-component-posts-manager/PostsManager'
+import UsersManager from 'pubsweet-component-users-manager/UsersManager'
+import TeamsManager from 'pubsweet-component-teams-manager/TeamsManager'
 
 // Public
 import Blog from 'pubsweet-component-blog/Blog'
@@ -24,6 +26,8 @@ export default (
 
     <Route path='/manage' component={AuthenticatedManage}>
       <Route path='posts' component={PostsManager} />
+      <Route path='users' component={UsersManager} />
+      <Route path='teams' component={TeamsManager} />
     </Route>
 
     <Route path='/login' component={Login} />
