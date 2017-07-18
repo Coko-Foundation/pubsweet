@@ -24,6 +24,11 @@ class MediumDraft extends React.Component {
       editorState = createEditorState()
     }
 
+    if (this.props.blog) {
+      this.props.actions.getCollections().then(result =>
+        this.props.actions.getFragment(this.props.blog, {id: this.props.fragmentId})
+    }
+
     this.state = {editorState: editorState}
     this.onChange = this.onChange.bind(this)
   }
@@ -56,16 +61,19 @@ class MediumDraft extends React.Component {
 }
 
 MediumDraft.propTypes = {
+  fragmentId: PropTypes.string.isRequired,
   blog: PropTypes.object,
   fragment: PropTypes.object,
   actions: PropTypes.object
 }
 
 function mapStateToProps (state, ownProps) {
+  let fragmentId = ownProps.params.id
   return {
+    fragmentId: fragmentId,
     blog: state.collections[0],
     id: ownProps.params.id,
-    fragment: state.fragments[ownProps.params.id]
+    fragment: state.fragments[fragmentId]
   }
 }
 
