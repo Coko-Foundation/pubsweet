@@ -1,0 +1,24 @@
+{
+  "name": "pubsweet-component-medium-draft",
+  "version": "0.0.1",
+  "description": "Medium Draft component for PubSweet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "draft-convert": "^1.4.8",
+    "font-awesome": "^4.7.0",
+    "medium-draft": "^0.5.2"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0-alpha.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "MediumDraft"
+  }
+}
