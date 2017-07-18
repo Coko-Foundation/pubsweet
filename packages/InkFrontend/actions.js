@@ -32,9 +32,15 @@ export function ink (file) {
   const data = new FormData()
   data.append('file', file)
 
+  const options = {
+    method: 'POST',
+    body: data,
+    parse: false
+  }
+
   return dispatch => {
     dispatch(inkRequest())
-    return request(ENDPOINT, data, { parse: false })
+    return request(ENDPOINT, options)
       .then(
         response => response.text() // TODO: return JSON from the backend
       ).then(
