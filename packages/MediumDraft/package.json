@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-medium-draft",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Medium Draft component for PubSweet",
   "main": "index.js",
   "scripts": {
