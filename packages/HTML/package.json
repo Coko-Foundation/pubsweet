@@ -1,0 +1,19 @@
+{
+  "name": "pubsweet-component-html",
+  "version": "0.0.1",
+  "description": "PubSweet component that displays the HTML of a fragment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0-alpha.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "path": "HTML"
+  }
+}
