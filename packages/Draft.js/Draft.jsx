@@ -10,8 +10,13 @@ class Draft extends React.Component {
   constructor (props) {
     super(props)
     let editorState
+
+    this.props.actions.getCollections().then(result =>
+      this.props.actions.getFragment(result.collections[0], {id: this.props.id})
+    )
+
     if (props.fragment && props.fragment.source) {
-      let content = convertFromRaw(props.fragment)
+      let content = convertFromRaw(props.fragment.source)
       editorState = EditorState.createWithContent(content)
     } else {
       editorState = EditorState.createEmpty()
@@ -19,6 +24,15 @@ class Draft extends React.Component {
 
     this.state = {editorState: editorState}
     this.onChange = this.onChange.bind(this)
+  }
+
+  componentDidUpdate (prevProps) {
+    let editorState
+    if (this.props.fragment && this.props.fragment.source && !prevProps.fragment) {
+      let content = convertFromRaw(this.props.fragment.source)
+      editorState = EditorState.createWithContent(content)
+      this.setState({editorState: editorState})
+    }
   }
 
   onChange (editorState) {
@@ -37,6 +51,7 @@ class Draft extends React.Component {
 }
 
 Draft.propTypes = {
+  id: PropTypes.string,
   blog: PropTypes.object,
   fragment: PropTypes.object,
   actions: PropTypes.object

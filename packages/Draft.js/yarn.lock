@@ -10,11 +10,11 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-draft-js@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.9.1.tgz#940a51a0ad1fede0411676b6404f4050495f54f9"
+draft-js@^0.10.0:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.1.tgz#6f1219d8095729691429ca6fd7a58d2a8be5cb67"
   dependencies:
-    fbjs "^0.8.3"
+    fbjs "^0.8.7"
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
@@ -24,7 +24,7 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
-fbjs@^0.8.3:
+fbjs@^0.8.7:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
