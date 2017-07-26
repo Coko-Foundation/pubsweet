@@ -35,17 +35,14 @@ export function requireAuthentication (Component, operation, selector) {
       this.checkAuth(nextProps.currentUser)
     }
 
-    checkAuthorization () {
-      let currentUser = this.props.currentUser.user
+    checkAuthorization (user) {
       let object = selector(this.props.state)
 
       try {
-        if (this.authsome.can(currentUser, operation, object)) {
+        if (this.authsome.can(user, operation, object)) {
           return <Component {...this.props} />
-        } else if (this.failRedirect) {
-          return this.props.pushState(this.failRedirect)
         } else {
-          <span />
+          return <span />
         }
       } catch (err) {
         return <span />
@@ -53,17 +50,24 @@ export function requireAuthentication (Component, operation, selector) {
     }
 
     checkAuth (currentUser) {
-      if (!currentUser.isFetching && !currentUser.isAuthenticated) {
-        let redirectAfterLogin = this.props.location.pathname
-        this.props.pushState(`/login?next=${redirectAfterLogin}`)
+      let object = selector(this.props.state)
+
+      if (!currentUser.isFetching) {
+        if (!currentUser.isAuthenticated) {
+          let redirectAfterLogin = this.props.location.pathname
+          return this.props.pushState(`/login?next=${redirectAfterLogin}`)
+        } else if (!this.authsome.can(currentUser.user, operation, object) && this.failRedirect) {
+          this.props.pushState(this.failRedirect)
+        } else {
+          this.checkAuthorization(currentUser.user)
+        }
       }
-      this.checkAuthorization()
     }
 
     render () {
       return (
         <div>
-          { this.checkAuthorization() }
+          { this.checkAuthorization(this.props.currentUser.user) }
         </div>
       )
     }
