@@ -32,9 +32,13 @@ class Collection extends Model {
   }
 
   addFragment (fragment) {
-    this.fragments = this.fragments.map(
-      fragmentId => new Fragment({id: fragmentId})
-    )
+    this.fragments = this.fragments.map(fragment => {
+      if (typeof fragment === 'object') {
+        return fragment
+      } else {
+        return new Fragment({id: fragment})
+      }
+    })
     this.fragments.push(fragment)
   }
 }
