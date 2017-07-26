@@ -21,7 +21,7 @@ const resolvename = name => {
 const install = names => new Promise((resolve, reject) => {
   logger.info('Adding components', names)
 
-  require('../src/load-config')(path.resolve('', './config'))
+  require('../src/load-config')(path.resolve('config'))
 
   const child = spawn(`yarn add ${names}`, {
     cwd: process.cwd(),
