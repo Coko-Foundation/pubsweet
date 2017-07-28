@@ -11,7 +11,7 @@ class Authorize extends React.Component {
     super(props)
 
     // TODO:
-    // Ah, this is because for the frontend, we supply the
+    // Ah, this is because for the client, we supply the
     // objects with owners in a different format than backend.
     // And authsome operates with the backend way. Need to rethink.
     this.object = Object.assign({}, this.props.object)
