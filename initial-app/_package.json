@@ -7,7 +7,7 @@
     "webpack"
   ],
   "dependencies": {
-    "pubsweet": "1.0.0-alpha.2",
+    "pubsweet": "1.0.0-alpha.3",
     "pubsweet-server": "1.0.0-alpha.2",
     "pubsweet-client": "1.0.0-alpha.3",
     "pubsweet-component-blog": "^0.2.0",
