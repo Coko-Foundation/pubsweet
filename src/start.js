@@ -56,9 +56,11 @@ const registerComponents = app => {
     const component = require(path.join(process.cwd(), 'node_modules', name))
     logger.info('Registered component', name)
 
-    if (component.backend) {
-      component.backend()(app)
-      logger.info('Registered backend component', name)
+    // Backwards compatibility, old name was 'backend', new name is 'server'
+    let serverComponent = component.server || component.backend
+    if (serverComponent) {
+      serverComponent()(app)
+      logger.info('Registered server component', name)
     }
   })
 }

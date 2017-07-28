@@ -38,8 +38,8 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 | repository | description |
 | :-------- | :-------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible backend API that runs on the server |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible frontend app that runs in the browser |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible server API that runs on the server |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible client app that runs in the browser |
 | [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
 | [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
 
@@ -151,7 +151,7 @@ pubsweet add users-manager
 
 Find all available components by typing:
 ```bash
-pubsweet components 
+pubsweet components
 ```
 
 To remove a component, simply type `remove` with one or more components:
