@@ -16,6 +16,7 @@
 	- [Getting PubSweet CLI](#getting-pubsweet-cli)
 		- [Prerequisites](#prerequisites)
 		- [Installation](#installation)
+    - [Installation on Windows](#installation-on-windows)
 	- [Using PubSweet CLI](#using-pubsweet-cli)
 		- [Displaying the commands (`pubsweet` or `pubsweet help`)](#displaying-the-commands-pubsweet-or-pubsweet-help)
 		- [Generating an app (`pubsweet new`)](#generating-an-app-pubsweet-new)
@@ -49,7 +50,7 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 ### Prerequisites
 
-- node v7.6+
+- Node.js v7.6+
 - npm v3+ or yarn v0.21+
 
 ### Installation
@@ -65,6 +66,20 @@ or
 ```bash
 yarn global add pubsweet
 ```
+
+### Installation on Windows
+
+- Install Ubuntu on Windows: [Windows Store](https://www.microsoft.com/en-gb/store/p/ubuntu/9nblggh4msv6#system-requirements)
+- Launch the Bash on Ubuntu on Windows from the Start menu
+- Install nvm: [nvm install script](https://github.com/creationix/nvm#install-script)
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+```
+
+- Restart your terminal/bash
+- `nvm install 7.7` (this version of Node.js is the latest to have precompiled leveldown packages)
+- `npm install -g pubsweet`
 
 ## Using PubSweet CLI
 
