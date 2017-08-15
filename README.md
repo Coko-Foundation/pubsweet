@@ -16,7 +16,7 @@
 	- [Getting PubSweet CLI](#getting-pubsweet-cli)
 		- [Prerequisites](#prerequisites)
 		- [Installation](#installation)
-    - [Installation on Windows](#installation-on-windows)
+		- [Installation on Windows](#installation-on-windows)
 	- [Using PubSweet CLI](#using-pubsweet-cli)
 		- [Displaying the commands (`pubsweet` or `pubsweet help`)](#displaying-the-commands-pubsweet-or-pubsweet-help)
 		- [Generating an app (`pubsweet new`)](#generating-an-app-pubsweet-new)
