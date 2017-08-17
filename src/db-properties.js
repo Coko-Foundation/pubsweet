@@ -11,6 +11,6 @@ module.exports = {
     replace: '*'
   },
   collection: {
-    description: 'Initial collection title'
+    description: 'Initial collection title (optional)'
   }
 }
