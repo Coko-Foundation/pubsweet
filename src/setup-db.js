@@ -53,7 +53,7 @@ const createAdminUser = async data => {
 const createCollection = async (title, user) => {
   logger.info('Creating the initial collection')
 
-  const Collection = require(`${serverPath()}/src/models/Collection`)
+  const Collection = require('pubsweet-server/src/models/Collection')
 
   const created = Date.now()
 
