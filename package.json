@@ -37,6 +37,7 @@
     "joi": "^10.4.1",
     "pouchdb": "^6.2.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
+    "pubsweet-server": "^1.0.0-alpha.2",
     "temp": "^0.8.3",
     "tmp": "0.0.29",
     "uuid": "^3.0.1",
