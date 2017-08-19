@@ -34,10 +34,6 @@ describe('API SSE enabled', () => {
 
       let mockMessage = jest.fn()
 
-      es.addEventListener('open', e => {
-        console.log('HELLO', e)
-      })
-
       es.addEventListener('message', event => {
         mockMessage()
         done()
@@ -53,7 +49,6 @@ describe('API SSE enabled', () => {
 
     server = api.api.listen(3000, () => {
       test()
-      console.log('listening on 3000')
     })
   })
 })

@@ -31,19 +31,19 @@ describe('authenticated api', function () {
   afterEach(dbCleaner)
 
   it(`fails to create a fragment in a protected
-      collection if authenticated as user without permissions`, () => {
-    return api.users.authenticate.post(
-      fixtures.updatedUser
-    ).then(
-      (token) => {
-        return api.fragments.post(
-          fixtures.fragment, collection, token
-        ).expect(
-          STATUS.FORBIDDEN
-        )
-      }
-    )
-  })
+    collection if authenticated as user without permissions`, () => {
+      return api.users.authenticate.post(
+        fixtures.updatedUser
+      ).then(
+        (token) => {
+          return api.fragments.post(
+            fixtures.fragment, collection, token
+          ).expect(
+            STATUS.FORBIDDEN
+          )
+        }
+      )
+    })
 
   describe('a non-admin user with a contributor role', () => {
     beforeEach(() => {
