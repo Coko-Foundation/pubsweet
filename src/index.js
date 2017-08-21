@@ -17,5 +17,5 @@ module.exports = {
 
     logger = theirLogger
   },
-  getRawLogger: () => logger 
+  getRawLogger: () => logger
 }

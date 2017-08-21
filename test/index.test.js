@@ -1,7 +1,5 @@
-
 describe('Logging manager', () => {
   describe('when no logger is specifed', () => {
-
     it('logs errors to console', () => {
       jest.spyOn(global.console, 'error').mockImplementation()
       const logger = require('../src')
@@ -33,7 +31,6 @@ describe('Logging manager', () => {
       expect(console.log).toHaveBeenCalled()
       console.log.mockRestore()
     })
-
   })
 
   describe('when passed another logger', () => {
@@ -80,7 +77,6 @@ describe('Logging manager', () => {
       logger.error('error')
       expect(bunyan.error).toHaveBeenLastCalledWith('error')
     })
-
   })
 
   describe('has getRawLogger method', () => {
@@ -92,7 +88,5 @@ describe('Logging manager', () => {
       const rawLogger = logger.getRawLogger()
       expect(rawLogger.fields.name).toBe('test')
     })
-
   })
-
 })
