@@ -1,0 +1,45 @@
+{
+  "name": "pubsweet-logger",
+  "version": "0.0.1",
+  "description": "A module encapsulating standard logging features for pubsweet components and services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --runInBand --no-cache",    
+    "lint": "eslint src test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.coko.foundation:yld/pubsweet-logger.git"
+  },
+  "keywords": [
+    "logger",
+    "pubsweet"
+  ],
+  "engines": {
+    "node": ">=7.9.0",
+    "npm": ">=3.0.0"
+  },
+  "author": "Antony Denyer",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^4.5.0",
+    "jest": "^20.0.4",
+    "standard": "^10.0.3",
+    "winston": "^2.3.1"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
+    "testEnvironment": "node",
+    "verbose": true
+  }
+}
