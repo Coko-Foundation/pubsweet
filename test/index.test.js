@@ -7,7 +7,7 @@ global.console = {
 
 const logger = require('../src')
 
-describe('logging manager', () => {
+describe('Logging manager', () => {
   describe('when no logger is specifed', () => {
     beforeEach(() => {
       global.console.log.mockClear()
@@ -34,6 +34,22 @@ describe('logging manager', () => {
     it('logs debug to console', () => {
       logger.debug('an debug message')
       expect(console.log).toHaveBeenCalled()
+    })
+  })
+
+  describe('when passed another logger', () => {
+    it('throws an error if a required method is not implemented', () => {
+      expect(() => {
+        logger.configure({})
+      }).toThrow('Logger must implement "error", "warn", "info" and "debug" functions')
+    })
+
+    it('works with winston', () => {
+      const winston = require('winston')
+      winston.debug = jest.fn()
+      logger.configure(winston)
+      logger.debug('something')
+      expect(winston.debug).toHaveBeenCalled()
     })
   })
 })

@@ -2,12 +2,19 @@ let logger = console
 logger.debug = console.log
 
 module.exports = {
-  error: logger.error,
-  warn: logger.warn,
-  info: logger.info,
-  debug: logger.debug,
+  error: (...args) => logger.error(...args),
+  warn: (...args) => logger.warn(...args),
+  info: (...args) => logger.info(...args),
+  debug: (...args) => logger.debug(...args),
   configure: (theirLogger) => {
-    // check all functions exist
+    if (typeof (theirLogger.error) !== 'function' ||
+        typeof (theirLogger.warn) !== 'function' ||
+        typeof (theirLogger.info) !== 'function' ||
+        typeof (theirLogger.debug) !== 'function'
+    ) {
+      throw new Error('Logger must implement "error", "warn", "info" and "debug" functions')
+    }
+
     logger = theirLogger
   }
 }
