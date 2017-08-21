@@ -1,5 +1,5 @@
 let logger = console
-logger.debug = console.log
+logger.debug = (...args) => console.log(...args)
 
 module.exports = {
   error: (...args) => logger.error(...args),
@@ -16,5 +16,6 @@ module.exports = {
     }
 
     logger = theirLogger
-  }
+  },
+  getRawLogger: () => logger 
 }
