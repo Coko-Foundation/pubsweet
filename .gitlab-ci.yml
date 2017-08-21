@@ -14,6 +14,7 @@ test:lint:
 test:node:
   script:
     - npm test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 publish:
   stage: deploy
