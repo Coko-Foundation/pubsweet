@@ -11,6 +11,10 @@ test:lint:
   script:
     - npm run lint
 
+test:vulnerabilities:
+  script:
+    - npm run vuln-test
+
 test:node:
   script:
     - npm test
