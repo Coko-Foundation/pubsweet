@@ -1,0 +1,16 @@
+image: pubsweet/pubsweet-test-base
+
+cache:
+  paths:
+  - node_modules/
+
+before_script:
+  - yarn
+
+test:lint:
+  script:
+    - npm run lint
+
+test:node:
+  script:
+    - npm test
