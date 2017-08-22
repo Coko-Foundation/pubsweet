@@ -50,15 +50,17 @@ describe('Logging manager', () => {
   })
 
   describe('when configure method is passed another logger', () => {
-    const logger = require('../src/')
-
     it('throws an error if a required method is not implemented', () => {
-      expect(() => {
+      const logger = require('../src/')
+      try {
         logger.configure({})
-      }).toThrow('Logger must implement "error", "warn", "info" and "debug" functions')
+      } catch (e) {
+        expect(e.name).toBe('ValidationError')
+      }
     })
 
     it('works with winston', () => {
+      const logger = require('../src/')
       const winston = require('winston')
       jest.spyOn(winston, 'debug').mockImplementation()
       jest.spyOn(winston, 'info').mockImplementation()
@@ -77,6 +79,9 @@ describe('Logging manager', () => {
     })
 
     it('works with bunyan', () => {
+      jest.resetModules()
+      config = require('config')
+      const logger = require('../src/')
       const bunyan = require('bunyan').createLogger({name: 'test'})
       jest.spyOn(bunyan, 'debug').mockImplementation()
       jest.spyOn(bunyan, 'info').mockImplementation()
@@ -93,12 +98,21 @@ describe('Logging manager', () => {
       logger.error('error')
       expect(bunyan.error).toHaveBeenLastCalledWith('error')
     })
+
+    it('prevents configuration again', () => {
+      jest.resetModules()
+      config = require('config')
+      const logger = require('../src/')
+      const winston = require('winston')
+      logger.configure(winston)
+      expect(() => logger.configure(winston)).toThrow(/already been configured/)
+    })
   })
 
   describe('has getRawLogger method', () => {
-    const logger = require('../src/')
-
     it('which returns raw logger', () => {
+      jest.resetModules()
+      const logger = require('../src/')
       const bunyan = require('bunyan').createLogger({name: 'test'})
       logger.configure(bunyan)
       const rawLogger = logger.getRawLogger()
@@ -106,20 +120,22 @@ describe('Logging manager', () => {
     })
   })
 
-  describe('config ', () => {
+  describe('when a logger is passed by config', () => {
     it('sets logger to "bunyan" if specified', () => {
       jest.resetModules()
       config = require('config')
-      config['pubsweet-server'] = { logger: 'bunyan' }
+      const bunyan = require('bunyan').createLogger({name: 'test'})
+      config['pubsweet-server'] = { logger: bunyan }
       const logger = require('../src/')
       const rawLogger = logger.getRawLogger()
-      expect(rawLogger.fields.name).toBe('pubsweet-logger')
+      expect(rawLogger.fields.name).toBe('test')
     })
 
     it('sets logger to "winston" if specified', () => {
       jest.resetModules()
       config = require('config')
-      config['pubsweet-server'] = { logger: 'winston' }
+      const winston = require('winston')
+      config['pubsweet-server'] = { logger: winston }
       const logger = require('../src/')
       const rawLogger = logger.getRawLogger()
       expect(rawLogger).toEqual(require('winston'))
@@ -131,10 +147,10 @@ describe('Logging manager', () => {
       config['pubsweet-server'] = {}
       const logger = require('../src/')
       const rawLogger = logger.getRawLogger()
-      expect(rawLogger).toEqual(console)
+      expect(rawLogger).toEqual(global.console)
     })
 
-    it('accepts "bunyan", "winston" or "undefined" only', () => {
+    it('logger passed must be an object', () => {
       jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = { logger: 'wiiiiiiiiinston' }
@@ -146,6 +162,15 @@ describe('Logging manager', () => {
       } catch (e) {
         expect(e.name).toBe('ValidationError')
       }
+    })
+
+    it('prevents configuration again', () => {
+      jest.resetModules()
+      config = require('config')
+      const winston = require('winston')
+      config['pubsweet-server'] = { logger: winston }
+      const logger = require('../src/')
+      expect(() => logger.configure(winston)).toThrow(/already been configured/)
     })
   })
 })

@@ -1,16 +1,16 @@
-const config = require('config').get('pubsweet-server')
-const defaultLogger = require('./validate-config')(config.logger)
+const config = require('config')
+const validations = require('./validations')
+const { get } = require('lodash/fp')
 
-const defaultLoggerMap = {
-  'console': () => {
-    global.console.debug = (...args) => console.log(...args)
-    return global.console
-  },
-  winston: () => require('winston'),
-  bunyan: () => require('bunyan').createLogger({ name: 'pubsweet-logger' })
+const loggerFromConfig = get('pubsweet-server.logger', config)
+
+let logger = validations.validateConfig(loggerFromConfig)
+let configured = Boolean(logger)
+
+if (!configured) {
+  global.console.debug = (...args) => global.console.log(args)
+  logger = global.console
 }
-
-let logger = defaultLoggerMap[defaultLogger]()
 
 module.exports = {
   error: (...args) => logger.error(...args),
@@ -23,15 +23,14 @@ module.exports = {
     }
   },
   configure: (theirLogger) => {
-    if (typeof (theirLogger.error) !== 'function' ||
-        typeof (theirLogger.warn) !== 'function' ||
-        typeof (theirLogger.info) !== 'function' ||
-        typeof (theirLogger.debug) !== 'function'
-    ) {
-      throw new Error('Logger must implement "error", "warn", "info" and "debug" functions')
+    if (configured) {
+      throw new Error('Logger has already been configured')
     }
 
+    validations.validateConfig(theirLogger)
+
     logger = theirLogger
+    configured = true
   },
   getRawLogger: () => logger
 }
