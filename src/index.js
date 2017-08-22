@@ -23,7 +23,7 @@ module.exports = (app = express()) => {
 
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
-  api.use(helmet())
+  app.use(helmet())
   app.use(express.static(path.resolve('.', '_build')))
   app.use('/uploads', express.static(path.resolve('.', 'uploads')))
 
