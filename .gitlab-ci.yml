@@ -1,0 +1,30 @@
+image: pubsweet/pubsweet-test-base
+
+cache:
+  paths:
+  - node_modules/
+
+before_script:
+  - yarn
+
+test:lint:
+  script:
+    - npm run lint
+
+test:vulnerabilities:
+  script:
+    - npm run vuln-test
+
+test:node:
+  script:
+    - npm test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+publish:
+  stage: deploy
+  only:
+    - tags
+    - triggers
+  script:
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+    - npm publish

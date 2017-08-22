@@ -8,7 +8,6 @@ config['pubsweet-server'] = { }
 
 describe('Logging manager', () => {
   describe('when no logger is specifed', () => {
-
     it('logs errors to console', () => {
       jest.spyOn(global.console, 'error').mockImplementation()
       const logger = require('../src/')
@@ -41,6 +40,13 @@ describe('Logging manager', () => {
       console.log.mockRestore()
     })
 
+    it('can stream logs to console', () => {
+      jest.spyOn(global.console, 'info').mockImplementation()
+      const logger = require('../src')
+      logger.stream.write('a stream message')
+      expect(console.info).toHaveBeenCalled()
+      console.info.mockRestore()
+    })
   })
 
   describe('when configure method is passed another logger', () => {
@@ -87,7 +93,6 @@ describe('Logging manager', () => {
       logger.error('error')
       expect(bunyan.error).toHaveBeenLastCalledWith('error')
     })
-
   })
 
   describe('has getRawLogger method', () => {
@@ -99,7 +104,6 @@ describe('Logging manager', () => {
       const rawLogger = logger.getRawLogger()
       expect(rawLogger.fields.name).toBe('test')
     })
-
   })
 
   describe('config ', () => {
