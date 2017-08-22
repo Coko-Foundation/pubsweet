@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "bunyan": "^1.8.12",
-    "chai": "^3.5.0",
     "eslint": "^4.5.0",
     "jest": "^20.0.4",
     "standard": "^10.0.3",
@@ -42,5 +41,9 @@
     ],
     "testEnvironment": "node",
     "verbose": true
+  },
+  "dependencies": {
+    "config": "^1.26.2",
+    "joi": "^10.6.0"
   }
 }
