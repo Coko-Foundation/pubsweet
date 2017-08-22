@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose"
+    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
+    "vuln-test": "nsp check"    
   },
   "engines": {
     "node": ">=7.6"
@@ -50,6 +51,7 @@
     "eslint": "^4.0.0",
     "eventsource": "^1.0.4",
     "jest-cli": "^19.0.2",
+    "nsp": "^2.7.0",
     "pouchdb-adapter-memory": "^6.1.1",
     "standard": "^10.0.2",
     "supertest": "^2.0.0",
