@@ -1,4 +1,5 @@
 const express = require('express')
+const helmet = require('helmet')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -21,7 +22,7 @@ module.exports = (app = express()) => {
 
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
-
+  api.use(helmet())
   app.use(express.static(path.resolve('.', '_build')))
   app.use('/uploads', express.static(path.resolve('.', 'uploads')))
 
