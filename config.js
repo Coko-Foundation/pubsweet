@@ -1,7 +1,7 @@
 // Config
 
 const path = require('path')
-const logger = require('./src/logger')
+const logger = require('pubsweet-logger')
 
 let envs = ['test', 'dev', 'stage', 'production']
 

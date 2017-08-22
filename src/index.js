@@ -1,11 +1,12 @@
 const express = require('express')
+const morgan = require('morgan')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const index = require('./routes/index')
 const api = require('./routes/api')
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
@@ -42,6 +43,8 @@ module.exports = (app = express()) => {
   // Serve the index page for front end
   app.use('/manage', index)
   app.use('/', index)
+
+  app.use(morgan('combined', { 'stream': logger.stream }))
 
   app.use((err, req, res, next) => {
     // development error handler, will print stacktrace

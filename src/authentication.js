@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 const jwt = require('jsonwebtoken')
 
 const BearerStrategy = require('passport-http-bearer').Strategy

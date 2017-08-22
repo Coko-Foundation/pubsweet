@@ -3,7 +3,7 @@
 const Collection = require('./models/Collection')
 const User = require('./models/User')
 
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 
 class Setup {
   static async setup (user, collection) {
