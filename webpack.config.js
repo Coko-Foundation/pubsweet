@@ -16,6 +16,9 @@ module.exports = {
   externals: [nodeExternals({
     whitelist: [/\.(?!js$).{1,5}$/i]
   })],
+  resolve: {
+    symlinks: false
+  },
   module: {
     rules: [
       {
@@ -25,12 +28,14 @@ module.exports = {
             test: /\.js$/,
             include: [
               path.join(__dirname, 'src'),
-              path.join(__dirname, 'lib'),
+              /xpub-[^/]+\/src/,
             ],
             loader: 'babel-loader',
             options: {
               presets: [
-                'react-app',
+                ['env', { modules: false }],
+                'react',
+                'stage-2'
               ],
               cacheDirectory: true,
             },
@@ -41,7 +46,7 @@ module.exports = {
             test: /\.local\.css$/,
             include: [
               path.join(__dirname, 'src'),
-              path.join(__dirname, 'lib'),
+              /xpub-[^/]+\/src/,
             ],
             use: [
               'style-loader',

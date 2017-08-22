@@ -1,11 +1,8 @@
-const path = require('path')
+const styleguideComponents = require('xpub-styleguide')
 
 module.exports = {
   title: 'xpub-ui style guide',
-  styleguideComponents: {
-    StyleGuideRenderer: path.join(__dirname, 'lib/styleguide/StyleGuideRenderer'),
-    Wrapper: path.join(__dirname, 'lib/styleguide/Wrapper'),
-  },
+  styleguideComponents,
   context: {
     faker: 'faker',
   },
