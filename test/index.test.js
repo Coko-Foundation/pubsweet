@@ -107,9 +107,8 @@ describe('Logging manager', () => {
   })
 
   describe('config ', () => {
-
     it('sets logger to "bunyan" if specified', () => {
-      jest.resetModules();
+      jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = { logger: 'bunyan' }
       const logger = require('../src/')
@@ -118,7 +117,7 @@ describe('Logging manager', () => {
     })
 
     it('sets logger to "winston" if specified', () => {
-      jest.resetModules();
+      jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = { logger: 'winston' }
       const logger = require('../src/')
@@ -127,7 +126,7 @@ describe('Logging manager', () => {
     })
 
     it('defaults to console', () => {
-      jest.resetModules();
+      jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = {}
       const logger = require('../src/')
@@ -136,7 +135,7 @@ describe('Logging manager', () => {
     })
 
     it('accepts "bunyan", "winston" or "undefined" only', () => {
-      jest.resetModules();
+      jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = { logger: 'wiiiiiiiiinston' }
 
@@ -147,7 +146,5 @@ describe('Logging manager', () => {
         expect(e.name).toBe('ValidationError')
       }
     })
-
   })
-
 })
