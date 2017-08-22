@@ -35,7 +35,7 @@ The logger exposes the following methods:
  - `info`
  - `debug`
  - `error`
- - `log`
+ - `warn`
  - `configure`
  - `getRawLogger` (returns the logger passed to `configure`)
 
