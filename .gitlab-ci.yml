@@ -8,3 +8,7 @@ before_script:
 test:
   script:
     - npm run test
+    
+test:vulnerabilities:
+  script:
+    - npm run vuln-test
