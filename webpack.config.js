@@ -1,6 +1,3 @@
-process.env.BABEL_ENV = 'development'
-process.env.NODE_ENV = 'development'
-
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
@@ -9,8 +6,6 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.join(__dirname, 'dist'),
-    library: 'xpub-styleguide',
-    libraryTarget: 'commonjs2'
   },
   devtool: 'cheap-module-source-map',
   externals: [nodeExternals({
@@ -28,6 +23,7 @@ module.exports = {
             test: /\.js$/,
             include: [
               path.join(__dirname, 'src'),
+              /xpub-[^/]+\/src/,
             ],
             loader: 'babel-loader',
             options: {
@@ -45,6 +41,7 @@ module.exports = {
             test: /\.local\.css$/,
             include: [
               path.join(__dirname, 'src'),
+              /xpub-[^/]+\/src/,
             ],
             use: [
               'style-loader',
