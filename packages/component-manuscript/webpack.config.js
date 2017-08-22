@@ -32,7 +32,12 @@ module.exports = {
             ],
             loader: 'babel-loader',
             options: {
-              presets: ['minify', 'react-app']
+              presets: [
+                'minify',
+                ['env', { modules: false }],
+                'react',
+                'stage-2'
+              ],
             }
           },
 
