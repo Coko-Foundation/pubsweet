@@ -17,7 +17,7 @@ module.exports = (app = express()) => {
 
   app.locals.models = models
 
-  app.use(require('morgan')('combined', { 'stream': logger.stream }))
+  app.use(morgan('combined', { 'stream': logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
 
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -43,8 +43,6 @@ module.exports = (app = express()) => {
   // Serve the index page for front end
   app.use('/manage', index)
   app.use('/', index)
-
-  app.use(morgan('combined', { 'stream': logger.stream }))
 
   app.use((err, req, res, next) => {
     // development error handler, will print stacktrace
