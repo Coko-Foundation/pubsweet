@@ -61,7 +61,26 @@ api.delete('/:id', authBearer, (req, res, next) => {
   )
 })
 
+// deprecated - use PATCH instead
 api.put('/:id', authBearer, (req, res, next) => {
+  return Authorize.can(
+    req.user, 'update', req.originalUrl
+  ).then(
+    () => Team.find(req.params.id)
+  ).then(
+    team => team.updateProperties(req.body)
+  ).then(
+    team => team.save()
+  ).then(
+    team => Team.find(req.params.id)
+  ).then(
+    team => res.status(STATUS.OK).json(team)
+  ).catch(
+    next
+  )
+})
+
+api.patch('/:id', authBearer, (req, res, next) => {
   return Authorize.can(
     req.user, 'update', req.originalUrl
   ).then(

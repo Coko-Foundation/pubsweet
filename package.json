@@ -1,10 +1,11 @@
 {
   "name": "pubsweet-server",
-  "version": "0.9.3",
+  "version": "1.0.0-alpha.2",
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose"
+    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
+    "vuln-test": "nsp check"    
   },
   "engines": {
     "node": ">=7.6"
@@ -19,6 +20,7 @@
     "colors": "^1.1.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "joi": "^10.0.6",
@@ -47,8 +49,10 @@
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.0.0",
+    "eventsource": "^1.0.4",
     "jest-cli": "^19.0.2",
+    "nsp": "^2.7.0",
     "pouchdb-adapter-memory": "^6.1.1",
     "standard": "^10.0.2",
     "supertest": "^2.0.0",

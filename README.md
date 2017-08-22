@@ -10,6 +10,5 @@ This is the PubSweet server, to be used as a dependency in PubSweet apps.
 # Development
 - Check out our GitLab repository: https://gitlab.coko.foundation/pubsweet/pubsweet-server
 
-# Short-term roadmap
-- 0.9 - Current version
-- 0.10 - Authorization middleware
+# Roadmap
+- Check out the [PubSweet 2.0 RFC](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/16)
