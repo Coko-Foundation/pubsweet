@@ -154,6 +154,7 @@ describe('Logging manager', () => {
       jest.resetModules()
       config = require('config')
       config['pubsweet-server'] = { logger: 'wiiiiiiiiinston' }
+      expect.hasAssertions()
 
       // https://github.com/facebook/jest/issues/2124
       try {
