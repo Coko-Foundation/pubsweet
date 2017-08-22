@@ -2,6 +2,47 @@
 
 A module encapsulating standard logging features for pubsweet components and services.
 
+## Usage
+
+Either: 
+
+```
+const myLogger = require('winston') // or something else
+const logger = require('pubsweet-logger')
+logger.configure(mylogger)
+```
+
+Or set the logger in config:
+
+```
+const myLogger = require('winston') // or something else
+
+{
+  'pubsweet-server':{
+    logger: myLogger
+  }
+}
+```
+
+The configured logger can then be imported from anywhere:
+
+```
+const logger = require('pubsweet-logger')
+logger.info('log')
+```
+
+The logger exposes the following methods:
+ - `info`
+ - `debug`
+ - `error`
+ - `log`
+ - `configure`
+ - `getRawLogger` (returns the logger passed to `configure`)
+
+As well as:
+ - `stream` (an object for passing to `morgan`)
+
+Note that the logger used to configure the module must implement "error", "warn", "info" and "debug" functions'.
 
 [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-logger/raw/master/LICENSE) 
 [![npm](https://img.shields.io/npm/v/pubsweet.svg)](https://npmjs.com/package/pubsweet-logger) 
