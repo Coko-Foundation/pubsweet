@@ -1,5 +1,16 @@
-let logger = console
-logger.debug = (...args) => console.log(...args)
+const config = require('config').get('pubsweet-server')
+const defaultLogger = require('./validate-config')(config.logger)
+
+const defaultLoggerMap = {
+  'console': () => {
+    global.console.debug = (...args) => console.log(...args)
+    return global.console
+  },
+  winston: () => require('winston'),
+  bunyan: () => require('bunyan').createLogger({ name: 'pubsweet-logger' })
+}
+
+let logger = defaultLoggerMap[defaultLogger]()
 
 module.exports = {
   error: (...args) => logger.error(...args),
