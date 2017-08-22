@@ -31,6 +31,14 @@ describe('Logging manager', () => {
       expect(console.log).toHaveBeenCalled()
       console.log.mockRestore()
     })
+
+    it('can stream logs to console', () => {
+      jest.spyOn(global.console, 'info').mockImplementation()
+      const logger = require('../src')
+      logger.stream.write('a stream message')
+      expect(console.info).toHaveBeenCalled()
+      console.info.mockRestore()
+    })
   })
 
   describe('when passed another logger', () => {

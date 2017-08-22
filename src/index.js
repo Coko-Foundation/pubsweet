@@ -6,6 +6,11 @@ module.exports = {
   warn: (...args) => logger.warn(...args),
   info: (...args) => logger.info(...args),
   debug: (...args) => logger.debug(...args),
+  stream: {
+    write: function (message, encoding) {
+      logger.info(message)
+    }
+  },
   configure: (theirLogger) => {
     if (typeof (theirLogger.error) !== 'function' ||
         typeof (theirLogger.warn) !== 'function' ||
