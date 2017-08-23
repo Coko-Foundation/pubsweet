@@ -1,4 +1,4 @@
-const blogmode = require('authsome/src/modes/blog')
+const testMode = require('../test/helpers/authsome_mode')
 const Joi = require('joi')
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
     }
   },
   authsome: {
-    mode: blogmode,
+    mode: testMode,
     teams: {
       teamContributors: {
         name: 'Contributors',

@@ -311,7 +311,7 @@ describe('Collections API', () => {
   })
 
   describe('user', () => {
-    it('should allow a user to list all the collections', async () => {
+    it('should allow a user to list all of the collections', async () => {
       const token = await authenticateUser()
 
       await api.collections.create(fixtures.collection, token)

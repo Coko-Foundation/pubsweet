@@ -4,8 +4,8 @@
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
-    "vuln-test": "nsp check"    
+    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --watch",
+    "vuln-test": "nsp check"
   },
   "engines": {
     "node": ">=7.6"
@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "authsome": "0.0.4",
+    "authsome": "0.0.6",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
@@ -63,6 +63,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-server"
   },
   "jest": {
+    "verbose": true,
     "testEnvironment": "node",
     "testRegex": "/test/.*test.js$",
     "collectCoverage": true,
