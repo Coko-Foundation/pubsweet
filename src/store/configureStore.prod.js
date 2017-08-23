@@ -2,6 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
 
 import reducers from '../reducers'
 
@@ -12,6 +13,7 @@ require('../components/reducers').forEach(
 export default function configureStore (history, initialState) {
   const reducer = combineReducers({
     ...reducers,
+    form: formReducer,
     routing: routerReducer
   })
 
