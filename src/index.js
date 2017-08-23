@@ -1,16 +1,7 @@
-import configureStore from './store/configureStore'
-import Root from './components/Root'
-import { requireAuthentication } from './components/AuthenticatedComponent'
-
 import './globals'
 
-import actions from './actions'
-import reducers from './reducers'
-
-export {
-  actions,
-  configureStore,
-  reducers,
-  requireAuthentication,
-  Root
-}
+export { default as configureStore } from './store/configureStore'
+export { default as Root } from './components/Root'
+export { requireAuthentication } from './components/AuthenticatedComponent'
+export { default as actions } from './actions'
+export { default as reducers } from './reducers'
