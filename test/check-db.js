@@ -3,7 +3,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 require('./helpers/fix-stdio')
 require('./helpers/debug-exit')
 
-const logger = require('../src/logger')
+const logger = require('pubsweet-logger')
 
 const path = require('path')
 const fs = require('fs-extra')

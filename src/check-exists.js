@@ -1,5 +1,5 @@
 const fs = require('fs-extra')
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 
 const logError = message => {
   logger.error('Path must be a directory containing a pubsweet app')

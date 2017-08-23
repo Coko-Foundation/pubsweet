@@ -1,5 +1,5 @@
 const path = require('path')
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 const httpdb = require('./http-db')
 
 module.exports = appPath => {

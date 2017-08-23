@@ -1,5 +1,5 @@
 const forever = require('forever-monitor')
-const logger = require('../src/logger')
+const logger = require('pubsweet-logger')
 const path = require('path')
 const program = require('commander')
 

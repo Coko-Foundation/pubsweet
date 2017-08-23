@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require('pubsweet-logger')
 const get = require('simple-get')
 
 module.exports = {
