@@ -107,9 +107,8 @@ export function updateTeam (team) {
     dispatch(updateTeamRequest(team))
     const url = teamUrl(team)
 
-    // TODO: remove "true" once the server supports PATCH for updates
-    return api.update(url, team, true).then(
-      fragment => dispatch(updateTeamSuccess(team)),
+    return api.update(url, team).then(
+      team => dispatch(updateTeamSuccess(team)),
       err => dispatch(updateTeamFailure(team, err))
     )
   }
@@ -145,7 +144,7 @@ export function deleteTeam (team) {
     const url = teamUrl(team)
 
     return api.remove(url).then(
-      fragment => dispatch(deleteTeamSuccess(team)),
+      team => dispatch(deleteTeamSuccess(team)),
       err => dispatch(deleteTeamFailure(team, err))
     )
   }
