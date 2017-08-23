@@ -52,6 +52,9 @@ describe('Logging manager', () => {
   describe('when configure method is passed another logger', () => {
     it('throws an error if a required method is not implemented', () => {
       const logger = require('../src/')
+      expect.hasAssertions()
+
+      // https://github.com/facebook/jest/issues/2124
       try {
         logger.configure({})
       } catch (e) {
@@ -156,7 +159,6 @@ describe('Logging manager', () => {
       config['pubsweet-server'] = { logger: 'wiiiiiiiiinston' }
       expect.hasAssertions()
 
-      // https://github.com/facebook/jest/issues/2124
       try {
         require('../src/')
       } catch (e) {
