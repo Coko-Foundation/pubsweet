@@ -6,7 +6,7 @@ const Collection = require('./Collection')
 
 const Team = require('./Team')
 const Authsome = require('authsome')
-const config = require('../../config')
+const config = require('config')
 
 const AuthorizationError = require('../errors/AuthorizationError')
 
