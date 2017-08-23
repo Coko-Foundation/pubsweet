@@ -1,12 +1,12 @@
 const path = require('path')
 const uuid = require('uuid')
+const config = require('config')
+const _ = require('lodash/fp')
 
 const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-find'))
   .plugin(require('pouchdb-upsert'))
   .plugin(require('relational-pouch'))
-
-const config = require('../config')
 
 const prepareAdapter = (dbPath) => {
   // Always use in-memory databases for testing
@@ -42,7 +42,7 @@ const dbName = (adapter) => {
   }
 }
 
-const dbPath = config['pubsweet-server']['dbPath']
+const dbPath = _.get('pubsweet-server.dbPath', config)
 
 const adapter = prepareAdapter(dbPath)
 
