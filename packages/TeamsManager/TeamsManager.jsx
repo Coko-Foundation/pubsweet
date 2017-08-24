@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
+import config from 'config'
 
 import Team from './Team'
 import TeamCreator from './TeamCreator'
@@ -52,7 +53,7 @@ export default class TeamsManager extends React.Component {
               <TeamCreator
                 create={actions.createTeam}
                 collections={collections}
-                types={CONFIG.authsome.teams}
+                types={config.authsome.teams}
               />
             </div>
           </Grid>

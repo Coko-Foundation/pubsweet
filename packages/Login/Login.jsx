@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { Grid, Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router'
 import styles from './Login.local.scss'
+import config from 'config'
 
 export default class Login extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.redirectTo = this.props.location.query.next || CONFIG['pubsweet-client']['login-redirect']
+    this.redirectTo = this.props.location.query.next || config['pubsweet-client']['login-redirect']
   }
   render () {
     const self = this
