@@ -1,14 +1,13 @@
 require('app-module-path').addPath(process.cwd())
 const path = require('path')
 
-const serverpath = require('./server-path')
 const dotenvPath = path.join(process.cwd(), `.env.${process.env.NODE_ENV}`)
 require('dotenv').config({ path: dotenvPath })
 
 const http = require('http')
 const express = require('express')
 const webpack = require('webpack')
-const pubsweet = require(`${serverpath()}`)
+const pubsweet = require('pubsweet-server')
 
 const logger = require('./logger')
 const onError = require('./error-exit')

@@ -2,7 +2,6 @@ process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')
-const serverpath = require('./server-path')
 
 const runPrompt = async ({ properties, override }) => {
   logger.info('Asking for user details')
@@ -35,7 +34,7 @@ const logInput = result => {
 const addAdminOwnerToAllCollections = async user => {
   logger.info('Adding admin owner to collections')
 
-  const Collection = require(`${serverpath()}/src/models/Collection`)
+  const Collection = require('pubsweet-server/src/models/Collection')
   const collections = await Collection.all()
 
   await Promise.all(collections.map(data => {
@@ -48,7 +47,7 @@ const addAdminOwnerToAllCollections = async user => {
 const createUser = async result => {
   logger.info('Creating user', result.username)
 
-  const User = require(`${serverpath()}/src/models/User`)
+  const User = require('pubsweet-server/src/models/User')
 
   const user = new User(result)
   await user.save()

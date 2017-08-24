@@ -2,7 +2,6 @@ process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
 const logger = require('./logger')
-const serverPath = require('./server-path')
 
 const runPrompt = async ({ override, properties }) => {
   const prompt = require('prompt')
@@ -33,7 +32,7 @@ const logResult = results => {
 const createAdminUser = async data => {
   logger.info('Creating the admin user')
 
-  const User = require(`${serverPath()}/src/models/User`)
+  const User = require('pubsweet-server/src/models/User')
 
   // create and save an admin user
   const user = new User({
@@ -54,7 +53,7 @@ const createAdminUser = async data => {
 const createCollection = async (title, user) => {
   logger.info('Creating the initial collection')
 
-  const Collection = require(`${serverPath()}/src/models/Collection`)
+  const Collection = require('pubsweet-server/src/models/Collection')
 
   const created = Date.now()
 

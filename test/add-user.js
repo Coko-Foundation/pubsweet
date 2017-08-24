@@ -38,8 +38,7 @@ describe('add-user', () => {
       require('../src/load-config')(path.resolve('', './config'))
       logger.info('Config dir is', process.env.NODE_CONFIG_DIR)
 
-      const serverpath = require('../src/server-path')
-      User = require(`${serverpath()}/src/models/User`)
+      User = require('pubsweet-server/src/models/User')
 
       done()
     } catch (e) {
