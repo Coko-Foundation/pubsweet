@@ -5,6 +5,7 @@
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
     "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
+    "test:docker": "gitlab-runner exec docker test",
     "vuln-test": "nsp check"
   },
   "engines": {
