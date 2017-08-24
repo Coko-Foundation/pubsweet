@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
+import config from 'config'
 
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
+const API_ENDPOINT = config['pubsweet-server'].API_ENDPOINT
 
 // read the authentication token from LocalStorage
 import getToken from './token'

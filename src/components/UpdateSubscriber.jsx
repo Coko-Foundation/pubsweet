@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import config from 'config'
 
 import * as T from '../actions/types'
 import 'event-source-polyfill'
@@ -47,7 +48,7 @@ class UpdateSubscriber extends Component {
   }
 
   visible () {
-    const config = CONFIG['pubsweet-client']['update-subscriber']
+    const config = config['pubsweet-client']['update-subscriber']
 
     return config && config.visible
   }

@@ -126,11 +126,6 @@
     ],
     "verbose": true,
     "globals": {
-      "CONFIG": {
-        "pubsweet-server": {
-          "API_ENDPOINT": "http://localhost:3000/api"
-        }
-      },
       "window": {}
     },
     "transformIgnorePatterns": [

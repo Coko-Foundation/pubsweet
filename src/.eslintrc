@@ -17,7 +17,6 @@
     "react"
   ],
   "globals": {
-    "PUBSWEET_COMPONENTS": true,
-    "CONFIG": true
+    "PUBSWEET_COMPONENTS": true
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import config from 'config'
 
 import Authsome from 'authsome'
 
@@ -14,13 +15,13 @@ export function requireAuthentication (Component, operation, selector) {
       super(props)
 
       this.authsome = new Authsome(
-        CONFIG['authsome'].mode,
-        { teams: CONFIG['authsome'].teams }
+        config['authsome'].mode,
+        { teams: config['authsome'].teams }
       )
 
       this.checkAuthorization = this.checkAuthorization.bind(this)
       this.checkAuth = this.checkAuth.bind(this)
-      this.failRedirect = CONFIG['authsome']['fail-redirect']
+      this.failRedirect = config['authsome']['fail-redirect']
     }
 
     componentWillMount () {
