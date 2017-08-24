@@ -39,7 +39,7 @@
     "pouchdb-upsert": "^2.0.0",
     "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
-    "pubsweet-logger": "git+https://gitlab.coko.foundation/yld/pubsweet-logger.git#HEAD",
+    "pubsweet-logger": "git+https://gitlab.coko.foundation/yld/pubsweet-logger.git",
     "pubsweet-sse": "^0.1.1",
     "relational-pouch": "^1.4.5",
     "uuid": "^3.0.1",
