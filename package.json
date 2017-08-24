@@ -65,7 +65,7 @@
   "jest": {
     "verbose": true,
     "testEnvironment": "node",
-    "testRegex": "/test/.*test.js$",
+    "testRegex": "/test/.*_test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.js"

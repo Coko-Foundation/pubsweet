@@ -5,7 +5,8 @@ const passport = require('passport')
 const express = require('express')
 
 const User = require('../models/User')
-const Authorize = require('../models/Authorize')
+// TEMP
+const Authorize = ''
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')

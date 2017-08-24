@@ -1,7 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 
-const api = express.Router()
+const api = express.Router({mergeParams: true})
 
 api.use(helmet())
 
@@ -19,6 +19,6 @@ api.use('/users', users)
 
 // Teams
 const teams = require('./api_teams')
-api.use('/teams', teams)
+api.use(teams)
 
 module.exports = api

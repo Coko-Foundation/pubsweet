@@ -22,11 +22,11 @@ module.exports = {
     teams: {
       teamContributors: {
         name: 'Contributors',
-        permissions: 'create'
+        permissions: 'POST'
       },
       teamCoauthors: {
         name: 'Coauthors',
-        permissions: 'update'
+        permissions: 'PATCH'
       }
     }
   }

@@ -11,28 +11,21 @@ const Collection = require('../models/Collection')
 const Fragment = require('../models/Fragment')
 
 const Authsome = require('authsome')
-let authsome = new Authsome(config.authsome, { models: require('../models') })
-const AuthorizationError = require('../errors/AuthorizationError')
+const authsome = new Authsome(config.authsome, { models: require('../models') })
 const NotFoundError = require('../errors/NotFoundError')
 const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector } = require('./util')
+const { objectId, buildChangeData, fieldSelector, authorizationError } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
 // Teams
+// TODO: Nested teams API to be deprecated
 const teams = require('./api_teams')
-
-var authorizationError = function (username, operation, object) {
-  username = username || 'public'
-  const msg = `User ${username} is not allowed to ${operation} ${object}`
-  return new AuthorizationError(msg)
-}
-
-api.use('/:id/teams', teams)
+api.use('/collections/:collectionId/', teams)
 
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
@@ -160,10 +153,14 @@ api.delete('/collections/:id', authBearer, async (req, res, next) => {
 })
 
 // Create a fragment and update the collection with the fragment
-api.post('/collections/:id/fragments', authBearer, async (req, res, next) => {
+api.post('/collections/:collectionId/fragments', authBearer, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, req.path)
+    let collection = await Collection.find(req.params.collectionId)
+    const permission = await authsome.can(req.user, req.method, {
+      path: req.path,
+      params: req.params,
+      fragment: req.body
+    })
 
     if (!permission) {
       throw authorizationError(req.user, req.method, collection)

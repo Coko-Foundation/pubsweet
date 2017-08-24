@@ -1,39 +1,31 @@
 const get = require('lodash/get')
-// function isPublished (fragment) {
-//   return fragment.published
-// }
 
-// function isOwner (user, object) {
-//   if (!object || !object.owners || !user) {
-//     return false
-//   }
+async function teamPermissions (user, operation, object, context) {
+  console.log(arguments)
+  const collectionId = get(object, 'params.collectionId')
 
-//   for (const ownerId of object.owners) {
-//     if (ownerId === user.id) {
-//       return true
-//     }
-//   }
-// }
+  if (collectionId) {
+    const collection = await context.models.Collection.find(collectionId)
 
-// function teamPermissions (user, operation, object) {
-//   if (!user || !Array.isArray(user.teams)) {
-//     return false
-//   }
+    // Go through a user's teams, if they belong to a team that's based around
+    // this particular collection, check what membership in that team allows
+    // and return accordingly
 
-//   for (const team of user.teams) {
-//     if (team.teamType.permissions === 'create' &&
-//         team.object.id === object.id &&
-//         operation === 'create') {
-//       return true
-//     } else if (team.teamType.permissions === 'update' &&
-//         team.object.id === object.id &&
-//         operation === 'update') {
-//       return true
-//     }
-//   }
+    for (const teamId of user.teams) {
+      const team = await context.models.Team.find(teamId)
 
-//   return false
-// }
+      if (team.teamType.permissions === 'POST' &&
+          team.object.id === collection.id &&
+          operation === 'POST') {
+        return true
+      } else if (team.teamType.permissions === 'PATCH' &&
+          team.object.id === object.id &&
+          operation === 'PATCH') {
+        return true
+      }
+    }
+  }
+}
 
 function unauthenticatedUser (operation, object) {
   // Public/unauthenticated users can GET /collections, filtered by 'published'
@@ -70,7 +62,7 @@ function unauthenticatedUser (operation, object) {
   return false
 }
 
-function authenticatedUser (user, operation, object) {
+async function authenticatedUser (user, operation, object, context) {
   // Allow the authenticated user to POST a collection
   if (operation === 'POST' && object === '/collections/') {
     return true
@@ -80,6 +72,37 @@ function authenticatedUser (user, operation, object) {
   if (operation === 'GET' && object === '/collections/') {
     return {
       filter: (collection) => collection.owners.includes(user.id)
+    }
+  }
+
+  // Allow owners of a collection to GET its teams, e.g.
+  // GET /api/collections/1/teams
+  if (operation === 'GET' && get(object, 'path') === '/teams') {
+    const collectionId = get(object, 'params.collectionId')
+    if (collectionId) {
+      const collection = await context.models.Collection.find(collectionId)
+      if (collection.owners.includes(user.id)) {
+        return true
+      }
+    }
+  }
+
+  // Advanced example
+  // Allow authenticated users to create a team based around a collection
+  // if they are one of the owners of this collection
+  if (['POST', 'PATCH'].includes(operation) && get(object, 'type') === 'team') {
+    if (get(object, 'object.type') === 'collection') {
+      const collection = await context.models.Collection.find(get(object, 'object.id'))
+      if (collection.owners.includes(user.id)) {
+        return true
+      }
+    }
+  }
+
+  if (user.teams.length !== 0) {
+    const permissions = teamPermissions(user, operation, object, context)
+    if (permissions) {
+      return permissions
     }
   }
 
@@ -93,7 +116,7 @@ function authenticatedUser (user, operation, object) {
       }
     }
 
-    // If no individual permissions exist (above), return the unauthenticated
+    // If no individual permissions exist (above), fallback to unauthenticated
     // user's permission
     return unauthenticatedUser(operation, object)
   }
@@ -110,7 +133,7 @@ var blog = async function (userId, operation, object, context) {
   if (user && user.admin === true) return true
 
   if (user) {
-    return authenticatedUser(user, operation, object)
+    return authenticatedUser(user, operation, object, context)
   }
 
   if (!user) {

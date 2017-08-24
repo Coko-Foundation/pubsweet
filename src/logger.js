@@ -12,9 +12,9 @@ let transports = [
 
 // write to the console if not silent and not testing
 if (!process.env.PUBSWEET_BACKEND_SILENT) {
-  if (process.env.NODE_ENV !== 'test') {
-    transports.push(new (winston.transports.Console)())
-  }
+  // if (process.env.NODE_ENV !== 'test') {
+  transports.push(new (winston.transports.Console)())
+  // }
 }
 
 const logger = new (winston.Logger)({
