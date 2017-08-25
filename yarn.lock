@@ -278,9 +278,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-authsome@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.4.tgz#7784887e6c17fdf126949c084cc3f543291dfb19"
+authsome@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.6.tgz#505a2555a87e29f47af9a0d511bc553558073d72"
 
 aws-sign2@~0.6.0:
   version "0.6.0"

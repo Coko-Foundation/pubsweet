@@ -2,7 +2,7 @@
   "name": "pubsweet-server",
   "version": "1.0.0-alpha.2",
   "scripts": {
-    "lint": "eslint src/ test/ config.js config/",
+    "lint": "eslint src/ test/ config/",
     "pretest": "npm run lint",
     "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
     "test:docker": "gitlab-runner exec docker test",

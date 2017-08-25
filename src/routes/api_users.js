@@ -7,7 +7,7 @@ const pickBy = require('lodash/pickBy')
 
 const User = require('../models/User')
 
-const config = require('../../config')
+const config = require('config')
 const Authsome = require('authsome')
 const authsome = new Authsome(config.authsome, { models: require('../models') })
 const { authorizationError } = require('./util')

@@ -4,7 +4,7 @@ const express = require('express')
 const passport = require('passport')
 const pickBy = require('lodash/pickBy')
 
-const config = require('../../config')
+const config = require('config')
 const Authsome = require('authsome')
 const authsome = new Authsome(config.authsome, { models: require('../models') })
 const Team = require('../models/Team')

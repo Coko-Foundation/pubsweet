@@ -1,5 +1,5 @@
 'use strict'
-const config = require('../../config')
+const config = require('config')
 
 const STATUS = require('http-status-codes')
 const pickBy = require('lodash/pickBy')
