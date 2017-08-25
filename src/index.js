@@ -10,7 +10,8 @@ const logger = require('./logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
-const config = require('../config')
+const config = require('config')
+const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
 
 module.exports = (app = express()) => {
@@ -37,7 +38,7 @@ module.exports = (app = express()) => {
   app.use('/api', api)
 
   // SSE update stream
-  if (config['pubsweet-server'].sse) {
+  if (_.get('pubsweet-server.sse', config)) {
     app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
   }
 
