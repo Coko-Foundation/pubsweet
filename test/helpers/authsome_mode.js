@@ -111,15 +111,20 @@ async function authenticatedUser (user, operation, object, context) {
 
     // Owner user
     if (collection.owners.includes(user.id)) {
-      if (operation === 'GET' || operation === 'DELETE' || operation === 'PATCH') {
+      if (['GET', 'DELETE', 'PATCH'].includes(operation)) {
         return true
       }
     }
-
-    // If no individual permissions exist (above), fallback to unauthenticated
-    // user's permission
-    return unauthenticatedUser(operation, object)
   }
+
+  if (get(object, 'type') === 'user' && get(object, 'id') === user.id) {
+    if (['GET', 'DELETE', 'PATCH'].includes(operation)) {
+      return true
+    }
+  }
+  // If no individual permissions exist (above), fallback to unauthenticated
+  // user's permission
+  return unauthenticatedUser(operation, object)
 }
 
 var blog = async function (userId, operation, object, context) {
