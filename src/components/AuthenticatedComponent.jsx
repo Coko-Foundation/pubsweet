@@ -9,13 +9,13 @@ import Authsome from 'authsome'
 
 import Actions from '../actions'
 
-export function requireAuthentication (Component, operation, selector) {
+export function requireAuthentication (Component, operation, selector, mode) {
   class AuthenticatedComponent extends React.Component {
     constructor (props) {
       super(props)
 
       this.authsome = new Authsome(
-        config['authsome'].mode,
+        mode,
         { teams: config['authsome'].teams }
       )
 
