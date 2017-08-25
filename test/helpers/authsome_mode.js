@@ -1,7 +1,6 @@
 const get = require('lodash/get')
 
 async function teamPermissions (user, operation, object, context) {
-  console.log(arguments)
   const collectionId = get(object, 'params.collectionId')
 
   if (collectionId) {
@@ -100,9 +99,18 @@ async function authenticatedUser (user, operation, object, context) {
   }
 
   if (user.teams.length !== 0) {
-    const permissions = teamPermissions(user, operation, object, context)
+    const permissions = await teamPermissions(user, operation, object, context)
+
     if (permissions) {
       return permissions
+    }
+  }
+
+  if (get(object, 'type') === 'fragment') {
+    const fragment = object
+
+    if (fragment.owners.includes(user.id)) {
+      return true
     }
   }
 
@@ -117,6 +125,7 @@ async function authenticatedUser (user, operation, object, context) {
     }
   }
 
+  // A user can GET, DELETE and PATCH itself
   if (get(object, 'type') === 'user' && get(object, 'id') === user.id) {
     if (['GET', 'DELETE', 'PATCH'].includes(operation)) {
       return true
@@ -127,8 +136,10 @@ async function authenticatedUser (user, operation, object, context) {
   return unauthenticatedUser(operation, object)
 }
 
-var blog = async function (userId, operation, object, context) {
-  console.log(arguments)
+var authsomeMode = async function (userId, operation, object, context) {
+  if (!userId) {
+    return unauthenticatedUser(operation, object)
+  }
 
   // It's up to us to retrieve the relevant models for our
   // authorization/authsome mode, e.g.
@@ -141,45 +152,7 @@ var blog = async function (userId, operation, object, context) {
     return authenticatedUser(user, operation, object, context)
   }
 
-  if (!user) {
-    return unauthenticatedUser(operation, object)
-  }
-
-  // let collection
-
-  // if (object.type === 'collection') {
-  //   collection = object
-  //   if (isOwner(user, collection)) {
-  //     return true
-  //   }
-
-  //   if (teamPermissions(user, operation, collection)) {
-  //     return true
-  //   }
-  // } else if (object.type === 'fragment') {
-  //   let fragment = object
-
-  //   if (isPublished(fragment) && operation === 'read') {
-  //     return true
-  //   }
-
-  //   if (isOwner(user, fragment)) {
-  //     return true
-  //   }
-
-  //   if (teamPermissions(user, operation, fragment)) {
-  //     return true
-  //   }
-
-  //   if (Array.isArray(fragment.parents)) {
-  //     collection = fragment.parents[0]
-  //     return teamPermissions(user, operation, collection)
-  //   }
-  // } else if (object.type === 'user') {
-  //   return user.id === object.id
-  // }
-
   return false
 }
 
-module.exports = blog
+module.exports = authsomeMode
