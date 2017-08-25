@@ -98,8 +98,7 @@ export function updateUser (user) {
 
     const url = '/users/' + user.id
 
-    // TODO: remove "true" once the server supports PATCH for updates
-    return api.update(url, user, true).then(
+    return api.update(url, user).then(
       user => dispatch(updateUserSuccess(user)),
       err => dispatch(updateUserFailure(err))
     )
