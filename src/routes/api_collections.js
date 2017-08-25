@@ -2,7 +2,6 @@
 const config = require('../../config')
 
 const STATUS = require('http-status-codes')
-const without = require('lodash/without')
 const pickBy = require('lodash/pickBy')
 const get = require('lodash/get')
 
@@ -247,7 +246,7 @@ api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async 
     const collection = await Collection.find(req.params.collectionId)
 
     if (!collection.fragments.includes(req.params.fragmentId)) {
-      throw NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
+      throw new NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
     }
 
     let fragment = await Fragment.find(req.params.fragmentId)
@@ -281,7 +280,7 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
     let collection = await Collection.find(req.params.collectionId)
 
     if (!collection.fragments.includes(req.params.fragmentId)) {
-      throw NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
+      throw new NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
     }
 
     let fragment = await Fragment.find(req.params.fragmentId)
@@ -292,10 +291,7 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
     }
 
     fragment = await fragment.delete()
-
-    let fragments = without(collection.fragments, fragment.id)
-    collection.fragments = fragments.map(id => new Fragment({id: id}))
-
+    collection.removeFragment(fragment)
     collection = await collection.save()
 
     res.status(STATUS.OK).json(fragment)

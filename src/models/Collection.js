@@ -1,6 +1,7 @@
 'use strict'
 const Model = require('./Model')
 const Fragment = require('./Fragment')
+const without = require('lodash/without')
 
 class Collection extends Model {
   constructor (properties) {
@@ -40,6 +41,17 @@ class Collection extends Model {
       }
     })
     this.fragments.push(fragment)
+  }
+
+  removeFragment (fragment) {
+    this.fragments = this.fragments.map(fragment => {
+      if (typeof fragment === 'object') {
+        return fragment.id
+      } else {
+        return fragment
+      }
+    })
+    this.fragments = without(this.fragments, fragment.id)
   }
 }
 

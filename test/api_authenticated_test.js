@@ -10,8 +10,8 @@ const Fragment = require('../src/models/Fragment')
 const User = require('../src/models/User')
 
 describe('authenticated api', function () {
-  var otherUser
-  var collection
+  let otherUser
+  let collection
 
   beforeEach(() => {
     // Create collection with admin user and one non-admin user
@@ -84,16 +84,21 @@ describe('authenticated api', function () {
     })
 
     describe('a fragment owned by the same user', () => {
-      var fragment
+      let fragment
 
-      beforeEach(() => {
+      beforeEach(async () => {
         fragment = new Fragment(fixtures.fragment)
         fragment.setOwners([otherUser.id])
-        return fragment.save()
+        fragment = await fragment.save()
+
+        collection.addFragment(fragment)
+        collection = await collection.save()
       })
 
-      afterEach(() => {
-        return fragment.delete()
+      afterEach(async () => {
+        fragment = await fragment.delete()
+        collection.removeFragment(fragment)
+        collection = await collection.save()
       })
 
       it('updates a fragment in a protected collection if an owner', () => {
