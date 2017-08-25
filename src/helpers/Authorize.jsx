@@ -24,7 +24,7 @@ class Authorize extends React.Component {
     // /TODO
 
     this.authsome = new Authsome(
-      config.authsome.mode,
+      this.props.authsome.mode,
       { teams: config.authsome.teams }
     )
   }
