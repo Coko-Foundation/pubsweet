@@ -1,5 +1,9 @@
 const express = require('express')
+const helmet = require('helmet')
+
 const api = express.Router()
+
+api.use(helmet())
 
 // Collections
 const collection = require('./api_collections')

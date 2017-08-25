@@ -1,4 +1,5 @@
 'use strict'
+const STATUS = require('http-status-codes')
 
 class ValidationError extends Error {
   constructor (message, status) {
@@ -6,7 +7,7 @@ class ValidationError extends Error {
     Error.captureStackTrace(this, 'ValidationError')
     this.name = 'ValidationError'
     this.message = message
-    this.status = status || 409
+    this.status = status || STATUS.CONFLICT
   }
 }
 

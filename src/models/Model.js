@@ -8,7 +8,9 @@ const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('pubsweet-logger')
-const validations = require('./validations')(require('../../config'))
+const validations = require('./validations')(require('config'))
+
+const STATUS = require('http-status-codes')
 
 schema()
 
@@ -47,7 +49,7 @@ class Model {
         logger.info('Found an existing version, this is an update of:', existing)
         this.rev = existing.rev
       } catch (error) {
-        if (error.status !== 404) {
+        if (error.status !== STATUS.NOT_FOUND) {
           throw error
         }
 

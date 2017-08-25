@@ -1,4 +1,5 @@
 'use strict'
+const STATUS = require('http-status-codes')
 
 class AuthorizationError extends Error {
   constructor (message, status) {
@@ -6,7 +7,7 @@ class AuthorizationError extends Error {
     Error.captureStackTrace(this, 'AuthorizationError')
     this.name = 'AuthorizationError'
     this.message = message
-    this.status = status || 403
+    this.status = status || STATUS.FORBIDDEN
   }
 }
 

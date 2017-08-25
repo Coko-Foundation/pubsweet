@@ -1,10 +1,16 @@
+image: pubsweet/pubsweet-test-base
+
+cache:
+  paths:
+    - node_modules/
+
 before_script:
-  - apt-get update -y
-  - apt-get install -y libssl-dev build-essential wget
-  - npm install -g node-gyp
-  - npm install -g mocha
-  - npm install
+  - yarn
 
 test:
   script:
     - npm run test
+    
+test:vulnerabilities:
+  script:
+    - npm run vuln-test

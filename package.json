@@ -4,7 +4,9 @@
   "scripts": {
     "lint": "eslint src/ test/ config.js config/",
     "pretest": "npm run lint",
-    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose"
+    "test": "PUBSWEET_SECRET=test NODE_ENV=test jest --runInBand --verbose",
+    "test:docker": "gitlab-runner exec docker test",
+    "vuln-test": "nsp check"
   },
   "engines": {
     "node": ">=7.6"
@@ -17,8 +19,10 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
+    "config": "^1.26.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
     "isomorphic-fetch": "^2.1.1",
     "joi": "^10.0.6",
@@ -51,6 +55,7 @@
     "eslint": "^4.0.0",
     "eventsource": "^1.0.4",
     "jest-cli": "^19.0.2",
+    "nsp": "^2.7.0",
     "pouchdb-adapter-memory": "^6.1.1",
     "standard": "^10.0.2",
     "supertest": "^2.0.0",
