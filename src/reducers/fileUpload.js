@@ -8,14 +8,16 @@ export default function (state = {
 }, action) {
   switch (action.type) {
     case FILE_UPLOAD_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         file: action.file
-      })
+      }
     case FILE_UPLOAD_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
     default:
       return state
   }

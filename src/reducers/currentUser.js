@@ -10,23 +10,26 @@ export default function (state = {
 }, action) {
   switch (action.type) {
     case GET_CURRENT_USER_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true,
         isAuthenticated: false
-      })
+      }
 
     case GET_CURRENT_USER_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: true,
         user: action.user
-      })
+      }
 
     case GET_CURRENT_USER_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: false
-      })
+      }
 
     case LOGOUT_SUCCESS:
       return {
