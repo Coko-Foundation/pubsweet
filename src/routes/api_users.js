@@ -34,7 +34,7 @@ api.post('/authenticate', authLocal, (req, res) => {
 api.get('/authenticate', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.user)
-    user.token = req.authIndo.token
+    user.token = req.authInfo.token
     const teams = await Promise.all(
       user.teams.map((teamId) => Team.find(teamId))
     )

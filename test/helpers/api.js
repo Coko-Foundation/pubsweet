@@ -87,6 +87,17 @@ const users = {
       } else {
         return req
       }
+    },
+    get: token => {
+      const req = request(
+        api
+      ).get(
+        '/api/users/authenticate'
+      ).set(
+        'Authorization', 'Bearer ' + token
+      )
+
+      return req
     }
   },
   post: user => {

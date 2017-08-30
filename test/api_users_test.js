@@ -139,6 +139,14 @@ describe('users api', () => {
       )
     })
 
+    it('can verify its token', async () => {
+      const token = await api.users.authenticate.post(fixtures.otherUser)
+      const res = await api.users.authenticate.get(token).expect(STATUS.OK)
+
+      expect(res.body.id).toBe(otherUser.id)
+      expect(res.body.token).toBe(token)
+    })
+
     it('can not get a list of users', () => {
       return api.users.authenticate.post(
         fixtures.otherUser
