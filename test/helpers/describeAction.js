@@ -36,8 +36,7 @@ const describeAction = actions => (key, opts, cb) => {
     firstarg: empty,
     secondarg: empty,
     types: {},
-    properties: {},
-    user: require.requireActual('pubsweet/test/fixtures').adminUser
+    properties: {}
   })
 
   describe(key, () => {
