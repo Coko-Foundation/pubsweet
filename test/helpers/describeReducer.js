@@ -1,9 +1,9 @@
 const expect = require.requireActual('chai').expect
 
-const describeReducer = reducerset => (name, opts) => {
+const describeReducer = reducer => (name, opts) => {
   describe(name, () => {
     it('returns the expected state', () => {
-      const output = reducerset(opts.state, opts.action)
+      const output = reducer(opts.state, opts.action)
       expect(output).to.eql(opts.output)
     })
   })

@@ -18,8 +18,6 @@ describe('teams actions', () => {
       success: ['isFetching', 'teams'],
       failure: ['isFetching', 'message']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('createTeam', {
@@ -47,11 +45,10 @@ describe('teams actions', () => {
     }
   }, (action, data) => {
     team = data[T.CREATE_TEAM_SUCCESS].team
-    // optional: more functionality tests here
   })
 
   describeAction('updateTeam', {
-    firstarg: () => team,
+    firstarg: team,
     secondard: {
       name: 'My readers',
       teamType: {
@@ -74,12 +71,10 @@ describe('teams actions', () => {
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('deleteTeam', {
-    firstarg: () => team,
+    firstarg: team,
     types: {
       request: T.DELETE_TEAM_REQUEST,
       success: T.DELETE_TEAM_SUCCESS,
@@ -90,7 +85,5 @@ describe('teams actions', () => {
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 })

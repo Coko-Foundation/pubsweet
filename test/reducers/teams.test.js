@@ -1,12 +1,15 @@
-const reducers = require.requireActual('../../src/reducers/teams')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/teams').default
+const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 describe('teams reducers', () => {
-  describeReducerSet('teams', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.teams).to.equal(reducer)
+  })
 
   const mockteam = { name: 'someteam', id: '1234' }
   const mockstate = [mockteam]

@@ -28,7 +28,5 @@ describe('fileUpload actions', () => {
       success: ['isFetching', 'file'],
       failure: ['isFetching', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 })

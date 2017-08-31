@@ -1,6 +1,7 @@
-const reducers = require.requireActual('../../src/reducers/collections')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/collections').default
+const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
@@ -8,9 +9,11 @@ const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
 const clone = require('lodash/clone')
 
 describe('collections reducers', () => {
-  describeReducerSet('collections', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.collections).to.equal(reducer)
+  })
 
-  const mockcol = {id: '123'}
+  const mockcol = { id: '123' }
   const mockfrag = { name: 'mock fragment', id: '1234' }
   const colwithfrag = clone(mockcol)
   colwithfrag.fragments = [mockfrag.id]

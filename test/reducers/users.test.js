@@ -1,14 +1,15 @@
-const reducers = require.requireActual('../../src/reducers/users')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/users').default
+const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
-const clone = require('lodash/clone')
-
 describe('users reducers', () => {
-  describeReducerSet('users', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.users).to.equal(reducer)
+  })
 
   const user = {
     username: 'fakeymcfake',
@@ -17,8 +18,7 @@ describe('users reducers', () => {
     id: '57d0fc8e-ece9-47bf-87d3-7935326b0128'
   }
 
-  const usermod = clone(user)
-  usermod.email = 'new@email.com'
+  const usermod = {...user, email: 'new@email.com'}
 
   const mockstate = { users: [user] }
 

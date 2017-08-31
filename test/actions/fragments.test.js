@@ -5,7 +5,7 @@ const describeAction = require.requireActual('../helpers/describeAction')(action
 const T = require('../../src/actions/types')
 
 describe('fragments actions', () => {
-  const mockcol = () => ({id: '123'})
+  const mockcol = {id: '123'}
   const mockfragment = {id: '1234'}
 
   describeAction('getFragments', {
@@ -17,8 +17,6 @@ describe('fragments actions', () => {
     properties: {
       success: ['fragments']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   // get a list of collections, with the specified fields
@@ -58,8 +56,6 @@ describe('fragments actions', () => {
       success: ['collection', 'fragment'],
       failure: ['fragment', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('getFragment', {
@@ -75,8 +71,6 @@ describe('fragments actions', () => {
       success: ['fragment', 'receivedAt'],
       failure: ['isFetching', 'fragment', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('updateFragment', {
@@ -96,8 +90,6 @@ describe('fragments actions', () => {
       success: ['fragment', 'receivedAt'],
       failure: ['fragment', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('deleteFragment', {
@@ -113,7 +105,5 @@ describe('fragments actions', () => {
       success: ['fragment', 'collection'],
       failure: ['fragment', 'error', 'update']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 })

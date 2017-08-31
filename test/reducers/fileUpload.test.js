@@ -1,11 +1,14 @@
-const reducers = require.requireActual('../../src/reducers/fileUpload')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/fileUpload').default
+const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 
 describe('fileUpload reducers', () => {
-  describeReducerSet('fileUpload', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.fileUpload).to.equal(reducer)
+  })
 
   describeReducer('fileUpload success', {
     action: {
