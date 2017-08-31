@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^6.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -51,30 +50,6 @@
   },
   "peerDependencies": {
     "pubsweet-server": "^1.0.0-alpha.2"
-  },
-  "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "db",
-      "after",
-      "afterEach",
-      "before",
-      "beforeEach",
-      "context",
-      "describe",
-      "it",
-      "setup",
-      "specify",
-      "suite",
-      "suiteSetup",
-      "suiteTeardown",
-      "teardown",
-      "test",
-      "xcontext",
-      "xdescribe",
-      "xit",
-      "xspecify"
-    ]
   },
   "repository": {
     "type": "git",
