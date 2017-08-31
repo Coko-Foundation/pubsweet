@@ -10,7 +10,7 @@ const parse = response => {
     return response.json()
   }
 
-  return response
+  return response.text()
 }
 
 const request = (url, options = {}) => {

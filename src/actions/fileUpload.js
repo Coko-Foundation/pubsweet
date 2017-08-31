@@ -42,8 +42,6 @@ export function fileUpload (file) {
 
     return request('/upload', opts)
       .then(
-        response => response.text()
-      ).then(
         file => dispatch(fileUploadSuccess(file)),
         err => dispatch(fileUploadFailure(err))
       )

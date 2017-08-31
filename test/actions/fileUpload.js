@@ -33,9 +33,6 @@ module.exports = app => {
     },
     user: app.user
   }, (action, data) => {
-    if (data[T.FILE_UPLOAD_FAILURE]) {
-      console.log('ERROR:', data[T.FILE_UPLOAD_FAILURE].error)
-    }
     // optional: more functionality tests here
   })
 }

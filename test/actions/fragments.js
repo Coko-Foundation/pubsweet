@@ -4,10 +4,7 @@ const T = require('../../src/actions/types')
 
 module.exports = app => {
   const mockcol = () => app.collection
-
-  const storedData = {
-    fragment: {}
-  }
+  const mockfragment = {id: '1234'}
 
   describeAction('getFragments', {
     firstarg: mockcol,
@@ -63,13 +60,12 @@ module.exports = app => {
     },
     user: () => app.user
   }, (action, data) => {
-    Object.assign(storedData.fragment, data[T.CREATE_FRAGMENT_SUCCESS].fragment)
     // optional: more functionality tests here
   })
 
   describeAction('getFragment', {
-    firstarg: mockcol(),
-    secondarg: () => storedData.fragment,
+    firstarg: mockcol,
+    secondarg: mockfragment,
     types: {
       request: T.GET_FRAGMENT_REQUEST,
       success: T.GET_FRAGMENT_SUCCESS,
@@ -87,13 +83,11 @@ module.exports = app => {
 
   describeAction('updateFragment', {
     firstarg: mockcol,
-    secondarg: () => {
-      return {
-        id: storedData.fragment.id,
-        title: 'modded fragment',
-        type: 'some_fragment',
-        owners: []
-      }
+    secondarg: {
+      id: '1234',
+      title: 'modded fragment',
+      type: 'some_fragment',
+      owners: []
     },
     types: {
       request: T.UPDATE_FRAGMENT_REQUEST,
@@ -111,7 +105,7 @@ module.exports = app => {
 
   describeAction('deleteFragment', {
     firstarg: mockcol,
-    secondarg: () => storedData.fragment,
+    secondarg: mockfragment,
     types: {
       request: T.DELETE_FRAGMENT_REQUEST,
       success: T.DELETE_FRAGMENT_SUCCESS,
