@@ -4,8 +4,13 @@ const actions = require.requireActual('../../src/actions/users')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
-  // let user
+module.exports = () => {
+  const user = {
+    username: 'fakeymcfake',
+    password: 'correct battery horse staple',
+    email: 'fakey_mcfake@pseudonymous.com',
+    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128'
+  }
 
   describeAction('getUsers', {
     types: {
@@ -16,14 +21,13 @@ module.exports = app => {
     properties: {
       success: ['users'],
       failure: ['isFetching', 'message']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('getUser', {
-    firstarg: { id: app.user.id },
+    firstarg: { id: user.id },
     types: {
       request: T.GET_USER_REQUEST,
       success: T.GET_USER_SUCCESS,
@@ -33,15 +37,14 @@ module.exports = app => {
       request: ['user'],
       success: ['user'],
       failure: ['user', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('updateUser', {
-    firstarg: app.user,
-    secondarg: app.user,
+    firstarg: user,
+    secondarg: user,
     types: {
       request: T.UPDATE_USER_REQUEST,
       success: T.UPDATE_USER_SUCCESS,
@@ -50,8 +53,7 @@ module.exports = app => {
     properties: {
       success: ['users'],
       failure: ['isFetching', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })

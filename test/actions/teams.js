@@ -1,9 +1,8 @@
 const actions = require.requireActual('../../src/actions/teams')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require.requireActual('../../src/actions/types')
-const fixtures = require.requireActual('../fixtures')
 
-module.exports = app => {
+module.exports = () => {
   let team
 
   describeAction('getTeams', {
@@ -16,14 +15,24 @@ module.exports = app => {
       request: ['isFetching'],
       success: ['isFetching', 'teams'],
       failure: ['isFetching', 'message']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('createTeam', {
-    firstarg: fixtures.readerTeam,
+    firstarg: {
+      name: 'My readers',
+      teamType: {
+        name: 'Readers',
+        permissions: 'read'
+      },
+      object: {
+        kind: 'blogpost',
+        source: '<blog></blog>',
+        presentation: '<p></p>'
+      }
+    },
     types: {
       request: T.CREATE_TEAM_REQUEST,
       success: T.CREATE_TEAM_SUCCESS,
@@ -33,8 +42,7 @@ module.exports = app => {
       request: ['team'],
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     team = data[T.CREATE_TEAM_SUCCESS].team
     // optional: more functionality tests here
@@ -42,7 +50,18 @@ module.exports = app => {
 
   describeAction('updateTeam', {
     firstarg: () => team,
-    secondard: fixtures.readerTeam,
+    secondard: {
+      name: 'My readers',
+      teamType: {
+        name: 'Readers',
+        permissions: 'read'
+      },
+      object: {
+        kind: 'blogpost',
+        source: '<blog></blog>',
+        presentation: '<p></p>'
+      }
+    },
     types: {
       request: T.UPDATE_TEAM_REQUEST,
       success: T.UPDATE_TEAM_SUCCESS,
@@ -52,8 +71,7 @@ module.exports = app => {
       request: ['team'],
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -69,8 +87,7 @@ module.exports = app => {
       request: ['team'],
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })

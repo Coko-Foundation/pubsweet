@@ -6,8 +6,8 @@ const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
-module.exports = app => describeReducerSet('collections', reducers, () => {
-  const mockcol = app.collection
+module.exports = () => describeReducerSet('collections', reducers, () => {
+  const mockcol = {id: '123'}
   const mockfrag = { name: 'mock fragment', id: '1234' }
   const colwithfrag = clone(mockcol)
   colwithfrag.fragments = [mockfrag.id]

@@ -2,12 +2,9 @@ const actions = require.requireActual('../../src/actions/fragments')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
-  const mockcol = () => app.collection
-
-  const storedData = {
-    fragment: {}
-  }
+module.exports = () => {
+  const mockcol = () => ({id: '123'})
+  const mockfragment = {id: '1234'}
 
   describeAction('getFragments', {
     firstarg: mockcol,
@@ -17,8 +14,7 @@ module.exports = app => {
     },
     properties: {
       success: ['fragments']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -35,8 +31,7 @@ module.exports = app => {
     },
     properties: {
       success: ['fragments']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     const filteredFragment = data.GET_FRAGMENTS_SUCCESS.fragments[0]
     expect(filteredFragment).toHaveProperty('id')
@@ -60,16 +55,14 @@ module.exports = app => {
     properties: {
       success: ['collection', 'fragment'],
       failure: ['fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
-    Object.assign(storedData.fragment, data[T.CREATE_FRAGMENT_SUCCESS].fragment)
     // optional: more functionality tests here
   })
 
   describeAction('getFragment', {
-    firstarg: mockcol(),
-    secondarg: () => storedData.fragment,
+    firstarg: mockcol,
+    secondarg: mockfragment,
     types: {
       request: T.GET_FRAGMENT_REQUEST,
       success: T.GET_FRAGMENT_SUCCESS,
@@ -79,21 +72,18 @@ module.exports = app => {
       request: ['fragment'],
       success: ['fragment', 'receivedAt'],
       failure: ['isFetching', 'fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('updateFragment', {
     firstarg: mockcol,
-    secondarg: () => {
-      return {
-        id: storedData.fragment.id,
-        title: 'modded fragment',
-        type: 'some_fragment',
-        owners: []
-      }
+    secondarg: {
+      id: '1234',
+      title: 'modded fragment',
+      type: 'some_fragment',
+      owners: []
     },
     types: {
       request: T.UPDATE_FRAGMENT_REQUEST,
@@ -103,15 +93,14 @@ module.exports = app => {
     properties: {
       success: ['fragment', 'receivedAt'],
       failure: ['fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
 
   describeAction('deleteFragment', {
     firstarg: mockcol,
-    secondarg: () => storedData.fragment,
+    secondarg: mockfragment,
     types: {
       request: T.DELETE_FRAGMENT_REQUEST,
       success: T.DELETE_FRAGMENT_SUCCESS,
@@ -121,8 +110,7 @@ module.exports = app => {
       request: ['fragment', 'update'],
       success: ['fragment', 'collection'],
       failure: ['fragment', 'error', 'update']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })

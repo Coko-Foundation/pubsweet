@@ -5,11 +5,8 @@
   "scripts": {
     "compile": "babel --presets es2015,react -d lib/ src/",
     "lint": "eslint src test",
-    "pretest": "npm run lint",
-    "pretestci": "npm run pretest",
-    "test": "./test/helpers/runtestcmd jest --runInBand --no-watchman --no-cache --verbose --forceExit",
-    "testdocker": "./test/helpers/runtestcmd \"jest --runInBand --no-watchman --no-cache --verbose --forceExit\"",
-    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test"
+    "test": "jest",
+    "testci": "gitlab-ci-multi-runner exec docker test"
   },
   "engines": {
     "node": ">=7.7.0",

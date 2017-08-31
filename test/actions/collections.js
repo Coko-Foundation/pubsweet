@@ -2,7 +2,7 @@ const actions = require.requireActual('../../src/actions/collections')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
+module.exports = () => {
   // const mockcol = () => app.collection
   //
   // const storedData = {
@@ -21,8 +21,7 @@ module.exports = app => {
       request: ['type'],
       success: ['type', 'collections', 'receivedAt'],
       failure: ['type', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -40,8 +39,7 @@ module.exports = app => {
       request: ['type'],
       success: ['type', 'collections', 'receivedAt'],
       failure: ['type', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     const filteredCollection = data.GET_COLLECTIONS_SUCCESS.collections[0]
     expect(filteredCollection).toHaveProperty('id')
@@ -66,8 +64,7 @@ module.exports = app => {
       request: ['type', 'collection'],
       success: ['type', 'collection'],
       failure: ['type', 'isFetching', 'collection', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     newcol = data.CREATE_COLLECTION_SUCCESS.collection
     // optional: more functionality tests here
@@ -83,8 +80,7 @@ module.exports = app => {
       request: ['type', 'collection'],
       success: ['type', 'collection', 'receivedAt'],
       failure: ['type', 'isFetching', 'collection', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     const collection = data.GET_COLLECTION_SUCCESS.collection
     expect(collection).toHaveProperty('id')
@@ -105,8 +101,7 @@ module.exports = app => {
       request: ['type', 'collection'],
       success: ['type', 'collection'],
       failure: ['type', 'isFetching', 'collection', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     expect(
       data.UPDATE_COLLECTION_SUCCESS.collection.title
@@ -130,8 +125,7 @@ module.exports = app => {
   //     request: ['type', 'collection'],
   //     success: ['type', 'collection'],
   //     failure: ['type', 'isFetching', 'collection', 'error']
-  //   },
-  //   user: () => app.user
+  //   }
   // }, (action, data) => {
   //   expect(
   //     data.PATCH_COLLECTION_SUCCESS.collection.title
@@ -150,8 +144,7 @@ module.exports = app => {
       request: ['type', 'collection', 'update'],
       success: ['type', 'collection'],
       failure: ['type', 'collection', 'update', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     expect(
       data.DELETE_COLLECTION_SUCCESS.collection.title

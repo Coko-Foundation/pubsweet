@@ -6,12 +6,18 @@ const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
-module.exports = app => describeReducerSet('users', reducers, () => {
+module.exports = () => describeReducerSet('users', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
   )(reducers.default)
 
-  const user = app.user
+  const user = {
+    username: 'fakeymcfake',
+    password: 'correct battery horse staple',
+    email: 'fakey_mcfake@pseudonymous.com',
+    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128'
+  }
+
   const usermod = clone(user)
   usermod.email = 'new@email.com'
 

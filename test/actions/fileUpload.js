@@ -18,7 +18,7 @@ const actions = require.requireActual('../../src/actions/fileUpload')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
+module.exports = () => {
   describeAction('fileUpload', {
     firstarg: './test/helpers/mockapp.js',
     types: {
@@ -30,12 +30,8 @@ module.exports = app => {
       request: ['isFetching'],
       success: ['isFetching', 'file'],
       failure: ['isFetching', 'error']
-    },
-    user: app.user
-  }, (action, data) => {
-    if (data[T.FILE_UPLOAD_FAILURE]) {
-      console.log('ERROR:', data[T.FILE_UPLOAD_FAILURE].error)
     }
+  }, (action, data) => {
     // optional: more functionality tests here
   })
 }
