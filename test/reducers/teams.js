@@ -4,7 +4,7 @@ const describeReducerSet = require.requireActual('../helpers/describeReducerSet'
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
-module.exports = app => describeReducerSet('teams', reducers, () => {
+module.exports = () => describeReducerSet('teams', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
   )(reducers.default)

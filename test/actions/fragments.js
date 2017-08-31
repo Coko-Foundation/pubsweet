@@ -2,8 +2,8 @@ const actions = require.requireActual('../../src/actions/fragments')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
-  const mockcol = () => app.collection
+module.exports = () => {
+  const mockcol = () => ({id: '123'})
   const mockfragment = {id: '1234'}
 
   describeAction('getFragments', {
@@ -14,8 +14,7 @@ module.exports = app => {
     },
     properties: {
       success: ['fragments']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -32,8 +31,7 @@ module.exports = app => {
     },
     properties: {
       success: ['fragments']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     const filteredFragment = data.GET_FRAGMENTS_SUCCESS.fragments[0]
     expect(filteredFragment).toHaveProperty('id')
@@ -57,8 +55,7 @@ module.exports = app => {
     properties: {
       success: ['collection', 'fragment'],
       failure: ['fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -75,8 +72,7 @@ module.exports = app => {
       request: ['fragment'],
       success: ['fragment', 'receivedAt'],
       failure: ['isFetching', 'fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -97,8 +93,7 @@ module.exports = app => {
     properties: {
       success: ['fragment', 'receivedAt'],
       failure: ['fragment', 'error']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })
@@ -115,8 +110,7 @@ module.exports = app => {
       request: ['fragment', 'update'],
       success: ['fragment', 'collection'],
       failure: ['fragment', 'error', 'update']
-    },
-    user: () => app.user
+    }
   }, (action, data) => {
     // optional: more functionality tests here
   })

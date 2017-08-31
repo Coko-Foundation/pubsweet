@@ -3,7 +3,7 @@ const describeReducerSet = require.requireActual('../helpers/describeReducerSet'
 
 const T = require('../../src/actions/types')
 
-module.exports = app => describeReducerSet('fileUpload', reducers, () => {
+module.exports = () => describeReducerSet('fileUpload', reducers, () => {
   const describeReducer = require.requireActual(
     '../helpers/describeReducer'
   )(reducers.default)
