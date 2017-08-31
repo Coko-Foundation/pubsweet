@@ -1,15 +1,14 @@
 const reducers = require.requireActual('../../src/reducers/users')
 const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
+const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
-module.exports = () => describeReducerSet('users', reducers, () => {
-  const describeReducer = require.requireActual(
-    '../helpers/describeReducer'
-  )(reducers.default)
+describe('users reducers', () => {
+  describeReducerSet('users', reducers)
 
   const user = {
     username: 'fakeymcfake',

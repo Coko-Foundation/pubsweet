@@ -1,14 +1,10 @@
+global.PUBSWEET_COMPONENTS = []
+
 const actions = require.requireActual('../../src/actions/collections')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = () => {
-  // const mockcol = () => app.collection
-  //
-  // const storedData = {
-  //   fragment: {}
-  // }
-
+describe('Collection actions', () => {
   describeAction('getCollections', {
     types: {
       request: T.GET_COLLECTIONS_REQUEST,
@@ -151,4 +147,4 @@ module.exports = () => {
     ).to.equal(newcol.collection.title)
     // optional: more functionality tests here
   })
-}
+})

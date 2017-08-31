@@ -1,8 +1,10 @@
+global.PUBSWEET_COMPONENTS = []
+
 const actions = require.requireActual('../../src/actions/fragments')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = () => {
+describe('fragments actions', () => {
   const mockcol = () => ({id: '123'})
   const mockfragment = {id: '1234'}
 
@@ -114,4 +116,4 @@ module.exports = () => {
   }, (action, data) => {
     // optional: more functionality tests here
   })
-}
+})
