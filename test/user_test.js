@@ -5,104 +5,70 @@ const fixtures = require('./fixtures/fixtures')
 const userFixture = fixtures.user
 
 describe('User', function () {
-  beforeEach(function () {
-    return dbCleaner()
-  })
+  beforeEach(dbCleaner)
 
-  it('validates passwords correctly after saving to db', async function (done) {
+  it('validates passwords correctly after saving to db', async () => {
     const user = new User(userFixture)
-
     await user.save()
 
     const savedUser = await User.findByUsername(user.username)
-
-    try {
-      expect(typeof savedUser).toBe('object')
-    } catch (e) {
-      done.fail(e)
-    }
+    expect(typeof savedUser).toBe('object')
 
     const shouldBeValid = await savedUser.validPassword(userFixture.password)
-
-    try {
-      expect(shouldBeValid).toEqual(true)
-    } catch (e) {
-      done.fail(e)
-    }
+    expect(shouldBeValid).toEqual(true)
 
     const shouldBeInvalid = await savedUser.validPassword('wrongpassword')
-
-    try {
-      expect(shouldBeInvalid).toEqual(false)
-    } catch (e) {
-      done.fail(e)
-    }
-
-    done()
+    expect(shouldBeInvalid).toEqual(false)
   })
 
-  it('raises an error if trying to save a non-unique user', async (done) => {
+  it('raises an error if trying to save a non-unique user', async () => {
     const user = new User(userFixture)
+    const duplicateUser = new User(userFixture)
 
     await user.save()
 
-    var duplicateUser = new User(userFixture)
-
     try {
       await duplicateUser.save()
-      done.fail('Duplicate user should not save')
     } catch (err) {
       expect(err.name).toEqual('ConflictError')
     }
 
-    done()
+    expect.hasAssertions()
   })
 
-  it('uses custom JSON serialization', async (done) => {
-    try {
-      const user = new User(userFixture)
-      await user.save()
+  it('uses custom JSON serialization', async () => {
+    const user = new User(userFixture)
+    await user.save()
 
-      const savedUser = await User.findByUsername(user.username)
-      expect(savedUser).toHaveProperty('username', user.username)
-      expect(savedUser).toHaveProperty('passwordHash')
+    const savedUser = await User.findByUsername(user.username)
+    expect(savedUser).toHaveProperty('username', user.username)
+    expect(savedUser).toHaveProperty('passwordHash')
 
-      const stringifiedUser = JSON.parse(JSON.stringify(savedUser))
-      expect(stringifiedUser).toHaveProperty('username', user.username)
-      expect(stringifiedUser).not.toHaveProperty('passwordHash')
-
-      done()
-    } catch (e) {
-      done.fail(e)
-    }
+    const stringifiedUser = JSON.parse(JSON.stringify(savedUser))
+    expect(stringifiedUser).toHaveProperty('username', user.username)
+    expect(stringifiedUser).not.toHaveProperty('passwordHash')
   })
 
-  it('uses custom JSON serialization in an array', async (done) => {
-    try {
-      const users = [
-        {username: 'user1', email: 'user-1@example.com', password: 'foo1'},
-        {username: 'user2', email: 'user-2@example.com', password: 'foo2'},
-        {username: 'user3', email: 'user-3@example.com', password: 'foo3'}
-      ]
+  it('uses custom JSON serialization in an array', async () => {
+    const users = [
+      {username: 'user1', email: 'user-1@example.com', password: 'foo1'},
+      {username: 'user2', email: 'user-2@example.com', password: 'foo2'},
+      {username: 'user3', email: 'user-3@example.com', password: 'foo3'}
+    ]
 
-      await Promise.all(users.map(user => new User(user).save()))
+    await Promise.all(users.map(user => new User(user).save()))
 
-      const savedUsers = await User.all()
+    const savedUsers = await User.all()
 
-      const savedUser = savedUsers[2]
-      expect(savedUser).toHaveProperty('username')
-      expect(savedUser).toHaveProperty('passwordHash')
+    const savedUser = savedUsers[2]
+    expect(savedUser).toHaveProperty('username')
+    expect(savedUser).toHaveProperty('passwordHash')
 
-      const stringifiedUsers = JSON.parse(JSON.stringify(savedUsers))
-      const stringifiedUser = stringifiedUsers[2]
+    const stringifiedUsers = JSON.parse(JSON.stringify(savedUsers))
+    const stringifiedUser = stringifiedUsers[2]
 
-      expect(stringifiedUser).toHaveProperty('username', savedUser.username)
-      expect(stringifiedUser).not.toHaveProperty('passwordHash')
-
-      done()
-    } catch (e) {
-      done.fail(e)
-    }
+    expect(stringifiedUser).toHaveProperty('username', savedUser.username)
+    expect(stringifiedUser).not.toHaveProperty('passwordHash')
   })
 
   it('finds a list of users', async () => {
