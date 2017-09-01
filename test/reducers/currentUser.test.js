@@ -1,7 +1,6 @@
 const expect = require.requireActual('chai').expect
 const allReducers = require.requireActual('../../src/reducers').default
 const reducer = require.requireActual('../../src/reducers/currentUser').default
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
@@ -15,46 +14,42 @@ describe('currentUser reducers', () => {
     name: 'jo johnson'
   }
 
-  describeReducer('currentUser success', {
-    state: {},
-    action: {
+  it('currentUser success', () => {
+    const actual = reducer({}, {
       type: T.GET_CURRENT_USER_SUCCESS,
       user: mockuser
-    },
-    output: {
+    })
+    expect(actual).to.eql({
       isFetching: false,
       isAuthenticated: true,
       user: mockuser
-    }
+    })
   })
 
-  describeReducer('currentUser failure', {
-    state: {},
-    action: {
+  it('currentUser failure', () => {
+    const actual = reducer({}, {
       type: T.GET_CURRENT_USER_FAILURE
-    },
-    output: { isFetching: false, isAuthenticated: false }
+    })
+    expect(actual).to.eql({ isFetching: false, isAuthenticated: false })
   })
 
-  describeReducer('currentUser request', {
-    state: {},
-    action: {
+  it('currentUser request', () => {
+    const actual = reducer({}, {
       type: T.GET_CURRENT_USER_REQUEST
-    },
-    output: { isFetching: true, isAuthenticated: false }
+    })
+    expect(actual).to.eql({ isFetching: true, isAuthenticated: false })
   })
 
-  describeReducer('logout success', {
-    state: {
+  it('logout success', () => {
+    const actual = reducer({
       user: mockuser
-    },
-    action: {
+    }, {
       type: LOGOUT_SUCCESS
-    },
-    output: {
+    })
+    expect(actual).to.eql({
       isFetching: false,
       isAuthenticated: false,
       user: null
-    }
+    })
   })
 })

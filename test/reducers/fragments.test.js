@@ -1,7 +1,6 @@
 const expect = require.requireActual('chai').expect
 const allReducers = require.requireActual('../../src/reducers').default
 const reducer = require.requireActual('../../src/reducers/fragments').default
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducer)
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
@@ -35,61 +34,55 @@ describe('fragments reducers', () => {
   const colwithfrag = clone(mockcol)
   colwithfrag.fragments = [mockfrag]
 
-  describeReducer('getOne request', {
-    state: mockstate,
-    action: {
+  it('getOne request', () => {
+    const actual = reducer(mockstate, {
       type: T.GET_FRAGMENT_REQUEST,
       collection: colwithfrag,
       fragment: mockfragmod
-    },
-    output: {}
+    })
+    expect(actual).to.eql({})
   })
 
-  describeReducer('getOne success', {
-    state: {},
-    action: {
+  it('getOne success', () => {
+    const actual = reducer({}, {
       type: T.GET_FRAGMENT_SUCCESS,
       collection: colwithfrag,
       fragment: mockfragmod
-    },
-    output: mockstatemod
+    })
+    expect(actual).to.eql(mockstatemod)
   })
 
-  describeReducer('updateOne success', {
-    state: mockstate,
-    action: {
+  it('updateOne success', () => {
+    const actual = reducer(mockstate, {
       type: T.UPDATE_FRAGMENT_SUCCESS,
       collection: colwithfrag,
       fragment: mockfragmod
-    },
-    output: mockstatemod
+    })
+    expect(actual).to.eql(mockstatemod)
   })
 
-  describeReducer('removeOne success', {
-    state: mockstate,
-    action: {
+  it('removeOne success', () => {
+    const actual = reducer(mockstate, {
       type: T.DELETE_FRAGMENT_SUCCESS,
       collection: colwithfrag,
       fragment: mockfrag
-    },
-    output: {}
+    })
+    expect(actual).to.eql({})
   })
 
-  describeReducer('replaceAll success', {
-    state: mockstate,
-    action: {
+  it('replaceAll success', () => {
+    const actual = reducer(mockstate, {
       type: T.GET_FRAGMENTS_SUCCESS,
       collection: colwithfrag,
       fragments: [mockfragmod]
-    },
-    output: mockstatemod
+    })
+    expect(actual).to.eql(mockstatemod)
   })
 
-  describeReducer('logout success', {
-    state: mockstate,
-    action: {
+  it('logout success', () => {
+    const actual = reducer(mockstate, {
       type: LOGOUT_SUCCESS
-    },
-    output: {}
+    })
+    expect(actual).to.eql({})
   })
 })
