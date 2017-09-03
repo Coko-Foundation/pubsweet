@@ -1,8 +1,10 @@
+global.PUBSWEET_COMPONENTS = []
+
 const actions = require.requireActual('../../src/actions/currentUser')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = () => {
+describe('currentUser actions', () => {
   describeAction('getCurrentUser', {
     types: {
       request: T.GET_CURRENT_USER_REQUEST,
@@ -17,4 +19,4 @@ module.exports = () => {
   }, (action, data) => {
 
   })
-}
+})

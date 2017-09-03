@@ -1,8 +1,10 @@
+global.PUBSWEET_COMPONENTS = []
+
 const actions = require.requireActual('../../src/actions/teams')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require.requireActual('../../src/actions/types')
 
-module.exports = () => {
+describe('teams actions', () => {
   let team
 
   describeAction('getTeams', {
@@ -91,4 +93,4 @@ module.exports = () => {
   }, (action, data) => {
     // optional: more functionality tests here
   })
-}
+})

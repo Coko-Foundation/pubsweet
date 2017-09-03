@@ -1,6 +1,6 @@
 const expect = require.requireActual('chai').expect
 
-module.exports = () => {
+describe('error reducers', () => {
   describe('reducer error handler', () => {
     const errorhandler = require('../../src/reducers/error').default
 
@@ -20,4 +20,4 @@ module.exports = () => {
       }
     )
   })
-}
+})

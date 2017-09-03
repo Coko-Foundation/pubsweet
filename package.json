@@ -55,31 +55,17 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-client"
   },
   "jest": {
-    "testEnvironment": "node",
-    "testRegex": "/test/[^/]*\\.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/(actions|reducers)/*.js"
     ],
-    "modulePaths": [
-      "<rootDir>/node_modules",
-      "<rootDir>/node_modules/pubsweet",
-      "./node_modules",
-      "."
-    ],
-    "verbose": true,
     "globals": {
       "CONFIG": {
-        "pubsweet-server": {
-          "API_ENDPOINT": "http://localhost:3000/api"
-        }
-      },
-      "window": {}
+        "pubsweet-server": {}
+      }
     },
     "transformIgnorePatterns": [
-      "<rootDir>/node_modules/?!(pubsweet)",
-      "<rootDir>/test",
-      "<rootDir>/node_modules/chai"
+      "<rootDir>/node_modules/(?!pubsweet)"
     ]
   }
 }

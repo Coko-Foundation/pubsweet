@@ -1,10 +1,10 @@
-// const expect = require.requireActual('chai').expect
+global.PUBSWEET_COMPONENTS = []
 
 const actions = require.requireActual('../../src/actions/users')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = () => {
+describe('users actions', () => {
   const user = {
     username: 'fakeymcfake',
     password: 'correct battery horse staple',
@@ -57,4 +57,4 @@ module.exports = () => {
   }, (action, data) => {
     // optional: more functionality tests here
   })
-}
+})

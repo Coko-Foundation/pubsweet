@@ -1,6 +1,3 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-process.env.NODE_ENV = 'production'
-process.env.SILENT_NPM = 'true'
 global.PUBSWEET_COMPONENTS = []
 
 require('isomorphic-form-data')
@@ -18,7 +15,7 @@ const actions = require.requireActual('../../src/actions/fileUpload')
 const describeAction = require.requireActual('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = () => {
+describe('fileUpload actions', () => {
   describeAction('fileUpload', {
     firstarg: './test/helpers/mockapp.js',
     types: {
@@ -34,4 +31,4 @@ module.exports = () => {
   }, (action, data) => {
     // optional: more functionality tests here
   })
-}
+})
