@@ -17,11 +17,11 @@ describe('error reducers', () => {
     it(
       'returns the error message if there\'s an error',
       () => {
-        jest.spyOn(console, 'log').mockImplementation(jest.fn())
+        jest.spyOn(console, 'error').mockImplementation(jest.fn())
         const error = new Error('this is a fake error')
         const action = { error }
         expect(reducer(null, action)).toBe(error.message)
-        expect(console.log.mock.calls[0][0]).toBe(error)
+        expect(console.error.mock.calls[0][0]).toBe(error)
       }
     )
   })
