@@ -1,5 +1,5 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
+const expect = require('chai').expect
+const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/error').default
 
 describe('error reducers', () => {
@@ -18,9 +18,11 @@ describe('error reducers', () => {
     it(
       'returns the error message if there\'s an error',
       () => {
+        jest.spyOn(console, 'log').mockImplementation(jest.fn())
         const error = new Error('this is a fake error')
         const action = { error }
         expect(reducer(null, action)).to.equal(error.message)
+        expect(console.log.mock.calls[0][0]).to.equal(error)
       }
     )
   })

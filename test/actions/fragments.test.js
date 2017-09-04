@@ -1,7 +1,7 @@
 global.PUBSWEET_COMPONENTS = []
 
-const actions = require.requireActual('../../src/actions/fragments')
-const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const actions = require('../../src/actions/fragments')
+const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 describe('fragments actions', () => {

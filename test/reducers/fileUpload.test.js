@@ -1,6 +1,6 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
-const reducer = require.requireActual('../../src/reducers/fileUpload').default
+const expect = require('chai').expect
+const allReducers = require('../../src/reducers').default
+const reducer = require('../../src/reducers/fileUpload').default
 
 const T = require('../../src/actions/types')
 

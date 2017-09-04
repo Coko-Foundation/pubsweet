@@ -1,6 +1,6 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
-const reducer = require.requireActual('../../src/reducers/users').default
+const expect = require('chai').expect
+const allReducers = require('../../src/reducers').default
+const reducer = require('../../src/reducers/users').default
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')

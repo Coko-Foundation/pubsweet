@@ -11,8 +11,8 @@ global.FormData.prototype.append = function (field, value, options) {
 }
 
 const fs = require('fs')
-const actions = require.requireActual('../../src/actions/fileUpload')
-const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const actions = require('../../src/actions/fileUpload')
+const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 describe('fileUpload actions', () => {

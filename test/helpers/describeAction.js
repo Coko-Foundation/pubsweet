@@ -1,7 +1,7 @@
-const expect = require.requireActual('chai').expect
+const expect = require('chai').expect
 
-const defaults = require.requireActual('lodash/defaults')
-const allactions = require.requireActual('../../src/actions').default
+const defaults = require('lodash/defaults')
+const allactions = require('../../src/actions').default
 const api = require('../../src/helpers/api')
 
 const empty = {}

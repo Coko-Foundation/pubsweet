@@ -1,7 +1,7 @@
 global.PUBSWEET_COMPONENTS = []
 
-const actions = require.requireActual('../../src/actions/collections')
-const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const actions = require('../../src/actions/collections')
+const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 describe('Collection actions', () => {
