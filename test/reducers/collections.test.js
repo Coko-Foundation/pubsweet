@@ -1,4 +1,3 @@
-const expect = require('chai').expect
 const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/collections').default
 
@@ -9,7 +8,7 @@ const clone = require('lodash/clone')
 
 describe('collections reducers', () => {
   it('is exported in the all reducers object', () => {
-    expect(allReducers.collections).to.equal(reducer)
+    expect(allReducers.collections).toBe(reducer)
   })
 
   const mockcol = { id: '123' }
@@ -22,14 +21,14 @@ describe('collections reducers', () => {
       type: T.GET_COLLECTIONS_SUCCESS,
       collections: [mockcol]
     })
-    expect(actual).to.eql([mockcol])
+    expect(actual).toEqual([mockcol])
   })
 
   it('getCollections failure', () => {
     const actual = reducer(undefined, {
       type: T.GET_COLLECTIONS_FAILURE
     })
-    expect(actual).to.eql([])
+    expect(actual).toEqual([])
   })
 
   it('getCollection request', () => {
@@ -37,7 +36,7 @@ describe('collections reducers', () => {
       type: T.GET_COLLECTION_REQUEST,
       collection: mockcol
     })
-    expect(actual).to.eql([])
+    expect(actual).toEqual([])
   })
 
   it('getCollection success', () => {
@@ -45,7 +44,7 @@ describe('collections reducers', () => {
       type: T.GET_COLLECTION_SUCCESS,
       collection: mockcol
     })
-    expect(actual).to.eql([mockcol])
+    expect(actual).toEqual([mockcol])
   })
 
   it('addFragments success', () => {
@@ -54,7 +53,7 @@ describe('collections reducers', () => {
       collection: mockcol,
       fragment: mockfrag
     })
-    expect(actual).to.eql([colwithfrag])
+    expect(actual).toEqual([colwithfrag])
   })
 
   it('removeFragments success', () => {
@@ -63,13 +62,13 @@ describe('collections reducers', () => {
       collection: colwithfrag,
       fragment: mockfrag
     })
-    expect(actual).to.eql([colwithfrag])
+    expect(actual).toEqual([colwithfrag])
   })
 
   it('logout success', () => {
     const actual = reducer([colwithfrag], {
       type: LOGOUT_SUCCESS
     })
-    expect(actual).to.eql([])
+    expect(actual).toEqual([])
   })
 })

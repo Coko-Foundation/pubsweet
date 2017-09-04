@@ -1,4 +1,3 @@
-const expect = require('chai').expect
 const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/teams').default
 
@@ -7,7 +6,7 @@ const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 describe('teams reducers', () => {
   it('is exported in the all reducers object', () => {
-    expect(allReducers.teams).to.equal(reducer)
+    expect(allReducers.teams).toBe(reducer)
   })
 
   const mockteam = { name: 'someteam', id: '1234' }
@@ -18,7 +17,7 @@ describe('teams reducers', () => {
       type: T.CREATE_TEAM_SUCCESS,
       team: mockteam
     })
-    expect(actual).to.eql(mockstate)
+    expect(actual).toEqual(mockstate)
   })
 
   it('updateTeam success', () => {
@@ -26,7 +25,7 @@ describe('teams reducers', () => {
       type: T.CREATE_TEAM_SUCCESS,
       team: mockteam
     })
-    expect(actual).to.eql(mockstate)
+    expect(actual).toEqual(mockstate)
   })
 
   it('getTeams success', () => {
@@ -34,7 +33,7 @@ describe('teams reducers', () => {
       type: T.GET_TEAMS_SUCCESS,
       teams: mockstate
     })
-    expect(actual).to.eql(mockstate)
+    expect(actual).toEqual(mockstate)
   })
 
   it('deleteTeam success', () => {
@@ -42,13 +41,13 @@ describe('teams reducers', () => {
       type: T.DELETE_TEAM_SUCCESS,
       team: mockteam
     })
-    expect(actual).to.eql([])
+    expect(actual).toEqual([])
   })
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
       type: LOGOUT_SUCCESS
     })
-    expect(actual).to.eql([])
+    expect(actual).toEqual([])
   })
 })

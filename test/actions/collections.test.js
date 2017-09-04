@@ -98,7 +98,7 @@ describe('Collection actions', () => {
   }, (action, data) => {
     expect(
       data.UPDATE_COLLECTION_SUCCESS.collection.title
-    ).to.equal('this is an updated collection')
+    ).toBe('this is an updated collection')
   })
 
   // NOTE: enable this once PATCH method is implemented on the server
@@ -121,7 +121,7 @@ describe('Collection actions', () => {
   // }, (action, data) => {
   //   expect(
   //     data.PATCH_COLLECTION_SUCCESS.collection.title
-  //   ).to.equal('this is a patched collection')
+  //   ).toBe('this is a patched collection')
   // })
 
   describeAction('deleteCollection', {
@@ -139,6 +139,6 @@ describe('Collection actions', () => {
   }, (action, data) => {
     expect(
       data.DELETE_COLLECTION_SUCCESS.collection.title
-    ).to.equal(newcol.collection.title)
+    ).toBe(newcol.collection.title)
   })
 })
