@@ -5,96 +5,115 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import Authsome from 'authsome'
+import actions from '../actions'
 
-import Actions from '../actions'
-
+// TODO refactor initial app to directly use component then remove this
 export function requireAuthentication (Component, operation, selector) {
-  class AuthenticatedComponent extends React.Component {
-    constructor (props) {
-      super(props)
+  return function WrappedAuthenticatedComponent (props) {
+    return <ConnectedAuthenticatedComponent
+      authsome={CONFIG['authsome']}
+      {...props}
+      component={Component}
+      operation={operation}
+      selector={selector}/>
+  }
+}
 
-      this.authsome = new Authsome(
-        CONFIG['authsome'].mode,
-        { teams: CONFIG['authsome'].teams }
-      )
+export class AuthenticatedComponent extends React.Component {
+  constructor (props) {
+    super(props)
 
-      this.checkAuthorization = this.checkAuthorization.bind(this)
-      this.checkAuth = this.checkAuth.bind(this)
-      this.failRedirect = CONFIG['authsome']['fail-redirect']
-    }
+    this.authsome = new Authsome(
+      this.props.authsome.mode,
+      { teams: this.props.authsome.teams }
+    )
 
-    componentWillMount () {
-      this.props.actions.getCurrentUser().then(
-        () => this.props.actions.getCollections()
-      ).then(
-        () => this.checkAuth(this.props.currentUser)
-      )
-    }
+    this.checkAuthorization = this.checkAuthorization.bind(this)
+    this.checkAuth = this.checkAuth.bind(this)
+    this.failRedirect = this.props.authsome['fail-redirect']
+  }
 
-    componentWillReceiveProps (nextProps) {
-      this.checkAuth(nextProps.currentUser)
-    }
+  componentWillMount () {
+    this.props.actions.getCurrentUser().then(
+      () => this.props.actions.getCollections()
+    ).then(
+      () => this.checkAuth(this.props.currentUser)
+    )
+  }
 
-    checkAuthorization (user) {
-      let object = selector(this.props.state)
+  componentWillReceiveProps (nextProps) {
+    this.checkAuth(nextProps.currentUser)
+  }
 
-      try {
-        if (this.authsome.can(user, operation, object)) {
-          return <Component {...this.props} />
-        } else {
-          return <span />
-        }
-      } catch (err) {
+  checkAuthorization (user) {
+    const object = this.props.selector(this.props.state)
+    const Component = this.props.component
+
+    try {
+      if (this.authsome.can(user, this.props.operation, object)) {
+        return <Component {...this.props} />
+      } else {
         return <span />
       }
+    } catch (err) {
+      return <span />
     }
+  }
 
-    checkAuth (currentUser) {
-      let object = selector(this.props.state)
+  checkAuth (currentUser) {
+    let object = this.props.selector(this.props.state)
 
-      if (!currentUser.isFetching) {
-        if (!currentUser.isAuthenticated) {
-          let redirectAfterLogin = this.props.location.pathname
-          return this.props.pushState(`/login?next=${redirectAfterLogin}`)
-        } else if (!this.authsome.can(currentUser.user, operation, object) && this.failRedirect) {
-          this.props.pushState(this.failRedirect)
-        } else {
-          this.checkAuthorization(currentUser.user)
-        }
+    if (!currentUser.isFetching) {
+      if (!currentUser.isAuthenticated) {
+        let redirectAfterLogin = this.props.location.pathname
+        return this.props.pushState(`/login?next=${redirectAfterLogin}`)
+      } else if (!this.authsome.can(currentUser.user, this.props.operation, object) && this.failRedirect) {
+        this.props.pushState(this.failRedirect)
+      } else {
+        this.checkAuthorization(currentUser.user)
       }
     }
-
-    render () {
-      return (
-        <div>
-          { this.checkAuthorization(this.props.currentUser.user) }
-        </div>
-      )
-    }
   }
 
-  AuthenticatedComponent.propTypes = {
-    location: PropTypes.object,
-    username: PropTypes.string,
-    actions: PropTypes.object.isRequired,
-    currentUser: PropTypes.object.isRequired,
-    pushState: PropTypes.func.isRequired,
-    state: PropTypes.object
+  render () {
+    return (
+      <div>
+        { this.checkAuthorization(this.props.currentUser.user) }
+      </div>
+    )
   }
-
-  function mapState (state) {
-    return {
-      currentUser: state.currentUser,
-      state: state
-    }
-  }
-
-  function mapDispatch (dispatch) {
-    return {
-      pushState: bindActionCreators(push, dispatch),
-      actions: bindActionCreators(Actions, dispatch)
-    }
-  }
-
-  return connect(mapState, mapDispatch)(AuthenticatedComponent)
 }
+
+AuthenticatedComponent.propTypes = {
+  component: PropTypes.element.isRequired,
+  selector: PropTypes.func.isRequired,
+  operation: PropTypes.string.isRequired,
+  authsome: PropTypes.shape({
+    mode: PropTypes.func,
+    teams: PropTypes.object,
+    'fail-redirect': PropTypes.string
+  }),
+  location: PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  pushState: PropTypes.func.isRequired,
+  state: PropTypes.object
+}
+
+function mapState (state) {
+  return {
+    currentUser: state.currentUser,
+    state: state
+  }
+}
+
+function mapDispatch (dispatch) {
+  return {
+    pushState: bindActionCreators(push, dispatch),
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+const ConnectedAuthenticatedComponent = connect(mapState, mapDispatch)(AuthenticatedComponent)
+
+export default ConnectedAuthenticatedComponent
