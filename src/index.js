@@ -34,6 +34,8 @@ module.exports = (app = express()) => {
   passport.use('anonymous', authentication.strategies.anonymous)
   passport.use('local', authentication.strategies.local)
 
+  // TODO: register components here
+
   // Main API
   app.use('/api', api)
 
