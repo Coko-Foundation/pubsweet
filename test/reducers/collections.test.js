@@ -1,6 +1,6 @@
-const reducers = require.requireActual('../../src/reducers/collections')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/collections').default
 
 const T = require('../../src/actions/types')
 const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
@@ -8,72 +8,68 @@ const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
 const clone = require('lodash/clone')
 
 describe('collections reducers', () => {
-  describeReducerSet('collections', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.collections).to.equal(reducer)
+  })
 
-  const mockcol = {id: '123'}
+  const mockcol = { id: '123' }
   const mockfrag = { name: 'mock fragment', id: '1234' }
   const colwithfrag = clone(mockcol)
   colwithfrag.fragments = [mockfrag.id]
 
-  describeReducer('getCollections success', {
-    state: [mockcol],
-    action: {
+  it('getCollections success', () => {
+    const actual = reducer([mockcol], {
       type: T.GET_COLLECTIONS_SUCCESS,
       collections: [mockcol]
-    },
-    output: [mockcol]
+    })
+    expect(actual).to.eql([mockcol])
   })
 
-  describeReducer('getCollections failure', {
-    action: {
+  it('getCollections failure', () => {
+    const actual = reducer(undefined, {
       type: T.GET_COLLECTIONS_FAILURE
-    },
-    output: []
+    })
+    expect(actual).to.eql([])
   })
 
-  describeReducer('getCollection request', {
-    state: [mockcol],
-    action: {
+  it('getCollection request', () => {
+    const actual = reducer([mockcol], {
       type: T.GET_COLLECTION_REQUEST,
       collection: mockcol
-    },
-    output: []
+    })
+    expect(actual).to.eql([])
   })
 
-  describeReducer('getCollection success', {
-    state: [],
-    action: {
+  it('getCollection success', () => {
+    const actual = reducer([], {
       type: T.GET_COLLECTION_SUCCESS,
       collection: mockcol
-    },
-    output: [mockcol]
+    })
+    expect(actual).to.eql([mockcol])
   })
 
-  describeReducer('addFragments success', {
-    state: [mockcol],
-    action: {
+  it('addFragments success', () => {
+    const actual = reducer([mockcol], {
       type: T.CREATE_FRAGMENT_SUCCESS,
       collection: mockcol,
       fragment: mockfrag
-    },
-    output: [colwithfrag]
+    })
+    expect(actual).to.eql([colwithfrag])
   })
 
-  describeReducer('removeFragments success', {
-    state: [colwithfrag],
-    action: {
+  it('removeFragments success', () => {
+    const actual = reducer([colwithfrag], {
       type: T.DELETE_FRAGMENT_SUCCESS,
       collection: colwithfrag,
       fragment: mockfrag
-    },
-    output: [colwithfrag]
+    })
+    expect(actual).to.eql([colwithfrag])
   })
 
-  describeReducer('logout success', {
-    state: [colwithfrag],
-    action: {
+  it('logout success', () => {
+    const actual = reducer([colwithfrag], {
       type: LOGOUT_SUCCESS
-    },
-    output: []
+    })
+    expect(actual).to.eql([])
   })
 })

@@ -1,57 +1,54 @@
-const reducers = require.requireActual('../../src/reducers/teams')
-const describeReducerSet = require.requireActual('../helpers/describeReducerSet')
-const describeReducer = require.requireActual('../helpers/describeReducer')(reducers.default)
+const expect = require.requireActual('chai').expect
+const allReducers = require.requireActual('../../src/reducers').default
+const reducer = require.requireActual('../../src/reducers/teams').default
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 describe('teams reducers', () => {
-  describeReducerSet('teams', reducers)
+  it('is exported in the all reducers object', () => {
+    expect(allReducers.teams).to.equal(reducer)
+  })
 
   const mockteam = { name: 'someteam', id: '1234' }
   const mockstate = [mockteam]
 
-  describeReducer('createTeam success', {
-    state: [],
-    action: {
+  it('createTeam success', () => {
+    const actual = reducer([], {
       type: T.CREATE_TEAM_SUCCESS,
       team: mockteam
-    },
-    output: mockstate
+    })
+    expect(actual).to.eql(mockstate)
   })
 
-  describeReducer('updateTeam success', {
-    state: [],
-    action: {
+  it('updateTeam success', () => {
+    const actual = reducer([], {
       type: T.CREATE_TEAM_SUCCESS,
       team: mockteam
-    },
-    output: mockstate
+    })
+    expect(actual).to.eql(mockstate)
   })
 
-  describeReducer('getTeams success', {
-    state: mockstate,
-    action: {
+  it('getTeams success', () => {
+    const actual = reducer(mockstate, {
       type: T.GET_TEAMS_SUCCESS,
       teams: mockstate
-    },
-    output: mockstate
+    })
+    expect(actual).to.eql(mockstate)
   })
 
-  describeReducer('deleteTeam success', {
-    state: mockstate,
-    action: {
+  it('deleteTeam success', () => {
+    const actual = reducer(mockstate, {
       type: T.DELETE_TEAM_SUCCESS,
       team: mockteam
-    },
-    output: []
+    })
+    expect(actual).to.eql([])
   })
 
-  describeReducer('logout success', {
-    state: mockstate,
-    action: {
+  it('logout success', () => {
+    const actual = reducer(mockstate, {
       type: LOGOUT_SUCCESS
-    },
-    output: []
+    })
+    expect(actual).to.eql([])
   })
 })

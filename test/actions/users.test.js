@@ -22,8 +22,6 @@ describe('users actions', () => {
       success: ['users'],
       failure: ['isFetching', 'message']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('getUser', {
@@ -38,8 +36,6 @@ describe('users actions', () => {
       success: ['user'],
       failure: ['user', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   describeAction('updateUser', {
@@ -54,7 +50,5 @@ describe('users actions', () => {
       success: ['users'],
       failure: ['isFetching', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 })

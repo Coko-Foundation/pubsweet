@@ -16,7 +16,5 @@ describe('currentUser actions', () => {
       success: ['user'],
       failure: ['error']
     }
-  }, (action, data) => {
-
   })
 })

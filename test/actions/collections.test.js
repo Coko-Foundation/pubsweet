@@ -18,8 +18,6 @@ describe('Collection actions', () => {
       success: ['type', 'collections', 'receivedAt'],
       failure: ['type', 'error']
     }
-  }, (action, data) => {
-    // optional: more functionality tests here
   })
 
   // get a list of collections, with the specified fields
@@ -63,11 +61,10 @@ describe('Collection actions', () => {
     }
   }, (action, data) => {
     newcol = data.CREATE_COLLECTION_SUCCESS.collection
-    // optional: more functionality tests here
   })
 
   describeAction('getCollection', {
-    firstarg: () => newcol,
+    firstarg: newcol,
     types: {
       request: T.GET_COLLECTION_REQUEST,
       success: T.GET_COLLECTION_SUCCESS
@@ -83,7 +80,7 @@ describe('Collection actions', () => {
   })
 
   describeAction('updateCollection', {
-    firstarg: () => newcol,
+    firstarg: newcol,
     secondarg: {
       type: 'testing',
       title: 'this is an updated collection'
@@ -102,12 +99,11 @@ describe('Collection actions', () => {
     expect(
       data.UPDATE_COLLECTION_SUCCESS.collection.title
     ).to.equal('this is an updated collection')
-    // optional: more functionality tests here
   })
 
   // NOTE: enable this once PATCH method is implemented on the server
   // describeAction('patchCollection', {
-  //   firstarg: () => newcol,
+  //   firstarg: newcol,
   //   secondarg: {
   //     type: 'testing',
   //     title: 'this is a patched collection'
@@ -126,11 +122,10 @@ describe('Collection actions', () => {
   //   expect(
   //     data.PATCH_COLLECTION_SUCCESS.collection.title
   //   ).to.equal('this is a patched collection')
-  //   // optional: more functionality tests here
   // })
 
   describeAction('deleteCollection', {
-    firstarg: () => newcol,
+    firstarg: newcol,
     types: {
       request: T.DELETE_COLLECTION_REQUEST,
       success: T.DELETE_COLLECTION_SUCCESS,
@@ -145,6 +140,5 @@ describe('Collection actions', () => {
     expect(
       data.DELETE_COLLECTION_SUCCESS.collection.title
     ).to.equal(newcol.collection.title)
-    // optional: more functionality tests here
   })
 })

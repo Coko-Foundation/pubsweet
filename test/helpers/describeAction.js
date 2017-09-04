@@ -24,8 +24,6 @@ function unMockApi () {
   })
 }
 
-const get = arg => typeof arg === 'function' ? arg() : arg
-
 const describeAction = actions => (key, opts, cb) => {
   if (typeof opts === 'function') {
     cb = opts
@@ -66,13 +64,13 @@ const describeAction = actions => (key, opts, cb) => {
     })
 
     it('returns a promise from the fetcher function', () => {
-      const fetcher = action(get(opts.firstarg), get(opts.secondarg))
+      const fetcher = action(opts.firstarg, opts.secondarg)
       const returned = fetcher(mockDispatch, mockGetState)
       expect(returned).to.be.a('promise')
     })
 
     it('dispatches a typed fragment', () => {
-      const fetcher = action(get(opts.firstarg), get(opts.secondarg))
+      const fetcher = action(opts.firstarg, opts.secondarg)
       let frag
       fetcher(fragment => { frag = fragment }, mockGetState)
       expect(frag).to.exist
@@ -92,7 +90,7 @@ const describeAction = actions => (key, opts, cb) => {
           if (!dispatched) dispatched = typedmsg
         }
 
-        let fetcher = action(get(opts.firstarg), get(opts.secondarg))
+        let fetcher = action(opts.firstarg, opts.secondarg)
         fetcher(dispatch, mockGetState)
 
         expect(dispatched).to.be.ok
@@ -117,7 +115,7 @@ const describeAction = actions => (key, opts, cb) => {
         : ''
 
       it(`dispatches ${key}Success ${propmsg}on successful response`, async () => {
-        let fetcher = action(get(opts.firstarg), get(opts.secondarg))
+        let fetcher = action(opts.firstarg, opts.secondarg)
         const dispatched = await fetcher(
           typedmsg => Promise.resolve(typedmsg),
           mockGetState
@@ -145,7 +143,7 @@ const describeAction = actions => (key, opts, cb) => {
         // make API reject every request
         mockApi(false)
 
-        let fetcher = action(get(opts.firstarg), get(opts.secondarg))
+        let fetcher = action(opts.firstarg, opts.secondarg)
         const dispatched = await fetcher(
           typedmsg => Promise.resolve(typedmsg),
           mockGetState
