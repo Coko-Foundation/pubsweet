@@ -28,8 +28,7 @@ export default function (state = [], action) {
 
   function removeTeams () {
     const todel = (action.teams || [action.team])
-    let teams = difference(state, todel)
-    return teams
+    return difference(state, todel)
   }
 
   switch (action.type) {

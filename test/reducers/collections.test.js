@@ -4,24 +4,21 @@ const reducer = require('../../src/reducers/collections').default
 const T = require('../../src/actions/types')
 const { LOGOUT_SUCCESS } = require('pubsweet-component-login/types')
 
-const clone = require('lodash/clone')
-
 describe('collections reducers', () => {
   it('is exported in the all reducers object', () => {
     expect(allReducers.collections).toBe(reducer)
   })
 
-  const mockcol = { id: '123' }
-  const mockfrag = { name: 'mock fragment', id: '1234' }
-  const colwithfrag = clone(mockcol)
-  colwithfrag.fragments = [mockfrag.id]
+  const mockCollection = { id: '123' }
+  const mockFragment = { name: 'mock fragment', id: '1234' }
+  const mockCollectionWithFragment = {...mockCollection, fragments: [mockFragment.id]}
 
   it('getCollections success', () => {
-    const actual = reducer([mockcol], {
+    const actual = reducer([mockCollection], {
       type: T.GET_COLLECTIONS_SUCCESS,
-      collections: [mockcol]
+      collections: [mockCollection]
     })
-    expect(actual).toEqual([mockcol])
+    expect(actual).toEqual([mockCollection])
   })
 
   it('getCollections failure', () => {
@@ -32,43 +29,86 @@ describe('collections reducers', () => {
   })
 
   it('getCollection request', () => {
-    const actual = reducer([mockcol], {
+    const actual = reducer([mockCollection], {
       type: T.GET_COLLECTION_REQUEST,
-      collection: mockcol
+      collection: mockCollection
     })
     expect(actual).toEqual([])
   })
 
-  it('getCollection success', () => {
+  it('getCollection success adds collection to store', () => {
     const actual = reducer([], {
       type: T.GET_COLLECTION_SUCCESS,
-      collection: mockcol
+      collection: mockCollection
     })
-    expect(actual).toEqual([mockcol])
+    expect(actual).toEqual([mockCollection])
+  })
+
+  it('getCollection success updates collection in store', () => {
+    const actual = reducer([mockCollection], {
+      type: T.GET_COLLECTION_SUCCESS,
+      collection: mockCollectionWithFragment
+    })
+    expect(actual).toEqual([mockCollectionWithFragment])
+  })
+
+  it('createCollection success', () => {
+    const actual = reducer(['dummy'], {
+      type: T.CREATE_COLLECTION_SUCCESS,
+      collection: mockCollection
+    })
+    expect(actual).toEqual(['dummy', mockCollection])
+  })
+
+  it('createCollection success ignores duplicate', () => {
+    const actual = reducer([mockCollection], {
+      type: T.CREATE_COLLECTION_SUCCESS,
+      collection: {...mockCollection, same: 'but different'}
+    })
+    expect(actual).toEqual([mockCollection])
+  })
+
+  it('updateCollection success', () => {
+    const actual = reducer(['dummy', mockCollection], {
+      type: T.UPDATE_COLLECTION_SUCCESS,
+      collection: mockCollection,
+      update: {
+        some: 'value'
+      }
+    })
+    expect(actual).toEqual(['dummy', {...mockCollection, some: 'value'}])
   })
 
   it('addFragments success', () => {
-    const actual = reducer([mockcol], {
+    const actual = reducer([mockCollection], {
       type: T.CREATE_FRAGMENT_SUCCESS,
-      collection: mockcol,
-      fragment: mockfrag
+      collection: mockCollection,
+      fragment: mockFragment
     })
-    expect(actual).toEqual([colwithfrag])
+    expect(actual).toEqual([mockCollectionWithFragment])
   })
 
   it('removeFragments success', () => {
-    const actual = reducer([colwithfrag], {
+    const actual = reducer([mockCollectionWithFragment], {
       type: T.DELETE_FRAGMENT_SUCCESS,
-      collection: colwithfrag,
-      fragment: mockfrag
+      collection: mockCollectionWithFragment,
+      fragment: mockFragment
     })
-    expect(actual).toEqual([colwithfrag])
+    expect(actual).toEqual([mockCollectionWithFragment])
   })
 
   it('logout success', () => {
-    const actual = reducer([colwithfrag], {
+    const actual = reducer([mockCollectionWithFragment], {
       type: LOGOUT_SUCCESS
     })
     expect(actual).toEqual([])
+  })
+
+  it('returns same state for unrecognised action', () => {
+    const state = []
+    const actual = reducer(state, {
+      type: 'something else'
+    })
+    expect(actual).toBe(state)
   })
 })

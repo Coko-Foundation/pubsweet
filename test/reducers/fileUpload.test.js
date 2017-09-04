@@ -25,4 +25,12 @@ describe('fileUpload reducers', () => {
     })
     expect(actual).toEqual({ isFetching: true })
   })
+
+  it('returns same state for unrecognised action', () => {
+    const state = {}
+    const actual = reducer(state, {
+      type: 'something else'
+    })
+    expect(actual).toBe(state)
+  })
 })

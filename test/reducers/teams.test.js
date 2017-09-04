@@ -21,11 +21,12 @@ describe('teams reducers', () => {
   })
 
   it('updateTeam success', () => {
-    const actual = reducer([], {
+    const updatedTeam = {...mockteam, foo: 'bar'}
+    const actual = reducer(mockstate, {
       type: T.CREATE_TEAM_SUCCESS,
-      team: mockteam
+      team: updatedTeam
     })
-    expect(actual).toEqual(mockstate)
+    expect(actual).toEqual([updatedTeam])
   })
 
   it('getTeams success', () => {
@@ -49,5 +50,13 @@ describe('teams reducers', () => {
       type: LOGOUT_SUCCESS
     })
     expect(actual).toEqual([])
+  })
+
+  it('returns same state for unrecognised action', () => {
+    const state = []
+    const actual = reducer(state, {
+      type: 'something else'
+    })
+    expect(actual).toBe(state)
   })
 })
