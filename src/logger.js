@@ -1,6 +1,5 @@
 'use strict'
 
-const path = require('path')
 const winston = require('winston')
 
 const logger = new (winston.Logger)({
