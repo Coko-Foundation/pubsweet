@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.3",
   "main": "src/index.js",
   "scripts": {
-    "compile": "babel --presets es2015,react -d lib/ src/",
+    "compile": "babel -d lib/ src/",
     "lint": "eslint src test",
     "test": "jest",
     "testci": "gitlab-ci-multi-runner exec docker test"
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^3.19.0",
