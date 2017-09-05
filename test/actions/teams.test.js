@@ -1,8 +1,8 @@
 global.PUBSWEET_COMPONENTS = []
 
-const actions = require.requireActual('../../src/actions/teams')
-const describeAction = require.requireActual('../helpers/describeAction')(actions)
-const T = require.requireActual('../../src/actions/types')
+const actions = require('../../src/actions/teams')
+const describeAction = require('../helpers/describeAction')(actions)
+const T = require('../../src/actions/types')
 
 describe('teams actions', () => {
   let team

@@ -1,6 +1,5 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
-const reducer = require.requireActual('../../src/reducers/fragments').default
+const allReducers = require('../../src/reducers').default
+const reducer = require('../../src/reducers/fragments').default
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
@@ -9,7 +8,7 @@ const clone = require('lodash/clone')
 
 describe('fragments reducers', () => {
   it('is exported in the all reducers object', () => {
-    expect(allReducers.fragments).to.equal(reducer)
+    expect(allReducers.fragments).toBe(reducer)
   })
 
   const mockcol = {id: '123'}
@@ -40,7 +39,7 @@ describe('fragments reducers', () => {
       collection: colwithfrag,
       fragment: mockfragmod
     })
-    expect(actual).to.eql({})
+    expect(actual).toEqual({})
   })
 
   it('getOne success', () => {
@@ -49,7 +48,7 @@ describe('fragments reducers', () => {
       collection: colwithfrag,
       fragment: mockfragmod
     })
-    expect(actual).to.eql(mockstatemod)
+    expect(actual).toEqual(mockstatemod)
   })
 
   it('updateOne success', () => {
@@ -58,7 +57,7 @@ describe('fragments reducers', () => {
       collection: colwithfrag,
       fragment: mockfragmod
     })
-    expect(actual).to.eql(mockstatemod)
+    expect(actual).toEqual(mockstatemod)
   })
 
   it('removeOne success', () => {
@@ -67,7 +66,7 @@ describe('fragments reducers', () => {
       collection: colwithfrag,
       fragment: mockfrag
     })
-    expect(actual).to.eql({})
+    expect(actual).toEqual({})
   })
 
   it('replaceAll success', () => {
@@ -76,13 +75,13 @@ describe('fragments reducers', () => {
       collection: colwithfrag,
       fragments: [mockfragmod]
     })
-    expect(actual).to.eql(mockstatemod)
+    expect(actual).toEqual(mockstatemod)
   })
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
       type: LOGOUT_SUCCESS
     })
-    expect(actual).to.eql({})
+    expect(actual).toEqual({})
   })
 })

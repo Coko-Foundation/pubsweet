@@ -1,12 +1,11 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
-const reducer = require.requireActual('../../src/reducers/fileUpload').default
+const allReducers = require('../../src/reducers').default
+const reducer = require('../../src/reducers/fileUpload').default
 
 const T = require('../../src/actions/types')
 
 describe('fileUpload reducers', () => {
   it('is exported in the all reducers object', () => {
-    expect(allReducers.fileUpload).to.equal(reducer)
+    expect(allReducers.fileUpload).toBe(reducer)
   })
 
   it('fileUpload success', () => {
@@ -14,7 +13,7 @@ describe('fileUpload reducers', () => {
       type: T.FILE_UPLOAD_SUCCESS,
       file: 'somefile'
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       isFetching: false,
       file: 'somefile'
     })
@@ -24,6 +23,6 @@ describe('fileUpload reducers', () => {
     const actual = reducer(undefined, {
       type: T.FILE_UPLOAD_REQUEST
     })
-    expect(actual).to.eql({ isFetching: true })
+    expect(actual).toEqual({ isFetching: true })
   })
 })

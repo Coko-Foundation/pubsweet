@@ -1,13 +1,12 @@
-const expect = require.requireActual('chai').expect
-const allReducers = require.requireActual('../../src/reducers').default
-const reducer = require.requireActual('../../src/reducers/users').default
+const allReducers = require('../../src/reducers').default
+const reducer = require('../../src/reducers/users').default
 
 const T = require('../../src/actions/types')
 const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 describe('users reducers', () => {
   it('is exported in the all reducers object', () => {
-    expect(allReducers.users).to.equal(reducer)
+    expect(allReducers.users).toBe(reducer)
   })
 
   const user = {
@@ -26,7 +25,7 @@ describe('users reducers', () => {
       type: T.GET_USERS_SUCCESS,
       users: [user]
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       isFetching: false,
       users: [user]
     })
@@ -36,7 +35,7 @@ describe('users reducers', () => {
     const actual = reducer(undefined, {
       type: T.GET_USERS_REQUEST
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       isFetching: true,
       users: []
     })
@@ -47,7 +46,7 @@ describe('users reducers', () => {
       type: T.GET_USER_SUCCESS,
       user: user
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       users: [user],
       isFetching: false
     })
@@ -58,7 +57,7 @@ describe('users reducers', () => {
       type: T.UPDATE_USER_REQUEST,
       user: usermod
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       users: [user],
       isFetching: true
     })
@@ -69,7 +68,7 @@ describe('users reducers', () => {
       type: T.UPDATE_USER_SUCCESS,
       user: usermod
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       users: [usermod],
       isFetching: false
     })
@@ -80,7 +79,7 @@ describe('users reducers', () => {
       type: LOGOUT_SUCCESS,
       user: usermod
     })
-    expect(actual).to.eql({
+    expect(actual).toEqual({
       users: [],
       isFetching: false
     })
