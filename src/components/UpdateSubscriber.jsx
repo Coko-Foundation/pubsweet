@@ -15,7 +15,7 @@ const actionMap = {
   'fragment:delete': T.DELETE_FRAGMENT_SUCCESS
 }
 
-class UpdateSubscriber extends Component {
+export class UpdateSubscriber extends Component {
   constructor (props) {
     super(props)
 
@@ -52,7 +52,7 @@ class UpdateSubscriber extends Component {
     return config && config.visible
   }
 
-  // if haven't received a heartbeat for 5 seconds, try to reconnect
+  // if haven't received a heartbeat for 30 seconds, try to reconnect
   monitor () {
     if (this.heartbeat) {
       window.clearTimeout(this.heartbeat)
@@ -88,7 +88,7 @@ class UpdateSubscriber extends Component {
 
       this.eventSource = new window.EventSource(url)
 
-      this.listeners.error = this.eventSource.addEventListener('error', () => {
+      this.listeners.error = () => {
         // console.log('error', this.eventSource.readyState)
 
         switch (this.eventSource.readyState) {
@@ -101,16 +101,16 @@ class UpdateSubscriber extends Component {
             this.monitor() // try again in a while if not connected
             break
         }
-      })
+      }
 
-      this.listeners.close = this.eventSource.addEventListener('close', () => {
-        console.log('close')
+      this.listeners.close = () => {
+        // console.log('close')
 
         this.setState({connected: false})
         // this.monitor() // don't try to reconnect, as "close" without error is deliberate
-      })
+      }
 
-      this.listeners.message = this.eventSource.addEventListener('message', event => {
+      this.listeners.message = event => {
         // console.log('message', event)
 
         if (event.origin !== window.location.origin) {
@@ -123,17 +123,21 @@ class UpdateSubscriber extends Component {
         const actionType = actionMap[action]
 
         handleUpdate(actionType, data)
-      })
+      }
 
-      this.listeners.open = this.eventSource.addEventListener('open', () => {
+      this.listeners.open = () => {
         // console.log('open')
         this.setState({ connected: true })
-      })
+      }
 
       // listen for a heartbeat message
-      this.listeners.pulse = this.eventSource.addEventListener('pulse', () => {
+      this.listeners.pulse = () => {
         // console.log('❤️')
         this.monitor()
+      }
+
+      Object.keys(this.listeners).forEach(key => {
+        this.eventSource.addEventListener(key, this.listeners[key])
       })
     }
   }

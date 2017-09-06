@@ -1535,6 +1535,10 @@ event-source-polyfill@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/event-source-polyfill/-/event-source-polyfill-0.0.9.tgz#18c6205d170ab09db889ffceaa33f0e493f14a50"
 
+eventsourcemock@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eventsourcemock/-/eventsourcemock-1.0.1.tgz#1bcd88f602097c33d4e95f85923bbba7bd847a86"
+
 exec-sh@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.2.0.tgz#14f75de3f20d286ef933099b2ce50a90359cef10"
