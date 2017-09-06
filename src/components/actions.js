@@ -1,15 +1,19 @@
 // const components = require('./components')
 const components = PUBSWEET_COMPONENTS
-const clientComponent = (component) => component.client || component.frontend
 
 module.exports = components
-  .filter(component => clientComponent(component).actions)
-  .map(component => clientComponent(component).actions)
+  .map(component => {
+    // handle old style component export
+    const clientDef = component.client || component.frontend
+    return clientDef && clientDef.actions
+  })
+  // filter out falsy values
+  .filter(Boolean)
   .map(actions => {
     if (typeof actions === 'function') {
       return actions()
     }
 
-    return actions.map(action => action())
+    return actions.reduce((output, actionImporter) => ({...output, ...actionImporter()}), {})
   })
   .reduce((output, actions) => ({...output, ...actions}), {})

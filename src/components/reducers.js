@@ -1,23 +1,23 @@
 // const components = require('./components')
 const components = PUBSWEET_COMPONENTS
-const clientComponent = (component) => component.client || component.frontend
 
 module.exports = components
-  .filter(component => clientComponent(component).reducers)
-  .map(component => clientComponent(component).reducers)
+  .map(component => {
+    // handle old style component export
+    const clientDef = component.client || component.frontend
+    return clientDef && clientDef.reducers
+  })
+  // filter out falsy values
+  .filter(Boolean)
   .map(reducers => {
-    // backwards-compatibility: component exports a function
-    if (typeof reducers === 'function') {
-      const reducer = reducers()
-
-      return {
-        [reducer.default.name]: reducer.default
-      }
-    }
-
-    // backwards-compatibility: component exports an array of functions
-    if (Array.isArray(reducers)) {
-      return reducers.map(reducer => reducer())
+    // backwards-compatibility: component exports a function or an array of functions
+    if (typeof reducers === 'function' || Array.isArray(reducers)) {
+      return [].concat(reducers)
+        .reduce((output, reducerImporter) => {
+          const reducer = reducerImporter().default
+          output[reducer.name] = reducer
+          return output
+        }, {})
     }
 
     // component exports an object where each value is a function
