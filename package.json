@@ -46,6 +46,7 @@
     "eventsourcemock": "^1.0.1",
     "isomorphic-form-data": "^1.0.0",
     "jest": "^20.0.4",
+    "nock": "^9.0.14",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1"
   },
