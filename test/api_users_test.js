@@ -6,20 +6,16 @@ const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 const fixtures = require('./fixtures/fixtures')
 const api = require('./helpers/api')
+const setupBase = require('../src/setup-base')
 
 describe('users api', () => {
   let userId
 
-  beforeEach(async (done) => {
-    try {
-      await cleanDB()
-      const { user } = await require('../src/setup-base').setup(fixtures.user, fixtures.collection)
-      userId = user.id
-      expect(userId).not.toBeNull()
-      done()
-    } catch (e) {
-      done.fail(e)
-    }
+  beforeEach(async () => {
+    await cleanDB()
+    const { user } = await setupBase.setup(fixtures.user, fixtures.collection)
+    userId = user.id
+    expect(userId).not.toBeNull()
   })
 
   afterEach(cleanDB)
@@ -52,7 +48,6 @@ describe('users api', () => {
     })
 
     it('can get another user', () => {
-      console.log('userId', userId)
       return api.users.authenticate.post(
         fixtures.user
       ).then(
@@ -206,21 +201,15 @@ describe('users api', () => {
       )
     })
 
-    it('authenticates an updated user', async (done) => {
-      try {
-        // authenticate
-        const token = await api.users.authenticate.post(fixtures.otherUser)
+    it('authenticates an updated user', async () => {
+      // authenticate
+      const token = await api.users.authenticate.post(fixtures.otherUser)
 
-        // change the username, email and password
-        await api.users.patch(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
+      // change the username, email and password
+      await api.users.patch(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
 
-        // authenticate with the updated details
-        await api.users.authenticate.post(fixtures.updatedUser)
-
-        done()
-      } catch (e) {
-        done.fail(e)
-      }
+      // authenticate with the updated details
+      await api.users.authenticate.post(fixtures.updatedUser)
     })
 
     it('persists an updated user', () => {
@@ -246,24 +235,18 @@ describe('users api', () => {
       )
     })
 
-    it('user can delete itself', async (done) => {
-      try {
-        // authenticate
-        const otherUserToken = await api.users.authenticate.post(fixtures.otherUser)
+    it('user can delete itself', async () => {
+      // authenticate
+      const otherUserToken = await api.users.authenticate.post(fixtures.otherUser)
 
-        // change username, email and password
-        await api.users.patch(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
+      // change username, email and password
+      await api.users.patch(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
 
-        // authenticate with updated details
-        const updatedUserToken = await api.users.authenticate.post(fixtures.updatedUser)
+      // authenticate with updated details
+      const updatedUserToken = await api.users.authenticate.post(fixtures.updatedUser)
 
-        // delete the updated user
-        await api.users.del(otherUser.id, updatedUserToken).expect(STATUS.OK)
-
-        done()
-      } catch (e) {
-        done.fail(e)
-      }
+      // delete the updated user
+      await api.users.del(otherUser.id, updatedUserToken).expect(STATUS.OK)
     })
   })
 
