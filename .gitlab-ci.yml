@@ -10,7 +10,9 @@ before_script:
 test:
   script:
     - npm run test
+  coverage: '/^All files\s+\|\s+(\d+.\d+)\s\|.*$/'
     
 test:vulnerabilities:
   script:
     - npm run vuln-test
+
