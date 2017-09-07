@@ -6,7 +6,7 @@ const winston = require('winston')
 // write to a log file per environment
 let transports = [
   new (winston.transports.File)({
-    filename: path.join(__dirname, '..', 'logs', 'pubsweet_' + process.env.NODE_ENV + '.log')
+    filename: path.join(process.cwd(), 'logs', 'pubsweet_' + process.env.NODE_ENV + '.log')
   })
 ]
 
