@@ -1,4 +1,5 @@
 const get = require('lodash/get')
+const pickBy = require('lodash/pickBy')
 
 async function teamPermissions (user, operation, object, context) {
   const collectionId = get(object, 'params.collectionId')
@@ -30,14 +31,14 @@ function unauthenticatedUser (operation, object) {
   // Public/unauthenticated users can GET /collections, filtered by 'published'
   if (operation === 'GET' && object && object.path === '/collections') {
     return {
-      filter: (collection) => collection.published
+      filter: (collections) => collections.filter(collection => collection.published)
     }
   }
 
   // Public/unauthenticated users can GET /collections/:id/fragments, filtered by 'published'
   if (operation === 'GET' && object && object.path === '/collections/:id/fragments') {
     return {
-      filter: (fragment) => fragment.published
+      filter: (fragments) => fragments.filter(fragment => fragment.published)
     }
   }
 
@@ -45,7 +46,9 @@ function unauthenticatedUser (operation, object) {
   if (operation === 'GET' && object && object.type === 'collection') {
     if (object.published) {
       return {
-        filter: (_, key) => ['id', 'title', 'owners'].includes(key)
+        filter: (collection) => pickBy(collection, (_, key) => {
+          return ['id', 'title', 'owners'].includes(key)
+        })
       }
     }
   }
@@ -53,7 +56,9 @@ function unauthenticatedUser (operation, object) {
   if (operation === 'GET' && object && object.type === 'fragment') {
     if (object.published) {
       return {
-        filter: (_, key) => ['id', 'title', 'source', 'presentation', 'owners'].includes(key)
+        filter: (fragment) => pickBy(fragment, (_, key) => {
+          return ['id', 'title', 'source', 'presentation', 'owners'].includes(key)
+        })
       }
     }
   }
@@ -62,9 +67,13 @@ function unauthenticatedUser (operation, object) {
 }
 
 async function authenticatedUser (user, operation, object, context) {
-  // Allow the authenticated user to POST a collection
-  if (operation === 'POST' && object === '/collections/') {
-    return true
+  // Allow the authenticated user to POST a collection (but not with a 'filtered' property)
+  if (operation === 'POST' && object.path === '/collections') {
+    return {
+      filter: (collection) => pickBy(collection, (_, key) => {
+        return key !== 'filtered'
+      })
+    }
   }
 
   // Allow the authenticated user to GET collections they own
@@ -119,8 +128,17 @@ async function authenticatedUser (user, operation, object, context) {
 
     // Owner user
     if (collection.owners.includes(user.id)) {
-      if (['GET', 'DELETE', 'PATCH'].includes(operation)) {
+      if (['GET', 'DELETE'].includes(operation)) {
         return true
+      }
+
+      // Only allow filtered updating (mirroring filtered creation) for non-admin users)
+      if (operation === 'PATCH') {
+        return {
+          filter: (collection) => pickBy(collection, (_, key) => {
+            return key !== 'filtered'
+          })
+        }
       }
     }
   }

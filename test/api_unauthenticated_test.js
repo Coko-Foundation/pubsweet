@@ -4,6 +4,7 @@ var api = require('./helpers/api')
 const createBasicCollection = require('./helpers/basic_collection')
 const createFragment = require('./helpers/fragment')
 const cleanDB = require('./helpers/db_cleaner')
+const Collection = require('../src/models/Collection')
 
 describe('unauthenticated/public api', () => {
   var fragment
@@ -68,6 +69,35 @@ describe('unauthenticated/public api', () => {
       return api.fragments.get(
         collection, null, fragment.id
       ).expect(STATUS.NOT_FOUND)
+    })
+  })
+
+  describe('collections filtering by object and properties', () => {
+    let publicCollection
+    let privateCollection
+
+    beforeEach(async () => {
+      publicCollection = new Collection({
+        title: 'Public collection',
+        published: true,
+        nonPublicProperty: 'example'
+      })
+      publicCollection = await publicCollection.save()
+
+      privateCollection = new Collection({
+        title: 'Private collection'
+      })
+      privateCollection = await privateCollection.save()
+    })
+
+    it('can only see the filtered list of collections and only filtered properties in each collection', () => {
+      return api.collections.list().expect(STATUS.OK).then(
+        res => {
+          const collections = res.body
+          expect(collections.length).toEqual(1)
+          expect(Object.keys(collections[0])).toEqual(['id', 'title', 'owners'])
+        }
+      )
     })
   })
 })

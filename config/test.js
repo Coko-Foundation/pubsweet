@@ -14,7 +14,9 @@ module.exports = {
       published: Joi.boolean()
     },
     collection: {
-      published: Joi.boolean()
+      published: Joi.boolean(),
+      nonPublicProperty: Joi.string(),
+      filtered: Joi.string()
     }
   },
   authsome: {

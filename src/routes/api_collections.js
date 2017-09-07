@@ -2,8 +2,6 @@
 const config = require('config')
 
 const STATUS = require('http-status-codes')
-const pickBy = require('lodash/pickBy')
-const get = require('lodash/get')
 
 const User = require('../models/User')
 const Collection = require('../models/Collection')
@@ -29,25 +27,25 @@ api.use('/collections/:collectionId/', teams)
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
   try {
-    const permission = authsome.can(req.user, req.method, req.path)
+    const permission = await authsome.can(req.user, req.method, req.route)
 
     if (!permission) {
-      throw authorizationError(req.user, req.method, req.path)
+      throw authorizationError(req.user, req.method, req.route)
     }
 
     let collections = await Collection.all()
 
     // Filtering objects, e.g. only show collections that have .published === true
     if (permission.filter) {
-      collections = collections.filter(permission.filter)
+      collections = permission.filter(collections)
     }
 
     collections = await Promise.all(collections.map(async collection => {
       let permission = await authsome.can(req.user, req.method, collection)
 
-      if (get(permission, 'filter')) {
+      if (permission.filter) {
         // Filtering properties, e.g. only show the title and id properties
-        return pickBy(collection, permission.filter)
+        return permission.filter(collection)
       } else {
         return collection
       }
@@ -63,17 +61,17 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
 // Create a collection
 api.post('/collections', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, req.path)
+    const permission = await authsome.can(req.user, req.method, req.route)
 
     if (!permission) {
-      throw authorizationError(req.user, req.method, req.path)
+      throw authorizationError(req.user, req.method, req.route)
+    }
+
+    if (permission.filter) {
+      req.body = permission.filter(req.body)
     }
 
     let collection = new Collection(req.body)
-
-    if (permission.filter) {
-      collection = pickBy(collection, permission.filter)
-    }
 
     collection.created = Date.now()
     collection.setOwners([req.user])
@@ -98,7 +96,7 @@ api.get('/collections/:id', authBearerAndPublic, async (req, res, next) => {
     }
 
     if (permission.filter) {
-      collection = pickBy(collection, permission.filter)
+      collection = permission.filter(collection)
     }
     return res.status(STATUS.OK).json(collection)
   } catch (err) {
@@ -118,7 +116,7 @@ api.patch('/collections/:id', authBearer, async (req, res, next) => {
     }
 
     if (permission.filter) {
-      update = pickBy(req.body, permission.filter)
+      update = permission.filter(update)
     }
 
     collection.updateProperties(update)
@@ -166,7 +164,7 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
     }
 
     if (permission.filter) {
-      req.body = pickBy(req.body, permission.filter)
+      req.body = permission.filter(req.body)
     }
 
     let fragment = new Fragment(req.body)
@@ -174,14 +172,12 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
     fragment.setOwners([req.user])
     fragment = await fragment.save()
 
-    console.log(fragment)
-
     collection.addFragment(fragment)
     collection = await collection.save()
 
     // How to address this?
     fragment = await User.ownersWithUsername(fragment)
-    console.log(fragment)
+
     res.status(STATUS.CREATED).json(fragment)
     sse.send({ action: 'fragment:create', data: { collection: objectId(collection), fragment } })
   } catch (err) {
@@ -200,7 +196,7 @@ api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next
       return authsome.can(req.user, req.method, fragment).then(permission => {
         // Filter fragments' properties
         if (permission.filter) {
-          return pickBy(fragment, permission.filter)
+          return permission.filter(fragment)
         } else if (permission) {
           return fragment
         }
@@ -231,7 +227,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic,
 
     return Fragment.find(req.params.fragmentId).then(fragment => {
       if (permission.filter) {
-        fragment = pickBy(fragment, permission.filter)
+        fragment = permission.filter(fragment)
       }
       return res.status(STATUS.OK).json(fragment)
     })
@@ -257,7 +253,7 @@ api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async 
     }
 
     if (permission.filter) {
-      req.body = pickBy(req.body, permission.filter)
+      req.body = permission.filter(req.body)
     }
 
     fragment.updateProperties(req.body)
