@@ -65,9 +65,7 @@ const initialGitCommit = async () => {
     'add',
     '-f', // force add as they're ignored in .gitignore
     'api/db/dev/.gitkeep',
-    'api/db/production/.gitkeep',
-    'logs/dev/.gitkeep',
-    'logs/production/.gitkeep'
+    'api/db/production/.gitkeep'
   ])
 
   await git.commit('Initial app commit')

@@ -39,17 +39,11 @@ const collect = (val, memo) => {
 
 const start = async (appPath, cmd) => {
   const env = process.env.NODE_ENV
-  const logPath = type => path.join(
-    appPath, 'logs', env, type + '.log'
-  )
 
   const child = forever.start(cmd, {
     silent: false,
     watch: false,
     max: 10,
-    logFile: logPath('forever'),
-    outFile: logPath('stdout'),
-    errFile: logPath('stderr'),
     cwd: appPath,
     env: {
       NODE_ENV: env,
@@ -62,7 +56,6 @@ const start = async (appPath, cmd) => {
     logger.info(`App ${appPath} started.`)
     logger.info('The app will be kept running, even if errors occur, until you stop it.')
     logger.info('To stop the app use ctrl-C')
-    logger.info(`Logs will be written to ${appPath}/logs/${env}/{stdout, stderr}.log`)
   })
 
   child.on('stop', proc => {
