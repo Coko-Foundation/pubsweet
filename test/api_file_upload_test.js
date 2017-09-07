@@ -22,10 +22,9 @@ const authenticateUser = () => {
 }
 
 describe('File upload/download', () => {
-  beforeEach(async (done) => {
+  beforeEach(async () => {
     await cleanDB()
     await new User(fixtures.user).save()
-    done()
   })
 
   it('should upload a file and preserve the extension and serve the file (if authenticated)', async () => {

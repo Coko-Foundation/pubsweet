@@ -1,21 +1,29 @@
-global.SSE = true
-
 const STATUS = require('http-status-codes')
 const EventSource = require('eventsource')
+const config = require('config')
+
+// override config for test
+config['pubsweet-server'].sse = true
 
 const User = require('../src/models/User')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
+const api = require('./helpers/api')
+
+const port = 30645
+
 describe('API SSE enabled', () => {
   let es
   let server
 
-  beforeEach(() => {
-    return cleanDB().then(
-      () => { return new User(fixtures.adminUser).save() }
-    )
+  beforeEach(async () => {
+    await cleanDB()
+    await new User(fixtures.adminUser).save()
+    await new Promise((resolve, reject) => {
+      server = api.api.listen(port, err => err ? reject(err) : resolve())
+    })
   })
 
   afterEach(() => {
@@ -23,34 +31,25 @@ describe('API SSE enabled', () => {
     if (server) server.close()
   })
 
-  it('should send an event if configured', (done) => {
-    // create a collection
+  it('should send an event if configured', async () => {
+    const token = await api.users.authenticate.post(fixtures.adminUser)
+    es = new EventSource(`http://localhost:${port}/updates?access_token=${encodeURIComponent(token)}`)
 
-    let api = require('./helpers/api')
+    // wrap event listener in promise
+    const eventPromise = new Promise(resolve => es.addEventListener('message', resolve))
 
-    let test = async () => {
-      let token = await api.users.authenticate.post(fixtures.adminUser)
-      es = new EventSource('http://localhost:3000/updates?access_token=' + encodeURIComponent(token))
+    // perform action
+    await api.collections.create(fixtures.collection, token)
+      .expect(STATUS.CREATED)
 
-      let mockMessage = jest.fn()
-
-      es.addEventListener('message', event => {
-        mockMessage()
-        done()
-      })
-
-      const collection = await api.collections.create(fixtures.collection, token)
-        .expect(STATUS.CREATED)
-        .then(res => res.body)
-
-      expect(mockMessage).toHaveBeenCalled()
-      expect(collection.type).toEqual(fixtures.collection.type)
-    }
-
-    server = api.api.listen(3000, () => {
-      test()
+    // await event
+    const event = await eventPromise
+    const eventData = JSON.parse(event.data)
+    expect(eventData).toMatchObject({
+      action: 'collection:create',
+      data: {
+        collection: fixtures.collection
+      }
     })
   })
 })
-
-global.SSE = false

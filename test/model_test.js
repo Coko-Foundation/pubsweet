@@ -95,13 +95,8 @@ describe('Model', function () {
     })
   })
 
-  it('can save the same object multiple times', async (done) => {
-    try {
-      // save the user 100 times
-      await Promise.all(range(100).map(() => user.save()))
-      done()
-    } catch (e) {
-      done.fail(e)
-    }
+  it('can save the same object multiple times', async () => {
+    // save the user 100 times
+    await Promise.all(range(100).map(() => user.save()))
   })
 })
