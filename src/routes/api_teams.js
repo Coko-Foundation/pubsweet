@@ -2,7 +2,6 @@
 const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
-const pickBy = require('lodash/pickBy')
 
 const config = require('config')
 const Authsome = require('authsome')
@@ -42,7 +41,7 @@ api.post('/teams', authBearer, async (req, res, next) => {
     }
 
     if (permission.filter) {
-      req.body = pickBy(req.body, permission.filter)
+      req.body = permission.filter(req.body)
     }
 
     let team = new Team(req.body)
@@ -64,7 +63,7 @@ api.get('/teams/:teamId', authBearer, async (req, res, next) => {
     }
 
     if (permission.filter) {
-      team = pickBy(team, permission.filter)
+      team = permission.filter(team)
     }
 
     res.status(STATUS.CREATED).json(team)

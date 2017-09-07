@@ -3,7 +3,6 @@
 const STATUS = require('http-status-codes')
 const passport = require('passport')
 const express = require('express')
-const pickBy = require('lodash/pickBy')
 
 const User = require('../models/User')
 
@@ -123,7 +122,7 @@ api.patch('/:id', authBearer, async (req, res, next) => {
     }
 
     if (permission.filter) {
-      req.body = pickBy(req.body, permission.filter)
+      req.body = permission.filter(req.body)
     }
 
     user = await user.updateProperties(req.body)
