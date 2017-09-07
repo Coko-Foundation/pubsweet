@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-const API_ENDPOINT = CONFIG['pubsweet-server'].API_ENDPOINT
+import endpoint from './endpoint'
 
 // read the authentication token from LocalStorage
 import getToken from './token'
@@ -24,7 +24,7 @@ const request = (url, options = {}) => {
   }
 
   if (!url.match(/^https?:/)) {
-    url = API_ENDPOINT + url
+    url = endpoint + url
   }
 
   return fetch(url, options).then(response => {
