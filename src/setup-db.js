@@ -1,7 +1,7 @@
 process.env.PUBSWEET_BACKEND_SILENT = true
 
 const colors = require('colors/safe')
-const logger = require('./logger')
+const logger = require('@pubsweet/logger')
 
 const runPrompt = async ({ override, properties }) => {
   const prompt = require('prompt')

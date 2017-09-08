@@ -9,7 +9,7 @@ const express = require('express')
 const webpack = require('webpack')
 const pubsweet = require('pubsweet-server')
 
-const logger = require('./logger')
+const logger = require('@pubsweet/logger')
 const onError = require('./error-exit')
 
 const config = require(path.join(process.cwd(), `config/${process.env.NODE_ENV}`))

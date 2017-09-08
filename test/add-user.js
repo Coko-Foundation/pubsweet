@@ -7,7 +7,7 @@ require('app-module-path').addPath(path.join(__dirname, '..', '..'))
 
 const fs = require('fs-extra')
 const workingdir = require('./helpers/working-dir')
-const logger = require('../src/logger')
+const logger = require('@pubsweet/logger')
 
 const appname = 'testapp'
 

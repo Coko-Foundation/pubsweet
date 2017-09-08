@@ -1,6 +1,6 @@
 var PouchDB = require('pouchdb')
 var express = require('express')
-var logger = require('../../src/logger')
+const logger = require('@pubsweet/logger')
 
 module.exports = () => new Promise((resolve, reject) => {
   logger.info('Starting pouchdb server')

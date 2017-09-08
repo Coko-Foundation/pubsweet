@@ -1,6 +1,6 @@
 // TODO: unused?
 
-const logger = require('../../src/logger')
+const logger = require('@pubsweet/logger')
 
 process.stdin.resume()
 
