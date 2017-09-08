@@ -1,10 +1,10 @@
 {
-  "name": "pubsweet-logger",
+  "name": "@pubsweet/logger",
   "version": "0.0.1",
   "description": "A module encapsulating standard logging features for pubsweet components and services.",
   "main": "src/index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --runInBand --no-cache",
+    "test": "jest",
     "lint": "eslint src test",
     "vuln-test": "nsp check --output checkstyle"
   },
