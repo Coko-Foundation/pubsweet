@@ -2,27 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Navigation from 'app/components/Navigation/Navigation'
 
-class Manage extends React.Component {
-  render () {
-    const { children, currentUser, actions } = this.props
-    return (
+function Manage ({ children, currentUser, actions, nav }) {
+  return (
       <div>
         <div className="bootstrap">
-          <Navigation
-            currentUser={currentUser}
-            actions={actions}
-            />
+          {
+            nav || <Navigation currentUser={currentUser} actions={actions}/>
+          }
         </div>
         {children}
       </div>
-    )
-  }
+  )
 }
 
 Manage.propTypes = {
-  currentUser: PropTypes.object,
+  nav: PropTypes.node,
   children: PropTypes.node,
-  actions: PropTypes.object.isRequired
+  currentUser: PropTypes.object,
+  actions: PropTypes.object
 }
 
 export default Manage
