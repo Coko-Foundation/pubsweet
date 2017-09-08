@@ -4,7 +4,7 @@ const diff = require('lodash/difference')
 const pullAll = require('lodash/pullAll')
 const spawn = require('child_process').spawn
 
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 // this regex matches all URL patterns and shortcuts accepted by npm
 // https://regex101.com/r/LWuC1E/1

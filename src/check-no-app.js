@@ -1,5 +1,5 @@
 const fs = require('fs-extra')
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 module.exports = async ({ appPath, override = {} }) => {
   logger.info('Checking that', appPath, 'does not exist')

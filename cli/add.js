@@ -1,4 +1,4 @@
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
 

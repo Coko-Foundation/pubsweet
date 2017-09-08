@@ -1,4 +1,4 @@
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 module.exports = async appPath => {
   // skip this during tests, as we use an in-memory DB

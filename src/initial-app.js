@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const Git = require('git-wrapper2-promise')
 const spawn = require('child-process-promise').spawn
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 const copyInitialApp = async () => {
   logger.info('Generating app structure')

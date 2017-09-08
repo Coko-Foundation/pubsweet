@@ -21,6 +21,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/logger": "^0.0.1",
     "app-module-path": "^2.2.0",
     "authsome": "0.0.4",
     "child-process-promise": "^2.2.1",
@@ -38,7 +39,6 @@
     "pouchdb": "^6.2.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
     "pubsweet-server": "^1.0.0-alpha.2",
-    "pubsweet-logger": "git+https://gitlab.coko.foundation/yld/pubsweet-logger.git",
     "temp": "^0.8.3",
     "tmp": "0.0.29",
     "uuid": "^3.0.1",

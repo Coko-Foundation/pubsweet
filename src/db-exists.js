@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const httpdb = require('./http-db')
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 module.exports = async dbPath => {
   let exists

@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const crypto = require('crypto')
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 const envDir = process.cwd() // TODO: require this from a module?
 

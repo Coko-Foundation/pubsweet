@@ -1,5 +1,5 @@
 const path = require('path')
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 module.exports = async opts => {
   await require('./check-no-app')(opts)
