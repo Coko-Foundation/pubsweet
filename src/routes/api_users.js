@@ -116,7 +116,7 @@ api.patch('/:id', authBearer, async (req, res, next) => {
     }
 
     // TODO: Move this to the authorization mode
-    const authenticatedUser = User.find(req.user)
+    const authenticatedUser = await User.find(req.user)
     if (req.body.admin && !authenticatedUser.admin) {
       throw new AuthorizationError('only admins can set other admins')
     }

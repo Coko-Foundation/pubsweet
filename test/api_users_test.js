@@ -59,6 +59,22 @@ describe('users api', () => {
       )
     })
 
+    it('can make another user an admin', () => {
+      const patchedUser = Object.assign(
+        { id: otherUser.id, admin: true }, fixtures.otherUser
+      )
+
+      return api.users.authenticate.post(
+        fixtures.user
+      ).then(
+        token => api.users.patch(
+          otherUser.id, patchedUser, token
+        ).expect(
+          STATUS.OK
+        )
+      )
+    })
+
     it('deletes a user', () => {
       return api.users.authenticate.post(
         fixtures.user
