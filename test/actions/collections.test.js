@@ -8,10 +8,8 @@ describe('Collection actions', () => {
   describeAction('getCollections', {
     types: {
       request: T.GET_COLLECTIONS_REQUEST,
-      success: T.GET_COLLECTIONS_SUCCESS
-      // TODO: there's no failure mode right now because collections
-      // can be listed without login - when we add more failure
-      // modes than auth fail we should enable failure here
+      success: T.GET_COLLECTIONS_SUCCESS,
+      failure: T.GET_COLLECTIONS_FAILURE
     },
     properties: {
       request: ['type'],
@@ -67,7 +65,8 @@ describe('Collection actions', () => {
     firstarg: newcol,
     types: {
       request: T.GET_COLLECTION_REQUEST,
-      success: T.GET_COLLECTION_SUCCESS
+      success: T.GET_COLLECTION_SUCCESS,
+      failure: T.GET_COLLECTION_FAILURE
     },
     properties: {
       request: ['type', 'collection'],

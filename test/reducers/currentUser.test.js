@@ -51,4 +51,12 @@ describe('currentUser reducers', () => {
       user: null
     })
   })
+
+  it('returns same state for unrecognised action', () => {
+    const state = {}
+    const actual = reducer(state, {
+      type: 'something else'
+    })
+    expect(actual).toBe(state)
+  })
 })

@@ -58,7 +58,7 @@ export default function (state = [], action) {
   function updateCollection () {
     const index = getCollectionIndex()
 
-    collections[index] = Object.assign(collections[index], action.update)
+    collections[index] = {...collections[index], ...action.update}
 
     return collections
   }

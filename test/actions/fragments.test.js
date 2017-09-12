@@ -27,7 +27,8 @@ describe('fragments actions', () => {
     },
     types: {
       request: T.GET_FRAGMENTS_REQUEST,
-      success: T.GET_FRAGMENTS_SUCCESS
+      success: T.GET_FRAGMENTS_SUCCESS,
+      failure: T.GET_FRAGMENTS_FAILURE
     },
     properties: {
       success: ['fragments']
