@@ -13,7 +13,5 @@ module.exports = components
     if (typeof actions === 'function') {
       return actions()
     }
-
-    return actions.reduce((output, actionImporter) => ({...output, ...actionImporter()}), {})
   })
   .reduce((output, actions) => ({...output, ...actions}), {})

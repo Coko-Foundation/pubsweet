@@ -10,14 +10,11 @@ module.exports = components
   // filter out falsy values
   .filter(Boolean)
   .map(reducers => {
-    // backwards-compatibility: component exports a function or an array of functions
-    if (typeof reducers === 'function' || Array.isArray(reducers)) {
-      return [].concat(reducers)
-        .reduce((output, reducerImporter) => {
-          const reducer = reducerImporter().default
-          output[reducer.name] = reducer
-          return output
-        }, {})
+    if (typeof reducers === 'function') {
+      const reducer = reducers()
+      return {
+        [reducer.default.name]: reducer.default
+      }
     }
 
     // component exports an object where each value is a function
