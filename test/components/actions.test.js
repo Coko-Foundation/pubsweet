@@ -10,7 +10,7 @@ describe('component actions combiner', () => {
       },
       {
         frontend: {
-          actions: [() => ({squirrelEat: 'nuts'})]
+          actions: () => ({squirrelEat: 'nuts'})
         }
       },
       {
