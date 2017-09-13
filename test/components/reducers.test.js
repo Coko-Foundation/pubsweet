@@ -10,7 +10,7 @@ describe('component actions combiner', () => {
       },
       {
         frontend: {
-          reducers: [() => ({default: {name: 'handleDogs'}})]
+          reducers: () => ({default: {name: 'handleDogs'}})
         }
       },
       {
