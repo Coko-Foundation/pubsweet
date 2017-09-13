@@ -6,7 +6,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-class Authorize extends React.Component {
+export class Authorize extends React.Component {
   constructor (props) {
     super(props)
 
@@ -23,8 +23,8 @@ class Authorize extends React.Component {
     // /TODO
 
     this.authsome = new Authsome(
-      CONFIG.authsome.mode,
-      { teams: CONFIG.authsome.teams }
+      props.authsome.mode,
+      { teams: props.authsome.teams }
     )
   }
 
@@ -51,10 +51,11 @@ Authorize.propTypes = {
   currentUser: PropTypes.object,
   operation: PropTypes.string,
   object: PropTypes.object,
-  teams: PropTypes.array,
-  collections: PropTypes.array,
-  fragments: PropTypes.object,
-  children: PropTypes.node
+  children: PropTypes.node,
+  authsome: PropTypes.shape({
+    mode: PropTypes.func.isRequired,
+    teams: PropTypes.object
+  }).isRequired
 }
 
 function mapState (state) {
@@ -62,7 +63,9 @@ function mapState (state) {
     teams: state.teams,
     collections: state.collections,
     fragments: state.fragments,
-    currentUser: state.currentUser.user
+    currentUser: state.currentUser.user,
+    // TODO fix this
+    authsome: CONFIG.authsome
   }
 }
 

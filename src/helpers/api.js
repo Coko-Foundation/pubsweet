@@ -6,7 +6,7 @@ import endpoint from './endpoint'
 import getToken from './token'
 
 const parse = response => {
-  if (response.headers.get('content-type').indexOf('application/json') !== -1) {
+  if (response.headers.get('content-type').includes('application/json')) {
     return response.json()
   }
 
@@ -29,9 +29,13 @@ const request = (url, options = {}) => {
 
   return fetch(url, options).then(response => {
     if (!response.ok) {
-      const error = new Error(response.statusText || response.status)
-      error.response = response.text() // NOTE: this is a promise
-      throw error
+      return response.text()
+        .then(errorText => {
+          const error = new Error(response.statusText || response.status)
+          error.response = errorText
+          error.statusCode = response.status
+          throw error
+        })
     }
 
     return options.parse === false ? response : parse(response)
@@ -68,7 +72,7 @@ export const update = (url, data, replace = false) => request(url, {
   body: JSON.stringify(data)
 })
 
-export const remove = (url, data) => request(url, {
+export const remove = (url) => request(url, {
   method: 'DELETE'
 })
 
