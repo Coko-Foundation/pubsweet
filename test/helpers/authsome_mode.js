@@ -1,5 +1,6 @@
 const get = require('lodash/get')
 const pickBy = require('lodash/pickBy')
+const omit = require('lodash/omit')
 
 async function teamPermissions (user, operation, object, context) {
   const collectionId = get(object, 'params.collectionId')
@@ -70,9 +71,7 @@ async function authenticatedUser (user, operation, object, context) {
   // Allow the authenticated user to POST a collection (but not with a 'filtered' property)
   if (operation === 'POST' && object.path === '/collections') {
     return {
-      filter: (collection) => pickBy(collection, (_, key) => {
-        return key !== 'filtered'
-      })
+      filter: (collection) => omit(collection, 'filtered')
     }
   }
 
@@ -135,9 +134,7 @@ async function authenticatedUser (user, operation, object, context) {
       // Only allow filtered updating (mirroring filtered creation) for non-admin users)
       if (operation === 'PATCH') {
         return {
-          filter: (collection) => pickBy(collection, (_, key) => {
-            return key !== 'filtered'
-          })
+          filter: (collection) => omit(collection, 'filtered')
         }
       }
     }
