@@ -5,13 +5,15 @@ module.exports = components
   .map(component => {
     // handle old style component export
     const clientDef = component.client || component.frontend
-    return clientDef && clientDef.actions
+    const actions = clientDef && clientDef.actions
+
+    if (actions && typeof actions === 'function') {
+      return actions
+    } else if (actions) {
+      throw new Error('Component\'s actions are not exported as a function')
+    }
   })
   // filter out falsy values
   .filter(Boolean)
-  .map(actions => {
-    if (typeof actions === 'function') {
-      return actions()
-    }
-  })
+  .map(actions => actions())
   .reduce((output, actions) => ({...output, ...actions}), {})
