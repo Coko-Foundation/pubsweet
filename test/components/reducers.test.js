@@ -31,4 +31,17 @@ describe('component actions combiner', () => {
       {handleDoors: 'I am reducer'}
     ])
   })
+
+  it('throws if reducers exported incorrectly', () => {
+    global.PUBSWEET_COMPONENTS = [
+      {
+        client: {
+          reducers: [() => 'wrong', () => 'export']
+        }
+      }
+    ]
+    expect(() => {
+      require('../../src/components/reducers')
+    }).toThrow()
+  })
 })

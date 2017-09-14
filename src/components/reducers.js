@@ -1,4 +1,5 @@
 // const components = require('./components')
+const isPlainObject = require('lodash/isPlainObject')
 const components = PUBSWEET_COMPONENTS
 
 module.exports = components
@@ -15,11 +16,13 @@ module.exports = components
       return {
         [reducer.default.name]: reducer.default
       }
+    } else if (isPlainObject(reducers)) {
+      // component exports an object where each value is a function
+      return Object.keys(reducers).reduce((output, key) => {
+        output[key] = reducers[key]()
+        return output
+      }, {})
     }
 
-    // component exports an object where each value is a function
-    return Object.keys(reducers).reduce((output, key) => {
-      output[key] = reducers[key]()
-      return output
-    }, {})
+    throw new Error('Component\'s reducers are exported incorrectly')
   })
