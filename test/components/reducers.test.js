@@ -10,7 +10,7 @@ describe('component actions combiner', () => {
       },
       {
         frontend: {
-          reducers: [() => ({default: {name: 'handleDogs'}})]
+          reducers: () => ({default: {name: 'handleDogs'}})
         }
       },
       {
@@ -30,5 +30,18 @@ describe('component actions combiner', () => {
       {handleDogs: {name: 'handleDogs'}},
       {handleDoors: 'I am reducer'}
     ])
+  })
+
+  it('throws if reducers exported incorrectly', () => {
+    global.PUBSWEET_COMPONENTS = [
+      {
+        client: {
+          reducers: [() => 'wrong', () => 'export']
+        }
+      }
+    ]
+    expect(() => {
+      require('../../src/components/reducers')
+    }).toThrow()
   })
 })
