@@ -18,7 +18,7 @@ export default function (state = [], action) {
   function updateOne () {
     const index = findIndex(teams, { id: action.team.id })
     if (index !== -1) {
-      teams[index] = assign(teams[index], action.team)
+      teams[index] = assign({}, teams[index], action.team)
     } else {
       teams.push(action.team)
     }

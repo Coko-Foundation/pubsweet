@@ -40,7 +40,7 @@ export default function (state = {}, action) {
     const oldfragment = fragments[action.fragment.id] || {}
     const update = action.update || action.fragment
 
-    fragments[action.fragment.id] = assign(oldfragment, update)
+    fragments[action.fragment.id] = assign({}, oldfragment, update)
 
     return fragments
   }
