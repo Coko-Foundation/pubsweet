@@ -16,7 +16,6 @@ import {
 import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 import clone from 'lodash/clone'
-import assign from 'lodash/assign'
 import unset from 'lodash/unset'
 
 export default function (state = {}, action) {
@@ -40,7 +39,7 @@ export default function (state = {}, action) {
     const oldfragment = fragments[action.fragment.id] || {}
     const update = action.update || action.fragment
 
-    fragments[action.fragment.id] = assign({}, oldfragment, update)
+    fragments[action.fragment.id] = {...oldfragment, ...update}
 
     return fragments
   }
