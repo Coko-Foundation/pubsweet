@@ -1,17 +1,15 @@
 import fetch from 'isomorphic-fetch'
-import config from 'config'
-
-const API_ENDPOINT = config['pubsweet-server'].API_ENDPOINT
+import endpoint from './endpoint'
 
 // read the authentication token from LocalStorage
 import getToken from './token'
 
 const parse = response => {
-  if (response.headers.get('content-type').indexOf('application/json') !== -1) {
+  if (response.headers.get('content-type').includes('application/json')) {
     return response.json()
   }
 
-  return response
+  return response.text()
 }
 
 const request = (url, options = {}) => {
@@ -25,14 +23,18 @@ const request = (url, options = {}) => {
   }
 
   if (!url.match(/^https?:/)) {
-    url = API_ENDPOINT + url
+    url = endpoint + url
   }
 
   return fetch(url, options).then(response => {
     if (!response.ok) {
-      const error = new Error(response.statusText || response.status)
-      error.response = response.text() // NOTE: this is a promise
-      throw error
+      return response.text()
+        .then(errorText => {
+          const error = new Error(response.statusText || response.status)
+          error.response = errorText
+          error.statusCode = response.status
+          throw error
+        })
     }
 
     return options.parse === false ? response : parse(response)
@@ -69,7 +71,7 @@ export const update = (url, data, replace = false) => request(url, {
   body: JSON.stringify(data)
 })
 
-export const remove = (url, data) => request(url, {
+export const remove = (url) => request(url, {
   method: 'DELETE'
 })
 

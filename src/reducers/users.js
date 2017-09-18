@@ -16,7 +16,7 @@ const updatedUsers = (users, data) => {
   if (index === -1) {
     users.push(data)
   } else {
-    users[index] = Object.assign(users[index], data)
+    users[index] = {...users[index], ...data}
   }
 
   return users
@@ -29,32 +29,37 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case GET_USERS_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
 
     case GET_USERS_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         users: action.users
-      })
+      }
 
     case GET_USER_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         users: updatedUsers(state.users, action.user)
-      })
+      }
 
     case UPDATE_USER_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
 
     case UPDATE_USER_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         users: updatedUsers(state.users, action.user)
-      })
+      }
 
     case LOGOUT_SUCCESS:
       return {

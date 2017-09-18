@@ -1,15 +1,19 @@
 // const components = require('./components')
 const components = PUBSWEET_COMPONENTS
-const clientComponent = (component) => component.client || component.frontend
 
 module.exports = components
-  .filter(component => clientComponent(component).actions)
-  .map(component => clientComponent(component).actions)
-  .map(actions => {
-    if (typeof actions === 'function') {
-      return actions()
-    }
+  .map(component => {
+    // handle old style component export
+    const clientDef = component.client || component.frontend
+    const actions = clientDef && clientDef.actions
 
-    return actions.map(action => action())
+    if (actions && typeof actions === 'function') {
+      return actions
+    } else if (actions) {
+      throw new Error('Component\'s actions are not exported as a function')
+    }
   })
+  // filter out falsy values
+  .filter(Boolean)
+  .map(actions => actions())
   .reduce((output, actions) => ({...output, ...actions}), {})

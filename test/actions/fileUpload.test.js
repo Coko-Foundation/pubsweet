@@ -1,6 +1,3 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-process.env.NODE_ENV = 'production'
-process.env.SILENT_NPM = 'true'
 global.PUBSWEET_COMPONENTS = []
 
 require('isomorphic-form-data')
@@ -14,11 +11,11 @@ global.FormData.prototype.append = function (field, value, options) {
 }
 
 const fs = require('fs')
-const actions = require.requireActual('../../src/actions/fileUpload')
-const describeAction = require.requireActual('../helpers/describeAction')(actions)
+const actions = require('../../src/actions/fileUpload')
+const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
-module.exports = app => {
+describe('fileUpload actions', () => {
   describeAction('fileUpload', {
     firstarg: './test/helpers/mockapp.js',
     types: {
@@ -30,12 +27,6 @@ module.exports = app => {
       request: ['isFetching'],
       success: ['isFetching', 'file'],
       failure: ['isFetching', 'error']
-    },
-    user: app.user
-  }, (action, data) => {
-    if (data[T.FILE_UPLOAD_FAILURE]) {
-      console.log('ERROR:', data[T.FILE_UPLOAD_FAILURE].error)
     }
-    // optional: more functionality tests here
   })
-}
+})

@@ -1,8 +1,6 @@
-const expect = require.requireActual('chai').expect
-
-const defaults = require.requireActual('lodash/defaults')
-const allactions = require.requireActual('../../src/actions').default
-const auth = require.requireActual('./auth')
+const defaults = require('lodash/defaults')
+const allactions = require('../../src/actions').default
+const api = require('../../src/helpers/api')
 
 const empty = {}
 const mockDispatch = () => {}
@@ -12,7 +10,29 @@ const mockGetState = () => {
   }
 }
 
-const get = arg => typeof arg === 'function' ? arg() : arg
+function mockApi (succeed = true) {
+  Object.keys(api).forEach(method => {
+    jest.spyOn(api, method).mockImplementation(() => succeed ? Promise.resolve({}) : Promise.reject({}))
+  })
+}
+
+function unMockApi () {
+  Object.keys(api).forEach(method => {
+    api[method].mockRestore()
+  })
+}
+
+// custom Jest matcher
+expect.extend({
+  toHaveProperties (object, expectedKeys) {
+    const actualKeys = Object.keys(object)
+    const pass = expectedKeys.every(key => actualKeys.includes(key))
+    return {
+      message: `Expected object ${pass ? 'not to' : 'to'} have properties: ${expectedKeys.join(', ')}`,
+      pass
+    }
+  }
+})
 
 const describeAction = actions => (key, opts, cb) => {
   if (typeof opts === 'function') {
@@ -24,8 +44,7 @@ const describeAction = actions => (key, opts, cb) => {
     firstarg: empty,
     secondarg: empty,
     types: {},
-    properties: {},
-    user: require.requireActual('pubsweet/test/fixtures').adminUser
+    properties: {}
   })
 
   describe(key, () => {
@@ -34,34 +53,38 @@ const describeAction = actions => (key, opts, cb) => {
 
     if (cb) afterAll(() => cb(action, data))
 
+    beforeEach(mockApi)
+
+    afterEach(unMockApi)
+
     // functional tests - no server required
     it('is exported from the file', () => {
-      expect(actions).to.have.property(key)
+      expect(actions).toHaveProperty(key)
     })
 
     it('is exported in the all actions object', () => {
-      expect(allactions).to.have.property(key)
+      expect(allactions).toHaveProperty(key)
     })
 
     action = actions[key]
 
     it('returns a fetcher function', () => {
       const returned = action(mockDispatch, mockGetState)
-      expect(returned).to.be.a('function')
+      expect(typeof returned).toBe('function')
     })
 
     it('returns a promise from the fetcher function', () => {
-      const fetcher = action(get(opts.firstarg), get(opts.secondarg))
+      const fetcher = action(opts.firstarg, opts.secondarg)
       const returned = fetcher(mockDispatch, mockGetState)
-      expect(returned).to.be.a('promise')
+      expect(typeof returned.then).toBe('function')
     })
 
     it('dispatches a typed fragment', () => {
-      const fetcher = action(get(opts.firstarg), get(opts.secondarg))
+      const fetcher = action(opts.firstarg, opts.secondarg)
       let frag
       fetcher(fragment => { frag = fragment }, mockGetState)
-      expect(frag).to.exist
-      expect(frag).to.include.keys('type')
+      expect(frag).toBeDefined()
+      expect(frag).toHaveProperty('type')
     })
 
     // real interaction with server
@@ -77,19 +100,18 @@ const describeAction = actions => (key, opts, cb) => {
           if (!dispatched) dispatched = typedmsg
         }
 
-        action(get(opts.firstarg), get(opts.secondarg))(
-          dispatch, mockGetState
-        )
+        let fetcher = action(opts.firstarg, opts.secondarg)
+        fetcher(dispatch, mockGetState)
 
-        expect(dispatched).to.be.ok
+        expect(dispatched).toBeTruthy()
         expect(
           dispatched.type
-        ).to.equal(
+        ).toBe(
           opts.types.request,
           `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
         )
         if (properties) {
-          expect(Object.keys(dispatched)).to.include.members(properties)
+          expect(dispatched).toHaveProperties(properties)
         }
 
         data[opts.types.request] = dispatched
@@ -102,29 +124,22 @@ const describeAction = actions => (key, opts, cb) => {
         ? `with [${properties.join(', ')}] `
         : ''
 
-      it(`dispatches ${key}Success ${propmsg}on successful response`, () => {
-        return auth.login(get(opts.user)).then(
-          user => action(get(opts.firstarg), get(opts.secondarg))(
-            typedmsg => new Promise(
-              (resolve, reject) => resolve(typedmsg)
-            ),
-            mockGetState
-          )
-        ).then(
-          dispatched => {
-            expect(dispatched).to.be.ok
-            expect(
-              dispatched.type
-            ).to.equal(
-              opts.types.success,
-              `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
-            )
-            if (properties) {
-              expect(Object.keys(dispatched)).to.include.members(properties)
-            }
-            data[opts.types.success] = dispatched
-          }
-        ).then(auth.logout)
+      it(`dispatches ${key}Success ${propmsg}on successful response`, async () => {
+        let fetcher = action(opts.firstarg, opts.secondarg)
+        const dispatched = await fetcher(
+          typedmsg => Promise.resolve(typedmsg),
+          mockGetState
+        )
+
+        expect(dispatched).toBeTruthy()
+        expect(dispatched.type).toBe(
+          opts.types.success,
+          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
+        )
+        if (properties) {
+          expect(dispatched).toHaveProperties(properties)
+        }
+        data[opts.types.success] = dispatched
       })
     }
 
@@ -134,29 +149,25 @@ const describeAction = actions => (key, opts, cb) => {
         ? `with [${properties.join(', ')}] `
         : ''
 
-      it(`dispatches ${key}Failure ${propmsg}on failed response`, () => {
-        return auth.logout().then(
-          () => action(get(opts.firstarg), get(opts.secondarg))(
-            typedmsg => new Promise(
-              (resolve, reject) => resolve(typedmsg)
-            ),
-            mockGetState
-          )
-        ).then(
-          dispatched => {
-            expect(dispatched).to.be.ok
-            expect(
-              dispatched.type
-            ).to.equal(
-              opts.types.failure,
-              `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
-            )
-            if (properties) {
-              expect(Object.keys(dispatched)).to.include.members(properties)
-            }
-            data[opts.types.failure] = dispatched
-          }
+      it(`dispatches ${key}Failure ${propmsg}on failed response`, async () => {
+        // make API reject every request
+        mockApi(false)
+
+        let fetcher = action(opts.firstarg, opts.secondarg)
+        const dispatched = await fetcher(
+          typedmsg => Promise.resolve(typedmsg),
+          mockGetState
         )
+
+        expect(dispatched).toBeTruthy()
+        expect(dispatched.type).toBe(
+          opts.types.failure,
+          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
+        )
+        if (properties) {
+          expect(dispatched).toHaveProperties(properties)
+        }
+        data[opts.types.failure] = dispatched
       })
     }
   })
