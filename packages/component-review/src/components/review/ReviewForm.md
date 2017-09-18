@@ -16,17 +16,20 @@ const version = {
 
 const review = {
   id: faker.random.uuid(),
-  note: '<p>This is a review</p>',
+  note: {
+    content: '<p>This is a review</p>'
+  },
   recommendation: 'accept'
 };
 
-const ReviewForm = reduxForm({ 
+const ConnectedReviewForm = reduxForm({ 
   form: 'review',
   onSubmit: values => console.log(values),
   onChange: values => console.log(values)
-})(Review);
+})(ReviewForm);
 
-<ReviewForm
+<ConnectedReviewForm
   version={version}
-  initialValues={review}/>
+  initialValues={review}
+  uploadFile={() => new XMLHttpRequest()}/>
 ```
