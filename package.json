@@ -1,0 +1,44 @@
+{
+  "name": "@pubsweet/db-manager",
+  "version": "0.0.1",
+  "description": "Provides database management utilities to Pubsweet apps.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --runInBand --no-cache",
+    "lint": "eslint src test",
+    "vuln-test": "nsp check --output checkstyle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.coko.foundation:yld/db-manager.git"
+  },
+  "keywords": [
+    "pubsweet",
+    "database"
+  ],
+  "engines": {
+    "node": ">=7.9.0",
+    "npm": ">=3.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "author": "Samuel Galson",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^21.1.0",
+    "nsp": "^2.8.0",
+    "standard": "^10.0.3"
+  }
+}
