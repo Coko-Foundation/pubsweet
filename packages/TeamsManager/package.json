@@ -8,8 +8,17 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react-bootstrap": "^0.31.3",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-select": "^1.0.0-rc.10",
+    "redux": "^3.7.2"
+  },
   "peerDependencies": {
-    "pubsweet-client": ">=0.9.0"
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "react": ">=15"
   },
   "repository": {
     "type": "git",
