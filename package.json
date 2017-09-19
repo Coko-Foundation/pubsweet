@@ -40,5 +40,11 @@
     "jest": "^21.1.0",
     "nsp": "^2.8.0",
     "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "@pubsweet/logger": "0.0.1",
+    "joi": "^11.0.2",
+    "pouchdb": "^6.3.4",
+    "pubsweet-server": "^1.0.0-alpha.3"
   }
 }
