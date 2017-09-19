@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import config from 'config'
+import _ from 'lodash/fp'
 
 import * as T from '../actions/types'
 import 'event-source-polyfill'
@@ -47,9 +49,7 @@ export class UpdateSubscriber extends Component {
   }
 
   visible () {
-    const config = CONFIG['pubsweet-client']['update-subscriber']
-
-    return config && config.visible
+    return _.get('pubsweet-client.update-subscriber.visible', config, false)
   }
 
   // if haven't received a heartbeat for 30 seconds, try to reconnect

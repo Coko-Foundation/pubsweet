@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import config from 'config'
 
 import Authsome from 'authsome'
 import actions from '../actions'
@@ -11,7 +12,7 @@ import actions from '../actions'
 export function requireAuthentication (Component, operation, selector) {
   return function WrappedAuthenticatedComponent (props) {
     return <ConnectedAuthenticatedComponent
-      authsome={CONFIG['authsome']}
+      authsome={config['authsome']}
       {...props}
       component={Component}
       operation={operation}

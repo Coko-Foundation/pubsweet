@@ -1,7 +1,5 @@
 import nock from 'nock'
-
-const API_ENDPOINT = 'http://example.com'
-global.CONFIG = { 'pubsweet-server': { API_ENDPOINT } }
+import endpoint from '../../src/helpers/endpoint'
 
 // must be require, not import, due to mocking global above
 const api = require('../../src/helpers/api')
@@ -14,7 +12,7 @@ describe('API helper', () => {
   })
 
   it('makes a GET request', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .get('/thing')
       .reply(200, 'A thing', {'content-type': 'text/plain'})
 
@@ -23,7 +21,7 @@ describe('API helper', () => {
   })
 
   it('makes a POST request', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .post('/thing', {
         some: 'data'
       })
@@ -34,7 +32,7 @@ describe('API helper', () => {
   })
 
   it('makes a PATCH request', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .patch('/thing/1', {
         some: 'data'
       })
@@ -45,7 +43,7 @@ describe('API helper', () => {
   })
 
   it('makes a PUT request', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .put('/thing/1', {
         some: 'data'
       })
@@ -56,7 +54,7 @@ describe('API helper', () => {
   })
 
   it('makes a DELETE request', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .delete('/thing/1')
       .reply(200, 'No thing', {'content-type': 'text/plain'})
 
@@ -66,7 +64,7 @@ describe('API helper', () => {
 
   it('automatically parses JSON response', async () => {
     const expected = { oh: 'yeah' }
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .get('/thing')
       .reply(200, expected, {'content-type': 'application/json'})
 
@@ -75,7 +73,7 @@ describe('API helper', () => {
   })
 
   it('includes token in header', async () => {
-    nock(API_ENDPOINT, {
+    nock(endpoint, {
       reqheaders: {
         'authorization': 'Bearer tok123'
       }
@@ -88,7 +86,7 @@ describe('API helper', () => {
   })
 
   it('wraps HTTP errors', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .get('/thing')
       .reply(500, 'Yikes!', {'content-type': ''})
 
@@ -103,7 +101,7 @@ describe('API helper', () => {
   })
 
   it('optionally returns raw response', async () => {
-    nock(API_ENDPOINT)
+    nock(endpoint)
       .get('/thing')
       .reply(204)
 

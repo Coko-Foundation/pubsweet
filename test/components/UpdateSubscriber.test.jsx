@@ -21,7 +21,6 @@ describe('<UpdateSubscriber/>', () => {
     global.window.localStorage = {
       getItem: jest.fn(() => 'tok')
     }
-    global.CONFIG = { 'pubsweet-client': { 'update-subscriber': { visible: true } } }
     global.window.EventSource = EventSourceMock
   })
 

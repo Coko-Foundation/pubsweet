@@ -58,14 +58,13 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-client"
   },
   "jest": {
+    "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
     "globals": {
-      "CONFIG": {
-        "pubsweet-server": {}
-      }
+      "window": {}
     },
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!pubsweet)"

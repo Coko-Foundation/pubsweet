@@ -1,3 +1,4 @@
-/* global CONFIG */
+import config from 'config'
 
-module.exports = CONFIG['pubsweet-server'].API_ENDPOINT
+module.exports = config['pubsweet-server'].API_ENDPOINT
+

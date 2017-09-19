@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch'
-
 import endpoint from './endpoint'
 
 // read the authentication token from LocalStorage
