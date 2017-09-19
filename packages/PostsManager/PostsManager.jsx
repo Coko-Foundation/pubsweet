@@ -4,12 +4,9 @@ import { Grid, Alert } from 'react-bootstrap'
 import PostList from './PostList'
 import PostCreator from './PostCreator'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import styles from './PostsManager.local.scss'
-import Actions from 'pubsweet-client/src/actions'
 
-class PostsManager extends React.Component {
+export default class PostsManager extends React.Component {
   componentWillMount () {
     this.props.actions.getCollections()
       .then(result => this.props.actions.getFragments(result.collections[0]))
@@ -53,28 +50,3 @@ PostsManager.propTypes = {
   error: PropTypes.string,
   currentUser: PropTypes.object
 }
-
-function mapState (state) {
-  let blog = state.collections[0]
-
-  let blogposts = blog ?
-    blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
-
-  return {
-    blog: state.collections[0],
-    blogposts: blogposts,
-    error: state.error,
-    currentUser: state.currentUser
-  }
-}
-
-function mapDispatch (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapState,
-  mapDispatch
-)(PostsManager)

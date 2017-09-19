@@ -1,13 +1,10 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Alert, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router'
-import { signupUser } from './actions'
 import styles from './Signup.local.scss'
 
-class Signup extends Component {
+export default class Signup extends Component {
   constructor (props) {
     super(props)
 
@@ -76,19 +73,3 @@ class Signup extends Component {
 Signup.propTypes = {
   actions: PropTypes.object
 }
-
-function mapState (state) {
-  return {
-    error: state.error
-  }
-}
-
-function mapDispatch (dispatch) {
-  return {
-    actions: bindActionCreators({ signupUser }, dispatch)
-  }
-}
-
-export default connect(
-  mapState, mapDispatch
-)(Signup)

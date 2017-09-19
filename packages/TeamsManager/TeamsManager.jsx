@@ -1,14 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
-import Actions from 'pubsweet-client/src/actions'
 import Team from './Team'
 import TeamCreator from './TeamCreator'
 
-class TeamsManager extends React.Component {
+export default class TeamsManager extends React.Component {
   componentWillMount () {
     this.props.actions.getUsers()
     this.props.actions.getTeams()
@@ -74,23 +71,3 @@ TeamsManager.propTypes = {
   actions: PropTypes.object.isRequired,
   error: PropTypes.string
 }
-
-function mapStateToProps (state) {
-  return {
-    collections: state.collections,
-    teams: state.teams,
-    users: state.users.users,
-    error: state.error
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TeamsManager)

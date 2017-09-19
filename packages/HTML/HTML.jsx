@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Actions from 'pubsweet-client/src/actions'
 
 import './HTML.scss'
 
-class HTML extends React.Component {
+export default class HTML extends React.Component {
   constructor (props) {
     super(props)
     this.props.actions.getCollections().then(result =>
@@ -36,21 +33,3 @@ HTML.propTypes = {
   id: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired
 }
-
-function mapStateToProps (state, ownProps) {
-  return {
-    id: ownProps.params.id,
-    fragment: state.fragments[ownProps.params.id]
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HTML)

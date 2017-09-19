@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Actions from 'pubsweet-client/src/actions'
-
-class Draft extends React.Component {
+export default class Draft extends React.Component {
   constructor (props) {
     super(props)
     let editorState
@@ -56,22 +52,3 @@ Draft.propTypes = {
   fragment: PropTypes.object,
   actions: PropTypes.object
 }
-
-function mapStateToProps (state, ownProps) {
-  return {
-    blog: state.collections[0],
-    id: ownProps.params.id,
-    fragment: state.fragments[ownProps.params.id]
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Draft)

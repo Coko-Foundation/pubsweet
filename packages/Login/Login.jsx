@@ -1,13 +1,10 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router'
-import { loginUser } from './actions'
 import styles from './Login.local.scss'
 
-class Login extends Component {
+export default class Login extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -71,19 +68,3 @@ Login.propTypes = {
   actions: PropTypes.object,
   location: PropTypes.object
 }
-
-function mapState (state) {
-  return {
-    error: state.error
-  }
-}
-
-function mapDispatch (dispatch) {
-  return {
-    actions: bindActionCreators({ loginUser }, dispatch)
-  }
-}
-
-export default connect(
-  mapState, mapDispatch
-)(Login)

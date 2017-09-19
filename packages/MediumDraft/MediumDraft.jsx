@@ -1,7 +1,3 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Actions from 'pubsweet-client/src/actions'
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import 'medium-draft/lib/index.css'
@@ -12,8 +8,7 @@ import { convertToRaw } from 'draft-js'
 import mediumDraftExporter from 'medium-draft/lib/exporter'
 import customImageSideButton from './CustomImageSideButton'
 
-
-class MediumDraft extends React.Component {
+export default class MediumDraft extends React.Component {
   constructor (props) {
     super(props)
 
@@ -67,24 +62,3 @@ MediumDraft.propTypes = {
   fragment: PropTypes.object,
   actions: PropTypes.object
 }
-
-function mapStateToProps (state, ownProps) {
-  let fragmentId = ownProps.params.id
-  return {
-    fragmentId: fragmentId,
-    blog: state.collections[0],
-    id: ownProps.params.id,
-    fragment: state.fragments[fragmentId]
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MediumDraft)
