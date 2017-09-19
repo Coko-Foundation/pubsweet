@@ -3,7 +3,6 @@ const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
-    'API_ENDPOINT': '/api',
     sse: false
   },
   validations: {
