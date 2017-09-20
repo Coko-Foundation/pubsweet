@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-manage",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Basic Manage (wrapper) component for PubSweet",
   "main": "index.js",
   "scripts": {
