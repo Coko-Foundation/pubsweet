@@ -9,10 +9,13 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1"
+    "prop-types": "^15.5.10",
+    "react-bootstrap": "^0.31.3",
+    "react-router": "^4.2.0"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1"
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "react": ">=15"
   },
   "repository": {
     "type": "git",

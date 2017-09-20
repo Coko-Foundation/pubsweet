@@ -8,9 +8,14 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "peerDependencies": {
+  "dependencies": {
     "joi-browser": "^10.0.6",
-    "pubsweet-client": ">=0.9.0"
+    "prop-types": "^15.5.10",
+    "react-bootstrap": "^0.31.3"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "react": ">=15"
   },
   "repository": {
     "type": "git",

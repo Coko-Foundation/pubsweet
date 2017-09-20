@@ -9,12 +9,13 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "pubsweet-component-navigation": "^0.2.5"
-  },
-  "peerDependencies": {
     "bootstrap-sass": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "pubsweet-client": ">=0.9.1"
+    "prop-types": "^15.5.10"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "react": ">=15"
   },
   "repository": {
     "type": "git",
