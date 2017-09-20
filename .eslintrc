@@ -18,7 +18,6 @@
     "node": true
   },
   "globals": {
-    "CONFIG": true,
     "VALIDATIONS": true
   }
 }

@@ -1,7 +1,8 @@
 import request from 'pubsweet-client/src/helpers/api'
 import * as T from './types'
+import config from 'config'
 
-const ENDPOINT = CONFIG['pubsweet-server']['API_ENDPOINT'].replace(/api$/, 'ink')
+const ENDPOINT = config['pubsweet-server']['API_ENDPOINT'].replace(/api$/, 'ink')
 
 function inkRequest () {
   return {
