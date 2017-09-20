@@ -1,6 +1,6 @@
 const logger = require('@pubsweet/logger')
 const winston = require('winston')
-const { validateConfig } = require('validations')
+const { validateConfig } = require('./validations')
 
 process.env.PUBSWEET_BACKEND_SILENT = true
 

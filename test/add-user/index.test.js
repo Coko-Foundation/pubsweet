@@ -1,33 +1,81 @@
+'use strict'
+
+const fs = require('fs-extra')
+const _ = require('lodash/fp')
+const path = require('path')
+const PouchDB = require('pouchdb')
+
+const basePath = path.join(__dirname, '..', '..', 'api', 'db')
+const dbPath = path.join(basePath, 'test')
+
+const nonAdminUser = {
+  username: 'testUsername',
+  email: 'test@example.com',
+  password: 'test_password'
+}
+
+const adminUser = {
+  username: 'adminTestUsername',
+  email: 'adminTtest@example.com',
+  password: 'adminTest_password'
+}
+
+const baseConfig = {
+  'pubsweet-server': {
+    dbPath: basePath,
+    adapter: 'leveldb'
+  },
+  dbManager: {
+    user: nonAdminUser,
+    collection: 'test_collection'
+  }
+}
+
+const adminConfig = _.merge(baseConfig, { dbManager: { user: adminUser } })
+
 describe('add-user', () => {
-  it('adds a regular user to the database', async () => {
-    await require('../src/add-user')({
-      appPath: appdir,
-      properties: require('../src/user-properties'),
-      override: fixtures.regularuser
-    })
+  beforeAll(async () => {
+    fs.ensureDirSync(basePath)
+  })
 
-    // const user = await User.findOneByField('username', fixtures.regularuser.username)
+  beforeEach(async () => {
+    jest.resetModules()
+    const config = require('config')
+    config['pubsweet-server'] = baseConfig['pubsweet-server']
+    config['dbManager'] = baseConfig['dbManager']
+    await new PouchDB(dbPath).destroy()
+  })
+
+  afterEach(async () => {
+    // call to models adds global db: see server/src/models/schema :(
+    await new PouchDB(dbPath).destroy()
+  })
+
+  it.only('adds a non-admin user', async () => {
+    jest.resetModules()
+    const config = require('config')
+    config['pubsweet-server'] = baseConfig['pubsweet-server']
+    config['dbManager'] = baseConfig['dbManager']
+    const { setupDb } = require('../../src/')
+    await setupDb()
+    const User = require('pubsweet-server/src/models/User')
     const users = await User.all()
-    const user = users.find(user => user.username === fixtures.regularuser.username)
-
+    const user = users.find(user => user.username === baseConfig.user.username)
     expect(user).not.toBeNull()
-    expect(user.email).toBe(fixtures.regularuser.email)
     expect(user.admin).toBe(false)
   })
 
   it('adds an admin user to the database', async () => {
-    await require('../src/add-user')({
-      appPath: appdir,
-      properties: require('../src/user-properties'),
-      override: fixtures.adminuser
-    })
-
-    // const user = await User.findOneByField('username', fixtures.adminuser.username)
+    jest.resetModules()
+    const config = require('config')
+    config['pubsweet-server'] = adminConfig['pubsweet-server']
+    config['dbManager'] = adminConfig['dbManager']
+    const { setupDb } = require('../../src/')
+    await setupDb()
+    const User = require('pubsweet-server/src/models/User')
     const users = await User.all()
-    const user = users.find(user => user.username === fixtures.adminuser.username)
-
+    const user = users.find(user => user.username === adminUser.user.username)
     expect(user).not.toBeNull()
-    expect(user.email).toBe(fixtures.adminuser.email)
     expect(user.admin).toBe(true)
   })
 })

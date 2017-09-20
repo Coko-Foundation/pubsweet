@@ -80,6 +80,6 @@ jspm_packages
 # pubsweet-specific
 myapp
 testapp
-
+api
 .vscode
 .wallaby.js

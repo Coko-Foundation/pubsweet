@@ -3,6 +3,7 @@ const config = require('config')
 const Collection = require('pubsweet-server/src/models/Collection')
 const User = require('pubsweet-server/src/models/User')
 const dbExists = require('../helpers/db-exists')
+const dbPath = require('../helpers/db-path')
 
 const addAdminOwnerToAllCollections = async user => {
   logger.info('Adding admin owner to collections')
@@ -30,8 +31,8 @@ const createUser = async userData => {
   return user
 }
 
-module.exports = async (dbPath) => {
-  const exists = await dbExists(dbPath)
+module.exports = async () => {
+  const exists = await dbExists()
   const userData = config.get('dbManager.user')
   if (!exists) {
     throw new Error('Cannot create user. No database at:', dbPath)

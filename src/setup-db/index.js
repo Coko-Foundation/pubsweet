@@ -4,11 +4,10 @@ const config = require('config')
 const dbExists = require('../helpers/db-exists')
 const generateEnv = require('./generate-env')
 const setupDb = require('./setup-db')
+const dbPath = require('../helpers/db-path')
 
-const dbPath = config.get('dbManager.dbPath')
-
-const checkNoDb = async dbPath => {
-  const exists = await dbExists(dbPath)
+const checkNoDb = async () => {
+  const exists = await dbExists()
   if (!exists) return null
 
   if (!config.get('dbManager').clobber) {
