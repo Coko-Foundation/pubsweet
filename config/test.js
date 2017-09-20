@@ -3,7 +3,9 @@ const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
-    sse: false
+    sse: false,
+    silent: process.env.PUBSWEET_BACKEND_SILENT,
+    secret: process.env.PUBSWEET_SECRET
   },
   validations: {
     fragment: {
