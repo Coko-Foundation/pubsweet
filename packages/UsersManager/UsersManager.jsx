@@ -1,13 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Alert } from 'react-bootstrap'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Actions from 'pubsweet-client/src/actions'
 
 import User from './User'
 
-class UsersManager extends React.Component {
+export default class UsersManager extends React.Component {
   componentWillMount () {
     this.props.actions.getUsers()
   }
@@ -57,21 +54,3 @@ UsersManager.propTypes = {
   actions: PropTypes.object.isRequired,
   error: PropTypes.string
 }
-
-function mapStateToProps (state) {
-  return {
-    users: state.users.users,
-    error: state.error
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UsersManager)

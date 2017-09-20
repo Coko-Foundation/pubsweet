@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import 'pubsweet-component-manage/Manage.scss'
 import styles from './Blog.local.scss'
 
-import Actions from 'pubsweet-client/src/actions'
-import { bindActionCreators } from 'redux'
 import BlogpostSummary from './Summary'
 
-class Blog extends React.Component {
+export default class Blog extends React.Component {
   constructor (props) {
     super(props)
     this.props.actions.getCollections()
@@ -74,25 +71,3 @@ Blog.propTypes = {
   // Injected by React Router
   actions: PropTypes.object.isRequired
 }
-
-function mapStateToProps (state) {
-  let blog = state.collections[0]
-  let posts = blog ? blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
-
-  return {
-    blog: state.collections[0],
-    posts: posts
-    // errorMessage: state.errorMessage
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Blog)

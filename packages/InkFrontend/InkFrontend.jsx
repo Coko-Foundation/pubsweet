@@ -1,14 +1,11 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Alert, Row, Col } from 'react-bootstrap'
-import { ink } from './actions'
 import Dropzone from 'react-dropzone'
 
 import escapeHtml from 'escape-html'
 
-class InkFrontend extends Component {
+export default class InkFrontend extends Component {
   constructor (props) {
     super(props)
     this.onDrop = this.onDrop.bind(this)
@@ -44,20 +41,3 @@ InkFrontend.propTypes = {
   error: PropTypes.string,
   ink: PropTypes.object
 }
-
-function mapState (state) {
-  return {
-    error: state.error,
-    ink: state.ink
-  }
-}
-
-function mapDispatch (dispatch) {
-  return {
-    actions: bindActionCreators({ ink }, dispatch)
-  }
-}
-
-export default connect(
-  mapState, mapDispatch
-)(InkFrontend)
