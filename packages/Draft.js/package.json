@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-draft",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Basic Draft.js component for PubSweet",
   "main": "index.js",
   "scripts": {
