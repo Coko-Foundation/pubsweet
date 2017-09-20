@@ -1,4 +1,4 @@
 import config from 'config'
 
-module.exports = config['pubsweet-server'].API_ENDPOINT
+module.exports = config['pubsweet-client'].API_ENDPOINT
 
