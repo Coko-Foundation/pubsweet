@@ -5,7 +5,6 @@ import Actions from 'pubsweet-client/src/actions'
 import Blog from './Blog'
 
 function mapStateToProps (state) {
-  console.log('state', state)
   let blog = state && state.collections[0]
   let posts = blog ? blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
 
