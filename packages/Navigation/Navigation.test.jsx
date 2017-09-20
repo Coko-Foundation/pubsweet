@@ -3,8 +3,6 @@ import React from 'react'
 
 import Navigation from './Navigation'
 
-global.CONFIG = {'pubsweet-client': {}}
-
 describe('<Navigation/>', () => {
   const makeWrapper = (props = {}) => shallow(<Navigation
       actions={{logoutUser: jest.fn()}}
