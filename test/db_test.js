@@ -1,6 +1,4 @@
-process.env.ALLOW_CONFIG_MUTATIONS = true
-
-describe.only('db configuration', () => {
+describe('db configuration', () => {
   it('overrides default adapter with config', async () => {
     const config = require('config')
     config['pubsweet-server'].adapter = 'leveldb'
