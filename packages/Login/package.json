@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-login",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Basic login component for PubSweet",
   "main": "index.js",
   "scripts": {
