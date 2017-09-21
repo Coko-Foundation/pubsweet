@@ -4,10 +4,10 @@ import Actions from 'pubsweet-client/src/actions'
 
 import HTML from './HTML'
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state, props) {
   return {
-    id: ownProps.params.id,
-    fragment: state.fragments[ownProps.params.id]
+    id: props.match.params.id,
+    fragment: state.fragments[props.match.params.id]
   }
 }
 

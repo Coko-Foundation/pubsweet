@@ -4,11 +4,11 @@ import Actions from 'pubsweet-client/src/actions'
 
 import Draft from './Draft'
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state, props) {
   return {
     blog: state.collections[0],
-    id: ownProps.params.id,
-    fragment: state.fragments[ownProps.params.id]
+    id: props.match.params.id,
+    fragment: state.fragments[props.match.params.id]
   }
 }
 
