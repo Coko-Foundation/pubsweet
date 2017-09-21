@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "jest --coverage",
+    "lint": "eslint 'packages/*/*.{js,jsx}'",
     "postinstall": "lerna bootstrap"
   },
   "devDependencies": {

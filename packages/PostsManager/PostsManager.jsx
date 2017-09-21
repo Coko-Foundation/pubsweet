@@ -8,7 +8,6 @@ import styles from './PostsManager.local.scss'
 import blogmode from 'authsome/src/modes/blog'
 const authsome = { mode: blogmode }
 
-
 export default class PostsManager extends React.Component {
   componentWillMount () {
     this.props.actions.getCollections()

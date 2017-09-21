@@ -1,9 +1,9 @@
-// TODO: This will break when rendered on a server
-const localStorage = window.localStorage || undefined
-
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST
 } from './types'
+
+// TODO: This will break when rendered on a server
+const localStorage = window.localStorage || undefined
 
 export default function userLogin (state = {
   isFetching: false,
