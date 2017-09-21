@@ -1,9 +1,8 @@
 const logger = require('@pubsweet/logger')
 const config = require('config')
-const userData = config.get('dbManager.user')
-const collectionTitle = config.get('dbManager').collection
+const _ = require('lodash/fp')
 
-const createAdminUser = async () => {
+const createAdminUser = async (userData) => {
   const User = require('pubsweet-server/src/models/User')
   logger.info('Creating the admin user')
 
@@ -21,11 +20,11 @@ const createAdminUser = async () => {
   return user
 }
 
-const createCollection = async (user) => {
+const createCollection = async (title, user) => {
   const Collection = require('pubsweet-server/src/models/Collection')
   logger.info('Creating the initial collection')
 
-  const collection = new Collection({ title: collectionTitle, created: Date.now() })
+  const collection = new Collection({ title, created: Date.now() })
   collection.setOwners([user.id])
   await collection.save()
 
@@ -34,10 +33,13 @@ const createCollection = async (user) => {
   return collection
 }
 
-module.exports = async () => {
+module.exports = async (setupDbConfig) => {
+  const mergedDbConfig = _.merge({}, config.get('dbManager'), setupDbConfig)
+  const collectionTitle = mergedDbConfig.collection
+  const userData = mergedDbConfig.user
   logger.info('Setting up the database')
-  const user = await createAdminUser()
-  const collection = collectionTitle ? await createCollection(user) : null
+  const user = await createAdminUser(userData)
+  const collection = collectionTitle ? await createCollection(collectionTitle, user) : null
   logger.info('Finished setting up the database')
   return {user, collection}
 }

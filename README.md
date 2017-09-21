@@ -18,7 +18,13 @@ This package exports the following functions:
 
 ### `setupDb`
 
-This function creates the database, adds a user and adds a collection if specified. It is called without arguments and takes its configuration from the following config keys:
+This function
+ - creates the database
+ - adds an admin user
+ - adds a collection if specified
+ - generates a secret in `config/local-<NODE_ENV>.json` under `pubsweet-server.secret`. 
+
+It can be called without arguments, in which case it will take its configuration from the following config keys:
 
 ```
 {
@@ -36,6 +42,7 @@ This function creates the database, adds a user and adds a collection if specifi
   }
 }
 ```
+Alternatively it can be passed the `dbManager` object as an argument, which will override the values on config.
 
 The name of the database will be the full dbPath with the NODE_ENV appended.
 

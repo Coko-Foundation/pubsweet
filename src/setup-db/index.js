@@ -22,10 +22,11 @@ const checkNoDb = async () => {
 }
 
 module.exports = async () => {
+  const setupDbConfig = config.get('dbManager')
   try {
     await checkNoDb()
     generateEnv()
-    return await setupDb()
+    return await setupDb(setupDbConfig)
   } catch (e) {
     logger.error('Database setup failed')
     throw e
