@@ -19,3 +19,7 @@ All modules forming part of the public API of the component should be exported f
 ### Backend components
 
 Should specify a minimum required version of Node and have no transpiling.
+
+## Publishing
+
+Be sure to switch to a separate branch for Lerna releases, as the master branch is protected from push, so your releases will fail.
