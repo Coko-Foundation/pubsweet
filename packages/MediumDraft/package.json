@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-medium-draft",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Medium Draft component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "redux": "^3.7.2"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
+    "pubsweet-client": ">=1.0.0-beta.3",
     "react": ">=15"
   },
   "repository": {
