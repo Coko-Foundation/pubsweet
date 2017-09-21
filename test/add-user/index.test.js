@@ -1,9 +1,12 @@
-'use strict'
+/* global db */
 
 const fs = require('fs-extra')
 const _ = require('lodash/fp')
 const path = require('path')
 const PouchDB = require('pouchdb')
+
+process.env.ALLOW_CONFIG_MUTATIONS = true
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const basePath = path.join(__dirname, '..', '..', 'api', 'db')
 const dbPath = path.join(basePath, 'test')
@@ -15,9 +18,9 @@ const nonAdminUser = {
 }
 
 const adminUser = {
-  username: 'adminTestUsername',
-  email: 'adminTtest@example.com',
-  password: 'adminTest_password'
+  username: 'adminUsername',
+  email: 'admin@example.com',
+  password: 'admin_password'
 }
 
 const baseConfig = {
@@ -48,10 +51,10 @@ describe('add-user', () => {
 
   afterEach(async () => {
     // call to models adds global db: see server/src/models/schema :(
-    await new PouchDB(dbPath).destroy()
+    await db.destroy()
   })
 
-  it.only('adds a non-admin user', async () => {
+  it('adds a non-admin user', async () => {
     jest.resetModules()
     const config = require('config')
     config['pubsweet-server'] = baseConfig['pubsweet-server']

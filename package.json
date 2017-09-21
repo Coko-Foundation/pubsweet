@@ -46,6 +46,6 @@
     "fs-extra": "^4.0.2",
     "joi": "^11.0.2",
     "pouchdb": "^6.3.4",
-    "pubsweet-server": "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#feat/inject-adapter"
+    "pubsweet-server": "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#feat/recreate-db"
   }
 }

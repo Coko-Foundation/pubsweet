@@ -5,6 +5,7 @@ const dbExists = require('../helpers/db-exists')
 const generateEnv = require('./generate-env')
 const setupDb = require('./setup-db')
 const dbPath = require('../helpers/db-path')
+const PouchDB = require('pouchdb')
 
 const checkNoDb = async () => {
   const exists = await dbExists()

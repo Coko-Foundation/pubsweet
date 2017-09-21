@@ -1,11 +1,10 @@
-const User = require('pubsweet-server/src/models/User')
-const Collection = require('pubsweet-server/src/models/Collection')
 const logger = require('@pubsweet/logger')
 const config = require('config')
 const userData = config.get('dbManager.user')
 const collectionTitle = config.get('dbManager').collection
 
 const createAdminUser = async () => {
+  const User = require('pubsweet-server/src/models/User')
   logger.info('Creating the admin user')
 
   const user = new User({
@@ -23,6 +22,7 @@ const createAdminUser = async () => {
 }
 
 const createCollection = async (user) => {
+  const Collection = require('pubsweet-server/src/models/Collection')
   logger.info('Creating the initial collection')
 
   const collection = new Collection({ title: collectionTitle, created: Date.now() })
@@ -35,9 +35,9 @@ const createCollection = async (user) => {
 }
 
 module.exports = async () => {
-    logger.info('Setting up the database')
-    const user = await createAdminUser()
-    const collection = collectionTitle ? await createCollection(user) : null
-    logger.info('Finished setting up the database')
-    return {user, collection}
+  logger.info('Setting up the database')
+  const user = await createAdminUser()
+  const collection = collectionTitle ? await createCollection(user) : null
+  logger.info('Finished setting up the database')
+  return {user, collection}
 }
