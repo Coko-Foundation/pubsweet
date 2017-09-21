@@ -62,7 +62,6 @@ describe('add-user', () => {
     await addUser(nonAdminUser)
     const User = require('pubsweet-server/src/models/User')
     const users = await User.all()
-    console.log(users)
     const user = users.find(user => user.username === nonAdminUser.username)
     expect(user).not.toBeNull()
     expect(user.admin).toBeFalsy()

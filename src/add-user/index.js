@@ -1,6 +1,7 @@
 const logger = require('@pubsweet/logger')
 const dbExists = require('../helpers/db-exists')
 const dbPath = require('../helpers/db-path')
+const { validateUser } = require('../validations')
 
 const addAdminOwnerToAllCollections = async user => {
   logger.info('Adding admin owner to collections')
@@ -31,6 +32,7 @@ const createUser = async (userData) => {
 }
 
 module.exports = async (userData) => {
+  validateUser(userData)
   const exists = await dbExists()
   if (!exists) {
     throw new Error('Cannot create user. No database at:', dbPath)

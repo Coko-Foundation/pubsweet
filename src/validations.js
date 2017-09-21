@@ -1,6 +1,5 @@
 const Joi = require('joi')
 const config = require('config')
-const path = require('path')
 const schemas = require('pubsweet-server/src/models/validations')
 const _ = require('lodash/fp')
 
@@ -24,6 +23,11 @@ const schema = Joi.object({
 module.exports = {
   validateConfig: function validateConfig () {
     const result = Joi.validate(config, schema, { allowUnknown: true })
+    if (result.error) throw result.error
+    return null
+  },
+  validateUser: function validateUser (userData) {
+    const result = Joi.validate(userData, userSchema, { allowUnknown: true })
     if (result.error) throw result.error
     return null
   }
