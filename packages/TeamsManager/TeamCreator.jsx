@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import { FormControl, Button, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
@@ -9,6 +8,7 @@ export default class TeamCreator extends React.Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
+    this.onNameChange = this.onNameChange.bind(this)
     this.onCollectionSelect = this.onCollectionSelect.bind(this)
     this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
 
@@ -20,8 +20,8 @@ export default class TeamCreator extends React.Component {
   onSave (event) {
     event.preventDefault()
 
-    let name = ReactDOM.findDOMNode(this.refs.name).value
-    let teamType = this.state.teamTypeSelected
+    const name = this.state.teamName
+    const teamType = this.state.teamTypeSelected
 
     let objectId
     let objectType
@@ -42,6 +42,10 @@ export default class TeamCreator extends React.Component {
         members: []
       })
     }
+  }
+
+  onNameChange (name) {
+    this.setState({teamName: name ? name.value : null})
   }
 
   onCollectionSelect (collection) {
@@ -69,12 +73,12 @@ export default class TeamCreator extends React.Component {
       <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
         <FormControl
-          type='text'
-          placeholder='Team Awesome'
-          label='Name'
-          name='teamName'
-          ref='name'
-          required />
+            type='text'
+            placeholder='Team Awesome'
+            label='Name'
+            name='teamName'
+            onChange={this.onNameChange}
+            required/>
         <Row>
           <Col md={3}>
             <h4>Team type</h4>

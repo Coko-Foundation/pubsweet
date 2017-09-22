@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup'
 import validations from 'pubsweet-server/src/models/validations'
@@ -13,8 +12,7 @@ export default class PostCreator extends React.Component {
   }
 
   onSave (text) {
-    var titlenode = ReactDOM.findDOMNode(this.title)
-    var title = titlenode.value
+    const title = this.titleInputNode.value
 
     if (title !== '') {
       this.props.create({
@@ -25,7 +23,7 @@ export default class PostCreator extends React.Component {
       })
     }
 
-    titlenode.blur()
+    this.titleInputNode.blur()
   }
   render () {
     return (
@@ -37,7 +35,7 @@ export default class PostCreator extends React.Component {
           placeholder='One fine day...'
           validations={validations(config)}
           modelProperty='fragment.title'
-          inputRef={(input) => { this.title = input }}
+          inputRef={(input) => { this.titleInputNode = input }}
         />
         <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
           <i className='fa fa-plus' /> Create

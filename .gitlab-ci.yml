@@ -7,3 +7,7 @@ test:
   script:
     - npm test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+lint:
+  script:
+    - npm run lint

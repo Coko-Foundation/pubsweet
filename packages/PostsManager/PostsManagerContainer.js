@@ -5,14 +5,14 @@ import Actions from 'pubsweet-client/src/actions'
 import PostsManager from './PostsManager'
 
 function mapState (state) {
-  let blog = state.collections[0]
-
-  let blogposts = blog ?
-      blog.fragments.map(f => state.fragments[f]).filter(f => f) : []
+  const blog = state.collections[0]
+  const blogposts = blog
+      ? blog.fragments.map(f => state.fragments[f]).filter(f => f)
+      : []
 
   return {
-    blog: state.collections[0],
-    blogposts: blogposts,
+    blog,
+    blogposts,
     error: state.error,
     currentUser: state.currentUser
   }
