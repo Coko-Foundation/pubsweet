@@ -1,11 +1,12 @@
 const logger = require('@pubsweet/logger')
-const path = require('path')
+const _ = require('lodash/fp')
 const config = require('config')
 const dbExists = require('../helpers/db-exists')
 const generateEnv = require('./generate-env')
 const setupDb = require('./setup-db')
 const dbPath = require('../helpers/db-path')
 const PouchDB = require('pouchdb')
+const { validateSetupDbConfig } = require('../validations')
 
 const checkNoDb = async () => {
   const exists = await dbExists()
@@ -21,12 +22,13 @@ const checkNoDb = async () => {
   logger.info('Removed DB at', dbPath)
 }
 
-module.exports = async () => {
-  const setupDbConfig = config.get('dbManager')
+module.exports = async (setupDbConfig) => {
+  const mergedDbConfig = _.merge(config.get('dbManager'), setupDbConfig)
+  validateSetupDbConfig(mergedDbConfig)
   try {
     await checkNoDb()
     generateEnv()
-    return await setupDb(setupDbConfig)
+    return await setupDb(mergedDbConfig)
   } catch (e) {
     logger.error('Database setup failed')
     throw e

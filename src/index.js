@@ -1,14 +1,11 @@
-const logger = require('@pubsweet/logger')
-const winston = require('winston')
-const { validateConfig } = require('./validations')
+const config = require('config')
+const { validateServerConfig } = require('./validations')
 
 process.env.PUBSWEET_BACKEND_SILENT = true
 
-logger.configure(winston)
-validateConfig()
+validateServerConfig(config.get('pubsweet-server'))
 
 module.exports = {
   setupDb: require('./setup-db/'),
   addUser: require('./add-user/')
 }
-

@@ -36,6 +36,7 @@ It can be called without arguments, in which case it will take its configuration
     username: 'xxxxxx',
     password: 'pppppp',
     email: 'email@example.com',
+    clobber: false // overwrite existing db (optional)
     collection: 'collection_title' // (optional)
   }
 }

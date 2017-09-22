@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const config = require('config')
 const schemas = require('pubsweet-server/src/models/validations')
 const _ = require('lodash/fp')
 
@@ -11,19 +10,22 @@ const userSchema = Joi.object({
 })
 
 const setupDbSchema = userSchema.keys({
+  clobber: Joi.boolean().optional(),
   collection: _.get('collection.title', schemas) || Joi.string().optional()
 })
 
-const schema = Joi.object({
-  dbManager: setupDbSchema.required(),
-  'pubsweet-server': Joi.object({
-    dbPath: Joi.string().required()
-  }).required()
+const serverSchema = Joi.object({
+  dbPath: Joi.string().required()
 })
 
 module.exports = {
-  validateConfig: function validateConfig () {
-    const result = Joi.validate(config, schema, { allowUnknown: true })
+  validateServerConfig: function validateServerConfig (serverConfig) {
+    const result = Joi.validate(serverConfig, serverSchema, { allowUnknown: true })
+    if (result.error) throw result.error
+    return null
+  },
+  validateSetupDbConfig: function validateSetupDbConfig (setupDbConfig) {
+    const result = Joi.validate(setupDbConfig, setupDbSchema, { allowUnknown: true })
     if (result.error) throw result.error
     return null
   },
