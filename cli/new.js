@@ -1,35 +1,52 @@
 const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
-const properties = require('../src/db-properties')
+const fs = require('fs-extra')
+const spawn = require('child-process-promise').spawn
+const path = require('path')
 
-module.exports = async args => {
+const STARTER_REPO_URL = 'https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git'
+
+const readCommand = async argsOverride => {
   program
     .arguments('[name]')
-    .description('Generate a new app in directory [name].')
-    .option('--dev', 'Setup app for development')
+    .description('Generate a new app in the current working directory with name [name].')
     .option('--clobber', 'Overwrite any existing files')
 
-  Object.keys(properties).forEach(key => {
-    program.option(`--${key} [string]`, properties[key].description)
-  })
+  program.parse(argsOverride || process.argv)
 
-  program.parse(args || process.argv)
+  const appName = program.args[0]
 
-  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
-
-  const appname = program.args[0]
-
-  if (!appname || appname.length === 0) {
+  if (!appName || appName.length === 0) {
     const eg = colors.bold(`pubsweet new ${colors.italic('myappname')}`)
     throw new Error(`You must specify an app name, e.g. ${eg}`)
   }
 
-  logger.info('Generating new PubSweet app:', appname)
+  return { appName, program.clobber }
+}
 
-  await require('../src/newapp')({
-    appPath: appname,
-    properties: require('../src/db-properties'),
-    override: program
+const clobber = (appName) => {
+  if (!fs.statSync(appName).isDirectory()) {
+    throw new Error(appName, 'exists in the current directory directory as a file. Will not overwrite.')
+  }
+  logger.info('Overwriting directory,' appName, 'due to --clobber flag')
+  fs.removeSync(appName)
+}
+
+
+module.exports = async argsOverride => {
+  const {appName, clobber} = readCommand(argsOverride)
+
+  logger.info('Generating new PubSweet app:', appName)
+  if (clobber) clobber()
+  await spawn('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit'})
+
+  logger.info('Installing app dependencies')
+  const localYarn = path.join(__dirname, 'node_modules', '.bin', 'yarn')
+  await spawn(localYarn, ['--ignore-optional', '--no-progress'], {
+    cwd: path.join(process.cwd, appName),
+    stdio: 'inherit'
   })
+
+  logger.info('Finished generating initial app')
 }
