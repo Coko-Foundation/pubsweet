@@ -36,7 +36,7 @@ const createCollection = async (title, user) => {
 module.exports = async (setupDbConfig) => {
   const mergedDbConfig = _.merge({}, config.get('dbManager'), setupDbConfig)
   const collectionTitle = mergedDbConfig.collection
-  const userData = mergedDbConfig.user
+  const userData = _.pick(['username','password','admin', 'email'], mergedDbConfig)
   logger.info('Setting up the database')
   const user = await createAdminUser(userData)
   const collection = collectionTitle ? await createCollection(collectionTitle, user) : null

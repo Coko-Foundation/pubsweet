@@ -33,11 +33,9 @@ It can be called without arguments, in which case it will take its configuration
     adapter: 'leveldb' // or 'memory' or 'http' (optional) 
   },
   dbManager: {
-    user: {
-      username: 'xxxxxx',
-      password: 'pppppp',
-      email: 'email@example.com'
-    },
+    username: 'xxxxxx',
+    password: 'pppppp',
+    email: 'email@example.com',
     collection: 'collection_title' // (optional)
   }
 }

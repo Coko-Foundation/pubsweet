@@ -10,11 +10,12 @@ const userSchema = Joi.object({
   admin: Joi.boolean().optional()
 })
 
+const setupDbSchema = userSchema.keys({
+  collection: _.get('collection.title', schemas) || Joi.string().optional()
+})
+
 const schema = Joi.object({
-  dbManager: Joi.object({
-    user: userSchema.required(),
-    collection: _.get('collection.title', schemas) || Joi.string().optional()
-  }).required(),
+  dbManager: setupDbSchema.required(),
   'pubsweet-server': Joi.object({
     dbPath: Joi.string().required()
   }).required()

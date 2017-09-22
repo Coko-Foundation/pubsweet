@@ -29,11 +29,9 @@ const baseConfig = {
     adapter: 'leveldb'
   },
   dbManager: {
-    user: {
-      username: 'testUsername',
-      email: 'test@example.com',
-      password: 'test_password'
-    },
+    username: 'testUsername',
+    email: 'test@example.com',
+    password: 'test_password',
     collection: 'test_collection'
   }
 }
