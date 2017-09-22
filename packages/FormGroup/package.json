@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-form-group",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Form component based on react-bootstrap with validation support for PubSweet",
   "main": "index.js",
   "scripts": {
