@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import config from 'config'
-
 import Authsome from 'authsome'
 import actions from '../actions'
 
@@ -110,6 +110,6 @@ function mapDispatch (dispatch) {
   }
 }
 
-const ConnectedAuthenticatedComponent = connect(mapState, mapDispatch)(AuthenticatedComponent)
+const ConnectedAuthenticatedComponent = withRouter(connect(mapState, mapDispatch)(AuthenticatedComponent))
 
 export default ConnectedAuthenticatedComponent

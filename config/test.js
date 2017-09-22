@@ -1,8 +1,6 @@
 module.exports = {
-  'pubsweet-server': {
-    'API_ENDPOINT': 'http://example.com'
-  },
   'pubsweet-client': {
+    'API_ENDPOINT': 'http://example.com',
     'update-subscriber': {
       visible: true
     }
