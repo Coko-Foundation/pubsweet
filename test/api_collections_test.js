@@ -404,5 +404,72 @@ describe('Collections API', () => {
       await api.collections.delete(collection.id, userToken)
         .expect(STATUS.FORBIDDEN)
     })
+
+    it('should delete teams associated with a collection when the collection is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: collection.id
+        }
+      }
+
+      await api.teams.post(teamData, collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different collection
+
+      const otherCollection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: otherCollection.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, collection, token)
+        .expect(STATUS.CREATED)
+
+      // await api.teams.get(token, collection, team)
+      // await api.teams.get(token, collection)
+      //     .expect(STATUS.OK)
+
+      const teamsBeforeDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.delete(collection.id, token)
+        .expect(STATUS.OK)
+
+      // await api.teams.get(token, collection, team)
+      // await api.teams.get(token, collection)
+      const teamsAfterDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
+    })
   })
 })

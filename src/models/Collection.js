@@ -1,6 +1,7 @@
 'use strict'
 const Model = require('./Model')
 const Fragment = require('./Fragment')
+const Team = require('./Team')
 
 class Collection extends Model {
   constructor (properties) {
@@ -40,6 +41,23 @@ class Collection extends Model {
       }
     })
     this.fragments.push(fragment)
+  }
+
+  async delete () {
+    await this.deleteTeams()
+    return super.delete()
+  }
+
+  async deleteTeams () {
+    const teams = await Team.all()
+
+    return Promise.all(
+      teams
+        .filter(team => team.object &&
+          team.object.type === this.type &&
+          team.object.id === this.id)
+        .map(team => team.delete())
+    )
   }
 }
 
