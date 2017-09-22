@@ -1,12 +1,13 @@
 const logger = require('@pubsweet/logger')
-const colors = require('colors/safe')
 const program = require('commander')
 const properties = require('../src/user-properties')
+const { addUser } = require('db-manager')
+const runPrompt = require('../src/run-prompt')
+const _ = require('lodash/fp')
 
-module.exports = async args => {
+const readCommand = async argsOverride => {
   program
-    .arguments('[path]')
-    .description('Add a user to the database for pubsweet app at [path].')
+    .description('Add a user to a database of a PubSweet app. Run from your project root')
     .option('--dev', 'Add user to development mode database')
 
   Object.keys(properties).forEach(key => {
@@ -19,22 +20,17 @@ module.exports = async args => {
     }
   })
 
-  program.parse(args || process.argv)
+  return program.parse(argsOverride || process.argv)
+}
 
-  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+module.exports = async argsOverride => {
+  const commandOpts = await readCommand(argsOverride)
 
-  const appPath = program.args[0]
+  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
-  if (!appPath || appPath.length === 0) {
-    const eg = colors.bold(`pubsweet adduser ${colors.italic('./myapp')}`)
-    throw new Error(`You must specify an app path, e.g. ${eg}`)
-  }
+  const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
+  const promptOverride = _.merge(configOpts, commandOpts)
+  const finalOpts = await runPrompt({properties, override: promptOverride})
 
-  logger.info('Adding user to database of the app at path', appPath)
-
-  await require('../src/add-user')({
-    appPath: appPath,
-    properties: require('../src/user-properties'),
-    override: program
-  })
+  return createUser(finalOpts)
 }

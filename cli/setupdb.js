@@ -1,12 +1,14 @@
-const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
 const properties = require('../src/db-properties')
+const { setupDb } = require('db-manager')
+const config = require('config')
+const _ = require('lodash/fp')
+const runPrompt = require('../src/run-prompt')
 
-module.exports = async args => {
+const readCommand = async argsOverride => {
   program
-    .arguments('[path]')
-    .description('Setup a database for your PubSweet app, [path] should be the root of the app')
+    .description('Setup a database for a PubSweet app. Run from your project root')
     .option('--dev', 'Generate development mode database')
     .option('--clobber', 'Overwrite any existing database')
 
@@ -14,22 +16,17 @@ module.exports = async args => {
     program.option(`--${key} [string]`, properties[key].description)
   })
 
-  program.parse(args || process.argv)
+  return program.parse(argsOverride || process.argv)
+}
 
-  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+module.exports = async argsOverride => {
+  const commandOpts = await readCommand(argsOverride)
 
-  const appPath = program.args[0]
+  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
-  if (!appPath || appPath.length === 0) {
-    const eg = colors.bold(`pubsweet setupdb ${colors.italic('./myapp')}`)
-    throw new Error(`You must specify an app path, e.g. ${eg}`)
-  }
+  const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
+  const promptOverride = _.merge(configOpts, commandOpts)
+  const finalOpts = await runPrompt({properties, override: promptOverride})
 
-  logger.info('Generating PubSweet app database at path', require('../src/db-path')(appPath))
-
-  await require('../src/newdb')({
-    appPath: appPath,
-    properties: require('../src/db-properties'),
-    override: program
-  })
+  return setupDb(finalOpts)
 }

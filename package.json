@@ -28,6 +28,7 @@
     "chokidar": "^1.6.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "db-manager": "git+https://gitlab.coko.foundation/yld/db-manager.git",
     "dotenv": "^2.0.0",
     "express": "^4.15.3",
     "express-pouchdb": "^2.3.7",
