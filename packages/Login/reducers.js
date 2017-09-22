@@ -12,34 +12,39 @@ export default function userLogin (state = {
 }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true,
         isAuthenticated: false,
         username: action.credentials.username
-      })
+      }
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: true,
         user: action.user,
         token: action.token
-      })
+      }
     case LOGIN_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: false,
-        error: action.message
-      })
+        error: action.error
+      }
     case LOGOUT_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: false
-      })
+      }
     case LOGOUT_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         isAuthenticated: false
-      })
+      }
     default:
       return state
   }

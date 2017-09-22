@@ -12,10 +12,10 @@ export default class Login extends Component {
     this.redirectTo = qs.parse(location.search).next ||
       config['pubsweet-client']['login-redirect']
   }
+
   render () {
-    const self = this
-    const { error } = self.props
-    self.refs = {}
+    const { error } = this.props
+    this.refs = {}
     return (
       <div className="bootstrap" style={{marginTop: 20}}>
         <Grid>
@@ -35,13 +35,19 @@ export default class Login extends Component {
               <form>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
-                  <input type="text"
-                    ref={function (c) { self.refs.username = c }} className={error ? 'form-control error' : 'form-control success'} placeholder="Username" />
+                  <input
+                      type="text"
+                      ref={input => { this.refs.username = input }}
+                      className={error ? 'form-control error' : 'form-control success'}
+                      placeholder="Username" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password"
-                    ref={function (c) { self.refs.password = c }} className={error ? 'form-control error' : 'form-control success'} placeholder="Password" />
+                  <input
+                      type="password"
+                      ref={input => { this.refs.password = input }}
+                      className={error ? 'form-control error' : 'form-control success'}
+                      placeholder="Password" />
                 </div>
                 <button onClick={this.handleClick}
                   className={styles.button + ' btn btn-block btn-primary'}>
@@ -56,6 +62,7 @@ export default class Login extends Component {
       </div>
     )
   }
+
   handleClick (event) {
     event.preventDefault()
     const credentials = {
@@ -67,6 +74,7 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
+  error: PropTypes.string,
   actions: PropTypes.object,
   location: PropTypes.object
 }
