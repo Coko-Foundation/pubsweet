@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 import Joi from 'joi-browser'
+import serverValidations from 'pubsweet-server/src/models/validations'
+import config from 'config'
+const validations = serverValidations(config)
 
 class PubSweetFormGroup extends React.Component {
   constructor (props) {
@@ -17,7 +20,7 @@ class PubSweetFormGroup extends React.Component {
     if (!state.startedEditing) return null
 
     let [model, property] = this.props.modelProperty.split('.')
-    let validation = Joi.reach(VALIDATIONS[model], property)
+    let validation = Joi.reach(validations[model], property)
 
     let result = validation.label(this.props.label).validate(state.value)
     if (result.error) {
