@@ -10,20 +10,8 @@ class Fragment extends Model {
   }
 
   async delete () {
-    await this.deleteTeams()
+    await Team.deleteAssociated(this.type, this.id)
     return super.delete()
-  }
-
-  async deleteTeams () {
-    const teams = await Team.all()
-
-    return Promise.all(
-      teams
-        .filter(team => team.object &&
-          team.object.type === this.type &&
-          team.object.id === this.id)
-        .map(team => team.delete())
-    )
   }
 }
 

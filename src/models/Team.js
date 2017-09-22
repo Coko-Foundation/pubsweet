@@ -16,6 +16,18 @@ class Team extends Model {
     }
   }
 
+  static async deleteAssociated (type, id) {
+    const teams = await Team.all()
+
+    return Promise.all(
+      teams
+        .filter(team => team.object &&
+          team.object.type === type &&
+          team.object.id === id)
+        .map(team => team.delete())
+    )
+  }
+
   updateProperties (properties) {
     let currentMembers = new Set(this.members)
     let newMembers = new Set(properties.members)
