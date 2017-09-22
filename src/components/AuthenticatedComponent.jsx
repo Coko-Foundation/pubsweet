@@ -66,13 +66,14 @@ export class AuthenticatedComponent extends React.Component {
       state,
       component: Component,
       operation,
+      children,
       ...otherProps
     } = this.props
 
     const object = selector(state)
     try {
       if (this.authsome.can(this.props.currentUser.user, operation, object)) {
-        return <Component {...otherProps} />
+        return children || <Component {...otherProps} />
       }
     } catch (e) {}
 
@@ -81,7 +82,8 @@ export class AuthenticatedComponent extends React.Component {
 }
 
 AuthenticatedComponent.propTypes = {
-  component: PropTypes.func.isRequired,
+  children: PropTypes.node,
+  component: PropTypes.func,
   selector: PropTypes.func.isRequired,
   operation: PropTypes.string.isRequired,
   authsome: PropTypes.shape({

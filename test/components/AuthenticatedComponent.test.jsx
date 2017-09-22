@@ -7,7 +7,6 @@ const { AuthenticatedComponent } = require('../../src/components/AuthenticatedCo
 
 function makeWrapper (props = {}) {
   return shallow(<AuthenticatedComponent
-    component={function ChildComponent () {}}
     selector={jest.fn(() => ({}))}
     operation=""
     authsome={{ mode: jest.fn(() => false) }}
@@ -18,7 +17,9 @@ function makeWrapper (props = {}) {
     currentUser={{}}
     pushState={jest.fn()}
     location={{}}
-    {...props} />)
+    {...props}>
+    <button/>
+  </AuthenticatedComponent>)
 }
 
 describe('<AuthenticatedComponent/>', () => {
@@ -55,7 +56,7 @@ describe('<AuthenticatedComponent/>', () => {
     expect(pushState).toHaveBeenCalledWith('stuff')
   })
 
-  it('renders component if authorized', () => {
+  it('renders children if authorized', () => {
     const pushState = jest.fn()
     const wrapper = makeWrapper({
       pushState,
@@ -66,7 +67,7 @@ describe('<AuthenticatedComponent/>', () => {
     })
     wrapper.instance().checkAuth({ isAuthenticated: true })
 
-    expect(wrapper.name()).toBe('ChildComponent')
+    expect(wrapper.name()).toBe('button')
     expect(pushState).not.toHaveBeenCalled()
   })
 
