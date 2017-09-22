@@ -4,12 +4,13 @@ import { Grid, Row, Col, Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import styles from './Login.local.scss'
 import config from 'config'
-
+import qs from 'query-string'
 export default class Login extends Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.redirectTo = this.props.location.query.next || config['pubsweet-client']['login-redirect']
+    this.redirectTo = qs.parse(location.search).next ||
+      config['pubsweet-client']['login-redirect']
   }
   render () {
     const self = this
