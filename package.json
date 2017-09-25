@@ -5,12 +5,9 @@
   "bin": "./bin/pubsweet.js",
   "scripts": {
     "lint": "eslint bin src cli test",
-    "pretest": "npm run lint",
-    "pretestci": "npm run pretest",
     "test": "NODE_ENV=test jest --runInBand --no-cache",
-    "testonly": "NODE_ENV=test jest --runInBand --no-cache",
-    "testdocker": "NODE_ENV=test jest --color --expand --verbose --runInBand --no-watchman --no-cache",
-    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
+    "vuln-test": "nsp check --output checkstyle",
+    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
     "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug",
     "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
   },

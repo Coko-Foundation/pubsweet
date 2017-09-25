@@ -1,8 +1,18 @@
 image: pubsweet/pubsweet-test-base
 before_script:
   - yarn
-test:
+  - yarn link
+
+test:lint:
   script:
-    - xvfb-run --server-args "-screen 0 1024x768x24" yarn run testdocker
+    - npm run lint
+
+test:vulnerabilities:
+  script:
+    - npm run vuln-test
+
+test:node:
+  script:
+    - npm test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 

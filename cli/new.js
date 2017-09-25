@@ -4,8 +4,7 @@ const program = require('commander')
 const fs = require('fs-extra')
 const spawn = require('child-process-promise').spawn
 const path = require('path')
-
-const STARTER_REPO_URL = 'https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git'
+const { STARTER_REPO_URL } = require('../src/constants')
 
 const readCommand = async argsOverride => {
   program
@@ -16,6 +15,7 @@ const readCommand = async argsOverride => {
   program.parse(argsOverride || process.argv)
 
   const appName = program.args[0]
+  logger.info('>>>>>>>>>>>>>>>>>>>>>>>', 'yes, using right file!', appName)
 
   if (!appName || appName.length === 0) {
     const eg = colors.bold(`pubsweet new ${colors.italic('myappname')}`)
@@ -34,7 +34,7 @@ const overWrite = (appName) => {
 }
 
 module.exports = async argsOverride => {
-  const { appName, clobber } = readCommand(argsOverride)
+  const { appName, clobber } = await readCommand(argsOverride)
 
   logger.info(`Generating new PubSweet app: ${appName}`)
 
