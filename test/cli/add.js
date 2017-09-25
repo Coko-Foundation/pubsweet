@@ -1,3 +1,4 @@
+/*
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 
 require('../helpers/fix-stdio')
@@ -38,3 +39,4 @@ describe('CLI: pubsweet add', () => {
     await expect(cliadd(cmd('add ink-backend'))).resolves.toBeUndefined()
   })
 })
+*/

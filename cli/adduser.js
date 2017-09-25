@@ -1,9 +1,9 @@
-const logger = require('@pubsweet/logger')
 const program = require('commander')
 const properties = require('../src/user-properties')
-const { addUser } = require('db-manager')
+const { addUser } = require('@pubsweet/db-manager')
 const runPrompt = require('../src/run-prompt')
 const _ = require('lodash/fp')
+const config = require('config')
 
 const readCommand = async argsOverride => {
   program
@@ -32,5 +32,5 @@ module.exports = async argsOverride => {
   const promptOverride = _.merge(configOpts, commandOpts)
   const finalOpts = await runPrompt({properties, override: promptOverride})
 
-  return createUser(finalOpts)
+  return addUser(finalOpts)
 }

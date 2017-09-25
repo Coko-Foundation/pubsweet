@@ -1,7 +1,6 @@
-const colors = require('colors/safe')
 const program = require('commander')
 const properties = require('../src/db-properties')
-const { setupDb } = require('db-manager')
+const { setupDb } = require('@pubsweet/db-manager')
 const config = require('config')
 const _ = require('lodash/fp')
 const runPrompt = require('../src/run-prompt')

@@ -1,68 +1,38 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-
-require('../helpers/fix-stdio')
-require('../helpers/debug-exit')
-
-const path = require('path')
-require('app-module-path').addPath(path.join(__dirname, '..', '..'))
-
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
 const fs = require('fs-extra')
-const workingdir = require('../helpers/working-dir')
-const cmd = require('../helpers/cmd')
+const formatOpts = require('../helpers/format-opts')
 const spawn = require('child-process-promise').spawn
+const config = require('config')
+const path = require('path')
+const appPath = path.join(require.resolve('@pubsweet/db-manager'), '..', '..')
 
-const clidb = require('../../cli/setupdb')
+const dbPath = `${appPath}/test-db`
 
-const dbanswers = {
+config['pubsweet-server'] = {
+  dbPath,
+  adapter: 'leveldb'
+}
+
+const answers = {
   username: 'someuser',
   email: 'user@test.com',
   password: '12345',
   collection: 'entries'
 }
 
-const newapp = () => {
-  const env = Object.create(process.env)
-  env.NODE_ENV = 'production'
-  const binpath = path.join(__dirname, '..', '..', 'bin', 'pubsweet-new')
-  const newcmd = cmd('new testapp', dbanswers).join(' ').replace(
-    ' new ', ` ${binpath} `
-  )
-  return spawn(
-    `${newcmd}`,
-    [],
-    {
-      cwd: process.cwd(),
-      stdio: 'inherit',
-      shell: true,
-      env: env
-    }
-  )
-}
-
-describe('CLI: pubsweet setupdb', () => {
-  beforeAll(() => { process.env.NODE_ENV = 'production' })
-  afterAll(() => { process.env.NODE_ENV = 'test' })
-
-  it('requires an app path', async () => {
-    await expect(clidb(cmd('setupdb'))).rejects
-      // .toMatch(/specify an app path/)
-      .toBeInstanceOf(Error)
+const runCommand = async (args, options) => {
+  const argList = args.split(' ').concat(formatOpts(options))
+  return spawn('pubsweet', argList, {
+    cwd: appPath,
+    stdio: 'inherit'
   })
-
+}
+// fs.emptyDirSync(dbPath)
+describe('CLI: pubsweet setupdb', () => {
   it('creates a new database', async () => {
-    const dir = await workingdir()
-    await newapp()
+    await runCommand('setupdb', answers)
+    const testFilePath = path.join(dbPath, 'test', 'CURRENT')
 
-    const appPath = path.join(dir, 'testapp')
-    require('app-module-path').addPath(appPath)
-
-    const dbPath = path.join(appPath, 'api', 'db')
-    await fs.emptyDir(dbPath)
-
-    await clidb(cmd(`setupdb ${appPath}`, dbanswers))
-
-    const testfile = path.join(require('../../src/db-path')(appPath), 'CURRENT')
-
-    await expect(fs.stat(testfile)).resolves.toBeInstanceOf(fs.Stats)
+    expect(fs.existsSync(testFilePath)).toBe(true)
   })
 })

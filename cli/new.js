@@ -22,24 +22,25 @@ const readCommand = async argsOverride => {
     throw new Error(`You must specify an app name, e.g. ${eg}`)
   }
 
-  return { appName, program.clobber }
+  return { appName, clobber: program.clobber }
 }
 
-const clobber = (appName) => {
+const overWrite = (appName) => {
   if (!fs.statSync(appName).isDirectory()) {
     throw new Error(appName, 'exists in the current directory directory as a file. Will not overwrite.')
   }
-  logger.info('Overwriting directory,' appName, 'due to --clobber flag')
+  logger.info(`Overwriting directory ${appName} due to --clobber flag`)
   fs.removeSync(appName)
 }
 
-
 module.exports = async argsOverride => {
-  const {appName, clobber} = readCommand(argsOverride)
+  const { appName, clobber } = readCommand(argsOverride)
 
-  logger.info('Generating new PubSweet app:', appName)
-  if (clobber) clobber()
-  await spawn('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit'})
+  logger.info(`Generating new PubSweet app: ${appName}`)
+
+  if (clobber) { overWrite(appName) }
+
+  await spawn('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
 
   logger.info('Installing app dependencies')
   const localYarn = path.join(__dirname, 'node_modules', '.bin', 'yarn')
