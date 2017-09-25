@@ -23,13 +23,13 @@
   "dependencies": {
     "@pubsweet/db-manager": "git+https://gitlab.coko.foundation/yld/db-manager.git",
     "@pubsweet/logger": "^0.0.1",
+    "@pubsweet/starter": "git+https://gitlab.coko.foundation/yld/pubsweet-starter.git#cli-refactor",
     "app-module-path": "^2.2.0",
     "authsome": "0.0.4",
     "child-process-promise": "^2.2.1",
     "chokidar": "^1.6.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
-    "db-manager": "git+https://gitlab.coko.foundation/yld/db-manager.git",
     "express": "^4.15.3",
     "express-pouchdb": "^2.3.7",
     "forever-monitor": "^1.7.0",
@@ -39,7 +39,6 @@
     "pouchdb": "^6.2.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
     "pubsweet-server": "^1.0.0-alpha.2",
-    "pubsweet-starter": "git+https://gitlab.coko.foundation/yld/pubsweet-starter.git#cli-refactor",
     "uuid": "^3.0.1",
     "webpack": "^2.3.2",
     "yarn": "^1.0.0"
