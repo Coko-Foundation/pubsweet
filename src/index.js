@@ -1,8 +1,12 @@
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
+
 const config = require('config')
 const validations = require('./validations')
 const { get } = require('lodash/fp')
 
 const loggerFromConfig = get('pubsweet-server.logger', config)
+
+config.util.setModuleDefaults('pubsweet-server.logger', loggerFromConfig)
 
 let logger = validations.validateConfig(loggerFromConfig)
 let configured = Boolean(logger)
