@@ -1,7 +1,6 @@
 'use strict'
 
 process.env.ALLOW_CONFIG_MUTATIONS = true
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 let config = require('config')
 config['pubsweet-server'] = { }
