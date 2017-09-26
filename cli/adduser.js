@@ -1,8 +1,8 @@
 const program = require('commander')
-const properties = require('../src/user-properties')
+const properties = require('../src/schemas/').user
 const { addUser } = require('@pubsweet/db-manager')
 const runPrompt = require('../src/run-prompt')
-const _ = require('lodash/fp')
+const _ = require('lodash')
 const config = require('config')
 
 const readCommand = async argsOverride => {
@@ -10,13 +10,11 @@ const readCommand = async argsOverride => {
     .description('Add a user to a database of a PubSweet app. Run from your project root')
     .option('--dev', 'Add user to development mode database')
 
-  Object.keys(properties).forEach(key => {
-    let value = properties[key]
-
-    if (value.type && value.type === 'boolean') {
-      program.option(`--${key}`, properties[key].description)
+  _.forEach(properties, (value, key) => {
+    if (_.get('type', value) === 'boolean') {
+      program.option(`--${key}`, value.description)
     } else {
-      program.option(`--${key} [string]`, properties[key].description)
+      program.option(`--${key} [string]`, value.description)
     }
   })
 

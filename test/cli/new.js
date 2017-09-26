@@ -1,40 +1,46 @@
-/*
-const formatArgs = require('../helpers/format-args')
-const spawn = require('child-process-promise').spawn
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
+jest.mock('child-process-promise', () => ({ spawn: jest.fn() }))
+jest.mock('fs-extra', () => {
+  const fs = require.requireActual('fs-extra')
+  fs.removeSync = jest.fn()
+  return fs
+})
 
-// const appName = 'testapp'
+const path = require('path')
+const fs = require('fs-extra')
+const { getMockArgv } = require('../helpers/')
+const runNew = require('../../cli/new')
 
-const runCommand = async (argsList, options) => {
-  const optsList = formatArgs(options)
-  return spawn('pubsweet', argsList.concat[optsList], {
-    cwd: process.cwd(),
-    stdio: 'inherit'
-  })
-}
+const spawnSpy = require('child-process-promise').spawn
+const removeSpy = fs.removeSync 
 
-describe('CLI: pubsweet new', () => {
-  it('requires an app name', async () => {
-    try {
-      await runCommand('new', {})
-    } catch (e) {
-      console.log(e)
-    }
-  })
-  it('rejects if app exists', async () => {
-    fs.writeFileSync(path.join(dir, 'file'), '')
+const appName = 'testapp'
+const appPath = path.join(process.cwd(), appName)
 
-    await expect(checknoapp({appPath: dir})).rejects
-      .toBeInstanceOf(Error)
-  })
-
-  it('resolves if no app exists', async () => {
-    const dir = '/__this_does_not_exist_probably__'
-    await checknoapp({appPath: dir})
+describe('new', () => {
+  it('spawns git and yarn child processes with correct arguments', async () => {
+    await runNew(getMockArgv({args: appName}))
+    const calls = spawnSpy.mock.calls
+    expect(calls).toHaveLength(2)
+    expect(calls[0][1][2]).toBe(appName)
+    expect(calls[1][2].cwd).toBe(appPath)
   })
 
-  it('resolves if clobber + app exists', async () => {
-    const dir = await workingdir()
-    await checknoapp({appPath: dir, override: { clobber: true }})
+  it('will not overwrite dir without clobber passed', async () => {
+    fs.ensureDirSync(path.join(appPath, 'block-write'))
+    await runNew(getMockArgv({args: appName}))
+    const calls = removeSpy.mock.calls
+    expect(calls).toHaveLength(0)
+    const notOverwritten = fs.existsSync(appPath)
+    expect(notOverwritten).toBeTruthy()
+    require.requireActual('fs-extra').removeSync(appPath)
+  })
+
+  it('will overwrite dir with clobber passed', async () => {
+    fs.ensureDirSync(path.join(appPath, 'block-write'))
+    await runNew(getMockArgv({args: appName, options: {clobber: true}}))
+    const calls = removeSpy.mock.calls
+    expect(calls[0][0]).toBe(appPath)
+    require.requireActual('fs-extra').removeSync(appPath)
   })
 })
-  */

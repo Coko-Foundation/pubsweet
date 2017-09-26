@@ -15,9 +15,8 @@ const readCommand = async argsOverride => {
   program.parse(argsOverride || process.argv)
 
   const appName = program.args[0]
-  logger.info('>>>>>>>>>>>>>>>>>>>>>>>', 'yes, using right file!', appName)
 
-  if (!appName || appName.length === 0) {
+  if (!appName) {
     const eg = colors.bold(`pubsweet new ${colors.italic('myappname')}`)
     throw new Error(`You must specify an app name, e.g. ${eg}`)
   }
@@ -25,27 +24,30 @@ const readCommand = async argsOverride => {
   return { appName, clobber: program.clobber }
 }
 
-const overWrite = (appName) => {
-  if (!fs.statSync(appName).isDirectory()) {
-    throw new Error(appName, 'exists in the current directory directory as a file. Will not overwrite.')
+const overWrite = (appPath) => {
+  if (!fs.statSync(appPath).isDirectory()) {
+    throw new Error(appPath, 'exists as a file. Will not overwrite.')
   }
-  logger.info(`Overwriting directory ${appName} due to --clobber flag`)
-  fs.removeSync(appName)
+  logger.info(`Overwriting ${appPath} due to --clobber flag`)
+  fs.removeSync(appPath)
 }
 
 module.exports = async argsOverride => {
   const { appName, clobber } = await readCommand(argsOverride)
-
   logger.info(`Generating new PubSweet app: ${appName}`)
 
-  if (clobber) { overWrite(appName) }
+  const appPath = path.join(process.cwd(), appName)
+
+  if (clobber) { overWrite(appPath) }
 
   await spawn('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
 
   logger.info('Installing app dependencies')
-  const localYarn = path.join(__dirname, 'node_modules', '.bin', 'yarn')
-  await spawn(localYarn, ['--ignore-optional', '--no-progress'], {
-    cwd: path.join(process.cwd, appName),
+
+  // TODO: There is an error when using local yarn. Fix it.
+  // const localYarn = path.join(__dirname, '..', 'node_modules', '.bin', 'yarn')
+  await spawn('yarn', ['install'], {
+    cwd: appPath,
     stdio: 'inherit'
   })
 

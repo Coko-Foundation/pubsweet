@@ -1,20 +1,38 @@
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000000
+const { runCommand } = require('./helpers/')
 const path = require('path')
 const fs = require('fs-extra')
-const { runCommand } = require('../helpers/')
 
 const appPath = path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter')
 const dbPath = path.join(appPath, 'api', 'db')
 
+const appName = 'testapp'
+const cwd = path.join(__dirname, '..', 'temp')
+
+/* These tests run "pubsweet" commands as child processes with no mocking */
+
 describe('CLI: integration test', async () => {
-  it.only('new: spawns git clone <appname> and yarn install', async () => {
+  it('new: will not overwrite non-empty dir', async () => {
+    expect.hasAssertions()
+    fs.ensureDirSync(path.join(cwd, 'testapp', 'blocking-dir'))
+    try {
+      await runCommand({ args: `new ${appName}`, cwd, stdio: 'pipe' })
+    } catch (e) {
+      expect(e.stderr).toContain(`destination path 'testapp' already exists and is not an empty directory`)
+    }
+    fs.removeSync(cwd)
+  })
+
+  // This test is very slow. There is a mocked version in test/cli/new.js
+  it.skip('new: runs git clone <appname> and yarn install', async () => {
+    // expect.hasAssertions()
     const appName = 'testapp'
-    const cwd = path.join(__dirname, '..', '..', 'temp')
     fs.ensureDirSync(cwd)
     try {
-      const { stdout, stderr } = await runCommand({ args: `new ${appName}`, cwd })
+      const { stdout, stderr } = await runCommand({ args: `new ${appName}`, cwd, stdio: 'pipe' })
+      // requires merge on pubsweet-starter
       console.log(stdout, stderr)
     } catch (e) {
-      console.log('eeeerrrored', e.stdout, e.stderr)
     }
     fs.removeSync(cwd)
   })

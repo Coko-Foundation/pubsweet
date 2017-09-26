@@ -253,3 +253,6 @@ Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
 <a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
+
+NOTE: for dev, necessary to run npm link in current dir and npm link pubsweet in @pubsweet-starter dir 
+

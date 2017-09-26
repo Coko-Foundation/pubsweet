@@ -1,8 +1,8 @@
 const program = require('commander')
-const properties = require('../src/db-properties')
+const properties = require('../src/schemas/').db
 const { setupDb } = require('@pubsweet/db-manager')
 const config = require('config')
-const _ = require('lodash/fp')
+const _ = require('lodash')
 const runPrompt = require('../src/run-prompt')
 
 const readCommand = async argsOverride => {
@@ -11,8 +11,8 @@ const readCommand = async argsOverride => {
     .option('--dev', 'Generate development mode database')
     .option('--clobber', 'Overwrite any existing database')
 
-  Object.keys(properties).forEach(key => {
-    program.option(`--${key} [string]`, properties[key].description)
+  _.forEach(properties, (value, key) => {
+    program.option(`--${key} [string]`, value.description)
   })
 
   return program.parse(argsOverride || process.argv)
