@@ -9,7 +9,7 @@ const createAdminUser = async (userData) => {
   const user = new User(userData)
   await user.save()
 
-  logger.info('Saved admin user: ', user.username)
+  logger.info('Saved admin user:', user.username)
 
   user.password = userData.password
   return user
@@ -23,7 +23,7 @@ const createCollection = async (title, user) => {
   collection.setOwners([user.id])
   await collection.save()
 
-  logger.info('Created initial collection: ', collection.title)
+  logger.info('Created initial collection:', collection.title)
 
   return collection
 }

@@ -24,6 +24,7 @@ const checkNoDb = async (mergedDbConfig) => {
 
 module.exports = async (setupDbConfig) => {
   const mergedDbConfig = _.merge(config.has('dbManager') ? config.get('dbManager'): {}, setupDbConfig)
+  config.util.setModuleDefaults(mergedDbConfig)
   validateSetupDbConfig(mergedDbConfig)
   try {
     await checkNoDb(mergedDbConfig)

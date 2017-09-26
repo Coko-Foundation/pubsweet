@@ -1,3 +1,4 @@
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
 const config = require('config')
 const { validateServerConfig } = require('./validations')
 
