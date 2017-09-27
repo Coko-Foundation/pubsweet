@@ -1,4 +1,3 @@
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
 jest.mock('child-process-promise', () => ({ spawn: jest.fn() }))
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')

@@ -14,16 +14,13 @@ jest.mock('../../src/package-management/helpers/', () => {
 const path = require('path')
 const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
-const runAdd = require('../../cli/add')
+const runRemove = require('../../cli/remove')
 
 const spawnSpy = require('child-process-promise').spawn
 const readPkgSpy = require('../../src/package-management/helpers/').getDepsFromPackageJson
 const writeSpy = fs.writeJsonSync 
 
-const appName = 'testapp'
-const appPath = path.join(process.cwd(), appName)
-
-describe('add', () => {
+describe('remove', () => {
   beforeAll(() => {
     process.chdir(path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'))
   })
@@ -37,25 +34,25 @@ describe('add', () => {
   })
 
   it('requires a component', async () => {
-    await expect(runAdd(getMockArgv(''))).rejects
+    await expect(runRemove(getMockArgv(''))).rejects
       .toBeInstanceOf(Error)
   })
 
-  it('writes new component into components.json', async () => {
-    const componentName = 'test-widget'
+  it('removes component from components.json', async () => {
+    const componentName = 'blog'
     const fullName = `pubsweet-component-${componentName}`
     readPkgSpy
-      .mockImplementationOnce(() => ({}))
       .mockImplementationOnce(() => ({ [fullName]: 'version' }))
-    await runAdd(getMockArgv({args: componentName}))
+      .mockImplementationOnce(() => ({}))
+    await runRemove(getMockArgv({args: componentName}))
     const calls = writeSpy.mock.calls
     expect(calls).toHaveLength(1)
-    expect(calls[0][1]).toContain(fullName)
+    expect(calls[0][1]).not.toContain(fullName)
   })
 
   it('spawns yarn child process with correct arguments', async () => {
     const componentName = 'test-widget'
-    await runAdd(getMockArgv({args: componentName}))
+    await runRemove(getMockArgv({args: componentName}))
     const calls = spawnSpy.mock.calls
     expect(calls).toHaveLength(1)
     expect(calls[0][1][1]).toBe(`pubsweet-component-${componentName}`)
