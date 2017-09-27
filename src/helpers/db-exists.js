@@ -1,8 +1,7 @@
 const path = require('path')
-require('isomorphic-fetch')
+const fetch = require('isomorphic-fetch')
 const fs = require('fs-extra')
 const logger = require('@pubsweet/logger')
-const config = require('config')
 const dbPath = require('./db-path')
 
 const httpDbExists = async url => {
@@ -10,19 +9,19 @@ const httpDbExists = async url => {
     await fetch(url)
     return true
   } catch (e) {
-    logger.debug('Error requesting DB:', err)
+    logger.debug('Error requesting DB:', e)
     return false
   }
 }
 
 const dbExists = async () => {
   if (/^http/.test(dbPath)) {
-    return await httpDbExists()
+    return httpDbExists()
   }
 
   const dbCheckPath = path.join(dbPath, 'CURRENT')
-  return await fs.pathExists(dbCheckPath)
-} 
+  return fs.pathExists(dbCheckPath)
+}
 
 module.exports = async () => {
   logger.info(`Checking if database exists at path ${dbPath}.`)

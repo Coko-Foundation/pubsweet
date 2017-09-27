@@ -7,5 +7,3 @@ const exportablePath = /^http/.test(dbPath)
   : path.join(dbPath, process.env.NODE_ENV)
 
 module.exports = exportablePath
-
-
