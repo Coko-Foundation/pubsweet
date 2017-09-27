@@ -18,10 +18,9 @@ const attachment = async (epub, res, id) => {
 }
 
 const folder = async (epub, res) => {
-  const folder = crypto.randomBytes(64).toString('hex')
-
   // TODO: read the path to the uploads folder from config
-  const path = process.cwd() + '/uploads/epub/' + folder
+  const folder = 'epub/' + crypto.randomBytes(32).toString('hex')
+  const path = process.cwd() + '/uploads/' + folder
 
   mkdirp.sync(path)
 
@@ -34,7 +33,7 @@ const folder = async (epub, res) => {
   archive.on('end', () => {
     console.log('Wrote %d bytes', archive.pointer())
 
-    res.json({path})
+    res.json({path: folder})
   })
 }
 
