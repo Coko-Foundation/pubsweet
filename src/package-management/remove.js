@@ -6,10 +6,10 @@ const spawn = require('child-process-promise').spawn
 const { isRepo, resolveName, getDepsFromPackageJson } = require('./helpers/')
 
 const remove = async names => {
-  logger.info('Removing components', names)
+  logger.info('Removing components:', names)
   await spawn('yarn', ['remove'].concat(names), { stdio: 'inherit' })
-  logger.info('Finished removing components', names)
-})
+  logger.info('Finished removing components')
+}
 
 const updateConfig = removedComponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
@@ -17,7 +17,7 @@ const updateConfig = removedComponents => {
   fs.ensureFileSync(configFile)
   const oldComponents = fs.readJsonSync(configFile, {throws:false})
   const newComponents = _.difference(oldComponents, removedComponents)
-  fs.writeJsonSync(configFile, newComponents)
+  fs.writeJsonSync(configFile, newComponents, {spaces: '\t'})
   logger.info('Finished updating components.json config')
 }
 

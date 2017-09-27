@@ -1,21 +1,21 @@
 const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
+const _ = require('lodash')
 
-module.exports = async argsOverride => {
+const readCommand = async argsOverride => {
   program
     .arguments('<components>')
     .description(`Remove component(s) in an app.
 
     <components> - a space-separated list of one or more components.`)
 
-  program.parse(argsOverride || process.argv)
-
-  return program.args
+  return program.parse(argsOverride || process.argv)
 }
 
 module.exports = async argsOverride => {
-  const components = await readCommand(argsOverride)
+  const commandOpts = await readCommand(argsOverride)
+  const components = commandOpts.args
 
   process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
@@ -28,5 +28,5 @@ module.exports = async argsOverride => {
 
   await require('../src/package-management/').remove(components)
 
-  logger.info(`${components.length} components removed`)
+  logger.info(`Success: ${components.length} components removed`)
 }

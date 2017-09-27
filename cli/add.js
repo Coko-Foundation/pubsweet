@@ -10,13 +10,12 @@ const readCommand = async argsOverride => {
 
     <components> - a space-separated list of one or more components.`)
 
-  program.parse(argsOverride || process.argv)
-
-  return pogram.args
+  return program.parse(argsOverride || process.argv)
 }
 
 module.exports = async argsOverride => {
-  const components = await readCommand(argsOverride)
+  const commandOpts = await readCommand(argsOverride)
+  const components = commandOpts.args
 
   process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
@@ -29,5 +28,5 @@ module.exports = async argsOverride => {
 
   await require('../src/package-management/').add(components)
 
-  logger.info(`${components.length} components installed`)
+  logger.info(`Success: ${components.length} components installed`)
 }

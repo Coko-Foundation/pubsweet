@@ -1,15 +1,15 @@
 const path = require('path')
 const fs = require('fs-extra')
-const _ = require('lodash/fp')
+const _ = require('lodash')
 const spawn = require('child-process-promise').spawn
 const logger = require('@pubsweet/logger')
 const { isRepo, resolveName, getDepsFromPackageJson } = require('./helpers/')
 
 const install = async names => {
-  logger.info('Adding components', names)
+  logger.info('Adding components:', names)
   await spawn('yarn', ['add'].concat(names), { stdio: 'inherit' })
-  logger.info('Finished adding components', names)
-})
+  logger.info('Finished adding components')
+}
 
 const updateConfig = addedComponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
@@ -17,7 +17,7 @@ const updateConfig = addedComponents => {
   fs.ensureFileSync(configFile)
   const oldComponents = fs.readJsonSync(configFile, {throws: false})
   const newComponents = _.union(oldComponents, addedComponents)
-  fs.writeJsonSync(configFile, newComponents)
+  fs.writeJsonSync(configFile, newComponents, {spaces: '\t'})
   logger.info('Finished updating components.json config')
 }
 

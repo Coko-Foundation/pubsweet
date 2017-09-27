@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const path = require('path')
 
 // this regex matches all URL patterns and shortcuts accepted by npm
 // https://regex101.com/r/LWuC1E/1

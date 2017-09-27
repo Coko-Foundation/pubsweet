@@ -1,10 +1,8 @@
 const spawn = require('child-process-promise').spawn
 const reduce = require('lodash/fp/reduce').convert({cap: false})
 
-const getMockArgv = ({ args, options }) => ['mock/exec/path', 'mock/file/path']
-  .concat(args ? args.split(' ') : [], formatOpts(options))
-
 const formatOpts = reduce((acc, value, key) => acc.concat(`--${key}`, value), [])
+const joinArgsAndOpts = (args, options) => (args ? args.split(' ') : []).concat(formatOpts(options)) 
 
 const getEnvWithConfig = (config = {}) => Object.assign(
     {},
@@ -12,9 +10,11 @@ const getEnvWithConfig = (config = {}) => Object.assign(
     { NODE_CONFIG: JSON.stringify(config) }
   )
 
+const getMockArgv = ({ args, options }) => ['mock/exec/path', 'mock/file/path']
+  .concat(joinArgsAndOpts(args, options))
+
 const runCommand = async ({ args, options, cwd, nodeConfig, stdio }) => {
-  const argList = args.split(' ').concat(formatOpts(options))
-  return spawn('pubsweet', argList, {
+  return spawn('pubsweet', joinArgsAndOpts(args, options), {
     cwd,
     stdio,
     env: getEnvWithConfig(nodeConfig),
@@ -25,7 +25,5 @@ const runCommand = async ({ args, options, cwd, nodeConfig, stdio }) => {
 
 module.exports = {
   getMockArgv,
-  formatOpts,
-  getEnvWithConfig,
   runCommand
 }
