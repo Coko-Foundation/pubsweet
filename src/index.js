@@ -8,5 +8,6 @@ validateServerConfig(config.get('pubsweet-server'))
 
 module.exports = {
   setupDb: require('./setup-db/'),
-  addUser: require('./add-user/')
+  addUser: require('./add-user/'),
+  dbExists: require('./helpers/db-exists.js') 
 }
