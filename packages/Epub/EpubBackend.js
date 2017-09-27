@@ -1,6 +1,7 @@
 const path = require('path')
 const HTMLEPUB = require('html-epub')
 const serverPath = require('pubsweet/src/server-path')()
+const output = require('./output')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -8,8 +9,6 @@ const EpubBackend = function (app) {
       const Collection = app.locals.models.Collection
 
       const id = req.params.id
-
-      res.attachment(`collection-${id}.epub`)
 
       // book
       const collection = await Collection.find(id)
@@ -27,23 +26,23 @@ const EpubBackend = function (app) {
         content: fragment.source
       }))
 
-      // NOTE: "uploads" is hard-coded in the image path
-      const resourceRoot = path.join(serverPath, '..', '..', '')
+      // TODO: read the path to the uploads folder from config
+      // TODO: remove hard-coded "uploads" from the image path
+      // const resourceRoot = process.cwd() + '/uploads'
+      const resourceRoot = process.cwd()
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 
       await epub.load(parts)
 
-      const archive = await epub.stream(res)
+      switch (req.query.destination) {
+        case 'folder':
+          return output.folder(epub, res)
 
-      // TODO: this might not work if the attachment header is already sent
-      archive.on('error', err => {
-        res.status(500).send({error: err.message})
-      })
-
-      archive.on('end', () => {
-        console.log('Wrote %d bytes', archive.pointer())
-      })
+        case 'attachment':
+        default:
+          return output.attachment(epub, res, id)
+      }
     } catch (e) {
       next(e)
     }
