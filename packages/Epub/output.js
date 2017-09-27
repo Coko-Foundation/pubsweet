@@ -1,3 +1,4 @@
+const fs = require('fs')
 const crypto = require('crypto')
 const mkdirp = require('mkdirp')
 const unzipper = require('unzipper')
@@ -21,6 +22,10 @@ const folder = async (epub, res) => {
   // TODO: read the path to the uploads folder from config
   const folder = 'epub/' + crypto.randomBytes(32).toString('hex')
   const path = process.cwd() + '/uploads/' + folder
+
+  if (fs.existsSync(path)) {
+    throw new Error('Output path already exists')
+  }
 
   mkdirp.sync(path)
 
