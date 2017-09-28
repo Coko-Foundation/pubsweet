@@ -1,4 +1,5 @@
 const HTMLEPUB = require('html-epub')
+const sorter = require('./sorter')
 const convert = require('./convert')
 const output = require('./output')
 
@@ -20,15 +21,15 @@ const EpubBackend = function (app) {
       // chapters
       const fragments = await collection.getFragments()
 
-      const parts = fragments.map(fragment => ({
+      const parts = fragments.sort(sorter).map(fragment => ({
         title: fragment.title,
         content: convert(fragment.source)
       }))
 
       // TODO: read the path to the uploads folder from config
       // TODO: remove hard-coded "uploads" from the image path
-      // const resourceRoot = process.cwd() + '/uploads'
-      const resourceRoot = process.cwd()
+      const resourceRoot = process.cwd() + '/uploads'
+      // const resourceRoot = process.cwd()
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 
