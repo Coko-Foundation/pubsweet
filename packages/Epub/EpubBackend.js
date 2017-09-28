@@ -1,4 +1,5 @@
 const HTMLEPUB = require('html-epub')
+const convert = require('./convert')
 const output = require('./output')
 
 const EpubBackend = function (app) {
@@ -21,7 +22,7 @@ const EpubBackend = function (app) {
 
       const parts = fragments.map(fragment => ({
         title: fragment.title,
-        content: fragment.source
+        content: convert(fragment.source)
       }))
 
       // TODO: read the path to the uploads folder from config
