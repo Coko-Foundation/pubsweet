@@ -2,7 +2,7 @@ const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
 const fs = require('fs-extra')
-const spawn = require('child-process-promise').spawn
+const spawnSync = require('child_process').spawnSync
 const path = require('path')
 const { STARTER_REPO_URL } = require('../src/constants')
 
@@ -40,13 +40,13 @@ module.exports = async argsOverride => {
 
   if (clobber) { overWrite(appPath) }
 
-  await spawn('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
+  spawnSync('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
 
   logger.info('Installing app dependencies')
 
   // TODO: There is an error when using local yarn. Fix it.
   // const localYarn = path.join(__dirname, '..', 'node_modules', '.bin', 'yarn')
-  await spawn('yarn', ['install'], {
+  spawnSync('yarn', ['install'], {
     cwd: appPath,
     stdio: 'inherit'
   })

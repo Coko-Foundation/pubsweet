@@ -1,4 +1,4 @@
-jest.mock('child-process-promise', () => ({ spawn: jest.fn() }))
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')
   fs.writeJsonSync = jest.fn()
@@ -16,9 +16,9 @@ const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
 const runRemove = require('../../cli/remove')
 
-const spawnSpy = require('child-process-promise').spawn
+const spawnSpy = require('child_process').spawnSync
 const readPkgSpy = require('../../src/package-management/helpers/').getDepsFromPackageJson
-const writeSpy = fs.writeJsonSync 
+const writeSpy = fs.writeJsonSync
 
 describe('remove', () => {
   beforeAll(() => {

@@ -1,8 +1,6 @@
-jest.mock('child-process-promise', () => ({ spawn: jest.fn() }))
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
 jest.mock('@pubsweet/db-manager', () => ({ setupDb: jest.fn() }))
 
-const path = require('path')
-const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
 const runSetupDb = require('../../cli/setupdb')
 const setupDbSpy = require('@pubsweet/db-manager').setupDb

@@ -1,4 +1,4 @@
-jest.mock('child-process-promise', () => ({ spawn: jest.fn() }))
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')
   fs.removeSync = jest.fn()
@@ -10,8 +10,8 @@ const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
 const runNew = require('../../cli/new')
 
-const spawnSpy = require('child-process-promise').spawn
-const removeSpy = fs.removeSync 
+const spawnSpy = require('child_process').spawnSync
+const removeSpy = fs.removeSync
 
 const appName = 'testapp'
 const appPath = path.join(process.cwd(), appName)

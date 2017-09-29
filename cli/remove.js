@@ -17,8 +17,6 @@ module.exports = async argsOverride => {
   const commandOpts = await readCommand(argsOverride)
   const components = commandOpts.args
 
-  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
-
   if (_.isEmpty(components)) {
     const eg = colors.bold(`pubsweet remove ${colors.italic('login signup blog')}`)
     throw new Error(`You must specify one or more components, e.g. ${eg}`)
@@ -26,7 +24,7 @@ module.exports = async argsOverride => {
 
   logger.info(`Removing ${components.length} components...`)
 
-  await require('../src/package-management/').remove(components)
+  require('../src/package-management/').remove(components)
 
   logger.info(`Success: ${components.length} components removed`)
 }

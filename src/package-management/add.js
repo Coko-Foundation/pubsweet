@@ -1,13 +1,13 @@
 const path = require('path')
 const fs = require('fs-extra')
 const _ = require('lodash')
-const spawn = require('child-process-promise').spawn
+const spawnSync = require('child_process').spawnSync
 const logger = require('@pubsweet/logger')
-const { isRepo, resolveName, getDepsFromPackageJson } = require('./helpers/')
+const { resolveName, getDepsFromPackageJson } = require('./helpers/')
 
-const install = async names => {
+const install = names => {
   logger.info('Adding components:', names)
-  await spawn('yarn', ['add'].concat(names), { stdio: 'inherit' })
+  spawnSync('yarn', ['add'].concat(names), { stdio: 'inherit' })
   logger.info('Finished adding components')
 }
 
@@ -21,11 +21,11 @@ const updateConfig = addedComponents => {
   logger.info('Finished updating components.json config')
 }
 
-module.exports = async components => {
+module.exports = components => {
   try {
     const names = components.map(resolveName)
     const oldModules = getDepsFromPackageJson()
-    await install(names)
+    install(names)
     const newModules = getDepsFromPackageJson()
     const addedModules = _.difference(_.keys(newModules), _.keys(oldModules))
     logger.info(`The following components are new: ${addedModules.join(' ')}`)

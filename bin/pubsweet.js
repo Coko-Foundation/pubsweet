@@ -6,7 +6,7 @@ const pkg = require('../package.json')
 program
   .version(pkg.version)
   .command('new', 'create and set up a new pubsweet app')
-  .command('run', 'start a pubsweet app')
+  .command('start', 'start a pubsweet app')
   .command('setupdb', 'generate a database for a pubsweet app')
   .command('add', 'add one or more components to a pubsweet app')
   .command('remove', 'remove one or more components to a pubsweet app')
