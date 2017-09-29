@@ -1,7 +1,7 @@
 jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')
-  fs.removeSync = jest.fn()
+  fs.removeSync = jest.fn(fs.removeSync)
   return fs
 })
 

@@ -69,7 +69,7 @@ describe('CLI: integration test', async () => {
     })
   })
 
-  describe('setupdb', async () => {
+  describe.only('setupdb', async () => {
     it('creates a new database', async () => {
       const answers = {
         username: 'someuser',
