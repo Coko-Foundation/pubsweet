@@ -8,9 +8,8 @@
     "test": "NODE_ENV=test jest --runInBand --no-cache",
     "test:mocked": "NODE_ENV=test jest ./test/cli",
     "vuln-test": "nsp check --output checkstyle",
-    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
-    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug",
-    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
+    "test:ci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug"
   },
   "keywords": [
     "pubsweet",
