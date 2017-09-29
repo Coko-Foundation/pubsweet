@@ -32,6 +32,7 @@
     "forever-monitor": "^1.7.0",
     "fs-extra": "^3.0.0",
     "html-webpack-plugin": "^2.24.0",
+    "inflection": "^1.12.0",
     "joi": "^10.4.1",
     "pouchdb": "^6.2.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
