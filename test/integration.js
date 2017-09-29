@@ -21,16 +21,17 @@ const nodeConfig = {
 
 describe('CLI: integration test', async () => {
   beforeAll(() => {
-    fs.emptyDirSync(tempDir)
+    fs.ensureDirSync(tempDir)
   })
 
   afterAll(() => {
+    console.log('removing')
     // fs.removeSync(tempDir)
   })
 
   describe('new', async () => {
     it('will not overwrite non-empty dir', async () => {
-      fs.ensureDirSync(path.join(tempDir, 'testapp', 'blocking-dir'))
+      fs.ensureDirSync(path.join(appPath, 'blocking-dir'))
       const { stderr } = await runCommand({ args: `new ${appName}`, cwd: tempDir, stdio: 'pipe' })
       expect(stderr).toContain(`destination path 'testapp' already exists and is not an empty directory`)
       fs.emptyDirSync(tempDir)
@@ -90,7 +91,7 @@ describe('CLI: integration test', async () => {
     })
   })
 
-  describe('start', async () => {
+  describe.skip('start', async () => {
     it('starts a server', async () => {
       const { stdout, stderr } = await runCommand({
         args: 'start',
