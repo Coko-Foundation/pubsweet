@@ -15,6 +15,7 @@ This package exports the following functions:
 
  - `setupDB`
  - `addUser`
+ - `dbExists`
 
 ### `setupDb`
 
@@ -57,4 +58,8 @@ addUser({
   admin: true // (optional)
 })
 ```
+
+### `dbExists`
+
+This function checks if any database exists at the configured path for the current NODE_ENV. Returns `true` or `false`
 
