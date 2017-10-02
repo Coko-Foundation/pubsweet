@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --runInBand --no-cache",
     "lint": "eslint src test",
+    "test:ci": "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
     "vuln-test": "nsp check --output checkstyle"
   },
   "repository": {
@@ -37,9 +38,14 @@
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "jest": "^21.1.0",
-    "nsp": "^2.8.0",
-    "standard": "^10.0.3"
+    "nsp": "^2.8.0"
   },
   "dependencies": {
     "@pubsweet/logger": "0.0.1",
