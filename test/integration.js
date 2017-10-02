@@ -53,14 +53,16 @@ describe('CLI: integration test', async () => {
     })
 
     it('adds component', async () => {
-      const { stdout } = await runCommandSync({ args: `add ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      const { stdout, stderr } = await runCommandSync({ args: `add ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      console.log(stdout, stderr)
       expect(stdout).toContain('Success: 1 components installed')
       const configPostAdd = fs.readJsonSync(componentsFile)
       expect(configPostAdd).toEqual(oldComponents.concat(`pubsweet-component-${componentName}`))
     })
 
     it('removes component', async () => {
-      const { stdout } = await runCommandSync({ args: `remove ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      const { stdout, stderr } = await runCommandSync({ args: `remove ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      console.log(stdout, stderr)
       expect(stdout).toContain('Success: 1 components removed')
       const configPostRemove = fs.readJsonSync(componentsFile)
       expect(configPostRemove).toEqual(oldComponents)
