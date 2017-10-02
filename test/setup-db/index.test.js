@@ -26,13 +26,14 @@ const baseConfig = {
 describe('setup-db', () => {
   beforeAll(async () => {
     fs.ensureDirSync(basePath)
-    const config = require('config')
-    config['pubsweet-server'] = baseConfig['pubsweet-server']
-    config['dbManager'] = baseConfig['dbManager']
     await new PouchDB(dbPath).destroy()
   })
 
   beforeEach(async () => {
+    jest.resetModules() // necessary because db must be recreated after destroyed
+    const config = require('config')
+    config['pubsweet-server'] = baseConfig['pubsweet-server']
+    config['dbManager'] = baseConfig['dbManager']
     const { setupDb } = require('../../src/')
     await setupDb()
   })
