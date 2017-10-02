@@ -1,7 +1,6 @@
 image: pubsweet/pubsweet-test-base
 before_script:
   - yarn
-  - yarn link
 
 test:lint:
   script:
