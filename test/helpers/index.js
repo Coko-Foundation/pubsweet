@@ -1,4 +1,5 @@
 const spawnSync = require('child_process').spawnSync
+const spawn = require('child_process').spawn
 const reduce = require('lodash/fp/reduce').convert({cap: false})
 
 const formatOpts = reduce((acc, value, key) => acc.concat(`--${key}`, value), [])
@@ -13,18 +14,27 @@ const getEnvWithConfig = (config = {}) => Object.assign(
 const getMockArgv = ({ args, options }) => ['mock/exec/path', 'mock/file/path']
   .concat(joinArgsAndOpts(args, options))
 
-const runCommand = ({ args, options, cwd, nodeConfig, stdio }) => {
+const runCommandSync = ({ args, options, cwd, nodeConfig, stdio }) => {
   const { stdout, stderr } = spawnSync('pubsweet', joinArgsAndOpts(args, options), {
     cwd,
     stdio,
     env: getEnvWithConfig(nodeConfig),
-    shell: true,
-    capture: (stdio === 'inherit') ? undefined : [ 'stdout', 'stderr' ]
+    shell: true
   })
-  return { stdout: stdout ? stdout.toString() : null, stderr: stderr ? stderr.toString() : null }
+  return ({ stdout: stdout ? stdout.toString() : null, stderr: stderr ? stderr.toString() : null })
+}
+
+const runCommandAsync = ({ args, options, cwd, nodeConfig, stdio }) => {
+  return spawn('pubsweet', joinArgsAndOpts(args, options), {
+    cwd,
+    stdio,
+    env: getEnvWithConfig(nodeConfig),
+    shell: true
+  })
 }
 
 module.exports = {
   getMockArgv,
-  runCommand
+  runCommandSync,
+  runCommandAsync
 }

@@ -140,14 +140,16 @@ pubsweet new myappname
 
 ### Setting up the database (`pubsweet setupdb`)
 
-Run the `setupdb` subcommand within your app directory to create the database for your app.
+Run the `setupdb` subcommand within your app directory to:
+- create the database for your app
+- create a secret in config/local.json (required by the server)
 
 ```bash
 cd myappname
 pubsweet setupdb
 ```
 
-This will generate a database for the current `NODE_ENV` (defaulting to 'production'). You can also create a database for the 'dev' environment by passing `--dev`.
+This will add the secret to config/local.json and generate a database for the current `NODE_ENV` (defaulting to 'production'). You can also create a database for the 'dev' environment by passing `--dev`.
 
 ```bash
 pubsweet setupdb --dev
@@ -188,6 +190,10 @@ Use the `start` subcommand within your app directory to start your app. It takes
 cd myappname
 pubsweet start
 ```
+
+Forever is initialised to watch for changes in the config directory by default. To manually configure forever, add settings under the `forever` key in config (see forever's documentation for which settings are available) 
+
+Start can also be passed `--dev` to set the NODE_ENV to 'dev', and `--reduxlog-off` to switch off the redux logger.
 
 ### Adding and removing components (`pubsweet add`, `pubsweet remove`)
 

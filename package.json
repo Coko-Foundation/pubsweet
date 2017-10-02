@@ -23,6 +23,7 @@
     "@pubsweet/starter": "git+https://gitlab.coko.foundation/yld/pubsweet-starter.git#cli-refactor",
     "authsome": "0.0.4",
     "bluebird": "^3.5.0",
+    "child-process-promise": "^2.2.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "dotenv": "^4.0.0",
