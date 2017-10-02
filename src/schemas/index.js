@@ -1,4 +1,4 @@
 module.exports = {
   db: require('./db'),
-  user: require('./user'),
+  user: require('./user')
 }
