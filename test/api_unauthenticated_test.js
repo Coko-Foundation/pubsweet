@@ -82,12 +82,12 @@ describe('unauthenticated/public api', () => {
         published: true,
         nonPublicProperty: 'example'
       })
-      publicCollection = await publicCollection.save()
+      await publicCollection.save()
 
       privateCollection = new Collection({
         title: 'Private collection'
       })
-      privateCollection = await privateCollection.save()
+      await privateCollection.save()
     })
 
     it('can only see the filtered list of collections and only filtered properties in each collection', () => {
