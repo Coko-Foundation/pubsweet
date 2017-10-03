@@ -44,6 +44,8 @@ describe('setup-db', () => {
   })
 
   it('creates the database', () => {
+    const config = require('config')
+    console.log('>>>>', config)
     const dbDir = fs.readdirSync(basePath)
     expect(dbDir).toContain('test')
     const items = fs.readdirSync(dbPath)
