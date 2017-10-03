@@ -223,7 +223,7 @@ api.get('/collections/:id/teams', authBearerAndPublic, async (req, res, next) =>
 
     let teams
     try {
-      teams = await Team.findByField('object.id', req.params.id)
+      teams = await Team.findByField({'object.id': req.params.id, 'object.type': 'collection'})
     } catch (err) {
       if (err instanceof NotFoundError) {
         teams = []
@@ -330,7 +330,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndP
       throw authorizationError(req.user, req.method, fragment)
     }
 
-    const teams = await Team.findByField('object.id', req.params.fragmentId)
+    const teams = await Team.findByField({'object.id': req.params.fragmentId, 'object.type': 'fragment'})
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)
