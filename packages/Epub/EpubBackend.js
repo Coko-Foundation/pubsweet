@@ -23,12 +23,10 @@ const EpubBackend = function (app) {
       const fragments = await collection.getFragments()
 
       // styles
-      const styles = [
-        req.params.style
-      ].filter(name => name)
+      const styles = [req.query.style].filter(name => name)
 
       // converters
-      const activeConverters = [req.params.converter]
+      const activeConverters = [req.query.converter]
         .filter(name => name && converters[name])
         .map(name => converters[name])
 
@@ -38,9 +36,7 @@ const EpubBackend = function (app) {
         activeConverters.forEach(converter => converter($))
 
         styles.forEach(uri => {
-          $('<link rel="stylesheet"/>')
-            .attr('href', uri)
-            .appendTo('head')
+          $('<link rel="stylesheet"/>').attr('href', uri).appendTo('head')
         })
 
         return {
