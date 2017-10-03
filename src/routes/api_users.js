@@ -21,7 +21,7 @@ const api = express.Router()
 const authentication = require('../authentication')
 
 // Issue a token
-api.post('/authenticate', authLocal, (req, res) => {
+api.post('/users/authenticate', authLocal, (req, res) => {
   return res.status(
     STATUS.CREATED
   ).json(
@@ -30,7 +30,7 @@ api.post('/authenticate', authLocal, (req, res) => {
 })
 
 // Verify a token
-api.get('/authenticate', authBearer, async (req, res, next) => {
+api.get('/users/authenticate', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.user)
     user.token = req.authInfo.token
@@ -45,7 +45,7 @@ api.get('/authenticate', authBearer, async (req, res, next) => {
 })
 
 // Create a user
-api.post('/', async (req, res, next) => {
+api.post('/users', async (req, res, next) => {
   try {
     let user = new User(req.body)
     if (req.body.admin) throw new ValidationError('invalid property: admin')
@@ -58,7 +58,7 @@ api.post('/', async (req, res, next) => {
 })
 
 // List users
-api.get('/', authBearer, async (req, res, next) => {
+api.get('/users', authBearer, async (req, res, next) => {
   try {
     const permission = await authsome.can(req.user, req.method, req.path)
 
@@ -74,7 +74,7 @@ api.get('/', authBearer, async (req, res, next) => {
 })
 
 // Get a user
-api.get('/:id', authBearer, async (req, res, next) => {
+api.get('/users/:id', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.params.id)
     const permission = await authsome.can(req.user, req.method, user)
@@ -90,7 +90,7 @@ api.get('/:id', authBearer, async (req, res, next) => {
 })
 
 // Delete a user
-api.delete('/:id', authBearer, async (req, res, next) => {
+api.delete('/users/:id', authBearer, async (req, res, next) => {
   try {
     let user = await User.find(req.params.id)
     const permission = await authsome.can(req.user, req.method, user)
@@ -106,7 +106,7 @@ api.delete('/:id', authBearer, async (req, res, next) => {
 })
 
 // Patch a user
-api.patch('/:id', authBearer, async (req, res, next) => {
+api.patch('/users/:id', authBearer, async (req, res, next) => {
   try {
     let user = await User.find(req.params.id)
     const permission = await authsome.can(req.user, req.method, user)
