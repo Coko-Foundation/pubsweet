@@ -35,15 +35,17 @@ describe('Collections API', () => {
       expect(collections).toEqual([])
     })
 
-    it('should allow an admin user to create a collection', async () => {
+    it('should allow an admin user to create a collection (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
-      const collection = await api.collections.create(fixtures.collection, adminToken)
+      const collection = await api.collections.create(
+        Object.assign({}, fixtures.collection, {filtered: 'example'}), adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
+      expect(collection.filtered).toEqual('example')
     })
 
     it('should allow an admin user to list all collections', async () => {
@@ -99,7 +101,7 @@ describe('Collections API', () => {
       expect(filteredCollection).not.toHaveProperty('created')
     })
 
-    it('should allow an admin user to update a collection', async () => {
+    it('should allow an admin user to update a collection (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
       // create a collection
@@ -109,12 +111,14 @@ describe('Collections API', () => {
 
       // update the collection
       const title = 'Updated title'
+      const filtered = 'example'
 
-      const result = await api.collections.update(collection.id, { title }, adminToken)
+      const result = await api.collections.update(collection.id, { title, filtered }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
       expect(result.title).toEqual(title)
+      expect(result.filtered).toEqual('example')
     })
 
     it('should allow an admin user to update a collection with some fragments', async () => {
@@ -311,7 +315,7 @@ describe('Collections API', () => {
   })
 
   describe('user', () => {
-    it('should allow a user to list all the collections', async () => {
+    it('should allow a user to list all of the collections', async () => {
       const token = await authenticateUser()
 
       await api.collections.create(fixtures.collection, token)
@@ -403,6 +407,37 @@ describe('Collections API', () => {
 
       await api.collections.delete(collection.id, userToken)
         .expect(STATUS.FORBIDDEN)
+    })
+
+    it('should filter collection properties based on authorization on creation', async () => {
+      const token = await authenticateUser()
+
+      let collection = await api.collections.create(
+        Object.assign({}, fixtures.collection, { filtered: 'example' }), token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
+
+      expect(Object.keys(collection)).not.toContain('filtered')
+    })
+
+    it('should filter collection properties based on authorization on update', async () => {
+      const token = await authenticateUser()
+
+      let collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const filtered = 'example'
+
+      collection = await api.collections.update(collection.id, { filtered }, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      // collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
+
+      expect(Object.keys(collection)).not.toContain('filtered')
     })
   })
 })

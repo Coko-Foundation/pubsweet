@@ -1,6 +1,7 @@
 const collection = {
   'type': 'collection',
-  'title': 'Science Blogger posts'
+  'title': 'Science Blogger posts',
+  'published': true
 }
 
 const updatedCollection = {
@@ -9,6 +10,7 @@ const updatedCollection = {
 
 const fragment = {
   'kind': 'blogpost',
+  'title': 'Just your regular blogpost',
   'source': '<blog></blog>',
   'presentation': '<p></p>'
 }
@@ -49,12 +51,12 @@ const adminUser = {
 
 const contribTeamType = {
   name: 'Contributors',
-  permissions: 'create'
+  permissions: 'POST'
 }
 
 const readerTeamType = {
   name: 'Readers',
-  permissions: 'read'
+  permissions: 'GET'
 }
 
 const teams = {
@@ -63,12 +65,14 @@ const teams = {
 }
 
 const contributorTeam = {
+  type: 'team',
   name: 'My contributors',
   teamType: teams.contributors,
   object: fragment
 }
 
 const readerTeam = {
+  type: 'team',
   name: 'My readers',
   teamType: teams.readers,
   object: fragment

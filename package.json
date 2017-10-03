@@ -16,13 +16,13 @@
   "main": "src/index.js",
   "dependencies": {
     "@pubsweet/logger": "^0.0.1",
-    "authsome": "0.0.4",
+    "authsome": "0.0.6",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
     "config": "^1.26.2",
     "cookie-parser": "^1.4.3",
-    "express": "^4.14.0",
+    "express": "^4.16.1",
     "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
     "joi": "^10.0.6",
@@ -51,6 +51,8 @@
   "devDependencies": {
     "eslint": "^4.0.0",
     "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource": "^1.0.4",
@@ -64,8 +66,9 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-server"
   },
   "jest": {
+    "verbose": true,
     "testEnvironment": "node",
-    "testRegex": "/test/.*test.js$",
+    "testRegex": "/test/.*_test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.js"

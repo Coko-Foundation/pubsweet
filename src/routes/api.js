@@ -1,24 +1,24 @@
 const express = require('express')
 const helmet = require('helmet')
 
-const api = express.Router()
+const api = express.Router({mergeParams: true})
 
 api.use(helmet())
 
 // Collections
-const collection = require('./api_collections')
-api.use('/collections', collection)
+const collections = require('./api_collections')
+api.use(collections)
 
 // File upload API
 const upload = require('./api_upload')
-api.use('/upload', upload)
+api.use(upload)
 
 // Users API
 const users = require('./api_users')
-api.use('/users', users)
+api.use(users)
 
 // Teams
 const teams = require('./api_teams')
-api.use('/teams', teams)
+api.use(teams)
 
 module.exports = api

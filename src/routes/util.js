@@ -1,6 +1,13 @@
 const pick = require('lodash/pick')
+const AuthorizationError = require('../errors/AuthorizationError')
 
 module.exports = {
+  authorizationError: (username, operation, object) => {
+    username = username || 'public'
+    const msg = `User ${username} is not allowed to ${operation} ${object}`
+    return new AuthorizationError(msg)
+  },
+
   // Build an object containing only the id
   objectId: object => ({ id: object.id }),
 

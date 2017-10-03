@@ -127,15 +127,16 @@ class Model {
       results = await db.rel.find(this.type, id)
     } catch (err) {
       if (err.name === 'NotFoundError') {
-        logger.info('Object not found:', this.type, id)
+        throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
+      } else {
+        throw err
       }
-      throw err
     }
 
     let result = results[plural].find(result => result.id === id)
 
     if (!result) {
-      throw new NotFoundError()
+      throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
     }
 
     return new this(result)
