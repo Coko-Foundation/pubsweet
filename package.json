@@ -15,6 +15,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
+    "@pubsweet/logger": "^0.0.1",
     "authsome": "0.0.4",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
@@ -42,7 +43,6 @@
     "pouchdb-upsert": "^2.0.0",
     "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
-    "@pubsweet/logger": "git+https://gitlab.coko.foundation/yld/pubsweet-logger.git",
     "pubsweet-sse": "^0.1.1",
     "relational-pouch": "^1.4.5",
     "uuid": "^3.0.1",
