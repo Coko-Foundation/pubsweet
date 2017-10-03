@@ -1,6 +1,7 @@
 const HTMLEPUB = require('html-epub')
+const cheerio = require('cheerio')
 const sorter = require('./sorter')
-const convert = require('./convert')
+const converters = require('./converters')
 const output = require('./output')
 
 const EpubBackend = function (app) {
@@ -21,15 +22,35 @@ const EpubBackend = function (app) {
       // chapters
       const fragments = await collection.getFragments()
 
-      const parts = fragments.sort(sorter).map(fragment => ({
-        title: fragment.title,
-        content: convert(fragment.source)
-      }))
+      // styles
+      const styles = [
+        req.params.style
+      ].filter(name => name)
+
+      // converters
+      const activeConverters = [req.params.converter]
+        .filter(name => name && converters[name])
+        .map(name => converters[name])
+
+      const parts = fragments.sort(sorter).map(fragment => {
+        const $ = cheerio.load(fragment.source)
+
+        activeConverters.forEach(converter => converter($))
+
+        styles.forEach(uri => {
+          $('<link rel="stylesheet"/>')
+            .attr('href', uri)
+            .appendTo('head')
+        })
+
+        return {
+          title: fragment.title,
+          content: $.html()
+        }
+      })
 
       // TODO: read the path to the uploads folder from config
-      // TODO: remove hard-coded "uploads" from the image path
       const resourceRoot = process.cwd() + '/uploads'
-      // const resourceRoot = process.cwd()
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 

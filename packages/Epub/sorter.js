@@ -1,7 +1,7 @@
 const divisions = {
   front: -1,
   body: 0,
-  back: 1,
+  back: 1
 }
 
 module.exports = (a, b) => {

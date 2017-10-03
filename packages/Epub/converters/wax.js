@@ -1,18 +1,9 @@
-const cheerio = require('cheerio')
-
-// TODO: read these from app config
-const stylesheets = [
-  '/static/epub/print.css'
-]
-
-module.exports = source => {
-  const $ = cheerio.load(source)
-
-  // remove "uploads" from the start of each img src attribute
-  $('img[src]').each((i, elem) => {
-    const $img = $(elem)
-    const src = $img.attr('src').replace(/^\/?uploads\//)
-    $img.attr('src', src)
+module.exports = $ => {
+  // remove "uploads" from the start of each src attribute
+  $('[src]').each((i, elem) => {
+    const $elem = $(elem)
+    const src = $elem.attr('src').replace(/^\/?uploads\//)
+    $elem.attr('src', src)
   })
 
   // replace "extract-prose" with "blockquote"
@@ -47,13 +38,4 @@ module.exports = source => {
     link.text(i)
     $note.replaceWith(link)
   })
-
-  // add links to stylesheets
-  stylesheets.forEach(stylesheet => {
-    const link = $('<link rel="stylesheet"/>')
-    link.attr('href', stylesheet)
-    $('head').append(link)
-  })
-
-  return $.html()
 }
