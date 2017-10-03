@@ -3,6 +3,13 @@ const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
+    // disable logging in tests
+    logger: {
+      error: () => false,
+      warn: () => false,
+      info: () => false,
+      debug: () => false
+    },
     sse: false
   },
   validations: {

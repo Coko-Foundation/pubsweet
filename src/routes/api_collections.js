@@ -5,6 +5,7 @@ const STATUS = require('http-status-codes')
 
 const User = require('../models/User')
 const Collection = require('../models/Collection')
+const Team = require('../models/Team')
 const Fragment = require('../models/Fragment')
 
 const Authsome = require('authsome')
@@ -18,11 +19,6 @@ const { objectId, buildChangeData, fieldSelector, authorizationError } = require
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
-
-// Teams
-// TODO: Nested teams API to be deprecated
-const teams = require('./api_teams')
-api.use('/collections/:collectionId/', teams)
 
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
@@ -215,6 +211,33 @@ api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next
   }
 })
 
+// Retrieve teams for a collection
+api.get('/collections/:id/teams', authBearerAndPublic, async (req, res, next) => {
+  try {
+    let collection = await Collection.find(req.params.id)
+    const permission = await authsome.can(req.user, req.method, collection)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, collection)
+    }
+
+    let teams
+    try {
+      teams = await Team.findByField('object.id', req.params.id)
+    } catch (err) {
+      if (err instanceof NotFoundError) {
+        teams = []
+      } else {
+        throw err
+      }
+    }
+
+    res.status(STATUS.OK).json(teams)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // Retrieve a fragment
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
@@ -296,5 +319,27 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
     next(err)
   }
 })
+
+// Retrieve teams for a fragment
+api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
+  try {
+    let fragment = await Fragment.find(req.params.fragmentId)
+    const permission = await authsome.can(req.user, req.method, fragment)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, fragment)
+    }
+
+    const teams = await Team.findByField('object.id', req.params.fragmentId)
+    res.status(STATUS.OK).json(teams)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Teams
+// TODO: Nested teams API to be deprecated
+const teams = require('./api_teams')
+api.use('/collections/:collectionId/', teams)
 
 module.exports = api
