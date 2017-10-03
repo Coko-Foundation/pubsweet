@@ -7,7 +7,7 @@ const prompt = require('prompt')
 const argvs = require('minimist')(process.argv.slice(2))
 const colors = require('colors/safe')
 
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 
 prompt.override = argvs
 prompt.start()

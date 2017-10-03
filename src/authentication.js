@@ -1,4 +1,4 @@
-const logger = require('pubsweet-logger')
+const logger = require('@pubsweet/logger')
 const jwt = require('jsonwebtoken')
 
 const BearerStrategy = require('passport-http-bearer').Strategy
@@ -6,6 +6,7 @@ const AnonymousStrategy = require('passport-anonymous').Strategy
 const LocalStrategy = require('passport-local').Strategy
 
 const User = require('./models/User')
+const config = require('config')
 
 const createToken = (user) => {
   logger.info('Creating token for', user.username)
@@ -15,13 +16,13 @@ const createToken = (user) => {
       username: user.username,
       id: user.id
     },
-    process.env.PUBSWEET_SECRET,
+    config.get('pubsweet-server.secret'),
     { expiresIn: 24 * 3600 }
   )
 }
 
 const verifyToken = (token, done) => {
-  jwt.verify(token, process.env.PUBSWEET_SECRET, (err, decoded) => {
+  jwt.verify(token, config.get('pubsweet-server.secret'), (err, decoded) => {
     if (err) return done(null)
 
     return done(null, decoded.id, {
