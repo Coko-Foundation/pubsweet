@@ -3,11 +3,9 @@ const pickBy = require('lodash/pickBy')
 const omit = require('lodash/omit')
 
 async function teamPermissions (user, operation, object, context) {
-  const collectionId = get(object, 'params.collectionId')
+  const collection = get(object, 'collection')
 
-  if (collectionId) {
-    const collection = await context.models.Collection.find(collectionId)
-
+  if (collection) {
     // Go through a user's teams, if they belong to a team that's based around
     // this particular collection, check what membership in that team allows
     // and return accordingly

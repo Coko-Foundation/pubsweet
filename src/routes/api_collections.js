@@ -154,8 +154,8 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
   try {
     let collection = await Collection.find(req.params.collectionId)
     const permission = await authsome.can(req.user, req.method, {
-      path: req.path,
-      params: req.params,
+      path: req.route.path,
+      collection: collection,
       fragment: req.body
     })
 
