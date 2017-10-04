@@ -3,8 +3,9 @@ const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
 const omit = require('lodash/omit')
+const config = require('config')
 
-const BCRYPT_COST = process.env.NODE_ENV === 'test' ? 1 : 12
+const BCRYPT_COST = config.get('NODE_ENV') === 'test' ? 1 : 12
 
 class User extends Model {
   constructor (properties) {
