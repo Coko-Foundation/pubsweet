@@ -4,7 +4,7 @@
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --runInBand --no-cache",
+    "test": "NODE_ENV=test jest --runInBand --no-cache",
     "lint": "eslint src test",
     "test:ci": "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
     "vuln-test": "nsp check --output checkstyle"
