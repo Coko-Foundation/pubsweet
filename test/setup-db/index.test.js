@@ -8,11 +8,11 @@ process.env.ALLOW_CONFIG_MUTATIONS = true
 process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const basePath = path.join(__dirname, '..', '..', 'api', 'db')
-const dbPath = path.join(basePath, 'test')
+const dbPath = path.join(basePath, 'test_db')
 
 const baseConfig = {
   'pubsweet-server': {
-    dbPath: basePath,
+    dbPath,
     adapter: 'leveldb'
   },
   dbManager: {
@@ -44,18 +44,9 @@ describe('setup-db', () => {
   })
 
   it('creates the database', () => {
-    const config = require('config')
-    console.log('>>>>', config)
     const dbDir = fs.readdirSync(basePath)
-    expect(dbDir).toContain('test')
+    expect(dbDir).toContain('test_db')
     const items = fs.readdirSync(dbPath)
     expect(items).toContain('CURRENT')
-  })
-
-  it('only creates the database for the current NODE_ENV', () => {
-    const existsDev = fs.pathExistsSync(path.join(basePath, 'dev'))
-    const existsProd = fs.pathExistsSync(path.join(basePath, 'production'))
-    expect(existsDev).toBe(false)
-    expect(existsProd).toBe(false)
   })
 })

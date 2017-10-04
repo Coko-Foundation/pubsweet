@@ -1,5 +1,1 @@
-module.exports = {
-  'pubsweet-server': {
-    logger: console
-  }
-}
+module.exports = { BCRYPT_COST: 1 }

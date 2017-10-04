@@ -8,7 +8,7 @@ process.env.ALLOW_CONFIG_MUTATIONS = true
 process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const basePath = path.join(__dirname, '..', '..', 'api', 'db')
-const dbPath = path.join(basePath, 'test')
+const dbPath = path.join(basePath, 'test_db')
 
 const nonAdminUser = {
   username: 'nonAdminUsername',
@@ -25,7 +25,7 @@ const adminUser = {
 
 const baseConfig = {
   'pubsweet-server': {
-    dbPath: basePath,
+    dbPath,
     adapter: 'leveldb'
   },
   dbManager: {

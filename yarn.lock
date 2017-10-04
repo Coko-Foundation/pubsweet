@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@pubsweet/logger@0.0.1":
+"@pubsweet/logger@0.0.1", "@pubsweet/logger@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@pubsweet/logger/-/logger-0.0.1.tgz#ec0c15f04e0c64232c29173848ffe6da8190c9c2"
   dependencies:
@@ -264,9 +264,9 @@ attempt-x@^1.1.0, attempt-x@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/attempt-x/-/attempt-x-1.1.1.tgz#fba64e96ce03c3e0bd92c92622061c4df387cb76"
 
-authsome@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.4.tgz#7784887e6c17fdf126949c084cc3f543291dfb19"
+authsome@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.6.tgz#505a2555a87e29f47af9a0d511bc553558073d72"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -1306,7 +1306,7 @@ expect@^21.2.1:
     jest-message-util "^21.2.1"
     jest-regex-util "^21.2.0"
 
-express@^4.14.0:
+express@^4.16.1:
   version "4.16.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
   dependencies:
@@ -1887,8 +1887,8 @@ hyperquest@~1.2.0:
     through2 "~0.6.3"
 
 i@0.3.x:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/i/-/i-0.3.5.tgz#1d2b854158ec8169113c6cb7f6b6801e99e211d5"
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/i/-/i-0.3.6.tgz#d96c92732076f072711b6b10fd7d4f65ad8ee23d"
 
 iconv-lite@0.4.13:
   version "0.4.13"
@@ -2981,7 +2981,7 @@ moment@2.x.x:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
-morgan@^1.7.0:
+morgan@^1.8.2:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.0.tgz#d01fa6c65859b76fcf31b3cb53a3821a311d8051"
   dependencies:
@@ -3868,24 +3868,25 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-"pubsweet-server@git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git":
+"pubsweet-server@git+https://gitlab.coko.foundation/yld/pubsweet-server.git#refactor/node_env":
   version "1.0.0-alpha.3"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#728e00e5b98392bd95c23a0cf74c48473a4597ce"
+  resolved "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#852ae34269249795e79bdd014d6d3aecdda832c3"
   dependencies:
-    authsome "0.0.4"
+    "@pubsweet/logger" "^0.0.1"
+    authsome "0.0.6"
     bcrypt "^1.0.2"
     body-parser "^1.15.2"
     colors "^1.1.2"
     config "^1.26.2"
     cookie-parser "^1.4.3"
-    express "^4.14.0"
+    express "^4.16.1"
     helmet "^3.8.1"
     http-status-codes "^1.0.6"
     joi "^10.0.6"
     jsonwebtoken "^7.1.7"
     lodash "^4.0.0"
     minimist "^1.2.0"
-    morgan "^1.7.0"
+    morgan "^1.8.2"
     multer "^1.1.0"
     passport "^0.3.2"
     passport-anonymous "^1.0.1"
