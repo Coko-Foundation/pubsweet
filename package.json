@@ -53,6 +53,6 @@
     "isomorphic-fetch": "^2.2.1",
     "joi": "^11.0.2",
     "pouchdb": "^6.3.4",
-    "pubsweet-server": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git"
+    "pubsweet-server": "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#refactor/node_env"
   }
 }

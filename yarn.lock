@@ -3870,7 +3870,7 @@ pseudomap@^1.0.2:
 
 "pubsweet-server@git+https://gitlab.coko.foundation/yld/pubsweet-server.git#refactor/node_env":
   version "1.0.0-alpha.3"
-  resolved "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#852ae34269249795e79bdd014d6d3aecdda832c3"
+  resolved "git+https://gitlab.coko.foundation/yld/pubsweet-server.git#a205988e91bbe1a70f41d40c7d7c037d4aedb17e"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     authsome "0.0.6"
