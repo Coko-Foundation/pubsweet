@@ -1,4 +1,3 @@
-const path = require('path')
 const logger = require('@pubsweet/logger')
 const config = require('config')
 
