@@ -14,6 +14,7 @@ const models = require('./models')
 const config = require('config')
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
+const components = require('./components')
 
 module.exports = (app = express()) => {
   global.versions = {}
@@ -34,6 +35,9 @@ module.exports = (app = express()) => {
   passport.use('bearer', authentication.strategies.bearer)
   passport.use('anonymous', authentication.strategies.anonymous)
   passport.use('local', authentication.strategies.local)
+
+  // Register components
+  components(app)
 
   // Main API
   app.use('/api', api)
