@@ -11,7 +11,6 @@ const webpackDevMw = require('webpack-dev-middleware')
 const webpackHotMw = require('webpack-hot-middleware')
 const pubsweet = require('pubsweet-server')
 const logger = require('@pubsweet/logger')
-const components = require(path.join(process.cwd(), 'config', 'components.json'))
 const onError = require('../error-exit')
 
 const compileBundle = async app => {
@@ -45,25 +44,9 @@ const compileBundle = async app => {
   }
 }
 
-const registerComponents = app => {
-  components.forEach(name => {
-    const component = require(name)
-    // Backwards compatibility, old name was 'backend', new name is 'server'
-    const serverComponent = component.server || component.backend
-    if (serverComponent) {
-      serverComponent()(app)
-      logger.info('Registered server component', name)
-    } else {
-      logger.info('Registered client component', name)
-    }
-  })
-}
-
 const start = async () => {
   const rawApp = express()
   await compileBundle(rawApp)
-  registerComponents(rawApp)
-  logger.info(`Finished registering components`)
 
   const app = pubsweet(rawApp)
   logger.info(`Registered @pubsweet/server middlewares`)
