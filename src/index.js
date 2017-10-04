@@ -14,7 +14,7 @@ const models = require('./models')
 const config = require('config')
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
-const registerComponents = require('./components')
+const registerComponents = require('./register-components')
 
 module.exports = (app = express()) => {
   global.versions = {}
