@@ -8,7 +8,6 @@ const runPrompt = require('../src/run-prompt')
 const readCommand = async argsOverride => {
   program
     .description('Setup a database for a PubSweet app. Run from your project root')
-    .option('--dev', 'Generate development mode database')
     .option('--clobber', 'Overwrite any existing database')
 
   _.forEach(properties, (value, key) => {
@@ -20,8 +19,6 @@ const readCommand = async argsOverride => {
 
 module.exports = async argsOverride => {
   const commandOpts = await readCommand(argsOverride)
-
-  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
   const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
   const promptOverride = _.merge(configOpts, commandOpts)

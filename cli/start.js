@@ -9,8 +9,7 @@ const { ordinalize } = require('inflection')
 
 const readCommand = async argsOverride => {
   program
-    .option('--dev', 'Run in development mode')
-    .option('--reduxlog-off', 'Switch off Redux logger (dev only)')
+    .option('--reduxlog-off', 'Switch off Redux logger')
     .description('Run the app at [path].')
 
   return program.parse(argsOverride || process.argv)
@@ -18,8 +17,6 @@ const readCommand = async argsOverride => {
 
 module.exports = async argsOverride => {
   const commandOpts = await readCommand(argsOverride)
-
-  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
   logger.info('Starting PubSweet app')
 

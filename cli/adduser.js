@@ -8,7 +8,6 @@ const config = require('config')
 const readCommand = async argsOverride => {
   program
     .description('Add a user to a database of a PubSweet app. Run from your project root')
-    .option('--dev', 'Add user to development mode database')
 
   _.forEach(properties, (value, key) => {
     if (_.get('type', value) === 'boolean') {
@@ -23,8 +22,6 @@ const readCommand = async argsOverride => {
 
 module.exports = async argsOverride => {
   const commandOpts = await readCommand(argsOverride)
-
-  process.env.NODE_ENV = commandOpts.dev ? 'dev' : (process.env.NODE_ENV || 'production')
 
   const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
   const promptOverride = _.merge(configOpts, commandOpts)

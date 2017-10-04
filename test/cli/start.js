@@ -4,7 +4,7 @@ jest.mock('webpack', () => {
   }
   return () => compiler
 })
-jest.mock(require('path').join(process.cwd(), 'webpack', `webpack.${process.env.NODE_ENV}.config.js`), () => {}, {virtual: true})
+jest.mock(require('path').join(process.cwd(), 'webpack', `webpack.${require('config')['NODE_ENV']}.config.js`), () => {}, {virtual: true})
 jest.mock(require('path').join(process.cwd(), 'config', 'components.json'), () => [], {virtual: true})
 jest.mock('pubsweet-server', () => jest.fn(x => x))
 jest.mock('forever-monitor', () => ({

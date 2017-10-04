@@ -149,10 +149,10 @@ cd myappname
 pubsweet setupdb
 ```
 
-This will add the secret to config/local.json and generate a database for the current `NODE_ENV` (defaulting to 'production'). You can also create a database for the 'dev' environment by passing `--dev`.
+This will add the secret to config/local.json and generate a database at `pubsweet-server.dbPath`.
 
 ```bash
-pubsweet setupdb --dev
+pubsweet setupdb
 ```
 
 If your app already has a database, `pubsweet setupdb` will not overwrite it by default. You can force it to delete an existing database and overwrite it with a new one using `--clobber`:
@@ -193,7 +193,7 @@ pubsweet start
 
 Forever is initialised to watch for changes in the config directory by default. To manually configure forever, add settings under the `forever` key in config (see forever's documentation for which settings are available) 
 
-Start can also be passed `--dev` to set the NODE_ENV to 'dev', and `--reduxlog-off` to switch off the redux logger.
+`start` can also be passed `--reduxlog-off` to switch off the redux logger.
 
 ### Adding and removing components (`pubsweet add`, `pubsweet remove`)
 
