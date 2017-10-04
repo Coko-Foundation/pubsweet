@@ -1,4 +1,3 @@
-const path = require('path')
 const logger = require('@pubsweet/logger')
 const HTMLEPUB = require('html-epub')
 
@@ -28,7 +27,7 @@ const EpubBackend = function (app) {
       }))
 
       // NOTE: "uploads" is hard-coded in the image path
-      const resourceRoot = process.cwd() 
+      const resourceRoot = process.cwd()
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 
