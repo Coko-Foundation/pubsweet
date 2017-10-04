@@ -1,4 +1,5 @@
 const path = require('path')
+const logger = require('@pubsweet/logger')
 const HTMLEPUB = require('html-epub')
 const serverPath = require('pubsweet/src/server-path')()
 
@@ -42,7 +43,7 @@ const EpubBackend = function (app) {
       })
 
       archive.on('end', () => {
-        console.log('Wrote %d bytes', archive.pointer())
+        logger.info('Wrote %d bytes', archive.pointer())
       })
     } catch (e) {
       next(e)
