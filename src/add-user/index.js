@@ -35,7 +35,7 @@ module.exports = async (userData) => {
   validateUser(userData)
   const exists = await dbExists()
   if (!exists) {
-    throw new Error('Cannot create user. No database at:', dbPath)
+    throw new Error('Cannot create user. No database at:', dbPath())
   }
   return createUser(userData)
 }

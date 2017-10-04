@@ -15,16 +15,16 @@ const httpDbExists = async url => {
 }
 
 const dbExists = async () => {
-  if (/^http/.test(dbPath)) {
+  if (/^http/.test(dbPath())) {
     return httpDbExists()
   }
 
-  const dbCheckPath = path.join(dbPath, 'CURRENT')
+  const dbCheckPath = path.join(dbPath(), 'CURRENT')
   return fs.pathExists(dbCheckPath)
 }
 
 module.exports = async () => {
-  logger.info(`Checking if database exists at path ${dbPath}.`)
+  logger.info(`Checking if database exists at path ${dbPath()}.`)
   const exists = await dbExists()
   logger.info(`Database ${exists ? 'exists' : 'does not exist'}.`)
   return exists

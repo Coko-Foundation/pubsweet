@@ -18,8 +18,8 @@ const checkNoDb = async (mergedDbConfig) => {
   }
 
   logger.info('Overwriting existing database due to clobber option')
-  await new PouchDB(dbPath).destroy()
-  logger.info('Removed DB at', dbPath)
+  await new PouchDB(dbPath()).destroy()
+  logger.info('Removed DB at', dbPath())
 }
 
 module.exports = async (setupDbConfig) => {
