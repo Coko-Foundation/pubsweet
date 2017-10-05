@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const omit = require('lodash/omit')
 const config = require('config')
 
-const BCRYPT_COST = config.get('NODE_ENV') === 'test' ? 1 : 12
+const BCRYPT_COST = config.util.getEnv('NODE_ENV') === 'test' ? 1 : 12
 
 class User extends Model {
   constructor (properties) {
