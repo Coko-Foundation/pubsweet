@@ -15,6 +15,7 @@ const dbOpts = {
 describe('setupdb', () => {
   it('calls dbManager.setupDb with correct arguments', async () => {
     await runSetupDb(getMockArgv({ options: dbOpts }))
-    expect(setupDbSpy.mock.calls[0][0]).toEqual(dbOpts)
+    const expected = Object.assign({}, dbOpts, { clobber: false })
+    expect(setupDbSpy.mock.calls[0][0]).toEqual(expected)
   })
 })

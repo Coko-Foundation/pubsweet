@@ -4,7 +4,7 @@
 
 "@pubsweet/db-manager@git+https://gitlab.coko.foundation/yld/db-manager.git":
   version "0.0.2"
-  resolved "git+https://gitlab.coko.foundation/yld/db-manager.git#02b77946327504a1e201544d66f7c755e665ea29"
+  resolved "git+https://gitlab.coko.foundation/yld/db-manager.git#4df92e5dfffc4acc319949314ab750a04a618ae9"
   dependencies:
     "@pubsweet/logger" "0.0.1"
     fs-extra "^4.0.2"
@@ -5497,7 +5497,7 @@ pubsweet-component-users-manager@^0.1.6:
 
 pubsweet-server@^1.0.0-alpha.3, "pubsweet-server@git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git":
   version "1.0.0-alpha.3"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#4239a422cf12e70b300911da5d3bd9da72c123bf"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#cecdf0454da607b14acad36661097cfeda75e51c"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     authsome "0.0.6"
@@ -5542,7 +5542,7 @@ pubsweet-theme-plugin@^0.0.1:
 
 "pubsweet@git+https://gitlab.coko.foundation/yld/pubsweet-cli.git#refactor/db-manager":
   version "1.0.0-alpha.4"
-  resolved "git+https://gitlab.coko.foundation/yld/pubsweet-cli.git#2ff7a981bb5ebf49175281acebe2550829fac189"
+  resolved "git+https://gitlab.coko.foundation/yld/pubsweet-cli.git#9ee1b237eb0b242680bd57241b3b66e758917029"
   dependencies:
     "@pubsweet/db-manager" "git+https://gitlab.coko.foundation/yld/db-manager.git"
     "@pubsweet/logger" "^0.0.1"
@@ -6570,8 +6570,8 @@ tapable@^0.2.7, tapable@~0.2.5:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
 
 tar-fs@^1.7.0:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.15.3.tgz#eccf935e941493d8151028e636e51ce4c3ca7f20"
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.16.0.tgz#e877a25acbcc51d8c790da1c57c9cf439817b896"
   dependencies:
     chownr "^1.0.1"
     mkdirp "^0.5.1"
