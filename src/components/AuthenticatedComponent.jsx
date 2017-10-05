@@ -51,10 +51,7 @@ export class AuthenticatedComponent extends React.Component {
       if (!currentUser.isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname
         this.props.pushState(`/login?next=${redirectAfterLogin}`)
-      } else if (
-        this.failRedirect &&
-        (!object || !this.authsome.can(currentUser.user, this.props.operation, object))
-      ) {
+      } else if (!this.authsome.can(currentUser.user, this.props.operation, object)) {
         this.props.pushState(this.failRedirect)
       }
     }
