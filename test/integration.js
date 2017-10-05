@@ -27,7 +27,7 @@ const dbOptions = {
 /* These tests run "pubsweet" commands as child processes with no mocking */
 /* They perform a full installation cycle, including multiple yarn commands */
 
-describe('CLI: integration test', async () => {
+describe('CLI: integration test', () => {
   beforeAll(() => {
     fs.ensureDirSync(tempDir)
   })
@@ -95,7 +95,7 @@ describe('CLI: integration test', async () => {
     })
   })
 
-  describe('start', async () => {
+  describe('start', () => {
     it('starts an app', (done) => {
       fs.ensureDirSync(dbPath)
 
