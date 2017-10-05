@@ -323,8 +323,13 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
 // Retrieve teams for a fragment
 api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
+    let collection = await Collection.find(req.params.collectionId)
     let fragment = await Fragment.find(req.params.fragmentId)
-    const permission = await authsome.can(req.user, req.method, fragment)
+    const permission = await authsome.can(req.user, req.method, {
+      path: req.route.path,
+      fragment,
+      collection
+    })
 
     if (!permission) {
       throw authorizationError(req.user, req.method, fragment)
