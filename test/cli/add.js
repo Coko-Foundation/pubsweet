@@ -38,7 +38,7 @@ describe('add', () => {
       .toBeInstanceOf(Error)
   })
 
-  it('writes new component into components.json', async () => {
+  it('calls function to write new component into components.json with correct argument', async () => {
     const componentName = 'test-widget'
     const fullName = `pubsweet-component-${componentName}`
     readPkgSpy
