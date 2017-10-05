@@ -44,7 +44,7 @@ It can be called without arguments, in which case it will take its configuration
 ```
 Alternatively it can be passed the `dbManager` object as an argument, which will override the values on config.
 
-The name of the database will be the full dbPath with the NODE_ENV appended.
+The name of the database will be the full `dbPath`.
 
 ### `addUser`
 
@@ -61,5 +61,5 @@ addUser({
 
 ### `dbExists`
 
-This function checks if any database exists at the configured path for the current NODE_ENV. Returns `true` or `false`
+This function checks if any database exists at the configured path. Returns `true` or `false`
 

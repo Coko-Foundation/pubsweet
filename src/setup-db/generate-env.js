@@ -3,9 +3,10 @@ const fs = require('fs-extra')
 const crypto = require('crypto')
 const logger = require('@pubsweet/logger')
 const _ = require('lodash/fp')
+const config = require('config')
 
 module.exports = () => {
-  const configFilePath = path.join(process.cwd(), 'config', `local-${process.env.NODE_ENV}.json`)
+  const configFilePath = path.join(process.cwd(), 'config', `local-${config.util.getEnv('NODE_ENV')}.json`)
   logger.info(`Adding pubsweet secret to ${configFilePath}`)
 
   let configObj
