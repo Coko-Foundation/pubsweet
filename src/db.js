@@ -12,7 +12,7 @@ const getAdapterIdentifier = (dbPath) => {
     return config.get('pubsweet-server.adapter')
   }
   // deprecated: should be set via config and next 3 lines removed
-  if (config.get('NODE_ENV') === 'test') {
+  if (config.util.getEnv('NODE_ENV') === 'test') {
     return 'memory'
   }
 
