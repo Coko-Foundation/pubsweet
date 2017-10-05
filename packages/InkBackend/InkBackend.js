@@ -5,6 +5,7 @@ const temp = require('temp').track()
 const fs = require('fs')
 const path = require('path')
 const promiseRetry = require('promise-retry')
+const logger = require('@pubsweet/logger')
 
 let inkConfig = config.get('pubsweet-component-ink-backend')
 let inkEndpoint = inkConfig.inkEndpoint
@@ -35,7 +36,7 @@ let getAuth = () => {
     }
   }).catch(
     err => {
-      console.log('INK API LOGIN FAILURE:', err)
+      logger.error('INK API LOGIN FAILURE:', err)
       throw err
     }
   )
@@ -176,7 +177,7 @@ var InkBackend = function (app) {
     var fileStream = new Busboy({ headers: req.headers })
 
     const handleErr = err => {
-      console.log('ERROR CONVERTING WITH INK', err)
+      logger.error('ERROR CONVERTING WITH INK', err)
       next(err)
     }
 

@@ -1,6 +1,5 @@
-const path = require('path')
+const logger = require('@pubsweet/logger')
 const HTMLEPUB = require('html-epub')
-const serverPath = require('pubsweet/src/server-path')()
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -28,7 +27,7 @@ const EpubBackend = function (app) {
       }))
 
       // NOTE: "uploads" is hard-coded in the image path
-      const resourceRoot = path.join(serverPath, '..', '..', '')
+      const resourceRoot = process.cwd()
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 
@@ -42,7 +41,7 @@ const EpubBackend = function (app) {
       })
 
       archive.on('end', () => {
-        console.log('Wrote %d bytes', archive.pointer())
+        logger.info('Wrote %d bytes', archive.pointer())
       })
     } catch (e) {
       next(e)

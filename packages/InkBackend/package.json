@@ -12,6 +12,7 @@
     "pubsweet-server": ">=0.8.1"
   },
   "dependencies": {
+    "@pubsweet/logger": "^0.0.1",
     "busboy": "^0.2.13",
     "config": "^1.26.1",
     "promise-retry": "^1.1.1",
