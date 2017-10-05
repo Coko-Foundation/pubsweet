@@ -2092,8 +2092,8 @@ hyperquest@~1.2.0:
     through2 "~0.6.3"
 
 i@0.3.x:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/i/-/i-0.3.5.tgz#1d2b854158ec8169113c6cb7f6b6801e99e211d5"
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/i/-/i-0.3.6.tgz#d96c92732076f072711b6b10fd7d4f65ad8ee23d"
 
 iconv-lite@0.4.13:
   version "0.4.13"
@@ -3930,13 +3930,7 @@ pouchdb-selector-core@6.3.4:
     pouchdb-collate "6.3.4"
     pouchdb-utils "6.3.4"
 
-pouchdb-upsert@^2.0.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/pouchdb-upsert/-/pouchdb-upsert-2.2.0.tgz#42b15e420848f3b294c35060589fdb51cf7f7f5f"
-  dependencies:
-    pouchdb-promise "^6.1.2"
-
-pouchdb-upsert@~2.0.1:
+pouchdb-upsert@^2.0.0, pouchdb-upsert@~2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/pouchdb-upsert/-/pouchdb-upsert-2.0.2.tgz#c746cc9945e52d8c78e42f63ade0666777996712"
   dependencies:
@@ -4823,8 +4817,8 @@ table@^4.0.1:
     string-width "^2.1.1"
 
 tar-fs@^1.7.0:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.15.3.tgz#eccf935e941493d8151028e636e51ce4c3ca7f20"
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.16.0.tgz#e877a25acbcc51d8c790da1c57c9cf439817b896"
   dependencies:
     chownr "^1.0.1"
     mkdirp "^0.5.1"

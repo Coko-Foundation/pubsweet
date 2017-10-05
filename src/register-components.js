@@ -1,6 +1,5 @@
 const logger = require('@pubsweet/logger')
 const config = require('config')
-console.log(config)
 
 module.exports = app => {
   if (config.has('pubsweet.components')) {
