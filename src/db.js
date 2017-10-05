@@ -1,4 +1,3 @@
-const path = require('path')
 const uuid = require('uuid')
 const config = require('config')
 const _ = require('lodash/fp')
@@ -12,8 +11,8 @@ const getAdapterIdentifier = (dbPath) => {
   if (config.has('pubsweet-server.adapter')) {
     return config.get('pubsweet-server.adapter')
   }
-
-  if (process.env.NODE_ENV === 'test') {
+  // deprecated: should be set via config and next 3 lines removed
+  if (config.get('NODE_ENV') === 'test') {
     return 'memory'
   }
 
@@ -37,7 +36,7 @@ const preparePouchConfig = (adapter) => {
 
     case 'leveldb':
       PouchDB.plugin(require('pouchdb-adapter-leveldb'))
-      return { name: path.join(dbPath, process.env.NODE_ENV), adapter }
+      return { name: dbPath, adapter }
   }
 }
 
