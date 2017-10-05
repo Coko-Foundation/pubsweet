@@ -88,8 +88,8 @@ The sequence of commands for generating and running a sample app is as follows:
 ```bash
 pubsweet new my-app-name
 cd my-app-name
-pubsweet setupdb (or npm run setupdb) 
-pubsweet start (or npm start)
+pubsweet setupdb # (or npm run setupdb) 
+pubsweet start # (or npm start)
 ```
 
 ## Using PubSweet CLI
@@ -105,7 +105,7 @@ Usage: pubsweet [options] [command]
 Commands:
 
   new         create and set up a new pubsweet app
-  start         start a pubsweet app
+  start       start a pubsweet app
   setupdb     generate a database for a pubsweet app
   add         add one or more components to a pubsweet app
   remove      remove one or more components from a pubsweet app
@@ -167,7 +167,7 @@ $ pubsweet setupdb --clobber
 info: Generating PubSweet app database at api/db/production
 info: Database already exists
 info: Overwriting existing database due to --clobber flag
-info: Aetting up the database
+info: Setting up the database
 question:><Admin username><
 [...etc]
 ```
@@ -198,7 +198,7 @@ Forever is initialised to watch for changes in the config directory by default. 
 ### Adding and removing components (`pubsweet add`, `pubsweet remove`)
 
 Components add pages, actions, and behaviors to pubsweet. There are many we have bundled by default, and you can create your own. To learn more about components,
-[read the documentation](TODO!).
+[read the documentation](https://pubsweet.org/docs/components).
 
 Run `add` or `remove` within your app directory, followed by one or more components, to add and remove components. These subcommands use `yarn` to add or remove the components and updates the configuration for your app accordingly.
 
