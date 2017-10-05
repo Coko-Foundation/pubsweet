@@ -2,7 +2,7 @@ const path = require('path')
 const Promise = require('bluebird')
 
 const config = require('config')
-const dotenvPath = path.join(process.cwd(), `.env.${config.get('NODE_ENV')}`)
+const dotenvPath = path.join(process.cwd(), `.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
 
 const http = require('http')
@@ -15,10 +15,10 @@ const logger = require('@pubsweet/logger')
 const onError = require('../error-exit')
 
 const compileBundle = async app => {
-  const webpackConfig = require(path.join(process.cwd(), 'webpack', `webpack.${config.get('NODE_ENV')}.config.js`))
+  const webpackConfig = require(path.join(process.cwd(), 'webpack', `webpack.${config.util.getEnv('NODE_ENV')}.config.js`))
   const compiler = webpack(webpackConfig)
 
-  if (config.get('NODE_ENV') === 'dev') {
+  if (config.util.getEnv('NODE_ENV') === 'development') {
     app.use(webpackDevMw(compiler, {
       noInfo: true,
       stats: {
