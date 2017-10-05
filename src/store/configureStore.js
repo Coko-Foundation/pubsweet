@@ -20,7 +20,7 @@ function configureStore (env) {
     })
 
     let logger
-    if (!config['pubsweet-client']['redux-log'] && env !== 'production') {
+    if (config['pubsweet-client']['redux-log'] && env !== 'production') {
       logger = applyMiddleware(createLogger())
     }
 
