@@ -42,26 +42,26 @@ module.exports = $ => {
     $extract.replaceWith(blockquote)
   })
   // replace "note[content]" with "aside" and a link
-  $('note').each((i, elem) => {
-    $(elem).remove()
-  })
-
   // $('note').each((i, elem) => {
-  //   const $note = $(elem)
-  //   const aside = $(
-  //     `<aside epub:type="footnote" id="${$note.attr('data-id')}" class="note"/>`
-  //   )
-  //   aside.html($note.attr('note-content'))
-  //   $('body').append(aside)
-
-  //   const link = $(
-  //     `<a href="${$note.attr(
-  //       'data-id'
-  //     )}" epub:type="noteref" class="note-link"/>`
-  //   )
-  //   link.text(i)
-  //   $note.replaceWith(link)
+  //   $(elem).remove()
   // })
+
+  $('note').each((i, elem) => {
+    const $note = $(elem)
+    const aside = $(
+      `<aside epub:type="endnote" id="${$note.attr('data-id')}" class="note"/>`
+    )
+    aside.html($note.attr('note-content'))
+    $('body').append(aside)
+
+    const callout = $(
+      `<span href="${$note.attr(
+        'data-id'
+      )}" epub:type="noteref" class="note-callout"/>`
+    )
+    callout.text(i)
+    $note.replaceWith(callout)
+  })
 
   $('comment').each((i, elem) => {
     let commentEncloses = $(elem).text()
