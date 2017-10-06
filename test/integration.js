@@ -6,10 +6,11 @@ const { runCommandSync, runCommandAsync } = require('./helpers/')
 const fetch = require('isomorphic-fetch')
 
 const appName = 'testapp'
+const dbName = 'test_db'
 const tempDir = path.join(__dirname, '..', 'temp')
 const appPath = path.join(tempDir, appName)
 const dbDir = path.join(appPath, 'api', 'db')
-const dbPath = path.join(dbDir, 'test_db')
+const dbPath = path.join(dbDir, dbName)
 
 const nodeConfig = {
   'pubsweet-server': {
