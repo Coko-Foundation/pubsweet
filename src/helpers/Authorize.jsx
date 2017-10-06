@@ -1,10 +1,10 @@
 'use strict'
 
-// import { includes } from 'lodash'
 import Authsome from 'authsome'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import config from 'config'
 
 export class Authorize extends React.Component {
   constructor (props) {
@@ -65,7 +65,7 @@ function mapState (state) {
     fragments: state.fragments,
     currentUser: state.currentUser.user,
     // TODO fix this
-    authsome: CONFIG.authsome
+    authsome: config.authsome
   }
 }
 

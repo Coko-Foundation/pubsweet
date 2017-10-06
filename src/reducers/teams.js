@@ -9,7 +9,6 @@ import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
-import assign from 'lodash/assign'
 import difference from 'lodash/difference'
 
 export default function (state = [], action) {
@@ -18,7 +17,7 @@ export default function (state = [], action) {
   function updateOne () {
     const index = findIndex(teams, { id: action.team.id })
     if (index !== -1) {
-      teams[index] = assign(teams[index], action.team)
+      teams[index] = {...teams[index], ...action.team}
     } else {
       teams.push(action.team)
     }

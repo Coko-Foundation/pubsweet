@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import config from 'config'
-
 import Authsome from 'authsome'
 import actions from '../actions'
 
@@ -51,10 +51,7 @@ export class AuthenticatedComponent extends React.Component {
       if (!currentUser.isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname
         this.props.pushState(`/login?next=${redirectAfterLogin}`)
-      } else if (
-        this.failRedirect &&
-        (!object || !this.authsome.can(currentUser.user, this.props.operation, object))
-      ) {
+      } else if (!this.authsome.can(currentUser.user, this.props.operation, object)) {
         this.props.pushState(this.failRedirect)
       }
     }
@@ -66,13 +63,14 @@ export class AuthenticatedComponent extends React.Component {
       state,
       component: Component,
       operation,
+      children,
       ...otherProps
     } = this.props
 
     const object = selector(state)
     try {
       if (this.authsome.can(this.props.currentUser.user, operation, object)) {
-        return <Component {...otherProps} />
+        return children || <Component {...otherProps} />
       }
     } catch (e) {}
 
@@ -81,7 +79,8 @@ export class AuthenticatedComponent extends React.Component {
 }
 
 AuthenticatedComponent.propTypes = {
-  component: PropTypes.func.isRequired,
+  children: PropTypes.node,
+  component: PropTypes.func,
   selector: PropTypes.func.isRequired,
   operation: PropTypes.string.isRequired,
   authsome: PropTypes.shape({
@@ -110,6 +109,6 @@ function mapDispatch (dispatch) {
   }
 }
 
-const ConnectedAuthenticatedComponent = connect(mapState, mapDispatch)(AuthenticatedComponent)
+const ConnectedAuthenticatedComponent = withRouter(connect(mapState, mapDispatch)(AuthenticatedComponent))
 
 export default ConnectedAuthenticatedComponent

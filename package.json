@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -22,11 +22,11 @@
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.0.0",
     "prop-types": "^15.5.8",
-    "pubsweet-component-login": "^0.2.4",
+    "pubsweet-component-login": "^0.4.1",
     "react": "^15.4.4",
     "react-redux": "^5.0.2",
-    "react-router": "^3.0.5",
-    "react-router-redux": "^4.0.5",
+    "react-router": "^4.2.0",
+    "react-router-redux": "next",
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",
     "redux-logger": "^3.0.1",
