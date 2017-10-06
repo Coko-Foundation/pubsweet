@@ -47,8 +47,12 @@ export default class Draft extends React.Component {
 }
 
 Draft.propTypes = {
+  /** ID of fragment to edit */
   id: PropTypes.string,
+  /** Collection that fragment belongs to */
   blog: PropTypes.object,
+  /** Optional existing fragment */
   fragment: PropTypes.object,
+  /** Bound action creators */
   actions: PropTypes.object
 }
