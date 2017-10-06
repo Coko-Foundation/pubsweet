@@ -5082,7 +5082,7 @@ pubsweet-theme-plugin@^0.0.1:
 
 "pubsweet@git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#refactor/db-manager":
   version "1.0.0-alpha.4"
-  resolved "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#e5ea9dc098809079465ab306f0cd330a428033e2"
+  resolved "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#fdccce99a2e3b46a71e27d5be9bf162bc844cc60"
   dependencies:
     "@pubsweet/db-manager" "git+https://gitlab.coko.foundation/yld/db-manager.git"
     "@pubsweet/logger" "^0.0.1"
