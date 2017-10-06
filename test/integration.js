@@ -8,7 +8,8 @@ const fetch = require('isomorphic-fetch')
 const appName = 'testapp'
 const tempDir = path.join(__dirname, '..', 'temp')
 const appPath = path.join(tempDir, appName)
-const dbPath = path.join(appPath, 'api', 'db', 'test_db')
+const dbDir = path.join(appPath, 'api', 'db')
+const dbPath = path.join(dbDir, 'test_db')
 
 const nodeConfig = {
   'pubsweet-server': {
@@ -78,7 +79,7 @@ describe('CLI: integration test', () => {
 
   describe('setupdb', () => {
     it('creates a new database', () => {
-      fs.ensureDirSync(dbPath)
+      fs.ensureDirSync(dbDir)
 
       const { stdout, stderr } = runCommandSync({
         args: 'setupdb',
@@ -90,14 +91,14 @@ describe('CLI: integration test', () => {
 
       console.log(stdout, stderr)
       expect(stdout).toContain('Finished')
-      expect(fs.existsSync(path.join(dbPath, 'test_db', 'CURRENT'))).toBe(true)
-      fs.removeSync(dbPath)
+      expect(fs.existsSync(path.join(dbPath, 'CURRENT'))).toBe(true)
+      fs.removeSync(dbDir)
     })
   })
 
   describe('start', () => {
     it('starts an app', (done) => {
-      fs.ensureDirSync(dbPath)
+      fs.ensureDirSync(dbDir)
 
       runCommandSync({
         args: 'setupdb',
