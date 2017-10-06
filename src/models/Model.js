@@ -31,7 +31,7 @@ class Model {
     let validation = Joi.validate(this, this.constructor.validations())
 
     if (validation.error) {
-      logger.info(validation.error)
+      logger.error(validation.error)
       throw validation.error
     }
 
@@ -39,14 +39,14 @@ class Model {
   }
 
   async save () {
-    logger.info('Saving', this.type, this.id)
+    logger.debug('Saving', this.type, this.id)
 
     this.validate()
 
     return saveQueue.add(async () => {
       try {
         const existing = await this.constructor.find(this.id)
-        logger.info('Found an existing version, this is an update of:', existing)
+        logger.debug('Found an existing version, this is an update of:', existing)
         this.rev = existing.rev
       } catch (error) {
         if (error.status !== STATUS.NOT_FOUND) {
@@ -58,7 +58,7 @@ class Model {
           await this.isUniq(this) // throws an exception if not unique
         }
 
-        logger.info('No existing object found, creating a new one:', this.type, this.id)
+        logger.debug('No existing object found, creating a new one:', this.type, this.id)
       }
 
       return this._put()
@@ -67,14 +67,14 @@ class Model {
 
   async _put () {
     await db.rel.save(this.constructor.type, this)
-    logger.info('Actually _put', this.type, this.id, this)
+    logger.debug('Actually _put', this.type, this.id, this)
     return this
   }
 
   async delete () {
     const object = await this.constructor.find(this.id)
     await db.rel.del(this.type, object)
-    logger.info('Deleted', this.type, this.id)
+    logger.debug('Deleted', this.type, this.id)
     return this
   }
 
@@ -82,7 +82,7 @@ class Model {
     // These properties are modified through setters
     delete properties.owners
 
-    logger.info('Updating properties to', properties)
+    logger.debug('Updating properties to', properties)
 
     Object.assign(this, properties)
     return this
@@ -143,7 +143,7 @@ class Model {
   }
 
   static async findByField (field, value) {
-    logger.info('Finding', field, value)
+    logger.debug('Finding', field, value)
     field = 'data.' + field
 
     let type = 'data.type'
