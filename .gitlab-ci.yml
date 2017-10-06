@@ -1,5 +1,6 @@
 image: pubsweet/pubsweet-test-base
 before_script:
+  - yarn cache clean
   - yarn
 
 test:lint:
