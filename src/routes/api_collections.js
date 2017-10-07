@@ -15,7 +15,7 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, authorizationError } = require('./util')
+const { objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
@@ -212,26 +212,15 @@ api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next
 })
 
 // Retrieve teams for a collection
-api.get('/collections/:id/teams', authBearerAndPublic, async (req, res, next) => {
+api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, collection)
-
-    if (!permission) {
-      throw authorizationError(req.user, req.method, collection)
-    }
-
-    let teams
-    try {
-      teams = await Team.findByField({'object.id': req.params.id, 'object.type': 'collection'})
-    } catch (err) {
-      if (err instanceof NotFoundError) {
-        teams = []
-      } else {
-        throw err
-      }
-    }
-
+    let teams = await getTeams({
+      req: req,
+      Team: Team,
+      authsome: authsome,
+      id: req.params.collectionId,
+      type: 'collection' })
+    console.log(teams)
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)
@@ -323,19 +312,13 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
 // Retrieve teams for a fragment
 api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.collectionId)
-    let fragment = await Fragment.find(req.params.fragmentId)
-    const permission = await authsome.can(req.user, req.method, {
-      path: req.route.path,
-      fragment,
-      collection
-    })
+    let teams = await getTeams({
+      req: req,
+      Team: Team,
+      authsome: authsome,
+      id: req.params.fragmentId,
+      type: 'fragment' })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, fragment)
-    }
-
-    const teams = await Team.findByField({'object.id': req.params.fragmentId, 'object.type': 'fragment'})
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)

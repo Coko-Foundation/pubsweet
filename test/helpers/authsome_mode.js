@@ -92,6 +92,13 @@ async function authenticatedUser (user, operation, object, context) {
     }
   }
 
+  if (operation === 'GET' && get(object, 'type') === 'team' && get(object, 'object.type') === 'collection') {
+    const collection = await context.models.Collection.find(get(object, 'object.id'))
+    if (collection.owners.includes(user.id)) {
+      return true
+    }
+  }
+
   // Advanced example
   // Allow authenticated users to create a team based around a collection
   // if they are one of the owners of this collection
