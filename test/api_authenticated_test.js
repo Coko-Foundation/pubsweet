@@ -137,7 +137,9 @@ describe('authenticated api', function () {
         return api.users.authenticate.post(
           fixtures.updatedUser
         ).then(
-          token => api.fragments.get(collection, token).expect(STATUS.OK)
+          token => api.fragments.get({
+            collection: collection, token: token
+          }).expect(STATUS.OK)
         ).then(
           res => expect(res.body).toEqual([])
         )
@@ -195,10 +197,7 @@ describe('authenticated api', function () {
         fixtures.updatedUser
       ).then(
         token => {
-          return api.fragments.get(
-            collection,
-            token
-          )
+          return api.fragments.get({ collection, token })
         }
       )
     })

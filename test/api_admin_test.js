@@ -59,7 +59,7 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.fragments.get(collection, token)
+      token => api.fragments.get({ collection, token })
     ).then(
       res => expect(res.body.length).toEqual(1)
     )

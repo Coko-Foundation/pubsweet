@@ -56,5 +56,28 @@ module.exports = {
     }
 
     return teams
+  },
+
+  filterFragments: async (opts) => {
+    let fragments = opts.fragments
+
+    fragments = await Promise.all(fragments.map(fragment => {
+      return opts.authsome.can(opts.req.user, opts.req.method, fragment).then(permission => {
+        // Filter fragments' properties
+        if (permission.filter) {
+          return permission.filter(fragment)
+        } else if (permission) {
+          return fragment
+        }
+      })
+    }))
+
+    fragments = fragments.filter(fragment => fragment !== undefined)
+
+    // Decorate owners with usernames
+    fragments = await Promise.all(fragments.map(f => opts.User.ownersWithUsername(f)))
+    fragments = fragments.map(opts.fieldSelector(opts.req))
+
+    return fragments
   }
 }

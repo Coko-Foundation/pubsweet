@@ -45,8 +45,19 @@ const fragments = {
       'Authorization', 'Bearer ' + token
     ) : req
   },
-  get: (collection, token, fragmentId) => {
-    let url = `/api/collections/${collection.id}/fragments`
+  get: (opts = {}) => {
+    const token = opts.token
+    const collection = opts.collection
+    const fragmentId = opts.fragmentId
+
+    let url
+
+    if (collection) {
+      url = `/api/collections/${collection.id}/fragments`
+    } else {
+      url = '/api/fragments'
+    }
+
     if (fragmentId) url += '/' + fragmentId
 
     const req = request(api).get(url)
