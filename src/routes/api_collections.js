@@ -5,6 +5,7 @@ const STATUS = require('http-status-codes')
 
 const User = require('../models/User')
 const Collection = require('../models/Collection')
+const Team = require('../models/Team')
 const Fragment = require('../models/Fragment')
 
 const Authsome = require('authsome')
@@ -14,15 +15,10 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, authorizationError } = require('./util')
+const { objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
-
-// Teams
-// TODO: Nested teams API to be deprecated
-const teams = require('./api_teams')
-api.use('/collections/:collectionId/', teams)
 
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
@@ -215,6 +211,22 @@ api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next
   }
 })
 
+// Retrieve teams for a collection
+api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res, next) => {
+  try {
+    let teams = await getTeams({
+      req: req,
+      Team: Team,
+      authsome: authsome,
+      id: req.params.collectionId,
+      type: 'collection' })
+    console.log(teams)
+    res.status(STATUS.OK).json(teams)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // Retrieve a fragment
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
@@ -296,5 +308,26 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
     next(err)
   }
 })
+
+// Retrieve teams for a fragment
+api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
+  try {
+    let teams = await getTeams({
+      req: req,
+      Team: Team,
+      authsome: authsome,
+      id: req.params.fragmentId,
+      type: 'fragment' })
+
+    res.status(STATUS.OK).json(teams)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Teams
+// TODO: Nested teams API to be deprecated
+const teams = require('./api_teams')
+api.use('/collections/:collectionId/', teams)
 
 module.exports = api

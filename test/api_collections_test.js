@@ -300,6 +300,38 @@ describe('Collections API', () => {
       expect(filteredFragment).toHaveProperty('presentation')
       expect(filteredFragment).not.toHaveProperty('source')
     })
+
+    it('should allow admin to retrieve teams for a fragment', async () => {
+      const token = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a fragment in the collection
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create the teams
+      await api.teams.post(fixtures.readerTeam, collection, token)
+      const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
+      await api.teams.post(teamFixture, collection, token)
+
+      // retrieve the fragment team(s)
+      const teams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teams).toHaveLength(1)
+      expect(teams[0]).toMatchObject({
+        name: 'My contributors',
+        object: {
+          type: 'fragment'
+        }
+      })
+    })
   })
 
   describe('anonymous', () => {
@@ -347,6 +379,33 @@ describe('Collections API', () => {
       // retrieve the collection
       await api.collections.retrieve(collection.id, token)
         .expect(STATUS.OK)
+    })
+
+    it('should allow a user to retrieve teams for a collection', async () => {
+      const token = await authenticateUser()
+
+      // create the collection
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create the teams
+      const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'collection', id: collection.id}})
+      await api.teams.post(teamFixture, collection, token)
+      await api.teams.post(fixtures.readerTeam, collection, token)
+
+      // retrieve the collection team(s)
+      const teams = await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teams).toHaveLength(1)
+      expect(teams[0]).toMatchObject({
+        name: 'My contributors',
+        object: {
+          type: 'collection'
+        }
+      })
     })
 
     it('should allow a user to update a collection they own', async () => {

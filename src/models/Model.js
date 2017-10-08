@@ -3,6 +3,7 @@
 const uuid = require('uuid')
 const Joi = require('joi')
 const Queue = require('promise-queue')
+const lodash = require('lodash')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
@@ -142,23 +143,33 @@ class Model {
     return new this(result)
   }
 
+  // `field` is a string
+  // `value` is a primitive, or a query object
+  // or
+  // `field` is an object of field, value pairs
   static async findByField (field, value) {
     logger.debug('Finding', field, value)
-    field = 'data.' + field
 
-    let type = 'data.type'
+    let selector = {
+      type: this.type
+    }
+
+    if (value !== undefined) {
+      selector[field] = value
+    } else {
+      Object.assign(selector, field)
+    }
+
+    selector = lodash.mapKeys(selector, (_, key) => `data.${key}`)
 
     await db.createIndex({
       index: {
-        fields: [field, type]
+        fields: Object.keys(selector)
       }
     })
 
     const results = await db.find({
-      selector: {
-        [type]: this.type,
-        [field]: value
-      }
+      selector
     })
 
     if (!results.docs.length) {

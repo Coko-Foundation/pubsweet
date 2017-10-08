@@ -182,12 +182,14 @@ describe('Teams API - per collection or fragment', () => {
         )
       })
 
-      it('should not be authorized to see teams for a collection', () => {
+      it('should not see teams in a collection', () => {
         return api.users.authenticate.post(
           fixtures.user
         ).then(
-          token => api.teams.get(token, collectionId).expect(STATUS.FORBIDDEN)
-        )
+          token => api.teams.get(token, collectionId).expect(STATUS.OK)
+        ).then(res => {
+          expect(res.body).toEqual([])
+        })
       })
     })
   })
