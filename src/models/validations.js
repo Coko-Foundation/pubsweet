@@ -1,7 +1,7 @@
 'use strict'
 
 // This module is used for communicating validation requirements to the
-// frontend and backend, it sits in the middle.
+// client and server, it sits in the middle.
 
 const Joi = require('joi')
 
