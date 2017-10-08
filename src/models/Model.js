@@ -149,7 +149,6 @@ class Model {
   // `field` is an object of field, value pairs
   static async findByField (field, value) {
     logger.debug('Finding', field, value)
-    field = 'data.' + field
 
     let selector = {
       type: this.type
