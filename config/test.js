@@ -16,13 +16,16 @@ module.exports = {
     fragment: {
       source: Joi.string(),
       kind: Joi.string(),
+      title: Joi.string(),
       presentation: Joi.string(),
       published: Joi.boolean()
     },
     collection: {
       published: Joi.boolean(),
       nonPublicProperty: Joi.string(),
-      filtered: Joi.string()
+      filtered: Joi.string(),
+      created: Joi.date().default(Date.now, 'creation time'),
+      title: Joi.string()
     }
   },
   authsome: {

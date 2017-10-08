@@ -12,21 +12,13 @@ let validations = {
   fragment: {
     id: Joi.string().guid().required(),
     type: Joi.string().required(),
-    title: Joi.string(),
     rev: Joi.string(),
-    collection: Joi.alternatives().try(
-      // a collection ID
-      Joi.string(),
-      // or a collection object
-      Joi.object({ type: Joi.string().valid('collection') }).unknown(true)
-    ),
+    fragments: Joi.array().items(Joi.string().guid()),
     owners: Joi.array().items(Joi.string().guid())
   },
   collection: {
     id: Joi.string().guid().required(),
-    created: Joi.date().default(Date.now, 'creation time'),
     type: Joi.string().required(),
-    title: Joi.string(),
     rev: Joi.string(),
     owners: Joi.array().items(Joi.string().guid()),
     fragments: Joi.array().items(
