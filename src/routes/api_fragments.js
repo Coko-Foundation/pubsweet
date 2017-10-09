@@ -265,14 +265,8 @@ api.patch('/fragments/:fragmentId', authBearer, async (req, res, next) => {
 })
 
 // Delete a fragment
-api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async (req, res, next) => {
+api.delete('/fragments/:fragmentId', authBearer, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.collectionId)
-
-    if (!collection.fragments.includes(req.params.fragmentId)) {
-      throw new NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
-    }
-
     let fragment = await Fragment.find(req.params.fragmentId)
     const permission = await authsome.can(req.user, req.method, fragment)
 
@@ -281,11 +275,9 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
     }
 
     fragment = await fragment.delete()
-    collection.removeFragment(fragment)
-    collection = await collection.save()
 
     res.status(STATUS.OK).json(fragment)
-    sse.send({ action: 'fragment:delete', data: { collection: objectId(collection), fragment } })
+    sse.send({ action: 'fragment:delete', data: { fragment } })
   } catch (err) {
     next(err)
   }

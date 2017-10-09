@@ -37,9 +37,7 @@ const fragments = {
       fragment
     )
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return authorizedRequest(req, token)
   },
   patch: (opts = {}) => {
     const { fragmentId, update, token, collection } = opts
@@ -55,9 +53,7 @@ const fragments = {
       .patch(url)
       .send(update)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return authorizedRequest(req, token)
   },
   get: (opts = {}) => {
     const { token, collection, fragmentId } = opts
@@ -79,10 +75,12 @@ const fragments = {
     }
 
     const req = request(api).get(url)
-
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return authorizedRequest(req, token)
+  },
+  delete: (opts = {}) => {
+    const { fragmentId, token } = opts
+    const req = request(api).delete(`/api/fragments/${fragmentId}`)
+    return authorizedRequest(req, token)
   }
 }
 
