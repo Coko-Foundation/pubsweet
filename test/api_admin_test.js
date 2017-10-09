@@ -71,9 +71,12 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.fragments.patch(
-        fragment.id, fixtures.fragment, collection, token
-      ).expect(STATUS.OK)
+      token => api.fragments.patch({
+        fragmentId: fragment.id,
+        update: fixtures.fragment,
+        collection,
+        token
+      }).expect(STATUS.OK)
     )
   })
 })

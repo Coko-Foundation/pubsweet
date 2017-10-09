@@ -85,20 +85,24 @@ describe('Fragments API', () => {
       expect(filteredFragment).not.toHaveProperty('source')
     })
 
-    it('should allow an admin user to update a collection (without filtering properties)', async () => {
+    it('should allow an admin user to update a fragment (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
-      // create a collection
-      const collection = await api.collections.create(fixtures.collection, adminToken)
-        .expect(STATUS.CREATED)
+      const fragment = await api.fragments.post({
+        fragment: fixtures.fragment,
+        token: adminToken
+      }).expect(STATUS.CREATED)
         .then(res => res.body)
 
       // update the collection
       const title = 'Updated title'
       const filtered = 'example'
 
-      const result = await api.collections.update(collection.id, { title, filtered }, adminToken)
-        .expect(STATUS.OK)
+      const result = await api.fragments.patch({
+        fragmentId: fragment.id,
+        update: { title, filtered },
+        token: adminToken
+      }).expect(STATUS.OK)
         .then(res => res.body)
 
       expect(result.title).toEqual(title)

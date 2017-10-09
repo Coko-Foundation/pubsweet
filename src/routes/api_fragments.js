@@ -238,14 +238,8 @@ api.get('/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) =>
 })
 
 // Update a fragment
-api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async (req, res, next) => {
+api.patch('/fragments/:fragmentId', authBearer, async (req, res, next) => {
   try {
-    const collection = await Collection.find(req.params.collectionId)
-
-    if (!collection.fragments.includes(req.params.fragmentId)) {
-      throw new NotFoundError(`collection ${collection.id} does not contain fragment ${req.params.fragmentId}`)
-    }
-
     let fragment = await Fragment.find(req.params.fragmentId)
     const permission = await authsome.can(req.user, req.method, fragment)
 
@@ -258,13 +252,12 @@ api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async 
     }
 
     fragment.updateProperties(req.body)
-
     fragment = await fragment.save()
     fragment = await User.ownersWithUsername(fragment)
 
     const update = buildChangeData(req.body, fragment)
-
     res.status(STATUS.OK).json(update)
+
     sse.send({ action: 'fragment:patch', data: { fragment: objectId(fragment), update } })
   } catch (err) {
     next(err)
