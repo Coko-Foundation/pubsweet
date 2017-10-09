@@ -130,19 +130,15 @@ describe('Fragments API', () => {
     it('should allow an admin user to retrieve only some fields when getting fragments', async () => {
       const adminToken = await authenticateAdmin()
 
-      // create a collection
-      const collection = await api.collections.create(fixtures.collection, adminToken)
-        .expect(STATUS.CREATED)
+      await api.fragments.post({
+        fragment: fixtures.fragment,
+        token: adminToken
+      }).expect(STATUS.CREATED)
         .then(res => res.body)
 
-      // create a fragment in the collection
-      await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
-        .expect(STATUS.CREATED)
-        .then(res => res.body)
-
-      // list fragments in this collection
-      const fragments = await api.collections.listFragments(collection.id, adminToken)
-        .expect(STATUS.OK)
+      const fragments = await api.fragments.get({
+        token: adminToken
+      }).expect(STATUS.OK)
         .then(res => res.body)
 
       expect(fragments).toHaveLength(1)
@@ -155,8 +151,10 @@ describe('Fragments API', () => {
       expect(fragment).toHaveProperty('source')
 
       // list fragments in this collection, requesting only certain fields
-      const filteredFragments = await api.collections.listFragments(collection.id, adminToken, { fields: ['type', 'presentation'] })
-        .expect(STATUS.OK)
+      const filteredFragments = await api.fragments.get({
+        token: adminToken,
+        fields: ['type', 'presentation']
+      }).expect(STATUS.OK)
         .then(res => res.body)
 
       expect(filteredFragments).toHaveLength(1)
@@ -172,24 +170,20 @@ describe('Fragments API', () => {
     it('should allow admin to retrieve teams for a fragment', async () => {
       const token = await authenticateAdmin()
 
-      // create a collection
-      const collection = await api.collections.create(fixtures.collection, token)
-        .expect(STATUS.CREATED)
-        .then(res => res.body)
-
-      // create a fragment in the collection
-      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, token)
-        .expect(STATUS.CREATED)
+      const fragment = await api.fragments.post({
+        fragment: fixtures.fragment,
+        token
+      }).expect(STATUS.CREATED)
         .then(res => res.body)
 
       // create the teams
-      await api.teams.post(fixtures.readerTeam, collection, token)
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
-      await api.teams.post(teamFixture, collection, token)
+      await api.teams.post(teamFixture, fragment, token)
 
       // retrieve the fragment team(s)
-      const teams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
-        .expect(STATUS.OK)
+      const teams = await api.fragments.teams({
+        fragmentId: fragment.id, token
+      }).expect(STATUS.OK)
         .then(res => res.body)
 
       expect(teams).toHaveLength(1)

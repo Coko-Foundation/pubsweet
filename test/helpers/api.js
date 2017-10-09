@@ -81,6 +81,14 @@ const fragments = {
     const { fragmentId, token } = opts
     const req = request(api).delete(`/api/fragments/${fragmentId}`)
     return authorizedRequest(req, token)
+  },
+  teams: (opts = {}) => {
+    const { fragmentId, token } = opts
+
+    const url = `/api/fragments/${fragmentId}/teams`
+
+    const req = request(api).get(url)
+    return authorizedRequest(req, token)
   }
 }
 

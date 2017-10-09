@@ -284,7 +284,7 @@ api.delete('/fragments/:fragmentId', authBearer, async (req, res, next) => {
 })
 
 // Retrieve teams for a fragment
-api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
+api.get('/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
     let teams = await getTeams({
       req: req,
