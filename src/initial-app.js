@@ -39,7 +39,7 @@ const renameProtectedFiles = async (outputDir, files) => {
 const installPackages = async () => {
   logger.info('Installing packages')
 
-  await spawn('yarn', ['--ignore-optional', '--no-progress'], {
+  await spawn('yarn', ['--no-progress'], {
     cwd: process.cwd(),
     stdio: process.env.SILENT_INSTALL ? 'ignore' : 'inherit',
     shell: true,
