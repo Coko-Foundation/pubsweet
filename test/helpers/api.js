@@ -18,9 +18,7 @@ const authorizedRequest = (req, token) => {
 
 const fragments = {
   post: (opts = {}) => {
-    const fragment = opts.fragment
-    const collection = opts.collection
-    const token = opts.token
+    const { fragment, collection, token } = opts
 
     let url
 
@@ -43,23 +41,26 @@ const fragments = {
       'Authorization', 'Bearer ' + token
     ) : req
   },
-  patch: (fragmentId, update, collection, token) => {
-    const req = request(
-      api
-    ).patch(
-      '/api/collections/' + collection.id + '/fragments/' + fragmentId
-    ).send(
-      update
-    )
+  patch: (opts = {}) => {
+    const { fragmentId, update, token, collection } = opts
+
+    let url
+    if (collection) {
+      url = `/api/collections/${collection.id}/fragments/${fragmentId}`
+    } else {
+      url = `/api/fragments/${fragmentId}`
+    }
+
+    const req = request(api)
+      .patch(url)
+      .send(update)
 
     return token ? req.set(
       'Authorization', 'Bearer ' + token
     ) : req
   },
   get: (opts = {}) => {
-    const token = opts.token
-    const collection = opts.collection
-    const fragmentId = opts.fragmentId
+    const { token, collection, fragmentId } = opts
 
     let url
 

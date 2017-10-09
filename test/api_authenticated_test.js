@@ -11,6 +11,7 @@ const User = require('../src/models/User')
 
 describe('authenticated api', function () {
   let otherUser
+  let user
   let collection
 
   beforeEach(() => {
@@ -18,7 +19,9 @@ describe('authenticated api', function () {
     return dbCleaner().then(
       createBasicCollection
     ).then(
-      (userAndCol) => { collection = userAndCol.collection }
+      (userAndCol) => {
+        ({ user, collection } = userAndCol)
+      }
     ).then(
       () => {
         // Create another user without any roles
@@ -106,12 +109,12 @@ describe('authenticated api', function () {
           fixtures.updatedUser
         ).then(
           (token) => {
-            return api.fragments.patch(
-              fragment.id,
-              fixtures.updatedFragment,
+            return api.fragments.patch({
+              fragmentId: fragment.id,
+              update: fixtures.updatedFragment,
               collection,
               token
-            ).expect(
+            }).expect(
               STATUS.OK
             )
           }
@@ -122,15 +125,19 @@ describe('authenticated api', function () {
     describe('actions on a fragment owned by a different user', () => {
       var fragment
 
-      beforeEach(() => {
+      beforeEach(async () => {
         const Fragment = require('../src/models/Fragment')
         fragment = new Fragment(fixtures.fragment)
-        fragment.setOwners([otherUser.id])
-        return fragment.save()
+        fragment.setOwners([user.id])
+        await fragment.save()
+        collection.addFragment(fragment)
+        await collection.save()
       })
 
-      afterEach(() => {
-        return fragment.delete()
+      afterEach(async () => {
+        await fragment.delete()
+        collection.removeFragment(fragment)
+        await collection.save()
       })
 
       it('cannot read a fragment in a protected collection if it is not published', () => {
@@ -145,17 +152,15 @@ describe('authenticated api', function () {
         )
       })
 
-      it('cannot update a fragment in a protected collection', () => {
-        return api.users.authenticate.post(
-          fixtures.updatedUser
-        ).then(
-          token => {
-            return api.fragments.patch(
-              fixtures.updatedFragment, collection, token
-            ).expect(
-              STATUS.UNAUTHORIZED
-            )
-          }
+      it('cannot update a fragment in a protected collection', async () => {
+        const token = await api.users.authenticate.post(fixtures.updatedUser)
+        return api.fragments.patch({
+          fragmentId: fragment.id,
+          update: fixtures.updatedFragment,
+          collection,
+          token
+        }).expect(
+          STATUS.FORBIDDEN
         )
       })
     })
