@@ -186,18 +186,15 @@ api.get('/fragments', authBearerAndPublic, async (req, res, next) => {
   }
 })
 
-// Create a fragment and update the collection with the fragment
-api.post('/collections/:collectionId/fragments', authBearer, async (req, res, next) => {
+api.post('/fragments', authBearer, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.collectionId)
     const permission = await authsome.can(req.user, req.method, {
       path: req.route.path,
-      collection: collection,
       fragment: req.body
     })
 
     if (!permission) {
-      throw authorizationError(req.user, req.method, collection)
+      throw authorizationError(req.user, req.method, req.body)
     }
 
     if (permission.filter) {
@@ -209,21 +206,18 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
     fragment.setOwners([req.user])
     fragment = await fragment.save()
 
-    collection.addFragment(fragment)
-    collection = await collection.save()
-
     // How to address this?
     fragment = await User.ownersWithUsername(fragment)
 
     res.status(STATUS.CREATED).json(fragment)
-    sse.send({ action: 'fragment:create', data: { collection: objectId(collection), fragment } })
+    sse.send({ action: 'fragment:create', data: { fragment } })
   } catch (err) {
     next(err)
   }
 })
 
 // Retrieve a fragment
-api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
+api.get('/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
     let fragment = await Fragment.find(req.params.fragmentId)
     let permission = await authsome.can(req.user, req.method, fragment)

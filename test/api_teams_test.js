@@ -117,9 +117,9 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           () => api.users.authenticate.post(fixtures.updatedUser)
         ).then(
-          token => api.fragments.post(
-            fixtures.fragment, collectionId, token
-          ).expect(
+          token => api.fragments.post({
+            fragment: fixtures.fragment, collection: collectionId, token
+          }).expect(
             STATUS.CREATED
           )
         )
@@ -156,9 +156,9 @@ describe('Teams API - per collection or fragment', () => {
         ).then(
           () => api.users.authenticate.post(fixtures.updatedUser)
         ).then(
-          token => api.fragments.post(
-            fixtures.fragment, collectionId, token
-          ).expect(
+          token => api.fragments.post({
+            fragment: fixtures.fragment, collection: collectionId, token
+          }).expect(
             STATUS.FORBIDDEN
           )
         )

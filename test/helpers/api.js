@@ -17,13 +17,24 @@ const authorizedRequest = (req, token) => {
 // TODO: standardise parameter order of the "fragments" methods below
 
 const fragments = {
-  post: (fragment, collection, token) => {
-    const collectionId = isString(collection) ? collection : collection.id
+  post: (opts = {}) => {
+    const fragment = opts.fragment
+    const collection = opts.collection
+    const token = opts.token
+
+    let url
+
+    if (collection) {
+      const collectionId = isString(collection) ? collection : collection.id
+      url = `/api/collections/${collectionId}/fragments`
+    } else {
+      url = '/api/fragments'
+    }
 
     const req = request(
       api
     ).post(
-      '/api/collections/' + collectionId + '/fragments'
+      url
     ).send(
       fragment
     )
@@ -59,6 +70,12 @@ const fragments = {
     }
 
     if (fragmentId) url += '/' + fragmentId
+
+    if (opts.fields) {
+      url += '?' + querystring.stringify({
+        fields: opts.fields.join(',')
+      })
+    }
 
     const req = request(api).get(url)
 

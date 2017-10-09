@@ -24,7 +24,7 @@ describe('Fragments API', () => {
   })
 
   describe('admin', () => {
-    it('should display an initially empty list of fragments', async () => {
+    it('should have an initially empty list of fragments', async () => {
       const adminToken = await authenticateAdmin()
 
       // list all the collections
@@ -38,67 +38,51 @@ describe('Fragments API', () => {
     it('should allow an admin user to create a fragment', async () => {
       const adminToken = await authenticateAdmin()
 
-      const collection = await api.collections.create(
-        Object.assign({}, fixtures.collection, {filtered: 'example'}), adminToken)
-        .expect(STATUS.CREATED)
+      const fragment = await api.fragments.post({
+        fragment: {...fixtures.fragment, filtered: 'example'},
+        token: adminToken
+      }).expect(STATUS.CREATED)
         .then(res => res.body)
 
-      expect(collection.type).toEqual(fixtures.collection.type)
-      expect(collection.title).toEqual(fixtures.collection.title)
-      expect(collection.filtered).toEqual('example')
+      expect(fragment.type).toEqual(fixtures.fragment.type)
+      expect(fragment.title).toEqual(fixtures.fragment.title)
+      expect(fragment.filtered).toEqual('example')
     })
 
-    it('should allow an admin user to list all collections', async () => {
+    it('should allow an admin user to retrieve only some fields of a fragment', async () => {
       const adminToken = await authenticateAdmin()
 
-      // create a collection
-      await api.collections.create(fixtures.collection, adminToken)
-        .expect(STATUS.CREATED)
+      // create a fragment
+      await api.fragments.post({
+        fragment: fixtures.fragment, token: adminToken
+      }).expect(STATUS.CREATED)
 
-      // list all the collections
-      const collections = await api.collections.list(adminToken)
+      // list all the fragments, asking for all fields
+      const fragments = await api.fragments.get({token: adminToken})
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(collections).toHaveLength(1)
+      expect(fragments).toHaveLength(1)
 
-      const collection = collections[0]
-      expect(collection.type).toEqual(fixtures.collection.type)
-      expect(collection.title).toEqual(fixtures.collection.title)
-    })
+      const fragment = fragments[0]
+      expect(fragment).toHaveProperty('id')
+      expect(fragment).toHaveProperty('type')
+      expect(fragment).toHaveProperty('title')
+      expect(fragment).toHaveProperty('source')
 
-    it('should allow an admin user to retrieve only some fields of collections', async () => {
-      const adminToken = await authenticateAdmin()
-
-      // create a collection
-      await api.collections.create(fixtures.collection, adminToken)
-        .expect(STATUS.CREATED)
-
-      // list all the collections, asking for all fields
-      const collections = await api.collections.list(adminToken)
-        .expect(STATUS.OK)
+      // list all the fragments, asking for only two fields
+      const filteredFragments = await api.fragments.get({
+        token: adminToken, fields: ['type', 'title']
+      }).expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(collections).toHaveLength(1)
+      expect(filteredFragments).toHaveLength(1)
 
-      const collection = collections[0]
-      expect(collection).toHaveProperty('id')
-      expect(collection).toHaveProperty('type')
-      expect(collection).toHaveProperty('title')
-      expect(collection).toHaveProperty('created')
-
-      // list all the collections, asking for only two fields
-      const filteredCollections = await api.collections.list(adminToken, { fields: ['type', 'title'] })
-        .expect(STATUS.OK)
-        .then(res => res.body)
-
-      expect(filteredCollections).toHaveLength(1)
-
-      const filteredCollection = filteredCollections[0]
-      expect(filteredCollection).toHaveProperty('id') // the ID field must always be present
-      expect(filteredCollection).toHaveProperty('type')
-      expect(filteredCollection).toHaveProperty('title')
-      expect(filteredCollection).not.toHaveProperty('created')
+      const filteredFragment = filteredFragments[0]
+      expect(filteredFragment).toHaveProperty('id') // the ID field must always be present
+      expect(filteredFragment).toHaveProperty('type')
+      expect(filteredFragment).toHaveProperty('title')
+      expect(filteredFragment).not.toHaveProperty('source')
     })
 
     it('should allow an admin user to update a collection (without filtering properties)', async () => {

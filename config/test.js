@@ -18,7 +18,8 @@ module.exports = {
       kind: Joi.string(),
       title: Joi.string(),
       presentation: Joi.string(),
-      published: Joi.boolean()
+      published: Joi.boolean(),
+      filtered: Joi.string()
     },
     collection: {
       published: Joi.boolean(),

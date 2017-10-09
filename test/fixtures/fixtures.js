@@ -9,6 +9,7 @@ const updatedCollection = {
 }
 
 const fragment = {
+  'type': 'fragment',
   'kind': 'blogpost',
   'title': 'Just your regular blogpost',
   'source': '<blog></blog>',

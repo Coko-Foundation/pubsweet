@@ -36,9 +36,9 @@ describe('authenticated api', function () {
         fixtures.updatedUser
       ).then(
         (token) => {
-          return api.fragments.post(
-            fixtures.fragment, collection, token
-          ).expect(
+          return api.fragments.post({
+            fragment: fixtures.fragment, collection, token
+          }).expect(
             STATUS.FORBIDDEN
           )
         }
@@ -67,9 +67,9 @@ describe('authenticated api', function () {
         fixtures.updatedUser
       ).then(
         token => {
-          return api.fragments.post(
-            fixtures.fragment, collection, token
-          ).expect(
+          return api.fragments.post({
+            fragment: fixtures.fragment, collection, token
+          }).expect(
             STATUS.CREATED
           )
         }
@@ -183,9 +183,9 @@ describe('authenticated api', function () {
         fixtures.updatedUser
       ).then(
         token => {
-          return api.fragments.post(
-            fixtures.fragment, collection, token
-          ).expect(
+          return api.fragments.post({
+            fragment: fixtures.fragment, collection, token
+          }).expect(
             STATUS.FORBIDDEN
           )
         }
@@ -204,17 +204,17 @@ describe('authenticated api', function () {
   })
 
   it('fails to create a fragment in the protected collection if not authenticated', function () {
-    return api.fragments.post(
-      fixtures.fragment, collection
-    ).expect(
+    return api.fragments.post({
+      fragment: fixtures.fragment, collection
+    }).expect(
       STATUS.UNAUTHORIZED
     )
   })
 
   it('fails to create a fragment in the protected collection if authentication wrong', function () {
-    return api.fragments.post(
-      fixtures.fragment, collection, 'wrong'
-    ).expect(
+    return api.fragments.post({
+      fragment: fixtures.fragment, collection, token: 'wrong'
+    }).expect(
       STATUS.UNAUTHORIZED
     )
   })
