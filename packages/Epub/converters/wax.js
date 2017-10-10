@@ -1,4 +1,6 @@
 module.exports = $ => {
+  const body = $('body')
+
   const replaceWithBlockquote = (i, elem) => {
     const $elem = $(elem)
 
@@ -48,7 +50,9 @@ module.exports = $ => {
   // remove "uploads" from the start of each src attribute
   $('[src]').each((i, elem) => {
     const $elem = $(elem)
-    const src = $elem.attr('src').replace(/^\/?uploads\//)
+
+    const src = $elem.attr('src').replace(/^\/?uploads\//, '')
+
     $elem.attr('src', src)
   })
 
@@ -72,7 +76,7 @@ module.exports = $ => {
     $('<aside epub:type="endnote" class="note"/>')
       .attr('id', id)
       .html($elem.attr('note-content'))
-      .appendTo('body')
+      .appendTo(body)
 
     const callout = $('<span epub:type="noteref" class="note-callout"/>')
       .attr('href', id) // TODO: needs hash?
