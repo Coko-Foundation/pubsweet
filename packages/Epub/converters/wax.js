@@ -6,8 +6,9 @@ module.exports = $ => {
     $elem.attr('src', src)
   })
 
-  // replace "extract-prose" with "blockquote"
-  $('extract-prose').each((i, elem) => {
+  // replace extracts and epigraphs with "blockquote"
+
+  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each((i, elem) => {
     const $extract = $(elem)
 
     const blockquote = $('<blockquote class="sc-blockquote"/>')
@@ -16,31 +17,6 @@ module.exports = $ => {
     $extract.replaceWith(blockquote)
   })
 
-  // replace "extract-poetry" with "blockquote"
-  $('extract-poetry').each((i, elem) => {
-    const $extract = $(elem)
-
-    const blockquote = $('<blockquote class="sc-blockquote"/>')
-    $extract.contents().appendTo(blockquote)
-
-    $extract.replaceWith(blockquote)
-  })
-  $('epigraph-poetry').each((i, elem) => {
-    const $extract = $(elem)
-
-    const blockquote = $('<blockquote class="sc-blockquote"/>')
-    $extract.contents().appendTo(blockquote)
-
-    $extract.replaceWith(blockquote)
-  })
-  $('epigraph-prose').each((i, elem) => {
-    const $extract = $(elem)
-
-    const blockquote = $('<blockquote class="sc-blockquote"/>')
-    $extract.contents().appendTo(blockquote)
-
-    $extract.replaceWith(blockquote)
-  })
   // replace "note[content]" with "aside" and a link
   // $('note').each((i, elem) => {
   //   $(elem).remove()
