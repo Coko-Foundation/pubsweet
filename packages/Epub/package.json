@@ -4,7 +4,7 @@
   "description": "Backend EPUB export component for PubSweet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -17,5 +17,9 @@
   "peerDependencies": {
     "pubsweet": ">=0.3.2",
     "pubsweet-server": ">=0.8.1"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "lodash": "^4.17.4"
   }
 }
