@@ -1,51 +1,45 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
-
-require('../helpers/fix-stdio')
-require('../helpers/debug-exit')
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
+jest.mock('fs-extra', () => {
+  const fs = require.requireActual('fs-extra')
+  fs.removeSync = jest.fn(fs.removeSync)
+  return fs
+})
 
 const path = require('path')
-require('app-module-path').addPath(path.join(__dirname, '..', '..'))
-
 const fs = require('fs-extra')
-const workingdir = require('../helpers/working-dir')
-const cmd = require('../helpers/cmd')
-const clinew = require('../../cli/new')
+const { getMockArgv } = require('../helpers/')
+const runNew = require('../../cli/new')
 
-const checkfiles = [
-  'api',
-  'api/db',
-  'app',
-  'app/components',
-  'webpack',
-  '.gitignore'
-]
+const spawnSpy = require('child_process').spawnSync
+const removeSpy = fs.removeSync
 
-const answers = {
-  username: 'someuser',
-  email: 'user@test.com',
-  password: '12345',
-  collection: 'entries'
-}
+const appName = 'testapp'
+const appPath = path.join(process.cwd(), appName)
 
-describe('CLI: pubsweet new', () => {
-  it('requires an app name', async () => {
-    await expect(clinew(cmd('new'))).rejects
-      // .toMatch(/specify an app name/)
-      .toBeInstanceOf(Error)
+describe('new', () => {
+  it('spawns git and yarn child processes with correct arguments', async () => {
+    await runNew(getMockArgv({args: appName}))
+    const calls = spawnSpy.mock.calls
+    expect(calls).toHaveLength(2)
+    expect(calls[0][1][2]).toBe(appName)
+    expect(calls[1][2].cwd).toBe(appPath)
   })
 
-  it('creates a new app', async () => {
-    const dir = await workingdir()
+  it('will not overwrite dir without clobber passed', async () => {
+    fs.ensureDirSync(path.join(appPath, 'block-write'))
+    await runNew(getMockArgv({args: appName}))
+    const calls = removeSpy.mock.calls
+    expect(calls).toHaveLength(0)
+    const notOverwritten = fs.existsSync(appPath)
+    expect(notOverwritten).toBeTruthy()
+    require.requireActual('fs-extra').removeSync(appPath)
+  })
 
-    await clinew(cmd('new testapp', answers))
-
-    const promises = checkfiles.map(async file => {
-      const filepath = path.join(dir, 'testapp', file)
-      await expect(fs.stat(filepath)).resolves.toBeInstanceOf(fs.Stats)
-    })
-
-    await expect(Promise.all(promises)).resolves.toEqual(
-      expect.arrayContaining([undefined])
-    )
+  it('will overwrite dir with clobber passed', async () => {
+    fs.ensureDirSync(path.join(appPath, 'block-write'))
+    await runNew(getMockArgv({args: appName, options: {clobber: true}}))
+    const calls = removeSpy.mock.calls
+    expect(calls[0][0]).toBe(appPath)
+    require.requireActual('fs-extra').removeSync(appPath)
   })
 })

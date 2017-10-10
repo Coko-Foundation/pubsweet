@@ -1,40 +1,31 @@
-const logger = require('@pubsweet/logger')
-const colors = require('colors/safe')
 const program = require('commander')
-const properties = require('../src/user-properties')
+const properties = require('../src/schemas/').user
+const { addUser } = require('@pubsweet/db-manager')
+const runPrompt = require('../src/run-prompt')
+const _ = require('lodash')
+const config = require('config')
 
-module.exports = async args => {
+const readCommand = async argsOverride => {
   program
-    .arguments('[path]')
-    .description('Add a user to the database for pubsweet app at [path].')
-    .option('--dev', 'Add user to development mode database')
+    .description('Add a user to a database of a PubSweet app. Run from your project root')
 
-  Object.keys(properties).forEach(key => {
-    let value = properties[key]
-
-    if (value.type && value.type === 'boolean') {
-      program.option(`--${key}`, properties[key].description)
+  _.forEach(properties, (value, key) => {
+    if (_.get('type', value) === 'boolean') {
+      program.option(`--${key}`, value.description)
     } else {
-      program.option(`--${key} [string]`, properties[key].description)
+      program.option(`--${key} [string]`, value.description)
     }
   })
 
-  program.parse(args || process.argv)
+  return program.parse(argsOverride || process.argv)
+}
 
-  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
+module.exports = async argsOverride => {
+  const commandOpts = await readCommand(argsOverride)
 
-  const appPath = program.args[0]
+  const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
+  const promptOverride = _.merge(configOpts, commandOpts)
+  const finalOpts = await runPrompt({properties, override: promptOverride})
 
-  if (!appPath || appPath.length === 0) {
-    const eg = colors.bold(`pubsweet adduser ${colors.italic('./myapp')}`)
-    throw new Error(`You must specify an app path, e.g. ${eg}`)
-  }
-
-  logger.info('Adding user to database of the app at path', appPath)
-
-  await require('../src/add-user')({
-    appPath: appPath,
-    properties: require('../src/user-properties'),
-    override: program
-  })
+  return addUser(finalOpts)
 }

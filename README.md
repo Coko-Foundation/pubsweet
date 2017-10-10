@@ -50,8 +50,8 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 ### Prerequisites
 
-- Node.js v7.6+
-- npm v3+ or yarn v0.21+
+- Node.js v8.6+
+- yarn v1.1.0+
 
 ### Installation
 
@@ -78,8 +78,19 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | b
 ```
 
 - Restart your terminal/bash
-- `nvm install 7.7` (this version of Node.js is the latest to have precompiled leveldown packages)
+- `nvm install 8.6` (this version of Node.js is the latest to have precompiled leveldown packages)
 - `npm install -g pubsweet`
+
+### Quickstart
+
+The sequence of commands for generating and running a sample app is as follows:
+
+```bash
+pubsweet new my-app-name
+cd my-app-name
+pubsweet setupdb # (or npm run setupdb) 
+pubsweet start # (or npm start)
+```
 
 ## Using PubSweet CLI
 
@@ -94,7 +105,7 @@ Usage: pubsweet [options] [command]
 Commands:
 
   new         create and set up a new pubsweet app
-  run         start a pubsweet app
+  start       start a pubsweet app
   setupdb     generate a database for a pubsweet app
   add         add one or more components to a pubsweet app
   remove      remove one or more components from a pubsweet app
@@ -111,13 +122,13 @@ For any command, you can see detailed usage help by running `pubsweet help cmd`,
 
 ```bash
 pubsweet help new
-pubsweet help run
+pubsweet help start
 [...etc]
 ```
 
 ### Generating an app (`pubsweet new`)
 
-The `new` subcommand generates a template PubSweet app for you to work from. This includes everything needed to run your publishing platform: dependencies, database setup, boilerplate code and configuration, and a set of initial components.
+The `new` subcommand generates a template PubSweet app for you to work from. This includes dependencies, boilerplate code and configuration, and a set of initial components.
 
 To generate an app, just provide the name:
 
@@ -125,116 +136,103 @@ To generate an app, just provide the name:
 pubsweet new myappname
 ```
 
-`pubsweet` will create a subdirectory with the name you supplied, and start generating the app inside. It'll ask you a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead:
-
-```bash
-pubsweet new myappname \
-  --username someuser \
-  --email some@email.com \
-  --password correct-horse-battery-staple \
-  --collection Articles
-```
-
-### Running your app (`pubsweet run`)
-
-The `run` subcommand starts your app. It takes care of transpilation, module bundling and process management.
-
-To start your app:
-
-**either** use the `run` command from the app directory:
-
-```bash
-cd myappname
-pubsweet run
-```
-
-**or** provide the app path to the `run` command:
-
-```bash
-pubsweet run path/to/myapp
-```
-
-### Adding and removing components (`pubsweet add`)
-
-Components add pages, actions, and behaviors to pubsweet. There are many we've
-bundled by default, and you can create your own. To read more about components,
-[read the documentation](TODO!).
-
-```bash
-pubsweet add users-manager
-```
-
-Find all available components by typing:
-```bash
-pubsweet components
-```
-
-To remove a component, simply type `remove` with one or more components:
-```bash
-pubsweet remove users-manager,teams-manager
-```
+`pubsweet` will clone the template app from GitLab (pubsweet-starter) into a subdirectory with the name you supplied, and run `yarn install` to install the app's dependencies. 
 
 ### Setting up the database (`pubsweet setupdb`)
 
-The `setupdb` subcommand creates the database for your app. It is usually used when you've cloned the source code of an existing app, or when you want to start over with a fresh database.
-
-To generate a database for an app that doesn't have one yet:
+Run the `setupdb` subcommand within your app directory to:
+- create the database for your app
+- create a secret in config/local.json (required by the server)
 
 ```bash
-pubsweet setupdb ./path/to/app/dir
+cd myappname
+pubsweet setupdb
 ```
 
-By default this will generate a **production** database only. To generate a **dev** database, run the command with `--dev`:
+This will add the secret to config/local.json and generate a database at `pubsweet-server.dbPath`.
 
 ```bash
-pubsweet setupdb --dev ./path/to/app/dir
+pubsweet setupdb
 ```
 
 If your app already has a database, `pubsweet setupdb` will not overwrite it by default. You can force it to delete an existing database and overwrite it with a new one using `--clobber`:
 
 ```
-$ pubsweet setupdb ./path/to/app/dir
-info: Generating PubSweet app database at path api/db/production
-error: Database appears to already exist
+$ pubsweet setupdb
+info: Generating PubSweet app database at api/db/production
+error: Database already exists
 error: If you want to overwrite the database, use --clobber
-$ pubsweet setupdb --clobber ./path/to/app/dir
-info: Generating PubSweet app database at path api/db/production
-info: Database appears to already exist
+
+$ pubsweet setupdb --clobber
+info: Generating PubSweet app database at api/db/production
+info: Database already exists
 info: Overwriting existing database due to --clobber flag
-info: setting up the database
-info: building prompt
+info: Setting up the database
 question:><Admin username><
 [...etc]
 ```
 
-As with `pubsweet new`, you can skip any or all of the interactive prompts by providing the user details with command-line flags:
+The command will prompt you with a series of questions to customise your app. If you prefer to provide the answers in the initial command, you can do that instead:
 
 ```bash
-pubsweet setupdb ./path/to/app/dir \
+pubsweet setupdb
   --username someuser \
   --email some@email.com \
   --password correct-horse-battery-staple \
   --collection Articles
 ```
 
-### Adding a user to the database (`pubsweet adduser`)
+### Running your app (`pubsweet start`)
 
-You can add a user to an existing database:
+Use the `start` subcommand within your app directory to start your app. It takes care of transpilation, module bundling and process management (using `forever`).
 
 ```bash
-pubsweet adduser ./path/to/app/dir
+cd myappname
+pubsweet start
+```
+
+Forever is initialised to watch for changes in the config directory by default. To manually configure forever, add settings under the `forever` key in config (see forever's documentation for which settings are available) 
+
+`start` can also be passed `--reduxlog-off` to switch off the redux logger.
+
+### Adding and removing components (`pubsweet add`, `pubsweet remove`)
+
+Components add pages, actions, and behaviors to pubsweet. There are many we have bundled by default, and you can create your own. To learn more about components,
+[read the documentation](https://pubsweet.org/docs/components).
+
+Run `add` or `remove` within your app directory, followed by one or more components, to add and remove components. These subcommands use `yarn` to add or remove the components and updates the configuration for your app accordingly.
+
+```bash
+cd myappname
+pubsweet add users-manager items-manager
+pubsweet remove users-manager items-manager
+```
+
+Find all available components by typing:
+
+```bash
+pubsweet components
+```
+
+### Adding a user to the database (`pubsweet adduser`)
+
+Run `adduser` within your app directory to add a user to an existing database:
+
+```bash
+cd myappname
+pubsweet adduser
 ```
 
 You can optionally make that user an admin:
 
 ```bash
-pubsweet adduser --admin ./path/to/app/dir
+pubsweet adduser --admin
 ```
 
-As with `pubsweet new` and `pubsweet setupdb`, you can skip any or all of the interactive prompts by providing the user details with command-line flags:
+As with `pubsweet setupdb`, you can skip any or all of the interactive prompts by providing the user details with command-line flags:
 
 ```bash
-pubsweet adduser ./path/to/app/dir \
+pubsweet adduser \
   --username someuser \
   --email some@email.com \
   --password correct-horse-battery-staple
@@ -243,6 +241,10 @@ pubsweet adduser ./path/to/app/dir \
 # Contributing
 
 Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/blob/master/CONTRIBUTING) guide.
+
+### Tests
+
+Note that integration tests found in the file `./tests/integration.js` will run tests against the globally installed `pubsweet` binary. You can replace the globally installed `pubsweet` with the current repository by running `yarn link`. No tests outside this file require the globally installed binary. 
 
 # Credits
 
@@ -253,3 +255,4 @@ Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
 <a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
+

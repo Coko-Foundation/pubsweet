@@ -1,35 +1,55 @@
 const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
-const properties = require('../src/db-properties')
+const fs = require('fs-extra')
+const spawnSync = require('child_process').spawnSync
+const path = require('path')
+const { STARTER_REPO_URL } = require('../src/constants')
 
-module.exports = async args => {
+const readCommand = async argsOverride => {
   program
     .arguments('[name]')
-    .description('Generate a new app in directory [name].')
-    .option('--dev', 'Setup app for development')
+    .description('Generate a new app in the current working directory with name [name].')
     .option('--clobber', 'Overwrite any existing files')
 
-  Object.keys(properties).forEach(key => {
-    program.option(`--${key} [string]`, properties[key].description)
-  })
+  program.parse(argsOverride || process.argv)
 
-  program.parse(args || process.argv)
+  const appName = program.args[0]
 
-  process.env.NODE_ENV = program.dev ? 'dev' : 'production'
-
-  const appname = program.args[0]
-
-  if (!appname || appname.length === 0) {
+  if (!appName) {
     const eg = colors.bold(`pubsweet new ${colors.italic('myappname')}`)
     throw new Error(`You must specify an app name, e.g. ${eg}`)
   }
 
-  logger.info('Generating new PubSweet app:', appname)
+  return { appName, clobber: program.clobber }
+}
 
-  await require('../src/newapp')({
-    appPath: appname,
-    properties: require('../src/db-properties'),
-    override: program
+const overWrite = (appPath) => {
+  if (!fs.statSync(appPath).isDirectory()) {
+    throw new Error(appPath, 'exists as a file. Will not overwrite.')
+  }
+  logger.info(`Overwriting ${appPath} due to --clobber flag`)
+  fs.removeSync(appPath)
+}
+
+module.exports = async argsOverride => {
+  const { appName, clobber } = await readCommand(argsOverride)
+  logger.info(`Generating new PubSweet app: ${appName}`)
+
+  const appPath = path.join(process.cwd(), appName)
+
+  if (clobber) { overWrite(appPath) }
+
+  spawnSync('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
+
+  logger.info('Installing app dependencies')
+
+  // TODO: There is an error when using local yarn. Fix it.
+  // const localYarn = path.join(__dirname, '..', 'node_modules', '.bin', 'yarn')
+  spawnSync('yarn', ['install'], {
+    cwd: appPath,
+    stdio: 'inherit'
   })
+
+  logger.info('Finished generating initial app')
 }

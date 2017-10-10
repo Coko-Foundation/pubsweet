@@ -5,14 +5,13 @@
   "bin": "./bin/pubsweet.js",
   "scripts": {
     "lint": "eslint bin src cli test",
-    "pretest": "npm run lint",
-    "pretestci": "npm run pretest",
+    "pretest": "yarn link",
     "test": "NODE_ENV=test jest --runInBand --no-cache",
-    "testonly": "NODE_ENV=test jest --runInBand --no-cache",
-    "testdocker": "NODE_ENV=test jest --color --expand --verbose --runInBand --no-watchman --no-cache",
-    "testci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test",
-    "testdebug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug",
-    "watchtest": "WATCH_TESTS=true NODE_ENV=test jest"
+    "posttest": "yarn unlink",
+    "test:mocked": "NODE_ENV=test jest ./test/cli",
+    "vuln-test": "nsp check --output checkstyle",
+    "test:ci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug"
   },
   "keywords": [
     "pubsweet",
@@ -21,45 +20,37 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/db-manager": "^0.0.4",
     "@pubsweet/logger": "^0.0.1",
-    "app-module-path": "^2.2.0",
-    "authsome": "0.0.4",
-    "child-process-promise": "^2.2.1",
-    "chokidar": "^1.6.1",
+    "bluebird": "^3.5.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
-    "dotenv": "^2.0.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "express-pouchdb": "^2.3.7",
     "forever-monitor": "^1.7.0",
-    "fs-extra": "^3.0.0",
-    "git-wrapper2-promise": "^0.2.9",
-    "html-webpack-plugin": "^2.24.0",
+    "fs-extra": "^4.0.2",
+    "inflection": "^1.12.0",
     "joi": "^10.4.1",
-    "pouchdb": "^6.2.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
-    "pubsweet-server": "^1.0.0-alpha.2",
-    "temp": "^0.8.3",
-    "tmp": "0.0.29",
     "uuid": "^3.0.1",
     "webpack": "^2.3.2",
-    "winston": "^2.2.0",
-    "yarn": "^0.24.6"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.19.1"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-cli"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
-    "clear-require": "^2.0.0",
-    "eslint": "^3.19.0",
-    "jest": "^20.0.4",
-    "nightmare": "segmentio/nightmare",
-    "nightmare-wait-for-url": "0.0.2",
-    "simple-get": "^2.5.1",
-    "standard": "^10.0.1",
-    "pouchdb-adapter-memory": "^6.1.1"
+    "@pubsweet/starter": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
+    "eslint": "^4.8.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^21.0.0",
+    "nsp": "^2.8.1"
   },
   "jest": {
     "testMatch": [

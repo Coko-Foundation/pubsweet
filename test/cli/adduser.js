@@ -1,47 +1,20 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
+jest.mock('@pubsweet/db-manager', () => ({ addUser: jest.fn() }))
 
-require('../helpers/fix-stdio')
-require('../helpers/debug-exit')
+const { getMockArgv } = require('../helpers/')
+const runAddUser = require('../../cli/adduser')
+const addUserSpy = require('@pubsweet/db-manager').addUser
 
-const path = require('path')
-require('app-module-path').addPath(path.join(__dirname, '..', '..'))
-
-const workingdir = require('../helpers/working-dir')
-const cmd = require('../helpers/cmd')
-
-const clinew = require('../../cli/new')
-const cliusr = require('../../cli/adduser')
-
-const dbanswers = {
-  username: 'someuser',
-  email: 'foo@example.com',
-  password: '12345',
-  collection: 'entries'
-}
-
-const useranswers = {
+const user = {
   username: 'anotheruser',
   email: 'bar@example.com',
   password: '12345',
-  admin: false
+  admin: true
 }
 
-describe('CLI: pubsweet adduser', () => {
-  it('requires an app path', async () => {
-    await expect(cliusr(cmd('adduser'))).rejects
-      // .toMatch(/specify an app path/)
-      .toBeInstanceOf(Error)
-  })
-
-  it('adds a user', async () => {
-    const dir = await workingdir()
-
-    await clinew(cmd('new testapp', dbanswers))
-
-    const appPath = path.join(dir, 'testapp')
-    require('app-module-path').addPath(appPath)
-
-    await expect(cliusr(cmd(`adduser ${appPath}`, useranswers))).resolves
-      .toBeUndefined()
+describe('adduser', () => {
+  it('calls dbManager.addUser with correct arguments', async () => {
+    await runAddUser(getMockArgv({ options: user }))
+    expect(addUserSpy.mock.calls[0][0]).toEqual(user)
   })
 })
