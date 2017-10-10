@@ -1,4 +1,50 @@
 module.exports = $ => {
+  const replaceWithBlockquote = (i, elem) => {
+    const $elem = $(elem)
+
+    const blockquote = $('<blockquote class="sc-blockquote"/>')
+      .append($elem.contents())
+
+    $elem.replaceWith(blockquote)
+  }
+
+  const replaceWithText = (i, elem) => {
+    const $elem = $(elem)
+
+    $elem.replaceWith($elem.text())
+  }
+
+  const replaceWithParagraph = className => (i, elem) => {
+    const $elem = $(elem)
+
+    const p = $('<p/>')
+      .attr('class', className)
+      .text($elem.text())
+
+    $elem.replaceWith(p)
+  }
+
+  const replaceWithList = className => (i, elem) => {
+    const $elem = $(elem)
+
+    const list = $('<ol/>')
+      .attr('class', className)
+      .append($elem.contents())
+
+    $elem.replaceWith(list)
+  }
+
+  // replace custom HTML elements
+  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose')
+    .each(replaceWithBlockquote)
+  $('comment').each(replaceWithText)
+  $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
+  $('chapter-title').each(replaceWithParagraph('sc-chapter-title'))
+  $('chapter-subtitle').each(replaceWithParagraph('sc-chapter-subtitle'))
+  $('source-note').each(replaceWithParagraph('source-note'))
+  $('ol[styling="qa"]').each(replaceWithList('sc-list-ol-qa'))
+  $('ol[styling="unstyled"]').each(replaceWithList('sc-list-ol-unstyled'))
+
   // remove "uploads" from the start of each src attribute
   $('[src]').each((i, elem) => {
     const $elem = $(elem)
@@ -6,23 +52,18 @@ module.exports = $ => {
     $elem.attr('src', src)
   })
 
-  // replace extracts and epigraphs with "blockquote"
-
-  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each((i, elem) => {
+  // accept or remove "track-change" elements
+  $('track-change').each((i, elem) => {
     const $elem = $(elem)
 
-    const blockquote = $('<blockquote class="sc-blockquote"/>')
-
-    $elem.contents().appendTo(blockquote)
-
-    $elem.replaceWith(blockquote)
+    if ($elem.attr('status') === 'delete') {
+      $elem.replaceWith($elem.text())
+    } else {
+      $elem.remove()
+    }
   })
 
-  // replace "note[content]" with "aside" and a link
-  // $('note').each((i, elem) => {
-  //   $(elem).remove()
-  // })
-
+  // replace inline notes with endnotes
   $('note').each((i, elem) => {
     const $elem = $(elem)
 
@@ -38,76 +79,5 @@ module.exports = $ => {
       .text(i)
 
     $elem.replaceWith(callout)
-  })
-
-  $('comment').each((i, elem) => {
-    const $elem = $(elem)
-
-    $elem.replaceWith($elem.text())
-  })
-
-  $('track-change').each((i, elem) => {
-    const $elem = $(elem)
-
-    if ($elem.attr('status') === 'delete') {
-      $elem.replaceWith($elem.text())
-    } else {
-      $elem.remove()
-    }
-  })
-
-  $('chapter-number').each((i, elem) => {
-    const $elem = $(elem)
-
-    const p = $('<p class="sc-chapter-number"/>')
-      .text($elem.text())
-
-    $elem.replaceWith(p)
-  })
-
-  $('chapter-title').each((i, elem) => {
-    const $elem = $(elem)
-
-    const p = $('<p class="sc-chapter-title"/>')
-      .text($elem.text())
-
-    $elem.replaceWith(p)
-  })
-
-  $('chapter-subtitle').each((i, elem) => {
-    const $elem = $(elem)
-
-    const p = $('<p class="sc-chapter-subtitle"/>')
-      .text($elem.text())
-
-    $elem.replaceWith(p)
-  })
-
-  $('source-note').each((i, elem) => {
-    const $elem = $(elem)
-
-    const p = $('<p class="sc-source-note"/>')
-      .text($elem.text())
-
-    $elem.replaceWith(p)
-  })
-
-  // add class name to ordered lists
-  $('ol').each((i, elem) => {
-    const $elem = $(elem)
-
-    switch ($elem.attr('styling')) {
-      case 'qa':
-        const qa = $('<ol class="sc-list-ol-qa"/>')
-        $elem.contents().appendTo(qa)
-        $elem.replaceWith(qa)
-        break
-
-      case 'unstyled':
-        const unstyled = $('<ol class="sc-list-ol-unstyled"/>')
-        $elem.contents().appendTo(unstyled)
-        $elem.replaceWith(unstyled)
-        break
-    }
   })
 }
