@@ -50,8 +50,8 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 ### Prerequisites
 
-- Node.js v7.6+
-- yarn v0.21+
+- Node.js v8.6+
+- yarn v1.1.0+
 
 ### Installation
 
@@ -78,7 +78,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | b
 ```
 
 - Restart your terminal/bash
-- `nvm install 7.7` (this version of Node.js is the latest to have precompiled leveldown packages)
+- `nvm install 8.6` (this version of Node.js is the latest to have precompiled leveldown packages)
 - `npm install -g pubsweet`
 
 ### Quickstart
