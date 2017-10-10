@@ -2,9 +2,20 @@
 # yarn lockfile v1
 
 
+"@pubsweet/db-manager@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@pubsweet/db-manager/-/db-manager-0.0.4.tgz#a0ddaed6c6ad8611b116cf322cc9d545df40bdb5"
+  dependencies:
+    "@pubsweet/logger" "0.0.1"
+    fs-extra "^4.0.2"
+    isomorphic-fetch "^2.2.1"
+    joi "^11.0.2"
+    pouchdb "^6.3.4"
+    pubsweet-server "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git"
+
 "@pubsweet/db-manager@git+https://gitlab.coko.foundation/yld/db-manager.git":
-  version "0.0.2"
-  resolved "git+https://gitlab.coko.foundation/yld/db-manager.git#4df92e5dfffc4acc319949314ab750a04a618ae9"
+  version "0.0.4"
+  resolved "git+https://gitlab.coko.foundation/yld/db-manager.git#2fb0d1f6f4621b8d5eb1fb950430e0e547ce94ec"
   dependencies:
     "@pubsweet/logger" "0.0.1"
     fs-extra "^4.0.2"
@@ -22,7 +33,7 @@
 
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#7ead43920795cb411d1dd0ea5128fa7a65a05fca"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#e2fdecc7b1c7edb313773ba2c5c1f58b21ae4851"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     jest "^21.1.0"
@@ -3773,8 +3784,8 @@ mkdirp@0.x.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
     minimist "0.0.8"
 
 moment@2.x.x:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.0.tgz#44f675ef6b944942762581b1c179fb679e599d67"
 
 morgan@^1.8.2:
   version "1.9.0"
@@ -5082,7 +5093,7 @@ pubsweet-theme-plugin@^0.0.1:
 
 "pubsweet@git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#refactor/db-manager":
   version "1.0.0-alpha.4"
-  resolved "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#62fcb37b8dea7944d6d1a613c77aa921a8c43fc6"
+  resolved "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#e468bd6017c0eb8c52ff80f2a7479f86bb0b2b45"
   dependencies:
     "@pubsweet/db-manager" "git+https://gitlab.coko.foundation/yld/db-manager.git"
     "@pubsweet/logger" "^0.0.1"
@@ -5425,8 +5436,8 @@ recast@^0.11.17:
     source-map "~0.5.0"
 
 redux-form@^7.0.3:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-7.1.0.tgz#f3a2a21b061d498f924f4ea4612d7a3155f64f02"
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-7.1.1.tgz#4d9ab1d9c03beb3a8b5f8e5d0f398cff4209081f"
   dependencies:
     babel-jest "^21.2.0"
     deep-equal "^1.0.1"

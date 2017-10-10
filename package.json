@@ -20,7 +20,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "git+https://gitlab.coko.foundation/yld/db-manager.git",
+    "@pubsweet/db-manager": "^0.0.4",
     "@pubsweet/logger": "^0.0.1",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
