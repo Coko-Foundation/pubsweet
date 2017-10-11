@@ -1,6 +1,7 @@
 'use strict'
 const Model = require('./Model')
 const Fragment = require('./Fragment')
+const Team = require('./Team')
 const without = require('lodash/without')
 
 class Collection extends Model {
@@ -52,6 +53,11 @@ class Collection extends Model {
       }
     })
     this.fragments = without(this.fragments, fragment.id)
+  }
+
+  async delete () {
+    await Team.deleteAssociated(this.type, this.id)
+    return super.delete()
   }
 }
 

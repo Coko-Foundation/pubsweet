@@ -498,5 +498,155 @@ describe('Collections API', () => {
 
       expect(Object.keys(collection)).not.toContain('filtered')
     })
+
+    it('should delete teams associated with a collection when the collection is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: collection.id
+        }
+      }
+
+      await api.teams.post(teamData, null, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different collection
+
+      const otherCollection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: otherCollection.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, null, token)
+        .expect(STATUS.CREATED)
+
+      const collectionTeams = await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collectionTeams).toHaveLength(1)
+
+      const teamsBeforeDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.delete(collection.id, token)
+        .expect(STATUS.OK)
+
+      await api.collections.retrieve(collection.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      // await api.collections.listTeams(collection.id, token)
+      //   .expect(STATUS.NOT_FOUND)
+
+      const teamsAfterDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
+    })
+
+    it('should delete teams associated with a fragment when the fragment is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const fragment = await api.fragments.post(fixtures.fragment, collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: fragment.id
+        }
+      }
+
+      await api.teams.post(teamData, null, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different fragment
+
+      const otherFragment = await api.fragments.post(fixtures.fragment, collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: otherFragment.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, null, token)
+        .expect(STATUS.CREATED)
+
+      const fragmentTeams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragmentTeams).toHaveLength(1)
+
+      const teamsBeforeDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.deleteFragment(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+
+      await api.collections.retrieveFragment(collection.id, fragment.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      // await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+      //   .expect(STATUS.NOT_FOUND)
+
+      const teamsAfterDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
+    })
   })
 })
