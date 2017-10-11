@@ -1,0 +1,32 @@
+{
+  "name": "pubsweet-component-epub-frontend",
+  "version": "0.0.1",
+  "description":
+    "A frontend component that triggers a conversion of Editoria's Typescript to epub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "epub",
+    "html",
+    "processing",
+    "conversion",
+    "frontend",
+    "pubsweet"
+  ],
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "isomorphic-fetch": "^2.1.1",
+    "react": "15.5.4",
+    "react-bootstrap": "0.30.10",
+    "react-dom": "15.5.4",
+    "react-redux": "5.0.4",
+    "redux": "3.6.0"
+  },
+  "peerDependencies": {
+    "pubsweet-client": "0.9.1",
+    "react": ">=15"
+  }
+}
