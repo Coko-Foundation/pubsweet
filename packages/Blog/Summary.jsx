@@ -10,20 +10,20 @@ export default class Summary extends React.Component {
     const { fragment } = this.props
     let summary
     if (fragment.source) {
-      var parser = new DOMParser() // eslint-disable-line
-      var doc = parser.parseFromString(fragment.source, 'text/html')
-      summary = doc.getElementsByTagName('abstract').length > 0 ? doc.getElementsByTagName('abstract')[0].innerText : null
+      const parser = new DOMParser() // eslint-disable-line
+      const doc = parser.parseFromString(fragment.source, 'text/html')
+      const [abstract] = doc.getElementsByTagName('abstract')
+      summary = abstract ? abstract.innerText : null
     }
     if (!summary) {
       summary = 'No summary available.'
     }
-    let publishDate = new Date(fragment.published_at).toDateString()
-
-    let owners = fragment.owners.map(owner => owner.username).join(', ')
+    const publishDate = new Date(fragment.published_at).toDateString()
+    const owners = fragment.owners.map(owner => owner.username).join(', ')
 
     return (
       <div className="blogpost bootstrap">
-        <Row key={fragment.id}>
+        <Row>
           <Col xs={12} md={8} mdOffset={2}>
             <h2>{fragment.title}</h2>
             <div dangerouslySetInnerHTML={{__html: summary}} />

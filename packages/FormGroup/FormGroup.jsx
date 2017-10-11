@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
+import {FormGroup as BootstrapFormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
 import Joi from 'joi-browser'
 import serverValidations from 'pubsweet-server/src/models/validations'
 import config from 'config'
 const validations = serverValidations(config)
 
-class PubSweetFormGroup extends React.Component {
+class FormGroup extends React.Component {
   constructor (props) {
     super(props)
     this.validateState = this.validateState.bind(this)
@@ -17,36 +17,37 @@ class PubSweetFormGroup extends React.Component {
   }
 
   validateState (state) {
-    if (!state.startedEditing) return null
+    if (!state.startedEditing) return state
 
-    let [model, property] = this.props.modelProperty.split('.')
-    let validation = Joi.reach(validations[model], property)
+    const [model, property] = this.props.modelProperty.split('.')
+    const validation = Joi.reach(validations[model], property)
 
-    let result = validation.label(this.props.label).validate(state.value)
+    const result = validation.label(this.props.label).validate(state.value)
     if (result.error) {
-      Object.assign(state, {
+      return {
+        ...state,
         validation: 'error',
         validationMessage: result.error.message
-      })
-    } else {
-      Object.assign(state, {
-        validation: 'success',
-        validationMessage: ''
-      })
+      }
+    }
+
+    return {
+      ...state,
+      validation: 'success',
+      validationMessage: ''
     }
   }
 
   handleChange (e) {
-    let nextState = {
+    const validatedState = this.validateState({
       startedEditing: true,
       value: e.target.value
-    }
-    this.validateState(nextState)
-    this.setState(nextState)
+    })
+    this.setState(validatedState)
   }
 
   render () {
-    return <FormGroup
+    return <BootstrapFormGroup
       controlId={this.props.controlId}
       validationState={this.state.validation}
     >
@@ -60,11 +61,11 @@ class PubSweetFormGroup extends React.Component {
       />
       <FormControl.Feedback />
       <HelpBlock>{this.state.validationMessage}</HelpBlock>
-    </FormGroup>
+    </BootstrapFormGroup>
   }
 }
 
-PubSweetFormGroup.propTypes = {
+FormGroup.propTypes = {
   controlId: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
@@ -72,4 +73,4 @@ PubSweetFormGroup.propTypes = {
   inputRef: PropTypes.func
 }
 
-export default PubSweetFormGroup
+export default FormGroup

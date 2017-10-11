@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@pubsweet/logger@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@pubsweet/logger/-/logger-0.0.1.tgz#ec0c15f04e0c64232c29173848ffe6da8190c9c2"
+  dependencies:
+    config "^1.26.2"
+    joi "^10.6.0"
+
 ajv@^4.9.1:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.8.tgz#82ffb02b29e662ae53bdc20af15947706739c536"
@@ -66,7 +73,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-config@^1.26.1:
+config@^1.26.1, config@^1.26.2:
   version "1.26.2"
   resolved "https://registry.yarnpkg.com/config/-/config-1.26.2.tgz#2466291168d8afae0aae8ab99ea4d4272f520cae"
   dependencies:
@@ -160,6 +167,10 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
+hoek@4.x.x:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.0.tgz#72d9d0754f7fe25ca2d01ad8f8f9a9449a89526d"
+
 http-signature@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/http-signature/-/http-signature-1.1.1.tgz#df72e267066cd0ac67fb76adf8e134a8fbcf91bf"
@@ -180,9 +191,26 @@ isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
+isemail@2.x.x:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-2.2.1.tgz#0353d3d9a62951080c262c2aa0a42b8ea8e9e2a6"
+
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
+
+items@2.x.x:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
+
+joi@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-10.6.0.tgz#52587f02d52b8b75cdb0c74f0b164a191a0e1fc2"
+  dependencies:
+    hoek "4.x.x"
+    isemail "2.x.x"
+    items "2.x.x"
+    topo "2.x.x"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -368,6 +396,12 @@ temp@^0.8.3:
   dependencies:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
+
+topo@2.x.x:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
+  dependencies:
+    hoek "4.x.x"
 
 tough-cookie@>=2.3.0, tough-cookie@~2.3.0:
   version "2.3.2"

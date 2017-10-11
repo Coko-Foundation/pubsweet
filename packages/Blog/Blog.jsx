@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import 'pubsweet-component-manage/Manage.scss'
 import styles from './Blog.local.scss'
 
-import BlogpostSummary from './Summary'
+import Summary from './Summary'
 
 export default class Blog extends React.Component {
   constructor (props) {
@@ -15,16 +15,9 @@ export default class Blog extends React.Component {
   }
 
   render () {
-    var posts = this.props.posts.map(blogpost => {
-      if (blogpost.published === true) {
-        return (<BlogpostSummary
-          key={blogpost.id}
-          fragment={blogpost}
-        />)
-      }
-    }).filter(function (summary) {
-      if (summary) return true
-    })
+    let posts = this.props.posts
+        .filter(post => post.published)
+        .map(post => <Summary key={post.id} fragment={post}/>)
 
     if (posts.length === 0 && this.props.blog) {
       posts = <Row>
