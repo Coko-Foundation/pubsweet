@@ -4,7 +4,7 @@ import {
   HTML_TO_EPUB_CONV_FAILURE
 } from './types'
 
-export default function htmlToEpub(
+export default function htmlToEpub (
   state = {
     isFetching: false,
     extractedEpubPath: ''

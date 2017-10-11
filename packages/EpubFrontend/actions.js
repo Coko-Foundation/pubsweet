@@ -1,27 +1,27 @@
 import fetch from 'isomorphic-fetch'
 import * as T from './types'
 
-function htmlToEpubRequest() {
+function htmlToEpubRequest () {
   return {
     type: T.HTML_TO_EPUB_CONV_REQUEST
   }
 }
 
-function htmlToEpubSuccess(extractedEpubPath) {
+function htmlToEpubSuccess (extractedEpubPath) {
   return {
     type: T.HTML_TO_EPUB_CONV_SUCCESS,
     extractedEpubPath: extractedEpubPath
   }
 }
 
-function htmlToEpubFailure(message) {
+function htmlToEpubFailure (message) {
   return {
     type: T.HTML_TO_EPUB_CONV_FAILURE,
     error: message
   }
 }
 
-export function htmlToEpub(bookId) {
+export function htmlToEpub (bookId) {
   return dispatch => {
     dispatch(htmlToEpubRequest())
 
