@@ -1,5 +1,8 @@
-const logger = require('@pubsweet/logger')
 const HTMLEPUB = require('html-epub')
+const cheerio = require('cheerio')
+const sorter = require('./sorter')
+const converters = require('./converters')
+const output = require('./output')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -7,8 +10,6 @@ const EpubBackend = function (app) {
       const Collection = app.locals.models.Collection
 
       const id = req.params.id
-
-      res.attachment(`collection-${id}.epub`)
 
       // book
       const collection = await Collection.find(id)
@@ -21,28 +22,44 @@ const EpubBackend = function (app) {
       // chapters
       const fragments = await collection.getFragments()
 
-      const parts = fragments.map(fragment => ({
-        title: fragment.title,
-        content: fragment.source
-      }))
+      // styles
+      const styles = [req.query.style].filter(name => name)
 
-      // NOTE: "uploads" is hard-coded in the image path
-      const resourceRoot = process.cwd()
+      // converters
+      const activeConverters = [req.query.converter]
+        .filter(name => name && converters[name])
+        .map(name => converters[name])
+
+      const parts = fragments.sort(sorter).map(fragment => {
+        const $ = cheerio.load(fragment.source)
+
+        activeConverters.forEach(converter => converter($))
+
+        styles.forEach(uri => {
+          $('<link rel="stylesheet"/>').attr('href', uri).appendTo('head')
+        })
+
+        return {
+          title: fragment.title,
+          content: $.html()
+        }
+      })
+
+      // TODO: read the path to the uploads folder from config
+      const resourceRoot = process.cwd() + '/uploads'
 
       const epub = new HTMLEPUB(book, {resourceRoot})
 
       await epub.load(parts)
 
-      const archive = await epub.stream(res)
+      switch (req.query.destination) {
+        case 'folder':
+          return output.folder(epub, res)
 
-      // TODO: this might not work if the attachment header is already sent
-      archive.on('error', err => {
-        res.status(500).send({error: err.message})
-      })
-
-      archive.on('end', () => {
-        logger.info('Wrote %d bytes', archive.pointer())
-      })
+        case 'attachment':
+        default:
+          return output.attachment(epub, res, id)
+      }
     } catch (e) {
       next(e)
     }
