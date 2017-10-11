@@ -1,12 +1,11 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({mergeParams: true})
 const path = require('path')
+const config = require('config')
 
-if (process.env.NODE_ENV === 'production') {
-  var filename = path.join('.', '_build', 'assets')
-} else {
-  filename = path.join('.', 'app')
-}
+const filename = config.util.getEnv('NODE_ENV') === 'production'
+  ? path.join('.', '_build', 'assets')
+  : path.join('.', 'app')
 
 router.get('*', (req, res, next) => {
   return res.sendFile('index.html', { root: filename })

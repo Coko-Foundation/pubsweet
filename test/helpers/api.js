@@ -87,6 +87,17 @@ const users = {
       } else {
         return req
       }
+    },
+    get: token => {
+      const req = request(
+        api
+      ).get(
+        '/api/users/authenticate'
+      ).set(
+        'Authorization', 'Bearer ' + token
+      )
+
+      return req
     }
   },
   post: user => {
@@ -182,6 +193,10 @@ const collections = {
     const req = request(api).delete(COLLECTIONS_ROOT + collectionId)
     return authorizedRequest(req, token)
   },
+  listTeams: (collectionId, token) => {
+    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/teams')
+    return authorizedRequest(req, token)
+  },
   listFragments: (collectionId, token, options) => {
     let url = COLLECTIONS_ROOT + collectionId + '/fragments'
 
@@ -210,6 +225,10 @@ const collections = {
   },
   deleteFragment: (collectionId, fragmentId, token) => {
     const req = request(api).delete(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+    return authorizedRequest(req, token)
+  },
+  listFragmentTeams: (collectionId, fragmentId, token) => {
+    const req = request(api).get(`${COLLECTIONS_ROOT}${collectionId}/fragments/${fragmentId}/teams`)
     return authorizedRequest(req, token)
   }
 }

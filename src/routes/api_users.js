@@ -5,7 +5,12 @@ const passport = require('passport')
 const express = require('express')
 
 const User = require('../models/User')
-const Authorize = require('../models/Authorize')
+
+const config = require('config')
+const Authsome = require('authsome')
+const authsome = new Authsome(config.authsome, { models: require('../models') })
+const { authorizationError } = require('./util')
+
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
@@ -15,8 +20,8 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
 const authentication = require('../authentication')
 
-// Token issuing
-api.post('/authenticate', authLocal, (req, res) => {
+// Issue a token
+api.post('/users/authenticate', authLocal, (req, res) => {
   return res.status(
     STATUS.CREATED
   ).json(
@@ -24,128 +29,110 @@ api.post('/authenticate', authLocal, (req, res) => {
   )
 })
 
-// Token verify
-api.get('/authenticate', authBearer, (req, res, next) => {
-  return User.find(
-    req.authInfo.id
-  ).then(
-    user => {
-      user.token = req.authInfo.token
-      let teams = user.teams.map((teamId) => Team.find(teamId))
-      return Promise.all([user, Promise.all(teams)])
-    }
-  ).then(
-    ([user, teams]) => {
-      user.teams = teams
-      return res.status(STATUS.OK).json(user)
-    }
-  ).catch(next)
-})
-
-// Create user
-api.post('/', (req, res, next) => {
-  const user = new User(req.body)
-
-  if (req.body.admin) throw new ValidationError('invalid property: admin')
-
-  return user.save().then(
-    response => res.status(STATUS.CREATED).json(response)
-  ).catch(
-    next
-  )
-})
-
-// List users
-api.get('/', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'read', req.originalUrl
-  ).then(
-    () => User.all()
-  ).then(
-    users => res.status(STATUS.OK).json({ users: users })
-  ).catch(
-    next
-  )
-})
-
-// Get user
-api.get('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'read', req.originalUrl
-  ).then(
-    () => User.find(req.params.id)
-  ).then(
-    user => res.status(STATUS.OK).json(user)
-  ).catch(
-    next
-  )
-})
-
-// Destroy a user
-api.delete('/:id', authBearer, async (req, res, next) => {
+// Verify a token
+api.get('/users/authenticate', authBearer, async (req, res, next) => {
   try {
-    await Authorize.can(req.user, 'delete', req.originalUrl)
-    const user = await User.find(req.params.id)
-    const deletedUser = await user.delete()
-
-    res.status(STATUS.OK).json(deletedUser)
-  } catch (e) {
-    next(e)
+    const user = await User.find(req.user)
+    user.token = req.authInfo.token
+    const teams = await Promise.all(
+      user.teams.map((teamId) => Team.find(teamId))
+    )
+    user.teams = teams
+    return res.status(STATUS.OK).json(user)
+  } catch (err) {
+    next(err)
   }
 })
 
-// Update a user
-// deprecated: use PATCH instead
-api.put('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'update', req.originalUrl
-  ).then(
-    () => User.find(req.user)
-  ).then(
-    user => {
-      // TODO: Move this to a validation step
-      if (req.body.admin && !user.admin) {
-        throw new AuthorizationError('only admins can set other admins')
-      }
-      return User.find(req.params.id)
-    }
-  ).then(
-    user => user.updateProperties(req.body)
-  ).then(
-    user => user.save()
-  ).then(
-    user => User.find(req.params.id)
-  ).then(
-    user => res.status(STATUS.OK).json(user)
-  ).catch(
-    next
-  )
+// Create a user
+api.post('/users', async (req, res, next) => {
+  try {
+    let user = new User(req.body)
+    if (req.body.admin) throw new ValidationError('invalid property: admin')
+
+    user = await user.save()
+    return res.status(STATUS.CREATED).json(user)
+  } catch (err) {
+    next(err)
+  }
 })
 
-api.patch('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'update', req.originalUrl
-  ).then(
-    () => User.find(req.user)
-  ).then(
-    user => {
-      // TODO: Move this to a validation step
-      if (req.body.admin && !user.admin) {
-        throw new AuthorizationError('only admins can set other admins')
-      }
-      return User.find(req.params.id)
+// List users
+api.get('/users', authBearer, async (req, res, next) => {
+  try {
+    const permission = await authsome.can(req.user, req.method, req.path)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.path)
     }
-  ).then(
-    user => user.updateProperties(req.body)
-  ).then(
-    user => user.save()
-  ).then(
-    user => User.find(req.params.id)
-  ).then(
-    user => res.status(STATUS.OK).json(user)
-  ).catch(
-    next
-  )
+
+    const users = await User.all()
+    return res.status(STATUS.OK).json({users: users})
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Get a user
+api.get('/users/:id', authBearer, async (req, res, next) => {
+  try {
+    const user = await User.find(req.params.id)
+    const permission = await authsome.can(req.user, req.method, user)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.path)
+    }
+
+    return res.status(STATUS.OK).json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Delete a user
+api.delete('/users/:id', authBearer, async (req, res, next) => {
+  try {
+    let user = await User.find(req.params.id)
+    const permission = await authsome.can(req.user, req.method, user)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.path)
+    }
+    user = await user.delete()
+    return res.status(STATUS.OK).json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Patch a user
+api.patch('/users/:id', authBearer, async (req, res, next) => {
+  try {
+    let user = await User.find(req.params.id)
+    const permission = await authsome.can(req.user, req.method, user)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.path)
+    }
+
+    // TODO: Move this to the authorization mode
+    const authenticatedUser = await User.find(req.user)
+    if (req.body.admin && !authenticatedUser.admin) {
+      throw new AuthorizationError('only admins can set other admins')
+    }
+
+    if (permission.filter) {
+      req.body = permission.filter(req.body)
+    }
+
+    user = await user.updateProperties(req.body)
+    user = await user.save()
+    user = await User.find(req.params.id)
+
+    return res.status(STATUS.OK).json(user)
+  } catch (err) {
+    next(err)
+  }
 })
 
 module.exports = api

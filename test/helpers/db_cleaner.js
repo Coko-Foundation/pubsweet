@@ -1,7 +1,7 @@
 'use strict'
 
 const createDb = require('../../src/db')
-const logger = require('../../src/logger')
+const logger = require('@pubsweet/logger')
 
 let dbCleaner = async () => {
   await global.db.destroy()

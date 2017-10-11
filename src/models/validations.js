@@ -14,6 +14,12 @@ let validations = {
     type: Joi.string().required(),
     title: Joi.string(),
     rev: Joi.string(),
+    collection: Joi.alternatives().try(
+      // a collection ID
+      Joi.string(),
+      // or a collection object
+      Joi.object({ type: Joi.string().valid('collection') }).unknown(true)
+    ),
     owners: Joi.array().items(Joi.string().guid())
   },
   collection: {

@@ -1,6 +1,14 @@
 const pick = require('lodash/pick')
+const AuthorizationError = require('../errors/AuthorizationError')
+const NotFoundError = require('../errors/NotFoundError')
 
 module.exports = {
+  authorizationError: (username, operation, object) => {
+    username = username || 'public'
+    const msg = `User ${username} is not allowed to ${operation} ${object}`
+    return new AuthorizationError(msg)
+  },
+
   // Build an object containing only the id
   objectId: object => ({ id: object.id }),
 
@@ -21,5 +29,32 @@ module.exports = {
     const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
 
     return item => fields ? pick(item, fields.concat('id')) : item
+  },
+
+  getTeams: async (opts) => {
+    let teams
+    try {
+      teams = await opts.Team.findByField({
+        'object.id': opts.id,
+        'object.type': opts.type
+      })
+
+      teams = await Promise.all(teams.map(async team => {
+        let permission = await opts.authsome.can(opts.req.user, opts.req.method, team)
+        if (permission) {
+          return team
+        }
+      }))
+
+      teams = teams.filter(team => team !== undefined)
+    } catch (err) {
+      if (err instanceof NotFoundError) {
+        teams = []
+      } else {
+        throw err
+      }
+    }
+
+    return teams
   }
 }

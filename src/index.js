@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const helmet = require('helmet')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -6,20 +7,21 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const index = require('./routes/index')
 const api = require('./routes/api')
-const logger = require('./logger')
+const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
 const config = require('config')
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
+const registerComponents = require('./register-components')
 
 module.exports = (app = express()) => {
   global.versions = {}
 
   app.locals.models = models
 
-  app.use(require('morgan')('combined', { 'stream': logger.stream }))
+  app.use(morgan('combined', { 'stream': logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
 
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -33,6 +35,8 @@ module.exports = (app = express()) => {
   passport.use('bearer', authentication.strategies.bearer)
   passport.use('anonymous', authentication.strategies.anonymous)
   passport.use('local', authentication.strategies.local)
+
+  registerComponents(app)
 
   // Main API
   app.use('/api', api)

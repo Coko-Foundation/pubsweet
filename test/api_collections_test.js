@@ -35,15 +35,17 @@ describe('Collections API', () => {
       expect(collections).toEqual([])
     })
 
-    it('should allow an admin user to create a collection', async () => {
+    it('should allow an admin user to create a collection (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
-      const collection = await api.collections.create(fixtures.collection, adminToken)
+      const collection = await api.collections.create(
+        Object.assign({}, fixtures.collection, {filtered: 'example'}), adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
+      expect(collection.filtered).toEqual('example')
     })
 
     it('should allow an admin user to list all collections', async () => {
@@ -99,7 +101,7 @@ describe('Collections API', () => {
       expect(filteredCollection).not.toHaveProperty('created')
     })
 
-    it('should allow an admin user to update a collection', async () => {
+    it('should allow an admin user to update a collection (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
       // create a collection
@@ -109,12 +111,14 @@ describe('Collections API', () => {
 
       // update the collection
       const title = 'Updated title'
+      const filtered = 'example'
 
-      const result = await api.collections.update(collection.id, { title }, adminToken)
+      const result = await api.collections.update(collection.id, { title, filtered }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
       expect(result.title).toEqual(title)
+      expect(result.filtered).toEqual('example')
     })
 
     it('should allow an admin user to update a collection with some fragments', async () => {
@@ -296,6 +300,38 @@ describe('Collections API', () => {
       expect(filteredFragment).toHaveProperty('presentation')
       expect(filteredFragment).not.toHaveProperty('source')
     })
+
+    it('should allow admin to retrieve teams for a fragment', async () => {
+      const token = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a fragment in the collection
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create the teams
+      await api.teams.post(fixtures.readerTeam, collection, token)
+      const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
+      await api.teams.post(teamFixture, collection, token)
+
+      // retrieve the fragment team(s)
+      const teams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teams).toHaveLength(1)
+      expect(teams[0]).toMatchObject({
+        name: 'My contributors',
+        object: {
+          type: 'fragment'
+        }
+      })
+    })
   })
 
   describe('anonymous', () => {
@@ -311,7 +347,7 @@ describe('Collections API', () => {
   })
 
   describe('user', () => {
-    it('should allow a user to list all the collections', async () => {
+    it('should allow a user to list all of the collections', async () => {
       const token = await authenticateUser()
 
       await api.collections.create(fixtures.collection, token)
@@ -343,6 +379,33 @@ describe('Collections API', () => {
       // retrieve the collection
       await api.collections.retrieve(collection.id, token)
         .expect(STATUS.OK)
+    })
+
+    it('should allow a user to retrieve teams for a collection', async () => {
+      const token = await authenticateUser()
+
+      // create the collection
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create the teams
+      const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'collection', id: collection.id}})
+      await api.teams.post(teamFixture, collection, token)
+      await api.teams.post(fixtures.readerTeam, collection, token)
+
+      // retrieve the collection team(s)
+      const teams = await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teams).toHaveLength(1)
+      expect(teams[0]).toMatchObject({
+        name: 'My contributors',
+        object: {
+          type: 'collection'
+        }
+      })
     })
 
     it('should allow a user to update a collection they own', async () => {
@@ -403,6 +466,37 @@ describe('Collections API', () => {
 
       await api.collections.delete(collection.id, userToken)
         .expect(STATUS.FORBIDDEN)
+    })
+
+    it('should filter collection properties based on authorization on creation', async () => {
+      const token = await authenticateUser()
+
+      let collection = await api.collections.create(
+        Object.assign({}, fixtures.collection, { filtered: 'example' }), token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
+
+      expect(Object.keys(collection)).not.toContain('filtered')
+    })
+
+    it('should filter collection properties based on authorization on update', async () => {
+      const token = await authenticateUser()
+
+      let collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const filtered = 'example'
+
+      collection = await api.collections.update(collection.id, { filtered }, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      // collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
+
+      expect(Object.keys(collection)).not.toContain('filtered')
     })
 
     it('should delete teams associated with a collection when the collection is deleted', async () => {

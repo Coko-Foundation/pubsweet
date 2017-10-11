@@ -99,4 +99,22 @@ describe('Model', function () {
     // save the user 100 times
     await Promise.all(range(100).map(() => user.save()))
   })
+
+  it('can find by multiple fields', async () => {
+    const users = await User.findByField({username: 'testuser', email: 'test@example.com'})
+    expect(users).toHaveLength(1)
+    expect(users[0]).toMatchObject({
+      username: 'testuser',
+      email: 'test@example.com'
+    })
+  })
+
+  it('can find with complex value', async () => {
+    const users = await User.findByField('username', {$ne: 'testuser'})
+    expect(users).toHaveLength(1)
+    expect(users[0]).toMatchObject({
+      username: 'changeduser',
+      email: 'changed@email.com'
+    })
+  })
 })

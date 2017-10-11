@@ -1,9 +1,15 @@
-const blogmode = require('authsome/src/modes/blog')
+const testMode = require('../test/helpers/authsome_mode')
 const Joi = require('joi')
 
 module.exports = {
   'pubsweet-server': {
-    'API_ENDPOINT': '/api',
+    // disable logging in tests
+    logger: {
+      error: () => false,
+      warn: () => false,
+      info: () => false,
+      debug: () => false
+    },
     sse: false
   },
   validations: {
@@ -12,18 +18,23 @@ module.exports = {
       kind: Joi.string(),
       presentation: Joi.string(),
       published: Joi.boolean()
+    },
+    collection: {
+      published: Joi.boolean(),
+      nonPublicProperty: Joi.string(),
+      filtered: Joi.string()
     }
   },
   authsome: {
-    mode: blogmode,
+    mode: testMode,
     teams: {
       teamContributors: {
         name: 'Contributors',
-        permissions: 'create'
+        permissions: 'POST'
       },
       teamCoauthors: {
         name: 'Coauthors',
-        permissions: 'update'
+        permissions: 'PATCH'
       }
     }
   }

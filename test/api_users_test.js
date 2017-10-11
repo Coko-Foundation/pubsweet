@@ -59,6 +59,22 @@ describe('users api', () => {
       )
     })
 
+    it('can make another user an admin', () => {
+      const patchedUser = Object.assign(
+        { id: otherUser.id, admin: true }, fixtures.otherUser
+      )
+
+      return api.users.authenticate.post(
+        fixtures.user
+      ).then(
+        token => api.users.patch(
+          otherUser.id, patchedUser, token
+        ).expect(
+          STATUS.OK
+        )
+      )
+    })
+
     it('deletes a user', () => {
       return api.users.authenticate.post(
         fixtures.user
@@ -132,6 +148,14 @@ describe('users api', () => {
         expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
       }
       )
+    })
+
+    it('can verify its token', async () => {
+      const token = await api.users.authenticate.post(fixtures.otherUser)
+      const res = await api.users.authenticate.get(token).expect(STATUS.OK)
+
+      expect(res.body.id).toBe(otherUser.id)
+      expect(res.body.token).toBe(token)
     })
 
     it('can not get a list of users', () => {

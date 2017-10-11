@@ -3,11 +3,12 @@
 const uuid = require('uuid')
 const Joi = require('joi')
 const Queue = require('promise-queue')
+const lodash = require('lodash')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
-const logger = require('../logger')
+const logger = require('@pubsweet/logger')
 const validations = require('./validations')(require('config'))
 
 const STATUS = require('http-status-codes')
@@ -31,7 +32,7 @@ class Model {
     let validation = Joi.validate(this, this.constructor.validations())
 
     if (validation.error) {
-      logger.info(validation.error)
+      logger.error(validation.error)
       throw validation.error
     }
 
@@ -39,14 +40,14 @@ class Model {
   }
 
   async save () {
-    logger.info('Saving', this.type, this.id)
+    logger.debug('Saving', this.type, this.id)
 
     this.validate()
 
     return saveQueue.add(async () => {
       try {
         const existing = await this.constructor.find(this.id)
-        logger.info('Found an existing version, this is an update of:', existing)
+        logger.debug('Found an existing version, this is an update of:', existing)
         this.rev = existing.rev
       } catch (error) {
         if (error.status !== STATUS.NOT_FOUND) {
@@ -58,7 +59,7 @@ class Model {
           await this.isUniq(this) // throws an exception if not unique
         }
 
-        logger.info('No existing object found, creating a new one:', this.type, this.id)
+        logger.debug('No existing object found, creating a new one:', this.type, this.id)
       }
 
       return this._put()
@@ -67,14 +68,14 @@ class Model {
 
   async _put () {
     await db.rel.save(this.constructor.type, this)
-    logger.info('Actually _put', this.type, this.id, this)
+    logger.debug('Actually _put', this.type, this.id, this)
     return this
   }
 
   async delete () {
     const object = await this.constructor.find(this.id)
     await db.rel.del(this.type, object)
-    logger.info('Deleted', this.type, this.id)
+    logger.debug('Deleted', this.type, this.id)
     return this
   }
 
@@ -82,7 +83,7 @@ class Model {
     // These properties are modified through setters
     delete properties.owners
 
-    logger.info('Updating properties to', properties)
+    logger.debug('Updating properties to', properties)
 
     Object.assign(this, properties)
     return this
@@ -127,37 +128,48 @@ class Model {
       results = await db.rel.find(this.type, id)
     } catch (err) {
       if (err.name === 'NotFoundError') {
-        logger.info('Object not found:', this.type, id)
+        throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
+      } else {
+        throw err
       }
-      throw err
     }
 
     let result = results[plural].find(result => result.id === id)
 
     if (!result) {
-      throw new NotFoundError()
+      throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
     }
 
     return new this(result)
   }
 
+  // `field` is a string
+  // `value` is a primitive, or a query object
+  // or
+  // `field` is an object of field, value pairs
   static async findByField (field, value) {
-    logger.info('Finding', field, value)
-    field = 'data.' + field
+    logger.debug('Finding', field, value)
 
-    let type = 'data.type'
+    let selector = {
+      type: this.type
+    }
+
+    if (value !== undefined) {
+      selector[field] = value
+    } else {
+      Object.assign(selector, field)
+    }
+
+    selector = lodash.mapKeys(selector, (_, key) => `data.${key}`)
 
     await db.createIndex({
       index: {
-        fields: [field, type]
+        fields: Object.keys(selector)
       }
     })
 
     const results = await db.find({
-      selector: {
-        [type]: this.type,
-        [field]: value
-      }
+      selector
     })
 
     if (!results.docs.length) {

@@ -1,101 +1,110 @@
 'use strict'
-
 const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
-const Authorize = require('../models/Authorize')
+
+const config = require('config')
+const Authsome = require('authsome')
+const authsome = new Authsome(config.authsome, { models: require('../models') })
 const Team = require('../models/Team')
+const { authorizationError } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
-const api = express.Router()
+const api = express.Router({mergeParams: true})
 
-api.get('/', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.authInfo.id, 'read', req.originalUrl
-  ).then(
-    () => Team.all()
-  ).then(
-    teams => res.status(STATUS.OK).json(teams)
-  ).catch(
-    next
-  )
+api.get('/teams', authBearer, async (req, res, next) => {
+  try {
+    const permission = await authsome.can(
+      req.user,
+      req.method,
+      {path: req.path, params: req.params}
+    )
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req)
+    }
+
+    const teams = await Team.all()
+
+    res.status(STATUS.OK).json(teams)
+  } catch (err) {
+    next(err)
+  }
 })
 
-api.post('/', authBearer, (req, res, next) => {
-  let team = new Team(req.body)
+api.post('/teams', authBearer, async (req, res, next) => {
+  try {
+    const permission = await authsome.can(req.user, req.method, req.body)
 
-  return Authorize.can(
-    req.authInfo.id, 'create', req.originalUrl
-  ).then(
-    () => team.save()
-  ).then(
-    response => res.status(STATUS.CREATED).json(response)
-  ).catch(
-    next
-  )
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.params)
+    }
+
+    if (permission.filter) {
+      req.body = permission.filter(req.body)
+    }
+
+    let team = new Team(req.body)
+    team = await team.save()
+
+    res.status(STATUS.CREATED).json(team)
+  } catch (err) {
+    next(err)
+  }
 })
 
-api.get('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'read', req.originalUrl
-  ).then(
-    () => Team.find(req.params.id)
-  ).then(
-    team => res.status(STATUS.OK).json(team)
-  ).catch(
-    next
-  )
+api.get('/teams/:teamId', authBearer, async (req, res, next) => {
+  try {
+    let team = await Team.find(req.params.teamId)
+    const permission = await authsome.can(req.user, req.method, team)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.params)
+    }
+
+    if (permission.filter) {
+      team = permission.filter(team)
+    }
+
+    res.status(STATUS.CREATED).json(team)
+  } catch (err) {
+    next(err)
+  }
 })
 
-api.delete('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'delete', req.originalUrl
-  ).then(
-    () => Team.find(req.params.id)
-  ).then(
-    team => team.delete()
-  ).then(
-    team => res.status(STATUS.OK).json(team)
-  ).catch(
-    next
-  )
+api.delete('/teams/:teamId', authBearer, async (req, res, next) => {
+  try {
+    let team = await Team.find(req.params.teamId)
+    const permission = await authsome.can(req.user, req.method, team)
+
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.params)
+    }
+
+    team = await team.delete()
+
+    res.status(STATUS.OK).json(team)
+  } catch (err) {
+    next(err)
+  }
 })
 
-// deprecated - use PATCH instead
-api.put('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'update', req.originalUrl
-  ).then(
-    () => Team.find(req.params.id)
-  ).then(
-    team => team.updateProperties(req.body)
-  ).then(
-    team => team.save()
-  ).then(
-    team => Team.find(req.params.id)
-  ).then(
-    team => res.status(STATUS.OK).json(team)
-  ).catch(
-    next
-  )
-})
+api.patch('/teams/:teamId', authBearer, async (req, res, next) => {
+  try {
+    let team = await Team.find(req.params.teamId)
+    const permission = await authsome.can(req.user, req.method, team)
 
-api.patch('/:id', authBearer, (req, res, next) => {
-  return Authorize.can(
-    req.user, 'update', req.originalUrl
-  ).then(
-    () => Team.find(req.params.id)
-  ).then(
-    team => team.updateProperties(req.body)
-  ).then(
-    team => team.save()
-  ).then(
-    team => Team.find(req.params.id)
-  ).then(
-    team => res.status(STATUS.OK).json(team)
-  ).catch(
-    next
-  )
+    if (!permission) {
+      throw authorizationError(req.user, req.method, req.params)
+    }
+
+    team = await team.updateProperties(req.body)
+    team = await team.save()
+
+    res.status(STATUS.OK).json(team)
+  } catch (err) {
+    next(err)
+  }
 })
 
 module.exports = api

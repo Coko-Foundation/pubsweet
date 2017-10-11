@@ -1,4 +1,4 @@
-const logger = require('./logger')
+const logger = require('@pubsweet/logger')
 const jwt = require('jsonwebtoken')
 
 const BearerStrategy = require('passport-http-bearer').Strategy
@@ -6,22 +6,23 @@ const AnonymousStrategy = require('passport-anonymous').Strategy
 const LocalStrategy = require('passport-local').Strategy
 
 const User = require('./models/User')
+const config = require('config')
 
 const createToken = (user) => {
-  logger.info('Creating token for', user.username)
+  logger.debug('Creating token for', user.username)
 
   return jwt.sign(
     {
       username: user.username,
       id: user.id
     },
-    process.env.PUBSWEET_SECRET,
+    config.get('pubsweet-server.secret'),
     { expiresIn: 24 * 3600 }
   )
 }
 
 const verifyToken = (token, done) => {
-  jwt.verify(token, process.env.PUBSWEET_SECRET, (err, decoded) => {
+  jwt.verify(token, config.get('pubsweet-server.secret'), (err, decoded) => {
     if (err) return done(null)
 
     return done(null, decoded.id, {
@@ -34,20 +35,20 @@ const verifyToken = (token, done) => {
 
 const verifyPassword = (username, password, done) => {
   let errorMessage = 'Wrong username or password.'
-  logger.info('User finding:', username)
+  logger.debug('User finding:', username)
 
   User.findByUsername(username).then(user => {
-    logger.info('User found:', user.username)
+    logger.debug('User found:', user.username)
     return Promise.all([user, user.validPassword(password)])
   }).then(([user, isValid]) => {
     if (isValid) {
       return done(null, user, { id: user.id })
     } else {
-      logger.info('Invalid password for user:', username)
+      logger.debug('Invalid password for user:', username)
       return done(null, false, { message: errorMessage })
     }
   }).catch((err) => {
-    logger.info('User not found', err)
+    logger.debug('User not found', err)
     if (err) { return done(null, false, { message: errorMessage }) }
   })
 }

@@ -23,7 +23,7 @@ const upload = multer({
   limits: {fileSize: 10000000, files: 1}
 })
 
-api.post('', authBearer, upload.single('file'), (req, res, next) => {
+api.post('/upload', authBearer, upload.single('file'), (req, res, next) => {
   return res.send('/' + req.file.path)
 })
 
