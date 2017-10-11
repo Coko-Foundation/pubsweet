@@ -471,5 +471,80 @@ describe('Collections API', () => {
 
       expect(teamsAfterDeletion).toHaveLength(1)
     })
+
+    // TODO: enable once per-fragment teams are supported
+
+    /*
+    it('should delete teams associated with a fragment when the fragment is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const fragment = await api.fragments.post(fixtures.fragment, fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: fragment.id
+        }
+      }
+
+      await api.teams.post(teamData, collection, fragment, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different fragment
+
+      const otherFragment = await api.fragments.post(fixtures.fragment, fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: otherFragment.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, otherFragment, collection, token)
+        .expect(STATUS.CREATED)
+
+      // await api.teams.get(token, otherFragment, team)
+      // await api.teams.get(token, otherFragment)
+      //     .expect(STATUS.OK)
+
+      const teamsBeforeDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.deleteFragment(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+
+      // await api.teams.get(token, fragment, collection, team)
+      // await api.teams.get(token, fragment, collection)
+      const teamsAfterDeletion = await api.teams.get(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
+    })
+    */
   })
 })
