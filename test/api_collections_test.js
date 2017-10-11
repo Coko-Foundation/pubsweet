@@ -562,8 +562,8 @@ describe('Collections API', () => {
       await api.collections.retrieve(collection.id, token)
         .expect(STATUS.NOT_FOUND)
 
-      await api.collections.listTeams(collection.id, token)
-        .expect(STATUS.NOT_FOUND)
+      // await api.collections.listTeams(collection.id, token)
+      //   .expect(STATUS.NOT_FOUND)
 
       const teamsAfterDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
@@ -639,8 +639,8 @@ describe('Collections API', () => {
       await api.collections.retrieveFragment(collection.id, fragment.id, token)
         .expect(STATUS.NOT_FOUND)
 
-      await api.collections.listFragmentTeams(collection.id, fragment.id, token)
-        .expect(STATUS.NOT_FOUND)
+      // await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+      //   .expect(STATUS.NOT_FOUND)
 
       const teamsAfterDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
