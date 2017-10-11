@@ -550,7 +550,7 @@ describe('Collections API', () => {
 
       expect(collectionTeams).toHaveLength(1)
 
-      const teamsBeforeDeletion = await api.teams.get(token)
+      const teamsBeforeDeletion = await api.teams.list(token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -565,7 +565,7 @@ describe('Collections API', () => {
       // await api.collections.listTeams(collection.id, token)
       //   .expect(STATUS.NOT_FOUND)
 
-      const teamsAfterDeletion = await api.teams.get(token)
+      const teamsAfterDeletion = await api.teams.list(token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -627,7 +627,7 @@ describe('Collections API', () => {
 
       expect(fragmentTeams).toHaveLength(1)
 
-      const teamsBeforeDeletion = await api.teams.get(token)
+      const teamsBeforeDeletion = await api.teams.list(token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -642,7 +642,7 @@ describe('Collections API', () => {
       // await api.collections.listFragmentTeams(collection.id, fragment.id, token)
       //   .expect(STATUS.NOT_FOUND)
 
-      const teamsAfterDeletion = await api.teams.get(token)
+      const teamsAfterDeletion = await api.teams.list(token)
         .expect(STATUS.OK)
         .then(res => res.body)
 

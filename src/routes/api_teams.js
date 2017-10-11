@@ -66,7 +66,7 @@ api.get('/teams/:teamId', authBearer, async (req, res, next) => {
       team = permission.filter(team)
     }
 
-    res.status(STATUS.CREATED).json(team)
+    res.status(STATUS.OK).json(team)
   } catch (err) {
     next(err)
   }
