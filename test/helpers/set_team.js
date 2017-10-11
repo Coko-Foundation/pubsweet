@@ -16,7 +16,7 @@ module.exports = (members, collection, team) => {
       }
 
       return api.teams.post(
-        team, collection, token
+        team, token
       ).expect(
         STATUS.CREATED
       )

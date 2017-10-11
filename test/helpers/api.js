@@ -250,13 +250,8 @@ const teams = {
       'Authorization', 'Bearer ' + token
     )
   },
-  post: (team, collection, token) => {
-    const collectionId = () => {
-      return isString(collection) ? collection : collection.id
-    }
-    const collectionpart = collection ? `/collections/${collectionId()}` : ''
-
-    const url = `/api${collectionpart}/teams`
+  post: (team, token) => {
+    const url = `/api/teams`
 
     return request(
       api
@@ -269,14 +264,9 @@ const teams = {
     )
   },
   // deprecated: use patch instead
-  put: (team, collection, teamId, token) => {
-    const collectionId = () => {
-      return isString(collection) ? collection : collection.id
-    }
-    const collectionpart = collection ? `/collections/${collectionId()}` : ''
-    const teampart = teamId ? `/${teamId}` : ''
-
-    const url = `/api${collectionpart}/teams${teampart}`
+  put: (team, teamId, token) => {
+    const teamPart = teamId ? `/${teamId}` : ''
+    const url = `/api/teams${teamPart}`
 
     return request(
       api
@@ -288,14 +278,9 @@ const teams = {
       'Authorization', 'Bearer ' + token
     )
   },
-  patch: (team, collection, teamId, token) => {
-    const collectionId = () => {
-      return isString(collection) ? collection : collection.id
-    }
-    const collectionpart = collection ? `/collections/${collectionId()}` : ''
-    const teampart = teamId ? `/${teamId}` : ''
-
-    const url = `/api${collectionpart}/teams${teampart}`
+  patch: (team, teamId, token) => {
+    const teamPart = teamId ? `/${teamId}` : ''
+    const url = `/api/teams${teamPart}`
 
     return request(
       api

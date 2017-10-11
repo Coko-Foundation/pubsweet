@@ -105,7 +105,7 @@ describe('Teams API - per collection or fragment', () => {
           fixtures.user
         ).then(
           token => api.teams.post(
-            team, collectionId, token
+            team, token
           ).expect(
             STATUS.CREATED
           )
@@ -137,7 +137,7 @@ describe('Teams API - per collection or fragment', () => {
           fixtures.user
         ).then(
           token => api.teams.post(
-            team, collectionId, token
+            team, token
           ).expect(
             STATUS.CREATED
           ).then(
@@ -148,7 +148,7 @@ describe('Teams API - per collection or fragment', () => {
             teamId = res.body.id
             team.members = []
             return api.teams.patch(
-              team, collectionId, teamId, token
+              team, teamId, token
             ).expect(
               STATUS.OK
             )
