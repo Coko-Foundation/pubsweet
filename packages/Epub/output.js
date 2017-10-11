@@ -1,3 +1,4 @@
+const logger = require('@pubsweet/logger')
 const fs = require('fs')
 const crypto = require('crypto')
 const mkdirp = require('mkdirp')
@@ -14,7 +15,7 @@ const attachment = async (epub, res, id) => {
   })
 
   archive.on('end', () => {
-    console.log('Wrote %d bytes', archive.pointer())
+    logger.info('Wrote %d bytes', archive.pointer())
   })
 }
 
@@ -36,7 +37,7 @@ const folder = async (epub, res) => {
   })
 
   archive.on('end', () => {
-    console.log('Wrote %d bytes', archive.pointer())
+    logger.info('Wrote %d bytes', archive.pointer())
 
     res.json({path: folder})
   })
