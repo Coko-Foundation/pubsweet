@@ -58,9 +58,9 @@ const getFragment = async req => {
  *
  * If required, the output is filtered.
  *
- * @param req        object Request
- * @param target     mixed  The subject of the permissions check
- * @param filterable mixed  The thing to be filtered if permission is granted
+ * @param req        object     Request
+ * @param target     mixed      The subject of the permissions check
+ * @param filterable mixed|null An optional thing to be filtered instead of the target
  *
  * @throws AuthorizationError if permission is not granted.
  *
