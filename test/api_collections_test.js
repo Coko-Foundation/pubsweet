@@ -519,7 +519,7 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(teamData, collection, token)
+      await api.teams.post(teamData, null, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -541,12 +541,14 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(otherTeamData, collection, token)
+      await api.teams.post(otherTeamData, null, token)
         .expect(STATUS.CREATED)
 
-      // await api.teams.get(token, collection, team)
-      // await api.teams.get(token, collection)
-      //     .expect(STATUS.OK)
+      const collectionTeams = await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collectionTeams).toHaveLength(1)
 
       const teamsBeforeDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
@@ -557,8 +559,12 @@ describe('Collections API', () => {
       await api.collections.delete(collection.id, token)
         .expect(STATUS.OK)
 
-      // await api.teams.get(token, collection, team)
-      // await api.teams.get(token, collection)
+      await api.collections.retrieve(collection.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.NOT_FOUND)
+
       const teamsAfterDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
         .then(res => res.body)
@@ -566,9 +572,6 @@ describe('Collections API', () => {
       expect(teamsAfterDeletion).toHaveLength(1)
     })
 
-    // TODO: enable once per-fragment teams are supported
-
-    /*
     it('should delete teams associated with a fragment when the fragment is deleted', async () => {
       // NOTE: need to authenticate as admin to be able to retrieve teams
       const token = await authenticateAdmin()
@@ -577,7 +580,7 @@ describe('Collections API', () => {
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
-      const fragment = await api.fragments.post(fixtures.fragment, fixtures.collection, token)
+      const fragment = await api.fragments.post(fixtures.fragment, collection, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -593,13 +596,13 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(teamData, collection, fragment, token)
+      await api.teams.post(teamData, null, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
       // create a different team on a different fragment
 
-      const otherFragment = await api.fragments.post(fixtures.fragment, fixtures.collection, token)
+      const otherFragment = await api.fragments.post(fixtures.fragment, collection, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -615,12 +618,14 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(otherTeamData, otherFragment, collection, token)
+      await api.teams.post(otherTeamData, null, token)
         .expect(STATUS.CREATED)
 
-      // await api.teams.get(token, otherFragment, team)
-      // await api.teams.get(token, otherFragment)
-      //     .expect(STATUS.OK)
+      const fragmentTeams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragmentTeams).toHaveLength(1)
 
       const teamsBeforeDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
@@ -631,14 +636,17 @@ describe('Collections API', () => {
       await api.collections.deleteFragment(collection.id, fragment.id, token)
         .expect(STATUS.OK)
 
-      // await api.teams.get(token, fragment, collection, team)
-      // await api.teams.get(token, fragment, collection)
+      await api.collections.retrieveFragment(collection.id, fragment.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.NOT_FOUND)
+
       const teamsAfterDeletion = await api.teams.get(token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
       expect(teamsAfterDeletion).toHaveLength(1)
     })
-    */
   })
 })
