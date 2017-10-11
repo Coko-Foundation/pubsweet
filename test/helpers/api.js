@@ -234,7 +234,18 @@ const collections = {
 }
 
 const teams = {
-  get: (token, collection) => {
+  get: (token, teamId) => {
+    const url = `/api/teams/${teamId}`
+
+    return request(
+      api
+    ).get(
+      url
+    ).set(
+      'Authorization', 'Bearer ' + token
+    )
+  },
+  list: (token, collection) => {
     const collectionId = () => {
       return isString(collection) ? collection : collection.id
     }
