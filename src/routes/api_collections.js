@@ -115,8 +115,8 @@ api.patch('/collections/:id', authBearer, async (req, res, next) => {
       update = permission.filter(update)
     }
 
-    collection.updateProperties(update)
-    collection = await collection.save()
+    await collection.updateProperties(update)
+    await collection.save()
 
     const updated = buildChangeData(update, collection)
 
@@ -268,9 +268,9 @@ api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async 
       req.body = permission.filter(req.body)
     }
 
-    fragment.updateProperties(req.body)
+    await fragment.updateProperties(req.body)
+    await fragment.save()
 
-    fragment = await fragment.save()
     fragment = await User.ownersWithUsername(fragment)
 
     const update = buildChangeData(req.body, fragment)
