@@ -1,9 +1,5 @@
 image: pubsweet/pubsweet-test-base
 
-cache:
-  paths:
-    - node_modules/
-
 before_script:
   - yarn
 
