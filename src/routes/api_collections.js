@@ -220,7 +220,6 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
       authsome: authsome,
       id: req.params.collectionId,
       type: 'collection' })
-    console.log(teams)
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)

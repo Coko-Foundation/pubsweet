@@ -34,10 +34,9 @@ api.get('/users/authenticate', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.user)
     user.token = req.authInfo.token
-    const teams = await Promise.all(
+    user.teams = await Promise.all(
       user.teams.map((teamId) => Team.find(teamId))
     )
-    user.teams = teams
     return res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
