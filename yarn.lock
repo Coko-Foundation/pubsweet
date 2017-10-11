@@ -13,17 +13,6 @@
     pouchdb "^6.3.4"
     pubsweet-server "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git"
 
-"@pubsweet/db-manager@git+https://gitlab.coko.foundation/yld/db-manager.git":
-  version "0.0.4"
-  resolved "git+https://gitlab.coko.foundation/yld/db-manager.git#2fb0d1f6f4621b8d5eb1fb950430e0e547ce94ec"
-  dependencies:
-    "@pubsweet/logger" "0.0.1"
-    fs-extra "^4.0.2"
-    isomorphic-fetch "^2.2.1"
-    joi "^11.0.2"
-    pouchdb "^6.3.4"
-    pubsweet-server "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git"
-
 "@pubsweet/logger@0.0.1", "@pubsweet/logger@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@pubsweet/logger/-/logger-0.0.1.tgz#ec0c15f04e0c64232c29173848ffe6da8190c9c2"
@@ -33,11 +22,11 @@
 
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#e2fdecc7b1c7edb313773ba2c5c1f58b21ae4851"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#a4da89836661401f0ac7981b05d1838bdcd844c4"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     jest "^21.1.0"
-    pubsweet "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#refactor/db-manager"
+    pubsweet "1.0.0-alpha.5"
     pubsweet-client "^1.0.0-beta.3"
     pubsweet-component-blog "^0.3.1"
     pubsweet-component-html "^0.2.0"
@@ -50,7 +39,7 @@
     pubsweet-component-signup "^0.4.0"
     pubsweet-component-teams-manager "^0.2.1"
     pubsweet-component-users-manager "^0.2.1"
-    pubsweet-server "git+https://git@gitlab.coko.foundation/pubsweet/pubsweet-server.git"
+    pubsweet-server "1.0.0-alpha.4"
     pubsweet-theme-plugin "^0.0.1"
     react-router-redux next
 
@@ -357,9 +346,9 @@ authsome@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.4.tgz#7784887e6c17fdf126949c084cc3f543291dfb19"
 
-authsome@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.6.tgz#505a2555a87e29f47af9a0d511bc553558073d72"
+authsome@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.9.tgz#08b34f1797b3539e6a362f0fb11a01ae0613f928"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -4795,7 +4784,7 @@ prompt@^1.0.0:
     utile "0.3.x"
     winston "2.1.x"
 
-prompt@flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87:
+prompt@flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87, "prompt@github:flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87":
   version "1.0.0"
   resolved "https://codeload.github.com/flatiron/prompt/tar.gz/1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87"
   dependencies:
@@ -5008,50 +4997,12 @@ pubsweet-component-users-manager@^0.2.1:
     react-redux "^5.0.6"
     redux "^3.7.2"
 
-pubsweet-server@^1.0.0-alpha.3, "pubsweet-server@git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git":
-  version "1.0.0-alpha.3"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#f181396a127fa4ddb5aac51816692378d5b95fe4"
+pubsweet-server@1.0.0-alpha.4, pubsweet-server@^1.0.0-alpha.3, "pubsweet-server@git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git":
+  version "1.0.0-alpha.4"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#a42cf5d171dc1c34e97d804039fd66e8451132a4"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
-    authsome "0.0.6"
-    bcrypt "^1.0.2"
-    body-parser "^1.15.2"
-    colors "^1.1.2"
-    config "^1.26.2"
-    cookie-parser "^1.4.3"
-    express "^4.16.1"
-    helmet "^3.8.1"
-    http-status-codes "^1.0.6"
-    joi "^10.0.6"
-    jsonwebtoken "^7.1.7"
-    lodash "^4.0.0"
-    minimist "^1.2.0"
-    morgan "^1.8.2"
-    multer "^1.1.0"
-    passport "^0.3.2"
-    passport-anonymous "^1.0.1"
-    passport-http-bearer "^1.0.1"
-    passport-local "^1.0.0"
-    pouchdb-adapter-http "^6.2.0"
-    pouchdb-adapter-leveldb "^6.1.1"
-    pouchdb-adapter-memory "^6.1.1"
-    pouchdb-core "^6.1.1"
-    pouchdb-find "^0.10.3"
-    pouchdb-upsert "^2.0.0"
-    promise-queue "^2.2.3"
-    prompt "^1.0.0"
-    pubsweet-sse "^0.1.1"
-    relational-pouch "^1.4.5"
-    uuid "^3.0.1"
-    winston "^2.2.0"
-
-"pubsweet-server@git+https://git@gitlab.coko.foundation/pubsweet/pubsweet-server.git":
-  version "1.0.0-alpha.3"
-  uid f181396a127fa4ddb5aac51816692378d5b95fe4
-  resolved "git+https://git@gitlab.coko.foundation/pubsweet/pubsweet-server.git#f181396a127fa4ddb5aac51816692378d5b95fe4"
-  dependencies:
-    "@pubsweet/logger" "^0.0.1"
-    authsome "0.0.6"
+    authsome "0.0.9"
     bcrypt "^1.0.2"
     body-parser "^1.15.2"
     colors "^1.1.2"
@@ -5091,11 +5042,11 @@ pubsweet-theme-plugin@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/pubsweet-theme-plugin/-/pubsweet-theme-plugin-0.0.1.tgz#4160bdd53dec4d646952d29337ce36bc3b8dfe9a"
 
-"pubsweet@git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#refactor/db-manager":
-  version "1.0.0-alpha.4"
-  resolved "git+https://git@gitlab.coko.foundation/yld/pubsweet-cli.git#e468bd6017c0eb8c52ff80f2a7479f86bb0b2b45"
+pubsweet@1.0.0-alpha.5:
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/pubsweet/-/pubsweet-1.0.0-alpha.5.tgz#f91820f4e157312aaca1bf28889ee02f3f9a3ca2"
   dependencies:
-    "@pubsweet/db-manager" "git+https://gitlab.coko.foundation/yld/db-manager.git"
+    "@pubsweet/db-manager" "^0.0.4"
     "@pubsweet/logger" "^0.0.1"
     bluebird "^3.5.0"
     colors "^1.1.2"
