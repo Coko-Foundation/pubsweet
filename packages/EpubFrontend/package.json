@@ -18,15 +18,9 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "isomorphic-fetch": "^2.1.1",
-    "react": "15.5.4",
-    "react-bootstrap": "0.30.10",
-    "react-dom": "15.5.4",
-    "react-redux": "5.0.4",
-    "redux": "3.6.0"
+    "isomorphic-fetch": "^2.1.1"
   },
   "peerDependencies": {
-    "pubsweet-client": "0.9.1",
-    "react": ">=15"
+    "pubsweet-client": ">=1.0.0-beta.3"
   }
 }

@@ -25,13 +25,8 @@ export function htmlToEpub (bookId) {
   return dispatch => {
     dispatch(htmlToEpubRequest())
 
-    let opts = {
-      method: 'GET'
-    }
-
     return fetch(
-      `/api/collections/${bookId}/epub?destination=folder&converter=wax&style=epub.css`,
-      opts
+      `/api/collections/${bookId}/epub?destination=folder&converter=wax&style=epub.css`
     ).then(
       res => res.json().then(data => dispatch(htmlToEpubSuccess(data.path))),
       err => {
