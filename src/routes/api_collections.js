@@ -172,7 +172,7 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
     collection = await collection.save()
 
     // How to address this?
-    fragment = await User.ownersWithUsername(fragment)
+    fragment.owners = await User.ownersWithUsername(fragment)
 
     res.status(STATUS.CREATED).json(fragment)
     sse.send({ action: 'fragment:create', data: { collection: objectId(collection), fragment } })
@@ -202,7 +202,10 @@ api.get('/collections/:id/fragments', authBearerAndPublic, async (req, res, next
     fragments = fragments.filter(fragment => fragment !== undefined)
 
     // Decorate owners with usernames
-    fragments = await Promise.all(fragments.map(f => User.ownersWithUsername(f)))
+    await Promise.all(fragments.map(async fragment => {
+      fragment.owners = await User.ownersWithUsername(fragment)
+    }))
+
     fragments = fragments.map(fieldSelector(req))
 
     return res.status(STATUS.OK).json(fragments)
@@ -220,7 +223,6 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
       authsome: authsome,
       id: req.params.collectionId,
       type: 'collection' })
-    console.log(teams)
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)
@@ -271,7 +273,7 @@ api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async 
     await fragment.updateProperties(req.body)
     await fragment.save()
 
-    fragment = await User.ownersWithUsername(fragment)
+    fragment.owners = await User.ownersWithUsername(fragment)
 
     const update = buildChangeData(req.body, fragment)
 

@@ -16,7 +16,7 @@ class Collection extends Model {
     options = options || {}
     options.filter = options.filter || (() => Promise.resolve(true))
 
-    var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
+    const fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
 
     return fragments.then(
       fragments => {
