@@ -16,7 +16,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@pubsweet/logger": "^0.0.1",
-    "authsome": "0.0.6",
+    "authsome": "0.0.9",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
