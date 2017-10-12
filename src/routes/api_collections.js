@@ -66,7 +66,7 @@ const getFragment = async req => {
  *
  * @returns {Promise} The (filtered) target, if permission is granted
  */
-const applyPermission = async (req, target, filterable) => {
+const applyPermissionFilter = async (req, target, filterable) => {
   const permission = await authsome.can(req.user, req.method, target)
 
   if (!permission) {
@@ -92,11 +92,11 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
     let collections = await Collection.all()
 
     // Filtering objects, e.g. only show collections that have .published === true
-    collections = await applyPermission(req, req.route, collections)
+    collections = await applyPermissionFilter(req, req.route, collections)
 
     // Filtering properties, e.g. only show the title and id properties
     collections = await Promise.all(collections.map(
-      collection => applyPermission(req, collection)
+      collection => applyPermissionFilter(req, collection)
     ))
 
     collections = collections.map(fieldSelector(req))
@@ -110,7 +110,7 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
 // Create a collection
 api.post('/collections', authBearer, async (req, res, next) => {
   try {
-    const properties = await applyPermission(req, req.route, req.body)
+    const properties = await applyPermissionFilter(req, req.route, req.body)
 
     const collection = new Collection(properties)
     collection.created = Date.now()
@@ -131,7 +131,7 @@ api.post('/collections', authBearer, async (req, res, next) => {
 api.get('/collections/:collectionId', authBearerAndPublic, async (req, res, next) => {
   try {
     const collection = await getCollection(req)
-    const properties = await applyPermission(req, collection)
+    const properties = await applyPermissionFilter(req, collection)
 
     return res.status(STATUS.OK).json(properties)
   } catch (err) {
@@ -143,7 +143,7 @@ api.get('/collections/:collectionId', authBearerAndPublic, async (req, res, next
 api.patch('/collections/:collectionId', authBearer, async (req, res, next) => {
   try {
     const collection = await getCollection(req)
-    const properties = await applyPermission(req, collection, req.body)
+    const properties = await applyPermissionFilter(req, collection, req.body)
 
     await collection.updateProperties(properties)
     await collection.save()
@@ -161,7 +161,7 @@ api.patch('/collections/:collectionId', authBearer, async (req, res, next) => {
 api.delete('/collections/:collectionId', authBearer, async (req, res, next) => {
   try {
     const collection = await getCollection(req)
-    const output = await applyPermission(req, collection)
+    const output = await applyPermissionFilter(req, collection)
 
     // TODO: filter the output, or return nothing?
 
@@ -188,7 +188,7 @@ api.post('/collections/:collectionId/fragments', authBearer, async (req, res, ne
         fragment: req.body
       }
 
-      properties = await applyPermission(req, object, req.body)
+      properties = await applyPermissionFilter(req, object, req.body)
     } catch (e) {
       if (e instanceof AuthorizationError) {
         throw authorizationError(req.user, req.method, collection)
@@ -223,7 +223,7 @@ api.get('/collections/:collectionId/fragments', authBearerAndPublic, async (req,
     // Filter fragments and their properties
     fragments = await Promise.all(fragments.map(async fragment => {
       try {
-        return await applyPermission(req, fragment)
+        return await applyPermissionFilter(req, fragment)
       } catch (e) {
         if (e instanceof AuthorizationError) {
           return undefined
@@ -251,7 +251,7 @@ api.get('/collections/:collectionId/fragments', authBearerAndPublic, async (req,
 // Retrieve teams for a collection
 api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res, next) => {
   const collection = await getCollection(req)
-  await applyPermission(req, collection)
+  await applyPermissionFilter(req, collection)
 
   try {
     const teams = await getTeams({
@@ -272,7 +272,7 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
     const fragment = await getFragment(req)
-    const properties = await applyPermission(req, fragment)
+    const properties = await applyPermissionFilter(req, fragment)
 
     return res.status(STATUS.OK).json(properties)
   } catch (err) {
@@ -284,7 +284,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic,
 api.patch('/collections/:collectionId/fragments/:fragmentId', authBearer, async (req, res, next) => {
   try {
     const fragment = await getFragment(req)
-    const properties = await applyPermission(req, fragment, req.body)
+    const properties = await applyPermissionFilter(req, fragment, req.body)
 
     await fragment.updateProperties(properties)
     await fragment.save()
@@ -304,7 +304,7 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
   try {
     const collection = await getCollection(req)
     const fragment = await getFragment(req)
-    await applyPermission(req, fragment)
+    await applyPermissionFilter(req, fragment)
 
     await fragment.delete()
     collection.removeFragment(fragment)
@@ -321,7 +321,7 @@ api.delete('/collections/:collectionId/fragments/:fragmentId', authBearer, async
 api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
     const fragment = await getFragment(req)
-    await applyPermission(req, fragment)
+    await applyPermissionFilter(req, fragment)
 
     const teams = await getTeams({
       req,
