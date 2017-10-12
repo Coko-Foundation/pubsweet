@@ -77,15 +77,16 @@ module.exports = $ => {
     const $elem = $(elem)
 
     const id = $elem.attr('data-id')
+    const content = `${i + 1}. ${$elem.attr('note-content')}`
 
     $('<aside epub:type="footnote" class="footnote"/>')
       .attr('id', id)
-      .html($elem.attr('note-content'))
+      .html(content)
       .appendTo(body)
 
     const callout = $('<a epub:type="noteref" class="note-callout"/>')
       .attr('href', '#' + id)
-      .text(`[${i}]`)
+      .text(`[${i + 1}]`)
 
     $elem.replaceWith(callout)
   })
