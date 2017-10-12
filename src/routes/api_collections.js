@@ -29,26 +29,17 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
       throw authorizationError(req.user, req.method, req.route)
     }
 
-    let collections = await Collection.all()
+    const collections = await Collection.all()
+    const filteredCollections = permission.filter ? permission.filter(collections) : collections
 
-    // Filtering objects, e.g. only show collections that have .published === true
-    if (permission.filter) {
-      collections = permission.filter(collections)
-    }
-
-    collections = await Promise.all(collections.map(async collection => {
-      let permission = await authsome.can(req.user, req.method, collection)
-
-      if (permission.filter) {
-        // Filtering properties, e.g. only show the title and id properties
-        return permission.filter(collection)
-      } else {
-        return collection
-      }
+    const collectionsWithSelectedFields = await Promise.all(filteredCollections.map(async collection => {
+      collection.owners = await User.ownersWithUsername(collection)
+      const collectionPermission = await authsome.can(req.user, req.method, collection)
+      const collectionWithSelectedFields = fieldSelector(req)(collection)
+      return collectionPermission.filter ? collectionPermission.filter(collectionWithSelectedFields) : collectionWithSelectedFields 
     }))
 
-    collections = collections.map(fieldSelector(req))
-    res.status(STATUS.OK).json(collections)
+    res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
     next(err)
   }
@@ -84,17 +75,18 @@ api.post('/collections', authBearer, async (req, res, next) => {
 // Retrieve a collection
 api.get('/collections/:id', authBearerAndPublic, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.id)
+    const collection = await Collection.find(req.params.id)
     const permission = await authsome.can(req.user, req.method, collection)
 
     if (!permission) {
       throw authorizationError(req.user, req.method, collection)
     }
 
-    if (permission.filter) {
-      collection = permission.filter(collection)
-    }
-    return res.status(STATUS.OK).json(collection)
+    const filteredCollection = permission.filter ? permission.filter(collection) : collection
+
+    filteredCollection.owners = await User.ownersWithUsername(collection)
+
+    return res.status(STATUS.OK).json(filteredCollection)
   } catch (err) {
     next(err)
   }
@@ -232,19 +224,17 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
 // Retrieve a fragment
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
-    let fragment = await Fragment.find(req.params.fragmentId)
-    let permission = await authsome.can(req.user, req.method, fragment)
+    const fragment = await Fragment.find(req.params.fragmentId)
+    const permission = await authsome.can(req.user, req.method, fragment)
 
     if (!permission) {
       throw authorizationError(req.user, req.method, fragment)
     }
 
-    return Fragment.find(req.params.fragmentId).then(fragment => {
-      if (permission.filter) {
-        fragment = permission.filter(fragment)
-      }
-      return res.status(STATUS.OK).json(fragment)
-    })
+    fragment.owners = await User.ownersWithUsername(fragment)
+    const filteredFragment = permission.filter ?  permission.filter(fragment) : fragment
+
+    return res.status(STATUS.OK).json(filteredFragment)
   } catch (err) {
     res.status(STATUS.NOT_FOUND).json(err.message)
   }

@@ -3,7 +3,6 @@
   "version": "1.0.0-alpha.4",
   "scripts": {
     "lint": "eslint src/ test/ config/",
-    "pretest": "npm run lint",
     "test": "PUBSWEET_SECRET=test jest",
     "test:docker": "gitlab-runner exec docker test",
     "vuln-test": "nsp check"
