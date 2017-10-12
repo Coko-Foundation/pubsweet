@@ -4,9 +4,8 @@ module.exports = $ => {
   const replaceWithBlockquote = (i, elem) => {
     const $elem = $(elem)
 
-    const blockquote = $('<blockquote class="sc-blockquote"/>').append(
-      $elem.contents()
-    )
+    const blockquote = $('<blockquote class="sc-blockquote"/>')
+      .append($elem.contents())
 
     $elem.replaceWith(blockquote)
   }
@@ -38,9 +37,7 @@ module.exports = $ => {
   }
 
   // replace custom HTML elements
-  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each(
-    replaceWithBlockquote
-  )
+  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each(replaceWithBlockquote)
   $('comment').each(replaceWithText)
   $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
   $('chapter-title').each(replaceWithParagraph('sc-chapter-title'))
@@ -81,7 +78,7 @@ module.exports = $ => {
       .appendTo(body)
 
     const callout = $('<a epub:type="noteref" class="note-callout"/>')
-      .attr('href', `#${id}`)
+      .attr('href', '#' + id)
       .text(i)
 
     $elem.replaceWith(callout)
