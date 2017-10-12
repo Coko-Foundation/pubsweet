@@ -365,9 +365,9 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // create the teams
-      await api.teams.post(fixtures.readerTeam, collection, token)
+      await api.teams.post(fixtures.readerTeam, token)
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
-      await api.teams.post(teamFixture, collection, token)
+      await api.teams.post(teamFixture, token)
 
       // retrieve the fragment team(s)
       const teams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
@@ -441,8 +441,8 @@ describe('Collections API', () => {
 
       // create the teams
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'collection', id: collection.id}})
-      await api.teams.post(teamFixture, collection, token)
-      await api.teams.post(fixtures.readerTeam, collection, token)
+      await api.teams.post(teamFixture, token)
+      await api.teams.post(fixtures.readerTeam, token)
 
       // retrieve the collection team(s)
       const teams = await api.collections.listTeams(collection.id, token)
@@ -569,7 +569,7 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(teamData, null, token)
+      await api.teams.post(teamData, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -591,7 +591,7 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(otherTeamData, null, token)
+      await api.teams.post(otherTeamData, token)
         .expect(STATUS.CREATED)
 
       const collectionTeams = await api.collections.listTeams(collection.id, token)
@@ -646,7 +646,7 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(teamData, null, token)
+      await api.teams.post(teamData, token)
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -668,7 +668,7 @@ describe('Collections API', () => {
         }
       }
 
-      await api.teams.post(otherTeamData, null, token)
+      await api.teams.post(otherTeamData, token)
         .expect(STATUS.CREATED)
 
       const fragmentTeams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
