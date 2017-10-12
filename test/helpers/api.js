@@ -263,21 +263,6 @@ const teams = {
       'Authorization', 'Bearer ' + token
     )
   },
-  // deprecated: use patch instead
-  put: (team, teamId, token) => {
-    const teamPart = teamId ? `/${teamId}` : ''
-    const url = `/api/teams${teamPart}`
-
-    return request(
-      api
-    ).put(
-      url
-    ).send(
-      team
-    ).set(
-      'Authorization', 'Bearer ' + token
-    )
-  },
   patch: (team, teamId, token) => {
     const teamPart = teamId ? `/${teamId}` : ''
     const url = `/api/teams${teamPart}`
