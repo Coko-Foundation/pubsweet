@@ -20,11 +20,7 @@ const compileBundle = async app => {
 
   if (config.util.getEnv('NODE_ENV') === 'development') {
     app.use(webpackDevMw(compiler, {
-      noInfo: true,
-      stats: {
-        colors: true,
-        chunks: false
-      },
+      stats: 'normal',
       publicPath: '/assets/'
     }))
 
