@@ -8,6 +8,7 @@ const lodash = require('lodash')
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
+const ConflictError = require('../errors/ConflictError')
 const logger = require('@pubsweet/logger')
 const validations = require('./validations')(require('config'))
 
@@ -48,7 +49,9 @@ class Model {
       try {
         const existing = await this.constructor.find(this.id)
         logger.debug('Found an existing version, this is an update of:', existing)
-        this.rev = existing.rev
+        if (this.rev !== existing.rev) {
+          throw new ConflictError(`Object changed since last read. Current revision is ${existing.rev}`) 
+        }
       } catch (error) {
         if (error.status !== STATUS.NOT_FOUND) {
           throw error

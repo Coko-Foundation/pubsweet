@@ -121,6 +121,25 @@ describe('Collections API', () => {
       expect(result.filtered).toEqual('example')
     })
 
+    it('should return conflict error if collection has changed before update', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherUserUpdate = { title: 'Causes conflict', filtered: 'example' }
+      const Collection = require('../src/models/Collection.js')
+      const collectionHandle = new Collection(Object.assign({}, collection, otherUserUpdate))
+      collectionHandle.save()
+
+      const myUpdate = { title: 'Outdated revision', filtered: 'example' }
+
+      await api.collections.update(collection.id, myUpdate, adminToken)
+        .expect(STATUS.CONFLICT)
+    })
+
     it('should allow an admin user to update a collection with some fragments', async () => {
       const adminToken = await authenticateAdmin()
 
