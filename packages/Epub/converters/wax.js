@@ -37,8 +37,7 @@ module.exports = $ => {
   }
 
   // replace custom HTML elements
-  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose')
-    .each(replaceWithBlockquote)
+  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each(replaceWithBlockquote)
   $('comment').each(replaceWithText)
   $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
   $('chapter-title').each(replaceWithParagraph('sc-chapter-title'))
@@ -73,13 +72,13 @@ module.exports = $ => {
 
     const id = $elem.attr('data-id')
 
-    $('<aside epub:type="endnote" class="note"/>')
+    $('<aside epub:type="footnote" class="footnote"/>')
       .attr('id', id)
       .html($elem.attr('note-content'))
       .appendTo(body)
 
-    const callout = $('<span epub:type="noteref" class="note-callout"/>')
-      .attr('href', id) // TODO: needs hash?
+    const callout = $('<a epub:type="noteref" class="note-callout"/>')
+      .attr('href', '#' + id)
       .text(i)
 
     $elem.replaceWith(callout)
