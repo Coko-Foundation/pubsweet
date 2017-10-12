@@ -36,6 +36,12 @@ module.exports = $ => {
     $elem.replaceWith(list)
   }
 
+  // add namespaces
+  $('html').attr({
+    'xmlns': 'http://www.w3.org/1999/xhtml',
+    'xmlns:epub': 'http://www.idpf.org/2007/ops'
+  })
+
   // replace custom HTML elements
   $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each(replaceWithBlockquote)
   $('comment').each(replaceWithText)
