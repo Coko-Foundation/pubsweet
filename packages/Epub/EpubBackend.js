@@ -1,7 +1,7 @@
 const HTMLEPUB = require('html-epub')
-const cheerio = require('cheerio')
 const sorter = require('./sorter')
 const converters = require('./converters')
+const processFragment = require('./process')
 const output = require('./output')
 
 const EpubBackend = function (app) {
@@ -30,20 +30,9 @@ const EpubBackend = function (app) {
         .filter(name => name && converters[name])
         .map(name => converters[name])
 
-      const parts = fragments.sort(sorter).map(fragment => {
-        const $ = cheerio.load(fragment.source)
-
-        activeConverters.forEach(converter => converter($))
-
-        styles.forEach(uri => {
-          $('<link rel="stylesheet"/>').attr('href', uri).appendTo('head')
-        })
-
-        return {
-          title: fragment.title,
-          content: $.html()
-        }
-      })
+      const parts = fragments.sort(sorter).map(
+        processFragment({ styles, activeConverters })
+      )
 
       // TODO: read the path to the uploads folder from config
       const resourceRoot = process.cwd() + '/uploads'
