@@ -85,7 +85,7 @@ module.exports = $ => {
 
     const callout = $('<a epub:type="noteref" class="note-callout"/>')
       .attr('href', '#' + id)
-      .text(i)
+      .text(`[${i}]`)
 
     $elem.replaceWith(callout)
   })
