@@ -1,15 +1,11 @@
 const testMode = require('../test/helpers/authsome_mode')
 const Joi = require('joi')
+const winston = require('winston')
 
 module.exports = {
   'pubsweet-server': {
     // disable logging in tests
-    logger: {
-      error: () => false,
-      warn: () => false,
-      info: () => false,
-      debug: () => false
-    },
+    logger: winston,
     sse: false
   },
   validations: {

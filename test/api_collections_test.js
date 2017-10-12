@@ -113,7 +113,7 @@ describe('Collections API', () => {
       const title = 'Updated title'
       const filtered = 'example'
 
-      const result = await api.collections.update(collection.id, { title, filtered }, adminToken)
+      const result = await api.collections.update(collection.id, { title, filtered, rev: collection.rev }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -134,10 +134,24 @@ describe('Collections API', () => {
       const collectionHandle = new Collection(Object.assign({}, collection, otherUserUpdate))
       collectionHandle.save()
 
-      const myUpdate = { title: 'Outdated revision', filtered: 'example' }
+      const myUpdate = { title: 'Outdated revision', filtered: 'example', rev: collection.rev }
 
       await api.collections.update(collection.id, myUpdate, adminToken)
         .expect(STATUS.CONFLICT)
+    })
+
+    it('should return bad request if rev property is not provided with an update', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const myUpdate = { title: 'Untagged revision', filtered: 'example' }
+
+      await api.collections.update(collection.id, myUpdate, adminToken)
+        .expect(STATUS.BAD_REQUEST)
     })
 
     it('should allow an admin user to update a collection with some fragments', async () => {
@@ -152,14 +166,11 @@ describe('Collections API', () => {
       await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
       await api.collections.createFragment(collection.id, fixtures.updatedFragment, adminToken)
 
-      // update the collection
-      const title = 'Updated title'
-
-      const result = await api.collections.update(collection.id, { title }, adminToken)
+      const result = await api.collections.retrieve(collection.id, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(result.title).toEqual(title)
+      expect(result.fragments).toHaveLength(2)
     })
 
     it('should allow an admin user to delete a collection', async () => {
@@ -232,7 +243,7 @@ describe('Collections API', () => {
       const source = '<blog>test</blog>'
 
       // update the fragment
-      await api.collections.updateFragment(collection.id, fragment.id, { source }, adminToken)
+      await api.collections.updateFragment(collection.id, fragment.id, { source, rev: fragment.rev }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -438,7 +449,7 @@ describe('Collections API', () => {
       // update the collection
       const title = 'Updated title'
 
-      const result = await api.collections.update(collection.id, { title }, token)
+      const result = await api.collections.update(collection.id, { title, rev: collection.rev }, token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -455,7 +466,7 @@ describe('Collections API', () => {
 
       const title = 'Updated title'
 
-      await api.collections.update(collection.id, { title }, userToken)
+      await api.collections.update(collection.id, { title, rev: collection.rev }, userToken)
         .expect(STATUS.FORBIDDEN)
     })
 
@@ -509,7 +520,7 @@ describe('Collections API', () => {
 
       const filtered = 'example'
 
-      collection = await api.collections.update(collection.id, { filtered }, token)
+      collection = await api.collections.update(collection.id, { filtered, rev: collection.rev }, token)
         .expect(STATUS.OK)
         .then(res => res.body)
 

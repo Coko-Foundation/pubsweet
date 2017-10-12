@@ -114,7 +114,6 @@ api.patch('/collections/:id', authBearer, async (req, res, next) => {
     if (permission.filter) {
       update = permission.filter(update)
     }
-
     await collection.updateProperties(update)
     await collection.save()
 

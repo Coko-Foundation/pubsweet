@@ -57,7 +57,9 @@ module.exports = (app = express()) => {
       logger.error(err.stack)
     }
 
-    if (err.name === 'ConflictError') {
+    if (err.name === 'ValidationError') {
+      return res.status(STATUS.BAD_REQUEST).json({ message: err.message })
+    } else if (err.name === 'ConflictError') {
       return res.status(STATUS.CONFLICT).json({ message: err.message })
     } else if (err.name === 'AuthorizationError') {
       return res.status(err.status).json({ message: err.message })
