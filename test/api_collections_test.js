@@ -42,7 +42,6 @@ describe('Collections API', () => {
         Object.assign({}, fixtures.collection, {filtered: 'example'}), adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
-
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
       expect(collection.filtered).toEqual('example')
@@ -65,6 +64,29 @@ describe('Collections API', () => {
       const collection = collections[0]
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
+    })
+
+    it('collection.owners should be augmented with usernames (both singular and plural endpoints)', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // retrieve the collection
+      const retrievedCollection = await api.collections.retrieve(collection.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(retrievedCollection.owners[0]).toHaveProperty('username', fixtures.adminUser.username)
+
+      // list all the collections
+      const collections = await api.collections.list(adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections[0].owners[0]).toHaveProperty('username', fixtures.adminUser.username)
     })
 
     it('should allow an admin user to retrieve only some fields of collections', async () => {
@@ -204,6 +226,34 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       expect(fragments).toHaveLength(0)
+    })
+
+    it('fragment.owners should be returned augmented with usernames (both plural and singular endpoints)', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a fragment in the collection
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // retrieve the created fragment
+      const retrievedFragment = await api.collections.retrieveFragment(collection.id, fragment.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(retrievedFragment.owners[0]).toHaveProperty('username', fixtures.adminUser.username)
+
+      // list the created fragments
+      const fragments = await api.collections.listFragments(collection.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragments[0].owners[0]).toHaveProperty('username', fixtures.adminUser.username)
     })
 
     it('should allow an admin user to create a fragment in a collection', async () => {

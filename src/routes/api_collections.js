@@ -87,19 +87,16 @@ const filter = (object, permission) => {
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
   try {
-    let collections = await Collection.all()
+    const collections = await Collection.all()
+    const filteredCollections = await applyPermissionFilter(req, req.route, collections)
 
-    // Filtering objects, e.g. only show collections that have .published === true
-    collections = await applyPermissionFilter(req, req.route, collections)
+    const collectionsWithSelectedFields = await Promise.all(filteredCollections.map(async collection => {
+      collection.owners = await User.ownersWithUsername(collection)
+      const properties = await applyPermissionFilter(req, collection)
+      return fieldSelector(req)(properties)
+    }))
 
-    // Filtering properties, e.g. only show the title and id properties
-    collections = await Promise.all(collections.map(
-      collection => applyPermissionFilter(req, collection)
-    ))
-
-    collections = collections.map(fieldSelector(req))
-
-    res.status(STATUS.OK).json(collections)
+    res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
     next(err)
   }
@@ -129,6 +126,7 @@ api.post('/collections', authBearer, async (req, res, next) => {
 api.get('/collections/:collectionId', authBearerAndPublic, async (req, res, next) => {
   try {
     const collection = await getCollection(req)
+    collection.owners = await User.ownersWithUsername(collection)
     const properties = await applyPermissionFilter(req, collection)
 
     return res.status(STATUS.OK).json(properties)
@@ -270,6 +268,7 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
 api.get('/collections/:collectionId/fragments/:fragmentId', authBearerAndPublic, async (req, res, next) => {
   try {
     const fragment = await getFragment(req)
+    fragment.owners = await User.ownersWithUsername(fragment)
     const properties = await applyPermissionFilter(req, fragment)
 
     return res.status(STATUS.OK).json(properties)
