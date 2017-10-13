@@ -39,12 +39,10 @@ class Model {
 
     this.validate()
 
-    if (typeof this.isUniq === 'function') {
+    if (!this.rev /*is create*/ && typeof this.isUniq === 'function') {
       await this.isUniq(this) // throws an exception if not unique
     }
-
-    const result = await this._put()
-    return result 
+    return this._put()
   }
 
   async _put () {

@@ -1,4 +1,5 @@
 const createDb = require('../src/db')
+const STATUS = require('http-status-codes')
 const range = require('lodash/range')
 
 const Model = require('../src/models/Model')
@@ -95,9 +96,13 @@ describe('Model', function () {
     })
   })
 
-  it('can save the same object multiple times', async () => {
-    // save the user 100 times
-    await Promise.all(range(100).map(() => user.save()))
+  it('saving the same object multiple times in parallel throws conflict error', async () => {
+    expect.hasAssertions()
+    try {
+      await Promise.all([user.save(), user.save()])
+    } catch (e) {
+      expect(e).toHaveProperty('status', STATUS.CONFLICT)
+    }
   })
 
   it('can find by multiple fields', async () => {

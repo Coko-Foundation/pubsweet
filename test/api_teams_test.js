@@ -77,7 +77,6 @@ describe('Teams API - per collection or fragment', () => {
     describe('owners', () => {
       let collectionId
       let otherUserId
-      let teamId
       let team
 
       beforeEach(() => {
@@ -162,10 +161,10 @@ describe('Teams API - per collection or fragment', () => {
           )
         ).then(
           ([res, token]) => {
-            teamId = res.body.id
-            team.members = []
+            const savedTeam = res.body
+            savedTeam.members = []
             return api.teams.patch(
-              team, teamId, token
+              savedTeam, savedTeam.id, token
             ).expect(
               STATUS.OK
             )

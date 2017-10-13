@@ -61,7 +61,7 @@ describe('users api', () => {
 
     it('can make another user an admin', () => {
       const patchedUser = Object.assign(
-        { id: otherUser.id, admin: true }, fixtures.otherUser
+        otherUser, { admin: true }
       )
 
       return api.users.authenticate.post(
@@ -90,11 +90,11 @@ describe('users api', () => {
       () => api.users.get().expect(STATUS.UNAUTHORIZED)
     )
 
-    it('can not sign up as an admin directly', () => {
-      const fakeadmin = Object.assign(
+    it('cannot sign up as an admin directly', () => {
+      const fakeAdmin = Object.assign(
         {}, fixtures.otherUser, { admin: true }
       )
-      return api.users.post(fakeadmin).expect(STATUS.CONFLICT)
+      return api.users.post(fakeAdmin).expect(STATUS.BAD_REQUEST)
     })
 
     it('can sign up', () => {
@@ -212,13 +212,13 @@ describe('users api', () => {
     })
 
     it('updates itself', () => {
-      const newself = Object.assign({}, fixtures.updatedUser)
+      const newSelf = Object.assign({}, otherUser, fixtures.updatedUser)
 
       return api.users.authenticate.post(
         fixtures.otherUser
       ).then(
         token => api.users.patch(
-          otherUser.id, newself, token
+          otherUser.id, newSelf, token
         ).expect(
           STATUS.OK
         )
@@ -226,24 +226,26 @@ describe('users api', () => {
     })
 
     it('authenticates an updated user', async () => {
+
       // authenticate
       const token = await api.users.authenticate.post(fixtures.otherUser)
 
       // change the username, email and password
-      await api.users.patch(otherUser.id, fixtures.updatedUser, token).expect(STATUS.OK)
+      const updatedUser = Object.assign({}, otherUser, fixtures.updatedUser)
+      await api.users.patch(otherUser.id, updatedUser, token).expect(STATUS.OK)
 
       // authenticate with the updated details
       await api.users.authenticate.post(fixtures.updatedUser)
     })
 
     it('persists an updated user', () => {
-      const newself = Object.assign({}, fixtures.updatedUser)
+      const newSelf = Object.assign({}, otherUser, fixtures.updatedUser)
 
       return api.users.authenticate.post(
         fixtures.otherUser
       ).then(
         token => api.users.patch(
-          otherUser.id, newself, token
+          otherUser.id, newSelf, token
         ).expect(
           STATUS.OK
         ).then(
@@ -264,7 +266,8 @@ describe('users api', () => {
       const otherUserToken = await api.users.authenticate.post(fixtures.otherUser)
 
       // change username, email and password
-      await api.users.patch(otherUser.id, fixtures.updatedUser, otherUserToken).expect(STATUS.OK)
+      const updatedUser = Object.assign({}, otherUser, fixtures.updatedUser)
+      await api.users.patch(otherUser.id, updatedUser, otherUserToken).expect(STATUS.OK)
 
       // authenticate with updated details
       const updatedUserToken = await api.users.authenticate.post(fixtures.updatedUser)
@@ -274,7 +277,7 @@ describe('users api', () => {
     })
   })
 
-  it('can not create a user if user exists', () => {
+  it('cannot create a user if user exists', () => {
     return api.users.post(fixtures.user).expect(STATUS.CONFLICT)
   })
 })
