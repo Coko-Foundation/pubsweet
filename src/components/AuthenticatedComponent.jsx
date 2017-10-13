@@ -5,56 +5,44 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
-import Authorize from '../helpers/Authorize'
 import actions from '../actions'
 
 export class AuthenticatedComponent extends React.Component {
   componentWillMount () {
     this.props.actions.getCurrentUser().then(
-      () => this.checkAuth(this.props.currentUser)
+      () => this.checkAuth(this.props)
     )
   }
 
   componentWillReceiveProps (nextProps) {
-    this.checkAuth(nextProps.currentUser)
+    this.checkAuth(nextProps)
   }
 
-  checkAuth (currentUser) {
-    if (!currentUser.isFetching && !currentUser.isAuthenticated) {
+  checkAuth ({isFetching, isAuthenticated}) {
+    if (!isFetching && !isAuthenticated) {
       const redirectAfterLogin = this.props.location.pathname
       this.props.pushState(`/login?next=${redirectAfterLogin}`)
     }
   }
 
   render () {
-    const { operation, object, unauthorized, children } = this.props
-    return (
-      <Authorize
-        operation={operation}
-        object={object}
-        unauthorized={unauthorized}
-      >
-        {children}
-      </Authorize>
-    )
+    return this.props.children
   }
 }
 
 AuthenticatedComponent.propTypes = {
   children: PropTypes.node,
-  unauthorized: PropTypes.node,
-  object: PropTypes.object.isRequired,
-  operation: PropTypes.string.isRequired,
   location: PropTypes.object,
   actions: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
   pushState: PropTypes.func.isRequired
 }
 
-function mapState (state, ownProps) {
+function mapState (state) {
   return {
-    currentUser: state.currentUser,
-    object: ownProps.selector(state)
+    isFetching: state.currentUser.isFetching,
+    isAuthenticated: state.currentUser.isAuthenticated
   }
 }
 
