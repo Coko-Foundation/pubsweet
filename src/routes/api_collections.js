@@ -22,9 +22,9 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 /**
  * Load a Collection from the database, using `:collectionId` from the route.
  *
- * @param req object Request
+ * @param {object} req Request
  *
- * @throws NotFoundError if the entity doesn't exist.
+ * @throws {NotFoundError} if the entity doesn't exist.
  *
  * @return {Promise<Collection>}
  */
@@ -35,9 +35,9 @@ const getCollection = req => {
 /**
  * Load a fragment from the database, using `:fragmentId` from the route.
  *
- * @param req object Request
+ * @param {object} req Request
  *
- * @throws NotFoundError if the Collection doesn't exist, the collection doesn't contain the given Fragment, or the fragment doesn't exist.
+ * @throws {NotFoundError} Thrown if the Collection doesn't exist, the collection doesn't contain the given Fragment, or the fragment doesn't exist.
  *
  * @returns {Promise<Fragment>}
  */
@@ -56,13 +56,13 @@ const getFragment = async req => {
  *
  * If required, the output is filtered.
  *
- * @param req        object     Request
- * @param target     mixed      The subject of the permissions check
- * @param filterable mixed|null An optional thing to be filtered instead of the target
+ * @param {object} req Request
+ * @param {*} target The subject of the permissions check
+ * @param {*} filterable An optional thing to be filtered instead of the target
  *
- * @throws AuthorizationError if permission is not granted.
+ * @throws {AuthorizationError} if permission is not granted.
  *
- * @returns {Promise} The (filtered) target, if permission is granted
+ * @returns {Promise} The (possibly filtered) target, if permission is granted
  */
 const applyPermissionFilter = async (req, target, filterable) => {
   const permission = await authsome.can(req.user, req.method, target)
@@ -78,7 +78,7 @@ const applyPermissionFilter = async (req, target, filterable) => {
  * If a filter is specified, applies that filter to the object and returns the result.
  * If a filter is not specified, the original object is returned.
  *
- * @returns mixed
+ * @returns {*}
  */
 const filter = (object, permission) => {
   return permission.filter ? permission.filter(object) : object
