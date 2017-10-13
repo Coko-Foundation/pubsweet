@@ -1,10 +1,10 @@
-global.PUBSWEET_COMPONENTS = []
-
 import React from 'react'
 import { shallow } from 'enzyme'
 import EventSourceMock, { sources } from 'eventsourcemock'
 
 import { UpdateSubscriber } from '../../src/components/UpdateSubscriber'
+
+global.PUBSWEET_COMPONENTS = []
 
 function makeWrapper (props = {}) {
   const wrapper = shallow(<UpdateSubscriber

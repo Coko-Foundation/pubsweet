@@ -12,7 +12,8 @@ const mockGetState = () => {
 
 function mockApi (succeed = true) {
   Object.keys(api).forEach(method => {
-    jest.spyOn(api, method).mockImplementation(() => succeed ? Promise.resolve({}) : Promise.reject({}))
+    jest.spyOn(api, method).mockImplementation(() => succeed
+      ? Promise.resolve({}) : Promise.reject(new Error({})))
   })
 }
 
