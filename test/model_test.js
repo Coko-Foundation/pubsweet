@@ -1,6 +1,5 @@
 const createDb = require('../src/db')
 const STATUS = require('http-status-codes')
-const range = require('lodash/range')
 
 const Model = require('../src/models/Model')
 const User = require('../src/models/User')

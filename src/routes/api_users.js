@@ -7,7 +7,7 @@ const express = require('express')
 const User = require('../models/User')
 
 const authsome = require('../helpers/authsome')
-const { authorizationError } = require('./util')
+const { filterByValues, authorizationError } = require('./util')
 
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
@@ -63,7 +63,9 @@ api.get('/users', authBearer, async (req, res, next) => {
       throw authorizationError(req.user, req.method, req.path)
     }
 
-    const users = await User.all()
+    const users = (await User.all())
+      .filter(filterByValues(req))
+
     return res.status(STATUS.OK).json({users: users})
   } catch (err) {
     next(err)
