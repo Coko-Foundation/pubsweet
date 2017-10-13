@@ -24,21 +24,14 @@ module.exports = {
 
     return data
   },
-  filterByValues: req => {
-    const filterPaths = _.difference(_.keys(req.query), ['fields'])
+  createFilterFromQuery: query => {
+    const filterPaths = _.difference(_.keys(query), ['fields'])
     
     return (item) => {
-      for (let filterPath of filterPaths) {
-        const filterValue = req.query[filterPath]
-        const filterValueMatch = _.has(item, filterPath) && _.get(item, filterPath) === filterValue 
-        if ( !filterValueMatch ) {
-          return false
-        }
-      }
-
-      return true
+      return filterPaths.every(filterPath => {
+        return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
+      })
     }
-
   },
   fieldSelector: req => {
     const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null

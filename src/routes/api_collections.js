@@ -14,7 +14,7 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { filterByValues, objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
+const { createFilterFromQuery, objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
@@ -95,7 +95,7 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
       const properties = await applyPermissionFilter(req, collection)
       return fieldSelector(req)(properties)
     })))
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
@@ -239,7 +239,7 @@ api.get('/collections/:collectionId/fragments', authBearerAndPublic, async (req,
 
     fragments = fragments
       .map(fieldSelector(req))
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     return res.status(STATUS.OK).json(fragments)
   } catch (err) {
@@ -260,7 +260,7 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
       id: collection.id,
       type: 'collection'
     }))
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {
@@ -331,7 +331,7 @@ api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndP
       id: fragment.id,
       type: 'fragment'
     }))
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {

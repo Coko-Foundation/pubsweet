@@ -5,7 +5,7 @@ const passport = require('passport')
 
 const authsome = require('../helpers/authsome')
 const Team = require('../models/Team')
-const { filterByValues, authorizationError } = require('./util')
+const { createFilterFromQuery, authorizationError } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router({mergeParams: true})
@@ -23,7 +23,7 @@ api.get('/teams', authBearer, async (req, res, next) => {
     }
 
     const teams = (await Team.all())
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {

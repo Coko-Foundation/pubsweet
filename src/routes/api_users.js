@@ -7,7 +7,7 @@ const express = require('express')
 const User = require('../models/User')
 
 const authsome = require('../helpers/authsome')
-const { filterByValues, authorizationError } = require('./util')
+const { createFilterFromQuery, authorizationError } = require('./util')
 
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
@@ -64,7 +64,7 @@ api.get('/users', authBearer, async (req, res, next) => {
     }
 
     const users = (await User.all())
-      .filter(filterByValues(req))
+      .filter(createFilterFromQuery(req.query))
 
     return res.status(STATUS.OK).json({users: users})
   } catch (err) {
