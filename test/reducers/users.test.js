@@ -1,3 +1,5 @@
+import { GET_CURRENT_USER_SUCCESS } from '../../src/actions/types'
+
 const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/users').default
 
@@ -82,6 +84,16 @@ describe('users reducers', () => {
     expect(actual).toEqual({
       users: [],
       isFetching: false
+    })
+  })
+
+  it('getCurrentUser success adds user to users array', () => {
+    const actual = reducer(mockstate, {
+      type: GET_CURRENT_USER_SUCCESS,
+      user
+    })
+    expect(actual).toEqual({
+      users: [user]
     })
   })
 
