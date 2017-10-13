@@ -3,9 +3,7 @@ const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
 
-const config = require('config')
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const authsome = require('../helpers/authsome')
 const Team = require('../models/Team')
 const { authorizationError } = require('./util')
 

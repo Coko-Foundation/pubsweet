@@ -6,9 +6,7 @@ const express = require('express')
 
 const User = require('../models/User')
 
-const config = require('config')
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const authsome = require('../helpers/authsome')
 const { authorizationError } = require('./util')
 
 const Team = require('../models/Team')

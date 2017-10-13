@@ -1,5 +1,4 @@
 'use strict'
-const config = require('config')
 
 const STATUS = require('http-status-codes')
 
@@ -8,8 +7,7 @@ const Collection = require('../models/Collection')
 const Team = require('../models/Team')
 const Fragment = require('../models/Fragment')
 
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const authsome = require('../helpers/authsome')
 const NotFoundError = require('../errors/NotFoundError')
 const AuthorizationError = require('../errors/AuthorizationError')
 const express = require('express')
