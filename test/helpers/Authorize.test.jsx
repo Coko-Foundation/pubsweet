@@ -1,9 +1,8 @@
-global.PUBSWEET_COMPONENTS = []
-
 import React from 'react'
 import { shallow } from 'enzyme'
-
 import { Authorize } from '../../src/helpers/Authorize'
+
+global.PUBSWEET_COMPONENTS = []
 
 function makeWrapper (props = {}) {
   return shallow(<Authorize currentUser={{ id: 'user1' }} {...props}>

@@ -1,7 +1,7 @@
-global.PUBSWEET_COMPONENTS = []
-
 import React from 'react'
 import { shallow } from 'enzyme'
+
+global.PUBSWEET_COMPONENTS = []
 
 const { AuthenticatedComponent } = require('../../src/components/AuthenticatedComponent')
 
