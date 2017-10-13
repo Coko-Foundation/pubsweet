@@ -25,7 +25,7 @@
     "pubsweet-component-login": "^0.4.1",
     "react": "^15.4.4",
     "react-redux": "^5.0.2",
-    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",
