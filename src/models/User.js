@@ -41,17 +41,17 @@ class User extends Model {
   async isUniq (user) {
     let result
 
-    const notNotFoundCatcher = e => {
+    const swallowNotFound = e => {
       if (e.name !== 'NotFoundError') throw e
     }
 
-    result = await User.findByEmail(user.email).catch(notNotFoundCatcher)
+    result = await User.findByEmail(user.email).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')
     }
 
-    result = await User.findByUsername(user.email).catch(notNotFoundCatcher)
+    result = await User.findByUsername(user.email).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')

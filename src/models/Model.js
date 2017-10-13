@@ -2,8 +2,7 @@
 
 const uuid = require('uuid')
 const Joi = require('joi')
-const Queue = require('promise-queue')
-const lodash = require('lodash')
+const _ = require('lodash')
 
 const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
@@ -11,11 +10,7 @@ const ValidationError = require('../errors/ValidationError')
 const logger = require('@pubsweet/logger')
 const validations = require('./validations')(require('config'))
 
-const STATUS = require('http-status-codes')
-
 schema()
-
-const saveQueue = new Queue(1, Infinity)
 
 class Model {
   constructor (properties) {
@@ -44,26 +39,10 @@ class Model {
 
     this.validate()
 
-    return saveQueue.add(async () => {
-      try {
-        const existing = await this.constructor.find(this.id)
-        logger.debug('Found an existing version, this is an update of:', existing)
-        this.rev = existing.rev
-      } catch (error) {
-        if (error.status !== STATUS.NOT_FOUND) {
-          throw error
-        }
-
-        // creating a new object, so check for uniqueness
-        if (typeof this.isUniq === 'function') {
-          await this.isUniq(this) // throws an exception if not unique
-        }
-
-        logger.debug('No existing object found, creating a new one:', this.type, this.id)
-      }
-
-      return this._put()
-    })
+    if (!this.rev /*is create*/ && typeof this.isUniq === 'function') {
+      await this.isUniq(this) // throws an exception if not unique
+    }
+    return this._put()
   }
 
   async _put () {
@@ -84,6 +63,9 @@ class Model {
     delete properties.owners
 
     logger.debug('Updating properties to', properties)
+
+    const validation = Joi.validate(properties, { rev: Joi.string().required() }, { allowUnknown: true })
+    if (validation.error) throw validation.error
 
     Object.assign(this, properties)
     return this
@@ -160,7 +142,7 @@ class Model {
       Object.assign(selector, field)
     }
 
-    selector = lodash.mapKeys(selector, (_, key) => `data.${key}`)
+    selector = _.mapKeys(selector, (_, key) => `data.${key}`)
 
     await db.createIndex({
       index: {

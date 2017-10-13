@@ -7,12 +7,12 @@ const fixtures = require('./fixtures/fixtures')
 const User = require('../src/models/User')
 const Fragment = require('../src/models/Fragment')
 
-var api = require('./helpers/api')
+const api = require('./helpers/api')
 
 describe('admin api', () => {
-  var otherUser
-  var collection
-  var fragment
+  let otherUser
+  let collection
+  let fragment
 
   beforeEach(() => {
     // Create collection with admin user and one non-admin user
@@ -66,11 +66,13 @@ describe('admin api', () => {
   })
 
   it('updates a fragment owned by someone else', () => {
+    const updatedFragment = Object.assign({}, fragment, fixtures.updatedFragment)
+
     return api.users.authenticate.post(
       fixtures.user
     ).then(
       token => api.fragments.patch(
-        fragment.id, fixtures.fragment, collection, token
+        fragment.id, updatedFragment, collection, token
       ).expect(STATUS.OK)
     )
   })
