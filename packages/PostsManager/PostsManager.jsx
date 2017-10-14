@@ -5,8 +5,6 @@ import PostList from './PostList'
 import PostCreator from './PostCreator'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import styles from './PostsManager.local.scss'
-import blogmode from 'authsome/src/modes/blog'
-const authsome = { mode: blogmode }
 
 export default class PostsManager extends React.Component {
   componentWillMount () {
@@ -32,7 +30,7 @@ export default class PostsManager extends React.Component {
                 blogposts={blogposts}
                 blog={blog}
                 currentUser={currentUser} />
-              <Authorize operation="create" object={blog} authsome={authsome}>
+              <Authorize operation="POST" object={blog}>
                 <PostCreator create={createBlogpost} />
               </Authorize>
             </Grid>
