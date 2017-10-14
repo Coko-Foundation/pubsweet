@@ -44,8 +44,8 @@ export default class TeamCreator extends React.Component {
     }
   }
 
-  onNameChange (name) {
-    this.setState({teamName: name ? name.value : null})
+  onNameChange (event) {
+    this.setState({teamName: event ? event.target.value : null})
   }
 
   onCollectionSelect (collection) {
