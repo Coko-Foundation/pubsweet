@@ -21,25 +21,31 @@ export default class PostsManager extends React.Component {
         <div className="bootstrap">
           <div className={styles.container}>
             <Grid>
-              {error ? <Alert bsStyle="warning">{error}</Alert> : null}
-              <h2 className={styles['header']}>{blog && blog.title}</h2>
-              <h3 className={styles['header']}>blog posts</h3>
-              <PostList
-                update={actions.updateFragment}
-                delete={actions.deleteFragment}
-                blogposts={blogposts}
-                blog={blog}
-                currentUser={currentUser} />
-              <Authorize operation="POST" object={blog}>
-                <PostCreator create={createBlogpost} />
+              <Authorize
+                  operation='GET'
+                  object={blog}
+                  unauthorized={<Alert bsStyle="warning">You are not authorized to view this page.</Alert>}
+              >
+                {error ? <Alert bsStyle="warning">{error}</Alert> : null}
+                <h2 className={styles['header']}>{blog && blog.title}</h2>
+                <h3 className={styles['header']}>blog posts</h3>
+                <PostList
+                    update={actions.updateFragment}
+                    delete={actions.deleteFragment}
+                    blogposts={blogposts}
+                    blog={blog}
+                    currentUser={currentUser}/>
+                <Authorize operation="POST" object={blog}>
+                  <PostCreator create={createBlogpost} />
+                </Authorize>
               </Authorize>
             </Grid>
           </div>
         </div>
       )
-    } else {
-      return false
     }
+
+    return null
   }
 }
 
