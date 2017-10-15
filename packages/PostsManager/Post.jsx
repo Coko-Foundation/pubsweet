@@ -93,7 +93,7 @@ export default class Post extends React.Component {
           <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}
         </td>
         <td>
-          <Authorize operation="edit" object={blogpost}>
+          <Authorize operation="PATCH" object={blogpost}>
             <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
               <Button bsStyle="primary" className={styles['button']} title="Edit" aria-label="Edit">
                 <i className="fa fa-pencil" />
@@ -101,11 +101,11 @@ export default class Post extends React.Component {
             </LinkContainer>
           </Authorize>
 
-          <Authorize operation="edit" object={blogpost}>
+          <Authorize operation="PATCH" object={blogpost}>
             {changePublished}
           </Authorize>
 
-          <Authorize operation="delete" object={blogpost}>
+          <Authorize operation="DELETE" object={blogpost}>
             <Button bsStyle="danger" className={styles['button']} onClick={this._onDestroyClick} title="Delete" aria-label="Delete">
               <i className="fa fa-trash-o" />
             </Button>

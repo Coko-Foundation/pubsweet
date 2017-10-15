@@ -17,12 +17,12 @@ const Navigation = ({ actions, currentUser }) => (
       <LinkContainer to='/manage/posts'>
         <NavItem>Posts</NavItem>
       </LinkContainer>
-      <Authorize operation='read' object='users'>
+      <Authorize operation='GET' object={{path: '/users'}}>
         <LinkContainer to='/manage/users'>
           <NavItem>Users</NavItem>
         </LinkContainer>
       </Authorize>
-      <Authorize operation='read' object='teams'>
+      <Authorize operation='GET' object={{path: '/teams'}}>
         <LinkContainer to='/manage/teams'>
           <NavItem>Teams</NavItem>
         </LinkContainer>
