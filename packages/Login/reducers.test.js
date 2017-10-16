@@ -1,4 +1,6 @@
-import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS} from './types'
+import {
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS
+} from 'pubsweet-client/src/actions/types'
 
 global.window.localStorage = {
   getItem: jest.fn(() => undefined)

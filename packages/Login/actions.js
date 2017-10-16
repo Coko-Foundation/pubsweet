@@ -1,5 +1,8 @@
 import * as api from 'pubsweet-client/src/helpers/api'
-import * as T from './types'
+import {
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST
+} from 'pubsweet-client/src/actions/types'
+
 import { push } from 'react-router-redux'
 
 // TODO: This will break when rendered on a server
@@ -9,7 +12,7 @@ const localStorage = window.localStorage || undefined
 // process and we need actions for each of them
 function loginRequest (credentials) {
   return {
-    type: T.LOGIN_REQUEST,
+    type: LOGIN_REQUEST,
     isFetching: true,
     isAuthenticated: false,
     credentials
@@ -18,7 +21,7 @@ function loginRequest (credentials) {
 
 function loginSuccess (user) {
   return {
-    type: T.LOGIN_SUCCESS,
+    type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     token: user.token,
@@ -28,7 +31,7 @@ function loginSuccess (user) {
 
 function loginFailure (message) {
   return {
-    type: T.LOGIN_FAILURE,
+    type: LOGIN_FAILURE,
     isFetching: false,
     isAuthenticated: false,
     error: message
@@ -53,7 +56,7 @@ export function loginUser (credentials, redirectTo) {
 
 function logoutRequest () {
   return {
-    type: T.LOGOUT_REQUEST,
+    type: LOGOUT_REQUEST,
     isFetching: true,
     isAuthenticated: true
   }
@@ -61,7 +64,7 @@ function logoutRequest () {
 
 function logoutSuccess () {
   return {
-    type: T.LOGOUT_SUCCESS,
+    type: LOGOUT_SUCCESS,
     isFetching: false,
     isAuthenticated: false
   }
