@@ -12,8 +12,16 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, authorizationError, getTeams,
-        applyPermissionFilter, getFragment } = require('./util')
+const {
+  objectId,
+  createFilterFromQuery,
+  buildChangeData,
+  fieldSelector,
+  authorizationError,
+  getTeams,
+  applyPermissionFilter,
+  getFragment
+} = require('./util')
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
 
@@ -71,6 +79,7 @@ api.get('/collections/:collectionId/fragments', authBearerAndPublic, async (req,
     }))
 
     fragments = fragments.filter(fragment => fragment !== undefined)
+      .filter(createFilterFromQuery(req.query))
 
     // Decorate owners with usernames
     await Promise.all(fragments.map(async fragment => {
@@ -145,12 +154,14 @@ api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndP
     const fragment = await getFragment({ req, Collection, Fragment })
     await applyPermissionFilter({ req, target: fragment })
 
-    const teams = await getTeams({
+    const teams = (await getTeams({
       req,
       Team,
       id: fragment.id,
       type: 'fragment'
-    })
+    }))
+      .filter(createFilterFromQuery(req.query))
+
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {
