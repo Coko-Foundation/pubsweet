@@ -9,10 +9,9 @@ import {
   DELETE_COLLECTION_SUCCESS,
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_SUCCESS,
-  DELETE_FRAGMENT_SUCCESS
+  DELETE_FRAGMENT_SUCCESS,
+  LOGOUT_SUCCESS
 } from '../actions/types'
-
-import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 import find from 'lodash/find'
 import union from 'lodash/union'
