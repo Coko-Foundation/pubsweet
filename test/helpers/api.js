@@ -198,16 +198,14 @@ const users = {
 }
 
 const collections = {
-  list: (token, options) => {
-    let url = COLLECTIONS_ROOT
+  list: (token, query = {}) => {
+    const url = COLLECTIONS_ROOT
 
-    if (options && options.fields) {
-      url += '?' + querystring.stringify({
-        fields: options.fields.join(',')
-      })
+    if (query.fields) {
+      query.fields = query.fields.join(',')
     }
 
-    const req = request(api).get(url)
+    const req = request(api).get(url).query(query)
     return authorizedRequest(req, token)
   },
   create: (collection, token) => {

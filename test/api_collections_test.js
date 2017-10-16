@@ -66,6 +66,48 @@ describe('Collections API', () => {
       expect(collection.title).toEqual(fixtures.collection.title)
     })
 
+    it('should allow an admin user to filter collections with query params', async () => {
+      const adminToken = await authenticateAdmin()
+
+      await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+      await api.collections.create(fixtures.collection2, adminToken)
+        .expect(STATUS.CREATED)
+
+      const query1 = {'owners.0.username': 'admin'}
+
+      const collections1 = await api.collections.list(adminToken, query1)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections1).toHaveLength(2)
+
+      const query2 = {'title': fixtures.collection.title}
+
+      const collections2 = await api.collections.list(adminToken, query2)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections2).toHaveLength(1)
+    })
+
+    it('should return empty array if filtering on non-existent property', async () => {
+      const adminToken = await authenticateAdmin()
+
+      await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+      await api.collections.create(fixtures.collection2, adminToken)
+        .expect(STATUS.CREATED)
+
+      const query = {'nonexistent': 'x'}
+
+      const collections = await api.collections.list(adminToken, query)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections).toHaveLength(0)
+    })
+
     it('collection.owners should be augmented with usernames (both singular and plural endpoints)', async () => {
       const adminToken = await authenticateAdmin()
 
@@ -559,6 +601,21 @@ describe('Collections API', () => {
       collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
 
       expect(Object.keys(collection)).not.toContain('filtered')
+    })
+
+    it('should return empty array if trying to filter with query params on properties for which user lacks authorization', async () => {
+      const token = await authenticateUser()
+
+      await api.collections.create(
+        Object.assign({}, fixtures.collection, { filtered: 'example' }), token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const collections = await api.collections.list(token, { filtered: 'example' })
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections).toHaveLength(0)
     })
 
     it('should filter collection properties based on authorization on update', async () => {

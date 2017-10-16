@@ -10,8 +10,14 @@ const express = require('express')
 const api = express.Router()
 
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, getTeams,
-        applyPermissionFilter } = require('./util')
+const {
+  createFilterFromQuery,
+  objectId,
+  buildChangeData,
+  fieldSelector,
+  getTeams,
+  applyPermissionFilter
+} = require('./util')
 
 const passport = require('passport')
 const authBearer = passport.authenticate('bearer', { session: false })
@@ -27,11 +33,12 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
       filterable: collections
     })
 
-    const collectionsWithSelectedFields = await Promise.all(filteredCollections.map(async collection => {
+    const collectionsWithSelectedFields = (await Promise.all(filteredCollections.map(async collection => {
       collection.owners = await User.ownersWithUsername(collection)
       const properties = await applyPermissionFilter({ req, target: collection })
       return fieldSelector(req)(properties)
-    }))
+    })))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
@@ -121,12 +128,13 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
   await applyPermissionFilter({ req, target: collection })
 
   try {
-    const teams = await getTeams({
+    const teams = (await getTeams({
       req,
       Team,
       id: collection.id,
       type: 'collection'
-    })
+    }))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {

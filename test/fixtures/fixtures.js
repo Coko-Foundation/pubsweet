@@ -4,6 +4,12 @@ const collection = {
   'published': true
 }
 
+const collection2 = {
+  'type': 'collection',
+  'title': 'Second collection',
+  'published': true
+}
+
 const updatedCollection = {
   'title': 'Update Blogger posts'
 }
@@ -81,6 +87,7 @@ const readerTeam = {
 
 module.exports = {
   collection: collection,
+  collection2,
   updatedCollection: updatedCollection,
   fragment: fragment,
   updatedFragment: updatedFragment,
