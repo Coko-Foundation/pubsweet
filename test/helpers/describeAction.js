@@ -52,6 +52,7 @@ const describeAction = actions => (key, opts, cb) => {
     const data = {}
     let action
 
+    // TODO this is broken because failures in the callback are not reported
     if (cb) afterAll(() => cb(action, data))
 
     beforeEach(mockApi)
@@ -105,12 +106,7 @@ const describeAction = actions => (key, opts, cb) => {
         fetcher(dispatch, mockGetState)
 
         expect(dispatched).toBeTruthy()
-        expect(
-          dispatched.type
-        ).toBe(
-          opts.types.request,
-          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
-        )
+        expect(dispatched.type).toBe(opts.types.request)
         if (properties) {
           expect(dispatched).toHaveProperties(properties)
         }
@@ -133,10 +129,7 @@ const describeAction = actions => (key, opts, cb) => {
         )
 
         expect(dispatched).toBeTruthy()
-        expect(dispatched.type).toBe(
-          opts.types.success,
-          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
-        )
+        expect(dispatched.type).toBe(opts.types.success)
         if (properties) {
           expect(dispatched).toHaveProperties(properties)
         }
@@ -161,10 +154,7 @@ const describeAction = actions => (key, opts, cb) => {
         )
 
         expect(dispatched).toBeTruthy()
-        expect(dispatched.type).toBe(
-          opts.types.failure,
-          `Received dispatched object with wrong type: \n${JSON.stringify(dispatched, null, 2)}`
-        )
+        expect(dispatched.type).toBe(opts.types.failure)
         if (properties) {
           expect(dispatched).toHaveProperties(properties)
         }

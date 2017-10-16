@@ -52,6 +52,15 @@ describe('teams reducers', () => {
     expect(actual).toEqual([])
   })
 
+  it('getCollectionTeam success', () => {
+    const extraTeam = {id: '4321', name: 'Another team'}
+    const actual = reducer(mockstate, {
+      type: T.GET_COLLECTION_TEAMS_SUCCESS,
+      teams: [extraTeam, mockteam]
+    })
+    expect(actual).toEqual([mockteam, extraTeam])
+  })
+
   it('returns same state for unrecognised action', () => {
     const state = []
     const actual = reducer(state, {
