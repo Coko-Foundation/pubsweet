@@ -172,7 +172,8 @@ api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndP
 // Get all fragments
 api.get('/fragments', authBearerAndPublic, async (req, res, next) => {
   try {
-    const fragments = await Fragment.all()
+    const fragments = (await Fragment.all())
+      .filter(createFilterFromQuery(req.query))
 
     // Filter fragments and their properties
     const propertyFilter = fieldSelector(req)
@@ -294,11 +295,12 @@ api.delete('/fragments/:fragmentId', authBearer, async (req, res, next) => {
 // Retrieve teams for a fragment
 api.get('/fragments/:fragmentId/teams', authBearerAndPublic, async (req, res, next) => {
   try {
-    let teams = await getTeams({
+    let teams = (await getTeams({
       req: req,
       Team: Team,
       id: req.params.fragmentId,
-      type: 'fragment' })
+      type: 'fragment' }))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {
