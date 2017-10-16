@@ -26,7 +26,6 @@ module.exports = {
   },
   createFilterFromQuery: query => {
     const filterPaths = _.difference(_.keys(query), ['fields'])
-    
     return (item) => {
       return filterPaths.every(filterPath => {
         return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
