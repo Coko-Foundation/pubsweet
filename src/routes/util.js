@@ -1,4 +1,4 @@
-const pick = require('lodash/pick')
+const _ = require('lodash')
 const AuthorizationError = require('../errors/AuthorizationError')
 const NotFoundError = require('../errors/NotFoundError')
 
@@ -24,11 +24,18 @@ module.exports = {
 
     return data
   },
-
+  createFilterFromQuery: query => {
+    const filterPaths = _.difference(_.keys(query), ['fields'])
+    return (item) => {
+      return filterPaths.every(filterPath => {
+        return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
+      })
+    }
+  },
   fieldSelector: req => {
     const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
 
-    return item => fields ? pick(item, fields.concat('id')) : item
+    return item => fields ? _.pick(item, fields.concat('id', 'rev')) : item
   },
 
   getTeams: async (opts) => {

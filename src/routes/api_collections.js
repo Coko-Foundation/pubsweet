@@ -14,7 +14,7 @@ const express = require('express')
 const api = express.Router()
 const passport = require('passport')
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
+const { createFilterFromQuery, objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { session: false })
@@ -90,11 +90,12 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
     const collections = await Collection.all()
     const filteredCollections = await applyPermissionFilter(req, req.route, collections)
 
-    const collectionsWithSelectedFields = await Promise.all(filteredCollections.map(async collection => {
+    const collectionsWithSelectedFields = (await Promise.all(filteredCollections.map(async collection => {
       collection.owners = await User.ownersWithUsername(collection)
       const properties = await applyPermissionFilter(req, collection)
       return fieldSelector(req)(properties)
-    }))
+    })))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
@@ -236,7 +237,9 @@ api.get('/collections/:collectionId/fragments', authBearerAndPublic, async (req,
       fragment.owners = await User.ownersWithUsername(fragment)
     }))
 
-    fragments = fragments.map(fieldSelector(req))
+    fragments = fragments
+      .map(fieldSelector(req))
+      .filter(createFilterFromQuery(req.query))
 
     return res.status(STATUS.OK).json(fragments)
   } catch (err) {
@@ -250,13 +253,14 @@ api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res
   await applyPermissionFilter(req, collection)
 
   try {
-    const teams = await getTeams({
+    const teams = (await getTeams({
       req,
       Team,
       authsome,
       id: collection.id,
       type: 'collection'
-    })
+    }))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {
@@ -320,13 +324,14 @@ api.get('/collections/:collectionId/fragments/:fragmentId/teams', authBearerAndP
     const fragment = await getFragment(req)
     await applyPermissionFilter(req, fragment)
 
-    const teams = await getTeams({
+    const teams = (await getTeams({
       req,
       Team,
       authsome,
       id: fragment.id,
       type: 'fragment'
-    })
+    }))
+      .filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {

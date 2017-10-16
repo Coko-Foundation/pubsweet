@@ -127,7 +127,6 @@ describe('Teams API - per collection or fragment', () => {
           )
         ).then(
           res => {
-            teamId = res.body.id
             expect(res.body.name).toEqual(team.name)
           }
         ).then(
