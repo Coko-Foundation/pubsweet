@@ -1,6 +1,7 @@
 'use strict'
 const Model = require('./Model')
 const Fragment = require('./Fragment')
+const Team = require('./Team')
 const without = require('lodash/without')
 
 class Collection extends Model {
@@ -16,7 +17,7 @@ class Collection extends Model {
     options = options || {}
     options.filter = options.filter || (() => Promise.resolve(true))
 
-    var fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
+    const fragments = Promise.all(this.fragments.map((id) => Fragment.find(id)))
 
     return fragments.then(
       fragments => {
@@ -52,6 +53,11 @@ class Collection extends Model {
       }
     })
     this.fragments = without(this.fragments, fragment.id)
+  }
+
+  async delete () {
+    await Team.deleteAssociated(this.type, this.id)
+    return super.delete()
   }
 }
 

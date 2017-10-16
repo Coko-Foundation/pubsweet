@@ -24,7 +24,7 @@ describe('Teams API - admin', () => {
     return api.users.authenticate.post(
       fixtures.adminUser
     ).then(
-      token => api.teams.get(token).expect(STATUS.OK)
+      token => api.teams.list(token).expect(STATUS.OK)
     ).then(
       res => expect(res.body).toEqual([])
     )
@@ -36,7 +36,7 @@ describe('Teams API - admin', () => {
     ).save().then(
       () => api.users.authenticate.post(fixtures.adminUser)
     ).then(
-      token => api.teams.get(token).expect(STATUS.OK)
+      token => api.teams.list(token).expect(STATUS.OK)
     ).then(
       res => {
         let team = res.body[0]
@@ -46,11 +46,28 @@ describe('Teams API - admin', () => {
     )
   })
 
+  it('should allow retrieval of a team by id', () => {
+    return new Team(
+      teamFixture
+    ).save().then(
+      () => api.users.authenticate.post(fixtures.adminUser)
+    ).then(
+      token => api.teams.list(token).then(res => ({teamId: res.body[0].id, token}))
+    ).then(
+      ({teamId, token}) => api.teams.get(token, teamId).expect(STATUS.OK)
+    ).then(
+      res => {
+        const team = res.body
+        expect(team.teamType.name).toEqual(contributors.name)
+        expect(team.members).toEqual([])
+      })
+  })
+
   it('should not allow listing all teams if user is not an admin', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.teams.get(token).expect(STATUS.FORBIDDEN)
+      token => api.teams.list(token).expect(STATUS.FORBIDDEN)
     )
   })
 })
@@ -60,7 +77,6 @@ describe('Teams API - per collection or fragment', () => {
     describe('owners', () => {
       let collectionId
       let otherUserId
-      let teamId
       let team
 
       beforeEach(() => {
@@ -87,7 +103,7 @@ describe('Teams API - per collection or fragment', () => {
         return api.users.authenticate.post(
           fixtures.user
         ).then(
-          token => api.teams.get(token, collectionId).expect(STATUS.OK)
+          token => api.teams.list(token, collectionId).expect(STATUS.OK)
         ).then(
           res => expect(res.body).toEqual([])
         )
@@ -105,7 +121,7 @@ describe('Teams API - per collection or fragment', () => {
           fixtures.user
         ).then(
           token => api.teams.post(
-            team, collectionId, token
+            team, token
           ).expect(
             STATUS.CREATED
           )
@@ -137,7 +153,7 @@ describe('Teams API - per collection or fragment', () => {
           fixtures.user
         ).then(
           token => api.teams.post(
-            team, collectionId, token
+            team, token
           ).expect(
             STATUS.CREATED
           ).then(
@@ -145,10 +161,10 @@ describe('Teams API - per collection or fragment', () => {
           )
         ).then(
           ([res, token]) => {
-            teamId = res.body.id
-            team.members = []
+            const savedTeam = res.body
+            savedTeam.members = []
             return api.teams.patch(
-              team, collectionId, teamId, token
+              savedTeam, savedTeam.id, token
             ).expect(
               STATUS.OK
             )
@@ -186,7 +202,7 @@ describe('Teams API - per collection or fragment', () => {
         return api.users.authenticate.post(
           fixtures.user
         ).then(
-          token => api.teams.get(token, collectionId).expect(STATUS.OK)
+          token => api.teams.list(token, collectionId).expect(STATUS.OK)
         ).then(res => {
           expect(res.body).toEqual([])
         })

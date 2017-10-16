@@ -42,7 +42,6 @@ describe('Collections API', () => {
         Object.assign({}, fixtures.collection, {filtered: 'example'}), adminToken)
         .expect(STATUS.CREATED)
         .then(res => res.body)
-
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
       expect(collection.filtered).toEqual('example')
@@ -65,6 +64,29 @@ describe('Collections API', () => {
       const collection = collections[0]
       expect(collection.type).toEqual(fixtures.collection.type)
       expect(collection.title).toEqual(fixtures.collection.title)
+    })
+
+    it('collection.owners should be augmented with usernames (both singular and plural endpoints)', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // retrieve the collection
+      const retrievedCollection = await api.collections.retrieve(collection.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(retrievedCollection.owners[0]).toHaveProperty('username', fixtures.adminUser.username)
+
+      // list all the collections
+      const collections = await api.collections.list(adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections[0].owners[0]).toHaveProperty('username', fixtures.adminUser.username)
     })
 
     it('should allow an admin user to retrieve only some fields of collections', async () => {
@@ -113,12 +135,45 @@ describe('Collections API', () => {
       const title = 'Updated title'
       const filtered = 'example'
 
-      const result = await api.collections.update(collection.id, { title, filtered }, adminToken)
+      const result = await api.collections.update(collection.id, { title, filtered, rev: collection.rev }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
       expect(result.title).toEqual(title)
       expect(result.filtered).toEqual('example')
+    })
+
+    it('should return conflict error if collection has changed before update', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherUserUpdate = { title: 'Causes conflict', filtered: 'example' }
+      const Collection = require('../src/models/Collection.js')
+      const collectionHandle = new Collection(Object.assign({}, collection, otherUserUpdate))
+      collectionHandle.save()
+
+      const myUpdate = { title: 'Outdated revision', filtered: 'example', rev: collection.rev }
+
+      await api.collections.update(collection.id, myUpdate, adminToken)
+        .expect(STATUS.CONFLICT)
+    })
+
+    it('should return bad request if rev property is not provided with an update', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const myUpdate = { title: 'Untagged revision', filtered: 'example' }
+
+      await api.collections.update(collection.id, myUpdate, adminToken)
+        .expect(STATUS.BAD_REQUEST)
     })
 
     it('should allow an admin user to update a collection with some fragments', async () => {
@@ -133,14 +188,11 @@ describe('Collections API', () => {
       await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
       await api.collections.createFragment(collection.id, fixtures.updatedFragment, adminToken)
 
-      // update the collection
-      const title = 'Updated title'
-
-      const result = await api.collections.update(collection.id, { title }, adminToken)
+      const result = await api.collections.retrieve(collection.id, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
-      expect(result.title).toEqual(title)
+      expect(result.fragments).toHaveLength(2)
     })
 
     it('should allow an admin user to delete a collection', async () => {
@@ -174,6 +226,34 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       expect(fragments).toHaveLength(0)
+    })
+
+    it('fragment.owners should be returned augmented with usernames (both plural and singular endpoints)', async () => {
+      const adminToken = await authenticateAdmin()
+
+      // create a collection
+      const collection = await api.collections.create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a fragment in the collection
+      const fragment = await api.collections.createFragment(collection.id, fixtures.fragment, adminToken)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // retrieve the created fragment
+      const retrievedFragment = await api.collections.retrieveFragment(collection.id, fragment.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(retrievedFragment.owners[0]).toHaveProperty('username', fixtures.adminUser.username)
+
+      // list the created fragments
+      const fragments = await api.collections.listFragments(collection.id, adminToken)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragments[0].owners[0]).toHaveProperty('username', fixtures.adminUser.username)
     })
 
     it('should allow an admin user to create a fragment in a collection', async () => {
@@ -213,7 +293,7 @@ describe('Collections API', () => {
       const source = '<blog>test</blog>'
 
       // update the fragment
-      await api.collections.updateFragment(collection.id, fragment.id, { source }, adminToken)
+      await api.collections.updateFragment(collection.id, fragment.id, { source, rev: fragment.rev }, adminToken)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -315,9 +395,9 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       // create the teams
-      await api.teams.post(fixtures.readerTeam, collection, token)
+      await api.teams.post(fixtures.readerTeam, token)
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
-      await api.teams.post(teamFixture, collection, token)
+      await api.teams.post(teamFixture, token)
 
       // retrieve the fragment team(s)
       const teams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
@@ -391,8 +471,8 @@ describe('Collections API', () => {
 
       // create the teams
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'collection', id: collection.id}})
-      await api.teams.post(teamFixture, collection, token)
-      await api.teams.post(fixtures.readerTeam, collection, token)
+      await api.teams.post(teamFixture, token)
+      await api.teams.post(fixtures.readerTeam, token)
 
       // retrieve the collection team(s)
       const teams = await api.collections.listTeams(collection.id, token)
@@ -419,7 +499,7 @@ describe('Collections API', () => {
       // update the collection
       const title = 'Updated title'
 
-      const result = await api.collections.update(collection.id, { title }, token)
+      const result = await api.collections.update(collection.id, { title, rev: collection.rev }, token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
@@ -436,7 +516,7 @@ describe('Collections API', () => {
 
       const title = 'Updated title'
 
-      await api.collections.update(collection.id, { title }, userToken)
+      await api.collections.update(collection.id, { title, rev: collection.rev }, userToken)
         .expect(STATUS.FORBIDDEN)
     })
 
@@ -490,13 +570,163 @@ describe('Collections API', () => {
 
       const filtered = 'example'
 
-      collection = await api.collections.update(collection.id, { filtered }, token)
+      collection = await api.collections.update(collection.id, { filtered, rev: collection.rev }, token)
         .expect(STATUS.OK)
         .then(res => res.body)
 
       // collection = await api.collections.retrieve(collection.id, token).expect(STATUS.OK)
 
       expect(Object.keys(collection)).not.toContain('filtered')
+    })
+
+    it('should delete teams associated with a collection when the collection is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: collection.id
+        }
+      }
+
+      await api.teams.post(teamData, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different collection
+
+      const otherCollection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'collection',
+          id: otherCollection.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, token)
+        .expect(STATUS.CREATED)
+
+      const collectionTeams = await api.collections.listTeams(collection.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collectionTeams).toHaveLength(1)
+
+      const teamsBeforeDeletion = await api.teams.list(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.delete(collection.id, token)
+        .expect(STATUS.OK)
+
+      await api.collections.retrieve(collection.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      // await api.collections.listTeams(collection.id, token)
+      //   .expect(STATUS.NOT_FOUND)
+
+      const teamsAfterDeletion = await api.teams.list(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
+    })
+
+    it('should delete teams associated with a fragment when the fragment is deleted', async () => {
+      // NOTE: need to authenticate as admin to be able to retrieve teams
+      const token = await authenticateAdmin()
+
+      const collection = await api.collections.create(fixtures.collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const fragment = await api.fragments.post(fixtures.fragment, collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const teamData = {
+        name: 'bar',
+        teamType: {
+          name: 'Test',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: fragment.id
+        }
+      }
+
+      await api.teams.post(teamData, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      // create a different team on a different fragment
+
+      const otherFragment = await api.fragments.post(fixtures.fragment, collection, token)
+        .expect(STATUS.CREATED)
+        .then(res => res.body)
+
+      const otherTeamData = {
+        name: 'foo',
+        teamType: {
+          name: 'Foo',
+          permissions: 'read'
+        },
+        object: {
+          type: 'fragment',
+          id: otherFragment.id
+        }
+      }
+
+      await api.teams.post(otherTeamData, token)
+        .expect(STATUS.CREATED)
+
+      const fragmentTeams = await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(fragmentTeams).toHaveLength(1)
+
+      const teamsBeforeDeletion = await api.teams.list(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsBeforeDeletion).toHaveLength(2)
+
+      await api.collections.deleteFragment(collection.id, fragment.id, token)
+        .expect(STATUS.OK)
+
+      await api.collections.retrieveFragment(collection.id, fragment.id, token)
+        .expect(STATUS.NOT_FOUND)
+
+      // await api.collections.listFragmentTeams(collection.id, fragment.id, token)
+      //   .expect(STATUS.NOT_FOUND)
+
+      const teamsAfterDeletion = await api.teams.list(token)
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(teamsAfterDeletion).toHaveLength(1)
     })
   })
 })

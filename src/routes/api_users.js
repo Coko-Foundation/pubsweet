@@ -6,9 +6,7 @@ const express = require('express')
 
 const User = require('../models/User')
 
-const config = require('config')
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const authsome = require('../helpers/authsome')
 const { authorizationError } = require('./util')
 
 const Team = require('../models/Team')
@@ -34,10 +32,9 @@ api.get('/users/authenticate', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.user)
     user.token = req.authInfo.token
-    const teams = await Promise.all(
+    user.teams = await Promise.all(
       user.teams.map((teamId) => Team.find(teamId))
     )
-    user.teams = teams
     return res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)

@@ -3,9 +3,7 @@ const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
 
-const config = require('config')
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const authsome = require('../helpers/authsome')
 const Team = require('../models/Team')
 const { authorizationError } = require('./util')
 
@@ -66,7 +64,7 @@ api.get('/teams/:teamId', authBearer, async (req, res, next) => {
       team = permission.filter(team)
     }
 
-    res.status(STATUS.CREATED).json(team)
+    res.status(STATUS.OK).json(team)
   } catch (err) {
     next(err)
   }

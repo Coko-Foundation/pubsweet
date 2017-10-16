@@ -3,6 +3,7 @@ const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
 const omit = require('lodash/omit')
+const pick = require('lodash/pick')
 const config = require('config')
 
 const BCRYPT_COST = config.util.getEnv('NODE_ENV') === 'test' ? 1 : 12
@@ -40,17 +41,17 @@ class User extends Model {
   async isUniq (user) {
     let result
 
-    const notNotFoundCatcher = e => {
+    const swallowNotFound = e => {
       if (e.name !== 'NotFoundError') throw e
     }
 
-    result = await User.findByEmail(user.email).catch(notNotFoundCatcher)
+    result = await User.findByEmail(user.email).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')
     }
 
-    result = await User.findByUsername(user.email).catch(notNotFoundCatcher)
+    result = await User.findByUsername(user.email).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')
@@ -71,13 +72,10 @@ class User extends Model {
 
   // For API display/JSON purposes only
   static ownersWithUsername (object) {
-    return Promise.all(object.owners.map(ownerId => this.find(ownerId)))
-      .then(owners => {
-        return owners.map(owner => ({id: owner.id, username: owner.username}))
-      }).then(owners => {
-        object.owners = owners
-        return object
-      })
+    return Promise.all(object.owners.map(async ownerId => {
+      const owner = await this.find(ownerId)
+      return pick(owner, ['id', 'username'])
+    }))
   }
 }
 

@@ -1,19 +1,17 @@
 'use strict'
-const config = require('config')
 
 const STATUS = require('http-status-codes')
 
 const Collection = require('../models/Collection')
 const Team = require('../models/Team')
-
-const Authsome = require('authsome')
-const authsome = new Authsome(config.authsome, { models: require('../models') })
+const User = require('../models/User')
 
 const express = require('express')
 const api = express.Router()
 
 const sse = require('pubsweet-sse')
-const { objectId, buildChangeData, fieldSelector, authorizationError, getTeams } = require('./util')
+const { objectId, buildChangeData, fieldSelector, getTeams,
+        applyPermissionFilter } = require('./util')
 
 const passport = require('passport')
 const authBearer = passport.authenticate('bearer', { session: false })
@@ -22,32 +20,20 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], { ses
 // List collections
 api.get('/collections', authBearerAndPublic, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, req.route)
+    const collections = await Collection.all()
+    const filteredCollections = await applyPermissionFilter({
+      req,
+      target: req.route,
+      filterable: collections
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.route)
-    }
-
-    let collections = await Collection.all()
-
-    // Filtering objects, e.g. only show collections that have .published === true
-    if (permission.filter) {
-      collections = permission.filter(collections)
-    }
-
-    collections = await Promise.all(collections.map(async collection => {
-      let permission = await authsome.can(req.user, req.method, collection)
-
-      if (permission.filter) {
-        // Filtering properties, e.g. only show the title and id properties
-        return permission.filter(collection)
-      } else {
-        return collection
-      }
+    const collectionsWithSelectedFields = await Promise.all(filteredCollections.map(async collection => {
+      collection.owners = await User.ownersWithUsername(collection)
+      const properties = await applyPermissionFilter({ req, target: collection })
+      return fieldSelector(req)(properties)
     }))
 
-    collections = collections.map(fieldSelector(req))
-    res.status(STATUS.OK).json(collections)
+    res.status(STATUS.OK).json(collectionsWithSelectedFields)
   } catch (err) {
     next(err)
   }
@@ -56,22 +42,19 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
 // Create a collection
 api.post('/collections', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, req.route)
+    const properties = await applyPermissionFilter({
+      req,
+      target: req.route,
+      filterable: req.body
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.route)
-    }
-
-    if (permission.filter) {
-      req.body = permission.filter(req.body)
-    }
-
-    let collection = new Collection(req.body)
-
+    const collection = new Collection(properties)
     collection.created = Date.now()
     collection.setOwners([req.user])
 
-    collection = await collection.save()
+    await collection.save()
+
+    // TODO: filter the output?
 
     res.status(STATUS.CREATED).json(collection)
     sse.send({ action: 'collection:create', data: { collection } })
@@ -81,43 +64,32 @@ api.post('/collections', authBearer, async (req, res, next) => {
 })
 
 // Retrieve a collection
-api.get('/collections/:id', authBearerAndPublic, async (req, res, next) => {
+api.get('/collections/:collectionId', authBearerAndPublic, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, collection)
+    const collection = await Collection.find(req.params.collectionId)
+    collection.owners = await User.ownersWithUsername(collection)
+    const properties = await applyPermissionFilter({ req, target: collection })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, collection)
-    }
-
-    if (permission.filter) {
-      collection = permission.filter(collection)
-    }
-    return res.status(STATUS.OK).json(collection)
+    return res.status(STATUS.OK).json(properties)
   } catch (err) {
     next(err)
   }
 })
 
 // Update a collection
-api.patch('/collections/:id', authBearer, async (req, res, next) => {
+api.patch('/collections/:collectionId', authBearer, async (req, res, next) => {
   try {
-    let update = req.body
-    let collection = await Collection.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, collection)
+    const collection = await Collection.find(req.params.collectionId)
+    const properties = await applyPermissionFilter({
+      req,
+      target: collection,
+      filterable: req.body
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, collection)
-    }
+    await collection.updateProperties(properties)
+    await collection.save()
 
-    if (permission.filter) {
-      update = permission.filter(update)
-    }
-
-    collection.updateProperties(update)
-    collection = await collection.save()
-
-    const updated = buildChangeData(update, collection)
+    const updated = buildChangeData(properties, collection)
 
     res.status(STATUS.OK).json(updated)
     sse.send({ action: 'collection:patch', data: { collection: objectId(collection), updated } })
@@ -127,17 +99,16 @@ api.patch('/collections/:id', authBearer, async (req, res, next) => {
 })
 
 // Delete a collection
-api.delete('/collections/:id', authBearer, async (req, res, next) => {
+api.delete('/collections/:collectionId', authBearer, async (req, res, next) => {
   try {
-    let collection = await Collection.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, collection)
+    const collection = await Collection.find(req.params.collectionId)
+    const output = await applyPermissionFilter({ req, target: collection })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, collection)
-    }
+    // TODO: filter the output, or return nothing?
 
-    collection = await collection.delete()
-    res.status(STATUS.OK).json(collection)
+    await collection.delete()
+
+    res.status(STATUS.OK).json(output)
     sse.send({ action: 'collection:delete', data: { collection: objectId(collection) } })
   } catch (err) {
     next(err)
@@ -146,19 +117,23 @@ api.delete('/collections/:id', authBearer, async (req, res, next) => {
 
 // Retrieve teams for a collection
 api.get('/collections/:collectionId/teams', authBearerAndPublic, async (req, res, next) => {
+  const collection = await Collection.find(req.params.collectionId)
+  await applyPermissionFilter({ req, target: collection })
+
   try {
-    let teams = await getTeams({
-      req: req,
-      Team: Team,
-      authsome: authsome,
-      id: req.params.collectionId,
-      type: 'collection' })
+    const teams = await getTeams({
+      req,
+      Team,
+      id: collection.id,
+      type: 'collection'
+    })
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {
     next(err)
   }
 })
+
 
 // Teams
 // TODO: Nested teams API to be deprecated

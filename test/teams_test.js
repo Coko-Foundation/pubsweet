@@ -116,7 +116,8 @@ describe('Teams model', function () {
       return Team.find(savedTeam.id)
     }).then(function (team) {
       return team.updateProperties({
-        members: [userId, adminId]
+        members: [userId, adminId],
+        rev: team.rev
       })
     }).then(function (team) {
       return team.save()

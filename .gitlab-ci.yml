@@ -1,7 +1,11 @@
-image: node:8
+image: pubsweet/pubsweet-test-base
 
 before_script:
   - yarn
+
+lint:
+  script:
+    - npm run lint
 
 test:
   script:
@@ -11,4 +15,3 @@ test:
 test:vulnerabilities:
   script:
     - npm run vuln-test
-
