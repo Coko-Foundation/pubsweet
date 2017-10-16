@@ -111,7 +111,7 @@ describe('authenticated api', function () {
           (token) => {
             return api.fragments.patch({
               fragmentId: fragment.id,
-              update: fixtures.updatedFragment,
+              update: {...fixtures.updatedFragment, rev: fragment.rev},
               collection,
               token
             }).expect(

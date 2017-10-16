@@ -164,9 +164,10 @@ api.get('/fragments', authBearerAndPublic, async (req, res, next) => {
     const fragments = await Fragment.all()
 
     // Filter fragments and their properties
+    const propertyFilter = fieldSelector(req)
     const filteredFragments = await Promise.all(fragments.map(async fragment => {
       try {
-        return await applyPermissionFilter({ req, target: fragment })
+        return await applyPermissionFilter({ req, target: propertyFilter(fragment) })
       } catch (e) {
         if (e instanceof AuthorizationError) {
           return undefined
@@ -203,7 +204,7 @@ api.post('/fragments', authBearer, async (req, res, next) => {
     fragment = await fragment.save()
 
     // How to address this?
-    fragment = await User.ownersWithUsername(fragment)
+    fragment.owners = await User.ownersWithUsername(fragment)
 
     res.status(STATUS.CREATED).json(fragment)
     sse.send({ action: 'fragment:create', data: { fragment } })
@@ -249,7 +250,7 @@ api.patch('/fragments/:fragmentId', authBearer, async (req, res, next) => {
 
     fragment.updateProperties(req.body)
     fragment = await fragment.save()
-    fragment = await User.ownersWithUsername(fragment)
+    fragment.owners = await User.ownersWithUsername(fragment)
 
     const update = buildChangeData(req.body, fragment)
     res.status(STATUS.OK).json(update)

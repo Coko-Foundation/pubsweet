@@ -96,7 +96,7 @@ describe('Fragments API', () => {
 
       const result = await api.fragments.patch({
         fragmentId: fragment.id,
-        update: { title, filtered },
+        update: { title, filtered, rev: fragment.rev },
         token: adminToken
       }).expect(STATUS.OK)
         .then(res => res.body)
@@ -178,7 +178,7 @@ describe('Fragments API', () => {
 
       // create the teams
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {object: {type: 'fragment', id: fragment.id}})
-      await api.teams.post(teamFixture, fragment, token)
+      await api.teams.post(teamFixture, token)
 
       // retrieve the fragment team(s)
       const teams = await api.fragments.teams({
