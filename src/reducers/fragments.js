@@ -10,10 +10,9 @@ import {
   // UPDATE_FRAGMENT_FAILURE,
   DELETE_FRAGMENT_REQUEST,
   DELETE_FRAGMENT_FAILURE,
-  DELETE_FRAGMENT_SUCCESS
+  DELETE_FRAGMENT_SUCCESS,
+  LOGOUT_SUCCESS
 } from '../actions/types'
-
-import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 import clone from 'lodash/clone'
 import unset from 'lodash/unset'

@@ -6,10 +6,9 @@ import {
   GET_USER_SUCCESS,
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
-  GET_CURRENT_USER_SUCCESS
+  GET_CURRENT_USER_SUCCESS,
+  LOGOUT_SUCCESS
 } from '../actions/types'
-
-import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 // TODO: store users as an object/map instead of an array
 

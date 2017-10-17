@@ -1,8 +1,9 @@
 import {
-  GET_CURRENT_USER_REQUEST, GET_CURRENT_USER_SUCCESS, GET_CURRENT_USER_FAILURE
+  GET_CURRENT_USER_REQUEST,
+  GET_CURRENT_USER_SUCCESS,
+  GET_CURRENT_USER_FAILURE,
+  LOGOUT_SUCCESS
 } from '../actions/types'
-
-import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 export default function (state = {
   isFetching: false,
