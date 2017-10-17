@@ -6,3 +6,4 @@ test.log
 uploads/
 coverage/
 logs/*
+config/local*.*
