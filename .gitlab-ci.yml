@@ -1,4 +1,4 @@
-image: node:7
+image: pubsweet/pubsweet-test-base
 
 before_script:
   - yarn

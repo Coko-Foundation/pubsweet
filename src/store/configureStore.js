@@ -11,12 +11,13 @@ require('../components/reducers').forEach(
   componentReducers => Object.assign(reducers, componentReducers)
 )
 
-function configureStore (env) {
-  return function configureStore (history, initialState) {
+function createConfigureStore (env) {
+  return function configureStore (history, initialState = {}, customReducers = {}, customMiddlewares = []) {
     const reducer = combineReducers({
       ...reducers,
       form: formReducer,
-      routing: routerReducer
+      routing: routerReducer,
+      ...customReducers
     })
 
     let logger
@@ -27,7 +28,8 @@ function configureStore (env) {
     const middleware = [
       applyMiddleware(thunk),
       logger,
-      applyMiddleware(routerMiddleware(history))
+      applyMiddleware(routerMiddleware(history)),
+      ...customMiddlewares.map(mw => applyMiddleware(mw))
     ].filter(value => value)
 
     // https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
@@ -52,7 +54,7 @@ function configureStore (env) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = configureStore('production')
+  module.exports = createConfigureStore('production')
 } else {
-  module.exports = configureStore('development')
+  module.exports = createConfigureStore('development')
 }
