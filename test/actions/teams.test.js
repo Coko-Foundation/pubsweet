@@ -5,8 +5,6 @@ const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 describe('teams actions', () => {
-  let team
-
   describeAction('getTeams', {
     types: {
       request: T.GET_TEAMS_REQUEST,
@@ -43,12 +41,10 @@ describe('teams actions', () => {
       success: ['team'],
       failure: ['isFetching', 'team', 'error']
     }
-  }, (action, data) => {
-    team = data[T.CREATE_TEAM_SUCCESS].team
   })
 
   describeAction('updateTeam', {
-    firstarg: team,
+    firstarg: {id: 234},
     secondard: {
       name: 'My readers',
       teamType: {
@@ -74,7 +70,7 @@ describe('teams actions', () => {
   })
 
   describeAction('deleteTeam', {
-    firstarg: team,
+    firstarg: {id: 234},
     types: {
       request: T.DELETE_TEAM_REQUEST,
       success: T.DELETE_TEAM_SUCCESS,
