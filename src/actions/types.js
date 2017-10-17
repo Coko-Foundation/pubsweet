@@ -82,3 +82,13 @@ export const FILE_UPLOAD_FAILURE = 'FILE_UPLOAD_FAILURE'
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE'
 export const HYDRATE = 'HYDRATE'
+
+// The following actions are implemented elsewhere in pubsweet components
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'

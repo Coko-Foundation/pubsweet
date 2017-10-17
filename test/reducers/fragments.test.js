@@ -2,7 +2,6 @@ const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/fragments').default
 
 const T = require('../../src/actions/types')
-const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 const clone = require('lodash/clone')
 
@@ -80,7 +79,7 @@ describe('fragments reducers', () => {
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
-      type: LOGOUT_SUCCESS
+      type: T.LOGOUT_SUCCESS
     })
     expect(actual).toEqual({})
   })

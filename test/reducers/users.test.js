@@ -4,7 +4,6 @@ const allReducers = require('../../src/reducers').default
 const reducer = require('../../src/reducers/users').default
 
 const T = require('../../src/actions/types')
-const {LOGOUT_SUCCESS} = require('pubsweet-component-login/types')
 
 describe('users reducers', () => {
   it('is exported in the all reducers object', () => {
@@ -78,7 +77,7 @@ describe('users reducers', () => {
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
-      type: LOGOUT_SUCCESS,
+      type: T.LOGOUT_SUCCESS,
       user: usermod
     })
     expect(actual).toEqual({

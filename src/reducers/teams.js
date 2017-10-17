@@ -2,10 +2,9 @@ import {
   GET_TEAMS_SUCCESS,
   CREATE_TEAM_SUCCESS,
   UPDATE_TEAM_SUCCESS,
-  DELETE_TEAM_SUCCESS
+  DELETE_TEAM_SUCCESS,
+  LOGOUT_SUCCESS
 } from '../actions/types'
-
-import { LOGOUT_SUCCESS } from 'pubsweet-component-login/types'
 
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
