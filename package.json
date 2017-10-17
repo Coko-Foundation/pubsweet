@@ -26,7 +26,7 @@
     "lerna": "2.0.0-rc.5",
     "node-sass": "^4.5.3",
     "pubsweet": "^1.0.0-alpha.4",
-    "pubsweet-client": "^1.0.0-beta.2",
+    "pubsweet-client": "^1.0.0-beta.7",
     "pubsweet-server": "^1.0.0-alpha.3",
     "pubsweet-theme-plugin": "0.0.1",
     "react": "^15.6.1",
