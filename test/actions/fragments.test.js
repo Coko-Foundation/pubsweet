@@ -33,12 +33,6 @@ describe('fragments actions', () => {
     properties: {
       success: ['fragments']
     }
-  }, (action, data) => {
-    const filteredFragment = data.GET_FRAGMENTS_SUCCESS.fragments[0]
-    expect(filteredFragment).toHaveProperty('id')
-    expect(filteredFragment).toHaveProperty('type')
-    expect(filteredFragment).toHaveProperty('presentation')
-    expect(filteredFragment).not.toHaveProperty('source')
   })
 
   describeAction('createFragment', {

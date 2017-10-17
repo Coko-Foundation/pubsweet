@@ -1,9 +1,6 @@
-const defaults = require('lodash/defaults')
 const allactions = require('../../src/actions').default
 const api = require('../../src/helpers/api')
 
-const empty = {}
-const mockDispatch = () => {}
 const mockGetState = () => {
   return {
     currentUser: {}
@@ -11,16 +8,10 @@ const mockGetState = () => {
 }
 
 function mockApi (succeed = true) {
-  Object.keys(api).forEach(method => {
-    jest.spyOn(api, method).mockImplementation(() => succeed
-      ? Promise.resolve({}) : Promise.reject(new Error({})))
-  })
-}
-
-function unMockApi () {
-  Object.keys(api).forEach(method => {
-    api[method].mockRestore()
-  })
+  const implementation = () => succeed ? Promise.resolve({}) : Promise.reject(new Error({}))
+  Object.keys(api)
+    .filter(method => typeof api[method] === 'function')
+    .forEach(method => jest.spyOn(api, method).mockImplementation(implementation))
 }
 
 // custom Jest matcher
@@ -35,31 +26,14 @@ expect.extend({
   }
 })
 
-const describeAction = actions => (key, opts, cb) => {
-  if (typeof opts === 'function') {
-    cb = opts
-    opts = {}
-  }
-
-  defaults(opts, {
-    firstarg: empty,
-    secondarg: empty,
-    types: {},
-    properties: {}
-  })
-
+const describeAction = actions => (key, opts) => {
   describe(key, () => {
-    const data = {}
-    let action
-
-    // TODO this is broken because failures in the callback are not reported
-    if (cb) afterAll(() => cb(action, data))
+    const actionCreator = actions[key]
 
     beforeEach(mockApi)
 
-    afterEach(unMockApi)
+    afterEach(() => jest.restoreAllMocks())
 
-    // functional tests - no server required
     it('is exported from the file', () => {
       expect(actions).toHaveProperty(key)
     })
@@ -68,50 +42,42 @@ const describeAction = actions => (key, opts, cb) => {
       expect(allactions).toHaveProperty(key)
     })
 
-    action = actions[key]
-
     it('returns a fetcher function', () => {
-      const returned = action(mockDispatch, mockGetState)
-      expect(typeof returned).toBe('function')
+      const thunk = actionCreator(() => {}, mockGetState)
+      expect(typeof thunk).toBe('function')
     })
 
     it('returns a promise from the fetcher function', () => {
-      const fetcher = action(opts.firstarg, opts.secondarg)
-      const returned = fetcher(mockDispatch, mockGetState)
+      const thunk = actionCreator(opts.firstarg, opts.secondarg)
+      const returned = thunk(() => {}, mockGetState)
       expect(typeof returned.then).toBe('function')
     })
 
-    it('dispatches a typed fragment', () => {
-      const fetcher = action(opts.firstarg, opts.secondarg)
-      let frag
-      fetcher(fragment => { frag = fragment }, mockGetState)
-      expect(frag).toBeDefined()
-      expect(frag).toHaveProperty('type')
+    it('dispatches an action object with a type property', () => {
+      const actions = []
+      const thunk = actionCreator(opts.firstarg, opts.secondarg)
+      thunk(action => actions.push(action), mockGetState)
+      expect(actions).toHaveLength(1)
+      expect(actions[0]).toHaveProperty('type')
     })
 
-    // real interaction with server
     if (opts.types.request) {
       const properties = opts.properties.request
       const propmsg = properties
         ? `with [${properties.join(', ')}] `
         : ''
+
       it(`dispatches ${key}Request ${propmsg}immediately`, () => {
-        let dispatched
+        const actions = []
+        const thunk = actionCreator(opts.firstarg, opts.secondarg)
+        thunk(action => actions.push(action), mockGetState)
 
-        const dispatch = typedmsg => {
-          if (!dispatched) dispatched = typedmsg
-        }
-
-        let fetcher = action(opts.firstarg, opts.secondarg)
-        fetcher(dispatch, mockGetState)
-
-        expect(dispatched).toBeTruthy()
-        expect(dispatched.type).toBe(opts.types.request)
+        const firstAction = actions[0]
+        expect(firstAction).toBeTruthy()
+        expect(firstAction.type).toBe(opts.types.request)
         if (properties) {
-          expect(dispatched).toHaveProperties(properties)
+          expect(firstAction).toHaveProperties(properties)
         }
-
-        data[opts.types.request] = dispatched
       })
     }
 
@@ -122,18 +88,16 @@ const describeAction = actions => (key, opts, cb) => {
         : ''
 
       it(`dispatches ${key}Success ${propmsg}on successful response`, async () => {
-        let fetcher = action(opts.firstarg, opts.secondarg)
-        const dispatched = await fetcher(
-          typedmsg => Promise.resolve(typedmsg),
-          mockGetState
-        )
+        const actions = []
+        const thunk = actionCreator(opts.firstarg, opts.secondarg)
+        await thunk(action => actions.push(action), mockGetState)
 
-        expect(dispatched).toBeTruthy()
-        expect(dispatched.type).toBe(opts.types.success)
+        const secondAction = actions[1]
+        expect(secondAction).toBeTruthy()
+        expect(secondAction.type).toBe(opts.types.success)
         if (properties) {
-          expect(dispatched).toHaveProperties(properties)
+          expect(secondAction).toHaveProperties(properties)
         }
-        data[opts.types.success] = dispatched
       })
     }
 
@@ -147,18 +111,16 @@ const describeAction = actions => (key, opts, cb) => {
         // make API reject every request
         mockApi(false)
 
-        let fetcher = action(opts.firstarg, opts.secondarg)
-        const dispatched = await fetcher(
-          typedmsg => Promise.resolve(typedmsg),
-          mockGetState
-        )
+        const actions = []
+        const thunk = actionCreator(opts.firstarg, opts.secondarg)
+        await thunk(action => actions.push(action), mockGetState)
 
-        expect(dispatched).toBeTruthy()
-        expect(dispatched.type).toBe(opts.types.failure)
+        const secondAction = actions[1]
+        expect(secondAction).toBeTruthy()
+        expect(secondAction.type).toBe(opts.types.failure)
         if (properties) {
-          expect(dispatched).toHaveProperties(properties)
+          expect(secondAction).toHaveProperties(properties)
         }
-        data[opts.types.failure] = dispatched
       })
     }
   })
