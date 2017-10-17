@@ -1,14 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Navigation from 'app/components/Navigation/Navigation'
 
-function Manage ({ children, currentUser, actions, nav }) {
+function Manage ({ children, nav }) {
   return (
       <div>
         <div className="bootstrap">
-          {
-            nav || <Navigation currentUser={currentUser} actions={actions}/>
-          }
+          {nav}
         </div>
         {children}
       </div>
@@ -16,10 +13,8 @@ function Manage ({ children, currentUser, actions, nav }) {
 }
 
 Manage.propTypes = {
-  nav: PropTypes.node,
-  children: PropTypes.node,
-  currentUser: PropTypes.object,
-  actions: PropTypes.object
+  nav: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 }
 
 export default Manage
