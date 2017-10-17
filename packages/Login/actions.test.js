@@ -1,6 +1,8 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS} from './types'
+import {
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS
+} from 'pubsweet-client/src/actions/types'
 import api from 'pubsweet-client/src/helpers/api'
 
 jest.mock('pubsweet-client/src/helpers/api', () => ({

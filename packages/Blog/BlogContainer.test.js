@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 jest.mock('config', () => ({
-  'pubsweet-server': {
+  'pubsweet-client': {
     API_ENDPOINT: ''
   }
 }))

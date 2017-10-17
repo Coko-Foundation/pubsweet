@@ -1,6 +1,6 @@
 import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST
-} from './types'
+} from 'pubsweet-client/src/actions/types'
 
 // TODO: This will break when rendered on a server
 const localStorage = window.localStorage || undefined
