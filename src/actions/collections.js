@@ -49,6 +49,40 @@ export function getCollections (options) {
   }
 }
 
+function getCollectionTeamsRequest () {
+  return {
+    type: T.GET_COLLECTION_TEAMS_REQUEST
+  }
+}
+
+function getCollectionTeamsFailure (error) {
+  return {
+    type: T.GET_COLLECTION_TEAMS_FAILURE,
+    error: error
+  }
+}
+
+function getCollectionTeamsSuccess (teams) {
+  return {
+    type: T.GET_COLLECTION_TEAMS_SUCCESS,
+    teams,
+    receivedAt: Date.now()
+  }
+}
+
+export function getCollectionTeams (collection) {
+  return dispatch => {
+    dispatch(getCollectionTeamsRequest())
+
+    let url = collectionUrl(collection, 'teams')
+
+    return api.get(url).then(
+      teams => dispatch(getCollectionTeamsSuccess(teams)),
+      err => dispatch(getCollectionTeamsFailure(err))
+    )
+  }
+}
+
 function createCollectionRequest (collection) {
   return {
     type: T.CREATE_COLLECTION_REQUEST,

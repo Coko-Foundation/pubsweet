@@ -40,6 +40,20 @@ describe('Collection actions', () => {
     expect(filteredCollection).not.toHaveProperty('created')
   })
 
+  describeAction('getCollectionTeams', {
+    firstarg: {id: 123},
+    types: {
+      request: T.GET_COLLECTION_TEAMS_REQUEST,
+      success: T.GET_COLLECTION_TEAMS_SUCCESS,
+      failure: T.GET_COLLECTION_TEAMS_FAILURE
+    },
+    properties: {
+      request: ['type'],
+      success: ['type', 'teams', 'receivedAt'],
+      failure: ['type', 'error']
+    }
+  })
+
   let newcol
 
   describeAction('createCollection', {
@@ -57,8 +71,6 @@ describe('Collection actions', () => {
       success: ['type', 'collection'],
       failure: ['type', 'isFetching', 'collection', 'error']
     }
-  }, (action, data) => {
-    newcol = data.CREATE_COLLECTION_SUCCESS.collection
   })
 
   describeAction('getCollection', {
