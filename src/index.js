@@ -52,7 +52,7 @@ module.exports = (app = express()) => {
 
   app.use((err, req, res, next) => {
     // development error handler, will print stacktrace
-    if (app.get('env') === 'dev' || app.get('env') === 'test') {
+    if (app.get('env') === 'development' || app.get('env') === 'test') {
       logger.error(err)
       logger.error(err.stack)
     }
