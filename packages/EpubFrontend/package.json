@@ -1,8 +1,7 @@
 {
   "name": "pubsweet-component-epub-frontend",
   "version": "0.0.1",
-  "description":
-    "A frontend component that triggers a conversion of Editoria's Typescript to epub",
+  "description": "A frontend component that triggers a conversion of Editoria's Typescript to epub",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

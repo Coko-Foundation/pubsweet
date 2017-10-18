@@ -7,16 +7,20 @@ const unzipper = require('unzipper')
 const attachment = async (epub, res, id) => {
   res.attachment(`collection-${id}.epub`)
 
-  const archive = await epub.stream(res)
+  try {
+    const archive = await epub.stream(res)
 
-  // TODO: this might not work if the attachment header is already sent
-  archive.on('error', err => {
-    res.status(500).send({error: err.message})
-  })
+    // TODO: this might not work if the attachment header is already sent
+    archive.on('error', err => {
+      res.status(500).json({error: err.message})
+    })
 
-  archive.on('end', () => {
-    logger.info('Wrote %d bytes', archive.pointer())
-  })
+    archive.on('end', () => {
+      logger.info('Wrote %d bytes', archive.pointer())
+    })
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  }
 }
 
 const folder = async (epub, res) => {
@@ -30,17 +34,21 @@ const folder = async (epub, res) => {
 
   mkdirp.sync(path)
 
-  const archive = await epub.stream(unzipper.Extract({path}))
+  try {
+    const archive = await epub.stream(unzipper.Extract({path}))
 
-  archive.on('error', err => {
-    res.status(500).send({error: err.message})
-  })
+    archive.on('error', err => {
+      res.status(500).json({error: err.message})
+    })
 
-  archive.on('end', () => {
-    logger.info('Wrote %d bytes', archive.pointer())
+    archive.on('end', () => {
+      logger.info('Wrote %d bytes', archive.pointer())
 
-    res.json({path: folder})
-  })
+      res.json({path: folder})
+    })
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  }
 }
 
 module.exports = {
