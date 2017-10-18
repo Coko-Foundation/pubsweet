@@ -1,5 +1,6 @@
 {
-  "extends": "standard",
+  "extends": ["standard", "prettier"],
+  "plugins": ["import", "node", "promise", "standard"],
   "env": {
     "es6": true,
     "node": true

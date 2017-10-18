@@ -39,13 +39,17 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "jest": "^21.1.0",
-    "nsp": "^2.8.0"
+    "lint-staged": "^4.2.3",
+    "nsp": "^2.8.0",
+    "prettier": "^1.7.4"
   },
   "dependencies": {
     "@pubsweet/logger": "0.0.1",

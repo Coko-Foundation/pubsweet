@@ -18,9 +18,9 @@ module.exports = () => {
   }
 
   const secret = crypto.randomBytes(64).toString('hex')
-  _.set('pubsweet-server.secret', secret, configObj)
+  const newConfig = _.set('pubsweet-server.secret', secret, configObj)
 
-  fs.writeJsonSync(configFilePath, configObj)
+  fs.writeJsonSync(configFilePath, newConfig)
 
   logger.info(`Added secret to ${configFilePath} under pubsweet-server.secret`)
 }
