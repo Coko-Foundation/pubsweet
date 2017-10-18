@@ -4,8 +4,8 @@ const winston = require('winston')
 
 module.exports = {
   'pubsweet-server': {
-    // disable logging in tests
     logger: winston,
+    secret: 'test',
     sse: false
   },
   validations: {
