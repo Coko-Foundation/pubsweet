@@ -1,19 +1,16 @@
 const express = require('express')
 const app = express()
-var api = require('../src')(app)
+const api = require('../src')(app)
 
 const User = require('../src/models/User')
 const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
 
 describe('api/app locals', () => {
-  beforeEach(() => {
-    return cleanDB().then(
-      () => { return new User(fixtures.adminUser).save() }
-    )
+  beforeEach(async () => {
+    await cleanDB()
+    await new User(fixtures.adminUser).save()
   })
-
-  afterEach(cleanDB)
 
   it('exposes models', () => {
     expect(api.locals.models.User.type).toEqual('user')
