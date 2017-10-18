@@ -2,14 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import actions from '../actions'
 
 export class AuthenticatedComponent extends React.Component {
   componentWillMount () {
-    this.props.actions.getCurrentUser().then(
+    this.props.getCurrentUser().then(
       () => this.checkAuth(this.props)
     )
   }
@@ -33,7 +32,7 @@ export class AuthenticatedComponent extends React.Component {
 AuthenticatedComponent.propTypes = {
   children: PropTypes.node,
   location: PropTypes.object,
-  actions: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
   pushState: PropTypes.func.isRequired
@@ -46,13 +45,6 @@ function mapState (state) {
   }
 }
 
-function mapDispatch (dispatch) {
-  return {
-    pushState: bindActionCreators(push, dispatch),
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-const ConnectedAuthenticatedComponent = withRouter(connect(mapState, mapDispatch)(AuthenticatedComponent))
+const ConnectedAuthenticatedComponent = withRouter(connect(mapState, {getCurrentUser: actions.getCurrentUser, pushState: push})(AuthenticatedComponent))
 
 export default ConnectedAuthenticatedComponent

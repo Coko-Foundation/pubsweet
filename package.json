@@ -9,18 +9,22 @@
     "testci": "gitlab-ci-multi-runner exec docker test"
   },
   "engines": {
-    "node": ">=7.7.0",
-    "npm": ">=3.0.0"
+    "node": ">=8.6.0",
+    "npm": ">=5.0.0"
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
     "authsome": "0.0.9",
     "config": "^1.21.0",
+    "eslint-config-prettier": "^2.6.0",
     "event-source-polyfill": "^0.0.10",
     "global": "^4.3.1",
+    "husky": "^0.14.3",
     "isomorphic-fetch": "^2.1.1",
+    "lint-staged": "^4.2.3",
     "lodash": "^4.0.0",
+    "prettier": "^1.7.4",
     "prop-types": "^15.5.8",
     "pubsweet-component-login": "^0.5.2",
     "react": "^15.4.4",

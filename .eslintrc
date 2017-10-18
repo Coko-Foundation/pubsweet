@@ -2,6 +2,9 @@
   "extends": [
     "standard",
     "plugin:react/recommended"
+    "prettier",
+    "prettier/standard",
+    "prettier/react",
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -12,9 +15,6 @@
   "env": {
     "browser": true
   },
-  "plugins": [
-    "react"
-  ],
   "globals": {
     "PUBSWEET_COMPONENTS": true
   }

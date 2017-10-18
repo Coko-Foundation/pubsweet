@@ -7,9 +7,7 @@ const { AuthenticatedComponent } = require('../../src/components/AuthenticatedCo
 
 function makeWrapper (props = {}) {
   return shallow(<AuthenticatedComponent
-    actions={{
-      getCurrentUser: () => Promise.resolve()
-    }}
+    getCurrentUser={() => Promise.resolve()}
     pushState={jest.fn()}
     location={{}}
     {...props}>
