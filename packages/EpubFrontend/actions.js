@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import queryString from 'querystring'
 import * as T from './types'
 
 function htmlToEpubRequest () {
@@ -21,18 +22,20 @@ function htmlToEpubFailure (message) {
   }
 }
 
-export function htmlToEpub (bookId) {
+export function htmlToEpub (
+  bookId,
+  queryParams
+) {
+  const qParams = queryString.stringify(queryParams)
   return dispatch => {
     dispatch(htmlToEpubRequest())
-
-    return fetch(
-      `/api/collections/${bookId}/epub?destination=folder&converter=wax&style=epub.css`
-    ).then(
+    return fetch(`/api/collections/${bookId}/epub?${qParams}`)
+    .then(
       res => res.json().then(data => dispatch(htmlToEpubSuccess(data.path))),
       err => {
         dispatch(htmlToEpubFailure(err))
         throw err
       }
-    )
+      )
   }
 }
