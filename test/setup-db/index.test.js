@@ -1,26 +1,29 @@
 /* global db */
+jest.mock('fs-extra', () => {
+  const fs = require.requireActual('fs-extra')
+  fs.writeJsonSync = jest.fn()
+  return fs
+})
 
 const fs = require('fs-extra')
+const _ = require('lodash')
 const path = require('path')
 const PouchDB = require('pouchdb')
-
-process.env.ALLOW_CONFIG_MUTATIONS = true
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const basePath = path.join(__dirname, '..', '..', 'api', 'db')
 const dbPath = path.join(basePath, 'test_db')
 
-const baseConfig = {
+const dbConfig = {
   'pubsweet-server': {
     dbPath,
-    adapter: 'leveldb'
+    adapter: 'leveldb',
   },
   dbManager: {
     username: 'testUsername',
     email: 'test@example.com',
     password: 'test_password',
-    collection: 'test_collection'
-  }
+    collection: 'test_collection',
+  },
 }
 
 describe('setup-db', () => {
@@ -32,8 +35,7 @@ describe('setup-db', () => {
   beforeEach(async () => {
     jest.resetModules() // necessary because db must be recreated after destroyed
     const config = require('config')
-    config['pubsweet-server'] = baseConfig['pubsweet-server']
-    config['dbManager'] = baseConfig['dbManager']
+    _.merge(config, dbConfig)
     const { setupDb } = require('../../src/')
     await setupDb()
   })
@@ -48,5 +50,11 @@ describe('setup-db', () => {
     expect(dbDir).toContain('test_db')
     const items = fs.readdirSync(dbPath)
     expect(items).toContain('CURRENT')
+  })
+
+  it('generates secret in config', () => {
+    const fs = require('fs-extra')
+    const calls = fs.writeJsonSync.mock.calls
+    expect(calls[0][1]['pubsweet-server']).toHaveProperty('secret')
   })
 })

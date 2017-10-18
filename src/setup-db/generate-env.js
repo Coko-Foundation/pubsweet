@@ -6,7 +6,11 @@ const _ = require('lodash/fp')
 const config = require('config')
 
 module.exports = () => {
-  const configFilePath = path.join(process.cwd(), 'config', `local-${config.util.getEnv('NODE_ENV')}.json`)
+  const configFilePath = path.join(
+    process.cwd(),
+    'config',
+    `local-${config.util.getEnv('NODE_ENV')}.json`,
+  )
   logger.info(`Adding pubsweet secret to ${configFilePath}`)
 
   let configObj
@@ -18,9 +22,9 @@ module.exports = () => {
   }
 
   const secret = crypto.randomBytes(64).toString('hex')
-  _.set('pubsweet-server.secret', secret, configObj)
+  const newConfig = _.set('pubsweet-server.secret', secret, configObj)
 
-  fs.writeJsonSync(configFilePath, configObj)
+  fs.writeJsonSync(configFilePath, newConfig)
 
   logger.info(`Added secret to ${configFilePath} under pubsweet-server.secret`)
 }
