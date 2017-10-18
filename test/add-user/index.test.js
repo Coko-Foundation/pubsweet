@@ -13,27 +13,27 @@ const dbPath = path.join(basePath, 'test_db')
 const nonAdminUser = {
   username: 'nonAdminUsername',
   email: 'nonAdmin@example.com',
-  password: 'nonAdmin_password'
+  password: 'nonAdmin_password',
 }
 
 const adminUser = {
   username: 'adminUsername',
   email: 'admin@example.com',
   password: 'admin_password',
-  admin: true
+  admin: true,
 }
 
 const baseConfig = {
   'pubsweet-server': {
     dbPath,
-    adapter: 'leveldb'
+    adapter: 'leveldb',
   },
   dbManager: {
     username: 'testUsername',
     email: 'test@example.com',
     password: 'test_password',
-    collection: 'test_collection'
-  }
+    collection: 'test_collection',
+  },
 }
 
 describe('add-user', () => {
