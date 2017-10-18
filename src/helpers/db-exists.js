@@ -3,6 +3,7 @@ const fetch = require('isomorphic-fetch')
 const fs = require('fs-extra')
 const logger = require('@pubsweet/logger')
 const getDbPath = require('./db-path')
+const config = require('config')
 
 const httpDbExists = async url => {
   try {
@@ -15,6 +16,11 @@ const httpDbExists = async url => {
 }
 
 const dbExists = async (dbPath) => {
+  if (config.get('pubsweet-server').adapter === 'memory') {
+    // in memory databases are unique each time
+    return false
+  }
+
   if (/^http/.test(dbPath)) {
     return httpDbExists(dbPath)
   }
