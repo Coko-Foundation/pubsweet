@@ -13,6 +13,7 @@ let validations = {
     id: Joi.string().guid().required(),
     type: Joi.string().required(),
     fragmentType: Joi.string().required(),
+    title: Joi.string(),
     rev: Joi.string(),
     fragments: Joi.array().items(Joi.string().guid()),
     owners: Joi.array().items(Joi.string().guid())
@@ -57,15 +58,18 @@ let validations = {
 }
 
 let allValidations = function (type, config) {
-  let configurableValidations
+  let extraValidations = {}
 
   if (config.validations && config.validations[type]) {
-    configurableValidations = config.validations[type]
+    extraValidations = config.validations[type]
   }
 
-  return Joi.object().keys(
-    Object.assign({}, validations[type], configurableValidations)
-  )
+  if (Array.isArray(extraValidations)) {
+    const alternatives = extraValidations.map(extra => ({...validations[type], ...extra}))
+    return Joi.alternatives().try(...alternatives)
+  }
+
+  return Joi.object().keys({...validations[type], ...extraValidations})
 }
 
 module.exports = function (config) {

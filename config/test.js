@@ -9,14 +9,20 @@ module.exports = {
     sse: false
   },
   validations: {
-    fragment: {
-      source: Joi.string(),
-      kind: Joi.string(),
-      title: Joi.string(),
-      presentation: Joi.string(),
-      published: Joi.boolean(),
-      filtered: Joi.string()
-    },
+    fragment: [
+      {
+        fragmentType: Joi.valid('blogpost').required(),
+        source: Joi.string(),
+        kind: Joi.string(),
+        presentation: Joi.string(),
+        published: Joi.boolean(),
+        filtered: Joi.string()
+      },
+      {
+        fragmentType: Joi.valid('file').required(),
+        path: Joi.string().required()
+      }
+    ],
     collection: {
       published: Joi.boolean(),
       nonPublicProperty: Joi.string(),

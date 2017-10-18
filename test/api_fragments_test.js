@@ -45,42 +45,6 @@ describe('Fragments API', () => {
       expect(fragment.filtered).toEqual('example')
     })
 
-    it('should allow an admin user to retrieve only some fields of a fragment', async () => {
-      const adminToken = await authenticateAdmin()
-
-      // create a fragment
-      await api.fragments.post({
-        fragment: fixtures.fragment, token: adminToken
-      }).expect(STATUS.CREATED)
-
-      // list all the fragments, asking for all fields
-      const fragments = await api.fragments.get({token: adminToken})
-        .expect(STATUS.OK)
-        .then(res => res.body)
-
-      expect(fragments).toHaveLength(1)
-
-      const fragment = fragments[0]
-      expect(fragment).toHaveProperty('id')
-      expect(fragment).toHaveProperty('type')
-      expect(fragment).toHaveProperty('title')
-      expect(fragment).toHaveProperty('source')
-
-      // list all the fragments, asking for only two fields
-      const filteredFragments = await api.fragments.get({
-        token: adminToken, fields: ['type', 'title']
-      }).expect(STATUS.OK)
-        .then(res => res.body)
-
-      expect(filteredFragments).toHaveLength(1)
-
-      const filteredFragment = filteredFragments[0]
-      expect(filteredFragment).toHaveProperty('id') // the ID field must always be present
-      expect(filteredFragment).toHaveProperty('type')
-      expect(filteredFragment).toHaveProperty('title')
-      expect(filteredFragment).not.toHaveProperty('source')
-    })
-
     it('should allow an admin user to update a fragment (without filtering properties)', async () => {
       const adminToken = await authenticateAdmin()
 
@@ -134,7 +98,6 @@ describe('Fragments API', () => {
         fragment: fixtures.fragment,
         token: adminToken
       }).expect(STATUS.CREATED)
-        .then(res => res.body)
 
       const fragments = await api.fragments.get({
         token: adminToken
