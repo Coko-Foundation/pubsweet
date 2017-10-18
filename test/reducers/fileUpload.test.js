@@ -11,17 +11,17 @@ describe('fileUpload reducers', () => {
   it('fileUpload success', () => {
     const actual = reducer(undefined, {
       type: T.FILE_UPLOAD_SUCCESS,
-      file: 'somefile'
+      file: 'somefile',
     })
     expect(actual).toEqual({
       isFetching: false,
-      file: 'somefile'
+      file: 'somefile',
     })
   })
 
   it('fileUpload request', () => {
     const actual = reducer(undefined, {
-      type: T.FILE_UPLOAD_REQUEST
+      type: T.FILE_UPLOAD_REQUEST,
     })
     expect(actual).toEqual({ isFetching: true })
   })
@@ -29,7 +29,7 @@ describe('fileUpload reducers', () => {
   it('returns same state for unrecognised action', () => {
     const state = {}
     const actual = reducer(state, {
-      type: 'something else'
+      type: 'something else',
     })
     expect(actual).toBe(state)
   })

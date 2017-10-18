@@ -3,16 +3,21 @@ import { shallow } from 'enzyme'
 
 global.PUBSWEET_COMPONENTS = []
 
-const { AuthenticatedComponent } = require('../../src/components/AuthenticatedComponent')
+const {
+  AuthenticatedComponent,
+} = require('../../src/components/AuthenticatedComponent')
 
-function makeWrapper (props = {}) {
-  return shallow(<AuthenticatedComponent
-    getCurrentUser={() => Promise.resolve()}
-    pushState={jest.fn()}
-    location={{}}
-    {...props}>
-    <button/>
-  </AuthenticatedComponent>)
+function makeWrapper(props = {}) {
+  return shallow(
+    <AuthenticatedComponent
+      getCurrentUser={() => Promise.resolve()}
+      pushState={jest.fn()}
+      location={{}}
+      {...props}
+    >
+      <button />
+    </AuthenticatedComponent>,
+  )
 }
 
 describe('<AuthenticatedComponent/>', () => {

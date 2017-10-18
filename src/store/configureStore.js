@@ -7,17 +7,22 @@ import { reducer as formReducer } from 'redux-form'
 import config from 'config'
 import reducers from '../reducers'
 
-require('../components/reducers').forEach(
-  componentReducers => Object.assign(reducers, componentReducers)
+require('../components/reducers').forEach(componentReducers =>
+  Object.assign(reducers, componentReducers),
 )
 
-function createConfigureStore (env) {
-  return function configureStore (history, initialState = {}, customReducers = {}, customMiddlewares = []) {
+function createConfigureStore(env) {
+  return function configureStore(
+    history,
+    initialState = {},
+    customReducers = {},
+    customMiddlewares = [],
+  ) {
     const reducer = combineReducers({
       ...reducers,
       form: formReducer,
       routing: routerReducer,
-      ...customReducers
+      ...customReducers,
     })
 
     let logger
@@ -29,16 +34,17 @@ function createConfigureStore (env) {
       applyMiddleware(thunk),
       logger,
       applyMiddleware(routerMiddleware(history)),
-      ...customMiddlewares.map(mw => applyMiddleware(mw))
+      ...customMiddlewares.map(mw => applyMiddleware(mw)),
     ].filter(value => value)
 
     // https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    const composeEnhancers =
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
     const store = createStore(
       reducer,
       initialState,
-      composeEnhancers(...middleware)
+      composeEnhancers(...middleware),
     )
 
     if (module.hot) {

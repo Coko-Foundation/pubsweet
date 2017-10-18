@@ -11,15 +11,16 @@ import componentActions from '../components/actions'
 
 // Resets the currently visible error message.
 const resetErrorMessage = () => ({
-  type: RESET_ERROR_MESSAGE
+  type: RESET_ERROR_MESSAGE,
 })
 
 // Hydrate hydrates the store from a persistent store, the backend.
 // It gets collections, fragments and user data (via token).
-const hydrate = () => dispatch => Promise.all([
-  dispatch(currentUser.getCurrentUser()),
-  dispatch(collections.getCollections())
-])
+const hydrate = () => dispatch =>
+  Promise.all([
+    dispatch(currentUser.getCurrentUser()),
+    dispatch(collections.getCollections()),
+  ])
 
 export default {
   ...collections,
@@ -30,5 +31,5 @@ export default {
   ...users,
   ...componentActions,
   hydrate,
-  resetErrorMessage
+  resetErrorMessage,
 }

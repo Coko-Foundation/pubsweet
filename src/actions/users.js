@@ -1,106 +1,112 @@
 import * as api from '../helpers/api'
 import * as T from './types'
 
-function getUsersRequest () {
+function getUsersRequest() {
   return {
     type: T.GET_USERS_REQUEST,
-    isFetching: true
+    isFetching: true,
   }
 }
 
-function getUsersSuccess (users) {
+function getUsersSuccess(users) {
   return {
     type: T.GET_USERS_SUCCESS,
     isFetching: false,
-    users: users
+    users: users,
   }
 }
 
-function getUsersFailure (message) {
+function getUsersFailure(message) {
   return {
     type: T.GET_USERS_FAILURE,
     isFetching: false,
-    message
+    message,
   }
 }
 
-export function getUsers () {
+export function getUsers() {
   return dispatch => {
     dispatch(getUsersRequest())
 
-    return api.get('/users').then(
-      users => dispatch(getUsersSuccess(users.users)),
-      err => dispatch(getUsersFailure(err))
-    )
+    return api
+      .get('/users')
+      .then(
+        users => dispatch(getUsersSuccess(users.users)),
+        err => dispatch(getUsersFailure(err)),
+      )
   }
 }
 
-function getUserRequest (user) {
+function getUserRequest(user) {
   return {
     type: T.GET_USER_REQUEST,
-    user
+    user,
   }
 }
 
-function getUserSuccess (user) {
+function getUserSuccess(user) {
   return {
     type: T.GET_USER_SUCCESS,
-    user
+    user,
   }
 }
 
-function getUserFailure (user, error) {
+function getUserFailure(user, error) {
   return {
     type: T.GET_USER_FAILURE,
     user,
-    error
+    error,
   }
 }
 
-export function getUser (user) {
+export function getUser(user) {
   return dispatch => {
     dispatch(getUserRequest(user))
 
-    return api.get('/users/' + user.id).then(
-      user => dispatch(getUserSuccess(user)),
-      err => dispatch(getUserFailure(err))
-    )
+    return api
+      .get('/users/' + user.id)
+      .then(
+        user => dispatch(getUserSuccess(user)),
+        err => dispatch(getUserFailure(err)),
+      )
   }
 }
 
-function updateUserRequest (user) {
+function updateUserRequest(user) {
   return {
     type: T.UPDATE_USER_REQUEST,
     user: user,
-    isFetching: true
+    isFetching: true,
   }
 }
 
-function updateUserSuccess (users) {
+function updateUserSuccess(users) {
   return {
     type: T.UPDATE_USER_SUCCESS,
     isFetching: false,
-    users: users
+    users: users,
   }
 }
 
-function updateUserFailure (message) {
+function updateUserFailure(message) {
   return {
     type: T.UPDATE_USER_FAILURE,
     isFetching: false,
-    error: message
+    error: message,
   }
 }
 
-export function updateUser (user) {
+export function updateUser(user) {
   return dispatch => {
     dispatch(updateUserRequest(user))
 
     const url = '/users/' + user.id
 
-    return api.update(url, user).then(
-      user => dispatch(updateUserSuccess(user)),
-      err => dispatch(updateUserFailure(err))
-    )
+    return api
+      .update(url, user)
+      .then(
+        user => dispatch(updateUserSuccess(user)),
+        err => dispatch(updateUserFailure(err)),
+      )
   }
 }

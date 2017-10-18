@@ -1,7 +1,7 @@
 import * as api from '../helpers/api'
 import * as T from './types'
 
-const teamUrl = (team) => {
+const teamUrl = team => {
   let url = '/teams'
 
   if (team) url += `/${team.id}`
@@ -9,143 +9,151 @@ const teamUrl = (team) => {
   return url
 }
 
-function getTeamsRequest () {
+function getTeamsRequest() {
   return {
     type: T.GET_TEAMS_REQUEST,
-    isFetching: true
+    isFetching: true,
   }
 }
 
-function getTeamsSuccess (teams) {
+function getTeamsSuccess(teams) {
   return {
     type: T.GET_TEAMS_SUCCESS,
     isFetching: false,
-    teams: teams
+    teams: teams,
   }
 }
 
-function getTeamsFailure (message) {
+function getTeamsFailure(message) {
   return {
     type: T.GET_TEAMS_FAILURE,
     isFetching: false,
-    message
+    message,
   }
 }
 
-export function getTeams () {
-  return (dispatch) => {
+export function getTeams() {
+  return dispatch => {
     dispatch(getTeamsRequest())
 
-    return api.get(teamUrl()).then(
-      teams => dispatch(getTeamsSuccess(teams)),
-      err => dispatch(getTeamsFailure(err))
-    )
+    return api
+      .get(teamUrl())
+      .then(
+        teams => dispatch(getTeamsSuccess(teams)),
+        err => dispatch(getTeamsFailure(err)),
+      )
   }
 }
 
-function createTeamRequest (team) {
+function createTeamRequest(team) {
   return {
     type: T.CREATE_TEAM_REQUEST,
-    team: team
+    team: team,
   }
 }
 
-function createTeamSuccess (team) {
+function createTeamSuccess(team) {
   return {
     type: T.CREATE_TEAM_SUCCESS,
-    team: team
+    team: team,
   }
 }
 
-function createTeamFailure (team, error) {
+function createTeamFailure(team, error) {
   return {
     type: T.CREATE_TEAM_FAILURE,
     isFetching: false,
     team: team,
-    error: error
+    error: error,
   }
 }
 
-export function createTeam (team) {
-  return (dispatch) => {
+export function createTeam(team) {
+  return dispatch => {
     dispatch(createTeamRequest(team))
 
     const url = teamUrl()
 
-    return api.create(url, team).then(
-      team => dispatch(createTeamSuccess(team)),
-      err => dispatch(createTeamFailure(team, err))
-    )
+    return api
+      .create(url, team)
+      .then(
+        team => dispatch(createTeamSuccess(team)),
+        err => dispatch(createTeamFailure(team, err)),
+      )
   }
 }
 
-function updateTeamRequest (team) {
+function updateTeamRequest(team) {
   return {
     type: T.UPDATE_TEAM_REQUEST,
-    team: team
+    team: team,
   }
 }
 
-function updateTeamSuccess (team) {
+function updateTeamSuccess(team) {
   return {
     type: T.UPDATE_TEAM_SUCCESS,
-    team: team
+    team: team,
   }
 }
 
-function updateTeamFailure (team, error) {
+function updateTeamFailure(team, error) {
   return {
     type: T.UPDATE_TEAM_FAILURE,
     isFetching: false,
     team: team,
-    error: error
+    error: error,
   }
 }
 
-export function updateTeam (team) {
-  return (dispatch) => {
+export function updateTeam(team) {
+  return dispatch => {
     dispatch(updateTeamRequest(team))
     const url = teamUrl(team)
 
-    return api.update(url, team).then(
-      team => dispatch(updateTeamSuccess(team)),
-      err => dispatch(updateTeamFailure(team, err))
-    )
+    return api
+      .update(url, team)
+      .then(
+        team => dispatch(updateTeamSuccess(team)),
+        err => dispatch(updateTeamFailure(team, err)),
+      )
   }
 }
 
-function deleteTeamRequest (team) {
+function deleteTeamRequest(team) {
   return {
     type: T.DELETE_TEAM_REQUEST,
-    team: team
+    team: team,
   }
 }
 
-function deleteTeamSuccess (team) {
+function deleteTeamSuccess(team) {
   return {
     type: T.DELETE_TEAM_SUCCESS,
-    team: team
+    team: team,
   }
 }
 
-function deleteTeamFailure (team, error) {
+function deleteTeamFailure(team, error) {
   return {
     type: T.DELETE_TEAM_FAILURE,
     isFetching: false,
     team: team,
-    error: error
+    error: error,
   }
 }
 
-export function deleteTeam (team) {
-  return (dispatch) => {
+export function deleteTeam(team) {
+  return dispatch => {
     dispatch(deleteTeamRequest(team))
 
     const url = teamUrl(team)
 
-    return api.remove(url).then(
-      team => dispatch(deleteTeamSuccess(team)),
-      err => dispatch(deleteTeamFailure(team, err))
-    )
+    return api
+      .remove(url)
+      .then(
+        team => dispatch(deleteTeamSuccess(team)),
+        err => dispatch(deleteTeamFailure(team, err)),
+      )
   }
 }

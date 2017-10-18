@@ -1,6 +1,6 @@
 global.PUBSWEET_COMPONENTS = []
 
-const {hydrate} = require('../../src/actions').default
+const { hydrate } = require('../../src/actions').default
 
 describe('actions index', () => {
   describe('hydrate', () => {

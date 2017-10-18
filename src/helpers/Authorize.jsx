@@ -8,35 +8,41 @@ import { compose } from 'redux'
 import withAuthsome from './withAuthsome'
 
 export class Authorize extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
-      authorized: false
+      authorized: false,
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.checkAuth(this.props)
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.checkAuth(nextProps)
   }
 
-  async checkAuth ({ authsome, currentUser, operation, object }) {
+  async checkAuth({ authsome, currentUser, operation, object }) {
     try {
-      const authorized = await authsome.can(currentUser && currentUser.id, operation, object)
+      const authorized = await authsome.can(
+        currentUser && currentUser.id,
+        operation,
+        object,
+      )
       this.setState({
-        authorized
+        authorized,
       })
     } catch (err) {
       console.error(err)
     }
   }
 
-  render () {
-    return this.state.authorized ? this.props.children : this.props.unauthorized || null
+  render() {
+    return this.state.authorized
+      ? this.props.children
+      : this.props.unauthorized || null
   }
 }
 
@@ -46,15 +52,15 @@ Authorize.propTypes = {
   object: PropTypes.object,
   children: PropTypes.node,
   unauthorized: PropTypes.node,
-  authsome: PropTypes.object.isRequired
+  authsome: PropTypes.object.isRequired,
 }
 
-function mapState (state) {
+function mapState(state) {
   return {
     teams: state.teams,
     collections: state.collections,
     fragments: state.fragments,
-    currentUser: state.currentUser.user
+    currentUser: state.currentUser.user,
   }
 }
 

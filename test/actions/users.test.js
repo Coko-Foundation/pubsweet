@@ -9,19 +9,19 @@ describe('users actions', () => {
     username: 'fakeymcfake',
     password: 'correct battery horse staple',
     email: 'fakey_mcfake@pseudonymous.com',
-    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128'
+    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128',
   }
 
   describeAction('getUsers', {
     types: {
       request: T.GET_USERS_REQUEST,
       success: T.GET_USERS_SUCCESS,
-      failure: T.GET_USERS_FAILURE
+      failure: T.GET_USERS_FAILURE,
     },
     properties: {
       success: ['users'],
-      failure: ['isFetching', 'message']
-    }
+      failure: ['isFetching', 'message'],
+    },
   })
 
   describeAction('getUser', {
@@ -29,13 +29,13 @@ describe('users actions', () => {
     types: {
       request: T.GET_USER_REQUEST,
       success: T.GET_USER_SUCCESS,
-      failure: T.GET_USER_FAILURE
+      failure: T.GET_USER_FAILURE,
     },
     properties: {
       request: ['user'],
       success: ['user'],
-      failure: ['user', 'error']
-    }
+      failure: ['user', 'error'],
+    },
   })
 
   describeAction('updateUser', {
@@ -44,11 +44,11 @@ describe('users actions', () => {
     types: {
       request: T.UPDATE_USER_REQUEST,
       success: T.UPDATE_USER_SUCCESS,
-      failure: T.UPDATE_USER_FAILURE
+      failure: T.UPDATE_USER_FAILURE,
     },
     properties: {
       success: ['users'],
-      failure: ['isFetching', 'error']
-    }
+      failure: ['isFetching', 'error'],
+    },
   })
 })

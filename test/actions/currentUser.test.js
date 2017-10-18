@@ -9,12 +9,12 @@ describe('currentUser actions', () => {
     types: {
       request: T.GET_CURRENT_USER_REQUEST,
       success: T.GET_CURRENT_USER_SUCCESS,
-      failure: T.GET_CURRENT_USER_FAILURE
+      failure: T.GET_CURRENT_USER_FAILURE,
     },
     properties: {
       request: [],
       success: ['user'],
-      failure: ['error']
-    }
+      failure: ['error'],
+    },
   })
 })

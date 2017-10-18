@@ -28,13 +28,12 @@ const request = (url, options = {}) => {
 
   return fetch(url, options).then(response => {
     if (!response.ok) {
-      return response.text()
-        .then(errorText => {
-          const error = new Error(response.statusText || response.status)
-          error.response = errorText
-          error.statusCode = response.status
-          throw error
-        })
+      return response.text().then(errorText => {
+        const error = new Error(response.statusText || response.status)
+        error.response = errorText
+        error.statusCode = response.status
+        throw error
+      })
     }
 
     return options.parse === false ? response : parse(response)
@@ -51,28 +50,32 @@ export const deprecatedFetch = (url, options = {}) => {
   return request(url, options)
 }
 
-export const get = (url) => request(url, {
-  method: 'GET'
-})
+export const get = url =>
+  request(url, {
+    method: 'GET',
+  })
 
-export const create = (url, data) => request(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
+export const create = (url, data) =>
+  request(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
 
-export const update = (url, data, replace = false) => request(url, {
-  method: replace ? 'PUT' : 'PATCH',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
+export const update = (url, data, replace = false) =>
+  request(url, {
+    method: replace ? 'PUT' : 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
 
-export const remove = (url) => request(url, {
-  method: 'DELETE'
-})
+export const remove = url =>
+  request(url, {
+    method: 'DELETE',
+  })
 
 export default request

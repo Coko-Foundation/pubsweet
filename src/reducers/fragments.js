@@ -11,39 +11,39 @@ import {
   DELETE_FRAGMENT_REQUEST,
   DELETE_FRAGMENT_FAILURE,
   DELETE_FRAGMENT_SUCCESS,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
 } from '../actions/types'
 
 import clone from 'lodash/clone'
 import unset from 'lodash/unset'
 
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   const fragments = clone(state)
 
-  function replaceAll () {
+  function replaceAll() {
     unset(fragments, action.collection.fragments)
-    action.fragments.forEach((fragment) => {
+    action.fragments.forEach(fragment => {
       fragments[fragment.id] = fragment
     })
     return fragments
   }
 
-  function setOne () {
+  function setOne() {
     fragments[action.fragment.id] = action.fragment
 
     return fragments
   }
 
-  function updateOne () {
+  function updateOne() {
     const oldfragment = fragments[action.fragment.id] || {}
     const update = action.update || action.fragment
 
-    fragments[action.fragment.id] = {...oldfragment, ...update}
+    fragments[action.fragment.id] = { ...oldfragment, ...update }
 
     return fragments
   }
 
-  function removeOne () {
+  function removeOne() {
     unset(fragments, action.fragment.id)
     return fragments
   }

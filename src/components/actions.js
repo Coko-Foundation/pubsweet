@@ -10,10 +10,10 @@ module.exports = components
     if (actions && typeof actions === 'function') {
       return actions
     } else if (actions) {
-      throw new Error('Component\'s actions are not exported as a function')
+      throw new Error("Component's actions are not exported as a function")
     }
   })
   // filter out falsy values
   .filter(Boolean)
   .map(actions => actions())
-  .reduce((output, actions) => ({...output, ...actions}), {})
+  .reduce((output, actions) => ({ ...output, ...actions }), {})

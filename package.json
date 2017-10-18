@@ -5,6 +5,7 @@
   "scripts": {
     "compile": "babel -d lib/ src/",
     "lint": "eslint --ext js,jsx src test",
+    "precommit": "lint-staged",
     "test": "jest",
     "testci": "gitlab-ci-multi-runner exec docker test"
   },

@@ -5,30 +5,30 @@ describe('component actions combiner', () => {
     global.PUBSWEET_COMPONENTS = [
       {
         client: {
-          reducers: () => ({default: {name: 'handleCows'}})
-        }
+          reducers: () => ({ default: { name: 'handleCows' } }),
+        },
       },
       {
         frontend: {
-          reducers: () => ({default: {name: 'handleDogs'}})
-        }
+          reducers: () => ({ default: { name: 'handleDogs' } }),
+        },
       },
       {
         client: {
           reducers: {
-            handleDoors: () => 'I am reducer'
-          }
-        }
+            handleDoors: () => 'I am reducer',
+          },
+        },
       },
       {
-        backend: "don't care"
-      }
+        backend: "don't care",
+      },
     ]
     const reducers = require('../../src/components/reducers')
     expect(reducers).toEqual([
-      {handleCows: {name: 'handleCows'}},
-      {handleDogs: {name: 'handleDogs'}},
-      {handleDoors: 'I am reducer'}
+      { handleCows: { name: 'handleCows' } },
+      { handleDogs: { name: 'handleDogs' } },
+      { handleDoors: 'I am reducer' },
     ])
   })
 
@@ -36,9 +36,9 @@ describe('component actions combiner', () => {
     global.PUBSWEET_COMPONENTS = [
       {
         client: {
-          reducers: [() => 'wrong', () => 'export']
-        }
-      }
+          reducers: [() => 'wrong', () => 'export'],
+        },
+      },
     ]
     expect(() => {
       require('../../src/components/reducers')

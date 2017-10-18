@@ -14,16 +14,16 @@ describe('teams reducers', () => {
   it('createTeam success', () => {
     const actual = reducer([], {
       type: T.CREATE_TEAM_SUCCESS,
-      team: mockteam
+      team: mockteam,
     })
     expect(actual).toEqual(mockstate)
   })
 
   it('updateTeam success', () => {
-    const updatedTeam = {...mockteam, foo: 'bar'}
+    const updatedTeam = { ...mockteam, foo: 'bar' }
     const actual = reducer(mockstate, {
       type: T.CREATE_TEAM_SUCCESS,
-      team: updatedTeam
+      team: updatedTeam,
     })
     expect(actual).toEqual([updatedTeam])
   })
@@ -31,7 +31,7 @@ describe('teams reducers', () => {
   it('getTeams success', () => {
     const actual = reducer(mockstate, {
       type: T.GET_TEAMS_SUCCESS,
-      teams: mockstate
+      teams: mockstate,
     })
     expect(actual).toEqual(mockstate)
   })
@@ -39,23 +39,23 @@ describe('teams reducers', () => {
   it('deleteTeam success', () => {
     const actual = reducer(mockstate, {
       type: T.DELETE_TEAM_SUCCESS,
-      team: mockteam
+      team: mockteam,
     })
     expect(actual).toEqual([])
   })
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
-      type: T.LOGOUT_SUCCESS
+      type: T.LOGOUT_SUCCESS,
     })
     expect(actual).toEqual([])
   })
 
   it('getCollectionTeam success', () => {
-    const extraTeam = {id: '4321', name: 'Another team'}
+    const extraTeam = { id: '4321', name: 'Another team' }
     const actual = reducer(mockstate, {
       type: T.GET_COLLECTION_TEAMS_SUCCESS,
-      teams: [extraTeam, mockteam]
+      teams: [extraTeam, mockteam],
     })
     expect(actual).toEqual([mockteam, extraTeam])
   })
@@ -63,7 +63,7 @@ describe('teams reducers', () => {
   it('returns same state for unrecognised action', () => {
     const state = []
     const actual = reducer(state, {
-      type: 'something else'
+      type: 'something else',
     })
     expect(actual).toBe(state)
   })
