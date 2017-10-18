@@ -9,7 +9,7 @@ describe('Validations export', function () {
 
     var fragment = new Fragment({
       title: 'Testing',
-      type: 'blogpost',
+      fragmentType: 'blogpost',
       owners: ['d56153c3-0ddf-44fd-9bec-c4151329ef0a']
     })
 
