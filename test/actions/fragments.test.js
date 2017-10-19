@@ -5,34 +5,34 @@ const describeAction = require('../helpers/describeAction')(actions)
 const T = require('../../src/actions/types')
 
 describe('fragments actions', () => {
-  const mockcol = {id: '123'}
-  const mockfragment = {id: '1234'}
+  const mockcol = { id: '123' }
+  const mockfragment = { id: '1234' }
 
   describeAction('getFragments', {
     firstarg: mockcol,
     types: {
       request: T.GET_FRAGMENTS_REQUEST,
-      success: T.GET_FRAGMENTS_SUCCESS
+      success: T.GET_FRAGMENTS_SUCCESS,
     },
     properties: {
-      success: ['fragments']
-    }
+      success: ['fragments'],
+    },
   })
 
   // get a list of collections, with the specified fields
   describeAction('getFragments', {
     firstarg: mockcol,
     secondarg: {
-      fields: ['type', 'presentation']
+      fields: ['type', 'presentation'],
     },
     types: {
       request: T.GET_FRAGMENTS_REQUEST,
       success: T.GET_FRAGMENTS_SUCCESS,
-      failure: T.GET_FRAGMENTS_FAILURE
+      failure: T.GET_FRAGMENTS_FAILURE,
     },
     properties: {
-      success: ['fragments']
-    }
+      success: ['fragments'],
+    },
   })
 
   describeAction('createFragment', {
@@ -40,17 +40,17 @@ describe('fragments actions', () => {
     secondarg: {
       title: 'mock fragment',
       type: 'some_fragment',
-      owners: []
+      owners: [],
     },
     types: {
       request: T.CREATE_FRAGMENT_REQUEST,
       success: T.CREATE_FRAGMENT_SUCCESS,
-      failure: T.CREATE_FRAGMENT_FAILURE
+      failure: T.CREATE_FRAGMENT_FAILURE,
     },
     properties: {
       success: ['collection', 'fragment'],
-      failure: ['fragment', 'error']
-    }
+      failure: ['fragment', 'error'],
+    },
   })
 
   describeAction('getFragment', {
@@ -59,13 +59,13 @@ describe('fragments actions', () => {
     types: {
       request: T.GET_FRAGMENT_REQUEST,
       success: T.GET_FRAGMENT_SUCCESS,
-      failure: T.GET_FRAGMENT_FAILURE
+      failure: T.GET_FRAGMENT_FAILURE,
     },
     properties: {
       request: ['fragment'],
       success: ['fragment', 'receivedAt'],
-      failure: ['isFetching', 'fragment', 'error']
-    }
+      failure: ['isFetching', 'fragment', 'error'],
+    },
   })
 
   describeAction('updateFragment', {
@@ -74,17 +74,17 @@ describe('fragments actions', () => {
       id: '1234',
       title: 'modded fragment',
       type: 'some_fragment',
-      owners: []
+      owners: [],
     },
     types: {
       request: T.UPDATE_FRAGMENT_REQUEST,
       success: T.UPDATE_FRAGMENT_SUCCESS,
-      failure: T.UPDATE_FRAGMENT_FAILURE
+      failure: T.UPDATE_FRAGMENT_FAILURE,
     },
     properties: {
       success: ['fragment', 'receivedAt'],
-      failure: ['fragment', 'error']
-    }
+      failure: ['fragment', 'error'],
+    },
   })
 
   describeAction('deleteFragment', {
@@ -93,12 +93,12 @@ describe('fragments actions', () => {
     types: {
       request: T.DELETE_FRAGMENT_REQUEST,
       success: T.DELETE_FRAGMENT_SUCCESS,
-      failure: T.DELETE_FRAGMENT_FAILURE
+      failure: T.DELETE_FRAGMENT_FAILURE,
     },
     properties: {
       request: ['fragment', 'update'],
       success: ['fragment', 'collection'],
-      failure: ['fragment', 'error', 'update']
-    }
+      failure: ['fragment', 'error', 'update'],
+    },
   })
 })

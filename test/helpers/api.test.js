@@ -7,14 +7,14 @@ const api = require('../../src/helpers/api')
 describe('API helper', () => {
   beforeAll(() => {
     global.window.localStorage = {
-      getItem: jest.fn(() => 'tok123')
+      getItem: jest.fn(() => 'tok123'),
     }
   })
 
   it('makes a GET request', async () => {
     nock(endpoint)
       .get('/thing')
-      .reply(200, 'A thing', {'content-type': 'text/plain'})
+      .reply(200, 'A thing', { 'content-type': 'text/plain' })
 
     const actual = await api.get('/thing')
     expect(actual).toBe('A thing')
@@ -23,40 +23,40 @@ describe('API helper', () => {
   it('makes a POST request', async () => {
     nock(endpoint)
       .post('/thing', {
-        some: 'data'
+        some: 'data',
       })
-      .reply(200, 'A new thing', {'content-type': 'text/plain'})
+      .reply(200, 'A new thing', { 'content-type': 'text/plain' })
 
-    const actual = await api.create('/thing', {some: 'data'})
+    const actual = await api.create('/thing', { some: 'data' })
     expect(actual).toBe('A new thing')
   })
 
   it('makes a PATCH request', async () => {
     nock(endpoint)
       .patch('/thing/1', {
-        some: 'data'
+        some: 'data',
       })
-      .reply(200, 'A partially updated thing', {'content-type': 'text/plain'})
+      .reply(200, 'A partially updated thing', { 'content-type': 'text/plain' })
 
-    const actual = await api.update('/thing/1', {some: 'data'})
+    const actual = await api.update('/thing/1', { some: 'data' })
     expect(actual).toBe('A partially updated thing')
   })
 
   it('makes a PUT request', async () => {
     nock(endpoint)
       .put('/thing/1', {
-        some: 'data'
+        some: 'data',
       })
-      .reply(200, 'An updated thing', {'content-type': 'text/plain'})
+      .reply(200, 'An updated thing', { 'content-type': 'text/plain' })
 
-    const actual = await api.update('/thing/1', {some: 'data'}, true)
+    const actual = await api.update('/thing/1', { some: 'data' }, true)
     expect(actual).toBe('An updated thing')
   })
 
   it('makes a DELETE request', async () => {
     nock(endpoint)
       .delete('/thing/1')
-      .reply(200, 'No thing', {'content-type': 'text/plain'})
+      .reply(200, 'No thing', { 'content-type': 'text/plain' })
 
     const actual = await api.remove('/thing/1')
     expect(actual).toBe('No thing')
@@ -66,7 +66,7 @@ describe('API helper', () => {
     const expected = { oh: 'yeah' }
     nock(endpoint)
       .get('/thing')
-      .reply(200, expected, {'content-type': 'application/json'})
+      .reply(200, expected, { 'content-type': 'application/json' })
 
     const actual = await api.get('/thing')
     expect(actual).toEqual(expected)
@@ -75,11 +75,11 @@ describe('API helper', () => {
   it('includes token in header', async () => {
     nock(endpoint, {
       reqheaders: {
-        'authorization': 'Bearer tok123'
-      }
+        authorization: 'Bearer tok123',
+      },
     })
       .get('/thing')
-      .reply(200, 'OK', {'content-type': ''})
+      .reply(200, 'OK', { 'content-type': '' })
 
     const actual = await api.get('/thing')
     expect(actual).toEqual('OK')
@@ -88,7 +88,7 @@ describe('API helper', () => {
   it('wraps HTTP errors', async () => {
     nock(endpoint)
       .get('/thing')
-      .reply(500, 'Yikes!', {'content-type': ''})
+      .reply(500, 'Yikes!', { 'content-type': '' })
 
     try {
       await api.get('/thing')
@@ -107,12 +107,12 @@ describe('API helper', () => {
 
     const response = await api.default('/thing', {
       method: 'GET',
-      parse: false
+      parse: false,
     })
 
     expect(response).toMatchObject({
       ok: true,
-      statusText: 'No Content'
+      statusText: 'No Content',
     })
   })
 })

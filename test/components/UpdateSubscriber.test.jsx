@@ -6,11 +6,10 @@ import { UpdateSubscriber } from '../../src/components/UpdateSubscriber'
 
 global.PUBSWEET_COMPONENTS = []
 
-function makeWrapper (props = {}) {
-  const wrapper = shallow(<UpdateSubscriber
-    currentUser={{}}
-    handleUpdate={jest.fn()}
-    {...props} />)
+function makeWrapper(props = {}) {
+  const wrapper = shallow(
+    <UpdateSubscriber currentUser={{}} handleUpdate={jest.fn()} {...props} />,
+  )
   // did* lifecycle methods don't get automatically called on shallow render
   wrapper.instance().componentDidMount()
   return wrapper
@@ -19,7 +18,7 @@ function makeWrapper (props = {}) {
 describe('<UpdateSubscriber/>', () => {
   beforeAll(() => {
     global.window.localStorage = {
-      getItem: jest.fn(() => 'tok')
+      getItem: jest.fn(() => 'tok'),
     }
     global.window.EventSource = EventSourceMock
   })
@@ -66,9 +65,11 @@ describe('<UpdateSubscriber/>', () => {
 
     sources['/updates?access_token=tok'].emit('message', {
       origin: 'null',
-      data: '{"action":"collection:create", "data":{"stuff":42}}'
+      data: '{"action":"collection:create", "data":{"stuff":42}}',
     })
-    expect(handleUpdate).toHaveBeenCalledWith('CREATE_COLLECTION_SUCCESS', {stuff: 42})
+    expect(handleUpdate).toHaveBeenCalledWith('CREATE_COLLECTION_SUCCESS', {
+      stuff: 42,
+    })
   })
 
   // TODO enable this test once PR is merged
@@ -80,7 +81,7 @@ describe('<UpdateSubscriber/>', () => {
 
     sources['/updates?access_token=tok'].emit('message', {
       origin: 'null',
-      data: '{}'
+      data: '{}',
     })
     expect(handleUpdate).not.toHaveBeenCalled()
   })
@@ -91,7 +92,7 @@ describe('<UpdateSubscriber/>', () => {
     sources['/updates?access_token=tok'].emit('open')
     expect(wrapper.html()).toContain('color:gray')
 
-    wrapper.setProps({currentUser: {}}).update()
+    wrapper.setProps({ currentUser: {} }).update()
     sources['/updates?access_token=tok'].emit('open')
     expect(wrapper.html()).toContain('color:green')
   })

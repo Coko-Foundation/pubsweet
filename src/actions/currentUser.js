@@ -1,34 +1,33 @@
 import * as api from '../helpers/api'
 import * as T from './types'
 
-function getCurrentUserRequest () {
+function getCurrentUserRequest() {
   return {
-    type: T.GET_CURRENT_USER_REQUEST
+    type: T.GET_CURRENT_USER_REQUEST,
   }
 }
 
-function getCurrentUserSuccess (user) {
+function getCurrentUserSuccess(user) {
   return {
     type: T.GET_CURRENT_USER_SUCCESS,
-    user
+    user,
   }
 }
 
-function getCurrentUserFailure (error) {
+function getCurrentUserFailure(error) {
   return {
     type: T.GET_CURRENT_USER_FAILURE,
-    error
+    error,
   }
 }
 
-export function getCurrentUser () {
+export function getCurrentUser() {
   return dispatch => {
     dispatch(getCurrentUserRequest())
 
-    return api.get('/users/authenticate').then(
-      user => dispatch(getCurrentUserSuccess(user))
-    ).catch(
-      err => dispatch(getCurrentUserFailure(err))
-    )
+    return api
+      .get('/users/authenticate')
+      .then(user => dispatch(getCurrentUserSuccess(user)))
+      .catch(err => dispatch(getCurrentUserFailure(err)))
   }
 }

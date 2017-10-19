@@ -13,5 +13,5 @@ export default {
   fileUpload,
   fragments,
   teams,
-  users
+  users,
 }

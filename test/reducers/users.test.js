@@ -14,92 +14,95 @@ describe('users reducers', () => {
     username: 'fakeymcfake',
     password: 'correct battery horse staple',
     email: 'fakey_mcfake@pseudonymous.com',
-    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128'
+    id: '57d0fc8e-ece9-47bf-87d3-7935326b0128',
   }
 
-  const usermod = {...user, email: 'new@email.com'}
+  const usermod = { ...user, email: 'new@email.com' }
 
   const mockstate = { users: [user] }
 
   it('getUsers success', () => {
     const actual = reducer(undefined, {
       type: T.GET_USERS_SUCCESS,
-      users: [user]
+      users: [user],
     })
     expect(actual).toEqual({
       isFetching: false,
-      users: [user]
+      users: [user],
     })
   })
 
   it('getUsers request', () => {
     const actual = reducer(undefined, {
-      type: T.GET_USERS_REQUEST
+      type: T.GET_USERS_REQUEST,
     })
     expect(actual).toEqual({
       isFetching: true,
-      users: []
+      users: [],
     })
   })
 
   it('getUser success', () => {
-    const actual = reducer({ users: [] }, {
-      type: T.GET_USER_SUCCESS,
-      user: user
-    })
+    const actual = reducer(
+      { users: [] },
+      {
+        type: T.GET_USER_SUCCESS,
+        user: user,
+      },
+    )
     expect(actual).toEqual({
       users: [user],
-      isFetching: false
+      isFetching: false,
     })
   })
 
   it('updateUser request', () => {
     const actual = reducer(mockstate, {
       type: T.UPDATE_USER_REQUEST,
-      user: usermod
+      user: usermod,
     })
     expect(actual).toEqual({
       users: [user],
-      isFetching: true
+      isFetching: true,
     })
   })
 
   it('updateUser success', () => {
     const actual = reducer(mockstate, {
       type: T.UPDATE_USER_SUCCESS,
-      user: usermod
+      user: usermod,
     })
     expect(actual).toEqual({
       users: [usermod],
-      isFetching: false
+      isFetching: false,
     })
   })
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
       type: T.LOGOUT_SUCCESS,
-      user: usermod
+      user: usermod,
     })
     expect(actual).toEqual({
       users: [],
-      isFetching: false
+      isFetching: false,
     })
   })
 
   it('getCurrentUser success adds user to users array', () => {
     const actual = reducer(mockstate, {
       type: GET_CURRENT_USER_SUCCESS,
-      user
+      user,
     })
     expect(actual).toEqual({
-      users: [user]
+      users: [user],
     })
   })
 
   it('returns same state for unrecognised action', () => {
     const state = {}
     const actual = reducer(state, {
-      type: 'something else'
+      type: 'something else',
     })
     expect(actual).toBe(state)
   })

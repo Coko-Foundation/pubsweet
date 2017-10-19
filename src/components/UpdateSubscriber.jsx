@@ -14,33 +14,33 @@ const actionMap = {
   'collection:delete': T.DELETE_COLLECTION_SUCCESS,
   'fragment:create': T.CREATE_FRAGMENT_SUCCESS,
   'fragment:patch': T.UPDATE_FRAGMENT_SUCCESS,
-  'fragment:delete': T.DELETE_FRAGMENT_SUCCESS
+  'fragment:delete': T.DELETE_FRAGMENT_SUCCESS,
 }
 
 export class UpdateSubscriber extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
       connected: false,
-      visible: false
+      visible: false,
     }
 
     this.listeners = {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.subscribe(this.props)
-    this.setState({visible: this.visible()})
+    this.setState({ visible: this.visible() })
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (!this.eventSource) {
       this.subscribe(nextProps)
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.eventSource) {
       this.removeAllEventListeners()
       this.eventSource.close()
@@ -48,12 +48,12 @@ export class UpdateSubscriber extends Component {
     }
   }
 
-  visible () {
+  visible() {
     return _.get('pubsweet-client.update-subscriber.visible', config, false)
   }
 
   // if haven't received a heartbeat for 30 seconds, try to reconnect
-  monitor () {
+  monitor() {
     if (this.heartbeat) {
       window.clearTimeout(this.heartbeat)
     }
@@ -64,8 +64,8 @@ export class UpdateSubscriber extends Component {
     }, 30000)
   }
 
-  subscribe (props) {
-    const {currentUser, handleUpdate} = props
+  subscribe(props) {
+    const { currentUser, handleUpdate } = props
 
     if (currentUser) {
       // ignore if not supported
@@ -93,11 +93,11 @@ export class UpdateSubscriber extends Component {
 
         switch (this.eventSource.readyState) {
           case 0: // CONNECTING
-            this.setState({connected: false})
+            this.setState({ connected: false })
             break
 
           case 2: // CLOSED
-            this.setState({connected: false})
+            this.setState({ connected: false })
             this.monitor() // try again in a while if not connected
             break
         }
@@ -106,7 +106,7 @@ export class UpdateSubscriber extends Component {
       this.listeners.close = () => {
         // console.log('close')
 
-        this.setState({connected: false})
+        this.setState({ connected: false })
         // this.monitor() // don't try to reconnect, as "close" without error is deliberate
       }
 
@@ -118,7 +118,7 @@ export class UpdateSubscriber extends Component {
           return
         }
 
-        const {action, data} = JSON.parse(event.data)
+        const { action, data } = JSON.parse(event.data)
 
         const actionType = actionMap[action]
 
@@ -142,35 +142,38 @@ export class UpdateSubscriber extends Component {
     }
   }
 
-  removeAllEventListeners () {
+  removeAllEventListeners() {
     Object.keys(this.listeners).forEach(key => {
       this.eventSource.removeEventListener(key, this.listeners[key])
     })
   }
 
-  render () {
-    const {connected, visible} = this.state
+  render() {
+    const { connected, visible } = this.state
 
     if (!visible) return null
 
     return (
-      <i className="fa fa-wifi" style={{
-        color: connected ? 'green' : 'gray'
-      }} />
+      <i
+        className="fa fa-wifi"
+        style={{
+          color: connected ? 'green' : 'gray',
+        }}
+      />
     )
   }
 }
 
 UpdateSubscriber.propTypes = {
   currentUser: PropTypes.object,
-  handleUpdate: PropTypes.func
+  handleUpdate: PropTypes.func,
 }
 
 export default connect(
   state => ({
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   }),
   dispatch => ({
-    handleUpdate: (type, body) => dispatch({type, ...body})
-  })
+    handleUpdate: (type, body) => dispatch({ type, ...body }),
+  }),
 )(UpdateSubscriber)

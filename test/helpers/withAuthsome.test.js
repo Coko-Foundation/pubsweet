@@ -11,7 +11,7 @@ describe('withAuthsome higher order component', () => {
   it('injects authsome instance as prop', () => {
     const store = createStore()
     const Component = withAuthsome()(() => null)
-    const wrapper = shallow(<Component store={store}/>)
+    const wrapper = shallow(<Component store={store} />)
 
     const authsome = wrapper.prop('authsome')
     expect(authsome).toBeInstanceOf(Authsome)
@@ -22,11 +22,11 @@ describe('withAuthsome higher order component', () => {
     const user2 = { id: 2 }
     const store = createStore({
       users: {
-        users: [user1, user2]
-      }
+        users: [user1, user2],
+      },
     })
     const Component = withAuthsome()(() => null)
-    const wrapper = shallow(<Component store={store}/>)
+    const wrapper = shallow(<Component store={store} />)
 
     const { context } = wrapper.prop('authsome')
     expect(context.models.User.find(1)).toEqual(user1)

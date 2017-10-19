@@ -14,7 +14,7 @@ module.exports = components
     if (typeof reducers === 'function') {
       const reducer = reducers()
       return {
-        [reducer.default.name]: reducer.default
+        [reducer.default.name]: reducer.default,
       }
     } else if (isPlainObject(reducers)) {
       // component exports an object where each value is a function
@@ -24,5 +24,5 @@ module.exports = components
       }, {})
     }
 
-    throw new Error('Component\'s reducers are exported incorrectly')
+    throw new Error("Component's reducers are exported incorrectly")
   })

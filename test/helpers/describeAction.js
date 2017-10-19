@@ -3,27 +3,32 @@ const api = require('../../src/helpers/api')
 
 const mockGetState = () => {
   return {
-    currentUser: {}
+    currentUser: {},
   }
 }
 
-function mockApi (succeed = true) {
-  const implementation = () => succeed ? Promise.resolve({}) : Promise.reject(new Error({}))
+function mockApi(succeed = true) {
+  const implementation = () =>
+    succeed ? Promise.resolve({}) : Promise.reject(new Error({}))
   Object.keys(api)
     .filter(method => typeof api[method] === 'function')
-    .forEach(method => jest.spyOn(api, method).mockImplementation(implementation))
+    .forEach(method =>
+      jest.spyOn(api, method).mockImplementation(implementation),
+    )
 }
 
 // custom Jest matcher
 expect.extend({
-  toHaveProperties (object, expectedKeys) {
+  toHaveProperties(object, expectedKeys) {
     const actualKeys = Object.keys(object)
     const pass = expectedKeys.every(key => actualKeys.includes(key))
     return {
-      message: `Expected object ${pass ? 'not to' : 'to'} have properties: ${expectedKeys.join(', ')}`,
-      pass
+      message: `Expected object ${pass
+        ? 'not to'
+        : 'to'} have properties: ${expectedKeys.join(', ')}`,
+      pass,
     }
-  }
+  },
 })
 
 const describeAction = actions => (key, opts) => {
@@ -63,9 +68,7 @@ const describeAction = actions => (key, opts) => {
 
     if (opts.types.request) {
       const properties = opts.properties.request
-      const propmsg = properties
-        ? `with [${properties.join(', ')}] `
-        : ''
+      const propmsg = properties ? `with [${properties.join(', ')}] ` : ''
 
       it(`dispatches ${key}Request ${propmsg}immediately`, () => {
         const actions = []
@@ -83,9 +86,7 @@ const describeAction = actions => (key, opts) => {
 
     if (opts.types.success) {
       const properties = opts.properties.success
-      const propmsg = properties
-        ? `with [${properties.join(', ')}] `
-        : ''
+      const propmsg = properties ? `with [${properties.join(', ')}] ` : ''
 
       it(`dispatches ${key}Success ${propmsg}on successful response`, async () => {
         const actions = []
@@ -103,9 +104,7 @@ const describeAction = actions => (key, opts) => {
 
     if (opts.types.failure) {
       const properties = opts.properties.failure
-      const propmsg = properties
-        ? `with [${properties.join(', ')}] `
-        : ''
+      const propmsg = properties ? `with [${properties.join(', ')}] ` : ''
 
       it(`dispatches ${key}Failure ${propmsg}on failed response`, async () => {
         // make API reject every request

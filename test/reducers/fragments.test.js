@@ -10,13 +10,13 @@ describe('fragments reducers', () => {
     expect(allReducers.fragments).toBe(reducer)
   })
 
-  const mockcol = {id: '123'}
+  const mockcol = { id: '123' }
   mockcol.fragments = []
 
   const mockfrag = {
     title: 'mock fragment',
     type: 'some_fragment',
-    owners: []
+    owners: [],
   }
   const mockstate = {}
   mockstate[mockfrag.id] = mockfrag
@@ -24,7 +24,7 @@ describe('fragments reducers', () => {
   const mockfragmod = {
     title: 'modded fragment',
     type: 'some_fragment',
-    owners: []
+    owners: [],
   }
   const mockstatemod = {}
   mockstatemod[mockfrag.id] = mockfragmod
@@ -36,17 +36,20 @@ describe('fragments reducers', () => {
     const actual = reducer(mockstate, {
       type: T.GET_FRAGMENT_REQUEST,
       collection: colwithfrag,
-      fragment: mockfragmod
+      fragment: mockfragmod,
     })
     expect(actual).toEqual({})
   })
 
   it('getOne success', () => {
-    const actual = reducer({}, {
-      type: T.GET_FRAGMENT_SUCCESS,
-      collection: colwithfrag,
-      fragment: mockfragmod
-    })
+    const actual = reducer(
+      {},
+      {
+        type: T.GET_FRAGMENT_SUCCESS,
+        collection: colwithfrag,
+        fragment: mockfragmod,
+      },
+    )
     expect(actual).toEqual(mockstatemod)
   })
 
@@ -54,7 +57,7 @@ describe('fragments reducers', () => {
     const actual = reducer(mockstate, {
       type: T.UPDATE_FRAGMENT_SUCCESS,
       collection: colwithfrag,
-      fragment: mockfragmod
+      fragment: mockfragmod,
     })
     expect(actual).toEqual(mockstatemod)
   })
@@ -63,7 +66,7 @@ describe('fragments reducers', () => {
     const actual = reducer(mockstate, {
       type: T.DELETE_FRAGMENT_SUCCESS,
       collection: colwithfrag,
-      fragment: mockfrag
+      fragment: mockfrag,
     })
     expect(actual).toEqual({})
   })
@@ -72,14 +75,14 @@ describe('fragments reducers', () => {
     const actual = reducer(mockstate, {
       type: T.GET_FRAGMENTS_SUCCESS,
       collection: colwithfrag,
-      fragments: [mockfragmod]
+      fragments: [mockfragmod],
     })
     expect(actual).toEqual(mockstatemod)
   })
 
   it('logout success', () => {
     const actual = reducer(mockstate, {
-      type: T.LOGOUT_SUCCESS
+      type: T.LOGOUT_SUCCESS,
     })
     expect(actual).toEqual({})
   })
@@ -87,7 +90,7 @@ describe('fragments reducers', () => {
   it('returns same state for unrecognised action', () => {
     const state = {}
     const actual = reducer(state, {
-      type: 'something else'
+      type: 'something else',
     })
     expect(actual).toBe(state)
   })

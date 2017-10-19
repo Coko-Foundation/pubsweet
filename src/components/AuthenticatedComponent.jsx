@@ -2,30 +2,27 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import actions from '../actions'
 
 export class AuthenticatedComponent extends React.Component {
-  componentWillMount () {
-    this.props.actions.getCurrentUser().then(
-      () => this.checkAuth(this.props)
-    )
+  componentWillMount() {
+    this.props.getCurrentUser().then(() => this.checkAuth(this.props))
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.checkAuth(nextProps)
   }
 
-  checkAuth ({isFetching, isAuthenticated}) {
+  checkAuth({ isFetching, isAuthenticated }) {
     if (!isFetching && !isAuthenticated) {
       const redirectAfterLogin = this.props.location.pathname
       this.props.pushState(`/login?next=${redirectAfterLogin}`)
     }
   }
 
-  render () {
+  render() {
     return this.props.children
   }
 }
@@ -33,26 +30,24 @@ export class AuthenticatedComponent extends React.Component {
 AuthenticatedComponent.propTypes = {
   children: PropTypes.node,
   location: PropTypes.object,
-  actions: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
-  pushState: PropTypes.func.isRequired
+  pushState: PropTypes.func.isRequired,
 }
 
-function mapState (state) {
+function mapState(state) {
   return {
     isFetching: state.currentUser.isFetching,
-    isAuthenticated: state.currentUser.isAuthenticated
+    isAuthenticated: state.currentUser.isAuthenticated,
   }
 }
 
-function mapDispatch (dispatch) {
-  return {
-    pushState: bindActionCreators(push, dispatch),
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-const ConnectedAuthenticatedComponent = withRouter(connect(mapState, mapDispatch)(AuthenticatedComponent))
+const ConnectedAuthenticatedComponent = withRouter(
+  connect(mapState, {
+    getCurrentUser: actions.getCurrentUser,
+    pushState: push,
+  })(AuthenticatedComponent),
+)
 
 export default ConnectedAuthenticatedComponent

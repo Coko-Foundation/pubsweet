@@ -5,29 +5,33 @@ describe('component actions combiner', () => {
     global.PUBSWEET_COMPONENTS = [
       {
         client: {
-          actions: () => ({cowSay: 'moo', dogSay: 'woof'})
-        }
+          actions: () => ({ cowSay: 'moo', dogSay: 'woof' }),
+        },
       },
       {
         frontend: {
-          actions: () => ({squirrelEat: 'nuts'})
-        }
+          actions: () => ({ squirrelEat: 'nuts' }),
+        },
       },
       {
-        backend: "don't care"
-      }
+        backend: "don't care",
+      },
     ]
     const actions = require('../../src/components/actions')
-    expect(actions).toEqual({cowSay: 'moo', dogSay: 'woof', squirrelEat: 'nuts'})
+    expect(actions).toEqual({
+      cowSay: 'moo',
+      dogSay: 'woof',
+      squirrelEat: 'nuts',
+    })
   })
 
   it('throws if actions is exported incorrectly', () => {
     global.PUBSWEET_COMPONENTS = [
       {
         client: {
-          actions: [() => 'wrong', () => 'export']
-        }
-      }
+          actions: [() => 'wrong', () => 'export'],
+        },
+      },
     ]
 
     expect(() => {

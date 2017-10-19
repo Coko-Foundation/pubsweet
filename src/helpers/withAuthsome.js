@@ -3,28 +3,29 @@ import { connect } from 'react-redux'
 import config from 'config'
 
 // higher order component to inject authsome into a component
-export default function withAuthsome () {
+export default function withAuthsome() {
   const authsome = new Authsome(config.authsome, {})
 
-  function mapState (state) {
+  function mapState(state) {
     authsome.context = {
       // fetch entities from store instead of database
       models: {
         Collection: {
-          find: id => state.collections.find(collection => collection.id === id)
+          find: id =>
+            state.collections.find(collection => collection.id === id),
         },
         Fragment: {
-          find: id => state.fragments[id]
+          find: id => state.fragments[id],
         },
         Team: {
-          find: id => state.teams.find(team => team.id === id)
+          find: id => state.teams.find(team => team.id === id),
         },
         User: {
           find: id => {
             return state.users.users.find(user => user.id === id)
-          }
-        }
-      }
+          },
+        },
+      },
     }
 
     return { authsome }

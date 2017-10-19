@@ -9,13 +9,13 @@ describe('teams actions', () => {
     types: {
       request: T.GET_TEAMS_REQUEST,
       success: T.GET_TEAMS_SUCCESS,
-      failure: T.GET_TEAMS_FAILURE
+      failure: T.GET_TEAMS_FAILURE,
     },
     properties: {
       request: ['isFetching'],
       success: ['isFetching', 'teams'],
-      failure: ['isFetching', 'message']
-    }
+      failure: ['isFetching', 'message'],
+    },
   })
 
   describeAction('createTeam', {
@@ -23,63 +23,63 @@ describe('teams actions', () => {
       name: 'My readers',
       teamType: {
         name: 'Readers',
-        permissions: 'read'
+        permissions: 'read',
       },
       object: {
         kind: 'blogpost',
         source: '<blog></blog>',
-        presentation: '<p></p>'
-      }
+        presentation: '<p></p>',
+      },
     },
     types: {
       request: T.CREATE_TEAM_REQUEST,
       success: T.CREATE_TEAM_SUCCESS,
-      failure: T.CREATE_TEAM_FAILURE
+      failure: T.CREATE_TEAM_FAILURE,
     },
     properties: {
       request: ['team'],
       success: ['team'],
-      failure: ['isFetching', 'team', 'error']
-    }
+      failure: ['isFetching', 'team', 'error'],
+    },
   })
 
   describeAction('updateTeam', {
-    firstarg: {id: 234},
+    firstarg: { id: 234 },
     secondard: {
       name: 'My readers',
       teamType: {
         name: 'Readers',
-        permissions: 'read'
+        permissions: 'read',
       },
       object: {
         kind: 'blogpost',
         source: '<blog></blog>',
-        presentation: '<p></p>'
-      }
+        presentation: '<p></p>',
+      },
     },
     types: {
       request: T.UPDATE_TEAM_REQUEST,
       success: T.UPDATE_TEAM_SUCCESS,
-      failure: T.UPDATE_TEAM_FAILURE
+      failure: T.UPDATE_TEAM_FAILURE,
     },
     properties: {
       request: ['team'],
       success: ['team'],
-      failure: ['isFetching', 'team', 'error']
-    }
+      failure: ['isFetching', 'team', 'error'],
+    },
   })
 
   describeAction('deleteTeam', {
-    firstarg: {id: 234},
+    firstarg: { id: 234 },
     types: {
       request: T.DELETE_TEAM_REQUEST,
       success: T.DELETE_TEAM_SUCCESS,
-      failure: T.DELETE_TEAM_FAILURE
+      failure: T.DELETE_TEAM_FAILURE,
     },
     properties: {
       request: ['team'],
       success: ['team'],
-      failure: ['isFetching', 'team', 'error']
-    }
+      failure: ['isFetching', 'team', 'error'],
+    },
   })
 })

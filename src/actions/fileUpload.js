@@ -1,31 +1,31 @@
 import request from '../helpers/api'
 import * as T from './types'
 
-function fileUploadRequest () {
+function fileUploadRequest() {
   return {
     type: T.FILE_UPLOAD_REQUEST,
-    isFetching: true
+    isFetching: true,
   }
 }
 
-function fileUploadSuccess (file) {
+function fileUploadSuccess(file) {
   return {
     type: T.FILE_UPLOAD_SUCCESS,
     isFetching: false,
-    file: file
+    file: file,
   }
 }
 
-function fileUploadFailure (message) {
+function fileUploadFailure(message) {
   return {
     type: T.FILE_UPLOAD_FAILURE,
     isFetching: false,
-    error: message
+    error: message,
   }
 }
 
-export function fileUpload (file) {
-  return (dispatch) => {
+export function fileUpload(file) {
+  return dispatch => {
     dispatch(fileUploadRequest())
 
     const data = new FormData()
@@ -34,16 +34,15 @@ export function fileUpload (file) {
     let opts = {
       method: 'POST',
       headers: {
-        'Accept': 'text/plain' // the response is a URL
+        Accept: 'text/plain', // the response is a URL
         // TODO: set the Location header of the response instead
       },
-      body: data
+      body: data,
     }
 
-    return request('/upload', opts)
-      .then(
-        file => dispatch(fileUploadSuccess(file)),
-        err => dispatch(fileUploadFailure(err))
-      )
+    return request('/upload', opts).then(
+      file => dispatch(fileUploadSuccess(file)),
+      err => dispatch(fileUploadFailure(err)),
+    )
   }
 }

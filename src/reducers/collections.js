@@ -10,7 +10,7 @@ import {
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_SUCCESS,
   DELETE_FRAGMENT_SUCCESS,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
 } from '../actions/types'
 
 import find from 'lodash/find'
@@ -20,19 +20,19 @@ import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import without from 'lodash/without'
 
-export default function (state = [], action) {
+export default function(state = [], action) {
   const collections = clone(state)
 
   // TODO: store entities as an object or immutable Map, with the id as the key
-  function getCollection () {
+  function getCollection() {
     return find(collections, { id: action.collection.id })
   }
 
-  function getCollectionIndex () {
-    return findIndex(collections, {id: action.collection.id})
+  function getCollectionIndex() {
+    return findIndex(collections, { id: action.collection.id })
   }
 
-  function addCollection () {
+  function addCollection() {
     // only add the collection if it hasn't already been added
     if (!getCollection()) {
       collections.push(action.collection)
@@ -41,7 +41,7 @@ export default function (state = [], action) {
     return collections
   }
 
-  function setCollection () {
+  function setCollection() {
     const index = getCollectionIndex()
 
     // NOTE: this is necessary because the collections state is an array
@@ -54,40 +54,40 @@ export default function (state = [], action) {
     return collections
   }
 
-  function updateCollection () {
+  function updateCollection() {
     const index = getCollectionIndex()
 
-    collections[index] = {...collections[index], ...action.update}
+    collections[index] = { ...collections[index], ...action.update }
 
     return collections
   }
 
-  function deleteCollection () {
+  function deleteCollection() {
     const collection = getCollection()
 
     return without(collections, collection)
   }
 
-  function addFragments () {
+  function addFragments() {
     const collection = getCollection()
 
     if (collection) {
       collection.fragments = union(
         collection.fragments,
-        (action.fragments || [action.fragment]).map(fragment => fragment.id)
+        (action.fragments || [action.fragment]).map(fragment => fragment.id),
       )
     }
 
     return collections
   }
 
-  function removeFragments () {
+  function removeFragments() {
     const collection = getCollection()
 
     if (collection) {
       collection.fragments = difference(
         collection.fragments,
-        (action.fragments || [action.fragment]).map(fragment => fragment.id)
+        (action.fragments || [action.fragment]).map(fragment => fragment.id),
       )
     }
 

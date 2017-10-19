@@ -4,10 +4,12 @@ import { Authorize } from '../../src/helpers/Authorize'
 
 global.PUBSWEET_COMPONENTS = []
 
-function makeWrapper (props = {}) {
-  return shallow(<Authorize currentUser={{ id: 'user1' }} {...props}>
-    <div/>
-  </Authorize>)
+function makeWrapper(props = {}) {
+  return shallow(
+    <Authorize currentUser={{ id: 'user1' }} {...props}>
+      <div />
+    </Authorize>,
+  )
 }
 
 describe('<Authorize/>', () => {
@@ -23,7 +25,7 @@ describe('<Authorize/>', () => {
       rejectMode = reject
     })
     mode = jest.fn(() => modePromise)
-    authsome = {can: mode}
+    authsome = { can: mode }
   })
 
   it('is empty when not authorized', async () => {
@@ -41,7 +43,7 @@ describe('<Authorize/>', () => {
   })
 
   it('optionally shows alternative content when not authorized', async () => {
-    const wrapper = makeWrapper({ authsome, unauthorized: <span/> })
+    const wrapper = makeWrapper({ authsome, unauthorized: <span /> })
 
     resolveMode(false)
     await modePromise
@@ -78,7 +80,7 @@ describe('<Authorize/>', () => {
     expect(mode).toHaveBeenCalled()
     mode.mockClear()
 
-    wrapper.setProps({ authsome, currentUser: {id: 'user2'} })
+    wrapper.setProps({ authsome, currentUser: { id: 'user2' } })
     expect(mode).toHaveBeenCalled()
   })
 })
