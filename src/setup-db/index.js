@@ -8,12 +8,14 @@ const dbPath = require('../helpers/db-path')
 const PouchDB = require('pouchdb')
 const { validateSetupDbConfig } = require('../validations')
 
-const checkNoDb = async (mergedDbConfig) => {
+const checkNoDb = async mergedDbConfig => {
   const exists = await dbExists()
   if (!exists) return null
 
   if (!mergedDbConfig.clobber) {
-    logger.error('If you want to overwrite the database, set clobber option to true')
+    logger.error(
+      'If you want to overwrite the database, set clobber option to true',
+    )
     throw new Error('Target database already exists, not clobbering')
   }
 
@@ -22,8 +24,11 @@ const checkNoDb = async (mergedDbConfig) => {
   logger.info('Removed DB at', dbPath())
 }
 
-module.exports = async (setupDbConfig) => {
-  const mergedDbConfig = _.merge(config.has('dbManager') ? config.get('dbManager') : {}, setupDbConfig)
+module.exports = async setupDbConfig => {
+  const mergedDbConfig = _.merge(
+    config.has('dbManager') ? config.get('dbManager') : {},
+    setupDbConfig,
+  )
   config.util.setModuleDefaults(mergedDbConfig)
   validateSetupDbConfig(mergedDbConfig)
   try {
