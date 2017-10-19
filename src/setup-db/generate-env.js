@@ -6,7 +6,11 @@ const _ = require('lodash/fp')
 const config = require('config')
 
 module.exports = () => {
-  const configFilePath = path.join(process.cwd(), 'config', `local-${config.util.getEnv('NODE_ENV')}.json`)
+  const configFilePath = path.join(
+    process.cwd(),
+    'config',
+    `local-${config.util.getEnv('NODE_ENV')}.json`,
+  )
   logger.info(`Adding pubsweet secret to ${configFilePath}`)
 
   let configObj

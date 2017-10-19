@@ -6,6 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest --runInBand --no-cache",
     "lint": "eslint src test",
+    "precommit": "lint-staged",
     "test:ci": "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
     "vuln-test": "nsp check --output checkstyle"
   },
