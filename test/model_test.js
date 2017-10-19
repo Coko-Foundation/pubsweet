@@ -3,6 +3,7 @@ const STATUS = require('http-status-codes')
 
 const Model = require('../src/models/Model')
 const User = require('../src/models/User')
+const Fragment = require('../src/models/Fragment')
 const Collection = require('../src/models/Collection')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
@@ -93,6 +94,25 @@ describe('Model', function () {
       expect(err.name).toEqual('ValidationError')
       expect(err.message).toEqual('child "email" fails because ["email" must be a valid email]')
     })
+  })
+
+  it('rejects a fragment with wrong fragmentType', () => {
+    const fragment = new Fragment(fixtures.fragment)
+    fragment.fragmentType = 'file'
+
+    expect.hasAssertions()
+    return fragment.save().catch(err => {
+      expect(err.name).toEqual('ValidationError')
+      expect(err.message).toEqual(
+        'child "fragmentType" fails because ["fragmentType" must be one of [blogpost]], child "path" fails because ["path" is required]'
+      )
+    })
+  })
+
+  it('accepts a fragment with alternative fragmentType', () => {
+    const fragment = new Fragment({fragmentType: 'file', path: '/one/two'})
+
+    return fragment.save()
   })
 
   it('saving the same object multiple times in parallel throws conflict error', async () => {

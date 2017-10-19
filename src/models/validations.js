@@ -1,7 +1,7 @@
 'use strict'
 
 // This module is used for communicating validation requirements to the
-// frontend and backend, it sits in the middle.
+// client and server, it sits in the middle.
 
 const Joi = require('joi')
 
@@ -12,21 +12,15 @@ let validations = {
   fragment: {
     id: Joi.string().guid().required(),
     type: Joi.string().required(),
+    fragmentType: Joi.string().required(),
     title: Joi.string(),
     rev: Joi.string(),
-    collection: Joi.alternatives().try(
-      // a collection ID
-      Joi.string(),
-      // or a collection object
-      Joi.object({ type: Joi.string().valid('collection') }).unknown(true)
-    ),
+    fragments: Joi.array().items(Joi.string().guid()),
     owners: Joi.array().items(Joi.string().guid())
   },
   collection: {
     id: Joi.string().guid().required(),
-    created: Joi.date().default(Date.now, 'creation time'),
     type: Joi.string().required(),
-    title: Joi.string(),
     rev: Joi.string(),
     owners: Joi.array().items(Joi.string().guid()),
     fragments: Joi.array().items(
@@ -64,15 +58,18 @@ let validations = {
 }
 
 let allValidations = function (type, config) {
-  let configurableValidations
+  let extraValidations = {}
 
   if (config.validations && config.validations[type]) {
-    configurableValidations = config.validations[type]
+    extraValidations = config.validations[type]
   }
 
-  return Joi.object().keys(
-    Object.assign({}, validations[type], configurableValidations)
-  )
+  if (Array.isArray(extraValidations)) {
+    const alternatives = extraValidations.map(extra => ({...validations[type], ...extra}))
+    return Joi.alternatives().try(...alternatives)
+  }
+
+  return Joi.object().keys({...validations[type], ...extraValidations})
 }
 
 module.exports = function (config) {

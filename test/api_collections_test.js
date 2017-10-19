@@ -717,7 +717,7 @@ describe('Collections API', () => {
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
-      const fragment = await api.fragments.post(fixtures.fragment, collection, token)
+      const fragment = await api.fragments.post({fragment: fixtures.fragment, collection, token})
         .expect(STATUS.CREATED)
         .then(res => res.body)
 
@@ -739,7 +739,7 @@ describe('Collections API', () => {
 
       // create a different team on a different fragment
 
-      const otherFragment = await api.fragments.post(fixtures.fragment, collection, token)
+      const otherFragment = await api.fragments.post({fragment: fixtures.fragment, collection, token})
         .expect(STATUS.CREATED)
         .then(res => res.body)
 

@@ -32,13 +32,13 @@ describe('unauthenticated/public api', () => {
     beforeEach(() => setNewFragment({ published: true }))
 
     it('can see a published fragment in a collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body[0].id).toEqual(fragment.id)
       )
     })
 
     it('can only see the published fragment in a collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body.map(f => f.id)).not.toContain(unpublishedFragment.id)
       )
     })
@@ -60,15 +60,14 @@ describe('unauthenticated/public api', () => {
     beforeEach(() => setNewFragment({ published: false }))
 
     it('can not list unpublished fragments in a protected collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body).toEqual([])
       )
     })
 
     it('can not find a fragment in a protected collection', () => {
-      return api.fragments.get(
-        collection, null, fragment.id
-      ).expect(STATUS.NOT_FOUND)
+      return api.fragments.get({ collection, fragmentId: fragment.id })
+        .expect(STATUS.NOT_FOUND)
     })
   })
 

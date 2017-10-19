@@ -15,14 +15,15 @@ const updatedCollection = {
 }
 
 const fragment = {
-  'kind': 'blogpost',
+  'type': 'fragment',
+  'fragmentType': 'blogpost',
   'title': 'Just your regular blogpost',
   'source': '<blog></blog>',
   'presentation': '<p></p>'
 }
 
 const updatedFragment = {
-  'kind': 'blogpost',
+  'fragmentType': 'blogpost',
   'source': '<blog><title>Updated</title></blog>',
   'presentation': '<p><h1>Updated</h1></p>'
 }
