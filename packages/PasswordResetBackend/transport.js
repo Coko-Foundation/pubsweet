@@ -5,8 +5,4 @@ const nodemailer = require('nodemailer')
 
 const options = config.get('mail-transport')
 
-if (!options) {
-  throw new Error("config 'mail-transport' not set")
-}
-
 module.exports = nodemailer.createTransport(options)

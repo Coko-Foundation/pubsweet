@@ -6,6 +6,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
+    "@pubsweet/logger": "0.0.1",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
