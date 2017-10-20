@@ -14,24 +14,14 @@ describe('authenticated api', function () {
   let user
   let collection
 
-  beforeEach(() => {
+  beforeEach(async () => {
     // Create collection with admin user and one non-admin user
-    return dbCleaner().then(
-      createBasicCollection
-    ).then(
-      (userAndCol) => {
-        ({ user, collection } = userAndCol)
-      }
-    ).then(
-      () => {
-        // Create another user without any roles
-        otherUser = new User(fixtures.updatedUser)
-        return otherUser.save()
-      }
-    )
+    await dbCleaner()
+    ;({user, collection} = await createBasicCollection())
+    // Create another user without any roles
+    otherUser = new User(fixtures.updatedUser)
+    await otherUser.save()
   })
-
-  afterEach(dbCleaner)
 
   it(`fails to create a fragment in a protected
     collection if authenticated as user without permissions`, () => {
@@ -123,7 +113,7 @@ describe('authenticated api', function () {
     })
 
     describe('actions on a fragment owned by a different user', () => {
-      var fragment
+      let fragment
 
       beforeEach(async () => {
         const Fragment = require('../src/models/Fragment')
