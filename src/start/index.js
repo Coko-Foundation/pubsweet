@@ -15,7 +15,7 @@ const webpackHotMw = require('webpack-hot-middleware')
 // See https://gitlab.coko.foundation/pubsweet/pubsweet-cli/issues/90
 const oldNodePath = process.env.NODE_PATH
 process.env.NODE_PATH = process.cwd()
-const pubsweet = require(`${process.cwd()}/node_modules/pubsweet-server`)
+const pubsweet = require('pubsweet-server')
 process.env.NODE_PATH = oldNodePath
 
 const logger = require('@pubsweet/logger')
