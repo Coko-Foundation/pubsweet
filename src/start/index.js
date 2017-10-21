@@ -10,7 +10,7 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackDevMw = require('webpack-dev-middleware')
 const webpackHotMw = require('webpack-hot-middleware')
-const pubsweet = require(`${process.cwd()}/node_modules/pubsweet-server`)
+const pubsweet = require('pubsweet-server')
 const logger = require('@pubsweet/logger')
 const onError = require('../error-exit')
 
