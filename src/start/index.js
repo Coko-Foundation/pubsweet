@@ -10,7 +10,14 @@ const express = require('express')
 const webpack = require('webpack')
 const webpackDevMw = require('webpack-dev-middleware')
 const webpackHotMw = require('webpack-hot-middleware')
+
+// TODO: Temp fix, to make a global 'pubsweet start' work.
+// See https://gitlab.coko.foundation/pubsweet/pubsweet-cli/issues/90
+const oldNodePath = process.env.NODE_PATH
+process.env.NODE_PATH = process.cwd()
 const pubsweet = require(`${process.cwd()}/node_modules/pubsweet-server`)
+process.env.NODE_PATH = oldNodePath
+
 const logger = require('@pubsweet/logger')
 const onError = require('../error-exit')
 
