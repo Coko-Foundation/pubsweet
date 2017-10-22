@@ -25,22 +25,22 @@ function makeApp (response) {
   return supertest(app)
 }
 
-describe('/password-reset route', () => {
+describe('/api/password-reset route', () => {
   describe('initial validation', () => {
     it('errors if no username', () => makeApp()
-        .post('/password-reset')
+        .post('/api/password-reset')
         .send({})
         .expect(400, '{"error":"Username must be specified"}')
     )
 
     it('errors if no user', () => makeApp(null)
-        .post('/password-reset')
+        .post('/api/password-reset')
         .send({username: 'hey'})
         .expect(400, '{"error":"User not found"}')
     )
 
     it('errors if DB call fails', () => makeApp(new Error('Ops!'))
-        .post('/password-reset')
+        .post('/api/password-reset')
         .send({username: 'hey'})
         .expect(500)
     )
@@ -54,7 +54,7 @@ describe('/password-reset route', () => {
         save: jest.fn()
       }
       return makeApp([user])
-          .post('/password-reset')
+          .post('/api/password-reset')
           .send({username: user.username})
           .expect(200)
           .then(() => {
@@ -77,7 +77,7 @@ describe('/password-reset route', () => {
         passwordResetToken: '123'
       }
       return makeApp([user])
-          .post('/password-reset')
+          .post('/api/password-reset')
           .send({username: user.username, token: 'wrong', password: 'new pass'})
           .expect(400, '{"error":"invalid"}')
     })
@@ -89,7 +89,7 @@ describe('/password-reset route', () => {
         passwordResetTimestamp: Date.now() - 1000 * 60 * 60 * 24 * 2
       }
       return makeApp([user])
-          .post('/password-reset')
+          .post('/api/password-reset')
           .send({username: user.username, token: user.passwordResetToken, password: 'new pass'})
           .expect(400, '{"error":"expired"}')
     })
@@ -102,7 +102,7 @@ describe('/password-reset route', () => {
         save: jest.fn()
       }
       return makeApp([user])
-          .post('/password-reset')
+          .post('/api/password-reset')
           .send({username: user.username, token: user.passwordResetToken, password: 'new pass'})
           .expect(200)
           .then(() => expect(user.save).toHaveBeenCalled())

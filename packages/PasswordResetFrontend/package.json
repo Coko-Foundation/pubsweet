@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.5.10",
+    "query-string": "^5.0.0",
     "react-bootstrap": "^0.31.3",
     "react-router": "^4.2.0"
   },

@@ -15,6 +15,7 @@
     "nodemailer": "^4.0.1"
   },
   "peerDependencies": {
+    "@pubsweet/logger": ">=0.0.1",
     "pubsweet-server": ">=1.0.0-alpha.1"
   },
   "repository": {

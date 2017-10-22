@@ -1,15 +1,18 @@
 const crypto = require('crypto')
 const moment = require('moment')
+const config = require('config')
 
-const logger = require('pubsweet-server/src/logger')
+const logger = require('@pubsweet/logger')
 const querystring = require('querystring')
 const bodyParser = require('body-parser')
 
 const transport = require('./transport')
-const passwordResetConfig = require('./passwordResetConfig')
+const configTokenLength = config.get('password-reset')['token-length'] || 32
+const configUrl = config.get('password-reset.url')
+const configSender = config.get('password-reset.sender')
 
 const PasswordResetBackend = function (app) {
-  app.post('/password-reset', bodyParser.json(), async function (req, res, next) {
+  app.post('/api/password-reset', bodyParser.json(), async function (req, res, next) {
     try {
       const { token, password, username } = req.body
 
@@ -51,12 +54,12 @@ const PasswordResetBackend = function (app) {
       } else {
         // send a password reset email
 
-        user.passwordResetToken = crypto.randomBytes(passwordResetConfig['token-length']).toString('hex')
+        user.passwordResetToken = crypto.randomBytes(configTokenLength).toString('hex')
         user.passwordResetTimestamp = Number(moment())
 
         await user.save()
 
-        const passwordResetURL = passwordResetConfig.url + '?' + querystring.encode({
+        const passwordResetURL = configUrl + '?' + querystring.encode({
           username: username,
           token: user.passwordResetToken
         })
@@ -64,7 +67,7 @@ const PasswordResetBackend = function (app) {
         logger.info(`Sending password reset email to ${user.email}`)
 
         await transport.sendMail({
-          from: passwordResetConfig.sender,
+          from: configSender,
           to: user.email,
           subject: 'Password reset',
           text: `Reset your password: ${passwordResetURL}`,

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router'
+import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
+import queryString from 'query-string'
 import * as api from 'pubsweet-client/src/helpers/api'
 
 class PasswordReset extends React.Component {
@@ -34,6 +35,10 @@ class PasswordReset extends React.Component {
     return api.create('/password-reset', data)
   }
 
+  parsedQuery () {
+    return queryString.parse(this.props.location.search)
+  }
+
   handleUsernameChange = (e) => {
     this.setState({username: e.target.value})
   }
@@ -57,7 +62,7 @@ class PasswordReset extends React.Component {
   handlePasswordSubmit = (e) => {
     e.preventDefault()
 
-    const {location: {query: {token, username}}} = this.props
+    const {token, username} = this.parsedQuery()
 
     const {password} = this.state
 
@@ -70,7 +75,7 @@ class PasswordReset extends React.Component {
     }
   }
 
-  initiatePasswordReset (data) {
+  async initiatePasswordReset (data) {
     this.setState({
       emailSent: false,
       emailError: false,
@@ -78,38 +83,23 @@ class PasswordReset extends React.Component {
       emailSending: true
     })
 
-    this.post(data).then(response => {
-      switch (response.status) {
-        case 200:
-          this.setState({
-            emailSent: true,
-            emailError: false,
-            emailSending: false
-          })
-          break
-
-        case 400:
-          response.json().then(body => {
-            this.setState({
-              emailError: true,
-              emailErrorMessage: body.error,
-              emailSending: false
-            })
-          })
-          break
-
-        default:
-          this.setState({
-            emailError: true,
-            emailErrorMessage: 'There was an unexpected error',
-            emailSending: false
-          })
-          break
-      }
-    })
+    try {
+      await this.post(data)
+      this.setState({
+        emailSent: true,
+        emailError: false,
+        emailSending: false
+      })
+    } catch (err) {
+      this.setState({
+        emailError: true,
+        emailErrorMessage: err.error || 'There was an unexpected error',
+        emailSending: false
+      })
+    }
   }
 
-  resetPassword (data) {
+  async resetPassword (data) {
     this.setState({
       passwordChanged: false,
       passwordError: false,
@@ -117,41 +107,26 @@ class PasswordReset extends React.Component {
       passwordSending: true
     })
 
-    this.post(data).then(response => {
-      switch (response.status) {
-        case 200:
-          this.setState({
-            passwordChanged: true,
-            passwordError: false,
-            passwordSending: false
-          })
-          break
-
-        case 400:
-          response.json().then(body => {
-            this.setState({
-              passwordError: true,
-              passwordErrorMessage: body.error,
-              passwordSending: false
-            })
-          })
-          break
-
-        default:
-          this.setState({
-            passwordError: true,
-            passwordErrorMessage: 'There was an unexpected error',
-            passwordSending: false
-          })
-          break
-      }
-    })
+    try {
+      await this.post(data)
+      this.setState({
+        passwordChanged: true,
+        passwordError: false,
+        passwordSending: false
+      })
+    } catch (err) {
+      this.setState({
+        passwordError: true,
+        passwordErrorMessage: err.error || 'There was an unexpected error',
+        passwordSending: false
+      })
+    }
   }
 
   render () {
     const {username, emailSent, emailError, emailErrorMessage, emailSending, password, passwordChanged, passwordError, passwordErrorMessage, passwordSending} = this.state
 
-    const {location: {query: {token}}} = this.props
+    const {token} = this.parsedQuery()
 
     const buildForm = () => {
       if (passwordChanged) {
@@ -172,7 +147,7 @@ class PasswordReset extends React.Component {
             </FormGroup>
 
             <div>
-              <Button type="submit" bsStyle="primary" bsSize="block" disabled={passwordSending}>
+              <Button type="submit" bsStyle="primary" block disabled={passwordSending}>
                 {passwordSending ? 'Saving…' : 'Save new password'}
               </Button>
             </div>
