@@ -1,7 +1,11 @@
+const path = require('path')
+const config = require('config')
+const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
+require('dotenv').config({ path: dotenvPath })
+
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
-const path = require('path')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const passport = require('passport')
@@ -11,12 +15,12 @@ const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
-const config = require('config')
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
+const startServer = require('./start-server')
 
-module.exports = (app = express()) => {
+const configureApp = (app) => {
   global.versions = {}
 
   app.locals.models = models
@@ -72,3 +76,17 @@ module.exports = (app = express()) => {
 
   return app
 }
+
+let server
+
+const start = async (app = express()) => {
+  if (server) return server
+  const configuredApp = configureApp(app)
+  server = await startServer(configuredApp)
+  server.expressApp = app
+  return server
+}
+
+start.configureApp = configureApp
+
+module.exports = start

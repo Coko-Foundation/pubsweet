@@ -1,5 +1,5 @@
 const request = require('supertest')
-const api = require('../../src')()
+const api = require('../../src').configureApp(require('express')())
 const STATUS = require('http-status-codes')
 const isString = require('lodash/isString')
 const querystring = require('querystring')
