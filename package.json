@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "scripts": {
     "lint": "eslint src/ test/ config/",
     "test": "jest",
