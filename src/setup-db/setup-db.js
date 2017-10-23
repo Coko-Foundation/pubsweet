@@ -15,30 +15,13 @@ const createAdminUser = async userData => {
   return user
 }
 
-const createCollection = async (title, user) => {
-  const Collection = require('pubsweet-server/src/models/Collection')
-  logger.info('Creating the initial collection')
-
-  const collection = new Collection({ title, created: Date.now() })
-  collection.setOwners([user.id])
-  await collection.save()
-
-  logger.info('Created initial collection:', collection.title)
-
-  return collection
-}
-
 module.exports = async mergedDbConfig => {
-  const collectionTitle = mergedDbConfig.collection
   const userData = _.pick(
     ['username', 'password', 'admin', 'email'],
     mergedDbConfig,
   )
   logger.info('Setting up the database')
   const user = await createAdminUser(userData)
-  const collection = collectionTitle
-    ? await createCollection(collectionTitle, user)
-    : null
   logger.info('Finished setting up the database')
-  return { user, collection }
+  return { user }
 }

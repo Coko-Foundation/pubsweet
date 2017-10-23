@@ -22,7 +22,6 @@ const dbConfig = {
     username: 'testUsername',
     email: 'test@example.com',
     password: 'test_password',
-    collection: 'test_collection',
   },
 }
 
