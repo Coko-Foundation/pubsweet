@@ -8,15 +8,17 @@ const addAdminOwnerToAllCollections = async user => {
   const Collection = require('pubsweet-server/src/models/Collection')
   const collections = await Collection.all()
 
-  await Promise.all(collections.map(data => {
-    const collection = new Collection(data)
-    collection.setOwners([user.id])
-    return collection.save()
-  }))
+  await Promise.all(
+    collections.map(data => {
+      const collection = new Collection(data)
+      collection.setOwners([user.id])
+      return collection.save()
+    }),
+  )
   logger.info(`Successfully added admin owner to collections`)
 }
 
-const createUser = async (userData) => {
+const createUser = async userData => {
   logger.info('Creating user', userData.username)
   const User = require('pubsweet-server/src/models/User')
 
@@ -31,7 +33,7 @@ const createUser = async (userData) => {
   return user
 }
 
-module.exports = async (userData) => {
+module.exports = async userData => {
   validateUser(userData)
   const exists = await dbExists()
   if (!exists) {

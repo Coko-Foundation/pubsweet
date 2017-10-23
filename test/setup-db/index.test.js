@@ -16,14 +16,14 @@ const dbPath = path.join(basePath, 'test_db')
 const dbConfig = {
   'pubsweet-server': {
     dbPath,
-    adapter: 'leveldb'
+    adapter: 'leveldb',
   },
   dbManager: {
     username: 'testUsername',
     email: 'test@example.com',
     password: 'test_password',
-    collection: 'test_collection'
-  }
+    collection: 'test_collection',
+  },
 }
 
 describe('setup-db', () => {
@@ -54,7 +54,7 @@ describe('setup-db', () => {
 
   it('generates secret in config', () => {
     const fs = require('fs-extra')
-    const calls = fs.writeJsonSync.mock.calls 
+    const calls = fs.writeJsonSync.mock.calls
     expect(calls[0][1]['pubsweet-server']).toHaveProperty('secret')
   })
 })

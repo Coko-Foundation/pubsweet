@@ -15,7 +15,7 @@ const httpDbExists = async url => {
   }
 }
 
-const dbExists = async (dbPath) => {
+const dbExists = async dbPath => {
   if (config.get('pubsweet-server').adapter === 'memory') {
     // in memory databases are unique each time
     return false
