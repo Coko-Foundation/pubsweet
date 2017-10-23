@@ -83,4 +83,4 @@ testapp
 api
 .vscode
 .wallaby.js
-config/local*.js
+config/local*.json
