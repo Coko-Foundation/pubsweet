@@ -83,7 +83,7 @@ const start = async (app = express()) => {
   if (server) return server
   const configuredApp = configureApp(app)
   server = await startServer(configuredApp)
-  server.expressApp = app
+  server.app = configuredApp
   return server
 }
 

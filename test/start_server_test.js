@@ -4,7 +4,7 @@ describe('Function exported by src/index.js', () => {
   it('starts the server and returns it with express app attached', async () => {
     const server = await start()
     expect(server.listening).toBe(true)
-    expect(server).toHaveProperty('expressApp')
+    expect(server).toHaveProperty('app')
     return server.close()
   })
 
