@@ -178,8 +178,7 @@ The command will prompt you with a series of questions to customise your app. If
 pubsweet setupdb
   --username someuser \
   --email some@email.com \
-  --password correct-horse-battery-staple \
-  --collection Articles
+  --password correct-horse-battery-staple
 ```
 
 ### Running your app (`pubsweet start`)

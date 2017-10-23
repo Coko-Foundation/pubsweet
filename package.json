@@ -20,7 +20,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^0.0.4",
+    "@pubsweet/db-manager": "^0.0.7",
     "@pubsweet/logger": "^0.0.1",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
@@ -44,10 +44,10 @@
   "devDependencies": {
     "@pubsweet/starter": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
     "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^21.0.0",
     "nsp": "^2.8.1"
