@@ -1,6 +1,10 @@
 const express = require('express')
-const path = require('path')
-const startServer = require(path.resolve('node_modules', 'pubsweet-server')) // use app's local pubsweet-server
+
+// global 'pubsweet start' needs to use an app's local pubsweet-server.
+const oldNodePath = process.env.NODE_PATH
+process.env.NODE_PATH = process.cwd()
+const startServer = require('pubsweet-server')
+process.env.NODE_PATH = oldNodePath
 
 const { build } = require('./build')
 const onError = require('../error-exit')
