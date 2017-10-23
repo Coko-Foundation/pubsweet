@@ -10,7 +10,7 @@ const { ordinalize } = require('inflection')
 const readCommand = async argsOverride => {
   program
     .option('--reduxlog-off', 'Switch off Redux logger')
-    .description('Run the app at [path].')
+    .description('Build assets and start the app with forever (not recommended for production).')
 
   return program.parse(argsOverride || process.argv)
 }
@@ -24,13 +24,13 @@ module.exports = async argsOverride => {
     throw new Error('Create database with "pubsweet setupdb" before starting app')
   }
 
-  const executable = path.join(__dirname, '..', 'src', 'start', 'index.js')
+  const executable = path.join(__dirname, '..', 'src', 'startup', 'start.js')
 
   const defaultOpts = {
     silent: false,
     watch: true,
     // By default we'll restart the app when config is edited
-    watchDirectory: path.join(process.cwd(), 'config'),
+    watchDirectory: path.resolve('config'),
     // watchIgnorePatterns: ["./client-config.js"] // perhaps
     max: 10,
     env: _.clone(process.env)

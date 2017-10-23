@@ -105,8 +105,9 @@ Usage: pubsweet [options] [command]
 Commands:
 
   new         create and set up a new pubsweet app
-  start       start a pubsweet app
   setupdb     generate a database for a pubsweet app
+  build       build static assets for a pubsweet app
+  start       build static assets and start a pubsweet app
   add         add one or more components to a pubsweet app
   remove      remove one or more components from a pubsweet app
   adduser     add a user to the database for a pubsweet app
@@ -182,9 +183,13 @@ pubsweet setupdb
   --collection Articles
 ```
 
+### Build your app (`pubsweet build`)
+
+Use the `build` subcommand within your app directory to compile your app's static assets with webpack. This command is useful for production scenarios where assets need to be compiled in a separate step. For development, we recommend using `pubsweet start`, which also takes care of building your assets.
+
 ### Running your app (`pubsweet start`)
 
-Use the `start` subcommand within your app directory to start your app. It takes care of transpilation, module bundling and process management (using `forever`).
+Use the `start` subcommand within your app directory to start your app. It builds your assets with webpack (as the `build` command) and launches your app with the process monitor `forever`.
 
 ```bash
 cd myappname
@@ -194,6 +199,8 @@ pubsweet start
 Forever is initialised to watch for changes in the config directory by default. To manually configure forever, add settings under the `forever` key in config (see forever's documentation for which settings are available) 
 
 `start` can also be passed `--reduxlog-off` to switch off the redux logger.
+
+`pubsweet start` is not recommended for production, where it is generally preferable to compile assets separately and maintain a startup script in your app. A sample startup script is included in the root directory of the `pubsweet-starter` repo (`app.js`).
 
 ### Adding and removing components (`pubsweet add`, `pubsweet remove`)
 
