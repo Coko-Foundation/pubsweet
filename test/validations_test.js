@@ -2,28 +2,25 @@ const Fragment = require('../src/models/Fragment')
 const validations = require('../src/models/validations')(require('config'))
 
 describe('Validations export', function () {
-  it('exports useable combined validations (static + configurable)', () => {
-    expect(Object.keys(validations).sort()).toEqual(
-      ['user', 'fragment', 'team', 'collection'].sort()
-    )
+  it('has validations for each type', () => {
+    expect(Object.keys(validations).sort()).toEqual(['collection', 'fragment', 'team', 'user'])
+  })
 
-    var fragment = new Fragment({
+  it('allows fragment with required fields', () => {
+    const fragment = new Fragment({
       title: 'Testing',
-      type: 'blogpost',
-      owners: ['d56153c3-0ddf-44fd-9bec-c4151329ef0a']
+      fragmentType: 'blogpost'
     })
 
     expect(fragment.validate()).toBe(true)
+  })
 
-    var message
+  it('rejects fragment with missing type', () => {
+    const fragment = new Fragment({
+      title: 'Testing'
+    })
+    fragment.type = undefined
 
-    try {
-      fragment.type = undefined
-      fragment.validate()
-    } catch (error) {
-      message = error.message
-    }
-
-    expect(message).toBeTruthy()
+    expect(() => fragment.validate()).toThrow('"type" is required')
   })
 })

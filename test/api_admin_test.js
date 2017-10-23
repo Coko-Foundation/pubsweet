@@ -49,7 +49,9 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.fragments.post(fixtures.fragment, collection, token)
+      token => api.fragments.post({
+        fragment: fixtures.fragment, collection, token
+      })
     ).then(
       res => expect(res.body.source).toEqual(fixtures.fragment.source)
     )
@@ -59,7 +61,7 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.fragments.get(collection, token)
+      token => api.fragments.get({ collection, token })
     ).then(
       res => expect(res.body.length).toEqual(1)
     )
@@ -71,9 +73,12 @@ describe('admin api', () => {
     return api.users.authenticate.post(
       fixtures.user
     ).then(
-      token => api.fragments.patch(
-        fragment.id, updatedFragment, collection, token
-      ).expect(STATUS.OK)
+      token => api.fragments.patch({
+        fragmentId: fragment.id,
+        update: updatedFragment,
+        collection,
+        token
+      }).expect(STATUS.OK)
     )
   })
 })

@@ -156,7 +156,7 @@ async function authenticatedUser (user, operation, object, context) {
   return unauthenticatedUser(operation, object)
 }
 
-var authsomeMode = async function (userId, operation, object, context) {
+const authsomeMode = async function (userId, operation, object, context) {
   if (!userId) {
     return unauthenticatedUser(operation, object)
   }

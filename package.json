@@ -57,7 +57,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource": "^1.0.4",
-    "jest-cli": "^20.0.4",
+    "jest-cli": "^21.2.1",
     "nsp": "^2.7.0",
     "standard": "^10.0.2",
     "supertest": "^2.0.0"

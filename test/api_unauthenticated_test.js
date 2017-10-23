@@ -1,44 +1,36 @@
 const STATUS = require('http-status-codes')
 
-var api = require('./helpers/api')
+const api = require('./helpers/api')
 const createBasicCollection = require('./helpers/basic_collection')
 const createFragment = require('./helpers/fragment')
 const cleanDB = require('./helpers/db_cleaner')
 const Collection = require('../src/models/Collection')
 
 describe('unauthenticated/public api', () => {
-  var fragment
-  var unpublishedFragment
-  var collection
+  let fragment
+  let unpublishedFragment
+  let collection
 
-  afterEach(cleanDB)
+  beforeEach(cleanDB)
 
-  const setNewFragment = (opts) => cleanDB().then(
-    createBasicCollection
-  ).then(
-    userAndCol => {
-      collection = userAndCol.collection
-      return createFragment(opts, collection)
-    }
-  ).then(
-    newfragment => { fragment = newfragment }
-  ).then(
-    () => createFragment({}, collection)
-  ).then(
-    fragment => { unpublishedFragment = fragment }
-  )
+  async function setNewFragment (opts) {
+    const userAndCollection = await createBasicCollection()
+    collection = userAndCollection.collection
+    fragment = await createFragment(opts, collection)
+    unpublishedFragment = await createFragment({}, collection)
+  }
 
   describe('published fragment', () => {
     beforeEach(() => setNewFragment({ published: true }))
 
     it('can see a published fragment in a collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body[0].id).toEqual(fragment.id)
       )
     })
 
     it('can only see the published fragment in a collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body.map(f => f.id)).not.toContain(unpublishedFragment.id)
       )
     })
@@ -60,15 +52,14 @@ describe('unauthenticated/public api', () => {
     beforeEach(() => setNewFragment({ published: false }))
 
     it('can not list unpublished fragments in a protected collection', () => {
-      return api.fragments.get(collection).expect(STATUS.OK).then(
+      return api.fragments.get({ collection }).expect(STATUS.OK).then(
         res => expect(res.body).toEqual([])
       )
     })
 
     it('can not find a fragment in a protected collection', () => {
-      return api.fragments.get(
-        collection, null, fragment.id
-      ).expect(STATUS.NOT_FOUND)
+      return api.fragments.get({ collection, fragmentId: fragment.id })
+        .expect(STATUS.NOT_FOUND)
     })
   })
 

@@ -17,43 +17,78 @@ const authorizedRequest = (req, token) => {
 // TODO: standardise parameter order of the "fragments" methods below
 
 const fragments = {
-  post: (fragment, collection, token) => {
-    const collectionId = isString(collection) ? collection : collection.id
+  post: (opts = {}) => {
+    const { fragment, collection, token } = opts
+
+    let url
+
+    if (collection) {
+      const collectionId = isString(collection) ? collection : collection.id
+      url = `/api/collections/${collectionId}/fragments`
+    } else {
+      url = '/api/fragments'
+    }
 
     const req = request(
       api
     ).post(
-      '/api/collections/' + collectionId + '/fragments'
+      url
     ).send(
       fragment
     )
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return authorizedRequest(req, token)
   },
-  patch: (fragmentId, update, collection, token) => {
-    const req = request(
-      api
-    ).patch(
-      '/api/collections/' + collection.id + '/fragments/' + fragmentId
-    ).send(
-      update
-    )
+  patch: (opts = {}) => {
+    const { fragmentId, update, token, collection } = opts
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    let url
+    if (collection) {
+      url = `/api/collections/${collection.id}/fragments/${fragmentId}`
+    } else {
+      url = `/api/fragments/${fragmentId}`
+    }
+
+    const req = request(api)
+      .patch(url)
+      .send(update)
+
+    return authorizedRequest(req, token)
   },
-  get: (collection, token, fragmentId) => {
-    let url = `/api/collections/${collection.id}/fragments`
+  get: (opts = {}) => {
+    const { token, collection, fragmentId } = opts
+
+    let url
+
+    if (collection) {
+      url = `/api/collections/${collection.id}/fragments`
+    } else {
+      url = '/api/fragments'
+    }
+
     if (fragmentId) url += '/' + fragmentId
 
-    const req = request(api).get(url)
+    if (opts.fields) {
+      url += '?' + querystring.stringify({
+        fields: opts.fields.join(',')
+      })
+    }
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    const req = request(api).get(url)
+    return authorizedRequest(req, token)
+  },
+  delete: (opts = {}) => {
+    const { fragmentId, token } = opts
+    const req = request(api).delete(`/api/fragments/${fragmentId}`)
+    return authorizedRequest(req, token)
+  },
+  teams: (opts = {}) => {
+    const { fragmentId, token } = opts
+
+    const url = `/api/fragments/${fragmentId}/teams`
+
+    const req = request(api).get(url)
+    return authorizedRequest(req, token)
   }
 }
 

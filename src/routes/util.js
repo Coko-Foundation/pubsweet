@@ -1,67 +1,123 @@
 const _ = require('lodash')
 const AuthorizationError = require('../errors/AuthorizationError')
 const NotFoundError = require('../errors/NotFoundError')
+const authsome = require('../helpers/authsome')
 
-module.exports = {
-  authorizationError: (username, operation, object) => {
+const Util = {}
+
+Util.authorizationError = (username, operation, object) => {
     username = username || 'public'
     const msg = `User ${username} is not allowed to ${operation} ${object}`
     return new AuthorizationError(msg)
   },
 
-  // Build an object containing only the id
-  objectId: object => ({ id: object.id }),
+// Build an object containing only the id
+Util.objectId = object => ({ id: object.id }),
 
-  // Build an object containing only the fields of `output` that were in `input`
-  // TODO: build a real diff, in case other fields were updated indirectly?
-  buildChangeData: (input, output) => {
-    const data = {}
+// Build an object containing only the fields of `output` that were in `input`
+// TODO: build a real diff, in case other fields were updated indirectly?
+Util.buildChangeData =  (input, output) => {
+  const data = {}
 
-    Object.keys(input).forEach(key => {
-      // TODO: compare and only add if changed?
-      data[key] = output[key]
+  Object.keys(input).forEach(key => {
+    // TODO: compare and only add if changed?
+    data[key] = output[key]
+  })
+
+  return data
+}
+
+Util.createFilterFromQuery = query => {
+  const filterPaths = _.difference(_.keys(query), ['fields'])
+  return (item) => {
+    return filterPaths.every(filterPath => {
+      return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
     })
-
-    return data
-  },
-  createFilterFromQuery: query => {
-    const filterPaths = _.difference(_.keys(query), ['fields'])
-    return (item) => {
-      return filterPaths.every(filterPath => {
-        return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
-      })
-    }
-  },
-  fieldSelector: req => {
-    const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
-
-    return item => fields ? _.pick(item, fields.concat('id', 'rev')) : item
-  },
-
-  getTeams: async (opts) => {
-    let teams
-    try {
-      teams = await opts.Team.findByField({
-        'object.id': opts.id,
-        'object.type': opts.type
-      })
-
-      teams = await Promise.all(teams.map(async team => {
-        let permission = await opts.authsome.can(opts.req.user, opts.req.method, team)
-        if (permission) {
-          return team
-        }
-      }))
-
-      teams = teams.filter(team => team !== undefined)
-    } catch (err) {
-      if (err instanceof NotFoundError) {
-        teams = []
-      } else {
-        throw err
-      }
-    }
-
-    return teams
   }
 }
+
+Util.fieldSelector = req => {
+  const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
+
+  return item => fields ? _.pick(item, fields.concat('id', 'rev')) : item
+}
+
+Util.getTeams = async (opts) => {
+  let teams
+  try {
+    teams = await opts.Team.findByField({
+      'object.id': opts.id,
+      'object.type': opts.type
+    })
+
+    teams = await Promise.all(teams.map(async team => {
+      let permission = await authsome.can(opts.req.user, opts.req.method, team)
+      if (permission) {
+        return team
+      }
+    }))
+
+    teams = teams.filter(team => team !== undefined)
+  } catch (err) {
+    if (err instanceof NotFoundError) {
+      teams = []
+    } else {
+      throw err
+    }
+  }
+
+  return teams
+}
+
+/**
+ * Load a fragment from the database, using `:fragmentId` from the route.
+ *
+ * @param {object} opts Options
+ * @param {object} opts.req Request
+ * @param {object} opts.Collection Collection model
+ * @param {object} opts.Fragment Fragment model
+ *
+ * @throws {NotFoundError} Thrown if the Collection doesn't exist, the collection doesn't contain the given Fragment, or the fragment doesn't exist.
+ *
+ * @returns {Promise<Fragment>}
+ */
+Util.getFragment = async opts => {
+  const collection = await opts.Collection.find(opts.req.params.collectionId)
+  const fragmentId = opts.req.params.fragmentId
+  if (!collection.fragments.includes(fragmentId)) {
+    throw new NotFoundError(`collection ${collection.id} does not contain fragment ${fragmentId}`)
+  }
+
+  return opts.Fragment.find(fragmentId)
+}
+
+/**
+ * Check that the current user can perform this action (HTTP verb) on the given object or route.
+ *
+ * If required, the output is filtered.
+ * @param {object} opts Options
+ * @param {object} opts.req Request
+ * @param {*} opts.target The subject of the permissions check
+ * @param {*} opts.filterable An optional thing to be filtered instead of the target
+ * @param {*} opts.authorizationError AuthorizationError
+ *
+ * @throws {AuthorizationError} if permission is not granted.
+ *
+ * @returns {Promise} The (possibly filtered) target, if permission is granted
+ */
+Util.applyPermissionFilter = async (opts) => {
+  const permission = await authsome.can(
+    opts.req.user, opts.req.method, opts.target)
+
+  if (!permission) {
+    throw Util.authorizationError(
+      opts.req.user, opts.req.method, opts.target
+    )
+  }
+
+  const object = opts.filterable || opts.target
+  return permission.filter ? permission.filter(object) : object
+}
+
+
+module.exports = Util
