@@ -20,7 +20,6 @@ const userSchema = Joi.object({
 
 const setupDbSchema = userSchema.keys({
   clobber: Joi.boolean().optional(),
-  collection: _.get('collection.title', schemas) || Joi.string().optional(),
 })
 
 const serverSchema = Joi.object({
