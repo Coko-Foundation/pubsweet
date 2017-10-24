@@ -33,7 +33,7 @@
 
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#fc2158c1247190ced3dcddb73865adf667135820"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#d5ed173f21a79d27cede7bd488a53380dc30a84e"
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     authsome "0.0.9"
@@ -51,7 +51,7 @@
     pubsweet-component-signup "^0.4.0"
     pubsweet-component-teams-manager "^0.2.1"
     pubsweet-component-users-manager "^0.2.1"
-    pubsweet-server "1.0.0-alpha.4"
+    pubsweet-server "1.0.0-beta.2"
     pubsweet-theme-plugin "^0.0.1"
     react-router-redux next
 
@@ -4834,7 +4834,7 @@ prompt@^1.0.0:
     utile "0.3.x"
     winston "2.1.x"
 
-prompt@flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87, "prompt@github:flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87":
+prompt@flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87:
   version "1.0.0"
   resolved "https://codeload.github.com/flatiron/prompt/tar.gz/1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87"
   dependencies:
@@ -5055,44 +5055,7 @@ pubsweet-component-users-manager@^0.2.1:
     react-redux "^5.0.6"
     redux "^3.7.2"
 
-pubsweet-server@1.0.0-alpha.4:
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/pubsweet-server/-/pubsweet-server-1.0.0-alpha.4.tgz#b4246a40e88336110eb4747e8a98e01b57117c28"
-  dependencies:
-    "@pubsweet/logger" "^0.0.1"
-    authsome "0.0.9"
-    bcrypt "^1.0.2"
-    body-parser "^1.15.2"
-    colors "^1.1.2"
-    config "^1.26.2"
-    cookie-parser "^1.4.3"
-    express "^4.16.1"
-    helmet "^3.8.1"
-    http-status-codes "^1.0.6"
-    joi "^10.0.6"
-    jsonwebtoken "^7.1.7"
-    lodash "^4.0.0"
-    minimist "^1.2.0"
-    morgan "^1.8.2"
-    multer "^1.1.0"
-    passport "^0.3.2"
-    passport-anonymous "^1.0.1"
-    passport-http-bearer "^1.0.1"
-    passport-local "^1.0.0"
-    pouchdb-adapter-http "^6.2.0"
-    pouchdb-adapter-leveldb "^6.1.1"
-    pouchdb-adapter-memory "^6.1.1"
-    pouchdb-core "^6.1.1"
-    pouchdb-find "^0.10.3"
-    pouchdb-upsert "^2.0.0"
-    promise-queue "^2.2.3"
-    prompt "^1.0.0"
-    pubsweet-sse "^0.1.1"
-    relational-pouch "^1.4.5"
-    uuid "^3.0.1"
-    winston "^2.2.0"
-
-pubsweet-server@^1.0.0-alpha.3, pubsweet-server@^1.0.0-beta.2:
+pubsweet-server@1.0.0-beta.2, pubsweet-server@^1.0.0-alpha.3, pubsweet-server@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/pubsweet-server/-/pubsweet-server-1.0.0-beta.2.tgz#d22165460cd71007ad195207bdbcdcd9e4d327a1"
   dependencies:
@@ -5707,6 +5670,10 @@ require-object-coercible-x@^1.4.1:
   resolved "https://registry.yarnpkg.com/require-object-coercible-x/-/require-object-coercible-x-1.4.1.tgz#75b9fb5bda2d15cf705a5714f108e8b40ca3eb2e"
   dependencies:
     is-nil-x "^1.4.1"
+
+require-relative@^0.8.7:
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
 
 require-uncached@^1.0.3:
   version "1.0.3"

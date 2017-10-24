@@ -131,8 +131,12 @@ describe('CLI: integration test', () => {
         nodeConfig
       })
 
+      app.stderr.on('data', async data => {
+        console.log('stderr:', data.toString())
+      })
+
       app.stdout.on('data', async data => {
-        console.log(data.toString())
+        console.log('stdout:', data.toString())
         if (data.toString().includes('App is listening')) {
           const result = await fetch('http://localhost:3000')
           expect(result.status).toBe(200)

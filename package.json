@@ -30,6 +30,7 @@
     "joi": "^10.4.1",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
     "pubsweet-server": "^1.0.0-beta.2",
+    "require-relative": "^0.8.7",
     "uuid": "^3.0.1",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0",
