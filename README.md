@@ -179,8 +179,7 @@ The command will prompt you with a series of questions to customise your app. If
 pubsweet setupdb
   --username someuser \
   --email some@email.com \
-  --password correct-horse-battery-staple \
-  --collection Articles
+  --password correct-horse-battery-staple
 ```
 
 ### Build your app (`pubsweet build`)
@@ -248,10 +247,6 @@ pubsweet adduser \
 # Contributing
 
 Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/blob/master/CONTRIBUTING) guide.
-
-### Tests
-
-Note that integration tests found in the file `./tests/integration.js` will run tests against the globally installed `pubsweet` binary. You can replace the globally installed `pubsweet` with the current repository by running `yarn link`. No tests outside this file require the globally installed binary. 
 
 # Credits
 

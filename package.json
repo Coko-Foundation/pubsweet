@@ -5,9 +5,7 @@
   "bin": "./bin/pubsweet.js",
   "scripts": {
     "lint": "eslint bin src cli test",
-    "pretest": "yarn link",
     "test": "NODE_ENV=test jest --runInBand --no-cache",
-    "posttest": "yarn unlink",
     "test:mocked": "NODE_ENV=test jest ./test/cli",
     "vuln-test": "nsp check --output checkstyle",
     "test:ci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
@@ -20,7 +18,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^0.0.4",
+    "@pubsweet/db-manager": "^0.0.7",
     "@pubsweet/logger": "^0.0.1",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",

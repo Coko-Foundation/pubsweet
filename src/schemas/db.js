@@ -10,9 +10,6 @@ module.exports = {
     hidden: true,
     replace: '*'
   },
-  collection: {
-    description: 'Initial collection title (optional)'
-  },
   clobber: {
     type: 'boolean',
     description: 'Overwrite any pre-existing database',
