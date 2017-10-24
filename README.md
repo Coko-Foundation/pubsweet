@@ -241,10 +241,6 @@ pubsweet adduser \
 
 Please read our [CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/blob/master/CONTRIBUTING) guide.
 
-### Tests
-
-Note that integration tests found in the file `./tests/integration.js` will run tests against the globally installed `pubsweet` binary. You can replace the globally installed `pubsweet` with the current repository by running `yarn link`. No tests outside this file require the globally installed binary. 
-
 # Credits
 
 `pubsweet-cli` is part of the PubSweet ecosystem.
