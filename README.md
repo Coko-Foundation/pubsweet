@@ -22,7 +22,6 @@ This package exports the following functions:
 This function
  - creates the database
  - adds an admin user
- - adds a collection if specified
  - generates a secret in `config/local-<NODE_ENV>.json` under `pubsweet-server.secret`. 
 
 It can be called without arguments, in which case it will take its configuration from the following config keys:
@@ -38,7 +37,6 @@ It can be called without arguments, in which case it will take its configuration
     password: 'pppppp',
     email: 'email@example.com',
     clobber: false // overwrite existing db (optional)
-    collection: 'collection_title' // (optional)
   }
 }
 ```
