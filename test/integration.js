@@ -22,8 +22,7 @@ const nodeConfig = {
 const dbOptions = {
   username: 'someuser',
   email: 'user@test.com',
-  password: '12345678',
-  collection: 'entries'
+  password: '12345678'
 }
 
 /* These tests run "pubsweet" commands as child processes with no mocking */
