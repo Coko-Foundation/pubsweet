@@ -1,5 +1,6 @@
 const spawnSync = require('child_process').spawnSync
 const spawn = require('child_process').spawn
+const path = require('path')
 const reduce = require('lodash/fp/reduce').convert({cap: false})
 
 const formatOpts = reduce((acc, value, key) => acc.concat(`--${key}`, value), [])
@@ -15,7 +16,7 @@ const getMockArgv = ({ args, options }) => ['mock/exec/path', 'mock/file/path']
   .concat(joinArgsAndOpts(args, options))
 
 const runCommandSync = ({ args, options, cwd, nodeConfig, stdio }) => {
-  const { stdout, stderr } = spawnSync('pubsweet', joinArgsAndOpts(args, options), {
+  const { stdout, stderr } = spawnSync(path.resolve('bin/pubsweet.js'), joinArgsAndOpts(args, options), {
     cwd,
     stdio,
     env: getEnvWithConfig(nodeConfig),
