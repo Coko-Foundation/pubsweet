@@ -4,9 +4,9 @@
 
 # Description
 
-This is the PubSweet client, to be used as a dependency in PubSweet apps, such as: https://gitlab.coko.foundation/pubsweet/science-blogger
+This is the PubSweet client, to be used as a dependency in PubSweet apps, such as: [Editoria](https://gitlab.coko.foundation/editoria/editoria).
 
 # Short-term roadmap
 
-- 1.0.0.alpha.1 - Current version
-- TBD after first PubSweet meeting on July 18, 2017
+- 1.0.0.beta.8 - Current version
+- 1.0 - Around the corner
