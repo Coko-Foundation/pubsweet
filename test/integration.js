@@ -96,6 +96,22 @@ describe('CLI: integration test', () => {
     })
   })
 
+  describe('build', () => {
+    const buildDir = path.join(appPath, '_build')
+
+    it('outputs static assets to _build directory', () => {
+      runCommandSync({
+        args: 'build',
+        stdio: 'inherit',
+        cwd: appPath,
+        nodeConfig
+      })
+
+      expect(fs.existsSync(path.join(buildDir, 'assets', 'app.js'))).toBe(true)
+      fs.removeSync(buildDir)
+    })
+  })
+
   describe('start', () => {
     it('starts an app', (done) => {
       fs.ensureDirSync(dbDir)
@@ -115,8 +131,12 @@ describe('CLI: integration test', () => {
         nodeConfig
       })
 
+      app.stderr.on('data', async data => {
+        console.log('stderr:', data.toString())
+      })
+
       app.stdout.on('data', async data => {
-        console.log(data.toString())
+        console.log('stdout:', data.toString())
         if (data.toString().includes('App is listening')) {
           const result = await fetch('http://localhost:3000')
           expect(result.status).toBe(200)

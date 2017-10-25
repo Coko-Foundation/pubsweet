@@ -4,20 +4,20 @@ jest.mock('webpack', () => {
   }
   return () => compiler
 })
-jest.mock(require('path').join(process.cwd(), 'webpack', `webpack.${require('config').util.getEnv('NODE_ENV')}.config.js`), () => {}, {virtual: true})
-jest.mock(require('path').join(process.cwd(), 'config', 'components.json'), () => [], {virtual: true})
-jest.mock('pubsweet-server', () => jest.fn(x => x))
+jest.mock(require('path').resolve('webpack', `webpack.${require('config').util.getEnv('NODE_ENV')}.config.js`), () => {}, {virtual: true})
+jest.mock(require('path').resolve('config', 'components.json'), () => [], {virtual: true})
 jest.mock('forever-monitor', () => ({
   start: jest.fn(() => ({ on: jest.fn() }))
 }))
+jest.mock('require-relative', () => () => (app) => require('bluebird').resolve({ on: jest.fn(), app }))
 
-// const foreverSpy = require('forever-monitor').start
 const { getMockArgv } = require('../helpers/')
 const Promise = require('bluebird')
+
 const config = require('config')
 config['pubsweet-server'] = { dbPath: __dirname, adapter: 'leveldb' }
 const runStart = require('../../cli/start')
-const start = require('../../src/start/')
+const start = require('../../src/startup/start.js')
 
 describe('start', () => {
   let server
@@ -31,8 +31,8 @@ describe('start', () => {
     await expect(runStart(getMockArgv(''))).rejects.toHaveProperty('message', `Create database with "pubsweet setupdb" before starting app`)
   })
 
-  it('starts the server', async () => {
+  it('calls startServer with an express app', async () => {
     server = await start()
-    expect(server.listening).toBe(true)
+    expect(server.app).toHaveProperty('mountpath', '/')
   })
 })
