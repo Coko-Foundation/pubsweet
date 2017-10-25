@@ -1,4 +1,4 @@
-const testMode = require('../test/helpers/authsome_mode')
+const path = require('path')
 const Joi = require('joi')
 const winston = require('winston')
 
@@ -32,7 +32,7 @@ module.exports = {
     }
   },
   authsome: {
-    mode: testMode,
+    mode: path.resolve(__dirname, '..', 'test', 'helpers', 'authsome_mode'),
     teams: {
       teamContributors: {
         name: 'Contributors',
