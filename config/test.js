@@ -5,4 +5,7 @@ module.exports = {
       visible: true,
     },
   },
+  authsome: {
+    mode: 'fake-mode'
+  },
 }
