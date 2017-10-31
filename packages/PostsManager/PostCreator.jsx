@@ -2,8 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup'
-import validations from 'pubsweet-server/src/models/validations'
+import mergeValidations from 'pubsweet-server/src/models/validations'
 import config from 'config'
+
+const appValidationsPath = config.validations
+const validations = mergeValidations(require(appValidationsPath))
 
 export default class PostCreator extends React.Component {
   constructor (props) {
@@ -33,7 +36,7 @@ export default class PostCreator extends React.Component {
           controlId='fragment.title'
           label='Title'
           placeholder='One fine day...'
-          validations={validations(config)}
+          validations={validations}
           modelProperty='fragment.title'
           inputRef={(input) => { this.titleInputNode = input }}
         />
