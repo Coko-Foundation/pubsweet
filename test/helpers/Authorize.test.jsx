@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Authorize } from '../../src/helpers/Authorize'
+jest.mock('fake-mode', () => false, {virtual: true})
 
 global.PUBSWEET_COMPONENTS = []
 

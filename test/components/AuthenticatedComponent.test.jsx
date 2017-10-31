@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 
 global.PUBSWEET_COMPONENTS = []
 
+jest.mock('fake-mode', () => false, {virtual: true})
 const {
   AuthenticatedComponent,
 } = require('../../src/components/AuthenticatedComponent')
