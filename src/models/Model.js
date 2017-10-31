@@ -8,7 +8,10 @@ const schema = require('./schema')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
 const logger = require('@pubsweet/logger')
-const validations = require('./validations')(require('config'))
+
+const config = require('config')
+const appValidations = require(config.validations)
+const validations = require('./validations')(appValidations)
 
 schema()
 

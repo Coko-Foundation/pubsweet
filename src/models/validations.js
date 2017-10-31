@@ -57,26 +57,26 @@ let validations = {
   }
 }
 
-let allValidations = function (type, config) {
-  let extraValidations = {}
+let allValidations = function (type, appValidations) {
+  let appValidationsForType = {}
 
-  if (config.validations && config.validations[type]) {
-    extraValidations = config.validations[type]
+  if (appValidations && appValidations[type]) {
+    appValidationsForType = appValidations[type]
   }
 
-  if (Array.isArray(extraValidations)) {
-    const alternatives = extraValidations.map(extra => ({...validations[type], ...extra}))
+  if (Array.isArray(appValidationsForType)) {
+    const alternatives = appValidationsForType.map(alternative => ({...validations[type], ...alternative}))
     return Joi.alternatives().try(...alternatives)
   }
 
-  return Joi.object().keys({...validations[type], ...extraValidations})
+  return Joi.object().keys({...validations[type], ...appValidationsForType})
 }
 
-module.exports = function (config) {
+module.exports = function (appValidations) {
   return {
-    fragment: allValidations('fragment', config),
-    collection: allValidations('collection', config),
-    user: allValidations('user', config),
-    team: allValidations('team', config)
+    fragment: allValidations('fragment', appValidations),
+    collection: allValidations('collection', appValidations),
+    user: allValidations('user', appValidations),
+    team: allValidations('team', appValidations)
   }
 }
