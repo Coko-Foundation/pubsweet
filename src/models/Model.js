@@ -10,8 +10,8 @@ const ValidationError = require('../errors/ValidationError')
 const logger = require('@pubsweet/logger')
 
 const config = require('config')
-const extraValidations = require(config.validations)
-const validations = require('./validations')(extraValidations)
+const appValidations = require(config.validations)
+const validations = require('./validations')(appValidations)
 
 schema()
 

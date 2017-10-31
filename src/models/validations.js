@@ -57,26 +57,26 @@ let validations = {
   }
 }
 
-let allValidations = function (type, extraValidations) {
-  let extraValidationsForType = {}
+let allValidations = function (type, appValidations) {
+  let appValidationsForType = {}
 
-  if (extraValidations && extraValidations[type]) {
-    extraValidationsForType = extraValidations[type]
+  if (appValidations && appValidations[type]) {
+    appValidationsForType = appValidations[type]
   }
 
-  if (Array.isArray(extraValidationsForType)) {
-    const alternatives = extraValidationsForType.map(extra => ({...validations[type], ...extra}))
+  if (Array.isArray(appValidationsForType)) {
+    const alternatives = appValidationsForType.map(alternative => ({...validations[type], ...alternative}))
     return Joi.alternatives().try(...alternatives)
   }
 
-  return Joi.object().keys({...validations[type], ...extraValidationsForType})
+  return Joi.object().keys({...validations[type], ...appValidationsForType})
 }
 
-module.exports = function (extraValidations) {
+module.exports = function (appValidations) {
   return {
-    fragment: allValidations('fragment', extraValidations),
-    collection: allValidations('collection', extraValidations),
-    user: allValidations('user', extraValidations),
-    team: allValidations('team', extraValidations)
+    fragment: allValidations('fragment', appValidations),
+    collection: allValidations('collection', appValidations),
+    user: allValidations('user', appValidations),
+    team: allValidations('team', appValidations)
   }
 }
