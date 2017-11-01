@@ -36,7 +36,8 @@ describe('fragments actions', () => {
   })
 
   describeAction('createFragment', {
-    firstarg: mockcol,
+    // no collection routes to top level fragment endpoint
+    firstarg: null,
     secondarg: {
       title: 'mock fragment',
       type: 'some_fragment',
