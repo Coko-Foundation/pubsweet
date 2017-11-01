@@ -8,7 +8,8 @@ global.PUBSWEET_COMPONENTS = []
 function makeWrapper(props = {}) {
   return shallow(
     <Authorize currentUser={{ id: 'user1' }} {...props}>
-      <div />
+      <span className="secret" />
+      <span className="sibling" />
     </Authorize>,
   )
 }
@@ -44,11 +45,12 @@ describe('<Authorize/>', () => {
   })
 
   it('optionally shows alternative content when not authorized', async () => {
-    const wrapper = makeWrapper({ authsome, unauthorized: <span /> })
+    const wrapper = makeWrapper({ authsome, unauthorized: <span className="message" /> })
 
     resolveMode(false)
     await modePromise
-    expect(wrapper.type()).toBe('span')
+    expect(wrapper.find('.secret')).toHaveLength(0)
+    expect(wrapper.find('.message')).toHaveLength(1)
   })
 
   it('is empty when authsome throws', async () => {
@@ -72,7 +74,7 @@ describe('<Authorize/>', () => {
 
     resolveMode(true)
     await modePromise
-    expect(wrapper.type()).toBe('div')
+    expect(wrapper.find('.secret')).toHaveLength(1)
   })
 
   it('rechecks auth when props change', () => {
