@@ -41,7 +41,7 @@ export class Authorize extends React.Component {
 
   render() {
     return this.state.authorized
-      ? <div>{this.props.children}</div>
+      ? this.props.children
       : this.props.unauthorized || null
   }
 }
