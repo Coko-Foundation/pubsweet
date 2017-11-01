@@ -50,7 +50,7 @@ Authorize.propTypes = {
   currentUser: PropTypes.object,
   operation: PropTypes.string,
   object: PropTypes.object,
-  children: PropTypes.node,
+  children: PropTypes.element,
   unauthorized: PropTypes.node,
   authsome: PropTypes.object.isRequired,
 }
