@@ -3378,12 +3378,6 @@ npm-path@^2.0.2:
   dependencies:
     which "^1.2.10"
 
-npm-path@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/npm-path/-/npm-path-2.0.3.tgz#15cff4e1c89a38da77f56f6055b24f975dfb2bbe"
-  dependencies:
-    which "^1.2.10"
-
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -4050,19 +4044,9 @@ pretty-format@^21.2.1:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-<<<<<<< HEAD
-private@^0.1.6, private@~0.1.5:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
-
-private@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/private/-/private-0.1.7.tgz#68ce5e8a1ef0a23bb570cc28537b5332aba63ef1"
-=======
 private@^0.1.6, private@^0.1.7, private@~0.1.5:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
->>>>>>> 96d7e787e2e3244e4378e71ee95d900819819ee0
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
@@ -4113,15 +4097,9 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-<<<<<<< HEAD
 pubsweet-server@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/pubsweet-server/-/pubsweet-server-1.0.0-beta.2.tgz#d22165460cd71007ad195207bdbcdcd9e4d327a1"
-=======
-"pubsweet-server@git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git":
-  version "1.0.0-alpha.4"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-server.git#0a676241ab403e2f26c75470a0b0486cf520f89d"
->>>>>>> 96d7e787e2e3244e4378e71ee95d900819819ee0
   dependencies:
     "@pubsweet/logger" "^0.0.1"
     authsome "0.0.9"

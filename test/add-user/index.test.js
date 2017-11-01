@@ -1,15 +1,3 @@
-/* global db */
-
-const fs = require('fs-extra')
-const path = require('path')
-const PouchDB = require('pouchdb')
-
-process.env.ALLOW_CONFIG_MUTATIONS = true
-process.env.SUPPRESS_NO_CONFIG_WARNING = true
-
-const basePath = path.join(__dirname, '..', '..', 'api', 'db')
-const dbPath = path.join(basePath, 'test_db')
-
 const nonAdminUser = {
   username: 'nonAdminUsername',
   email: 'nonAdmin@example.com',
@@ -24,10 +12,6 @@ const adminUser = {
 }
 
 const baseConfig = {
-  'pubsweet-server': {
-    dbPath,
-    adapter: 'leveldb',
-  },
   dbManager: {
     username: 'testUsername',
     email: 'test@example.com',
@@ -36,23 +20,13 @@ const baseConfig = {
 }
 
 describe('add-user', () => {
-  beforeAll(() => {
-    fs.ensureDirSync(basePath)
-  })
-
   beforeEach(async () => {
-    await new PouchDB(dbPath).destroy()
-    jest.resetModules() // necessary because db must be recreated after destroyed
+    // need to reset modules to get fresh db because models hold a reference
+    jest.resetModules()
     const config = require('config')
-    config['pubsweet-server'] = baseConfig['pubsweet-server']
     config['dbManager'] = baseConfig['dbManager']
     const { setupDb } = require('../../src/')
     await setupDb()
-  })
-
-  afterEach(async () => {
-    // call to models adds global db: see server/src/models/schema :(
-    await db.destroy()
   })
 
   it('adds a non-admin user', async () => {

@@ -1,5 +1,14 @@
 const Joi = require('joi')
-const schemas = require('pubsweet-server/src/models/validations')
+const config = require('config')
+let appValidations
+try {
+  appValidations = require(config.validations)
+} catch (err) {
+  appValidations = []
+}
+const schemas = require('pubsweet-server/src/models/validations')(
+  appValidations,
+)
 const _ = require('lodash/fp')
 
 const userSchema = Joi.object({

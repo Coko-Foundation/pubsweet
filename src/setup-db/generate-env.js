@@ -6,9 +6,16 @@ const _ = require('lodash/fp')
 const config = require('config')
 
 module.exports = () => {
+  if (
+    config.has('pubsweet-server.secret') &&
+    config.get('pubsweet-server.secret')
+  ) {
+    logger.info('Using existing secret from config')
+    return
+  }
+
   const configFilePath = path.join(
-    process.cwd(),
-    'config',
+    config.util.getEnv('NODE_CONFIG_DIR'),
     `local-${config.util.getEnv('NODE_ENV')}.json`,
   )
   logger.info(`Adding pubsweet secret to ${configFilePath}`)
