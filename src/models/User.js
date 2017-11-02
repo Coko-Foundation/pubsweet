@@ -51,7 +51,7 @@ class User extends Model {
       throw new ConflictError('User already exists')
     }
 
-    result = await User.findByUsername(user.email).catch(swallowNotFound)
+    result = await User.findByUsername(user.username).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')
