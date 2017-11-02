@@ -13,7 +13,6 @@ let validations = {
     id: Joi.string().guid().required(),
     type: Joi.string().required(),
     fragmentType: Joi.string().required(),
-    title: Joi.string(),
     rev: Joi.string(),
     fragments: Joi.array().items(Joi.string().guid()),
     owners: Joi.array().items(Joi.string().guid())

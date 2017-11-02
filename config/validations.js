@@ -6,6 +6,7 @@ module.exports = {
       fragmentType: Joi.valid('blogpost').required(),
       source: Joi.string(),
       kind: Joi.string(),
+      title: Joi.string(),
       presentation: Joi.string(),
       published: Joi.boolean(),
       filtered: Joi.string()
