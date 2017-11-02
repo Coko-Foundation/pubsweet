@@ -19,10 +19,9 @@ export default class PostCreator extends React.Component {
 
     if (title !== '') {
       this.props.create({
-        kind: 'blogpost',
-        title: title,
-        published: false,
-        source: undefined
+        fragmentType: 'blogpost',
+        title,
+        published: false
       })
     }
 
