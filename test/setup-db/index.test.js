@@ -18,11 +18,6 @@ const dbConfig = {
     dbPath,
     adapter: 'leveldb',
   },
-  dbManager: {
-    username: 'testUsername',
-    email: 'test@example.com',
-    password: 'test_password',
-  },
 }
 
 describe('setup-db', () => {
@@ -35,25 +30,36 @@ describe('setup-db', () => {
     jest.resetModules() // necessary because db must be recreated after destroyed
     const config = require('config')
     _.merge(config, dbConfig)
-    const { setupDb } = require('../../src/')
+  })
+
+  // call to models adds global db: see server/src/models/schema :(
+  afterEach(() => db.destroy())
+
+  it('creates the database', async () => {
+    const { setupDb } = require('../../src')
     await setupDb()
-  })
-
-  afterEach(async () => {
-    // call to models adds global db: see server/src/models/schema :(
-    await db.destroy()
-  })
-
-  it('creates the database', () => {
     const dbDir = fs.readdirSync(basePath)
     expect(dbDir).toContain('test_db')
     const items = fs.readdirSync(dbPath)
     expect(items).toContain('CURRENT')
   })
 
-  it('generates secret in config', () => {
+  it('generates secret in config if not set', async () => {
+    const config = require('config')
+    config['pubsweet-server'].secret = null
+    const { setupDb } = require('../../src')
+    await setupDb()
     const fs = require('fs-extra')
-    const calls = fs.writeJsonSync.mock.calls
-    expect(calls[0][1]['pubsweet-server']).toHaveProperty('secret')
+    expect(fs.writeJsonSync).toHaveBeenCalled()
+    expect(fs.writeJsonSync.mock.calls[0][1]['pubsweet-server']).toHaveProperty(
+      'secret',
+    )
+  })
+
+  it('does not regenerate secret if already set', async () => {
+    const fs = require('fs-extra')
+    const { setupDb } = require('../../src')
+    await setupDb()
+    expect(fs.writeJsonSync).not.toHaveBeenCalled()
   })
 })
