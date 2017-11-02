@@ -21,9 +21,28 @@ describe('User', function () {
     expect(shouldBeInvalid).toEqual(false)
   })
 
-  it('raises an error if trying to save a non-unique user', async () => {
+  it('raises an error if trying to save a user with a non-unique username', async () => {
     const user = new User(userFixture)
-    const duplicateUser = new User(userFixture)
+    const otherUserFixture = fixtures.otherUser
+    otherUserFixture.username = userFixture.username
+    const duplicateUser = new User(otherUserFixture)
+
+    await user.save()
+
+    try {
+      await duplicateUser.save()
+    } catch (err) {
+      expect(err.name).toEqual('ConflictError')
+    }
+
+    expect.hasAssertions()
+  })
+
+  it('raises an error if trying to save a user with a non-unique email', async () => {
+    const user = new User(userFixture)
+    const otherUserFixture = fixtures.otherUser
+    otherUserFixture.email = userFixture.email
+    const duplicateUser = new User(otherUserFixture)
 
     await user.save()
 
