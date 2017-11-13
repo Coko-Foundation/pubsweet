@@ -3,6 +3,7 @@ const sorter = require('./sorter')
 const converters = require('./converters')
 const processFragment = require('./process')
 const output = require('./output')
+const fs = require('fs')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -22,9 +23,18 @@ const EpubBackend = function (app) {
       // chapters
       const fragments = await collection.getFragments()
 
-      // styles
-      const styles = [req.query.style].filter(name => name)
-
+      // CSS Theme
+      // TODO: change it from array to the name of the selected theme
+      let styles = [req.query.style].filter(name => name)
+      // TODO: to be desided where the per applications themes should live
+      let stylesRoot = process.cwd() + '/static'
+      console.log('where', __dirname)
+      if (styles.length === 0 || !fs.existsSync(`${stylesRoot}/${styles[0]}`)) {
+        styles = ['defaultEpubTheme.css']
+        stylesRoot = `${__dirname}/themes`
+      }
+      console.log('styles', styles)
+      console.log('stylesroot', stylesRoot)
       // converters
       const activeConverters = [req.query.converter]
         .filter(name => name && converters[name])
@@ -37,7 +47,7 @@ const EpubBackend = function (app) {
       // TODO: read the path to the uploads folder from config
       const resourceRoot = process.cwd() + '/uploads'
 
-      const epub = new HTMLEPUB(book, {resourceRoot})
+      const epub = new HTMLEPUB(book, {resourceRoot, stylesRoot})
 
       await epub.load(parts)
 
