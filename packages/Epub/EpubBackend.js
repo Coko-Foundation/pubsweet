@@ -1,9 +1,10 @@
 const HTMLEPUB = require('html-epub')
+const fs = require('fs')
+
 const sorter = require('./sorter')
 const converters = require('./converters')
 const processFragment = require('./process')
 const output = require('./output')
-const fs = require('fs')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -28,13 +29,12 @@ const EpubBackend = function (app) {
       let styles = [req.query.style].filter(name => name)
       // TODO: to be desided where the per applications themes should live
       let stylesRoot = process.cwd() + '/static'
-      console.log('where', __dirname)
+
       if (styles.length === 0 || !fs.existsSync(`${stylesRoot}/${styles[0]}`)) {
-        styles = ['defaultEpubTheme.css']
+        styles = ['default.css']
         stylesRoot = `${__dirname}/themes`
       }
-      console.log('styles', styles)
-      console.log('stylesroot', stylesRoot)
+
       // converters
       const activeConverters = [req.query.converter]
         .filter(name => name && converters[name])
