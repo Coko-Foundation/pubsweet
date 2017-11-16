@@ -2,19 +2,10 @@ import * as api from '../helpers/api'
 import * as T from './types'
 
 export const fragmentUrl = (collection, fragment) => {
-  let url = `/collections/${collection.id}/fragments`
-
-  if (fragment.id) url += `/${fragment.id}`
-
-  return url
-}
-
-export const collectionUrl = (collection, suffix) => {
-  let url = '/collections'
-
-  if (collection) url += `/${collection.id}`
-
-  if (suffix) url += `/${suffix}`
+  let url = ''
+  if (collection) url += `/collections/${collection.id}`
+  url += '/fragments'
+  if (fragment && fragment.id) url += `/${fragment.id}`
 
   return url
 }
@@ -46,7 +37,7 @@ export function getFragments(collection, options) {
   return dispatch => {
     dispatch(getFragmentsRequest(collection))
 
-    let url = collectionUrl(collection, 'fragments')
+    let url = fragmentUrl(collection)
 
     if (options && options.fields) {
       url += '?fields=' + encodeURIComponent(options.fields.join(','))
