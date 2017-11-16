@@ -173,7 +173,7 @@ const downloadFromInk = ([auth, response]) => {
 }
 
 var InkBackend = function (app) {
-  app.use('/ink', (req, res, next) => {
+  app.use('/api/ink', (req, res, next) => {
     var fileStream = new Busboy({ headers: req.headers })
 
     const handleErr = err => {
