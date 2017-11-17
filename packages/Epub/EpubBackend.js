@@ -41,7 +41,7 @@ const EpubBackend = function (app) {
         .map(name => converters[name])
 
       const parts = fragments.sort(sorter).map(
-        processFragment({ styles, activeConverters })
+        processFragment({ styles, activeConverters, book })
       )
 
       // TODO: read the path to the uploads folder from config

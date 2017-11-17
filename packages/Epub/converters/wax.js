@@ -1,10 +1,17 @@
-module.exports = $ => {
+module.exports = ($, fragmentTitle, bookTitle, fragmentDivision) => {
   const body = $('body')
 
-  const replaceWithBlockquote = (i, elem) => {
+  const outerContainer = $('<div/>').attr('class', fragmentDivision)
+  const innerContainer = $('<section/>').attr('data-type', 'chapter')
+  $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)
+  $('<h1/>').attr('class', 'ct').html(fragmentTitle).appendTo(innerContainer)
+  $('<div/>').attr('class', 'dup').html(fragmentTitle).appendTo(innerContainer)
+  $('<div/>').attr('class', 'folio').appendTo(innerContainer)
+
+  const replaceWithBlockquote = className => (i, elem) => {
     const $elem = $(elem)
 
-    const blockquote = $('<blockquote class="sc-blockquote"/>')
+    const blockquote = $(`<blockquote class="${className}"/>`)
       .append($elem.contents())
 
     $elem.replaceWith(blockquote)
@@ -43,14 +50,17 @@ module.exports = $ => {
   })
 
   // replace custom HTML elements
-  $('extract-prose, extract-poetry, epigraph-poetry, epigraph-prose').each(replaceWithBlockquote)
+  $('extract-prose').each(replaceWithBlockquote('ex'))
+  $('extract-poetry').each(replaceWithBlockquote('px'))
+  $('epigraph-poetry').each(replaceWithBlockquote('sepo'))
+  $('epigraph-prose').each(replaceWithBlockquote('sep'))
   $('comment').each(replaceWithText)
   $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
-  $('chapter-title').each(replaceWithParagraph('sc-chapter-title'))
-  $('chapter-subtitle').each(replaceWithParagraph('sc-chapter-subtitle'))
-  $('source-note').each(replaceWithParagraph('source-note'))
-  $('ol[styling="qa"]').each(replaceWithList('sc-list-ol-qa'))
-  $('ol[styling="unstyled"]').each(replaceWithList('sc-list-ol-unstyled'))
+  $('chapter-title').each(replaceWithParagraph('ct'))
+  $('chapter-subtitle').each(replaceWithParagraph('cst'))
+  $('source-note').each(replaceWithParagraph('exsn'))
+  $('ol[styling="qa"]').each(replaceWithList('di'))
+  $('ol[styling="unstyled"]').each(replaceWithList('none'))
 
   // remove "uploads" from the start of each src attribute
   $('[src]').each((i, elem) => {
@@ -78,16 +88,22 @@ module.exports = $ => {
 
     const id = $elem.attr('data-id')
     const content = `${i + 1}. ${$elem.attr('note-content')}`
+    const sup = $('<sup/>').text(`${i + 1}`)
 
     $('<aside epub:type="footnote" class="footnote"/>')
       .attr('id', id)
       .html(content)
       .appendTo(body)
 
-    const callout = $('<a epub:type="noteref" class="note-callout"/>')
+    const callout = $('<a epub:type="noteref" class="footnoteRef"/>')
       .attr('href', '#' + id)
-      .text(`[${i + 1}]`)
+      .append(sup)
 
     $elem.replaceWith(callout)
   })
+
+  let bodyContent = body.contents()
+  innerContainer.append(bodyContent)
+  outerContainer.append(innerContainer)
+  body.replaceWith(outerContainer)
 }
