@@ -3,10 +3,11 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision) => {
 
   const outerContainer = $('<div/>').attr('class', fragmentDivision)
   const innerContainer = $('<section/>').attr('data-type', 'chapter')
+  $('<p/>').attr('class', 'ch-start').html('beginning').appendTo(innerContainer)
+  $('<div/>').attr('class', 'folio').appendTo(innerContainer)
   $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)
   $('<h1/>').attr('class', 'ct').html(fragmentTitle).appendTo(innerContainer)
   $('<div/>').attr('class', 'dup').html(fragmentTitle).appendTo(innerContainer)
-  $('<div/>').attr('class', 'folio').appendTo(innerContainer)
 
   const replaceWithBlockquote = className => (i, elem) => {
     const $elem = $(elem)
