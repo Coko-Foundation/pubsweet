@@ -1,8 +1,8 @@
 module.exports = ($, fragmentTitle, bookTitle, fragmentDivision) => {
   const body = $('body')
 
-  const outerContainer = $('<div/>').attr('class', fragmentDivision)
-  const innerContainer = $('<section/>').attr('data-type', 'chapter')
+  let outerContainer = $('<div/>').attr('class', fragmentDivision)
+  let innerContainer = $('<section/>').attr('data-type', 'chapter')
   $('<p/>').attr('class', 'ch-start').html('beginning').appendTo(innerContainer)
   $('<div/>').attr('class', 'folio').appendTo(innerContainer)
   $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)

@@ -5,6 +5,7 @@ const processFragment = require('./process')
 test('converts source to html', () => {
   const fragment = {
     title: 'A Test',
+    division: 'body',
     source: `
       <div>
           <h1>A Test</h1>
