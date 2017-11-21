@@ -138,7 +138,7 @@ describe('CLI: integration test', () => {
       app.stdout.on('data', async data => {
         console.log('stdout:', data.toString())
         if (data.toString().includes('App is listening')) {
-          const result = await fetch('http://localhost:3000')
+          const result = await fetch('http://localhost:4000')
           expect(result.status).toBe(200)
           done()
         }

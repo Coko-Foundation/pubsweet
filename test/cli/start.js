@@ -1,15 +1,22 @@
 jest.mock('webpack', () => {
-  const compiler = {
-    run: cb => cb(null, {})
-  }
-  return () => compiler
 })
 jest.mock(require('path').resolve('webpack', `webpack.${require('config').util.getEnv('NODE_ENV')}.config.js`), () => {}, {virtual: true})
 jest.mock(require('path').resolve('config', 'components.json'), () => [], {virtual: true})
 jest.mock('forever-monitor', () => ({
   start: jest.fn(() => ({ on: jest.fn() }))
 }))
-jest.mock('require-relative', () => () => (app) => require('bluebird').resolve({ on: jest.fn(), app }))
+jest.mock('require-relative', () => {
+  return (required) => {
+    if (required === 'webpack') {
+      const compiler = {
+        run: cb => cb(null, {})
+      }
+      return () => compiler
+    } else {
+      return (app) => require('bluebird').resolve({ on: jest.fn(), app })
+    }
+  }
+})
 
 const { getMockArgv } = require('../helpers/')
 const Promise = require('bluebird')
