@@ -1,4 +1,5 @@
-const webpack = require('webpack')
+const requireRelative = require('require-relative')
+const webpack = requireRelative('webpack')
 const Promise = require('bluebird')
 const path = require('path')
 const webpackDevMw = require('webpack-dev-middleware')

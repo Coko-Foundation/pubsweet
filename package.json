@@ -56,6 +56,9 @@
       "**/test/*.js",
       "**/test/cli/*.js"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/*.js",
