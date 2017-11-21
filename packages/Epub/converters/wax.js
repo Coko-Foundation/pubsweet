@@ -1,8 +1,17 @@
-module.exports = ($, fragmentTitle, bookTitle, fragmentDivision) => {
+module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcategory) => {
   const body = $('body')
 
   let outerContainer = $('<div/>').attr('class', fragmentDivision)
-  let innerContainer = $('<section/>').attr('data-type', 'chapter')
+  let innerContainer
+
+  if (fragmentDivision === 'front') {
+    innerContainer = $('<section/>').attr('data-type', 'fm-body')
+  } else if (fragmentDivision === 'back') {
+    innerContainer = $('<section/>').attr('data-type', 'bm-body')
+  } else {
+    innerContainer = $('<section/>').attr('data-type', fragmentSubcategory)
+  }
+
   $('<p/>').attr('class', 'ch-start').html('beginning').appendTo(innerContainer)
   $('<div/>').attr('class', 'folio').appendTo(innerContainer)
   $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)

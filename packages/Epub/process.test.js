@@ -6,6 +6,7 @@ test('converts source to html', () => {
   const fragment = {
     title: 'A Test',
     division: 'body',
+    subCategory: 'part',
     source: `
       <div>
           <h1>A Test</h1>
