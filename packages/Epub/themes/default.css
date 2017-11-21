@@ -1,81 +1,2040 @@
-.sc-chapter-title {
-  display: block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  /* font-weight: bold; */
+@charset "UTF-8";
+
+.content {
+  margin: 0;
 }
-.sc-chapter-subtitle {
+
+/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
+/* Document
+========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
+ */
+ html {
+  -ms-text-size-adjust: 100%;
+
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+
+  /* 2 */
+}
+
+/* Sections
+========================================================================== */
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+ body {
+  margin: 0;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+ article,
+ aside,
+ footer,
+ header,
+ nav,
+ section {
   display: block;
-  font-size: 1.5em;
-  margin-top: 0.83em;
-  margin-bottom: 0.83em;
-  margin-left: 0;
-  margin-right: 0;
-  /* font-weight: bold; */
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+ h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in IE.
+ */
+ figcaption,
+ figure,
+ main {
+  /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+ figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+ hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+
+  /* 1 */
+  height: 0;
+
+  /* 1 */
+  overflow: visible;
+
+  /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+ pre {
+  font-family: monospace, monospace;
+
+  /* 1 */
+  font-size: 1em;
+
+  /* 2 */
+}
+
+/* Text-level semantics
+========================================================================== */
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+ a {
+  background-color: transparent;
+
+  /* 1 */
+  -webkit-text-decoration-skip: objects;
+
+  /* 2 */
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57- and Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+ abbr[title] {
+  border-bottom: none;
+
+  /* 1 */
+  text-decoration: underline;
+
+  /* 2 */
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+
+  /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+ b,
+ strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+ b,
+ strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+ code,
+ kbd,
+ samp {
+  font-family: monospace, monospace;
+
+  /* 1 */
+  font-size: 1em;
+
+  /* 2 */
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+ dfn {
   font-style: italic;
 }
-.sc-chapter-number {
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+ mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+ small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+ sub,
+ sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ */
+ audio,
+ video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+ audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+ img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+ svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Forms
+========================================================================== */
+/**
+ * 1. Change the font styles in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+  font-family: sans-serif;
+
+  /* 1 */
+  font-size: 100%;
+
+  /* 1 */
+  line-height: 1.15;
+
+  /* 1 */
+  margin: 0;
+
+  /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+ button,
+ input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+ button,
+ select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+ button,
+ html [type="button"],
+ [type="reset"],
+ [type="submit"] {
+  -webkit-appearance: button;
+
+  /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+ button::-moz-focus-inner,
+ [type="button"]::-moz-focus-inner,
+ [type="reset"]::-moz-focus-inner,
+ [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+ button:-moz-focusring,
+ [type="button"]:-moz-focusring,
+ [type="reset"]:-moz-focusring,
+ [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+ fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+ legend {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  /* 1 */
+  color: inherit;
+
+  /* 2 */
+  display: table;
+
+  /* 1 */
+  max-width: 100%;
+
+  /* 1 */
+  padding: 0;
+
+  /* 3 */
+  white-space: normal;
+
+  /* 1 */
+}
+
+/**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+ progress {
+  display: inline-block;
+
+  /* 1 */
+  vertical-align: baseline;
+
+  /* 2 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+ textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+ [type="checkbox"],
+ [type="radio"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  /* 1 */
+  padding: 0;
+
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+ [type="number"]::-webkit-inner-spin-button,
+ [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+ [type="search"] {
+  -webkit-appearance: textfield;
+
+  /* 1 */
+  outline-offset: -2px;
+
+  /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+ */
+ [type="search"]::-webkit-search-cancel-button,
+ [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+ ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+
+  /* 1 */
+  font: inherit;
+
+  /* 2 */
+}
+
+/* Interactive
+========================================================================== */
+/*
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ */
+ details,
+ menu {
   display: block;
-  font-size: 1.17em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+ summary {
+  display: list-item;
+}
+
+/* Scripting
+========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ */
+ canvas {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+ template {
+  display: none;
+}
+
+/* Hidden
+========================================================================== */
+/**
+ * Add the correct display in IE 10-.
+ */
+ [hidden] {
+  display: none;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url("fonts/MinionPro-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url("fonts/MinionPro-It.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url("fonts/MinionPro-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minion Pro';
+  src: url("fonts/MinionPro-BoldIt.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* colors for the books */
+/*needed Vars
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+/* General CSS for contents */
+html {
+  font-family: "Minion Pro";
+  font-weight: normal;
+  font-size: 13px;
+  color: black;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+
+p {
+  font-size: 13px;
+  line-height: 17px;
+  text-align: justify;
+  text-indent: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  -moz-hyphens: auto;
+}
+
+p + p {
+    text-indent: 1pc;
+}
+
+p:first-of-type {
+  text-indent: 0;
+}
+
+em, .italic {
+  font-family: inherit;
+  font-style: italic;
+  font-weight: 400;
+}
+
+pre {
+  max-width: (6in - 0.75) in0 0.75 in;
+}
+
+a {
+  color: black;
+  font-family: "Minion Pro";
+  font-weight: 400;
+  text-decoration: none;
+  font-style: inherit;
+}
+
+a:hover {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+strong em {
+  font-weight: bold;
+  font-style: italic;
+}
+
+var {
+  font-family: "Minion Pro";
+  font-weight: normal;
+}
+
+var em, var .Italic {
+  font-weight: normal;
+  font-style: normal;
+}
+
+blockquote {
+  display: block;
+  margin-top: 13pt;
+  margin-bottom: 12.8pt;
+  margin-left: 1pc;
+}
+
+blockquote p {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 12.80pt;
+  text-indent: 0;
+  text-align: justify;
+  margin-top: 0;
+}
+
+blockquote p + p {
+  margin-top: 0;
+}
+
+sup {
+  font-size: 6.5px;
+  font-weight: inherit;
+  position: relative;
+  top: -3px;
+  vertical-align: baseline;
+}
+
+.references p {
+  line-height: 16px;
+  font-size: 13px;
+}
+
+hr {
+  -webkit-column-break-before: avoid;
+  page-break-before: avoid;
+  break-before: avoid;
+  margin-top: 5px;
+  margin-bottom: 29px;
+  border: none;
+}
+
+hr:after {
+  content: "• • •";
+  height: 17px;
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 1em;
+}
+
+hr.ls {
+  height: 0px;
+}
+
+hr.ls:after {
+  content: "\2002";
+}
+
+.small-caps, [data-type="chapter"] .cepsn, ol lh.lpti, ul lh.lpti, .c-two > p {
+  font-variant-caps: all-small-caps;
+  -webkit-font-feature-settings: "smcp", "c2sc";
+  font-feature-settings: "smcp", "c2sc";
+}
+
+.old-style-figures, h3, [data-type="chapter"] h1:before, [data-type="chapter"] .ct:before {
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-feature-settings: "onum";
+  font-feature-settings: "onum";
+}
+
+/* The ways all the titles appears */
+ h1 {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 400;
+  text-align: center;
+}
+
+ .subtitle {
+  margin-top: 0.8pc;
+  text-align: center;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13pt;
+  -webkit-column-break-before: avoid;
+  page-break-before: avoid;
+  break-before: avoid;
+  display: block;
+  margin-top: 0;
+}
+
+ .subtitle + p {
+  margin-top: 141pt;
+}
+
+ h2 {
+  font-family: "Minion Pro";
+  font-size: 12px;
+  margin: 0 auto;
+  max-width: 361px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  line-height: 17px;
+  -webkit-column-break-after: avoid;
+  page-break-after: avoid;
+  break-after: avoid;
+  text-align: center;
+  letter-spacing: 2pt;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+ h3 {
+  font-size: 12px;
+  line-height: 17px;
+  font-style: italic;
+  margin: 0 auto;
+  max-width: 361px;
+  text-align: center;
+  font-weight: 400;
+}
+
+ h3 em {
+  font-style: normal;
+}
+
+ h3 + p {
+  text-indent: 0;
+}
+
+ h4 {
+  font-size: 13px;
+  line-height: 13pt;
+  margin-top: 26pt;
+  font-style: italic;
+  text-align: left;
+  display: inline-bloc;
+}
+
+ h4:after {
+  content: ".&emsp;";
+  display: inline-block;
+}
+
+ h4 + p {
+  text-indent: 0;
+}
+
+  blockquote.intro {
+  max-width: 80mm;
+  display: block;
+  margin-top: 1pc;
   margin-left: 0;
-  margin-right: 0;
-  /* font-weight: bold; */
+}
+
+  blockquote.intro:first-of-type {
+  margin-top: 2pc;
+}
+
+  blockquote.intro p {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 13pt;
+  text-indent: 0;
+  text-align: left;
+}
+
+  blockquote.intro p.author {
+  font-size: 8pt;
+  line-height: 13pt;
+}
+
+  {
+  margin-bottom: 0;
+}
+
+  h1 + p {
+  text-indent: 0;
+}
+
+html {
+  counter-reset: chapter;
+}
+
+.ht {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+[data-type="chapter"] {
+  margin: 0 auto;
+}
+
+[data-type="chapter"] h1, .ct {
+  margin-top: 40px;
+  padding-left: 55px;
+  padding-right: 55px;
+  font-size: 24px;
+  line-height: 34px;
+  text-transform: none;
+  font-weight: 400;
+  text-align: center;
+  text-transform: capitalize;
+  /*margin-bottom: 0;*/
+  /*hack for vivliostyle with no hgroup*/
+  margin-bottom: 166px;
+
+}
+
+[data-type="chapter"] h1:before, .ct:before {
+  content: counter(chapter);
+  counter-increment: chapter;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 0.5px solid black;
+  margin: 0 auto;
+  margin-bottom: 17px;
+  display: block;
+  letter-spacing: 1px;
+  clear: both;
+  width: 32px;
+  height: 31px;
+}
+
+.cst {
+  padding-left: 55px;
+  padding-right: 55px;
+  font-size: 17px;
+  line-height: 21px;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.cau {
+  padding-left: 35px;
+  padding-right: 35px;
+  font-size: 13px;
+  margin-top: 13px;
+  text-indent: 0;
+  text-align: center;
+}
+
+.cep {
+  font-size: 12px;
+  line-height: 14px;
+  font-style: italic;
+  width: 350px;
+  margin: 0 auto;
+  text-align: justify;
+  text-indent: 0;
+  margin-top: 25px;
+}
+
+.cep em {
+  font-style: normal;
+}
+
+.cepsn {
+  font-size: 11px;
+  line-height: 16px;
+  font-style: normal;
+  width: 350px;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  margin-top: 3px;
+  text-align: justify;
+  text-indent: 0;
+}
+
+.pt {
+  -webkit-column-break-before: page;
+  page-break-before: page;
+  break-before: page;
+  font-size: 16px;
+  line-height: 1;
+  margin: 0;
+  font-variant: all-small-caps;
+  -webkit-font-feature-settings: "smcp", "c2sc";
+  font-feature-settings: "smcp", "c2sc";
+  letter-spacing: 1px;
+}
+
+.notes ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 8px;
+}
+
+.notes ol li {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 11px;
+  line-height: 15px;
+}
+
+.notes ol li:first-of-type {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.notes ol li:last-of-type {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.notes ol li:first-child {
+  margin-top: 0px;
+}
+
+.notes ol li:first-child {
+  margin-top: 0px;
+}
+
+.notes ol li p {
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.footnoteRef {
+  font-style: normal !important;
+}
+
+figure {
+  margin: 0;
+  text-indent: 0;
+  padding: 0;
+  page-break-inside: avoid;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0pt;
+  float-reference: column;
+  float: top;
+  float-defer: last;
+}
+
+figure figcaption {
+  font-size: 12px;
+  font-style: normal;
+  text-indent: 0;
+  text-align: left;
+  font-size: 8pt;
+  line-height: 11pt;
+}
+
+figure figcaption:before {
+  font-style: italic;
+}
+
+figure img {
+  width: 100%;
+}
+
+/* list */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-left: 2.1em;
+}
+
+ul p,
+ol p {
+  text-indent: 0;
+  text-align: left;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+ol, ul {
+  list-style-position: outside;
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-feature-settings: "onum";
+  font-feature-settings: "onum";
+}
+
+ol lh.lpti, ul lh.lpti {
+  margin-left: 1.5em;
+  letter-spacing: 1px;
+  margin-top: 16px;
+  margin-bottom: 2px;
+  display: block;
+}
+
+ol lh.lpti + li, ul lh.lpti + li {
+  margin-top: 0;
+}
+
+ol li, ul li {
+  margin-left: 1.5em;
+}
+
+ol > li:first-of-type, ul > li:first-of-type {
+  margin-top: 17px;
+}
+
+ol li:nth-of-type(n + 9), ul li:nth-of-type(n + 9) {
+  margin-left: 1.5em;
+}
+
+ul {
+  margin-left: 1.5em;
+}
+
+ul li {
+  list-style-type: bullet;
+  list-style-position: outside;
+}
+
+h2.tabletitle {
+  font-size: 13px;
+  line-height: 14pt;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 8pt !important;
+  padding-bottom: 0;
+  border-collapse: none;
+}
+
+.table-caption {
+  text-indent: 0;
+  text-align: justify;
+  margin: 0 auto;
+  font-size: 8pt !important;
+  line-height: 17px !important;
+}
+
+table {
+  font-family: "Minion Pro";
+  margin-bottom: 26px;
+  border-bottom: 1pt solid grey;
+  border-left: 0;
+  border-right: 0;
+  page-break-inside: avoid;
+  border-collapse: collapse;
+}
+
+table p {
+  font-size: 7px;
+  line-height: 17px;
+  text-align: left;
+  text-indent: 0;
+}
+
+thead tr:nth-of-type(n+2) p {
+  text-align: right;
+}
+
+th {
+  width: 10%;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  font-weight: normal;
+  border-bottom: 1pt solid grey;
+}
+
+tr td:nth-of-type(n+2) p {
+  text-align: right;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  orphans: 2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.pagination-pagebreak,
+chaptertitle,
+img,
+h1,
+h2,
+h3 {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.no-page-break {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+#no-page-break {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+h1 + h2,
+h1 + h3,
+h1 + h4,
+h1 + h5,
+h1 + h6,
+h2 + h2,
+h2 + h3,
+h2 + h4,
+h2 + h5,
+h2 + h6,
+h3 + h2,
+h3 + h3,
+h3 + h4,
+h3 + h5,
+h3 + h6,
+h4 + h2,
+h4 + h3,
+h4 + h4,
+h4 + h5,
+h4 + h6,
+h5 + h2,
+h5 + h3,
+h5 + h4,
+h5 + h5,
+h5 + h6,
+h6 + h2,
+h6 + h3,
+h6 + h4,
+h6 + h5,
+h6 + h6,
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p,
+h1 + ol,
+h2 + ol,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol,
+h1 + ul,
+h2 + ul,
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h1 + ol li:first-of-type,
+h2 + ol li:first-of-type,
+h3 + ol li:first-of-type,
+h4 + ol li:first-of-type,
+h5 + ol li:first-of-type,
+h6 + ol li:first-of-type,
+h1 + ul > li:first-of-type,
+h2 + ul > li:first-of-type,
+h3 + ul > li:first-of-type,
+h4 + ul > li:first-of-type,
+h5 + ul > li:first-of-type,
+h6 + ul > li:first-of-type,
+li ul,
+li ol {
+  page-break-before: avoid;
+}
+
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p {
+  text-indent: 0;
+}
+
+ol + h2 {
+  margin-top: 33px;
+}
+
+h2, div > h2.fm1:first-of-type {
+  margin-top: 0;
+}
+
+section .fmtxt + .fmh {
+  margin-top: 34px;
+}
+
+hgroup + h2 {
+  margin-top: 0;
+}
+
+p + h2 {
+  margin-top: 18px;
+}
+
+p + h3 {
+  margin-top: 0px;
+}
+
+h2 {
+  margin-bottom: 0;
+  padding-top: 4px;
+}
+
+h2 + p {
+  margin-top: 12px;
+}
+
+h3 {
+  padding-top: 10px;
+}
+
+h3 + p {
+  margin-top: 7px;
+}
+
+ol + p, ul + p, hr + p {
+  text-indent: 0;
+}
+
+.cepsn:last-of-type {
+  margin-bottom: 0;
+}
+
+.cep:last-of-type {
+  margin-bottom: 88px;
+}
+
+.cst:last-of-type {
+  margin-bottom: 135px;
+}
+
+.cau:last-of-type {
+  margin-bottom: 105px;
+}
+
+.ct:last-of-type, .ct:last-of-type {
+  margin-bottom: 166px;
+}
+
+
+ol > li:first-child, ul > li:first-child {
+  padding-top: 8px;
+}
+
+ol li:last-child, ul li:last-child {
+  margin-bottom: 9px;
+}
+
+.subvention p {
+  font-size: 12px;
+  line-height: 11pt;
+  font-family: inherit;
+  text-align: left;
+}
+
+[data-type="half-title"] h1 {
+  text-align: center;
+  font-size: 21px;
+  line-height: 25px;
+  text-transform: titlecase;
+}
+
+section[data-type="seriePage"] {
+  font-size: 11px;
+  line-height: 14px;
+}
+
+section[data-type="seriePage"] .st {
+  text-align: center;
+  margin-top: 0;
+}
+
+section[data-type="seriePage"] .sphn {
+  text-indent: 0;
+  text-align: justify;
+  font-size: inherit;
+  line-height: inherit;
+  margin-top: 17px;
+  text-indent: 0;
+}
+
+section[data-type="seriePage"] .st {
+  text-align: center;
+  font-size: inherit;
   text-transform: uppercase;
 }
 
-.sc-source-note {
-  color: #939393;
-  font-size: 14px;
-  /* font-style: italic; */
+section[data-type="seriePage"] .sed {
+  text-indent: 0;
+  text-align: center;
 }
 
-.sc-source-note::before {
-  content: ' [ ';
+section[data-type="seriePage"] .sl li {
+  margin-bottom: 6px;
 }
 
-.sc-source-note::after {
-  content: ' ]';
+section[data-type="seriePage"] .sl li p {
+  font-size: inherit;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  text-align: left;
+  font-size: 11px;
+  line-height: 14px;
 }
-.sc-blockquote {
-  border-left: 2px solid #e0e4e4;
-  padding-left: 30px;
+
+/* chains */
+.st + .sed {
+  margin-top: 18px;
 }
-.sc-list-ol-qa {
-  list-style-type: none;
+
+.sphn + .sed {
+  margin-top: 22px;
+}
+
+.sed + .sl {
+  margin-top: 22px;
+}
+
+.titlepage {
+  text-indent: 0;
+}
+
+.titlepage hgroup {
+  width: 20pc;
+  margin: 0 auto;
+}
+
+.titlepage hgroup .ti {
+  font-size: 34px;
+  line-height: 39px;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.titlepage hgroup p.sti {
+  font-size: 14pt;
+  line-height: 17pt;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 8.8pt;
+  font-style: italic;
+}
+
+.titlepage hgroup:after {
+  position: absolute;
+  left: 10.5pc;
+  content: ' ';
+  display: block;
+  width: 2pc;
+  margin: 0 auto;
+  margin-top: 4pc;
+  text-align: center;
+  margin-top: 2.17pc;
+  height: 1pt;
+  border-bottom: 0.3pt solid black;
+}
+
+.titlepage .edby {
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4.85pc;
+  font-style: italic;
+  text-align: center;
+  text-indent: 0;
+}
+
+.titlepage .au {
+  font-weight: 400;
+  font-size: 16pt;
+  line-height: 22pt;
+  text-align: center;
+  margin: 0 auto;
+  text-indent: 0;
+  width: 20pc;
+}
+
+.titlepage .edby + .au {
+  margin-top: 5.3pt;
+}
+
+.titlepage hgroup + .au {
+  margin-top: 6.3pc;
+}
+
+.titlepage .aux {
+  font-size: 12px;
+  line-height: 16px;
+  font-style: italic;
+  text-align: center;
+  text-indent: 0;
+  margin: 0 auto;
+  margin-top: 0.56pc;
+  width: 20pc;
+}
+
+.publisher p.pub {
+  font-size: 13px;
+  letter-spacing: 0.75pt;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 1.3pc;
+}
+
+.publisher #ucp-logo svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.ded p {
+  text-indent: 0;
+  font-family: "Minion Pro";
+  font-size: 12px;
+  line-height: 11.5pt;
+  text-align: center;
+  text-indent: 0pc;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.epigraph blockquote {
   margin: 0;
-  padding-left: 22px;
-}
-.sc-list-ol-qa li {
-  padding-left: 1em;
-  text-indent: -1em;
-}
-.sc-list-ol-qa li:nth-child(odd):before {
-  content: 'Q: ';
-  font-weight: bold;
-}
-.sc-list-ol-qa li:nth-child(even):before {
-  content: 'A: ';
-  font-weight: bold;
+  padding-left: 0;
 }
 
-.sc-list-ol-unstyled {
-  list-style-type: none;
+.epigraph blockquote + blockquote {
+  margin-top: 11pt;
+}
+
+.epigraph blockquote p {
+  font-size: 13px;
+  line-height: 17px;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.epigraph .bep {
+  width: 22pc;
+}
+
+.epigraph .bepo {
+  width: 20pc;
+  padding-left: 12px;
+}
+
+.epigraph .bepo p:first-line {
+  margin-left: -8.8pt;
+  display: block;
+  width: 20.7pc;
+}
+
+.epigraph .bepsn, .epigraph .beposn {
+  text-indent: 0;
+  font-size: 9.5pt;
+  line-height: 10.5pt;
+  display: block;
+  text-indent: 0;
+  margin-top: 3.8pt;
+  font-style: normal;
+  font-variant-caps: all-small-caps;
+  -webkit-font-feature-settings: "smcp", "c2sc";
+  font-feature-settings: "smcp", "c2sc";
+  letter-spacing: 0.2pt;
   margin-left: 0;
 }
-.sc-list-ol-unstyled li {
-  padding-left: 1em;
-  text-indent: -1em;
+
+.epigraph .bepsn:before, .epigraph .beposn:before {
+  content: "\2014  ";
 }
-.note-callout {
+
+.epigraph p {
+  font-style: italic;
+}
+
+.epigraph p em {
+  font-style: normal;
+}
+
+.copyright {
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  width: 20pc;
+}
+
+.copyright .cp, .copyright .cip {
+  margin-top: 21pt;
+}
+
+.copyright .cp p, .copyright .cip p {
+  font-size: 8pt;
+  line-height: 10.5pt;
+  -webkit-hyphens: inherit;
+  -ms-hyphens: inherit;
+  hyphens: inherit;
+  text-indent: 0;
+  text-align: left;
+  margin-top: 1pt;
+}
+
+.fm-body hgroup, .notes hgroup {
+  margin: 0;
+}
+
+.fmh {
+  font-size: 16px;
+  line-height: 1;
+  font-variant: all-small-caps;
+  -webkit-font-feature-settings: "smcp", "c2sc";
+  font-feature-settings: "smcp", "c2sc";
+  letter-spacing: 0.5pt;
+  margin-bottom: 0;
+}
+
+.fm-body hgroup .fmau, .notes hgroup .fmau {
+  margin-top: 17px;
+  text-align: center;
+  text-indent: 0;
+  margin-bottom: 0;
+}
+
+.fm-body .fm1, .notes .fm1 {
+  -webkit-font-feature-settings: "lnum";
+  font-feature-settings: "lnum";
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0.5pt;
+}
+
+.fm-body .fmhn, .notes .fmhn {
+  font-style: italic;
+}
+
+.fm-body .fmhn + .fmtxt, .notes .fmhn + .fmtxt {
+  margin-top: 17px;
+}
+
+.fm-body .fmsig p, .notes .fmsig p {
+  font-style: italic;
+  text-align: right;
+  text-indent: 0;
+}
+
+.fm-body .crossRef li p:after {
+  content: "123";
+  font-style: italic;
+  font-weight: 300;
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.list-abbreviations .undecorated li {
+  padding-left: 75px;
+  text-indent: -75px;
+  padding-right: 75px;
+  line-height: 17px;
+  list-style-type: none;
+}
+
+.list-abbreviations .undecorated li:before {
+  content: '  ';
+}
+
+.list-abbreviations .undecorated li p abbr {
+  margin-left: -75px;
+  float: left;
+  display: inline-block;
+}
+
+.toc ul {
+  font-size: 13px;
+  line-height: 17px;
+  list-style-type: none;
+  text-indent: 0;
+}
+
+.toc ul li {
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: 0;
+  line-height: 17px;
+  font-size: 13px;
+  text-indent: 0;
+}
+
+.toc ul li:before {
+  content: "";
+  font-size: 12px;
+  padding-right: 0;
   color: black;
-  text-decoration: none;
-  vertical-align: baseline;
-  padding: 1px;
-  cursor: text;
-  font-size: 14px;
+}
+
+.crossRef li p:after {
+  content: "123";
+  font-style: normal;
+}
+
+.toc {
+  counter-reset: part;
+}
+
+.c-one {
+  font-style: italic;
+  text-align: left;
+  font-size: 13px;
+  line-height: 17px;
+}
+
+.c-two > p {
+  margin-top: 11px;
+  counter-increment: part;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 2px;
+  margin-left: 0;
+}
+
+.c-two > p:before {
+  content: "part " counter(part, upper-roman) ". ";
+}
+
+.c-three {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.c-three p {
+  font-size: 13px;
+  line-height: 17px;
+  text-indent: 0;
+  padding-left: 0;
+  list-style-position: outside;
+}
+
+.c-four {
+  font-size: 12px;
+  line-height: 17px;
+}
+
+ul + ul.c-three {
+  margin-left: 0;
+}
+
+.toc ul {
+  margin-left: 0;
+}
+
+.toc a:after {
+  content: "123";
+  content: "  " target-counter(attr(href, url), page);
+  display: inline;
+  margin-left: 1em;
+  float: right;
+}
+
+.numbering p {
+  font-size: 13px;
+  line-height: 17px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+  text-align: right;
+  background: grey;
+  display: block;
+  height: 17px;
+  overflow: hidden;
+}
+
+.numbering p:nth-of-type(2n) {
+  background: lightgrey;
+}
+
+
+
+
+
+
+
+
+/*hack for the update*/
+
+
+
+
+.cst {
+  margin-top:-166px;
+  margin-bottom: 135px;
+}
+
+.cst + p {
+  text-indent: 0;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Vivliostyle starts here */
+
+/*
+This is the layout for the ucp vivliostyle export
+
+thing tried here: create a complete flow with specific updated layout on different pages
+/*
+This is the layout for the ucp vivliostyle export
+
+thing tried here: create a complete flow with specific updated layout on different pages
+
+/* page size */
+
+@page {
+  size: 6in 9in;
+}
+
+/*send parts to part layout*/
+[data-type="part"]   {
+  -epubx-flow-into: partStart;
+}
+
+
+/*drop folio*/
+.folio {
+  -epubx-flow-into: startFolio;
+  -epubx-flow-options: exclusive;
+}
+
+
+
+section {
+  break-after: page;
+}
+
+
+/*front matter*/
+/* layout frontmatter */
+
+[data-type="fm-body"] h1.fmh {
+  -epubx-flow-into: fmHgroup;
+}
+
+[data-type="bm-body"] h1.bmh {
+  -epubx-flow-into: fmHgroup;
+}
+
+
+/* front matter stuff layout */
+
+@-epubx-page-master frontmatterBodyFirst {
+  @-epubx-partition header {
+    -epubx-flow-from: fmHgroup;
+    -epubx-required: true;
+    -epubx-flow-options: exclusive;
+    left: 73px;
+    right: 73px;
+    top: 121px;
+    height: 206px;
+    /* background: red; */
+    /* -epubx-snap-height: 17px; */
+  }
+  @-epubx-partition text {
+    -epubx-flow-from: body;
+    left: 73px;
+    right: 73px;
+    top: 371px;
+    bottom: 83px;
+  }
+  @-epubx-partition folio {
+    -epubx-flow-from: startFolio;
+    left: 73px;
+    right: 73px;
+    top: 796px;
+  }
+
+}
+
+
+@-epubx-page-master frontmatterBody {
+  @-epubx-partition text {
+    -epubx-flow-from: body;
+    left: 73px;
+    right: 73px;
+    top: 121px;
+    bottom: 83px;
+  }
+  @-epubx-partition folio {
+    -epubx-flow-from: startFolio;
+    left: 73px;
+    right: 73px;
+    top: 796px;
+  }
+  @-epubx-partition runningheader-left {
+    -epubx-flow-from: header;
+    -epubx-enabled: -epubx-expr(page-number % 2==0);
+    text-align: left;
+    left: 73px;
+    top: 51px;
+    height: 17px;
+    
+    
+    
+
+}
+
+@-epubx-partition runningheader-right {
+    -epubx-flow-from: booktitle;
+    -epubx-enabled: -epubx-expr(page-number % 2==1);
+    right: 73px;
+    top: 51px;
+    height: 17px;
+    /* width: 400px; */
+    text-align: right;
+
+}
+
+
+
+}
+
+
+@-epubx-page-master partStart {
+  @-epubx-partition partbegins {
+    -epubx-flow-from: partStart;
+    -epubx-required: true;
+    left: 73px;
+    right: 73px;
+    top: 132px;
+    height: 700px;
+  } 
+}
+
+
+
+
+/* duplication flow for running elements */
+
+.dup {
+    -epubx-flow-into: header;
+    -epubx-utilization: 0.1;
+    -epubx-flow-options: exclusive static last;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    padding-top: 0;
+    line-height: 1.2;
+    /* text-align: right; */
+    font-variant-numeric: oldstyle-nums;
+    font-feature-settings: "smcp", "c2sc", "onum";
+font-variant-caps: all-small-caps;
+
+
+}
+
+.dup:before {
+  content: counter(page) "\2002\2002\2002" ;
+
+}
+
+
+.booktitle {
+  line-height: 1.2;
+    -epubx-flow-into: booktitle;
+    -epubx-flow-options: exclusive static;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    /* letter-spacing: 0.01em; */
+    font-size: 10px;
+    padding-top: 0;
+    text-align: right;
+    font-variant-numeric: oldstyle-nums;
+font-feature-settings: "smcp", "c2sc", "onum";    font-variant-caps: all-small-caps;
+
+    }
+
+.booktitle:after {
+  content: "\2002\2002\2002" counter(page)  ;
+
+}
+
+
+
+/*drop folio*/
+.folio {
+    font-size: 10px;
+    font-variant-numeric: oldstyle-nums;
+    font-feature-settings: "smcp", "c2sc", "onum";
+    font-variant-caps: all-small-caps;
+    font-size: 13px;
+    line-height: 1;
+    text-align: center;
+}
+
+.folio:after {
+    content:  counter(page);
+}
+
+
+
+
+
+
+/* layout body */
+
+
+
+
+.ch-start {
+    -epubx-flow-into: chapterStart;
+    /* hack the chapter debut */
+
+}
+
+@-epubx-page-master chapterStart {
+
+    @-epubx-partition startchapter {
+        -epubx-flow-from: chapterStart;
+        -epubx-required: true;
+        left: 0;
+        right: 0;
+        height: 0;
+        top: 0;
+        /* background: yellow; */
+        /* this partition is a hack to detect the beginning of a new chapter */
+    }
+
+    @-epubx-partition chapter {
+        -epubx-flow-from: body;
+        /* -epubx-required: true; */
+        left: 73px;
+        right: 73px;
+        top: 82px;
+        bottom: 84px;
+    }
+
+     @-epubx-partition folio {
+        -epubx-flow-from: startFolio;
+        left: 73px;
+        right: 73px;
+        top: 796px;
+        height: 17px;
+    }
+  
+}
+
+@-epubx-page-master chapterBody {
+    @-epubx-partition contentfollow {
+        -epubx-flow-from: body;
+        /* -epubx-required: true; */
+        left: 73px;
+        right: 73px;
+        top: 82px;
+        bottom: 84px;
+    }
+    
+    @import "helpers/running-head.css";
+
+    /* background:red; */
+}
+
+
+
+
+
+/* front matter stuff layout */
+
+@-epubx-page-master backmatterBodyFirst {
+  @-epubx-partition header {
+    -epubx-flow-from: bmHgroup;
+    -epubx-required: true;
+    -epubx-flow-options: exclusive;
+    left: 73px;
+    right: 73px;
+    top: 121px;
+    height: 206px;
+    /* background: red; */
+    /* -epubx-snap-height: 17px; */
+  }
+  @-epubx-partition text {
+    -epubx-flow-from: body;
+    left: 73px;
+    right: 73px;
+    top: 371px;
+    bottom: 83px;
+  }
+  @-epubx-partition folio {
+    -epubx-flow-from: startFolio;
+    left: 73px;
+    right: 73px;
+    top: 796px;
+  }
+
+}
+
+
+@-epubx-page-master frontmatterBody {
+    @-epubx-partition text {
+    -epubx-flow-from: body;
+    left: 73px;
+    right: 73px;
+    top: 121px;
+    bottom: 83px;
+  }
+  @-epubx-partition folio {
+    -epubx-flow-from: startFolio;
+    left: 73px;
+    right: 73px;
+    top: 796px;
+  }
+  @-epubx-partition runningheader-left {
+    -epubx-flow-from: header;
+    -epubx-enabled: -epubx-expr(page-number % 2==0);
+    text-align: left;
+    left: 73px;
+    top: 51px;
+    height: 17px;
+    
+    
+    
+
+}
+
+@-epubx-partition runningheader-right {
+    -epubx-flow-from: booktitle;
+    -epubx-enabled: -epubx-expr(page-number % 2==1);
+    right: 73px;
+    top: 51px;
+    height: 17px;
+    /* width: 400px; */
+    text-align: right;
+
+}
+
+
+
+}
+
+
+@-epubx-page-master partStart {
+  @-epubx-partition partbegins {
+    -epubx-flow-from: partStart;
+    -epubx-required: true;
+    left: 73px;
+    right: 73px;
+    top: 132px;
+    height: 700px;
+  } 
 }
