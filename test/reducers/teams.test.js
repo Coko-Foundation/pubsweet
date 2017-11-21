@@ -39,7 +39,7 @@ describe('teams reducers', () => {
   it('deleteTeam success', () => {
     const actual = reducer(mockstate, {
       type: T.DELETE_TEAM_SUCCESS,
-      team: mockteam,
+      team: { ...mockteam },
     })
     expect(actual).toEqual([])
   })

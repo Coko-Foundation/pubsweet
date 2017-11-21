@@ -9,7 +9,7 @@ import {
 
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
-import difference from 'lodash/difference'
+import differenceBy from 'lodash/differenceBy'
 import unionBy from 'lodash/unionBy'
 
 export default function(state = [], action) {
@@ -26,11 +26,6 @@ export default function(state = [], action) {
     return teams
   }
 
-  function removeTeams() {
-    const todel = action.teams || [action.team]
-    return difference(state, todel)
-  }
-
   switch (action.type) {
     case CREATE_TEAM_SUCCESS:
     case UPDATE_TEAM_SUCCESS:
@@ -38,7 +33,7 @@ export default function(state = [], action) {
     case GET_TEAMS_SUCCESS:
       return clone(action.teams)
     case DELETE_TEAM_SUCCESS:
-      return removeTeams()
+      return differenceBy(state, [action.team], 'id')
     case LOGOUT_SUCCESS:
       return []
     case GET_COLLECTION_TEAMS_SUCCESS:
