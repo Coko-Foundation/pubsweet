@@ -15,12 +15,12 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
   $('<p/>').attr('class', 'ch-start').html('beginning').appendTo(innerContainer)
   $('<div/>').attr('class', 'folio').appendTo(innerContainer)
   $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)
+  $('<div/>').attr('class', 'dup').html(fragmentTitle).appendTo(innerContainer)
   if (fragmentSubcategory === 'part') {
     $('<p/>').attr('class', 'part-number').html(fragmentNumber).appendTo(innerContainer)
   } else if (fragmentSubcategory === 'chapter') {
     $('<p/>').attr('class', 'chapter-number').html(fragmentNumber).appendTo(innerContainer)
   }
-  $('<div/>').attr('class', 'dup').html(fragmentTitle).appendTo(innerContainer)
   $('<h1/>').attr('class', 'ct').html(fragmentTitle).appendTo(innerContainer)
 
   const replaceWithBlockquote = className => (i, elem) => {

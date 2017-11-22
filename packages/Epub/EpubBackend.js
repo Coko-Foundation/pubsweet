@@ -36,6 +36,11 @@ const EpubBackend = function (app) {
         stylesRoot = `${__dirname}/themes`
       }
 
+      let fontsRoot = process.cwd() + '/static/fonts'
+      if (!fs.existsSync(fontsRoot)) {
+        fontsRoot = ''
+      }
+
       // converters
       const activeConverters = [req.query.converter]
         .filter(name => name && converters[name])
@@ -60,7 +65,7 @@ const EpubBackend = function (app) {
       // TODO: read the path to the uploads folder from config
       const resourceRoot = process.cwd() + '/uploads'
 
-      const epub = new HTMLEPUB(book, {resourceRoot, stylesRoot})
+      const epub = new HTMLEPUB(book, {resourceRoot, stylesRoot, fontsRoot})
 
       await epub.load(parts)
 
