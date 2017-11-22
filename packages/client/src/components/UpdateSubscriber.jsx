@@ -7,6 +7,7 @@ import _ from 'lodash/fp'
 import * as T from '../actions/types'
 import 'event-source-polyfill'
 import token from '../helpers/token'
+import { selectCurrentUser } from '../selectors'
 
 const actionMap = {
   'collection:create': T.CREATE_COLLECTION_SUCCESS,
@@ -171,7 +172,7 @@ UpdateSubscriber.propTypes = {
 
 export default connect(
   state => ({
-    currentUser: state.currentUser,
+    currentUser: selectCurrentUser(state),
   }),
   dispatch => ({
     handleUpdate: (type, body) => dispatch({ type, ...body }),

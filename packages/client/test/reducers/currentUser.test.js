@@ -34,7 +34,11 @@ describe('currentUser reducers', () => {
         type: T.GET_CURRENT_USER_FAILURE,
       },
     )
-    expect(actual).toEqual({ isFetching: false, isAuthenticated: false })
+    expect(actual).toEqual({
+      isFetching: false,
+      isAuthenticated: false,
+      user: null,
+    })
   })
 
   it('currentUser request', () => {
@@ -44,7 +48,7 @@ describe('currentUser reducers', () => {
         type: T.GET_CURRENT_USER_REQUEST,
       },
     )
-    expect(actual).toEqual({ isFetching: true, isAuthenticated: false })
+    expect(actual).toEqual({ isFetching: true })
   })
 
   it('logout success', () => {
