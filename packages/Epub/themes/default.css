@@ -612,7 +612,7 @@ hr {
 }
 
 hr:after {
-  content: "• • •";
+  content: "• • •";
   height: 17px;
   display: block;
   text-align: center;
@@ -838,7 +838,11 @@ html {
   text-indent: 0;
 }
 
+<<<<<<< HEAD
 .pt , [data-type="part"] p.ct, [data-type="part"] h1.ct , .back [data-type="bm-body"] .ct , [data-type="toc"] h1 {
+=======
+.pt , [data-type="part"] p.ct, [data-type="part"] h1.ct  {
+>>>>>>> e61feefec32231764d419957742e76fa1eaf1885
   -webkit-column-break-before: page;
   page-break-before: page;
   break-before: page;
@@ -1851,6 +1855,7 @@ img {
   float-defer: last;*/
   /*float: block-end; */
 }
+/* hack the chapter debut */
 
 .cst + p {
   margin-top: 0px;
@@ -1937,12 +1942,6 @@ p + .cst {
     height: 17px;
   }
 
-  @-epubx-partition runningheader-right {
-    -epubx-flow-from: booktitle;
-    -epubx-enabled: -epubx-expr(page-number % 2 == 1);
-    right: 73px;
-    top: 51px;
-    height: 17px;
 
     /* width: 400px; */
     text-align: right;

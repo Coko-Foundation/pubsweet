@@ -7,6 +7,7 @@ test('converts source to html', () => {
     title: 'A Test',
     division: 'body',
     subCategory: 'part',
+    number: 3,
     source: `
       <div>
           <h1>A Test</h1>

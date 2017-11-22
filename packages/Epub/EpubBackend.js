@@ -1,10 +1,12 @@
 const HTMLEPUB = require('html-epub')
 const fs = require('fs')
+const _ = require('lodash')
 
 const sorter = require('./sorter')
 const converters = require('./converters')
 const processFragment = require('./process')
 const output = require('./output')
+const config = require('config')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -35,19 +37,37 @@ const EpubBackend = function (app) {
         stylesRoot = `${__dirname}/themes`
       }
 
+      let fontsRoot = process.cwd() + config.epub.fontsPath
+      console.log('opath', fontsRoot)
+      if (!fs.existsSync(fontsRoot)) {
+        fontsRoot = ''
+      }
+
       // converters
       const activeConverters = [req.query.converter]
         .filter(name => name && converters[name])
         .map(name => converters[name])
 
-      const parts = fragments.sort(sorter).map(
+      const sortedFragments = fragments.sort(sorter)
+      const partsIds = sortedFragments
+      .filter(fragment => fragment.division === 'body' && fragment.subCategory === 'part')
+      .map(fragment => fragment.id)
+
+      sortedFragments.forEach(fragment => {
+        let found = _.indexOf(partsIds, fragment.id)
+        if (found !== -1) {
+          fragment.number = found + 1
+        }
+      })
+
+      const parts = sortedFragments.map(
         processFragment({ styles, activeConverters, book })
       )
 
       // TODO: read the path to the uploads folder from config
       const resourceRoot = process.cwd() + '/uploads'
 
-      const epub = new HTMLEPUB(book, {resourceRoot, stylesRoot})
+      const epub = new HTMLEPUB(book, {resourceRoot, stylesRoot, fontsRoot})
 
       await epub.load(parts)
 
