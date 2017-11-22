@@ -6,13 +6,13 @@
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
-   ========================================================================== */
+========================================================================== */
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in
  *    IE on Windows Phone and in iOS.
  */
-html {
+ html {
   -ms-text-size-adjust: 100%;
 
   /* 2 */
@@ -22,23 +22,23 @@ html {
 }
 
 /* Sections
-   ========================================================================== */
+========================================================================== */
 /**
  * Remove the margin in all browsers (opinionated).
  */
-body {
+ body {
   margin: 0;
 }
 
 /**
  * Add the correct display in IE 9-.
  */
-article,
-aside,
-footer,
-header,
-nav,
-section {
+ article,
+ aside,
+ footer,
+ header,
+ nav,
+ section {
   display: block;
 }
 
@@ -46,20 +46,20 @@ section {
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
-h1 {
+ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
 
 /* Grouping content
-   ========================================================================== */
+========================================================================== */
 /**
  * Add the correct display in IE 9-.
  * 1. Add the correct display in IE.
  */
-figcaption,
-figure,
-main {
+ figcaption,
+ figure,
+ main {
   /* 1 */
   display: block;
 }
@@ -67,7 +67,7 @@ main {
 /**
  * Add the correct margin in IE 8.
  */
-figure {
+ figure {
   margin: 1em 40px;
 }
 
@@ -75,7 +75,7 @@ figure {
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
  */
-hr {
+ hr {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 
@@ -92,7 +92,7 @@ hr {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-pre {
+ pre {
   font-family: monospace, monospace;
 
   /* 1 */
@@ -102,12 +102,12 @@ pre {
 }
 
 /* Text-level semantics
-   ========================================================================== */
+========================================================================== */
 /**
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
  */
-a {
+ a {
   background-color: transparent;
 
   /* 1 */
@@ -120,7 +120,7 @@ a {
  * 1. Remove the bottom border in Chrome 57- and Firefox 39-.
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
-abbr[title] {
+ abbr[title] {
   border-bottom: none;
 
   /* 1 */
@@ -136,16 +136,16 @@ abbr[title] {
 /**
  * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
  */
-b,
-strong {
+ b,
+ strong {
   font-weight: inherit;
 }
 
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
-b,
-strong {
+ b,
+ strong {
   font-weight: bolder;
 }
 
@@ -153,9 +153,9 @@ strong {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-code,
-kbd,
-samp {
+ code,
+ kbd,
+ samp {
   font-family: monospace, monospace;
 
   /* 1 */
@@ -167,14 +167,14 @@ samp {
 /**
  * Add the correct font style in Android 4.3-.
  */
-dfn {
+ dfn {
   font-style: italic;
 }
 
 /**
  * Add the correct background and color in IE 9-.
  */
-mark {
+ mark {
   background-color: #ff0;
   color: #000;
 }
@@ -182,7 +182,7 @@ mark {
 /**
  * Add the correct font size in all browsers.
  */
-small {
+ small {
   font-size: 80%;
 }
 
@@ -190,8 +190,8 @@ small {
  * Prevent `sub` and `sup` elements from affecting the line height in
  * all browsers.
  */
-sub,
-sup {
+ sub,
+ sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -207,19 +207,19 @@ sup {
 }
 
 /* Embedded content
-   ========================================================================== */
+========================================================================== */
 /**
  * Add the correct display in IE 9-.
  */
-audio,
-video {
+ audio,
+ video {
   display: inline-block;
 }
 
 /**
  * Add the correct display in iOS 4-7.
  */
-audio:not([controls]) {
+ audio:not([controls]) {
   display: none;
   height: 0;
 }
@@ -227,28 +227,28 @@ audio:not([controls]) {
 /**
  * Remove the border on images inside links in IE 10-.
  */
-img {
+ img {
   border-style: none;
 }
 
 /**
  * Hide the overflow in IE.
  */
-svg:not(:root) {
+ svg:not(:root) {
   overflow: hidden;
 }
 
 /* Forms
-   ========================================================================== */
+========================================================================== */
 /**
  * 1. Change the font styles in all browsers (opinionated).
  * 2. Remove the margin in Firefox and Safari.
  */
-button,
-input,
-optgroup,
-select,
-textarea {
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
   font-family: sans-serif;
 
   /* 1 */
@@ -267,8 +267,8 @@ textarea {
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
  */
-button,
-input {
+ button,
+ input {
   /* 1 */
   overflow: visible;
 }
@@ -277,8 +277,8 @@ input {
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
  * 1. Remove the inheritance of text transform in Firefox.
  */
-button,
-select {
+ button,
+ select {
   /* 1 */
   text-transform: none;
 }
@@ -288,10 +288,10 @@ select {
  *    controls in Android 4.
  * 2. Correct the inability to style clickable types in iOS and Safari.
  */
-button,
-html [type="button"],
-[type="reset"],
-[type="submit"] {
+ button,
+ html [type="button"],
+ [type="reset"],
+ [type="submit"] {
   -webkit-appearance: button;
 
   /* 2 */
@@ -300,10 +300,10 @@ html [type="button"],
 /**
  * Remove the inner border and padding in Firefox.
  */
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+ button::-moz-focus-inner,
+ [type="button"]::-moz-focus-inner,
+ [type="reset"]::-moz-focus-inner,
+ [type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -311,17 +311,17 @@ button::-moz-focus-inner,
 /**
  * Restore the focus styles unset by the previous rule.
  */
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+ button:-moz-focusring,
+ [type="button"]:-moz-focusring,
+ [type="reset"]:-moz-focusring,
+ [type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
 /**
  * Correct the padding in Firefox.
  */
-fieldset {
+ fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
 
@@ -331,7 +331,7 @@ fieldset {
  * 3. Remove the padding so developers are not caught out when they zero out
  *    `fieldset` elements in all browsers.
  */
-legend {
+ legend {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 
@@ -357,7 +357,7 @@ legend {
  * 1. Add the correct display in IE 9-.
  * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
  */
-progress {
+ progress {
   display: inline-block;
 
   /* 1 */
@@ -369,7 +369,7 @@ progress {
 /**
  * Remove the default vertical scrollbar in IE.
  */
-textarea {
+ textarea {
   overflow: auto;
 }
 
@@ -377,8 +377,8 @@ textarea {
  * 1. Add the correct box sizing in IE 10-.
  * 2. Remove the padding in IE 10-.
  */
-[type="checkbox"],
-[type="radio"] {
+ [type="checkbox"],
+ [type="radio"] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 
@@ -391,8 +391,8 @@ textarea {
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+ [type="number"]::-webkit-inner-spin-button,
+ [type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -400,7 +400,7 @@ textarea {
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
  */
-[type="search"] {
+ [type="search"] {
   -webkit-appearance: textfield;
 
   /* 1 */
@@ -412,8 +412,8 @@ textarea {
 /**
  * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
  */
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
+ [type="search"]::-webkit-search-cancel-button,
+ [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -421,7 +421,7 @@ textarea {
  * 1. Correct the inability to style clickable types in iOS and Safari.
  * 2. Change font properties to `inherit` in Safari.
  */
-::-webkit-file-upload-button {
+ ::-webkit-file-upload-button {
   -webkit-appearance: button;
 
   /* 1 */
@@ -431,45 +431,45 @@ textarea {
 }
 
 /* Interactive
-   ========================================================================== */
+========================================================================== */
 /*
  * Add the correct display in IE 9-.
  * 1. Add the correct display in Edge, IE, and Firefox.
  */
-details,
-menu {
+ details,
+ menu {
   display: block;
 }
 
 /*
  * Add the correct display in all browsers.
  */
-summary {
+ summary {
   display: list-item;
 }
 
 /* Scripting
-   ========================================================================== */
+========================================================================== */
 /**
  * Add the correct display in IE 9-.
  */
-canvas {
+ canvas {
   display: inline-block;
 }
 
 /**
  * Add the correct display in IE.
  */
-template {
+ template {
   display: none;
 }
 
 /* Hidden
-   ========================================================================== */
+========================================================================== */
 /**
  * Add the correct display in IE 10-.
  */
-[hidden] {
+ [hidden] {
   display: none;
 }
 
@@ -503,7 +503,7 @@ template {
 
 /* colors for the books */
 /*needed Vars
-      ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 /* General CSS for contents */
 html {
   font-family: "Minion Pro";
@@ -634,7 +634,7 @@ hr.ls:after {
   font-feature-settings: "smcp", "c2sc";
 }
 
-.old-style-figures, section h3, .ct:before {
+.old-style-figures, section h3, .ct:before, ..ct:before {
   font-variant-numeric: oldstyle-nums;
   -webkit-font-feature-settings: "onum";
   font-feature-settings: "onum";
@@ -752,7 +752,7 @@ section hgroup + p {
 }
 
 html {
-  counter-reset: chapter;
+  /*counter-reset: chapter;*/
 }
 
 .ht {
@@ -772,7 +772,11 @@ html {
   text-transform: capitalize;
 }
 
-.body .ct:before {
+[data-type="chapter"] .ct {
+  margin-top: 0;
+}
+
+.body .chapter-number {
   content: counter(chapter);
   counter-increment: chapter;
   text-align: center;
@@ -785,6 +789,7 @@ html {
   clear: both;
   width: 32px;
   height: 31px;
+  margin-top: 50px;
 }
 
 .cst {
@@ -833,13 +838,12 @@ html {
   text-indent: 0;
 }
 
-.pt {
+.pt , [data-type="part"] p.ct, [data-type="part"] h1.ct , .back [data-type="bm-body"] .ct , [data-type="toc"] h1 {
   -webkit-column-break-before: page;
   page-break-before: page;
   break-before: page;
   font-size: 16px;
   line-height: 1;
-  margin: 0;
   font-variant: all-small-caps;
   -webkit-font-feature-settings: "smcp", "c2sc";
   font-feature-settings: "smcp", "c2sc";
@@ -1230,10 +1234,7 @@ ol li:last-child, ul li:last-child {
   margin-bottom: 166px;
 }
 
-.ct + .cst {
-  margin-top: -166px;
-  margin-bottom: 111px;
-}
+
 
 .subvention p {
   font-size: 12px;
@@ -1494,7 +1495,7 @@ section[data-type="seriePage"] .sl li p {
   margin: 0;
 }
 
-[data-type="fm-body"] .ct, .notes h1.fmh {
+[data-type="fm-body"] .ct, [data-type="toc"] h1, .notes h1.fmh {
   font-size: 16px;
   line-height: 1;
   font-variant: all-small-caps;
@@ -1662,6 +1663,10 @@ ul + ul.c-three {
   background: lightgrey;
 }
 
+.cst + p {
+  text-indent: 0;
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Vivliostyle starts here */
 
@@ -1681,11 +1686,7 @@ thing tried here: create a complete flow with specific updated layout on differe
 }
 
 /*send parts to part layout*/
-[data-type="part"] {
-  -epubx-flow-into: partStart;
-}
 
-/*drop folio*/
 .folio {
   -epubx-flow-into: startFolio;
   -epubx-flow-options: exclusive;
@@ -1694,17 +1695,29 @@ thing tried here: create a complete flow with specific updated layout on differe
 section {
   break-after: page;
 }
-
-/*front matter*/
+/*front matter
 /* layout frontmatter */
 
 [data-type="fm-body"] h1.ct {
+  -epubx-flow-into: fmHgroup;
+}
+[data-type="toc"] h1 {
+  -epubx-flow-into: fmHgroup;
+}
+[data-type="part"] h1.ct {
   -epubx-flow-into: fmHgroup;
 }
 
 [data-type="bm-body"] h1.ct {
   -epubx-flow-into: fmHgroup;
 }
+
+
+.body [data-type="chapter"] .ch-start {
+  -epubx-flow-into: chapterStart;
+  -epubx-flow-option: exclusive;
+}
+
 
 /* front matter stuff layout */
 
@@ -1715,7 +1728,7 @@ section {
     -epubx-flow-options: exclusive;
     left: 73px;
     right: 73px;
-    top: 121px;
+    top: 92px;
     height: 206px;
 
     /* background: red; */
@@ -1736,55 +1749,16 @@ section {
     right: 73px;
     top: 796px;
   }
+
+  /*background-image:  repeating-linear-gradient(180deg, transparent  0, transparent 16px , rgba(0,255,0,0.7) 17px) , url(grid.png) ; */
+  background-size: cover;
+  background-position:  0 8px , 0 0 ;
+
 }
 
-@-epubx-page-master frontmatterBody {
-  @-epubx-partition text {
-    -epubx-flow-from: body;
-    left: 73px;
-    right: 73px;
-    top: 121px;
-    bottom: 83px;
-  }
 
-  @-epubx-partition folio {
-    -epubx-flow-from: startFolio;
-    left: 73px;
-    right: 73px;
-    top: 796px;
-  }
 
-  @-epubx-partition runningheader-left {
-    -epubx-flow-from: header;
-    -epubx-enabled: -epubx-expr(page-number % 2 == 0);
-    text-align: left;
-    left: 73px;
-    top: 51px;
-    height: 17px;
-  }
 
-  @-epubx-partition runningheader-right {
-    -epubx-flow-from: booktitle;
-    -epubx-enabled: -epubx-expr(page-number % 2 == 1);
-    right: 73px;
-    top: 51px;
-    height: 17px;
-
-    /* width: 400px; */
-    text-align: right;
-  }
-}
-
-@-epubx-page-master partStart {
-  @-epubx-partition partbegins {
-    -epubx-flow-from: partStart;
-    -epubx-required: true;
-    left: 73px;
-    right: 73px;
-    top: 132px;
-    height: 700px;
-  }
-}
 
 /* duplication flow for running elements */
 
@@ -1829,6 +1803,11 @@ section {
   content: "   " counter(page);
 }
 
+
+.folio {
+  -epubx-flow-into: startFolio;
+}
+
 /*drop folio*/
 .folio {
   font-size: 10px;
@@ -1846,106 +1825,107 @@ section {
 
 /* layout body */
 
-.ch-start {
-  -epubx-flow-into: chapterStart;
 
-  /* hack the chapter debut */
+h1.ct + .cst , .dup + .cst {
+  margin-top: -166px;
+  margin-bottom: 111px;
 }
+
+
+
+img {
+  align-self: center;
+
+  display: flex;
+  max-width: 100%;
+  height: 457px;
+  object-fit: cover;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  margin-top: 27px;
+  height: 238px;
+  /*margin-bottom: 35px;*/
+
+/*  float-reference: page;
+  float: bottom;
+  float-defer: last;*/
+  /*float: block-end; */
+}
+
+.cst + p {
+  margin-top: 0px;
+}
+
+p + .cst {
+  margin-top: 14px;
+}
+
+
+[data-type="part"] .ch-start ,
+.back .ch-start {
+  display: none;
+}
+
+.front .ch-start {
+  display: none;
+}
+
+
+[data-type="part"] h1.ct::before {
+  display: none;
+}
+
+.part-number {
+  display: none;
+}
+
+
+
 
 @-epubx-page-master chapterStart {
-  @-epubx-partition startchapter {
-    -epubx-flow-from: chapterStart;
-    -epubx-required: true;
-    left: 0;
-    right: 0;
-    height: 0;
-    top: 0;
 
-    /* background: yellow; */
-    /* this partition is a hack to detect the beginning of a new chapter */
-  }
+    @-epubx-partition startchapter {
+        -epubx-flow-from: chapterStart;
+        -epubx-required: true;
+        left: 0;
+        right: 0;
+        height: 0;
+        top: 0;
+         background: black;
+        /* this partition is a hack to detect the beginning of a new chapter */
+    }
 
-  @-epubx-partition chapter {
-    -epubx-flow-from: body;
+    @-epubx-partition chapter {
+        -epubx-flow-from: body;
+        /* -epubx-required: true; */
+        left: 73px;
+        right: 73px;
+        top: 82px;
+        bottom: 84px;
+    }
 
-    /* -epubx-required: true; */
-    left: 73px;
-    right: 73px;
-    top: 82px;
-    bottom: 84px;
-  }
+     @-epubx-partition folio {
+        -epubx-flow-from: startFolio;
+        left: 73px;
+        right: 73px;
+        top: 796px;
+        height: 17px;
+    }
+/*      background-image:  repeating-linear-gradient(180deg, transparent  0, transparent 16px , rgba(0,255,0,0.7) 17px) , url(grid.png) ;
+*/  background-size: cover;
+  background-position:  0 8px , 0 0 ;
 
-  @-epubx-partition folio {
-    -epubx-flow-from: startFolio;
-    left: 73px;
-    right: 73px;
-    top: 796px;
-    height: 17px;
-  }
-}
 
-@-epubx-page-master chapterBody {
-  @-epubx-partition contentfollow {
-    -epubx-flow-from: body;
-
-    /* -epubx-required: true; */
-    left: 73px;
-    right: 73px;
-    top: 82px;
-    bottom: 84px;
-  }
-
-  @import "helpers/running-head.css";
-
-  /* background:red; */
-}
-
-/* front matter stuff layout */
-
-@-epubx-page-master backmatterBodyFirst {
-  @-epubx-partition header {
-    -epubx-flow-from: bmHgroup;
-    -epubx-required: true;
-    -epubx-flow-options: exclusive;
-    left: 73px;
-    right: 73px;
-    top: 121px;
-    height: 206px;
-
-    /* background: red; */
-    /* -epubx-snap-height: 17px; */
-  }
-
-  @-epubx-partition text {
-    -epubx-flow-from: body;
-    left: 73px;
-    right: 73px;
-    top: 371px;
-    bottom: 83px;
-  }
-
-  @-epubx-partition folio {
-    -epubx-flow-from: startFolio;
-    left: 73px;
-    right: 73px;
-    top: 796px;
-  }
 }
 
 @-epubx-page-master frontmatterBody {
+
   @-epubx-partition text {
     -epubx-flow-from: body;
     left: 73px;
     right: 73px;
-    top: 121px;
+    top: 82px;
     bottom: 83px;
-  }
-
-  @-epubx-partition folio {
-    -epubx-flow-from: startFolio;
-    left: 73px;
-    right: 73px;
-    top: 796px;
   }
 
   @-epubx-partition runningheader-left {
@@ -1967,15 +1947,19 @@ section {
     /* width: 400px; */
     text-align: right;
   }
+  /*background-image:  repeating-linear-gradient(180deg, transparent  0, transparent 16px , rgba(0,255,0,0.7) 17px) , url(grid.png) ; */
+  background-size: cover;
+  background-position:  0 8px , 0 0 ;
+
 }
 
-@-epubx-page-master partStart {
-  @-epubx-partition partbegins {
-    -epubx-flow-from: partStart;
-    -epubx-required: true;
-    left: 73px;
-    right: 73px;
-    top: 132px;
-    height: 700px;
-  }
+
+.chapter-number + .dup + .ct + p {
+margin-top: -10px;
+}
+
+[data-type="toc"] ol li {
+  padding: 0;
+  margin: 0;
+margin-top: 16px;
 }
