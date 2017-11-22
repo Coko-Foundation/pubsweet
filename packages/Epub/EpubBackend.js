@@ -6,6 +6,7 @@ const sorter = require('./sorter')
 const converters = require('./converters')
 const processFragment = require('./process')
 const output = require('./output')
+const config = require('config')
 
 const EpubBackend = function (app) {
   app.use('/api/collections/:id/epub', async function (req, res, next) {
@@ -36,7 +37,8 @@ const EpubBackend = function (app) {
         stylesRoot = `${__dirname}/themes`
       }
 
-      let fontsRoot = process.cwd() + '/static/fonts'
+      let fontsRoot = process.cwd() + config.epub.fontsPath
+      console.log('opath', fontsRoot)
       if (!fs.existsSync(fontsRoot)) {
         fontsRoot = ''
       }
