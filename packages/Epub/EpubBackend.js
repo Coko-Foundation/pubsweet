@@ -1,6 +1,6 @@
 const HTMLEPUB = require('html-epub')
 const fs = require('fs')
-const _ = require('lodash')
+const indexOf = require('lodash/indexOf')
 
 const sorter = require('./sorter')
 const converters = require('./converters')
@@ -37,11 +37,11 @@ const EpubBackend = function (app) {
         stylesRoot = `${__dirname}/themes`
       }
 
-      let fontsRoot = process.cwd() + config.epub.fontsPath
+      let fontsRoot = config.epub && config.epub.fontsPath
+        ? process.cwd() + config.epub.fontsPath
+        : null
 
-      if (!fs.existsSync(fontsRoot)) {
-        fontsRoot = ''
-      }
+      if (!fs.existsSync(fontsRoot)) fontsRoot = ''
 
       // converters
       const activeConverters = [req.query.converter]
@@ -54,7 +54,7 @@ const EpubBackend = function (app) {
       .map(fragment => fragment.id)
 
       sortedFragments.forEach(fragment => {
-        let found = _.indexOf(partsIds, fragment.id)
+        let found = indexOf(partsIds, fragment.id)
         if (found !== -1) {
           fragment.number = found + 1
         }

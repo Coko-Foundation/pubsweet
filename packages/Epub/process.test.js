@@ -14,7 +14,7 @@ test('converts source to html', () => {
           <p>Test</p>
       </div>
     `,
-    id: 1,
+    id: '1'
   }
 
   const book = {
