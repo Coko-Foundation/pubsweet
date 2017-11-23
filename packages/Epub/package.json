@@ -11,7 +11,7 @@
   "dependencies": {
     "@pubsweet/logger": "^0.0.1",
     "cheerio": "^1.0.0-rc.2",
-    "html-epub": "^0.5.0",
+    "html-epub": "^0.5.1",
     "mkdirp": "^0.5.1",
     "unzipper": "^0.8.9"
   },
