@@ -722,7 +722,7 @@ h3 {
 	text-align: left;
 	/*display: inline;   */
 	/*this is for next step*/
-	font-weight: 400;	
+	font-weight: 400;
 	/*height: 0;*/
 	width: auto;
 	margin-bottom: 0;
@@ -781,7 +781,7 @@ html {
 }
 
 .ct {
-	
+
 
 	margin-top: 40px;
 	padding-left: 55px;
@@ -910,7 +910,7 @@ html {
 	line-height: 13px;
 }
 
-.footnoteRef {
+.inline-note-callout {
 	font-size: 1em;
 	font-style: normal !important;
 }
@@ -1882,12 +1882,13 @@ img {
 
 	display: flex;
 	max-width: 100%;
-	height: 457px;
+	max-height: 248px;
+	/* height: 248px;
+	height: 457px; */
 	object-fit: cover;
 	margin: 0 auto;
 	margin-bottom: 24px;
 	margin-top: 17px;
-	height: 248px;
 	/*margin-bottom: 35px;*/
 
 /*  float-reference: page;
@@ -1935,7 +1936,7 @@ p + .cst {
 		right: 0;
 		height: 0;
 		top: 0;
-		background: black; 
+		background: black;
 		/* this partition is a hack to detect the beginning of a new chapter */
 	}
 
@@ -2035,13 +2036,19 @@ sup {
 .footnote {
 	float: footnote;
 }
-.inline-footnote {
+
+.inline-note-footer {
 	float: footnote;
+	font-size: 10px;
+	line-height: 1;
+	margin-left: 0.7pc;
+	overflow-wrap: break-word;
+	text-indent: -0.6pc;
 }
 
 .di li {
 	list-style-type: none;
-	list-style-position: inside; 
+	list-style-position: inside;
 }
 
 .di li::before {
@@ -2052,7 +2059,7 @@ sup {
 .di li:nth-of-type(odd)::before {
 		content: 'Q:';
 		text-transform: uppercase;
-		font-weight: 500;  
+		font-weight: 500;
 
 
 
@@ -2062,7 +2069,7 @@ sup {
 .di li:nth-of-type(even)::before {
 		content: 'A:';
 		text-transform: uppercase;
-		font-weight: 500;  
+		font-weight: 500;
 	}
 
 .bibliography-entry {

@@ -65,6 +65,7 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
   })
 
   // replace custom HTML elements
+  $('extract').each(replaceWithBlockquote('ex')) // delete when xsweet is updated
   $('extract-prose').each(replaceWithBlockquote('ex'))
   $('extract-poetry').each(replaceWithBlockquote('px'))
   $('epigraph-poetry').each(replaceWithBlockquote('sepo'))
@@ -104,20 +105,16 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
 
     const id = $elem.attr('data-id')
     const content = `${i + 1}. ${$elem.attr('note-content')}`
-    // const sup = $('<sup/>').text(`${i + 1}`)
 
-    // const noteContent = $('<span class="inline-footnote" />')
-    //   .attr('data-note-num', id)
-    //   .html(content)
-      // $('<aside epub:type="footnote" class="footnote"/>')
-      // .attr('id', id)
-      // .html(content)
-      // .appendTo(body)
+    const callout = $(`
+      <a class="inline-note-callout" href="#${id}">
+        <sup>${i + 1}</sup>
+      </a>
+      <span class="inline-note-footer" data-note-num="${id}">
+        ${content}
+      </span>
+    `)
 
-    const callout = $(`<a class="footnoteRef" href="#${id}"><sup>${i + 1}</sup></a><span class="inline-footnote" data-note-num="${id}">${content}</span>`)
-      // .attr('href', '#' + id)
-      // .append(sup)
-    // const outcome = noteContent.after(callout)
     $elem.replaceWith(callout)
   })
 
