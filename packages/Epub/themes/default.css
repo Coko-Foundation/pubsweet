@@ -2041,9 +2041,19 @@ sup {
 	float: footnote;
 	font-size: 10px;
 	line-height: 1;
-	margin-left: 0.7pc;
+}
+
+.inline-note-number {
+	float: left;
+	text-indent: 0;
+	width: 3%;
+}
+
+.inline-note-content {
+	float: left;
 	overflow-wrap: break-word;
-	text-indent: -0.6pc;
+	text-indent: 0;
+	width: 97%;
 }
 
 .di li {

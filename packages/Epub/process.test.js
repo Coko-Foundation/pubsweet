@@ -13,7 +13,8 @@ test('converts source to html', () => {
           <h1>A Test</h1>
           <p>Test</p>
       </div>
-    `
+    `,
+    id: 1,
   }
 
   const book = {

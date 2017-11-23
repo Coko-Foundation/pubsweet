@@ -50,7 +50,7 @@ const EpubBackend = function (app) {
 
       const sortedFragments = fragments.sort(sorter)
       const partsIds = sortedFragments
-      .filter(fragment => fragment.division === 'body' && fragment.subCategory === 'part')
+      .filter(fragment => fragment.division === 'body' && fragment.subCategory === 'part') // HACK -- to remove
       .map(fragment => fragment.id)
 
       sortedFragments.forEach(fragment => {

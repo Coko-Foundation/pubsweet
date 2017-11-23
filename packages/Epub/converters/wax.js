@@ -104,14 +104,16 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
     const $elem = $(elem)
 
     const id = $elem.attr('data-id')
-    const content = `${i + 1}. ${$elem.attr('note-content')}`
+    const noteNumber = `${i + 1}.`
+    const content = `${$elem.attr('note-content')}`
 
     const callout = $(`
       <a class="inline-note-callout" href="#${id}">
         <sup>${i + 1}</sup>
       </a>
       <span class="inline-note-footer" data-note-num="${id}">
-        ${content}
+        <span class="inline-note-number"> ${noteNumber} </span>
+        <span class="inline-note-content"> ${content} </span>
       </span>
     `)
 
