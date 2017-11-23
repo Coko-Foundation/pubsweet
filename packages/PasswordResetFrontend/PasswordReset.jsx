@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Grid, Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
 import queryString from 'query-string'
 import * as api from 'pubsweet-client/src/helpers/api'
+import styles from './PasswordReset.local.scss'
 
 class PasswordReset extends React.Component {
   constructor (props) {
@@ -212,7 +213,7 @@ class PasswordReset extends React.Component {
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className="auth-logo" alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
+              <img src="/assets/pubsweet-rgb-small.jpg" className={styles.logo} alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
 
@@ -222,7 +223,7 @@ class PasswordReset extends React.Component {
               {buildError(passwordErrorMessage)}
             </Col>
 
-            <Col xs={12} md={4}>
+            <Col xs={12} md={4} className={styles.passwordReset}>
               <h1>Password reset</h1>
 
               {buildForm()}
