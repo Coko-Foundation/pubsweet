@@ -38,7 +38,7 @@ const EpubBackend = function (app) {
       }
 
       let fontsRoot = process.cwd() + config.epub.fontsPath
-      console.log('opath', fontsRoot)
+
       if (!fs.existsSync(fontsRoot)) {
         fontsRoot = ''
       }
