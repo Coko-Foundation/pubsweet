@@ -69,7 +69,7 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
   $('extract-poetry').each(replaceWithBlockquote('px'))
   $('epigraph-poetry').each(replaceWithBlockquote('sepo'))
   $('epigraph-prose').each(replaceWithBlockquote('sep'))
-  $('bibliography-entry').each(replaceWithBlockquote('bibliography-entry'))
+  $('bibliography-entry').each(replaceWithParagraph('bibliography-entry'))
   $('comment').each(replaceWithText)
   // $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
   $('chapter-title').each(replaceWithParagraph('ct'))
@@ -104,17 +104,20 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
 
     const id = $elem.attr('data-id')
     const content = `${i + 1}. ${$elem.attr('note-content')}`
-    const sup = $('<sup/>').text(`${i + 1}`)
+    // const sup = $('<sup/>').text(`${i + 1}`)
 
-    $('<aside epub:type="footnote" class="footnote"/>')
-      .attr('id', id)
-      .html(content)
-      .appendTo(body)
+    // const noteContent = $('<span class="inline-footnote" />')
+    //   .attr('data-note-num', id)
+    //   .html(content)
+      // $('<aside epub:type="footnote" class="footnote"/>')
+      // .attr('id', id)
+      // .html(content)
+      // .appendTo(body)
 
-    const callout = $('<a epub:type="noteref" class="footnoteRef"/>')
-      .attr('href', '#' + id)
-      .append(sup)
-
+    const callout = $(`<a class="footnoteRef" href="#${id}"><sup>${i + 1}</sup></a><span class="inline-footnote" data-note-num="${id}">${content}</span>`)
+      // .attr('href', '#' + id)
+      // .append(sup)
+    // const outcome = noteContent.after(callout)
     $elem.replaceWith(callout)
   })
 
