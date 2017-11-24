@@ -2,7 +2,7 @@ const cheerio = require('cheerio')
 
 module.exports = ({ styles, activeConverters, book }) => fragment => {
   const $ = cheerio.load(fragment.source)
-  const fragmentTitle = fragment.title
+  const fragmentTitle = fragment.title || 'Untitled'
   const bookTitle = book.title
   const fragmentDivision = fragment.division
   const fragmentSubcategory = fragment.subCategory
