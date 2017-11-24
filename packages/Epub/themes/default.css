@@ -1824,6 +1824,8 @@ section {
 
 .dup:before {
 	content: counter(page) "   ";
+	letter-spacing: 0px !important;
+
 }
 
 .booktitle {
@@ -1845,6 +1847,8 @@ section {
 
 .booktitle:after {
 	content: "   " counter(page);
+	letter-spacing: 0px !important;
+
 }
 
 
@@ -1865,12 +1869,13 @@ section {
 
 .folio:after {
 	content: counter(page);
+	letter-spacing: 0px !important;
 }
 
 /* layout body */
 
 
-h1.ct + .cst , .dup + .cst {
+.ct + .cst , .dup + .cst {
 	margin-top: -166px;
 	margin-bottom: 111px;
 }
@@ -2032,15 +2037,17 @@ sup {
 	font-size: 11px;
 	line-height: 15px;
 }
-
+/*
 .footnote {
 	float: footnote;
 }
-
+*/
 .inline-note-footer {
 	float: footnote;
-	font-size: 10px;
-	line-height: 1;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 11px;
+	line-height: 15px;
 }
 
 .inline-note-number {
@@ -2098,4 +2105,8 @@ ol.none , ul.none {
 
 cite {
   display: block;
+}
+
+p.ct {
+	display: none;
 }
