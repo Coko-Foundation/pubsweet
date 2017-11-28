@@ -172,9 +172,9 @@ const downloadFromInk = ([auth, response]) => {
   return retryFor30SecondsUntil200(url, auth)
 }
 
-var InkBackend = function (app) {
+const InkBackend = function (app) {
   app.use('/ink', (req, res, next) => {
-    var fileStream = new Busboy({ headers: req.headers })
+    const fileStream = new Busboy({ headers: req.headers })
 
     const handleErr = err => {
       logger.error('ERROR CONVERTING WITH INK', err)
@@ -182,13 +182,13 @@ var InkBackend = function (app) {
     }
 
     fileStream.on('file', (fieldname, file, filename, encoding, contentType) => {
-      var stream = temp.createWriteStream()
+      const stream = temp.createWriteStream()
       file.pipe(stream)
 
       file.on('end', () => {
         stream.end()
 
-        var fileOpts = {
+        const fileOpts = {
           value: fs.createReadStream(stream.path),
           options: {
             filename: filename,
