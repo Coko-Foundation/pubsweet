@@ -1,25 +1,34 @@
-import {
-  INK_REQUEST, INK_SUCCESS, INK_FAILURE
-} from './types'
+import { INK_FAILURE, INK_REQUEST, INK_SUCCESS } from './types'
 
-export default function ink (state = {
-  isFetching: false
-}, action) {
+const initialState = {
+  isFetching: false,
+  converted: null,
+  error: null
+}
+
+export default function ink (state = initialState, action) {
   switch (action.type) {
     case INK_REQUEST:
-      return Object.assign({}, state, {
-        isFetching: true
-      })
+      return {
+        isFetching: true,
+        converted: null,
+        error: null
+      }
+
     case INK_SUCCESS:
-      return Object.assign({}, state, {
+      return {
         isFetching: false,
-        converted: action.converted
-      })
+        converted: action.converted,
+        error: null
+      }
+
     case INK_FAILURE:
-      return Object.assign({}, state, {
+      return {
         isFetching: false,
+        converted: null,
         error: action.error
-      })
+      }
+
     default:
       return state
   }
