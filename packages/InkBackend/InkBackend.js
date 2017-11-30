@@ -3,7 +3,6 @@ const path = require('path')
 const logger = require('@pubsweet/logger')
 const Busboy = require('busboy')
 const config = require('config')
-const promiseRetry = require('promise-retry')
 const rp = require('request-promise-native')
 const temp = require('temp')
 
@@ -46,12 +45,17 @@ const upload = (recipeId, inputFile, auth) => rp({
   timeout: 60 * 60 * 1000 // 3600 seconds
 })
 
-const download = (chain, auth, outputFileName) => {
+// Download the output file (keep trying if there's a 404 response, until it's ready)
+const download = async (chain, auth, outputFileName) => {
   const manifest = chain.input_file_manifest
 
   if (manifest.length === 0) {
     throw new Error('The INK server gave a malformed response (no input files in the process chain)')
   }
+
+  const interval = inkConfig.interval || 1000 // try once per second
+
+  const maxRetries = inkConfig.maxRetries || 300 // retry for up to 5 minutes
 
   const uri = inkUrl('process_chains/' + chain.id + '/download_output_file')
 
@@ -64,16 +68,33 @@ const download = (chain, auth, outputFileName) => {
     ...auth
   }
 
-  const request = retry => rp({ uri, qs, headers }).catch(error => {
-    logger.error('Error downloading from INK:', error.message)
-    retry()
-  })
+  for (let i = 0; i < maxRetries; i++) {
+    // delay
+    await new Promise(resolve => setTimeout(resolve, interval))
 
-  return promiseRetry(request, {
-    retries: inkConfig.maxRetries || 60, // retry for 1 minute
-    factor: 1, // no backoff
-    minTimeout: 1000 // retry every second
-  })
+    const response = await rp({
+      uri,
+      qs,
+      headers,
+      simple: false,
+      resolveWithFullResponse: true
+    }).catch(error => {
+      logger.error('Error downloading from INK:', error.message)
+      throw error
+    })
+
+    // a successful request: return the data
+    if (response.statusCode === 200) {
+      return response.body
+    }
+
+    // not a 404 response - stop trying
+    if (response.statusCode !== 404) {
+      break
+    }
+  }
+
+  throw new Error('Unable to download the output from INK')
 }
 
 const findRecipeId = (recipeKey = 'Editoria Typescript', auth) => rp({
