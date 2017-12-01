@@ -6,7 +6,9 @@ module.exports = ({ styles, activeConverters, book }) => fragment => {
   const bookTitle = book.title
   const fragmentDivision = fragment.division
   const fragmentSubcategory = fragment.subCategory
-  const fragmentNumber = fragment.hasOwnProperty('number') ? fragment.number : -1
+  const fragmentNumber = fragment.hasOwnProperty('number')
+    ? fragment.number
+    : -1
 
   activeConverters.forEach(converter => converter($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcategory, fragmentNumber))
 

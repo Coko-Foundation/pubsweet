@@ -1,6 +1,5 @@
 const HTMLEPUB = require('html-epub')
 const fs = require('fs')
-const indexOf = require('lodash/indexOf')
 
 const sorter = require('./sorter')
 const converters = require('./converters')
@@ -48,19 +47,7 @@ const EpubBackend = function (app) {
         .filter(name => name && converters[name])
         .map(name => converters[name])
 
-      const sortedFragments = fragments.sort(sorter)
-      const partsIds = sortedFragments
-      .filter(fragment => fragment.division === 'body' && fragment.subCategory === 'part') // HACK -- to remove
-      .map(fragment => fragment.id)
-
-      sortedFragments.forEach(fragment => {
-        let found = indexOf(partsIds, fragment.id)
-        if (found !== -1) {
-          fragment.number = found + 1
-        }
-      })
-
-      const parts = sortedFragments.map(
+      const parts = fragments.sort(sorter).map(
         processFragment({ styles, activeConverters, book })
       )
 
