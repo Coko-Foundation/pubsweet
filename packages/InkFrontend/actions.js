@@ -1,51 +1,43 @@
+import qs from 'query-string'
 import request from 'pubsweet-client/src/helpers/api'
-import * as T from './types'
-import config from 'config'
+import { INK_FAILURE, INK_REQUEST, INK_SUCCESS } from './types'
 
-const ENDPOINT = config['pubsweet-client']['API_ENDPOINT'].replace(/api$/, 'ink')
+export const inkRequest = () => ({
+  type: INK_REQUEST
+})
 
-function inkRequest () {
-  return {
-    type: T.INK_REQUEST,
-    isFetching: true
+export const inkSuccess = converted => ({
+  type: INK_SUCCESS,
+  converted
+})
+
+export const inkFailure = error => ({
+  type: INK_FAILURE,
+  error
+})
+
+export const ink = (file, options) => dispatch => {
+  dispatch(inkRequest())
+
+  const body = new FormData()
+  body.append('file', file)
+
+  let url = '/ink'
+
+  if (options) {
+    url += '?' + qs.stringify(options)
   }
-}
 
-function inkSuccess (converted) {
-  return {
-    type: T.INK_SUCCESS,
-    isFetching: false,
-    converted: converted
-  }
-}
-
-function inkFailure (message) {
-  return {
-    type: T.INK_FAILURE,
-    isFetching: false,
-    error: message
-  }
-}
-
-// Calls the API to get a token and
-// dispatches actions along the way
-export function ink (file) {
-  const data = new FormData()
-  data.append('file', file)
-
-  const options = {
+  return request(url, {
     method: 'POST',
-    body: data,
-    parse: false
-  }
+    body
+  }).then(data => {
+    dispatch(inkSuccess(data.converted))
 
-  return dispatch => {
-    dispatch(inkRequest())
-    return request(ENDPOINT, options)
-      .then(
-        response => response.text() // TODO: return JSON from the backend
-      ).then(
-        response => dispatch(inkSuccess(response))
-      ).catch(err => dispatch(inkFailure(err)))
-  }
+    return data
+  }).catch(error => {
+    dispatch(inkFailure(error.message))
+
+    throw error
+  })
 }

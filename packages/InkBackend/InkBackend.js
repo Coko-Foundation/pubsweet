@@ -1,214 +1,172 @@
-const config = require('config')
-const rp = require('request-promise-native')
-const Busboy = require('busboy')
-const temp = require('temp').track()
 const fs = require('fs')
 const path = require('path')
-const promiseRetry = require('promise-retry')
 const logger = require('@pubsweet/logger')
+const Busboy = require('busboy')
+const config = require('config')
+const rp = require('request-promise-native')
+const temp = require('temp')
 
-let inkConfig = config.get('pubsweet-component-ink-backend')
-let inkEndpoint = inkConfig.inkEndpoint
-let email = inkConfig.email
-let password = inkConfig.password
-let maxRetries = inkConfig.maxRetries || 60
+// rp.debug = true
 
-let authRequest = {
-  uri: inkEndpoint + '/api/auth/sign_in',
+const inkConfig = config.get('pubsweet-component-ink-backend')
+
+// Generate the absolute URL
+const inkUrl = path => inkConfig.inkEndpoint + 'api/' + path
+
+// Sign in
+const authorize = () => rp({
   method: 'POST',
-  body: {
-    email: email,
-    password: password
+  uri: inkUrl('auth/sign_in'),
+  formData: {
+    email: inkConfig.email,
+    password: inkConfig.password
   },
-  json: true,
   headers: {
     'Accept': 'application/vnd.ink.1'
   },
   resolveWithFullResponse: true
-}
-
-// Get an access token
-let getAuth = () => {
-  return rp(authRequest).then(response => {
-    return {
-      accessToken: response.headers['access-token'],
-      client: response.headers['client']
-    }
-  }).catch(
-    err => {
-      logger.error('INK API LOGIN FAILURE:', err)
-      throw err
-    }
-  )
-}
-
-let defaultRecipeId = null
-let recipeListUrl = inkEndpoint + '/api/recipes'
-
-const getRecipeId = () => {
-  if (defaultRecipeId) return Promise.resolve(defaultRecipeId)
-
-  const listRequest = auth => ({
-    method: 'GET',
-    uri: recipeListUrl,
-    headers: {
-      'uid': email,
-      'access-token': auth.accessToken,
-      'client': auth.client
-    }
-  })
-
-  return getAuth().then(
-    auth => rp(listRequest(auth))
-  ).then(
-    response => Promise.resolve(JSON.parse(response))
-  ).then(
-    response => {
-      const defaultRecipe = response.recipes.find(
-        recipe => recipe.name === 'Editoria Typescript' // XSweet recipe
-      )
-      if (!defaultRecipe) throw new Error('could not get default recipe from INK')
-      defaultRecipeId = defaultRecipe.id
-      return Promise.resolve(defaultRecipeId)
-    }
-  )
-}
-
-getRecipeId()
-
-const inkRecipeUrl = () => getRecipeId().then(
-  recipeId => Promise.resolve(inkEndpoint + '/api/recipes/' + recipeId + '/execute')
-)
-
-const healthCheckRequest = auth => inkRecipeUrl().then(
-  recipeUrl => {
-    const opts = {
-      uri: recipeUrl,
-      method: 'OPTIONS',
-      headers: {
-        'Access-Control-Request-Method': 'POST',
-        'Access-Control-Request-Headers': 'access-token, client, expiry, token-type, uid',
-        'Origin': 'http://ink.coko.foundation',
-        'access-token': auth.accessToken,
-        'client': auth.client
-      }
-    }
-    return Promise.resolve(opts)
-  }
-)
-
-const uploadRequest = (data, auth) => inkRecipeUrl().then(
-  recipeUrl => {
-    const opts = {
-      uri: recipeUrl,
-      method: 'POST',
-      headers: {
-        'uid': email,
-        'access-token': auth.accessToken,
-        'client': auth.client
-      },
-      formData: {
-        input_files: [data]
-      }
-    }
-    return Promise.resolve(opts)
-  }
-)
+}).then(res => ({
+  'client': res.headers['client'],
+  'access-token': res.headers['access-token']
+}))
 
 // Upload file to INK and execute the recipe
-const uploadToInk = data => auth => uploadRequest(
-  data, auth
-).then(
-  rp
-).then(
-  response => Promise.resolve([auth, JSON.parse(response)])
-)
+const upload = (recipeId, inputFile, auth) => rp({
+  method: 'POST',
+  uri: inkUrl('recipes/' + recipeId + '/execute'),
+  headers: {
+    uid: inkConfig.email,
+    ...auth
+  },
+  formData: {
+    input_files: [inputFile]
+  },
+  json: true,
+  timeout: 60 * 60 * 1000 // 3600 seconds
+})
 
-// Check if INK is alive and well
-const checkInk = auth => healthCheckRequest(auth).then(
-  rp
-).then(
-  response => {
-    return Promise.resolve(auth)
-  }
-).catch(
-  err => {
-    throw err
-  }
-)
+// Download the output file (keep trying if there's a 404 response, until it's ready)
+const download = async (chain, auth, outputFileName) => {
+  const manifest = chain.input_file_manifest
 
-const retryFor30SecondsUntil200 = (uri, auth) => {
-  const downloadRequest = {
-    method: 'GET',
-    uri: uri,
-    headers: {
-      'uid': email,
-      'access-token': auth.accessToken,
-      'client': auth.client
-    }
-  }
-
-  return promiseRetry(
-    (retry, number) => {
-      return rp(downloadRequest).catch(retry)
-    },
-    { retries: maxRetries, factor: 1, minTimeout: 3000 }
-  )
-}
-
-const downloadUrl = (chainId, relPath) => inkEndpoint +
-  '/api/process_chains/' +
-  chainId +
-  '/download_output_file?relative_path=' +
-  relPath +
-  '.html'
-
-const downloadFromInk = ([auth, response]) => {
-  if (response.process_chain.input_file_manifest.length === 0) {
+  if (manifest.length === 0) {
     throw new Error('The INK server gave a malformed response (no input files in the process chain)')
   }
-  const relPath = path.basename(response.process_chain.input_file_manifest[0].path, '.docx')
-  const url = downloadUrl(response.process_chain.id, relPath)
-  return retryFor30SecondsUntil200(url, auth)
-}
 
-var InkBackend = function (app) {
-  app.use('/api/ink', (req, res, next) => {
-    var fileStream = new Busboy({ headers: req.headers })
+  const interval = inkConfig.interval || 1000 // try once per second
 
-    const handleErr = err => {
-      logger.error('ERROR CONVERTING WITH INK', err)
-      next(err)
+  const maxRetries = inkConfig.maxRetries || 300 // retry for up to 5 minutes
+
+  const uri = inkUrl('process_chains/' + chain.id + '/download_output_file')
+
+  const qs = {
+    relative_path: outputFileName || path.basename(manifest[0].path, '.docx') + '.html'
+  }
+
+  const headers = {
+    uid: inkConfig.email,
+    ...auth
+  }
+
+  for (let i = 0; i < maxRetries; i++) {
+    // delay
+    await new Promise(resolve => setTimeout(resolve, interval))
+
+    const response = await rp({
+      uri,
+      qs,
+      headers,
+      simple: false,
+      resolveWithFullResponse: true
+    }).catch(error => {
+      logger.error('Error downloading from INK:', error.message)
+      throw error
+    })
+
+    // a successful request: return the data
+    if (response.statusCode === 200) {
+      return response.body
     }
 
+    // not a 404 response - stop trying
+    if (response.statusCode !== 404) {
+      break
+    }
+  }
+
+  throw new Error('Unable to download the output from INK')
+}
+
+const findRecipeId = (recipeKey = 'Editoria Typescript', auth) => rp({
+  method: 'GET',
+  uri: inkUrl('recipes'),
+  headers: {
+    uid: inkConfig.email,
+    ...auth
+  },
+  json: true
+}).then(data => {
+  const recipe = data.recipes.find(recipe => recipe.name === recipeKey)
+
+  return recipe ? recipe.id : null
+})
+
+const process = async (inputFile, options) => {
+  const auth = await authorize().catch(err => {
+    logger.error('INK API LOGIN FAILURE:', err.message)
+    throw err
+  })
+
+  // either use the recipe id from the configuration or search for it by name
+  const recipeId = inkConfig.recipes[options.recipe] || await findRecipeId(options.recipe, auth)
+  if (!recipeId) throw new Error('Unknown recipe')
+
+  const response = await upload(recipeId, inputFile, auth).catch(err => {
+    logger.error('INK API UPLOAD FAILURE:', err.message)
+    throw err
+  })
+
+  return download(response.process_chain, auth, options.outputFileName)
+}
+
+const InkBackend = function (app) {
+  // TODO: authentication on this route
+  app.use('/api/ink', (req, res, next) => {
+    const fileStream = new Busboy({ headers: req.headers })
+
     fileStream.on('file', (fieldname, file, filename, encoding, contentType) => {
-      var stream = temp.createWriteStream()
+      const stream = temp.createWriteStream()
+
+      stream.on('finish', () => {
+        const inputFile = {
+          value: fs.createReadStream(stream.path),
+          options: { filename, contentType }
+        }
+
+        process(inputFile, req.query).then(converted => {
+          res.json({ converted })
+
+          // clean up temp file
+          fs.unlink(stream.path, () => {
+            logger.info('Deleted temporary file', stream.path)
+          })
+        }).catch(err => {
+          logger.error('ERROR CONVERTING WITH INK:', err.message)
+          next(err)
+        })
+      })
+
       file.pipe(stream)
 
       file.on('end', () => {
         stream.end()
-
-        var fileOpts = {
-          value: fs.createReadStream(stream.path),
-          options: {
-            filename: filename,
-            contentType: contentType
-          }
-        }
-
-        getAuth().then(
-          checkInk
-        ).then(
-          uploadToInk(fileOpts)
-        ).then(
-          downloadFromInk
-        ).then(
-          response => res.send(response)
-        ).catch(handleErr)
       })
     })
 
-    fileStream.on('error', handleErr)
+    fileStream.on('error', err => {
+      logger.error(err)
+      next(err)
+    })
 
     req.pipe(fileStream)
   })
