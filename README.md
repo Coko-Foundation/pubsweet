@@ -11,7 +11,7 @@
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
 - [Overview](#overview)
-	- [PubSweet modules](#pubsweet-modules)
+	- [PubSweet packages](#pubsweet-packages)
 - [Getting started](#getting-started)
 - [Support](#support)
 - [Credits](#credits)
@@ -24,34 +24,33 @@
 
 It's a modular and flexible framework consisting of a **server** and **client** that work together, **components** that can modify or extend the functionality of the server and/or client, and a **command-line tool** that helps manage PubSweet apps.
 
-## PubSweet modules
+## PubSweet packages (managed with Lerna)
 
 | repository | description |
 | :-------- | :-------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet-server) | an extensible backend API that runs on the server |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet-client) | an extensible frontend app that runs in the browser |
-| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet-components) | pluggable extensions for server and/or client |
-| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-server](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-server) | an extensible RESTful API that runs on the server |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-client](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-client) | an extensible frontend app that runs in the browser |
+| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-components](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-components) | components for server and/or client |
+| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-cli](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-cli) | a suite of command-line tools for building and managing your platform |
+| [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-logger) | logging utility |
+| [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/packages/db-manager) | utility for managing PubSweet databases |
+| [@pubsweet/pubsweet-theme-plugin](https://gitlab.coko.foundation/pubsweet/packages/db-manager) | webpack plugin for theme support in PubSweet |
 
 # Getting started
 
-The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet-cli).
+The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-cli).
 
 # Support
 
 - **If you have a general query about PubSweet**, or want to discuss anything with us, come and [chat to us in our Mattermost channel](https://mattermost.coko.foundation/coko/channels/pubsweet).
 
-- **Bug reports and feature requests** belong in the issues of the relevant repository:
-  - [`pubsweet-cli` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/issues)
-  - [`pubsweet-server` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-server/issues)
-  - [`pubsweet-client` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-client/issues)
-  - [`pubsweet-test-docker-baseimg` issues](https://gitlab.coko.foundation/pubsweet/pubsweet-test-docker-baseimg/issues)
+- **Bug reports and feature requests** belong in the issues of this monorepo.
 
-- **If you're not sure where an issue belongs**, or to discuss the PubSweet ecosystem in general, [use the pubsweet/pubsweet issues](https://gitlab.coko.foundation/pubsweet/pubsweet/issues).
 
 # Projects using PubSweet
 
-- [Editoria](https://gitlab.coko.foundation/yannisbarlas/editoria) - a book production platform built for University of California Press
+- [Editoria](https://gitlab.coko.foundation/editoria/editoria) - a book production platform built for University of California Press
+- [Xpub](https://gitlab.coko.foundation/xpub/xpub) - a journal publishing platform
 
 # Credits
 
