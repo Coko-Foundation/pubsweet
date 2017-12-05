@@ -1,0 +1,10 @@
+{
+  "extends": ["standard", "eslint:recommended"],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  }
+}
+

@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "db": true,
+    "acl": true
+  }
+}
