@@ -1,0 +1,178 @@
+0 silly input [ '../pubsweet-client' ]
+1 silly flags { _: [ 'import' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   pathToRepo: '../pubsweet-client' }
+2 verbose rootPath /Users/juretriglav/src/pubsweet
+3 info version 2.5.1
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Users/juretriglav/src/pubsweet/VERSION
+7 silly initialize attempt
+8 silly statSync /Users/juretriglav/src/pubsweet-client
+9 silly existsSync /Users/juretriglav/src/pubsweet/packages/pubsweet-client
+10 silly getCurrentSHA
+11 verbose getCurrentSHA 0893425c31cf8c7f0bf9123cd211c17f52939a4f
+12 info About to import 867 commits from ../pubsweet-client into packages/pubsweet-client
+13 silly initialize success
+14 silly execute attempt
+15 info 133945f
+16 info aa0efbe
+17 info 54d2f33
+18 info 6339649
+19 info 43accb4
+20 info 64e8ced
+21 info 36f8ed4
+22 info 4b43c04
+23 info e961231
+24 info f685ec4
+25 info ebdb3a7
+26 info 70c160e
+27 info b9275b1
+28 info 08c98ae
+29 info 606e603
+30 info 1c46b02
+31 info 3a095b5
+32 info 5da4842
+33 info 7aeb04d
+34 info ae133e5
+35 info 1086bbe
+36 info 00976dd
+37 info 01eca5c
+38 info 44114ea
+39 info 666dcbb
+40 info 74e13b5
+41 info 68973e5
+42 info f205375
+43 info 75ea147
+44 info ab12a52
+45 info b0c8c57
+46 info f2b16a4
+47 info 618c42a
+48 info b91dd61
+49 info 0be6c28
+50 info 8f1a203
+51 info 0611424
+52 info 8754cf5
+53 info 360a234
+54 info a88874e
+55 info e136ed6
+56 info 914ba2b
+57 info 24d53fa
+58 info 1635148
+59 info a98ac6b
+60 info 11de7f5
+61 info e4e86e3
+62 info eb78ee2
+63 info ea5a286
+64 info 94f72f6
+65 info ef54e57
+66 info 20e5726
+67 info 2f17eb9
+68 info 5792748
+69 info 5cc281f
+70 info 99d2d63
+71 info 32ec60e
+72 info 0359138
+73 info 1f17669
+74 info c49240e
+75 info 8ffbda7
+76 info 058a47c
+77 info 8be5b03
+78 info 434acf6
+79 info 3b0d06a
+80 info ac7bfb0
+81 info 336a60c
+82 info a96e84b
+83 info 8d17e40
+84 info efb4498
+85 info f859938
+86 info 22c8376
+87 info 8493126
+88 info d631885
+89 info c86f21e
+90 info 29cb6ac
+91 info 48ffc6a
+92 info 6488822
+93 info 2e1019e
+94 info b08c58a
+95 info 40ae5e4
+96 info e4d30fb
+97 info cea5ea6
+98 info 1fd52e7
+99 info 3a7e921
+100 info b7852d7
+101 info 4cf6e50
+102 info d733e33
+103 info 4d1e222
+104 info 1afab2e
+105 info 996bde5
+106 info ca66e67
+107 info b674135
+108 info 0dbccf0
+109 info 7848c02
+110 info be8ba63
+111 info b57b3a9
+112 info c95b11c
+113 info dcc638b
+114 info fda64f3
+115 info 2b508d6
+116 info 082f6bd
+117 info fad5a2e
+118 info 4ca0fd5
+119 info 364f97d
+120 info 7338adf
+121 info 0902fa5
+122 info 9e1384d
+123 info d007c12
+124 info 75d8471
+125 info f829492
+126 info 5b926fb
+127 info be36575
+128 info e99dfd0
+129 info f1caf54
+130 info fbcb0df
+131 info 606efd2
+132 info a13e9d5
+133 info f9024ec
+134 info 1ed3c64
+135 info 4a47f17
+136 info c90ff4d
+137 info eaf0842
+138 info 1070ae6
+139 info 2d02645
+140 info 2fdb98c
+141 error import Failed to apply commit 2fdb98c.
+141 error import Error: Command failed: git am -3
+141 error import error: Failed to merge in the changes.
+141 error import Applying: Update substance-components package to a version which fixes https://github.com/substance/lens/pull/85
+141 error import Using index info to reconstruct a base tree...
+141 error import M	packages/pubsweet-client/package.json
+141 error import Falling back to patching base and 3-way merge...
+141 error import Auto-merging packages/pubsweet-client/package.json
+141 error import CONFLICT (content): Merge conflict in packages/pubsweet-client/package.json
+141 error import Patch failed at 0001 Update substance-components package to a version which fixes https://github.com/substance/lens/pull/85
+141 error import The copy of the patch that failed is found in: .git/rebase-apply/patch
+141 error import When you have resolved this problem, run "git am --continue".
+141 error import If you prefer to skip this patch, run "git am --skip" instead.
+141 error import To restore the original branch and stop patching, run "git am --abort".
+141 error import
+141 error import Rolling back to previous HEAD (commit 0893425c31cf8c7f0bf9123cd211c17f52939a4f).
+141 error import You may try with --flatten to import flat history.
+142 error execute callback with error
+143 error Failed to apply commit 2fdb98c.
+143 error Error: Command failed: git am -3
+143 error error: Failed to merge in the changes.
+143 error Applying: Update substance-components package to a version which fixes https://github.com/substance/lens/pull/85
+143 error Using index info to reconstruct a base tree...
+143 error M	packages/pubsweet-client/package.json
+143 error Falling back to patching base and 3-way merge...
+143 error Auto-merging packages/pubsweet-client/package.json
+143 error CONFLICT (content): Merge conflict in packages/pubsweet-client/package.json
+143 error Patch failed at 0001 Update substance-components package to a version which fixes https://github.com/substance/lens/pull/85
+143 error The copy of the patch that failed is found in: .git/rebase-apply/patch
+143 error When you have resolved this problem, run "git am --continue".
+143 error If you prefer to skip this patch, run "git am --skip" instead.
+143 error To restore the original branch and stop patching, run "git am --abort".
+143 error
+143 error Rolling back to previous HEAD (commit 0893425c31cf8c7f0bf9123cd211c17f52939a4f).

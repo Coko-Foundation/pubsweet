@@ -1,0 +1,13 @@
+image: node:7
+
+before_script:
+  - yarn
+
+test:
+  script:
+    - npm test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+lint:
+  script:
+    - npm run lint

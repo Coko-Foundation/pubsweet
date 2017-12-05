@@ -1,0 +1,17 @@
+image: pubsweet/pubsweet-test-base
+before_script:
+  - yarn
+
+test:lint:
+  script:
+    - npm run lint
+
+test:vulnerabilities:
+  script:
+    - npm run vuln-test
+
+test:node:
+  script:
+    - npm test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+

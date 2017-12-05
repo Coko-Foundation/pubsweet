@@ -1,0 +1,63 @@
+{
+  "name": "@pubsweet/db-manager",
+  "version": "0.0.8",
+  "description": "Provides database management utilities to Pubsweet apps.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --runInBand --no-cache",
+    "lint": "eslint src test",
+    "precommit": "lint-staged",
+    "test:ci": "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
+    "vuln-test": "nsp check --output checkstyle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.coko.foundation:yld/db-manager.git"
+  },
+  "keywords": [
+    "pubsweet",
+    "database"
+  ],
+  "engines": {
+    "node": ">=7.9.0",
+    "npm": ">=3.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "author": "Samuel Galson",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "lint-staged": "^4.2.3",
+    "nsp": "^2.8.0",
+    "prettier": "^1.7.4"
+  },
+  "dependencies": {
+    "@pubsweet/logger": "0.0.1",
+    "fs-extra": "^4.0.2",
+    "isomorphic-fetch": "^2.2.1",
+    "joi": "^11.0.2",
+    "pouchdb": "^6.3.4",
+    "pubsweet-server": "^1.0.0-beta.2"
+  }
+}

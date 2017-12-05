@@ -1,0 +1,56 @@
+{
+  "name": "@pubsweet/logger",
+  "version": "0.0.1",
+  "description": "A module encapsulating standard logging features for pubsweet components and services.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src test",
+    "vuln-test": "nsp check --output checkstyle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.coko.foundation:pubsweet/pubsweet-logger.git"
+  },
+  "keywords": [
+    "logger",
+    "pubsweet"
+  ],
+  "engines": {
+    "node": ">=7.9.0",
+    "npm": ">=3.0.0"
+  },
+  "author": "Antony Denyer",
+  "license": "MIT",
+  "devDependencies": {
+    "bunyan": "^1.8.12",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.4",
+    "nsp": "^2.7.0",
+    "winston": "^2.3.1"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "dependencies": {
+    "config": "^1.26.2",
+    "joi": "^10.6.0",
+    "lodash": "^4.17.4"
+  }
+}
