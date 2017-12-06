@@ -21,8 +21,9 @@
 }
 
 .root .input {
-  display: none;
   margin-right: 0.25rem;
+  opacity: 0;
+  position: absolute;
 }
 
 .root span::before {
@@ -37,6 +38,7 @@
   width: 9px;
 }
 
+.root input:focus + span::before,
 .root:hover span::before {
   //background-size: 100%;
   background: var(--color-primary);
