@@ -1,26 +1,40 @@
 .root {
   display: flex;
   justify-content: space-between;
-}
+  margin: 1rem;
 
-.link {
-  color: var(--color-primary);
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
 
-  &::before {
-    color: #aaa;
-    display: inline-block;
-    height: 1em;
-    margin-right: 0.3em;
-    text-align: center;
+    &::before {
+      color: #aaa;
+      display: inline-block;
+      height: 1em;
+      margin-right: 0.3em;
+      text-align: center;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
   }
 }
 
-.link:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.section {
+  display: flex;
+}
 
-  &::before {
-    color: var(--color-primary);
+.navLinks {
+  display: flex;
+  margin: 0 1rem;
+
+  a {
+    padding: 0 1rem;
+
+    &:global(.active) {
+      font-weight: bold;
+    }
   }
 }
 
@@ -28,16 +42,17 @@
   align-items: center;
   display: inline-flex;
   padding: 0 1rem;
+
+  svg {
+    margin-right: 0.3rem;
+  }
 }
 
-.actions {
-  display: flex;
-}
+.logo {
+  font-weight: bold;
+  text-decoration: none;
 
-.username {
-  margin-left: 0.3em;
-}
-
-.logo::before {
-  content: "";
+  &::before {
+    content: '';
+  }
 }

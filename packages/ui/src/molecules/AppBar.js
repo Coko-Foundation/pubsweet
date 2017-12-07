@@ -4,37 +4,47 @@ import classnames from 'classnames'
 import classes from './AppBar.local.scss'
 import Icon from '../atoms/Icon'
 
-const AppBar = ({ brandLink, brandName, loginLink, logoutLink, userName }) => (
-  <div className={classes.root}>
-    <Link
-      className={classnames(classes.link, classes.logo)}
-      to={brandLink || '/'}
-    >
-      {brandName}
-    </Link>
+const AppBar = ({
+  brandLink = '/',
+  brandName,
+  loginLink = '/login',
+  onLogoutClick,
+  navLinks,
+  user,
+  className,
+}) => (
+  <nav className={classnames(classes.root, className)}>
+    <div className={classes.section}>
+      <Link className={classes.logo} to={brandLink}>
+        {brandName}
+      </Link>
 
-    <div className={classes.actions}>
-      {userName && (
+      {navLinks && <div className={classes.navLinks}>{navLinks}</div>}
+    </div>
+
+    <div className={classes.section}>
+      {user && (
         <span className={classes.item}>
           <Icon size={16}>user</Icon>
-          <span className={classes.username}>{userName}</span>
+          {user.username}
+          {user.admin ? ' (admin)' : ''}
         </span>
       )}
 
-      {userName ? (
-        <Link
-          className={classnames(classes.item, classes.link)}
-          to={logoutLink}
-        >
-          logout
-        </Link>
-      ) : (
-        <Link className={classnames(classes.item, classes.link)} to={loginLink}>
-          login
+      {user && (
+        <a className={classes.item} href="#" onClick={onLogoutClick}>
+          <Icon size={16}>power</Icon>
+          Logout
+        </a>
+      )}
+
+      {!user && (
+        <Link className={classes.item} to={loginLink}>
+          Login
         </Link>
       )}
     </div>
-  </div>
+  </nav>
 )
 
 export default AppBar
