@@ -1,5 +1,11 @@
 {
+	"name": "pubsweet-monorepo",
+	"private": true,
 	"devDependencies": {
 		"lerna": "^2.5.1"
-	}
+	},
+	"workspaces": [
+		"packages/*",
+		"packages/pubsweet-components/packages/*"
+	]
 }

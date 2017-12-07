@@ -12,6 +12,8 @@ module.exports = dir => {
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,
     /@pubsweet\/[^/]+\/src/,
+    /styleguide\/src/,
+    /ui\/src/
   ]
 
   return {

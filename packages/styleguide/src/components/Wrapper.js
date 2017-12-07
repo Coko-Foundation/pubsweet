@@ -3,11 +3,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { reducer as formReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux'
-import { JournalProvider } from 'xpub-journal'
 
-import 'xpub-theme'
-
-import * as journal from '../config/journal'
+import "@pubsweet/theme"
 
 import classes from './Wrapper.local.scss'
 
@@ -23,9 +20,7 @@ const store = createStore(
 const Wrapper = ({ children }) => (
   <Provider store={store}>
     <Router>
-      <JournalProvider journal={journal}>
-        <div className={classes.root}>{children}</div>
-      </JournalProvider>
+      <div className={classes.root}>{children}</div>
     </Router>
   </Provider>
 )

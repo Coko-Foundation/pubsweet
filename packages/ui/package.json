@@ -1,6 +1,6 @@
 {
-  "name": "pubsweet-ui",
-  "version": "0.0.2",
+  "name": "@pubsweet/ui",
+  "version": "0.1.0",
   "files": [
     "docs",
     "dist",
@@ -27,6 +27,7 @@
     "redux-form": "^7.0.3"
   },
   "devDependencies": {
+    "@pubsweet/styleguide": "^0.1.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
@@ -43,8 +44,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.2"
+    "webpack-node-externals": "^1.6.0"
   },
   "jest": {
     "moduleNameMapper": {

@@ -23,9 +23,9 @@ module.exports = {
   skipComponentsWithoutExample: true,
   styleguideComponents: {
     StyleGuideRenderer: require.resolve(
-      'xpub-styleguide/src/components/StyleGuideRenderer',
+      '@pubsweet/styleguide/src/components/StyleGuideRenderer',
     ),
-    Wrapper: require.resolve('xpub-styleguide/src/components/Wrapper'),
+    Wrapper: require.resolve('@pubsweet/styleguide/src/components/Wrapper'),
   },
   theme: {
     color: {
@@ -35,5 +35,5 @@ module.exports = {
       base: '"Fira Sans", sans-serif',
     },
   },
-  title: 'xpub-ui style guide',
+  title: 'PubSweet UI style guide',
 }
