@@ -5,7 +5,6 @@
   "bin": "./bin/pubsweet.js",
   "scripts": {
     "lint": "eslint bin src cli test",
-    "test": "NODE_ENV=test jest --runInBand --no-cache",
     "test:mocked": "NODE_ENV=test jest ./test/cli",
     "vuln-test": "nsp check --output checkstyle",
     "test:ci": "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",

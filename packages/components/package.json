@@ -45,7 +45,8 @@
     "style-loader": "^0.18.2",
     "supertest": "^3.0.0",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.6"
+    "webpack": "^3.5.6",
+    "config": "^1.28.1"
   },
   "jest": {
     "transformIgnorePatterns": [
