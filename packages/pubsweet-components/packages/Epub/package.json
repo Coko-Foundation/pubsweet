@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-epub",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Backend EPUB export component for PubSweet",
   "main": "index.js",
   "scripts": {
