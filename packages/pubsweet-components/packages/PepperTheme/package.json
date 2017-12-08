@@ -3,9 +3,6 @@
   "version": "0.0.3",
   "description": "Pepper's theme for PubSweet",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "repository": {

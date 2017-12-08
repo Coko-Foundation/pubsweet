@@ -3,9 +3,6 @@
   "version": "0.3.0",
   "description": "Basic teams manager component for PubSweet",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {

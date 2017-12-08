@@ -3,9 +3,6 @@
   "version": "0.2.2",
   "description": "A frontend component that talks to the INK backend component (which talks to INK for file processing and conversion)",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-components"
