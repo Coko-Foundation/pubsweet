@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/v1.0.0...v1.1.0) (2017-12-08)
+
+
+### Features
+
+* remove comment ([3dafdeb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3dafdeb))
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/v0.2.4...v1.0.0) (2017-12-08)
 
