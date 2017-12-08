@@ -1,4 +1,5 @@
 {
+  "name": "pubsweet-monorepo",
   "private": true,
   "license": "MIT",
   "devDependencies": {
@@ -35,5 +36,9 @@
     ],
     "*.css": "stylelint",
     "*.scss": "stylelint"
-  }
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/components/packages/*"
+  ]
 }

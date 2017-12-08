@@ -26,7 +26,7 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 ## PubSweet packages (managed with Lerna)
 
-| repository | description |
+| package | description |
 | :-------- | :-------- |
 | [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-server](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-server) | an extensible RESTful API that runs on the server |
 | [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet/pubsweet-client](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-client) | an extensible frontend app that runs in the browser |
