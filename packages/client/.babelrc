@@ -3,5 +3,9 @@
     "env",
     "react",
     "stage-2"
+  ],
+  "ignore": [
+    "node_modules/",
+    "../../node_modules/"
   ]
 }
