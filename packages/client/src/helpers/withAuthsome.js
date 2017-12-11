@@ -1,11 +1,12 @@
 import Authsome from 'authsome'
 import { connect } from 'react-redux'
 import config from 'config'
+
 const mode = require(config.authsome.mode)
 
 // higher order component to inject authsome into a component
 export default function withAuthsome() {
-  const authsome = new Authsome({...config.authsome, mode}, {})
+  const authsome = new Authsome({ ...config.authsome, mode }, {})
 
   function mapState(state) {
     authsome.context = {

@@ -5,9 +5,9 @@ import Navigation from './Navigation'
 
 describe('<Navigation/>', () => {
   const makeWrapper = (props = {}) => shallow(<Navigation
-      actions={{logoutUser: jest.fn()}}
-      currentUser={{isAuthenticated: true, user: {}}}
-      {...props}
+    actions={{logoutUser: jest.fn()}}
+    currentUser={{isAuthenticated: true, user: {}}}
+    {...props}
   />)
 
   it('shows user nav when logged in', () => {

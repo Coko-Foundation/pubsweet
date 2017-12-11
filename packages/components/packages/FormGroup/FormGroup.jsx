@@ -4,6 +4,7 @@ import {FormGroup as BootstrapFormGroup, ControlLabel, FormControl, HelpBlock} f
 import Joi from 'joi-browser'
 import serverValidations from 'pubsweet-server/src/models/validations'
 import config from 'config'
+
 const validations = serverValidations(config)
 
 class FormGroup extends React.Component {

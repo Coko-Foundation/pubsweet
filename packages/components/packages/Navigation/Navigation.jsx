@@ -6,6 +6,7 @@ import { Navbar, Nav, NavItem, NavbarBrand } from 'react-bootstrap'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import NavbarUser from './NavbarUser'
 
+
 const Navigation = ({ actions, currentUser }) => (
   <Navbar fluid>
     <Navbar.Header>

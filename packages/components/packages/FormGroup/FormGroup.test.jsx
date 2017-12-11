@@ -8,10 +8,10 @@ jest.mock('joi-browser', () => require('joi'))
 
 describe('<FormGroup/>', () => {
   const makeWrapper = (props = {}) => shallow(<FormGroup
-      controlId={''}
-      label="Testing"
-      modelProperty="fragment.title"
-      {...props}
+    controlId={''}
+    label="Testing"
+    modelProperty="team.name"
+    {...props}
   />)
 
   it('shows error on invalid input', () => {
