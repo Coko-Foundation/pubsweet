@@ -7,7 +7,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "@pubsweet/logger": "0.0.1",
+    "@pubsweet/logger": "^0.0.1",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
@@ -25,11 +25,11 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^20.0.4",
     "joi-browser": "^10.6.1",
-    "lerna": "2.0.0-rc.5",
+    "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
     "pubsweet": "^1.0.0-alpha.4",
-    "pubsweet-client": "^1.0.0-beta.7",
-    "pubsweet-server": "^1.0.0-alpha.3",
+    "pubsweet-client": "^1.0.0",
+    "pubsweet-server": "^1.0.0",
     "pubsweet-theme-plugin": "0.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
