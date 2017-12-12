@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/db-manager",
-  "version": "0.0.9",
+  "version": "0.0.8",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
