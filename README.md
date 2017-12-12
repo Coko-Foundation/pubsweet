@@ -28,13 +28,13 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 | package | description |
 | :-------- | :-------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/tree/master/packages/server) | an extensible RESTful API that runs on the server |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/tree/master/packages/client) | an extensible frontend app that runs in the browser |
-| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet-components](https://gitlab.coko.foundation/pubsweet/tree/master/packages/components) | components for server and/or client |
-| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet cli](https://gitlab.coko.foundation/pubsweet/tree/master/packages/cli) | a suite of command-line tools for building and managing your platform |
-| [pubsweet-theme-plugin](https://gitlab.coko.foundation/pubsweet/tree/master/packages/theme-plugin) | webpack plugin for theme support in PubSweet |
-| [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/tree/master/packages/logger) | logging utility |
-| [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/tree/master/packages/db-manager) | utility for managing PubSweet databases |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server) | an extensible RESTful API that runs on the server |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/client) | an extensible frontend app that runs in the browser |
+| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components) | components for server and/or client |
+| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet cli](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/cli) | a suite of command-line tools for building and managing your platform |
+| [pubsweet-theme-plugin](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/theme-plugin) | webpack plugin for theme support in PubSweet |
+| [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/logger) | logging utility |
+| [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/db-manager) | utility for managing PubSweet databases |
 
 # Getting started
 
