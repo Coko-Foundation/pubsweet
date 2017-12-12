@@ -65,5 +65,8 @@
     "test:watch": "npm test -- --watch",
     "test:cover": "npm test -- --coverage",
     "test:u": "npm test -- --updateSnapshot"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
