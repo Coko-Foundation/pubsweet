@@ -1,11 +1,47 @@
 {
-	"name": "pubsweet-monorepo",
-	"private": true,
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	},
-	"workspaces": [
-		"packages/*",
-		"packages/pubsweet-components/packages/*"
-	]
+  "name": "pubsweet-monorepo",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.13.1",
+    "eslint-config-stylelint": "^8.0.0",
+    "eslint-plugin-jest": "^21.4.2",
+    "stylelint-config-pubsweet": "^0.0.3",
+    "eslint-config-pubsweet": "^0.0.6",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lerna": "^2.5.1",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.8.2",
+    "stylelint": "^8.2.0",
+    "stylelint-config-standard": "^18.0.0"
+  },
+  "scripts": {
+    "clean": "lerna clean",
+    "test": "lerna run test",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint packages",
+    "lint:style": "stylelint packages/**/*.scss packages/**/*.css",
+    "precommit": "lerna run --concurrency 1 --stream precommit"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "git add"
+    ],
+    "*.css": "stylelint",
+    "*.scss": "stylelint"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/components/packages/*"
+  ]
 }

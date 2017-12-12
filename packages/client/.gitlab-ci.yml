@@ -1,0 +1,14 @@
+image: pubsweet/pubsweet-test-base
+
+before_script:
+  - yarn
+
+test:
+  script:
+    - npm test
+  coverage: '/^All files\s+\|\s+(\d+.\d+)\s\|.*$/'
+
+lint:
+  script:
+    - npm run lint
+
