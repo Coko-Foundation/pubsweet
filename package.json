@@ -6,6 +6,9 @@
     "babel-eslint": "^8.0.1",
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.13.1",
+    "eslint-config-stylelint": "^8.0.0",
+    "eslint-plugin-jest": "^21.4.2",
+    "stylelint-config-pubsweet": "^0.0.3",
     "eslint-config-pubsweet": "^0.0.6",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
@@ -40,10 +43,5 @@
   "workspaces": [
     "packages/*",
     "packages/components/packages/*"
-  ],
-  "dependencies": {
-    "eslint-config-stylelint": "^8.0.0",
-    "eslint-plugin-jest": "^21.4.2",
-    "stylelint-config-pubsweet": "^0.0.3"
-  }
+  ]
 }
