@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "eslint-config-stylelint": "^8.0.0",
+    "eslint-plugin-jest": "^21.4.2",
     "stylelint-config-pubsweet": "^0.0.3"
   }
 }
