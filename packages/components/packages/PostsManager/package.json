@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-posts-manager",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Basic Posts manager component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
