@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     "docs",
     "dist",
@@ -13,8 +13,8 @@
     "classnames": "^2.2.5",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-15": "^1.0.5",
-    "lodash": "^4.17.4",
     "humps": "^2.0.1",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -27,7 +27,7 @@
     "redux-form": "^7.0.3"
   },
   "devDependencies": {
-    "@pubsweet/styleguide": "^0.1.0",
+    "@pubsweet/styleguide": "^0.1.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",

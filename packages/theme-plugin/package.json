@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-theme-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A plugin for Webpack 2, used by PubSweet for themes support.",
   "main": "index.js",
   "repository": {

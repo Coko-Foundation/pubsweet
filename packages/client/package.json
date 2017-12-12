@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -27,7 +27,7 @@
     "lodash": "^4.0.0",
     "prettier": "^1.7.4",
     "prop-types": "^15.5.8",
-    "pubsweet-component-login": "^0.5.2",
+    "pubsweet-component-login": "^0.5.6",
     "react": "^15.4.4",
     "react-css-themr": "^2.1.2",
     "react-redux": "^5.0.2",
