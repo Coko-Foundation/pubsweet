@@ -12,7 +12,7 @@ function fileUploadSuccess(file) {
   return {
     type: T.FILE_UPLOAD_SUCCESS,
     isFetching: false,
-    file: file,
+    file,
   }
 }
 
@@ -31,7 +31,7 @@ export function fileUpload(file) {
     const data = new FormData()
     data.append('file', file)
 
-    let opts = {
+    const opts = {
       method: 'POST',
       headers: {
         Accept: 'text/plain', // the response is a URL

@@ -22,11 +22,11 @@ module.exports = {
   info: (...args) => logger.info(...args),
   debug: (...args) => logger.debug(...args),
   stream: {
-    write: function (message, encoding) {
+    write(message, encoding) {
       logger.info(message)
-    }
+    },
   },
-  configure: (theirLogger) => {
+  configure: theirLogger => {
     if (configured) {
       throw new Error('Logger has already been configured')
     }
@@ -36,5 +36,5 @@ module.exports = {
     logger = theirLogger
     configured = true
   },
-  getRawLogger: () => logger
+  getRawLogger: () => logger,
 }

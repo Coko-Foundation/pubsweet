@@ -1,12 +1,10 @@
-'use strict'
-
 const _ = require('lodash')
 
 const Model = require('./Model')
 const User = require('./User')
 
 class Team extends Model {
-  constructor (properties) {
+  constructor(properties) {
     super(properties)
 
     this.type = 'team'
@@ -16,60 +14,63 @@ class Team extends Model {
     }
   }
 
-  static async deleteAssociated (type, id) {
+  static async deleteAssociated(type, id) {
     const teams = await Team.all()
 
     return Promise.all(
       teams
-        .filter(team => team.object &&
-          team.object.type === type &&
-          team.object.id === id)
-        .map(team => team.delete())
+        .filter(
+          team =>
+            team.object && team.object.type === type && team.object.id === id,
+        )
+        .map(team => team.delete()),
     )
   }
 
-  async updateProperties (properties) {
-    let currentMembers = new Set(this.members)
-    let newMembers = new Set(properties.members)
-    let removedMembers = new Set([...currentMembers].filter(x => !newMembers.has(x)))
+  async updateProperties(properties) {
+    const currentMembers = new Set(this.members)
+    const newMembers = new Set(properties.members)
+    const removedMembers = new Set(
+      [...currentMembers].filter(x => !newMembers.has(x)),
+    )
 
     await Promise.all(
-      [...removedMembers].map(userId => {
-        return User.find(userId).then(user => {
+      [...removedMembers].map(userId =>
+        User.find(userId).then(user => {
           user.teams = user.teams.filter(teamId => teamId !== this.id)
           return user.save()
-        })
-      })
+        }),
+      ),
     )
 
     return super.updateProperties(properties)
   }
 
-  async save () {
+  async save() {
     await Promise.all(
-      this.members.map(member => {
-        return User.find(member).then(user => {
-          if (!(user.teams).includes(this.id)) {
+      this.members.map(member =>
+        User.find(member).then(user => {
+          if (!user.teams.includes(this.id)) {
             user.teams.push(this.id)
             return user.save()
           }
-        })
-      })
+        }),
+      ),
     )
 
     return super.save()
   }
 
-  async delete () {
+  async delete() {
     await Promise.all(
-      this.members.map(member => {
-        return User.find(member).then(user => {
+      this.members.map(member =>
+        User.find(member).then(user => {
           if (user.teams.includes(this.id)) {
             user.teams = _.without(user.teams, this.id)
             return user.save()
           }
-        })
-      })
+        }),
+      ),
     )
 
     return super.delete()

@@ -15,5 +15,4 @@ describe('Function exported by src/index.js', () => {
     expect(secondAccess).toHaveProperty('originalServer')
     return server.close()
   })
-
 })

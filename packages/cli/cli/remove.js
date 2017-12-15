@@ -4,9 +4,7 @@ const program = require('commander')
 const _ = require('lodash')
 
 const readCommand = async argsOverride => {
-  program
-    .arguments('<components>')
-    .description(`Remove component(s) in an app.
+  program.arguments('<components>').description(`Remove component(s) in an app.
 
     <components> - a space-separated list of one or more components.`)
 
@@ -18,7 +16,9 @@ module.exports = async argsOverride => {
   const components = commandOpts.args
 
   if (_.isEmpty(components)) {
-    const eg = colors.bold(`pubsweet remove ${colors.italic('login signup blog')}`)
+    const eg = colors.bold(
+      `pubsweet remove ${colors.italic('login signup blog')}`,
+    )
     throw new Error(`You must specify one or more components, e.g. ${eg}`)
   }
 

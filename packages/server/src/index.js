@@ -1,5 +1,6 @@
 const path = require('path')
 const config = require('config')
+
 const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
 
@@ -21,12 +22,12 @@ const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
 const startServer = require('./start-server')
 
-const configureApp = (app) => {
+const configureApp = app => {
   global.versions = {}
 
   app.locals.models = models
 
-  app.use(morgan('combined', { 'stream': logger.stream }))
+  app.use(morgan('combined', { stream: logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
 
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -51,7 +52,11 @@ const configureApp = (app) => {
 
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
-    app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
+    app.get(
+      '/updates',
+      passport.authenticate('bearer', { session: false }),
+      sse.connect,
+    )
   }
 
   // Serve the index page for front end
@@ -73,9 +78,10 @@ const configureApp = (app) => {
       return res.status(err.status).json({ message: err.message })
     } else if (err.name === 'AuthenticationError') {
       return res.status(STATUS.UNAUTHORIZED).json({ message: err.message })
-    } else {
-      return res.status(err.status || STATUS.INTERNAL_SERVER_ERROR).json({ message: err.message })
     }
+    return res
+      .status(err.status || STATUS.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message })
   })
 
   return app

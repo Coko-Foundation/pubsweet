@@ -9,7 +9,7 @@ const user = {
   username: 'anotheruser',
   email: 'bar@example.com',
   password: '12345',
-  admin: true
+  admin: true,
 }
 
 describe('adduser', () => {

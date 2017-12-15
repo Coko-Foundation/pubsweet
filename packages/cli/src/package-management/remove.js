@@ -15,9 +15,9 @@ const updateConfig = removedComponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
   logger.info(`Removing components from ${configFile}`)
   fs.ensureFileSync(configFile)
-  const oldComponents = fs.readJsonSync(configFile, {throws: false})
+  const oldComponents = fs.readJsonSync(configFile, { throws: false })
   const newComponents = _.difference(oldComponents, removedComponents)
-  fs.writeJsonSync(configFile, newComponents, {spaces: '\t'})
+  fs.writeJsonSync(configFile, newComponents, { spaces: '\t' })
   logger.info('Finished updating components.json config')
 }
 

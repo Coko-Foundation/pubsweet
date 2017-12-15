@@ -1,6 +1,10 @@
 import * as api from 'pubsweet-client/src/helpers/api'
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_SUCCESS,
+  LOGOUT_REQUEST,
 } from 'pubsweet-client/src/actions/types'
 
 import { push } from 'react-router-redux'
@@ -10,37 +14,37 @@ const localStorage = window.localStorage || undefined
 
 // There are three possible states for our login
 // process and we need actions for each of them
-function loginRequest (credentials) {
+function loginRequest(credentials) {
   return {
     type: LOGIN_REQUEST,
     isFetching: true,
     isAuthenticated: false,
-    credentials
+    credentials,
   }
 }
 
-function loginSuccess (user) {
+function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     token: user.token,
-    user: user
+    user,
   }
 }
 
-function loginFailure (message) {
+function loginFailure(message) {
   return {
     type: LOGIN_FAILURE,
     isFetching: false,
     isAuthenticated: false,
-    error: message
+    error: message,
   }
 }
 
 // Calls the API to get a token and
 // dispatches actions along the way
-export function loginUser (credentials, redirectTo) {
+export function loginUser(credentials, redirectTo) {
   return dispatch => {
     dispatch(loginRequest(credentials))
     return api.create('/users/authenticate', credentials).then(
@@ -49,31 +53,31 @@ export function loginUser (credentials, redirectTo) {
         dispatch(loginSuccess(user))
         if (redirectTo) dispatch(push(redirectTo))
       },
-      err => dispatch(loginFailure(err))
+      err => dispatch(loginFailure(err)),
     )
   }
 }
 
-function logoutRequest () {
+function logoutRequest() {
   return {
     type: LOGOUT_REQUEST,
     isFetching: true,
-    isAuthenticated: true
+    isAuthenticated: true,
   }
 }
 
-function logoutSuccess () {
+function logoutSuccess() {
   return {
     type: LOGOUT_SUCCESS,
     isFetching: false,
-    isAuthenticated: false
+    isAuthenticated: false,
   }
 }
 
 // Logs the user out
 // Since we are using JWTs, we just need to remove the token
 // from localStorage.
-export function logoutUser (redirectTo) {
+export function logoutUser(redirectTo) {
   return dispatch => {
     dispatch(logoutRequest())
     localStorage.removeItem('token')

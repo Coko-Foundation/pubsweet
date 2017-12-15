@@ -1,5 +1,6 @@
 // const components = require('./components')
 const isPlainObject = require('lodash/isPlainObject')
+
 const components = PUBSWEET_COMPONENTS
 
 module.exports = components

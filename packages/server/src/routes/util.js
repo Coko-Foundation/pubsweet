@@ -4,58 +4,62 @@ const NotFoundError = require('../errors/NotFoundError')
 const authsome = require('../helpers/authsome')
 
 const Util = {}
+;(Util.authorizationError = (username, operation, object) => {
+  username = username || 'public'
+  const msg = `User ${username} is not allowed to ${operation} ${object}`
+  return new AuthorizationError(msg)
+}),
+  // Build an object containing only the id
+  (Util.objectId = object => ({ id: object.id })),
+  // Build an object containing only the fields of `output` that were in `input`
+  // TODO: build a real diff, in case other fields were updated indirectly?
+  (Util.buildChangeData = (input, output) => {
+    const data = {}
 
-Util.authorizationError = (username, operation, object) => {
-    username = username || 'public'
-    const msg = `User ${username} is not allowed to ${operation} ${object}`
-    return new AuthorizationError(msg)
-  },
+    Object.keys(input).forEach(key => {
+      // TODO: compare and only add if changed?
+      data[key] = output[key]
+    })
 
-// Build an object containing only the id
-Util.objectId = object => ({ id: object.id }),
-
-// Build an object containing only the fields of `output` that were in `input`
-// TODO: build a real diff, in case other fields were updated indirectly?
-Util.buildChangeData =  (input, output) => {
-  const data = {}
-
-  Object.keys(input).forEach(key => {
-    // TODO: compare and only add if changed?
-    data[key] = output[key]
+    return data
   })
-
-  return data
-}
 
 Util.createFilterFromQuery = query => {
   const filterPaths = _.difference(_.keys(query), ['fields'])
-  return (item) => {
-    return filterPaths.every(filterPath => {
-      return _.has(item, filterPath) && _.get(item, filterPath) === query[filterPath]
-    })
-  }
+  return item =>
+    filterPaths.every(
+      filterPath =>
+        _.has(item, filterPath) &&
+        _.get(item, filterPath) === query[filterPath],
+    )
 }
 
 Util.fieldSelector = req => {
   const fields = req.query.fields ? req.query.fields.split(/\s*,\s*/) : null
 
-  return item => fields ? _.pick(item, fields.concat('id', 'rev')) : item
+  return item => (fields ? _.pick(item, fields.concat('id', 'rev')) : item)
 }
 
-Util.getTeams = async (opts) => {
+Util.getTeams = async opts => {
   let teams
   try {
     teams = await opts.Team.findByField({
       'object.id': opts.id,
-      'object.type': opts.type
+      'object.type': opts.type,
     })
 
-    teams = await Promise.all(teams.map(async team => {
-      let permission = await authsome.can(opts.req.user, opts.req.method, team)
-      if (permission) {
-        return team
-      }
-    }))
+    teams = await Promise.all(
+      teams.map(async team => {
+        const permission = await authsome.can(
+          opts.req.user,
+          opts.req.method,
+          team,
+        )
+        if (permission) {
+          return team
+        }
+      }),
+    )
 
     teams = teams.filter(team => team !== undefined)
   } catch (err) {
@@ -85,7 +89,9 @@ Util.getFragment = async opts => {
   const collection = await opts.Collection.find(opts.req.params.collectionId)
   const fragmentId = opts.req.params.fragmentId
   if (!collection.fragments.includes(fragmentId)) {
-    throw new NotFoundError(`collection ${collection.id} does not contain fragment ${fragmentId}`)
+    throw new NotFoundError(
+      `collection ${collection.id} does not contain fragment ${fragmentId}`,
+    )
   }
 
   return opts.Fragment.find(fragmentId)
@@ -105,19 +111,19 @@ Util.getFragment = async opts => {
  *
  * @returns {Promise} The (possibly filtered) target, if permission is granted
  */
-Util.applyPermissionFilter = async (opts) => {
+Util.applyPermissionFilter = async opts => {
   const permission = await authsome.can(
-    opts.req.user, opts.req.method, opts.target)
+    opts.req.user,
+    opts.req.method,
+    opts.target,
+  )
 
   if (!permission) {
-    throw Util.authorizationError(
-      opts.req.user, opts.req.method, opts.target
-    )
+    throw Util.authorizationError(opts.req.user, opts.req.method, opts.target)
   }
 
   const object = opts.filterable || opts.target
   return permission.filter ? permission.filter(object) : object
 }
-
 
 module.exports = Util

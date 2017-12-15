@@ -1,4 +1,3 @@
-'use strict'
 const Model = require('./Model')
 const ConflictError = require('../errors/ConflictError')
 const bcrypt = require('bcrypt')
@@ -9,7 +8,7 @@ const config = require('config')
 const BCRYPT_COST = config.util.getEnv('NODE_ENV') === 'test' ? 1 : 12
 
 class User extends Model {
-  constructor (properties) {
+  constructor(properties) {
     super(properties)
 
     this.type = 'user'
@@ -17,11 +16,11 @@ class User extends Model {
     this.username = properties.username
   }
 
-  toJSON () {
+  toJSON() {
     return omit(this, ['passwordHash'])
   }
 
-  async save () {
+  async save() {
     if (this.password) {
       this.passwordHash = await this.hashPassword(this.password)
       delete this.password
@@ -30,15 +29,15 @@ class User extends Model {
     return Model.prototype.save.call(this)
   }
 
-  validPassword (password) {
+  validPassword(password) {
     return bcrypt.compare(password, this.passwordHash)
   }
 
-  hashPassword (password) {
+  hashPassword(password) {
     return bcrypt.hash(password, BCRYPT_COST)
   }
 
-  async isUniq (user) {
+  async isUniq(user) {
     let result
 
     const swallowNotFound = e => {
@@ -58,24 +57,22 @@ class User extends Model {
     }
   }
 
-  static findByEmail (email) {
-    return this.findByField('email', email).then(function (users) {
-      return users[0]
-    })
+  static findByEmail(email) {
+    return this.findByField('email', email).then(users => users[0])
   }
 
-  static findByUsername (username) {
-    return this.findByField('username', username).then(function (users) {
-      return users[0]
-    })
+  static findByUsername(username) {
+    return this.findByField('username', username).then(users => users[0])
   }
 
   // For API display/JSON purposes only
-  static ownersWithUsername (object) {
-    return Promise.all(object.owners.map(async ownerId => {
-      const owner = await this.find(ownerId)
-      return pick(owner, ['id', 'username'])
-    }))
+  static ownersWithUsername(object) {
+    return Promise.all(
+      object.owners.map(async ownerId => {
+        const owner = await this.find(ownerId)
+        return pick(owner, ['id', 'username'])
+      }),
+    )
   }
 }
 

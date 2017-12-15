@@ -1,4 +1,3 @@
-'use strict'
 const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
@@ -8,22 +7,20 @@ const Team = require('../models/Team')
 const { createFilterFromQuery, authorizationError } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
-const api = express.Router({mergeParams: true})
+const api = express.Router({ mergeParams: true })
 
 api.get('/teams', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(
-      req.user,
-      req.method,
-      {path: req.path, params: req.params}
-    )
+    const permission = await authsome.can(req.user, req.method, {
+      path: req.path,
+      params: req.params,
+    })
 
     if (!permission) {
       throw authorizationError(req.user, req.method, req)
     }
 
-    const teams = (await Team.all())
-      .filter(createFilterFromQuery(req.query))
+    const teams = (await Team.all()).filter(createFilterFromQuery(req.query))
 
     res.status(STATUS.OK).json(teams)
   } catch (err) {

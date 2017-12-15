@@ -6,6 +6,6 @@ module.exports = {
     },
   },
   authsome: {
-    mode: 'fake-mode'
+    mode: 'fake-mode',
   },
 }

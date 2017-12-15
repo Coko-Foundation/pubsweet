@@ -22,7 +22,7 @@ describe('API SSE enabled', () => {
     await cleanDB()
     await new User(fixtures.adminUser).save()
     await new Promise((resolve, reject) => {
-      server = api.api.listen(port, err => err ? reject(err) : resolve())
+      server = api.api.listen(port, err => (err ? reject(err) : resolve()))
     })
   })
 
@@ -33,13 +33,20 @@ describe('API SSE enabled', () => {
 
   it('should send an event if configured', async () => {
     const token = await api.users.authenticate.post(fixtures.adminUser)
-    es = new EventSource(`http://localhost:${port}/updates?access_token=${encodeURIComponent(token)}`)
+    es = new EventSource(
+      `http://localhost:${port}/updates?access_token=${encodeURIComponent(
+        token,
+      )}`,
+    )
 
     // wrap event listener in promise
-    const eventPromise = new Promise(resolve => es.addEventListener('message', resolve))
+    const eventPromise = new Promise(resolve =>
+      es.addEventListener('message', resolve),
+    )
 
     // perform action
-    await api.collections.create(fixtures.collection, token)
+    await api.collections
+      .create(fixtures.collection, token)
       .expect(STATUS.CREATED)
 
     // await event
@@ -48,8 +55,8 @@ describe('API SSE enabled', () => {
     expect(eventData).toMatchObject({
       action: 'collection:create',
       data: {
-        collection: fixtures.collection
-      }
+        collection: fixtures.collection,
+      },
     })
   })
 })

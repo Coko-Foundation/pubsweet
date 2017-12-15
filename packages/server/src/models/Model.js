@@ -1,5 +1,3 @@
-'use strict'
-
 const uuid = require('uuid')
 const Joi = require('joi')
 const _ = require('lodash')
@@ -10,24 +8,25 @@ const ValidationError = require('../errors/ValidationError')
 const logger = require('@pubsweet/logger')
 
 const config = require('config')
+
 const appValidations = require(config.validations)
 const validations = require('./validations')(appValidations)
 
 schema()
 
 class Model {
-  constructor (properties) {
+  constructor(properties) {
     schema()
     this.id = Model.uuid()
     Object.assign(this, properties)
   }
 
-  static validations () {
+  static validations() {
     return validations[this.type]
   }
 
-  validate () {
-    let validation = Joi.validate(this, this.constructor.validations())
+  validate() {
+    const validation = Joi.validate(this, this.constructor.validations())
 
     if (validation.error) {
       logger.error(validation.error)
@@ -37,44 +36,48 @@ class Model {
     return true
   }
 
-  async save () {
+  async save() {
     logger.debug('Saving', this.type, this.id)
 
     this.validate()
 
-    if (!this.rev /*is create*/ && typeof this.isUniq === 'function') {
+    if (!this.rev /* is create */ && typeof this.isUniq === 'function') {
       await this.isUniq(this) // throws an exception if not unique
     }
     return this._put()
   }
 
-  async _put () {
+  async _put() {
     await db.rel.save(this.constructor.type, this)
     logger.debug('Actually _put', this.type, this.id, this)
     return this
   }
 
-  async delete () {
+  async delete() {
     const object = await this.constructor.find(this.id)
     await db.rel.del(this.type, object)
     logger.debug('Deleted', this.type, this.id)
     return this
   }
 
-  async updateProperties (properties) {
+  async updateProperties(properties) {
     // These properties are modified through setters
     delete properties.owners
 
     logger.debug('Updating properties to', properties)
 
-    const validation = Joi.validate(properties, { rev: Joi.string().required() }, { allowUnknown: true })
+    const validation = Joi.validate(
+      properties,
+      { rev: Joi.string().required() },
+      { allowUnknown: true },
+    )
     if (validation.error) throw validation.error
 
     Object.assign(this, properties)
     return this
   }
 
-  setOwners (owners) {
+  setOwners(owners) {
     if (Array.isArray(owners)) {
       owners.forEach(owner => this.validateOwner(owner))
       this.owners = owners
@@ -83,30 +86,31 @@ class Model {
     }
   }
 
-  validateOwner (owner) {
-    if (typeof owner !== 'string') throw new ValidationError('owner should be an id')
+  validateOwner(owner) {
+    if (typeof owner !== 'string')
+      throw new ValidationError('owner should be an id')
   }
 
-  isOwner (userId) {
+  isOwner(userId) {
     return Array.isArray(this.owners) && this.owners.includes(userId)
   }
 
-  static uuid () {
+  static uuid() {
     return uuid.v4()
   }
 
   // Find all of a certain type e.g.
   // User.all()
-  static async all () {
+  static async all() {
     const results = await db.rel.find(this.type)
 
-    return results[this.type + 's'].map(result => new this(result))
+    return results[`${this.type}s`].map(result => new this(result))
   }
 
   // Find by id e.g.
   // User.find('394')
-  static async find (id) {
-    let plural = this.type + 's'
+  static async find(id) {
+    const plural = `${this.type}s`
     let results
 
     try {
@@ -119,7 +123,7 @@ class Model {
       }
     }
 
-    let result = results[plural].find(result => result.id === id)
+    const result = results[plural].find(result => result.id === id)
 
     if (!result) {
       throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
@@ -132,11 +136,11 @@ class Model {
   // `value` is a primitive, or a query object
   // or
   // `field` is an object of field, value pairs
-  static async findByField (field, value) {
+  static async findByField(field, value) {
     logger.debug('Finding', field, value)
 
     let selector = {
-      type: this.type
+      type: this.type,
     }
 
     if (value !== undefined) {
@@ -149,12 +153,12 @@ class Model {
 
     await db.createIndex({
       index: {
-        fields: Object.keys(selector)
-      }
+        fields: Object.keys(selector),
+      },
     })
 
     const results = await db.find({
-      selector
+      selector,
     })
 
     if (!results.docs.length) {
@@ -162,15 +166,15 @@ class Model {
     }
 
     return results.docs.map(result => {
-      let id = db.rel.parseDocID(result._id).id
-      let foundObject = result.data
+      const id = db.rel.parseDocID(result._id).id
+      const foundObject = result.data
       foundObject.id = id
       foundObject.rev = result._rev
       return new this(foundObject)
     })
   }
 
-  static async findOneByField (field, value) {
+  static async findOneByField(field, value) {
     const results = await this.findByField(field, value)
 
     return results.length ? results[0] : null

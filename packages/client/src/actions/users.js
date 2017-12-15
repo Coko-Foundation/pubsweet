@@ -12,7 +12,7 @@ function getUsersSuccess(users) {
   return {
     type: T.GET_USERS_SUCCESS,
     isFetching: false,
-    users: users,
+    users,
   }
 }
 
@@ -64,7 +64,7 @@ export function getUser(user) {
     dispatch(getUserRequest(user))
 
     return api
-      .get('/users/' + user.id)
+      .get(`/users/${user.id}`)
       .then(
         user => dispatch(getUserSuccess(user)),
         err => dispatch(getUserFailure(err)),
@@ -75,7 +75,7 @@ export function getUser(user) {
 function updateUserRequest(user) {
   return {
     type: T.UPDATE_USER_REQUEST,
-    user: user,
+    user,
     isFetching: true,
   }
 }
@@ -84,7 +84,7 @@ function updateUserSuccess(users) {
   return {
     type: T.UPDATE_USER_SUCCESS,
     isFetching: false,
-    users: users,
+    users,
   }
 }
 
@@ -100,7 +100,7 @@ export function updateUser(user) {
   return dispatch => {
     dispatch(updateUserRequest(user))
 
-    const url = '/users/' + user.id
+    const url = `/users/${user.id}`
 
     return api
       .update(url, user)

@@ -4,9 +4,7 @@ const program = require('commander')
 const _ = require('lodash')
 
 const readCommand = async argsOverride => {
-  program
-    .arguments('<components>')
-    .description(`Add component(s) to an app.
+  program.arguments('<components>').description(`Add component(s) to an app.
 
     <components> - a space-separated list of one or more components.`)
 

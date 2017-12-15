@@ -12,14 +12,14 @@ const logInput = result => {
   })
 }
 
-module.exports = async function runPrompt ({properties, override}) {
+module.exports = async function runPrompt({ properties, override }) {
   const prompt = require('prompt')
   const promptGet = Promise.promisify(prompt.get)
   prompt.override = override
   prompt.message = colors.cyan('question:')
   prompt.delimiter = colors.green('><')
   prompt.start()
-  const result = await promptGet({properties})
+  const result = await promptGet({ properties })
 
   _.each(result, (val, key) => {
     result[key] = val === '' ? undefined : val

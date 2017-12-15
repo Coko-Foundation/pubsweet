@@ -1,9 +1,7 @@
-'use strict'
-
 const STATUS = require('http-status-codes')
 
 class ConflictError extends Error {
-  constructor (message, status) {
+  constructor(message, status) {
     super(message)
     Error.captureStackTrace(this, 'ConflictError')
     this.name = 'ConflictError'

@@ -5,32 +5,32 @@ test('sorts chapters', () => {
   const chapters = [
     {
       division: 'front',
-      index: 0
+      index: 0,
     },
     {
       division: 'front',
-      index: 1
+      index: 1,
     },
     {
       division: 'body',
-      index: 0
+      index: 0,
     },
     {
       division: 'body',
-      index: 1
+      index: 1,
     },
     {
       division: 'body',
-      index: 2
+      index: 2,
     },
     {
       division: 'back',
-      index: 0
+      index: 0,
     },
     {
       division: 'back',
-      index: 1
-    }
+      index: 1,
+    },
   ]
 
   const shuffledChapters = shuffle(chapters)

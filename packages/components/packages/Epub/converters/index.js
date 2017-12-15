@@ -1,3 +1,3 @@
 module.exports = {
-  wax: require('./wax')
+  wax: require('./wax'),
 }

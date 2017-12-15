@@ -1,7 +1,14 @@
-module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcategory, fragmentNumber) => {
+module.exports = (
+  $,
+  fragmentTitle,
+  bookTitle,
+  fragmentDivision,
+  fragmentSubcategory,
+  fragmentNumber,
+) => {
   const body = $('body')
 
-  let outerContainer = $('<div/>').attr('class', fragmentDivision)
+  const outerContainer = $('<div/>').attr('class', fragmentDivision)
   let innerContainer
 
   if (fragmentDivision === 'front') {
@@ -12,22 +19,43 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
     innerContainer = $('<section/>').attr('data-type', fragmentSubcategory)
   }
 
-  $('<p/>').attr('class', 'ch-start').html('beginning').appendTo(innerContainer)
-  $('<div/>').attr('class', 'folio').appendTo(innerContainer)
-  $('<div/>').attr('class', 'booktitle').html(bookTitle).appendTo(innerContainer)
-  $('<div/>').attr('class', 'dup').html(fragmentTitle).appendTo(innerContainer)
+  $('<p/>')
+    .attr('class', 'ch-start')
+    .html('beginning')
+    .appendTo(innerContainer)
+  $('<div/>')
+    .attr('class', 'folio')
+    .appendTo(innerContainer)
+  $('<div/>')
+    .attr('class', 'booktitle')
+    .html(bookTitle)
+    .appendTo(innerContainer)
+  $('<div/>')
+    .attr('class', 'dup')
+    .html(fragmentTitle)
+    .appendTo(innerContainer)
   if (fragmentSubcategory === 'part') {
-    $('<p/>').attr('class', 'part-number').html(fragmentNumber).appendTo(innerContainer)
+    $('<p/>')
+      .attr('class', 'part-number')
+      .html(fragmentNumber)
+      .appendTo(innerContainer)
   } else if (fragmentSubcategory === 'chapter') {
-    $('<p/>').attr('class', 'chapter-number').html(fragmentNumber).appendTo(innerContainer)
+    $('<p/>')
+      .attr('class', 'chapter-number')
+      .html(fragmentNumber)
+      .appendTo(innerContainer)
   }
-  $('<h1/>').attr('class', 'ct').html(fragmentTitle).appendTo(innerContainer)
+  $('<h1/>')
+    .attr('class', 'ct')
+    .html(fragmentTitle)
+    .appendTo(innerContainer)
 
   const replaceWithBlockquote = className => (i, elem) => {
     const $elem = $(elem)
 
-    const blockquote = $(`<blockquote class="${className}"/>`)
-      .append($elem.contents())
+    const blockquote = $(`<blockquote class="${className}"/>`).append(
+      $elem.contents(),
+    )
 
     $elem.replaceWith(blockquote)
   }
@@ -60,8 +88,8 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
 
   // add namespaces
   $('html').attr({
-    'xmlns': 'http://www.w3.org/1999/xhtml',
-    'xmlns:epub': 'http://www.idpf.org/2007/ops'
+    xmlns: 'http://www.w3.org/1999/xhtml',
+    'xmlns:epub': 'http://www.idpf.org/2007/ops',
   })
 
   // replace custom HTML elements
@@ -120,7 +148,7 @@ module.exports = ($, fragmentTitle, bookTitle, fragmentDivision, fragmentSubcate
     $elem.replaceWith(callout)
   })
 
-  let bodyContent = body.contents()
+  const bodyContent = body.contents()
   innerContainer.append(bodyContent)
   outerContainer.append(innerContainer)
   body.replaceWith(outerContainer)

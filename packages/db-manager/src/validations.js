@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const config = require('config')
+
 let appValidations
 try {
   appValidations = require(config.validations)

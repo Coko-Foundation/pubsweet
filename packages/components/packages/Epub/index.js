@@ -1,3 +1,3 @@
 module.exports = {
-  backend: () => app => require('./EpubBackend')(app)
+  backend: () => app => require('./EpubBackend')(app),
 }

@@ -2,9 +2,10 @@ const dbCleaner = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 
 const fixtures = require('./fixtures/fixtures')
+
 const userFixture = fixtures.user
 
-describe('User', function () {
+describe('User', () => {
   beforeEach(dbCleaner)
 
   it('validates passwords correctly after saving to db', async () => {
@@ -70,9 +71,9 @@ describe('User', function () {
 
   it('uses custom JSON serialization in an array', async () => {
     const users = [
-      {username: 'user1', email: 'user-1@example.com', password: 'foo1'},
-      {username: 'user2', email: 'user-2@example.com', password: 'foo2'},
-      {username: 'user3', email: 'user-3@example.com', password: 'foo3'}
+      { username: 'user1', email: 'user-1@example.com', password: 'foo1' },
+      { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
+      { username: 'user3', email: 'user-3@example.com', password: 'foo3' },
     ]
 
     await Promise.all(users.map(user => new User(user).save()))
@@ -92,9 +93,14 @@ describe('User', function () {
 
   it('finds a list of users', async () => {
     const users = [
-      { username: 'user1', email: 'user-1@example.com', password: 'foo1', admin: true },
+      {
+        username: 'user1',
+        email: 'user-1@example.com',
+        password: 'foo1',
+        admin: true,
+      },
       { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
-      { username: 'user3', email: 'user-3@example.com', password: 'foo3' }
+      { username: 'user3', email: 'user-3@example.com', password: 'foo3' },
     ]
 
     await Promise.all(users.map(user => new User(user).save()))
@@ -107,9 +113,14 @@ describe('User', function () {
 
   it('finds a single user by field', async () => {
     const users = [
-      { username: 'user1', email: 'user-1@example.com', password: 'foo1', admin: true },
+      {
+        username: 'user1',
+        email: 'user-1@example.com',
+        password: 'foo1',
+        admin: true,
+      },
       { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
-      { username: 'user3', email: 'user-3@example.com', password: 'foo3' }
+      { username: 'user3', email: 'user-3@example.com', password: 'foo3' },
     ]
 
     await Promise.all(users.map(user => new User(user).save()))
@@ -118,10 +129,12 @@ describe('User', function () {
 
     expect(item).toBeInstanceOf(User)
 
-    expect(item).toEqual(expect.objectContaining({
-      username: 'user1',
-      email: 'user-1@example.com',
-      admin: true
-    }))
+    expect(item).toEqual(
+      expect.objectContaining({
+        username: 'user1',
+        email: 'user-1@example.com',
+        admin: true,
+      }),
+    )
   })
 })
