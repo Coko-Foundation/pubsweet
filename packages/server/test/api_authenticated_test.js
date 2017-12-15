@@ -9,7 +9,7 @@ const fixtures = require('./fixtures/fixtures')
 const Fragment = require('../src/models/Fragment')
 const User = require('../src/models/User')
 
-describe('authenticated api', function () {
+describe('authenticated api', () => {
   let otherUser
   let user
   let collection
@@ -17,64 +17,55 @@ describe('authenticated api', function () {
   beforeEach(async () => {
     // Create collection with admin user and one non-admin user
     await dbCleaner()
-    ;({user, collection} = await createBasicCollection())
+    ;({ user, collection } = await createBasicCollection())
     // Create another user without any roles
     otherUser = new User(fixtures.updatedUser)
     await otherUser.save()
   })
 
   it(`fails to create a fragment in a protected
-    collection if authenticated as user without permissions`, () => {
-      return api.users.authenticate.post(
-        fixtures.updatedUser
-      ).then(
-        (token) => {
-          return api.fragments.post({
-            fragment: fixtures.fragment, collection, token
-          }).expect(
-            STATUS.FORBIDDEN
-          )
-        }
-      )
-    })
+    collection if authenticated as user without permissions`, () =>
+    api.users.authenticate.post(fixtures.updatedUser).then(token =>
+      api.fragments
+        .post({
+          fragment: fixtures.fragment,
+          collection,
+          token,
+        })
+        .expect(STATUS.FORBIDDEN),
+    ))
 
   describe('a non-admin user with a contributor role', () => {
-    beforeEach(() => {
-      return setTeamForCollection(
+    beforeEach(() =>
+      setTeamForCollection(
         [otherUser.id],
         collection,
-        fixtures.contributorTeam
-      )
-    })
+        fixtures.contributorTeam,
+      ),
+    )
 
-    afterEach(() => {
-      return setTeamForCollection(
-        [],
-        collection,
-        fixtures.contributorTeam
-      )
-    })
+    afterEach(() =>
+      setTeamForCollection([], collection, fixtures.contributorTeam),
+    )
 
-    it('creates a fragment in a protected collection', () => {
-      return api.users.authenticate.post(
-        fixtures.updatedUser
-      ).then(
-        token => {
-          return api.fragments.post({
-            fragment: fixtures.fragment, collection, token
-          }).expect(
-            STATUS.CREATED
-          )
-        }
-      ).then(
-        res => {
+    it('creates a fragment in a protected collection', () =>
+      api.users.authenticate
+        .post(fixtures.updatedUser)
+        .then(token =>
+          api.fragments
+            .post({
+              fragment: fixtures.fragment,
+              collection,
+              token,
+            })
+            .expect(STATUS.CREATED),
+        )
+        .then(res => {
           expect(res.body.owners).toContainEqual({
             id: otherUser.id,
-            username: otherUser.username
+            username: otherUser.username,
           })
-        }
-      )
-    })
+        }))
 
     describe('a fragment owned by the same user', () => {
       let fragment
@@ -94,22 +85,17 @@ describe('authenticated api', function () {
         collection = await collection.save()
       })
 
-      it('updates a fragment in a protected collection if an owner', () => {
-        return api.users.authenticate.post(
-          fixtures.updatedUser
-        ).then(
-          (token) => {
-            return api.fragments.patch({
+      it('updates a fragment in a protected collection if an owner', () =>
+        api.users.authenticate.post(fixtures.updatedUser).then(token =>
+          api.fragments
+            .patch({
               fragmentId: fragment.id,
-              update: {...fixtures.updatedFragment, rev: fragment.rev},
+              update: { ...fixtures.updatedFragment, rev: fragment.rev },
               collection,
-              token
-            }).expect(
-              STATUS.OK
-            )
-          }
-        )
-      })
+              token,
+            })
+            .expect(STATUS.OK),
+        ))
     })
 
     describe('actions on a fragment owned by a different user', () => {
@@ -130,87 +116,71 @@ describe('authenticated api', function () {
         await collection.save()
       })
 
-      it('cannot read a fragment in a protected collection if it is not published', () => {
-        return api.users.authenticate.post(
-          fixtures.updatedUser
-        ).then(
-          token => api.fragments.get({
-            collection: collection, token: token
-          }).expect(STATUS.OK)
-        ).then(
-          res => expect(res.body).toEqual([])
-        )
-      })
+      it('cannot read a fragment in a protected collection if it is not published', () =>
+        api.users.authenticate
+          .post(fixtures.updatedUser)
+          .then(token =>
+            api.fragments
+              .get({
+                collection,
+                token,
+              })
+              .expect(STATUS.OK),
+          )
+          .then(res => expect(res.body).toEqual([])))
 
       it('cannot update a fragment in a protected collection', async () => {
         const token = await api.users.authenticate.post(fixtures.updatedUser)
-        return api.fragments.patch({
-          fragmentId: fragment.id,
-          update: fixtures.updatedFragment,
-          collection,
-          token
-        }).expect(
-          STATUS.FORBIDDEN
-        )
+        return api.fragments
+          .patch({
+            fragmentId: fragment.id,
+            update: fixtures.updatedFragment,
+            collection,
+            token,
+          })
+          .expect(STATUS.FORBIDDEN)
       })
     })
   })
 
   describe('a non-admin user with a reader role', () => {
-    beforeEach(() => {
-      return setTeamForCollection(
-        [otherUser.id],
-        collection,
-        fixtures.readerTeam
-      )
-    })
-
-    afterEach(() => {
-      return setTeamForCollection(
-        [],
-        collection,
-        fixtures.readerTeam
-      )
-    })
-
-    it('can not create a fragment', () => {
-      return api.users.authenticate.post(
-        fixtures.updatedUser
-      ).then(
-        token => {
-          return api.fragments.post({
-            fragment: fixtures.fragment, collection, token
-          }).expect(
-            STATUS.FORBIDDEN
-          )
-        }
-      )
-    })
-
-    it('can read a fragment', function () {
-      return api.users.authenticate.post(
-        fixtures.updatedUser
-      ).then(
-        token => {
-          return api.fragments.get({ collection, token })
-        }
-      )
-    })
-  })
-
-  it('fails to create a fragment in the protected collection if not authenticated', function () {
-    return api.fragments.post({
-      fragment: fixtures.fragment, collection
-    }).expect(
-      STATUS.UNAUTHORIZED
+    beforeEach(() =>
+      setTeamForCollection([otherUser.id], collection, fixtures.readerTeam),
     )
+
+    afterEach(() => setTeamForCollection([], collection, fixtures.readerTeam))
+
+    it('can not create a fragment', () =>
+      api.users.authenticate.post(fixtures.updatedUser).then(token =>
+        api.fragments
+          .post({
+            fragment: fixtures.fragment,
+            collection,
+            token,
+          })
+          .expect(STATUS.FORBIDDEN),
+      ))
+
+    it('can read a fragment', () =>
+      api.users.authenticate
+        .post(fixtures.updatedUser)
+        .then(token => api.fragments.get({ collection, token })))
   })
 
-  it('fails to create a fragment in the protected collection if authentication wrong', function () {
-    return api.fragments.post({
-      fragment: fixtures.fragment, collection, token: 'wrong'
-    }).expect(
-      STATUS.UNAUTHORIZED
-    )
-  })
+  it('fails to create a fragment in the protected collection if not authenticated', () =>
+    api.fragments
+      .post({
+        fragment: fixtures.fragment,
+        collection,
+      })
+      .expect(STATUS.UNAUTHORIZED))
+
+  it('fails to create a fragment in the protected collection if authentication wrong', () =>
+    api.fragments
+      .post({
+        fragment: fixtures.fragment,
+        collection,
+        token: 'wrong',
+      })
+      .expect(STATUS.UNAUTHORIZED))
 })

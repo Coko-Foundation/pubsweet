@@ -12,9 +12,9 @@ module.exports = async collectionData => {
   await collection.save()
 
   logger.info(
-    `Successfully created collection ${user
-      ? `and set ${user.id} as owner`
-      : 'with no owner'}`,
+    `Successfully created collection ${
+      user ? `and set ${user.id} as owner` : 'with no owner'
+    }`,
   )
   return collection
 }

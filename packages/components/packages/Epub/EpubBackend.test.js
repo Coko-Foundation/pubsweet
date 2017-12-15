@@ -3,13 +3,18 @@ const supertest = require('supertest')
 
 const component = require('.')
 
-function makeApp (response) {
+function makeApp(response) {
   const app = express()
   // mock DB
   app.locals.models = {
     Collection: {
-      find: jest.fn(() => response instanceof Error ? Promise.reject(response) : Promise.resolve(response))
-    }
+      find: jest.fn(
+        () =>
+          response instanceof Error
+            ? Promise.reject(response)
+            : Promise.resolve(response),
+      ),
+    },
   }
   // register component
   component.backend()(app)
@@ -22,18 +27,21 @@ describe('/collections/*/epub route', () => {
     const collection = {
       id: 'col1',
       title: 'Test thing',
-      getFragments: () => [{title: 'One thing', source: 'In depth'}]
+      getFragments: () => [{ title: 'One thing', source: 'In depth' }],
     }
     return makeApp(collection)
-        .get('/api/collections/234/epub')
-        .expect(200)
-        .expect('Content-disposition', 'attachment; filename="collection-234.epub"')
+      .get('/api/collections/234/epub')
+      .expect(200)
+      .expect(
+        'Content-disposition',
+        'attachment; filename="collection-234.epub"',
+      )
   })
 
   it('errors if DB call fails', () => {
     const error = new Error('Ops!')
     return makeApp(error)
-        .get('/api/collections/234/epub')
-        .expect(500)
+      .get('/api/collections/234/epub')
+      .expect(500)
   })
 })

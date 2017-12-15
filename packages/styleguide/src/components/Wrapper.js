@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { reducer as formReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux'
 
-import "@pubsweet/theme"
+import '@pubsweet/theme'
 
 import classes from './Wrapper.local.scss'
 

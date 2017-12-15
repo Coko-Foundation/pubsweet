@@ -1,19 +1,17 @@
-'use strict'
-
 const Collection = require('./models/Collection')
 const User = require('./models/User')
 
 const logger = require('@pubsweet/logger')
 
 class Setup {
-  static async setup (user, collection) {
+  static async setup(user, collection) {
     logger.info('Starting setup')
 
     let admin = new User({
       username: user.username,
       email: user.email,
       password: user.password,
-      admin: true
+      admin: true,
     })
 
     admin = await admin.save()
@@ -26,7 +24,7 @@ class Setup {
 
     return {
       user: admin,
-      collection: collection
+      collection,
     }
   }
 }

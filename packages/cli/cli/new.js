@@ -9,7 +9,9 @@ const { STARTER_REPO_URL } = require('../src/constants')
 const readCommand = async argsOverride => {
   program
     .arguments('[name]')
-    .description('Generate a new app in the current working directory with name [name].')
+    .description(
+      'Generate a new app in the current working directory with name [name].',
+    )
     .option('--clobber', 'Overwrite any existing files')
 
   program.parse(argsOverride || process.argv)
@@ -24,7 +26,7 @@ const readCommand = async argsOverride => {
   return { appName, clobber: program.clobber }
 }
 
-const overWrite = (appPath) => {
+const overWrite = appPath => {
   if (!fs.statSync(appPath).isDirectory()) {
     throw new Error(appPath, 'exists as a file. Will not overwrite.')
   }
@@ -38,7 +40,9 @@ module.exports = async argsOverride => {
 
   const appPath = path.join(process.cwd(), appName)
 
-  if (clobber) { overWrite(appPath) }
+  if (clobber) {
+    overWrite(appPath)
+  }
 
   spawnSync('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
 
@@ -48,7 +52,7 @@ module.exports = async argsOverride => {
   // const localYarn = path.join(__dirname, '..', 'node_modules', '.bin', 'yarn')
   spawnSync('yarn', ['install'], {
     cwd: appPath,
-    stdio: 'inherit'
+    stdio: 'inherit',
   })
 
   logger.info('Finished generating initial app')

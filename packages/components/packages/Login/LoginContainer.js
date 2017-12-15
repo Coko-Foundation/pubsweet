@@ -4,18 +4,16 @@ import { loginUser } from './actions'
 
 import Login from './Login'
 
-function mapState (state) {
+function mapState(state) {
   return {
-    error: state.error
+    error: state.error,
   }
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
-    actions: bindActionCreators({ loginUser }, dispatch)
+    actions: bindActionCreators({ loginUser }, dispatch),
   }
 }
 
-export default connect(
-    mapState, mapDispatch
-)(Login)
+export default connect(mapState, mapDispatch)(Login)

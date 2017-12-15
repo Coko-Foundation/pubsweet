@@ -17,7 +17,7 @@ describe('API SSE disabled', () => {
     await cleanDB()
     await new User(fixtures.adminUser).save()
     await new Promise((resolve, reject) => {
-      server = api.api.listen(port, err => err ? reject(err) : resolve())
+      server = api.api.listen(port, err => (err ? reject(err) : resolve()))
     })
   })
 
@@ -28,13 +28,20 @@ describe('API SSE disabled', () => {
 
   it('should not send an event if not configured', async () => {
     const token = await api.users.authenticate.post(fixtures.adminUser)
-    es = new EventSource(`http://localhost:${port}/updates?access_token=${encodeURIComponent(token)}`)
+    es = new EventSource(
+      `http://localhost:${port}/updates?access_token=${encodeURIComponent(
+        token,
+      )}`,
+    )
 
     const eventPromise = new Promise((resolve, reject) => {
       es.addEventListener('message', resolve)
       es.addEventListener('error', reject)
     })
 
-    await expect(eventPromise).rejects.toEqual({type: 'error', status: STATUS.NOT_FOUND})
+    await expect(eventPromise).rejects.toEqual({
+      type: 'error',
+      status: STATUS.NOT_FOUND,
+    })
   })
 })

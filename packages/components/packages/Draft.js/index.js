@@ -1,7 +1,5 @@
 module.exports = {
   frontend: {
-    components: [
-      () => require('./DraftContainer')
-    ]
-  }
+    components: [() => require('./DraftContainer')],
+  },
 }

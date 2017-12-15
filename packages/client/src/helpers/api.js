@@ -14,12 +14,12 @@ const parse = response => {
 
 const request = (url, options = {}) => {
   options.headers = options.headers || {}
-  options.headers['Accept'] = options.headers['Accept'] || 'application/json'
+  options.headers.Accept = options.headers.Accept || 'application/json'
 
   const token = getToken()
 
   if (token) {
-    options.headers['Authorization'] = 'Bearer ' + token
+    options.headers.Authorization = `Bearer ${token}`
   }
 
   if (!url.match(/^https?:/)) {

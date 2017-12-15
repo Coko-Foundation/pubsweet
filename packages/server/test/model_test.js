@@ -8,7 +8,7 @@ const Collection = require('../src/models/Collection')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
-describe('Model', function () {
+describe('Model', () => {
   let user
   let otherUser
 
@@ -20,35 +20,41 @@ describe('Model', function () {
 
   it('raises an error if trying to find on a destroyed database', () => {
     expect.hasAssertions()
-    return global.db.destroy().then(
-      () => Model.findByField('field', 'value')
-    ).catch(err => {
-      expect(err.name).toEqual('Error')
-    }).then(() => {
-      global.db = createDb()
-    })
+    return global.db
+      .destroy()
+      .then(() => Model.findByField('field', 'value'))
+      .catch(err => {
+        expect(err.name).toEqual('Error')
+      })
+      .then(() => {
+        global.db = createDb()
+      })
   })
 
   it('raises an error if trying to find all on a destroyed database', () => {
     expect.hasAssertions()
-    return global.db.destroy().then(
-      () => User.all()
-    ).catch(err => {
-      expect(err.name).toEqual('Error')
-    }).then(() => {
-      global.db = createDb()
-    })
+    return global.db
+      .destroy()
+      .then(() => User.all())
+      .catch(err => {
+        expect(err.name).toEqual('Error')
+      })
+      .then(() => {
+        global.db = createDb()
+      })
   })
 
   it('raises an error if trying to save on a destroyed database', () => {
     expect.hasAssertions()
-    return global.db.destroy().then(
-      () => user.save()
-    ).catch(err => {
-      expect(err.name).toEqual('Error')
-    }).then(() => {
-      global.db = createDb()
-    })
+    return global.db
+      .destroy()
+      .then(() => user.save())
+      .catch(err => {
+        expect(err.name).toEqual('Error')
+      })
+      .then(() => {
+        global.db = createDb()
+      })
   })
 
   it('initially has no owner', () => {
@@ -92,7 +98,9 @@ describe('Model', function () {
     expect.hasAssertions()
     return user.save().catch(err => {
       expect(err.name).toEqual('ValidationError')
-      expect(err.message).toEqual('child "email" fails because ["email" must be a valid email]')
+      expect(err.message).toEqual(
+        'child "email" fails because ["email" must be a valid email]',
+      )
     })
   })
 
@@ -104,13 +112,13 @@ describe('Model', function () {
     return fragment.save().catch(err => {
       expect(err.name).toEqual('ValidationError')
       expect(err.message).toEqual(
-        'child "fragmentType" fails because ["fragmentType" must be one of [blogpost]], child "path" fails because ["path" is required]'
+        'child "fragmentType" fails because ["fragmentType" must be one of [blogpost]], child "path" fails because ["path" is required]',
       )
     })
   })
 
   it('accepts a fragment with alternative fragmentType', () => {
-    const fragment = new Fragment({fragmentType: 'file', path: '/one/two'})
+    const fragment = new Fragment({ fragmentType: 'file', path: '/one/two' })
 
     return fragment.save()
   })
@@ -125,20 +133,23 @@ describe('Model', function () {
   })
 
   it('can find by multiple fields', async () => {
-    const users = await User.findByField({username: 'testuser', email: 'test@example.com'})
+    const users = await User.findByField({
+      username: 'testuser',
+      email: 'test@example.com',
+    })
     expect(users).toHaveLength(1)
     expect(users[0]).toMatchObject({
       username: 'testuser',
-      email: 'test@example.com'
+      email: 'test@example.com',
     })
   })
 
   it('can find with complex value', async () => {
-    const users = await User.findByField('username', {$ne: 'testuser'})
+    const users = await User.findByField('username', { $ne: 'testuser' })
     expect(users).toHaveLength(1)
     expect(users[0]).toMatchObject({
       username: 'changeduser',
-      email: 'changed@email.com'
+      email: 'changed@email.com',
     })
   })
 })

@@ -3,17 +3,17 @@ import request from 'pubsweet-client/src/helpers/api'
 import { INK_FAILURE, INK_REQUEST, INK_SUCCESS } from './types'
 
 export const inkRequest = () => ({
-  type: INK_REQUEST
+  type: INK_REQUEST,
 })
 
 export const inkSuccess = converted => ({
   type: INK_SUCCESS,
-  converted
+  converted,
 })
 
 export const inkFailure = error => ({
   type: INK_FAILURE,
-  error
+  error,
 })
 
 export const ink = (file, options) => dispatch => {
@@ -25,19 +25,21 @@ export const ink = (file, options) => dispatch => {
   let url = '/ink'
 
   if (options) {
-    url += '?' + qs.stringify(options)
+    url += `?${qs.stringify(options)}`
   }
 
   return request(url, {
     method: 'POST',
-    body
-  }).then(data => {
-    dispatch(inkSuccess(data.converted))
-
-    return data
-  }).catch(error => {
-    dispatch(inkFailure(error.message))
-
-    throw error
+    body,
   })
+    .then(data => {
+      dispatch(inkSuccess(data.converted))
+
+      return data
+    })
+    .catch(error => {
+      dispatch(inkFailure(error.message))
+
+      throw error
+    })
 }

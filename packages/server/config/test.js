@@ -5,7 +5,7 @@ module.exports = {
   'pubsweet-server': {
     logger: winston,
     secret: 'test',
-    sse: false
+    sse: false,
   },
   validations: path.join(__dirname, 'validations'),
   authsome: {
@@ -13,12 +13,12 @@ module.exports = {
     teams: {
       teamContributors: {
         name: 'Contributors',
-        permissions: 'POST'
+        permissions: 'POST',
       },
       teamCoauthors: {
         name: 'Coauthors',
-        permissions: 'PATCH'
-      }
-    }
-  }
+        permissions: 'PATCH',
+      },
+    },
+  },
 }

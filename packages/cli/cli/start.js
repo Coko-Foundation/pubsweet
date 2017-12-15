@@ -10,7 +10,9 @@ const { ordinalize } = require('inflection')
 const readCommand = async argsOverride => {
   program
     .option('--reduxlog-off', 'Switch off Redux logger')
-    .description('Build assets and start the app with forever (not recommended for production).')
+    .description(
+      'Build assets and start the app with forever (not recommended for production).',
+    )
 
   return program.parse(argsOverride || process.argv)
 }
@@ -21,7 +23,9 @@ module.exports = async argsOverride => {
   logger.info('Starting PubSweet app')
 
   if (!await dbExists()) {
-    throw new Error('Create database with "pubsweet setupdb" before starting app')
+    throw new Error(
+      'Create database with "pubsweet setupdb" before starting app',
+    )
   }
 
   const executable = path.join(__dirname, '..', 'src', 'startup', 'start.js')
@@ -33,15 +37,15 @@ module.exports = async argsOverride => {
     watchDirectory: path.resolve('config'),
     // watchIgnorePatterns: ["./client-config.js"] // perhaps
     max: 10,
-    env: _.clone(process.env)
+    env: _.clone(process.env),
   }
 
   const configOpts = config.has('forever') ? config.get('forever') : {}
 
   const overrideOpts = {
     env: {
-      REDUXLOG_OFF: commandOpts.reduxlogOff
-    }
+      REDUXLOG_OFF: commandOpts.reduxlogOff,
+    },
   }
 
   const finalOpts = _.merge(defaultOpts, configOpts, overrideOpts)
@@ -50,7 +54,9 @@ module.exports = async argsOverride => {
 
   child.on('start', () => {
     logger.info(`App started.`)
-    logger.info('The app will be kept running, even if errors occur, until you stop it.')
+    logger.info(
+      'The app will be kept running, even if errors occur, until you stop it.',
+    )
     logger.info('To stop the app use ctrl-C')
   })
 

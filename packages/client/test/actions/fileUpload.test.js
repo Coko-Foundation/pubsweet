@@ -1,6 +1,7 @@
 global.PUBSWEET_COMPONENTS = []
 
 require('isomorphic-form-data')
+
 global.FormData.prototype.oldAppend = global.FormData.prototype.append
 global.FormData.prototype.append = function(field, value, options) {
   // File upload testing hack

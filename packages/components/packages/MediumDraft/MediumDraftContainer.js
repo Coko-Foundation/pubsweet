@@ -4,23 +4,20 @@ import Actions from 'pubsweet-client/src/actions'
 
 import MediumDraft from './MediumDraft'
 
-function mapStateToProps (state, props) {
-  let fragmentId = props.match.params.id
+function mapStateToProps(state, props) {
+  const fragmentId = props.match.params.id
   return {
-    fragmentId: fragmentId,
+    fragmentId,
     blog: state.collections[0],
     id: fragmentId,
-    fragment: state.fragments[fragmentId]
+    fragment: state.fragments[fragmentId],
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MediumDraft)
+export default connect(mapStateToProps, mapDispatchToProps)(MediumDraft)

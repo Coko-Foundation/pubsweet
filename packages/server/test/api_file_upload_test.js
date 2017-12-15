@@ -5,21 +5,19 @@ const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
 const User = require('../src/models/User')
 
-function fileName (name) {
+function fileName(name) {
   return path.join(__dirname, 'fixtures', name)
 }
 
-function file (name) {
+function file(name) {
   return fs.createReadStream(fileName(name))
 }
 
-function fileBuffer (name) {
+function fileBuffer(name) {
   return fs.readFileSync(fileName(name))
 }
 
-const authenticateUser = () => {
-  return api.users.authenticate.post(fixtures.user)
-}
+const authenticateUser = () => api.users.authenticate.post(fixtures.user)
 
 describe('File upload/download', () => {
   beforeEach(async () => {

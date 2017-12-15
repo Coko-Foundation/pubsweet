@@ -47,7 +47,7 @@ describe('users reducers', () => {
       { users: [] },
       {
         type: T.GET_USER_SUCCESS,
-        user: user,
+        user,
       },
     )
     expect(actual).toEqual({

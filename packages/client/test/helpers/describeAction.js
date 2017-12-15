@@ -1,11 +1,9 @@
 const allactions = require('../../src/actions').default
 const api = require('../../src/helpers/api')
 
-const mockGetState = () => {
-  return {
-    currentUser: {},
-  }
-}
+const mockGetState = () => ({
+  currentUser: {},
+})
 
 function mockApi(succeed = true) {
   const implementation = () =>
@@ -23,9 +21,9 @@ expect.extend({
     const actualKeys = Object.keys(object)
     const pass = expectedKeys.every(key => actualKeys.includes(key))
     return {
-      message: `Expected object ${pass
-        ? 'not to'
-        : 'to'} have properties: ${expectedKeys.join(', ')}`,
+      message: `Expected object ${
+        pass ? 'not to' : 'to'
+      } have properties: ${expectedKeys.join(', ')}`,
       pass,
     }
   },

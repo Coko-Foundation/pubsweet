@@ -13,15 +13,15 @@ export const fragmentUrl = (collection, fragment) => {
 function getFragmentsRequest(collection) {
   return {
     type: T.GET_FRAGMENTS_REQUEST,
-    collection: collection,
+    collection,
   }
 }
 
 function getFragmentsSuccess(collection, fragments) {
   return {
     type: T.GET_FRAGMENTS_SUCCESS,
-    collection: collection,
-    fragments: fragments,
+    collection,
+    fragments,
     receivedAt: Date.now(),
   }
 }
@@ -29,7 +29,7 @@ function getFragmentsSuccess(collection, fragments) {
 function getFragmentsFailure(error) {
   return {
     type: T.GET_FRAGMENTS_FAILURE,
-    error: error,
+    error,
   }
 }
 
@@ -40,7 +40,7 @@ export function getFragments(collection, options) {
     let url = fragmentUrl(collection)
 
     if (options && options.fields) {
-      url += '?fields=' + encodeURIComponent(options.fields.join(','))
+      url += `?fields=${encodeURIComponent(options.fields.join(','))}`
     }
 
     return api
@@ -55,15 +55,15 @@ export function getFragments(collection, options) {
 function createFragmentRequest(fragment) {
   return {
     type: T.CREATE_FRAGMENT_REQUEST,
-    fragment: fragment,
+    fragment,
   }
 }
 
 function createFragmentSuccess(collection, fragment) {
   return {
     type: T.CREATE_FRAGMENT_SUCCESS,
-    collection: collection,
-    fragment: fragment,
+    collection,
+    fragment,
   }
 }
 
@@ -71,8 +71,8 @@ function createFragmentFailure(fragment, error) {
   return {
     type: T.CREATE_FRAGMENT_FAILURE,
     isFetching: false,
-    fragment: fragment,
-    error: error,
+    fragment,
+    error,
   }
 }
 
@@ -94,14 +94,14 @@ export function createFragment(collection, fragment) {
 function getFragmentRequest(fragment) {
   return {
     type: T.GET_FRAGMENT_REQUEST,
-    fragment: fragment,
+    fragment,
   }
 }
 
 function getFragmentSuccess(fragment) {
   return {
     type: T.GET_FRAGMENT_SUCCESS,
-    fragment: fragment,
+    fragment,
     receivedAt: Date.now(),
   }
 }
@@ -110,8 +110,8 @@ function getFragmentFailure(fragment, error) {
   return {
     type: T.GET_FRAGMENT_FAILURE,
     isFetching: false,
-    fragment: fragment,
-    error: error,
+    fragment,
+    error,
   }
 }
 
@@ -133,15 +133,15 @@ export function getFragment(collection, fragment) {
 function updateFragmentRequest(fragment) {
   return {
     type: T.UPDATE_FRAGMENT_REQUEST,
-    fragment: fragment,
+    fragment,
   }
 }
 
 function updateFragmentSuccess(fragment, update) {
   return {
     type: T.UPDATE_FRAGMENT_SUCCESS,
-    fragment: fragment,
-    update: update,
+    fragment,
+    update,
     receivedAt: Date.now(),
   }
 }
@@ -150,8 +150,8 @@ function updateFragmentFailure(fragment, error) {
   return {
     type: T.UPDATE_FRAGMENT_FAILURE,
     isFetching: false,
-    fragment: fragment,
-    error: error,
+    fragment,
+    error,
   }
 }
 
@@ -173,7 +173,7 @@ export function updateFragment(collection, fragment) {
 function deleteFragmentRequest(fragment) {
   return {
     type: T.DELETE_FRAGMENT_REQUEST,
-    fragment: fragment,
+    fragment,
     update: { deleted: true },
   }
 }
@@ -181,17 +181,17 @@ function deleteFragmentRequest(fragment) {
 function deleteFragmentSuccess(collection, fragment) {
   return {
     type: T.DELETE_FRAGMENT_SUCCESS,
-    collection: collection,
-    fragment: fragment,
+    collection,
+    fragment,
   }
 }
 
 function deleteFragmentFailure(fragment, error) {
   return {
     type: T.DELETE_FRAGMENT_FAILURE,
-    fragment: fragment,
+    fragment,
     update: { deleted: undefined },
-    error: error,
+    error,
   }
 }
 

@@ -7,16 +7,16 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules\/(?!pubsweet-)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.s?css$/,
         exclude: /\.local\.s?css$/,
         loader: [
-          {loader: 'style-loader'},
-          {loader: 'css-loader'},
-          {loader: 'sass-loader'}
-        ]
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.local\.s?css$/,
@@ -26,11 +26,11 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
@@ -39,23 +39,23 @@ module.exports = {
             loader: 'url-loader',
             options: {
               prefix: 'font',
-              limit: 1000
-            }
-          }
-        ]
-      }
-    ]
+              limit: 1000,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
     alias: {
       joi: 'joi-browser',
-      config: path.join(__dirname, 'styleguidist', 'config.json')
+      config: path.join(__dirname, 'styleguidist', 'config.json'),
     },
-    extensions: ['.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss'],
   },
   plugins: [
     new webpack.DefinePlugin({
-      PUBSWEET_COMPONENTS: JSON.stringify([])
-    })
-  ]
+      PUBSWEET_COMPONENTS: JSON.stringify([]),
+    }),
+  ],
 }

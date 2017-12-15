@@ -1,7 +1,5 @@
 module.exports = {
   frontend: {
-    components: [
-      () => require('./PostsManagerContainer')
-    ]
-  }
+    components: [() => require('./PostsManagerContainer')],
+  },
 }

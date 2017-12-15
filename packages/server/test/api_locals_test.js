@@ -17,7 +17,9 @@ describe('api/app locals', () => {
     expect(api.locals.models.Fragment.type).toEqual('fragment')
     expect(api.locals.models.Collection.type).toEqual('collection')
 
-    const user = await api.locals.models.User.findByEmail(fixtures.adminUser.email)
+    const user = await api.locals.models.User.findByEmail(
+      fixtures.adminUser.email,
+    )
     expect(user.username).toEqual(fixtures.adminUser.username)
   })
 })

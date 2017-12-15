@@ -1,27 +1,34 @@
-jest.mock('webpack', () => {
+jest.mock('webpack', () => {})
+jest.mock(
+  require('path').resolve(
+    'webpack',
+    `webpack.${require('config').util.getEnv('NODE_ENV')}.config.js`,
+  ),
+  () => {},
+  { virtual: true },
+)
+jest.mock(require('path').resolve('config', 'components.json'), () => [], {
+  virtual: true,
 })
-jest.mock(require('path').resolve('webpack', `webpack.${require('config').util.getEnv('NODE_ENV')}.config.js`), () => {}, {virtual: true})
-jest.mock(require('path').resolve('config', 'components.json'), () => [], {virtual: true})
+
 jest.mock('forever-monitor', () => ({
-  start: jest.fn(() => ({ on: jest.fn() }))
+  start: jest.fn(() => ({ on: jest.fn() })),
 }))
-jest.mock('require-relative', () => {
-  return (required) => {
-    if (required === 'webpack') {
-      const compiler = {
-        run: cb => cb(null, {})
-      }
-      return () => compiler
-    } else {
-      return (app) => require('bluebird').resolve({ on: jest.fn(), app })
+jest.mock('require-relative', () => required => {
+  if (required === 'webpack') {
+    const compiler = {
+      run: cb => cb(null, {}),
     }
+    return () => compiler
   }
+  return app => require('bluebird').resolve({ on: jest.fn(), app })
 })
 
 const { getMockArgv } = require('../helpers/')
 const Promise = require('bluebird')
 
 const config = require('config')
+
 config['pubsweet-server'] = { dbPath: __dirname, adapter: 'leveldb' }
 const runStart = require('../../cli/start')
 const start = require('../../src/startup/start.js')
@@ -35,7 +42,10 @@ describe('start', () => {
   })
 
   it('throws an error if no database found', async () => {
-    await expect(runStart(getMockArgv(''))).rejects.toHaveProperty('message', `Create database with "pubsweet setupdb" before starting app`)
+    await expect(runStart(getMockArgv(''))).rejects.toHaveProperty(
+      'message',
+      `Create database with "pubsweet setupdb" before starting app`,
+    )
   })
 
   it('calls startServer with an express app', async () => {

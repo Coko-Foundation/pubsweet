@@ -8,7 +8,7 @@ const COLLECTIONS_ROOT = '/api/collections/'
 
 const authorizedRequest = (req, token) => {
   if (token) {
-    req.set('Authorization', 'Bearer ' + token)
+    req.set('Authorization', `Bearer ${token}`)
   }
 
   return req
@@ -29,13 +29,9 @@ const fragments = {
       url = '/api/fragments'
     }
 
-    const req = request(
-      api
-    ).post(
-      url
-    ).send(
-      fragment
-    )
+    const req = request(api)
+      .post(url)
+      .send(fragment)
 
     return authorizedRequest(req, token)
   },
@@ -66,12 +62,12 @@ const fragments = {
       url = '/api/fragments'
     }
 
-    if (fragmentId) url += '/' + fragmentId
+    if (fragmentId) url += `/${fragmentId}`
 
     if (opts.fields) {
-      url += '?' + querystring.stringify({
-        fields: opts.fields.join(',')
-      })
+      url += `?${querystring.stringify({
+        fields: opts.fields.join(','),
+      })}`
     }
 
     const req = request(api).get(url)
@@ -89,112 +85,70 @@ const fragments = {
 
     const req = request(api).get(url)
     return authorizedRequest(req, token)
-  }
+  },
 }
 
 const users = {
   authenticate: {
     post: (user, opts = {}) => {
-      let expect = opts.expect === undefined ? true : opts.expect
-      let token = opts.token === undefined ? true : opts.token
+      const expect = opts.expect === undefined ? true : opts.expect
+      const token = opts.token === undefined ? true : opts.token
 
-      let req = request(
-        api
-      ).post(
-        '/api/users/authenticate'
-      ).send(
-        {
+      let req = request(api)
+        .post('/api/users/authenticate')
+        .send({
           username: user.username,
-          password: user.password
-        }
-      )
+          password: user.password,
+        })
 
       if (expect) {
-        req = req.expect(
-          STATUS.CREATED
-        )
+        req = req.expect(STATUS.CREATED)
       }
 
       if (token) {
-        return req.then(
-          res => res.body.token
-        )
-      } else {
-        return req
+        return req.then(res => res.body.token)
       }
+      return req
     },
     get: token => {
-      const req = request(
-        api
-      ).get(
-        '/api/users/authenticate'
-      ).set(
-        'Authorization', 'Bearer ' + token
-      )
+      const req = request(api)
+        .get('/api/users/authenticate')
+        .set('Authorization', `Bearer ${token}`)
 
       return req
-    }
+    },
   },
-  post: user => {
-    return request(
-      api
-    ).post(
-      '/api/users'
-    ).send(
-      user
-    )
-  },
+  post: user =>
+    request(api)
+      .post('/api/users')
+      .send(user),
   // deprecated: use patch instead
   put: (userId, user, token) => {
-    const req = request(
-      api
-    ).put(
-      `/api/users/${userId}`
-    ).send(
-      user
-    )
+    const req = request(api)
+      .put(`/api/users/${userId}`)
+      .send(user)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
   },
   patch: (userId, user, token) => {
-    const req = request(
-      api
-    ).patch(
-      `/api/users/${userId}`
-    ).send(
-      user
-    )
+    const req = request(api)
+      .patch(`/api/users/${userId}`)
+      .send(user)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
   },
   get: (userId, token) => {
     const url = `/api/users${userId ? `/${userId}` : ''}`
 
-    const req = request(
-      api
-    ).get(
-      url
-    )
+    const req = request(api).get(url)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
   },
   del: (userId, token) => {
-    const req = request(
-      api
-    ).delete(
-      `/api/users/${userId}`
-    )
+    const req = request(api).delete(`/api/users/${userId}`)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
-  }
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
+  },
 }
 
 const collections = {
@@ -205,11 +159,14 @@ const collections = {
       query.fields = query.fields.join(',')
     }
 
-    const req = request(api).get(url).query(query)
+    const req = request(api)
+      .get(url)
+      .query(query)
     return authorizedRequest(req, token)
   },
   create: (collection, token) => {
-    const req = request(api).post(COLLECTIONS_ROOT)
+    const req = request(api)
+      .post(COLLECTIONS_ROOT)
       .send(collection)
     return authorizedRequest(req, token)
   },
@@ -218,7 +175,8 @@ const collections = {
     return authorizedRequest(req, token)
   },
   update: (collectionId, patch, token) => {
-    const req = request(api).patch(COLLECTIONS_ROOT + collectionId)
+    const req = request(api)
+      .patch(COLLECTIONS_ROOT + collectionId)
       .send(patch)
     return authorizedRequest(req, token)
   },
@@ -227,134 +185,111 @@ const collections = {
     return authorizedRequest(req, token)
   },
   listTeams: (collectionId, token) => {
-    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/teams')
+    const req = request(api).get(`${COLLECTIONS_ROOT + collectionId}/teams`)
     return authorizedRequest(req, token)
   },
   listFragments: (collectionId, token, options) => {
-    let url = COLLECTIONS_ROOT + collectionId + '/fragments'
+    let url = `${COLLECTIONS_ROOT + collectionId}/fragments`
 
     if (options && options.fields) {
-      url += '?' + querystring.stringify({
-        fields: options.fields.join(',')
-      })
+      url += `?${querystring.stringify({
+        fields: options.fields.join(','),
+      })}`
     }
 
     const req = request(api).get(url)
     return authorizedRequest(req, token)
   },
   createFragment: (collectionId, fragment, token) => {
-    const req = request(api).post(COLLECTIONS_ROOT + collectionId + '/fragments')
+    const req = request(api)
+      .post(`${COLLECTIONS_ROOT + collectionId}/fragments`)
       .send(fragment)
     return authorizedRequest(req, token)
   },
   retrieveFragment: (collectionId, fragmentId, token) => {
-    const req = request(api).get(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+    const req = request(api).get(
+      `${COLLECTIONS_ROOT + collectionId}/fragments/${fragmentId}`,
+    )
     return authorizedRequest(req, token)
   },
   updateFragment: (collectionId, fragmentId, patch, token) => {
-    const req = request(api).patch(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+    const req = request(api)
+      .patch(`${COLLECTIONS_ROOT + collectionId}/fragments/${fragmentId}`)
       .send(patch)
     return authorizedRequest(req, token)
   },
   deleteFragment: (collectionId, fragmentId, token) => {
-    const req = request(api).delete(COLLECTIONS_ROOT + collectionId + '/fragments/' + fragmentId)
+    const req = request(api).delete(
+      `${COLLECTIONS_ROOT + collectionId}/fragments/${fragmentId}`,
+    )
     return authorizedRequest(req, token)
   },
   listFragmentTeams: (collectionId, fragmentId, token) => {
-    const req = request(api).get(`${COLLECTIONS_ROOT}${collectionId}/fragments/${fragmentId}/teams`)
+    const req = request(api).get(
+      `${COLLECTIONS_ROOT}${collectionId}/fragments/${fragmentId}/teams`,
+    )
     return authorizedRequest(req, token)
-  }
+  },
 }
 
 const teams = {
   get: (token, teamId) => {
     const url = `/api/teams/${teamId}`
 
-    return request(
-      api
-    ).get(
-      url
-    ).set(
-      'Authorization', 'Bearer ' + token
-    )
+    return request(api)
+      .get(url)
+      .set('Authorization', `Bearer ${token}`)
   },
   list: (token, collection) => {
-    const collectionId = () => {
-      return isString(collection) ? collection : collection.id
-    }
+    const collectionId = () =>
+      isString(collection) ? collection : collection.id
     const collectionpart = collection ? `/collections/${collectionId()}` : ''
 
     const url = `/api${collectionpart}/teams`
 
-    return request(
-      api
-    ).get(
-      url
-    ).set(
-      'Authorization', 'Bearer ' + token
-    )
+    return request(api)
+      .get(url)
+      .set('Authorization', `Bearer ${token}`)
   },
   post: (team, token) => {
     const url = `/api/teams`
 
-    return request(
-      api
-    ).post(
-      url
-    ).send(
-      team
-    ).set(
-      'Authorization', 'Bearer ' + token
-    )
+    return request(api)
+      .post(url)
+      .send(team)
+      .set('Authorization', `Bearer ${token}`)
   },
   patch: (team, teamId, token) => {
     const teamPart = teamId ? `/${teamId}` : ''
     const url = `/api/teams${teamPart}`
 
-    return request(
-      api
-    ).patch(
-      url
-    ).send(
-      team
-    ).set(
-      'Authorization', 'Bearer ' + token
-    )
-  }
+    return request(api)
+      .patch(url)
+      .send(team)
+      .set('Authorization', `Bearer ${token}`)
+  },
 }
 
 const upload = {
   post: (file, token) => {
-    const req = request(
-      api
-    ).post(
-      '/api/upload'
-    ).attach(
-      'file', file
-    )
+    const req = request(api)
+      .post('/api/upload')
+      .attach('file', file)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
   },
   get: (path, token) => {
-    const req = request(
-      api
-    ).get(
-      path
-    )
+    const req = request(api).get(path)
 
-    return token ? req.set(
-      'Authorization', 'Bearer ' + token
-    ) : req
-  }
+    return token ? req.set('Authorization', `Bearer ${token}`) : req
+  },
 }
 
 module.exports = {
-  fragments: fragments,
-  users: users,
-  collections: collections,
-  teams: teams,
-  upload: upload,
-  api: api
+  fragments,
+  users,
+  collections,
+  teams,
+  upload,
+  api,
 }

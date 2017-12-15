@@ -24,7 +24,7 @@ describe('add-user', () => {
     // need to reset modules to get fresh db because models hold a reference
     jest.resetModules()
     const config = require('config')
-    config['dbManager'] = baseConfig['dbManager']
+    config.dbManager = baseConfig.dbManager
     const { setupDb } = require('../../src/')
     await setupDb()
   })

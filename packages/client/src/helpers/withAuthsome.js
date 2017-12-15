@@ -23,9 +23,7 @@ export default function withAuthsome() {
           find: id => state.teams.find(team => team.id === id),
         },
         User: {
-          find: id => {
-            return state.users.users.find(user => user.id === id)
-          },
+          find: id => state.users.users.find(user => user.id === id),
         },
       },
     }
