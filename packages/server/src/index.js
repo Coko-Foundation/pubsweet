@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const index = require('./routes/index')
 const api = require('./routes/api')
+const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
@@ -39,6 +40,9 @@ const configureApp = (app) => {
   passport.use('bearer', authentication.strategies.bearer)
   passport.use('anonymous', authentication.strategies.anonymous)
   passport.use('local', authentication.strategies.local)
+
+  app.locals.passport = passport
+  app.locals.authsome = authsome
 
   registerComponents(app)
 
