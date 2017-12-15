@@ -2,7 +2,7 @@ const path = require('path')
 const logger = require('@pubsweet/logger')
 const fs = require('fs-extra')
 const _ = require('lodash')
-const spawnSync = require('child_process').spawnSync
+const { spawnSync } = require('child_process')
 const { resolveName, getDepsFromPackageJson } = require('./helpers/')
 
 const remove = names => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'

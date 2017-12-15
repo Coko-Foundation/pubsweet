@@ -73,10 +73,12 @@ const download = async (chain, auth, outputFileName) => {
     ...auth,
   }
 
-  for (let i = 0; i < maxRetries; i++) {
+  for (let i = 0; i < maxRetries; i += 1) {
     // delay
+    // eslint-disable-next-line no-await-in-loop
     await new Promise(resolve => setTimeout(resolve, interval))
 
+    // eslint-disable-next-line no-await-in-loop
     const response = await rp({
       uri,
       qs,
@@ -137,7 +139,7 @@ const process = async (inputFile, options) => {
   return download(response.process_chain, auth, options.outputFileName)
 }
 
-const InkBackend = function(app) {
+const InkBackend = app => {
   // TODO: authentication on this route
   app.use('/api/ink', (req, res, next) => {
     const fileStream = new Busboy({ headers: req.headers })

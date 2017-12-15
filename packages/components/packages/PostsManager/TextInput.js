@@ -14,20 +14,6 @@ export default class TextInput extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <input
-        autoFocus
-        className={this.props.className}
-        id={this.props.id}
-        onChange={this._onChange}
-        onKeyDown={this._onKeyDown}
-        placeholder={this.props.placeholder}
-        value={this.state.value}
-      />
-    )
-  }
-
   _save() {
     this.props.onSave(this.state.value)
     this.setState({
@@ -45,6 +31,21 @@ export default class TextInput extends React.Component {
     if (event.keyCode === ENTER_KEY_CODE) {
       this._save()
     }
+  }
+
+  render() {
+    return (
+      <input
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus
+        className={this.props.className}
+        id={this.props.id}
+        onChange={this._onChange}
+        onKeyDown={this._onKeyDown}
+        placeholder={this.props.placeholder}
+        value={this.state.value}
+      />
+    )
   }
 }
 

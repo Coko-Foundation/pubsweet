@@ -1,6 +1,6 @@
+import { push } from 'react-router-redux'
 import * as api from 'pubsweet-client/src/helpers/api'
 import * as T from './types'
-import { push } from 'react-router-redux'
 
 function signupRequest() {
   return {

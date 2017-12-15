@@ -10,7 +10,9 @@ async function teamPermissions(user, operation, object, context) {
     // this particular collection, check what membership in that team allows
     // and return accordingly
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const teamId of user.teams) {
+      // eslint-disable-next-line no-await-in-loop
       const team = await context.models.Team.find(teamId)
 
       if (
@@ -175,7 +177,7 @@ async function authenticatedUser(user, operation, object, context) {
   return unauthenticatedUser(operation, object)
 }
 
-const authsomeMode = async function(userId, operation, object, context) {
+const authsomeMode = async (userId, operation, object, context) => {
   if (!userId) {
     return unauthenticatedUser(operation, object)
   }

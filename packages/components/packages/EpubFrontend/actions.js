@@ -26,7 +26,7 @@ function htmlToEpubFailure(message) {
 export function htmlToEpub(bookId, options) {
   const params = stringify(options)
 
-  return function(dispatch) {
+  return dispatch => {
     dispatch(htmlToEpubRequest())
 
     return fetch(`/api/collections/${bookId}/epub?${params}`)

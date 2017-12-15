@@ -22,7 +22,7 @@ class User extends Model {
 
   async save() {
     if (this.password) {
-      this.passwordHash = await this.hashPassword(this.password)
+      this.passwordHash = await User.hashPassword(this.password)
       delete this.password
     }
 
@@ -33,11 +33,11 @@ class User extends Model {
     return bcrypt.compare(password, this.passwordHash)
   }
 
-  hashPassword(password) {
+  static hashPassword(password) {
     return bcrypt.hash(password, BCRYPT_COST)
   }
 
-  async isUniq(user) {
+  static async isUniq(user) {
     let result
 
     const swallowNotFound = e => {

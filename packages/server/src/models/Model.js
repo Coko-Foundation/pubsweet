@@ -41,8 +41,11 @@ class Model {
 
     this.validate()
 
-    if (!this.rev /* is create */ && typeof this.isUniq === 'function') {
-      await this.isUniq(this) // throws an exception if not unique
+    if (
+      !this.rev /* is create */ &&
+      typeof this.constructor.isUniq === 'function'
+    ) {
+      await this.constructor.isUniq(this) // throws an exception if not unique
     }
     return this._put()
   }
@@ -79,14 +82,14 @@ class Model {
 
   setOwners(owners) {
     if (Array.isArray(owners)) {
-      owners.forEach(owner => this.validateOwner(owner))
+      owners.forEach(owner => this.constructor.validateOwner(owner))
       this.owners = owners
     } else {
       throw new ValidationError('owners should be an array')
     }
   }
 
-  validateOwner(owner) {
+  static validateOwner(owner) {
     if (typeof owner !== 'string')
       throw new ValidationError('owner should be an id')
   }
@@ -166,7 +169,7 @@ class Model {
     }
 
     return results.docs.map(result => {
-      const id = db.rel.parseDocID(result._id).id
+      const { id } = db.rel.parseDocID(result._id)
       const foundObject = result.data
       foundObject.id = id
       foundObject.rev = result._rev

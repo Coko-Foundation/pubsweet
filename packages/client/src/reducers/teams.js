@@ -1,3 +1,8 @@
+import clone from 'lodash/clone'
+import findIndex from 'lodash/findIndex'
+import differenceBy from 'lodash/differenceBy'
+import unionBy from 'lodash/unionBy'
+
 import {
   GET_TEAMS_SUCCESS,
   CREATE_TEAM_SUCCESS,
@@ -6,11 +11,6 @@ import {
   GET_COLLECTION_TEAMS_SUCCESS,
   LOGOUT_SUCCESS,
 } from '../actions/types'
-
-import clone from 'lodash/clone'
-import findIndex from 'lodash/findIndex'
-import differenceBy from 'lodash/differenceBy'
-import unionBy from 'lodash/unionBy'
 
 export default function(state = [], action) {
   const teams = clone(state)
@@ -38,7 +38,7 @@ export default function(state = [], action) {
       return []
     case GET_COLLECTION_TEAMS_SUCCESS:
       return unionBy(state, action.teams, 'id')
+    default:
+      return state
   }
-
-  return state
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 process.env.ALLOW_CONFIG_MUTATIONS = true
 
 let config = require('config')

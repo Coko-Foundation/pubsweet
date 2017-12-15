@@ -1,5 +1,5 @@
-const spawnSync = require('child_process').spawnSync
-const spawn = require('child_process').spawn
+const { spawnSync } = require('child_process')
+const { spawn } = require('child_process')
 const path = require('path')
 const reduce = require('lodash/fp/reduce').convert({ cap: false })
 

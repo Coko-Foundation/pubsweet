@@ -7,12 +7,12 @@ const processFragment = require('./process')
 const output = require('./output')
 const config = require('config')
 
-const EpubBackend = function(app) {
+const EpubBackend = app => {
   app.use('/api/collections/:id/epub', async (req, res, next) => {
     try {
-      const Collection = app.locals.models.Collection
+      const { Collection } = app.locals.models
 
-      const id = req.params.id
+      const { id } = req.params
 
       // book
       const collection = await Collection.find(id)
