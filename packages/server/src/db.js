@@ -37,6 +37,9 @@ const preparePouchConfig = adapter => {
     case 'leveldb':
       PouchDB.plugin(require('pouchdb-adapter-leveldb'))
       return { name: dbPath, adapter }
+
+    default:
+      throw new Error('Unrecognised DB adapter')
   }
 }
 

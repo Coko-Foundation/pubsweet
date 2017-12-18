@@ -48,7 +48,7 @@ describe('remove', () => {
       .mockImplementationOnce(() => ({ [fullName]: 'version' }))
       .mockImplementationOnce(() => ({}))
     await runRemove(getMockArgv({ args: componentName }))
-    const calls = writeSpy.mock.calls
+    const { calls } = writeSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1]).not.toContain(fullName)
   })
@@ -56,7 +56,7 @@ describe('remove', () => {
   it('spawns yarn child process with correct arguments', async () => {
     const componentName = 'test-widget'
     await runRemove(getMockArgv({ args: componentName }))
-    const calls = spawnSpy.mock.calls
+    const { calls } = spawnSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1][1]).toBe(`pubsweet-component-${componentName}`)
   })

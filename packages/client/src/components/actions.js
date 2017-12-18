@@ -9,9 +9,13 @@ module.exports = components
 
     if (actions && typeof actions === 'function') {
       return actions
-    } else if (actions) {
+    }
+
+    if (actions) {
       throw new Error("Component's actions are not exported as a function")
     }
+
+    return null
   })
   // filter out falsy values
   .filter(Boolean)

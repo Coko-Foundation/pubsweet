@@ -66,7 +66,7 @@ const validations = {
   },
 }
 
-const allValidations = function(type, appValidations) {
+const allValidations = (type, appValidations) => {
   let appValidationsForType = {}
 
   if (appValidations && appValidations[type]) {
@@ -84,11 +84,9 @@ const allValidations = function(type, appValidations) {
   return Joi.object().keys({ ...validations[type], ...appValidationsForType })
 }
 
-module.exports = function(appValidations) {
-  return {
-    fragment: allValidations('fragment', appValidations),
-    collection: allValidations('collection', appValidations),
-    user: allValidations('user', appValidations),
-    team: allValidations('team', appValidations),
-  }
-}
+module.exports = appValidations => ({
+  fragment: allValidations('fragment', appValidations),
+  collection: allValidations('collection', appValidations),
+  user: allValidations('user', appValidations),
+  team: allValidations('team', appValidations),
+})

@@ -12,7 +12,7 @@ const configTokenLength = config.get('password-reset')['token-length'] || 32
 const configUrl = config.get('password-reset.url')
 const configSender = config.get('password-reset.sender')
 
-const PasswordResetBackend = function(app) {
+const PasswordResetBackend = app => {
   app.post('/api/password-reset', bodyParser.json(), async (req, res, next) => {
     try {
       const { token, password, username } = req.body

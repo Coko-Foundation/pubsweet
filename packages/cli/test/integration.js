@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000000
 
 const path = require('path')

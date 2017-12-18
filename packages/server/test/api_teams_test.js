@@ -8,7 +8,7 @@ const Team = require('../src/models/Team')
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
-const contributors = fixtures.teams.contributors
+const { contributors } = fixtures.teams
 const teamFixture = fixtures.contributorTeam
 const api = require('./helpers/api')
 

@@ -4,25 +4,27 @@ const NotFoundError = require('../errors/NotFoundError')
 const authsome = require('../helpers/authsome')
 
 const Util = {}
-;(Util.authorizationError = (username, operation, object) => {
+Util.authorizationError = (username, operation, object) => {
   username = username || 'public'
   const msg = `User ${username} is not allowed to ${operation} ${object}`
   return new AuthorizationError(msg)
-}),
-  // Build an object containing only the id
-  (Util.objectId = object => ({ id: object.id })),
-  // Build an object containing only the fields of `output` that were in `input`
-  // TODO: build a real diff, in case other fields were updated indirectly?
-  (Util.buildChangeData = (input, output) => {
-    const data = {}
+}
 
-    Object.keys(input).forEach(key => {
-      // TODO: compare and only add if changed?
-      data[key] = output[key]
-    })
+// Build an object containing only the id
+Util.objectId = object => ({ id: object.id })
 
-    return data
+// Build an object containing only the fields of `output` that were in `input`
+// TODO: build a real diff, in case other fields were updated indirectly?
+Util.buildChangeData = (input, output) => {
+  const data = {}
+
+  Object.keys(input).forEach(key => {
+    // TODO: compare and only add if changed?
+    data[key] = output[key]
   })
+
+  return data
+}
 
 Util.createFilterFromQuery = query => {
   const filterPaths = _.difference(_.keys(query), ['fields'])
@@ -87,7 +89,7 @@ Util.getTeams = async opts => {
  */
 Util.getFragment = async opts => {
   const collection = await opts.Collection.find(opts.req.params.collectionId)
-  const fragmentId = opts.req.params.fragmentId
+  const { fragmentId } = opts.req.params
   if (!collection.fragments.includes(fragmentId)) {
     throw new NotFoundError(
       `collection ${collection.id} does not contain fragment ${fragmentId}`,

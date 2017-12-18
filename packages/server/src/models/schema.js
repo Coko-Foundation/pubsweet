@@ -1,6 +1,6 @@
 global.db = require('../db')()
 
-module.exports = function() {
+module.exports = () => {
   if (!db.rel) {
     return db.setSchema([
       {

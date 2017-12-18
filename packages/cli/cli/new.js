@@ -2,7 +2,7 @@ const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
 const fs = require('fs-extra')
-const spawnSync = require('child_process').spawnSync
+const { spawnSync } = require('child_process')
 const path = require('path')
 const { STARTER_REPO_URL } = require('../src/constants')
 
