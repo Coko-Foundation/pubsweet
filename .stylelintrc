@@ -1,4 +1,4 @@
 {
-  "extends": "stylelint-config-pubsweet"
+  "extends": ["stylelint-config-pubsweet", "stylelint-config-prettier"]
 }
 
