@@ -1,13 +1,15 @@
-@import "../variables";
+@import '../variables';
 
 .hero {
-  text-align: center;
-  margin-top: 40px;
+  border-bottom: 4px $pink solid;
+  /* stylelint-disable */
   margin-bottom: 50px;
   margin-left: 10px !important;
   margin-right: 10px !important;
+  margin-top: 40px;
+  /* stylelint-enable */
   padding-bottom: 40px;
-  border-bottom: 4px $pink solid;
+  text-align: center;
 }
 
 .heroBackground {
@@ -15,12 +17,12 @@
 }
 
 .blogContainer {
-	border-right: 4px solid $teal;
-	border-left: 4px solid $brand-primary;
-	padding: 0 30px;
+  border-left: 4px solid $brand-primary;
+  border-right: 4px solid $teal;
+  padding: 0 30px;
 }
 
 .blogFooter {
-	text-align: center;
-	padding-top: 50px;
+  padding-top: 50px;
+  text-align: center;
 }

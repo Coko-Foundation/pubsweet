@@ -1,24 +1,28 @@
-@import "../variables";
-.loginLogo{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	display: block;
-	img{
-		width: 100%;
-	}
+@import '../variables';
+
+.loginLogo {
+  display: block;
+  margin-bottom: 30px;
+  margin-top: 30px;
+
+  img {
+    width: 100%;
+  }
 }
-.login{
-	border-right: 4px solid $teal;
-	border-left: 4px solid $brand-primary;
-	padding-left: 40px !important;
-	padding-right: 40px !important;
 
-	h1, legend{
-		margin-left: -25px;
-		padding-bottom: 20px;
-	}
+.login {
+  border-left: 4px solid $brand-primary;
+  border-right: 4px solid $teal;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
 
-	button{
-		margin-bottom: 20px !important;
-	}
+  h1,
+  legend {
+    margin-left: -25px;
+    padding-bottom: 20px;
+  }
+
+  button {
+    margin-bottom: 20px !important;
+  }
 }

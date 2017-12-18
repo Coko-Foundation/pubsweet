@@ -1,30 +1,37 @@
 @font-face {
   font-family: 'karmillaregular';
-  src: url('../fonts/karmilla-015/karmilla-regular-015-webfont.eot');
-  src: url('../fonts/karmilla-015/karmilla-regular-015-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/karmilla-015/karmilla-regular-015-webfont.woff2') format('woff2'),
-  url('../fonts/karmilla-015/karmilla-regular-015-webfont.woff') format('woff'),
-  url('../fonts/karmilla-015/karmilla-regular-015-webfont.ttf') format('truetype'),
-  url('../fonts/karmilla-015/karmilla-regular-015-webfont.svg#karmillaregular') format('svg');
-  font-weight: normal;
   font-style: normal;
-
+  font-weight: normal;
+  src: url('../fonts/karmilla-015/karmilla-regular-015-webfont.eot');
+  src: url('../fonts/karmilla-015/karmilla-regular-015-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/karmilla-015/karmilla-regular-015-webfont.woff2')
+      format('woff2'),
+    url('../fonts/karmilla-015/karmilla-regular-015-webfont.woff')
+      format('woff'),
+    url('../fonts/karmilla-015/karmilla-regular-015-webfont.ttf')
+      format('truetype'),
+    url('../fonts/karmilla-015/karmilla-regular-015-webfont.svg#karmillaregular')
+      format('svg');
 }
 
 @font-face {
   font-family: 'karmillabold';
-  src: url('../fonts/karmilla-015/karmilla-bold-015-webfont.eot');
-  src: url('../fonts/karmilla-015/karmilla-bold-015-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/karmilla-015/karmilla-bold-015-webfont.woff2') format('woff2'),
-  url('../fonts/karmilla-015/karmilla-bold-015-webfont.woff') format('woff'),
-  url('../fonts/karmilla-015/karmilla-bold-015-webfont.ttf') format('truetype'),
-  url('../fonts/karmilla-015/karmilla-bold-015-webfont.svg#karmillabold') format('svg');
-  font-weight: normal;
   font-style: normal;
-
+  font-weight: normal;
+  src: url('../fonts/karmilla-015/karmilla-bold-015-webfont.eot');
+  src: url('../fonts/karmilla-015/karmilla-bold-015-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/karmilla-015/karmilla-bold-015-webfont.woff2') format('woff2'),
+    url('../fonts/karmilla-015/karmilla-bold-015-webfont.woff') format('woff'),
+    url('../fonts/karmilla-015/karmilla-bold-015-webfont.ttf')
+      format('truetype'),
+    url('../fonts/karmilla-015/karmilla-bold-015-webfont.svg#karmillabold')
+      format('svg');
 }
 
-body, html {
+body,
+html {
   font-family: 'karmillaregular', Helvetica, Arial, sans-serif;
 }
 
@@ -38,199 +45,227 @@ body, html {
   //$link-color:       $brand-primary;
   //$pink: #E50C79;
   //$teal: #51C2BD;
-  @import "variables";
-
+  @import 'variables';
   @import '~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss';
   @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
-  a{
-    color: $pink;//pink
-    text-decoration: underline;
+  a {
+    color: $pink;
+    text-decoration: underline; //pink
   }
-  h1, h2, h3{
-    font-family: 'karmillaregular';
+
+  h1,
+  h2,
+  h3 {
     color: $teal !important;
-    margin-top: 5px;
+    font-family: 'karmillaregular', sans-serif;
     margin-bottom: 5px;
+    margin-top: 5px;
     padding-bottom: 0;
     padding-top: 0;
   }
-  h2{
-    font-weight: bold;
+
+  h2 {
     font-size: 25px;
+    font-weight: bold;
   }
-  h3{
+
+  h3 {
     color: lighten($teal, 10%) !important;
     font-size: 20px;
   }
-  .alert.alert-warning{
-    background-color: #EFD2DF;
-    margin-top: 50px;
+
+  .alert.alert-warning {
+    background-color: #efd2df;
     border: 0;
     color: black;
+    margin-top: 50px;
   }
 
   //form
-  legend{
-    //color: #43B1A9;//
-    color: $teal;//teal
+  legend {
     border: 0;
-    font-weight: bold;
+    //color: #43B1A9;//
+    color: $teal;
+    font-weight: bold; //teal
   }
-  label{
-    color: #844D9F;
+
+  label {
+    color: #844d9f;
     font-weight: lighter;
   }
 
-  input[type="text"], input[type="text"].form-control,
-  input[type="password"].form-control{
-    border: 2px solid #BAB8B8;
+  input[type='text'],
+  input[type='text'].form-control,
+  input[type='password'].form-control {
+    border: 2px solid #bab8b8;
 
-    &.error{
+    &.error {
       border-right: 4px solid $pink;
-
     }
 
-    &.success{
+    &.success {
       border-right: 4px solid $brand-primary;
     }
   }
 
-  .form-group{
-    margin-top: 15px;
+  .form-group {
     margin-bottom: 15px;
+    margin-top: 15px;
   }
 
-  .btn-primary{
+  .btn-primary {
     background-color: $brand-primary;
     border-color: transparent;
   }
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     .navbar-nav {
       margin: 10px;
     }
+
     .navbar-nav > li > a {
-      padding-top: 20px;
       padding-bottom: 20px;
+      padding-top: 20px;
     }
   }
 
-  .navbar-default{
+  .navbar-default {
     background-color: transparent;
     border: 0;
     font-weight: bold;
-    .container-fluid{
+
+    .container-fluid {
       border-bottom: 4px $teal solid;
-      margin-right: 15px;
       margin-left: 15px;
+      margin-right: 15px;
       padding-right: 65px;
     }
+
     .navbar-brand {
       height: 65px;
-      padding: 0 30px 5px 15px;
       margin-top: 10px;
-      img{
+      padding: 0 30px 5px 15px;
+
+      img {
         height: 100%;
       }
     }
-    .navbar-nav{
-      > .active{
-        > a{
-          color: $pink;
-          background-color: transparent;
-          text-decoration: none;
-          font-weight: bold;
-        }
-        :hover {
-          background-color: transparent;
-        }
-      }
+
+    .navbar-nav {
       > li {
-        > a{
+        > a {
           color: $brand-primary;
           text-decoration: none;
         }
       }
-      .logout a{
+
+      > .active {
+        > a {
+          background-color: transparent;
+          color: $pink;
+          font-weight: bold;
+          text-decoration: none;
+        }
+
+        :hover {
+          background-color: transparent;
+        }
+      }
+
+      .logout a {
         color: $teal;
       }
     }
   }
 
-  .table{
+  .table {
     margin-bottom: 10px;
-    > thead{
-      > tr{
-        > th{
+
+    > thead {
+      > tr {
+        > th {
+          background-color: transparent;
           border: 0;
           color: $brand-primary;
           text-align: left;
-          background-color: transparent;
         }
       }
     }
-    > tbody{
-      > tr:first-child{
-        > td{
-          border: 0;
-        }
-      }
-      > tr{
-        > td{
+
+    > tbody {
+      > tr {
+        > td {
           border: 0;
           border-top: 1px $brand-primary solid;
-          padding-top: 20px;
           padding-bottom: 20px;
+          padding-top: 20px;
+        }
+      }
+
+      > tr:first-child {
+        > td {
+          border: 0;
         }
       }
     }
-    td.index, th.index{
+
+    td.index,
+    th.index {
       width: 5%;
     }
-    td.main, th.main{
+
+    td.main,
+    th.main {
       width: 50%;
     }
-    .btn-primary{
+
+    .btn-primary {
       background-color: $teal;
       border: 0;
       margin-left: 5px;
-      i{
+
+      i {
         margin-left: -2px;
         margin-top: 2px;
       }
     }
-    .btn-success{
-      background-color: #4B8AC9;
+
+    .btn-success {
+      background-color: #4b8ac9;
+      border: 0;
+      margin-left: 5px;
+    }
+
+    .btn-danger {
+      background-color: #d13689;
       border: 0;
       margin-left: 5px;
 
-    }
-    .btn-danger{
-      background-color: #D13689;
-      border: 0;
-      margin-left: 5px;
-      i{
+      i {
         margin-left: -1px;
       }
     }
+
     .btn-warning {
-      margin-left: 5px;
       border: 0;
+      margin-left: 5px;
     }
   }
 
   //custom elements
 
-  .btn-wide{
-    font-family: 'karmillaregular';
+  .btn-wide {
+    font-family: 'karmillaregular', sans-serif;
     font-size: 21px;
     padding: 5px 50px;
   }
-  .published .fa-circle{
+
+  .published .fa-circle {
     color: $teal;
   }
-  .unpublished .fa-circle{
+
+  .unpublished .fa-circle {
     color: $pink;
   }
 }
