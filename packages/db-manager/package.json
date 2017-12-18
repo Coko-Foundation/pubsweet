@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.coko.foundation:yld/db-manager.git"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "keywords": ["pubsweet", "database"],
   "engines": {

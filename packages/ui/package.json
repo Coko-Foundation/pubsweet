@@ -1,13 +1,13 @@
 {
   "name": "@pubsweet/ui",
   "version": "0.1.0",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
+  "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  },
   "dependencies": {
     "babel-jest": "^21.2.0",
     "classnames": "^2.2.5",

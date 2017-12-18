@@ -1,7 +1,8 @@
 {
   "name": "pubsweet-component-form-group",
   "version": "0.1.2",
-  "description": "Form component based on react-bootstrap with validation support for PubSweet",
+  "description":
+    "Form component based on react-bootstrap with validation support for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -17,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "FormGroup"
   }
 }
