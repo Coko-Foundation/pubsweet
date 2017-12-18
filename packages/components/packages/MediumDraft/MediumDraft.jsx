@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { convertToRaw } from 'draft-js'
+import { Editor, createEditorState } from 'medium-draft'
+import mediumDraftExporter from 'medium-draft/lib/exporter'
 import 'medium-draft/lib/index.css'
+
+import customImageSideButton from './CustomImageSideButton'
 import './styles.scss'
 
-import { Editor, createEditorState } from 'medium-draft'
-import { convertToRaw } from 'draft-js'
-import mediumDraftExporter from 'medium-draft/lib/exporter'
-import customImageSideButton from './CustomImageSideButton'
-
 export default class MediumDraft extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     let editorState
@@ -21,36 +21,43 @@ export default class MediumDraft extends React.Component {
 
     if (this.props.blog) {
       this.props.actions.getCollections().then(result =>
-        this.props.actions.getFragment(this.props.blog, {id: this.props.fragmentId})
+        this.props.actions.getFragment(this.props.blog, {
+          id: this.props.fragmentId,
+        }),
       )
     }
 
-    this.state = {editorState: editorState}
+    this.state = { editorState }
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange (editorState) {
-    this.setState({editorState})
-    let fragment = Object.assign(this.props.fragment, {
+  componentDidMount() {
+    this.editorElement.focus()
+  }
+
+  onChange(editorState) {
+    this.setState({ editorState })
+    const fragment = Object.assign(this.props.fragment, {
       source: convertToRaw(editorState.getCurrentContent()),
-      presentation: mediumDraftExporter(editorState.getCurrentContent())
+      presentation: mediumDraftExporter(editorState.getCurrentContent()),
     })
 
     this.props.actions.updateFragment(this.props.blog, fragment)
   }
 
-  componentDidMount () {
-    this.refs.editor.focus()
-  }
-
-  render () {
+  render() {
     const { editorState } = this.state
     return (
       <Editor
-        ref="editor"
         editorState={editorState}
         onChange={this.onChange}
-        sideButtons={[{ title: 'Image', component: customImageSideButton(this.props.actions.fileUpload) }]}
+        ref={el => (this.editorElement = el)}
+        sideButtons={[
+          {
+            title: 'Image',
+            component: customImageSideButton(this.props.actions.fileUpload),
+          },
+        ]}
       />
     )
   }
@@ -60,5 +67,5 @@ MediumDraft.propTypes = {
   fragmentId: PropTypes.string.isRequired,
   blog: PropTypes.object,
   fragment: PropTypes.object,
-  actions: PropTypes.object
+  actions: PropTypes.object,
 }

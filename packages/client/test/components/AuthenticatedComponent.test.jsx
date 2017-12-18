@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 global.PUBSWEET_COMPONENTS = []
 
-jest.mock('fake-mode', () => false, {virtual: true})
+jest.mock('fake-mode', () => false, { virtual: true })
 const {
   AuthenticatedComponent,
 } = require('../../src/components/AuthenticatedComponent')
@@ -12,8 +12,8 @@ function makeWrapper(props = {}) {
   return shallow(
     <AuthenticatedComponent
       getCurrentUser={() => Promise.resolve()}
-      pushState={jest.fn()}
       location={{}}
+      pushState={jest.fn()}
       {...props}
     >
       <button />
@@ -27,7 +27,7 @@ describe('<AuthenticatedComponent/>', () => {
     const wrapper = makeWrapper({ pushState })
     wrapper.instance().checkAuth({ isFetching: true })
 
-    expect(wrapper.find('button').length).toBe(0)
+    expect(wrapper.find('button')).toHaveLength(0)
     expect(pushState).not.toHaveBeenCalled()
   })
 
@@ -51,8 +51,13 @@ describe('<AuthenticatedComponent/>', () => {
 
   it('renders children components when authenticated', async () => {
     const pushState = jest.fn()
-    const wrapper = makeWrapper({ pushState, location: { pathname: 'blah' }, isFetching: false, isAuthenticated: true })
+    const wrapper = makeWrapper({
+      pushState,
+      location: { pathname: 'blah' },
+      isFetching: false,
+      isAuthenticated: true,
+    })
 
-    expect(wrapper.find('button').length).toBe(1)
+    expect(wrapper.find('button')).toHaveLength(1)
   })
 })

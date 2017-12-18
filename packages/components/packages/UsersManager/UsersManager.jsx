@@ -5,30 +5,17 @@ import { Grid, Alert } from 'react-bootstrap'
 import User from './User'
 
 export default class UsersManager extends React.Component {
-  componentWillMount () {
+  componentWillMount() {
     this.props.actions.getUsers()
   }
 
-  render () {
-    let { users, actions, error } = this.props
-
-    if (users) {
-      users = users.map((user, key) => {
-        return (<User
-          number={key + 1}
-          key={user.id}
-          user={user}
-          update={actions.updateUser}
-        />)
-      })
-    } else {
-      users = []
-    }
+  render() {
+    const { users = [], actions, error } = this.props
 
     return (
       <div className="bootstrap">
         <Grid>
-          { error ? <Alert bsStyle="warning">{error}</Alert> : null}
+          {error ? <Alert bsStyle="warning">{error}</Alert> : null}
           <div>
             <table className="table">
               <thead>
@@ -39,7 +26,14 @@ export default class UsersManager extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                { users }
+                {users.map((user, key) => (
+                  <User
+                    key={user.id}
+                    number={key + 1}
+                    update={actions.updateUser}
+                    user={user}
+                  />
+                ))}
               </tbody>
             </table>
           </div>
@@ -52,5 +46,5 @@ export default class UsersManager extends React.Component {
 UsersManager.propTypes = {
   users: PropTypes.array,
   actions: PropTypes.object.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
 }

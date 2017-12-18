@@ -1,23 +1,24 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import Summary from './Summary'
 
 describe('<Summary/>', () => {
-  const makeWrapper = (fragment = {}) => shallow(
+  const makeWrapper = (fragment = {}) =>
+    shallow(
       <BrowserRouter>
         <Summary
-            fragment={{
-              id: 123,
-              title: 'A foo post',
-              published_at: '2017-01-02T12:34:56',
-              owners: [{username: 'Anne Author'}],
-              ...fragment
-            }}
+          fragment={{
+            id: 123,
+            title: 'A foo post',
+            published_at: '2017-01-02T12:34:56',
+            owners: [{ username: 'Anne Author' }],
+            ...fragment,
+          }}
         />
-      </BrowserRouter>
-  )
+      </BrowserRouter>,
+    )
 
   it('shows fragment title', () => {
     const wrapper = makeWrapper()
@@ -40,15 +41,17 @@ describe('<Summary/>', () => {
   })
 
   it('looks for <abstract>', () => {
-    const wrapper = makeWrapper({source: 'no abstract'})
-    let html = wrapper.html()
+    const wrapper = makeWrapper({ source: 'no abstract' })
+    const html = wrapper.html()
     expect(html).not.toContain('no abstract')
   })
 
   // TODO mock DOMParser (used to extract abstract) or something
   it.skip('shows <abstract>', () => {
-    const wrapper = makeWrapper({source: '<abstract>this <b>stuff</b></abstract> but not this'})
-    let html = wrapper.html()
+    const wrapper = makeWrapper({
+      source: '<abstract>this <b>stuff</b></abstract> but not this',
+    })
+    const html = wrapper.html()
     expect(html).toContain('this <b>stuff</b>')
     expect(html).not.toContain('but not this')
   })

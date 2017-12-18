@@ -1,19 +1,28 @@
 import React from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col, Alert, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap'
+import {
+  Grid,
+  Row,
+  Col,
+  Alert,
+  FormGroup,
+  ControlLabel,
+  Button,
+  FormControl,
+} from 'react-bootstrap'
 import queryString from 'query-string'
 import * as api from 'pubsweet-client/src/helpers/api'
 import styles from './PasswordReset.local.scss'
 
 class PasswordReset extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = this.getInitialState()
   }
 
-  getInitialState () {
+  getInitialState() {
     return {
       username: '',
       emailSent: false,
@@ -24,115 +33,129 @@ class PasswordReset extends React.Component {
       passwordChanged: false,
       passwordError: false,
       passwordErrorMessage: null,
-      passwordSending: false
+      passwordSending: false,
     }
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     this.setState(this.getInitialState())
   }
 
-  post (data) {
+  static post(data) {
     return api.create('/password-reset', data)
   }
 
-  parsedQuery () {
+  parsedQuery() {
     return queryString.parse(this.props.location.search)
   }
 
-  handleUsernameChange = (e) => {
-    this.setState({username: e.target.value})
+  handleUsernameChange = e => {
+    this.setState({ username: e.target.value })
   }
 
-  handlePasswordChange = (e) => {
-    this.setState({password: e.target.value})
+  handlePasswordChange = e => {
+    this.setState({ password: e.target.value })
   }
 
-  handleUsernameSubmit = (e) => {
+  handleUsernameSubmit = e => {
     e.preventDefault()
 
-    const {username} = this.state
+    const { username } = this.state
 
     if (username) {
-      this.initiatePasswordReset({username})
+      this.initiatePasswordReset({ username })
     } else {
-      this.setState({emailError: 'Please enter a username'})
+      this.setState({ emailError: 'Please enter a username' })
     }
   }
 
-  handlePasswordSubmit = (e) => {
+  handlePasswordSubmit = e => {
     e.preventDefault()
 
-    const {token, username} = this.parsedQuery()
+    const { token, username } = this.parsedQuery()
 
-    const {password} = this.state
+    const { password } = this.state
 
     // TODO: enter twice and confirm?
 
     if (password) {
-      this.resetPassword({password, token, username})
+      this.resetPassword({ password, token, username })
     } else {
-      this.setState({passwordError: 'Please enter a new password'})
+      this.setState({ passwordError: 'Please enter a new password' })
     }
   }
 
-  async initiatePasswordReset (data) {
+  async initiatePasswordReset(data) {
     this.setState({
       emailSent: false,
       emailError: false,
       emailErrorMessage: null,
-      emailSending: true
+      emailSending: true,
     })
 
     try {
-      await this.post(data)
+      await PasswordReset.post(data)
       this.setState({
         emailSent: true,
         emailError: false,
-        emailSending: false
+        emailSending: false,
       })
     } catch (err) {
       this.setState({
         emailError: true,
         emailErrorMessage: err.error || 'There was an unexpected error',
-        emailSending: false
+        emailSending: false,
       })
     }
   }
 
-  async resetPassword (data) {
+  async resetPassword(data) {
     this.setState({
       passwordChanged: false,
       passwordError: false,
       passwordErrorMessage: null,
-      passwordSending: true
+      passwordSending: true,
     })
 
     try {
-      await this.post(data)
+      await PasswordReset.post(data)
       this.setState({
         passwordChanged: true,
         passwordError: false,
-        passwordSending: false
+        passwordSending: false,
       })
     } catch (err) {
       this.setState({
         passwordError: true,
         passwordErrorMessage: err.error || 'There was an unexpected error',
-        passwordSending: false
+        passwordSending: false,
       })
     }
   }
 
-  render () {
-    const {username, emailSent, emailError, emailErrorMessage, emailSending, password, passwordChanged, passwordError, passwordErrorMessage, passwordSending} = this.state
+  render() {
+    const {
+      username,
+      emailSent,
+      emailError,
+      emailErrorMessage,
+      emailSending,
+      password,
+      passwordChanged,
+      passwordError,
+      passwordErrorMessage,
+      passwordSending,
+    } = this.state
 
-    const {token} = this.parsedQuery()
+    const { token } = this.parsedQuery()
 
     const buildForm = () => {
       if (passwordChanged) {
         return (
-          <Alert bsStyle="success">Your password has been changed, you can now <Link to="/login">login with the new password</Link>.</Alert>
+          <Alert bsStyle="success">
+            Your password has been changed, you can now{' '}
+            <Link to="/login">login with the new password</Link>.
+          </Alert>
         )
       }
 
@@ -144,11 +167,21 @@ class PasswordReset extends React.Component {
             <FormGroup validationState={passwordError ? 'error' : 'success'}>
               <ControlLabel>New password</ControlLabel>
 
-              <FormControl type="password" onChange={this.handlePasswordChange} value={password} placeholder="Enter a new password…"/>
+              <FormControl
+                onChange={this.handlePasswordChange}
+                placeholder="Enter a new password…"
+                type="password"
+                value={password}
+              />
             </FormGroup>
 
             <div>
-              <Button type="submit" bsStyle="primary" block disabled={passwordSending}>
+              <Button
+                block
+                bsStyle="primary"
+                disabled={passwordSending}
+                type="submit"
+              >
                 {passwordSending ? 'Saving…' : 'Save new password'}
               </Button>
             </div>
@@ -158,7 +191,9 @@ class PasswordReset extends React.Component {
 
       if (emailSent) {
         return (
-          <Alert bsStyle="success">An email has been sent containing further instructions.</Alert>
+          <Alert bsStyle="success">
+            An email has been sent containing further instructions.
+          </Alert>
         )
       }
 
@@ -169,11 +204,21 @@ class PasswordReset extends React.Component {
           <FormGroup validationState={emailError ? 'error' : 'success'}>
             <ControlLabel>Username</ControlLabel>
 
-            <FormControl type="text" onChange={this.handleUsernameChange} value={username} placeholder="Enter your username"/>
+            <FormControl
+              onChange={this.handleUsernameChange}
+              placeholder="Enter your username"
+              type="text"
+              value={username}
+            />
           </FormGroup>
 
           <div>
-            <Button type="submit" bsStyle="primary" block disabled={emailSending}>
+            <Button
+              block
+              bsStyle="primary"
+              disabled={emailSending}
+              type="submit"
+            >
               {emailSending ? 'Sending…' : 'Send email'}
             </Button>
           </div>
@@ -181,27 +226,32 @@ class PasswordReset extends React.Component {
       )
     }
 
-    const buildError = (error) => {
+    const buildError = error => {
       if (!error) return null
 
       return (
         <Alert bsStyle="warning">
-          <i className="fa fa-exclamation-circle"/> {buildErrorMessage(error)}
+          <i className="fa fa-exclamation-circle" /> {buildErrorMessage(error)}
         </Alert>
       )
     }
 
-    const buildErrorMessage = (error) => {
+    const buildErrorMessage = error => {
       if (error === 'expired') {
         return (
-          <span>The token is only valid for 24 hours, please <Link to="/password-reset">request a new password reset email</Link></span>
+          <span>
+            The token is only valid for 24 hours, please{' '}
+            <Link to="/password-reset">request a new password reset email</Link>
+          </span>
         )
       }
 
       if (error === 'invalid') {
         return (
-          <span>The token is no longer valid, please <Link
-            to="/password-reset">request a new password reset email</Link></span>
+          <span>
+            The token is no longer valid, please{' '}
+            <Link to="/password-reset">request a new password reset email</Link>
+          </span>
         )
       }
 
@@ -209,11 +259,16 @@ class PasswordReset extends React.Component {
     }
 
     return (
-      <div className="bootstrap" style={{marginTop: 20}}>
+      <div className="bootstrap" style={{ marginTop: 20 }}>
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className={styles.logo} alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
+              <img
+                alt="pubsweet-logo"
+                className={styles.logo}
+                src="/assets/pubsweet-rgb-small.jpg"
+                style={{ maxWidth: '100%' }}
+              />
             </Col>
           </Row>
 
@@ -223,12 +278,12 @@ class PasswordReset extends React.Component {
               {buildError(passwordErrorMessage)}
             </Col>
 
-            <Col xs={12} md={4} className={styles.passwordReset}>
+            <Col className={styles.passwordReset} md={4} xs={12}>
               <h1>Password reset</h1>
 
               {buildForm()}
 
-              <div style={{marginTop: 20}}>
+              <div style={{ marginTop: 20 }}>
                 <Link to="/login">Return to login form</Link>
               </div>
             </Col>
@@ -240,7 +295,7 @@ class PasswordReset extends React.Component {
 }
 
 PasswordReset.propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 }
 
 export default withRouter(PasswordReset)
