@@ -1,4 +1,7 @@
 .fragment {
+  margin-left: auto;
+  margin-right: auto;
+
   @media (min-width: 768px) {
     width: 750px;
   }
@@ -7,11 +10,7 @@
     width: 970px;
   }
 
-  @media (min-width: 1200px)  {
+  @media (min-width: 1200px) {
     width: 1170px;
   }
-
-  margin-right: auto;
-  margin-left: auto;
 }
-
