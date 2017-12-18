@@ -34,7 +34,8 @@
 // hide the input
 
 .input {
-  display: none;
+  opacity: 0;
+  position: absolute;
 }
 
 /* pseudo-input */
