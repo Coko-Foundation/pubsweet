@@ -5,6 +5,7 @@ const Busboy = require('busboy')
 const config = require('config')
 const rp = require('request-promise-native')
 const temp = require('temp')
+const Pusher = require('pusher-js')
 
 // rp.debug = true
 
@@ -12,6 +13,11 @@ const inkConfig = config.get('pubsweet-component-ink-backend')
 
 // Generate the absolute URL
 const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
+
+// Connect to the INK Pusher/Slanger endpoint
+const connectToPusher = ({ appKey, ...options }) => new Pusher(appKey, options)
+
+const pusher = connectToPusher(inkConfig.pusher)
 
 // Sign in
 const authorize = () =>
@@ -47,64 +53,21 @@ const upload = (recipeId, inputFile, auth) =>
     timeout: 60 * 60 * 1000, // 3600 seconds
   })
 
-// Download the output file (keep trying if there's a 404 response, until it's ready)
-const download = async (chain, auth, outputFileName) => {
-  const manifest = chain.input_file_manifest
+// Download the output file
+const download = (chainId, auth, outputFileName) =>
+  rp({
+    uri: inkUrl(`process_chains/${chainId}/download_output_file`),
+    qs: {
+      relative_path: outputFileName,
+    },
+    headers: {
+      uid: inkConfig.email,
+      ...auth,
+    },
+  })
 
-  if (manifest.length === 0) {
-    throw new Error(
-      'The INK server gave a malformed response (no input files in the process chain)',
-    )
-  }
-
-  const interval = inkConfig.interval || 1000 // try once per second
-
-  const maxRetries = inkConfig.maxRetries || 300 // retry for up to 5 minutes
-
-  const uri = inkUrl(`process_chains/${chain.id}/download_output_file`)
-
-  const qs = {
-    relative_path:
-      outputFileName || `${path.basename(manifest[0].path, '.docx')}.html`,
-  }
-
-  const headers = {
-    uid: inkConfig.email,
-    ...auth,
-  }
-
-  for (let i = 0; i < maxRetries; i += 1) {
-    // delay
-    // eslint-disable-next-line no-await-in-loop
-    await new Promise(resolve => setTimeout(resolve, interval))
-
-    // eslint-disable-next-line no-await-in-loop
-    const response = await rp({
-      uri,
-      qs,
-      headers,
-      simple: false,
-      resolveWithFullResponse: true,
-    }).catch(error => {
-      logger.error('Error downloading from INK:', error.message)
-      throw error
-    })
-
-    // a successful request: return the data
-    if (response.statusCode === 200) {
-      return response.body
-    }
-
-    // not a 404 response - stop trying
-    if (response.statusCode !== 404) {
-      break
-    }
-  }
-
-  throw new Error('Unable to download the output from INK')
-}
-
-const findRecipeId = (recipeKey = 'Editoria Typescript', auth) =>
+// Find the ID of a recipe by name
+const findRecipeId = (name = 'Editoria Typescript', auth) =>
   rp({
     method: 'GET',
     uri: inkUrl('recipes'),
@@ -114,7 +77,7 @@ const findRecipeId = (recipeKey = 'Editoria Typescript', auth) =>
     },
     json: true,
   }).then(data => {
-    const recipe = data.recipes.find(recipe => recipe.name === recipeKey)
+    const recipe = data.recipes.find(recipe => recipe.name === name)
 
     return recipe ? recipe.id : null
   })
@@ -136,7 +99,69 @@ const process = async (inputFile, options) => {
     throw err
   })
 
-  return download(response.process_chain, auth, options.outputFileName)
+  const chain = response.process_chain
+
+  return new Promise((resolve, reject) => {
+    // subscribe to the "process chain execution" channel
+    const channel = pusher.subscribe('process_chain_execution')
+
+    // wait for a "subscription succeeded" event
+    channel.bind('pusher:subscription_succeeded', () => {
+      const handler = data => {
+        if (data.chain_id !== chain.id) return
+
+        logger.info('Processing completed', data)
+
+        // unbind the event handler
+        channel.unbind('processing_completed', handler)
+
+        // unsubscribe from the channel
+        pusher.unsubscribe('process_chain_execution')
+
+        const manifest = chain.input_file_manifest
+
+        if (manifest.length === 0) {
+          reject(
+            new Error(
+              'The INK server gave a malformed response (no input files in the process chain)',
+            ),
+          )
+        }
+
+        // backwards compatibility
+        if (!options.outputFileName) {
+          options.outputFileName = `${path.basename(
+            manifest[0].path,
+            '.docx',
+          )}.html`
+        }
+
+        // download the output file
+        logger.info(
+          `Downloading output file ${options.outputFileName} from chain ${
+            chain.id
+          }`,
+        )
+
+        download(chain.id, auth, options.outputFileName)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            logger.error('Error downloading from INK:', error.message)
+            reject(error)
+          })
+      }
+
+      // handle "processing completed" events on this channel
+      channel.bind('processing_completed', handler)
+    })
+
+    channel.bind('pusher:subscription_error', status => {
+      logger.error('Pusher subscription error', status)
+      reject(new Error('There was an error subscribing to the INK channel'))
+    })
+  })
 }
 
 const InkBackend = app => {
@@ -154,6 +179,8 @@ const InkBackend = app => {
             value: fs.createReadStream(stream.path),
             options: { filename, contentType },
           }
+
+          logger.info(`Uploading file to INK for processing`)
 
           process(inputFile, req.query)
             .then(converted => {
