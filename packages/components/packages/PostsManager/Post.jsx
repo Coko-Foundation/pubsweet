@@ -3,72 +3,98 @@ import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-import TextInput from './TextInput'
-import styles from './Post.local'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import TextInput from './TextInput'
+import styles from './Post.local.scss'
 
 export default class Post extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this._onSave = this._onSave.bind(this)
-    this._onPublish = this._onPublish.bind(this)
-    this._onUnpublish = this._onUnpublish.bind(this)
-    this._onDestroyClick = this._onDestroyClick.bind(this)
-    this._onDoubleClick = this._onDoubleClick.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.onPublish = this.onPublish.bind(this)
+    this.onUnpublish = this.onUnpublish.bind(this)
+    this.onDestroyClick = this.onDestroyClick.bind(this)
+    this.onDoubleClick = this.onDoubleClick.bind(this)
 
     this.state = {
-      isEditing: false
+      isEditing: false,
     }
   }
 
-  _onSave (title) {
-    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
-      title: title
-    }))
+  onSave(title) {
+    this.props.update(
+      this.props.blog,
+      Object.assign(this.props.blogpost, {
+        title,
+      }),
+    )
   }
 
-  _onPublish () {
-    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
-      published_at: new Date(),
-      published: true
-    }))
+  onPublish() {
+    this.props.update(
+      this.props.blog,
+      Object.assign(this.props.blogpost, {
+        published_at: new Date(),
+        published: true,
+      }),
+    )
   }
 
-  _onUnpublish () {
-    this.props.update(this.props.blog, Object.assign(this.props.blogpost, {
-      published: false
-    }))
+  onUnpublish() {
+    this.props.update(
+      this.props.blog,
+      Object.assign(this.props.blogpost, {
+        published: false,
+      }),
+    )
   }
 
-  _onDestroyClick () {
+  onDestroyClick() {
     this.props.delete(this.props.blog, this.props.blogpost)
   }
 
-  _onDoubleClick () {
-    this.setState({isEditing: true})
+  onDoubleClick() {
+    this.setState({ isEditing: true })
   }
 
-  render () {
+  render() {
     const { blogpost, number } = this.props
-    var input
+    let input
     if (this.state.isEditing) {
-      input =
+      input = (
         <TextInput
           className="edit"
-          onSave={this._onSave}
+          onSave={this.onSave}
           value={blogpost.title}
         />
+      )
     }
 
-    var changePublished
+    let changePublished
     if (!blogpost.published) {
-      changePublished = <Button title="Publish" aria-label="Publish" bsStyle="success" className={styles['button']} onClick={this._onPublish}>
-        <i className="fa fa-paper-plane-o" />
-      </Button>
+      changePublished = (
+        <Button
+          aria-label="Publish"
+          bsStyle="success"
+          className={styles.button}
+          onClick={this.onPublish}
+          title="Publish"
+        >
+          <i className="fa fa-paper-plane-o" />
+        </Button>
+      )
     } else {
-      changePublished = <Button title="Unpublish" aria-label="Unpublish" bsStyle="warning" className={styles['button']} onClick={this._onUnpublish}>
-        <i className="fa fa-chain-broken" />
-      </Button>
+      changePublished = (
+        <Button
+          aria-label="Unpublish"
+          bsStyle="warning"
+          className={styles.button}
+          onClick={this.onUnpublish}
+          title="Unpublish"
+        >
+          <i className="fa fa-chain-broken" />
+        </Button>
+      )
     }
 
     if (blogpost.published_at) {
@@ -77,36 +103,44 @@ export default class Post extends React.Component {
 
     return (
       <tr key={blogpost.key}>
-        <td className="index">
-          {number}
-        </td>
+        <td className="index">{number}</td>
         <td className="main">
-          <label onDoubleClick={this._onDoubleClick}>
-            {blogpost.title}
-          </label>
+          <label onDoubleClick={this.onDoubleClick}>{blogpost.title}</label>
           {input}
         </td>
-        <td>
-          {blogpost.owners.map(owner => owner.username).join(', ')}
-        </td>
+        <td>{blogpost.owners.map(owner => owner.username).join(', ')}</td>
         <td className={blogpost.published ? 'published' : 'unpublished'}>
-          <i className="fa fa-circle" /> ({blogpost.published ? 'Published' : 'Unpublished'}) <br />{blogpost.published_at}
+          <i className="fa fa-circle" /> ({blogpost.published
+            ? 'Published'
+            : 'Unpublished'}) <br />
+          {blogpost.published_at}
         </td>
         <td>
-          <Authorize operation="PATCH" object={blogpost}>
+          <Authorize object={blogpost} operation="PATCH">
             <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
-              <Button bsStyle="primary" className={styles['button']} title="Edit" aria-label="Edit">
+              <Button
+                aria-label="Edit"
+                bsStyle="primary"
+                className={styles.button}
+                title="Edit"
+              >
                 <i className="fa fa-pencil" />
               </Button>
             </LinkContainer>
           </Authorize>
 
-          <Authorize operation="PATCH" object={blogpost}>
+          <Authorize object={blogpost} operation="PATCH">
             {changePublished}
           </Authorize>
 
-          <Authorize operation="DELETE" object={blogpost}>
-            <Button bsStyle="danger" className={styles['button']} onClick={this._onDestroyClick} title="Delete" aria-label="Delete">
+          <Authorize object={blogpost} operation="DELETE">
+            <Button
+              aria-label="Delete"
+              bsStyle="danger"
+              className={styles.button}
+              onClick={this.onDestroyClick}
+              title="Delete"
+            >
               <i className="fa fa-trash-o" />
             </Button>
           </Authorize>
@@ -121,5 +155,5 @@ Post.propTypes = {
   blog: PropTypes.object,
   blogpost: PropTypes.object,
   delete: PropTypes.func,
-  update: PropTypes.func
+  update: PropTypes.func,
 }

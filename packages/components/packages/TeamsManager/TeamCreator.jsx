@@ -5,7 +5,7 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 export default class TeamCreator extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSave = this.onSave.bind(this)
     this.onNameChange = this.onNameChange.bind(this)
@@ -13,11 +13,11 @@ export default class TeamCreator extends React.Component {
     this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
 
     this.state = {
-      collectionSelected: undefined
+      collectionSelected: undefined,
     }
   }
 
-  onSave (event) {
+  onSave(event) {
     event.preventDefault()
 
     const name = this.state.teamName
@@ -33,75 +33,84 @@ export default class TeamCreator extends React.Component {
 
     if (name && teamType && objectId && objectType) {
       this.props.create({
-        name: name,
+        name,
         teamType: this.props.types[teamType],
         object: {
           id: objectId,
-          type: objectType
+          type: objectType,
         },
-        members: []
+        members: [],
       })
     }
   }
 
-  onNameChange (event) {
-    this.setState({teamName: event ? event.target.value : null})
+  onNameChange(event) {
+    this.setState({ teamName: event ? event.target.value : null })
   }
 
-  onCollectionSelect (collection) {
-    this.setState({collectionSelected: collection ? collection.value : null})
+  onCollectionSelect(collection) {
+    this.setState({ collectionSelected: collection ? collection.value : null })
   }
 
-  onTeamTypeSelect (teamType) {
-    this.setState({teamTypeSelected: teamType ? teamType.value : null})
+  onTeamTypeSelect(teamType) {
+    this.setState({ teamTypeSelected: teamType ? teamType.value : null })
   }
 
-  render () {
+  render() {
     let { collections, types } = this.props
 
     collections = collections.map(collection => ({
       value: collection.id,
-      label: collection.title
+      label: collection.title,
     }))
 
     types = Object.keys(types).map(type => ({
       value: type,
-      label: `${types[type].name} (${types[type].permissions})`
+      label: `${types[type].name} (${types[type].permissions})`,
     }))
 
     return (
       <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
         <FormControl
-            type='text'
-            placeholder='Team Awesome'
-            label='Name'
-            name='teamName'
-            onChange={this.onNameChange}
-            required/>
+          label="Name"
+          name="teamName"
+          onChange={this.onNameChange}
+          placeholder="Team Awesome"
+          required
+          type="text"
+        />
         <Row>
           <Col md={3}>
             <h4>Team type</h4>
             <Select
-              name='teamType'
-              options={types}
-              value={this.state.teamTypeSelected}
+              name="teamType"
               onChange={this.onTeamTypeSelect}
-              required />
+              options={types}
+              required
+              value={this.state.teamTypeSelected}
+            />
           </Col>
           <Col md={9}>
             <h4>Collection</h4>
             <Select
-              name='collection'
-              options={collections}
-              value={this.state.collectionSelected}
+              name="collection"
               onChange={this.onCollectionSelect}
-              required />
+              options={collections}
+              required
+              value={this.state.collectionSelected}
+            />
           </Col>
         </Row>
         <br />
-        <Button bsStyle='primary' type='submit' title='Create' aria-label='Create'>
-          <i className='fa fa-plus' /> Create</Button>
+        <Button
+          aria-label="Create"
+          bsStyle="primary"
+          title="Create"
+          type="submit"
+        >
+          <i className="fa fa-plus" /> Create
+        </Button>
       </form>
     )
   }
@@ -110,5 +119,5 @@ export default class TeamCreator extends React.Component {
 TeamCreator.propTypes = {
   collections: PropTypes.array,
   types: PropTypes.object,
-  create: PropTypes.func
+  create: PropTypes.func,
 }

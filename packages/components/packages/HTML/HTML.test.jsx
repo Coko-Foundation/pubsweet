@@ -1,17 +1,20 @@
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import HTML from './HTML'
 
 describe('<HTML/>', () => {
-  const makeWrapper = (props = {}) => shallow(<HTML
-      id='123'
-      actions={{
-        getCollections: jest.fn(() => Promise.resolve({collections: []})),
-        getFragment: jest.fn()
-      }}
-      {...props}
-  />)
+  const makeWrapper = (props = {}) =>
+    shallow(
+      <HTML
+        actions={{
+          getCollections: jest.fn(() => Promise.resolve({ collections: [] })),
+          getFragment: jest.fn(),
+        }}
+        id="123"
+        {...props}
+      />,
+    )
 
   it('shows message if no fragment', () => {
     const wrapper = makeWrapper()
@@ -19,8 +22,8 @@ describe('<HTML/>', () => {
   })
 
   it('shows fragment HTML', () => {
-    let presentation = '<h1>Hey</h1>'
-    const wrapper = makeWrapper({fragment: {presentation}})
+    const presentation = '<h1>Hey</h1>'
+    const wrapper = makeWrapper({ fragment: { presentation } })
     expect(wrapper.html()).toContain(presentation)
   })
 })

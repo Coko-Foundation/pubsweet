@@ -8,23 +8,28 @@ import styles from './Blog.local.scss'
 import Summary from './Summary'
 
 export default class Blog extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.props.actions.getCollections()
+    this.props.actions
+      .getCollections()
       .then(result => this.props.actions.getFragments(result.collections[0]))
   }
 
-  render () {
+  render() {
     let posts = this.props.posts
-        .filter(post => post.published)
-        .map(post => <Summary key={post.id} fragment={post}/>)
+      .filter(post => post.published)
+      .map(post => <Summary fragment={post} key={post.id} />)
 
     if (posts.length === 0 && this.props.blog) {
-      posts = <Row>
-        <Col md={8} mdOffset={2}>
-          <p>No blogpost has been published on {this.props.blog.title} yet.</p>
-        </Col>
-      </Row>
+      posts = (
+        <Row>
+          <Col md={8} mdOffset={2}>
+            <p>
+              No blogpost has been published on {this.props.blog.title} yet.
+            </p>
+          </Col>
+        </Row>
+      )
     }
 
     return (
@@ -40,17 +45,17 @@ export default class Blog extends React.Component {
           </Grid>
         </div>
         <Grid>
-          <div className={styles.blogContainer}>
-            {posts}
-          </div>
+          <div className={styles.blogContainer}>{posts}</div>
           <Row className={styles.blogFooter}>
             <Col md={8} mdOffset={2}>
-              <p>Powered by <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a></p>
+              <p>
+                Powered by{' '}
+                <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
+              </p>
             </Col>
           </Row>
         </Grid>
       </div>
-
     )
   }
 }
@@ -62,5 +67,5 @@ Blog.propTypes = {
   // Injected by React Redux
   // errorMessage: PropTypes.string,
   // Injected by React Router
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 }

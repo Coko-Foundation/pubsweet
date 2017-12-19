@@ -6,7 +6,6 @@
   },
   "extends": ["pubsweet"],
   "rules": {
-    "camelcase": 0,
     "consistent-return": 0,
     "prefer-destructuring": ["error", {
       "VariableDeclarator": {
@@ -35,7 +34,10 @@
     "no-param-reassign": 0,
     "no-shadow": 0,
     "no-underscore-dangle": 0,
+    "react/forbid-prop-types": 0,
     "react/no-did-mount-set-state": 0,
+    "react/no-unused-prop-types": 0,
+    "react/no-unused-state": 0,
     "react/prop-types": 0,
     "react/require-default-props": 0,
     "sort-keys": 0

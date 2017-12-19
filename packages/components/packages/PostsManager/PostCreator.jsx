@@ -9,43 +9,50 @@ const appValidationsPath = config.validations
 const validations = mergeValidations(require(appValidationsPath))
 
 export default class PostCreator extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSave = this.onSave.bind(this)
   }
 
-  onSave (text) {
+  onSave(text) {
     const title = this.titleInputNode.value
 
     if (title !== '') {
       this.props.create({
         fragmentType: 'blogpost',
         title,
-        published: false
+        published: false,
       })
     }
 
     this.titleInputNode.blur()
   }
-  render () {
+  render() {
     return (
       <div>
         <h3>Create a new blog post</h3>
         <FormGroup
-          controlId='fragment.title'
-          label='Title'
-          placeholder='One fine day...'
+          controlId="fragment.title"
+          inputRef={input => {
+            this.titleInputNode = input
+          }}
+          label="Title"
+          modelProperty="fragment.title"
+          placeholder="One fine day..."
           validations={validations}
-          modelProperty='fragment.title'
-          inputRef={(input) => { this.titleInputNode = input }}
         />
-        <Button bsStyle='primary' onClick={this.onSave} title='Create' aria-label='Create'>
-          <i className='fa fa-plus' /> Create
+        <Button
+          aria-label="Create"
+          bsStyle="primary"
+          onClick={this.onSave}
+          title="Create"
+        >
+          <i className="fa fa-plus" /> Create
         </Button>
       </div>
     )
   }
 }
 PostCreator.propTypes = {
-  create: PropTypes.func
+  create: PropTypes.func,
 }

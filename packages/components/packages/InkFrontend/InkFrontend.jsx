@@ -4,29 +4,34 @@ import { Alert, Row, Col } from 'react-bootstrap'
 import Dropzone from 'react-dropzone'
 
 export default class InkFrontend extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onDrop = this.onDrop.bind(this)
   }
 
-  onDrop (files) {
+  onDrop(files) {
     this.props.convert(files[0])
   }
 
-  render () {
+  render() {
     const { ink } = this.props
 
     return (
-      <div className='bootstrap'>
-        { ink.isFetching ? <Alert bsStyle="info">INK is doing its thing...</Alert> : null }
-        { ink.error ? <Alert bsStyle="danger">INK failed</Alert> : null }
+      <div className="bootstrap">
+        {ink.isFetching ? (
+          <Alert bsStyle="info">INK is doing its thing...</Alert>
+        ) : null}
+        {ink.error ? <Alert bsStyle="danger">INK failed</Alert> : null}
 
         <Row>
-          <Col xs={12} md={2} mdOffset={5}>
-            <Dropzone onDrop={this.onDrop} multiple={false}>
-              <div>Try dropping some files here, or click to select files to upload.</div>
+          <Col md={2} mdOffset={5} xs={12}>
+            <Dropzone multiple={false} onDrop={this.onDrop}>
+              <div>
+                Try dropping some files here, or click to select files to
+                upload.
+              </div>
             </Dropzone>
-            { ink.converted ? <span>HERE { ink.converted }</span> : null}
+            {ink.converted ? <span>HERE {ink.converted}</span> : null}
           </Col>
         </Row>
       </div>
@@ -36,5 +41,5 @@ export default class InkFrontend extends Component {
 
 InkFrontend.propTypes = {
   convert: PropTypes.func,
-  ink: PropTypes.object
+  ink: PropTypes.object,
 }

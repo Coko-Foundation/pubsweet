@@ -5,37 +5,34 @@ import 'react-select/dist/react-select.css'
 import { Button } from 'react-bootstrap'
 
 class Team extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.updateMembers = this.updateMembers.bind(this)
     this.onDelete = this.onDelete.bind(this)
   }
 
-  updateMembers (members) {
-    var memberIds = members.map(member => member.value)
-    var team = Object.assign(this.props.team, { members: memberIds })
+  updateMembers(members) {
+    const memberIds = members.map(member => member.value)
+    const team = Object.assign(this.props.team, { members: memberIds })
     this.props.update(team)
   }
 
-  onDelete () {
+  onDelete() {
     this.props.delete(this.props.team)
   }
 
-  render () {
-    let { team, number, users } = this.props
+  render() {
+    const { team, number, users } = this.props
 
-    let options = users.map(function (user) {
-      return {value: user.id, label: user.username}
-    })
+    const options = users.map(user => ({
+      value: user.id,
+      label: user.username,
+    }))
 
     return (
-      <tr className='team'>
-        <td>
-          {number}
-        </td>
-        <td>
-          {team.name}
-        </td>
+      <tr className="team">
+        <td>{number}</td>
+        <td>{team.name}</td>
         <td>
           {team.teamType.name} ({team.teamType.permissions})
         </td>
@@ -44,16 +41,21 @@ class Team extends React.Component {
         </td>
         <td>
           <Select
-            name='members'
             multi
-            value={team.members.join(',')}
-            options={options}
+            name="members"
             onChange={this.updateMembers}
+            options={options}
+            value={team.members.join(',')}
           />
         </td>
         <td>
-          <Button bsStyle='danger' onClick={this.onDelete} title='Delete' aria-label='Delete'>
-            <i className='fa fa-trash-o' />
+          <Button
+            aria-label="Delete"
+            bsStyle="danger"
+            onClick={this.onDelete}
+            title="Delete"
+          >
+            <i className="fa fa-trash-o" />
           </Button>
         </td>
       </tr>
@@ -66,7 +68,7 @@ Team.propTypes = {
   number: PropTypes.number,
   update: PropTypes.func.isRequired,
   delete: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 }
 
 export default Team

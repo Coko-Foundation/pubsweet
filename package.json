@@ -27,8 +27,8 @@
     "clean": "lerna clean",
     "test": "lerna run test",
     "lint": "npm run lint:js && npm run lint:style",
-    "lint:js": "eslint packages",
-    "lint:style": "stylelint packages/**/*.scss packages/**/*.css",
+    "lint:js": "eslint 'packages/**/*.{js,jsx}'",
+    "lint:style": "stylelint 'packages/**/*.{css,scss}'",
     "precommit": "lint-staged"
   },
   "workspaces": ["packages/*", "packages/components/packages/*"]

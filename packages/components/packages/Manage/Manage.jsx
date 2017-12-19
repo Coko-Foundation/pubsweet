@@ -1,20 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Manage ({ children, nav }) {
+function Manage({ children, nav }) {
   return (
-      <div>
-        <div className="bootstrap">
-          {nav}
-        </div>
-        {children}
-      </div>
+    <div>
+      <div className="bootstrap">{nav}</div>
+      {children}
+    </div>
   )
 }
 
 Manage.propTypes = {
   nav: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Manage
