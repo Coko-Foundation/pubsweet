@@ -8,7 +8,7 @@ const setupDbSpy = require('@pubsweet/db-manager').setupDb
 const dbOpts = {
   username: 'anotheruser',
   email: 'bar@example.com',
-  password: '12345'
+  password: '12345',
 }
 
 describe('setupdb', () => {

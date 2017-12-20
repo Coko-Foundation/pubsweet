@@ -2,7 +2,7 @@ const get = require('lodash/get')
 const pickBy = require('lodash/pickBy')
 const omit = require('lodash/omit')
 
-async function teamPermissions (user, operation, object, context) {
+async function teamPermissions(user, operation, object, context) {
   const collection = get(object, 'collection')
 
   if (collection) {
@@ -10,34 +10,45 @@ async function teamPermissions (user, operation, object, context) {
     // this particular collection, check what membership in that team allows
     // and return accordingly
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const teamId of user.teams) {
+      // eslint-disable-next-line no-await-in-loop
       const team = await context.models.Team.find(teamId)
 
-      if (team.teamType.permissions === 'POST' &&
-          team.object.id === collection.id &&
-          operation === 'POST') {
+      if (
+        team.teamType.permissions === 'POST' &&
+        team.object.id === collection.id &&
+        operation === 'POST'
+      ) {
         return true
-      } else if (team.teamType.permissions === 'PATCH' &&
-          team.object.id === object.id &&
-          operation === 'PATCH') {
+      } else if (
+        team.teamType.permissions === 'PATCH' &&
+        team.object.id === object.id &&
+        operation === 'PATCH'
+      ) {
         return true
       }
     }
   }
 }
 
-function unauthenticatedUser (operation, object) {
+function unauthenticatedUser(operation, object) {
   // Public/unauthenticated users can GET /collections, filtered by 'published'
   if (operation === 'GET' && object && object.path === '/collections') {
     return {
-      filter: (collections) => collections.filter(collection => collection.published)
+      filter: collections =>
+        collections.filter(collection => collection.published),
     }
   }
 
   // Public/unauthenticated users can GET /collections/:id/fragments, filtered by 'published'
-  if (operation === 'GET' && object && object.path === '/collections/:id/fragments') {
+  if (
+    operation === 'GET' &&
+    object &&
+    object.path === '/collections/:id/fragments'
+  ) {
     return {
-      filter: (fragments) => fragments.filter(fragment => fragment.published)
+      filter: fragments => fragments.filter(fragment => fragment.published),
     }
   }
 
@@ -45,9 +56,10 @@ function unauthenticatedUser (operation, object) {
   if (operation === 'GET' && object && object.type === 'collection') {
     if (object.published) {
       return {
-        filter: (collection) => pickBy(collection, (_, key) => {
-          return ['id', 'title', 'owners'].includes(key)
-        })
+        filter: collection =>
+          pickBy(collection, (_, key) =>
+            ['id', 'title', 'owners'].includes(key),
+          ),
       }
     }
   }
@@ -55,9 +67,10 @@ function unauthenticatedUser (operation, object) {
   if (operation === 'GET' && object && object.type === 'fragment') {
     if (object.published) {
       return {
-        filter: (fragment) => pickBy(fragment, (_, key) => {
-          return ['id', 'title', 'source', 'presentation', 'owners'].includes(key)
-        })
+        filter: fragment =>
+          pickBy(fragment, (_, key) =>
+            ['id', 'title', 'source', 'presentation', 'owners'].includes(key),
+          ),
       }
     }
   }
@@ -65,18 +78,18 @@ function unauthenticatedUser (operation, object) {
   return false
 }
 
-async function authenticatedUser (user, operation, object, context) {
+async function authenticatedUser(user, operation, object, context) {
   // Allow the authenticated user to POST a collection (but not with a 'filtered' property)
   if (operation === 'POST' && object.path === '/collections') {
     return {
-      filter: (collection) => omit(collection, 'filtered')
+      filter: collection => omit(collection, 'filtered'),
     }
   }
 
   // Allow the authenticated user to GET collections they own
   if (operation === 'GET' && object === '/collections/') {
     return {
-      filter: (collection) => collection.owners.includes(user.id)
+      filter: collection => collection.owners.includes(user.id),
     }
   }
 
@@ -92,8 +105,14 @@ async function authenticatedUser (user, operation, object, context) {
     }
   }
 
-  if (operation === 'GET' && get(object, 'type') === 'team' && get(object, 'object.type') === 'collection') {
-    const collection = await context.models.Collection.find(get(object, 'object.id'))
+  if (
+    operation === 'GET' &&
+    get(object, 'type') === 'team' &&
+    get(object, 'object.type') === 'collection'
+  ) {
+    const collection = await context.models.Collection.find(
+      get(object, 'object.id'),
+    )
     if (collection.owners.includes(user.id)) {
       return true
     }
@@ -104,7 +123,9 @@ async function authenticatedUser (user, operation, object, context) {
   // if they are one of the owners of this collection
   if (['POST', 'PATCH'].includes(operation) && get(object, 'type') === 'team') {
     if (get(object, 'object.type') === 'collection') {
-      const collection = await context.models.Collection.find(get(object, 'object.id'))
+      const collection = await context.models.Collection.find(
+        get(object, 'object.id'),
+      )
       if (collection.owners.includes(user.id)) {
         return true
       }
@@ -139,7 +160,7 @@ async function authenticatedUser (user, operation, object, context) {
       // Only allow filtered updating (mirroring filtered creation) for non-admin users)
       if (operation === 'PATCH') {
         return {
-          filter: (collection) => omit(collection, 'filtered')
+          filter: collection => omit(collection, 'filtered'),
         }
       }
     }
@@ -156,7 +177,7 @@ async function authenticatedUser (user, operation, object, context) {
   return unauthenticatedUser(operation, object)
 }
 
-const authsomeMode = async function (userId, operation, object, context) {
+const authsomeMode = async (userId, operation, object, context) => {
   if (!userId) {
     return unauthenticatedUser(operation, object)
   }

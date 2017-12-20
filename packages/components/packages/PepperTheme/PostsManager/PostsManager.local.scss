@@ -1,12 +1,14 @@
-@import "../variables";
+@import '../variables';
 
-.container{
-  .dataset{
+.container {
+  .dataset {
     padding-right: 2em;
   }
-  table{
+
+  table {
     margin-left: 3em;
-    label{
+
+    label {
       color: black;
     }
   }

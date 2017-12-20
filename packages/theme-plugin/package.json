@@ -5,13 +5,9 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-theme-plugin"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "keywords": [
-    "themes",
-    "webpack",
-    "plugin"
-  ],
+  "keywords": ["themes", "webpack", "plugin"],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT"
 }

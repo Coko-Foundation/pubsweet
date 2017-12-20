@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {FormGroup as BootstrapFormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
+import {
+  FormGroup as BootstrapFormGroup,
+  ControlLabel,
+  FormControl,
+  HelpBlock,
+} from 'react-bootstrap'
 import Joi from 'joi-browser'
 import serverValidations from 'pubsweet-server/src/models/validations'
 import config from 'config'
@@ -8,16 +13,14 @@ import config from 'config'
 const validations = serverValidations(config)
 
 class FormGroup extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.validateState = this.validateState.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.state = {
-      startedEditing: false
+      startedEditing: false,
     }
   }
 
-  validateState (state) {
+  validateState(state) {
     if (!state.startedEditing) return state
 
     const [model, property] = this.props.modelProperty.split('.')
@@ -28,41 +31,43 @@ class FormGroup extends React.Component {
       return {
         ...state,
         validation: 'error',
-        validationMessage: result.error.message
+        validationMessage: result.error.message,
       }
     }
 
     return {
       ...state,
       validation: 'success',
-      validationMessage: ''
+      validationMessage: '',
     }
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const validatedState = this.validateState({
       startedEditing: true,
-      value: e.target.value
+      value: e.target.value,
     })
     this.setState(validatedState)
   }
 
-  render () {
-    return <BootstrapFormGroup
-      controlId={this.props.controlId}
-      validationState={this.state.validation}
-    >
-      <ControlLabel>{this.props.label}</ControlLabel>
-      <FormControl
-        type='text'
-        value={this.state.value}
-        placeholder={this.props.placeholder}
-        onChange={this.handleChange}
-        inputRef={this.props.inputRef}
-      />
-      <FormControl.Feedback />
-      <HelpBlock>{this.state.validationMessage}</HelpBlock>
-    </BootstrapFormGroup>
+  render() {
+    return (
+      <BootstrapFormGroup
+        controlId={this.props.controlId}
+        validationState={this.state.validation}
+      >
+        <ControlLabel>{this.props.label}</ControlLabel>
+        <FormControl
+          inputRef={this.props.inputRef}
+          onChange={e => this.handleChange(e)}
+          placeholder={this.props.placeholder}
+          type="text"
+          value={this.state.value}
+        />
+        <FormControl.Feedback />
+        <HelpBlock>{this.state.validationMessage}</HelpBlock>
+      </BootstrapFormGroup>
+    )
   }
 }
 
@@ -71,7 +76,7 @@ FormGroup.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   modelProperty: PropTypes.string,
-  inputRef: PropTypes.func
+  inputRef: PropTypes.func,
 }
 
 export default FormGroup

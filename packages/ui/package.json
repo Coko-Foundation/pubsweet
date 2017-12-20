@@ -8,6 +8,10 @@
   ],
   "main": "src",
   "jsnext:main": "src",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  },
   "dependencies": {
     "babel-jest": "^21.2.0",
     "classnames": "^2.2.5",

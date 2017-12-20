@@ -1,5 +1,3 @@
-'use strict'
-
 const STATUS = require('http-status-codes')
 const passport = require('passport')
 const express = require('express')
@@ -13,28 +11,29 @@ const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
 
-const authLocal = passport.authenticate('local', { failWithError: true, session: false })
+const authLocal = passport.authenticate('local', {
+  failWithError: true,
+  session: false,
+})
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
 const authentication = require('../authentication')
 
 // Issue a token
-api.post('/users/authenticate', authLocal, (req, res) => {
-  return res.status(
-    STATUS.CREATED
-  ).json(
-    Object.assign({ token: authentication.token.create(req.user) }, req.user)
-  )
-})
+api.post('/users/authenticate', authLocal, (req, res) =>
+  res
+    .status(STATUS.CREATED)
+    .json(
+      Object.assign({ token: authentication.token.create(req.user) }, req.user),
+    ),
+)
 
 // Verify a token
 api.get('/users/authenticate', authBearer, async (req, res, next) => {
   try {
     const user = await User.find(req.user)
     user.token = req.authInfo.token
-    user.teams = await Promise.all(
-      user.teams.map((teamId) => Team.find(teamId))
-    )
+    user.teams = await Promise.all(user.teams.map(teamId => Team.find(teamId)))
     return res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
@@ -63,10 +62,9 @@ api.get('/users', authBearer, async (req, res, next) => {
       throw authorizationError(req.user, req.method, req.path)
     }
 
-    const users = (await User.all())
-      .filter(createFilterFromQuery(req.query))
+    const users = (await User.all()).filter(createFilterFromQuery(req.query))
 
-    return res.status(STATUS.OK).json({users: users})
+    return res.status(STATUS.OK).json({ users })
   } catch (err) {
     next(err)
   }

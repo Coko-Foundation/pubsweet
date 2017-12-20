@@ -1,18 +1,18 @@
 module.exports = {
   username: {
-    description: 'Username'
+    description: 'Username',
   },
   email: {
-    description: 'Email address'
+    description: 'Email address',
   },
   password: {
     description: 'Password',
     hidden: true,
-    replace: '*'
+    replace: '*',
   },
   admin: {
     description: 'Give user admin privileges',
     type: 'boolean',
-    default: true
-  }
+    default: true,
+  },
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000000
 
 const path = require('path')
@@ -15,14 +16,14 @@ const dbPath = path.join(dbDir, dbName)
 const nodeConfig = {
   'pubsweet-server': {
     dbPath,
-    adapter: 'leveldb'
-  }
+    adapter: 'leveldb',
+  },
 }
 
 const dbOptions = {
   username: 'someuser',
   email: 'user@test.com',
-  password: '12345678'
+  password: '12345678',
 }
 
 /* These tests run "pubsweet" commands as child processes with no mocking */
@@ -40,8 +41,14 @@ describe('CLI: integration test', () => {
   describe('new', () => {
     it('will not overwrite non-empty dir', () => {
       fs.ensureDirSync(path.join(appPath, 'blocking-dir'))
-      const { stderr } = runCommandSync({ args: `new ${appName}`, cwd: tempDir, stdio: 'pipe' })
-      expect(stderr).toContain(`destination path 'testapp' already exists and is not an empty directory`)
+      const { stderr } = runCommandSync({
+        args: `new ${appName}`,
+        cwd: tempDir,
+        stdio: 'pipe',
+      })
+      expect(stderr).toContain(
+        `destination path 'testapp' already exists and is not an empty directory`,
+      )
       fs.emptyDirSync(tempDir)
     })
 
@@ -61,15 +68,25 @@ describe('CLI: integration test', () => {
     })
 
     it('adds component', () => {
-      const { stdout, stderr } = runCommandSync({ args: `add ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      const { stdout, stderr } = runCommandSync({
+        args: `add ${componentName}`,
+        cwd: appPath,
+        stdio: 'pipe',
+      })
       console.log(stdout, stderr)
       expect(stdout).toContain('Success: 1 components installed')
       const configPostAdd = fs.readJsonSync(componentsFile)
-      expect(configPostAdd).toEqual(oldComponents.concat(`pubsweet-component-${componentName}`))
+      expect(configPostAdd).toEqual(
+        oldComponents.concat(`pubsweet-component-${componentName}`),
+      )
     })
 
     it('removes component', () => {
-      const { stdout, stderr } = runCommandSync({ args: `remove ${componentName}`, cwd: appPath, stdio: 'pipe' })
+      const { stdout, stderr } = runCommandSync({
+        args: `remove ${componentName}`,
+        cwd: appPath,
+        stdio: 'pipe',
+      })
       console.log(stdout, stderr)
       expect(stdout).toContain('Success: 1 components removed')
       const configPostRemove = fs.readJsonSync(componentsFile)
@@ -86,7 +103,7 @@ describe('CLI: integration test', () => {
         options: dbOptions,
         stdio: 'pipe',
         cwd: appPath,
-        nodeConfig
+        nodeConfig,
       })
 
       console.log(stdout, stderr)
@@ -104,7 +121,7 @@ describe('CLI: integration test', () => {
         args: 'build',
         stdio: 'inherit',
         cwd: appPath,
-        nodeConfig
+        nodeConfig,
       })
 
       expect(fs.existsSync(path.join(buildDir, 'assets', 'app.js'))).toBe(true)
@@ -113,7 +130,7 @@ describe('CLI: integration test', () => {
   })
 
   describe('start', () => {
-    it('starts an app', (done) => {
+    it('starts an app', done => {
       fs.ensureDirSync(dbDir)
 
       runCommandSync({
@@ -121,14 +138,14 @@ describe('CLI: integration test', () => {
         options: dbOptions,
         stdio: 'inherit',
         cwd: appPath,
-        nodeConfig
+        nodeConfig,
       })
 
       const app = runCommandAsync({
         args: 'start',
         cwd: appPath,
         stdio: 'pipe',
-        nodeConfig
+        nodeConfig,
       })
 
       app.stderr.on('data', async data => {

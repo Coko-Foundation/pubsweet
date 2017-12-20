@@ -5,52 +5,89 @@ import { Link } from 'react-router-dom'
 import styles from './Signup.local.scss'
 
 export default class Signup extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
   }
 
-  render () {
+  handleClick(event) {
+    event.preventDefault()
+    const user = {
+      username: this.usernameElement.value,
+      email: this.emailElement.value,
+      password: this.passwordElement.value,
+    }
+    this.props.actions.signupUser(user)
+  }
+
+  render() {
     const self = this
     const { error } = self.props
     self.refs = {}
     return (
-      <div className="bootstrap" style={{marginTop: 20}}>
+      <div className="bootstrap" style={{ marginTop: 20 }}>
         <Grid>
           <Row>
             <Col md={2} mdOffset={5}>
-              <img src="/assets/pubsweet-rgb-small.jpg" className={styles.logo} alt="pubsweet-logo" style={{maxWidth: '100%'}}/>
+              <img
+                alt="pubsweet-logo"
+                className={styles.logo}
+                src="/assets/pubsweet-rgb-small.jpg"
+                style={{ maxWidth: '100%' }}
+              />
             </Col>
           </Row>
 
           <Row>
             <Col md={4}>
-              {error && <Alert bsStyle="warning"><i className="fa fa-exclamation-circle"/>&nbsp; {error}</Alert>}
+              {error && (
+                <Alert bsStyle="warning">
+                  <i className="fa fa-exclamation-circle" />&nbsp; {error}
+                </Alert>
+              )}
             </Col>
 
-            <Col xs={12} md={4} className={styles.signup}>
+            <Col className={styles.signup} md={4} xs={12}>
               <h1>Sign up</h1>
               <form>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
-                  <input type="text"
-                    ref={function (c) { self.refs.username = c }} className="form-control" placeholder="Username" />
+                  <input
+                    className="form-control"
+                    placeholder="Username"
+                    ref={el => (this.usernameElement = el)}
+                    type="text"
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input type="text"
-                    ref={function (c) { self.refs.email = c }} className="form-control" placeholder="Email" />
+                  <input
+                    className="form-control"
+                    placeholder="Email"
+                    ref={el => (this.emailElement = el)}
+                    type="text"
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password"
-                    ref={function (c) { self.refs.password = c }} className="form-control" placeholder="Password" />
+                  <input
+                    className="form-control"
+                    placeholder="Password"
+                    ref={el => (this.passwordElement = el)}
+                    type="password"
+                  />
                 </div>
-                <button onClick={this.handleClick} className={styles.button + ' btn btn-block btn-primary'}>
+                <button
+                  className={`${styles.button} btn btn-block btn-primary`}
+                  onClick={this.handleClick}
+                >
                   Sign up
                 </button>
-                <p>Already have an account?<br/><Link to="/login">Log in here</Link></p>
+                <p>
+                  Already have an account?<br />
+                  <Link to="/login">Log in here</Link>
+                </p>
               </form>
             </Col>
           </Row>
@@ -58,18 +95,8 @@ export default class Signup extends Component {
       </div>
     )
   }
-
-  handleClick (event) {
-    event.preventDefault()
-    const user = {
-      username: this.refs.username.value,
-      email: this.refs.email.value,
-      password: this.refs.password.value
-    }
-    this.props.actions.signupUser(user)
-  }
 }
 
 Signup.propTypes = {
-  actions: PropTypes.object
+  actions: PropTypes.object,
 }

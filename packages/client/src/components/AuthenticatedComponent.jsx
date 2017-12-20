@@ -5,6 +5,7 @@ import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
 
 import actions from '../actions'
+import { selectCurrentUser } from '../selectors'
 
 export class AuthenticatedComponent extends React.Component {
   componentWillMount() {
@@ -39,7 +40,7 @@ AuthenticatedComponent.propTypes = {
 function mapState(state) {
   return {
     isFetching: state.currentUser.isFetching,
-    isAuthenticated: state.currentUser.isAuthenticated,
+    isAuthenticated: !!selectCurrentUser(state),
   }
 }
 

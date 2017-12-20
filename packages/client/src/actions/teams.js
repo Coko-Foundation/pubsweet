@@ -20,7 +20,7 @@ function getTeamsSuccess(teams) {
   return {
     type: T.GET_TEAMS_SUCCESS,
     isFetching: false,
-    teams: teams,
+    teams,
   }
 }
 
@@ -48,14 +48,14 @@ export function getTeams() {
 function createTeamRequest(team) {
   return {
     type: T.CREATE_TEAM_REQUEST,
-    team: team,
+    team,
   }
 }
 
 function createTeamSuccess(team) {
   return {
     type: T.CREATE_TEAM_SUCCESS,
-    team: team,
+    team,
   }
 }
 
@@ -63,8 +63,8 @@ function createTeamFailure(team, error) {
   return {
     type: T.CREATE_TEAM_FAILURE,
     isFetching: false,
-    team: team,
-    error: error,
+    team,
+    error,
   }
 }
 
@@ -86,14 +86,14 @@ export function createTeam(team) {
 function updateTeamRequest(team) {
   return {
     type: T.UPDATE_TEAM_REQUEST,
-    team: team,
+    team,
   }
 }
 
 function updateTeamSuccess(team) {
   return {
     type: T.UPDATE_TEAM_SUCCESS,
-    team: team,
+    team,
   }
 }
 
@@ -101,8 +101,8 @@ function updateTeamFailure(team, error) {
   return {
     type: T.UPDATE_TEAM_FAILURE,
     isFetching: false,
-    team: team,
-    error: error,
+    team,
+    error,
   }
 }
 
@@ -123,14 +123,14 @@ export function updateTeam(team) {
 function deleteTeamRequest(team) {
   return {
     type: T.DELETE_TEAM_REQUEST,
-    team: team,
+    team,
   }
 }
 
 function deleteTeamSuccess(team) {
   return {
     type: T.DELETE_TEAM_SUCCESS,
-    team: team,
+    team,
   }
 }
 
@@ -138,8 +138,8 @@ function deleteTeamFailure(team, error) {
   return {
     type: T.DELETE_TEAM_FAILURE,
     isFetching: false,
-    team: team,
-    error: error,
+    team,
+    error,
   }
 }
 

@@ -5,19 +5,19 @@ import {
   LOGOUT_SUCCESS,
 } from '../actions/types'
 
-export default function(
-  state = {
-    isFetching: false,
-    isAuthenticated: false,
-  },
-  action,
-) {
+const initialState = {
+  isFetching: false,
+  // TODO remove isAuthenticated in favour of !!user
+  isAuthenticated: false,
+  user: null,
+}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_CURRENT_USER_REQUEST:
       return {
         ...state,
         isFetching: true,
-        isAuthenticated: false,
       }
 
     case GET_CURRENT_USER_SUCCESS:
@@ -33,6 +33,7 @@ export default function(
         ...state,
         isFetching: false,
         isAuthenticated: false,
+        user: null,
       }
 
     case LOGOUT_SUCCESS:

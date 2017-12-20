@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const _ = require('lodash')
-const spawnSync = require('child_process').spawnSync
+const { spawnSync } = require('child_process')
 const logger = require('@pubsweet/logger')
 const { resolveName, getDepsFromPackageJson } = require('./helpers/')
 
@@ -15,9 +15,9 @@ const updateConfig = addedComponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
   logger.info(`Adding new components to ${configFile}`)
   fs.ensureFileSync(configFile)
-  const oldComponents = fs.readJsonSync(configFile, {throws: false})
+  const oldComponents = fs.readJsonSync(configFile, { throws: false })
   const newComponents = _.union(oldComponents, addedComponents)
-  fs.writeJsonSync(configFile, newComponents, {spaces: '\t'})
+  fs.writeJsonSync(configFile, newComponents, { spaces: '\t' })
   logger.info('Finished updating components.json config')
 }
 

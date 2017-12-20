@@ -4,9 +4,9 @@ import InkFrontend from './InkFrontend'
 
 export default connect(
   state => ({
-    ink: state.ink
+    ink: state.ink,
   }),
   {
-    convert
-  }
+    convert,
+  },
 )(InkFrontend)

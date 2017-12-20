@@ -1,17 +1,4 @@
 {
-  "extends": [
-    "standard",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/standard",
-    "prettier/react",
-  ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2017
-  },
   "env": {
     "browser": true
   },

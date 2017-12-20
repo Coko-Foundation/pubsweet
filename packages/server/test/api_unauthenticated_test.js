@@ -13,7 +13,7 @@ describe('unauthenticated/public api', () => {
 
   beforeEach(cleanDB)
 
-  async function setNewFragment (opts) {
+  async function setNewFragment(opts) {
     const userAndCollection = await createBasicCollection()
     collection = userAndCollection.collection
     fragment = await createFragment(opts, collection)
@@ -23,44 +23,56 @@ describe('unauthenticated/public api', () => {
   describe('published fragment', () => {
     beforeEach(() => setNewFragment({ published: true }))
 
-    it('can see a published fragment in a collection', () => {
-      return api.fragments.get({ collection }).expect(STATUS.OK).then(
-        res => expect(res.body[0].id).toEqual(fragment.id)
-      )
-    })
+    it('can see a published fragment in a collection', () =>
+      api.fragments
+        .get({ collection })
+        .expect(STATUS.OK)
+        .then(res => expect(res.body[0].id).toEqual(fragment.id)))
 
-    it('can only see the published fragment in a collection', () => {
-      return api.fragments.get({ collection }).expect(STATUS.OK).then(
-        res => expect(res.body.map(f => f.id)).not.toContain(unpublishedFragment.id)
-      )
-    })
+    it('can only see the published fragment in a collection', () =>
+      api.fragments
+        .get({ collection })
+        .expect(STATUS.OK)
+        .then(res =>
+          expect(res.body.map(f => f.id)).not.toContain(unpublishedFragment.id),
+        ))
 
-    it('can only see the filtered list of properties for a fragment', () => {
-      return api.collections.retrieveFragment(collection.id, fragment.id).expect(STATUS.OK).then(
-        res => expect(Object.keys(res.body)).toEqual(['id', 'title', 'source', 'presentation', 'owners'])
-      )
-    })
+    it('can only see the filtered list of properties for a fragment', () =>
+      api.collections
+        .retrieveFragment(collection.id, fragment.id)
+        .expect(STATUS.OK)
+        .then(res =>
+          expect(Object.keys(res.body)).toEqual([
+            'id',
+            'title',
+            'source',
+            'presentation',
+            'owners',
+          ]),
+        ))
 
-    it('can only see the filtered list of properties for a collection', () => {
-      return api.collections.retrieve(collection.id).expect(STATUS.OK).then(
-        res => expect(Object.keys(res.body)).toEqual(['id', 'title', 'owners'])
-      )
-    })
+    it('can only see the filtered list of properties for a collection', () =>
+      api.collections
+        .retrieve(collection.id)
+        .expect(STATUS.OK)
+        .then(res =>
+          expect(Object.keys(res.body)).toEqual(['id', 'title', 'owners']),
+        ))
   })
 
   describe('unpublished fragment', () => {
     beforeEach(() => setNewFragment({ published: false }))
 
-    it('can not list unpublished fragments in a protected collection', () => {
-      return api.fragments.get({ collection }).expect(STATUS.OK).then(
-        res => expect(res.body).toEqual([])
-      )
-    })
+    it('can not list unpublished fragments in a protected collection', () =>
+      api.fragments
+        .get({ collection })
+        .expect(STATUS.OK)
+        .then(res => expect(res.body).toEqual([])))
 
-    it('can not find a fragment in a protected collection', () => {
-      return api.fragments.get({ collection, fragmentId: fragment.id })
-        .expect(STATUS.NOT_FOUND)
-    })
+    it('can not find a fragment in a protected collection', () =>
+      api.fragments
+        .get({ collection, fragmentId: fragment.id })
+        .expect(STATUS.NOT_FOUND))
   })
 
   describe('collections filtering by object and properties', () => {
@@ -71,24 +83,24 @@ describe('unauthenticated/public api', () => {
       publicCollection = new Collection({
         title: 'Public collection',
         published: true,
-        nonPublicProperty: 'example'
+        nonPublicProperty: 'example',
       })
       await publicCollection.save()
 
       privateCollection = new Collection({
-        title: 'Private collection'
+        title: 'Private collection',
       })
       await privateCollection.save()
     })
 
-    it('can only see the filtered list of collections and only filtered properties in each collection', () => {
-      return api.collections.list().expect(STATUS.OK).then(
-        res => {
+    it('can only see the filtered list of collections and only filtered properties in each collection', () =>
+      api.collections
+        .list()
+        .expect(STATUS.OK)
+        .then(res => {
           const collections = res.body
-          expect(collections.length).toEqual(1)
+          expect(collections).toHaveLength(1)
           expect(Object.keys(collections[0])).toEqual(['id', 'title', 'owners'])
-        }
-      )
-    })
+        }))
   })
 })

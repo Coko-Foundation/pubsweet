@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use strict'
 
 const Setup = require('./setup-base.js')
 
@@ -20,40 +19,37 @@ prompt.get(
   {
     properties: {
       username: {
-        description: colors.magenta("What is the admin's username?")
+        description: colors.magenta("What is the admin's username?"),
       },
       email: {
-        description: colors.yellow("What is the admin's email?")
+        description: colors.yellow("What is the admin's email?"),
       },
       password: {
-        description: colors.blue("What is the admin's password?")
+        description: colors.blue("What is the admin's password?"),
       },
       collectionTitle: {
-        description: colors.cyan("What is the collection's title?")
-      }
-    }
+        description: colors.cyan("What is the collection's title?"),
+      },
+    },
   },
   (err, result) => {
     if (err) return logger.info(err)
 
     logger.info('Received the following answers:')
-    logger.info('  username: ' + result.username)
-    logger.info('  email: ' + result.email)
-    logger.info('  password: ' + result.password)
-    logger.info('  collection: ' + result.collectionTitle)
+    logger.info(`  username: ${result.username}`)
+    logger.info(`  email: ${result.email}`)
+    logger.info(`  password: ${result.password}`)
+    logger.info(`  collection: ${result.collectionTitle}`)
 
     // Setup
-    let admin = {
+    const admin = {
       username: result.username,
       email: result.email,
-      password: result.password
+      password: result.password,
     }
 
-    Setup.setup(
-      admin,
-      {title: result.collectionTitle}
-    ).then(
-      () => { logger.info(colors.rainbow('Your PubSweet is now ready!')) }
-    )
-  }
+    Setup.setup(admin, { title: result.collectionTitle }).then(() => {
+      logger.info(colors.rainbow('Your PubSweet is now ready!'))
+    })
+  },
 )

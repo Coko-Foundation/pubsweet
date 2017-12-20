@@ -20,14 +20,14 @@ function getCollectionsRequest() {
 function getCollectionsFailure(error) {
   return {
     type: T.GET_COLLECTIONS_FAILURE,
-    error: error,
+    error,
   }
 }
 
 function getCollectionsSuccess(collections) {
   return {
     type: T.GET_COLLECTIONS_SUCCESS,
-    collections: collections,
+    collections,
     receivedAt: Date.now(),
   }
 }
@@ -39,7 +39,7 @@ export function getCollections(options) {
     let url = collectionUrl()
 
     if (options && options.fields) {
-      url += '?fields=' + encodeURIComponent(options.fields.join(','))
+      url += `?fields=${encodeURIComponent(options.fields.join(','))}`
     }
 
     return api
@@ -60,7 +60,7 @@ function getCollectionTeamsRequest() {
 function getCollectionTeamsFailure(error) {
   return {
     type: T.GET_COLLECTION_TEAMS_FAILURE,
-    error: error,
+    error,
   }
 }
 
@@ -76,7 +76,7 @@ export function getCollectionTeams(collection) {
   return dispatch => {
     dispatch(getCollectionTeamsRequest())
 
-    let url = collectionUrl(collection, 'teams')
+    const url = collectionUrl(collection, 'teams')
 
     return api
       .get(url)
@@ -90,14 +90,14 @@ export function getCollectionTeams(collection) {
 function createCollectionRequest(collection) {
   return {
     type: T.CREATE_COLLECTION_REQUEST,
-    collection: collection,
+    collection,
   }
 }
 
 function createCollectionSuccess(collection) {
   return {
     type: T.CREATE_COLLECTION_SUCCESS,
-    collection: collection,
+    collection,
   }
 }
 
@@ -105,8 +105,8 @@ function createCollectionFailure(collection, error) {
   return {
     type: T.CREATE_COLLECTION_FAILURE,
     isFetching: false,
-    collection: collection,
-    error: error,
+    collection,
+    error,
   }
 }
 
@@ -128,14 +128,14 @@ export function createCollection(collection) {
 function getCollectionRequest(collection) {
   return {
     type: T.GET_COLLECTION_REQUEST,
-    collection: collection,
+    collection,
   }
 }
 
 function getCollectionSuccess(collection) {
   return {
     type: T.GET_COLLECTION_SUCCESS,
-    collection: collection,
+    collection,
     receivedAt: Date.now(),
   }
 }
@@ -144,8 +144,8 @@ function getCollectionFailure(collection, error) {
   return {
     type: T.GET_COLLECTION_FAILURE,
     isFetching: false,
-    collection: collection,
-    error: error,
+    collection,
+    error,
   }
 }
 
@@ -167,15 +167,15 @@ export function getCollection(collection) {
 function updateCollectionRequest(collection) {
   return {
     type: T.UPDATE_COLLECTION_REQUEST,
-    collection: collection,
+    collection,
   }
 }
 
 function updateCollectionSuccess(collection, update) {
   return {
     type: T.UPDATE_COLLECTION_SUCCESS,
-    collection: collection,
-    update: update,
+    collection,
+    update,
     receivedAt: Date.now(),
   }
 }
@@ -184,8 +184,8 @@ function updateCollectionFailure(collection, error) {
   return {
     type: T.UPDATE_COLLECTION_FAILURE,
     isFetching: false,
-    collection: collection,
-    error: error,
+    collection,
+    error,
   }
 }
 
@@ -207,7 +207,7 @@ export function updateCollection(collection) {
 function deleteCollectionRequest(collection) {
   return {
     type: T.DELETE_COLLECTION_REQUEST,
-    collection: collection,
+    collection,
     update: { deleted: true },
   }
 }
@@ -215,16 +215,16 @@ function deleteCollectionRequest(collection) {
 function deleteCollectionSuccess(collection) {
   return {
     type: T.DELETE_COLLECTION_SUCCESS,
-    collection: collection,
+    collection,
   }
 }
 
 function deleteCollectionFailure(collection, error) {
   return {
     type: T.DELETE_COLLECTION_FAILURE,
-    collection: collection,
+    collection,
     update: { deleted: undefined },
-    error: error,
+    error,
   }
 }
 

@@ -1,4 +1,4 @@
 module.exports = {
   start: require('./start'),
-  ...require('./build')
+  ...require('./build'),
 }

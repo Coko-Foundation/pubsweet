@@ -3,10 +3,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import config from 'config'
 import _ from 'lodash/fp'
+import 'event-source-polyfill'
 
 import * as T from '../actions/types'
-import 'event-source-polyfill'
 import token from '../helpers/token'
+import { selectCurrentUser } from '../selectors'
 
 const actionMap = {
   'collection:create': T.CREATE_COLLECTION_SUCCESS,
@@ -31,7 +32,7 @@ export class UpdateSubscriber extends Component {
 
   componentDidMount() {
     this.subscribe(this.props)
-    this.setState({ visible: this.visible() })
+    this.setState({ visible: UpdateSubscriber.visible() })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,11 +45,10 @@ export class UpdateSubscriber extends Component {
     if (this.eventSource) {
       this.removeAllEventListeners()
       this.eventSource.close()
-      // delete this.eventSource
     }
   }
 
-  visible() {
+  static visible() {
     return _.get('pubsweet-client.update-subscriber.visible', config, false)
   }
 
@@ -59,7 +59,6 @@ export class UpdateSubscriber extends Component {
     }
 
     this.heartbeat = window.setTimeout(() => {
-      // console.log('no heartbeat - reconnecting…')
       this.subscribe(this.props)
     }, 30000)
   }
@@ -73,24 +72,20 @@ export class UpdateSubscriber extends Component {
 
       // clear any existing heartbeat monitor
       if (this.heartbeat) {
-        // console.log('clearing timeout')
         window.clearTimeout(this.heartbeat)
       }
 
       // close any existing connection
       if (this.eventSource) {
-        // console.log('closing')
         this.eventSource.close()
       }
 
       // EventSource can't have Authorization header, so have to use query string
-      const url = '/updates?access_token=' + encodeURIComponent(token())
+      const url = `/updates?access_token=${encodeURIComponent(token())}`
 
       this.eventSource = new window.EventSource(url)
 
       this.listeners.error = () => {
-        // console.log('error', this.eventSource.readyState)
-
         switch (this.eventSource.readyState) {
           case 0: // CONNECTING
             this.setState({ connected: false })
@@ -100,21 +95,18 @@ export class UpdateSubscriber extends Component {
             this.setState({ connected: false })
             this.monitor() // try again in a while if not connected
             break
+
+          default: // do nothing
         }
       }
 
       this.listeners.close = () => {
-        // console.log('close')
-
         this.setState({ connected: false })
         // this.monitor() // don't try to reconnect, as "close" without error is deliberate
       }
 
       this.listeners.message = event => {
-        // console.log('message', event)
-
         if (event.origin !== window.location.origin) {
-          // console.error('Message from unexpected origin', event.origin)
           return
         }
 
@@ -126,13 +118,11 @@ export class UpdateSubscriber extends Component {
       }
 
       this.listeners.open = () => {
-        // console.log('open')
         this.setState({ connected: true })
       }
 
       // listen for a heartbeat message
       this.listeners.pulse = () => {
-        // console.log('❤️')
         this.monitor()
       }
 
@@ -171,7 +161,7 @@ UpdateSubscriber.propTypes = {
 
 export default connect(
   state => ({
-    currentUser: state.currentUser,
+    currentUser: selectCurrentUser(state),
   }),
   dispatch => ({
     handleUpdate: (type, body) => dispatch({ type, ...body }),

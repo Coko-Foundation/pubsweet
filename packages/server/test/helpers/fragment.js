@@ -6,12 +6,8 @@ module.exports = (opts, collection) => {
   const fragment = new Fragment(fixtures.fragment)
   assign(fragment, opts)
 
-  return fragment.save().then(
-    () => {
-      collection.addFragment(fragment)
-      return collection.save().then(
-        () => fragment
-      )
-    }
-  )
+  return fragment.save().then(() => {
+    collection.addFragment(fragment)
+    return collection.save().then(() => fragment)
+  })
 }

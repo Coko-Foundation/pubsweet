@@ -11,27 +11,27 @@ const configureStore = require('../../src/store/configureStore')
 const history = createHistory()
 const store = configureStore(history, {})
 
-const theme = { ThemedComponent: {testClass: 'mappedClassName'} }
+const themeObj = { ThemedComponent: { testClass: 'mappedClassName' } }
 
 const ThemedComponent = themr('ThemedComponent')(({ theme }) => (
-  <div className={theme.testClass}></div>
+  <div className={theme.testClass} />
 ))
 
 function makeWrapper(props = {}) {
   return shallow(
     <Root
-      store={store}
       history={history}
       routes={<ThemedComponent />}
-      theme={theme}
+      store={store}
+      theme={themeObj}
       {...props}
-    />
+    />,
   )
 }
 
 describe('<Root/>', () => {
   it('Adds a theme to context', async () => {
-    const wrapper = makeWrapper({ theme })
+    const wrapper = makeWrapper()
     expect(wrapper.html()).toBe('<div class="mappedClassName"></div>')
   })
 })

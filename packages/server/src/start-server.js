@@ -4,7 +4,10 @@ const Promise = require('bluebird')
 const logger = require('@pubsweet/logger')
 
 const startServer = async app => {
-  const port = config['pubsweet-server'].port || /*deprecated:-->*/process.env.PORT || 3000
+  const port =
+    config['pubsweet-server'].port ||
+    /* deprecated:--> */ process.env.PORT ||
+    3000
   app.set('port', port)
   const server = http.createServer(app)
   logger.info(`Starting HTTP server`)

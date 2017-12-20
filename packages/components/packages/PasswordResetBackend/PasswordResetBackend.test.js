@@ -5,19 +5,24 @@ const supertest = require('supertest')
 const config = require('config')
 
 // mocks
-config['password-reset'] = {url: '/', sender: 'me'}
-jest.mock('./transport', () => ({sendMail: jest.fn()}))
+config['password-reset'] = { url: '/', sender: 'me' }
+jest.mock('./transport', () => ({ sendMail: jest.fn() }))
 
 const transport = require('./transport')
 const component = require('.')
 
-function makeApp (response) {
+function makeApp(response) {
   const app = express()
   // mock DB
   app.locals.models = {
     User: {
-      findByField: jest.fn(() => response instanceof Error ? Promise.reject(response) : Promise.resolve(response))
-    }
+      findByField: jest.fn(
+        () =>
+          response instanceof Error
+            ? Promise.reject(response)
+            : Promise.resolve(response),
+      ),
+    },
   }
   // register component
   component.backend()(app)
@@ -27,23 +32,23 @@ function makeApp (response) {
 
 describe('/api/password-reset route', () => {
   describe('initial validation', () => {
-    it('errors if no username', () => makeApp()
+    it('errors if no username', () =>
+      makeApp()
         .post('/api/password-reset')
         .send({})
-        .expect(400, '{"error":"Username must be specified"}')
-    )
+        .expect(400, '{"error":"Username must be specified"}'))
 
-    it('errors if no user', () => makeApp(null)
+    it('errors if no user', () =>
+      makeApp(null)
         .post('/api/password-reset')
-        .send({username: 'hey'})
-        .expect(400, '{"error":"User not found"}')
-    )
+        .send({ username: 'hey' })
+        .expect(400, '{"error":"User not found"}'))
 
-    it('errors if DB call fails', () => makeApp(new Error('Ops!'))
+    it('errors if DB call fails', () =>
+      makeApp(new Error('Ops!'))
         .post('/api/password-reset')
-        .send({username: 'hey'})
-        .expect(500)
-    )
+        .send({ username: 'hey' })
+        .expect(500))
   })
 
   describe('sending email', () => {
@@ -51,22 +56,24 @@ describe('/api/password-reset route', () => {
       const user = {
         username: 'hey',
         email: 'hey@here.com',
-        save: jest.fn()
+        save: jest.fn(),
       }
       return makeApp([user])
-          .post('/api/password-reset')
-          .send({username: user.username})
-          .expect(200)
-          .then(() => {
-            expect(user.passwordResetToken).toBeDefined()
-            expect(user.passwordResetTimestamp).toBeDefined()
-            expect(user.save).toHaveBeenCalled()
-            expect(transport.sendMail).toHaveBeenCalledWith(expect.objectContaining({
+        .post('/api/password-reset')
+        .send({ username: user.username })
+        .expect(200)
+        .then(() => {
+          expect(user.passwordResetToken).toBeDefined()
+          expect(user.passwordResetTimestamp).toBeDefined()
+          expect(user.save).toHaveBeenCalled()
+          expect(transport.sendMail).toHaveBeenCalledWith(
+            expect.objectContaining({
               from: 'me',
               to: user.email,
-              subject: 'Password reset'
-            }))
-          })
+              subject: 'Password reset',
+            }),
+          )
+        })
     })
   })
 
@@ -74,24 +81,28 @@ describe('/api/password-reset route', () => {
     it('errors if reset token does not match', () => {
       const user = {
         username: 'hey',
-        passwordResetToken: '123'
+        passwordResetToken: '123',
       }
       return makeApp([user])
-          .post('/api/password-reset')
-          .send({username: user.username, token: 'wrong', password: 'new pass'})
-          .expect(400, '{"error":"invalid"}')
+        .post('/api/password-reset')
+        .send({ username: user.username, token: 'wrong', password: 'new pass' })
+        .expect(400, '{"error":"invalid"}')
     })
 
     it('errors if reset timestamp is in the past', () => {
       const user = {
         username: 'hey',
         passwordResetToken: '123',
-        passwordResetTimestamp: Date.now() - 1000 * 60 * 60 * 24 * 2
+        passwordResetTimestamp: Date.now() - 1000 * 60 * 60 * 24 * 2,
       }
       return makeApp([user])
-          .post('/api/password-reset')
-          .send({username: user.username, token: user.passwordResetToken, password: 'new pass'})
-          .expect(400, '{"error":"expired"}')
+        .post('/api/password-reset')
+        .send({
+          username: user.username,
+          token: user.passwordResetToken,
+          password: 'new pass',
+        })
+        .expect(400, '{"error":"expired"}')
     })
 
     it('saves user if all valid', () => {
@@ -99,13 +110,17 @@ describe('/api/password-reset route', () => {
         username: 'hey',
         passwordResetToken: '123',
         passwordResetTimestamp: Date.now(),
-        save: jest.fn()
+        save: jest.fn(),
       }
       return makeApp([user])
-          .post('/api/password-reset')
-          .send({username: user.username, token: user.passwordResetToken, password: 'new pass'})
-          .expect(200)
-          .then(() => expect(user.save).toHaveBeenCalled())
+        .post('/api/password-reset')
+        .send({
+          username: user.username,
+          token: user.passwordResetToken,
+          password: 'new pass',
+        })
+        .expect(200)
+        .then(() => expect(user.save).toHaveBeenCalled())
     })
   })
 })

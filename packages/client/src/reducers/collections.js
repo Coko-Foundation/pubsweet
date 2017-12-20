@@ -1,3 +1,10 @@
+import find from 'lodash/find'
+import union from 'lodash/union'
+import difference from 'lodash/difference'
+import clone from 'lodash/clone'
+import findIndex from 'lodash/findIndex'
+import without from 'lodash/without'
+
 import {
   GET_COLLECTIONS_SUCCESS,
   GET_COLLECTIONS_FAILURE,
@@ -12,13 +19,6 @@ import {
   DELETE_FRAGMENT_SUCCESS,
   LOGOUT_SUCCESS,
 } from '../actions/types'
-
-import find from 'lodash/find'
-import union from 'lodash/union'
-import difference from 'lodash/difference'
-import clone from 'lodash/clone'
-import findIndex from 'lodash/findIndex'
-import without from 'lodash/without'
 
 export default function(state = [], action) {
   const collections = clone(state)
@@ -124,7 +124,8 @@ export default function(state = [], action) {
 
     case LOGOUT_SUCCESS:
       return []
-  }
 
-  return state
+    default:
+      return state
+  }
 }

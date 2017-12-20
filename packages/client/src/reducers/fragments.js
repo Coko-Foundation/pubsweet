@@ -1,3 +1,6 @@
+import clone from 'lodash/clone'
+import unset from 'lodash/unset'
+
 import {
   GET_FRAGMENTS_SUCCESS,
   CREATE_FRAGMENT_REQUEST,
@@ -13,9 +16,6 @@ import {
   DELETE_FRAGMENT_SUCCESS,
   LOGOUT_SUCCESS,
 } from '../actions/types'
-
-import clone from 'lodash/clone'
-import unset from 'lodash/unset'
 
 export default function(state = {}, action) {
   const fragments = clone(state)
@@ -74,7 +74,8 @@ export default function(state = {}, action) {
 
     case LOGOUT_SUCCESS:
       return {}
-  }
 
-  return state
+    default:
+      return state
+  }
 }

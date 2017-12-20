@@ -30,6 +30,12 @@ class Menu extends React.Component {
     this.props.onChange(selected)
   }
 
+  handleKeyPress = (event, selected) => {
+    if (event.which === 13) {
+      this.handleSelect(selected)
+    }
+  }
+
   optionLabel = value => {
     const { options } = this.props
 
@@ -48,7 +54,7 @@ class Menu extends React.Component {
       >
         {label && <span className={classes.label}>{label}</span>}
 
-        <div className={classes.main}>
+        <div className={classes.main} role="listbox">
           <div className={classes.openerContainer}>
             <button
               className={classes.opener}
@@ -69,11 +75,17 @@ class Menu extends React.Component {
               <div className={classes.options}>
                 {options.map(option => (
                   <div
+                    aria-selected={option.value === selected}
                     className={classnames(classes.option, {
                       [classes.active]: option.value === selected,
                     })}
                     key={option.value}
                     onClick={() => this.handleSelect(option.value)}
+                    onKeyPress={event =>
+                      this.handleKeyPress(event, option.value)
+                    }
+                    role="option"
+                    tabIndex="0"
                   >
                     {option.label || option.value}
                   </div>

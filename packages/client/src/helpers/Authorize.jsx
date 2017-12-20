@@ -1,11 +1,10 @@
-'use strict'
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import withAuthsome from './withAuthsome'
+import { selectCurrentUser } from '../selectors'
 
 export class Authorize extends React.Component {
   constructor(props) {
@@ -57,10 +56,7 @@ Authorize.propTypes = {
 
 function mapState(state) {
   return {
-    teams: state.teams,
-    collections: state.collections,
-    fragments: state.fragments,
-    currentUser: state.currentUser.user,
+    currentUser: selectCurrentUser(state),
   }
 }
 

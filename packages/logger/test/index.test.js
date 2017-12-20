@@ -1,9 +1,9 @@
-'use strict'
-
+/* eslint-disable no-console */
 process.env.ALLOW_CONFIG_MUTATIONS = true
 
 let config = require('config')
-config['pubsweet-server'] = { }
+
+config['pubsweet-server'] = {}
 
 describe('Logging manager', () => {
   describe('when no logger is specifed', () => {
@@ -84,7 +84,7 @@ describe('Logging manager', () => {
       jest.resetModules()
       config = require('config')
       const logger = require('../src/')
-      const bunyan = require('bunyan').createLogger({name: 'test'})
+      const bunyan = require('bunyan').createLogger({ name: 'test' })
       jest.spyOn(bunyan, 'debug').mockImplementation()
       jest.spyOn(bunyan, 'info').mockImplementation()
       jest.spyOn(bunyan, 'warn').mockImplementation()
@@ -115,7 +115,7 @@ describe('Logging manager', () => {
     it('which returns raw logger', () => {
       jest.resetModules()
       const logger = require('../src/')
-      const bunyan = require('bunyan').createLogger({name: 'test'})
+      const bunyan = require('bunyan').createLogger({ name: 'test' })
       logger.configure(bunyan)
       const rawLogger = logger.getRawLogger()
       expect(rawLogger.fields.name).toBe('test')
@@ -126,7 +126,7 @@ describe('Logging manager', () => {
     it('sets logger to "bunyan" if specified', () => {
       jest.resetModules()
       config = require('config')
-      const bunyan = require('bunyan').createLogger({name: 'test'})
+      const bunyan = require('bunyan').createLogger({ name: 'test' })
       config['pubsweet-server'] = { logger: bunyan }
       const logger = require('../src/')
       const rawLogger = logger.getRawLogger()

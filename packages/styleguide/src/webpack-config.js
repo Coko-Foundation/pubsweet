@@ -13,7 +13,7 @@ module.exports = dir => {
     /wax-[^/]+\/src/,
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
-    /ui\/src/
+    /ui\/src/,
   ]
 
   return {

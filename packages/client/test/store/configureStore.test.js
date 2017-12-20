@@ -10,12 +10,10 @@ describe('configureStore', () => {
     const customInitialState = { collections: ['initial'] }
 
     const customReducers = {
-      test: (state, action) => {
-        return {
-          ...state,
-          fired: action.fired,
-        }
-      },
+      test: (state, action) => ({
+        ...state,
+        fired: action.fired,
+      }),
     }
 
     const customMiddlewares = [

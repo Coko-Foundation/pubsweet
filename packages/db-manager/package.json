@@ -5,51 +5,32 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "precommit": "lint-staged",
-    "test:ci": "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
+    "test:ci":
+      "gitlab-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
     "vuln-test": "nsp check --output checkstyle"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.coko.foundation:yld/db-manager.git"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "keywords": [
-    "pubsweet",
-    "database"
-  ],
+  "keywords": ["pubsweet", "database"],
   "engines": {
     "node": ">=7.9.0",
     "npm": ">=3.0.0"
   },
   "jest": {
-    "testMatch": [
-      "**/test/**/*.js"
-    ],
+    "testMatch": ["**/test/**/*.js"],
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
-    "modulePaths": [
-      "<rootDir>/node_modules"
-    ],
+    "collectCoverageFrom": ["src/**/*.js"],
+    "modulePaths": ["<rootDir>/node_modules"],
     "testEnvironment": "node",
     "verbose": true
   },
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^4.13.1",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "husky": "^0.14.3",
     "jest": "^21.1.0",
-    "lint-staged": "^6.0.0",
-    "nsp": "^2.8.0",
-    "prettier": "^1.7.4"
+    "nsp": "^2.8.0"
   },
   "dependencies": {
     "@pubsweet/logger": "^0.0.2",

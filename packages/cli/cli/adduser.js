@@ -6,8 +6,9 @@ const _ = require('lodash')
 const config = require('config')
 
 const readCommand = async argsOverride => {
-  program
-    .description('Add a user to a database of a PubSweet app. Run from your project root')
+  program.description(
+    'Add a user to a database of a PubSweet app. Run from your project root',
+  )
 
   _.forEach(properties, (value, key) => {
     if (_.get('type', value) === 'boolean') {
@@ -25,7 +26,7 @@ module.exports = async argsOverride => {
 
   const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
   const promptOverride = _.merge(configOpts, commandOpts)
-  const finalOpts = await runPrompt({properties, override: promptOverride})
+  const finalOpts = await runPrompt({ properties, override: promptOverride })
 
   return addUser(finalOpts)
 }

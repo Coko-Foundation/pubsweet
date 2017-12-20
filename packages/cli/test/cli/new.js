@@ -11,6 +11,7 @@ const { getMockArgv } = require('../helpers/')
 const runNew = require('../../cli/new')
 
 const spawnSpy = require('child_process').spawnSync
+
 const removeSpy = fs.removeSync
 
 const appName = 'testapp'
@@ -18,8 +19,8 @@ const appPath = path.join(process.cwd(), appName)
 
 describe('new', () => {
   it('spawns git and yarn child processes with correct arguments', async () => {
-    await runNew(getMockArgv({args: appName}))
-    const calls = spawnSpy.mock.calls
+    await runNew(getMockArgv({ args: appName }))
+    const { calls } = spawnSpy.mock
     expect(calls).toHaveLength(2)
     expect(calls[0][1][2]).toBe(appName)
     expect(calls[1][2].cwd).toBe(appPath)
@@ -27,8 +28,8 @@ describe('new', () => {
 
   it('will not overwrite dir without clobber passed', async () => {
     fs.ensureDirSync(path.join(appPath, 'block-write'))
-    await runNew(getMockArgv({args: appName}))
-    const calls = removeSpy.mock.calls
+    await runNew(getMockArgv({ args: appName }))
+    const { calls } = removeSpy.mock
     expect(calls).toHaveLength(0)
     const notOverwritten = fs.existsSync(appPath)
     expect(notOverwritten).toBeTruthy()
@@ -37,8 +38,8 @@ describe('new', () => {
 
   it('will overwrite dir with clobber passed', async () => {
     fs.ensureDirSync(path.join(appPath, 'block-write'))
-    await runNew(getMockArgv({args: appName, options: {clobber: true}}))
-    const calls = removeSpy.mock.calls
+    await runNew(getMockArgv({ args: appName, options: { clobber: true } }))
+    const { calls } = removeSpy.mock
     expect(calls[0][0]).toBe(appPath)
     require.requireActual('fs-extra').removeSync(appPath)
   })

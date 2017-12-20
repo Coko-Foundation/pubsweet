@@ -17,12 +17,16 @@ const { getMockArgv } = require('../helpers/')
 const runAdd = require('../../cli/add')
 
 const spawnSpy = require('child_process').spawnSync
-const readPkgSpy = require('../../src/package-management/helpers/').getDepsFromPackageJson
+const readPkgSpy = require('../../src/package-management/helpers/')
+  .getDepsFromPackageJson
+
 const writeSpy = fs.writeJsonSync
 
 describe('add', () => {
   beforeAll(() => {
-    process.chdir(path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'))
+    process.chdir(
+      path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'),
+    )
   })
 
   beforeEach(() => {
@@ -34,8 +38,7 @@ describe('add', () => {
   })
 
   it('requires a component', async () => {
-    await expect(runAdd(getMockArgv(''))).rejects
-      .toBeInstanceOf(Error)
+    await expect(runAdd(getMockArgv(''))).rejects.toBeInstanceOf(Error)
   })
 
   it('calls function to write new component into components.json with correct argument', async () => {
@@ -44,16 +47,16 @@ describe('add', () => {
     readPkgSpy
       .mockImplementationOnce(() => ({}))
       .mockImplementationOnce(() => ({ [fullName]: 'version' }))
-    await runAdd(getMockArgv({args: componentName}))
-    const calls = writeSpy.mock.calls
+    await runAdd(getMockArgv({ args: componentName }))
+    const { calls } = writeSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1]).toContain(fullName)
   })
 
   it('spawns yarn child process with correct arguments', async () => {
     const componentName = 'test-widget'
-    await runAdd(getMockArgv({args: componentName}))
-    const calls = spawnSpy.mock.calls
+    await runAdd(getMockArgv({ args: componentName }))
+    const { calls } = spawnSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1][1]).toBe(`pubsweet-component-${componentName}`)
   })

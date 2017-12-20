@@ -6,22 +6,30 @@ $color: var(--color-primary);
 $color-back: white;
 
 @mixin realBorder($color, $colorback) {
-  background: linear-gradient($colorback 0, $colorback 1.2em, $color 1.2em, $color 1.25em, $colorback 1.25em, $colorback 2em) no-repeat;
-  text-shadow: 0.05em 0.05em 0 $colorback, -0.05em -0.05em 0 $colorback, -0.05em 0.05em 0 $colorback, 0.05em -0.05em 0 $colorback;
+  background: linear-gradient(
+      $colorback 0,
+      $colorback 1.2em,
+      $color 1.2em,
+      $color 1.25em,
+      $colorback 1.25em,
+      $colorback 2em
+    )
+    no-repeat;
+  text-shadow: 0.05em 0.05em 0 $colorback, -0.05em -0.05em 0 $colorback,
+    -0.05em 0.05em 0 $colorback, 0.05em -0.05em 0 $colorback;
 }
 
 .root {
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: 'Fira Sans Condensed', sans-serif;
 }
 
 .react-tags {
-  position: relative;
-  padding: 6px 0 0 6px;
-  font-size: 1em;
-  line-height: 1.2;
-
   /* clicking anywhere will focus the input */
   cursor: text;
+  font-size: 1em;
+  line-height: 1.2;
+  padding: 6px 0 0 6px;
+  position: relative;
 }
 
 .react-tags.is-focused {
@@ -33,33 +41,34 @@ $color-back: white;
 }
 
 .react-tags__selected-tag {
-  font-family: "Vollkorn", serif;
-  display: inline-block;
-  box-sizing: border-box;
-  margin: 0 1em 1em 0;
-  padding: 0.1em 0.3em;
   border: 0 solid transparent;
-  @include realBorder(#aaa, white);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Vollkorn', serif;
 
   /* match the font styles */
   font-size: inherit;
   line-height: inherit;
-  cursor: pointer;
+  margin: 0 1em 1em 0;
+  padding: 0.1em 0.3em;
+
+  @include realBorder(#aaa, white);
 }
 
 .react-tags__selected-tag::after {
-  content: '\2715';
-  margin-left: 8px;
-  padding: 3px 0 0;
-  // margin: 0;
-  display: inline-block;
-  width: 13px;
-  height: 10px;
-  font-size: 0.9em;
   background: white;
   color: #aaa;
+  content: '\2715';
+  // margin: 0;
+  display: inline-block;
+  font-size: 0.9em;
   font-weight: 600;
+  height: 10px;
+  margin-left: 8px;
+  padding: 3px 0 0;
   text-shadow: none;
+  width: 13px;
 
   &:hover {
     background: var(--color-primary);
@@ -68,9 +77,9 @@ $color-back: white;
 
 .react-tags__selected-tag:hover,
 .react-tags__selected-tag:focus {
-  @include realBorder(transparent, white);
-
   text-decoration: line-through;
+
+  @include realBorder(transparent, white);
 
   &::after {
     color: var(--color-danger);
@@ -82,10 +91,10 @@ $color-back: white;
 
   /* match tag layout */
   margin: 0 1em 1em 0;
-  padding: 0.1em 0.3em;
 
   /* prevent autoresize overflowing the container */
   max-width: 100px;
+  padding: 0.1em 0.3em;
 }
 
 @media screen and (min-width: 30em) {
@@ -96,25 +105,26 @@ $color-back: white;
 }
 
 .react-tags__search input {
-  /* prevent autoresize overflowing the container */
-  max-width: 100%;
-
-  /* remove styles and layout from this element */
-  margin: 0;
-  padding: 0;
   border: 0;
-  outline: none;
+  border-bottom: 1px dashed grey;
+  color: black; // color: red;
+  font-family: 'Vollkorn', serif;
 
   /* match the font styles */
   font-size: inherit;
   line-height: inherit;
-  border-bottom: 1px dashed grey;
+
+  /* remove styles and layout from this element */
+  margin: 0;
+
+  /* prevent autoresize overflowing the container */
+  max-width: 100%;
   min-width: 15ch;
-  font-family: "Vollkorn", serif;
-  color: black; // color: red;
+  outline: none;
+  padding: 0;
 
   &::placeholder {
-    font-family: "Fira Sans Condensed", sans-serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
     opacity: 0.5;
   }
 

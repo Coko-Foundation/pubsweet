@@ -7,7 +7,7 @@ const PouchDB = require('pouchdb-core')
   .plugin(require('pouchdb-upsert'))
   .plugin(require('relational-pouch'))
 
-const getAdapterIdentifier = (dbPath) => {
+const getAdapterIdentifier = dbPath => {
   if (config.has('pubsweet-server.adapter')) {
     return config.get('pubsweet-server.adapter')
   }
@@ -23,7 +23,7 @@ const getAdapterIdentifier = (dbPath) => {
   return 'leveldb'
 }
 
-const preparePouchConfig = (adapter) => {
+const preparePouchConfig = adapter => {
   switch (adapter) {
     case 'memory':
       PouchDB.plugin(require('pouchdb-adapter-memory'))
@@ -37,6 +37,9 @@ const preparePouchConfig = (adapter) => {
     case 'leveldb':
       PouchDB.plugin(require('pouchdb-adapter-leveldb'))
       return { name: dbPath, adapter }
+
+    default:
+      throw new Error('Unrecognised DB adapter')
   }
 }
 
@@ -44,8 +47,7 @@ const dbPath = _.get('pubsweet-server.dbPath', config)
 const adapterIdentifier = getAdapterIdentifier(dbPath)
 const pouchConfig = preparePouchConfig(adapterIdentifier)
 
-module.exports = () => {
+module.exports = () =>
   // Pass name as first arg because passing { name } on options
-  // seems to produce different result (see Pouch issue #1137 ?) 
-  return new PouchDB(pouchConfig.name, { adapter: pouchConfig.adapter })
-}
+  // seems to produce different result (see Pouch issue #1137 ?)
+  new PouchDB(pouchConfig.name, { adapter: pouchConfig.adapter })

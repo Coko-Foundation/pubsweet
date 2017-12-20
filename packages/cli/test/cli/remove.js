@@ -17,12 +17,16 @@ const { getMockArgv } = require('../helpers/')
 const runRemove = require('../../cli/remove')
 
 const spawnSpy = require('child_process').spawnSync
-const readPkgSpy = require('../../src/package-management/helpers/').getDepsFromPackageJson
+const readPkgSpy = require('../../src/package-management/helpers/')
+  .getDepsFromPackageJson
+
 const writeSpy = fs.writeJsonSync
 
 describe('remove', () => {
   beforeAll(() => {
-    process.chdir(path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'))
+    process.chdir(
+      path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'),
+    )
   })
 
   beforeEach(() => {
@@ -34,8 +38,7 @@ describe('remove', () => {
   })
 
   it('requires a component', async () => {
-    await expect(runRemove(getMockArgv(''))).rejects
-      .toBeInstanceOf(Error)
+    await expect(runRemove(getMockArgv(''))).rejects.toBeInstanceOf(Error)
   })
 
   it('removes component from components.json', async () => {
@@ -44,16 +47,16 @@ describe('remove', () => {
     readPkgSpy
       .mockImplementationOnce(() => ({ [fullName]: 'version' }))
       .mockImplementationOnce(() => ({}))
-    await runRemove(getMockArgv({args: componentName}))
-    const calls = writeSpy.mock.calls
+    await runRemove(getMockArgv({ args: componentName }))
+    const { calls } = writeSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1]).not.toContain(fullName)
   })
 
   it('spawns yarn child process with correct arguments', async () => {
     const componentName = 'test-widget'
-    await runRemove(getMockArgv({args: componentName}))
-    const calls = spawnSpy.mock.calls
+    await runRemove(getMockArgv({ args: componentName }))
+    const { calls } = spawnSpy.mock
     expect(calls).toHaveLength(1)
     expect(calls[0][1][1]).toBe(`pubsweet-component-${componentName}`)
   })

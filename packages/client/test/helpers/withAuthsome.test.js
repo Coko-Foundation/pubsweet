@@ -4,7 +4,8 @@ import configureStore from 'redux-mock-store'
 import Authsome from 'authsome'
 
 import withAuthsome from '../../src/helpers/withAuthsome'
-jest.mock('fake-mode', () => false, {virtual: true})
+
+jest.mock('fake-mode', () => false, { virtual: true })
 
 describe('withAuthsome higher order component', () => {
   const createStore = configureStore()

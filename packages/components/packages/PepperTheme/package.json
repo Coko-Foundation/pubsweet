@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://gitlab.coko.foundation/pubsweet-components.git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "PepperTheme"
   }
 }

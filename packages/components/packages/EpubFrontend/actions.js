@@ -2,34 +2,34 @@ import fetch from 'isomorphic-fetch'
 import { stringify } from 'querystring'
 import * as T from './types'
 
-function htmlToEpubRequest () {
+function htmlToEpubRequest() {
   return {
-    type: T.HTML_TO_EPUB_CONV_REQUEST
+    type: T.HTML_TO_EPUB_CONV_REQUEST,
   }
 }
 
-function htmlToEpubSuccess (extractedEpubPath) {
+function htmlToEpubSuccess(extractedEpubPath) {
   return {
     type: T.HTML_TO_EPUB_CONV_SUCCESS,
-    extractedEpubPath
+    extractedEpubPath,
   }
 }
 
-function htmlToEpubFailure (message) {
+function htmlToEpubFailure(message) {
   return {
     type: T.HTML_TO_EPUB_CONV_FAILURE,
-    error: message
+    error: message,
   }
 }
 
 // TODO: use `api` from pubsweet-client instead of `fetch`, for authentication
-export function htmlToEpub (bookId, options) {
+export function htmlToEpub(bookId, options) {
   const params = stringify(options)
 
-  return function (dispatch) {
+  return dispatch => {
     dispatch(htmlToEpubRequest())
 
-    return fetch(`/api/collections/${bookId}/epub?` + params)
+    return fetch(`/api/collections/${bookId}/epub?${params}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText)

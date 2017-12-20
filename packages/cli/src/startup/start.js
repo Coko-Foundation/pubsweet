@@ -14,7 +14,8 @@ const start = async () => {
   return server
 }
 
-if (require.main === module) { // file is being executed
+if (require.main === module) {
+  // file is being executed
   start()
 } else {
   module.exports = start

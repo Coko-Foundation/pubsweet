@@ -2,7 +2,7 @@ const path = require('path')
 const logger = require('@pubsweet/logger')
 const fs = require('fs-extra')
 const _ = require('lodash')
-const spawnSync = require('child_process').spawnSync
+const { spawnSync } = require('child_process')
 const { resolveName, getDepsFromPackageJson } = require('./helpers/')
 
 const remove = names => {
@@ -15,9 +15,9 @@ const updateConfig = removedComponents => {
   const configFile = path.join(process.cwd(), 'config', 'components.json')
   logger.info(`Removing components from ${configFile}`)
   fs.ensureFileSync(configFile)
-  const oldComponents = fs.readJsonSync(configFile, {throws: false})
+  const oldComponents = fs.readJsonSync(configFile, { throws: false })
   const newComponents = _.difference(oldComponents, removedComponents)
-  fs.writeJsonSync(configFile, newComponents, {spaces: '\t'})
+  fs.writeJsonSync(configFile, newComponents, { spaces: '\t' })
   logger.info('Finished updating components.json config')
 }
 

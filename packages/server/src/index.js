@@ -1,5 +1,6 @@
 const path = require('path')
 const config = require('config')
+
 const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
 
@@ -11,6 +12,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const index = require('./routes/index')
 const api = require('./routes/api')
+const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
@@ -20,12 +22,12 @@ const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
 const startServer = require('./start-server')
 
-const configureApp = (app) => {
+const configureApp = app => {
   global.versions = {}
 
   app.locals.models = models
 
-  app.use(morgan('combined', { 'stream': logger.stream }))
+  app.use(morgan('combined', { stream: logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
 
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -40,6 +42,9 @@ const configureApp = (app) => {
   passport.use('anonymous', authentication.strategies.anonymous)
   passport.use('local', authentication.strategies.local)
 
+  app.locals.passport = passport
+  app.locals.authsome = authsome
+
   registerComponents(app)
 
   // Main API
@@ -47,7 +52,11 @@ const configureApp = (app) => {
 
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
-    app.get('/updates', passport.authenticate('bearer', { session: false }), sse.connect)
+    app.get(
+      '/updates',
+      passport.authenticate('bearer', { session: false }),
+      sse.connect,
+    )
   }
 
   // Serve the index page for front end
@@ -69,9 +78,10 @@ const configureApp = (app) => {
       return res.status(err.status).json({ message: err.message })
     } else if (err.name === 'AuthenticationError') {
       return res.status(STATUS.UNAUTHORIZED).json({ message: err.message })
-    } else {
-      return res.status(err.status || STATUS.INTERNAL_SERVER_ERROR).json({ message: err.message })
     }
+    return res
+      .status(err.status || STATUS.INTERNAL_SERVER_ERROR)
+      .json({ message: err.message })
   })
 
   return app

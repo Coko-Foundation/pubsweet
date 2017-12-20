@@ -1,14 +1,20 @@
 image: pubsweet/pubsweet-test-base
 
-before_script:
-  - yarn
+install:
+  stage: build
+  script: yarn
+  artifacts:
+    expire_in: 1h
+    paths:
+      - node_modules
+      - packages/*/node_modules
+      - packages/components/packages/*/node_modules
+
+lint:style:
+ script: npm run lint:style
+
+lint:js:
+ script: npm run lint:js
 
 test:
-  script:
-    - npm test
-  coverage: '/^All files\s+\|\s+(\d+.\d+)\s\|.*$/'
-
-lint:
-  script:
-    - npm run lint
-
+  script: npm run test
