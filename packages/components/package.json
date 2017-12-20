@@ -1,12 +1,13 @@
 {
   "name": "pubsweet-components",
-  "version": "0.0.0",
+  "version": "0.0.2",
+  "private": true,
   "scripts": {
     "styleguide": "styleguidist server",
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "@pubsweet/logger": "^0.0.1",
+    "@pubsweet/logger": "^0.0.2",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
@@ -26,10 +27,10 @@
     "joi-browser": "^10.6.1",
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
-    "pubsweet": "^1.0.0-alpha.4",
-    "pubsweet-client": "^1.0.0",
-    "pubsweet-server": "^1.0.0",
-    "pubsweet-theme-plugin": "0.0.1",
+    "pubsweet": "^1.1.1",
+    "pubsweet-client": "^1.1.1",
+    "pubsweet-server": "^1.0.1",
+    "pubsweet-theme-plugin": "^0.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2",

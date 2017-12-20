@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/theme",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CSS for PubSweet apps and styleguides",
   "main": "src",
   "license": "MIT",
@@ -13,5 +13,8 @@
   },
   "dependencies_disabled": {
     "pubsweet-fira": "^0.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

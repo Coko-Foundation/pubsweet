@@ -1,8 +1,7 @@
 {
   "name": "@pubsweet/logger",
-  "version": "0.0.1",
-  "description":
-    "A module encapsulating standard logging features for pubsweet components and services.",
+  "version": "0.0.2",
+  "description": "A module encapsulating standard logging features for pubsweet components and services.",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",

@@ -1,15 +1,14 @@
 {
   "name": "pubsweet-component-form-group",
-  "version": "0.1.2",
-  "description":
-    "Form component based on react-bootstrap with validation support for PubSweet",
+  "version": "0.1.3",
+  "description": "Form component based on react-bootstrap with validation support for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
     "joi-browser": "^10.0.6",
     "prop-types": "^15.5.10",
-    "pubsweet-server": "^1.0.0-alpha.3",
+    "pubsweet-server": "^1.0.1",
     "react-bootstrap": "^0.31.3"
   },
   "peerDependencies": {
