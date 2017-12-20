@@ -31,7 +31,8 @@
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",
     "redux-logger": "^3.0.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
