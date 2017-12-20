@@ -1,0 +1,26 @@
+{
+  "name": "component-universal-modal",
+  "version": "0.0.1",
+  "description": "A Univeral Modal for usage across all the pubsweet universe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "Universal-modal"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react-modal": "^3.1.7",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0-alpha.1",
+    "react": ">=15"
+  }
+}
