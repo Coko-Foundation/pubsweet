@@ -1,5 +1,5 @@
 {
-  "name": "component-universal-modal",
+  "name": "pubsweet-component-universal-modal",
   "version": "0.0.1",
   "description": "A Univeral Modal for usage across all the pubsweet universe",
   "main": "index.js",
@@ -8,8 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "Universal-modal"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet-components"
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",

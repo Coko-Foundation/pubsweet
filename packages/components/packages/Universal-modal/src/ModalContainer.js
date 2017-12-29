@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Modal from './Modal'
+import Modal from './components/Modal'
 
 export default connect(state => ({
   modal: state.modal,

@@ -1,34 +1,34 @@
 import { TOGGLE_MODAL_TRIGGER } from './types'
 
-export default function modal(
-  state = {
-    isOpen: false,
-    modalType: 'confirm',
-    component: null,
-    successFn: null,
-    cancelFn: null,
-    onAfterOpen: () => {},
-    onRequestClose: () => {},
-    closeTimeoutMS: 150,
-    style: {},
-    contentLabel: 'Modal',
-  },
-  action,
-) {
+export default function modal(state = [], action) {
   if (action.type === TOGGLE_MODAL_TRIGGER) {
-    const modal = {
-      isOpen: action.isOpen,
-      modalType: action.modalType,
-      component: action.component,
-      successFn: action.successFn,
-      cancelFn: action.cancelFn,
-      onAfterOpen: action.onAfterOpen,
-      onRequestClose: action.onRequestClose,
-      closeTimeoutMS: action.closeTimeoutMS,
-      style: action.style,
-      contentLabel: action.contentLabel,
+    let find = false
+
+    const modalState = state.map(item => {
+      if (item.component === action.component) {
+        find = true
+        item.isOpen = !item.isOpen
+        return { ...item, ...action.payload }
+      }
+      return item
+    })
+
+    if (!find) {
+      const modalProps = {
+        isOpen: true,
+        title: action.title,
+        component: action.component,
+        onAfterOpen: action.onAfterOpen,
+        onRequestClose: action.onRequestClose,
+        closeTimeoutMS: action.closeTimeoutMS,
+        style: action.style,
+        contentLabel: action.contentLabel,
+      }
+
+      modalState.push(modalProps)
     }
-    return Object.assign({}, state, modal)
+
+    return modalState
   }
   return state
 }
