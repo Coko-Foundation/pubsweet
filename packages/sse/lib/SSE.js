@@ -1,7 +1,7 @@
-const EventEmitter = require('events').EventEmitter
+const { EventEmitter } = require('events')
 
 class SSE extends EventEmitter {
-  constructor () {
+  constructor() {
     super()
 
     this.connect = this.connect.bind(this)
@@ -9,9 +9,9 @@ class SSE extends EventEmitter {
     this.pulse()
   }
 
-  connect (req, res) {
+  connect(req, res) {
     // if (req.header('Accept').indexOf('text/event-stream') === -1) {
-      // TODO: throw exception?
+    // TODO: throw exception?
     // }
 
     req.socket.setTimeout(Number.MAX_SAFE_INTEGER)
@@ -23,19 +23,20 @@ class SSE extends EventEmitter {
     res.set({
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive',
-      'X-Accel-Buffering': 'no' // prevent buffering by nginx
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no', // prevent buffering by nginx
     })
 
     this.setMaxListeners(this.getMaxListeners() + 1)
 
     const write = (type, data) => {
-      res.write(type + ': ' + data)
+      res.write(`${type}: ${data}`)
       res.write('\n')
     }
 
     const dataListener = data => {
-      write('id', this.messageId++)
+      this.messageId = this.messageId + 1
+      write('id', this.messageId)
 
       if (data.event) {
         write('event', data.event)
@@ -56,16 +57,16 @@ class SSE extends EventEmitter {
     })
   }
 
-  pulse () {
+  pulse() {
     const pulseInterval = setInterval(() => {
-      this.emit('data', {event: 'pulse', data: Date.now()})
+      this.emit('data', { event: 'pulse', data: Date.now() })
     }, 10000)
 
     pulseInterval.unref()
   }
 
-  send (data, event) {
-    this.emit('data', {data, event})
+  send(data, event) {
+    this.emit('data', { data, event })
   }
 }
 

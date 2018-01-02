@@ -16,11 +16,5 @@
   },
   "devDependencies": {
     "standard": "^10.0.2"
-  },
-  "eslintConfig": {
-    "extends": "standard",
-    "parserOptions": {
-      "ecmaVersion": 6
-    }
   }
 }
