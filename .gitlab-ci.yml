@@ -13,21 +13,13 @@ install:
 lint:style:
   script:
     - npm run lint:style
-    - docker ps -a -q | xargs -n1 -P 8 docker rm -f
-    - docker volume ls -q | xargs -n1 -P 8 docker volume rm
-    - docker image ls -q | xargs docker image rm -f
 
 lint:js:
   script:
     - npm run lint:js
-    - docker ps -a -q | xargs -n1 -P 8 docker rm -f
-    - docker volume ls -q | xargs -n1 -P 8 docker volume rm
-    - docker image ls -q | xargs docker image rm -f
 
 test:
   script:
     - npm run test
-    - docker ps -a -q | xargs -n1 -P 8 docker rm -f
-    - docker volume ls -q | xargs -n1 -P 8 docker volume rm
-    - docker image ls -q | xargs docker image rm -f
+
 
