@@ -11,10 +11,15 @@ install:
       - packages/components/packages/*/node_modules
 
 lint:style:
- script: npm run lint:style
+  script:
+    - npm run lint:style
 
 lint:js:
- script: npm run lint:js
+  script:
+    - npm run lint:js
 
 test:
-  script: npm run test
+  script:
+    - npm run test
+
+
