@@ -1,3 +1,6 @@
 .root {
+  // color of the icon is set by his parent
+
   display: inline-flex;
+  width: var(--icon-size);
 }
