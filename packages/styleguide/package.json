@@ -1,10 +1,7 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "0.1.1",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "version": "0.1.2",
+  "files": ["src", "dist"],
   "main": "src",
   "dependencies": {
     "@pubsweet/theme": "^0.1.1",

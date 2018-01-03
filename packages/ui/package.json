@@ -1,11 +1,7 @@
 {
   "name": "@pubsweet/ui",
-  "version": "0.1.1",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
+  "version": "0.1.2",
+  "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
   "repository": {
@@ -31,7 +27,7 @@
     "redux-form": "^7.0.3"
   },
   "devDependencies": {
-    "@pubsweet/styleguide": "^0.1.1",
+    "@pubsweet/styleguide": "^0.1.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
