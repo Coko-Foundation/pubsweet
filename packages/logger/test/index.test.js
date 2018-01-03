@@ -80,27 +80,6 @@ describe('Logging manager', () => {
       expect(winston.error).toHaveBeenLastCalledWith('error')
     })
 
-    it('works with bunyan', () => {
-      jest.resetModules()
-      config = require('config')
-      const logger = require('../src/')
-      const bunyan = require('bunyan').createLogger({ name: 'test' })
-      jest.spyOn(bunyan, 'debug').mockImplementation()
-      jest.spyOn(bunyan, 'info').mockImplementation()
-      jest.spyOn(bunyan, 'warn').mockImplementation()
-      jest.spyOn(bunyan, 'error').mockImplementation()
-      logger.configure(bunyan)
-
-      logger.debug('debug')
-      expect(bunyan.debug).toHaveBeenLastCalledWith('debug')
-      logger.info('info')
-      expect(bunyan.info).toHaveBeenLastCalledWith('info')
-      logger.warn('warn')
-      expect(bunyan.warn).toHaveBeenLastCalledWith('warn')
-      logger.error('error')
-      expect(bunyan.error).toHaveBeenLastCalledWith('error')
-    })
-
     it('prevents configuration again', () => {
       jest.resetModules()
       config = require('config')
@@ -115,24 +94,14 @@ describe('Logging manager', () => {
     it('which returns raw logger', () => {
       jest.resetModules()
       const logger = require('../src/')
-      const bunyan = require('bunyan').createLogger({ name: 'test' })
-      logger.configure(bunyan)
+      const winston = require('winston')
+      logger.configure(winston)
       const rawLogger = logger.getRawLogger()
-      expect(rawLogger.fields.name).toBe('test')
+      expect(rawLogger).toBe(winston)
     })
   })
 
   describe('when a logger is passed by config', () => {
-    it('sets logger to "bunyan" if specified', () => {
-      jest.resetModules()
-      config = require('config')
-      const bunyan = require('bunyan').createLogger({ name: 'test' })
-      config['pubsweet-server'] = { logger: bunyan }
-      const logger = require('../src/')
-      const rawLogger = logger.getRawLogger()
-      expect(rawLogger.fields.name).toBe('test')
-    })
-
     it('sets logger to "winston" if specified', () => {
       jest.resetModules()
       config = require('config')
