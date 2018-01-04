@@ -14,7 +14,7 @@ const Attachments = props => (
     uploadingFile={({ file, progress, error }) => (
       <div className={classes.uploading}>
         <span className={classes.icon}>
-          <Icon color="var(--color-primary)">paperclip</Icon>
+          <Icon color="var(--color-local, black)">paperclip</Icon>
         </span>
         <span className={classes.filename}>{error || 'Uploading…'}</span>
       </div>

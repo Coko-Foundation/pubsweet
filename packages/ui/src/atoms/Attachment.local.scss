@@ -1,13 +1,30 @@
+.root {
+  align-items: center;
+  display: flex;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
 .icon {
-  color: var(--color-primary);
-  display: inline-flex;
-  margin-right: 10px;
+  --color-local: var(--color-primary);
+  --icon-size: 16px;
+
+  margin: 0.5em;
+}
+
+.icon svg {
+  height: var(--icon-size);
+  width: var(--icon-size);
 }
 
 .filename {
-  font-size: 0.7em;
-  height: 2em;
-  max-width: 25ch;
+  color: var(--color-primary);
+  display: inline-flex;
   overflow-wrap: break-word;
   padding: 0;
+  word-break: break-all;
+}
+
+.root:hover .filename {
+  text-decoration: underline;
 }

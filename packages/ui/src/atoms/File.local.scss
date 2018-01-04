@@ -77,8 +77,8 @@
     font-style: italic;
     margin: 5px;
     max-width: 15ch;
+    overflow-wrap: break-all; /* to divide into lines */
     text-align: center;
-    word-break: break-all; /* to divide into lines */
   }
 
   &:hover {

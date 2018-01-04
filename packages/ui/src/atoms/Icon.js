@@ -3,7 +3,7 @@ import { pascalize } from 'humps'
 import * as icons from 'react-feather'
 import classes from './Icon.local.scss'
 
-const Icon = ({ children, color = 'black', size = 24 }) => {
+const Icon = ({ children, color = 'var(--color-local, black)', size = 24 }) => {
   // convert `arrow_left` to `ArrowLeft`
   const name = pascalize(children)
 
