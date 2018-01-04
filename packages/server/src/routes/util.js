@@ -57,9 +57,7 @@ Util.getTeams = async opts => {
           opts.req.method,
           team,
         )
-        if (permission) {
-          return team
-        }
+        return permission ? team : undefined
       }),
     )
 

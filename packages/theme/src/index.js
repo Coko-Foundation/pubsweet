@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+
 import 'typeface-fira-mono'
 import 'typeface-fira-sans'
 import 'typeface-fira-sans-condensed'

@@ -30,6 +30,8 @@ async function teamPermissions(user, operation, object, context) {
       }
     }
   }
+
+  return false
 }
 
 function unauthenticatedUser(operation, object) {

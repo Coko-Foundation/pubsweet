@@ -2,7 +2,7 @@ global.db = require('../db')()
 
 module.exports = () => {
   if (!db.rel) {
-    return db.setSchema([
+    db.setSchema([
       {
         singular: 'collection',
         plural: 'collections',

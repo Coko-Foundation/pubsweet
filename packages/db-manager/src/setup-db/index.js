@@ -10,7 +10,7 @@ const { validateSetupDbConfig } = require('../validations')
 
 const checkNoDb = async mergedDbConfig => {
   const exists = await dbExists()
-  if (!exists) return null
+  if (!exists) return
 
   if (!mergedDbConfig.clobber) {
     logger.error(

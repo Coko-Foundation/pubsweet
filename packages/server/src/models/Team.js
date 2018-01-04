@@ -48,14 +48,13 @@ class Team extends Model {
 
   async save() {
     await Promise.all(
-      this.members.map(member =>
-        User.find(member).then(user => {
-          if (!user.teams.includes(this.id)) {
-            user.teams.push(this.id)
-            return user.save()
-          }
-        }),
-      ),
+      this.members.map(async member => {
+        const user = await User.find(member)
+        if (!user.teams.includes(this.id)) {
+          user.teams.push(this.id)
+          await user.save()
+        }
+      }),
     )
 
     return super.save()
@@ -63,14 +62,13 @@ class Team extends Model {
 
   async delete() {
     await Promise.all(
-      this.members.map(member =>
-        User.find(member).then(user => {
-          if (user.teams.includes(this.id)) {
-            user.teams = _.without(user.teams, this.id)
-            return user.save()
-          }
-        }),
-      ),
+      this.members.map(async member => {
+        const user = await User.find(member)
+        if (user.teams.includes(this.id)) {
+          user.teams = _.without(user.teams, this.id)
+          await user.save()
+        }
+      }),
     )
 
     return super.delete()
