@@ -30,7 +30,7 @@ export class UpdateSubscriber extends Component {
     this.listeners = {}
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.subscribe(this.props)
     this.setState({ visible: UpdateSubscriber.visible() })
   }
