@@ -15,7 +15,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^0.0.8",
+    "@pubsweet/db-manager": "^0.0.10",
     "@pubsweet/logger": "^0.1.0",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
