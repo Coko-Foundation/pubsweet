@@ -7,12 +7,9 @@ import { UpdateSubscriber } from '../../src/components/UpdateSubscriber'
 global.PUBSWEET_COMPONENTS = []
 
 function makeWrapper(props = {}) {
-  const wrapper = shallow(
+  return shallow(
     <UpdateSubscriber currentUser={{}} handleUpdate={jest.fn()} {...props} />,
   )
-  // did* lifecycle methods don't get automatically called on shallow render
-  wrapper.instance().componentDidMount()
-  return wrapper
 }
 
 describe('<UpdateSubscriber/>', () => {
