@@ -61,11 +61,11 @@ const EpubBackend = app => {
 
       switch (req.query.destination) {
         case 'folder':
-          return output.folder(epub, res)
-
+          output.folder(epub, res)
+          break
         case 'attachment':
         default:
-          return output.attachment(epub, res, id)
+          output.attachment(epub, res, id)
       }
     } catch (e) {
       next(e)

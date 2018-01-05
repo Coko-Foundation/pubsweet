@@ -33,7 +33,10 @@ prompt.get(
     },
   },
   (err, result) => {
-    if (err) return logger.info(err)
+    if (err) {
+      logger.info(err)
+      return
+    }
 
     logger.info('Received the following answers:')
     logger.info(`  username: ${result.username}`)

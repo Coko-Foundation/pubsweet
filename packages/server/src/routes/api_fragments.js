@@ -106,7 +106,7 @@ api.get(
 
       fragments = fragments.map(fieldSelector(req))
 
-      return res.status(STATUS.OK).json(fragments)
+      res.status(STATUS.OK).json(fragments)
     } catch (err) {
       next(err)
     }
@@ -123,7 +123,7 @@ api.get(
       fragment.owners = await User.ownersWithUsername(fragment)
       const properties = await applyPermissionFilter({ req, target: fragment })
 
-      return res.status(STATUS.OK).json(properties)
+      res.status(STATUS.OK).json(properties)
     } catch (err) {
       res.status(STATUS.NOT_FOUND).json(err.message)
     }
@@ -276,21 +276,19 @@ api.get(
   authBearerAndPublic,
   async (req, res, next) => {
     try {
-      const fragment = await Fragment.find(req.params.fragmentId)
+      let fragment = await Fragment.find(req.params.fragmentId)
       const permission = await authsome.can(req.user, req.method, fragment)
 
       if (!permission) {
         throw authorizationError(req.user, req.method, fragment)
       }
 
-      return Fragment.find(req.params.fragmentId).then(fragment => {
-        if (permission.filter) {
-          fragment = permission.filter(fragment)
-        }
-        return res.status(STATUS.OK).json(fragment)
-      })
+      if (permission.filter) {
+        fragment = permission.filter(fragment)
+      }
+      res.status(STATUS.OK).json(fragment)
     } catch (err) {
-      res.status(STATUS.NOT_FOUND).json(err.message)
+      next(err)
     }
   },
 )

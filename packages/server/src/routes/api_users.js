@@ -34,7 +34,7 @@ api.get('/users/authenticate', authBearer, async (req, res, next) => {
     const user = await User.find(req.user)
     user.token = req.authInfo.token
     user.teams = await Promise.all(user.teams.map(teamId => Team.find(teamId)))
-    return res.status(STATUS.OK).json(user)
+    res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
   }
@@ -47,7 +47,7 @@ api.post('/users', async (req, res, next) => {
     if (req.body.admin) throw new ValidationError('invalid property: admin')
 
     user = await user.save()
-    return res.status(STATUS.CREATED).json(user)
+    res.status(STATUS.CREATED).json(user)
   } catch (err) {
     next(err)
   }
@@ -64,7 +64,7 @@ api.get('/users', authBearer, async (req, res, next) => {
 
     const users = (await User.all()).filter(createFilterFromQuery(req.query))
 
-    return res.status(STATUS.OK).json({ users })
+    res.status(STATUS.OK).json({ users })
   } catch (err) {
     next(err)
   }
@@ -80,7 +80,7 @@ api.get('/users/:id', authBearer, async (req, res, next) => {
       throw authorizationError(req.user, req.method, req.path)
     }
 
-    return res.status(STATUS.OK).json(user)
+    res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
   }
@@ -96,7 +96,7 @@ api.delete('/users/:id', authBearer, async (req, res, next) => {
       throw authorizationError(req.user, req.method, req.path)
     }
     user = await user.delete()
-    return res.status(STATUS.OK).json(user)
+    res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
   }
@@ -126,7 +126,7 @@ api.patch('/users/:id', authBearer, async (req, res, next) => {
     user = await user.save()
     user = await User.find(req.params.id)
 
-    return res.status(STATUS.OK).json(user)
+    res.status(STATUS.OK).json(user)
   } catch (err) {
     next(err)
   }

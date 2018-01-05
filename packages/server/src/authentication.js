@@ -44,15 +44,16 @@ const verifyPassword = (username, password, done) => {
     })
     .then(([user, isValid]) => {
       if (isValid) {
-        return done(null, user, { id: user.id })
+        done(null, user, { id: user.id })
+        return
       }
       logger.debug('Invalid password for user:', username)
-      return done(null, false, { message: errorMessage })
+      done(null, false, { message: errorMessage })
     })
     .catch(err => {
       logger.debug('User not found', err)
       if (err) {
-        return done(null, false, { message: errorMessage })
+        done(null, false, { message: errorMessage })
       }
     })
 }

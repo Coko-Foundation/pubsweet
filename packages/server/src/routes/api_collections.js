@@ -89,7 +89,7 @@ api.get(
         target: collection,
       })
 
-      return res.status(STATUS.OK).json(properties)
+      res.status(STATUS.OK).json(properties)
     } catch (err) {
       next(err)
     }
