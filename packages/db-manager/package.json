@@ -36,7 +36,7 @@
     "@pubsweet/logger": "^0.1.0",
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
-    "joi": "^11.0.2",
+    "joi": "^13.1.0",
     "pouchdb": "^6.3.4",
     "pubsweet-server": "^1.0.2"
   }
