@@ -7,10 +7,12 @@ import {
   HelpBlock,
 } from 'react-bootstrap'
 import Joi from 'joi-browser'
-import serverValidations from 'pubsweet-server/src/models/validations'
+
+import mergeValidations from 'pubsweet-server/src/models/validations'
 import config from 'config'
 
-const validations = serverValidations(config)
+const appValidationsPath = config.validations
+const validations = mergeValidations(require(appValidationsPath))
 
 class FormGroup extends React.Component {
   constructor(props) {

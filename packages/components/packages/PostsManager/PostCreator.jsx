@@ -2,11 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
 import FormGroup from 'pubsweet-component-form-group/FormGroup'
-import mergeValidations from 'pubsweet-server/src/models/validations'
-import config from 'config'
-
-const appValidationsPath = config.validations
-const validations = mergeValidations(require(appValidationsPath))
 
 export default class PostCreator extends React.Component {
   constructor(props) {
@@ -39,7 +34,6 @@ export default class PostCreator extends React.Component {
           label="Title"
           modelProperty="fragment.title"
           placeholder="One fine day..."
-          validations={validations}
         />
         <Button
           aria-label="Create"
