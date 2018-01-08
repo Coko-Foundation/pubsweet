@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/logger",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description":
     "A module encapsulating standard logging features for pubsweet components and services.",
   "main": "src/index.js",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "config": "^1.26.2",
-    "joi": "^10.6.0",
+    "joi": "^13.1.0",
     "lodash": "^4.17.4"
   }
 }
