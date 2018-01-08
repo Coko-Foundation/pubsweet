@@ -83,7 +83,7 @@ stop_review:ui:
   - master
   script:
     - source deploy.sh
-    - delete_deployment
+    - delete_deployment_no_db
 
 staging:ui:
   image: xpub/deployer:latest
