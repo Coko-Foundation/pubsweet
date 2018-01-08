@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@pubsweet/starter":
-      "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#update_deps",
+      "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
     "jest": "^21.0.0",
     "nsp": "^2.8.1"
   },
