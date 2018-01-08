@@ -21,7 +21,9 @@ export default function(state = {}, action) {
   const fragments = clone(state)
 
   function replaceAll() {
-    unset(fragments, action.collection.fragments)
+    if (action.collection) {
+      unset(fragments, action.collection.fragments)
+    }
     action.fragments.forEach(fragment => {
       fragments[fragment.id] = fragment
     })

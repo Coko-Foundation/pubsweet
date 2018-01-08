@@ -69,26 +69,30 @@ export default function(state = [], action) {
   }
 
   function addFragments() {
-    const collection = getCollection()
+    if (action.collection) {
+      const collection = getCollection()
 
-    if (collection) {
-      collection.fragments = union(
-        collection.fragments,
-        (action.fragments || [action.fragment]).map(fragment => fragment.id),
-      )
+      if (collection) {
+        collection.fragments = union(
+          collection.fragments,
+          (action.fragments || [action.fragment]).map(fragment => fragment.id),
+        )
+      }
     }
 
     return collections
   }
 
   function removeFragments() {
-    const collection = getCollection()
+    if (action.collection) {
+      const collection = getCollection()
 
-    if (collection) {
-      collection.fragments = difference(
-        collection.fragments,
-        (action.fragments || [action.fragment]).map(fragment => fragment.id),
-      )
+      if (collection) {
+        collection.fragments = difference(
+          collection.fragments,
+          (action.fragments || [action.fragment]).map(fragment => fragment.id),
+        )
+      }
     }
 
     return collections
