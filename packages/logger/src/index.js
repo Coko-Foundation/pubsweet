@@ -5,15 +5,15 @@ const validations = require('./validations')
 const { get } = require('lodash/fp')
 
 const loggerFromConfig = get('pubsweet-server.logger', config)
+
 config.util.setModuleDefaults('pubsweet-server.logger', loggerFromConfig)
-let configured = loggerFromConfig === {}
-let logger
+
+let logger = validations.validateConfig(loggerFromConfig)
+let configured = Boolean(logger)
 
 if (!configured) {
   global.console.debug = (...args) => global.console.log(args)
   logger = global.console
-} else {
-  logger = validations.validateConfig(loggerFromConfig)
 }
 
 module.exports = {

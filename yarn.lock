@@ -86,15 +86,15 @@
 
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#600e39e8b6a759e9bdce0844f611dc72368d5c85"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#2a2a5c197a90befc2c60a6cf226b699353a6daae"
   dependencies:
-    "@pubsweet/db-manager" "^0.0.10"
-    "@pubsweet/logger" "^0.1.0"
-    authsome "0.0.9"
-    pubsweet "1.1.2"
-    pubsweet-client "1.1.2"
+    "@pubsweet/db-manager" "^0.0.12"
+    "@pubsweet/logger" "^0.1.2"
+    authsome "^0.0.9"
+    pubsweet "^1.1.4"
+    pubsweet-client "^1.1.2"
     pubsweet-component-blog "^0.3.1"
-    pubsweet-component-form-group "0.1.5"
+    pubsweet-component-form-group "0.1.6"
     pubsweet-component-html "^0.2.0"
     pubsweet-component-login "^0.5.2"
     pubsweet-component-manage "^0.2.2"
@@ -107,7 +107,7 @@
     pubsweet-component-signup "^0.4.0"
     pubsweet-component-teams-manager "^0.3.0"
     pubsweet-component-users-manager "^0.2.1"
-    pubsweet-server "1.0.2"
+    pubsweet-server "^1.0.4"
     pubsweet-theme-plugin "^0.0.3"
     react-router-redux next
 
@@ -567,7 +567,7 @@ attr-accept@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.1.0.tgz#b5cd35227f163935a8f1de10ed3eba16941f6be6"
 
-authsome@0.0.9:
+authsome@0.0.9, authsome@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.9.tgz#08b34f1797b3539e6a362f0fb11a01ae0613f928"
 
@@ -8599,6 +8599,28 @@ public-encrypt@^4.0.0:
     create-hash "^1.1.0"
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
+
+pubsweet-component-form-group@0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-0.1.5.tgz#392d76f8a9506731c82a7027ba95ab562f6c90ca"
+  dependencies:
+    joi-browser "^13.0.1"
+    prop-types "^15.5.10"
+    pubsweet-server "^1.0.3"
+    react-bootstrap "^0.31.3"
+
+pubsweet-component-posts-manager@0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-posts-manager/-/pubsweet-component-posts-manager-0.6.5.tgz#d35ac7f74bf198d652ff81e9a790ea006ec3719c"
+  dependencies:
+    prop-types "^15.5.10"
+    pubsweet-component-form-group "^0.1.5"
+    react-bootstrap "^0.31.3"
+    react-dom "^15.6.1"
+    react-redux "^5.0.6"
+    react-router-bootstrap "^0.24.4"
+    react-router-dom "^4.2.2"
+    redux "^3.7.2"
 
 pubsweet-server@1.0.2:
   version "1.0.2"
