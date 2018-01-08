@@ -1,0 +1,12 @@
+$main-grey: #666;
+
+.root {
+  display: flex;
+  margin-left: auto;
+
+  .middleLine {
+    background-color: $main-grey;
+    height: 40px;
+    width: 1px;
+  }
+}
