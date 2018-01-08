@@ -1,16 +1,16 @@
 .stateListContainer {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
 .itemContainer {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
 .delimiter {
-  margin-right: 5px;
   margin-left: 5px;
+  margin-right: 5px;
 }
