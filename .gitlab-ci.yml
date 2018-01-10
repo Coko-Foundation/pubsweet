@@ -1,25 +1,128 @@
-image: pubsweet/pubsweet-test-base
+variables:
+  IMAGE_ORG: pubsweet
+  IMAGE_NAME: pubsweet
+  BASE_DOMAIN: gateway.ps.semioticsquares.com
+  CONFIGURATION_REPOSITORY: https://gitlab.coko.foundation/pubsweet/deployment-config.git
 
-install:
+stages:
+  - build
+  - test
+  - review
+  - staging
+  - production
+  - demo
+
+build:
+  image: docker:latest
   stage: build
-  script: yarn
-  artifacts:
-    expire_in: 1h
-    paths:
-      - node_modules
-      - packages/*/node_modules
-      - packages/components/packages/*/node_modules
+  script:
+    - docker version
+    - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+    - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
+    - docker build -t $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA .
+    - docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
 
 lint:style:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  variables:
+    GIT_STRATEGY: none
   script:
+    - cd ${HOME}
     - npm run lint:style
 
 lint:js:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  variables:
+    GIT_STRATEGY: none
   script:
+    - cd ${HOME}
     - npm run lint:js
 
 test:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  variables:
+    GIT_STRATEGY: none
   script:
-    - npm run test
+    - cd ${HOME}
+    - NODE_ENV=test npm run test
 
+# -----------------------------------------------
+# ui --------------------------------------------
+# -----------------------------------------------
 
+review:ui:
+  image: xpub/deployer:latest
+  stage: review
+  variables:
+    PACKAGE_NAME: ui
+  environment:
+    name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
+    # !! kube-lego will fail if domain > 63 chars
+    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
+    on_stop: stop_review:ui
+  except:
+  - master
+  script:
+    - source deploy.sh
+    - create_deployment
+
+stop_review:ui:
+  image: xpub/deployer:latest
+  stage: review
+  variables:
+    PACKAGE_NAME: ui 
+    GIT_STRATEGY: none
+  environment:
+    name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
+    action: stop
+  when: manual
+  except:
+  - master
+  script:
+    - source deploy.sh
+    - delete_deployment_no_db
+
+staging:ui:
+  image: xpub/deployer:latest
+  stage: staging
+  variables:
+    PACKAGE_NAME: ui
+  environment:
+    name: $PACKAGE_NAME/staging
+    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
+  only:
+  - master
+  script:
+    - source deploy.sh
+    - create_deployment
+
+production:ui:
+  image: xpub/deployer:latest
+  stage: production
+  variables:
+    PACKAGE_NAME: ui
+  environment:
+    name: $PACKAGE_NAME/production
+    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
+  when: manual
+  only:
+  - master
+  script:
+    - source deploy.sh
+    - create_deployment
+
+demo:ui:
+  image: xpub/deployer:latest
+  stage: demo
+  variables:
+    PACKAGE_NAME: ui
+  environment:
+    name: $PACKAGE_NAME/demo
+    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
+  when: manual
+  script:
+    - source deploy.sh
+    - create_deployment
