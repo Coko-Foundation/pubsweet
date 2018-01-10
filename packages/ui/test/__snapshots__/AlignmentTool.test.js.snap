@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlignmentTool is rendered correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="root"
+  >
+    <span
+      className="label"
+    >
+      Left
+    </span>
+    <div
+      className="root noBorderRight"
+      id="left"
+      onClick={[Function]}
+      role="presentation"
+    />
+  </div>
+  <div
+    className="middleLine"
+  />
+  <div
+    className="root reverseOrder"
+  >
+    <span
+      className="label"
+    >
+      right
+    </span>
+    <div
+      className="root noBorderLeft"
+      id="right"
+      onClick={[Function]}
+      role="presentation"
+    />
+  </div>
+</div>
+`;

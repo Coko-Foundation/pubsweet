@@ -7,10 +7,10 @@ import classes from './AlignmentBox.local.scss'
 const AlignmentBox = ({ active, id, noBorder, onClick }) => {
   const styles = classNames(classes.root, {
     [classes.active]: active,
-    [classes.borderTop]: noBorder.top,
-    [classes.borderRight]: noBorder.right,
-    [classes.borderBottom]: noBorder.bottom,
-    [classes.borderLeft]: noBorder.left,
+    [classes.noBorderTop]: noBorder.top,
+    [classes.noBorderRight]: noBorder.right,
+    [classes.noBorderBottom]: noBorder.bottom,
+    [classes.noBorderLeft]: noBorder.left,
   })
 
   return (
