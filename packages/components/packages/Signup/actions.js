@@ -5,15 +5,12 @@ import * as T from './types'
 function signupRequest() {
   return {
     type: T.SIGNUP_REQUEST,
-    isFetching: true,
   }
 }
 
 function signupSuccess(user) {
   return {
     type: T.SIGNUP_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
     user,
   }
 }
@@ -21,8 +18,6 @@ function signupSuccess(user) {
 function signupFailure(message) {
   return {
     type: T.SIGNUP_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
     error: message,
   }
 }

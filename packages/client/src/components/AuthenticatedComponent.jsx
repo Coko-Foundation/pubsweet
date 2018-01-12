@@ -7,9 +7,12 @@ import PropTypes from 'prop-types'
 import actions from '../actions'
 import { selectCurrentUser } from '../selectors'
 
+const isAllowedRedirect = pathname =>
+  !['/logout', '/login', '/signup'].includes(pathname)
+
 export class AuthenticatedComponent extends React.Component {
   componentWillMount() {
-    this.props.getCurrentUser().then(() => this.checkAuth(this.props))
+    this.props.ensureCurrentUser().then(() => this.checkAuth(this.props))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -18,8 +21,12 @@ export class AuthenticatedComponent extends React.Component {
 
   checkAuth({ isFetching, isAuthenticated }) {
     if (!isFetching && !isAuthenticated) {
-      const redirectAfterLogin = this.props.location.pathname
-      this.props.pushState(`/login?next=${redirectAfterLogin}`)
+      const returnUrl = this.props.location.pathname
+      let loginUrl = '/login'
+      if (isAllowedRedirect(returnUrl)) {
+        loginUrl += `?next=${returnUrl}`
+      }
+      this.props.pushState(loginUrl)
     }
   }
 
@@ -31,7 +38,7 @@ export class AuthenticatedComponent extends React.Component {
 AuthenticatedComponent.propTypes = {
   children: PropTypes.node,
   location: PropTypes.object,
-  getCurrentUser: PropTypes.func.isRequired,
+  ensureCurrentUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
   pushState: PropTypes.func.isRequired,
@@ -46,7 +53,7 @@ function mapState(state) {
 
 const ConnectedAuthenticatedComponent = withRouter(
   connect(mapState, {
-    getCurrentUser: actions.getCurrentUser,
+    ensureCurrentUser: actions.ensureCurrentUser,
     pushState: push,
   })(AuthenticatedComponent),
 )

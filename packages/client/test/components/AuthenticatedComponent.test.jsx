@@ -11,7 +11,7 @@ const {
 function makeWrapper(props = {}) {
   return shallow(
     <AuthenticatedComponent
-      getCurrentUser={() => Promise.resolve()}
+      ensureCurrentUser={() => Promise.resolve()}
       location={{}}
       pushState={jest.fn()}
       {...props}

@@ -32,8 +32,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        isAuthenticated: false,
-        user: null,
       }
 
     case LOGOUT_SUCCESS:
