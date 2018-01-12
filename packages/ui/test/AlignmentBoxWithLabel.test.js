@@ -30,7 +30,7 @@ describe('AlignmentBoxWithLabel', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test('should contain one Alignment Box children', () => {
+  test('should contain one Alignment Box child', () => {
     expect(wrapper.find(AlignmentBox).exists()).toEqual(true)
   })
 
@@ -49,8 +49,7 @@ describe('AlignmentBoxWithLabel', () => {
     expect(wrapperMounted.prop('labelPositionRight')).toEqual(false)
   })
 
-  test(`with default props has the label on the left side of the Alignment Box
-    and the text of the label is correct`, () => {
+  test(`with default props the label is rendered on the left`, () => {
     expect(wrapper.is('.reverseOrder')).toBe(false)
     expect(wrapperRendered.text()).toEqual(requiredProps.labelText)
   })
