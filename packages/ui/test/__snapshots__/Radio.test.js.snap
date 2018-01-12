@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Radio Snapshot 1`] = `
+exports[`Radio is rendered correctly 1`] = `
 <label
   className="root"
   style={

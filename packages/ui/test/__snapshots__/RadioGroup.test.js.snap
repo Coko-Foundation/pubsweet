@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Radio Group Snapshot 1`] = `
+exports[`Radio Group is rendered correctly 1`] = `
 <div>
   <label
     className="root"
