@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StateList is rendered correctly 1`] = `
+<div
+  className="stateListContainer"
+>
+  <div
+    className="itemContainer"
+  >
+    <span
+      className="root"
+      disabled={false}
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex="0"
+    >
+      To Clean
+    </span>
+    <svg
+      className="delimiter"
+      fill="none"
+      height={16}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="9 18 15 12 9 6"
+      />
+    </svg>
+  </div>
+  <div
+    className="itemContainer"
+  >
+    <span
+      className="root"
+      disabled={false}
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex="0"
+    >
+      To Edit
+    </span>
+    <svg
+      className="delimiter"
+      fill="none"
+      height={16}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="9 18 15 12 9 6"
+      />
+    </svg>
+  </div>
+  <div
+    className="itemContainer"
+  >
+    <span
+      className="root"
+      disabled={false}
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex="0"
+    >
+      To Review
+    </span>
+    <svg
+      className="delimiter"
+      fill="none"
+      height={16}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width={16}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="9 18 15 12 9 6"
+      />
+    </svg>
+  </div>
+  <div
+    className="itemContainer"
+  >
+    <span
+      className="root"
+      disabled={false}
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex="0"
+    >
+      To Style
+    </span>
+  </div>
+</div>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StateItem is rendered correctly 1`] = `
+<span
+  className="root"
+  disabled={false}
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex="0"
+>
+  Cleaning
+</span>
+`;
