@@ -1,0 +1,35 @@
+$light-grey: #b3b3b3;
+$main-grey: #666;
+$white-rgba: rgba(255, 255, 255, 1);
+
+.root {
+  border: 1px solid $main-grey;
+  box-shadow: inset 0 0 0 2px $white-rgba;
+  cursor: pointer;
+  height: 26px;
+  width: 17px;
+
+  &:hover {
+    background-color: $light-grey;
+  }
+
+  &.active {
+    background-color: $main-grey;
+  }
+}
+
+.noBorderTop {
+  border-top: 0;
+}
+
+.noBorderRight {
+  border-right: 0;
+}
+
+.noBorderBottom {
+  border-bottom: 0;
+}
+
+.noBorderLeft {
+  border-left: 0;
+}
