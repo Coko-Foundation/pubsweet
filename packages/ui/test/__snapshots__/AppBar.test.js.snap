@@ -1,18 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppBar Snapshot 1`] = `
-<div
+exports[`AppBar Basic display 1`] = `
+<nav
   className="root"
 >
-  <a
-    className="link logo"
-    href="some link"
-    onClick={[Function]}
-  >
-    some brand
-  </a>
   <div
-    className="actions"
+    className="section"
+  >
+    <a
+      className="logo"
+      href="/"
+      onClick={[Function]}
+    >
+      some brand
+    </a>
+  </div>
+  <div
+    className="section"
+  >
+    <a
+      className="item"
+      href="/login"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+  </div>
+</nav>
+`;
+
+exports[`AppBar With admin user 1`] = `
+<nav
+  className="root"
+>
+  <div
+    className="section"
+  >
+    <a
+      className="logo"
+      href="/"
+      onClick={[Function]}
+    >
+      some brand
+    </a>
+  </div>
+  <div
+    className="section"
   >
     <span
       className="item"
@@ -46,19 +79,106 @@ exports[`AppBar Snapshot 1`] = `
           />
         </svg>
       </span>
-      <span
-        className="username"
-      >
-        some name
-      </span>
+      some user
+       (admin)
     </span>
     <a
-      className="item link"
-      href="logout link"
+      className="item"
+      href="#"
       onClick={[Function]}
     >
-      logout
+      <span
+        className="root"
+      >
+        <svg
+          fill="none"
+          height={16}
+          stroke="var(--color-local, black)"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18.36 6.64a9 9 0 1 1-12.73 0"
+          />
+          <line
+            x1="12"
+            x2="12"
+            y1="2"
+            y2="12"
+          />
+        </svg>
+      </span>
+      Logout
     </a>
   </div>
-</div>
+</nav>
+`;
+
+exports[`AppBar With custom brand and login links 1`] = `
+<nav
+  className="root"
+>
+  <div
+    className="section"
+  >
+    <a
+      className="logo"
+      href="/home"
+      onClick={[Function]}
+    >
+      some brand
+    </a>
+  </div>
+  <div
+    className="section"
+  >
+    <a
+      className="item"
+      href="/signin"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+  </div>
+</nav>
+`;
+
+exports[`AppBar With nav links 1`] = `
+<nav
+  className="root"
+>
+  <div
+    className="section"
+  >
+    <a
+      className="logo"
+      href="/"
+      onClick={[Function]}
+    >
+      some brand
+    </a>
+    <div
+      className="navLinks"
+    >
+      <div>
+        Links!
+      </div>
+    </div>
+  </div>
+  <div
+    className="section"
+  >
+    <a
+      className="item"
+      href="/login"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+  </div>
+</nav>
 `;
