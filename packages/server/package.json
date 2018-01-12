@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "lint": "eslint src/ test/ config/",
     "test": "jest",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "@pubsweet/logger": "^0.1.2",
+    "@pubsweet/logger": "^0.2.0",
     "authsome": "0.0.9",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.1",
