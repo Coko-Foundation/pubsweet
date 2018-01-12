@@ -15,7 +15,7 @@ const props = {
 const wrapper = shallow(<Radio {...props} />)
 
 describe('Radio', () => {
-  test('Snapshot', () => {
+  test('is rendered correctly', () => {
     const tree = renderer.create(<Radio {...props} />).toJSON()
     expect(tree).toMatchSnapshot()
   })

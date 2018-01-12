@@ -30,14 +30,12 @@ const wrapper = shallow(<RadioGroup {...props} />)
 const radios = wrapper.find(Radio)
 
 describe('Radio Group', () => {
-  test('Snapshot', () => {
+  test('is rendered correctly', () => {
     const tree = renderer.create(<RadioGroup {...props} />).toJSON()
     expect(tree).toMatchSnapshot()
   })
 
   test('Renders a number of radio buttons', () => {
-    expect(wrapper.is('div')).toBeTruthy()
-
     const len = props.options.length
     expect(wrapper.children()).toHaveLength(len)
 

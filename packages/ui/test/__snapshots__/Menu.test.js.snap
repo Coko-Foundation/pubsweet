@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu Snapshot 1`] = `
+exports[`Menu is rendered correctly 1`] = `
 <div
   className="root"
 >

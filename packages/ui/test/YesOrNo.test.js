@@ -14,7 +14,7 @@ const wrapper = shallow(<YesOrNo {...props} />)
 const radio = wrapper.find(RadioGroup)
 
 describe('Yes or No', () => {
-  test('Snapshot', () => {
+  test('is rendered correclty', () => {
     const tree = renderer.create(<YesOrNo {...props} />).toJSON()
     expect(tree).toMatchSnapshot()
   })
