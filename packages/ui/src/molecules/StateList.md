@@ -1,4 +1,4 @@
-State List
+A list of State Items separated by a delimiter.
 
 ```js
 const current = {

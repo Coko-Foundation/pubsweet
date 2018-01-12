@@ -18,21 +18,16 @@ const wrapper = shallow(<StateItem {...props} />)
 const wrapperRendered = render(<StateItem {...props} />)
 
 describe('StateItem', () => {
-  test('Snapshot', () => {
+  test('is rendered correctly', () => {
     const tree = renderer.create(<StateItem {...props} />).toJSON()
     expect(tree).toMatchSnapshot()
-  })
-
-  test('it should be a span', () => {
-    expect(wrapper.is('span')).toBeTruthy()
-    expect(wrapper).toHaveLength(1)
   })
 
   test('with default props class disabled should not exist', () => {
     expect(wrapper.is('.disabled')).toBe(false)
   })
 
-  test('State Item should be disabled', () => {
+  test('with given props should be disabled', () => {
     const newProps = clone(props)
     newProps.disabled = true
     const newWrapper = shallow(<StateItem {...newProps} />)
@@ -40,11 +35,11 @@ describe('StateItem', () => {
     expect(newWrapper.is('.disabled')).toBe(true)
   })
 
-  test('it should render the value Cleaning', () => {
+  test('should render the value Cleaning', () => {
     expect(wrapperRendered.text()).toEqual(props.values[props.index])
   })
 
-  test('update is triggered', () => {
+  test('update method should be triggered upon click', () => {
     wrapper.simulate('click')
     expect(wrapper.instance().props.update).toHaveBeenCalled()
   })

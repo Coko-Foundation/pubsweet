@@ -19,31 +19,28 @@ const stateValues = {
   style: ['To Style', 'Styling', 'Styled'],
 }
 
-const myMock = jest.fn()
-
 const props = {
   currentValues,
   values: stateValues,
-  update: myMock,
+  update: () => null,
 }
 const wrapper = shallow(<StateList {...props} />)
 const stateItems = wrapper.find(StateItem)
 
-describe('StateItem', () => {
-  test('Snapshot', () => {
+describe('StateList', () => {
+  test('is rendered correctly', () => {
     const tree = renderer.create(<StateList {...props} />).toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  test('it should contain four State Item children', () => {
+  test('should contain four State Item children', () => {
     const itemsNumber = Object.keys(stateValues).length
 
-    expect(wrapper.is('div')).toBeTruthy()
-    expect(wrapper.children()).toHaveLength(itemsNumber)
+    expect(stateItems.exists()).toEqual(true)
     expect(stateItems).toHaveLength(itemsNumber)
   })
 
-  test('State Item get the correct props', () => {
+  test('gets the correct props', () => {
     let i = 0
     const stateItemComp = stateItems.getElements()
 
