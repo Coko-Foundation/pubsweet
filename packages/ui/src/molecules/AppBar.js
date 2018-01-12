@@ -6,7 +6,7 @@ import Icon from '../atoms/Icon'
 
 const AppBar = ({
   brandLink = '/',
-  brandName,
+  brand,
   loginLink = '/login',
   onLogoutClick,
   navLinks,
@@ -15,9 +15,11 @@ const AppBar = ({
 }) => (
   <nav className={classnames(classes.root, className)}>
     <div className={classes.section}>
-      <Link className={classes.logo} to={brandLink}>
-        {brandName}
-      </Link>
+      {brand && (
+        <Link className={classes.logo} to={brandLink}>
+          {brand}
+        </Link>
+      )}
 
       {navLinks && <div className={classes.navLinks}>{navLinks}</div>}
     </div>

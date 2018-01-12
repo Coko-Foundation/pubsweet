@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer'
 import AppBar from '../src/molecules/AppBar'
 
 const baseProps = {
-  brandName: 'some brand',
+  brand: 'some brand',
   onLogoutClick: () => {},
 }
 

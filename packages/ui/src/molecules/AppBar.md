@@ -4,25 +4,25 @@ It displays the name of the application (as a link to the home page), the
 username of the current user, and a link to sign out.
 
 ```js
-<AppBar brandName="xpub" user={{ username: 'user', admin: true }} />
+<AppBar brand="xpub" user={{ username: 'user', admin: true }} />
 ```
 
 When the user is not signed in, only the login link is displayed.
 
 ```js
-<AppBar brandName="xpub" />
+<AppBar brand="xpub" />
 ```
 
 Can optionally pass navigation links or image for brand.
 
 ```js
 <AppBar
-  brandName={
+  brand={
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="-150 -50 300 350"
+      viewBox="-150 -50 300 300"
       width="50"
-      height="50"
+      height="42"
       fillOpacity="0.5"
     >
       <circle cx="0" cy="50" fill="red" r="100" />
