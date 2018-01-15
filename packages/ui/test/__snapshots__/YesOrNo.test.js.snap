@@ -13,27 +13,31 @@ exports[`Yes or No is rendered correclty 1`] = `
     <input
       checked={false}
       className="input"
+      disabled={undefined}
       name="TestName"
       onChange={[Function]}
       required={undefined}
       type="radio"
       value="yes"
     />
+     
     <span
       className="pseudoInput"
       style={
         Object {
-          "background": "transparent",
+          "color": "black",
         }
       }
-    >
-       
-    </span>
+    />
+     
     <span
       className="label"
     >
+       
       Yes
+       
     </span>
+     
   </label>
   <label
     className="root inline"
@@ -46,27 +50,31 @@ exports[`Yes or No is rendered correclty 1`] = `
     <input
       checked={false}
       className="input"
+      disabled={undefined}
       name="TestName"
       onChange={[Function]}
       required={undefined}
       type="radio"
       value="no"
     />
+     
     <span
       className="pseudoInput"
       style={
         Object {
-          "background": "transparent",
+          "color": "black",
         }
       }
-    >
-       
-    </span>
+    />
+     
     <span
       className="label"
     >
+       
       No
+       
     </span>
+     
   </label>
 </div>
 `;

@@ -13,27 +13,31 @@ exports[`Radio Group is rendered correctly 1`] = `
     <input
       checked={false}
       className="input"
+      disabled={undefined}
       name="TestName"
       onChange={[Function]}
       required={true}
       type="radio"
       value="yes"
     />
+     
     <span
       className="pseudoInput"
       style={
         Object {
-          "background": "transparent",
+          "color": "black",
         }
       }
-    >
-       
-    </span>
+    />
+     
     <span
       className="label"
     >
+       
       Yes
+       
     </span>
+     
   </label>
   <label
     className="root"
@@ -46,27 +50,31 @@ exports[`Radio Group is rendered correctly 1`] = `
     <input
       checked={false}
       className="input"
+      disabled={undefined}
       name="TestName"
       onChange={[Function]}
       required={true}
       type="radio"
       value="no"
     />
+     
     <span
       className="pseudoInput"
       style={
         Object {
-          "background": "transparent",
+          "color": "black",
         }
       }
-    >
-       
-    </span>
+    />
+     
     <span
       className="label"
     >
+       
       No
+       
     </span>
+     
   </label>
   <label
     className="root"
@@ -79,27 +87,31 @@ exports[`Radio Group is rendered correctly 1`] = `
     <input
       checked={false}
       className="input"
+      disabled={undefined}
       name="TestName"
       onChange={[Function]}
       required={true}
       type="radio"
       value="maybe"
     />
+     
     <span
       className="pseudoInput"
       style={
         Object {
-          "background": "transparent",
+          "color": "black",
         }
       }
-    >
-       
-    </span>
+    />
+     
     <span
       className="label"
     >
+       
       Maybe
+       
     </span>
+     
   </label>
 </div>
 `;
