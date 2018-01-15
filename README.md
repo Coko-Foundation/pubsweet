@@ -38,7 +38,7 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 # Getting started
 
-The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/packages/pubsweet-cli).
+The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/cli).
 
 # Support
 
