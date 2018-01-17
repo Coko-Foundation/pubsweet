@@ -6,7 +6,6 @@ const Radio = ({
   className,
   color = 'black',
   inline,
-  author,
   name,
   value,
   label,
@@ -19,7 +18,6 @@ const Radio = ({
     className={classnames(
       classes.root,
       {
-        [classes.author]: author,
         [classes.inline]: inline,
         [classes.checked]: checked,
       },

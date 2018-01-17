@@ -73,12 +73,12 @@
 
   .name {
     color: #aaa;
-    font-size: 0.9em;
+    font-size: 1em;
     font-style: italic;
-    margin: 5px;
-    max-width: 15ch;
-    overflow-wrap: break-all; /* to divide into lines */
+    margin: 0.7em;
     text-align: center;
+    width: 20ch;
+    word-break: break-all; /* to divide into lines */
   }
 
   &:hover {
