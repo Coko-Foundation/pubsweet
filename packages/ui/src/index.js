@@ -11,6 +11,8 @@ export { default as Radio } from './atoms/Radio'
 export { default as Tags } from './atoms/Tags'
 export { default as TextField } from './atoms/TextField'
 export { default as ValidatedField } from './atoms/ValidatedField'
+export { default as StateItem } from './atoms/StateItem'
+export { default as AlignmentBox } from './atoms/AlignmentBox'
 
 /* molecules */
 export { default as AppBar } from './molecules/AppBar'
@@ -21,3 +23,8 @@ export { default as PlainButton } from './molecules/PlainButton'
 export { default as Supplementary } from './molecules/Supplementary'
 export { default as RadioGroup } from './molecules/RadioGroup'
 export { default as YesOrNo } from './molecules/YesOrNo'
+export { default as StateList } from './molecules/StateList'
+export {
+  default as AlignmentBoxWithLabel,
+} from './molecules/AlignmentBoxWithLabel'
+export { default as AlignmentTool } from './molecules/AlignmentTool.js'
