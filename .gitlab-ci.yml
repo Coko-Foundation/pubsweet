@@ -16,11 +16,11 @@ build:
   image: docker:latest
   stage: build
   script:
-    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD"]; then docker version; fi
-    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD"]; then docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD; fi
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker version; fi
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD; fi
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
-    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD"]; then docker build -t $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA .; fi
-    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD"]; then docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA; fi
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker build -t $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA .; fi
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA; fi
 
 lint:style:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
