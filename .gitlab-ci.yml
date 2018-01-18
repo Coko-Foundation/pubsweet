@@ -16,6 +16,7 @@ build:
   image: docker:latest
   stage: build
   script:
+    - if [ -z "$DOCKERHUB_USERNAME" ] && [ -z "$DOCKERHUB_PASSWORD"]; then exit 1; fi
     - docker version
     - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
