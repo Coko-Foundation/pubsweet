@@ -60,6 +60,8 @@ push:latest:
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
     - docker build -t $IMAGE_ORG/$IMAGE_NAME:latest --label COMMIT_SHA=$CI_COMMIT_SHA .
     - docker push $IMAGE_ORG/$IMAGE_NAME:latest
+  only:
+  - master
 
 # -----------------------------------------------
 # ui --------------------------------------------
