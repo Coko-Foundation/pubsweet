@@ -285,11 +285,22 @@ const upload = {
   },
 }
 
+const graphql = {
+  query: (query, variables, token) => {
+    const req = request(api)
+      .post('/graphql')
+      .send({ query, variables })
+    if (token) req.set('Authorization', `Bearer ${token}`)
+    return req
+  },
+}
+
 module.exports = {
   fragments,
   users,
   collections,
   teams,
   upload,
+  graphql,
   api,
 }

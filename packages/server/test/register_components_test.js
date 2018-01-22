@@ -13,4 +13,9 @@ describe('App startup', async () => {
     const res = await request(api.api).get('/mock-component')
     expect(res.status).toBe(STATUS.OK)
   })
+
+  it('loads graphql types and resolvers', async () => {
+    const res = await api.graphql.query('{ test }')
+    expect(res.body).toEqual({ data: { test: 'OK' } })
+  })
 })
