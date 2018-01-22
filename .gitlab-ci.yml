@@ -17,10 +17,10 @@ build:
   stage: build
   script:
     - docker version
-    - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD; fi
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
     - docker build -t $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA .
-    - docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+    - if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_PASSWORD" ]; then docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA; fi
 
 lint:style:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
@@ -73,7 +73,7 @@ stop_review:ui:
   image: xpub/deployer:latest
   stage: review
   variables:
-    PACKAGE_NAME: ui 
+    PACKAGE_NAME: ui
     GIT_STRATEGY: none
   environment:
     name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
