@@ -1,0 +1,23 @@
+{
+  "name": "pubsweet-component-polling-backend",
+  "version": "0.0.1",
+  "description": "Polling backend component",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "peerDependencies": {
+    "@pubsweet/logger": ">=0.0.1",
+    "pubsweet-server": ">=1.0.0-alpha.1"
+  },
+  "dependencies": {
+    "pubsweet-sse": "^0.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "PollingBackend"
+  }
+}

@@ -55,6 +55,25 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@pubsweet/db-manager@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@pubsweet/db-manager/-/db-manager-0.0.12.tgz#e05c2f2d6a664a33dcf70050e28f8b82a3a17564"
+  dependencies:
+    "@pubsweet/logger" "^0.1.2"
+    fs-extra "^4.0.2"
+    isomorphic-fetch "^2.2.1"
+    joi "^13.1.0"
+    pouchdb "^6.3.4"
+    pubsweet-server "^1.0.4"
+
+"@pubsweet/logger@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@pubsweet/logger/-/logger-0.1.2.tgz#a7e27d346967beefd88eef51ea324922eb939d91"
+  dependencies:
+    config "^1.26.2"
+    joi "^13.1.0"
+    lodash "^4.17.4"
+
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
   resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#2a2a5c197a90befc2c60a6cf226b699353a6daae"
@@ -8545,6 +8564,15 @@ public-encrypt@^4.0.0:
     create-hash "^1.1.0"
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
+
+pubsweet-component-form-group@0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-0.1.6.tgz#020fcb45967abafeb113bed3deefc39cb34e7f60"
+  dependencies:
+    joi-browser "^13.0.1"
+    prop-types "^15.5.10"
+    pubsweet-server "^1.0.4"
+    react-bootstrap "^0.31.3"
 
 pubsweet-component-posts-manager@0.6.5:
   version "0.6.5"
