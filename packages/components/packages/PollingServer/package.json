@@ -9,7 +9,6 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "peerDependencies": {
-    "@pubsweet/logger": ">=0.0.1",
     "pubsweet-server": ">=1.0.0"
   },
   "repository": {
