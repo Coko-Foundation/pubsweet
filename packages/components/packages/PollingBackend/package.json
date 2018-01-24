@@ -12,9 +12,6 @@
     "@pubsweet/logger": ">=0.0.1",
     "pubsweet-server": ">=1.0.0-alpha.1"
   },
-  "dependencies": {
-    "pubsweet-sse": "^0.1.4"
-  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",

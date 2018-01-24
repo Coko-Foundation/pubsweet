@@ -1,7 +1,6 @@
-// const sse = require('pubsweet-sse')
-
 const PollingBackend = app => {
   const { Fragment, Collection, User } = app.locals.models
+  const { sse } = app.locals
   let task
 
   const setTimer = (handler, milisecond, opts) => {
@@ -16,16 +15,18 @@ const PollingBackend = app => {
   }
 
   const unlocker = async opts => {
-    // const { collectionId, fragmentId, user } = opts
     const { collectionId, fragmentId } = opts
-    // console.log('user', user)
     const collection = await Collection.find(collectionId)
+
     if (!collection.fragments.includes(fragmentId)) {
       throw new Error(
         `collection ${collection.id} does not contain fragment ${fragmentId}`,
       )
     }
+
     const fragment = await Fragment.find(fragmentId)
+
+    if (fragment.lock === null) return
 
     const patch = {
       id: fragment.id,
@@ -36,14 +37,13 @@ const PollingBackend = app => {
     await fragment.updateProperties(patch)
     await fragment.save()
     fragment.owners = await User.ownersWithUsername(fragment)
-    const data = {}
+    const update = {}
 
     Object.keys(patch).forEach(key => {
-      data[key] = fragment[key]
+      update[key] = fragment[key]
     })
-    // console.log('data', data)
-    const update = data
-    app.locals.sse.send({
+
+    sse.send({
       action: 'fragment:patch',
       data: { fragment: { id: fragment.id }, update },
     })
