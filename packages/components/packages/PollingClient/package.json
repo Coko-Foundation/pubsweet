@@ -1,14 +1,14 @@
 {
-  "name": "pubsweet-component-polling-frontend",
+  "name": "@pubsweet/component-polling-client",
   "version": "0.0.1",
   "description":
-    "A frontend component that poll the server in order to release the lock of a resource",
+    "A client component that poll the server in order to release the lock of a resource",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "keywords": ["polling", "lock", "frontend", "pubsweet"],
+  "keywords": ["polling", "lock", "client", "pubsweet"],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
@@ -16,7 +16,10 @@
     "redux": "^3.7.2"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
+    "pubsweet-client": ">=1.0.0",
     "react": ">=15"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

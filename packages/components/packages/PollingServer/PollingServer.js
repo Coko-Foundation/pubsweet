@@ -1,4 +1,4 @@
-const PollingBackend = app => {
+const PollingServer = app => {
   const { Fragment, Collection, User } = app.locals.models
   const { sse } = app.locals
   let task
@@ -85,4 +85,4 @@ const PollingBackend = app => {
   )
 }
 
-module.exports = PollingBackend
+module.exports = PollingServer
