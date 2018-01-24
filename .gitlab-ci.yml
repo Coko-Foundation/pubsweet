@@ -68,7 +68,7 @@ push:latest:
 # -----------------------------------------------
 
 review:ui:
-  image: xpub/deployer:latest
+  image: pubsweet/deployer:latest
   stage: review
   variables:
     PACKAGE_NAME: ui
@@ -84,7 +84,7 @@ review:ui:
     - create_deployment
 
 stop_review:ui:
-  image: xpub/deployer:latest
+  image: pubsweet/deployer:latest
   stage: review
   variables:
     PACKAGE_NAME: ui
@@ -100,7 +100,7 @@ stop_review:ui:
     - delete_deployment_no_db
 
 staging:ui:
-  image: xpub/deployer:latest
+  image: pubsweet/deployer:latest
   stage: staging
   variables:
     PACKAGE_NAME: ui
@@ -114,7 +114,7 @@ staging:ui:
     - create_deployment
 
 production:ui:
-  image: xpub/deployer:latest
+  image: pubsweet/deployer:latest
   stage: production
   variables:
     PACKAGE_NAME: ui
@@ -129,7 +129,7 @@ production:ui:
     - create_deployment
 
 demo:ui:
-  image: xpub/deployer:latest
+  image: pubsweet/deployer:latest
   stage: demo
   variables:
     PACKAGE_NAME: ui
