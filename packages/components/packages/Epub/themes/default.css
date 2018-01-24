@@ -2098,6 +2098,11 @@ sup {
   width: 97%;
 }
 
+.inline-note-content p {
+  text-indent: 0;
+  text-align: left;
+}
+
 .di li {
   list-style-position: inside;
   list-style-type: none;

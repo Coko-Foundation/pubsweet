@@ -133,20 +133,27 @@ module.exports = (
 
     const id = $elem.attr('data-id')
     const noteNumber = `${i + 1}.`
-    const content = `${$elem.attr('note-content')}`
+    const element = $('#notes').find($(`#container-${id}`))
+    let content = ''
+
+    for (let i = 0; i < element.children().length; i += 1) {
+      const currentElement = $(element.children().get(i))
+      content += `<p>${currentElement.text()}</p>`
+    }
 
     const callout = $(`
       <a class="inline-note-callout" href="#${id}">
         <sup>${i + 1}</sup>
       </a>
-      <span class="inline-note-footer" data-note-num="${id}">
+      <div class="inline-note-footer" data-note-num="${id}">
         <span class="inline-note-number"> ${noteNumber} </span>
-        <span class="inline-note-content"> ${content} </span>
-      </span>
+        <div class="inline-note-content"> ${content} </div>
+      </div>
     `)
 
     $elem.replaceWith(callout)
   })
+  $('#notes').remove()
 
   const bodyContent = body.contents()
   innerContainer.append(bodyContent)
