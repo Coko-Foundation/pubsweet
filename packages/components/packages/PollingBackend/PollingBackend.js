@@ -1,4 +1,4 @@
-const sse = require('pubsweet-sse')
+// const sse = require('pubsweet-sse')
 
 const PollingBackend = app => {
   const { Fragment, Collection, User } = app.locals.models
@@ -41,12 +41,11 @@ const PollingBackend = app => {
     Object.keys(patch).forEach(key => {
       data[key] = fragment[key]
     })
-
-    // console.log('fragment', fragment)
-
-    sse.send({
+    // console.log('data', data)
+    const update = data
+    app.locals.sse.send({
       action: 'fragment:patch',
-      data: { fragment: { id: fragment.id }, data },
+      data: { fragment: { id: fragment.id }, update },
     })
   }
 
