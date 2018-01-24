@@ -59,6 +59,8 @@ const configureApp = app => {
     )
   }
 
+  app.locals.sse = sse
+
   // Serve the index page for front end
   app.use('/manage', index)
   app.use('/', index)
