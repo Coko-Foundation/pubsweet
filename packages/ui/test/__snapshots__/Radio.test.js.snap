@@ -12,26 +12,30 @@ exports[`Radio is rendered correctly 1`] = `
   <input
     checked={false}
     className="input"
+    disabled={undefined}
     name="TestName"
     onChange={undefined}
     required={true}
     type="radio"
     value="TestValue"
   />
+   
   <span
     className="pseudoInput"
     style={
       Object {
-        "background": "transparent",
+        "color": "black",
       }
     }
-  >
-     
-  </span>
+  />
+   
   <span
     className="label"
   >
+     
     TestLabel
+     
   </span>
+   
 </label>
 `;

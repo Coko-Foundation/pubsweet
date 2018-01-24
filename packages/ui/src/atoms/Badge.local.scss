@@ -1,10 +1,15 @@
 .root {
   align-items: center;
-  // background: lightgrey;
-  background: linear-gradient(#fff 0, #fff 1.1em, grey 1.1em, grey 1.15em, #fff 1.15em, #fff 2em);
-  color: inherit;
-  display: inline-flex;
-  font-size: 0.8rem;
+  background: linear-gradient(
+    #fff 0,
+    #fff 1.1em,
+    grey 1.1em,
+    grey 1.2em,
+    #fff 1.15em,
+    #fff 2em
+  );
+  font-family: var(--font-interface);
+  font-size: 1em;
   margin-right: 1em;
   padding-bottom: 1em;
 }
@@ -21,5 +26,6 @@
 .label {
   display: inline-block;
   padding: 0;
-  text-shadow: 0.05em 0.05em 0 #fff, -0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em -0.05em 0 #fff;
+  text-shadow: 0.05em 0.05em 0 #fff, -0.05em -0.05em 0 #fff,
+    -0.05em 0.05em 0 #fff, 0.05em -0.05em 0 #fff;
 }

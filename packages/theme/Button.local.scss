@@ -28,7 +28,7 @@
 //   padding: 0.1em 0.3em;
 //   opacity: 0;
 // }
-.root:active {
+.root :active {
   transform: scale(0.8);
 }
 
@@ -66,6 +66,7 @@
   border: 2px solid transparent;
   border-bottom: 2px solid #bbb;
   color: #bbb;
+  cursor: not-allowed;
 }
 
 .disabled:hover {
@@ -73,7 +74,6 @@
   border: 2px solid transparent;
   border-bottom: 2px solid #bbb;
   color: #aaa;
-  cursor: not-allowed;
 }
 
 .disabled:hover::after {
@@ -89,7 +89,6 @@
   text-align: left;
   text-transform: lowercase;
   top: 30%;
-  // width: 30ch;
 }
 
 .addFile {

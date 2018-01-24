@@ -1,10 +1,45 @@
 .root {
-  align-items: center;
-  display: flex;
+  font-size: 1em;
 }
 
-.label {
+.inline {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   margin-right: 0.5em;
+}
+
+.inline .label {
+  margin-right: 0.5em;
+}
+
+.opener {
+  background: transparent;
+  border: none;
+  border-left: 2px solid lightgrey;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.2em;
+}
+
+.opener:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.inline .opener {
+  margin-bottom: -4px;
+}
+
+.root .inline {
+  flex-direction: columns;
+}
+
+.root:not(.inline) .label {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 0.5em;
 }
 
 .main {
@@ -15,22 +50,6 @@
   position: absolute;
 }
 
-.opener {
-  align-items: center;
-  background: transparent;
-  border: none;
-  border-left: 2px solid transparent;
-  cursor: pointer;
-  display: flex;
-  font-family: var(--font-author);
-  font-size: inherit;
-  outline: none;
-}
-
-.opener:hover {
-  color: var(--color-primary);
-}
-
 .open .opener {
   border-left: 2px solid var(--color-primary);
   color: var(--color-primary);
@@ -39,7 +58,9 @@
 .placeholder {
   color: #aaa;
   font-family: var(--font-interface);
+  font-style: italic;
   font-weight: 400;
+  text-transform: normal;
 }
 
 .opener:hover .placeholder {
@@ -61,17 +82,20 @@
   background-color: white;
   border-bottom: 2px solid var(--color-primary);
   border-left: 2px solid var(--color-primary);
-  // columns: 2 auto;
   left: 0;
-  min-width: 10em;
+  min-width: 0;
   opacity: 0;
+  padding-bottom: 0.5em;
   padding-top: 0.5em;
   position: absolute;
   top: 0;
+  transition: opacity 2s;
+  width: 0;
   z-index: 10;
 }
 
 .open .options {
+  min-width: 10em;
   opacity: 1;
 }
 
@@ -89,4 +113,8 @@
 .active {
   color: black;
   font-weight: 600; /* placeholder for the semibold */
+}
+
+.root.author {
+  font-family: var(--font-author);
 }
