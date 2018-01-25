@@ -1,14 +1,14 @@
 const PollingServer = app => {
   const { Fragment, Collection, User } = app.locals.models
-  const { sse } = app.locals
-  let task
+  const tasks = {}
 
   const setTimer = (handler, milisecond, opts) => {
-    if (task) {
-      clearTimeout(task)
+    if (Object.keys(tasks).length > 0) {
+      clearTimeout(tasks[opts.fragmentId])
+      delete tasks[opts.fragmentId]
     }
     try {
-      task = setTimeout(handler, milisecond, opts)
+      tasks[opts.fragmentId] = setTimeout(handler, milisecond, opts)
     } catch (e) {
       throw new Error('error')
     }
@@ -37,16 +37,23 @@ const PollingServer = app => {
     await fragment.updateProperties(patch)
     await fragment.save()
     fragment.owners = await User.ownersWithUsername(fragment)
-    const update = {}
+
+    const data = {}
 
     Object.keys(patch).forEach(key => {
-      update[key] = fragment[key]
+      data[key] = fragment[key]
     })
 
-    sse.send({
+    const update = data
+
+    app.locals.sse.send({
       action: 'fragment:patch',
       data: { fragment: { id: fragment.id }, update },
     })
+
+    if (Object.keys(tasks).length > 0) {
+      delete tasks[opts.fragmentId]
+    }
   }
 
   app.get(
