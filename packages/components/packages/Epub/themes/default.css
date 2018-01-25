@@ -2083,19 +2083,22 @@ sup {
   line-height: 15px;
   margin-bottom: 0;
   margin-top: 0;
+  vertical-align: baseline;
 }
 
 .inline-note-number {
   float: left;
   text-indent: 0;
-  width: 3%;
+  width: 4%;
 }
 
 .inline-note-content {
   float: left;
   overflow-wrap: break-word;
   text-indent: 0;
-  width: 97%;
+  width: 96%;
+  position: relative;
+  bottom: 2px;
 }
 
 .inline-note-content p {
