@@ -5,6 +5,7 @@ class Fragment extends Model {
   constructor(properties) {
     super(properties)
     this.type = 'fragment'
+    this.owners = this.owners || []
   }
 
   async delete() {

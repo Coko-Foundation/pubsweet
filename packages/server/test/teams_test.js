@@ -127,7 +127,6 @@ describe('Teams model', () => {
       .then(team =>
         team.updateProperties({
           members: [userId, adminId],
-          rev: team.rev,
         }),
       )
       .then(team => team.save())

@@ -13,7 +13,6 @@ const validations = {
       .required(),
     type: Joi.string().required(),
     fragmentType: Joi.string().required(),
-    rev: Joi.string(),
     fragments: Joi.array().items(Joi.string().guid()),
     owners: Joi.array().items(Joi.string().guid()),
   },
@@ -22,12 +21,11 @@ const validations = {
       .guid()
       .required(),
     type: Joi.string().required(),
-    rev: Joi.string(),
     owners: Joi.array().items(Joi.string().guid()),
     fragments: Joi.array().items(
       Joi.alternatives().try(
         // a fragment ID
-        Joi.string(),
+        Joi.string().guid(),
         // or a fragment object
         Joi.object({ type: Joi.string().valid('fragment') }).unknown(true),
       ),
@@ -46,7 +44,6 @@ const validations = {
       .required(),
     passwordHash: Joi.string().required(),
     admin: Joi.boolean(),
-    rev: Joi.string(),
     fragments: Joi.array().items(Joi.string().guid()),
     collections: Joi.array().items(Joi.string().guid()),
     teams: Joi.array().items(Joi.string().guid()),
@@ -61,7 +58,6 @@ const validations = {
     name: Joi.string().required(),
     object: Joi.object().required(),
     teamType: Joi.object().required(),
-    rev: Joi.string(),
     members: Joi.array().items(Joi.string().guid()),
   },
 }

@@ -42,12 +42,12 @@ describe('unauthenticated/public api', () => {
         .retrieveFragment(collection.id, fragment.id)
         .expect(STATUS.OK)
         .then(res =>
-          expect(Object.keys(res.body)).toEqual([
+          expect(Object.keys(res.body).sort()).toEqual([
             'id',
-            'title',
-            'source',
-            'presentation',
             'owners',
+            'presentation',
+            'source',
+            'title',
           ]),
         ))
 

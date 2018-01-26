@@ -32,18 +32,7 @@ const setupDbSchema = userSchema.keys({
   clobber: Joi.boolean().optional(),
 })
 
-const serverSchema = Joi.object({
-  dbPath: Joi.string().required(),
-})
-
 module.exports = {
-  validateServerConfig: function validateServerConfig(serverConfig) {
-    const result = Joi.validate(serverConfig, serverSchema, {
-      allowUnknown: true,
-    })
-    if (result.error) throw result.error
-    return null
-  },
   validateSetupDbConfig: function validateSetupDbConfig(setupDbConfig) {
     const result = Joi.validate(setupDbConfig, setupDbSchema, {
       allowUnknown: true,

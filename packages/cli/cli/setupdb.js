@@ -1,8 +1,9 @@
 const program = require('commander')
-const properties = require('../src/schemas/').db
+const properties = require('../src/schemas').db
 const { setupDb } = require('@pubsweet/db-manager')
+const db = require('pubsweet-server/src/db')
 const config = require('config')
-const _ = require('lodash')
+const { forEach, merge } = require('lodash')
 const runPrompt = require('../src/run-prompt')
 
 const readCommand = async argsOverride => {
@@ -10,7 +11,7 @@ const readCommand = async argsOverride => {
     'Setup a database for a PubSweet app. Run from your project root',
   )
 
-  _.forEach(properties, (value, key) => {
+  forEach(properties, (value, key) => {
     if (value.type === 'boolean') {
       program.option(`--${key}`, value.description)
     } else {
@@ -23,11 +24,14 @@ const readCommand = async argsOverride => {
 
 module.exports = async argsOverride => {
   const commandOpts = await readCommand(argsOverride)
-  commandOpts.clobber = !!commandOpts.clobber // Always interpret absence of option as clobber = false
-
   const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
-  const promptOverride = _.merge(configOpts, commandOpts)
+
+  const promptOverride = merge(configOpts, commandOpts)
+  promptOverride.clobber = !!promptOverride.clobber // Always interpret absence of option as clobber = false
   const finalOpts = await runPrompt({ properties, override: promptOverride })
 
-  return setupDb(finalOpts)
+  await setupDb(finalOpts)
+
+  // drain pool to avoid 10 second delay before command exits
+  db.end()
 }

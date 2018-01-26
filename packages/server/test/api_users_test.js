@@ -18,8 +18,6 @@ describe('users api', () => {
     expect(userId).not.toBeNull()
   })
 
-  afterEach(cleanDB)
-
   describe('admin', () => {
     let otherUser
 
@@ -27,13 +25,6 @@ describe('users api', () => {
       const user = new User(fixtures.otherUser)
       otherUser = await user.save()
     })
-
-    afterEach(
-      () =>
-        User.find(otherUser.id)
-          .then(user => user.delete())
-          .catch(() => {}), // we might have already deleted the user
-    )
 
     it('can get a list of users', () =>
       api.users.authenticate
@@ -53,7 +44,7 @@ describe('users api', () => {
         }))
 
     it('can make another user an admin', () => {
-      const patchedUser = Object.assign(otherUser, { admin: true })
+      const patchedUser = { ...otherUser, admin: true }
 
       return api.users.authenticate
         .post(fixtures.user)
