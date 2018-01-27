@@ -9,8 +9,13 @@ const logger = require('@pubsweet/logger')
 
 const config = require('config')
 
-const appValidations = require(config.validations)
-const validations = require('./validations')(appValidations)
+let validations
+if (config.validations) {
+  const appValidations = require(config.validations)
+  validations = require('./validations')(appValidations)
+} else {
+  validations = require('./validations')()
+}
 
 schema()
 
