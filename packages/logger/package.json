@@ -20,7 +20,7 @@
   "author": "Antony Denyer",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.2.1",
+    "jest": "^22.1.4",
     "nsp": "^2.7.0",
     "winston": "^2.3.1"
   },

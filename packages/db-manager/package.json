@@ -29,7 +29,7 @@
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.1.0",
+    "jest": "^22.1.4",
     "nsp": "^2.8.0"
   },
   "dependencies": {
