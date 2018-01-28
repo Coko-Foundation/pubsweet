@@ -58,6 +58,7 @@
   "jest": {
     "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     "collectCoverageFrom": ["src/**/*.{js,jsx}"],
     "globals": {
       "window": {}

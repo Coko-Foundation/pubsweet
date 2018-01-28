@@ -26,11 +26,29 @@
   },
   "scripts": {
     "clean": "lerna clean",
-    "test": "lerna run test",
+    "test": "jest",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint 'packages/**/*.{js,jsx}'",
     "lint:style": "stylelint 'packages/**/*.{css,scss}'",
     "precommit": "lint-staged"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "packages/cli/src/*.js",
+      "packages/cli/cli/*.js",
+      "client/src/**/*.{js,jsx}",
+      "components/**/*.{js,jsx}",
+      "db-manager/src/**/*.js",
+      "logger/src/**/*.js",
+      "server/src/**/*.js",
+      "sse/lib/**/*.js",
+      "theme-plugin/*.js",
+      "ui/src/**/*.{js,jsx}",
+      "!**/*.test.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "projects": ["packages/*"]
   },
   "workspaces": ["packages/*", "packages/components/packages/*"]
 }

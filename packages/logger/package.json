@@ -25,12 +25,13 @@
     "winston": "^2.3.1"
   },
   "jest": {
-    "testMatch": ["**/test/**/*.js"],
+    "testMatch": ["**/test/**/*test.js"],
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
     "modulePaths": ["<rootDir>/node_modules"],
     "testEnvironment": "node",
-    "verbose": true
+    "verbose": true,
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   },
   "dependencies": {
     "config": "^1.26.2",

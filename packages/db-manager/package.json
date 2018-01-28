@@ -19,10 +19,10 @@
     "npm": ">=3.0.0"
   },
   "jest": {
-    "testMatch": ["**/test/**/*.js"],
+    "testMatch": ["**/test/**/*.test.js"],
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
-    "modulePaths": ["<rootDir>/node_modules"],
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     "testEnvironment": "node",
     "verbose": true
   },
