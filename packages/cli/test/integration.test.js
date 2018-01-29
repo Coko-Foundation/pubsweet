@@ -18,6 +18,18 @@ const nodeConfig = {
     dbPath,
     adapter: 'leveldb',
   },
+  // TODO: Remove this once version of server that handles
+  // undefined app validations is released.
+  validations: 'path',
+  authsome: {
+    mode: 'authsome/src/modes/blog',
+  },
+  pubsweet: {
+    components: [],
+  },
+  'pubsweet-client': {
+    theme: 'PepperTheme',
+  },
 }
 
 const dbOptions = {
@@ -155,10 +167,16 @@ describe('CLI: integration test', () => {
       app.stdout.on('data', async data => {
         console.log('stdout:', data.toString())
         if (data.toString().includes('App is listening')) {
-          const result = await fetch('http://localhost:4000')
+          const result = await fetch('http://localhost:3000')
           expect(result.status).toBe(200)
-          done()
+          console.log('Killing the app')
+          process.kill(-app.pid)
         }
+      })
+
+      app.on('close', (code, signal) => {
+        console.log(`App killed ${signal}`)
+        done()
       })
     })
   })

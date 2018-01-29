@@ -24,9 +24,7 @@ const writeSpy = fs.writeJsonSync
 
 describe('add', () => {
   beforeAll(() => {
-    process.chdir(
-      path.join(__dirname, '..', '..', 'node_modules', '@pubsweet', 'starter'),
-    )
+    process.chdir(path.dirname(require.resolve('@pubsweet/starter')))
   })
 
   beforeEach(() => {

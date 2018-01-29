@@ -3,7 +3,7 @@ const { spawn } = require('child_process')
 const path = require('path')
 const reduce = require('lodash/fp/reduce').convert({ cap: false })
 
-const pubsweet = path.resolve('bin/pubsweet.js')
+const pubsweet = path.resolve(__dirname, '..', '..', 'bin', 'pubsweet.js')
 
 const formatOpts = reduce(
   (acc, value, key) => acc.concat(`--${key}`, value),
@@ -41,6 +41,7 @@ const runCommandAsync = ({ args, options, cwd, nodeConfig, stdio }) =>
     stdio,
     env: getEnvWithConfig(nodeConfig),
     shell: true,
+    detached: true,
   })
 
 module.exports = {

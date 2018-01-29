@@ -3,12 +3,7 @@ const request = require('supertest')
 const path = require('path')
 const config = require('config')
 
-const mockComponentPath = path.join(
-  process.cwd(),
-  'test',
-  'mocks',
-  'mock_component.js',
-)
+const mockComponentPath = path.resolve(__dirname, 'mocks', 'mock_component.js')
 config.pubsweet = { components: [mockComponentPath] }
 
 const api = require('./helpers/api')

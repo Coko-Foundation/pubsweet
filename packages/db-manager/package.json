@@ -19,17 +19,17 @@
     "npm": ">=3.0.0"
   },
   "jest": {
-    "testMatch": ["**/test/**/*.js"],
+    "testMatch": ["**/test/**/*.test.js"],
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
-    "modulePaths": ["<rootDir>/node_modules"],
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     "testEnvironment": "node",
     "verbose": true
   },
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.1.0",
+    "jest": "^22.1.4",
     "nsp": "^2.8.0"
   },
   "dependencies": {

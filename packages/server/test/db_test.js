@@ -1,3 +1,7 @@
+const path = require('path')
+
+process.env.NODE_CONFIG_DIR = path.resolve(__dirname, '..', 'config')
+
 describe('db configuration', () => {
   it('overrides default adapter with config', async () => {
     const originalNodeEnv = process.env.NODE_ENV
