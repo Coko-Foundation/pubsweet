@@ -97,7 +97,7 @@ stop_review:ui:
   - master
   script:
     - source deploy.sh
-    - delete_deployment_no_db
+    - delete_deployment
 
 staging:ui:
   image: pubsweet/deployer:latest
