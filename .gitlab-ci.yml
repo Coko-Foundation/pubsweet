@@ -75,7 +75,7 @@ review:ui:
   environment:
     name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
     # !! kube-lego will fail if domain > 63 chars
-    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
+    url: "http://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
     on_stop: stop_review:ui
   except:
   - master
