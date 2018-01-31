@@ -32,3 +32,61 @@ exports[`Menu is rendered correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`Menu is rendered correctly when open 1`] = `
+<div
+  className="root open"
+>
+  <div
+    className="main"
+    role="listbox"
+  >
+    <div
+      className="openerContainer"
+    >
+      <button
+        className="opener"
+        onClick={[Function]}
+        type="button"
+      >
+        <span>
+          Foo
+        </span>
+        <span
+          className="arrow"
+        >
+          ▼
+        </span>
+      </button>
+    </div>
+    <div
+      className="optionsContainer"
+    >
+      <div
+        className="options"
+      >
+        <div
+          aria-selected={true}
+          className="option active"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="option"
+          tabIndex="0"
+        >
+          Foo
+        </div>
+        <div
+          aria-selected={false}
+          className="option"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="option"
+          tabIndex="0"
+        >
+          Bar
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
