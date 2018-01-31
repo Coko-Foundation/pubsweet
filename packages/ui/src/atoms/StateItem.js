@@ -33,12 +33,11 @@ const Root = styled.span`
   ${props => (props.disabled ? disabled : '')};
 `
 
-const StateItem = ({ disabled, name, update, values, index }) => {
-  const handleInteraction = () => {
+const StateItem = ({ update, disabled, values, index }) => {
+  const callUpdateWithNextIndex = () => {
     if (disabled) return
-
     const nextIndex = arrayShift(values, index)
-    update(name, nextIndex)
+    update(values[index], nextIndex)
   }
 
   const arrayShift = (array, i) => (i === array.length - 1 ? 0 : i + 1)
@@ -46,8 +45,8 @@ const StateItem = ({ disabled, name, update, values, index }) => {
   return (
     <Root
       disabled={disabled}
-      onClick={handleInteraction}
-      onKeyPress={handleInteraction}
+      onClick={callUpdateWithNextIndex}
+      onKeyPress={callUpdateWithNextIndex}
       role="button"
       tabIndex="0"
     >
@@ -59,7 +58,6 @@ const StateItem = ({ disabled, name, update, values, index }) => {
 StateItem.propTypes = {
   disabled: PropTypes.bool,
   index: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

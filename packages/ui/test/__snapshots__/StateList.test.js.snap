@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StateList is rendered correctly 1`] = `
+.c0 {
+  cursor: pointer;
+  font-family: var(--font-interface);
+  font-size: 16px;
+  font-style: italic;
+  padding: 0;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:hover {
+  color: #404040;
+  -webkit-transition: 0.25s ease-in-out 0s;
+  transition: 0.25s ease-in-out 0s;
+}
+
 <div
   className="stateListContainer"
 >
@@ -8,7 +26,7 @@ exports[`StateList is rendered correctly 1`] = `
     className="itemContainer"
   >
     <span
-      className="root"
+      className="c0"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -38,7 +56,7 @@ exports[`StateList is rendered correctly 1`] = `
     className="itemContainer"
   >
     <span
-      className="root"
+      className="c0"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -68,7 +86,7 @@ exports[`StateList is rendered correctly 1`] = `
     className="itemContainer"
   >
     <span
-      className="root"
+      className="c0"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -98,7 +116,7 @@ exports[`StateList is rendered correctly 1`] = `
     className="itemContainer"
   >
     <span
-      className="root"
+      className="c0"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}

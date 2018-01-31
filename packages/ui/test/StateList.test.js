@@ -1,6 +1,7 @@
 import React from 'react'
 import { forIn } from 'lodash'
 import { shallow } from 'enzyme'
+import 'jest-styled-components'
 import renderer from 'react-test-renderer'
 
 import StateItem from '../src/atoms/StateItem'
@@ -50,7 +51,6 @@ describe('StateList', () => {
 
       expect(stateItemProps.disabled).toEqual(false)
       expect(stateItemProps.index).toEqual(props.currentValues[key])
-      expect(stateItemProps.name).toEqual(key)
       expect(stateItemProps.values).toEqual(props.values[key])
 
       i += 1

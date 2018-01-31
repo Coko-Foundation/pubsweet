@@ -13,24 +13,23 @@ const StateList = ({ currentValues, update, values }) => {
   // TODO: Placeholder -- to be implemented with authsome
   const canAct = key => true
 
-  const handleUpdate = (name, index) => {
-    update(name, index)
+  const handleUpdate = (currentItem, nextIndex) => {
+    update(currentItem, nextIndex)
   }
 
-  const items = map(values, (valueList, name) => {
+  const items = map(values, (valueList, currentItem) => {
     let delimiter
-    const currentValueIndex = currentValues[name]
+    const currentValueIndex = currentValues[currentItem]
 
-    if (name !== lastItem) {
+    if (currentItem !== lastItem) {
       delimiter = <ChevronRight className={classes.delimiter} size={16} />
     }
 
     return (
       <div className={classes.itemContainer} key={uniqueId()}>
         <StateItem
-          disabled={!canAct(name)}
+          disabled={!canAct(currentItem)}
           index={currentValueIndex}
-          name={name}
           update={handleUpdate}
           values={valueList}
         />
