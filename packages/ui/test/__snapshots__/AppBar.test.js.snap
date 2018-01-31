@@ -30,6 +30,14 @@ exports[`AppBar Basic display 1`] = `
 `;
 
 exports[`AppBar With admin user 1`] = `
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: var(--icon-size);
+}
+
 <nav
   className="root"
 >
@@ -51,7 +59,7 @@ exports[`AppBar With admin user 1`] = `
       className="item"
     >
       <span
-        className="root"
+        className="c0"
       >
         <svg
           height={16}
@@ -88,7 +96,7 @@ exports[`AppBar With admin user 1`] = `
       onClick={[Function]}
     >
       <span
-        className="root"
+        className="c0"
       >
         <svg
           fill="none"

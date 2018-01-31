@@ -2,6 +2,7 @@ import React from 'react'
 import { clone } from 'lodash'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
+import 'jest-styled-components'
 
 import Radio from '../src/atoms/Radio'
 import RadioGroup from '../src/molecules/RadioGroup'
