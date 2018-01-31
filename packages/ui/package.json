@@ -9,7 +9,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^22.1.0",
     "classnames": "^2.2.5",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-15": "^1.0.5",
