@@ -36,8 +36,6 @@ describe('currentUser reducers', () => {
     )
     expect(actual).toEqual({
       isFetching: false,
-      isAuthenticated: false,
-      user: null,
     })
   })
 

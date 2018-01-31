@@ -1,6 +1,8 @@
 export { default as configureStore } from './store/configureStore'
 export { default as Root } from './components/Root'
-export { requireAuthentication } from './components/AuthenticatedComponent'
+export {
+  default as AuthenticatedComponent,
+} from './components/AuthenticatedComponent'
 export { default as actions } from './actions'
 export { default as reducers } from './reducers'
 export { default as validations } from './validations'

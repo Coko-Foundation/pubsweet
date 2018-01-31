@@ -9,11 +9,12 @@ export default function userSignup(
 ) {
   switch (action.type) {
     case SIGNUP_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: true,
+      return {
+        ...state,
+        isFetching: false,
         isAuthenticated: true,
         user: action.user,
-      })
+      }
     default:
       return state
   }

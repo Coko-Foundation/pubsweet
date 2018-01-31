@@ -17,8 +17,6 @@ const localStorage = window.localStorage || undefined
 function loginRequest(credentials) {
   return {
     type: LOGIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
     credentials,
   }
 }
@@ -26,8 +24,6 @@ function loginRequest(credentials) {
 function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
     token: user.token,
     user,
   }
@@ -36,8 +32,6 @@ function loginSuccess(user) {
 function loginFailure(message) {
   return {
     type: LOGIN_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
     error: message,
   }
 }

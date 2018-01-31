@@ -1,19 +1,20 @@
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signupUser } from './actions'
+import { compose } from 'recompose'
+import { reduxForm } from 'redux-form'
 
+import { signupUser } from './actions'
 import Signup from './Signup'
 
-function mapState(state) {
-  return {
+const onSubmit = (values, dispatch) => {
+  dispatch(signupUser(values))
+}
+
+export default compose(
+  reduxForm({
+    form: 'signup',
+    onSubmit,
+  }),
+  connect(state => ({
     error: state.error,
-  }
-}
-
-function mapDispatch(dispatch) {
-  return {
-    actions: bindActionCreators({ signupUser }, dispatch),
-  }
-}
-
-export default connect(mapState, mapDispatch)(Signup)
+  })),
+)(Signup)

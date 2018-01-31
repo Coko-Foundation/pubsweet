@@ -31,3 +31,13 @@ export function getCurrentUser() {
       .catch(err => dispatch(getCurrentUserFailure(err)))
   }
 }
+
+export function ensureCurrentUser() {
+  return (dispatch, getState) => {
+    const { currentUser } = getState()
+    if (!currentUser.isFetching && !currentUser.isFetched) {
+      return dispatch(getCurrentUser())
+    }
+    return Promise.resolve()
+  }
+}

@@ -44,7 +44,6 @@ describe('Login actions', () => {
 
       expect(secondAction).toMatchObject({
         type: LOGIN_FAILURE,
-        isAuthenticated: false,
         error,
       })
     })
@@ -67,7 +66,6 @@ describe('Login actions', () => {
 
       expect(secondAction).toMatchObject({
         type: LOGIN_SUCCESS,
-        isAuthenticated: true,
         user,
       })
     })
