@@ -1,18 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu is rendered correctly 1`] = `
+.c3 {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.2em;
+}
+
+.c5 {
+  display: inline-block;
+  font-size: 50%;
+  margin-left: 10px;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c1 {
+  position: relative;
+}
+
+.c6 {
+  position: absolute;
+}
+
+.c0 {
+  font-size: 1em;
+}
+
+.c0 .c2 {
+  border-left: 2px solid lightgrey;
+  color: inherit;
+}
+
+.c0 .c2 .sc-bxivhb {
+  color: #aaa;
+}
+
+.c0 .c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c0 .c2:hover .sc-bxivhb {
+  color: var(--color-primary);
+}
+
+.c0 .c4 {
+  -webkit-transform: scaleX(2.2) scaleY(1.2);
+  -ms-transform: scaleX(2.2) scaleY(1.2);
+  transform: scaleX(2.2) scaleY(1.2);
+}
+
+.c0 .sc-gzVnrw {
+  min-width: 0;
+  opacity: 0;
+}
+
 <div
-  className="root"
+  className="c0"
+  open={false}
 >
   <div
-    className="main"
+    className="c1"
     role="listbox"
   >
     <div
-      className="openerContainer"
+      className=""
     >
       <button
-        className="opener"
+        className="c2 c3"
         onClick={[Function]}
         type="button"
       >
@@ -20,32 +79,161 @@ exports[`Menu is rendered correctly 1`] = `
           Foo
         </span>
         <span
-          className="arrow"
+          className="c4 c5"
         >
           ▼
         </span>
       </button>
     </div>
     <div
-      className="optionsContainer"
+      className="c6"
     />
   </div>
 </div>
 `;
 
 exports[`Menu is rendered correctly when open 1`] = `
+.c3 {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.2em;
+}
+
+.c5 {
+  display: inline-block;
+  font-size: 50%;
+  margin-left: 10px;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c1 {
+  position: relative;
+}
+
+.c6 {
+  position: absolute;
+}
+
+.c8 {
+  background-color: white;
+  border-bottom: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+  left: 0;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  position: absolute;
+  top: 0;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+  width: 0;
+  z-index: 10;
+}
+
+.c9 {
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-author);
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.c9:hover {
+  color: var(--color-primary);
+}
+
+.c10 {
+  color: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  font-family: var(--font-author);
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.c10:hover {
+  color: var(--color-primary);
+}
+
+.gQZhbO .c2 {
+  border-left: 2px solid lightgrey;
+  color: inherit;
+}
+
+.gQZhbO .c2 .sc-bxivhb {
+  color: #aaa;
+}
+
+.gQZhbO .c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.gQZhbO .c2:hover .sc-bxivhb {
+  color: var(--color-primary);
+}
+
+.gQZhbO .c4 {
+  -webkit-transform: scaleX(2.2) scaleY(1.2);
+  -ms-transform: scaleX(2.2) scaleY(1.2);
+  transform: scaleX(2.2) scaleY(1.2);
+}
+
+.gQZhbO .c7 {
+  min-width: 0;
+  opacity: 0;
+}
+
+.c0 {
+  font-size: 1em;
+}
+
+.c0 .c2 {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c0 .c2 .sc-bxivhb {
+  color: #aaa;
+}
+
+.c0 .c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c0 .c2:hover .sc-bxivhb {
+  color: var(--color-primary);
+}
+
+.c0 .c4 {
+  -webkit-transform: scaleX(2.2) scaleY(-1.2);
+  -ms-transform: scaleX(2.2) scaleY(-1.2);
+  transform: scaleX(2.2) scaleY(-1.2);
+}
+
+.c0 .c7 {
+  min-width: 10em;
+  opacity: 1;
+}
+
 <div
-  className="root open"
+  className="c0"
+  open={true}
 >
   <div
-    className="main"
+    className="c1"
     role="listbox"
   >
     <div
-      className="openerContainer"
+      className=""
     >
       <button
-        className="opener"
+        className="c2 c3"
         onClick={[Function]}
         type="button"
       >
@@ -53,21 +241,21 @@ exports[`Menu is rendered correctly when open 1`] = `
           Foo
         </span>
         <span
-          className="arrow"
+          className="c4 c5"
         >
           ▼
         </span>
       </button>
     </div>
     <div
-      className="optionsContainer"
+      className="c6"
     >
       <div
-        className="options"
+        className="c7 c8"
       >
         <div
           aria-selected={true}
-          className="option active"
+          className="c9"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -77,7 +265,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="option"
+          className="c10"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
