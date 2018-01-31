@@ -1,8 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AlignmentBox is rendered correctly 1`] = `
+.c0 {
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,1);
+  cursor: pointer;
+  height: 26px;
+  width: 17px;
+  border-style: solid;
+  border-color: #666;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  background-color: transparent;
+}
+
+.c0:hover {
+  background-color: #b3b3b3;
+}
+
 <div
-  className="root"
+  className="c0"
   id="left"
   onClick={[Function]}
   role="presentation"

@@ -13,7 +13,7 @@ exports[`AlignmentTool is rendered correctly 1`] = `
       Left
     </span>
     <div
-      className="root noBorderRight"
+      className="sc-bdVaJa ieYRgr"
       id="left"
       onClick={[Function]}
       role="presentation"
@@ -31,7 +31,7 @@ exports[`AlignmentTool is rendered correctly 1`] = `
       right
     </span>
     <div
-      className="root noBorderLeft"
+      className="sc-bdVaJa fCBdDA"
       id="right"
       onClick={[Function]}
       role="presentation"

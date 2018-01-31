@@ -6,6 +6,10 @@ const lightGrey = '#b3b3b3'
 const mainGrey = '#666'
 const whiteRGBA = 'rgba(255, 255, 255, 1)'
 
+const borderRule = position => props => `
+    border-${position}-width: ${props.noBorder[position] ? '0' : '1px'};
+  `
+
 const Root = styled.div.attrs({
   role: 'presentation',
 })`
@@ -16,12 +20,10 @@ const Root = styled.div.attrs({
 
   border-style: solid;
   border-color: ${mainGrey};
-  border-top-width: ${props => (props.noBorder.top ? 0 : 1)}px;
-  border-right-width: ${props => (props.noBorder.right ? 0 : 1)}px;
-  border-bottom-width: ${props => (props.noBorder.bottom ? 0 : 1)}px;
-  border-left-width: ${props => (props.noBorder.left ? 0 : 1)}px;
-
-  background-color: ${props => (props.active ? mainGrey : 'transparent')};
+  ${borderRule('top')} ${borderRule('right')} ${borderRule(
+      'bottom',
+    )} ${borderRule('left')} background-color: ${props =>
+      props.active ? mainGrey : 'transparent'};
 
   &:hover {
     background-color: ${lightGrey};

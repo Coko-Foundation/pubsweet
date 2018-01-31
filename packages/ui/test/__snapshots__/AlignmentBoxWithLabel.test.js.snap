@@ -10,7 +10,7 @@ exports[`AlignmentBoxWithLabel is rendered correctly 1`] = `
     Left
   </span>
   <div
-    className="root"
+    className="sc-bdVaJa iAeTlR"
     id="left"
     onClick={[Function]}
     role="presentation"
