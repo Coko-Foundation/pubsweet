@@ -720,6 +720,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+atob@~1.1.0:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/atob/-/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
+
 attempt-x@^1.1.0, attempt-x@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/attempt-x/-/attempt-x-1.1.1.tgz#fba64e96ce03c3e0bd92c92622061c4df387cb76"
@@ -2763,6 +2767,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.6.0:
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-spawn@5.1.0, cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -2861,6 +2873,15 @@ css-to-react-native@^2.0.3:
 css-what@2.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.0.tgz#9467d032c38cfaefb9f2d79501253062f87fa1bd"
+
+css@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/css/-/css-2.2.1.tgz#73a4c81de85db664d4ee674f7d47085e3b2d55dc"
+  dependencies:
+    inherits "^2.0.1"
+    source-map "^0.1.38"
+    source-map-resolve "^0.3.0"
+    urix "^0.1.0"
 
 cssesc@^0.1.0:
   version "0.1.0"
@@ -6329,6 +6350,12 @@ jest-snapshot@^22.1.2:
     natural-compare "^1.4.0"
     pretty-format "^22.1.0"
 
+jest-styled-components@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-4.10.0.tgz#6fcd83208fefc4ceb87b79b55d44697a05d226a8"
+  dependencies:
+    css "^2.2.1"
+
 jest-util@^22.1.4:
   version "22.1.4"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-22.1.4.tgz#ac8cbd43ee654102f1941f3f0e9d1d789a8b6a9b"
@@ -9188,6 +9215,42 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pubsweet-client@^1.1.2:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/pubsweet-client/-/pubsweet-client-1.1.4.tgz#9b4ea16bd25d305d7e3392aa45c0db8865471611"
+  dependencies:
+    authsome "0.0.9"
+    config "^1.21.0"
+    event-source-polyfill "^0.0.10"
+    global "^4.3.1"
+    isomorphic-fetch "^2.1.1"
+    lint-staged "^6.0.0"
+    lodash "^4.0.0"
+    prop-types "^15.5.8"
+    pubsweet-component-login "^0.6.0"
+    react "^15.4.4"
+    react-css-themr "^2.1.2"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-router-redux next
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    redux-logger "^3.0.1"
+    redux-thunk "^2.2.0"
+    reselect "^3.0.1"
+
+pubsweet-component-blog@^0.3.1:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-blog/-/pubsweet-component-blog-0.3.5.tgz#3af228868a9bf255414711e0f18e6dd12d455d0e"
+  dependencies:
+    prop-types "^15.5.10"
+    pubsweet-component-manage "^0.2.2"
+    react-bootstrap "^0.31.3"
+    react-redux "^5.0.6"
+    react-router-bootstrap "^0.24.4"
+    react-router-dom "^4.2.2"
+    redux "^3.7.2"
+
 pubsweet-component-form-group@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-0.1.6.tgz#020fcb45967abafeb113bed3deefc39cb34e7f60"
@@ -9195,6 +9258,15 @@ pubsweet-component-form-group@0.1.6:
     joi-browser "^13.0.1"
     prop-types "^15.5.10"
     pubsweet-server "^1.0.4"
+    react-bootstrap "^0.31.3"
+
+pubsweet-component-form-group@^0.1.5:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-0.1.10.tgz#5639d1c427b51da0c34772f202f2090ad38eedac"
+  dependencies:
+    joi-browser "^13.0.1"
+    prop-types "^15.5.10"
+    pubsweet-server "^1.1.0"
     react-bootstrap "^0.31.3"
 
 pubsweet-component-login@^0.5.2:
@@ -9207,6 +9279,36 @@ pubsweet-component-login@^0.5.2:
     react-router-dom "^4.2.2"
     react-router-redux "^4.0.8"
     redux "^3.7.2"
+
+pubsweet-component-login@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-login/-/pubsweet-component-login-0.6.0.tgz#4f5ee6ca096b8b8651d50c9798957a694e42c6d2"
+  dependencies:
+    prop-types "^15.5.10"
+    react-bootstrap "^0.31.3"
+    react-redux "^5.0.6"
+    react-router-dom "^4.2.2"
+    react-router-redux "^4.0.8"
+    redux "^3.7.2"
+    redux-form "^7.0.3"
+
+pubsweet-component-navigation@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-navigation/-/pubsweet-component-navigation-0.3.2.tgz#c4f3d2d61ce61ce116215c4fc700afa665285a72"
+  dependencies:
+    prop-types "^15.5.10"
+    react-bootstrap "^0.31.3"
+    react-router-bootstrap "^0.24.4"
+    react-router-dom "^4.2.2"
+
+pubsweet-component-password-reset-frontend@^0.2.0:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-frontend/-/pubsweet-component-password-reset-frontend-0.2.3.tgz#801e0a49a45fb04890ef993d3f372009f5c472e6"
+  dependencies:
+    prop-types "^15.5.10"
+    query-string "^5.0.0"
+    react-bootstrap "^0.31.3"
+    react-router "^4.2.0"
 
 pubsweet-component-posts-manager@0.6.5:
   version "0.6.5"
@@ -9229,6 +9331,26 @@ pubsweet-component-signup@^0.4.0:
     react-bootstrap "^0.31.3"
     react-redux "^5.0.6"
     react-router "^4.2.0"
+    redux "^3.7.2"
+
+pubsweet-component-teams-manager@^0.3.0:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-teams-manager/-/pubsweet-component-teams-manager-0.3.2.tgz#78d3b1d79c8daed31033361e06d0844d1f1abbe7"
+  dependencies:
+    prop-types "^15.5.10"
+    react-bootstrap "^0.31.3"
+    react-dom "^15.6.1"
+    react-redux "^5.0.6"
+    react-select "^1.0.0-rc.10"
+    redux "^3.7.2"
+
+pubsweet-component-users-manager@^0.2.1:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-users-manager/-/pubsweet-component-users-manager-0.2.3.tgz#8cad081f405f5428a3e4d27a4d0ad77763ce0a2f"
+  dependencies:
+    prop-types "^15.5.10"
+    react-bootstrap "^0.31.3"
+    react-redux "^5.0.6"
     redux "^3.7.2"
 
 pump@^1.0.0:
@@ -9415,6 +9537,13 @@ react-bootstrap@^0.32.0:
 react-codemirror2@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-2.0.2.tgz#68b2ae8923174a2b3d8b6fe905d0fd3c91d97d97"
+
+react-css-themr@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-css-themr/-/react-css-themr-2.1.2.tgz#e017514e471c232f43a754a55b49d81faf5dafb8"
+  dependencies:
+    hoist-non-react-statics "^1.2.0"
+    invariant "^2.2.1"
 
 react-dev-utils@^3.0.2:
   version "3.1.1"
@@ -9696,6 +9825,16 @@ react-transition-group@^2.0.0, react-transition-group@^2.2.0:
     loose-envify "^1.3.1"
     prop-types "^15.5.8"
     warning "^3.0.0"
+
+react@^15.4.4:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
+  dependencies:
+    create-react-class "^15.6.0"
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
 
 react@^16.2.0:
   version "16.2.0"
@@ -10330,6 +10469,10 @@ resolve-pathname@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
 
+resolve-url@~0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
+
 resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
@@ -10720,6 +10863,15 @@ source-list-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
 
+source-map-resolve@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/source-map-resolve/-/source-map-resolve-0.3.1.tgz#610f6122a445b8dd51535a2a71b783dfc1248761"
+  dependencies:
+    atob "~1.1.0"
+    resolve-url "~0.2.1"
+    source-map-url "~0.3.0"
+    urix "~0.1.0"
+
 source-map-support@^0.4.15:
   version "0.4.18"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.18.tgz#0286a6de8be42641338594e97ccea75f0a2c585f"
@@ -10738,9 +10890,19 @@ source-map-support@^0.5.1:
   dependencies:
     source-map "^0.6.0"
 
+source-map-url@~0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.3.0.tgz#7ecaf13b57bcd09da8a40c5d269db33799d4aaf9"
+
 source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.6:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
+
+source-map@^0.1.38:
+  version "0.1.43"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.43.tgz#c24bc146ca517c1471f5dacbe2571b2b7f9e3346"
+  dependencies:
+    amdefine ">=0.0.4"
 
 source-map@^0.4.2, source-map@^0.4.4:
   version "0.4.4"
@@ -11067,6 +11229,19 @@ style-loader@^0.19.0:
 style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
+
+styled-components@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.4.0.tgz#086d0fd483d54638837fca3ea546a030b94adf75"
+  dependencies:
+    buffer "^5.0.3"
+    css-to-react-native "^2.0.3"
+    fbjs "^0.8.9"
+    hoist-non-react-statics "^1.2.0"
+    is-plain-object "^2.0.1"
+    prop-types "^15.5.4"
+    stylis "^3.4.0"
+    supports-color "^3.2.3"
 
 styled-components@^3.1.4:
   version "3.1.4"
@@ -11881,6 +12056,10 @@ unzipper@^0.8.9:
 upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
+
+urix@^0.1.0, urix@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
 
 url-loader@^0.5.9:
   version "0.5.9"
