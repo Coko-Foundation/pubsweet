@@ -17,14 +17,6 @@
   margin-bottom: 0.5rem;
 }
 
-.root span {
-  font-size: 1.2em;
-}
-
-.root:hover span {
-  color: var(--color-primary);
-}
-
 .label {
   display: inline-block;
   font-family: inherit;
@@ -32,8 +24,8 @@
   font-style: italic;
 }
 
-.checked .label {
-  font-weight: inherit;
+.root:not(.checked):hover .label {
+  color: var(--color-primary);
 }
 
 .input {
@@ -59,17 +51,16 @@
 
 .root.checked .pseudoInput {
   background: currentcolor;
-  border: var(--local-border-size) solid white;
   box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
 }
 
 .root:not(.checked):hover .pseudoInput {
   animation: checking 0.5s;
   background: var(--color-primary);
-  border: var(--local-border-size) solid white;
   box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
 }
 
+/* Not used for now
 .root.author {
   font-family: var(--font-author);
 }
@@ -78,6 +69,7 @@
   font-size: 1.3em;
   text-transform: lowercase;
 }
+*/
 
 @keyframes checking {
   0% {
