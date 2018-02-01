@@ -1,62 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu is rendered correctly 1`] = `
-.c3 {
+.c0 {
+  font-size: 1em;
+}
+
+.c2 {
   background: transparent;
   border: none;
   cursor: pointer;
   font-family: inherit;
   font-size: 1.2em;
+  border-left: 2px solid lightgrey;
+  color: inherit;
 }
 
-.c5 {
+.c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c3 {
   display: inline-block;
   font-size: 50%;
   margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
+  -webkit-transform: scaleX(2.2) scaleY(1.2);
+  -ms-transform: scaleX(2.2) scaleY(1.2);
+  transform: scaleX(2.2) scaleY(1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c6 {
+.c4 {
   position: absolute;
-}
-
-.c0 {
-  font-size: 1em;
-}
-
-.c0 .c2 {
-  border-left: 2px solid lightgrey;
-  color: inherit;
-}
-
-.c0 .c2 .sc-bxivhb {
-  color: #aaa;
-}
-
-.c0 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-.c0 .c2:hover .sc-bxivhb {
-  color: var(--color-primary);
-}
-
-.c0 .c4 {
-  -webkit-transform: scaleX(2.2) scaleY(1.2);
-  -ms-transform: scaleX(2.2) scaleY(1.2);
-  transform: scaleX(2.2) scaleY(1.2);
-}
-
-.c0 .sc-gzVnrw {
-  min-width: 0;
-  opacity: 0;
 }
 
 <div
@@ -71,54 +52,70 @@ exports[`Menu is rendered correctly 1`] = `
       className=""
     >
       <button
-        className="c2 c3"
+        className="c2"
         onClick={[Function]}
+        open={false}
         type="button"
       >
         <span>
           Foo
         </span>
         <span
-          className="c4 c5"
+          className="c3"
+          open={false}
         >
           ▼
         </span>
       </button>
     </div>
     <div
-      className="c6"
+      className="c4"
     />
   </div>
 </div>
 `;
 
 exports[`Menu is rendered correctly when open 1`] = `
-.c3 {
+.c0 {
+  font-size: 1em;
+}
+
+.c2 {
   background: transparent;
   border: none;
   cursor: pointer;
   font-family: inherit;
   font-size: 1.2em;
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
-.c5 {
+.c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c3 {
   display: inline-block;
   font-size: 50%;
   margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
+  -webkit-transform: scaleX(2.2) scaleY(-1.2);
+  -ms-transform: scaleX(2.2) scaleY(-1.2);
+  transform: scaleX(2.2) scaleY(-1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c6 {
+.c4 {
   position: absolute;
 }
 
-.c8 {
+.c5 {
   background-color: white;
   border-bottom: 2px solid var(--color-primary);
   border-left: 2px solid var(--color-primary);
@@ -131,9 +128,11 @@ exports[`Menu is rendered correctly when open 1`] = `
   transition: opacity 2s;
   width: 0;
   z-index: 10;
+  min-width: 10em;
+  opacity: 1;
 }
 
-.c9 {
+.c6 {
   color: black;
   font-weight: 600;
   cursor: pointer;
@@ -142,11 +141,11 @@ exports[`Menu is rendered correctly when open 1`] = `
   white-space: nowrap;
 }
 
-.c9:hover {
+.c6:hover {
   color: var(--color-primary);
 }
 
-.c10 {
+.c7 {
   color: #444;
   font-weight: inherit;
   cursor: pointer;
@@ -155,70 +154,8 @@ exports[`Menu is rendered correctly when open 1`] = `
   white-space: nowrap;
 }
 
-.c10:hover {
+.c7:hover {
   color: var(--color-primary);
-}
-
-.gQZhbO .c2 {
-  border-left: 2px solid lightgrey;
-  color: inherit;
-}
-
-.gQZhbO .c2 .sc-bxivhb {
-  color: #aaa;
-}
-
-.gQZhbO .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-.gQZhbO .c2:hover .sc-bxivhb {
-  color: var(--color-primary);
-}
-
-.gQZhbO .c4 {
-  -webkit-transform: scaleX(2.2) scaleY(1.2);
-  -ms-transform: scaleX(2.2) scaleY(1.2);
-  transform: scaleX(2.2) scaleY(1.2);
-}
-
-.gQZhbO .c7 {
-  min-width: 0;
-  opacity: 0;
-}
-
-.c0 {
-  font-size: 1em;
-}
-
-.c0 .c2 {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-.c0 .c2 .sc-bxivhb {
-  color: #aaa;
-}
-
-.c0 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-.c0 .c2:hover .sc-bxivhb {
-  color: var(--color-primary);
-}
-
-.c0 .c4 {
-  -webkit-transform: scaleX(2.2) scaleY(-1.2);
-  -ms-transform: scaleX(2.2) scaleY(-1.2);
-  transform: scaleX(2.2) scaleY(-1.2);
-}
-
-.c0 .c7 {
-  min-width: 10em;
-  opacity: 1;
 }
 
 <div
@@ -233,29 +170,32 @@ exports[`Menu is rendered correctly when open 1`] = `
       className=""
     >
       <button
-        className="c2 c3"
+        className="c2"
         onClick={[Function]}
+        open={true}
         type="button"
       >
         <span>
           Foo
         </span>
         <span
-          className="c4 c5"
+          className="c3"
+          open={true}
         >
           ▼
         </span>
       </button>
     </div>
     <div
-      className="c6"
+      className="c4"
     >
       <div
-        className="c7 c8"
+        className="c5"
+        open={true}
       >
         <div
           aria-selected={true}
-          className="c9"
+          className="c6"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -265,7 +205,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c10"
+          className="c7"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"

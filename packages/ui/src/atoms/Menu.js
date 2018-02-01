@@ -4,6 +4,10 @@ import styled from 'styled-components'
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
 
+const Root = styled.div`
+  font-size: 1em;
+`
+
 const Label = styled.span`
   display: block;
   font-size: 1em;
@@ -20,6 +24,15 @@ const Opener = styled.button.attrs({
   cursor: pointer;
   font-family: inherit;
   font-size: 1.2em;
+
+  border-left: 2px solid
+    ${props => (props.open ? 'var(--color-primary)' : 'lightgrey')};
+  color: ${props => (props.open ? 'var(--color-primary)' : 'inherit')};
+
+  &:hover {
+    border-left: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
 `
 
 const Placeholder = styled.span`
@@ -27,6 +40,11 @@ const Placeholder = styled.span`
   font-style: italic;
   font-weight: 400;
   text-transform: normal;
+  color: #aaa;
+
+  &:hover {
+    color: var(--color-primary);
+  }
 `
 
 const Arrow = styled.span`
@@ -34,6 +52,7 @@ const Arrow = styled.span`
   font-size: 50%;
   margin-left: 10px;
   transition: transform 0.2s;
+  transform: scaleX(2.2) scaleY(${props => (props.open ? -1.2 : 1.2)});
 `
 
 const Main = styled.div.attrs({
@@ -58,6 +77,9 @@ const Options = styled.div`
   transition: opacity 2s;
   width: 0;
   z-index: 10;
+
+  min-width: ${props => (props.open ? '10em' : '0')};
+  opacity: ${props => (props.open ? '1' : '0')};
 `
 
 const Option = styled.div.attrs({
@@ -74,38 +96,6 @@ const Option = styled.div.attrs({
 
   &:hover {
     color: var(--color-primary);
-  }
-`
-
-const Root = styled.div`
-  font-size: 1em;
-
-  ${Opener} {
-    border-left: 2px solid
-      ${props => (props.open ? 'var(--color-primary)' : 'lightgrey')};
-    color: ${props => (props.open ? 'var(--color-primary)' : 'inherit')};
-
-    ${Placeholder} {
-      color: #aaa;
-    }
-  }
-
-  ${Opener}:hover {
-    border-left: 2px solid var(--color-primary);
-    color: var(--color-primary);
-
-    ${Placeholder} {
-      color: var(--color-primary);
-    }
-  }
-
-  ${Arrow} {
-    transform: scaleX(2.2) scaleY(${props => (props.open ? -1.2 : 1.2)});
-  }
-
-  ${Options} {
-    min-width: ${props => (props.open ? '10em' : '0')};
-    opacity: ${props => (props.open ? '1' : '0')};
   }
 `
 
@@ -182,19 +172,19 @@ class Menu extends React.Component {
 
         <Main>
           <OpenerContainer>
-            <Opener onClick={this.toggleMenu}>
+            <Opener onClick={this.toggleMenu} open={open}>
               {selected ? (
                 <span>{this.optionLabel(selected)}</span>
               ) : (
                 <Placeholder>{placeholder}</Placeholder>
               )}
-              <Arrow>▼</Arrow>
+              <Arrow open={open}>▼</Arrow>
             </Opener>
           </OpenerContainer>
 
           <OptionsContainer>
             {open && (
-              <Options>
+              <Options open={open}>
                 {options.map(option => (
                   <Option
                     active={option.value === selected}
