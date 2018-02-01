@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AlignmentTool is rendered correctly 1`] = `
-.c0 {
+.c3 {
   box-shadow: inset 0 0 0 2px rgba(255,255,255,1);
   cursor: pointer;
   height: 26px;
@@ -15,11 +15,11 @@ exports[`AlignmentTool is rendered correctly 1`] = `
   background-color: transparent;
 }
 
-.c0:hover {
+.c3:hover {
   background-color: #b3b3b3;
 }
 
-.c1 {
+.c6 {
   box-shadow: inset 0 0 0 2px rgba(255,255,255,1);
   cursor: pointer;
   height: 26px;
@@ -33,41 +33,93 @@ exports[`AlignmentTool is rendered correctly 1`] = `
   background-color: transparent;
 }
 
-.c1:hover {
+.c6:hover {
   background-color: #b3b3b3;
 }
 
+.c1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c2 {
+  color: #0d78f2;
+  font-family: var(--font-interface);
+  font-size: 16px;
+  font-style: italic;
+  margin-left: 0;
+  margin-right: 10px;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+}
+
+.c5 {
+  color: #0d78f2;
+  font-family: var(--font-interface);
+  font-size: 16px;
+  font-style: italic;
+  margin-left: 10px;
+  margin-right: 0;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+}
+
+.c4 {
+  background-color: #666;
+  height: 40px;
+  width: 1px;
+}
+
 <div
-  className="root"
+  className="c0"
 >
   <div
-    className="root"
+    className="c1"
   >
     <span
-      className="label"
+      className="c2"
     >
       Left
     </span>
     <div
-      className="c0"
+      className="c3"
       id="left"
       onClick={[Function]}
       role="presentation"
     />
   </div>
   <div
-    className="middleLine"
+    className="c4"
   />
   <div
-    className="root reverseOrder"
+    className="c1"
   >
     <span
-      className="label"
+      className="c5"
     >
       right
     </span>
     <div
-      className="c1"
+      className="c6"
       id="right"
       onClick={[Function]}
       role="presentation"
