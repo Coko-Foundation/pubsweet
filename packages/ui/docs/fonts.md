@@ -1,33 +1,38 @@
 CSS variables are used to define font families.
 
-`--font-author`
-
-```js
-<div style={{ fontFamily: 'var(--font-author)' }}>
-{faker.lorem.sentence(5)}
-</div>
-```
-
-`--font-reviewer`
-
-```js
-<div style={{ fontFamily: 'var(--font-reviewer)' }}>
-{faker.lorem.sentence(5)}
-</div>
-```
-
 `--font-interface`
 
 ```js
 <div style={{ fontFamily: 'var(--font-interface)' }}>
-{faker.lorem.sentence(5)}
+  {faker.lorem.sentence(5)}
 </div>
 ```
 
-`--font-mono`
+`--font-heading`
 
 ```js
-<div style={{ fontFamily: 'var(--font-mono)' }}>
-{faker.lorem.sentence(5)}
+<div
+  style={{
+    fontFamily: 'var(--font-heading)',
+    fontSize: 'var(--font-size-heading-1)',
+  }}
+>
+  {faker.lorem.sentence(5)}
+</div>
+```
+
+`--font-reading`
+
+```js
+<div style={{ fontFamily: 'var(--font-reading)' }}>
+  {faker.lorem.sentence(5)}
+</div>
+```
+
+`--font-writing`
+
+```js
+<div style={{ fontFamily: 'var(--font-writing)' }}>
+  {faker.lorem.sentence(5)}
 </div>
 ```

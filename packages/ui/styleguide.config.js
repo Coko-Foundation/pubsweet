@@ -29,10 +29,10 @@ module.exports = {
   },
   theme: {
     color: {
-      link: 'cornflowerblue',
+      link: '#205d86',
     },
     fontFamily: {
-      base: '"Fira Sans", sans-serif',
+      base: '"Noto Sans", sans-serif',
     },
   },
   title: 'PubSweet UI style guide',
