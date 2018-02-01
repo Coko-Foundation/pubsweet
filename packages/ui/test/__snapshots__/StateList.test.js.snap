@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StateList is rendered correctly 1`] = `
-.c0 {
+.c2 {
   cursor: pointer;
   font-family: var(--font-interface);
   font-size: 16px;
@@ -9,24 +9,57 @@ exports[`StateList is rendered correctly 1`] = `
   padding: 0;
 }
 
-.c0:focus {
+.c2:focus {
   outline: none;
 }
 
-.c0:hover {
+.c2:hover {
   color: #404040;
   -webkit-transition: 0.25s ease-in-out 0s;
   transition: 0.25s ease-in-out 0s;
 }
 
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 <div
-  className="stateListContainer"
+  className="c0"
 >
   <div
-    className="itemContainer"
+    className="c1"
   >
     <span
-      className="c0"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -36,7 +69,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Clean
     </span>
     <svg
-      className="delimiter"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -53,10 +86,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="itemContainer"
+    className="c1"
   >
     <span
-      className="c0"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -66,7 +99,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Edit
     </span>
     <svg
-      className="delimiter"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -83,10 +116,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="itemContainer"
+    className="c1"
   >
     <span
-      className="c0"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -96,7 +129,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Review
     </span>
     <svg
-      className="delimiter"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -113,10 +146,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="itemContainer"
+    className="c1"
   >
     <span
-      className="c0"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
