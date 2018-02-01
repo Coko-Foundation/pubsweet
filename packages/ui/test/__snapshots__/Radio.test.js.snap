@@ -19,6 +19,7 @@ exports[`Radio is rendered correctly 1`] = `
   border-radius: 50%;
   -webkit-transition: border 0.2s ease;
   transition: border 0.2s ease;
+  color: black;
 }
 
 .c5 {
@@ -40,6 +41,7 @@ exports[`Radio is rendered correctly 1`] = `
   display: flex;
   -webkit-transition: all 2s;
   transition: all 2s;
+  color: black;
 }
 
 .c0:not(:last-child) {
@@ -67,11 +69,7 @@ exports[`Radio is rendered correctly 1`] = `
 <label
   checked={false}
   className="c0"
-  style={
-    Object {
-      "color": "black",
-    }
-  }
+  color="black"
 >
   <input
     checked={false}
@@ -86,11 +84,7 @@ exports[`Radio is rendered correctly 1`] = `
    
   <span
     className="c2 c3"
-    style={
-      Object {
-        "color": "black",
-      }
-    }
+    color="black"
   />
    
   <span

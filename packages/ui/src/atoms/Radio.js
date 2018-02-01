@@ -21,6 +21,7 @@ const PseudoInput = styled.span`
   border-radius: 50%;
 
   transition: border 0.2s ease;
+  color: ${props => props.color};
 `
 
 const Label = styled.span`
@@ -73,6 +74,7 @@ const Root = styled.label`
         ${props => (props.checked ? 'currentcolor' : 'var(--color-primary)')};
     }
   }
+  color: ${props => props.color};
 `
 
 /* Not used for now
@@ -98,7 +100,7 @@ const Radio = ({
   onChange,
   readonly,
 }) => (
-  <Root checked={checked} style={{ color }}>
+  <Root checked={checked} color={color}>
     <Input
       checked={checked}
       disabled={readonly}
@@ -108,7 +110,7 @@ const Radio = ({
       type="radio"
       value={value}
     />{' '}
-    <PseudoInput style={{ color }} /> <Label> {label} </Label>{' '}
+    <PseudoInput color={color} /> <Label> {label} </Label>{' '}
   </Root>
 )
 

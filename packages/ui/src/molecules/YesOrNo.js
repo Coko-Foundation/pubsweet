@@ -1,6 +1,5 @@
 import React from 'react'
 import RadioGroup from './RadioGroup'
-import classes from './YesOrNo.local.scss'
 
 const options = [
   {
@@ -13,13 +12,12 @@ const options = [
   },
 ]
 
-const YesOrNo = ({ name, value, required, onChange }) => (
+const YesOrNo = ({ name, value, required, onChange, color = 'black' }) => (
   <RadioGroup
-    className={classes.root}
     inline
     name={name}
     onChange={onChange}
-    options={options}
+    options={options.map(el => ({ ...el, color }))}
     required={required}
     value={value}
   />
