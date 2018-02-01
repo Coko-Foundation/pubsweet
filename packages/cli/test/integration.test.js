@@ -5,10 +5,11 @@ const path = require('path')
 const fs = require('fs-extra')
 const { runCommandSync, runCommandAsync } = require('./helpers/')
 const fetch = require('isomorphic-fetch')
+const os = require('os')
 
-const appName = 'testapp'
+const appName = `pubsweet-test-${Math.floor(Math.random() * 99999)}`
 const dbName = 'test_db'
-const tempDir = path.join(__dirname, '..', 'temp')
+const tempDir = os.tmpdir()
 const appPath = path.join(tempDir, appName)
 const dbDir = path.join(appPath, 'api', 'db')
 const dbPath = path.join(dbDir, dbName)
@@ -47,7 +48,7 @@ describe('CLI: integration test', () => {
   })
 
   afterAll(() => {
-    fs.removeSync(tempDir)
+    fs.removeSync(appPath)
   })
 
   describe('new', () => {
@@ -59,9 +60,9 @@ describe('CLI: integration test', () => {
         stdio: 'pipe',
       })
       expect(stderr).toContain(
-        `destination path 'testapp' already exists and is not an empty directory`,
+        `destination path '${appName}' already exists and is not an empty directory`,
       )
-      fs.emptyDirSync(tempDir)
+      fs.removeSync(appPath)
     })
 
     it('runs git clone <appname> and yarn install', () => {
