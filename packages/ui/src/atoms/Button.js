@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const BaseButton = styled.button.attrs({
+const BaseStandardButton = styled.button.attrs({
   type: 'button',
 })`
   background: #ddd;
@@ -25,19 +25,20 @@ const BaseButton = styled.button.attrs({
     transform: scale(0.8);
   }
 
-  & ::after {
+  &::after {
     animation: 1s warning;
     opacity: 1;
   }
 `
 
-const PrimaryButton = BaseButton.extend`
+const PrimaryStandardButton = BaseStandardButton.extend`
   background-color: var(--color-primary);
   border: 2px solid transparent;
   border-bottom: 4px solid var(--color-primary);
   color: white;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: white;
     border: 2px solid var(--color-primary);
     border-bottom: 4px solid var(--color-primary);
@@ -46,16 +47,11 @@ const PrimaryButton = BaseButton.extend`
   }
 
   &:focus {
-    background: white;
-    border: 2px solid var(--color-primary);
-    border-bottom: 4px solid var(--color-primary);
     box-shadow: 0 2px 0 0 var(--color-primary);
-    color: var(--color-primary);
-    outline: 1px solid transparent;
   }
 `
 
-const DisabledButton = BaseButton.extend.attrs({
+const DisabledStandardButton = BaseStandardButton.extend.attrs({
   disabled: true,
 })`
   background: white;
@@ -87,14 +83,51 @@ const DisabledButton = BaseButton.extend.attrs({
   }
 `
 
-const Button = ({ children, disabled, primary, ...props }) => {
-  if (disabled) {
-    return <DisabledButton {...props}>{children}</DisabledButton>
+const plainButtonOverrides = `
+  background: none;
+  border: 0;
+  border-bottom: 2px solid #777;
+  font-style: italic;
+  letter-spacing: 0;
+  padding: 0;
+  text-transform: none;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+`
+
+const DisabledPlainButton = DisabledStandardButton.extend`
+  ${plainButtonOverrides};
+`
+const BasePlainButton = BaseStandardButton.extend`
+  ${plainButtonOverrides};
+`
+
+const Button = ({ children, disabled, primary, plain, ...props }) => {
+  if (!plain && disabled) {
+    return (
+      <DisabledStandardButton {...props}>{children}</DisabledStandardButton>
+    )
   }
   if (primary) {
-    return <PrimaryButton {...props}>{children}</PrimaryButton>
+    return <PrimaryStandardButton {...props}>{children}</PrimaryStandardButton>
   }
-  return <BaseButton {...props}>{children}</BaseButton>
+  if (plain && disabled) {
+    return <DisabledPlainButton {...props}>{children}</DisabledPlainButton>
+  }
+  if (plain) {
+    return <BasePlainButton {...props}>{children}</BasePlainButton>
+  }
+  return <BaseStandardButton {...props}>{children}</BaseStandardButton>
 }
 
 export default Button
