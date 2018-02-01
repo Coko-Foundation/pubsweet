@@ -1,8 +1,10 @@
 {
   "lerna": "2.5.1",
-  "packages": [
-    "packages/*",
-    "packages/components/packages/*"
-  ],
+  "packages": ["packages/*", "packages/components/packages/*"],
+  "command": {
+    "publish": {
+      "conventionalCommits": true
+    }
+  },
   "version": "independent"
 }
