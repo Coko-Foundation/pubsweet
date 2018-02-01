@@ -147,7 +147,7 @@ exports[`Menu is rendered correctly when open 1`] = `
 }
 
 .c10 {
-  color: inherit;
+  color: #444;
   font-weight: inherit;
   cursor: pointer;
   font-family: var(--font-author);

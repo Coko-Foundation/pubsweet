@@ -65,7 +65,7 @@ const Option = styled.div.attrs({
   tabIndex: '0',
   'aria-selected': props => props.active,
 })`
-  color: ${props => (props.active ? 'black' : 'inherit')};
+  color: ${props => (props.active ? 'black' : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
   font-family: var(--font-author);
