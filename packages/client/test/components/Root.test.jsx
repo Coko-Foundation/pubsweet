@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import createHistory from 'history/createBrowserHistory'
 import styled from 'styled-components'
 
@@ -18,7 +18,7 @@ describe('<Root/>', () => {
       test: ${props => expect(props.theme.color).toBe('blue')};
     `
 
-    shallow(
+    mount(
       <Root
         history={history}
         routes={<Box />}
