@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-components",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "private": true,
   "scripts": {
     "styleguide": "styleguidist server",
@@ -27,9 +27,9 @@
     "joi-browser": "^13.0.1",
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
-    "pubsweet": "^1.1.7",
+    "pubsweet": "^1.1.8",
     "pubsweet-client": "^1.1.4",
-    "pubsweet-server": "^1.0.7",
+    "pubsweet-server": "^1.1.0",
     "pubsweet-theme-plugin": "^0.0.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
