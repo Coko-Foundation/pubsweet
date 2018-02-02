@@ -21,8 +21,8 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "query-string": "^5.0.1",
-    "react-bootstrap": "^0.31.3",
-    "react-dropzone": "^3.7.3",
+    "react-bootstrap": "^0.32.0",
+    "react-dropzone": "^4.2.7",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },

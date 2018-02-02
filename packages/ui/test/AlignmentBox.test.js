@@ -65,6 +65,6 @@ describe('AlignmentBox', () => {
   test('on click the corresponding method is triggered', () => {
     const newWrapper = shallow(<AlignmentBox {...props} />)
     newWrapper.simulate('click')
-    expect(newWrapper.instance().props.onClick).toHaveBeenCalled()
+    expect(newWrapper.props().onClick).toHaveBeenCalled()
   })
 })

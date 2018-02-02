@@ -10,11 +10,11 @@
     "joi-browser": "^13.0.1",
     "prop-types": "^15.5.10",
     "pubsweet-server": "^1.1.0",
-    "react-bootstrap": "^0.31.3"
+    "react-bootstrap": "^0.32.0"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
-    "react": ">=15"
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
   },
   "repository": {
     "type": "git",

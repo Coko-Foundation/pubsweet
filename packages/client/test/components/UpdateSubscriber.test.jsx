@@ -29,7 +29,7 @@ describe('<UpdateSubscriber/>', () => {
   it('is connected after open event', () => {
     const wrapper = makeWrapper()
     sources['/updates?access_token=tok'].emit('open')
-
+    wrapper.update()
     expect(wrapper.html()).toContain('color:green')
   })
 
@@ -37,6 +37,7 @@ describe('<UpdateSubscriber/>', () => {
     const wrapper = makeWrapper()
 
     sources['/updates?access_token=tok'].emit('open')
+    wrapper.update()
     expect(wrapper.html()).toContain('color:green')
 
     sources['/updates?access_token=tok'].readyState = 0
@@ -49,6 +50,7 @@ describe('<UpdateSubscriber/>', () => {
     const wrapper = makeWrapper()
 
     sources['/updates?access_token=tok'].emit('open')
+    wrapper.update()
     expect(wrapper.html()).toContain('color:green')
 
     sources['/updates?access_token=tok'].emit('close')
@@ -69,9 +71,7 @@ describe('<UpdateSubscriber/>', () => {
     })
   })
 
-  // TODO enable this test once PR is merged
-  // https://github.com/gcedo/eventsourcemock/pull/1
-  it.skip('unregisters listeners on unmount', () => {
+  it('unregisters listeners on unmount', () => {
     const handleUpdate = jest.fn()
     const wrapper = makeWrapper({ handleUpdate })
     wrapper.instance().componentWillUnmount()
@@ -91,6 +91,7 @@ describe('<UpdateSubscriber/>', () => {
 
     wrapper.setProps({ currentUser: {} }).update()
     sources['/updates?access_token=tok'].emit('open')
+    wrapper.update()
     expect(wrapper.html()).toContain('color:green')
   })
 

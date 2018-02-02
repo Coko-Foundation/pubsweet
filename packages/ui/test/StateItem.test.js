@@ -41,6 +41,6 @@ describe('StateItem', () => {
 
   test('update method should be triggered upon click', () => {
     wrapper.simulate('click')
-    expect(wrapper.instance().props.update).toHaveBeenCalled()
+    expect(props.update).toHaveBeenCalled()
   })
 })

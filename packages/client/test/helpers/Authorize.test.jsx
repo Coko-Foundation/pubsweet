@@ -49,6 +49,7 @@ describe('<Authorize/>', () => {
 
     resolveMode(false)
     await modePromise
+    wrapper.update()
     expect(wrapper.type()).toBe('span')
   })
 
@@ -61,6 +62,7 @@ describe('<Authorize/>', () => {
     try {
       await modePromise
     } catch (err) {
+      wrapper.update()
       expect(wrapper.type()).toBe(null)
       expect(console.error).toHaveBeenCalled()
     }
@@ -73,7 +75,8 @@ describe('<Authorize/>', () => {
 
     resolveMode(true)
     await modePromise
-    expect(wrapper.type()).toBe('div')
+    wrapper.update()
+    expect(wrapper.find('div')).toHaveLength(1)
   })
 
   it('rechecks auth when props change', () => {
@@ -83,6 +86,7 @@ describe('<Authorize/>', () => {
     mode.mockClear()
 
     wrapper.setProps({ authsome, currentUser: { id: 'user2' } })
+    wrapper.update()
     expect(mode).toHaveBeenCalled()
   })
 })
