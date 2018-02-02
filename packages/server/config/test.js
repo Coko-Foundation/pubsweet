@@ -4,6 +4,7 @@ const winston = require('winston')
 module.exports = {
   'pubsweet-server': {
     logger: new winston.Logger({ level: 'warn' }),
+    port: 4000,
     secret: 'test',
     sse: false,
   },

@@ -10,6 +10,7 @@ const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const graphqlApi = require('./graphql/routes')
 const index = require('./routes/index')
 const api = require('./routes/api')
 const authsome = require('./helpers/authsome')
@@ -47,8 +48,14 @@ const configureApp = app => {
 
   registerComponents(app)
 
-  // Main API
+  // REST API
   app.use('/api', api)
+
+  // GraphQL API
+  // temporary environment check while this stuff is in beta
+  if (['development', 'test'].includes(config.util.getEnv('NODE_ENV'))) {
+    app.use(graphqlApi)
+  }
 
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
