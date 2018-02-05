@@ -4,14 +4,18 @@ import styled from 'styled-components'
 const BaseStandardButton = styled.button.attrs({
   type: 'button',
 })`
+  display: block;
+  position: relative;
+  margin-top: 1em;
+  padding: 0.4em 2em;
+
+  cursor: pointer;
   background: #ddd;
   border: none;
-  cursor: pointer;
+
   font-family: var(--font-interface);
   font-size: inherit;
   letter-spacing: 0.05em;
-  padding: 10px 20px;
-  position: relative;
   text-transform: uppercase;
 
   &:hover,
