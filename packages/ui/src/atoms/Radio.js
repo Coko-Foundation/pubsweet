@@ -6,21 +6,21 @@ const Input = styled.input`
 `
 
 const PseudoInput = styled.span`
-  --local-border-size: 2px;
-  --local-borderTwo-size: 1px;
-
   display: inline-block;
   content: ' ';
-  width: 0.6em;
-  height: 0.6em;
+  width: var(--sub-grid-unit);
+  height: var(--sub-grid-unit);
   vertical-align: center;
-  margin-left: 0.2em;
-  margin-right: 0.6em;
+  margin-left: var(--sub-grid-unit);
+  margin-right: var(--sub-grid-unit);
 
-  border: var(--local-border-size) var(--border-style) var(--color-border);
+  /* This is not a real border (box-shadow provides that), so not themed as such */
+  border: 2px solid white;
   border-radius: 50%;
 
-  transition: border 0.2s var(--transition-timing-function);
+  transition: border var(--transition-duration-unit)
+    var(--transition-timing-function);
+
   color: ${props => props.color};
 `
 
@@ -50,16 +50,16 @@ const Root = styled.label`
   align-items: center;
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  transition: all 2s;
+  transition: all var(--transition-duration);
 
   &:not(:last-child) {
-    margin-right: ${props => (props.inline ? '2.7em' : '0')};
-    margin-bottom: ${props => (props.inline ? '0' : '0.5rem')};
+    margin-right: ${props => (props.inline ? 'var(--grid-unit)' : '0')};
+    margin-bottom: ${props => (props.inline ? '0' : 'var(--sub-grid-unit)')};
   }
 
   ${PseudoInput} {
     background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+    box-shadow: 0 0 0 var(--border-width) currentcolor;
   }
 
   &:hover {
@@ -69,8 +69,8 @@ const Root = styled.label`
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: 0.5s;
-      box-shadow: 0 0 0 var(--local-borderTwo-size)
+      animation-duration: calc(var(--transition-duration-unit) * 2);
+      box-shadow: 0 0 0 var(--border-width)
         ${props => (props.checked ? 'currentcolor' : 'var(--color-primary)')};
     }
   }
