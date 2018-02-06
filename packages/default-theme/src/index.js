@@ -8,6 +8,7 @@ import 'typeface-ubuntu-mono'
 injectGlobal`
 :root {
   /* Colors */
+  --color-background: white;
   --color-primary: #205d86;
   --color-secondary: #e7e7e7;
   --color-furniture: #ccc;

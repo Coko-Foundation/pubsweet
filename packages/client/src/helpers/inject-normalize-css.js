@@ -8,6 +8,7 @@ export default function injectNormalizeCSS() {
     :root {
       padding: 0;
       box-sizing: border-box;
+      background-color: var(--color-background);
       font-family: var(--font-interface), sans-serif;
       font-size: var(--font-size-base);
       color: var(--color-text);
