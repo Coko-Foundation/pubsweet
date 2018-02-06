@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-const Label = styled.label`
-  margin-right: 10px;
-`
+const Label = styled.label``
 
 export default Label

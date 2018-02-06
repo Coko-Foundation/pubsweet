@@ -7,10 +7,21 @@ import Input from '../atoms/Input'
 const Root = styled.div`
   --font-local: var(--font-reviewer);
 
-  align-items: center;
   display: flex;
+  flex-direction: ${props => (props.inline ? 'row' : 'column')};
+  align-items: ${props => (props.inline ? 'center' : 'normal')};
+  justify-items: ${props => (props.inline ? 'bottom' : 'auto')};
+
+  max-width: 200px;
+  margin-top: 0;
+  margin-bottom: 20px;
+
   font-size: 1em;
   line-height: 1.8;
+
+  ${Input} {
+    margin-left: ${props => (props.inline ? '1em' : '')};
+  }
 `
 
 const TextField = ({
@@ -23,8 +34,9 @@ const TextField = ({
   onBlur,
   onChange,
   readonly,
+  inline,
 }) => (
-  <Root>
+  <Root inline={inline}>
     {label && <Label>{label}</Label>}
     <Input
       name={name}
