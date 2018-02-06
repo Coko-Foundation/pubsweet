@@ -9,7 +9,6 @@ export { default as Icon } from './atoms/Icon'
 export { default as Menu } from './atoms/Menu'
 export { default as Radio } from './atoms/Radio'
 export { default as Tags } from './atoms/Tags'
-export { default as TextField } from './atoms/TextField'
 export { default as ValidatedField } from './atoms/ValidatedField'
 export { default as StateItem } from './atoms/StateItem'
 export { default as AlignmentBox } from './atoms/AlignmentBox'
@@ -28,3 +27,4 @@ export {
   default as AlignmentBoxWithLabel,
 } from './molecules/AlignmentBoxWithLabel'
 export { default as AlignmentTool } from './molecules/AlignmentTool.js'
+export { default as TextField } from './molecules/TextField'
