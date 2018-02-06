@@ -96,9 +96,7 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    font-size: 1em;
-    line-height: 1.2;
-    padding: 6px 0 0 6px;
+    padding: var(--sub-grid-unit) 0 0 var(--sub-grid-unit);
     position: relative;
   }
 
@@ -111,59 +109,48 @@ const Tags = styled(TagsUnstyled)`
   }
 
   .${classNames.selectedTag} {
-    border: 0 solid transparent;
-    box-sizing: border-box;
+    border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: 'Vollkorn', serif;
+    font-family: var(--font-reading);
 
     /* match the font styles */
-    font-size: inherit;
-    line-height: inherit;
-    margin: 0 1em 1em 0;
+    margin: 0 var(--sub-grid-unit) var(--grid-unit) 0;
     padding: 0.1em 0.3em;
 
-    ${realBorder('#aaa', 'white')}
+    ${realBorder('var(--color-border)', 'var(--color-background)')}
   }
 
   .${classNames.selectedTag}::after {
-    background: white;
-    color: #aaa;
+    color: var(--color-border);
     content: '\\2715';
-    // margin: 0;
     display: inline-block;
-    font-size: 0.9em;
+    font-size: var(--font-size-base-small);
     font-weight: 600;
-    height: 10px;
-    margin-left: 8px;
-    padding: 3px 0 0;
-    text-shadow: none;
-    width: 13px;
-
-    &:hover {
-      background: var(--color-primary);
-    }
+    margin-left: var(--sub-grid-unit);
+    padding: var(--sub-grid-unit) 0 0
+    width: var(--sub-grid-unit);
   }
 
   .${classNames.selectedTag}:hover,
   .${classNames.selectedTag}:focus {
     text-decoration: line-through;
 
-    ${realBorder('transparent', 'white')}
+    ${realBorder('transparent', 'var(--color-background)')}
 
     &::after {
-      color: var(--color-danger);
+      color: var(--color-error);
     }
   }
   .${classNames.search} {
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 1em 1em 0;
+    margin: 0 0 var(--grid-unit) 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: 100px;
-    padding: 0.1em 0.3em;
+    max-width: calc(var(--grid-unit) * 5);
+    padding: var(--sub-grid-unit) var(--sub-grid-unit);
   }
 
   @media screen and (min-width: 30em) {
@@ -175,9 +162,9 @@ const Tags = styled(TagsUnstyled)`
 
   .${classNames.search} input {
     border: 0;
-    border-bottom: 1px dashed grey;
-    color: black;
-    font-family: 'Vollkorn', serif;
+    border-bottom: var(--border-width) dashed var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-reading);
 
     /* match the font styles */
     font-size: inherit;
@@ -188,18 +175,18 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: 15ch;
+    min-width: calc(var(--grid-unit) * 5);
     outline: none;
     padding: 0;
 
     &::placeholder {
-      font-family: 'Fira Sans Condensed', sans-serif;
-      opacity: 0.5;
+      font-family: var(--font-interface);
+      color: var(--color-text-placeholder);
     }
 
     &:focus,
     &:hover {
-      border-bottom: 1px dashed var(--color-primary);
+      border-bottom: var(--border-width) dashed var(--color-primary);
     }
   }
 
