@@ -17,17 +17,17 @@ const PseudoInput = styled.span`
   margin-left: 0.2em;
   margin-right: 0.6em;
 
-  border: var(--local-border-size) solid white;
+  border: var(--local-border-size) var(--border-style) var(--color-border);
   border-radius: 50%;
 
-  transition: border 0.2s ease;
+  transition: border 0.2s var(--transition-timing-function);
   color: ${props => props.color};
 `
 
 const Label = styled.span`
   display: inline-block;
   font-family: inherit;
-  font-size: 1em;
+  font-size: var(--font-size-base);
   font-style: italic;
 `
 
