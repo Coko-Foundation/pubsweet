@@ -3,6 +3,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
+import injectNormalizeCSS from '../helpers/inject-normalize-css'
+
+injectNormalizeCSS()
 
 const Root = ({ store, history, routes, theme }) => (
   <Provider store={store}>

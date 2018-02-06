@@ -36,6 +36,7 @@ injectGlobal`
 
   /* Spacing */
   --grid-unit: 32px;
+  --sub-grid-unit: calc(var(--grid-unit) / 4 );;
 
   /* Border */
   --border-radius: 8px;
@@ -47,6 +48,7 @@ injectGlobal`
 
   /* Transition */
   --transition-duration: 2s;
+  --transition-duration-unit: calc(var(--transition-duration) / 10 );
   --transition-timing-function: ease;
   --transition-delay: 500ms;
 }

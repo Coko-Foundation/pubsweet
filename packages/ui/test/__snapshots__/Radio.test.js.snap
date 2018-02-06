@@ -15,17 +15,17 @@ exports[`Radio is rendered correctly 1`] = `
   vertical-align: center;
   margin-left: 0.2em;
   margin-right: 0.6em;
-  border: var(--local-border-size) solid white;
+  border: var(--local-border-size) var(--border-style) var(--color-border);
   border-radius: 50%;
-  -webkit-transition: border 0.2s ease;
-  transition: border 0.2s ease;
+  -webkit-transition: border 0.2s var(--transition-timing-function);
+  transition: border 0.2s var(--transition-timing-function);
   color: black;
 }
 
 .c5 {
   display: inline-block;
   font-family: inherit;
-  font-size: 1em;
+  font-size: var(--font-size-base);
   font-style: italic;
 }
 
