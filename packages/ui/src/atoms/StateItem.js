@@ -2,32 +2,29 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import React from 'react'
 
-const darkGrey = '#404040'
-const lightGrey = '#b3b3b3'
-
 const disabled = `
-  color: ${lightGrey};
+  color: var(--color-secondary);
   cursor: default;
 
   &:hover {
-    color: ${lightGrey};
+    color: var(--color-secondary);
   }
 `
 
 const Root = styled.span`
   cursor: pointer;
   font-family: var(--font-interface);
-  font-size: 16px;
+  font-size: var(--font-size-base-small);
   font-style: italic;
-  padding: 0;
 
   &:focus {
     outline: none;
   }
 
   &:hover {
-    color: ${darkGrey};
-    transition: 0.25s ease-in-out 0s;
+    color: var(--color-text);
+    transition: var(--transition-duration-unit)
+      var(--transition-timing-function);
   }
 
   ${props => (props.disabled ? disabled : '')};
