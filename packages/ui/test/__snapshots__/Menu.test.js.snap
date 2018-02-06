@@ -1,34 +1,220 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu is rendered correctly 1`] = `
+.c0 {
+  font-size: 1em;
+}
+
+.c2 {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.2em;
+  border-left: 2px solid lightgrey;
+  color: inherit;
+}
+
+.c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c3 {
+  display: inline-block;
+  font-size: 50%;
+  margin-left: 10px;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+  -webkit-transform: scaleX(2.2) scaleY(1.2);
+  -ms-transform: scaleX(2.2) scaleY(1.2);
+  transform: scaleX(2.2) scaleY(1.2);
+}
+
+.c1 {
+  position: relative;
+}
+
+.c4 {
+  position: absolute;
+}
+
 <div
-  className="root"
+  className="c0"
+  open={false}
 >
   <div
-    className="main"
+    className="c1"
     role="listbox"
   >
     <div
-      className="openerContainer"
+      className=""
     >
       <button
-        className="opener"
+        className="c2"
         onClick={[Function]}
+        open={false}
         type="button"
       >
         <span>
           Foo
         </span>
         <span
-          className="arrow"
+          className="c3"
+          open={false}
         >
           ▼
         </span>
       </button>
     </div>
     <div
-      className="optionsContainer"
+      className="c4"
     />
+  </div>
+</div>
+`;
+
+exports[`Menu is rendered correctly when open 1`] = `
+.c0 {
+  font-size: 1em;
+}
+
+.c2 {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.2em;
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c2:hover {
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.c3 {
+  display: inline-block;
+  font-size: 50%;
+  margin-left: 10px;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+  -webkit-transform: scaleX(2.2) scaleY(-1.2);
+  -ms-transform: scaleX(2.2) scaleY(-1.2);
+  transform: scaleX(2.2) scaleY(-1.2);
+}
+
+.c1 {
+  position: relative;
+}
+
+.c4 {
+  position: absolute;
+}
+
+.c5 {
+  background-color: white;
+  border-bottom: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+  left: 0;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  position: absolute;
+  top: 0;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+  width: 0;
+  z-index: 10;
+  min-width: 10em;
+  opacity: 1;
+}
+
+.c6 {
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-author);
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.c6:hover {
+  color: var(--color-primary);
+}
+
+.c7 {
+  color: #444;
+  font-weight: inherit;
+  cursor: pointer;
+  font-family: var(--font-author);
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.c7:hover {
+  color: var(--color-primary);
+}
+
+<div
+  className="c0"
+  open={true}
+>
+  <div
+    className="c1"
+    role="listbox"
+  >
+    <div
+      className=""
+    >
+      <button
+        className="c2"
+        onClick={[Function]}
+        open={true}
+        type="button"
+      >
+        <span>
+          Foo
+        </span>
+        <span
+          className="c3"
+          open={true}
+        >
+          ▼
+        </span>
+      </button>
+    </div>
+    <div
+      className="c4"
+    >
+      <div
+        className="c5"
+        open={true}
+      >
+        <div
+          aria-selected={true}
+          className="c6"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="option"
+          tabIndex="0"
+        >
+          Foo
+        </div>
+        <div
+          aria-selected={false}
+          className="c7"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="option"
+          tabIndex="0"
+        >
+          Bar
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

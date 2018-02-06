@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import renderer from 'react-test-renderer'
+import 'jest-styled-components'
 
 import AlignmentBoxWithLabel from '../src/molecules/AlignmentBoxWithLabel'
 import AlignmentTool from '../src/molecules/AlignmentTool'

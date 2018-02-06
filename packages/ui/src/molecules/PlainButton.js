@@ -1,21 +1,12 @@
 import React from 'react'
-import classnames from 'classnames'
 import Button from '../atoms/Button'
-import classes from './PlainButton.local.scss'
 
-const PlainButton = ({
-  className,
-  children,
-  type,
-  disabled,
-  primary,
-  onClick,
-}) => (
+const PlainButton = ({ className, children, type, disabled, onClick }) => (
   <Button
-    className={classnames(classes.root, className)}
+    className={className}
     disabled={disabled}
     onClick={onClick}
-    primary={primary}
+    plain
     type={type}
   >
     {children}

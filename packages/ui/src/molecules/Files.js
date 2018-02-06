@@ -1,6 +1,46 @@
 import React from 'react'
-import classes from './Files.local.scss'
+import styled from 'styled-components'
 import Upload from './Upload'
+
+const Root = styled.div``
+const Uploader = styled.div``
+
+const FileList = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  font-style: italic;
+  line-height: 1.5;
+`
+
+const AttachButton = styled.button.attrs({
+  type: 'button',
+})`
+  background: transparent;
+  border: 1px dashed grey;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 2em;
+  padding: 10px;
+`
+
+/* Not used for now
+.button {
+  background: transparent;
+  border: 1px dashed grey;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 2em;
+  padding: 10px;
+}
+
+.button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+*/
 
 class Files extends React.Component {
   constructor(props) {
@@ -49,27 +89,23 @@ class Files extends React.Component {
     const { values, uploads } = this.state
 
     return (
-      <div className={classes.root}>
-        <div className={classes.upload}>
-          <button
-            className={classes.attach}
-            onClick={() => this.fileInput.click()}
-            type="button"
-          >
+      <Root>
+        <Uploader>
+          <AttachButton onClick={() => this.fileInput.click()}>
             {buttonText}
-          </button>
+          </AttachButton>
 
           <input
-            className={classes.input}
             multiple
             name={name}
             onChange={this.handleChange}
             ref={input => (this.fileInput = input)}
+            style={{ display: 'none' }}
             type="file"
           />
-        </div>
+        </Uploader>
 
-        <div className={classes.files}>
+        <FileList>
           {uploads &&
             uploads.map(upload => (
               <Upload
@@ -82,8 +118,8 @@ class Files extends React.Component {
             ))}
 
           {values && values.map(uploadedFile)}
-        </div>
-      </div>
+        </FileList>
+      </Root>
     )
   }
 }

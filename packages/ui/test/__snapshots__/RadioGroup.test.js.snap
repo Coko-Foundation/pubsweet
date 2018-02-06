@@ -1,18 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio Group is rendered correctly 1`] = `
+.c1 {
+  display: none;
+}
+
+.c3 {
+  --local-border-size: 2px;
+  --local-borderTwo-size: 1px;
+  display: inline-block;
+  content: ' ';
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: center;
+  margin-left: 0.2em;
+  margin-right: 0.6em;
+  border: var(--local-border-size) solid white;
+  border-radius: 50%;
+  -webkit-transition: border 0.2s ease;
+  transition: border 0.2s ease;
+  color: black;
+}
+
+.c5 {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1em;
+  font-style: italic;
+}
+
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all 2s;
+  transition: all 2s;
+  color: black;
+}
+
+.c0:not(:last-child) {
+  margin-right: 0;
+  margin-bottom: 0.5rem;
+}
+
+.c0 .c2 {
+  background: transparent;
+  box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+}
+
+.c0:hover .c4 {
+  color: var(--color-primary);
+}
+
+.c0:hover .c2 {
+  -webkit-animation-name: kLnLOV;
+  animation-name: kLnLOV;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
+}
+
 <div>
   <label
-    className="root"
-    style={
-      Object {
-        "color": "black",
-      }
-    }
+    checked={false}
+    className="c0"
+    color="black"
   >
     <input
       checked={false}
-      className="input"
+      className="c1"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -22,16 +84,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="pseudoInput"
-      style={
-        Object {
-          "color": "black",
-        }
-      }
+      className="c2 c3"
+      color="black"
     />
      
     <span
-      className="label"
+      className="c4 c5"
     >
        
       Yes
@@ -40,16 +98,13 @@ exports[`Radio Group is rendered correctly 1`] = `
      
   </label>
   <label
-    className="root"
-    style={
-      Object {
-        "color": "black",
-      }
-    }
+    checked={false}
+    className="c0"
+    color="black"
   >
     <input
       checked={false}
-      className="input"
+      className="c1"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -59,16 +114,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="pseudoInput"
-      style={
-        Object {
-          "color": "black",
-        }
-      }
+      className="c2 c3"
+      color="black"
     />
      
     <span
-      className="label"
+      className="c4 c5"
     >
        
       No
@@ -77,16 +128,13 @@ exports[`Radio Group is rendered correctly 1`] = `
      
   </label>
   <label
-    className="root"
-    style={
-      Object {
-        "color": "black",
-      }
-    }
+    checked={false}
+    className="c0"
+    color="black"
   >
     <input
       checked={false}
-      className="input"
+      className="c1"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -96,16 +144,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="pseudoInput"
-      style={
-        Object {
-          "color": "black",
-        }
-      }
+      className="c2 c3"
+      color="black"
     />
      
     <span
-      className="label"
+      className="c4 c5"
     >
        
       Maybe

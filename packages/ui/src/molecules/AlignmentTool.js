@@ -1,8 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import AlignmentBoxWithLabel from './AlignmentBoxWithLabel'
-import classes from './AlignmentTool.local.scss'
+
+const mainGrey = '#666'
+
+const Root = styled.div`
+  display: flex;
+  margin-left: auto;
+`
+
+const MiddleLine = styled.div`
+  background-color: ${mainGrey};
+  height: 40px;
+  width: 1px;
+`
 
 const AlignmentTool = ({ data, onClickAlignmentBox }) => {
   const onClick = event => {
@@ -17,7 +30,7 @@ const AlignmentTool = ({ data, onClickAlignmentBox }) => {
   const noBorderLeft = { left: true }
 
   return (
-    <div className={classes.root}>
+    <Root>
       <AlignmentBoxWithLabel
         active={leftData.active}
         id={leftData.id}
@@ -26,7 +39,7 @@ const AlignmentTool = ({ data, onClickAlignmentBox }) => {
         onClick={onClick}
       />
 
-      <div className={classes.middleLine} />
+      <MiddleLine />
 
       <AlignmentBoxWithLabel
         active={rightData.active}
@@ -36,7 +49,7 @@ const AlignmentTool = ({ data, onClickAlignmentBox }) => {
         noBorder={noBorderLeft}
         onClick={onClick}
       />
-    </div>
+    </Root>
   )
 }
 

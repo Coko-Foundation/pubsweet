@@ -1,9 +1,26 @@
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled from 'styled-components'
 
 import AlignmentBox from '../atoms/AlignmentBox'
-import classes from './AlignmentBoxWithLabel.local.scss'
+
+const blue = '#0d78f2'
+
+const Root = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`
+
+const Label = styled.span`
+  color: ${blue};
+  font-family: var(--font-interface);
+  font-size: 16px;
+  font-style: italic;
+  margin-left: ${props => (props.positionRight ? '10px' : '0')};
+  margin-right: ${props => (props.positionRight ? '0' : '10px')};
+  order: ${props => (props.positionRight ? '2' : '0')};
+`
 
 const AlignmentBoxWithLabel = ({
   active,
@@ -12,23 +29,17 @@ const AlignmentBoxWithLabel = ({
   labelText,
   noBorder,
   onClick,
-}) => {
-  const styles = classNames(classes.root, {
-    [classes.reverseOrder]: labelPositionRight,
-  })
-
-  return (
-    <div className={styles}>
-      <span className={classes.label}>{labelText}</span>
-      <AlignmentBox
-        active={active}
-        id={id}
-        noBorder={noBorder}
-        onClick={onClick}
-      />
-    </div>
-  )
-}
+}) => (
+  <Root>
+    <Label positionRight={labelPositionRight}>{labelText}</Label>
+    <AlignmentBox
+      active={active}
+      id={id}
+      noBorder={noBorder}
+      onClick={onClick}
+    />
+  </Root>
+)
 
 AlignmentBoxWithLabel.propTypes = {
   active: PropTypes.bool.isRequired,

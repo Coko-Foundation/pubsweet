@@ -1,6 +1,7 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import renderer from 'react-test-renderer'
+import 'jest-styled-components'
 
 import Radio from '../src/atoms/Radio'
 
@@ -12,7 +13,7 @@ const props = {
   value: 'TestValue',
 }
 
-const wrapper = shallow(<Radio {...props} />)
+const wrapper = mount(<Radio {...props} />)
 
 describe('Radio', () => {
   test('is rendered correctly', () => {

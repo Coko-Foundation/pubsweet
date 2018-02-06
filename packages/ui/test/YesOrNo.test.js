@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
+import 'jest-styled-components'
 
 import YesOrNo from '../src/molecules/YesOrNo'
 import RadioGroup from '../src/molecules/RadioGroup'

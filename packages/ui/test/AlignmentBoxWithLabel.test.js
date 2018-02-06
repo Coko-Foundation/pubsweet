@@ -1,16 +1,10 @@
 import React from 'react'
-import { shallow, mount, render } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import renderer from 'react-test-renderer'
+import 'jest-styled-components'
 
 import AlignmentBox from '../src/atoms/AlignmentBox'
 import AlignmentBoxWithLabel from '../src/molecules/AlignmentBoxWithLabel'
-
-const props = {
-  active: true,
-  id: 'left',
-  labelPositionRight: true,
-  labelText: 'Left',
-}
 
 const requiredProps = {
   active: false,
@@ -20,7 +14,6 @@ const requiredProps = {
 
 const wrapper = shallow(<AlignmentBoxWithLabel {...requiredProps} />)
 const wrapperMounted = mount(<AlignmentBoxWithLabel {...requiredProps} />)
-const wrapperRendered = render(<AlignmentBoxWithLabel {...requiredProps} />)
 
 describe('AlignmentBoxWithLabel', () => {
   test('is rendered correctly', () => {
@@ -50,13 +43,17 @@ describe('AlignmentBoxWithLabel', () => {
   })
 
   test(`with default props the label is rendered on the left`, () => {
-    expect(wrapper.is('.reverseOrder')).toBe(false)
-    expect(wrapperRendered.text()).toEqual(requiredProps.labelText)
+    const label = wrapperMounted.find('span')
+    expect(label.text()).toEqual(requiredProps.labelText)
+    expect(label).toHaveStyleRule('order', '0')
   })
 
-  test('with given props has the correct classes', () => {
-    const newWrapper = shallow(<AlignmentBoxWithLabel {...props} />)
-
-    expect(newWrapper.is('.reverseOrder')).toBe(true)
+  test('with labelPositionRight={true}, the label is rendered on the right', () => {
+    const newWrapper = mount(
+      <AlignmentBoxWithLabel labelPositionRight {...requiredProps} />,
+    )
+    const label = newWrapper.find('span')
+    expect(label.text()).toEqual(requiredProps.labelText)
+    expect(label).toHaveStyleRule('order', '2')
   })
 })

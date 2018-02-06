@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Files renders correctly 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-size: 0.9em;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.c0 {
+  background: transparent;
+  border: 1px dashed grey;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 2em;
+  padding: 10px;
+}
+
+<div
+  className=""
+>
+  <div
+    className=""
+  >
+    <button
+      className="c0"
+      onClick={[Function]}
+      type="button"
+    >
+      ↑ Choose a file to upload
+    </button>
+    <input
+      multiple={true}
+      name={undefined}
+      onChange={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="file"
+    />
+  </div>
+  <div
+    className="c1"
+  >
+    <div>
+      IMG_4346.JPG
+    </div>
+  </div>
+</div>
+`;

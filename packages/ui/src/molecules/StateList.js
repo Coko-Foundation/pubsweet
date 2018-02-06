@@ -2,9 +2,26 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { map, uniqueId, keys, last } from 'lodash'
 import { ChevronRight } from 'react-feather'
+import styled from 'styled-components'
 
-import classes from './StateList.local.scss'
 import StateItem from '../atoms/StateItem'
+
+const StateListContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`
+
+const ItemContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`
+
+const Delimiter = styled(ChevronRight).attrs({ size: 16 })`
+  margin-left: 5px;
+  margin-right: 5px;
+`
 
 const StateList = ({ currentValues, update, values }) => {
   const progressIds = keys(values)
@@ -13,33 +30,27 @@ const StateList = ({ currentValues, update, values }) => {
   // TODO: Placeholder -- to be implemented with authsome
   const canAct = key => true
 
-  const handleUpdate = (name, index) => {
-    update(name, index)
+  const handleUpdate = (currentItem, nextIndex) => {
+    update(currentItem, nextIndex)
   }
 
-  const items = map(values, (valueList, name) => {
-    let delimiter
-    const currentValueIndex = currentValues[name]
-
-    if (name !== lastItem) {
-      delimiter = <ChevronRight className={classes.delimiter} size={16} />
-    }
+  const items = map(values, (valueList, currentItem) => {
+    const currentValueIndex = currentValues[currentItem]
 
     return (
-      <div className={classes.itemContainer} key={uniqueId()}>
+      <ItemContainer key={uniqueId()}>
         <StateItem
-          disabled={!canAct(name)}
+          disabled={!canAct(currentItem)}
           index={currentValueIndex}
-          name={name}
           update={handleUpdate}
           values={valueList}
         />
-        {delimiter}
-      </div>
+        {currentItem !== lastItem && <Delimiter />}
+      </ItemContainer>
     )
   })
 
-  return <div className={classes.stateListContainer}>{items}</div>
+  return <StateListContainer>{items}</StateListContainer>
 }
 
 StateList.propTypes = {
