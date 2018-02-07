@@ -1,14 +1,14 @@
 # AWS S3 File Upload
 
-In order to use `component-xpub-aws-s3` you first need to have a `.env` file containing AWS data in the root folder of the starting point of your applications.
+In order to use `component-aws-s3` you first need to have a `.env` file containing AWS data in the root folder of the starting point of your applications.
 
 The `.env` file should look like this:
 
-```bash
-AWS_ACCESS_KEY = exampleKey
-AWS_SECRET_KEY = exampleKey/sads/21
-AWS_REGION = region-name
-AWS_BUCKET = bucket-name
+```shell
+AWS_S3_ACCESS_KEY = exampleKey
+AWS_S3_SECRET_KEY = exampleKey/sads/21
+AWS_S3_REGION = region-name
+AWS_S3_BUCKET = bucket-name
 ```
 
 Then, as soon as possible in your app you should add the `dotenv` package:
@@ -17,7 +17,7 @@ Then, as soon as possible in your app you should add the `dotenv` package:
 require('dotenv').config()
 ```
 
-# `component-xpub-aws-s3` API
+# `component-aws-s3` API
 
 A list of endpoints that help you upload, download and delete S3 files.
 
