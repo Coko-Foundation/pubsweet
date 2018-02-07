@@ -29,5 +29,10 @@
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "AWSS3"
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/src/.*.test.js$",
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   }
 }
