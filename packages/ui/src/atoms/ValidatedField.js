@@ -6,23 +6,22 @@ import styled from 'styled-components'
 // TODO: pass ...props.input to children automatically?
 
 const MessageWrapper = styled.div`
-  font-family: var(--font-author);
+  font-family: var(--font-writing);
   display: inline-block;
   font-style: italic;
-  margin-left: 1em;
-  margin-top: 10px;
+  margin-left: calc(var(--sub-grid-unit) * 4);
+  margin-top: var(--sub-grid-unit);
 `
 
 const Message = styled.div`
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: var(--sub-grid-unit);
   }
-  font-size: 0.9em;
-  letter-spacing: 0.01em;
+  font-size: var(--font-size-base-small);
 `
 
 const ErrorMessage = Message.extend`
-  color: var(--color-danger);
+  color: var(--color-error);
 `
 
 const WarningMessage = Message.extend`
