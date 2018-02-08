@@ -1,7 +1,7 @@
 {
-  "name": "@pubsweet/components-aws-s3",
-  "version": "0.0.1",
-  "description": "aws s3 configured for PubSweet",
+  "name": "@pubsweet/component-aws-s3",
+  "version": "0.1.0",
+  "description": "AWS S3 upload component for PubSweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
   "files": ["src"],
