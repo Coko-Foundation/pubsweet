@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@1.0.0...pubsweet-components@1.1.0) (2018-02-08)
+
+### Bug Fixes
+
+* **components:** update react-router-redux version to match client ([3d257ef](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3d257ef))
+
+### Features
+
+* **components:** added aws s3 ([73c0764](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/73c0764))
+
 <a name="1.0.0"></a>
 
 # [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@0.0.12...pubsweet-components@1.0.0) (2018-02-02)

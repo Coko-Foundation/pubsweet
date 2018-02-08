@@ -11,4 +11,7 @@ module.exports = {
     region: process.env.AWS_SES_REGION,
     sender: process.env.EMAIL_SENDER || 'test_sender@domain.com',
   },
+  'pubsweet-component-aws-s3': {
+    validations: path.join(__dirname, 'upload-validations'),
+  },
 }
