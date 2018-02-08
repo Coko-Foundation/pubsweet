@@ -4,10 +4,8 @@ const uuid = require('uuid')
 const Joi = require('joi')
 const _ = require('lodash')
 const config = require('config')
-const logger = require('@pubsweet/logger')
 
-logger.info(config)
-logger.debug(config)
+console.info(config) // eslint-disable-line
 
 const s3Config = _.get(config, 'pubsweet-component-aws-s3')
 const uploadValidations = require(s3Config.validations)
