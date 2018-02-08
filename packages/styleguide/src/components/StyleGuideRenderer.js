@@ -7,14 +7,16 @@ import '@pubsweet/default-theme'
 injectNormalizeCss()
 
 const grid = `
-*[data-preview] {
+div[data-preview] {
   --grid-color: rgba(122,200,122, 1);
   --sub-grid-color: rgba(122,200,122, 0.3);
 
   background-image: repeating-linear-gradient( to bottom, 
-    var(--grid-color),
-    var(--grid-color) 1px,
-    transparent 1px,
+    transparent,
+    transparent calc(var(--grid-unit) / 2),
+    var(--grid-color) calc(var(--grid-unit) / 2),
+    var(--grid-color) calc(var(--grid-unit) / 2 + 1px),
+    transparent calc(var(--grid-unit) / 2 + 1px),
     transparent var(--grid-unit)
   ), repeating-linear-gradient( to bottom, 
     var(--sub-grid-color),
@@ -22,9 +24,24 @@ const grid = `
     transparent 1px,
     transparent var(--sub-grid-unit)
   );
+  border-color: transparent;
 }
 `
-
+/*
+  background-image: repeating-linear-gradient( to bottom, 
+    transparent,
+    transparent calc(var(--grid-unit) / 2),
+    var(--grid-color) calc(var(--grid-unit) / 2),
+    var(--grid-color) calc((var(--grid-unit) / 2) + 1),
+    transparent calc((var(--grid-unit) / 2) + 1),
+    transparent var(--grid-unit)
+  ), repeating-linear-gradient( to bottom, 
+    var(--sub-grid-color),
+    var(--sub-grid-color) 1px,
+    transparent 1px,
+    transparent var(--sub-grid-unit)
+  );
+  */
 const Root = styled.div`
   display: grid;
   grid-template-areas: 'side content';
@@ -55,6 +72,9 @@ const Content = styled.div`
   grid-area: content;
   overflow-y: auto;
   padding: 1rem;
+  *[data-preview] {
+    padding: calc(var(--grid-unit) / 2);
+  }
   ${props => props.grid && grid};
 `
 
