@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@2.0.0...pubsweet-client@2.1.0) (2018-02-08)
+
+### Features
+
+* **client:** add styled components ([43ab2c5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/43ab2c5))
+
 <a name="2.0.0"></a>
 
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@1.1.4...pubsweet-client@2.0.0) (2018-02-02)
