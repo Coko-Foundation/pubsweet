@@ -1,5 +1,5 @@
 {
-  "name": "pubsweet-components-aws-s3",
+  "name": "@pubsweet/components-aws-s3",
   "version": "0.0.1",
   "description": "aws s3 configured for PubSweet",
   "license": "MIT",
@@ -33,5 +33,8 @@
   "jest": {
     "verbose": true,
     "testRegex": "/src/.*.test.js$"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
