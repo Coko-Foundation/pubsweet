@@ -1,4 +1,5 @@
 import React from 'react'
+import propTypes from 'prop-types'
 import { Icon } from '@pubsweet/ui'
 import styled, { keyframes } from 'styled-components'
 
@@ -34,5 +35,14 @@ const Root = styled.div`
   justify-content: center;
   animation: ${rotating} 1.5s linear infinite;
 `
+
+Spinner.propTypes = {
+  /** Feather icon (https://feathericons.com/) */
+  icon: propTypes.string,
+  /** String or HEX color */
+  color: propTypes.string,
+  /** Size of the Icon component  */
+  size: propTypes.number,
+}
 
 export default Spinner
