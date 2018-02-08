@@ -3,8 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { reducer as formReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux'
-import styled, { injectGlobal } from 'styled-components'
-import injectNormalizeCss from 'pubsweet-client/src/helpers/inject-normalize-css'
+import styled from 'styled-components'
 
 import '@pubsweet/default-theme'
 
@@ -16,14 +15,6 @@ const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
-
-injectNormalizeCss()
-
-injectGlobal`
-  body: {
-    overflow: hidden;
-  }
-`
 
 const Root = styled.div``
 
