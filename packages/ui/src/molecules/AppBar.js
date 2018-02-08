@@ -6,8 +6,9 @@ import Icon from '../atoms/Icon'
 
 const Root = styled.nav`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 1rem;
+  min-height: calc(var(--grid-unit) * 2);
 
   a {
     color: var(--color-primary);
@@ -46,11 +47,16 @@ const NavLinks = styled.div`
 `
 
 const Logo = styled(Link)`
+  display: flex;
   font-weight: bold;
   text-decoration: none;
 
   &::before {
     content: '';
+  }
+
+  svg {
+    height: calc(var(--grid-unit) * 2);
   }
 `
 
