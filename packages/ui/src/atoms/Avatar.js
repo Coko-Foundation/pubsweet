@@ -2,13 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.svg.attrs({
-  viewBox: props => `0 0 ${props.width + 5} ${props.height}`,
+  viewBox: props => `0 0 105 70`,
   xmlns: 'http://www.w3.org/2000/svg',
 })`
-  height: auto;
-  max-height: 100vh;
-  max-width: 100%;
-  width: auto;
+  width: calc(var(--grid-unit) * 3);
+  height: calc(var(--grid-unit) * 2);
 `
 
 const Persona = styled.path.attrs({
@@ -66,17 +64,14 @@ const Reviewer = ({ status, letter }) => {
 
 const STATUSES = ['accepted', 'pending', 'declined', 'submitted']
 
-const Avatar = ({ status, width, height, reviewerLetter }) => {
+const Avatar = ({ status, reviewerLetter }) => {
   status = status.toLowerCase()
   if (!STATUSES.includes(status)) {
     status = 'default'
   }
 
-  width = width || 100
-  height = height || 70
-
   return (
-    <Container height={height} width={width}>
+    <Container>
       <Persona status={status} />
       <Check status={status} />
       <X status={status} />
