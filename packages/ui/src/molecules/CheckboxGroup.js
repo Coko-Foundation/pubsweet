@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import Checkbox from '../atoms/Checkbox'
 
-const Root = styled.div`
-  display: flex;
-`
+import Checkbox from '../atoms/Checkbox'
+import ControlGroup from '../atoms/ControlGroup'
 
 class CheckboxGroup extends React.Component {
   constructor(props) {
@@ -36,7 +33,7 @@ class CheckboxGroup extends React.Component {
     const { values } = this.state
 
     return (
-      <Root>
+      <ControlGroup inline={inline}>
         {options.map(option => (
           <Checkbox
             checked={values.includes(option.value)}
@@ -49,7 +46,7 @@ class CheckboxGroup extends React.Component {
             value={option.value}
           />
         ))}
-      </Root>
+      </ControlGroup>
     )
   }
 }
