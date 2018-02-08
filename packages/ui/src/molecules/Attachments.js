@@ -10,23 +10,21 @@ import Icon from '../atoms/Icon'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  margin-bottom: var(--grid-unit);
 `
 
 const Paperclip = styled.span`
-  color: gray;
-  margin-right: 10px;
+  margin-right: var(--sub-grid-unit);
 `
 
 const Filename = styled.span`
-  color: gray;
+  color: var(--color-text);
 `
 
 const UploadingFile = ({ file, progress, error }) => (
   <Root>
     <Paperclip>
-      <Icon color="var(--color-local, black)">paperclip</Icon>
+      <Icon color="var(--color-text)">paperclip</Icon>
     </Paperclip>
     <Filename>{error || 'Uploading…'}</Filename>
   </Root>

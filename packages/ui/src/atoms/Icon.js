@@ -5,10 +5,10 @@ import styled from 'styled-components'
 
 const Container = styled.span`
   display: inline-flex;
-  width: var(--icon-size);
+  padding: calc(var(--sub-grid-unit) / 2);
 `
 
-const Icon = ({ children, color = 'var(--color-local, black)', size = 24 }) => {
+const Icon = ({ children, color = 'var(--color-text)', size = 24 }) => {
   // convert `arrow_left` to `ArrowLeft`
   const name = pascalize(children)
 

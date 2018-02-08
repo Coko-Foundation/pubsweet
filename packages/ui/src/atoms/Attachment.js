@@ -14,7 +14,7 @@ const IconContainer = styled.span`
   --color-local: var(--color-primary);
   --icon-size: 16px;
 
-  margin: 0.5em;
+  margin: 0 var(--sub-grid-unit);
 
   & svg {
     height: var(--icon-size);
@@ -25,7 +25,6 @@ const IconContainer = styled.span`
 const Root = styled.a`
   align-items: center;
   display: flex;
-  line-height: 1.15;
   text-decoration: none;
 
   &:hover ${Filename} {
