@@ -8,17 +8,17 @@ const Input = styled.input`
 const PseudoInput = styled.span`
   display: inline-block;
   content: ' ';
-  width: var(--sub-grid-unit);
-  height: var(--sub-grid-unit);
+  width: calc(var(--sub-grid-unit) * 2);
+  height: calc(var(--sub-grid-unit) * 2);
   vertical-align: center;
   margin-left: var(--sub-grid-unit);
   margin-right: var(--sub-grid-unit);
 
   /* This is not a real border (box-shadow provides that), so not themed as such */
-  border: 2px solid white;
+  border: calc(var(--sub-grid-unit) / 4) solid white;
   border-radius: 50%;
 
-  transition: border var(--transition-duration-unit)
+  transition: border var(--transition-duration-xs)
     var(--transition-timing-function);
 
   color: ${props => props.color};
@@ -69,7 +69,7 @@ const Root = styled.label`
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: calc(var(--transition-duration-unit) * 2);
+      animation-duration: var(--transition-duration-s);
       box-shadow: 0 0 0 var(--border-width)
         ${props => (props.checked ? 'currentcolor' : 'var(--color-primary)')};
     }

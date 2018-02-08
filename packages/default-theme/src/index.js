@@ -48,8 +48,10 @@ injectGlobal`
   --box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.3);
 
   /* Transition */
-  --transition-duration: 2s;
-  --transition-duration-unit: calc(var(--transition-duration) / 10 );
+  --transition-duration: 1s;
+  --transition-duration-m: calc(var(--transition-duration) / 2 );
+  --transition-duration-s: calc(var(--transition-duration) / 5 );
+  --transition-duration-xs: calc(var(--transition-duration) / 10 );
   --transition-timing-function: ease;
   --transition-delay: 500ms;
 }
