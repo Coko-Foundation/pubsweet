@@ -51,10 +51,11 @@ const Root = styled.label`
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   transition: all var(--transition-duration);
+  min-height: var(--grid-unit);
 
   &:not(:last-child) {
     margin-right: ${props => (props.inline ? 'var(--grid-unit)' : '0')};
-    margin-bottom: ${props => (props.inline ? '0' : 'var(--sub-grid-unit)')};
+    margin-bottom: 0;
   }
 
   ${PseudoInput} {
@@ -100,7 +101,7 @@ const Radio = ({
   onChange,
   readonly,
 }) => (
-  <Root checked={checked} color={color}>
+  <Root checked={checked} color={color} inline={inline}>
     <Input
       checked={checked}
       disabled={readonly}
