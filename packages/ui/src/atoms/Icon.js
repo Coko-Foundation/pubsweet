@@ -4,10 +4,11 @@ import * as icons from 'react-feather'
 import styled from 'styled-components'
 
 const Container = styled.span`
-  display: flex;
+  display: inline-flex;
+  width: var(--icon-size);
 `
 
-const Icon = ({ children, color = 'var(--color-local, black)', size = 32 }) => {
+const Icon = ({ children, color = 'var(--color-local, black)', size = 24 }) => {
   // convert `arrow_left` to `ArrowLeft`
   const name = pascalize(children)
 
