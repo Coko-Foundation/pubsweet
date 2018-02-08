@@ -1,6 +1,24 @@
-# AWS S3 File Upload
+# AWS S3 File Upload Configuration
 
-In order to use `component-aws-s3` you first need to have a `.env` file containing AWS data in the root folder of the starting point of your applications.
+In order to use this component, the following configuration needs to be added to a PubSweet application inside a section named `pubsweet-component-aws-s3`:
+
+* `secretAccessKey`: the `AWS_S3_SECRET_KEY` value from the app's `.env` file
+* `accessKeyId`: the `AWS_S3_ACCESS_KEY` value from the app's `.env` file
+* `region`: the `AWS_S3_REGION` value from the app's `.env` file
+* `region`: the `AWS_S3_BUCKET` value from the app's `.env` file
+
+
+For example:
+
+```json
+'pubsweet-component-aws-s3': {
+    secretAccessKey: process.env.AWS_S3_SECRET_KEY,
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY,
+    region: process.env.AWS_S3_REGION,
+    region: process.env.AWS_S3_BUCKET,
+    validations: path.resolve(__dirname, 'upload-validations.js'),
+  },
+```
 
 The `.env` file should look like this:
 
