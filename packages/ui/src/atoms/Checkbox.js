@@ -20,14 +20,12 @@ const Root = styled.label`
   align-items: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   font-family: var(--font-author);
-  font-size: 1em;
   font-style: italic;
   letter-spacing: 1px;
   transition: all 2s;
 
   &:not(:last-child) {
     margin-right: ${props => (props.inline ? '2.7em' : '0')};
-    margin-bottom: ${props => (props.inline ? '0' : '0.5rem')};
   }
 
   & input {
@@ -36,7 +34,6 @@ const Root = styled.label`
   }
 
   & span {
-    border-bottom: 1px solid transparent;
     font-size: 1.1em;
     transition: color 0.5s;
   }
@@ -84,7 +81,7 @@ const Checkbox = ({
   checked = checked || false
 
   return (
-    <Root checked={checked}>
+    <Root checked={checked} inline={inline}>
       <input
         checked={checked}
         name={name}
