@@ -8,39 +8,20 @@ const Uploader = styled.div``
 const FileList = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 0.9em;
+  font-size: var(--font-size-small);
   font-style: italic;
-  line-height: 1.5;
 `
 
 const AttachButton = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: 1px dashed grey;
+  border: var(--border-width) dashed var(--color-border);
+  height: var(--grid-unit);
   cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  margin-bottom: 2em;
-  padding: 10px;
+  margin-bottom: var(--grid-unit);
+  padding: var(--sub-grid-unit);
 `
-
-/* Not used for now
-.button {
-  background: transparent;
-  border: 1px dashed grey;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  margin-bottom: 2em;
-  padding: 10px;
-}
-
-.button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-*/
 
 class Files extends React.Component {
   constructor(props) {

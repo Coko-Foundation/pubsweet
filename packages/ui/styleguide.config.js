@@ -27,13 +27,5 @@ module.exports = {
     ),
     Wrapper: require.resolve('@pubsweet/styleguide/src/components/Wrapper'),
   },
-  theme: {
-    color: {
-      link: '#205d86',
-    },
-    fontFamily: {
-      base: '"Noto Sans", sans-serif',
-    },
-  },
   title: 'PubSweet UI style guide',
 }
