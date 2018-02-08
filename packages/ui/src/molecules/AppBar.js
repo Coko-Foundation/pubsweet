@@ -13,18 +13,6 @@ const Root = styled.nav`
   a {
     color: var(--color-primary);
     text-decoration: none;
-
-    &::before {
-      color: #aaa;
-      display: inline-block;
-      height: 1em;
-      margin-right: 0.3em;
-      text-align: center;
-
-      &:hover {
-        color: var(--color-primary);
-      }
-    }
   }
 `
 
@@ -50,10 +38,6 @@ const Logo = styled(Link)`
   display: flex;
   font-weight: bold;
   text-decoration: none;
-
-  &::before {
-    content: '';
-  }
 
   svg {
     height: calc(var(--grid-unit) * 2);
