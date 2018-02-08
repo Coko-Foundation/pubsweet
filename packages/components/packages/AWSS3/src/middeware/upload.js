@@ -5,8 +5,6 @@ const Joi = require('joi')
 const _ = require('lodash')
 const config = require('config')
 
-console.info(config) // eslint-disable-line
-
 const s3Config = _.get(config, 'pubsweet-component-aws-s3')
 const uploadValidations = require(s3Config.validations)
 

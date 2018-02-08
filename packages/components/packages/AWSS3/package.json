@@ -32,7 +32,6 @@
   },
   "jest": {
     "verbose": true,
-    "testRegex": "/src/.*.test.js$",
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+    "testRegex": "/src/.*.test.js$"
   }
 }
