@@ -8,11 +8,13 @@ const BaseStandardButton = styled.button.attrs({
   border: none;
   cursor: pointer;
   font-family: var(--font-interface);
+
   font-size: inherit;
   letter-spacing: 0.05em;
-  padding: 10px 20px;
-  position: relative;
   text-transform: uppercase;
+
+  height: var(--grid-unit);
+  padding: 0 20px;
 
   &:hover,
   &:focus {
