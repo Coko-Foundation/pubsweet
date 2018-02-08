@@ -16,6 +16,7 @@ injectGlobal`
   --color-background-hue: #f1f1f1; /* marginally darker shade of the app background so that it can be used to divide the interface when needed */
   --color-success: #050;
   --color-error: #b50000;
+  --color-warning: #ffcc00;
   --color-text: #333;
   --color-text-reverse: #fff;
   --color-text-placeholder: #595959;
