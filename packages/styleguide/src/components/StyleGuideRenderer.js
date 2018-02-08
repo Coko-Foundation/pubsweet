@@ -8,40 +8,33 @@ injectNormalizeCss()
 
 const grid = `
 div[data-preview] {
-  --grid-color: rgba(122,200,122, 1);
-  --sub-grid-color: rgba(122,200,122, 0.3);
+  --a-dark: rgba(255, 0, 0, 0.2);
+  --a-light: rgba(255, 69, 69, 0.1);
+  --b-dark: rgba(0, 121, 253, 0.2);
+  --b-light: rgba(68, 158, 255, 0.1);
 
   background-image: repeating-linear-gradient( to bottom, 
-    transparent,
-    transparent calc(var(--grid-unit) / 2),
-    var(--grid-color) calc(var(--grid-unit) / 2),
-    var(--grid-color) calc(var(--grid-unit) / 2 + 1px),
-    transparent calc(var(--grid-unit) / 2 + 1px),
-    transparent var(--grid-unit)
-  ), repeating-linear-gradient( to bottom, 
-    var(--sub-grid-color),
-    var(--sub-grid-color) 1px,
-    transparent 1px,
-    transparent var(--sub-grid-unit)
+    var(--a-dark),
+    var(--a-dark) var(--sub-grid-unit),
+    var(--a-light) var(--sub-grid-unit),
+    var(--a-light) calc(2 * var(--sub-grid-unit)),
+    var(--b-dark) calc(2 * var(--sub-grid-unit)),
+    var(--b-dark) calc(3 * var(--sub-grid-unit)),
+    var(--b-light) calc(3 * var(--sub-grid-unit)),
+    var(--b-light) calc(4 * var(--sub-grid-unit)),
+    var(--b-dark) calc(4 * var(--sub-grid-unit)),
+    var(--b-dark) calc(5 * var(--sub-grid-unit)),
+    var(--b-light) calc(5 * var(--sub-grid-unit)),
+    var(--b-light) calc(6 * var(--sub-grid-unit)),
+    var(--a-dark) calc(6 * var(--sub-grid-unit)),
+    var(--a-dark) calc(7 * var(--sub-grid-unit)),
+    var(--a-light) calc(7 * var(--sub-grid-unit)),
+    var(--a-light) calc(8 * var(--sub-grid-unit))
   );
-  border-color: transparent;
+  border-color: white;
 }
 `
-/*
-  background-image: repeating-linear-gradient( to bottom, 
-    transparent,
-    transparent calc(var(--grid-unit) / 2),
-    var(--grid-color) calc(var(--grid-unit) / 2),
-    var(--grid-color) calc((var(--grid-unit) / 2) + 1),
-    transparent calc((var(--grid-unit) / 2) + 1),
-    transparent var(--grid-unit)
-  ), repeating-linear-gradient( to bottom, 
-    var(--sub-grid-color),
-    var(--sub-grid-color) 1px,
-    transparent 1px,
-    transparent var(--sub-grid-unit)
-  );
-  */
+
 const Root = styled.div`
   display: grid;
   grid-template-areas: 'side content';
