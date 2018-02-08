@@ -4,14 +4,10 @@ import styled from 'styled-components'
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
 
-const Root = styled.div`
-  font-size: 1em;
-`
+const Root = styled.div``
 
 const Label = styled.span`
   display: block;
-  font-size: 1em;
-  margin-bottom: 0.5em;
 `
 
 const OpenerContainer = styled.div``
