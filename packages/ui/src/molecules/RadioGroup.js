@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import Radio from '../atoms/Radio'
 
-const Root = styled.div`
-  display: flex;
-`
+import Radio from '../atoms/Radio'
+import ControlGroup from '../atoms/ControlGroup'
 
 class RadioGroup extends React.Component {
   constructor(props) {
@@ -26,7 +23,7 @@ class RadioGroup extends React.Component {
     const { value } = this.state
 
     return (
-      <Root>
+      <ControlGroup inline={inline}>
         {options.map(option => (
           <Radio
             checked={option.value === value}
@@ -40,7 +37,7 @@ class RadioGroup extends React.Component {
             value={option.value}
           />
         ))}
-      </Root>
+      </ControlGroup>
     )
   }
 }
