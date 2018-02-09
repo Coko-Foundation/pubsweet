@@ -1,35 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio Group is rendered correctly 1`] = `
-.c1 {
+.c2 {
   display: none;
 }
 
-.c3 {
-  --local-border-size: 2px;
-  --local-borderTwo-size: 1px;
+.c4 {
   display: inline-block;
   content: ' ';
-  width: 0.6em;
-  height: 0.6em;
+  width: calc(var(--sub-grid-unit) * 2);
+  height: calc(var(--sub-grid-unit) * 2);
   vertical-align: center;
-  margin-left: 0.2em;
-  margin-right: 0.6em;
-  border: var(--local-border-size) solid white;
+  margin-left: var(--sub-grid-unit);
+  margin-right: var(--sub-grid-unit);
+  border: calc(var(--sub-grid-unit) / 4) solid white;
   border-radius: 50%;
-  -webkit-transition: border 0.2s ease;
-  transition: border 0.2s ease;
+  -webkit-transition: border var(--transition-duration-xs) var(--transition-timing-function);
+  transition: border var(--transition-duration-xs) var(--transition-timing-function);
   color: black;
 }
 
-.c5 {
+.c6 {
   display: inline-block;
   font-family: inherit;
-  font-size: 1em;
+  font-size: var(--font-size-base);
   font-style: italic;
 }
 
-.c0 {
+.c1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -39,42 +37,55 @@ exports[`Radio Group is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all var(--transition-duration);
+  transition: all var(--transition-duration);
+  min-height: var(--grid-unit);
   color: black;
 }
 
-.c0:not(:last-child) {
+.c1:not(:last-child) {
   margin-right: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
-.c0 .c2 {
+.c1 .c3 {
   background: transparent;
-  box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+  box-shadow: 0 0 0 var(--border-width) currentcolor;
 }
 
-.c0:hover .c4 {
+.c1:hover .c5 {
   color: var(--color-primary);
 }
 
-.c0:hover .c2 {
+.c1:hover .c3 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
+  -webkit-animation-duration: var(--transition-duration-s);
+  animation-duration: var(--transition-duration-s);
+  box-shadow: 0 0 0 var(--border-width) var(--color-primary);
 }
 
-<div>
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+<div
+  className="c0"
+>
   <label
     checked={false}
-    className="c0"
+    className="c1"
     color="black"
   >
     <input
       checked={false}
-      className="c1"
+      className="c2"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -84,12 +95,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c2 c3"
+      className="c3 c4"
       color="black"
     />
      
     <span
-      className="c4 c5"
+      className="c5 c6"
     >
        
       Yes
@@ -99,12 +110,12 @@ exports[`Radio Group is rendered correctly 1`] = `
   </label>
   <label
     checked={false}
-    className="c0"
+    className="c1"
     color="black"
   >
     <input
       checked={false}
-      className="c1"
+      className="c2"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -114,12 +125,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c2 c3"
+      className="c3 c4"
       color="black"
     />
      
     <span
-      className="c4 c5"
+      className="c5 c6"
     >
        
       No
@@ -129,12 +140,12 @@ exports[`Radio Group is rendered correctly 1`] = `
   </label>
   <label
     checked={false}
-    className="c0"
+    className="c1"
     color="black"
   >
     <input
       checked={false}
-      className="c1"
+      className="c2"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -144,12 +155,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c2 c3"
+      className="c3 c4"
       color="black"
     />
      
     <span
-      className="c4 c5"
+      className="c5 c6"
     >
        
       Maybe

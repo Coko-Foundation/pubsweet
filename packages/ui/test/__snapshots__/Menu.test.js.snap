@@ -2,42 +2,81 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  font-size: 1em;
+  width: calc(var(--grid-unit) * 14);
 }
 
 .c2 {
   background: transparent;
-  border: none;
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
-  border-left: 2px solid lightgrey;
-  color: inherit;
+  width: 100%;
+  height: calc(var(--grid-unit) * 2);
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .c3 {
-  display: inline-block;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: left;
+  padding-left: calc(var(--grid-unit) / 2);
+}
+
+.c3:hover {
+  color: var(--color-primary);
+}
+
+.c4 {
+  border-left: var(--border-width) var(--border-style) var(--color-furniture);
+  width: calc(var(--grid-unit) * 2);
+  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c5 {
   font-size: 50%;
-  margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transform: scaleX(2.2) scaleY(1.2);
-  -ms-transform: scaleX(2.2) scaleY(1.2);
-  transform: scaleX(2.2) scaleY(1.2);
+  -webkit-transform: scaleX(2) scaleY(1.2);
+  -ms-transform: scaleX(2) scaleY(1.2);
+  transform: scaleX(2) scaleY(1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c4 {
+.c6 {
   position: absolute;
+  left: 0;
+  right: 0;
 }
 
 <div
@@ -48,28 +87,30 @@ exports[`Menu is rendered correctly 1`] = `
     className="c1"
     role="listbox"
   >
-    <div
-      className=""
+    <button
+      className="c2"
+      onClick={[Function]}
+      open={false}
+      type="button"
     >
-      <button
-        className="c2"
-        onClick={[Function]}
-        open={false}
-        type="button"
+      <span
+        className="c3"
       >
-        <span>
-          Foo
-        </span>
+        Foo
+      </span>
+      <span
+        className="c4"
+      >
         <span
-          className="c3"
+          className="c5"
           open={false}
         >
           ▼
         </span>
-      </button>
-    </div>
+      </span>
+    </button>
     <div
-      className="c4"
+      className="c6"
     />
   </div>
 </div>
@@ -77,85 +118,140 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  font-size: 1em;
+  width: calc(var(--grid-unit) * 14);
 }
 
 .c2 {
   background: transparent;
-  border: none;
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  width: 100%;
+  height: calc(var(--grid-unit) * 2);
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .c3 {
-  display: inline-block;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: left;
+  padding-left: calc(var(--grid-unit) / 2);
+}
+
+.c3:hover {
+  color: var(--color-primary);
+}
+
+.c4 {
+  border-left: var(--border-width) var(--border-style) var(--color-furniture);
+  width: calc(var(--grid-unit) * 2);
+  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c5 {
   font-size: 50%;
-  margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transform: scaleX(2.2) scaleY(-1.2);
-  -ms-transform: scaleX(2.2) scaleY(-1.2);
-  transform: scaleX(2.2) scaleY(-1.2);
+  -webkit-transform: scaleX(2) scaleY(-1.2);
+  -ms-transform: scaleX(2) scaleY(-1.2);
+  transform: scaleX(2) scaleY(-1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c4 {
-  position: absolute;
-}
-
-.c5 {
-  background-color: white;
-  border-bottom: 2px solid var(--color-primary);
-  border-left: 2px solid var(--color-primary);
-  left: 0;
-  padding-bottom: 0.5em;
-  padding-top: 0.5em;
-  position: absolute;
-  top: 0;
-  -webkit-transition: opacity 2s;
-  transition: opacity 2s;
-  width: 0;
-  z-index: 10;
-  min-width: 10em;
-  opacity: 1;
-}
-
 .c6 {
-  color: black;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-author);
-  padding: 10px;
-  white-space: nowrap;
-}
-
-.c6:hover {
-  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .c7 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-background);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.c8 {
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-author);
+  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2) calc(var(--sub-grid-unit) * 2);
+  border: var(--border-width) var(--border-style) transparent;
+  border-width: var(--border-width) 0 var(--border-width) 0;
+  white-space: nowrap;
+}
+
+.c8:hover {
+  background: var(--color-background-hue);
+  border-color: var(--color-border);
+}
+
+.c8:first-child:hover {
+  border-top-color: var(--color-background-hue);
+}
+
+.c8:last-child:hover {
+  border-bottom-color: var(--color-background-hue);
+}
+
+.c9 {
   color: #444;
   font-weight: inherit;
   cursor: pointer;
   font-family: var(--font-author);
-  padding: 10px;
+  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2) calc(var(--sub-grid-unit) * 2);
+  border: var(--border-width) var(--border-style) transparent;
+  border-width: var(--border-width) 0 var(--border-width) 0;
   white-space: nowrap;
 }
 
-.c7:hover {
-  color: var(--color-primary);
+.c9:hover {
+  background: var(--color-background-hue);
+  border-color: var(--color-border);
+}
+
+.c9:first-child:hover {
+  border-top-color: var(--color-background-hue);
+}
+
+.c9:last-child:hover {
+  border-bottom-color: var(--color-background-hue);
 }
 
 <div
@@ -166,36 +262,38 @@ exports[`Menu is rendered correctly when open 1`] = `
     className="c1"
     role="listbox"
   >
-    <div
-      className=""
+    <button
+      className="c2"
+      onClick={[Function]}
+      open={true}
+      type="button"
     >
-      <button
-        className="c2"
-        onClick={[Function]}
-        open={true}
-        type="button"
+      <span
+        className="c3"
       >
-        <span>
-          Foo
-        </span>
+        Foo
+      </span>
+      <span
+        className="c4"
+      >
         <span
-          className="c3"
+          className="c5"
           open={true}
         >
           ▼
         </span>
-      </button>
-    </div>
+      </span>
+    </button>
     <div
-      className="c4"
+      className="c6"
     >
       <div
-        className="c5"
+        className="c7"
         open={true}
       >
         <div
           aria-selected={true}
-          className="c6"
+          className="c8"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -205,7 +303,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c7"
+          className="c9"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
