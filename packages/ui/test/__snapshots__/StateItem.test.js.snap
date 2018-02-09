@@ -4,9 +4,8 @@ exports[`StateItem is rendered correctly 1`] = `
 .c0 {
   cursor: pointer;
   font-family: var(--font-interface);
-  font-size: 16px;
+  font-size: var(--font-size-base-small);
   font-style: italic;
-  padding: 0;
 }
 
 .c0:focus {
@@ -14,9 +13,9 @@ exports[`StateItem is rendered correctly 1`] = `
 }
 
 .c0:hover {
-  color: #404040;
-  -webkit-transition: 0.25s ease-in-out 0s;
-  transition: 0.25s ease-in-out 0s;
+  color: var(--color-text);
+  -webkit-transition: var(--transition-duration-unit) var(--transition-timing-function);
+  transition: var(--transition-duration-unit) var(--transition-timing-function);
 }
 
 <span
