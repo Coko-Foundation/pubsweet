@@ -1,23 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Root = styled.label`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(var(--grid-unit) * 14);
 `
 
-const Label = styled.span`
+const Label = styled.label`
   font-size: var(--font-size-base-small);
+  display: block;
 `
 
 const Input = styled.input`
   border: var(--border-width) var(--border-style) var(--color-border);
   border-radius: var(--border-radius);
 
+  font-family: inherit;
   font-size: inherit;
 
-  padding: var(--sub-grid-unit);
-  height: calc((var(--grid-unit) / 2) - (var(--border-width) * 2));
+  padding: 0 calc(var(--grid-unit) / 2);
+  height: calc(var(--grid-unit) * 2);
 
   &::placeholder {
     color: var(--color-text-placeholder);
