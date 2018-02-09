@@ -14,8 +14,9 @@ const BaseStandardButton = styled.button.attrs({
   font-size: inherit;
   letter-spacing: 0.05em;
 
-  height: var(--grid-unit);
-  padding: 0 calc(var(--grid-unit) / 2);
+  min-width: calc(var(--grid-unit) * 4);
+  height: calc(var(--grid-unit) * 2);
+  padding: 0 calc(var(--grid-unit) / 4);
 
   &:active {
     transform: scale(0.8);
@@ -47,6 +48,15 @@ const BasePlainButton = BaseStandardButton.extend`
   padding: 0;
   text-transform: none;
 
+  min-width: 0;
+  height: var(--grid-unit);
+
+  &:hover,
+  &:focus {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
   &:active {
     transform: scale(0.99);
   }
@@ -55,10 +65,12 @@ const BasePlainButton = BaseStandardButton.extend`
 const DisabledPlainButton = BasePlainButton.extend.attrs({
   disabled: true,
 })`
-  background: none;
-  border-color: var(--color-secondary);
-  color: var(--color-secondary);
-  cursor: not-allowed;
+  &, &:hover, &:focus {
+    background: none;
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    cursor: not-allowed;
+  }
 `
 
 const Button = ({ children, disabled, primary, plain, ...props }) => {
