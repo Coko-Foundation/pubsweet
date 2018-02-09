@@ -7,7 +7,7 @@ import styled from 'styled-components'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  width: calc(var(--grid-unit) * 14);
+  max-width: calc(var(--grid-unit) * 14);
 `
 
 const Label = styled.label`

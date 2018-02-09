@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(var(--grid-unit) * 14);
+  max-width: calc(var(--grid-unit) * 14);
 `
 
 const Label = styled.label`
