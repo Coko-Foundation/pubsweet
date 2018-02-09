@@ -4,6 +4,7 @@ import styled from 'styled-components'
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
 // TODO: determine the correct color for non-selected options
+// FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
   width: calc(var(--grid-unit) * 14);
@@ -55,6 +56,7 @@ const ArrowContainer = styled.span`
   border-left: var(--border-width) var(--border-style) var(--color-furniture);
 
   width: calc(var(--grid-unit) * 2);
+  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
 
   display: flex;
   align-items: center;
