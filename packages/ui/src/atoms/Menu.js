@@ -3,52 +3,67 @@ import styled from 'styled-components'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
+// TODO: determine the correct color for non-selected options
 
-const Root = styled.div``
-
-const Label = styled.span`
-  display: block;
+const Root = styled.div`
+  width: calc(var(--grid-unit) * 14);
 `
 
-const OpenerContainer = styled.div``
+const Label = styled.label`
+  font-size: var(--font-size-base-small);
+`
 
 const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: none;
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
 
-  border-left: 2px solid
-    ${props => (props.open ? 'var(--color-primary)' : 'lightgrey')};
-  color: ${props => (props.open ? 'var(--color-primary)' : 'inherit')};
+  width: 100%;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
 
   &:hover {
-    border-left: 2px solid var(--color-primary);
+    border-color: var(--color-primary);
+  }
+`
+
+const Value = styled.span`
+  flex-grow: 1;
+
+  text-align: left;
+  padding-left: calc(var(--grid-unit) / 2);
+
+  &:hover {
     color: var(--color-primary);
   }
 `
 
-const Placeholder = styled.span`
-  font-family: var(--font-interface);
+const Placeholder = Value.extend`
+  color: var(--color-text-placeholder);
   font-style: italic;
-  font-weight: 400;
-  text-transform: normal;
-  color: #aaa;
+`
 
-  &:hover {
-    color: var(--color-primary);
-  }
+const ArrowContainer = styled.span`
+  border-left: var(--border-width) var(--border-style) var(--color-furniture);
+
+  width: calc(var(--grid-unit) * 2);
+  height: calc(var(--grid-unit) * 2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Arrow = styled.span`
-  display: inline-block;
   font-size: 50%;
-  margin-left: 10px;
   transition: transform 0.2s;
-  transform: scaleX(2.2) scaleY(${props => (props.open ? -1.2 : 1.2)});
+  transform: scaleX(2) scaleY(${props => (props.open ? -1.2 : 1.2)});
 `
 
 const Main = styled.div.attrs({
@@ -59,23 +74,20 @@ const Main = styled.div.attrs({
 
 const OptionsContainer = styled.div`
   position: absolute;
+  left: 0;
+  right: 0;
 `
 
 const Options = styled.div`
-  background-color: white;
-  border-bottom: 2px solid var(--color-primary);
-  border-left: 2px solid var(--color-primary);
-  left: 0;
-  padding-bottom: 0.5em;
-  padding-top: 0.5em;
   position: absolute;
   top: 0;
-  transition: opacity 2s;
-  width: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
 
-  min-width: ${props => (props.open ? '10em' : '0')};
-  opacity: ${props => (props.open ? '1' : '0')};
+  background-color: var(--color-background);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
 `
 
 const Option = styled.div.attrs({
@@ -83,43 +95,29 @@ const Option = styled.div.attrs({
   tabIndex: '0',
   'aria-selected': props => props.active,
 })`
-  color: ${props => (props.active ? 'black' : '#444')};
+  color: ${props => (props.active ? 'var(--text-color)' : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
   font-family: var(--font-author);
-  padding: 10px;
+  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2)
+    calc(var(--sub-grid-unit) * 2);
+  border: var(--border-width) var(--border-style) transparent;
+  border-width: var(--border-width) 0 var(--border-width) 0;
   white-space: nowrap;
 
   &:hover {
-    color: var(--color-primary);
+    background: var(--color-background-hue);
+    border-color: var(--color-border);
+  }
+
+  &:first-child:hover {
+    border-top-color: var(--color-background-hue);
+  }
+
+  &:last-child:hover {
+    border-bottom-color: var(--color-background-hue);
   }
 `
-
-/* Not used for now
-.inline {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-right: 0.5em;
-}
-
-.inline .label {
-  margin-right: 0.5em;
-}
-
-.inline .opener {
-  margin-bottom: -4px;
-}
-
-.root .inline {
-  flex-direction: columns;
-}
-
-.root.author {
-  font-family: var(--font-author);
-}
-*/
 
 class Menu extends React.Component {
   constructor(props) {
@@ -167,16 +165,16 @@ class Menu extends React.Component {
         {label && <Label>{label}</Label>}
 
         <Main>
-          <OpenerContainer>
-            <Opener onClick={this.toggleMenu} open={open}>
-              {selected ? (
-                <span>{this.optionLabel(selected)}</span>
-              ) : (
-                <Placeholder>{placeholder}</Placeholder>
-              )}
+          <Opener onClick={this.toggleMenu} open={open}>
+            {selected ? (
+              <Value>{this.optionLabel(selected)}</Value>
+            ) : (
+              <Placeholder>{placeholder}</Placeholder>
+            )}
+            <ArrowContainer>
               <Arrow open={open}>▼</Arrow>
-            </Opener>
-          </OpenerContainer>
+            </ArrowContainer>
+          </Opener>
 
           <OptionsContainer>
             {open && (
