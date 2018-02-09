@@ -22,7 +22,6 @@
     "lint-staged": "^6.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.5.8",
-    "pubsweet-component-login": "^1.0.1",
     "react": "^16.2.0",
     "react-css-themr": "^2.1.2",
     "react-redux": "^5.0.2",
