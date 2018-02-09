@@ -11,6 +11,7 @@ const Root = styled.div`
 
 const Label = styled.label`
   font-size: var(--font-size-base-small);
+  display: block;
 `
 
 const Opener = styled.button.attrs({
@@ -23,6 +24,7 @@ const Opener = styled.button.attrs({
   font-family: inherit;
 
   width: 100%;
+  height: calc(var(--grid-unit) * 2);
   padding: 0;
 
   display: flex;
@@ -53,7 +55,6 @@ const ArrowContainer = styled.span`
   border-left: var(--border-width) var(--border-style) var(--color-furniture);
 
   width: calc(var(--grid-unit) * 2);
-  height: calc(var(--grid-unit) * 2);
 
   display: flex;
   align-items: center;
