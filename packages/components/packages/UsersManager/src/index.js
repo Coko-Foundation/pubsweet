@@ -1,5 +1,6 @@
 module.exports = {
-  frontend: {
+  client: {
     components: [() => require('./UsersManagerContainer')],
   },
+  container: require('./UsersManagerContainer'),
 }
