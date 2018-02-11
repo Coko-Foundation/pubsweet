@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormControl, Button, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import { Button, TextField } from '@pubsweet/ui'
 
 export default class TeamCreator extends React.Component {
   constructor(props) {
@@ -72,7 +72,7 @@ export default class TeamCreator extends React.Component {
     return (
       <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
-        <FormControl
+        <TextField
           label="Name"
           name="teamName"
           onChange={this.onNameChange}
@@ -80,28 +80,22 @@ export default class TeamCreator extends React.Component {
           required
           type="text"
         />
-        <Row>
-          <Col md={3}>
-            <h4>Team type</h4>
-            <Select
-              name="teamType"
-              onChange={this.onTeamTypeSelect}
-              options={types}
-              required
-              value={this.state.teamTypeSelected}
-            />
-          </Col>
-          <Col md={9}>
-            <h4>Collection</h4>
-            <Select
-              name="collection"
-              onChange={this.onCollectionSelect}
-              options={collections}
-              required
-              value={this.state.collectionSelected}
-            />
-          </Col>
-        </Row>
+        <h4>Team type</h4>
+        <Select
+          name="teamType"
+          onChange={this.onTeamTypeSelect}
+          options={types}
+          required
+          value={this.state.teamTypeSelected}
+        />
+        <h4>Collection</h4>
+        <Select
+          name="collection"
+          onChange={this.onCollectionSelect}
+          options={collections}
+          required
+          value={this.state.collectionSelected}
+        />
         <br />
         <Button
           aria-label="Create"

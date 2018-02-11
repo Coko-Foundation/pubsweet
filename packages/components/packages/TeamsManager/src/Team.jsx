@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
-import { Button } from 'react-bootstrap'
 
 class Team extends React.Component {
   constructor(props) {
@@ -49,14 +48,9 @@ class Team extends React.Component {
           />
         </td>
         <td>
-          <Button
-            aria-label="Delete"
-            bsStyle="danger"
-            onClick={this.onDelete}
-            title="Delete"
-          >
+          <button aria-label="Delete" onClick={this.onDelete} title="Delete">
             <i className="fa fa-trash-o" />
-          </Button>
+          </button>
         </td>
       </tr>
     )
