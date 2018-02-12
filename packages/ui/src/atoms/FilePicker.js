@@ -44,7 +44,7 @@ class FilePicker extends Component {
           style={{ display: 'none' }}
           type="file"
         />
-        {React.cloneElement(children, {
+        {React.cloneElement(React.Children.only(children), {
           onClick: e => {
             e.preventDefault()
             !disabled && this.fileInput.click()
