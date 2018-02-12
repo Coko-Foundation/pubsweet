@@ -5,6 +5,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   max-width: calc(var(--grid-unit) * 14);
+  margin-bottom: var(--grid-unit);
 `
 
 const Label = styled.label`

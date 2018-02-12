@@ -8,6 +8,7 @@ import styled from 'styled-components'
 
 const Root = styled.div`
   max-width: calc(var(--grid-unit) * 14);
+  margin-bottom: var(--grid-unit);
 `
 
 const Label = styled.label`
