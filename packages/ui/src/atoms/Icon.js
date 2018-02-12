@@ -6,16 +6,25 @@ import styled from 'styled-components'
 const Container = styled.span`
   display: inline-flex;
   padding: calc(var(--sub-grid-unit) / 2);
+  svg {
+    stroke: ${props => props.color};
+    width: calc(${props => props.size} * var(--sub-grid-unit));
+    height: calc(${props => props.size} * var(--sub-grid-unit));
+  }
 `
 
-const Icon = ({ children, color = 'var(--color-text)', size = 24 }) => {
+const Icon = ({ children, color = 'var(--color-text)', size = 3 }) => {
   // convert `arrow_left` to `ArrowLeft`
   const name = pascalize(children)
 
   // select the icon
   const icon = icons[name]
 
-  return <Container>{icon({ color, size })}</Container>
+  return (
+    <Container color={color} size={size}>
+      {icon({})}
+    </Container>
+  )
 }
 
 export default Icon

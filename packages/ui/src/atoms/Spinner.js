@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import { Icon } from '@pubsweet/ui'
 import styled, { keyframes } from 'styled-components'
 
-const Spinner = ({ icon = 'loader', size = 16, color = '#444' }) => (
+const Spinner = ({ icon = 'loader', size = 2, color = '#444' }) => (
   <Root>
     <Icon color={color} size={size}>
       {icon}

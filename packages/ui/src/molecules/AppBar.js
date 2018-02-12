@@ -81,7 +81,7 @@ const AppBar = ({
     <Section>
       {user && (
         <Item>
-          <Icon size={16}>user</Icon>
+          <Icon size={2}>user</Icon>
           {user.username}
           {user.admin ? ' (admin)' : ''}
         </Item>
@@ -89,7 +89,7 @@ const AppBar = ({
 
       {user && (
         <ActionItem href="#" onClick={onLogoutClick}>
-          <Icon size={16}>power</Icon>
+          <Icon size={2}>power</Icon>
           Logout
         </ActionItem>
       )}
