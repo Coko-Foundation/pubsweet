@@ -27,7 +27,7 @@ function makeApp(response) {
   )
   app.locals.passport = passport
   // register component
-  component.backend()(app)
+  component.server()(app)
   // create test wrapper
   return supertest(app)
 }
