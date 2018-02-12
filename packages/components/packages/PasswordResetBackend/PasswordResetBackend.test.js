@@ -2,10 +2,8 @@ process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const express = require('express')
 const supertest = require('supertest')
-const config = require('config')
 
 // mocks
-config['password-reset'] = { url: '/', sender: 'me' }
 jest.mock('./transport', () => ({ sendMail: jest.fn() }))
 
 const transport = require('./transport')
@@ -68,7 +66,7 @@ describe('/api/password-reset route', () => {
           expect(user.save).toHaveBeenCalled()
           expect(transport.sendMail).toHaveBeenCalledWith(
             expect.objectContaining({
-              from: 'me',
+              from: 'nobody@example.com',
               to: user.email,
               subject: 'Password reset',
             }),

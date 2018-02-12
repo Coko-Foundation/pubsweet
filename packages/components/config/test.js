@@ -14,4 +14,10 @@ module.exports = {
   'pubsweet-component-aws-s3': {
     validations: path.join(__dirname, 'upload-validations'),
   },
+  'pubsweet-server': {
+    baseUrl: 'http://example.com',
+  },
+  mailer: {
+    from: 'nobody@example.com',
+  },
 }
