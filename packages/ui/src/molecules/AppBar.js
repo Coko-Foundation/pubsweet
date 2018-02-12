@@ -39,8 +39,8 @@ const Logo = styled(Link)`
   font-weight: bold;
   text-decoration: none;
 
-  svg {
-    height: calc(var(--grid-unit) * 2);
+  & > * {
+    max-height: calc(var(--grid-unit) * 2);
   }
 `
 
