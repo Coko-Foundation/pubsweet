@@ -76,7 +76,7 @@ const Item = ({
         ),
       )
 
-const DecoratedItem = compose(
+export const DecoratedItem = compose(
   DropTarget('item', itemTarget, (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),

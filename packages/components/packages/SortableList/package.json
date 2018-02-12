@@ -8,5 +8,8 @@
     "react-dnd": "^2.5.4",
     "react-dom": "^15.6.1",
     "recompose": "^0.26.0"
+  },
+  "devDependencies": {
+    "react-dnd-test-backend": "^2.5.4"
   }
 }
