@@ -1,5 +1,5 @@
 {
-  "name": "@pubsweet/components-aws-ses",
+  "name": "@pubsweet/component-aws-ses",
   "version": "0.0.1",
   "description": "aws ses configured for pubsweet",
   "license": "MIT",
