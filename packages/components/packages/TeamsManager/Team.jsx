@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
+import { Menu } from '@pubsweet/ui'
 import 'react-select/dist/react-select.css'
 import { Button } from 'react-bootstrap'
 
@@ -40,7 +40,7 @@ class Team extends React.Component {
           {team.object.type} {team.object.id}
         </td>
         <td>
-          <Select
+          <Menu
             multi
             name="members"
             onChange={this.updateMembers}

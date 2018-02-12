@@ -1,16 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
-import FormGroup from 'pubsweet-component-form-group/FormGroup'
+import { Button, TextField } from '@pubsweet/ui'
 
 export default class PostCreator extends React.Component {
   constructor(props) {
     super(props)
     this.onSave = this.onSave.bind(this)
+    this.onTitleChange = this.onTitleChange.bind(this)
+    this.state = { title: '' }
   }
 
-  onSave(text) {
-    const title = this.titleInputNode.value
+  onTitleChange(event) {
+    this.setState({ title: event ? event.target.value : '' })
+  }
+
+  onSave(event) {
+    event.preventDefault()
+
+    const { title } = this.state
 
     if (title !== '') {
       this.props.create({
@@ -18,32 +25,24 @@ export default class PostCreator extends React.Component {
         title,
         published: false,
       })
+      this.setState({ title: '' })
     }
-
-    this.titleInputNode.blur()
   }
+
   render() {
     return (
-      <div>
+      <form onSubmit={this.onSave}>
         <h3>Create a new blog post</h3>
-        <FormGroup
-          controlId="fragment.title"
-          inputRef={input => {
-            this.titleInputNode = input
-          }}
+        <TextField
           label="Title"
-          modelProperty="fragment.title"
+          name="title"
+          onChange={this.onTitleChange}
           placeholder="One fine day..."
+          required
+          value={this.state.title}
         />
-        <Button
-          aria-label="Create"
-          bsStyle="primary"
-          onClick={this.onSave}
-          title="Create"
-        >
-          <i className="fa fa-plus" /> Create
-        </Button>
-      </div>
+        <Button type="submit">Create</Button>
+      </form>
     )
   }
 }
