@@ -8,10 +8,10 @@ The color can be changed.
 
 ```js
 <Icon color="red">arrow_right</Icon>
-``` 
+```
 
 The size can be changed.
 
 ```js
-<Icon size={48}>arrow_right</Icon>
-``` 
+<Icon size={6}>arrow_right</Icon>
+```
