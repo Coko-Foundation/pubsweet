@@ -7,7 +7,6 @@ In order to use this component, the following configuration needs to be added to
 * `region`: the `AWS_S3_REGION` value from the app's `.env` file
 * `bucket`: the `AWS_S3_BUCKET` value from the app's `.env` file
 
-
 For example:
 
 ```json

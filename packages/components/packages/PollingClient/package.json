@@ -17,7 +17,7 @@
   },
   "peerDependencies": {
     "pubsweet-client": ">=1.0.0",
-    "react": ">=15"
+    "react": ">=16"
   },
   "publishConfig": {
     "access": "public"
