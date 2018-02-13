@@ -65,15 +65,15 @@ describe('GraphQL endpoint', () => {
   describe('mutations', () => {
     it('can create a user', async () => {
       const { body } = await api.graphql.query(
-        `mutation($input: UserInput) { 
+        `mutation($input: String) { 
           createUser(input: $input) { username } 
         }`,
         {
-          input: {
+          input: JSON.stringify({
             username: 'floobs',
             email: 'nobody@example.com',
             password: 'password',
-          },
+          }),
         },
         token,
       )
@@ -87,16 +87,16 @@ describe('GraphQL endpoint', () => {
 
     it('can update a user', async () => {
       const { body } = await api.graphql.query(
-        `mutation($id: ID, $input: UserInput) { 
+        `mutation($id: ID, $input: String) { 
           updateUser(id: $id, input: $input) { username, email } 
         }`,
         {
           id: user.id,
-          input: {
+          input: JSON.stringify({
             username: 'floobs',
             email: 'nobody@example.com',
             rev: user.rev,
-          },
+          }),
         },
         token,
       )
