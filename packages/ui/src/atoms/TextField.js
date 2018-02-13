@@ -5,7 +5,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: var(--grid-unit);
+  margin-bottom: ${props => (props.inline ? '0' : 'var(--grid-unit)')};
 `
 
 const Label = styled.label`
@@ -49,8 +49,9 @@ const TextField = ({
   onChange,
   readonly,
   validationStatus,
+  inline,
 }) => (
-  <Root>
+  <Root inline={inline}>
     {label && <Label>{label}</Label>}
     <Input
       name={name}
