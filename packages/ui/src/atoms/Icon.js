@@ -20,9 +20,13 @@ const Icon = ({ children, color = 'var(--color-text)', size = 3 }) => {
   // select the icon
   const icon = icons[name]
 
+  if (!icon) {
+    console.warn("Icon '%s' not found", name)
+  }
+
   return (
     <Container color={color} size={size}>
-      {icon({})}
+      {icon ? icon({}) : ''}
     </Container>
   )
 }
