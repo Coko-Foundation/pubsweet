@@ -17,6 +17,7 @@ const BaseStandardButton = styled.button.attrs({
   min-width: calc(var(--grid-unit) * 4);
   height: calc(var(--grid-unit) * 2);
   padding: 0 calc(var(--grid-unit) / 4);
+  margin-right: var(--sub-grid-unit);
 
   &:active {
     transform: scale(0.8);
@@ -50,6 +51,7 @@ const BasePlainButton = BaseStandardButton.extend`
 
   min-width: 0;
   height: var(--grid-unit);
+  margin-right: var(--sub-grid-unit);
 
   &:hover,
   &:focus {
