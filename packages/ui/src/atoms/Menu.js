@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const Root = styled.div`
   max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: var(--grid-unit);
+  margin-bottom: ${props => (props.inline ? '0' : 'var(--grid-unit)')};
 `
 
 const Label = styled.label`
@@ -41,7 +41,7 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding-left: calc(var(--grid-unit) / 2);
+  padding: 0 calc(var(--grid-unit) / 2);
 
   &:hover {
     color: var(--color-primary);
@@ -161,11 +161,16 @@ class Menu extends React.Component {
   }
 
   render() {
-    const { label, options, placeholder = 'Choose in the list' } = this.props
+    const {
+      label,
+      options,
+      inline,
+      placeholder = 'Choose in the list',
+    } = this.props
     const { open, selected } = this.state
 
     return (
-      <Root open={open}>
+      <Root inline={inline} open={open}>
         {label && <Label>{label}</Label>}
 
         <Main>
