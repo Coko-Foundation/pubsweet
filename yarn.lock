@@ -10264,9 +10264,9 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-feather@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.0.7.tgz#f2118f1d2402b0c1e6f23c732f9e7f9fd4ca61e2"
+react-feather@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.0.8.tgz#69b13d5c729949f194d33201dee91bab67fa31a2"
 
 react-group@^1.0.5:
   version "1.0.5"
