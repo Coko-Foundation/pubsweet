@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Button, EditableValue } from '@pubsweet/ui'
 
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
-import TextInput from './TextInput'
-import styles from './Post.local.scss'
 
 export default class Post extends React.Component {
   constructor(props) {
     super(props)
-    this.onSave = this.onSave.bind(this)
+    this.onUpdateTitle = this.onUpdateTitle.bind(this)
     this.onPublish = this.onPublish.bind(this)
     this.onUnpublish = this.onUnpublish.bind(this)
     this.onDestroyClick = this.onDestroyClick.bind(this)
@@ -21,7 +18,7 @@ export default class Post extends React.Component {
     }
   }
 
-  onSave(title) {
+  onUpdateTitle(title) {
     this.props.update(
       this.props.blog,
       Object.assign(this.props.blogpost, {
@@ -59,40 +56,18 @@ export default class Post extends React.Component {
 
   render() {
     const { blogpost, number } = this.props
-    let input
-    if (this.state.isEditing) {
-      input = (
-        <TextInput
-          className="edit"
-          onSave={this.onSave}
-          value={blogpost.title}
-        />
-      )
-    }
 
     let changePublished
     if (!blogpost.published) {
       changePublished = (
-        <Button
-          aria-label="Publish"
-          bsStyle="success"
-          className={styles.button}
-          onClick={this.onPublish}
-          title="Publish"
-        >
-          <i className="fa fa-paper-plane-o" />
+        <Button onClick={this.onPublish} plain>
+          Publish
         </Button>
       )
     } else {
       changePublished = (
-        <Button
-          aria-label="Unpublish"
-          bsStyle="warning"
-          className={styles.button}
-          onClick={this.onUnpublish}
-          title="Unpublish"
-        >
-          <i className="fa fa-chain-broken" />
+        <Button onClick={this.onUnpublish} plain>
+          Unpublish
         </Button>
       )
     }
@@ -103,30 +78,29 @@ export default class Post extends React.Component {
 
     return (
       <tr key={blogpost.key}>
-        <td className="index">{number}</td>
-        <td className="main">
-          <label onDoubleClick={this.onDoubleClick}>{blogpost.title}</label>
-          {input}
+        <td>{number}</td>
+        <td>
+          <EditableValue
+            onSave={this.onUpdateTitle}
+            required
+            value={this.props.blogpost.title}
+          />
         </td>
         <td>{blogpost.owners.map(owner => owner.username).join(', ')}</td>
-        <td className={blogpost.published ? 'published' : 'unpublished'}>
-          <i className="fa fa-circle" /> ({blogpost.published
-            ? 'Published'
-            : 'Unpublished'}) <br />
+        <td>
+          {blogpost.published ? 'Published' : 'Unpublished'} <br />
           {blogpost.published_at}
         </td>
         <td>
           <Authorize object={blogpost} operation="PATCH">
-            <LinkContainer to={`/manage/sciencewriter/${blogpost.id}`}>
-              <Button
-                aria-label="Edit"
-                bsStyle="primary"
-                className={styles.button}
-                title="Edit"
-              >
-                <i className="fa fa-pencil" />
-              </Button>
-            </LinkContainer>
+            <Button
+              onClick={() =>
+                (window.location = `/manage/sciencewriter/${blogpost.id}`)
+              }
+              plain
+            >
+              Edit
+            </Button>
           </Authorize>
 
           <Authorize object={blogpost} operation="PATCH">
@@ -134,14 +108,8 @@ export default class Post extends React.Component {
           </Authorize>
 
           <Authorize object={blogpost} operation="DELETE">
-            <Button
-              aria-label="Delete"
-              bsStyle="danger"
-              className={styles.button}
-              onClick={this.onDestroyClick}
-              title="Delete"
-            >
-              <i className="fa fa-trash-o" />
+            <Button onClick={this.onDestroyClick} plain>
+              Delete
             </Button>
           </Authorize>
         </td>
