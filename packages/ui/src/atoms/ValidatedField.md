@@ -1,33 +1,49 @@
 A form field that displays the results of validation.
 
+With an error:
+
 ```js
-const { reduxForm } = require('redux-form');
+const { reduxForm } = require('redux-form')
 
-const ValidatedFieldForm = reduxForm({ 
+const ValidatedFieldForm = reduxForm({
   form: 'validated-field-error',
-  onChange: values => console.log(values)
-})(ValidatedField);
-
-const TextInput = input => <TextField {...input}/>;
-
-<ValidatedFieldForm 
-    name="error" 
-    validate={() => 'Required'}
-    component={TextInput}/>
+  onChange: values => console.log(values),
+})(ValidatedField)
+;<ValidatedFieldForm
+  name="error"
+  validate={() => 'Required'}
+  component={TextField}
+/>
 ```
 
+With a warning:
+
 ```js
-const { reduxForm } = require('redux-form');
+const { reduxForm } = require('redux-form')
 
-const ValidatedFieldForm = reduxForm({ 
+const ValidatedFieldForm = reduxForm({
   form: 'validated-field-warning',
-  onChange: values => console.log(values)
-})(ValidatedField);
+  onChange: values => console.log(values),
+})(ValidatedField)
+;<ValidatedFieldForm
+  name="warning"
+  warn={() => 'Expected'}
+  component={TextField}
+/>
+```
 
-const TextInput = input => <TextField {...input}/>;
+Or with success color only:
 
-<ValidatedFieldForm 
-    name="warning" 
-    warn={() => 'Expected'}
-    component={TextInput}/>
+```js
+const { reduxForm } = require('redux-form')
+
+const ValidatedFieldForm = reduxForm({
+  form: 'validated-field-success',
+  onChange: values => console.log(values),
+})(ValidatedField)
+;<ValidatedFieldForm
+  name="success"
+  validate={() => undefined}
+  component={TextField}
+/>
 ```
