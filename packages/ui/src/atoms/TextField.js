@@ -14,7 +14,17 @@ const Label = styled.label`
 `
 
 const Input = styled.input`
-  border: var(--border-width) var(--border-style) var(--color-border);
+  border: var(--border-width) var(--border-style)
+    ${({ validationStatus = 'default' }) => {
+      const colorMap = {
+        error: 'var(--color-error)',
+        success: 'var(--color-success)',
+        warning: 'var(--color-warning)',
+        default: 'var(--color-border)',
+      }
+      return colorMap[validationStatus]
+    }};
+
   border-radius: var(--border-radius);
 
   font-family: inherit;
@@ -38,6 +48,7 @@ const TextField = ({
   onBlur,
   onChange,
   readonly,
+  validationStatus,
 }) => (
   <Root>
     {label && <Label>{label}</Label>}
@@ -49,6 +60,7 @@ const TextField = ({
       readOnly={readonly}
       required={required}
       type={type}
+      validationStatus={validationStatus}
       value={value}
     />
   </Root>

@@ -6,11 +6,9 @@ import styled from 'styled-components'
 // TODO: pass ...props.input to children automatically?
 
 const MessageWrapper = styled.div`
-  font-family: var(--font-writing);
-  display: inline-block;
-  font-style: italic;
-  margin-left: calc(var(--sub-grid-unit) * 4);
-  margin-top: var(--sub-grid-unit);
+  font-family: var(--font-interface);
+  display: block;
+  margin-top: calc(var(--grid-unit) * -1);
 `
 
 const Message = styled.div`
@@ -28,19 +26,26 @@ const WarningMessage = Message.extend`
   color: var(--color-warning);
 `
 
-const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => (
-  <div>
-    {component(input)}
+const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {
+  let validationStatus
+  if (meta.touched) validationStatus = 'success'
+  if (meta.touched && meta.error) validationStatus = 'error'
+  if (meta.touched && meta.warning) validationStatus = 'warning'
 
-    {meta.touched &&
-      (meta.error || meta.warning) && (
-        <MessageWrapper>
-          {meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
-          {meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
-        </MessageWrapper>
-      )}
-  </div>
-)
+  return (
+    <div>
+      {component({ ...input, validationStatus })}
+
+      {meta.touched &&
+        (meta.error || meta.warning) && (
+          <MessageWrapper>
+            {meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
+            {meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
+          </MessageWrapper>
+        )}
+    </div>
+  )
+}
 
 const ValidatedField = ({ fieldComponent, ...rest }) => (
   <Field {...rest} component={fieldComponent} />
