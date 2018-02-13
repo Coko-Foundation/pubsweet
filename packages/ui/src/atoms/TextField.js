@@ -47,6 +47,7 @@ const TextField = ({
   value = '',
   onBlur,
   onChange,
+  onKeyDown,
   readonly,
   validationStatus,
   inline,
@@ -57,6 +58,7 @@ const TextField = ({
       name={name}
       onBlur={onBlur}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       placeholder={placeholder}
       readOnly={readonly}
       required={required}
