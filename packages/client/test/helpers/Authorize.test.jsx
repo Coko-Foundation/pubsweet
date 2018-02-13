@@ -8,7 +8,7 @@ global.PUBSWEET_COMPONENTS = []
 
 function makeWrapper(props = {}) {
   return shallow(
-    <Authorize currentUser={{ id: 'user1' }} {...props}>
+    <Authorize data={{ currentUser: { id: 'user1' } }} {...props}>
       <div />
     </Authorize>,
   )
@@ -85,7 +85,7 @@ describe('<Authorize/>', () => {
     expect(mode).toHaveBeenCalled()
     mode.mockClear()
 
-    wrapper.setProps({ authsome, currentUser: { id: 'user2' } })
+    wrapper.setProps({ authsome, data: { currentUser: { id: 'user2' } } })
     wrapper.update()
     expect(mode).toHaveBeenCalled()
   })

@@ -11,9 +11,9 @@ const {
 function makeWrapper(props = {}) {
   return shallow(
     <AuthenticatedComponent
-      ensureCurrentUser={() => Promise.resolve()}
+      data={{}}
+      history={{ push: jest.fn() }}
       location={{}}
-      pushState={jest.fn()}
       {...props}
     >
       <button />
@@ -23,39 +23,39 @@ function makeWrapper(props = {}) {
 
 describe('<AuthenticatedComponent/>', () => {
   it('does nothing when fetching', async () => {
-    const pushState = jest.fn()
-    const wrapper = makeWrapper({ pushState })
-    wrapper.instance().checkAuth({ isFetching: true })
+    const wrapper = makeWrapper()
+    wrapper.instance().checkAuth({ data: { loading: true } })
 
     expect(wrapper.find('button')).toHaveLength(0)
-    expect(pushState).not.toHaveBeenCalled()
+    const pushMock = wrapper.instance().props.history.push
+    expect(pushMock).not.toHaveBeenCalled()
   })
 
   it('redirects to login if not authenticated', async () => {
-    const pushState = jest.fn()
-    const wrapper = makeWrapper({ pushState, location: { pathname: 'blah' } })
-    wrapper.instance().checkAuth({ isAuthenticated: false })
+    const wrapper = makeWrapper({ location: { pathname: 'blah' } })
+    wrapper.instance().checkAuth({ data: {} })
 
-    expect(pushState).toHaveBeenCalledWith('/login?next=blah')
+    const pushMock = wrapper.instance().props.history.push
+    expect(pushMock).toHaveBeenCalledWith('/login?next=blah')
   })
 
   it('calls checkAuth() when props change', () => {
-    const pushState = jest.fn()
-    const wrapper = makeWrapper({ pushState, location: { pathname: 'blah' } })
+    const wrapper = makeWrapper({ location: { pathname: 'blah' } })
 
-    expect(pushState).not.toHaveBeenCalled()
+    const pushMock = wrapper.instance().props.history.push
+    expect(pushMock).not.toHaveBeenCalled()
 
-    wrapper.setProps({ isAuthenticated: false })
-    expect(pushState).toHaveBeenCalledWith('/login?next=blah')
+    wrapper.setProps({ data: {} })
+    expect(pushMock).toHaveBeenCalledWith('/login?next=blah')
   })
 
   it('renders children components when authenticated', async () => {
-    const pushState = jest.fn()
     const wrapper = makeWrapper({
-      pushState,
       location: { pathname: 'blah' },
-      isFetching: false,
-      isAuthenticated: true,
+      data: {
+        loading: false,
+        currentUser: { user: {} },
+      },
     })
 
     expect(wrapper.find('button')).toHaveLength(1)

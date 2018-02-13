@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-
+import { graphql, compose } from 'react-apollo'
+import gql from 'graphql-tag'
 import withAuthsome from './withAuthsome'
-import { selectCurrentUser } from '../selectors'
 
 export class Authorize extends React.Component {
   constructor(props) {
@@ -23,10 +21,10 @@ export class Authorize extends React.Component {
     this.checkAuth(nextProps)
   }
 
-  async checkAuth({ authsome, currentUser, operation, object }) {
+  async checkAuth({ authsome, data: { currentUser }, operation, object }) {
     try {
       const authorized = await authsome.can(
-        currentUser && currentUser.id,
+        currentUser && currentUser.user && currentUser.user.id,
         operation,
         object,
       )
@@ -46,7 +44,7 @@ export class Authorize extends React.Component {
 }
 
 Authorize.propTypes = {
-  currentUser: PropTypes.object,
+  data: PropTypes.shape({ currentUser: PropTypes.object }),
   operation: PropTypes.string,
   object: PropTypes.object,
   children: PropTypes.element,
@@ -54,10 +52,17 @@ Authorize.propTypes = {
   authsome: PropTypes.object.isRequired,
 }
 
-function mapState(state) {
-  return {
-    currentUser: selectCurrentUser(state),
+const query = gql`
+  query CurrentUser {
+    currentUser {
+      user {
+        id
+        username
+        email
+        admin
+      }
+    }
   }
-}
+`
 
-export default compose(withAuthsome(), connect(mapState))(Authorize)
+export default compose(withAuthsome(), graphql(query))(Authorize)
