@@ -1,26 +1,24 @@
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import Actions from 'pubsweet-client/src/actions'
+import { compose, graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import withLoader from 'pubsweet-client/src/helpers/withLoader'
 
 import Blog from './Blog'
 
-function mapStateToProps(state) {
-  const blog = state && state.collections[0]
-  const posts = blog
-    ? blog.fragments.map(f => state.fragments[f]).filter(f => f)
-    : []
-
-  return {
-    blog: state && state.collections[0],
-    posts,
-    // errorMessage: state.errorMessage
+const query = gql`
+  query {
+    blogs: collections {
+      title
+    }
+    posts: fragments {
+      id
+      title
+      published_at
+      published
+      owners {
+        username
+      }
+    }
   }
-}
+`
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Blog)
+export default compose(graphql(query), withLoader())(Blog)

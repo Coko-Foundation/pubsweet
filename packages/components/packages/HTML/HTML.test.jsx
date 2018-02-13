@@ -4,17 +4,7 @@ import React from 'react'
 import HTML from './HTML'
 
 describe('<HTML/>', () => {
-  const makeWrapper = (props = {}) =>
-    shallow(
-      <HTML
-        actions={{
-          getCollections: jest.fn(() => Promise.resolve({ collections: [] })),
-          getFragment: jest.fn(),
-        }}
-        id="123"
-        {...props}
-      />,
-    )
+  const makeWrapper = (props = {}) => shallow(<HTML id="123" {...props} />)
 
   it('shows message if no fragment', () => {
     const wrapper = makeWrapper()

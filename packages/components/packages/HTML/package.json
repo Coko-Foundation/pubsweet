@@ -6,12 +6,14 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "graphql-tag": "^2.7.3",
     "prop-types": "^15.5.10",
+    "react-apollo": "^2.0.4",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0",
+    "pubsweet-client": ">=2.0",
     "react": ">=15"
   },
   "repository": {

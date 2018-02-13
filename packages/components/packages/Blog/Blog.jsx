@@ -7,65 +7,51 @@ import styles from './Blog.local.scss'
 
 import Summary from './Summary'
 
-export default class Blog extends React.Component {
-  constructor(props) {
-    super(props)
-    this.props.actions
-      .getCollections()
-      .then(result => this.props.actions.getFragments(result.collections[0]))
+const Blog = ({ blogs: [blog], posts }) => {
+  let displayPosts = posts
+    .filter(fragment => fragment.published)
+    .map(fragment => <Summary fragment={fragment} key={fragment.id} />)
+
+  if (displayPosts.length === 0 && blog) {
+    displayPosts = (
+      <Row>
+        <Col md={8} mdOffset={2}>
+          <p>No blogpost has been published on {blog.title} yet.</p>
+        </Col>
+      </Row>
+    )
   }
 
-  render() {
-    let posts = this.props.posts
-      .filter(post => post.published)
-      .map(post => <Summary fragment={post} key={post.id} />)
-
-    if (posts.length === 0 && this.props.blog) {
-      posts = (
-        <Row>
-          <Col md={8} mdOffset={2}>
-            <p>
-              No blogpost has been published on {this.props.blog.title} yet.
-            </p>
-          </Col>
-        </Row>
-      )
-    }
-
-    return (
-      <div className="bootstrap">
-        <div className={styles.heroBackground}>
-          <Grid>
-            <Row className={styles.hero}>
-              <Col md={8} mdOffset={2}>
-                <h1>Welcome to {this.props.blog && this.props.blog.title}</h1>
-                <label>Science for the Web</label>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+  return (
+    <div className="bootstrap">
+      <div className={styles.heroBackground}>
         <Grid>
-          <div className={styles.blogContainer}>{posts}</div>
-          <Row className={styles.blogFooter}>
+          <Row className={styles.hero}>
             <Col md={8} mdOffset={2}>
-              <p>
-                Powered by{' '}
-                <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
-              </p>
+              <h1>Welcome to {blog && blog.title}</h1>
+              <label>Science for the Web</label>
             </Col>
           </Row>
         </Grid>
       </div>
-    )
-  }
+      <Grid>
+        <div className={styles.blogContainer}>{displayPosts}</div>
+        <Row className={styles.blogFooter}>
+          <Col md={8} mdOffset={2}>
+            <p>
+              Powered by{' '}
+              <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
+            </p>
+          </Col>
+        </Row>
+      </Grid>
+    </div>
+  )
 }
 
 Blog.propTypes = {
-  // Data
-  blog: PropTypes.object,
+  blogs: PropTypes.array,
   posts: PropTypes.array,
-  // Injected by React Redux
-  // errorMessage: PropTypes.string,
-  // Injected by React Router
-  actions: PropTypes.object.isRequired,
 }
+
+export default Blog

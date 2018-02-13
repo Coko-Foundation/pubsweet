@@ -3,16 +3,12 @@ The main component of a blog or news page.
 Basic display:
 
 ```js
-const getCollections = () => new Promise(() => null)
-
-;<Blog blog={{ title: 'Some Blog' }} posts={[]} actions={{ getCollections }} />
+;<Blog blog={{ title: 'Some Blog' }} posts={[]} />
 ```
 
 With a post:
 
 ```js
-const getCollections = () => new Promise(() => null)
-
 ;<Blog
   blog={{ title: 'Some Blog' }}
   posts={[
@@ -25,6 +21,5 @@ const getCollections = () => new Promise(() => null)
       published: true,
     },
   ]}
-  actions={{ getCollections }}
 />
 ```

@@ -5,20 +5,10 @@ import Blog from './Blog'
 
 describe('<Blog/>', () => {
   const makeWrapper = (props = {}) =>
-    shallow(
-      <Blog
-        actions={{
-          getCollections: jest.fn(() => Promise.resolve({ collections: [] })),
-          getFragments: jest.fn(),
-        }}
-        blog={{}}
-        posts={[]}
-        {...props}
-      />,
-    )
+    shallow(<Blog blogs={[{}]} posts={[]} {...props} />)
 
   it('shows blog title', () => {
-    const wrapper = makeWrapper({ blog: { title: 'Foo bar weekly' } })
+    const wrapper = makeWrapper({ blogs: [{ title: 'Foo bar weekly' }] })
     expect(wrapper.html()).toContain('Foo bar weekly')
   })
 

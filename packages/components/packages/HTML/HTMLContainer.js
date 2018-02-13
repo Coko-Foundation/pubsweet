@@ -1,20 +1,20 @@
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Actions from 'pubsweet-client/src/actions'
+import { compose, graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import withLoader from 'pubsweet-client/src/helpers/withLoader'
 
 import HTML from './HTML'
 
-function mapStateToProps(state, props) {
-  return {
-    id: props.match.params.id,
-    fragment: state.fragments[props.match.params.id],
+const query = gql`
+  query($id: ID!) {
+    fragment(id: $id) {
+      id
+      presentation
+    }
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HTML)
+`
+export default compose(
+  graphql(query, {
+    options: ({ match }) => ({ variables: { id: match.params.id } }),
+  }),
+  withLoader(),
+)(HTML)

@@ -7,27 +7,13 @@ const Root = styled.div`
   margin-right: auto;
 `
 
-export default class HTML extends React.Component {
-  constructor(props) {
-    super(props)
-    this.props.actions.getCollections().then(result =>
-      this.props.actions.getFragment(result.collections[0], {
-        id: this.props.id,
-      }),
-    )
-  }
-
-  render() {
-    const { fragment } = this.props
-
-    if (fragment) {
-      return (
-        <Root dangerouslySetInnerHTML={{ __html: fragment.presentation }} />
-      )
-    }
-    return <div>No fragment found</div>
-  }
-}
+const HTML = ({ fragment }) =>
+  fragment ? (
+    <Root dangerouslySetInnerHTML={{ __html: fragment.presentation }}
+    />
+  ) : (
+    <div>No fragment found</div>
+  )
 
 HTML.propTypes = {
   // Data
@@ -35,3 +21,5 @@ HTML.propTypes = {
   id: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired,
 }
+
+export default HTML
