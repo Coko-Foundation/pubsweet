@@ -9,8 +9,6 @@ exports[`Files renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: var(--font-size-small);
-  font-style: italic;
 }
 
 .c0 {
@@ -25,9 +23,7 @@ exports[`Files renders correctly 1`] = `
 <div
   className=""
 >
-  <div
-    className=""
-  >
+  <div>
     <button
       className="c0"
       onClick={[Function]}
@@ -49,10 +45,6 @@ exports[`Files renders correctly 1`] = `
   </div>
   <div
     className="c1"
-  >
-    <div>
-      IMG_4346.JPG
-    </div>
-  </div>
+  />
 </div>
 `;

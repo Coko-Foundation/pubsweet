@@ -38,8 +38,8 @@ exports[`AppBar Basic display 1`] = `
   text-decoration: none;
 }
 
-.c2 svg {
-  height: calc(var(--grid-unit) * 2);
+.c2 > * {
+  max-height: calc(var(--grid-unit) * 2);
 }
 
 .c3 {
@@ -95,6 +95,12 @@ exports[`AppBar With admin user 1`] = `
   padding: calc(var(--sub-grid-unit) / 2);
 }
 
+.c4 svg {
+  stroke: var(--color-text);
+  width: calc(2 * var(--sub-grid-unit));
+  height: calc(2 * var(--sub-grid-unit));
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -132,8 +138,8 @@ exports[`AppBar With admin user 1`] = `
   text-decoration: none;
 }
 
-.c2 svg {
-  height: calc(var(--grid-unit) * 2);
+.c2 > * {
+  max-height: calc(var(--grid-unit) * 2);
 }
 
 .c3 {
@@ -190,17 +196,19 @@ exports[`AppBar With admin user 1`] = `
     >
       <span
         className="c4"
+        color="var(--color-text)"
+        size={2}
       >
         <svg
-          height={16}
+          height={undefined}
           viewBox="0 0 24 24"
-          width={16}
+          width={undefined}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
             fill="none"
-            stroke="var(--color-text)"
+            stroke={undefined}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -210,7 +218,7 @@ exports[`AppBar With admin user 1`] = `
             cy="7"
             fill="none"
             r="4"
-            stroke="var(--color-text)"
+            stroke={undefined}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -227,16 +235,18 @@ exports[`AppBar With admin user 1`] = `
     >
       <span
         className="c4"
+        color="var(--color-text)"
+        size={2}
       >
         <svg
           fill="none"
-          height={16}
-          stroke="var(--color-text)"
+          height={undefined}
+          stroke={undefined}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="2"
           viewBox="0 0 24 24"
-          width={16}
+          width={undefined}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -294,8 +304,8 @@ exports[`AppBar With custom brand and login links 1`] = `
   text-decoration: none;
 }
 
-.c2 svg {
-  height: calc(var(--grid-unit) * 2);
+.c2 > * {
+  max-height: calc(var(--grid-unit) * 2);
 }
 
 .c3 {
@@ -400,8 +410,8 @@ exports[`AppBar With nav links 1`] = `
   text-decoration: none;
 }
 
-.c2 svg {
-  height: calc(var(--grid-unit) * 2);
+.c2 > * {
+  max-height: calc(var(--grid-unit) * 2);
 }
 
 .c4 {

@@ -2,7 +2,8 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  width: calc(var(--grid-unit) * 14);
+  max-width: calc(var(--grid-unit) * 14);
+  margin-bottom: var(--grid-unit);
 }
 
 .c2 {
@@ -34,7 +35,7 @@ exports[`Menu is rendered correctly 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding-left: calc(var(--grid-unit) / 2);
+  padding: 0 calc(var(--grid-unit) / 2);
 }
 
 .c3:hover {
@@ -118,7 +119,8 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  width: calc(var(--grid-unit) * 14);
+  max-width: calc(var(--grid-unit) * 14);
+  margin-bottom: var(--grid-unit);
 }
 
 .c2 {
@@ -150,7 +152,7 @@ exports[`Menu is rendered correctly when open 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding-left: calc(var(--grid-unit) / 2);
+  padding: 0 calc(var(--grid-unit) / 2);
 }
 
 .c3:hover {
