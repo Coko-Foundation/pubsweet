@@ -8,6 +8,7 @@ const webpack = require('webpack')
 module.exports = dir => {
   const include = [
     path.join(dir, 'src'),
+    path.join(dir, 'packages'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,
@@ -28,7 +29,7 @@ module.exports = dir => {
           oneOf: [
             // ES6 modules
             {
-              test: /\.js$/,
+              test: /\.jsx?$/,
               include,
               loader: 'babel-loader',
               options: {
@@ -101,7 +102,7 @@ module.exports = dir => {
 
             // Files
             {
-              exclude: [/\.js$/, /\.html$/, /\.json$/],
+              exclude: [/\.jsx?$/, /\.html$/, /\.json$/],
               loader: 'file-loader',
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',

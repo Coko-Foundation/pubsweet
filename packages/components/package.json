@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@pubsweet/logger": "^0.2.1",
+    "@pubsweet/styleguide": "^1.0.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
@@ -53,5 +54,6 @@
     "transformIgnorePatterns": ["/node_modules/(?!@?pubsweet)"],
     "testPathIgnorePatterns": ["/node_modules", "config/"],
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
-  }
+  },
+  "dependencies": {}
 }
