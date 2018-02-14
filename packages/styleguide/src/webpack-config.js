@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'development'
 
 const path = require('path')
 const webpack = require('webpack')
+const config = require('config')
 // const nodeExternals = require('webpack-node-externals')
 
 module.exports = dir => {
@@ -15,6 +16,7 @@ module.exports = dir => {
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
     /ui\/src/,
+    /server\/src\/models/,
   ]
 
   return {
@@ -120,6 +122,10 @@ module.exports = dir => {
       // mock constants
       new webpack.DefinePlugin({
         PUBSWEET_COMPONENTS: '[]',
+      }),
+      new webpack.ContextReplacementPlugin(/./, __dirname, {
+        [config.authsome.mode]: config.authsome.mode,
+        [config.validations]: config.validations,
       }),
     ],
     watch: true,
