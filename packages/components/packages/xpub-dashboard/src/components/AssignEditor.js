@@ -1,38 +1,15 @@
 import React from 'react'
-import { compose, withProps } from 'recompose'
 import { Menu } from '@pubsweet/ui'
-import { withJournal } from 'xpub-journal'
 
 // TODO: select multiple editors
-const AssignEditor = ({
-  project,
-  team,
-  teamName,
-  teamTypeName,
-  options,
-  addUserToTeam,
-}) => (
+const AssignEditor = ({ team, teamName, options, addUserToTeam }) => (
   <Menu
     label={teamName}
-    onChange={user => {
-      addUserToTeam({
-        group: 'editor',
-        name: teamName,
-        project,
-        team,
-        teamTypeName,
-        user,
-      })
-    }}
+    onChange={addUserToTeam}
     options={options}
     placeholder="Assign an editor…"
-    value={team ? team.members[0] : null}
+    value={team && team.members[0] ? team.members[0].id : null}
   />
 )
 
-export default compose(
-  withJournal,
-  withProps(({ journal, teamTypeName }) => ({
-    teamName: journal.roles[teamTypeName],
-  })),
-)(AssignEditor)
+export default AssignEditor

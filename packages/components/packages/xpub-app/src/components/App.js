@@ -1,8 +1,7 @@
 import React from 'react'
-import { compose } from 'recompose'
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
-
+import { compose, graphql } from 'react-apollo'
+import { gql } from 'apollo-client-preset'
 import { AppBar } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
 import actions from 'pubsweet-client/src/actions'
@@ -19,12 +18,25 @@ const App = ({ children, currentUser, journal, logoutUser }) => (
   </div>
 )
 
+const query = gql`
+  query CurrentUser {
+    currentUser {
+      user {
+        id
+        username
+        email
+        admin
+      }
+    }
+  }
+`
+
 export default compose(
-  connect(
-    state => ({
-      currentUser: state.currentUser.user,
+  graphql(query, {
+    props: ({ data: { currentUser } }) => ({
+      currentUser: currentUser && currentUser.user,
     }),
-    { logoutUser: actions.logoutUser },
-  ),
+  }),
+  connect(null, { logoutUser: actions.logoutUser }),
   withJournal,
 )(App)

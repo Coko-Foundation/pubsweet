@@ -25,18 +25,14 @@ const ConnectPage = requirements => WrappedComponent => {
     }
 
     componentDidMount = () => {
-      this.fetch(this.props)
+      this.fetch()
     }
 
     componentWillReceiveProps = nextProps => {
       // this.fetch(nextProps)
     }
 
-    fetch({ isAuthenticated }) {
-      if (!isAuthenticated) {
-        return
-      }
-
+    fetch() {
       if (this.state.fetching) {
         return
       }
@@ -72,6 +68,8 @@ const ConnectPage = requirements => WrappedComponent => {
       if (error) return <ErrorMessage>{error}</ErrorMessage>
 
       if (!complete) return <LoadingMessage />
+
+      if (!this.props.isAuthenticated) return <div>Not authenticated</div>
 
       return <WrappedComponent {...this.props} />
     }

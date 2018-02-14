@@ -53,6 +53,7 @@ const onChange = (values, dispatch, { project, version }) => {
 
 export default compose(
   ConnectPage(({ match }) => [
+    actions.ensureCurrentUser(),
     actions.getCollection({ id: match.params.project }),
     actions.getFragments({ id: match.params.project }),
   ]),
