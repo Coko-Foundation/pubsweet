@@ -1,10 +1,11 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import { Button, EditableValue } from '@pubsweet/ui'
 
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
-export default class Post extends React.Component {
+class Post extends React.Component {
   constructor(props) {
     super(props)
     this.onUpdateTitle = this.onUpdateTitle.bind(this)
@@ -95,7 +96,7 @@ export default class Post extends React.Component {
           <Authorize object={blogpost} operation="PATCH">
             <Button
               onClick={() =>
-                (window.location = `/manage/sciencewriter/${blogpost.id}`)
+                this.props.history.push(`/manage/sciencewriter/${blogpost.id}`)
               }
               plain
             >
@@ -125,3 +126,5 @@ Post.propTypes = {
   delete: PropTypes.func,
   update: PropTypes.func,
 }
+
+export default withRouter(Post)
