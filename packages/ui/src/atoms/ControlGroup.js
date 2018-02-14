@@ -5,4 +5,7 @@ const ControlGroup = styled.div`
   flex-direction: ${props => (props.inline ? 'row' : 'column')};
 `
 
+/**
+ * @component
+ */
 export default ControlGroup

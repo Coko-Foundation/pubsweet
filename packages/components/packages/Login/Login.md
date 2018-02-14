@@ -5,8 +5,19 @@ const { reduxForm } = require('redux-form')
 
 const LoginForm = reduxForm({
   form: 'login',
-  onChange: values => console.log(values),
+  onSubmit: val => console.log(val),
 })(Login)
+;<LoginForm />
+```
 
-;<LoginForm handleSubmit={() => console.log('submitted')} />
+Which can have an error message:
+
+```js
+const { reduxForm } = require('redux-form')
+
+const LoginForm = reduxForm({
+  form: 'login-error',
+  onSubmit: val => console.log(val),
+})(Login)
+;<LoginForm error={'Yikes!'} />
 ```
