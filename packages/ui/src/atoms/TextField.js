@@ -15,15 +15,13 @@ const Label = styled.label`
 
 const Input = styled.input`
   border: var(--border-width) var(--border-style)
-    ${({ validationStatus = 'default' }) => {
-      const colorMap = {
+    ${({ validationStatus = 'default' }) =>
+      ({
         error: 'var(--color-error)',
         success: 'var(--color-success)',
         warning: 'var(--color-warning)',
         default: 'var(--color-border)',
-      }
-      return colorMap[validationStatus]
-    }};
+      }[validationStatus])};
 
   border-radius: var(--border-radius);
 

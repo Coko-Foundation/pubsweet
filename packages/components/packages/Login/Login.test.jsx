@@ -1,14 +1,14 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import { Login, ErrorMessage, Signup, ResetPassword } from './Login'
+import { Login, ErrorText, Signup, ResetPassword } from './Login'
 
 describe('<Login/>', () => {
   const makeWrapper = (props = {}) => shallow(<Login {...props} />)
 
   it('shows error', () => {
     const wrapper = makeWrapper({ error: 'Yikes!' })
-    expect(wrapper.find(ErrorMessage)).toHaveLength(1)
+    expect(wrapper.find(ErrorText)).toHaveLength(1)
   })
 
   it('can hide sign up link', () => {

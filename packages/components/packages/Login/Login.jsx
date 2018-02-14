@@ -1,41 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
-import { Button, TextField } from '@pubsweet/ui'
+import {
+  CenteredColumn,
+  ErrorText,
+  Title,
+  Link,
+  Button,
+  TextField,
+} from '@pubsweet/ui'
 import styled from 'styled-components'
 
-const Root = styled.div`
-  margin: 0 auto;
-  width: 40ch;
-`
-
-const Title = styled.div`
-  font-size: var(--font-size-heading-1);
-  font-family: var(--font-heading);
-  margin-bottom: calc(1 * var(--grid-unit));
-  text-align: left;
-`
-
-const ErrorMessage = styled.div`
-  color: var(--color-error);
-`
-
-const StyledLink = styled(Link)`
-  color: var(--color-primary);
-  border-bottom: 1px solid currentcolor;
-  cursor: pointer;
-  margin-left: var(--sub-grid-unit);
-`
-
-const Alternate = styled.div`
-  color: var(--color-text);
-  font-size: var(--font-size-base);
-  text-align: left;
-`
-
-const Signup = Alternate.extend``
-const ResetPassword = Alternate.extend``
+// These enable tests to select components
+const Signup = styled.div``
+const ResetPassword = styled.div``
 
 const UsernameInput = props => <TextField label="Username" {...props.input} />
 const PasswordInput = props => (
@@ -48,10 +26,10 @@ const Login = ({
   signup = true,
   passwordReset = true,
 }) => (
-  <Root>
+  <CenteredColumn>
     <Title>Login</Title>
 
-    {error && <ErrorMessage>{error}</ErrorMessage>}
+    {error && <ErrorText>{error}</ErrorText>}
 
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
@@ -63,18 +41,18 @@ const Login = ({
 
     {signup && (
       <Signup>
-        <span>Don&apos;t have an account?</span>
-        <StyledLink to="/signup">Sign up</StyledLink>
+        <span>Don&apos;t have an account? </span>
+        <Link to="/signup">Sign up</Link>
       </Signup>
     )}
 
     {passwordReset && (
       <ResetPassword>
-        <span>Forgot your password?</span>
-        <StyledLink to="/password-reset">Reset password</StyledLink>
+        <span>Forgot your password? </span>
+        <Link to="/password-reset">Reset password</Link>
       </ResetPassword>
     )}
-  </Root>
+  </CenteredColumn>
 )
 
 Login.propTypes = {
@@ -86,7 +64,7 @@ Login.propTypes = {
 }
 
 // used by tests
-export { Login, ErrorMessage, Signup, ResetPassword }
+export { Login, ErrorText, Signup, ResetPassword }
 
 // used by consumers
 export default Login

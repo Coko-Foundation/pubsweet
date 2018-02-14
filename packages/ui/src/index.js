@@ -15,6 +15,10 @@ export { default as StateItem } from './atoms/StateItem'
 export { default as AlignmentBox } from './atoms/AlignmentBox'
 export { default as UploadButton } from './atoms/UploadButton'
 export { default as ControlGroup } from './atoms/ControlGroup'
+export { default as Link } from './atoms/Link'
+export { default as Title } from './atoms/Title'
+export { default as ErrorText } from './atoms/ErrorText'
+export { default as CenteredColumn } from './atoms/CenteredColumn'
 
 /* molecules */
 export { default as AppBar } from './molecules/AppBar'

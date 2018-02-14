@@ -200,28 +200,23 @@ exports[`AppBar With admin user 1`] = `
         size={2}
       >
         <svg
+          fill="none"
           height={undefined}
+          stroke={undefined}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           viewBox="0 0 24 24"
           width={undefined}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
-            fill="none"
-            stroke={undefined}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
           />
           <circle
             cx="12"
             cy="7"
-            fill="none"
             r="4"
-            stroke={undefined}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
           />
         </svg>
       </span>
