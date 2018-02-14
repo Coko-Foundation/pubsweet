@@ -17,7 +17,10 @@ const { reduxForm } = require('redux-form')
 
 const LoginForm = reduxForm({
   form: 'login-error',
-  onSubmit: val => console.log(val),
+  onSubmit: val => {
+    console.log(val)
+    return Promise.reject(new SubmissionError({ _error: 'Error message' }))
+  },
 })(Login)
-;<LoginForm error={'Yikes!'} />
+;<LoginForm />
 ```
