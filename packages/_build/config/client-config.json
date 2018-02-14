@@ -1,0 +1,11 @@
+{
+  "authsome": {
+    "mode": "pubsweet-server/test/helpers/authsome_mode"
+  },
+  "validations":
+    "/Users/samgalson/pub/pdk/pubsweet/packages/components/config/validations",
+  "pubsweet-component-aws-s3": {
+    "validations":
+      "/Users/samgalson/pub/pdk/pubsweet/packages/components/config/upload-validations"
+  }
+}
