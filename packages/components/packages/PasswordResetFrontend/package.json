@@ -6,10 +6,11 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/ui": "^2.0.0",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
-    "react-bootstrap": "^0.32.0",
-    "react-router": "^4.2.0"
+    "react-router": "^4.2.0",
+    "styled-components": "^2.4.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=1.0.0-alpha.1",

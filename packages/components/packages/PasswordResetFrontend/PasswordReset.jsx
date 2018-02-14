@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {
-  Grid,
-  Row,
-  Col,
-  Alert,
-  FormGroup,
-  ControlLabel,
-  Button,
-  FormControl,
-} from 'react-bootstrap'
 import queryString from 'query-string'
+import styled from 'styled-components'
+import { TextField, Button } from '@pubsweet/ui'
 import * as api from 'pubsweet-client/src/helpers/api'
-import styles from './PasswordReset.local.scss'
+
+const Root = styled.div`
+  margin: 0 auto;
+  width: 40ch;
+`
+
+const Alert = styled.div`
+  color: var(--color-error);
+`
 
 class PasswordReset extends React.Component {
   constructor(props) {
@@ -137,12 +137,10 @@ class PasswordReset extends React.Component {
     const {
       username,
       emailSent,
-      emailError,
       emailErrorMessage,
       emailSending,
       password,
       passwordChanged,
-      passwordError,
       passwordErrorMessage,
       passwordSending,
     } = this.state
@@ -152,7 +150,7 @@ class PasswordReset extends React.Component {
     const buildForm = () => {
       if (passwordChanged) {
         return (
-          <Alert bsStyle="success">
+          <Alert>
             Your password has been changed, you can now{' '}
             <Link to="/login">login with the new password</Link>.
           </Alert>
@@ -164,27 +162,17 @@ class PasswordReset extends React.Component {
 
         return (
           <form onSubmit={this.handlePasswordSubmit}>
-            <FormGroup validationState={passwordError ? 'error' : 'success'}>
-              <ControlLabel>New password</ControlLabel>
+            <TextField
+              label="New password"
+              onChange={this.handlePasswordChange}
+              placeholder="Enter a new password…"
+              type="password"
+              value={password}
+            />
 
-              <FormControl
-                onChange={this.handlePasswordChange}
-                placeholder="Enter a new password…"
-                type="password"
-                value={password}
-              />
-            </FormGroup>
-
-            <div>
-              <Button
-                block
-                bsStyle="primary"
-                disabled={passwordSending}
-                type="submit"
-              >
-                {passwordSending ? 'Saving…' : 'Save new password'}
-              </Button>
-            </div>
+            <Button disabled={passwordSending} type="submit">
+              {passwordSending ? 'Saving…' : 'Save new password'}
+            </Button>
           </form>
         )
       }
@@ -201,27 +189,16 @@ class PasswordReset extends React.Component {
 
       return (
         <form onSubmit={this.handleUsernameSubmit}>
-          <FormGroup validationState={emailError ? 'error' : 'success'}>
-            <ControlLabel>Username</ControlLabel>
-
-            <FormControl
-              onChange={this.handleUsernameChange}
-              placeholder="Enter your username"
-              type="text"
-              value={username}
-            />
-          </FormGroup>
-
-          <div>
-            <Button
-              block
-              bsStyle="primary"
-              disabled={emailSending}
-              type="submit"
-            >
-              {emailSending ? 'Sending…' : 'Send email'}
-            </Button>
-          </div>
+          <TextField
+            label="Username"
+            onChange={this.handleUsernameChange}
+            placeholder="Enter your username"
+            type="text"
+            value={username}
+          />
+          <Button disabled={emailSending} type="submit">
+            {emailSending ? 'Sending…' : 'Send email'}
+          </Button>
         </form>
       )
     }
@@ -259,37 +236,16 @@ class PasswordReset extends React.Component {
     }
 
     return (
-      <div className="bootstrap" style={{ marginTop: 20 }}>
-        <Grid>
-          <Row>
-            <Col md={2} mdOffset={5}>
-              <img
-                alt="pubsweet-logo"
-                className={styles.logo}
-                src="/assets/pubsweet-rgb-small.jpg"
-                style={{ maxWidth: '100%' }}
-              />
-            </Col>
-          </Row>
+      <Root>
+        {buildError(emailErrorMessage)}
+        {buildError(passwordErrorMessage)}
 
-          <Row>
-            <Col md={4}>
-              {buildError(emailErrorMessage)}
-              {buildError(passwordErrorMessage)}
-            </Col>
+        <h1>Password reset</h1>
 
-            <Col className={styles.passwordReset} md={4} xs={12}>
-              <h1>Password reset</h1>
+        {buildForm()}
 
-              {buildForm()}
-
-              <div style={{ marginTop: 20 }}>
-                <Link to="/login">Return to login form</Link>
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+        <Link to="/login">Return to login form</Link>
+      </Root>
     )
   }
 }
