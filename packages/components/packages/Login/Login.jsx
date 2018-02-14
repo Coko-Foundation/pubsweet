@@ -17,7 +17,7 @@ const Title = styled.div`
   text-align: left;
 `
 
-const Error = styled.div`
+const ErrorMessage = styled.div`
   color: var(--color-error);
 `
 
@@ -34,6 +34,9 @@ const Alternate = styled.div`
   text-align: left;
 `
 
+const Signup = Alternate.extend``
+const ResetPassword = Alternate.extend``
+
 const UsernameInput = props => <TextField label="Username" {...props.input} />
 const PasswordInput = props => (
   <TextField label="Password" {...props.input} type="password" />
@@ -48,7 +51,7 @@ const Login = ({
   <Root>
     <Title>Login</Title>
 
-    {error && <Error>{error}</Error>}
+    {error && <ErrorMessage>{error}</ErrorMessage>}
 
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
@@ -59,17 +62,17 @@ const Login = ({
     </form>
 
     {signup && (
-      <Alternate>
+      <Signup>
         <span>Don&apos;t have an account?</span>
         <StyledLink to="/signup">Sign up</StyledLink>
-      </Alternate>
+      </Signup>
     )}
 
     {passwordReset && (
-      <Alternate>
+      <ResetPassword>
         <span>Forgot your password?</span>
         <StyledLink to="/password-reset">Reset password</StyledLink>
-      </Alternate>
+      </ResetPassword>
     )}
   </Root>
 )
@@ -82,4 +85,8 @@ Login.propTypes = {
   passwordReset: PropTypes.bool,
 }
 
+// used by tests
+export { Login, ErrorMessage, Signup, ResetPassword }
+
+// used by consumers
 export default Login
