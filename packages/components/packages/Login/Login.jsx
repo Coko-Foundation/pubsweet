@@ -3,8 +3,36 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
 import { Button, TextField } from '@pubsweet/ui'
+import styled from 'styled-components'
 
-import classes from './Login.local.scss'
+const Root = styled.div`
+  margin: 0 auto;
+  width: 40ch;
+`
+
+const Title = styled.div`
+  font-size: var(--font-size-heading-1);
+  font-family: var(--font-heading);
+  margin-bottom: calc(1 * var(--grid-unit));
+  text-align: left;
+`
+
+const Error = styled.div`
+  color: var(--color-error);
+`
+
+const StyledLink = styled(Link)`
+  color: var(--color-primary);
+  border-bottom: 1px solid currentcolor;
+  cursor: pointer;
+  margin-left: var(--sub-grid-unit);
+`
+
+const Alternate = styled.div`
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  text-align: left;
+`
 
 const UsernameInput = props => <TextField label="Username" {...props.input} />
 const PasswordInput = props => (
@@ -17,37 +45,33 @@ const Login = ({
   signup = true,
   passwordReset = true,
 }) => (
-  <div className={classes.root}>
-    <div className={classes.title}>Login</div>
+  <Root>
+    <Title>Login</Title>
 
-    {error && <div className={classes.error}>{error}</div>}
+    {error && <Error>{error}</Error>}
 
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={PasswordInput} name="password" />
-      <Button className={classes.button} primary type="submit">
+      <Button primary type="submit">
         Login
       </Button>
     </form>
 
     {signup && (
-      <div className={classes.alternate}>
-        <span className={classes.message}>Don&apos;t have an account?</span>
-        <Link className={classes.link} to="/signup">
-          Sign up
-        </Link>
-      </div>
+      <Alternate>
+        <span>Don&apos;t have an account?</span>
+        <StyledLink to="/signup">Sign up</StyledLink>
+      </Alternate>
     )}
 
     {passwordReset && (
-      <div className={classes.alternate}>
-        <span className={classes.message}>Forgot your password?</span>
-        <Link className={classes.link} to="/password-reset">
-          Reset password
-        </Link>
-      </div>
+      <Alternate>
+        <span>Forgot your password?</span>
+        <StyledLink to="/password-reset">Reset password</StyledLink>
+      </Alternate>
     )}
-  </div>
+  </Root>
 )
 
 Login.propTypes = {
