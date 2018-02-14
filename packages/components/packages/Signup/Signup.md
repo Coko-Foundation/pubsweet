@@ -13,11 +13,14 @@ const SignupForm = reduxForm({
 Which can have an error message:
 
 ```js
-const { reduxForm } = require('redux-form')
+const { reduxForm, SubmissionError } = require('redux-form')
 
 const SignupForm = reduxForm({
   form: 'signup-error',
-  onSubmit: val => console.log(val),
+  onSubmit: val => {
+    console.log(val)
+    return Promise.reject(new SubmissionError({ _error: 'Error message' }))
+  },
 })(Signup)
-;<SignupForm error={'Yikes!'} />
+;<SignupForm />
 ```
