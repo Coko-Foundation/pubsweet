@@ -39,37 +39,23 @@ const DisabledStandardButton = BaseStandardButton.extend.attrs({
   cursor: not-allowed;
 `
 
-const BasePlainButton = BaseStandardButton.extend`
+const BasePlainButton = styled.button.attrs({
+  type: 'button',
+})`
   background: none;
-  border: 0;
-  border-bottom: var(--border-width) var(--border-style) var(--color-secondary);
-  border-radius: 0;
-  font-style: italic;
-  letter-spacing: 0;
+  border: none;
   padding: 0;
-  text-transform: none;
-
-  min-width: 0;
-  height: var(--grid-unit);
-  margin-right: var(--sub-grid-unit);
-
-  &:hover,
-  &:focus {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-  }
-
-  &:active {
-    transform: scale(0.99);
-  }
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 `
 
 const DisabledPlainButton = BasePlainButton.extend.attrs({
   disabled: true,
 })`
   &, &:hover, &:focus {
-    background: none;
-    border-color: var(--color-secondary);
     color: var(--color-secondary);
     cursor: not-allowed;
   }
