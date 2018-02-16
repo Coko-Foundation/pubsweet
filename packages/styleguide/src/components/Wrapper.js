@@ -5,8 +5,6 @@ import { reducer as formReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux'
 import styled from 'styled-components'
 
-import '@pubsweet/default-theme'
-
 const rootReducer = combineReducers({
   form: formReducer,
 })
