@@ -11,6 +11,7 @@ injectGlobal`
   --color-background: white;
   --color-primary: #205d86;
   --color-secondary: #e7e7e7;
+  --color-quiet: #aaa;
   --color-furniture: #ccc;
   --color-border: #aaa;
   --color-background-hue: #f1f1f1; /* marginally darker shade of the app background so that it can be used to divide the interface when needed */
