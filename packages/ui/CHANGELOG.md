@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@2.0.0...@pubsweet/ui@2.1.0) (2018-02-16)
+
+### Features
+
+* **component:** add file picker component ([4fcb74f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4fcb74f))
+* **component:** add progress steps component ([e4b77c4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4b77c4))
+* **component:** add spinner component ([3a4ae9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3a4ae9a))
+
 <a name="2.0.0"></a>
 
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@1.0.0...@pubsweet/ui@2.0.0) (2018-02-08)

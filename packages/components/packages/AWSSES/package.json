@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-aws-ses",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "aws ses configured for pubsweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
