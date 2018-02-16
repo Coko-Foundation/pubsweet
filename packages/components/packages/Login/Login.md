@@ -13,7 +13,7 @@ const LoginForm = reduxForm({
 Which can have an error message:
 
 ```js
-const { reduxForm } = require('redux-form')
+const { reduxForm, SubmissionError } = require('redux-form')
 
 const LoginForm = reduxForm({
   form: 'login-error',
