@@ -91,3 +91,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# webpack build
+_build
