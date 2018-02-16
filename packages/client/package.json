@@ -4,8 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
-    "test": "jest",
-    "testci": "gitlab-ci-multi-runner exec docker test"
+    "test": "jest"
   },
   "engines": {
     "node": ">=8.6.0",
