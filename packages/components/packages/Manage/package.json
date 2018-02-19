@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-manage",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Basic Manage (wrapper) component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -11,8 +11,8 @@
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
-    "react": ">=15"
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
   },
   "repository": {
     "type": "git",

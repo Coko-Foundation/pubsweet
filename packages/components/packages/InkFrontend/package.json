@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-ink-frontend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":
     "A frontend component that talks to the INK backend component (which talks to INK for file processing and conversion)",
   "main": "index.js",
@@ -27,7 +27,7 @@
     "redux": "^3.7.2"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
-    "react": ">=15"
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
   }
 }

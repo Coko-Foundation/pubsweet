@@ -1,22 +1,17 @@
 {
   "name": "pubsweet",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
-    "test:mocked": "NODE_ENV=test jest ./test/cli",
-    "vuln-test": "nsp check --output checkstyle",
-    "test:ci":
-      "gitlab-ci-multi-runner exec docker --docker-image=pubsweet/pubsweet-test-base test:node",
-    "test:debug":
-      "node --inspect-brk ./node_modules/.bin/jest --debug --runInBand --no-watchman --no-cache --env jest-environment-node-debug"
+    "vuln-test": "nsp check --output checkstyle"
   },
   "keywords": ["pubsweet", "cli"],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^0.0.16",
-    "@pubsweet/logger": "^0.2.1",
+    "@pubsweet/db-manager": "^0.0.17",
+    "@pubsweet/logger": "^0.2.2",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
@@ -25,7 +20,7 @@
     "fs-extra": "^4.0.2",
     "inflection": "^1.12.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
-    "pubsweet-server": "^1.1.0",
+    "pubsweet-server": "^1.1.1",
     "require-relative": "^0.8.7",
     "uuid": "^3.0.1",
     "webpack": "^3.8.1",
