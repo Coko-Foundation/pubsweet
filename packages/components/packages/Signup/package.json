@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-signup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic signup form component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -13,8 +13,8 @@
     "redux": "^3.7.2"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0-alpha.1",
-    "react": ">=15"
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
   },
   "repository": {
     "type": "git",

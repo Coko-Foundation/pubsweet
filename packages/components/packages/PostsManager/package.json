@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-posts-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic Posts manager component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -8,7 +8,7 @@
   "dependencies": {
     "@pubsweet/ui": "^2.0.0",
     "prop-types": "^15.5.10",
-    "pubsweet-component-form-group": "^1.0.0",
+    "pubsweet-component-form-group": "^1.0.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -17,7 +17,7 @@
   "peerDependencies": {
     "pubsweet-client": "^1.0.0",
     "pubsweet-server": "^1.0.0",
-    "react": ">=15"
+    "react": ">=16"
   },
   "repository": {
     "type": "git",

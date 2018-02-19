@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
@@ -63,10 +63,7 @@
     "clean": "rimraf dist",
     "prebuild": "npm run clean && npm run lint",
     "build": "webpack --progress --profile",
-    "test": "jest",
-    "test:watch": "npm test -- --watch",
-    "test:cover": "npm test -- --coverage",
-    "test:u": "npm test -- --updateSnapshot"
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"

@@ -1,4 +1,4 @@
-import { selectUser } from '../../packages/client/src/selectors'
+import { selectUser } from '../../src/selectors/index'
 
 describe('Selectors', () => {
   it('selectUser', () => {
