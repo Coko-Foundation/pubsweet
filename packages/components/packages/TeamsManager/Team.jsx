@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from '@pubsweet/ui'
-import 'react-select/dist/react-select.css'
 import { Button } from 'react-bootstrap'
 
 class Team extends React.Component {
