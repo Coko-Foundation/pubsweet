@@ -13,11 +13,11 @@ program
   .command('remove', 'remove one or more components from a pubsweet app')
   .command('adduser', 'add a user to the database for a pubsweet app')
 
-// only runs if there are cmnds/opts entered
+// only runs if there are commands or options entered
 if (process.argv.length > 2) {
   const cmdArr = []
   const keyArr = Object.keys(program.commands)
-  for (let i = 0; i < keyArr.length; i += i) {
+  for (let i = 0; i < keyArr.length; i += 1) {
     cmdArr[i] = program.commands[keyArr[i]]._name
   }
 
