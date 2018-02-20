@@ -27,6 +27,7 @@ const configureApp = app => {
   global.versions = {}
 
   app.locals.models = models
+  app.locals.passport = passport
 
   app.use(morgan('combined', { stream: logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
