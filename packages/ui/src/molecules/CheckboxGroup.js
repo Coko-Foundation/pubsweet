@@ -11,7 +11,7 @@ class CheckboxGroup extends React.Component {
   }
 
   handleChange = event => {
-    const { values } = this.state
+    const values = [...this.state.values]
 
     const { value } = event.target
 
