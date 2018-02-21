@@ -1,0 +1,26 @@
+{
+  "name": "@pubsweet/component-mail-service",
+  "version": "0.0.1",
+  "description": "mail service component for pubsweet",
+  "license": "MIT",
+  "author": "Collaborative Knowledge Foundation",
+  "files": ["src"],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "MailService"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "handlebars": "^4.0.11"
+  },
+  "peerDependencies": {
+    "@pubsweet/logger": "^0.0.1",
+    "pubsweet-server": "^1.0.1",
+    "@pubsweet/component-aws-ses": "^0.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

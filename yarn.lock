@@ -2113,6 +2113,10 @@ chalk@2.3.0, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
+chance@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/chance/-/chance-1.0.13.tgz#666bec2db42b3084456a3e4f4c28a82db5ccb7e6"
+
 change-emitter@^0.1.2:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
@@ -5281,7 +5285,7 @@ handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
-handlebars@^4.0.2, handlebars@^4.0.3:
+handlebars@^4.0.11, handlebars@^4.0.2, handlebars@^4.0.3:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
   dependencies:
@@ -10018,6 +10022,15 @@ pubsweet-component-navigation@^0.3.2:
     react-bootstrap "^0.31.3"
     react-router-bootstrap "^0.24.4"
     react-router-dom "^4.2.2"
+
+pubsweet-component-password-reset-backend@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-backend/-/pubsweet-component-password-reset-backend-0.2.2.tgz#02175acbf0eaa29425c47638327166f61b84a393"
+  dependencies:
+    body-parser "^1.17.2"
+    config "^1.26.1"
+    moment "^2.18.1"
+    nodemailer "^4.0.1"
 
 pubsweet-component-password-reset-frontend@^0.2.0:
   version "0.2.3"

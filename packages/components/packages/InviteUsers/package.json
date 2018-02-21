@@ -1,0 +1,37 @@
+{
+  "name": "@pubsweet/component-invite",
+  "version": "0.0.1",
+  "description": "invite component for pubsweet",
+  "license": "MIT",
+  "author": "Collaborative Knowledge Foundation",
+  "files": ["src"],
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "InviteUsers"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chance": "^1.0.13"
+  },
+  "peerDependencies": {
+    "@pubsweet/logger": "^0.0.1",
+    "pubsweet-server": "^1.0.1",
+    "@pubsweet/component-mail-service": "0.0.1"
+  },
+  "devDependencies": {
+    "jest": "^22.1.1",
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/src/.*.test.js$"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

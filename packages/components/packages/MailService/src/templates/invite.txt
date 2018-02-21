@@ -1,0 +1,7 @@
+You have been invited to Hindawi
+You can now join Hindawi.
+Please confirm your account and set your account details by clicking on the link below.
+{{ url }} CONFIRM
+Hindawi Publishing Corporation
+315 Madison Ave, Third Floor, Suite 307
+New York, NY 10017
