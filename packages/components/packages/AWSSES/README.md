@@ -1,4 +1,6 @@
-# AWS SES Configuration
+# AWS SES
+
+## Configuration
 
 In order to use this component, the following configuration needs to be added to a PubSweet application inside a section named `pubsweet-component-aws-ses`:
 
@@ -10,17 +12,20 @@ In order to use this component, the following configuration needs to be added to
 For example:
 
 ```json
-"pubsweet-component-aws-ses": {
-    "secretAccessKey": "process.env.AWS_SES_SECRET_KEY",
-    "accessKeyId": "process.env.AWS_SES_ACCESS_KEY",
-    "region": "process.env.AWS_SES_REGION",
-    "sender": "process.env.EMAIL_SENDER",
-  },
+  mailer: {
+    from: "sender@domain.com",
+    transport: {
+      "pubsweet-component-aws-ses": {
+        "secretAccessKey": "process.env.AWS_SES_SECRET_KEY",
+        "accessKeyId": "process.env.AWS_SES_ACCESS_KEY",
+        "region": "process.env.AWS_SES_REGION",
+        "sender": "process.env.EMAIL_SENDER",
+    },
+    }
+  }
 ```
 
-In order to use `component-aws-ses` you first need to have a `.env` file containing AWS data in the root folder of the starting point of your application.
-
-The `.env` file contain the following data:
+The `.env` file should contain the following data:
 
 ```bash
 AWS_SES_SECRET_KEY = <secretKey>
@@ -35,31 +40,39 @@ Then, as soon as possible in your app you should add the `dotenv` package:
 require('dotenv').config()
 ```
 
-# `component-aws-ses` API
+## Usage
 
-A list of endpoints that help you upload, download and delete S3 files.
+Here's how you can use the package in your code.
 
-## Send an email [POST]
+```js
+const SES = require('pubsweet-components-aws-ses')
+const fs = require('fs')
 
-#### Request
+module.exports = {
+  setupEmail: async (email, emailType) => {
+    let subject
+    const htmlBody = readFile(`${__dirname}/templates/${emailType}.html`)
+    const textBody = readFile(`${__dirname}/templates/${emailType}.txt`)
 
-`POST /api/email`
+    switch (emailType) {
+      case 'invitation-email':
+        subject = 'You have been invited!'
+        break
+      default:
+        subject = 'Welcome!'
+        break
+    }
 
-#### Request body
-
-All parameters are `required`
-
-```json
-{
-  "email": "to_email@domain.com",
-  "subject": "Example subject",
-  "textBody": "this is an email",
-  "htmlBody": "<p><b>This</b> is an <i>email</i>"
+    SES.sendEmail(email, subject, textBody, htmlBody)
+  },
 }
-```
 
-#### Response
-
-```json
-HTTP/1.1 204
+const readFile = path =>
+  fs.readFileSync(path, { encoding: 'utf-8' }, (err, file) => {
+    if (err) {
+      throw err
+    } else {
+      return file
+    }
+  })
 ```
