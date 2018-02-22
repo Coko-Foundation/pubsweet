@@ -1,6 +1,8 @@
 const express = require('express')
 const passport = require('passport')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
+const { apolloUploadExpress } = require('apollo-upload-server')
+
 const config = require('config')
 
 const graphqlSchema = require('./schema')
@@ -14,6 +16,7 @@ const router = new express.Router()
 router.use(
   '/graphql',
   authBearerAndPublic,
+  apolloUploadExpress(),
   graphqlExpress(req => ({
     schema: graphqlSchema,
     context: { user: req.user, connectors },

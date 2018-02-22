@@ -14,6 +14,7 @@
   "dependencies": {
     "@pubsweet/logger": "^0.2.2",
     "apollo-server-express": "^1.3.2",
+    "apollo-upload-server": "^4.0.2",
     "authsome": "0.0.9",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.1",
