@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@1.1.0...pubsweet-components@2.0.0) (2018-02-16)
+
+### Bug Fixes
+
+* **component:** fix tests ([bf9d13e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bf9d13e))
+
+### Code Refactoring
+
+* **components:** update mail transport config shape ([d142cd3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d142cd3))
+
+### Features
+
+* **component:** add aws ses package ([2e34627](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2e34627))
+* **component:** sortable list component with react-dnd ([f4bda90](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f4bda90))
+
+### BREAKING CHANGES
+
+* **components:** mail transport config has moved from `mail-transport` to `mailer.transport`
+
 <a name="1.1.0"></a>
 
 # [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@1.0.0...pubsweet-components@1.1.0) (2018-02-08)
