@@ -5,11 +5,12 @@ const Button = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: var(--border-width) dashed var(--color-border);
-  height: var(--grid-unit);
+  border: ${props => props.theme.borderWidth} dashed
+    ${props => props.theme.colorBorder};
+  height: ${props => props.theme.gridUnit};
   cursor: pointer;
-  margin-bottom: var(--grid-unit);
-  padding: var(--sub-grid-unit);
+  margin-bottom: ${props => props.theme.gridUnit};
+  padding: ${props => props.theme.subGridUnit};
 `
 
 const UploadButton = ({ name, buttonText, onChange }) => {

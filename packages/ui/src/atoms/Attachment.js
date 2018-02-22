@@ -4,25 +4,27 @@ import Icon from './Icon'
 
 const Filename = styled.span`
   color: ${props =>
-    props.uploaded ? 'var(--color-primary)' : 'var(--color-secondary)'};
+    props.uploaded ? props.theme.colorPrimary : props.theme.colorSecondary};
   display: inline-flex;
   overflow-wrap: break-word;
   padding: 0;
   word-break: break-all;
 `
-const uploadedIcon = `
-  stroke: var(--color-primary);
-  height: var(--font-size-base-small);
-  width: var(--font-size-base-small);
+
+const uploadedIcon = ({ theme }) => `
+  stroke: ${theme.colorPrimary};
+  height: ${theme.fontSizeBaseSmall};
+  width: ${theme.fontSizeBaseSmall};
 `
 
-const uploadingIcon = `
-  stroke: var(--color-text);
-  height: var(--font-size-base);
-  width: var(--font-size-base);
+const uploadingIcon = ({ theme }) => `
+  stroke: ${theme.colorText};
+  height: ${theme.fontSizeBase};
+  width: ${theme.fontSizeBase};
 `
+
 const IconContainer = styled.span`
-  margin: 0 var(--sub-grid-unit);
+  margin: 0 ${props => props.theme.subGridUnit};
 
   & svg {
     ${props => (props.uploaded ? uploadedIcon : uploadingIcon)};
@@ -35,11 +37,16 @@ const Root = styled.a`
   text-decoration: none;
 
   &:hover ${Filename} {
-    ${props => props.uploaded && 'text-decoration: underline;'}
+    text-decoration: ${props => (props.uploaded ? 'underline' : 'none')};
+  }
 `
 
 const Attachment = ({ file, error, uploaded }) => (
-  <Root download={uploaded && file.name} href={uploaded && file.url}>
+  <Root
+    download={uploaded && file.name}
+    href={uploaded && file.url}
+    uploaded={uploaded}
+  >
     <IconContainer uploaded={uploaded}>
       <Icon>paperclip</Icon>
     </IconContainer>

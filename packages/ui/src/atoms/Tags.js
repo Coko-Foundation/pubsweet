@@ -96,12 +96,13 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    padding: var(--sub-grid-unit) 0 0 var(--sub-grid-unit);
+    padding: ${props => props.theme.subGridUnit} 0 0 ${props =>
+  props.theme.subGridUnit};
     position: relative;
   }
 
   .${classNames.root}.${classNames.rootFocused} {
-    border-color: var(--color-primary);
+    border-color: ${props => props.theme.colorPrimary};
   }
 
   .${classNames.selected} {
@@ -112,45 +113,47 @@ const Tags = styled(TagsUnstyled)`
     border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: var(--font-reading);
+    font-family: ${props => props.theme.fontReading};
 
     /* match the font styles */
-    margin: 0 var(--sub-grid-unit) var(--grid-unit) 0;
+    margin: 0 ${props => props.theme.subGridUnit} ${props =>
+  props.theme.gridUnit} 0;
     padding: 0.1em 0.3em;
 
-    ${realBorder('var(--color-border)', 'var(--color-background)')}
+    ${props => realBorder(props.theme.colorBorder, props.theme.colorBackground)}
   }
 
   .${classNames.selectedTag}::after {
-    color: var(--color-border);
+    color: ${props => props.theme.colorBorder};
     content: '\\2715';
     display: inline-block;
-    font-size: var(--font-size-base-small);
+    font-size: ${props => props.theme.fontSizeBaseSmall};
     font-weight: 600;
-    margin-left: var(--sub-grid-unit);
-    padding: var(--sub-grid-unit) 0 0
-    width: var(--sub-grid-unit);
+    margin-left: ${props => props.theme.subGridUnit};
+    padding: ${props => props.theme.subGridUnit} 0 0
+    width: ${props => props.theme.subGridUnit};
   }
 
   .${classNames.selectedTag}:hover,
   .${classNames.selectedTag}:focus {
     text-decoration: line-through;
 
-    ${realBorder('transparent', 'var(--color-background)')}
+    ${props => realBorder('transparent', props.theme.colorBackground)}
 
     &::after {
-      color: var(--color-error);
+      color: ${props => props.theme.colorError};
     }
   }
   .${classNames.search} {
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 0 var(--grid-unit) 0;
+    margin: 0 0 ${props => props.theme.gridUnit} 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: calc(var(--grid-unit) * 5);
-    padding: var(--sub-grid-unit) var(--sub-grid-unit);
+    max-width: calc(${props => props.theme.gridUnit} * 5);
+    padding: ${props => props.theme.subGridUnit} ${props =>
+  props.theme.subGridUnit};
   }
 
   @media screen and (min-width: 30em) {
@@ -162,9 +165,10 @@ const Tags = styled(TagsUnstyled)`
 
   .${classNames.search} input {
     border: 0;
-    border-bottom: var(--border-width) dashed var(--color-border);
-    color: var(--color-text);
-    font-family: var(--font-reading);
+    border-bottom: ${props => props.theme.borderWidth} dashed ${props =>
+  props.theme.colorBorder};
+    color: ${props => props.theme.colorText};
+    font-family: ${props => props.theme.fontReading};
 
     /* match the font styles */
     font-size: inherit;
@@ -175,18 +179,19 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: calc(var(--grid-unit) * 5);
+    min-width: calc(${props => props.theme.gridUnit} * 5);
     outline: none;
     padding: 0;
 
     &::placeholder {
-      font-family: var(--font-interface);
-      color: var(--color-text-placeholder);
+      font-family: ${props => props.theme.fontInterface};
+      color: ${props => props.theme.colorTextPlaceholder};
     }
 
     &:focus,
     &:hover {
-      border-bottom: var(--border-width) dashed var(--color-primary);
+      border-bottom: ${props => props.theme.borderWidth} dashed ${props =>
+  props.theme.colorPrimary};
     }
   }
 

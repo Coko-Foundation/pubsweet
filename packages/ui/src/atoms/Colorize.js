@@ -1,4 +1,6 @@
 import React from 'react'
+import { withTheme } from 'styled-components'
+import { compose } from 'recompose'
 
 const Colorize = Component => {
   const Colorized = ({
@@ -11,19 +13,20 @@ const Colorize = Component => {
     warning,
     reverse,
     placeholder,
+    theme = {},
     ...props
   }) => {
     const color =
-      (primary && 'var(--color-primary)') ||
-      (secondary && 'var(--color-secondary)') ||
-      (quiet && 'var(--color-quiet)') ||
-      (furniture && 'var(--color-furniture)') ||
-      (success && 'var(--color-success)') ||
-      (error && 'var(--color-error)') ||
-      (warning && 'var(--color-warning)') ||
-      (reverse && 'var(--color-text-reverse)') ||
-      (placeholder && 'var(--color-text-placeholder)') ||
-      'var(--color-text)'
+      (primary && theme.colorPrimary) ||
+      (secondary && theme.colorSecondary) ||
+      (quiet && theme.colorQuiet) ||
+      (furniture && theme.colorFurniture) ||
+      (success && theme.colorSuccess) ||
+      (error && theme.colorError) ||
+      (warning && theme.colorWarning) ||
+      (reverse && theme.colorTextReverse) ||
+      (placeholder && theme.colorTextPlaceholder) ||
+      theme.colorText
 
     return <Component color={color} {...props} />
   }
@@ -32,4 +35,4 @@ const Colorize = Component => {
   return Colorized
 }
 
-export default Colorize
+export default compose(withTheme, Colorize)

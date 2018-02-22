@@ -4,20 +4,21 @@ import styled from 'styled-components'
 const BaseStandardButton = styled.button.attrs({
   type: 'button',
 })`
-  background: var(--color-secondary);
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  background: ${props => props.theme.colorSecondary};
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} ${props => props.theme.colorBorder};
+  border-radius: ${props => props.theme.borderRadius};
 
   cursor: pointer;
 
-  font-family: var(--font-interface);
+  font-family: ${props => props.theme.fontInterface};
   font-size: inherit;
   letter-spacing: 0.05em;
 
-  min-width: calc(var(--grid-unit) * 4);
-  height: calc(var(--grid-unit) * 2);
-  padding: 0 calc(var(--grid-unit) / 4);
-  margin-right: var(--sub-grid-unit);
+  min-width: calc(${props => props.theme.gridUnit} * 4);
+  height: calc(${props => props.theme.gridUnit} * 2);
+  padding: 0 calc(${props => props.theme.gridUnit} / 4);
+  margin-right: ${props => props.theme.subGridUnit};
 
   &:active {
     transform: scale(0.8);
@@ -25,17 +26,17 @@ const BaseStandardButton = styled.button.attrs({
 `
 
 const PrimaryStandardButton = BaseStandardButton.extend`
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-background);
+  background-color: ${props => props.theme.colorPrimary};
+  border-color: ${props => props.theme.colorPrimary};
+  color: ${props => props.theme.colorBackground};
 `
 
 const DisabledStandardButton = BaseStandardButton.extend.attrs({
   disabled: true,
 })`
-  background: var(--color-background);
+  background: ${props => props.theme.colorBackground};
   border-color: transparent;
-  color: var(--color-secondary);
+  color: ${props => props.theme.colorSecondary};
   cursor: not-allowed;
 `
 
@@ -45,7 +46,7 @@ const BasePlainButton = styled.button.attrs({
   background: none;
   border: none;
   padding: 0;
-  color: var(--color-primary);
+  color: ${props => props.theme.colorPrimary};
   text-decoration: underline;
   cursor: pointer;
   font-family: inherit;
@@ -56,7 +57,7 @@ const DisabledPlainButton = BasePlainButton.extend.attrs({
   disabled: true,
 })`
   &, &:hover, &:focus {
-    color: var(--color-secondary);
+    color: ${props => props.theme.colorSecondary};
     cursor: not-allowed;
   }
 `

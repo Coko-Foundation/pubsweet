@@ -5,19 +5,22 @@ import PropTypes from 'prop-types'
 import TextField from '../atoms/TextField'
 
 const Root = styled.div`
-  width: calc(var(--grid-unit) * 14);
-  margin-bottom: ${props => (props.inline ? '0' : 'var(--grid-unit)')};
+  width: calc(${props => props.theme.gridUnit} * 14);
+  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Value = styled.div`
-  padding: calc(var(--grid-unit) / 2 - var(--border-width))
-    calc(var(--grid-unit) / 2);
-  border: var(--border-width) var(--border-style) transparent;
-  border-radius: var(--border-radius);
+  padding: calc(
+      ${props => props.theme.gridUnit} / 2 - ${props => props.theme.borderWidth}
+    )
+    calc(${props => props.theme.gridUnit} / 2);
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} transparent;
+  border-radius: ${props => props.theme.borderRadius};
   cursor: pointer;
 
   &:hover {
-    border-color: var(--color-secondary);
+    border-color: ${props => props.theme.colorSecondary};
   }
 `
 

@@ -9,7 +9,7 @@ const Root = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(${props => props.theme.gridUnit} * 2);
 `
 
 const Section = styled.div`
@@ -17,17 +17,18 @@ const Section = styled.div`
 `
 
 const Logo = styled.span`
-  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2)
-    1rem;
+  margin: calc(${props => props.theme.subGridUnit} * 2) 1rem
+    calc(${props => props.theme.subGridUnit} * 2) 1rem;
   & svg {
-    height: calc(var(--grid-unit) * 2);
+    height: calc(${props => props.theme.gridUnit} * 2);
   }
 `
 
 const Item = styled.span`
   align-items: center;
   display: inline-flex;
-  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+  margin: calc(${props => props.theme.gridUnit} * 1) 1rem
+    calc(${props => props.theme.gridUnit} * 1) 1rem;
 `
 
 const AppBar = ({

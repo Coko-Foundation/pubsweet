@@ -7,11 +7,11 @@ import Colorize from './Colorize'
 
 const Container = styled.span`
   display: inline-flex;
-  padding: calc(var(--sub-grid-unit) / 2);
+  padding: calc(${props => props.theme.subGridUnit} / 2);
   svg {
-    stroke: ${props => props.color};
-    width: calc(${props => props.size} * var(--sub-grid-unit));
-    height: calc(${props => props.size} * var(--sub-grid-unit));
+    stroke: ${props => props.color || props.theme.colorText};
+    width: calc(${props => props.size} * ${props => props.theme.subGridUnit});
+    height: calc(${props => props.size} * ${props => props.theme.subGridUnit});
   }
 `
 

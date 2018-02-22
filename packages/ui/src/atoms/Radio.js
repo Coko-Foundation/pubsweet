@@ -8,18 +8,18 @@ const Input = styled.input`
 const PseudoInput = styled.span`
   display: inline-block;
   content: ' ';
-  width: calc(var(--sub-grid-unit) * 2);
-  height: calc(var(--sub-grid-unit) * 2);
+  width: calc(${props => props.theme.subGridUnit} * 2);
+  height: calc(${props => props.theme.subGridUnit} * 2);
   vertical-align: center;
-  margin-left: var(--sub-grid-unit);
-  margin-right: var(--sub-grid-unit);
+  margin-left: ${props => props.theme.subGridUnit};
+  margin-right: ${props => props.theme.subGridUnit};
 
   /* This is not a real border (box-shadow provides that), so not themed as such */
-  border: calc(var(--sub-grid-unit) / 4) solid white;
+  border: calc(${props => props.theme.subGridUnit} / 4) solid white;
   border-radius: 50%;
 
-  transition: border var(--transition-duration-xs)
-    var(--transition-timing-function);
+  transition: border ${props => props.theme.transitionDurationXs}
+    ${props => props.theme.transitionTimingFunction};
 
   color: ${props => props.color};
 `
@@ -27,7 +27,7 @@ const PseudoInput = styled.span`
 const Label = styled.span`
   display: inline-block;
   font-family: inherit;
-  font-size: var(--font-size-base);
+  font-size: ${props => props.theme.fontSizeBase};
   font-style: italic;
 `
 
@@ -50,29 +50,29 @@ const Root = styled.label`
   align-items: center;
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  transition: all var(--transition-duration);
-  min-height: var(--grid-unit);
+  transition: all ${props => props.theme.transitionDuration};
+  min-height: ${props => props.theme.gridUnit};
 
   &:not(:last-child) {
-    margin-right: ${props => (props.inline ? 'var(--grid-unit)' : '0')};
+    margin-right: ${props => (props.inline ? props.theme.gridUnit : '0')};
     margin-bottom: 0;
   }
 
   ${PseudoInput} {
     background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    box-shadow: 0 0 0 var(--border-width) currentcolor;
+    box-shadow: 0 0 0 ${props => props.theme.borderWidth} currentcolor;
   }
 
   &:hover {
     ${Label} {
-      color: ${props => (props.checked ? 'inherit' : 'var(--color-primary)')};
+      color: ${props => (props.checked ? 'inherit' : props.theme.colorPrimary)};
     }
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: var(--transition-duration-s);
-      box-shadow: 0 0 0 var(--border-width)
-        ${props => (props.checked ? 'currentcolor' : 'var(--color-primary)')};
+      animation-duration: ${props => props.theme.transitionDurationS};
+      box-shadow: 0 0 0 ${props => props.theme.borderWidth}
+        ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
   }
   color: ${props => props.color};
@@ -80,7 +80,7 @@ const Root = styled.label`
 
 /* Not used for now
 .root.author {
-  font-family: var(--font-author);
+  font-family: ${props => props.theme.fontAuthor};
 }
 
 .root.author span {
