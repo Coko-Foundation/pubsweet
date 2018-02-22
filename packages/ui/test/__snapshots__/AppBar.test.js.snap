@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
+.c3 {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -17,11 +22,6 @@ exports[`AppBar Basic display 1`] = `
   min-height: calc(var(--grid-unit) * 2);
 }
 
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -30,19 +30,14 @@ exports[`AppBar Basic display 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: bold;
-  text-decoration: none;
+  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
 }
 
-.c2 > * {
-  max-height: calc(var(--grid-unit) * 2);
+.c2 svg {
+  height: calc(var(--grid-unit) * 2);
 }
 
-.c3 {
+.c4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -51,11 +46,7 @@ exports[`AppBar Basic display 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
+  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
 }
 
 <nav
@@ -64,30 +55,38 @@ exports[`AppBar Basic display 1`] = `
   <div
     className="c1"
   >
-    <a
+    <span
       className="c2"
-      href="/"
-      onClick={[Function]}
     >
-      some brand
-    </a>
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
   </div>
   <div
     className="c1"
   >
-    <a
-      className="c3"
-      href="/login"
-      onClick={[Function]}
+    <span
+      className="c4"
     >
-      Login
-    </a>
+      <a
+        className="c3"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
   </div>
 </nav>
 `;
 
 exports[`AppBar With admin user 1`] = `
-.c4 {
+.c5 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -95,10 +94,15 @@ exports[`AppBar With admin user 1`] = `
   padding: calc(var(--sub-grid-unit) / 2);
 }
 
-.c4 svg {
+.c5 svg {
   stroke: var(--color-text);
   width: calc(2 * var(--sub-grid-unit));
   height: calc(2 * var(--sub-grid-unit));
+}
+
+.c3 {
+  color: var(--color-primary);
+  cursor: pointer;
 }
 
 .c0 {
@@ -117,11 +121,6 @@ exports[`AppBar With admin user 1`] = `
   min-height: calc(var(--grid-unit) * 2);
 }
 
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -130,19 +129,14 @@ exports[`AppBar With admin user 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: bold;
-  text-decoration: none;
+  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
 }
 
-.c2 > * {
-  max-height: calc(var(--grid-unit) * 2);
+.c2 svg {
+  height: calc(var(--grid-unit) * 2);
 }
 
-.c3 {
+.c4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -151,27 +145,7 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c5 svg {
-  margin-right: 0.3rem;
+  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
 }
 
 <nav
@@ -180,22 +154,26 @@ exports[`AppBar With admin user 1`] = `
   <div
     className="c1"
   >
-    <a
+    <span
       className="c2"
-      href="/"
-      onClick={[Function]}
     >
-      some brand
-    </a>
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
   </div>
   <div
     className="c1"
   >
     <span
-      className="c3"
+      className="c4"
     >
       <span
-        className="c4"
+        className="c5"
         color="var(--color-text)"
         size={2}
       >
@@ -223,45 +201,54 @@ exports[`AppBar With admin user 1`] = `
       some user
        (admin)
     </span>
-    <a
-      className="c5"
-      href="#"
-      onClick={[Function]}
+    <span
+      className="c4"
     >
-      <span
-        className="c4"
-        color="var(--color-text)"
-        size={2}
+      <a
+        className="c3"
+        href="#"
+        onClick={[Function]}
       >
-        <svg
-          fill="none"
-          height={undefined}
-          stroke={undefined}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          width={undefined}
-          xmlns="http://www.w3.org/2000/svg"
+        <span
+          className="c5"
+          color="var(--color-text)"
+          size={2}
         >
-          <path
-            d="M18.36 6.64a9 9 0 1 1-12.73 0"
-          />
-          <line
-            x1="12"
-            x2="12"
-            y1="2"
-            y2="12"
-          />
-        </svg>
-      </span>
-      Logout
-    </a>
+          <svg
+            fill="none"
+            height={undefined}
+            stroke={undefined}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            width={undefined}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18.36 6.64a9 9 0 1 1-12.73 0"
+            />
+            <line
+              x1="12"
+              x2="12"
+              y1="2"
+              y2="12"
+            />
+          </svg>
+        </span>
+        Logout
+      </a>
+    </span>
   </div>
 </nav>
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
+.c3 {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -278,11 +265,6 @@ exports[`AppBar With custom brand and login links 1`] = `
   min-height: calc(var(--grid-unit) * 2);
 }
 
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -291,122 +273,11 @@ exports[`AppBar With custom brand and login links 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: bold;
-  text-decoration: none;
+  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
 }
 
-.c2 > * {
-  max-height: calc(var(--grid-unit) * 2);
-}
-
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
-}
-
-<nav
-  className="c0"
->
-  <div
-    className="c1"
-  >
-    <a
-      className="c2"
-      href="/home"
-      onClick={[Function]}
-    >
-      some brand
-    </a>
-  </div>
-  <div
-    className="c1"
-  >
-    <a
-      className="c3"
-      href="/signin"
-      onClick={[Function]}
-    >
-      Login
-    </a>
-  </div>
-</nav>
-`;
-
-exports[`AppBar With nav links 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
-}
-
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0 1rem;
-}
-
-.c3 a {
-  padding: 0 1rem;
-}
-
-.c3 a:global(.active) {
-  font-weight: bold;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.c2 > * {
-  max-height: calc(var(--grid-unit) * 2);
+.c2 svg {
+  height: calc(var(--grid-unit) * 2);
 }
 
 .c4 {
@@ -418,11 +289,7 @@ exports[`AppBar With nav links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c4 svg {
-  margin-right: 0.3rem;
+  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
 }
 
 <nav
@@ -431,31 +298,117 @@ exports[`AppBar With nav links 1`] = `
   <div
     className="c1"
   >
-    <a
+    <span
       className="c2"
-      href="/"
-      onClick={[Function]}
     >
-      some brand
-    </a>
-    <div
-      className="c3"
-    >
-      <div>
-        Links!
-      </div>
-    </div>
+      <a
+        className="c3"
+        href="/home"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
   </div>
   <div
     className="c1"
   >
-    <a
+    <span
       className="c4"
-      href="/login"
-      onClick={[Function]}
     >
-      Login
-    </a>
+      <a
+        className="c3"
+        href="/signin"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
+  </div>
+</nav>
+`;
+
+exports[`AppBar With nav links 1`] = `
+.c3 {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: calc(var(--grid-unit) * 2);
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
+}
+
+.c2 svg {
+  height: calc(var(--grid-unit) * 2);
+}
+
+.c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+}
+
+<nav
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <span
+      className="c2"
+    >
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
+  </div>
+  <div
+    className="c1"
+  >
+    <span
+      className="c4"
+    >
+      <a
+        className="c3"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
   </div>
 </nav>
 `;

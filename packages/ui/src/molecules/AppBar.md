@@ -28,10 +28,9 @@ Can optionally pass navigation links or image for brand.
       <circle cx="-70" cy="150" fill="green" r="100" />
     </svg>
   }
-  navLinks={
-    <div>
-      <a href="">Home</a> | <a href="">About</a>
-    </div>
-  }
+  navLinkComponents={[
+    <Link to="/home">Home</Link>,
+    <Link to="/about">About</Link>,
+  ]}
 />
 ```

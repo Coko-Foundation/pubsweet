@@ -17,6 +17,7 @@ module.exports = {
     '**/packages/InkBackend/**',
     '**/packages/PasswordResetBackend/**',
     '**/packages/MediumDraft/CustomImageSideButton.jsx',
+    '**/packages/FormGroup/FormGroup.jsx',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],
