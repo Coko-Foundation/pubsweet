@@ -21,6 +21,7 @@ Can optionally pass navigation links or image for brand.
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-220 -50 440 300"
+      width="64"
       fillOpacity="0.5"
     >
       <circle cx="0" cy="50" fill="red" r="100" />

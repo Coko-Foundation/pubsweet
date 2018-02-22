@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Link as UnstyledLink } from 'react-router-dom'
 
 const Link = styled(UnstyledLink)`
-  color: var(--color-primary);
+  color: ${props => props.theme.colorPrimary};
   cursor: pointer;
 `
 

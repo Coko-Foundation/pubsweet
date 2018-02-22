@@ -1,60 +1,57 @@
 /* eslint-disable import/extensions */
-import { injectGlobal } from 'styled-components'
-
 import 'typeface-noto-sans'
 import 'typeface-noto-serif'
 import 'typeface-ubuntu-mono'
 
-injectGlobal`
-:root {
+export default {
   /* Colors */
-  --color-background: white;
-  --color-primary: #205d86;
-  --color-secondary: #e7e7e7;
-  --color-quiet: #aaa;
-  --color-furniture: #ccc;
-  --color-border: #aaa;
-  --color-background-hue: #f1f1f1; /* marginally darker shade of the app background so that it can be used to divide the interface when needed */
-  --color-success: #050;
-  --color-error: #b50000;
-  --color-warning: #ffcc00;
-  --color-text: #333;
-  --color-text-reverse: #fff;
-  --color-text-placeholder: #595959;
+  colorBackground: 'white',
+  colorPrimary: '#205d86',
+  colorSecondary: '#e7e7e7',
+  colorQuiet: '#aaa',
+  colorFurniture: '#ccc',
+  colorBorder: '#aaa',
+  colorBackgroundHue:
+    '#f1f1f1' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
+  colorSuccess: '#050',
+  colorError: '#b50000',
+  colorWarning: '#ffcc00',
+  colorText: '#333',
+  colorTextReverse: '#fff',
+  colorTextPlaceholder: '#595959',
 
   /* Text variables */
-  --font-interface: 'Noto Sans';
-  --font-heading: 'Noto Sans';
-  --font-reading: 'Noto Serif';
-  --font-writing: 'Ubuntu mono';
-  --font-size-base: 18px;
-  --font-size-base-small: 16px;
-  --font-size-heading-1: 36px;
-  --font-size-heading-2: 32px;
-  --font-size-heading-3: 29px;
-  --font-size-heading-4: 26px;
-  --font-size-heading-5: 23px;
-  --font-size-heading-6: 20px;
-  --font-line-height: 32px;
+  fontInterface: "'Noto Sans'",
+  fontHeading: "'Noto Sans'",
+  fontReading: "'Noto Serif'",
+  fontWriting: "'Ubuntu mono'",
+  fontSizeBase: '18px',
+  fontSizeBaseSmall: '16px',
+  fontSizeHeading1: '36px',
+  fontSizeHeading2: '32px',
+  fontSizeHeading3: '29px',
+  fontSizeHeading4: '26px',
+  fontSizeHeading5: '23px',
+  fontSizeHeading6: '20px',
+  fontLineHeight: '32px',
 
   /* Spacing */
-  --grid-unit: 32px;
-  --sub-grid-unit: calc(var(--grid-unit) / 4 );;
+  gridUnit: '32px',
+  subGridUnit: '8px',
 
   /* Border */
-  --border-radius: 8px;
-  --border-width: 1px;
-  --border-style: solid;
+  borderRadius: '8px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
 
   /* Shadow (for tooltip) */
-  --box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.3);
+  boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
 
   /* Transition */
-  --transition-duration: 1s;
-  --transition-duration-m: calc(var(--transition-duration) / 2 );
-  --transition-duration-s: calc(var(--transition-duration) / 5 );
-  --transition-duration-xs: calc(var(--transition-duration) / 10 );
-  --transition-timing-function: ease;
-  --transition-delay: 500ms;
+  transitionDuration: '1s',
+  transitionDurationM: '0.5s',
+  transitionDurationS: '0.2s',
+  transitionDurationXs: '0.1s',
+  transitionTimingFunction: 'ease',
+  transitionDelay: '500ms',
 }
-`

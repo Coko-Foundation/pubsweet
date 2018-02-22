@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ErrorText = styled.div`
-  color: var(--color-error);
+  color: ${props => props.theme.colorError};
 `
 
 /**

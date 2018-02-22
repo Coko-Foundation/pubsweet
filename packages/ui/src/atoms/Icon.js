@@ -5,15 +5,16 @@ import styled from 'styled-components'
 
 const Container = styled.span`
   display: inline-flex;
-  padding: calc(var(--sub-grid-unit) / 2);
+  padding: calc(${props => props.theme.subGridUnit} / 2);
   svg {
-    stroke: ${props => props.color};
-    width: calc(${props => props.size} * var(--sub-grid-unit));
-    height: calc(${props => props.size} * var(--sub-grid-unit));
+    stroke: ${props => props.color || props.theme.colorText};
+    width: calc(${props => props.size} * ${props => props.theme.subGridUnit});
+    height: calc(${props => props.size} * ${props => props.theme.subGridUnit});
   }
 `
 
-const Icon = ({ children, color = 'var(--color-text)', size = 3 }) => {
+const Icon = ({ children, color, size = 3 }) => {
+  // color = color || theme.colorText
   // convert `arrow_left` to `ArrowLeft`
   const name = pascalize(children)
 

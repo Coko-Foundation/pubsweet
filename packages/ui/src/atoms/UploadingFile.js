@@ -2,62 +2,65 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Icon = styled.div`
-  background: var(--color-furniture);
-  height: calc(var(--sub-grid-unit) * 15);
-  margin-bottom: var(--sub-grid-unit);
+  background: ${props => props.theme.colorFurniture};
+  height: calc(${props => props.theme.subGridUnit} * 15);
+  margin-bottom: ${props => props.theme.subGridUnit};
   opacity: 0.5;
   position: relative;
-  width: calc(var(--grid-unit) * 3);
+  width: calc(${props => props.theme.gridUnit} * 3);
 `
 
 const Progress = styled.div`
-  color: var(--color-text-reverse);
+  color: ${props => props.theme.colorTextReverse};
   display: block;
   position: absolute;
-  bottom: var(--sub-grid-unit);
-  left: calc(var(--sub-grid-unit) * 4);
+  bottom: ${props => props.theme.subGridUnit};
+  left: calc(${props => props.theme.subGridUnit} * 4);
 `
 
 const Extension = styled.div`
-  background: var(--color-text);
-  color: var(--color-text-reverse);
-  font-size: var(--font-size-base-small);
-  left: calc(var(--sub-grid-unit) * 2);
+  background: ${props => props.theme.colorText};
+  color: ${props => props.theme.colorTextReverse};
+  font-size: ${props => props.theme.fontSizeBaseSmall};
+  left: calc(${props => props.theme.subGridUnit} * 2);
   position: absolute;
   right: 0;
   text-align: center;
   text-transform: uppercase;
-  top: calc(var(--sub-grid-unit) * 2);
+  top: calc(${props => props.theme.subGridUnit} * 2);
 `
 
 const Filename = styled.div`
-  color: var(--color-text);
-  font-size: var(--font-size-base-small);
+  color: ${props => props.theme.colorText};
+  font-size: ${props => props.theme.fontSizeBaseSmall};
   font-style: italic;
-  max-width: calc(var(--grid-unit) * 10);
+  max-width: calc(${props => props.theme.gridUnit} * 10);
 `
 
 const Uploading = styled.div`
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: var(--grid-unit);
-  margin-right: calc(var(--sub-grid-unit) * 3);
+  margin-bottom: ${props => props.theme.gridUnit};
+  margin-right: calc(${props => props.theme.subGridUnit} * 3);
   position: relative;
-  width: calc(var(--grid-unit) * 10);
+  width: calc(${props => props.theme.gridUnit} * 10);
 `
 
 const Uploaded = Uploading.extend`
   &::before,
   &::after {
     cursor: pointer;
-    transition: transform var(--transition-duration-s);
-    font-size: var(--font-size-base-small);
+    transition: transform ${props => props.theme.transitionDurationS};
+    font-size: ${props => props.theme.fontSizeBaseSmall};
     left: 65%;
-    padding: 0 var(--sub-grid-unit) 0 var(--sub-grid-unit);
+    padding: 0 ${props => props.theme.subGridUnit} 0
+      ${props => props.theme.subGridUnit};
     position: absolute;
-    border: var(--border-width) var(--border-style) var(--color-text-reverse);
-    color: var(--color-text-reverse);
+    border: ${props => props.theme.borderWidth}
+      ${props => props.theme.borderStyle}
+      ${props => props.theme.colorTextReverse};
+    color: ${props => props.theme.colorTextReverse};
     text-transform: uppercase;
     cursor: pointer;
     transform: scaleX(0);
@@ -65,27 +68,27 @@ const Uploaded = Uploading.extend`
   }
 
   &::after {
-    background: var(--color-error);
+    background: ${props => props.theme.colorError};
     content: 'Remove';
-    top: calc(var(--sub-grid-unit) * 5);
+    top: calc(${props => props.theme.subGridUnit} * 5);
     z-index: 2;
   }
 
   &::before {
-    background: var(--color-primary);
+    background: ${props => props.theme.colorPrimary};
     content: 'Replace';
-    top: calc(var(--sub-grid-unit) * 10);
+    top: calc(${props => props.theme.subGridUnit} * 10);
     z-index: 3;
   }
 
   &:hover ${Extension} {
-    background: var(--color-text-reverse);
-    color: var(--color-primary);
+    background: ${props => props.theme.colorTextReverse};
+    color: ${props => props.theme.colorPrimary};
   }
 
   &:hover ${Icon} {
     opacity: 1;
-    background: var(--color-primary);
+    background: ${props => props.theme.colorPrimary};
     transform: skewY(6deg) rotate(-6deg);
   }
 
@@ -96,14 +99,15 @@ const Uploaded = Uploading.extend`
 `
 
 const ErrorWrapper = styled.div`
-  background: var(--color-error);
-  border: calc(var(--border-width) * 2) var(--border-style)
-    var(--color-text-reverse);
-  color: var(--color-text-reverse);
-  font-size: var(--font-size-base-small);
+  background: ${props => props.theme.colorError};
+  border: calc(${props => props.theme.borderWidth} * 2)
+    ${props => props.theme.borderStyle} ${props => props.theme.colorTextReverse};
+  color: ${props => props.theme.colorTextReverse};
+  font-size: ${props => props.theme.fontSizeBaseSmall};
   letter-spacing: 0.01em;
   opacity: 1;
-  padding: var(--sub-grid-unit) var(--sub-grid-unit);
+  padding: ${props => props.theme.subGridUnit}
+    ${props => props.theme.subGridUnit};
   position: absolute;
   top: 25%;
   z-index: 4;

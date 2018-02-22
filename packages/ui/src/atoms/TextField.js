@@ -4,35 +4,37 @@ import styled from 'styled-components'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: ${props => (props.inline ? '0' : 'var(--grid-unit)')};
+  max-width: calc(${props => props.theme.gridUnit} * 14);
+  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: var(--font-size-base-small);
+  font-size: ${props => props.theme.fontSizeBaseSmall};
   display: block;
 `
 
-const Input = styled.input`
-  border: var(--border-width) var(--border-style)
-    ${({ validationStatus = 'default' }) =>
-      ({
-        error: 'var(--color-error)',
-        success: 'var(--color-success)',
-        warning: 'var(--color-warning)',
-        default: 'var(--color-border)',
-      }[validationStatus])};
+const borderColor = ({ theme, validationStatus = 'default' }) =>
+  ({
+    error: theme.colorError,
+    success: theme.colorSuccess,
+    warning: theme.colorWarning,
+    default: theme.colorBorder,
+  }[validationStatus])
 
-  border-radius: var(--border-radius);
+const Input = styled.input`
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} ${borderColor};
+
+  border-radius: ${props => props.theme.borderRadius};
 
   font-family: inherit;
   font-size: inherit;
 
-  padding: 0 calc(var(--grid-unit) / 2);
-  height: calc(var(--grid-unit) * 2);
+  padding: 0 calc(${props => props.theme.gridUnit} / 2);
+  height: calc(${props => props.theme.gridUnit} * 2);
 
   &::placeholder {
-    color: var(--color-text-placeholder);
+    color: ${props => props.theme.colorTextPlaceholder};
   }
 `
 

@@ -8,10 +8,10 @@ const Root = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(${props => props.theme.gridUnit} * 2);
 
   a {
-    color: var(--color-primary);
+    color: ${props => props.theme.colorPrimary};
     text-decoration: none;
   }
 `
@@ -39,8 +39,8 @@ const Logo = styled(Link)`
   font-weight: bold;
   text-decoration: none;
 
-  & > * {
-    max-height: calc(var(--grid-unit) * 2);
+  * {
+    max-height: calc(${props => props.theme.gridUnit} * 2);
   }
 `
 

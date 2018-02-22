@@ -7,12 +7,12 @@ import styled from 'styled-components'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: ${props => (props.inline ? '0' : 'var(--grid-unit)')};
+  max-width: calc(${props => props.theme.gridUnit} * 14);
+  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: var(--font-size-base-small);
+  font-size: ${props => props.theme.fontSizeBaseSmall};
   display: block;
 `
 
@@ -20,20 +20,21 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} ${props => props.theme.colorBorder};
+  border-radius: ${props => props.theme.borderRadius};
   cursor: pointer;
   font-family: inherit;
 
   width: 100%;
-  height: calc(var(--grid-unit) * 2);
+  height: calc(${props => props.theme.gridUnit} * 2);
   padding: 0;
 
   display: flex;
   align-items: center;
 
   &:hover {
-    border-color: var(--color-primary);
+    border-color: ${props => props.theme.colorPrimary};
   }
 `
 
@@ -41,23 +42,27 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(var(--grid-unit) / 2);
+  padding: 0 calc(${props => props.theme.gridUnit} / 2);
 
   &:hover {
-    color: var(--color-primary);
+    color: ${props => props.theme.colorPrimary};
   }
 `
 
 const Placeholder = Value.extend`
-  color: var(--color-text-placeholder);
+  color: ${props => props.theme.colorTextPlaceholder};
   font-style: italic;
 `
 
 const ArrowContainer = styled.span`
-  border-left: var(--border-width) var(--border-style) var(--color-furniture);
+  border-left: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} ${props => props.theme.colorFurniture};
 
-  width: calc(var(--grid-unit) * 2);
-  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
+  width: calc(${props => props.theme.gridUnit} * 2);
+  height: calc(
+    ${props => props.theme.gridUnit} * 2 - ${props => props.theme.borderWidth} *
+      2
+  );
 
   display: flex;
   align-items: center;
@@ -88,9 +93,10 @@ const Options = styled.div`
   left: 0;
   right: 0;
 
-  background-color: var(--color-background);
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  background-color: ${props => props.theme.colorBackground};
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} ${props => props.theme.colorBorder};
+  border-radius: ${props => props.theme.borderRadius};
   overflow: hidden;
 `
 
@@ -99,27 +105,32 @@ const Option = styled.div.attrs({
   tabIndex: '0',
   'aria-selected': props => props.active,
 })`
-  color: ${props => (props.active ? 'var(--text-color)' : '#444')};
+  color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: var(--font-author);
-  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2)
-    calc(var(--sub-grid-unit) * 2);
-  border: var(--border-width) var(--border-style) transparent;
-  border-width: var(--border-width) 0 var(--border-width) 0;
+  font-family: ${props => props.theme.fontAuthor};
+  padding: calc(
+      ${props => props.theme.subGridUnit} - ${props => props.theme.borderWidth} *
+        2
+    )
+    calc(${props => props.theme.subGridUnit} * 2);
+  border: ${props => props.theme.borderWidth}
+    ${props => props.theme.borderStyle} transparent;
+  border-width: ${props => props.theme.borderWidth} 0
+    ${props => props.theme.borderWidth} 0;
   white-space: nowrap;
 
   &:hover {
-    background: var(--color-background-hue);
-    border-color: var(--color-border);
+    background: ${props => props.theme.colorBackgroundHue};
+    border-color: ${props => props.theme.colorBorder};
   }
 
   &:first-child:hover {
-    border-top-color: var(--color-background-hue);
+    border-top-color: ${props => props.theme.colorBackgroundHue};
   }
 
   &:last-child:hover {
-    border-bottom-color: var(--color-background-hue);
+    border-bottom-color: ${props => props.theme.colorBackgroundHue};
   }
 `
 

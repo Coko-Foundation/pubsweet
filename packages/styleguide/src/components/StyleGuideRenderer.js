@@ -1,38 +1,41 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import { Button } from '@pubsweet/ui'
-import injectNormalizeCss from 'pubsweet-client/src/helpers/inject-normalize-css'
-import '@pubsweet/default-theme'
+import StyleRoot, {
+  injectGlobalStyles,
+} from 'pubsweet-client/src/helpers/StyleRoot'
+import theme from '@pubsweet/default-theme'
 
-injectNormalizeCss()
+injectGlobalStyles()
 
-const grid = `
-div[data-preview] {
-  --a-dark: rgba(255, 0, 0, 0.2);
-  --a-light: rgba(255, 69, 69, 0.1);
-  --b-dark: rgba(0, 121, 253, 0.2);
-  --b-light: rgba(68, 158, 255, 0.1);
+const aDark = 'rgba(255, 0, 0, 0.2)'
+const aLight = 'rgba(255, 69, 69, 0.1)'
+const bDark = 'rgba(0, 121, 253, 0.2)'
+const bLight = 'rgba(68, 158, 255, 0.1)'
 
-  background-image: repeating-linear-gradient( to bottom, 
-    var(--a-dark),
-    var(--a-dark) var(--sub-grid-unit),
-    var(--a-light) var(--sub-grid-unit),
-    var(--a-light) calc(2 * var(--sub-grid-unit)),
-    var(--b-dark) calc(2 * var(--sub-grid-unit)),
-    var(--b-dark) calc(3 * var(--sub-grid-unit)),
-    var(--b-light) calc(3 * var(--sub-grid-unit)),
-    var(--b-light) calc(4 * var(--sub-grid-unit)),
-    var(--b-dark) calc(4 * var(--sub-grid-unit)),
-    var(--b-dark) calc(5 * var(--sub-grid-unit)),
-    var(--b-light) calc(5 * var(--sub-grid-unit)),
-    var(--b-light) calc(6 * var(--sub-grid-unit)),
-    var(--a-dark) calc(6 * var(--sub-grid-unit)),
-    var(--a-dark) calc(7 * var(--sub-grid-unit)),
-    var(--a-light) calc(7 * var(--sub-grid-unit)),
-    var(--a-light) calc(8 * var(--sub-grid-unit))
-  );
-  border-color: white;
-}
+const grid = css`
+  div[data-preview] {
+    background-image: ${props => `repeating-linear-gradient( to bottom,
+    ${aDark},
+    ${aDark} ${props.theme.subGridUnit},
+    ${aLight} ${props.theme.subGridUnit},
+    ${aLight} calc(2 * ${props.theme.subGridUnit}),
+    ${bDark} calc(2 * ${props.theme.subGridUnit}),
+    ${bDark} calc(3 * ${props.theme.subGridUnit}),
+    ${bLight} calc(3 * ${props.theme.subGridUnit}),
+    ${bLight} calc(4 * ${props.theme.subGridUnit}),
+    ${bDark} calc(4 * ${props.theme.subGridUnit}),
+    ${bDark} calc(5 * ${props.theme.subGridUnit}),
+    ${bLight} calc(5 * ${props.theme.subGridUnit}),
+    ${bLight} calc(6 * ${props.theme.subGridUnit}),
+    ${aDark} calc(6 * ${props.theme.subGridUnit}),
+    ${aDark} calc(7 * ${props.theme.subGridUnit}),
+    ${aLight} calc(7 * ${props.theme.subGridUnit}),
+    ${aLight} calc(8 * ${props.theme.subGridUnit})
+  )`};
+
+    border-color: white;
+  }
 `
 
 const Root = styled.div`
@@ -55,8 +58,8 @@ const Header = styled.header`
 `
 
 const Title = styled.h1`
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1rem;
+  font-family: ${props => props.theme.fontInterface};
+  font-size: ${props => props.theme.fontSizeBase};
   margin-bottom: 0;
   padding: 0 1rem;
 `
@@ -66,7 +69,7 @@ const Content = styled.div`
   overflow-y: auto;
   padding: 1rem;
   *[data-preview] {
-    padding: calc(var(--grid-unit) / 2);
+    padding: calc(${props => props.theme.gridUnit} / 2);
   }
   ${props => props.grid && grid};
 `
@@ -77,8 +80,12 @@ const Nav = styled.nav`
   padding: 0.5rem;
 `
 const NarrowButton = styled(Button)`
-  margin: 0 calc(var(--sub-grid-unit) * 6) var(--sub-grid-unit)
-    calc(var(--sub-grid-unit) * 4);
+  margin: ${props => `
+    0
+    calc(${props.theme.subGridUnit} * 6)
+    ${props.theme.subGridUnit}
+    calc(${props.theme.subGridUnit} * 4)
+  `};
 `
 
 class StyleGuideRenderer extends React.Component {
@@ -95,16 +102,20 @@ class StyleGuideRenderer extends React.Component {
     )
 
     return (
-      <Root>
-        <Sidebar>
-          <Header>
-            <Title>{title}</Title>
-          </Header>
-          <GridToggle />
-          <Nav>{toc}</Nav>
-        </Sidebar>
-        <Content grid={this.state.grid}>{children}</Content>
-      </Root>
+      <ThemeProvider theme={theme}>
+        <StyleRoot>
+          <Root>
+            <Sidebar>
+              <Header>
+                <Title>{title}</Title>
+              </Header>
+              <GridToggle />
+              <Nav>{toc}</Nav>
+            </Sidebar>
+            <Content grid={this.state.grid}>{children}</Content>
+          </Root>
+        </StyleRoot>
+      </ThemeProvider>
     )
   }
 }

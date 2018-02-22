@@ -6,24 +6,24 @@ import styled from 'styled-components'
 // TODO: pass ...props.input to children automatically?
 
 const MessageWrapper = styled.div`
-  font-family: var(--font-interface);
+  font-family: ${props => props.theme.fontInterface};
   display: block;
-  margin-top: calc(var(--grid-unit) * -1);
+  margin-top: calc(${props => props.theme.gridUnit} * -1);
 `
 
 const Message = styled.div`
   &:not(:last-child) {
-    margin-bottom: var(--sub-grid-unit);
+    margin-bottom: ${props => props.theme.subGridUnit};
   }
-  font-size: var(--font-size-base-small);
+  font-size: ${props => props.theme.fontSizeBaseSmall};
 `
 
 const ErrorMessage = Message.extend`
-  color: var(--color-error);
+  color: ${props => props.theme.colorError};
 `
 
 const WarningMessage = Message.extend`
-  color: var(--color-warning);
+  color: ${props => props.theme.colorWarning};
 `
 
 const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {
