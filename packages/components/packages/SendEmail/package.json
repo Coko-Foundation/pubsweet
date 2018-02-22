@@ -1,7 +1,7 @@
 {
-  "name": "@pubsweet/component-aws-ses",
+  "name": "@pubsweet/component-send-email",
   "version": "0.2.0",
-  "description": "aws ses configured for pubsweet",
+  "description": "send email configured for pubsweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
   "files": ["src"],
@@ -11,13 +11,12 @@
     "nodemailer": "^4.4.2"
   },
   "peerDependencies": {
-    "@pubsweet/logger": "^0.0.1",
-    "pubsweet-server": "^1.0.1"
+    "@pubsweet/logger": "^0.0.1"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "AWSSES"
+    "path": "SendEmail"
   },
   "publishConfig": {
     "access": "public"
