@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-components",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "styleguide": "styleguidist server",
@@ -27,9 +27,9 @@
     "joi-browser": "^13.0.1",
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
-    "pubsweet": "^1.1.9",
+    "pubsweet": "^2.0.0",
     "pubsweet-client": "^2.1.1",
-    "pubsweet-server": "^1.1.1",
+    "pubsweet-server": "^2.0.0",
     "pubsweet-theme-plugin": "^0.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -50,8 +50,13 @@
     "moduleNameMapper": {
       "\\.s?css$": "identity-obj-proxy"
     },
-    "transformIgnorePatterns": ["/node_modules/(?!@?pubsweet)"],
-    "testPathIgnorePatterns": ["/node_modules", "config/"],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@?pubsweet)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules",
+      "config/"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   }
 }
