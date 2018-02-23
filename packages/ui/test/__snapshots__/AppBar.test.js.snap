@@ -96,8 +96,8 @@ exports[`AppBar With admin user 1`] = `
 
 .c5 svg {
   stroke: var(--color-text);
-  width: calc(2 * var(--sub-grid-unit));
-  height: calc(2 * var(--sub-grid-unit));
+  width: calc(3 * var(--sub-grid-unit));
+  height: calc(3 * var(--sub-grid-unit));
 }
 
 .c3 {
@@ -175,7 +175,7 @@ exports[`AppBar With admin user 1`] = `
       <span
         className="c5"
         color="var(--color-text)"
-        size={2}
+        size={3}
       >
         <svg
           fill="none"
@@ -212,7 +212,7 @@ exports[`AppBar With admin user 1`] = `
         <span
           className="c5"
           color="var(--color-text)"
-          size={2}
+          size={3}
         >
           <svg
             fill="none"
