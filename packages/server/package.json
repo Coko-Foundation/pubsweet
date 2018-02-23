@@ -38,16 +38,10 @@
     "passport-anonymous": "^1.0.1",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "pouchdb-adapter-http": "^6.2.0",
-    "pouchdb-adapter-leveldb": "^6.1.1",
-    "pouchdb-adapter-memory": "^6.1.1",
-    "pouchdb-core": "^6.1.1",
-    "pouchdb-find": "^0.10.3",
-    "pouchdb-upsert": "^2.0.0",
+    "pg": "^7.4.1",
     "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
     "pubsweet-sse": "^0.1.4",
-    "relational-pouch": "^1.4.5",
     "require-relative": "^0.8.7",
     "uuid": "^3.0.1",
     "winston": "^2.2.0"
@@ -55,6 +49,7 @@
   "devDependencies": {
     "eventsource": "^1.0.4",
     "jest-cli": "^22.1.4",
+    "jest-environment-db": "^0.1.0",
     "nsp": "^2.7.0",
     "supertest": "^2.0.0"
   },
@@ -63,11 +58,10 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "jest": {
-    "verbose": true,
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*_test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }

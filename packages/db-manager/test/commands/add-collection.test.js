@@ -1,15 +1,9 @@
-let User
-let Collection
-let addCollection
+const { addCollection, createTables } = require('../../src')
+const Collection = require('pubsweet-server/src/models/Collection')
+const User = require('pubsweet-server/src/models/User')
 
 describe('add-collection', () => {
-  beforeEach(async () => {
-    // need to reset modules to get fresh db because models hold a reference
-    jest.resetModules()
-    addCollection = require('../../src').addCollection
-    Collection = require('pubsweet-server/src/models/Collection')
-    User = require('pubsweet-server/src/models/User')
-  })
+  beforeEach(() => createTables(true))
 
   it('adds a collection to the database', async () => {
     await addCollection({})

@@ -4,6 +4,7 @@
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
+    "test": "jest",
     "vuln-test": "nsp check --output checkstyle"
   },
   "repository": {
@@ -20,13 +21,14 @@
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-db",
     "verbose": true
   },
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
     "jest": "^22.1.4",
+    "jest-environment-db": "^0.1.0",
     "nsp": "^2.8.0"
   },
   "dependencies": {
@@ -34,7 +36,7 @@
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
     "joi": "^13.1.0",
-    "pouchdb": "^6.3.4",
+    "pg": "^7.4.1",
     "pubsweet-server": "^1.1.1"
   }
 }

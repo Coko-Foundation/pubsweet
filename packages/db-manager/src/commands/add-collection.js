@@ -1,13 +1,13 @@
 const logger = require('@pubsweet/logger')
+const Collection = require('pubsweet-server/src/models/Collection')
+const User = require('pubsweet-server/src/models/User')
 
 module.exports = async collectionData => {
   logger.info('Creating collection')
 
-  const Collection = require('pubsweet-server/src/models/Collection')
-  const User = require('pubsweet-server/src/models/User')
-
-  const collection = new Collection(collectionData)
+  const collection = await new Collection(collectionData).save()
   const [user] = await User.all()
+
   if (user) collection.setOwners([user.id])
   await collection.save()
 

@@ -1,9 +1,10 @@
 const logger = require('@pubsweet/logger')
+const User = require('pubsweet-server/src/models/User')
+const Collection = require('pubsweet-server/src/models/Collection')
 const { validateUser } = require('../validations')
 
 const addAdminOwnerToAllCollections = async user => {
   logger.info('Adding admin owner to collections')
-  const Collection = require('pubsweet-server/src/models/Collection')
   const collections = await Collection.all()
 
   await Promise.all(
@@ -20,7 +21,6 @@ module.exports = async userData => {
   validateUser(userData)
 
   logger.info('Creating user', userData.username)
-  const User = require('pubsweet-server/src/models/User')
 
   const user = new User(userData)
   await user.save()

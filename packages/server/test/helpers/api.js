@@ -1,7 +1,6 @@
 const supertest = require('supertest')
 const app = require('../../src').configureApp(require('express')())
 const STATUS = require('http-status-codes')
-const isString = require('lodash/isString')
 const querystring = require('querystring')
 
 const COLLECTIONS_ROOT = '/api/collections/'
@@ -25,7 +24,8 @@ const fragments = {
     let url
 
     if (collection) {
-      const collectionId = isString(collection) ? collection : collection.id
+      const collectionId =
+        typeof collection === 'object' ? collection.id : collection
       url = `/api/collections/${collectionId}/fragments`
     } else {
       url = '/api/fragments'
@@ -223,7 +223,7 @@ const teams = {
   },
   list: (token, collection) => {
     const collectionId = () =>
-      isString(collection) ? collection : collection.id
+      typeof collection === 'object' ? collection.id : collection
     const collectionpart = collection ? `/collections/${collectionId()}` : ''
 
     const url = `/api${collectionpart}/teams`

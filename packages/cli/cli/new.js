@@ -4,6 +4,7 @@ const program = require('commander')
 const fs = require('fs-extra')
 const { spawnSync } = require('child_process')
 const path = require('path')
+const crypto = require('crypto')
 const { STARTER_REPO_URL } = require('../src/constants')
 
 const readCommand = async argsOverride => {
@@ -28,7 +29,7 @@ const readCommand = async argsOverride => {
 
 const overWrite = appPath => {
   if (!fs.statSync(appPath).isDirectory()) {
-    throw new Error(appPath, 'exists as a file. Will not overwrite.')
+    throw new Error(`${appPath} exists as a file. Will not overwrite.`)
   }
   logger.info(`Overwriting ${appPath} due to --clobber flag`)
   fs.removeSync(appPath)
@@ -54,6 +55,12 @@ module.exports = async argsOverride => {
     cwd: appPath,
     stdio: 'inherit',
   })
+
+  // generate secret
+  const configFilePath = path.join(appPath, 'config', `local.json`)
+  const secret = crypto.randomBytes(64).toString('hex')
+  fs.writeJsonSync(configFilePath, { secret })
+  logger.info(`Added secret to ${configFilePath} under pubsweet-server.secret`)
 
   logger.info('Finished generating initial app')
 }
