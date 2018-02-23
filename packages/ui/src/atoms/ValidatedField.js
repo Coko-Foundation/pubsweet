@@ -2,28 +2,29 @@ import React from 'react'
 import { compose, withHandlers } from 'recompose'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 
 // TODO: pass ...props.input to children automatically?
 
 const MessageWrapper = styled.div`
-  font-family: ${props => props.theme.fontInterface};
+  font-family: ${theme.fontInterface};
   display: block;
-  margin-top: calc(${props => props.theme.gridUnit} * -1);
+  margin-top: calc(${theme.gridUnit} * -1);
 `
 
 const Message = styled.div`
   &:not(:last-child) {
-    margin-bottom: ${props => props.theme.subGridUnit};
+    margin-bottom: ${theme.subGridUnit};
   }
-  font-size: ${props => props.theme.fontSizeBaseSmall};
+  font-size: ${theme.fontSizeBaseSmall};
 `
 
 const ErrorMessage = Message.extend`
-  color: ${props => props.theme.colorError};
+  color: ${theme.colorError};
 `
 
 const WarningMessage = Message.extend`
-  color: ${props => props.theme.colorWarning};
+  color: ${theme.colorWarning};
 `
 
 const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {

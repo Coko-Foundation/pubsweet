@@ -1,10 +1,10 @@
 import React from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button } from '@pubsweet/ui'
+import { Button, theme } from '@pubsweet/ui'
 import StyleRoot, {
   injectGlobalStyles,
 } from 'pubsweet-client/src/helpers/StyleRoot'
-import theme from '@pubsweet/default-theme'
+import defaultTheme from '@pubsweet/default-theme'
 
 injectGlobalStyles()
 
@@ -58,8 +58,8 @@ const Header = styled.header`
 `
 
 const Title = styled.h1`
-  font-family: ${props => props.theme.fontInterface};
-  font-size: ${props => props.theme.fontSizeBase};
+  font-family: ${theme.fontInterface};
+  font-size: ${theme.fontSizeBase};
   margin-bottom: 0;
   padding: 0 1rem;
 `
@@ -69,7 +69,7 @@ const Content = styled.div`
   overflow-y: auto;
   padding: 1rem;
   *[data-preview] {
-    padding: calc(${props => props.theme.gridUnit} / 2);
+    padding: calc(${theme.gridUnit} / 2);
   }
   ${props => props.grid && grid};
 `
@@ -102,7 +102,7 @@ class StyleGuideRenderer extends React.Component {
     )
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
         <StyleRoot>
           <Root>
             <Sidebar>

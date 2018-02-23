@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 import Icon from './Icon'
 
 const Filename = styled.span`
@@ -24,7 +25,7 @@ const uploadingIcon = ({ theme }) => `
 `
 
 const IconContainer = styled.span`
-  margin: 0 ${props => props.theme.subGridUnit};
+  margin: 0 ${theme.subGridUnit};
 
   & svg {
     ${props => (props.uploaded ? uploadedIcon : uploadingIcon)};

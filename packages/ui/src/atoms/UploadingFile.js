@@ -1,66 +1,64 @@
 import React from 'react'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 
 const Icon = styled.div`
-  background: ${props => props.theme.colorFurniture};
-  height: calc(${props => props.theme.subGridUnit} * 15);
-  margin-bottom: ${props => props.theme.subGridUnit};
+  background: ${theme.colorFurniture};
+  height: calc(${theme.subGridUnit} * 15);
+  margin-bottom: ${theme.subGridUnit};
   opacity: 0.5;
   position: relative;
-  width: calc(${props => props.theme.gridUnit} * 3);
+  width: calc(${theme.gridUnit} * 3);
 `
 
 const Progress = styled.div`
-  color: ${props => props.theme.colorTextReverse};
+  color: ${theme.colorTextReverse};
   display: block;
   position: absolute;
-  bottom: ${props => props.theme.subGridUnit};
-  left: calc(${props => props.theme.subGridUnit} * 4);
+  bottom: ${theme.subGridUnit};
+  left: calc(${theme.subGridUnit} * 4);
 `
 
 const Extension = styled.div`
-  background: ${props => props.theme.colorText};
-  color: ${props => props.theme.colorTextReverse};
-  font-size: ${props => props.theme.fontSizeBaseSmall};
-  left: calc(${props => props.theme.subGridUnit} * 2);
+  background: ${theme.colorText};
+  color: ${theme.colorTextReverse};
+  font-size: ${theme.fontSizeBaseSmall};
+  left: calc(${theme.subGridUnit} * 2);
   position: absolute;
   right: 0;
   text-align: center;
   text-transform: uppercase;
-  top: calc(${props => props.theme.subGridUnit} * 2);
+  top: calc(${theme.subGridUnit} * 2);
 `
 
 const Filename = styled.div`
-  color: ${props => props.theme.colorText};
-  font-size: ${props => props.theme.fontSizeBaseSmall};
+  color: ${theme.colorText};
+  font-size: ${theme.fontSizeBaseSmall};
   font-style: italic;
-  max-width: calc(${props => props.theme.gridUnit} * 10);
+  max-width: calc(${theme.gridUnit} * 10);
 `
 
 const Uploading = styled.div`
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: ${props => props.theme.gridUnit};
-  margin-right: calc(${props => props.theme.subGridUnit} * 3);
+  margin-bottom: ${theme.gridUnit};
+  margin-right: calc(${theme.subGridUnit} * 3);
   position: relative;
-  width: calc(${props => props.theme.gridUnit} * 10);
+  width: calc(${theme.gridUnit} * 10);
 `
 
 const Uploaded = Uploading.extend`
   &::before,
   &::after {
     cursor: pointer;
-    transition: transform ${props => props.theme.transitionDurationS};
-    font-size: ${props => props.theme.fontSizeBaseSmall};
+    transition: transform ${theme.transitionDurationS};
+    font-size: ${theme.fontSizeBaseSmall};
     left: 65%;
-    padding: 0 ${props => props.theme.subGridUnit} 0
-      ${props => props.theme.subGridUnit};
+    padding: 0 ${theme.subGridUnit} 0 ${theme.subGridUnit};
     position: absolute;
-    border: ${props => props.theme.borderWidth}
-      ${props => props.theme.borderStyle}
-      ${props => props.theme.colorTextReverse};
-    color: ${props => props.theme.colorTextReverse};
+    border: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorTextReverse};
+    color: ${theme.colorTextReverse};
     text-transform: uppercase;
     cursor: pointer;
     transform: scaleX(0);
@@ -68,27 +66,27 @@ const Uploaded = Uploading.extend`
   }
 
   &::after {
-    background: ${props => props.theme.colorError};
+    background: ${theme.colorError};
     content: 'Remove';
-    top: calc(${props => props.theme.subGridUnit} * 5);
+    top: calc(${theme.subGridUnit} * 5);
     z-index: 2;
   }
 
   &::before {
-    background: ${props => props.theme.colorPrimary};
+    background: ${theme.colorPrimary};
     content: 'Replace';
-    top: calc(${props => props.theme.subGridUnit} * 10);
+    top: calc(${theme.subGridUnit} * 10);
     z-index: 3;
   }
 
   &:hover ${Extension} {
-    background: ${props => props.theme.colorTextReverse};
-    color: ${props => props.theme.colorPrimary};
+    background: ${theme.colorTextReverse};
+    color: ${theme.colorPrimary};
   }
 
   &:hover ${Icon} {
     opacity: 1;
-    background: ${props => props.theme.colorPrimary};
+    background: ${theme.colorPrimary};
     transform: skewY(6deg) rotate(-6deg);
   }
 
@@ -99,15 +97,14 @@ const Uploaded = Uploading.extend`
 `
 
 const ErrorWrapper = styled.div`
-  background: ${props => props.theme.colorError};
-  border: calc(${props => props.theme.borderWidth} * 2)
-    ${props => props.theme.borderStyle} ${props => props.theme.colorTextReverse};
-  color: ${props => props.theme.colorTextReverse};
-  font-size: ${props => props.theme.fontSizeBaseSmall};
+  background: ${theme.colorError};
+  border: calc(${theme.borderWidth} * 2) ${theme.borderStyle}
+    ${theme.colorTextReverse};
+  color: ${theme.colorTextReverse};
+  font-size: ${theme.fontSizeBaseSmall};
   letter-spacing: 0.01em;
   opacity: 1;
-  padding: ${props => props.theme.subGridUnit}
-    ${props => props.theme.subGridUnit};
+  padding: ${theme.subGridUnit} ${theme.subGridUnit};
   position: absolute;
   top: 25%;
   z-index: 4;
