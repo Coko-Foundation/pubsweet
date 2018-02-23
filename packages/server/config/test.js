@@ -7,6 +7,7 @@ module.exports = {
     port: 4000,
     secret: 'test',
     sse: false,
+    uploads: 'uploads',
   },
   validations: path.join(__dirname, 'validations'),
   authsome: {

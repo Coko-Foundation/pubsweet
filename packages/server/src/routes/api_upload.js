@@ -3,13 +3,14 @@ const crypto = require('crypto')
 const multer = require('multer')
 const passport = require('passport')
 const express = require('express')
+const config = require('config')
 
 const api = express.Router()
 
 const authBearer = passport.authenticate('bearer', { session: false })
 
 const storage = multer.diskStorage({
-  destination: 'uploads/',
+  destination: config.get('pubsweet-server').uploads,
   filename(req, file, cb) {
     crypto.pseudoRandomBytes(16, (err, raw) => {
       if (err) {
