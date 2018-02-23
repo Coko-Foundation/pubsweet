@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 import {
   CenteredColumn,
   Link,
-  Title,
+  H1,
   ErrorText,
   Button,
   TextField,
@@ -18,8 +18,8 @@ const PasswordInput = props => (
 )
 
 const Signup = ({ error, handleSubmit }) => (
-  <CenteredColumn>
-    <Title>Sign up</Title>
+  <CenteredColumn small>
+    <H1>Sign up</H1>
 
     {error && <ErrorText>{error}</ErrorText>}
 

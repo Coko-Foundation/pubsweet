@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Upload from './Upload'
-import ControlGroup from '../atoms/ControlGroup'
+import Flexbox from '../atoms/Flexbox'
 import UploadButton from '../atoms/UploadButton'
 
 const Root = styled.div``
@@ -59,7 +59,7 @@ class FileUploadList extends React.Component {
           name={name}
           onChange={this.handleChange}
         />
-        <ControlGroup>
+        <Flexbox column>
           {uploads &&
             uploads.map(upload => (
               <Upload
@@ -81,7 +81,7 @@ class FileUploadList extends React.Component {
             files.map(file => (
               <FileComponent file={file} key={file.name} uploaded />
             ))}
-        </ControlGroup>
+        </Flexbox>
       </Root>
     )
   }

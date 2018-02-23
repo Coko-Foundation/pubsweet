@@ -4,7 +4,7 @@ import { Field } from 'redux-form'
 import {
   CenteredColumn,
   ErrorText,
-  Title,
+  H1,
   Link,
   Button,
   TextField,
@@ -26,8 +26,8 @@ const Login = ({
   signup = true,
   passwordReset = true,
 }) => (
-  <CenteredColumn>
-    <Title>Login</Title>
+  <CenteredColumn small>
+    <H1>Login</H1>
 
     {error && <ErrorText>{error}</ErrorText>}
 
