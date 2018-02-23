@@ -156,8 +156,11 @@ cd myappname
 pubsweet start
 ```
 
-Use the `start` subcommand within your app directory to start your app. It uses
-Docker Compose to:
+Use the `start` subcommand within your app directory to start your app. Open a
+browser and navigate to http://localhost:3000. A default user account is
+created for you: username `admin`, password `password`.
+
+Under the hood, `pubsweet start` uses Docker Compose to:
 
 * start the backing services (database)
 * set up the database if necessary, including a default admin user (`pubsweet setupdb`)
