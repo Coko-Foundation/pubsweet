@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 
 // TODO: separate tags when pasted
 // TODO: allow tags to be edited
@@ -96,13 +97,12 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    padding: ${props => props.theme.subGridUnit} 0 0 ${props =>
-  props.theme.subGridUnit};
+    padding: ${theme.subGridUnit} 0 0 ${theme.subGridUnit};
     position: relative;
   }
 
   .${classNames.root}.${classNames.rootFocused} {
-    border-color: ${props => props.theme.colorPrimary};
+    border-color: ${theme.colorPrimary};
   }
 
   .${classNames.selected} {
@@ -113,25 +113,24 @@ const Tags = styled(TagsUnstyled)`
     border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: ${props => props.theme.fontReading};
+    font-family: ${theme.fontReading};
 
     /* match the font styles */
-    margin: 0 ${props => props.theme.subGridUnit} ${props =>
-  props.theme.gridUnit} 0;
+    margin: 0 ${theme.subGridUnit} ${theme.gridUnit} 0;
     padding: 0.1em 0.3em;
 
     ${props => realBorder(props.theme.colorBorder, props.theme.colorBackground)}
   }
 
   .${classNames.selectedTag}::after {
-    color: ${props => props.theme.colorBorder};
+    color: ${theme.colorBorder};
     content: '\\2715';
     display: inline-block;
-    font-size: ${props => props.theme.fontSizeBaseSmall};
+    font-size: ${theme.fontSizeBaseSmall};
     font-weight: 600;
-    margin-left: ${props => props.theme.subGridUnit};
-    padding: ${props => props.theme.subGridUnit} 0 0
-    width: ${props => props.theme.subGridUnit};
+    margin-left: ${theme.subGridUnit};
+    padding: ${theme.subGridUnit} 0 0
+    width: ${theme.subGridUnit};
   }
 
   .${classNames.selectedTag}:hover,
@@ -141,19 +140,18 @@ const Tags = styled(TagsUnstyled)`
     ${props => realBorder('transparent', props.theme.colorBackground)}
 
     &::after {
-      color: ${props => props.theme.colorError};
+      color: ${theme.colorError};
     }
   }
   .${classNames.search} {
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 0 ${props => props.theme.gridUnit} 0;
+    margin: 0 0 ${theme.gridUnit} 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: calc(${props => props.theme.gridUnit} * 5);
-    padding: ${props => props.theme.subGridUnit} ${props =>
-  props.theme.subGridUnit};
+    max-width: calc(${theme.gridUnit} * 5);
+    padding: ${theme.subGridUnit} ${theme.subGridUnit};
   }
 
   @media screen and (min-width: 30em) {
@@ -165,10 +163,9 @@ const Tags = styled(TagsUnstyled)`
 
   .${classNames.search} input {
     border: 0;
-    border-bottom: ${props => props.theme.borderWidth} dashed ${props =>
-  props.theme.colorBorder};
-    color: ${props => props.theme.colorText};
-    font-family: ${props => props.theme.fontReading};
+    border-bottom: ${theme.borderWidth} dashed ${theme.colorBorder};
+    color: ${theme.colorText};
+    font-family: ${theme.fontReading};
 
     /* match the font styles */
     font-size: inherit;
@@ -179,19 +176,18 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: calc(${props => props.theme.gridUnit} * 5);
+    min-width: calc(${theme.gridUnit} * 5);
     outline: none;
     padding: 0;
 
     &::placeholder {
-      font-family: ${props => props.theme.fontInterface};
-      color: ${props => props.theme.colorTextPlaceholder};
+      font-family: ${theme.fontInterface};
+      color: ${theme.colorTextPlaceholder};
     }
 
     &:focus,
     &:hover {
-      border-bottom: ${props => props.theme.borderWidth} dashed ${props =>
-  props.theme.colorPrimary};
+      border-bottom: ${theme.borderWidth} dashed ${theme.colorPrimary};
     }
   }
 

@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import theme from '../helpers/theme'
 import Icon from '../atoms/Icon'
 
 const Root = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: calc(${props => props.theme.gridUnit} * 2);
+  min-height: calc(${theme.gridUnit} * 2);
 
   a {
-    color: ${props => props.theme.colorPrimary};
+    color: ${theme.colorPrimary};
     text-decoration: none;
   }
 `
@@ -40,7 +41,7 @@ const Logo = styled(Link)`
   text-decoration: none;
 
   * {
-    max-height: calc(${props => props.theme.gridUnit} * 2);
+    max-height: calc(${theme.gridUnit} * 2);
   }
 `
 

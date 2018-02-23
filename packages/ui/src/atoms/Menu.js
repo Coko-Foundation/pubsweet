@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -7,12 +8,12 @@ import styled from 'styled-components'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  max-width: calc(${props => props.theme.gridUnit} * 14);
+  max-width: calc(${theme.gridUnit} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${props => props.theme.fontSizeBaseSmall};
+  font-size: ${theme.fontSizeBaseSmall};
   display: block;
 `
 
@@ -20,21 +21,20 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${props => props.theme.borderWidth}
-    ${props => props.theme.borderStyle} ${props => props.theme.colorBorder};
-  border-radius: ${props => props.theme.borderRadius};
+  border: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorBorder};
+  border-radius: ${theme.borderRadius};
   cursor: pointer;
   font-family: inherit;
 
   width: 100%;
-  height: calc(${props => props.theme.gridUnit} * 2);
+  height: calc(${theme.gridUnit} * 2);
   padding: 0;
 
   display: flex;
   align-items: center;
 
   &:hover {
-    border-color: ${props => props.theme.colorPrimary};
+    border-color: ${theme.colorPrimary};
   }
 `
 
@@ -42,27 +42,23 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(${props => props.theme.gridUnit} / 2);
+  padding: 0 calc(${theme.gridUnit} / 2);
 
   &:hover {
-    color: ${props => props.theme.colorPrimary};
+    color: ${theme.colorPrimary};
   }
 `
 
 const Placeholder = Value.extend`
-  color: ${props => props.theme.colorTextPlaceholder};
+  color: ${theme.colorTextPlaceholder};
   font-style: italic;
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${props => props.theme.borderWidth}
-    ${props => props.theme.borderStyle} ${props => props.theme.colorFurniture};
+  border-left: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorFurniture};
 
-  width: calc(${props => props.theme.gridUnit} * 2);
-  height: calc(
-    ${props => props.theme.gridUnit} * 2 - ${props => props.theme.borderWidth} *
-      2
-  );
+  width: calc(${theme.gridUnit} * 2);
+  height: calc(${theme.gridUnit} * 2 - ${theme.borderWidth} * 2);
 
   display: flex;
   align-items: center;
@@ -93,10 +89,9 @@ const Options = styled.div`
   left: 0;
   right: 0;
 
-  background-color: ${props => props.theme.colorBackground};
-  border: ${props => props.theme.borderWidth}
-    ${props => props.theme.borderStyle} ${props => props.theme.colorBorder};
-  border-radius: ${props => props.theme.borderRadius};
+  background-color: ${theme.colorBackground};
+  border: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorBorder};
+  border-radius: ${theme.borderRadius};
   overflow: hidden;
 `
 
@@ -108,29 +103,24 @@ const Option = styled.div.attrs({
   color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: ${props => props.theme.fontAuthor};
-  padding: calc(
-      ${props => props.theme.subGridUnit} - ${props => props.theme.borderWidth} *
-        2
-    )
-    calc(${props => props.theme.subGridUnit} * 2);
-  border: ${props => props.theme.borderWidth}
-    ${props => props.theme.borderStyle} transparent;
-  border-width: ${props => props.theme.borderWidth} 0
-    ${props => props.theme.borderWidth} 0;
+  font-family: ${theme.fontAuthor};
+  padding: calc(${theme.subGridUnit} - ${theme.borderWidth} * 2)
+    calc(${theme.subGridUnit} * 2);
+  border: ${theme.borderWidth} ${theme.borderStyle} transparent;
+  border-width: ${theme.borderWidth} 0 ${theme.borderWidth} 0;
   white-space: nowrap;
 
   &:hover {
-    background: ${props => props.theme.colorBackgroundHue};
-    border-color: ${props => props.theme.colorBorder};
+    background: ${theme.colorBackgroundHue};
+    border-color: ${theme.colorBorder};
   }
 
   &:first-child:hover {
-    border-top-color: ${props => props.theme.colorBackgroundHue};
+    border-top-color: ${theme.colorBackgroundHue};
   }
 
   &:last-child:hover {
-    border-bottom-color: ${props => props.theme.colorBackgroundHue};
+    border-bottom-color: ${theme.colorBackgroundHue};
   }
 `
 

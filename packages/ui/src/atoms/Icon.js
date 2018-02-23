@@ -2,14 +2,15 @@ import React from 'react'
 import { pascalize } from 'humps'
 import * as icons from 'react-feather'
 import styled from 'styled-components'
+import theme from '../helpers/theme'
 
 const Container = styled.span`
   display: inline-flex;
-  padding: calc(${props => props.theme.subGridUnit} / 2);
+  padding: calc(${theme.subGridUnit} / 2);
   svg {
     stroke: ${props => props.color || props.theme.colorText};
-    width: calc(${props => props.size} * ${props => props.theme.subGridUnit});
-    height: calc(${props => props.size} * ${props => props.theme.subGridUnit});
+    width: calc(${props => props.size} * ${theme.subGridUnit});
+    height: calc(${props => props.size} * ${theme.subGridUnit});
   }
 `
 
