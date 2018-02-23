@@ -3,23 +3,27 @@ const resolvers = {
     fragment(_, { id }, ctx) {
       return ctx.connectors.fragment.fetchOne(id, ctx)
     },
-    fragments(ctx) {
+    fragments(_, { id }, ctx) {
       return ctx.connectors.fragment.fetchAll(ctx)
     },
   },
   Mutation: {
+    createFragment(_, { input }, ctx) {
+      return ctx.connectors.fragment.create(input, ctx)
+    },
     deleteFragment(_, { id }, ctx) {
       return ctx.connectors.fragment.delete(id, ctx)
     },
-    createFragment(_, { input }, ctx) {
-      return ctx.connectors.fragment.create(input, ctx)
+    updateFragment(_, { id, input }, ctx) {
+      return ctx.connectors.fragment.update(id, input, ctx)
     },
   },
   Fragment: {
     owners(fragment, vars, ctx) {
-      return fragment.owners
-        ? ctx.connectors.user.fetchSome(fragment.owners, ctx)
-        : []
+      return ctx.connectors.user.fetchSome(fragment.owners, ctx)
+    },
+    fragments(fragment, vars, ctx) {
+      return ctx.connectors.fragment.fetchSome(fragment.fragments, ctx)
     },
   },
 }
@@ -31,12 +35,14 @@ const typeDefs = `
   }
   
   extend type Mutation {
-    createFragment(input: FragmentInput): Fragment
+    createFragment(input: String): Fragment
     deleteFragment(id: ID): Fragment 
+    updateFragment(id: ID, input: String): Fragment
   }
   
   type Fragment {
     id: ID!
+    rev: String
     type: String!
     fragmentType: String
     fragments: [Fragment!]!
@@ -44,8 +50,10 @@ const typeDefs = `
   }
   
   input FragmentInput {
-    owners: [ID!]
+    fragmentType: String
     fragments: [ID!]
+    owners: [ID!]
+    rev: String
   }
 `
 

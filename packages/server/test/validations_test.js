@@ -16,6 +16,8 @@ describe('Validations export', () => {
 
   it('allows fragment with required fields', () => {
     const fragment = new Fragment({
+      // ID is generated on save so provide it explicitly here
+      id: '06521f58-9740-4f38-bd25-f00e528cbb2d',
       title: 'Testing',
       fragmentType: 'blogpost',
     })
@@ -25,6 +27,7 @@ describe('Validations export', () => {
 
   it('rejects fragment with missing type', () => {
     const fragment = new Fragment({
+      id: '06521f58-9740-4f38-bd25-f00e528cbb2d',
       title: 'Testing',
     })
     fragment.type = undefined

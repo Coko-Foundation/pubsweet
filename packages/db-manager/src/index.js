@@ -1,11 +1,7 @@
-const config = require('config')
-const { validateServerConfig } = require('./validations')
-
-validateServerConfig(config.get('pubsweet-server'))
-
 module.exports = {
-  setupDb: require('./setup-db'),
-  addUser: require('./add-user'),
-  addCollection: require('./add-collection'),
+  createTables: require('./commands/create-tables'),
+  setupDb: require('./commands/setup-db'),
+  addUser: require('./commands/add-user'),
+  addCollection: require('./commands/add-collection'),
   dbExists: require('./helpers/db-exists'),
 }

@@ -7,6 +7,7 @@ const collection = require('./definitions/collection')
 const fragment = require('./definitions/fragment')
 const team = require('./definitions/team')
 const user = require('./definitions/user')
+const upload = require('./definitions/upload')
 const authentication = require('./definitions/authentication')
 
 // load base types and resolvers
@@ -16,6 +17,7 @@ const typeDefs = [
   fragment.typeDefs,
   team.typeDefs,
   user.typeDefs,
+  upload.typeDefs,
   authentication.typeDefs,
 ]
 const resolvers = merge(
@@ -24,6 +26,7 @@ const resolvers = merge(
   fragment.resolvers,
   team.resolvers,
   user.resolvers,
+  upload.resolvers,
   authentication.resolvers,
 )
 

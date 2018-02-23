@@ -14,12 +14,13 @@ const resolvers = {
     createTeam(_, { input }, ctx) {
       return ctx.connectors.team.create(input, ctx)
     },
+    updateTeam(_, { id, input }, ctx) {
+      return ctx.connectors.team.update(id, input, ctx)
+    },
   },
   Team: {
     members(team, vars, ctx) {
-      return team.members
-        ? ctx.connectors.user.fetchSome(team.members, ctx)
-        : []
+      return ctx.connectors.user.fetchSome(team.members, ctx)
     },
   },
 }
@@ -31,22 +32,37 @@ const typeDefs = `
   }
   
   extend type Mutation {
-    createTeam(input: TeamInput): Team
+    createTeam(input: String): Team
     deleteTeam(id: ID): Team 
+    updateTeam(id: ID, input: String): Team
   }
   
   type Team {
     id: ID!
+    rev: String
     type: String!
-    teamType: String!
+    teamType: TeamType
     name: String!
-    object: ID!
+    object: TeamObject
     members: [User!]!
   }
   
+  type TeamObject {
+    type: String
+    id: ID!
+  }
+  
+  type TeamType {
+    name: String
+    permissions: String
+  }
+  
   input TeamInput {
-    owners: [ID!]
-    fragments: [ID!]
+    teamType: String
+    name: String
+    object: ID
+    members: [ID!]
+    rev: String
   }
 `
 

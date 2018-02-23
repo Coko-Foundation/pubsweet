@@ -1,8 +1,11 @@
 module.exports = {
   'pubsweet-server': {
+    db: {
+      // temporary database name set by jest-environment-db
+      database: global.__testDbName || 'test',
+    },
+    ignoreTerminatedConnectionError: true,
     secret: 'test',
-    dbPath: 'dummy value for validation',
-    adapter: 'memory',
     logger: {
       error: () => false,
       warn: () => false,

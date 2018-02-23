@@ -20,17 +20,13 @@ const resolvers = {
   },
   User: {
     collections(user, vars, ctx) {
-      return user.collections
-        ? ctx.connectors.collection.fetchSome(user.collections, ctx)
-        : []
+      return ctx.connectors.collection.fetchSome(user.collections, ctx)
     },
     teams(user, vars, ctx) {
-      return user.teams ? ctx.connectors.team.fetchSome(user.teams, ctx) : []
+      return ctx.connectors.team.fetchSome(user.teams, ctx)
     },
     fragments(user, vars, ctx) {
-      return user.fragments
-        ? ctx.connectors.fragment.fetchSome(user.fragments, ctx)
-        : []
+      return ctx.connectors.fragment.fetchSome(user.fragments, ctx)
     },
   },
 }
@@ -42,13 +38,14 @@ const typeDefs = `
   }
   
   extend type Mutation {
-    createUser(input: UserInput): User
+    createUser(input: String): User
     deleteUser(id: ID): User 
-    updateUser(id: ID, input: UserInput): User 
+    updateUser(id: ID, input: String): User 
   }
   
   type User {
     id: ID!
+    rev: String
     type: String
     username: String!
     email: String!

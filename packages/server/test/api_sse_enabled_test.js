@@ -22,7 +22,7 @@ describe('API SSE enabled', () => {
     await cleanDB()
     await new User(fixtures.adminUser).save()
     await new Promise((resolve, reject) => {
-      server = api.api.listen(port, err => (err ? reject(err) : resolve()))
+      server = api.app.listen(port, err => (err ? reject(err) : resolve()))
     })
   })
 

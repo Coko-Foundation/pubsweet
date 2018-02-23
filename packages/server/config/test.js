@@ -3,10 +3,19 @@ const winston = require('winston')
 
 module.exports = {
   'pubsweet-server': {
-    logger: new winston.Logger({ level: 'warn' }),
+    db: {
+      // temporary database name set by jest-environment-db
+      database: global.__testDbName || 'test',
+    },
+    ignoreTerminatedConnectionError: true,
+    logger: new winston.Logger({
+      level: 'warn',
+      transports: [new winston.transports.Console()],
+    }),
     port: 4000,
     secret: 'test',
     sse: false,
+    uploads: 'uploads',
   },
   validations: path.join(__dirname, 'validations'),
   authsome: {

@@ -14,6 +14,9 @@ class User extends Model {
     this.type = 'user'
     this.email = properties.email
     this.username = properties.username
+    this.collections = this.collections || []
+    this.fragments = this.fragments || []
+    this.teams = this.teams || []
   }
 
   toJSON() {
@@ -21,12 +24,16 @@ class User extends Model {
   }
 
   async save() {
+    if (!this.id) {
+      await User.isUniq(this)
+    }
+
     if (this.password) {
       this.passwordHash = await User.hashPassword(this.password)
       delete this.password
     }
 
-    return Model.prototype.save.call(this)
+    return super.save()
   }
 
   validPassword(password) {
@@ -46,11 +53,9 @@ class User extends Model {
 
     result = await User.findByEmail(user.email).catch(swallowNotFound)
 
-    if (result) {
-      throw new ConflictError('User already exists')
+    if (!result) {
+      result = await User.findByUsername(user.username).catch(swallowNotFound)
     }
-
-    result = await User.findByUsername(user.username).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')
