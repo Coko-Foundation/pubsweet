@@ -2,18 +2,18 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: var(--grid-unit);
+  max-width: calc(32px * 14);
+  margin-bottom: 32px;
 }
 
 .c2 {
   background: transparent;
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  border: 1px solid grey;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -26,7 +26,7 @@ exports[`Menu is rendered correctly 1`] = `
 }
 
 .c2:hover {
-  border-color: var(--color-primary);
+  border-color: black;
 }
 
 .c3 {
@@ -35,17 +35,17 @@ exports[`Menu is rendered correctly 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding: 0 calc(var(--grid-unit) / 2);
+  padding: 0 calc(32px / 2);
 }
 
 .c3:hover {
-  color: var(--color-primary);
+  color: black;
 }
 
 .c4 {
-  border-left: var(--border-width) var(--border-style) var(--color-furniture);
-  width: calc(var(--grid-unit) * 2);
-  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
+  border-left: 1px solid grey;
+  width: calc(32px * 2);
+  height: calc(32px * 2 - 1px * 2);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -119,18 +119,18 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  max-width: calc(var(--grid-unit) * 14);
-  margin-bottom: var(--grid-unit);
+  max-width: calc(32px * 14);
+  margin-bottom: 32px;
 }
 
 .c2 {
   background: transparent;
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  border: 1px solid grey;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -143,7 +143,7 @@ exports[`Menu is rendered correctly when open 1`] = `
 }
 
 .c2:hover {
-  border-color: var(--color-primary);
+  border-color: black;
 }
 
 .c3 {
@@ -152,17 +152,17 @@ exports[`Menu is rendered correctly when open 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding: 0 calc(var(--grid-unit) / 2);
+  padding: 0 calc(32px / 2);
 }
 
 .c3:hover {
-  color: var(--color-primary);
+  color: black;
 }
 
 .c4 {
-  border-left: var(--border-width) var(--border-style) var(--color-furniture);
-  width: calc(var(--grid-unit) * 2);
-  height: calc(var(--grid-unit) * 2 - var(--border-width) * 2);
+  border-left: 1px solid grey;
+  width: calc(32px * 2);
+  height: calc(32px * 2 - 1px * 2);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -202,58 +202,55 @@ exports[`Menu is rendered correctly when open 1`] = `
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-background);
-  border: var(--border-width) var(--border-style) var(--color-border);
-  border-radius: var(--border-radius);
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .c8 {
-  color: var(--text-color);
   font-weight: 600;
   cursor: pointer;
-  font-family: var(--font-author);
-  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2) calc(var(--sub-grid-unit) * 2);
-  border: var(--border-width) var(--border-style) transparent;
-  border-width: var(--border-width) 0 var(--border-width) 0;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
   white-space: nowrap;
 }
 
 .c8:hover {
-  background: var(--color-background-hue);
-  border-color: var(--color-border);
+  background: grey;
+  border-color: grey;
 }
 
 .c8:first-child:hover {
-  border-top-color: var(--color-background-hue);
+  border-top-color: grey;
 }
 
 .c8:last-child:hover {
-  border-bottom-color: var(--color-background-hue);
+  border-bottom-color: grey;
 }
 
 .c9 {
   color: #444;
   font-weight: inherit;
   cursor: pointer;
-  font-family: var(--font-author);
-  padding: calc(var(--sub-grid-unit) - var(--border-width) * 2) calc(var(--sub-grid-unit) * 2);
-  border: var(--border-width) var(--border-style) transparent;
-  border-width: var(--border-width) 0 var(--border-width) 0;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
   white-space: nowrap;
 }
 
 .c9:hover {
-  background: var(--color-background-hue);
-  border-color: var(--color-border);
+  background: grey;
+  border-color: grey;
 }
 
 .c9:first-child:hover {
-  border-top-color: var(--color-background-hue);
+  border-top-color: grey;
 }
 
 .c9:last-child:hover {
-  border-bottom-color: var(--color-background-hue);
+  border-bottom-color: grey;
 }
 
 <div

@@ -2,7 +2,7 @@
 
 exports[`AppBar Basic display 1`] = `
 .c3 {
-  color: var(--color-primary);
+  color: black;
   cursor: pointer;
 }
 
@@ -19,7 +19,7 @@ exports[`AppBar Basic display 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -30,11 +30,11 @@ exports[`AppBar Basic display 1`] = `
 }
 
 .c2 {
-  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
 .c2 svg {
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
 }
 
 .c4 {
@@ -46,7 +46,7 @@ exports[`AppBar Basic display 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav
@@ -91,17 +91,17 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: calc(var(--sub-grid-unit) / 2);
+  padding: calc(8px / 2);
 }
 
 .c5 svg {
-  stroke: var(--color-text);
-  width: calc(2 * var(--sub-grid-unit));
-  height: calc(2 * var(--sub-grid-unit));
+  stroke: black;
+  width: calc(2 * 8px);
+  height: calc(2 * 8px);
 }
 
 .c3 {
-  color: var(--color-primary);
+  color: black;
   cursor: pointer;
 }
 
@@ -118,7 +118,7 @@ exports[`AppBar With admin user 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -129,11 +129,11 @@ exports[`AppBar With admin user 1`] = `
 }
 
 .c2 {
-  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
 .c2 svg {
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
 }
 
 .c4 {
@@ -145,7 +145,7 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav
@@ -174,7 +174,7 @@ exports[`AppBar With admin user 1`] = `
     >
       <span
         className="c5"
-        color="var(--color-text)"
+        color="black"
         size={2}
       >
         <svg
@@ -211,7 +211,7 @@ exports[`AppBar With admin user 1`] = `
       >
         <span
           className="c5"
-          color="var(--color-text)"
+          color="black"
           size={2}
         >
           <svg
@@ -245,7 +245,7 @@ exports[`AppBar With admin user 1`] = `
 
 exports[`AppBar With custom brand and login links 1`] = `
 .c3 {
-  color: var(--color-primary);
+  color: black;
   cursor: pointer;
 }
 
@@ -262,7 +262,7 @@ exports[`AppBar With custom brand and login links 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -273,11 +273,11 @@ exports[`AppBar With custom brand and login links 1`] = `
 }
 
 .c2 {
-  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
 .c2 svg {
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
 }
 
 .c4 {
@@ -289,7 +289,7 @@ exports[`AppBar With custom brand and login links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav
@@ -330,7 +330,7 @@ exports[`AppBar With custom brand and login links 1`] = `
 
 exports[`AppBar With nav links 1`] = `
 .c3 {
-  color: var(--color-primary);
+  color: black;
   cursor: pointer;
 }
 
@@ -347,7 +347,7 @@ exports[`AppBar With nav links 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  min-height: calc(var(--grid-unit) * 2);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -358,11 +358,11 @@ exports[`AppBar With nav links 1`] = `
 }
 
 .c2 {
-  margin: calc(var(--sub-grid-unit) * 2) 1rem calc(var(--sub-grid-unit) * 2) 1rem;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
 .c2 svg {
-  height: calc(var(--grid-unit) * 2);
+  height: calc(32px * 2);
 }
 
 .c4 {
@@ -374,7 +374,7 @@ exports[`AppBar With nav links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(var(--grid-unit) * 1) 1rem calc(var(--grid-unit) * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav

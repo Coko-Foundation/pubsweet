@@ -8,22 +8,22 @@ exports[`Radio Group is rendered correctly 1`] = `
 .c4 {
   display: inline-block;
   content: ' ';
-  width: calc(var(--sub-grid-unit) * 2);
-  height: calc(var(--sub-grid-unit) * 2);
+  width: calc(8px * 2);
+  height: calc(8px * 2);
   vertical-align: center;
-  margin-left: var(--sub-grid-unit);
-  margin-right: var(--sub-grid-unit);
-  border: calc(var(--sub-grid-unit) / 4) solid white;
+  margin-left: 8px;
+  margin-right: 8px;
+  border: calc(8px / 4) solid white;
   border-radius: 50%;
-  -webkit-transition: border var(--transition-duration-xs) var(--transition-timing-function);
-  transition: border var(--transition-duration-xs) var(--transition-timing-function);
+  -webkit-transition: border 0.1s ease;
+  transition: border 0.1s ease;
   color: black;
 }
 
 .c6 {
   display: inline-block;
   font-family: inherit;
-  font-size: var(--font-size-base);
+  font-size: 18px;
   font-style: italic;
 }
 
@@ -37,9 +37,9 @@ exports[`Radio Group is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: all var(--transition-duration);
-  transition: all var(--transition-duration);
-  min-height: var(--grid-unit);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  min-height: 32px;
   color: black;
 }
 
@@ -50,19 +50,19 @@ exports[`Radio Group is rendered correctly 1`] = `
 
 .c1 .c3 {
   background: transparent;
-  box-shadow: 0 0 0 var(--border-width) currentcolor;
+  box-shadow: 0 0 0 1px currentcolor;
 }
 
 .c1:hover .c5 {
-  color: var(--color-primary);
+  color: black;
 }
 
 .c1:hover .c3 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
-  -webkit-animation-duration: var(--transition-duration-s);
-  animation-duration: var(--transition-duration-s);
-  box-shadow: 0 0 0 var(--border-width) var(--color-primary);
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  box-shadow: 0 0 0 1px black;
 }
 
 .c0 {

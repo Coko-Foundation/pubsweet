@@ -5,6 +5,7 @@ import 'jest-styled-components'
 
 import YesOrNo from '../src/molecules/YesOrNo'
 import RadioGroup from '../src/molecules/RadioGroup'
+import TestThemeProvider from './setup/theme'
 
 const props = {
   name: 'TestName',
@@ -16,7 +17,13 @@ const radio = wrapper.find(RadioGroup)
 
 describe('Yes or No', () => {
   test('is rendered correclty', () => {
-    const tree = renderer.create(<YesOrNo {...props} />).toJSON()
+    const tree = renderer
+      .create(
+        <TestThemeProvider>
+          <YesOrNo {...props} />
+        </TestThemeProvider>,
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 

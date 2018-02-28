@@ -17,11 +17,8 @@ exports[`Files renders correctly 1`] = `
 
 .c0 {
   background: transparent;
-  border: var(--border-width) dashed var(--color-border);
-  height: var(--grid-unit);
+  border: dashed;
   cursor: pointer;
-  margin-bottom: var(--grid-unit);
-  padding: var(--sub-grid-unit);
 }
 
 <div

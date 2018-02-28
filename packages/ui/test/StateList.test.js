@@ -6,6 +6,7 @@ import renderer from 'react-test-renderer'
 
 import StateItem from '../src/atoms/StateItem'
 import StateList from '../src/molecules/StateList'
+import TestThemeProvider from './setup/theme'
 
 const currentValues = {
   style: 0,
@@ -30,7 +31,13 @@ const stateItems = wrapper.find(StateItem)
 
 describe('StateList', () => {
   test('is rendered correctly', () => {
-    const tree = renderer.create(<StateList {...props} />).toJSON()
+    const tree = renderer
+      .create(
+        <TestThemeProvider>
+          <StateList {...props} />
+        </TestThemeProvider>,
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 

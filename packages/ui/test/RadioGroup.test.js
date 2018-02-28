@@ -6,6 +6,7 @@ import 'jest-styled-components'
 
 import Radio from '../src/atoms/Radio'
 import RadioGroup from '../src/molecules/RadioGroup'
+import TestThemeProvider from './setup/theme'
 
 const props = {
   name: 'TestName',
@@ -32,7 +33,13 @@ const radios = wrapper.find(Radio)
 
 describe('Radio Group', () => {
   test('is rendered correctly', () => {
-    const tree = renderer.create(<RadioGroup {...props} />).toJSON()
+    const tree = renderer
+      .create(
+        <TestThemeProvider>
+          <RadioGroup {...props} />
+        </TestThemeProvider>,
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 
