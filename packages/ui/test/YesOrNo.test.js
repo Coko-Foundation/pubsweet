@@ -13,10 +13,14 @@ const props = {
 }
 
 const wrapper = shallow(<YesOrNo {...props} />)
+  .find('Colorized')
+  .shallow()
+  .find('YesOrNo')
+  .shallow()
 const radio = wrapper.find(RadioGroup)
 
 describe('Yes or No', () => {
-  test('is rendered correclty', () => {
+  test('is rendered corrctly', () => {
     const tree = renderer
       .create(
         <TestThemeProvider>
