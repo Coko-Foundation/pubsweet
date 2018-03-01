@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const statusColor = props =>
   ({
@@ -12,8 +12,8 @@ const Container = styled.svg.attrs({
   viewBox: props => `0 0 105 70`,
   xmlns: 'http://www.w3.org/2000/svg',
 })`
-  width: calc(${theme.gridUnit} * 3);
-  height: calc(${theme.gridUnit} * 2);
+  width: calc(${fromTheme.gridUnit} * 3);
+  height: calc(${fromTheme.gridUnit} * 2);
 `
 
 const Persona = styled.path.attrs({
@@ -46,7 +46,7 @@ const QuestionMark = styled.path.attrs({
 `
 
 const ReviewerText = styled.text`
-  fill: ${theme.colorPrimary};
+  fill: ${fromTheme.colorPrimary};
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 50px;
   font-style: normal;

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 import Icon from './Icon'
 
 const Filename = styled.span`
@@ -13,19 +13,19 @@ const Filename = styled.span`
 `
 
 const uploadedIcon = ({ theme }) => `
-  stroke: ${theme.colorPrimary};
-  height: ${theme.fontSizeBaseSmall};
-  width: ${theme.fontSizeBaseSmall};
+  stroke: ${fromTheme.colorPrimary};
+  height: ${fromTheme.fontSizeBaseSmall};
+  width: ${fromTheme.fontSizeBaseSmall};
 `
 
 const uploadingIcon = ({ theme }) => `
-  stroke: ${theme.colorText};
-  height: ${theme.fontSizeBase};
-  width: ${theme.fontSizeBase};
+  stroke: ${fromTheme.colorText};
+  height: ${fromTheme.fontSizeBase};
+  width: ${fromTheme.fontSizeBase};
 `
 
 const IconContainer = styled.span`
-  margin: 0 ${theme.subGridUnit};
+  margin: 0 ${fromTheme.subGridUnit};
 
   & svg {
     ${props => (props.uploaded ? uploadedIcon : uploadingIcon)};

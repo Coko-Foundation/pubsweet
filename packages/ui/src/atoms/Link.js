@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { Link as UnstyledLink } from 'react-router-dom'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const Link = styled(UnstyledLink)`
-  color: ${theme.colorPrimary};
+  color: ${fromTheme.colorPrimary};
   cursor: pointer;
 `
 

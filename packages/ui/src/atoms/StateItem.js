@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import React from 'react'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const disabled = css`
-  color: ${theme.colorSecondary};
+  color: ${fromTheme.colorSecondary};
   cursor: default;
 
   &:hover {
-    color: ${theme.colorSecondary};
+    color: ${fromTheme.colorSecondary};
   }
 `
 
 const Root = styled.span`
   cursor: pointer;
-  font-family: ${theme.fontInterface};
-  font-size: ${theme.fontSizeBaseSmall};
+  font-family: ${fromTheme.fontInterface};
+  font-size: ${fromTheme.fontSizeBaseSmall};
   font-style: italic;
 
   &:focus {
@@ -23,9 +23,9 @@ const Root = styled.span`
   }
 
   &:hover {
-    color: ${theme.colorText};
-    transition: ${theme.transitionDurationUnit}
-      ${theme.transitionTimingFunction};
+    color: ${fromTheme.colorText};
+    transition: ${fromTheme.transitionDurationUnit}
+      ${fromTheme.transitionTimingFunction};
   }
 
   ${props => props.disabled && disabled};

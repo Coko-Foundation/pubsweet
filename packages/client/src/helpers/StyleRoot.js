@@ -1,17 +1,17 @@
 import styled, { injectGlobal } from 'styled-components'
 import styledNormalize from 'styled-normalize'
-import { theme } from '@pubsweet/ui'
+import { fromTheme } from '@pubsweet/ui'
 
 const injectGlobalStyles = () => injectGlobal`
   ${styledNormalize}
 `
 
 const StyleRoot = styled.div`
-  background-color: ${theme.colorBackground};
-  font-family: ${theme.fontInterface}, sans-serif;
-  font-size: ${theme.fontSizeBase};
-  color: ${theme.colorText};
-  line-height: ${theme.fontLineHeight};
+  background-color: ${fromTheme.colorBackground};
+  font-family: ${fromTheme.fontInterface}, sans-serif;
+  font-size: ${fromTheme.fontSizeBase};
+  color: ${fromTheme.colorText};
+  line-height: ${fromTheme.fontLineHeight};
 
   * {
     box-sizing: border-box;

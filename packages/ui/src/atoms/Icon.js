@@ -4,15 +4,15 @@ import * as icons from 'react-feather'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Colorize from './Colorize'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const Container = styled.span`
   display: inline-flex;
-  padding: calc(${theme.subGridUnit} / 2);
+  padding: calc(${fromTheme.subGridUnit} / 2);
   svg {
     stroke: ${props => props.color || props.theme.colorText};
-    width: calc(${props => props.size} * ${theme.subGridUnit});
-    height: calc(${props => props.size} * ${theme.subGridUnit});
+    width: calc(${props => props.size} * ${fromTheme.subGridUnit});
+    height: calc(${props => props.size} * ${fromTheme.subGridUnit});
   }
 `
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -8,12 +8,12 @@ import theme from '../helpers/theme'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  max-width: calc(${theme.gridUnit} * 14);
+  max-width: calc(${fromTheme.gridUnit} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${theme.fontSizeBaseSmall};
+  font-size: ${fromTheme.fontSizeBaseSmall};
   display: block;
 `
 
@@ -21,20 +21,21 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorBorder};
-  border-radius: ${theme.borderRadius};
+  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
+    ${fromTheme.colorBorder};
+  border-radius: ${fromTheme.borderRadius};
   cursor: pointer;
   font-family: inherit;
 
   width: 100%;
-  height: calc(${theme.gridUnit} * 2);
+  height: calc(${fromTheme.gridUnit} * 2);
   padding: 0;
 
   display: flex;
   align-items: center;
 
   &:hover {
-    border-color: ${theme.colorPrimary};
+    border-color: ${fromTheme.colorPrimary};
   }
 `
 
@@ -42,23 +43,24 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(${theme.gridUnit} / 2);
+  padding: 0 calc(${fromTheme.gridUnit} / 2);
 
   &:hover {
-    color: ${theme.colorPrimary};
+    color: ${fromTheme.colorPrimary};
   }
 `
 
 const Placeholder = Value.extend`
-  color: ${theme.colorTextPlaceholder};
+  color: ${fromTheme.colorTextPlaceholder};
   font-style: italic;
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorFurniture};
+  border-left: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
+    ${fromTheme.colorFurniture};
 
-  width: calc(${theme.gridUnit} * 2);
-  height: calc(${theme.gridUnit} * 2 - ${theme.borderWidth} * 2);
+  width: calc(${fromTheme.gridUnit} * 2);
+  height: calc(${fromTheme.gridUnit} * 2 - ${fromTheme.borderWidth} * 2);
 
   display: flex;
   align-items: center;
@@ -89,9 +91,10 @@ const Options = styled.div`
   left: 0;
   right: 0;
 
-  background-color: ${theme.colorBackground};
-  border: ${theme.borderWidth} ${theme.borderStyle} ${theme.colorBorder};
-  border-radius: ${theme.borderRadius};
+  background-color: ${fromTheme.colorBackground};
+  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
+    ${fromTheme.colorBorder};
+  border-radius: ${fromTheme.borderRadius};
   overflow: hidden;
 `
 
@@ -103,24 +106,24 @@ const Option = styled.div.attrs({
   color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: ${theme.fontAuthor};
-  padding: calc(${theme.subGridUnit} - ${theme.borderWidth} * 2)
-    calc(${theme.subGridUnit} * 2);
-  border: ${theme.borderWidth} ${theme.borderStyle} transparent;
-  border-width: ${theme.borderWidth} 0 ${theme.borderWidth} 0;
+  font-family: ${fromTheme.fontAuthor};
+  padding: calc(${fromTheme.subGridUnit} - ${fromTheme.borderWidth} * 2)
+    calc(${fromTheme.subGridUnit} * 2);
+  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle} transparent;
+  border-width: ${fromTheme.borderWidth} 0 ${fromTheme.borderWidth} 0;
   white-space: nowrap;
 
   &:hover {
-    background: ${theme.colorBackgroundHue};
-    border-color: ${theme.colorBorder};
+    background: ${fromTheme.colorBackgroundHue};
+    border-color: ${fromTheme.colorBorder};
   }
 
   &:first-child:hover {
-    border-top-color: ${theme.colorBackgroundHue};
+    border-top-color: ${fromTheme.colorBackgroundHue};
   }
 
   &:last-child:hover {
-    border-bottom-color: ${theme.colorBackgroundHue};
+    border-bottom-color: ${fromTheme.colorBackgroundHue};
   }
 `
 

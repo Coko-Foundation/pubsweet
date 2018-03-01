@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: calc(${theme.gridUnit} * 14);
+  max-width: calc(${fromTheme.gridUnit} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${theme.fontSizeBaseSmall};
+  font-size: ${fromTheme.fontSizeBaseSmall};
   display: block;
 `
 
@@ -23,18 +23,18 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
   }[validationStatus])
 
 const Input = styled.input`
-  border: ${theme.borderWidth} ${theme.borderStyle} ${borderColor};
+  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle} ${borderColor};
 
-  border-radius: ${theme.borderRadius};
+  border-radius: ${fromTheme.borderRadius};
 
   font-family: inherit;
   font-size: inherit;
 
-  padding: 0 calc(${theme.gridUnit} / 2);
-  height: calc(${theme.gridUnit} * 2);
+  padding: 0 calc(${fromTheme.gridUnit} / 2);
+  height: calc(${fromTheme.gridUnit} * 2);
 
   &::placeholder {
-    color: ${theme.colorTextPlaceholder};
+    color: ${fromTheme.colorTextPlaceholder};
   }
 `
 

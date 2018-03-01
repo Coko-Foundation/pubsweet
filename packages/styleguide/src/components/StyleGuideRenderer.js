@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, theme } from '@pubsweet/ui'
+import { Button, fromTheme } from '@pubsweet/ui'
 import StyleRoot, {
   injectGlobalStyles,
 } from 'pubsweet-client/src/helpers/StyleRoot'
@@ -58,8 +58,8 @@ const Header = styled.header`
 `
 
 const Title = styled.h1`
-  font-family: ${theme.fontInterface};
-  font-size: ${theme.fontSizeBase};
+  font-family: ${fromTheme.fontInterface};
+  font-size: ${fromTheme.fontSizeBase};
   margin-bottom: 0;
   padding: 0 1rem;
 `
@@ -69,7 +69,7 @@ const Content = styled.div`
   overflow-y: auto;
   padding: 1rem;
   *[data-preview] {
-    padding: calc(${theme.gridUnit} / 2);
+    padding: calc(${fromTheme.gridUnit} / 2);
   }
   ${props => props.grid && grid};
 `

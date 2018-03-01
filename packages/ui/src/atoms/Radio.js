@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import theme from '../helpers/theme'
+import fromTheme from '../helpers/fromTheme'
 
 const Input = styled.input`
   display: none;
@@ -9,18 +9,18 @@ const Input = styled.input`
 const PseudoInput = styled.span`
   display: inline-block;
   content: ' ';
-  width: calc(${theme.subGridUnit} * 2);
-  height: calc(${theme.subGridUnit} * 2);
+  width: calc(${fromTheme.subGridUnit} * 2);
+  height: calc(${fromTheme.subGridUnit} * 2);
   vertical-align: center;
-  margin-left: ${theme.subGridUnit};
-  margin-right: ${theme.subGridUnit};
+  margin-left: ${fromTheme.subGridUnit};
+  margin-right: ${fromTheme.subGridUnit};
 
   /* This is not a real border (box-shadow provides that), so not themed as such */
-  border: calc(${theme.subGridUnit} / 4) solid white;
+  border: calc(${fromTheme.subGridUnit} / 4) solid white;
   border-radius: 50%;
 
-  transition: border ${theme.transitionDurationXs}
-    ${theme.transitionTimingFunction};
+  transition: border ${fromTheme.transitionDurationXs}
+    ${fromTheme.transitionTimingFunction};
 
   color: ${props => props.color};
 `
@@ -28,7 +28,7 @@ const PseudoInput = styled.span`
 const Label = styled.span`
   display: inline-block;
   font-family: inherit;
-  font-size: ${theme.fontSizeBase};
+  font-size: ${fromTheme.fontSizeBase};
   font-style: italic;
 `
 
@@ -51,8 +51,8 @@ const Root = styled.label`
   align-items: center;
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  transition: all ${theme.transitionDuration};
-  min-height: ${theme.gridUnit};
+  transition: all ${fromTheme.transitionDuration};
+  min-height: ${fromTheme.gridUnit};
 
   &:not(:last-child) {
     margin-right: ${props => (props.inline ? props.theme.gridUnit : '0')};
@@ -61,7 +61,7 @@ const Root = styled.label`
 
   ${PseudoInput} {
     background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    box-shadow: 0 0 0 ${theme.borderWidth} currentcolor;
+    box-shadow: 0 0 0 ${fromTheme.borderWidth} currentcolor;
   }
 
   &:hover {
@@ -71,8 +71,8 @@ const Root = styled.label`
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: ${theme.transitionDurationS};
-      box-shadow: 0 0 0 ${theme.borderWidth}
+      animation-duration: ${fromTheme.transitionDurationS};
+      box-shadow: 0 0 0 ${fromTheme.borderWidth}
         ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
   }
@@ -81,7 +81,7 @@ const Root = styled.label`
 
 /* Not used for now
 .root.author {
-  font-family: ${theme.fontAuthor};
+  font-family: ${fromTheme.fontAuthor};
 }
 
 .root.author span {
