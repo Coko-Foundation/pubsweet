@@ -21,7 +21,6 @@ coverage/
 .nfs*
 
 ### OSX ###
-<<<<<<< HEAD:.gitignore
 *.DS_Store
 .AppleDouble
 .LSOverride
