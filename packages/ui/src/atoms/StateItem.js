@@ -4,18 +4,18 @@ import React from 'react'
 import fromTheme from '../helpers/fromTheme'
 
 const disabled = css`
-  color: ${fromTheme.colorSecondary};
+  color: ${fromTheme('colorSecondary')};
   cursor: default;
 
   &:hover {
-    color: ${fromTheme.colorSecondary};
+    color: ${fromTheme('colorSecondary')};
   }
 `
 
 const Root = styled.span`
   cursor: pointer;
-  font-family: ${fromTheme.fontInterface};
-  font-size: ${fromTheme.fontSizeBaseSmall};
+  font-family: ${fromTheme('fontInterface')};
+  font-size: ${fromTheme('fontSizeBaseSmall')};
   font-style: italic;
 
   &:focus {
@@ -23,9 +23,9 @@ const Root = styled.span`
   }
 
   &:hover {
-    color: ${fromTheme.colorText};
-    transition: ${fromTheme.transitionDurationUnit}
-      ${fromTheme.transitionTimingFunction};
+    color: ${fromTheme('colorText')};
+    transition: ${fromTheme('transitionDurationUnit')}
+      ${fromTheme('transitionTimingFunction')};
   }
 
   ${props => props.disabled && disabled};

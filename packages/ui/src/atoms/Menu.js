@@ -8,12 +8,12 @@ import fromTheme from '../helpers/fromTheme'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  max-width: calc(${fromTheme.gridUnit} * 14);
+  max-width: calc(${fromTheme('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${fromTheme.fontSizeBaseSmall};
+  font-size: ${fromTheme('fontSizeBaseSmall')};
   display: block;
 `
 
@@ -21,21 +21,21 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
-    ${fromTheme.colorBorder};
-  border-radius: ${fromTheme.borderRadius};
+  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
+    ${fromTheme('colorBorder')};
+  border-radius: ${fromTheme('borderRadius')};
   cursor: pointer;
   font-family: inherit;
 
   width: 100%;
-  height: calc(${fromTheme.gridUnit} * 2);
+  height: calc(${fromTheme('gridUnit')} * 2);
   padding: 0;
 
   display: flex;
   align-items: center;
 
   &:hover {
-    border-color: ${fromTheme.colorPrimary};
+    border-color: ${fromTheme('colorPrimary')};
   }
 `
 
@@ -43,24 +43,24 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(${fromTheme.gridUnit} / 2);
+  padding: 0 calc(${fromTheme('gridUnit')} / 2);
 
   &:hover {
-    color: ${fromTheme.colorPrimary};
+    color: ${fromTheme('colorPrimary')};
   }
 `
 
 const Placeholder = Value.extend`
-  color: ${fromTheme.colorTextPlaceholder};
+  color: ${fromTheme('colorTextPlaceholder')};
   font-style: italic;
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
-    ${fromTheme.colorFurniture};
+  border-left: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
+    ${fromTheme('colorFurniture')};
 
-  width: calc(${fromTheme.gridUnit} * 2);
-  height: calc(${fromTheme.gridUnit} * 2 - ${fromTheme.borderWidth} * 2);
+  width: calc(${fromTheme('gridUnit')} * 2);
+  height: calc(${fromTheme('gridUnit')} * 2 - ${fromTheme('borderWidth')} * 2);
 
   display: flex;
   align-items: center;
@@ -91,10 +91,10 @@ const Options = styled.div`
   left: 0;
   right: 0;
 
-  background-color: ${fromTheme.colorBackground};
-  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
-    ${fromTheme.colorBorder};
-  border-radius: ${fromTheme.borderRadius};
+  background-color: ${fromTheme('colorBackground')};
+  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
+    ${fromTheme('colorBorder')};
+  border-radius: ${fromTheme('borderRadius')};
   overflow: hidden;
 `
 
@@ -106,24 +106,24 @@ const Option = styled.div.attrs({
   color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: ${fromTheme.fontAuthor};
-  padding: calc(${fromTheme.subGridUnit} - ${fromTheme.borderWidth} * 2)
-    calc(${fromTheme.subGridUnit} * 2);
-  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle} transparent;
-  border-width: ${fromTheme.borderWidth} 0 ${fromTheme.borderWidth} 0;
+  font-family: ${fromTheme('fontAuthor')};
+  padding: calc(${fromTheme('subGridUnit')} - ${fromTheme('borderWidth')} * 2)
+    calc(${fromTheme('subGridUnit')} * 2);
+  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')} transparent;
+  border-width: ${fromTheme('borderWidth')} 0 ${fromTheme('borderWidth')} 0;
   white-space: nowrap;
 
   &:hover {
-    background: ${fromTheme.colorBackgroundHue};
-    border-color: ${fromTheme.colorBorder};
+    background: ${fromTheme('colorBackgroundHue')};
+    border-color: ${fromTheme('colorBorder')};
   }
 
   &:first-child:hover {
-    border-top-color: ${fromTheme.colorBackgroundHue};
+    border-top-color: ${fromTheme('colorBackgroundHue')};
   }
 
   &:last-child:hover {
-    border-bottom-color: ${fromTheme.colorBackgroundHue};
+    border-bottom-color: ${fromTheme('colorBackgroundHue')};
   }
 `
 

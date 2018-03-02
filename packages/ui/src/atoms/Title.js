@@ -13,8 +13,8 @@ const fontSize = ({ theme, level = 1 }) =>
 
 const Title = styled.div`
   font-size: ${fontSize};
-  font-family: ${fromTheme.fontHeading};
-  margin-bottom: ${fromTheme.gridUnit};
+  font-family: ${fromTheme('fontHeading')};
+  margin-bottom: ${fromTheme('gridUnit')};
 `
 
 /**

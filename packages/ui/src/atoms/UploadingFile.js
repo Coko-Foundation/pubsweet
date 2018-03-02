@@ -3,63 +3,63 @@ import styled from 'styled-components'
 import fromTheme from '../helpers/fromTheme'
 
 const Icon = styled.div`
-  background: ${fromTheme.colorFurniture};
-  height: calc(${fromTheme.subGridUnit} * 15);
-  margin-bottom: ${fromTheme.subGridUnit};
+  background: ${fromTheme('colorFurniture')};
+  height: calc(${fromTheme('subGridUnit')} * 15);
+  margin-bottom: ${fromTheme('subGridUnit')};
   opacity: 0.5;
   position: relative;
-  width: calc(${fromTheme.gridUnit} * 3);
+  width: calc(${fromTheme('gridUnit')} * 3);
 `
 
 const Progress = styled.div`
-  color: ${fromTheme.colorTextReverse};
+  color: ${fromTheme('colorTextReverse')};
   display: block;
   position: absolute;
-  bottom: ${fromTheme.subGridUnit};
-  left: calc(${fromTheme.subGridUnit} * 4);
+  bottom: ${fromTheme('subGridUnit')};
+  left: calc(${fromTheme('subGridUnit')} * 4);
 `
 
 const Extension = styled.div`
-  background: ${fromTheme.colorText};
-  color: ${fromTheme.colorTextReverse};
-  font-size: ${fromTheme.fontSizeBaseSmall};
-  left: calc(${fromTheme.subGridUnit} * 2);
+  background: ${fromTheme('colorText')};
+  color: ${fromTheme('colorTextReverse')};
+  font-size: ${fromTheme('fontSizeBaseSmall')};
+  left: calc(${fromTheme('subGridUnit')} * 2);
   position: absolute;
   right: 0;
   text-align: center;
   text-transform: uppercase;
-  top: calc(${fromTheme.subGridUnit} * 2);
+  top: calc(${fromTheme('subGridUnit')} * 2);
 `
 
 const Filename = styled.div`
-  color: ${fromTheme.colorText};
-  font-size: ${fromTheme.fontSizeBaseSmall};
+  color: ${fromTheme('colorText')};
+  font-size: ${fromTheme('fontSizeBaseSmall')};
   font-style: italic;
-  max-width: calc(${fromTheme.gridUnit} * 10);
+  max-width: calc(${fromTheme('gridUnit')} * 10);
 `
 
 const Uploading = styled.div`
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: ${fromTheme.gridUnit};
-  margin-right: calc(${fromTheme.subGridUnit} * 3);
+  margin-bottom: ${fromTheme('gridUnit')};
+  margin-right: calc(${fromTheme('subGridUnit')} * 3);
   position: relative;
-  width: calc(${fromTheme.gridUnit} * 10);
+  width: calc(${fromTheme('gridUnit')} * 10);
 `
 
 const Uploaded = Uploading.extend`
   &::before,
   &::after {
     cursor: pointer;
-    transition: transform ${fromTheme.transitionDurationS};
-    font-size: ${fromTheme.fontSizeBaseSmall};
+    transition: transform ${fromTheme('transitionDurationS')};
+    font-size: ${fromTheme('fontSizeBaseSmall')};
     left: 65%;
-    padding: 0 ${fromTheme.subGridUnit} 0 ${fromTheme.subGridUnit};
+    padding: 0 ${fromTheme('subGridUnit')} 0 ${fromTheme('subGridUnit')};
     position: absolute;
-    border: ${fromTheme.borderWidth} ${fromTheme.borderStyle}
-      ${fromTheme.colorTextReverse};
-    color: ${fromTheme.colorTextReverse};
+    border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
+      ${fromTheme('colorTextReverse')};
+    color: ${fromTheme('colorTextReverse')};
     text-transform: uppercase;
     cursor: pointer;
     transform: scaleX(0);
@@ -67,27 +67,27 @@ const Uploaded = Uploading.extend`
   }
 
   &::after {
-    background: ${fromTheme.colorError};
+    background: ${fromTheme('colorError')};
     content: 'Remove';
-    top: calc(${fromTheme.subGridUnit} * 5);
+    top: calc(${fromTheme('subGridUnit')} * 5);
     z-index: 2;
   }
 
   &::before {
-    background: ${fromTheme.colorPrimary};
+    background: ${fromTheme('colorPrimary')};
     content: 'Replace';
-    top: calc(${fromTheme.subGridUnit} * 10);
+    top: calc(${fromTheme('subGridUnit')} * 10);
     z-index: 3;
   }
 
   &:hover ${Extension} {
-    background: ${fromTheme.colorTextReverse};
-    color: ${fromTheme.colorPrimary};
+    background: ${fromTheme('colorTextReverse')};
+    color: ${fromTheme('colorPrimary')};
   }
 
   &:hover ${Icon} {
     opacity: 1;
-    background: ${fromTheme.colorPrimary};
+    background: ${fromTheme('colorPrimary')};
     transform: skewY(6deg) rotate(-6deg);
   }
 
@@ -98,14 +98,14 @@ const Uploaded = Uploading.extend`
 `
 
 const ErrorWrapper = styled.div`
-  background: ${fromTheme.colorError};
-  border: calc(${fromTheme.borderWidth} * 2) ${fromTheme.borderStyle}
-    ${fromTheme.colorTextReverse};
-  color: ${fromTheme.colorTextReverse};
-  font-size: ${fromTheme.fontSizeBaseSmall};
+  background: ${fromTheme('colorError')};
+  border: calc(${fromTheme('borderWidth')} * 2) ${fromTheme('borderStyle')}
+    ${fromTheme('colorTextReverse')};
+  color: ${fromTheme('colorTextReverse')};
+  font-size: ${fromTheme('fontSizeBaseSmall')};
   letter-spacing: 0.01em;
   opacity: 1;
-  padding: ${fromTheme.subGridUnit} ${fromTheme.subGridUnit};
+  padding: ${fromTheme('subGridUnit')} ${fromTheme('subGridUnit')};
   position: absolute;
   top: 25%;
   z-index: 4;

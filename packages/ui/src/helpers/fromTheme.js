@@ -6,15 +6,8 @@ A bit of syntactic sugar for styled-components. Lets you replace this:
 
 with this:
 
-  ${fromTheme.colorPrimary}
+  ${fromTheme('colorPrimary')}
 
 */
 
-export default new Proxy(
-  {},
-  {
-    get(target, name, receiver) {
-      return props => props.theme[name]
-    },
-  },
-)
+export default name => props => props.theme[name]

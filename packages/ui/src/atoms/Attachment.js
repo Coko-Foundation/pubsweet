@@ -13,19 +13,19 @@ const Filename = styled.span`
 `
 
 const uploadedIcon = ({ theme }) => `
-  stroke: ${fromTheme.colorPrimary};
-  height: ${fromTheme.fontSizeBaseSmall};
-  width: ${fromTheme.fontSizeBaseSmall};
+  stroke: ${fromTheme('colorPrimary')};
+  height: ${fromTheme('fontSizeBaseSmall')};
+  width: ${fromTheme('fontSizeBaseSmall')};
 `
 
 const uploadingIcon = ({ theme }) => `
-  stroke: ${fromTheme.colorText};
-  height: ${fromTheme.fontSizeBase};
-  width: ${fromTheme.fontSizeBase};
+  stroke: ${fromTheme('colorText')};
+  height: ${fromTheme('fontSizeBase')};
+  width: ${fromTheme('fontSizeBase')};
 `
 
 const IconContainer = styled.span`
-  margin: 0 ${fromTheme.subGridUnit};
+  margin: 0 ${fromTheme('subGridUnit')};
 
   & svg {
     ${props => (props.uploaded ? uploadedIcon : uploadingIcon)};

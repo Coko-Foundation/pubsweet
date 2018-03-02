@@ -7,11 +7,11 @@ const injectGlobalStyles = () => injectGlobal`
 `
 
 const StyleRoot = styled.div`
-  background-color: ${fromTheme.colorBackground};
-  font-family: ${fromTheme.fontInterface}, sans-serif;
-  font-size: ${fromTheme.fontSizeBase};
-  color: ${fromTheme.colorText};
-  line-height: ${fromTheme.fontLineHeight};
+  background-color: ${fromTheme('colorBackground')};
+  font-family: ${fromTheme('fontInterface')}, sans-serif;
+  font-size: ${fromTheme('fontSizeBase')};
+  color: ${fromTheme('colorText')};
+  line-height: ${fromTheme('fontLineHeight')};
 
   * {
     box-sizing: border-box;

@@ -8,11 +8,11 @@ import fromTheme from '../helpers/fromTheme'
 
 const Container = styled.span`
   display: inline-flex;
-  padding: calc(${fromTheme.subGridUnit} / 2);
+  padding: calc(${fromTheme('subGridUnit')} / 2);
   svg {
     stroke: ${props => props.color || props.theme.colorText};
-    width: calc(${props => props.size} * ${fromTheme.subGridUnit});
-    height: calc(${props => props.size} * ${fromTheme.subGridUnit});
+    width: calc(${props => props.size} * ${fromTheme('subGridUnit')});
+    height: calc(${props => props.size} * ${fromTheme('subGridUnit')});
   }
 `
 

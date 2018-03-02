@@ -6,19 +6,19 @@ import fromTheme from '../helpers/fromTheme'
 import TextField from '../atoms/TextField'
 
 const Root = styled.div`
-  width: calc(${fromTheme.gridUnit} * 14);
+  width: calc(${fromTheme('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Value = styled.div`
-  padding: calc(${fromTheme.gridUnit} / 2 - ${fromTheme.borderWidth})
-    calc(${fromTheme.gridUnit} / 2);
-  border: ${fromTheme.borderWidth} ${fromTheme.borderStyle} transparent;
-  border-radius: ${fromTheme.borderRadius};
+  padding: calc(${fromTheme('gridUnit')} / 2 - ${fromTheme('borderWidth')})
+    calc(${fromTheme('gridUnit')} / 2);
+  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')} transparent;
+  border-radius: ${fromTheme('borderRadius')};
   cursor: pointer;
 
   &:hover {
-    border-color: ${fromTheme.colorSecondary};
+    border-color: ${fromTheme('colorSecondary')};
   }
 `
 

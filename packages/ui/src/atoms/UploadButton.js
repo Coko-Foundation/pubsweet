@@ -6,11 +6,11 @@ const Button = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${fromTheme.borderWidth} dashed ${fromTheme.colorBorder};
-  height: ${fromTheme.gridUnit};
+  border: ${fromTheme('borderWidth')} dashed ${fromTheme('colorBorder')};
+  height: ${fromTheme('gridUnit')};
   cursor: pointer;
-  margin-bottom: ${fromTheme.gridUnit};
-  padding: ${fromTheme.subGridUnit};
+  margin-bottom: ${fromTheme('gridUnit')};
+  padding: ${fromTheme('subGridUnit')};
 `
 
 const UploadButton = ({ name, buttonText, onChange }) => {

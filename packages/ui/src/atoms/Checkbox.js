@@ -23,7 +23,7 @@ const localBorderTwoSize = '1px'
 const Root = styled.label`
   align-items: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  font-family: ${fromTheme.fontAuthor};
+  font-family: ${fromTheme('fontAuthor')};
   font-style: italic;
   letter-spacing: 1px;
   transition: all 2s;
@@ -43,7 +43,7 @@ const Root = styled.label`
   }
 
   &:hover span {
-    color: ${fromTheme.colorPrimary};
+    color: ${fromTheme('colorPrimary')};
   }
 
   & span::before {
@@ -65,8 +65,8 @@ const Root = styled.label`
   &:hover span::before {
     animation: ${checking} 0.5s;
 
-    background: ${fromTheme.colorPrimary};
-    box-shadow: 0 0 0 ${localBorderTwoSize} ${fromTheme.colorPrimary};
+    background: ${fromTheme('colorPrimary')};
+    box-shadow: 0 0 0 ${localBorderTwoSize} ${fromTheme('colorPrimary')};
   }
 `
 

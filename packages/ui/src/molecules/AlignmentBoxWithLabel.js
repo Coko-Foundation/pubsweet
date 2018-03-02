@@ -15,7 +15,7 @@ const Root = styled.div`
 
 const Label = styled.span`
   color: ${blue};
-  font-family: ${fromTheme.fontInterface};
+  font-family: ${fromTheme('fontInterface')};
   font-size: 16px;
   font-style: italic;
   margin-left: ${props => (props.positionRight ? '10px' : '0')};

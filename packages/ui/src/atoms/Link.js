@@ -3,7 +3,7 @@ import { Link as UnstyledLink } from 'react-router-dom'
 import fromTheme from '../helpers/fromTheme'
 
 const Link = styled(UnstyledLink)`
-  color: ${fromTheme.colorPrimary};
+  color: ${fromTheme('colorPrimary')};
   cursor: pointer;
 `
 
