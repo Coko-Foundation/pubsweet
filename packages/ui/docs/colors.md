@@ -7,7 +7,10 @@ CSS variables are used to define the theme's color scheme.
 Default font color
 
 ```js
-<div style={{ color: 'var(--color-text)' }}>{faker.lorem.sentence(5)}</div>
+const ColorText = require('styled-components').default.div`
+  color: ${props => props.theme.colorText};
+`
+;<ColorText>{faker.lorem.sentence(5)}</ColorText>
 ```
 
 `--color-text-reverse`
@@ -15,14 +18,11 @@ Default font color
 Reverse font color
 
 ```js
-<div
-  style={{
-    background: 'var(--color-text)',
-    color: 'var(--color-text-reverse)',
-  }}
->
-  {faker.lorem.sentence(5)}
-</div>
+const ColorTextReverse = require('styled-components').default.div`
+  background-color: ${props => props.theme.colorText};
+  color: ${props => props.theme.colorTextReverse};
+`
+;<ColorTextReverse>{faker.lorem.sentence(5)}</ColorTextReverse>
 ```
 
 `--color-primary`
@@ -30,7 +30,10 @@ Reverse font color
 Indicates a primary call to action
 
 ```js
-<div style={{ color: 'var(--color-primary)' }}>{faker.lorem.sentence(5)}</div>
+const ColorPrimary = require('styled-components').default.div`
+  color: ${props => props.theme.colorPrimary};
+`
+;<ColorPrimary>{faker.lorem.sentence(5)}</ColorPrimary>
 ```
 
 `--color-secondary`
@@ -38,7 +41,10 @@ Indicates a primary call to action
 Default color for non-primary actions
 
 ```js
-<div style={{ color: 'var(--color-secondary)' }}>{faker.lorem.sentence(5)}</div>
+const ColorSecondary = require('styled-components').default.div`
+  color: ${props => props.theme.colorSecondary};
+`
+;<ColorSecondary>{faker.lorem.sentence(5)}</ColorSecondary>
 ```
 
 `--color-furniture`
@@ -46,7 +52,16 @@ Default color for non-primary actions
 Meant to be applied to elements that indicate content division
 
 ```js
-<div style={{ color: 'var(--color-furniture)' }}>{faker.lorem.sentence(5)}</div>
+const Divider = require('styled-components').default.span`
+  color: ${props => props.theme.colorFurniture};
+`
+;<div>
+  {faker.lorem.sentence(2)}
+  <Divider> | </Divider>
+  {faker.lorem.sentence(2)}
+  <Divider> | </Divider>
+  {faker.lorem.sentence(2)}
+</div>
 ```
 
 `--color-border`
@@ -54,17 +69,7 @@ Meant to be applied to elements that indicate content division
 For borders around form elements
 
 ```js
-<input
-  type="text"
-  style={{
-    border: 'var(--border-width) var(--border-style) var(--color-border)',
-    borderRadius: 'var(--border-radius)',
-    color: 'var(--color-text)',
-    fontSize: 'var(--font-size-base)',
-    padding: '12px',
-  }}
-  value={faker.lorem.sentence(5)}
-/>
+<TextField inline value={faker.lorem.sentence(3)} />
 ```
 
 `--color-text-placeholder`
@@ -72,17 +77,7 @@ For borders around form elements
 Used for text field placeholders
 
 ```js
-<input
-  type="text"
-  style={{
-    border: 'var(--border-width) var(--border-style) var(--color-border)',
-    borderRadius: 'var(--border-radius)',
-    color: 'var(--color-text-placeholder)',
-    fontSize: 'var(--font-size-base)',
-    padding: '12px',
-  }}
-  placeholder="First name"
-/>
+<TextField inline placeholder={faker.lorem.sentence(3)} />
 ```
 
 `--color-background-hue`
@@ -90,11 +85,14 @@ Used for text field placeholders
 Used to create a discrete contrast the default background color
 
 ```js
-<div>
+const BackgroundHue = require('styled-components').default.div`
+  background-color: ${props => props.theme.colorBackgroundHue};
+`
+;<div>
   <div>{faker.lorem.sentence(5)}</div>
-  <div style={{ background: 'var(--color-background-hue)' }}>
-    {faker.lorem.sentence(5)}
-  </div>
+  <BackgroundHue>{faker.lorem.sentence(5)}</BackgroundHue>
+  <div>{faker.lorem.sentence(5)}</div>
+  <BackgroundHue>{faker.lorem.sentence(5)}</BackgroundHue>
   <div>{faker.lorem.sentence(5)}</div>
 </div>
 ```
@@ -106,7 +104,10 @@ Used to create a discrete contrast the default background color
 Used to indicate a successful validation state
 
 ```js
-<div style={{ color: 'var(--color-success)' }}>{faker.lorem.sentence(5)}</div>
+const ColorSuccess = require('styled-components').default.div`
+  color: ${props => props.theme.colorSuccess};
+`
+;<ColorSuccess>{faker.lorem.sentence(5)}</ColorSuccess>
 ```
 
 Used to indicate an error in validation
@@ -114,5 +115,8 @@ Used to indicate an error in validation
 `--color-error`
 
 ```js
-<div style={{ color: 'var(--color-error)' }}>{faker.lorem.sentence(5)}</div>
+const ColorError = require('styled-components').default.div`
+  color: ${props => props.theme.colorError};
+`
+;<ColorError>{faker.lorem.sentence(5)}</ColorError>
 ```

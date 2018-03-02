@@ -28,4 +28,7 @@ module.exports = {
     Wrapper: require.resolve('@pubsweet/styleguide/src/components/Wrapper'),
   },
   title: 'PubSweet UI style guide',
+  compilerConfig: {
+    transforms: { dangerousTaggedTemplateString: true },
+  },
 }
