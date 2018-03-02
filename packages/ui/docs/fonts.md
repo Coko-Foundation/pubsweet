@@ -1,6 +1,6 @@
 CSS variables are used to define font families.
 
-`--font-interface`
+`fontInterface`
 
 ```js
 const FontInterface = require('styled-components').default.div`
@@ -9,7 +9,7 @@ const FontInterface = require('styled-components').default.div`
 ;<FontInterface>{faker.lorem.sentence(5)}</FontInterface>
 ```
 
-`--font-heading`
+`fontHeading`
 
 ```js
 const FontHeading = require('styled-components').default.div`
@@ -18,7 +18,7 @@ const FontHeading = require('styled-components').default.div`
 ;<FontHeading>{faker.lorem.sentence(5)}</FontHeading>
 ```
 
-`--font-reading`
+`fontReading`
 
 ```js
 const FontReading = require('styled-components').default.div`
@@ -27,7 +27,7 @@ const FontReading = require('styled-components').default.div`
 ;<FontReading>{faker.lorem.sentence(5)}</FontReading>
 ```
 
-`--font-writing`
+`fontWriting`
 
 ```js
 const FontWriting = require('styled-components').default.div`

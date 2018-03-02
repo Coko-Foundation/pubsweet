@@ -2,7 +2,7 @@ CSS variables are used to define the theme's color scheme.
 
 ## Brand colors
 
-`--color-text`
+`colorText`
 
 Default font color
 
@@ -13,7 +13,7 @@ const ColorText = require('styled-components').default.div`
 ;<ColorText>{faker.lorem.sentence(5)}</ColorText>
 ```
 
-`--color-text-reverse`
+`colorTextReverse`
 
 Reverse font color
 
@@ -25,7 +25,7 @@ const ColorTextReverse = require('styled-components').default.div`
 ;<ColorTextReverse>{faker.lorem.sentence(5)}</ColorTextReverse>
 ```
 
-`--color-primary`
+`colorPrimary`
 
 Indicates a primary call to action
 
@@ -36,7 +36,7 @@ const ColorPrimary = require('styled-components').default.div`
 ;<ColorPrimary>{faker.lorem.sentence(5)}</ColorPrimary>
 ```
 
-`--color-secondary`
+`colorSecondary`
 
 Default color for non-primary actions
 
@@ -47,7 +47,7 @@ const ColorSecondary = require('styled-components').default.div`
 ;<ColorSecondary>{faker.lorem.sentence(5)}</ColorSecondary>
 ```
 
-`--color-furniture`
+`colorFurniture`
 
 Meant to be applied to elements that indicate content division
 
@@ -64,7 +64,7 @@ const Divider = require('styled-components').default.span`
 </div>
 ```
 
-`--color-border`
+`colorBorder`
 
 For borders around form elements
 
@@ -72,7 +72,7 @@ For borders around form elements
 <TextField inline value={faker.lorem.sentence(3)} />
 ```
 
-`--color-text-placeholder`
+`colorTextPlaceholder`
 
 Used for text field placeholders
 
@@ -80,7 +80,7 @@ Used for text field placeholders
 <TextField inline placeholder={faker.lorem.sentence(3)} />
 ```
 
-`--color-background-hue`
+`colorBackgroundHue`
 
 Used to create a discrete contrast the default background color
 
@@ -99,7 +99,7 @@ const BackgroundHue = require('styled-components').default.div`
 
 ## Colors for interactions
 
-`--color-success`
+`colorSuccess`
 
 Used to indicate a successful validation state
 
@@ -112,7 +112,7 @@ const ColorSuccess = require('styled-components').default.div`
 
 Used to indicate an error in validation
 
-`--color-error`
+`colorError`
 
 ```js
 const ColorError = require('styled-components').default.div`
