@@ -6,26 +6,24 @@ exports[`Radio is rendered correctly 1`] = `
 }
 
 .c3 {
-  --local-border-size: 2px;
-  --local-borderTwo-size: 1px;
   display: inline-block;
   content: ' ';
-  width: 0.6em;
-  height: 0.6em;
+  width: calc(8px * 2);
+  height: calc(8px * 2);
   vertical-align: center;
-  margin-left: 0.2em;
-  margin-right: 0.6em;
-  border: var(--local-border-size) solid white;
+  margin-left: 8px;
+  margin-right: 8px;
+  border: calc(8px / 4) solid white;
   border-radius: 50%;
-  -webkit-transition: border 0.2s ease;
-  transition: border 0.2s ease;
+  -webkit-transition: border 0.1s ease;
+  transition: border 0.1s ease;
   color: black;
 }
 
 .c5 {
   display: inline-block;
   font-family: inherit;
-  font-size: 1em;
+  font-size: 18px;
   font-style: italic;
 }
 
@@ -39,31 +37,32 @@ exports[`Radio is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  min-height: 32px;
   color: black;
 }
 
 .c0:not(:last-child) {
   margin-right: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .c0 .c2 {
   background: transparent;
-  box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+  box-shadow: 0 0 0 1px currentcolor;
 }
 
 .c0:hover .c4 {
-  color: var(--color-primary);
+  color: black;
 }
 
 .c0:hover .c2 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  box-shadow: 0 0 0 1px black;
 }
 
 <label

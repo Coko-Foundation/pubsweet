@@ -1,62 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
-const Root = styled.label`
-  --font-local: var(--font-reviewer);
-
-  align-items: center;
+const Root = styled.div`
   display: flex;
-  font-size: 1em;
-  line-height: 1.8;
+  flex-direction: column;
+  max-width: calc(${th('gridUnit')} * 14);
+  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
-const Label = styled.span`
-  margin-right: 10px;
+const Label = styled.label`
+  font-size: ${th('fontSizeBaseSmall')};
+  display: block;
 `
+
+const borderColor = ({ theme, validationStatus = 'default' }) =>
+  ({
+    error: theme.colorError,
+    success: theme.colorSuccess,
+    warning: theme.colorWarning,
+    default: theme.colorBorder,
+  }[validationStatus])
 
 const Input = styled.input`
-  --color-back: darkgray;
+  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
 
-  background: linear-gradient(
-      to right,
-      transparent 0%,
-      transparent 2px,
-      white 2px,
-      white 4px
-    ),
-    linear-gradient(white 0%, white 90%, var(--color-back) 95%, white 100%);
-  background-position: 0 0, 0.2em 0;
-  background-repeat: repeat-X, repeat-Y;
-  background-size: 7px 100%, 100% 1.3em;
-  border: none;
-  border-left: 1px solid darkgrey;
-  caret-color: var(--color-primary);
-  flex: 1;
-  font-family: var(--font-local), serif;
+  border-radius: ${th('borderRadius')};
+
+  font-family: inherit;
   font-size: inherit;
-  max-width: 100%;
-  padding: 0 0.5em;
 
-  &:hover,
-  &:focus {
-    border-color: transparent;
-    box-shadow: none;
-    outline-style: none;
-  }
-
-  &:hover {
-    --color-back: var(--color-primary);
-  }
-
-  &:focus {
-    --color-back: #aaa;
-  }
+  padding: 0 calc(${th('gridUnit')} / 2);
+  height: calc(${th('gridUnit')} * 2);
 
   &::placeholder {
-    color: #999;
-    font-family: var(--font-interface);
-    font-size: 1em;
-    font-style: italic;
+    color: ${th('colorTextPlaceholder')};
   }
 `
 
@@ -69,18 +47,23 @@ const TextField = ({
   value = '',
   onBlur,
   onChange,
+  onKeyDown,
   readonly,
+  validationStatus,
+  inline,
 }) => (
-  <Root>
+  <Root inline={inline}>
     {label && <Label>{label}</Label>}
     <Input
       name={name}
       onBlur={onBlur}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       placeholder={placeholder}
       readOnly={readonly}
       required={required}
       type={type}
+      validationStatus={validationStatus}
       value={value}
     />
   </Root>

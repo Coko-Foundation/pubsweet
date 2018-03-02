@@ -6,11 +6,10 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/ui": "^2.0.0",
     "prop-types": "^15.5.10",
-    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "react-select": "^1.0.0-rc.10",
     "redux": "^3.7.2"
   },
   "peerDependencies": {

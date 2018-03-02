@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 
 import Radio from '../src/atoms/Radio'
+import TestThemeProvider from './setup/theme'
 
 const props = {
   checked: false,
@@ -13,16 +14,20 @@ const props = {
   value: 'TestValue',
 }
 
-const wrapper = mount(<Radio {...props} />)
-
 describe('Radio', () => {
   test('is rendered correctly', () => {
-    const tree = renderer.create(<Radio {...props} />).toJSON()
+    const tree = renderer
+      .create(
+        <TestThemeProvider>
+          <Radio {...props} />
+        </TestThemeProvider>,
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 
   test('Input gets the correct props', () => {
-    const input = wrapper.find('input')
+    const input = mount(<Radio {...props} />).find('input')
 
     expect(input.prop('name')).toBe(props.name)
     expect(input.prop('value')).toBe(props.value)

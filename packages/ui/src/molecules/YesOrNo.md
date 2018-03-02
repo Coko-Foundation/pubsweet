@@ -14,12 +14,20 @@ If a value is set, one option is selected.
 />
 ```
 
-A colour can be passed in:
+Different statuses have different colours:
 
 ```js
-<YesOrNo
-  name="yesornocoloured"
-  color="darkgreen"
-  onChange={value => console.log(value)}
-/>
+<div>
+  <YesOrNo
+    primary
+    name="yesornocoloured"
+    onChange={value => console.log(value)}
+  />
+
+  <YesOrNo
+    warning
+    name="yesornocoloured"
+    onChange={value => console.log(value)}
+  />
+</div>
 ```

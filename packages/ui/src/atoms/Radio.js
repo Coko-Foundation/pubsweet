@@ -1,33 +1,34 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import th from '../helpers/themeHelper'
 
 const Input = styled.input`
   display: none;
 `
 
 const PseudoInput = styled.span`
-  --local-border-size: 2px;
-  --local-borderTwo-size: 1px;
-
   display: inline-block;
   content: ' ';
-  width: 0.6em;
-  height: 0.6em;
+  width: calc(${th('subGridUnit')} * 2);
+  height: calc(${th('subGridUnit')} * 2);
   vertical-align: center;
-  margin-left: 0.2em;
-  margin-right: 0.6em;
+  margin-left: ${th('subGridUnit')};
+  margin-right: ${th('subGridUnit')};
 
-  border: var(--local-border-size) solid white;
+  /* This is not a real border (box-shadow provides that), so not themed as such */
+  border: calc(${th('subGridUnit')} / 4) solid white;
   border-radius: 50%;
 
-  transition: border 0.2s ease;
+  transition: border ${th('transitionDurationXs')}
+    ${th('transitionTimingFunction')};
+
   color: ${props => props.color};
 `
 
 const Label = styled.span`
   display: inline-block;
   font-family: inherit;
-  font-size: 1em;
+  font-size: ${th('fontSizeBase')};
   font-style: italic;
 `
 
@@ -50,28 +51,29 @@ const Root = styled.label`
   align-items: center;
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  transition: all 2s;
+  transition: all ${th('transitionDuration')};
+  min-height: ${th('gridUnit')};
 
   &:not(:last-child) {
-    margin-right: ${props => (props.inline ? '2.7em' : '0')};
-    margin-bottom: ${props => (props.inline ? '0' : '0.5rem')};
+    margin-right: ${props => (props.inline ? props.theme.gridUnit : '0')};
+    margin-bottom: 0;
   }
 
   ${PseudoInput} {
     background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+    box-shadow: 0 0 0 ${th('borderWidth')} currentcolor;
   }
 
   &:hover {
     ${Label} {
-      color: ${props => (props.checked ? 'inherit' : 'var(--color-primary)')};
+      color: ${props => (props.checked ? 'inherit' : props.theme.colorPrimary)};
     }
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: 0.5s;
-      box-shadow: 0 0 0 var(--local-borderTwo-size)
-        ${props => (props.checked ? 'currentcolor' : 'var(--color-primary)')};
+      animation-duration: ${th('transitionDurationS')};
+      box-shadow: 0 0 0 ${th('borderWidth')}
+        ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
   }
   color: ${props => props.color};
@@ -79,7 +81,7 @@ const Root = styled.label`
 
 /* Not used for now
 .root.author {
-  font-family: var(--font-author);
+  font-family: ${th("fontAuthor")};
 }
 
 .root.author span {
@@ -100,7 +102,7 @@ const Radio = ({
   onChange,
   readonly,
 }) => (
-  <Root checked={checked} color={color}>
+  <Root checked={checked} color={color} inline={inline}>
     <Input
       checked={checked}
       disabled={readonly}

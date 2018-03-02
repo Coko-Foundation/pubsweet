@@ -1,75 +1,34 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
+import th from '../helpers/themeHelper'
 import Icon from '../atoms/Icon'
+import Link from '../atoms/Link'
 
 const Root = styled.nav`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 1rem;
-
-  a {
-    color: var(--color-primary);
-    text-decoration: none;
-
-    &::before {
-      color: #aaa;
-      display: inline-block;
-      height: 1em;
-      margin-right: 0.3em;
-      text-align: center;
-
-      &:hover {
-        color: var(--color-primary);
-      }
-    }
-  }
+  min-height: calc(${th('gridUnit')} * 2);
 `
 
 const Section = styled.div`
   display: flex;
 `
 
-const NavLinks = styled.div`
-  align-items: center;
-  display: flex;
-  margin: 0 1rem;
-
-  a {
-    padding: 0 1rem;
-
-    &:global(.active) {
-      font-weight: bold;
-    }
-  }
-`
-
-const Logo = styled(Link)`
-  font-weight: bold;
-  text-decoration: none;
-
-  &::before {
-    content: '';
-  }
-`
-
-const itemStyle = `
-  align-items: center;
-  display: inline-flex;
-  padding: 0 1rem;
-
-  svg {
-    margin-right: 0.3rem;
+const Logo = styled.span`
+  margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
+    1rem;
+  & svg {
+    height: calc(${th('gridUnit')} * 2);
   }
 `
 
 const Item = styled.span`
-  ${itemStyle};
-`
-const ActionItem = Item.withComponent('a')
-const LinkItem = styled(Link)`
-  ${itemStyle};
+  align-items: center;
+  display: inline-flex;
+  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
 `
 
 const AppBar = ({
@@ -77,36 +36,60 @@ const AppBar = ({
   brand,
   loginLink = '/login',
   onLogoutClick,
-  navLinks,
+  navLinkComponents,
   user,
-  className,
 }) => (
   <Root>
     <Section>
-      {brand && <Logo to={brandLink}>{brand}</Logo>}
+      {brand && (
+        <Logo>
+          <Link to={brandLink}>{brand}</Link>
+        </Logo>
+      )}
 
-      {navLinks && <NavLinks>{navLinks}</NavLinks>}
+      {navLinkComponents &&
+        navLinkComponents.map((NavLinkComponent, idx) => (
+          <span key={NavLinkComponent.props.to}>
+            <Item>{NavLinkComponent}</Item>
+            {idx < navLinkComponents.length - 1 && <Item>|</Item>}
+          </span>
+        ))}
     </Section>
 
     <Section>
       {user && (
         <Item>
-          <Icon size={16}>user</Icon>
+          <Icon size={2}>user</Icon>
           {user.username}
           {user.admin ? ' (admin)' : ''}
         </Item>
       )}
 
       {user && (
-        <ActionItem href="#" onClick={onLogoutClick}>
-          <Icon size={16}>power</Icon>
-          Logout
-        </ActionItem>
+        <Item>
+          <Link onClick={onLogoutClick} to="#">
+            <Icon size={2}>power</Icon>
+            Logout
+          </Link>
+        </Item>
       )}
 
-      {!user && <LinkItem to={loginLink}>Login</LinkItem>}
+      {!user && (
+        <Item>
+          <Link to={loginLink}>Login</Link>
+        </Item>
+      )}
     </Section>
   </Root>
 )
+
+AppBar.propTypes = {
+  brandLink: PropTypes.string,
+  brand: PropTypes.node,
+  loginLink: PropTypes.string,
+  onLogoutClick: PropTypes.func,
+  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
+  user: PropTypes.object,
+}
 
 export default AppBar

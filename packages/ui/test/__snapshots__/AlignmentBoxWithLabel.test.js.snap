@@ -35,7 +35,6 @@ exports[`AlignmentBoxWithLabel is rendered correctly 1`] = `
 
 .c1 {
   color: #0d78f2;
-  font-family: var(--font-interface);
   font-size: 16px;
   font-style: italic;
   margin-left: 0;
