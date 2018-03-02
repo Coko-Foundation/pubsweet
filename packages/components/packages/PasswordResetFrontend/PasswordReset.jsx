@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import styled from 'styled-components'
-import { TextField, Button } from '@pubsweet/ui'
+import { TextField, Button, th } from '@pubsweet/ui'
 import * as api from 'pubsweet-client/src/helpers/api'
 
 const Root = styled.div`
@@ -12,7 +12,7 @@ const Root = styled.div`
 `
 
 const Alert = styled.div`
-  color: var(--color-error);
+  color: ${th('colorError')};
 `
 
 class PasswordReset extends React.Component {
