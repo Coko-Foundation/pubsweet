@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const Heading = styled.span`
-  color: ${fromTheme('colorPrimary')};
+  color: ${th('colorPrimary')};
   font-size: ${({ level = 1, theme }) => theme[`fontSizeHeading${level}`]};
-  font-family: ${fromTheme('fontHeading')};
-  margin-bottom: calc(1 * ${fromTheme('gridUnit')});
+  font-family: ${th('fontHeading')};
+  margin-bottom: calc(1 * ${th('gridUnit')});
 `
 
 export const H1 = ({ children }) => <Heading level={1}>{children}</Heading>

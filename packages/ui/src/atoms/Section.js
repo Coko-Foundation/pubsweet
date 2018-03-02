@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const Section = styled.div`
-  margin: 0 ${fromTheme('gridUnit')} ${fromTheme('gridUnit')} 0;
+  margin: 0 ${th('gridUnit')} ${th('gridUnit')} 0;
 
   &:not(:last-of-type) {
-    margin-bottom: calc(${fromTheme('gridUnit')} * 2);
+    margin-bottom: calc(${th('gridUnit')} * 2);
   }
 `
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 // TODO: separate tags when pasted
 // TODO: allow tags to be edited
@@ -97,12 +97,12 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    padding: ${fromTheme('subGridUnit')} 0 0 ${fromTheme('subGridUnit')};
+    padding: ${th('subGridUnit')} 0 0 ${th('subGridUnit')};
     position: relative;
   }
 
   .${classNames.root}.${classNames.rootFocused} {
-    border-color: ${fromTheme('colorPrimary')};
+    border-color: ${th('colorPrimary')};
   }
 
   .${classNames.selected} {
@@ -113,24 +113,24 @@ const Tags = styled(TagsUnstyled)`
     border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: ${fromTheme('fontReading')};
+    font-family: ${th('fontReading')};
 
     /* match the font styles */
-    margin: 0 ${fromTheme('subGridUnit')} ${fromTheme('gridUnit')} 0;
+    margin: 0 ${th('subGridUnit')} ${th('gridUnit')} 0;
     padding: 0.1em 0.3em;
 
     ${props => realBorder(props.theme.colorBorder, props.theme.colorBackground)}
   }
 
   .${classNames.selectedTag}::after {
-    color: ${fromTheme('colorBorder')};
+    color: ${th('colorBorder')};
     content: '\\2715';
     display: inline-block;
-    font-size: ${fromTheme('fontSizeBaseSmall')};
+    font-size: ${th('fontSizeBaseSmall')};
     font-weight: 600;
-    margin-left: ${fromTheme('subGridUnit')};
-    padding: ${fromTheme('subGridUnit')} 0 0
-    width: ${fromTheme('subGridUnit')};
+    margin-left: ${th('subGridUnit')};
+    padding: ${th('subGridUnit')} 0 0
+    width: ${th('subGridUnit')};
   }
 
   .${classNames.selectedTag}:hover,
@@ -140,18 +140,18 @@ const Tags = styled(TagsUnstyled)`
     ${props => realBorder('transparent', props.theme.colorBackground)}
 
     &::after {
-      color: ${fromTheme('colorError')};
+      color: ${th('colorError')};
     }
   }
   .${classNames.search} {
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 0 ${fromTheme('gridUnit')} 0;
+    margin: 0 0 ${th('gridUnit')} 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: calc(${fromTheme('gridUnit')} * 5);
-    padding: ${fromTheme('subGridUnit')} ${fromTheme('subGridUnit')};
+    max-width: calc(${th('gridUnit')} * 5);
+    padding: ${th('subGridUnit')} ${th('subGridUnit')};
   }
 
   @media screen and (min-width: 30em) {
@@ -163,11 +163,9 @@ const Tags = styled(TagsUnstyled)`
 
   .${classNames.search} input {
     border: 0;
-    border-bottom: ${fromTheme('borderWidth')} dashed ${fromTheme(
-  'colorBorder',
-)};
-    color: ${fromTheme('colorText')};
-    font-family: ${fromTheme('fontReading')};
+    border-bottom: ${th('borderWidth')} dashed ${th('colorBorder')};
+    color: ${th('colorText')};
+    font-family: ${th('fontReading')};
 
     /* match the font styles */
     font-size: inherit;
@@ -178,20 +176,18 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: calc(${fromTheme('gridUnit')} * 5);
+    min-width: calc(${th('gridUnit')} * 5);
     outline: none;
     padding: 0;
 
     &::placeholder {
-      font-family: ${fromTheme('fontInterface')};
-      color: ${fromTheme('colorTextPlaceholder')};
+      font-family: ${th('fontInterface')};
+      color: ${th('colorTextPlaceholder')};
     }
 
     &:focus,
     &:hover {
-      border-bottom: ${fromTheme('borderWidth')} dashed ${fromTheme(
-  'colorPrimary',
-)};
+      border-bottom: ${th('borderWidth')} dashed ${th('colorPrimary')};
     }
   }
 

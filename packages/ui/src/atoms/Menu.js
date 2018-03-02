@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -8,12 +8,12 @@ import fromTheme from '../helpers/fromTheme'
 // FIXME: putting markup inside a <button> is invalid
 
 const Root = styled.div`
-  max-width: calc(${fromTheme('gridUnit')} * 14);
+  max-width: calc(${th('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${fromTheme('fontSizeBaseSmall')};
+  font-size: ${th('fontSizeBaseSmall')};
   display: block;
 `
 
@@ -21,21 +21,20 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
-    ${fromTheme('colorBorder')};
-  border-radius: ${fromTheme('borderRadius')};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border-radius: ${th('borderRadius')};
   cursor: pointer;
   font-family: inherit;
 
   width: 100%;
-  height: calc(${fromTheme('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2);
   padding: 0;
 
   display: flex;
   align-items: center;
 
   &:hover {
-    border-color: ${fromTheme('colorPrimary')};
+    border-color: ${th('colorPrimary')};
   }
 `
 
@@ -43,24 +42,23 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(${fromTheme('gridUnit')} / 2);
+  padding: 0 calc(${th('gridUnit')} / 2);
 
   &:hover {
-    color: ${fromTheme('colorPrimary')};
+    color: ${th('colorPrimary')};
   }
 `
 
 const Placeholder = Value.extend`
-  color: ${fromTheme('colorTextPlaceholder')};
+  color: ${th('colorTextPlaceholder')};
   font-style: italic;
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
-    ${fromTheme('colorFurniture')};
+  border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
 
-  width: calc(${fromTheme('gridUnit')} * 2);
-  height: calc(${fromTheme('gridUnit')} * 2 - ${fromTheme('borderWidth')} * 2);
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
 
   display: flex;
   align-items: center;
@@ -91,10 +89,9 @@ const Options = styled.div`
   left: 0;
   right: 0;
 
-  background-color: ${fromTheme('colorBackground')};
-  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')}
-    ${fromTheme('colorBorder')};
-  border-radius: ${fromTheme('borderRadius')};
+  background-color: ${th('colorBackground')};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border-radius: ${th('borderRadius')};
   overflow: hidden;
 `
 
@@ -106,24 +103,24 @@ const Option = styled.div.attrs({
   color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: ${fromTheme('fontAuthor')};
-  padding: calc(${fromTheme('subGridUnit')} - ${fromTheme('borderWidth')} * 2)
-    calc(${fromTheme('subGridUnit')} * 2);
-  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')} transparent;
-  border-width: ${fromTheme('borderWidth')} 0 ${fromTheme('borderWidth')} 0;
+  font-family: ${th('fontAuthor')};
+  padding: calc(${th('subGridUnit')} - ${th('borderWidth')} * 2)
+    calc(${th('subGridUnit')} * 2);
+  border: ${th('borderWidth')} ${th('borderStyle')} transparent;
+  border-width: ${th('borderWidth')} 0 ${th('borderWidth')} 0;
   white-space: nowrap;
 
   &:hover {
-    background: ${fromTheme('colorBackgroundHue')};
-    border-color: ${fromTheme('colorBorder')};
+    background: ${th('colorBackgroundHue')};
+    border-color: ${th('colorBorder')};
   }
 
   &:first-child:hover {
-    border-top-color: ${fromTheme('colorBackgroundHue')};
+    border-top-color: ${th('colorBackgroundHue')};
   }
 
   &:last-child:hover {
-    border-bottom-color: ${fromTheme('colorBackgroundHue')};
+    border-bottom-color: ${th('colorBackgroundHue')};
   }
 `
 

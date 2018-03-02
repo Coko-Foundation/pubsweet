@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 import Icon from '../atoms/Icon'
 import Link from '../atoms/Link'
 
@@ -10,7 +10,7 @@ const Root = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: calc(${fromTheme('gridUnit')} * 2);
+  min-height: calc(${th('gridUnit')} * 2);
 `
 
 const Section = styled.div`
@@ -18,18 +18,17 @@ const Section = styled.div`
 `
 
 const Logo = styled.span`
-  margin: calc(${fromTheme('subGridUnit')} * 2) 1rem
-    calc(${fromTheme('subGridUnit')} * 2) 1rem;
+  margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
+    1rem;
   & svg {
-    height: calc(${fromTheme('gridUnit')} * 2);
+    height: calc(${th('gridUnit')} * 2);
   }
 `
 
 const Item = styled.span`
   align-items: center;
   display: inline-flex;
-  margin: calc(${fromTheme('gridUnit')} * 1) 1rem
-    calc(${fromTheme('gridUnit')} * 1) 1rem;
+  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
 `
 
 const AppBar = ({

@@ -42,4 +42,4 @@ export { default as AlignmentTool } from './molecules/AlignmentTool.js'
 export { default as Steps } from './molecules/Steps'
 
 /* helpers */
-export { default as fromTheme } from './helpers/fromTheme'
+export { default as th } from './helpers/themeHelper'

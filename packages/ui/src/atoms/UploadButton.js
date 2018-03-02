@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const Button = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${fromTheme('borderWidth')} dashed ${fromTheme('colorBorder')};
-  height: ${fromTheme('gridUnit')};
+  border: ${th('borderWidth')} dashed ${th('colorBorder')};
+  height: ${th('gridUnit')};
   cursor: pointer;
-  margin-bottom: ${fromTheme('gridUnit')};
-  padding: ${fromTheme('subGridUnit')};
+  margin-bottom: ${th('gridUnit')};
+  padding: ${th('subGridUnit')};
 `
 
 const UploadButton = ({ name, buttonText, onChange }) => {

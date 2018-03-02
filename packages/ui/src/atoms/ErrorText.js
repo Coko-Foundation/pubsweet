@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const ErrorText = styled.div`
-  color: ${fromTheme('colorError')};
+  color: ${th('colorError')};
 `
 
 /**

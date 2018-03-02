@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: calc(${fromTheme('gridUnit')} * 14);
+  max-width: calc(${th('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Label = styled.label`
-  font-size: ${fromTheme('fontSizeBaseSmall')};
+  font-size: ${th('fontSizeBaseSmall')};
   display: block;
 `
 
@@ -23,18 +23,18 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
   }[validationStatus])
 
 const Input = styled.input`
-  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')} ${borderColor};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
 
-  border-radius: ${fromTheme('borderRadius')};
+  border-radius: ${th('borderRadius')};
 
   font-family: inherit;
   font-size: inherit;
 
-  padding: 0 calc(${fromTheme('gridUnit')} / 2);
-  height: calc(${fromTheme('gridUnit')} * 2);
+  padding: 0 calc(${th('gridUnit')} / 2);
+  height: calc(${th('gridUnit')} * 2);
 
   &::placeholder {
-    color: ${fromTheme('colorTextPlaceholder')};
+    color: ${th('colorTextPlaceholder')};
   }
 `
 

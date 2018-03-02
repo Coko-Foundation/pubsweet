@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const checking = keyframes`
   0% {
@@ -23,7 +23,7 @@ const localBorderTwoSize = '1px'
 const Root = styled.label`
   align-items: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  font-family: ${fromTheme('fontAuthor')};
+  font-family: ${th('fontAuthor')};
   font-style: italic;
   letter-spacing: 1px;
   transition: all 2s;
@@ -43,7 +43,7 @@ const Root = styled.label`
   }
 
   &:hover span {
-    color: ${fromTheme('colorPrimary')};
+    color: ${th('colorPrimary')};
   }
 
   & span::before {
@@ -65,8 +65,8 @@ const Root = styled.label`
   &:hover span::before {
     animation: ${checking} 0.5s;
 
-    background: ${fromTheme('colorPrimary')};
-    box-shadow: 0 0 0 ${localBorderTwoSize} ${fromTheme('colorPrimary')};
+    background: ${th('colorPrimary')};
+    box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
   }
 `
 

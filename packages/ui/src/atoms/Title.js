@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 
 const fontSize = ({ theme, level = 1 }) =>
   ({
@@ -13,8 +13,8 @@ const fontSize = ({ theme, level = 1 }) =>
 
 const Title = styled.div`
   font-size: ${fontSize};
-  font-family: ${fromTheme('fontHeading')};
-  margin-bottom: ${fromTheme('gridUnit')};
+  font-family: ${th('fontHeading')};
+  margin-bottom: ${th('gridUnit')};
 `
 
 /**

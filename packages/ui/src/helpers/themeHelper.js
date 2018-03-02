@@ -6,7 +6,7 @@ A bit of syntactic sugar for styled-components. Lets you replace this:
 
 with this:
 
-  ${fromTheme('colorPrimary')}
+  ${th('colorPrimary')}
 
 */
 

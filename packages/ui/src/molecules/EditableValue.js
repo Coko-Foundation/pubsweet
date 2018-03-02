@@ -2,23 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import fromTheme from '../helpers/fromTheme'
+import th from '../helpers/themeHelper'
 import TextField from '../atoms/TextField'
 
 const Root = styled.div`
-  width: calc(${fromTheme('gridUnit')} * 14);
+  width: calc(${th('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
 const Value = styled.div`
-  padding: calc(${fromTheme('gridUnit')} / 2 - ${fromTheme('borderWidth')})
-    calc(${fromTheme('gridUnit')} / 2);
-  border: ${fromTheme('borderWidth')} ${fromTheme('borderStyle')} transparent;
-  border-radius: ${fromTheme('borderRadius')};
+  padding: calc(${th('gridUnit')} / 2 - ${th('borderWidth')})
+    calc(${th('gridUnit')} / 2);
+  border: ${th('borderWidth')} ${th('borderStyle')} transparent;
+  border-radius: ${th('borderRadius')};
   cursor: pointer;
 
   &:hover {
-    border-color: ${fromTheme('colorSecondary')};
+    border-color: ${th('colorSecondary')};
   }
 `
 
