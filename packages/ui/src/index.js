@@ -38,7 +38,7 @@ export { default as StateList } from './molecules/StateList'
 export {
   default as AlignmentBoxWithLabel,
 } from './molecules/AlignmentBoxWithLabel'
-export { default as AlignmentTool } from './molecules/AlignmentTool.js'
+export { default as AlignmentTool } from './molecules/AlignmentTool'
 export { default as Steps } from './molecules/Steps'
 
 /* helpers */
