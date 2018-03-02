@@ -1,57 +1,54 @@
 /* eslint-disable import/extensions */
-import { injectGlobal } from 'styled-components'
-
 import './fonts/index.css'
 
-injectGlobal`
-:root {
+export default {
   /* Colors */
-  --color-background: #fff;
-  --color-primary: #0288d1;
-  --color-secondary: #888;
-  --color-furniture: #ccc;
-  --color-border: #aaa;
-  --color-background-hue: #f5f5f5; /* marginally darker shade of the app background so that it can be used to divide the interface when needed */
-  --color-success: #629f43;
-  --color-error: #b50000;
-  --color-warning: #cf0c4e;
-  --color-text: #212121;
-  --color-text-reverse: #fff;
-  --color-text-placeholder: #bdbdbd;
+  colorBackground: '#fff',
+  colorPrimary: '#0288d1',
+  colorSecondary: '#888',
+  colorFurniture: '#ccc',
+  colorBorder: '#aaa',
+  colorBackgroundHue:
+    '#f5f5f5' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
+  colorSuccess: '#629f43',
+  colorError: '#b50000',
+  colorWarning: '#cf0c4e',
+  colorText: '#212121',
+  colorTextReverse: '#fff',
+  colorTextPlaceholder: '#bdbdbd',
 
   /* Text variables */
-  --font-interface: Georgia, serif;
-  --font-heading: "Avenir Next Webfont", Arial, Helvetica, sans-serif;
-  --font-reading: Georgia, serif;
-  --font-writing: "Courier 10 Pitch", Courier, monospace;
-  --font-size-base: 16px;
-  --font-size-base-small: 13px;
-  --font-size-heading-1: 36px;
-  --font-size-heading-2: 26px;
-  --font-size-heading-3: 22px;
-  --font-size-heading-4: 20px;
-  --font-size-heading-5: 18px;
-  --font-size-heading-6: 16px;
-  --font-line-height: 32px;
+  fontInterface: 'Georgia, serif',
+  fontHeading: '"Avenir Next Webfont", Arial, Helvetica, sans-serif',
+  fontReading: 'Georgia, serif',
+  fontWriting: '"Courier 10 Pitch", Courier, monospace',
+  fontSizeBase: '16px',
+  fontSizeBaseSmall: '13px',
+  fontSizeHeading1: '36px',
+  fontSizeHeading2: '26px',
+  fontSizeHeading3: '22px',
+  fontSizeHeading4: '20px',
+  fontSizeHeading5: '18px',
+  fontSizeHeading6: '16px',
+  fontLineHeight: '32px',
 
   /* Spacing */
-  --grid-unit: 24px;
-  --sub-grid-unit: calc(var(--grid-unit) / 4 );;
+  gridUnit: '24px',
+  subGridUnit: '6px',
 
   /* Border */
-  --border-radius: 3px;
-  --border-width: 1px;
-  --border-style: solid;
+  borderRadius: '3px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
 
   /* Shadow (for tooltip) */
-  --box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.3);
+  boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
 
   /* Transition */
-  --transition-duration: 1s;
-  --transition-duration-m: calc(var(--transition-duration) / 2 );
-  --transition-duration-s: calc(var(--transition-duration) / 5 );
-  --transition-duration-xs: calc(var(--transition-duration) / 10 );
-  --transition-timing-function: ease-in-out;
-  --transition-delay: 500ms;
+  transitionDuration: '1s',
+  transitionDurationM: '0.5s',
+  transitionDurationS: '0.2s',
+  transitionDurationXs: '0.1s',
+  transitionTimingFunction: 'ease-in-out',
+  transitionDelay: '500ms',
 }
-`
