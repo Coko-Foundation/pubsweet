@@ -16,6 +16,7 @@
     "apollo-client-preset": "^1.0.8",
     "apollo-link": "^1.1.0",
     "apollo-link-context": "^1.0.5",
+    "apollo-upload-client": "^7.1.0-alpha.1",
     "authsome": "0.0.9",
     "config": "^1.21.0",
     "event-source-polyfill": "^0.0.10",
@@ -66,9 +67,7 @@
     "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
     "globals": {
       "window": {}
     }

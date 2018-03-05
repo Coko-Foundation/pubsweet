@@ -8,10 +8,12 @@ import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { createUploadLink } from 'apollo-upload-client'
 import StyleRoot, { injectGlobalStyles } from '../helpers/StyleRoot'
 
 injectGlobalStyles()
 
+const uploadLink = createUploadLink()
 const httpLink = createHttpLink()
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token')
@@ -23,7 +25,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: authLink.concat(uploadLink, httpLink),
   cache: new InMemoryCache(),
 })
 
