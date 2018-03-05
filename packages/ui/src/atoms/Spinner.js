@@ -33,7 +33,9 @@ const Root = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  animation: ${rotating} 1.5s linear infinite;
+  svg {
+    animation: ${rotating} 1.5s linear infinite;
+  }
 `
 
 Spinner.propTypes = {
