@@ -1,44 +1,59 @@
 import React from 'react'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 import Icon from './Icon'
 
 const Filename = styled.span`
-  color: var(--color-primary);
+  color: ${props =>
+    props.uploaded ? props.theme.colorPrimary : props.theme.colorSecondary};
   display: inline-flex;
   overflow-wrap: break-word;
   padding: 0;
   word-break: break-all;
 `
 
-const IconContainer = styled.span`
-  --color-local: var(--color-primary);
-  --icon-size: 16px;
+const uploadedIcon = ({ theme }) => `
+  stroke: ${th('colorPrimary')};
+  height: ${th('fontSizeBaseSmall')};
+  width: ${th('fontSizeBaseSmall')};
+`
 
-  margin: 0.5em;
+const uploadingIcon = ({ theme }) => `
+  stroke: ${th('colorText')};
+  height: ${th('fontSizeBase')};
+  width: ${th('fontSizeBase')};
+`
+
+const IconContainer = styled.span`
+  margin: 0 ${th('subGridUnit')};
 
   & svg {
-    height: var(--icon-size);
-    width: var(--icon-size);
+    ${props => (props.uploaded ? uploadedIcon : uploadingIcon)};
   }
 `
 
 const Root = styled.a`
   align-items: center;
   display: flex;
-  line-height: 1.15;
   text-decoration: none;
 
   &:hover ${Filename} {
-    text-decoration: underline;
+    text-decoration: ${props => (props.uploaded ? 'underline' : 'none')};
   }
 `
 
-const Attachment = ({ value }) => (
-  <Root download={value.name} href={value.url}>
-    <IconContainer>
-      <Icon color="var(--color-local)">paperclip</Icon>
+const Attachment = ({ file, error, uploaded }) => (
+  <Root
+    download={uploaded && file.name}
+    href={uploaded && file.url}
+    uploaded={uploaded}
+  >
+    <IconContainer uploaded={uploaded}>
+      <Icon>paperclip</Icon>
     </IconContainer>
-    <Filename>{value.name}</Filename>
+    <Filename uploaded={uploaded}>
+      {error || (uploaded ? file.name : 'Uploading...')}
+    </Filename>
   </Root>
 )
 

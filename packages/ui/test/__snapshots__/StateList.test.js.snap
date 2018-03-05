@@ -3,10 +3,9 @@
 exports[`StateList is rendered correctly 1`] = `
 .c2 {
   cursor: pointer;
-  font-family: var(--font-interface);
+  font-family: sans-serif;
   font-size: 16px;
   font-style: italic;
-  padding: 0;
 }
 
 .c2:focus {
@@ -14,9 +13,9 @@ exports[`StateList is rendered correctly 1`] = `
 }
 
 .c2:hover {
-  color: #404040;
-  -webkit-transition: 0.25s ease-in-out 0s;
-  transition: 0.25s ease-in-out 0s;
+  color: black;
+  -webkit-transition: ease;
+  transition: ease;
 }
 
 .c0 {

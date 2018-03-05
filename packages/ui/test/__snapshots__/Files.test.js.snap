@@ -9,27 +9,22 @@ exports[`Files renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 0.9em;
-  font-style: italic;
-  line-height: 1.5;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
 }
 
 .c0 {
   background: transparent;
-  border: 1px dashed grey;
+  border: dashed;
   cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  margin-bottom: 2em;
-  padding: 10px;
 }
 
 <div
   className=""
 >
-  <div
-    className=""
-  >
+  <div>
     <button
       className="c0"
       onClick={[Function]}
@@ -51,10 +46,6 @@ exports[`Files renders correctly 1`] = `
   </div>
   <div
     className="c1"
-  >
-    <div>
-      IMG_4346.JPG
-    </div>
-  </div>
+  />
 </div>
 `;

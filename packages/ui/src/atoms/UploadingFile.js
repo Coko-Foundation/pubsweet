@@ -1,129 +1,138 @@
 import React from 'react'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
-// TODO: cancel button
+const Icon = styled.div`
+  background: ${th('colorFurniture')};
+  height: calc(${th('subGridUnit')} * 15);
+  margin-bottom: ${th('subGridUnit')};
+  opacity: 0.5;
+  position: relative;
+  width: calc(${th('gridUnit')} * 3);
+`
 
-const Root = styled.div`
+const Progress = styled.div`
+  color: ${th('colorTextReverse')};
+  display: block;
+  position: absolute;
+  bottom: ${th('subGridUnit')};
+  left: calc(${th('subGridUnit')} * 4);
+`
+
+const Extension = styled.div`
+  background: ${th('colorText')};
+  color: ${th('colorTextReverse')};
+  font-size: ${th('fontSizeBaseSmall')};
+  left: calc(${th('subGridUnit')} * 2);
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-transform: uppercase;
+  top: calc(${th('subGridUnit')} * 2);
+`
+
+const Filename = styled.div`
+  color: ${th('colorText')};
+  font-size: ${th('fontSizeBaseSmall')};
+  font-style: italic;
+  max-width: calc(${th('gridUnit')} * 10);
+`
+
+const Uploading = styled.div`
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: 2em;
-  margin-right: 3em;
+  margin-bottom: ${th('gridUnit')};
+  margin-right: calc(${th('subGridUnit')} * 3);
   position: relative;
-  width: 20ch;
+  width: calc(${th('gridUnit')} * 10);
+`
+
+const Uploaded = Uploading.extend`
+  &::before,
+  &::after {
+    cursor: pointer;
+    transition: transform ${th('transitionDurationS')};
+    font-size: ${th('fontSizeBaseSmall')};
+    left: 65%;
+    padding: 0 ${th('subGridUnit')} 0 ${th('subGridUnit')};
+    position: absolute;
+    border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorTextReverse')};
+    color: ${th('colorTextReverse')};
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: scaleX(0);
+    transform-origin: 0 0;
+  }
+
+  &::after {
+    background: ${th('colorError')};
+    content: 'Remove';
+    top: calc(${th('subGridUnit')} * 5);
+    z-index: 2;
+  }
+
+  &::before {
+    background: ${th('colorPrimary')};
+    content: 'Replace';
+    top: calc(${th('subGridUnit')} * 10);
+    z-index: 3;
+  }
+
+  &:hover ${Extension} {
+    background: ${th('colorTextReverse')};
+    color: ${th('colorPrimary')};
+  }
+
+  &:hover ${Icon} {
+    opacity: 1;
+    background: ${th('colorPrimary')};
+    transform: skewY(6deg) rotate(-6deg);
+  }
+
+  &:hover::after,
+  &:hover::before {
+    transform: scaleX(1);
+  }
 `
 
 const ErrorWrapper = styled.div`
-  background: var(--color-danger);
-  border: 2px solid white;
-  color: white;
-  font-size: 0.8em;
+  background: ${th('colorError')};
+  border: calc(${th('borderWidth')} * 2) ${th('borderStyle')}
+    ${th('colorTextReverse')};
+  color: ${th('colorTextReverse')};
+  font-size: ${th('fontSizeBaseSmall')};
   letter-spacing: 0.01em;
   opacity: 1;
-  padding: 0.3em 0.5em;
+  padding: ${th('subGridUnit')} ${th('subGridUnit')};
   position: absolute;
   top: 25%;
   z-index: 4;
 `
 
-const Icon = styled.div`
-  background: #ddd;
-  height: 100px;
-  margin: 5px;
-  opacity: 0.5;
-  position: relative;
-  width: 70px;
-`
+const getFileExtension = ({ name }) => name.replace(/^.+\./, '')
 
-const Progress = styled.div`
-  background-image:
-    linear-gradient(
-      var(--color-primary-light) 50%,
-      var(--color-primary) 75%,
-      to top
-    );
-  bottom: 0;
-  content: '';
-  display: block;
-  left: 0;
-  opacity: 1;
-  position: absolute;
-  right: 0;
-  transform-origin: 0 0;
+const UploadingFile = ({ file, progress, error, uploaded }) => {
+  const Root = uploaded ? Uploaded : Uploading
 
-  &::after {
-    /* we can use a data attribute for the numbering below */
-    bottom: 2px;
-    color: white;
-    content: '${props => props.percent}%';
-    display: block;
-    position: absolute;
-    right: 2px;
-  }
-`
-
-const Filename = styled.div`
-  color: gray;
-  font-size: 90%;
-  font-style: italic;
-  margin: 5px;
-  max-width: 20ch;
-`
-const Extension = styled.div`
-  background: #888;
-  color: white;
-  font-size: 12px;
-  left: 20px;
-  padding: 2px;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  text-transform: uppercase;
-  top: 20px;
-`
-const extension = ({ name }) => name.replace(/^.+\./, '')
-
-const UploadingFile = ({ file, error, progress }) => (
-  <Root>
-    {!!error && <ErrorWrapper>{error}</ErrorWrapper>}
-    <Icon>
-      {!!progress && <Progress percent={progress * 100} />}
-      <Extension>{extension(file)}</Extension>
-    </Icon>
-    <Filename>{file.name}</Filename>
-  </Root>
-)
+  return (
+    <Root>
+      {!!error && <ErrorWrapper>{error}</ErrorWrapper>}
+      <Icon>
+        {!!progress && <Progress>{progress * 100}%</Progress>}
+        <Extension>{getFileExtension(file)}</Extension>
+      </Icon>
+      <Filename>
+        {uploaded ? (
+          <a download={file.name} href={file.url}>
+            {file.name}
+          </a>
+        ) : (
+          file.name
+        )}
+      </Filename>
+    </Root>
+  )
+}
 
 export default UploadingFile
-
-// clock experiment, on hold.
-// const Progress = styled.div`
-//    opacity: 1;
-//    background: var(--color-primary);
-//    position: absolute;
-//    bottom: 10%;
-//    right: 10%;
-//    content: '';
-//    width: 3px;
-//    height: 1em;
-//    display: block;
-//    // margin-left: 30%;
-//    transform-origin: 0 0;
-//    animation: rotate 1s infinite ease-in-out ;
-//    background-image:
-//    &:after {
-//      content: "uploading";
-//      display: block;
-//      position: absolute;
-//      width: 1em;
-//      height:  1em;
-//    }
-//
-//  @keyframes rotate {
-//    0% {
-//      transform: rotate(0)
-//    }
-//    100% {
-//      transform: rotate(360deg);
-//    }
-// `

@@ -1,33 +1,37 @@
 CSS variables are used to define font families.
 
-`--font-author`
+`fontInterface`
 
 ```js
-<div style={{ fontFamily: 'var(--font-author)' }}>
-{faker.lorem.sentence(5)}
-</div>
+const FontInterface = require('styled-components').default.div`
+  font-family: ${props => props.theme.fontInterface};
+`
+;<FontInterface>{faker.lorem.sentence(5)}</FontInterface>
 ```
 
-`--font-reviewer`
+`fontHeading`
 
 ```js
-<div style={{ fontFamily: 'var(--font-reviewer)' }}>
-{faker.lorem.sentence(5)}
-</div>
+const FontHeading = require('styled-components').default.div`
+  font-family: ${props => props.theme.fontHeading};
+`
+;<FontHeading>{faker.lorem.sentence(5)}</FontHeading>
 ```
 
-`--font-interface`
+`fontReading`
 
 ```js
-<div style={{ fontFamily: 'var(--font-interface)' }}>
-{faker.lorem.sentence(5)}
-</div>
+const FontReading = require('styled-components').default.div`
+  font-family: ${props => props.theme.fontReading};
+`
+;<FontReading>{faker.lorem.sentence(5)}</FontReading>
 ```
 
-`--font-mono`
+`fontWriting`
 
 ```js
-<div style={{ fontFamily: 'var(--font-mono)' }}>
-{faker.lorem.sentence(5)}
-</div>
+const FontWriting = require('styled-components').default.div`
+  font-family: ${props => props.theme.fontWriting};
+`
+;<FontWriting>{faker.lorem.sentence(5)}</FontWriting>
 ```

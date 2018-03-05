@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.1"></a>
+
+## [2.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@2.1.0...@pubsweet/ui@2.1.1) (2018-02-23)
+
+### Bug Fixes
+
+* **ui:** add spinner in index.js ([84ecec1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/84ecec1))
+
 <a name="2.1.0"></a>
 
 # [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@2.0.0...@pubsweet/ui@2.1.0) (2018-02-16)

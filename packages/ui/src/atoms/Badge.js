@@ -11,7 +11,6 @@ const Root = styled.span`
     #fff 1.15em,
     #fff 2em
   );
-  font-family: var(--font-interface);
   font-size: 1em;
   margin-right: 1em;
   padding-bottom: 1em;

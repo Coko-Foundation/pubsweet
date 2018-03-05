@@ -2,42 +2,82 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  font-size: 1em;
+  max-width: calc(32px * 14);
+  margin-bottom: 32px;
 }
 
 .c2 {
   background: transparent;
-  border: none;
+  border: 1px solid grey;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
-  border-left: 2px solid lightgrey;
-  color: inherit;
+  width: 100%;
+  height: calc(32px * 2);
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  border-color: black;
 }
 
 .c3 {
-  display: inline-block;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 calc(32px / 2);
+}
+
+.c3:hover {
+  color: black;
+}
+
+.c4 {
+  border-left: 1px solid grey;
+  width: calc(32px * 2);
+  height: calc(32px * 2 - 1px * 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c5 {
   font-size: 50%;
-  margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transform: scaleX(2.2) scaleY(1.2);
-  -ms-transform: scaleX(2.2) scaleY(1.2);
-  transform: scaleX(2.2) scaleY(1.2);
+  -webkit-transform: scaleX(2) scaleY(1.2);
+  -ms-transform: scaleX(2) scaleY(1.2);
+  transform: scaleX(2) scaleY(1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c4 {
+.c6 {
   position: absolute;
+  left: 0;
+  right: 0;
 }
 
 <div
@@ -48,28 +88,30 @@ exports[`Menu is rendered correctly 1`] = `
     className="c1"
     role="listbox"
   >
-    <div
-      className=""
+    <button
+      className="c2"
+      onClick={[Function]}
+      open={false}
+      type="button"
     >
-      <button
-        className="c2"
-        onClick={[Function]}
-        open={false}
-        type="button"
+      <span
+        className="c3"
       >
-        <span>
-          Foo
-        </span>
+        Foo
+      </span>
+      <span
+        className="c4"
+      >
         <span
-          className="c3"
+          className="c5"
           open={false}
         >
           ▼
         </span>
-      </button>
-    </div>
+      </span>
+    </button>
     <div
-      className="c4"
+      className="c6"
     />
   </div>
 </div>
@@ -77,85 +119,138 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  font-size: 1em;
+  max-width: calc(32px * 14);
+  margin-bottom: 32px;
 }
 
 .c2 {
   background: transparent;
-  border: none;
+  border: 1px solid grey;
+  border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  width: 100%;
+  height: calc(32px * 2);
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2:hover {
-  border-left: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  border-color: black;
 }
 
 .c3 {
-  display: inline-block;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 calc(32px / 2);
+}
+
+.c3:hover {
+  color: black;
+}
+
+.c4 {
+  border-left: 1px solid grey;
+  width: calc(32px * 2);
+  height: calc(32px * 2 - 1px * 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c5 {
   font-size: 50%;
-  margin-left: 10px;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transform: scaleX(2.2) scaleY(-1.2);
-  -ms-transform: scaleX(2.2) scaleY(-1.2);
-  transform: scaleX(2.2) scaleY(-1.2);
+  -webkit-transform: scaleX(2) scaleY(-1.2);
+  -ms-transform: scaleX(2) scaleY(-1.2);
+  transform: scaleX(2) scaleY(-1.2);
 }
 
 .c1 {
   position: relative;
 }
 
-.c4 {
-  position: absolute;
-}
-
-.c5 {
-  background-color: white;
-  border-bottom: 2px solid var(--color-primary);
-  border-left: 2px solid var(--color-primary);
-  left: 0;
-  padding-bottom: 0.5em;
-  padding-top: 0.5em;
-  position: absolute;
-  top: 0;
-  -webkit-transition: opacity 2s;
-  transition: opacity 2s;
-  width: 0;
-  z-index: 10;
-  min-width: 10em;
-  opacity: 1;
-}
-
 .c6 {
-  color: black;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-author);
-  padding: 10px;
-  white-space: nowrap;
-}
-
-.c6:hover {
-  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .c7 {
-  color: #444;
-  font-weight: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.c8 {
+  font-weight: 600;
   cursor: pointer;
-  font-family: var(--font-author);
-  padding: 10px;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
   white-space: nowrap;
 }
 
-.c7:hover {
-  color: var(--color-primary);
+.c8:hover {
+  background: grey;
+  border-color: grey;
+}
+
+.c8:first-child:hover {
+  border-top-color: grey;
+}
+
+.c8:last-child:hover {
+  border-bottom-color: grey;
+}
+
+.c9 {
+  color: #444;
+  font-weight: inherit;
+  cursor: pointer;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
+  white-space: nowrap;
+}
+
+.c9:hover {
+  background: grey;
+  border-color: grey;
+}
+
+.c9:first-child:hover {
+  border-top-color: grey;
+}
+
+.c9:last-child:hover {
+  border-bottom-color: grey;
 }
 
 <div
@@ -166,36 +261,38 @@ exports[`Menu is rendered correctly when open 1`] = `
     className="c1"
     role="listbox"
   >
-    <div
-      className=""
+    <button
+      className="c2"
+      onClick={[Function]}
+      open={true}
+      type="button"
     >
-      <button
-        className="c2"
-        onClick={[Function]}
-        open={true}
-        type="button"
+      <span
+        className="c3"
       >
-        <span>
-          Foo
-        </span>
+        Foo
+      </span>
+      <span
+        className="c4"
+      >
         <span
-          className="c3"
+          className="c5"
           open={true}
         >
           ▼
         </span>
-      </button>
-    </div>
+      </span>
+    </button>
     <div
-      className="c4"
+      className="c6"
     >
       <div
-        className="c5"
+        className="c7"
         open={true}
       >
         <div
           aria-selected={true}
-          className="c6"
+          className="c8"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -205,7 +302,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c7"
+          className="c9"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"

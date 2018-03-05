@@ -20,9 +20,8 @@ Can optionally pass navigation links or image for brand.
   brand={
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="-150 -50 300 300"
-      width="50"
-      height="42"
+      viewBox="-220 -50 440 300"
+      width="64"
       fillOpacity="0.5"
     >
       <circle cx="0" cy="50" fill="red" r="100" />
@@ -30,10 +29,9 @@ Can optionally pass navigation links or image for brand.
       <circle cx="-70" cy="150" fill="green" r="100" />
     </svg>
   }
-  navLinks={
-    <div>
-      <a href="">Home</a> | <a href="">About</a>
-    </div>
-  }
+  navLinkComponents={[
+    <Link to="/home">Home</Link>,
+    <Link to="/about">About</Link>,
+  ]}
 />
 ```

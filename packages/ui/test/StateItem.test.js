@@ -5,6 +5,7 @@ import 'jest-styled-components'
 import renderer from 'react-test-renderer'
 
 import StateItem from '../src/atoms/StateItem'
+import TestThemeProvider from './setup/theme'
 
 const myMock = jest.fn()
 const props = {
@@ -18,7 +19,13 @@ const wrapperRendered = render(<StateItem {...props} />)
 
 describe('StateItem', () => {
   test('is rendered correctly', () => {
-    const tree = renderer.create(<StateItem {...props} />).toJSON()
+    const tree = renderer
+      .create(
+        <TestThemeProvider>
+          <StateItem {...props} />
+        </TestThemeProvider>,
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 

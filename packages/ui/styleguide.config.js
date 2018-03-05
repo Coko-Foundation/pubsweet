@@ -27,13 +27,8 @@ module.exports = {
     ),
     Wrapper: require.resolve('@pubsweet/styleguide/src/components/Wrapper'),
   },
-  theme: {
-    color: {
-      link: 'cornflowerblue',
-    },
-    fontFamily: {
-      base: '"Fira Sans", sans-serif',
-    },
-  },
   title: 'PubSweet UI style guide',
+  compilerConfig: {
+    transforms: { dangerousTaggedTemplateString: true },
+  },
 }

@@ -1,7 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import './HTML.scss'
+const Root = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+`
 
 export default class HTML extends React.Component {
   constructor(props) {
@@ -18,10 +22,7 @@ export default class HTML extends React.Component {
 
     if (fragment) {
       return (
-        <div
-          className="fragment"
-          dangerouslySetInnerHTML={{ __html: fragment.presentation }}
-        />
+        <Root dangerouslySetInnerHTML={{ __html: fragment.presentation }} />
       )
     }
     return <div>No fragment found</div>

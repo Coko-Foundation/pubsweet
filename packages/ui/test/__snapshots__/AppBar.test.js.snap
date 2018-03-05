@@ -1,33 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin: 1rem;
-}
-
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.c0 a::before {
-  color: #aaa;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.3em;
-  text-align: center;
-}
-
-.c0 a::before:hover {
-  color: var(--color-primary);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -38,113 +30,14 @@ exports[`AppBar Basic display 1`] = `
 }
 
 .c2 {
-  font-weight: bold;
-  text-decoration: none;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2::before {
-  content: '';
+.c2 svg {
+  height: calc(32px * 2);
 }
 
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
-}
-
-<nav
-  className="c0"
->
-  <div
-    className="c1"
-  >
-    <a
-      className="c2"
-      href="/"
-      onClick={[Function]}
-    >
-      some brand
-    </a>
-  </div>
-  <div
-    className="c1"
-  >
-    <a
-      className="c3"
-      href="/login"
-      onClick={[Function]}
-    >
-      Login
-    </a>
-  </div>
-</nav>
-`;
-
-exports[`AppBar With admin user 1`] = `
 .c4 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  width: var(--icon-size);
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin: 1rem;
-}
-
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.c0 a::before {
-  color: #aaa;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.3em;
-  text-align: center;
-}
-
-.c0 a::before:hover {
-  color: var(--color-primary);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c2 {
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.c2::before {
-  content: '';
-}
-
-.c3 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -153,27 +46,7 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c5 svg {
-  margin-right: 0.3rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav
@@ -182,116 +55,214 @@ exports[`AppBar With admin user 1`] = `
   <div
     className="c1"
   >
-    <a
+    <span
       className="c2"
-      href="/"
-      onClick={[Function]}
     >
-      some brand
-    </a>
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
   </div>
   <div
     className="c1"
   >
     <span
-      className="c3"
+      className="c4"
+    >
+      <a
+        className="c3"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
+  </div>
+</nav>
+`;
+
+exports[`AppBar With admin user 1`] = `
+.c5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc(8px / 2);
+}
+
+.c5 svg {
+  stroke: black;
+  width: calc(2 * 8px);
+  height: calc(2 * 8px);
+}
+
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: calc(32px * 2);
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
+}
+
+.c2 svg {
+  height: calc(32px * 2);
+}
+
+.c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+}
+
+<nav
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <span
+      className="c2"
+    >
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
+  </div>
+  <div
+    className="c1"
+  >
+    <span
+      className="c4"
     >
       <span
-        className="c4"
+        className="c5"
+        color="black"
+        size={2}
       >
         <svg
-          height={16}
+          fill="none"
+          height={undefined}
+          stroke={undefined}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           viewBox="0 0 24 24"
-          width={16}
+          width={undefined}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
-            fill="none"
-            stroke="var(--color-local, black)"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
           />
           <circle
             cx="12"
             cy="7"
-            fill="none"
             r="4"
-            stroke="var(--color-local, black)"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
           />
         </svg>
       </span>
       some user
        (admin)
     </span>
-    <a
-      className="c5"
-      href="#"
-      onClick={[Function]}
+    <span
+      className="c4"
     >
-      <span
-        className="c4"
+      <a
+        className="c3"
+        href="#"
+        onClick={[Function]}
       >
-        <svg
-          fill="none"
-          height={16}
-          stroke="var(--color-local, black)"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          width={16}
-          xmlns="http://www.w3.org/2000/svg"
+        <span
+          className="c5"
+          color="black"
+          size={2}
         >
-          <path
-            d="M18.36 6.64a9 9 0 1 1-12.73 0"
-          />
-          <line
-            x1="12"
-            x2="12"
-            y1="2"
-            y2="12"
-          />
-        </svg>
-      </span>
-      Logout
-    </a>
+          <svg
+            fill="none"
+            height={undefined}
+            stroke={undefined}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            width={undefined}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18.36 6.64a9 9 0 1 1-12.73 0"
+            />
+            <line
+              x1="12"
+              x2="12"
+              y1="2"
+              y2="12"
+            />
+          </svg>
+        </span>
+        Logout
+      </a>
+    </span>
   </div>
 </nav>
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin: 1rem;
-}
-
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.c0 a::before {
-  color: #aaa;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.3em;
-  text-align: center;
-}
-
-.c0 a::before:hover {
-  color: var(--color-primary);
+  min-height: calc(32px * 2);
 }
 
 .c1 {
@@ -302,122 +273,11 @@ exports[`AppBar With custom brand and login links 1`] = `
 }
 
 .c2 {
-  font-weight: bold;
-  text-decoration: none;
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2::before {
-  content: '';
-}
-
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c3 svg {
-  margin-right: 0.3rem;
-}
-
-<nav
-  className="c0"
->
-  <div
-    className="c1"
-  >
-    <a
-      className="c2"
-      href="/home"
-      onClick={[Function]}
-    >
-      some brand
-    </a>
-  </div>
-  <div
-    className="c1"
-  >
-    <a
-      className="c3"
-      href="/signin"
-      onClick={[Function]}
-    >
-      Login
-    </a>
-  </div>
-</nav>
-`;
-
-exports[`AppBar With nav links 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin: 1rem;
-}
-
-.c0 a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.c0 a::before {
-  color: #aaa;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.3em;
-  text-align: center;
-}
-
-.c0 a::before:hover {
-  color: var(--color-primary);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0 1rem;
-}
-
-.c3 a {
-  padding: 0 1rem;
-}
-
-.c3 a:global(.active) {
-  font-weight: bold;
-}
-
-.c2 {
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.c2::before {
-  content: '';
+.c2 svg {
+  height: calc(32px * 2);
 }
 
 .c4 {
@@ -429,11 +289,7 @@ exports[`AppBar With nav links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 0 1rem;
-}
-
-.c4 svg {
-  margin-right: 0.3rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
 }
 
 <nav
@@ -442,31 +298,117 @@ exports[`AppBar With nav links 1`] = `
   <div
     className="c1"
   >
-    <a
+    <span
       className="c2"
-      href="/"
-      onClick={[Function]}
     >
-      some brand
-    </a>
-    <div
-      className="c3"
-    >
-      <div>
-        Links!
-      </div>
-    </div>
+      <a
+        className="c3"
+        href="/home"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
   </div>
   <div
     className="c1"
   >
-    <a
+    <span
       className="c4"
-      href="/login"
-      onClick={[Function]}
     >
-      Login
-    </a>
+      <a
+        className="c3"
+        href="/signin"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
+  </div>
+</nav>
+`;
+
+exports[`AppBar With nav links 1`] = `
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: calc(32px * 2);
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
+}
+
+.c2 svg {
+  height: calc(32px * 2);
+}
+
+.c4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+}
+
+<nav
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <span
+      className="c2"
+    >
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
+  </div>
+  <div
+    className="c1"
+  >
+    <span
+      className="c4"
+    >
+      <a
+        className="c3"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </span>
   </div>
 </nav>
 `;

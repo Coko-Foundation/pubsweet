@@ -1,5 +1,7 @@
 import React from 'react'
+
 import Radio from '../atoms/Radio'
+import Flexbox from '../atoms/Flexbox'
 
 class RadioGroup extends React.Component {
   constructor(props) {
@@ -21,7 +23,7 @@ class RadioGroup extends React.Component {
     const { value } = this.state
 
     return (
-      <div>
+      <Flexbox inline={!inline}>
         {options.map(option => (
           <Radio
             checked={option.value === value}
@@ -35,7 +37,7 @@ class RadioGroup extends React.Component {
             value={option.value}
           />
         ))}
-      </div>
+      </Flexbox>
     )
   }
 }

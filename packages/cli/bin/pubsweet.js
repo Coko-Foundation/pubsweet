@@ -13,5 +13,8 @@ program
   .command('add', 'add one or more components to a pubsweet app')
   .command('remove', 'remove one or more components from a pubsweet app')
   .command('adduser', 'add a user to the database for a pubsweet app')
+  .parse(process.argv)
 
-program.parse(process.argv)
+if (!program.commands.map(cmd => cmd._name).includes(program.args[0])) {
+  program.help()
+}
