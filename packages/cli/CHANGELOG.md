@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.0.0...pubsweet@2.1.0) (2018-03-05)
+
+
+### Bug Fixes
+
+* **cli:** fix loop for making cmd list ([51ebd3b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/51ebd3b)), closes [#107](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/107) [#114](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/114)
+
+
+### Features
+
+* **cli:** show help when unknown command is used ([7a92e1e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a92e1e)), closes [#107](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/107) [#114](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/114)
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@1.1.9...pubsweet@2.0.0) (2018-02-23)
 

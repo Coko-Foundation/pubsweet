@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -60,7 +60,9 @@
     "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
     "globals": {
       "window": {}
     }

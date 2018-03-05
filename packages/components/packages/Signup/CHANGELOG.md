@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.2"></a>
+## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@1.0.1...pubsweet-component-signup@1.0.2) (2018-03-05)
+
+
+### Bug Fixes
+
+* **components:** add dependency on pubsweet/ui ([f0a1926](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f0a1926))
+* **components:** signup and login error examples ([3f991ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f991ec))
+
+
+
+
 <a name="1.0.1"></a>
 
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@1.0.0...pubsweet-component-signup@1.0.1) (2018-02-16)

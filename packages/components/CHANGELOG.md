@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@2.0.1...pubsweet-components@3.0.0) (2018-03-05)
+
+
+### Bug Fixes
+
+* restore FormGroup to its previous state, for later deletion ([3135ffd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3135ffd))
+* **components:** add dependency on pubsweet/ui ([f0a1926](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f0a1926))
+* **components:** correctly redirect when edit button is clicked ([faca509](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/faca509))
+* **components:** login example ([6dfd66c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6dfd66c))
+* **components:** login tests were failing after refactor ([62be047](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/62be047))
+* **components:** make styleguide work (mostly) ([d036681](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d036681))
+* **components:** PasswordReset was still using a CSS variable ([e1c2c84](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e1c2c84))
+* **components:** signup and login error examples ([3f991ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f991ec))
+* **components:** styleguide can render components using validations ([93df7af](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93df7af))
+
+
+### Code Refactoring
+
+* **ui:** tidy AppBar ([09751b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/09751b6))
+
+
+### Features
+
+* **elife-theme:** add elife theme ([e406e0d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e406e0d))
+
+
+### BREAKING CHANGES
+
+* **ui:**   * navLinks prop is now navLinkComponents and expects an array of
+elements
+
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@2.0.0...pubsweet-components@2.0.1) (2018-02-23)
 
