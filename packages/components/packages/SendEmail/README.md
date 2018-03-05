@@ -2,24 +2,27 @@
 
 ## Configuration
 
-In order to configure this component, simply edit the `mailer` section in the `src/config.js` file to your preferred transport method.
-
-The component is currently configured to use AWS SES:
+In order to configure this component, simply add the path to your `mailer` configuration in your app's `config` file. For example:
 
 ```js
-// src/config.js
+  mailer: {
+    path: `${__dirname}/mailer`,
+  },
+```
+
+In this case, `mailer.js` creates a new `AWS.SES` object which will be used to send emails:
+
+```js
 const AWS = require('aws-sdk')
 
 module.exports = {
-  mailer: {
-    from: process.env.EMAIL_SENDER,
-    transport: {
-      SES: new AWS.SES({
-        accessKeyId: process.env.AWS_SES_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SES_SECRET_KEY,
-        region: process.env.AWS_SES_REGION,
-      }),
-    },
+  from: process.env.EMAIL_SENDER,
+  transport: {
+    SES: new AWS.SES({
+      accessKeyId: process.env.AWS_SES_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SES_SECRET_KEY,
+      region: process.env.AWS_SES_REGION,
+    }),
   },
 }
 ```
@@ -35,7 +38,7 @@ AWS_SES_REGION = region-name
 
 ## Usage
 
-Here's an example on how you can use the component in your code.
+The `send-email` component contains a `send()` function which takes the following parameters: `toEmail`, `subject`, `textBody` and `htmlBody`.
 
 ```js
 const Email = require('@pubsweet/component-send-email')
@@ -46,7 +49,17 @@ module.exports = {
     const textBody = 'This is an email'
     const subject = 'You have been invited!'
 
-    Email.send(toEmail, subject, textBody, htmlBody)
+    try {
+      const sendEmailRes = await Email.send(
+        toEmail,
+        subject,
+        textBody,
+        htmlBody,
+      )
+      return sendEmailRes
+    } catch (e) {
+      return e
+    }
   },
 }
 ```
