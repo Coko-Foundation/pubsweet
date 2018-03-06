@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox Group is rendered correctly 1`] = `
-.c0 {
+.c1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -10,8 +10,6 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-family: var(--font-author);
-  font-size: 1em;
   font-style: italic;
   -webkit-letter-spacing: 1px;
   -moz-letter-spacing: 1px;
@@ -21,30 +19,22 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   transition: all 2s;
 }
 
-.c0:not(:last-child) {
+.c1:not(:last-child) {
   margin-right: 0;
-  margin-bottom: 0.5rem;
 }
 
-.c0 input {
+.c1 input {
   display: none;
   margin-right: 0.25rem;
 }
 
-.c0 span {
-  border-bottom: 1px solid transparent;
+.c1 span {
   font-size: 1.1em;
   -webkit-transition: color 0.5s;
   transition: color 0.5s;
 }
 
-.c0:hover span {
-  color: var(--color-primary);
-}
-
-.c0 span::before {
-  --local-border-size: 3px;
-  --local-borderTwo-size: 1px;
+.c1 span::before {
   content: ' ';
   display: inline-block;
   vertical-align: middle;
@@ -52,23 +42,38 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   height: 0.7em;
   margin-right: 0.5em;
   background: transparent;
-  border: var(--local-border-size) solid white;
-  box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+  border: 3px solid white;
+  box-shadow: 0 0 0 1px currentcolor;
   -webkit-transition: border 0.5s ease,background-size 0.3s ease;
   transition: border 0.5s ease,background-size 0.3s ease;
 }
 
-.c0:hover span::before {
+.c1:hover span::before {
   -webkit-animation: kLnLOV 0.5s;
   animation: kLnLOV 0.5s;
-  background: var(--color-primary);
-  box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
+  box-shadow: 0 0 0 1px;
 }
 
-<div>
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
+}
+
+<div
+  className="c0"
+>
   <label
     checked={false}
-    className="c0"
+    className="c1"
   >
     <input
       checked={false}
@@ -84,7 +89,7 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   </label>
   <label
     checked={false}
-    className="c0"
+    className="c1"
   >
     <input
       checked={false}
@@ -100,7 +105,7 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   </label>
   <label
     checked={false}
-    className="c0"
+    className="c1"
   >
     <input
       checked={false}
