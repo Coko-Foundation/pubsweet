@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.1"></a>
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.0.0...@pubsweet/ui@3.0.1) (2018-03-06)
+
+
+### Bug Fixes
+
+* **ui:** fix mutation in checkbox group list ([6a6388a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6a6388a)), closes [#313](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/313)
+* **ui:** stop spinner from moving around when rotating ([e8e395e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8e395e)), closes [#330](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/330)
+
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@2.1.1...@pubsweet/ui@3.0.0) (2018-03-05)
 

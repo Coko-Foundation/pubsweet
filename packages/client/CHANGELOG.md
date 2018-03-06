@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.2.1"></a>
+## [2.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@2.2.0...pubsweet-client@2.2.1) (2018-03-06)
+
+
+### Bug Fixes
+
+* **client:** add ui dependency ([cc1a8ae](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cc1a8ae))
+
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@2.1.1...pubsweet-client@2.2.0) (2018-03-05)
 
