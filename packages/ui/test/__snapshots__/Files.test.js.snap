@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Files renders correctly 1`] = `
+.c0 {
+  background: transparent;
+  border: dashed;
+  cursor: pointer;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -13,12 +19,6 @@ exports[`Files renders correctly 1`] = `
   -webkit-justify-content: left;
   -ms-flex-pack: left;
   justify-content: left;
-}
-
-.c0 {
-  background: transparent;
-  border: dashed;
-  cursor: pointer;
 }
 
 <div
