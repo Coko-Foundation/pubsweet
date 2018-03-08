@@ -46,7 +46,7 @@ const superscript = {
   toDOM: () => ['sup'],
 }
 
-const small_caps = {
+const smallcaps = {
   parseDOM: [{ style: 'font-variant=small-caps' }],
   toDOM: () => ['span', { style: 'font-variant:small-caps' }],
 }
@@ -55,7 +55,7 @@ export default {
   bold,
   italic,
   link,
-  small_caps,
+  smallcaps,
   subscript,
   superscript,
 }

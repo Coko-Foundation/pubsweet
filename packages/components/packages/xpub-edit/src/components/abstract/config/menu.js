@@ -44,6 +44,7 @@ export default {
         }
 
         setBlockType(schema.nodes.heading, { level: 1 })(state, dispatch)
+        return undefined
       },
       title: 'Toggle section title',
     },

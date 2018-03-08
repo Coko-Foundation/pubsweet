@@ -28,6 +28,7 @@ class Tabs extends React.Component {
 
   componentDidMount() {
     const { activeKey } = this.props
+    // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ activeKey })
   }
 

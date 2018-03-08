@@ -12,7 +12,7 @@ const superscript = {
   parseDOM: [{ tag: 'sup' }, { style: 'vertical-align=super' }],
   toDOM: () => ['sup'],
 }
-
+// eslint-disable-next-line camelcase
 const small_caps = {
   parseDOM: [{ style: 'font-variant=small-caps' }],
   toDOM: () => ['span', { style: 'font-variant:small-caps' }],
