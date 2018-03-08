@@ -22,7 +22,7 @@ describe('GraphQL uploads', () => {
           operationName: null,
           variables: { file: null },
           query:
-            'mutation ($file: Upload!) {\n  upload(file: $file) {\n    filename\n    __typename\n  }\n}\n',
+            'mutation ($file: Upload!) {\n  upload(file: $file) {\n    url\n    __typename\n  }\n}\n',
         }),
       )
       .field('map', JSON.stringify({ '0': ['variables.file'] }))
@@ -30,7 +30,9 @@ describe('GraphQL uploads', () => {
       .set('Authorization', `Bearer ${token}`)
 
     expect(body).toMatchObject({
-      data: { upload: { filename: expect.stringMatching(/\w{16}\.txt/) } },
+      data: {
+        upload: { url: expect.stringMatching(/^\/\w{32}\.txt$/) },
+      },
     })
   })
 })
