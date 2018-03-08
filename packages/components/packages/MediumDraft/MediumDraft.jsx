@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { convertToRaw } from 'draft-js'
 import { Editor, createEditorState } from 'medium-draft'
@@ -6,7 +7,25 @@ import mediumDraftExporter from 'medium-draft/lib/exporter'
 import 'medium-draft/lib/index.css'
 
 import customImageSideButton from './CustomImageSideButton'
-import './styles.scss'
+
+const Root = styled.div`
+  .md-RichEditor-root {
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 768px) {
+      width: 750px;
+    }
+
+    @media (min-width: 992px) {
+      width: 970px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 1170px;
+    }
+  }
+`
 
 export default class MediumDraft extends React.Component {
   constructor(props) {
@@ -48,17 +67,19 @@ export default class MediumDraft extends React.Component {
   render() {
     const { editorState } = this.state
     return (
-      <Editor
-        editorState={editorState}
-        onChange={this.onChange}
-        ref={el => (this.editorElement = el)}
-        sideButtons={[
-          {
-            title: 'Image',
-            component: customImageSideButton(this.props.actions.fileUpload),
-          },
-        ]}
-      />
+      <Root>
+        <Editor
+          editorState={editorState}
+          onChange={this.onChange}
+          ref={el => (this.editorElement = el)}
+          sideButtons={[
+            {
+              title: 'Image',
+              component: customImageSideButton(this.props.actions.fileUpload),
+            },
+          ]}
+        />
+      </Root>
     )
   }
 }
