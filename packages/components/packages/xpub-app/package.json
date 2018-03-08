@@ -1,5 +1,5 @@
 {
-  "name": "pubsweet-component-xpub-app",
+  "name": "@pubsweet/xpub-app",
   "version": "0.0.2",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
