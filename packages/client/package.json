@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -13,7 +13,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^3.0.0",
+    "@pubsweet/ui": "^3.0.1",
     "authsome": "0.0.9",
     "config": "^1.21.0",
     "event-source-polyfill": "^0.0.10",
@@ -61,7 +61,9 @@
     "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
     "globals": {
       "window": {}
     }
