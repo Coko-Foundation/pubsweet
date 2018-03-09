@@ -51,13 +51,11 @@
     "moduleNameMapper": {
       "\\.s?css$": "identity-obj-proxy"
     },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@?pubsweet)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules",
-      "config/"
-    ],
+    "transformIgnorePatterns": ["/node_modules/(?!@?pubsweet)"],
+    "testPathIgnorePatterns": ["/node_modules", "config/"],
+    "globals": {
+      "PUBSWEET_COMPONENTS": []
+    },
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   }
 }
