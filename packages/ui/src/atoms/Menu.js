@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import th from '../helpers/themeHelper'
 
@@ -7,6 +8,7 @@ import th from '../helpers/themeHelper'
 // TODO: determine the correct color for non-selected options
 // FIXME: putting markup inside a <button> is invalid
 
+// #region styled components
 const Root = styled.div`
   max-width: calc(${th('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
@@ -123,6 +125,7 @@ const Option = styled.div.attrs({
     border-bottom-color: ${th('colorBackgroundHue')};
   }
 `
+// #endregion
 
 class Menu extends React.Component {
   constructor(props) {
@@ -166,7 +169,8 @@ class Menu extends React.Component {
       label,
       options,
       inline,
-      placeholder = 'Choose in the list',
+      placeholder,
+      renderOption: RenderOption,
     } = this.props
     const { open, selected } = this.state
 
@@ -190,16 +194,14 @@ class Menu extends React.Component {
             {open && (
               <Options open={open}>
                 {options.map(option => (
-                  <Option
-                    active={option.value === selected}
+                  <RenderOption
+                    handleKeyPress={this.handleKeyPress}
+                    handleSelect={this.handleSelect}
                     key={option.value}
-                    onClick={() => this.handleSelect(option.value)}
-                    onKeyPress={event =>
-                      this.handleKeyPress(event, option.value)
-                    }
-                  >
-                    {option.label || option.value}
-                  </Option>
+                    label={option.label}
+                    selected={selected}
+                    value={option.value}
+                  />
                 ))}
               </Options>
             )}
@@ -208,6 +210,44 @@ class Menu extends React.Component {
       </Root>
     )
   }
+}
+
+const MenuOption = ({
+  selected,
+  label,
+  value,
+  handleSelect,
+  handleKeyPress,
+}) => (
+  <Option
+    active={value === selected}
+    key={value}
+    onClick={() => handleSelect(value)}
+    onKeyPress={event => handleKeyPress(event, value)}
+  >
+    {label || value}
+  </Option>
+)
+
+Menu.propTypes = {
+  /** Menu items. */
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    }),
+  ).isRequired,
+  /** Custom option component. The component will be rendered with *optionProps*. */
+  renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Optional label to be shown above the menu. */
+  label: PropTypes.string,
+  /** Placeholder until a value is selected. */
+  placeholder: PropTypes.string,
+}
+
+Menu.defaultProps = {
+  renderOption: MenuOption,
+  placeholder: 'Choose in the list',
 }
 
 export default Menu
