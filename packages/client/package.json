@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -13,7 +13,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^3.0.1",
+    "@pubsweet/ui": "^3.1.0",
     "authsome": "0.0.9",
     "config": "^1.21.0",
     "event-source-polyfill": "^0.0.10",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@2.0.0...pubsweet-server@2.0.1) (2018-03-09)
+
+
+### Bug Fixes
+
+* **server:** return file url from upload mutation ([e10a10f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e10a10f))
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@1.1.1...pubsweet-server@2.0.0) (2018-02-23)
 

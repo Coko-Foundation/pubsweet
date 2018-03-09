@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-dashboard",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^2.1.0",
+    "pubsweet-client": "^2.2.2",
     "pubsweet-component-ink-frontend": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -24,10 +24,10 @@
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
     "styled-components": "^2.4.0",
-    "xpub-connect": "^0.0.2",
-    "xpub-journal": "^0.0.2",
-    "xpub-selectors": "^0.0.2",
-    "xpub-upload": "^0.0.2"
+    "xpub-connect": "^0.0.3",
+    "xpub-journal": "^0.0.3",
+    "xpub-selectors": "^0.0.3",
+    "xpub-upload": "^0.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -50,7 +50,7 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.2"
+    "xpub-styleguide": "^0.0.3"
   },
   "jest": {
     "moduleNameMapper": {
