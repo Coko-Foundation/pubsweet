@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
-    "xpub-journal": "^0.0.2"
+    "xpub-journal": "^0.0.3"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
