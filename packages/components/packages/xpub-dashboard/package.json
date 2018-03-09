@@ -4,25 +4,18 @@
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "dependencies": {
-    "@pubsweet/ui": "3.0.0",
+    "@pubsweet/ui": "^3.0.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^2.2.2",
-    "pubsweet-component-ink-frontend": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "pubsweet-component-ink-frontend": "^1.0.1",
     "react-dropzone": "^4.1.2",
     "react-moment": "^0.6.1",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
-    "redux": "^3.6.0",
     "styled-components": "^2.4.0",
     "xpub-connect": "^0.0.3",
     "xpub-journal": "^0.0.3",
@@ -52,13 +45,15 @@
     "webpack-node-externals": "^1.6.0",
     "xpub-styleguide": "^0.0.3"
   },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
+  },
   "jest": {
     "moduleNameMapper": {
       "\\.s?css$": "identity-obj-proxy"
     },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@?pubsweet)"
-    ],
+    "transformIgnorePatterns": ["/node_modules/(?!@?pubsweet)"],
     "globals": {
       "PUBSWEET_COMPONENTS": []
     }

@@ -7,7 +7,7 @@
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/ui": "3.0.0",
+    "@pubsweet/ui": "^3.0.0",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
@@ -16,9 +16,7 @@
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-model": "^1.0.0",
     "prosemirror-state": "^1.0.1",
-    "prosemirror-view": "^1.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -36,6 +34,9 @@
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
     "xpub-styleguide": "^0.0.3"
+  },
+  "peerDependencies": {
+    "react": ">=16"
   },
   "scripts": {
     "styleguide": "styleguidist server",

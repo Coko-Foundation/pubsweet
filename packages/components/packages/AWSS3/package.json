@@ -18,8 +18,8 @@
     "nodemailer": "^4.4.2"
   },
   "peerDependencies": {
-    "@pubsweet/logger": "^0.0.1",
-    "pubsweet-server": "^1.0.1"
+    "@pubsweet/logger": ">=0.0.1",
+    "pubsweet-server": ">=1.0.0"
   },
   "devDependencies": {
     "jest": "^22.1.1",
