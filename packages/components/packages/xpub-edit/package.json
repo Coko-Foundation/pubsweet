@@ -1,7 +1,10 @@
 {
   "name": "xpub-edit",
-  "version": "0.0.2",
-  "files": ["dist", "src"],
+  "version": "0.0.3",
+  "files": [
+    "dist",
+    "src"
+  ],
   "main": "src",
   "dependencies": {
     "@pubsweet/ui": "^3.0.0",
@@ -30,7 +33,7 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.2"
+    "xpub-styleguide": "^0.0.3"
   },
   "peerDependencies": {
     "react": ">=16"

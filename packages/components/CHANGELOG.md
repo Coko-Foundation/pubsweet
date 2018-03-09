@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.2"></a>
+## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.1...pubsweet-components@3.0.2) (2018-03-09)
+
+
+### Bug Fixes
+
+* **xpub:** dubiously ignore linting errors ([a60d0ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a60d0ad))
+* **xpub:** find-reviewers package name ([1b0ff2d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1b0ff2d))
+* **xpub:** package name ([2383506](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2383506))
+* **xpub:** tests ([cec85e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec85e2))
+
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.0...pubsweet-components@3.0.1) (2018-03-06)
 
