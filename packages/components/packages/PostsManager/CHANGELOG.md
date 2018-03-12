@@ -3,22 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="1.0.3"></a>
-## [1.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.2...pubsweet-component-posts-manager@1.0.3) (2018-03-05)
+<a name="1.0.5"></a>
 
+## [1.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.4...pubsweet-component-posts-manager@1.0.5) (2018-03-09)
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+<a name="1.0.4"></a>
+
+## [1.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.3...pubsweet-component-posts-manager@1.0.4) (2018-03-06)
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+<a name="1.0.3"></a>
+
+## [1.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.2...pubsweet-component-posts-manager@1.0.3) (2018-03-05)
 
 ### Bug Fixes
 
 * **components:** correctly redirect when edit button is clicked ([faca509](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/faca509))
 
-
-
-
 <a name="1.0.2"></a>
+
 ## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.1...pubsweet-component-posts-manager@1.0.2) (2018-02-23)
-
-
-
 
 **Note:** Version bump only for package pubsweet-component-posts-manager
 
