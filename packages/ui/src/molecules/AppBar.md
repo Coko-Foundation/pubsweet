@@ -35,3 +35,29 @@ Can optionally pass navigation links or image for brand.
   ]}
 />
 ```
+
+Can use a custom component as right element.
+
+```js
+const RightComponent = ({ user, loginLink, onLogoutClick }) => (
+  <div
+    style={{
+      padding: 10,
+      border: '1px solid gray',
+      display: 'flex',
+      width: 200,
+      justifyContent: 'space-between',
+    }}
+  >
+    <span>{user ? user.username : 'admin'}</span>
+    <button onClick={onLogoutClick}>logout</button>
+  </div>
+)
+
+;<AppBar
+  brand="xpub"
+  user={{ username: 'userName', admin: true }}
+  rightComponent={RightComponent}
+  onLogoutClick={() => console.log('Logout clicked')}
+/>
+```

@@ -41,6 +41,7 @@ const AppBar = ({
   onLogoutClick,
   navLinkComponents,
   user,
+  rightComponent,
 }) => (
   <Root>
     <Section>
@@ -59,30 +60,34 @@ const AppBar = ({
         ))}
     </Section>
 
-    <Section>
-      {user && (
-        <Item>
-          <Icon size={2}>user</Icon>
-          {user.username}
-          {user.admin ? ' (admin)' : ''}
-        </Item>
-      )}
+    {rightComponent ? (
+      React.createElement(rightComponent, { user, loginLink, onLogoutClick })
+    ) : (
+      <Section>
+        {user && (
+          <Item>
+            <Icon size={2}>user</Icon>
+            {user.username}
+            {user.admin ? ' (admin)' : ''}
+          </Item>
+        )}
 
-      {user && (
-        <Item>
-          <Link onClick={onLogoutClick} to="#">
-            <Icon size={2}>power</Icon>
-            Logout
-          </Link>
-        </Item>
-      )}
+        {user && (
+          <Item>
+            <Link onClick={onLogoutClick} to="#">
+              <Icon size={2}>power</Icon>
+              Logout
+            </Link>
+          </Item>
+        )}
 
-      {!user && (
-        <Item>
-          <Link to={loginLink}>Login</Link>
-        </Item>
-      )}
-    </Section>
+        {!user && (
+          <Item>
+            <Link to={loginLink}>Login</Link>
+          </Item>
+        )}
+      </Section>
+    )}
   </Root>
 )
 
@@ -93,6 +98,7 @@ AppBar.propTypes = {
   onLogoutClick: PropTypes.func,
   navLinkComponents: PropTypes.arrayOf(PropTypes.element),
   user: PropTypes.object,
+  rightComponent: PropTypes.element,
 }
 
 export default AppBar
