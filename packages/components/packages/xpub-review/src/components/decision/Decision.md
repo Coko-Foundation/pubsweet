@@ -8,13 +8,11 @@ const decision = {
     attachments: [
       {
         name: faker.system.commonFileName(),
-        url: faker.internet.url()
-      }
-    ]
+        url: faker.internet.url(),
+      },
+    ],
   },
-  recommendation: 'accept'
-};
-
-<Decision
-  decision={decision}/>
+  recommendation: 'accept',
+}
+;<Decision decision={decision} />
 ```

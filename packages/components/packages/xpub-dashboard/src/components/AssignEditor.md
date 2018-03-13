@@ -3,11 +3,11 @@ A drop-down menu for assigning an editor to a project.
 ```js
 const project = {
   id: faker.random.uuid(),
-};
+}
 
 const team = {
-  members: []
-};
+  members: [],
+}
 
 const options = [
   {
@@ -21,10 +21,9 @@ const options = [
   {
     value: faker.random.uuid(),
     label: faker.internet.userName(),
-  }
-];
-
-<AssignEditor 
+  },
+]
+;<AssignEditor
   project={project}
   team={team}
   teamName="Senior Editor"

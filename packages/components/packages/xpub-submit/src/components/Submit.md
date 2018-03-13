@@ -1,41 +1,35 @@
 A form for entering information about the submission.
 
 ```js
-const { reduxForm } = require('redux-form');
+const { reduxForm } = require('redux-form')
 
 const project = {
   id: faker.random.uuid(),
-};
+}
 
 const version = {
   id: faker.random.uuid(),
   metadata: {
-      title: faker.lorem.sentence(25),
-      articleType: 'original-research'
+    title: faker.lorem.sentence(25),
+    articleType: 'original-research',
   },
   declarations: {
-    openData: 'yes'
+    openData: 'yes',
   },
   suggestions: {
     reviewers: {
-      opposed: [
-        faker.name.findName()
-      ]
-    }
-  }
-};
+      opposed: [faker.name.findName()],
+    },
+  },
+}
 
-const SubmitForm = reduxForm({ 
+const SubmitForm = reduxForm({
   form: 'submit',
   touchOnChange: true,
   onSubmit: values => console.log(values),
-  onChange: values => console.log(values)
-})(Submit);
-
-<div style={{position:'relative', paddingRight: 100}}>
-    <SubmitForm 
-      project={project}
-      version={version}
-      initialValues={version}/>
+  onChange: values => console.log(values),
+})(Submit)
+;<div style={{ position: 'relative', paddingRight: 100 }}>
+  <SubmitForm project={project} version={version} initialValues={version} />
 </div>
 ```

@@ -94,10 +94,10 @@ export default {
     //     // view.focus()
     //   }
     // }
-    small_caps: {
-      active: markActive(schema.marks.small_caps),
+    smallcaps: {
+      active: markActive(schema.marks.smallcaps),
       content: icons.small_caps,
-      run: toggleMark(schema.marks.small_caps),
+      run: toggleMark(schema.marks.smallcaps),
       title: 'Toggle small caps',
     },
     subscript: {

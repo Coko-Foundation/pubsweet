@@ -1,15 +1,27 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import th from '../helpers/themeHelper'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
 // TODO: determine the correct color for non-selected options
+// TODO: add z-indexes in theme object?
 // FIXME: putting markup inside a <button> is invalid
 
+// #region styled components
 const Root = styled.div`
-  max-width: calc(${th('gridUnit')} * 14);
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+`
+
+const CloseOverlay = styled.div`
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
 `
 
 const Label = styled.label`
@@ -92,7 +104,9 @@ const Options = styled.div`
   background-color: ${th('colorBackground')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-  overflow: hidden;
+  overflow-y: scroll;
+  max-height: ${({ maxHeight }) => `${maxHeight}px`};
+  z-index: 100;
 `
 
 const Option = styled.div.attrs({
@@ -123,6 +137,7 @@ const Option = styled.div.attrs({
     border-bottom-color: ${th('colorBackgroundHue')};
   }
 `
+// #endregion
 
 class Menu extends React.Component {
   constructor(props) {
@@ -163,43 +178,40 @@ class Menu extends React.Component {
 
   render() {
     const {
+      maxHeight = 250,
       label,
       options,
       inline,
-      placeholder = 'Choose in the list',
+      placeholder,
+      renderOption: RenderOption,
+      renderOpener: RenderOpener,
     } = this.props
     const { open, selected } = this.state
 
     return (
       <Root inline={inline} open={open}>
         {label && <Label>{label}</Label>}
-
+        {open && <CloseOverlay onClick={this.toggleMenu} />}
         <Main>
-          <Opener onClick={this.toggleMenu} open={open}>
-            {selected ? (
-              <Value>{this.optionLabel(selected)}</Value>
-            ) : (
-              <Placeholder>{placeholder}</Placeholder>
-            )}
-            <ArrowContainer>
-              <Arrow open={open}>▼</Arrow>
-            </ArrowContainer>
-          </Opener>
-
+          <RenderOpener
+            open={open}
+            optionLabel={this.optionLabel}
+            placeholder={placeholder}
+            selected={selected}
+            toggleMenu={this.toggleMenu}
+          />
           <OptionsContainer>
             {open && (
-              <Options open={open}>
+              <Options maxHeight={maxHeight} open={open}>
                 {options.map(option => (
-                  <Option
-                    active={option.value === selected}
+                  <RenderOption
+                    handleKeyPress={this.handleKeyPress}
+                    handleSelect={this.handleSelect}
                     key={option.value}
-                    onClick={() => this.handleSelect(option.value)}
-                    onKeyPress={event =>
-                      this.handleKeyPress(event, option.value)
-                    }
-                  >
-                    {option.label || option.value}
-                  </Option>
+                    label={option.label}
+                    selected={selected}
+                    value={option.value}
+                  />
                 ))}
               </Options>
             )}
@@ -208,6 +220,68 @@ class Menu extends React.Component {
       </Root>
     )
   }
+}
+
+const DefaultMenuOption = ({
+  selected,
+  label,
+  value,
+  handleSelect,
+  handleKeyPress,
+}) => (
+  <Option
+    active={value === selected}
+    key={value}
+    onClick={() => handleSelect(value)}
+    onKeyPress={event => handleKeyPress(event, value)}
+  >
+    {label || value}
+  </Option>
+)
+
+const DefaultOpener = ({
+  toggleMenu,
+  open,
+  selected,
+  placeholder,
+  optionLabel,
+}) => (
+  <Opener onClick={toggleMenu} open={open}>
+    {selected ? (
+      <Value>{optionLabel(selected)}</Value>
+    ) : (
+      <Placeholder>{placeholder}</Placeholder>
+    )}
+    <ArrowContainer>
+      <Arrow open={open}>▼</Arrow>
+    </ArrowContainer>
+  </Opener>
+)
+
+Menu.propTypes = {
+  /** Menu items. */
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    }),
+  ).isRequired,
+  /** Custom component for the selected option. */
+  renderOpener: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Custom option component. The component will be rendered with *optionProps*. */
+  renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Optional label to be shown above the menu. */
+  label: PropTypes.string,
+  /** Placeholder until a value is selected. */
+  placeholder: PropTypes.string,
+  /** Maximum height of the options container. */
+  maxHeight: PropTypes.number,
+}
+
+Menu.defaultProps = {
+  renderOption: DefaultMenuOption,
+  renderOpener: DefaultOpener,
+  placeholder: 'Choose in the list',
 }
 
 export default Menu

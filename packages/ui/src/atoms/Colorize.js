@@ -6,7 +6,6 @@ const Colorize = Component => {
   const Colorized = ({
     primary,
     secondary,
-    quiet,
     furniture,
     success,
     error,
@@ -19,7 +18,6 @@ const Colorize = Component => {
     const color =
       (primary && theme.colorPrimary) ||
       (secondary && theme.colorSecondary) ||
-      (quiet && theme.colorQuiet) ||
       (furniture && theme.colorFurniture) ||
       (success && theme.colorSuccess) ||
       (error && theme.colorError) ||
