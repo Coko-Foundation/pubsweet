@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { File, th } from '@pubsweet/ui'
+import { File } from '@pubsweet/ui'
 
 const Root = styled.div``
 
@@ -13,7 +13,6 @@ const Table = styled.table`
 
 const Heading = styled.th`
   font-weight: inherit;
-  color: ${th('colorQuiet')};
   padding: 0 1em 0 0;
 `
 
