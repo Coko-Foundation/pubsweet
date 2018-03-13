@@ -1,10 +1,18 @@
 import React from 'react'
+import { decamelize } from 'humps'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, th } from '@pubsweet/ui'
+import { Button, Menu, th } from '@pubsweet/ui'
 import StyleRoot, {
   injectGlobalStyles,
 } from 'pubsweet-client/src/helpers/StyleRoot'
 import defaultTheme from '@pubsweet/default-theme'
+import elifeTheme from '@pubsweet/elife-theme'
+
+const initialTheme = 'defaultTheme'
+const themes = {
+  defaultTheme,
+  elifeTheme,
+}
 
 injectGlobalStyles()
 
@@ -88,10 +96,24 @@ const NarrowButton = styled(Button)`
   `};
 `
 
+const NarrowMenu = styled(Menu)`
+  margin: ${props => `
+    0
+    calc(${props.theme.subGridUnit} * 6)
+    ${props.theme.subGridUnit}
+    calc(${props.theme.subGridUnit} * 4)
+  `};
+`
+
+const wrappers = []
+
 class StyleGuideRenderer extends React.Component {
-  constructor() {
-    super()
-    this.state = { grid: false }
+  constructor(props) {
+    super(props)
+    this.state = {
+      grid: false,
+      themeName: initialTheme,
+    }
   }
   render() {
     const { title, children, toc } = this.props
@@ -101,8 +123,26 @@ class StyleGuideRenderer extends React.Component {
       </NarrowButton>
     )
 
+    const options = Object.keys(themes).map(themeName => ({
+      value: themeName,
+      label: decamelize(themeName, { separator: ' ' }),
+    }))
+    const ThemeSelector = () => (
+      <NarrowMenu
+        onChange={value => {
+          // update each wrapper
+          wrappers.forEach(wrapper => {
+            wrapper.setState({ themeName: value })
+          })
+          // also update self
+          this.setState({ themeName: value })
+        }}
+        options={options}
+        value={this.state.themeName}
+      />
+    )
     return (
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={themes[this.state.themeName]}>
         <StyleRoot>
           <Root>
             <Sidebar>
@@ -110,6 +150,7 @@ class StyleGuideRenderer extends React.Component {
                 <Title>{title}</Title>
               </Header>
               <GridToggle />
+              <ThemeSelector />
               <Nav>{toc}</Nav>
             </Sidebar>
             <Content grid={this.state.grid}>{children}</Content>
@@ -120,3 +161,4 @@ class StyleGuideRenderer extends React.Component {
   }
 }
 export default StyleGuideRenderer
+export { initialTheme, themes, wrappers }
