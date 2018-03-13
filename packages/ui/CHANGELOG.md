@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.0.1...@pubsweet/ui@3.1.0) (2018-03-09)
+
+
+### Bug Fixes
+
+* **ui:** apply height to any brand element passed to AppBar ([b6cd888](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b6cd888))
+* **ui:** fix Icon prop types ([ce7889b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ce7889b))
+
+
+### Features
+
+* **ui:** wrap spinners in colorize ([b42b0e5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b42b0e5)), closes [#343](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/343)
+
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.0.0...@pubsweet/ui@3.0.1) (2018-03-06)
 

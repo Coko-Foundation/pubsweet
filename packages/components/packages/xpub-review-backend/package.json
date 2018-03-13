@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-review-backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src",
   "scripts": {
     "test": "jest"
@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "config": "^1.26.1",
+    "lodash": "^4.17.5",
     "moment": "^2.18.1",
     "nodemailer": "^4.0.1"
   },
@@ -21,7 +22,6 @@
   },
   "peerDependencies": {
     "@pubsweet/logger": ">=0.0.1",
-    "pubsweet-component-xpub-review": "^0.0.1",
-    "pubsweet-server": ">=1.0.0-alpha.1"
+    "pubsweet-server": ">=1.0.0"
   }
 }

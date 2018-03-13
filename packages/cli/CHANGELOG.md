@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.0...pubsweet@2.1.1) (2018-03-09)
+
+
+### Bug Fixes
+
+* **xpub:** tests ([cec85e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec85e2))
+
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.0.0...pubsweet@2.1.0) (2018-03-05)
 
