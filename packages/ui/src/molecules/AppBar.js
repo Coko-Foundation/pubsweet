@@ -20,7 +20,10 @@ const Section = styled.div`
 const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
-  & svg {
+`
+
+const LogoLink = Link.extend`
+  & > * {
     height: calc(${th('gridUnit')} * 2);
   }
 `
@@ -43,7 +46,7 @@ const AppBar = ({
     <Section>
       {brand && (
         <Logo>
-          <Link to={brandLink}>{brand}</Link>
+          <LogoLink to={brandLink}>{brand}</LogoLink>
         </Logo>
       )}
 

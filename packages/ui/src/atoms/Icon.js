@@ -34,7 +34,7 @@ const Icon = ({ children, color, size = 3, ...props }) => {
   )
 }
 
-Icon.protoTypes = {
+Icon.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
 }
