@@ -4,31 +4,24 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 <a name="1.0.4"></a>
+
 ## [1.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@1.0.3...pubsweet-component-password-reset-frontend@1.0.4) (2018-03-09)
-
-
-
 
 **Note:** Version bump only for package pubsweet-component-password-reset-frontend
 
 <a name="1.0.3"></a>
+
 ## [1.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@1.0.2...pubsweet-component-password-reset-frontend@1.0.3) (2018-03-06)
-
-
-
 
 **Note:** Version bump only for package pubsweet-component-password-reset-frontend
 
 <a name="1.0.2"></a>
-## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@1.0.1...pubsweet-component-password-reset-frontend@1.0.2) (2018-03-05)
 
+## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@1.0.1...pubsweet-component-password-reset-frontend@1.0.2) (2018-03-05)
 
 ### Bug Fixes
 
 * **components:** PasswordReset was still using a CSS variable ([e1c2c84](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e1c2c84))
-
-
-
 
 <a name="1.0.1"></a>
 

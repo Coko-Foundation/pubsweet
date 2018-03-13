@@ -8,16 +8,15 @@ const review = {
     attachments: [
       {
         name: faker.system.commonFileName(),
-        url: faker.internet.url()
-      }
-    ]
+        url: faker.internet.url(),
+      },
+    ],
   },
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'accept'
-};
+  recommendation: 'accept',
+}
 
-<Review
-  review={review}/>
+;<Review review={review} />
 ```

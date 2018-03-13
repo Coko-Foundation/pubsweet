@@ -1,7 +1,6 @@
-const AWS = require('aws-sdk')
-const logger = require('@pubsweet/logger')
-const config = require('config')
 const _ = require('lodash')
+const AWS = require('aws-sdk')
+const config = require('config')
 
 const s3Config = _.get(config, 'pubsweet-component-aws-s3')
 
@@ -18,44 +17,29 @@ const FileBackend = app => {
   const upload = require('./middeware/upload').setupMulter(s3)
 
   app.post(
-    '/api/file',
+    '/api/files',
     authBearer,
     upload.single('file'),
     require('./routeHandlers/postFile'),
   )
-  app.get('/api/file/:fragmentId/:fileId', authBearer, async (req, res) => {
-    const params = {
-      Bucket: s3Config.bucket,
-      Key: `${req.params.fragmentId}/${req.params.fileId}`,
-    }
 
-    s3.getSignedUrl('getObject', params, (err, data) => {
-      if (err) {
-        res.status(err.statusCode).json({ error: err.message })
-        logger.error(err.message)
-        return
-      }
+  app.get(
+    '/api/files/:fragmentId/:fileId',
+    authBearer,
+    require('./routeHandlers/getSignedUrl')(s3, s3Config),
+  )
 
-      res.status(200).json({
-        signedUrl: data,
-      })
-    })
-  })
-  app.delete('/api/file/:fragmentId/:fileId', authBearer, async (req, res) => {
-    const params = {
-      Bucket: s3Config.bucket,
-      Key: `${req.params.fragmentId}/${req.params.fileId}`,
-    }
-    s3.deleteObject(params, (err, data) => {
-      if (err) {
-        res.status(err.statusCode).json({ error: err.message })
-        logger.error(err.message)
-        return
-      }
+  app.get(
+    '/api/files/:fragmentId',
+    authBearer,
+    require('./routeHandlers/zipFiles')(s3, s3Config),
+  )
 
-      res.status(204).json()
-    })
-  })
+  app.delete(
+    '/api/files/:fragmentId/:fileId',
+    authBearer,
+    require('./routeHandlers/deleteFile')(s3, s3Config),
+  )
 }
 
 module.exports = FileBackend

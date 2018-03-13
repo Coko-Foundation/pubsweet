@@ -1,11 +1,7 @@
 {
   "name": "@pubsweet/ui",
   "version": "3.1.0",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
+  "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
   "repository": {

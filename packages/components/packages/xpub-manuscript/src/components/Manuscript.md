@@ -8,13 +8,14 @@ const content = `
 </container>`
 
 const currentUser = {
-  teams: [{ teamType: { name: 'Production Editor' } }]
-};
+  teams: [{ teamType: { name: 'Production Editor' } }],
+}
 
-<Manuscript 
+;<Manuscript
   content={content}
   currentUser={currentUser}
   fileUpload={data => console.log(data)}
   updateManuscript={data => console.log(data)}
-  version={{}}/>
+  version={{}}
+/>
 ```
