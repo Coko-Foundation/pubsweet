@@ -1,61 +1,49 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
+import { graphql, compose } from 'react-apollo'
 
-import actions from '../actions'
-import { selectCurrentUser } from '../selectors'
+import gql from 'graphql-tag'
 
-const isAllowedRedirect = pathname =>
-  !['/logout', '/login', '/signup'].includes(pathname)
+const query = gql`
+  query CurrentUser {
+    currentUser {
+      user {
+        id
+        username
+        email
+        admin
+      }
+    }
+  }
+`
 
 export class AuthenticatedComponent extends React.Component {
-  componentWillMount() {
-    this.props.ensureCurrentUser().then(() => this.checkAuth(this.props))
-  }
-
   componentWillReceiveProps(nextProps) {
     this.checkAuth(nextProps)
   }
 
-  checkAuth({ isFetching, isAuthenticated }) {
-    if (!isFetching && !isAuthenticated) {
-      const returnUrl = this.props.location.pathname
-      let loginUrl = '/login'
-      if (isAllowedRedirect(returnUrl)) {
-        loginUrl += `?next=${returnUrl}`
-      }
-      this.props.pushState(loginUrl)
+  checkAuth({ data: { loading, currentUser } }) {
+    if (!loading && !(currentUser && currentUser.user)) {
+      const redirectAfterLogin = this.props.location.pathname
+      this.props.history.push(`/login?next=${redirectAfterLogin}`)
     }
   }
 
   render() {
-    return this.props.isAuthenticated ? this.props.children : null
+    const { data, children } = this.props
+    return data.currentUser && data.currentUser.user ? children : null
   }
 }
 
 AuthenticatedComponent.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool,
+    currentUser: PropTypes.object,
+  }),
   children: PropTypes.node,
-  location: PropTypes.object,
-  ensureCurrentUser: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool,
-  isAuthenticated: PropTypes.bool,
-  pushState: PropTypes.func.isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string }),
+  history: PropTypes.shape({ push: PropTypes.func }),
 }
 
-function mapState(state) {
-  return {
-    isFetching: state.currentUser.isFetching,
-    isAuthenticated: !!selectCurrentUser(state),
-  }
-}
-
-const ConnectedAuthenticatedComponent = withRouter(
-  connect(mapState, {
-    ensureCurrentUser: actions.ensureCurrentUser,
-    pushState: push,
-  })(AuthenticatedComponent),
-)
-
-export default ConnectedAuthenticatedComponent
+export default compose(withRouter, graphql(query))(AuthenticatedComponent)
