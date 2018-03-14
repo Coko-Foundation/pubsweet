@@ -1,12 +1,8 @@
 import React from 'react'
 
-const MetadataOwners = ({ owners }) => (
-  <span>
-    {owners.map((owner, index) => [
-      index === 0 ? null : <span>, </span>,
-      <span>{owner.username || 'Anonymous'}</span>,
-    ])}
-  </span>
-)
+const MetadataOwners = ({ owners }) =>
+  owners.map(owner => (
+    <span key={owner.id}>{owner.username || 'Anonymous'}</span>
+  ))
 
 export default MetadataOwners
