@@ -6,7 +6,6 @@ const theme = {
   colorBackground: 'white',
   colorPrimary: 'black',
   colorSecondary: 'grey',
-  colorQuiet: 'grey',
   colorFurniture: 'grey',
   colorBorder: 'grey',
   colorBackgroundHue: 'grey',

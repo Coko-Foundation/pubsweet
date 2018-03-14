@@ -3,6 +3,8 @@ process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const httpMocks = require('node-mocks-http')
 
+const zipHandler = require('./routeHandlers/zipFiles')
+
 describe('ValidateFile for multer fileFilter', () => {
   it('should return TRUE when fileType is supplementary', () => {
     const validateFile = require('./middeware/upload').validateFile(
@@ -66,6 +68,103 @@ describe('Upload file route handler', () => {
     expect(res.statusCode).toBe(400)
     const data = JSON.parse(res._getData())
     expect(data.error).toEqual(req.fileValidationError)
+  })
+})
+
+describe('Zip files endpoint', () => {
+  const testObject = {
+    Key: 'KeyToMyHeart',
+    Body: Buffer.alloc(10),
+    Metadata: {
+      filetype: 'manuscripts',
+      filename: 'test.txt',
+    },
+  }
+  const mockBucket = {
+    RandomKey: {
+      Contents: [testObject, testObject],
+    },
+  }
+
+  const s3 = {}
+  const mocks = {}
+  let mockArchiver = null
+  const s3Config = {
+    bucket: 'TestBucket',
+  }
+  beforeAll(() => {
+    s3.getObject = jest.fn((params, cb) => {
+      cb(null, testObject)
+    })
+
+    s3.listObjects = jest.fn((params, cb) => {
+      cb(null, mockBucket[params.Prefix])
+    })
+    mocks.pipe = jest.fn()
+    mocks.append = jest.fn()
+    mocks.finalize = jest.fn()
+    mocks.attachment = jest.fn()
+
+    mockArchiver = jest.fn(p => ({
+      pipe: mocks.pipe,
+      append: mocks.append,
+      finalize: mocks.finalize,
+    }))
+  })
+  afterEach(() => {
+    s3.getObject.mockClear()
+    s3.listObjects.mockClear()
+    mocks.pipe.mockClear()
+    mocks.append.mockClear()
+    mocks.attachment.mockClear()
+  })
+  it(`no zipping if no files found`, async () => {
+    const zipFiles = zipHandler(s3, s3Config, mockArchiver)
+    const request = httpMocks.createRequest({
+      method: 'GET',
+      params: {
+        fragmentId: 'NotFoundKey',
+      },
+    })
+    const response = httpMocks.createResponse()
+    response.attachment = mocks.attachment
+
+    await zipFiles(request, response)
+
+    expect(s3.listObjects.mock.calls).toHaveLength(1)
+    expect(s3.getObject.mock.calls).toHaveLength(0)
+    expect(mocks.attachment.mock.calls).toHaveLength(0)
+    expect(mocks.append.mock.calls).toHaveLength(0)
+    expect(mocks.pipe.mock.calls).toHaveLength(0)
+
+    const responseData = JSON.parse(response._getData())
+
+    expect(responseData.message).toEqual(
+      `No files found for the requested manuscript.`,
+    )
+    expect(response._getStatusCode()).toEqual(204)
+  })
+  it('zips all the files', async () => {
+    const zipFiles = zipHandler(s3, s3Config, mockArchiver)
+
+    const request = httpMocks.createRequest({
+      method: 'GET',
+      params: {
+        fragmentId: 'RandomKey',
+      },
+    })
+    const response = httpMocks.createResponse()
+    response.attachment = mocks.attachment
+
+    await zipFiles(request, response)
+
+    expect(s3.listObjects.mock.calls).toHaveLength(1)
+    expect(s3.getObject.mock.calls).toHaveLength(2)
+    expect(mocks.attachment.mock.calls).toHaveLength(1)
+    expect(mocks.attachment.mock.calls[0][0]).toEqual('RandomKey-archive.zip')
+    expect(mocks.append.mock.calls).toHaveLength(2)
+    expect(mocks.pipe.mock.calls).toHaveLength(1)
+    expect(response._getStatusCode()).toEqual(200)
   })
 })
 
