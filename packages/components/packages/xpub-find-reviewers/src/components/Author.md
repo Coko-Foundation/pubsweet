@@ -8,20 +8,19 @@ const author = {
     {
       id: faker.random.uuid(),
       title: faker.lorem.sentence(20, 5),
-      scorePercent: faker.random.number({ min: 1, max: 100 })
+      scorePercent: faker.random.number({ min: 1, max: 100 }),
     },
     {
       id: faker.random.uuid(),
       title: faker.lorem.sentence(20, 5),
-      scorePercent: faker.random.number({ min: 1, max: 100 })
+      scorePercent: faker.random.number({ min: 1, max: 100 }),
     },
     {
       id: faker.random.uuid(),
       title: faker.lorem.sentence(20, 5),
-      scorePercent: faker.random.number({ min: 1, max: 100 })
-    }
-  ]
-};
-
-<Author author={author}/>
+      scorePercent: faker.random.number({ min: 1, max: 100 }),
+    },
+  ],
+}
+;<Author author={author} />
 ```

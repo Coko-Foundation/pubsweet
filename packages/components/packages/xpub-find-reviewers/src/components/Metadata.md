@@ -8,9 +8,8 @@ const version = {
       faker.name.findName(),
       faker.name.findName(),
       faker.name.findName(),
-    ]
-  }
-};
-
-<Metadata version={version} />
+    ],
+  },
+}
+;<Metadata version={version} />
 ```

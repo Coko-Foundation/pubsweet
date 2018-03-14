@@ -14,6 +14,7 @@ const appPath = path.join(tempDir, appName)
 const nodeConfig = {
   'pubsweet-server': {
     db: { database: global.__testDbName },
+    uploads: 'uploads',
   },
   // TODO: Remove this once version of server that handles
   // undefined app validations is released.
@@ -44,10 +45,11 @@ describe('CLI: integration test', () => {
   describe('new', () => {
     it('will not overwrite non-empty dir', () => {
       fs.ensureDirSync(path.join(appPath, 'blocking-dir'))
-      const { stderr } = runCommandSync({
+      const { stdout, stderr } = runCommandSync({
         args: `new ${appName}`,
         cwd: tempDir,
       })
+      console.log(stderr, stdout)
       expect(stderr).toContain(
         `destination path '${appName}' already exists and is not an empty directory`,
       )
@@ -118,12 +120,13 @@ describe('CLI: integration test', () => {
     const buildDir = path.join(appPath, '_build')
 
     it('outputs static assets to _build directory', () => {
-      runCommandSync({
+      const { stdout, stderr } = runCommandSync({
         args: 'build',
         stdio: 'inherit',
         cwd: appPath,
         nodeConfig,
       })
+      console.log(stderr, stdout)
 
       expect(fs.existsSync(path.join(buildDir, 'assets', 'app.js'))).toBe(true)
       fs.removeSync(buildDir)

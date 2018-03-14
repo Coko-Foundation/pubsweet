@@ -1,11 +1,11 @@
-const multer = require('multer')
-const multerS3 = require('multer-s3')
-const uuid = require('uuid')
 const Joi = require('joi')
-const _ = require('lodash')
+const uuid = require('uuid')
 const config = require('config')
+const multer = require('multer')
+const { get } = require('lodash')
+const multerS3 = require('multer-s3')
 
-const s3Config = _.get(config, 'pubsweet-component-aws-s3')
+const s3Config = get(config, 'pubsweet-component-aws-s3')
 const uploadValidations = require(s3Config.validations)
 
 const setupMulter = s3 => {
@@ -15,6 +15,12 @@ const setupMulter = s3 => {
       bucket: s3Config.bucket,
       contentType: (req, file, cb) => {
         cb(null, file.mimetype)
+      },
+      metadata: (req, file, cb) => {
+        cb(null, {
+          FileType: get(req, 'body.fileType'),
+          FileName: get(file, 'originalname'),
+        })
       },
       key: (req, file, cb) => {
         const fileKey = `${req.body.fragmentId}/${uuid.v4()}`

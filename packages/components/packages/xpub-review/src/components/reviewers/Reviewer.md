@@ -4,19 +4,16 @@ A reviewer who has been invited:
 const reviewer = {
   status: 'invited',
   events: {
-    invited: faker.date.recent(),    
+    invited: faker.date.recent(),
   },
   _reviewer: {
-    ordinal: null
+    ordinal: null,
   },
   _user: {
-     username: faker.internet.userName(),
+    username: faker.internet.userName(),
   },
-};
-
-<Reviewer
-  reviewer={reviewer}
-  removeReviewer={() => console.log('remove')}/>
+}
+;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
 A reviewer who has accepted their invitation:
@@ -29,16 +26,13 @@ const reviewer = {
     accepted: faker.date.recent(),
   },
   _reviewer: {
-    ordinal: null
+    ordinal: null,
   },
   _user: {
-     username: faker.internet.userName(),
+    username: faker.internet.userName(),
   },
-};
-
-<Reviewer
-  reviewer={reviewer}
-  removeReviewer={() => console.log('remove')}/>
+}
+;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
 A reviewer who has declined their invitation:
@@ -51,16 +45,13 @@ const reviewer = {
     declined: faker.date.recent(),
   },
   _reviewer: {
-    ordinal: null
+    ordinal: null,
   },
   _user: {
-     username: faker.internet.userName(),
+    username: faker.internet.userName(),
   },
-};
-
-<Reviewer
-  reviewer={reviewer}
-  removeReviewer={() => console.log('remove')}/>
+}
+;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
 A reviewer who has submitted their review:
@@ -74,14 +65,11 @@ const reviewer = {
     reviewed: faker.date.recent(),
   },
   _reviewer: {
-    ordinal: faker.random.number({ max: 3 })
+    ordinal: faker.random.number({ max: 3 }),
   },
   _user: {
-     username: faker.internet.userName(),
+    username: faker.internet.userName(),
   },
-};
-
-<Reviewer
-  reviewer={reviewer}
-  removeReviewer={() => console.log('remove')}/>
+}
+;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```

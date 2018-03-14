@@ -5,10 +5,10 @@ const version = {
   id: faker.random.uuid(),
   submitted: faker.date.past(2),
   declarations: {
-    openReview: true
+    openReview: true,
   },
   files: {
-    supplementary: []
+    supplementary: [],
   },
   reviewers: [
     {
@@ -17,9 +17,9 @@ const version = {
       status: 'reviewed',
       submitted: faker.date.past(2),
       note: {
-        content: '<p>This is a review</p>'
+        content: '<p>This is a review</p>',
       },
-      recommendation: 'accept'
+      recommendation: 'accept',
     },
     {
       id: faker.random.uuid(),
@@ -27,20 +27,18 @@ const version = {
       status: 'reviewed',
       submitted: faker.date.past(2),
       note: {
-        content: '<p>This is another review</p>'
+        content: '<p>This is another review</p>',
       },
-      recommendation: 'revise'
+      recommendation: 'revise',
     },
   ],
   decision: {
     submitted: faker.date.past(2),
     note: {
       content: '<p>This is a decision</p>',
-      recommendation: 'accept'
-    }
-  }
-};
-
-<DecisionReviews
-  version={version}/>
+      recommendation: 'accept',
+    },
+  },
+}
+;<DecisionReviews version={version} />
 ```
