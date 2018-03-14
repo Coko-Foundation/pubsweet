@@ -14,52 +14,49 @@ In this case, `mailer.js` creates a new `AWS.SES` object which will be used to s
 
 ```js
 const AWS = require('aws-sdk')
+const config = require('config')
 
 module.exports = {
-  from: process.env.EMAIL_SENDER,
   transport: {
     SES: new AWS.SES({
-      accessKeyId: process.env.AWS_SES_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SES_SECRET_KEY,
-      region: process.env.AWS_SES_REGION,
+      accessKeyId: config.SES.accessKey,
+      secretAccessKey: config.SES.secretKey,
+      region: config.SES.region,
     }),
   },
 }
 ```
 
-The `.env` file should contain the following data:
+If you plan on using environment variables for your AWS account, you need to create a `config/custom-environment-variables.json` file with the following content:
 
-```bash
-AWS_SES_SECRET_KEY = <secretKey>
-AWS_SES_ACCESS_KEY = <accessKey>
-EMAIL_SENDER = verified_ses_sender@domain.com
-AWS_SES_REGION = region-name
+```json
+{
+  "SES": {
+    "accessKey": "AWS_SES_ACCESS_KEY",
+    "secretKey": "AWS_SES_SECRET_KEY",
+    "region": "AWS_SES_REGION"
+  }
+}
 ```
 
 ## Usage
 
-The `send-email` component contains a `send()` function which takes the following parameters: `toEmail`, `subject`, `textBody` and `htmlBody`.
+The `send-email` component contains a `send()` function which takes a single `mailData` object which needs to contain at least the following properties: `from`, `to`, `subject`, `text`, `html`.
 
-```js
+```javascript
 const Email = require('@pubsweet/component-send-email')
+const config = require('config')
 
 module.exports = {
   setupEmail: async toEmail => {
-    const htmlBody = '<p>This is an email</p>'
-    const textBody = 'This is an email'
-    const subject = 'You have been invited!'
-
-    try {
-      const sendEmailRes = await Email.send(
-        toEmail,
-        subject,
-        textBody,
-        htmlBody,
-      )
-      return sendEmailRes
-    } catch (e) {
-      return e
+    const mailData = {
+      from: config.get('mailer.from'),
+      to: toEmail,
+      subject: 'You have been invited!',
+      text: 'This is an email',
+      html: '<p>This is an email</p>',
     }
+    return Email.send(mailData)
   },
 }
 ```
