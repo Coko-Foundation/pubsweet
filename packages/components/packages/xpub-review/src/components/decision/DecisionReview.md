@@ -15,14 +15,13 @@ const review = {
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 
 const reviewer = {
   ordinal: faker.random.number({ min: 1, max: 5 }),
   name: faker.name.findName(),
 }
-
 ;<DecisionReview review={review} reviewer={reviewer} />
 ```
 
@@ -43,13 +42,12 @@ const review = {
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'revise',
+  Recommendation: { recommendation: 'revise' },
 }
 
 const reviewer = {
   ordinal: faker.random.number({ min: 1, max: 5 }),
   name: faker.name.findName(),
 }
-
 ;<DecisionReview review={review} reviewer={reviewer} open />
 ```

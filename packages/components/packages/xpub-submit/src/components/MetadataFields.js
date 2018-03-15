@@ -47,7 +47,7 @@ const ArticleSectionInput = journal => input => (
   <CheckboxGroup options={journal.articleSections} {...input} />
 )
 
-const Metadata = ({ journal, readonly }) => (
+const MetadataFields = ({ journal, readonly }) => (
   <FormSection name="metadata">
     <Section id="metadata.title">
       <ValidatedField
@@ -123,4 +123,4 @@ const Metadata = ({ journal, readonly }) => (
   </FormSection>
 )
 
-export default withJournal(Metadata)
+export default withJournal(MetadataFields)

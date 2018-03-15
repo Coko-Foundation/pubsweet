@@ -10,7 +10,7 @@ const version = {
   },
 }
 
-const MetadataForm = reduxForm({ form: 'metadata' })(Metadata)
+const MetadataForm = reduxForm({ form: 'metadata' })(MetadataFields)
 
 ;<MetadataForm
   initialValues={version}

@@ -33,4 +33,5 @@ const Colorize = Component => {
   return Colorized
 }
 
+/** @component */
 export default compose(withTheme, Colorize)

@@ -73,7 +73,7 @@ const ReviewLayout = ({
 
   if (currentVersion.submitted && (!review || !review.submitted)) {
     const submittedMoment = moment()
-    const key = submittedMoment.format('x')
+    const key = 'currentversion-key'
     const label = submittedMoment.format('YYYY-MM-DD')
 
     reviewSections.push({
