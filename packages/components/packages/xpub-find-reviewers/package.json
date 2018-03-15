@@ -4,10 +4,7 @@
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "dependencies": {
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
@@ -37,9 +34,6 @@
   },
   "scripts": {
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile"
+    "styleguide:build": "styleguidist build"
   }
 }

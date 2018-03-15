@@ -4,10 +4,7 @@
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "dependencies": {
     "@pubsweet/ui": "^3.2.1",
     "classnames": "^2.2.5",
@@ -52,23 +49,8 @@
     "pubsweet-client": ">=1.0.0",
     "react": ">=16"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.s?css$": "identity-obj-proxy"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@?pubsweet)"
-    ],
-    "globals": {
-      "PUBSWEET_COMPONENTS": []
-    }
-  },
   "scripts": {
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile",
-    "test": "jest"
+    "styleguide:build": "styleguidist build"
   }
 }

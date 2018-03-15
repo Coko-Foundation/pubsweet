@@ -46,9 +46,6 @@
   },
   "scripts": {
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "prebuild": "npm run clean && npm run lint",
-    "clean": "rimraf dist",
-    "build": "NODE_ENV=production webpack --progress --profile --optimize-minimize"
+    "styleguide:build": "styleguidist build"
   }
 }

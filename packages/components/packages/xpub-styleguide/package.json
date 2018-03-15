@@ -32,9 +32,5 @@
   "peerDependencies": {
     "react": ">=16"
   },
-  "scripts": {
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile"
-  }
+  "scripts": {}
 }
