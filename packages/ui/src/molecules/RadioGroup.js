@@ -1,7 +1,6 @@
 import React from 'react'
 
-import Radio from '../atoms/Radio'
-import Flexbox from '../atoms/Flexbox'
+import { Radio, Flexbox } from '../atoms'
 
 class RadioGroup extends React.Component {
   constructor(props) {

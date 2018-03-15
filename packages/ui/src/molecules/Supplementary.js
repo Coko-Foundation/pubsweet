@@ -1,6 +1,6 @@
 import React from 'react'
-import FileUploadList from './FileUploadList'
-import UploadingFile from '../atoms/UploadingFile'
+import { UploadingFile } from '../atoms'
+import { FileUploadList } from '../molecules'
 
 const Supplementary = props => (
   <FileUploadList
