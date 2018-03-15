@@ -43,7 +43,7 @@ const AppBar = ({
   onLogoutClick,
   navLinkComponents,
   user,
-  rightComponent: RightComponent,
+  rightComponent: RightComponent = DefaultRightComponent,
 }) => (
   <Root>
     <Section>
@@ -104,10 +104,6 @@ AppBar.propTypes = {
   user: PropTypes.object,
   navLinkComponents: PropTypes.arrayOf(PropTypes.element),
   rightComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-}
-
-AppBar.defaultProps = {
-  rightComponent: DefaultRightComponent,
 }
 
 export default AppBar
