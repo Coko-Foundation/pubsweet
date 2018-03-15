@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="1.0.1"></a>
+      <a name="1.0.2"></a>
+## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.1...@pubsweet/db-manager@1.0.2) (2018-03-15)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/db-manager
+
+      <a name="1.0.1"></a>
 
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.0...@pubsweet/db-manager@1.0.1) (2018-03-09)
 
@@ -21,9 +29,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * All data is now persisted in a PostgreSQL database instead of PouchDB
 * Database server must be running and have an existing database before running `pubsweet setupdb` (Docker config provided)
-  `pubsweet start` runs `npm start` script if found and falls back to `pubsweet server`
-  `pubsweet server` starts the PubSweet server (like the old `pubsweet start`)
-  `pubsweet-server` model API is unchanged
+`pubsweet start` runs `npm start` script if found and falls back to `pubsweet server`
+`pubsweet server` starts the PubSweet server (like the old `pubsweet start`)
+`pubsweet-server` model API is unchanged
 
 <a name="0.0.17"></a>
 
