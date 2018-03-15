@@ -13442,6 +13442,41 @@ xmlhttprequest@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
 
+xpub-journal@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xpub-journal/-/xpub-journal-0.0.3.tgz#d930328aa3ee9a60de73444d4e960963ee65ede4"
+  dependencies:
+    prop-types "^15.5.10"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    recompose "^0.26.0"
+
+xpub-styleguide@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xpub-styleguide/-/xpub-styleguide-0.0.3.tgz#91fd6000956d61f40a730a3f963082a7b4fba54d"
+  dependencies:
+    "@pubsweet/styleguide" "^1.1.2"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    xpub-journal "^0.0.3"
+    xpub-theme "^0.0.3"
+
+xpub-theme@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xpub-theme/-/xpub-theme-0.0.3.tgz#65c70bc52d4bf499d3959a77d138aaddcd382642"
+  dependencies:
+    "@pubsweet/theme" "^0.1.3"
+    cokourier-prime-sans "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git"
+    typeface-fira-mono "^0.0.43"
+    typeface-fira-sans "^0.0.43"
+    typeface-fira-sans-condensed "^0.0.43"
+    typeface-vollkorn "^0.0.43"
+
 "xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.0, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
