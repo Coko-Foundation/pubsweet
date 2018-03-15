@@ -3,7 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="3.0.2"></a>
+      <a name="4.0.0"></a>
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.2...pubsweet-components@4.0.0) (2018-03-15)
+
+
+### Bug Fixes
+
+* **login:** add missing recompose dependency ([a3b5a80](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a3b5a80)), closes [#353](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/353)
+* **xpub:** variable linter error prosemirror ([f57768c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f57768c))
+
+
+### Features
+
+* **aws-s3:** add endpoint to zip S3 files of a manuscript ([f50f602](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f50f602))
+
+
+### BREAKING CHANGES
+
+* **aws-s3:** renamed the AWS-S3 endpoints to conform to REST principles (pluralize entity name)
+
+
+
+
+      <a name="3.0.2"></a>
 
 ## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.1...pubsweet-components@3.0.2) (2018-03-09)
 
@@ -47,7 +69,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * **ui:** \* navLinks prop is now navLinkComponents and expects an array of
-  elements
+elements
 
 <a name="2.0.1"></a>
 
