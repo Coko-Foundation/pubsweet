@@ -1,15 +1,6 @@
 const Authsome = require('authsome')
 
-const authsomeConfig = {
-  teams: {
-    teamSeniorEditors: {
-      name: 'SeniorEditors',
-    },
-    teamHandlingEditors: {
-      name: 'HandlingEditors',
-    },
-  },
-}
+const authsomeConfig = require('./teams-config.js')
 
 const collections = [
   {
@@ -68,7 +59,7 @@ const users = [
 ]
 
 const authsome = new Authsome(
-  { mode: require('./index'), ...authsomeConfig },
+  { mode: require('../src/index'), ...authsomeConfig },
   {
     models: {
       User: { find: id => users.find(user => user.id === id) },

@@ -13,9 +13,19 @@
   "devDependencies": {
     "jest": "^22.2.0",
     "jsdoc": "^3.5.5",
-    "jsdoc-to-markdown": "^4.0.1"
+    "jsdoc-to-markdown": "^4.0.1",
+    "pubsweet-server": "^2.0.2"
   },
   "dependencies": {
-    "authsome": "^0.0.9"
+    "authsome": "^0.0.10"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-db",
+    "testRegex": "/test/.*.test.js$",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }
