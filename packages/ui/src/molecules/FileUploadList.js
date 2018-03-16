@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Upload from './Upload'
-import Flexbox from '../atoms/Flexbox'
-import UploadButton from '../atoms/UploadButton'
+import { Flexbox, UploadButton } from '../atoms'
+import { Upload } from '../molecules'
 
 const Root = styled.div``
 

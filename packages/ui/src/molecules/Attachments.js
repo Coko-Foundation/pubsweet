@@ -1,7 +1,7 @@
 import React from 'react'
 
-import FileUploadList from './FileUploadList'
-import Attachment from '../atoms/Attachment'
+import { Attachment } from '../atoms'
+import { FileUploadList } from '../molecules'
 
 // TODO: show upload progress
 

@@ -1,19 +1,17 @@
 A dashboard item showing a project that the current user is handling as editor.
 
 ```js
-const AssignEditor = require('../AssignEditor').default;
+const AssignEditor = require('../AssignEditor').default
 
 const project = {
   id: faker.random.uuid(),
   title: faker.lorem.sentence(15),
   status: 'submitted',
-  fragments: [
-    faker.random.uuid()
-  ],
+  fragments: [faker.random.uuid()],
   owners: [
     {
-      name: faker.name.findName()
-    }
+      name: faker.name.findName(),
+    },
   ],
   reviewers: [
     {
@@ -35,20 +33,20 @@ const project = {
     {
       id: 'reviewer-reviewed',
       name: faker.name.findName(),
-      ordinal: 1
-    }
-  ]
-};
+      ordinal: 1,
+    },
+  ],
+}
 
 const version = {
   id: faker.random.uuid(),
   submitted: faker.date.past(1),
   metadata: {
     articleType: 'original-research',
-    articleSection: ['cognitive-psychology']
+    articleSection: ['cognitive-psychology'],
   },
   declarations: {
-    openReview: true
+    openReview: true,
   },
   reviews: [
     {
@@ -56,7 +54,7 @@ const version = {
       status: 'invited',
       events: {
         invited: faker.date.past(1),
-      }
+      },
     },
     {
       reviewer: 'reviewer-accepted',
@@ -64,7 +62,7 @@ const version = {
       events: {
         invited: faker.date.past(1),
         accepted: faker.date.past(1),
-      }
+      },
     },
     {
       reviewer: 'reviewer-declined',
@@ -72,7 +70,7 @@ const version = {
       events: {
         invited: faker.date.past(1),
         declined: faker.date.past(1),
-      }
+      },
     },
     {
       reviewer: 'reviewer-reviewed',
@@ -81,14 +79,14 @@ const version = {
         invited: faker.date.past(1),
         accepted: faker.date.past(1),
         reviewed: faker.date.past(1),
-      }
+      },
     },
-  ]
-};
+  ],
+}
 
 const team = {
-  members: []
-};
+  members: [],
+}
 
 const options = [
   {
@@ -102,16 +100,17 @@ const options = [
   {
     value: faker.random.uuid(),
     label: faker.internet.userName(),
-  }
-];
+  },
+]
 
 const AssignEditorContainer = props => (
-  <AssignEditor team={team} options={options} {...props}/>
-);
+  <AssignEditor team={team} options={options} {...props} />
+)
 
-<EditorItem
-      project={project}
-      version={version}
-      addUserToTeam={props => console.log(props)}
-      AssignEditor={AssignEditorContainer}/>
+;<EditorItem
+  project={project}
+  version={version}
+  addUserToTeam={props => console.log(props)}
+  AssignEditor={AssignEditorContainer}
+/>
 ```

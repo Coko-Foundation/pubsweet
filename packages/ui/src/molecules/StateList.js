@@ -4,7 +4,7 @@ import { map, uniqueId, keys, last } from 'lodash'
 import { ChevronRight } from 'react-feather'
 import styled from 'styled-components'
 
-import StateItem from '../atoms/StateItem'
+import { StateItem } from '../atoms'
 
 const StateListContainer = styled.div`
   align-items: center;

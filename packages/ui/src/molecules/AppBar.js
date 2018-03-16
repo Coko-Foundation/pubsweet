@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import th from '../helpers/themeHelper'
-import Icon from '../atoms/Icon'
-import Link from '../atoms/Link'
+import { Icon, Link } from '../atoms'
 
 const Root = styled.nav`
   display: flex;

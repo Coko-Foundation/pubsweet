@@ -3,17 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="1.1.1"></a>
-## [1.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.0...pubsweet-component-form-group@1.1.1) (2018-03-09)
+<a name="1.1.2"></a>
+## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.1...pubsweet-component-form-group@1.1.2) (2018-03-15)
 
 
 
 
 **Note:** Version bump only for package pubsweet-component-form-group
 
-<a name="1.1.0"></a>
-# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.0.2...pubsweet-component-form-group@1.1.0) (2018-03-05)
+<a name="1.1.1"></a>
 
+## [1.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.0...pubsweet-component-form-group@1.1.1) (2018-03-09)
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.0"></a>
+
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.0.2...pubsweet-component-form-group@1.1.0) (2018-03-05)
 
 ### Bug Fixes
 
@@ -21,19 +27,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **components:** styleguide can render components using validations ([93df7af](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93df7af))
 * restore FormGroup to its previous state, for later deletion ([3135ffd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3135ffd))
 
-
 ### Features
 
 * **elife-theme:** add elife theme ([e406e0d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e406e0d))
 
-
-
-
 <a name="1.0.2"></a>
+
 ## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.0.1...pubsweet-component-form-group@1.0.2) (2018-02-23)
-
-
-
 
 **Note:** Version bump only for package pubsweet-component-form-group
 

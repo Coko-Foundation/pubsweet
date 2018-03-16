@@ -1,8 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { Icon } from '@pubsweet/ui'
 import styled, { keyframes } from 'styled-components'
-import Colorize from './Colorize'
+import { Icon, Colorize } from '../atoms'
 
 const Spinner = ({ icon = 'loader', size = 2, color = '#444' }) => (
   <Root>

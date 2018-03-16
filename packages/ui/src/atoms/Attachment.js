@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import th from '../helpers/themeHelper'
-import Icon from './Icon'
+import { Icon } from '../atoms'
 
 const Filename = styled.span`
   color: ${props =>

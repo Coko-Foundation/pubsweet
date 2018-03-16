@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import th from '../helpers/themeHelper'
 
-import AlignmentBox from '../atoms/AlignmentBox'
+import { AlignmentBox } from '../atoms'
 
 const blue = '#0d78f2'
 

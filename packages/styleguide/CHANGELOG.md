@@ -3,25 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.1.2...@pubsweet/styleguide@1.1.3) (2018-03-15)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
 <a name="1.1.2"></a>
+
 ## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.1.1...@pubsweet/styleguide@1.1.2) (2018-03-09)
-
-
-
 
 **Note:** Version bump only for package @pubsweet/styleguide
 
 <a name="1.1.1"></a>
+
 ## [1.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.1.0...@pubsweet/styleguide@1.1.1) (2018-03-06)
-
-
-
 
 **Note:** Version bump only for package @pubsweet/styleguide
 
 <a name="1.1.0"></a>
-# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.0.0...@pubsweet/styleguide@1.1.0) (2018-03-05)
 
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.0.0...@pubsweet/styleguide@1.1.0) (2018-03-05)
 
 ### Bug Fixes
 
@@ -29,16 +33,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **components:** styleguide can render components using validations ([93df7af](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93df7af))
 * **ui:** failing build ([c52f678](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c52f678))
 
-
 ### Features
 
 * **default-theme:** add variables to default theme ([ba121b0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba121b0))
 * **elife-theme:** add elife theme ([e406e0d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e406e0d))
 * **normalize:** add normalize css ([9eb24e5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9eb24e5))
 * **styleguide:** add button for viewing components against grid ([6a4999f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6a4999f))
-
-
-
 
 <a name="1.0.0"></a>
 
