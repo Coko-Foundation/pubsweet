@@ -30,6 +30,7 @@ const validations = {
         Joi.object({ type: Joi.string().valid('fragment') }).unknown(true),
       ),
     ),
+    created: Joi.date(),
   },
   user: {
     id: Joi.string()
