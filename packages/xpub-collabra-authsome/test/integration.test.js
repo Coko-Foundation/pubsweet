@@ -9,25 +9,43 @@ const authentication = require('pubsweet-server/src/authentication')
 let adminToken
 // let userToken
 
+const collectionPaper1 = {
+  title: 'Paper 1',
+  status: 'submitted',
+}
+
 describe('server integration', () => {
   beforeEach(async () => {
     await cleanDB()
     const [admin] = await Promise.all([
       new User(fixtures.adminUser).save(),
-      // new User(fixtures.user).save(),
+      new User(fixtures.user).save(),
     ])
     adminToken = authentication.token.create(admin)
     // userToken = authentication.token.create(user)
   })
 
   describe('admin', () => {
-    it('can create a team and a collection', async () => {
+    it('can create a collection with REST', async () => {
       const collection = await api.collections
-        .create(fixtures.collection, adminToken)
+        .create(collectionPaper1, adminToken)
         .expect(201)
         .then(res => res.body)
 
       expect(collection.type).toEqual(fixtures.collection.type)
+    })
+
+    it('can create a collection through GraphQL', async () => {
+      const { body } = await api.graphql.query(
+        `mutation($input: String) {
+          createCollection(input: $input) { id, title, status }
+        }`,
+        {
+          input: JSON.stringify(collectionPaper1),
+        },
+        adminToken,
+      )
+      expect(body.data.createCollection.title).toEqual(collectionPaper1.title)
     })
   })
 })

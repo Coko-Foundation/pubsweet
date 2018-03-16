@@ -216,16 +216,35 @@ class GraphQLMode extends XpubCollabraMode {
    * Returns true if current operation is listing collections
    *
    * @memberof GraphQLMode
+   * @returns {boolean}
    */
-  isListingCollections = () => {
-    if (this.operation === 'list collections') {
-      return true
-    }
-    return false
-  }
+  isListingCollections = () => this.operation === 'list collections'
+
+  /**
+   * Returns true if the current operation is a create on collections
+   *
+   * @returns {boolean}
+   */
+  isCreatingCollections = () =>
+    this.operation === 'create' && this.object === 'collection'
 
   async determine() {
-    return this.isListingCollections()
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    const user = await this.context.models.User.find(this.userId)
+
+    // Admins can do anything
+    if (this.isAdmin(user)) {
+      return true
+    }
+
+    if (this.isListingCollections()) {
+      return true
+    }
+
+    return false
   }
 }
 
@@ -247,6 +266,14 @@ module.exports = {
     return mode.determine()
   },
   'list collections': (userId, operation, object, context) => {
+    const mode = new GraphQLMode(userId, operation, object, context)
+    return mode.determine()
+  },
+  create: (userId, operation, object, context) => {
+    const mode = new GraphQLMode(userId, operation, object, context)
+    return mode.determine()
+  },
+  read: (userId, operation, object, context) => {
     const mode = new GraphQLMode(userId, operation, object, context)
     return mode.determine()
   },
