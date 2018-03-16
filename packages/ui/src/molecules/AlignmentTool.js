@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import AlignmentBoxWithLabel from './AlignmentBoxWithLabel'
+import { AlignmentBoxWithLabel } from '../molecules'
 
 const mainGrey = '#666'
 

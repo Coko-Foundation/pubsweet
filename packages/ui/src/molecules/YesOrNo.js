@@ -1,5 +1,6 @@
 import React from 'react'
-import RadioGroup from './RadioGroup'
+import { Colorize } from '../atoms'
+import { RadioGroup } from '../molecules'
 
 const options = [
   {
@@ -23,4 +24,4 @@ const YesOrNo = ({ name, value, required, onChange, color = 'black' }) => (
   />
 )
 
-export default YesOrNo
+export default Colorize(YesOrNo)

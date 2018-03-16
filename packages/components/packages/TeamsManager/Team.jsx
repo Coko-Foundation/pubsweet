@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
-import { Button } from 'react-bootstrap'
+import { Button, Menu } from '@pubsweet/ui'
 
 class Team extends React.Component {
   constructor(props) {
@@ -30,7 +28,7 @@ class Team extends React.Component {
     }))
 
     return (
-      <tr className="team">
+      <tr>
         <td>{number}</td>
         <td>{team.name}</td>
         <td>
@@ -40,7 +38,8 @@ class Team extends React.Component {
           {team.object.type} {team.object.id}
         </td>
         <td>
-          <Select
+          <Menu
+            inline
             multi
             name="members"
             onChange={this.updateMembers}
@@ -49,14 +48,7 @@ class Team extends React.Component {
           />
         </td>
         <td>
-          <Button
-            aria-label="Delete"
-            bsStyle="danger"
-            onClick={this.onDelete}
-            title="Delete"
-          >
-            <i className="fa fa-trash-o" />
-          </Button>
+          <Button onClick={this.onDelete}>Delete</Button>
         </td>
       </tr>
     )

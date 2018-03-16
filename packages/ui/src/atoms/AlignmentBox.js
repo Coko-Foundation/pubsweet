@@ -7,7 +7,7 @@ const mainGrey = '#666'
 const whiteRGBA = 'rgba(255, 255, 255, 1)'
 
 const borderRule = position => props => `
-    border-${position}-width: ${props.noBorder[position] ? '0' : '1px'};
+    border-${position}-width: ${props.noBorder[position] ? '0' : '1px'}
   `
 
 const Root = styled.div.attrs({
@@ -20,10 +20,12 @@ const Root = styled.div.attrs({
 
   border-style: solid;
   border-color: ${mainGrey};
-  ${borderRule('top')} ${borderRule('right')} ${borderRule(
-      'bottom',
-    )} ${borderRule('left')} background-color: ${props =>
-      props.active ? mainGrey : 'transparent'};
+  ${borderRule('top')};
+  ${borderRule('right')};
+  ${borderRule('bottom')};
+  ${borderRule('left')};
+
+  background-color: ${props => (props.active ? mainGrey : 'transparent')};
 
   &:hover {
     background-color: ${lightGrey};

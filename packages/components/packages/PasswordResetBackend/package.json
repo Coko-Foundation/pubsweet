@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-password-reset-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Password reset backend component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "peerDependencies": {
     "@pubsweet/logger": ">=0.0.1",
-    "pubsweet-server": ">=1.0.0-alpha.1"
+    "pubsweet-server": ">=1.0.0"
   },
   "repository": {
     "type": "git",

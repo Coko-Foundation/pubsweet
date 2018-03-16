@@ -3,10 +3,9 @@
 exports[`StateItem is rendered correctly 1`] = `
 .c0 {
   cursor: pointer;
-  font-family: var(--font-interface);
+  font-family: sans-serif;
   font-size: 16px;
   font-style: italic;
-  padding: 0;
 }
 
 .c0:focus {
@@ -14,9 +13,9 @@ exports[`StateItem is rendered correctly 1`] = `
 }
 
 .c0:hover {
-  color: #404040;
-  -webkit-transition: 0.25s ease-in-out 0s;
-  transition: 0.25s ease-in-out 0s;
+  color: black;
+  -webkit-transition: ease;
+  transition: ease;
 }
 
 <span

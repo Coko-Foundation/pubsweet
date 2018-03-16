@@ -3,7 +3,7 @@ const resolvers = {
     collection(_, { id }, ctx) {
       return ctx.connectors.collection.fetchOne(id, ctx)
     },
-    collections(ctx) {
+    collections(_, { id }, ctx) {
       return ctx.connectors.collection.fetchAll(ctx)
     },
   },
@@ -14,12 +14,16 @@ const resolvers = {
     createCollection(_, { input }, ctx) {
       return ctx.connectors.collection.create(input, ctx)
     },
+    updateCollection(_, { id, input }, ctx) {
+      return ctx.connectors.collection.update(id, input, ctx)
+    },
   },
   Collection: {
     owners(collection, vars, ctx) {
-      return collection.owners
-        ? ctx.connectors.user.fetchSome(collection.owners, ctx)
-        : []
+      return ctx.connectors.user.fetchSome(collection.owners, ctx)
+    },
+    fragments(collection, vars, ctx) {
+      return ctx.connectors.fragment.fetchSome(collection.fragments, ctx)
     },
   },
 }
@@ -31,12 +35,14 @@ const typeDefs = `
   }
   
   extend type Mutation {
-    createCollection(input: CollectionInput): Collection
+    createCollection(input: String): Collection
     deleteCollection(id: ID): Collection 
+    updateCollection(id: ID, input: String): Collection
   }
   
   type Collection {
     id: ID!
+    rev: String
     type: String!
     owners: [User!]!
     fragments: [Fragment!]!
@@ -45,6 +51,7 @@ const typeDefs = `
   input CollectionInput {
     owners: [ID!]
     fragments: [ID!]
+    rev: String
   }
 `
 

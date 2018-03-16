@@ -1,13 +1,12 @@
 const uuid = require('uuid')
 const Joi = require('joi')
-const _ = require('lodash')
+const config = require('config')
+const { Client } = require('pg')
 
-const schema = require('./schema')
+const logger = require('@pubsweet/logger')
+const db = require('../db')
 const NotFoundError = require('../errors/NotFoundError')
 const ValidationError = require('../errors/ValidationError')
-const logger = require('@pubsweet/logger')
-
-const config = require('config')
 
 let validations
 if (config.validations) {
@@ -17,12 +16,8 @@ if (config.validations) {
   validations = require('./validations')()
 }
 
-schema()
-
 class Model {
   constructor(properties) {
-    schema()
-    this.id = Model.uuid()
     Object.assign(this, properties)
   }
 
@@ -42,28 +37,38 @@ class Model {
   }
 
   async save() {
-    logger.debug('Saving', this.type, this.id)
+    let isNew = false
+    if (!this.id) {
+      isNew = true
+      this.id = Model.uuid()
+    }
 
     this.validate()
 
-    if (
-      !this.rev /* is create */ &&
-      typeof this.constructor.isUniq === 'function'
-    ) {
-      await this.constructor.isUniq(this) // throws an exception if not unique
+    // remove id and any custom toJSON function
+    const data = { ...this, toJSON: undefined, id: undefined }
+    if (isNew) {
+      logger.debug('Saving', this.type, this.id)
+      await db.query('INSERT INTO entities (id, data) VALUES ($1, $2)', [
+        this.id,
+        data,
+      ])
+    } else {
+      logger.debug('Updating', this.type, this.id)
+      await db.query('UPDATE entities SET data = $2 WHERE id = $1', [
+        this.id,
+        data,
+      ])
     }
-    return this._put()
-  }
 
-  async _put() {
-    await db.rel.save(this.constructor.type, this)
-    logger.debug('Actually _put', this.type, this.id, this)
     return this
   }
 
   async delete() {
-    const object = await this.constructor.find(this.id)
-    await db.rel.del(this.type, object)
+    await db.query(
+      `DELETE FROM entities WHERE data->>'type' = $1 AND id = $2`,
+      [this.type, this.id],
+    )
     logger.debug('Deleted', this.type, this.id)
     return this
   }
@@ -74,11 +79,7 @@ class Model {
 
     logger.debug('Updating properties to', properties)
 
-    const validation = Joi.validate(
-      properties,
-      { rev: Joi.string().required() },
-      { allowUnknown: true },
-    )
+    const validation = Joi.validate(properties, {}, { allowUnknown: true })
     if (validation.error) throw validation.error
 
     Object.assign(this, properties)
@@ -110,34 +111,36 @@ class Model {
   // Find all of a certain type e.g.
   // User.all()
   static async all() {
-    const results = await db.rel.find(this.type)
-
-    return results[`${this.type}s`].map(result => new this(result))
+    const { rows } = await db.query(
+      `SELECT * FROM entities WHERE data->>'type' = $1`,
+      [this.type],
+    )
+    return rows.map(result => new this({ id: result.id, ...result.data }))
   }
 
   // Find by id e.g.
   // User.find('394')
   static async find(id) {
-    const plural = `${this.type}s`
-    let results
-
-    try {
-      results = await db.rel.find(this.type, id)
-    } catch (err) {
-      if (err.name === 'NotFoundError') {
-        throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
-      } else {
-        throw err
-      }
-    }
-
-    const result = results[plural].find(result => result.id === id)
-
-    if (!result) {
+    const { rows } = await db.query(
+      `SELECT * FROM entities WHERE data->>'type' = $1 AND id = $2`,
+      [this.type, id],
+    )
+    if (rows.length === 0) {
       throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
     }
 
-    return new this(result)
+    return new this({ id: rows[0].id, ...rows[0].data })
+  }
+
+  // map dotted paths into JSONB accessors: one.two => data->'one'->>'two'
+  static selectorToSql(selector) {
+    const keys = Object.keys(selector).map(key => {
+      const parts = key.split('.').map(Client.prototype.escapeLiteral)
+      parts.unshift('data')
+      const last = parts.pop()
+      return `${parts.join('->')}->>${last}`
+    })
+    return keys.map((accessor, index) => `${accessor} = $${index + 1}`)
   }
 
   // `field` is a string
@@ -147,7 +150,7 @@ class Model {
   static async findByField(field, value) {
     logger.debug('Finding', field, value)
 
-    let selector = {
+    const selector = {
       type: this.type,
     }
 
@@ -156,30 +159,18 @@ class Model {
     } else {
       Object.assign(selector, field)
     }
+    const where = this.selectorToSql(selector)
 
-    selector = _.mapKeys(selector, (_, key) => `data.${key}`)
+    const { rows } = await db.query(
+      `SELECT id, data FROM entities WHERE ${where.join(' AND ')}`,
+      Object.values(selector),
+    )
 
-    await db.createIndex({
-      index: {
-        fields: Object.keys(selector),
-      },
-    })
-
-    const results = await db.find({
-      selector,
-    })
-
-    if (!results.docs.length) {
+    if (!rows.length) {
       throw new NotFoundError()
     }
 
-    return results.docs.map(result => {
-      const { id } = db.rel.parseDocID(result._id)
-      const foundObject = result.data
-      foundObject.id = id
-      foundObject.rev = result._rev
-      return new this(foundObject)
-    })
+    return rows.map(result => new this({ id: result.id, ...result.data }))
   }
 
   static async findOneByField(field, value) {

@@ -1,12 +1,12 @@
 {
   "name": "pubsweet-component-ink-backend",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Backend INK component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "peerDependencies": {
-    "pubsweet-server": ">=0.8.1"
+    "pubsweet-server": ">=1.0.0"
   },
   "dependencies": {
     "@pubsweet/logger": "^0.2.2",

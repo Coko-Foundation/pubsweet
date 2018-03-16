@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormControl, Button, Row, Col } from 'react-bootstrap'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
+import { Button, Menu, TextField } from '@pubsweet/ui'
 
 export default class TeamCreator extends React.Component {
   constructor(props) {
@@ -41,19 +39,24 @@ export default class TeamCreator extends React.Component {
         },
         members: [],
       })
+      this.setState({
+        teamName: '',
+        collectionSelected: null,
+        teamTypeSelected: null,
+      })
     }
   }
 
   onNameChange(event) {
-    this.setState({ teamName: event ? event.target.value : null })
+    this.setState({ teamName: event ? event.target.value : '' })
   }
 
-  onCollectionSelect(collection) {
-    this.setState({ collectionSelected: collection ? collection.value : null })
+  onCollectionSelect(collectionId) {
+    this.setState({ collectionSelected: collectionId || null })
   }
 
   onTeamTypeSelect(teamType) {
-    this.setState({ teamTypeSelected: teamType ? teamType.value : null })
+    this.setState({ teamTypeSelected: teamType || null })
   }
 
   render() {
@@ -72,45 +75,31 @@ export default class TeamCreator extends React.Component {
     return (
       <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
-        <FormControl
+        <TextField
           label="Name"
           name="teamName"
           onChange={this.onNameChange}
           placeholder="Team Awesome"
           required
-          type="text"
+          value={this.state.teamName}
         />
-        <Row>
-          <Col md={3}>
-            <h4>Team type</h4>
-            <Select
-              name="teamType"
-              onChange={this.onTeamTypeSelect}
-              options={types}
-              required
-              value={this.state.teamTypeSelected}
-            />
-          </Col>
-          <Col md={9}>
-            <h4>Collection</h4>
-            <Select
-              name="collection"
-              onChange={this.onCollectionSelect}
-              options={collections}
-              required
-              value={this.state.collectionSelected}
-            />
-          </Col>
-        </Row>
-        <br />
-        <Button
-          aria-label="Create"
-          bsStyle="primary"
-          title="Create"
-          type="submit"
-        >
-          <i className="fa fa-plus" /> Create
-        </Button>
+        <h4>Team type</h4>
+        <Menu
+          name="teamType"
+          onChange={this.onTeamTypeSelect}
+          options={types}
+          required
+          value={this.state.teamTypeSelected}
+        />
+        <h4>Collection</h4>
+        <Menu
+          name="collection"
+          onChange={this.onCollectionSelect}
+          options={collections}
+          required
+          value={this.state.collectionSelected}
+        />
+        <Button type="submit">Create</Button>
       </form>
     )
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
 // TODO: separate tags when pasted
 // TODO: allow tags to be edited
@@ -96,14 +97,12 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    font-size: 1em;
-    line-height: 1.2;
-    padding: 6px 0 0 6px;
+    padding: ${th('subGridUnit')} 0 0 ${th('subGridUnit')};
     position: relative;
   }
 
   .${classNames.root}.${classNames.rootFocused} {
-    border-color: var(--color-primary);
+    border-color: ${th('colorPrimary')};
   }
 
   .${classNames.selected} {
@@ -111,59 +110,48 @@ const Tags = styled(TagsUnstyled)`
   }
 
   .${classNames.selectedTag} {
-    border: 0 solid transparent;
-    box-sizing: border-box;
+    border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: 'Vollkorn', serif;
+    font-family: ${th('fontReading')};
 
     /* match the font styles */
-    font-size: inherit;
-    line-height: inherit;
-    margin: 0 1em 1em 0;
+    margin: 0 ${th('subGridUnit')} ${th('gridUnit')} 0;
     padding: 0.1em 0.3em;
 
-    ${realBorder('#aaa', 'white')}
+    ${props => realBorder(props.theme.colorBorder, props.theme.colorBackground)}
   }
 
   .${classNames.selectedTag}::after {
-    background: white;
-    color: #aaa;
+    color: ${th('colorBorder')};
     content: '\\2715';
-    // margin: 0;
     display: inline-block;
-    font-size: 0.9em;
+    font-size: ${th('fontSizeBaseSmall')};
     font-weight: 600;
-    height: 10px;
-    margin-left: 8px;
-    padding: 3px 0 0;
-    text-shadow: none;
-    width: 13px;
-
-    &:hover {
-      background: var(--color-primary);
-    }
+    margin-left: ${th('subGridUnit')};
+    padding: ${th('subGridUnit')} 0 0
+    width: ${th('subGridUnit')};
   }
 
   .${classNames.selectedTag}:hover,
   .${classNames.selectedTag}:focus {
     text-decoration: line-through;
 
-    ${realBorder('transparent', 'white')}
+    ${props => realBorder('transparent', props.theme.colorBackground)}
 
     &::after {
-      color: var(--color-danger);
+      color: ${th('colorError')};
     }
   }
   .${classNames.search} {
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 1em 1em 0;
+    margin: 0 0 ${th('gridUnit')} 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: 100px;
-    padding: 0.1em 0.3em;
+    max-width: calc(${th('gridUnit')} * 5);
+    padding: ${th('subGridUnit')} ${th('subGridUnit')};
   }
 
   @media screen and (min-width: 30em) {
@@ -175,9 +163,9 @@ const Tags = styled(TagsUnstyled)`
 
   .${classNames.search} input {
     border: 0;
-    border-bottom: 1px dashed grey;
-    color: black;
-    font-family: 'Vollkorn', serif;
+    border-bottom: ${th('borderWidth')} dashed ${th('colorBorder')};
+    color: ${th('colorText')};
+    font-family: ${th('fontReading')};
 
     /* match the font styles */
     font-size: inherit;
@@ -188,18 +176,18 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: 15ch;
+    min-width: calc(${th('gridUnit')} * 5);
     outline: none;
     padding: 0;
 
     &::placeholder {
-      font-family: 'Fira Sans Condensed', sans-serif;
-      opacity: 0.5;
+      font-family: ${th('fontInterface')};
+      color: ${th('colorTextPlaceholder')};
     }
 
     &:focus,
     &:hover {
-      border-bottom: 1px dashed var(--color-primary);
+      border-bottom: ${th('borderWidth')} dashed ${th('colorPrimary')};
     }
   }
 

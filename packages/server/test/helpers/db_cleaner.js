@@ -1,14 +1,11 @@
-const createDb = require('../../src/db')
+const db = require('../../src/db')
 const logger = require('@pubsweet/logger')
 
 const dbCleaner = async () => {
-  await global.db.destroy()
+  await db.query('DROP TABLE IF EXISTS entities')
+  await db.query('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
 
-  global.db = createDb()
-
-  const info = await global.db.info()
-
-  logger.info('Created database', info)
+  logger.info('Created database')
 }
 
 module.exports = dbCleaner

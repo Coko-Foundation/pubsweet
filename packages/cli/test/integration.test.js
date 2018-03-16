@@ -8,16 +8,13 @@ const fetch = require('isomorphic-fetch')
 const os = require('os')
 
 const appName = `pubsweet-test-${Math.floor(Math.random() * 99999)}`
-const dbName = 'test_db'
 const tempDir = os.tmpdir()
 const appPath = path.join(tempDir, appName)
-const dbDir = path.join(appPath, 'api', 'db')
-const dbPath = path.join(dbDir, dbName)
 
 const nodeConfig = {
   'pubsweet-server': {
-    dbPath,
-    adapter: 'leveldb',
+    db: { database: global.__testDbName },
+    uploads: 'uploads',
   },
   // TODO: Remove this once version of server that handles
   // undefined app validations is released.
@@ -33,7 +30,7 @@ const nodeConfig = {
   },
 }
 
-const dbOptions = {
+const defaultUser = {
   username: 'someuser',
   email: 'user@test.com',
   password: '12345678',
@@ -43,31 +40,28 @@ const dbOptions = {
 /* They perform a full installation cycle, including multiple yarn commands */
 
 describe('CLI: integration test', () => {
-  beforeAll(() => {
-    fs.ensureDirSync(tempDir)
-  })
-
-  afterAll(() => {
-    fs.removeSync(appPath)
-  })
+  afterAll(() => fs.removeSync(appPath))
 
   describe('new', () => {
     it('will not overwrite non-empty dir', () => {
       fs.ensureDirSync(path.join(appPath, 'blocking-dir'))
-      const { stderr } = runCommandSync({
+      const { stdout, stderr } = runCommandSync({
         args: `new ${appName}`,
         cwd: tempDir,
-        stdio: 'pipe',
       })
+      console.log(stderr, stdout)
       expect(stderr).toContain(
         `destination path '${appName}' already exists and is not an empty directory`,
       )
       fs.removeSync(appPath)
     })
 
-    it('runs git clone <appname> and yarn install', () => {
+    it('clones repo, installs dependencies and generates secret', () => {
       runCommandSync({ args: `new ${appName}`, cwd: tempDir, stdio: 'inherit' })
-      expect(fs.existsSync(path.join(appPath, 'node_modules'))).toBe(true)
+      expect(fs.readdirSync(appPath)).toContain('node_modules')
+      expect(fs.readdirSync(path.join(appPath, 'config'))).toContain(
+        'local.json',
+      )
     })
   })
 
@@ -108,12 +102,10 @@ describe('CLI: integration test', () => {
   })
 
   describe('setupdb', () => {
-    it('creates a new database', () => {
-      fs.ensureDirSync(dbDir)
-
+    it('creates tables', () => {
       const { stdout, stderr } = runCommandSync({
         args: 'setupdb',
-        options: dbOptions,
+        options: defaultUser,
         stdio: 'pipe',
         cwd: appPath,
         nodeConfig,
@@ -121,8 +113,6 @@ describe('CLI: integration test', () => {
 
       console.log(stdout, stderr)
       expect(stdout).toContain('Finished')
-      expect(fs.existsSync(path.join(dbPath, 'CURRENT'))).toBe(true)
-      fs.removeSync(dbDir)
     })
   })
 
@@ -130,38 +120,29 @@ describe('CLI: integration test', () => {
     const buildDir = path.join(appPath, '_build')
 
     it('outputs static assets to _build directory', () => {
-      runCommandSync({
+      const { stdout, stderr } = runCommandSync({
         args: 'build',
         stdio: 'inherit',
         cwd: appPath,
         nodeConfig,
       })
+      console.log(stderr, stdout)
 
       expect(fs.existsSync(path.join(buildDir, 'assets', 'app.js'))).toBe(true)
       fs.removeSync(buildDir)
     })
   })
 
-  describe('start', () => {
+  describe('server', () => {
     it('starts an app', done => {
-      fs.ensureDirSync(dbDir)
-
-      runCommandSync({
-        args: 'setupdb',
-        options: dbOptions,
-        stdio: 'inherit',
-        cwd: appPath,
-        nodeConfig,
-      })
-
       const app = runCommandAsync({
-        args: 'start',
+        args: 'server',
         cwd: appPath,
         stdio: 'pipe',
         nodeConfig,
       })
 
-      app.stderr.on('data', async data => {
+      app.stderr.on('data', data => {
         console.log('stderr:', data.toString())
       })
 

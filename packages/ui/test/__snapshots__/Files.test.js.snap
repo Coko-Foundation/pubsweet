@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Files renders correctly 1`] = `
+.c0 {
+  background: transparent;
+  border: dashed;
+  cursor: pointer;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -9,27 +15,16 @@ exports[`Files renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-size: 0.9em;
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.c0 {
-  background: transparent;
-  border: 1px dashed grey;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  margin-bottom: 2em;
-  padding: 10px;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
 }
 
 <div
   className=""
 >
-  <div
-    className=""
-  >
+  <div>
     <button
       className="c0"
       onClick={[Function]}
@@ -51,10 +46,6 @@ exports[`Files renders correctly 1`] = `
   </div>
   <div
     className="c1"
-  >
-    <div>
-      IMG_4346.JPG
-    </div>
-  </div>
+  />
 </div>
 `;

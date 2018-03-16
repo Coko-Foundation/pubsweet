@@ -1,61 +1,22 @@
 const path = require('path')
-const webpack = require('webpack')
+const config = require('config')
+const fs = require('fs-extra')
 
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules\/(?!pubsweet-)/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.s?css$/,
-        exclude: /\.local\.s?css$/,
-        loader: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ],
-      },
-      {
-        test: /\.local\.s?css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-            },
-          },
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
-        loader: [
-          {
-            loader: 'url-loader',
-            options: {
-              prefix: 'font',
-              limit: 1000,
-            },
-          },
-        ],
-      },
-    ],
+// can't use node-config in webpack so save whitelisted client config into the build and alias it below
+const outputPath = path.resolve(__dirname, '_build', 'config')
+fs.ensureDirSync(outputPath)
+const clientConfigPath = path.join(outputPath, 'client-config.json')
+fs.writeJsonSync(clientConfigPath, config, { spaces: 2 })
+
+const makeWebpackConfig = require('@pubsweet/styleguide/src/webpack-config')
+
+const webpackConfig = makeWebpackConfig(__dirname)
+
+webpackConfig.resolve = {
+  alias: {
+    joi: 'joi-browser',
+    config: clientConfigPath,
   },
-  resolve: {
-    alias: {
-      joi: 'joi-browser',
-      config: path.join(__dirname, 'styleguidist', 'config.json'),
-    },
-    extensions: ['.js', '.jsx', '.json', '.scss'],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      PUBSWEET_COMPONENTS: JSON.stringify([]),
-    }),
-  ],
 }
+
+module.exports = webpackConfig

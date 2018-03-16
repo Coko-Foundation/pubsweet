@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Post from './Post'
 
-import styles from './PostList.scss'
-
 const PostList = props => {
   const blogposts = props.blogposts.map((blogpost, key) => {
     const id = blogpost.id ? blogpost.id : key + 1
@@ -20,12 +18,12 @@ const PostList = props => {
     )
   })
   return (
-    <div className={styles.list}>
-      <table className="table table-hover">
+    <div>
+      <table>
         <thead>
           <tr>
-            <th className="index">#</th>
-            <th className="main">Title</th>
+            <th>#</th>
+            <th>Title</th>
             <th>Author</th>
             <th>Status</th>
             <th>Actions</th>

@@ -2,46 +2,51 @@ import React from 'react'
 import { compose, withHandlers } from 'recompose'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
 // TODO: pass ...props.input to children automatically?
 
 const MessageWrapper = styled.div`
-  font-family: var(--font-author);
-  display: inline-block;
-  font-style: italic;
-  margin-left: 1em;
-  margin-top: 10px;
+  font-family: ${th('fontInterface')};
+  display: block;
+  margin-top: calc(${th('gridUnit')} * -1);
 `
 
 const Message = styled.div`
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: ${th('subGridUnit')};
   }
-  font-size: 0.9em;
-  letter-spacing: 0.01em;
+  font-size: ${th('fontSizeBaseSmall')};
 `
 
 const ErrorMessage = Message.extend`
-  color: var(--color-danger);
+  color: ${th('colorError')};
 `
 
 const WarningMessage = Message.extend`
-  color: var(--color-warning);
+  color: ${th('colorWarning')};
 `
 
-const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => (
-  <div>
-    {component(input)}
+const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {
+  let validationStatus
+  if (meta.touched) validationStatus = 'success'
+  if (meta.touched && meta.error) validationStatus = 'error'
+  if (meta.touched && meta.warning) validationStatus = 'warning'
 
-    {meta.touched &&
-      (meta.error || meta.warning) && (
-        <MessageWrapper>
-          {meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
-          {meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
-        </MessageWrapper>
-      )}
-  </div>
-)
+  return (
+    <div>
+      {component({ ...input, validationStatus })}
+
+      {meta.touched &&
+        (meta.error || meta.warning) && (
+          <MessageWrapper>
+            {meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
+            {meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
+          </MessageWrapper>
+        )}
+    </div>
+  )
+}
 
 const ValidatedField = ({ fieldComponent, ...rest }) => (
   <Field {...rest} component={fieldComponent} />

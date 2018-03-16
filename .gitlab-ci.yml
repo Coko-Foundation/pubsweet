@@ -52,10 +52,21 @@ test:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
   variables:
+    # don't clone repo as image already has it
     GIT_STRATEGY: none
+    # setup data for postgres image
+    POSTGRES_USER: test
+    POSTGRES_PASSWORD: pw
+    # connection details for tests
+    PGUSER: test
+    PGPASSWORD: pw
+    NODE_ENV: test
+  services:
+    - postgres
   script:
     - cd ${HOME}
-    - NODE_ENV=test npm run test
+    # specify host here else it confuses the linked postgres image
+    - PGHOST=postgres npm run test
 
 # if tests pass we will push latest, labelled with current commit hash
 push:latest:

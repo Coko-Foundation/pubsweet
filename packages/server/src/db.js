@@ -1,53 +1,22 @@
-const uuid = require('uuid')
+const pg = require('pg')
 const config = require('config')
-const _ = require('lodash/fp')
+const logger = require('@pubsweet/logger')
 
-const PouchDB = require('pouchdb-core')
-  .plugin(require('pouchdb-find'))
-  .plugin(require('pouchdb-upsert'))
-  .plugin(require('relational-pouch'))
+const ignoreError =
+  config.has('pubsweet-server.ignoreTerminatedConnectionError') &&
+  config.get('pubsweet-server.ignoreTerminatedConnectionError')
+const connectionDetails =
+  config['pubsweet-server'] && config['pubsweet-server'].db
 
-const getAdapterIdentifier = dbPath => {
-  if (config.has('pubsweet-server.adapter')) {
-    return config.get('pubsweet-server.adapter')
+const pool = new pg.Pool(connectionDetails)
+pool.on('error', err => {
+  // ignore some errors which are thrown in integration tests
+  if (
+    ignoreError &&
+    err.message !== 'terminating connection due to administrator command'
+  ) {
+    logger.error(err)
   }
-  // deprecated: should be set via config and next 3 lines removed
-  if (config.util.getEnv('NODE_ENV') === 'test') {
-    return 'memory'
-  }
+})
 
-  if (dbPath.match(/^http/)) {
-    return 'http'
-  }
-
-  return 'leveldb'
-}
-
-const preparePouchConfig = adapter => {
-  switch (adapter) {
-    case 'memory':
-      PouchDB.plugin(require('pouchdb-adapter-memory'))
-      // a new database for each test
-      return { name: uuid(), adapter }
-
-    case 'http':
-      PouchDB.plugin(require('pouchdb-adapter-http'))
-      return { name: dbPath, adapter }
-
-    case 'leveldb':
-      PouchDB.plugin(require('pouchdb-adapter-leveldb'))
-      return { name: dbPath, adapter }
-
-    default:
-      throw new Error('Unrecognised DB adapter')
-  }
-}
-
-const dbPath = _.get('pubsweet-server.dbPath', config)
-const adapterIdentifier = getAdapterIdentifier(dbPath)
-const pouchConfig = preparePouchConfig(adapterIdentifier)
-
-module.exports = () =>
-  // Pass name as first arg because passing { name } on options
-  // seems to produce different result (see Pouch issue #1137 ?)
-  new PouchDB(pouchConfig.name, { adapter: pouchConfig.adapter })
+module.exports = pool

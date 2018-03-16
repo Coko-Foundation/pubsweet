@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import th from '../helpers/themeHelper'
 
 const checking = keyframes`
   0% {
@@ -16,18 +17,19 @@ const checking = keyframes`
   }
 `
 
+const localBorderSize = '3px'
+const localBorderTwoSize = '1px'
+
 const Root = styled.label`
   align-items: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
-  font-family: var(--font-author);
-  font-size: 1em;
+  font-family: ${th('fontAuthor')};
   font-style: italic;
   letter-spacing: 1px;
   transition: all 2s;
 
   &:not(:last-child) {
     margin-right: ${props => (props.inline ? '2.7em' : '0')};
-    margin-bottom: ${props => (props.inline ? '0' : '0.5rem')};
   }
 
   & input {
@@ -36,19 +38,15 @@ const Root = styled.label`
   }
 
   & span {
-    border-bottom: 1px solid transparent;
     font-size: 1.1em;
     transition: color 0.5s;
   }
 
   &:hover span {
-    color: var(--color-primary);
+    color: ${th('colorPrimary')};
   }
 
   & span::before {
-    --local-border-size: 3px;
-    --local-borderTwo-size: 1px;
-
     content: ' ';
     display: inline-block;
     vertical-align: middle;
@@ -58,8 +56,8 @@ const Root = styled.label`
     margin-right: 0.5em;
 
     background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    border: var(--local-border-size) solid white;
-    box-shadow: 0 0 0 var(--local-borderTwo-size) currentcolor;
+    border: ${localBorderSize} solid white;
+    box-shadow: 0 0 0 ${localBorderTwoSize} currentcolor;
 
     transition: border 0.5s ease, background-size 0.3s ease;
   }
@@ -67,8 +65,8 @@ const Root = styled.label`
   &:hover span::before {
     animation: ${checking} 0.5s;
 
-    background: var(--color-primary);
-    box-shadow: 0 0 0 var(--local-borderTwo-size) var(--color-primary);
+    background: ${th('colorPrimary')};
+    box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
   }
 `
 
@@ -84,7 +82,7 @@ const Checkbox = ({
   checked = checked || false
 
   return (
-    <Root checked={checked}>
+    <Root checked={checked} inline={inline}>
       <input
         checked={checked}
         name={name}

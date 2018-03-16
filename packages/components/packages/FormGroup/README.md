@@ -36,4 +36,3 @@ var title = ReactDOM.findDOMNode(this.title).value
 ## License
 
 MIT
-

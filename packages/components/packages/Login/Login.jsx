@@ -1,10 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
-import { Button, TextField } from '@pubsweet/ui'
+import {
+  CenteredColumn,
+  ErrorText,
+  H1,
+  Link,
+  Button,
+  TextField,
+} from '@pubsweet/ui'
+import styled from 'styled-components'
 
-import classes from './Login.local.scss'
+// These enable tests to select components
+const Signup = styled.div``
+const ResetPassword = styled.div``
 
 const UsernameInput = props => <TextField label="Username" {...props.input} />
 const PasswordInput = props => (
@@ -17,37 +26,33 @@ const Login = ({
   signup = true,
   passwordReset = true,
 }) => (
-  <div className={classes.root}>
-    <div className={classes.title}>Login</div>
+  <CenteredColumn small>
+    <H1>Login</H1>
 
-    {error && <div className={classes.error}>{error}</div>}
+    {error && <ErrorText>{error}</ErrorText>}
 
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={PasswordInput} name="password" />
-      <Button className={classes.button} primary type="submit">
+      <Button primary type="submit">
         Login
       </Button>
     </form>
 
     {signup && (
-      <div className={classes.alternate}>
-        <span className={classes.message}>Don&apos;t have an account?</span>
-        <Link className={classes.link} to="/signup">
-          Sign up
-        </Link>
-      </div>
+      <Signup>
+        <span>Don&apos;t have an account? </span>
+        <Link to="/signup">Sign up</Link>
+      </Signup>
     )}
 
     {passwordReset && (
-      <div className={classes.alternate}>
-        <span className={classes.message}>Forgot your password?</span>
-        <Link className={classes.link} to="/password-reset">
-          Reset password
-        </Link>
-      </div>
+      <ResetPassword>
+        <span>Forgot your password? </span>
+        <Link to="/password-reset">Reset password</Link>
+      </ResetPassword>
     )}
-  </div>
+  </CenteredColumn>
 )
 
 Login.propTypes = {
@@ -58,4 +63,8 @@ Login.propTypes = {
   passwordReset: PropTypes.bool,
 }
 
+// used by tests
+export { Login, ErrorText, Signup, ResetPassword }
+
+// used by consumers
 export default Login

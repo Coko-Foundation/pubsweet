@@ -1,9 +1,9 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { Icon } from '@pubsweet/ui'
 import styled, { keyframes } from 'styled-components'
+import { Icon, Colorize } from '../atoms'
 
-const Spinner = ({ icon = 'loader', size = 16, color = '#444' }) => (
+const Spinner = ({ icon = 'loader', size = 2, color = '#444' }) => (
   <Root>
     <Icon color={color} size={size}>
       {icon}
@@ -33,7 +33,9 @@ const Root = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  animation: ${rotating} 1.5s linear infinite;
+  svg {
+    animation: ${rotating} 1.5s linear infinite;
+  }
 `
 
 Spinner.propTypes = {
@@ -45,4 +47,4 @@ Spinner.propTypes = {
   size: propTypes.number,
 }
 
-export default Spinner
+export default Colorize(Spinner)

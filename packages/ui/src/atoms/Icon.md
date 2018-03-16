@@ -7,11 +7,14 @@ An icon, from the [Feather](https://feathericons.com/) icon set.
 The color can be changed.
 
 ```js
-<Icon color="red">arrow_right</Icon>
-``` 
+<div>
+  <Icon error>arrow_right</Icon>
+  <Icon primary>arrow_right</Icon>
+</div>
+```
 
 The size can be changed.
 
 ```js
-<Icon size={48}>arrow_right</Icon>
-``` 
+<Icon size={6}>arrow_right</Icon>
+```

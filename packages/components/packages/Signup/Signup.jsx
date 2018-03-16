@@ -1,8 +1,13 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { Link } from 'react-router-dom'
-import { Button, TextField } from '@pubsweet/ui'
-import classes from './Signup.local.scss'
+import {
+  CenteredColumn,
+  Link,
+  H1,
+  ErrorText,
+  Button,
+  TextField,
+} from '@pubsweet/ui'
 
 const UsernameInput = props => <TextField label="Username" {...props.input} />
 const EmailInput = props => (
@@ -13,27 +18,25 @@ const PasswordInput = props => (
 )
 
 const Signup = ({ error, handleSubmit }) => (
-  <div className={classes.root}>
-    <div className={classes.title}>Sign up</div>
+  <CenteredColumn small>
+    <H1>Sign up</H1>
 
-    {error && <div className={classes.error}>{error}</div>}
+    {error && <ErrorText>{error}</ErrorText>}
 
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={EmailInput} name="email" />
       <Field component={PasswordInput} name="password" />
-      <Button className={classes.button} primary type="submit">
+      <Button primary type="submit">
         Sign up
       </Button>
     </form>
 
-    <div className={classes.alternate}>
-      <span className={classes.message}>Already have an account?</span>
-      <Link className={classes.link} to="/login">
-        Login
-      </Link>
+    <div>
+      <span>Already have an account? </span>
+      <Link to="/login">Login</Link>
     </div>
-  </div>
+  </CenteredColumn>
 )
 
 export default Signup

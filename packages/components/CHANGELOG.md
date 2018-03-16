@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+      <a name="4.0.0"></a>
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.2...pubsweet-components@4.0.0) (2018-03-15)
+
+
+### Bug Fixes
+
+* **login:** add missing recompose dependency ([a3b5a80](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a3b5a80)), closes [#353](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/353)
+* **xpub:** variable linter error prosemirror ([f57768c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f57768c))
+
+
+### Features
+
+* **aws-s3:** add endpoint to zip S3 files of a manuscript ([f50f602](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f50f602))
+
+
+### BREAKING CHANGES
+
+* **aws-s3:** renamed the AWS-S3 endpoints to conform to REST principles (pluralize entity name)
+
+
+
+
+      <a name="3.0.2"></a>
+
+## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.1...pubsweet-components@3.0.2) (2018-03-09)
+
+### Bug Fixes
+
+* **xpub:** dubiously ignore linting errors ([a60d0ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a60d0ad))
+* **xpub:** find-reviewers package name ([1b0ff2d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1b0ff2d))
+* **xpub:** package name ([2383506](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2383506))
+* **xpub:** tests ([cec85e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec85e2))
+
+<a name="3.0.1"></a>
+
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.0...pubsweet-components@3.0.1) (2018-03-06)
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="3.0.0"></a>
+
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@2.0.1...pubsweet-components@3.0.0) (2018-03-05)
+
+### Bug Fixes
+
+* restore FormGroup to its previous state, for later deletion ([3135ffd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3135ffd))
+* **components:** add dependency on pubsweet/ui ([f0a1926](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f0a1926))
+* **components:** correctly redirect when edit button is clicked ([faca509](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/faca509))
+* **components:** login example ([6dfd66c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6dfd66c))
+* **components:** login tests were failing after refactor ([62be047](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/62be047))
+* **components:** make styleguide work (mostly) ([d036681](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d036681))
+* **components:** PasswordReset was still using a CSS variable ([e1c2c84](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e1c2c84))
+* **components:** signup and login error examples ([3f991ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f991ec))
+* **components:** styleguide can render components using validations ([93df7af](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93df7af))
+
+### Code Refactoring
+
+* **ui:** tidy AppBar ([09751b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/09751b6))
+
+### Features
+
+* **elife-theme:** add elife theme ([e406e0d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e406e0d))
+
+### BREAKING CHANGES
+
+* **ui:** \* navLinks prop is now navLinkComponents and expects an array of
+elements
+
+<a name="2.0.1"></a>
+
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@2.0.0...pubsweet-components@2.0.1) (2018-02-23)
+
+**Note:** Version bump only for package pubsweet-components
+
 <a name="2.0.0"></a>
 
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@1.1.0...pubsweet-components@2.0.0) (2018-02-16)
