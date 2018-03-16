@@ -10,4 +10,5 @@ const Tab = styled.div`
     active ? theme.colorPrimary : theme.colorBorder};
 `
 
+/** @component */
 export default Tab

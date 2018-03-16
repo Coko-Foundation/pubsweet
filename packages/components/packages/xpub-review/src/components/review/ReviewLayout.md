@@ -45,7 +45,7 @@ const versions = [
         note: {
           content: '<p>This is a review</p>',
         },
-        recommendation: 'accept',
+        Recommendation: { recommendation: 'accept' },
       },
     ],
   },
@@ -71,7 +71,7 @@ const versions = [
         note: {
           content: '<p>This is another review</p>',
         },
-        recommendation: 'accept',
+        Recommendation: { recommendation: 'accept' },
       },
     ],
   },
@@ -107,6 +107,8 @@ const reviewer = currentVersion.reviewers.find(
   review => review.reviewer === projectReviewer.id,
 )
 
+reviewer._reviewer = { id: reviewer.reviewer }
+
 const handlingEditors = [
   {
     username: faker.internet.userName(),
@@ -118,7 +120,6 @@ const ConnectedReviewLayout = reduxForm({
   onSubmit: values => console.log(values),
   onChange: values => console.log(values),
 })(ReviewLayout)
-
 ;<div style={{ position: 'relative', height: 600 }}>
   <ConnectedReviewLayout
     project={project}
