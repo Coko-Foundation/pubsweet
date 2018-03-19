@@ -1,13 +1,13 @@
 {
   "name": "xpub-styleguide",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "files": [
     "src",
     "dist"
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/styleguide": "^1.1.3",
+    "@pubsweet/styleguide": "^1.1.4",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",

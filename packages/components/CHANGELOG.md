@@ -3,7 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="4.0.0"></a>
+  <a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.0.0...pubsweet-components@4.1.0) (2018-03-19)
+
+
+### Bug Fixes
+
+* **component-send-email:** remove logger ([a8d2dda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a8d2dda))
+* **component-send-email:** remove sendMail callback ([d0be1d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d0be1d8))
+* **send-email:** rename for styleguide ([0a5b0a5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0a5b0a5))
+
+
+### Features
+
+* **component-send-email:** add error handling ([b3f423a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b3f423a))
+* **component-send-email:** refactor send email ([201bfd9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/201bfd9))
+* **component-send-email:** WIP refactor ses ([531d630](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/531d630))
+
+
+
+
+  <a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.2...pubsweet-components@4.0.0) (2018-03-15)
 
 
@@ -25,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="3.0.2"></a>
+<a name="3.0.2"></a>
 
 ## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.1...pubsweet-components@3.0.2) (2018-03-09)
 

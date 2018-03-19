@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-review-backend",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "src",
   "scripts": {
     "test": "jest"
