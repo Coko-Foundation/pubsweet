@@ -66,11 +66,9 @@ describe('Collections API', () => {
 
     it('should enable filtering by boolean property for collections', async () => {
       const collection1 = fixtures.collection
-      const collection2 = Object.assign(
-        {},
-        { published: false },
-        fixtures.collection2,
-      )
+      const collection2 = Object.assign({}, fixtures.collection2, {
+        published: false,
+      })
 
       await api.collections
         .create(collection1, adminToken)
