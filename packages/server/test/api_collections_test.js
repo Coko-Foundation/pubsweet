@@ -64,6 +64,49 @@ describe('Collections API', () => {
       expect(collection.title).toEqual(fixtures.collection.title)
     })
 
+    it('should enable filtering by boolean property for collections', async () => {
+      const collection1 = fixtures.collection
+      const collection2 = Object.assign(
+        {},
+        { published: false },
+        fixtures.collection2,
+      )
+
+      await api.collections
+        .create(collection1, adminToken)
+        .expect(STATUS.CREATED)
+
+      await api.collections
+        .create(collection2, adminToken)
+        .expect(STATUS.CREATED)
+
+      const collections = await api.collections
+        .list(adminToken, { published: true })
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections).toHaveLength(1)
+      expect(collections[0].published).toBe(true)
+    })
+
+    it('should enable filtering by string property for collections', async () => {
+      await api.collections
+        .create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+
+      await api.collections
+        .create(fixtures.collection2, adminToken)
+        .expect(STATUS.CREATED)
+
+      const collections = await api.collections
+        .list(adminToken, { title: 'Second collection' })
+        .expect(STATUS.OK)
+        .then(res => res.body)
+
+      expect(collections).toHaveLength(1)
+      expect(collections[0].title).toBe('Second collection')
+    })
+
     it('should allow an admin user to filter collections with query params', async () => {
       await api.collections
         .create(fixtures.collection, adminToken)
