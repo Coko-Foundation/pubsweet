@@ -1,11 +1,7 @@
 {
   "name": "@pubsweet/ui",
   "version": "3.2.1",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
+  "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
   "repository": {
@@ -45,7 +41,6 @@
     "jest": "^22.1.4",
     "jest-styled-components": "^4.10.0",
     "node-sass": "^4.5.3",
-    "react-styleguidist": "^6.0.8",
     "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
@@ -62,8 +57,6 @@
     }
   },
   "scripts": {
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
     "clean": "rimraf dist",
     "prebuild": "npm run clean && npm run lint",
     "build": "webpack --progress --profile",
