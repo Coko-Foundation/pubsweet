@@ -2,11 +2,10 @@ const program = require('commander')
 const properties = require('../src/schemas').db
 const { setupDb } = require('@pubsweet/db-manager')
 const db = require('pubsweet-server/src/db')
-const config = require('config')
-const { forEach, merge } = require('lodash')
+const { forEach } = require('lodash')
 const runPrompt = require('../src/run-prompt')
 
-const readCommand = async argsOverride => {
+module.exports = async (commandArguments = process.argv) => {
   program.description(
     'Setup a database for a PubSweet app. Run from your project root',
   )
@@ -19,17 +18,14 @@ const readCommand = async argsOverride => {
     }
   })
 
-  return program.parse(argsOverride || process.argv)
-}
+  const promptOverride = program.parse(commandArguments)
 
-module.exports = async argsOverride => {
-  const commandOpts = await readCommand(argsOverride)
-  const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
+  // Always interpret absence of option as clobber = false
+  promptOverride.clobber = !!promptOverride.clobber
 
-  const promptOverride = merge(configOpts, commandOpts)
-  promptOverride.clobber = !!promptOverride.clobber // Always interpret absence of option as clobber = false
   const finalOpts = await runPrompt({ properties, override: promptOverride })
 
+  finalOpts.admin = true
   await setupDb(finalOpts)
 
   // drain pool to avoid 10 second delay before command exits
