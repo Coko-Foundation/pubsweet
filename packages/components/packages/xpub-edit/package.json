@@ -1,13 +1,13 @@
 {
   "name": "xpub-edit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "files": [
     "dist",
     "src"
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/ui": "^3.2.0",
+    "@pubsweet/ui": "^3.2.1",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
@@ -33,7 +33,7 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.4"
+    "xpub-styleguide": "^0.0.5"
   },
   "peerDependencies": {
     "react": ">=16"

@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="3.2.0"></a>
+  <a name="3.2.1"></a>
+## [3.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.2.0...@pubsweet/ui@3.2.1) (2018-03-19)
+
+
+### Bug Fixes
+
+* **styleguide:** fix File component ([1acbca6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1acbca6))
+
+
+
+
+  <a name="3.2.0"></a>
 # [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.1.0...@pubsweet/ui@3.2.0) (2018-03-15)
 
 
@@ -19,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="3.1.0"></a>
+<a name="3.1.0"></a>
 
 # [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.0.1...@pubsweet/ui@3.1.0) (2018-03-09)
 
