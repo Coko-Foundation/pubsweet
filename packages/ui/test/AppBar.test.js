@@ -42,4 +42,15 @@ describe('AppBar', () => {
     const tree = render({ brandLink: '/home', loginLink: '/signin' })
     expect(tree).toMatchSnapshot()
   })
+
+  test('With custom right component', () => {
+    const RightComponent = ({ user, loginLink, onLogoutClick }) => (
+      <div>{user.username}</div>
+    )
+    const tree = render({
+      user: { username: 'userName', admin: true },
+      rightComponent: RightComponent,
+    })
+    expect(tree).toMatchSnapshot()
+  })
 })

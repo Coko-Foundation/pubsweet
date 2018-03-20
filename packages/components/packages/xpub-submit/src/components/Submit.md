@@ -29,7 +29,6 @@ const SubmitForm = reduxForm({
   onSubmit: values => console.log(values),
   onChange: values => console.log(values),
 })(Submit)
-
 ;<div style={{ position: 'relative', paddingRight: 100 }}>
   <SubmitForm project={project} version={version} initialValues={version} />
 </div>

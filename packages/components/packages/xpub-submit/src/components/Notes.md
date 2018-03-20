@@ -10,6 +10,5 @@ const version = {
 }
 
 const NotesForm = reduxForm({ form: 'notes' })(Notes)
-
 ;<NotesForm initialValues={version} onChange={values => console.log(values)} />
 ```

@@ -1,10 +1,7 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
   "version": "0.0.5",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "main": "src",
   "dependencies": {
     "prop-types": "^15.5.10",

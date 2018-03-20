@@ -10,7 +10,6 @@ const content = `
 const currentUser = {
   teams: [{ teamType: { name: 'Production Editor' } }],
 }
-
 ;<Manuscript
   content={content}
   currentUser={currentUser}

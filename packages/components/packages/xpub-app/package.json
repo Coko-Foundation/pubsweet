@@ -4,10 +4,7 @@
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "dependencies": {
     "@pubsweet/ui": "^3.2.1",
     "prop-types": "^15.5.10",

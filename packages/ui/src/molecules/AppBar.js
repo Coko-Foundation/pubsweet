@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import th from '../helpers/themeHelper'
 import { Icon, Link } from '../atoms'
 
+// #region styled-components
 const Root = styled.nav`
   display: flex;
   align-items: center;
@@ -32,6 +33,7 @@ const Item = styled.span`
   display: inline-flex;
   margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
 `
+// #endregion
 
 const AppBar = ({
   brandLink = '/',
@@ -40,6 +42,7 @@ const AppBar = ({
   onLogoutClick,
   navLinkComponents,
   user,
+  rightComponent: RightComponent = DefaultRightComponent,
 }) => (
   <Root>
     <Section>
@@ -57,32 +60,39 @@ const AppBar = ({
           </span>
         ))}
     </Section>
-
-    <Section>
-      {user && (
-        <Item>
-          <Icon size={2}>user</Icon>
-          {user.username}
-          {user.admin ? ' (admin)' : ''}
-        </Item>
-      )}
-
-      {user && (
-        <Item>
-          <Link onClick={onLogoutClick} to="#">
-            <Icon size={2}>power</Icon>
-            Logout
-          </Link>
-        </Item>
-      )}
-
-      {!user && (
-        <Item>
-          <Link to={loginLink}>Login</Link>
-        </Item>
-      )}
-    </Section>
+    <RightComponent
+      loginLink={loginLink}
+      onLogoutClick={onLogoutClick}
+      user={user}
+    />
   </Root>
+)
+
+const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
+  <Section>
+    {user && (
+      <Item>
+        <Icon size={2}>user</Icon>
+        {user.username}
+        {user.admin ? ' (admin)' : ''}
+      </Item>
+    )}
+
+    {user && (
+      <Item>
+        <Link onClick={onLogoutClick} to="#">
+          <Icon size={2}>power</Icon>
+          Logout
+        </Link>
+      </Item>
+    )}
+
+    {!user && (
+      <Item>
+        <Link to={loginLink}>Login</Link>
+      </Item>
+    )}
+  </Section>
 )
 
 AppBar.propTypes = {
@@ -90,8 +100,9 @@ AppBar.propTypes = {
   brand: PropTypes.node,
   loginLink: PropTypes.string,
   onLogoutClick: PropTypes.func,
-  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
   user: PropTypes.object,
+  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
+  rightComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default AppBar

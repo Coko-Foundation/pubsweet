@@ -18,7 +18,6 @@ const sections = [
     content: <div>baz</div>,
   },
 ]
-
 ;<Tabs sections={sections} activeKey={'1485950400000'} />
 ```
 
@@ -35,6 +34,5 @@ const sections = [
     content: <div>bar</div>,
   },
 ]
-
 ;<Tabs sections={sections} activeKey="2017-02-14" title="Versions" />
 ```

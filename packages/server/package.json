@@ -61,9 +61,7 @@
     "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*_test.js$",
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.js"],
     "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }

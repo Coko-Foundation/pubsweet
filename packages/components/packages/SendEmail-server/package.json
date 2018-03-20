@@ -4,9 +4,7 @@
   "description": "send email configured for pubsweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.185.0",

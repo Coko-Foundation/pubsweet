@@ -34,6 +34,5 @@ const ConnectedReviewerForm = reduxForm({
     reset()
   },
 })(ReviewerForm)
-
 ;<ConnectedReviewerForm loadOptions={loadOptions} />
 ```

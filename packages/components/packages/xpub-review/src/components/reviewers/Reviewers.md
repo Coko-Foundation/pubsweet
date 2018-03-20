@@ -94,7 +94,6 @@ const ReviewerContainer = withHandlers({
       ),
     }),
 })(Reviewer)
-
 ;<Reviewers
   ReviewerForm={ReviewerFormContainer}
   Reviewer={ReviewerContainer}
