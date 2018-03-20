@@ -45,7 +45,7 @@ const versions = [
         note: {
           content: '<p>This is a review</p>',
         },
-        recommendation: 'accept',
+        Recommendation: { recommendation: 'accept' },
       },
     ],
   },
@@ -71,7 +71,7 @@ const versions = [
         note: {
           content: '<p>This is another review</p>',
         },
-        recommendation: 'accept',
+        Recommendation: { recommendation: 'accept' },
       },
     ],
   },
@@ -106,6 +106,8 @@ const currentVersion = versions[versions.length - 1]
 const reviewer = currentVersion.reviewers.find(
   review => review.reviewer === projectReviewer.id,
 )
+
+reviewer._reviewer = { id: reviewer.reviewer }
 
 const handlingEditors = [
   {

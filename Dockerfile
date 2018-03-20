@@ -15,7 +15,7 @@ RUN [ "rm", "-rf", "/npm-packages-offline-cache"]
 
 ENV NODE_ENV "production"
 
-WORKDIR ${HOME}/packages/ui
+WORKDIR ${HOME}/packages/styleguide
 RUN [ "npm", "run", "styleguide:build" ]
 # Create file for kubernetes health checks
 RUN touch ./styleguide/health

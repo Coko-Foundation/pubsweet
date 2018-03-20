@@ -12,7 +12,7 @@ const decision = {
       },
     ],
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 ;<Decision decision={decision} />
 ```

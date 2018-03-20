@@ -19,7 +19,7 @@ const decision = {
   note: {
     content: '<p>This is a decision</p>',
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 
 const ConnectedDecisionForm = reduxForm({

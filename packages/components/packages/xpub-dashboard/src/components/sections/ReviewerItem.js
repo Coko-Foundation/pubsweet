@@ -15,6 +15,7 @@ import VersionTitle from './VersionTitle'
 
 const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
   const reviewer = getReviewerFromUser(project, version, currentUser)
+
   const status = reviewer && reviewer.status
 
   return (

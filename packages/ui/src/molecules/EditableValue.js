@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import th from '../helpers/themeHelper'
-import TextField from '../atoms/TextField'
+import { TextField } from '../atoms'
 
 const Root = styled.div`
   width: calc(${th('gridUnit')} * 14);

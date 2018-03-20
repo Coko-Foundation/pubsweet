@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "files": ["src", "dist"],
   "main": "src",
   "dependencies": {
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
     "wax-editor-react": "^0.1.10",
-    "xpub-connect": "^0.0.3",
-    "xpub-selectors": "^0.0.3"
+    "xpub-connect": "^0.0.5",
+    "xpub-selectors": "^0.0.4"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
@@ -27,7 +27,7 @@
     "file-loader": "^1.1.5",
     "node-sass": "^4.5.3",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^2.2.2",
+    "pubsweet-client": "^2.2.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
@@ -39,14 +39,10 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.3"
+    "xpub-styleguide": "^0.0.5"
   },
   "scripts": {
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "prebuild": "npm run clean && npm run lint",
-    "clean": "rimraf dist",
-    "build":
-      "NODE_ENV=production webpack --progress --profile --optimize-minimize"
+    "styleguide:build": "styleguidist build"
   }
 }

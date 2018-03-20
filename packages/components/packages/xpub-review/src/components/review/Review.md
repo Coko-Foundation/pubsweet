@@ -15,7 +15,7 @@ const review = {
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 ;<Review review={review} />
 ```

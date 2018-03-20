@@ -1,7 +1,6 @@
 import React from 'react'
 
-import Checkbox from '../atoms/Checkbox'
-import Flexbox from '../atoms/Flexbox'
+import { Checkbox, Flexbox } from '../atoms'
 
 class CheckboxGroup extends React.Component {
   constructor(props) {

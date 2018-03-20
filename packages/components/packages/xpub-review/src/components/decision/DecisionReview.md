@@ -15,7 +15,7 @@ const review = {
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 
 const reviewer = {
@@ -42,7 +42,7 @@ const review = {
   confidential: {
     content: '<p>This is confidential</p>',
   },
-  recommendation: 'revise',
+  Recommendation: { recommendation: 'revise' },
 }
 
 const reviewer = {
