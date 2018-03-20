@@ -40,9 +40,6 @@
   },
   "scripts": {
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile"
+    "styleguide:build": "styleguidist build"
   }
 }

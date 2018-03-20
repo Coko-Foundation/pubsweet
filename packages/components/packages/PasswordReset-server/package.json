@@ -3,9 +3,7 @@
   "version": "1.0.2",
   "description": "Password reset backend component for PubSweet",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
+  "scripts": {},
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {

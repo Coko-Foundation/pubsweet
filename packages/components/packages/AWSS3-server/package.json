@@ -4,13 +4,8 @@
   "description": "AWS S3 upload component for PubSweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
   "dependencies": {
     "archiver": "^2.1.1",
     "aws-sdk": "^2.185.0",
@@ -32,10 +27,6 @@
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "AWSS3"
-  },
-  "jest": {
-    "verbose": true,
-    "testRegex": "/src/.*.test.js$"
   },
   "publishConfig": {
     "access": "public"
