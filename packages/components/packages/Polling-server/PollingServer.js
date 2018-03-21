@@ -30,7 +30,6 @@ const PollingServer = app => {
 
     const patch = {
       id: fragment.id,
-      rev: fragment.rev,
       lock: null,
     }
 
