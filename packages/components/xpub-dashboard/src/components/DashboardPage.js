@@ -1,109 +1,162 @@
 import { compose, withProps } from 'recompose'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { actions } from 'pubsweet-client'
-import { newestFirst, selectCurrentUser } from 'xpub-selectors'
-import { ConnectPage } from 'xpub-connect'
-import { uploadManuscript } from '../redux/conversion'
+import { graphql } from 'react-apollo'
+import { gql } from 'apollo-client-preset'
+import { withLoader } from 'pubsweet-client'
+import { newestFirst } from 'xpub-selectors'
+import { cloneDeep } from 'lodash'
 import Dashboard from './Dashboard'
 import AssignEditorContainer from './AssignEditorContainer'
+import upload from '../lib/upload'
 
-const reviewerResponse = (project, version, reviewer, status) => dispatch => {
-  reviewer.status = status
+const query = gql`
+  {
+    collections {
+      id
+      rev
+      type
+      created
+      title
+      status
+      owners {
+        id
+        username
+      }
+      reviewers {
+        id
+        user
+      }
+      fragments {
+        id
+        rev
+        created
+        source
+        type
+        version
+        submitted
+        metadata {
+          title
+          abstract
+          articleType
+          articleSection
+          authors
+        }
+        reviewers {
+          id
+          reviewer
+          status
+          _reviewer {
+            id
+            user
+          }
+          _user {
+            id
+          }
+        }
+        declarations {
+          openPeerReview
+        }
+      }
+    }
+    currentUser {
+      user {
+        id
+        username
+        admin
+      }
+    }
+  }
+`
 
-  return dispatch(
-    actions.updateFragment(project, {
-      id: version.id,
-      rev: version.rev,
-      reviewers: version.reviewers,
-    }),
-  )
-}
+const deleteProjectMutation = gql`
+  mutation($id: ID) {
+    deleteCollection(id: $id) {
+      id
+    }
+  }
+`
+
+const updateReviewerMutation = gql`
+  mutation($id: ID, $input: String) {
+    updateFragment(id: $id, input: $input) {
+      id
+      reviewers {
+        id
+        reviewer
+        status
+        _reviewer {
+          id
+          user
+        }
+        _user {
+          id
+        }
+      }
+    }
+  }
+`
 
 export default compose(
-  ConnectPage(() => [
-    actions.getCollections(),
-    actions.getTeams(),
-    actions.getUsers(),
-  ]),
-  connect(
-    state => {
-      const { collections } = state
-      // const { conversion, teams } = state
-      const { conversion } = state
-      const currentUser = selectCurrentUser(state)
-
-      const sortedCollections = newestFirst(collections)
-
-      // const unassignedCollections = sortedCollections.filter(
-      //   collection =>
-      //     collection.status === 'submitted' &&
-      //     !teams.some(
-      //       team =>
-      //         team.object.type === 'collection' &&
-      //         team.object.id === collection.id &&
-      //         team.teamType.name === 'handlingEditor',
-      //     ),
-      // )
-      // const myCollections = teams
-      //   .filter(
-      //     team =>
-      //       team.group === 'editor' &&
-      //       team.object.type === 'collection' &&
-      //       team.members.includes(currentUser.id),
-      //   )
-      //   .map(team =>
-      //     collections.find(collection => collection.id === team.object.id),
-      //   )
-
-      const dashboard = {
-        // editor: newestFirst(
-        //   unassignedCollections
-        //     .concat(myCollections)
-        //     .filter(
-        //       (collection, index, items) =>
-        //         items.findIndex(item => item.id === collection.id) === index,
-        //     ),
-        // ),
-        editor: sortedCollections.filter(
-          collection =>
-            collection.status === 'submitted' ||
-            collection.status === 'revising',
-        ),
-        owner: sortedCollections.filter(
-          collection =>
-            collection.owners &&
-            collection.owners.some(owner => owner.id === currentUser.id),
-        ),
-        // reviewer: newestFirst(teams
-        //   .filter(team => team.group === 'reviewer'
-        //     && team.object.type === 'collection'
-        //     && team.members.includes(currentUser.id))
-        //   .map(team => collections.find(collection => {
-        //     return collection.id === team.object
-        //   }))),
-        reviewer: sortedCollections.filter(
-          collection =>
-            collection.reviewers &&
-            collection.reviewers.some(
-              reviewer => reviewer && reviewer.user === currentUser.id,
-            ),
-        ),
-      }
-
-      return { collections, conversion, currentUser, dashboard }
-    },
-    (dispatch, { history }) => ({
-      deleteProject: collection =>
-        dispatch(actions.deleteCollection(collection)),
-      reviewerResponse: (project, version, reviewer, status) =>
-        dispatch(reviewerResponse(project, version, reviewer, status)),
-      uploadManuscript: acceptedFiles =>
-        dispatch(uploadManuscript(acceptedFiles, history)),
+  graphql(query),
+  graphql(deleteProjectMutation, {
+    props: ({ mutate }) => ({
+      deleteProject: project => mutate({ variables: { id: project.id } }),
     }),
-  ),
-  withProps({
-    AssignEditor: AssignEditorContainer,
+    options: {
+      update: (proxy, { data: { deleteCollection: { id } } }) => {
+        const data = proxy.readQuery({ query })
+        const collectionIndex = data.collections.findIndex(col => col.id === id)
+        if (collectionIndex > -1) {
+          data.collections.splice(collectionIndex, 1)
+          proxy.writeQuery({ query, data })
+        }
+      },
+    },
   }),
-  withRouter,
+  graphql(updateReviewerMutation, {
+    props: ({ mutate }) => ({
+      reviewerResponse: (version, reviewId, status) => {
+        const reviewers = cloneDeep(version.reviewers)
+        const reviewer = reviewers.find(reviewer => reviewer.id === reviewId)
+        reviewer.status = status
+        return mutate({
+          variables: {
+            id: version.id,
+            input: JSON.stringify({ reviewers, rev: version.rev }),
+          },
+        })
+      },
+    }),
+  }),
+  withLoader(),
+  withProps(({ collections, currentUser }) => {
+    const sortedCollections = newestFirst(collections)
+
+    const dashboard = {
+      editor: sortedCollections.filter(
+        collection =>
+          collection.status === 'submitted' || collection.status === 'revising',
+      ),
+      owner: sortedCollections.filter(
+        collection =>
+          currentUser &&
+          collection.owners &&
+          collection.owners.some(owner => owner.id === currentUser.user.id),
+      ),
+      reviewer: sortedCollections.filter(
+        collection =>
+          currentUser &&
+          collection.reviewers &&
+          collection.reviewers.some(
+            reviewer => reviewer && reviewer.user === currentUser.user.id,
+          ),
+      ),
+    }
+
+    return {
+      currentUser: currentUser.user,
+      dashboard,
+      AssignEditor: AssignEditorContainer,
+    }
+  }),
+  upload,
 )(Dashboard)

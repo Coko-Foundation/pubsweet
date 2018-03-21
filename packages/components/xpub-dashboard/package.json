@@ -10,10 +10,12 @@
   ],
   "dependencies": {
     "@pubsweet/ui": "^3.3.2",
+    "apollo-client-preset": "^1.0.8",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "pubsweet-component-ink-frontend": "^1.0.2",
+    "react-apollo": "^2.0.4",
     "react-dropzone": "^4.1.2",
     "react-moment": "^0.6.1",
     "react-redux": "^5.0.2",

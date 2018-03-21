@@ -43,7 +43,7 @@ const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
             <ActionContainer>
               <Button
                 onClick={() =>
-                  reviewerResponse(project, version, reviewer, 'accepted')
+                  reviewerResponse(version, reviewer.id, 'accepted')
                 }
               >
                 accept
@@ -55,7 +55,7 @@ const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
             <ActionContainer>
               <Button
                 onClick={() =>
-                  reviewerResponse(project, version, reviewer, 'rejected')
+                  reviewerResponse(version, reviewer.id, 'rejected')
                 }
               >
                 reject

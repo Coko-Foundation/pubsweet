@@ -7,7 +7,9 @@
   ],
   "main": "src",
   "dependencies": {
+    "apollo-client-preset": "^1.0.8",
     "prop-types": "^15.5.10",
+    "react-apollo": "^2.0.4",
     "recompose": "^0.26.0",
     "wax-editor-react": "^0.1.10",
     "xpub-connect": "^0.0.9",
