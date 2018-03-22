@@ -6,10 +6,59 @@ const config = require('config')
 const rp = require('request-promise-native')
 const temp = require('temp')
 const Pusher = require('pusher-js')
+const Joi = require('joi')
 
 // rp.debug = true
 
 const inkConfig = config.get('pubsweet-component-ink-backend')
+
+function checkInkConfig(inkConfig) {
+  /**
+   * Sanity checks on inkConfig
+   *
+   * config must have pubsweet-component-ink-backend with
+   * { inkEndpoint, email, password, recipes, pusher }
+   *
+   * config.get will throw if there is no pubsweet-component-ink-backend
+   * so no need to worry about that
+   *
+   * More at
+   * https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/packages/Ink-server
+   */
+  const inkSchema = {
+    inkEndpoint: Joi.string().required(),
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+    recipes: Joi.object()
+      .required()
+      .min(1),
+    pusher: Joi.object()
+      .keys({
+        appKey: Joi.string().required(),
+        wsHost: Joi.string().required(),
+        wsPort: Joi.number().required(),
+        httpHost: Joi.string(),
+        httpPort: Joi.number(),
+      })
+      .required(),
+    maxRetries: Joi.number(),
+  }
+  const { error } = Joi.validate(inkConfig, inkSchema)
+  if (error === null) return
+
+  // error here
+  const cokoGitlabPage = 'https://gitlab.coko.foundation'
+  const inkPath =
+    '/pubsweet/pubsweet/tree/master/packages' +
+    '/components/packages/Ink-server'
+
+  throw new Error(
+    `${'Bad ink config in config.pubsweet-component-ink-backend' +
+      '. More info on how to set ink config at '}${cokoGitlabPage}${inkPath}. Full error message log: ${error}`,
+  )
+}
+
+checkInkConfig(inkConfig)
 
 // Generate the absolute URL
 const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
