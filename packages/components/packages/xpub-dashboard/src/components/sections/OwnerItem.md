@@ -10,7 +10,6 @@ const project = {
 const version = {
   id: faker.random.uuid(),
 }
-
 ;<OwnerItem
   project={project}
   version={version}

@@ -1,6 +1,9 @@
 A dashboard item showing a project that the current user is handling as editor.
 
 ```js
+const { JournalProvider } = require('xpub-journal')
+const journal = require('xpub-styleguide/src/config/journal')
+
 const AssignEditor = require('../AssignEditor').default
 
 const project = {
@@ -11,6 +14,7 @@ const project = {
   owners: [
     {
       name: faker.name.findName(),
+      username: faker.name.findName(),
     },
   ],
   reviewers: [
@@ -103,14 +107,27 @@ const options = [
   },
 ]
 
-const AssignEditorContainer = props => (
-  <AssignEditor team={team} options={options} {...props} />
+const AssignEditorContainer = ({
+  project,
+  teamName,
+  teamTypeName,
+  addUserToTeam,
+}) => (
+  <AssignEditor
+    team={team}
+    options={options}
+    project={project}
+    teamName={teamName}
+    teamTypeName={teamTypeName}
+    addUserToTeam={addUserToTeam}
+  />
 )
-
-;<EditorItem
-  project={project}
-  version={version}
-  addUserToTeam={props => console.log(props)}
-  AssignEditor={AssignEditorContainer}
-/>
+;<JournalProvider journal={journal}>
+  <EditorItem
+    project={project}
+    version={version}
+    addUserToTeam={props => console.log(props)}
+    AssignEditor={AssignEditorContainer}
+  />
+</JournalProvider>
 ```

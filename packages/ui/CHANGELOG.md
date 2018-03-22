@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+  <a name="3.2.1"></a>
+## [3.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.2.0...@pubsweet/ui@3.2.1) (2018-03-19)
+
+
+### Bug Fixes
+
+* **styleguide:** fix File component ([1acbca6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1acbca6))
+
+
+
+
+  <a name="3.2.0"></a>
+# [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.1.0...@pubsweet/ui@3.2.0) (2018-03-15)
+
+
+### Bug Fixes
+
+* **menu:** update snapshot tests ([ec9af16](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ec9af16))
+
+
+### Features
+
+* **menu:** add renderOption prop and update docs ([fe769d4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fe769d4)), closes [#335](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/335)
+
+
+
+
 <a name="3.1.0"></a>
 
 # [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.0.1...@pubsweet/ui@3.1.0) (2018-03-09)
@@ -62,9 +89,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **ui:** \* Icon takes semantic color props instead of a color name
 * **ui:** \* navLinks prop is now navLinkComponents and expects an array of
-  elements
+elements
 * **ui:** \* `Files` (renamed to `FileUploadList`) takes a single component that will receive `uploaded` prop
-  when upload is complete
+when upload is complete
 * `Attachment` has default and uploaded state
 * `UploadingFile` has default and uploaded state (`File` is deprecated)
 * `UploadingFile`, `File`, `Files`, `Supplementary`, and `Attachments` takes `files` prop instead of `values`

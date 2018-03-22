@@ -16,7 +16,6 @@ const version = {
 const SupplementaryFilesForm = reduxForm({ form: 'supplementaryFiles' })(
   SupplementaryFiles,
 )
-
 ;<SupplementaryFilesForm
   initialValues={version}
   uploadFile={file => new XMLHttpRequest()}

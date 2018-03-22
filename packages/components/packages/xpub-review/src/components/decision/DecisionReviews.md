@@ -13,23 +13,25 @@ const version = {
   reviewers: [
     {
       id: faker.random.uuid(),
+      _user: { username: 'john123' },
       reviewer: 'reviewer-reviewed',
       status: 'reviewed',
       submitted: faker.date.past(2),
       note: {
         content: '<p>This is a review</p>',
       },
-      recommendation: 'accept',
+      Recommendation: { recommendation: 'accept' },
     },
     {
       id: faker.random.uuid(),
+      _user: { username: 'john123' },
       reviewer: 'reviewer-reviewed',
       status: 'reviewed',
       submitted: faker.date.past(2),
       note: {
         content: '<p>This is another review</p>',
       },
-      recommendation: 'revise',
+      Recommendation: { recommendation: 'revise' },
     },
   ],
   decision: {
@@ -40,6 +42,5 @@ const version = {
     },
   },
 }
-
 ;<DecisionReviews version={version} />
 ```

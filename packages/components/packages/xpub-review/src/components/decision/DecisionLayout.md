@@ -120,7 +120,6 @@ const ConnectedDecisionLayout = reduxForm({
   onSubmit: values => console.log(values),
   onChange: values => console.log(values),
 })(DecisionLayout)
-
 ;<div style={{ position: 'relative', height: 600 }}>
   <ConnectedDecisionLayout
     project={project}

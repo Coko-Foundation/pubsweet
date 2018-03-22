@@ -1,4 +1,5 @@
 export { default as metadata } from './metadata'
+export { default as reviewStatus } from './review-status'
 export { default as declarations } from './declarations'
 export { default as decisions } from './decisions'
 export { default as recommendations } from './recommendations'

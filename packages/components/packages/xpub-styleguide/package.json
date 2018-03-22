@@ -1,16 +1,16 @@
 {
   "name": "xpub-styleguide",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "files": ["src", "dist"],
   "main": "src",
   "dependencies": {
-    "@pubsweet/styleguide": "^1.1.2",
+    "@pubsweet/styleguide": "^1.1.4",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
     "redux-form": "^7.0.3",
-    "xpub-journal": "^0.0.3",
-    "xpub-theme": "^0.0.3"
+    "xpub-journal": "^0.0.4",
+    "xpub-theme": "^0.0.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -29,9 +29,5 @@
   "peerDependencies": {
     "react": ">=16"
   },
-  "scripts": {
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile"
-  }
+  "scripts": {}
 }

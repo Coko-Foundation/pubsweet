@@ -13,7 +13,6 @@ const reviewer = {
     username: faker.internet.userName(),
   },
 }
-
 ;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
@@ -33,7 +32,6 @@ const reviewer = {
     username: faker.internet.userName(),
   },
 }
-
 ;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
@@ -53,7 +51,6 @@ const reviewer = {
     username: faker.internet.userName(),
   },
 }
-
 ;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```
 
@@ -74,6 +71,5 @@ const reviewer = {
     username: faker.internet.userName(),
   },
 }
-
 ;<Reviewer reviewer={reviewer} removeReviewer={() => console.log('remove')} />
 ```

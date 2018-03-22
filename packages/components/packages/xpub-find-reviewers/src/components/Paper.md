@@ -6,6 +6,5 @@ const paper = {
   title: faker.lorem.sentence(20, 5),
   scorePercent: faker.random.number({ min: 1, max: 100 }),
 }
-
 ;<Paper id={paper.id} paper={paper} />
 ```

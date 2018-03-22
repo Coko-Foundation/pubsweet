@@ -1,6 +1,9 @@
 A drop-down menu for assigning an editor to a project.
 
 ```js
+const { JournalProvider } = require('xpub-journal')
+const journal = require('xpub-styleguide/src/config/journal')
+
 const project = {
   id: faker.random.uuid(),
 }
@@ -23,13 +26,14 @@ const options = [
     label: faker.internet.userName(),
   },
 ]
-
-;<AssignEditor
-  project={project}
-  team={team}
-  teamName="Senior Editor"
-  teamTypeName="seniorEditor"
-  options={options}
-  addUserToTeam={value => console.log(value)}
-/>
+;<JournalProvider journal={journal}>
+  <AssignEditor
+    project={project}
+    team={team}
+    teamName="Senior Editor"
+    teamTypeName="seniorEditor"
+    options={options}
+    addUserToTeam={value => console.log(value)}
+  />
+</JournalProvider>
 ```

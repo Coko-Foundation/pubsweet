@@ -6,7 +6,6 @@ The user can confirm submission using the primary button, or return to the submi
 const project = {
   id: faker.random.uuid(),
 }
-
 ;<Confirm
   project={project}
   confirmSubmission={() => console.log('confirmed')}
