@@ -185,6 +185,7 @@ exports[`AppBar With admin user 1`] = `
       <span
         className="c5"
         color="black"
+        role="img"
         size={2}
       >
         <svg
@@ -222,6 +223,7 @@ exports[`AppBar With admin user 1`] = `
         <span
           className="c5"
           color="black"
+          role="img"
           size={2}
         >
           <svg

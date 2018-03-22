@@ -32,12 +32,14 @@ const Root = styled.label`
     margin-right: ${props => (props.inline ? '2.7em' : '0')};
   }
 
-  & input {
-    display: none;
-    margin-right: 0.25rem;
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
   }
 
-  & span {
+  span {
+    margin-right: 0.25rem;
     font-size: 1.1em;
     transition: color 0.5s;
   }
@@ -46,7 +48,7 @@ const Root = styled.label`
     color: ${th('colorPrimary')};
   }
 
-  & span::before {
+  span::before {
     content: ' ';
     display: inline-block;
     vertical-align: middle;
@@ -67,6 +69,11 @@ const Root = styled.label`
 
     background: ${th('colorPrimary')};
     box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
+  }
+
+  input:focus + span::before {
+    box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
+      ${th('colorPrimary')};
   }
 `
 

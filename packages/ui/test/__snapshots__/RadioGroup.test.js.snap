@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio Group is rendered correctly 1`] = `
-.c2 {
-  display: none;
+.c3 {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
 }
 
-.c4 {
+.c5 {
   display: inline-block;
   content: ' ';
   width: calc(8px * 2);
@@ -20,7 +22,7 @@ exports[`Radio Group is rendered correctly 1`] = `
   color: black;
 }
 
-.c6 {
+.c7 {
   display: inline-block;
   font-family: inherit;
   font-size: 18px;
@@ -48,21 +50,25 @@ exports[`Radio Group is rendered correctly 1`] = `
   margin-bottom: 0;
 }
 
-.c1 .c3 {
+.c1 .c4 {
   background: transparent;
   box-shadow: 0 0 0 1px currentcolor;
 }
 
-.c1:hover .c5 {
+.c1:hover .c6 {
   color: black;
 }
 
-.c1:hover .c3 {
+.c1:hover .c4 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
   -webkit-animation-duration: 0.2s;
   animation-duration: 0.2s;
   box-shadow: 0 0 0 1px black;
+}
+
+.c1 .c2:focus + .c4 {
+  box-shadow: 0 0 1px calc(1px * 2) black;
 }
 
 .c0 {
@@ -89,7 +95,7 @@ exports[`Radio Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
-      className="c2"
+      className="c2 c3"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -99,12 +105,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c3 c4"
+      className="c4 c5"
       color="black"
     />
      
     <span
-      className="c5 c6"
+      className="c6 c7"
     >
        
       Yes
@@ -119,7 +125,7 @@ exports[`Radio Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
-      className="c2"
+      className="c2 c3"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -129,12 +135,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c3 c4"
+      className="c4 c5"
       color="black"
     />
      
     <span
-      className="c5 c6"
+      className="c6 c7"
     >
        
       No
@@ -149,7 +155,7 @@ exports[`Radio Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
-      className="c2"
+      className="c2 c3"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -159,12 +165,12 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
      
     <span
-      className="c3 c4"
+      className="c4 c5"
       color="black"
     />
      
     <span
-      className="c5 c6"
+      className="c6 c7"
     >
        
       Maybe
