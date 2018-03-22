@@ -45,6 +45,7 @@ Can use a custom component as right element.
 * _loginLink_ - link to redirect users to login
 
 ```js
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const RightComponent = ({ user, loginLink, onLogoutClick }) => (
   <div
     style={{
