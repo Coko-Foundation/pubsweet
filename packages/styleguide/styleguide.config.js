@@ -53,4 +53,5 @@ module.exports = {
   compilerConfig: {
     transforms: { dangerousTaggedTemplateString: true },
   },
+  pagePerSection: true,
 }

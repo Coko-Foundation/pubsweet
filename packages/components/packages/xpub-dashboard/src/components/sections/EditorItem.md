@@ -106,7 +106,7 @@ const options = [
     label: faker.internet.userName(),
   },
 ]
-
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const AssignEditorContainer = ({
   project,
   teamName,
