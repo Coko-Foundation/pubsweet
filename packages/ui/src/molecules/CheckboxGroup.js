@@ -1,4 +1,5 @@
 import React from 'react'
+import { clone } from 'lodash'
 
 import Checkbox from '../atoms/Checkbox'
 import Flexbox from '../atoms/Flexbox'
@@ -8,7 +9,7 @@ class CheckboxGroup extends React.Component {
     super(props)
 
     this.state = {
-      values: props.value || [],
+      values: props.value ? clone(props.value) : [],
     }
   }
 
