@@ -1,10 +1,16 @@
 module.exports = {
   teams: {
-    teamSeniorEditors: {
-      name: 'SeniorEditors',
+    seniorEditor: {
+      name: 'Senior Editors',
     },
-    teamHandlingEditors: {
-      name: 'HandlingEditors',
+    handlingEditor: {
+      name: 'Handling Editors',
+    },
+    managingEditor: {
+      name: 'Managing Editors',
+    },
+    reviewer: {
+      name: 'Reviewer',
     },
   },
 }

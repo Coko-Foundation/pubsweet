@@ -110,7 +110,7 @@ class XpubCollabraMode {
    * @returns {boolean}
    */
   isAssignedHandlingEditor = (user, object) =>
-    this.isTeamMember(user, 'Handling Editor', object)
+    this.isTeamMember(user, 'handlingEditor', object)
 
   /**
    * Checks if user is a senior editor (member of a team of type senior editor) for an object
@@ -119,7 +119,7 @@ class XpubCollabraMode {
    * @returns {boolean}
    */
   isAssignedSeniorEditor = (user, object) =>
-    this.isTeamMember(user, 'Senior Editor', object)
+    this.isTeamMember(user, 'seniorEditor', object)
 
   /**
    * Checks if user is a senior editor (member of a team of type senior editor) for an object
@@ -127,7 +127,7 @@ class XpubCollabraMode {
    * @param {any} user
    * @returns {boolean}
    */
-  isManagingEditor = user => this.isTeamMember(user, 'Managing Editor')
+  isManagingEditor = user => this.isTeamMember(user, 'managingEditor')
 
   /**
    * Checks if userId is present, indicating an authenticated user
