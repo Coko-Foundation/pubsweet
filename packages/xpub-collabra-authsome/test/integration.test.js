@@ -7,7 +7,7 @@ const api = require('pubsweet-server/test/helpers/api')
 const authentication = require('pubsweet-server/src/authentication')
 
 let adminToken
-// let userToken
+let userToken
 
 const collectionPaper1 = {
   title: 'Paper 1',
@@ -17,12 +17,12 @@ const collectionPaper1 = {
 describe('server integration', () => {
   beforeEach(async () => {
     await cleanDB()
-    const [admin] = await Promise.all([
+    const [admin, user] = await Promise.all([
       new User(fixtures.adminUser).save(),
       new User(fixtures.user).save(),
     ])
     adminToken = authentication.token.create(admin)
-    // userToken = authentication.token.create(user)
+    userToken = authentication.token.create(user)
   })
 
   describe('admin', () => {
@@ -46,6 +46,32 @@ describe('server integration', () => {
         adminToken,
       )
       expect(body.data.createCollection.title).toEqual(collectionPaper1.title)
+    })
+  })
+
+  describe('user', () => {
+    describe('REST', () => {
+      it('can create a collection with REST', async () => {
+        const collection = await api.collections
+          .create(collectionPaper1, userToken)
+          .expect(201)
+          .then(res => res.body)
+
+        expect(collection.type).toEqual(fixtures.collection.type)
+      })
+    })
+
+    describe('GraphQL', () => {
+      it('can create a collection with GraphQL', async () => {
+        const { body } = await api.graphql.query(
+          `mutation($input: String) {
+            createCollection(input: $input) { id, title, status }
+          }`,
+          { input: JSON.stringify(collectionPaper1) },
+          userToken,
+        )
+        expect(body.data.createCollection.title).toEqual(collectionPaper1.title)
+      })
     })
   })
 })

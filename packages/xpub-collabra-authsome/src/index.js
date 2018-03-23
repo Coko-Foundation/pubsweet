@@ -158,6 +158,16 @@ class RESTMode extends XpubCollabraMode {
   }
 
   /**
+   * Returns true if the current operation is a create on collections
+   *
+   * @returns {boolean}
+   */
+  isCreatingCollections = () =>
+    this.operation === 'create' &&
+    this.object &&
+    this.object.path === '/collections'
+
+  /**
    * An async functions that's the entry point for determining
    * authorization results. Returns true (if allowed), false (if not allowed),
    * and { filter: function(filterable) } if partially allowed
@@ -174,6 +184,11 @@ class RESTMode extends XpubCollabraMode {
 
     // Admins can do anything
     if (this.isAdmin(user)) {
+      return true
+    }
+
+    // Users can create collections
+    if (this.isCreatingCollections()) {
       return true
     }
 
@@ -226,7 +241,19 @@ class GraphQLMode extends XpubCollabraMode {
    * @returns {boolean}
    */
   isCreatingCollections = () =>
-    this.operation === 'create' && this.object === 'collection'
+    this.operation === 'create' &&
+    (this.object === 'collections' ||
+      (this.object && this.object.type === 'collection'))
+
+  /**
+   * Returns true if owner of the object is user and operation is read
+   * @param {any} user
+   * @returns {boolean}
+   */
+  isReadingOwnObject = user =>
+    this.operation === 'read' &&
+    this.object &&
+    this.object.owners.includes(user.id)
 
   async determine() {
     if (!this.isAuthenticated()) {
@@ -240,10 +267,18 @@ class GraphQLMode extends XpubCollabraMode {
       return true
     }
 
+    // Users can create collections
+    if (this.isCreatingCollections()) {
+      return true
+    }
+
     if (this.isListingCollections()) {
       return true
     }
 
+    if (this.isReadingOwnObject(user)) {
+      return true
+    }
     return false
   }
 }
