@@ -1,4 +1,4 @@
-import { User } from 'pubsweet-server/src/models'
+const { User } = require('pubsweet-server/src/models')
 
 // Perhaps these should be exported from server together?
 const cleanDB = require('pubsweet-server/test/helpers/db_cleaner')

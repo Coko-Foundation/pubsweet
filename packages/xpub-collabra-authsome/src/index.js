@@ -41,8 +41,8 @@ class XpubCollabraMode {
    * @param {any} object
    * @returns {boolean}
    */
-  async isTeamMember(user, teamType, object) {
-    if (!user || !Array.isArray(user.teams)) {
+  async isTeamMember(teamType, object) {
+    if (!this.user || !Array.isArray(this.user.teams)) {
       return false
     }
 
@@ -59,7 +59,7 @@ class XpubCollabraMode {
     }
 
     const memberships = await Promise.all(
-      user.teams.map(async teamId => {
+      this.user.teams.map(async teamId => {
         const team = await this.context.models.Team.find(teamId)
         return membershipCondition(team)
       }),
@@ -83,51 +83,52 @@ class XpubCollabraMode {
    * Checks if the user is an author, as represented with the owners
    * relationship
    *
-   * @param {any} user
    * @param {any} object
    * @returns {boolean}
    */
-  isAuthor(user) {
-    if (!this.object || !this.object.owners || !user) {
+  isAuthor() {
+    if (!this.object || !this.object.owners || !this.user) {
       return false
     }
-    return this.object.owners.includes(user.id)
+    return this.object.owners.includes(this.user.id)
   }
 
   /**
    * Checks if the user is an author, as represented with the owners
    * relationship
    *
-   * @param {any} user
    * @returns {boolean}
    */
-  isAdmin = user => user && user.admin
+  isAdmin() {
+    return this.user && this.user.admin
+  }
 
   /**
    * Checks if user is a handling editor (member of a team of type handling editor) for an object
    *
-   * @param {any} user
    * @returns {boolean}
    */
-  isAssignedHandlingEditor = (user, object) =>
-    this.isTeamMember(user, 'handlingEditor', object)
+  isAssignedHandlingEditor(object) {
+    return this.isTeamMember('handlingEditor', object)
+  }
 
   /**
    * Checks if user is a senior editor (member of a team of type senior editor) for an object
    *
-   * @param {any} user
    * @returns {boolean}
    */
-  isAssignedSeniorEditor = (user, object) =>
-    this.isTeamMember(user, 'seniorEditor', object)
+  isAssignedSeniorEditor(object) {
+    return this.isTeamMember('seniorEditor', object)
+  }
 
   /**
    * Checks if user is a senior editor (member of a team of type senior editor) for an object
    *
-   * @param {any} user
    * @returns {boolean}
    */
-  isManagingEditor = user => this.isTeamMember(user, 'managingEditor')
+  isManagingEditor() {
+    return this.isTeamMember('managingEditor')
+  }
 
   /**
    * Checks if userId is present, indicating an authenticated user
@@ -135,18 +136,25 @@ class XpubCollabraMode {
    * @param {any} userId
    * @returns {boolean}
    */
-  isAuthenticated = () => !!this.userId
+  isAuthenticated() {
+    return !!this.userId
+  }
 }
 
 /** This class is used to handle authorization requirements for REST endpoints. */
 class RESTMode extends XpubCollabraMode {
+  // constructor(userId, operation, object, context) {
+  //   super(userId, operation, object, context)
+  //   // this.isListingCollections = this.isListingCollections.bind(this)
+  //   // this.isCreatingCollections = this.isCreatingCollections.bind(this)
+  // }
   /**
    * Determine if the current operation is a listing of the collections
    *
    * @returns {boolean}
    * @memberof RESTMode
    */
-  isListingCollections = () => {
+  isListingCollections() {
     if (
       this.operation === 'read' &&
       this.object &&
@@ -162,10 +170,13 @@ class RESTMode extends XpubCollabraMode {
    *
    * @returns {boolean}
    */
-  isCreatingCollections = () =>
-    this.operation === 'create' &&
-    this.object &&
-    this.object.path === '/collections'
+  isCreatingCollections() {
+    return (
+      this.operation === 'create' &&
+      this.object &&
+      this.object.path === '/collections'
+    )
+  }
 
   /**
    * An async functions that's the entry point for determining
@@ -180,10 +191,10 @@ class RESTMode extends XpubCollabraMode {
       return this.unauthenticatedUser(this.operation)
     }
 
-    const user = await this.context.models.User.find(this.userId)
+    this.user = await this.context.models.User.find(this.userId)
 
     // Admins can do anything
-    if (this.isAdmin(user)) {
+    if (this.isAdmin()) {
       return true
     }
 
@@ -201,7 +212,7 @@ class RESTMode extends XpubCollabraMode {
       //   Senior Editor sees those they have been assigned to
       //   Handling Editor sees those they have been assigned to
 
-      if (await this.isManagingEditor(user)) {
+      if (await this.isManagingEditor()) {
         return true
       }
 
@@ -210,9 +221,9 @@ class RESTMode extends XpubCollabraMode {
           const filteredCollections = await Promise.all(
             collections.map(async collection => {
               const condition =
-                this.isAuthor(user, collection) ||
-                (await this.isAssignedHandlingEditor(user, collection)) || // eslint-disable-line
-                (await this.isAssignedSeniorEditor(user, collection)) // eslint-disable-line
+                this.isAuthor(collection) ||
+                (await this.isAssignedHandlingEditor(collection)) || // eslint-disable-line
+                (await this.isAssignedSeniorEditor(collection)) // eslint-disable-line
               return condition ? collection : undefined // eslint-disable-line
             }),
           )
@@ -233,37 +244,44 @@ class GraphQLMode extends XpubCollabraMode {
    * @memberof GraphQLMode
    * @returns {boolean}
    */
-  isListingCollections = () => this.operation === 'list collections'
+  isListingCollections() {
+    return this.operation === 'list collections'
+  }
 
   /**
    * Returns true if the current operation is a create on collections
    *
    * @returns {boolean}
    */
-  isCreatingCollections = () =>
-    this.operation === 'create' &&
-    (this.object === 'collections' ||
-      (this.object && this.object.type === 'collection'))
+  isCreatingCollections() {
+    return (
+      this.operation === 'create' &&
+      (this.object === 'collections' ||
+        (this.object && this.object.type === 'collection'))
+    )
+  }
 
   /**
    * Returns true if owner of the object is user and operation is read
-   * @param {any} user
    * @returns {boolean}
    */
-  isReadingOwnObject = user =>
-    this.operation === 'read' &&
-    this.object &&
-    this.object.owners.includes(user.id)
+  isReadingOwnObject() {
+    return (
+      this.operation === 'read' &&
+      this.object &&
+      this.object.owners.includes(this.user.id)
+    )
+  }
 
   async determine() {
     if (!this.isAuthenticated()) {
       return false
     }
 
-    const user = await this.context.models.User.find(this.userId)
+    this.user = await this.context.models.User.find(this.userId)
 
     // Admins can do anything
-    if (this.isAdmin(user)) {
+    if (this.isAdmin()) {
       return true
     }
 
@@ -276,7 +294,7 @@ class GraphQLMode extends XpubCollabraMode {
       return true
     }
 
-    if (this.isReadingOwnObject(user)) {
+    if (this.isReadingOwnObject()) {
       return true
     }
     return false
