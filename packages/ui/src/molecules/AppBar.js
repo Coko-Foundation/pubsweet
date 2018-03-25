@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import th from '../helpers/themeHelper'
-import Icon from '../atoms/Icon'
-import Link from '../atoms/Link'
+import { Icon, Link } from '../atoms'
 
+// #region styled-components
 const Root = styled.nav`
   display: flex;
   align-items: center;
@@ -20,7 +20,10 @@ const Section = styled.div`
 const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
-  & svg {
+`
+
+const LogoLink = Link.extend`
+  & > * {
     height: calc(${th('gridUnit')} * 2);
   }
 `
@@ -30,6 +33,7 @@ const Item = styled.span`
   display: inline-flex;
   margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
 `
+// #endregion
 
 const AppBar = ({
   brandLink = '/',
@@ -38,12 +42,13 @@ const AppBar = ({
   onLogoutClick,
   navLinkComponents,
   user,
+  rightComponent: RightComponent = DefaultRightComponent,
 }) => (
   <Root>
     <Section>
       {brand && (
         <Logo>
-          <Link to={brandLink}>{brand}</Link>
+          <LogoLink to={brandLink}>{brand}</LogoLink>
         </Logo>
       )}
 
@@ -55,32 +60,39 @@ const AppBar = ({
           </span>
         ))}
     </Section>
-
-    <Section>
-      {user && (
-        <Item>
-          <Icon size={2}>user</Icon>
-          {user.username}
-          {user.admin ? ' (admin)' : ''}
-        </Item>
-      )}
-
-      {user && (
-        <Item>
-          <Link onClick={onLogoutClick} to="#">
-            <Icon size={2}>power</Icon>
-            Logout
-          </Link>
-        </Item>
-      )}
-
-      {!user && (
-        <Item>
-          <Link to={loginLink}>Login</Link>
-        </Item>
-      )}
-    </Section>
+    <RightComponent
+      loginLink={loginLink}
+      onLogoutClick={onLogoutClick}
+      user={user}
+    />
   </Root>
+)
+
+const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
+  <Section>
+    {user && (
+      <Item>
+        <Icon size={2}>user</Icon>
+        {user.username}
+        {user.admin ? ' (admin)' : ''}
+      </Item>
+    )}
+
+    {user && (
+      <Item>
+        <Link onClick={onLogoutClick} to="#">
+          <Icon size={2}>power</Icon>
+          Logout
+        </Link>
+      </Item>
+    )}
+
+    {!user && (
+      <Item>
+        <Link to={loginLink}>Login</Link>
+      </Item>
+    )}
+  </Section>
 )
 
 AppBar.propTypes = {
@@ -88,8 +100,9 @@ AppBar.propTypes = {
   brand: PropTypes.node,
   loginLink: PropTypes.string,
   onLogoutClick: PropTypes.func,
-  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
   user: PropTypes.object,
+  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
+  rightComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 }
 
 export default AppBar

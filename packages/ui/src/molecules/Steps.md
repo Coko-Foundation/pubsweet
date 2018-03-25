@@ -46,6 +46,7 @@ initialState = { currentStep: 0 }
 * Usage with a custom step component
 
 ```js
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
   return <div>
     {customProp} / {index}
@@ -65,12 +66,14 @@ Each child of the Steps component has access to the `currentStep` and also it's 
   When the default separator is not what you want you can always pass a custom separator component. This custom separator will be placed between each two adjacent children.
 
 ```js
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
   return <div>
     {customProp} / {index}
   </div>
 }
 
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const Separator = () => {
   return <div style={{
     alignItems: 'center',

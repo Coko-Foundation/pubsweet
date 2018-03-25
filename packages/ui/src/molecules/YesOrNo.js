@@ -1,6 +1,6 @@
 import React from 'react'
-import RadioGroup from './RadioGroup'
-import Colorize from '../atoms/Colorize'
+import { Colorize } from '../atoms'
+import { RadioGroup } from '../molecules'
 
 const options = [
   {

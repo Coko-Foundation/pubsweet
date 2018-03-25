@@ -3,7 +3,7 @@ import { pascalize } from 'humps'
 import * as icons from 'react-feather'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Colorize from './Colorize'
+import { Colorize } from '../atoms'
 import th from '../helpers/themeHelper'
 
 const Container = styled.span`
@@ -34,7 +34,7 @@ const Icon = ({ children, color, size = 3, ...props }) => {
   )
 }
 
-Icon.protoTypes = {
+Icon.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
 }

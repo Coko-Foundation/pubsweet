@@ -2,7 +2,6 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  max-width: calc(32px * 14);
   margin-bottom: 32px;
 }
 
@@ -119,11 +118,20 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  max-width: calc(32px * 14);
   margin-bottom: 32px;
 }
 
-.c2 {
+.c1 {
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.c3 {
   background: transparent;
   border: 1px solid grey;
   border-radius: 8px;
@@ -142,11 +150,11 @@ exports[`Menu is rendered correctly when open 1`] = `
   align-items: center;
 }
 
-.c2:hover {
+.c3:hover {
   border-color: black;
 }
 
-.c3 {
+.c4 {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -155,11 +163,11 @@ exports[`Menu is rendered correctly when open 1`] = `
   padding: 0 calc(32px / 2);
 }
 
-.c3:hover {
+.c4:hover {
   color: black;
 }
 
-.c4 {
+.c5 {
   border-left: 1px solid grey;
   width: calc(32px * 2);
   height: calc(32px * 2 - 1px * 2);
@@ -177,7 +185,7 @@ exports[`Menu is rendered correctly when open 1`] = `
   justify-content: center;
 }
 
-.c5 {
+.c6 {
   font-size: 50%;
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
@@ -187,17 +195,17 @@ exports[`Menu is rendered correctly when open 1`] = `
   transform: scaleX(2) scaleY(-1.2);
 }
 
-.c1 {
+.c2 {
   position: relative;
 }
 
-.c6 {
+.c7 {
   position: absolute;
   left: 0;
   right: 0;
 }
 
-.c7 {
+.c8 {
   position: absolute;
   top: 0;
   left: 0;
@@ -205,34 +213,13 @@ exports[`Menu is rendered correctly when open 1`] = `
   background-color: white;
   border: 1px solid grey;
   border-radius: 8px;
-  overflow: hidden;
-}
-
-.c8 {
-  font-weight: 600;
-  cursor: pointer;
-  padding: calc(8px - 1px * 2) calc(8px * 2);
-  border: 1px solid transparent;
-  border-width: 1px 0 1px 0;
-  white-space: nowrap;
-}
-
-.c8:hover {
-  background: grey;
-  border-color: grey;
-}
-
-.c8:first-child:hover {
-  border-top-color: grey;
-}
-
-.c8:last-child:hover {
-  border-bottom-color: grey;
+  overflow-y: scroll;
+  max-height: 250px;
+  z-index: 100;
 }
 
 .c9 {
-  color: #444;
-  font-weight: inherit;
+  font-weight: 600;
   cursor: pointer;
   padding: calc(8px - 1px * 2) calc(8px * 2);
   border: 1px solid transparent;
@@ -253,30 +240,57 @@ exports[`Menu is rendered correctly when open 1`] = `
   border-bottom-color: grey;
 }
 
+.c10 {
+  color: #444;
+  font-weight: inherit;
+  cursor: pointer;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
+  white-space: nowrap;
+}
+
+.c10:hover {
+  background: grey;
+  border-color: grey;
+}
+
+.c10:first-child:hover {
+  border-top-color: grey;
+}
+
+.c10:last-child:hover {
+  border-bottom-color: grey;
+}
+
 <div
   className="c0"
   open={true}
 >
   <div
     className="c1"
+    onClick={[Function]}
+  />
+  <div
+    className="c2"
     role="listbox"
   >
     <button
-      className="c2"
+      className="c3"
       onClick={[Function]}
       open={true}
       type="button"
     >
       <span
-        className="c3"
+        className="c4"
       >
         Foo
       </span>
       <span
-        className="c4"
+        className="c5"
       >
         <span
-          className="c5"
+          className="c6"
           open={true}
         >
           ▼
@@ -284,15 +298,15 @@ exports[`Menu is rendered correctly when open 1`] = `
       </span>
     </button>
     <div
-      className="c6"
+      className="c7"
     >
       <div
-        className="c7"
+        className="c8"
         open={true}
       >
         <div
           aria-selected={true}
-          className="c8"
+          className="c9"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -302,7 +316,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c9"
+          className="c10"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"

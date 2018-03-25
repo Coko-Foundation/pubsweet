@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../atoms/Button'
+import { Button } from '../atoms'
 
 const PlainButton = ({ className, children, type, disabled, onClick }) => (
   <Button

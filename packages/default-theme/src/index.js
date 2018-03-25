@@ -8,7 +8,6 @@ export default {
   colorBackground: 'white',
   colorPrimary: '#205d86',
   colorSecondary: '#e7e7e7',
-  colorQuiet: '#aaa',
   colorFurniture: '#ccc',
   colorBorder: '#aaa',
   colorBackgroundHue:

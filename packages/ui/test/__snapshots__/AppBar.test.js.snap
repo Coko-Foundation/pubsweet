@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
-.c3 {
+.c5 {
   color: black;
   cursor: pointer;
 }
@@ -33,7 +33,12 @@ exports[`AppBar Basic display 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2 svg {
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c3 > * {
   height: calc(32px * 2);
 }
 
@@ -74,7 +79,7 @@ exports[`AppBar Basic display 1`] = `
       className="c4"
     >
       <a
-        className="c3"
+        className="c5"
         href="/login"
         onClick={[Function]}
       >
@@ -100,7 +105,7 @@ exports[`AppBar With admin user 1`] = `
   height: calc(2 * 8px);
 }
 
-.c3 {
+.c6 {
   color: black;
   cursor: pointer;
 }
@@ -132,7 +137,12 @@ exports[`AppBar With admin user 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2 svg {
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c3 > * {
   height: calc(32px * 2);
 }
 
@@ -205,7 +215,7 @@ exports[`AppBar With admin user 1`] = `
       className="c4"
     >
       <a
-        className="c3"
+        className="c6"
         href="#"
         onClick={[Function]}
       >
@@ -244,7 +254,7 @@ exports[`AppBar With admin user 1`] = `
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
-.c3 {
+.c5 {
   color: black;
   cursor: pointer;
 }
@@ -276,7 +286,12 @@ exports[`AppBar With custom brand and login links 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2 svg {
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c3 > * {
   height: calc(32px * 2);
 }
 
@@ -317,7 +332,7 @@ exports[`AppBar With custom brand and login links 1`] = `
       className="c4"
     >
       <a
-        className="c3"
+        className="c5"
         href="/signin"
         onClick={[Function]}
       >
@@ -328,8 +343,69 @@ exports[`AppBar With custom brand and login links 1`] = `
 </nav>
 `;
 
-exports[`AppBar With nav links 1`] = `
+exports[`AppBar With custom right component 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: calc(32px * 2);
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
+}
+
 .c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c3 > * {
+  height: calc(32px * 2);
+}
+
+<nav
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <span
+      className="c2"
+    >
+      <a
+        className="c3"
+        href="/"
+        onClick={[Function]}
+      >
+        some brand
+      </a>
+    </span>
+  </div>
+  <div>
+    userName
+  </div>
+</nav>
+`;
+
+exports[`AppBar With nav links 1`] = `
+.c5 {
   color: black;
   cursor: pointer;
 }
@@ -361,7 +437,12 @@ exports[`AppBar With nav links 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c2 svg {
+.c3 {
+  color: black;
+  cursor: pointer;
+}
+
+.c3 > * {
   height: calc(32px * 2);
 }
 
@@ -402,7 +483,7 @@ exports[`AppBar With nav links 1`] = `
       className="c4"
     >
       <a
-        className="c3"
+        className="c5"
         href="/login"
         onClick={[Function]}
       >
