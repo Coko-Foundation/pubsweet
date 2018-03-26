@@ -4,7 +4,6 @@ Basic display:
 
 ```js
 const getCollections = () => new Promise(() => null)
-
 ;<Blog blog={{ title: 'Some Blog' }} posts={[]} actions={{ getCollections }} />
 ```
 
@@ -12,7 +11,6 @@ With a post:
 
 ```js
 const getCollections = () => new Promise(() => null)
-
 ;<Blog
   blog={{ title: 'Some Blog' }}
   posts={[
