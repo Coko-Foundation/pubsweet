@@ -25,7 +25,7 @@ export default ({ name = 'mutate' } = {}) => WrappedComponent =>
         .catch(error => {
           this.setState({
             loading: false,
-            error,
+            error: error.message,
             result: null,
           })
         })
