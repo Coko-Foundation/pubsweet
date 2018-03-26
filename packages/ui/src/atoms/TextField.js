@@ -38,35 +38,34 @@ const Input = styled.input`
   }
 `
 
-const TextField = ({
-  label,
-  name,
-  placeholder,
-  required,
-  type = 'text',
-  value = '',
-  onBlur,
-  onChange,
-  onKeyDown,
-  readonly,
-  validationStatus,
-  inline,
-}) => (
-  <Root inline={inline}>
-    {label && <Label>{label}</Label>}
-    <Input
-      name={name}
-      onBlur={onBlur}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-      placeholder={placeholder}
-      readOnly={readonly}
-      required={required}
-      type={type}
-      validationStatus={validationStatus}
-      value={value}
-    />
-  </Root>
-)
+class TextField extends React.Component {
+  componentWillMount() {
+    // generate a unique ID to link the label to the input
+    // note this may not play well with server rendering
+    this.inputId = `textfield-${Math.round(Math.random() * 1e12).toString(36)}`
+  }
+  render() {
+    const {
+      label,
+      type = 'text',
+      value = '',
+      readonly,
+      inline,
+      ...props
+    } = this.props
+    return (
+      <Root inline={inline}>
+        {label && <Label htmlFor={this.inputId}>{label}</Label>}
+        <Input
+          id={this.inputId}
+          readOnly={readonly}
+          type={type}
+          value={value}
+          {...props}
+        />
+      </Root>
+    )
+  }
+}
 
 export default TextField
