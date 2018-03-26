@@ -1,5 +1,5 @@
 import React from 'react'
-import { decamelize } from 'humps'
+import _ from 'lodash'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Button, Menu, th } from '@pubsweet/ui'
 import StyleRoot, {
@@ -87,25 +87,50 @@ const Nav = styled.nav`
   overflow-y: auto;
   padding: 0.5rem;
 `
-const NarrowButton = styled(Button)`
-  margin: ${props => `
-    0
-    calc(${props.theme.subGridUnit} * 6)
-    ${props.theme.subGridUnit}
-    calc(${props.theme.subGridUnit} * 4)
-  `};
-`
 
-const NarrowMenu = styled(Menu)`
-  margin: ${props => `
-    0
-    calc(${props.theme.subGridUnit} * 6)
-    ${props.theme.subGridUnit}
-    calc(${props.theme.subGridUnit} * 4)
-  `};
-`
+function makeNarrow(component) {
+  return styled(component)`
+    margin: ${props => `
+        0
+        calc(${props.theme.subGridUnit} * 6)
+        ${props.theme.subGridUnit}
+        calc(${props.theme.subGridUnit} * 4)
+        `};
+  `
+}
 
-const wrappers = []
+const NarrowButton = makeNarrow(Button)
+const NarrowMenu = makeNarrow(Menu)
+
+const componentStore = {
+  /**
+   * Generic component store
+   * All the components in here will be updated whenever the
+   * theme is changed. For now just a list of components.
+   */
+  components: [],
+  addComponent(component) {
+    /**
+     * Adds react component to store
+     * @param {object} component - component to store
+     */
+    this.components.push(component)
+  },
+  removeComponent(component) {
+    /**
+     * Removes react component from store
+     * @param {object} component - component to be removed from store
+     */
+    this.components.splice(this.components.indexOf(component), 1)
+  },
+  getComponents() {
+    /**
+     * Returns list of components in store
+     * @returns {object} - list of components in store
+     */
+    return this.components
+  },
+}
 
 class StyleGuideRenderer extends React.Component {
   constructor(props) {
@@ -125,14 +150,14 @@ class StyleGuideRenderer extends React.Component {
 
     const options = Object.keys(themes).map(themeName => ({
       value: themeName,
-      label: decamelize(themeName, { separator: ' ' }),
+      label: _.startCase(themeName),
     }))
     const ThemeSelector = () => (
       <NarrowMenu
         onChange={value => {
-          // update each wrapper
-          wrappers.forEach(wrapper => {
-            wrapper.setState({ themeName: value })
+          // update each component listening for theme changes
+          componentStore.getComponents().forEach(component => {
+            component.setState({ themeName: value })
           })
           // also update self
           this.setState({ themeName: value })
@@ -161,4 +186,4 @@ class StyleGuideRenderer extends React.Component {
   }
 }
 export default StyleGuideRenderer
-export { initialTheme, themes, wrappers }
+export { initialTheme, themes, componentStore }

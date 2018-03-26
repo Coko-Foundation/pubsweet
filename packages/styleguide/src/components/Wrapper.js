@@ -7,7 +7,7 @@ import { JournalProvider } from 'xpub-journal'
 import * as journal from 'xpub-styleguide/src/config/journal'
 import styled, { ThemeProvider } from 'styled-components'
 import ErrorBoundary from './ErrorBoundary'
-import { initialTheme, themes, wrappers } from './StyleGuideRenderer'
+import { initialTheme, themes, componentStore } from './StyleGuideRenderer'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -26,7 +26,12 @@ class Wrapper extends React.Component {
     this.state = {
       themeName: initialTheme,
     }
-    wrappers.push(this)
+  }
+  componentDidMount() {
+    componentStore.addComponent(this)
+  }
+  componentWillUnmount() {
+    componentStore.removeComponent(this)
   }
   render() {
     return (
