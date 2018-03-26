@@ -185,11 +185,12 @@ class Menu extends React.Component {
       placeholder,
       renderOption: RenderOption,
       renderOpener: RenderOpener,
+      className,
     } = this.props
     const { open, selected } = this.state
 
     return (
-      <Root inline={inline} open={open}>
+      <Root className={className} inline={inline} open={open}>
         {label && <Label>{label}</Label>}
         {open && <CloseOverlay onClick={this.toggleMenu} />}
         <Main>
