@@ -72,5 +72,29 @@ describe('GraphQL core mutations', () => {
         data: { deleteUser: { username: 'admin' } },
       })
     })
+
+    it('sets owners when creating a collection', async () => {
+      const { body } = await api.graphql.query(
+        `mutation($input: String) {
+          createCollection(input: $input) {
+            owners {
+              id
+            }
+          }
+        }`,
+        {
+          input: JSON.stringify({}),
+        },
+        token,
+      )
+
+      expect(body).toEqual({
+        data: {
+          createCollection: {
+            owners: [{ id: user.id }],
+          },
+        },
+      })
+    })
   })
 })

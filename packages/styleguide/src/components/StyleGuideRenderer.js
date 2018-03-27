@@ -8,7 +8,8 @@ import StyleRoot, {
 import defaultTheme from '@pubsweet/default-theme'
 import elifeTheme from '@pubsweet/elife-theme'
 
-const initialTheme = 'defaultTheme'
+const initialThemeName = 'defaultTheme'
+const currentTheme = { name: initialThemeName }
 const themes = {
   defaultTheme,
   elifeTheme,
@@ -137,7 +138,7 @@ class StyleGuideRenderer extends React.Component {
     super(props)
     this.state = {
       grid: false,
-      themeName: initialTheme,
+      themeName: initialThemeName,
     }
   }
   render() {
@@ -159,8 +160,10 @@ class StyleGuideRenderer extends React.Component {
           componentStore.getComponents().forEach(component => {
             component.setState({ themeName: value })
           })
-          // also update self
+          // update self
           this.setState({ themeName: value })
+          // update theme state
+          currentTheme.name = value
         }}
         options={options}
         value={this.state.themeName}
@@ -186,4 +189,4 @@ class StyleGuideRenderer extends React.Component {
   }
 }
 export default StyleGuideRenderer
-export { initialTheme, themes, componentStore }
+export { currentTheme, themes, componentStore }

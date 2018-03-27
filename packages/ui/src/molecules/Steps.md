@@ -2,14 +2,6 @@
 
 `Steps` is a navigation bar that guides users through the steps of a task. Use it whenever there is a sequence of tasks or steps that need to be done. By default the `Steps` modules has a `Step` and `Separator` default components, but custom components with different styles can be used as shown in the examples below.
 
-## Props
-
-|      Prop       |                            Description                            | Required | Default |      Type       |
-| :-------------: | :---------------------------------------------------------------: | :------: | :-----: | :-------------: |
-|   currentStep   |                  The current step of the wizard.                  |   true   |  null   |     number      |
-| renderSeparator | Separator component to be rendered between two adjacent children. |  false   |  null   | React component |
-|     margin      |                   Margit of the root container.                   |  false   | "20px"  |     string      |
-
 ## Examples
 
 * Usage with the Step component.

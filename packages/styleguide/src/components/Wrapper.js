@@ -7,7 +7,7 @@ import { JournalProvider } from 'xpub-journal'
 import * as journal from 'xpub-styleguide/src/config/journal'
 import styled, { ThemeProvider } from 'styled-components'
 import ErrorBoundary from './ErrorBoundary'
-import { initialTheme, themes, componentStore } from './StyleGuideRenderer'
+import { currentTheme, themes, componentStore } from './StyleGuideRenderer'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -24,7 +24,7 @@ class Wrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      themeName: initialTheme,
+      themeName: currentTheme.name,
     }
   }
   componentDidMount() {
