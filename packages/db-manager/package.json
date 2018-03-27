@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/db-manager",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
@@ -11,15 +11,22 @@
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "keywords": ["pubsweet", "database"],
+  "keywords": [
+    "pubsweet",
+    "database"
+  ],
   "engines": {
     "node": ">=7.9.0",
     "npm": ">=3.0.0"
   },
   "jest": {
-    "testMatch": ["**/test/**/*.test.js"],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.js"],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     "testEnvironment": "jest-environment-db",
     "verbose": true
@@ -37,6 +44,6 @@
     "isomorphic-fetch": "^2.2.1",
     "joi": "^13.1.0",
     "pg": "^7.4.1",
-    "pubsweet-server": "^2.0.3"
+    "pubsweet-server": "^2.0.4"
   }
 }
