@@ -9,7 +9,7 @@
     "config": "^1.26.1",
     "lodash": "^4.17.5",
     "moment": "^2.18.1",
-    "nodemailer": "^4.0.1"
+    "@pubsweet/component-send-email": "^0.2.2"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
