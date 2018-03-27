@@ -39,7 +39,7 @@ export default class Blog extends React.Component {
             <Row className={styles.hero}>
               <Col md={8} mdOffset={2}>
                 <h1>Welcome to {this.props.blog && this.props.blog.title}</h1>
-                <label>Science for the Web</label>
+                <p>Science for the Web</p>
               </Col>
             </Row>
           </Grid>

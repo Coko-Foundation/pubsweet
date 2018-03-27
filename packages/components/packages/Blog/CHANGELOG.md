@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.3"></a>
+## [1.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.2...pubsweet-component-blog@1.0.3) (2018-03-27)
+
+
+### Bug Fixes
+
+* resolve remaining jsx-a11y lint issues ([a75c0de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a75c0de))
+
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.1...pubsweet-component-blog@1.0.2) (2018-03-05)
 

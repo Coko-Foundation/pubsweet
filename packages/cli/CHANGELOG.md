@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.1.3"></a>
+      <a name="2.1.4"></a>
+## [2.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.3...pubsweet@2.1.4) (2018-03-27)
+
+
+### Bug Fixes
+
+* **cli:** create admin user with setupdb ([46992d9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/46992d9))
+
+
+
+
+      <a name="2.1.3"></a>
 ## [2.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.2...pubsweet@2.1.3) (2018-03-19)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-  <a name="2.1.2"></a>
+<a name="2.1.2"></a>
 ## [2.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.1...pubsweet@2.1.2) (2018-03-15)
 
 

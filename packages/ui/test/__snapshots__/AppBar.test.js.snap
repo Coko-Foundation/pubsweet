@@ -106,8 +106,21 @@ exports[`AppBar With admin user 1`] = `
 }
 
 .c6 {
+  background: none;
+  border: none;
+  padding: 0;
   color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
   cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.c6[disabled] {
+  color: grey;
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 .c0 {
@@ -185,6 +198,7 @@ exports[`AppBar With admin user 1`] = `
       <span
         className="c5"
         color="black"
+        role="img"
         size={2}
       >
         <svg
@@ -214,14 +228,16 @@ exports[`AppBar With admin user 1`] = `
     <span
       className="c4"
     >
-      <a
+      <button
         className="c6"
-        href="#"
+        disabled={undefined}
         onClick={[Function]}
+        type={undefined}
       >
         <span
           className="c5"
           color="black"
+          role="img"
           size={2}
         >
           <svg
@@ -247,7 +263,7 @@ exports[`AppBar With admin user 1`] = `
           </svg>
         </span>
         Logout
-      </a>
+      </button>
     </span>
   </div>
 </nav>

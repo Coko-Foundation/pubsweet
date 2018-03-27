@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import th from '../helpers/themeHelper'
 import { Icon, Link } from '../atoms'
+import PlainButton from './PlainButton'
 
 // #region styled-components
 const Root = styled.nav`
@@ -80,10 +81,10 @@ const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
 
     {user && (
       <Item>
-        <Link onClick={onLogoutClick} to="#">
+        <PlainButton onClick={onLogoutClick}>
           <Icon size={2}>power</Icon>
           Logout
-        </Link>
+        </PlainButton>
       </Item>
     )}
 
