@@ -16,24 +16,27 @@ class User extends React.Component {
     )
   }
 
-  processTeamMembership(teamType) {
-    const { user, createTeam, updateTeam, teams, configuredTeams } = this.props
-
-    const existingTeam = teams.find(
+  findExistingTeam(teamType) {
+    const { teams } = this.props
+    return teams.find(
       team => team.teamType === teamType && team.object === undefined,
     )
+  }
 
+  addMember(teamType) {
+    const { user, createTeam, updateTeam, configuredTeams } = this.props
+    const existingTeam = this.findExistingTeam(teamType)
     if (existingTeam) {
-      // console.log('found team', existingTeam, 'would add user', user)
-      existingTeam.members.push(user.id)
-      updateTeam(existingTeam)
+      if (!existingTeam.members.includes(user.id)) {
+        // console.log('found team', existingTeam, 'would add user', user)
+        existingTeam.members.push(user.id)
+        updateTeam(existingTeam)
+      } else {
+        // console.log('user already member of', existingTeam)
+      }
     } else {
-      // console.log(
-      //   'theme not found',
-      //   existingTeam,
-      //   'would create team for',
-      //   user,
-      // )
+      // console.log('team not found', teamType, 'would create team with', user)
+
       createTeam({
         teamType,
         name: configuredTeams[teamType].name,
@@ -42,25 +45,47 @@ class User extends React.Component {
     }
   }
 
+  removeMember(teamType) {
+    const { user, updateTeam } = this.props
+    const existingTeam = this.findExistingTeam(teamType)
+    if (!existingTeam) {
+      return
+    }
+
+    if (existingTeam) {
+      if (existingTeam.members.includes(user.id)) {
+        // console.log('found team', existingTeam, 'would remove user', user)
+        existingTeam.members = existingTeam.members.filter(
+          member => member !== user.id,
+        )
+        updateTeam(existingTeam)
+      }
+    }
+  }
+
   onTeamChange(teamTypes) {
-    teamTypes.each(teamType => this.processTeamMembership(teamType))
+    const { configuredTeams } = this.props
+
+    // Idempotently add member
+    teamTypes.forEach(teamType => this.addMember(teamType))
+
+    // Idempotently remove member
+    const teamsDifference = Object.keys(configuredTeams).filter(
+      teamType => !teamTypes.includes(teamType),
+    )
+    teamsDifference.forEach(teamType => this.removeMember(teamType))
   }
 
   render() {
     const { user, teams, configuredTeams } = this.props
-    const activeTeams = Object.entries(configuredTeams).find(
-      ([teamType, _]) => {
-        const teamsOfType = teams.find(
-          team => team.teamType === teamType && team.object === undefined,
-        )
-        if (teamsOfType) {
-          const isMember = teamsOfType.find(team =>
+    const activeTeams = Object.entries(configuredTeams).filter(
+      ([teamType, _]) =>
+        teams.find(
+          team =>
+            team.teamType === teamType &&
+            team.object === undefined &&
             team.members.includes(user.id),
-          )
-          return isMember
-        }
-        return false
-      },
+        ),
     )
     const checkBoxValue = activeTeams
       ? activeTeams.map(([teamType, _]) => teamType)
