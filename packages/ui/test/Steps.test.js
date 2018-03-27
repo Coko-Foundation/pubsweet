@@ -16,7 +16,7 @@ describe('<Steps>', () => {
         <Steps.Step title="Third step" />
       </Steps>,
     )
-    const children = wrapper.children()
-    expect(children).toHaveLength(3)
+    const steps = wrapper.find(Steps.Step)
+    expect(steps).toHaveLength(3)
   })
 })
