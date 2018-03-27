@@ -22,11 +22,13 @@ function checkInkConfig(inkConfig) {
   /**
    * Sanity checks on inkConfig
    *
-   * config must have pubsweet-component-ink-backend with
-   * { inkEndpoint, email, password, recipes, pusher }
+   * @param {object} inkConfig - pubsweet-component-ink-backend config
    *
-   * config.get will throw if there is no pubsweet-component-ink-backend
-   * so no need to worry about that
+   * @typedef {object} inkConfigReturn
+   * @property {boolean} correct - ink config is correct or not
+   * @property {string} errorMessage - error message to be printed
+   *
+   * @returns {inkConfigReturn}
    *
    * More at
    * https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/packages/Ink-server
@@ -50,13 +52,20 @@ function checkInkConfig(inkConfig) {
     maxRetries: Joi.number(),
   }
   const { error } = Joi.validate(inkConfig, inkSchema)
-  if (error === null) return
+  if (error === null) return { correct: true, errorMessage: '' }
 
   // error here
   logger.warn(baseInkConfigErrorMessage + error)
+  return {
+    correct: false,
+    errorMessage: baseInkConfigErrorMessage + error,
+  }
 }
 
-checkInkConfig(inkConfig)
+const {
+  correct: correctInkConfig,
+  errorMessage: inkConfigErrorMessage,
+} = checkInkConfig(inkConfig)
 
 // Generate the absolute URL
 const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
@@ -64,23 +73,13 @@ const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
 // Connect to the INK Pusher/Slanger endpoint
 const connectToPusher = ({ appKey, ...options }) => new Pusher(appKey, options)
 let pusher
-if (typeof inkConfig.pusher !== 'undefined') {
+if (correctInkConfig) {
   pusher = connectToPusher(inkConfig.pusher)
 }
 
 // Sign in
-const authorize = async () => {
-  if (typeof inkConfig.email === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the email field`,
-    )
-  }
-  if (typeof inkConfig.password === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the password field`,
-    )
-  }
-  return rp({
+const authorize = async () =>
+  rp({
     method: 'POST',
     uri: inkUrl('auth/sign_in'),
     formData: {
@@ -95,16 +94,10 @@ const authorize = async () => {
     client: res.headers.client,
     'access-token': res.headers['access-token'],
   }))
-}
 
 // Upload file to INK and execute the recipe
-const upload = async (recipeId, inputFile, auth) => {
-  if (typeof inkConfig.email === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the email field`,
-    )
-  }
-  return rp({
+const upload = async (recipeId, inputFile, auth) =>
+  rp({
     method: 'POST',
     uri: inkUrl(`recipes/${recipeId}/execute`),
     headers: {
@@ -117,16 +110,10 @@ const upload = async (recipeId, inputFile, auth) => {
     json: true,
     timeout: 60 * 60 * 1000, // 3600 seconds
   })
-}
 
 // Download the output file
-const download = async (chainId, auth, outputFileName) => {
-  if (typeof inkConfig.email === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the email field`,
-    )
-  }
-  return rp({
+const download = async (chainId, auth, outputFileName) =>
+  rp({
     uri: inkUrl(`process_chains/${chainId}/download_output_file`),
     qs: {
       relative_path: outputFileName,
@@ -136,16 +123,10 @@ const download = async (chainId, auth, outputFileName) => {
       ...auth,
     },
   })
-}
 
 // Find the ID of a recipe by name
-const findRecipeId = async (name = 'Editoria Typescript', auth) => {
-  if (typeof inkConfig.email === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the email field`,
-    )
-  }
-  return rp({
+const findRecipeId = async (name = 'Editoria Typescript', auth) =>
+  rp({
     method: 'GET',
     uri: inkUrl('recipes'),
     headers: {
@@ -158,7 +139,6 @@ const findRecipeId = async (name = 'Editoria Typescript', auth) => {
 
     return recipe ? recipe.id : null
   })
-}
 
 const process = async (inputFile, options) => {
   const auth = await authorize().catch(err => {
@@ -167,11 +147,6 @@ const process = async (inputFile, options) => {
   })
 
   // either use the recipe id from the configuration or search for it by name
-  if (typeof inkConfig.recipes === 'undefined') {
-    throw new Error(
-      `${baseInkConfigErrorMessage}ink config is missing the recipes field`,
-    )
-  }
   const recipeId =
     inkConfig.recipes[options.recipe] ||
     (await findRecipeId(options.recipe, auth))
@@ -186,11 +161,6 @@ const process = async (inputFile, options) => {
 
   return new Promise((resolve, reject) => {
     // subscribe to the "process chain execution" channel
-    if (typeof pusher === 'undefined') {
-      throw new Error(
-        `${baseInkConfigErrorMessage}ink config is missing the pusher field`,
-      )
-    }
     const channel = pusher.subscribe('process_chain_execution')
 
     // wait for a "subscription succeeded" event
@@ -255,6 +225,10 @@ const process = async (inputFile, options) => {
 const InkBackend = app => {
   // TODO: authentication on this route
   app.use('/api/ink', (req, res, next) => {
+    if (!correctInkConfig) {
+      next(new Error(inkConfigErrorMessage))
+      return
+    }
     const fileStream = new Busboy({ headers: req.headers })
 
     fileStream.on(
