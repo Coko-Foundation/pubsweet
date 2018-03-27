@@ -19,7 +19,7 @@ const decision = {
   note: {
     content: '<p>This is a decision</p>',
   },
-  recommendation: 'accept',
+  Recommendation: { recommendation: 'accept' },
 }
 
 const ConnectedDecisionForm = reduxForm({
@@ -27,7 +27,6 @@ const ConnectedDecisionForm = reduxForm({
   onSubmit: values => console.log(values),
   onChange: values => console.log(values),
 })(DecisionForm)
-
 ;<ConnectedDecisionForm
   version={version}
   initialValues={decision}

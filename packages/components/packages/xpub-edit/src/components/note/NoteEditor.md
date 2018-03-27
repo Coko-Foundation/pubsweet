@@ -2,7 +2,6 @@ An editor for a note, with some formatting.
 
 ```js
 const value = faker.lorem.sentence(50)
-
 ;<NoteEditor
   value={value}
   title="Note"

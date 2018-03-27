@@ -12,7 +12,6 @@ const version = {
 }
 
 const SuggestionsForm = reduxForm({ form: 'suggestions' })(Suggestions)
-
 ;<SuggestionsForm
   initialValues={version}
   onChange={values => console.log(values)}

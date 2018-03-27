@@ -48,11 +48,11 @@ const version = {
     ],
   },
 }
-
 ;<FindReviewersLayout
   authors={authors}
   papers={papers}
   version={version}
+  toggleAuthor={() => () => null}
   error={null}
 />
 ```

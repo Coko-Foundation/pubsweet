@@ -22,6 +22,5 @@ const author = {
     },
   ],
 }
-
-;<Author author={author} />
+;<Author author={author} toggleAuthor={() => null} />
 ```

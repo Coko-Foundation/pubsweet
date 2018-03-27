@@ -16,7 +16,7 @@ A sortable list implemented with `react-dnd`.
 
 This component should be used in a React-DnD `DragDropContext` or `DragDropContextProvider`. Make sure you have `react-dnd-html5-backend` installed and wrap the parent component with `DragDropContext` decorator or add the `DragDropContextProvider` in your root component.
 
-```js
+```js static
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
@@ -29,7 +29,7 @@ export default DragDropContext(HTML5Backend)(YourApp)
 
 or
 
-```js
+```js static
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
 
@@ -46,7 +46,7 @@ export default class YourApp {
 
 ### Pass in a list of users
 
-```js
+```js static
 const items = [
   {firstName: 'John', lastName: 'Doe'},
   {firstName: 'Michael', lastName: 'Jackson'},
@@ -65,7 +65,7 @@ const Item = ({ isOver, isDragging, ...rest }) =>
 
 ### With custom drag handle
 
-```js
+```js static
 const DragHandle = () => <div>Drag me!</div>
 
 const ItemWithDragHandle = ({ dragHandle, ...rest }) => <div>
@@ -85,7 +85,7 @@ const ItemWithDragHandle = ({ dragHandle, ...rest }) => <div>
 
 To move items of the parent container whenever `moveItem` function is called we can use the `SortableList.moveItem` helper. More info in the example below.
 
-```js
+```js static
 const Container = ({ moveItem, items }) => (
   <div>
     ...
@@ -97,7 +97,7 @@ const Container = ({ moveItem, items }) => (
 
 Enhanced using recompose
 
-```js
+```js static
 const MoveExample = compose(
   withState('items', 'setItems', [
     { name: 'John' },

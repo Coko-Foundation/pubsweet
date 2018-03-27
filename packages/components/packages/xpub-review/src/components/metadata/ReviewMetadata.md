@@ -30,6 +30,5 @@ const handlingEditors = [
     username: faker.internet.userName(),
   },
 ]
-
 ;<ReviewMetadata version={version} handlingEditors={handlingEditors} />
 ```

@@ -2,7 +2,6 @@ An editor for an article's title, with minimal formatting.
 
 ```js
 const value = faker.lorem.sentence(15)
-
 ;<TitleEditor
   value={value}
   title="Title"

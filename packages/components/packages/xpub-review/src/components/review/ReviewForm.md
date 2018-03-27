@@ -27,7 +27,6 @@ const ConnectedReviewForm = reduxForm({
   onSubmit: values => console.log(values),
   onChange: values => console.log(values),
 })(ReviewForm)
-
 ;<ConnectedReviewForm
   version={version}
   initialValues={review}

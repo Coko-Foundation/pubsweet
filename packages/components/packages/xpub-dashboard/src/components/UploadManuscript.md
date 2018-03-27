@@ -4,7 +4,6 @@ A button for uploading a manuscript (DOCX) file to start a submission.
 const conversion = {
   converting: false,
 }
-
 ;<UploadManuscript conversion={conversion} />
 ```
 
@@ -14,7 +13,6 @@ While the manuscript is converting, a spinner is displayed.
 const conversion = {
   converting: true,
 }
-
 ;<UploadManuscript conversion={conversion} />
 ```
 
@@ -25,7 +23,6 @@ const conversion = {
   complete: true,
   message: 'Submission created',
 }
-
 ;<UploadManuscript conversion={conversion} />
 ```
 
@@ -37,6 +34,5 @@ const conversion = {
     message: 'There was an error',
   },
 }
-
 ;<UploadManuscript conversion={conversion} />
 ```

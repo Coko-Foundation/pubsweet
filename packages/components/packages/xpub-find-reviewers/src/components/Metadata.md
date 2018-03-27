@@ -11,6 +11,5 @@ const version = {
     ],
   },
 }
-
 ;<Metadata version={version} />
 ```

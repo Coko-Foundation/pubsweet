@@ -52,7 +52,7 @@ const ReviewMetadata = ({ version, handlingEditors }) => (
             </Heading>
             <Cell>
               {version.files.supplementary.map(file => (
-                <File key={file.url} value={file} />
+                <File file={file} key={file.url} value={file} />
               ))}
             </Cell>
           </tr>

@@ -1,5 +1,5 @@
 import React from 'react'
-import UploadingFile from '../atoms'
+import UploadingFile from './UploadingFile'
 
 const File = props => <UploadingFile {...props} uploaded />
 

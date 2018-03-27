@@ -1,0 +1,24 @@
+{
+  "name": "@pubsweet/component-send-email",
+  "version": "0.2.1",
+  "description": "send email configured for pubsweet",
+  "license": "MIT",
+  "author": "Collaborative Knowledge Foundation",
+  "files": ["src"],
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.185.0",
+    "nodemailer": "^4.4.2"
+  },
+  "peerDependencies": {
+    "@pubsweet/logger": "^0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "SendEmail"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

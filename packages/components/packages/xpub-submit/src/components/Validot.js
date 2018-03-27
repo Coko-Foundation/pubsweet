@@ -50,4 +50,5 @@ const Validot = styled.div.attrs({
   }});
 `
 
+/** @component */
 export default Validot
