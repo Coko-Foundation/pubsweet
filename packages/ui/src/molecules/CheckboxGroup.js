@@ -24,7 +24,7 @@ class CheckboxGroup extends React.Component {
       <Flexbox column={!inline}>
         {options.map(option => (
           <Checkbox
-            checked={value.includes(option.value)}
+            checked={Array.isArray(value) && value.includes(option.value)}
             inline={inline}
             key={option.value}
             label={option.label}
