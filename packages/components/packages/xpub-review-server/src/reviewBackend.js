@@ -18,14 +18,14 @@ module.exports = app => {
       const canViewVersion = await authsome.can(req.user, 'GET', version)
       const canPatchVersion = await authsome.can(req.user, 'PATCH', version)
       if (!canPatchVersion || !canViewVersion) throw new AuthorizationError()
-      let versionUpdateData = { rev: version.rev, decision: req.body.decision }
+      let versionUpdateData = { decision: req.body.decision }
       if (canPatchVersion.filter) {
         versionUpdateData = canPatchVersion.filter(versionUpdateData)
       }
       await version.updateProperties(versionUpdateData)
 
       let nextVersionData
-      let projectUpdateData = { rev: project.rev }
+      let projectUpdateData = {}
       let message
       switch (version.decision.recommendation) {
         case 'accept':

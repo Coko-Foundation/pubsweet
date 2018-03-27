@@ -10,7 +10,7 @@ const Navigation = ({ actions, currentUser }) => (
   <Navbar fluid>
     <Navbar.Header>
       <NavbarBrand>
-        <a href="#">
+        <a href="/">
           <img alt="pubsweet" src="/pubsweet.jpg" />
         </a>
       </NavbarBrand>

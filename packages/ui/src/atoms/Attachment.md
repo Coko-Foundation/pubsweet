@@ -19,3 +19,13 @@ const file = {
 }
 ;<Attachment file={file} uploaded />
 ```
+
+When passed the `error` prop, it shows an error:
+
+```js
+const file = {
+  name: faker.system.commonFileName(),
+  url: faker.internet.url(),
+}
+;<Attachment file={file} error="Upload failed" />
+```

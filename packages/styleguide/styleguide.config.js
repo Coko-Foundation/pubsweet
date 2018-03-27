@@ -25,11 +25,11 @@ module.exports = {
       components: '../ui/src/molecules/*.js',
     },
     {
-      name: 'Core Components',
+      name: 'Core-components',
       components: '../components/packages/!(xpub-*)/**/*.{jsx,js}',
     },
     {
-      name: 'Xpub Components',
+      name: 'Xpub-components',
       components: '../components/packages/xpub-*/**/*.{jsx,js}',
     },
   ],
@@ -53,4 +53,5 @@ module.exports = {
   compilerConfig: {
     transforms: { dangerousTaggedTemplateString: true },
   },
+  pagePerSection: true,
 }

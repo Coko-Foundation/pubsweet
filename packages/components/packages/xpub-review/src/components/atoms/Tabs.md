@@ -1,6 +1,7 @@
 A set of tabs for switching between dated versions.
 
 ```js
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const sections = [
   {
     key: '1485950400000',
@@ -24,6 +25,7 @@ const sections = [
 The tabs can have a title.
 
 ```js
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const sections = [
   {
     key: '2017-02-01',

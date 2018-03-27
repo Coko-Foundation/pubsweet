@@ -56,6 +56,8 @@ A menu can use a custom components for the opener and for the options.
 * _handleKeyPress_ - keyboard handler
 
 ```js
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
+
 const CustomOption = ({ selected, label, value, handleSelect }) => (
   <div
     onClick={() => handleSelect(value)}
