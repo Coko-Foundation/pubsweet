@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.1.3...pubsweet-component-xpub-review-backend@0.1.4) (2018-03-27)
+
+
+### Bug Fixes
+
+* **components:** review backend remove revs ([a2781e6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2781e6))
+
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.1.2...pubsweet-component-xpub-review-backend@0.1.3) (2018-03-19)
 
