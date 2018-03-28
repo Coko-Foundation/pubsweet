@@ -43,11 +43,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-<<<<<<< HEAD
 <a name="4.1.0"></a>
-=======
-      <a name="4.1.0"></a>
->>>>>>> chore(release): publish
 # [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.0.0...pubsweet-components@4.1.0) (2018-03-19)
 
 
