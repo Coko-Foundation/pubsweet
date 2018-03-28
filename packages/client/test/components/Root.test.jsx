@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory'
 import styled from 'styled-components'
 
 global.PUBSWEET_COMPONENTS = []
+global.fetch = () => {}
 
 const Root = require('../../src/components/Root').default
 const configureStore = require('../../src/store/configureStore')

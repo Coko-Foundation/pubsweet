@@ -56,7 +56,8 @@
       "config/"
     ],
     "globals": {
-      "PUBSWEET_COMPONENTS": []
+      "PUBSWEET_COMPONENTS": [],
+      "fetch": true
     },
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   }
