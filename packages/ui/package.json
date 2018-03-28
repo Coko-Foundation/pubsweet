@@ -1,11 +1,7 @@
 {
   "name": "@pubsweet/ui",
-  "version": "3.3.0",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
+  "version": "3.3.1",
+  "files": ["docs", "dist", "src"],
   "main": "src",
   "jsnext:main": "src",
   "repository": {
@@ -33,7 +29,7 @@
     "styled-components": "^2.4.0"
   },
   "devDependencies": {
-    "@pubsweet/styleguide": "^1.2.0",
+    "@pubsweet/styleguide": "^1.2.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",

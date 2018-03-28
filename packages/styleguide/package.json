@@ -1,15 +1,12 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "1.2.0",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "version": "1.2.1",
+  "files": ["src", "dist"],
   "main": "src",
   "dependencies": {
     "@pubsweet/default-theme": "^0.2.1",
     "@pubsweet/elife-theme": "^0.1.0",
-    "@pubsweet/ui": "^3.3.0",
+    "@pubsweet/ui": "^3.3.1",
     "faker": "^4.1.0",
     "lodash": "^4.17.5",
     "react": "^16.2.0",
