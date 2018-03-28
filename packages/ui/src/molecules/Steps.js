@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import { compose, withHandlers, setDisplayName } from 'recompose'
+import styled from 'styled-components'
 
 const Separator = styled.div`
   background-color: #000;
@@ -20,19 +19,14 @@ const StyledStep = styled.div`
   width: 16px;
 `
 
-const bulletStyle = css`
+const Bullet = styled.div`
   background-color: #000;
   border-radius: 50%;
   height: 10px;
   width: 10px;
 `
 
-const Bullet = styled.div`
-  ${bulletStyle};
-`
-
-const Success = styled.div`
-  ${bulletStyle};
+const Success = Bullet.extend`
   align-items: center;
   color: #fff;
   display: flex;
@@ -57,7 +51,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: ${({ margin }) => margin || '20px'};
+  margin: ${({ margin }) => margin};
   min-width: 500px;
 `
 
@@ -65,41 +59,41 @@ const Step = ({ title, index, currentStep }) => (
   <StyledStep>
     {index === currentStep && <Bullet />}
     {index < currentStep && <Success>✓</Success>}
-    <StepTitle>{`${index + 1}. ${title}`}</StepTitle>
+    {title && <StepTitle>{`${index + 1}. ${title}`}</StepTitle>}
   </StyledStep>
 )
 
-const Steps = ({ renderSteps, margin }) => (
-  <Root margin={margin}>{renderSteps()}</Root>
+const Steps = ({
+  children,
+  renderSeparator = Separator,
+  currentStep,
+  margin = '20px',
+}) => (
+  <Root margin={margin}>
+    {React.Children.toArray(children).reduce(
+      (acc, el, index, arr) =>
+        index === arr.length - 1
+          ? [...acc, React.cloneElement(el, { index, currentStep })]
+          : [
+              ...acc,
+              React.cloneElement(el, { index, currentStep }),
+              React.createElement(renderSeparator, { key: `sep-${el.key}` }),
+            ],
+      [],
+    )}
+  </Root>
 )
 
-const DecoratedSteps = compose(
-  setDisplayName('Steps'),
-  withHandlers({
-    renderSteps: ({ children, renderSeparator, currentStep }) => () => {
-      const separator = renderSeparator || Separator
-      return React.Children.toArray(children).reduce(
-        (acc, el, index, arr) =>
-          index === arr.length - 1
-            ? [...acc, React.cloneElement(el, { index, currentStep })]
-            : [
-                ...acc,
-                React.cloneElement(el, { index, currentStep }),
-                React.createElement(separator, { key: `sep-${el.key}` }),
-              ],
-        [],
-      )
-    },
-  }),
-)(Steps)
+Steps.Step = Step
+Steps.Separator = Separator
 
-DecoratedSteps.Step = Step
-DecoratedSteps.Separator = Separator
-
-DecoratedSteps.propTypes = {
+Steps.propTypes = {
+  /** The current step of the wizard. */
   currentStep: PropTypes.number.isRequired,
+  /** Separator component to be rendered between two adjacent children. */
   renderSeparator: PropTypes.func,
+  /** Margin of the root container. */
   margin: PropTypes.string,
 }
 
-export default DecoratedSteps
+export default Steps

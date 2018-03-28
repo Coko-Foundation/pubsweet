@@ -23,6 +23,14 @@ class User extends Model {
     return omit(this, ['passwordHash'])
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setOwners() {
+    // FIXME: this is overriden to be a no-op, because setOwners() is called by
+    // the API on create for all entity types and setting `owners` on a User is
+    // not allowed. This should instead be solved by having separate code paths
+    // in the API for different entity types.
+  }
+
   async save() {
     if (!this.id) {
       await User.isUniq(this)

@@ -110,7 +110,6 @@ describe('Checkbox Group', () => {
     newProps.onChange = jest.fn()
     const newWrapper = shallow(<CheckboxGroup {...newProps} />)
     const checkboxTwo = newWrapper.find('Checkbox').at(1)
-    const oldValues = newWrapper.state().values
     checkboxTwo.simulate('change', {
       target: {
         value: 'two',
@@ -120,8 +119,7 @@ describe('Checkbox Group', () => {
 
     expect(newProps.onChange).toHaveBeenCalledWith(['three', 'two'])
 
-    // Values in state should be different after selection (no direct mutation)
-    const newValues = newWrapper.state().values
-    expect(newValues).not.toEqual(oldValues)
+    // Values in props should be the same after selection (no direct mutation)
+    expect(newProps.value).toEqual(['three'])
   })
 })
