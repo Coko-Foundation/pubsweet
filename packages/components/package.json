@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-components",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "private": true,
   "scripts": {
     "test": "jest --coverage"
@@ -27,7 +27,7 @@
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
     "pubsweet": "^2.1.5",
-    "pubsweet-client": "^2.2.6",
+    "pubsweet-client": "^2.3.0",
     "pubsweet-server": "^2.0.5",
     "pubsweet-theme-plugin": "^0.0.3",
     "react": "^16.2.0",
