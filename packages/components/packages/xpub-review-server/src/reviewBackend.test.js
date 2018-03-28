@@ -6,7 +6,7 @@ const supertest = require('supertest')
 const bodyParser = require('body-parser')
 
 // mocks
-jest.mock('./transport', () => ({ sendMail: jest.fn() }))
+jest.mock('@pubsweet/component-send-email', () => ({ sendMail: jest.fn() }))
 jest.mock('pubsweet-server/src/models/User', () => ({
   find: jest.fn(() => ({ email: 'author@example.org' })),
 }))
@@ -31,7 +31,7 @@ jest.mock('pubsweet-server/src/helpers/authsome', () => ({
 }))
 
 const authsome = require('pubsweet-server/src/helpers/authsome')
-const transport = require('./transport')
+const transport = require('@pubsweet/component-send-email')
 const component = require('./reviewBackend')
 
 function makeApp() {
