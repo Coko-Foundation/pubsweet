@@ -48,7 +48,7 @@ const addReviewer = (props, projectReviewer, dispatch) => {
 const handleSubmit = props => reset => (values, dispatch) =>
   // TODO: create a u ser account if values.user.id is null
 
-  getProjectReviewer(props, values.user)
+  getProjectReviewer(props, values)
     .then(projectReviewer => {
       if (some(props.version.reviewers, { reviewer: projectReviewer.id })) {
         throw new SubmissionError('This reviewer has already been added')
