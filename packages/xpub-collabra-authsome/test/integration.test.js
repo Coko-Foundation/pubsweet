@@ -1,4 +1,9 @@
-const { User, Collection, Team } = require('pubsweet-server/src/models')
+const {
+  User,
+  Collection,
+  Team,
+  Fragment,
+} = require('pubsweet-server/src/models')
 
 // Perhaps these should be exported from server together?
 const cleanDB = require('pubsweet-server/test/helpers/db_cleaner')
@@ -78,6 +83,9 @@ describe('server integration', () => {
   describe('managing editor', () => {
     describe('REST', () => {
       let editorToken
+      let paperA
+      let paperB
+
       beforeEach(async () => {
         const editor = await new User(
           Object.assign({}, fixtures.user, {
@@ -91,24 +99,50 @@ describe('server integration', () => {
           teamType: 'managingEditor',
           members: [editor.id],
         }).save()
-        const paperA = new Collection({ title: 'Paper A' })
-        const paperB = new Collection({ title: 'Paper B' })
 
-        paperA.setOwners([user.id])
-        paperB.setOwners([admin.id])
+        const versionA1 = await new Fragment({
+          fragmentType: 'version',
+          version: 1,
+          owners: [user.id],
+        }).save()
+        const versionB1 = await new Fragment({
+          fragmentType: 'version',
+          version: 2,
+          owners: [admin.id],
+        }).save()
+        paperA = new Collection({
+          title: 'Project Paper A',
+          owners: [user.id],
+          fragments: [versionA1.id],
+        })
+        paperB = new Collection({
+          title: 'Project Paper B',
+          owners: [admin.id],
+          fragments: [versionB1.id],
+        })
+
         await paperA.save()
         await paperB.save()
 
         editorToken = authentication.token.create(editor)
       })
 
-      it('can list all collections', async () => {
+      it('can list all projects (collections)', async () => {
         const collections = await api.collections
           .list(editorToken)
           .expect(200)
           .then(res => res.body)
 
         expect(collections).toHaveLength(2)
+      })
+
+      it('can list all versions (fragments) of a project (collection)', async () => {
+        const fragments = await api.fragments
+          .get({ collection: paperA, token: editorToken })
+          .expect(200)
+          .then(res => res.body)
+
+        expect(fragments).toHaveLength(1)
       })
     })
   })

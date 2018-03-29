@@ -190,6 +190,14 @@ class RESTMode extends XpubCollabraMode {
     )
   }
 
+  isGettingFragments() {
+    return (
+      this.operation === 'read' &&
+      this.object &&
+      this.object.type === 'fragment'
+    )
+  }
+
   /**
    * An async functions that's the entry point for determining
    * authorization results. Returns true (if allowed), false (if not allowed),
@@ -220,6 +228,13 @@ class RESTMode extends XpubCollabraMode {
         return true
       }
     }
+
+    if (this.isGettingFragments()) {
+      if (await this.isManagingEditor()) {
+        return true
+      }
+    }
+
     if (this.isListingCollections()) {
       // Filtering for listing collections
       // Requirements:
