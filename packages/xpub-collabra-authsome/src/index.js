@@ -55,7 +55,7 @@ class XpubCollabraMode {
         team.object.id === object.id
     } else {
       // We're asking if a user is a member of a global team
-      membershipCondition = team => team.teamType === teamType
+      membershipCondition = team => team.teamType === teamType && !team.object
     }
 
     const memberships = await Promise.all(
@@ -143,11 +143,6 @@ class XpubCollabraMode {
 
 /** This class is used to handle authorization requirements for REST endpoints. */
 class RESTMode extends XpubCollabraMode {
-  // constructor(userId, operation, object, context) {
-  //   super(userId, operation, object, context)
-  //   // this.isListingCollections = this.isListingCollections.bind(this)
-  //   // this.isCreatingCollections = this.isCreatingCollections.bind(this)
-  // }
   /**
    * Determine if the current operation is a listing of the collections
    *
@@ -159,6 +154,23 @@ class RESTMode extends XpubCollabraMode {
       this.operation === 'read' &&
       this.object &&
       this.object.path === '/collections'
+    ) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * Determine if the current operation is reading acollections
+   *
+   * @returns { boolean }
+   * @memberof RESTMode
+   */
+  isGettingCollection() {
+    if (
+      this.operation === 'read' &&
+      this.object &&
+      this.object.type === 'collection'
     ) {
       return true
     }
@@ -203,6 +215,11 @@ class RESTMode extends XpubCollabraMode {
       return true
     }
 
+    if (this.isGettingCollection()) {
+      if (await this.isManagingEditor()) {
+        return true
+      }
+    }
     if (this.isListingCollections()) {
       // Filtering for listing collections
       // Requirements:
