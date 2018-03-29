@@ -11,38 +11,34 @@ export const MAKE_INVITATION_FAILURE = 'MAKE_INVITATION_FAILURE'
 function makeInvitationRequest(project, version) {
   return {
     type: MAKE_INVITATION_REQUEST,
-    project,
     version,
   }
 }
 
-function makeInvitationSuccess(project, version, result) {
+function makeInvitationSuccess(version, result) {
   return {
     type: MAKE_INVITATION_SUCCESS,
-    project,
     version,
     result,
   }
 }
 
-function makeInvitationFailure(project, version, error) {
+function makeInvitationFailure(version, error) {
   return {
     type: MAKE_INVITATION_FAILURE,
-    project,
     version,
     error,
   }
 }
 
-export function makeInvitation(project, version) {
+export function makeInvitation(version) {
   return dispatch => {
-    dispatch(makeInvitationRequest(project, version))
+    dispatch(makeInvitationRequest(version))
 
     return api
       .update('/make-invitation', {
-        projectId: project.id,
         versionId: version.id,
-        decision: version.decision,
+        reviewers: version.reviewers,
       })
       .then(result => {
         dispatch({
@@ -62,9 +58,9 @@ export function makeInvitation(project, version) {
             receivedAt: Date.now(),
           })
         }
-        dispatch(makeInvitationSuccess(project, version, result))
+        dispatch(makeInvitationSuccess(version, result))
       })
-      .catch(error => dispatch(makeInvitationFailure(project, version, error)))
+      .catch(error => dispatch(makeInvitationFailure(version, error)))
   }
 }
 

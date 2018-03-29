@@ -10,7 +10,17 @@ const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationErro
 
 module.exports = app => {
   app.patch('/api/make-invitation', async (req, res, next) => {
-    f
+    const version = await Fragment.find(req.body.versionId)
+
+    const canViewVersion = await authsome.can(req.user, 'GET', version)
+    const canPatchVersion = await authsome.can(req.user, 'PATCH', version)
+    if (!canPatchVersion || !canViewVersion) throw new AuthorizationError()
+    let versionUpdateData = req.body.reviewers
+    if (canPatchVersion.filter) {
+      versionUpdateData = canPatchVersion.filter(versionUpdateData)
+    }
+    await version.updateProperties({ reviewers: versionUpdateData })
+    await version.save()
   })
 
   app.patch('/api/make-decision', async (req, res, next) => {
