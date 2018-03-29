@@ -11,7 +11,6 @@ export const MAKE_INVITATION_FAILURE = 'MAKE_INVITATION_FAILURE'
 function makeInvitationRequest(project, version) {
   return {
     type: MAKE_INVITATION_REQUEST,
-    project,
     version,
   }
 }
@@ -32,14 +31,17 @@ function makeInvitationFailure(version, error) {
   }
 }
 
-export function makeInvitation(project, version) {
+export function makeInvitation(version) {
   return dispatch => {
-    dispatch(makeInvitationRequest(project, version))
+    dispatch(makeInvitationRequest(version))
 
     return api
       .update('/make-invitation', {
         versionId: version.id,
+<<<<<<< HEAD
         projectId: project.id,
+=======
+>>>>>>> feat(component): add make invitation request
         reviewers: version.reviewers,
       })
       .then(result => {
