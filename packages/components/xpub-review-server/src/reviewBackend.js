@@ -9,6 +9,10 @@ const authsome = require('pubsweet-server/src/helpers/authsome')
 const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
 
 module.exports = app => {
+  app.patch('/api/make-invitation', async (req, res, next) => {
+    f
+  })
+
   app.patch('/api/make-decision', async (req, res, next) => {
     try {
       const version = await Fragment.find(req.body.versionId)

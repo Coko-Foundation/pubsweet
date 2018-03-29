@@ -36,7 +36,9 @@ const addReviewer = (props, projectReviewer) => {
     reviewer: projectReviewer.id,
     status: 'invited',
   }
-
+  console.log(props)
+  debugger;
+  //return dispatch(actions.makeDecision(project, version))
   return props
     .updateVersion(props.project, {
       id: props.version.id,
