@@ -24,11 +24,13 @@ exports[`Checkbox Group is rendered correctly 1`] = `
 }
 
 .c1 input {
-  display: none;
-  margin-right: 0.25rem;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
 }
 
 .c1 span {
+  margin-right: 0.25rem;
   font-size: 1.1em;
   -webkit-transition: color 0.5s;
   transition: color 0.5s;
@@ -52,6 +54,10 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   -webkit-animation: kLnLOV 0.5s;
   animation: kLnLOV 0.5s;
   box-shadow: 0 0 0 1px;
+}
+
+.c1 input:focus + span::before {
+  box-shadow: 0 0 calc( * 2);
 }
 
 .c0 {

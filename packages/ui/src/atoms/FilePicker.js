@@ -39,15 +39,21 @@ class FilePicker extends Component {
       <div>
         <input
           accept={this.getAllowedTypes()}
+          disabled={disabled}
           onChange={this.handleUpload}
           ref={input => (this.fileInput = input)}
           style={{ display: 'none' }}
           type="file"
         />
         {React.cloneElement(React.Children.only(children), {
+          tabIndex: disabled ? undefined : 0,
+          onKeyPress: e => {
+            e.preventDefault()
+            if (['Enter', ' '].includes(e.key)) this.fileInput.click()
+          },
           onClick: e => {
             e.preventDefault()
-            !disabled && this.fileInput.click()
+            this.fileInput.click()
           },
         })}
       </div>

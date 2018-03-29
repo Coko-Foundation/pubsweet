@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.2.0...@pubsweet/styleguide@1.2.1) (2018-03-28)
+
+
+### Bug Fixes
+
+* **styleguide:** save selected theme when switching between components ([be2b255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be2b255)), closes [#362](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/362)
+
+
+
+
+<a name="1.2.0"></a>
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.1.4...@pubsweet/styleguide@1.2.0) (2018-03-27)
+
+
+### Bug Fixes
+
+* **styleguide:** add lodash to styleguide deps ([f60f632](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f60f632))
+* **styleguide:** styleguidist cannot cope with spaces in names ([19dfd4e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19dfd4e))
+
+
+### Features
+
+* **styleguide:** add theme picker to styleguide ([27b3b05](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/27b3b05)), closes [#346](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/346)
+* **styleguide:** add theme picker to styleguide ([3233a86](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3233a86)), closes [#346](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/346)
+* **styleguide:** page per section ([0bf0836](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0bf0836))
+
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.1.3...@pubsweet/styleguide@1.1.4) (2018-03-19)
 

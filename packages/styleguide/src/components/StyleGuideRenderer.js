@@ -1,10 +1,19 @@
 import React from 'react'
+import _ from 'lodash'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, th } from '@pubsweet/ui'
+import { Button, Menu, th } from '@pubsweet/ui'
 import StyleRoot, {
   injectGlobalStyles,
 } from 'pubsweet-client/src/helpers/StyleRoot'
 import defaultTheme from '@pubsweet/default-theme'
+import elifeTheme from '@pubsweet/elife-theme'
+
+const initialThemeName = 'defaultTheme'
+const currentTheme = { name: initialThemeName }
+const themes = {
+  defaultTheme,
+  elifeTheme,
+}
 
 injectGlobalStyles()
 
@@ -79,19 +88,58 @@ const Nav = styled.nav`
   overflow-y: auto;
   padding: 0.5rem;
 `
-const NarrowButton = styled(Button)`
-  margin: ${props => `
-    0
-    calc(${props.theme.subGridUnit} * 6)
-    ${props.theme.subGridUnit}
-    calc(${props.theme.subGridUnit} * 4)
-  `};
-`
+
+function makeNarrow(component) {
+  return styled(component)`
+    margin: ${props => `
+        0
+        calc(${props.theme.subGridUnit} * 6)
+        ${props.theme.subGridUnit}
+        calc(${props.theme.subGridUnit} * 4)
+        `};
+  `
+}
+
+const NarrowButton = makeNarrow(Button)
+const NarrowMenu = makeNarrow(Menu)
+
+const componentStore = {
+  /**
+   * Generic component store
+   * All the components in here will be updated whenever the
+   * theme is changed. For now just a list of components.
+   */
+  components: [],
+  addComponent(component) {
+    /**
+     * Adds react component to store
+     * @param {object} component - component to store
+     */
+    this.components.push(component)
+  },
+  removeComponent(component) {
+    /**
+     * Removes react component from store
+     * @param {object} component - component to be removed from store
+     */
+    this.components.splice(this.components.indexOf(component), 1)
+  },
+  getComponents() {
+    /**
+     * Returns list of components in store
+     * @returns {object} - list of components in store
+     */
+    return this.components
+  },
+}
 
 class StyleGuideRenderer extends React.Component {
-  constructor() {
-    super()
-    this.state = { grid: false }
+  constructor(props) {
+    super(props)
+    this.state = {
+      grid: false,
+      themeName: initialThemeName,
+    }
   }
   render() {
     const { title, children, toc } = this.props
@@ -101,8 +149,28 @@ class StyleGuideRenderer extends React.Component {
       </NarrowButton>
     )
 
+    const options = Object.keys(themes).map(themeName => ({
+      value: themeName,
+      label: _.startCase(themeName),
+    }))
+    const ThemeSelector = () => (
+      <NarrowMenu
+        onChange={value => {
+          // update each component listening for theme changes
+          componentStore.getComponents().forEach(component => {
+            component.setState({ themeName: value })
+          })
+          // update self
+          this.setState({ themeName: value })
+          // update theme state
+          currentTheme.name = value
+        }}
+        options={options}
+        value={this.state.themeName}
+      />
+    )
     return (
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={themes[this.state.themeName]}>
         <StyleRoot>
           <Root>
             <Sidebar>
@@ -110,6 +178,7 @@ class StyleGuideRenderer extends React.Component {
                 <Title>{title}</Title>
               </Header>
               <GridToggle />
+              <ThemeSelector />
               <Nav>{toc}</Nav>
             </Sidebar>
             <Content grid={this.state.grid}>{children}</Content>
@@ -120,3 +189,4 @@ class StyleGuideRenderer extends React.Component {
   }
 }
 export default StyleGuideRenderer
+export { currentTheme, themes, componentStore }

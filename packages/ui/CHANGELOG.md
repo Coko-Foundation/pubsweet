@@ -3,7 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="3.2.1"></a>
+  <a name="3.3.1"></a>
+## [3.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.0...@pubsweet/ui@3.3.1) (2018-03-28)
+
+
+### Bug Fixes
+
+* **ui:** check that value is an array ([081d2a4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/081d2a4))
+* **ui:** update CheckboxGroup rendering if props change ([a58e0d6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a58e0d6))
+
+
+
+
+  <a name="3.3.0"></a>
+# [3.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.2.1...@pubsweet/ui@3.3.0) (2018-03-27)
+
+
+### Bug Fixes
+
+* **ui:** improve accessibility of atoms ([0b709d0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0b709d0))
+* resolve remaining jsx-a11y lint issues ([a75c0de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a75c0de))
+
+
+### Features
+
+* **appbar:** add render prop for the right component of the appbar ([fe2f531](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fe2f531)), closes [#335](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/335)
+* **styleguide:** add theme picker to styleguide ([27b3b05](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/27b3b05)), closes [#346](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/346)
+* **styleguide:** page per section ([0bf0836](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0bf0836))
+
+
+
+
+<a name="3.2.1"></a>
 ## [3.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.2.0...@pubsweet/ui@3.2.1) (2018-03-19)
 
 
@@ -14,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="3.2.0"></a>
+<a name="3.2.0"></a>
 # [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.1.0...@pubsweet/ui@3.2.0) (2018-03-15)
 
 

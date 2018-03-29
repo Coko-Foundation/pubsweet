@@ -32,6 +32,7 @@ function createCreator(entityName, EntityModel) {
     await can(ctx.user, 'create', entityName)
     const input = JSON.parse(inputString)
     const entity = new EntityModel(input)
+    entity.setOwners([ctx.user])
     const outputFilter = await canKnowAbout(ctx.user, entity)
     await can(ctx.user, 'create', entity)
 

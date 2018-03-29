@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th, Link } from '@pubsweet/ui'
 
 const Root = styled.div`
   display: flex;
@@ -27,6 +27,13 @@ const Reviewers = ({
         reviewerUsers={reviewerUsers}
         version={version}
       />
+      <Link
+        to={`/projects/${project.id}/versions/${version.id}/decisions/${
+          project.id
+        }`}
+      >
+        Back to Control Panel
+      </Link>
     </Form>
 
     {reviewers && (

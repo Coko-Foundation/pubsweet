@@ -28,7 +28,7 @@ const Icon = ({ children, color, size = 3, ...props }) => {
   }
 
   return (
-    <Container color={color} size={size}>
+    <Container color={color} role="img" size={size} {...props}>
       {icon ? icon({}) : ''}
     </Container>
   )

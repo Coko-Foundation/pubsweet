@@ -3,7 +3,9 @@ import styled, { keyframes } from 'styled-components'
 import th from '../helpers/themeHelper'
 
 const Input = styled.input`
-  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
 `
 
 const PseudoInput = styled.span`
@@ -76,6 +78,12 @@ const Root = styled.label`
         ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
   }
+
+  ${Input}:focus + ${PseudoInput} {
+    box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
+      ${th('colorPrimary')};
+  }
+
   color: ${props => props.color};
 `
 

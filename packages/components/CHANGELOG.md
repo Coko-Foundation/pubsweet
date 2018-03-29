@@ -3,7 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="4.1.0"></a>
+      <a name="4.3.0"></a>
+# [4.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.1...pubsweet-components@4.3.0) (2018-03-28)
+
+
+### Features
+
+* **client:** add Apollo Client ([2fe9d93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2fe9d93))
+
+
+
+
+      <a name="4.2.1"></a>
+## [4.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.0...pubsweet-components@4.2.1) (2018-03-28)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="4.2.0"></a>
+# [4.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.1.0...pubsweet-components@4.2.0) (2018-03-27)
+
+
+### Bug Fixes
+
+* **components:** review backend remove revs ([a2781e6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2781e6))
+* resolve remaining jsx-a11y lint issues ([0675289](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0675289))
+* resolve remaining jsx-a11y lint issues ([a75c0de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a75c0de))
+* **components:** use version.id as key ([0ca2f56](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0ca2f56))
+* **polling-server:** remove revs ([b42cecd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b42cecd))
+
+
+### Features
+
+* **components:** add Link from review page back to control panel ([860b737](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/860b737))
+* **styleguide:** page per section ([0bf0836](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0bf0836))
+
+
+
+
+<a name="4.1.0"></a>
 # [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.0.0...pubsweet-components@4.1.0) (2018-03-19)
 
 
@@ -23,7 +63,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="4.0.0"></a>
+<a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@3.0.2...pubsweet-components@4.0.0) (2018-03-15)
 
 

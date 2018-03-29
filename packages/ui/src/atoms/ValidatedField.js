@@ -27,7 +27,10 @@ const WarningMessage = Message.extend`
   color: ${th('colorWarning')};
 `
 
-const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {
+const ValidatedFieldComponent = ({ component: Component }) => ({
+  meta,
+  input,
+}) => {
   let validationStatus
   if (meta.touched) validationStatus = 'success'
   if (meta.touched && meta.error) validationStatus = 'error'
@@ -35,15 +38,15 @@ const ValidatedFieldComponent = ({ component }) => ({ meta, input }) => {
 
   return (
     <div>
-      {component({ ...input, validationStatus })}
+      <Component {...input} validationStatus={validationStatus} />
 
-      {meta.touched &&
-        (meta.error || meta.warning) && (
-          <MessageWrapper>
-            {meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
-            {meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
-          </MessageWrapper>
-        )}
+      {/* live region DOM node must be initially present for changes to be announced */}
+      <MessageWrapper role="alert">
+        {meta.touched &&
+          meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
+        {meta.touched &&
+          meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
+      </MessageWrapper>
     </div>
   )
 }

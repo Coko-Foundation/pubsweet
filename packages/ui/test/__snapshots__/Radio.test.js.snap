@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio is rendered correctly 1`] = `
-.c1 {
-  display: none;
+.c2 {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
 }
 
-.c3 {
+.c4 {
   display: inline-block;
   content: ' ';
   width: calc(8px * 2);
@@ -20,7 +22,7 @@ exports[`Radio is rendered correctly 1`] = `
   color: black;
 }
 
-.c5 {
+.c6 {
   display: inline-block;
   font-family: inherit;
   font-size: 18px;
@@ -48,21 +50,25 @@ exports[`Radio is rendered correctly 1`] = `
   margin-bottom: 0;
 }
 
-.c0 .c2 {
+.c0 .c3 {
   background: transparent;
   box-shadow: 0 0 0 1px currentcolor;
 }
 
-.c0:hover .c4 {
+.c0:hover .c5 {
   color: black;
 }
 
-.c0:hover .c2 {
+.c0:hover .c3 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
   -webkit-animation-duration: 0.2s;
   animation-duration: 0.2s;
   box-shadow: 0 0 0 1px black;
+}
+
+.c0 .c1:focus + .c3 {
+  box-shadow: 0 0 1px calc(1px * 2) black;
 }
 
 <label
@@ -72,7 +78,7 @@ exports[`Radio is rendered correctly 1`] = `
 >
   <input
     checked={false}
-    className="c1"
+    className="c1 c2"
     disabled={undefined}
     name="TestName"
     onChange={undefined}
@@ -82,12 +88,12 @@ exports[`Radio is rendered correctly 1`] = `
   />
    
   <span
-    className="c2 c3"
+    className="c3 c4"
     color="black"
   />
    
   <span
-    className="c4 c5"
+    className="c5 c6"
   >
      
     TestLabel

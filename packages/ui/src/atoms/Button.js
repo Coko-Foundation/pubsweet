@@ -20,8 +20,16 @@ const BaseStandardButton = styled.button.attrs({
   padding: 0 calc(${th('gridUnit')} / 4);
   margin-right: ${th('subGridUnit')};
 
-  &:active {
-    transform: scale(0.8);
+  &:active,
+  &:hover {
+    // note: doesn't work in IE
+    filter: brightness(80%);
+  }
+
+  &[disabled] {
+    filter: none;
+    opacity: 0.8;
+    cursor: not-allowed;
   }
 `
 
@@ -29,15 +37,6 @@ const PrimaryStandardButton = BaseStandardButton.extend`
   background-color: ${th('colorPrimary')};
   border-color: ${th('colorPrimary')};
   color: ${th('colorBackground')};
-`
-
-const DisabledStandardButton = BaseStandardButton.extend.attrs({
-  disabled: true,
-})`
-  background: ${th('colorBackground')};
-  border-color: transparent;
-  color: ${th('colorSecondary')};
-  cursor: not-allowed;
 `
 
 const BasePlainButton = styled.button.attrs({
@@ -51,33 +50,22 @@ const BasePlainButton = styled.button.attrs({
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
-`
 
-const DisabledPlainButton = BasePlainButton.extend.attrs({
-  disabled: true,
-})`
-  &, &:hover, &:focus {
-    color: ${th('colorSecondary')};
+  &[disabled] {
+    color: ${th('colorTextPlaceholder')};
+    opacity: 0.8;
     cursor: not-allowed;
   }
 `
 
-const Button = ({ children, disabled, primary, plain, ...props }) => {
-  if (!plain && disabled) {
-    return (
-      <DisabledStandardButton {...props}>{children}</DisabledStandardButton>
-    )
-  }
+const Button = ({ primary, plain, ...props }) => {
   if (primary) {
-    return <PrimaryStandardButton {...props}>{children}</PrimaryStandardButton>
-  }
-  if (plain && disabled) {
-    return <DisabledPlainButton {...props}>{children}</DisabledPlainButton>
+    return <PrimaryStandardButton {...props} />
   }
   if (plain) {
-    return <BasePlainButton {...props}>{children}</BasePlainButton>
+    return <BasePlainButton {...props} />
   }
-  return <BaseStandardButton {...props}>{children}</BaseStandardButton>
+  return <BaseStandardButton {...props} />
 }
 
 export default Button
