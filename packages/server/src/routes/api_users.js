@@ -5,7 +5,6 @@ const express = require('express')
 const User = require('../models/User')
 
 const authsome = require('../helpers/authsome')
-const { createFilterFromQuery, authorizationError } = require('./util')
 
 const Team = require('../models/Team')
 const AuthorizationError = require('../errors/AuthorizationError')
@@ -18,6 +17,13 @@ const authLocal = passport.authenticate('local', {
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router()
 const authentication = require('../authentication')
+
+const {
+  applyPermissionFilter,
+  fieldSelector,
+  createFilterFromQuery,
+  authorizationError,
+} = require('./util')
 
 // Issue a token
 api.post('/users/authenticate', authLocal, (req, res) =>
@@ -56,15 +62,24 @@ api.post('/users', async (req, res, next) => {
 // List users
 api.get('/users', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, req.path)
+    const users = await User.all()
+    const filteredUsers = await applyPermissionFilter({
+      req,
+      target: req.route,
+      filterable: users,
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.path)
-    }
+    const usersWithSelectedFields = (await Promise.all(
+      filteredUsers.map(async user => {
+        const properties = await applyPermissionFilter({
+          req,
+          target: user,
+        })
+        return fieldSelector(req)(properties)
+      }),
+    )).filter(createFilterFromQuery(req.query))
 
-    const users = (await User.all()).filter(createFilterFromQuery(req.query))
-
-    res.status(STATUS.OK).json({ users })
+    res.status(STATUS.OK).json(usersWithSelectedFields)
   } catch (err) {
     next(err)
   }
@@ -76,11 +91,16 @@ api.get('/users/:id', authBearer, async (req, res, next) => {
     const user = await User.find(req.params.id)
     const permission = await authsome.can(req.user, req.method, user)
 
+    const properties = await applyPermissionFilter({
+      req,
+      target: user,
+    })
+
     if (!permission) {
       throw authorizationError(req.user, req.method, req.path)
     }
 
-    res.status(STATUS.OK).json(user)
+    res.status(STATUS.OK).json(properties)
   } catch (err) {
     next(err)
   }
