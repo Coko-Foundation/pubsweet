@@ -7,6 +7,7 @@ import UsersManager from './UsersManager'
 function mapStateToProps(state) {
   return {
     users: state.users.users,
+    teams: state.teams,
     error: state.error,
   }
 }
