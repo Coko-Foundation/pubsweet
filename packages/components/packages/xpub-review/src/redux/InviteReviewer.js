@@ -31,7 +31,7 @@ function makeInvitationFailure(version, error) {
   }
 }
 
-export function makeInvitation(version) {
+export function makeInvitation(project, version) {
   return dispatch => {
     dispatch(makeInvitationRequest(version))
 
