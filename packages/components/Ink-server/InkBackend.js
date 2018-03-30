@@ -67,9 +67,6 @@ const {
   errorMessage: inkConfigErrorMessage,
 } = checkInkConfig(inkConfig)
 
-
-console.log(inkConfig)
-debugger;
 // Generate the absolute URL
 const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
 
