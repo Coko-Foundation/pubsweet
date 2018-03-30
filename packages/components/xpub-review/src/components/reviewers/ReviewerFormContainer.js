@@ -28,7 +28,7 @@ const addProjectReviewer = (props, user) => {
 }
 
 const addReviewer = (props, projectReviewer, dispatch) => {
-  const version = Object.assign({}, props.version)
+  const { version } = props
   const reviewer = {
     events: {
       invited: new Date().toString(),
@@ -41,19 +41,6 @@ const addReviewer = (props, projectReviewer, dispatch) => {
   version.reviewers = (props.version.reviewers || []).concat(reviewer)
 
   return dispatch(actions.inviteReviewer(props.project, version))
-  //return reviewer
-  // console.log({
-  //   id: props.version.id,
-  //   rev: props.version.rev,
-  //   reviewers: (props.version.reviewers || []).concat(reviewer),
-  // },"222222222222222222222222222")
-  // return props
-  //   .updateVersion(props.project, {
-  //     id: props.version.id,
-  //     rev: props.version.rev,
-  //     reviewers: (props.version.reviewers || []).concat(reviewer),
-  //   })
-  //   .then(() => reviewer)
 }
 
 const handleSubmit = props => reset => (values, dispatch) =>
