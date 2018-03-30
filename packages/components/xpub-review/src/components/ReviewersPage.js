@@ -23,6 +23,7 @@ export default compose(
       reviewer => reviewer.reviewer,
     )
 
+    console.log(reviewers)
     const reviewerUsers = state.users.users
     // const reviewerUsers = filter(state.users.users, { reviewer: true })
 
