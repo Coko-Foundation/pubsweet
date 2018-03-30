@@ -56,6 +56,17 @@ describe('server integration', () => {
 
   describe('user', () => {
     describe('REST', () => {
+      it('can create users', async () => {
+        await api.users
+          .post({
+            username: 'test',
+            email: 'test3@example.com',
+            password: 'testpassword',
+          })
+          .expect(201)
+          .then(res => res.body)
+      })
+
       it('can create a collection with REST', async () => {
         const collection = await api.collections
           .create(collectionPaper1, userToken)
@@ -64,18 +75,98 @@ describe('server integration', () => {
 
         expect(collection.type).toEqual(fixtures.collection.type)
       })
+
+      it('can create a fragment', async () => {
+        await api.fragments
+          .post({
+            fragment: { version: 3, fragmentType: 'version' },
+            token: userToken,
+          })
+          .expect(201)
+      })
+
+      it('can create a fragment in a collection', async () => {
+        const collection = await new Collection({
+          title: 'Test',
+          owners: [user.id],
+        }).save()
+
+        await api.fragments
+          .post({
+            fragment: { version: 4, fragmentType: 'version' },
+            collection: { id: collection.id },
+            token: userToken,
+          })
+          .expect(201)
+      })
+
+      it('can read own user', async () => {
+        const userResponse = await api.users
+          .get({ userId: user.id, token: userToken })
+          .expect(200)
+          .then(res => res.body)
+        expect(userResponse.id).toEqual(user.id)
+      })
+
+      it('can only read certain properties of other users', async () => {
+        const userResponse = await api.users
+          .get({ userId: admin.id, token: userToken })
+          .expect(200)
+          .then(res => res.body)
+        expect(Object.keys(userResponse).sort()).toEqual([
+          'id',
+          'type',
+          'username',
+        ])
+      })
+
+      it('can list users', async () => {
+        const users = await api.users
+          .get({ token: userToken })
+          .expect(200)
+          .then(res => res.body)
+        expect(users).toHaveLength(2)
+      })
     })
 
     describe('GraphQL', () => {
       it('can create a collection with GraphQL', async () => {
         const { body } = await api.graphql.query(
           `mutation($input: String) {
-            createCollection(input: $input) { id, title, status }
+            createCollection(input: $input) {
+              id
+              title
+              status
+            }
           }`,
           { input: JSON.stringify(collectionPaper1) },
           userToken,
         )
         expect(body.data.createCollection.title).toEqual(collectionPaper1.title)
+      })
+
+      it('can read a collection with GraphQL', async () => {
+        const collection = await new Collection({
+          title: 'Test',
+          owners: [user.id],
+        }).save()
+
+        const { body } = await api.graphql.query(
+          `query($id: ID) {
+              collection(id: $id) {
+                title
+                owners {
+                  id
+                }
+              }
+            }`,
+          { id: collection.id },
+          userToken,
+        )
+
+        expect(body).toEqual({
+          data: { collection: { title: 'Test', owners: [{ id: user.id }] } },
+        })
       })
     })
   })
@@ -110,6 +201,7 @@ describe('server integration', () => {
           version: 2,
           owners: [admin.id],
         }).save()
+
         paperA = new Collection({
           title: 'Project Paper A',
           owners: [user.id],

@@ -1,3 +1,5 @@
+const { pickBy } = require('lodash')
+
 /** The base class for Xpub Collabra's Authsome mode. */
 class XpubCollabraMode {
   /**
@@ -86,11 +88,11 @@ class XpubCollabraMode {
    * @param {any} object
    * @returns {boolean}
    */
-  isAuthor() {
-    if (!this.object || !this.object.owners || !this.user) {
+  isAuthor(object) {
+    if (!object || !object.owners || !this.user) {
       return false
     }
-    return this.object.owners.includes(this.user.id)
+    return object.owners.includes(this.user.id)
   }
 
   /**
@@ -139,65 +141,139 @@ class XpubCollabraMode {
   isAuthenticated() {
     return !!this.userId
   }
+
+  canCreateCollection() {
+    return this.isAuthenticated()
+  }
+
+  async canReadCollection() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    this.user = await this.context.models.User.find(this.userId)
+
+    if (await this.isManagingEditor()) {
+      return true
+    }
+
+    const collection = await this.context.models.Collection.find(this.object.id)
+
+    const permission =
+      this.isAuthor(collection) ||
+      (await this.isAssignedHandlingEditor(collection)) ||
+      (await this.isAssignedSeniorEditor(collection))
+
+    return permission
+  }
+
+  async canListUsers() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    this.user = await this.context.models.User.find(this.userId)
+
+    return true
+  }
+
+  async canReadUser() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    this.user = await this.context.models.User.find(this.userId)
+
+    if (this.user.id === this.object.id) {
+      return true
+    }
+    return {
+      filter: user =>
+        pickBy(user, (_, key) => ['id', 'username', 'type'].includes(key)),
+    }
+  }
+
+  async canReadFragment() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    // Caveat: this means every logged-in user can read every fragment (but needs its UUID)
+    // Ideally we'd check if the fragment (version) belongs to a collection (project)
+    // where the user is a member of a team with the appropriate rights. However there is no
+    // link from a fragment back to a collection at this point. Something to keep in mind!
+    return true
+  }
+
+  async canListCollections() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+    this.user = await this.context.models.User.find(this.userId)
+
+    if (await this.isManagingEditor()) {
+      return true
+    }
+
+    return {
+      filter: async collections => {
+        const filteredCollections = await Promise.all(
+          collections.map(async collection => {
+            const condition =
+              this.isAuthor(collection) ||
+              (await this.isAssignedHandlingEditor(collection)) || // eslint-disable-line
+              (await this.isAssignedSeniorEditor(collection)) // eslint-disable-line
+            return condition ? collection : undefined // eslint-disable-line
+          }, this),
+        )
+
+        return filteredCollections.filter(collection => collection)
+      },
+    }
+  }
+
+  canCreateFragment() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+    return true
+  }
+
+  async canCreateFragmentInACollection() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+
+    this.user = await this.context.models.User.find(this.userId)
+
+    const { collection } = this.object
+    if (collection) {
+      const permission =
+        this.isAuthor(collection) ||
+        (await this.isAssignedHandlingEditor(collection)) ||
+        (await this.isAssignedSeniorEditor(collection))
+
+      return permission
+    }
+
+    return false
+  }
+
+  // eslint-disable-next-line
+  canCreateUser() {
+    return true
+  }
+
+  canCreateTeam() {
+    if (!this.isAuthenticated()) {
+      return false
+    }
+    return true
+  }
 }
 
 /** This class is used to handle authorization requirements for REST endpoints. */
 class RESTMode extends XpubCollabraMode {
-  /**
-   * Determine if the current operation is a listing of the collections
-   *
-   * @returns {boolean}
-   * @memberof RESTMode
-   */
-  isListingCollections() {
-    if (
-      this.operation === 'read' &&
-      this.object &&
-      this.object.path === '/collections'
-    ) {
-      return true
-    }
-    return false
-  }
-
-  /**
-   * Determine if the current operation is reading acollections
-   *
-   * @returns { boolean }
-   * @memberof RESTMode
-   */
-  isGettingCollection() {
-    if (
-      this.operation === 'read' &&
-      this.object &&
-      this.object.type === 'collection'
-    ) {
-      return true
-    }
-    return false
-  }
-
-  /**
-   * Returns true if the current operation is a create on collections
-   *
-   * @returns {boolean}
-   */
-  isCreatingCollections() {
-    return (
-      this.operation === 'create' &&
-      this.object &&
-      this.object.path === '/collections'
-    )
-  }
-
-  isGettingFragments() {
-    return (
-      this.operation === 'read' &&
-      this.object &&
-      this.object.type === 'fragment'
-    )
-  }
-
   /**
    * An async functions that's the entry point for determining
    * authorization results. Returns true (if allowed), false (if not allowed),
@@ -211,58 +287,9 @@ class RESTMode extends XpubCollabraMode {
       return this.unauthenticatedUser(this.operation)
     }
 
-    this.user = await this.context.models.User.find(this.userId)
-
     // Admins can do anything
     if (this.isAdmin()) {
       return true
-    }
-
-    // Users can create collections
-    if (this.isCreatingCollections()) {
-      return true
-    }
-
-    if (this.isGettingCollection()) {
-      if (await this.isManagingEditor()) {
-        return true
-      }
-    }
-
-    if (this.isGettingFragments()) {
-      if (await this.isManagingEditor()) {
-        return true
-      }
-    }
-
-    if (this.isListingCollections()) {
-      // Filtering for listing collections
-      // Requirements:
-      // 'My Submissions' for authors of a doc (people that have created a doc)
-      // 'To Review' for reviewers
-      // 'My Manuscripts'
-      //   Senior Editor sees those they have been assigned to
-      //   Handling Editor sees those they have been assigned to
-
-      if (await this.isManagingEditor()) {
-        return true
-      }
-
-      return {
-        filter: async collections => {
-          const filteredCollections = await Promise.all(
-            collections.map(async collection => {
-              const condition =
-                this.isAuthor(collection) ||
-                (await this.isAssignedHandlingEditor(collection)) || // eslint-disable-line
-                (await this.isAssignedSeniorEditor(collection)) // eslint-disable-line
-              return condition ? collection : undefined // eslint-disable-line
-            }),
-          )
-
-          return filteredCollections.filter(collection => collection)
-        },
-      }
     }
     return false
   }
@@ -281,19 +308,6 @@ class GraphQLMode extends XpubCollabraMode {
   }
 
   /**
-   * Returns true if the current operation is a create on collections
-   *
-   * @returns {boolean}
-   */
-  isCreatingCollections() {
-    return (
-      this.operation === 'create' &&
-      (this.object === 'collections' ||
-        (this.object && this.object.type === 'collection'))
-    )
-  }
-
-  /**
    * Returns true if owner of the object is user and operation is read
    * @returns {boolean}
    */
@@ -304,62 +318,157 @@ class GraphQLMode extends XpubCollabraMode {
       this.object.owners.includes(this.user.id)
     )
   }
-
-  async determine() {
-    if (!this.isAuthenticated()) {
-      return false
-    }
-
-    this.user = await this.context.models.User.find(this.userId)
-
-    // Admins can do anything
-    if (this.isAdmin()) {
-      return true
-    }
-
-    // Users can create collections
-    if (this.isCreatingCollections()) {
-      return true
-    }
-
-    if (this.isListingCollections()) {
-      return true
-    }
-
-    if (this.isReadingOwnObject()) {
-      return true
-    }
-    return false
-  }
 }
 
 module.exports = {
+  // This runs before all other authorization queries and is used here
+  // to allow admin to do everything
+  before: async (userId, operation, object, context) => {
+    const user = await context.models.User.find(userId)
+    return user.admin
+  },
   GET: (userId, operation, object, context) => {
     const mode = new RESTMode(userId, operation, object, context)
-    return mode.determine()
+
+    // GET /api/collections
+    if (object && object.path === '/collections') {
+      return mode.canListCollections()
+    }
+
+    // GET /api/users
+    if (object && object.path === '/users') {
+      return mode.canListUsers()
+    }
+
+    // GET /api/fragments
+    if (object && object.path === '/fragments') {
+      return mode.canListFragments()
+    }
+
+    // GET /api/teams
+    if (object && object.path === '/teams') {
+      return mode.canListTeams()
+    }
+
+    // GET /api/collection
+    if (object && object.type === 'collection') {
+      return mode.canReadCollection()
+    }
+
+    // GET /api/fragment
+    if (object && object.type === 'fragment') {
+      return mode.canReadFragment()
+    }
+
+    // GET /api/team
+    if (object && object.type === 'team') {
+      return mode.canReadTeam()
+    }
+
+    // GET /api/user
+    if (object && object.type === 'user') {
+      return mode.canReadUser()
+    }
+
+    return false
   },
   POST: (userId, operation, object, context) => {
     const mode = new RESTMode(userId, operation, object, context)
-    return mode.determine()
+
+    // POST /api/collections
+    if (object && object.path === '/collections') {
+      return mode.canCreateCollection()
+    }
+
+    // POST /api/users
+    if (object && object.path === '/users') {
+      return mode.canCreateUser()
+    }
+
+    // POST /api/fragments
+    if (object && object.path === '/fragments') {
+      return mode.canCreateFragment()
+    }
+
+    // POST /api/collections/:collectionId/fragments
+    if (object && object.path === '/collections/:collectionId/fragments') {
+      return mode.canCreateFragmentInACollection()
+    }
+
+    // POST /api/teams
+    if (object && object.path === '/teams') {
+      return mode.canCreateTeam()
+    }
+
+    return false
   },
   PATCH: (userId, operation, object, context) => {
     const mode = new RESTMode(userId, operation, object, context)
-    return mode.determine()
+
+    // PATCH /api/collections
+    if (object && object.path === '/collections') {
+      return mode.canUpdateCollection()
+    }
+
+    // PATCH /api/users
+    if (object && object.path === '/users') {
+      return mode.canUpdateUser()
+    }
+
+    // PATCH /api/fragments
+    if (object && object.path === '/fragments') {
+      return mode.canUpdateFragment()
+    }
+
+    // PATCH /api/collections/:collectionId/fragments
+    if (object && object.path === '/collections/:collectionId/fragments') {
+      return mode.canUpdateFragmentInACollection()
+    }
+
+    // PATCH /api/teams
+    if (object && object.path === '/teams') {
+      return mode.canUpdateTeam()
+    }
+
+    return false
   },
   DELETE: (userId, operation, object, context) => {
     const mode = new RESTMode(userId, operation, object, context)
     return mode.determine()
   },
+  // Example of a specific authorization query. Notice how easy it is to respond to this.
   'list collections': (userId, operation, object, context) => {
     const mode = new GraphQLMode(userId, operation, object, context)
-    return mode.determine()
+    return mode.canListCollections()
   },
   create: (userId, operation, object, context) => {
     const mode = new GraphQLMode(userId, operation, object, context)
-    return mode.determine()
+
+    if (object === 'collections' || object.type === 'collection') {
+      return mode.canCreateCollection()
+    }
+
+    return false
   },
   read: (userId, operation, object, context) => {
     const mode = new GraphQLMode(userId, operation, object, context)
-    return mode.determine()
+
+    if (object === 'collections') {
+      return mode.canListCollections()
+    }
+
+    if (object.type === 'collection') {
+      return mode.canReadCollection()
+    }
+
+    if (object === 'users') {
+      return mode.canListUsers()
+    }
+
+    if (object.type === 'user') {
+      return mode.canReadUser()
+    }
+
+    return false
   },
 }

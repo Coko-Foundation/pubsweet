@@ -17,15 +17,13 @@
     "pubsweet-server": "^2.0.2"
   },
   "dependencies": {
-    "authsome": "^0.0.10"
+    "authsome": "^0.1.0"
   },
   "jest": {
     "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*.test.js$",
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.js"],
     "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }
