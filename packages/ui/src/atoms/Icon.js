@@ -1,5 +1,5 @@
 import React from 'react'
-import { pascalize } from 'humps'
+import _ from 'lodash'
 import * as icons from 'react-feather'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
@@ -18,7 +18,7 @@ const Container = styled.span`
 
 const Icon = ({ children, color, size = 3, ...props }) => {
   // convert `arrow_left` to `ArrowLeft`
-  const name = pascalize(children)
+  const name = _.upperFirst(_.camelCase(children))
 
   // select the icon
   const icon = icons[name]
