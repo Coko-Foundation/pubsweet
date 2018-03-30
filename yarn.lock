@@ -838,13 +838,13 @@ attr-accept@^1.0.3:
   dependencies:
     core-js "^2.5.0"
 
-authsome@0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.10.tgz#86acec36ea80085a32bda2a703e834a4c1b8b085"
-
-authsome@0.0.9, authsome@^0.0.9:
+authsome@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.0.9.tgz#08b34f1797b3539e6a362f0fb11a01ae0613f928"
+
+authsome@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/authsome/-/authsome-0.1.0.tgz#4152e666afcaa7f7c51ddbed94145ad7105904d9"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -6273,7 +6273,7 @@ jest-changed-files@^22.4.3:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^22.1.4, jest-cli@^22.4.3:
+jest-cli@^22.1.4, jest-cli@^22.4.2:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-22.4.3.tgz#bf16c4a5fb7edc3fa5b9bb7819e34139e88a72c7"
   dependencies:
