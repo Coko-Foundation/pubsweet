@@ -79,7 +79,7 @@ api.get('/users', authBearer, async (req, res, next) => {
       }),
     )).filter(createFilterFromQuery(req.query))
 
-    res.status(STATUS.OK).json(usersWithSelectedFields)
+    res.status(STATUS.OK).json({ users: usersWithSelectedFields })
   } catch (err) {
     next(err)
   }
