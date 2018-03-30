@@ -31,17 +31,14 @@ function makeInvitationFailure(version, error) {
   }
 }
 
-export function makeInvitation(version) {
+export function makeInvitation(project, version) {
   return dispatch => {
     dispatch(makeInvitationRequest(version))
 
     return api
       .update('/make-invitation', {
         versionId: version.id,
-<<<<<<< HEAD
         projectId: project.id,
-=======
->>>>>>> feat(component): add make invitation request
         reviewers: version.reviewers,
       })
       .then(result => {
