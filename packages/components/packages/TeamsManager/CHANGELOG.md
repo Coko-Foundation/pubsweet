@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.0.8...pubsweet-component-teams-manager@1.1.0) (2018-03-30)
+
+
+### Features
+
+* **components:** remove react-bootstrap ([e66c933](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e66c933))
+
+
+
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.0.7...pubsweet-component-teams-manager@1.0.8) (2018-03-28)
 
