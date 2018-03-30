@@ -17,10 +17,10 @@ export default class TeamsManager extends React.Component {
 
     if (teams && collections && users) {
       return (
-        <div className="pubsweet-component pubsweet-component-scroll">
+        <div>
           {error ? <div>{error}</div> : null}
           <div>
-            <table className="table">
+            <table>
               <thead>
                 <tr>
                   <th>#</th>

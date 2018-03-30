@@ -18,7 +18,7 @@ export default class UsersManager extends React.Component {
       <div>
         {error ? <div>{error}</div> : null}
         <div>
-          <table className="table">
+          <table>
             <thead>
               <tr>
                 <th>id</th>
