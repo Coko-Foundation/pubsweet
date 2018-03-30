@@ -29,7 +29,7 @@ describe('users api', () => {
     it('can get a list of users', () =>
       api.users.authenticate
         .post(fixtures.user)
-        .then(token => api.users.get(null, token).expect(STATUS.OK))
+        .then(token => api.users.get({ token }).expect(STATUS.OK))
         .then(res => {
           expect(res.body.users).toHaveLength(2)
           expect(res.body.users[0].username).not.toBe(undefined)
@@ -38,7 +38,9 @@ describe('users api', () => {
     it('can get another user', () =>
       api.users.authenticate
         .post(fixtures.user)
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.username).toBe(otherUser.username)
         }))
@@ -61,7 +63,7 @@ describe('users api', () => {
 
   describe('unauthenticated user', () => {
     it('can not get a list of users', () =>
-      api.users.get().expect(STATUS.UNAUTHORIZED))
+      api.users.get({}).expect(STATUS.UNAUTHORIZED))
 
     it('cannot sign up as an admin directly', () => {
       const fakeAdmin = Object.assign({}, fixtures.otherUser, { admin: true })
@@ -135,7 +137,7 @@ describe('users api', () => {
     it('can not get a list of users', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(null, token).expect(STATUS.FORBIDDEN)))
+        .then(token => api.users.get({ token }).expect(STATUS.FORBIDDEN)))
 
     it('can not delete other users', () =>
       api.users.authenticate
@@ -145,12 +147,16 @@ describe('users api', () => {
     it('can not get other users', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(userId, token).expect(STATUS.FORBIDDEN)))
+        .then(token =>
+          api.users.get({ userId, token }).expect(STATUS.FORBIDDEN),
+        ))
 
     it('can get itself', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.id).toBe(otherUser.id)
           expect(res.body.username).toBe(fixtures.otherUser.username)
@@ -204,7 +210,9 @@ describe('users api', () => {
             .expect(STATUS.OK)
             .then(() => token),
         )
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.id).toBe(otherUser.id)
           expect(res.body.username).toBe(fixtures.updatedUser.username)

@@ -16,13 +16,13 @@ async function teamPermissions(user, operation, object, context) {
       const team = await context.models.Team.find(teamId)
 
       if (
-        team.teamType.permissions === 'POST' &&
+        team.teamType === 'teamContributors' &&
         team.object.id === collection.id &&
         operation === 'POST'
       ) {
         return true
       } else if (
-        team.teamType.permissions === 'PATCH' &&
+        team.teamType === 'teamCoauthors' &&
         team.object.id === object.id &&
         operation === 'PATCH'
       ) {
