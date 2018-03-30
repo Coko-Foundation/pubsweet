@@ -29,7 +29,6 @@ export default compose(
     // populate the reviewer user
     // TODO: remove these, as they'll get saved back to the server
     reviewers.forEach(reviewer => {
-      console.log(reviewer, "reviewer")
       const projectReviewer = find(project.reviewers, {
         id: reviewer.reviewer,
       })
