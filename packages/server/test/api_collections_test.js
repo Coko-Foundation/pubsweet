@@ -731,10 +731,7 @@ describe('Collections API', () => {
 
       const teamData = {
         name: 'bar',
-        teamType: {
-          name: 'Test',
-          permissions: 'read',
-        },
+        teamType: 'testType',
         object: {
           type: 'collection',
           id: collection.id,
@@ -755,10 +752,7 @@ describe('Collections API', () => {
 
       const otherTeamData = {
         name: 'foo',
-        teamType: {
-          name: 'Foo',
-          permissions: 'read',
-        },
+        teamType: 'fooType',
         object: {
           type: 'collection',
           id: otherCollection.id,
@@ -787,9 +781,6 @@ describe('Collections API', () => {
         .retrieve(collection.id, adminToken)
         .expect(STATUS.NOT_FOUND)
 
-      // await api.collections.listTeams(collection.id, adminToken)
-      //   .expect(STATUS.NOT_FOUND)
-
       const teamsAfterDeletion = await api.teams
         .list(adminToken)
         .expect(STATUS.OK)
@@ -810,10 +801,7 @@ describe('Collections API', () => {
 
       const teamData = {
         name: 'bar',
-        teamType: {
-          name: 'Test',
-          permissions: 'read',
-        },
+        teamType: 'testType',
         object: {
           type: 'fragment',
           id: fragment.id,
@@ -834,10 +822,7 @@ describe('Collections API', () => {
 
       const otherTeamData = {
         name: 'foo',
-        teamType: {
-          name: 'Foo',
-          permissions: 'read',
-        },
+        teamType: 'fooType',
         object: {
           type: 'fragment',
           id: otherFragment.id,
