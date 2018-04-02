@@ -6,21 +6,79 @@ const config = require('config')
 const rp = require('request-promise-native')
 const temp = require('temp')
 const Pusher = require('pusher-js')
+const Joi = require('joi')
 
 // rp.debug = true
-
 const inkConfig = config.get('pubsweet-component-ink-backend')
+const cokoGitlabPage = 'https://gitlab.coko.foundation'
+const inkPath =
+  '/pubsweet/pubsweet/tree/master/packages/components/packages/Ink-server'
+
+const baseInkConfigErrorMessage = `${'Bad ink config in ' +
+  'config.pubsweet-component-ink-backend. More info on how to set ink ' +
+  'config at '}${cokoGitlabPage}${inkPath}. Full error message log: `
+
+function checkInkConfig(inkConfig) {
+  /**
+   * Sanity checks on inkConfig
+   *
+   * @param {object} inkConfig - pubsweet-component-ink-backend config
+   *
+   * @typedef {object} inkConfigReturn
+   * @property {boolean} correct - ink config is correct or not
+   * @property {string} errorMessage - error message to be printed
+   *
+   * @returns {inkConfigReturn}
+   *
+   * More at
+   * https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/packages/Ink-server
+   */
+  const inkSchema = {
+    inkEndpoint: Joi.string().required(),
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+    recipes: Joi.object()
+      .required()
+      .min(1),
+    pusher: Joi.object()
+      .keys({
+        appKey: Joi.string().required(),
+        wsHost: Joi.string().required(),
+        wsPort: Joi.number().required(),
+        httpHost: Joi.string(),
+        httpPort: Joi.number(),
+      })
+      .required(),
+    maxRetries: Joi.number(),
+  }
+  const { error } = Joi.validate(inkConfig, inkSchema)
+  if (error === null) return { correct: true, errorMessage: '' }
+
+  // error here
+  logger.warn(baseInkConfigErrorMessage + error)
+  return {
+    correct: false,
+    errorMessage: baseInkConfigErrorMessage + error,
+  }
+}
+
+const {
+  correct: correctInkConfig,
+  errorMessage: inkConfigErrorMessage,
+} = checkInkConfig(inkConfig)
 
 // Generate the absolute URL
 const inkUrl = path => `${inkConfig.inkEndpoint}api/${path}`
 
 // Connect to the INK Pusher/Slanger endpoint
 const connectToPusher = ({ appKey, ...options }) => new Pusher(appKey, options)
-
-const pusher = connectToPusher(inkConfig.pusher)
+let pusher
+if (correctInkConfig) {
+  pusher = connectToPusher(inkConfig.pusher)
+}
 
 // Sign in
-const authorize = () =>
+const authorize = async () =>
   rp({
     method: 'POST',
     uri: inkUrl('auth/sign_in'),
@@ -38,7 +96,7 @@ const authorize = () =>
   }))
 
 // Upload file to INK and execute the recipe
-const upload = (recipeId, inputFile, auth) =>
+const upload = async (recipeId, inputFile, auth) =>
   rp({
     method: 'POST',
     uri: inkUrl(`recipes/${recipeId}/execute`),
@@ -54,7 +112,7 @@ const upload = (recipeId, inputFile, auth) =>
   })
 
 // Download the output file
-const download = (chainId, auth, outputFileName) =>
+const download = async (chainId, auth, outputFileName) =>
   rp({
     uri: inkUrl(`process_chains/${chainId}/download_output_file`),
     qs: {
@@ -67,7 +125,7 @@ const download = (chainId, auth, outputFileName) =>
   })
 
 // Find the ID of a recipe by name
-const findRecipeId = (name = 'Editoria Typescript', auth) =>
+const findRecipeId = async (name = 'Editoria Typescript', auth) =>
   rp({
     method: 'GET',
     uri: inkUrl('recipes'),
@@ -167,6 +225,10 @@ const process = async (inputFile, options) => {
 const InkBackend = app => {
   // TODO: authentication on this route
   app.use('/api/ink', (req, res, next) => {
+    if (!correctInkConfig) {
+      next(new Error(inkConfigErrorMessage))
+      return
+    }
     const fileStream = new Busboy({ headers: req.headers })
 
     fileStream.on(
