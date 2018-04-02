@@ -12,9 +12,9 @@ const Header = styled.div`
 `
 
 const Body = styled.div`
-  align-items: flex-end;
+  align-items: space-between;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: ${th('gridUnit')};
   padding-left: 1.5em;
 `

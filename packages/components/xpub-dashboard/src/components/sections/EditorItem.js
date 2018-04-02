@@ -1,9 +1,9 @@
 import React from 'react'
 
+import styled from 'styled-components'
 import { Item, Header, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 import { Roles, Role } from '../molecules/Roles'
-import styled from 'styled-components'
 
 import Status from '../Status'
 import Meta from '../metadata/Meta'
@@ -17,7 +17,8 @@ import Reviews from '../Reviews'
 import VersionTitle from './VersionTitle'
 
 const VersionTitleLink = styled(ProjectLink)`
-  flex: 1;
+  text-decoration: none;
+  color: #333;
 `
 const EditorItemLinks = ({ project, version }) => (
   <Links>
@@ -75,7 +76,7 @@ const EditorItem = ({ AssignEditor, project, version, addUserToTeam }) => (
         project={project}
         version={version}
       >
-        <VersionTitle version={version} />
+        <VersionTitle linkUrl="true" version={version} />
       </VersionTitleLink>
       <EditorItemLinks project={project} version={version} />
     </Body>

@@ -7,8 +7,11 @@ const Root = styled.div`
   flex: 1;
   font-size: ${th('fontSizeHeading3')};
 `
+const RootLink = styled.span`
+  font-size: ${th('fontSizeHeading3')};
+`
 
-export default ({ version, className }) => {
+export default ({ version, className, linkUrl }) => {
   // <TitleViewer
   //     value={version && version.metadata && version.metadata.title || 'Untitled'}
   //     className={className}/>
@@ -18,5 +21,5 @@ export default ({ version, className }) => {
       ? version.metadata.title
       : 'Untitled'
 
-  return <Root>{title}</Root>
+  return linkUrl ? <RootLink>{title}</RootLink> : <Root>{title}</Root>
 }
