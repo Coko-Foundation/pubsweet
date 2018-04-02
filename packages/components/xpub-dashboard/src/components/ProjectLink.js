@@ -24,7 +24,9 @@ const projectUrl = ({ project, version, page, id }) => {
 }
 
 const ProjectLink = props => (
-  <Link to={projectUrl(props)}>{props.children}</Link>
+  <Link className={props.className} to={projectUrl(props)}>
+    {props.children}
+  </Link>
 )
 
 export default ProjectLink
