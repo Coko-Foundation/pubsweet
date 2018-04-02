@@ -14,6 +14,10 @@ jest.mock('pubsweet-server/src/models/Fragment', () => ({
   find: jest.fn(() => ({
     version: 1,
     owners: [{}],
+    metadata: {
+      title: 'title',
+      abstract: 'abstract',
+    },
     updateProperties(update) {
       Object.assign(this, update)
     },
@@ -22,7 +26,12 @@ jest.mock('pubsweet-server/src/models/Fragment', () => ({
 }))
 jest.mock('pubsweet-server/src/models/Collection', () => ({
   find: jest.fn(() => ({
-    updateProperties: () => {},
+    updateProperties: () => ({}),
+    reviewers: [
+      {
+        user: 1,
+      },
+    ],
     save: () => {},
   })),
 }))
@@ -71,6 +80,59 @@ describe('/api/make-decision route', () => {
       decision: { recommendation: 'accept', note: { content: 'blah blah' } },
       versionId: 1,
       projectId: 2,
+    })
+    expect(response.status).toBe(403)
+    expect(transport.sendMail).not.toHaveBeenCalled()
+  })
+})
+
+describe('/api/make-invitation route', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+  it('sends invitation email', async () => {
+    authsome.can.mockReturnValue(true)
+    const app = makeApp()
+    const response = await app.patch('/api/make-invitation').send({
+      versionId: '1',
+      projectId: '2',
+      reviewers: [
+        {
+          events: {
+            invited: 'Mon Apr 02 2018 14:58:06 GMT+0300 (EEST)',
+          },
+          email: 'author@example.org',
+          status: 'invited',
+        },
+      ],
+    })
+    expect(response.body.version.reviewers).toBeDefined()
+    expect(transport.sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        from: 'sender@example.com',
+        to: 'author@example.org',
+        subject: 'Review Invitation',
+        html:
+          "<p>title</p><p>abstract</p><p>Click <a href='http://example.com'>here</a> to navigate to the Dashboard</p>",
+      }),
+    )
+  })
+
+  it('rejects if not authorised', async () => {
+    authsome.can.mockReturnValue(false)
+    const app = makeApp()
+    const response = await app.patch('/api/make-invitation').send({
+      versionId: '1',
+      projectId: '2',
+      reviewers: [
+        {
+          events: {
+            invited: 'Mon Apr 02 2018 14:58:06 GMT+0300 (EEST)',
+          },
+          email: 'author@example.org',
+          status: 'invited',
+        },
+      ],
     })
     expect(response.status).toBe(403)
     expect(transport.sendMail).not.toHaveBeenCalled()
