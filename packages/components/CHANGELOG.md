@@ -3,7 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="4.3.0"></a>
+  <a name="5.0.0"></a>
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.3.0...pubsweet-components@5.0.0) (2018-03-30)
+
+
+### Features
+
+* **components:** remove react-bootstrap ([e66c933](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e66c933))
+* **users-manager:** add support for removing members ([bb06148](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb06148))
+* **users-manager:** add way to add global teams ([9bbccab](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bbccab))
+
+
+### BREAKING CHANGES
+
+* **users-manager:** Depends on a validation change for teamType -> string, and additionally, a validation change where team's objects are no longer required.
+
+
+
+
+  <a name="4.3.0"></a>
 # [4.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.1...pubsweet-components@4.3.0) (2018-03-28)
 
 
@@ -14,7 +32,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="4.2.1"></a>
+<a name="4.2.1"></a>
 ## [4.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.0...pubsweet-components@4.2.1) (2018-03-28)
 
 

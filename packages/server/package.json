@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "2.0.5",
+  "version": "3.0.0",
   "scripts": {
     "test": "jest",
     "vuln-test": "nsp check"
@@ -61,7 +61,9 @@
     "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*_test.js$",
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.js"],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }
