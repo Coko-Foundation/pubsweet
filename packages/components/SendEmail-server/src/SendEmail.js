@@ -1,7 +1,18 @@
+const logger = require('@pubsweet/logger')
 const nodemailer = require('nodemailer')
 const config = require('config')
 
-const mailerConfig = require(config.mailer.path)
+let mailerConfig = {}
+try {
+  mailerConfig = require(config.mailer.path)
+} catch (err) {
+  logger.error(
+    'Mailer: The configuration is either invalid or missing. Check here: ' +
+      'https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/packages/SendEmail-server',
+  )
+  throw err
+}
+
 module.exports = {
   send: mailData => {
     const transporter = nodemailer.createTransport(mailerConfig.transport)

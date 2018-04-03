@@ -1,12 +1,12 @@
 const { pick } = require('lodash')
 const config = require('config')
 const logger = require('@pubsweet/logger')
+const emailer = require('@pubsweet/component-send-email')
 const User = require('pubsweet-server/src/models/User')
 const Fragment = require('pubsweet-server/src/models/Fragment')
 const Collection = require('pubsweet-server/src/models/Collection')
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
-const transport = require('./transport')
 
 module.exports = app => {
   app.patch('/api/make-decision', async (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports = app => {
 
       const authorEmails = authors.map(user => user.email)
       logger.info(`Sending decision email to ${authorEmails}`)
-      await transport.sendMail({
+      await emailer.sendMail({
         from: config.get('mailer.from'),
         to: authorEmails,
         subject: 'Decision made',

@@ -14,7 +14,7 @@ import {
 import { Section, Legend } from '../styles'
 
 const minSize1 = minSize(1)
-const minChars20 = minChars(20)
+const minChars10 = minChars(10)
 const minChars100 = minChars(100)
 const maxChars500 = maxChars(500)
 const maxChars5000 = maxChars(5000)
@@ -55,7 +55,7 @@ const MetadataFields = ({ journal, readonly }) => (
         name="title"
         readonly={readonly}
         required
-        validate={[minChars20, maxChars500]}
+        validate={[minChars10, maxChars500]}
       />
     </Section>
 
