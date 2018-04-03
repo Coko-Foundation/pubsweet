@@ -1,8 +1,7 @@
 {
   "name": "pubsweet-component-ink-frontend",
-  "version": "1.0.1",
-  "description":
-    "A frontend component that talks to the INK backend component (which talks to INK for file processing and conversion)",
+  "version": "1.0.2",
+  "description": "A frontend component that talks to the INK backend component (which talks to INK for file processing and conversion)",
   "main": "index.js",
   "repository": {
     "type": "git",

@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="3.0.0"></a>
+  <a name="4.0.0"></a>
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@3.0.0...pubsweet-server@4.0.0) (2018-04-03)
+
+
+### Features
+
+* **server:** remove user.teams pre-filling ([055eafe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/055eafe))
+
+
+### BREAKING CHANGES
+
+* **server:** User.teams no longer returns an array of objects, but instead returns an array of
+ids, as it's stored in the database.
+
+
+
+
+  <a name="3.0.0"></a>
 # [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@2.0.5...pubsweet-server@3.0.0) (2018-03-30)
 
 
@@ -27,7 +44,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.0.5"></a>
+<a name="2.0.5"></a>
 ## [2.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@2.0.4...pubsweet-server@2.0.5) (2018-03-28)
 
 
