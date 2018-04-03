@@ -25,7 +25,7 @@ Different statuses have different colours:
   />
 
   <YesOrNo
-    warning
+    error
     name="yesornocoloured"
     onChange={value => console.log(value)}
   />

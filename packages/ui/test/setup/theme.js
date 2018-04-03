@@ -11,7 +11,6 @@ const theme = {
   colorBackgroundHue: 'grey',
   colorSuccess: 'green',
   colorError: 'red',
-  colorWarning: 'yellow',
   colorText: 'black',
   colorTextReverse: 'white',
   colorTextPlaceholder: 'grey',

@@ -44,7 +44,6 @@ const Validot = styled.div.attrs({
 
   --color-circle: var(${props => {
     if (props.valid) return '--color-primary'
-    if (props.warning) return '--color-warning'
     if (props.error) return '--color-error'
     return '--color-furniture'
   }});

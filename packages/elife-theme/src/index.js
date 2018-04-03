@@ -12,7 +12,6 @@ export default {
     '#f5f5f5' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
   colorSuccess: '#629f43',
   colorError: '#b50000',
-  colorWarning: '#cf0c4e',
   colorText: '#212121',
   colorTextReverse: '#fff',
   colorTextPlaceholder: '#bdbdbd',

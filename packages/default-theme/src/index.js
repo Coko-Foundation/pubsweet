@@ -10,11 +10,9 @@ export default {
   colorSecondary: '#e7e7e7',
   colorFurniture: '#ccc',
   colorBorder: '#aaa',
-  colorBackgroundHue:
-    '#f1f1f1' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
+  colorBackgroundHue: '#f1f1f1',
   colorSuccess: '#050',
   colorError: '#b50000',
-  colorWarning: '#ffcc00',
   colorText: '#333',
   colorTextReverse: '#fff',
   colorTextPlaceholder: '#595959',
@@ -48,9 +46,9 @@ export default {
 
   /* Transition */
   transitionDuration: '1s',
-  transitionDurationM: '0.5s',
-  transitionDurationS: '0.2s',
-  transitionDurationXs: '0.1s',
+  // transitionDurationM: '0.5s',
+  // transitionDurationS: '0.2s',
+  // transitionDurationXs: '0.1s',
   transitionTimingFunction: 'ease',
   transitionDelay: '500ms',
 }

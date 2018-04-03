@@ -18,7 +18,6 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
   ({
     error: theme.colorError,
     success: theme.colorSuccess,
-    warning: theme.colorWarning,
     default: theme.colorBorder,
   }[validationStatus])
 

@@ -23,10 +23,6 @@ const ErrorMessage = Message.extend`
   color: ${th('colorError')};
 `
 
-const WarningMessage = Message.extend`
-  color: ${th('colorWarning')};
-`
-
 const ValidatedFieldComponent = ({ component: Component }) => ({
   meta,
   input,
@@ -34,7 +30,6 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
   let validationStatus
   if (meta.touched) validationStatus = 'success'
   if (meta.touched && meta.error) validationStatus = 'error'
-  if (meta.touched && meta.warning) validationStatus = 'warning'
 
   return (
     <div>
@@ -44,8 +39,6 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
       <MessageWrapper role="alert">
         {meta.touched &&
           meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
-        {meta.touched &&
-          meta.warning && <WarningMessage>{meta.warning}</WarningMessage>}
       </MessageWrapper>
     </div>
   )
