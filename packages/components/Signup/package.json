@@ -1,0 +1,25 @@
+{
+  "name": "pubsweet-component-signup",
+  "version": "1.0.10",
+  "description": "Basic signup form component for PubSweet",
+  "main": "index.js",
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "@pubsweet/ui": "^3.3.2",
+    "prop-types": "^15.5.10",
+    "react-bootstrap": "^0.32.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2"
+  },
+  "peerDependencies": {
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "Signup"
+  }
+}

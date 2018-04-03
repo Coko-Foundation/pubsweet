@@ -3,7 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="4.2.0"></a>
+      <a name="5.1.0"></a>
+# [5.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.0.0...pubsweet-components@5.1.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* **components:** check configuration missing ([98e96ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98e96ec))
+* **components:** fix rebase conflicts ([987858d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/987858d))
+* **components:** fix test backend ([1e647f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1e647f7))
+* **components:** make use of email component ([084be2f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/084be2f))
+* **components:** submit change validation minSize ([6efbcf0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6efbcf0))
+
+
+### Features
+
+* **ink-backend:** allow the app to run even if ink config is missing ([467b1de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/467b1de)), closes [#351](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/351)
+* **ink-backend:** improve error messages for missing config ([ccd6326](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ccd6326)), closes [#351](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/351)
+
+
+
+
+      <a name="5.0.0"></a>
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.3.0...pubsweet-components@5.0.0) (2018-03-30)
+
+
+### Features
+
+* **components:** remove react-bootstrap ([e66c933](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e66c933))
+* **users-manager:** add support for removing members ([bb06148](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb06148))
+* **users-manager:** add way to add global teams ([9bbccab](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bbccab))
+
+
+### BREAKING CHANGES
+
+* **users-manager:** Depends on a validation change for teamType -> string, and additionally, a validation change where team's objects are no longer required.
+
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.1...pubsweet-components@4.3.0) (2018-03-28)
+
+
+### Features
+
+* **client:** add Apollo Client ([2fe9d93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2fe9d93))
+
+
+
+
+<a name="4.2.1"></a>
+## [4.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.0...pubsweet-components@4.2.1) (2018-03-28)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="4.2.0"></a>
 # [4.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.1.0...pubsweet-components@4.2.0) (2018-03-27)
 
 
@@ -24,7 +82,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="4.1.0"></a>
+<a name="4.1.0"></a>
 # [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.0.0...pubsweet-components@4.1.0) (2018-03-19)
 
 

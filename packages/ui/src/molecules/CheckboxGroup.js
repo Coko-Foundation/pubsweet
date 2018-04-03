@@ -1,19 +1,10 @@
 import React from 'react'
-import { clone } from 'lodash'
 
 import { Checkbox, Flexbox } from '../atoms'
 
 class CheckboxGroup extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      values: props.value ? clone(props.value) : [],
-    }
-  }
-
   handleChange = event => {
-    const values = [...this.state.values]
+    const values = this.props.value ? Array.from(this.props.value) : []
 
     const { value } = event.target
 
@@ -23,20 +14,17 @@ class CheckboxGroup extends React.Component {
       values.splice(values.indexOf(value), 1)
     }
 
-    this.setState({ values })
-
     this.props.onChange(values)
   }
 
   render() {
-    const { inline, name, options, required } = this.props
-    const { values } = this.state
+    const { value, inline, name, options, required } = this.props
 
     return (
       <Flexbox column={!inline}>
         {options.map(option => (
           <Checkbox
-            checked={values.includes(option.value)}
+            checked={Array.isArray(value) && value.includes(option.value)}
             inline={inline}
             key={option.value}
             label={option.label}

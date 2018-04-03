@@ -30,6 +30,7 @@ const validations = {
         Joi.object({ type: Joi.string().valid('fragment') }).unknown(true),
       ),
     ),
+    created: Joi.date(),
   },
   user: {
     id: Joi.string()
@@ -56,8 +57,8 @@ const validations = {
       .required(),
     type: Joi.string().required(),
     name: Joi.string().required(),
-    object: Joi.object().required(),
-    teamType: Joi.object().required(),
+    object: Joi.object(),
+    teamType: Joi.string().required(),
     members: Joi.array().items(Joi.string().guid()),
   },
 }

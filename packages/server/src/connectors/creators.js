@@ -33,10 +33,10 @@ function createCreator(entityName, EntityModel) {
     const input = JSON.parse(inputString)
     const entity = new EntityModel(input)
     entity.setOwners([ctx.user])
-    const outputFilter = await canKnowAbout(ctx.user, entity)
     await can(ctx.user, 'create', entity)
-
-    return outputFilter(await entity.save())
+    const output = await entity.save()
+    const outputFilter = await canKnowAbout(ctx.user, output)
+    return outputFilter(output)
   }
 }
 

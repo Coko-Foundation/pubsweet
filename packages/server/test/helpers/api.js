@@ -126,7 +126,8 @@ const users = {
 
     return token ? req.set('Authorization', `Bearer ${token}`) : req
   },
-  get: (userId, token) => {
+  get: (opts = {}) => {
+    const { token, userId } = opts
     const url = `/api/users${userId ? `/${userId}` : ''}`
 
     const req = request.get(url)
