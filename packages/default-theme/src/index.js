@@ -42,7 +42,7 @@ export default {
   borderStyle: 'solid',
 
   /* Shadow (for tooltip) */
-  boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
+  // boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
 
   /* Transition */
   transitionDuration: '.2s',
