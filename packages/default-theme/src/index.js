@@ -45,10 +45,7 @@ export default {
   boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
 
   /* Transition */
-  transitionDuration: '1s',
-  // transitionDurationM: '0.5s',
-  // transitionDurationS: '0.2s',
-  // transitionDurationXs: '0.1s',
+  transitionDuration: '.2s',
   transitionTimingFunction: 'ease',
-  transitionDelay: '500ms',
+  transitionDelay: '0',
 }

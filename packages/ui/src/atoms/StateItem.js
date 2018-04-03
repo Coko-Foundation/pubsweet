@@ -24,8 +24,7 @@ const Root = styled.span`
 
   &:hover {
     color: ${th('colorText')};
-    transition: ${th('transitionDurationUnit')}
-      ${th('transitionTimingFunction')};
+    transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
   }
 
   ${props => props.disabled && disabled};
