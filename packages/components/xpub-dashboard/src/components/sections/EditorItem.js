@@ -12,6 +12,7 @@ import MetadataType from '../metadata/MetadataType'
 import MetadataReviewType from '../metadata/MetadataReviewType'
 import MetadataSubmittedDate from '../metadata/MetadataSubmittedDate'
 import MetadataOwners from '../metadata/MetadataOwners'
+import MetadataStreamLined from '../metadata/MetadataStreamLined'
 import ProjectLink from '../ProjectLink'
 import Reviews from '../Reviews'
 import VersionTitle from './VersionTitle'
@@ -53,11 +54,13 @@ const EditorItem = ({ AssignEditor, project, version, addUserToTeam }) => (
   <Item>
     <Header>
       <Status status={project.status} />
-
       <Meta>
         <MetadataOwners owners={project.owners} />
         <Divider separator="–" />
         <MetadataSubmittedDate submitted={version.submitted} />
+        <MetadataStreamLined
+          streamlinedReview={version.declarations.streamlinedReview}
+        />
         <Divider separator="–" />
         <MetadataType type={version.metadata.articleType} />
         <Divider separator="–" />
