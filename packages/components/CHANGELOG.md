@@ -3,7 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="5.0.0"></a>
+      <a name="5.1.0"></a>
+# [5.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.0.0...pubsweet-components@5.1.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* **components:** check configuration missing ([98e96ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98e96ec))
+* **components:** fix rebase conflicts ([987858d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/987858d))
+* **components:** fix test backend ([1e647f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1e647f7))
+* **components:** make use of email component ([084be2f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/084be2f))
+* **components:** submit change validation minSize ([6efbcf0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6efbcf0))
+
+
+### Features
+
+* **ink-backend:** allow the app to run even if ink config is missing ([467b1de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/467b1de)), closes [#351](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/351)
+* **ink-backend:** improve error messages for missing config ([ccd6326](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ccd6326)), closes [#351](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/351)
+
+
+
+
+      <a name="5.0.0"></a>
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.3.0...pubsweet-components@5.0.0) (2018-03-30)
 
 
@@ -21,7 +42,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="4.3.0"></a>
+<a name="4.3.0"></a>
 # [4.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.2.1...pubsweet-components@4.3.0) (2018-03-28)
 
 

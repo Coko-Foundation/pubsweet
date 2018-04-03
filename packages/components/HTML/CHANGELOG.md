@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.7"></a>
+## [0.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-html@0.2.6...pubsweet-component-html@0.2.7) (2018-04-03)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-html
+
 <a name="0.2.6"></a>
 ## [0.2.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-html@0.2.5...pubsweet-component-html@0.2.6) (2018-03-05)
 

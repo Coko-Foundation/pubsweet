@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "files": [
     "src",
     "dist"
@@ -10,8 +10,8 @@
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
     "wax-editor-react": "^0.1.10",
-    "xpub-connect": "^0.0.8",
-    "xpub-selectors": "^0.0.4"
+    "xpub-connect": "^0.0.9",
+    "xpub-selectors": "^0.0.5"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
@@ -42,7 +42,7 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.8"
+    "xpub-styleguide": "^0.0.9"
   },
   "scripts": {
     "styleguide": "styleguidist server",
