@@ -57,7 +57,7 @@
     ],
     "projects": ["packages/*"]
   },
-  "workspaces": ["packages/*", "packages/components/packages/*"],
+  "workspaces": ["packages/*", "packages/components/*"],
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
