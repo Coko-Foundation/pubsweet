@@ -1,28 +1,14 @@
 import React from 'react'
-import HtmlEditor from '../HtmlEditor'
-import * as options from './config'
 
-const EpistemeEditor = ({
-  className,
-  value,
-  placeholder,
-  placeholderClassName,
-  title,
-  onBlur,
-  onChange,
-  readonly,
-}) => (
-  <HtmlEditor
-    className={className}
-    onBlur={onBlur}
-    onChange={onChange}
-    options={options}
-    placeholder={placeholder}
-    placeholderClassName={placeholderClassName}
-    readonly={readonly}
-    title={title}
-    value={value}
-  />
+import Editor from '@atlaskit/editor-core/dist/es5/editor'
+
+const EpistemeEditor = () => (
+  <div>
+    <p>
+      The most basic editor possible. Editor you get by rendering {'<Editor/>'}{' '}
+      component with no props.
+    </p>
+    <Editor appearance="message" />
+  </div>
 )
-
 export default EpistemeEditor

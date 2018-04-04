@@ -1,12 +1,11 @@
 {
   "name": "xpub-edit",
   "version": "0.0.9",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src"],
   "main": "src",
   "dependencies": {
+    "@atlaskit/editor-core": "^67.0.4",
+    "@atlaskit/media-core": "^15.3.0",
     "@pubsweet/ui": "^3.3.2",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",
@@ -16,7 +15,8 @@
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-model": "^1.0.0",
     "prosemirror-state": "^1.0.1",
-    "prosemirror-view": "^1.0.0"
+    "prosemirror-view": "^1.0.0",
+    "rxjs": "^5.5.8"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
