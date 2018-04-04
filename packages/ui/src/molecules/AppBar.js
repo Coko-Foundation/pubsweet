@@ -1,112 +1,109 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-import Icon from '../atoms/Icon'
+import th from '../helpers/themeHelper'
+import { Icon, Link } from '../atoms'
+import PlainButton from './PlainButton'
 
+// #region styled-components
 const Root = styled.nav`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin: 1rem;
-
-  a {
-    color: var(--color-primary);
-    text-decoration: none;
-
-    &::before {
-      color: #aaa;
-      display: inline-block;
-      height: 1em;
-      margin-right: 0.3em;
-      text-align: center;
-
-      &:hover {
-        color: var(--color-primary);
-      }
-    }
-  }
+  min-height: calc(${th('gridUnit')} * 2);
 `
 
 const Section = styled.div`
   display: flex;
 `
 
-const NavLinks = styled.div`
-  align-items: center;
-  display: flex;
-  margin: 0 1rem;
-
-  a {
-    padding: 0 1rem;
-
-    &:global(.active) {
-      font-weight: bold;
-    }
-  }
+const Logo = styled.span`
+  margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
+    1rem;
 `
 
-const Logo = styled(Link)`
-  font-weight: bold;
-  text-decoration: none;
-
-  &::before {
-    content: '';
-  }
-`
-
-const itemStyle = `
-  align-items: center;
-  display: inline-flex;
-  padding: 0 1rem;
-
-  svg {
-    margin-right: 0.3rem;
+const LogoLink = Link.extend`
+  & > * {
+    height: calc(${th('gridUnit')} * 2);
   }
 `
 
 const Item = styled.span`
-  ${itemStyle};
+  align-items: center;
+  display: inline-flex;
+  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
 `
-const ActionItem = Item.withComponent('a')
-const LinkItem = styled(Link)`
-  ${itemStyle};
-`
+// #endregion
 
 const AppBar = ({
   brandLink = '/',
   brand,
   loginLink = '/login',
   onLogoutClick,
-  navLinks,
+  navLinkComponents,
   user,
-  className,
+  rightComponent: RightComponent = DefaultRightComponent,
 }) => (
   <Root>
     <Section>
-      {brand && <Logo to={brandLink}>{brand}</Logo>}
-
-      {navLinks && <NavLinks>{navLinks}</NavLinks>}
-    </Section>
-
-    <Section>
-      {user && (
-        <Item>
-          <Icon size={16}>user</Icon>
-          {user.username}
-          {user.admin ? ' (admin)' : ''}
-        </Item>
+      {brand && (
+        <Logo>
+          <LogoLink to={brandLink}>{brand}</LogoLink>
+        </Logo>
       )}
 
-      {user && (
-        <ActionItem href="#" onClick={onLogoutClick}>
-          <Icon size={16}>power</Icon>
-          Logout
-        </ActionItem>
-      )}
-
-      {!user && <LinkItem to={loginLink}>Login</LinkItem>}
+      {navLinkComponents &&
+        navLinkComponents.map((NavLinkComponent, idx) => (
+          <span key={NavLinkComponent.props.to}>
+            <Item>{NavLinkComponent}</Item>
+            {idx < navLinkComponents.length - 1 && <Item>|</Item>}
+          </span>
+        ))}
     </Section>
+    <RightComponent
+      loginLink={loginLink}
+      onLogoutClick={onLogoutClick}
+      user={user}
+    />
   </Root>
 )
+
+const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
+  <Section>
+    {user && (
+      <Item>
+        <Icon size={2}>user</Icon>
+        {user.username}
+        {user.admin ? ' (admin)' : ''}
+      </Item>
+    )}
+
+    {user && (
+      <Item>
+        <PlainButton onClick={onLogoutClick}>
+          <Icon size={2}>power</Icon>
+          Logout
+        </PlainButton>
+      </Item>
+    )}
+
+    {!user && (
+      <Item>
+        <Link to={loginLink}>Login</Link>
+      </Item>
+    )}
+  </Section>
+)
+
+AppBar.propTypes = {
+  brandLink: PropTypes.string,
+  brand: PropTypes.node,
+  loginLink: PropTypes.string,
+  onLogoutClick: PropTypes.func,
+  user: PropTypes.object,
+  navLinkComponents: PropTypes.arrayOf(PropTypes.element),
+  rightComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+}
 
 export default AppBar

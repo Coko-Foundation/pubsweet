@@ -2,7 +2,7 @@ const authsome = require('../helpers/authsome')
 const AuthorizationError = require('../errors/AuthorizationError')
 const NotFoundError = require('../errors/NotFoundError')
 
-// check permissions or throw authroization error
+// check permissions or throw authorization error
 async function can(userId, verb, entity) {
   const permission = await authsome.can(userId, verb, entity)
   if (!permission) {
@@ -28,13 +28,15 @@ async function canKnowAbout(userId, entity) {
 
 // create a function which creates a new entity and performs authorization checks
 function createCreator(entityName, EntityModel) {
-  return async (input, ctx) => {
+  return async (inputString, ctx) => {
     await can(ctx.user, 'create', entityName)
+    const input = JSON.parse(inputString)
     const entity = new EntityModel(input)
-    const outputFilter = await canKnowAbout(ctx.user, entity)
+    entity.setOwners([ctx.user])
     await can(ctx.user, 'create', entity)
-
-    return outputFilter(await entity.save())
+    const output = await entity.save()
+    const outputFilter = await canKnowAbout(ctx.user, output)
+    return outputFilter(output)
   }
 }
 
@@ -52,11 +54,12 @@ function deleteCreator(entityName, EntityModel) {
 
 // create a function which updates a new entity and performs authorization checks
 function updateCreator(entityName, EntityModel) {
-  return async (id, input, ctx) => {
+  return async (id, inputString, ctx) => {
     await can(ctx.user, 'update', entityName)
     const entity = await EntityModel.find(id)
     const outputFilter = await canKnowAbout(ctx.user, entity)
     const inputFilter = await can(ctx.user, 'update', entity)
+    const input = JSON.parse(inputString)
     await entity.updateProperties(inputFilter(input))
 
     return outputFilter(await entity.save())
@@ -102,7 +105,8 @@ function fetchOneCreator(entityName, EntityModel) {
 // create a function which fetches a number of entities by ID
 // and delegates authorization checks
 function fetchSomeCreator(fetchOne) {
-  return (ids, ctx) => Promise.all(ids.map(id => fetchOne(id, ctx)))
+  return (ids, ctx) =>
+    ids ? Promise.all(ids.map(id => fetchOne(id, ctx))) : []
 }
 
 // create a connector object with fetchers for all, one and some

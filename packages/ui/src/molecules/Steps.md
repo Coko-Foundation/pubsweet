@@ -2,14 +2,6 @@
 
 `Steps` is a navigation bar that guides users through the steps of a task. Use it whenever there is a sequence of tasks or steps that need to be done. By default the `Steps` modules has a `Step` and `Separator` default components, but custom components with different styles can be used as shown in the examples below.
 
-## Props
-
-|      Prop       |                            Description                            | Required | Default |      Type       |
-| :-------------: | :---------------------------------------------------------------: | :------: | :-----: | :-------------: |
-|   currentStep   |                  The current step of the wizard.                  |   true   |  null   |     number      |
-| renderSeparator | Separator component to be rendered between two adjacent children. |  false   |  null   | React component |
-|     margin      |                   Margit of the root container.                   |  false   | "20px"  |     string      |
-
 ## Examples
 
 * Usage with the Step component.
@@ -46,6 +38,7 @@ initialState = { currentStep: 0 }
 * Usage with a custom step component
 
 ```js
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
   return <div>
     {customProp} / {index}
@@ -65,12 +58,14 @@ Each child of the Steps component has access to the `currentStep` and also it's 
   When the default separator is not what you want you can always pass a custom separator component. This custom separator will be placed between each two adjacent children.
 
 ```js
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
   return <div>
     {customProp} / {index}
   </div>
 }
 
+<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const Separator = () => {
   return <div style={{
     alignItems: 'center',

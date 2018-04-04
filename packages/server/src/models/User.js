@@ -14,19 +14,34 @@ class User extends Model {
     this.type = 'user'
     this.email = properties.email
     this.username = properties.username
+    this.collections = this.collections || []
+    this.fragments = this.fragments || []
+    this.teams = this.teams || []
   }
 
   toJSON() {
     return omit(this, ['passwordHash'])
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setOwners() {
+    // FIXME: this is overriden to be a no-op, because setOwners() is called by
+    // the API on create for all entity types and setting `owners` on a User is
+    // not allowed. This should instead be solved by having separate code paths
+    // in the API for different entity types.
+  }
+
   async save() {
+    if (!this.id) {
+      await User.isUniq(this)
+    }
+
     if (this.password) {
       this.passwordHash = await User.hashPassword(this.password)
       delete this.password
     }
 
-    return Model.prototype.save.call(this)
+    return super.save()
   }
 
   validPassword(password) {
@@ -46,11 +61,9 @@ class User extends Model {
 
     result = await User.findByEmail(user.email).catch(swallowNotFound)
 
-    if (result) {
-      throw new ConflictError('User already exists')
+    if (!result) {
+      result = await User.findByUsername(user.username).catch(swallowNotFound)
     }
-
-    result = await User.findByUsername(user.username).catch(swallowNotFound)
 
     if (result) {
       throw new ConflictError('User already exists')

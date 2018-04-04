@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
-import AlignmentBox from '../atoms/AlignmentBox'
+import { AlignmentBox } from '../atoms'
 
 const blue = '#0d78f2'
 
@@ -14,7 +15,7 @@ const Root = styled.div`
 
 const Label = styled.span`
   color: ${blue};
-  font-family: var(--font-interface);
+  font-family: ${th('fontInterface')};
   font-size: 16px;
   font-style: italic;
   margin-left: ${props => (props.positionRight ? '10px' : '0')};

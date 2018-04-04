@@ -32,7 +32,7 @@ Util.createFilterFromQuery = query => {
     filterPaths.every(
       filterPath =>
         _.has(item, filterPath) &&
-        _.get(item, filterPath) === query[filterPath],
+        String(_.get(item, filterPath)) === query[filterPath],
     )
 }
 

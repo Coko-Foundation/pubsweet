@@ -1,58 +1,86 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import th from '../helpers/themeHelper'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
+// TODO: determine the correct color for non-selected options
+// TODO: add z-indexes in theme object?
+// FIXME: putting markup inside a <button> is invalid
 
+// #region styled components
 const Root = styled.div`
-  font-size: 1em;
+  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
 `
 
-const Label = styled.span`
+const CloseOverlay = styled.div`
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+`
+
+const Label = styled.label`
+  font-size: ${th('fontSizeBaseSmall')};
   display: block;
-  font-size: 1em;
-  margin-bottom: 0.5em;
 `
-
-const OpenerContainer = styled.div``
 
 const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: none;
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border-radius: ${th('borderRadius')};
   cursor: pointer;
   font-family: inherit;
-  font-size: 1.2em;
 
-  border-left: 2px solid
-    ${props => (props.open ? 'var(--color-primary)' : 'lightgrey')};
-  color: ${props => (props.open ? 'var(--color-primary)' : 'inherit')};
+  width: 100%;
+  height: calc(${th('gridUnit')} * 2);
+  padding: 0;
+
+  display: flex;
+  align-items: center;
 
   &:hover {
-    border-left: 2px solid var(--color-primary);
-    color: var(--color-primary);
+    border-color: ${th('colorPrimary')};
   }
 `
 
-const Placeholder = styled.span`
-  font-family: var(--font-interface);
-  font-style: italic;
-  font-weight: 400;
-  text-transform: normal;
-  color: #aaa;
+const Value = styled.span`
+  flex-grow: 1;
+
+  text-align: left;
+  padding: 0 calc(${th('gridUnit')} / 2);
 
   &:hover {
-    color: var(--color-primary);
+    color: ${th('colorPrimary')};
   }
+`
+
+const Placeholder = Value.extend`
+  color: ${th('colorTextPlaceholder')};
+  font-style: italic;
+`
+
+const ArrowContainer = styled.span`
+  border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
+
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Arrow = styled.span`
-  display: inline-block;
   font-size: 50%;
-  margin-left: 10px;
   transition: transform 0.2s;
-  transform: scaleX(2.2) scaleY(${props => (props.open ? -1.2 : 1.2)});
+  transform: scaleX(2) scaleY(${props => (props.open ? -1.2 : 1.2)});
 `
 
 const Main = styled.div.attrs({
@@ -63,23 +91,22 @@ const Main = styled.div.attrs({
 
 const OptionsContainer = styled.div`
   position: absolute;
+  left: 0;
+  right: 0;
 `
 
 const Options = styled.div`
-  background-color: white;
-  border-bottom: 2px solid var(--color-primary);
-  border-left: 2px solid var(--color-primary);
-  left: 0;
-  padding-bottom: 0.5em;
-  padding-top: 0.5em;
   position: absolute;
   top: 0;
-  transition: opacity 2s;
-  width: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
 
-  min-width: ${props => (props.open ? '10em' : '0')};
-  opacity: ${props => (props.open ? '1' : '0')};
+  background-color: ${th('colorBackground')};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border-radius: ${th('borderRadius')};
+  overflow-y: scroll;
+  max-height: ${({ maxHeight }) => `${maxHeight}px`};
+  z-index: 100;
 `
 
 const Option = styled.div.attrs({
@@ -87,43 +114,30 @@ const Option = styled.div.attrs({
   tabIndex: '0',
   'aria-selected': props => props.active,
 })`
-  color: ${props => (props.active ? 'black' : '#444')};
+  color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
-  font-family: var(--font-author);
-  padding: 10px;
+  font-family: ${th('fontAuthor')};
+  padding: calc(${th('subGridUnit')} - ${th('borderWidth')} * 2)
+    calc(${th('subGridUnit')} * 2);
+  border: ${th('borderWidth')} ${th('borderStyle')} transparent;
+  border-width: ${th('borderWidth')} 0 ${th('borderWidth')} 0;
   white-space: nowrap;
 
   &:hover {
-    color: var(--color-primary);
+    background: ${th('colorBackgroundHue')};
+    border-color: ${th('colorBorder')};
+  }
+
+  &:first-child:hover {
+    border-top-color: ${th('colorBackgroundHue')};
+  }
+
+  &:last-child:hover {
+    border-bottom-color: ${th('colorBackgroundHue')};
   }
 `
-
-/* Not used for now
-.inline {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-right: 0.5em;
-}
-
-.inline .label {
-  margin-right: 0.5em;
-}
-
-.inline .opener {
-  margin-bottom: -4px;
-}
-
-.root .inline {
-  flex-direction: columns;
-}
-
-.root.author {
-  font-family: var(--font-author);
-}
-*/
+// #endregion
 
 class Menu extends React.Component {
   constructor(props) {
@@ -163,39 +177,42 @@ class Menu extends React.Component {
   }
 
   render() {
-    const { label, options, placeholder = 'Choose in the list' } = this.props
+    const {
+      maxHeight = 250,
+      label,
+      options,
+      inline,
+      placeholder,
+      renderOption: RenderOption,
+      renderOpener: RenderOpener,
+      className,
+    } = this.props
     const { open, selected } = this.state
 
     return (
-      <Root open={open}>
+      <Root className={className} inline={inline} open={open}>
         {label && <Label>{label}</Label>}
-
+        {open && <CloseOverlay onClick={this.toggleMenu} />}
         <Main>
-          <OpenerContainer>
-            <Opener onClick={this.toggleMenu} open={open}>
-              {selected ? (
-                <span>{this.optionLabel(selected)}</span>
-              ) : (
-                <Placeholder>{placeholder}</Placeholder>
-              )}
-              <Arrow open={open}>▼</Arrow>
-            </Opener>
-          </OpenerContainer>
-
+          <RenderOpener
+            open={open}
+            optionLabel={this.optionLabel}
+            placeholder={placeholder}
+            selected={selected}
+            toggleMenu={this.toggleMenu}
+          />
           <OptionsContainer>
             {open && (
-              <Options open={open}>
+              <Options maxHeight={maxHeight} open={open}>
                 {options.map(option => (
-                  <Option
-                    active={option.value === selected}
+                  <RenderOption
+                    handleKeyPress={this.handleKeyPress}
+                    handleSelect={this.handleSelect}
                     key={option.value}
-                    onClick={() => this.handleSelect(option.value)}
-                    onKeyPress={event =>
-                      this.handleKeyPress(event, option.value)
-                    }
-                  >
-                    {option.label || option.value}
-                  </Option>
+                    label={option.label}
+                    selected={selected}
+                    value={option.value}
+                  />
                 ))}
               </Options>
             )}
@@ -204,6 +221,68 @@ class Menu extends React.Component {
       </Root>
     )
   }
+}
+
+const DefaultMenuOption = ({
+  selected,
+  label,
+  value,
+  handleSelect,
+  handleKeyPress,
+}) => (
+  <Option
+    active={value === selected}
+    key={value}
+    onClick={() => handleSelect(value)}
+    onKeyPress={event => handleKeyPress(event, value)}
+  >
+    {label || value}
+  </Option>
+)
+
+const DefaultOpener = ({
+  toggleMenu,
+  open,
+  selected,
+  placeholder,
+  optionLabel,
+}) => (
+  <Opener onClick={toggleMenu} open={open}>
+    {selected ? (
+      <Value>{optionLabel(selected)}</Value>
+    ) : (
+      <Placeholder>{placeholder}</Placeholder>
+    )}
+    <ArrowContainer>
+      <Arrow open={open}>▼</Arrow>
+    </ArrowContainer>
+  </Opener>
+)
+
+Menu.propTypes = {
+  /** Menu items. */
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    }),
+  ).isRequired,
+  /** Custom component for the selected option. */
+  renderOpener: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Custom option component. The component will be rendered with *optionProps*. */
+  renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Optional label to be shown above the menu. */
+  label: PropTypes.string,
+  /** Placeholder until a value is selected. */
+  placeholder: PropTypes.string,
+  /** Maximum height of the options container. */
+  maxHeight: PropTypes.number,
+}
+
+Menu.defaultProps = {
+  renderOption: DefaultMenuOption,
+  renderOpener: DefaultOpener,
+  placeholder: 'Choose in the list',
 }
 
 export default Menu

@@ -47,6 +47,8 @@ class Team extends Model {
   }
 
   async save() {
+    await super.save()
+
     await Promise.all(
       this.members.map(async member => {
         const user = await User.find(member)
@@ -57,7 +59,7 @@ class Team extends Model {
       }),
     )
 
-    return super.save()
+    return this
   }
 
   async delete() {

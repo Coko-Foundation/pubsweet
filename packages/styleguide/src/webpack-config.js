@@ -1,19 +1,32 @@
 process.env.BABEL_ENV = 'development'
 process.env.NODE_ENV = 'development'
 
-const path = require('path')
 const webpack = require('webpack')
+const path = require('path')
+const config = require('config')
+const fs = require('fs-extra')
+
 // const nodeExternals = require('webpack-node-externals')
 
 module.exports = dir => {
+  // can't use node-config in webpack so save whitelisted client config into the build and alias it below
+  const outputPath = path.resolve(__dirname, '_build', 'config')
+  fs.ensureDirSync(outputPath)
+  const clientConfigPath = path.join(outputPath, 'client-config.json')
+  fs.writeJsonSync(clientConfigPath, config, { spaces: 2 })
+
   const include = [
     path.join(dir, 'src'),
+    path.join(dir, 'packages'),
+    path.join(dir, '..', 'components', 'packages'),
+    path.join(dir, '..', 'ui', 'src'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
     /ui\/src/,
+    /server\/src\/models/,
   ]
 
   return {
@@ -28,7 +41,7 @@ module.exports = dir => {
           oneOf: [
             // ES6 modules
             {
-              test: /\.js$/,
+              test: /\.jsx?$/,
               include,
               loader: 'babel-loader',
               options: {
@@ -101,7 +114,7 @@ module.exports = dir => {
 
             // Files
             {
-              exclude: [/\.js$/, /\.html$/, /\.json$/],
+              exclude: [/\.jsx?$/, /\.html$/, /\.json$/],
               loader: 'file-loader',
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
@@ -121,6 +134,12 @@ module.exports = dir => {
         PUBSWEET_COMPONENTS: '[]',
       }),
     ],
+    resolve: {
+      alias: {
+        joi: 'joi-browser',
+        config: clientConfigPath,
+      },
+    },
     watch: true,
   }
 }

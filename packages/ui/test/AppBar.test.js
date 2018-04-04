@@ -4,61 +4,53 @@ import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 
 import AppBar from '../src/molecules/AppBar'
+import TestThemeProvider from './setup/theme'
 
 const baseProps = {
   brand: 'some brand',
   onLogoutClick: () => {},
 }
 
+const render = (props = {}) =>
+  renderer
+    .create(
+      <MemoryRouter>
+        <TestThemeProvider>
+          <AppBar {...props} {...baseProps} />
+        </TestThemeProvider>
+      </MemoryRouter>,
+    )
+    .toJSON()
+
 describe('AppBar', () => {
   test('Basic display', () => {
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <AppBar {...baseProps} />
-        </MemoryRouter>,
-      )
-      .toJSON()
-
+    const tree = render()
     expect(tree).toMatchSnapshot()
   })
 
   test('With admin user', () => {
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <AppBar
-            {...baseProps}
-            user={{ username: 'some user', admin: true }}
-          />
-        </MemoryRouter>,
-      )
-      .toJSON()
-
+    const tree = render({ user: { username: 'some user', admin: true } })
     expect(tree).toMatchSnapshot()
   })
 
   test('With nav links', () => {
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <AppBar {...baseProps} navLinks={<div>Links!</div>} />
-        </MemoryRouter>,
-      )
-      .toJSON()
-
+    const tree = render({ navLinks: <div>Links!</div> })
     expect(tree).toMatchSnapshot()
   })
 
   test('With custom brand and login links', () => {
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <AppBar {...baseProps} brandLink="/home" loginLink="/signin" />
-        </MemoryRouter>,
-      )
-      .toJSON()
+    const tree = render({ brandLink: '/home', loginLink: '/signin' })
+    expect(tree).toMatchSnapshot()
+  })
 
+  test('With custom right component', () => {
+    const RightComponent = ({ user, loginLink, onLogoutClick }) => (
+      <div>{user.username}</div>
+    )
+    const tree = render({
+      user: { username: 'userName', admin: true },
+      rightComponent: RightComponent,
+    })
     expect(tree).toMatchSnapshot()
   })
 })

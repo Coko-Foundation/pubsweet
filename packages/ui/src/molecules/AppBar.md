@@ -20,9 +20,8 @@ Can optionally pass navigation links or image for brand.
   brand={
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="-150 -50 300 300"
-      width="50"
-      height="42"
+      viewBox="-220 -50 440 300"
+      width="64"
       fillOpacity="0.5"
     >
       <circle cx="0" cy="50" fill="red" r="100" />
@@ -30,10 +29,41 @@ Can optionally pass navigation links or image for brand.
       <circle cx="-70" cy="150" fill="green" r="100" />
     </svg>
   }
-  navLinks={
-    <div>
-      <a href="">Home</a> | <a href="">About</a>
-    </div>
-  }
+  navLinkComponents={[
+    <Link to="/home">Home</Link>,
+    <Link to="/about">About</Link>,
+  ]}
+/>
+```
+
+Can use a custom component as right element.
+
+**Right component props** - the right component will be passed the following props
+
+* _user_ - the current logged in user; null if no user is logged in
+* _onLogoutClick_ - the logout function
+* _loginLink_ - link to redirect users to login
+
+```js
+;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
+const RightComponent = ({ user, loginLink, onLogoutClick }) => (
+  <div
+    style={{
+      padding: 10,
+      border: '1px solid gray',
+      display: 'flex',
+      width: 200,
+      justifyContent: 'space-between',
+    }}
+  >
+    <span>{user ? user.username : 'admin'}</span>
+    <button onClick={onLogoutClick}>logout</button>
+  </div>
+)
+;<AppBar
+  brand="xpub"
+  user={{ username: 'userName', admin: true }}
+  rightComponent={RightComponent}
+  onLogoutClick={() => console.log('Logout clicked')}
 />
 ```

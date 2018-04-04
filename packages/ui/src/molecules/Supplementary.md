@@ -1,18 +1,15 @@
 A list of supplementary files, and a button to upload a new file.
 
 ```js
-const value = [
+const files = [
   {
     name: faker.system.commonFileName(),
-    url: faker.internet.url()
+    url: faker.internet.url(),
   },
   {
     name: faker.system.commonFileName(),
-    url: faker.internet.url()
-  }
-];
-
-<Supplementary 
-  value={value}
-  uploadFile={file => new XMLHttpRequest()}/>
+    url: faker.internet.url(),
+  },
+]
+;<Supplementary files={files} uploadFile={file => new XMLHttpRequest()} />
 ```

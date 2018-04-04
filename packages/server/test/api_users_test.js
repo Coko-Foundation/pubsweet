@@ -18,8 +18,6 @@ describe('users api', () => {
     expect(userId).not.toBeNull()
   })
 
-  afterEach(cleanDB)
-
   describe('admin', () => {
     let otherUser
 
@@ -28,17 +26,10 @@ describe('users api', () => {
       otherUser = await user.save()
     })
 
-    afterEach(
-      () =>
-        User.find(otherUser.id)
-          .then(user => user.delete())
-          .catch(() => {}), // we might have already deleted the user
-    )
-
     it('can get a list of users', () =>
       api.users.authenticate
         .post(fixtures.user)
-        .then(token => api.users.get(null, token).expect(STATUS.OK))
+        .then(token => api.users.get({ token }).expect(STATUS.OK))
         .then(res => {
           expect(res.body.users).toHaveLength(2)
           expect(res.body.users[0].username).not.toBe(undefined)
@@ -47,13 +38,15 @@ describe('users api', () => {
     it('can get another user', () =>
       api.users.authenticate
         .post(fixtures.user)
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.username).toBe(otherUser.username)
         }))
 
     it('can make another user an admin', () => {
-      const patchedUser = Object.assign(otherUser, { admin: true })
+      const patchedUser = { ...otherUser, admin: true }
 
       return api.users.authenticate
         .post(fixtures.user)
@@ -70,7 +63,7 @@ describe('users api', () => {
 
   describe('unauthenticated user', () => {
     it('can not get a list of users', () =>
-      api.users.get().expect(STATUS.UNAUTHORIZED))
+      api.users.get({}).expect(STATUS.UNAUTHORIZED))
 
     it('cannot sign up as an admin directly', () => {
       const fakeAdmin = Object.assign({}, fixtures.otherUser, { admin: true })
@@ -144,7 +137,7 @@ describe('users api', () => {
     it('can not get a list of users', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(null, token).expect(STATUS.FORBIDDEN)))
+        .then(token => api.users.get({ token }).expect(STATUS.FORBIDDEN)))
 
     it('can not delete other users', () =>
       api.users.authenticate
@@ -154,12 +147,16 @@ describe('users api', () => {
     it('can not get other users', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(userId, token).expect(STATUS.FORBIDDEN)))
+        .then(token =>
+          api.users.get({ userId, token }).expect(STATUS.FORBIDDEN),
+        ))
 
     it('can get itself', () =>
       api.users.authenticate
         .post(fixtures.otherUser)
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.id).toBe(otherUser.id)
           expect(res.body.username).toBe(fixtures.otherUser.username)
@@ -213,7 +210,9 @@ describe('users api', () => {
             .expect(STATUS.OK)
             .then(() => token),
         )
-        .then(token => api.users.get(otherUser.id, token).expect(STATUS.OK))
+        .then(token =>
+          api.users.get({ userId: otherUser.id, token }).expect(STATUS.OK),
+        )
         .then(res => {
           expect(res.body.id).toBe(otherUser.id)
           expect(res.body.username).toBe(fixtures.updatedUser.username)

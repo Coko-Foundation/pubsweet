@@ -35,7 +35,10 @@ const configureApp = app => {
   app.use(cookieParser())
   app.use(helmet())
   app.use(express.static(path.resolve('.', '_build')))
-  app.use('/uploads', express.static(path.resolve('.', 'uploads')))
+  app.use(
+    '/uploads',
+    express.static(path.resolve(config.get('pubsweet-server.uploads'))),
+  )
 
   // Passport strategies
   app.use(passport.initialize())

@@ -1,36 +1,34 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import React from 'react'
+import th from '../helpers/themeHelper'
 
-const darkGrey = '#404040'
-const lightGrey = '#b3b3b3'
-
-const disabled = `
-  color: ${lightGrey};
+const disabled = css`
+  color: ${th('colorSecondary')};
   cursor: default;
 
   &:hover {
-    color: ${lightGrey};
+    color: ${th('colorSecondary')};
   }
 `
 
 const Root = styled.span`
   cursor: pointer;
-  font-family: var(--font-interface);
-  font-size: 16px;
+  font-family: ${th('fontInterface')};
+  font-size: ${th('fontSizeBaseSmall')};
   font-style: italic;
-  padding: 0;
 
   &:focus {
     outline: none;
   }
 
   &:hover {
-    color: ${darkGrey};
-    transition: 0.25s ease-in-out 0s;
+    color: ${th('colorText')};
+    transition: ${th('transitionDurationUnit')}
+      ${th('transitionTimingFunction')};
   }
 
-  ${props => (props.disabled ? disabled : '')};
+  ${props => props.disabled && disabled};
 `
 
 const StateItem = ({ update, disabled, values, index }) => {

@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import styled from 'styled-components'
 
+// TODO move to theme
 const lightGrey = '#b3b3b3'
 const mainGrey = '#666'
 const whiteRGBA = 'rgba(255, 255, 255, 1)'
 
 const borderRule = position => props => `
-    border-${position}-width: ${props.noBorder[position] ? '0' : '1px'};
+    border-${position}-width: ${props.noBorder[position] ? '0' : '1px'}
   `
 
-const Root = styled.div.attrs({
+const AlignmentBox = styled.div.attrs({
   role: 'presentation',
 })`
   box-shadow: inset 0 0 0 2px ${whiteRGBA};
@@ -20,19 +20,17 @@ const Root = styled.div.attrs({
 
   border-style: solid;
   border-color: ${mainGrey};
-  ${borderRule('top')} ${borderRule('right')} ${borderRule(
-      'bottom',
-    )} ${borderRule('left')} background-color: ${props =>
-      props.active ? mainGrey : 'transparent'};
+  ${borderRule('top')};
+  ${borderRule('right')};
+  ${borderRule('bottom')};
+  ${borderRule('left')};
+
+  background-color: ${props => (props.active ? mainGrey : 'transparent')};
 
   &:hover {
     background-color: ${lightGrey};
   }
 `
-
-const AlignmentBox = ({ active, id, noBorder, onClick }) => (
-  <Root active={active} id={id} noBorder={noBorder} onClick={onClick} />
-)
 
 AlignmentBox.propTypes = {
   active: PropTypes.bool.isRequired,

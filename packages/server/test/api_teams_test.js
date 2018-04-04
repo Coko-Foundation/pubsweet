@@ -8,7 +8,6 @@ const Team = require('../src/models/Team')
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
-const { contributors } = fixtures.teams
 const teamFixture = fixtures.contributorTeam
 const api = require('./helpers/api')
 
@@ -32,7 +31,7 @@ describe('Teams API - admin', () => {
       .then(token => api.teams.list(token).expect(STATUS.OK))
       .then(res => {
         const team = res.body[0]
-        expect(team.teamType.name).toEqual(contributors.name)
+        expect(team.teamType).toEqual('teamContributors')
         expect(team.members).toEqual([])
       }))
 
@@ -48,7 +47,7 @@ describe('Teams API - admin', () => {
       )
       .then(res => {
         const team = res.body
-        expect(team.teamType.name).toEqual(contributors.name)
+        expect(team.teamType).toEqual('teamContributors')
         expect(team.members).toEqual([])
       }))
 

@@ -1,16 +1,17 @@
 {
   "name": "pubsweet",
-  "version": "1.1.9",
+  "version": "2.1.7",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
+    "test": "jest",
     "vuln-test": "nsp check --output checkstyle"
   },
   "keywords": ["pubsweet", "cli"],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^0.0.17",
+    "@pubsweet/db-manager": "^1.0.7",
     "@pubsweet/logger": "^0.2.2",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
@@ -20,7 +21,7 @@
     "fs-extra": "^4.0.2",
     "inflection": "^1.12.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
-    "pubsweet-server": "^1.1.1",
+    "pubsweet-server": "^4.0.0",
     "require-relative": "^0.8.7",
     "uuid": "^3.0.1",
     "webpack": "^3.8.1",
@@ -35,6 +36,7 @@
     "@pubsweet/starter":
       "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
     "jest": "^22.1.4",
+    "jest-environment-db": "^1.0.0",
     "nsp": "^2.8.1"
   },
   "jest": {
@@ -43,9 +45,9 @@
     "collectCoverage": true,
     "collectCoverageFrom": ["src/*.js", "cli/*.js"],
     "modulePaths": ["<rootDir>/node_modules"],
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-db",
     "unmockedModulePathPatterns": ["/src/models"],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js",
     "verbose": true
   }
 }
