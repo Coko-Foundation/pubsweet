@@ -1,9 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col } from 'react-bootstrap'
-
-import 'pubsweet-component-manage/Manage.scss'
-import styles from './Blog.local.scss'
 
 import Summary from './Summary'
 
@@ -22,39 +18,19 @@ export default class Blog extends React.Component {
 
     if (posts.length === 0 && this.props.blog) {
       posts = (
-        <Row>
-          <Col md={8} mdOffset={2}>
-            <p>
-              No blogpost has been published on {this.props.blog.title} yet.
-            </p>
-          </Col>
-        </Row>
+        <p>No blogpost has been published on {this.props.blog.title} yet.</p>
       )
     }
 
     return (
-      <div className="bootstrap">
-        <div className={styles.heroBackground}>
-          <Grid>
-            <Row className={styles.hero}>
-              <Col md={8} mdOffset={2}>
-                <h1>Welcome to {this.props.blog && this.props.blog.title}</h1>
-                <p>Science for the Web</p>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-        <Grid>
-          <div className={styles.blogContainer}>{posts}</div>
-          <Row className={styles.blogFooter}>
-            <Col md={8} mdOffset={2}>
-              <p>
-                Powered by{' '}
-                <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
-              </p>
-            </Col>
-          </Row>
-        </Grid>
+      <div>
+        <h1>Welcome to {this.props.blog && this.props.blog.title}</h1>
+        <p>Science for the Web</p>
+        <div>{posts}</div>
+        <p>
+          Powered by{' '}
+          <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
+        </p>
       </div>
     )
   }
