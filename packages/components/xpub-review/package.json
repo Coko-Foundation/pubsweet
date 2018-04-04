@@ -4,10 +4,7 @@
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist"
-  ],
+  "files": ["src", "dist"],
   "dependencies": {
     "@pubsweet/ui": "^3.3.2",
     "classnames": "^2.2.5",
@@ -19,7 +16,7 @@
     "recompose": "^0.26.0",
     "redux-form": "^7.0.3",
     "striptags": "^3.1.0",
-    "styled-components": "^2.4.0",
+    "styled-components": "^3.2.5",
     "uuid": "^3.1.0",
     "wax-editor-react": "^0.1.8",
     "xpub-connect": "^0.0.9",
