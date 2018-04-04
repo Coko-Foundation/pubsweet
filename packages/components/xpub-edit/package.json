@@ -5,7 +5,9 @@
   "main": "src",
   "dependencies": {
     "@atlaskit/editor-core": "^67.0.4",
+    "@atlaskit/editor-test-helpers": "^3.0.1",
     "@atlaskit/media-core": "^15.3.0",
+    "@atlaskit/util-data-test": "^8.0.4",
     "@pubsweet/ui": "^3.3.2",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",
