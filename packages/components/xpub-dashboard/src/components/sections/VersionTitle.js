@@ -4,14 +4,10 @@ import { th } from '@pubsweet/ui'
 // import {TitleViewer} from 'xpub-edit/src/components'
 
 const Root = styled.div`
-  flex: 1;
-  font-size: ${th('fontSizeHeading3')};
-`
-const RootLink = styled.span`
   font-size: ${th('fontSizeHeading3')};
 `
 
-export default ({ version, className, linkUrl }) => {
+export default ({ version, className }) => {
   // <TitleViewer
   //     value={version && version.metadata && version.metadata.title || 'Untitled'}
   //     className={className}/>
@@ -21,5 +17,5 @@ export default ({ version, className, linkUrl }) => {
       ? version.metadata.title
       : 'Untitled'
 
-  return linkUrl ? <RootLink>{title}</RootLink> : <Root>{title}</Root>
+  return <Root>{title}</Root>
 }
