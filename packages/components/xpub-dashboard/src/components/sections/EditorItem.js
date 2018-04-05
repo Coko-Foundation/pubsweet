@@ -55,12 +55,12 @@ const EditorItem = ({ AssignEditor, project, version, addUserToTeam }) => (
     <Header>
       <Status status={project.status} />
       <Meta>
-        <MetadataOwners owners={project.owners} />
-        <Divider separator="–" />
-        <MetadataSubmittedDate submitted={version.submitted} />
         <MetadataStreamLined
           streamlinedReview={version.declarations.streamlinedReview}
         />
+        <MetadataOwners owners={project.owners} />
+        <Divider separator="–" />
+        <MetadataSubmittedDate submitted={version.submitted} />
         <Divider separator="–" />
         <MetadataType type={version.metadata.articleType} />
         <Divider separator="–" />
