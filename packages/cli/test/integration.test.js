@@ -30,10 +30,11 @@ const nodeConfig = {
   },
 }
 
-const defaultUser = {
+const setupDbOptions = {
   username: 'someuser',
   email: 'user@test.com',
   password: '12345678',
+  clobber: false,
 }
 
 /* These tests run "pubsweet" commands as child processes with no mocking */
@@ -105,7 +106,7 @@ describe('CLI: integration test', () => {
     it('creates tables', () => {
       const { stdout, stderr } = runCommandSync({
         args: 'setupdb',
-        options: defaultUser,
+        options: setupDbOptions,
         stdio: 'pipe',
         cwd: appPath,
         nodeConfig,
