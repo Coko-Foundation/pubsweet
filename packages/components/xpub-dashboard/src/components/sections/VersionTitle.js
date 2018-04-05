@@ -4,7 +4,6 @@ import { th } from '@pubsweet/ui'
 // import {TitleViewer} from 'xpub-edit/src/components'
 
 const Root = styled.div`
-  flex: 1;
   font-size: ${th('fontSizeHeading3')};
 `
 
