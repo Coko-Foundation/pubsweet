@@ -2,8 +2,11 @@ const program = require('commander')
 const properties = require('../src/schemas').db
 const { setupDb } = require('@pubsweet/db-manager')
 const db = require('pubsweet-server/src/db')
-const { forEach } = require('lodash')
+const config = require('config')
+const { some, forEach } = require('lodash')
 const runPrompt = require('../src/run-prompt')
+const dbExists = require('@pubsweet/db-manager/src/helpers/db-exists')
+const logger = require('@pubsweet/logger')
 
 module.exports = async (commandArguments = process.argv) => {
   program.description(
@@ -19,9 +22,17 @@ module.exports = async (commandArguments = process.argv) => {
   })
 
   const promptOverride = program.parse(commandArguments)
+  const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
 
-  // Always interpret absence of option as clobber = false
-  promptOverride.clobber = !!promptOverride.clobber
+  // We can only clobber if either is set (by prompt or config)
+  const clobbering = some([promptOverride.clobber, configOpts.clobber])
+
+  if ((await dbExists()) && !clobbering) {
+    logger.error(
+      'If you want to overwrite the database, set clobber option to true',
+    )
+    throw new Error('Target database already exists, not clobbering')
+  }
 
   const finalOpts = await runPrompt({ properties, override: promptOverride })
 
