@@ -1,7 +1,7 @@
 FROM pubsweet/pubsweet:base
 
 COPY package.json yarn.lock ./
-COPY lerna.json .eslintignore .eslintrc .prettierrc .stylelintignore .stylelintrc commitlint.config.js ./
+COPY lerna.json .eslintignore .eslintrc .prettierrc .prettierignore .stylelintignore .stylelintrc commitlint.config.js ./
 COPY packages packages
 
 RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
