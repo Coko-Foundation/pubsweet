@@ -30,7 +30,7 @@ const nodeConfig = {
   },
 }
 
-const defaultUser = {
+const setupDbOptions = {
   username: 'someuser',
   email: 'user@test.com',
   password: '12345678',
@@ -105,7 +105,7 @@ describe('CLI: integration test', () => {
     it('creates tables', () => {
       const { stdout, stderr } = runCommandSync({
         args: 'setupdb',
-        options: defaultUser,
+        options: setupDbOptions,
         stdio: 'pipe',
         cwd: appPath,
         nodeConfig,
