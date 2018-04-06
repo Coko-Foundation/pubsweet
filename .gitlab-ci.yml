@@ -41,6 +41,15 @@ lint:js:
     - cd ${HOME}
     - npm run lint:js
 
+lint:json:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - cd ${HOME}
+    - npm run lint:json
+  
 lint:commits:
    image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
    stage: test
