@@ -24,6 +24,9 @@ module.exports = async (commandArguments = process.argv) => {
   const promptOverride = program.parse(commandArguments)
   const configOpts = config.has('dbManager') ? config.get('dbManager') : {}
 
+  // Use the  absence of clobber option as a override with value 'false'
+  promptOverride.clobber = !!promptOverride.clobber
+
   // We can only clobber if either is set (by prompt or config)
   const clobbering = some([promptOverride.clobber, configOpts.clobber])
 

@@ -34,7 +34,6 @@ const setupDbOptions = {
   username: 'someuser',
   email: 'user@test.com',
   password: '12345678',
-  clobber: false,
 }
 
 /* These tests run "pubsweet" commands as child processes with no mocking */
