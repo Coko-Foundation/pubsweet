@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { withLoader } from 'pubsweet-client'
-import uploadFile from 'xpub-upload'
+import uploadFile from 'xpub-upload/src/no-redux'
 import Submit from './Submit'
 
 const fragmentFields = `
