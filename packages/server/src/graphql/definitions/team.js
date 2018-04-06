@@ -41,7 +41,7 @@ const typeDefs = `
     id: ID!
     rev: String
     type: String!
-    teamType: TeamType
+    teamType: String!
     name: String!
     object: TeamObject
     members: [User!]!
@@ -51,12 +51,7 @@ const typeDefs = `
     type: String
     id: ID!
   }
-  
-  type TeamType {
-    name: String
-    permissions: String
-  }
-  
+    
   input TeamInput {
     teamType: String
     name: String
