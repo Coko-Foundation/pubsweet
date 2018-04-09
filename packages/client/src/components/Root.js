@@ -13,24 +13,30 @@ import StyleRoot, { injectGlobalStyles } from '../helpers/StyleRoot'
 
 injectGlobalStyles()
 
-const uploadLink = createUploadLink()
-const httpLink = createHttpLink()
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token')
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
+// Construct an ApolloClient. If a function is passed as the first argument,
+// it will be called with the default client config as an argument, and should
+// return the desired config.
+const makeApolloClient = makeConfig => {
+  const uploadLink = createUploadLink()
+  const httpLink = createHttpLink()
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('token')
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    }
+  })
+  const config = {
+    link: authLink.concat(uploadLink, httpLink),
+    cache: new InMemoryCache(),
   }
-})
-const client = new ApolloClient({
-  link: authLink.concat(uploadLink, httpLink),
-  cache: new InMemoryCache(),
-})
+  return new ApolloClient(makeConfig ? makeConfig(config) : config)
+}
 
-const Root = ({ store, history, routes, theme }) => (
-  <ApolloProvider client={client}>
+const Root = ({ makeApolloConfig, store, history, routes, theme }) => (
+  <ApolloProvider client={makeApolloClient(makeApolloConfig)}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
