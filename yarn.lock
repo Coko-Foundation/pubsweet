@@ -4414,7 +4414,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.1, fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.5, fbjs@^0.8.9:
+fbjs@^0.8.1, fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.5:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -5332,10 +5332,6 @@ hoek@4.x.x:
 hoek@5.x.x:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-5.0.3.tgz#b71d40d943d0a95da01956b547f83c4a5b4a34ac"
-
-hoist-non-react-statics@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
 hoist-non-react-statics@^2.1.0, hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.0"
@@ -6423,9 +6419,9 @@ jest-snapshot@^22.4.3:
     natural-compare "^1.4.0"
     pretty-format "^22.4.3"
 
-jest-styled-components@^4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-4.10.0.tgz#6fcd83208fefc4ceb87b79b55d44697a05d226a8"
+jest-styled-components@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-5.0.1.tgz#386c5a161a0f5e783444d624bfc18c6d228d1277"
   dependencies:
     css "^2.2.1"
 
@@ -11133,17 +11129,18 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-styled-components@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.4.0.tgz#086d0fd483d54638837fca3ea546a030b94adf75"
+styled-components@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.2.5.tgz#b5d5d7d618ab240ff10602b5ca5886b8db3d0a0d"
   dependencies:
     buffer "^5.0.3"
     css-to-react-native "^2.0.3"
-    fbjs "^0.8.9"
-    hoist-non-react-statics "^1.2.0"
+    fbjs "^0.8.16"
+    hoist-non-react-statics "^2.5.0"
     is-plain-object "^2.0.1"
     prop-types "^15.5.4"
-    stylis "^3.4.0"
+    stylis "^3.5.0"
+    stylis-rule-sheet "^0.0.10"
     supports-color "^3.2.3"
 
 styled-normalize@^3.0.1:
@@ -11224,7 +11221,11 @@ stylelint@^8.2.0:
     svg-tags "^1.0.0"
     table "^4.0.1"
 
-stylis@^3.4.0:
+stylis-rule-sheet@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stylis-rule-sheet/-/stylis-rule-sheet-0.0.10.tgz#44e64a2b076643f4b52e5ff71efc04d8c3c4a430"
+
+stylis@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.0.tgz#016fa239663d77f868fef5b67cf201c4b7c701e1"
 
