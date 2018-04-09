@@ -123,11 +123,19 @@ async function authenticatedUser(user, operation, object, context) {
   // Advanced example
   // Allow authenticated users to create a team based around a collection
   // if they are one of the owners of this collection
-  if (['POST', 'PATCH'].includes(operation) && get(object, 'type') === 'team') {
-    if (get(object, 'object.type') === 'collection') {
-      const collection = await context.models.Collection.find(
-        get(object, 'object.id'),
-      )
+  if (get(object, 'path') === '/teams') {
+    let collectionId
+    if (operation === 'POST') {
+      if (get(object, 'team.object.type') === 'collection') {
+        collectionId = get(object, 'team.object.id')
+      }
+    } else if (operation === 'PATCH') {
+      if (get(object, 'object.type') === 'collection') {
+        collectionId = get(object, 'object.id')
+      }
+    }
+    if (collectionId) {
+      const collection = await context.models.Collection.find(collectionId)
       if (collection.owners.includes(user.id)) {
         return true
       }

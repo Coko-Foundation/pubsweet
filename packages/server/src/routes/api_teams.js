@@ -31,9 +31,17 @@ api.get('/teams', authBearer, async (req, res, next) => {
 
 api.post('/teams', authBearer, async (req, res, next) => {
   try {
+    // Teams are either based around objects or not,
+    // we need to know if they are and around which object
+    const target = Object.assign(
+      {},
+      { path: req.route.path },
+      { team: req.body },
+    )
+
     const properties = await applyPermissionFilter({
       req,
-      target: req.route,
+      target,
       filterable: req.body,
     })
 
