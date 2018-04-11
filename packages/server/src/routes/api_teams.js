@@ -2,27 +2,28 @@ const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
 
-const authsome = require('../helpers/authsome')
+const {
+  createFilterFromQuery,
+  applyPermissionFilter,
+  buildChangeData,
+} = require('./util')
 const Team = require('../models/Team')
-const { createFilterFromQuery, authorizationError } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const api = express.Router({ mergeParams: true })
 
 api.get('/teams', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, {
-      path: req.path,
-      params: req.params,
+    const teams = await Team.all()
+    const filteredTeams = await applyPermissionFilter({
+      req,
+      target: req.route,
+      filterable: teams,
     })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req)
-    }
+    filteredTeams.filter(createFilterFromQuery(req.query))
 
-    const teams = (await Team.all()).filter(createFilterFromQuery(req.query))
-
-    res.status(STATUS.OK).json(teams)
+    res.status(STATUS.OK).json(filteredTeams)
   } catch (err) {
     next(err)
   }
@@ -30,18 +31,23 @@ api.get('/teams', authBearer, async (req, res, next) => {
 
 api.post('/teams', authBearer, async (req, res, next) => {
   try {
-    const permission = await authsome.can(req.user, req.method, req.body)
+    // Teams are either based around objects or not,
+    // we need to know if they are and around which object
+    const target = Object.assign(
+      {},
+      { path: req.route.path },
+      { team: req.body },
+    )
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.params)
-    }
+    const properties = await applyPermissionFilter({
+      req,
+      target,
+      filterable: req.body,
+    })
 
-    if (permission.filter) {
-      req.body = permission.filter(req.body)
-    }
+    const team = new Team(properties)
 
-    let team = new Team(req.body)
-    team = await team.save()
+    await team.save()
 
     res.status(STATUS.CREATED).json(team)
   } catch (err) {
@@ -51,18 +57,13 @@ api.post('/teams', authBearer, async (req, res, next) => {
 
 api.get('/teams/:teamId', authBearer, async (req, res, next) => {
   try {
-    let team = await Team.find(req.params.teamId)
-    const permission = await authsome.can(req.user, req.method, team)
+    const team = await Team.find(req.params.teamId)
+    const properties = await applyPermissionFilter({
+      req,
+      target: team,
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.params)
-    }
-
-    if (permission.filter) {
-      team = permission.filter(team)
-    }
-
-    res.status(STATUS.OK).json(team)
+    res.status(STATUS.OK).json(properties)
   } catch (err) {
     next(err)
   }
@@ -70,16 +71,12 @@ api.get('/teams/:teamId', authBearer, async (req, res, next) => {
 
 api.delete('/teams/:teamId', authBearer, async (req, res, next) => {
   try {
-    let team = await Team.find(req.params.teamId)
-    const permission = await authsome.can(req.user, req.method, team)
+    const team = await Team.find(req.params.teamId)
+    const output = await applyPermissionFilter({ req, target: team })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.params)
-    }
+    await team.delete()
 
-    team = await team.delete()
-
-    res.status(STATUS.OK).json(team)
+    res.status(STATUS.OK).json(output)
   } catch (err) {
     next(err)
   }
@@ -87,17 +84,19 @@ api.delete('/teams/:teamId', authBearer, async (req, res, next) => {
 
 api.patch('/teams/:teamId', authBearer, async (req, res, next) => {
   try {
-    let team = await Team.find(req.params.teamId)
-    const permission = await authsome.can(req.user, req.method, team)
+    const team = await Team.find(req.params.teamId)
+    const properties = await applyPermissionFilter({
+      req,
+      target: team,
+      filterable: req.body,
+    })
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.params)
-    }
+    await team.updateProperties(properties)
+    await team.save()
 
-    team = await team.updateProperties(req.body)
-    team = await team.save()
+    const updated = buildChangeData(properties, team)
 
-    res.status(STATUS.OK).json(team)
+    res.status(STATUS.OK).json(updated)
   } catch (err) {
     next(err)
   }
