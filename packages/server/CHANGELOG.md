@@ -3,7 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="4.0.0"></a>
+      <a name="5.0.0"></a>
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@4.0.0...pubsweet-server@5.0.0) (2018-04-11)
+
+
+### Bug Fixes
+
+* **graphql:** make teamType a string ([d2005ac](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d2005ac))
+* **pubsweet-server:** typo correction ([ed88381](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ed88381))
+* **pubsweet-server:** update teams api ([6652307](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6652307))
+* **teams:** add object.team to authsome query ([79b39b5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/79b39b5))
+* **teams:** fix test authsome mode for PATCH ([f448c19](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f448c19))
+
+
+### BREAKING CHANGES
+
+* **pubsweet-server:** The teams API endpoints now work differently in terms of filtering capabilities & in combination with Authsome, in the same way as the collections and fragments API endpoints work. See https://gitlab.coko.foundation/pubsweet/pubsweet/merge_requests/177 for more information.
+
+
+
+
+      <a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@3.0.0...pubsweet-server@4.0.0) (2018-04-03)
 
 
@@ -20,7 +40,7 @@ ids, as it's stored in the database.
 
 
 
-  <a name="3.0.0"></a>
+<a name="3.0.0"></a>
 # [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@2.0.5...pubsweet-server@3.0.0) (2018-03-30)
 
 

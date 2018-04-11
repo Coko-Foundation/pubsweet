@@ -3,7 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.1.7"></a>
+      <a name="2.1.8"></a>
+## [2.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.7...pubsweet@2.1.8) (2018-04-11)
+
+
+### Bug Fixes
+
+* **cli:** fail early when database exists and clobber not set ([67dbe20](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/67dbe20))
+* **test:** set the clobber option for setupdb test ([bb81d21](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb81d21))
+* add back clobber undefined to false override ([c966115](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c966115))
+
+
+
+
+      <a name="2.1.7"></a>
 ## [2.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.6...pubsweet@2.1.7) (2018-04-03)
 
 
@@ -11,7 +24,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-  <a name="2.1.6"></a>
+<a name="2.1.6"></a>
 ## [2.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.5...pubsweet@2.1.6) (2018-03-30)
 
 

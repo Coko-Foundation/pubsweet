@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-submit",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^3.3.2",
+    "@pubsweet/ui": "^3.3.3",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-redux": "^5.0.2",
@@ -18,8 +18,8 @@
     "redux-form": "^7.0.3",
     "striptags": "^3.1.0",
     "styled-components": "^3.2.5",
-    "xpub-connect": "^0.0.9",
-    "xpub-edit": "^0.0.9",
+    "xpub-connect": "^0.0.10",
+    "xpub-edit": "^0.0.10",
     "xpub-journal": "^0.0.6",
     "xpub-selectors": "^0.0.5",
     "xpub-upload": "^0.0.6",
@@ -37,7 +37,7 @@
     "react-styleguidist": "^6.2.5",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0",
-    "xpub-styleguide": "^0.0.9"
+    "xpub-styleguide": "^0.0.10"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
