@@ -9,7 +9,9 @@ const Wrapper = styled.div`
   display: flex;
   margin-bottom: 0.8em;
   margin-top: 0;
+  flex-direction: column;
 `
+const ToolBar = styled.div``
 
 const Legend = styled.div`
   font-size: ${th('fontSizeBase')};
@@ -19,21 +21,22 @@ const Legend = styled.div`
 const MenuBar = ({ title, menu, state, dispatch }) => (
   <Wrapper>
     {title && <Legend>{title}</Legend>}
-
-    {['marks', 'blocks', 'insert', 'history', 'table'].map(name =>
-      map(menu[name], (item, key) => (
-        <MenuButton
-          handle={e => {
-            e.preventDefault()
-            item.run(state, dispatch)
-          }}
-          item={item}
-          key={key}
-          state={state}
-          title={title}
-        />
-      )),
-    )}
+    <ToolBar>
+      {['marks', 'blocks', 'insert', 'history', 'table'].map(name =>
+        map(menu[name], (item, key) => (
+          <MenuButton
+            handle={e => {
+              e.preventDefault()
+              item.run(state, dispatch)
+            }}
+            item={item}
+            key={key}
+            state={state}
+            title={title}
+          />
+        )),
+      )}
+    </ToolBar>
   </Wrapper>
 )
 
