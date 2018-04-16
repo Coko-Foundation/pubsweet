@@ -6,7 +6,9 @@ const supertest = require('supertest')
 const bodyParser = require('body-parser')
 
 // mocks
-jest.mock('@pubsweet/component-send-email', () => ({ sendMail: jest.fn() }))
+jest.mock('@pubsweet/component-send-email', () => ({
+  send: jest.fn().mockImplementation(() => Promise.resolve({})),
+}))
 jest.mock('pubsweet-server/src/models/User', () => ({
   find: jest.fn(() => ({ email: 'author@example.org' })),
 }))
@@ -39,6 +41,12 @@ jest.mock('pubsweet-server/src/helpers/authsome', () => ({
   can: jest.fn(() => true),
 }))
 
+jest.mock('passport', () => ({
+  authenticate: jest.fn((AuthBear, data) =>
+    jest.fn((req, res, next) => next()),
+  ),
+}))
+
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const transport = require('@pubsweet/component-send-email')
 const component = require('./reviewBackend')
@@ -64,7 +72,7 @@ describe('/api/make-decision route', () => {
     expect(response.body.version).toBeDefined()
     expect(response.body.project).toBeDefined()
     expect(response.body.nextVersion).not.toBeDefined()
-    expect(transport.sendMail).toHaveBeenCalledWith(
+    expect(transport.send).toHaveBeenCalledWith(
       expect.objectContaining({
         from: 'sender@example.com',
         to: ['author@example.org'],
@@ -82,7 +90,7 @@ describe('/api/make-decision route', () => {
       projectId: 2,
     })
     expect(response.status).toBe(403)
-    expect(transport.sendMail).not.toHaveBeenCalled()
+    expect(transport.send).not.toHaveBeenCalled()
   })
 })
 
@@ -96,6 +104,7 @@ describe('/api/make-invitation route', () => {
     const response = await app.patch('/api/make-invitation').send({
       versionId: '1',
       projectId: '2',
+      reviewerId: 1,
       reviewers: [
         {
           events: {
@@ -106,14 +115,15 @@ describe('/api/make-invitation route', () => {
         },
       ],
     })
+
     expect(response.body.version.reviewers).toBeDefined()
-    expect(transport.sendMail).toHaveBeenCalledWith(
+    expect(transport.send).toHaveBeenCalledWith(
       expect.objectContaining({
         from: 'sender@example.com',
         to: 'author@example.org',
         subject: 'Review Invitation',
         html:
-          "<p>title</p><p>abstract</p><p>Click <a href='http://example.com'>here</a> to navigate to the Dashboard</p>",
+          "<p>title</p><p>abstract</p><p><a href='http://example.com'>Click here to navigate to the Dashboard</a></p>",
       }),
     )
   })
@@ -124,6 +134,7 @@ describe('/api/make-invitation route', () => {
     const response = await app.patch('/api/make-invitation').send({
       versionId: '1',
       projectId: '2',
+      reviewerId: 1,
       reviewers: [
         {
           events: {
@@ -134,7 +145,8 @@ describe('/api/make-invitation route', () => {
         },
       ],
     })
+
     expect(response.status).toBe(403)
-    expect(transport.sendMail).not.toHaveBeenCalled()
+    expect(transport.send).not.toHaveBeenCalled()
   })
 })
