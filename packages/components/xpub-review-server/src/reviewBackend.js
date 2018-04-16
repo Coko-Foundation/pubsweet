@@ -1,5 +1,6 @@
 const { pick } = require('lodash')
 const config = require('config')
+const passport = require('passport')
 const logger = require('@pubsweet/logger')
 const emailer = require('@pubsweet/component-send-email')
 const User = require('pubsweet-server/src/models/User')
@@ -8,14 +9,18 @@ const Collection = require('pubsweet-server/src/models/Collection')
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
 
+const authBearer = passport.authenticate('bearer', { session: false })
+
 module.exports = app => {
-  app.patch('/api/make-invitation', async (req, res, next) => {
+  app.patch('/api/make-invitation', authBearer, async (req, res, next) => {
     try {
       const version = await Fragment.find(req.body.versionId)
       const project = await Collection.find(req.body.projectId)
 
       const reviewer = await Promise.all(
-        project.reviewers.map(({ user }) => User.find(user)),
+        project.reviewers
+          .filter(user => user.user === req.body.reviewerId)
+          .map(({ user }) => User.find(user)),
       )
 
       const canViewVersion = await authsome.can(req.user, 'GET', version)
@@ -28,31 +33,43 @@ module.exports = app => {
       await version.updateProperties({ reviewers: versionUpdateData })
       await version.save()
 
-      logger.info(`Sending decision email to ${reviewer[0].email}`)
+      logger.info(`Sending invitation email to ${reviewer[0].email}`)
 
       let message = `<p>${version.metadata.title}</p>`
       message += `<p>${version.metadata.abstract}</p>`
-      message += `<p>Click <a href='${
+      message += `<p><a href='${
         config.get('pubsweet-server').baseUrl
-      }'>here</a> to navigate to the Dashboard</p>`
+      }'>Click here to navigate to the Dashboard</a></p>`
 
-      transport.sendMail({
-        from: config.get('mailer.from'),
-        to: reviewer[0].email,
-        subject: 'Review Invitation',
-        html: message,
-      })
+      emailer
+        .send({
+          from: config.get('mailer.from'),
+          to: reviewer[0].email,
+          subject: 'Review Invitation',
+          html: message,
+        })
+        .catch(err => {
+          logger.error(err.response)
+        })
+
+      const canViewProject = await authsome.can(req.user, 'GET', project)
+      const canPatchProject = await authsome.can(req.user, 'PATCH', project)
+      if (!canPatchProject || !canViewProject) throw new AuthorizationError()
 
       res.send({
-        project,
-        version,
+        version: canViewVersion.filter
+          ? canViewVersion.filter(version)
+          : version,
+        project: canViewProject.filter
+          ? canViewProject.filter(project)
+          : project,
       })
     } catch (err) {
       next(err)
     }
   })
 
-  app.patch('/api/make-decision', async (req, res, next) => {
+  app.patch('/api/make-decision', authBearer, async (req, res, next) => {
     try {
       const version = await Fragment.find(req.body.versionId)
       const project = await Collection.find(req.body.projectId)
@@ -141,12 +158,16 @@ module.exports = app => {
 
       const authorEmails = authors.map(user => user.email)
       logger.info(`Sending decision email to ${authorEmails}`)
-      await emailer.sendMail({
-        from: config.get('mailer.from'),
-        to: authorEmails,
-        subject: 'Decision made',
-        html: message,
-      })
+      emailer
+        .send({
+          from: config.get('mailer.from'),
+          to: authorEmails,
+          subject: 'Decision made',
+          html: message,
+        })
+        .catch(err => {
+          logger.error(err.response)
+        })
 
       res.send({
         version: canViewVersion.filter

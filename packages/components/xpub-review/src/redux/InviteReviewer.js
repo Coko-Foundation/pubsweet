@@ -4,45 +4,44 @@ import {
   GET_FRAGMENT_SUCCESS,
 } from 'pubsweet-client/src/actions/types'
 
-export const MAKE_DECISION_REQUEST = 'MAKE_DECISION_REQUEST'
-export const MAKE_DECISION_SUCCESS = 'MAKE_DECISION_SUCCESS'
-export const MAKE_DECISION_FAILURE = 'MAKE_DECISION_FAILURE'
+export const MAKE_INVITATION_REQUEST = 'MAKE_INVITATION_REQUEST'
+export const MAKE_INVITATION_SUCCESS = 'MAKE_INVITATION_SUCCESS'
+export const MAKE_INVITATION_FAILURE = 'MAKE_INVITATION_FAILURE'
 
-function makeDecisionRequest(project, version) {
+function makeInvitationRequest(project, version) {
   return {
-    type: MAKE_DECISION_REQUEST,
+    type: MAKE_INVITATION_REQUEST,
     project,
     version,
   }
 }
 
-function makeDecisionSuccess(project, version, result) {
+function makeInvitationSuccess(version, result) {
   return {
-    type: MAKE_DECISION_SUCCESS,
-    project,
+    type: MAKE_INVITATION_SUCCESS,
     version,
     result,
   }
 }
 
-function makeDecisionFailure(project, version, error) {
+function makeInvitationFailure(version, error) {
   return {
-    type: MAKE_DECISION_FAILURE,
-    project,
+    type: MAKE_INVITATION_FAILURE,
     version,
     error,
   }
 }
 
-export function makeDecision(project, version) {
+export function makeInvitation(project, version, reviewerId) {
   return dispatch => {
-    dispatch(makeDecisionRequest(project, version))
+    dispatch(makeInvitationRequest(project, version))
 
     return api
-      .update('/make-decision', {
-        projectId: project.id,
+      .update('/make-invitation', {
         versionId: version.id,
-        decision: version.decision,
+        projectId: project.id,
+        reviewers: version.reviewers,
+        reviewerId,
       })
       .then(result => {
         dispatch({
@@ -62,22 +61,22 @@ export function makeDecision(project, version) {
             receivedAt: Date.now(),
           })
         }
-        dispatch(makeDecisionSuccess(project, version, result))
+        dispatch(makeInvitationSuccess(version, result))
       })
-      .catch(error => dispatch(makeDecisionFailure(project, version, error)))
+      .catch(error => dispatch(makeInvitationFailure(version, error)))
   }
 }
 
 const initialState = {}
 export default (state = initialState, action) => {
   switch (action.type) {
-    case MAKE_DECISION_REQUEST:
+    case MAKE_INVITATION_REQUEST:
       return {}
 
-    case MAKE_DECISION_SUCCESS:
+    case MAKE_INVITATION_SUCCESS:
       return {}
 
-    case MAKE_DECISION_FAILURE:
+    case MAKE_INVITATION_FAILURE:
       return { error: action.error }
 
     default:

@@ -40,7 +40,9 @@ const addReviewer = (props, projectReviewer, dispatch) => {
 
   version.reviewers = (props.version.reviewers || []).concat(reviewer)
 
-  return dispatch(actions.inviteReviewer(props.project, version))
+  return dispatch(
+    actions.inviteReviewer(props.project, version, projectReviewer.user),
+  )
 }
 
 const handleSubmit = props => reset => (values, dispatch) =>
