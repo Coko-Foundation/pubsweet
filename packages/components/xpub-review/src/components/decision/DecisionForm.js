@@ -10,7 +10,11 @@ import { required } from 'xpub-validators'
 import AdminSection from '../atoms/AdminSection'
 
 const NoteInput = input => (
-  <NoteEditor placeholder="Enter your decision…" title="Decision" {...input} />
+  <NoteEditor
+    placeholder="Write/paste your decision letter here, or upload it using the upload button on the right."
+    title="Decision"
+    {...input}
+  />
 )
 
 const AttachmentsInput = uploadFile => input => (
