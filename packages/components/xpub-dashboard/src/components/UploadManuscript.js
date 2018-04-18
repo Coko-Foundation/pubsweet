@@ -101,6 +101,7 @@ const StatusCompleted = Status.extend.attrs({
 
 const Root = styled.div`
   display: flex;
+  flex-direction: column;
   font-weight: 200;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -118,6 +119,8 @@ const Root = styled.div`
 `
 
 const Main = styled.div`
+  display: flex;
+  justify-content: center;
   margin-left: 10px;
 `
 
@@ -133,6 +136,13 @@ const Info = styled.div`
   font-size: 2em;
   font-weight: 400;
   text-transform: uppercase;
+`
+
+const SubInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #333;
+  line-height: 32px;
 `
 
 class UploadManuscript extends Component {
@@ -196,22 +206,27 @@ class UploadManuscript extends Component {
         onDrop={uploadManuscript}
       >
         <Root>
-          {this.status === 'completed' && <StatusCompleted />}
-          {this.status === 'error' && <StatusError />}
-          {this.status === 'converting' && <StatusConverting />}
-          {this.status === 'idle' && <StatusIdle />}
-
           <Main>
+            {this.status === 'completed' && <StatusCompleted />}
+            {this.status === 'error' && <StatusError />}
+            {this.status === 'converting' && <StatusConverting />}
+            {this.status === 'idle' && <StatusIdle />}
             {this.state.error ? (
               <Error>{conversion.error.message}</Error>
             ) : (
-              <Info>
-                {this.state.completed
-                  ? 'Submission created'
-                  : 'Create submission'}
-              </Info>
+              [
+                <Info>
+                  {this.state.completed
+                    ? 'Submission created'
+                    : 'Create submission'}
+                </Info>,
+              ]
             )}
           </Main>
+          <SubInfo>
+            {this.status === 'converting' &&
+              'Your manuscript is being being converted into a directly editable version. This might take a while.'}
+          </SubInfo>
         </Root>
       </StyledDropzone>
     )
