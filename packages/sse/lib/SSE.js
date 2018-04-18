@@ -6,6 +6,9 @@ class SSE extends EventEmitter {
 
     this.connect = this.connect.bind(this)
     this.messageId = 0
+    this.user = ''
+    // only to pass linting
+    this.models = {}
     this.pulse()
   }
 
@@ -17,6 +20,8 @@ class SSE extends EventEmitter {
     req.socket.setTimeout(Number.MAX_SAFE_INTEGER)
     req.socket.setNoDelay(true)
     req.socket.setKeepAlive(true)
+    // TODO: how to access models here
+    this.user = this.models.User.find(req.user)
 
     res.statusCode = 200
 
@@ -42,8 +47,9 @@ class SSE extends EventEmitter {
         write('event', data.event)
       }
 
-      write('data', JSON.stringify(data.data))
-
+      if (this.shouldBroadcast(data.data)) {
+        write('data', JSON.stringify(data.data))
+      }
       res.write('\n')
     }
 
@@ -55,6 +61,18 @@ class SSE extends EventEmitter {
       this.removeListener('data', dataListener)
       this.setMaxListeners(this.getMaxListeners() - 1)
     })
+  }
+
+  async shouldBroadcast(data) {
+    // TODO: if the data is about fragment then use the collection's id first
+    const memberships = await Promise.all(
+      this.user.teams.map(async teamId => {
+        // TODO: how to access models here???
+        const teamFound = await this.models.Team.find(teamId)
+        return teamFound.object.id === data.id
+      }),
+    )
+    return memberships.includes(true)
   }
 
   pulse() {
