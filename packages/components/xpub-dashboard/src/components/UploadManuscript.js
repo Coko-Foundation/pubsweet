@@ -218,7 +218,7 @@ class UploadManuscript extends Component {
                 <Info>
                   {this.state.completed
                     ? 'Submission created'
-                    : 'Create submission'}
+                    : 'Submit Manuscript'}
                 </Info>,
               ]
             )}
