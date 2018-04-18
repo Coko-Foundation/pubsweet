@@ -14,19 +14,14 @@ const renderField = ({ input, label, placeholder }) => {
     <TextField placeholder={placeholder} {...input} />
   </div>
 }
-
+//{/* TODO validation */}
 const renderAuthors = ({ authors }) => {
   <ul>
     <li>
-      <Button /> {/* TODO Add another author button */}
-
-      {/* TODO Remove author button? When at least one remaining */}
-
+      {/* TODO Add another author button <Button> component */}
+      {/* TODO Remove author button When at least one remaining */}
     </li>
-    {
-      {/* TODO validation */}
-
-      authors.map((author, index) =>
+    { authors.map((author, index) =>
         <li key={index}>
           <div>Author #{index + 1}</div>
 
@@ -58,7 +53,8 @@ const renderAuthors = ({ authors }) => {
             placeholder="Enter affiliation…"
           />
         </li>
-      )}
+        )
+      }
   </ul>  
 }
 
