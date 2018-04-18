@@ -3,6 +3,7 @@ import { FormSection } from 'redux-form'
 import { AbstractEditor, TitleEditor } from 'xpub-edit'
 import { CheckboxGroup, Menu, TextField, ValidatedField } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
+import { AuthorsInput } from './AuthorsInput'
 import {
   join,
   required,
@@ -29,10 +30,6 @@ const AbstractInput = input => (
     title="Abstract"
     {...input}
   />
-)
-
-const AuthorsInput = input => (
-  <TextField placeholder="Enter author names…" {...input} />
 )
 
 const KeywordsInput = input => (
@@ -71,7 +68,7 @@ const MetadataFields = ({ journal, readonly }) => (
 
     <Section id="metadata.authors">
       <Legend space>Authors</Legend>
-
+      {/* TODO validation */}
       <ValidatedField
         component={AuthorsInput}
         format={join()}
