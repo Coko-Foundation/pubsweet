@@ -15,7 +15,7 @@ const index = require('./routes/index')
 const api = require('./routes/api')
 const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
-const sse = require('pubsweet-sse')
+const SSE = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
 const _ = require('lodash/fp')
@@ -62,14 +62,14 @@ const configureApp = app => {
 
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
+    const sse = new SSE(authsome.can)
     app.get(
       '/updates',
       passport.authenticate('bearer', { session: false }),
       sse.connect,
     )
+    app.locals.sse = sse
   }
-
-  app.locals.sse = sse
 
   // Serve the index page for front end
   app.use('/manage', index)

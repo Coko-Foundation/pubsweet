@@ -1,14 +1,13 @@
 const { EventEmitter } = require('events')
 
 class SSE extends EventEmitter {
-  constructor() {
+  constructor(eventFilter) {
     super()
 
     this.connect = this.connect.bind(this)
     this.messageId = 0
-    this.user = ''
-    // only to pass linting
-    this.models = {}
+    this.userId = ''
+    this.eventFilter = eventFilter
     this.pulse()
   }
 
@@ -17,11 +16,11 @@ class SSE extends EventEmitter {
     // TODO: throw exception?
     // }
 
+    this.userId = req.user
+
     req.socket.setTimeout(Number.MAX_SAFE_INTEGER)
     req.socket.setNoDelay(true)
     req.socket.setKeepAlive(true)
-    // TODO: how to access models here
-    this.user = this.models.User.find(req.user)
 
     res.statusCode = 200
 
@@ -47,32 +46,27 @@ class SSE extends EventEmitter {
         write('event', data.event)
       }
 
-      if (this.shouldBroadcast(data.data)) {
-        write('data', JSON.stringify(data.data))
-      }
+      write('data', JSON.stringify(data.data))
       res.write('\n')
     }
 
     // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
 
-    this.on('data', dataListener)
+    this.on('data', async data => {
+      const shouldBroadcast = await this.eventFilter(
+        this.userId,
+        data.event,
+        data.data,
+      )
+      if (shouldBroadcast) {
+        dataListener(data)
+      }
+    })
 
     req.on('close', () => {
       this.removeListener('data', dataListener)
       this.setMaxListeners(this.getMaxListeners() - 1)
     })
-  }
-
-  async shouldBroadcast(data) {
-    // TODO: if the data is about fragment then use the collection's id first
-    const memberships = await Promise.all(
-      this.user.teams.map(async teamId => {
-        // TODO: how to access models here???
-        const teamFound = await this.models.Team.find(teamId)
-        return teamFound.object.id === data.id
-      }),
-    )
-    return memberships.includes(true)
   }
 
   pulse() {
@@ -88,4 +82,4 @@ class SSE extends EventEmitter {
   }
 }
 
-module.exports = new SSE()
+module.exports = SSE
