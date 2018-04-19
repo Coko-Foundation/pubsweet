@@ -4,12 +4,9 @@ const authentication = require('../../authentication')
 
 const resolvers = {
   Query: {
-    async currentUser(_, vars, ctx) {
-      const user = await User.find(ctx.user)
-      return {
-        user,
-        token: authentication.token.create(user),
-      }
+    currentUser(_, vars, ctx) {
+      if (!ctx.user) return null
+      return User.find(ctx.user)
     },
   },
   Mutation: {
@@ -36,7 +33,7 @@ const resolvers = {
 const typeDefs = `
   extend type Query {
     # Get the currently authenticated user based on the JWT in the HTTP headers
-    currentUser: LoginResult
+    currentUser: User
   }
 
   extend type Mutation {

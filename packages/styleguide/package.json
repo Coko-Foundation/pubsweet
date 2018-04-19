@@ -1,15 +1,15 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "files": [
     "src",
     "dist"
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/default-theme": "^0.2.1",
-    "@pubsweet/elife-theme": "^0.1.0",
-    "@pubsweet/ui": "^3.3.2",
+    "@pubsweet/default-theme": "^0.2.2",
+    "@pubsweet/elife-theme": "^0.1.1",
+    "@pubsweet/ui": "^3.3.3",
     "faker": "^4.1.0",
     "lodash": "^4.17.5",
     "react": "^16.2.0",
@@ -20,7 +20,7 @@
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",
-    "styled-components": "^2.4.0",
+    "styled-components": "^3.2.5",
     "xpub-journal": "^0.0.3",
     "xpub-styleguide": "^0.0.3"
   },

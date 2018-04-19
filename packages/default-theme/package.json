@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/default-theme",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Default theme for pubsweet apps",
   "main": "src",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "access": "public"
   },
   "dependencies": {
-    "styled-components": "^2.4.0",
+    "styled-components": "^3.2.5",
     "typeface-noto-sans": "^0.0.54",
     "typeface-noto-serif": "^0.0.54",
     "typeface-ubuntu-mono": "^0.0.54"

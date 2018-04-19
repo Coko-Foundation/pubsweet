@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.1.3...pubsweet-component-xpub-dashboard@0.2.0) (2018-04-11)
+
+
+### Bug Fixes
+
+* **components:** change title styling ([3c154ba](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c154ba))
+
+
+### Features
+
+* **components:** add Link to control panel ([85458b9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85458b9))
+* **components:** fix import add link ([dfe4818](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dfe4818))
+
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.1.2...pubsweet-component-xpub-dashboard@0.1.3) (2018-04-03)
 

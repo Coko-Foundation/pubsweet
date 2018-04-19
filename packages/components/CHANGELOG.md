@@ -3,7 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="5.1.0"></a>
+  <a name="5.2.0"></a>
+# [5.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.1.0...pubsweet-components@5.2.0) (2018-04-11)
+
+
+### Bug Fixes
+
+* **components:** change title styling ([3c154ba](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c154ba))
+* bump standard dependency ([0c599db](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0c599db))
+
+
+### Features
+
+* **components:** add Link to control panel ([85458b9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85458b9))
+* **components:** fix import add link ([dfe4818](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dfe4818))
+
+
+
+
+  <a name="5.1.0"></a>
 # [5.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.0.0...pubsweet-components@5.1.0) (2018-04-03)
 
 
@@ -24,7 +42,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="5.0.0"></a>
+<a name="5.0.0"></a>
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@4.3.0...pubsweet-components@5.0.0) (2018-03-30)
 
 

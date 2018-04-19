@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.4.0"></a>
+# [2.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@2.3.1...pubsweet-client@2.4.0) (2018-04-11)
+
+
+### Features
+
+* enable the Apollo client to be customised ([0546acc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0546acc))
+
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@2.3.0...pubsweet-client@2.3.1) (2018-03-30)
 

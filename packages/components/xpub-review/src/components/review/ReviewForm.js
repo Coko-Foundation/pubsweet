@@ -11,7 +11,11 @@ import { required } from 'xpub-validators'
 import AdminSection from '../atoms/AdminSection'
 
 const NoteInput = input => (
-  <NoteEditor placeholder="Enter your review…" title="Review" {...input} />
+  <NoteEditor
+    placeholder="Enter your review…"
+    title="Comments to the Author"
+    {...input}
+  />
 )
 
 const AttachmentsInput = uploadFile => input => (
@@ -21,7 +25,7 @@ const AttachmentsInput = uploadFile => input => (
 const ConfidentialInput = input => (
   <NoteEditor
     placeholder="Enter a confidential note to the editor (optional)…"
-    title="Confidential"
+    title="Confidential Comments to Editor (Optional)"
     {...input}
   />
 )
