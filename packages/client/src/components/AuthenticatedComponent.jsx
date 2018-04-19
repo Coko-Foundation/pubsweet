@@ -7,9 +7,6 @@ import PropTypes from 'prop-types'
 import actions from '../actions'
 import { selectCurrentUser } from '../selectors'
 
-const isAllowedRedirect = pathname =>
-  !['/logout', '/login', '/signup'].includes(pathname)
-
 export class AuthenticatedComponent extends React.Component {
   componentWillMount() {
     this.props.ensureCurrentUser().then(() => this.checkAuth(this.props))
@@ -19,14 +16,16 @@ export class AuthenticatedComponent extends React.Component {
     this.checkAuth(nextProps)
   }
 
-  checkAuth({ isFetching, isAuthenticated }) {
+  createReturnUrl = ({ pathname, search = '' }) => pathname + search
+
+  checkAuth = ({ isFetching, isAuthenticated }) => {
+    const { location, pushState } = this.props
     if (!isFetching && !isAuthenticated) {
-      const returnUrl = this.props.location.pathname
-      let loginUrl = '/login'
-      if (isAllowedRedirect(returnUrl)) {
-        loginUrl += `?next=${returnUrl}`
-      }
-      this.props.pushState(loginUrl)
+      const returnUrl = this.createReturnUrl(location)
+      const loginUrl = `/login?next=${returnUrl}`
+      pushState(loginUrl, {
+        from: { pathname: returnUrl },
+      })
     }
   }
 
