@@ -10,7 +10,7 @@ const getSignedUrl = (s3, s3Config) => {
     }
 
     try {
-      const signedUrl = await asyncGetSignedUrl(params)
+      const signedUrl = await asyncGetSignedUrl('getObject', params)
       res.status(200).json({
         signedUrl,
       })
