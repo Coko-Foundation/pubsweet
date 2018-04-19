@@ -65,11 +65,12 @@ const Step = ({ title, index, currentStep }) => (
 
 const Steps = ({
   children,
+  className,
   renderSeparator = Separator,
   currentStep,
   margin = '20px',
 }) => (
-  <Root margin={margin}>
+  <Root className={className} margin={margin}>
     {React.Children.toArray(children).reduce(
       (acc, el, index, arr) =>
         index === arr.length - 1
