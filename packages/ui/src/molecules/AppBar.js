@@ -16,6 +16,7 @@ const Root = styled.nav`
 
 const Section = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const Logo = styled.span`
@@ -52,7 +53,6 @@ const AppBar = ({
           <LogoLink to={brandLink}>{brand}</LogoLink>
         </Logo>
       )}
-
       {navLinkComponents &&
         navLinkComponents.map((NavLinkComponent, idx) => (
           <span key={NavLinkComponent.props.to}>
