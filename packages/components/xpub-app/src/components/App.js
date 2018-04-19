@@ -53,7 +53,7 @@ const NavLinkComponents = routerPath =>
     ManuscriptMenu(routerPath, '/projects/:project/versions/:version/submit'),
     SubmissionMenu(
       routerPath,
-      '/projects/:project/versions/:version/manuscript'
+      '/projects/:project/versions/:version/manuscript',
     ),
   ].filter(comp => comp)
 
