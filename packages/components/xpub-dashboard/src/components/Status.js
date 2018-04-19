@@ -11,7 +11,7 @@ const labels = {
   new: 'Unsubmitted',
   rejected: 'Rejected',
   submitted: 'Submitted',
-  revising: 'Under Revision',
+  revising: 'Back with Author for Revision',
 }
 
 const Root = styled.div`
