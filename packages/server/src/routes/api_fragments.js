@@ -11,7 +11,9 @@ const express = require('express')
 
 const api = express.Router()
 const passport = require('passport')
-const sse = require('pubsweet-sse')
+const SSE = require('pubsweet-sse')
+
+const sse = new SSE()
 const {
   objectId,
   createFilterFromQuery,

@@ -7,7 +7,7 @@ class SSE extends EventEmitter {
     this.connect = this.connect.bind(this)
     this.messageId = 0
     this.userId = ''
-    this.eventFilter = eventFilter
+    this.eventFilter = eventFilter || null
     this.pulse()
   }
 
@@ -53,13 +53,16 @@ class SSE extends EventEmitter {
     // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
 
     this.on('data', async data => {
-      const shouldBroadcast = await this.eventFilter(
-        this.userId,
-        data.event,
-        data.data,
-      )
-      if (shouldBroadcast) {
-        dataListener(data)
+      if (data.event) dataListener(data)
+      if (this.eventFilter !== null) {
+        const shouldBroadcast = await this.eventFilter(
+          this.userId,
+          data.action,
+          data.data,
+        )
+        if (shouldBroadcast) {
+          dataListener(data)
+        }
       }
     })
 

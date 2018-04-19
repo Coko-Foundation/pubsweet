@@ -88,6 +88,10 @@ async function authenticatedUser(user, operation, object, context) {
     }
   }
 
+  if (operation === 'collection:create') {
+    return true
+  }
+
   // Allow the authenticated user to GET collections they own
   if (operation === 'GET' && object === '/collections/') {
     return {
