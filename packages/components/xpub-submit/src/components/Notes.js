@@ -5,6 +5,15 @@ import { ValidatedField } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
 import { Section } from '../styles'
 
+// TODO: this is only here because prosemirror would save the title in the
+// metadata as html instead of plain text. we need to maybe find a better
+// position than here to perform this operation
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
+
 const FundingInput = input => (
   <NoteEditor
     placeholder="Enter an acknowledgment…"
@@ -36,6 +45,7 @@ const Notes = ({ readonly }) => (
       <ValidatedField
         component={InstructionsInput}
         name="specialInstructions"
+        parse={stripHtml}
         readonly={readonly}
       />
     </Section>
