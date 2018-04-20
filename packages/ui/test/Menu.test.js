@@ -2,7 +2,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 
-import Menu from '../src/atoms/Menu'
+import { Menu } from '../src/'
 import TestThemeProvider from './setup/theme'
 
 const props = {
