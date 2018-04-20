@@ -15,7 +15,7 @@ const index = require('./routes/index')
 const api = require('./routes/api')
 const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
-const SSE = require('pubsweet-sse')
+const sse = require('pubsweet-sse')
 const authentication = require('./authentication')
 const models = require('./models')
 const _ = require('lodash/fp')
@@ -59,15 +59,16 @@ const configureApp = app => {
   if (['development', 'test'].includes(config.util.getEnv('NODE_ENV'))) {
     app.use(graphqlApi)
   }
-
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
-    const sse = new SSE(authsome.can)
+    sse.setContext(authsome)
+
     app.get(
       '/updates',
       passport.authenticate('bearer', { session: false }),
       sse.connect,
     )
+
     app.locals.sse = sse
   }
 

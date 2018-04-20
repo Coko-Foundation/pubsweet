@@ -8,9 +8,7 @@ const express = require('express')
 
 const api = express.Router()
 
-const SSE = require('pubsweet-sse')
-
-const sse = new SSE()
+const sse = require('pubsweet-sse')
 const {
   createFilterFromQuery,
   objectId,
