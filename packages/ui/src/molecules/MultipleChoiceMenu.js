@@ -1,0 +1,130 @@
+import React from 'react'
+import styled from 'styled-components'
+import { get } from 'lodash'
+
+import { Checkbox } from '../atoms/'
+import { Menu } from '../molecules'
+import th from '../helpers/themeHelper'
+
+const Option = styled.div.attrs({
+  role: 'option',
+  tabIndex: '0',
+  'aria-selected': props => props.active,
+})``
+
+const Opener = styled.button.attrs({
+  type: 'button',
+})`
+  background: transparent;
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border-radius: ${th('borderRadius')};
+  cursor: pointer;
+  font-family: inherit;
+
+  width: 100%;
+  height: calc(${th('gridUnit')} * 2);
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    border-color: ${th('colorPrimary')};
+  }
+`
+
+const Value = styled.span`
+  flex-grow: 1;
+
+  text-align: left;
+  padding: 0 calc(${th('gridUnit')} / 2);
+
+  &:hover {
+    color: ${th('colorPrimary')};
+  }
+`
+
+const Placeholder = Value.extend`
+  color: ${th('colorTextPlaceholder')};
+  font-style: italic;
+`
+
+const ArrowContainer = styled.span`
+  border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
+
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Arrow = styled.span`
+  font-size: 50%;
+  transition: transform 0.2s;
+  transform: scaleX(2) scaleY(${props => (props.open ? -1.2 : 1.2)});
+`
+
+const optionLabel = selected => Object.values(selected).join(', ')
+
+const MultipleChoiceOpener = ({
+  toggleMenu,
+  open,
+  selected = {},
+  placeholder,
+}) => (
+  <Opener onClick={toggleMenu} open={open}>
+    {selected ? (
+      <Value>{optionLabel(selected)}</Value>
+    ) : (
+      <Placeholder>{placeholder}</Placeholder>
+    )}
+    <ArrowContainer>
+      <Arrow open={open}>▼</Arrow>
+    </ArrowContainer>
+  </Opener>
+)
+
+const SubjectOption = ({
+  selected = {},
+  label,
+  value,
+  handleSelect,
+  handleKeyPress,
+}) => (
+  <Option
+    key={value}
+    onClick={() => {
+      const newSelected = {
+        ...selected,
+        [value]: label,
+      }
+      handleSelect({ open: true, selected: newSelected })
+    }}
+    onKeyPress={event => handleKeyPress(event, value)}
+  >
+    <Checkbox checked={get(selected, `${value}`)} />
+    {label || value}
+  </Option>
+)
+
+const MultipleChoiceMenu = () => {
+  const options = [
+    { value: 'biochemistry', label: 'Biochemistry' },
+    {
+      value: 'biophysics-and-structural-biology',
+      label: 'Biophysics and Structural Biology',
+    },
+  ]
+  return (
+    <Menu
+      options={options}
+      placeholder="Choose in the list"
+      renderOpener={MultipleChoiceOpener}
+      renderOption={SubjectOption}
+    />
+  )
+}
+
+export default MultipleChoiceMenu
