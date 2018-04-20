@@ -6,8 +6,6 @@ class SSE extends EventEmitter {
 
     this.connect = this.connect.bind(this)
     this.messageId = 0
-    this.userId = ''
-    this.eventFilter = null
     this.pulse()
   }
 
@@ -61,7 +59,6 @@ class SSE extends EventEmitter {
           action,
           payload,
         )
-
         if (shouldBroadcast) {
           dataListener(data)
         }
@@ -86,8 +83,8 @@ class SSE extends EventEmitter {
     this.emit('data', { data, event })
   }
 
-  setContext(context) {
-    this.eventFilter = context
+  setEventFilter(authsome) {
+    this.eventFilter = authsome
   }
 }
 
