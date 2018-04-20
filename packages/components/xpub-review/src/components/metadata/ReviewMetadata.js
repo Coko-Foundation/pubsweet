@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { withJournal } from 'xpub-journal'
-import ReactHtmlParser from 'react-html-parser'
 
 import { File } from '@pubsweet/ui'
 
@@ -29,6 +28,7 @@ const Metadata = styled.div`
 const Cell = styled.span`
   padding: 0;
 `
+const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
 
 const ReviewMetadata = ({ version, handlingEditors, journal }) => (
   <Root>
@@ -63,35 +63,40 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
       <div>
         <Heading>Suggested Reviewers :</Heading>
         <Cell>
-          {version.suggestions.reviewers.suggested.length === 0 && 'none'}
-          {version.suggestions.reviewers.suggested.concat()}
+          {arrayToText(
+            ((version.suggestions || {}).reviewers || {}).suggested || [],
+          )}
         </Cell>
       </div>
       <div>
         <Heading>Opposed Reviewers :</Heading>
         <Cell>
-          {version.suggestions.reviewers.opposed.length === 0 && 'none'}
-          {version.suggestions.reviewers.opposed.concat()}
+          {arrayToText(
+            ((version.suggestions || {}).reviewers || {}).opposed || [],
+          )}
         </Cell>
       </div>
       <div>
         <Heading>Suggested Editors :</Heading>
         <Cell>
-          {version.suggestions.editors.suggested.length === 0 && 'none'}
-          {version.suggestions.editors.suggested.concat()}
+          {arrayToText(
+            ((version.suggestions || {}).editors || {}).suggested || [],
+          )}
         </Cell>
       </div>
       <div>
         <Heading>Opposed Editors :</Heading>
         <Cell>
-          {version.suggestions.editors.opposed.length === 0 && 'none'}
-          {version.suggestions.editors.opposed.concat()}
+          {arrayToText(
+            ((version.suggestions || {}).editors || {}).opposed || [],
+          )}
         </Cell>
       </div>
       <div>
         <Heading>Special Instructions :</Heading>
         <Cell>
-          {ReactHtmlParser(version.notes.specialInstructions) || 'none'}
+          {((version.notes || {}).specialInstructions || '') === '' && 'none'}
+          {version.notes.specialInstructions}
         </Cell>
       </div>
     </Metadata>
