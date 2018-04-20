@@ -155,13 +155,12 @@ class Menu extends React.Component {
     })
   }
 
-  handleSelect = selected => {
+  handleSelect = ({ selected, open }) => {
     this.setState({
-      open: false,
+      open,
       selected,
     })
-
-    this.props.onChange(selected)
+    if (this.props.onChange) this.props.onChange(selected)
   }
 
   handleKeyPress = (event, selected) => {
@@ -233,7 +232,7 @@ const DefaultMenuOption = ({
   <Option
     active={value === selected}
     key={value}
-    onClick={() => handleSelect(value)}
+    onClick={() => handleSelect({ open: false, selected: value })}
     onKeyPress={event => handleKeyPress(event, value)}
   >
     {label || value}
