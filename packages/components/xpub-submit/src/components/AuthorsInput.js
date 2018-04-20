@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, FieldArray } from 'redux-form'
+import { FieldArray } from 'redux-form'
 import { TextField, ValidatedField, Button } from '@pubsweet/ui'
 import {
   required,
@@ -10,8 +10,7 @@ const minSize1 = minSize(1)
 
 const renderField = ({ input, label, placeholder }) => {
   <div>
-    <label>{label}</label>
-    <TextField placeholder={placeholder} {...input} />
+    <TextField placeholder={placeholder} label={label} {...input} />
   </div>
 }
 //{/* TODO validation */}
@@ -25,32 +24,36 @@ const renderAuthors = ({ authors }) => {
         <li key={index}>
           <div>Author #{index + 1}</div>
 
-          <Field
+          <ValidatedField
+            component={renderField} //label="First name", placeholder="Enter first name…"
             name={`${author}.firstName`}
-            component={renderField}
-            label="First name"
-            placeholder="Enter first name…"
+            readonly={readonly}
+            required
+            validate={[minSize1]}    
           />
 
-          <Field 
+          <ValidatedField 
+            component={renderField} //label="Last name", placeholder="Enter last name…"
             name={`${author}.lastName`}
-            component={renderField}
-            label="Last name"
-            placeholder="Enter last name…"
+            readonly={readonly}
+            required
+            validate={[minSize1]}    
           />
 
-          <Field 
+          <ValidatedField 
+            component={renderField} //label="Email address", placeholder="Enter email address…"
             name={`${author}.email`}
-            component={renderField}
-            label="Email address"
-            placeholder="Enter email address…"
+            readonly={readonly}
+            required
+            validate={[minSize1]}    
           />
 
-          <Field 
+          <ValidatedField 
+            component={renderField} //label="Affiliation", placeholder="Enter affiliation…"
             name={`${author}.affiliation`}
-            component={renderField}
-            label="Affiliation"
-            placeholder="Enter affiliation…"
+            readonly={readonly}
+            required
+            validate={[minSize1]}  
           />
         </li>
         )
@@ -60,7 +63,7 @@ const renderAuthors = ({ authors }) => {
 
 const AuthorsInput = () => {
   return (
-    <FieldArray name="authors" component={renderMembers} />
+    <FieldArray name="authors" component={renderAuthors} />
   )
 }
 
