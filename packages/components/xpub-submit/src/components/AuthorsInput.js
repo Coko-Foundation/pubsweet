@@ -6,7 +6,7 @@ import { required, minSize } from 'xpub-validators'
 const minSize1 = minSize(1)
 
 const firstNameInput = ({ input }) => {
-  <div>
+  ;<div>
     <TextField
       placeholder={'Enter first name…'}
       label={'First name'}
@@ -16,7 +16,7 @@ const firstNameInput = ({ input }) => {
 }
 
 const lastNameInput = ({ input }) => {
-  <div>
+  ;<div>
     <TextField
       placeholder={'Enter last name…'}
       label={'Last name'}
@@ -26,7 +26,7 @@ const lastNameInput = ({ input }) => {
 }
 
 const emailAddressInput = ({ input }) => {
-  <div>
+  ;<div>
     <TextField
       placeholder={'Enter email address…'}
       label={'Email address'}
@@ -36,7 +36,7 @@ const emailAddressInput = ({ input }) => {
 }
 
 const affiliationInput = ({ input }) => {
-  <div>
+  ;<div>
     <TextField
       placeholder={'Enter affiliation…'}
       label={'Affiliation'}
@@ -46,7 +46,7 @@ const affiliationInput = ({ input }) => {
 }
 
 const renderAuthors = ({ authors }) => {
-  <ul>
+  ;<ul>
     <li>
       <Button onClick={() => authors.push()} plain type="button">
         Add another author

@@ -68,7 +68,7 @@ const MetadataFields = ({ journal, readonly }) => (
 
     <Section id="metadata.authors">
       <Legend space>Authors</Legend>
-      
+
       <ValidatedField
         component={AuthorsInput}
         name="authors"
