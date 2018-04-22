@@ -64,7 +64,6 @@ export const withEditorStyle = Component => styled(Component).attrs({
   .placeholder {
     color: ${th('colorTextPlaceholder')};
     font-family: ${th('fontInterface')};
-    height: 0;
     pointer-events: none;
   }
 
