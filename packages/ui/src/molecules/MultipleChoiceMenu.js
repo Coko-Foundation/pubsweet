@@ -18,7 +18,6 @@ const Opener = styled.button.attrs({
   background: transparent;
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-  cursor: pointer;
   font-family: inherit;
 
   width: 100%;
@@ -30,7 +29,7 @@ const Opener = styled.button.attrs({
 
   &:hover {
     border-color: ${th('colorPrimary')};
-  }
+  // }
 `
 
 const Value = styled.span`
@@ -86,7 +85,7 @@ const MultipleChoiceOpener = ({
   </Opener>
 )
 
-const SubjectOption = ({
+const MultipleChoiceCheckboxOption = ({
   selected = {},
   label,
   value,
@@ -95,16 +94,16 @@ const SubjectOption = ({
 }) => (
   <Option
     key={value}
-    onClick={() => {
-      const newSelected = {
-        ...selected,
-        [value]: label,
-      }
+    onClick={e => {
+      e.preventDefault()
+      const newSelected = { ...selected }
+      if (selected[value]) delete newSelected[value]
+      else newSelected[value] = label
       handleSelect({ open: true, selected: newSelected })
     }}
     onKeyPress={event => handleKeyPress(event, value)}
   >
-    <Checkbox checked={get(selected, `${value}`)} />
+    <Checkbox checked={!!get(selected, `${value}`)} />
     {label || value}
   </Option>
 )
@@ -122,7 +121,7 @@ const MultipleChoiceMenu = () => {
       options={options}
       placeholder="Choose in the list"
       renderOpener={MultipleChoiceOpener}
-      renderOption={SubjectOption}
+      renderOption={MultipleChoiceCheckboxOption}
     />
   )
 }
