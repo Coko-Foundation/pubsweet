@@ -1,4 +1,4 @@
-import { compose, withProps } from 'recompose'
+import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { actions } from 'pubsweet-client'
@@ -6,7 +6,6 @@ import { newestFirst, selectCurrentUser } from 'xpub-selectors'
 import { ConnectPage } from 'xpub-connect'
 import { uploadManuscript } from '../redux/conversion'
 import Dashboard from './Dashboard'
-import AssignEditorContainer from './AssignEditorContainer'
 
 const reviewerResponse = (project, version, reviewer, status) => dispatch => {
   reviewer.status = status
@@ -102,8 +101,5 @@ export default compose(
         dispatch(uploadManuscript(acceptedFiles, history)),
     }),
   ),
-  withProps({
-    AssignEditor: AssignEditorContainer,
-  }),
   withRouter,
 )(Dashboard)

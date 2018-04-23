@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Item, Header, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
-import { Roles, Role } from '../molecules/Roles'
 
 import Status from '../Status'
 import Meta from '../metadata/Meta'
@@ -83,24 +82,6 @@ const EditorItem = ({ AssignEditor, project, version, addUserToTeam }) => (
       </VersionTitleLink>
       <EditorItemLinks project={project} version={version} />
     </Body>
-
-    <Roles>
-      <Role>
-        <AssignEditor
-          addUserToTeam={addUserToTeam}
-          project={project}
-          teamTypeName="seniorEditor"
-        />
-      </Role>
-
-      <Role>
-        <AssignEditor
-          addUserToTeam={addUserToTeam}
-          project={project}
-          teamTypeName="handlingEditor"
-        />
-      </Role>
-    </Roles>
 
     <Reviews project={project} version={version} />
   </Item>
