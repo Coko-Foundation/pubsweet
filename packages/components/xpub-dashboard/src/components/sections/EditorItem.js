@@ -49,7 +49,7 @@ const EditorItemLinks = ({ project, version }) => (
   </Links>
 )
 
-const EditorItem = ({ AssignEditor, project, version, addUserToTeam }) => (
+const EditorItem = ({ project, version }) => (
   <Item>
     <Header>
       <Status status={project.status} />

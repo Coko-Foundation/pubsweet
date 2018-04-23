@@ -56,6 +56,8 @@ export default compose(
   ConnectPage(({ match }) => [
     actions.getCollection({ id: match.params.project }),
     actions.getFragments({ id: match.params.project }),
+    actions.getTeams(),
+    actions.getUsers(),
   ]),
   connect(
     (state, { match }) => {

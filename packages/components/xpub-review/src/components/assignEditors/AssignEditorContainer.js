@@ -10,8 +10,9 @@ const editorOption = user => ({
 
 export default compose(
   connect(
-    (state, { project, teamTypeName }) => ({
-      options:
+    (state, { project, teamTypeName }) => {
+      console.log(state)
+    return { options:
         state.users &&
         !state.users.isFetching &&
         state.users.users
@@ -25,7 +26,7 @@ export default compose(
             team.object.id === project.id &&
             team.teamType.name === teamTypeName,
         ),
-    }),
+    }},
     {
       addUserToTeam,
     },
