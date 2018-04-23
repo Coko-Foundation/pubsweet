@@ -49,20 +49,22 @@ class SSE extends EventEmitter {
     }
 
     // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
-
     this.on('data', async data => {
       const { action, data: payload } = data.data
-      if (data.event) dataListener(data)
-      if (this.eventFilter !== null && action) {
-        const shouldBroadcast = await this.eventFilter.can(
-          this.userId,
-          action,
-          payload,
-        )
-        if (shouldBroadcast) {
-          dataListener(data)
-        }
+
+      if (data.event === 'pulse' || !this.authsome) {
+        return dataListener(data)
       }
+
+      const permission = await this.authsome.can(this.userId, action, payload)
+
+      if (permission.filter) {
+        data.data.data = permission.filter(payload)
+        return dataListener(data)
+      } else if (permission) {
+        return dataListener(data)
+      }
+      return undefined
     })
 
     req.on('close', () => {
@@ -83,8 +85,8 @@ class SSE extends EventEmitter {
     this.emit('data', { data, event })
   }
 
-  setEventFilter(authsome) {
-    this.eventFilter = authsome
+  setAuthsome(authsome) {
+    this.authsome = authsome
   }
 }
 
