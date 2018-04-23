@@ -3,8 +3,8 @@ import { FormSection } from 'redux-form'
 import { Supplementary, ValidatedField } from '@pubsweet/ui'
 import { Section, Legend } from '../styles'
 
-const FileInput = uploadFile => input => (
-  <Supplementary uploadFile={uploadFile} {...input} />
+const FileInput = uploadFile => ({ value, ...input }) => (
+  <Supplementary files={value} uploadFile={uploadFile} {...input} />
 )
 
 const SupplementaryFiles = ({ uploadFile, readonly }) => (
