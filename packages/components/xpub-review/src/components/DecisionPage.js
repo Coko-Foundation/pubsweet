@@ -13,6 +13,7 @@ import {
 } from 'xpub-selectors'
 import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
+import AssignEditorContainer from '../components/assignEditors/AssignEditorContainer'
 
 const onSubmit = (values, dispatch, { project, version, history }) => {
   version.decision = {
@@ -72,6 +73,7 @@ export default compose(
   withRouter,
   withProps(({ currentVersion }) => ({
     initialValues: currentVersion.decision,
+    AssignEditor: AssignEditorContainer,
   })),
   reduxForm({
     form: 'decision',

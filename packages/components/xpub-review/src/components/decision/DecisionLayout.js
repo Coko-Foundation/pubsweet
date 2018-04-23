@@ -5,6 +5,7 @@ import SimpleEditor from 'wax-editor-react'
 
 import DecisionForm from './DecisionForm'
 import DecisionReviews from './DecisionReviews'
+import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
@@ -24,6 +25,7 @@ const DecisionLayout = ({
   uploadFile,
   valid,
   versions,
+  AssignEditor,
 }) => {
   const decisionSections = []
   const editorSections = []
@@ -75,6 +77,11 @@ const DecisionLayout = ({
             <ReviewMetadata version={currentVersion} />
           </AdminSection>
           <AdminSection>
+            <AssignEditorsReviewers
+              AssignEditor={AssignEditor}
+              project={project}
+              version={currentVersion}
+            />
             <Link
               to={`/projects/${project.id}/versions/${
                 currentVersion.id
