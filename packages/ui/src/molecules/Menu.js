@@ -163,9 +163,9 @@ class Menu extends React.Component {
     if (this.props.onChange) this.props.onChange(selected)
   }
 
-  handleKeyPress = (event, selected) => {
+  handleKeyPress = (event, selected, open) => {
     if (event.which === 13) {
-      this.handleSelect(selected)
+      this.handleSelect(selected, open)
     }
   }
 
