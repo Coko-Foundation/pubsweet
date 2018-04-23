@@ -89,7 +89,13 @@ async function authenticatedUser(user, operation, object, context) {
   }
 
   if (operation === 'collection:create') {
-    return true
+    return {
+      filter: payload => ({
+        collection: pickBy(payload.collection, (_, key) =>
+          ['id', 'title'].includes(key),
+        ),
+      }),
+    }
   }
 
   // Allow the authenticated user to GET collections they own

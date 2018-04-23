@@ -61,7 +61,7 @@ const configureApp = app => {
   }
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
-    sse.setEventFilter(authsome)
+    sse.setAuthsome(authsome)
     app.get(
       '/updates',
       passport.authenticate('bearer', { session: false }),

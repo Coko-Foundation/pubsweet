@@ -16,11 +16,14 @@ const port = 30645
 
 describe('API SSE enabled', () => {
   let es
+  let adminEs
   let server
 
   beforeEach(async () => {
     await cleanDB()
     await new User(fixtures.adminUser).save()
+    await new User(fixtures.user).save()
+
     await new Promise((resolve, reject) => {
       server = api.app.listen(port, err => (err ? reject(err) : resolve()))
     })
@@ -28,6 +31,7 @@ describe('API SSE enabled', () => {
 
   afterEach(() => {
     if (es) es.close()
+    if (adminEs) adminEs.close()
     if (server) server.close()
   })
 
@@ -57,6 +61,87 @@ describe('API SSE enabled', () => {
       data: {
         collection: fixtures.collection,
       },
+    })
+  })
+
+  describe('event filter', () => {
+    it('supports not sending an event', async () => {
+      const adminToken = await api.users.authenticate.post(fixtures.adminUser)
+      const token = await api.users.authenticate.post(fixtures.user)
+
+      es = new EventSource(
+        `http://localhost:${port}/updates?access_token=${encodeURIComponent(
+          token,
+        )}`,
+      )
+
+      // wrap user's event listener in promise
+      const eventPromise = new Promise(resolve =>
+        es.addEventListener('message', resolve),
+      )
+
+      // perform action (we'll block the SSE for this one)
+      await api.fragments
+        .post({ fragment: fixtures.fragment, token: adminToken })
+        .expect(STATUS.CREATED)
+
+      // perform action (let this one through filtered)
+      await api.collections
+        .create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+
+      // await user's filtered event
+      const event = await eventPromise
+      const eventData = JSON.parse(event.data)
+
+      expect(eventData).toEqual(
+        expect.objectContaining({
+          action: 'collection:create',
+          data: {
+            collection: {
+              id: expect.any(String),
+              title: fixtures.collection.title,
+            },
+          },
+        }),
+      )
+    })
+
+    it('supports property-filtering', async () => {
+      const adminToken = await api.users.authenticate.post(fixtures.adminUser)
+      const token = await api.users.authenticate.post(fixtures.user)
+
+      es = new EventSource(
+        `http://localhost:${port}/updates?access_token=${encodeURIComponent(
+          token,
+        )}`,
+      )
+
+      // wrap user's event listener in promise
+      const eventPromise = new Promise(resolve =>
+        es.addEventListener('message', resolve),
+      )
+
+      // perform action
+      await api.collections
+        .create(fixtures.collection, adminToken)
+        .expect(STATUS.CREATED)
+
+      // await user's filtered event
+      const event = await eventPromise
+      const eventData = JSON.parse(event.data)
+
+      expect(eventData).toEqual(
+        expect.objectContaining({
+          action: 'collection:create',
+          data: {
+            collection: {
+              id: expect.any(String),
+              title: fixtures.collection.title,
+            },
+          },
+        }),
+      )
     })
   })
 })
