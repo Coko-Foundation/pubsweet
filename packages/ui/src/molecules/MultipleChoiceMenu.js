@@ -98,7 +98,8 @@ const MultipleChoiceCheckboxOption = ({
       e.preventDefault()
       const newSelected = { ...selected }
       if (selected[value]) delete newSelected[value]
-      else newSelected[value] = label
+      else if (Object.keys(selected).length <= 1) newSelected[value] = label
+      else return
       handleSelect({ open: true, selected: newSelected })
     }}
     onKeyPress={event => handleKeyPress(event, value)}
@@ -110,6 +111,29 @@ const MultipleChoiceCheckboxOption = ({
 
 const MultipleChoiceMenu = () => {
   const options = [
+    {
+      value: 'structural-biology-molecular-biophysics',
+      label: 'Structural Biology and Molecular Biophysics',
+    },
+    { value: 'plant-biology', label: 'Plant Biology' },
+    { value: 'physics-living-systems', label: 'Physics of Living Systems' },
+    { value: 'neuroscience', label: 'Neuroscience' },
+    {
+      value: 'microbiology-infectious-disease',
+      label: 'Microbiology and Infectious Disease',
+    },
+    { value: 'immunology-inflammation', label: 'Immunology and Inflammation' },
+    { value: 'human-biology-medicine', label: 'Human Biology and Medicine' },
+    {
+      value: 'genomics-evolutionary-biology',
+      label: 'Genomics and Evolutionary Biology',
+    },
+    { value: 'genes-chromosomes', label: 'Genes and Chromosomes' },
+    {
+      value: 'epidemiology-global-health',
+      label: 'Epidemiology and Global Health',
+    },
+    { value: 'ecology', label: 'Ecology' },
     { value: 'biochemistry', label: 'Biochemistry' },
     {
       value: 'biophysics-and-structural-biology',
