@@ -18,8 +18,8 @@ const NoteInput = input => (
   />
 )
 
-const AttachmentsInput = uploadFile => input => (
-  <Attachments uploadFile={uploadFile} {...input} />
+const AttachmentsInput = uploadFile => ({ value, ...input }) => (
+  <Attachments files={value} uploadFile={uploadFile} {...input} />
 )
 
 const ConfidentialInput = input => (
