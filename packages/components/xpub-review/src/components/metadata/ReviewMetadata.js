@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { withJournal } from 'xpub-journal'
 
-import { File } from '@pubsweet/ui'
+import { File, Attachment } from '@pubsweet/ui'
 
 const Root = styled.div``
 
@@ -99,6 +99,19 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
           {version.notes.specialInstructions}
         </Cell>
       </div>
+      <div>
+        <Heading>
+          {version.files.supplementary.length} supplementary{' '}
+          {version.files.supplementary.length === 1 ? 'file' : 'files'}:
+        </Heading>
+        {!!version.files.supplementary.length && (
+          <Cell>
+            {version.files.supplementary.map(file => (
+              <Attachment file={file} key={file.url} uploaded />
+            ))}
+          </Cell>
+        )}
+      </div>
     </Metadata>
     <Table>
       <tbody>
@@ -108,20 +121,6 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
             <Cell>
               {handlingEditors.map(user => (
                 <span key={user.username}>{user.username}</span>
-              ))}
-            </Cell>
-          </tr>
-        )}
-
-        {!!version.files.supplementary.length && (
-          <tr>
-            <Heading>
-              {version.files.supplementary.length} supplementary{' '}
-              {version.files.supplementary.length === 1 ? 'file' : 'files'}:
-            </Heading>
-            <Cell>
-              {version.files.supplementary.map(file => (
-                <File file={file} key={file.url} value={file} />
               ))}
             </Cell>
           </tr>
