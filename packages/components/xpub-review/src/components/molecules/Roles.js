@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Roles = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 0.8em;
   margin-bottom: 0.6em;
   margin-left: 0.5em;
@@ -13,9 +13,10 @@ const Roles = styled.div`
 
 const Role = styled.div`
   display: flex;
+
+  &:not(:last-of-type) {
+    margin-right: 3em;
+  }
 `
-// &:not(:last-of-type) {
-//   margin-right: 3em;
-// }
 
 export { Roles, Role }
