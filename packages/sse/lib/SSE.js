@@ -14,8 +14,6 @@ class SSE extends EventEmitter {
     // TODO: throw exception?
     // }
 
-    this.userId = req.user
-
     req.socket.setTimeout(Number.MAX_SAFE_INTEGER)
     req.socket.setNoDelay(true)
     req.socket.setKeepAlive(true)
@@ -56,7 +54,7 @@ class SSE extends EventEmitter {
         return dataListener(data)
       }
 
-      const permission = await this.authsome.can(this.userId, action, payload)
+      const permission = await this.authsome.can(req.user, action, payload)
 
       if (permission.filter) {
         data.data.data = permission.filter(payload)
