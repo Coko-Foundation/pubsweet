@@ -13,7 +13,23 @@ When the user is not signed in, only the login link is displayed.
 <AppBar brand="xpub" />
 ```
 
-Can optionally pass navigation links or image for brand.
+Can optionally pass navigation links
+
+```js
+<AppBar
+  brand="xpub"
+  navLinkComponents={[
+    <Link to="/home">Home</Link>,
+    <Link to="/about">About</Link>,
+  ]}
+  user={{
+    username: 'user',
+    admin: true,
+  }}
+/>
+```
+
+Can optionally pass an image for a brand.
 
 ```js
 <AppBar

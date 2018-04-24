@@ -16,6 +16,7 @@ const Root = styled.nav`
 
 const Section = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const Logo = styled.span`
