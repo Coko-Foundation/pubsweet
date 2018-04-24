@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.1"></a>
+## [0.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.0...pubsweet-component-xpub-dashboard@0.2.1) (2018-04-24)
+
+
+### Bug Fixes
+
+* **components:** add file streamlined data ([9dd6797](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dd6797))
+* **components:** add metadata StreamLined ([29a1fcd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29a1fcd))
+* **components:** add subinfo to upload ([446fc16](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/446fc16))
+* **components:** change order ([2020d49](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2020d49))
+* **components:** change text to create submission button ([d3b6385](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d3b6385))
+* **components:** statuses changed for revision ([3bc09dc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3bc09dc))
+* **dashboard:** change stremlined metadata label ([992cc4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/992cc4f))
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.1.3...pubsweet-component-xpub-dashboard@0.2.0) (2018-04-11)
 

@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.1.5...pubsweet-component-xpub-review-backend@0.2.0) (2018-04-24)
+
+
+### Bug Fixes
+
+* **components:** fix review backend test ([874b6a3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/874b6a3))
+* **components:** fix test backend authbear ([7c16970](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c16970))
+* **components:** fix test backend authbear ([25c0623](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/25c0623))
+* **components:** passport through route ([593eeda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/593eeda))
+
+
+### Features
+
+* **component:** add make invitation request ([947c846](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/947c846))
+* **component:** add make invitation request ([bda7d95](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bda7d95))
+* **components:** add API endpoint invitation ([ae7d9aa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ae7d9aa))
+* **components:** add API endpoint invitation ([abdf121](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/abdf121))
+* **components:** create invite reviewer endpoints ([20d456b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/20d456b))
+* **components:** create invite reviewer endpoints ([fc6cad4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fc6cad4))
+* **components:** write test for api/make-invitation ([c03f745](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c03f745))
+* **components:** write test for api/make-invitation ([a8ba38e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a8ba38e))
+
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.1.4...pubsweet-component-xpub-review-backend@0.1.5) (2018-04-03)
 

@@ -3,7 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="5.0.0"></a>
+  <a name="6.0.0"></a>
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@5.0.0...pubsweet-server@6.0.0) (2018-04-24)
+
+
+### Bug Fixes
+
+* **server:** correct 'updated' property to 'update' ([18a6b35](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/18a6b35)), closes [#385](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/385)
+
+
+### Features
+
+* **server:** implement authorization-based filtering of SSE ([a1b5cd3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a1b5cd3))
+* **server:** simplify currentUser query response ([6432b58](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6432b58))
+
+
+### BREAKING CHANGES
+
+* **server:** remove `token` from `currentUser` query response since it must have been provided in the request.
+
+
+
+
+  <a name="5.0.0"></a>
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@4.0.0...pubsweet-server@5.0.0) (2018-04-11)
 
 
@@ -23,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="4.0.0"></a>
+<a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@3.0.0...pubsweet-server@4.0.0) (2018-04-03)
 
 
