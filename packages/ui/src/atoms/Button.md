@@ -1,31 +1,25 @@
-A standard button.
-
-```js
-<Button>Save</Button>
-```
-
-A standard button can be disabled.
-
-```js
-<Button disabled>Save</Button>
-```
-
-A standard button can be marked as the "primary" action.
+A primary button.
 
 ```js
 <Button primary>Save</Button>
 ```
 
-A button can also be "plain" style.
+A disabled primary button.
 
 ```js
-<Button plain>Plain button</Button>
+<Button primary disabled>
+  Save
+</Button>
 ```
 
-Or be "plain" style and "disabled".
+A non-primary button.
 
 ```js
-<Button plain disabled>
-  Plain button
-</Button>
+<Button>Save</Button>
+```
+
+A disabled non-primary button.
+
+```js
+<Button disabled>Save</Button>
 ```

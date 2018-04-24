@@ -13,6 +13,7 @@ const scaleFn = (base, scale, heading) => base * scale ** Math.abs(heading - 6)
 const th = name => props => props.theme[name]
 
 const fontSizeBase = 16
+const gridUnit = 24
 const scale = 1.2
 
 const cokoTheme = {
@@ -49,7 +50,7 @@ const cokoTheme = {
   fontLineHeight: '24px',
 
   /* Spacing */
-  gridUnit: '24px',
+  gridUnit: `${gridUnit}px`,
   subGridUnit: '6px',
 
   /* Border */
@@ -69,6 +70,35 @@ const cokoTheme = {
   transitionDelay: '0',
 
   cssOverrides: {
+    Button: css`
+      text-transform: uppercase;
+
+      ${props =>
+        !props.primary &&
+        `
+          background: none;
+          border: none;
+          color: ${props.theme.colorPrimary};
+          padding: 0;
+          text-decoration: underline;
+          text-transform: none;
+
+          &:hover {
+            background: none;
+            border: none;
+            font-weight: 500;
+          }
+
+          &[disabled] {
+            color: ${props.theme.colorTextPlaceholder};
+
+            &:hover {
+              background: none;
+              font-weight: normal;
+            }
+          }
+        `};
+    `,
     TextField: {
       // TODO
       // -- input padding: breaking the grid?

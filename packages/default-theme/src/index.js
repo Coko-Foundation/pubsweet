@@ -22,8 +22,8 @@ export default {
   fontHeading: "'Noto Sans'",
   fontReading: "'Noto Serif'",
   fontWriting: "'Ubuntu mono'",
-  fontSizeBase: '18px',
-  fontSizeBaseSmall: '16px',
+  fontSizeBase: '16px',
+  fontSizeBaseSmall: '14px',
   fontSizeHeading1: '36px',
   fontSizeHeading2: '32px',
   fontSizeHeading3: '29px',
@@ -33,11 +33,11 @@ export default {
   fontLineHeight: '32px',
 
   /* Spacing */
-  gridUnit: '32px',
+  gridUnit: '24px',
   subGridUnit: '8px',
 
   /* Border */
-  borderRadius: '8px',
+  borderRadius: '5px', // changed, needs check by designers
   borderWidth: '1px',
   borderStyle: 'solid',
 

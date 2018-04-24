@@ -1,71 +1,48 @@
-import React from 'react'
+// import React from 'react'
+import { get } from 'lodash'
 import styled from 'styled-components'
 import th from '../helpers/themeHelper'
 
-const BaseStandardButton = styled.button.attrs({
+const StyledButton = styled.button.attrs({
   type: 'button',
 })`
-  background: ${th('colorSecondary')};
+  background: ${props =>
+    props.primary ? th('colorPrimary') : th('colorSecondary')};
+
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-
-  cursor: pointer;
-
+  color: ${props => (props.primary ? th('colorTextReverse') : th('colorText'))}
   font-family: ${th('fontInterface')};
-  font-size: inherit;
-  letter-spacing: 0.05em;
-
+  font-size: ${th('fontSizeBase')};
+  line-height: ${th('gridUnit')};
   min-width: calc(${th('gridUnit')} * 4);
-  height: calc(${th('gridUnit')} * 2);
-  padding: 0 calc(${th('gridUnit')} / 4);
-  margin-right: ${th('subGridUnit')};
+  padding: calc(${th('gridUnit')} / 2);
 
-  &:active,
+  &:focus,
   &:hover {
-    // note: doesn't work in IE
-    filter: brightness(80%);
+    // DARKEN 30
+    background-color: ${props => (props.primary ? '#16415D' : '#A1A1A1')};
+    transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
+  }
+
+  &:active {
+    // DARKEN 50
+    background-color: ${props => (props.primary ? '#102E43' : '#737373')};
   }
 
   &[disabled] {
-    filter: none;
-    opacity: 0.8;
     cursor: not-allowed;
+    opacity: 0.5;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background: ${props =>
+        props.primary ? th('colorPrimary') : th('colorSecondary')};
+    }
   }
+
+  ${props => get(props.theme, 'cssOverrides.Button')}
 `
 
-const PrimaryStandardButton = BaseStandardButton.extend`
-  background-color: ${th('colorPrimary')};
-  border-color: ${th('colorPrimary')};
-  color: ${th('colorBackground')};
-`
-
-const BasePlainButton = styled.button.attrs({
-  type: 'button',
-})`
-  background: none;
-  border: none;
-  padding: 0;
-  color: ${th('colorPrimary')};
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-
-  &[disabled] {
-    color: ${th('colorTextPlaceholder')};
-    opacity: 0.8;
-    cursor: not-allowed;
-  }
-`
-
-const Button = ({ primary, plain, ...props }) => {
-  if (primary) {
-    return <PrimaryStandardButton {...props} />
-  }
-  if (plain) {
-    return <BasePlainButton {...props} />
-  }
-  return <BaseStandardButton {...props} />
-}
-
-export default Button
+export default StyledButton
