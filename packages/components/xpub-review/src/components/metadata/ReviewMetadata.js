@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { withJournal } from 'xpub-journal'
 
-import { File, Attachment } from '@pubsweet/ui'
+import { Attachment } from '@pubsweet/ui'
 
 const Root = styled.div``
 
