@@ -9,6 +9,7 @@ const Header = styled.div`
   align-items: baseline;
   display: flex;
   justify-content: space-between;
+  text-transform: uppercase;
 `
 
 const Body = styled.div`

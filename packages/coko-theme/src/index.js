@@ -86,7 +86,8 @@ const cokoTheme = {
           &:hover {
             background: none;
             border: none;
-            font-weight: 500;
+            // DARKEN 30
+            color: #16415D;
           }
 
           &[disabled] {
@@ -94,7 +95,6 @@ const cokoTheme = {
 
             &:hover {
               background: none;
-              font-weight: normal;
             }
           }
         `};

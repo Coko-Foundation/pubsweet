@@ -16,9 +16,10 @@ const Section = styled.div`
 
 const Heading = styled.div`
   color: ${th('colorPrimary')};
-  font-family: ${th('fontHeading')};
+  font-family: ${th('fontReading')};
   font-size: ${th('fontSizeHeading3')};
   margin: ${th('gridUnit')} 0;
+  text-transform: uppercase;
 `
 
 const UploadContainer = styled.div`
