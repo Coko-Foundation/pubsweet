@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@0.0.10...pubsweet-component-xpub-submit@0.1.0) (2018-04-24)
+
+
+### Bug Fixes
+
+* **compoenents:** fix cases of empty objects in metadata ([7a5bfbc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a5bfbc))
+* **component:** put striphtml function back to place ([2a69dca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2a69dca))
+* **components:** change value to files at upload components ([aa2b45e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aa2b45e))
+* **xpub-submit:** use no-redux version of uploadFile ([cc904a3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cc904a3))
+
+
+### Features
+
+* **xpub-submit:** move GraphQL functionality into separate component ([cfb2a81](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cfb2a81))
+
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@0.0.9...pubsweet-component-xpub-submit@0.0.10) (2018-04-11)
 

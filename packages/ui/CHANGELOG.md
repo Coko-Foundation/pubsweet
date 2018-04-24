@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="3.3.3"></a>
+      <a name="3.3.4"></a>
+## [3.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.3...@pubsweet/ui@3.3.4) (2018-04-24)
+
+
+### Bug Fixes
+
+* **ui:** allow Steps molecule container to be styled with a className ([087d320](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/087d320))
+
+
+
+
+      <a name="3.3.3"></a>
 ## [3.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.2...@pubsweet/ui@3.3.3) (2018-04-11)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/ui
 
-  <a name="3.3.2"></a>
+<a name="3.3.2"></a>
 ## [3.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.1...@pubsweet/ui@3.3.2) (2018-03-30)
 
 

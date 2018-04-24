@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.11"></a>
+## [0.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.0.10...xpub-edit@0.0.11) (2018-04-24)
+
+
+### Bug Fixes
+
+* **components:** change placeholder ([d80a41a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d80a41a))
+* **components:** structure title under Toolbar ([3e7b76b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3e7b76b))
+
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.0.9...xpub-edit@0.0.10) (2018-04-11)
 

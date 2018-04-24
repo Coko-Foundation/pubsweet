@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.1.8"></a>
+  <a name="2.2.0"></a>
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.8...pubsweet@2.2.0) (2018-04-24)
+
+
+### Features
+
+* **components:** create invite reviewer endpoints ([4269fbe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4269fbe))
+
+
+
+
+  <a name="2.1.8"></a>
 ## [2.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.7...pubsweet@2.1.8) (2018-04-11)
 
 
@@ -16,7 +27,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.1.7"></a>
+<a name="2.1.7"></a>
 ## [2.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.6...pubsweet@2.1.7) (2018-04-03)
 
 
