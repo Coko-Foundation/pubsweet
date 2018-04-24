@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
 import { Roles } from '../molecules/Roles'
 
 const Root = styled.div``
@@ -26,6 +26,9 @@ const AssignEditorsReviewers = ({
         teamTypeName="handlingEditor"
       />
     </Roles>
+    <Link to={`/projects/${project.id}/versions/${version.id}/reviewers`}>
+      Assign Reviewers
+    </Link>
   </Root>
 )
 

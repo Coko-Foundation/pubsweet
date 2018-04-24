@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Roles = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   font-size: 0.8em;
   margin-bottom: 0.6em;
   margin-left: 0.5em;

@@ -1,6 +1,5 @@
 import React from 'react'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
 import SimpleEditor from 'wax-editor-react'
 
 import DecisionForm from './DecisionForm'
@@ -74,21 +73,14 @@ const DecisionLayout = ({
       content: (
         <div>
           <AdminSection>
-            <ReviewMetadata version={currentVersion} />
-          </AdminSection>
-          <AdminSection>
             <AssignEditorsReviewers
               AssignEditor={AssignEditor}
               project={project}
               version={currentVersion}
             />
-            <Link
-              to={`/projects/${project.id}/versions/${
-                currentVersion.id
-              }/reviewers`}
-            >
-              Assign Reviewers
-            </Link>
+          </AdminSection>
+          <AdminSection>
+            <ReviewMetadata version={currentVersion} />
           </AdminSection>
           <AdminSection>
             <DecisionReviews version={currentVersion} />
