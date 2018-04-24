@@ -70,8 +70,8 @@ export default compose(
     },
   ),
   withRouter,
-  withProps(({ decision }) => ({
-    initialValues: decision,
+  withProps(({ currentVersion }) => ({
+    initialValues: currentVersion.decision,
   })),
   reduxForm({
     form: 'decision',
