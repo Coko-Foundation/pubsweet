@@ -59,17 +59,17 @@ const configureApp = app => {
   if (['development', 'test'].includes(config.util.getEnv('NODE_ENV'))) {
     app.use(graphqlApi)
   }
-
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
+    sse.setAuthsome(authsome)
     app.get(
       '/updates',
       passport.authenticate('bearer', { session: false }),
       sse.connect,
     )
-  }
 
-  app.locals.sse = sse
+    app.locals.sse = sse
+  }
 
   // Serve the index page for front end
   app.use('/manage', index)
