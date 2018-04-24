@@ -22,20 +22,18 @@ const MenuBar = ({ title, menu, state, dispatch }) => (
   <Wrapper>
     {title && <Legend>{title}</Legend>}
     <ToolBar>
-      {['marks', 'blocks', 'insert', 'history', 'table'].map(name =>
-        map(menu[name], (item, key) => (
-          <MenuButton
-            handle={e => {
-              e.preventDefault()
-              item.run(state, dispatch)
-            }}
-            item={item}
-            key={key}
-            state={state}
-            title={title}
-          />
-        )),
-      )}
+      {map(menu, (item, key) => (
+        <MenuButton
+          handle={e => {
+            e.preventDefault()
+            item.run(state, dispatch)
+          }}
+          item={item}
+          key={key}
+          state={state}
+          title={title}
+        />
+      ))}
     </ToolBar>
   </Wrapper>
 )

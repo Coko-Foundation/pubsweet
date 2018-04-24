@@ -1,5 +1,6 @@
 import { Schema } from 'prosemirror-model'
 import pick from 'lodash/pick'
+import map from 'lodash/map'
 
 import makePlugins from './plugins'
 import menuItems from './menu'
@@ -17,18 +18,8 @@ export default features => {
     },
   })
 
-  const menu = {
-    marks: Object.keys(menuItems)
-      .filter(name => featureNames.includes(name))
-      .reduce(
-        (obj, name) => ({
-          ...obj,
-          [name]: menuItems[name](schema),
-        }),
-        {},
-      ),
-  }
-
+  const enabledMenuItems = pick(menuItems, featureNames)
+  const menu = map(enabledMenuItems, itemCreator => itemCreator(schema))
   const plugins = makePlugins(schema, features)
 
   return {

@@ -21,4 +21,6 @@ export default {
     </span>
   ),
   heading: <span>Heading</span>,
+  undo: <span>Undo</span>,
+  redo: <span>Redo</span>,
 }
