@@ -1,3 +1,5 @@
+import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
+
 const allactions = require('../../src/actions').default
 const api = require('../../src/helpers/api')
 
@@ -17,13 +19,22 @@ function mockApi(succeed = true) {
 
 // custom Jest matcher
 expect.extend({
-  toHaveProperties(object, expectedKeys) {
-    const actualKeys = Object.keys(object)
-    const pass = expectedKeys.every(key => actualKeys.includes(key))
+  toHaveProperties(actual, expected) {
+    const message = pass => (actual, expected) => () => `${matcherHint(
+      '.toHaveProperties',
+    )}
+
+      Expected object ${pass ? 'not to' : 'to'} contain all keys:
+      ${printExpected(expected)}
+      Received:
+      ${printReceived(Object.keys(actual))}`
+
+    const actualKeys = Object.keys(actual)
+    const pass =
+      expected.length === actualKeys.length &&
+      expected.every(key => actualKeys.includes(key))
     return {
-      message: `Expected object ${
-        pass ? 'not to' : 'to'
-      } have properties: ${expectedKeys.join(', ')}`,
+      message: message(pass)(actual, expected),
       pass,
     }
   },

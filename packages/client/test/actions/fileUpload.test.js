@@ -25,9 +25,9 @@ describe('fileUpload actions', () => {
       failure: T.FILE_UPLOAD_FAILURE,
     },
     properties: {
-      request: ['isFetching'],
-      success: ['isFetching', 'file'],
-      failure: ['isFetching', 'error'],
+      request: ['type', 'isFetching'],
+      success: ['type', 'isFetching', 'file'],
+      failure: ['type', 'isFetching', 'error'],
     },
   })
 })

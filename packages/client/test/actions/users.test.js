@@ -19,8 +19,8 @@ describe('users actions', () => {
       failure: T.GET_USERS_FAILURE,
     },
     properties: {
-      success: ['users'],
-      failure: ['isFetching', 'message'],
+      success: ['type', 'isFetching', 'users'],
+      failure: ['type', 'isFetching', 'message'],
     },
   })
 
@@ -32,9 +32,9 @@ describe('users actions', () => {
       failure: T.GET_USER_FAILURE,
     },
     properties: {
-      request: ['user'],
-      success: ['user'],
-      failure: ['user', 'error'],
+      request: ['type', 'user'],
+      success: ['type', 'user'],
+      failure: ['type', 'user', 'error'],
     },
   })
 
@@ -47,8 +47,8 @@ describe('users actions', () => {
       failure: T.UPDATE_USER_FAILURE,
     },
     properties: {
-      success: ['users'],
-      failure: ['isFetching', 'error'],
+      success: ['type', 'isFetching', 'users'],
+      failure: ['type', 'isFetching', 'error'],
     },
   })
 })

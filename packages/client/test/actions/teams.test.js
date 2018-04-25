@@ -12,9 +12,9 @@ describe('teams actions', () => {
       failure: T.GET_TEAMS_FAILURE,
     },
     properties: {
-      request: ['isFetching'],
-      success: ['isFetching', 'teams'],
-      failure: ['isFetching', 'message'],
+      request: ['type', 'isFetching'],
+      success: ['type', 'isFetching', 'teams'],
+      failure: ['type', 'isFetching', 'message'],
     },
   })
 
@@ -37,9 +37,9 @@ describe('teams actions', () => {
       failure: T.CREATE_TEAM_FAILURE,
     },
     properties: {
-      request: ['team'],
-      success: ['team'],
-      failure: ['isFetching', 'team', 'error'],
+      request: ['type', 'team'],
+      success: ['type', 'team'],
+      failure: ['type', 'isFetching', 'team', 'error'],
     },
   })
 
@@ -63,9 +63,9 @@ describe('teams actions', () => {
       failure: T.UPDATE_TEAM_FAILURE,
     },
     properties: {
-      request: ['team'],
-      success: ['team'],
-      failure: ['isFetching', 'team', 'error'],
+      request: ['type', 'team'],
+      success: ['type', 'team', 'update'],
+      failure: ['type', 'isFetching', 'team', 'error'],
     },
   })
 
@@ -77,9 +77,9 @@ describe('teams actions', () => {
       failure: T.DELETE_TEAM_FAILURE,
     },
     properties: {
-      request: ['team'],
-      success: ['team'],
-      failure: ['isFetching', 'team', 'error'],
+      request: ['type', 'team'],
+      success: ['type', 'team'],
+      failure: ['type', 'isFetching', 'team', 'error'],
     },
   })
 })

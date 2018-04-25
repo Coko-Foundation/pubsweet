@@ -90,10 +90,11 @@ function updateTeamRequest(team) {
   }
 }
 
-function updateTeamSuccess(team) {
+function updateTeamSuccess(team, update) {
   return {
     type: T.UPDATE_TEAM_SUCCESS,
     team,
+    update,
   }
 }
 
@@ -114,7 +115,7 @@ export function updateTeam(team) {
     return api
       .update(url, team)
       .then(
-        team => dispatch(updateTeamSuccess(team)),
+        update => dispatch(updateTeamSuccess(team, update)),
         err => dispatch(updateTeamFailure(team, err)),
       )
   }
