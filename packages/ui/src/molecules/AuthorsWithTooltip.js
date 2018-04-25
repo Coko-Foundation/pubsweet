@@ -1,7 +1,10 @@
 import React from 'react'
-import { th } from '@pubsweet/ui'
+import PropTypes from 'prop-types'
+import 'react-tippy/dist/tippy.css'
 import { Tooltip } from 'react-tippy'
 import styled, { ThemeProvider, withTheme, css } from 'styled-components'
+
+import th from '../helpers/themeHelper'
 
 const DefaultTooltip = ({
   authorName,
@@ -51,9 +54,9 @@ const TooltipComponent = ({ children, component: Component, ...rest }) => (
   </Tooltip>
 )
 
-const AuthorWithTooltip = withTheme(TooltipComponent)
+const AuthorTooltip = withTheme(TooltipComponent)
 
-const AuthorsInfo = ({
+const AuthorsWithTooltip = ({
   authors = [],
   theme,
   tooltipComponent = DefaultTooltip,
@@ -75,7 +78,7 @@ const AuthorsInfo = ({
         index,
         arr,
       ) => (
-        <AuthorWithTooltip
+        <AuthorTooltip
           affiliation={affiliation}
           authorName={`${firstName} ${lastName}`}
           component={tooltipComponent}
@@ -92,13 +95,28 @@ const AuthorsInfo = ({
             isSubmitting={isSubmitting}
             lastName={lastName}
           />
-        </AuthorWithTooltip>
+        </AuthorTooltip>
       ),
     )}
   </AuthorList>
 )
 
-export default AuthorsInfo
+AuthorsWithTooltip.propTypes = {
+  /** Array of objects with authors */
+  authors: PropTypes.array.isRequired,
+  /** Element or component to render the authors list */
+  labelComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  /** Element or component for tooltip content */
+  tooltipComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+}
+
+AuthorsWithTooltip.defaultProps = {
+  authors: [],
+  labelComponent: DefaultLabel,
+  tooltipComponent: DefaultTooltip,
+}
+
+export default AuthorsWithTooltip
 
 // #region styled-components
 const defaultText = css`
@@ -124,7 +142,7 @@ const Author = styled.div`
 `
 
 const AuthorStatus = styled.span`
-  border: ${th('borderDefault')};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   ${defaultText};
   text-align: center;
   text-transform: uppercase;
