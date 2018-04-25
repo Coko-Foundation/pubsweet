@@ -16,6 +16,10 @@ const Heading = styled.span`
   font-weight: inherit;
   padding: 0 1em 0 0;
   white-space: nowrap;
+  text-align: right;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
 `
 const Metadata = styled.div`
   div {
@@ -27,6 +31,9 @@ const Metadata = styled.div`
 
 const Cell = styled.span`
   padding: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
 `
 const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
 
@@ -102,7 +109,7 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
       <div>
         <Heading>
           {version.files.supplementary.length} supplementary{' '}
-          {version.files.supplementary.length === 1 ? 'file' : 'files'}:
+          {version.files.supplementary.length === 1 ? 'file' : 'files'} :
         </Heading>
         {!!version.files.supplementary.length && (
           <Cell>
