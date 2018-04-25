@@ -139,6 +139,8 @@ module.exports = app => {
           nextVersionData = canCreateVersion.filter(nextVersionData)
         }
         nextVersion = new Fragment(nextVersionData)
+        nextVersion.setOwners([req.user])
+
         canViewNextVersion = await authsome.can(req.user, 'GET', nextVersion)
       }
 
@@ -152,8 +154,9 @@ module.exports = app => {
 
       await Promise.all([
         version.save(),
-        project.save(),
         nextVersion && nextVersion.save(),
+        nextVersion && project.addFragment(nextVersion),
+        project.save(),
       ])
 
       const authorEmails = authors.map(user => user.email)
