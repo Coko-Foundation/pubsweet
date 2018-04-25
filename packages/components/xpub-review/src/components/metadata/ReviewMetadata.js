@@ -106,19 +106,21 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
           {version.notes.specialInstructions}
         </Cell>
       </div>
-      <div>
-        <Heading>
-          {version.files.supplementary.length} supplementary{' '}
-          {version.files.supplementary.length === 1 ? 'file' : 'files'} :
-        </Heading>
-        {!!version.files.supplementary.length && (
-          <Cell>
-            {version.files.supplementary.map(file => (
-              <Attachment file={file} key={file.url} uploaded />
-            ))}
-          </Cell>
-        )}
-      </div>
+      {version.files.supplementary.length > 0 && (
+        <div>
+          <Heading>
+            {version.files.supplementary.length} supplementary{' '}
+            {version.files.supplementary.length === 1 ? 'file' : 'files'} :
+          </Heading>
+          {!!version.files.supplementary.length && (
+            <Cell>
+              {version.files.supplementary.map(file => (
+                <Attachment file={file} key={file.url} uploaded />
+              ))}
+            </Cell>
+          )}
+        </div>
+      )}
     </Metadata>
     <Table>
       <tbody>
