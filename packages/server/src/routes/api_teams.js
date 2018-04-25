@@ -1,11 +1,13 @@
 const STATUS = require('http-status-codes')
 const express = require('express')
 const passport = require('passport')
+const sse = require('pubsweet-sse')
 
 const {
   createFilterFromQuery,
   applyPermissionFilter,
   buildChangeData,
+  objectId,
 } = require('./util')
 const Team = require('../models/Team')
 
@@ -50,6 +52,7 @@ api.post('/teams', authBearer, async (req, res, next) => {
     await team.save()
 
     res.status(STATUS.CREATED).json(team)
+    sse.send({ action: 'team:create', data: { team } })
   } catch (err) {
     next(err)
   }
@@ -77,6 +80,7 @@ api.delete('/teams/:teamId', authBearer, async (req, res, next) => {
     await team.delete()
 
     res.status(STATUS.OK).json(output)
+    sse.send({ action: 'team:delete', data: { team: objectId(team) } })
   } catch (err) {
     next(err)
   }
@@ -94,9 +98,13 @@ api.patch('/teams/:teamId', authBearer, async (req, res, next) => {
     await team.updateProperties(properties)
     await team.save()
 
-    const updated = buildChangeData(properties, team)
+    const update = buildChangeData(properties, team)
 
-    res.status(STATUS.OK).json(updated)
+    res.status(STATUS.OK).json(update)
+    sse.send({
+      action: 'team:patch',
+      data: { team: objectId(team), update },
+    })
   } catch (err) {
     next(err)
   }

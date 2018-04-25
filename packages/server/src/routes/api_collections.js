@@ -1,14 +1,11 @@
+const express = require('express')
 const STATUS = require('http-status-codes')
-
-const Collection = require('../models/Collection')
+const sse = require('pubsweet-sse')
+const passport = require('passport')
 const Team = require('../models/Team')
 const User = require('../models/User')
+const Collection = require('../models/Collection')
 
-const express = require('express')
-
-const api = express.Router()
-
-const sse = require('pubsweet-sse')
 const {
   createFilterFromQuery,
   objectId,
@@ -18,7 +15,7 @@ const {
   applyPermissionFilter,
 } = require('./util')
 
-const passport = require('passport')
+const api = express.Router()
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
