@@ -76,33 +76,10 @@ describe('Collection actions', () => {
     },
     properties: {
       request: ['type', 'collection'],
-      success: ['type', 'collection'],
+      success: ['type', 'collection', 'update', 'receivedAt'],
       failure: ['type', 'isFetching', 'collection', 'error'],
     },
   })
-
-  // NOTE: enable this once PATCH method is implemented on the server
-  // describeAction('patchCollection', {
-  //   firstarg: newcol,
-  //   secondarg: {
-  //     type: 'testing',
-  //     title: 'this is a patched collection'
-  //   },
-  //   types: {
-  //     request: T.PATCH_COLLECTION_REQUEST,
-  //     success: T.PATCH_COLLECTION_SUCCESS,
-  //     failure: T.PATCH_COLLECTION_FAILURE
-  //   },
-  //   properties: {
-  //     request: ['type', 'collection'],
-  //     success: ['type', 'collection'],
-  //     failure: ['type', 'isFetching', 'collection', 'error']
-  //   }
-  // }, (action, data) => {
-  //   expect(
-  //     data.PATCH_COLLECTION_SUCCESS.collection.title
-  //   ).toBe('this is a patched collection')
-  // })
 
   describeAction('deleteCollection', {
     firstarg: { id: 123 },
