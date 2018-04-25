@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="6.0.0"></a>
+      <a name="6.1.0"></a>
+# [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@6.0.0...pubsweet-server@6.1.0) (2018-04-25)
+
+
+### Features
+
+* **server:** add sse events to team endpoints ([26a739a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/26a739a)), closes [#390](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/390)
+
+
+
+
+      <a name="6.0.0"></a>
 # [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@5.0.0...pubsweet-server@6.0.0) (2018-04-24)
 
 
@@ -25,7 +36,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="5.0.0"></a>
+<a name="5.0.0"></a>
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@4.0.0...pubsweet-server@5.0.0) (2018-04-11)
 
 
