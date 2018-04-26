@@ -55,8 +55,7 @@ const configureApp = app => {
   app.use('/api', api)
 
   // GraphQL API
-  // temporary environment check while this stuff is in beta
-  if (['development', 'test'].includes(config.util.getEnv('NODE_ENV'))) {
+  if (config.get('pubsweet-server').enableExperimentalGraphql) {
     app.use(graphqlApi)
   }
   // SSE update stream

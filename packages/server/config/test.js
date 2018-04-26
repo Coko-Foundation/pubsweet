@@ -12,6 +12,7 @@ module.exports = {
       level: 'warn',
       transports: [new winston.transports.Console()],
     }),
+    enableExperimentalGraphql: true,
     port: 4000,
     secret: 'test',
     sse: false,
