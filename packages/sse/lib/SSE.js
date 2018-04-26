@@ -34,21 +34,37 @@ class SSE extends EventEmitter {
       res.write('\n')
     }
 
-    const dataListener = data => {
+    const writeMessage = message => {
       this.messageId = this.messageId + 1
       write('id', this.messageId)
 
-      if (data.event) {
-        write('event', data.event)
+      if (message.event) {
+        write('event', message.event)
       }
 
-      write('data', JSON.stringify(data.data))
-
+      write('data', JSON.stringify(message.data))
       res.write('\n')
     }
 
-    // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
+    const dataListener = async data => {
+      const { action, data: payload } = data.data
 
+      if (data.event === 'pulse' || !this.authsome) {
+        return writeMessage(data)
+      }
+
+      const permission = await this.authsome.can(req.user, action, payload)
+
+      if (permission.filter) {
+        data.data.data = permission.filter(payload)
+        return writeMessage(data)
+      } else if (permission) {
+        return writeMessage(data)
+      }
+      return undefined
+    }
+
+    // TODO: store all updates, use Last-Event-ID to send missed messages on reconnect
     this.on('data', dataListener)
 
     req.on('close', () => {
@@ -67,6 +83,10 @@ class SSE extends EventEmitter {
 
   send(data, event) {
     this.emit('data', { data, event })
+  }
+
+  setAuthsome(authsome) {
+    this.authsome = authsome
   }
 }
 

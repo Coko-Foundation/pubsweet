@@ -50,7 +50,7 @@ const stripHtml = htmlString => {
 const onChange = (values, dispatch, { project, version }) => {
   values.metadata.title = stripHtml(values.metadata.title) // see TODO above
 
-  return dispatch(
+  dispatch(
     actions.updateFragment(project, {
       id: version.id,
       rev: version.rev,
@@ -58,8 +58,6 @@ const onChange = (values, dispatch, { project, version }) => {
       ...values,
     }),
   )
-
-  // TODO: display a notification when saving/saving completes/saving fails
 }
 
 export default compose(

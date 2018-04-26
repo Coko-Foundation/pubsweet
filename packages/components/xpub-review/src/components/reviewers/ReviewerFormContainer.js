@@ -27,7 +27,8 @@ const addProjectReviewer = (props, user) => {
     .then(() => reviewer)
 }
 
-const addReviewer = (props, projectReviewer) => {
+const addReviewer = (props, projectReviewer, dispatch) => {
+  const { version } = props
   const reviewer = {
     events: {
       invited: new Date().toString(),
@@ -37,17 +38,15 @@ const addReviewer = (props, projectReviewer) => {
     status: 'invited',
   }
 
-  return props
-    .updateVersion(props.project, {
-      id: props.version.id,
-      rev: props.version.rev,
-      reviewers: (props.version.reviewers || []).concat(reviewer),
-    })
-    .then(() => reviewer)
+  version.reviewers = (props.version.reviewers || []).concat(reviewer)
+
+  return dispatch(
+    actions.inviteReviewer(props.project, version, projectReviewer.user),
+  )
 }
 
-const handleSubmit = props => reset => values =>
-  // TODO: create a user account if values.user.id is null
+const handleSubmit = props => reset => (values, dispatch) =>
+  // TODO: create a u ser account if values.user.id is null
 
   getProjectReviewer(props, values.user)
     .then(projectReviewer => {
@@ -55,7 +54,7 @@ const handleSubmit = props => reset => values =>
         throw new SubmissionError('This reviewer has already been added')
       }
 
-      return addReviewer(props, projectReviewer)
+      return addReviewer(props, projectReviewer, dispatch)
     })
     .then(() => reset())
 

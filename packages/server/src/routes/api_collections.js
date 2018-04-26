@@ -1,14 +1,11 @@
+const express = require('express')
 const STATUS = require('http-status-codes')
-
-const Collection = require('../models/Collection')
+const sse = require('pubsweet-sse')
+const passport = require('passport')
 const Team = require('../models/Team')
 const User = require('../models/User')
+const Collection = require('../models/Collection')
 
-const express = require('express')
-
-const api = express.Router()
-
-const sse = require('pubsweet-sse')
 const {
   createFilterFromQuery,
   objectId,
@@ -18,7 +15,7 @@ const {
   applyPermissionFilter,
 } = require('./util')
 
-const passport = require('passport')
+const api = express.Router()
 
 const authBearer = passport.authenticate('bearer', { session: false })
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
@@ -109,12 +106,12 @@ api.patch('/collections/:collectionId', authBearer, async (req, res, next) => {
     await collection.updateProperties(properties)
     await collection.save()
 
-    const updated = buildChangeData(properties, collection)
+    const update = buildChangeData(properties, collection)
 
-    res.status(STATUS.OK).json(updated)
+    res.status(STATUS.OK).json(update)
     sse.send({
       action: 'collection:patch',
-      data: { collection: objectId(collection), updated },
+      data: { collection: objectId(collection), update },
     })
   } catch (err) {
     next(err)

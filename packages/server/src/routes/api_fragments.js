@@ -6,12 +6,12 @@ const Fragment = require('../models/Fragment')
 const authsome = require('../helpers/authsome')
 const AuthorizationError = require('../errors/AuthorizationError')
 const STATUS = require('http-status-codes')
-
 const express = require('express')
+const sse = require('pubsweet-sse')
+const passport = require('passport')
 
 const api = express.Router()
-const passport = require('passport')
-const sse = require('pubsweet-sse')
+
 const {
   objectId,
   createFilterFromQuery,

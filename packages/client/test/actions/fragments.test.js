@@ -15,7 +15,7 @@ describe('fragments actions', () => {
       success: T.GET_FRAGMENTS_SUCCESS,
     },
     properties: {
-      success: ['fragments'],
+      success: ['type', 'fragments', 'receivedAt', 'collection'],
     },
   })
 
@@ -31,7 +31,7 @@ describe('fragments actions', () => {
       failure: T.GET_FRAGMENTS_FAILURE,
     },
     properties: {
-      success: ['fragments'],
+      success: ['type', 'fragments', 'receivedAt', 'collection'],
     },
   })
 
@@ -49,8 +49,8 @@ describe('fragments actions', () => {
       failure: T.CREATE_FRAGMENT_FAILURE,
     },
     properties: {
-      success: ['collection', 'fragment'],
-      failure: ['fragment', 'error'],
+      success: ['type', 'collection', 'fragment'],
+      failure: ['type', 'isFetching', 'fragment', 'error'],
     },
   })
 
@@ -63,9 +63,9 @@ describe('fragments actions', () => {
       failure: T.GET_FRAGMENT_FAILURE,
     },
     properties: {
-      request: ['fragment'],
-      success: ['fragment', 'receivedAt'],
-      failure: ['isFetching', 'fragment', 'error'],
+      request: ['type', 'fragment'],
+      success: ['type', 'fragment', 'receivedAt'],
+      failure: ['type', 'isFetching', 'fragment', 'error'],
     },
   })
 
@@ -83,8 +83,8 @@ describe('fragments actions', () => {
       failure: T.UPDATE_FRAGMENT_FAILURE,
     },
     properties: {
-      success: ['fragment', 'receivedAt'],
-      failure: ['fragment', 'error'],
+      success: ['type', 'fragment', 'update', 'receivedAt'],
+      failure: ['type', 'isFetching', 'fragment', 'error'],
     },
   })
 
@@ -97,9 +97,9 @@ describe('fragments actions', () => {
       failure: T.DELETE_FRAGMENT_FAILURE,
     },
     properties: {
-      request: ['fragment', 'update'],
-      success: ['fragment', 'collection'],
-      failure: ['fragment', 'error', 'update'],
+      request: ['type', 'fragment', 'update'],
+      success: ['type', 'fragment', 'collection'],
+      failure: ['type', 'fragment', 'error', 'update'],
     },
   })
 })

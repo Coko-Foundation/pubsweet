@@ -16,6 +16,9 @@ const actionMap = {
   'fragment:create': T.CREATE_FRAGMENT_SUCCESS,
   'fragment:patch': T.UPDATE_FRAGMENT_SUCCESS,
   'fragment:delete': T.DELETE_FRAGMENT_SUCCESS,
+  'team:create': T.CREATE_TEAM_SUCCESS,
+  'team:patch': T.UPDATE_TEAM_SUCCESS,
+  'team:delete': T.DELETE_TEAM_SUCCESS,
 }
 
 export class UpdateSubscriber extends Component {

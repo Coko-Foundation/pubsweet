@@ -36,7 +36,9 @@ describe('<AuthenticatedComponent/>', () => {
     const wrapper = makeWrapper({ pushState, location: { pathname: 'blah' } })
     wrapper.instance().checkAuth({ isAuthenticated: false })
 
-    expect(pushState).toHaveBeenCalledWith('/login?next=blah')
+    expect(pushState).toHaveBeenCalledWith('/login?next=blah', {
+      from: { pathname: 'blah' },
+    })
   })
 
   it('calls checkAuth() when props change', () => {
@@ -46,7 +48,9 @@ describe('<AuthenticatedComponent/>', () => {
     expect(pushState).not.toHaveBeenCalled()
 
     wrapper.setProps({ isAuthenticated: false })
-    expect(pushState).toHaveBeenCalledWith('/login?next=blah')
+    expect(pushState).toHaveBeenCalledWith('/login?next=blah', {
+      from: { pathname: 'blah' },
+    })
   })
 
   it('renders children components when authenticated', async () => {
