@@ -5,7 +5,7 @@ import { minSize, readonly } from 'xpub-validators'
 
 const minSize1 = minSize(1)
 
-const firstNameInput = ({ input }) => (
+const firstNameInput = input => (
   <TextField
     label={'First name'}
     placeholder={'Enter first name…'}
@@ -13,23 +13,19 @@ const firstNameInput = ({ input }) => (
   />
 )
 
-const lastNameInput = ({ input }) => (
+const lastNameInput = input => (
+  <TextField label={'Last name'} placeholder={'Enter last name…'} {...input} />
+)
+
+const emailAddressInput = input => (
   <TextField
-    label={'Last name'}
-    placeholder={'Enter last name…'}
+    label={'Email address'}
+    placeholder={'Enter email address…'}
     {...input}
   />
 )
 
-const emailAddressInput = ({ input }) => (
-    <TextField
-      label={'Email address'}
-      placeholder={'Enter email address…'}
-    {...input}
-    />
-)
-
-const affiliationInput = ({ input }) => (
+const affiliationInput = input => (
   <TextField
     label={'Affiliation'}
     placeholder={'Enter affiliation…'}
@@ -37,14 +33,14 @@ const affiliationInput = ({ input }) => (
   />
 )
 
-const renderAuthors = ({ authors }) => (
+const renderAuthors = authors => (
   <ul>
     <li>
       <Button onClick={() => authors.push()} plain type="button">
         Add another author
       </Button>
     </li>
-    {authors.map((author, index) => (
+    {authors.map((author) => (
       <li key={index}>
         <Button onClick={() => authors.remove(index)} plain type="button">
           Remove this author
@@ -88,8 +84,8 @@ const renderAuthors = ({ authors }) => (
   </ul>
 )
 
-const AuthorsInput = () => {
-  return <FieldArray name="authors" component={renderAuthors} />
-}
+const AuthorsInput = () => (
+  <FieldArray name="authors" component={renderAuthors} />
+)
 
 export default AuthorsInput

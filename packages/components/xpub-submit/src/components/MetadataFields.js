@@ -3,7 +3,6 @@ import { FormSection } from 'redux-form'
 import { AbstractEditor, TitleEditor } from 'xpub-edit'
 import { CheckboxGroup, Menu, TextField, ValidatedField } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
-import { AuthorsInput } from './AuthorsInput'
 import {
   join,
   required,
@@ -13,6 +12,7 @@ import {
   split,
 } from 'xpub-validators'
 import { Section, Legend } from '../styles'
+import { AuthorsInput } from './AuthorsInput'
 
 const minSize1 = minSize(1)
 const minChars10 = minChars(10)
