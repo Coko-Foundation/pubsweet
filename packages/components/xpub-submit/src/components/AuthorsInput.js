@@ -1,51 +1,43 @@
 import React from 'react'
 import { FieldArray } from 'redux-form'
 import { TextField, ValidatedField, Button } from '@pubsweet/ui'
-import { required, minSize } from 'xpub-validators'
+import { minSize, readonly } from 'xpub-validators'
 
 const minSize1 = minSize(1)
 
-const firstNameInput = ({ input }) => {
-  <div>
-    <TextField
-      placeholder={'Enter first name…'}
-      label={'First name'}
-      {...input}
-    />
-  </div>
-}
+const firstNameInput = ({ input }) => (
+  <TextField
+    label={'First name'}
+    placeholder={'Enter first name…'}
+    {...input}
+  />
+)
 
-const lastNameInput = ({ input }) => {
-  <div>
-    <TextField
-      placeholder={'Enter last name…'}
-      label={'Last name'}
-      {...input}
-    />
-  </div>
-}
+const lastNameInput = ({ input }) => (
+  <TextField
+    label={'Last name'}
+    placeholder={'Enter last name…'}
+    {...input}
+  />
+)
 
-const emailAddressInput = ({ input }) => {
-  <div>
+const emailAddressInput = ({ input }) => (
     <TextField
-      placeholder={'Enter email address…'}
       label={'Email address'}
-      {...input}
+      placeholder={'Enter email address…'}
+    {...input}
     />
-  </div>
-}
+)
 
-const affiliationInput = ({ input }) => {
-  <div>
-    <TextField
-      placeholder={'Enter affiliation…'}
-      label={'Affiliation'}
-      {...input}
-    />
-  </div>
-}
+const affiliationInput = ({ input }) => (
+  <TextField
+    label={'Affiliation'}
+    placeholder={'Enter affiliation…'}
+    {...input}
+  />
+)
 
-const renderAuthors = ({ authors }) => {
+const renderAuthors = ({ authors }) => (
   <ul>
     <li>
       <Button onClick={() => authors.push()} plain type="button">
@@ -94,7 +86,7 @@ const renderAuthors = ({ authors }) => {
       </li>
     ))}
   </ul>
-}
+)
 
 const AuthorsInput = () => {
   return <FieldArray name="authors" component={renderAuthors} />
