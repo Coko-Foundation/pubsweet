@@ -10,10 +10,12 @@ module.exports = {
       presentation: Joi.string(),
       published: Joi.boolean(),
       filtered: Joi.string(),
+      owners: Joi.array().items(Joi.string().guid()),
     },
     {
       fragmentType: Joi.valid('file').required(),
       path: Joi.string().required(),
+      owners: Joi.array().items(Joi.string().guid()),
     },
   ],
   collection: {
@@ -22,5 +24,6 @@ module.exports = {
     filtered: Joi.string(),
     created: Joi.date().default(Date.now, 'creation time'),
     title: Joi.string(),
+    owners: Joi.array().items(Joi.string().guid()),
   },
 }

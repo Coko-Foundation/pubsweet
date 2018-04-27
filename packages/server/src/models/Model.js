@@ -6,7 +6,6 @@ const { Client } = require('pg')
 const logger = require('@pubsweet/logger')
 const db = require('../db')
 const NotFoundError = require('../errors/NotFoundError')
-const ValidationError = require('../errors/ValidationError')
 
 let validations
 if (config.validations) {
@@ -84,24 +83,6 @@ class Model {
 
     Object.assign(this, properties)
     return this
-  }
-
-  setOwners(owners) {
-    if (Array.isArray(owners)) {
-      owners.forEach(owner => this.constructor.validateOwner(owner))
-      this.owners = owners
-    } else {
-      throw new ValidationError('owners should be an array')
-    }
-  }
-
-  static validateOwner(owner) {
-    if (typeof owner !== 'string')
-      throw new ValidationError('owner should be an id')
-  }
-
-  isOwner(userId) {
-    return Array.isArray(this.owners) && this.owners.includes(userId)
   }
 
   static uuid() {

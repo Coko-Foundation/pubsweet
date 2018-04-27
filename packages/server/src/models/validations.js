@@ -14,14 +14,12 @@ const validations = {
     type: Joi.string().required(),
     fragmentType: Joi.string().required(),
     fragments: Joi.array().items(Joi.string().guid()),
-    owners: Joi.array().items(Joi.string().guid()),
   },
   collection: {
     id: Joi.string()
       .guid()
       .required(),
     type: Joi.string().required(),
-    owners: Joi.array().items(Joi.string().guid()),
     fragments: Joi.array().items(
       Joi.alternatives().try(
         // a fragment ID

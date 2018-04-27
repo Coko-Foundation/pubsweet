@@ -3,7 +3,6 @@ const STATUS = require('http-status-codes')
 const sse = require('pubsweet-sse')
 const passport = require('passport')
 const Team = require('../models/Team')
-const User = require('../models/User')
 const Collection = require('../models/Collection')
 
 const {
@@ -34,7 +33,6 @@ api.get('/collections', authBearerAndPublic, async (req, res, next) => {
 
     const collectionsWithSelectedFields = (await Promise.all(
       filteredCollections.map(async collection => {
-        collection.owners = await User.ownersWithUsername(collection)
         const properties = await applyPermissionFilter({
           req,
           target: collection,
@@ -60,7 +58,6 @@ api.post('/collections', authBearer, async (req, res, next) => {
 
     const collection = new Collection(properties)
     collection.created = Date.now()
-    collection.setOwners([req.user])
 
     await collection.save()
 
@@ -80,7 +77,6 @@ api.get(
   async (req, res, next) => {
     try {
       const collection = await Collection.find(req.params.collectionId)
-      collection.owners = await User.ownersWithUsername(collection)
       const properties = await applyPermissionFilter({
         req,
         target: collection,

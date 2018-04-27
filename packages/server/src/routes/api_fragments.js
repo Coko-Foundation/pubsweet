@@ -1,4 +1,3 @@
-const User = require('../models/User')
 const Collection = require('../models/Collection')
 const Team = require('../models/Team')
 const Fragment = require('../models/Fragment')
@@ -50,13 +49,10 @@ api.post(
 
       const fragment = new Fragment(filteredProperties)
 
-      fragment.setOwners([req.user])
       await fragment.save()
 
       collection.addFragment(fragment)
       await collection.save()
-
-      fragment.owners = await User.ownersWithUsername(fragment)
 
       res.status(STATUS.CREATED).json(fragment)
       sse.send({
@@ -97,13 +93,6 @@ api.get(
         .filter(fragment => fragment !== undefined)
         .filter(createFilterFromQuery(req.query))
 
-      // Decorate owners with usernames
-      await Promise.all(
-        fragments.map(async fragment => {
-          fragment.owners = await User.ownersWithUsername(fragment)
-        }),
-      )
-
       fragments = fragments.map(fieldSelector(req))
 
       res.status(STATUS.OK).json(fragments)
@@ -120,7 +109,6 @@ api.get(
   async (req, res, next) => {
     try {
       const fragment = await getFragment({ req, Collection, Fragment })
-      fragment.owners = await User.ownersWithUsername(fragment)
       const properties = await applyPermissionFilter({ req, target: fragment })
 
       res.status(STATUS.OK).json(properties)
@@ -145,7 +133,6 @@ api.patch(
 
       await fragment.updateProperties(properties)
       await fragment.save()
-      fragment.owners = await User.ownersWithUsername(fragment)
 
       const update = buildChangeData(properties, fragment)
 
@@ -257,11 +244,7 @@ api.post('/fragments', authBearer, async (req, res, next) => {
 
     let fragment = new Fragment(req.body)
 
-    fragment.setOwners([req.user])
     fragment = await fragment.save()
-
-    // How to address this?
-    fragment.owners = await User.ownersWithUsername(fragment)
 
     res.status(STATUS.CREATED).json(fragment)
     sse.send({ action: 'fragment:create', data: { fragment } })
@@ -309,7 +292,6 @@ api.patch('/fragments/:fragmentId', authBearer, async (req, res, next) => {
 
     fragment.updateProperties(req.body)
     fragment = await fragment.save()
-    fragment.owners = await User.ownersWithUsername(fragment)
 
     const update = buildChangeData(req.body, fragment)
     res.status(STATUS.OK).json(update)
