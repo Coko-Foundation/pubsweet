@@ -59,7 +59,7 @@ module.exports = async argsOverride => {
   // generate secret
   const configFilePath = path.join(appPath, 'config', `local.json`)
   const secret = crypto.randomBytes(64).toString('hex')
-  fs.writeJsonSync(configFilePath, { secret })
+  fs.writeJsonSync(configFilePath, { 'pubsweet-server': { secret } })
   logger.info(`Added secret to ${configFilePath} under pubsweet-server.secret`)
 
   logger.info('Finished generating initial app')
