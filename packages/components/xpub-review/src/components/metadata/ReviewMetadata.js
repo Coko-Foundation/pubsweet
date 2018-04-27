@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { withJournal } from 'xpub-journal'
 
-import { File } from '@pubsweet/ui'
+import { Attachment } from '@pubsweet/ui'
 
 const Root = styled.div``
 
@@ -16,6 +16,10 @@ const Heading = styled.span`
   font-weight: inherit;
   padding: 0 1em 0 0;
   white-space: nowrap;
+  text-align: right;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
 `
 const Metadata = styled.div`
   div {
@@ -27,6 +31,9 @@ const Metadata = styled.div`
 
 const Cell = styled.span`
   padding: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
 `
 const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
 
@@ -99,6 +106,21 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
           {version.notes.specialInstructions}
         </Cell>
       </div>
+      {version.files.supplementary.length > 0 && (
+        <div>
+          <Heading>
+            {version.files.supplementary.length} supplementary{' '}
+            {version.files.supplementary.length === 1 ? 'file' : 'files'} :
+          </Heading>
+          {!!version.files.supplementary.length && (
+            <Cell>
+              {version.files.supplementary.map(file => (
+                <Attachment file={file} key={file.url} uploaded />
+              ))}
+            </Cell>
+          )}
+        </div>
+      )}
     </Metadata>
     <Table>
       <tbody>
@@ -108,20 +130,6 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
             <Cell>
               {handlingEditors.map(user => (
                 <span key={user.username}>{user.username}</span>
-              ))}
-            </Cell>
-          </tr>
-        )}
-
-        {!!version.files.supplementary.length && (
-          <tr>
-            <Heading>
-              {version.files.supplementary.length} supplementary{' '}
-              {version.files.supplementary.length === 1 ? 'file' : 'files'}:
-            </Heading>
-            <Cell>
-              {version.files.supplementary.map(file => (
-                <File file={file} key={file.url} value={file} />
               ))}
             </Cell>
           </tr>
