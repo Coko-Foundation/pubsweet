@@ -13,7 +13,6 @@ const EditorItemWithVersion = withVersion(EditorItem)
 const ReviewerItemWithVersion = withVersion(ReviewerItem)
 
 const Dashboard = ({
-  AssignEditor,
   currentUser,
   conversion,
   dashboard,
@@ -73,11 +72,7 @@ const Dashboard = ({
       <Section>
         <Heading>My Manuscripts</Heading>
         {dashboard.editor.map(project => (
-          <EditorItemWithVersion
-            AssignEditor={AssignEditor}
-            key={project.id}
-            project={project}
-          />
+          <EditorItemWithVersion key={project.id} project={project} />
         ))}
       </Section>
     )}

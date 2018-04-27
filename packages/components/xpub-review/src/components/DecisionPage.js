@@ -13,6 +13,7 @@ import {
 } from 'xpub-selectors'
 import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
+import AssignEditorContainer from '../components/assignEditors/AssignEditorContainer'
 
 const onSubmit = (values, dispatch, { project, version, history }) => {
   version.decision = {
@@ -55,6 +56,8 @@ export default compose(
   ConnectPage(({ match }) => [
     actions.getCollection({ id: match.params.project }),
     actions.getFragments({ id: match.params.project }),
+    actions.getTeams(),
+    actions.getUsers(),
   ]),
   connect(
     (state, { match }) => {
@@ -72,6 +75,7 @@ export default compose(
   withRouter,
   withProps(({ currentVersion }) => ({
     initialValues: currentVersion.decision,
+    AssignEditor: AssignEditorContainer,
   })),
   reduxForm({
     form: 'decision',

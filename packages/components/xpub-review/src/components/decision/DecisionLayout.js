@@ -1,10 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
 import SimpleEditor from 'wax-editor-react'
 
 import DecisionForm from './DecisionForm'
 import DecisionReviews from './DecisionReviews'
+import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
@@ -24,6 +24,7 @@ const DecisionLayout = ({
   uploadFile,
   valid,
   versions,
+  AssignEditor,
 }) => {
   const decisionSections = []
   const editorSections = []
@@ -72,16 +73,14 @@ const DecisionLayout = ({
       content: (
         <div>
           <AdminSection>
-            <ReviewMetadata version={currentVersion} />
+            <AssignEditorsReviewers
+              AssignEditor={AssignEditor}
+              project={project}
+              version={currentVersion}
+            />
           </AdminSection>
           <AdminSection>
-            <Link
-              to={`/projects/${project.id}/versions/${
-                currentVersion.id
-              }/reviewers`}
-            >
-              Assign Reviewers
-            </Link>
+            <ReviewMetadata version={currentVersion} />
           </AdminSection>
           <AdminSection>
             <DecisionReviews version={currentVersion} />

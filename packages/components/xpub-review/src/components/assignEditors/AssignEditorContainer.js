@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import AssignEditor from './AssignEditor'
-import { addUserToTeam } from '../redux/teams'
+import { addUserToTeam } from '../../redux/teams'
 
 const editorOption = user => ({
   label: user.username, // TODO: name
