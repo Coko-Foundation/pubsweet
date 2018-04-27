@@ -1,9 +1,16 @@
 import React from 'react'
-import HtmlViewer from '../HtmlViewer'
-import * as options from './config'
+import ConfigurableViewer from '../configurable/ConfigurableViewer'
 
-const AbstractViewer = ({ className, value }) => (
-  <HtmlViewer className={className} options={options} value={value} />
+const AbstractViewer = props => (
+  <ConfigurableViewer
+    bold
+    heading
+    italic
+    smallcaps
+    subscript
+    superscript
+    {...props}
+  />
 )
 
 export default AbstractViewer

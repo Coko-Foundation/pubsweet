@@ -1,9 +1,8 @@
 import React from 'react'
-import HtmlViewer from '../HtmlViewer'
-import * as options from './config'
+import ConfigurableViewer from '../configurable/ConfigurableViewer'
 
-const TitleViewer = ({ className, value }) => (
-  <HtmlViewer className={className} options={options} value={value} />
+const TitleViewer = props => (
+  <ConfigurableViewer italic smallcaps subscript superscript {...props} />
 )
 
 export default TitleViewer
