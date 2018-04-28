@@ -9156,6 +9156,10 @@ pubsweet-server@^2.0.0:
     uuid "^3.0.1"
     winston "^2.2.0"
 
+pubsweet-sse@^0.1.4:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-sse/-/pubsweet-sse-0.1.5.tgz#c93195c52121e299c8a55896962d870f792ce963"
+
 pubsweet-theme-plugin@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/pubsweet-theme-plugin/-/pubsweet-theme-plugin-0.0.3.tgz#1773543a95ed9f56eb8b14f13f24496e034d140b"
