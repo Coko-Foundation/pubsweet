@@ -1,5 +1,6 @@
 export { default as Upload } from './Upload'
 export { default as AppBar } from './AppBar'
+export { default as Action } from './Action'
 export { default as FileUploadList } from './FileUploadList'
 export { default as Attachments } from './Attachments'
 export { default as CheckboxGroup } from './CheckboxGroup'
