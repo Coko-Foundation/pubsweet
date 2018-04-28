@@ -147,13 +147,13 @@ exports[`AppBar With admin user 1`] = `
 
 .c7:focus,
 .c7:hover {
-  background-color: #A1A1A1;
+  background-color: #a1a1a1;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
 
 .c7:active {
-  background-color: #737373;
+  background-color: '#737373';
 }
 
 .c7[disabled] {
