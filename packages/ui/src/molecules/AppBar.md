@@ -13,14 +13,16 @@ When the user is not signed in, only the login link is displayed.
 <AppBar brand="xpub" />
 ```
 
-Can optionally pass navigation links
+Can optionally pass navigation links.
 
 ```js
 <AppBar
   brand="xpub"
   navLinkComponents={[
-    <Link to="/home">Home</Link>,
-    <Link to="/about">About</Link>,
+    <Action active to="/home">
+      Home
+    </Action>,
+    <Action to="/about">About</Action>,
   ]}
   user={{
     username: 'user',
@@ -46,8 +48,8 @@ Can optionally pass an image for a brand.
     </svg>
   }
   navLinkComponents={[
-    <Link to="/home">Home</Link>,
-    <Link to="/about">About</Link>,
+    <Action to="/home">Home</Action>,
+    <Action to="/about">About</Action>,
   ]}
 />
 ```
@@ -62,6 +64,7 @@ Can use a custom component as right element.
 
 ```js
 ;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
+
 const RightComponent = ({ user, loginLink, onLogoutClick }) => (
   <div
     style={{

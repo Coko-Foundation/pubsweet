@@ -23,10 +23,12 @@ const common = css`
   color: ${th('colorPrimary')};
   font: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
+  font-weight: ${props => (props.active ? 'bold' : 'normal')};
   text-decoration: none;
   transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
 
   &:hover {
+    background: none;
     color: ${th('colorPrimary')};
     text-decoration: underline;
   }

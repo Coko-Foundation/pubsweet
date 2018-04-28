@@ -4,6 +4,8 @@ import 'typeface-vollkorn'
 
 import { css } from 'styled-components'
 
+import { Action, AppBar } from './elements'
+
 // LEAVE THESE HERE, they're useful for easy switching to the default theme
 // import theme from '@pubsweet/default-theme'
 // export default theme
@@ -13,55 +15,8 @@ const scaleFn = (base, scale, heading) => base * scale ** Math.abs(heading - 6)
 const th = name => props => props.theme[name]
 
 const fontSizeBase = 16
-const gridUnit = 24
 const scale = 1.2
-
-const underlineFade = css`
-  &:before {
-    transition: ${th('transitionDuration')} ease;
-    opacity: 0;
-  }
-
-  &:hover:before {
-    opacity: 1;
-  }
-`
-
-// const underlineGrow = css`
-//   &:before {
-//     transform: scaleX(0);
-//     transition: ${th('transitionDuration')} ease;
-//   }
-
-//   &:hover:before {
-//     transform: scaleX(1);
-//   }
-// `
-
-const underlineAnimation = css`
-  position: relative;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: ${th('colorPrimary')};
-    visibility: hidden;
-  }
-
-  &:hover:before {
-    visibility: visible;
-  }
-
-  ${underlineFade};
-`
+const gridUnit = 24
 
 const cokoTheme = {
   /* Colors */
@@ -117,9 +72,8 @@ const cokoTheme = {
   transitionDelay: '0',
 
   cssOverrides: {
-    Action: css`
-      ${underlineAnimation};
-    `,
+    Action,
+    AppBar,
     Button: css`
       text-transform: uppercase;
 

@@ -14,3 +14,9 @@ Action that is a button.
 ```js
 <Action>I am a button.</Action>
 ```
+
+When an action is active, it turns bold. (useful for a navigation bar)
+
+```js
+<Action active>Active</Action>
+```
