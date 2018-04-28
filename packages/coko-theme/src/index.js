@@ -2,9 +2,7 @@
 import 'typeface-fira-sans-condensed'
 import 'typeface-vollkorn'
 
-import { css } from 'styled-components'
-
-import { Action, ActionGroup, AppBar } from './elements'
+import { Action, ActionGroup, AppBar, Button, TextField } from './elements'
 
 // LEAVE THESE HERE, they're useful for easy switching to the default theme
 // import theme from '@pubsweet/default-theme'
@@ -12,7 +10,6 @@ import { Action, ActionGroup, AppBar } from './elements'
 
 // TODO -- where should functions like this exist?
 const scaleFn = (base, scale, heading) => base * scale ** Math.abs(heading - 6)
-const th = name => props => props.theme[name]
 
 const fontSizeBase = 16
 const scale = 1.2
@@ -75,78 +72,8 @@ const cokoTheme = {
     Action,
     ActionGroup,
     AppBar,
-    Button: css`
-      text-transform: uppercase;
-
-      ${props =>
-        !props.primary &&
-        `
-          background: none;
-          border: none;
-          color: ${props.theme.colorPrimary};
-          padding: 0;
-          text-decoration: underline;
-          text-transform: none;
-
-          &:hover {
-            background: none;
-            border: none;
-            // DARKEN 30
-            color: #16415D;
-          }
-
-          &[disabled] {
-            color: ${props.theme.colorTextPlaceholder};
-
-            &:hover {
-              background: none;
-            }
-          }
-        `};
-    `,
-    TextField: {
-      // TODO
-      // -- input padding: breaking the grid?
-      // -- small placeholder text? maybe by default?
-      Input: css`
-        border-width: 0 0 1px 0;
-        border-style: dashed;
-        border-color: ${props => {
-          switch (props.validationStatus) {
-            case 'success':
-              return props.theme.colorSuccess
-            case 'error':
-              return props.theme.colorError
-            default:
-              return props.theme.colorBorder
-          }
-        }};
-        color: ${props => {
-          switch (props.validationStatus) {
-            case 'success':
-              return props.theme.colorSuccess
-            case 'error':
-              return props.theme.colorError
-            default:
-              return 'inherit'
-          }
-        }};
-        height: calc(${th('gridUnit')} * 2);
-        outline: 0;
-        padding: 0 0 0 2px;
-        transition: ${th('transitionDuration')}
-          ${th('transitionTimingFunction')};
-
-        &:focus {
-          border-color: ${th('colorPrimary')};
-          color: inherit;
-        }
-
-        &::placeholder {
-          font-size: ${th('fontSizeBaseSmall')};
-        }
-      `,
-    },
+    Button,
+    TextField,
   },
 }
 
