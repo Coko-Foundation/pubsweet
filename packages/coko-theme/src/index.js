@@ -4,7 +4,7 @@ import 'typeface-vollkorn'
 
 import { css } from 'styled-components'
 
-import { Action, AppBar } from './elements'
+import { Action, ActionGroup, AppBar } from './elements'
 
 // LEAVE THESE HERE, they're useful for easy switching to the default theme
 // import theme from '@pubsweet/default-theme'
@@ -73,6 +73,7 @@ const cokoTheme = {
 
   cssOverrides: {
     Action,
+    ActionGroup,
     AppBar,
     Button: css`
       text-transform: uppercase;

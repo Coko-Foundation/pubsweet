@@ -27,7 +27,9 @@ const common = css`
   text-decoration: none;
   transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background: none;
     color: ${th('colorPrimary')};
     text-decoration: underline;
