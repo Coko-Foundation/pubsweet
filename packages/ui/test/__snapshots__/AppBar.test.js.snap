@@ -14,7 +14,9 @@ exports[`AppBar Basic display 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover {
+.c4:hover,
+.c4:focus,
+.c4:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -165,7 +167,9 @@ exports[`AppBar With admin user 1`] = `
   background: grey;
 }
 
-.c7:hover {
+.c7:hover,
+.c7:focus,
+.c7:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -185,7 +189,9 @@ exports[`AppBar With admin user 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover {
+.c4:hover,
+.c4:focus,
+.c4:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -350,7 +356,9 @@ exports[`AppBar With custom brand and login links 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover {
+.c4:hover,
+.c4:focus,
+.c4:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -454,7 +462,9 @@ exports[`AppBar With custom right component 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover {
+.c4:hover,
+.c4:focus,
+.c4:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -534,7 +544,9 @@ exports[`AppBar With nav links 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover {
+.c4:hover,
+.c4:focus,
+.c4:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
