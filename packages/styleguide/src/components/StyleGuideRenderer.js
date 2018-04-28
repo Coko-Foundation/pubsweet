@@ -10,8 +10,8 @@ import defaultTheme from '@pubsweet/default-theme'
 import cokoTheme from '@pubsweet/coko-theme'
 import elifeTheme from '@pubsweet/elife-theme'
 
-// const initialThemeName = 'defaultTheme'
-const initialThemeName = 'cokoTheme'
+const initialThemeName = 'defaultTheme'
+// const initialThemeName = 'cokoTheme'
 
 const currentTheme = { name: initialThemeName }
 const themes = {
