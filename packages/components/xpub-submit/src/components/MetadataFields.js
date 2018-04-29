@@ -11,7 +11,11 @@ import {
   minSize,
   split,
 } from 'xpub-validators'
+<<<<<<< HEAD
 import AuthorsInput from './AuthorsInput'
+=======
+import { AuthorsInput } from './AuthorsInput'
+>>>>>>> 267fc7ff... feat: update MetadataFields to use AuthorsInput component
 import { Section, Legend } from '../styles'
 
 const minSize1 = minSize(1)
