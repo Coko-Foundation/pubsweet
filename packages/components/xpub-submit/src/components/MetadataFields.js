@@ -11,7 +11,7 @@ import {
   minSize,
   split,
 } from 'xpub-validators'
-import AuthorsInput from './AuthorsInput'
+import { AuthorsInput } from './AuthorsInput'
 import { Section, Legend } from '../styles'
 
 const minSize1 = minSize(1)
