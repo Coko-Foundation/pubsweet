@@ -1,15 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Button, th } from '@pubsweet/ui'
-import Metadata from './MetadataFields'
-import Declarations from './Declarations'
-import Suggestions from './Suggestions'
-import Notes from './Notes'
-import SupplementaryFiles from './SupplementaryFiles'
-import Confirm from './Confirm'
-import { Heading1 } from '../styles'
-// import Validots from './Validots'
+import { th } from '@pubsweet/ui'
+import moment from 'moment'
+import Tabs from './atoms/Tabs'
+import CurrentVersionPage from './CurrentVersionPage'
+import SubmittedVersion from './SubmittedVersion'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -20,26 +15,10 @@ const Wrapper = styled.div`
   overflow: ${({ confirming }) => confirming && 'hidden'};
 `
 
-const Intro = styled.div`
-  font-style: italic;
-  line-height: 1.4;
-`
-
-const ModalWrapper = styled.div`
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-`
-
 const Submit = ({
   project,
-  version,
+  submittedVersion,
+  currentVersion,
   valid,
   error,
   readonly,
@@ -47,52 +26,36 @@ const Submit = ({
   uploadFile,
   confirming,
   toggleConfirming,
-}) => (
-  <Wrapper>
-    <Heading1>Submission information</Heading1>
+}) => {
+  const decisionSections = []
 
-    <Intro>
-      <div>
-        We have ingested your manuscript. To access your manuscript in an
-        editor, please{' '}
-        <Link to={`/projects/${project.id}/versions/${version.id}/manuscript`}>
-          view here
-        </Link>.
-      </div>
-      <div>
-        To complete your submission, please answer the following questions.
-      </div>
-      <div>The answers will be automatically saved.</div>
-    </Intro>
+  console.log(submittedVersion,currentVersion)
 
-    <form onSubmit={handleSubmit}>
-      <Metadata readonly={readonly} />
-      <Declarations readonly={readonly} />
-      <Suggestions readonly={readonly} />
-      <Notes readonly={readonly} />
-      <SupplementaryFiles readonly={readonly} uploadFile={uploadFile} />
+  submittedVersion.forEach(versionElem => {
+    const submittedMoment = moment(versionElem.submitted)
+    const label = submittedMoment.format('YYYY-MM-DD')
+    decisionSections.push({
+      content: <SubmittedVersion project={project} version={versionElem} />,
+      key: versionElem.id,
+      label,
+    })
+  })
 
-      {!readonly && (
-        <div>
-          <Button onClick={toggleConfirming} primary type="button">
-            Submit your manuscript
-          </Button>
-        </div>
-      )}
+  decisionSections.push({
+    content: <CurrentVersionPage project={project} version={currentVersion} />,
+    key: currentVersion.id,
+    label: 'Current Version',
+  })
 
-      {confirming && (
-        <ModalWrapper>
-          <Confirm toggleConfirming={toggleConfirming} />
-        </ModalWrapper>
-      )}
-    </form>
-
-    {/* <div className={classes.validots}>
-      <Validots
-        valid={valid}
-        handleSubmit={handleSubmit}/>
-    </div> */}
-  </Wrapper>
-)
+  return (
+    <Wrapper>
+      <Tabs
+        activeKey={currentVersion.id}
+        sections={decisionSections}
+        title="Versions"
+      />
+    </Wrapper>
+  )
+}
 
 export default Submit
