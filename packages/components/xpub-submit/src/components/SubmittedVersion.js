@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Attachment, { th } from '@pubsweet/ui'
+import Attachment, { Button, th } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
 import { Heading1, Section, Legend } from '../styles'
 import { Columns, SubmissionVersion, Review } from './atoms/Columns'
+import Accordion from './molecules/Accordion'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -47,17 +48,26 @@ const Abstract = styled.div`
   word-wrap: break-word;
 `
 
-const CurrentVersion = ({
+const ReviewAccordion = reviewers => (
+  <ReviewAccordion>
+    {reviewers.length &&
+      reviewers.map(review => (
+        <Accordion
+          component={review.note.content}
+          key="decision"
+          title="decision"
+        />
+      ))}
+  </ReviewAccordion>
+)
+
+const SubmittedVersion = ({
   project,
   version,
-  valid,
-  error,
-  readonly,
   handleSubmit,
-  uploadFile,
-  confirming,
-  toggleConfirming,
   journal,
+  toggleOpen,
+  open,
 }) => (
   <Wrapper>
     <Columns>
@@ -126,9 +136,24 @@ const CurrentVersion = ({
           ]}
         </Section>
       </SubmissionVersion>
-      <Review>test</Review>
+      <Review>
+        <Section id="accordion.decision">
+          <Accordion
+            component={version.decision.note.content}
+            key="decision"
+            title="decision"
+          />
+        </Section>
+        <Section id="accordion.review">
+          <Accordion
+            component={ReviewAccordion(version.reviewers)}
+            key="reviews"
+            title="decisionc df"
+          />
+        </Section>
+      </Review>
     </Columns>
   </Wrapper>
 )
 
-export default withJournal(CurrentVersion)
+export default withJournal(SubmittedVersion)
