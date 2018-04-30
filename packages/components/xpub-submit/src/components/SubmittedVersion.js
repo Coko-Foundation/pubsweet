@@ -47,18 +47,19 @@ const SubLegend = Legend.extend`
 const Abstract = styled.div`
   word-wrap: break-word;
 `
+const ReviewAccord = styled.div``
 
-const ReviewAccordion = reviewers => (
-  <ReviewAccordion>
-    {reviewers.length &&
+const ReviewAccordion = ({ reviewers }) => (
+  <ReviewAccord>
+    {reviewers.length > 0 &&
       reviewers.map(review => (
         <Accordion
-          Component={() => review.note.content}
+          Component={review.note.content}
           key={review.id}
           title="review"
         />
       ))}
-  </ReviewAccordion>
+  </ReviewAccord>
 )
 
 const SubmittedVersion = ({
@@ -75,10 +76,11 @@ const SubmittedVersion = ({
         <Heading1>Submission information</Heading1>
         <Intro>
           <div>
-            {console.log(version)}
             We have ingested your manuscript. To access your manuscript in an
             editor, please{' '}
-            <Link to={`/projects/${project.id}/versions/${version.id}/manuscript`}>
+            <Link
+              to={`/projects/${project.id}/versions/${version.id}/manuscript`}
+            >
               view here
             </Link>.
           </div>
@@ -137,20 +139,20 @@ const SubmittedVersion = ({
         </Section>
       </SubmissionVersion>
       <Review>
-        <Section id="accordion.decision">
-          {/* <Accordion
-            Component={() => version.decision.note.content}
-            key="decision"
-            title="decision"
-          /> */}
-        </Section>
-        <Section id="accordion.review">
-          <Accordion
-            Component={() => <ReviewAccordion reviewers={version.reviewers} />}
-            key="review"
-            title="decisionc df"
-          />
-        </Section>
+        <Accordion
+          Component={version.decision.note.content}
+          key="decision"
+          title="decision"
+        />
+        {version.reviewers && (
+          <Section id="accordion.review">
+            <Accordion
+              Component={<ReviewAccordion reviewers={version.reviewers} />}
+              key="review"
+              title="decisionc df"
+            />
+          </Section>
+        )}
       </Review>
     </Columns>
   </Wrapper>
