@@ -3,17 +3,17 @@ import styled from 'styled-components'
 const Columns = styled.div`
   display: grid;
   grid-column-gap: 2em;
-  grid-template-areas: 'manuscript admin';
+  grid-template-areas: 'SubmissionVersion Review';
   grid-template-columns: minmax(200px, 80ch) minmax(200px, 50ch);
   justify-content: center;
 `
 
-const Manuscript = styled.div`
-  grid-area: manuscript;
+const SubmissionVersion = styled.div`
+  grid-area: SubmissionVersion;
 `
 
-const Admin = styled.div`
-  grid-area: admin;
+const Review = styled.div`
+  grid-area: Review;
 `
 
-export { Columns, Manuscript, Admin }
+export { Columns, SubmissionVersion, Review }

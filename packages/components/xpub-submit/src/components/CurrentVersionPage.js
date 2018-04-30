@@ -49,6 +49,7 @@ const stripHtml = htmlString => {
 // TODO: redux-form doesn't have an onBlur handler(?)
 const onChange = (values, dispatch, { project, version }) => {
   values.metadata.title = stripHtml(values.metadata.title) // see TODO above
+  values.metadata.abstract = stripHtml(values.metadata.abstract) // see TODO above
 
   dispatch(
     actions.updateFragment(project, {
@@ -71,7 +72,7 @@ export default compose(
   connect(
     (state, { match, project, version }) => {
       // const project = selectCollection(state, match.params.project)
-      console.log(version, match)
+
       // version = selectFragment(state, match.params.version)
       // console.log(version)
 

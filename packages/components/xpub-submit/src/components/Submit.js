@@ -29,8 +29,6 @@ const Submit = ({
 }) => {
   const decisionSections = []
 
-  console.log(submittedVersion,currentVersion)
-
   submittedVersion.forEach(versionElem => {
     const submittedMoment = moment(versionElem.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')

@@ -29,7 +29,7 @@ export const selectCurrentVersion = (state, project) =>
   newestFirst(selectFragments(state, project.fragments))[0]
 
 export const selectLastSubmittedVersion = (state, project) => {
-  console.log(newestSubmittedFirst(selectFragments(state, project.fragments)))
+  // console.log(newestSubmittedFirst(selectFragments(state, project.fragments)))
   return newestSubmittedFirst(selectFragments(state, project.fragments))
 }
 
