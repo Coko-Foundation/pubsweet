@@ -46,10 +46,22 @@ const createTables = async clobber => {
     unsafeCleanup: true,
   })
 
-  const migrationPaths = getMigrationPaths()
-  await Promise.all(
-    migrationPaths.map(migrationPath => fs.copy(migrationPath, tempDir)),
-  )
+  // filter out any migration paths that do not exist
+  const migrationPaths = (await Promise.all(
+    getMigrationPaths().map(async migrationPath => {
+      if (await fs.exists(migrationPath)) {
+        await fs.copy(migrationPath, tempDir)
+        return migrationPath
+      }
+      return undefined
+    }),
+  )).filter(path => path)
+
+  // fallback if no migrations (which implies old version of server)
+  if (migrationPaths.length === 0) {
+    await db.query('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
+    return
+  }
 
   const migrator = new Umzug({
     storage,
