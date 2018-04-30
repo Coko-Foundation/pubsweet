@@ -53,9 +53,9 @@ const ReviewAccordion = reviewers => (
     {reviewers.length &&
       reviewers.map(review => (
         <Accordion
-          component={review.note.content}
-          key="decision"
-          title="decision"
+          Component={() => review.note.content}
+          key={review.id}
+          title="review"
         />
       ))}
   </ReviewAccordion>
@@ -138,16 +138,16 @@ const SubmittedVersion = ({
       </SubmissionVersion>
       <Review>
         <Section id="accordion.decision">
-          <Accordion
-            component={version.decision.note.content}
+          {/* <Accordion
+            Component={() => version.decision.note.content}
             key="decision"
             title="decision"
-          />
+          /> */}
         </Section>
         <Section id="accordion.review">
           <Accordion
-            component={ReviewAccordion(version.reviewers)}
-            key="reviews"
+            Component={() => <ReviewAccordion reviewers={version.reviewers} />}
+            key="review"
             title="decisionc df"
           />
         </Section>

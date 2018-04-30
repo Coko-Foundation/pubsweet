@@ -71,7 +71,7 @@ const ReviewHeading = ({
   )
 }
 
-const Accordion = ({ journal, open, toggleOpen, title, component }) => (
+const Accordion = ({ journal, open, toggleOpen, title, Component }) => (
   <Root>
     <ReviewHeading
       journal={journal}
@@ -81,8 +81,7 @@ const Accordion = ({ journal, open, toggleOpen, title, component }) => (
       // recommendation={recommendation}
       toggleOpen={toggleOpen}
     />
-    {console.log(component,1111)}
-    {open && <ReviewBody>{component}</ReviewBody>}
+    {open && <ReviewBody>{Component}</ReviewBody>}
   </Root>
 )
 
