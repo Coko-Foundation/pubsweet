@@ -14,6 +14,7 @@ module.exports = {
     },
   },
   dbManager: {
+    migrationsPath: `${__dirname}/../test/migrations`,
     username: 'testUsername',
     email: 'test@example.com',
     password: 'test_password',

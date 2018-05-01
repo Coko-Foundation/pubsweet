@@ -15,8 +15,8 @@ module.exports = () => {
   )
 
   // load migrations from app
-  if (config.has('migrationsPath')) {
-    migrationsPaths.push(path.resolve(config.get('migrationsPath')))
+  if (config.has('dbManager.migrationsPath')) {
+    migrationsPaths.push(path.resolve(config.get('dbManager.migrationsPath')))
   }
 
   // load migrations from components

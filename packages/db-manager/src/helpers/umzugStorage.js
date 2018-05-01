@@ -18,6 +18,6 @@ module.exports = {
       )`,
     )
     const { rows } = await db.query('SELECT id FROM migrations')
-    return rows
+    return rows.map(row => row.id)
   },
 }

@@ -222,6 +222,15 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
+"@pubsweet/default-theme@^0.2.0":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@pubsweet/default-theme/-/default-theme-0.2.2.tgz#23a229e74a7bdc63b951efe0f0bbd830fd5faa98"
+  dependencies:
+    styled-components "^3.2.5"
+    typeface-noto-sans "^0.0.54"
+    typeface-noto-serif "^0.0.54"
+    typeface-ubuntu-mono "^0.0.54"
+
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
   resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#7ff5635e266415ecb4969658175af8ae9940d791"
@@ -250,6 +259,38 @@
     pubsweet-server "^2.0.0"
     pubsweet-theme-plugin "^0.0.3"
     react-router-redux next
+
+"@pubsweet/theme@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@pubsweet/theme/-/theme-0.1.3.tgz#2c508abc284a33ce14f1fa0a08486477def259a4"
+  dependencies:
+    cokourier-prime-sans "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git"
+    typeface-fira-mono "^0.0.43"
+    typeface-fira-sans "^0.0.43"
+    typeface-fira-sans-condensed "^0.0.43"
+    typeface-vollkorn "^0.0.43"
+
+"@pubsweet/ui@^3.0.0":
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-3.3.4.tgz#f4dda1e900268a7c460f01aec40da187518b6363"
+  dependencies:
+    babel-jest "^21.2.0"
+    classnames "^2.2.5"
+    enzyme "^3.2.0"
+    enzyme-adapter-react-16 "^1.1.1"
+    invariant "^2.2.3"
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-feather "^1.0.8"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-tag-autocomplete "^5.5.0"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
 
 "@types/async@2.0.47":
   version "2.0.47"
