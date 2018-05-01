@@ -15,6 +15,8 @@ stages:
 build:
   image: docker:latest
   stage: build
+  except:
+    - tags
   script:
     - docker version
     - docker build -t $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA .
@@ -26,6 +28,8 @@ build:
 lint:style:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
+  except:
+    - tags
   variables:
     GIT_STRATEGY: none
   script:
@@ -35,6 +39,8 @@ lint:style:
 lint:js:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
+  except:
+    - tags
   variables:
     GIT_STRATEGY: none
   script:
@@ -44,6 +50,8 @@ lint:js:
 lint:json:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
+  except:
+    - tags
   variables:
     GIT_STRATEGY: none
   script:
@@ -53,6 +61,8 @@ lint:json:
 lint:commits:
    image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
    stage: test
+   except:
+     - tags
    script:
      - cp -r .git ${HOME}/ && cd ${HOME}
      - yarn commitlint --from=origin/master --to=$CI_COMMIT_SHA
@@ -72,6 +82,8 @@ test:
     NODE_ENV: test
   services:
     - postgres
+  except:
+    - tags
   script:
     - cd ${HOME}
     # specify host here else it confuses the linked postgres image
@@ -88,7 +100,9 @@ push:latest:
     - docker build -t $IMAGE_ORG/$IMAGE_NAME:latest --label COMMIT_SHA=$CI_COMMIT_SHA .
     - docker push $IMAGE_ORG/$IMAGE_NAME:latest
   only:
-  - master
+    - master
+  except:
+    - tags
 
 # -----------------------------------------------
 # ui --------------------------------------------
@@ -121,7 +135,8 @@ stop_review:ui:
     action: stop
   when: manual
   except:
-  - master
+    - master
+    - tags
   script:
     - source deploy.sh
     - delete_deployment
@@ -135,7 +150,9 @@ staging:ui:
     name: $PACKAGE_NAME/staging
     url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
   only:
-  - master
+    - master
+  except:
+    - tags
   script:
     - source deploy.sh
     - create_deployment
@@ -150,7 +167,9 @@ production:ui:
     url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
   when: manual
   only:
-  - master
+    - master
+  except:
+    - tags
   script:
     - source deploy.sh
     - create_deployment
@@ -164,6 +183,8 @@ demo:ui:
     name: $PACKAGE_NAME/demo
     url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
   when: manual
+  except:
+    - tags
   script:
     - source deploy.sh
     - create_deployment
