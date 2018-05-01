@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Attachment, { Button, th } from '@pubsweet/ui'
+import Attachment, { th } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
 import { Heading1, Section, Legend } from '../styles'
 import { Columns, SubmissionVersion, Review } from './atoms/Columns'
@@ -52,10 +52,11 @@ const ReviewAccord = styled.div``
 const ReviewAccordion = ({ reviewers }) => (
   <ReviewAccord>
     {reviewers.length > 0 &&
-      reviewers.map(review => (
+      reviewers.map((review, index) => (
         <Accordion
           Component={review.note.content}
           key={review.id}
+          ordinal={index + 1}
           title="review"
         />
       ))}
@@ -149,7 +150,7 @@ const SubmittedVersion = ({
             <Accordion
               Component={<ReviewAccordion reviewers={version.reviewers} />}
               key="review"
-              title="decisionc df"
+              title="decision"
             />
           </Section>
         )}

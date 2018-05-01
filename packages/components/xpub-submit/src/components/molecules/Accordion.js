@@ -6,7 +6,7 @@ import { Button } from '@pubsweet/ui'
 
 const Root = styled.div``
 
-const ReviewBody = styled.div`
+const AccordionBody = styled.div`
   margin-left: 1em;
 `
 
@@ -35,7 +35,7 @@ const Bullet = ({ journal, recommendation }) => {
   return <Dot />
 }
 
-const ReviewHeading = ({
+const AccordionHeading = ({
   journal,
   name,
   open,
@@ -71,17 +71,23 @@ const ReviewHeading = ({
   )
 }
 
-const Accordion = ({ journal, open, toggleOpen, title, Component }) => (
+const Accordion = ({
+  journal,
+  open,
+  ordinal,
+  toggleOpen,
+  title,
+  Component,
+}) => (
   <Root>
-    <ReviewHeading
+    <AccordionHeading
       journal={journal}
       name={title}
       open={open}
-      ordinal="2"
-      // recommendation={recommendation}
+      ordinal={ordinal}
       toggleOpen={toggleOpen}
     />
-    {open && <ReviewBody>{Component}</ReviewBody>}
+    {open && <AccordionBody>{Component}</AccordionBody>}
   </Root>
 )
 

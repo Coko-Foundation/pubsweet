@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { actions } from 'pubsweet-client'
 import uploadFile from 'xpub-upload'
+
 import CurrentVersion from './CurrentVersion'
 
 const onSubmit = (values, dispatch, { history, project, version }) =>
@@ -68,14 +69,10 @@ export default compose(
   //   // ),
   // ]),
   connect(
-    (state, { match, project, version }) => {
-      // const project = selectCollection(state, match.params.project)
-
-      // version = selectFragment(state, match.params.version)
-      // console.log(version)
-
-      return { project, version }
-    },
+    (state, { match, project, version }) => ({
+      project,
+      version,
+    }),
     {
       uploadFile,
     },
