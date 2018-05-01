@@ -2,7 +2,7 @@ import { orderBy, filter } from 'lodash'
 
 export const newestFirst = items => orderBy(items, ['created'], ['desc'])
 
-export const newestSubmittedFirst = items =>
+export const newestDecidedFirst = items =>
   orderBy(
     filter(
       items,
@@ -10,6 +10,11 @@ export const newestSubmittedFirst = items =>
       ['created'],
       ['desc'],
     ),
+  )
+
+export const newestSubmittedFirst = items =>
+  orderBy(
+    filter(items, data => data.subbmitted === undefined, ['created'], ['desc']),
   )
 
 export const selectCurrentUser = state =>
@@ -27,6 +32,9 @@ export const selectFragment = (state, id) => state.fragments[id]
 
 export const selectCurrentVersion = (state, project) =>
   newestFirst(selectFragments(state, project.fragments))[0]
+
+export const selectLastDecidedVersion = (state, project) =>
+  newestDecidedFirst(selectFragments(state, project.fragments))
 
 export const selectLastSubmittedVersion = (state, project) =>
   newestSubmittedFirst(selectFragments(state, project.fragments))

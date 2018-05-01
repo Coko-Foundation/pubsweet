@@ -52,14 +52,17 @@ const ReviewAccord = styled.div``
 const ReviewAccordion = ({ reviewers }) => (
   <ReviewAccord>
     {reviewers.length > 0 &&
-      reviewers.map((review, index) => (
-        <Accordion
-          Component={review.note.content}
-          key={review.id}
-          ordinal={index + 1}
-          title="review"
-        />
-      ))}
+      reviewers.map((review, index) => {
+        if (!review.note) return null
+        return (
+          <Accordion
+            Component={review.note.content}
+            key={review.id}
+            ordinal={index + 1}
+            title="review"
+          />
+        )
+      })}
   </ReviewAccord>
 )
 

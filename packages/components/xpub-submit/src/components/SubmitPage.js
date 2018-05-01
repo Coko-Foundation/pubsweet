@@ -7,7 +7,7 @@ import {
   selectCollection,
   // selectFragments,
   selectCurrentVersion,
-  selectLastSubmittedVersion,
+  selectLastDecidedVersion,
 } from 'xpub-selectors'
 import Submit from './Submit'
 
@@ -21,7 +21,7 @@ export default compose(
       const project = selectCollection(state, match.params.project)
       // const version = selectFragments(state, (project || {}).fragments || [])
       const currentVersion = selectCurrentVersion(state, project)
-      const submittedVersion = selectLastSubmittedVersion(state, project)
+      const submittedVersion = selectLastDecidedVersion(state, project)
 
       return { project, submittedVersion, currentVersion }
     },
