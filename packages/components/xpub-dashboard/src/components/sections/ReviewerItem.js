@@ -20,7 +20,11 @@ const ReviewerItem = ({
   currentUser,
   reviewerResponse,
 }) => {
-  const reviewer = getReviewerFromUser(project, lastSubmittedVersion, currentUser)
+  const reviewer = getReviewerFromUser(
+    project,
+    lastSubmittedVersion,
+    currentUser,
+  )
 
   const status = reviewer && reviewer.status
 
@@ -69,7 +73,6 @@ const ReviewerItem = ({
             </ActionContainer>
           </Actions>
         )}
-        {console.log(reviewer)}
         {(reviewer || {}).status === 'rejected' && 'rejected'}
       </Body>
     </Item>

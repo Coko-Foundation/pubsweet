@@ -12,7 +12,6 @@ const onSubmit = (values, dispatch, { project, version }) =>
   dispatch(
     actions.updateFragment(project, {
       id: version.id,
-      // rev: version.rev,
       submitted: new Date(),
       ...values,
     }),
@@ -21,7 +20,6 @@ const onSubmit = (values, dispatch, { project, version }) =>
       dispatch(
         actions.updateCollection({
           id: project.id,
-          // rev: project.rev,
           status: 'submitted',
         }),
       ),
@@ -77,9 +75,8 @@ export default compose(
     }
   }),
   reduxForm({
-    // enableReinitialize: true,
     form: 'submit',
-    onChange: throttle(onChange, 3000, { trailing: false }),
+    onChange: throttle(onChange, 3000, { trailing: true }),
     onSubmit,
   }),
   withState('confirming', 'setConfirming', false),
