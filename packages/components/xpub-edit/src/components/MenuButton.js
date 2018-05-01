@@ -27,6 +27,7 @@ const MenuButton = ({ item, state, handle }) => (
     disabled={item.enable && !item.enable(state)}
     onMouseDown={handle}
     title={item.title}
+    type="button"
   >
     {item.content}
   </Button>
