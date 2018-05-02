@@ -12,7 +12,6 @@
 
 import React from 'react'
 import { css } from 'styled-components'
-import { get } from 'lodash'
 
 import OriginalButton from '../atoms/Button'
 import OriginalLink from '../atoms/Link'
@@ -35,7 +34,7 @@ const common = css`
     text-decoration: underline;
   }
 
-  ${props => get(props.theme, 'cssOverrides.Action')};
+  ${th('cssOverrides.Action')};
 `
 
 const Button = OriginalButton.extend`

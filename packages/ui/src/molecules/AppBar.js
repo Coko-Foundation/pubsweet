@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { get } from 'lodash'
 
 import th from '../helpers/themeHelper'
 import { Icon } from '../atoms'
@@ -14,8 +13,8 @@ const Root = styled.nav`
   justify-content: space-between;
   min-height: calc(${th('gridUnit')} * 2);
 
-  ${props => get(props.theme, 'cssOverrides.AppBar')};
-  ${props => get(props.theme, 'cssOverrides.AppBar.Root')};
+  ${th('cssOverrides.AppBar')};
+  ${th('cssOverrides.AppBar.Root')};
 `
 
 const Section = styled.div`
@@ -27,7 +26,7 @@ const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
 
-  ${props => get(props.theme, 'cssOverrides.AppBar.Logo')};
+  ${th('cssOverrides.AppBar.Logo')};
 `
 
 const LogoLink = styled(Action)`
@@ -35,7 +34,7 @@ const LogoLink = styled(Action)`
     height: calc(${th('gridUnit')} * 2);
   }
 
-  ${props => get(props.theme, 'cssOverrides.AppBar.LogoLink')};
+  ${th('cssOverrides.AppBar.LogoLink')};
 `
 
 const Item = styled.span`

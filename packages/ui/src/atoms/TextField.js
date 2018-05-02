@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { get } from 'lodash'
 
 import th from '../helpers/themeHelper'
 
@@ -38,7 +37,7 @@ const Input = styled.input`
     color: ${th('colorTextPlaceholder')};
   }
 
-  ${props => get(props, 'theme.cssOverrides.TextField.Input')};
+  ${th('cssOverrides.TextField.Input')};
 `
 
 class TextField extends React.Component {

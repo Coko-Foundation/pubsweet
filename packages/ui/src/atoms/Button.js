@@ -1,5 +1,3 @@
-// import React from 'react'
-import { get } from 'lodash'
 import styled, { css } from 'styled-components'
 import th from '../helpers/themeHelper'
 
@@ -63,9 +61,9 @@ const StyledButton = styled.button.attrs({
     }
   }
 
-  ${props => props.primary && primary} ${props =>
-    get(props.theme, 'cssOverrides.Button')};
-  ${props => get(props.theme, 'cssOverrides.Button.Root')};
+  ${props => props.primary && primary};
+  ${th('cssOverrides.Button')};
+  ${th('cssOverrides.Button.Root')};
 `
 
 export default StyledButton
