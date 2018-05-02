@@ -12,6 +12,5 @@ export default {
   `,
   ActionWrapper: css`
     border-right: 1px solid ${th('colorPrimary')};
-    color: indianred !important;
   `,
 }
