@@ -97,9 +97,10 @@ api.get(
 api.patch('/collections/:collectionId', authBearer, async (req, res, next) => {
   try {
     const collection = await Collection.find(req.params.collectionId)
+    const currentAndUpdate = { current: collection, update: req.body }
     const properties = await applyPermissionFilter({
       req,
-      target: collection,
+      target: currentAndUpdate,
       filterable: req.body,
     })
 

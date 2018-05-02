@@ -89,9 +89,10 @@ api.delete('/teams/:teamId', authBearer, async (req, res, next) => {
 api.patch('/teams/:teamId', authBearer, async (req, res, next) => {
   try {
     const team = await Team.find(req.params.teamId)
+    const currentAndUpdate = { current: team, update: req.body }
     const properties = await applyPermissionFilter({
       req,
-      target: team,
+      target: currentAndUpdate,
       filterable: req.body,
     })
 

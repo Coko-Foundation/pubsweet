@@ -147,12 +147,15 @@ async function authenticatedUser(user, operation, object, context) {
 
   // Allow authenticated users to add/remove team members of a team based
   // around a collection if they are one of the owners of this collection
-  if (get(object, 'type') === 'team' && operation === 'PATCH') {
-    if (get(object, 'object.type') === 'collection') {
-      const collectionId = get(object, 'object.id')
+  if (get(object, 'current.type') === 'team' && operation === 'PATCH') {
+    if (get(object, 'current.object.type') === 'collection') {
+      const collectionId = get(object, 'current.object.id')
       const collection = await context.models.Collection.find(collectionId)
       if (collection.owners.includes(user.id)) {
-        return true
+        // But they shouldn't be able to change the object of the Team
+        return {
+          filter: team => omit(team, 'object'),
+        }
       }
     }
   }
@@ -181,22 +184,41 @@ async function authenticatedUser(user, operation, object, context) {
       if (['GET', 'DELETE'].includes(operation)) {
         return true
       }
+    }
+  }
 
-      // Only allow filtered updating (mirroring filtered creation) for non-admin users)
-      if (operation === 'PATCH') {
+  if (operation === 'PATCH') {
+    if (get(object, 'current.type') === 'collection') {
+      if (get(object, 'current.owners').includes(user.id)) {
         return {
           filter: collection => omit(collection, 'filtered'),
         }
       }
     }
-  }
 
-  // A user can GET, DELETE and PATCH itself
-  if (get(object, 'type') === 'user' && get(object, 'id') === user.id) {
-    if (['GET', 'DELETE', 'PATCH'].includes(operation)) {
+    // A user can PATCH itself, but not to become an admin
+    if (
+      get(object, 'current.type') === 'user' &&
+      get(object, 'current.id') === user.id &&
+      operation === 'PATCH'
+    ) {
+      if (get(object, 'current.admin') === true) {
+        return true
+      } else if (get(object, 'update.admin') === true) {
+        return false
+      }
+
       return true
     }
   }
+
+  // A user can GET, DELETE itself
+  if (get(object, 'type') === 'user' && get(object, 'id') === user.id) {
+    if (['GET', 'DELETE'].includes(operation)) {
+      return true
+    }
+  }
+
   // If no individual permissions exist (above), fallback to unauthenticated
   // user's permission
   return unauthenticatedUser(operation, object)
