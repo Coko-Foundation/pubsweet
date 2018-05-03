@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.2.4...@pubsweet/styleguide@1.3.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **ui:** revert to default theme as default for styleguide ([ec2aabe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ec2aabe))
+
+
+### Features
+
+* **theme:** coko theme is in place ([731f501](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/731f501))
+
+
+
+
 <a name="1.2.4"></a>
 ## [1.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.2.3...@pubsweet/styleguide@1.2.4) (2018-04-24)
 

@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/coko-theme",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "This is a coko theme for Apps",
   "main": "src",
   "license": "MIT",
@@ -8,9 +8,8 @@
     "access": "public"
   },
   "dependencies": {
+    "cokourier-prime-sans": "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git",
     "styled-components": "^3.2.5",
-    "cokourier-prime-sans":
-      "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git",
     "typeface-fira-sans-condensed": "^0.0.54",
     "typeface-vollkorn": "^0.0.54"
   }

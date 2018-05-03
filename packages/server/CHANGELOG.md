@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="7.0.0"></a>
+      <a name="7.0.1"></a>
+## [7.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.0.0...pubsweet-server@7.0.1) (2018-05-03)
+
+
+### Bug Fixes
+
+* **server:** update nested PATCH endpoint ([9793075](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9793075))
+
+
+
+
+      <a name="7.0.0"></a>
 # [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@6.1.0...pubsweet-server@7.0.0) (2018-05-03)
 
 
@@ -24,7 +35,7 @@ the wished update.status is 'edited'.
 
 
 
-  <a name="6.1.0"></a>
+<a name="6.1.0"></a>
 # [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@6.0.0...pubsweet-server@6.1.0) (2018-04-25)
 
 

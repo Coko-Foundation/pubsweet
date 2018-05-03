@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.3"></a>
+## [0.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.2...pubsweet-component-xpub-dashboard@0.2.3) (2018-05-03)
+
+
+### Bug Fixes
+
+* **xpub-dashboard:** correct styles for author manuscripts ([1d8761e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1d8761e))
+
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.1...pubsweet-component-xpub-dashboard@0.2.2) (2018-05-03)
 
