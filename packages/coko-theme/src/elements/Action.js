@@ -27,7 +27,9 @@ const underlineFade = css`
 const underlineAnimation = css`
   position: relative;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     text-decoration: none;
   }
 
