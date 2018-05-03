@@ -119,7 +119,8 @@ review:ui:
     url: "http://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
     on_stop: stop_review:ui
   except:
-  - master
+    - master
+    - tags
   script:
     - source deploy.sh
     - create_deployment
