@@ -137,9 +137,10 @@ api.patch(
   async (req, res, next) => {
     try {
       const fragment = await getFragment({ req, Collection, Fragment })
+      const currentAndUpdate = { current: fragment, update: req.body }
       const properties = await applyPermissionFilter({
         req,
-        target: fragment,
+        target: currentAndUpdate,
         filterable: req.body,
       })
 
