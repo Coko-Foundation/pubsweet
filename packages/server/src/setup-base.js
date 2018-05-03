@@ -18,7 +18,7 @@ class Setup {
     logger.info('Created admin user: ', admin)
 
     collection = new Collection(collection)
-    collection.setOwners([admin.id])
+
     collection = await collection.save()
     logger.info('Created initial collection: ', collection.title)
 

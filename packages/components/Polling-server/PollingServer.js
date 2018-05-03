@@ -35,7 +35,6 @@ const PollingServer = app => {
 
     await fragment.updateProperties(patch)
     await fragment.save()
-    fragment.owners = await User.ownersWithUsername(fragment)
 
     const data = {}
 

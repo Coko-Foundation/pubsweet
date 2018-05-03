@@ -16,40 +16,6 @@ describe('Model', () => {
     otherUser = await new User(fixtures.updatedUser).save()
   })
 
-  it('initially has no owner', () => {
-    const collection = new Collection(fixtures.collection)
-
-    expect(collection.owners).toEqual([])
-    expect(collection.isOwner(user.id)).toBe(false)
-    expect(collection.isOwner(otherUser.id)).toBe(false)
-  })
-
-  it('can set the owners of a Collection', () => {
-    const collection = new Collection(fixtures.collection)
-
-    collection.setOwners([otherUser.id])
-    expect(collection.owners).toEqual([otherUser.id])
-    expect(collection.isOwner(user.id)).toBe(false)
-    expect(collection.isOwner(otherUser.id)).toBe(true)
-
-    collection.setOwners([user.id, otherUser.id])
-    expect(collection.owners.sort()).toEqual([user.id, otherUser.id].sort())
-    expect(collection.isOwner(user.id)).toBe(true)
-    expect(collection.isOwner(otherUser.id)).toBe(true)
-  })
-
-  it('cannot set owners to non-array', () => {
-    const collection = new Collection(fixtures.collection)
-
-    expect.hasAssertions()
-    try {
-      collection.setOwners('notAnArray')
-    } catch (err) {
-      expect(err.name).toEqual('ValidationError')
-      expect(err.message).toEqual('owners should be an array')
-    }
-  })
-
   it('can validate an object', () => {
     const user = new User({
       ...fixtures.user,

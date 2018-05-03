@@ -41,7 +41,6 @@ describe('fragments actions', () => {
     secondarg: {
       title: 'mock fragment',
       type: 'some_fragment',
-      owners: [],
     },
     types: {
       request: T.CREATE_FRAGMENT_REQUEST,
@@ -75,7 +74,6 @@ describe('fragments actions', () => {
       id: '1234',
       title: 'modded fragment',
       type: 'some_fragment',
-      owners: [],
     },
     types: {
       request: T.UPDATE_FRAGMENT_REQUEST,

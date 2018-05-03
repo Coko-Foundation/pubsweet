@@ -16,8 +16,8 @@ describe('GraphQL core mutations', () => {
   describe('mutations', () => {
     it('can create a user', async () => {
       const { body } = await api.graphql.query(
-        `mutation($input: String) { 
-          createUser(input: $input) { username } 
+        `mutation($input: String) {
+          createUser(input: $input) { username }
         }`,
         {
           input: JSON.stringify({
@@ -38,8 +38,8 @@ describe('GraphQL core mutations', () => {
 
     it('can update a user', async () => {
       const { body } = await api.graphql.query(
-        `mutation($id: ID, $input: String) { 
-          updateUser(id: $id, input: $input) { username, email } 
+        `mutation($id: ID, $input: String) {
+          updateUser(id: $id, input: $input) { username, email }
         }`,
         {
           id: user.id,
@@ -61,8 +61,8 @@ describe('GraphQL core mutations', () => {
 
     it('can delete a user', async () => {
       const { body } = await api.graphql.query(
-        `mutation($id: ID) { 
-          deleteUser(id: $id) { username } 
+        `mutation($id: ID) {
+          deleteUser(id: $id) { username }
         }`,
         { id: user.id },
         token,
@@ -70,30 +70,6 @@ describe('GraphQL core mutations', () => {
 
       expect(body).toEqual({
         data: { deleteUser: { username: 'admin' } },
-      })
-    })
-
-    it('sets owners when creating a collection', async () => {
-      const { body } = await api.graphql.query(
-        `mutation($input: String) {
-          createCollection(input: $input) {
-            owners {
-              id
-            }
-          }
-        }`,
-        {
-          input: JSON.stringify({}),
-        },
-        token,
-      )
-
-      expect(body).toEqual({
-        data: {
-          createCollection: {
-            owners: [{ id: user.id }],
-          },
-        },
       })
     })
   })

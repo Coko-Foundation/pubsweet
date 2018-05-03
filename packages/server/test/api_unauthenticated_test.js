@@ -100,7 +100,7 @@ describe('unauthenticated/public api', () => {
         .then(res => {
           const collections = res.body
           expect(collections).toHaveLength(1)
-          expect(Object.keys(collections[0])).toEqual(['id', 'title', 'owners'])
+          expect(Object.keys(collections[0])).toEqual(['id', 'title'])
         }))
   })
 })

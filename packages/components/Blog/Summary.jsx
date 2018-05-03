@@ -17,7 +17,6 @@ const Summary = props => {
     summary = abstract ? abstract.innerText : null
   }
   const publishDate = new Date(fragment.published_at).toDateString()
-  const owners = fragment.owners.map(owner => owner.username).join(', ')
 
   return (
     <div className="blogpost bootstrap">
@@ -30,7 +29,7 @@ const Summary = props => {
           </LinkContainer>&nbsp;
           <div>
             <em>
-              Published by {owners} on {publishDate}.
+              Published by {fragment.authors.join(', ')} on {publishDate}.
             </em>
           </div>
         </Col>

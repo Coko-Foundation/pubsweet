@@ -49,30 +49,21 @@ describe('authenticated api', () => {
     )
 
     it('creates a fragment in a protected collection', () =>
-      api.users.authenticate
-        .post(fixtures.updatedUser)
-        .then(token =>
-          api.fragments
-            .post({
-              fragment: fixtures.fragment,
-              collection,
-              token,
-            })
-            .expect(STATUS.CREATED),
-        )
-        .then(res => {
-          expect(res.body.owners).toContainEqual({
-            id: otherUser.id,
-            username: otherUser.username,
+      api.users.authenticate.post(fixtures.updatedUser).then(token =>
+        api.fragments
+          .post({
+            fragment: fixtures.fragment,
+            collection,
+            token,
           })
-        }))
+          .expect(STATUS.CREATED),
+      ))
 
     describe('a fragment owned by the same user', () => {
       let fragment
 
       beforeEach(async () => {
         fragment = new Fragment(fixtures.fragment)
-        fragment.setOwners([otherUser.id])
         fragment = await fragment.save()
 
         collection.addFragment(fragment)
@@ -104,7 +95,7 @@ describe('authenticated api', () => {
       beforeEach(async () => {
         const Fragment = require('../src/models/Fragment')
         fragment = new Fragment(fixtures.fragment)
-        fragment.setOwners([user.id])
+
         await fragment.save()
         collection.addFragment(fragment)
         await collection.save()

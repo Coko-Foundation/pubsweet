@@ -13,7 +13,7 @@ describe('<Summary/>', () => {
             id: 123,
             title: 'A foo post',
             published_at: '2017-01-02T12:34:56',
-            owners: [{ username: 'Anne Author' }],
+            authors: ['Anne Author'],
             ...fragment,
           }}
         />

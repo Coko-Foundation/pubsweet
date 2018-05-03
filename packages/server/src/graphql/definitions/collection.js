@@ -19,9 +19,6 @@ const resolvers = {
     },
   },
   Collection: {
-    owners(collection, vars, ctx) {
-      return ctx.connectors.user.fetchSome(collection.owners, ctx)
-    },
     fragments(collection, vars, ctx) {
       return ctx.connectors.fragment.fetchSome(collection.fragments, ctx)
     },
@@ -33,23 +30,21 @@ const typeDefs = `
     collection(id: ID): Collection
     collections: [Collection]
   }
-  
+
   extend type Mutation {
     createCollection(input: String): Collection
-    deleteCollection(id: ID): Collection 
+    deleteCollection(id: ID): Collection
     updateCollection(id: ID, input: String): Collection
   }
-  
+
   type Collection {
     id: ID!
     rev: String
     type: String!
-    owners: [User!]!
     fragments: [Fragment!]!
   }
-  
+
   input CollectionInput {
-    owners: [ID!]
     fragments: [ID!]
     rev: String
   }

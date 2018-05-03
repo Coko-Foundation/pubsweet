@@ -87,7 +87,7 @@ class Post extends React.Component {
             value={this.props.blogpost.title}
           />
         </td>
-        <td>{blogpost.owners.map(owner => owner.username).join(', ')}</td>
+        <td>{blogpost.authors.join(', ')}</td>
         <td>
           {blogpost.published ? 'Published' : 'Unpublished'} <br />
           {blogpost.published_at}

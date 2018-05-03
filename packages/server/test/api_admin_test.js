@@ -29,7 +29,7 @@ describe('admin api', () => {
       .then(() => {
         // Create fragment and add fragment to collection
         fragment = new Fragment(fixtures.fragment)
-        fragment.setOwners([otherUser.id])
+
         return fragment.save().then(fragment => {
           collection.addFragment(fragment)
           return collection.save()

@@ -8,7 +8,6 @@ class Collection extends Model {
     super(properties)
     this.type = 'collection'
     this.fragments = this.fragments || []
-    this.owners = this.owners || []
   }
 
   async save() {

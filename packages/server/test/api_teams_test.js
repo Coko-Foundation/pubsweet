@@ -69,7 +69,7 @@ describe('Teams API - per collection or fragment', () => {
           .then(() => new User(fixtures.user).save())
           .then(user => {
             const collection = new Collection(fixtures.collection)
-            collection.setOwners([user.id])
+
             return collection.save()
           })
           .then(collection => {

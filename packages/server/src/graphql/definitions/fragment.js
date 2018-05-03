@@ -19,9 +19,6 @@ const resolvers = {
     },
   },
   Fragment: {
-    owners(fragment, vars, ctx) {
-      return ctx.connectors.user.fetchSome(fragment.owners, ctx)
-    },
     fragments(fragment, vars, ctx) {
       return ctx.connectors.fragment.fetchSome(fragment.fragments, ctx)
     },
@@ -33,26 +30,24 @@ const typeDefs = `
     fragment(id: ID): Fragment
     fragments: [Fragment]
   }
-  
+
   extend type Mutation {
     createFragment(input: String): Fragment
-    deleteFragment(id: ID): Fragment 
+    deleteFragment(id: ID): Fragment
     updateFragment(id: ID, input: String): Fragment
   }
-  
+
   type Fragment {
     id: ID!
     rev: String
     type: String!
     fragmentType: String
     fragments: [Fragment!]!
-    owners: [User!]!
   }
-  
+
   input FragmentInput {
     fragmentType: String
     fragments: [ID!]
-    owners: [ID!]
     rev: String
   }
 `
