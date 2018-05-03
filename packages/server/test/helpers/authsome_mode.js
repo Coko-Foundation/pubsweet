@@ -188,7 +188,7 @@ async function authenticatedUser(user, operation, object, context) {
   }
 
   if (operation === 'PATCH') {
-    if (get(object, 'current.type') === 'collection') {
+    if (['collection', 'fragment'].includes(get(object, 'current.type'))) {
       if (get(object, 'current.owners').includes(user.id)) {
         return {
           filter: collection => omit(collection, 'filtered'),
