@@ -297,21 +297,19 @@ api.get(
 api.patch('/fragments/:fragmentId', authBearer, async (req, res, next) => {
   try {
     let fragment = await Fragment.find(req.params.fragmentId)
-    const permission = await authsome.can(req.user, req.method, fragment)
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, fragment)
-    }
+    const currentAndUpdate = { current: fragment, update: req.body }
+    const properties = await applyPermissionFilter({
+      req,
+      target: currentAndUpdate,
+      filterable: req.body,
+    })
 
-    if (permission.filter) {
-      req.body = permission.filter(req.body)
-    }
-
-    fragment.updateProperties(req.body)
+    fragment.updateProperties(properties)
     fragment = await fragment.save()
     fragment.owners = await User.ownersWithUsername(fragment)
 
-    const update = buildChangeData(req.body, fragment)
+    const update = buildChangeData(properties, fragment)
     res.status(STATUS.OK).json(update)
 
     sse.send({

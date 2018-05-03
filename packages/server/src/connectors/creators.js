@@ -58,9 +58,12 @@ function updateCreator(entityName, EntityModel) {
     await can(ctx.user, 'update', entityName)
     const entity = await EntityModel.find(id)
     const outputFilter = await canKnowAbout(ctx.user, entity)
-    const inputFilter = await can(ctx.user, 'update', entity)
-    const input = JSON.parse(inputString)
-    await entity.updateProperties(inputFilter(input))
+
+    const update = JSON.parse(inputString)
+    const currentAndUpdate = { current: entity, update }
+    const updateFilter = await can(ctx.user, 'update', currentAndUpdate)
+
+    await entity.updateProperties(updateFilter(update))
 
     return outputFilter(await entity.save())
   }

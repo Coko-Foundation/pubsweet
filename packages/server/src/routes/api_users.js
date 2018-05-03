@@ -6,7 +6,6 @@ const User = require('../models/User')
 
 const authsome = require('../helpers/authsome')
 
-const AuthorizationError = require('../errors/AuthorizationError')
 const ValidationError = require('../errors/ValidationError')
 
 const authLocal = passport.authenticate('local', {
@@ -124,23 +123,15 @@ api.delete('/users/:id', authBearer, async (req, res, next) => {
 api.patch('/users/:id', authBearer, async (req, res, next) => {
   try {
     let user = await User.find(req.params.id)
-    const permission = await authsome.can(req.user, req.method, user)
 
-    if (!permission) {
-      throw authorizationError(req.user, req.method, req.path)
-    }
+    const currentAndUpdate = { current: user, update: req.body }
+    const properties = await applyPermissionFilter({
+      req,
+      target: currentAndUpdate,
+      filterable: req.body,
+    })
 
-    // TODO: Move this to the authorization mode
-    const authenticatedUser = await User.find(req.user)
-    if (req.body.admin && !authenticatedUser.admin) {
-      throw new AuthorizationError('only admins can set other admins')
-    }
-
-    if (permission.filter) {
-      req.body = permission.filter(req.body)
-    }
-
-    user = await user.updateProperties(req.body)
+    user = await user.updateProperties(properties)
     user = await user.save()
     user = await User.find(req.params.id)
 
