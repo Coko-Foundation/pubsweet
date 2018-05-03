@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.0.11...xpub-edit@0.1.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **xpub-edit:** prevent editors from submitting form ([f1f7dda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f1f7dda))
+
+
+### Features
+
+* **xpub-edit:** create editor component with simple API ([ee6fb83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ee6fb83))
+
+
+
+
 <a name="0.0.11"></a>
 ## [0.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.0.10...xpub-edit@0.0.11) (2018-04-24)
 
