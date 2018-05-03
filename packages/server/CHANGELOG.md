@@ -3,7 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="6.1.0"></a>
+  <a name="7.0.0"></a>
+# [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@6.1.0...pubsweet-server@7.0.0) (2018-05-03)
+
+
+### Features
+
+* add config property for graphql endpoint ([c463855](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c463855))
+* **server:** add current and update state to update authorization ([9b2b073](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b2b073)), closes [#393](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/393)
+
+
+### BREAKING CHANGES
+
+* **server:** Authsome mode parts that deal with 'PATCH' or update operations, must now deal with
+the changed API, which provides a {current:, update:} object, where 'current' represents the current
+state of the object, and 'update' representes the requested update. This was added so that one can
+verify e.g. that a object.status update is allowed, if the current object.status is 'editing', and
+the wished update.status is 'edited'.
+
+
+
+
+  <a name="6.1.0"></a>
 # [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@6.0.0...pubsweet-server@6.1.0) (2018-04-25)
 
 
@@ -14,7 +35,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="6.0.0"></a>
+<a name="6.0.0"></a>
 # [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@5.0.0...pubsweet-server@6.0.0) (2018-04-24)
 
 

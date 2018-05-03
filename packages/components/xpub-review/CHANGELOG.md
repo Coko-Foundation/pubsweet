@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.2.0...pubsweet-component-xpub-review@0.3.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **components:** align columns cp page ([a5968b0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a5968b0))
+* **components:** align dropdown horizontally ([a7081e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a7081e3))
+* **components:** change position and direction of assign ([7a7eeb3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a7eeb3))
+* **components:** change supplymentary to attachment component ([143c452](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/143c452))
+* **components:** fix lint errors ([be173db](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be173db))
+* **components:** fix lint errors ([c2b8e52](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c2b8e52))
+* **components:** fix lint errors ([98046fb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98046fb))
+* **components:** fix lint errors ([2503ff9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2503ff9))
+* **components:** fix unsued lint error ([20c282c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/20c282c))
+* **components:** load all users to control panel ([90c88e6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90c88e6))
+* **components:** load all users to control panel ([92dac6b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/92dac6b))
+* **components:** load all users to control panel ([f20e44d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f20e44d))
+* **components:** load all users to control panel ([85fa14f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85fa14f))
+* **components:** loading data in the decision form ([8f499aa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8f499aa))
+* **components:** take care of case of zero files ([b70f728](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b70f728))
+
+
+### Features
+
+* **components:** add assign editors to cp ([3cca44d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3cca44d))
+* **components:** add assign editors to cp ([987310d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/987310d))
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.1.4...pubsweet-component-xpub-review@0.2.0) (2018-04-24)
 

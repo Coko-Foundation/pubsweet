@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.2.1"></a>
+  <a name="2.2.2"></a>
+## [2.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.1...pubsweet@2.2.2) (2018-05-03)
+
+
+### Bug Fixes
+
+* **cli:** change secret location ([83f3570](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/83f3570))
+
+
+
+
+  <a name="2.2.1"></a>
 ## [2.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.0...pubsweet@2.2.1) (2018-04-25)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-      <a name="2.2.0"></a>
+<a name="2.2.0"></a>
 # [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.1.8...pubsweet@2.2.0) (2018-04-24)
 
 

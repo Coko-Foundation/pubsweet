@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-submit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "striptags": "^3.1.0",
     "styled-components": "^3.2.5",
     "xpub-connect": "^0.0.11",
-    "xpub-edit": "^0.0.11",
+    "xpub-edit": "^0.1.0",
     "xpub-journal": "^0.0.6",
     "xpub-selectors": "^0.0.5",
     "xpub-upload": "^0.0.7",

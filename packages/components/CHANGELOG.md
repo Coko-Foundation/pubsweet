@@ -3,7 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="5.3.2"></a>
+  <a name="5.4.0"></a>
+# [5.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.2...pubsweet-components@5.4.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **components:** add version to collection ([98303ae](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98303ae))
+* **components:** align columns cp page ([a5968b0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a5968b0))
+* **components:** align dropdown horizontally ([a7081e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a7081e3))
+* **components:** change position and direction of assign ([7a7eeb3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a7eeb3))
+* **components:** change supplymentary to attachment component ([143c452](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/143c452))
+* **components:** fix lint errors ([c2b8e52](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c2b8e52))
+* **components:** fix lint errors ([2503ff9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2503ff9))
+* **components:** fix lint errors ([98046fb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98046fb))
+* **components:** fix lint errors ([be173db](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be173db))
+* **components:** fix unsued lint error ([20c282c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/20c282c))
+* **components:** load all users to control panel ([92dac6b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/92dac6b))
+* **components:** load all users to control panel ([90c88e6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90c88e6))
+* **components:** load all users to control panel ([85fa14f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85fa14f))
+* **components:** load all users to control panel ([f20e44d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f20e44d))
+* **components:** loading data in the decision form ([8f499aa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8f499aa))
+* **components:** remove from Dashboard assign editor ([751a63e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/751a63e))
+* **components:** take care of case of zero files ([b70f728](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b70f728))
+* **xpub-edit:** prevent editors from submitting form ([f1f7dda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f1f7dda))
+
+
+### Features
+
+* **components:** add assign editors to cp ([3cca44d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3cca44d))
+* **components:** add assign editors to cp ([987310d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/987310d))
+* **xpub-edit:** create editor component with simple API ([ee6fb83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ee6fb83))
+
+
+
+
+  <a name="5.3.2"></a>
 ## [5.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.1...pubsweet-components@5.3.2) (2018-04-25)
 
 
@@ -11,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-components
 
-      <a name="5.3.1"></a>
+<a name="5.3.1"></a>
 ## [5.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.0...pubsweet-components@5.3.1) (2018-04-25)
 
 

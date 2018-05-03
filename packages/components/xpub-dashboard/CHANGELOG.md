@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.2"></a>
+## [0.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.1...pubsweet-component-xpub-dashboard@0.2.2) (2018-05-03)
+
+
+### Bug Fixes
+
+* **components:** load all users to control panel ([90c88e6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90c88e6))
+* **components:** remove from Dashboard assign editor ([751a63e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/751a63e))
+
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.0...pubsweet-component-xpub-dashboard@0.2.1) (2018-04-24)
 
