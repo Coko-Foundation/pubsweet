@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import th from '../helpers/themeHelper'
-import { Icon, Link } from '../atoms'
-import PlainButton from './PlainButton'
+import { Icon } from '../atoms'
+import Action from './Action'
 
 // #region styled-components
 const Root = styled.nav`
@@ -12,27 +12,35 @@ const Root = styled.nav`
   align-items: center;
   justify-content: space-between;
   min-height: calc(${th('gridUnit')} * 2);
+
+  ${th('cssOverrides.AppBar')};
+  ${th('cssOverrides.AppBar.Root')};
 `
 
 const Section = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
+
+  ${th('cssOverrides.AppBar.Logo')};
 `
 
-const LogoLink = Link.extend`
+const LogoLink = styled(Action)`
   & > * {
     height: calc(${th('gridUnit')} * 2);
   }
+
+  ${th('cssOverrides.AppBar.LogoLink')};
 `
 
 const Item = styled.span`
   align-items: center;
   display: inline-flex;
-  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 1rem;
+  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 0;
 `
 // #endregion
 
@@ -57,7 +65,6 @@ const AppBar = ({
         navLinkComponents.map((NavLinkComponent, idx) => (
           <span key={NavLinkComponent.props.to}>
             <Item>{NavLinkComponent}</Item>
-            {idx < navLinkComponents.length - 1 && <Item>|</Item>}
           </span>
         ))}
     </Section>
@@ -81,16 +88,14 @@ const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
 
     {user && (
       <Item>
-        <PlainButton onClick={onLogoutClick}>
-          <Icon size={2}>power</Icon>
-          Logout
-        </PlainButton>
+        <Icon size={2}>power</Icon>
+        <Action onClick={onLogoutClick}>Logout</Action>
       </Item>
     )}
 
     {!user && (
       <Item>
-        <Link to={loginLink}>Login</Link>
+        <Action to={loginLink}>Login</Action>
       </Item>
     )}
   </Section>

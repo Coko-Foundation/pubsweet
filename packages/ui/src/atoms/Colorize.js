@@ -9,7 +9,6 @@ const Colorize = Component => {
     furniture,
     success,
     error,
-    warning,
     reverse,
     placeholder,
     theme = {},
@@ -21,7 +20,6 @@ const Colorize = Component => {
       (furniture && theme.colorFurniture) ||
       (success && theme.colorSuccess) ||
       (error && theme.colorError) ||
-      (warning && theme.colorWarning) ||
       (reverse && theme.colorTextReverse) ||
       (placeholder && theme.colorTextPlaceholder) ||
       theme.colorText

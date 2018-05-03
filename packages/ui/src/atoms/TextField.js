@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import th from '../helpers/themeHelper'
 
 const Root = styled.div`
@@ -18,7 +19,6 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
   ({
     error: theme.colorError,
     success: theme.colorSuccess,
-    warning: theme.colorWarning,
     default: theme.colorBorder,
   }[validationStatus])
 
@@ -36,6 +36,8 @@ const Input = styled.input`
   &::placeholder {
     color: ${th('colorTextPlaceholder')};
   }
+
+  ${th('cssOverrides.TextField.Input')};
 `
 
 class TextField extends React.Component {

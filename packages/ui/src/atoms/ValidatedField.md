@@ -16,22 +16,6 @@ const ValidatedFieldForm = reduxForm({
 />
 ```
 
-With a warning:
-
-```js
-const { reduxForm } = require('redux-form')
-
-const ValidatedFieldForm = reduxForm({
-  form: 'validated-field-warning',
-  onChange: values => console.log(values),
-})(ValidatedField)
-;<ValidatedFieldForm
-  name="warning"
-  warn={() => 'Expected'}
-  component={TextField}
-/>
-```
-
 Or with success color only:
 
 ```js

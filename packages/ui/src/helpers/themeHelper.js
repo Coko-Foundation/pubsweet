@@ -1,3 +1,5 @@
+import { get } from 'lodash'
+
 /*
 
 A bit of syntactic sugar for styled-components. Lets you replace this:
@@ -10,4 +12,4 @@ with this:
 
 */
 
-export default name => props => props.theme[name]
+export default name => props => get(props.theme, name)

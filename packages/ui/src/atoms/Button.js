@@ -1,71 +1,69 @@
-import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import th from '../helpers/themeHelper'
 
-const BaseStandardButton = styled.button.attrs({
+const primary = css`
+  background: ${th('colorPrimary')};
+  color: ${th('colorTextReverse')};
+
+  &:focus,
+  &:hover {
+    // DARKEN 30
+    background-color: #16415d;
+  }
+
+  &:active {
+    // DARKEN 50
+    background-color: #102e43;
+  }
+
+  &[disabled] {
+    &:focus,
+    &:hover,
+    &:active {
+      background: ${th('colorPrimary')};
+    }
+  }
+`
+
+const StyledButton = styled.button.attrs({
   type: 'button',
 })`
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-
-  cursor: pointer;
-
+  color: ${th('colorText')};
   font-family: ${th('fontInterface')};
-  font-size: inherit;
-  letter-spacing: 0.05em;
-
+  font-size: ${th('fontSizeBase')};
+  line-height: ${th('gridUnit')};
   min-width: calc(${th('gridUnit')} * 4);
-  height: calc(${th('gridUnit')} * 2);
-  padding: 0 calc(${th('gridUnit')} / 4);
-  margin-right: ${th('subGridUnit')};
+  padding: calc(${th('gridUnit')} / 2);
 
-  &:active,
+  &:focus,
   &:hover {
-    // note: doesn't work in IE
-    filter: brightness(80%);
+    // DARKEN 30
+    background-color: #a1a1a1;
+    transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
+  }
+
+  &:active {
+    // DARKEN 50
+    background-color: '#737373';
   }
 
   &[disabled] {
-    filter: none;
-    opacity: 0.8;
     cursor: not-allowed;
+    opacity: 0.5;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background: ${th('colorSecondary')};
+    }
   }
+
+  ${props => props.primary && primary};
+  ${th('cssOverrides.Button')};
+  ${th('cssOverrides.Button.Root')};
 `
 
-const PrimaryStandardButton = BaseStandardButton.extend`
-  background-color: ${th('colorPrimary')};
-  border-color: ${th('colorPrimary')};
-  color: ${th('colorBackground')};
-`
-
-const BasePlainButton = styled.button.attrs({
-  type: 'button',
-})`
-  background: none;
-  border: none;
-  padding: 0;
-  color: ${th('colorPrimary')};
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-
-  &[disabled] {
-    color: ${th('colorTextPlaceholder')};
-    opacity: 0.8;
-    cursor: not-allowed;
-  }
-`
-
-const Button = ({ primary, plain, ...props }) => {
-  if (primary) {
-    return <PrimaryStandardButton {...props} />
-  }
-  if (plain) {
-    return <BasePlainButton {...props} />
-  }
-  return <BaseStandardButton {...props} />
-}
-
-export default Button
+export default StyledButton

@@ -14,8 +14,8 @@ exports[`StateItem is rendered correctly 1`] = `
 
 .c0:hover {
   color: black;
-  -webkit-transition: ease;
-  transition: ease;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
 }
 
 <span

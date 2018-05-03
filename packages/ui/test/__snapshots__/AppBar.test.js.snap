@@ -1,9 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
-.c5 {
+.c4 {
   color: black;
   cursor: pointer;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c4:hover,
+.c4:focus,
+.c4:active {
+  background: none;
+  color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .c0 {
@@ -27,22 +44,21 @@ exports[`AppBar Basic display 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2 {
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 {
-  color: black;
-  cursor: pointer;
-}
-
 .c3 > * {
   height: calc(32px * 2);
 }
 
-.c4 {
+.c5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -51,7 +67,7 @@ exports[`AppBar Basic display 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 0;
 }
 
 <nav
@@ -64,7 +80,7 @@ exports[`AppBar Basic display 1`] = `
       className="c2"
     >
       <a
-        className="c3"
+        className="c3 c4"
         href="/"
         onClick={[Function]}
       >
@@ -76,10 +92,10 @@ exports[`AppBar Basic display 1`] = `
     className="c1"
   >
     <span
-      className="c4"
+      className="c5"
     >
       <a
-        className="c5"
+        className="c4"
         href="/login"
         onClick={[Function]}
       >
@@ -91,7 +107,7 @@ exports[`AppBar Basic display 1`] = `
 `;
 
 exports[`AppBar With admin user 1`] = `
-.c5 {
+.c6 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -99,28 +115,87 @@ exports[`AppBar With admin user 1`] = `
   padding: calc(8px / 2);
 }
 
-.c5 svg {
+.c6 svg {
   stroke: black;
   width: calc(2 * 8px);
   height: calc(2 * 8px);
 }
 
-.c6 {
+.c7 {
+  background: grey;
+  border: 1px solid grey;
+  border-radius: 8px;
+  color: black;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 32px;
+  min-width: calc(32px * 4);
+  padding: calc(32px / 2);
   background: none;
   border: none;
+  min-width: 0;
   padding: 0;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c7:focus,
+.c7:hover {
+  background-color: #a1a1a1;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c7:active {
+  background-color: '#737373';
+}
+
+.c7[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.c7[disabled]:focus,
+.c7[disabled]:hover,
+.c7[disabled]:active {
+  background: grey;
+}
+
+.c7:hover,
+.c7:focus,
+.c7:active {
+  background: none;
   color: black;
   -webkit-text-decoration: underline;
   text-decoration: underline;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
 }
 
-.c6[disabled] {
-  color: grey;
-  opacity: 0.8;
-  cursor: not-allowed;
+.c4 {
+  color: black;
+  cursor: pointer;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c4:hover,
+.c4:focus,
+.c4:active {
+  background: none;
+  color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .c0 {
@@ -144,22 +219,21 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2 {
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 {
-  color: black;
-  cursor: pointer;
-}
-
 .c3 > * {
   height: calc(32px * 2);
 }
 
-.c4 {
+.c5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -168,7 +242,7 @@ exports[`AppBar With admin user 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 0;
 }
 
 <nav
@@ -181,7 +255,7 @@ exports[`AppBar With admin user 1`] = `
       className="c2"
     >
       <a
-        className="c3"
+        className="c3 c4"
         href="/"
         onClick={[Function]}
       >
@@ -193,10 +267,10 @@ exports[`AppBar With admin user 1`] = `
     className="c1"
   >
     <span
-      className="c4"
+      className="c5"
     >
       <span
-        className="c5"
+        className="c6"
         color="black"
         role="img"
         size={2}
@@ -226,42 +300,41 @@ exports[`AppBar With admin user 1`] = `
        (admin)
     </span>
     <span
-      className="c4"
+      className="c5"
     >
-      <button
+      <span
         className="c6"
-        disabled={undefined}
-        onClick={[Function]}
-        type={undefined}
+        color="black"
+        role="img"
+        size={2}
       >
-        <span
-          className="c5"
-          color="black"
-          role="img"
-          size={2}
+        <svg
+          fill="none"
+          height={undefined}
+          stroke={undefined}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width={undefined}
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            fill="none"
-            height={undefined}
-            stroke={undefined}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width={undefined}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18.36 6.64a9 9 0 1 1-12.73 0"
-            />
-            <line
-              x1="12"
-              x2="12"
-              y1="2"
-              y2="12"
-            />
-          </svg>
-        </span>
+          <path
+            d="M18.36 6.64a9 9 0 1 1-12.73 0"
+          />
+          <line
+            x1="12"
+            x2="12"
+            y1="2"
+            y2="12"
+          />
+        </svg>
+      </span>
+      <button
+        className="c7"
+        onClick={[Function]}
+        type="button"
+      >
         Logout
       </button>
     </span>
@@ -270,9 +343,26 @@ exports[`AppBar With admin user 1`] = `
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
-.c5 {
+.c4 {
   color: black;
   cursor: pointer;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c4:hover,
+.c4:focus,
+.c4:active {
+  background: none;
+  color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .c0 {
@@ -296,22 +386,21 @@ exports[`AppBar With custom brand and login links 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2 {
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 {
-  color: black;
-  cursor: pointer;
-}
-
 .c3 > * {
   height: calc(32px * 2);
 }
 
-.c4 {
+.c5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -320,7 +409,7 @@ exports[`AppBar With custom brand and login links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 0;
 }
 
 <nav
@@ -333,7 +422,7 @@ exports[`AppBar With custom brand and login links 1`] = `
       className="c2"
     >
       <a
-        className="c3"
+        className="c3 c4"
         href="/home"
         onClick={[Function]}
       >
@@ -345,10 +434,10 @@ exports[`AppBar With custom brand and login links 1`] = `
     className="c1"
   >
     <span
-      className="c4"
+      className="c5"
     >
       <a
-        className="c5"
+        className="c4"
         href="/signin"
         onClick={[Function]}
       >
@@ -360,6 +449,28 @@ exports[`AppBar With custom brand and login links 1`] = `
 `;
 
 exports[`AppBar With custom right component 1`] = `
+.c4 {
+  color: black;
+  cursor: pointer;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c4:hover,
+.c4:focus,
+.c4:active {
+  background: none;
+  color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -381,15 +492,14 @@ exports[`AppBar With custom right component 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2 {
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 {
-  color: black;
-  cursor: pointer;
 }
 
 .c3 > * {
@@ -406,7 +516,7 @@ exports[`AppBar With custom right component 1`] = `
       className="c2"
     >
       <a
-        className="c3"
+        className="c3 c4"
         href="/"
         onClick={[Function]}
       >
@@ -421,9 +531,26 @@ exports[`AppBar With custom right component 1`] = `
 `;
 
 exports[`AppBar With nav links 1`] = `
-.c5 {
+.c4 {
   color: black;
   cursor: pointer;
+  color: black;
+  font: sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c4:hover,
+.c4:focus,
+.c4:active {
+  background: none;
+  color: black;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .c0 {
@@ -447,22 +574,21 @@ exports[`AppBar With nav links 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c2 {
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 {
-  color: black;
-  cursor: pointer;
-}
-
 .c3 > * {
   height: calc(32px * 2);
 }
 
-.c4 {
+.c5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -471,7 +597,7 @@ exports[`AppBar With nav links 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin: calc(32px * 1) 1rem calc(32px * 1) 1rem;
+  margin: calc(32px * 1) 1rem calc(32px * 1) 0;
 }
 
 <nav
@@ -484,7 +610,7 @@ exports[`AppBar With nav links 1`] = `
       className="c2"
     >
       <a
-        className="c3"
+        className="c3 c4"
         href="/"
         onClick={[Function]}
       >
@@ -496,10 +622,10 @@ exports[`AppBar With nav links 1`] = `
     className="c1"
   >
     <span
-      className="c4"
+      className="c5"
     >
       <a
-        className="c5"
+        className="c4"
         href="/login"
         onClick={[Function]}
       >

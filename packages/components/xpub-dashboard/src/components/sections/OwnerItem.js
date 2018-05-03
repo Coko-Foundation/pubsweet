@@ -1,47 +1,43 @@
 import React from 'react'
 
-import { Button } from '@pubsweet/ui'
-import { Item, Header, Body, Divider } from '../molecules/Item'
-import { Links, LinkContainer } from '../molecules/Links'
+import { Action, ActionGroup } from '@pubsweet/ui'
 
+import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
-import ProjectLink from '../ProjectLink'
 import VersionTitle from './VersionTitle'
 
-const OwnerItem = ({ project, version, deleteProject }) => (
-  <Item>
+const OwnerItem = ({ project, version, deleteProject }) => {
+  const itemHeader = (
     <Header>
       <Status status={project.status} />
     </Header>
+  )
 
+  const baseLink = `/projects/${project.id}/versions/${version.id}`
+  const submitLink = `${baseLink}/submit`
+  const manuscriptLink = `${baseLink}/manuscript`
+
+  const actions = (
+    <ActionGroup>
+      <Action to={submitLink}>Summary Info</Action>
+      <Action to={manuscriptLink}>Manuscript</Action>
+      <Action onClick={() => deleteProject(project)}>Delete</Action>
+    </ActionGroup>
+  )
+
+  const body = (
     <Body>
       <VersionTitle version={version} />
-
-      <Links>
-        <LinkContainer>
-          <ProjectLink page="submit" project={project} version={version}>
-            Summary info
-          </ProjectLink>
-        </LinkContainer>
-
-        <Divider separator="|" />
-
-        <LinkContainer>
-          <ProjectLink page="manuscript" project={project} version={version}>
-            Manuscript
-          </ProjectLink>
-        </LinkContainer>
-
-        <Divider separator="|" />
-
-        <LinkContainer>
-          <Button onClick={() => deleteProject(project)} plain>
-            Delete
-          </Button>
-        </LinkContainer>
-      </Links>
+      {actions}
     </Body>
-  </Item>
-)
+  )
+
+  return (
+    <Item>
+      {itemHeader}
+      {body}
+    </Item>
+  )
+}
 
 export default OwnerItem

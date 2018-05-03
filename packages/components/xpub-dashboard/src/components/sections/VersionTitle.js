@@ -4,7 +4,7 @@ import { th } from '@pubsweet/ui'
 // import {TitleViewer} from 'xpub-edit/src/components'
 
 const Root = styled.div`
-  font-size: ${th('fontSizeHeading3')};
+  font-size: ${th('fontSizeHeading4')};
 `
 
 export default ({ version, className }) => {

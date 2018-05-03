@@ -10,11 +10,9 @@ export default {
   colorSecondary: '#e7e7e7',
   colorFurniture: '#ccc',
   colorBorder: '#aaa',
-  colorBackgroundHue:
-    '#f1f1f1' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
+  colorBackgroundHue: '#f1f1f1',
   colorSuccess: '#050',
   colorError: '#b50000',
-  colorWarning: '#ffcc00',
   colorText: '#333',
   colorTextReverse: '#fff',
   colorTextPlaceholder: '#595959',
@@ -24,8 +22,8 @@ export default {
   fontHeading: "'Noto Sans'",
   fontReading: "'Noto Serif'",
   fontWriting: "'Ubuntu mono'",
-  fontSizeBase: '18px',
-  fontSizeBaseSmall: '16px',
+  fontSizeBase: '16px',
+  fontSizeBaseSmall: '14px',
   fontSizeHeading1: '36px',
   fontSizeHeading2: '32px',
   fontSizeHeading3: '29px',
@@ -35,22 +33,19 @@ export default {
   fontLineHeight: '32px',
 
   /* Spacing */
-  gridUnit: '32px',
+  gridUnit: '24px',
   subGridUnit: '8px',
 
   /* Border */
-  borderRadius: '8px',
+  borderRadius: '5px', // changed, needs check by designers
   borderWidth: '1px',
   borderStyle: 'solid',
 
   /* Shadow (for tooltip) */
-  boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
+  // boxShadow: '0 2px 4px 0 rgba(51, 51, 51, 0.3)',
 
   /* Transition */
-  transitionDuration: '1s',
-  transitionDurationM: '0.5s',
-  transitionDurationS: '0.2s',
-  transitionDurationXs: '0.1s',
+  transitionDuration: '.2s',
   transitionTimingFunction: 'ease',
-  transitionDelay: '500ms',
+  transitionDelay: '0',
 }

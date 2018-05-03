@@ -21,7 +21,7 @@ const PseudoInput = styled.span`
   border: calc(${th('subGridUnit')} / 4) solid white;
   border-radius: 50%;
 
-  transition: border ${th('transitionDurationXs')}
+  transition: border ${th('transitionDuration')}
     ${th('transitionTimingFunction')};
 
   color: ${props => props.color};
@@ -73,7 +73,7 @@ const Root = styled.label`
 
     ${PseudoInput} {
       animation-name: ${props => (props.checked ? 'none' : checking)};
-      animation-duration: ${th('transitionDurationS')};
+      animation-duration: ${th('transitionDuration')};
       box-shadow: 0 0 0 ${th('borderWidth')}
         ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }

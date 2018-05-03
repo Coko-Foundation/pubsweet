@@ -52,7 +52,7 @@ const Uploaded = Uploading.extend`
   &::before,
   &::after {
     cursor: pointer;
-    transition: transform ${th('transitionDurationS')};
+    transition: transform ${th('transitionDuration')};
     font-size: ${th('fontSizeBaseSmall')};
     left: 65%;
     padding: 0 ${th('subGridUnit')} 0 ${th('subGridUnit')};

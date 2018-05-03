@@ -17,8 +17,8 @@ exports[`Yes or No is rendered corrctly 1`] = `
   margin-right: 8px;
   border: calc(8px / 4) solid white;
   border-radius: 50%;
-  -webkit-transition: border 0.1s ease;
-  transition: border 0.1s ease;
+  -webkit-transition: border 1s ease;
+  transition: border 1s ease;
   color: black;
 }
 
@@ -62,8 +62,8 @@ exports[`Yes or No is rendered corrctly 1`] = `
 .c1:hover .c4 {
   -webkit-animation-name: kLnLOV;
   animation-name: kLnLOV;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   box-shadow: 0 0 0 1px black;
 }
 

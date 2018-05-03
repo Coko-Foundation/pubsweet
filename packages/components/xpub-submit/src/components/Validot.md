@@ -6,12 +6,6 @@ A dot representing the validation state of a form field.
 ;<Validot />
 ```
 
-### Warning
-
-```js
-;<Validot warning message="There was a warning" />
-```
-
 ### Error
 
 ```js
