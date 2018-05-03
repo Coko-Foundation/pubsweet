@@ -3,7 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="3.3.4"></a>
+  <a name="4.0.0"></a>
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.4...@pubsweet/ui@4.0.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **theme:** remove warning color ([c0897c8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c0897c8))
+* **theme:** simplify transitions ([90c72ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90c72ff))
+* **ui:** align logo with links in appbar ([c35aeb1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c35aeb1))
+* **ui:** export action element ([bb9e7d3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb9e7d3))
+
+
+### Features
+
+* **theme:** coko theme is in place ([731f501](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/731f501))
+* **ui:** add action element ([301d800](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/301d800))
+* **ui:** add action group ([32b9555](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32b9555))
+
+
+### BREAKING CHANGES
+
+* **theme:** transitions might not work for components that used the Xs, S and M values
+* **theme:** might break components that used the warning colors
+
+
+
+
+  <a name="3.3.4"></a>
 ## [3.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.3...@pubsweet/ui@3.3.4) (2018-04-24)
 
 
@@ -14,7 +41,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="3.3.3"></a>
+<a name="3.3.3"></a>
 ## [3.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.2...@pubsweet/ui@3.3.3) (2018-04-11)
 
 

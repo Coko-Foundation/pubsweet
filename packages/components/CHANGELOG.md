@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="5.4.0"></a>
+      <a name="6.0.0"></a>
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.4.0...pubsweet-components@6.0.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* **theme:** remove warning color ([c0897c8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c0897c8))
+* **xpub-dashboard:** correct styles for author manuscripts ([1d8761e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1d8761e))
+
+
+### BREAKING CHANGES
+
+* **theme:** might break components that used the warning colors
+
+
+
+
+      <a name="5.4.0"></a>
 # [5.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.2...pubsweet-components@5.4.0) (2018-05-03)
 
 
@@ -38,7 +55,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="5.3.2"></a>
+<a name="5.3.2"></a>
 ## [5.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.1...pubsweet-components@5.3.2) (2018-04-25)
 
 
