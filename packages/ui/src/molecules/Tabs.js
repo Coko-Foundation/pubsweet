@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
 
 import { Tab } from '../atoms'
+import th from '../helpers/themeHelper'
 
 // TODO: allow the tab content to be separate from the key
 

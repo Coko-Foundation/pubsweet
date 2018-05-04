@@ -119,7 +119,8 @@ const Tags = styled(TagsUnstyled)`
     margin: 0 ${th('subGridUnit')} ${th('gridUnit')} 0;
     padding: 0.1em 0.3em;
 
-    ${props => realBorder(props.theme.colorBorder, props.theme.colorBackground)}
+    ${props =>
+      realBorder(props.theme.colorBorder, props.theme.colorBackground)};
   }
 
   .${classNames.selectedTag}::after {
@@ -129,17 +130,15 @@ const Tags = styled(TagsUnstyled)`
     font-size: ${th('fontSizeBaseSmall')};
     font-weight: 600;
     margin-left: ${th('subGridUnit')};
-    padding: ${th('subGridUnit')} 0 0
+    padding: ${th('subGridUnit')} 0 0;
     width: ${th('subGridUnit')};
   }
 
-  .${classNames.selectedTag}:hover,
-  .${classNames.selectedTag}:focus {
+  .${classNames.selectedTag}:hover, .${classNames.selectedTag}:focus {
     text-decoration: line-through;
 
-    ${props => realBorder('transparent', props.theme.colorBackground)}
-
-    &::after {
+    ${props =>
+      realBorder('transparent', props.theme.colorBackground)} &::after {
       color: ${th('colorError')};
     }
   }
