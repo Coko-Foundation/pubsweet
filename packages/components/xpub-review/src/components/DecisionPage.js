@@ -15,6 +15,15 @@ import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
 import AssignEditorContainer from '../components/assignEditors/AssignEditorContainer'
 
+// TODO: this is only here because prosemirror would save the title in the
+// metadata as html instead of plain text. we need to maybe find a better
+// position than here to perform this operation
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
+
 const onSubmit = (values, dispatch, { project, version, history }) => {
   version.decision = {
     ...version.decision,
@@ -36,6 +45,7 @@ const onSubmit = (values, dispatch, { project, version, history }) => {
 }
 
 const onChange = (values, dispatch, { project, version }) => {
+  values.note.content = stripHtml(values.note.content) // see TODO above
   version.decision = {
     ...version.decision,
     ...values,

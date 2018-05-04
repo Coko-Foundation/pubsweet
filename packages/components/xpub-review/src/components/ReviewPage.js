@@ -17,6 +17,15 @@ import {
 import uploadFile from 'xpub-upload'
 import ReviewLayout from './review/ReviewLayout'
 
+// TODO: this is only here because prosemirror would save the title in the
+// metadata as html instead of plain text. we need to maybe find a better
+// position than here to perform this operation
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
+
 const onSubmit = (
   values,
   dispatch,
@@ -47,6 +56,7 @@ const onSubmit = (
 }
 
 const onChange = (values, dispatch, { project, version, reviewer }) => {
+  values.note.content = stripHtml(values.note.content) // see TODO above
   Object.assign(reviewer, {
     // submitted: new Date(),
     ...values,

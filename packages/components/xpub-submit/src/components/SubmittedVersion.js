@@ -16,14 +16,6 @@ const Wrapper = styled.div`
   overflow: ${({ confirming }) => confirming && 'hidden'};
 `
 
-// const hoverStyles = css`
-//   background-image: linear-gradient(to right, #666 50%, white 0%);
-//   background-position: 0 90%;
-//   background-repeat: repeat-x;
-//   background-size: 6px 1px;
-//   position: relative;
-// `
-
 const Intro = styled.div`
   font-style: italic;
   line-height: 1.4;
@@ -40,14 +32,14 @@ const SubLegend = Legend.extend`
   margin-top: ${th('gridUnit')};
 `
 
-// &:hover {
-//   ${props => !props.readonly && hoverStyles};
-// }
-
 const Abstract = styled.div`
   word-wrap: break-word;
 `
 const ReviewAccord = styled.div``
+
+const ReviewsItem = styled.div`
+  margin-left: 1em;
+`
 
 const ReviewAccordion = ({ reviewers }) => (
   <ReviewAccord>
@@ -60,6 +52,7 @@ const ReviewAccordion = ({ reviewers }) => (
             key={review.id}
             ordinal={index + 1}
             title="review"
+            withDots="true"
           />
         )
       })}
@@ -144,19 +137,22 @@ const SubmittedVersion = ({
       </SubmissionVersion>
       <Review>
         <Accordion
-          Component={version.decision.note.content}
+          Component={<ReviewsItem>{version.decision.note.content}</ReviewsItem>}
           key="decision"
-          title="decision"
+          status="revise"
+          title="Decision"
         />
-        {version.reviewers && (
-          <Section id="accordion.review">
-            <Accordion
-              Component={<ReviewAccordion reviewers={version.reviewers} />}
-              key="review"
-              title="decision"
-            />
-          </Section>
-        )}
+        <ReviewsItem>
+          {version.reviewers && (
+            <Section id="accordion.review">
+              <Accordion
+                Component={<ReviewAccordion reviewers={version.reviewers} />}
+                key="review"
+                title="Reviews"
+              />
+            </Section>
+          )}
+        </ReviewsItem>
       </Review>
     </Columns>
   </Wrapper>
