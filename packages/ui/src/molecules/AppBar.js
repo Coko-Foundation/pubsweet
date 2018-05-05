@@ -8,8 +8,9 @@ import Action from './Action'
 
 // #region styled-components
 const Root = styled.nav`
-  display: flex;
   align-items: center;
+  display: flex;
+  font-family: ${th('fontInterface')};
   justify-content: space-between;
   min-height: calc(${th('gridUnit')} * 2);
 
