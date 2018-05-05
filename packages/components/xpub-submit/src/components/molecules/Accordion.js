@@ -73,7 +73,6 @@ const AccordionHeading = ({
     height: 1px;
     flex: 1;
     margin-left: 10px;
-    margin-right: 10px;
   `
 
   return (

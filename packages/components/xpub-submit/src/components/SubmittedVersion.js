@@ -51,7 +51,7 @@ const ReviewAccordion = ({ reviewers }) => (
             Component={review.note.content}
             key={review.id}
             ordinal={index + 1}
-            title="review"
+            title="Review"
             withDots="true"
           />
         )
