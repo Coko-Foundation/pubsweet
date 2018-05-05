@@ -20,7 +20,7 @@ import th from '../helpers/themeHelper'
 
 const common = css`
   color: ${th('colorPrimary')};
-  font: ${th('fontInterface')};
+  font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
   text-decoration: none;
