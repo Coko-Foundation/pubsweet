@@ -1,9 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
 import { FieldArray } from 'redux-form'
 import { TextField, ValidatedField, Button } from '@pubsweet/ui'
 import { minSize, readonly } from 'xpub-validators'
 
 const minSize1 = minSize(1)
+
+
+const Inline = styled.div`
+  display: inline-block;
+`
 
 const firstNameInput = input => (
   <TextField label="First name" placeholder="Enter first name…" {...input} />
@@ -39,37 +45,49 @@ const renderAuthors = ({ fields, meta: { touched, error, submitFailed } }) => (
         </Button>
 
         <div>Author {index + 1}:</div>
-        <ValidatedField
-          component={firstNameInput}
-          name={`${author}.firstName`}
-          readonly={readonly}
-          required
-          validate={[minSize1]}
-        />
+        <div>
+          <Inline className="testing">
+            <ValidatedField
+              component={firstNameInput}
+              name={`${author}.firstName`}
+              readonly={readonly}
+              required
+              validate={[minSize1]}
+            />
+          </Inline>
 
-        <ValidatedField
-          component={lastNameInput}
-          name={`${author}.lastName`}
-          readonly={readonly}
-          required
-          validate={[minSize1]}
-        />
+        <Inline>
+          <ValidatedField
+            component={lastNameInput}
+            name={`${author}.lastName`}
+            readonly={readonly}
+            required
+            validate={[minSize1]}
+          />
+          </Inline>
+        </div>
 
-        <ValidatedField
-          component={emailAddressInput}
-          name={`${author}.email`}
-          readonly={readonly}
-          required
-          validate={[minSize1]}
-        />
+        <div>
+          <Inline className="testing1">
+            <ValidatedField
+              component={emailAddressInput}
+              name={`${author}.email`}
+              readonly={readonly}
+              required
+              validate={[minSize1]}
+            />
+          </Inline>
 
-        <ValidatedField
-          component={affiliationInput}
-          name={`${author}.affiliation`}
-          readonly={readonly}
-          required
-          validate={[minSize1]}
-        />
+          <Inline>
+            <ValidatedField
+              component={affiliationInput}
+              name={`${author}.affiliation`}
+              readonly={readonly}
+              required
+              validate={[minSize1]}
+            />
+          </Inline>
+        </div>
       </li>
     ))}
   </ul>
