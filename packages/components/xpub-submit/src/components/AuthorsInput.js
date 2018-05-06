@@ -36,7 +36,9 @@ const affiliationInput = input => (
   <TextField label="Affiliation" placeholder="Enter affiliation…" {...input} />
 )
 
-const renderAuthors = ({ fields, meta: { touched, error, submitFailed } }) => (
+const buttonMessage = "Author cannot be removed. At least one author required";
+
+const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) => (
   <ul>
     <UnbulletedList className="tesssst">
       <li>
@@ -90,9 +92,11 @@ const renderAuthors = ({ fields, meta: { touched, error, submitFailed } }) => (
               />
             </Inline>
           </div>
-          <Button onClick={() => fields.remove(index)} plain type="button">
-            Remove this author
-          </Button>
+          {fields.length > 1 && 
+            <Button onClick={() => fields.remove(index)} plain type="button">
+              Remove this author
+            </Button>
+          }
         </li>
       ))}
     </UnbulletedList>
