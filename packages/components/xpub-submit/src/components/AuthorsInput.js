@@ -9,11 +9,20 @@ const minSize1 = minSize(1)
 
 const Inline = styled.div`
   display: inline-block;
+  margin-right: 30px;
 `
 
 const UnbulletedList = styled.div`
   list-style-type: none;
   margin-left: -40px;
+`
+
+const Spacing = styled.div`
+  padding: 15px 0px;
+`
+
+const Author = styled.div`
+  padding-bottom: 10px;
 `
 
 const firstNameInput = input => (
@@ -36,11 +45,9 @@ const affiliationInput = input => (
   <TextField label="Affiliation" placeholder="Enter affiliation…" {...input} />
 )
 
-const buttonMessage = "Author cannot be removed. At least one author required";
-
 const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) => (
   <ul>
-    <UnbulletedList className="tesssst">
+    <UnbulletedList>
       <li>
         <Button onClick={() => fields.push()} plain type="button">
           Add another author
@@ -48,9 +55,16 @@ const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) 
       </li>
       {fields.map((author, index) => (
         <li key={author.email}>
-          <div>Author {index + 1}:</div>
+        <Spacing>
+          <Author>Author: &nbsp;
+              {fields.length > 1 && 
+                <Button onClick={() => fields.remove(index)} type="button">
+                  Remove
+                </Button>
+              }
+          </Author>
           <div>
-            <Inline className="testing">
+            <Inline>
               <ValidatedField
                 component={firstNameInput}
                 name={`${author}.firstName`}
@@ -60,19 +74,19 @@ const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) 
               />
             </Inline>
 
-          <Inline>
-            <ValidatedField
-              component={lastNameInput}
-              name={`${author}.lastName`}
-              readonly={readonly}
-              required
-              validate={[minSize1]}
-            />
+            <Inline>
+              <ValidatedField
+                component={lastNameInput}
+                name={`${author}.lastName`}
+                readonly={readonly}
+                required
+                validate={[minSize1]}
+              />
             </Inline>
           </div>
 
           <div>
-            <Inline className="testing1">
+            <Inline>
               <ValidatedField
                 component={emailAddressInput}
                 name={`${author}.email`}
@@ -92,11 +106,7 @@ const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) 
               />
             </Inline>
           </div>
-          {fields.length > 1 && 
-            <Button onClick={() => fields.remove(index)} plain type="button">
-              Remove this author
-            </Button>
-          }
+          </Spacing>
         </li>
       ))}
     </UnbulletedList>
