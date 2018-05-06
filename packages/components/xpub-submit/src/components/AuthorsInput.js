@@ -6,7 +6,6 @@ import { minSize, readonly } from 'xpub-validators'
 
 const minSize1 = minSize(1)
 
-
 const Inline = styled.div`
   display: inline-block;
   margin-right: 30px;
@@ -45,7 +44,10 @@ const affiliationInput = input => (
   <TextField label="Affiliation" placeholder="Enter affiliation…" {...input} />
 )
 
-const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) => (
+const renderAuthors = ({
+  fields = {},
+  meta: { touched, error, submitFailed },
+}) => (
   <ul>
     <UnbulletedList>
       <li>
@@ -55,57 +57,58 @@ const renderAuthors = ({ fields = {}, meta: { touched, error, submitFailed } }) 
       </li>
       {fields.map((author, index) => (
         <li key={author.email}>
-        <Spacing>
-          <Author>Author: &nbsp;
-              {fields.length > 1 && 
+          <Spacing>
+            <Author>
+              Author:&nbsp;
+              {fields.length > 1 && (
                 <Button onClick={() => fields.remove(index)} type="button">
                   Remove
                 </Button>
-              }
-          </Author>
-          <div>
-            <Inline>
-              <ValidatedField
-                component={firstNameInput}
-                name={`${author}.firstName`}
-                readonly={readonly}
-                required
-                validate={[minSize1]}
-              />
-            </Inline>
+              )}
+            </Author>
+            <div>
+              <Inline>
+                <ValidatedField
+                  component={firstNameInput}
+                  name={`${author}.firstName`}
+                  readonly={readonly}
+                  required
+                  validate={[minSize1]}
+                />
+              </Inline>
 
-            <Inline>
-              <ValidatedField
-                component={lastNameInput}
-                name={`${author}.lastName`}
-                readonly={readonly}
-                required
-                validate={[minSize1]}
-              />
-            </Inline>
-          </div>
+              <Inline>
+                <ValidatedField
+                  component={lastNameInput}
+                  name={`${author}.lastName`}
+                  readonly={readonly}
+                  required
+                  validate={[minSize1]}
+                />
+              </Inline>
+            </div>
 
-          <div>
-            <Inline>
-              <ValidatedField
-                component={emailAddressInput}
-                name={`${author}.email`}
-                readonly={readonly}
-                required
-                validate={[minSize1]}
-              />
-            </Inline>
+            <div>
+              <Inline>
+                <ValidatedField
+                  component={emailAddressInput}
+                  name={`${author}.email`}
+                  readonly={readonly}
+                  required
+                  validate={[minSize1]}
+                />
+              </Inline>
 
-            <Inline>
-              <ValidatedField
-                component={affiliationInput}
-                name={`${author}.affiliation`}
-                readonly={readonly}
-                required
-                validate={[minSize1]}
-              />
-            </Inline>
-          </div>
+              <Inline>
+                <ValidatedField
+                  component={affiliationInput}
+                  name={`${author}.affiliation`}
+                  readonly={readonly}
+                  required
+                  validate={[minSize1]}
+                />
+              </Inline>
+            </div>
           </Spacing>
         </li>
       ))}
