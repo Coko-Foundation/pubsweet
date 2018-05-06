@@ -11,6 +11,11 @@ const Inline = styled.div`
   display: inline-block;
 `
 
+const UnbulletedList = styled.div`
+  list-style-type: none;
+  margin-left: -40px;
+`
+
 const firstNameInput = input => (
   <TextField label="First name" placeholder="Enter first name…" {...input} />
 )
@@ -33,63 +38,64 @@ const affiliationInput = input => (
 
 const renderAuthors = ({ fields, meta: { touched, error, submitFailed } }) => (
   <ul>
-    <li>
-      <Button onClick={() => fields.push()} plain type="button">
-        Add another author
-      </Button>
-    </li>
-    {fields.map((author, index) => (
-      <li key={author.email}>
-        <Button onClick={() => fields.remove(index)} plain type="button">
-          Remove this author
+    <UnbulletedList className="tesssst">
+      <li>
+        <Button onClick={() => fields.push()} plain type="button">
+          Add another author
         </Button>
-
-        <div>Author {index + 1}:</div>
-        <div>
-          <Inline className="testing">
-            <ValidatedField
-              component={firstNameInput}
-              name={`${author}.firstName`}
-              readonly={readonly}
-              required
-              validate={[minSize1]}
-            />
-          </Inline>
-
-        <Inline>
-          <ValidatedField
-            component={lastNameInput}
-            name={`${author}.lastName`}
-            readonly={readonly}
-            required
-            validate={[minSize1]}
-          />
-          </Inline>
-        </div>
-
-        <div>
-          <Inline className="testing1">
-            <ValidatedField
-              component={emailAddressInput}
-              name={`${author}.email`}
-              readonly={readonly}
-              required
-              validate={[minSize1]}
-            />
-          </Inline>
+      </li>
+      {fields.map((author, index) => (
+        <li key={author.email}>
+          <div>Author {index + 1}:</div>
+          <div>
+            <Inline className="testing">
+              <ValidatedField
+                component={firstNameInput}
+                name={`${author}.firstName`}
+                readonly={readonly}
+                required
+                validate={[minSize1]}
+              />
+            </Inline>
 
           <Inline>
             <ValidatedField
-              component={affiliationInput}
-              name={`${author}.affiliation`}
+              component={lastNameInput}
+              name={`${author}.lastName`}
               readonly={readonly}
               required
               validate={[minSize1]}
             />
-          </Inline>
-        </div>
-      </li>
-    ))}
+            </Inline>
+          </div>
+
+          <div>
+            <Inline className="testing1">
+              <ValidatedField
+                component={emailAddressInput}
+                name={`${author}.email`}
+                readonly={readonly}
+                required
+                validate={[minSize1]}
+              />
+            </Inline>
+
+            <Inline>
+              <ValidatedField
+                component={affiliationInput}
+                name={`${author}.affiliation`}
+                readonly={readonly}
+                required
+                validate={[minSize1]}
+              />
+            </Inline>
+          </div>
+          <Button onClick={() => fields.remove(index)} plain type="button">
+            Remove this author
+          </Button>
+        </li>
+      ))}
+    </UnbulletedList>
   </ul>
 )
 
