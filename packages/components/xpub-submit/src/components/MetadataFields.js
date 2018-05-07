@@ -11,6 +11,7 @@ import {
   minSize,
   split,
 } from 'xpub-validators'
+import AuthorsInput from './AuthorsInput'
 import { Section, Legend } from '../styles'
 
 const minSize1 = minSize(1)
@@ -29,10 +30,6 @@ const AbstractInput = input => (
     title="Abstract"
     {...input}
   />
-)
-
-const AuthorsInput = input => (
-  <TextField placeholder="Enter author names…" {...input} />
 )
 
 const KeywordsInput = input => (
@@ -74,9 +71,7 @@ const MetadataFields = ({ journal, readonly }) => (
 
       <ValidatedField
         component={AuthorsInput}
-        format={join()}
         name="authors"
-        parse={split()}
         readonly={readonly}
         required
         validate={[minSize1]}
