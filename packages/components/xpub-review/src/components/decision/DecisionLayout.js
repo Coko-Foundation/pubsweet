@@ -87,7 +87,6 @@ const DecisionLayout = ({
           </AdminSection>
           <AdminSection>
             <DecisionForm
-              decision={decision}
               handleSubmit={handleSubmit}
               uploadFile={uploadFile}
               valid={valid}

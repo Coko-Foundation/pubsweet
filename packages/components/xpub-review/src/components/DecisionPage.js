@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { debounce, isEmpty } from 'lodash'
 import { compose, withProps } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -45,6 +45,7 @@ const onSubmit = (values, dispatch, { project, version, history }) => {
 }
 
 const onChange = (values, dispatch, { project, version }) => {
+  if (isEmpty(values)) return false
   values.note.content = stripHtml(values.note.content) // see TODO above
   version.decision = {
     ...version.decision,
@@ -92,5 +93,6 @@ export default compose(
     onChange: debounce(onChange, 1000, { maxWait: 5000 }),
     onSubmit,
     destroyOnUnmount: false,
+    enableReinitialize: true,
   }),
 )(DecisionLayout)
