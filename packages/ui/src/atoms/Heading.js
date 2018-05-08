@@ -8,7 +8,6 @@ const style = css`
   color: ${th('colorPrimary')};
   font-size: ${({ level = 1, theme }) => theme[`fontSizeHeading${level}`]};
   font-family: ${th('fontHeading')};
-  margin: 0 0 ${th('gridUnit')};
 `
 
 export const H1 = styled.h1.attrs({ level: 1 })`
