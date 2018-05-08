@@ -17,3 +17,5 @@ export { default as Supplementary } from './Supplementary'
 export { default as Upload } from './Upload'
 export { default as YesOrNo } from './YesOrNo'
 export { default as Tabs } from './Tabs'
+
+export { default as Manuscript } from './Manuscript'
