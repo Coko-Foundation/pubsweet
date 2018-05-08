@@ -67,11 +67,15 @@ const CurrentVersion = ({
     </Intro>
 
     <form onSubmit={handleSubmit}>
-      <Metadata readonly={readonly} />
-      <Declarations readonly={readonly} />
-      <Suggestions readonly={readonly} />
+      <Metadata readonly={readonly} version={version} />
+      <Declarations readonly={readonly} version={version} />
+      <Suggestions readonly={readonly} version={version} />
       <Notes readonly={readonly} />
-      <SupplementaryFiles readonly={readonly} uploadFile={uploadFile} />
+      <SupplementaryFiles
+        readonly={readonly}
+        uploadFile={uploadFile}
+        version={version}
+      />
 
       {!readonly && (
         <div>

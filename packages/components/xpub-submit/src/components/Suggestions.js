@@ -1,4 +1,5 @@
 import React from 'react'
+import { branch, renderComponent } from 'recompose'
 import { FormSection } from 'redux-form'
 import { TextField, ValidatedField, th } from '@pubsweet/ui'
 import { join, split } from 'xpub-validators'
@@ -28,7 +29,7 @@ const SubLegend = Legend.extend`
   margin-top: ${th('gridUnit')};
 `
 
-const Suggestions = ({ readonly }) => (
+const SuggestionsEditable = ({ readonly }) => (
   <FormSection name="suggestions">
     <Section id="suggestions.reviewers">
       <FormSection name="reviewers">
@@ -92,4 +93,24 @@ const Suggestions = ({ readonly }) => (
   </FormSection>
 )
 
-export default Suggestions
+const SuggestionsNonEditable = ({ readonly, version }) => [
+  <Section id="suggestions.reviewers">
+    <Legend>Suggested or opposed reviewers</Legend>
+    <SubLegend>Suggested reviewers</SubLegend>
+    <div>{version.suggestions.reviewers.suggested.join(', ')}</div>
+    <SubLegend>Opposed reviewers</SubLegend>
+    <div>{version.suggestions.reviewers.opposed.join(', ')}</div>
+  </Section>,
+  <Section id="suggestions.editors">
+    <Legend>Suggested or opposed editors</Legend>
+    <SubLegend>Suggested editors</SubLegend>
+    <div>{version.suggestions.editors.suggested.join(', ')}</div>
+    <SubLegend>Opposed editors</SubLegend>
+    <div>{version.suggestions.editors.opposed.join(', ')}</div>
+  </Section>,
+]
+
+export default branch(
+  ({ readonly }) => readonly === true,
+  renderComponent(SuggestionsNonEditable),
+)(SuggestionsEditable)

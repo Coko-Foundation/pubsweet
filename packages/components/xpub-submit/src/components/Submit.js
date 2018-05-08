@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th, Tabs } from '@pubsweet/ui'
 import moment from 'moment'
-import Tabs from './atoms/Tabs'
-import CurrentVersionPage from './CurrentVersionPage'
-import SubmittedVersion from './SubmittedVersion'
+import CurrentVersion from './CurrentVersion'
+import DecisionReviewColumn from './DecisionReviewColumn'
+import { Columns, SubmissionVersion } from './atoms/Columns'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -15,17 +15,26 @@ const Wrapper = styled.div`
   overflow: ${({ confirming }) => confirming && 'hidden'};
 `
 
+const SubmittedVersionColumns = props => (
+  <Wrapper>
+    <Columns>
+      <SubmissionVersion>
+        <CurrentVersion
+          project={props.project}
+          readonly
+          version={props.version}
+        />,
+      </SubmissionVersion>
+      <DecisionReviewColumn {...props} />
+    </Columns>
+  </Wrapper>
+)
+
 const Submit = ({
   project,
   submittedVersion,
   currentVersion,
-  valid,
-  error,
-  readonly,
-  handleSubmit,
-  uploadFile,
-  confirming,
-  toggleConfirming,
+  ...formProps
 }) => {
   const decisionSections = []
 
@@ -33,14 +42,22 @@ const Submit = ({
     const submittedMoment = moment(versionElem.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
     decisionSections.push({
-      content: <SubmittedVersion project={project} version={versionElem} />,
+      content: (
+        <SubmittedVersionColumns project={project} version={versionElem} />
+      ),
       key: versionElem.id,
       label,
     })
   })
 
   decisionSections.push({
-    content: <CurrentVersionPage project={project} version={currentVersion} />,
+    content: (
+      <CurrentVersion
+        {...formProps}
+        project={project}
+        version={currentVersion}
+      />
+    ),
     key: currentVersion.id,
     label: 'Current Version',
   })
