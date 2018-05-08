@@ -23,10 +23,15 @@ const makeKeymap = (schema, features) => {
     'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
   }
 
-  if (features.bold) keys['Mod-b'] = toggleMark(schema.marks.bold)
-  if (features.italic) keys['Mod-i'] = toggleMark(schema.marks.italic)
-  if (features.heading)
+  if (features.includes('bold')) {
+    keys['Mod-b'] = toggleMark(schema.marks.bold)
+  }
+  if (features.includes('italic')) {
+    keys['Mod-i'] = toggleMark(schema.marks.italic)
+  }
+  if (features.includes('heading')) {
     keys['Shift-Ctrl-1'] = setBlockType(schema.nodes.heading, { level: 1 })
+  }
 
   Object.keys(baseKeymap).forEach(key => {
     if (keys[key]) {
