@@ -25,7 +25,6 @@ const ReviewLayout = ({
 
   versions.forEach(version => {
     let review
-    console.log(version.reviewers,reviewer)
     if (version.reviewers) {
       review = version.reviewers.find(
         review => review.reviewer === reviewer._reviewer.id,
