@@ -1,21 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
 import { withJournal } from 'xpub-journal'
-import { Section, Legend } from '../styles'
+import { Section } from '../styles'
 import { Review } from './atoms/Columns'
 import Accordion from './molecules/Accordion'
-
-const Intro = styled.div`
-  font-style: italic;
-  line-height: 1.4;
-`
-
-const DeclarationSection = Section.extend`
-  margin: calc(${th('gridUnit')} * 2) 0;
-  display: flex;
-  justify-content: space-between;
-`
 
 const ReviewAccord = styled.div``
 
