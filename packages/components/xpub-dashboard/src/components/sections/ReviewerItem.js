@@ -64,7 +64,7 @@ const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
           </Actions>
         )}
 
-        {reviewer.status === 'rejected' && 'rejected'}
+        {status === 'rejected' && 'rejected'}
       </Body>
     </Item>
   )
