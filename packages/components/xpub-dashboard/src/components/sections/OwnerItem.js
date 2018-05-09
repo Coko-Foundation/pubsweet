@@ -1,4 +1,5 @@
 import React from 'react'
+import { renderNothing } from 'recompose'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
@@ -22,7 +23,11 @@ const OwnerItem = ({ project, version, deleteProject }) => {
     <ActionGroup>
       <Action to={submitLink}>Summary Info</Action>
       <Action to={manuscriptLink}>Manuscript</Action>
-      <Action onClick={() => deleteProject(project)}>Delete</Action>
+      {!version.submitted ? (
+        <Action onClick={() => deleteProject(project)}>Delete</Action>
+      ) : (
+        renderNothing
+      )}
     </ActionGroup>
   )
 
