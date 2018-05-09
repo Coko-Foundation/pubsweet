@@ -36,7 +36,7 @@
     "xpub-styleguide": "^0.0.12"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16.3"
   },
   "scripts": {
     "styleguide": "styleguidist server",
