@@ -13,7 +13,7 @@ import Tabs from '../atoms/Tabs'
 const ReviewLayout = ({
   project,
   versions,
-  currentVersion,
+  lastSubmitted,
   handlingEditors,
   reviewer,
   valid,
@@ -25,6 +25,7 @@ const ReviewLayout = ({
 
   versions.forEach(version => {
     let review
+    console.log(version.reviewers,reviewer)
     if (version.reviewers) {
       review = version.reviewers.find(
         review => review.reviewer === reviewer._reviewer.id,
@@ -67,13 +68,13 @@ const ReviewLayout = ({
     }
   }, [])
 
-  const review = currentVersion.reviewers.find(
+  const review = lastSubmitted.reviewers.find(
     review => review.id === reviewer.id,
   )
 
-  if (currentVersion.submitted && (!review || !review.submitted)) {
+  if (lastSubmitted.submitted && (!review || !review.submitted)) {
     const submittedMoment = moment()
-    const key = currentVersion.id
+    const key = lastSubmitted.id
     const label = submittedMoment.format('YYYY-MM-DD')
 
     reviewSections.push({
@@ -81,7 +82,7 @@ const ReviewLayout = ({
         <div>
           <ReviewMetadata
             handlingEditors={handlingEditors}
-            version={currentVersion}
+            version={lastSubmitted}
           />
           <ReviewForm
             handleSubmit={handleSubmit}
@@ -98,7 +99,7 @@ const ReviewLayout = ({
     editorSections.push({
       content: (
         <SimpleEditor
-          content={currentVersion.source}
+          content={lastSubmitted.source}
           editing="selection"
           key={key}
           layout="bare"

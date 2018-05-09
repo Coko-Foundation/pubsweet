@@ -55,6 +55,7 @@ const Submit = ({
       <CurrentVersion
         {...formProps}
         project={project}
+        readonly={false}
         version={currentVersion}
       />
     ),

@@ -13,9 +13,7 @@ export const newestDecidedFirst = items =>
   )
 
 export const newestSubmittedFirst = items =>
-  orderBy(
-    filter(items, data => data.subbmitted === undefined, ['created'], ['desc']),
-  )
+  orderBy(filter(items, data => !!data.submitted), ['submitted'], ['desc'])
 
 export const selectCurrentUser = state =>
   state.currentUser.isAuthenticated ? state.currentUser.user : null

@@ -9,7 +9,7 @@ import {
   selectCurrentUser,
   selectCollection,
   selectFragments,
-  selectCurrentVersion,
+  selectLastSubmittedVersion,
   selectFragment,
   selectUser,
   getReviewerFromUser,
@@ -86,7 +86,7 @@ export default compose(
       const project = selectCollection(state, match.params.project)
       const versions = selectFragments(state, project.fragments)
       const version = selectFragment(state, match.params.version)
-      const currentVersion = selectCurrentVersion(state, project)
+      const lastSubmitted = selectLastSubmittedVersion(state, project)[0]
 
       let handlingEditors
       const editors = state.teams.find(
@@ -99,10 +99,10 @@ export default compose(
       if (editors) {
         handlingEditors = editors.members.map(id => selectUser(state, id))
       }
-      const reviewer = getReviewerFromUser(project, currentVersion, currentUser)
+      const reviewer = getReviewerFromUser(project, lastSubmitted, currentUser)
 
       return {
-        currentVersion,
+        lastSubmitted,
         handlingEditors,
         project,
         reviewer,
