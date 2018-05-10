@@ -3,6 +3,8 @@ A page for an editor to make a decision on a version of a project.
 ```js
 const { reduxForm } = require('redux-form')
 
+const AssignEditor = require('../assignEditors/AssignEditor').default
+
 const project = {
   id: faker.random.uuid(),
   reviewers: [
@@ -31,6 +33,9 @@ const versions = [
     },
     files: {
       supplementary: [],
+    },
+    notes: {
+      specialInstructions: 'foo'
     },
     reviewers: [
       {
@@ -61,6 +66,9 @@ const versions = [
     submitted: faker.date.past(1),
     declarations: {
       openReview: true,
+    },
+    notes: {
+      specialInstructions: 'foo'
     },
     files: {
       supplementary: [],
@@ -95,6 +103,9 @@ const versions = [
     declarations: {
       openReview: true,
     },
+    notes: {
+      specialInstructions: 'foo'
+    },
     files: {
       supplementary: [],
     },
@@ -112,6 +123,41 @@ const versions = [
   },
 ]
 
+const team = {
+  members: [],
+}
+
+const options = [
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+]
+
+const AssignEditorContainer = ({
+  project,
+  teamName,
+  teamTypeName,
+  addUserToTeam,
+}) => (
+  <AssignEditor
+    team={team}
+    options={options}
+    project={project}
+    teamName={teamName}
+    teamTypeName={teamTypeName}
+    addUserToTeam={addUserToTeam}
+  />
+)
+
 const currentVersion = versions[versions.length - 1]
 const decision = currentVersion.decision
 
@@ -127,6 +173,7 @@ const ConnectedDecisionLayout = reduxForm({
     currentVersion={currentVersion}
     initialValues={decision}
     uploadFile={() => {}}
+    AssignEditor={AssignEditorContainer}
   />
 </div>
 ```

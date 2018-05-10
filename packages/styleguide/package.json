@@ -16,7 +16,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
-    "react-styleguidist": "^6.5.0",
+    "react-styleguidist": "^7.0.10",
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",

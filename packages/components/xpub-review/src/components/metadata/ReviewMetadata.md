@@ -9,6 +9,9 @@ const project = {
 
 const version = {
   id: faker.random.uuid(),
+  notes: {
+    specialInstructions: 'foo'
+  },
   metadata: {
     keywords: ['foo', 'bar'],
   },
