@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="4.0.0"></a>
+      <a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@4.0.0...@pubsweet/ui@4.1.0) (2018-05-09)
+
+
+### Bug Fixes
+
+* **ui:** fix th import ([2bf7bd9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2bf7bd9))
+
+
+### Features
+
+* **ui:** copy Tabs molecule and Tab atom from xpub-review component ([719d2fc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/719d2fc))
+
+
+
+
+      <a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.4...@pubsweet/ui@4.0.0) (2018-05-03)
 
 
@@ -30,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="3.3.4"></a>
+<a name="3.3.4"></a>
 ## [3.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.3...@pubsweet/ui@3.3.4) (2018-04-24)
 
 

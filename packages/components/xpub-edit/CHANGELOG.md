@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.2"></a>
+## [0.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.1.1...xpub-edit@0.1.2) (2018-05-09)
+
+
+### Bug Fixes
+
+* **xpub-edit:** ensure config is not regenerated on each render ([d98e722](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d98e722))
+
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.1.0...xpub-edit@0.1.1) (2018-05-03)
 

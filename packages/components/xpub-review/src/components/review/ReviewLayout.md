@@ -29,6 +29,9 @@ const versions = [
     declarations: {
       openReview: true,
     },
+    notes: {
+      specialInstructions: 'foo'
+    },
     files: {
       supplementary: [],
     },
@@ -55,6 +58,9 @@ const versions = [
     declarations: {
       openReview: true,
     },
+    notes: {
+      specialInstructions: 'foo'
+    },
     files: {
       supplementary: [],
     },
@@ -80,6 +86,9 @@ const versions = [
     submitted: faker.date.past(1),
     declarations: {
       openReview: true,
+    },
+    notes: {
+      specialInstructions: 'foo'
     },
     files: {
       supplementary: [],

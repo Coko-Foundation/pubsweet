@@ -3,7 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="6.0.0"></a>
+  <a name="6.1.0"></a>
+# [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.0.0...pubsweet-components@6.1.0) (2018-05-09)
+
+
+### Bug Fixes
+
+* **xpub-dash:** fix reviewer item crash when status is revision ([fc79496](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fc79496))
+* fixed misnamed redux form props in authors input ([940edc0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/940edc0))
+* fixed misnamed redux form props in authors input ([bb4af56](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb4af56))
+* fixed misnamed redux form props in authors input ([fb362b2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb362b2))
+* **xpub-edit:** ensure config is not regenerated on each render ([d98e722](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d98e722))
+
+
+### Features
+
+* add AuthorsInput component ([f7d12b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f7d12b3))
+* authors input, added padding around fields ([1e5d742](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1e5d742))
+* authors input, fixed merge error ([c908fa4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c908fa4))
+* authors input, fixed prettier errors ([0657143](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0657143))
+* authors input,component  updated to ensure at least one author ([d43dd92](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d43dd92))
+* list styles for authors input ([3f85bbd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f85bbd))
+* two inputs per line ([aa0544a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aa0544a))
+* update MetadataFields to use AuthorsInput component ([fa1640e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fa1640e))
+* update MetadataFields to use AuthorsInput component ([1baac87](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1baac87))
+* update MetadataFields to use AuthorsInput component ([355f282](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/355f282))
+
+
+
+
+  <a name="6.0.0"></a>
 # [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.4.0...pubsweet-components@6.0.0) (2018-05-03)
 
 
@@ -20,7 +49,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="5.4.0"></a>
+<a name="5.4.0"></a>
 # [5.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.3.2...pubsweet-components@5.4.0) (2018-05-03)
 
 
