@@ -3,18 +3,21 @@ const { promisify } = require('util')
 const nodeArchiver = require('archiver')
 const logger = require('@pubsweet/logger')
 
+const filterByType = (fileTypes = []) => ({ Metadata: { filetype } }) =>
+  fileTypes.length > 0 ? fileTypes.includes(filetype) : true
+
 const zipFiles = (s3, s3Config, archiver = nodeArchiver) => {
   const asyncGetObject = promisify(s3.getObject.bind(s3))
   const asyncListObjects = promisify(s3.listObjects.bind(s3))
   return async (req, res) => {
     const { fragmentId } = req.params
+    const { fileTypes } = req.query
     try {
       const params = {
         Bucket: s3Config.bucket,
         Prefix: `${fragmentId}`,
       }
       const s3Items = await asyncListObjects(params)
-
       if (s3Items) {
         const s3Files = await Promise.all(
           s3Items.Contents.map(content =>
@@ -30,7 +33,7 @@ const zipFiles = (s3, s3Config, archiver = nodeArchiver) => {
           archive.pipe(res)
           res.attachment(`${fragmentId}-archive.zip`)
 
-          s3Files.forEach(f => {
+          s3Files.filter(filterByType(fileTypes)).forEach(f => {
             archive.append(f.Body, {
               name: `${get(f, 'Metadata.filetype') || 'supplementary'}/${get(
                 f,
