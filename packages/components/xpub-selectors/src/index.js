@@ -1,6 +1,19 @@
-import { orderBy } from 'lodash'
+import { orderBy, filter } from 'lodash'
 
 export const newestFirst = items => orderBy(items, ['created'], ['desc'])
+
+export const newestDecidedFirst = items =>
+  orderBy(
+    filter(
+      items,
+      data => (data.decision || {}).status === 'submitted',
+      ['created'],
+      ['desc'],
+    ),
+  )
+
+export const newestSubmittedFirst = items =>
+  orderBy(filter(items, data => !!data.submitted), ['submitted'], ['desc'])
 
 export const selectCurrentUser = state =>
   state.currentUser.isAuthenticated ? state.currentUser.user : null
@@ -17,6 +30,12 @@ export const selectFragment = (state, id) => state.fragments[id]
 
 export const selectCurrentVersion = (state, project) =>
   newestFirst(selectFragments(state, project.fragments))[0]
+
+export const selectLastDecidedVersion = (state, project) =>
+  newestDecidedFirst(selectFragments(state, project.fragments))
+
+export const selectLastSubmittedVersion = (state, project) =>
+  newestSubmittedFirst(selectFragments(state, project.fragments))
 
 export const getReviewerFromUser = (project, version, currentUser) => {
   if (!project.reviewers || !version.reviewers) return null

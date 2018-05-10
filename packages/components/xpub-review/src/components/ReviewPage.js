@@ -9,13 +9,22 @@ import {
   selectCurrentUser,
   selectCollection,
   selectFragments,
-  selectCurrentVersion,
+  selectLastSubmittedVersion,
   selectFragment,
   selectUser,
   getReviewerFromUser,
 } from 'xpub-selectors'
 import uploadFile from 'xpub-upload'
 import ReviewLayout from './review/ReviewLayout'
+
+// TODO: this is only here because prosemirror would save the title in the
+// metadata as html instead of plain text. we need to maybe find a better
+// position than here to perform this operation
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
 
 const onSubmit = (
   values,
@@ -47,6 +56,7 @@ const onSubmit = (
 }
 
 const onChange = (values, dispatch, { project, version, reviewer }) => {
+  values.note.content = stripHtml(values.note.content) // see TODO above
   Object.assign(reviewer, {
     // submitted: new Date(),
     ...values,
@@ -76,7 +86,7 @@ export default compose(
       const project = selectCollection(state, match.params.project)
       const versions = selectFragments(state, project.fragments)
       const version = selectFragment(state, match.params.version)
-      const currentVersion = selectCurrentVersion(state, project)
+      const lastSubmitted = selectLastSubmittedVersion(state, project)[0]
 
       let handlingEditors
       const editors = state.teams.find(
@@ -89,10 +99,10 @@ export default compose(
       if (editors) {
         handlingEditors = editors.members.map(id => selectUser(state, id))
       }
-      const reviewer = getReviewerFromUser(project, currentVersion, currentUser)
+      const reviewer = getReviewerFromUser(project, lastSubmitted, currentUser)
 
       return {
-        currentVersion,
+        lastSubmitted,
         handlingEditors,
         project,
         reviewer,

@@ -1,4 +1,5 @@
 import React from 'react'
+import { branch, renderNothing } from 'recompose'
 import { FormSection } from 'redux-form'
 import { NoteEditor } from 'xpub-edit'
 import { ValidatedField } from '@pubsweet/ui'
@@ -52,4 +53,4 @@ const Notes = ({ readonly }) => (
   </FormSection>
 )
 
-export default Notes
+export default branch(({ readonly }) => readonly === true, renderNothing)(Notes)

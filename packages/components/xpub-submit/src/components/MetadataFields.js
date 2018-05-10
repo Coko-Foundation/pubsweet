@@ -1,4 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
+import { branch, renderComponent } from 'recompose'
 import { FormSection } from 'redux-form'
 import { AbstractEditor, TitleEditor } from 'xpub-edit'
 import { CheckboxGroup, Menu, TextField, ValidatedField } from '@pubsweet/ui'
@@ -32,6 +34,10 @@ const AbstractInput = input => (
   />
 )
 
+const Abstract = styled.div`
+  word-wrap: break-word;
+`
+
 const KeywordsInput = input => (
   <TextField placeholder="Enter keywords…" {...input} />
 )
@@ -44,7 +50,7 @@ const ArticleSectionInput = journal => input => (
   <CheckboxGroup options={journal.articleSections} {...input} />
 )
 
-const MetadataFields = ({ journal, readonly }) => (
+const MetadataFieldsEditable = ({ journal, readonly }) => (
   <FormSection name="metadata">
     <Section id="metadata.title">
       <ValidatedField
@@ -118,4 +124,24 @@ const MetadataFields = ({ journal, readonly }) => (
   </FormSection>
 )
 
-export default withJournal(MetadataFields)
+const MetadataFieldsNonEditable = ({ version, journal, readonly }) => [
+  <Section id="metadata.title">
+    <Legend>Title</Legend>
+    <div>{version.metadata.title}</div>
+  </Section>,
+  <Section id="metadata.abstract">
+    <Legend>Abstract</Legend>
+    <Abstract>{version.metadata.abstract}</Abstract>
+  </Section>,
+  <Section id="metadata.keywords">
+    <Legend>Keywords</Legend>
+    <div>{version.metadata.keywords.join(', ')}</div>
+  </Section>,
+]
+
+export default withJournal(
+  branch(
+    ({ readonly }) => readonly === true,
+    renderComponent(MetadataFieldsNonEditable),
+  )(MetadataFieldsEditable),
+)

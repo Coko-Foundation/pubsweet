@@ -1,4 +1,5 @@
 import React from 'react'
+import { branch, renderComponent } from 'recompose'
 import { css } from 'styled-components'
 import { FormSection } from 'redux-form'
 import { ValidatedField, RadioGroup, th } from '@pubsweet/ui'
@@ -24,7 +25,7 @@ const DeclarationSection = Section.extend`
   }
 `
 
-const Declarations = ({ journal, readonly }) => (
+const DeclarationsEditable = ({ journal, readonly }) => (
   <FormSection name="declarations">
     {journal.declarations.questions.map(question => (
       <DeclarationSection id={`declarations.${question.id}`} key={question.id}>
@@ -43,4 +44,24 @@ const Declarations = ({ journal, readonly }) => (
   </FormSection>
 )
 
-export default withJournal(Declarations)
+const DeclarationsNonEditable = ({ journal, readonly, version }) => (
+  <div>
+    <DeclarationSection>
+      <Legend>Type of article</Legend>
+      {version.metadata.articleType}
+    </DeclarationSection>
+    {journal.declarations.questions.map(question => (
+      <DeclarationSection>
+        <Legend>{question.legend}</Legend>
+        {version.declarations[question.id]}
+      </DeclarationSection>
+    ))}
+  </div>
+)
+
+export default withJournal(
+  branch(
+    ({ readonly }) => readonly === true,
+    renderComponent(DeclarationsNonEditable),
+  )(DeclarationsEditable),
+)

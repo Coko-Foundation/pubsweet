@@ -1,20 +1,24 @@
 import { pick, throttle } from 'lodash'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { actions } from 'pubsweet-client'
-import uploadFile from 'xpub-upload'
 import { ConnectPage } from 'xpub-connect'
-import { selectCollection, selectFragment } from 'xpub-selectors'
+import uploadFile from 'xpub-upload'
+import {
+  selectCollection,
+  selectFragment,
+  selectCurrentVersion,
+  selectLastDecidedVersion,
+} from 'xpub-selectors'
+
 import Submit from './Submit'
 
-const onSubmit = (values, dispatch, { history, project, version }) =>
-  // console.log('submit', values)
-
+const onSubmit = (values, dispatch, { project, version }) =>
   dispatch(
     actions.updateFragment(project, {
       id: version.id,
-      rev: version.rev,
       submitted: new Date(),
       ...values,
     }),
@@ -23,20 +27,18 @@ const onSubmit = (values, dispatch, { history, project, version }) =>
       dispatch(
         actions.updateCollection({
           id: project.id,
-          rev: project.rev,
           status: 'submitted',
         }),
       ),
     )
     .then(() => {
-      history.push('/')
+      dispatch(push('/'))
     })
     .catch(error => {
       if (error.validationErrors) {
         throw new SubmissionError()
       }
     })
-
 // TODO: this is only here because prosemirror would save the title in the
 // metadata as html instead of plain text. we need to maybe find a better
 // position than here to perform this operation
@@ -49,6 +51,7 @@ const stripHtml = htmlString => {
 // TODO: redux-form doesn't have an onBlur handler(?)
 const onChange = (values, dispatch, { project, version }) => {
   values.metadata.title = stripHtml(values.metadata.title) // see TODO above
+  values.metadata.abstract = stripHtml(values.metadata.abstract) // see TODO above
 
   dispatch(
     actions.updateFragment(project, {
@@ -63,17 +66,16 @@ const onChange = (values, dispatch, { project, version }) => {
 export default compose(
   ConnectPage(({ match }) => [
     actions.getCollection({ id: match.params.project }),
-    actions.getFragment(
-      { id: match.params.project },
-      { id: match.params.version },
-    ),
+    actions.getFragments({ id: match.params.project }),
   ]),
   connect(
     (state, { match }) => {
       const project = selectCollection(state, match.params.project)
       const version = selectFragment(state, match.params.version)
+      const currentVersion = selectCurrentVersion(state, project)
+      const submittedVersion = selectLastDecidedVersion(state, project)
 
-      return { project, version }
+      return { project, submittedVersion, currentVersion, version }
     },
     {
       uploadFile,
@@ -88,9 +90,8 @@ export default compose(
     }
   }),
   reduxForm({
-    // enableReinitialize: true,
     form: 'submit',
-    onChange: throttle(onChange, 3000, { trailing: false }),
+    onChange: throttle(onChange, 3000, { trailing: true }),
     onSubmit,
   }),
   withState('confirming', 'setConfirming', false),

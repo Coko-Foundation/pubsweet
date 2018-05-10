@@ -54,7 +54,6 @@ export default compose(
       //   .map(team =>
       //     collections.find(collection => collection.id === team.object.id),
       //   )
-
       const dashboard = {
         // editor: newestFirst(
         //   unassignedCollections

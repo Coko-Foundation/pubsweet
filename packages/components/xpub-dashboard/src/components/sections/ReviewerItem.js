@@ -13,8 +13,18 @@ import VersionTitle from './VersionTitle'
 // TODO: only return actions if not accepted or rejected
 // TODO: review id in link
 
-const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
-  const reviewer = getReviewerFromUser(project, version, currentUser)
+const ReviewerItem = ({
+  project,
+  version,
+  lastSubmittedVersion,
+  currentUser,
+  reviewerResponse,
+}) => {
+  const reviewer = getReviewerFromUser(
+    project,
+    lastSubmittedVersion,
+    currentUser,
+  )
 
   const status = reviewer && reviewer.status
 
@@ -63,7 +73,6 @@ const ReviewerItem = ({ project, version, currentUser, reviewerResponse }) => {
             </ActionContainer>
           </Actions>
         )}
-
         {status === 'rejected' && 'rejected'}
       </Body>
     </Item>

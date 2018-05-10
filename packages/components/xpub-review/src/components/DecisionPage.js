@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { debounce, isEmpty } from 'lodash'
 import { compose, withProps } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -14,6 +14,15 @@ import {
 import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
 import AssignEditorContainer from '../components/assignEditors/AssignEditorContainer'
+
+// TODO: this is only here because prosemirror would save the title in the
+// metadata as html instead of plain text. we need to maybe find a better
+// position than here to perform this operation
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
 
 const onSubmit = (values, dispatch, { project, version, history }) => {
   version.decision = {
@@ -36,6 +45,8 @@ const onSubmit = (values, dispatch, { project, version, history }) => {
 }
 
 const onChange = (values, dispatch, { project, version }) => {
+  if (isEmpty(values)) return false
+  values.note.content = stripHtml(values.note.content) // see TODO above
   version.decision = {
     ...version.decision,
     ...values,
@@ -82,5 +93,6 @@ export default compose(
     onChange: debounce(onChange, 1000, { maxWait: 5000 }),
     onSubmit,
     destroyOnUnmount: false,
+    enableReinitialize: true,
   }),
 )(DecisionLayout)
