@@ -3,7 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="6.1.0"></a>
+      <a name="6.2.0"></a>
+# [6.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.1.0...pubsweet-components@6.2.0) (2018-05-10)
+
+
+### Bug Fixes
+
+* **components:** dashboard if statment reject ([999587a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/999587a))
+* **components:** decision linter ([5679ce0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5679ce0))
+* **components:** fix lint errors ([4e22ec1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4e22ec1))
+* **components:** fix linting issues ([4385b58](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4385b58))
+* **components:** fixes in linter ([7c31f6b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c31f6b))
+* **components:** html parse, styled components ([8b24552](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8b24552))
+* **components:** lint issues ([ff56878](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ff56878))
+* **components:** linter ([9aac3fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9aac3fa))
+* **components:** merge two commponets two one ([4e2ed76](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4e2ed76))
+* **components:** redirect submission add selectors ([53db5a7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53db5a7))
+* **components:** redux form ([2f7f1ed](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f7f1ed))
+* **components:** review page layout ([4ea2cdd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4ea2cdd))
+* **components:** take care of case of zero files ([82cff08](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/82cff08))
+* **components:** title wording ([0c293f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0c293f4))
+
+
+### Features
+
+* **components:** add columns to submission and tabs ([40470a0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/40470a0))
+* **components:** add current version files ([4c77f3c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4c77f3c))
+* **components:** add tabs to submission ([0e45892](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e45892))
+* **components:** create accordion component ([05a23e4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/05a23e4))
+* **components:** create accordion component ([54f5b7d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/54f5b7d))
+
+
+
+
+      <a name="6.1.0"></a>
 # [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.0.0...pubsweet-components@6.1.0) (2018-05-09)
 
 
@@ -32,7 +65,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="6.0.0"></a>
+<a name="6.0.0"></a>
 # [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@5.4.0...pubsweet-components@6.0.0) (2018-05-03)
 
 

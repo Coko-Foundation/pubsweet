@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.4...pubsweet-component-xpub-dashboard@0.3.0) (2018-05-10)
+
+
+### Bug Fixes
+
+* **components:** dashboard if statment reject ([999587a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/999587a))
+* **components:** linter ([9aac3fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9aac3fa))
+* **components:** redirect submission add selectors ([53db5a7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53db5a7))
+
+
+### Features
+
+* **components:** create accordion component ([54f5b7d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/54f5b7d))
+
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.3...pubsweet-component-xpub-dashboard@0.2.4) (2018-05-09)
 

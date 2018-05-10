@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.3.2...pubsweet-component-xpub-review@0.4.0) (2018-05-10)
+
+
+### Bug Fixes
+
+* **components:** decision linter ([5679ce0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5679ce0))
+* **components:** html parse, styled components ([8b24552](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8b24552))
+* **components:** lint issues ([ff56878](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ff56878))
+* **components:** redux form ([2f7f1ed](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f7f1ed))
+* **components:** review page layout ([4ea2cdd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4ea2cdd))
+
+
+### Features
+
+* **components:** add tabs to submission ([0e45892](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e45892))
+
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.3.1...pubsweet-component-xpub-review@0.3.2) (2018-05-09)
 
