@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="4.1.0"></a>
+  <a name="4.1.1"></a>
+## [4.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@4.1.0...@pubsweet/ui@4.1.1) (2018-05-10)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/ui
+
+  <a name="4.1.0"></a>
 # [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@4.0.0...@pubsweet/ui@4.1.0) (2018-05-09)
 
 
@@ -19,7 +27,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="4.0.0"></a>
+<a name="4.0.0"></a>
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@3.3.4...@pubsweet/ui@4.0.0) (2018-05-03)
 
 

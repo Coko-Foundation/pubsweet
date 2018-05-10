@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.0.5...xpub-selectors@0.1.0) (2018-05-10)
+
+
+### Bug Fixes
+
+* **components:** fix lint errors ([4e22ec1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4e22ec1))
+* **components:** redirect submission add selectors ([53db5a7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53db5a7))
+* **components:** review page layout ([4ea2cdd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4ea2cdd))
+
+
+### Features
+
+* **components:** add columns to submission and tabs ([40470a0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/40470a0))
+* **components:** add tabs to submission ([0e45892](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e45892))
+
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.0.4...xpub-selectors@0.0.5) (2018-04-03)
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.14"></a>
+## [0.0.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-styleguide@0.0.13...xpub-styleguide@0.0.14) (2018-05-10)
+
+
+
+
+**Note:** Version bump only for package xpub-styleguide
+
 <a name="0.0.13"></a>
 ## [0.0.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-styleguide@0.0.12...xpub-styleguide@0.0.13) (2018-05-09)
 
