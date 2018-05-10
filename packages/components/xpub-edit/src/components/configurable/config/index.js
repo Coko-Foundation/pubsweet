@@ -8,17 +8,15 @@ import nodes from './nodes'
 import marks from './marks'
 
 export default features => {
-  const featureNames = Object.keys(features)
-
   const schema = new Schema({
-    marks: pick(marks, featureNames),
+    marks: pick(marks, features),
     nodes: {
       ...pick(nodes, ['doc', 'paragraph', 'text']),
-      ...pick(nodes, featureNames),
+      ...pick(nodes, features),
     },
   })
 
-  const enabledMenuItems = pick(menuItems, featureNames)
+  const enabledMenuItems = pick(menuItems, features)
   const menu = map(enabledMenuItems, itemCreator => itemCreator(schema))
   const plugins = makePlugins(schema, features)
 

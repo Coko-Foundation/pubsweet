@@ -53,7 +53,18 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { options, title, readonly } = this.props
+    const {
+      autoFocus,
+      basePlaceholderClassName,
+      className,
+      onBlur,
+      options,
+      placeholder,
+      placeholderClassName,
+      title,
+      readonly,
+      ...remainingProps
+    } = this.props
     const { state } = this.state
     const menu = readonly ? {} : options.menu
 
@@ -68,7 +79,7 @@ class Editor extends React.Component {
           />
         )}
 
-        <div ref={this.createEditorView} />
+        <div ref={this.createEditorView} {...remainingProps} />
       </div>
     )
   }

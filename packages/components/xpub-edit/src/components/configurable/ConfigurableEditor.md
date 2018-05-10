@@ -1,4 +1,4 @@
-An editor that can be configured simply with boolean props
+An editor whose features can be configured with boolean props
 
 ```js
 const value = faker.lorem.sentence(20)

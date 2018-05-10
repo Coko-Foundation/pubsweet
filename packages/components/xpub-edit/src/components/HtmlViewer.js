@@ -24,9 +24,9 @@ class HtmlViewer extends React.Component {
   }
 
   render() {
-    const { options, className, value } = this.props
+    const { options, value, ...props } = this.props
     options.doc = this.changeContentValue(value)
-    return <Viewer className={className} options={options} />
+    return <Viewer options={options} {...props} />
   }
 }
 

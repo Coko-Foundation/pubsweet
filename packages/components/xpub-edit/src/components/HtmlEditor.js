@@ -48,27 +48,9 @@ class HtmlEditor extends React.Component {
   }
 
   render() {
-    const {
-      options,
-      className,
-      placeholder,
-      placeholderClassName,
-      title,
-      readonly,
-    } = this.props
+    const { value, onChange, onBlur, ...passedProps } = this.props
 
-    return (
-      <Editor
-        className={className}
-        onBlur={this.onBlur}
-        onChange={this.onChange}
-        options={options}
-        placeholder={placeholder}
-        placeholderClassName={placeholderClassName}
-        readonly={readonly}
-        title={title}
-      />
-    )
+    return <Editor onChange={this.onChange} {...passedProps} />
   }
 }
 

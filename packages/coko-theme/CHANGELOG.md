@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@1.0.0...@pubsweet/coko-theme@1.0.1) (2018-05-09)
+
+
+### Bug Fixes
+
+* **theme:** fix active underline for action on coko theme ([9ef7165](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9ef7165))
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@0.1.1...@pubsweet/coko-theme@1.0.0) (2018-05-03)
 

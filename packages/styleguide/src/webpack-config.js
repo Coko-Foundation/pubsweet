@@ -17,8 +17,7 @@ module.exports = dir => {
 
   const include = [
     path.join(dir, 'src'),
-    path.join(dir, 'packages'),
-    path.join(dir, '..', 'components', 'packages'),
+    path.join(dir, '..', 'components'),
     path.join(dir, '..', 'ui', 'src'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
@@ -26,7 +25,6 @@ module.exports = dir => {
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
     /ui\/src/,
-    /server\/src\/models/,
   ]
 
   return {
