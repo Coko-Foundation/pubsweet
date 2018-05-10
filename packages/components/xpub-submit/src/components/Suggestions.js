@@ -93,22 +93,28 @@ const SuggestionsEditable = ({ readonly }) => (
   </FormSection>
 )
 
-const SuggestionsNonEditable = ({ readonly, version }) => [
-  <Section id="suggestions.reviewers">
-    <Legend>Suggested or opposed reviewers</Legend>
-    <SubLegend>Suggested reviewers</SubLegend>
-    <div>{version.suggestions.reviewers.suggested.join(', ')}</div>
-    <SubLegend>Opposed reviewers</SubLegend>
-    <div>{version.suggestions.reviewers.opposed.join(', ')}</div>
-  </Section>,
-  <Section id="suggestions.editors">
-    <Legend>Suggested or opposed editors</Legend>
-    <SubLegend>Suggested editors</SubLegend>
-    <div>{version.suggestions.editors.suggested.join(', ')}</div>
-    <SubLegend>Opposed editors</SubLegend>
-    <div>{version.suggestions.editors.opposed.join(', ')}</div>
-  </Section>,
-]
+const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
+
+const SuggestionsNonEditable = ({ readonly, version }) => {
+  const suggestions = version.suggestions || {}
+
+  return [
+    <Section id="suggestions.reviewers">
+      <Legend>Suggested or opposed reviewers</Legend>
+      <SubLegend>Suggested reviewers</SubLegend>
+      <div>{arrayToText((suggestions.reviewers || {}).suggested || [])}</div>
+      <SubLegend>Opposed reviewers</SubLegend>
+      <div>{arrayToText((suggestions.reviewers || {}).opposed || [])}</div>
+    </Section>,
+    <Section id="suggestions.editors">
+      <Legend>Suggested or opposed editors</Legend>
+      <SubLegend>Suggested editors</SubLegend>
+      <div>{arrayToText((suggestions.editors || {}).suggested || [])}</div>
+      <SubLegend>Opposed editors</SubLegend>
+      <div>{arrayToText((suggestions.editors || {}).opposed || [])}</div>
+    </Section>,
+  ]
+}
 
 export default branch(
   ({ readonly }) => readonly === true,
