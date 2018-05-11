@@ -1,6 +1,7 @@
 {
   "name": "xpub-styleguide",
   "version": "0.0.14",
+  "license": "MIT",
   "files": [
     "src",
     "dist"

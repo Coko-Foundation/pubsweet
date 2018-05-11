@@ -1,6 +1,7 @@
 {
   "name": "@pubsweet/ui",
   "version": "4.1.1",
+  "license": "MIT",
   "files": [
     "docs",
     "dist",

@@ -1,6 +1,7 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
   "version": "0.0.16",
+  "license": "MIT",
   "files": [
     "src",
     "dist"
