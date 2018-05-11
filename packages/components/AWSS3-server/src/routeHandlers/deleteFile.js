@@ -11,7 +11,7 @@ const deleteFile = (s3, s3Config) => {
 
     try {
       await asyncDeleteObject(params)
-      res.status(204)
+      res.status(204).end()
     } catch (err) {
       logger.error(err.message)
       res.status(err.statusCode).json({ error: err.message })

@@ -44,9 +44,7 @@ const zipFiles = (s3, s3Config, archiver = nodeArchiver) => {
           archive.finalize()
         }
       } else {
-        res.status(204).json({
-          message: `No files found for the requested manuscript.`,
-        })
+        res.status(204).end()
       }
     } catch (err) {
       logger.error(err.message)
