@@ -35,7 +35,6 @@ const Cell = styled.span`
   flex-shrink: 0;
   flex-basis: 50%;
 `
-
 const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
 
 const ReviewMetadata = ({ version, handlingEditors, journal }) => (
