@@ -23,7 +23,7 @@ export default compose(
           team =>
             team.object.type === 'collection' &&
             team.object.id === project.id &&
-            team.teamType.name === teamTypeName,
+            team.teamType === teamTypeName,
         ),
     }),
     {
