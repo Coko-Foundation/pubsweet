@@ -93,8 +93,6 @@ const SuggestionsEditable = ({ readonly }) => (
   </FormSection>
 )
 
-const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
-
 const SuggestionsNonEditable = ({ readonly, version }) => {
   const suggestions = version.suggestions || {}
 
@@ -102,18 +100,25 @@ const SuggestionsNonEditable = ({ readonly, version }) => {
     <Section id="suggestions.reviewers">
       <Legend>Suggested or opposed reviewers</Legend>
       <SubLegend>Suggested reviewers</SubLegend>
-      <div>{arrayToText((suggestions.reviewers || {}).suggested || [])}</div>
+      <div>{suggestionsText(suggestions.reviewers, 'suggested')}</div>
       <SubLegend>Opposed reviewers</SubLegend>
-      <div>{arrayToText((suggestions.reviewers || {}).opposed || [])}</div>
+      <div>{suggestionsText(suggestions.reviewers, 'opposed')}</div>
     </Section>,
     <Section id="suggestions.editors">
       <Legend>Suggested or opposed editors</Legend>
       <SubLegend>Suggested editors</SubLegend>
-      <div>{arrayToText((suggestions.editors || {}).suggested || [])}</div>
+      <div>{suggestionsText(suggestions.editors, 'suggested')}</div>
       <SubLegend>Opposed editors</SubLegend>
-      <div>{arrayToText((suggestions.editors || {}).opposed || [])}</div>
+      <div>{suggestionsText(suggestions.editors, 'opposed')}</div>
     </Section>,
   ]
+}
+
+const suggestionsText = (source, property) => {
+  if (source && Array.isArray(source[property]) && !!source[property].length) {
+    return source[property].join(', ')
+  }
+  return 'none'
 }
 
 export default branch(
