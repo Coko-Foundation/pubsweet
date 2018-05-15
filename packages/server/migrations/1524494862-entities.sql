@@ -1,0 +1,1 @@
+CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB);
