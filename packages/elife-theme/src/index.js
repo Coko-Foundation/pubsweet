@@ -5,16 +5,26 @@ export default {
   /* Colors */
   colorBackground: '#fff',
   colorPrimary: '#0288d1',
+  colorPrimaryDark: '#0277bd',
+  colorPrimaryLight: '#b3e5fc',
   colorSecondary: '#888',
   colorFurniture: '#ccc',
   colorBorder: '#aaa',
   colorBackgroundHue:
     '#f5f5f5' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,
   colorSuccess: '#629f43',
+  colorSuccessDark: '#569037',
+  colorAttention: '#cf0c4e',
   colorError: '#b50000',
   colorText: '#212121',
   colorTextReverse: '#fff',
   colorTextPlaceholder: '#bdbdbd',
+  colorTextSecondary: '#888',
+  colorTextDividers: '#e0e0e0',
+  colorTextUiCode: '#f7f7f7',
+  colorTextSecondaryReverse: '#9e9e9e',
+  colorTextDividersReverse: '#616161',
+  colorTextUiBackgroundHueReverse: '#333',
 
   /* Text variables */
   fontInterface: 'Georgia, serif',
