@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.1.3...xpub-edit@0.1.4) (2018-05-18)
+
+
+### Bug Fixes
+
+* use MIT on all package.json files ([4558ae4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4558ae4))
+
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@0.1.2...xpub-edit@0.1.3) (2018-05-10)
 

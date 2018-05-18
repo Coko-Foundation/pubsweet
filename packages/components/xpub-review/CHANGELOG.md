@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.4.0...pubsweet-component-xpub-review@0.4.1) (2018-05-18)
+
+
+### Bug Fixes
+
+* **components:** authors assigning problem ([50baa94](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/50baa94))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.3.2...pubsweet-component-xpub-review@0.4.0) (2018-05-10)
 
