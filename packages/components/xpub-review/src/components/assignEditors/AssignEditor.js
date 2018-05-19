@@ -5,7 +5,7 @@ import { withJournal } from 'xpub-journal'
 
 // TODO: select multiple editors
 const AssignEditor = ({
-  version,
+  project,
   team,
   teamName,
   teamTypeName,
@@ -18,7 +18,7 @@ const AssignEditor = ({
       addUserToTeam({
         group: 'editor',
         name: teamName,
-        version,
+        project,
         team,
         teamTypeName,
         user,
