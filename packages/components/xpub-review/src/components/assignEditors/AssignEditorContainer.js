@@ -10,7 +10,7 @@ const editorOption = user => ({
 
 export default compose(
   connect(
-    (state, { project, teamTypeName }) => ({
+    (state, { version, teamTypeName }) => ({
       options:
         state.users &&
         !state.users.isFetching &&
@@ -21,8 +21,8 @@ export default compose(
         state.teams &&
         state.teams.find(
           team =>
-            team.object.type === 'collection' &&
-            team.object.id === project.id &&
+            team.object.type === 'fragment' &&
+            team.object.id === version.id &&
             team.teamType === teamTypeName,
         ),
     }),

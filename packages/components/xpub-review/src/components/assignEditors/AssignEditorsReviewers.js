@@ -17,13 +17,13 @@ const AssignEditorsReviewers = ({
     <Roles>
       <AssignEditor
         addUserToTeam={addUserToTeam}
-        project={project}
         teamTypeName="seniorEditor"
+        version={version}
       />
       <AssignEditor
         addUserToTeam={addUserToTeam}
-        project={project}
         teamTypeName="handlingEditor"
+        version={version}
       />
     </Roles>
     <Link to={`/projects/${project.id}/versions/${version.id}/reviewers`}>

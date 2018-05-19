@@ -5,7 +5,7 @@ export const addUserToTeam = ({
   teamTypeName,
   name,
   group,
-  project,
+  version,
   user,
 }) => dispatch => {
   if (team) {
@@ -19,8 +19,8 @@ export const addUserToTeam = ({
       group,
       name,
       object: {
-        type: 'collection',
-        id: project.id,
+        type: 'fragment',
+        id: version.id,
       },
       members: [user],
     }),
