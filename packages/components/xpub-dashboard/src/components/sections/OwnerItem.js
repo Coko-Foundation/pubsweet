@@ -9,11 +9,9 @@ import VersionTitle from './VersionTitle'
 
 const OwnerItem = ({ project, version, deleteProject }) => {
   const itemHeader = (
-    <Authorize object={[project]} operation="can view my submission section">
-      <Header>
-        <Status status={project.status} />
-      </Header>
-    </Authorize>
+    <Header>
+      <Status status={project.status} />
+    </Header>
   )
 
   const baseLink = `/projects/${project.id}/versions/${version.id}`
@@ -36,10 +34,12 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   return (
-    <Item>
-      {itemHeader}
-      {body}
-    </Item>
+    <Authorize object={[project]} operation="can view my submission section">
+      <Item>
+        {itemHeader}
+        {body}
+      </Item>
+    </Authorize>
   )
 }
 

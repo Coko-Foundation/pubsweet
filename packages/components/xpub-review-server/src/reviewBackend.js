@@ -25,7 +25,10 @@ module.exports = app => {
       )
 
       const canViewVersion = await authsome.can(req.user, 'GET', version)
-      const canPatchVersion = await authsome.can(req.user, 'PATCH', version)
+      const canPatchVersion = await authsome.can(req.user, 'PATCH', {
+        path: '/make-invitation',
+        collection: project,
+      })
 
       if (!canPatchVersion || !canViewVersion) throw new AuthorizationError()
       let versionUpdateData = req.body.reviewers
