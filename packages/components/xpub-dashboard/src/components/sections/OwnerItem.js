@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
@@ -8,9 +9,11 @@ import VersionTitle from './VersionTitle'
 
 const OwnerItem = ({ project, version, deleteProject }) => {
   const itemHeader = (
-    <Header>
-      <Status status={project.status} />
-    </Header>
+    <Authorize object={[project]} operation="can view my submission section">
+      <Header>
+        <Status status={project.status} />
+      </Header>
+    </Authorize>
   )
 
   const baseLink = `/projects/${project.id}/versions/${version.id}`

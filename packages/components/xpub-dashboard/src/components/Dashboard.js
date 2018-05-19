@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 
 import UploadManuscript from './UploadManuscript'
@@ -36,7 +36,10 @@ const Dashboard = ({
         </UploadContainer>
       )}
 
-    {!!dashboard.owner.length && (
+    <Authorize
+      object={dashboard.owner}
+      operation="can view my submission section"
+    >
       <Section>
         <Heading>My Submissions</Heading>
         {dashboard.owner.map(project => (
@@ -52,9 +55,9 @@ const Dashboard = ({
           />
         ))}
       </Section>
-    )}
+    </Authorize>
 
-    {!!dashboard.reviewer.length && (
+    <Authorize object={dashboard.reviewer} operation="can view review section">
       <Section>
         <Heading>To review</Heading>
         {dashboard.reviewer.map(project => (
@@ -66,16 +69,21 @@ const Dashboard = ({
           />
         ))}
       </Section>
-    )}
+    </Authorize>
 
-    {!!dashboard.editor.length && (
-      <Section>
-        <Heading>My Manuscripts</Heading>
-        {dashboard.editor.map(project => (
-          <EditorItemWithVersion key={project.id} project={project} />
-        ))}
-      </Section>
-    )}
+    <Authorize
+      object={dashboard.editor}
+      operation="can view my manuscripts section"
+    >
+      {dashboard.editor.length > 0 && (
+        <Section>
+          <Heading>My Manuscripts</Heading>
+          {dashboard.editor.map(project => (
+            <EditorItemWithVersion key={project.id} project={project} />
+          ))}
+        </Section>
+      )}
+    </Authorize>
   </Page>
 )
 

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Item, Header, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 
@@ -50,41 +51,42 @@ const EditorItemLinks = ({ project, version }) => (
 )
 
 const EditorItem = ({ project, version }) => (
-  <Item>
-    <Header>
-      <Status status={project.status} />
-      <Meta>
-        <MetadataStreamLined
-          streamlinedReview={version.declarations.streamlinedReview}
-        />
-        <MetadataOwners owners={project.owners} />
-        <Divider separator="–" />
-        <MetadataSubmittedDate submitted={version.submitted} />
-        <Divider separator="–" />
-        <MetadataType type={version.metadata.articleType} />
-        <Divider separator="–" />
-        <MetadataSections sections={version.metadata.articleSection} />
-        <Divider separator="–" />
-        <MetadataReviewType
-          openPeerReview={version.declarations.openPeerReview}
-        />
-      </Meta>
-    </Header>
+  <Authorize object={[project]} operation="can view my manuscripts section">
+    <Item>
+      <Header>
+        <Status status={project.status} />
+        <Meta>
+          <MetadataStreamLined
+            streamlinedReview={version.declarations.streamlinedReview}
+          />
+          <MetadataOwners owners={project.owners} />
+          <Divider separator="–" />
+          <MetadataSubmittedDate submitted={version.submitted} />
+          <Divider separator="–" />
+          <MetadataType type={version.metadata.articleType} />
+          <Divider separator="–" />
+          <MetadataSections sections={version.metadata.articleSection} />
+          <Divider separator="–" />
+          <MetadataReviewType
+            openPeerReview={version.declarations.openPeerReview}
+          />
+        </Meta>
+      </Header>
+      <Body>
+        <VersionTitleLink
+          id={project.id}
+          page="decisions"
+          project={project}
+          version={version}
+        >
+          <VersionTitle linkUrl="true" version={version} />
+        </VersionTitleLink>
+        <EditorItemLinks project={project} version={version} />
+      </Body>
 
-    <Body>
-      <VersionTitleLink
-        id={project.id}
-        page="decisions"
-        project={project}
-        version={version}
-      >
-        <VersionTitle linkUrl="true" version={version} />
-      </VersionTitleLink>
-      <EditorItemLinks project={project} version={version} />
-    </Body>
-
-    <Reviews project={project} version={version} />
-  </Item>
+      <Reviews project={project} version={version} />
+    </Item>
+  </Authorize>
 )
 
 export default EditorItem

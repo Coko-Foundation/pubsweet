@@ -63,16 +63,8 @@ export default compose(
         //         items.findIndex(item => item.id === collection.id) === index,
         //     ),
         // ),
-        editor: sortedCollections.filter(
-          collection =>
-            collection.status === 'submitted' ||
-            collection.status === 'revising',
-        ),
-        owner: sortedCollections.filter(
-          collection =>
-            collection.owners &&
-            collection.owners.some(owner => owner.id === currentUser.id),
-        ),
+        editor: sortedCollections,
+        owner: sortedCollections,
         // reviewer: newestFirst(teams
         //   .filter(team => team.group === 'reviewer'
         //     && team.object.type === 'collection'
@@ -80,13 +72,7 @@ export default compose(
         //   .map(team => collections.find(collection => {
         //     return collection.id === team.object
         //   }))),
-        reviewer: sortedCollections.filter(
-          collection =>
-            collection.reviewers &&
-            collection.reviewers.some(
-              reviewer => reviewer && reviewer.user === currentUser.id,
-            ),
-        ),
+        reviewer: sortedCollections,
       }
 
       return { collections, conversion, currentUser, dashboard }
