@@ -2,13 +2,13 @@ import React from 'react'
 
 import moment from 'moment'
 // import classnames from 'classnames'
+import { Tabs } from '@pubsweet/ui'
 import SimpleEditor from 'wax-editor-react'
 
 import ReviewForm from './ReviewForm'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Review from './Review'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
-import Tabs from '../atoms/Tabs'
 
 const ReviewLayout = ({
   project,

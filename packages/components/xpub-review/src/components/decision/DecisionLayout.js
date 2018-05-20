@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import SimpleEditor from 'wax-editor-react'
 
+import { Tabs } from '@pubsweet/ui'
 import DecisionForm from './DecisionForm'
 import DecisionReviews from './DecisionReviews'
 import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
@@ -9,7 +10,6 @@ import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
 import AdminSection from '../atoms/AdminSection'
-import Tabs from '../atoms/Tabs'
 
 // TODO -- is passing arrays of react components as props an ok practice?
 /*
