@@ -25,6 +25,7 @@ module.exports = dir => {
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
     /ui\/src/,
+    /packages\/client\/src/,
   ]
 
   return {
