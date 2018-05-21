@@ -1,4 +1,5 @@
 import React from 'react'
+import 'regenerator-runtime/runtime'
 import { Button } from '@pubsweet/ui'
 import { getReviewerFromUser } from 'xpub-selectors'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'

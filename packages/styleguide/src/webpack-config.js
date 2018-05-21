@@ -132,6 +132,10 @@ module.exports = dir => {
       new webpack.DefinePlugin({
         PUBSWEET_COMPONENTS: '[]',
       }),
+      new webpack.ContextReplacementPlugin(/./, __dirname, {
+        [config.authsome.mode]: config.authsome.mode,
+        [config.validations]: config.validations,
+      }),
     ],
     resolve: {
       alias: {
