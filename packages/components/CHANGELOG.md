@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="6.2.1"></a>
+      <a name="6.2.2"></a>
+## [6.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.1...pubsweet-components@6.2.2) (2018-05-21)
+
+
+### Bug Fixes
+
+* **components:** use Tabs from pubsweet ui ([8e9fd3c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8e9fd3c))
+
+
+
+
+      <a name="6.2.1"></a>
 ## [6.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.0...pubsweet-components@6.2.1) (2018-05-18)
 
 
@@ -21,7 +32,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="6.2.0"></a>
+<a name="6.2.0"></a>
 # [6.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.1.0...pubsweet-components@6.2.0) (2018-05-10)
 
 
