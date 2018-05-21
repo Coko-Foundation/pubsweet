@@ -1,6 +1,6 @@
 {
   "name": "xpub-styleguide",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "license": "MIT",
   "files": [
     "src",
@@ -8,7 +8,7 @@
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/styleguide": "^1.3.2",
+    "@pubsweet/styleguide": "^1.3.3",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",

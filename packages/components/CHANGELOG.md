@@ -3,7 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="6.2.0"></a>
+  <a name="6.2.1"></a>
+## [6.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.0...pubsweet-components@6.2.1) (2018-05-18)
+
+
+### Bug Fixes
+
+* use MIT on all package.json files ([4558ae4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4558ae4))
+* **components:** add tests to suggestions component ([50777b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/50777b3))
+* **components:** authors assigning problem ([50baa94](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/50baa94))
+* **components:** cases with empty editors suggestions ([0a6bd45](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0a6bd45))
+* **components:** delete unneeded line ([daea008](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/daea008))
+* **components:** rewrite conditional checks to more clean ([c41d79d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c41d79d))
+* **components:** submit submitted versions ([48d07ee](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48d07ee))
+* **components:** upload diasble during converting ([227b136](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/227b136))
+
+
+
+
+  <a name="6.2.0"></a>
 # [6.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.1.0...pubsweet-components@6.2.0) (2018-05-10)
 
 
@@ -36,7 +54,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="6.1.0"></a>
+<a name="6.1.0"></a>
 # [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.0.0...pubsweet-components@6.1.0) (2018-05-09)
 
 

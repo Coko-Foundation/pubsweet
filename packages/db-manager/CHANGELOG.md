@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="1.0.12"></a>
+  <a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.12...@pubsweet/db-manager@1.1.0) (2018-05-18)
+
+
+### Bug Fixes
+
+* use one file at monorepo root ([456f49b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/456f49b))
+
+
+### Features
+
+* migration runner ([76a48b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/76a48b3))
+* migration runner ([be49be5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be49be5))
+
+
+
+
+  <a name="1.0.12"></a>
 ## [1.0.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.11...@pubsweet/db-manager@1.0.12) (2018-05-03)
 
 
@@ -11,7 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/db-manager
 
-      <a name="1.0.11"></a>
+<a name="1.0.11"></a>
 ## [1.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.10...@pubsweet/db-manager@1.0.11) (2018-05-03)
 
 

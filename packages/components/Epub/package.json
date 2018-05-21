@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-epub",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Backend EPUB export component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/logger": "^0.2.2",
+    "@pubsweet/logger": "^0.2.3",
     "cheerio": "^1.0.0-rc.2",
     "html-epub": "^0.5.2",
     "mkdirp": "^0.5.1",

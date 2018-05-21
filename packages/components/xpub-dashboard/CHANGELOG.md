@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.1"></a>
+## [0.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.3.0...pubsweet-component-xpub-dashboard@0.3.1) (2018-05-18)
+
+
+### Bug Fixes
+
+* **components:** upload diasble during converting ([227b136](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/227b136))
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.2.4...pubsweet-component-xpub-dashboard@0.3.0) (2018-05-10)
 

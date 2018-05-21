@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/db-manager",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
@@ -35,16 +35,16 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^22.1.4",
-    "jest-environment-db": "^1.0.0",
+    "jest-environment-db": "^1.0.1",
     "nsp": "^2.8.0"
   },
   "dependencies": {
-    "@pubsweet/logger": "^0.2.2",
+    "@pubsweet/logger": "^0.2.3",
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
     "joi": "^13.1.0",
     "pg": "^7.4.1",
-    "pubsweet-server": "^7.0.1",
+    "pubsweet-server": "^7.1.0",
     "tmp": "^0.0.33",
     "umzug": "^2.1.0"
   }
