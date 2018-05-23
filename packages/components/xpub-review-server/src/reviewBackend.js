@@ -63,7 +63,6 @@ module.exports = app => {
 
       const team = new Team({
         teamType: 'reviewer',
-        group: 'editor',
         name: 'Reviewer',
         object: {
           type: 'fragment',

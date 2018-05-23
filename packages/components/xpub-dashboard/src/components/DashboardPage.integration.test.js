@@ -18,7 +18,12 @@ import { Section, UploadContainer } from './molecules/Page'
 // this should be elsewhere
 Enzyme.configure({ adapter: new Adapter() })
 
-jest.mock('config', () => ({ 'pubsweet-client': {} }))
+jest.mock('config', () => ({
+  'pubsweet-client': {},
+  authsome: {
+    mode: 'authsome',
+  },
+}))
 
 // Mock out the API
 jest.mock('pubsweet-client/src/helpers/api', () => ({
