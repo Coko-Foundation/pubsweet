@@ -15,10 +15,7 @@ export const addUserToTeam = ({
 
   return dispatch(
     actions.createTeam({
-      teamType: {
-        name: teamTypeName,
-        permissions: 'editor', // TODO
-      },
+      teamType: teamTypeName,
       group,
       name,
       object: {

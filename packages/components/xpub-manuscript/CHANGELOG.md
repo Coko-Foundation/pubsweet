@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.18"></a>
+## [0.0.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.0.17...pubsweet-component-xpub-manuscript@0.0.18) (2018-05-21)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.0.17"></a>
+## [0.0.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.0.16...pubsweet-component-xpub-manuscript@0.0.17) (2018-05-18)
+
+
+### Bug Fixes
+
+* use MIT on all package.json files ([4558ae4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4558ae4))
+
+
+
+
 <a name="0.0.16"></a>
 ## [0.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.0.15...pubsweet-component-xpub-manuscript@0.0.16) (2018-05-10)
 

@@ -1,8 +1,7 @@
 {
   "name": "@pubsweet/logger",
-  "version": "0.2.2",
-  "description":
-    "A module encapsulating standard logging features for pubsweet components and services.",
+  "version": "0.2.3",
+  "description": "A module encapsulating standard logging features for pubsweet components and services.",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
@@ -12,7 +11,10 @@
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "keywords": ["logger", "pubsweet"],
+  "keywords": [
+    "logger",
+    "pubsweet"
+  ],
   "engines": {
     "node": ">=7.9.0",
     "npm": ">=3.0.0"
@@ -25,10 +27,16 @@
     "winston": "^2.3.1"
   },
   "jest": {
-    "testMatch": ["**/test/**/*test.js"],
+    "testMatch": [
+      "**/test/**/*test.js"
+    ],
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.js"],
-    "modulePaths": ["<rootDir>/node_modules"],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
     "testEnvironment": "node",
     "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"

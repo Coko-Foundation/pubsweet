@@ -20,12 +20,15 @@ describe('teams reducers', () => {
   })
 
   it('updateTeam success', () => {
-    const updatedTeam = { ...mockteam, foo: 'bar' }
-    const actual = reducer(mockstate, {
-      type: T.CREATE_TEAM_SUCCESS,
-      team: updatedTeam,
+    // const updatedTeam = { ...mockteam, foo: 'bar' }
+    const actual = reducer([mockstate, mockteam], {
+      type: T.UPDATE_TEAM_SUCCESS,
+      team: mockteam,
+      update: {
+        foo: 'bar',
+      },
     })
-    expect(actual).toEqual([updatedTeam])
+    expect(actual).toEqual([mockstate, { ...mockteam, foo: 'bar' }])
   })
 
   it('getTeams success', () => {

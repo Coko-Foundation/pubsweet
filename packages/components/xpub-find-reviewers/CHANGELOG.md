@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.16"></a>
+## [0.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.15...pubsweet-component-xpub-find-reviewers@0.0.16) (2018-05-21)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
+<a name="0.0.15"></a>
+## [0.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.14...pubsweet-component-xpub-find-reviewers@0.0.15) (2018-05-18)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
 <a name="0.0.14"></a>
 ## [0.0.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.13...pubsweet-component-xpub-find-reviewers@0.0.14) (2018-05-10)
 

@@ -6,7 +6,7 @@ export default {
   colorBackground: '#fff',
   colorPrimary: '#0288d1',
   colorSecondary: '#888',
-  colorFurniture: '#ccc',
+  colorFurniture: '#E0E0E0',
   colorBorder: '#aaa',
   colorBackgroundHue:
     '#f5f5f5' /* marginally darker shade of the app background so that it can be used to divide the interface when needed */,

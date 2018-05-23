@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.2"></a>
+## [1.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@1.2.1...pubsweet-component-xpub-submit@1.2.2) (2018-05-21)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-submit
+
+<a name="1.2.1"></a>
+## [1.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@1.2.0...pubsweet-component-xpub-submit@1.2.1) (2018-05-18)
+
+
+### Bug Fixes
+
+* **components:** add tests to suggestions component ([50777b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/50777b3))
+* **components:** rewrite conditional checks to more clean ([c41d79d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c41d79d))
+* **components:** submit submitted versions ([48d07ee](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48d07ee))
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@1.1.0...pubsweet-component-xpub-submit@1.2.0) (2018-05-10)
 

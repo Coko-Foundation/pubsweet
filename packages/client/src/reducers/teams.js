@@ -1,7 +1,8 @@
 import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
-import differenceBy from 'lodash/differenceBy'
+import find from 'lodash/find'
 import unionBy from 'lodash/unionBy'
+import differenceBy from 'lodash/differenceBy'
 
 import {
   GET_TEAMS_SUCCESS,
@@ -15,19 +16,29 @@ import {
 export default function(state = [], action) {
   const teams = clone(state)
 
-  function updateOne() {
-    const index = findIndex(teams, { id: action.team.id })
-    if (index !== -1) {
-      teams[index] = { ...teams[index], ...action.team }
-    } else {
+  function getTeam() {
+    return find(teams, { id: action.team.id })
+  }
+  function getTeamIndex() {
+    return findIndex(teams, { id: action.team.id })
+  }
+
+  function addTeam() {
+    if (!getTeam()) {
       teams.push(action.team)
     }
+    return teams
+  }
 
+  function updateOne() {
+    const index = getTeamIndex()
+    teams[index] = { ...teams[index], ...action.update }
     return teams
   }
 
   switch (action.type) {
     case CREATE_TEAM_SUCCESS:
+      return addTeam()
     case UPDATE_TEAM_SUCCESS:
       return updateOne()
     case GET_TEAMS_SUCCESS:
