@@ -81,11 +81,16 @@ This endpoint allows you to retrieve a file's signed URL that can be used to dow
 
 #### Request
 
-`GET /api/file/{fileId}`
+`GET /api/files/{fragmentId}/{fileId}`
 
-| URI Parameter | Requiered | Requirements | Description        |
-| ------------- | --------- | ------------ | ------------------ |
-| fileId        | Yes       | String       | The ID of the file |
+| URI Parameter | Requiered | Requirements | Description            |
+| ------------- | --------- | ------------ | ---------------------- |
+| fragmentId    | Yes       | String       | The ID of the fragment |
+| fileId        | Yes       | String       | The ID of the file     |
+
+| Query Parameter | Requiered | Requirements | Description                            |
+| --------------- | --------- | ------------ | -------------------------------------- |
+| download        | No        | Boolean      | Get the file data blob if set to true. |
 
 #### Response
 
@@ -93,6 +98,31 @@ This endpoint allows you to retrieve a file's signed URL that can be used to dow
 HTTP/1.1 200
 {
 	"signedUrl": "aws-url"
+}
+```
+
+## Retrieve files as zip [GET]
+
+This endpoint allows you to retrieve a fragment's files as a zip archive.
+
+#### Request
+
+`GET /api/files/{fragmentId}`
+
+| URI Parameter | Requiered | Requirements | Description            |
+| ------------- | --------- | ------------ | ---------------------- |
+| fragmentId    | Yes       | String       | The ID of the fragment |
+
+| Query Parameter | Requiered | Requirements  | Description                                                                                    |
+| --------------- | --------- | ------------- | ---------------------------------------------------------------------------------------------- |
+| fileTypes       | No        | Array(String) | Specify which file types to be included in the zip. All file types will be included if omitted |
+
+#### Response
+
+```json
+HTTP/1.1 200
+{
+	"dataBlob"
 }
 ```
 

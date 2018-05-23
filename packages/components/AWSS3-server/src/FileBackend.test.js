@@ -136,7 +136,6 @@ describe('Zip files endpoint', () => {
     expect(mocks.attachment.mock.calls).toHaveLength(0)
     expect(mocks.append.mock.calls).toHaveLength(0)
     expect(mocks.pipe.mock.calls).toHaveLength(0)
-
     const responseData = JSON.parse(response._getData())
 
     expect(responseData.message).toEqual(
