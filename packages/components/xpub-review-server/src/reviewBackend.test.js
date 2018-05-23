@@ -124,6 +124,7 @@ describe('/api/make-invitation route', () => {
         },
       ],
     })
+    console.log(response) // eslint-disable-line no-console
     expect(response.body.version.reviewers).toBeDefined()
     expect(transport.send).toHaveBeenCalledWith(
       expect.objectContaining({
