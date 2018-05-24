@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="6.2.2"></a>
+  <a name="6.3.0"></a>
+# [6.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.2...pubsweet-components@6.3.0) (2018-05-24)
+
+
+### Bug Fixes
+
+* **aws-s3:** add end when sending 204 ([5a72d40](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5a72d40))
+* **aws-s3:** handle case when no files were found ([36241c2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/36241c2))
+
+
+### Features
+
+* **aws-s3:** file download and select zip file types ([e4a876f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4a876f))
+
+
+
+
+  <a name="6.2.2"></a>
 ## [6.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.1...pubsweet-components@6.2.2) (2018-05-21)
 
 
@@ -14,7 +31,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="6.2.1"></a>
+<a name="6.2.1"></a>
 ## [6.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.0...pubsweet-components@6.2.1) (2018-05-18)
 
 
