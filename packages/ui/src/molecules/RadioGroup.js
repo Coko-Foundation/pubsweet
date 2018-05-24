@@ -22,7 +22,7 @@ class RadioGroup extends React.Component {
     const { value } = this.state
 
     return (
-      <Flexbox inline={!inline}>
+      <Flexbox column={!inline}>
         {options.map(option => (
           <Radio
             checked={option.value === value}
