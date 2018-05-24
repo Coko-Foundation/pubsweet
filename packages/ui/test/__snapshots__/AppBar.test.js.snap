@@ -10,6 +10,7 @@ exports[`AppBar Basic display 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
@@ -141,19 +142,20 @@ exports[`AppBar With admin user 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
 
 .c7:focus,
 .c7:hover {
-  background-color: #a1a1a1;
+  background-color: hsl(0,0%,35.1%);
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
 
 .c7:active {
-  background-color: '#737373';
+  background-color: hsl(0,0%,25.1%);
 }
 
 .c7[disabled] {
@@ -185,6 +187,7 @@ exports[`AppBar With admin user 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
@@ -352,6 +355,7 @@ exports[`AppBar With custom brand and login links 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
@@ -458,6 +462,7 @@ exports[`AppBar With custom right component 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
@@ -540,6 +545,7 @@ exports[`AppBar With nav links 1`] = `
   font-weight: normal;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-transform: none;
   -webkit-transition: 1s ease;
   transition: 1s ease;
 }
