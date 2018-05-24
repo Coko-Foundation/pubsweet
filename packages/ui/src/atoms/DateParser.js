@@ -1,5 +1,6 @@
 import moment from 'moment'
-import { compose, withProps, withHandlers } from 'recompose'
+import propTypes from 'prop-types'
+import { compose, withProps, withHandlers, setDisplayName } from 'recompose'
 
 const getDuration = timestamp => {
   const today = moment()
@@ -7,9 +8,10 @@ const getDuration = timestamp => {
   return moment.duration(today.diff(stamp))
 }
 
-const Date = ({ children, timestamp, daysAgo }) => children(timestamp, daysAgo)
+const D = ({ children, timestamp, daysAgo }) => children(timestamp, daysAgo)
 
-export default compose(
+const DateParser = compose(
+  setDisplayName('DateParser'),
   withHandlers({
     renderTimestamp: ({ timestamp, dateFormat = 'DD.MM.YYYY' }) => () => {
       if (!timestamp) return ''
@@ -30,4 +32,14 @@ export default compose(
     daysAgo: renderDaysAgo(),
     timestamp: renderTimestamp(),
   })),
-)(Date)
+)(D)
+
+export default DateParser
+
+DateParser.propTypes = {
+  /** The date string. Can be any date parsable by momentjs. */
+  timestamp: propTypes.oneOf([propTypes.string, propTypes.instanceOf(Date)])
+    .isRequired,
+  /** Format of the rendered date. */
+  dateFormat: propTypes.string,
+}
