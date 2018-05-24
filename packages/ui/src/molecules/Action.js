@@ -23,6 +23,7 @@ const common = css`
   font-size: ${th('fontSizeBase')};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
   text-decoration: none;
+  text-transform: none;
   transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
 
   &:hover,

@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "color": "^3.0.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.4",
+    "styled-components": "^3.2.5"
   },
   "author": "Yannis Barlas",
   "license": "MIT"

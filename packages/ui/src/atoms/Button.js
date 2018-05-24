@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { darken, th } from '@pubsweet/ui-toolkit'
+import { darken, override, th } from '@pubsweet/ui-toolkit'
 
 const primary = css`
   background: ${th('colorPrimary')};
@@ -58,8 +58,7 @@ const StyledButton = styled.button.attrs({
   }
 
   ${props => props.primary && primary};
-  ${th('cssOverrides.Button')};
-  ${th('cssOverrides.Button.Root')};
+  ${override('Button')};
 `
 
 export default StyledButton
