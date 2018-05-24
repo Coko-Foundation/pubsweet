@@ -4,20 +4,34 @@ process.env.NODE_CONFIG = '{"mailer":{"from":"sender@example.com"}}'
 const express = require('express')
 const supertest = require('supertest')
 const bodyParser = require('body-parser')
-
+// let team = require('pubsweet-server/src/models/Team')
 // mocks
 jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
 
-jest.mock('pubsweet-server/src/models/Team', () => ({
+// team = jest.fn()
+
+// team.mockImplementation({
+//   id: '08888b14-8b64-420d-898f-b2bdd9fbd57c',
+//   members: ['9555530a-ca92-4e74-a48c-b21ccc109ca8'],
+//   save: () => {},
+// })
+
+jest.mock('pubsweet-server/src/models/Team', () => () => ({
+  find: jest.fn(() => ({
+    id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+    email: 'author@example.org',
+    save: () => {},
+  })),
   save: () => {},
 }))
 
 jest.mock('pubsweet-server/src/models/User', () => ({
   find: jest.fn(() => ({
     id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
-    teams: [],
+    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
     email: 'author@example.org',
     save: () => {},
   })),

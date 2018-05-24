@@ -13,6 +13,7 @@ const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationErro
 const authBearer = passport.authenticate('bearer', { session: false })
 
 module.exports = app => {
+  let test = ''
   app.patch('/api/make-invitation', authBearer, async (req, res, next) => {
     try {
       const version = await Fragment.find(req.body.versionId)
@@ -71,7 +72,7 @@ module.exports = app => {
         members: [reviewer[0].id],
       })
 
-      await team.save()
+      test = await team.save() // eslint-disable-line no-unused-vars
 
       res.send({
         version: canViewVersion.filter
@@ -82,6 +83,7 @@ module.exports = app => {
           : project,
       })
     } catch (err) {
+      err.test = test
       next(err)
     }
   })
