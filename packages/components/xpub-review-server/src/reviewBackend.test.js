@@ -4,19 +4,11 @@ process.env.NODE_CONFIG = '{"mailer":{"from":"sender@example.com"}}'
 const express = require('express')
 const supertest = require('supertest')
 const bodyParser = require('body-parser')
-// let team = require('pubsweet-server/src/models/Team')
+
 // mocks
 jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
-
-// team = jest.fn()
-
-// team.mockImplementation({
-//   id: '08888b14-8b64-420d-898f-b2bdd9fbd57c',
-//   members: ['9555530a-ca92-4e74-a48c-b21ccc109ca8'],
-//   save: () => {},
-// })
 
 jest.mock('pubsweet-server/src/models/Team', () => () => ({
   find: jest.fn(() => ({
@@ -142,7 +134,7 @@ describe('/api/make-invitation route', () => {
         },
       ],
     })
-    console.log(response) // eslint-disable-line no-console
+
     expect(response.body.version.reviewers).toBeDefined()
     expect(transport.send).toHaveBeenCalledWith(
       expect.objectContaining({
