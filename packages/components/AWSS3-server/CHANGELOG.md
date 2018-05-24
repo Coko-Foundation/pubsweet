@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.0.4...@pubsweet/component-aws-s3@1.1.0) (2018-05-24)
+
+
+### Bug Fixes
+
+* **aws-s3:** add end when sending 204 ([5a72d40](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5a72d40))
+* **aws-s3:** handle case when no files were found ([36241c2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/36241c2))
+
+
+### Features
+
+* **aws-s3:** file download and select zip file types ([e4a876f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4a876f))
+
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.0.3...@pubsweet/component-aws-s3@1.0.4) (2018-04-24)
 
