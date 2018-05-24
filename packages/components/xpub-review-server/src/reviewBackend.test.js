@@ -10,6 +10,10 @@ jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
 
+jest.mock('pubsweet-server/src/models/Team', () => ({
+  save: () => {},
+}))
+
 jest.mock('pubsweet-server/src/models/User', () => ({
   find: jest.fn(() => ({
     id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',

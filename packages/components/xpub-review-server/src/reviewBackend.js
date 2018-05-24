@@ -6,7 +6,7 @@ const emailer = require('@pubsweet/component-send-email')
 const User = require('pubsweet-server/src/models/User')
 const Fragment = require('pubsweet-server/src/models/Fragment')
 const Collection = require('pubsweet-server/src/models/Collection')
-// const Team = require('pubsweet-server/src/models/Team')
+const Team = require('pubsweet-server/src/models/Team')
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
 
@@ -61,17 +61,17 @@ module.exports = app => {
       const canPatchProject = await authsome.can(req.user, 'PATCH', project)
       if (!canPatchProject || !canViewProject) throw new AuthorizationError()
 
-      // const team = new Team({
-      //   teamType: 'reviewer',
-      //   name: 'Reviewer',
-      //   object: {
-      //     type: 'fragment',
-      //     id: version.id,
-      //   },
-      //   members: [reviewer[0].id],
-      // })
+      const team = new Team({
+        teamType: 'reviewer',
+        name: 'Reviewer',
+        object: {
+          type: 'fragment',
+          id: version.id,
+        },
+        members: [reviewer[0].id],
+      })
 
-      // await team.save()
+      await team.save()
 
       res.send({
         version: canViewVersion.filter
