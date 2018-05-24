@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import MenuButton from './MenuButton'
 
 const Wrapper = styled.div`

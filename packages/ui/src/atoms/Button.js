@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const primary = css`
   background: ${th('colorPrimary')};

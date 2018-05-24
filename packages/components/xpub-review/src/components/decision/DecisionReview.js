@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { compose, withState, withHandlers } from 'recompose'
 import { withJournal } from 'xpub-journal'
-import { Button, th } from '@pubsweet/ui'
+import { Button } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import Review from '../review/Review'
 
 const ToggleReview = ({ open, toggle }) => (

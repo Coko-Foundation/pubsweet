@@ -3,7 +3,8 @@ import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import styled from 'styled-components'
-import { TextField, Button, th } from '@pubsweet/ui'
+import { TextField, Button } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import * as api from 'pubsweet-client/src/helpers/api'
 
 const Root = styled.div`

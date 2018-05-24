@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled, { keyframes, withTheme } from 'styled-components'
 import Dropzone from 'react-dropzone'
-import { Icon, th } from '@pubsweet/ui'
+import { Icon } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 const StyledDropzone = styled(Dropzone)`
   border: none;

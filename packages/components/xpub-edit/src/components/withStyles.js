@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 const contentStyles = css`
   hr {

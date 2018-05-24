@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { th } from '@pubsweet/ui-toolkit'
 
-import th from '../helpers/themeHelper'
 import { Icon } from '../atoms'
 import Action from './Action'
 

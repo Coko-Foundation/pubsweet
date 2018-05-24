@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, PlainButton, th } from '@pubsweet/ui'
+import { Button, PlainButton } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import { Heading1 } from '../styles'
 
 const Wrapper = styled.div`

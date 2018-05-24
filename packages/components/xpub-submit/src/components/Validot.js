@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 // TODO: use the parent validots node instead of document
 // TODO: highlight the scrolled-to element

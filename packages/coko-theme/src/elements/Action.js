@@ -1,6 +1,5 @@
 import { css } from 'styled-components'
-
-const th = name => props => props.theme[name]
+import { th } from '@pubsweet/ui-toolkit'
 
 const underlineFade = css`
   &:before {

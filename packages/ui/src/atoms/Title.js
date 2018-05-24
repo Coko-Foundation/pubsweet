@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const fontSize = ({ theme, level = 1 }) =>
   ({

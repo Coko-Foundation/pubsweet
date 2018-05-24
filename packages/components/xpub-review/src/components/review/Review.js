@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NoteViewer } from 'xpub-edit'
-import { Attachment, th } from '@pubsweet/ui'
+import { Attachment } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 const Heading = styled.div``
 const Note = styled.div`

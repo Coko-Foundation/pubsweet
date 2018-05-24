@@ -1,0 +1,19 @@
+{
+  "name": "@pubsweet/ui-toolkit",
+  "version": "0.0.0",
+  "description": "Helper functions and reusable blocks for use with @pubsweet/ui",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pubsweet",
+    "ui"
+  ],
+  "author": "Yannis Barlas",
+  "license": "MIT"
+}

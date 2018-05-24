@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { th } from '@pubsweet/ui-toolkit'
 
 import Action from './Action'
-
-import th from '../helpers/themeHelper'
 
 const Group = styled.div`
   ${th('cssOverrides.ActionGroup')};

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th, Tabs } from '@pubsweet/ui'
+import { Tabs } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import moment from 'moment'
 import CurrentVersion from './CurrentVersion'
 import DecisionReviewColumn from './DecisionReviewColumn'
