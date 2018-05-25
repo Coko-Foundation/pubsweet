@@ -20,6 +20,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "invariant": "^2.2.3",
     "lodash": "^4.17.4",
+    "moment": "^2.22.1",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
