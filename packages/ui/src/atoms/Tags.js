@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import styled from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 // TODO: separate tags when pasted
 // TODO: allow tags to be edited

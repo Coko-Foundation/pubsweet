@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const checking = keyframes`
   0% {

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import th from '../helpers/themeHelper'
+import { darken, override, th } from '@pubsweet/ui-toolkit'
 
 const primary = css`
   background: ${th('colorPrimary')};
@@ -7,13 +7,11 @@ const primary = css`
 
   &:focus,
   &:hover {
-    // DARKEN 30
-    background-color: #16415d;
+    background-color: ${darken('colorPrimary', 30)};
   }
 
   &:active {
-    // DARKEN 50
-    background-color: #102e43;
+    background-color: ${darken('colorPrimary', 0.5)};
   }
 
   &[disabled] {
@@ -40,14 +38,12 @@ const StyledButton = styled.button.attrs({
 
   &:focus,
   &:hover {
-    // DARKEN 30
-    background-color: #a1a1a1;
+    background-color: ${darken('colorSecondary', 0.3)};
     transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
   }
 
   &:active {
-    // DARKEN 50
-    background-color: '#737373';
+    background-color: ${darken('colorSecondary', 0.5)};
   }
 
   &[disabled] {
@@ -62,8 +58,7 @@ const StyledButton = styled.button.attrs({
   }
 
   ${props => props.primary && primary};
-  ${th('cssOverrides.Button')};
-  ${th('cssOverrides.Button.Root')};
+  ${override('Button')};
 `
 
 export default StyledButton

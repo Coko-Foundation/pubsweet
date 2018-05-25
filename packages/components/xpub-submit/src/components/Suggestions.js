@@ -1,7 +1,8 @@
 import React from 'react'
 import { branch, renderComponent } from 'recompose'
 import { FormSection } from 'redux-form'
-import { TextField, ValidatedField, th } from '@pubsweet/ui'
+import { TextField, ValidatedField } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import { join, split } from 'xpub-validators'
 import { Section, Legend } from '../styles'
 

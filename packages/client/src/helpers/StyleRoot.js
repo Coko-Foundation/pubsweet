@@ -1,6 +1,6 @@
 import styled, { injectGlobal } from 'styled-components'
 import styledNormalize from 'styled-normalize'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 const injectGlobalStyles = () => injectGlobal`
   ${styledNormalize}

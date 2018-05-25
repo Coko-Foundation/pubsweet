@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import Editor from './Editor'
 
 const StyledEditor = styled(Editor).attrs({

@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "@pubsweet/ui": "^4.1.3",
+    "@pubsweet/ui-toolkit": "^0.0.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

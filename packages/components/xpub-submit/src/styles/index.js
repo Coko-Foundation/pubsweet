@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 export const Heading1 = styled.h1`
   margin: 0 0 ${th('gridUnit')};

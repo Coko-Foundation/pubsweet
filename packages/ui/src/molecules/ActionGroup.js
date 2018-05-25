@@ -1,19 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
+import { override, th } from '@pubsweet/ui-toolkit'
 
 import Action from './Action'
 
-import th from '../helpers/themeHelper'
-
 const Group = styled.div`
-  ${th('cssOverrides.ActionGroup')};
-  ${th('cssOverrides.ActionGroup.Root')};
+  ${override('ActionGroup')};
 `
 
 const ActionWrapper = styled.div`
   display: inline-block;
   padding: 0 ${th('subGridUnit')};
-  ${th('cssOverrides.ActionGroup.ActionWrapper')};
+
+  ${override('ActionGroup.ActionWrapper')};
 `
 
 const ActionGroup = props => {

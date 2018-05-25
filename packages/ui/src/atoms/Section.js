@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const Section = styled.div`
   margin: 0 ${th('gridUnit')} ${th('gridUnit')} 0;

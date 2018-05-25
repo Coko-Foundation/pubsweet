@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { override, th } from '@pubsweet/ui-toolkit'
 
-import th from '../helpers/themeHelper'
 import { Icon } from '../atoms'
 import Action from './Action'
 
@@ -13,8 +13,7 @@ const Root = styled.nav`
   justify-content: space-between;
   min-height: calc(${th('gridUnit')} * 2);
 
-  ${th('cssOverrides.AppBar')};
-  ${th('cssOverrides.AppBar.Root')};
+  ${override('AppBar')};
 `
 
 const Section = styled.div`
@@ -26,7 +25,7 @@ const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
 
-  ${th('cssOverrides.AppBar.Logo')};
+  ${override('AppBar.Logo')};
 `
 
 const LogoLink = styled(Action)`
@@ -34,7 +33,7 @@ const LogoLink = styled(Action)`
     height: calc(${th('gridUnit')} * 2);
   }
 
-  ${th('cssOverrides.AppBar.LogoLink')};
+  ${override('AppBar.LogoLink')};
 `
 
 const Item = styled.span`

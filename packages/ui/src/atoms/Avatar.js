@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import th from '../helpers/themeHelper'
+
+import { th } from '@pubsweet/ui-toolkit'
 
 const statusColor = props =>
   ({

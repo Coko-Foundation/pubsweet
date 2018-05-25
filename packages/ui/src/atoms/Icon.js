@@ -3,8 +3,8 @@ import _ from 'lodash'
 import * as icons from 'react-feather'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { th } from '@pubsweet/ui-toolkit'
 import { Colorize } from '../atoms'
-import th from '../helpers/themeHelper'
 
 const Container = styled.span`
   display: inline-flex;

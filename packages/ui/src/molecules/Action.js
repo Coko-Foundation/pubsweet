@@ -12,11 +12,10 @@
 
 import React from 'react'
 import { css } from 'styled-components'
+import { th } from '@pubsweet/ui-toolkit'
 
 import OriginalButton from '../atoms/Button'
 import OriginalLink from '../atoms/Link'
-
-import th from '../helpers/themeHelper'
 
 const common = css`
   color: ${th('colorPrimary')};
@@ -24,6 +23,7 @@ const common = css`
   font-size: ${th('fontSizeBase')};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
   text-decoration: none;
+  text-transform: none;
   transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};
 
   &:hover,

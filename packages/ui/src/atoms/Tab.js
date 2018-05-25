@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const Tab = styled.div`
   padding: ${th('subGridUnit')} 1em;

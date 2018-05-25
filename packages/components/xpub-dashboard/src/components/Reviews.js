@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { compose, withProps } from 'recompose'
 import { groupBy } from 'lodash'
 import { withJournal } from 'xpub-journal'
-import { Badge, th } from '@pubsweet/ui'
+import { Badge } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: inline-flex;

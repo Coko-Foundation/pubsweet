@@ -2,7 +2,7 @@ import React from 'react'
 import { compose, withHandlers } from 'recompose'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 // TODO: pass ...props.input to children automatically?
 

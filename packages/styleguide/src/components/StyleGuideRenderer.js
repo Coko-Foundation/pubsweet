@@ -1,7 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, Menu, th } from '@pubsweet/ui'
+import { Button, Menu } from '@pubsweet/ui'
+import { th } from '@pubsweet/ui-toolkit'
 import StyleRoot, {
   injectGlobalStyles,
 } from 'pubsweet-client/src/helpers/StyleRoot'

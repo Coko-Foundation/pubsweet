@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import React from 'react'
-import th from '../helpers/themeHelper'
+import { th } from '@pubsweet/ui-toolkit'
 
 const disabled = css`
   color: ${th('colorSecondary')};
