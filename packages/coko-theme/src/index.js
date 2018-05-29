@@ -4,7 +4,14 @@ import 'typeface-vollkorn'
 
 import { headingScale } from '@pubsweet/ui-toolkit'
 
-import { Action, ActionGroup, AppBar, Button, TextField } from './elements'
+import {
+  Action,
+  ActionGroup,
+  AppBar,
+  Button,
+  Heading,
+  TextField,
+} from './elements'
 
 const fontSizeBase = 16
 const scale = 1.2
@@ -68,10 +75,9 @@ const cokoTheme = {
     ActionGroup,
     AppBar,
     Button,
+    Heading,
     TextField,
   },
 }
-
-// console.log(cokoTheme)
 
 export default cokoTheme
