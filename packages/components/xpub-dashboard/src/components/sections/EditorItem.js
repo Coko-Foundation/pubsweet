@@ -50,6 +50,11 @@ const EditorItemLinks = ({ project, version }) => (
   </Links>
 )
 
+const getDeclarationsObject = (version, value) => {
+  const declarations = version.declarations || {}
+  return declarations[value] || 'no'
+}
+
 const EditorItem = ({ project, version }) => (
   <Authorize object={[project]} operation="can view my manuscripts section">
     <Item>
@@ -57,7 +62,10 @@ const EditorItem = ({ project, version }) => (
         <Status status={project.status} />
         <Meta>
           <MetadataStreamLined
-            streamlinedReview={version.declarations.streamlinedReview}
+            streamlinedReview={getDeclarationsObject(
+              version,
+              'streamlinedReview',
+            )}
           />
           <MetadataOwners owners={project.owners} />
           <Divider separator="–" />
@@ -68,7 +76,7 @@ const EditorItem = ({ project, version }) => (
           <MetadataSections sections={version.metadata.articleSection} />
           <Divider separator="–" />
           <MetadataReviewType
-            openPeerReview={version.declarations.openPeerReview}
+            openPeerReview={getDeclarationsObject(version, 'openPeerReview')}
           />
         </Meta>
       </Header>
