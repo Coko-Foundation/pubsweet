@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -73,7 +74,12 @@ const ConnectPage = requirements => WrappedComponent => {
 
       if (!complete) return <LoadingMessage />
 
-      return <WrappedComponent {...this.props} />
+      const checkObject = this.props.match
+      return (
+        <Authorize object={checkObject} operation="can view page">
+          <WrappedComponent {...this.props} />
+        </Authorize>
+      )
     }
   }
 
