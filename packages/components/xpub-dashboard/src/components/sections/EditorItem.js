@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
-import { Item, Header, Body, Divider } from '../molecules/Item'
+import { Item, Header, Body } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 
 import Status from '../Status'
@@ -55,6 +55,11 @@ const getDeclarationsObject = (version, value) => {
   return declarations[value] || 'no'
 }
 
+const getMetadataObject = (version, value) => {
+  const metadata = version.metadata || {}
+  return metadata[value] || []
+}
+
 const EditorItem = ({ project, version }) => (
   <Authorize object={[project]} operation="can view my manuscripts section">
     <Item>
@@ -68,13 +73,11 @@ const EditorItem = ({ project, version }) => (
             )}
           />
           <MetadataOwners owners={project.owners} />
-          <Divider separator="–" />
           <MetadataSubmittedDate submitted={version.submitted} />
-          <Divider separator="–" />
-          <MetadataType type={version.metadata.articleType} />
-          <Divider separator="–" />
-          <MetadataSections sections={version.metadata.articleSection} />
-          <Divider separator="–" />
+          <MetadataType type={getMetadataObject(version, 'articleType')} />
+          <MetadataSections
+            sections={getMetadataObject(version, 'articleSection')}
+          />
           <MetadataReviewType
             openPeerReview={getDeclarationsObject(version, 'openPeerReview')}
           />
