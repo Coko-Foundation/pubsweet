@@ -1,5 +1,4 @@
 import React from 'react'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 
 import UploadManuscript from './UploadManuscript'
@@ -28,21 +27,16 @@ const Dashboard = ({
       />
     </UploadContainer>
 
-    {!dashboard.owner.length &&
-      !dashboard.reviewer.length &&
-      !dashboard.editor.length && (
-        <UploadContainer>
-          Nothing to do at the moment. Please upload a document.
-        </UploadContainer>
-      )}
+    {!dashboard.length && (
+      <UploadContainer>
+        Nothing to do at the moment. Please upload a document.
+      </UploadContainer>
+    )}
 
-    <Authorize
-      object={dashboard.owner}
-      operation="can view my submission section"
-    >
+    {dashboard.length > 0 && (
       <Section>
         <Heading>My Submissions</Heading>
-        {dashboard.owner.map(project => (
+        {dashboard.map(project => (
           <OwnerItemWithVersion
             deleteProject={() =>
               // eslint-disable-next-line no-alert
@@ -55,12 +49,12 @@ const Dashboard = ({
           />
         ))}
       </Section>
-    </Authorize>
+    )}
 
-    <Authorize object={dashboard.reviewer} operation="can view review section">
+    {dashboard.length > 0 && (
       <Section>
         <Heading>To review</Heading>
-        {dashboard.reviewer.map(project => (
+        {dashboard.map(project => (
           <ReviewerItemWithVersion
             currentUser={currentUser}
             key={project.id}
@@ -69,21 +63,16 @@ const Dashboard = ({
           />
         ))}
       </Section>
-    </Authorize>
+    )}
 
-    <Authorize
-      object={dashboard.editor}
-      operation="can view my manuscripts section"
-    >
-      {dashboard.editor.length > 0 && (
-        <Section>
-          <Heading>My Manuscripts</Heading>
-          {dashboard.editor.map(project => (
-            <EditorItemWithVersion key={project.id} project={project} />
-          ))}
-        </Section>
-      )}
-    </Authorize>
+    {dashboard.length > 0 && (
+      <Section>
+        <Heading>My Manuscripts</Heading>
+        {dashboard.map(project => (
+          <EditorItemWithVersion key={project.id} project={project} />
+        ))}
+      </Section>
+    )}
   </Page>
 )
 
