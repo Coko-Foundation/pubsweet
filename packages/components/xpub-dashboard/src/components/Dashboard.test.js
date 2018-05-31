@@ -38,15 +38,6 @@ describe('Dashboard', () => {
       props,
     )
 
-    props.dashboard = Object.assign(
-      {
-        owner: [],
-        reviewer: [],
-        editor: [],
-      },
-      props.dashboard,
-    )
-
     return shallow(<Dashboard {...props} />)
   }
 
@@ -61,7 +52,7 @@ describe('Dashboard', () => {
   it('shows a list of projects submitted by the current user', () => {
     const project = { id: 1 }
     const dashboard = makeWrapper({
-      dashboard: { owner: [project] },
+      dashboard: [project],
     })
     expect(dashboard.find('.empty')).toHaveLength(0)
     const section = dashboard.find(OwnerItem)
@@ -72,7 +63,7 @@ describe('Dashboard', () => {
   it('shows a list of projects to be reviewed', () => {
     const project = { id: 1 }
     const dashboard = makeWrapper({
-      dashboard: { reviewer: [project] },
+      dashboard: [project],
     })
 
     expect(dashboard.find(UploadContainer)).toHaveLength(1)
@@ -84,7 +75,7 @@ describe('Dashboard', () => {
   it('shows a list of projects of which the current user is the editor', () => {
     const project = { id: 1 }
     const dashboard = makeWrapper({
-      dashboard: { editor: [project] },
+      dashboard: [project],
     })
 
     expect(dashboard.find(UploadContainer)).toHaveLength(1)
