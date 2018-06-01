@@ -7,9 +7,9 @@ module.exports = app => {
     config.get('pubsweet.components').forEach(name => {
       const component = requireRelative(name)
       logger.info('Registered component', name)
-      const backendComponent = component.server || component.backend
-      if (backendComponent) {
-        backendComponent()(app)
+      const serverComponent = component.server || component.backend
+      if (serverComponent) {
+        serverComponent()(app)
         logger.info('Registered server component', name)
       }
     })
