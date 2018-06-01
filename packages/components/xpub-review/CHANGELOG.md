@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.4.2...pubsweet-component-xpub-review@1.0.0) (2018-06-01)
+
+
+### Features
+
+* **ui:** start ui-toolkit module ([2083b9c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2083b9c))
+
+
+### BREAKING CHANGES
+
+* **ui:** th now comes from the toolkit, so all th imports from ui are now broken
+
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@0.4.1...pubsweet-component-xpub-review@0.4.2) (2018-05-21)
 

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@1.2.2...pubsweet-component-xpub-submit@2.0.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **components:** submit button show ([2635368](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2635368))
+
+
+### Features
+
+* **ui:** start ui-toolkit module ([2083b9c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2083b9c))
+
+
+### BREAKING CHANGES
+
+* **ui:** th now comes from the toolkit, so all th imports from ui are now broken
+
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@1.2.1...pubsweet-component-xpub-submit@1.2.2) (2018-05-21)
 
