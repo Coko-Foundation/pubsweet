@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="7.1.0"></a>
+      <a name="7.1.1"></a>
+## [7.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.0...pubsweet-server@7.1.1) (2018-06-01)
+
+
+### Bug Fixes
+
+* **styleguide:** add and use simple authsome mode in styleguide ([e2e0e85](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e2e0e85))
+
+
+
+
+      <a name="7.1.0"></a>
 # [7.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.0.1...pubsweet-server@7.1.0) (2018-05-18)
 
 
@@ -19,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="7.0.1"></a>
+<a name="7.0.1"></a>
 ## [7.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.0.0...pubsweet-server@7.0.1) (2018-05-03)
 
 
