@@ -1,3 +1,3 @@
 module.exports = {
-  backend: () => require('./reviewBackend.js'),
+  server: () => require('./reviewBackend.js'),
 }

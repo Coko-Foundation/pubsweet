@@ -1,5 +1,5 @@
 require('dotenv').config()
 
 module.exports = {
-  backend: () => app => require('./src/FileBackend')(app),
+  server: () => app => require('./src/FileBackend')(app),
 }

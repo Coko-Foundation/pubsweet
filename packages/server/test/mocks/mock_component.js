@@ -1,7 +1,7 @@
 const STATUS = require('http-status-codes')
 
 const mockComponent = {
-  backend: () => app => {
+  server: () => app => {
     app.use('/mock-component', (req, res, next) =>
       res.status(STATUS.OK).json({ ok: '!' }),
     )
