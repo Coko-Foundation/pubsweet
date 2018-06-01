@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 
 import UploadManuscript from './UploadManuscript'
@@ -28,54 +28,57 @@ const Dashboard = ({
       />
     </UploadContainer>
 
-    {!dashboard.owner.length &&
-      !dashboard.reviewer.length &&
-      !dashboard.editor.length && (
-        <UploadContainer>
-          Nothing to do at the moment. Please upload a document.
-        </UploadContainer>
+    {!dashboard.length && (
+      <UploadContainer>
+        Nothing to do at the moment. Please upload a document.
+      </UploadContainer>
+    )}
+    <Authorize object={dashboard} operation="can view my submission section">
+      {dashboard.length > 0 && (
+        <Section>
+          <Heading>My Submissions</Heading>
+          {dashboard.map(project => (
+            <OwnerItemWithVersion
+              deleteProject={() =>
+                // eslint-disable-next-line no-alert
+                window.confirm(
+                  'Are you sure you want to delete this submission?',
+                ) && deleteProject(project)
+              }
+              key={project.id}
+              project={project}
+            />
+          ))}
+        </Section>
       )}
+    </Authorize>
 
-    {!!dashboard.owner.length && (
-      <Section>
-        <Heading>My Submissions</Heading>
-        {dashboard.owner.map(project => (
-          <OwnerItemWithVersion
-            deleteProject={() =>
-              // eslint-disable-next-line no-alert
-              window.confirm(
-                'Are you sure you want to delete this submission?',
-              ) && deleteProject(project)
-            }
-            key={project.id}
-            project={project}
-          />
-        ))}
-      </Section>
-    )}
+    <Authorize object={dashboard} operation="can view review section">
+      {dashboard.length > 0 && (
+        <Section>
+          <Heading>To review</Heading>
+          {dashboard.map(project => (
+            <ReviewerItemWithVersion
+              currentUser={currentUser}
+              key={project.id}
+              project={project}
+              reviewerResponse={reviewerResponse}
+            />
+          ))}
+        </Section>
+      )}
+    </Authorize>
 
-    {!!dashboard.reviewer.length && (
-      <Section>
-        <Heading>To review</Heading>
-        {dashboard.reviewer.map(project => (
-          <ReviewerItemWithVersion
-            currentUser={currentUser}
-            key={project.id}
-            project={project}
-            reviewerResponse={reviewerResponse}
-          />
-        ))}
-      </Section>
-    )}
-
-    {!!dashboard.editor.length && (
-      <Section>
-        <Heading>My Manuscripts</Heading>
-        {dashboard.editor.map(project => (
-          <EditorItemWithVersion key={project.id} project={project} />
-        ))}
-      </Section>
-    )}
+    <Authorize object={dashboard} operation="can view my manuscripts section">
+      {dashboard.length > 0 && (
+        <Section>
+          <Heading>My Manuscripts</Heading>
+          {dashboard.map(project => (
+            <EditorItemWithVersion key={project.id} project={project} />
+          ))}
+        </Section>
+      )}
+    </Authorize>
   </Page>
 )
 

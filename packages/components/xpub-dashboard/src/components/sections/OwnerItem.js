@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
@@ -33,10 +34,12 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   return (
-    <Item>
-      {itemHeader}
-      {body}
-    </Item>
+    <Authorize object={[project]} operation="can view my submission section">
+      <Item>
+        {itemHeader}
+        {body}
+      </Item>
+    </Authorize>
   )
 }
 

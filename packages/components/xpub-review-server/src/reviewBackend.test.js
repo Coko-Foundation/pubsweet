@@ -9,9 +9,26 @@ const bodyParser = require('body-parser')
 jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
-jest.mock('pubsweet-server/src/models/User', () => ({
-  find: jest.fn(() => ({ email: 'author@example.org' })),
+
+jest.mock('pubsweet-server/src/models/Team', () => () => ({
+  find: jest.fn(() => ({
+    id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+    email: 'author@example.org',
+    save: () => {},
+  })),
+  save: () => {},
 }))
+
+jest.mock('pubsweet-server/src/models/User', () => ({
+  find: jest.fn(() => ({
+    id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+    email: 'author@example.org',
+    save: () => {},
+  })),
+}))
+
 jest.mock('pubsweet-server/src/models/Fragment', () => ({
   find: jest.fn(() => ({
     version: 1,
@@ -26,17 +43,19 @@ jest.mock('pubsweet-server/src/models/Fragment', () => ({
     save: () => {},
   })),
 }))
+
 jest.mock('pubsweet-server/src/models/Collection', () => ({
   find: jest.fn(() => ({
     updateProperties: () => ({}),
     reviewers: [
       {
-        user: 1,
+        user: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
       },
     ],
     save: () => {},
   })),
 }))
+
 jest.mock('pubsweet-server/src/helpers/authsome', () => ({
   can: jest.fn(() => true),
 }))
@@ -104,7 +123,7 @@ describe('/api/make-invitation route', () => {
     const response = await app.patch('/api/make-invitation').send({
       versionId: '1',
       projectId: '2',
-      reviewerId: 1,
+      reviewerId: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
       reviewers: [
         {
           events: {
@@ -134,7 +153,7 @@ describe('/api/make-invitation route', () => {
     const response = await app.patch('/api/make-invitation').send({
       versionId: '1',
       projectId: '2',
-      reviewerId: 1,
+      reviewerId: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
       reviewers: [
         {
           events: {

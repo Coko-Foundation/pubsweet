@@ -25,6 +25,7 @@ module.exports = dir => {
     /@pubsweet\/[^/]+\/src/,
     /styleguide\/src/,
     /ui\/src/,
+    /packages\/client\/src/,
   ]
 
   return {
@@ -130,6 +131,10 @@ module.exports = dir => {
       // mock constants
       new webpack.DefinePlugin({
         PUBSWEET_COMPONENTS: '[]',
+      }),
+      new webpack.ContextReplacementPlugin(/./, __dirname, {
+        [config.authsome.mode]: config.authsome.mode,
+        [config.validations]: config.validations,
       }),
     ],
     resolve: {

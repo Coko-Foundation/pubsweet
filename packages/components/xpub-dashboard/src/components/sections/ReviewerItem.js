@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@pubsweet/ui'
 import { getReviewerFromUser } from 'xpub-selectors'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
@@ -29,53 +30,55 @@ const ReviewerItem = ({
   const status = reviewer && reviewer.status
 
   return (
-    <Item>
-      <Body>
-        <VersionTitle version={version} />
+    <Authorize object={[project]} operation="can view review section">
+      <Item>
+        <Body>
+          <VersionTitle version={version} />
 
-        {(status === 'accepted' || status === 'completed') && (
-          <Links>
-            <LinkContainer>
-              <ProjectLink
-                id={reviewer.id}
-                page="reviews"
-                project={project}
-                version={version}
-              >
-                {reviewer.submitted ? 'Completed' : 'Do Review'}
-              </ProjectLink>
-            </LinkContainer>
-          </Links>
-        )}
+          {(status === 'accepted' || status === 'completed') && (
+            <Links>
+              <LinkContainer>
+                <ProjectLink
+                  id={reviewer.id}
+                  page="reviews"
+                  project={project}
+                  version={version}
+                >
+                  {reviewer.submitted ? 'Completed' : 'Do Review'}
+                </ProjectLink>
+              </LinkContainer>
+            </Links>
+          )}
 
-        {status === 'invited' && (
-          <Actions>
-            <ActionContainer>
-              <Button
-                onClick={() =>
-                  reviewerResponse(project, version, reviewer, 'accepted')
-                }
-              >
-                accept
-              </Button>
-            </ActionContainer>
+          {status === 'invited' && (
+            <Actions>
+              <ActionContainer>
+                <Button
+                  onClick={() =>
+                    reviewerResponse(project, version, reviewer, 'accepted')
+                  }
+                >
+                  accept
+                </Button>
+              </ActionContainer>
 
-            <Divider separator="|" />
+              <Divider separator="|" />
 
-            <ActionContainer>
-              <Button
-                onClick={() =>
-                  reviewerResponse(project, version, reviewer, 'rejected')
-                }
-              >
-                reject
-              </Button>
-            </ActionContainer>
-          </Actions>
-        )}
-        {status === 'rejected' && 'rejected'}
-      </Body>
-    </Item>
+              <ActionContainer>
+                <Button
+                  onClick={() =>
+                    reviewerResponse(project, version, reviewer, 'rejected')
+                  }
+                >
+                  reject
+                </Button>
+              </ActionContainer>
+            </Actions>
+          )}
+          {status === 'rejected' && 'rejected'}
+        </Body>
+      </Item>
+    </Authorize>
   )
 }
 
