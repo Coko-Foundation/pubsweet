@@ -19,6 +19,9 @@
     "lodash": "^4.17.4",
     "styled-components": "^3.2.5"
   },
-  "author": "Yannis Barlas",
-  "license": "MIT"
+  "author": "Adam Hyde",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
