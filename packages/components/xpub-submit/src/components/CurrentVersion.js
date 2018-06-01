@@ -78,7 +78,7 @@ const CurrentVersion = ({
         version={version}
       />
 
-      {!readonly && (
+      {!version.submitted && (
         <div>
           <Button onClick={toggleConfirming} primary type="button">
             Submit your manuscript
