@@ -1,3 +1,3 @@
 module.exports = {
-  backend: () => app => require('./PasswordResetBackend')(app),
+  server: () => app => require('./PasswordResetBackend')(app),
 }

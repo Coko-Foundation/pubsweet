@@ -21,7 +21,7 @@ describe('component actions combiner', () => {
         },
       },
       {
-        backend: "don't care",
+        server: "don't care",
       },
     ]
     const reducers = require('../../src/components/reducers')

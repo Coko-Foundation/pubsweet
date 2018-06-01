@@ -14,7 +14,7 @@ describe('component actions combiner', () => {
         },
       },
       {
-        backend: "don't care",
+        server: "don't care",
       },
     ]
     const actions = require('../../src/components/actions')
