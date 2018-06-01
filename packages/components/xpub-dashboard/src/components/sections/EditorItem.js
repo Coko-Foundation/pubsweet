@@ -1,7 +1,6 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import 'regenerator-runtime/runtime'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Item, Header, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'

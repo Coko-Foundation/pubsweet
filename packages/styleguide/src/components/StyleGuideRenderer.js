@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import 'regenerator-runtime/runtime'
 import styled, { css, ThemeProvider } from 'styled-components'
 import { Button, Menu } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'

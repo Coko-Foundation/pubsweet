@@ -1,5 +1,4 @@
 import React from 'react'
-import 'regenerator-runtime/runtime'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
