@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { th } from '@pubsweet/ui-toolkit'
 
 const ErrorMessage = styled.div`
@@ -76,7 +76,11 @@ const ConnectPage = requirements => WrappedComponent => {
 
       const checkObject = this.props.match
       return (
-        <Authorize object={checkObject} operation="can view page">
+        <Authorize
+          object={checkObject}
+          operation="can view page"
+          unauthorized={() => <Redirect to="/" />}
+        >
           <WrappedComponent {...this.props} />
         </Authorize>
       )
