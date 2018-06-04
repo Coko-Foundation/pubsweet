@@ -8,7 +8,7 @@ const AuthorLayout = ({ author, assignReviewer, project, version }) => (
   <div className={classes.root}>
     <h1 className={classes.title}>
       {author && (
-        <a href={author.url} target="_blank">
+        <a href={author.url} rel="noopener noreferrer" target="_blank">
           {author.name}
         </a>
       )}
