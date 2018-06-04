@@ -260,6 +260,27 @@
     pubsweet-theme-plugin "^0.0.3"
     react-router-redux next
 
+"@pubsweet/styleguide@^1.1.2":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@pubsweet/styleguide/-/styleguide-1.3.4.tgz#48abc2e7595064fd7cb7534de9581a052e9eba09"
+  dependencies:
+    "@pubsweet/default-theme" "^1.0.0"
+    "@pubsweet/elife-theme" "^1.0.1"
+    "@pubsweet/ui" "^4.1.3"
+    faker "^4.1.0"
+    lodash "^4.17.5"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-styleguidist "^7.0.10"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
+    xpub-journal "^0.0.3"
+    xpub-styleguide "^0.0.3"
+
 "@pubsweet/theme@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@pubsweet/theme/-/theme-0.1.3.tgz#2c508abc284a33ce14f1fa0a08486477def259a4"
@@ -273,6 +294,28 @@
 "@pubsweet/ui@^3.0.0":
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-3.3.4.tgz#f4dda1e900268a7c460f01aec40da187518b6363"
+  dependencies:
+    babel-jest "^21.2.0"
+    classnames "^2.2.5"
+    enzyme "^3.2.0"
+    enzyme-adapter-react-16 "^1.1.1"
+    invariant "^2.2.3"
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-feather "^1.0.8"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-tag-autocomplete "^5.5.0"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
+
+"@pubsweet/ui@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-4.1.3.tgz#a8c65aa69618505a1e3777f4d18c3d676b800ee9"
   dependencies:
     babel-jest "^21.2.0"
     classnames "^2.2.5"
@@ -9253,6 +9296,38 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pubsweet-client@^2.1.1:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-client/-/pubsweet-client-2.5.5.tgz#53235a55c2e806d22e572a12cf53da769c0adba2"
+  dependencies:
+    "@pubsweet/ui" "^4.1.3"
+    apollo-client-preset "^1.0.8"
+    apollo-link "^1.2.1"
+    apollo-link-context "^1.0.5"
+    apollo-upload-client "^8.0.0"
+    authsome "^0.1.0"
+    config "^1.21.0"
+    event-source-polyfill "^0.0.10"
+    global "^4.3.1"
+    graphql "^0.13.0"
+    graphql-tag "^2.7.3"
+    isomorphic-fetch "^2.1.1"
+    lint-staged "^6.0.0"
+    lodash "^4.0.0"
+    prop-types "^15.5.8"
+    react "^16.2.0"
+    react-apollo "^2.1.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-router-redux next
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    redux-logger "^3.0.1"
+    redux-thunk "^2.2.0"
+    reselect "^3.0.1"
+    styled-components "^3.2.5"
+    styled-normalize "^3.0.1"
+
 pubsweet-component-form-group@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-1.0.2.tgz#83283bf032af986fcdbf51c06c223db4182534af"
@@ -9261,6 +9336,16 @@ pubsweet-component-form-group@1.0.2:
     prop-types "^15.5.10"
     pubsweet-server "^2.0.0"
     react-bootstrap "^0.32.0"
+
+pubsweet-component-password-reset-frontend@^1.0.1:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-frontend/-/pubsweet-component-password-reset-frontend-1.0.17.tgz#1bf0381740acf2fd6643248a822fdf56bc995a64"
+  dependencies:
+    "@pubsweet/ui" "^4.1.3"
+    prop-types "^15.5.10"
+    query-string "^5.0.0"
+    react-router "^4.2.0"
+    styled-components "^3.2.5"
 
 pubsweet-component-pepper-theme@^0.0.5:
   version "0.0.5"
