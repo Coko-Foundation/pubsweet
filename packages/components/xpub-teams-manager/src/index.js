@@ -1,6 +1,5 @@
 module.exports = {
-  client: {
-    components: [() => require('./TeamsManagerPage')],
+  frontend: {
+    components: [() => require('./components/TeamsManagerPage')],
   },
-  container: require('./TeamsManagerPage'),
 }

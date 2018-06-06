@@ -10,8 +10,7 @@ class Team extends React.Component {
   }
 
   updateMembers(members) {
-    const memberIds = members.map(member => member.value)
-    const team = Object.assign(this.props.team, { members: memberIds })
+    const team = Object.assign(this.props.team, { members })
     this.props.update(team)
   }
 
@@ -30,9 +29,8 @@ class Team extends React.Component {
     return (
       <tr>
         <td>{number}</td>
-        <td>{team.name}</td>
         <td>
-          {team.teamType.name} ({team.teamType.permissions})
+          {team.name} {team.teamType.permissions}
         </td>
         <td>
           {team.object.type} {team.object.id}
@@ -44,7 +42,7 @@ class Team extends React.Component {
             name="members"
             onChange={this.updateMembers}
             options={options}
-            value={team.members.join(',')}
+            value={team.members}
           />
         </td>
         <td>

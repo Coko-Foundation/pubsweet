@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Menu, TextField } from '@pubsweet/ui'
+import { Button, Menu } from '@pubsweet/ui'
 
 export default class TeamCreator extends React.Component {
   constructor(props) {
     super(props)
     this.onSave = this.onSave.bind(this)
-    this.onNameChange = this.onNameChange.bind(this)
     this.onCollectionSelect = this.onCollectionSelect.bind(this)
     this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
 
@@ -18,7 +17,6 @@ export default class TeamCreator extends React.Component {
   onSave(event) {
     event.preventDefault()
 
-    const name = this.state.teamName
     const teamType = this.state.teamTypeSelected
 
     let objectId
@@ -29,10 +27,10 @@ export default class TeamCreator extends React.Component {
       objectType = 'collection'
     }
 
-    if (name && teamType && objectId && objectType) {
+    if (teamType && objectId && objectType) {
       this.props.create({
-        name,
-        teamType: this.props.types[teamType],
+        name: this.props.types[teamType].name,
+        teamType,
         object: {
           id: objectId,
           type: objectType,
@@ -45,10 +43,6 @@ export default class TeamCreator extends React.Component {
         teamTypeSelected: null,
       })
     }
-  }
-
-  onNameChange(event) {
-    this.setState({ teamName: event ? event.target.value : '' })
   }
 
   onCollectionSelect(collectionId) {
@@ -69,20 +63,12 @@ export default class TeamCreator extends React.Component {
 
     types = Object.keys(types).map(type => ({
       value: type,
-      label: `${types[type].name} (${types[type].permissions})`,
+      label: `${types[type].name} ${types[type].permissions}`,
     }))
 
     return (
       <form onSubmit={this.onSave}>
         <h3>Create a new team</h3>
-        <TextField
-          label="Name"
-          name="teamName"
-          onChange={this.onNameChange}
-          placeholder="Team Awesome"
-          required
-          value={this.state.teamName}
-        />
         <h4>Team type</h4>
         <Menu
           name="teamType"

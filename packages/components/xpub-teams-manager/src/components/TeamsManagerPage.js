@@ -25,7 +25,7 @@ export default compose(
       deleteTeam: collection => dispatch(actions.deleteTeam(collection)),
       updateTeam: (project, version, reviewer, status) =>
         dispatch(actions.updateTeam(project, version, reviewer, status)),
-      createTeam: () => dispatch(actions.createTeam),
+      createTeam: team => dispatch(actions.createTeam(team)),
     }),
   ),
   withRouter,
