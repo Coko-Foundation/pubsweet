@@ -1,5 +1,6 @@
 import React from 'react'
 import config from 'config'
+import { Page } from './molecules/Page'
 
 import Team from './Team'
 import TeamCreator from './TeamCreator'
@@ -15,7 +16,7 @@ const TeamsManager = ({
 }) => {
   if (teams && collections && users) {
     return (
-      <div>
+      <Page>
         {error ? <div>{error}</div> : null}
         <div>
           <table>
@@ -48,7 +49,7 @@ const TeamsManager = ({
             types={config.authsome.teams}
           />
         </div>
-      </div>
+      </Page>
     )
   }
   return null
