@@ -50,6 +50,16 @@ const underlineAnimation = css`
   ${underlineFade};
 `
 
+const active = css`
+  font-weight: normal;
+
+  &:before {
+    opacity: 1;
+    visibility: visible;
+  }
+`
+
 export default css`
   ${underlineAnimation};
+  ${props => props.active && active};
 `
