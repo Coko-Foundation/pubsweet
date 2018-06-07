@@ -4,11 +4,23 @@ import 'typeface-vollkorn'
 
 import { headingScale } from '@pubsweet/ui-toolkit'
 
+import { injectGlobal } from 'styled-components'
+
 import { Action, ActionGroup, AppBar, Button, TextField } from './elements'
 
 const fontSizeBase = 16
 const scale = 1.2
 const gridUnit = 24
+
+injectGlobal`
+  body {
+    height: 100vh;
+  }
+
+  #root, #root > div {
+    height: 100%;
+  }
+`
 
 const cokoTheme = {
   /* Colors */
