@@ -18,12 +18,11 @@ const TeamsManager = ({
     return (
       <Page>
         {error ? <div>{error}</div> : null}
-        <div>
+        {teams.length > 0 && (
           <table>
             <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
                 <th>Type</th>
                 <th>Object</th>
                 <th>Members</th>
@@ -43,12 +42,12 @@ const TeamsManager = ({
               ))}
             </tbody>
           </table>
-          <TeamCreator
-            collections={collections}
-            create={createTeam}
-            types={config.authsome.teams}
-          />
-        </div>
+        )}
+        <TeamCreator
+          collections={collections}
+          create={createTeam}
+          types={config.authsome.teams}
+        />
       </Page>
     )
   }
