@@ -43,7 +43,7 @@ const Opener = styled.button.attrs({
   font-family: inherit;
 
   width: 100%;
-  height: calc(${th('gridUnit')} * 6);
+  height: auto;
   padding: 0;
 
   display: flex;
@@ -57,11 +57,17 @@ const Opener = styled.button.attrs({
 `
 
 const Value = styled.span`
+  border-right: ${th('borderWidth')} ${th('borderStyle')}
+    ${th('colorFurniture')};
+
   flex-grow: 1;
-
+  white-space: nowrap;
+  flex-wrap: wrap;
+  display: flex;
   text-align: left;
-  padding: 0 ${th('gridUnit')};
-
+  line-height: calc(${th('gridUnit')} * 2);
+  padding: 0 calc(${th('gridUnit')} / 2);
+  white-space: nowrap;
   &:hover {
     color: ${th('colorPrimary')};
   }
@@ -70,16 +76,15 @@ const Value = styled.span`
 `
 
 const MultipleValue = styled.span`
-  flex-grow: 1;
-
   text-align: left;
-  padding: calc(${th('gridUnit')} / 2);
+  padding: 0 calc(${th('gridUnit')} / 2);
   color: ${th('colorPrimary')};
   background-color: ${th('colorSecondary')};
-  margin-right: calc(${th('gridUnit')} / 4);
+  margin: calc(${th('gridUnit')} / 6);
   button {
     margin-left: calc(${th('gridUnit')} / 2);
     min-width: 0px;
+    padding: calc(${th('gridUnit')} / 2);
   }
 `
 
@@ -91,10 +96,8 @@ const Placeholder = Value.extend`
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
-
-  width: calc(${th('gridUnit')} * 6);
-  height: calc(${th('gridUnit')} * 6 - ${th('borderWidth')} * 2);
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
 
   display: flex;
   align-items: center;
@@ -191,12 +194,13 @@ class Menu extends React.Component {
     })
   }
 
-  removeSelect = value => {
-    const { selected } = this.state
+  removeSelect = (event, value) => {
+    event.stopPropagation()
+    let { selected } = this.state
     const index = selected.indexOf(value)
-    this.setState({
-      selected: [...selected.slice(0, index), ...selected.slice(index + 1)],
-    })
+    selected = [...selected.slice(0, index), ...selected.slice(index + 1)]
+    this.setState({ selected })
+    if (this.props.onChange) this.props.onChange(selected)
   }
 
   handleSelect = ({ selected, open }) => {
@@ -315,12 +319,13 @@ const DefaultOpener = ({
     {selected &&
       !Array.isArray(selected) && <Value>{optionLabel(selected)}</Value>}
     {selected &&
+      selected.length > 0 &&
       Array.isArray(selected) && (
         <Value>
           {selected.map(select => (
             <MultipleValue>
               {optionLabel(select)}
-              <Button onClick={() => removeSelect(select)}>x</Button>
+              <Button onClick={event => removeSelect(event, select)}>x</Button>
             </MultipleValue>
           ))}
         </Value>

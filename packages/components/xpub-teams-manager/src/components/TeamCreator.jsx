@@ -85,7 +85,9 @@ export default class TeamCreator extends React.Component {
           required
           value={this.state.collectionSelected}
         />
-        <Button type="submit">Create</Button>
+        <Button primary type="submit">
+          Create
+        </Button>
       </form>
     )
   }

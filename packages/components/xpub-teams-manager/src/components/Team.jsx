@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { Button, Menu } from '@pubsweet/ui'
+import { TeamTableCell } from './molecules/Table'
+
+const StyledMenu = styled(Menu)`
+  width: 100%;
+`
 
 class Team extends React.Component {
   constructor(props) {
@@ -26,30 +32,28 @@ class Team extends React.Component {
       label: user.username,
     }))
 
-    return (
-      <tr>
-        <td>{number}</td>
-        <td>
-          {team.name} {team.teamType.permissions}
-        </td>
-        <td>
-          {team.object.type} {team.object.id}
-        </td>
-        <td>
-          <Menu
-            inline
-            multi
-            name="members"
-            onChange={this.updateMembers}
-            options={options}
-            value={team.members}
-          />
-        </td>
-        <td>
-          <Button onClick={this.onDelete}>Delete</Button>
-        </td>
-      </tr>
-    )
+    return [
+      <TeamTableCell width={5}>{number}</TeamTableCell>,
+      <TeamTableCell>
+        {team.name} {team.teamType.permissions}
+      </TeamTableCell>,
+      <TeamTableCell>
+        {team.object.type} {team.object.id}
+      </TeamTableCell>,
+      <TeamTableCell width={40}>
+        <StyledMenu
+          inline
+          multi
+          name="members"
+          onChange={this.updateMembers}
+          options={options}
+          value={team.members}
+        />
+      </TeamTableCell>,
+      <TeamTableCell width={15}>
+        <Button onClick={this.onDelete}>Delete</Button>
+      </TeamTableCell>,
+    ]
   }
 }
 
