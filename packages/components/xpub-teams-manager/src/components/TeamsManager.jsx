@@ -11,7 +11,7 @@ const TeamsManager = ({
   deleteTeam,
   createTeam,
   error,
-  users,
+  userOptions,
   collections,
 }) => (
   <Page>
@@ -26,12 +26,12 @@ const TeamsManager = ({
 
         {teams.map((team, key) => (
           <Team
-            delete={deleteTeam}
+            deleteTeam={deleteTeam}
             key={team.id}
             number={key + 1}
             team={team}
-            update={updateTeam}
-            users={users}
+            updateTeam={updateTeam}
+            userOptions={userOptions}
           />
         ))}
       </TeamTable>

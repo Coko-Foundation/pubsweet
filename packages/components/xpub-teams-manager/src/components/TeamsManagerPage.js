@@ -1,6 +1,5 @@
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { actions } from 'pubsweet-client'
 
 import { ConnectPage } from 'xpub-connect'
@@ -16,17 +15,22 @@ export default compose(
   connect(
     state => {
       const { collections, teams, error } = state
-      // const { conversion, teams } = state
       const { users } = state.users
 
-      return { teams, collections, users, error }
+      const userOptions = users.map(user => ({
+        value: user.id,
+        label: user.username,
+      }))
+
+      return { teams, collections, userOptions, error }
     },
     (dispatch, { history }) => ({
       deleteTeam: collection => dispatch(actions.deleteTeam(collection)),
-      updateTeam: (project, version, reviewer, status) =>
-        dispatch(actions.updateTeam(project, version, reviewer, status)),
+      updateTeam: (members, team) => {
+        team = Object.assign(team, { members })
+        return dispatch(actions.updateTeam(team))
+      },
       createTeam: team => dispatch(actions.createTeam(team)),
     }),
   ),
-  withRouter,
 )(TeamsManager)
