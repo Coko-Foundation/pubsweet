@@ -10,8 +10,6 @@ import TeamCreator from './TeamCreator'
 // this should be elsewhere
 Enzyme.configure({ adapter: new Adapter() })
 
-jest.mock('./molecules/Table', ({ TeamTableCell }) => TeamTableCell)
-
 jest.mock('config', () => ({
   'pubsweet-client': {},
   authsome: {

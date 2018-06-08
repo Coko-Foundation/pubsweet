@@ -8,7 +8,7 @@ exports[`Menu is rendered correctly 1`] = `
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(8px * 6);
+  height: auto;
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -29,8 +29,18 @@ exports[`Menu is rendered correctly 1`] = `
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  white-space: nowrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   text-align: left;
-  padding: 0 8px;
+  line-height: calc(32px * 2);
+  padding: 0 calc(32px / 2);
+  white-space: nowrap;
 }
 
 .c2:hover {
@@ -130,7 +140,7 @@ exports[`Menu is rendered correctly when open 1`] = `
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(8px * 6);
+  height: auto;
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -151,8 +161,18 @@ exports[`Menu is rendered correctly when open 1`] = `
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  white-space: nowrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   text-align: left;
-  padding: 0 8px;
+  line-height: calc(32px * 2);
+  padding: 0 calc(32px / 2);
+  white-space: nowrap;
 }
 
 .c3:hover {
