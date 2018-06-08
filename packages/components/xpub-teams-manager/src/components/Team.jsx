@@ -7,27 +7,30 @@ const StyledMenu = styled(Menu)`
   width: 100%;
 `
 
-const Team = ({ team, number, userOptions, deleteTeam, updateTeam }) => [
-  <TeamTableCell width={5}>{number}</TeamTableCell>,
-  <TeamTableCell>
-    {team.name} {team.teamType.permissions}
-  </TeamTableCell>,
-  <TeamTableCell>
-    {team.object.type} {team.object.id}
-  </TeamTableCell>,
-  <TeamTableCell width={40}>
-    <StyledMenu
-      inline
-      multi
-      name="members"
-      onChange={members => updateTeam(members, team)}
-      options={userOptions}
-      value={team.members}
-    />
-  </TeamTableCell>,
-  <TeamTableCell width={15}>
-    <Button onClick={() => deleteTeam(team)}>Delete</Button>
-  </TeamTableCell>,
-]
+const Team = ({ team, number, userOptions, deleteTeam, updateTeam }) =>
+  team
+    ? [
+        <TeamTableCell width={5}>{number}</TeamTableCell>,
+        <TeamTableCell>
+          {team.name} {team.teamType.permissions}
+        </TeamTableCell>,
+        <TeamTableCell>
+          {team.object.type} {team.object.id}
+        </TeamTableCell>,
+        <TeamTableCell width={40}>
+          <StyledMenu
+            inline
+            multi
+            name="members"
+            onChange={members => updateTeam(members, team)}
+            options={userOptions}
+            value={team.members}
+          />
+        </TeamTableCell>,
+        <TeamTableCell width={15}>
+          <Button onClick={() => deleteTeam(team)}>Delete</Button>
+        </TeamTableCell>,
+      ]
+    : null
 
 export default Team
