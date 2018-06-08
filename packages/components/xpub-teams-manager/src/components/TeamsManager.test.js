@@ -1,86 +1,94 @@
-// import React from 'react'
-// import Enzyme, { shallow } from 'enzyme'
-// import Adapter from 'enzyme-adapter-react-16'
+import React from 'react'
+import Enzyme, { shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
-// import TeamsManager from './TeamsManager'
-// import { UploadContainer } from './molecules/Page'
-// import OwnerItem from './sections/OwnerItem'
-// import ReviewerItem from './sections/ReviewerItem'
-// import EditorItem from './sections/EditorItem'
+import TeamsManager from './TeamsManager'
 
-// // this should be elsewhere
-// Enzyme.configure({ adapter: new Adapter() })
+import Team from './Team'
+import TeamCreator from './TeamCreator'
 
-// jest.mock('config', () => ({
-//   'pubsweet-client': {},
-//   authsome: {
-//     mode: 'authsome',
-//   },
-// }))
+// this should be elsewhere
+Enzyme.configure({ adapter: new Adapter() })
 
-// jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock('config', () => ({
+  'pubsweet-client': {},
+  authsome: {
+    mode: 'authsome',
+    teams: {
+      seniorEditor: {
+        name: 'Senior Editors',
+        permissions: '',
+      },
+      handlingEditor: {
+        name: 'Handling Editors',
+        permissions: '',
+      },
+      managingEditor: {
+        name: 'Managing Editors',
+        permissions: '',
+      },
+      reviewer: {
+        name: 'Reviewer',
+        permissions: '',
+      },
+    },
+  },
+}))
 
-// jest.mock('./sections/OwnerItem', () => 'OwnerItem')
-// jest.mock('./sections/ReviewerItem', () => 'ReviewerItem')
-// jest.mock('./sections/EditorItem', () => 'EditorItem')
+describe('TeamsManager', () => {
+  const makeWrapper = (props = {}) => {
+    props = Object.assign(
+      {
+        teams: [],
+        userOptions: [
+          { id: '1', username: 'author' },
+          { id: '2', username: 'managing Editor' },
+        ],
+      },
+      props,
+    )
 
-// jest.mock('./withVersion', () => ItemWithVersion => ItemWithVersion)
+    return shallow(<TeamsManager {...props} />)
+  }
 
-// const getProjects = item => item.map(c => c.props().project)
+  it('shows nothing when there are no teams', () => {
+    const teammanager = makeWrapper()
+    expect(teammanager.find(Team)).toHaveLength(0)
+    expect(teammanager.find(TeamCreator)).toHaveLength(1)
+  })
 
-// describe('TeamsManager', () => {
-//   const makeWrapper = (props = {}) => {
-//     props = Object.assign(
-//       {
-//         dashboard: {},
-//         conversion: {},
-//       },
-//       props,
-//     )
+  it('shows a list of teams created', () => {
+    const teammanager = makeWrapper({
+      teams: [
+        {
+          id: 1,
+          name: 'team1',
+          teamType: {
+            name: 'Senior Editors',
+            permissions: '',
+          },
+          object: {
+            type: 'collection',
+            id: '1',
+          },
+          members: [],
+        },
+        {
+          id: 1,
+          name: 'team2',
+          teamType: {
+            name: 'Handling Editors',
+            permissions: '',
+          },
+          object: {
+            type: 'collection',
+            id: '1',
+          },
+          members: [],
+        },
+      ],
+    })
 
-//     return shallow(<TeamsManager {...props} />)
-//   }
-
-//   it('shows a message when there are no projects', () => {
-//     const dashboard = makeWrapper()
-//     expect(dashboard.find(UploadContainer)).toHaveLength(2)
-
-//     expect(dashboard.find(OwnerItem)).toHaveLength(0)
-//     expect(dashboard.find(ReviewerItem)).toHaveLength(0)
-//   })
-
-//   it('shows a list of projects submitted by the current user', () => {
-//     const project = { id: 1 }
-//     const dashboard = makeWrapper({
-//       dashboard: [project],
-//     })
-//     expect(dashboard.find('.empty')).toHaveLength(0)
-//     const section = dashboard.find(OwnerItem)
-//     expect(section).toHaveLength(1)
-//     expect(getProjects(section)).toEqual([project])
-//   })
-
-//   it('shows a list of projects to be reviewed', () => {
-//     const project = { id: 1 }
-//     const dashboard = makeWrapper({
-//       dashboard: [project],
-//     })
-
-//     expect(dashboard.find(UploadContainer)).toHaveLength(1)
-//     const section = dashboard.find(ReviewerItem)
-//     expect(section).toHaveLength(1)
-//     expect(getProjects(section)).toEqual([project])
-//   })
-
-//   it('shows a list of projects of which the current user is the editor', () => {
-//     const project = { id: 1 }
-//     const dashboard = makeWrapper({
-//       dashboard: [project],
-//     })
-
-//     expect(dashboard.find(UploadContainer)).toHaveLength(1)
-//     const section = dashboard.find(EditorItem)
-//     expect(section).toHaveLength(1)
-//     expect(getProjects(section)).toEqual([project])
-//   })
-// })
+    expect(teammanager.find(Team)).toHaveLength(2)
+  })
+})
