@@ -6,6 +6,9 @@ const Meta = styled.div`
   flex-wrap: nowrap;
   font-size: ${th('fontSizeBaseSmall')};
   white-space: nowrap;
+  *:not(:last-child):after {
+    content: '-';
+  }
 `
 
 export default Meta

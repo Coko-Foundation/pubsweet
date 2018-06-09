@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
-import { Item, Header, Body, Divider } from '../molecules/Item'
+import { Item, Header, Body } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 
 import Status from '../Status'
@@ -50,6 +50,16 @@ const EditorItemLinks = ({ project, version }) => (
   </Links>
 )
 
+const getDeclarationsObject = (version, value) => {
+  const declarations = version.declarations || {}
+  return declarations[value] || 'no'
+}
+
+const getMetadataObject = (version, value) => {
+  const metadata = version.metadata || {}
+  return metadata[value] || []
+}
+
 const EditorItem = ({ project, version }) => (
   <Authorize object={[project]} operation="can view my manuscripts section">
     <Item>
@@ -57,18 +67,19 @@ const EditorItem = ({ project, version }) => (
         <Status status={project.status} />
         <Meta>
           <MetadataStreamLined
-            streamlinedReview={version.declarations.streamlinedReview}
+            streamlinedReview={getDeclarationsObject(
+              version,
+              'streamlinedReview',
+            )}
           />
           <MetadataOwners owners={project.owners} />
-          <Divider separator="–" />
           <MetadataSubmittedDate submitted={version.submitted} />
-          <Divider separator="–" />
-          <MetadataType type={version.metadata.articleType} />
-          <Divider separator="–" />
-          <MetadataSections sections={version.metadata.articleSection} />
-          <Divider separator="–" />
+          <MetadataType type={getMetadataObject(version, 'articleType')} />
+          <MetadataSections
+            sections={getMetadataObject(version, 'articleSection')}
+          />
           <MetadataReviewType
-            openPeerReview={version.declarations.openPeerReview}
+            openPeerReview={getDeclarationsObject(version, 'openPeerReview')}
           />
         </Meta>
       </Header>
