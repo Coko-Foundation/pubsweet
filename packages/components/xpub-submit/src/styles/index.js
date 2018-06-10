@@ -15,3 +15,8 @@ export const Legend = styled.div`
   font-weight: 600;
   margin-bottom: ${({ space, theme }) => space && theme.subGridUnit};
 `
+export const SubNote = styled.span`
+  font-size: ${th('fontSizeBaseSmall')};
+  color: ${th('colorTextPlaceholder')};
+  page-break-before: always;
+`

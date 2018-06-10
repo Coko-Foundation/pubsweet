@@ -5,7 +5,7 @@ import { NoteEditor } from 'xpub-edit'
 import { withJournal } from 'xpub-journal'
 import { ValidatedField } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
-import { Section } from '../styles'
+import { Section, SubNote } from '../styles'
 
 // TODO: this is only here because prosemirror would save the title in the
 // metadata as html instead of plain text. we need to maybe find a better
@@ -16,28 +16,32 @@ const stripHtml = htmlString => {
   return temp.textContent
 }
 
-const Input = input => <NoteEditor {...input} />
+const Input = extraProps => input => <NoteEditor {...input} {...extraProps} />
 
 const Notes = ({ readonly, journal }) => (
   <FormSection name="notes">
     <Section id="notes.fundingAcknowledgement">
       <ValidatedField
-        component={Input}
+        component={Input(journal.notes.fundingAcknowledgement)}
         name="fundingAcknowledgement"
         readonly={readonly}
         validate={[required]}
-        {...journal.notes.fundingAcknowledgement}
       />
+      <SubNote>
+        {stripHtml(journal.notes.fundingAcknowledgement.description)}
+      </SubNote>
     </Section>
 
     <Section id="notes.specialInstructions">
       <ValidatedField
-        component={Input}
+        component={Input(journal.notes.specialInstructions)}
         name="specialInstructions"
         parse={stripHtml}
         readonly={readonly}
-        {...journal.notes.specialInstructions}
       />
+      <SubNote>
+        {stripHtml(journal.notes.specialInstructions.description)}
+      </SubNote>
     </Section>
   </FormSection>
 )
