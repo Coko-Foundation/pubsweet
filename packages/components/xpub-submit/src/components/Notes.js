@@ -2,6 +2,7 @@ import React from 'react'
 import { branch, renderNothing } from 'recompose'
 import { FormSection } from 'redux-form'
 import { NoteEditor } from 'xpub-edit'
+import { withJournal } from 'xpub-journal'
 import { ValidatedField } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
 import { Section } from '../styles'
@@ -15,42 +16,32 @@ const stripHtml = htmlString => {
   return temp.textContent
 }
 
-const FundingInput = input => (
-  <NoteEditor
-    placeholder="Enter an acknowledgment…"
-    title="Funding body acknowledgement (required)"
-    {...input}
-  />
-)
+const Input = input => <NoteEditor {...input} />
 
-const InstructionsInput = input => (
-  <NoteEditor
-    placeholder="Enter instructions for the editor…"
-    title="Special instructions (confidential, to Editors only)"
-    {...input}
-  />
-)
-
-const Notes = ({ readonly }) => (
+const Notes = ({ readonly, journal }) => (
   <FormSection name="notes">
     <Section id="notes.fundingAcknowledgement">
       <ValidatedField
-        component={FundingInput}
+        component={Input}
         name="fundingAcknowledgement"
         readonly={readonly}
         validate={[required]}
+        {...journal.notes.fundingAcknowledgement}
       />
     </Section>
 
     <Section id="notes.specialInstructions">
       <ValidatedField
-        component={InstructionsInput}
+        component={Input}
         name="specialInstructions"
         parse={stripHtml}
         readonly={readonly}
+        {...journal.notes.specialInstructions}
       />
     </Section>
   </FormSection>
 )
 
-export default branch(({ readonly }) => readonly === true, renderNothing)(Notes)
+export default withJournal(
+  branch(({ readonly }) => readonly === true, renderNothing)(Notes),
+)
