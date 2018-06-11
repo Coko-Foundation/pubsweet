@@ -4,7 +4,7 @@ const config = require('config')
 
 let mailerConfig = {}
 try {
-  mailerConfig = require(config.mailer.path)
+  mailerConfig = require(config.get('mailer.path'))
 } catch (err) {
   logger.error(
     'Mailer: The configuration is either invalid or missing. Check here: ' +
