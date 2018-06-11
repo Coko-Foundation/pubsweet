@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui-toolkit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Helper functions and reusable blocks for use with @pubsweet/ui",
   "repository": {
     "type": "git",
@@ -19,6 +19,9 @@
     "lodash": "^4.17.4",
     "styled-components": "^3.2.5"
   },
-  "author": "Yannis Barlas",
-  "license": "MIT"
+  "author": "Adam Hyde",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }

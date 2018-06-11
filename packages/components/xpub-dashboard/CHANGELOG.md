@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.3.2...pubsweet-component-xpub-dashboard@1.0.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **components:** dasboard fixing multiple submissions ([01fa2f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/01fa2f9))
+* **dashboard:** empty dashboard collections ([3f4db98](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f4db98))
+* **dashboard:** remove regenerate import and add it to styleguide ([96731cf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/96731cf))
+* **dashboard:** section hide on empty ([7a139ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a139ec))
+* **dashboard:** test change object dashboard ([906ccfd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/906ccfd))
+* **styleguide:** compile authsome ([8e9407f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8e9407f))
+* **test:** dashboard - reviewer test ([30f41b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30f41b3))
+
+
+### Features
+
+* **components:** add authsome to dashboard ([833a9de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/833a9de))
+* **ui:** start ui-toolkit module ([2083b9c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2083b9c))
+
+
+### BREAKING CHANGES
+
+* **ui:** th now comes from the toolkit, so all th imports from ui are now broken
+
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.3.1...pubsweet-component-xpub-dashboard@0.3.2) (2018-05-21)
 

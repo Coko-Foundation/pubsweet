@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@1.0.1...@pubsweet/coko-theme@2.0.0) (2018-06-01)
+
+
+### Features
+
+* **ui:** add darken-lighten functions to toolkit ([ba8ab1b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba8ab1b))
+* **ui:** add scaling function to ui-toolkit ([c92fe32](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c92fe32))
+* **ui:** start ui-toolkit module ([2083b9c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2083b9c))
+
+
+### BREAKING CHANGES
+
+* **ui:** th now comes from the toolkit, so all th imports from ui are now broken
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@1.0.0...@pubsweet/coko-theme@1.0.1) (2018-05-09)
 

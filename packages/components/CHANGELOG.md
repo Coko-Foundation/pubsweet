@@ -3,7 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="6.3.0"></a>
+      <a name="7.0.0"></a>
+# [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.3.0...pubsweet-components@7.0.0) (2018-06-01)
+
+
+### Bug Fixes
+
+* **components:** change assigning editors to fragments ([98bc86a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98bc86a))
+* **components:** dasboard fixing multiple submissions ([01fa2f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/01fa2f9))
+* **components:** revert assigning editors to version ([74bf8f3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/74bf8f3))
+* **components:** submit button show ([2635368](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2635368))
+* **dashboard:** empty dashboard collections ([3f4db98](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f4db98))
+* **dashboard:** remove regenerate import and add it to styleguide ([96731cf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/96731cf))
+* **dashboard:** section hide on empty ([7a139ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7a139ec))
+* **dashboard:** test change object dashboard ([906ccfd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/906ccfd))
+* **review-server:** remove debug logs ([16dc70a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/16dc70a))
+* **styleguide:** compile authsome ([8e9407f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8e9407f))
+* **test:** dashboard - reviewer test ([30f41b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30f41b3))
+* **test:** debug test on gitalb ([387d5b7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/387d5b7))
+* **test:** debugging on gitlab ([72f5c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/72f5c4f))
+* **test:** gitlab error ([3c8a4b8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c8a4b8))
+* **test:** review backend test ([3cd439c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3cd439c))
+* **test:** reviewer backend server ([edd00ba](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/edd00ba))
+
+
+### Features
+
+* **components:** add authsome to dashboard ([833a9de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/833a9de))
+* **ui:** start ui-toolkit module ([2083b9c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2083b9c))
+
+
+### BREAKING CHANGES
+
+* **ui:** th now comes from the toolkit, so all th imports from ui are now broken
+
+
+
+
+      <a name="6.3.0"></a>
 # [6.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.2...pubsweet-components@6.3.0) (2018-05-24)
 
 
@@ -20,7 +57,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="6.2.2"></a>
+<a name="6.2.2"></a>
 ## [6.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.1...pubsweet-components@6.2.2) (2018-05-21)
 
 

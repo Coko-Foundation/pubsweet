@@ -7,7 +7,7 @@ import ProjectLink from './ProjectLink'
 const PaperLayout = ({ paper, project, version }) => (
   <div className={classes.root}>
     <h1 className={classes.title}>
-      <a href={paper.url} target="_blank">
+      <a href={paper.url} rel="noopener noreferrer" target="_blank">
         {paper.title}
       </a>
     </h1>
