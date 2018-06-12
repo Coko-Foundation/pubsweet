@@ -1,7 +1,7 @@
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { actions } from 'pubsweet-client'
-
+import config from 'config'
 import { ConnectPage } from 'xpub-connect'
 
 import TeamsManager from './TeamsManager'
@@ -22,7 +22,17 @@ export default compose(
         label: user.username,
       }))
 
-      return { teams, collections, userOptions, error }
+      const collectionsOptions = collections.map(collection => ({
+        value: collection.id,
+        label: collection.title,
+      }))
+      const types = config.authsome.teams
+      const typesOptions = Object.keys(types).map(type => ({
+        value: type,
+        label: `${types[type].name} ${types[type].permissions}`,
+      }))
+
+      return { teams, collectionsOptions, userOptions, typesOptions, error }
     },
     (dispatch, { history }) => ({
       deleteTeam: collection => dispatch(actions.deleteTeam(collection)),

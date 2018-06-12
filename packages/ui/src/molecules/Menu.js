@@ -194,6 +194,13 @@ class Menu extends React.Component {
     })
   }
 
+  resetMenu = props => {
+    this.state = {
+      open: false,
+      selected: undefined,
+    }
+  }
+
   removeSelect = (event, value) => {
     event.stopPropagation()
     let { selected } = this.state
@@ -242,8 +249,11 @@ class Menu extends React.Component {
       renderOpener: RenderOpener,
       className,
       multi,
+      reset,
     } = this.props
     const { open, selected } = this.state
+
+    if (reset === true) this.resetMenu(this.props)
 
     return (
       <Root className={className} inline={inline} open={open}>
@@ -348,6 +358,8 @@ Menu.propTypes = {
   renderOpener: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   /** Custom option component. The component will be rendered with *optionProps*. */
   renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /** Option to reset Menu to default */
+  reset: PropTypes.bool,
   /** Optional label to be shown above the menu. */
   label: PropTypes.string,
   /** Placeholder until a value is selected. */
@@ -359,6 +371,7 @@ Menu.propTypes = {
 Menu.defaultProps = {
   renderOption: DefaultMenuOption,
   renderOpener: DefaultOpener,
+  reset: false,
   placeholder: 'Choose in the list',
 }
 

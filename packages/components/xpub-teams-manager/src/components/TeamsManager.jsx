@@ -1,5 +1,4 @@
 import React from 'react'
-import config from 'config'
 import { Page } from './molecules/Page'
 import { TeamTableCell, TeamTable } from './molecules/Table'
 import Team from './Team'
@@ -12,7 +11,8 @@ const TeamsManager = ({
   createTeam,
   error,
   userOptions,
-  collections,
+  collectionsOptions,
+  typesOptions,
 }) => (
   <Page>
     {error ? <div>{error}</div> : null}
@@ -37,9 +37,9 @@ const TeamsManager = ({
       </TeamTable>
     )}
     <TeamCreator
-      collections={collections}
+      collectionsOptions={collectionsOptions}
       create={createTeam}
-      types={config.authsome.teams}
+      typesOptions={typesOptions}
     />
   </Page>
 )

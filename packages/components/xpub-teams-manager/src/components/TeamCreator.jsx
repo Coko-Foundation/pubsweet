@@ -1,100 +1,84 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { find } from 'lodash'
+import { compose, withHandlers, withState } from 'recompose'
 import { Button, Menu } from '@pubsweet/ui'
 
-export default class TeamCreator extends React.Component {
-  constructor(props) {
-    super(props)
-    this.onSave = this.onSave.bind(this)
-    this.onCollectionSelect = this.onCollectionSelect.bind(this)
-    this.onTeamTypeSelect = this.onTeamTypeSelect.bind(this)
+const TeamCreator = ({
+  teamTypeSelected,
+  collectionSelected,
+  collectionsOptions,
+  typesOptions,
+  onChangeCollection,
+  onChangeType,
+  onSave,
+}) => (
+  <form onSubmit={onSave}>
+    <h3>Create a new team</h3>
+    <h4>Team type</h4>
+    <Menu
+      name="teamType"
+      onChange={onChangeType}
+      options={typesOptions}
+      required
+      reset={teamTypeSelected}
+      value={teamTypeSelected}
+    />
+    <h4>Collection</h4>
+    <Menu
+      name="collection"
+      onChange={onChangeCollection}
+      options={collectionsOptions}
+      required
+      reset={collectionSelected}
+      value={collectionSelected}
+    />
+    <Button primary type="submit">
+      Create
+    </Button>
+  </form>
+)
 
-    this.state = {
-      collectionSelected: undefined,
-    }
-  }
+export default compose(
+  withState('collectionSelected', 'onCollectionSelect', false),
+  withState('teamTypeSelected', 'onTeamTypeSelect', false),
+  withHandlers({
+    onChangeCollection: ({ onCollectionSelect }) => collectionId =>
+      onCollectionSelect(() => collectionId || false),
+    onChangeType: ({ onTeamTypeSelect }) => teamType =>
+      onTeamTypeSelect(() => teamType || false),
+    onSave: ({
+      teamTypeSelected,
+      collectionSelected,
+      create,
+      typesOptions,
+      onTeamTypeSelect,
+      onCollectionSelect,
+    }) => event => {
+      event.preventDefault()
+      const teamType = teamTypeSelected
 
-  onSave(event) {
-    event.preventDefault()
+      let objectId
+      let objectType
 
-    const teamType = this.state.teamTypeSelected
+      if (collectionSelected) {
+        objectId = collectionSelected
+        objectType = 'collection'
+      }
 
-    let objectId
-    let objectType
+      if (teamType && objectId && objectType) {
+        create({
+          name: find(typesOptions, types => types.value === teamType).label,
+          teamType,
+          object: {
+            id: objectId,
+            type: objectType,
+          },
+          members: [],
+        })
 
-    if (this.state.collectionSelected) {
-      objectId = this.state.collectionSelected
-      objectType = 'collection'
-    }
-
-    if (teamType && objectId && objectType) {
-      this.props.create({
-        name: this.props.types[teamType].name,
-        teamType,
-        object: {
-          id: objectId,
-          type: objectType,
-        },
-        members: [],
-      })
-      this.setState({
-        teamName: '',
-        collectionSelected: null,
-        teamTypeSelected: null,
-      })
-    }
-  }
-
-  onCollectionSelect(collectionId) {
-    this.setState({ collectionSelected: collectionId || null })
-  }
-
-  onTeamTypeSelect(teamType) {
-    this.setState({ teamTypeSelected: teamType || null })
-  }
-
-  render() {
-    let { collections, types } = this.props
-
-    collections = collections.map(collection => ({
-      value: collection.id,
-      label: collection.title,
-    }))
-
-    types = Object.keys(types).map(type => ({
-      value: type,
-      label: `${types[type].name} ${types[type].permissions}`,
-    }))
-
-    return (
-      <form onSubmit={this.onSave}>
-        <h3>Create a new team</h3>
-        <h4>Team type</h4>
-        <Menu
-          name="teamType"
-          onChange={this.onTeamTypeSelect}
-          options={types}
-          required
-          value={this.state.teamTypeSelected}
-        />
-        <h4>Collection</h4>
-        <Menu
-          name="collection"
-          onChange={this.onCollectionSelect}
-          options={collections}
-          required
-          value={this.state.collectionSelected}
-        />
-        <Button primary type="submit">
-          Create
-        </Button>
-      </form>
-    )
-  }
-}
-
-TeamCreator.propTypes = {
-  collections: PropTypes.array,
-  types: PropTypes.object,
-  create: PropTypes.func,
-}
+        onTeamTypeSelect(() => true)
+        onCollectionSelect(() => true)
+      }
+    },
+  }),
+)(TeamCreator)
