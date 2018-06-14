@@ -15,7 +15,9 @@
   "dependencies": {
     "@pubsweet/ui": "^5.0.0",
     "@pubsweet/ui-toolkit": "^1.0.0",
-    "apollo-client-preset": "^1.0.8",
+    "apollo-client": "^2.3.4",
+    "apollo-link-http": "^1.5.4",
+    "apollo-cache-inmemory": "^1.2.4",
     "apollo-link": "^1.2.1",
     "apollo-link-context": "^1.0.5",
     "apollo-upload-client": "^8.0.0",
