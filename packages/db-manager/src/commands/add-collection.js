@@ -13,7 +13,7 @@ module.exports = async collectionData => {
   if (user) collection.setOwners([user.id])
   await collection.save()
 
-  if (fragment) collection.addFragment([fragment])
+  if (fragment) collection.addFragment(fragment)
   await collection.save()
 
   logger.info(
