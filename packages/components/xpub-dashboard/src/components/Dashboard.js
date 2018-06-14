@@ -30,7 +30,7 @@ const Dashboard = ({
 
     {!dashboard.length && (
       <UploadContainer>
-        Nothing to do ABCXYZ at the moment. Please upload a document.
+        Nothing to do at the moment. Please upload a document.
       </UploadContainer>
     )}
     <Authorize object={dashboard} operation="can view my submission section">
