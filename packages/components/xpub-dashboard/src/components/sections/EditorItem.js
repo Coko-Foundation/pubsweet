@@ -2,8 +2,8 @@ import React from 'react'
 
 import styled from 'styled-components'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import { Action, ActionGroup } from '@pubsweet/ui'
 import { Item, Header, Body } from '../molecules/Item'
-import { Links, LinkContainer } from '../molecules/Links'
 
 import Status from '../Status'
 import Meta from '../metadata/Meta'
@@ -21,33 +21,22 @@ const VersionTitleLink = styled(ProjectLink)`
   text-decoration: none;
   color: #333;
 `
+
 const EditorItemLinks = ({ project, version }) => (
-  <Links>
-    <LinkContainer>
-      {/* {(!version.decision ||
-        version.decision.status !== 'revising' ||
-        version.decision.status !== 'submitted') && (
-        <span>
-          <ProjectLink page="reviewers" project={project} version={version}>
-            Assign Reviewers
-          </ProjectLink>
-
-          <Divider separator="|" />
-        </span>
-      )} */}
-
-      <ProjectLink
-        id={project.id}
-        page="decisions"
-        project={project}
-        version={version}
-      >
-        {version.decision && version.decision.status === 'submitted'
-          ? `Decision: ${version.decision.recommendation}`
-          : 'Control Panel'}
-      </ProjectLink>
-    </LinkContainer>
-  </Links>
+  <ActionGroup>
+    <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+      Summary Info
+    </Action>
+    <Action
+      to={`/projects/${project.id}/versions/${version.id}/decisions/${
+        project.id
+      }`}
+    >
+      {version.decision && version.decision.status === 'submitted'
+        ? `Decision: ${version.decision.recommendation}`
+        : 'Control Panel'}
+    </Action>
+  </ActionGroup>
 )
 
 const getDeclarationsObject = (version, value) => {
