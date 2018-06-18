@@ -51,8 +51,7 @@
     "jest-cli": "^22.1.4",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.7.0",
-    "supertest": "^2.0.0",
-    "babel-plugin-transform-async-super": "1.0.0"
+    "supertest": "^2.0.0"
   },
   "repository": {
     "type": "git",
