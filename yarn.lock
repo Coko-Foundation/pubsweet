@@ -211,6 +211,12 @@
   dependencies:
     find-up "^2.1.0"
 
+"@elifesciences/elife-theme@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@elifesciences/elife-theme/-/elife-theme-1.0.0.tgz#141ab9e7a6fd72d5c56e96f6f7fb71a7225ecf5b"
+  dependencies:
+    styled-components "^3.2.5"
+
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"
@@ -227,6 +233,12 @@
     typeface-noto-sans "^0.0.54"
     typeface-noto-serif "^0.0.54"
     typeface-ubuntu-mono "^0.0.54"
+
+"@pubsweet/elife-theme@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@pubsweet/elife-theme/-/elife-theme-1.0.1.tgz#92b389777a61db72bd43b92617f63f41c74bdefa"
+  dependencies:
+    styled-components "^3.2.5"
 
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"

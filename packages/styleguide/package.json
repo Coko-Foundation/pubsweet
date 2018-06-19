@@ -9,7 +9,7 @@
   "main": "src",
   "dependencies": {
     "@pubsweet/default-theme": "^1.0.0",
-    "@pubsweet/elife-theme": "^1.0.1",
+    "@elifesciences/elife-theme": "^1.0.0",
     "@pubsweet/ui": "^4.1.3",
     "@pubsweet/ui-toolkit": "^1.0.0",
     "faker": "^4.1.0",
