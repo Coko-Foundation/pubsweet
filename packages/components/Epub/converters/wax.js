@@ -1,3 +1,5 @@
+const hljs = require('highlight.js')
+
 module.exports = (
   $,
   fragmentTitle,
@@ -44,6 +46,8 @@ module.exports = (
       .attr('class', 'chapter-number')
       .html(fragmentNumber)
       .appendTo(innerContainer)
+  } else {
+    // if unumbered component
   }
   $('<h1/>')
     .attr('class', 'ct')
@@ -58,6 +62,17 @@ module.exports = (
     )
 
     $elem.replaceWith(blockquote)
+  }
+
+  const replaceWithPre = className => (i, elem) => {
+    const $elem = $(elem)
+    const { source } = $elem[0].attribs
+    const { language } = $elem[0].attribs
+
+    const highLighter = hljs.highlight(language, source)
+    const pre = $(`<pre class="${language}"/>`).append(highLighter.value)
+
+    $elem.replaceWith(pre)
   }
 
   const replaceWithText = (i, elem) => {
@@ -118,7 +133,10 @@ module.exports = (
   $('source-note').each(replaceWithParagraph('exsn'))
   $('ol[styling="qa"]').each(replaceWithList('di'))
   $('ol[styling="unstyled"]').each(replaceWithList('none'))
+
   $('figure').each(replaceWithFigure(''))
+  $('script').each(replaceWithPre('pre'))
+
 
   // remove "uploads" from the start of each src attribute
   $('[src]').each((i, elem) => {
