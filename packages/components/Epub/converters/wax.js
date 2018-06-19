@@ -1,3 +1,5 @@
+const hljs = require('highlight.js')
+
 module.exports = (
   $,
   fragmentTitle,
@@ -7,19 +9,6 @@ module.exports = (
   fragmentNumber,
 ) => {
   const body = $('body')
-
-  // Escape htnml to exporting special characters
-  const escapeHtml = text => {
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;',
-    }
-
-    return text.replace(/[&<>"']/g, m => map[m])
-  }
 
   const outerContainer = $('<div/>').attr('class', fragmentDivision)
   let innerContainer
@@ -79,7 +68,9 @@ module.exports = (
     const $elem = $(elem)
     const { source } = $elem[0].attribs
     const { language } = $elem[0].attribs
-    const pre = $(`<pre class="${language}"/>`).append(escapeHtml(source))
+
+    const highLighter = hljs.highlight(language, source)
+    const pre = $(`<pre class="${language}"/>`).append(highLighter.value)
 
     $elem.replaceWith(pre)
   }
