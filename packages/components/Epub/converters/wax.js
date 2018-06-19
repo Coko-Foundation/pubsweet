@@ -137,7 +137,6 @@ module.exports = (
   $('figure').each(replaceWithFigure(''))
   $('script').each(replaceWithPre('pre'))
 
-
   // remove "uploads" from the start of each src attribute
   $('[src]').each((i, elem) => {
     const $elem = $(elem)

@@ -2305,7 +2305,7 @@ figure figcaption::before {
   content: 'figure ' counter(figure) ' \2014  ';
   margin-top: 0;
   font-size: 0.9em;
-
+}
 /* To send content on page right/left */
 
 .right {
