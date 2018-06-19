@@ -101,6 +101,18 @@ module.exports = (
     $elem.replaceWith(list)
   }
 
+  const replaceWithFigure = className => (i, elem) => {
+    const $elem = $(elem)
+
+    const figure = $(
+      `<figure><img src="${$elem[0].attribs.src}"/><figcaption>${
+        $elem[0].attribs.figcaption
+      }</figcaption></figure>`,
+    )
+
+    $elem.replaceWith(figure)
+  }
+
   // add namespaces
   $('html').attr({
     xmlns: 'http://www.w3.org/1999/xhtml',
@@ -121,6 +133,8 @@ module.exports = (
   $('source-note').each(replaceWithParagraph('exsn'))
   $('ol[styling="qa"]').each(replaceWithList('di'))
   $('ol[styling="unstyled"]').each(replaceWithList('none'))
+
+  $('figure').each(replaceWithFigure(''))
   $('script').each(replaceWithPre('pre'))
 
   // remove "uploads" from the start of each src attribute
