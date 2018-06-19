@@ -2294,18 +2294,14 @@ pre {
   padding: 10px;
   white-space: pre-wrap;
   word-break: normal;
+  border-radius: 8px;
 }
 
-/*
-Monokai style - ported by Luigi Maselli - http://grigio.org
-*/
+/* update to the code should get here */
 
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
+pre {
   background: #272822;
-  color: #ddd;
+  color: #eee;
 }
 
 .hljs-tag,
@@ -2314,7 +2310,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-literal,
 .hljs-strong,
 .hljs-name {
-  color: #f92672;
+  color: magenta;
 }
 
 .hljs-code {
@@ -2354,7 +2350,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-quote,
 .hljs-deletion,
 .hljs-meta {
-  color: #75715e;
+  color: #ee2b74;
 }
 
 .hljs-keyword,
