@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.18"></a>
+## [0.0.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.17...pubsweet-component-xpub-find-reviewers@0.0.18) (2018-06-19)
+
+
+### Bug Fixes
+
+* **linter:** error ([7db67f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7db67f9))
+
+
+
+
 <a name="0.0.17"></a>
 ## [0.0.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.16...pubsweet-component-xpub-find-reviewers@0.0.17) (2018-06-01)
 

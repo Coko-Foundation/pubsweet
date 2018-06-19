@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.0.0...@pubsweet/ui-toolkit@1.1.0) (2018-06-19)
+
+
+### Features
+
+* **ui-toolkit:** reuse animations ([be962dd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be962dd))
+
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2018-06-01)
 

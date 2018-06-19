@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@2.0.0...@pubsweet/coko-theme@2.1.0) (2018-06-19)
+
+
+### Bug Fixes
+
+* **coko theme:** improve appbar ui for coko theme ([9bd07b0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bd07b0))
+
+
+### Features
+
+* **ui-toolkit:** reuse animations ([be962dd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be962dd))
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@1.0.1...@pubsweet/coko-theme@2.0.0) (2018-06-01)
 

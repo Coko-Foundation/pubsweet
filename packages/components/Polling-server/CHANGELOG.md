@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.6"></a>
+## [0.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-polling-server@0.0.5...@pubsweet/component-polling-server@0.0.6) (2018-06-19)
+
+
+### Bug Fixes
+
+* **polling server:** locking and unlocking handled in server now ([19ac6bf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19ac6bf))
+
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-polling-server@0.0.4...@pubsweet/component-polling-server@0.0.5) (2018-04-03)
 
