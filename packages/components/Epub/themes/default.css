@@ -2150,3 +2150,32 @@ cite {
 p.ct {
   display: none;
 }
+
+/* figure shou;d work with this */
+
+figure {
+  width: 100%;
+}
+
+figure img {
+  width: 100%;
+  counter-increment: figure;
+}
+
+figure figcaption {
+  text-align: center;
+  margin-top: 0;
+}
+
+body {
+  counter-reset: figure;
+  font-size: 1em;
+  font-size: normal;
+}
+
+figure figcaption::before {
+  text-align: center;
+  content: 'figure ' counter(figure) ' \2014  ';
+  margin-top: 0;
+  font-size: 0.9em;
+}
