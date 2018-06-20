@@ -34,6 +34,8 @@ jest.mock('pubsweet-client/src/helpers/api', () => ({
   }),
 }))
 
+jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+
 global.window.localStorage = {
   getItem: jest.fn(() => 'tok123'),
 }
