@@ -11,7 +11,7 @@ export class Authorize extends React.Component {
     super(props)
 
     this.state = {
-      authorized: false,
+      authorized: undefined,
     }
   }
 
@@ -23,6 +23,11 @@ export class Authorize extends React.Component {
     this.checkAuth(nextProps)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.authorized === nextState.authorized) return false
+    return true
+  }
+
   async checkAuth({ authsome, currentUser, operation, object }) {
     try {
       const authorized = await authsome.can(
@@ -30,6 +35,7 @@ export class Authorize extends React.Component {
         operation,
         object,
       )
+
       this.setState({
         authorized,
       })
@@ -38,10 +44,17 @@ export class Authorize extends React.Component {
     }
   }
 
+  renderValidReactElement() {
+    return React.isValidElement(this.props.unauthorized) ||
+      this.props.unauthorized === null
+      ? this.props.unauthorized
+      : this.props.unauthorized()
+  }
+
   render() {
-    return this.state.authorized
-      ? this.props.children
-      : this.props.unauthorized || null
+    return this.state.authorized === false
+      ? this.renderValidReactElement()
+      : this.props.children
   }
 }
 
@@ -52,6 +65,10 @@ Authorize.propTypes = {
   children: PropTypes.element,
   unauthorized: PropTypes.node,
   authsome: PropTypes.object.isRequired,
+}
+
+Authorize.defaultProps = {
+  unauthorized: null,
 }
 
 function mapState(state) {
