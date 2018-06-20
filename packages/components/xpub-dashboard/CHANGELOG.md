@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@1.0.0...pubsweet-component-xpub-dashboard@1.0.1) (2018-06-19)
+
+
+### Bug Fixes
+
+* **dashboard:** add actions to dashboard editorItem ([58733b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/58733b6))
+* **dashboard:** empty declaration object ([919bde4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/919bde4))
+* **metadata:** empty values ([e6f55ea](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e6f55ea))
+* **pubsweet-ui:** tests are failing ([0e57798](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e57798))
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@0.3.2...pubsweet-component-xpub-dashboard@1.0.0) (2018-06-01)
 

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.2"></a>
+## [0.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.1...pubsweet-component-xpub-review-backend@0.2.2) (2018-06-19)
+
+
+### Bug Fixes
+
+* **components:** change assigning editors to fragments ([98bc86a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98bc86a))
+* **components:** dasboard fixing multiple submissions ([01fa2f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/01fa2f9))
+* **review-server:** remove debug logs ([16dc70a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/16dc70a))
+* **test:** dashboard - reviewer test ([30f41b3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30f41b3))
+* **test:** debug test on gitalb ([387d5b7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/387d5b7))
+* **test:** debugging on gitlab ([72f5c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/72f5c4f))
+* **test:** gitlab error ([3c8a4b8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c8a4b8))
+* **test:** review backend test ([3cd439c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3cd439c))
+* **test:** reviewer backend server ([edd00ba](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/edd00ba))
+
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.0...pubsweet-component-xpub-review-backend@0.2.1) (2018-05-03)
 

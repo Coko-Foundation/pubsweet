@@ -3,7 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="7.0.0"></a>
+  <a name="7.1.0"></a>
+# [7.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@7.0.0...pubsweet-components@7.1.0) (2018-06-19)
+
+
+### Bug Fixes
+
+* **dashboard:** add actions to dashboard editorItem ([58733b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/58733b6))
+* **dashboard:** empty declaration object ([919bde4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/919bde4))
+* add content-type to delete file middleware ([9fd2d92](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9fd2d92))
+* **epub:** add code snippets to epub export ([375d5dc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/375d5dc))
+* **linter:** error ([7db67f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7db67f9))
+* **metadata:** empty values ([e6f55ea](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e6f55ea))
+* **polling server:** locking and unlocking handled in server now ([19ac6bf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19ac6bf))
+* **pubsweet-ui:** tests are failing ([0e57798](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e57798))
+* **send-email-server:** use config package according to documentation ([d05d72f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d05d72f))
+* linting errors ([03c52da](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/03c52da))
+
+
+### Features
+
+* add figure and figcaption on export ([6b3ebd6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6b3ebd6))
+* add highlight js to export ([ef08e72](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ef08e72))
+* styles for the figcaption ([ae19a09](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ae19a09))
+
+
+
+
+  <a name="7.0.0"></a>
 # [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.3.0...pubsweet-components@7.0.0) (2018-06-01)
 
 
@@ -40,7 +67,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="6.3.0"></a>
+<a name="6.3.0"></a>
 # [6.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@6.2.2...pubsweet-components@6.3.0) (2018-05-24)
 
 
