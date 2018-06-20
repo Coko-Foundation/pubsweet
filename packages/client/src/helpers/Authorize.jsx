@@ -52,9 +52,11 @@ export class Authorize extends React.Component {
   }
 
   render() {
-    return this.state.authorized === false
-      ? this.renderValidReactElement()
-      : this.props.children
+    if (this.state.authorized === undefined) return null
+
+    return this.state.authorized === true
+      ? this.props.children
+      : this.renderValidReactElement()
   }
 }
 
@@ -63,7 +65,7 @@ Authorize.propTypes = {
   operation: PropTypes.string,
   object: PropTypes.object,
   children: PropTypes.element,
-  unauthorized: PropTypes.node,
+  unauthorized: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   authsome: PropTypes.object.isRequired,
 }
 

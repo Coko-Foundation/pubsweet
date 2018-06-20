@@ -44,12 +44,23 @@ describe('<Authorize/>', () => {
     expect(wrapper.type()).toBe(null)
   })
 
-  it('optionally shows alternative content when not authorized', async () => {
+  it('optionally shows alternative content when not authorized pass Component as React Element', async () => {
     const wrapper = makeWrapper({ authsome, unauthorized: <span /> })
 
     resolveMode(false)
     await modePromise
     wrapper.update()
+
+    expect(wrapper.type()).toBe('span')
+  })
+
+  it('optionally shows alternative content when not authorized pass Component as Function', async () => {
+    const wrapper = makeWrapper({ authsome, unauthorized: () => <span /> })
+
+    resolveMode(false)
+    await modePromise
+    wrapper.update()
+
     expect(wrapper.type()).toBe('span')
   })
 
