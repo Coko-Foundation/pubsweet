@@ -7,7 +7,7 @@ const primary = css`
 
   &:focus,
   &:hover {
-    background-color: ${darken('colorPrimary', 30)};
+    background-color: ${darken('colorPrimary', 0.3)};
   }
 
   &:active {
