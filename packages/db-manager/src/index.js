@@ -3,5 +3,6 @@ module.exports = {
   setupDb: require('./commands/setup-db'),
   addUser: require('./commands/add-user'),
   addCollection: require('./commands/add-collection'),
+  addFragment: require('./commands/add-fragment'),
   dbExists: require('./helpers/db-exists'),
 }
