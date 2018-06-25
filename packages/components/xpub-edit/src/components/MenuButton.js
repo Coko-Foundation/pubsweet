@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Button = styled.button`
   background: ${th('colorBackground')};
@@ -19,6 +19,8 @@ const Button = styled.button`
   }
 
   border-bottom-color: ${({ active }) => active && 'black'};
+
+  ${override('xpub-edit.MenuButton.Button')};
 `
 
 const MenuButton = ({ item, state, handle }) => (
