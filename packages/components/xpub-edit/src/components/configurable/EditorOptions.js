@@ -1,4 +1,5 @@
 import React from 'react'
+import pick from 'lodash/pick'
 import makeConfig from './config'
 
 const FEATURES_WHITELIST = [
@@ -21,9 +22,7 @@ class ConfigurableEditor extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const features = Object.keys(nextProps)
-      .filter(key => FEATURES_WHITELIST.includes(key))
-      .filter(key => nextProps[key])
+    const features = pick(nextProps, FEATURES_WHITELIST)
 
     if (prevState.options) {
       // updating options on an existing editor is deliberately disabled
