@@ -2580,6 +2580,10 @@ codemirror@^5.36.0:
   version "5.38.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.38.0.tgz#26a9551446e51dbdde36aabe60f72469724fd332"
 
+codemirror@^5.38.0:
+  version "5.39.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.39.0.tgz#4654f7d2f7e525e04a62e72d9482348ccb37dce5"
+
 "cokourier-prime-sans@git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git":
   version "0.0.1"
   resolved "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git#55aa30adce0193baac1ea026cf4409be9dd93a10"
@@ -12550,23 +12554,24 @@ watchpack@^1.4.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
-wax-editor-core@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/wax-editor-core/-/wax-editor-core-0.4.0.tgz#a361b8243cbf807bc9075f10560ccdfa457b4764"
+wax-editor-core@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/wax-editor-core/-/wax-editor-core-0.6.1.tgz#297c38fba5abe97891481f58ca74cf6ab1c53564"
   dependencies:
+    codemirror "^5.38.0"
     font-awesome "^4.7.0"
     lodash "^4.17.4"
     substance "1.0.0-beta.6.5"
 
-wax-editor-react@^0.1.10, wax-editor-react@^0.1.8:
-  version "0.1.20"
-  resolved "https://registry.yarnpkg.com/wax-editor-react/-/wax-editor-react-0.1.20.tgz#8c20f3cec7329266fc7f0eeb09692ae7c836751f"
+wax-editor-react@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/wax-editor-react/-/wax-editor-react-0.2.2.tgz#c33c3e06c206b8c9f601ce53d73638d6c010c51e"
   dependencies:
     lodash "^4.17.4"
     react "^16.2.0"
     react-dom "^16.2.0"
     react-router-dom "^4.2.2"
-    wax-editor-core "^0.4.0"
+    wax-editor-core "^0.6.1"
 
 wbuf@^1.1.0, wbuf@^1.7.2:
   version "1.7.3"
