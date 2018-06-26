@@ -6,11 +6,13 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  ${th('cssOverrides.TextField.Root')};
 `
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   display: block;
+  ${th('cssOverrides.TextField.Label')};
 `
 
 const borderColor = ({ theme, validationStatus = 'default' }) =>
