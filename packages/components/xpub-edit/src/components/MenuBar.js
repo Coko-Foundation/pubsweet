@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 import MenuButton from './MenuButton'
 
 const Wrapper = styled.div`
@@ -10,12 +10,18 @@ const Wrapper = styled.div`
   margin-bottom: 0.8em;
   margin-top: 0;
   flex-direction: column;
+
+  ${override('xpub-edit.MenuBar.Wrapper')};
 `
-const ToolBar = styled.div``
+const ToolBar = styled.div`
+  ${override('xpub-edit.MenuBar.ToolBar')};
+`
 
 const Legend = styled.div`
   font-size: ${th('fontSizeBase')};
   margin-right: 10px;
+
+  ${override('xpub-edit.MenuBar.Legend')};
 `
 
 const MenuBar = ({ title, menu, state, dispatch }) => (
