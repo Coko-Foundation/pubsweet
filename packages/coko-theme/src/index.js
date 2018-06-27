@@ -35,6 +35,7 @@ const cokoTheme = {
   colorText: '#111',
   colorTextReverse: '#FFF',
   colorTextPlaceholder: '#595959',
+  colorWarning: '#ffc107',
 
   // TODO -- not used anywhere
   //   $colorInteract: var($colorPrimaryDarker);

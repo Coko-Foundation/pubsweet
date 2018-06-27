@@ -16,6 +16,7 @@ export default {
   colorText: '#333',
   colorTextReverse: '#fff',
   colorTextPlaceholder: '#595959',
+  colorWarning: '#ffc107',
 
   /* Text variables */
   fontInterface: "'Noto Sans'",

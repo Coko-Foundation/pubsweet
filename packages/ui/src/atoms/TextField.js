@@ -18,6 +18,7 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
     error: theme.colorError,
     success: theme.colorSuccess,
     default: theme.colorBorder,
+    warning: theme.colorWarning,
   }[validationStatus])
 
 const Input = styled.input`
