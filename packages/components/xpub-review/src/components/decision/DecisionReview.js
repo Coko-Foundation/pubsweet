@@ -68,7 +68,7 @@ const DecisionReview = ({ review, reviewer, journal, open, toggleOpen }) => {
   const { name, ordinal } = reviewer
 
   const Root = styled.div`
-    margin-bottom: ${th('gridUnit')};
+    margin-bottom: calc(${th('gridUnit')} * 3);
   `
 
   const ReviewBody = styled.div`

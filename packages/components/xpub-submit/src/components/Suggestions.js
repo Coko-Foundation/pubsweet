@@ -27,7 +27,7 @@ const OpposedEditorInput = input => (
 
 const SubLegend = Legend.extend`
   font-weight: normal;
-  margin-top: ${th('gridUnit')};
+  margin-top: calc(${th('gridUnit')} * 3);
 `
 
 const SuggestionsEditable = ({ readonly }) => (

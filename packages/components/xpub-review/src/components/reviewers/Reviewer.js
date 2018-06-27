@@ -7,8 +7,8 @@ import { th } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   font-family: ${th('fontReviewer')};
-  margin-right: ${th('subGridUnit')};
-  padding: ${th('subGridUnit')};
+  margin-right: ${th('gridUnit')};
+  padding: ${th('gridUnit')};
 `
 
 const Event = styled.div`

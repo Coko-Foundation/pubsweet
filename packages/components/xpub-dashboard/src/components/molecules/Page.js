@@ -7,10 +7,10 @@ const Page = styled.div`
 `
 
 const Section = styled.div`
-  margin: ${th('gridUnit')} 0;
+  margin: calc(${th('gridUnit')} * 3) 0;
 
   &:not(:last-of-type) {
-    margin-bottom: calc(${th('gridUnit')} * 2);
+    margin-bottom: calc(${th('gridUnit')} * 6);
   }
 `
 
@@ -18,7 +18,7 @@ const Heading = styled.div`
   color: ${th('colorPrimary')};
   font-family: ${th('fontReading')};
   font-size: ${th('fontSizeHeading3')};
-  margin: ${th('gridUnit')} 0;
+  margin: calc(${th('gridUnit')} * 3) 0;
   text-transform: uppercase;
 `
 

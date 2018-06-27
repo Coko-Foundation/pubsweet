@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
 const Tab = styled.div`
-  padding: ${th('subGridUnit')} 1em;
+  padding: ${th('gridUnit')} 1em;
   font-size: ${th('fontSizeBaseSmall')};
   border-width: 0 ${th('borderWidth')} ${th('borderWidth')} 0;
   border-style: ${th('borderStyle')};

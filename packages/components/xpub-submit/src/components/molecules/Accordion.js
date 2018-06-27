@@ -51,7 +51,7 @@ const AccordionHeading = ({
   const Root = styled.div`
     display: flex;
     align-items: baseline;
-    margin-bottom: ${th('gridUnit')};
+    margin-bottom: calc(${th('gridUnit')} * 3);
   `
 
   const Ordinal = styled(Title)``

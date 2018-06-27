@@ -11,14 +11,14 @@ const Input = styled.input`
 const PseudoInput = styled.span`
   display: inline-block;
   content: ' ';
-  width: calc(${th('subGridUnit')} * 2);
-  height: calc(${th('subGridUnit')} * 2);
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2);
   vertical-align: center;
-  margin-left: ${th('subGridUnit')};
-  margin-right: ${th('subGridUnit')};
+  margin-left: ${th('gridUnit')};
+  margin-right: ${th('gridUnit')};
 
   /* This is not a real border (box-shadow provides that), so not themed as such */
-  border: calc(${th('subGridUnit')} / 4) solid white;
+  border: calc(${th('gridUnit')} / 4) solid white;
   border-radius: 50%;
 
   transition: border ${th('transitionDuration')}
@@ -54,10 +54,11 @@ const Root = styled.label`
   cursor: pointer;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   transition: all ${th('transitionDuration')};
-  min-height: ${th('gridUnit')};
+  min-height: calc(${th('gridUnit')} * 3);
 
   &:not(:last-child) {
-    margin-right: ${props => (props.inline ? props.theme.gridUnit : '0')};
+    margin-right: ${props =>
+      props.inline ? `calc(${props.theme.gridUnit} * 3)` : '0'};
     margin-bottom: 0;
   }
 

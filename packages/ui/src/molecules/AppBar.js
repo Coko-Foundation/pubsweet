@@ -11,7 +11,7 @@ const Root = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: calc(${th('gridUnit')} * 2);
+  min-height: calc(${th('gridUnit')} * 6);
 
   ${override('ui.AppBar')};
 `
@@ -22,15 +22,14 @@ const Section = styled.div`
 `
 
 const Logo = styled.span`
-  margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
-    1rem;
+  margin: calc(${th('gridUnit')} * 2) 1rem calc(${th('gridUnit')} * 2) 1rem;
 
   ${override('ui.AppBar.Logo')};
 `
 
 const LogoLink = styled(Action)`
   & > * {
-    height: calc(${th('gridUnit')} * 2);
+    height: calc(${th('gridUnit')} * 6);
   }
 
   ${override('ui.AppBar.LogoLink')};
@@ -39,7 +38,7 @@ const LogoLink = styled(Action)`
 const Item = styled.span`
   align-items: center;
   display: inline-flex;
-  margin: calc(${th('gridUnit')} * 1) 1rem calc(${th('gridUnit')} * 1) 0;
+  margin: calc(${th('gridUnit')} * 3) 1rem calc(${th('gridUnit')} * 3) 0;
 `
 // #endregion
 

@@ -14,7 +14,7 @@ const fontSize = ({ theme, level = 1 }) =>
 const Title = styled.div`
   font-size: ${fontSize};
   font-family: ${th('fontHeading')};
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 3);
 
   ${override('ui.Title')};
 `

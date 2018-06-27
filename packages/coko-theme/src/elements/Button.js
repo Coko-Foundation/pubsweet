@@ -27,6 +27,8 @@ const secondary = css`
 `
 
 export default css`
+  line-height: calc(${th('gridUnit')} * 4);
+  min-width: calc(${th('gridUnit')} * 16);
   text-transform: uppercase;
   ${props => !props.primary && secondary};
 `

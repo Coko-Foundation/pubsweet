@@ -9,12 +9,12 @@ import { th } from '@pubsweet/ui-toolkit'
 const MessageWrapper = styled.div`
   font-family: ${th('fontInterface')};
   display: block;
-  margin-top: calc(${th('gridUnit')} * -1);
+  margin-top: calc(${th('gridUnit')} * -3);
 `
 
 const Message = styled.div`
   &:not(:last-child) {
-    margin-bottom: ${th('subGridUnit')};
+    margin-bottom: ${th('gridUnit')};
   }
   font-size: ${th('fontSizeBaseSmall')};
 `

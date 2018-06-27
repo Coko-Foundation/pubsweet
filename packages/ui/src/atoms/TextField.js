@@ -5,7 +5,8 @@ import { th, override } from '@pubsweet/ui-toolkit'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  margin-bottom: ${props =>
+    props.inline ? '0' : `calc(${props.theme.gridUnit} * 3)`};
   ${override('ui.TextField')};
 `
 
@@ -31,14 +32,14 @@ const Input = styled.input`
   font-family: inherit;
   font-size: inherit;
 
-  padding: 0 calc(${th('gridUnit')} / 2);
-  height: calc(${th('gridUnit')} * 2);
+  padding: 0 ${th('gridUnit')};
+  height: calc(${th('gridUnit')} * 6);
 
   &::placeholder {
     color: ${th('colorTextPlaceholder')};
   }
 
-  ${override('ui.TextField.Input')};
+  /* ${override('ui.TextField.Input')}; */
 `
 
 class TextField extends React.Component {
