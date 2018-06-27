@@ -10,7 +10,7 @@
   "dependencies": {
     "@elifesciences/elife-theme": "^1.0.0",
     "@pubsweet/default-theme": "^1.0.0",
-    "@pubsweet/ui": "^4.1.3",
+    "@pubsweet/ui": "^5.0.1",
     "@pubsweet/ui-toolkit": "^1.1.0",
     "faker": "^4.1.0",
     "lodash": "^4.17.5",

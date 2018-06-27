@@ -6,7 +6,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^4.1.3",
+    "@pubsweet/ui": "^5.0.1",
     "prop-types": "^15.5.10",
     "pubsweet-component-form-group": "^1.1.14",
     "react-redux": "^5.0.6",
