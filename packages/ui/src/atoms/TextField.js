@@ -6,13 +6,13 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
-  ${override('TextField.Root')};
+  ${override('ui.TextField')};
 `
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   display: block;
-  ${override('TextField.Label')};
+  ${override('ui.TextField.Label')};
 `
 
 const borderColor = ({ theme, validationStatus = 'default' }) =>
@@ -37,7 +37,7 @@ const Input = styled.input`
     color: ${th('colorTextPlaceholder')};
   }
 
-  ${override('TextField.Input')};
+  ${override('ui.TextField.Input')};
 `
 
 class TextField extends React.Component {
