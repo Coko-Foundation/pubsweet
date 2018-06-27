@@ -11,17 +11,22 @@ const ConfigurableEditor = props => (
   </EditorOptions>
 )
 
+const optionPropType = PropTypes.oneOfType([
+  PropTypes.bool,
+  PropTypes.shape({ icon: PropTypes.node }),
+])
+
 ConfigurableEditor.propTypes = {
-  bold: PropTypes.bool,
-  italic: PropTypes.bool,
-  underline: PropTypes.bool,
-  superscript: PropTypes.bool,
-  subscript: PropTypes.bool,
-  smallcaps: PropTypes.bool,
-  link: PropTypes.bool,
-  heading: PropTypes.bool,
-  undo: PropTypes.bool,
-  redo: PropTypes.bool,
+  bold: optionPropType,
+  italic: optionPropType,
+  underline: optionPropType,
+  superscript: optionPropType,
+  subscript: optionPropType,
+  smallcaps: optionPropType,
+  link: optionPropType,
+  heading: optionPropType,
+  undo: optionPropType,
+  redo: optionPropType,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
