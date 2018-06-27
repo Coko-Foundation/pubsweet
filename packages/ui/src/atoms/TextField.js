@@ -6,12 +6,12 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  ${override('ui.TextField')};
 `
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   display: block;
-
   ${override('ui.TextField.Label')};
 `
 
