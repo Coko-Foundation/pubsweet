@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.2...pubsweet-component-login@1.1.3) (2018-06-19)
+
+
+### Bug Fixes
+
+* **pubsweet-ui:** tests are failing ([0e57798](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0e57798))
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.1...pubsweet-component-login@1.1.2) (2018-04-03)
 

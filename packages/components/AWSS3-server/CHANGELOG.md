@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.2"></a>
+## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.1.1...@pubsweet/component-aws-s3@1.1.2) (2018-06-19)
+
+
+### Bug Fixes
+
+* add content-type to delete file middleware ([9fd2d92](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9fd2d92))
+
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.1.0...@pubsweet/component-aws-s3@1.1.1) (2018-06-01)
 

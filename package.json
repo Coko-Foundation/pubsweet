@@ -51,7 +51,6 @@
       "logger/src/**/*.js",
       "server/src/**/*.js",
       "sse/lib/**/*.js",
-      "theme-plugin/*.js",
       "ui/src/**/*.{js,jsx}",
       "!**/*.test.{js,jsx}",
       "!**/node_modules/**"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@2.0.0...@pubsweet/styleguide@2.0.1) (2018-06-19)
+
+
+### Bug Fixes
+
+* **styleguide:** include babel-polyfill for styleguide ([67b4ab8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/67b4ab8))
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@1.3.4...@pubsweet/styleguide@2.0.0) (2018-06-01)
 

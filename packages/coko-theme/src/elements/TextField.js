@@ -12,6 +12,8 @@ export default {
       switch (props.validationStatus) {
         case 'success':
           return props.theme.colorSuccess
+        case 'warning':
+          return props.theme.colorWarning
         case 'error':
           return props.theme.colorError
         default:
@@ -22,6 +24,8 @@ export default {
       switch (props.validationStatus) {
         case 'success':
           return props.theme.colorSuccess
+        case 'warning':
+          return props.theme.colorWarning
         case 'error':
           return props.theme.colorError
         default:

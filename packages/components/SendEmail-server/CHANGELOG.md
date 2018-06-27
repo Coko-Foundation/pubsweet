@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.4"></a>
+## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.2.3...@pubsweet/component-send-email@0.2.4) (2018-06-19)
+
+
+### Bug Fixes
+
+* **send-email-server:** use config package according to documentation ([d05d72f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d05d72f))
+
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.2.2...@pubsweet/component-send-email@0.2.3) (2018-04-03)
 

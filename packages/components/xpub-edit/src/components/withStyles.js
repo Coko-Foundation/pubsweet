@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const contentStyles = css`
   hr {
@@ -72,6 +72,8 @@ export const withEditorStyle = Component => styled(Component).attrs({
   }
 
   ${contentStyles};
+
+  ${override('xpub-edit.Editor')};
 `
 
 export const withViewerStyle = Component => styled(Component)`

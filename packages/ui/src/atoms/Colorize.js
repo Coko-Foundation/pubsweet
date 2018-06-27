@@ -6,6 +6,7 @@ const Colorize = Component => {
   const Colorized = ({
     primary,
     secondary,
+    warning,
     furniture,
     success,
     error,
@@ -18,6 +19,7 @@ const Colorize = Component => {
       (primary && theme.colorPrimary) ||
       (secondary && theme.colorSecondary) ||
       (furniture && theme.colorFurniture) ||
+      (warning && theme.colorWarning) ||
       (success && theme.colorSuccess) ||
       (error && theme.colorError) ||
       (reverse && theme.colorTextReverse) ||

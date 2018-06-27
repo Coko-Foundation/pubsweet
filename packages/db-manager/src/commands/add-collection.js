@@ -2,7 +2,7 @@ const logger = require('@pubsweet/logger')
 const Collection = require('pubsweet-server/src/models/Collection')
 const User = require('pubsweet-server/src/models/User')
 
-module.exports = async collectionData => {
+module.exports = async (collectionData, fragment = null) => {
   logger.info('Creating collection')
 
   const collection = await new Collection(collectionData).save()
@@ -11,10 +11,14 @@ module.exports = async collectionData => {
   if (user) collection.setOwners([user.id])
   await collection.save()
 
+  if (fragment) collection.addFragment(fragment)
+  await collection.save()
+
   logger.info(
     `Successfully created collection ${
       user ? `and set ${user.id} as owner` : 'with no owner'
     }`,
   )
+
   return collection
 }
