@@ -1,16 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  ${override('ui.TextField')};
 `
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   display: block;
+  ${override('ui.TextField.Label')};
 `
 
 const borderColor = ({ theme, validationStatus = 'default' }) =>
@@ -36,7 +38,7 @@ const Input = styled.input`
     color: ${th('colorTextPlaceholder')};
   }
 
-  ${th('cssOverrides.TextField.Input')};
+  ${override('ui.TextField.Input')};
 `
 
 class TextField extends React.Component {
