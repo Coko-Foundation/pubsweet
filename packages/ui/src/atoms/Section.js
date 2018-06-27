@@ -8,7 +8,7 @@ const Section = styled.div`
     margin-bottom: calc(${th('gridUnit')} * 2);
   }
 
-  ${override('Section')};
+  ${override('ui.Section')};
 `
 
 /**

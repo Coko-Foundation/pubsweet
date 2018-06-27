@@ -21,7 +21,7 @@ const Value = styled.div`
     border-color: ${th('colorSecondary')};
   }
 
-  ${override('EditableValue')};
+  ${override('ui.EditableValue')};
 `
 
 const ESCAPE_KEY_CODE = 27

@@ -76,7 +76,7 @@ const Root = styled.label`
       ${th('colorPrimary')};
   }
 
-  ${override('Checkbox.Label')};
+  ${override('ui.Checkbox.Label')};
 `
 
 const Checkbox = ({

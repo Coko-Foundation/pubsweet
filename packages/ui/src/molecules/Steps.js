@@ -8,7 +8,7 @@ const Separator = styled.div`
   flex: 1;
   height: 2px;
 
-  ${override('Steps.Separator')};
+  ${override('ui.Steps.Separator')};
 `
 
 const StyledStep = styled.div`
@@ -21,7 +21,7 @@ const StyledStep = styled.div`
   position: relative;
   width: 16px;
 
-  ${override('Steps.Step')};
+  ${override('ui.Steps.Step')};
 `
 
 const Bullet = styled.div`
@@ -30,7 +30,7 @@ const Bullet = styled.div`
   height: 10px;
   width: 10px;
 
-  ${override('Steps.Bullet')};
+  ${override('ui.Steps.Bullet')};
 `
 
 const Success = Bullet.extend`
@@ -42,7 +42,7 @@ const Success = Bullet.extend`
   justify-content: center;
   width: 18px;
 
-  ${override('Steps.Success')};
+  ${override('ui.Steps.Success')};
 `
 
 const StepTitle = styled.span`
@@ -54,7 +54,7 @@ const StepTitle = styled.span`
   white-space: normal;
   width: 120px;
 
-  ${override('Steps.StepTitle')};
+  ${override('ui.Steps.StepTitle')};
 `
 
 const Root = styled.div`
@@ -65,7 +65,7 @@ const Root = styled.div`
   margin: ${({ margin }) => margin};
   min-width: 500px;
 
-  ${override('Steps')};
+  ${override('ui.Steps')};
 `
 
 const Step = ({ title, index, currentStep }) => (

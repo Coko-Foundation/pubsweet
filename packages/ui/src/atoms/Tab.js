@@ -10,7 +10,7 @@ const Tab = styled.div`
   border-color: ${({ active, theme }) =>
     active ? theme.colorPrimary : theme.colorBorder};
 
-  ${override('Tab')};
+  ${override('ui.Tab')};
 `
 
 /** @component */

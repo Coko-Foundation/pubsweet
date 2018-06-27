@@ -14,7 +14,7 @@ const Container = styled.span`
     width: calc(${props => props.size} * ${th('subGridUnit')});
     height: calc(${props => props.size} * ${th('subGridUnit')});
   }
-  ${override('Icon')};
+  ${override('ui.Icon')};
 `
 
 const Icon = ({ children, color, size = 3, ...props }) => {

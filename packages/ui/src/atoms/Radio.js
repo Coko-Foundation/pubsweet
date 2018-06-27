@@ -77,7 +77,7 @@ const Root = styled.label`
       box-shadow: 0 0 0 ${th('borderWidth')}
         ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
-    ${override('Radio.Label')};
+    ${override('ui.Radio.Label')};
   }
 
   ${Input}:focus + ${PseudoInput} {

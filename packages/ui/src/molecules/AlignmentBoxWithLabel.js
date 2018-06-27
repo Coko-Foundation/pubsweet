@@ -12,7 +12,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: row;
 
-  ${override('AlignmentBoxWithLabel')};
+  ${override('ui.AlignmentBoxWithLabel')};
 `
 
 const Label = styled.span`
@@ -24,7 +24,7 @@ const Label = styled.span`
   margin-right: ${props => (props.positionRight ? '0' : '10px')};
   order: ${props => (props.positionRight ? '2' : '0')};
 
-  ${override('AlignmentBoxWithLabel.Label')};
+  ${override('ui.AlignmentBoxWithLabel.Label')};
 `
 
 const AlignmentBoxWithLabel = ({

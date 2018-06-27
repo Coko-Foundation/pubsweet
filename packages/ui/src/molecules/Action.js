@@ -34,7 +34,7 @@ const common = css`
     text-decoration: underline;
   }
 
-  ${override('Action')};
+  ${override('ui.Action')};
 `
 
 const Button = OriginalButton.extend`

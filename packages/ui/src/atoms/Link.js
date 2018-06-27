@@ -6,7 +6,7 @@ const Link = styled(UnstyledLink)`
   color: ${th('colorPrimary')};
   cursor: pointer;
 
-  ${override('Link')};
+  ${override('ui.Link')};
 `
 
 /**

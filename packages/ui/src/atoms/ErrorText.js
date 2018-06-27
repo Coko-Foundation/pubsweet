@@ -4,7 +4,7 @@ import { th, override } from '@pubsweet/ui-toolkit'
 const ErrorText = styled.div`
   color: ${th('colorError')};
 
-  ${override('ErrorText')};
+  ${override('ui.ErrorText')};
 `
 
 /**

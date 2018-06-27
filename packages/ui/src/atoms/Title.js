@@ -16,7 +16,7 @@ const Title = styled.div`
   font-family: ${th('fontHeading')};
   margin-bottom: ${th('gridUnit')};
 
-  ${override('Title')};
+  ${override('ui.Title')};
 `
 
 /**

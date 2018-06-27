@@ -13,7 +13,7 @@ const Root = styled.nav`
   justify-content: space-between;
   min-height: calc(${th('gridUnit')} * 2);
 
-  ${override('AppBar')};
+  ${override('ui.AppBar')};
 `
 
 const Section = styled.div`
@@ -25,7 +25,7 @@ const Logo = styled.span`
   margin: calc(${th('subGridUnit')} * 2) 1rem calc(${th('subGridUnit')} * 2)
     1rem;
 
-  ${override('AppBar.Logo')};
+  ${override('ui.AppBar.Logo')};
 `
 
 const LogoLink = styled(Action)`
@@ -33,7 +33,7 @@ const LogoLink = styled(Action)`
     height: calc(${th('gridUnit')} * 2);
   }
 
-  ${override('AppBar.LogoLink')};
+  ${override('ui.AppBar.LogoLink')};
 `
 
 const Item = styled.span`
