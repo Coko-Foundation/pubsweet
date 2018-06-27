@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { reducer as formReducer } from 'redux-form'
+import currentUser from 'pubsweet-client/src/reducers/currentUser'
 import { createStore, combineReducers } from 'redux'
 import { JournalProvider } from 'xpub-journal'
 import * as journal from 'xpub-styleguide/src/config/journal'
@@ -11,10 +12,20 @@ import { currentTheme, themes, componentStore } from './StyleGuideRenderer'
 
 const rootReducer = combineReducers({
   form: formReducer,
+  currentUser,
 })
 
 const store = createStore(
   rootReducer,
+  {
+    currentUser: {
+      user: {
+        admin: true,
+        type: 'user',
+        id: 1,
+      },
+    },
+  },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
 
