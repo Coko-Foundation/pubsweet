@@ -35,7 +35,7 @@ describe('add-collection', () => {
       fragmentType: 'version',
     }).save()
 
-    await addCollection({})
+    await addCollection({}, fragment)
     const [actualCollection] = await Collection.all()
 
     expect(actualCollection).toMatchObject({
