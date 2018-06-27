@@ -2,7 +2,7 @@
 
 exports[`Menu is rendered correctly 1`] = `
 .c0 {
-  margin-bottom: 32px;
+  margin-bottom: calc(8px * 3);
 }
 
 .c2 {
@@ -12,7 +12,7 @@ exports[`Menu is rendered correctly 1`] = `
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(32px * 2);
+  height: calc(8px * 6);
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -34,7 +34,7 @@ exports[`Menu is rendered correctly 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding: 0 calc(32px / 2);
+  padding: 0 8px;
 }
 
 .c3:hover {
@@ -43,8 +43,8 @@ exports[`Menu is rendered correctly 1`] = `
 
 .c4 {
   border-left: 1px solid grey;
-  width: calc(32px * 2);
-  height: calc(32px * 2 - 1px * 2);
+  width: calc(8px * 6);
+  height: calc(8px * 6 - 1px * 2);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,7 +118,7 @@ exports[`Menu is rendered correctly 1`] = `
 
 exports[`Menu is rendered correctly when open 1`] = `
 .c0 {
-  margin-bottom: 32px;
+  margin-bottom: calc(8px * 3);
 }
 
 .c1 {
@@ -138,7 +138,7 @@ exports[`Menu is rendered correctly when open 1`] = `
   cursor: pointer;
   font-family: inherit;
   width: 100%;
-  height: calc(32px * 2);
+  height: calc(8px * 6);
   padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -160,7 +160,7 @@ exports[`Menu is rendered correctly when open 1`] = `
   -ms-flex-positive: 1;
   flex-grow: 1;
   text-align: left;
-  padding: 0 calc(32px / 2);
+  padding: 0 8px;
 }
 
 .c4:hover {
@@ -169,8 +169,8 @@ exports[`Menu is rendered correctly when open 1`] = `
 
 .c5 {
   border-left: 1px solid grey;
-  width: calc(32px * 2);
-  height: calc(32px * 2 - 1px * 2);
+  width: calc(8px * 6);
+  height: calc(8px * 6 - 1px * 2);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

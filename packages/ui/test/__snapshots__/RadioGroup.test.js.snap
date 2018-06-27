@@ -41,7 +41,7 @@ exports[`Radio Group is rendered correctly 1`] = `
   display: flex;
   -webkit-transition: all 1s;
   transition: all 1s;
-  min-height: 32px;
+  min-height: calc(8px * 3);
   color: black;
 }
 
