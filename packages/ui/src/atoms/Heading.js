@@ -7,32 +7,32 @@ const style = css`
   color: ${th('colorPrimary')};
   font-size: ${({ level = 1, theme }) => theme[`fontSizeHeading${level}`]};
   font-family: ${th('fontHeading')};
-  ${override('Heading')};
+  ${override('ui.Heading')};
 `
 
 export const H1 = styled.h1.attrs({ level: 1 })`
   ${style};
-  ${override('H1')};
+  ${override('ui.H1')};
 `
 export const H2 = styled.h2.attrs({ level: 2 })`
   ${style};
-  ${override('H2')};
+  ${override('ui.H2')};
 `
 export const H3 = styled.h3.attrs({ level: 3 })`
   ${style};
-  ${override('H3')};
+  ${override('ui.H3')};
 `
 export const H4 = styled.h4.attrs({ level: 4 })`
   ${style};
-  ${override('H4')};
+  ${override('ui.H4')};
 `
 export const H5 = styled.h5.attrs({ level: 5 })`
   ${style};
-  ${override('H5')};
+  ${override('ui.H5')};
 `
 export const H6 = styled.h6.attrs({ level: 6 })`
   ${style};
-  ${override('H6')};
+  ${override('ui.H6')};
 `
 
 const componentMap = [null, H1, H2, H3, H4, H5, H6]

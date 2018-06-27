@@ -12,7 +12,7 @@
 
 import React from 'react'
 import { css } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 import OriginalButton from '../atoms/Button'
 import OriginalLink from '../atoms/Link'
@@ -34,7 +34,7 @@ const common = css`
     text-decoration: underline;
   }
 
-  ${th('cssOverrides.Action')};
+  ${override('ui.Action')};
 `
 
 const Button = OriginalButton.extend`

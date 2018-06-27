@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Input = styled.input`
   position: absolute;
@@ -85,6 +85,8 @@ const Root = styled.label`
   }
 
   color: ${props => props.color};
+
+  ${override('ui.Radio')};
 `
 
 /* Not used for now

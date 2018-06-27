@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const ErrorText = styled.div`
   color: ${th('colorError')};
+
+  ${override('ui.ErrorText')};
 `
 
 /**

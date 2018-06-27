@@ -77,11 +77,13 @@ const cokoTheme = {
   transitionDelay: '0',
 
   cssOverrides: {
-    Action,
-    ActionGroup,
-    AppBar,
-    Button,
-    TextField,
+    ui: {
+      Action,
+      ActionGroup,
+      AppBar,
+      Button,
+      TextField,
+    },
   },
 }
 

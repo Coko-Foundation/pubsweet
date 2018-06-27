@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { override } from '@pubsweet/ui-toolkit'
 
 const Separator = styled.div`
   background-color: #000;
   flex: 1;
   height: 2px;
+
+  ${override('ui.Steps.Separator')};
 `
 
 const StyledStep = styled.div`
@@ -17,6 +20,8 @@ const StyledStep = styled.div`
   justify-content: center;
   position: relative;
   width: 16px;
+
+  ${override('ui.Steps.Step')};
 `
 
 const Bullet = styled.div`
@@ -24,6 +29,8 @@ const Bullet = styled.div`
   border-radius: 50%;
   height: 10px;
   width: 10px;
+
+  ${override('ui.Steps.Bullet')};
 `
 
 const Success = Bullet.extend`
@@ -34,6 +41,8 @@ const Success = Bullet.extend`
   height: 18px;
   justify-content: center;
   width: 18px;
+
+  ${override('ui.Steps.Success')};
 `
 
 const StepTitle = styled.span`
@@ -44,6 +53,8 @@ const StepTitle = styled.span`
   top: 25px;
   white-space: normal;
   width: 120px;
+
+  ${override('ui.Steps.StepTitle')};
 `
 
 const Root = styled.div`
@@ -53,6 +64,8 @@ const Root = styled.div`
   justify-content: space-between;
   margin: ${({ margin }) => margin};
   min-width: 500px;
+
+  ${override('ui.Steps')};
 `
 
 const Step = ({ title, index, currentStep }) => (

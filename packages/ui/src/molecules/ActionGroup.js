@@ -5,14 +5,14 @@ import { override, th } from '@pubsweet/ui-toolkit'
 import Action from './Action'
 
 const Group = styled.div`
-  ${override('ActionGroup')};
+  ${override('ui.ActionGroup')};
 `
 
 const ActionWrapper = styled.div`
   display: inline-block;
   padding: 0 ${th('subGridUnit')};
 
-  ${override('ActionGroup.ActionWrapper')};
+  ${override('ui.ActionGroup.ActionWrapper')};
 `
 
 const ActionGroup = props => {
