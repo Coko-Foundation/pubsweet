@@ -189,7 +189,6 @@ module.exports = app => {
           nextVersionData = canCreateVersion.filter(nextVersionData)
         }
         nextVersion = new Fragment(nextVersionData)
-        // nextVersion.setOwners([req.user])
 
         canViewNextVersion = await authsome.can(req.user, 'GET', nextVersion)
       }
