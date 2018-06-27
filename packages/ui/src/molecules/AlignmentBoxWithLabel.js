@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 import { AlignmentBox } from '../atoms'
 
@@ -11,6 +11,8 @@ const Root = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+
+  ${override('AlignmentBoxWithLabel')};
 `
 
 const Label = styled.span`
@@ -21,6 +23,8 @@ const Label = styled.span`
   margin-left: ${props => (props.positionRight ? '10px' : '0')};
   margin-right: ${props => (props.positionRight ? '0' : '10px')};
   order: ${props => (props.positionRight ? '2' : '0')};
+
+  ${override('AlignmentBoxWithLabel.Label')};
 `
 
 const AlignmentBoxWithLabel = ({

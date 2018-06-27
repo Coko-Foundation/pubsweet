@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 import { TextField } from '../atoms'
 
@@ -20,6 +20,8 @@ const Value = styled.div`
   &:hover {
     border-color: ${th('colorSecondary')};
   }
+
+  ${override('EditableValue')};
 `
 
 const ESCAPE_KEY_CODE = 27
