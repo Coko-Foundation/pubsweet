@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const checking = keyframes`
   0% {
@@ -75,6 +75,8 @@ const Root = styled.label`
     box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
       ${th('colorPrimary')};
   }
+
+  ${override('Checkbox.Label')};
 `
 
 const Checkbox = ({

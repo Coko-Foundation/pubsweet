@@ -3,7 +3,7 @@ import _ from 'lodash'
 import * as icons from 'react-feather'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 import { Colorize } from '../atoms'
 
 const Container = styled.span`
@@ -14,6 +14,7 @@ const Container = styled.span`
     width: calc(${props => props.size} * ${th('subGridUnit')});
     height: calc(${props => props.size} * ${th('subGridUnit')});
   }
+  ${override('Icon')};
 `
 
 const Icon = ({ children, color, size = 3, ...props }) => {

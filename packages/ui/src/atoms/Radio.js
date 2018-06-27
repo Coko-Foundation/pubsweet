@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Input = styled.input`
   position: absolute;
@@ -77,6 +77,7 @@ const Root = styled.label`
       box-shadow: 0 0 0 ${th('borderWidth')}
         ${props => (props.checked ? 'currentcolor' : props.theme.colorPrimary)};
     }
+    ${override('Radio.Label')};
   }
 
   ${Input}:focus + ${PseudoInput} {

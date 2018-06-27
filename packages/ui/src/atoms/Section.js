@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Section = styled.div`
   margin: 0 ${th('gridUnit')} ${th('gridUnit')} 0;
@@ -7,6 +7,8 @@ const Section = styled.div`
   &:not(:last-of-type) {
     margin-bottom: calc(${th('gridUnit')} * 2);
   }
+
+  ${override('Section')};
 `
 
 /**

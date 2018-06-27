@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const Tab = styled.div`
   padding: ${th('subGridUnit')} 1em;
@@ -9,6 +9,8 @@ const Tab = styled.div`
   border-style: ${th('borderStyle')};
   border-color: ${({ active, theme }) =>
     active ? theme.colorPrimary : theme.colorBorder};
+
+  ${override('Tab')};
 `
 
 /** @component */

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 const fontSize = ({ theme, level = 1 }) =>
   ({
@@ -15,6 +15,8 @@ const Title = styled.div`
   font-size: ${fontSize};
   font-family: ${th('fontHeading')};
   margin-bottom: ${th('gridUnit')};
+
+  ${override('Title')};
 `
 
 /**
