@@ -58,7 +58,7 @@ const StyledButton = styled.button.attrs({
   }
 
   ${props => props.primary && primary};
-  ${override('Button')};
+  ${override('ui.Button')};
 `
 
 export default StyledButton
