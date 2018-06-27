@@ -235,6 +235,7 @@ class Menu extends React.Component {
 
   optionLabel = value => {
     const { options } = this.props
+
     return options.find(option => option.value === value).label
   }
 
