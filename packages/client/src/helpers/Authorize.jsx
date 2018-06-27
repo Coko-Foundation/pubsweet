@@ -44,7 +44,7 @@ export class Authorize extends React.Component {
     }
   }
 
-  renderValidReactElement() {
+  renderUnauthorizedProp() {
     return React.isValidElement(this.props.unauthorized) ||
       this.props.unauthorized === null
       ? this.props.unauthorized
@@ -56,7 +56,7 @@ export class Authorize extends React.Component {
 
     return this.state.authorized === true
       ? this.props.children
-      : this.renderValidReactElement()
+      : this.renderUnauthorizedProp()
   }
 }
 
