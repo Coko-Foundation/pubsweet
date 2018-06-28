@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@1.0.1...xpub-connect@1.1.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **connectpage:** add redirect on anothorized ([2d256a8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2d256a8))
+
+
+### Features
+
+* **connectpage:** add authsome mode to ConnectPage ([1f85eff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1f85eff))
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@1.0.0...xpub-connect@1.0.1) (2018-06-19)
 

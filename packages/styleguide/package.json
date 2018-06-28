@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "license": "MIT",
   "files": [
     "src",
@@ -9,8 +9,8 @@
   "main": "src",
   "dependencies": {
     "@elifesciences/elife-theme": "^1.0.0",
-    "@pubsweet/default-theme": "^1.0.0",
-    "@pubsweet/ui": "^5.0.1",
+    "@pubsweet/default-theme": "^2.0.0",
+    "@pubsweet/ui": "^6.0.0",
     "@pubsweet/ui-toolkit": "^1.1.0",
     "faker": "^4.1.0",
     "lodash": "^4.17.5",

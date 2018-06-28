@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.9"></a>
+## [1.1.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.1.8...pubsweet-component-teams-manager@1.1.9) (2018-06-28)
+
+
+### Bug Fixes
+
+* **monorepo:** fix versions of ui across repo ([72ada07](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/72ada07))
+
+
+
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.1.7...pubsweet-component-teams-manager@1.1.8) (2018-05-21)
 

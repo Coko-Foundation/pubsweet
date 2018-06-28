@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@2.0.1...@pubsweet/styleguide@3.0.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **elife-theme:** use elifesciences org instead of pubsweet for theme ([310a418](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/310a418))
+* **monorepo:** fix versions of ui across repo ([72ada07](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/72ada07))
+
+
+### Code Refactoring
+
+* **ui:** replace current gridunit variables with one small value ([cf48f29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf48f29))
+
+
+### BREAKING CHANGES
+
+* **ui:** Your ui components will now be multiplying a much smaller value so they need to be
+adjusted
+
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@2.0.0...@pubsweet/styleguide@2.0.1) (2018-06-19)
 
