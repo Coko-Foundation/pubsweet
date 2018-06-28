@@ -25,10 +25,6 @@
   `
 
   Now both of the above scenarios will work.
-
-  NOTE: Makes the assumption that you are following the pubsweet convention of
-        putting your overrides under the cssOverrides property of your theme
-        object.
 */
 
 import { css } from 'styled-components'
