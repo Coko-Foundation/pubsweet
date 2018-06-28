@@ -6,7 +6,15 @@ import { headingScale } from '@pubsweet/ui-toolkit'
 
 import { injectGlobal } from 'styled-components'
 
-import { Action, ActionGroup, AppBar, Button, TextField } from './elements'
+import {
+  Action,
+  ActionGroup,
+  AppBar,
+  Button,
+  Checkbox,
+  Radio,
+  TextField,
+} from './elements'
 
 const fontSizeBase = 16
 const scale = 1.2
@@ -80,6 +88,8 @@ const cokoTheme = {
       ActionGroup,
       AppBar,
       Button,
+      Checkbox,
+      Radio,
       TextField,
     },
   },
