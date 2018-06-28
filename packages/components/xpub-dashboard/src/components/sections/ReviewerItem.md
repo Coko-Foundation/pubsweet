@@ -30,6 +30,7 @@ const version = {
 ;<ReviewerItem
   project={project}
   version={version}
+  lastSubmittedVersion={version}
   currentUser={currentUser}
   reviewerResponse={(id, status) => setState({ reviewer: { status } })}
 />
@@ -62,7 +63,12 @@ const version = {
   id: faker.random.uuid(),
   reviewers: [reviewer],
 }
-;<ReviewerItem project={project} version={version} currentUser={currentUser} />
+;<ReviewerItem
+  project={project}
+  version={version}
+  lastSubmittedVersion={version}
+  currentUser={currentUser}
+/>
 ```
 
 When the reviewer has declined the invitation to review, they can't perform any further actions.
@@ -92,5 +98,10 @@ const version = {
   id: faker.random.uuid(),
   reviewers: [reviewer],
 }
-;<ReviewerItem project={project} version={version} currentUser={currentUser} />
+;<ReviewerItem
+  project={project}
+  version={version}
+  lastSubmittedVersion={version}
+  currentUser={currentUser}
+/>
 ```
