@@ -14,7 +14,9 @@ import elifeTheme from '@elifesciences/elife-theme'
 
 const initialThemeName = 'defaultTheme'
 
-const currentTheme = { name: initialThemeName }
+const currentTheme = {
+  name: localStorage.getItem('currentTheme') || initialThemeName,
+}
 const themes = {
   defaultTheme,
   cokoTheme,
@@ -144,7 +146,7 @@ class StyleGuideRenderer extends React.Component {
     super(props)
     this.state = {
       grid: false,
-      themeName: initialThemeName,
+      themeName: currentTheme.name,
     }
   }
   render() {
@@ -170,6 +172,8 @@ class StyleGuideRenderer extends React.Component {
           this.setState({ themeName: value })
           // update theme state
           currentTheme.name = value
+          // update localstorage
+          localStorage.setItem('currentTheme', value)
         }}
         options={options}
         value={this.state.themeName}
