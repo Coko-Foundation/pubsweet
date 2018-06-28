@@ -3,11 +3,11 @@
 
   This is here so that you don't have to think about compatibility between this:
 
-  cssOverrides.TextField = css``
+  cssOverrides.ui.TextField = css``
 
   and this:
 
-  cssOverrides.TextField = {
+  cssOverrides.ui.TextField = {
     Root: css``,
     Input: css``
   }
@@ -21,7 +21,7 @@
   const TextField = styled.div`
     YOUR CSS HERE
 
-    ${override('TextField')};
+    ${override('ui.TextField')};
   `
 
   Now both of the above scenarios will work.
@@ -32,11 +32,18 @@
 */
 
 import { css } from 'styled-components'
+import { get, has } from 'lodash'
 import th from './themeHelper'
 
-const override = name => css`
-  ${th(`cssOverrides.${name}`)};
-  ${th(`cssOverrides.${name}.Root`)};
-`
+const override = name => props => {
+  if (has(get(props.theme.cssOverrides, name), 'Root')) {
+    return css`
+      ${th(`cssOverrides.${name}.Root`)};
+    `
+  }
+  return css`
+    ${th(`cssOverrides.${name}`)};
+  `
+}
 
 export default override
