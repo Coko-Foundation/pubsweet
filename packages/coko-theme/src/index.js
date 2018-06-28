@@ -10,7 +10,6 @@ import { Action, ActionGroup, AppBar, Button, TextField } from './elements'
 
 const fontSizeBase = 16
 const scale = 1.2
-const gridUnit = 24
 
 injectGlobal`
   body {
@@ -57,8 +56,7 @@ const cokoTheme = {
   fontLineHeight: '24px',
 
   /* Spacing */
-  gridUnit: `${gridUnit}px`,
-  subGridUnit: '6px',
+  gridUnit: '6px',
 
   /* Border */
   borderRadius: '0',

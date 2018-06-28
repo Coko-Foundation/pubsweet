@@ -9,11 +9,11 @@ import { Tab } from '../atoms'
 const Root = styled.div``
 const TabsContainer = styled.div`
   display: flex;
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 3);
 `
 const Title = styled.div`
   border-bottom: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
-  padding: ${th('subGridUnit')} 1em;
+  padding: ${th('gridUnit')} 1em;
 `
 const TabContainer = styled.div``
 const Content = styled.div``

@@ -32,21 +32,21 @@ const grid = css`
   div[data-preview] {
     background-image: ${props => `repeating-linear-gradient( to bottom,
     ${aDark},
-    ${aDark} ${props.theme.subGridUnit},
-    ${aLight} ${props.theme.subGridUnit},
-    ${aLight} calc(2 * ${props.theme.subGridUnit}),
-    ${bDark} calc(2 * ${props.theme.subGridUnit}),
-    ${bDark} calc(3 * ${props.theme.subGridUnit}),
-    ${bLight} calc(3 * ${props.theme.subGridUnit}),
-    ${bLight} calc(4 * ${props.theme.subGridUnit}),
-    ${bDark} calc(4 * ${props.theme.subGridUnit}),
-    ${bDark} calc(5 * ${props.theme.subGridUnit}),
-    ${bLight} calc(5 * ${props.theme.subGridUnit}),
-    ${bLight} calc(6 * ${props.theme.subGridUnit}),
-    ${aDark} calc(6 * ${props.theme.subGridUnit}),
-    ${aDark} calc(7 * ${props.theme.subGridUnit}),
-    ${aLight} calc(7 * ${props.theme.subGridUnit}),
-    ${aLight} calc(8 * ${props.theme.subGridUnit})
+    ${aDark} ${props.theme.gridUnit},
+    ${aLight} ${props.theme.gridUnit},
+    ${aLight} calc(2 * ${props.theme.gridUnit}),
+    ${bDark} calc(2 * ${props.theme.gridUnit}),
+    ${bDark} calc(3 * ${props.theme.gridUnit}),
+    ${bLight} calc(3 * ${props.theme.gridUnit}),
+    ${bLight} calc(4 * ${props.theme.gridUnit}),
+    ${bDark} calc(4 * ${props.theme.gridUnit}),
+    ${bDark} calc(5 * ${props.theme.gridUnit}),
+    ${bLight} calc(5 * ${props.theme.gridUnit}),
+    ${bLight} calc(6 * ${props.theme.gridUnit}),
+    ${aDark} calc(6 * ${props.theme.gridUnit}),
+    ${aDark} calc(7 * ${props.theme.gridUnit}),
+    ${aLight} calc(7 * ${props.theme.gridUnit}),
+    ${aLight} calc(8 * ${props.theme.gridUnit})
   )`};
 
     border-color: white;
@@ -84,7 +84,7 @@ const Content = styled.div`
   overflow-y: auto;
   padding: 1rem;
   *[data-preview] {
-    padding: calc(${th('gridUnit')} / 2);
+    padding: ${th('gridUnit')};
   }
   ${props => props.grid && grid};
 `
@@ -99,9 +99,9 @@ function makeNarrow(component) {
   return styled(component)`
     margin: ${props => `
         0
-        calc(${props.theme.subGridUnit} * 6)
-        ${props.theme.subGridUnit}
-        calc(${props.theme.subGridUnit} * 4)
+        calc(${props.theme.gridUnit} * 6)
+        ${props.theme.gridUnit}
+        calc(${props.theme.gridUnit} * 4)
         `};
   `
 }

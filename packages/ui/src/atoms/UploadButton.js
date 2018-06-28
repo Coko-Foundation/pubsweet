@@ -7,10 +7,10 @@ const Button = styled.button.attrs({
 })`
   background: transparent;
   border: ${th('borderWidth')} dashed ${th('colorBorder')};
-  height: ${th('gridUnit')};
+  height: calc(${th('gridUnit')} * 3);
   cursor: pointer;
-  margin-bottom: ${th('gridUnit')};
-  padding: ${th('subGridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 3);
+  padding: ${th('gridUnit')};
 `
 
 const UploadButton = ({ name, buttonText, onChange }) => {

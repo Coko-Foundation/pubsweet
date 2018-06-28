@@ -34,8 +34,7 @@ export default {
   fontLineHeight: '32px',
 
   /* Spacing */
-  gridUnit: '24px',
-  subGridUnit: '8px',
+  gridUnit: '8px',
 
   /* Border */
   borderRadius: '5px', // changed, needs check by designers

@@ -32,9 +32,9 @@ const StyledButton = styled.button.attrs({
   color: ${th('colorText')};
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
-  line-height: ${th('gridUnit')};
-  min-width: calc(${th('gridUnit')} * 4);
-  padding: calc(${th('gridUnit')} / 2);
+  line-height: calc(${th('gridUnit')} * 3);
+  min-width: calc(${th('gridUnit')} * 12);
+  padding: ${th('gridUnit')};
 
   &:focus,
   &:hover {

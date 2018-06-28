@@ -17,12 +17,12 @@ const Filename = styled.span`
 `
 
 const IconContainer = styled.span`
-  margin: 0 ${th('subGridUnit')};
+  margin: 0 ${th('gridUnit')};
 
   svg {
+    height: ${th('fontSizeBase')};
     stroke: ${props =>
       props.theme[props.uploaded ? 'colorPrimary' : 'colorText']};
-    height: ${th('fontSizeBase')};
     width: ${th('fontSizeBase')};
   }
 `

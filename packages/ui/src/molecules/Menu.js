@@ -11,7 +11,8 @@ import { th } from '@pubsweet/ui-toolkit'
 
 // #region styled components
 const Root = styled.div`
-  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  margin-bottom: ${props =>
+    props.inline ? '0' : `calc(${props.theme.gridUnit} * 3) `};
 `
 
 const CloseOverlay = styled.div`
@@ -39,7 +40,7 @@ const Opener = styled.button.attrs({
   font-family: inherit;
 
   width: 100%;
-  height: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 6);
   padding: 0;
 
   display: flex;
@@ -54,7 +55,7 @@ const Value = styled.span`
   flex-grow: 1;
 
   text-align: left;
-  padding: 0 calc(${th('gridUnit')} / 2);
+  padding: 0 ${th('gridUnit')};
 
   &:hover {
     color: ${th('colorPrimary')};
@@ -69,8 +70,8 @@ const Placeholder = Value.extend`
 const ArrowContainer = styled.span`
   border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
 
-  width: calc(${th('gridUnit')} * 2);
-  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
+  width: calc(${th('gridUnit')} * 6);
+  height: calc(${th('gridUnit')} * 6 - ${th('borderWidth')} * 2);
 
   display: flex;
   align-items: center;
@@ -118,8 +119,8 @@ const Option = styled.div.attrs({
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;
   font-family: ${th('fontAuthor')};
-  padding: calc(${th('subGridUnit')} - ${th('borderWidth')} * 2)
-    calc(${th('subGridUnit')} * 2);
+  padding: calc(${th('gridUnit')} - ${th('borderWidth')} * 2)
+    calc(${th('gridUnit')} * 2);
   border: ${th('borderWidth')} ${th('borderStyle')} transparent;
   border-width: ${th('borderWidth')} 0 ${th('borderWidth')} 0;
   white-space: nowrap;

@@ -4,48 +4,48 @@ import { th } from '@pubsweet/ui-toolkit'
 
 const Icon = styled.div`
   background: ${th('colorFurniture')};
-  height: calc(${th('subGridUnit')} * 15);
-  margin-bottom: ${th('subGridUnit')};
+  height: calc(${th('gridUnit')} * 15);
+  margin-bottom: ${th('gridUnit')};
   opacity: 0.5;
   position: relative;
-  width: calc(${th('gridUnit')} * 3);
+  width: calc(${th('gridUnit')} * 9);
 `
 
 const Progress = styled.div`
   color: ${th('colorTextReverse')};
   display: block;
   position: absolute;
-  bottom: ${th('subGridUnit')};
-  left: calc(${th('subGridUnit')} * 4);
+  bottom: ${th('gridUnit')};
+  left: calc(${th('gridUnit')} * 4);
 `
 
 const Extension = styled.div`
   background: ${th('colorText')};
   color: ${th('colorTextReverse')};
   font-size: ${th('fontSizeBaseSmall')};
-  left: calc(${th('subGridUnit')} * 2);
+  left: calc(${th('gridUnit')} * 2);
   position: absolute;
   right: 0;
   text-align: center;
   text-transform: uppercase;
-  top: calc(${th('subGridUnit')} * 2);
+  top: calc(${th('gridUnit')} * 2);
 `
 
 const Filename = styled.div`
   color: ${th('colorText')};
   font-size: ${th('fontSizeBaseSmall')};
   font-style: italic;
-  max-width: calc(${th('gridUnit')} * 10);
+  max-width: calc(${th('gridUnit')} * 30);
 `
 
 const Uploading = styled.div`
   align-items: center;
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: ${th('gridUnit')};
-  margin-right: calc(${th('subGridUnit')} * 3);
+  margin-bottom: calc(${th('gridUnit')} * 3);
+  margin-right: calc(${th('gridUnit')} * 3);
   position: relative;
-  width: calc(${th('gridUnit')} * 10);
+  width: calc(${th('gridUnit')} * 30);
 `
 
 const Uploaded = Uploading.extend`
@@ -55,7 +55,7 @@ const Uploaded = Uploading.extend`
     transition: transform ${th('transitionDuration')};
     font-size: ${th('fontSizeBaseSmall')};
     left: 65%;
-    padding: 0 ${th('subGridUnit')} 0 ${th('subGridUnit')};
+    padding: 0 ${th('gridUnit')} 0 ${th('gridUnit')};
     position: absolute;
     border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorTextReverse')};
     color: ${th('colorTextReverse')};
@@ -68,14 +68,14 @@ const Uploaded = Uploading.extend`
   &::after {
     background: ${th('colorError')};
     content: 'Remove';
-    top: calc(${th('subGridUnit')} * 5);
+    top: calc(${th('gridUnit')} * 5);
     z-index: 2;
   }
 
   &::before {
     background: ${th('colorPrimary')};
     content: 'Replace';
-    top: calc(${th('subGridUnit')} * 10);
+    top: calc(${th('gridUnit')} * 10);
     z-index: 3;
   }
 
@@ -104,7 +104,7 @@ const ErrorWrapper = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
   letter-spacing: 0.01em;
   opacity: 1;
-  padding: ${th('subGridUnit')} ${th('subGridUnit')};
+  padding: ${th('gridUnit')} ${th('gridUnit')};
   position: absolute;
   top: 25%;
   z-index: 4;

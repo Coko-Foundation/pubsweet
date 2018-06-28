@@ -4,7 +4,9 @@ exports[`Files renders correctly 1`] = `
 .c0 {
   background: transparent;
   border: dashed;
+  height: calc( * 3);
   cursor: pointer;
+  margin-bottom: calc( * 3);
 }
 
 .c1 {

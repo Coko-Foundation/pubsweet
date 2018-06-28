@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 
 const Item = styled.div`
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit') * 4});
 `
 
 const Header = styled.div`
@@ -16,7 +16,7 @@ const Body = styled.div`
   align-items: space-between;
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 4);
   padding-left: 1.5em;
 `
 

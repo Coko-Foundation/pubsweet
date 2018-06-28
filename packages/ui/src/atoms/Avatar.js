@@ -13,8 +13,8 @@ const Container = styled.svg.attrs({
   viewBox: props => `0 0 105 70`,
   xmlns: 'http://www.w3.org/2000/svg',
 })`
-  width: calc(${th('gridUnit')} * 3);
-  height: calc(${th('gridUnit')} * 2);
+  width: calc(${th('gridUnit')} * 9);
+  height: calc(${th('gridUnit')} * 6);
 `
 
 const Persona = styled.path.attrs({

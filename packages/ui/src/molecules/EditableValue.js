@@ -6,13 +6,13 @@ import { th, override } from '@pubsweet/ui-toolkit'
 import { TextField } from '../atoms'
 
 const Root = styled.div`
-  width: calc(${th('gridUnit')} * 14);
-  margin-bottom: ${props => (props.inline ? '0' : props.theme.gridUnit)};
+  width: calc(${th('gridUnit')} * 42);
+  margin-bottom: ${props =>
+    props.inline ? '0' : `calc(${props.theme.gridUnit} * 3) `};
 `
 
 const Value = styled.div`
-  padding: calc(${th('gridUnit')} / 2 - ${th('borderWidth')})
-    calc(${th('gridUnit')} / 2);
+  padding: calc(${th('gridUnit')} - ${th('borderWidth')}) ${th('gridUnit')};
   border: ${th('borderWidth')} ${th('borderStyle')} transparent;
   border-radius: ${th('borderRadius')};
   cursor: pointer;

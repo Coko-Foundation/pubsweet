@@ -97,7 +97,7 @@ const Tags = styled(TagsUnstyled)`
   .${classNames.root} {
     /* clicking anywhere will focus the input */
     cursor: text;
-    padding: ${th('subGridUnit')} 0 0 ${th('subGridUnit')};
+    padding: ${th('gridUnit')} 0 0 ${th('gridUnit')};
     position: relative;
   }
 
@@ -116,7 +116,7 @@ const Tags = styled(TagsUnstyled)`
     font-family: ${th('fontReading')};
 
     /* match the font styles */
-    margin: 0 ${th('subGridUnit')} ${th('gridUnit')} 0;
+    margin: 0 ${th('gridUnit')} calc(${th('gridUnit')} * 3) 0;
     padding: 0.1em 0.3em;
 
     ${props =>
@@ -129,9 +129,9 @@ const Tags = styled(TagsUnstyled)`
     display: inline-block;
     font-size: ${th('fontSizeBaseSmall')};
     font-weight: 600;
-    margin-left: ${th('subGridUnit')};
-    padding: ${th('subGridUnit')} 0 0;
-    width: ${th('subGridUnit')};
+    margin-left: ${th('gridUnit')};
+    padding: ${th('gridUnit')} 0 0;
+    width: ${th('gridUnit')};
   }
 
   .${classNames.selectedTag}:hover, .${classNames.selectedTag}:focus {
@@ -146,11 +146,11 @@ const Tags = styled(TagsUnstyled)`
     display: inline-block;
 
     /* match tag layout */
-    margin: 0 0 ${th('gridUnit')} 0;
+    margin: 0 0 calc(${th('gridUnit')} * 3) 0;
 
     /* prevent autoresize overflowing the container */
-    max-width: calc(${th('gridUnit')} * 5);
-    padding: ${th('subGridUnit')} ${th('subGridUnit')};
+    max-width: calc(${th('gridUnit')} * 15);
+    padding: ${th('gridUnit')} ${th('gridUnit')};
   }
 
   @media screen and (min-width: 30em) {
@@ -175,7 +175,7 @@ const Tags = styled(TagsUnstyled)`
 
     /* prevent autoresize overflowing the container */
     max-width: 100%;
-    min-width: calc(${th('gridUnit')} * 5);
+    min-width: calc(${th('gridUnit')} * 15);
     outline: none;
     padding: 0;
 

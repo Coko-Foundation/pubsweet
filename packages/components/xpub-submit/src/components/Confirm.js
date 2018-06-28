@@ -11,17 +11,17 @@ const Wrapper = styled.div`
   max-height: 100%;
   max-width: 60em;
   overflow-y: auto;
-  padding: calc(${th('gridUnit')} * 2);
+  padding: calc(${th('gridUnit')} * 6);
 `
 
 const Paragraph = styled.p`
   font-size: ${th('fontSizeBase')};
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 3);
   width: 55ch;
 `
 
 const Divider = styled.span`
-  margin: 0 calc(${th('gridUnit')} / 2);
+  margin: 0 ${th('gridUnit')};
 `
 
 const Confirm = ({ toggleConfirming }) => (

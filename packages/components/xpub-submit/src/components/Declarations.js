@@ -18,13 +18,13 @@ const hoverStyles = css`
 `
 
 const DeclarationSection = Section.extend`
-  margin: calc(${th('gridUnit')} * 2) 0;
+  margin: calc(${th('gridUnit')} * 6) 0;
 `
 
 const Question = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: calc(${th('gridUnit')} / 2);
+  margin-bottom: ${th('gridUnit')};
 
   &:hover {
     ${props => !props.readonly && hoverStyles};

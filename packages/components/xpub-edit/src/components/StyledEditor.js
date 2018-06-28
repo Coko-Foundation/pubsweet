@@ -9,11 +9,11 @@ const StyledEditor = styled(Editor).attrs({
   font-size: ${th('fontSizeBase')};
   line-height: 1.8;
   min-height: 1em;
-  margin-bottom: ${th('gridUnit')};
+  margin-bottom: calc(${th('gridUnit')} * 3);
 
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-  padding: calc(${th('gridUnit')} / 2);
+  padding: ${th('gridUnit')};
 
   &:focus {
     outline: none;

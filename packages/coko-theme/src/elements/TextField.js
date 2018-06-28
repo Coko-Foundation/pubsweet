@@ -32,7 +32,7 @@ export default {
           return 'inherit'
       }
     }};
-    height: calc(${th('gridUnit')} * 2);
+    height: calc(${th('gridUnit')} * 8);
     outline: 0;
     padding: 0 0 0 2px;
     transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};

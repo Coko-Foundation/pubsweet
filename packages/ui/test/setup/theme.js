@@ -31,8 +31,7 @@ const theme = {
   fontLineHeight: '32px',
 
   /* Spacing */
-  gridUnit: '32px',
-  subGridUnit: '8px',
+  gridUnit: '8px',
 
   /* Border */
   borderRadius: '8px',

@@ -10,7 +10,7 @@ const Group = styled.div`
 
 const ActionWrapper = styled.div`
   display: inline-block;
-  padding: 0 ${th('subGridUnit')};
+  padding: 0 ${th('gridUnit')};
 
   ${override('ui.ActionGroup.ActionWrapper')};
 `

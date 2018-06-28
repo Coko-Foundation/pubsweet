@@ -5,7 +5,7 @@ import { th } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: flex;
-  margin-top: ${th('gridUnit')};
+  margin-top: calc(${th('gridUnit')} * 3);
 `
 const Form = styled.div``
 const ReviewersList = styled.div`
