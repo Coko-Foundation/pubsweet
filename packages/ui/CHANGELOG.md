@@ -3,7 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="5.0.1"></a>
+      <a name="6.0.0"></a>
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@5.0.1...@pubsweet/ui@6.0.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **ui:** change override to exported component ([534bcd6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/534bcd6))
+* **ui:** fix bad value in darken ([2c05b2b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2c05b2b))
+* **ui:** update cssOverrides to override ([b877af9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b877af9))
+* **ui:** use override instead of th for styling TextField ([89ba87a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/89ba87a))
+
+
+### Code Refactoring
+
+* **ui:** add package namespacing to css overrides ([d68ef7e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d68ef7e)), closes [#342](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/342)
+* **ui:** replace current gridunit variables with one small value ([cf48f29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf48f29))
+
+
+### Features
+
+* **ui:** add css overrides to TextField.Root and TextField.Label ([c5a4fa7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5a4fa7))
+* **ui:** add css overrides to ui components ([11a1481](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/11a1481))
+* **ui:** add css overrides to ui molecules ([e9ad6c5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e9ad6c5))
+* **ui:** reintroduce warning color ([27943ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/27943ad))
+* **ui:** scope Button overrides with ui package ([69e84e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/69e84e2))
+* **ui:** scope TextField css overrides to ui package ([e3ecc3b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e3ecc3b))
+* add CSS override hooks to Menu ([9a6c445](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9a6c445))
+* make headings more reusable ([f24530a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f24530a))
+
+
+### BREAKING CHANGES
+
+* remove margin bottom from component
+Change overflow property to auto to hide empty scroll bar
+* **ui:** Your ui components will now be multiplying a much smaller value so they need to be
+adjusted
+* **ui:** Themes may have to be updated to use package namespacing for css overrides
+*   * remove margins
+
+
+
+
+      <a name="5.0.1"></a>
 ## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@5.0.0...@pubsweet/ui@5.0.1) (2018-06-19)
 
 
@@ -11,7 +53,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/ui
 
-  <a name="5.0.0"></a>
+<a name="5.0.0"></a>
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@4.1.3...@pubsweet/ui@5.0.0) (2018-06-01)
 
 

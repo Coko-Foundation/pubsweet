@@ -1,6 +1,6 @@
 {
   "name": "pubsweet",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^1.1.1",
+    "@pubsweet/db-manager": "^1.2.0",
     "@pubsweet/logger": "^0.2.4",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",

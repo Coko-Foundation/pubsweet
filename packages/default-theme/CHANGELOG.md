@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@1.0.0...@pubsweet/default-theme@2.0.0) (2018-06-28)
+
+
+### Code Refactoring
+
+* **ui:** replace current gridunit variables with one small value ([cf48f29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf48f29))
+
+
+### Features
+
+* **ui:** reintroduce warning color ([27943ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/27943ad))
+
+
+### BREAKING CHANGES
+
+* **ui:** Your ui components will now be multiplying a much smaller value so they need to be
+adjusted
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@0.2.2...@pubsweet/default-theme@1.0.0) (2018-05-03)
 

@@ -3,7 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="1.1.1"></a>
+  <a name="1.2.0"></a>
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.1.1...@pubsweet/db-manager@1.2.0) (2018-06-28)
+
+
+### Features
+
+* add addFragment to dbmanager ([e12c305](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e12c305))
+* remove extraneous brackets ([c9e6b35](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c9e6b35))
+* remove line that adds first fragment to collection ([f17a494](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f17a494))
+* unit tests for add fragment ([10fba12](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/10fba12))
+
+
+
+
+  <a name="1.1.1"></a>
 ## [1.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.1.0...@pubsweet/db-manager@1.1.1) (2018-06-19)
 
 
@@ -11,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/db-manager
 
-      <a name="1.1.0"></a>
+<a name="1.1.0"></a>
 # [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.0.12...@pubsweet/db-manager@1.1.0) (2018-05-18)
 
 

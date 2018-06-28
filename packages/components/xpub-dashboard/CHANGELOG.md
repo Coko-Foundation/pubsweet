@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@1.0.1...pubsweet-component-xpub-dashboard@2.0.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **authorize:** add authorize to hide delete ([125a872](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/125a872))
+* **authsome:** update stucture of currentUpdate ([909b80f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/909b80f))
+* **components:** prevent Delete when paper is submitted status ([b556e25](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b556e25))
+* **dashboard:** make use of authorize ([ccc993c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ccc993c))
+* **dashboard:** mock authorize component ([198f95a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/198f95a))
+* **styleguide:** correct require path ([79a2b07](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/79a2b07))
+
+
+### Code Refactoring
+
+* **ui:** replace current gridunit variables with one small value ([cf48f29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf48f29))
+
+
+### BREAKING CHANGES
+
+* **ui:** Your ui components will now be multiplying a much smaller value so they need to be
+adjusted
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@1.0.0...pubsweet-component-xpub-dashboard@1.0.1) (2018-06-19)
 

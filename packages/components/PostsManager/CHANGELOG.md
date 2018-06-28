@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.22"></a>
+## [1.0.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.21...pubsweet-component-posts-manager@1.0.22) (2018-06-28)
+
+
+### Bug Fixes
+
+* **monorepo:** fix versions of ui across repo ([72ada07](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/72ada07))
+
+
+
+
 <a name="1.0.21"></a>
 ## [1.0.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.20...pubsweet-component-posts-manager@1.0.21) (2018-06-19)
 

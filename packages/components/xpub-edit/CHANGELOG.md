@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@1.0.1...xpub-edit@2.0.0) (2018-06-28)
+
+
+### Code Refactoring
+
+* **ui:** replace current gridunit variables with one small value ([cf48f29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf48f29))
+
+
+### Features
+
+* **xpub-edit:** add CSS override hooks ([36bf82c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/36bf82c))
+* **xpub-edit:** allow menu icons to be configured ([fb578bf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb578bf))
+
+
+### BREAKING CHANGES
+
+* **ui:** Your ui components will now be multiplying a much smaller value so they need to be
+adjusted
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@1.0.0...xpub-edit@1.0.1) (2018-06-19)
 

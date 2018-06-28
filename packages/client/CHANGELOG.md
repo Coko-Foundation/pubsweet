@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.2"></a>
+## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@3.0.1...pubsweet-client@3.0.2) (2018-06-28)
+
+
+### Bug Fixes
+
+* **authorize:** render function component ([cebdaa3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cebdaa3))
+* **authsome:** change names to tests and function ([3f3559c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3f3559c))
+
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@3.0.0...pubsweet-client@3.0.1) (2018-06-19)
 
