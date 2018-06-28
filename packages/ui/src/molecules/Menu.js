@@ -359,7 +359,6 @@ Menu.propTypes = {
   renderOpener: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   /** Custom option component. The component will be rendered with *optionProps*. */
   renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-  /** Option to reset Menu to default */
   reset: PropTypes.bool,
   /** Optional label to be shown above the menu. */
   label: PropTypes.string,
