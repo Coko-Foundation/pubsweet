@@ -1,74 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio Group is rendered correctly 1`] = `
-.c3 {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-
-.c5 {
-  display: inline-block;
-  content: ' ';
-  width: calc(8px * 2);
-  height: calc(8px * 2);
-  vertical-align: center;
-  margin-left: 8px;
-  margin-right: 8px;
-  border: calc(8px / 4) solid white;
-  border-radius: 50%;
-  -webkit-transition: border 1s ease;
-  transition: border 1s ease;
-  color: black;
-}
-
-.c7 {
-  display: inline-block;
-  font-family: inherit;
-  font-size: 18px;
-  font-style: italic;
-}
-
 .c1 {
+  cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: all 1s;
-  transition: all 1s;
   min-height: calc(8px * 3);
   color: black;
-}
-
-.c1:not(:last-child) {
-  margin-right: 0;
-  margin-bottom: 0;
-}
-
-.c1 .c4 {
-  background: transparent;
-  box-shadow: 0 0 0 1px currentcolor;
-}
-
-.c1:hover .c6 {
-  color: black;
-}
-
-.c1:hover .c4 {
-  -webkit-animation-name: kLnLOV;
-  animation-name: kLnLOV;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  box-shadow: 0 0 0 1px black;
-}
-
-.c1 .c2:focus + .c4 {
-  box-shadow: 0 0 1px calc(1px * 2) black;
 }
 
 .c0 {
@@ -91,11 +35,11 @@ exports[`Radio Group is rendered correctly 1`] = `
   <label
     checked={false}
     className="c1"
-    color="black"
+    color={undefined}
   >
     <input
       checked={false}
-      className="c2 c3"
+      className=""
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -103,29 +47,22 @@ exports[`Radio Group is rendered correctly 1`] = `
       type="radio"
       value="yes"
     />
-     
     <span
-      className="c4 c5"
-      color="black"
-    />
-     
-    <span
-      className="c6 c7"
+      checked={false}
+      className=""
+      color={undefined}
     >
-       
       Yes
-       
     </span>
-     
   </label>
   <label
     checked={false}
     className="c1"
-    color="black"
+    color={undefined}
   >
     <input
       checked={false}
-      className="c2 c3"
+      className=""
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -133,29 +70,22 @@ exports[`Radio Group is rendered correctly 1`] = `
       type="radio"
       value="no"
     />
-     
     <span
-      className="c4 c5"
-      color="black"
-    />
-     
-    <span
-      className="c6 c7"
+      checked={false}
+      className=""
+      color={undefined}
     >
-       
       No
-       
     </span>
-     
   </label>
   <label
     checked={false}
     className="c1"
-    color="black"
+    color={undefined}
   >
     <input
       checked={false}
-      className="c2 c3"
+      className=""
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -163,20 +93,13 @@ exports[`Radio Group is rendered correctly 1`] = `
       type="radio"
       value="maybe"
     />
-     
     <span
-      className="c4 c5"
-      color="black"
-    />
-     
-    <span
-      className="c6 c7"
+      checked={false}
+      className=""
+      color={undefined}
     >
-       
       Maybe
-       
     </span>
-     
   </label>
 </div>
 `;

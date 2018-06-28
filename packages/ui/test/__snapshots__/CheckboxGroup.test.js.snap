@@ -2,6 +2,7 @@
 
 exports[`Checkbox Group is rendered correctly 1`] = `
 .c1 {
+  cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -10,54 +11,10 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-style: italic;
-  -webkit-letter-spacing: 1px;
-  -moz-letter-spacing: 1px;
-  -ms-letter-spacing: 1px;
-  letter-spacing: 1px;
-  -webkit-transition: all 2s;
-  transition: all 2s;
 }
 
 .c1:not(:last-child) {
   margin-right: 0;
-}
-
-.c1 input {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-
-.c1 span {
-  margin-right: 0.25rem;
-  font-size: 1.1em;
-  -webkit-transition: color 0.5s;
-  transition: color 0.5s;
-}
-
-.c1 span::before {
-  content: ' ';
-  display: inline-block;
-  vertical-align: middle;
-  width: 0.7em;
-  height: 0.7em;
-  margin-right: 0.5em;
-  background: transparent;
-  border: 3px solid white;
-  box-shadow: 0 0 0 1px currentcolor;
-  -webkit-transition: border 0.5s ease,background-size 0.3s ease;
-  transition: border 0.5s ease,background-size 0.3s ease;
-}
-
-.c1:hover span::before {
-  -webkit-animation: kLnLOV 0.5s;
-  animation: kLnLOV 0.5s;
-  box-shadow: 0 0 0 1px;
-}
-
-.c1 input:focus + span::before {
-  box-shadow: 0 0 calc( * 2);
 }
 
 .c0 {
@@ -83,13 +40,17 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
+      className=""
       name={undefined}
       onChange={[Function]}
       required={undefined}
       type="checkbox"
       value="one"
     />
-    <span>
+    <span
+      checked={false}
+      className=""
+    >
       One
     </span>
   </label>
@@ -99,13 +60,17 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
+      className=""
       name={undefined}
       onChange={[Function]}
       required={undefined}
       type="checkbox"
       value="two"
     />
-    <span>
+    <span
+      checked={false}
+      className=""
+    >
       Two
     </span>
   </label>
@@ -115,13 +80,17 @@ exports[`Checkbox Group is rendered correctly 1`] = `
   >
     <input
       checked={false}
+      className=""
       name={undefined}
       onChange={[Function]}
       required={undefined}
       type="checkbox"
       value="three"
     />
-    <span>
+    <span
+      checked={false}
+      className=""
+    >
       Three
     </span>
   </label>

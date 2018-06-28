@@ -1,79 +1,22 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
-const checking = keyframes`
-  0% {
-    transform: scale(0.8);
-  }
-  20% {
-    transform: scale(1.2);
-  }
-  80% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1);
-  }
+const Label = styled.span`
+  ${override('ui.Checkbox.Label')};
 `
-
-const localBorderSize = '3px'
-const localBorderTwoSize = '1px'
-
+const Input = styled.input`
+  margin-right: ${th('gridUnit')};
+  ${override('ui.Checkbox.Input')};
+`
 const Root = styled.label`
+  cursor: pointer;
   align-items: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   font-family: ${th('fontAuthor')};
-  font-style: italic;
-  letter-spacing: 1px;
-  transition: all 2s;
 
   &:not(:last-child) {
-    margin-right: ${props => (props.inline ? '2.7em' : '0')};
-  }
-
-  input {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-  }
-
-  span {
-    margin-right: 0.25rem;
-    font-size: 1.1em;
-    transition: color 0.5s;
-  }
-
-  &:hover span {
-    color: ${th('colorPrimary')};
-  }
-
-  span::before {
-    content: ' ';
-    display: inline-block;
-    vertical-align: middle;
-
-    width: 0.7em;
-    height: 0.7em;
-    margin-right: 0.5em;
-
-    background: ${props => (props.checked ? 'currentcolor' : 'transparent')};
-    border: ${localBorderSize} solid white;
-    box-shadow: 0 0 0 ${localBorderTwoSize} currentcolor;
-
-    transition: border 0.5s ease, background-size 0.3s ease;
-  }
-
-  &:hover span::before {
-    animation: ${checking} 0.5s;
-
-    background: ${th('colorPrimary')};
-    box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
-  }
-
-  input:focus + span::before {
-    box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
-      ${th('colorPrimary')};
+    margin-right: ${props => (props.inline ? props.theme.gridUnit : '0')};
   }
 
   ${override('ui.Checkbox')};
@@ -92,7 +35,7 @@ const Checkbox = ({
 
   return (
     <Root checked={checked} inline={inline}>
-      <input
+      <Input
         checked={checked}
         name={name}
         onChange={onChange}
@@ -100,7 +43,7 @@ const Checkbox = ({
         type="checkbox"
         value={value}
       />
-      <span>{label}</span>
+      <Label checked={checked}>{label}</Label>
     </Root>
   )
 }
