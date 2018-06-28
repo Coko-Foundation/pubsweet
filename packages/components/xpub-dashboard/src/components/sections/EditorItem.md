@@ -2,7 +2,7 @@ A dashboard item showing a project that the current user is handling as editor.
 
 ```js
 const { JournalProvider } = require('xpub-journal')
-const journal = require('../../../config/journal')
+const journal = require('@pubsweet/styleguide/config/journal')
 
 const project = {
   id: faker.random.uuid(),

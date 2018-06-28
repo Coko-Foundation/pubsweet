@@ -2,7 +2,7 @@ A drop-down menu for assigning an editor to a project.
 
 ```js
 const { JournalProvider } = require('xpub-journal')
-const journal = require('../../../config/journal')
+const journal = require('@pubsweet/styleguide/config/journal')
 
 const project = {
   id: faker.random.uuid(),
