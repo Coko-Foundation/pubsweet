@@ -10,8 +10,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^5.0.1",
-    "@pubsweet/ui-toolkit": "^1.0.0",
+    "@pubsweet/ui": "^6.0.0",
+    "@pubsweet/ui-toolkit": "^1.1.0",
     "prop-types": "^15.5.10",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",

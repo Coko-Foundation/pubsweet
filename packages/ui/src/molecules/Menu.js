@@ -43,7 +43,7 @@ const Opener = styled.button.attrs({
   font-family: inherit;
 
   width: 100%;
-  height: auto;
+  height: calc(${th('gridUnit')} * 6);
   padding: 0;
 
   display: flex;
@@ -65,8 +65,8 @@ const Value = styled.span`
   flex-wrap: wrap;
   display: flex;
   text-align: left;
-  line-height: calc(${th('gridUnit')} * 2);
-  padding: 0 calc(${th('gridUnit')} / 2);
+  line-height: ${th('gridUnit')};
+  padding: 0 ${th('gridUnit')};
   white-space: nowrap;
   &:hover {
     color: ${th('colorPrimary')};
@@ -74,6 +74,7 @@ const Value = styled.span`
 
   ${override('ui.Menu.Value')};
 `
+// 0 calc(${th('gridUnit')} / 2);
 
 const MultipleValue = styled.span`
   text-align: left;
@@ -91,6 +92,7 @@ const MultipleValue = styled.span`
 const Placeholder = Value.extend`
   color: ${th('colorTextPlaceholder')};
   font-style: italic;
+  padding: calc(${th('gridUnit')} * 2);
 
   ${override('ui.Menu.Placeholder')};
 `
@@ -102,7 +104,7 @@ const ArrowContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  padding: calc(${th('gridUnit')} * 2);
   ${override('ui.Menu.ArrowContainer')};
 `
 
