@@ -4,10 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { reducer as formReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux'
 import { JournalProvider } from 'xpub-journal'
-import * as journal from 'xpub-styleguide/src/config/journal'
 import styled, { ThemeProvider } from 'styled-components'
 import ErrorBoundary from './ErrorBoundary'
 import { currentTheme, themes, componentStore } from './StyleGuideRenderer'
+import * as journal from '../../config/journal'
 
 const rootReducer = combineReducers({
   form: formReducer,
