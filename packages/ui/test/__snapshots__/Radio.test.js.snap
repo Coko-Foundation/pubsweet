@@ -1,84 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio is rendered correctly 1`] = `
-.c2 {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-
-.c4 {
-  display: inline-block;
-  content: ' ';
-  width: calc(8px * 2);
-  height: calc(8px * 2);
-  vertical-align: center;
-  margin-left: 8px;
-  margin-right: 8px;
-  border: calc(8px / 4) solid white;
-  border-radius: 50%;
-  -webkit-transition: border 1s ease;
-  transition: border 1s ease;
-  color: black;
-}
-
-.c6 {
-  display: inline-block;
-  font-family: inherit;
-  font-size: 18px;
-  font-style: italic;
-}
-
 .c0 {
+  cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: all 1s;
-  transition: all 1s;
   min-height: calc(8px * 3);
   color: black;
-}
-
-.c0:not(:last-child) {
-  margin-right: 0;
-  margin-bottom: 0;
-}
-
-.c0 .c3 {
-  background: transparent;
-  box-shadow: 0 0 0 1px currentcolor;
-}
-
-.c0:hover .c5 {
-  color: black;
-}
-
-.c0:hover .c3 {
-  -webkit-animation-name: kLnLOV;
-  animation-name: kLnLOV;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  box-shadow: 0 0 0 1px black;
-}
-
-.c0 .c1:focus + .c3 {
-  box-shadow: 0 0 1px calc(1px * 2) black;
 }
 
 <label
   checked={false}
   className="c0"
-  color="black"
+  color={undefined}
 >
   <input
     checked={false}
-    className="c1 c2"
+    className=""
     disabled={undefined}
     name="TestName"
     onChange={undefined}
@@ -86,19 +30,12 @@ exports[`Radio is rendered correctly 1`] = `
     type="radio"
     value="TestValue"
   />
-   
   <span
-    className="c3 c4"
-    color="black"
-  />
-   
-  <span
-    className="c5 c6"
+    checked={false}
+    className=""
+    color={undefined}
   >
-     
     TestLabel
-     
   </span>
-   
 </label>
 `;
