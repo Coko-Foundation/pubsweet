@@ -2,8 +2,6 @@
 import 'typeface-fira-sans-condensed'
 import 'typeface-vollkorn'
 
-import { headingScale } from '@pubsweet/ui-toolkit'
-
 import { injectGlobal } from 'styled-components'
 
 import {
@@ -15,9 +13,6 @@ import {
   Radio,
   TextField,
 } from './elements'
-
-const fontSizeBase = 16
-const scale = 1.2
 
 injectGlobal`
   body {
@@ -57,27 +52,27 @@ const cokoTheme = {
   fontWriting: "'Cokourier Prime Sans'",
 
   // font sizes
-  fontSizeBase: `${fontSizeBase}px`,
+  fontSizeBase: '16px',
   fontSizeBaseSmall: '14px',
-  fontSizeHeading1: `${headingScale(fontSizeBase, scale, 1)}px`, // 39.81
-  fontSizeHeading2: `${headingScale(fontSizeBase, scale, 2)}px`, // 33.18
-  fontSizeHeading3: `${headingScale(fontSizeBase, scale, 3)}px`, // 27.65
-  fontSizeHeading4: `${headingScale(fontSizeBase, scale, 4)}px`, // 23.04
-  fontSizeHeading5: `${headingScale(fontSizeBase, scale, 5)}px`, // 19.2
-  fontSizeHeading6: `${headingScale(fontSizeBase, scale, 6)}px`, // 16
+  fontSizeHeading1: '40px',
+  fontSizeHeading2: '36px',
+  fontSizeHeading3: '28px',
+  fontSizeHeading4: '24px',
+  fontSizeHeading5: '20px',
+  fontSizeHeading6: '16px',
 
   // line heights
   lineHeightBase: '24px',
   lineHeightBaseSmall: '16px',
-  lineHeightHeading1: '40px',
+  lineHeightHeading1: '48px',
   lineHeightHeading2: '40px',
   lineHeightHeading3: '32px',
-  lineHeightHeading4: '24px',
+  lineHeightHeading4: '32px',
   lineHeightHeading5: '24px',
   lineHeightHeading6: '24px',
 
   /* Spacing */
-  gridUnit: '6px',
+  gridUnit: '8px',
 
   /* Border */
   borderRadius: '0',
