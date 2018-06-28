@@ -13,6 +13,7 @@ const Root = styled.div`
 
 const Event = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
 `
 
 const ordinalLetter = ordinal =>

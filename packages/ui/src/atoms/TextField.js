@@ -12,6 +12,7 @@ const Root = styled.div`
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   display: block;
   ${override('ui.TextField.Label')};
 `

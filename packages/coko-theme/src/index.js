@@ -49,19 +49,32 @@ const cokoTheme = {
   // $colorPrimaryDarker: #0551a8
 
   /* Text variables */
+
+  // fonts
   fontInterface: "'Fira Sans Condensed'",
   fontHeading: "'Fira Sans Condensed'",
   fontReading: "'Vollkorn'",
   fontWriting: "'Cokourier Prime Sans'",
+
+  // font sizes
   fontSizeBase: `${fontSizeBase}px`,
   fontSizeBaseSmall: '14px',
-  fontSizeHeading1: `${headingScale(fontSizeBase, scale, 1)}px`,
-  fontSizeHeading2: `${headingScale(fontSizeBase, scale, 2)}px`,
-  fontSizeHeading3: `${headingScale(fontSizeBase, scale, 3)}px`,
-  fontSizeHeading4: `${headingScale(fontSizeBase, scale, 4)}px`,
-  fontSizeHeading5: `${headingScale(fontSizeBase, scale, 5)}px`,
-  fontSizeHeading6: `${headingScale(fontSizeBase, scale, 6)}px`,
-  fontLineHeight: '24px',
+  fontSizeHeading1: `${headingScale(fontSizeBase, scale, 1)}px`, // 39.81
+  fontSizeHeading2: `${headingScale(fontSizeBase, scale, 2)}px`, // 33.18
+  fontSizeHeading3: `${headingScale(fontSizeBase, scale, 3)}px`, // 27.65
+  fontSizeHeading4: `${headingScale(fontSizeBase, scale, 4)}px`, // 23.04
+  fontSizeHeading5: `${headingScale(fontSizeBase, scale, 5)}px`, // 19.2
+  fontSizeHeading6: `${headingScale(fontSizeBase, scale, 6)}px`, // 16
+
+  // line heights
+  lineHeightBase: '24px',
+  lineHeightBaseSmall: '16px',
+  lineHeightHeading1: '40px',
+  lineHeightHeading2: '40px',
+  lineHeightHeading3: '32px',
+  lineHeightHeading4: '24px',
+  lineHeightHeading5: '24px',
+  lineHeightHeading6: '24px',
 
   /* Spacing */
   gridUnit: '6px',

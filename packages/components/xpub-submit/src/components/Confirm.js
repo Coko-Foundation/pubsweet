@@ -7,7 +7,7 @@ import { Heading1 } from '../styles'
 const Wrapper = styled.div`
   background: ${th('colorBackground')};
   color: ${th('colorText')};
-  line-height: ${th('fontLineHeight')};
+  line-height: ${th('lineHeightBase')};
   max-height: 100%;
   max-width: 60em;
   overflow-y: auto;

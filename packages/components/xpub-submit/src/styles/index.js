@@ -4,6 +4,7 @@ import { th } from '@pubsweet/ui-toolkit'
 export const Heading1 = styled.h1`
   margin: 0 0 calc(${th('gridUnit')} * 3);
   font-size: ${th('fontSizeHeading1')};
+  line-height: ${th('lineHeightHeading1')};
 `
 
 export const Section = styled.div`
@@ -17,6 +18,7 @@ export const Legend = styled.div`
 `
 export const SubNote = styled.span`
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   color: ${th('colorTextPlaceholder')};
   page-break-before: always;
 `

@@ -17,6 +17,7 @@ const Root = styled.span`
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBaseSmall')};
   font-style: italic;
+  line-height: ${th('lineHeightBaseSmall')};
 
   &:focus {
     outline: none;

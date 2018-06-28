@@ -7,6 +7,7 @@ import { th } from '@pubsweet/ui-toolkit'
 const Heading = styled.div``
 const Note = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
 `
 const Recommendation = Note.extend``
 const Content = styled.div``

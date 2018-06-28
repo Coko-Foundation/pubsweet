@@ -7,6 +7,7 @@ const style = css`
   color: ${th('colorPrimary')};
   font-size: ${({ level = 1, theme }) => theme[`fontSizeHeading${level}`]};
   font-family: ${th('fontHeading')};
+  line-height: ${({ level = 1, theme }) => theme[`lineHeightHeading${level}`]};
   ${override('ui.Heading')};
 `
 

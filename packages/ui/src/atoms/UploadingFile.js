@@ -23,6 +23,7 @@ const Extension = styled.div`
   background: ${th('colorText')};
   color: ${th('colorTextReverse')};
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   left: calc(${th('gridUnit')} * 2);
   position: absolute;
   right: 0;
@@ -34,6 +35,7 @@ const Extension = styled.div`
 const Filename = styled.div`
   color: ${th('colorText')};
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   font-style: italic;
   max-width: calc(${th('gridUnit')} * 30);
 `
@@ -54,6 +56,7 @@ const Uploaded = Uploading.extend`
     cursor: pointer;
     transition: transform ${th('transitionDuration')};
     font-size: ${th('fontSizeBaseSmall')};
+    line-height: ${th('lineHeightBaseSmall')};
     left: 65%;
     padding: 0 ${th('gridUnit')} 0 ${th('gridUnit')};
     position: absolute;
@@ -102,6 +105,7 @@ const ErrorWrapper = styled.div`
     ${th('colorTextReverse')};
   color: ${th('colorTextReverse')};
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   letter-spacing: 0.01em;
   opacity: 1;
   padding: ${th('gridUnit')} ${th('gridUnit')};

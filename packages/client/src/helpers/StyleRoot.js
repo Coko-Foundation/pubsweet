@@ -11,7 +11,7 @@ const StyleRoot = styled.div`
   font-family: ${th('fontInterface')}, sans-serif;
   font-size: ${th('fontSizeBase')};
   color: ${th('colorText')};
-  line-height: ${th('fontLineHeight')};
+  line-height: ${th('lineHeightBase')};
 
   * {
     box-sizing: border-box;
