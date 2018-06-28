@@ -1,4 +1,5 @@
 import React from 'react'
+import { pickBy } from 'lodash'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
@@ -18,12 +19,26 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const submitLink = `${baseLink}/submit`
   const manuscriptLink = `${baseLink}/manuscript`
 
-  const actions = (
+  const actionButtons = {
+    submit: <Action to={submitLink}>Summary Info</Action>,
+    manuscript: <Action to={manuscriptLink}>Manuscript</Action>,
+    delete: <Action onClick={() => deleteProject(project)}>Delete</Action>,
+  }
+
+  const unauthorized = (
     <ActionGroup>
-      <Action to={submitLink}>Summary Info</Action>
-      <Action to={manuscriptLink}>Manuscript</Action>
-      <Action onClick={() => deleteProject(project)}>Delete</Action>
+      {Object.values(pickBy(actionButtons, (value, key) => key !== 'delete'))}
     </ActionGroup>
+  )
+
+  const actions = (
+    <Authorize
+      object={project}
+      operation="can delete collection"
+      unauthorized={unauthorized}
+    >
+      <ActionGroup>{Object.values(actionButtons)}</ActionGroup>
+    </Authorize>
   )
 
   const body = (
