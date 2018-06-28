@@ -39,7 +39,7 @@ const Input = styled.input`
     color: ${th('colorTextPlaceholder')};
   }
 
-  /* ${override('ui.TextField.Input')}; */
+  ${override('ui.TextField.Input')};
 `
 
 class TextField extends React.Component {
