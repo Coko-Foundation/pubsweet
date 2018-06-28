@@ -1,8 +1,126 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu is rendered correctly 1`] = `
+.c1 {
+  background: transparent;
+  border: 1px solid grey;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  height: calc(8px * 6);
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1:hover {
+  border-color: black;
+}
+
+.c2 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 8px;
+}
+
+.c2:hover {
+  color: black;
+}
+
+.c3 {
+  border-left: 1px solid grey;
+  width: calc(8px * 6);
+  height: calc(8px * 6 - 1px * 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c4 {
+  font-size: 50%;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+  -webkit-transform: scaleX(2) scaleY(1.2);
+  -ms-transform: scaleX(2) scaleY(1.2);
+  transform: scaleX(2) scaleY(1.2);
+}
+
 .c0 {
-  margin-bottom: calc(8px * 3);
+  position: relative;
+}
+
+.c5 {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+<div
+  className=""
+  open={false}
+>
+  <div
+    className="c0"
+    role="listbox"
+  >
+    <button
+      className="c1"
+      onClick={[Function]}
+      open={false}
+      type="button"
+    >
+      <span
+        className="c2"
+      >
+        Foo
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="c4"
+          open={false}
+        >
+          ▼
+        </span>
+      </span>
+    </button>
+    <div
+      className="c5"
+    />
+  </div>
+</div>
+`;
+
+exports[`Menu is rendered correctly when open 1`] = `
+.c0 {
+  background-color: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .c2 {
@@ -64,148 +182,22 @@ exports[`Menu is rendered correctly 1`] = `
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transform: scaleX(2) scaleY(1.2);
-  -ms-transform: scaleX(2) scaleY(1.2);
-  transform: scaleX(2) scaleY(1.2);
-}
-
-.c1 {
-  position: relative;
-}
-
-.c6 {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-<div
-  className="c0"
-  open={false}
->
-  <div
-    className="c1"
-    role="listbox"
-  >
-    <button
-      className="c2"
-      onClick={[Function]}
-      open={false}
-      type="button"
-    >
-      <span
-        className="c3"
-      >
-        Foo
-      </span>
-      <span
-        className="c4"
-      >
-        <span
-          className="c5"
-          open={false}
-        >
-          ▼
-        </span>
-      </span>
-    </button>
-    <div
-      className="c6"
-    />
-  </div>
-</div>
-`;
-
-exports[`Menu is rendered correctly when open 1`] = `
-.c0 {
-  margin-bottom: calc(8px * 3);
-}
-
-.c1 {
-  background-color: transparent;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.c3 {
-  background: transparent;
-  border: 1px solid grey;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-  width: 100%;
-  height: calc(8px * 6);
-  padding: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c3:hover {
-  border-color: black;
-}
-
-.c4 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  text-align: left;
-  padding: 0 8px;
-}
-
-.c4:hover {
-  color: black;
-}
-
-.c5 {
-  border-left: 1px solid grey;
-  width: calc(8px * 6);
-  height: calc(8px * 6 - 1px * 2);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c6 {
-  font-size: 50%;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
   -webkit-transform: scaleX(2) scaleY(-1.2);
   -ms-transform: scaleX(2) scaleY(-1.2);
   transform: scaleX(2) scaleY(-1.2);
 }
 
-.c2 {
+.c1 {
   position: relative;
 }
 
-.c7 {
+.c6 {
   position: absolute;
   left: 0;
   right: 0;
 }
 
-.c8 {
+.c7 {
   position: absolute;
   top: 0;
   left: 0;
@@ -213,13 +205,36 @@ exports[`Menu is rendered correctly when open 1`] = `
   background-color: white;
   border: 1px solid grey;
   border-radius: 8px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 250px;
   z-index: 100;
 }
 
-.c9 {
+.c8 {
   font-weight: 600;
+  cursor: pointer;
+  padding: calc(8px - 1px * 2) calc(8px * 2);
+  border: 1px solid transparent;
+  border-width: 1px 0 1px 0;
+  white-space: nowrap;
+}
+
+.c8:hover {
+  background: grey;
+  border-color: grey;
+}
+
+.c8:first-child:hover {
+  border-top-color: grey;
+}
+
+.c8:last-child:hover {
+  border-bottom-color: grey;
+}
+
+.c9 {
+  color: #444;
+  font-weight: inherit;
   cursor: pointer;
   padding: calc(8px - 1px * 2) calc(8px * 2);
   border: 1px solid transparent;
@@ -240,57 +255,34 @@ exports[`Menu is rendered correctly when open 1`] = `
   border-bottom-color: grey;
 }
 
-.c10 {
-  color: #444;
-  font-weight: inherit;
-  cursor: pointer;
-  padding: calc(8px - 1px * 2) calc(8px * 2);
-  border: 1px solid transparent;
-  border-width: 1px 0 1px 0;
-  white-space: nowrap;
-}
-
-.c10:hover {
-  background: grey;
-  border-color: grey;
-}
-
-.c10:first-child:hover {
-  border-top-color: grey;
-}
-
-.c10:last-child:hover {
-  border-bottom-color: grey;
-}
-
 <div
-  className="c0"
+  className=""
   open={true}
 >
   <div
-    className="c1"
+    className="c0"
     onClick={[Function]}
   />
   <div
-    className="c2"
+    className="c1"
     role="listbox"
   >
     <button
-      className="c3"
+      className="c2"
       onClick={[Function]}
       open={true}
       type="button"
     >
       <span
-        className="c4"
+        className="c3"
       >
         Foo
       </span>
       <span
-        className="c5"
+        className="c4"
       >
         <span
-          className="c6"
+          className="c5"
           open={true}
         >
           ▼
@@ -298,15 +290,15 @@ exports[`Menu is rendered correctly when open 1`] = `
       </span>
     </button>
     <div
-      className="c7"
+      className="c6"
     >
       <div
-        className="c8"
+        className="c7"
         open={true}
       >
         <div
           aria-selected={true}
-          className="c9"
+          className="c8"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -316,7 +308,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c10"
+          className="c9"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"

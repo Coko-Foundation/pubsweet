@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -10,10 +10,7 @@ import { th } from '@pubsweet/ui-toolkit'
 // FIXME: putting markup inside a <button> is invalid
 
 // #region styled components
-const Root = styled.div`
-  margin-bottom: ${props =>
-    props.inline ? '0' : `calc(${props.theme.gridUnit} * 3) `};
-`
+const Root = styled.div``
 
 const CloseOverlay = styled.div`
   background-color: transparent;
@@ -23,11 +20,15 @@ const CloseOverlay = styled.div`
   top: 0;
   right: 0;
   z-index: 10;
+
+  ${override('ui.Menu.CloseOverlay')};
 `
 
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   display: block;
+
+  ${override('ui.Menu.Label')};
 `
 
 const Opener = styled.button.attrs({
@@ -49,6 +50,8 @@ const Opener = styled.button.attrs({
   &:hover {
     border-color: ${th('colorPrimary')};
   }
+
+  ${override('ui.Menu.Opener')};
 `
 
 const Value = styled.span`
@@ -60,11 +63,15 @@ const Value = styled.span`
   &:hover {
     color: ${th('colorPrimary')};
   }
+
+  ${override('ui.Menu.Value')};
 `
 
 const Placeholder = Value.extend`
   color: ${th('colorTextPlaceholder')};
   font-style: italic;
+
+  ${override('ui.Menu.Placeholder')};
 `
 
 const ArrowContainer = styled.span`
@@ -76,24 +83,32 @@ const ArrowContainer = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${override('ui.Menu.ArrowContainer')};
 `
 
 const Arrow = styled.span`
   font-size: 50%;
   transition: transform 0.2s;
   transform: scaleX(2) scaleY(${props => (props.open ? -1.2 : 1.2)});
+
+  ${override('ui.Menu.Arrow')};
 `
 
 const Main = styled.div.attrs({
   role: 'listbox',
 })`
   position: relative;
+
+  ${override('ui.Menu.Main')};
 `
 
 const OptionsContainer = styled.div`
   position: absolute;
   left: 0;
   right: 0;
+
+  ${override('ui.Menu.OptionsContainer')};
 `
 
 const Options = styled.div`
@@ -105,9 +120,11 @@ const Options = styled.div`
   background-color: ${th('colorBackground')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: ${({ maxHeight }) => `${maxHeight}px`};
   z-index: 100;
+
+  ${override('ui.Menu.Options')};
 `
 
 const Option = styled.div.attrs({
@@ -137,6 +154,8 @@ const Option = styled.div.attrs({
   &:last-child:hover {
     border-bottom-color: ${th('colorBackgroundHue')};
   }
+
+  ${override('ui.Menu.Option')};
 `
 // #endregion
 
