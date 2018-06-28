@@ -24,11 +24,20 @@ module.exports = app => {
           .map(({ user }) => User.find(user)),
       )
 
+      const currentAndUpdate = {
+        current: version,
+        update: {
+          id: req.body.versionId,
+          reviewers: req.body.reviewers,
+        },
+      }
+
       const canViewVersion = await authsome.can(req.user, 'GET', version)
-      const canPatchVersion = await authsome.can(req.user, 'PATCH', {
-        path: '/make-invitation',
-        collection: project,
-      })
+      const canPatchVersion = await authsome.can(
+        req.user,
+        'PATCH',
+        currentAndUpdate,
+      )
 
       if (!canPatchVersion || !canViewVersion) throw new AuthorizationError()
       let versionUpdateData = req.body.reviewers
@@ -57,8 +66,17 @@ module.exports = app => {
           logger.error(err.response)
         })
 
+      const currentAndUpdateProject = {
+        current: project,
+        update: req.body,
+      }
+
       const canViewProject = await authsome.can(req.user, 'GET', project)
-      const canPatchProject = await authsome.can(req.user, 'PATCH', project)
+      const canPatchProject = await authsome.can(
+        req.user,
+        'PATCH',
+        currentAndUpdateProject,
+      )
       if (!canPatchProject || !canViewProject) throw new AuthorizationError()
 
       const team = new Team({
@@ -92,8 +110,21 @@ module.exports = app => {
       const project = await Collection.find(req.body.projectId)
       const authors = await Promise.all(version.owners.map(id => User.find(id)))
 
+      let currentAndUpdate = {
+        current: version,
+        update: {
+          id: req.body.versionId,
+          decision: req.body.decision,
+        },
+      }
+
       const canViewVersion = await authsome.can(req.user, 'GET', version)
-      const canPatchVersion = await authsome.can(req.user, 'PATCH', version)
+      const canPatchVersion = await authsome.can(
+        req.user,
+        'PATCH',
+        currentAndUpdate,
+      )
+
       if (!canPatchVersion || !canViewVersion) throw new AuthorizationError()
       let versionUpdateData = { decision: req.body.decision }
       if (canPatchVersion.filter) {
@@ -120,6 +151,8 @@ module.exports = app => {
           message = '<p>Revisions to your manuscript have been requested</p>'
 
           const cloned = pick(version, [
+            'collections',
+            'owners',
             'source',
             'metadata',
             'declarations',
@@ -146,23 +179,28 @@ module.exports = app => {
       let nextVersion
       let canViewNextVersion
       if (nextVersionData) {
-        const canCreateVersion = await authsome.can(
-          req.user,
-          'POST',
-          nextVersionData,
-        )
+        const canCreateVersion = await authsome.can(req.user, 'POST', {
+          path: '/collections/:collectionId/fragments',
+          collection: project,
+          fragment: nextVersionData,
+        })
         if (!canCreateVersion) throw new AuthorizationError()
         if (canCreateVersion.filter) {
           nextVersionData = canCreateVersion.filter(nextVersionData)
         }
         nextVersion = new Fragment(nextVersionData)
-        nextVersion.setOwners([req.user])
 
         canViewNextVersion = await authsome.can(req.user, 'GET', nextVersion)
       }
 
+      currentAndUpdate = { current: project, update: req.body }
+
       const canViewProject = await authsome.can(req.user, 'GET', project)
-      const canPatchProject = await authsome.can(req.user, 'PATCH', project)
+      const canPatchProject = await authsome.can(
+        req.user,
+        'PATCH',
+        currentAndUpdate,
+      )
       if (!canPatchProject || !canViewProject) throw new AuthorizationError()
       if (canPatchProject.filter) {
         projectUpdateData = canPatchProject.filter(projectUpdateData)

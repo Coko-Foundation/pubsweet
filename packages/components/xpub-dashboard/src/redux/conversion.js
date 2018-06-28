@@ -70,6 +70,7 @@ export const uploadManuscript = (acceptedFiles, history) => dispatch => {
             return dispatch(
               actions.createFragment(collection, {
                 created: new Date(), // TODO: set on server
+                collections: [collection.id],
                 files: {
                   manuscript: {
                     name: inputFile.name,
