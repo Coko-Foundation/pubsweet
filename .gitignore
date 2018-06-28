@@ -2,7 +2,7 @@ node_modules
 coverage
 *.log
 coverage/
-
+uploads/
 # Created by https://www.gitignore.io/api/osx,linux
 
 ### Linux ###

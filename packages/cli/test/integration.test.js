@@ -14,7 +14,7 @@ const appPath = path.join(tempDir, appName)
 const nodeConfig = {
   'pubsweet-server': {
     db: { database: global.__testDbName },
-    uploads: 'uploads',
+    uploads: path.join(appPath, 'uploads'),
   },
   // TODO: Remove this once version of server that handles
   // undefined app validations is released.
