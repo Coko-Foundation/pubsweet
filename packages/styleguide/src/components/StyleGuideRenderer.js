@@ -12,9 +12,10 @@ import defaultTheme from '@pubsweet/default-theme'
 import cokoTheme from '@pubsweet/coko-theme'
 import elifeTheme from '@elifesciences/elife-theme'
 
-const initialThemeName = 'defaultTheme'
+const currentTheme = {
+  name: localStorage.getItem('currentTheme') || 'defaultTheme',
+}
 
-const currentTheme = { name: initialThemeName }
 const themes = {
   defaultTheme,
   cokoTheme,
@@ -142,15 +143,25 @@ const componentStore = {
 class StyleGuideRenderer extends React.Component {
   constructor(props) {
     super(props)
+
+    const isGridOn = localStorage.getItem('showGrid') === 'true'
+
     this.state = {
-      grid: false,
-      themeName: initialThemeName,
+      grid: isGridOn || false,
+      themeName: currentTheme.name,
     }
   }
+
   render() {
     const { title, children, toc } = this.props
     const GridToggle = () => (
-      <NarrowButton onClick={() => this.setState({ grid: !this.state.grid })}>
+      <NarrowButton
+        onClick={() => {
+          const newGridState = !this.state.grid
+          this.setState({ grid: newGridState })
+          localStorage.setItem('showGrid', newGridState)
+        }}
+      >
         Toggle Grid
       </NarrowButton>
     )
@@ -170,11 +181,14 @@ class StyleGuideRenderer extends React.Component {
           this.setState({ themeName: value })
           // update theme state
           currentTheme.name = value
+          // update localstorage
+          localStorage.setItem('currentTheme', value)
         }}
         options={options}
         value={this.state.themeName}
       />
     )
+
     return (
       <ThemeProvider theme={themes[this.state.themeName]}>
         <StyleRoot>
