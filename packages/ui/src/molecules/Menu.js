@@ -74,7 +74,6 @@ const Value = styled.span`
 
   ${override('ui.Menu.Value')};
 `
-// 0 calc(${th('gridUnit')} / 2);
 
 const MultipleValue = styled.span`
   text-align: left;
