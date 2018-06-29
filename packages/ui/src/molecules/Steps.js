@@ -47,7 +47,6 @@ const Success = Bullet.extend`
 
 const StepTitle = styled.span`
   font-size: 0.9em;
-  left: -45px;
   position: absolute;
   text-align: center;
   top: 25px;
@@ -69,10 +68,14 @@ const Root = styled.div`
 `
 
 const Step = ({ title, index, currentStep }) => (
-  <StyledStep>
+  <StyledStep isCurrent={index === currentStep} isPast={index < currentStep}>
     {index === currentStep && <Bullet />}
-    {index < currentStep && <Success>✓</Success>}
-    {title && <StepTitle>{`${index + 1}. ${title}`}</StepTitle>}
+    {index < currentStep && <Success />}
+    {title && (
+      <StepTitle isCurrent={index === currentStep} isPast={index < currentStep}>
+        {title}
+      </StepTitle>
+    )}
   </StyledStep>
 )
 
@@ -91,7 +94,11 @@ const Steps = ({
           : [
               ...acc,
               React.cloneElement(el, { index, currentStep }),
-              React.createElement(renderSeparator, { key: `sep-${el.key}` }),
+              React.createElement(renderSeparator, {
+                key: `sep-${el.key}`,
+                isCurrent: index === currentStep,
+                isPast: index < currentStep,
+              }),
             ],
       [],
     )}
