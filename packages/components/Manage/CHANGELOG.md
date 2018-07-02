@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-manage@0.2.4...pubsweet-component-manage@1.0.0) (2018-07-02)
+
+
+### Bug Fixes
+
+* **components:** import Manage styles in component ([6f0e443](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6f0e443))
+
+
+### BREAKING CHANGES
+
+* **components:** Manage.scss is now required in the component itself. Since this was usually
+required from the app itself, this would now result in double importing of styles.
+
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-manage@0.2.3...pubsweet-component-manage@0.2.4) (2018-04-03)
 

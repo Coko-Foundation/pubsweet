@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-components",
-  "version": "8.0.1",
+  "version": "9.0.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@pubsweet/logger": "^0.2.4",
-    "@pubsweet/styleguide": "^3.0.1",
+    "@pubsweet/styleguide": "^3.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
@@ -29,7 +29,7 @@
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
     "pubsweet": "^2.2.7",
-    "pubsweet-client": "^3.0.3",
+    "pubsweet-client": "^4.0.0",
     "pubsweet-server": "^7.1.2",
     "pubsweet-theme-plugin": "^0.0.3",
     "react": "^16.3.2",

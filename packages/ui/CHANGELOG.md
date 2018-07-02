@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="6.0.1"></a>
+      <a name="7.0.0"></a>
+# [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@6.0.1...@pubsweet/ui@7.0.0) (2018-07-02)
+
+
+### Features
+
+* **ui:** introduce more line height variables ([85c24e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85c24e2))
+
+
+### BREAKING CHANGES
+
+* **ui:** the existing fontLineHeight variable is gone and replaced by multiple new variables
+
+
+
+
+      <a name="6.0.1"></a>
 ## [6.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@6.0.0...@pubsweet/ui@6.0.1) (2018-06-28)
 
 
@@ -14,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="6.0.0"></a>
+<a name="6.0.0"></a>
 # [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@5.0.1...@pubsweet/ui@6.0.0) (2018-06-28)
 
 
