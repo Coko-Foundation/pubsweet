@@ -17,6 +17,6 @@
     "isomorphic-fetch": "^2.1.1"
   },
   "peerDependencies": {
-    "pubsweet-client": ">=1.0.0"
+    "pubsweet-client": "^2.5.5"
   }
 }
