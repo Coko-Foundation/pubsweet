@@ -3,11 +3,11 @@
 
   This is here so that you don't have to think about compatibility between this:
 
-  cssOverrides.ui.TextField = css``
+  cssOverrides.ui.Button = css``
 
   and this:
 
-  cssOverrides.ui.TextField = {
+  cssOverrides.ui.Button = {
     Root: css``,
     Input: css``
   }
@@ -18,31 +18,50 @@
 
   Usage:
 
-  const TextField = styled.div`
+  const Button = styled.div`
     YOUR CSS HERE
 
-    ${override('ui.TextField')};
+    ${override('ui.Button')};
   `
 
   Now both of the above scenarios will work.
-
-  NOTE: Makes the assumption that you are following the pubsweet convention of
-        putting your overrides under the cssOverrides property of your theme
-        object.
 */
 
 import { css } from 'styled-components'
 import { get, has } from 'lodash'
+
 import th from './themeHelper'
 
-const override = name => props => {
-  if (has(get(props.theme.cssOverrides, name), 'Root')) {
+/*
+  Will be using ui.Button as an example component override to explain the code.
+*/
+const override = (name, overrideKey = 'cssOverrides') => props => {
+  // Find (props.theme.cssOverrides.) ui.Button
+  const target = get(props.theme[overrideKey], name)
+
+  // ui.Button is not there.
+  if (!target) return null
+
+  /*
+    ui.Button is there, but there is no ui.Button.Root or ui.Button: css``.
+
+    This also covers the case where you only target children of the component.
+    eg. if your override looks like ui.Button = { Icon: css`` }
+    In this case, there would be no overrides for ui.Button, but only for
+    ui.Button.Icon, which would have its own override.
+  */
+  if (!target.entries) return null
+
+  // ui.Button.Root exists
+  if (has(target, 'Root')) {
     return css`
-      ${th(`cssOverrides.${name}.Root`)};
+      ${th(`${overrideKey}.${name}.Root`)};
     `
   }
+
+  // ui.Button: css`` exists
   return css`
-    ${th(`cssOverrides.${name}`)};
+    ${th(`${overrideKey}.${name}`)};
   `
 }
 
