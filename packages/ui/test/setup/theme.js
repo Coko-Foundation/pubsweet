@@ -16,10 +16,14 @@ const theme = {
   colorTextPlaceholder: 'grey',
 
   /* Text variables */
+
+  // fonts
   fontInterface: 'sans-serif',
   fontHeading: 'serif',
   fontReading: 'serif',
   fontWriting: 'monospace',
+
+  // font sizes
   fontSizeBase: '18px',
   fontSizeBaseSmall: '16px',
   fontSizeHeading1: '36px',
@@ -28,7 +32,16 @@ const theme = {
   fontSizeHeading4: '26px',
   fontSizeHeading5: '23px',
   fontSizeHeading6: '20px',
-  fontLineHeight: '32px',
+
+  // line heights
+  lineHeightBase: '24px',
+  lineHeightBaseSmall: '24px',
+  lineHeightHeading1: '40px',
+  lineHeightHeading2: '40px',
+  lineHeightHeading3: '32px',
+  lineHeightHeading4: '32px',
+  lineHeightHeading5: '24px',
+  lineHeightHeading6: '24px',
 
   /* Spacing */
   gridUnit: '8px',

@@ -129,6 +129,7 @@ const Tags = styled(TagsUnstyled)`
     display: inline-block;
     font-size: ${th('fontSizeBaseSmall')};
     font-weight: 600;
+    line-height: ${th('lineHeightBaseSmall')};
     margin-left: ${th('gridUnit')};
     padding: ${th('gridUnit')} 0 0;
     width: ${th('gridUnit')};

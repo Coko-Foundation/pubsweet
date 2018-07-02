@@ -44,6 +44,7 @@ export default {
 
     &::placeholder {
       font-size: ${th('fontSizeBaseSmall')};
+      line-height: ${th('lineHeightBaseSmall')};
     }
   `,
 }

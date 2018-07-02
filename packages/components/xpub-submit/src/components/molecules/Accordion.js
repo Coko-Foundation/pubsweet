@@ -11,6 +11,7 @@ const AccordionBody = styled.div``
 const Title = styled.span`
   font-size: ${th('fontSizeHeading5')};
   font-family: ${th('fontHeading')};
+  line-height: ${th('lineHeightHeading5')};
 `
 
 const ToggleReview = ({ open, toggle }) => (

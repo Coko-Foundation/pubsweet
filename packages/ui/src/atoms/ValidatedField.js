@@ -17,6 +17,7 @@ const Message = styled.div`
     margin-bottom: ${th('gridUnit')};
   }
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
 `
 
 const ErrorMessage = Message.extend`

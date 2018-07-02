@@ -18,6 +18,7 @@ const Heading = styled.div`
   color: ${th('colorPrimary')};
   font-family: ${th('fontReading')};
   font-size: ${th('fontSizeHeading3')};
+  line-height: ${th('lineHeightHeading3')};
   margin: calc(${th('gridUnit')} * 3) 0;
   text-transform: uppercase;
 `

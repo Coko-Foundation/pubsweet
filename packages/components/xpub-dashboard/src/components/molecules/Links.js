@@ -9,6 +9,7 @@ const Links = styled.div`
 
 const LinkContainer = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
 `
 
 export { Links, LinkContainer }

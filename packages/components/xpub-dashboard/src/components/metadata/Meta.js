@@ -5,6 +5,7 @@ const Meta = styled.div`
   display: flex;
   flex-wrap: nowrap;
   font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th('lineHeightBaseSmall')};
   white-space: nowrap;
   *:not(:last-child):after {
     content: '-';
