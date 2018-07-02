@@ -3,7 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.0.1"></a>
+      <a name="9.0.0"></a>
+# [9.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@8.0.1...pubsweet-components@9.0.0) (2018-07-02)
+
+
+### Bug Fixes
+
+* **components:** import Manage styles in component ([6f0e443](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6f0e443))
+
+
+### Features
+
+* **ui:** introduce more line height variables ([85c24e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85c24e2))
+
+
+### BREAKING CHANGES
+
+* **components:** Manage.scss is now required in the component itself. Since this was usually
+required from the app itself, this would now result in double importing of styles.
+* **ui:** the existing fontLineHeight variable is gone and replaced by multiple new variables
+
+
+
+
+      <a name="8.0.1"></a>
 ## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@8.0.0...pubsweet-components@8.0.1) (2018-06-28)
 
 
@@ -11,7 +34,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-components
 
-  <a name="8.0.0"></a>
+<a name="8.0.0"></a>
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@7.1.0...pubsweet-components@8.0.0) (2018-06-28)
 
 

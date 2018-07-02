@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.0.1...@pubsweet/styleguide@3.1.0) (2018-07-02)
+
+
+### Features
+
+* **styleguide:** persist grid toggle in localstorage ([feefb29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/feefb29))
+* **styleguide:** persist theme choice in local storage ([09cf65c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/09cf65c))
+
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.0.0...@pubsweet/styleguide@3.0.1) (2018-06-28)
 

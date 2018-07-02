@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@3.0.3...pubsweet-client@4.0.0) (2018-07-02)
+
+
+### Features
+
+* **ui:** introduce more line height variables ([85c24e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/85c24e2))
+
+
+### BREAKING CHANGES
+
+* **ui:** the existing fontLineHeight variable is gone and replaced by multiple new variables
+
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@3.0.2...pubsweet-client@3.0.3) (2018-06-28)
 
