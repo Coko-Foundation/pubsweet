@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-dashboard",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^7.0.0",
+    "@pubsweet/ui": "^8.0.0",
     "@pubsweet/ui-toolkit": "^1.1.2",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
