@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="7.0.0"></a>
+  <a name="8.0.0"></a>
+# [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@7.0.0...@pubsweet/ui@8.0.0) (2018-07-03)
+
+
+### Features
+
+* **ui:** modify the progress indicator to help with theming ([40113d0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/40113d0))
+
+
+### BREAKING CHANGES
+
+* **ui:** Removed style  left:-45px. Removed numbering of steps - to be done by caller. Removed the tick from Success component - to be supplied by caller.
+
+
+
+
+  <a name="7.0.0"></a>
 # [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@6.0.1...@pubsweet/ui@7.0.0) (2018-07-02)
 
 
@@ -19,7 +35,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="6.0.1"></a>
+<a name="6.0.1"></a>
 ## [6.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@6.0.0...@pubsweet/ui@6.0.1) (2018-06-28)
 
 

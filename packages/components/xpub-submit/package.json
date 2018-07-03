@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-submit",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^7.0.0",
+    "@pubsweet/ui": "^8.0.0",
     "@pubsweet/ui-toolkit": "^1.1.2",
     "apollo-client-preset": "^1.0.8",
     "lodash": "^4.17.4",
