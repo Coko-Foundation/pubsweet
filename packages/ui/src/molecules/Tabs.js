@@ -35,6 +35,9 @@ class Tabs extends React.Component {
 
   setActiveKey(activeKey) {
     this.setState({ activeKey })
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(activeKey)
+    }
   }
 
   render() {
