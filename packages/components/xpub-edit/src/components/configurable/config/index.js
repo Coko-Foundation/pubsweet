@@ -7,7 +7,6 @@ import map from 'lodash/map'
 
 import makePlugins from './plugins'
 import menuItems from './menu'
-// import nodes from './nodes'
 import marks from './marks'
 
 export default features => {
@@ -16,10 +15,6 @@ export default features => {
   const schema = new Schema({
     nodes: addListNodes(defaultSchema.spec.nodes, 'paragraph block*', 'block'),
     marks: pick(marks, featureNames),
-    // nodes: {
-    //   ...pick(nodes, ['doc', 'paragraph', 'text']),
-    //   ...pick(nodes, featureNames),
-    // },
   })
 
   const enabledMenuItems = pick(menuItems, featureNames)

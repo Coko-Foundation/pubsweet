@@ -58,11 +58,11 @@ const makeKeymap = (schema, features) => {
   }
 
   Object.keys(baseKeymap).forEach(key => {
-    //  if (keys[key]) {
-    keys[key] = chainCommands(keys[key], baseKeymap[key])
-    //  } else {
-    //    keys[key] = baseKeymap[key]
-    //  }
+    if (keys[key]) {
+      keys[key] = chainCommands(keys[key], baseKeymap[key])
+    } else {
+      keys[key] = baseKeymap[key]
+    }
   })
 
   return keymap(keys)
