@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
+import { Button } from '@pubsweet/ui'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -56,11 +57,17 @@ const Opener = styled.button.attrs({
 `
 
 const Value = styled.span`
+  border-right: ${th('borderWidth')} ${th('borderStyle')}
+    ${th('colorFurniture')};
+
   flex-grow: 1;
-
+  white-space: nowrap;
+  flex-wrap: wrap;
+  display: flex;
   text-align: left;
+  line-height: ${th('gridUnit')};
   padding: 0 ${th('gridUnit')};
-
+  white-space: nowrap;
   &:hover {
     color: ${th('colorPrimary')};
   }
@@ -68,23 +75,35 @@ const Value = styled.span`
   ${override('ui.Menu.Value')};
 `
 
+const MultipleValue = styled.span`
+  text-align: left;
+  padding: 0 calc(${th('gridUnit')} / 2);
+  color: ${th('colorPrimary')};
+  background-color: ${th('colorSecondary')};
+  margin: calc(${th('gridUnit')} / 6);
+  button {
+    margin-left: calc(${th('gridUnit')} / 2);
+    min-width: 0px;
+    padding: calc(${th('gridUnit')} / 2);
+  }
+`
+
 const Placeholder = Value.extend`
   color: ${th('colorTextPlaceholder')};
   font-style: italic;
+  padding: calc(${th('gridUnit')} * 2);
 
   ${override('ui.Menu.Placeholder')};
 `
 
 const ArrowContainer = styled.span`
-  border-left: ${th('borderWidth')} ${th('borderStyle')} ${th('colorFurniture')};
-
-  width: calc(${th('gridUnit')} * 6);
-  height: calc(${th('gridUnit')} * 6 - ${th('borderWidth')} * 2);
+  width: calc(${th('gridUnit')} * 2);
+  height: calc(${th('gridUnit')} * 2 - ${th('borderWidth')} * 2);
 
   display: flex;
   align-items: center;
   justify-content: center;
-
+  padding: calc(${th('gridUnit')} * 2);
   ${override('ui.Menu.ArrowContainer')};
 `
 
@@ -176,12 +195,37 @@ class Menu extends React.Component {
     })
   }
 
+  resetMenu = props => {
+    this.state = {
+      open: false,
+      selected: undefined,
+    }
+  }
+
+  removeSelect = (event, value) => {
+    event.stopPropagation()
+    let { selected } = this.state
+    const index = selected.indexOf(value)
+    selected = [...selected.slice(0, index), ...selected.slice(index + 1)]
+    this.setState({ selected })
+    if (this.props.onChange) this.props.onChange(selected)
+  }
+
   handleSelect = ({ selected, open }) => {
+    const { multi } = this.props
+    let values
+    if (multi) {
+      values = this.state.selected ? this.state.selected : []
+      if (values.indexOf(selected) === -1) values.push(selected)
+    } else {
+      values = selected
+    }
+
     this.setState({
       open,
-      selected,
+      selected: values,
     })
-    if (this.props.onChange) this.props.onChange(selected)
+    if (this.props.onChange) this.props.onChange(values)
   }
 
   handleKeyPress = (event, selected, open) => {
@@ -206,8 +250,12 @@ class Menu extends React.Component {
       renderOption: RenderOption,
       renderOpener: RenderOpener,
       className,
+      multi,
+      reset,
     } = this.props
     const { open, selected } = this.state
+
+    if (reset === true) this.resetMenu(this.props)
 
     return (
       <Root className={className} inline={inline} open={open}>
@@ -218,6 +266,7 @@ class Menu extends React.Component {
             open={open}
             optionLabel={this.optionLabel}
             placeholder={placeholder}
+            removeSelect={this.removeSelect}
             selected={selected}
             toggleMenu={this.toggleMenu}
           />
@@ -230,6 +279,7 @@ class Menu extends React.Component {
                     handleSelect={this.handleSelect}
                     key={option.value}
                     label={option.label}
+                    multi={multi}
                     selected={selected}
                     value={option.value}
                   />
@@ -249,16 +299,22 @@ const DefaultMenuOption = ({
   value,
   handleSelect,
   handleKeyPress,
-}) => (
-  <Option
-    active={value === selected}
-    key={value}
-    onClick={() => handleSelect({ open: false, selected: value })}
-    onKeyPress={event => handleKeyPress(event, value)}
-  >
-    {label || value}
-  </Option>
-)
+  multi,
+}) => {
+  const option = (
+    <Option
+      active={value === selected}
+      key={value}
+      onClick={() => handleSelect({ open: false, selected: value })}
+      onKeyPress={event => handleKeyPress(event, value)}
+    >
+      {label || value}
+    </Option>
+  )
+
+  if (!multi) return option
+  return multi && !selected.includes(value) ? option : null
+}
 
 const DefaultOpener = ({
   toggleMenu,
@@ -266,13 +322,26 @@ const DefaultOpener = ({
   selected,
   placeholder,
   optionLabel,
+  removeSelect,
 }) => (
   <Opener onClick={toggleMenu} open={open}>
-    {selected ? (
-      <Value>{optionLabel(selected)}</Value>
-    ) : (
+    {(!selected || selected.length === 0) && (
       <Placeholder>{placeholder}</Placeholder>
     )}
+    {selected &&
+      !Array.isArray(selected) && <Value>{optionLabel(selected)}</Value>}
+    {selected &&
+      selected.length > 0 &&
+      Array.isArray(selected) && (
+        <Value>
+          {selected.map(select => (
+            <MultipleValue>
+              {optionLabel(select)}
+              <Button onClick={event => removeSelect(event, select)}>x</Button>
+            </MultipleValue>
+          ))}
+        </Value>
+      )}
     <ArrowContainer>
       <Arrow open={open}>▼</Arrow>
     </ArrowContainer>
@@ -291,6 +360,7 @@ Menu.propTypes = {
   renderOpener: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   /** Custom option component. The component will be rendered with *optionProps*. */
   renderOption: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  reset: PropTypes.bool,
   /** Optional label to be shown above the menu. */
   label: PropTypes.string,
   /** Placeholder until a value is selected. */
@@ -302,6 +372,7 @@ Menu.propTypes = {
 Menu.defaultProps = {
   renderOption: DefaultMenuOption,
   renderOpener: DefaultOpener,
+  reset: false,
   placeholder: 'Choose in the list',
 }
 
