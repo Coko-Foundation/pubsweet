@@ -13,6 +13,7 @@ const FEATURES_WHITELIST = [
   'heading',
   'undo',
   'redo',
+  'bulletlist',
   'orderedlist',
   'joinaboveblock',
   'liftitem',

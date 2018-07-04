@@ -34,10 +34,15 @@ const promptForURL = () => {
 
 export default {
   orderedlist: schema => ({
-    // active: markActive(schema.marks.bold),
     content: 'ordered list',
     run: wrapInList(schema.nodes.ordered_list, { order: { default: 1 } }),
     title: 'Toggle ordered List',
+    select: state => true,
+  }),
+  bulletlist: schema => ({
+    content: 'bullet list',
+    run: wrapInList(schema.nodes.bullet_list, {}),
+    title: 'Toggle bullet List',
     select: state => true,
   }),
   joinaboveblock: schema => ({
@@ -50,7 +55,7 @@ export default {
     content: 'lift',
     run: lift,
     select: state => lift(state),
-    title: 'join wtih above block',
+    title: 'lift item',
   }),
   bold: schema => ({
     active: markActive(schema.marks.bold),

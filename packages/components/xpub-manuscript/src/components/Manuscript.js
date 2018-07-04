@@ -12,7 +12,15 @@ const Manuscript = ({
   updateManuscript,
   version,
 }) => (
-  <NoteEditor joinaboveblock liftitem orderedlist redo undo value={content} />
+  <NoteEditor
+    bulletlist
+    joinaboveblock
+    liftitem
+    orderedlist
+    redo
+    undo
+    value={content}
+  />
 
   // <SimpleEditor
   //   content={content}

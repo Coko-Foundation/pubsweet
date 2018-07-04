@@ -24,7 +24,7 @@ const Legend = styled.div`
   ${override('xpub-edit.MenuBar.Legend')};
 `
 
-const MenuBar = ({ title, menu, state, dispatch, select }) => (
+const MenuBar = ({ title, menu, state, dispatch }) => (
   <Wrapper>
     {title && <Legend>{title}</Legend>}
     <ToolBar>
