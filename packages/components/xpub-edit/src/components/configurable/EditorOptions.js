@@ -14,6 +14,8 @@ const FEATURES_WHITELIST = [
   'undo',
   'redo',
   'orderedlist',
+  'joinaboveblock',
+  'liftitem',
 ]
 
 class ConfigurableEditor extends React.Component {

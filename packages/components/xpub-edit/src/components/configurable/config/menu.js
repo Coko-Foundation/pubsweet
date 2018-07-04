@@ -1,4 +1,4 @@
-import { setBlockType, toggleMark } from 'prosemirror-commands'
+import { setBlockType, toggleMark, joinUp, lift } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
 
@@ -38,6 +38,20 @@ export default {
     content: 'ordered list',
     run: wrapInList(schema.nodes.ordered_list, { order: { default: 1 } }),
     title: 'Toggle List',
+  }),
+  joinaboveblock: schema => ({
+    // active: markActive(schema.marks.bold),
+    content: 'join',
+    run: joinUp,
+    select: state => joinUp(state),
+    title: 'join wtih above block',
+  }),
+  liftitem: schema => ({
+    // active: markActive(schema.marks.bold),
+    content: 'lift',
+    run: lift,
+    select: state => lift(state),
+    title: 'join wtih above block',
   }),
   bold: schema => ({
     active: markActive(schema.marks.bold),
