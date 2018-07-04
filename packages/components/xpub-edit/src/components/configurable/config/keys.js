@@ -37,6 +37,7 @@ const makeKeymap = (schema, features) => {
     'Shift-Mod-z': redo,
     'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
     'Shift-Ctrl-9': wrapInList(schema.nodes.ordered_list),
+    'Shift-Ctrl-8': wrapInList(schema.nodes.bullet_list),
   }
 
   const type = schema.nodes.list_item
