@@ -1,5 +1,6 @@
 import { setBlockType, toggleMark } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
+import { wrapInList } from 'prosemirror-schema-list'
 
 import icons from './icons'
 
@@ -32,6 +33,12 @@ const promptForURL = () => {
 }
 
 export default {
+  orderedlist: schema => ({
+    // active: markActive(schema.marks.bold),
+    content: 'ordered list',
+    run: wrapInList(schema.nodes.ordered_list, { order: { default: 1 } }),
+    title: 'Toggle List',
+  }),
   bold: schema => ({
     active: markActive(schema.marks.bold),
     content: icons.bold,

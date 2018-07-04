@@ -13,6 +13,7 @@ const FEATURES_WHITELIST = [
   'heading',
   'undo',
   'redo',
+  'orderedlist',
 ]
 
 class ConfigurableEditor extends React.Component {

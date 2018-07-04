@@ -9,8 +9,23 @@ import {
   exitCode,
   selectParentNode,
 } from 'prosemirror-commands'
+import {
+  wrapInList,
+  splitListItem,
+  liftListItem,
+  sinkListItem,
+} from 'prosemirror-schema-list'
 
 const makeKeymap = (schema, features) => {
+  const bind = (key, cmd) => {
+    if (features) {
+      const mapped = features[key]
+      if (mapped === false) return
+      if (mapped) key = mapped
+    }
+    keys[key] = cmd
+  }
+
   const keys = {
     Backspace: undoInputRule,
     'Ctrl-Enter': exitCode,
@@ -21,6 +36,15 @@ const makeKeymap = (schema, features) => {
     'Mod-y': redo,
     'Shift-Mod-z': redo,
     'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
+    'Shift-Ctrl-9': wrapInList(schema.nodes.ordered_list),
+  }
+
+  const type = schema.nodes.list_item
+
+  if (type) {
+    bind('Enter', splitListItem(type))
+    bind('Mod-[', liftListItem(type))
+    bind('Mod-]', sinkListItem(type))
   }
 
   if (features.includes('bold')) {
@@ -34,11 +58,11 @@ const makeKeymap = (schema, features) => {
   }
 
   Object.keys(baseKeymap).forEach(key => {
-    if (keys[key]) {
-      keys[key] = chainCommands(keys[key], baseKeymap[key])
-    } else {
-      keys[key] = baseKeymap[key]
-    }
+    //  if (keys[key]) {
+    keys[key] = chainCommands(keys[key], baseKeymap[key])
+    //  } else {
+    //    keys[key] = baseKeymap[key]
+    //  }
   })
 
   return keymap(keys)
