@@ -28,8 +28,24 @@ const configureApp = app => {
 
   app.locals.models = models
 
-  app.use(morgan('combined', { stream: logger.stream }))
   app.use(bodyParser.json({ limit: '50mb' }))
+  morgan.token('graphql', ({ body }, res, type) => {
+    if (!body.operationName) return ''
+    switch (type) {
+      case 'query':
+        return body.query.replace(/\s+/g, ' ')
+      case 'variables':
+        return JSON.stringify(body.variables)
+      case 'operation':
+      default:
+        return body.operationName
+    }
+  })
+  app.use(
+    morgan(config.get('pubsweet-server').morganLogFormat || 'combined', {
+      stream: logger.stream,
+    }),
+  )
 
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
