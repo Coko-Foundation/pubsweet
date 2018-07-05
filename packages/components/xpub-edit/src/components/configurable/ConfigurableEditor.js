@@ -30,6 +30,7 @@ ConfigurableEditor.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  debounceDelay: PropTypes.number,
 }
 
 export default ConfigurableEditor
