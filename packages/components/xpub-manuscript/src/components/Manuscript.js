@@ -1,8 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-// import SimpleEditor from 'wax-editor-react'
-import { NoteEditor } from 'xpub-edit'
-// TODO: convert user teams to roles (see SimpleEditorWrapper)?
+import { MainEditor } from 'xpub-edit'
 
 const Manuscript = ({
   content,
@@ -11,27 +9,6 @@ const Manuscript = ({
   history,
   updateManuscript,
   version,
-}) => (
-  <NoteEditor
-    bulletlist
-    joinaboveblock
-    liftitem
-    orderedlist
-    redo
-    undo
-    value={content}
-  />
-
-  // <SimpleEditor
-  //   content={content}
-  //   fileUpload={fileUpload}
-  //   history={history}
-  //   onSave={source => updateManuscript({ source })}
-  //   readOnly={version.submitted}
-  //   trackChanges={false}
-  //   update={data => updateManuscript(data)}
-  //   user={currentUser}
-  // />
-)
+}) => <MainEditor onChange={values => true} value={content} />
 
 export default withRouter(Manuscript)

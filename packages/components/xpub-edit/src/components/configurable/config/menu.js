@@ -37,13 +37,13 @@ export default {
     content: 'ordered list',
     run: wrapInList(schema.nodes.ordered_list, { order: { default: 1 } }),
     title: 'Toggle ordered List',
-    select: state => true,
+    select: state => wrapInList(state),
   }),
   bulletlist: schema => ({
     content: 'bullet list',
     run: wrapInList(schema.nodes.bullet_list, {}),
     title: 'Toggle bullet List',
-    select: state => true,
+    select: state => wrapInList(state),
   }),
   joinaboveblock: schema => ({
     content: 'join',
