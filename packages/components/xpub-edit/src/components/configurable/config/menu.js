@@ -49,7 +49,7 @@ export default {
     content: 'join',
     run: joinUp,
     select: state => joinUp(state),
-    title: 'join wtih above block',
+    title: 'join with above block',
   }),
   liftitem: schema => ({
     content: 'lift',
