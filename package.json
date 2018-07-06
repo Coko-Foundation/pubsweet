@@ -55,14 +55,9 @@
       "!**/*.test.{js,jsx}",
       "!**/node_modules/**"
     ],
-    "projects": [
-      "packages/*"
-    ]
+    "projects": ["packages/*"]
   },
-  "workspaces": [
-    "packages/*",
-    "packages/components/*"
-  ],
+  "workspaces": ["packages/*", "packages/components/*"],
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
