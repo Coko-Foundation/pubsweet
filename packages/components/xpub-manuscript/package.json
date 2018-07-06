@@ -10,7 +10,7 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
-    "wax-editor-react": "^0.2.2",
+    "wax-editor-react": "^0.2.3",
     "xpub-connect": "^1.1.2",
     "xpub-selectors": "^0.1.0"
   },
