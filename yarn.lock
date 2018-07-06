@@ -12535,24 +12535,24 @@ watchpack@^1.4.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
-wax-editor-core@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/wax-editor-core/-/wax-editor-core-0.6.1.tgz#297c38fba5abe97891481f58ca74cf6ab1c53564"
+wax-editor-core@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/wax-editor-core/-/wax-editor-core-0.6.2.tgz#e929abd532e8017c29651e68c17166cfe3b9ee3c"
   dependencies:
     codemirror "^5.38.0"
     font-awesome "^4.7.0"
     lodash "^4.17.4"
     substance "1.0.0-beta.6.5"
 
-wax-editor-react@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/wax-editor-react/-/wax-editor-react-0.2.2.tgz#c33c3e06c206b8c9f601ce53d73638d6c010c51e"
+wax-editor-react@^0.2., wax-editor-react@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/wax-editor-react/-/wax-editor-react-0.2.3.tgz#f7f5f412ecd6d2f18b6d41b8ec0d6d6eaff1e35a"
   dependencies:
     lodash "^4.17.4"
     react "^16.2.0"
     react-dom "^16.2.0"
     react-router-dom "^4.2.2"
-    wax-editor-core "^0.6.1"
+    wax-editor-core "^0.6.2"
 
 wbuf@^1.1.0, wbuf@^1.7.2:
   version "1.7.3"
