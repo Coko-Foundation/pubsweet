@@ -12544,7 +12544,7 @@ wax-editor-core@^0.6.2:
     lodash "^4.17.4"
     substance "1.0.0-beta.6.5"
 
-wax-editor-react@^0.2., wax-editor-react@^0.2.3:
+wax-editor-react@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/wax-editor-react/-/wax-editor-react-0.2.3.tgz#f7f5f412ecd6d2f18b6d41b8ec0d6d6eaff1e35a"
   dependencies:
