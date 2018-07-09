@@ -45,7 +45,7 @@ const makeKeymap = (schema, features) => {
   if (type) {
     bind('Enter', splitListItem(type))
     bind('Mod-[', liftListItem(type))
-    bind('Mod-]', sinkListItem(type))
+    bind('Tab', sinkListItem(type))
   }
 
   if (features.includes('bold')) {

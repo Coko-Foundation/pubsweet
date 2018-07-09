@@ -23,8 +23,8 @@ const Manuscript = ({
     update={data => updateManuscript(data)}
     user={currentUser}
   />
-)
 
-// <MainEditor onChange={values => true} value={content} />
+  // <MainEditor onChange={values => true} value={content} />
+)
 
 export default withRouter(Manuscript)

@@ -49,13 +49,13 @@ export default {
     content: 'join',
     run: joinUp,
     select: state => joinUp(state),
-    title: 'join with above block',
+    title: 'Join with above block',
   }),
   liftitem: schema => ({
     content: 'lift',
     run: lift,
     select: state => lift(state),
-    title: 'lift item',
+    title: 'Lift item',
   }),
   bold: schema => ({
     active: markActive(schema.marks.bold),
