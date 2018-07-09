@@ -29,7 +29,7 @@ const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th('lineHeightBaseSmall')};
   display: block;
-
+  ${override('ui.Label')};
   ${override('ui.Menu.Label')};
 `
 

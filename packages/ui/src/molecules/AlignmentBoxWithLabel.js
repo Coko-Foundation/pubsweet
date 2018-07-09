@@ -23,7 +23,7 @@ const Label = styled.span`
   margin-left: ${props => (props.positionRight ? '10px' : '0')};
   margin-right: ${props => (props.positionRight ? '0' : '10px')};
   order: ${props => (props.positionRight ? '2' : '0')};
-
+  ${override('ui.Label')};
   ${override('ui.AlignmentBoxWithLabel.Label')};
 `
 
