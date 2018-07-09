@@ -3,7 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.0.0"></a>
+      <a name="8.0.1"></a>
+## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.0.0...@pubsweet/ui@8.0.1) (2018-07-09)
+
+
+### Bug Fixes
+
+* **component:** remove comment ([a9b956e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a9b956e))
+* **components:** button to styledButton ([0404203](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0404203))
+* **menu:** reset function ([2961a85](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2961a85))
+* **snapshot:** test recreate ([bb11b8f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb11b8f))
+* **teammanager:** test fix failing ([c559488](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c559488))
+* **teammanager:** update styles component ([c92bbd5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c92bbd5))
+* **test:** update snapshot ([b8e4a51](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b8e4a51))
+* **test:** update snapshot ([8cd93a4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8cd93a4))
+* **xpub-team-manager:** move files to components ([4421a68](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4421a68))
+
+
+
+
+      <a name="8.0.0"></a>
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@7.0.0...@pubsweet/ui@8.0.0) (2018-07-03)
 
 
@@ -19,7 +38,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="7.0.0"></a>
+<a name="7.0.0"></a>
 # [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@6.0.1...@pubsweet/ui@7.0.0) (2018-07-02)
 
 

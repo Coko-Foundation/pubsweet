@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="7.1.2"></a>
+      <a name="7.2.0"></a>
+# [7.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.2...pubsweet-server@7.2.0) (2018-07-09)
+
+
+### Features
+
+* **server:** make morgan request log format configurable ([a2a3810](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2a3810))
+
+
+
+
+      <a name="7.1.2"></a>
 ## [7.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.1...pubsweet-server@7.1.2) (2018-06-19)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-server
 
-  <a name="7.1.1"></a>
+<a name="7.1.1"></a>
 ## [7.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.0...pubsweet-server@7.1.1) (2018-06-01)
 
 
