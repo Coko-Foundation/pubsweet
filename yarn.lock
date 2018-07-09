@@ -9451,14 +9451,6 @@ pubsweet-component-form-group@1.0.2:
     pubsweet-server "^2.0.0"
     react-bootstrap "^0.32.0"
 
-pubsweet-component-manage@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-manage/-/pubsweet-component-manage-0.2.4.tgz#47a6835ca4bfb55b8034aa9f8c6961bc38ba5eaa"
-  dependencies:
-    bootstrap-sass "^3.3.7"
-    font-awesome "^4.7.0"
-    prop-types "^15.5.10"
-
 pubsweet-component-password-reset-frontend@^1.0.1:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-frontend/-/pubsweet-component-password-reset-frontend-1.0.17.tgz#1bf0381740acf2fd6643248a822fdf56bc995a64"
