@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "7.1.2",
+  "version": "7.2.0",
   "scripts": {
     "test": "jest",
     "vuln-test": "nsp check"

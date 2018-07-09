@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.1.2...@pubsweet/ui-toolkit@1.1.3) (2018-07-09)
+
+
+### Bug Fixes
+
+* **ui-toolkit:** fix Root override not getting registered ([075e439](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/075e439))
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.1.1...@pubsweet/ui-toolkit@1.1.2) (2018-07-02)
 

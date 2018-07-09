@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.0.2...xpub-edit@2.1.0) (2018-07-09)
+
+
+### Features
+
+* **xpub-edit:** make debounce delay configurable ([d7784c1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d7784c1))
+
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.0.1...xpub-edit@2.0.2) (2018-07-02)
 
