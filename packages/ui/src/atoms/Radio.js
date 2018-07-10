@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
 const Label = styled.span`
+  ${override('ui.Label')};
   ${override('ui.Radio.Label')};
 `
 const Input = styled.input`
-  margin-right: ${th('subGridUnit')};
+  margin-right: ${th('gridUnit')};
   ${override('ui.Radio.Input')};
 `
 const Root = styled.label`

@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Yes or No is rendered corrctly 1`] = `
+.c2 {
+  margin-right: 8px;
+}
+
 .c1 {
   cursor: pointer;
   -webkit-align-items: center;
@@ -39,7 +43,7 @@ exports[`Yes or No is rendered corrctly 1`] = `
   >
     <input
       checked={false}
-      className=""
+      className="c2"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
@@ -62,7 +66,7 @@ exports[`Yes or No is rendered corrctly 1`] = `
   >
     <input
       checked={false}
-      className=""
+      className="c2"
       disabled={undefined}
       name="TestName"
       onChange={[Function]}
