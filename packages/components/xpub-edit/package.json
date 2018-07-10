@@ -14,6 +14,7 @@
     "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-history": "^1.0.0",
     "prosemirror-inputrules": "^1.0.0",
+    "prosemirror-tables": "^0.7.5",
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
