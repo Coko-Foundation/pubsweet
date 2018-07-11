@@ -1,7 +1,7 @@
 import { Schema } from 'prosemirror-model'
 import { addListNodes } from 'prosemirror-schema-list'
 import { schema as defaultSchema } from 'prosemirror-schema-basic'
-
+import { tableNodes } from 'prosemirror-tables'
 import pick from 'lodash/pick'
 import map from 'lodash/map'
 
@@ -13,7 +13,28 @@ export default features => {
   const featureNames = Object.keys(features).filter(key => features[key])
 
   const schema = new Schema({
-    nodes: addListNodes(defaultSchema.spec.nodes, 'paragraph block*', 'block'),
+    nodes: addListNodes(
+      defaultSchema.spec.nodes,
+      'paragraph block*',
+      'block',
+    ).append(
+      tableNodes({
+        tableGroup: 'block',
+        cellContent: 'block+',
+        cellAttributes: {
+          background: {
+            default: null,
+            getFromDOM(dom) {
+              return dom.style.backgroundColor || null
+            },
+            setDOMAttr(value, attrs) {
+              if (value)
+                attrs.style = `${attrs.style || ''}background-color: ${value};`
+            },
+          },
+        },
+      }),
+    ),
     marks: pick(marks, featureNames),
   })
 
