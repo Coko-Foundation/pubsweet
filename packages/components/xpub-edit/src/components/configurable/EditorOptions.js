@@ -17,6 +17,7 @@ const FEATURES_WHITELIST = [
   'orderedlist',
   'joinaboveblock',
   'liftitem',
+  'addcolumnbefore',
 ]
 
 class ConfigurableEditor extends React.Component {

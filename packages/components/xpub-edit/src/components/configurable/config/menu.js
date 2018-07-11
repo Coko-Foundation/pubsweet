@@ -1,6 +1,7 @@
 import { setBlockType, toggleMark, joinUp, lift } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
+import { addColumnBefore } from 'prosemirror-tables'
 
 import icons from './icons'
 
@@ -33,6 +34,12 @@ const promptForURL = () => {
 }
 
 export default {
+  addcolumnbefore: schema => ({
+    content: 'add column before',
+    run: addColumnBefore,
+    title: 'Toggle ordered List',
+    select: state => true,
+  }),
   orderedlist: schema => ({
     content: 'ordered list',
     run: wrapInList(schema.nodes.ordered_list, { order: { default: 1 } }),
