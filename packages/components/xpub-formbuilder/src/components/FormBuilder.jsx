@@ -61,6 +61,8 @@ const Info = styled.div`
   padding: calc(8px / 2);
 `
 
+const ElementTitle = styled.span``
+
 const createMarkup = encodedHtml => ({
   __html: unescape(encodedHtml),
 })
@@ -76,7 +78,7 @@ const BuilderElement = ({ elements, changeProperties, deleteElement, form }) =>
           })
         }
       >
-        <span dangerouslySetInnerHTML={createMarkup(value.title)} /> ({
+        <ElementTitle dangerouslySetInnerHTML={createMarkup(value.title)} /> ({
           value.component
         })
       </Action>
