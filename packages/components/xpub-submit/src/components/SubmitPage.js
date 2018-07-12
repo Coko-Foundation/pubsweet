@@ -75,16 +75,14 @@ export default compose(
       const version = selectFragment(state, match.params.version)
       const currentVersion = selectCurrentVersion(state, project)
       const submittedVersion = selectLastDecidedVersion(state, project)
-      const {
-        forms: { forms },
-      } = state
+      const { forms } = state
 
       return {
         project,
         submittedVersion,
         currentVersion,
         version,
-        forms,
+        forms: forms.forms,
       }
     },
     {
