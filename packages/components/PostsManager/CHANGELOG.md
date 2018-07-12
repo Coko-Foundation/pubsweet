@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.27"></a>
+## [1.0.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.26...pubsweet-component-posts-manager@1.0.27) (2018-07-12)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
 <a name="1.0.26"></a>
 ## [1.0.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.25...pubsweet-component-posts-manager@1.0.26) (2018-07-09)
 

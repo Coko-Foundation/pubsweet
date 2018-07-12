@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.1.0...xpub-edit@2.2.0) (2018-07-12)
+
+
+### Bug Fixes
+
+* change shortcut and label text ([882a490](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882a490))
+* remove unused code ([b8f7abb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b8f7abb))
+* typo ([b2667b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b2667b6))
+
+
+### Features
+
+* add bullet list ([f528fd0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f528fd0))
+* create main editor ([b0eeca3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b0eeca3))
+* hide lift/join if not list ([a63028c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a63028c))
+* join and lift lists ([505e306](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/505e306))
+* ordered lists in progress ([2ba933f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2ba933f))
+* replace wax with noteEditor/add basic,list schema as dependencies ([64ba50a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/64ba50a))
+
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.0.2...xpub-edit@2.1.0) (2018-07-09)
 
