@@ -2,7 +2,8 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import SimpleEditor from 'wax-editor-react'
 
-// TODO: convert user teams to roles (see SimpleEditorWrapper)?
+// Change to main Editor when everything is done
+// import { MainEditor } from 'xpub-edit'
 
 const Manuscript = ({
   content,
@@ -22,6 +23,8 @@ const Manuscript = ({
     update={data => updateManuscript(data)}
     user={currentUser}
   />
+
+  // <MainEditor onChange={values => true} value={content} />
 )
 
 export default withRouter(Manuscript)
