@@ -1,22 +1,146 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Button, Menu } from '@pubsweet/ui'
-import { TeamTableCell } from './molecules/Table'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import styled, { withTheme } from 'styled-components'
+import { unescape } from 'lodash'
+import { th } from '@pubsweet/ui-toolkit'
+import { Icon, Action } from '@pubsweet/ui'
+import { Page } from './molecules/Page'
 
-const StyledMenu = styled(Menu)`
-  width: 100%;
+const Element = styled.div`
+  display: flex;
+  border: 1px solid #000;
+  padding: 10px;
+  margin: 10px;
+  justify-content: space-between;
 `
 
-const FormBuilder = () => [
-  <TeamTableCell width={5}>1</TeamTableCell>,
-  <TeamTableCell>tefsd</TeamTableCell>,
-  <TeamTableCell>4444</TeamTableCell>,
-  <TeamTableCell width={40}>
-    <StyledMenu inline multi name="members" options={[]} />
-  </TeamTableCell>,
-  <TeamTableCell width={15}>
-    <Button>Delete</Button>
-  </TeamTableCell>,
-]
+const StatusIcon = withTheme(({ children, theme }) => (
+  <Icon color={theme.colorPrimary}>{children}</Icon>
+))
 
-export default FormBuilder
+const Status = styled.div`
+  align-items: center;
+  color: ${th('colorPrimary')};
+  display: inline-flex;
+`
+
+const StatusIdle = Status.extend.attrs({
+  children: () => <StatusIcon>plus_circle</StatusIcon>,
+})``
+
+const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-weight: 200;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  &:hover ${StatusIdle} {
+    circle {
+      fill: ${th('colorPrimary')};
+      stroke: ${th('colorPrimary')};
+    }
+
+    line {
+      stroke: white;
+    }
+  }
+`
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const Info = styled.div`
+  color: ${th('colorPrimary')};
+  font-size: 2em;
+  font-weight: 400;
+  text-transform: uppercase;
+  display: inline-flex;
+  padding: calc(8px / 2);
+`
+
+const createMarkup = encodedHtml => ({
+  __html: unescape(encodedHtml),
+})
+
+const BuilderElement = ({ elements, changeProperties, deleteElement, form }) =>
+  elements.map((value, key) => (
+    <Element key={`element-${value.id}`}>
+      <Action
+        onClick={() =>
+          changeProperties({
+            type: 'element',
+            properties: value,
+          })
+        }
+      >
+        <span dangerouslySetInnerHTML={createMarkup(value.title)} /> ({
+          value.component
+        })
+      </Action>
+      <Action onClick={() => deleteElement(form, value)}>x</Action>
+    </Element>
+  ))
+
+const AddButtonElement = ({ addElements }) => (
+  <Root>
+    <Main>
+      <Action
+        onClick={() =>
+          addElements({
+            title: 'New Component',
+            id: `${Date.now()}`,
+          })
+        }
+      >
+        <StatusIdle />
+        <Info>Add Element</Info>
+      </Action>
+    </Main>
+  </Root>
+)
+
+const FormBuilder = ({
+  form,
+  elements,
+  key,
+  addElements,
+  changeProperties,
+  deleteElement,
+}) => (
+  <Page>
+    <AddButtonElement addElements={addElements} form={form} />
+    {elements &&
+      elements.length > 0 && (
+        <BuilderElement
+          changeProperties={changeProperties}
+          deleteElement={deleteElement}
+          elements={elements}
+          form={form}
+        />
+      )}
+  </Page>
+)
+
+export default compose(
+  withState('elements', 'onAddElements', ({ form }) => form.children || []),
+  withHandlers({
+    addElements: ({ onAddElements, elements, form }) => addElement =>
+      onAddElements(() => {
+        if (!form.children) {
+          form.children = []
+        }
+        form.children.push(addElement)
+        return form.children
+      }),
+  }),
+  lifecycle({
+    componentWillReceiveProps(nextProps) {
+      if (this.props.form !== nextProps.form) {
+        this.setState({ elements: nextProps.form.children })
+      }
+    },
+  }),
+)(FormBuilder)

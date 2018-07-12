@@ -6,33 +6,57 @@ import { actions } from 'pubsweet-client'
 import { ConnectPage } from 'xpub-connect'
 
 import FormBuilderLayout from './FormBuilderLayout'
-import { createForm, updateForm, deleteForm } from '../redux/FormBuilder'
+import {
+  createForms,
+  updateForms,
+  deleteForms,
+  deleteElements,
+  getForms,
+  updateElements,
+} from '../redux/FormBuilder'
 
 export default compose(
-  ConnectPage(() => [actions.getUsers()]),
+  ConnectPage(() => [actions.getUsers(), getForms()]),
   connect(
     state => {
       const { error } = state
-      let { forms } = state
-      forms = {
-        1: {},
-        2: {},
-        new: {},
-      }
-      return { error, forms }
+      const { forms } = state.forms
+
+      return { error, forms: forms.forms }
     },
     (dispatch, { history }) => ({
-      deleteForm: formProperties => deleteForm(formProperties),
-      updateForm: formProperties => updateForm(formProperties),
-      createForm: formProperties => createForm(formProperties),
+      deleteForm: form => dispatch(deleteForms(form)),
+      deleteElement: (form, element) => dispatch(deleteElements(form, element)),
+      updateForm: (form, formProperties) =>
+        dispatch(updateForms(form, formProperties)),
+      createForm: formProperties => dispatch(createForms(formProperties)),
+      updateElements: (form, formElements) =>
+        dispatch(updateElements(form, formElements)),
     }),
   ),
   withState('properties', 'onChangeProperties', ({ forms }) => ({
     type: 'form',
-    properties: (forms || [])[0],
+    properties: forms[0] || {},
   })),
+  withState(
+    'activeTab',
+    'onChangeTab',
+    ({ forms, activeTab }) => (forms.length === 0 ? 'new' : 0),
+  ),
   withHandlers({
-    changeProperties: ({ onChangeProperties }) => properties =>
-      onChangeProperties(() => properties || {}),
+    changeProperties: ({
+      onChangeProperties,
+      forms,
+      activeTab,
+    }) => properties =>
+      onChangeProperties(
+        () =>
+          Object.assign({}, properties, {
+            id: (forms[activeTab] || {}).id,
+          }) || undefined,
+      ),
+    changeTabs: ({ onChangeTab }) => activeTab => {
+      onChangeTab(() => activeTab || '')
+    },
   }),
 )(FormBuilderLayout)
