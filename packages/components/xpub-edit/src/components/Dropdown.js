@@ -15,7 +15,7 @@ const Opener = styled.button.attrs({
 
   width: 100%;
   height: calc(${th('gridUnit')} * 6);
-  padding: 0;
+  padding-left: 20px;
 
   display: flex;
   align-items: center;
@@ -27,7 +27,11 @@ const Opener = styled.button.attrs({
   ${override('ui.Menu.Opener')};
 `
 
-const MenuStyled = styled(Menu)``
+const MenuStyled = styled(Menu)`
+  float: right;
+  width: 21%;
+  margin-right: 50%;
+`
 
 const renderOpener = ({ placeholder, toggleMenu, open }) => (
   <Opener onClick={toggleMenu} open={open}>
@@ -37,15 +41,15 @@ const renderOpener = ({ placeholder, toggleMenu, open }) => (
 
 const Dropdown = ({ item, state, dispatch, ...rest }) => (
   <MenuStyled
+    onChange={value => {
+      tablesFn[value](state, dispatch)
+    }}
     options={[
       { label: 'add column before', value: 'addColumnBefore' },
       { label: 'add column after', value: 'addColumnAfter' },
     ]}
-    renderOpener={renderOpener}
     placeholder="Table Menu"
-    onChange={value => {
-      tablesFn[value](state, dispatch)
-    }}
+    renderOpener={renderOpener}
     {...rest}
   />
 )

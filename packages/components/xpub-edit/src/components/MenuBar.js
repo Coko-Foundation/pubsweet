@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 `
 const ToolBar = styled.div`
   ${override('xpub-edit.MenuBar.ToolBar')};
+  width: 100%;
 `
 
 const Legend = styled.div`
