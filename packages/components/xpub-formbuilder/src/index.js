@@ -2,10 +2,10 @@ module.exports = {
   frontend: {
     components: [() => require('./components')],
     actions: () => ({
-      getForms: require('./redux/FormBuilder').getForms,
+      getForm: require('./redux/FormBuilder').getForm,
     }),
     reducers: {
-      formBuilder: () => require('./redux/FormBuilder').default,
+      forms: () => require('./redux/FormBuilder').default,
     },
   },
   server: () => require('./server/formRequestBackend'),

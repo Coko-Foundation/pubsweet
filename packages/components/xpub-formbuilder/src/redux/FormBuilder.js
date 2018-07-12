@@ -17,14 +17,14 @@ function getFormSuccess(forms) {
   }
 }
 
-function getFormFailure(project, version, error) {
+function getFormFailure(error) {
   return {
     type: GET_FORM_FAILURE,
     error,
   }
 }
 
-export function getForms(project, version) {
+export function getForms() {
   return dispatch => {
     dispatch(getFormRequest())
 
@@ -37,12 +37,67 @@ export function getForms(project, version) {
   }
 }
 
-export function updateForms(properties) {
+export function getForm(formId) {
   return dispatch => {
     dispatch(getFormRequest())
 
     return api
-      .update('/get-forms', properties)
+      .get(`/get-form/${formId}`, {})
+      .then(result => {
+        dispatch(getFormSuccess(result))
+      })
+      .catch(error => dispatch(getFormFailure(error)))
+  }
+}
+
+export function updateForms(form, properties) {
+  return dispatch => {
+    dispatch(getFormRequest())
+
+    return api
+      .update(`/update-forms/${form.id}`, properties)
+      .then(result => {
+        dispatch(getFormSuccess(result))
+      })
+      .catch(error => dispatch(getFormFailure(error)))
+  }
+}
+
+export function updateElements(form, properties) {
+  return dispatch => {
+    dispatch(getFormRequest())
+
+    return api
+      .update(
+        `/update-forms/${form.id}/element/${properties.children.id}`,
+        properties,
+      )
+      .then(result => {
+        dispatch(getFormSuccess(result))
+      })
+      .catch(error => dispatch(getFormFailure(error)))
+  }
+}
+
+export function deleteForms(form) {
+  return dispatch => {
+    dispatch(getFormRequest())
+
+    return api
+      .remove(`/delete-forms/${form.id}`)
+      .then(result => {
+        dispatch(getFormSuccess(result))
+      })
+      .catch(error => dispatch(getFormFailure(error)))
+  }
+}
+
+export function deleteElements(form, element) {
+  return dispatch => {
+    dispatch(getFormRequest())
+
+    return api
+      .remove(`/delete-forms/${form.id}/elements/${element.id}`)
       .then(result => {
         dispatch(getFormSuccess(result))
       })
@@ -55,7 +110,7 @@ export function createForms(properties) {
     dispatch(getFormRequest())
 
     return api
-      .create('/get-forms', {})
+      .create('/create-forms', properties)
       .then(result => {
         dispatch(getFormSuccess(result))
       })
@@ -66,12 +121,9 @@ export function createForms(properties) {
 const initialState = {}
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_FORM_REQUEST:
-      return {}
-
     case GET_FORM_SUCCESS:
       return {
-        forms: state.forms,
+        forms: action.forms.forms,
       }
 
     case GET_FORM_FAILURE:
