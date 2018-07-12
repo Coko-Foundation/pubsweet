@@ -8,7 +8,8 @@ const Opener = styled.button.attrs({
   type: 'button',
 })`
   background: transparent;
-  border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
+  border: 0;
+  // border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
   cursor: pointer;
   font-family: inherit;
@@ -21,16 +22,23 @@ const Opener = styled.button.attrs({
   align-items: center;
 
   &:hover {
-    border-color: ${th('colorPrimary')};
+    // border-color: ${th('colorPrimary')};
+  }
+  &:after {
+    content:'>';
+    margin-left: 10px;
+    transform: rotate(90deg);
   }
 
   ${override('ui.Menu.Opener')};
 `
 
 const MenuStyled = styled(Menu)`
+  bottom: 10px;
   float: right;
-  width: 21%;
-  margin-right: 50%;
+  margin-right: 65%;
+  position: relative;
+  width: 10%;
 `
 
 const renderOpener = ({ placeholder, toggleMenu, open }) => (
