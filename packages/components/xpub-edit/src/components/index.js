@@ -1,5 +1,6 @@
 export { default as AbstractViewer } from './abstract/AbstractViewer'
 export { default as AbstractEditor } from './abstract/AbstractEditor'
+export { default as MainEditor } from './main/MainEditor'
 export { default as NoteViewer } from './note/NoteViewer'
 export { default as NoteEditor } from './note/NoteEditor'
 export { default as TextViewer } from './text/TextViewer'

@@ -3,6 +3,8 @@ import pick from 'lodash/pick'
 import makeConfig from './config'
 
 const FEATURES_WHITELIST = [
+  'undo',
+  'redo',
   'bold',
   'italic',
   'underline',
@@ -11,8 +13,10 @@ const FEATURES_WHITELIST = [
   'smallcaps',
   'link',
   'heading',
-  'undo',
-  'redo',
+  'bulletlist',
+  'orderedlist',
+  'joinaboveblock',
+  'liftitem',
 ]
 
 class ConfigurableEditor extends React.Component {

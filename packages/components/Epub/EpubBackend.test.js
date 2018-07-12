@@ -27,7 +27,14 @@ describe('/collections/*/epub route', () => {
     const collection = {
       id: 'col1',
       title: 'Test thing',
-      getFragments: () => [{ title: 'One thing', source: 'In depth' }],
+      getFragments: () => [
+        {
+          title: 'One thing',
+          source: 'In depth',
+          division: 'body',
+          subCategory: 'part',
+        },
+      ],
     }
     return makeApp(collection)
       .get('/api/collections/234/epub')

@@ -7,11 +7,22 @@ const Button = styled.button`
   border: none;
   border-bottom: 2px solid transparent;
   color: #777;
+  display: ${props => (props.select ? 'inline' : 'none')}
   cursor: pointer;
   height: 20px;
   margin: 0 0.4em;
   min-width: 20px;
   padding: 0;
+
+  &:disabled {
+    opacity: 0.2;
+    color: #777;
+
+    &:hover {
+      border-bottom: none;
+      color: #777;
+    }
+  }
 
   &:hover {
     border-bottom-color: ${th('colorPrimary')};
@@ -28,6 +39,7 @@ const MenuButton = ({ item, state, handle }) => (
     active={item.active && item.active(state)}
     disabled={item.enable && !item.enable(state)}
     onMouseDown={handle}
+    select={item.select && item.select(state)}
     title={item.title}
     type="button"
   >

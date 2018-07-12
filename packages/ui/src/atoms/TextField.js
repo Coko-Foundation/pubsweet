@@ -53,6 +53,7 @@ class TextField extends React.Component {
   render() {
     const {
       innerRefProp,
+      className,
       label,
       type = 'text',
       value = '',
@@ -61,7 +62,7 @@ class TextField extends React.Component {
       ...props
     } = this.props
     return (
-      <Root inline={inline}>
+      <Root className={className} inline={inline}>
         {label && <Label htmlFor={this.inputId}>{label}</Label>}
         <Input
           id={this.inputId}
