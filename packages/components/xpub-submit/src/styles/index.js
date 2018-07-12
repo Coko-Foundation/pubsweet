@@ -11,7 +11,9 @@ export const Section = styled.div`
   margin: calc(${th('gridUnit')} * 6) 0;
   display: flex;
   flex-direction: ${({ cssOverrides }) =>
-    cssOverrides['flex-direction'] ? cssOverrides['flex-direction'] : 'column'};
+    cssOverrides && cssOverrides['flex-direction']
+      ? cssOverrides['flex-direction']
+      : 'column'};
   flex-wrap: wrap;
   justify-content: space-between;
 `

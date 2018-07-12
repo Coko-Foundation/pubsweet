@@ -7,7 +7,7 @@ const passport = require('passport')
 // const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
 const fs = require('fs')
 // const filepath = require('path')
-const { readFiles } = require('./util')
+const { readFiles, mkdirp } = require('./util')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 
@@ -26,9 +26,12 @@ const mergeFiles = path =>
 module.exports = app => {
   app.get('/api/get-forms', authBearer, async (req, res, next) => {
     try {
-      const path = `${config.get('pubsweet-component-xpub-formbuilder.path')}/`
+      const folderPath = `${config.get(
+        'pubsweet-component-xpub-formbuilder.path',
+      )}/`
 
-      mergeFiles(path).then(forms =>
+      mkdirp(folderPath)
+      mergeFiles(folderPath).then(forms =>
         res.send({
           forms,
         }),
@@ -129,7 +132,7 @@ module.exports = app => {
       const path = `${folderPath}/${content.id}.json`
 
       if (!fs.existsSync(path)) {
-        fs.existsSync(`${folderPath}`) || fs.mkdirSync(`${folderPath}`)
+        mkdirp(folderPath)
         fs.writeFileSync(path, JSON.stringify(content))
       }
 

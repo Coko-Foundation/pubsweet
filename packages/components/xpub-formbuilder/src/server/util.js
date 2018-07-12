@@ -15,6 +15,24 @@ const promiseAllP = (items, block) => {
   return Promise.all(promises)
 }
 
+Util.mkdirp = dir =>
+  path
+    .resolve(dir)
+    .split(path.sep)
+    .reduce((acc, cur) => {
+      const currentPath = path.normalize(acc + path.sep + cur)
+      try {
+        fs.statSync(currentPath)
+      } catch (e) {
+        if (e.code === 'ENOENT') {
+          fs.mkdirSync(currentPath)
+        } else {
+          throw e
+        }
+      }
+      return currentPath
+    }, '')
+
 Util.readFiles = dirname =>
   new Promise((resolve, reject) => {
     fs.readdir(dirname, (err, filenames) => {
