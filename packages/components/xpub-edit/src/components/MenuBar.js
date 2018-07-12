@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
 import { th, override } from '@pubsweet/ui-toolkit'
-import MenuButton from './MenuButton'
 
 const Wrapper = styled.div`
   align-items: baseline;
@@ -28,18 +27,19 @@ const MenuBar = ({ title, menu, state, dispatch }) => (
   <Wrapper>
     {title && <Legend>{title}</Legend>}
     <ToolBar>
-      {map(menu, (item, key) => (
-        <MenuButton
-          handle={e => {
+      {map(menu, (item, key) =>
+        item.menu({
+          handle: e => {
             e.preventDefault()
             item.run(state, dispatch)
-          }}
-          item={item}
-          key={key}
-          state={state}
-          title={title}
-        />
-      ))}
+          },
+          item,
+          key,
+          state,
+          title,
+          dispatch,
+        }),
+      )}
     </ToolBar>
   </Wrapper>
 )
