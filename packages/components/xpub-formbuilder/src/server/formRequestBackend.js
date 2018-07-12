@@ -129,6 +129,7 @@ module.exports = app => {
       const path = `${folderPath}/${content.id}.json`
 
       if (!fs.existsSync(path)) {
+        fs.existsSync(`${folderPath}`) || fs.mkdirSync(`${folderPath}`)
         fs.writeFileSync(path, JSON.stringify(content))
       }
 
