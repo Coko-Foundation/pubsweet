@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="8.0.1"></a>
+  <a name="8.1.0"></a>
+# [8.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.0.1...@pubsweet/ui@8.1.0) (2018-07-12)
+
+
+### Bug Fixes
+
+* **ui:** add classname prop to textfield ([841782e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/841782e))
+
+
+### Features
+
+* **ui:** add inner ref prop to textfield ([b5136dc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b5136dc))
+* **ui:** add override for all ui.Label ([7d2a9f5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7d2a9f5))
+
+
+
+
+  <a name="8.0.1"></a>
 ## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.0.0...@pubsweet/ui@8.0.1) (2018-07-09)
 
 
@@ -22,7 +39,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="8.0.0"></a>
+<a name="8.0.0"></a>
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@7.0.0...@pubsweet/ui@8.0.0) (2018-07-03)
 
 
