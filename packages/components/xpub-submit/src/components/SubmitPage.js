@@ -65,6 +65,7 @@ const onChange = (values, dispatch, { project, version }) => {
 
 export default compose(
   ConnectPage(({ match }) => [
+    actions.getForm('submit'),
     actions.getCollection({ id: match.params.project }),
     actions.getFragments({ id: match.params.project }),
   ]),
@@ -74,8 +75,17 @@ export default compose(
       const version = selectFragment(state, match.params.version)
       const currentVersion = selectCurrentVersion(state, project)
       const submittedVersion = selectLastDecidedVersion(state, project)
+      const {
+        forms: { forms },
+      } = state
 
-      return { project, submittedVersion, currentVersion, version }
+      return {
+        project,
+        submittedVersion,
+        currentVersion,
+        version,
+        forms,
+      }
     },
     {
       uploadFile,

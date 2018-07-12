@@ -9,6 +9,11 @@ export const Heading1 = styled.h1`
 
 export const Section = styled.div`
   margin: calc(${th('gridUnit')} * 6) 0;
+  display: flex;
+  flex-direction: ${({ cssOverrides }) =>
+    cssOverrides['flex-direction'] ? cssOverrides['flex-direction'] : 'column'};
+  flex-wrap: wrap;
+  justify-content: space-between;
 `
 
 export const Legend = styled.div`
@@ -20,5 +25,5 @@ export const SubNote = styled.span`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th('lineHeightBaseSmall')};
   color: ${th('colorTextPlaceholder')};
-  page-break-before: always;
+  width: 100%;
 `
