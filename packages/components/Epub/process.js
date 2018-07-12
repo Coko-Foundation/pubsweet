@@ -33,5 +33,7 @@ module.exports = ({ styles, activeConverters, book }) => fragment => {
   return {
     title: fragment.title,
     content: $.html(),
+    division: fragmentDivision,
+    type: fragmentSubcategory,
   }
 }
