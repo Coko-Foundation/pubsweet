@@ -5,7 +5,7 @@ import { wrapInList } from 'prosemirror-schema-list'
 
 import icons from './icons'
 import MenuButton from '../../MenuButton'
-import Dropdown from '../../Dropdown'
+import DropDownTable from '../../DropDownTable'
 
 const markActive = type => state => {
   const { from, $from, to, empty } = state.selection
@@ -41,7 +41,7 @@ export default {
     run: option => true,
     title: '',
     select: state => true,
-    menu: props => <Dropdown {...props} />,
+    menu: props => <DropDownTable {...props} />,
   }),
   orderedlist: schema => ({
     content: 'ordered list',
