@@ -30,6 +30,10 @@ const Opener = styled.button.attrs({
     transform: rotate(90deg);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   ${override('ui.Menu.Opener')};
 `
 

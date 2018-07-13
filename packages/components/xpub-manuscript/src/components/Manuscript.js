@@ -8,10 +8,16 @@ import styled from 'styled-components'
 import { MainEditor } from 'xpub-edit'
 
 const MainEditorStyled = styled(MainEditor)`
+  border: none;
+  margin: 0 200px 50px 40px;
+  height: 800px;
+  overflow-y: scroll;
   table {
     width: 100%;
     border-spacing: 0px !important;
-    /*background-color: red;*/
+    tr {
+      height: 50px;
+    }
   }
 `
 const Manuscript = ({

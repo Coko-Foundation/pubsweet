@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   align-items: baseline;
   display: flex;
   margin-bottom: 0.8em;
-  margin-top: 0;
+  margin-top: 2em;
   flex-direction: column;
 
   ${override('xpub-edit.MenuBar.Wrapper')};
