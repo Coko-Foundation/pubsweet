@@ -18,6 +18,31 @@ const textarea = {
   },
 }
 
+const validate = {
+  component: 'Menu',
+  props: {
+    multi: true,
+    options: [
+      {
+        value: 'required',
+        label: 'Required',
+      },
+      {
+        value: 'minSize',
+        label: 'minSize',
+      },
+      {
+        value: 'minChars',
+        label: 'minimum Characters',
+      },
+      {
+        value: 'maxChars',
+        label: 'maximum Characters',
+      },
+    ],
+  },
+}
+
 const radiofield = {
   component: 'RadioBox',
   props: {
@@ -42,18 +67,13 @@ export default {
     title: textfield,
     name: textfield,
     description: editorfield,
-    validate: {
-      component: 'Menu',
-      props: {
-        multi: true,
-        options: [
-          {
-            value: 'minSize',
-            label: 'minSize',
-          },
-        ],
-      },
-    },
+    validate,
+  },
+  AuthorsInput: {
+    id: textfield,
+    title: textfield,
+    name: textfield,
+    validate,
   },
   AbstractEditor: {
     id: textfield,
@@ -61,18 +81,7 @@ export default {
     name: textfield,
     placeholder: textfield,
     description: editorfield,
-    validate: {
-      component: 'Menu',
-      props: {
-        multi: true,
-        options: [
-          {
-            value: 'minSize',
-            label: 'minSize',
-          },
-        ],
-      },
-    },
+    validate,
   },
   TextField: {
     id: textfield,
@@ -120,18 +129,7 @@ export default {
     placeholder: textfield,
     description: editorfield,
     options: optionfield,
-    validate: {
-      component: 'Menu',
-      props: {
-        multi: true,
-        options: [
-          {
-            value: 'minSize',
-            label: 'minSize',
-          },
-        ],
-      },
-    },
+    validate,
   },
   Menu: {
     id: textfield,
@@ -140,18 +138,7 @@ export default {
     placeholder: textfield,
     description: editorfield,
     options: optionfield,
-    validate: {
-      component: 'Menu',
-      props: {
-        multi: true,
-        options: [
-          {
-            value: 'minSize',
-            label: 'minSize',
-          },
-        ],
-      },
-    },
+    validate,
   },
   RadioGroup: {
     id: textfield,
@@ -161,17 +148,6 @@ export default {
     options: optionfield,
     inline: radiofield,
     sectioncss: textarea,
-    validate: {
-      component: 'Menu',
-      props: {
-        multi: true,
-        options: [
-          {
-            value: 'required',
-            label: 'Required',
-          },
-        ],
-      },
-    },
+    validate,
   },
 }

@@ -7,6 +7,7 @@ import * as elements from '@pubsweet/ui'
 import * as validators from 'xpub-validators'
 import { AbstractEditor } from 'xpub-edit'
 import { Heading1, Section, Legend, SubNote } from '../styles'
+import AuthorsInput from './AuthorsInput'
 import Confirm from './Confirm'
 
 const Wrapper = styled.div`
@@ -37,6 +38,7 @@ const ModalWrapper = styled.div`
 
 const { ValidatedField, Button } = elements
 elements.AbstractEditor = AbstractEditor
+elements.AuthorsInput = AuthorsInput
 
 const rejectProps = (obj, keys) =>
   Object.keys(obj)
