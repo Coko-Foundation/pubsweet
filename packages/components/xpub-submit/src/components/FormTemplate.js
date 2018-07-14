@@ -64,6 +64,17 @@ const createMarkup = encodedHtml => ({
   __html: unescape(encodedHtml),
 })
 
+const executeValidate = (vld = [], value = {}) => {
+  const validator = vld || []
+  if (validator.length === 0) return undefined
+  return validator.map(
+    validFn =>
+      validFn === 'required'
+        ? validators[validFn]
+        : validators[validFn](value[validFn]),
+  )
+}
+
 export default ({
   form,
   handleSubmit,
@@ -99,7 +110,9 @@ export default ({
               'sectioncss',
               'parse',
               'format',
+              'validate',
             ])}
+            validate={executeValidate(element.validate, element.validateValue)}
           />
           <SubNote
             dangerouslySetInnerHTML={createMarkup(element.description)}

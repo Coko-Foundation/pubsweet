@@ -89,6 +89,7 @@ export default {
     name: textfield,
     placeholder: textfield,
     description: editorfield,
+    validate,
     parse: {
       component: 'Menu',
       props: {

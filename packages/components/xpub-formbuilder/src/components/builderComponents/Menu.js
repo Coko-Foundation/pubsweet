@@ -1,6 +1,7 @@
 import React from 'react'
 import { Menu, TextField, ValidatedField } from '@pubsweet/ui'
 import { compose, withState, withHandlers } from 'recompose'
+import { Legend, Section } from '../styles'
 
 const ValidationMenu = input => (
   <div>
@@ -12,11 +13,13 @@ const ValidationMenu = input => (
     />
     {input.selectelement &&
       input.selectelement !== 'required' && (
-        <ValidatedField
-          component={TextField}
-          label="Min / Max"
-          name={`${input.selectelement}.validateValue`}
-        />
+        <Section>
+          <Legend space>FIeld Min / Max</Legend>
+          <ValidatedField
+            component={TextField}
+            name={`validateValue.${input.selectelement}`}
+          />
+        </Section>
       )}
   </div>
 )
