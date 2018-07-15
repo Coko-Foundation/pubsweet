@@ -40,6 +40,7 @@ const Opener = styled.button.attrs({
 const MenuStyled = styled(Menu)`
   bottom: 10px;
   float: right;
+  display: ${props => (props.select ? 'inline' : 'none')};
   margin-right: 65%;
   position: relative;
   width: 10%;
@@ -60,7 +61,7 @@ const dropDownOptions = [
   { label: 'Delete row', value: 'deleteRow' },
   { label: 'Delete table', value: 'deleteTable' },
   { label: 'Merge cells', value: 'mergeCells' },
-  { label: 'Split cell', value: 'mergeCells' },
+  { label: 'Split cell', value: 'splitCell' },
   { label: 'Toggle header column', value: 'toggleHeaderColumn' },
   { label: 'Toggle header row', value: 'toggleHeaderRow' },
   { label: 'Toggle header cells', value: 'toggleHeaderCell' },
@@ -74,6 +75,7 @@ const Dropdown = ({ item, state, dispatch, ...rest }) => (
     options={dropDownOptions}
     placeholder="Table Menu"
     renderOpener={renderOpener}
+    select={item.select && item.select(state)}
     {...rest}
   />
 )

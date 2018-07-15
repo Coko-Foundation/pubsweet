@@ -2,7 +2,7 @@ import React from 'react'
 import { setBlockType, toggleMark, joinUp, lift } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
-
+import { addColumnBefore } from 'prosemirror-tables'
 import icons from './icons'
 import MenuButton from '../../MenuButton'
 import DropDownTable from '../../DropDownTable'
@@ -40,7 +40,7 @@ export default {
     content: 'table',
     run: option => true,
     title: '',
-    select: state => true,
+    select: state => addColumnBefore(state),
     menu: props => <DropDownTable {...props} />,
   }),
   orderedlist: schema => ({
