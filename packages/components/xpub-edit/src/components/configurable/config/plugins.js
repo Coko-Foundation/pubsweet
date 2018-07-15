@@ -4,7 +4,7 @@ import makeKeymap from './keys'
 
 export default (schema, features) => [
   makeKeymap(schema, features),
+  columnResizing(),
   history(),
   tableEditing(),
-  columnResizing(),
 ]
