@@ -19,6 +19,9 @@ const MainEditorStyled = styled(MainEditor)`
       height: 50px;
     }
   }
+  &.resize-cursor {
+    cursor: col-resize;
+  }
 `
 const Manuscript = ({
   content,
