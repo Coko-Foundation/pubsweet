@@ -4,7 +4,6 @@ import { schema as defaultSchema } from 'prosemirror-schema-basic'
 import { tableNodes } from 'prosemirror-tables'
 import pick from 'lodash/pick'
 import map from 'lodash/map'
-
 import makePlugins from './plugins'
 import menuItems from './menu'
 import marks from './marks'
