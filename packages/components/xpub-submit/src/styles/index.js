@@ -14,7 +14,8 @@ export const Section = styled.div`
     cssOverrides && cssOverrides['flex-direction']
       ? cssOverrides['flex-direction']
       : 'column'};
-  flex-wrap: wrap;
+  flex-wrap: ${({ cssOverrides }) =>
+    cssOverrides && cssOverrides.wrap ? cssOverrides.wrap : 'nowrap'};
   justify-content: space-between;
 `
 
