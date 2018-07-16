@@ -37,30 +37,28 @@ const promptForURL = () => {
   return url
 }
 
-const createTable = (row = 1, col = 1, cellAttrs = {}) => {
-  return function(state, dispatch) {
-    const { tr, schema } = state
-    const tableType = schema.nodes.table
-    const rowType = schema.nodes.table_row
-    const cellType = schema.nodes.table_cell
-    const cellNode = cellType.createAndFill(cellAttrs)
-    const cells = []
-    for (let i = 0; i < col; i++) cells.push(cellNode)
-    const rowNode = rowType.create(null, Fragment.from(cells))
-    const rows = []
-    for (let i = 0; i < row; i++) rows.push(rowNode)
-    const tableNode = tableType.create(null, Fragment.from(rows))
-    const newSelection = TextSelection.create(tr.doc, 1)
-    if (dispatch) {
-      dispatch(
-        tr
-          .replaceSelectionWith(tableNode)
-          .setSelection(newSelection)
-          .scrollIntoView(),
-      )
-    }
-    return true
+const createTable = (row = 1, col = 1, cellAttrs = {}) => (state, dispatch) => {
+  const { tr, schema } = state
+  const tableType = schema.nodes.table
+  const rowType = schema.nodes.table_row
+  const cellType = schema.nodes.table_cell
+  const cellNode = cellType.createAndFill(cellAttrs)
+  const cells = []
+  for (let i = 0; i < col; i += 1) cells.push(cellNode)
+  const rowNode = rowType.create(null, Fragment.from(cells))
+  const rows = []
+  for (let i = 0; i < row; i += 1) rows.push(rowNode)
+  const tableNode = tableType.create(null, Fragment.from(rows))
+  const newSelection = TextSelection.create(tr.doc, 1)
+  if (dispatch) {
+    dispatch(
+      tr
+        .replaceSelectionWith(tableNode)
+        .setSelection(newSelection)
+        .scrollIntoView(),
+    )
   }
+  return true
 }
 
 export default {
