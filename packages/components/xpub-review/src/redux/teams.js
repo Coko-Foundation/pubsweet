@@ -9,7 +9,7 @@ export const addUserToTeam = ({
   user,
 }) => dispatch => {
   if (team) {
-    team.members.push(user)
+    team.members = [user]
     return dispatch(actions.updateTeam(team))
   }
 
