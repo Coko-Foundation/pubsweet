@@ -29,7 +29,10 @@ if (
   router.get(
     '/graphiql',
     authBearerAndPublic,
-    graphiqlExpress({ endpointURL: '/graphql' }),
+    graphiqlExpress({
+      endpointURL: '/graphql',
+      subscriptionsEndpoint: `ws://localhost:5000/subscriptions`,
+    }),
   )
 }
 

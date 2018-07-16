@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
+import { WebSocketLink } from 'apollo-link-ws'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
@@ -19,6 +20,12 @@ injectGlobalStyles()
 const makeApolloClient = makeConfig => {
   const uploadLink = createUploadLink()
   const httpLink = createHttpLink()
+  const wsLink = new WebSocketLink({
+    uri: `ws://localhost:5000/subscriptions`,
+    options: {
+      reconnect: true,
+    },
+  })
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token')
     return {
@@ -29,7 +36,7 @@ const makeApolloClient = makeConfig => {
     }
   })
   const config = {
-    link: authLink.concat(uploadLink, httpLink),
+    link: authLink.concat(uploadLink, httpLink, wsLink),
     cache: new InMemoryCache(),
   }
   return new ApolloClient(makeConfig ? makeConfig(config) : config)

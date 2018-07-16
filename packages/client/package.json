@@ -20,6 +20,7 @@
     "apollo-link": "^1.2.1",
     "apollo-link-context": "^1.0.5",
     "apollo-link-http": "^1.5.4",
+    "apollo-link-ws": "^1.0.8",
     "apollo-upload-client": "^8.0.0",
     "authsome": "^0.1.0",
     "config": "^1.21.0",
@@ -42,7 +43,8 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "styled-components": "^3.2.5",
-    "styled-normalize": "^3.0.1"
+    "styled-normalize": "^3.0.1",
+    "subscriptions-transport-ws": "^0.9.12"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

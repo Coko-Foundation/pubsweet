@@ -12,7 +12,7 @@ const authentication = require('./definitions/authentication')
 
 // load base types and resolvers
 const typeDefs = [
-  `type Query, type Mutation`,
+  `type Query, type Mutation, type Subscription`,
   collection.typeDefs,
   fragment.typeDefs,
   team.typeDefs,
