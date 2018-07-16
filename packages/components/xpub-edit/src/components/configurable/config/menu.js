@@ -1,4 +1,6 @@
 import React from 'react'
+import { Fragment } from 'prosemirror-model'
+import { TextSelection } from 'prosemirror-state'
 import { setBlockType, toggleMark, joinUp, lift } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
@@ -35,6 +37,32 @@ const promptForURL = () => {
   return url
 }
 
+const createTable = (row = 1, col = 1, cellAttrs = {}) => {
+  return function(state, dispatch) {
+    const { tr, schema } = state
+    const tableType = schema.nodes.table
+    const rowType = schema.nodes.table_row
+    const cellType = schema.nodes.table_cell
+    const cellNode = cellType.createAndFill(cellAttrs)
+    const cells = []
+    for (let i = 0; i < col; i++) cells.push(cellNode)
+    const rowNode = rowType.create(null, Fragment.from(cells))
+    const rows = []
+    for (let i = 0; i < row; i++) rows.push(rowNode)
+    const tableNode = tableType.create(null, Fragment.from(rows))
+    const newSelection = TextSelection.create(tr.doc, 1)
+    if (dispatch) {
+      dispatch(
+        tr
+          .replaceSelectionWith(tableNode)
+          .setSelection(newSelection)
+          .scrollIntoView(),
+      )
+    }
+    return true
+  }
+}
+
 export default {
   table: schema => ({
     content: 'table',
@@ -42,6 +70,13 @@ export default {
     title: '',
     select: state => addColumnBefore(state),
     menu: props => <DropDownTable {...props} />,
+  }),
+  createtable: schema => ({
+    content: 'create table',
+    run: createTable(2, 2),
+    title: 'Create a new table',
+    select: state => true,
+    menu: props => <MenuButton {...props} />,
   }),
   orderedlist: schema => ({
     content: 'ordered list',

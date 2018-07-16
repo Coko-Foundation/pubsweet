@@ -18,6 +18,7 @@ const FEATURES_WHITELIST = [
   'joinaboveblock',
   'liftitem',
   'table',
+  'createtable',
 ]
 
 class ConfigurableEditor extends React.Component {

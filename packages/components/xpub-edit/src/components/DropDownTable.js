@@ -41,7 +41,7 @@ const MenuStyled = styled(Menu)`
   bottom: 10px;
   float: right;
   display: ${props => (props.select ? 'inline' : 'none')};
-  margin-right: 65%;
+  margin-right: 60%;
   position: relative;
   width: 10%;
 `
