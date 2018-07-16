@@ -228,7 +228,7 @@ class UploadManuscript extends Component {
           </Main>
           <SubInfo>
             {this.status === 'converting' &&
-              'Your manuscript is being being converted into a directly editable version. This might take a while.'}
+              'Your manuscript is being converted into a directly editable version. This might take a while.'}
           </SubInfo>
         </Root>
       </StyledDropzone>
