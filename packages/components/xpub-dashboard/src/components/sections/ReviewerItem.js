@@ -30,7 +30,11 @@ const ReviewerItem = ({
   const status = reviewer && reviewer.status
 
   return (
-    <Authorize object={[project]} operation="can view review section">
+    <Authorize
+      key={`${project.id}-${status}`}
+      object={[project]}
+      operation="can view review section"
+    >
       <Item>
         <Body>
           <VersionTitle version={version} />
