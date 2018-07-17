@@ -18,6 +18,13 @@ import SimpleEditor from 'wax-editor-react'
 //     tr {
 //       height: 50px;
 //     }
+//     td {
+//       width: 50%;
+//       &.selectedCell {
+//         background: rgba(200, 200, 255, 0.4);
+//         pointer-events: none;
+//       }
+//     }
 //   }
 //   &.resize-cursor {
 //     cursor: col-resize;
