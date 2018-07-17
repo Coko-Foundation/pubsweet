@@ -7,6 +7,8 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
+import { split } from 'apollo-link'
+import { getMainDefinition } from 'apollo-utilities'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
@@ -35,8 +37,16 @@ const makeApolloClient = makeConfig => {
       },
     }
   })
+  const link = split(
+    ({ query }) => {
+      const { kind, operation } = getMainDefinition(query)
+      return kind === 'OperationDefinition' && operation === 'subscription'
+    },
+    wsLink,
+    authLink.concat(uploadLink, httpLink),
+  )
   const config = {
-    link: authLink.concat(uploadLink, httpLink, wsLink),
+    link,
     cache: new InMemoryCache(),
   }
   return new ApolloClient(makeConfig ? makeConfig(config) : config)
