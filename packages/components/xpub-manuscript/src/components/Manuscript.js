@@ -30,6 +30,7 @@ import SimpleEditor from 'wax-editor-react'
 //     cursor: col-resize;
 //   }
 // `
+
 const Manuscript = ({
   content,
   currentUser,
@@ -49,7 +50,10 @@ const Manuscript = ({
     user={currentUser}
   />
 
-  // <MainEditorStyled onChange={values => true} value={content} />
+  //  <MainEditorStyled
+  //  onChange={source => updateManuscript({ source })}
+  //  value={content}
+  //  />
 )
 
 export default withRouter(Manuscript)
