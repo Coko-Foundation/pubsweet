@@ -57,7 +57,7 @@ const renderAuthors = ({
         </Button>
       </li>
       {fields.map((author, index) => (
-        <li key={index}>
+        <li key={`${author}.email`}>
           <Spacing>
             <Author>
               Author:&nbsp;
