@@ -9,12 +9,15 @@ import {
   exitCode,
   selectParentNode,
 } from 'prosemirror-commands'
+
 import {
   wrapInList,
   splitListItem,
   liftListItem,
   sinkListItem,
 } from 'prosemirror-schema-list'
+
+import { goToNextCell } from 'prosemirror-tables'
 
 const makeKeymap = (schema, features) => {
   const bind = (key, cmd) => {
@@ -38,6 +41,8 @@ const makeKeymap = (schema, features) => {
     'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
     'Shift-Ctrl-9': wrapInList(schema.nodes.ordered_list),
     'Shift-Ctrl-8': wrapInList(schema.nodes.bullet_list),
+    Tab: goToNextCell(1),
+    'Shift-Tab': goToNextCell(-1),
   }
 
   const type = schema.nodes.list_item
@@ -45,7 +50,7 @@ const makeKeymap = (schema, features) => {
   if (type) {
     bind('Enter', splitListItem(type))
     bind('Mod-[', liftListItem(type))
-    bind('Tab', sinkListItem(type))
+    bind('Mod-]', sinkListItem(type))
   }
 
   if (features.includes('bold')) {

@@ -14,6 +14,8 @@ const MainEditor = props => (
     orderedlist
     joinaboveblock
     liftitem
+    createtable
+    table
     {...props}
   />
 )
