@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.3.0"></a>
+# [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.2.0...xpub-edit@2.3.0) (2018-07-19)
+
+
+### Bug Fixes
+
+* linting errors ([1759e9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1759e9e))
+* remove prose-mirror menu ([19028d2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19028d2))
+
+
+### Features
+
+* add dependency ([6bc93e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6bc93e8))
+* add plugins for column resizing and table editing ([d796fe3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d796fe3))
+* add shortcuts ([7cb5f0b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7cb5f0b))
+* add table options ([f7d34d3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f7d34d3))
+* add tables schema ([b66e97b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b66e97b))
+* basic styling of the editor ([7cc9f59](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7cc9f59))
+* correct order of plugins ([e8c20f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8c20f7))
+* create new table command ([429d7ed](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/429d7ed))
+* do not display table menu whhen table is not selected ([d4d4bb1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d4d4bb1))
+* dropdown from pubsweet/ui in editor's toolbar ([de3d008](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/de3d008))
+* rename Dropdown to DropDownTable ([a341592](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a341592))
+* some styling ([e4f7f44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4f7f44))
+* table drop down styling ([04c69bd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/04c69bd))
+
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.1.0...xpub-edit@2.2.0) (2018-07-12)
 

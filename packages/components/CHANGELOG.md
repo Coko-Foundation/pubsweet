@@ -3,7 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.2.0"></a>
+      <a name="9.3.0"></a>
+# [9.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.2.0...pubsweet-components@9.3.0) (2018-07-19)
+
+
+### Bug Fixes
+
+* add  wax till features done ([6f9fa2c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6f9fa2c))
+* linting errors ([1759e9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1759e9e))
+* remove prose-mirror menu ([19028d2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19028d2))
+* **dashboard:** fixing typo message upload ([3fec4ef](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3fec4ef))
+* wax ver 0.2.5 ([9dce588](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dce588))
+* **teams-manager:** update to fit new server Team model ([ccef37c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ccef37c))
+
+
+### Features
+
+* add dependency ([6bc93e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6bc93e8))
+* add plugins for column resizing and table editing ([d796fe3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d796fe3))
+* add resize cursor ([15a17ca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/15a17ca))
+* add shortcuts ([7cb5f0b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7cb5f0b))
+* add table options ([f7d34d3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f7d34d3))
+* add tables schema ([b66e97b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b66e97b))
+* basic styling of the editor ([7cc9f59](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7cc9f59))
+* correct order of plugins ([e8c20f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8c20f7))
+* create new table command ([429d7ed](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/429d7ed))
+* do not display table menu whhen table is not selected ([d4d4bb1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d4d4bb1))
+* dropdown from pubsweet/ui in editor's toolbar ([de3d008](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/de3d008))
+* rename Dropdown to DropDownTable ([a341592](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a341592))
+* some styling ([e4f7f44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4f7f44))
+* styles for table to work properly ([1defda3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1defda3))
+* table drop down styling ([04c69bd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/04c69bd))
+
+
+
+
+      <a name="9.2.0"></a>
 # [9.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.1.0...pubsweet-components@9.2.0) (2018-07-12)
 
 
@@ -28,7 +63,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="9.1.0"></a>
+<a name="9.1.0"></a>
 # [9.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.0.1...pubsweet-components@9.1.0) (2018-07-09)
 
 

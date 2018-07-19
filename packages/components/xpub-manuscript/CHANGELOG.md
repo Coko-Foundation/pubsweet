@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.2.0...pubsweet-component-xpub-manuscript@0.3.0) (2018-07-19)
+
+
+### Bug Fixes
+
+* add  wax till features done ([6f9fa2c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6f9fa2c))
+* linting errors ([1759e9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1759e9e))
+* wax ver 0.2.5 ([9dce588](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dce588))
+
+
+### Features
+
+* add dependency ([6bc93e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6bc93e8))
+* add resize cursor ([15a17ca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/15a17ca))
+* basic styling of the editor ([7cc9f59](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7cc9f59))
+* create new table command ([429d7ed](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/429d7ed))
+* some styling ([e4f7f44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4f7f44))
+* styles for table to work properly ([1defda3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1defda3))
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.1.0...pubsweet-component-xpub-manuscript@0.2.0) (2018-07-12)
 

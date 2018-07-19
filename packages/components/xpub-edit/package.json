@@ -1,6 +1,6 @@
 {
   "name": "xpub-edit",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "license": "MIT",
   "files": [
     "dist",
@@ -14,12 +14,12 @@
     "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-history": "^1.0.0",
     "prosemirror-inputrules": "^1.0.0",
-    "prosemirror-tables": "^0.7.5",
     "prosemirror-keymap": "^1.0.0",
     "prosemirror-model": "^1.0.0",
     "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",
     "prosemirror-state": "^1.0.1",
+    "prosemirror-tables": "^0.7.5",
     "prosemirror-view": "^1.0.0"
   },
   "devDependencies": {
