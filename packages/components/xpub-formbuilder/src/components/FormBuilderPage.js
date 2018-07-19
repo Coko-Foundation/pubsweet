@@ -6,6 +6,7 @@ import { actions } from 'pubsweet-client'
 import { ConnectPage } from 'xpub-connect'
 
 import FormBuilderLayout from './FormBuilderLayout'
+
 import {
   createForms,
   updateForms,

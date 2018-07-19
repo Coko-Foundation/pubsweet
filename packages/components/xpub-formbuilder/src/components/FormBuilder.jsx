@@ -107,7 +107,6 @@ const AddButtonElement = ({ addElements }) => (
 const FormBuilder = ({
   form,
   elements,
-  key,
   addElements,
   changeProperties,
   deleteElement,
@@ -121,6 +120,7 @@ const FormBuilder = ({
           deleteElement={deleteElement}
           elements={elements}
           form={form}
+          id="builder-element"
         />
       )}
   </Page>
