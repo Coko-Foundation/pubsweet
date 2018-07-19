@@ -31,9 +31,7 @@ class Team extends React.Component {
       <tr>
         <td>{number}</td>
         <td>{team.name}</td>
-        <td>
-          {team.teamType.name} ({team.teamType.permissions})
-        </td>
+        <td>{team.teamType}</td>
         <td>
           {team.object.type} {team.object.id}
         </td>

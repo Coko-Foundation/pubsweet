@@ -12,10 +12,6 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },
-  "peerDependencies": {
-    "pubsweet-client": ">=1.0.0",
-    "react": ">=16"
-  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
