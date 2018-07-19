@@ -17,8 +17,9 @@ const FEATURES_WHITELIST = [
   'orderedlist',
   'joinaboveblock',
   'liftitem',
-  'table',
   'createtable',
+  'table',
+  'insertimage',
 ]
 
 class ConfigurableEditor extends React.Component {

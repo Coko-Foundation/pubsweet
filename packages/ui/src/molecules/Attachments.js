@@ -9,6 +9,7 @@ const Attachments = props => (
   <FileUploadList
     {...props}
     buttonText="Attach file"
+    className={props.className}
     FileComponent={Attachment}
   />
 )

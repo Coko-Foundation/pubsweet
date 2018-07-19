@@ -48,11 +48,11 @@ class FileUploadList extends React.Component {
   }
 
   render() {
-    const { name, buttonText, FileComponent } = this.props
+    const { name, buttonText, className, FileComponent } = this.props
     const { files, uploads } = this.state
 
     return (
-      <Root>
+      <Root className={className}>
         <UploadButton
           buttonText={buttonText}
           name={name}
