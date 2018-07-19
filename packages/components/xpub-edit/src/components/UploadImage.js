@@ -17,8 +17,7 @@ const AttachmentsStyled = styled(Attachments)`
     }
   }
 `
-const UploadImage = ({ item, state, handle }) => (
-  <AttachmentsStyled files={[]} />
+const UploadImage = ({ item, state, handle, fileUpload }) => (
+  <AttachmentsStyled files={[]} uploadFile={fileUpload} />
 )
-
 export default UploadImage

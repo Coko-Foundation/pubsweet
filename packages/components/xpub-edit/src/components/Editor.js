@@ -63,6 +63,7 @@ class Editor extends React.Component {
       placeholderClassName,
       title,
       readonly,
+      fileUpload,
       ...remainingProps
     } = this.props
     const { state } = this.state
@@ -73,6 +74,7 @@ class Editor extends React.Component {
         {menu && (
           <MenuBar
             dispatch={this.dispatchTransaction}
+            fileUpload={fileUpload}
             menu={menu}
             state={state}
             title={title}
