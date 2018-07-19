@@ -33,7 +33,11 @@ const Dashboard = ({
         Nothing to do at the moment. Please upload a document.
       </UploadContainer>
     )}
-    <Authorize object={dashboard} operation="can view my submission section">
+    <Authorize
+      key={`submission-${dashboard.length}`}
+      object={dashboard}
+      operation="can view my submission section"
+    >
       {dashboard.length > 0 && (
         <Section>
           <Heading>My Submissions</Heading>
@@ -45,7 +49,7 @@ const Dashboard = ({
                   'Are you sure you want to delete this submission?',
                 ) && deleteProject(project)
               }
-              key={project.id}
+              key={`submission-${project.id}`}
               project={project}
             />
           ))}
@@ -69,12 +73,19 @@ const Dashboard = ({
       )}
     </Authorize>
 
-    <Authorize object={dashboard} operation="can view my manuscripts section">
+    <Authorize
+      key={`manuscript-${dashboard.length}`}
+      object={dashboard}
+      operation="can view my manuscripts section"
+    >
       {dashboard.length > 0 && (
         <Section>
           <Heading>My Manuscripts</Heading>
           {dashboard.map(project => (
-            <EditorItemWithVersion key={project.id} project={project} />
+            <EditorItemWithVersion
+              key={`manuscript-${project.id}`}
+              project={project}
+            />
           ))}
         </Section>
       )}
