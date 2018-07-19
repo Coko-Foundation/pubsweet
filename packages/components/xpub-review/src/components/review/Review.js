@@ -24,7 +24,7 @@ const Review = ({ review }) => (
 
         {review.note.attachments &&
           review.note.attachments.map(attachment => (
-            <Attachment key={attachment.url} value={attachment} />
+            <Attachment file={attachment} key={attachment.url} uploaded />
           ))}
       </Note>
     </div>
@@ -40,7 +40,7 @@ const Review = ({ review }) => (
 
           {review.confidential.attachments &&
             review.confidential.attachments.map(attachment => (
-              <Attachment key={attachment.url} value={attachment} />
+              <Attachment file={attachment} key={attachment.url} uploaded />
             ))}
         </Note>
       </div>
