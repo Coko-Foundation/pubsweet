@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FieldArray } from 'redux-form'
+import { compose, lifecycle } from 'recompose'
 import { TextField, ValidatedField, Button } from '@pubsweet/ui'
 import { minSize, readonly } from 'xpub-validators'
 
@@ -56,7 +57,7 @@ const renderAuthors = ({
         </Button>
       </li>
       {fields.map((author, index) => (
-        <li key={author.email}>
+        <li key={`${author}.email`}>
           <Spacing>
             <Author>
               Author:&nbsp;
@@ -116,8 +117,18 @@ const renderAuthors = ({
   </ul>
 )
 
+const renderAuthorsComp = compose(
+  lifecycle({
+    componentDidMount() {
+      if (this.props.fields.length === 0) {
+        this.props.fields.push()
+      }
+    },
+  }),
+)(renderAuthors)
+
 const AuthorsInput = () => (
-  <FieldArray component={renderAuthors} name="authors" />
+  <FieldArray component={renderAuthorsComp} name="authors" />
 )
 
 export default AuthorsInput
