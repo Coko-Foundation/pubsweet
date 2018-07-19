@@ -32,7 +32,7 @@ export default class TeamCreator extends React.Component {
     if (name && teamType && objectId && objectType) {
       this.props.create({
         name,
-        teamType: this.props.types[teamType],
+        teamType,
         object: {
           id: objectId,
           type: objectType,
@@ -69,7 +69,7 @@ export default class TeamCreator extends React.Component {
 
     types = Object.keys(types).map(type => ({
       value: type,
-      label: `${types[type].name} (${types[type].permissions})`,
+      label: `${types[type].name}`,
     }))
 
     return (
