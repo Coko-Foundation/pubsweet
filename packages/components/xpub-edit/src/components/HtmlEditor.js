@@ -29,7 +29,7 @@ class HtmlEditor extends React.Component {
     const {
       debounceDelay = 1000,
       value,
-      onChange,
+      onChange = () => true,
       onBlur,
       options,
     } = this.props

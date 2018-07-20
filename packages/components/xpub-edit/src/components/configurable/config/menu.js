@@ -38,10 +38,6 @@ const promptForURL = () => {
   return url
 }
 
-const uploadImage = state => {
-  // console.log('testttt')
-}
-
 const createTable = (row = 1, col = 1, cellAttrs = {}) => (state, dispatch) => {
   const { tr, schema } = state
   const tableType = schema.nodes.table
@@ -83,7 +79,7 @@ export default {
   }),
   insertimage: schema => ({
     content: 'upload image',
-    run: state => uploadImage(state),
+    run: option => true,
     title: 'Upload an image',
     select: state => true,
     menu: props => <UploadImage {...props} />,
