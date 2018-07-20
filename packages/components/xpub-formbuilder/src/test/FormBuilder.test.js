@@ -2,9 +2,10 @@ import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
+import { diveTo } from './util'
 import FormBuilder from '../components/FormBuilder'
 import forms from './config/test.json'
-// import formsnoelements from './config/testnoelements.json'
+import formsnoelements from './config/testnoelements.json'
 
 // this should be elsewhere
 Enzyme.configure({ adapter: new Adapter() })
@@ -38,7 +39,7 @@ describe('FormBuilder', () => {
   const makeWrapper = (props = {}) => {
     props = Object.assign(
       {
-        form: forms[0],
+        form: formsnoelements[0],
       },
       props,
     )
@@ -48,9 +49,40 @@ describe('FormBuilder', () => {
 
   it('shows just the add element button', () => {
     const formbuilder = makeWrapper()
-    // console.log(formbuilder.diveTo('FormBuilder').debug())
-    expect(formbuilder.find()).toHaveLength(0)
-    // expect(teammanager.find(TeamCreator)).toHaveLength(1)
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#builder-element'),
+    ).toHaveLength(0)
+
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#add-element'),
+    ).toHaveLength(1)
+  })
+
+  it('shows add element button and form elements', () => {
+    const formbuilder = makeWrapper({ form: forms[0] })
+
+    // console.log(diveTo(formbuilder, 'lifecycle(FormBuilder)', {}))
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#builder-element'),
+    ).toHaveLength(1)
+
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#builder-element')
+        .dive(),
+    ).toHaveLength(1)
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#add-element'),
+    ).toHaveLength(1)
   })
 
   //   it('shows a list of teams created', () => {

@@ -1,5 +1,11 @@
 import React from 'react'
-import { compose, withState, withHandlers, lifecycle } from 'recompose'
+import {
+  compose,
+  withState,
+  withHandlers,
+  lifecycle,
+  // setDisplayName,
+} from 'recompose'
 import styled, { withTheme } from 'styled-components'
 import { unescape } from 'lodash'
 import { th } from '@pubsweet/ui-toolkit'
@@ -112,7 +118,7 @@ const FormBuilder = ({
   deleteElement,
 }) => (
   <Page>
-    <AddButtonElement addElements={addElements} form={form} />
+    <AddButtonElement addElements={addElements} form={form} id="add-element" />
     {elements &&
       elements.length > 0 && (
         <BuilderElement
@@ -125,6 +131,8 @@ const FormBuilder = ({
       )}
   </Page>
 )
+
+FormBuilder.displayName = 'FormBuilder'
 
 export default compose(
   withState('elements', 'onAddElements', ({ form }) => form.children || []),
