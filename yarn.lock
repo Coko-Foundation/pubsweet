@@ -234,6 +234,21 @@
     typeface-noto-serif "^0.0.54"
     typeface-ubuntu-mono "^0.0.54"
 
+"@pubsweet/default-theme@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@pubsweet/default-theme/-/default-theme-1.0.0.tgz#38c3d5fe6b058c7fa603ee977c398892fe7e27da"
+  dependencies:
+    styled-components "^3.2.5"
+    typeface-noto-sans "^0.0.54"
+    typeface-noto-serif "^0.0.54"
+    typeface-ubuntu-mono "^0.0.54"
+
+"@pubsweet/elife-theme@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@pubsweet/elife-theme/-/elife-theme-1.0.1.tgz#92b389777a61db72bd43b92617f63f41c74bdefa"
+  dependencies:
+    styled-components "^3.2.5"
+
 "@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
   version "1.0.0-alpha.1"
   resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#2f3626f023db1cf8cfb13790eaa9f35b9806df41"
@@ -262,6 +277,59 @@
     pubsweet-server "^2.0.0"
     pubsweet-theme-plugin "^0.0.3"
     react-router-redux next
+
+"@pubsweet/styleguide@^1.1.2":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@pubsweet/styleguide/-/styleguide-1.3.4.tgz#48abc2e7595064fd7cb7534de9581a052e9eba09"
+  dependencies:
+    "@pubsweet/default-theme" "^1.0.0"
+    "@pubsweet/elife-theme" "^1.0.1"
+    "@pubsweet/ui" "^4.1.3"
+    faker "^4.1.0"
+    lodash "^4.17.5"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-styleguidist "^7.0.10"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
+    xpub-journal "^0.0.3"
+    xpub-styleguide "^0.0.3"
+
+"@pubsweet/styleguide@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@pubsweet/styleguide/-/styleguide-2.0.1.tgz#d4063a9248063cff46fa440b86cce08b0b2e1e14"
+  dependencies:
+    "@pubsweet/default-theme" "^1.0.0"
+    "@pubsweet/elife-theme" "^1.0.1"
+    "@pubsweet/ui" "^4.1.3"
+    "@pubsweet/ui-toolkit" "^1.1.0"
+    faker "^4.1.0"
+    lodash "^4.17.5"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-styleguidist "^7.0.10"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
+    xpub-journal "^0.0.3"
+    xpub-styleguide "^0.0.3"
+
+"@pubsweet/theme@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@pubsweet/theme/-/theme-0.1.3.tgz#2c508abc284a33ce14f1fa0a08486477def259a4"
+  dependencies:
+    cokourier-prime-sans "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git"
+    typeface-fira-mono "^0.0.43"
+    typeface-fira-sans "^0.0.43"
+    typeface-fira-sans-condensed "^0.0.43"
+    typeface-vollkorn "^0.0.43"
 
 "@pubsweet/ui@^3.0.0":
   version "3.3.4"
@@ -295,6 +363,29 @@
     enzyme-adapter-react-16 "^1.1.1"
     invariant "^2.2.3"
     lodash "^4.17.4"
+    prop-types "^15.5.10"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-feather "^1.0.8"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    react-tag-autocomplete "^5.5.0"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    styled-components "^3.2.5"
+
+"@pubsweet/ui@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-7.0.0.tgz#c4a203bce525a505601cd55f7e8e9f7f45d5e1af"
+  dependencies:
+    babel-jest "^21.2.0"
+    classnames "^2.2.5"
+    enzyme "^3.2.0"
+    enzyme-adapter-react-16 "^1.1.1"
+    invariant "^2.2.3"
+    lodash "^4.17.4"
+    moment "^2.22.1"
     prop-types "^15.5.10"
     react "^16.2.0"
     react-dom "^16.2.0"
@@ -2765,7 +2856,7 @@ concat-stream@^1.4.10, concat-stream@^1.4.7, concat-stream@^1.5.0, concat-stream
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-config@^1.21.0, config@^1.26.1, config@^1.26.2, config@^1.28.1:
+config@^1.21.0, config@^1.26.1, config@^1.26.2, config@^1.28.1, config@^1.29.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/config/-/config-1.30.0.tgz#1d60a9f35348a13c175798d384e81a5a16c3ba6e"
   dependencies:
@@ -7936,6 +8027,20 @@ nock@^9.0.14:
     qs "^6.5.1"
     semver "^5.5.0"
 
+nock@^9.2.3:
+  version "9.4.2"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-9.4.2.tgz#bab58a44b5781bdb74d7808673a2dbeefafb898d"
+  dependencies:
+    chai "^4.1.2"
+    debug "^3.1.0"
+    deep-equal "^1.0.0"
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.5"
+    mkdirp "^0.5.0"
+    propagate "^1.0.0"
+    qs "^6.5.1"
+    semver "^5.5.0"
+
 node-dir@^0.1.10:
   version "0.1.17"
   resolved "https://registry.yarnpkg.com/node-dir/-/node-dir-0.1.17.tgz#5f5665d93351335caabef8f1c554516cf5f1e4e5"
@@ -8259,6 +8364,10 @@ nwsapi@^2.0.0:
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
+
+oauth@0.9.x:
+  version "0.9.15"
+  resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
 
 object-assign@^3.0.0:
   version "3.0.0"
@@ -8664,6 +8773,21 @@ passport-local@^1.0.0:
   resolved "https://registry.yarnpkg.com/passport-local/-/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
   dependencies:
     passport-strategy "1.x.x"
+
+passport-oauth2@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/passport-oauth2/-/passport-oauth2-1.4.0.tgz#f62f81583cbe12609be7ce6f160b9395a27b86ad"
+  dependencies:
+    oauth "0.9.x"
+    passport-strategy "1.x.x"
+    uid2 "0.0.x"
+    utils-merge "1.x.x"
+
+"passport-orcid@git+https://github.com/g-sam/passport-orcid.git":
+  version "0.0.3"
+  resolved "git+https://github.com/g-sam/passport-orcid.git#966519e915eac0c948336c2a604178118d6dfc12"
+  dependencies:
+    passport-oauth2 "^1.4.0"
 
 passport-strategy@1.x.x:
   version "1.0.0"
@@ -9451,6 +9575,14 @@ pubsweet-component-form-group@1.0.2:
     pubsweet-server "^2.0.0"
     react-bootstrap "^0.32.0"
 
+pubsweet-component-manage@^0.2.3:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-manage/-/pubsweet-component-manage-0.2.4.tgz#47a6835ca4bfb55b8034aa9f8c6961bc38ba5eaa"
+  dependencies:
+    bootstrap-sass "^3.3.7"
+    font-awesome "^4.7.0"
+    prop-types "^15.5.10"
+
 pubsweet-component-password-reset-frontend@^1.0.1:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-frontend/-/pubsweet-component-password-reset-frontend-1.0.17.tgz#1bf0381740acf2fd6643248a822fdf56bc995a64"
@@ -9609,6 +9741,13 @@ query-string@^5.0.0, query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
+
+query-string@^6.0.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.1.0.tgz#01e7d69f6a0940dac67a937d6c6325647aa4532a"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    strict-uri-encode "^2.0.0"
 
 querystring-es3@^0.2.0:
   version "0.2.1"
@@ -11386,6 +11525,10 @@ strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
 
+strict-uri-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
+
 string-length@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-2.0.0.tgz#d40dbb686a3ace960c1cffca562bf2c45f8363ed"
@@ -12166,6 +12309,10 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
+uid2@0.0.x:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
+
 umzug@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/umzug/-/umzug-2.1.0.tgz#c49dd71c7c26d082a9c9d3592dc6dc92cf867761"
@@ -12416,7 +12563,7 @@ utile@0.3.x:
     ncp "1.0.x"
     rimraf "2.x.x"
 
-utils-merge@1.0.1:
+utils-merge@1.0.1, utils-merge@1.x.x:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
 
@@ -12880,6 +13027,44 @@ xpub-journal@^0.0.3:
     react "^16.2.0"
     react-dom "^16.2.0"
     recompose "^0.26.0"
+
+xpub-styleguide@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/xpub-styleguide/-/xpub-styleguide-0.0.17.tgz#1772d087a3fc22d04b1ac6963fb30ed2fff1f7f6"
+  dependencies:
+    "@pubsweet/styleguide" "^2.0.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    recompose "^0.26.0"
+    redux-form "^7.0.3"
+    xpub-journal "^0.0.6"
+    xpub-theme "^0.0.7"
+
+xpub-styleguide@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xpub-styleguide/-/xpub-styleguide-0.0.3.tgz#91fd6000956d61f40a730a3f963082a7b4fba54d"
+  dependencies:
+    "@pubsweet/styleguide" "^1.1.2"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-redux "^5.0.2"
+    react-router-dom "^4.2.2"
+    recompose "^0.26.0"
+    redux "^3.6.0"
+    redux-form "^7.0.3"
+    xpub-journal "^0.0.3"
+    xpub-theme "^0.0.3"
+
+xpub-theme@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/xpub-theme/-/xpub-theme-0.0.3.tgz#65c70bc52d4bf499d3959a77d138aaddcd382642"
+  dependencies:
+    "@pubsweet/theme" "^0.1.3"
+    cokourier-prime-sans "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git"
+    typeface-fira-mono "^0.0.43"
+    typeface-fira-sans "^0.0.43"
+    typeface-fira-sans-condensed "^0.0.43"
+    typeface-vollkorn "^0.0.43"
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"

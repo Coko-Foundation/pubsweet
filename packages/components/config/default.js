@@ -16,8 +16,15 @@ module.exports = {
   },
   'pubsweet-server': {
     baseUrl: 'http://example.com',
+    secret: 'not so secret',
   },
   mailer: {
     from: 'nobody@example.com',
+  },
+  'auth-orcid': {
+    clientID: '123',
+    clientSecret: 'abc',
+    authorizationURL: 'http://localhost:8080/oauth/authorize',
+    tokenURL: 'http://localhost:8080/oauth/token',
   },
 }
