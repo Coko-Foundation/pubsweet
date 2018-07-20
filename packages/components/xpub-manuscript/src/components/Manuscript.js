@@ -1,10 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-
-// import SimpleEditor from 'wax-editor-react'
-
-// Change to main Editor when everything is done
 import { MainEditor } from 'xpub-edit'
 
 const MainEditorStyled = styled(MainEditor)`
@@ -38,17 +34,6 @@ const Manuscript = ({
   updateManuscript,
   version,
 }) => (
-  // <SimpleEditor
-  //   content={content}
-  //   fileUpload={fileUpload}
-  //   history={history}
-  //   onSave={source => updateManuscript({ source })}
-  //   readOnly={version.submitted}
-  //   trackChanges={false}
-  //   update={data => updateManuscript(data)}
-  //   user={currentUser}
-  // />
-
   <MainEditorStyled
     fileUpload={fileUpload}
     onChange={source => updateManuscript({ source })}
