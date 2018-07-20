@@ -40,6 +40,7 @@ const Opener = styled.button.attrs({
 const MenuStyled = styled(Menu)`
   display: ${props => (props.select ? 'inline-flex' : 'none')};
   button {
+    height: 20px;
     width: 170px;
   }
 `
