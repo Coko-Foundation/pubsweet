@@ -18,7 +18,8 @@ const PollingServer = app => {
   const { Fragment, Collection, User } = app.locals.models
   const { authsome } = app.locals
   const tasks = {}
-  const pollingTime = config.polling.server || 3000
+  const { timer } = config.get('@pubsweet/component-polling-server')
+  const pollingTime = timer || 3000
 
   initCache(Fragment)
 
