@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.0.5"></a>
+## [4.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.0.4...pubsweet-component-xpub-submit@4.0.5) (2018-07-23)
+
+
+### Bug Fixes
+
+* **submit:** authors Input start open ([03bbe31](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/03bbe31))
+* **submit:** fix lint error ([d6c2077](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d6c2077))
+
+
+
+
 <a name="4.0.4"></a>
 ## [4.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.0.3...pubsweet-component-xpub-submit@4.0.4) (2018-07-19)
 
