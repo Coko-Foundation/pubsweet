@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.5"></a>
+## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.4...pubsweet-component-xpub-dashboard@3.0.5) (2018-07-23)
+
+
+### Bug Fixes
+
+* **dashboard:** add keys to dashboard ([38f73f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/38f73f7))
+* **dashobard:** add key to compoent ([bc76925](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bc76925))
+
+
+
+
 <a name="3.0.4"></a>
 ## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.3...pubsweet-component-xpub-dashboard@3.0.4) (2018-07-19)
 

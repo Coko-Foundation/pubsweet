@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="9.3.0"></a>
+  <a name="9.3.1"></a>
+## [9.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.0...pubsweet-components@9.3.1) (2018-07-23)
+
+
+### Bug Fixes
+
+* **dashboard:** add keys to dashboard ([38f73f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/38f73f7))
+* **dashobard:** add key to compoent ([bc76925](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bc76925))
+* **review:** change attachment files ([bdfa18d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bdfa18d))
+* **review:** change user assign editor ([eadca2b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/eadca2b))
+* **submit:** authors Input start open ([03bbe31](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/03bbe31))
+* **submit:** fix lint error ([d6c2077](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d6c2077))
+
+
+
+
+  <a name="9.3.0"></a>
 # [9.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.2.0...pubsweet-components@9.3.0) (2018-07-19)
 
 
@@ -38,7 +54,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="9.2.0"></a>
+<a name="9.2.0"></a>
 # [9.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.1.0...pubsweet-components@9.2.0) (2018-07-12)
 
 
