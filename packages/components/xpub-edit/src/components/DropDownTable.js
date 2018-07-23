@@ -38,12 +38,11 @@ const Opener = styled.button.attrs({
 `
 
 const MenuStyled = styled(Menu)`
-  bottom: 10px;
-  float: right;
-  display: ${props => (props.select ? 'inline' : 'none')};
-  margin-right: 60%;
-  position: relative;
-  width: 10%;
+  display: ${props => (props.select ? 'inline-flex' : 'none')};
+  button {
+    height: 20px;
+    width: 170px;
+  }
 `
 
 const renderOpener = ({ placeholder, toggleMenu, open }) => (

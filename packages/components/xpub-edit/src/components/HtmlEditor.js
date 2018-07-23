@@ -29,7 +29,7 @@ class HtmlEditor extends React.Component {
     const {
       debounceDelay = 1000,
       value,
-      onChange,
+      onChange = () => true,
       onBlur,
       options,
     } = this.props
@@ -53,9 +53,15 @@ class HtmlEditor extends React.Component {
   }
 
   render() {
-    const { value, onChange, onBlur, ...passedProps } = this.props
+    const { value, onChange, onBlur, fileUpload, ...passedProps } = this.props
 
-    return <Editor onChange={this.onChange} {...passedProps} />
+    return (
+      <Editor
+        fileUpload={fileUpload}
+        onChange={this.onChange}
+        {...passedProps}
+      />
+    )
   }
 }
 

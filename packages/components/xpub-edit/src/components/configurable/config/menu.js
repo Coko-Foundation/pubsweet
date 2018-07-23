@@ -8,6 +8,7 @@ import { addColumnBefore } from 'prosemirror-tables'
 import icons from './icons'
 import MenuButton from '../../MenuButton'
 import DropDownTable from '../../DropDownTable'
+import UploadImage from '../../UploadImage'
 
 const markActive = type => state => {
   const { from, $from, to, empty } = state.selection
@@ -75,6 +76,13 @@ export default {
     title: 'Create a new table',
     select: state => true,
     menu: props => <MenuButton {...props} />,
+  }),
+  insertimage: schema => ({
+    content: 'upload image',
+    run: option => true,
+    title: 'Upload an image',
+    select: state => true,
+    menu: props => <UploadImage {...props} />,
   }),
   orderedlist: schema => ({
     content: 'ordered list',

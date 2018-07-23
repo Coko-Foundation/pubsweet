@@ -16,6 +16,7 @@ const MainEditor = props => (
     liftitem
     createtable
     table
+    insertimage
     {...props}
   />
 )
