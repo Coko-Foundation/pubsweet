@@ -1,9 +1,27 @@
+const config = require('config')
+
 const logger = require('@pubsweet/logger')
+
+const lockedFragments = {}
+const initCache = async Fragment => {
+  const allFragments = await Fragment.all()
+  for (let i = 0; i < allFragments.length; i += 1) {
+    const currentFragment = allFragments[i]
+    if (currentFragment.lock && currentFragment.lock !== null) {
+      const { id } = currentFragment
+      lockedFragments[id] = currentFragment.lock.editor.userId
+    }
+  }
+}
 
 const PollingServer = app => {
   const { Fragment, Collection, User } = app.locals.models
   const { authsome } = app.locals
   const tasks = {}
+  const { timer } = config.get('@pubsweet/component-polling-server')
+  const pollingTime = timer || 3000
+
+  initCache(Fragment)
 
   const setTimer = (handler, milisecond, opts) => {
     logger.info(
@@ -61,8 +79,14 @@ const PollingServer = app => {
       logger.info('Fragment Update')
       await fragment.updateProperties(patch)
       await fragment.save()
+
+      logger.info(`Fragments Cache before ${JSON.stringify(lockedFragments)}`)
+      delete lockedFragments[fragment.id]
+      logger.info(`Fragments Cache after ${JSON.stringify(lockedFragments)}`)
       logger.info('Fragment stored')
-      logger.info(`The value for fragment lock now is ${fragment.lock}`)
+      logger.info(
+        `The value for fragment lock now is ${JSON.stringify(fragment.lock)}`,
+      )
       // fragment.owners = await User.ownersWithUsername(fragment)
 
       const data = {}
@@ -98,6 +122,7 @@ const PollingServer = app => {
       logger.info(
         `Initiating polling for fragment with id ${fragmentId} of the collection with id ${collectionId} for user ${username}`,
       )
+
       try {
         if (!username) {
           logger.error('Username not provided')
@@ -120,50 +145,75 @@ const PollingServer = app => {
           user,
         }
 
-        const fragment = await Fragment.find(fragmentId)
-        logger.info('Fragment found')
+        // find in cache
+        if (
+          Object.keys(lockedFragments).length > 0 &&
+          lockedFragments[fragmentId]
+        ) {
+          logger.info('Fragment found in cache')
+          if (lockedFragments[fragmentId] === user.id) {
+            logger.info(
+              'Fragment found in cache and it is locked by the correct user',
+            )
+            setTimer(unlocker, pollingTime, opts)
+            res.sendStatus(200)
+          } else {
+            logger.info(
+              `Fragment found in cache but it is not locked from ${
+                user.username
+              }`,
+            )
+            res.sendStatus(403)
+          }
+        } else {
+          const fragment = await Fragment.find(fragmentId)
+          logger.info('Fragment found but not from cache')
 
-        if (fragment) {
-          if (fragment.lock === null) {
-            const patch = {
-              id: fragmentId,
-              lock: {
-                editor: { username: user.username, userId: user.id },
-                timestamp: new Date(),
-              },
-            }
-            const object = {
-              current: fragment,
-              update: patch,
-            }
-            const condition = await authsome.can(user.id, 'PATCH', object)
-            if (condition) {
-              logger.info('Fragment Update')
-              await fragment.updateProperties(patch)
-              await fragment.save()
-              logger.info('Fragment stored')
-              logger.info(`The value for fragment lock now is ${fragment.lock}`)
-              const data = {}
-              Object.keys(patch).forEach(key => {
-                data[key] = fragment[key]
-              })
-              const update = data
-              app.locals.sse.send({
-                action: 'fragment:patch',
-                data: { fragment: { id: fragment.id }, update },
-              })
-              logger.info('SSE sent')
-            }
-          } else if (fragment.lock !== null || fragment.lock !== undefined) {
-            if (fragment.lock.editor.userId !== user.id) {
-              res.sendStatus(403)
+          if (fragment) {
+            if (fragment.lock === null) {
+              const patch = {
+                id: fragmentId,
+                lock: {
+                  editor: { username: user.username, userId: user.id },
+                  timestamp: new Date(),
+                },
+              }
+              const object = {
+                current: fragment,
+                update: patch,
+              }
+              const condition = await authsome.can(user.id, 'PATCH', object)
+              if (condition) {
+                logger.info('Fragment Update')
+                await fragment.updateProperties(patch)
+                await fragment.save()
+                lockedFragments[fragment.id] = user.id
+                logger.info('Fragment stored')
+                logger.info(
+                  `The value for fragment lock now is ${fragment.lock}`,
+                )
+                const data = {}
+                Object.keys(patch).forEach(key => {
+                  data[key] = fragment[key]
+                })
+                const update = data
+                app.locals.sse.send({
+                  action: 'fragment:patch',
+                  data: { fragment: { id: fragment.id }, update },
+                })
+                logger.info('SSE sent')
+              }
+            } else if (fragment.lock !== null || fragment.lock !== undefined) {
+              if (fragment.lock.editor.userId !== user.id) {
+                res.sendStatus(403)
+              }
             }
           }
-        }
-        logger.info(`Setting timmer for 5000 ms`)
-        setTimer(unlocker, 5000, opts)
+          logger.info(`Setting timmer for ${pollingTime} ms`)
+          setTimer(unlocker, pollingTime, opts)
 
-        res.sendStatus(200)
+          res.sendStatus(200)
+        }
       } catch (e) {
         logger.error(`In polling endpoint ${e}`)
         throw new Error(e)

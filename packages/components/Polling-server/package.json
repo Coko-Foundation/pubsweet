@@ -12,6 +12,9 @@
     "@pubsweet/logger": "^0.2.3",
     "pubsweet-server": "^7.1.1"
   },
+  "dependencies": {
+    "config": "^1.26.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
