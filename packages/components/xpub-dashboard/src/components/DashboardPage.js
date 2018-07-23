@@ -37,8 +37,12 @@ export default compose(
       return { collections, conversion, currentUser, dashboard }
     },
     (dispatch, { history }) => ({
-      deleteProject: collection =>
-        dispatch(actions.deleteCollection(collection)),
+      deleteProject: collection => {
+        collection.fragments.map(fragment =>
+          dispatch(actions.deleteFragment(collection, { id: fragment })),
+        )
+        dispatch(actions.deleteCollection(collection))
+      },
       reviewerResponse: (project, version, reviewer, status) =>
         dispatch(reviewerResponse(project, version, reviewer, status)),
       uploadManuscript: acceptedFiles =>
