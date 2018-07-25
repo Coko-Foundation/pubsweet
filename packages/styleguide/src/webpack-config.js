@@ -26,6 +26,7 @@ module.exports = dir => {
     /styleguide\/src/,
     /ui\/src/,
     /packages\/client\/src/,
+    /@elifesciences\/[^/]+\/src/,
   ]
 
   return {
