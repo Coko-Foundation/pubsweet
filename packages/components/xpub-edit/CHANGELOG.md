@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.4.0"></a>
+# [2.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.3.0...xpub-edit@2.4.0) (2018-07-27)
+
+
+### Bug Fixes
+
+* keep toolbar height consinstent ([7896e7b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7896e7b))
+
+
+### Features
+
+* add Attachments pubsweet comp for image upload ([a2dc8ca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2dc8ca))
+* remove Wax from manuscript page ([da1147b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/da1147b))
+* upload image working ([c77e4e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c77e4e0))
+* upload in progress ([29e48d9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29e48d9))
+
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.2.0...xpub-edit@2.3.0) (2018-07-19)
 
