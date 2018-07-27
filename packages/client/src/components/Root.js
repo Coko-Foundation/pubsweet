@@ -23,7 +23,7 @@ const makeApolloClient = makeConfig => {
   const uploadLink = createUploadLink()
   const httpLink = createHttpLink()
   const wsLink = new WebSocketLink({
-    uri: `ws://localhost:5000/subscriptions`,
+    uri: `ws://${window.location.hostname}:5000/subscriptions`,
     options: {
       reconnect: true,
     },
