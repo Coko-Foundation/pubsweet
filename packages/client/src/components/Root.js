@@ -26,6 +26,9 @@ const makeApolloClient = makeConfig => {
     uri: `ws://${window.location.hostname}:5000/subscriptions`,
     options: {
       reconnect: true,
+      connectionParams: {
+        authToken: localStorage.getItem('token'),
+      },
     },
   })
   const authLink = setContext((_, { headers }) => {
