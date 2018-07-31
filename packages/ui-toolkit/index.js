@@ -3,6 +3,6 @@ export { fadeIn, fadeOut } from './src/styles/fadeInOut'
 
 export { default as headingScale } from './src/headingScale'
 export { default as override } from './src/override'
-export { th, borderColor } from './src/themeHelper'
+export { th, validationColor } from './src/themeHelper'
 
 export { default as rotate360 } from './src/styles/rotate360'

@@ -14,9 +14,9 @@ import { get } from 'lodash'
 const th = name => props => get(props.theme, name)
 
 /**
- * returns border color from theme object, based on validation status
+ * returns color from theme object, based on validation status
  */
-const borderColor = ({ theme, validationStatus = 'default' }) =>
+const validationColor = ({ theme, validationStatus = 'default' }) =>
   ({
     error: theme.colorError,
     success: theme.colorSuccess,
@@ -24,4 +24,4 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
     warning: theme.colorWarning,
   }[validationStatus])
 
-export { th, borderColor }
+export { th, validationColor }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th, override, borderColor } from '@pubsweet/ui-toolkit'
+import { th, override, validationColor } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Label = styled.label`
 `
 
 const Input = styled.input`
-  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${validationColor};
 
   border-radius: ${th('borderRadius')};
 
