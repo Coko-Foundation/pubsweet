@@ -10,6 +10,7 @@ const logger = require('@pubsweet/logger')
 
 const graphqlSchema = require('./schema')
 const { token } = require('../authentication')
+const { pubsubs } = require('./pubsubs')
 
 const port = config.has('pubsweet-server.wsPort')
   ? config.get('pubsweet-server.wsPort')
@@ -19,8 +20,6 @@ const websocketServer = createServer((req, res) => {
   res.writeHead(404)
   res.end()
 })
-
-const pubsubs = {}
 
 module.exports = {
   startWebsocketServer: () => {
@@ -55,5 +54,4 @@ module.exports = {
       )
     })
   },
-  pubsubs,
 }
