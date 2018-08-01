@@ -18,17 +18,6 @@ const Label = styled.label`
   ${override('ui.TextField.Label')};
 `
 
-<<<<<<< HEAD
-=======
-const borderColor = ({ theme, validationstatus = 'default' }) =>
-  ({
-    error: theme.colorError,
-    success: theme.colorSuccess,
-    default: theme.colorBorder,
-    warning: theme.colorWarning,
-  }[validationstatus])
-
->>>>>>> fix(warnings): naming changes
 const Input = styled.input`
   border: ${th('borderWidth')} ${th('borderStyle')} ${validationColor};
 

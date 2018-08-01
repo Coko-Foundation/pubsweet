@@ -8,7 +8,7 @@ const StyledDropzone = styled(Dropzone)`
   border: none;
   cursor: pointer;
   display: inline-block;
-  ${({ disableupload }) => disableupload === 'true' && 'pointer-events: none;'};
+  ${({ disableupload }) => disableupload && 'pointer-events: none;'};
 `
 
 const StatusIcon = withTheme(({ children, theme }) => (
@@ -205,7 +205,7 @@ class UploadManuscript extends Component {
     return (
       <StyledDropzone
         accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        disableupload={(this.status === 'converting').toString()}
+        disableupload={this.status === 'converting' ? 'disableupload' : null}
         onDrop={uploadManuscript}
       >
         <Root>

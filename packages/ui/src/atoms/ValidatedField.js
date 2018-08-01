@@ -34,7 +34,7 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
 
   return (
     <div>
-      <Component {...input} validationstatus={validationStatus} />
+      <Component {...input} validationStatus={validationStatus} />
 
       {/* live region DOM node must be initially present for changes to be announced */}
       <MessageWrapper role="alert">
