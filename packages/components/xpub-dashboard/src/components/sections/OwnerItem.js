@@ -20,21 +20,9 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const manuscriptLink = `${baseLink}/manuscript`
 
   const actionButtons = {
-    submit: (
-      <Action key="submit-button" to={submitLink}>
-        Summary Info
-      </Action>
-    ),
-    manuscript: (
-      <Action key="manuscript-button" to={manuscriptLink}>
-        Manuscript
-      </Action>
-    ),
-    delete: (
-      <Action key="delete-button" onClick={() => deleteProject(project)}>
-        Delete
-      </Action>
-    ),
+    submit: <Action to={submitLink}>Summary Info</Action>,
+    manuscript: <Action to={manuscriptLink}>Manuscript</Action>,
+    delete: <Action onClick={() => deleteProject(project)}>Delete</Action>,
   }
 
   const unauthorized = (

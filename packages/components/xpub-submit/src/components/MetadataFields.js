@@ -22,11 +22,11 @@ const minChars100 = minChars(100)
 const maxChars500 = maxChars(500)
 const maxChars5000 = maxChars(5000)
 
-const TitleInput = input => (
+const TitleInput = ({ validationStatus, ...input }) => (
   <TitleEditor placeholder="Enter the title…" title="Title" {...input} />
 )
 
-const AbstractInput = input => (
+const AbstractInput = ({ validationStatus, ...input }) => (
   <AbstractEditor
     placeholder="Enter the abstract…"
     title="Abstract"
