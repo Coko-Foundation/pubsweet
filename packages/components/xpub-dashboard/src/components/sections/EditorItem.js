@@ -21,13 +21,16 @@ const VersionTitleLink = styled(ProjectLink)`
   text-decoration: none;
   color: #333;
 `
+const NoSpaceAction = styled(Action)`
+  white-space: nowrap;
+`
 
 const EditorItemLinks = ({ project, version }) => (
   <ActionGroup>
-    <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+    <NoSpaceAction to={`/projects/${project.id}/versions/${version.id}/submit`}>
       Summary Info
-    </Action>
-    <Action
+    </NoSpaceAction>
+    <NoSpaceAction
       to={`/projects/${project.id}/versions/${version.id}/decisions/${
         project.id
       }`}
@@ -35,7 +38,7 @@ const EditorItemLinks = ({ project, version }) => (
       {version.decision && version.decision.status === 'submitted'
         ? `Decision: ${version.decision.recommendation}`
         : 'Control Panel'}
-    </Action>
+    </NoSpaceAction>
   </ActionGroup>
 )
 

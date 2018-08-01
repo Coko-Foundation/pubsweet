@@ -1,12 +1,16 @@
 import React from 'react'
 import { pickBy } from 'lodash'
-
+import styled from 'styled-components'
 import { Action, ActionGroup } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
+
+const NoSpaceAction = styled(Action)`
+  white-space: nowrap;
+`
 
 const OwnerItem = ({ project, version, deleteProject }) => {
   const itemHeader = (
@@ -20,9 +24,13 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const manuscriptLink = `${baseLink}/manuscript`
 
   const actionButtons = {
-    submit: <Action to={submitLink}>Summary Info</Action>,
+    submit: <NoSpaceAction to={submitLink}>Summary Info</NoSpaceAction>,
     manuscript: <Action to={manuscriptLink}>Manuscript</Action>,
-    delete: <Action onClick={() => deleteProject(project)}>Delete</Action>,
+    delete: (
+      <Action onClick={() => deleteProject(project)} to="#">
+        Delete
+      </Action>
+    ),
   }
 
   const unauthorized = (
