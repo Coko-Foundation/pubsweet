@@ -21,7 +21,7 @@ const common = css`
   color: ${th('colorPrimary')};
   font: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
-  font-weight: ${props => (props.active === 'true' ? 'bold' : 'normal')};
+  font-weight: ${props => (props.active ? 'bold' : 'normal')};
   text-decoration: none;
   text-transform: none;
   transition: ${th('transitionDuration')} ${th('transitionTimingFunction')};

@@ -61,5 +61,5 @@ const active = css`
 
 export default css`
   ${underlineAnimation};
-  ${props => props.active === 'true' && active};
+  ${props => props.active && active};
 `
