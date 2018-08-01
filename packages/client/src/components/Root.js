@@ -19,18 +19,9 @@ injectGlobalStyles()
 // Construct an ApolloClient. If a function is passed as the first argument,
 // it will be called with the default client config as an argument, and should
 // return the desired config.
-const makeApolloClient = makeConfig => {
+const makeApolloClient = (makeConfig, connectToWebSocket) => {
   const uploadLink = createUploadLink()
   const httpLink = createHttpLink()
-  const wsLink = new WebSocketLink({
-    uri: `ws://${window.location.hostname}:5000/subscriptions`,
-    options: {
-      reconnect: true,
-      connectionParams: {
-        authToken: localStorage.getItem('token'),
-      },
-    },
-  })
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token')
     return {
@@ -40,14 +31,26 @@ const makeApolloClient = makeConfig => {
       },
     }
   })
-  const link = split(
-    ({ query }) => {
-      const { kind, operation } = getMainDefinition(query)
-      return kind === 'OperationDefinition' && operation === 'subscription'
-    },
-    wsLink,
-    authLink.concat(uploadLink, httpLink),
-  )
+  let link = authLink.concat(uploadLink, httpLink)
+  if (connectToWebSocket) {
+    const wsLink = new WebSocketLink({
+      uri: `ws://${window.location.hostname}:5000/subscriptions`,
+      options: {
+        reconnect: true,
+        connectionParams: {
+          authToken: localStorage.getItem('token'),
+        },
+      },
+    })
+    link = split(
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query)
+        return kind === 'OperationDefinition' && operation === 'subscription'
+      },
+      wsLink,
+      link,
+    )
+  }
   const config = {
     link,
     cache: new InMemoryCache(),
@@ -55,8 +58,17 @@ const makeApolloClient = makeConfig => {
   return new ApolloClient(makeConfig ? makeConfig(config) : config)
 }
 
-const Root = ({ makeApolloConfig, store, history, routes, theme }) => (
-  <ApolloProvider client={makeApolloClient(makeApolloConfig)}>
+const Root = ({
+  makeApolloConfig,
+  store,
+  history,
+  routes,
+  theme,
+  connectToWebSocket = true,
+}) => (
+  <ApolloProvider
+    client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
+  >
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
