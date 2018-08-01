@@ -5,6 +5,9 @@ const fs = require('fs-extra')
 const { promisify } = require('util')
 const config = require('config')
 
+const { pubsubs, asyncIterators } = require('../pubsubs')
+
+const { ON_UPLOAD_PROGRESS } = asyncIterators
 const randomBytes = promisify(crypto.randomBytes)
 const uploadsPath = config.get('pubsweet-server').uploads
 
@@ -28,6 +31,12 @@ const resolvers = {
       })
     },
   },
+  Subscription: {
+    uploadProgress: {
+      subscribe: (_, vars, context) =>
+        pubsubs[context.user].asyncIterator(ON_UPLOAD_PROGRESS),
+    },
+  },
 }
 
 const typeDefs = `
@@ -37,7 +46,11 @@ const typeDefs = `
     # Upload a file, store it on the server and return the file url
     upload(file: Upload!): UploadResult
   } 
-  
+
+  extend type Subscription {
+    uploadProgress: Int!
+  }
+
   type UploadResult {
     url: String
   }
