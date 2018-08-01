@@ -19,7 +19,8 @@ const setupMulter = s3 => {
       metadata: (req, file, cb) => {
         cb(null, {
           FileType: get(req, 'body.fileType'),
-          FileName: get(file, 'originalname'),
+          FileName: get(req, 'body.newName', get(file, 'originalname')),
+          OriginalName: get(file, 'originalname'),
         })
       },
       key: (req, file, cb) => {
