@@ -30,7 +30,7 @@
 import { css } from 'styled-components'
 import { get, has } from 'lodash'
 
-import th from './themeHelper'
+import { th } from './themeHelper'
 
 /*
   Will be using ui.Button as an example component override to explain the code.
