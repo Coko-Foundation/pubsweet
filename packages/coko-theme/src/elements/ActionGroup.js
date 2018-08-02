@@ -3,8 +3,6 @@ import { th } from '@pubsweet/ui-toolkit'
 
 export default {
   Root: css`
-    align-self: flex-start;
-    display: flex;
     > * {
       &:last-child {
         border-right: 0;

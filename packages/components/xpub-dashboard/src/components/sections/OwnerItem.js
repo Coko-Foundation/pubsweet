@@ -8,8 +8,8 @@ import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
 
-const NoSpaceAction = styled(Action)`
-  white-space: nowrap;
+const StyledActions = styled.div`
+  flex-shrink: 0;
 `
 
 const OwnerItem = ({ project, version, deleteProject }) => {
@@ -24,13 +24,9 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const manuscriptLink = `${baseLink}/manuscript`
 
   const actionButtons = {
-    submit: <NoSpaceAction to={submitLink}>Summary Info</NoSpaceAction>,
+    submit: <Action to={submitLink}>Summary Info</Action>,
     manuscript: <Action to={manuscriptLink}>Manuscript</Action>,
-    delete: (
-      <Action onClick={() => deleteProject(project)} to="#">
-        Delete
-      </Action>
-    ),
+    delete: <Action onClick={() => deleteProject(project)}>Delete</Action>,
   }
 
   const unauthorized = (
@@ -52,7 +48,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const body = (
     <Body>
       <VersionTitle version={version} />
-      {actions}
+      <StyledActions>{actions}</StyledActions>
     </Body>
   )
 

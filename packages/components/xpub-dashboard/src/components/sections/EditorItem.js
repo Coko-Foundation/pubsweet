@@ -21,26 +21,29 @@ const VersionTitleLink = styled(ProjectLink)`
   text-decoration: none;
   color: #333;
 `
-const NoSpaceAction = styled(Action)`
-  white-space: nowrap;
-`
 
 const EditorItemLinks = ({ project, version }) => (
-  <ActionGroup>
-    <NoSpaceAction to={`/projects/${project.id}/versions/${version.id}/submit`}>
-      Summary Info
-    </NoSpaceAction>
-    <NoSpaceAction
-      to={`/projects/${project.id}/versions/${version.id}/decisions/${
-        project.id
-      }`}
-    >
-      {version.decision && version.decision.status === 'submitted'
-        ? `Decision: ${version.decision.recommendation}`
-        : 'Control Panel'}
-    </NoSpaceAction>
-  </ActionGroup>
+  <StyledEditorItemLinks>
+    <ActionGroup>
+      <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+        Summary Info
+      </Action>
+      <Action
+        to={`/projects/${project.id}/versions/${version.id}/decisions/${
+          project.id
+        }`}
+      >
+        {version.decision && version.decision.status === 'submitted'
+          ? `Decision: ${version.decision.recommendation}`
+          : 'Control Panel'}
+      </Action>
+    </ActionGroup>
+  </StyledEditorItemLinks>
 )
+
+const StyledEditorItemLinks = styled.div`
+  flex-shrink: 0;
+`
 
 const getDeclarationsObject = (version, value) => {
   const declarations = version.declarations || {}
