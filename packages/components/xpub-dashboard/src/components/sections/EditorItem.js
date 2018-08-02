@@ -23,27 +23,21 @@ const VersionTitleLink = styled(ProjectLink)`
 `
 
 const EditorItemLinks = ({ project, version }) => (
-  <StyledEditorItemLinks>
-    <ActionGroup>
-      <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
-        Summary Info
-      </Action>
-      <Action
-        to={`/projects/${project.id}/versions/${version.id}/decisions/${
-          project.id
-        }`}
-      >
-        {version.decision && version.decision.status === 'submitted'
-          ? `Decision: ${version.decision.recommendation}`
-          : 'Control Panel'}
-      </Action>
-    </ActionGroup>
-  </StyledEditorItemLinks>
+  <ActionGroup>
+    <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+      Summary Info
+    </Action>
+    <Action
+      to={`/projects/${project.id}/versions/${version.id}/decisions/${
+        project.id
+      }`}
+    >
+      {version.decision && version.decision.status === 'submitted'
+        ? `Decision: ${version.decision.recommendation}`
+        : 'Control Panel'}
+    </Action>
+  </ActionGroup>
 )
-
-const StyledEditorItemLinks = styled.div`
-  flex-shrink: 0;
-`
 
 const getDeclarationsObject = (version, value) => {
   const declarations = version.declarations || {}

@@ -1,16 +1,11 @@
 import React from 'react'
 import { pickBy } from 'lodash'
-import styled from 'styled-components'
 import { Action, ActionGroup } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
-
-const StyledActions = styled.div`
-  flex-shrink: 0;
-`
 
 const OwnerItem = ({ project, version, deleteProject }) => {
   const itemHeader = (
@@ -48,7 +43,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   const body = (
     <Body>
       <VersionTitle version={version} />
-      <StyledActions>{actions}</StyledActions>
+      {actions}
     </Body>
   )
 

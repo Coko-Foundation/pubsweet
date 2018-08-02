@@ -18,6 +18,9 @@ const Body = styled.div`
   justify-content: space-between;
   margin-bottom: calc(${th('gridUnit')} * 4);
   padding-left: 1.5em;
+  & > div:last-child {
+    flex-shrink: 0;
+  }
 `
 
 const Divider = styled.span.attrs({
