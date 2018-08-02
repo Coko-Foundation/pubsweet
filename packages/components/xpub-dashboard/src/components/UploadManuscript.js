@@ -4,11 +4,13 @@ import Dropzone from 'react-dropzone'
 import { Icon } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 
-const StyledDropzone = styled(Dropzone)`
+const StyledDropzone = styled(({ disableUpload, ...props }) => (
+  <Dropzone {...props} />
+))`
   border: none;
   cursor: pointer;
   display: inline-block;
-  ${({ disableupload }) => disableupload && 'pointer-events: none;'};
+  ${({ disableUpload }) => disableUpload && 'pointer-events: none;'};
 `
 
 const StatusIcon = withTheme(({ children, theme }) => (
@@ -205,7 +207,7 @@ class UploadManuscript extends Component {
     return (
       <StyledDropzone
         accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        disableupload={this.status === 'converting' ? 'disableupload' : null}
+        disableUpload={this.status === 'converting' ? 'disableUpload' : null}
         onDrop={uploadManuscript}
       >
         <Root>
