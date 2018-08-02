@@ -17,15 +17,10 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": Array [
-        Array [],
-        undefined,
-      ],
+      "children": Array [],
     },
     "ref": null,
-    "rendered": Array [
-      undefined,
-    ],
+    "rendered": Array [],
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -34,15 +29,10 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": Array [
-          Array [],
-          undefined,
-        ],
+        "children": Array [],
       },
       "ref": null,
-      "rendered": Array [
-        undefined,
-      ],
+      "rendered": Array [],
       "type": [Function],
     },
   ],
