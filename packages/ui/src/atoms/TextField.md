@@ -28,7 +28,7 @@ initialState = { value: '' }
 ;<TextField
   label="Foo"
   value={state.value || 'This is not valid'}
-  validationstatus="error"
+  validationStatus="error"
   placeholder="so you can write some in here"
   onChange={event => setState({ value: event.target.value })}
 />
@@ -41,7 +41,7 @@ initialState = { value: '' }
 ;<TextField
   label="Foo"
   value={state.value || 'This is could be a problem'}
-  validationstatus="warning"
+  validationStatus="warning"
   placeholder="so you can write some in here"
   onChange={event => setState({ value: event.target.value })}
 />
@@ -54,7 +54,7 @@ initialState = { value: '' }
 ;<TextField
   label="Foo"
   value={state.value || 'This is good'}
-  validationstatus="success"
+  validationStatus="success"
   placeholder="so you can write some in here"
   onChange={event => setState({ value: event.target.value })}
 />
