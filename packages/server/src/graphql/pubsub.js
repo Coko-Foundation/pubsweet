@@ -1,6 +1,8 @@
 /**
  * PubSub related stuff used in GraphQL subscriptions
  */
+const { RedisPubSub } = require('graphql-redis-subscriptions')
+
 module.exports = {
   /**
    * Object with a pubsub per client connection.
@@ -10,7 +12,7 @@ module.exports = {
    *
    * The structure is pubsubs: { userId: PubSub object, ... }
    */
-  pubsubs: {},
+  pubsub: new RedisPubSub(),
   /**
    * Iterators to listen to
    */

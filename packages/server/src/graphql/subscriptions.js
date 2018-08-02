@@ -4,13 +4,12 @@
 const { createServer } = require('http')
 const { execute, subscribe } = require('graphql')
 const { SubscriptionServer } = require('subscriptions-transport-ws')
-const { PubSub } = require('graphql-subscriptions')
+
 const config = require('config')
 const logger = require('@pubsweet/logger')
 
 const graphqlSchema = require('./schema')
 const { token } = require('../authentication')
-const { pubsubs } = require('./pubsubs')
 
 const port = config.has('pubsweet-server.wsPort')
   ? config.get('pubsweet-server.wsPort')
@@ -38,13 +37,9 @@ module.exports = {
                 if (!id) {
                   throw new Error('Bad auth token')
                 }
-                pubsubs[id] = new PubSub()
                 resolve({ user: id })
               })
             })
-          },
-          onDisconnect: (webSocket, context) => {
-            delete pubsubs[context.user]
           },
         },
         {
