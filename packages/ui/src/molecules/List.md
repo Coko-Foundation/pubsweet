@@ -4,7 +4,6 @@ A component that displays items in a vertical list. Can be customized with a cus
 
 ```js
 const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
-
 ;<List items={items} />
 ```
 
@@ -12,7 +11,6 @@ const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
 
 ```js
 const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
-
 ;<List items={items} itemKey="name" />
 ```
 
@@ -20,7 +18,6 @@ const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
 
 ```js
 const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
-
 ;<List
   items={items}
   onItemClick={item => console.log('I clicked on: ', item)}
@@ -39,29 +36,5 @@ const CustomItem = item => (
     {` ${item.name}`}
   </span>
 )
-
 ;<List items={items} component={CustomItem} />
-```
-
-* Items as children
-
-```js
-<List>
-  <span>First item</span>
-  <span>Second item</span>
-  <span>Third item</span>
-</List>
-```
-
-* Why not both?
-  Items passed as props to the List component will be displayed first.
-
-```js
-const items = [{ id: 1, name: 'First item' }, { id: 2, name: 'Second item' }]
-
-;<List items={items}>
-  <span>First child</span>
-  <span>Second child</span>
-  <span>Third child</span>
-</List>
 ```

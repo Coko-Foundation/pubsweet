@@ -16,7 +16,8 @@ const Root = styled.div.attrs({
 `
 
 const Item = styled.div.attrs({
-  className: 'list-item',
+  // we could make a helper for this
+  'data-test-id': props => props['data-test-id'] || 'list-item',
 })`
   ${override('ui.List.Item')};
 `
@@ -41,12 +42,11 @@ const List = ({
     {items.map(item => (
       <Component key={get(item, itemKey)} {...item} {...rest} />
     ))}
-    {children}
   </Root>
 )
 
 List.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.array.isRequired,
   itemKey: PropTypes.string,
   onItemClick: PropTypes.func,
 }
