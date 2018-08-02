@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="9.4.0"></a>
+  <a name="9.5.0"></a>
+# [9.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.4.0...pubsweet-components@9.5.0) (2018-08-02)
+
+
+### Features
+
+* **aws-s3:** add option to save files with new names ([14e66e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14e66e3))
+
+
+
+
+  <a name="9.4.0"></a>
 # [9.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.1...pubsweet-components@9.4.0) (2018-07-27)
 
 
@@ -23,7 +34,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="9.3.1"></a>
+<a name="9.3.1"></a>
 ## [9.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.0...pubsweet-components@9.3.1) (2018-07-23)
 
 
