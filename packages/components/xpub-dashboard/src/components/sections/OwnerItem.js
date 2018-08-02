@@ -61,11 +61,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   return (
-    <Authorize
-      key={`OwnerItem-${project.id}`}
-      object={[project]}
-      operation="can view my submission section"
-    >
+    <Authorize object={[project]} operation="can view my submission section">
       <Item>
         {itemHeader}
         {body}
