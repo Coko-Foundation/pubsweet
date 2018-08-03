@@ -63,7 +63,7 @@ export class Authorize extends React.Component {
 Authorize.propTypes = {
   currentUser: PropTypes.object,
   operation: PropTypes.string,
-  object: PropTypes.object,
+  object: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.element,
   unauthorized: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   authsome: PropTypes.object.isRequired,

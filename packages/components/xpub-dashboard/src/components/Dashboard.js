@@ -38,7 +38,7 @@ const Dashboard = ({
       object={dashboard}
       operation="can view my submission section"
     >
-      {dashboard.length > 0 && (
+      {dashboard.length > 0 ? (
         <Section>
           <Heading>My Submissions</Heading>
           {dashboard.map(project => (
@@ -54,11 +54,11 @@ const Dashboard = ({
             />
           ))}
         </Section>
-      )}
+      ) : null}
     </Authorize>
 
     <Authorize object={dashboard} operation="can view review section">
-      {dashboard.length > 0 && (
+      {dashboard.length > 0 ? (
         <Section>
           <Heading>To review</Heading>
           {dashboard.map(project => (
@@ -70,7 +70,7 @@ const Dashboard = ({
             />
           ))}
         </Section>
-      )}
+      ) : null}
     </Authorize>
 
     <Authorize
@@ -78,7 +78,7 @@ const Dashboard = ({
       object={dashboard}
       operation="can view my manuscripts section"
     >
-      {dashboard.length > 0 && (
+      {dashboard.length > 0 ? (
         <Section>
           <Heading>My Manuscripts</Heading>
           {dashboard.map(project => (
@@ -88,7 +88,7 @@ const Dashboard = ({
             />
           ))}
         </Section>
-      )}
+      ) : null}
     </Authorize>
   </Page>
 )

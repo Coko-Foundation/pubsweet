@@ -4,7 +4,9 @@ import Dropzone from 'react-dropzone'
 import { Icon } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 
-const StyledDropzone = styled(Dropzone)`
+const StyledDropzone = styled(({ disableUpload, ...props }) => (
+  <Dropzone {...props} />
+))`
   border: none;
   cursor: pointer;
   display: inline-block;
@@ -205,7 +207,7 @@ class UploadManuscript extends Component {
     return (
       <StyledDropzone
         accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        disableUpload={this.status === 'converting'}
+        disableUpload={this.status === 'converting' ? 'disableUpload' : null}
         onDrop={uploadManuscript}
       >
         <Root>
@@ -217,13 +219,11 @@ class UploadManuscript extends Component {
             {this.state.error ? (
               <Error>{conversion.error.message}</Error>
             ) : (
-              [
-                <Info>
-                  {this.state.completed
-                    ? 'Submission created'
-                    : 'Submit Manuscript'}
-                </Info>,
-              ]
+              <Info>
+                {this.state.completed
+                  ? 'Submission created'
+                  : 'Submit Manuscript'}
+              </Info>
             )}
           </Main>
           <SubInfo>
