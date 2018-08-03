@@ -23,11 +23,6 @@ export class Authorize extends React.Component {
     this.checkAuth(nextProps)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.authorized === nextState.authorized) return false
-    return true
-  }
-
   async checkAuth({ authsome, currentUser, operation, object }) {
     try {
       const authorized = await authsome.can(
