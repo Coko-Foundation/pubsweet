@@ -39,6 +39,7 @@ const FormBuilderLayout = ({
       label: [
         form.name,
         <DeleteIcon
+          key={`delete-form-${key}`}
           onClick={e => {
             e.preventDefault()
             deleteForm(form)
@@ -52,7 +53,12 @@ const FormBuilderLayout = ({
 
   Sections.push({
     content: (
-      <FormProperties mode="create" onSubmitFn={createForm} properties={{}} />
+      <FormProperties
+        key="form-builder-new"
+        mode="create"
+        onSubmitFn={createForm}
+        properties={{}}
+      />
     ),
     key: 'new',
     label: '+ Add Form',

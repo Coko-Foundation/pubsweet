@@ -4,6 +4,11 @@ import { th } from '@pubsweet/ui-toolkit'
 const Page = styled.div`
   margin: auto;
   max-width: 60em;
+  form {
+    overflow-y: scroll;
+    padding-right: 40px;
+    height: 800px;
+  }
 `
 
 const Section = styled.div`

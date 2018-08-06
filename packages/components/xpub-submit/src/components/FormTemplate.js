@@ -88,37 +88,48 @@ export default ({
     <Intro>
       <div>
         {ReactHtmlParser(
-          form.description.replace('###link###', link(project, version)),
+          (form.description || '').replace(
+            '###link###',
+            link(project, version),
+          ),
         )}
       </div>
     </Intro>
     <form onSubmit={handleSubmit}>
-      {form.children.map(element => (
-        <Section
-          cssOverrides={JSON.parse(element.sectioncss || '{}')}
-          key={`${element.id}`}
-        >
-          <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
-          <ValidatedField
-            component={elements[element.component]}
-            format={executeFn(element.format)}
-            parse={executeFn(element.parse)}
-            readonly={false}
-            {...rejectProps(element, [
-              'component',
-              'title',
-              'sectioncss',
-              'parse',
-              'format',
-              'validate',
-            ])}
-            validate={executeValidate(element.validate, element.validateValue)}
-          />
-          <SubNote
-            dangerouslySetInnerHTML={createMarkup(element.description)}
-          />
-        </Section>
-      ))}
+      {(form.children || [])
+        .sort(
+          (obj1, obj2) => parseInt(obj1.order, 10) - parseInt(obj2.order, 10),
+        )
+        .map(element => (
+          <Section
+            cssOverrides={JSON.parse(element.sectioncss || '{}')}
+            key={`${element.id}`}
+          >
+            <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
+            <ValidatedField
+              component={elements[element.component]}
+              format={executeFn(element.format)}
+              key={`validate-${element.id}`}
+              parse={executeFn(element.parse)}
+              readonly={false}
+              {...rejectProps(element, [
+                'component',
+                'title',
+                'sectioncss',
+                'parse',
+                'format',
+                'validate',
+              ])}
+              validate={executeValidate(
+                element.validate,
+                element.validateValue,
+              )}
+            />
+            <SubNote
+              dangerouslySetInnerHTML={createMarkup(element.description)}
+            />
+          </Section>
+        ))}
       {!version.submitted &&
         form.haspopup === 'false' && (
           <Button primary type="submit">

@@ -15,7 +15,7 @@ import { FormSection, reduxForm } from 'redux-form'
 import FormProperties from './FormProperties'
 import components from './config/Elements'
 import * as elements from './builderComponents'
-import { Page } from './molecules/Page'
+import { Page, Heading } from './molecules/Page'
 import { Section, Legend } from './styles'
 
 const MenuComponents = input => (
@@ -36,7 +36,7 @@ const ComponentProperties = ({
 }) => (
   <Page>
     <form onSubmit={handleSubmit}>
-      <h3>Component Properties</h3>
+      <Heading>Component Properties</Heading>
       <FormSection name="children">
         <Section>
           <Legend space>Choose Component</Legend>

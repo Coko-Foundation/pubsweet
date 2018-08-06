@@ -46,22 +46,22 @@ const FormProperties = ({
     <form onSubmit={handleSubmit}>
       <h3>{mode === 'create' ? 'Create Form' : 'Update Form'}</h3>
       <FormSection name="">
-        <Section id="form.id">
+        <Section id="form.id" key="form.id">
           <Legend>ID Form</Legend>
           <ValidatedField component={idText} name="id" />
         </Section>
-        <Section id="form.name">
+        <Section id="form.name" key="form.name">
           <Legend>Form Name</Legend>
           <ValidatedField component={nameText} name="name" />
         </Section>
-        <Section id="form.description">
+        <Section id="form.description" key="form.description">
           <Legend>Description</Legend>
           <ValidatedField
             component={AbstractField.default}
             name="description"
           />
         </Section>
-        <Section id="form.submitpopup">
+        <Section id="form.submitpopup" key="form.submitpopup">
           <Legend>Submit on Popup</Legend>
           <ValidatedField
             component={RadioBox.default}
@@ -81,11 +81,11 @@ const FormProperties = ({
           />
         </Section>
         {showPopupValue === 'true' && [
-          <Section id="popup.title">
+          <Section id="popup.title" key="popup.title">
             <Legend>Popup Title</Legend>
             <ValidatedField component={nameText} name="popuptitle" />
           </Section>,
-          <Section id="popup.description">
+          <Section id="popup.description" key="popup.description">
             <Legend>Description</Legend>
             <ValidatedField
               component={AbstractField.default}

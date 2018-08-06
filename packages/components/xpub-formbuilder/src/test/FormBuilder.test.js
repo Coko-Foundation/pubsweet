@@ -1,6 +1,7 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import { Action } from '@pubsweet/ui'
 
 import { diveTo } from './util'
 import FormBuilder from '../components/FormBuilder'
@@ -65,19 +66,14 @@ describe('FormBuilder', () => {
   it('shows add element button and form elements', () => {
     const formbuilder = makeWrapper({ form: forms[0] })
 
-    // console.log(diveTo(formbuilder, 'lifecycle(FormBuilder)', {}))
-    expect(
-      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-        .dive()
-        .find('#builder-element'),
-    ).toHaveLength(1)
-
     expect(
       diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
         .dive()
         .find('#builder-element')
-        .dive(),
-    ).toHaveLength(1)
+        .dive()
+        .at(0),
+    ).toHaveLength(2)
+
     expect(
       diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
         .dive()
@@ -85,38 +81,27 @@ describe('FormBuilder', () => {
     ).toHaveLength(1)
   })
 
-  //   it('shows a list of teams created', () => {
-  //     const teammanager = makeWrapper({
-  //       teams: [
-  //         {
-  //           id: 1,
-  //           name: 'team1',
-  //           teamType: {
-  //             name: 'Senior Editors',
-  //             permissions: '',
-  //           },
-  //           object: {
-  //             type: 'collection',
-  //             id: '1',
-  //           },
-  //           members: [],
-  //         },
-  //         {
-  //           id: 1,
-  //           name: 'team2',
-  //           teamType: {
-  //             name: 'Handling Editors',
-  //             permissions: '',
-  //           },
-  //           object: {
-  //             type: 'collection',
-  //             id: '1',
-  //           },
-  //           members: [],
-  //         },
-  //       ],
-  //     })
+  it('adds empty element to the form', () => {
+    const formbuilder = makeWrapper()
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#builder-element'),
+    ).toHaveLength(0)
 
-  //     expect(teammanager.find(Team)).toHaveLength(2)
-  //   })
+    diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+      .dive()
+      .find('#add-element')
+      .dive()
+      .find(Action)
+      .simulate('click')
+
+    formbuilder.update()
+
+    expect(
+      diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
+        .dive()
+        .find('#builder-element'),
+    ).toHaveLength(1)
+  })
 })

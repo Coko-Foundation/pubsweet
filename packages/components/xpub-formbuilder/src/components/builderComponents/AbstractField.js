@@ -1,7 +1,7 @@
 import React from 'react'
 import { AbstractEditor } from 'xpub-edit'
 
-const AbstractInput = input => (
+const AbstractInput = ({ validationStatus, ...input }) => (
   <AbstractEditor placeholder="Enter text" title="" {...input} />
 )
 
