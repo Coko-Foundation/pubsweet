@@ -12,6 +12,11 @@ const DeleteIcon = styled(Action)`
   line-height: 1.15;
 `
 
+const AdminStyled = styled(Admin)`
+  border-left: 1px solid black;
+  padding-left: 40px;
+`
+
 const FormBuilderLayout = ({
   forms,
   properties,
@@ -78,14 +83,14 @@ const FormBuilderLayout = ({
         sections={Sections}
         title="builder"
       />
-      <Admin>
+      <AdminStyled>
         <ComponentProperties
           changeTabs={changeTabs}
           key={`${properties.type}-${(properties.properties || {}).id}`}
           onSubmitFn={properties.type === 'form' ? updateForm : updateElements}
           properties={properties}
         />
-      </Admin>
+      </AdminStyled>
     </Columns>
   )
 }

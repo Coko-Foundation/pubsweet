@@ -6,6 +6,7 @@ import { Button, TextField, ValidatedField } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 import { FormSection, reduxForm } from 'redux-form'
 import { AbstractField, RadioBox } from './builderComponents'
+import { Page, Heading } from './molecules/Page'
 
 const nameText = input => <TextField {...input} />
 
@@ -41,63 +42,67 @@ const FormProperties = ({
   showPopupValue,
 }) =>
   isEmpty(properties.properties) && mode !== 'create' ? (
-    <span>No properties available</span>
+    <Page>
+      <span>&nbsp;</span>
+    </Page>
   ) : (
-    <form onSubmit={handleSubmit}>
-      <h3>{mode === 'create' ? 'Create Form' : 'Update Form'}</h3>
-      <FormSection name="">
-        <Section id="form.id" key="form.id">
-          <Legend>ID Form</Legend>
-          <ValidatedField component={idText} name="id" />
-        </Section>
-        <Section id="form.name" key="form.name">
-          <Legend>Form Name</Legend>
-          <ValidatedField component={nameText} name="name" />
-        </Section>
-        <Section id="form.description" key="form.description">
-          <Legend>Description</Legend>
-          <ValidatedField
-            component={AbstractField.default}
-            name="description"
-          />
-        </Section>
-        <Section id="form.submitpopup" key="form.submitpopup">
-          <Legend>Submit on Popup</Legend>
-          <ValidatedField
-            component={RadioBox.default}
-            inline
-            name="haspopup"
-            onChange={(input, value) => selectPopup(value)}
-            options={[
-              {
-                label: 'Yes',
-                value: 'true',
-              },
-              {
-                label: 'No',
-                value: 'false',
-              },
-            ]}
-          />
-        </Section>
-        {showPopupValue === 'true' && [
-          <Section id="popup.title" key="popup.title">
-            <Legend>Popup Title</Legend>
-            <ValidatedField component={nameText} name="popuptitle" />
-          </Section>,
-          <Section id="popup.description" key="popup.description">
+    <Page>
+      <form onSubmit={handleSubmit}>
+        <Heading>{mode === 'create' ? 'Create Form' : 'Update Form'}</Heading>
+        <FormSection name="">
+          <Section id="form.id" key="form.id">
+            <Legend>ID Form</Legend>
+            <ValidatedField component={idText} name="id" />
+          </Section>
+          <Section id="form.name" key="form.name">
+            <Legend>Form Name</Legend>
+            <ValidatedField component={nameText} name="name" />
+          </Section>
+          <Section id="form.description" key="form.description">
             <Legend>Description</Legend>
             <ValidatedField
               component={AbstractField.default}
-              name="popupdescription"
+              name="description"
             />
-          </Section>,
-        ]}
-        <Button primary type="submit">
-          {mode === 'create' ? 'Create Form' : 'Update Form'}
-        </Button>
-      </FormSection>
-    </form>
+          </Section>
+          <Section id="form.submitpopup" key="form.submitpopup">
+            <Legend>Submit on Popup</Legend>
+            <ValidatedField
+              component={RadioBox.default}
+              inline
+              name="haspopup"
+              onChange={(input, value) => selectPopup(value)}
+              options={[
+                {
+                  label: 'Yes',
+                  value: 'true',
+                },
+                {
+                  label: 'No',
+                  value: 'false',
+                },
+              ]}
+            />
+          </Section>
+          {showPopupValue === 'true' && [
+            <Section id="popup.title" key="popup.title">
+              <Legend>Popup Title</Legend>
+              <ValidatedField component={nameText} name="popuptitle" />
+            </Section>,
+            <Section id="popup.description" key="popup.description">
+              <Legend>Description</Legend>
+              <ValidatedField
+                component={AbstractField.default}
+                name="popupdescription"
+              />
+            </Section>,
+          ]}
+          <Button primary type="submit">
+            {mode === 'create' ? 'Create Form' : 'Update Form'}
+          </Button>
+        </FormSection>
+      </form>
+    </Page>
   )
 
 export default compose(
