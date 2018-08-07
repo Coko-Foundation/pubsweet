@@ -1,3 +1,4 @@
+export { default as Accordion } from './Accordion'
 export { default as Action } from './Action'
 export { default as ActionGroup } from './ActionGroup'
 export { default as AlignmentBoxWithLabel } from './AlignmentBoxWithLabel'
