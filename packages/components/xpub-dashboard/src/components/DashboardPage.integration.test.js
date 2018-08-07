@@ -23,6 +23,17 @@ jest.mock('config', () => ({
   authsome: {
     mode: 'authsome',
   },
+  'pubsweet-component-xpub-dashboard': {
+    acceptUploadFiles: [
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/x-latex',
+      'text/vnd.latex-z',
+      'text/x-tex',
+      'application/pdf',
+      'application/epub+zip',
+      'application/zip',
+    ],
+  },
 }))
 
 // Mock out the API

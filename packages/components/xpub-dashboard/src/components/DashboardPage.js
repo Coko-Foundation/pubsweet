@@ -4,8 +4,19 @@ import { withRouter } from 'react-router-dom'
 import { actions } from 'pubsweet-client'
 import { newestFirst, selectCurrentUser } from 'xpub-selectors'
 import { ConnectPage } from 'xpub-connect'
-import { uploadManuscript } from '../redux/conversion'
+import config from 'config'
+import {
+  uploadManuscript,
+  uploadManuscriptNoConversion,
+} from '../redux/conversion'
 import Dashboard from './Dashboard'
+
+const { acceptUploadFiles } = config['pubsweet-component-xpub-dashboard'] || {}
+
+const acceptFiles =
+  acceptUploadFiles.length > 0
+    ? acceptUploadFiles.join()
+    : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
 const reviewerResponse = (project, version, reviewer, status) => dispatch => {
   reviewer.status = status
@@ -34,7 +45,13 @@ export default compose(
 
       const dashboard = newestFirst(collections)
 
-      return { collections, conversion, currentUser, dashboard }
+      return {
+        acceptFiles,
+        collections,
+        conversion,
+        currentUser,
+        dashboard,
+      }
     },
     (dispatch, { history }) => ({
       deleteProject: collection => {
@@ -45,8 +62,16 @@ export default compose(
       },
       reviewerResponse: (project, version, reviewer, status) =>
         dispatch(reviewerResponse(project, version, reviewer, status)),
-      uploadManuscript: acceptedFiles =>
-        dispatch(uploadManuscript(acceptedFiles, history)),
+      uploadManuscript: acceptedFiles => {
+        if (
+          acceptedFiles[0].type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ) {
+          dispatch(uploadManuscript(acceptedFiles, history))
+        } else {
+          dispatch(uploadManuscriptNoConversion(acceptedFiles, history))
+        }
+      },
     }),
   ),
   withRouter,

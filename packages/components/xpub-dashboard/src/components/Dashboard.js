@@ -13,6 +13,7 @@ const EditorItemWithVersion = withVersion(EditorItem)
 const ReviewerItemWithVersion = withVersion(ReviewerItem)
 
 const Dashboard = ({
+  acceptFiles,
   currentUser,
   conversion,
   dashboard,
@@ -23,6 +24,7 @@ const Dashboard = ({
   <Page>
     <UploadContainer>
       <UploadManuscript
+        acceptFiles={acceptFiles}
         conversion={conversion}
         uploadManuscript={uploadManuscript}
       />
