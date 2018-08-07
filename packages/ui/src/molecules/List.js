@@ -7,7 +7,7 @@ import { override } from '@pubsweet/ui-toolkit'
 
 // #region styles
 const Root = styled.div.attrs({
-  className: 'list-root',
+  'data-test-id': props => props['data-test-id'] || 'list-root',
 })`
   display: flex;
   flex-direction: column;
