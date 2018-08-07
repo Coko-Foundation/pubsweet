@@ -202,11 +202,11 @@ class UploadManuscript extends Component {
   }
 
   render() {
-    const { uploadManuscript, conversion } = this.props
+    const { acceptFiles, uploadManuscript, conversion } = this.props
 
     return (
       <StyledDropzone
-        accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        accept={acceptFiles}
         disableUpload={this.status === 'converting' ? 'disableUpload' : null}
         onDrop={uploadManuscript}
       >
@@ -229,6 +229,8 @@ class UploadManuscript extends Component {
           <SubInfo>
             {this.status === 'converting' &&
               'Your manuscript is being converted into a directly editable version. This might take a while.'}
+            {this.status !== 'converting' &&
+              'Accepted file types: pdf, epub, zip, docx, latex'}
           </SubInfo>
         </Root>
       </StyledDropzone>

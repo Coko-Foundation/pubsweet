@@ -26,6 +26,17 @@ const MainEditorStyled = styled(MainEditor)`
     cursor: col-resize;
   }
 `
+
+const Info = styled.span`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+`
+
 const Manuscript = ({
   content,
   currentUser,
@@ -33,12 +44,16 @@ const Manuscript = ({
   history,
   updateManuscript,
   version,
-}) => (
-  <MainEditorStyled
-    fileUpload={fileUpload}
-    onChange={source => updateManuscript({ source })}
-    value={content}
-  />
-)
+}) =>
+  version.files.manuscript.type ===
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+    <MainEditorStyled
+      fileUpload={fileUpload}
+      onChange={source => updateManuscript({ source })}
+      value={content}
+    />
+  ) : (
+    <Info>No supported view of the file</Info>
+  )
 
 export default withRouter(Manuscript)

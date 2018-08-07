@@ -9,6 +9,7 @@ import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
+import { Info } from '../molecules/Info'
 import AdminSection from '../atoms/AdminSection'
 
 // TODO -- is passing arrays of react components as props an ok practice?
@@ -49,15 +50,19 @@ const DecisionLayout = ({
       })
 
       editorSections.push({
-        content: (
-          <SimpleEditor
-            content={version.source}
-            editing="selection"
-            key={version.id}
-            layout="bare"
-            readOnly
-          />
-        ),
+        content:
+          version.files.manuscript.type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+            <SimpleEditor
+              content={version.source}
+              editing="selection"
+              key={version.id}
+              layout="bare"
+              readOnly
+            />
+          ) : (
+            <Info>No supported view of the file</Info>
+          ),
         key: version.id,
         label,
       })
@@ -99,15 +104,19 @@ const DecisionLayout = ({
     })
 
     editorSections.push({
-      content: (
-        <SimpleEditor
-          content={currentVersion.source}
-          editing="selection"
-          key={currentVersion.id}
-          layout="bare"
-          readOnly
-        />
-      ),
+      content:
+        currentVersion.files.manuscript.type ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+          <SimpleEditor
+            content={currentVersion.source}
+            editing="selection"
+            key={currentVersion.id}
+            layout="bare"
+            readOnly
+          />
+        ) : (
+          <Info>No supported view of the file</Info>
+        ),
       key: currentVersion.id,
       label,
     })
