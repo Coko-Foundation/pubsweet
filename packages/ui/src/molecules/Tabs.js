@@ -15,11 +15,11 @@ const Title = styled.div`
   border-bottom: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   padding: ${th('gridUnit')} 1em;
 `
-const TabContainer = styled.div``
-TabContainer.displayName = 'TabContainer'
+const TabContainer = styled.div.attrs({
+  'data-test-id': props => props['data-test-id'] || 'tab-container',
+})``
 
 const Content = styled.div``
-Content.displayName = 'Content'
 
 class Tabs extends React.Component {
   constructor(props) {

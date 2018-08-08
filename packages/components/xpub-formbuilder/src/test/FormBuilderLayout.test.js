@@ -91,7 +91,9 @@ describe('FormBuilder Layout', () => {
       activeTab: 'new',
     })
 
-    expect(formbuilder.find('TabContainer').children()).toHaveLength(1)
+    expect(
+      formbuilder.find('[data-test-id="tab-container"]').children(),
+    ).toHaveLength(1)
 
     expect(
       formbuilder
@@ -118,7 +120,9 @@ describe('FormBuilder Layout', () => {
       forms: testforms,
     })
 
-    expect(formbuilder.find('TabContainer').children()).toHaveLength(3)
+    expect(
+      formbuilder.find('[data-test-id="tab-container"]').children(),
+    ).toHaveLength(3)
 
     expect(
       formbuilder
