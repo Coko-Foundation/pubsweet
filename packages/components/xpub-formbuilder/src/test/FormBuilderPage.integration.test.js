@@ -15,8 +15,6 @@ import FormBuilderPage from '../components/FormBuilderPage'
 
 import forms from './config/test.json'
 
-import FormBuilder from '../components/FormBuilder'
-
 import FormProperties from '../components/FormProperties'
 
 // this should be elsewhere
@@ -110,7 +108,6 @@ describe('FormBuilderPage', () => {
 
     setImmediate(() => {
       page.update()
-      expect(page.find(FormBuilder)).toHaveLength(forms.length)
       expect(page.find('#builder-element').children()).toHaveLength(
         forms[0].children.length,
       )
