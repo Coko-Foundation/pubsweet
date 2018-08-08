@@ -16,7 +16,10 @@ const Title = styled.div`
   padding: ${th('gridUnit')} 1em;
 `
 const TabContainer = styled.div``
+TabContainer.displayName = 'TabContainer'
+
 const Content = styled.div``
+Content.displayName = 'Content'
 
 class Tabs extends React.Component {
   constructor(props) {

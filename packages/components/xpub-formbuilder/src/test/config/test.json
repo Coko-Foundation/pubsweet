@@ -22,5 +22,6 @@
         "validateValue": { "minChars": "10" }
       }
     ]
-  }
+  },
+  { "name": "test form 1", "id": "test1" }
 ]

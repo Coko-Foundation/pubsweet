@@ -11,7 +11,9 @@ import { reducers } from 'pubsweet-client'
 
 import FormProperties from '../components/FormProperties'
 import FormBuilderLayout from '../components/FormBuilderLayout'
+import FormBuilder from '../components/FormBuilder'
 import noforms from './config/noforms.json'
+import testforms from './config/test.json'
 
 // this should be elsewhere
 Enzyme.configure({ adapter: new Adapter() })
@@ -89,57 +91,47 @@ describe('FormBuilder Layout', () => {
       activeTab: 'new',
     })
 
-    formbuilder.find(FormProperties).debug()
-    // console.log(diveTo(formbuilder, 'withProps(withState(withHandlers(ReduxForm)))', {}).debug())
-    // console.log(formbuilder.find('branch(withProps(ReduxForm))').dive().dive().dive().debug())
-    // expect(diveTo(formbuilder, 'branch(withProps(ReduxForm))', {})).toHaveLength(1)
+    expect(formbuilder.find('TabContainer').children()).toHaveLength(1)
 
-    // expect(
-    //   diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-    //     .dive()
-    //     .find('#add-element'),
-    // ).toHaveLength(1)
+    expect(
+      formbuilder
+        .find(FormProperties)
+        .find('form')
+        .text(),
+    ).toContain('Create Form')
+
+    expect(
+      formbuilder
+        .find(FormProperties)
+        .at(1)
+        .find('form'),
+    ).toHaveLength(0)
   })
 
-  // it('shows add element button and form elements', () => {
-  //   const formbuilder = makeWrapper({ form: forms[0] })
+  it('shows three tabs and make the first active', () => {
+    const formbuilder = makeWrapper({
+      properties: {
+        type: 'form',
+        properties: testforms[0],
+      },
+      activeTab: 0,
+      forms: testforms,
+    })
 
-  //   expect(
-  //     diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-  //       .dive()
-  //       .find('#builder-element')
-  //       .dive()
-  //       .at(0),
-  //   ).toHaveLength(2)
+    expect(formbuilder.find('TabContainer').children()).toHaveLength(3)
 
-  //   expect(
-  //     diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-  //       .dive()
-  //       .find('#add-element'),
-  //   ).toHaveLength(1)
-  // })
+    expect(
+      formbuilder
+        .find(FormBuilder)
+        .find('BuilderElement')
+        .children(),
+    ).toHaveLength(testforms[0].children.length)
 
-  // it('adds empty element to the form', () => {
-  //   const formbuilder = makeWrapper()
-  //   expect(
-  //     diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-  //       .dive()
-  //       .find('#builder-element'),
-  //   ).toHaveLength(0)
-
-  //   diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-  //     .dive()
-  //     .find('#add-element')
-  //     .dive()
-  //     .find(Action)
-  //     .simulate('click')
-
-  //   formbuilder.update()
-
-  //   expect(
-  //     diveTo(formbuilder, 'lifecycle(FormBuilder)', {})
-  //       .dive()
-  //       .find('#builder-element'),
-  //   ).toHaveLength(1)
-  // })
+    expect(
+      formbuilder
+        .find(FormProperties)
+        .at(0)
+        .find('form'),
+    ).toHaveLength(1)
+  })
 })
