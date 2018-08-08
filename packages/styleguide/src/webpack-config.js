@@ -142,6 +142,11 @@ module.exports = dir => {
       alias: {
         joi: 'joi-browser',
         config: clientConfigPath,
+        'styled-components': path.resolve(
+          '../../',
+          'node_modules',
+          'styled-components',
+        ),
       },
     },
     watch: true,

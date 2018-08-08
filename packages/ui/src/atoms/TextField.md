@@ -59,3 +59,16 @@ initialState = { value: '' }
   onChange={event => setState({ value: event.target.value })}
 />
 ```
+
+Disabled text field.
+
+```js
+initialState = { value: '' }
+;<TextField
+  label="Foo"
+  disabled
+  value={state.value || 'This is good'}
+  placeholder="so you can write some in here"
+  onChange={event => setState({ value: event.target.value })}
+/>
+```

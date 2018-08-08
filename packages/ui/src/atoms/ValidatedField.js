@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { compose, withHandlers } from 'recompose'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 
 // TODO: pass ...props.input to children automatically?
 
@@ -10,6 +10,8 @@ const MessageWrapper = styled.div`
   font-family: ${th('fontInterface')};
   display: block;
   margin-top: calc(${th('gridUnit')} * -3);
+
+  ${override('ui.ValidatedTextField.MessageWrapper')};
 `
 
 const Message = styled.div`
@@ -22,6 +24,8 @@ const Message = styled.div`
 
 const ErrorMessage = Message.extend`
   color: ${th('colorError')};
+
+  ${override('ui.ValidatedTextField.ErrorMessage')};
 `
 
 const ValidatedFieldComponent = ({ component: Component }) => ({
@@ -33,7 +37,7 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
   if (meta.touched && meta.error) validationStatus = 'error'
 
   return (
-    <div>
+    <Fragment>
       <Component {...input} validationStatus={validationStatus} />
 
       {/* live region DOM node must be initially present for changes to be announced */}
@@ -41,7 +45,7 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
         {meta.touched &&
           meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
       </MessageWrapper>
-    </div>
+    </Fragment>
   )
 }
 

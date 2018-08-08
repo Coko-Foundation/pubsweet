@@ -8,7 +8,9 @@ The color can be changed.
 
 ```js
 <div>
-  <Icon error>arrow_right</Icon>
+  <Icon error dark>
+    arrow_right
+  </Icon>
   <Icon primary>arrow_right</Icon>
 </div>
 ```

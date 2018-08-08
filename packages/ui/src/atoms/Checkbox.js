@@ -27,25 +27,23 @@ const Checkbox = ({
   name,
   value,
   label,
-  checked,
   required,
   onChange,
-}) => {
-  checked = checked || false
-
-  return (
-    <Root checked={checked} inline={inline}>
-      <Input
-        checked={checked}
-        name={name}
-        onChange={onChange}
-        required={required}
-        type="checkbox"
-        value={value}
-      />
-      <Label checked={checked}>{label}</Label>
-    </Root>
-  )
-}
+  checked = false,
+  disabled = false,
+}) => (
+  <Root checked={checked} disabled={disabled} inline={inline}>
+    <Input
+      checked={checked}
+      disabled={disabled}
+      name={name}
+      onChange={onChange}
+      required={required}
+      type="checkbox"
+      value={value}
+    />
+    <Label checked={checked}>{label}</Label>
+  </Root>
+)
 
 export default Checkbox

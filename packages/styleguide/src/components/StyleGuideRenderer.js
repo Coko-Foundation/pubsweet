@@ -11,6 +11,7 @@ import StyleRoot, {
 import defaultTheme from '@pubsweet/default-theme'
 import cokoTheme from '@pubsweet/coko-theme'
 import elifeTheme from '@elifesciences/elife-theme'
+import hindawiTheme from 'hindawi-theme'
 
 const currentTheme = {
   name: localStorage.getItem('currentTheme') || 'defaultTheme',
@@ -20,6 +21,7 @@ const themes = {
   defaultTheme,
   cokoTheme,
   elifeTheme,
+  hindawiTheme,
 }
 
 injectGlobalStyles()
