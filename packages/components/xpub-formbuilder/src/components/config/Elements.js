@@ -1,4 +1,13 @@
+import config from 'config'
+
+const extendComponents = (config['pubsweet-component-xpub-formbuilder'] || {})
+  .components
+
 const textfield = {
+  component: 'TextField',
+}
+
+const orderfield = {
   component: 'TextField',
 }
 
@@ -61,18 +70,20 @@ const radiofield = {
   },
 }
 
-export default {
+const elements = {
   Supplementary: {
     id: textfield,
     title: textfield,
     name: textfield,
     description: editorfield,
+    order: orderfield,
     validate,
   },
   AuthorsInput: {
     id: textfield,
     title: textfield,
     name: textfield,
+    order: orderfield,
     validate,
   },
   AbstractEditor: {
@@ -81,6 +92,7 @@ export default {
     name: textfield,
     placeholder: textfield,
     description: editorfield,
+    order: orderfield,
     validate,
   },
   TextField: {
@@ -89,6 +101,7 @@ export default {
     name: textfield,
     placeholder: textfield,
     description: editorfield,
+    order: orderfield,
     validate,
     parse: {
       component: 'Menu',
@@ -127,9 +140,9 @@ export default {
     id: textfield,
     title: textfield,
     name: textfield,
-    placeholder: textfield,
     description: editorfield,
     options: optionfield,
+    order: orderfield,
     validate,
   },
   Menu: {
@@ -139,6 +152,7 @@ export default {
     placeholder: textfield,
     description: editorfield,
     options: optionfield,
+    order: orderfield,
     validate,
   },
   RadioGroup: {
@@ -147,8 +161,11 @@ export default {
     name: textfield,
     description: editorfield,
     options: optionfield,
+    order: orderfield,
     inline: radiofield,
     sectioncss: textarea,
     validate,
   },
 }
+
+export default Object.assign(elements, extendComponents)

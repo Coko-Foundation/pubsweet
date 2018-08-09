@@ -36,7 +36,7 @@ const ModalWrapper = styled.div`
   top: 0;
 `
 
-const { ValidatedField, Button } = elements
+const { ValidatedField, Button, Attachment } = elements
 elements.AbstractEditor = AbstractEditor
 elements.AuthorsInput = AuthorsInput
 
@@ -119,6 +119,9 @@ export default ({
                 'parse',
                 'format',
                 'validate',
+                'validateValue',
+                'description',
+                'order',
               ])}
               validate={executeValidate(
                 element.validate,
@@ -130,6 +133,19 @@ export default ({
             />
           </Section>
         ))}
+
+      {version.files.manuscript.type !==
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
+        <Section id="files.manuscript">
+          <Legend space>Submitted Manuscript</Legend>
+          <Attachment
+            file={version.files.manuscript}
+            key={version.files.manuscript.url}
+            uploaded
+          />
+        </Section>
+      )}
+
       {!version.submitted &&
         form.haspopup === 'false' && (
           <Button primary type="submit">

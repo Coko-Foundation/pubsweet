@@ -1,5 +1,5 @@
 import React from 'react'
-import { map } from 'lodash'
+import { map, omitBy } from 'lodash'
 // import styled from 'styled-components'
 import {
   branch,
@@ -75,7 +75,9 @@ const UpdateForm = ({ onSubmitFn, properties, changeTabs }) => (
 
 const onSubmit = (values, dispatch, { onSubmitFn, id, properties }) => {
   if (!values.children.id || !values.children.component) return
-  onSubmitFn({ id: properties.id }, Object.assign({}, values))
+
+  const children = omitBy(values.children, value => value === '')
+  onSubmitFn({ id: properties.id }, Object.assign({}, { children }))
 }
 
 const ComponentForm = compose(

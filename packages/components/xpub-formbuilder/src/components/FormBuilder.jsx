@@ -137,19 +137,21 @@ FormBuilder.displayName = 'FormBuilder'
 export default compose(
   withState('elements', 'onAddElements', ({ form }) => form.children || []),
   withHandlers({
-    addElements: ({ onAddElements, elements, form }) => addElement =>
+    addElements: ({ onAddElements, form }) => addElement =>
       onAddElements(() => {
-        if (!form.children) {
-          form.children = []
-        }
-        form.children.push(addElement)
-        return form.children
+        const addEl = { children: form.children || [] }
+        addEl.children = [...addEl.children, addElement]
+        return addEl.children
       }),
   }),
   lifecycle({
     componentWillReceiveProps(nextProps) {
-      if (this.props.form !== nextProps.form) {
+      if (this.props.form.children !== nextProps.form.children) {
         this.setState({ elements: nextProps.form.children })
+      }
+
+      if (this.props.elements !== nextProps.elements) {
+        this.setState({ elements: nextProps.elements })
       }
     },
   }),
