@@ -30,12 +30,14 @@ module.exports = {
           execute,
           subscribe,
           onConnect: (connectionParams, webSocket, context) => {
-            if (!connectionParams.authToken)
+            if (!connectionParams.authToken) {
               throw new Error('Missing auth token')
-            return new Promise(resolve => {
+            }
+            return new Promise((resolve, reject) => {
               token.verify(connectionParams.authToken, (_, id) => {
                 if (!id) {
-                  throw new Error('Bad auth token')
+                  logger.info('Bad auth token')
+                  reject(new Error('Bad auth token'))
                 }
                 resolve({ user: id })
               })
