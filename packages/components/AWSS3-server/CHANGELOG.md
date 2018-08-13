@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.1.2...@pubsweet/component-aws-s3@1.2.0) (2018-08-02)
+
+
+### Features
+
+* **aws-s3:** add option to save files with new names ([14e66e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14e66e3))
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.1.1...@pubsweet/component-aws-s3@1.1.2) (2018-06-19)
 
