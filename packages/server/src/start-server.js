@@ -3,7 +3,7 @@ const config = require('config')
 const Promise = require('bluebird')
 const logger = require('@pubsweet/logger')
 
-const { startWebsocketServer } = require('./graphql/subscriptions')
+const { addSubscriptions } = require('./graphql/subscriptions')
 
 const startServer = async app => {
   const port =
@@ -16,7 +16,7 @@ const startServer = async app => {
   const startListening = Promise.promisify(server.listen, { context: server })
   await startListening(port)
   logger.info(`App is listening on port ${port}`)
-  startWebsocketServer()
+  addSubscriptions(server)
   return server
 }
 

@@ -34,7 +34,7 @@ if (
     authBearerAndPublic,
     graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://${hostname}:5000/subscriptions`,
+      subscriptionsEndpoint: `ws://${hostname}:3000/subscriptions`,
     }),
   )
 }
