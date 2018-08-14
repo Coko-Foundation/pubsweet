@@ -41,6 +41,7 @@ exports[`Checkbox Group is rendered correctly 1`] = `
     <input
       checked={false}
       className=""
+      disabled={undefined}
       name={undefined}
       onChange={[Function]}
       required={undefined}
@@ -61,6 +62,7 @@ exports[`Checkbox Group is rendered correctly 1`] = `
     <input
       checked={false}
       className=""
+      disabled={undefined}
       name={undefined}
       onChange={[Function]}
       required={undefined}
@@ -81,6 +83,7 @@ exports[`Checkbox Group is rendered correctly 1`] = `
     <input
       checked={false}
       className=""
+      disabled={undefined}
       name={undefined}
       onChange={[Function]}
       required={undefined}

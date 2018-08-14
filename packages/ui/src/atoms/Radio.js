@@ -21,6 +21,7 @@ const Root = styled.label`
 `
 const Radio = ({
   className,
+  disabled,
   color,
   inline,
   name,
@@ -29,12 +30,11 @@ const Radio = ({
   checked,
   required,
   onChange,
-  readonly,
 }) => (
-  <Root checked={checked} color={color} inline={inline}>
+  <Root checked={checked} className={className} color={color} inline={inline}>
     <Input
       checked={checked}
-      disabled={readonly}
+      disabled={disabled}
       name={name}
       onChange={onChange}
       required={required}
