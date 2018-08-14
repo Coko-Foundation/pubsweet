@@ -15,7 +15,7 @@ const createTables = async clobber => {
       logger.info('Overwriting existing database due to clobber option')
       await Promise.all(
         // TODO this is dangerous, change it
-        rows.map(row => db.query(`DROP TABLE ${row.tablename}`)),
+        rows.map(row => db.query(`DROP TABLE "${row.tablename}" CASCADE`)),
       )
     } else {
       logger.error(
