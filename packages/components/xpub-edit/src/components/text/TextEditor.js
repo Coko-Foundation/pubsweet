@@ -8,12 +8,13 @@ import * as options from './config'
 
 const TextEditor = ({
   className,
-  value,
-  placeholder,
-  placeholderClassName,
-  title,
   onBlur,
   onChange,
+  placeholder,
+  placeholderClassName,
+  readonly,
+  title,
+  value,
 }) => (
   <HtmlEditor
     className={className}
@@ -22,6 +23,7 @@ const TextEditor = ({
     options={options}
     placeholder={placeholder}
     placeholderClassName={placeholderClassName}
+    readonly={readonly}
     title={title}
     value={value}
   />
