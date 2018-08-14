@@ -20,6 +20,13 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "SendEmail"
   },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/tests/.*.test.js$"
+  },
+  "scripts": {
+    "test": "jest"
+  },
   "publishConfig": {
     "access": "public"
   }

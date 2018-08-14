@@ -2,8 +2,13 @@ const config = require('config')
 const helpers = require('./helpers')
 const SendEmail = require('@pubsweet/component-send-email')
 
-const logoUrl = config.get('logo')
-
+const configData = {
+  logo: config.get('logo'),
+  senderName: config.get('sender.name'),
+  senderCity: config.get('sender.city'),
+  senderState: config.get('sender.state'),
+  senderZip: config.get('sender.zipCode'),
+}
 class Email {
   constructor({
     type = 'system',
@@ -43,7 +48,7 @@ class Email {
         html: helpers.getInvitationBody({
           replacements: {
             ...body,
-            logo: logoUrl,
+            ...configData,
             ...this.content,
             toUserName: this.toUser.name,
           },
@@ -58,7 +63,7 @@ class Email {
       html: helpers.getNotificationBody({
         replacements: {
           ...body,
-          logo: logoUrl,
+          ...configData,
           toUserName: this.toUser.name,
           ...this.content,
         },
@@ -69,7 +74,7 @@ class Email {
     }
   }
 
-  sendEmail({ text, html }) {
+  async sendEmail({ text, html }) {
     const mailData = {
       from: config.get('mailer.from'),
       to: this.toUser.email,
@@ -78,7 +83,11 @@ class Email {
       html,
     }
 
-    SendEmail.send(mailData)
+    try {
+      await SendEmail.send(mailData)
+    } catch (e) {
+      throw new Error(e)
+    }
   }
 }
 

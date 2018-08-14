@@ -28,30 +28,37 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 1.  **Notifications**
     These are the most basic emails, which contain at least a piece of text, called a `Paragraph` and may or may not contain an `Action Button`. The `paragraph` and `hasLink` are passed to the `getBody()` function as properties of the `body` parameter.
 
-```javascript
-const emailTemplate = require('@pubsweet/component-email-template')
+    ![notification](https://gitlab.coko.foundation/xpub/xpub-faraday/uploads/27cb6acc8ff4a07758f55e5ea0504d28/notification.png)
 
-const sendNotifications = ({ user, editor, collection, fragment }) => {
-  const email = new emailTemplate({
-    type: 'user',
-    toUser: {
-      email: user.email,
-      name: `${user.firstName} ${user.lastName}`,
-    },
-    content: {
-      subject: `${collection.customId}: Manuscript Update`,
-      signatureName: `${editor.name}`,
-      ctaLink: `http://localhost:3000/projects/${collection.id}/versions/${
-        fragment.id
-      }/details`,
-      ctaText: 'MANUSCRIPT DETAILS',
-      unsubscribeLink: `http://localhost:3000/unsubscribe/${user.id}`,
-    },
-  })
+    ```javascript
+    const emailTemplate = require('@pubsweet/component-email-template')
 
-  const paragraph = `We are please to inform you that the manuscript has passed the technical check process and is now submitted. Please click the link below to access the manuscript.`
+    const sendNotifications = ({ user, editor, collection, fragment }) => {
+      const email = new emailTemplate({
+        type: 'user',
+        toUser: {
+          email: user.email,
+          name: `${user.firstName} ${user.lastName}`,
+        },
+        content: {
+          subject: `${collection.customId}: Manuscript Update`,
+          signatureName: `${editor.name}`,
+          ctaLink: `http://localhost:3000/projects/${collection.id}/versions/${
+            fragment.id
+          }/details`,
+          ctaText: 'MANUSCRIPT DETAILS',
+          unsubscribeLink: `http://localhost:3000/unsubscribe/${user.id}`,
+        },
+      })
 
-  const { html, text } = email.getBody({ paragraph, hasLink: true })
-  email.sendEmail({ html, text })
-}
-```
+      const paragraph = `We are please to inform you that the manuscript has passed the technical check process and is now submitted. Please click the link below to access the manuscript.`
+
+      const { html, text } = email.getBody({ paragraph, hasLink: true })
+      email.sendEmail({ html, text })
+    }
+    ```
+
+1.  **Reviewer Invitation**
+    This email template is specific to Hindawi and it requires some data that might not be available in other PubSweet apps.
+
+    ![invitation](https://gitlab.coko.foundation/xpub/xpub-faraday/uploads/438af32b5da5532ed2bd6ca46588be50/Screen_Shot_2018-08-14_at_12.49.37.png)
