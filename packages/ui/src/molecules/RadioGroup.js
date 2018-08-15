@@ -18,7 +18,7 @@ class RadioGroup extends React.Component {
   }
 
   render() {
-    const { inline, name, options, required } = this.props
+    const { className, disabled, inline, name, options, required } = this.props
     const { value } = this.state
 
     return (
@@ -26,7 +26,9 @@ class RadioGroup extends React.Component {
         {options.map(option => (
           <Radio
             checked={option.value === value}
+            className={className}
             color={option.color}
+            disabled={disabled}
             inline={inline}
             key={option.value}
             label={option.label}

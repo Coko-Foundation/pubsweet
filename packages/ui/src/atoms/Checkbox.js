@@ -23,6 +23,7 @@ const Root = styled.label`
 `
 
 const Checkbox = ({
+  className,
   inline,
   name,
   value,

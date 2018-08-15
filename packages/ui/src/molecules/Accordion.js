@@ -47,7 +47,7 @@ const HeaderIcon = styled.div`
 `
 // #endregion
 
-const HeaderComponent = ({ icon, expanded, label, toggle, ...props }) => (
+const HeaderComponent = ({ icon, label, toggle, expanded, ...props }) => (
   <Header expanded={expanded} onClick={toggle} {...props}>
     <HeaderIcon expanded={expanded}>
       <Icon primary size={3}>

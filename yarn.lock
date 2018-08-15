@@ -5608,13 +5608,6 @@ highlightjs@^9.10.0:
   version "9.10.0"
   resolved "https://registry.yarnpkg.com/highlightjs/-/highlightjs-9.10.0.tgz#fca9b78ddaa3b1abca89d6c3ee105ad270a80190"
 
-hindawi-theme@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/hindawi-theme/-/hindawi-theme-1.0.1.tgz#803065d8de1d1d3641a6a86149240cf724c17698"
-  dependencies:
-    "@pubsweet/ui-toolkit" "^1.1.3"
-    styled-components "^3.2.5"
-
 history@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"

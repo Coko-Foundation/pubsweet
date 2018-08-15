@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.1.3...@pubsweet/ui-toolkit@1.2.0) (2018-08-02)
+
+
+### Bug Fixes
+
+* **ui-toolkit:** fix broken th import ([c8f8ba4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c8f8ba4))
+
+
+### Features
+
+* **ui-toolkit:** add borderColor function to theme helper ([0ed3fc1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0ed3fc1))
+
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.1.2...@pubsweet/ui-toolkit@1.1.3) (2018-07-09)
 
