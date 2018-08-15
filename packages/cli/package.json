@@ -42,6 +42,7 @@
     "nsp": "^2.8.1"
   },
   "jest": {
+    "displayName": "cli",
     "testMatch": [
       "<rootDir>/test/*.test.js",
       "<rootDir>/test/cli/*.test.js"
