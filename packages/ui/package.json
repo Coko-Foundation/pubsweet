@@ -45,7 +45,7 @@
     "faker": "^4.1.0",
     "file-loader": "^1.1.5",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.1.4",
+    "jest": "^23.5.0",
     "jest-styled-components": "^5.0.1",
     "node-sass": "^4.5.3",
     "react-test-renderer": "^16.2.0",
