@@ -5,7 +5,7 @@ const fs = require('fs-extra')
 const { promisify } = require('util')
 const config = require('config')
 
-const { pubsub, asyncIterators } = require('../pubsub')
+const { getPubsub, asyncIterators } = require('../pubsub')
 
 const { ON_UPLOAD_PROGRESS } = asyncIterators
 const randomBytes = promisify(crypto.randomBytes)
@@ -33,8 +33,10 @@ const resolvers = {
   },
   Subscription: {
     uploadProgress: {
-      subscribe: (_, vars, context) =>
-        pubsub.asyncIterator(`${ON_UPLOAD_PROGRESS}.${context.user}`),
+      subscribe: async (_, vars, context) => {
+        const pubsub = await getPubsub()
+        return pubsub.asyncIterator(`${ON_UPLOAD_PROGRESS}.${context.user}`)
+      },
     },
   },
 }

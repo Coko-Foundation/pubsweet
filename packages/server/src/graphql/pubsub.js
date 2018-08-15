@@ -3,12 +3,17 @@
  */
 const { PostgresPubSub } = require('graphql-postgres-subscriptions')
 
+const db = require('../db')
+
 module.exports = {
   /**
    * Pubsub object used in graphql subscriptions
    * to push messages back to the client.
    */
-  pubsub: new PostgresPubSub(),
+  getPubsub: async () => {
+    const client = await db.connect()
+    return new PostgresPubSub({ client })
+  },
   /**
    * Iterators to listen to
    */
