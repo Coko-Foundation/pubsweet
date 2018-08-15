@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "eventsource": "^1.0.4",
-    "jest-cli": "^22.1.4",
+    "jest-cli": "^23.5.0",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.7.0",
     "supertest": "^2.0.0"
@@ -60,10 +60,6 @@
   "jest": {
     "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*_test.js$",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }

@@ -13,10 +13,9 @@ jest.mock('pubsweet-client/src/helpers/api', () => ({
   create: jest.fn(() => Promise.resolve({})),
 }))
 
-global.window.localStorage = {
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-}
+// See https://github.com/facebook/jest/issues/6798
+jest.spyOn(Storage.prototype, 'setItem')
+jest.spyOn(Storage.prototype, 'removeItem')
 
 const { loginUser, logoutUser } = require('./actions')
 
@@ -78,7 +77,6 @@ describe('Login actions', () => {
         .mockImplementationOnce(jest.fn(() => Promise.resolve(user)))
 
       await store.dispatch(loginUser())
-
       expect(global.window.localStorage.setItem).toHaveBeenCalledWith(
         'token',
         user.token,

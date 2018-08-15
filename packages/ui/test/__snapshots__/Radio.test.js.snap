@@ -22,14 +22,11 @@ exports[`Radio is rendered correctly 1`] = `
 <label
   checked={false}
   className="c0"
-  color={undefined}
 >
   <input
     checked={false}
     className="c1"
-    disabled={undefined}
     name="TestName"
-    onChange={undefined}
     required={true}
     type="radio"
     value="TestValue"
@@ -37,7 +34,6 @@ exports[`Radio is rendered correctly 1`] = `
   <span
     checked={false}
     className=""
-    color={undefined}
   >
     TestLabel
   </span>

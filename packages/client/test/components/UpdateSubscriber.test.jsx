@@ -14,9 +14,7 @@ function makeWrapper(props = {}) {
 
 describe('<UpdateSubscriber/>', () => {
   beforeAll(() => {
-    global.window.localStorage = {
-      getItem: jest.fn(() => 'tok'),
-    }
+    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => 'tok')
     global.window.EventSource = EventSourceMock
   })
 
@@ -59,11 +57,11 @@ describe('<UpdateSubscriber/>', () => {
   })
 
   it('calls handleUpdate on message event', () => {
-    const handleUpdate = jest.fn()
+    const handleUpdate = jest.fn(() => 'oy')
     makeWrapper({ handleUpdate })
 
     sources['/updates?access_token=tok'].emit('message', {
-      origin: 'null',
+      origin: 'http://localhost',
       data: '{"action":"collection:create", "data":{"stuff":42}}',
     })
     expect(handleUpdate).toHaveBeenCalledWith('CREATE_COLLECTION_SUCCESS', {
@@ -77,7 +75,7 @@ describe('<UpdateSubscriber/>', () => {
     wrapper.instance().componentWillUnmount()
 
     sources['/updates?access_token=tok'].emit('message', {
-      origin: 'null',
+      origin: 'http://localhost',
       data: '{}',
     })
     expect(handleUpdate).not.toHaveBeenCalled()

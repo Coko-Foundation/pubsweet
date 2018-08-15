@@ -53,7 +53,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eventsourcemock": "^1.0.1",
     "isomorphic-form-data": "^1.0.0",
-    "jest": "^22.1.4",
+    "jest": "^23.5.0",
     "nock": "^9.0.14",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
@@ -67,12 +67,9 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "jest": {
-    "testRegex": "/test/.+test.jsx?$",
     "collectCoverage": true,
+    "testRegex": "/test/.+test.jsx?$",
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
     "globals": {
       "window": {}
     }
