@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { th, override } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
@@ -29,8 +30,8 @@ const borderColor = ({ theme, validationStatus = 'default' }) =>
 const Area = styled.textarea`
   border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
   border-radius: ${th('borderRadius')};
-  font-family: inherit;
-  font-size: inherit;
+  font-family: ${th('fontWriting')};
+  font-size: ${th('fontSizeBase')};
   padding: calc(${th('gridUnit')} * 1.5) ${th('gridUnit')};
   line-height: ${th('lineHeightBase')};
   box-sizing: border-box;
@@ -63,6 +64,14 @@ class TextArea extends React.Component {
       </Root>
     )
   }
+}
+
+TextArea.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  readOnly: PropTypes.bool,
+  rows: PropTypes.number,
 }
 
 export default TextArea
