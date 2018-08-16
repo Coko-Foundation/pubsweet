@@ -87,7 +87,7 @@ test:
   script:
     - cd ${HOME}
     # specify host here else it confuses the linked postgres image
-    - PGHOST=postgres npm run test
+    - PGHOST=postgres yarn test
 
 # if tests pass we will push latest, labelled with current commit hash
 push:latest:

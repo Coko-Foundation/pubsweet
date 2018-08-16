@@ -43,16 +43,7 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "packages/cli/src/*.js",
-      "packages/cli/cli/*.js",
-      "client/src/**/*.{js,jsx}",
-      "components/**/*.{js,jsx}",
-      "db-manager/src/**/*.js",
-      "logger/src/**/*.js",
-      "server/src/**/*.js",
-      "sse/lib/**/*.js",
-      "ui/src/**/*.{js,jsx}",
+      "**/*.{js,jsx}",
       "!**/*.test.{js,jsx}",
       "!**/node_modules/**"
     ],
