@@ -1,8 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { override, th } from '@pubsweet/ui-toolkit'
 
-import { Icon } from '../atoms'
+import { Icon2 } from '../atoms'
+
+const AttachmentIcon = ({ uploaded, ...props }) => (
+  <Icon2
+    iconName="Paperclip"
+    overrideName="@pubsweet.ui.Attachment"
+    {...props}
+  />
+)
+
+const StyledAttachmentIcon = styled(AttachmentIcon)`
+  margin: 0 ${th('gridUnit')};
+  height: ${th('fontSizeBase')};
+  width: ${th('fontSizeBase')};
+  stroke: ${props => (props.uploaded ? th('colorPrimary') : th('colorText'))};
+  ${override('ui.Attachment')};
+`
 
 const Filename = styled.span`
   color: ${props => {
@@ -14,17 +30,6 @@ const Filename = styled.span`
   overflow-wrap: break-word;
   padding: 0;
   word-break: break-all;
-`
-
-const IconContainer = styled.span`
-  margin: 0 ${th('gridUnit')};
-
-  svg {
-    height: ${th('fontSizeBase')};
-    stroke: ${props =>
-      props.theme[props.uploaded ? 'colorPrimary' : 'colorText']};
-    width: ${th('fontSizeBase')};
-  }
 `
 
 const Link = styled.a`
@@ -39,9 +44,7 @@ const Link = styled.a`
 
 const Attachment = ({ file, error, uploaded }) => (
   <Link download={uploaded && file.name} href={uploaded && file.url}>
-    <IconContainer uploaded={uploaded}>
-      <Icon>paperclip</Icon>
-    </IconContainer>
+    <StyledAttachmentIcon uploaded={uploaded} />
     <Filename error={error} uploaded={uploaded}>
       {error || (uploaded ? file.name : 'Uploading...')}
     </Filename>
