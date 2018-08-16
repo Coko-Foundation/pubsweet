@@ -1,6 +1,7 @@
 export { default as Colorize } from './Colorize'
 export { default as UploadingFile } from './UploadingFile'
 export { default as Icon } from './Icon'
+export { default as Icon2 } from './Icon2'
 export { default as Attachment } from './Attachment'
 export { default as Avatar } from './Avatar'
 export { default as Badge } from './Badge'
