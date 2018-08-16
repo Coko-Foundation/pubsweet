@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@pubsweet/starter": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
-    "jest": "^22.1.4",
+    "jest": "^23.5.0",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.8.1"
   },
@@ -48,11 +48,6 @@
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/build/"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/*.js",
-      "cli/*.js"
     ],
     "modulePaths": [
       "<rootDir>/node_modules"

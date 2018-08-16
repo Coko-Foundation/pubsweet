@@ -3,7 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.3.1"></a>
+  <a name="9.5.0"></a>
+# [9.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.4.0...pubsweet-components@9.5.0) (2018-08-02)
+
+
+### Features
+
+* **aws-s3:** add option to save files with new names ([14e66e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14e66e3))
+
+
+
+
+  <a name="9.4.0"></a>
+# [9.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.1...pubsweet-components@9.4.0) (2018-07-27)
+
+
+### Bug Fixes
+
+* keep toolbar height consinstent ([7896e7b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7896e7b))
+* **dashboard:** delete associated fragments ([f95c292](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f95c292))
+
+
+### Features
+
+* add Attachments pubsweet comp for image upload ([a2dc8ca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2dc8ca))
+* remove Wax from manuscript page ([da1147b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/da1147b))
+* upload image working ([c77e4e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c77e4e0))
+* upload in progress ([29e48d9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29e48d9))
+
+
+
+
+<a name="9.3.1"></a>
 ## [9.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.0...pubsweet-components@9.3.1) (2018-07-23)
 
 
@@ -19,7 +50,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="9.3.0"></a>
+<a name="9.3.0"></a>
 # [9.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.2.0...pubsweet-components@9.3.0) (2018-07-19)
 
 

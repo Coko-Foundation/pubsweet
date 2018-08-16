@@ -31,7 +31,7 @@
   "scripts": {
     "clean": "lerna clean",
     "styleguide": "npm run --prefix packages/styleguide styleguide",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:json",
     "lint:js": "eslint 'packages/**/*.{js,jsx}'",
     "lint:style": "stylelint 'packages/**/*.{css,scss}'",
@@ -43,6 +43,7 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
+      "src/**/*.js",
       "packages/cli/src/*.js",
       "packages/cli/cli/*.js",
       "client/src/**/*.{js,jsx}",
@@ -55,9 +56,14 @@
       "!**/*.test.{js,jsx}",
       "!**/node_modules/**"
     ],
-    "projects": ["packages/*"]
+    "projects": [
+      "packages/*"
+    ]
   },
-  "workspaces": ["packages/*", "packages/components/*"],
+  "workspaces": [
+    "packages/*",
+    "packages/components/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"

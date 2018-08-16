@@ -115,6 +115,7 @@ class Editor extends React.Component {
       placeholderClassName,
       title,
       readonly,
+      fileUpload,
       ...remainingProps
     } = this.props
     const { state } = this.state

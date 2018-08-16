@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.5"></a>
+## [3.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.4...@pubsweet/styleguide@3.1.5) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+<a name="3.1.4"></a>
+## [3.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.3...@pubsweet/styleguide@3.1.4) (2018-07-27)
+
+
+### Bug Fixes
+
+* **styleguide:** add elife-theme to webpack's config ([be98cc1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/be98cc1))
+
+
+
+
 <a name="3.1.3"></a>
 ## [3.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.2...@pubsweet/styleguide@3.1.3) (2018-07-12)
 

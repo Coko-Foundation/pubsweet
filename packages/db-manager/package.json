@@ -23,10 +23,6 @@
     "testMatch": [
       "**/test/**/*.test.js"
     ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     "testEnvironment": "jest-environment-db",
     "verbose": true
@@ -34,7 +30,7 @@
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^22.1.4",
+    "jest": "^23.5.0",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.8.0"
   },

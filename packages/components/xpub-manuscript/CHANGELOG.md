@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.0...pubsweet-component-xpub-manuscript@0.4.1) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.4.0"></a>
+# [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.3.0...pubsweet-component-xpub-manuscript@0.4.0) (2018-07-27)
+
+
+### Features
+
+* add Attachments pubsweet comp for image upload ([a2dc8ca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2dc8ca))
+* remove Wax from manuscript page ([da1147b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/da1147b))
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.2.0...pubsweet-component-xpub-manuscript@0.3.0) (2018-07-19)
 

@@ -44,10 +44,8 @@ exports[`Yes or No is rendered corrctly 1`] = `
     <input
       checked={false}
       className="c2"
-      disabled={undefined}
       name="TestName"
       onChange={[Function]}
-      required={undefined}
       type="radio"
       value="yes"
     />
@@ -67,10 +65,8 @@ exports[`Yes or No is rendered corrctly 1`] = `
     <input
       checked={false}
       className="c2"
-      disabled={undefined}
       name="TestName"
       onChange={[Function]}
-      required={undefined}
       type="radio"
       value="no"
     />

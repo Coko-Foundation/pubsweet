@@ -24,7 +24,8 @@
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
-    "graphql": "^0.12.3",
+    "graphql": "^0.13.2",
+    "graphql-postgres-subscriptions": "^1.0.2",
     "graphql-tools": "^2.18.0",
     "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
@@ -43,12 +44,13 @@
     "prompt": "^1.0.0",
     "pubsweet-sse": "^1.0.0",
     "require-relative": "^0.8.7",
+    "subscriptions-transport-ws": "^0.9.12",
     "uuid": "^3.0.1",
     "winston": "^2.2.0"
   },
   "devDependencies": {
     "eventsource": "^1.0.4",
-    "jest-cli": "^22.1.4",
+    "jest-cli": "^23.5.0",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.7.0",
     "supertest": "^2.0.0"
@@ -60,10 +62,6 @@
   "jest": {
     "testEnvironment": "jest-environment-db",
     "testRegex": "/test/.*_test.js$",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }

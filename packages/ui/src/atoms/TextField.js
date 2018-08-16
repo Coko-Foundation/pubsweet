@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { th, override } from '@pubsweet/ui-toolkit'
+import { th, override, validationColor } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: flex;
@@ -18,16 +18,8 @@ const Label = styled.label`
   ${override('ui.TextField.Label')};
 `
 
-const borderColor = ({ theme, validationStatus = 'default' }) =>
-  ({
-    error: theme.colorError,
-    success: theme.colorSuccess,
-    default: theme.colorBorder,
-    warning: theme.colorWarning,
-  }[validationStatus])
-
 const Input = styled.input`
-  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${validationColor};
 
   border-radius: ${th('borderRadius')};
 

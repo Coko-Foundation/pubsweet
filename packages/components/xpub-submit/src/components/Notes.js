@@ -16,7 +16,9 @@ const stripHtml = htmlString => {
   return temp.textContent
 }
 
-const Input = extraProps => input => <NoteEditor {...input} {...extraProps} />
+const Input = extraProps => ({ validationStatus, ...input }) => (
+  <NoteEditor {...input} {...extraProps} />
+)
 
 const Notes = ({ readonly, journal }) => (
   <FormSection name="notes">

@@ -6,9 +6,7 @@ const api = require('../../src/helpers/api')
 
 describe('API helper', () => {
   beforeAll(() => {
-    global.window.localStorage = {
-      getItem: jest.fn(() => 'tok123'),
-    }
+    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => 'tok123')
   })
 
   it('makes a GET request', async () => {

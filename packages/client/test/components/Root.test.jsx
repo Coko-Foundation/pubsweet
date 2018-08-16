@@ -21,6 +21,7 @@ describe('<Root/>', () => {
 
     mount(
       <Root
+        connectToWebSocket={false}
         history={history}
         routes={<Box />}
         store={store}
