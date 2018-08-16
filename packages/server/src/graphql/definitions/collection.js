@@ -33,13 +33,13 @@ const typeDefs = `
     collection(id: ID): Collection
     collections: [Collection]
   }
-  
+
   extend type Mutation {
-    createCollection(input: String): Collection
-    deleteCollection(id: ID): Collection 
-    updateCollection(id: ID, input: String): Collection
+    createCollection(input: CollectionInput): Collection
+    deleteCollection(id: ID): Collection
+    updateCollection(id: ID, input: CollectionInput): Collection
   }
-  
+
   type Collection {
     id: ID!
     rev: String
@@ -47,7 +47,7 @@ const typeDefs = `
     owners: [User!]!
     fragments: [Fragment!]!
   }
-  
+
   input CollectionInput {
     owners: [ID!]
     fragments: [ID!]

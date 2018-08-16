@@ -28,9 +28,8 @@ async function canKnowAbout(userId, entity) {
 
 // create a function which creates a new entity and performs authorization checks
 function createCreator(entityName, EntityModel) {
-  return async (inputString, ctx) => {
+  return async (input, ctx) => {
     await can(ctx.user, 'create', entityName)
-    const input = JSON.parse(inputString)
     const entity = new EntityModel(input)
     entity.setOwners([ctx.user])
     await can(ctx.user, 'create', entity)
@@ -54,12 +53,10 @@ function deleteCreator(entityName, EntityModel) {
 
 // create a function which updates a new entity and performs authorization checks
 function updateCreator(entityName, EntityModel) {
-  return async (id, inputString, ctx) => {
+  return async (id, update, ctx) => {
     await can(ctx.user, 'update', entityName)
     const entity = await EntityModel.find(id)
     const outputFilter = await canKnowAbout(ctx.user, entity)
-
-    const update = JSON.parse(inputString)
     const currentAndUpdate = { current: entity, update }
     const updateFilter = await can(ctx.user, 'update', currentAndUpdate)
 

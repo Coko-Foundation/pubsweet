@@ -36,13 +36,13 @@ const typeDefs = `
     user(id: ID): User
     users: [User]
   }
-  
+
   extend type Mutation {
-    createUser(input: String): User
-    deleteUser(id: ID): User 
-    updateUser(id: ID, input: String): User 
+    createUser(input: UserInput): User
+    deleteUser(id: ID): User
+    updateUser(id: ID, input: UserInput): User
   }
-  
+
   type User {
     id: ID!
     rev: String
@@ -54,7 +54,7 @@ const typeDefs = `
     fragments: [Fragment!]!
     collections: [Collection!]!
   }
-  
+
   input UserInput {
     username: String!
     email: String!
