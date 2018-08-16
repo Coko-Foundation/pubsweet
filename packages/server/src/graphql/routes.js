@@ -13,6 +13,9 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
 })
 const router = new express.Router()
 
+const hostname = config.has('pubsweet-server.hostname')
+  ? config.get('pubsweet-server.hostname')
+  : 'localhost'
 router.use(
   '/graphql',
   authBearerAndPublic,
@@ -29,7 +32,10 @@ if (
   router.get(
     '/graphiql',
     authBearerAndPublic,
-    graphiqlExpress({ endpointURL: '/graphql' }),
+    graphiqlExpress({
+      endpointURL: '/graphql',
+      subscriptionsEndpoint: `ws://${hostname}:3000/subscriptions`,
+    }),
   )
 }
 
