@@ -3,8 +3,28 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { override, th } from '@pubsweet/ui-toolkit'
 
-import { Icon } from '../atoms'
+import { Icon2 } from '../atoms'
 import Action from './Action'
+
+const UserIcon = props => (
+  <Icon2 iconName="User" overrideName="@pubsweet.ui.AppBar.User" {...props} />
+)
+
+const StyledUserIcon = styled(UserIcon)`
+  height: calc(2 * ${th('gridUnit')})
+  width: calc(2 * ${th('gridUnit')})
+  ${override('ui.AppBar.UserIcon')}
+`
+
+const PowerIcon = props => (
+  <Icon2 iconName="Power" overrideName="@pubsweet.ui.AppBar.Power" {...props} />
+)
+
+const StyledPowerIcon = styled(PowerIcon)`
+  height: calc(2 * ${th('gridUnit')})
+  width: calc(2 * ${th('gridUnit')})
+  ${override('ui.AppBar.PowerIcon')}
+`
 
 // #region styled-components
 const Root = styled.nav`
@@ -78,7 +98,7 @@ const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
   <Section>
     {user && (
       <Item>
-        <Icon size={2}>user</Icon>
+        <StyledUserIcon />
         {user.username}
         {user.admin ? ' (admin)' : ''}
       </Item>
@@ -86,7 +106,7 @@ const DefaultRightComponent = ({ user, onLogoutClick, loginLink }) => (
 
     {user && (
       <Item>
-        <Icon size={2}>power</Icon>
+        <StyledPowerIcon />
         <Action onClick={onLogoutClick}>Logout</Action>
       </Item>
     )}
