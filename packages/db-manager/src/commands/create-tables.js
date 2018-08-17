@@ -12,10 +12,11 @@ const createTables = async clobber => {
   if (rows.length) {
     if (clobber) {
       logger.info('Overwriting existing database due to clobber option')
-      await Promise.all(
-        // TODO this is dangerous, change it
-        rows.map(row => db.query(`DROP TABLE "${row.tablename}" CASCADE`)),
-      )
+      // TODO this is dangerous, change it
+      const dropQuery = rows
+        .map(row => `DROP TABLE "${row.tablename}" CASCADE`)
+        .join(';')
+      await db.query(dropQuery)
     } else {
       logger.error(
         'If you want to overwrite the database, set clobber option to true',
