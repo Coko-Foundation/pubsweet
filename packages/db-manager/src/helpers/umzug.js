@@ -39,7 +39,7 @@ const getUmzug = async migrationsPaths => {
     migrations: {
       path: tempDir,
       params: [db],
-      pattern: /\d+-\w+\.(js|sql)/,
+      pattern: /\d+-[\w-]+\.(js|sql)/,
       customResolver: filePath => {
         if (path.extname(filePath) === '.sql') {
           return sqlResolver(filePath)
