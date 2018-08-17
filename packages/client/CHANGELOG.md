@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.0.5...pubsweet-client@4.1.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **authorize:** fix for correct props propagation ([5de8ea8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5de8ea8))
+* **graphql:** disable authentication for websocket link ([06305c7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/06305c7))
+* **server:** use the existing http server for subscriptions ([c5d1362](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d1362))
+* **test:** fix Root test in client ([c6ed350](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c6ed350))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+
+
+### Features
+
+* **graphql:** add subscription support to graphql ([d71b0c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d71b0c6))
+* **graphql:** enable authentication over the websocket ([98c9e6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98c9e6d))
+* **graphql:** get hostname from variables ([64b7c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/64b7c4f))
+* **graphql:** make connection to websocket optional ([695f1bb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/695f1bb))
+
+
+
+
 <a name="4.0.5"></a>
 ## [4.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.0.4...pubsweet-client@4.0.5) (2018-08-02)
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.8"></a>
+## [3.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.7...pubsweet-component-xpub-dashboard@3.0.8) (2018-08-17)
+
+
+### Bug Fixes
+
+* **actions:** pubsweet ui responsive ([b1cab9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1cab9a))
+* **actions:** validationStatus fix ([762432f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/762432f))
+* **css:** fix responsiveness of actions ([9bff385](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bff385))
+* **revert:** valildateStatus ([5d6f53e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d6f53e))
+* **style:** remove  enter line ([e2de927](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e2de927))
+* **style:** responsive line tool ([c3219ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c3219ec))
+* **warnings:** don't pass every prop to Dom Element ([d8f5e93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d8f5e93))
+* **warnings:** key actions ([2f176f0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f176f0))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+* **warnings:** remove key from unneeded component ([2dda7a5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2dda7a5))
+
+
+
+
 <a name="3.0.7"></a>
 ## [3.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.6...pubsweet-component-xpub-dashboard@3.0.7) (2018-08-02)
 

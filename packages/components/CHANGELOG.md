@@ -3,7 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.5.0"></a>
+      <a name="9.6.0"></a>
+# [9.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.5.0...pubsweet-components@9.6.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **actions:** pubsweet ui responsive ([b1cab9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1cab9a))
+* **actions:** validationStatus fix ([762432f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/762432f))
+* **css:** fix responsiveness of actions ([9bff385](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bff385))
+* **revert:** valildateStatus ([5d6f53e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d6f53e))
+* **style:** remove  enter line ([e2de927](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e2de927))
+* **style:** responsive line tool ([c3219ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c3219ec))
+* **warnings:** don't pass every prop to Dom Element ([a27d938](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a27d938))
+* **warnings:** don't pass every prop to Dom Element ([d8f5e93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d8f5e93))
+* **warnings:** key actions ([2f176f0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f176f0))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+* **warnings:** remove key from unneeded component ([2dda7a5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2dda7a5))
+
+
+### Features
+
+* use onBlur ([9990e1e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9990e1e))
+* **xpub-edit:** add readonly prop to texteditor ([054bcef](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/054bcef))
+
+
+
+
+      <a name="9.5.0"></a>
 # [9.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.4.0...pubsweet-components@9.5.0) (2018-08-02)
 
 
@@ -14,7 +41,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="9.4.0"></a>
+<a name="9.4.0"></a>
 # [9.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.1...pubsweet-components@9.4.0) (2018-07-27)
 
 

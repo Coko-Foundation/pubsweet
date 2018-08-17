@@ -3,7 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.3.0"></a>
+      <a name="8.4.0"></a>
+# [8.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.3.0...@pubsweet/ui@8.4.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **actions:** active on css prop ([5e6c737](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5e6c737))
+* **revert:** valildateStatus ([5d6f53e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d6f53e))
+* **styleguide:** pass correct property ([287aa00](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/287aa00))
+* **ui:** update checkboxgroup snapshot ([ff9644a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ff9644a))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+* **warnings:** naming problems ([917cee8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/917cee8))
+
+
+### Features
+
+* **accordion-component:** ui accordion component ([10ad7c3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/10ad7c3))
+* **list-component:** a component that renders items in a list ([78490e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/78490e0))
+* **list-component:** remove children as list items; pass data test id ([de3d919](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/de3d919))
+* **list-component:** remove classname from styled component ([7c2a417](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c2a417))
+* **ui:** give readonly option to radio and checkbox ([fecfe69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fecfe69))
+
+
+
+
+      <a name="8.3.0"></a>
 # [8.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.2.0...@pubsweet/ui@8.3.0) (2018-08-02)
 
 
@@ -14,7 +39,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="8.2.0"></a>
+<a name="8.2.0"></a>
 # [8.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.1.0...@pubsweet/ui@8.2.0) (2018-07-27)
 
 
