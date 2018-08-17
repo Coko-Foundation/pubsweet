@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/db-manager",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "scripts": {
@@ -35,12 +35,12 @@
     "nsp": "^2.8.0"
   },
   "dependencies": {
-    "@pubsweet/logger": "^0.2.4",
+    "@pubsweet/logger": "^0.2.5",
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
     "joi": "^13.1.0",
     "pg": "^7.4.1",
-    "pubsweet-server": "^7.2.0",
+    "pubsweet-server": "^8.0.0",
     "tmp": "^0.0.33",
     "umzug": "^2.1.0"
   }

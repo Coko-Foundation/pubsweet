@@ -3,7 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="7.2.0"></a>
+  <a name="8.0.0"></a>
+# [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.2.0...pubsweet-server@8.0.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **graphql:** fix bug where frontend gets bad data on subscription ([3301269](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3301269))
+* **graphql:** fix error that would crash the server on bad auth token ([058c6cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/058c6cd))
+* **graphql:** return one pubsub only in getPubsub ([d016272](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d016272))
+* **graphql:** use same db client in pubsub connection ([f002f4a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f002f4a))
+* **graphql:** use same version of graphql across the project ([445f204](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/445f204))
+* **server:** use appropriate inputs for GraphQL mutations ([dd6d3f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dd6d3f4)), closes [#418](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/418)
+* **server:** use the existing http server for subscriptions ([c5d1362](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d1362))
+
+
+### Features
+
+* **graphql:** add subscription support to graphql ([d71b0c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d71b0c6))
+* **graphql:** add upload progress subscription definition ([4248ffd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4248ffd))
+* **graphql:** enable authentication over the websocket ([98c9e6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98c9e6d))
+* **graphql:** get hostname from variables ([64b7c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/64b7c4f))
+* **graphql:** replace redis pubsub with postgres pubsub ([7c3ab7c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c3ab7c))
+* **graphql:** use only one pubsub object on the server ([a875e77](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a875e77))
+
+
+### BREAKING CHANGES
+
+* **server:** Inputs are no longer strings, they are now objects.
+
+
+
+
+  <a name="7.2.0"></a>
 # [7.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.2...pubsweet-server@7.2.0) (2018-07-09)
 
 
@@ -14,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="7.1.2"></a>
+<a name="7.1.2"></a>
 ## [7.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.1...pubsweet-server@7.1.2) (2018-06-19)
 
 

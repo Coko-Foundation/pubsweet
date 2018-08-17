@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.2.8"></a>
+      <a name="2.3.0"></a>
+# [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.8...pubsweet@2.3.0) (2018-08-17)
+
+
+### Features
+
+* add CLI migrate command ([3ea9dd2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3ea9dd2))
+
+
+
+
+      <a name="2.2.8"></a>
 ## [2.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.7...pubsweet@2.2.8) (2018-07-09)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-  <a name="2.2.7"></a>
+<a name="2.2.7"></a>
 ## [2.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.6...pubsweet@2.2.7) (2018-06-28)
 
 
