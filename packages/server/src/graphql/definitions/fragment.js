@@ -33,13 +33,13 @@ const typeDefs = `
     fragment(id: ID): Fragment
     fragments: [Fragment]
   }
-  
+
   extend type Mutation {
-    createFragment(input: String): Fragment
-    deleteFragment(id: ID): Fragment 
-    updateFragment(id: ID, input: String): Fragment
+    createFragment(input: FragmentInput): Fragment
+    deleteFragment(id: ID): Fragment
+    updateFragment(id: ID, input: FragmentInput): Fragment
   }
-  
+
   type Fragment {
     id: ID!
     rev: String
@@ -48,7 +48,7 @@ const typeDefs = `
     fragments: [Fragment!]!
     owners: [User!]!
   }
-  
+
   input FragmentInput {
     fragmentType: String
     fragments: [ID!]

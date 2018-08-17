@@ -30,13 +30,13 @@ const typeDefs = `
     team(id: ID): Team
     teams: [Team]
   }
-  
+
   extend type Mutation {
-    createTeam(input: String): Team
-    deleteTeam(id: ID): Team 
+    createTeam(input: TeamInput): Team
+    deleteTeam(id: ID): Team
     updateTeam(id: ID, input: String): Team
   }
-  
+
   type Team {
     id: ID!
     rev: String
@@ -45,19 +45,26 @@ const typeDefs = `
     name: String!
     object: TeamObject
     members: [User!]!
+    owners: [User]
   }
-  
+
   type TeamObject {
-    type: String
-    id: ID!
+    objectId: ID!
+    objectType: String!
   }
-    
+
   input TeamInput {
     teamType: String
     name: String
-    object: ID
+    object: TeamObjectInput
     members: [ID!]
     rev: String
+
+  }
+
+  input TeamObjectInput {
+    objectId: ID!
+    objectType: String!
   }
 `
 

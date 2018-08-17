@@ -60,6 +60,7 @@ const validations = {
     object: Joi.object(),
     teamType: Joi.string().required(),
     members: Joi.array().items(Joi.string().guid()),
+    owners: Joi.array().items(Joi.string().guid()),
   },
 }
 

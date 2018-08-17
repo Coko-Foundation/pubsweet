@@ -29,9 +29,9 @@ describe('GraphQL core queries', () => {
   it('can resolve user by ID', async () => {
     const { body } = await api.graphql.query(
       `query($id: ID) {
-          user(id: $id) { 
+          user(id: $id) {
             username
-            admin 
+            admin
           }
         }`,
       { id: user.id },
