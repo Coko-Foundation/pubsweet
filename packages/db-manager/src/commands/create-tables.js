@@ -1,7 +1,6 @@
 const logger = require('@pubsweet/logger')
 const db = require('pubsweet-server/src/db')
-const getUmzug = require('../helpers/umzug')
-const getMigrationPaths = require('../helpers/migrationPaths')
+const migrate = require('./migrate')
 
 const createTables = async clobber => {
   const { rows } = await db.query(`
@@ -26,8 +25,7 @@ const createTables = async clobber => {
   }
 
   // run migrations
-  const umzug = await getUmzug(getMigrationPaths())
-  await umzug.up()
+  await migrate()
 
   const { rows: countRows } = await db.query(`
     SELECT COUNT(*)
