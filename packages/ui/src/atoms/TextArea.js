@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { th, override } from '@pubsweet/ui-toolkit'
+import { th, override, validationColor } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
   display: flex;
@@ -18,17 +18,8 @@ const Label = styled.label`
   ${override('ui.Label')};
   ${override('ui.TextArea.Label')};
 `
-
-const borderColor = ({ theme, validationStatus = 'default' }) =>
-  ({
-    error: theme.colorError,
-    success: theme.colorSuccess,
-    default: theme.colorBorder,
-    warning: theme.colorWarning,
-  }[validationStatus])
-
 const Area = styled.textarea`
-  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
+  border: ${th('borderWidth')} ${th('borderStyle')} ${validationColor};
   border-radius: ${th('borderRadius')};
   font-family: ${th('fontWriting')};
   font-size: ${th('fontSizeBase')};
