@@ -51,7 +51,8 @@
       "!**/coverage/**"
     ],
     "coverageDirectory": "<rootDir>/coverage",
-    "projects": [{
+    "projects": [
+      {
         "rootDir": "<rootDir>/packages/server",
         "displayName": "server",
         "testEnvironment": "jest-environment-db",
@@ -140,7 +141,6 @@
         }
       }
     ]
-
   },
   "workspaces": [
     "packages/*",
@@ -154,5 +154,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release"
+  },
+  "resolutions": {
+    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release"
   }
 }
