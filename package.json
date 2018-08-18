@@ -75,8 +75,72 @@
         ],
         "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
         "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/packages/components",
+        "displayName": "components",
+        "moduleNameMapper": {
+          "\\.s?css$": "identity-obj-proxy"
+        },
+        "transformIgnorePatterns": [
+          "/node_modules/(?!@?pubsweet)"
+        ],
+        "testPathIgnorePatterns": [
+          "/node_modules",
+          "config/test"
+        ],
+        "globals": {
+          "PUBSWEET_COMPONENTS": [],
+          "fetch": true
+        },
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+      },
+      {
+        "rootDir": "<rootDir>/packages/cli",
+        "displayName": "cli",
+        "testMatch": [
+          "<rootDir>/test/*.test.js",
+          "<rootDir>/test/cli/*.test.js"
+        ],
+        "testPathIgnorePatterns": [
+          "<rootDir>/build/"
+        ],
+        "modulePaths": [
+          "<rootDir>/node_modules"
+        ],
+        "testEnvironment": "jest-environment-db",
+        "unmockedModulePathPatterns": [
+          "/src/models"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js",
+        "verbose": true
+      },
+      {
+        "rootDir": "<rootDir>/packages/logger",
+        "displayName": "logger",
+        "testMatch": [
+          "**/test/**/*test.js"
+        ],
+        "modulePaths": [
+          "<rootDir>/node_modules"
+        ],
+        "testEnvironment": "node",
+        "verbose": true,
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+      },
+      {
+        "rootDir": "<rootDir>/packages/ui",
+        "displayName": "ui",
+        "moduleNameMapper": {
+          "\\.s?css$": "identity-obj-proxy"
+        },
+        "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
+        "transform": {
+          "\\.js$": "<rootDir>/test/config/transform.js"
+        }
       }
     ]
+
   },
   "workspaces": [
     "packages/*",

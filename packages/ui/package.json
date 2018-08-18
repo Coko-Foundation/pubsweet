@@ -54,15 +54,6 @@
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.s?css$": "identity-obj-proxy"
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
-    "transform": {
-      "\\.js$": "<rootDir>/test/config/transform.js"
-    }
-  },
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean && npm run lint",
