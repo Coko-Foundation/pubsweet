@@ -56,11 +56,5 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
-  },
-  "jest": {
-    "displayName": "server",
-    "testEnvironment": "jest-environment-db",
-    "testRegex": "/test/.*_test.js$",
-    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
   }
 }

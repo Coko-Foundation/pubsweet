@@ -19,14 +19,6 @@
     "node": ">=7.9.0",
     "npm": ">=3.0.0"
   },
-  "jest": {
-    "testMatch": [
-      "**/test/**/*.test.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "testEnvironment": "jest-environment-db",
-    "verbose": true
-  },
   "author": "Samuel Galson",
   "license": "MIT",
   "devDependencies": {
