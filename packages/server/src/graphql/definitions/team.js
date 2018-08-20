@@ -34,7 +34,7 @@ const typeDefs = `
   extend type Mutation {
     createTeam(input: TeamInput): Team
     deleteTeam(id: ID): Team
-    updateTeam(id: ID, input: String): Team
+    updateTeam(id: ID, input: TeamInput): Team
   }
 
   type Team {
