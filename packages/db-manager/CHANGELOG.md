@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="1.3.0"></a>
+      <a name="1.3.1"></a>
+## [1.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.3.0...@pubsweet/db-manager@1.3.1) (2018-08-20)
+
+
+### Bug Fixes
+
+* drop tables in one query ([11179ea](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/11179ea))
+
+
+
+
+      <a name="1.3.0"></a>
 # [1.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.2.1...@pubsweet/db-manager@1.3.0) (2018-08-17)
 
 
@@ -19,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="1.2.1"></a>
+<a name="1.2.1"></a>
 ## [1.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@1.2.0...@pubsweet/db-manager@1.2.1) (2018-07-09)
 
 

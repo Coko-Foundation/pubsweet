@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "MIT",
   "files": [
     "src",
@@ -31,7 +31,7 @@
     "file-loader": "^1.1.5",
     "node-sass": "^4.5.3",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^4.1.0",
+    "pubsweet-client": "^4.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
