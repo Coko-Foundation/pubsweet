@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="8.4.0"></a>
+  <a name="8.5.0"></a>
+# [8.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.4.0...@pubsweet/ui@8.5.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* **ui:** rename jsx file to js ([c5d218a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d218a))
+
+
+### Features
+
+* **ui:** add TextArea component ([8bf12cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8bf12cb))
+
+
+
+
+  <a name="8.4.0"></a>
 # [8.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.3.0...@pubsweet/ui@8.4.0) (2018-08-17)
 
 
@@ -28,7 +44,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="8.3.0"></a>
+<a name="8.3.0"></a>
 # [8.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.2.0...@pubsweet/ui@8.3.0) (2018-08-02)
 
 

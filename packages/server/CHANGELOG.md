@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.0.0"></a>
+      <a name="8.0.1"></a>
+## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.0.0...pubsweet-server@8.0.1) (2018-08-20)
+
+
+### Bug Fixes
+
+* **server:** use TeamInput for updateTeam mutation too ([b84b369](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b84b369))
+
+
+
+
+      <a name="8.0.0"></a>
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.2.0...pubsweet-server@8.0.0) (2018-08-17)
 
 
@@ -35,7 +46,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="7.2.0"></a>
+<a name="7.2.0"></a>
 # [7.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.2...pubsweet-server@7.2.0) (2018-07-09)
 
 
