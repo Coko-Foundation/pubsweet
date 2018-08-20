@@ -40,23 +40,5 @@
     "jest": "^23.5.0",
     "jest-environment-db": "^1.0.1",
     "nsp": "^2.8.1"
-  },
-  "jest": {
-    "testMatch": [
-      "<rootDir>/test/*.test.js",
-      "<rootDir>/test/cli/*.test.js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/"
-    ],
-    "modulePaths": [
-      "<rootDir>/node_modules"
-    ],
-    "testEnvironment": "jest-environment-db",
-    "unmockedModulePathPatterns": [
-      "/src/models"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js",
-    "verbose": true
   }
 }

@@ -3,9 +3,6 @@
   "version": "9.6.0",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "test": "jest --coverage"
-  },
   "devDependencies": {
     "@pubsweet/logger": "^0.2.5",
     "@pubsweet/styleguide": "^3.1.6",
@@ -45,22 +42,5 @@
     "supertest": "^3.0.0",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.6"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.s?css$": "identity-obj-proxy"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@?pubsweet)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules",
-      "config/test"
-    ],
-    "globals": {
-      "PUBSWEET_COMPONENTS": [],
-      "fetch": true
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
   }
 }

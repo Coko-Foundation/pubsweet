@@ -67,13 +67,5 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "testRegex": "/test/.+test.jsx?$",
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
-    "globals": {
-      "window": {}
-    }
   }
 }

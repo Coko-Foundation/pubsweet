@@ -26,17 +26,6 @@
     "nsp": "^2.7.0",
     "winston": "^2.3.1"
   },
-  "jest": {
-    "testMatch": [
-      "**/test/**/*test.js"
-    ],
-    "modulePaths": [
-      "<rootDir>/node_modules"
-    ],
-    "testEnvironment": "node",
-    "verbose": true,
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
-  },
   "dependencies": {
     "config": "^1.26.2",
     "joi": "^13.1.0",
