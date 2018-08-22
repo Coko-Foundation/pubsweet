@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.5.1"></a>
+## [2.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.0...xpub-edit@2.5.1) (2018-08-22)
+
+
+### Bug Fixes
+
+* **xpub-edit:** hide menu when readonly ([3a5b846](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3a5b846))
+
+
+
+
 <a name="2.5.0"></a>
 # [2.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.4.1...xpub-edit@2.5.0) (2018-08-17)
 
