@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.6.1"></a>
+      <a name="9.6.2"></a>
+## [9.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.1...pubsweet-components@9.6.2) (2018-08-22)
+
+
+### Bug Fixes
+
+* **xpub-edit:** hide menu when readonly ([3a5b846](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3a5b846))
+
+
+
+
+      <a name="9.6.1"></a>
 ## [9.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.0...pubsweet-components@9.6.1) (2018-08-20)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-components
 
-  <a name="9.6.0"></a>
+<a name="9.6.0"></a>
 # [9.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.5.0...pubsweet-components@9.6.0) (2018-08-17)
 
 

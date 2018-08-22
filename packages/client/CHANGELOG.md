@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.1.2"></a>
+## [4.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.1...pubsweet-client@4.1.2) (2018-08-22)
+
+
+### Bug Fixes
+
+* fixed websocket protocol over https ([2235990](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2235990))
+
+
+
+
 <a name="4.1.1"></a>
 ## [4.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.0...pubsweet-client@4.1.1) (2018-08-20)
 

@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-review",
-  "version": "3.1.7",
+  "version": "3.1.8",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "uuid": "^3.1.0",
     "wax-editor-react": "^0.2.3",
     "xpub-connect": "^1.1.4",
-    "xpub-edit": "^2.5.0",
+    "xpub-edit": "^2.5.1",
     "xpub-journal": "^0.0.6",
     "xpub-selectors": "^0.1.0",
     "xpub-upload": "^0.0.7",
