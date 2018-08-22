@@ -33,8 +33,9 @@ const makeApolloClient = (makeConfig, connectToWebSocket) => {
   })
   let link = authLink.concat(uploadLink, httpLink)
   if (connectToWebSocket) {
+    const wsProtocol = window.location.protocol === 'https' ? 'wss' : 'ws'
     const wsLink = new WebSocketLink({
-      uri: `ws://${window.location.host}/subscriptions`,
+      uri: `${wsProtocol}://${window.location.host}/subscriptions`,
       options: {
         reconnect: true,
         connectionParams: {
