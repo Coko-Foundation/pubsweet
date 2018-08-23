@@ -9,3 +9,13 @@ Component that renders a date string.
   )}
 </DateParser>
 ```
+
+Component that renders a date string with humanize duration threshold.
+
+```js
+const date = new Date()
+
+;<DateParser timestamp={date} durationThreshold={0}>
+  {(timestamp, daysAgo) => <span>{timestamp}</span>}
+</DateParser>
+```

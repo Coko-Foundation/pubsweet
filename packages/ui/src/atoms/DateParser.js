@@ -13,11 +13,15 @@ const D = ({ children, timestamp, daysAgo }) => children(timestamp, daysAgo)
 const DateParser = compose(
   setDisplayName('DateParser'),
   withHandlers({
-    renderTimestamp: ({ timestamp, dateFormat = 'DD.MM.YYYY' }) => () => {
+    renderTimestamp: ({
+      timestamp,
+      dateFormat = 'DD.MM.YYYY',
+      durationThreshold = 1,
+    }) => () => {
       if (!timestamp) return ''
       const duration = getDuration(timestamp)
 
-      if (duration.asDays() < 1) {
+      if (duration.asDays() < durationThreshold) {
         return `${duration.humanize()}`
       }
       return moment(timestamp).format(dateFormat)
