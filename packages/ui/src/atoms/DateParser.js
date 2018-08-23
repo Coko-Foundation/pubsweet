@@ -46,4 +46,6 @@ DateParser.propTypes = {
     .isRequired,
   /** Format of the rendered date. */
   dateFormat: propTypes.string,
+  /** Humanize duration threshold */
+  durationThreshold: propTypes.number,
 }
