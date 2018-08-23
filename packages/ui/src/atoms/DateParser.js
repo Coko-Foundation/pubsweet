@@ -42,7 +42,7 @@ export default DateParser
 
 DateParser.propTypes = {
   /** The date string. Can be any date parsable by momentjs. */
-  timestamp: propTypes.oneOf([propTypes.string, propTypes.instanceOf(Date)])
+  timestamp: propTypes.oneOfType([propTypes.string, propTypes.number, Date])
     .isRequired,
   /** Format of the rendered date. */
   dateFormat: propTypes.string,
