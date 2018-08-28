@@ -8,7 +8,7 @@ const getDuration = timestamp => {
   return moment.duration(today.diff(stamp))
 }
 
-const D = ({ children, timestamp, daysAgo }) => children(timestamp, daysAgo)
+const D = ({ children, timestamp, timeAgo }) => children(timestamp, timeAgo)
 
 const DateParser = compose(
   setDisplayName('DateParser'),
@@ -16,24 +16,24 @@ const DateParser = compose(
     renderTimestamp: ({
       timestamp,
       dateFormat = 'DD.MM.YYYY',
-      durationThreshold = 1,
+      humanizeThreshold = 0,
     }) => () => {
       if (!timestamp) return ''
       const duration = getDuration(timestamp)
 
-      if (duration.asDays() < durationThreshold) {
-        return `${duration.humanize()}`
+      if (duration.asDays() < humanizeThreshold) {
+        return `${duration.humanize()} ago`
       }
       return moment(timestamp).format(dateFormat)
     },
-    renderDaysAgo: ({ timestamp }) => () => {
+    renderTimeAgo: ({ timestamp }) => () => {
       if (!timestamp) return ''
       const duration = getDuration(timestamp)
       return duration.humanize()
     },
   }),
-  withProps(({ renderTimestamp, renderDaysAgo }) => ({
-    daysAgo: renderDaysAgo(),
+  withProps(({ renderTimestamp, renderTimeAgo }) => ({
+    timeAgo: renderTimeAgo(),
     timestamp: renderTimestamp(),
   })),
 )(D)
@@ -47,5 +47,5 @@ DateParser.propTypes = {
   /** Format of the rendered date. */
   dateFormat: propTypes.string,
   /** Humanize duration threshold */
-  durationThreshold: propTypes.number,
+  humanizeThreshold: propTypes.number,
 }
