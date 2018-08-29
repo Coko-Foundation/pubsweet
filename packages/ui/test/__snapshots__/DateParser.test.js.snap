@@ -22,7 +22,7 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": [Function],
-      "renderDaysAgo": [Function],
+      "renderTimeAgo": [Function],
       "renderTimestamp": [Function],
       "timestamp": "2018-05-18T10:38:12.063Z",
     },
@@ -37,7 +37,7 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": [Function],
-        "renderDaysAgo": [Function],
+        "renderTimeAgo": [Function],
         "renderTimestamp": [Function],
         "timestamp": "2018-05-18T10:38:12.063Z",
       },
