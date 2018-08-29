@@ -139,6 +139,13 @@
         "transform": {
           "\\.js$": "<rootDir>/test/config/transform.js"
         }
+      },
+      {
+        "rootDir": "<rootDir>/packages/sse",
+        "displayName": "sse",
+        "testRegex": "/test/.*_test.js$",
+        "testEnvironment": "node"
+
       }
     ]
   },
