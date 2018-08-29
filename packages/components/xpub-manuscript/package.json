@@ -10,9 +10,9 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
-    "wax-editor-react": "^0.2.5",
     "xpub-connect": "^1.1.4",
-    "xpub-selectors": "^0.1.0"
+    "xpub-selectors": "^0.1.0",
+    "wax-prose-mirror": "^0.0.8"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
