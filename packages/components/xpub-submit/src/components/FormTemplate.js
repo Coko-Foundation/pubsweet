@@ -37,7 +37,9 @@ const ModalWrapper = styled.div`
 `
 
 const { ValidatedField, Button, Attachment } = elements
-elements.AbstractEditor = AbstractEditor
+elements.AbstractEditor = ({ validationStatus, ...rest }) => (
+  <AbstractEditor {...rest} />
+)
 elements.AuthorsInput = AuthorsInput
 
 const rejectProps = (obj, keys) =>

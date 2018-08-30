@@ -56,8 +56,6 @@ const onChange = (values, dispatch, { project, version }) => {
   dispatch(
     actions.updateFragment(project, {
       id: version.id,
-      rev: version.rev,
-      // submitted: false,
       ...values,
     }),
   )
@@ -101,7 +99,6 @@ export default compose(
     form: 'submit',
     onChange: throttle(onChange, 3000, { trailing: true }),
     onSubmit,
-    destroyOnUnmount: false,
   }),
   withState('confirming', 'setConfirming', false),
   withHandlers({
