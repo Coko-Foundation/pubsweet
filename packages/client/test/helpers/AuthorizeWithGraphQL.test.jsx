@@ -177,7 +177,7 @@ describe('Authsome GraphQL context', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper('user1', { authsome })
 
-    await wait(11)
+    await wait(100)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
@@ -202,7 +202,7 @@ describe('A query for a missing object', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper('user1', { authsome })
 
-    await wait(2)
+    await wait(100)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(0)

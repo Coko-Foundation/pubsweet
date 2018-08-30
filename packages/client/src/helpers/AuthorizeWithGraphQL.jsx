@@ -1,5 +1,7 @@
 import React from 'react'
 import { ApolloConsumer } from 'react-apollo'
+import Authsome from 'authsome'
+import config from 'config'
 
 import {
   GET_USER,
@@ -79,10 +81,19 @@ export class AuthorizeWithGraphQL extends Authorize {
   }
 }
 
-const AuthorizeWithGraphQLWrapper = props => (
-  <ApolloConsumer>
-    {client => <AuthorizeWithGraphQL {...props} client={client} />}
-  </ApolloConsumer>
-)
+const AuthorizeWithGraphQLWrapper = props => {
+  if (!props.authsome) {
+    props.authsome = new Authsome(
+      { ...config.authsome, mode: require(config.authsome.mode) },
+      {},
+    )
+  }
+
+  return (
+    <ApolloConsumer>
+      {client => <AuthorizeWithGraphQL {...props} client={client} />}
+    </ApolloConsumer>
+  )
+}
 
 export default AuthorizeWithGraphQLWrapper
