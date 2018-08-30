@@ -82,8 +82,9 @@ export class AuthorizeWithGraphQL extends Authorize {
 }
 
 const AuthorizeWithGraphQLWrapper = props => {
+  let authsome
   if (!props.authsome) {
-    props.authsome = new Authsome(
+    authsome = new Authsome(
       { ...config.authsome, mode: require(config.authsome.mode) },
       {},
     )
@@ -91,7 +92,9 @@ const AuthorizeWithGraphQLWrapper = props => {
 
   return (
     <ApolloConsumer>
-      {client => <AuthorizeWithGraphQL {...props} client={client} />}
+      {client => (
+        <AuthorizeWithGraphQL authsome={authsome} {...props} client={client} />
+      )}
     </ApolloConsumer>
   )
 }

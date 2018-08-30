@@ -11,8 +11,6 @@ import {
   GET_TEAM,
 } from '../../src/helpers/AuthorizeGraphQLQueries'
 
-jest.mock('fake-mode', () => false, { virtual: true })
-
 global.PUBSWEET_COMPONENTS = []
 
 const user1 = { username: 'admin', admin: true, teams: [] }
@@ -208,5 +206,22 @@ describe('A query for a missing object', () => {
     expect(div).toHaveLength(0)
     expect(console.error).toHaveBeenCalledWith(error)
     console.error.mockRestore()
+  })
+})
+
+jest.mock(
+  'fake-mode',
+  () => async (userId, operation, object, context) => true,
+  { virtual: true },
+)
+
+describe('Actual use of Authorize', () => {
+  it('renders without supplying authsome in props', async () => {
+    // Gets authsome mode from the config
+    const wrapper = makeDeepWrapper('user1')
+    await wait(100)
+    wrapper.update()
+    const div = wrapper.find('div')
+    expect(div.text()).toBe('Only for admins')
   })
 })
