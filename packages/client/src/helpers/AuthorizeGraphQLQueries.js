@@ -3,9 +3,12 @@ import gql from 'graphql-tag'
 const GET_USER = gql`
   query($id: ID!) {
     user(id: $id) {
+      id
       username
       admin
-      teams
+      teams {
+        id
+      }
     }
   }
 `
@@ -14,8 +17,12 @@ const GET_COLLECTION = gql`
   query($id: ID) {
     collection(id: $id) {
       id
-      fragments
-      owners
+      fragments {
+        id
+      }
+      owners {
+        id
+      }
     }
   }
 `
@@ -25,7 +32,9 @@ const GET_FRAGMENT = gql`
     fragment(id: $id) {
       id
       fragmentType
-      owners
+      owners {
+        id
+      }
     }
   }
 `
@@ -34,9 +43,14 @@ const GET_TEAM = gql`
   query($id: ID) {
     team(id: $id) {
       id
-      members
+      members {
+        id
+      }
       teamType
-      object
+      object {
+        objectId
+        objectType
+      }
       name
     }
   }

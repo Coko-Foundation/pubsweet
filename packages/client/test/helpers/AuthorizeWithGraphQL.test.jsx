@@ -13,19 +13,24 @@ import {
 
 global.PUBSWEET_COMPONENTS = []
 
-const user1 = { username: 'admin', admin: true, teams: [] }
-const fragment1 = { id: 'fragment1', fragmentType: 'blogpost', owners: [user1] }
+const user1 = { id: 'user1', username: 'admin', admin: true, teams: [] }
+const fragment1 = {
+  id: 'fragment1',
+  fragmentType: 'blogpost',
+  owners: [{ id: user1.id }],
+}
 const team1 = {
   id: 'team1',
-  members: [user1],
+  members: [{ id: user1.id }],
   teamType: 'editors',
   object: { objectId: 'fragment1', objectType: 'fragment' },
   name: 'team',
 }
+
 const collection1 = {
   id: 'collection1',
-  fragments: [fragment1],
-  owners: [user1],
+  fragments: [{ id: fragment1.id }],
+  owners: [{ id: user1.id }],
 }
 
 const mocks = [
@@ -51,7 +56,12 @@ const mocks = [
     },
     result: {
       data: {
-        user: { username: 'nonadmin', admin: false, teams: [] },
+        user: {
+          id: 'non-admin',
+          username: 'nonadmin',
+          admin: false,
+          teams: [],
+        },
       },
     },
   },
