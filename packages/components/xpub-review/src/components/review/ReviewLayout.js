@@ -2,12 +2,13 @@ import React from 'react'
 
 import moment from 'moment'
 import { Tabs } from '@pubsweet/ui'
-import SimpleEditor from 'wax-editor-react'
+import { Wax } from 'wax-prose-mirror'
 
 import ReviewForm from './ReviewForm'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Review from './Review'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
+import { EditorWrapper } from '../molecules/EditorWrapper'
 import { Info } from '../molecules/Info'
 
 const ReviewLayout = ({
@@ -55,13 +56,9 @@ const ReviewLayout = ({
         content:
           lastSubmitted.files.manuscript.type ===
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-            <SimpleEditor
-              content={lastSubmitted.source}
-              editing="selection"
-              key={key}
-              layout="bare"
-              readOnly
-            />
+            <EditorWrapper>
+              <Wax key={key} readonly value={lastSubmitted.source} />
+            </EditorWrapper>
           ) : (
             <Info>No supported view of the file</Info>
           ),
@@ -103,13 +100,9 @@ const ReviewLayout = ({
       content:
         lastSubmitted.files.manuscript.type ===
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-          <SimpleEditor
-            content={lastSubmitted.source}
-            editing="selection"
-            key={key}
-            layout="bare"
-            readOnly
-          />
+          <EditorWrapper>
+            <Wax key={key} readonly value={lastSubmitted.source} />
+          </EditorWrapper>
         ) : (
           <Info>No supported view of the file</Info>
         ),
