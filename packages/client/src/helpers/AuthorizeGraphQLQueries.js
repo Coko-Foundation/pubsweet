@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const GET_USER = gql`
-  query($id: ID!) {
+  query GetUser($id: ID!) {
     user(id: $id) {
       id
       username
@@ -14,7 +14,7 @@ const GET_USER = gql`
 `
 
 const GET_COLLECTION = gql`
-  query($id: ID) {
+  query GetCollection($id: ID) {
     collection(id: $id) {
       id
       fragments {
@@ -28,7 +28,7 @@ const GET_COLLECTION = gql`
 `
 
 const GET_FRAGMENT = gql`
-  query($id: ID) {
+  query GetFragment($id: ID) {
     fragment(id: $id) {
       id
       fragmentType
@@ -40,7 +40,7 @@ const GET_FRAGMENT = gql`
 `
 
 const GET_TEAM = gql`
-  query($id: ID) {
+  query GetTeam($id: ID) {
     team(id: $id) {
       id
       members {
