@@ -99,6 +99,9 @@ export default compose(
     form: 'submit',
     onChange: throttle(onChange, 3000, { trailing: true }),
     onSubmit,
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true,
   }),
   withState('confirming', 'setConfirming', false),
   withHandlers({

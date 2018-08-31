@@ -61,7 +61,7 @@ const DeclarationsNonEditable = ({ journal, readonly, version }) => (
     </DeclarationSection>
     {journal.declarations.questions.map(question => (
       <DeclarationSection>
-        <Legend>{question.legend}</Legend>
+        <Legend>{ReactHtmlParser(question.legend)}</Legend>
         {version.declarations[question.id]}
       </DeclarationSection>
     ))}
