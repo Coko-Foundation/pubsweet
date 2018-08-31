@@ -78,3 +78,4 @@ Temporary Items
 
 # webpack build
 _build
+.vscode
