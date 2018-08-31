@@ -27,14 +27,18 @@ const ErrorMessage = Message.extend`
 const ValidatedFieldComponent = ({ component: Component }) => ({
   meta,
   input,
+  ...extraProps
 }) => {
   let validationStatus
   if (meta.touched) validationStatus = 'success'
   if (meta.touched && meta.error) validationStatus = 'error'
-
   return (
     <div>
-      <Component {...input} validationStatus={validationStatus} />
+      <Component
+        {...extraProps}
+        {...input}
+        validationStatus={validationStatus}
+      />
 
       {/* live region DOM node must be initially present for changes to be announced */}
       <MessageWrapper role="alert">

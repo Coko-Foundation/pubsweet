@@ -39,6 +39,7 @@ const onSubmit = (values, dispatch, { project, version }) =>
         throw new SubmissionError()
       }
     })
+
 // TODO: this is only here because prosemirror would save the title in the
 // metadata as html instead of plain text. we need to maybe find a better
 // position than here to perform this operation
@@ -48,16 +49,13 @@ const stripHtml = htmlString => {
   return temp.textContent
 }
 
-// TODO: redux-form doesn't have an onBlur handler(?)
 const onChange = (values, dispatch, { project, version }) => {
   values.metadata.title = stripHtml(values.metadata.title) // see TODO above
-  values.metadata.abstract = stripHtml(values.metadata.abstract) // see TODO above
+  values.metadata.abstract = stripHtml(values.metadata.abstract || '') // see TODO above
 
   dispatch(
     actions.updateFragment(project, {
       id: version.id,
-      rev: version.rev,
-      // submitted: false,
       ...values,
     }),
   )
@@ -65,6 +63,7 @@ const onChange = (values, dispatch, { project, version }) => {
 
 export default compose(
   ConnectPage(({ match }) => [
+    actions.getForm('submit'),
     actions.getCollection({ id: match.params.project }),
     actions.getFragments({ id: match.params.project }),
   ]),
@@ -74,8 +73,15 @@ export default compose(
       const version = selectFragment(state, match.params.version)
       const currentVersion = selectCurrentVersion(state, project)
       const submittedVersion = selectLastDecidedVersion(state, project)
+      const { forms } = state
 
-      return { project, submittedVersion, currentVersion, version }
+      return {
+        project,
+        submittedVersion,
+        currentVersion,
+        version,
+        forms: forms.forms,
+      }
     },
     {
       uploadFile,
@@ -93,6 +99,9 @@ export default compose(
     form: 'submit',
     onChange: throttle(onChange, 3000, { trailing: true }),
     onSubmit,
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true,
   }),
   withState('confirming', 'setConfirming', false),
   withHandlers({

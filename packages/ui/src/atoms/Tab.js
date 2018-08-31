@@ -5,7 +5,6 @@ import { th, override } from '@pubsweet/ui-toolkit'
 const Tab = styled.div`
   padding: ${th('gridUnit')} 1em;
   font-size: ${th('fontSizeBaseSmall')};
-  line-height: ${th('lineHeightBaseSmall')};
   border-width: 0 ${th('borderWidth')} ${th('borderWidth')} 0;
   border-style: ${th('borderStyle')};
   border-color: ${({ active, theme }) =>

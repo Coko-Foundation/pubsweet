@@ -186,6 +186,7 @@ class Menu extends React.Component {
     this.state = {
       open: false,
       selected: props.value,
+      selectOneOfMultiElement: undefined,
     }
   }
 
@@ -200,6 +201,13 @@ class Menu extends React.Component {
       open: false,
       selected: undefined,
     }
+  }
+
+  selectOneOfMultiElement = (event, value) => {
+    event.stopPropagation()
+    const selectOneOfMultiElement = value
+    this.setState({ selectOneOfMultiElement })
+    if (this.props.selectElement) this.props.selectElement(value)
   }
 
   removeSelect = (event, value) => {
@@ -268,6 +276,7 @@ class Menu extends React.Component {
             placeholder={placeholder}
             removeSelect={this.removeSelect}
             selected={selected}
+            selectOneOfMultiElement={this.selectOneOfMultiElement}
             toggleMenu={this.toggleMenu}
           />
           <OptionsContainer>
@@ -323,6 +332,7 @@ const DefaultOpener = ({
   placeholder,
   optionLabel,
   removeSelect,
+  selectOneOfMultiElement,
 }) => (
   <Opener onClick={toggleMenu} open={open}>
     {(!selected || selected.length === 0) && (
@@ -335,7 +345,9 @@ const DefaultOpener = ({
       Array.isArray(selected) && (
         <Value>
           {selected.map(select => (
-            <MultipleValue>
+            <MultipleValue
+              onClick={event => selectOneOfMultiElement(event, select)}
+            >
               {optionLabel(select)}
               <Button onClick={event => removeSelect(event, select)}>x</Button>
             </MultipleValue>
