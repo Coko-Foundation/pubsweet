@@ -42,7 +42,6 @@ initialState = {
     activeTab={state.activeTab}
     properties={state.properties}
     changeProperties={value => {
-      console.log(value)
       setState({ properties: value })
     }}
     changeTabs={value => setState({ activeTab: value })}
