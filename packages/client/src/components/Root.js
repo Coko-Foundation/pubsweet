@@ -38,9 +38,7 @@ const makeApolloClient = (makeConfig, connectToWebSocket) => {
       uri: `${wsProtocol}://${window.location.host}/subscriptions`,
       options: {
         reconnect: true,
-        connectionParams: {
-          authToken: localStorage.getItem('token'),
-        },
+        connectionParams: () => ({ authToken: localStorage.getItem('token') }),
       },
     })
     link = split(
