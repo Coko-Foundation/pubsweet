@@ -3,7 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.5.0"></a>
+      <a name="8.6.0"></a>
+# [8.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.5.0...@pubsweet/ui@8.6.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **test:** add data-test-id to tabs ([e8a42cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8a42cb))
+
+
+### Features
+
+* **date-parser:** add humanize threshold ([42be337](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/42be337))
+* **formbuilder:** add forms layout ([0cd6b9d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd6b9d))
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+* **submit:** import dynamically the form template ([ac4649e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ac4649e))
+
+
+
+
+      <a name="8.5.0"></a>
 # [8.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.4.0...@pubsweet/ui@8.5.0) (2018-08-20)
 
 
@@ -19,7 +38,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="8.4.0"></a>
+<a name="8.4.0"></a>
 # [8.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.3.0...@pubsweet/ui@8.4.0) (2018-08-17)
 
 

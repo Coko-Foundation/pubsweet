@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.0.10...pubsweet-component-xpub-submit@4.1.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **editor:** remove warnings ([b563efd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b563efd))
+* **fomrbuilder:** fix validation ([98b3b5e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98b3b5e))
+* **foormbuilder:** linter prettier ([db290ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/db290ff))
+* **formbuilder:** create folder from scratch ([a2d533e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2d533e))
+* **formbuilder:** fixing styling issues to submit ([54bc9a3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/54bc9a3))
+* **submit:** fixing authors save field ([bb89f08](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb89f08))
+* **submit:** form was updated correctly ([94f9844](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/94f9844))
+
+
+### Features
+
+* **formbuilder:** add formbuilder component ([c24b9f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c24b9f7))
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+* **submit:** import dynamically the form template ([ac4649e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ac4649e))
+
+
+
+
 <a name="4.0.10"></a>
 ## [4.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.0.9...pubsweet-component-xpub-submit@4.0.10) (2018-08-22)
 

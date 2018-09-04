@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "8.0.1",
+  "version": "8.1.0",
   "scripts": {
     "test": "jest",
     "vuln-test": "nsp check"
@@ -42,7 +42,7 @@
     "pg": "^7.4.1",
     "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
-    "pubsweet-sse": "^1.0.0",
+    "pubsweet-sse": "^1.0.1",
     "require-relative": "^0.8.7",
     "subscriptions-transport-ws": "^0.9.12",
     "uuid": "^3.0.1",
