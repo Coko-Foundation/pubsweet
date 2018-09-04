@@ -1,7 +1,7 @@
 {
   "name": "pubsweet-sse",
   "description": "Broadcast server-sent events to connected Express clients",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://gitlab.coko.foundation/pubsweet/pubsweet",
   "repository": {
     "type": "git",

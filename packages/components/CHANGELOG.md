@@ -3,7 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.6.3"></a>
+      <a name="9.7.0"></a>
+# [9.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.3...pubsweet-components@9.7.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **editor:** remove warnings ([b563efd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b563efd))
+* **editor:** replace wax with wax-prosemirror ([d7b12f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d7b12f4))
+* **fomrbuilder:** fix validation ([98b3b5e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98b3b5e))
+* **foormbuilder:** linter prettier ([db290ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/db290ff))
+* **formbuilder:** create folder from scratch ([a2d533e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2d533e))
+* **formbuilder:** erase files uneeded ([9bc04cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bc04cd))
+* **formbuilder:** fixing styling issues to submit ([54bc9a3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/54bc9a3))
+* **formbuilder:** test addition ([1379895](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1379895))
+* **readme:** change readme files ([eb0ff9b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/eb0ff9b))
+* **styleguide:** remove console ([c8f7bb2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c8f7bb2))
+* **submit:** fixing authors save field ([bb89f08](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb89f08))
+* **submit:** form was updated correctly ([94f9844](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/94f9844))
+* **test:** add data-test-id to tabs ([e8a42cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8a42cb))
+* **test:** fix intgration test ([900f0db](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/900f0db))
+* **update:** update dependencies ([52c0002](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/52c0002))
+* **xpubformbuilder:** integration test and component ([6806f81](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6806f81))
+
+
+### Features
+
+* **backend:** add backend check path floder ([8c95e72](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8c95e72))
+* **components:** form builder backend requests ([7082b0f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7082b0f))
+* **formbuilder:** add components for the builder ([cfae1c0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cfae1c0))
+* **formbuilder:** add form redux actions formbuilder ([7436353](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7436353))
+* **formbuilder:** add formbuilder component ([c24b9f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c24b9f7))
+* **formbuilder:** add forms layout ([0cd6b9d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd6b9d))
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+* **formbuilder:** layout of form builder ([2bd4956](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2bd4956))
+* **submit:** import dynamically the form template ([ac4649e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ac4649e))
+* add wax-prose-mirror to xpub ([c397a97](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c397a97))
+
+
+
+
+      <a name="9.6.3"></a>
 ## [9.6.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.2...pubsweet-components@9.6.3) (2018-08-23)
 
 
@@ -11,7 +51,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-components
 
-  <a name="9.6.2"></a>
+<a name="9.6.2"></a>
 ## [9.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.1...pubsweet-components@9.6.2) (2018-08-22)
 
 

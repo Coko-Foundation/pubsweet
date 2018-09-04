@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.2.0"></a>
+# [4.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.3...pubsweet-client@4.2.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **client:** create a new authsome instance if not supplied ([fcc5423](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fcc5423))
+* **client:** fix graphql queries ([3003c50](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3003c50))
+* **client:** initialize an authsome mode from config if not supplied ([e0b7416](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e0b7416))
+* use named graphql queries ([03e5656](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/03e5656))
+* **subscriptions:** get token from local storage on each reconnect ([68dabdc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68dabdc))
+
+
+### Features
+
+* **client:** add AuthorizeWithGraphQL ([57eca9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/57eca9a))
+
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.2...pubsweet-client@4.1.3) (2018-08-23)
 

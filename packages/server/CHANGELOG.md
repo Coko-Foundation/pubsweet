@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="8.0.1"></a>
+  <a name="8.1.0"></a>
+# [8.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.0.1...pubsweet-server@8.1.0) (2018-09-04)
+
+
+### Features
+
+* **client:** add AuthorizeWithGraphQL ([57eca9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/57eca9a))
+
+
+
+
+  <a name="8.0.1"></a>
 ## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.0.0...pubsweet-server@8.0.1) (2018-08-20)
 
 
@@ -14,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="8.0.0"></a>
+<a name="8.0.0"></a>
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.2.0...pubsweet-server@8.0.0) (2018-08-17)
 
 
