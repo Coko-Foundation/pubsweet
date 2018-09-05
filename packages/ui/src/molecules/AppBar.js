@@ -45,13 +45,14 @@ const Item = styled.span`
 const AppBar = ({
   brandLink = '/',
   brand,
+  className,
   loginLink = '/login',
   onLogoutClick,
   navLinkComponents,
   user,
   rightComponent: RightComponent = DefaultRightComponent,
 }) => (
-  <Root>
+  <Root className={className}>
     <Section>
       {brand && (
         <Logo>
