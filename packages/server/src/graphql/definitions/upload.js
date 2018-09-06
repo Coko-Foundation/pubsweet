@@ -35,6 +35,11 @@ const resolvers = {
     uploadProgress: {
       subscribe: async (_, vars, context) => {
         const pubsub = await getPubsub()
+        setTimeout(() => {
+          pubsub.publish(`${ON_UPLOAD_PROGRESS}.${context.user}`, {
+            uploadProgress: 100,
+          })
+        }, 1000)
         return pubsub.asyncIterator(`${ON_UPLOAD_PROGRESS}.${context.user}`)
       },
     },
