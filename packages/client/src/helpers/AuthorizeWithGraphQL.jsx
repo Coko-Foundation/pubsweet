@@ -4,6 +4,7 @@ import Authsome from 'authsome'
 import config from 'config'
 
 import {
+  CURRENT_USER,
   GET_USER,
   GET_COLLECTION,
   GET_FRAGMENT,
@@ -17,7 +18,7 @@ const getDataFromQuery = async (client, query, field) => {
 }
 
 export class AuthorizeWithGraphQL extends Authorize {
-  async checkAuth({ authsome, currentUser, operation, object }) {
+  async checkAuth({ authsome, operation, object }) {
     authsome.context = {
       models: {
         User: {
@@ -67,6 +68,13 @@ export class AuthorizeWithGraphQL extends Authorize {
       },
     }
     try {
+      const currentUser = await getDataFromQuery(
+        this.props.client,
+        {
+          query: CURRENT_USER,
+        },
+        'currentUser',
+      )
       const authorized = await authsome.can(
         currentUser && currentUser.id,
         operation,
