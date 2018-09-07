@@ -1,5 +1,15 @@
 import gql from 'graphql-tag'
 
+const CURRENT_USER = gql`
+  query CurrentUser {
+    currentUser {
+      admin
+      id
+      username
+    }
+  }
+`
+
 const GET_USER = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
@@ -57,6 +67,7 @@ const GET_TEAM = gql`
 `
 
 module.exports = {
+  CURRENT_USER,
   GET_USER,
   GET_COLLECTION,
   GET_FRAGMENT,
