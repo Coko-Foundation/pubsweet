@@ -3,8 +3,9 @@ import { mount } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import wait from 'waait'
 import Authsome from 'authsome'
-import AuthorizeWrapper from '../../src/helpers/AuthorizeWithGraphQL'
+import AuthorizeWithGraphQL from '../../src/helpers/AuthorizeWithGraphQL'
 import {
+  CURRENT_USER,
   GET_USER,
   GET_COLLECTION,
   GET_FRAGMENT,
@@ -13,7 +14,20 @@ import {
 
 global.PUBSWEET_COMPONENTS = []
 
-const user1 = { id: 'user1', username: 'admin', admin: true, teams: [] }
+const user1 = {
+  id: 'user1',
+  username: 'admin',
+  admin: true,
+  teams: [],
+}
+
+const nonAdminUser = {
+  id: 'non-admin',
+  username: 'nonadmin',
+  admin: false,
+  teams: [],
+}
+
 const fragment1 = {
   id: 'fragment1',
   fragmentType: 'blogpost',
@@ -33,7 +47,17 @@ const collection1 = {
   owners: [{ id: user1.id }],
 }
 
-const mocks = [
+const mocks = currentUser => [
+  {
+    request: {
+      query: CURRENT_USER,
+    },
+    result: {
+      data: {
+        currentUser,
+      },
+    },
+  },
   {
     request: {
       query: GET_USER,
@@ -56,12 +80,7 @@ const mocks = [
     },
     result: {
       data: {
-        user: {
-          id: 'non-admin',
-          username: 'nonadmin',
-          admin: false,
-          teams: [],
-        },
+        user: nonAdminUser,
       },
     },
   },
@@ -120,12 +139,12 @@ const mocks = [
   },
 ]
 
-function makeDeepWrapper(currentUserId, props = {}) {
+function makeDeepWrapper(currentUser, props = {}) {
   return mount(
-    <MockedProvider addTypename={false} mocks={mocks}>
-      <AuthorizeWrapper currentUser={{ id: currentUserId }} {...props}>
+    <MockedProvider addTypename={false} mocks={mocks(currentUser)}>
+      <AuthorizeWithGraphQL {...props}>
         <div>Only for admins</div>
-      </AuthorizeWrapper>
+      </AuthorizeWithGraphQL>
     </MockedProvider>,
   )
 }
@@ -144,9 +163,9 @@ describe('AuthorizeGraphQLWrapper', () => {
 
   it('renders children when user is admin', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
-    const wrapper = makeDeepWrapper('user1', { authsome })
+    const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(2)
+    await wait(20)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
@@ -156,7 +175,7 @@ describe('AuthorizeGraphQLWrapper', () => {
   it('renders nothing when user is not admin', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
 
-    const wrapper = makeDeepWrapper('non-admin', { authsome })
+    const wrapper = makeDeepWrapper(nonAdminUser, { authsome })
     await wait(2)
     wrapper.update()
     const div = wrapper.find('div')
@@ -183,9 +202,9 @@ describe('Authsome GraphQL context', () => {
 
   it('can query all models through the context', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
-    const wrapper = makeDeepWrapper('user1', { authsome })
+    const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(100)
+    await wait(20)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
@@ -208,9 +227,9 @@ describe('A query for a missing object', () => {
   it('fails authorization if user is missing', async () => {
     console.error = jest.fn()
     const authsome = new Authsome({ mode: authsomeMode })
-    const wrapper = makeDeepWrapper('user1', { authsome })
+    const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(100)
+    await wait(20)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(0)
@@ -228,8 +247,8 @@ jest.mock(
 describe('Actual use of Authorize', () => {
   it('renders without supplying authsome in props', async () => {
     // Gets authsome mode from the config
-    const wrapper = makeDeepWrapper('user1')
-    await wait(100)
+    const wrapper = makeDeepWrapper(user1)
+    await wait(20)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div.text()).toBe('Only for admins')
