@@ -1,8 +1,3 @@
-/**
- * TODO test with
- * ./node_modules/.bin/jest packages/server/test/graphql/subscriptions_test.js
- */
-
 const User = require('../../src/models/User')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
@@ -17,32 +12,81 @@ const { split } = require('apollo-link')
 const { getMainDefinition } = require('apollo-utilities')
 const { InMemoryCache } = require('apollo-cache-inmemory')
 const gql = require('graphql-tag')
+const FormData = require('form-data')
+const fetch = require('node-fetch')
 
-global.fetch = () => {}
+function generateFetchOptions(token, fileSize) {
+  // This dance needs to happen because apollo-upload-client is 'untestable':
+  // https://github.com/jaydenseric/apollo-upload-client/issues/32#issuecomment-327694315
 
-describe('Subscription test', () => {
+  let variables
+  let size
+  let query
+
+  if (fileSize) {
+    variables = {
+      file: null,
+      fileSize,
+    }
+    query =
+      'mutation uploadFile($file: Upload!, $fileSize: Int) { upload(file: $file, fileSize: $fileSize) { url, __typename }}'
+    size = fileSize
+  } else {
+    variables = {
+      file: null,
+    }
+    query =
+      'mutation uploadFile($file: Upload!) { upload(file: $file) { url, __typename }}'
+    size = 512000
+  }
+
+  const body = new FormData()
+  body.append(
+    'operations',
+    JSON.stringify({
+      operationName: 'uploadFile',
+      variables,
+      query,
+    }),
+  )
+
+  body.append('map', JSON.stringify({ 1: ['variables.file'] }))
+  body.append('1', 'a'.repeat(size), { filename: 'a.txt' })
+
+  const options = {
+    method: 'POST',
+    body,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  return options
+}
+describe('GraphQL subscriptions', () => {
   let token
   let user
   let server
   let apolloClient
+  let wsLink
+
   beforeAll(async () => {
-    /* TODO will this even work */
     server = await startServer()
   })
   beforeEach(async () => {
     await cleanDB()
     user = await new User(fixtures.adminUser).save()
     token = authentication.token.create(user)
-    const wsLink = new WebSocketLink({
-      uri: `ws://localhost/subscriptions`,
+    wsLink = new WebSocketLink({
+      uri: `ws://localhost:4000/subscriptions`,
       options: {
         connectionParams: {
           authToken: token,
         },
       },
+      reconnect: false,
       webSocketImpl: WebSocket,
     })
-    const httpLink = createHttpLink()
+    const httpLink = createHttpLink({ fetch })
     const link = split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query)
@@ -55,13 +99,20 @@ describe('Subscription test', () => {
       link,
       cache: new InMemoryCache(),
     }
-    /* TODO this will not connect to websocket */
     apolloClient = new ApolloClient(config)
   })
+
+  afterEach(async () => {
+    await wsLink.subscriptionClient.client.close()
+  })
+
   afterAll(async () => {
     server.close()
   })
-  it('works', async () => {
+
+  it('reports progress when fileSize is given', async () => {
+    let done
+    let progress = 0
     const subscriptionPromise = new Promise((resolve, reject) => {
       apolloClient
         .subscribe({
@@ -72,10 +123,52 @@ describe('Subscription test', () => {
           `,
         })
         .subscribe({
-          next: resolve,
+          next: res => {
+            expect(res.data.uploadProgress).toBeGreaterThanOrEqual(progress)
+            progress = res.data.uploadProgress
+            expect(progress).toBeGreaterThan(-1)
+            expect(progress).toBeLessThanOrEqual(100)
+            if (done) resolve('done')
+          },
           error: reject,
         })
     })
-    const res = await subscriptionPromise
+
+    await fetch(
+      `http://localhost:4000/graphql`,
+      generateFetchOptions(token, 1000000),
+    )
+    done = true
+    expect(await subscriptionPromise).toBe('done')
+  })
+
+  it('reports progress when fileSize is not given', async () => {
+    let done
+    let progress = 0
+
+    const subscriptionPromise = new Promise((resolve, reject) => {
+      apolloClient
+        .subscribe({
+          query: gql`
+            subscription onUploadProgress {
+              uploadProgress
+            }
+          `,
+        })
+        .subscribe({
+          next: res => {
+            expect(res.data.uploadProgress).toBeGreaterThanOrEqual(progress)
+            progress = res.data.uploadProgress
+            expect(progress).toBeGreaterThan(-1)
+            expect(progress).toBeLessThanOrEqual(512000)
+            if (done) resolve('done')
+          },
+          error: reject,
+        })
+    })
+
+    await fetch(`http://localhost:4000/graphql`, generateFetchOptions(token))
+    done = true
+    expect(await subscriptionPromise).toBe('done')
   })
 })
