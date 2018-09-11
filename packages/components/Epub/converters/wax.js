@@ -163,7 +163,7 @@ module.exports = (
 
     for (let i = 0; i < element.children().length; i += 1) {
       const currentElement = $(element.children().get(i))
-      content += `${currentElement.text()}`
+      content += `<span class="footnote-line">${currentElement.text()}</span>`
     }
 
     const callout = $(`
