@@ -163,17 +163,17 @@ module.exports = (
 
     for (let i = 0; i < element.children().length; i += 1) {
       const currentElement = $(element.children().get(i))
-      content += `<p>${currentElement.text()}</p>`
+      content += `${currentElement.text()}`
     }
 
     const callout = $(`
       <a class="inline-note-callout" href="#${id}">
         <sup>${i + 1}</sup>
       </a>
-      <div class="inline-note-footer" data-note-num="${id}">
+      <span class="inline-note-footer" data-note-num="${id}">
         <span class="inline-note-number"> ${noteNumber} </span>
-        <div class="inline-note-content"> ${content} </div>
-      </div>
+        <span class="inline-note-content"> ${content} </span>
+      </span>
     `)
 
     $elem.replaceWith(callout)
