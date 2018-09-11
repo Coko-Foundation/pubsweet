@@ -1,7 +1,7 @@
 variables:
   IMAGE_ORG: pubsweet
   IMAGE_NAME: pubsweet
-  BASE_DOMAIN: gateway.ps.semioticsquares.com
+  BASE_DOMAIN: gateway.ps.elifesciences.yld.io
   CONFIGURATION_REPOSITORY: https://gitlab.coko.foundation/pubsweet/deployment-config.git
 
 stages:
