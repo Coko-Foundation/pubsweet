@@ -1,6 +1,8 @@
 const path = require('path')
 const config = require('config')
-const requireRelative = require('require-relative')
+
+const resolveRelative = m => require.resolve(m, { paths: [process.cwd()] })
+const requireRelative = m => require(resolveRelative(m))
 
 module.exports = () => {
   const migrationsPaths = []
@@ -8,7 +10,7 @@ module.exports = () => {
   // load migrations from pubsweet-server
   migrationsPaths.push(
     path.resolve(
-      path.dirname(requireRelative.resolve('pubsweet-server')),
+      path.dirname(resolveRelative('pubsweet-server')),
       '..',
       'migrations',
     ),
@@ -26,7 +28,7 @@ module.exports = () => {
       if (component.migrationsPath) {
         migrationsPaths.push(
           path.resolve(
-            path.dirname(requireRelative.resolve(name)),
+            path.dirname(resolveRelative(name)),
             component.migrationsPath,
           ),
         )

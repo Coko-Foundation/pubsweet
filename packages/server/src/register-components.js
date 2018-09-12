@@ -1,6 +1,8 @@
 const logger = require('@pubsweet/logger')
 const config = require('config')
-const requireRelative = require('require-relative')
+
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
 
 module.exports = app => {
   if (config.has('pubsweet.components')) {

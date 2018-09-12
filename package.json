@@ -145,7 +145,6 @@
         "displayName": "sse",
         "testRegex": "/test/.*_test.js$",
         "testEnvironment": "node"
-
       }
     ]
   },

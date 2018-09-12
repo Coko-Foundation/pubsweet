@@ -1,5 +1,4 @@
 const config = require('config')
-const requireRelative = require('require-relative')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('graphql-tools')
 
@@ -9,6 +8,9 @@ const team = require('./definitions/team')
 const user = require('./definitions/user')
 const upload = require('./definitions/upload')
 const authentication = require('./definitions/authentication')
+
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
 
 // load base types and resolvers
 const typeDefs = [
