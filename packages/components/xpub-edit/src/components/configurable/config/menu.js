@@ -125,6 +125,7 @@ export default {
     content: icons.italic,
     run: toggleMark(schema.marks.italic),
     title: 'Toggle italic',
+    select: state => true,
     menu: props => <MenuButton {...props} />,
   }),
   underline: schema => ({
