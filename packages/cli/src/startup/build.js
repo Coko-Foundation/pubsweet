@@ -1,4 +1,5 @@
-const requireRelative = require('require-relative')
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
 
 const webpack = requireRelative('webpack')
 const Promise = require('bluebird')

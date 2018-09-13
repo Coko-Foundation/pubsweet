@@ -1,7 +1,9 @@
 const logger = require('@pubsweet/logger')
 const { spawn } = require('child_process')
-const requireRelative = require('require-relative')
 const serverCommand = require('./server')
+
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
 
 module.exports = async () => {
   logger.info('Starting PubSweet app')
