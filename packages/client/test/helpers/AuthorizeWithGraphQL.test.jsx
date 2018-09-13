@@ -165,7 +165,7 @@ describe('AuthorizeGraphQLWrapper', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(20)
+    await wait(100)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
@@ -204,7 +204,7 @@ describe('Authsome GraphQL context', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(20)
+    await wait(100)
     wrapper.update()
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
