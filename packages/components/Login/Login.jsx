@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Field } from 'redux-form'
+import { Field } from 'formik'
 import {
   CenteredColumn,
   ErrorText,
@@ -15,9 +15,9 @@ import styled from 'styled-components'
 const Signup = styled.div``
 const ResetPassword = styled.div``
 
-const UsernameInput = props => <TextField label="Username" {...props.input} />
+const UsernameInput = props => <TextField label="Username" {...props.field} />
 const PasswordInput = props => (
-  <TextField label="Password" {...props.input} type="password" />
+  <TextField label="Password" {...props.field} type="password" />
 )
 
 const Login = ({
