@@ -1,11 +1,13 @@
 import { withFormik } from 'formik'
+import { compose } from 'recompose'
+import { connect } from 'react-redux'
 import { loginUser } from './actions'
 
 import Login from './Login'
 import redirectPath from './redirect'
 
-const handleSubmit = (values, dispatch, { location }) => {
-  dispatch(loginUser(values, redirectPath({ location })))
+const handleSubmit = (values, { props: { dispatch, location }, setErrors }) => {
+  dispatch(loginUser(values, redirectPath({ location }), setErrors))
 }
 
 const enhancedFormik = withFormik({
@@ -19,6 +21,6 @@ const enhancedFormik = withFormik({
   }),
   displayName: 'login',
   handleSubmit,
-})
+})(Login)
 
-export default enhancedFormik(Login)
+export default compose(connect(state => state))(enhancedFormik)
