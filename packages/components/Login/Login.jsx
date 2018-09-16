@@ -21,7 +21,7 @@ const PasswordInput = props => (
 )
 
 const Login = ({
-  error,
+  errors, // Formik Error Handling
   handleSubmit,
   signup = true,
   passwordReset = true,
@@ -29,8 +29,7 @@ const Login = ({
   <CenteredColumn small>
     <H1>Login</H1>
 
-    {error && <ErrorText>{error}</ErrorText>}
-
+    {errors[0] && <ErrorText>{errors[0].message}</ErrorText>}
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={PasswordInput} name="password" />
