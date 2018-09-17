@@ -21,7 +21,7 @@ const handleSubmit = (values, { props, setSubmitting, setErrors }) => {
     .catch(e => {
       if (e.graphQLErrors) {
         setSubmitting(false)
-        setErrors(e.graphQLErrors)
+        setErrors(e.graphQLErrors[0].message)
       }
     })
 }

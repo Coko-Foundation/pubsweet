@@ -48,7 +48,7 @@ export function loginUser(credentials, redirectTo, setErrors) {
         if (redirectTo) dispatch(push(redirectTo))
       },
       err => {
-        setErrors([JSON.parse(err.response)])
+        setErrors(JSON.parse(err.response).message)
         dispatch(loginFailure(err))
       },
     )

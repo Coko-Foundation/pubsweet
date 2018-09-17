@@ -30,7 +30,7 @@ const Login = ({
   <CenteredColumn small>
     <H1>Login</H1>
 
-    {!isEmpty(errors) && <ErrorText>{errors[0].message}</ErrorText>}
+    {!isEmpty(errors) && <ErrorText>{errors}</ErrorText>}
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={PasswordInput} name="password" />
