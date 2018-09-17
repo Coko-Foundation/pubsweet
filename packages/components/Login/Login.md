@@ -34,7 +34,7 @@ const LoginForm = withFormik({
   }),
   displayName: 'login',
   handleSubmit: (values, { setErrors }) =>
-    setErrors([{ message: 'Wrong username or password.' }]),
+    setErrors('Wrong username or password.'),
 })(Login)
 ;<LoginForm />
 ```
