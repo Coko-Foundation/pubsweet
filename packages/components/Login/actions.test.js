@@ -28,7 +28,7 @@ describe('Login actions', () => {
     it("doesn't get authenticated on failure", async () => {
       const store = createMockStore({})
       const credentials = { username: 'mr blobby' }
-      const error = new Error('Nope')
+      const error = new Error([{ message: 'Nope' }])
       jest
         .spyOn(api, 'create')
         .mockImplementationOnce(jest.fn(() => Promise.reject(error)))
