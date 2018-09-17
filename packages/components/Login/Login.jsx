@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'formik'
+import { isEmpty } from 'lodash'
 import {
   CenteredColumn,
   ErrorText,
@@ -21,7 +22,7 @@ const PasswordInput = props => (
 )
 
 const Login = ({
-  errors, // Formik Error Handling
+  errors,
   handleSubmit,
   signup = true,
   passwordReset = true,
@@ -29,7 +30,7 @@ const Login = ({
   <CenteredColumn small>
     <H1>Login</H1>
 
-    {errors[0] && <ErrorText>{errors[0].message}</ErrorText>}
+    {!isEmpty(errors) && <ErrorText>{errors[0].message}</ErrorText>}
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />
       <Field component={PasswordInput} name="password" />
