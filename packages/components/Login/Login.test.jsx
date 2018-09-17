@@ -7,7 +7,7 @@ describe('<Login/>', () => {
   const makeWrapper = (props = {}) => shallow(<Login {...props} />)
 
   it('shows error', () => {
-    const wrapper = makeWrapper({ errors: [{ message: 'Yikes!' }] })
+    const wrapper = makeWrapper({ errors: 'Yikes!' })
     expect(wrapper.find(ErrorText)).toHaveLength(1)
   })
 
