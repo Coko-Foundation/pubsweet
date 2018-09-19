@@ -22,7 +22,7 @@ function signupFailure(message) {
   }
 }
 
-export function signupUser(user) {
+export function signupUser(user, setErrors) {
   return dispatch => {
     dispatch(signupRequest())
     return api.create('/users', user).then(
@@ -30,7 +30,10 @@ export function signupUser(user) {
         dispatch(signupSuccess(user))
         dispatch(push('/login'))
       },
-      err => dispatch(signupFailure(err)),
+      err => {
+        setErrors(JSON.parse(err.response).message)
+        dispatch(signupFailure(err))
+      },
     )
   }
 }

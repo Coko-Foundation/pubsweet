@@ -1,11 +1,21 @@
-A login form
+A Submit form
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
-const SignupForm = reduxForm({
-  form: 'signup',
-  onChange: values => console.log(values),
+const SignupForm = withFormik({
+  initialValues: {
+    username: '',
+    password: '',
+    email: '',
+  },
+  mapPropsToValues: props => ({
+    username: props.username,
+    email: props.email,
+    password: props.password,
+  }),
+  displayName: 'signup',
+  handleSubmit,
 })(Signup)
 ;<SignupForm />
 ```
@@ -13,14 +23,21 @@ const SignupForm = reduxForm({
 Which can have an error message:
 
 ```js
-const { reduxForm, SubmissionError } = require('redux-form')
+const { withFormik } = require('formik')
 
-const SignupForm = reduxForm({
-  form: 'signup-error',
-  onSubmit: val => {
-    console.log(val)
-    return Promise.reject(new SubmissionError({ _error: 'Error message' }))
+const SignupForm = withFormik({
+  initialValues: {
+    username: '',
+    password: '',
+    email: '',
   },
+  mapPropsToValues: props => ({
+    username: props.username,
+    email: props.email,
+    password: props.password,
+  }),
+  displayName: 'signup-error',
+  handleSubmit: (values, { setErrors }) => setErrors('Error message'),
 })(Signup)
 ;<SignupForm />
 ```

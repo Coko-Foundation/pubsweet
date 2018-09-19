@@ -1,5 +1,6 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field } from 'formik'
+import { isEmpty } from 'lodash'
 import {
   CenteredColumn,
   Link,
@@ -9,19 +10,19 @@ import {
   TextField,
 } from '@pubsweet/ui'
 
-const UsernameInput = props => <TextField label="Username" {...props.input} />
+const UsernameInput = props => <TextField label="Username" {...props.field} />
 const EmailInput = props => (
-  <TextField label="Email" {...props.input} type="email" />
+  <TextField label="Email" {...props.field} type="email" />
 )
 const PasswordInput = props => (
-  <TextField label="Password" {...props.input} type="password" />
+  <TextField label="Password" {...props.field} type="password" />
 )
 
-const Signup = ({ error, handleSubmit }) => (
+const Signup = ({ errors, handleSubmit }) => (
   <CenteredColumn small>
     <H1>Sign up</H1>
 
-    {error && <ErrorText>{error}</ErrorText>}
+    {!isEmpty(errors) && <ErrorText>{errors}</ErrorText>}
 
     <form onSubmit={handleSubmit}>
       <Field component={UsernameInput} name="username" />

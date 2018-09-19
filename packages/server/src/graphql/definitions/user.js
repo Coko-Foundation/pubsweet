@@ -57,6 +57,7 @@ const typeDefs = `
     password: String
     rev: String
   }
+  
 `
 
 module.exports = { resolvers, typeDefs }
