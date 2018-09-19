@@ -4,7 +4,7 @@ const api = require('./helpers/api')
 const createBasicCollection = require('./helpers/basic_collection')
 const createFragment = require('./helpers/fragment')
 const cleanDB = require('./helpers/db_cleaner')
-const Collection = require('../src/models/Collection')
+const { Collection } = require('../src/models')
 
 describe('unauthenticated/public api', () => {
   let fragment
@@ -56,7 +56,11 @@ describe('unauthenticated/public api', () => {
         .retrieve(collection.id)
         .expect(STATUS.OK)
         .then(res =>
-          expect(Object.keys(res.body)).toEqual(['id', 'title', 'owners']),
+          expect(Object.keys(res.body).sort()).toEqual([
+            'id',
+            'owners',
+            'title',
+          ]),
         ))
   })
 
@@ -85,6 +89,7 @@ describe('unauthenticated/public api', () => {
         published: true,
         nonPublicProperty: 'example',
       })
+
       await publicCollection.save()
 
       privateCollection = new Collection({
@@ -100,7 +105,11 @@ describe('unauthenticated/public api', () => {
         .then(res => {
           const collections = res.body
           expect(collections).toHaveLength(1)
-          expect(Object.keys(collections[0])).toEqual(['id', 'title', 'owners'])
+          expect(Object.keys(collections[0]).sort()).toEqual([
+            'id',
+            'owners',
+            'title',
+          ])
         }))
   })
 })

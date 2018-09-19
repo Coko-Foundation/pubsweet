@@ -7,6 +7,7 @@ module.exports = {
       // temporary database name set by jest-environment-db
       database: global.__testDbName || 'test',
     },
+    pool: { min: 0, max: 10, idleTimeoutMillis: 1000 },
     ignoreTerminatedConnectionError: true,
     logger: new winston.Logger({
       level: 'warn',

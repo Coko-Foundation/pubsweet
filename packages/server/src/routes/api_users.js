@@ -2,7 +2,9 @@ const STATUS = require('http-status-codes')
 const passport = require('passport')
 const express = require('express')
 
-const User = require('../models/User')
+const models = require('../models')
+
+const { User } = models
 
 const authsome = require('../helpers/authsome')
 

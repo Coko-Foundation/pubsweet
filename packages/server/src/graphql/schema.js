@@ -32,16 +32,25 @@ const resolvers = merge(
   authentication.resolvers,
 )
 
-// merge in component types and resolvers
+// recursively merge in component types and resolvers
+function getSchemaRecursively(componentName) {
+  const component = requireRelative(componentName)
+
+  if (component.extending) {
+    getSchemaRecursively(component.extending)
+  }
+
+  if (component.typeDefs) {
+    typeDefs.push(component.typeDefs)
+  }
+  if (component.resolvers) {
+    merge(resolvers, component.resolvers)
+  }
+}
+
 if (config.has('pubsweet.components')) {
-  config.get('pubsweet.components').forEach(name => {
-    const component = requireRelative(name)
-    if (component.typeDefs) {
-      typeDefs.push(component.typeDefs)
-    }
-    if (component.resolvers) {
-      merge(resolvers, component.resolvers)
-    }
+  config.get('pubsweet.components').forEach(componentName => {
+    getSchemaRecursively(componentName)
   })
 }
 

@@ -11,7 +11,7 @@
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
-* [Overview](#overview) 
+* [Overview](#overview)
 * [PubSweet packages](#pubsweet-packages)
 * [Wiki](#wiki)
 * [Support](#support)
@@ -43,13 +43,12 @@ The [PubSweet Wiki](https://gitlab.coko.foundation/pubsweet/pubsweet/wikis/home)
 
 The wiki answers most of the common questions around:
 
-- Setting up your local environment
-- Documentation of PubSweet components
-- Using PubSweet components
-- The PubSweet data model
-- Technical terms
-- Contributing
-
+* Setting up your local environment
+* Documentation of PubSweet components
+* Using PubSweet components
+* The PubSweet data model
+* Technical terms
+* Contributing
 
 # Support
 

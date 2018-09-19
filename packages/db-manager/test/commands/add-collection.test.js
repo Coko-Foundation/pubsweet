@@ -1,7 +1,5 @@
 const { addCollection, createTables } = require('../../src')
-const Collection = require('pubsweet-server/src/models/Collection')
-const User = require('pubsweet-server/src/models/User')
-const Fragment = require('pubsweet-server/src/models/Fragment')
+const { User, Collection, Fragment } = require('pubsweet-server')
 
 describe('add-collection', () => {
   beforeEach(() => createTables(true))

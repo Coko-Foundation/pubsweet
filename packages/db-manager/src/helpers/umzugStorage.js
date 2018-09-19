@@ -3,21 +3,21 @@ const db = require('pubsweet-server/src/db')
 // umzug storage adapter
 module.exports = {
   async logMigration(id) {
-    await db.query('INSERT INTO migrations (id) VALUES ($1)', [id])
+    await db.raw('INSERT INTO migrations (id) VALUES (?)', [id])
   },
 
   async unlogMigration(id) {
-    await db.query('DELETE FROM migrations WHERE id = $1', [id])
+    await db.raw('DELETE FROM migrations WHERE id = ?', [id])
   },
 
   async executed() {
-    await db.query(
+    await db.raw(
       `CREATE TABLE IF NOT EXISTS migrations (
         id TEXT PRIMARY KEY,
         run_at TIMESTAMPTZ DEFAULT current_timestamp
       )`,
     )
-    const { rows } = await db.query('SELECT id FROM migrations')
+    const { rows } = await db.raw('SELECT id FROM migrations')
     return rows.map(row => row.id)
   },
 }

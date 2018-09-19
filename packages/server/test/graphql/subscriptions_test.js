@@ -2,7 +2,7 @@ const User = require('../../src/models/User')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
 const authentication = require('../../src/authentication')
-const startServer = require('../../src/')
+const { startServer } = require('../../src')
 
 const WebSocket = require('ws')
 const { ApolloClient } = require('apollo-client')
@@ -14,6 +14,7 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const gql = require('graphql-tag')
 const FormData = require('form-data')
 const fetch = require('node-fetch')
+const wait = require('waait')
 
 function generateFetchOptions(token, fileSize) {
   // This dance needs to happen because apollo-upload-client is 'untestable':
@@ -37,7 +38,7 @@ function generateFetchOptions(token, fileSize) {
     }
     query =
       'mutation uploadFile($file: Upload!) { upload(file: $file) { url, __typename }}'
-    size = 512000
+    size = 1000000
   }
 
   const body = new FormData()
@@ -113,6 +114,7 @@ describe('GraphQL subscriptions', () => {
   it('reports progress when fileSize is given', async () => {
     let done
     let progress = 0
+
     const subscriptionPromise = new Promise((resolve, reject) => {
       apolloClient
         .subscribe({
@@ -123,11 +125,15 @@ describe('GraphQL subscriptions', () => {
           `,
         })
         .subscribe({
-          next: res => {
+          next: async res => {
             expect(res.data.uploadProgress).toBeGreaterThanOrEqual(progress)
             progress = res.data.uploadProgress
             expect(progress).toBeGreaterThan(-1)
             expect(progress).toBeLessThanOrEqual(100)
+            // sometimes the last notification is sent slightly before
+            // fetch completes, resulting in an unresolved promise, so
+            // we just wait a tiny bit.
+            await wait(100)
             if (done) resolve('done')
           },
           error: reject,
@@ -156,11 +162,15 @@ describe('GraphQL subscriptions', () => {
           `,
         })
         .subscribe({
-          next: res => {
+          next: async res => {
             expect(res.data.uploadProgress).toBeGreaterThanOrEqual(progress)
             progress = res.data.uploadProgress
             expect(progress).toBeGreaterThan(-1)
-            expect(progress).toBeLessThanOrEqual(512000)
+            expect(progress).toBeLessThanOrEqual(1000000)
+            // sometimes the last notification is sent slightly before
+            // fetch completes, resulting in an unresolved promise, so
+            // we just wait a tiny bit.
+            await wait(100)
             if (done) resolve('done')
           },
           error: reject,
