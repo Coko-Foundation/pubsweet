@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.5.2"></a>
+## [2.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.1...xpub-edit@2.5.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* **component:** add state to italics ([68ffe93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68ffe93))
+
+
+
+
 <a name="2.5.1"></a>
 ## [2.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.0...xpub-edit@2.5.1) (2018-08-22)
 

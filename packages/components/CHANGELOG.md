@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.7.1"></a>
+      <a name="9.7.2"></a>
+## [9.7.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.1...pubsweet-components@9.7.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* exported notes and fix notes on different lines ([1336da6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1336da6))
+* **component:** add state to italics ([68ffe93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68ffe93))
+
+
+
+
+      <a name="9.7.1"></a>
 ## [9.7.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.0...pubsweet-components@9.7.1) (2018-09-06)
 
 
@@ -11,7 +23,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-components
 
-  <a name="9.7.0"></a>
+<a name="9.7.0"></a>
 # [9.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.3...pubsweet-components@9.7.0) (2018-09-04)
 
 
