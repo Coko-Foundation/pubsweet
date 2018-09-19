@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.4"></a>
+## [0.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.3.3...pubsweet-component-epub@0.3.4) (2018-09-19)
+
+
+### Bug Fixes
+
+* exported notes and fix notes on different lines ([1336da6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1336da6))
+
+
+
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.3.2...pubsweet-component-epub@0.3.3) (2018-08-20)
 

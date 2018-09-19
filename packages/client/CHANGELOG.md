@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.2.2"></a>
+## [4.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.2.1...pubsweet-client@4.2.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* get current user in authorize component ([ae773fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ae773fa))
+
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.2.0...pubsweet-client@4.2.1) (2018-09-06)
 

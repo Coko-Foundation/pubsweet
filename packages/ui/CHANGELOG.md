@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="8.6.1"></a>
+      <a name="8.6.2"></a>
+## [8.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.1...@pubsweet/ui@8.6.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* **ui:** make sure action group does not render empty elements ([d310cdc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d310cdc))
+
+
+
+
+      <a name="8.6.1"></a>
 ## [8.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.0...@pubsweet/ui@8.6.1) (2018-09-06)
 
 
@@ -14,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="8.6.0"></a>
+<a name="8.6.0"></a>
 # [8.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.5.0...@pubsweet/ui@8.6.0) (2018-09-04)
 
 
