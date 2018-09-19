@@ -15,6 +15,7 @@ const resolvers = {
   Upload: GraphQLUpload,
   Mutation: {
     upload: async (_, { file, fileSize }, context) => {
+      const pubsub = await getPubsub()
       const { stream, filename, encoding } = await file
 
       const raw = await randomBytes(16)
@@ -25,7 +26,6 @@ const resolvers = {
       const outStream = fs.createWriteStream(outPath)
       stream.pipe(outStream, { encoding })
       let uploadedSize = 0
-      const pubsub = await getPubsub()
 
       stream.on('data', chunk => {
         uploadedSize += chunk.length

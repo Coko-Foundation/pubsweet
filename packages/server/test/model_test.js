@@ -1,8 +1,5 @@
 const STATUS = require('http-status-codes')
-
-const User = require('../src/models/User')
-const Fragment = require('../src/models/Fragment')
-const Collection = require('../src/models/Collection')
+const { User, Fragment, Collection } = require('../src/models')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
@@ -16,7 +13,7 @@ describe('Model', () => {
     otherUser = await new User(fixtures.updatedUser).save()
   })
 
-  it('initially has no owner', () => {
+  it('initially has no owners', () => {
     const collection = new Collection(fixtures.collection)
 
     expect(collection.owners).toEqual([])
@@ -36,18 +33,6 @@ describe('Model', () => {
     expect(collection.owners.sort()).toEqual([user.id, otherUser.id].sort())
     expect(collection.isOwner(user.id)).toBe(true)
     expect(collection.isOwner(otherUser.id)).toBe(true)
-  })
-
-  it('cannot set owners to non-array', () => {
-    const collection = new Collection(fixtures.collection)
-
-    expect.hasAssertions()
-    try {
-      collection.setOwners('notAnArray')
-    } catch (err) {
-      expect(err.name).toEqual('ValidationError')
-      expect(err.message).toEqual('owners should be an array')
-    }
   })
 
   it('can validate an object', () => {
@@ -109,14 +94,14 @@ describe('Model', () => {
 
   it('turns an object selector into SQL clauses', () => {
     expect(User.selectorToSql({ foo: 'bar', 'do.re.mi': 'fa so la' })).toEqual([
-      "data->>'foo' = $1",
-      "data->'do'->'re'->>'mi' = $2",
+      "data->>'foo' = ?",
+      "data->'do'->'re'->>'mi' = ?",
     ])
   })
 
   it('escapes naughty names', () => {
     expect(
       User.selectorToSql({ "Robert'); DROP TABLE Students; --": '' }),
-    ).toEqual(["data->>'Robert''); DROP TABLE Students; --' = $1"])
+    ).toEqual(["data->>'Robert''); DROP TABLE Students; --' = ?"])
   })
 })

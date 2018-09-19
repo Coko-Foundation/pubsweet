@@ -1,29 +1,29 @@
 const resolvers = {
   Query: {
     fragment(_, { id }, ctx) {
-      return ctx.connectors.fragment.fetchOne(id, ctx)
+      return ctx.connectors.Fragment.fetchOne(id, ctx)
     },
     fragments(_, { id }, ctx) {
-      return ctx.connectors.fragment.fetchAll(ctx)
+      return ctx.connectors.Fragment.fetchAll(ctx)
     },
   },
   Mutation: {
     createFragment(_, { input }, ctx) {
-      return ctx.connectors.fragment.create(input, ctx)
+      return ctx.connectors.Fragment.create(input, ctx)
     },
     deleteFragment(_, { id }, ctx) {
-      return ctx.connectors.fragment.delete(id, ctx)
+      return ctx.connectors.Fragment.delete(id, ctx)
     },
     updateFragment(_, { id, input }, ctx) {
-      return ctx.connectors.fragment.update(id, input, ctx)
+      return ctx.connectors.Fragment.update(id, input, ctx)
     },
   },
   Fragment: {
     owners(fragment, vars, ctx) {
-      return ctx.connectors.user.fetchSome(fragment.owners, ctx)
+      return ctx.connectors.User.fetchSome(fragment.owners, ctx)
     },
     fragments(fragment, vars, ctx) {
-      return ctx.connectors.fragment.fetchSome(fragment.fragments, ctx)
+      return ctx.connectors.Fragment.fetchSome(fragment.fragments, ctx)
     },
   },
 }

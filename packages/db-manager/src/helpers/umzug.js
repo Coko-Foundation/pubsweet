@@ -13,7 +13,7 @@ const makeTempDir = promisify(tmp.dir)
 const sqlResolver = filePath => ({
   up: async db => {
     const fileContents = await fs.readFile(filePath, 'utf-8')
-    return db.query(fileContents)
+    return db.raw(fileContents)
   },
 })
 

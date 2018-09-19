@@ -247,7 +247,7 @@ describe('Collections API', () => {
         .then(res => res.body)
 
       const otherUserUpdate = { title: 'Causes conflict', filtered: 'example' }
-      const Collection = require('../src/models/Collection.js')
+      const { Collection } = require('pubsweet-server')
       const collectionHandle = new Collection(
         Object.assign({}, collection, otherUserUpdate),
       )

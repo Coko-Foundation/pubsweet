@@ -1,6 +1,4 @@
-const Collection = require('./models/Collection')
-const User = require('./models/User')
-
+const { User, Collection } = require('pubsweet-server')
 const logger = require('@pubsweet/logger')
 
 class Setup {

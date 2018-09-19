@@ -1,9 +1,7 @@
-const User = require('../models/User')
-const Collection = require('../models/Collection')
-const Team = require('../models/Team')
-const Fragment = require('../models/Fragment')
-
+const models = require('../models')
 const authsome = require('../helpers/authsome')
+
+const { User, Collection, Team, Fragment } = models
 const AuthorizationError = require('../errors/AuthorizationError')
 const STATUS = require('http-status-codes')
 const express = require('express')

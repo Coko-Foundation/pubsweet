@@ -4,15 +4,16 @@ const onError = require('../error-exit')
 
 const requireRelative = m =>
   require(require.resolve(m, { paths: [process.cwd()] }))
+
 // this script run from global install needs to use an app's local pubsweet-server.
-const startServer = requireRelative('pubsweet-server')
+const { startServer } = requireRelative('pubsweet-server')
 
 const start = async () => {
   const rawApp = express()
   await build(rawApp)
-  const server = await startServer(rawApp)
-  server.on('error', onError)
-  return server
+  const startedServer = await startServer(rawApp)
+  startedServer.on('error', onError)
+  return startedServer
 }
 
 if (require.main === module) {

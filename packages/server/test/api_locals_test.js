@@ -1,7 +1,7 @@
 const User = require('../src/models/User')
 const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
-const api = require('../src').configureApp(require('express')())
+const api = require('../src/app')(require('express')())
 
 describe('api/app locals', () => {
   beforeEach(async () => {

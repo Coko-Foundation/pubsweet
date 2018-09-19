@@ -17,7 +17,6 @@ module.exports = {
         execute,
         subscribe,
         onConnect: (connectionParams, webSocket, context) => {
-          // console.log('new connection to websocket')
           if (!connectionParams.authToken) {
             throw new Error('Missing auth token')
           }

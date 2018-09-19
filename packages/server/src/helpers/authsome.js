@@ -1,8 +1,9 @@
 const config = require('config')
 const Authsome = require('authsome')
-const models = require('../models')
 
 const mode = require(config.get('authsome.mode'))
+
+const models = require('../models')
 
 const authsome = new Authsome(
   { ...config.authsome, mode },

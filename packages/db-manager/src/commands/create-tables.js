@@ -3,7 +3,7 @@ const db = require('pubsweet-server/src/db')
 const migrate = require('./migrate')
 
 const createTables = async clobber => {
-  const { rows } = await db.query(`
+  const { rows } = await db.raw(`
     SELECT tablename
     FROM pg_tables
     WHERE schemaname = current_schema
@@ -16,7 +16,7 @@ const createTables = async clobber => {
       const dropQuery = rows
         .map(row => `DROP TABLE "${row.tablename}" CASCADE`)
         .join(';')
-      await db.query(dropQuery)
+      await db.raw(dropQuery)
     } else {
       logger.error(
         'If you want to overwrite the database, set clobber option to true',
@@ -28,7 +28,7 @@ const createTables = async clobber => {
   // run migrations
   await migrate()
 
-  const { rows: countRows } = await db.query(`
+  const { rows: countRows } = await db.raw(`
     SELECT COUNT(*)
     FROM pg_tables
     WHERE schemaname = current_schema AND tablename = 'entities'
@@ -36,7 +36,7 @@ const createTables = async clobber => {
 
   // fallback if no entities table (which implies old version of server)
   if (countRows[0].count === '0') {
-    await db.query('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
+    await db.raw('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
   }
 }
 

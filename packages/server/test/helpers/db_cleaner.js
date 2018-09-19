@@ -1,11 +1,13 @@
 const db = require('../../src/db')
 const logger = require('@pubsweet/logger')
+const { migrate } = require('@pubsweet/db-manager')
 
 const dbCleaner = async () => {
-  await db.query('DROP TABLE IF EXISTS entities')
-  await db.query('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
-
-  logger.info('Created database')
+  await db.raw('DROP SCHEMA public CASCADE;')
+  await db.raw('CREATE SCHEMA public;')
+  await db.raw('GRANT ALL ON SCHEMA public TO public;')
+  await migrate()
+  logger.info('Dropped all tables and ran all migrations')
 }
 
 module.exports = dbCleaner

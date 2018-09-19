@@ -2,8 +2,14 @@
  * PubSub related stuff used in GraphQL subscriptions
  */
 const { PostgresPubSub } = require('graphql-postgres-subscriptions')
+const config = require('config')
+const pg = require('pg')
 
-const db = require('../db')
+const connection = config['pubsweet-server'] && config['pubsweet-server'].db
+
+const ignoreTerminatedError =
+  config.has('pubsweet-server.ignoreTerminatedConnectionError') &&
+  config.get('pubsweet-server.ignoreTerminatedConnectionError')
 
 let pubsub
 
@@ -14,8 +20,24 @@ module.exports = {
    */
   getPubsub: async () => {
     if (pubsub) return pubsub
-    const client = await db.connect()
+    const client = new pg.Client(connection)
+    // ignore some errors which are thrown in integration tests
+    if (ignoreTerminatedError) {
+      client.on('error', async err => {
+        if (
+          err.message !==
+            'terminating connection due to administrator command' &&
+          err.message !== 'Connection terminated unexpectedly'
+        ) {
+          throw err
+        }
+      })
+    }
+    await client.connect()
     pubsub = new PostgresPubSub({ client })
+    if (ignoreTerminatedError) {
+      pubsub.subscribe('error', () => {})
+    }
     return pubsub
   },
   /**

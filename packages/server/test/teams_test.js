@@ -1,8 +1,4 @@
-const Collection = require('../src/models/Collection')
-const Fragment = require('../src/models/Fragment')
-const User = require('../src/models/User')
-const Team = require('../src/models/Team')
-
+const { Fragment, User, Collection, Team } = require('../src/models')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 

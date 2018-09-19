@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const config = require('config')
 
 const resolveRelative = m => require.resolve(m, { paths: [process.cwd()] })
@@ -21,18 +22,27 @@ module.exports = () => {
     migrationsPaths.push(path.resolve(config.get('dbManager.migrationsPath')))
   }
 
+  function getPathsRecursively(componentName) {
+    const component = requireRelative(componentName)
+    const migrationsPath = path.resolve(
+      path.dirname(resolveRelative(componentName)),
+      'migrations',
+    )
+
+    // Add /migrations folder for components by convention
+    if (fs.existsSync(migrationsPath)) {
+      migrationsPaths.push(migrationsPath)
+    }
+
+    if (component.extending) {
+      getPathsRecursively(component.extending)
+    }
+  }
+
   // load migrations from components
   if (config.has('pubsweet.components')) {
-    config.get('pubsweet.components').forEach(name => {
-      const component = requireRelative(name)
-      if (component.migrationsPath) {
-        migrationsPaths.push(
-          path.resolve(
-            path.dirname(resolveRelative(name)),
-            component.migrationsPath,
-          ),
-        )
-      }
+    config.get('pubsweet.components').forEach(componentName => {
+      getPathsRecursively(componentName)
     })
   }
 

@@ -2,6 +2,7 @@
 // client and server, it sits in the middle.
 
 const Joi = require('joi')
+const { merge, flatten } = require('lodash')
 
 // These are fixed/required validations, they are combined with configurable
 // validations later
@@ -17,9 +18,7 @@ const validations = {
     owners: Joi.array().items(Joi.string().guid()),
   },
   collection: {
-    id: Joi.string()
-      .guid()
-      .required(),
+    id: Joi.string().guid(),
     type: Joi.string().required(),
     owners: Joi.array().items(Joi.string().guid()),
     fragments: Joi.array().items(
@@ -64,27 +63,53 @@ const validations = {
   },
 }
 
-const allValidations = (type, appValidations) => {
-  let appValidationsForType = {}
-
-  if (appValidations && appValidations[type]) {
-    appValidationsForType = appValidations[type]
+const allValidations = (type, extendedValidations) => {
+  // If there are several source of extended validations,
+  // deep merge them.
+  if (Array.isArray(extendedValidations)) {
+    extendedValidations = merge(...extendedValidations)
   }
 
-  if (Array.isArray(appValidationsForType)) {
-    const alternatives = appValidationsForType.map(alternative => ({
+  let extendedValidationsForType = {}
+
+  if (extendedValidations && extendedValidations[type]) {
+    extendedValidationsForType = extendedValidations[type]
+  }
+
+  if (Array.isArray(extendedValidationsForType)) {
+    const alternatives = extendedValidationsForType.map(alternative => ({
       ...validations[type],
       ...alternative,
     }))
     return Joi.alternatives().try(...alternatives)
   }
 
-  return Joi.object().keys({ ...validations[type], ...appValidationsForType })
+  return Joi.object().keys({
+    ...validations[type],
+    ...extendedValidationsForType,
+  })
 }
 
-module.exports = appValidations => ({
-  fragment: allValidations('fragment', appValidations),
-  collection: allValidations('collection', appValidations),
-  user: allValidations('user', appValidations),
-  team: allValidations('team', appValidations),
-})
+module.exports = extendedValidations => {
+  const coreModels = Object.keys(validations)
+
+  if (!extendedValidations) {
+    extendedValidations = []
+  } else if (!Array.isArray(extendedValidations)) {
+    extendedValidations = [extendedValidations]
+  }
+
+  const externalModels = [
+    ...new Set(
+      flatten(extendedValidations.map(validations => Object.keys(validations))),
+    ),
+  ]
+
+  const models = coreModels.concat(externalModels)
+
+  const exported = {}
+  models.forEach(model => {
+    exported[model] = allValidations(model, extendedValidations)
+  })
+  return exported
+}

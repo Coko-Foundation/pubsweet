@@ -1,3 +1,1 @@
-module.exports = {
-  migrationsPath: 'migrations',
-}
+module.exports = {}
