@@ -342,6 +342,19 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
+"@pubsweet/db-manager@^1.0.0", "@pubsweet/db-manager@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@pubsweet/db-manager/-/db-manager-1.4.0.tgz#7353c291972bf4584ebd128379a61747272ee50e"
+  dependencies:
+    "@pubsweet/logger" "^0.2.6"
+    fs-extra "^4.0.2"
+    isomorphic-fetch "^2.2.1"
+    joi "^13.1.0"
+    pg "^7.4.1"
+    pubsweet-server "^8.2.0"
+    tmp "^0.0.33"
+    umzug "^2.1.0"
+
 "@pubsweet/default-theme@^0.2.0":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@pubsweet/default-theme/-/default-theme-0.2.2.tgz#23a229e74a7bdc63b951efe0f0bbd830fd5faa98"
@@ -10188,6 +10201,45 @@ pubsweet-server@^7.2.0:
     uuid "^3.0.1"
     winston "^2.2.0"
 
+pubsweet-server@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/pubsweet-server/-/pubsweet-server-8.2.0.tgz#b50d87f29b21ac5d2cb2cfddbb8214c9ffe58bda"
+  dependencies:
+    "@pubsweet/logger" "^0.2.6"
+    apollo-server-express "^1.3.2"
+    apollo-upload-server "^4.0.2"
+    authsome "^0.1.0"
+    bcrypt "^2.0.1"
+    bluebird "^3.5.1"
+    body-parser "^1.15.2"
+    colors "^1.1.2"
+    config "^1.26.2"
+    cookie-parser "^1.4.3"
+    dotenv "^4.0.0"
+    express "^4.16.1"
+    graphql "^0.13.2"
+    graphql-postgres-subscriptions "^1.0.2"
+    graphql-tools "^2.18.0"
+    helmet "^3.8.1"
+    http-status-codes "^1.0.6"
+    joi "^13.1.0"
+    jsonwebtoken "^7.1.7"
+    lodash "^4.0.0"
+    minimist "^1.2.0"
+    morgan "^1.8.2"
+    multer "^1.1.0"
+    passport "^0.3.2"
+    passport-anonymous "^1.0.1"
+    passport-http-bearer "^1.0.1"
+    passport-local "^1.0.0"
+    pg "^7.4.1"
+    promise-queue "^2.2.3"
+    prompt "^1.0.0"
+    pubsweet-sse "^1.0.1"
+    subscriptions-transport-ws "^0.9.12"
+    uuid "^3.0.1"
+    winston "^2.2.0"
+
 pubsweet-sse@^0.1.4:
   version "0.1.5"
   resolved "http://registry.npmjs.org/pubsweet-sse/-/pubsweet-sse-0.1.5.tgz#c93195c52121e299c8a55896962d870f792ce963"
@@ -10195,6 +10247,26 @@ pubsweet-sse@^0.1.4:
 pubsweet-theme-plugin@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/pubsweet-theme-plugin/-/pubsweet-theme-plugin-0.0.3.tgz#1773543a95ed9f56eb8b14f13f24496e034d140b"
+
+pubsweet@^2.0.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/pubsweet/-/pubsweet-2.4.0.tgz#fe2d27ea1a2792e7978fa1b2c446489e5778e358"
+  dependencies:
+    "@pubsweet/db-manager" "^1.4.0"
+    "@pubsweet/logger" "^0.2.6"
+    bluebird "^3.5.0"
+    colors "^1.1.2"
+    commander "^2.9.0"
+    express "^4.15.3"
+    forever-monitor "^1.7.0"
+    fs-extra "^4.0.2"
+    inflection "^1.12.0"
+    prompt flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87
+    pubsweet-server "^8.2.0"
+    uuid "^3.0.1"
+    webpack "^3.8.1"
+    webpack-dev-middleware "^1.12.0"
+    webpack-hot-middleware "^2.20.0"
 
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"

@@ -49,6 +49,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
+    "@pubsweet/db-manager": "^2.0.0",
     "eventsource": "^1.0.4",
     "jest-cli": "^23.5.0",
     "jest-environment-db": "^2.0.0",
