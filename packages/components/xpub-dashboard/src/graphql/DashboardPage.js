@@ -4,8 +4,8 @@ import { gql } from 'apollo-client-preset'
 import { withLoader } from 'pubsweet-client'
 import { newestFirst } from 'xpub-selectors'
 import { cloneDeep } from 'lodash'
-import Dashboard from '../Dashboard'
-import upload from '../../lib/upload'
+import Dashboard from '../components/Dashboard'
+import upload from '../lib/upload'
 
 const query = gql`
   {
