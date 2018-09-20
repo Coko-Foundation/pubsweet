@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-components",
-  "version": "9.7.2",
+  "version": "9.7.3",
   "private": true,
   "license": "MIT",
   "devDependencies": {
@@ -25,9 +25,9 @@
     "joi-browser": "^13.0.1",
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
-    "pubsweet": "^2.4.0",
-    "pubsweet-client": "^4.2.2",
-    "pubsweet-server": "^8.2.0",
+    "pubsweet": "^3.0.0",
+    "pubsweet-client": "^5.0.0",
+    "pubsweet-server": "^9.0.0",
     "pubsweet-theme-plugin": "^0.0.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
