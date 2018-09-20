@@ -15,7 +15,7 @@ const SignupForm = withFormik({
     password: props.password,
   }),
   displayName: 'signup',
-  handleSubmit,
+  handleSubmit: () => {},
 })(Signup)
 ;<SignupForm />
 ```
