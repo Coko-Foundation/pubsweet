@@ -20,7 +20,7 @@ your report. After the initial reply to your report, the security team will
 try to keep you informed of the progress towards a fix and full
 announcement, and may ask for additional information or guidance.
 
-You can also report a vulnerability through [npm](https://www.npmjs.com/policies/security#reporting-security-problems-to-npm), with the option of submitting a vunerability directly for a specific package, e.g. [`pubsweet`](https://www.npmjs.com/advisories/report?package=pubsweet).
+You can also report a vulnerability through [npm](https://www.npmjs.com/policies/security#reporting-security-problems-to-npm), with the option of submitting a vulnerability directly for a specific package, e.g. [`pubsweet`](https://www.npmjs.com/advisories/report?package=pubsweet).
 
 ## Disclosure Policy
 
