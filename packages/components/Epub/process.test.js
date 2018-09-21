@@ -24,12 +24,16 @@ test('converts source to html', () => {
   }
 
   const styles = ['test.css']
-  const activeConverters = [converters.wax]
+  const activeConverters = [converters.wax, converters['wax-ucp']]
+  const notesPart = cheerio.load(
+    '<html><body><section data-type="notes"><h1 class="ct">Notes</h1></section></body></html>',
+  )
 
   const { title, content } = processFragment({
     styles,
     activeConverters,
     book,
+    notesPart,
   })(fragment)
 
   expect(title).toBe('A Test')

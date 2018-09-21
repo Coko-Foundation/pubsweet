@@ -181,17 +181,7 @@ module.exports = (
       }
     }
     const li = notesPart('<li/>').html(content)
-    // notesPart(`ol[id=${somethingRandom}]`).append(content)
     notesList.append(li)
-    // const callout = $(`
-    //   <a class="inline-note-callout" href="#${id}">
-    //     <sup>${i + 1}</sup>
-    //   </a>
-    //   <span class="inline-note-footer" data-note-num="${id}">
-    //     <span class="inline-note-number">${noteNumber}</span>
-    //     <span class="inline-note-content">${content}<span>
-    //   </span>
-    // `)
     const callout = $(`
       <a class="inline-note-callout" href="#${id}">
         <sup>${noteNumber}</sup>
