@@ -10,6 +10,10 @@ const config = require('config')
 
 const createToken = user => {
   logger.debug('Creating token for', user.username)
+  let expiresIn = 24 * 3600
+  if (config.has('pubsweet-server.tokenExpiresIn')) {
+    expiresIn = config.get('pubsweet-server.tokenExpiresIn')
+  }
 
   return jwt.sign(
     {
@@ -17,7 +21,7 @@ const createToken = user => {
       id: user.id,
     },
     config.get('pubsweet-server.secret'),
-    { expiresIn: 24 * 3600 },
+    { expiresIn },
   )
 }
 
