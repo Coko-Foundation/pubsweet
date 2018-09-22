@@ -80,10 +80,4 @@ describe('token management', () => {
     verifyToken(token, tokenErrorCallback)
     Date.now = realDate
   })
-
-  it('checks that Date is stil normal elsewhere', () => {
-    expect(Date.now()).toEqual(new Date().getTime())
-  })
 })
-
-//
