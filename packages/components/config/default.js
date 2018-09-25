@@ -1,4 +1,5 @@
 const path = require('path')
+const { deferConfig } = require('config/defer')
 
 module.exports = {
   authsome: {
@@ -15,7 +16,7 @@ module.exports = {
     validations: path.join(__dirname, 'upload-validations'),
   },
   'pubsweet-server': {
-    baseUrl: 'http://example.com',
+    baseUrl: deferConfig(cfg => 'http://example.com'),
   },
   mailer: {
     from: 'nobody@example.com',

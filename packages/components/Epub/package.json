@@ -21,7 +21,7 @@
     "pubsweet-server": "^7.1.0"
   },
   "devDependencies": {
-    "config": "^1.28.1",
+    "config": "^2.0.1",
     "jest": "^23.5.0",
     "lodash": "^4.17.4"
   }

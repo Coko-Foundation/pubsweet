@@ -22,13 +22,13 @@
   "author": "Antony Denyer",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^23.5.0",
+    "jest": "^23.6.0",
     "nsp": "^2.7.0",
     "winston": "^2.3.1"
   },
   "dependencies": {
-    "config": "^1.26.2",
-    "joi": "^13.1.0",
+    "config": "^2.0.1",
+    "joi": "^13.6.0",
     "lodash": "^4.17.4"
   }
 }

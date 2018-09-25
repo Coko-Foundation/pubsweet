@@ -6,7 +6,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "joi-browser": "^13.0.1",
+    "joi-browser": "^13.4.0",
     "prop-types": "^15.5.10",
     "pubsweet-server": "^9.0.0"
   },
