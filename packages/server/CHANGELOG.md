@@ -3,7 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.0.0"></a>
+      <a name="9.1.0"></a>
+# [9.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.0.0...pubsweet-server@9.1.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **server:** add missing objection dependency ([3dfdae3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3dfdae3))
+* **server:** specify db-manager dev dependency for server ([b86a564](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b86a564))
+
+
+### Features
+
+* **server:** add configurable token expiration ([f2eb1a8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f2eb1a8)), closes [#427](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/427)
+
+
+
+
+      <a name="9.0.0"></a>
 # [9.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.2.0...pubsweet-server@9.0.0) (2018-09-20)
 
 
@@ -22,7 +39,7 @@ startServer } = require('pubsweet-server').
 
 
 
-  <a name="8.2.0"></a>
+<a name="8.2.0"></a>
 # [8.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.1.0...pubsweet-server@8.2.0) (2018-09-19)
 
 

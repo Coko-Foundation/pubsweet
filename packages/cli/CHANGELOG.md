@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="3.0.0"></a>
+  <a name="3.0.1"></a>
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.0...pubsweet@3.0.1) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+  <a name="3.0.0"></a>
 # [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.4.0...pubsweet@3.0.0) (2018-09-20)
 
 
@@ -22,7 +30,7 @@ startServer } = require('pubsweet-server').
 
 
 
-      <a name="2.4.0"></a>
+<a name="2.4.0"></a>
 # [2.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.3.2...pubsweet@2.4.0) (2018-09-19)
 
 
