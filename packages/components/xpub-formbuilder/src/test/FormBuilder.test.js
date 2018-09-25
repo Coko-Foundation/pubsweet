@@ -8,9 +8,6 @@ import FormBuilder from '../components/FormBuilder'
 import forms from './config/test.json'
 import formsnoelements from './config/testnoelements.json'
 
-// this should be elsewhere
-Enzyme.configure({ adapter: new Adapter() })
-
 jest.mock('config', () => ({
   'pubsweet-client': {},
   authsome: {
@@ -35,6 +32,9 @@ jest.mock('config', () => ({
     },
   },
 }))
+
+// this should be elsewhere
+Enzyme.configure({ adapter: new Adapter() })
 
 describe('FormBuilder', () => {
   const makeWrapper = (props = {}) => {

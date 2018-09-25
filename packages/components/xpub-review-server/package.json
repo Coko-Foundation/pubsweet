@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
-    "jest": "^23.5.0",
+    "jest": "^23.6.0",
     "superagent": "^3.8.2",
     "supertest": "^3.0.0"
   },
