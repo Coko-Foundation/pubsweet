@@ -23,7 +23,7 @@
     "apollo-link-ws": "^1.0.8",
     "apollo-upload-client": "^8.0.0",
     "authsome": "^0.1.0",
-    "config": "^1.21.0",
+    "config": "^2.0.1",
     "event-source-polyfill": "^0.0.10",
     "global": "^4.3.1",
     "graphql": "^0.13.2",

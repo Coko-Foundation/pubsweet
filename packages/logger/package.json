@@ -27,7 +27,7 @@
     "winston": "^2.3.1"
   },
   "dependencies": {
-    "config": "^1.26.2",
+    "config": "^2.0.1",
     "joi": "^13.1.0",
     "lodash": "^4.17.4"
   }
