@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-formbuilder",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Form builder component for Xpub",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
