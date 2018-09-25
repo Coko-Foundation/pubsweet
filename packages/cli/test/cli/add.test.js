@@ -22,7 +22,7 @@ const readPkgSpy = require('../../src/package-management/helpers/')
 
 const writeSpy = fs.writeJsonSync
 
-describe('add', () => {
+describe.skip('add', () => {
   beforeAll(() => {
     process.chdir(path.dirname(require.resolve('@pubsweet/starter')))
   })

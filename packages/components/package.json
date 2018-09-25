@@ -22,7 +22,7 @@
     "font-awesome": "^4.7.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.5.0",
-    "joi-browser": "^13.0.1",
+    "joi-browser": "^13.4.0",
     "lerna": "^2.5.1",
     "node-sass": "^4.5.3",
     "pubsweet": "^3.0.0",
