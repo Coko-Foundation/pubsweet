@@ -3,15 +3,17 @@ const helpers = require('./helpers')
 const SendEmail = require('@pubsweet/component-send-email')
 
 const configData = {
-  logo: config.get('logo'),
-  senderName: config.get('sender.name'),
-  senderCity: config.get('sender.city'),
-  senderState: config.get('sender.state'),
-  senderZip: config.get('sender.zipCode'),
+  logo: config.get('journal.logo'),
+  address: config.get('journal.address'),
+  privacy: config.get('journal.privacy'),
+  ctaColor: config.get('journal.ctaColor'),
+  logoLink: config.get('journal.logoLink'),
+  publisher: config.get('journal.publisher'),
 }
 class Email {
   constructor({
     type = 'system',
+    fromEmail = config.get('journal.fromEmail'),
     toUser = {
       id: '',
       email: '',
@@ -23,11 +25,13 @@ class Email {
       ctaText: '',
       signatureName: '',
       unsubscribeLink: '',
+      signatureJournal: '',
     },
   }) {
     this.type = type
     this.toUser = toUser
     this.content = content
+    this.fromEmail = fromEmail
   }
 
   set _toUser(newToUser) {
@@ -42,45 +46,51 @@ class Email {
     this.content = newContent
   }
 
-  getBody({ body = {}, isReviewerInvitation = false }) {
-    if (isReviewerInvitation) {
-      return {
-        html: helpers.getInvitationBody({
-          replacements: {
-            ...body,
-            ...configData,
-            ...this.content,
-            toUserName: this.toUser.name,
-          },
-        }),
-        text: `${body.resend} ${body.upperContent} ${body.manuscriptText} ${
-          body.lowerContent
-        } ${this.content.signatureName}`,
-      }
-    }
-
+  getInvitationBody({ emailBodyProps }) {
     return {
-      html: helpers.getNotificationBody({
+      html: helpers.getCompiledInvitationBody({
         replacements: {
-          ...body,
           ...configData,
-          toUserName: this.toUser.name,
           ...this.content,
+          ...emailBodyProps,
+          toEmail: this.toUser.email,
+          toUserName: this.toUser.name,
         },
       }),
-      text: `${body.paragraph} ${this.content.ctaLink} ${
+      text: `${emailBodyProps.resend} ${emailBodyProps.upperContent} ${
+        emailBodyProps.manuscriptText
+      } ${emailBodyProps.lowerContent} ${this.content.signatureName}`,
+    }
+  }
+
+  getNotificationBody({ emailBodyProps }) {
+    return {
+      html: helpers.getCompiledNotificationBody({
+        replacements: {
+          ...configData,
+          ...this.content,
+          ...emailBodyProps,
+          toEmail: this.toUser.email,
+          toUserName: this.toUser.name,
+        },
+      }),
+      text: `${emailBodyProps.paragraph} ${this.content.ctaLink} ${
         this.content.ctaText
       } ${this.content.signatureName}`,
     }
   }
 
   async sendEmail({ text, html }) {
+    const { fromEmail: from } = this
+    const { email: to } = this.toUser
+    const { subject } = this.content
+
     const mailData = {
-      from: config.get('mailer.from'),
-      to: this.toUser.email,
-      subject: this.content.subject,
+      to,
       text,
       html,
+      from,
+      subject,
     }
 
     try {

@@ -2,7 +2,9 @@
   <tr>
     <td style="padding:30px 23px 0px 23px;background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff">
       <div>
-        <p data-pm-slice="1 1 []">Dear Dr. {{toUserName}},</p>
+        {{#if hasIntro}}
+          {{> intro}}
+        {{/if}}
         <p>&nbsp;</p>
         <p>
           {{{paragraph}}}
@@ -13,7 +15,9 @@
             {{> button }}
           {{/if}}
         </p>
-        {{> signature}}
+        {{#if hasSignature }}
+          {{> signature}}
+        {{/if}}
         <p>&nbsp;</p>
       </div>
     </td>

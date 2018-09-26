@@ -1,17 +1,18 @@
 const fs = require('fs')
 const handlebars = require('handlebars')
 
-const getNotificationBody = ({ replacements }) => {
+const getCompiledNotificationBody = ({ replacements }) => {
   handlePartial('header', replacements)
+  if (replacements.hasIntro) handlePartial('intro', replacements)
   handlePartial('footer', replacements)
-  handlePartial('signature', replacements)
+  if (replacements.hasSignature) handlePartial('signature', replacements)
   if (replacements.hasLink) handlePartial('button', replacements)
   handlePartial('body', replacements)
 
-  return getMainTemplate({ fileName: 'notification', context: replacements })
+  return compileBody({ fileName: 'notification', context: replacements })
 }
 
-const getInvitationBody = ({ replacements }) => {
+const getCompiledInvitationBody = ({ replacements }) => {
   handlePartial('invHeader', replacements)
   handlePartial('footer', replacements)
   handlePartial('invUpperContent', replacements)
@@ -20,7 +21,7 @@ const getInvitationBody = ({ replacements }) => {
   handlePartial('signature', replacements)
   handlePartial('invLowerContent', replacements)
 
-  return getMainTemplate({ fileName: 'invitation', context: replacements })
+  return compileBody({ fileName: 'invitation', context: replacements })
 }
 
 const readFile = path =>
@@ -32,14 +33,14 @@ const readFile = path =>
     }
   })
 
-const handlePartial = (partialName = 'signature', context = {}) => {
+const handlePartial = (partialName, context = {}) => {
   let partial = readFile(`${__dirname}/templates/partials/${partialName}.hbs`)
   const template = handlebars.compile(partial)
   partial = template(context)
   handlebars.registerPartial(partialName, partial)
 }
 
-const getMainTemplate = ({ fileName, context }) => {
+const compileBody = ({ fileName, context }) => {
   const htmlFile = readFile(`${__dirname}/templates/${fileName}.html`)
   const htmlTemplate = handlebars.compile(htmlFile)
   const htmlBody = htmlTemplate(context)
@@ -47,6 +48,6 @@ const getMainTemplate = ({ fileName, context }) => {
 }
 
 module.exports = {
-  getNotificationBody,
-  getInvitationBody,
+  getCompiledNotificationBody,
+  getCompiledInvitationBody,
 }
