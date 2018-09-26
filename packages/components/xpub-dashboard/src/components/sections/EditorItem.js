@@ -11,7 +11,7 @@ import MetadataSections from '../metadata/MetadataSections'
 import MetadataType from '../metadata/MetadataType'
 import MetadataReviewType from '../metadata/MetadataReviewType'
 import MetadataSubmittedDate from '../metadata/MetadataSubmittedDate'
-import MetadataOwners from '../metadata/MetadataOwners'
+import MetadataAuthors from '../metadata/MetadataAuthors'
 import MetadataStreamLined from '../metadata/MetadataStreamLined'
 import ProjectLink from '../ProjectLink'
 import Reviews from '../Reviews'
@@ -22,15 +22,13 @@ const VersionTitleLink = styled(ProjectLink)`
   color: #333;
 `
 
-const EditorItemLinks = ({ project, version }) => (
+const EditorItemLinks = ({ version }) => (
   <ActionGroup>
-    <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+    <Action to={`/projects/JournalID/versions/${version.id}/submit`}>
       Summary Info
     </Action>
     <Action
-      to={`/projects/${project.id}/versions/${version.id}/decisions/${
-        project.id
-      }`}
+      to={`/projects/JournalID/versions/${version.id}/decisions/${version.id}`}
     >
       {version.decision && version.decision.status === 'submitted'
         ? `Decision: ${version.decision.recommendation}`
@@ -40,20 +38,21 @@ const EditorItemLinks = ({ project, version }) => (
 )
 
 const getDeclarationsObject = (version, value) => {
-  const declarations = version.declarations || {}
+  const declarations = version.meta.declarations || {}
+
   return declarations[value] || 'no'
 }
 
 const getMetadataObject = (version, value) => {
-  const metadata = version.metadata || {}
+  const metadata = version.meta || {}
   return metadata[value] || []
 }
 
-const EditorItem = ({ project, version }) => (
-  <Authorize object={[project]} operation="can view my manuscripts section">
+const EditorItem = ({ version }) => (
+  <Authorize object={[version]} operation="can view my manuscripts section">
     <Item>
       <Header>
-        <Status status={project.status} />
+        <Status status={version.status} />
         <Meta>
           <MetadataStreamLined
             streamlinedReview={getDeclarationsObject(
@@ -61,11 +60,18 @@ const EditorItem = ({ project, version }) => (
               'streamlinedReview',
             )}
           />
-          <MetadataOwners owners={project.owners} />
-          <MetadataSubmittedDate submitted={version.submitted} />
+          <MetadataAuthors
+            authors={version.teams.find(team => team.role === 'author').members}
+          />
+          <MetadataSubmittedDate
+            submitted={
+              version.meta.history.find(history => history.type === 'submitted')
+                .date
+            }
+          />
           <MetadataType type={getMetadataObject(version, 'articleType')} />
           <MetadataSections
-            sections={getMetadataObject(version, 'articleSection')}
+            sections={getMetadataObject(version, 'articleSections')}
           />
           <MetadataReviewType
             openPeerReview={getDeclarationsObject(version, 'openPeerReview')}
@@ -73,18 +79,13 @@ const EditorItem = ({ project, version }) => (
         </Meta>
       </Header>
       <Body>
-        <VersionTitleLink
-          id={project.id}
-          page="decisions"
-          project={project}
-          version={version}
-        >
+        <VersionTitleLink id={version.id} page="decisions" version={version}>
           <VersionTitle linkUrl="true" version={version} />
         </VersionTitleLink>
-        <EditorItemLinks project={project} version={version} />
+        <EditorItemLinks project={version} version={version} />
       </Body>
 
-      <Reviews project={project} version={version} />
+      <Reviews version={version} />
     </Item>
   </Authorize>
 )

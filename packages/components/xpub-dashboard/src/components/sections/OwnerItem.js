@@ -8,14 +8,14 @@ import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
 
-const OwnerItem = ({ project, version, deleteProject }) => {
+const OwnerItem = ({ version, deleteProject }) => {
   const itemHeader = (
     <Header>
-      <Status status={project.status} />
+      <Status status={version.status} />
     </Header>
   )
 
-  const baseLink = `/projects/${project.id}/versions/${version.id}`
+  const baseLink = `/projects/JOURNALID/versions/${version.id}`
   const submitLink = `${baseLink}/submit`
   const manuscriptLink = `${baseLink}/manuscript`
 
@@ -31,7 +31,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
       </Action>
     ),
     delete: (
-      <Action key="delete-action" onClick={() => deleteProject(project)}>
+      <Action key="delete-action" onClick={() => deleteProject(version)}>
         Delete
       </Action>
     ),
@@ -45,7 +45,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
 
   const actions = (
     <Authorize
-      object={project}
+      object={version}
       operation="can delete collection"
       unauthorized={unauthorized}
     >
@@ -61,7 +61,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   return (
-    <Authorize object={[project]} operation="can view my submission section">
+    <Authorize object={[version]} operation="can view my submission section">
       <Item>
         {itemHeader}
         {body}

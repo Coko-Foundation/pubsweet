@@ -1,16 +1,11 @@
 import React from 'react'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 
 import UploadManuscript from './UploadManuscript'
-import withVersion from './withVersion'
 import EditorItem from './sections/EditorItem'
 import OwnerItem from './sections/OwnerItem'
-import ReviewerItem from './sections/ReviewerItem'
-
-const OwnerItemWithVersion = withVersion(OwnerItem)
-const EditorItemWithVersion = withVersion(EditorItem)
-const ReviewerItemWithVersion = withVersion(ReviewerItem)
+// import ReviewerItem from './sections/ReviewerItem'
 
 const Dashboard = ({
   acceptFiles,
@@ -20,6 +15,7 @@ const Dashboard = ({
   deleteProject,
   reviewerResponse,
   uploadManuscript,
+  ...props
 }) => (
   <Page>
     <UploadContainer>
@@ -35,63 +31,64 @@ const Dashboard = ({
         Nothing to do at the moment. Please upload a document.
       </UploadContainer>
     )}
-    <Authorize
-      key={`submission-${dashboard.length}`}
+    <AuthorizeWithGraphQL
       object={dashboard}
       operation="can view my submission section"
     >
       {dashboard.length > 0 ? (
         <Section>
           <Heading>My Submissions</Heading>
-          {dashboard.map(project => (
-            <OwnerItemWithVersion
+          {dashboard.map(submission => (
+            <OwnerItem
               deleteProject={() =>
                 // eslint-disable-next-line no-alert
                 window.confirm(
                   'Are you sure you want to delete this submission?',
-                ) && deleteProject(project)
+                ) && deleteProject(submission)
               }
-              key={`submission-${project.id}`}
-              project={project}
+              key={`submission-${submission.id}`}
+              version={submission}
             />
           ))}
         </Section>
       ) : null}
-    </Authorize>
+    </AuthorizeWithGraphQL>
 
-    <Authorize object={dashboard} operation="can view review section">
+    {/* <AuthorizeWithGraphQL
+      object={dashboard}
+      operation="can view review section"
+    >
       {dashboard.length > 0 ? (
         <Section>
           <Heading>To review</Heading>
-          {dashboard.map(project => (
-            <ReviewerItemWithVersion
+          {dashboard.map(review => (
+            <ReviewerItem
               currentUser={currentUser}
-              key={project.id}
-              project={project}
+              key={review.id}
               reviewerResponse={reviewerResponse}
+              version={review}
             />
           ))}
         </Section>
       ) : null}
-    </Authorize>
+    </AuthorizeWithGraphQL> */}
 
-    <Authorize
-      key={`manuscript-${dashboard.length}`}
+    <AuthorizeWithGraphQL
       object={dashboard}
       operation="can view my manuscripts section"
     >
       {dashboard.length > 0 ? (
         <Section>
           <Heading>My Manuscripts</Heading>
-          {dashboard.map(project => (
-            <EditorItemWithVersion
-              key={`manuscript-${project.id}`}
-              project={project}
+          {dashboard.map(manuscript => (
+            <EditorItem
+              key={`manuscript-${manuscript.id}`}
+              version={manuscript}
             />
           ))}
         </Section>
       ) : null}
-    </Authorize>
+    </AuthorizeWithGraphQL>
   </Page>
 )
 
