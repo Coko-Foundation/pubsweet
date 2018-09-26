@@ -28,7 +28,7 @@ class RadioGroup extends React.Component {
             checked={option.value === value}
             className={className}
             color={option.color}
-            disabled={disabled}
+            disabled={disabled || option.disabled}
             inline={inline}
             key={option.value}
             label={option.label}
