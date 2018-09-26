@@ -16,6 +16,7 @@ const Dashboard = ({
   deleteManuscript,
   reviewerResponse,
   uploadManuscript,
+  ...props
 }) => (
   <Page>
     <UploadContainer>

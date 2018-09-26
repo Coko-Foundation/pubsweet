@@ -41,7 +41,10 @@ const EditorItemLinks = ({ version, journals }) => (
 )
 
 const getDeclarationsObject = (version, value) => {
+<<<<<<< HEAD
   if (!version.meta) version.meta = {}
+=======
+>>>>>>> feat(graphql): changes components to new data schema
   const declarations = version.meta.declarations || {}
 
   return declarations[value] || 'no'
@@ -52,6 +55,7 @@ const getMetadataObject = (version, value) => {
   return metadata[value] || []
 }
 
+<<<<<<< HEAD
 const getSubmitedDate = version =>
   getMetadataObject(version, 'history').find(
     history => history.type === 'submitted',
@@ -62,6 +66,10 @@ const EditorItem = ({ version, journals }) => (
     object={[version]}
     operation="can view my manuscripts section"
   >
+=======
+const EditorItem = ({ version }) => (
+  <Authorize object={[version]} operation="can view my manuscripts section">
+>>>>>>> feat(graphql): changes components to new data schema
     <Item>
       <Header>
         <Status status={version.status} />
@@ -72,10 +80,22 @@ const EditorItem = ({ version, journals }) => (
               'streamlinedReview',
             )}
           />
+<<<<<<< HEAD
           <MetadataAuthors authors={getUserFromTeam(version, 'author')} />
           {getSubmitedDate(version) ? (
             <MetadataSubmittedDate submitted={getSubmitedDate(version).date} />
           ) : null}
+=======
+          <MetadataAuthors
+            authors={version.teams.find(team => team.role === 'author').members}
+          />
+          <MetadataSubmittedDate
+            submitted={
+              version.meta.history.find(history => history.type === 'submitted')
+                .date
+            }
+          />
+>>>>>>> feat(graphql): changes components to new data schema
           <MetadataType type={getMetadataObject(version, 'articleType')} />
           <MetadataSections
             sections={getMetadataObject(version, 'articleSections')}
@@ -87,9 +107,15 @@ const EditorItem = ({ version, journals }) => (
       </Header>
       <Body>
         <VersionTitleLink id={version.id} page="decisions" version={version}>
+<<<<<<< HEAD
           <VersionTitle version={version} />
         </VersionTitleLink>
         <EditorItemLinks journals={journals} version={version} />
+=======
+          <VersionTitle linkUrl="true" version={version} />
+        </VersionTitleLink>
+        <EditorItemLinks project={version} version={version} />
+>>>>>>> feat(graphql): changes components to new data schema
       </Body>
 
       <Reviews version={version} />
