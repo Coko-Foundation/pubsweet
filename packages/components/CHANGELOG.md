@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="9.7.4"></a>
+  <a name="9.7.5"></a>
+## [9.7.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.4...pubsweet-components@9.7.5) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+  <a name="9.7.4"></a>
 ## [9.7.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.3...pubsweet-components@9.7.4) (2018-09-25)
 
 
@@ -14,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="9.7.3"></a>
+<a name="9.7.3"></a>
 ## [9.7.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.2...pubsweet-components@9.7.3) (2018-09-20)
 
 
