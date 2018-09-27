@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.0.2"></a>
+      <a name="2.0.3"></a>
+## [2.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.2...@pubsweet/db-manager@2.0.3) (2018-09-27)
+
+
+### Bug Fixes
+
+* fixing a release with unstaged changes ([db2cdd3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/db2cdd3))
+
+
+
+
+      <a name="2.0.2"></a>
 ## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.1...@pubsweet/db-manager@2.0.2) (2018-09-27)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/db-manager
 
-  <a name="2.0.1"></a>
+<a name="2.0.1"></a>
 ## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.0...@pubsweet/db-manager@2.0.1) (2018-09-25)
 
 

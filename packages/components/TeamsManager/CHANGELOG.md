@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.24"></a>
+## [1.1.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.1.23...pubsweet-component-teams-manager@1.1.24) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-teams-manager
+
 <a name="1.1.23"></a>
 ## [1.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-teams-manager@1.1.22...pubsweet-component-teams-manager@1.1.23) (2018-09-25)
 

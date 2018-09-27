@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.23"></a>
+## [1.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.22...pubsweet-component-form-group@1.1.23) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
 <a name="1.1.22"></a>
 ## [1.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.21...pubsweet-component-form-group@1.1.22) (2018-09-27)
 

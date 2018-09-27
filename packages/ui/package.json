@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "8.6.2",
+  "version": "8.7.0",
   "license": "MIT",
   "files": [
     "docs",
@@ -35,7 +35,7 @@
     "styled-components": "^3.2.5"
   },
   "devDependencies": {
-    "@pubsweet/styleguide": "^3.1.10",
+    "@pubsweet/styleguide": "^3.1.11",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
