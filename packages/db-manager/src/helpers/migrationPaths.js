@@ -45,6 +45,6 @@ module.exports = () => {
       getPathsRecursively(componentName)
     })
   }
-
+  // TODO: remove, release gone wrong.
   return migrationsPaths
 }
