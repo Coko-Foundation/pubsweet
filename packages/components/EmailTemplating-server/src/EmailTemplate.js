@@ -13,7 +13,7 @@ const configData = {
 class Email {
   constructor({
     type = 'system',
-    fromEmail = config.get('journal.fromEmail'),
+    fromEmail = config.get('journal.staffEmail'),
     toUser = {
       id: '',
       email: '',
