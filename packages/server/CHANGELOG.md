@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.1.1"></a>
+      <a name="9.1.2"></a>
+## [9.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.1...pubsweet-server@9.1.2) (2018-09-27)
+
+
+### Bug Fixes
+
+* **server:** get model from the component ([ce88a8c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ce88a8c))
+* **server:** require components relatively ([b2ae124](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b2ae124))
+
+
+
+
+      <a name="9.1.1"></a>
 ## [9.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.0...pubsweet-server@9.1.1) (2018-09-27)
 
 
@@ -11,7 +23,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-server
 
-  <a name="9.1.0"></a>
+<a name="9.1.0"></a>
 # [9.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.0.0...pubsweet-server@9.1.0) (2018-09-25)
 
 
