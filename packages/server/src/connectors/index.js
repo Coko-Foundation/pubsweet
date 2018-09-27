@@ -16,11 +16,10 @@ const connectors = {
 // merge in component connectors, recursively
 function getConnectorsRecursively(componentName) {
   const component = requireRelative(componentName)
-
   if (component.modelName) {
     connectors[component.modelName] = connector(
       component.modelName,
-      models[component.modelName],
+      component.model,
     )
   }
 
