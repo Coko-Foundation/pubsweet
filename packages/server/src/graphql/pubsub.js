@@ -12,6 +12,7 @@ const ignoreTerminatedError =
   config.get('pubsweet-server.ignoreTerminatedConnectionError')
 
 let pubsub
+let client
 
 module.exports = {
   /**
@@ -20,7 +21,7 @@ module.exports = {
    */
   getPubsub: async () => {
     if (pubsub) return pubsub
-    const client = new pg.Client(connection)
+    client = new pg.Client(connection)
     // ignore some errors which are thrown in integration tests
     if (ignoreTerminatedError) {
       client.on('error', async err => {
@@ -40,6 +41,15 @@ module.exports = {
     }
     return pubsub
   },
+
+  destroy: () => {
+    if (client) {
+      pubsub = null
+      return client.end()
+    }
+    return Promise.resolve()
+  },
+
   /**
    * Iterators to listen to
    */
