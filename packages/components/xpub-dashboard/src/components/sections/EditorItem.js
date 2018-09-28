@@ -1,10 +1,11 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
 import { Action, ActionGroup } from '@pubsweet/ui'
-import { Item, Header, Body } from '../molecules/Item'
+import { getUserFromTeam } from 'xpub-selectors'
 
+import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import Meta from '../metadata/Meta'
 import MetadataSections from '../metadata/MetadataSections'
@@ -49,7 +50,10 @@ const getMetadataObject = (version, value) => {
 }
 
 const EditorItem = ({ version }) => (
-  <Authorize object={[version]} operation="can view my manuscripts section">
+  <AuthorizeWithGraphQL
+    object={[version]}
+    operation="can view my manuscripts section"
+  >
     <Item>
       <Header>
         <Status status={version.status} />
@@ -60,9 +64,7 @@ const EditorItem = ({ version }) => (
               'streamlinedReview',
             )}
           />
-          <MetadataAuthors
-            authors={version.teams.find(team => team.role === 'author').members}
-          />
+          <MetadataAuthors authors={getUserFromTeam(version, 'author')} />
           <MetadataSubmittedDate
             submitted={
               version.meta.history.find(history => history.type === 'submitted')
@@ -87,7 +89,7 @@ const EditorItem = ({ version }) => (
 
       <Reviews version={version} />
     </Item>
-  </Authorize>
+  </AuthorizeWithGraphQL>
 )
 
 export default EditorItem

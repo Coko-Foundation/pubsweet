@@ -1,36 +1,10 @@
 import { compose, withProps, withState } from 'recompose'
 import { withRouter } from 'react-router-dom'
-import { gql } from 'apollo-client-preset'
 import { withApollo } from 'react-apollo'
 import request from 'pubsweet-client/src/helpers/api'
+import queries from '../graphql/queries/'
+import mutations from '../graphql/mutations/'
 import { extractTitle, generateTitle } from './title'
-
-const uploadManuscriptMutation = gql`
-  mutation($file: Upload!) {
-    upload(file: $file) {
-      url
-    }
-  }
-`
-
-const createFragmentMutation = gql`
-  mutation($input: String) {
-    createFragment(input: $input) {
-      id
-    }
-  }
-`
-
-const createCollectionMutation = gql`
-  mutation($input: String) {
-    createCollection(input: $input) {
-      id
-      fragments {
-        id
-      }
-    }
-  }
-`
 
 export default compose(
   withApollo,
@@ -48,7 +22,7 @@ export default compose(
           }
 
           return client.mutate({
-            mutation: uploadManuscriptMutation,
+            mutation: mutations.uploadManuscriptMutation,
             variables: { file },
           })
         })
@@ -70,43 +44,49 @@ export default compose(
           source = response.converted
           title = extractTitle(source) || generateTitle(file.name)
 
-          const fragment = {
+          const manuscript = {
             created: new Date(), // TODO: set on server
             files: {
-              manuscript: {
-                name: file.name,
-                url: fileURL,
-              },
-              supplementary: [],
+              created: new Date(), // TODO: set on server
+              type: 'manuscript',
+              filename: file.name,
+              url: fileURL,
+              mimeType: file.type,
             },
-            fragmentType: 'version',
-            metadata: {
+            meta: {
               title,
+              source,
             },
-            source,
-            version: 1,
+            status: 'new',
           }
+
           return client.mutate({
-            mutation: createFragmentMutation,
-            variables: { input: JSON.stringify(fragment) },
-          })
-        })
-        .then(({ data }) => {
-          const collection = { title, fragments: [data.createFragment.id] }
-          return client.mutate({
-            mutation: createCollectionMutation,
-            variables: { input: JSON.stringify(collection) },
+            mutation: mutations.createManuscriptMutation,
+            variables: { input: manuscript },
+            update: (
+              proxy,
+              {
+                data: {
+                  createManuscript: { id },
+                },
+              },
+            ) => {
+              const data = proxy.readQuery({ query: queries.myManuscripts })
+
+              data.manuscripts.manuscripts.push(manuscript)
+              proxy.writeQuery({ query: queries.myManuscripts, data })
+            },
           })
         })
         .then(({ data }) => {
           setConversionState({ converting: false })
-          const route = `/projects/${data.createCollection.id}/versions/${
-            data.createCollection.fragments[0].id
-          }/submit`
-          // redirect after a short delay
-          window.setTimeout(() => {
-            history.push(route)
-          }, 2000)
+          // const route = `/projects/${data.createManuscript.id}/versions/${
+          //   data.createCollection.fragments[0].id
+          // }/submit`
+          // // redirect after a short delay
+          // window.setTimeout(() => {
+          //   history.push(route)
+          // }, 2000)
         })
         .catch(error => setConversionState({ error }))
     },

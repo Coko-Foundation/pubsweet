@@ -1,8 +1,7 @@
 import React from 'react'
 import { Button } from '@pubsweet/ui'
-import { getReviewerFromUser } from 'xpub-selectors'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
-
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
+import { getUserFromTeam } from 'xpub-selectors'
 import { Item, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 import { Actions, ActionContainer } from '../molecules/Actions'
@@ -14,41 +13,28 @@ import VersionTitle from './VersionTitle'
 // TODO: only return actions if not accepted or rejected
 // TODO: review id in link
 
-const ReviewerItem = ({
-  project,
-  version,
-  lastSubmittedVersion,
-  currentUser,
-  reviewerResponse,
-}) => {
-  const reviewer = getReviewerFromUser(
-    project,
-    lastSubmittedVersion,
-    currentUser,
-  )
+const ReviewerItem = ({ version, currentUser }) => {
+  const { status } =
+    getUserFromTeam(version, 'reviewer').filter(
+      member => member.user.id === currentUser.id,
+    )[0] || {}
 
-  const status = reviewer && reviewer.status
-
+  const review = version.reviews[0]
   return (
-    <Authorize
-      key={`${project.id}-${status}`}
-      object={[project]}
+    <AuthorizeWithGraphQL
+      key={`${review.id}`}
+      object={[version]}
       operation="can view review section"
     >
       <Item>
         <Body>
           <VersionTitle version={version} />
 
-          {(status === 'accepted' || status === 'completed') && (
+          {status === 'accepted' && (
             <Links>
               <LinkContainer>
-                <ProjectLink
-                  id={reviewer.id}
-                  page="reviews"
-                  project={project}
-                  version={version}
-                >
-                  {reviewer.submitted ? 'Completed' : 'Do Review'}
+                <ProjectLink id={version.id} page="reviews" version={version}>
+                  {review.recommendation ? 'Completed' : 'Do Review'}
                 </ProjectLink>
               </LinkContainer>
             </Links>
@@ -58,9 +44,8 @@ const ReviewerItem = ({
             <Actions>
               <ActionContainer>
                 <Button
-                  onClick={() =>
-                    reviewerResponse(project, version, reviewer, 'accepted')
-                  }
+                  onClick={() => {}}
+                  // reviewerResponse(project, version, reviewer, 'accepted'
                 >
                   accept
                 </Button>
@@ -70,9 +55,8 @@ const ReviewerItem = ({
 
               <ActionContainer>
                 <Button
-                  onClick={() =>
-                    reviewerResponse(project, version, reviewer, 'rejected')
-                  }
+                  onClick={() => {}}
+                  // reviewerResponse(project, version, reviewer, 'rejected')
                 >
                   reject
                 </Button>
@@ -82,7 +66,7 @@ const ReviewerItem = ({
           {status === 'rejected' && 'rejected'}
         </Body>
       </Item>
-    </Authorize>
+    </AuthorizeWithGraphQL>
   )
 }
 

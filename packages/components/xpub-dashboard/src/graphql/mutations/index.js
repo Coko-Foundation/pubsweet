@@ -1,10 +1,34 @@
 import gql from 'graphql-tag'
 
 export default {
-  deleteProjectMutation: gql`
+  deleteManuscriptMutation: gql`
     mutation($id: ID) {
-      deleteCollection(id: $id) {
+      deleteManuscript(id: $id) {
         id
+      }
+    }
+  `,
+  uploadManuscriptMutation: gql`
+    mutation($file: Upload!) {
+      upload(file: $file) {
+        url
+      }
+    }
+  `,
+  createManuscriptMutation: gql`
+    mutation($input: ManuscriptInput) {
+      createManuscript(input: $input) {
+        id
+      }
+    }
+  `,
+  updateJournalMutation: gql`
+    mutation($input: JournalInput) {
+      updateJournal(input: $input) {
+        id
+        manuscripts {
+          id
+        }
       }
     }
   `,

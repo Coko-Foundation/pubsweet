@@ -5,14 +5,14 @@ import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 import UploadManuscript from './UploadManuscript'
 import EditorItem from './sections/EditorItem'
 import OwnerItem from './sections/OwnerItem'
-// import ReviewerItem from './sections/ReviewerItem'
+import ReviewerItem from './sections/ReviewerItem'
 
 const Dashboard = ({
   acceptFiles,
   currentUser,
   conversion,
   dashboard,
-  deleteProject,
+  deleteManuscript,
   reviewerResponse,
   uploadManuscript,
   ...props
@@ -40,11 +40,11 @@ const Dashboard = ({
           <Heading>My Submissions</Heading>
           {dashboard.map(submission => (
             <OwnerItem
-              deleteProject={() =>
+              deleteManuscript={() =>
                 // eslint-disable-next-line no-alert
                 window.confirm(
                   'Are you sure you want to delete this submission?',
-                ) && deleteProject(submission)
+                ) && deleteManuscript(submission)
               }
               key={`submission-${submission.id}`}
               version={submission}
@@ -53,8 +53,7 @@ const Dashboard = ({
         </Section>
       ) : null}
     </AuthorizeWithGraphQL>
-
-    {/* <AuthorizeWithGraphQL
+    <AuthorizeWithGraphQL
       object={dashboard}
       operation="can view review section"
     >
@@ -65,13 +64,12 @@ const Dashboard = ({
             <ReviewerItem
               currentUser={currentUser}
               key={review.id}
-              reviewerResponse={reviewerResponse}
               version={review}
             />
           ))}
         </Section>
       ) : null}
-    </AuthorizeWithGraphQL> */}
+    </AuthorizeWithGraphQL>
 
     <AuthorizeWithGraphQL
       object={dashboard}

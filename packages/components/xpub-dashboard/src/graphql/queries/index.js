@@ -16,6 +16,7 @@ export default {
           id
           reviews {
             open
+            recommendation
             created
             user {
               identities {
@@ -30,7 +31,9 @@ export default {
           teams {
             role
             members {
+              status
               user {
+                id
                 username
                 identities {
                   ... on Local {

@@ -2,13 +2,13 @@ import React from 'react'
 import { pickBy } from 'lodash'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
 
-const OwnerItem = ({ version, deleteProject }) => {
+const OwnerItem = ({ version, deleteManuscript }) => {
   const itemHeader = (
     <Header>
       <Status status={version.status} />
@@ -31,7 +31,7 @@ const OwnerItem = ({ version, deleteProject }) => {
       </Action>
     ),
     delete: (
-      <Action key="delete-action" onClick={() => deleteProject(version)}>
+      <Action key="delete-action" onClick={() => deleteManuscript(version)}>
         Delete
       </Action>
     ),
@@ -44,13 +44,13 @@ const OwnerItem = ({ version, deleteProject }) => {
   )
 
   const actions = (
-    <Authorize
+    <AuthorizeWithGraphQL
       object={version}
       operation="can delete collection"
       unauthorized={unauthorized}
     >
       <ActionGroup>{Object.values(actionButtons)}</ActionGroup>
-    </Authorize>
+    </AuthorizeWithGraphQL>
   )
 
   const body = (
@@ -61,12 +61,15 @@ const OwnerItem = ({ version, deleteProject }) => {
   )
 
   return (
-    <Authorize object={[version]} operation="can view my submission section">
+    <AuthorizeWithGraphQL
+      object={[version]}
+      operation="can view my submission section"
+    >
       <Item>
         {itemHeader}
         {body}
       </Item>
-    </Authorize>
+    </AuthorizeWithGraphQL>
   )
 }
 
