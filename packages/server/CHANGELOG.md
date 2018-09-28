@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="9.1.2"></a>
+  <a name="9.2.0"></a>
+# [9.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.2...pubsweet-server@9.2.0) (2018-09-28)
+
+
+### Features
+
+* add destroy method to graphql pubsub ([0c51f41](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0c51f41))
+* use [@pubsweet](https://gitlab.coko.foundation/pubsweet)/logger for graphql errors ([2c031fe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2c031fe))
+
+
+
+
+  <a name="9.1.2"></a>
 ## [9.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.1...pubsweet-server@9.1.2) (2018-09-27)
 
 
@@ -15,7 +27,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="9.1.1"></a>
+<a name="9.1.1"></a>
 ## [9.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.0...pubsweet-server@9.1.1) (2018-09-27)
 
 
