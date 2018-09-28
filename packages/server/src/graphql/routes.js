@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const { apolloUploadExpress } = require('apollo-upload-server')
+const logger = require('@pubsweet/logger')
 
 const config = require('config')
 
@@ -23,6 +24,10 @@ router.use(
   graphqlExpress(req => ({
     schema: graphqlSchema,
     context: { user: req.user, connectors },
+    formatError: err => {
+      logger.error(err.message, { error: err })
+      return err
+    },
   })),
 )
 if (
