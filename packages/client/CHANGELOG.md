@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@5.0.2...pubsweet-client@6.0.0) (2018-09-29)
+
+
+### Features
+
+* add global property to team ([81b2a7b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/81b2a7b)), closes [#424](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/424)
+
+
+### BREAKING CHANGES
+
+* Teams now have a built-in global property meant to distinguish between object-based
+teams and global teams. Previously a global team was defined as a team missing its object, but since
+that is ambiguous, i.e. an object can be missing for several reasons - a global property is much
+more straight-forward. If you were already using a .global property on Team in your app, your app
+will break as the GraphQL schema will conflict.
+
+
+
+
 <a name="5.0.2"></a>
 ## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@5.0.1...pubsweet-client@5.0.2) (2018-09-27)
 
