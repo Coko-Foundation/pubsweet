@@ -78,6 +78,30 @@ describe('Teams model', () => {
       })
   })
 
+  it('can save a global team', () => {
+    let team = teamFixture
+    team.name = 'Global test team'
+    team.global = true
+    team.members = [userId]
+    team = new Team(team)
+
+    let teamId
+
+    return team
+      .save()
+      .then(savedTeam => {
+        teamId = savedTeam.id
+        expect(savedTeam.members).toEqual([userId])
+        expect(savedTeam.global).toEqual(team.global)
+        expect(savedTeam.teamType).toEqual(team.teamType)
+        expect(savedTeam.name).toEqual(team.name)
+        return User.find(userId)
+      })
+      .then(user => {
+        expect(user.teams).toEqual([teamId])
+      })
+  })
+
   it('can save a team with members based around a fragment', () => {
     let team = teamFixture
     team.name = 'Test team'

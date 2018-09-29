@@ -62,6 +62,7 @@ const GET_TEAM = gql`
         objectType
       }
       name
+      global
     }
   }
 `

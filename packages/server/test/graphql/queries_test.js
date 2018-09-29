@@ -61,14 +61,19 @@ describe('GraphQL core queries', () => {
   it('can resolve nested query', async () => {
     await new Team({ ...fixtures.contributorTeam, members: [user.id] }).save()
     const { body } = await api.graphql.query(
-      `{ users { username, teams { name } } }`,
+      `{ users { username, teams { name, global } } }`,
       {},
       token,
     )
 
     expect(body).toEqual({
       data: {
-        users: [{ username: 'admin', teams: [{ name: 'My contributors' }] }],
+        users: [
+          {
+            username: 'admin',
+            teams: [{ name: 'My contributors', global: null }],
+          },
+        ],
       },
     })
   })
