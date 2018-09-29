@@ -46,6 +46,7 @@ const typeDefs = `
     object: TeamObject
     members: [User!]!
     owners: [User]
+    global: Boolean
   }
 
   type TeamObject {
@@ -59,6 +60,7 @@ const typeDefs = `
     object: TeamObjectInput
     members: [ID!]
     rev: String
+    global: Boolean
 
   }
 

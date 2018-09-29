@@ -39,6 +39,7 @@ const team1 = {
   teamType: 'editors',
   object: { objectId: 'fragment1', objectType: 'fragment' },
   name: 'team',
+  global: false,
 }
 
 const collection1 = {
