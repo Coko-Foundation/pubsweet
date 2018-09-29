@@ -5,7 +5,8 @@
   "files": [
     "docs",
     "dist",
-    "src"
+    "src",
+    ".babelrc"
   ],
   "main": "src",
   "jsnext:main": "src",
