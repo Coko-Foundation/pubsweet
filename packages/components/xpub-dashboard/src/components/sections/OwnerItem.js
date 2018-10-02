@@ -8,14 +8,14 @@ import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
 
-const OwnerItem = ({ version, deleteManuscript }) => {
+const OwnerItem = ({ version, journals, deleteManuscript }) => {
   const itemHeader = (
     <Header>
       <Status status={version.status} />
     </Header>
   )
 
-  const baseLink = `/projects/JOURNALID/versions/${version.id}`
+  const baseLink = `/journals/${journals.id}/versions/${version.id}`
   const submitLink = `${baseLink}/submit`
   const manuscriptLink = `${baseLink}/manuscript`
 

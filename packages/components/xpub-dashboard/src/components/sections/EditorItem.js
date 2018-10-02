@@ -14,22 +14,24 @@ import MetadataReviewType from '../metadata/MetadataReviewType'
 import MetadataSubmittedDate from '../metadata/MetadataSubmittedDate'
 import MetadataAuthors from '../metadata/MetadataAuthors'
 import MetadataStreamLined from '../metadata/MetadataStreamLined'
-import ProjectLink from '../ProjectLink'
+import JournalLink from '../JournalLink'
 import Reviews from '../Reviews'
 import VersionTitle from './VersionTitle'
 
-const VersionTitleLink = styled(ProjectLink)`
+const VersionTitleLink = styled(JournalLink)`
   text-decoration: none;
   color: #333;
 `
 
-const EditorItemLinks = ({ version }) => (
+const EditorItemLinks = ({ version, journals }) => (
   <ActionGroup>
-    <Action to={`/projects/JournalID/versions/${version.id}/submit`}>
+    <Action to={`/journals/${journals.id}/versions/${version.id}/submit`}>
       Summary Info
     </Action>
     <Action
-      to={`/projects/JournalID/versions/${version.id}/decisions/${version.id}`}
+      to={`/journals/${journals.id}/versions/${version.id}/decisions/${
+        version.id
+      }`}
     >
       {version.decision && version.decision.status === 'submitted'
         ? `Decision: ${version.decision.recommendation}`
@@ -49,7 +51,12 @@ const getMetadataObject = (version, value) => {
   return metadata[value] || []
 }
 
-const EditorItem = ({ version }) => (
+const getSubmitedDate = version =>
+  getMetadataObject(version, 'history').find(
+    history => history.type === 'submitted',
+  ) || []
+
+const EditorItem = ({ version, journals }) => (
   <AuthorizeWithGraphQL
     object={[version]}
     operation="can view my manuscripts section"
@@ -65,12 +72,15 @@ const EditorItem = ({ version }) => (
             )}
           />
           <MetadataAuthors authors={getUserFromTeam(version, 'author')} />
-          <MetadataSubmittedDate
-            submitted={
-              version.meta.history.find(history => history.type === 'submitted')
-                .date
-            }
-          />
+          {getSubmitedDate(version).length ? (
+            <MetadataSubmittedDate
+              submitted={
+                version.meta.history.find(
+                  history => history.type === 'submitted',
+                ).date
+              }
+            />
+          ) : null}
           <MetadataType type={getMetadataObject(version, 'articleType')} />
           <MetadataSections
             sections={getMetadataObject(version, 'articleSections')}
@@ -82,9 +92,9 @@ const EditorItem = ({ version }) => (
       </Header>
       <Body>
         <VersionTitleLink id={version.id} page="decisions" version={version}>
-          <VersionTitle linkUrl="true" version={version} />
+          <VersionTitle version={version} />
         </VersionTitleLink>
-        <EditorItemLinks project={version} version={version} />
+        <EditorItemLinks journals={journals} version={version} />
       </Body>
 
       <Reviews version={version} />

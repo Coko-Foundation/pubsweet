@@ -50,7 +50,7 @@ export const getReviewerFromUser = (project, version, currentUser) => {
 }
 
 export const getUserFromTeam = (version, role) => {
-  if (!version.teams) return null
+  if (!version.teams) return []
 
   const teams = version.teams.filter(team => team.role === role)
   return teams.length ? teams[0].members : []

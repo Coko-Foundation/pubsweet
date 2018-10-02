@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default {
-  myManuscripts: gql`
+  dashboard: gql`
     {
       currentUser {
         id
@@ -9,7 +9,7 @@ export default {
         admin
       }
 
-      manuscripts {
+      journals {
         id
         journalTitle
         manuscripts {

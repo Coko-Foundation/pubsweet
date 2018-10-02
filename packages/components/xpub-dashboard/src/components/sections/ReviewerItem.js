@@ -6,7 +6,7 @@ import { Item, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 import { Actions, ActionContainer } from '../molecules/Actions'
 
-import ProjectLink from '../ProjectLink'
+import JournalLink from '../JournalLink'
 import VersionTitle from './VersionTitle'
 
 // TODO: only return links if version id is in reviewer.accepted array
@@ -19,7 +19,9 @@ const ReviewerItem = ({ version, currentUser }) => {
       member => member.user.id === currentUser.id,
     )[0] || {}
 
-  const review = version.reviews[0]
+  const review = version.reviews[0] || null
+  if (!review) return null
+
   return (
     <AuthorizeWithGraphQL
       key={`${review.id}`}
@@ -33,9 +35,9 @@ const ReviewerItem = ({ version, currentUser }) => {
           {status === 'accepted' && (
             <Links>
               <LinkContainer>
-                <ProjectLink id={version.id} page="reviews" version={version}>
+                <JournalLink id={version.id} page="reviews" version={version}>
                   {review.recommendation ? 'Completed' : 'Do Review'}
-                </ProjectLink>
+                </JournalLink>
               </LinkContainer>
             </Links>
           )}

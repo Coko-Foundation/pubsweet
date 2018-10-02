@@ -12,10 +12,10 @@ const Dashboard = ({
   currentUser,
   conversion,
   dashboard,
+  journals,
   deleteManuscript,
   reviewerResponse,
   uploadManuscript,
-  ...props
 }) => (
   <Page>
     <UploadContainer>
@@ -46,6 +46,7 @@ const Dashboard = ({
                   'Are you sure you want to delete this submission?',
                 ) && deleteManuscript(submission)
               }
+              journals={journals}
               key={`submission-${submission.id}`}
               version={submission}
             />
@@ -63,6 +64,7 @@ const Dashboard = ({
           {dashboard.map(review => (
             <ReviewerItem
               currentUser={currentUser}
+              journals={journals}
               key={review.id}
               version={review}
             />
@@ -80,6 +82,7 @@ const Dashboard = ({
           <Heading>My Manuscripts</Heading>
           {dashboard.map(manuscript => (
             <EditorItem
+              journals={journals}
               key={`manuscript-${manuscript.id}`}
               version={manuscript}
             />

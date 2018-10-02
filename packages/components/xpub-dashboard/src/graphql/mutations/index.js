@@ -19,6 +19,35 @@ export default {
     mutation($input: ManuscriptInput) {
       createManuscript(input: $input) {
         id
+        created
+        teams {
+          members {
+            user {
+              id
+              username
+              identities {
+                ... on Local {
+                  name {
+                    surname
+                  }
+                }
+              }
+            }
+            status
+          }
+          role
+        }
+        status
+        reviews {
+          id
+        }
+        meta {
+          title
+          declarations
+          articleSections
+          articleType
+          history
+        }
       }
     }
   `,

@@ -1,13 +1,23 @@
 import { compose, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 import { withLoader } from 'pubsweet-client'
+import { connectToContext } from 'xpub-with-context'
+import config from 'config'
 import queries from './queries/'
 import mutations from './mutations/'
 import Dashboard from '../components/Dashboard'
 import upload from '../lib/upload'
 
+const { acceptUploadFiles } = config['pubsweet-component-xpub-dashboard'] || {}
+
+const acceptFiles =
+  acceptUploadFiles.length > 0
+    ? acceptUploadFiles.join()
+    : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
 export default compose(
-  graphql(queries.myManuscripts, {
+  connectToContext(),
+  graphql(queries.dashboard, {
     options: { context: { online: false } },
   }),
   graphql(mutations.deleteManuscriptMutation, {
@@ -24,21 +34,23 @@ export default compose(
           },
         },
       ) => {
-        const data = proxy.readQuery({ query: queries.myManuscripts })
-        const manuscriptIndex = data.manuscripts.manuscripts.findIndex(
+        const data = proxy.readQuery({ query: queries.dashboard })
+        const manuscriptIndex = data.journals.manuscripts.findIndex(
           manuscript => manuscript.id === id,
         )
         if (manuscriptIndex > -1) {
-          data.manuscripts.manuscripts.splice(manuscriptIndex, 1)
-          proxy.writeQuery({ query: queries.myManuscripts, data })
+          data.journals.manuscripts.splice(manuscriptIndex, 1)
+          proxy.writeQuery({ query: queries.dashboard, data })
         }
       },
     },
   }),
   withLoader(),
-  withProps(({ manuscripts: { manuscripts }, currentUser }) => ({
-    dashboard: manuscripts,
+  withProps(({ journals, currentUser }) => ({
+    dashboard: journals.manuscripts,
+    journals,
     currentUser,
+    acceptFiles,
   })),
   upload,
 )(Dashboard)

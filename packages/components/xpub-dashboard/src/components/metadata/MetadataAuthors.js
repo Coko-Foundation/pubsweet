@@ -1,16 +1,16 @@
 import React from 'react'
 
-const MetadataOwners = ({ authors }) => (
-  <span>
-    {authors.length &&
-      authors
+const MetadataAuthors = ({ authors }) =>
+  authors.length ? (
+    <span>
+      {authors
         .map(author => (
-          <span key={author.user.username}>
-            {author.user.username || 'Anonymous'}
+          <span key={(author.user || {}).username || 'Anonymous'}>
+            {(author.user || {}).username || 'Anonymous'}
           </span>
         ))
         .reduce((prev, curr) => [prev, ', ', curr])}
-  </span>
-)
+    </span>
+  ) : null
 
-export default MetadataOwners
+export default MetadataAuthors
