@@ -1,5 +1,6 @@
 const HTMLEPUB = require('html-epub')
 const fs = require('fs')
+const cheerio = require('cheerio')
 
 const sorter = require('./sorter')
 const converters = require('./converters')
@@ -24,6 +25,15 @@ const EpubBackend = app => {
 
       // chapters
       const fragments = await collection.getFragments()
+      let notesPart
+      if (
+        config['pubsweet-client'] &&
+        config['pubsweet-client'].converter === 'wax-ucp'
+      ) {
+        notesPart = cheerio.load(
+          '<html><body><section data-type="notes"><h1 class="ct">Notes</h1></section></body></html>',
+        )
+      }
 
       // CSS Theme
       // TODO: change it from array to the name of the selected theme
@@ -50,7 +60,27 @@ const EpubBackend = app => {
 
       const parts = fragments
         .sort(sorter)
-        .map(processFragment({ styles, activeConverters, book }))
+        .map(processFragment({ styles, activeConverters, book, notesPart }))
+
+      if (
+        config['pubsweet-client'] &&
+        config['pubsweet-client'].converter === 'wax-ucp'
+      ) {
+        const notesFragment = {
+          source: notesPart.html(),
+          division: 'back',
+          subCategory: 'component',
+          title: 'Notes',
+        }
+        const notes = processFragment({
+          styles,
+          activeConverters,
+          book,
+          notesPart,
+        })(notesFragment)
+
+        parts.push(notes)
+      }
 
       // TODO: read the path to the uploads folder from config
       const resourceRoot = `${process.cwd()}/uploads`

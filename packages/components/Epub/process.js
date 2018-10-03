@@ -1,6 +1,11 @@
 const cheerio = require('cheerio')
 
-module.exports = ({ styles, activeConverters, book }) => fragment => {
+module.exports = ({
+  styles,
+  activeConverters,
+  book,
+  notesPart,
+}) => fragment => {
   const $ = cheerio.load(fragment.source)
   const fragmentTitle = fragment.title || 'Untitled'
   const bookTitle = book.title
@@ -13,17 +18,30 @@ module.exports = ({ styles, activeConverters, book }) => fragment => {
     ? fragment.number
     : -1
 
-  activeConverters.forEach(converter =>
-    converter(
-      $,
-      fragmentTitle,
-      bookTitle,
-      fragmentDivision,
-      fragmentSubcategory,
-      fragmentNumber,
-    ),
-  )
-
+  if (notesPart === undefined) {
+    activeConverters.forEach(converter =>
+      converter(
+        $,
+        fragmentTitle,
+        bookTitle,
+        fragmentDivision,
+        fragmentSubcategory,
+        fragmentNumber,
+      ),
+    )
+  } else {
+    activeConverters.forEach(converter =>
+      converter(
+        $,
+        fragmentTitle,
+        bookTitle,
+        fragmentDivision,
+        fragmentSubcategory,
+        fragmentNumber,
+        notesPart,
+      ),
+    )
+  }
   styles.forEach(uri => {
     $('<link rel="stylesheet"/>')
       .attr('href', uri)
