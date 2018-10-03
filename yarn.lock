@@ -357,6 +357,36 @@
   dependencies:
     styled-components "^3.2.5"
 
+"@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
+  version "1.0.0-alpha.1"
+  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#70b1c81f5b8ec434ba40cec3c73869e0057c2edd"
+  dependencies:
+    "@pubsweet/coko-theme" "^4.1.0"
+    "@pubsweet/db-manager" "^2.0.0"
+    "@pubsweet/default-theme" "3.0.0"
+    "@pubsweet/logger" "^0.2.6"
+    "@pubsweet/ui" "^8.6.2"
+    authsome "^0.1.0"
+    pubsweet "^3.0.0"
+    pubsweet-client "^5.0.0"
+    pubsweet-component-blog "^1.0.5"
+    pubsweet-component-form-group "1.1.20"
+    pubsweet-component-html "^0.2.5"
+    pubsweet-component-login "1.1.16"
+    pubsweet-component-manage "^1.0.0"
+    pubsweet-component-medium-draft "^0.2.3"
+    pubsweet-component-navigation "^1.0.1"
+    pubsweet-component-password-reset-backend "^1.0.0"
+    pubsweet-component-password-reset-frontend "^2.0.14"
+    pubsweet-component-pepper-theme "^0.0.5"
+    pubsweet-component-posts-manager "1.0.35"
+    pubsweet-component-signup "^1.0.30"
+    pubsweet-component-teams-manager "^1.1.22"
+    pubsweet-component-users-manager "^2.0.1"
+    pubsweet-server "^9.0.0"
+    pubsweet-theme-plugin "^0.0.3"
+    react-router-redux next
+
 "@pubsweet/styleguide@^1.1.2":
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/@pubsweet/styleguide/-/styleguide-1.3.4.tgz#48abc2e7595064fd7cb7534de9581a052e9eba09"
@@ -7275,7 +7305,7 @@ jmespath@0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
-joi-browser@^13.4.0:
+joi-browser@^13.0.1, joi-browser@^13.4.0:
   version "13.4.0"
   resolved "https://registry.yarnpkg.com/joi-browser/-/joi-browser-13.4.0.tgz#b72ba61b610e3f58e51b563a14e0f5225cfb6896"
 
@@ -10161,6 +10191,41 @@ public-encrypt@^4.0.0:
     create-hash "^1.1.0"
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
+
+pubsweet-component-form-group@1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-1.1.20.tgz#4ced2533b54099e2c5b8846564a053149142db13"
+  dependencies:
+    joi-browser "^13.0.1"
+    prop-types "^15.5.10"
+    pubsweet-server "^9.0.0"
+
+pubsweet-component-login@1.1.16:
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-login/-/pubsweet-component-login-1.1.16.tgz#99ed48fb91eccfd9f9ccee48e8d1984fd58a6799"
+  dependencies:
+    "@pubsweet/ui" "^8.6.2"
+    prop-types "^15.5.10"
+    react-redux "^5.0.6"
+    react-router-dom "^4.2.2"
+    react-router-redux "^5.0.0-alpha.9"
+    recompose "^0.26.0"
+    redux-form "^7.0.3"
+
+pubsweet-component-pepper-theme@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-pepper-theme/-/pubsweet-component-pepper-theme-0.0.5.tgz#eb39aafbab8e1a737752b6c5ed7ef057ead414cc"
+
+pubsweet-component-posts-manager@1.0.35:
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-posts-manager/-/pubsweet-component-posts-manager-1.0.35.tgz#a3877ef368f8aafa4781c15d0303ccb7af6086c5"
+  dependencies:
+    "@pubsweet/ui" "^8.6.2"
+    prop-types "^15.5.10"
+    pubsweet-component-form-group "^1.1.20"
+    react-redux "^5.0.6"
+    react-router-dom "^4.2.2"
+    redux "^3.7.2"
 
 pubsweet-theme-plugin@^0.0.3:
   version "0.0.3"
