@@ -1,5 +1,5 @@
 const program = require('commander')
-const db = require('pubsweet-server/src/db')
+const { db } = require('pubsweet-server')
 const { migrate } = require('@pubsweet/db-manager')
 
 module.exports = async (commandArguments = process.argv) => {
@@ -7,5 +7,5 @@ module.exports = async (commandArguments = process.argv) => {
   await migrate(options)
 
   // drain pool to avoid 10 second delay before command exits
-  db.end()
+  await db.destroy()
 }
