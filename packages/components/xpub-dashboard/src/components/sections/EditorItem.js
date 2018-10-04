@@ -41,6 +41,7 @@ const EditorItemLinks = ({ version, journals }) => (
 )
 
 const getDeclarationsObject = (version, value) => {
+  if (!version.meta) version.meta = {}
   const declarations = version.meta.declarations || {}
 
   return declarations[value] || 'no'
@@ -72,14 +73,8 @@ const EditorItem = ({ version, journals }) => (
             )}
           />
           <MetadataAuthors authors={getUserFromTeam(version, 'author')} />
-          {getSubmitedDate(version).length ? (
-            <MetadataSubmittedDate
-              submitted={
-                version.meta.history.find(
-                  history => history.type === 'submitted',
-                ).date
-              }
-            />
+          {getSubmitedDate(version) ? (
+            <MetadataSubmittedDate submitted={getSubmitedDate(version).date} />
           ) : null}
           <MetadataType type={getMetadataObject(version, 'articleType')} />
           <MetadataSections

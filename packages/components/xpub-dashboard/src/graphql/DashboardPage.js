@@ -19,6 +19,7 @@ export default compose(
   connectToContext(),
   graphql(queries.dashboard, {
     options: { context: { online: false } },
+    props: data => data,
   }),
   graphql(mutations.deleteManuscriptMutation, {
     props: ({ mutate }) => ({
@@ -46,7 +47,7 @@ export default compose(
     },
   }),
   withLoader(),
-  withProps(({ journals, currentUser }) => ({
+  withProps(({ journals, currentUser, ...rest }) => ({
     dashboard: journals.manuscripts,
     journals,
     currentUser,
