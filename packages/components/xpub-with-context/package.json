@@ -9,7 +9,6 @@
     "dist"
   ],
   "dependencies": {
-    "prop-types": "^15.5.10",
     "recompose": "^0.26.0"
   },
   "peerDependencies": {
