@@ -1,17 +1,12 @@
 import React from 'react'
-import { MemoryRouter } from 'react-router-dom'
 import faker from 'faker'
+import { MemoryRouter } from 'react-router-dom'
 import { MockedProvider } from 'react-apollo/test-utils'
-
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-
 import { ThemeProvider } from 'styled-components'
 
-// import { reducers } from 'pubsweet-client'
-// import conversion from '../redux/conversion'
-
-import DashboardPage from '../graphql/DashboardPage'
+import DashboardPage from './DashboardPage'
 import { Section, UploadContainer } from './molecules/Page'
 import queries from '../graphql/queries'
 // this should be elsewhere

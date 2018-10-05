@@ -23,12 +23,6 @@ jest.mock(
   () => 'AuthorizeWithGraphQL',
 )
 
-// // jest.mock('./sections/OwnerItem', () => 'OwnerItem')
-// // jest.mock('./sections/ReviewerItem', () => 'ReviewerItem')
-// // jest.mock('./sections/EditorItem', () => 'EditorItem')
-
-// jest.mock('./withVersion', () => ItemWithVersion => ItemWithVersion)
-
 const getProjects = item => item.map(c => c.props().version)
 
 describe('Dashboard', () => {
