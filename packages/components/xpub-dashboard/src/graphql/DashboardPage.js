@@ -27,14 +27,7 @@ export default compose(
         mutate({ variables: { id: manuscript.id } }),
     }),
     options: {
-      update: (
-        proxy,
-        {
-          data: {
-            deleteManuscript: { id },
-          },
-        },
-      ) => {
+      update: (proxy, { data: { deleteManuscript: { id } } }) => {
         const data = proxy.readQuery({ query: queries.dashboard })
         const manuscriptIndex = data.journals.manuscripts.findIndex(
           manuscript => manuscript.id === id,
