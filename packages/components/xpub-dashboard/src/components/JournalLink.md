@@ -1,31 +1,31 @@
 A link to a project, version, or page.
 
 ```js
-<ProjectLink project="foo">project</ProjectLink>
+<JournalLink journal="foo">journal</JournalLink>
 ```
 
 ```js
-<ProjectLink project="foo" version="bar">
+<JournalLink journal="foo" version="bar">
   version
-</ProjectLink>
+</JournalLink>
 ```
 
 ```js
-<ProjectLink project="foo" version="bar" page="baz">
+<JournalLink journal="foo" version="bar" page="baz">
   page
-</ProjectLink>
+</JournalLink>
 ```
 
 ```js
-<ProjectLink project="foo" version="bar" page="baz" id={1}>
+<JournalLink journal="foo" version="bar" page="baz" id={1}>
   id
-</ProjectLink>
+</JournalLink>
 ```
 
 The project and/or version can be an object with an id.
 
 ```js
-<ProjectLink project={{ id: 'foo' }} version={{ id: 'bar' }}>
+<JournalLink journal={{ id: 'foo' }} version={{ id: 'bar' }}>
   id
-</ProjectLink>
+</JournalLink>
 ```

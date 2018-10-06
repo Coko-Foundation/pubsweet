@@ -5,7 +5,7 @@ const projectUrl = ({ journal, version, page, id }) => {
   const parts = []
 
   parts.push('journals')
-  parts.push(typeof project === 'object' ? journal.id : journal)
+  parts.push(typeof journal === 'object' ? journal.id : journal)
 
   if (version) {
     parts.push('versions')
@@ -23,10 +23,10 @@ const projectUrl = ({ journal, version, page, id }) => {
   return parts.join('/')
 }
 
-const ProjectLink = props => (
+const JournalLink = props => (
   <Link className={props.className} to={projectUrl(props)}>
     {props.children}
   </Link>
 )
 
-export default ProjectLink
+export default JournalLink
