@@ -46,7 +46,10 @@ export default {
           declarations
           articleSections
           articleType
-          history
+          history {
+            type
+            date
+          }
         }
       }
     }
