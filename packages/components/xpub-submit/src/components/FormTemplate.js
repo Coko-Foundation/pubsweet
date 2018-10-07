@@ -36,6 +36,14 @@ const ModalWrapper = styled.div`
   top: 0;
 `
 
+const filterFileManuscript = files =>
+  files.filter(
+    file =>
+      file.type === 'manuscript' &&
+      file.mimeType ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  )
+
 const { ValidatedField, Button, Attachment } = elements
 elements.AbstractEditor = ({ validationStatus, ...rest }) => (
   <AbstractEditor {...rest} />
@@ -54,8 +62,8 @@ const rejectProps = (obj, keys) =>
       {},
     )
 
-const link = (project, version) =>
-  String.raw`<a href=/projects/${project.id}/versions/${
+const link = (journal, version) =>
+  String.raw`<a href=/journals/${journal.id}/versions/${
     version.id
   }/manuscript>view here</a>`
 
@@ -80,7 +88,7 @@ const executeValidate = (vld = [], value = {}) => {
 export default ({
   form,
   handleSubmit,
-  project,
+  journal,
   version,
   toggleConfirming,
   confirming,
@@ -92,7 +100,7 @@ export default ({
         {ReactHtmlParser(
           (form.description || '').replace(
             '###link###',
-            link(project, version),
+            link(journal, version),
           ),
         )}
       </div>
@@ -136,8 +144,7 @@ export default ({
           </Section>
         ))}
 
-      {version.files.manuscript.type !==
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
+      {filterFileManuscript(version.files).length && (
         <Section id="files.manuscript">
           <Legend space>Submitted Manuscript</Legend>
           <Attachment
@@ -148,7 +155,7 @@ export default ({
         </Section>
       )}
 
-      {!version.submitted &&
+      {!version.status === 'submitted' &&
         form.haspopup === 'false' && (
           <Button primary type="submit">
             Submit your manuscript

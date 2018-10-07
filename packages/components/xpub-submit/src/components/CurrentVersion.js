@@ -40,7 +40,7 @@ const ModalWrapper = styled.div`
 `
 
 const CurrentVersion = ({
-  project,
+  journal,
   version,
   valid,
   error,
@@ -57,7 +57,7 @@ const CurrentVersion = ({
       <div>
         We have ingested your manuscript. To access your manuscript in an
         editor, please{' '}
-        <Link to={`/projects/${project.id}/versions/${version.id}/manuscript`}>
+        <Link to={`/journals/${journal.id}/versions/${version.id}/manuscript`}>
           view here
         </Link>.
       </div>

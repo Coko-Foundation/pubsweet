@@ -1,75 +1,104 @@
-import { pick, throttle, defaultsDeep } from 'lodash'
+import { pick, throttle, defaultsDeep, cloneDeep } from 'lodash'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { withLoader } from 'pubsweet-client'
 import uploadFile from 'xpub-upload/src/no-redux'
-import Submit from './Submit'
+import Submit from '../components/Submit'
 
 const fragmentFields = `
   id
-  metadata {
-    title
-    abstract
-    authors
-    keywords
-    articleType
-    articleSection
-  }
-  declarations {
-    openData
-    previouslySubmitted
-    openPeerReview
-    streamlinedReview
-    researchNexus
-    preregistered
-  }
-  suggestions {
-    reviewers {
-      suggested
-      opposed
-    }
-    editors {
-      suggested
-      opposed
-    }
-  }
-  notes {
-    fundingAcknowledgement
-    specialInstructions
-  }
+  created
   files {
-    manuscript {
-      name
-      type
-      size
-      url
-    }
-    supplementary {
-      name
-      type
-      size
-      url
-    }
+    id
+    created
+    label
+    filename
+    mimeType
+    type
+    size
+    url
   }
-`
-
-const query = gql`
-  query($id: ID) {
-    collection(id: $id) {
-      id
-      fragments {
-        ${fragmentFields}
+  reviews {
+    open
+    recommendation
+    created
+    user {
+      identities {
+        ... on Local {
+          name {
+            surname
+          }
+        }
       }
     }
-    currentUser {
+  }
+  teams {
+    id
+    role
+    members {
+      status
       user {
         id
         username
-        admin
+        identities {
+          ... on Local {
+            name {
+              surname
+            }
+          }
+        }
       }
     }
+  }
+  status
+  meta {
+    title
+    declarations
+    articleSections
+    articleType
+    history {
+      type
+      date
+    }
+    notes {
+      id
+      created
+      notesType
+      content
+    }
+  }
+`
+// declarations {
+//   openData
+//   previouslySubmitted
+//   openPeerReview
+//   streamlinedReview
+//   researchNexus
+//   preregistered
+// }
+// notes {
+//   fundingAcknowledgement
+//   specialInstructions
+// }
+
+const query = gql`
+  query($id: ID!, $form: String!) {
+    currentUser {
+      id
+      username
+      admin
+    }
+
+    manuscript(id: $id) {
+      ${fragmentFields}
+      manuscriptVersions {
+        ${fragmentFields}
+      }
+    }
+
+    getFile(form: $form)
   }
 `
 
@@ -156,7 +185,8 @@ export default compose(
   graphql(query, {
     options: ({ match }) => ({
       variables: {
-        id: match.params.project,
+        id: match.params.journal,
+        form: 'submit',
       },
     }),
   }),
@@ -207,9 +237,10 @@ export default compose(
     }),
   }),
   withLoader(),
-  withProps(({ collection, currentUser }) => ({
-    project: collection,
-    version: collection.fragments[0],
+  withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
+    journal: { id: journal },
+    version: manuscript,
+    forms: cloneDeep(getFile),
     uploadFile,
   })),
   withProps(({ version }) => {
