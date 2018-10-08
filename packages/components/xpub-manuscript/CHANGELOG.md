@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.7"></a>
+## [0.5.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.6...pubsweet-component-xpub-manuscript@0.5.7) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
 <a name="0.5.6"></a>
 ## [0.5.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.5...pubsweet-component-xpub-manuscript@0.5.6) (2018-09-29)
 
