@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="3.0.5"></a>
+      <a name="3.0.6"></a>
+## [3.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.5...pubsweet@3.0.6) (2018-10-08)
+
+
+### Bug Fixes
+
+* **cli:** update migration teardown to use knex instead of pg ([8cc2a3e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8cc2a3e))
+
+
+
+
+      <a name="3.0.5"></a>
 ## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.4...pubsweet@3.0.5) (2018-09-29)
 
 
@@ -11,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-  <a name="3.0.4"></a>
+<a name="3.0.4"></a>
 ## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.3...pubsweet@3.0.4) (2018-09-28)
 
 
