@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.3.5...pubsweet-component-epub@0.4.0) (2018-10-08)
+
+
+### Features
+
+* **$epub:** additional converter for ucp ([293274d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/293274d))
+* **epub:** additional converter for UCP ([87b3041](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/87b3041))
+
+
+
+
 <a name="0.3.5"></a>
 ## [0.3.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.3.4...pubsweet-component-epub@0.3.5) (2018-09-25)
 
