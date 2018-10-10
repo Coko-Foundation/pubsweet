@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const { apolloUploadExpress } = require('apollo-upload-server')
+const logger = require('@pubsweet/logger')
 
 const config = require('config')
 
@@ -13,6 +14,9 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
 })
 const router = new express.Router()
 
+const hostname = config.has('pubsweet-server.hostname')
+  ? config.get('pubsweet-server.hostname')
+  : 'localhost'
 router.use(
   '/graphql',
   authBearerAndPublic,
@@ -20,6 +24,10 @@ router.use(
   graphqlExpress(req => ({
     schema: graphqlSchema,
     context: { user: req.user, connectors },
+    formatError: err => {
+      logger.error(err.message, { error: err })
+      return err
+    },
   })),
 )
 if (
@@ -29,7 +37,10 @@ if (
   router.get(
     '/graphiql',
     authBearerAndPublic,
-    graphiqlExpress({ endpointURL: '/graphql' }),
+    graphiqlExpress({
+      endpointURL: '/graphql',
+      subscriptionsEndpoint: `ws://${hostname}:3000/subscriptions`,
+    }),
   )
 }
 

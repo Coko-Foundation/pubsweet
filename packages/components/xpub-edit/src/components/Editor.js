@@ -115,10 +115,11 @@ class Editor extends React.Component {
       placeholderClassName,
       title,
       readonly,
+      fileUpload,
       ...remainingProps
     } = this.props
     const { state } = this.state
-    const menu = readonly ? {} : options.menu
+    const menu = readonly ? null : options.menu
 
     return (
       <div>

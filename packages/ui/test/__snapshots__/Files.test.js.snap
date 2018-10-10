@@ -36,7 +36,6 @@ exports[`Files renders correctly 1`] = `
     </button>
     <input
       multiple={true}
-      name={undefined}
       onChange={[Function]}
       style={
         Object {

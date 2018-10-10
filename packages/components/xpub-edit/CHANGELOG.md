@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.5.2"></a>
+## [2.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.1...xpub-edit@2.5.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* **component:** add state to italics ([68ffe93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68ffe93))
+
+
+
+
+<a name="2.5.1"></a>
+## [2.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.0...xpub-edit@2.5.1) (2018-08-22)
+
+
+### Bug Fixes
+
+* **xpub-edit:** hide menu when readonly ([3a5b846](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3a5b846))
+
+
+
+
+<a name="2.5.0"></a>
+# [2.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.4.1...xpub-edit@2.5.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **warnings:** don't pass every prop to Dom Element ([a27d938](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a27d938))
+
+
+### Features
+
+* use onBlur ([9990e1e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9990e1e))
+* **xpub-edit:** add readonly prop to texteditor ([054bcef](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/054bcef))
+
+
+
+
+<a name="2.4.1"></a>
+## [2.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.4.0...xpub-edit@2.4.1) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package xpub-edit
+
 <a name="2.4.0"></a>
 # [2.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.3.0...xpub-edit@2.4.0) (2018-07-27)
 

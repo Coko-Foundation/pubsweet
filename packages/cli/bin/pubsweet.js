@@ -7,6 +7,7 @@ program
   .version(pkg.version)
   .command('new', 'create and set up a new pubsweet app')
   .command('setupdb', 'generate a database for a pubsweet app')
+  .command('migrate', 'run pending database migrations')
   .command('build', 'build static assets for a pubsweet app')
   .command('start', 'start pubsweet server and backing services')
   .command('server', 'build static assets and start a pubsweet app')

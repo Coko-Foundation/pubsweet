@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import SimpleEditor from 'wax-editor-react'
+import { Wax } from 'wax-prose-mirror'
 
 import { Tabs } from '@pubsweet/ui'
 import DecisionForm from './DecisionForm'
@@ -9,13 +9,9 @@ import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
+import { Info } from '../molecules/Info'
+import { EditorWrapper } from '../molecules/EditorWrapper'
 import AdminSection from '../atoms/AdminSection'
-
-// TODO -- is passing arrays of react components as props an ok practice?
-/*
-  TODO -- should we make an editor for each tab, or should we just rerender
-          the same one with different content?
-*/
 
 const DecisionLayout = ({
   currentVersion,
@@ -49,15 +45,15 @@ const DecisionLayout = ({
       })
 
       editorSections.push({
-        content: (
-          <SimpleEditor
-            content={version.source}
-            editing="selection"
-            key={version.id}
-            layout="bare"
-            readOnly
-          />
-        ),
+        content:
+          version.files.manuscript.type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+            <EditorWrapper>
+              <Wax key={version.id} readonly value={version.source} />
+            </EditorWrapper>
+          ) : (
+            <Info>No supported view of the file</Info>
+          ),
         key: version.id,
         label,
       })
@@ -99,15 +95,19 @@ const DecisionLayout = ({
     })
 
     editorSections.push({
-      content: (
-        <SimpleEditor
-          content={currentVersion.source}
-          editing="selection"
-          key={currentVersion.id}
-          layout="bare"
-          readOnly
-        />
-      ),
+      content:
+        currentVersion.files.manuscript.type ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+          <EditorWrapper>
+            <Wax
+              key={currentVersion.id}
+              readonly
+              value={currentVersion.source}
+            />
+          </EditorWrapper>
+        ) : (
+          <Info>No supported view of the file</Info>
+        ),
       key: currentVersion.id,
       label,
     })

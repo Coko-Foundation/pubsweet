@@ -1,29 +1,29 @@
 const resolvers = {
   Query: {
     collection(_, { id }, ctx) {
-      return ctx.connectors.collection.fetchOne(id, ctx)
+      return ctx.connectors.Collection.fetchOne(id, ctx)
     },
     collections(_, { id }, ctx) {
-      return ctx.connectors.collection.fetchAll(ctx)
+      return ctx.connectors.Collection.fetchAll(ctx)
     },
   },
   Mutation: {
     deleteCollection(_, { id }, ctx) {
-      return ctx.connectors.collection.delete(id, ctx)
+      return ctx.connectors.Collection.delete(id, ctx)
     },
     createCollection(_, { input }, ctx) {
-      return ctx.connectors.collection.create(input, ctx)
+      return ctx.connectors.Collection.create(input, ctx)
     },
     updateCollection(_, { id, input }, ctx) {
-      return ctx.connectors.collection.update(id, input, ctx)
+      return ctx.connectors.Collection.update(id, input, ctx)
     },
   },
   Collection: {
     owners(collection, vars, ctx) {
-      return ctx.connectors.user.fetchSome(collection.owners, ctx)
+      return ctx.connectors.User.fetchSome(collection.owners, ctx)
     },
     fragments(collection, vars, ctx) {
-      return ctx.connectors.fragment.fetchSome(collection.fragments, ctx)
+      return ctx.connectors.Fragment.fetchSome(collection.fragments, ctx)
     },
   },
 }
@@ -33,13 +33,13 @@ const typeDefs = `
     collection(id: ID): Collection
     collections: [Collection]
   }
-  
+
   extend type Mutation {
-    createCollection(input: String): Collection
-    deleteCollection(id: ID): Collection 
-    updateCollection(id: ID, input: String): Collection
+    createCollection(input: CollectionInput): Collection
+    deleteCollection(id: ID): Collection
+    updateCollection(id: ID, input: CollectionInput): Collection
   }
-  
+
   type Collection {
     id: ID!
     rev: String
@@ -47,7 +47,7 @@ const typeDefs = `
     owners: [User!]!
     fragments: [Fragment!]!
   }
-  
+
   input CollectionInput {
     owners: [ID!]
     fragments: [ID!]

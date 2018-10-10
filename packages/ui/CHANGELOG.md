@@ -3,7 +3,122 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="8.2.0"></a>
+      <a name="8.7.1"></a>
+## [8.7.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.7.0...@pubsweet/ui@8.7.1) (2018-10-08)
+
+
+### Bug Fixes
+
+* add .babelrc to ui package's files ([9373b95](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9373b95))
+
+
+
+
+      <a name="8.7.0"></a>
+# [8.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.2...@pubsweet/ui@8.7.0) (2018-09-27)
+
+
+### Features
+
+* **ui:** can now disable a single radio in a group ([026202c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/026202c))
+
+
+
+
+<a name="8.6.2"></a>
+## [8.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.1...@pubsweet/ui@8.6.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* **ui:** make sure action group does not render empty elements ([d310cdc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d310cdc))
+
+
+
+
+<a name="8.6.1"></a>
+## [8.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.0...@pubsweet/ui@8.6.1) (2018-09-06)
+
+
+### Bug Fixes
+
+* **ui:** add classname to appbar so that styles can be extended ([6b66bb3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6b66bb3))
+
+
+
+
+<a name="8.6.0"></a>
+# [8.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.5.0...@pubsweet/ui@8.6.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **test:** add data-test-id to tabs ([e8a42cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8a42cb))
+
+
+### Features
+
+* **date-parser:** add humanize threshold ([42be337](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/42be337))
+* **formbuilder:** add forms layout ([0cd6b9d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd6b9d))
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+* **submit:** import dynamically the form template ([ac4649e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ac4649e))
+
+
+
+
+<a name="8.5.0"></a>
+# [8.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.4.0...@pubsweet/ui@8.5.0) (2018-08-20)
+
+
+### Bug Fixes
+
+* **ui:** rename jsx file to js ([c5d218a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d218a))
+
+
+### Features
+
+* **ui:** add TextArea component ([8bf12cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8bf12cb))
+
+
+
+
+<a name="8.4.0"></a>
+# [8.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.3.0...@pubsweet/ui@8.4.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **actions:** active on css prop ([5e6c737](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5e6c737))
+* **revert:** valildateStatus ([5d6f53e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d6f53e))
+* **styleguide:** pass correct property ([287aa00](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/287aa00))
+* **ui:** update checkboxgroup snapshot ([ff9644a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ff9644a))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+* **warnings:** naming problems ([917cee8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/917cee8))
+
+
+### Features
+
+* **accordion-component:** ui accordion component ([10ad7c3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/10ad7c3))
+* **list-component:** a component that renders items in a list ([78490e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/78490e0))
+* **list-component:** remove children as list items; pass data test id ([de3d919](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/de3d919))
+* **list-component:** remove classname from styled component ([7c2a417](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c2a417))
+* **ui:** give readonly option to radio and checkbox ([fecfe69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fecfe69))
+
+
+
+
+<a name="8.3.0"></a>
+# [8.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.2.0...@pubsweet/ui@8.3.0) (2018-08-02)
+
+
+### Features
+
+* **ui-toolkit:** add borderColor function to theme helper ([0ed3fc1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0ed3fc1))
+
+
+
+
+<a name="8.2.0"></a>
 # [8.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.1.0...@pubsweet/ui@8.2.0) (2018-07-27)
 
 
@@ -14,7 +129,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="8.1.0"></a>
+<a name="8.1.0"></a>
 # [8.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.0.1...@pubsweet/ui@8.1.0) (2018-07-12)
 
 

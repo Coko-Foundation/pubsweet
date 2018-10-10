@@ -112,7 +112,7 @@ describe('GraphQL authentication', () => {
 
       expect(body).toMatchObject({
         data: { users: null },
-        errors: [{ message: 'Operation not permitted: read users' }],
+        errors: [{ message: 'Operation not permitted: read User' }],
       })
     })
 
@@ -140,9 +140,9 @@ describe('GraphQL authentication', () => {
 
       const { body } = await api.graphql.query(
         `query($id: ID) {
-          user(id: $id) { 
+          user(id: $id) {
             username
-            admin 
+            admin
           }
         }`,
         { id: user.id },

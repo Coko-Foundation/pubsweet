@@ -29,9 +29,9 @@ describe('GraphQL core queries', () => {
   it('can resolve user by ID', async () => {
     const { body } = await api.graphql.query(
       `query($id: ID) {
-          user(id: $id) { 
+          user(id: $id) {
             username
-            admin 
+            admin
           }
         }`,
       { id: user.id },
@@ -43,17 +43,37 @@ describe('GraphQL core queries', () => {
     })
   })
 
+  it('can resolve a query for a missing object', async () => {
+    const { body } = await api.graphql.query(
+      `query($id: ID) {
+          user(id: $id) {
+            username
+          }
+        }`,
+      { id: '09e2fdec-a589-4104-b366-108b6e54f2b8' },
+      token,
+    )
+
+    expect(body.data).toEqual({ user: null })
+    expect(body.errors[0].message).toMatch('Object not found')
+  })
+
   it('can resolve nested query', async () => {
     await new Team({ ...fixtures.contributorTeam, members: [user.id] }).save()
     const { body } = await api.graphql.query(
-      `{ users { username, teams { name } } }`,
+      `{ users { username, teams { name, global } } }`,
       {},
       token,
     )
 
     expect(body).toEqual({
       data: {
-        users: [{ username: 'admin', teams: [{ name: 'My contributors' }] }],
+        users: [
+          {
+            username: 'admin',
+            teams: [{ name: 'My contributors', global: null }],
+          },
+        ],
       },
     })
   })

@@ -6,9 +6,7 @@ import {
   LOGOUT_SUCCESS,
 } from 'pubsweet-client/src/actions/types'
 
-global.window.localStorage = {
-  getItem: jest.fn(() => undefined),
-}
+jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => undefined)
 
 const reducer = require('./reducers').default
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Button } from '@pubsweet/ui'
+import { Button, Attachment } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 import Metadata from './MetadataFields'
 import Declarations from './Declarations'
@@ -10,7 +10,7 @@ import Notes from './Notes'
 import SupplementaryFiles from './SupplementaryFiles'
 
 import Confirm from './Confirm'
-import { Heading1 } from '../styles'
+import { Heading1, Section, Legend } from '../styles'
 // import Validots from './Validots'
 
 const Wrapper = styled.div`
@@ -77,6 +77,17 @@ const CurrentVersion = ({
         uploadFile={uploadFile}
         version={version}
       />
+      {version.files.manuscript.type !==
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
+        <Section id="files.manuscript">
+          <Legend space>Submitted Manuscript</Legend>
+          <Attachment
+            file={version.files.manuscript}
+            key={version.files.manuscript.url}
+            uploaded
+          />
+        </Section>
+      )}
 
       {!version.submitted && (
         <div>
@@ -85,7 +96,6 @@ const CurrentVersion = ({
           </Button>
         </div>
       )}
-
       {confirming && (
         <ModalWrapper>
           <Confirm toggleConfirming={toggleConfirming} />

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.6"></a>
+## [0.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-validators@0.0.5...xpub-validators@0.0.6) (2018-09-04)
+
+
+### Bug Fixes
+
+* **fomrbuilder:** fix validation ([98b3b5e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98b3b5e))
+
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-validators@0.0.4...xpub-validators@0.0.5) (2018-04-03)
 

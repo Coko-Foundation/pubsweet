@@ -68,7 +68,6 @@ export class UpdateSubscriber extends Component {
 
   subscribe(props) {
     const { currentUser, handleUpdate } = props
-
     if (currentUser) {
       // ignore if not supported
       if (!window.EventSource) return

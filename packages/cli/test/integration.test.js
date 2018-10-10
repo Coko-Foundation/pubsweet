@@ -16,9 +16,6 @@ const nodeConfig = {
     db: { database: global.__testDbName },
     uploads: path.join(appPath, 'uploads'),
   },
-  // TODO: Remove this once version of server that handles
-  // undefined app validations is released.
-  validations: 'path',
   authsome: {
     mode: 'authsome/src/modes/blog',
   },

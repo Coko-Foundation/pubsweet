@@ -3,6 +3,113 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.7"></a>
+## [0.5.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.6...pubsweet-component-xpub-manuscript@0.5.7) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.6"></a>
+## [0.5.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.5...pubsweet-component-xpub-manuscript@0.5.6) (2018-09-29)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.5"></a>
+## [0.5.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.4...pubsweet-component-xpub-manuscript@0.5.5) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.4"></a>
+## [0.5.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.3...pubsweet-component-xpub-manuscript@0.5.4) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.3"></a>
+## [0.5.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.2...pubsweet-component-xpub-manuscript@0.5.3) (2018-09-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.2"></a>
+## [0.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.1...pubsweet-component-xpub-manuscript@0.5.2) (2018-09-19)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.1"></a>
+## [0.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.5.0...pubsweet-component-xpub-manuscript@0.5.1) (2018-09-06)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.5.0"></a>
+# [0.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.5...pubsweet-component-xpub-manuscript@0.5.0) (2018-09-04)
+
+
+### Features
+
+* add wax-prose-mirror to xpub ([c397a97](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c397a97))
+
+
+
+
+<a name="0.4.5"></a>
+## [0.4.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.4...pubsweet-component-xpub-manuscript@0.4.5) (2018-08-23)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.4.4"></a>
+## [0.4.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.3...pubsweet-component-xpub-manuscript@0.4.4) (2018-08-22)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.4.3"></a>
+## [0.4.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.2...pubsweet-component-xpub-manuscript@0.4.3) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.4.2"></a>
+## [0.4.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.1...pubsweet-component-xpub-manuscript@0.4.2) (2018-08-17)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+<a name="0.4.1"></a>
+## [0.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.4.0...pubsweet-component-xpub-manuscript@0.4.1) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
 <a name="0.4.0"></a>
 # [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.3.0...pubsweet-component-xpub-manuscript@0.4.0) (2018-07-27)
 

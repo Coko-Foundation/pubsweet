@@ -1,8 +1,4 @@
-const Collection = require('../src/models/Collection')
-const Fragment = require('../src/models/Fragment')
-const User = require('../src/models/User')
-const Team = require('../src/models/Team')
-
+const { Fragment, User, Collection, Team } = require('../src/models')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
@@ -73,6 +69,30 @@ describe('Teams model', () => {
         teamId = savedTeam.id
         expect(savedTeam.members).toEqual([userId])
         expect(savedTeam.object).toEqual(team.object)
+        expect(savedTeam.teamType).toEqual(team.teamType)
+        expect(savedTeam.name).toEqual(team.name)
+        return User.find(userId)
+      })
+      .then(user => {
+        expect(user.teams).toEqual([teamId])
+      })
+  })
+
+  it('can save a global team', () => {
+    let team = teamFixture
+    team.name = 'Global test team'
+    team.global = true
+    team.members = [userId]
+    team = new Team(team)
+
+    let teamId
+
+    return team
+      .save()
+      .then(savedTeam => {
+        teamId = savedTeam.id
+        expect(savedTeam.members).toEqual([userId])
+        expect(savedTeam.global).toEqual(team.global)
         expect(savedTeam.teamType).toEqual(team.teamType)
         expect(savedTeam.name).toEqual(team.name)
         return User.find(userId)

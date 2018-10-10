@@ -58,6 +58,7 @@ class HtmlEditor extends React.Component {
     return (
       <Editor
         fileUpload={fileUpload}
+        onBlur={this.onBlur}
         onChange={this.onChange}
         {...passedProps}
       />

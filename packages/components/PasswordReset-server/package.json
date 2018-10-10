@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-password-reset-backend",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Password reset backend component for PubSweet",
   "main": "index.js",
   "scripts": {},
@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "config": "^1.26.1",
+    "config": "^2.0.1",
     "moment": "^2.18.1",
     "nodemailer": "^4.0.1"
   },

@@ -69,6 +69,11 @@ describe('/api/password-reset route', () => {
               from: 'nobody@example.com',
               to: user.email,
               subject: 'Password reset',
+              text: expect.stringContaining(
+                `http://example.com/password-reset?username=${
+                  user.username
+                }&token=${user.passwordResetToken}`,
+              ),
             }),
           )
         })

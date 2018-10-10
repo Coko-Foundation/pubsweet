@@ -1,8 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
 const Label = styled.span`
+  ${props =>
+    props.disabled &&
+    css`
+      cursor: not-allowed;
+    `};
+
   ${override('ui.Label')};
   ${override('ui.Radio.Label')};
 `
@@ -21,6 +27,7 @@ const Root = styled.label`
 `
 const Radio = ({
   className,
+  disabled,
   color,
   inline,
   name,
@@ -29,19 +36,18 @@ const Radio = ({
   checked,
   required,
   onChange,
-  readonly,
 }) => (
-  <Root checked={checked} color={color} inline={inline}>
+  <Root checked={checked} className={className} color={color} inline={inline}>
     <Input
       checked={checked}
-      disabled={readonly}
+      disabled={disabled}
       name={name}
       onChange={onChange}
       required={required}
       type="radio"
       value={value}
     />
-    <Label checked={checked} color={color}>
+    <Label checked={checked} color={color} disabled={disabled}>
       {label}
     </Label>
   </Root>

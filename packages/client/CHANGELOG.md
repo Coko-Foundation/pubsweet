@@ -3,6 +3,169 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.1"></a>
+## [6.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@6.0.0...pubsweet-client@6.0.1) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
+<a name="6.0.0"></a>
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@5.0.2...pubsweet-client@6.0.0) (2018-09-29)
+
+
+### Features
+
+* add global property to team ([81b2a7b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/81b2a7b)), closes [#424](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/424)
+
+
+### BREAKING CHANGES
+
+* Teams now have a built-in global property meant to distinguish between object-based
+teams and global teams. Previously a global team was defined as a team missing its object, but since
+that is ambiguous, i.e. an object can be missing for several reasons - a global property is much
+more straight-forward. If you were already using a .global property on Team in your app, your app
+will break as the GraphQL schema will conflict.
+
+
+
+
+<a name="5.0.2"></a>
+## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@5.0.1...pubsweet-client@5.0.2) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
+<a name="5.0.1"></a>
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@5.0.0...pubsweet-client@5.0.1) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
+<a name="5.0.0"></a>
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.2.2...pubsweet-client@5.0.0) (2018-09-20)
+
+
+### Features
+
+* add base-model package for standalone data models ([fc446e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fc446e8)), closes [#395](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/395)
+
+
+### BREAKING CHANGES
+
+* In PubSweet server, the exported thing is no longer startServer directly, but it's
+now part of the exported object. This will break applications that use the equivalent of const
+startServer = require('pubsweet-server'). The new method for getting a startServer is const {
+startServer } = require('pubsweet-server').
+
+
+
+
+<a name="4.2.2"></a>
+## [4.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.2.1...pubsweet-client@4.2.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* get current user in authorize component ([ae773fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ae773fa))
+
+
+
+
+<a name="4.2.1"></a>
+## [4.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.2.0...pubsweet-client@4.2.1) (2018-09-06)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
+<a name="4.2.0"></a>
+# [4.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.3...pubsweet-client@4.2.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **client:** create a new authsome instance if not supplied ([fcc5423](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fcc5423))
+* **client:** fix graphql queries ([3003c50](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3003c50))
+* **client:** initialize an authsome mode from config if not supplied ([e0b7416](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e0b7416))
+* use named graphql queries ([03e5656](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/03e5656))
+* **subscriptions:** get token from local storage on each reconnect ([68dabdc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68dabdc))
+
+
+### Features
+
+* **client:** add AuthorizeWithGraphQL ([57eca9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/57eca9a))
+
+
+
+
+<a name="4.1.3"></a>
+## [4.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.2...pubsweet-client@4.1.3) (2018-08-23)
+
+
+### Bug Fixes
+
+* fixed minor mistake ([cbe6d75](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cbe6d75))
+
+
+
+
+<a name="4.1.2"></a>
+## [4.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.1...pubsweet-client@4.1.2) (2018-08-22)
+
+
+### Bug Fixes
+
+* fixed websocket protocol over https ([2235990](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2235990))
+
+
+
+
+<a name="4.1.1"></a>
+## [4.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.1.0...pubsweet-client@4.1.1) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
+<a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.0.5...pubsweet-client@4.1.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **authorize:** fix for correct props propagation ([5de8ea8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5de8ea8))
+* **graphql:** disable authentication for websocket link ([06305c7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/06305c7))
+* **server:** use the existing http server for subscriptions ([c5d1362](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d1362))
+* **test:** fix Root test in client ([c6ed350](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c6ed350))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+
+
+### Features
+
+* **graphql:** add subscription support to graphql ([d71b0c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d71b0c6))
+* **graphql:** enable authentication over the websocket ([98c9e6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98c9e6d))
+* **graphql:** get hostname from variables ([64b7c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/64b7c4f))
+* **graphql:** make connection to websocket optional ([695f1bb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/695f1bb))
+
+
+
+
+<a name="4.0.5"></a>
+## [4.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.0.4...pubsweet-client@4.0.5) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package pubsweet-client
+
 <a name="4.0.4"></a>
 ## [4.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@4.0.3...pubsweet-client@4.0.4) (2018-07-27)
 

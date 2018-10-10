@@ -128,7 +128,7 @@ const renderAuthorsComp = compose(
 )(renderAuthors)
 
 const AuthorsInput = () => (
-  <FieldArray component={renderAuthorsComp} name="authors" />
+  <FieldArray component={renderAuthorsComp} name="metadata.authors" />
 )
 
 export default AuthorsInput

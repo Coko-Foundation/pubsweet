@@ -6,13 +6,13 @@ class SSE extends EventEmitter {
 
     this.connect = this.connect.bind(this)
     this.messageId = 0
-    this.pulse()
   }
 
   connect(req, res) {
     // if (req.header('Accept').indexOf('text/event-stream') === -1) {
     // TODO: throw exception?
     // }
+    this.pulse()
 
     req.socket.setTimeout(Number.MAX_SAFE_INTEGER)
     req.socket.setNoDelay(true)
@@ -70,15 +70,20 @@ class SSE extends EventEmitter {
     req.on('close', () => {
       this.removeListener('data', dataListener)
       this.setMaxListeners(this.getMaxListeners() - 1)
+      if (this.listenerCount('data') === 0) {
+        clearInterval(this.pulseInterval)
+        this.pulseInterval = undefined
+      }
     })
   }
 
   pulse() {
-    const pulseInterval = setInterval(() => {
+    if (this.pulseInterval) return // Already pulsing
+    this.pulseInterval = setInterval(() => {
       this.emit('data', { event: 'pulse', data: Date.now() })
     }, 10000)
 
-    pulseInterval.unref()
+    this.pulseInterval.unref()
   }
 
   send(data, event) {

@@ -1,5 +1,5 @@
 const supertest = require('supertest')
-const app = require('../../src').configureApp(require('express')())
+const app = require('../../src/app')(require('express')())
 const STATUS = require('http-status-codes')
 const querystring = require('querystring')
 

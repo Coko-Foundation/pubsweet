@@ -48,4 +48,27 @@ describe('DateParser', () => {
     expect(wrapper.find('div')).toHaveLength(1)
     expect(wrapper.html()).toMatch('2018-05-18')
   })
+
+  it('renders with humanized threshold - 2 days ago', () => {
+    const today = new Date()
+    const fewDaysAgo = new Date().setDate(today.getDate() - 2)
+    const wrapper = mount(
+      <DateParser humanizeThreshold={3} timestamp={fewDaysAgo}>
+        {t => <div>{t}</div>}
+      </DateParser>,
+    )
+    expect(wrapper.find('div')).toHaveLength(1)
+    expect(wrapper.html()).toMatch('<div>2 days ago</div>')
+  })
+
+  it('renders correct time ago', () => {
+    const today = new Date()
+    const wrapper = mount(
+      <DateParser humanizeThreshold={3} timestamp={today}>
+        {(t, ago) => <div>{ago} ago</div>}
+      </DateParser>,
+    )
+    expect(wrapper.find('div')).toHaveLength(1)
+    expect(wrapper.html()).toMatch('<div>a few seconds ago</div>')
+  })
 })

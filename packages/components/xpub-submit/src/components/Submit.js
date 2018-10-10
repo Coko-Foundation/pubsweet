@@ -6,6 +6,7 @@ import moment from 'moment'
 import CurrentVersion from './CurrentVersion'
 import DecisionReviewColumn from './DecisionReviewColumn'
 import { Columns, SubmissionVersion } from './atoms/Columns'
+import FormTemplate from './FormTemplate'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -35,6 +36,7 @@ const Submit = ({
   project,
   submittedVersion,
   currentVersion,
+  forms,
   ...formProps
 }) => {
   const decisionSections = []
@@ -51,12 +53,25 @@ const Submit = ({
     })
   })
 
+  // decisionSections.push({
+  //   content: (
+  //     <CurrentVersion
+  //       {...formProps}
+  //       project={project}
+  //       readonly={false}
+  //       version={currentVersion}
+  //     />
+  //   ),
+  //   key: "pao", // currentVersion.id,
+  //   label: 'Current Version pao',
+  // })
+
   decisionSections.push({
     content: (
-      <CurrentVersion
+      <FormTemplate
         {...formProps}
+        form={forms}
         project={project}
-        readonly={false}
         version={currentVersion}
       />
     ),

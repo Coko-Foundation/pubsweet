@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.13"></a>
+## [3.1.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.12...pubsweet-component-xpub-review@3.1.13) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.12"></a>
+## [3.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.11...pubsweet-component-xpub-review@3.1.12) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.11"></a>
+## [3.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.10...pubsweet-component-xpub-review@3.1.11) (2018-09-19)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.10"></a>
+## [3.1.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.9...pubsweet-component-xpub-review@3.1.10) (2018-09-06)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.9"></a>
+## [3.1.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.8...pubsweet-component-xpub-review@3.1.9) (2018-09-04)
+
+
+### Bug Fixes
+
+* **editor:** replace wax with wax-prosemirror ([d7b12f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d7b12f4))
+
+
+
+
+<a name="3.1.8"></a>
+## [3.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.7...pubsweet-component-xpub-review@3.1.8) (2018-08-22)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.7"></a>
+## [3.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.6...pubsweet-component-xpub-review@3.1.7) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.6"></a>
+## [3.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.5...pubsweet-component-xpub-review@3.1.6) (2018-08-17)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
+<a name="3.1.5"></a>
+## [3.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.4...pubsweet-component-xpub-review@3.1.5) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-xpub-review
+
 <a name="3.1.4"></a>
 ## [3.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review@3.1.3...pubsweet-component-xpub-review@3.1.4) (2018-07-27)
 

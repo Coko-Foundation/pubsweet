@@ -3,7 +3,168 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="7.2.0"></a>
+  <a name="10.0.1"></a>
+## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.0...pubsweet-server@10.0.1) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-server
+
+  <a name="10.0.0"></a>
+# [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.2.0...pubsweet-server@10.0.0) (2018-09-29)
+
+
+### Features
+
+* add global property to team ([81b2a7b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/81b2a7b)), closes [#424](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/424)
+
+
+### BREAKING CHANGES
+
+* Teams now have a built-in global property meant to distinguish between object-based
+teams and global teams. Previously a global team was defined as a team missing its object, but since
+that is ambiguous, i.e. an object can be missing for several reasons - a global property is much
+more straight-forward. If you were already using a .global property on Team in your app, your app
+will break as the GraphQL schema will conflict.
+
+
+
+
+<a name="9.2.0"></a>
+# [9.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.2...pubsweet-server@9.2.0) (2018-09-28)
+
+
+### Features
+
+* add destroy method to graphql pubsub ([0c51f41](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0c51f41))
+* use [@pubsweet](https://gitlab.coko.foundation/pubsweet)/logger for graphql errors ([2c031fe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2c031fe))
+
+
+
+
+<a name="9.1.2"></a>
+## [9.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.1...pubsweet-server@9.1.2) (2018-09-27)
+
+
+### Bug Fixes
+
+* **server:** get model from the component ([ce88a8c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ce88a8c))
+* **server:** require components relatively ([b2ae124](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b2ae124))
+
+
+
+
+<a name="9.1.1"></a>
+## [9.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.1.0...pubsweet-server@9.1.1) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-server
+
+<a name="9.1.0"></a>
+# [9.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.0.0...pubsweet-server@9.1.0) (2018-09-25)
+
+
+### Bug Fixes
+
+* **server:** add missing objection dependency ([3dfdae3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3dfdae3))
+* **server:** specify db-manager dev dependency for server ([b86a564](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b86a564))
+
+
+### Features
+
+* **server:** add configurable token expiration ([f2eb1a8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f2eb1a8)), closes [#427](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/427)
+
+
+
+
+<a name="9.0.0"></a>
+# [9.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.2.0...pubsweet-server@9.0.0) (2018-09-20)
+
+
+### Features
+
+* add base-model package for standalone data models ([fc446e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fc446e8)), closes [#395](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/395)
+
+
+### BREAKING CHANGES
+
+* In PubSweet server, the exported thing is no longer startServer directly, but it's
+now part of the exported object. This will break applications that use the equivalent of const
+startServer = require('pubsweet-server'). The new method for getting a startServer is const {
+startServer } = require('pubsweet-server').
+
+
+
+
+<a name="8.2.0"></a>
+# [8.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.1.0...pubsweet-server@8.2.0) (2018-09-19)
+
+
+### Features
+
+* **server:** remove require-relative ([38a8f50](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/38a8f50))
+
+
+
+
+<a name="8.1.0"></a>
+# [8.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.0.1...pubsweet-server@8.1.0) (2018-09-04)
+
+
+### Features
+
+* **client:** add AuthorizeWithGraphQL ([57eca9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/57eca9a))
+
+
+
+
+<a name="8.0.1"></a>
+## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@8.0.0...pubsweet-server@8.0.1) (2018-08-20)
+
+
+### Bug Fixes
+
+* **server:** use TeamInput for updateTeam mutation too ([b84b369](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b84b369))
+
+
+
+
+<a name="8.0.0"></a>
+# [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.2.0...pubsweet-server@8.0.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **graphql:** fix bug where frontend gets bad data on subscription ([3301269](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3301269))
+* **graphql:** fix error that would crash the server on bad auth token ([058c6cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/058c6cd))
+* **graphql:** return one pubsub only in getPubsub ([d016272](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d016272))
+* **graphql:** use same db client in pubsub connection ([f002f4a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f002f4a))
+* **graphql:** use same version of graphql across the project ([445f204](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/445f204))
+* **server:** use appropriate inputs for GraphQL mutations ([dd6d3f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dd6d3f4)), closes [#418](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/418)
+* **server:** use the existing http server for subscriptions ([c5d1362](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c5d1362))
+
+
+### Features
+
+* **graphql:** add subscription support to graphql ([d71b0c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d71b0c6))
+* **graphql:** add upload progress subscription definition ([4248ffd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4248ffd))
+* **graphql:** enable authentication over the websocket ([98c9e6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98c9e6d))
+* **graphql:** get hostname from variables ([64b7c4f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/64b7c4f))
+* **graphql:** replace redis pubsub with postgres pubsub ([7c3ab7c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c3ab7c))
+* **graphql:** use only one pubsub object on the server ([a875e77](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a875e77))
+
+
+### BREAKING CHANGES
+
+* **server:** Inputs are no longer strings, they are now objects.
+
+
+
+
+<a name="7.2.0"></a>
 # [7.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.2...pubsweet-server@7.2.0) (2018-07-09)
 
 
@@ -14,7 +175,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="7.1.2"></a>
+<a name="7.1.2"></a>
 ## [7.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@7.1.1...pubsweet-server@7.1.2) (2018-06-19)
 
 

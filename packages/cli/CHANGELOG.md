@@ -3,7 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.2.8"></a>
+      <a name="3.0.6"></a>
+## [3.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.5...pubsweet@3.0.6) (2018-10-08)
+
+
+### Bug Fixes
+
+* **cli:** update migration teardown to use knex instead of pg ([8cc2a3e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8cc2a3e))
+
+
+
+
+      <a name="3.0.5"></a>
+## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.4...pubsweet@3.0.5) (2018-09-29)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="3.0.4"></a>
+## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.3...pubsweet@3.0.4) (2018-09-28)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="3.0.3"></a>
+## [3.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.2...pubsweet@3.0.3) (2018-09-27)
+
+
+### Bug Fixes
+
+* **cli:** the db pool is now destroyed, not ended ([db36d1d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/db36d1d))
+
+
+
+
+<a name="3.0.2"></a>
+## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.1...pubsweet@3.0.2) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="3.0.1"></a>
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.0...pubsweet@3.0.1) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="3.0.0"></a>
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.4.0...pubsweet@3.0.0) (2018-09-20)
+
+
+### Features
+
+* add base-model package for standalone data models ([fc446e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fc446e8)), closes [#395](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/395)
+
+
+### BREAKING CHANGES
+
+* In PubSweet server, the exported thing is no longer startServer directly, but it's
+now part of the exported object. This will break applications that use the equivalent of const
+startServer = require('pubsweet-server'). The new method for getting a startServer is const {
+startServer } = require('pubsweet-server').
+
+
+
+
+<a name="2.4.0"></a>
+# [2.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.3.2...pubsweet@2.4.0) (2018-09-19)
+
+
+### Features
+
+* **server:** remove require-relative ([38a8f50](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/38a8f50))
+
+
+
+
+<a name="2.3.2"></a>
+## [2.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.3.1...pubsweet@2.3.2) (2018-09-04)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="2.3.1"></a>
+## [2.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.3.0...pubsweet@2.3.1) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet
+
+<a name="2.3.0"></a>
+# [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.8...pubsweet@2.3.0) (2018-08-17)
+
+
+### Features
+
+* add CLI migrate command ([3ea9dd2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3ea9dd2))
+
+
+
+
+<a name="2.2.8"></a>
 ## [2.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.7...pubsweet@2.2.8) (2018-07-09)
 
 
@@ -11,7 +122,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet
 
-  <a name="2.2.7"></a>
+<a name="2.2.7"></a>
 ## [2.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@2.2.6...pubsweet@2.2.7) (2018-06-28)
 
 

@@ -1,22 +1,17 @@
-const pg = require('pg')
+const knex = require('knex')
 const config = require('config')
-const logger = require('@pubsweet/logger')
+const { knexSnakeCaseMappers } = require('objection')
 
-const ignoreError =
-  config.has('pubsweet-server.ignoreTerminatedConnectionError') &&
-  config.get('pubsweet-server.ignoreTerminatedConnectionError')
-const connectionDetails =
-  config['pubsweet-server'] && config['pubsweet-server'].db
+const connection = config['pubsweet-server'] && config['pubsweet-server'].db
+const pool = config['pubsweet-server'] && config['pubsweet-server'].pool
 
-const pool = new pg.Pool(connectionDetails)
-pool.on('error', err => {
-  // ignore some errors which are thrown in integration tests
-  if (
-    ignoreError &&
-    err.message !== 'terminating connection due to administrator command'
-  ) {
-    logger.error(err)
-  }
+const db = knex({
+  client: 'pg',
+  connection,
+  pool,
+  ...knexSnakeCaseMappers(),
+  acquireConnectionTimeout: 5000,
+  asyncStackTraces: true,
 })
 
-module.exports = pool
+module.exports = db

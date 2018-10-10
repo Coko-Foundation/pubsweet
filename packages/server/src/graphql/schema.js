@@ -1,5 +1,4 @@
 const config = require('config')
-const requireRelative = require('require-relative')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('graphql-tools')
 
@@ -10,9 +9,12 @@ const user = require('./definitions/user')
 const upload = require('./definitions/upload')
 const authentication = require('./definitions/authentication')
 
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
+
 // load base types and resolvers
 const typeDefs = [
-  `type Query, type Mutation`,
+  `type Query, type Mutation, type Subscription`,
   collection.typeDefs,
   fragment.typeDefs,
   team.typeDefs,
@@ -30,16 +32,25 @@ const resolvers = merge(
   authentication.resolvers,
 )
 
-// merge in component types and resolvers
+// recursively merge in component types and resolvers
+function getSchemaRecursively(componentName) {
+  const component = requireRelative(componentName)
+
+  if (component.extending) {
+    getSchemaRecursively(component.extending)
+  }
+
+  if (component.typeDefs) {
+    typeDefs.push(component.typeDefs)
+  }
+  if (component.resolvers) {
+    merge(resolvers, component.resolvers)
+  }
+}
+
 if (config.has('pubsweet.components')) {
-  config.get('pubsweet.components').forEach(name => {
-    const component = requireRelative(name)
-    if (component.typeDefs) {
-      typeDefs.push(component.typeDefs)
-    }
-    if (component.resolvers) {
-      merge(resolvers, component.resolvers)
-    }
+  config.get('pubsweet.components').forEach(componentName => {
+    getSchemaRecursively(componentName)
   })
 }
 

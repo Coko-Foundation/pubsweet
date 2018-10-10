@@ -3,7 +3,195 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="9.4.0"></a>
+  <a name="9.8.0"></a>
+# [9.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.8...pubsweet-components@9.8.0) (2018-10-08)
+
+
+### Features
+
+* **$epub:** additional converter for ucp ([293274d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/293274d))
+* **epub:** additional converter for UCP ([87b3041](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/87b3041))
+
+
+
+
+  <a name="9.7.8"></a>
+## [9.7.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.7...pubsweet-components@9.7.8) (2018-09-29)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.7"></a>
+## [9.7.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.6...pubsweet-components@9.7.7) (2018-09-28)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.6"></a>
+## [9.7.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.5...pubsweet-components@9.7.6) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.5"></a>
+## [9.7.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.4...pubsweet-components@9.7.5) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.4"></a>
+## [9.7.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.3...pubsweet-components@9.7.4) (2018-09-25)
+
+
+### Bug Fixes
+
+* **components:** make team manager resitant to undefined objects ([f180348](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f180348))
+
+
+
+
+<a name="9.7.3"></a>
+## [9.7.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.2...pubsweet-components@9.7.3) (2018-09-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.2"></a>
+## [9.7.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.1...pubsweet-components@9.7.2) (2018-09-19)
+
+
+### Bug Fixes
+
+* exported notes and fix notes on different lines ([1336da6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1336da6))
+* **component:** add state to italics ([68ffe93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/68ffe93))
+
+
+
+
+<a name="9.7.1"></a>
+## [9.7.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.0...pubsweet-components@9.7.1) (2018-09-06)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.7.0"></a>
+# [9.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.3...pubsweet-components@9.7.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **editor:** remove warnings ([b563efd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b563efd))
+* **editor:** replace wax with wax-prosemirror ([d7b12f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d7b12f4))
+* **fomrbuilder:** fix validation ([98b3b5e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98b3b5e))
+* **foormbuilder:** linter prettier ([db290ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/db290ff))
+* **formbuilder:** create folder from scratch ([a2d533e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2d533e))
+* **formbuilder:** erase files uneeded ([9bc04cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bc04cd))
+* **formbuilder:** fixing styling issues to submit ([54bc9a3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/54bc9a3))
+* **formbuilder:** test addition ([1379895](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1379895))
+* **readme:** change readme files ([eb0ff9b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/eb0ff9b))
+* **styleguide:** remove console ([c8f7bb2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c8f7bb2))
+* **submit:** fixing authors save field ([bb89f08](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb89f08))
+* **submit:** form was updated correctly ([94f9844](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/94f9844))
+* **test:** add data-test-id to tabs ([e8a42cb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e8a42cb))
+* **test:** fix intgration test ([900f0db](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/900f0db))
+* **update:** update dependencies ([52c0002](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/52c0002))
+* **xpubformbuilder:** integration test and component ([6806f81](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6806f81))
+
+
+### Features
+
+* **backend:** add backend check path floder ([8c95e72](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8c95e72))
+* **components:** form builder backend requests ([7082b0f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7082b0f))
+* **formbuilder:** add components for the builder ([cfae1c0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cfae1c0))
+* **formbuilder:** add form redux actions formbuilder ([7436353](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7436353))
+* **formbuilder:** add formbuilder component ([c24b9f7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c24b9f7))
+* **formbuilder:** add forms layout ([0cd6b9d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd6b9d))
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+* **formbuilder:** layout of form builder ([2bd4956](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2bd4956))
+* **submit:** import dynamically the form template ([ac4649e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ac4649e))
+* add wax-prose-mirror to xpub ([c397a97](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c397a97))
+
+
+
+
+<a name="9.6.3"></a>
+## [9.6.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.2...pubsweet-components@9.6.3) (2018-08-23)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.6.2"></a>
+## [9.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.1...pubsweet-components@9.6.2) (2018-08-22)
+
+
+### Bug Fixes
+
+* **xpub-edit:** hide menu when readonly ([3a5b846](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3a5b846))
+
+
+
+
+<a name="9.6.1"></a>
+## [9.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.6.0...pubsweet-components@9.6.1) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-components
+
+<a name="9.6.0"></a>
+# [9.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.5.0...pubsweet-components@9.6.0) (2018-08-17)
+
+
+### Bug Fixes
+
+* **actions:** pubsweet ui responsive ([b1cab9a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1cab9a))
+* **actions:** validationStatus fix ([762432f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/762432f))
+* **css:** fix responsiveness of actions ([9bff385](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bff385))
+* **revert:** valildateStatus ([5d6f53e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d6f53e))
+* **style:** remove  enter line ([e2de927](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e2de927))
+* **style:** responsive line tool ([c3219ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c3219ec))
+* **warnings:** don't pass every prop to Dom Element ([a27d938](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a27d938))
+* **warnings:** don't pass every prop to Dom Element ([d8f5e93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d8f5e93))
+* **warnings:** key actions ([2f176f0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f176f0))
+* **warnings:** naming changes ([e4727ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e4727ad))
+* **warnings:** remove key from unneeded component ([2dda7a5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2dda7a5))
+
+
+### Features
+
+* use onBlur ([9990e1e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9990e1e))
+* **xpub-edit:** add readonly prop to texteditor ([054bcef](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/054bcef))
+
+
+
+
+<a name="9.5.0"></a>
+# [9.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.4.0...pubsweet-components@9.5.0) (2018-08-02)
+
+
+### Features
+
+* **aws-s3:** add option to save files with new names ([14e66e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14e66e3))
+
+
+
+
+<a name="9.4.0"></a>
 # [9.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.1...pubsweet-components@9.4.0) (2018-07-27)
 
 
@@ -23,7 +211,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="9.3.1"></a>
+<a name="9.3.1"></a>
 ## [9.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.3.0...pubsweet-components@9.3.1) (2018-07-23)
 
 

@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.18"></a>
+## [1.1.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.17...pubsweet-component-login@1.1.18) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.17"></a>
+## [1.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.16...pubsweet-component-login@1.1.17) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.16"></a>
+## [1.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.15...pubsweet-component-login@1.1.16) (2018-09-19)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.15"></a>
+## [1.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.14...pubsweet-component-login@1.1.15) (2018-09-06)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.14"></a>
+## [1.1.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.13...pubsweet-component-login@1.1.14) (2018-09-04)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.13"></a>
+## [1.1.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.12...pubsweet-component-login@1.1.13) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.12"></a>
+## [1.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.11...pubsweet-component-login@1.1.12) (2018-08-17)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
+<a name="1.1.11"></a>
+## [1.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.10...pubsweet-component-login@1.1.11) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-login
+
 <a name="1.1.10"></a>
 ## [1.1.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.1.9...pubsweet-component-login@1.1.10) (2018-07-27)
 

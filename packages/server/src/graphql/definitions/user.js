@@ -1,32 +1,29 @@
 const resolvers = {
   Query: {
     user(_, { id }, ctx) {
-      return ctx.connectors.user.fetchOne(id, ctx)
+      return ctx.connectors.User.fetchOne(id, ctx)
     },
     users(_, vars, ctx) {
-      return ctx.connectors.user.fetchAll(ctx)
+      return ctx.connectors.User.fetchAll(ctx)
     },
   },
   Mutation: {
     createUser(_, { input }, ctx) {
-      return ctx.connectors.user.create(input, ctx)
+      return ctx.connectors.User.create(input, ctx)
     },
     deleteUser(_, { id }, ctx) {
-      return ctx.connectors.user.delete(id, ctx)
+      return ctx.connectors.User.delete(id, ctx)
     },
     updateUser(_, { id, input }, ctx) {
-      return ctx.connectors.user.update(id, input, ctx)
+      return ctx.connectors.User.update(id, input, ctx)
     },
   },
   User: {
-    collections(user, vars, ctx) {
-      return ctx.connectors.collection.fetchSome(user.collections, ctx)
-    },
     teams(user, vars, ctx) {
-      return ctx.connectors.team.fetchSome(user.teams, ctx)
+      return ctx.connectors.Team.fetchSome(user.teams, ctx)
     },
     fragments(user, vars, ctx) {
-      return ctx.connectors.fragment.fetchSome(user.fragments, ctx)
+      return ctx.connectors.Fragment.fetchSome(user.fragments, ctx)
     },
   },
 }
@@ -36,13 +33,13 @@ const typeDefs = `
     user(id: ID): User
     users: [User]
   }
-  
+
   extend type Mutation {
-    createUser(input: String): User
-    deleteUser(id: ID): User 
-    updateUser(id: ID, input: String): User 
+    createUser(input: UserInput): User
+    deleteUser(id: ID): User
+    updateUser(id: ID, input: UserInput): User
   }
-  
+
   type User {
     id: ID!
     rev: String
@@ -52,9 +49,8 @@ const typeDefs = `
     admin: Boolean
     teams: [Team!]!
     fragments: [Fragment!]!
-    collections: [Collection!]!
   }
-  
+
   input UserInput {
     username: String!
     email: String!

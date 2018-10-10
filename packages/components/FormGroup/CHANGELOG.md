@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.26"></a>
+## [1.1.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.25...pubsweet-component-form-group@1.1.26) (2018-10-08)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.25"></a>
+## [1.1.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.24...pubsweet-component-form-group@1.1.25) (2018-09-29)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.24"></a>
+## [1.1.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.23...pubsweet-component-form-group@1.1.24) (2018-09-28)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.23"></a>
+## [1.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.22...pubsweet-component-form-group@1.1.23) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.22"></a>
+## [1.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.21...pubsweet-component-form-group@1.1.22) (2018-09-27)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.21"></a>
+## [1.1.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.20...pubsweet-component-form-group@1.1.21) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.20"></a>
+## [1.1.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.19...pubsweet-component-form-group@1.1.20) (2018-09-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.19"></a>
+## [1.1.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.18...pubsweet-component-form-group@1.1.19) (2018-09-19)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.18"></a>
+## [1.1.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.17...pubsweet-component-form-group@1.1.18) (2018-09-04)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.17"></a>
+## [1.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.16...pubsweet-component-form-group@1.1.17) (2018-08-20)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
+<a name="1.1.16"></a>
+## [1.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.15...pubsweet-component-form-group@1.1.16) (2018-08-17)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-form-group
+
 <a name="1.1.15"></a>
 ## [1.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.14...pubsweet-component-form-group@1.1.15) (2018-07-09)
 

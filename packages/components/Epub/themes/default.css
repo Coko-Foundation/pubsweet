@@ -2395,3 +2395,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-selector-id {
   font-weight: bold;
 }
+
+.footnote-line {
+  display: block;
+}

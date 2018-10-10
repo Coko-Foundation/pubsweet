@@ -1,10 +1,7 @@
 const STATUS = require('http-status-codes')
 const cloneDeep = require('lodash/cloneDeep')
 
-const Collection = require('../src/models/Collection')
-const User = require('../src/models/User')
-const Team = require('../src/models/Team')
-
+const { Collection, User, Team } = require('../src/models')
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
@@ -160,7 +157,7 @@ describe('Teams API - per collection or fragment', () => {
           .then(() => new User(fixtures.user).save())
           .then(user => {
             const collection = new Collection(fixtures.collection)
-            collection.owners = []
+            collection.setOwners([])
             return collection.save()
           })
           .then(collection => {

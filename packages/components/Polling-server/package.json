@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-polling-server",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Polling server component",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "pubsweet-server": "^7.1.1"
   },
   "dependencies": {
-    "config": "^1.26.2"
+    "config": "^2.0.1"
   },
   "repository": {
     "type": "git",

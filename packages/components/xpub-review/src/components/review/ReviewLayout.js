@@ -1,14 +1,15 @@
 import React from 'react'
 
 import moment from 'moment'
-// import classnames from 'classnames'
 import { Tabs } from '@pubsweet/ui'
-import SimpleEditor from 'wax-editor-react'
+import { Wax } from 'wax-prose-mirror'
 
 import ReviewForm from './ReviewForm'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Review from './Review'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
+import { EditorWrapper } from '../molecules/EditorWrapper'
+import { Info } from '../molecules/Info'
 
 const ReviewLayout = ({
   project,
@@ -52,15 +53,15 @@ const ReviewLayout = ({
 
       // TODO: need to include unreviewed versions?
       editorSections.push({
-        content: (
-          <SimpleEditor
-            content={version.source}
-            editing="selection"
-            key={key}
-            layout="bare"
-            readOnly
-          />
-        ),
+        content:
+          lastSubmitted.files.manuscript.type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+            <EditorWrapper>
+              <Wax key={key} readonly value={lastSubmitted.source} />
+            </EditorWrapper>
+          ) : (
+            <Info>No supported view of the file</Info>
+          ),
         key,
         label,
       })
@@ -96,15 +97,15 @@ const ReviewLayout = ({
     })
 
     editorSections.push({
-      content: (
-        <SimpleEditor
-          content={lastSubmitted.source}
-          editing="selection"
-          key={key}
-          layout="bare"
-          readOnly
-        />
-      ),
+      content:
+        lastSubmitted.files.manuscript.type ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+          <EditorWrapper>
+            <Wax key={key} readonly value={lastSubmitted.source} />
+          </EditorWrapper>
+        ) : (
+          <Info>No supported view of the file</Info>
+        ),
       key,
       label,
     })

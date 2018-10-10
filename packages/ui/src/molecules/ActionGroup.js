@@ -16,9 +16,10 @@ const ActionWrapper = styled.div`
 `
 
 const ActionGroup = props => {
-  const children = React.Children.map(props.children, child => (
-    <ActionWrapper>{child}</ActionWrapper>
-  ))
+  const children = React.Children.map(
+    props.children,
+    child => child && <ActionWrapper>{child}</ActionWrapper>,
+  )
 
   return <Group>{children}</Group>
 }

@@ -45,30 +45,30 @@ class Model {
 
     this.validate()
 
+    const data = { ...this }
     // remove id and any custom toJSON function
-    const data = { ...this, toJSON: undefined, id: undefined }
+    delete data.id
+    delete data.toJSON
+
     if (isNew) {
       logger.debug('Saving', this.type, this.id)
-      await db.query('INSERT INTO entities (id, data) VALUES ($1, $2)', [
+      await db.raw('INSERT INTO entities (id, data) VALUES (?, ?)', [
         this.id,
         data,
       ])
     } else {
       logger.debug('Updating', this.type, this.id)
-      await db.query('UPDATE entities SET data = $2 WHERE id = $1', [
-        this.id,
-        data,
-      ])
+      await db.raw('UPDATE entities SET data = ? WHERE id = ?', [data, this.id])
     }
 
     return this
   }
 
   async delete() {
-    await db.query(
-      `DELETE FROM entities WHERE data->>'type' = $1 AND id = $2`,
-      [this.type, this.id],
-    )
+    await db.raw(`DELETE FROM entities WHERE data->>'type' = ? AND id = ?`, [
+      this.type,
+      this.id,
+    ])
     logger.debug('Deleted', this.type, this.id)
     return this
   }
@@ -111,8 +111,8 @@ class Model {
   // Find all of a certain type e.g.
   // User.all()
   static async all() {
-    const { rows } = await db.query(
-      `SELECT * FROM entities WHERE data->>'type' = $1`,
+    const { rows } = await db.raw(
+      `SELECT * FROM entities WHERE data->>'type' = ?`,
       [this.type],
     )
     return rows.map(result => new this({ id: result.id, ...result.data }))
@@ -121,10 +121,11 @@ class Model {
   // Find by id e.g.
   // User.find('394')
   static async find(id) {
-    const { rows } = await db.query(
-      `SELECT * FROM entities WHERE data->>'type' = $1 AND id = $2`,
+    const { rows } = await db.raw(
+      `SELECT * FROM entities WHERE data->>'type' = ? AND id = ?`,
       [this.type, id],
     )
+
     if (rows.length === 0) {
       throw new NotFoundError(`Object not found: ${this.type} with id ${id}`)
     }
@@ -140,7 +141,7 @@ class Model {
       const last = parts.pop()
       return `${parts.join('->')}->>${last}`
     })
-    return keys.map((accessor, index) => `${accessor} = $${index + 1}`)
+    return keys.map((accessor, index) => `${accessor} = ?`)
   }
 
   // `field` is a string
@@ -160,8 +161,7 @@ class Model {
       Object.assign(selector, field)
     }
     const where = this.selectorToSql(selector)
-
-    const { rows } = await db.query(
+    const { rows } = await db.raw(
       `SELECT id, data FROM entities WHERE ${where.join(' AND ')}`,
       Object.values(selector),
     )

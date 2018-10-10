@@ -12,6 +12,7 @@ import {
   Checkbox,
   Radio,
   TextField,
+  Menu,
 } from './elements'
 
 injectGlobal`
@@ -99,6 +100,7 @@ const cokoTheme = {
       Checkbox,
       Radio,
       TextField,
+      Menu,
     },
   },
 }

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@4.0.2...@pubsweet/coko-theme@4.1.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* **menu:** add style to menu multiple ([7964081](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7964081))
+
+
+### Features
+
+* **formbuilder:** add validation for elements ([882935a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/882935a))
+
+
+
+
+<a name="4.0.2"></a>
+## [4.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@4.0.1...@pubsweet/coko-theme@4.0.2) (2018-08-02)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/coko-theme
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@4.0.0...@pubsweet/coko-theme@4.0.1) (2018-07-09)
 

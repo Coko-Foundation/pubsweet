@@ -23,11 +23,6 @@ export class Authorize extends React.Component {
     this.checkAuth(nextProps)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.authorized === nextState.authorized) return false
-    return true
-  }
-
   async checkAuth({ authsome, currentUser, operation, object }) {
     try {
       const authorized = await authsome.can(
@@ -63,7 +58,7 @@ export class Authorize extends React.Component {
 Authorize.propTypes = {
   currentUser: PropTypes.object,
   operation: PropTypes.string,
-  object: PropTypes.object,
+  object: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.element,
   unauthorized: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   authsome: PropTypes.object.isRequired,

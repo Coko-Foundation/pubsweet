@@ -1,12 +1,38 @@
-const { connectorCreator } = require('./creators')
-const Collection = require('../models/Collection')
-const Fragment = require('../models/Fragment')
-const Team = require('../models/Team')
-const User = require('../models/User')
+const config = require('config')
 
-module.exports = {
-  collection: connectorCreator('collections', Collection),
-  fragment: connectorCreator('fragments', Fragment),
-  team: connectorCreator('teams', Team),
-  user: connectorCreator('users', User),
+const connector = require('./connector')
+const models = require('../models')
+
+const requireRelative = m =>
+  require(require.resolve(m, { paths: [process.cwd()] }))
+
+const connectors = {
+  Collection: connector('Collection', models.Collection),
+  Fragment: connector('Fragment', models.Fragment),
+  Team: connector('Team', models.Team),
+  User: connector('User', models.User),
 }
+
+// merge in component connectors, recursively
+function getConnectorsRecursively(componentName) {
+  const component = requireRelative(componentName)
+  if (component.modelName) {
+    connectors[component.modelName] = connector(
+      component.modelName,
+      component.model,
+    )
+  }
+
+  if (component.extending) {
+    getConnectorsRecursively(component.extending)
+  }
+}
+
+// recursively merge in component types and resolvers
+if (config.has('pubsweet.components')) {
+  config.get('pubsweet.components').forEach(componentName => {
+    getConnectorsRecursively(componentName)
+  })
+}
+
+module.exports = connectors

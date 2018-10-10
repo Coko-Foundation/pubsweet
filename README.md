@@ -11,8 +11,9 @@
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
 
-* [Overview](#overview) - [PubSweet packages](#pubsweet-packages)
-* [Getting started](#getting-started)
+* [Overview](#overview)
+* [PubSweet packages](#pubsweet-packages)
+* [Wiki](#wiki)
 * [Support](#support)
 * [Credits](#credits)
 
@@ -36,9 +37,18 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 | [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/logger)                                                                                                                     | logging utility                                                       |
 | [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/db-manager)                                                                                                             | utility for managing PubSweet databases                               |
 
-# Getting started
+# Wiki
 
-The entry-point into PubSweet is the `pubsweet` command-line tool: [pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/cli).
+The [PubSweet Wiki](https://gitlab.coko.foundation/pubsweet/pubsweet/wikis/home) contains all of the documentation for the PubSweet framework.
+
+The wiki answers most of the common questions around:
+
+* Setting up your local environment
+* Documentation of PubSweet components
+* Using PubSweet components
+* The PubSweet data model
+* Technical terms
+* Contributing
 
 # Support
 

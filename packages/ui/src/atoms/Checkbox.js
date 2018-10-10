@@ -23,6 +23,8 @@ const Root = styled.label`
 `
 
 const Checkbox = ({
+  className,
+  disabled,
   inline,
   name,
   value,
@@ -34,9 +36,10 @@ const Checkbox = ({
   checked = checked || false
 
   return (
-    <Root checked={checked} inline={inline}>
+    <Root checked={checked} className={className} inline={inline}>
       <Input
         checked={checked}
+        disabled={disabled}
         name={name}
         onChange={onChange}
         required={required}

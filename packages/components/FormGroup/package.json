@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-component-form-group",
-  "version": "1.1.15",
+  "version": "1.1.26",
   "description": "Form component with validation support for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "joi-browser": "^13.0.1",
+    "joi-browser": "^13.4.0",
     "prop-types": "^15.5.10",
-    "pubsweet-server": "^7.2.0"
+    "pubsweet-server": "^10.0.1"
   },
   "peerDependencies": {
     "pubsweet-client": ">=1.0.0",

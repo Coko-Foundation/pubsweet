@@ -1,7 +1,7 @@
 variables:
   IMAGE_ORG: pubsweet
   IMAGE_NAME: pubsweet
-  BASE_DOMAIN: gateway.ps.semioticsquares.com
+  BASE_DOMAIN: gateway.ps.elifesciences.yld.io
   CONFIGURATION_REPOSITORY: https://gitlab.coko.foundation/pubsweet/deployment-config.git
 
 stages:
@@ -87,7 +87,7 @@ test:
   script:
     - cd ${HOME}
     # specify host here else it confuses the linked postgres image
-    - PGHOST=postgres npm run test
+    - PGHOST=postgres yarn test
 
 # if tests pass we will push latest, labelled with current commit hash
 push:latest:

@@ -27,14 +27,19 @@ class Team extends React.Component {
       label: user.username,
     }))
 
+    let object
+    if (team.object) {
+      object = `${team.object.type} ${team.object.id}`
+    } else {
+      object = 'Global'
+    }
+
     return (
       <tr>
         <td>{number}</td>
         <td>{team.name}</td>
         <td>{team.teamType}</td>
-        <td>
-          {team.object.type} {team.object.id}
-        </td>
+        <td>{object}</td>
         <td>
           <Menu
             inline
