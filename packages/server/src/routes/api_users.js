@@ -26,13 +26,15 @@ const {
 } = require('./util')
 
 // Issue a token
-api.post('/users/authenticate', authLocal, (req, res) =>
-  res
+api.post('/users/authenticate', authLocal, (req, res) => {
+  delete req.user.passwordHash
+
+  return res
     .status(STATUS.CREATED)
     .json(
       Object.assign({ token: authentication.token.create(req.user) }, req.user),
-    ),
-)
+    )
+})
 
 // Verify a token
 api.get('/users/authenticate', authBearer, async (req, res, next) => {
