@@ -11729,10 +11729,44 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pubsweet-component-form-group@1.1.25:
+  version "1.1.25"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-1.1.25.tgz#ba93e042483ce7097f799966322940d6b67f2b11"
+  integrity sha512-7QmaHh/DbGcOt5jEx7DfQiWwnL7+CHQWm9DLRC9yS7dZ5yFJGsyLpzerAUbFDBlUftcrufymKDbzICbBj0AaaA==
+  dependencies:
+    joi-browser "^13.4.0"
+    prop-types "^15.5.10"
+    pubsweet-server "^10.0.0"
+
+pubsweet-component-login@1.1.17:
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-login/-/pubsweet-component-login-1.1.17.tgz#8ea00b85e73a1068fbd6e1d7a4173ba3cfc17c42"
+  integrity sha512-1M5xBtUGi+nWoknzSYQ8C7RAo3XCPCJzgdOQaKi2Cl1iIKHZy0wsNXlK3gv/3dldJ47QLSL2E6sKnlwy2YijLQ==
+  dependencies:
+    "@pubsweet/ui" "^8.7.0"
+    prop-types "^15.5.10"
+    react-redux "^5.0.6"
+    react-router-dom "^4.2.2"
+    react-router-redux "^5.0.0-alpha.9"
+    recompose "^0.26.0"
+    redux-form "^7.0.3"
+
 pubsweet-component-pepper-theme@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/pubsweet-component-pepper-theme/-/pubsweet-component-pepper-theme-0.0.5.tgz#eb39aafbab8e1a737752b6c5ed7ef057ead414cc"
   integrity sha512-b84iM59NMjAqKWbKs2/HSNrwFgb4/siOaXHqyfzs4Z+b+/rO1WthUGjJ4h8Uq3GeuTSPSG8QmdraDyPYHPDDQg==
+
+pubsweet-component-posts-manager@1.0.40:
+  version "1.0.40"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-posts-manager/-/pubsweet-component-posts-manager-1.0.40.tgz#ce757fde0ffbedafe441229b11ad4c97b0a72110"
+  integrity sha512-hqsltbexB1iw1/l7E/uHq3VlxA5hw+a1gkdpCdzZ5MBawVln/Db6Tme4zxXSkjjBC73NZh/QZ+ABgDI3aUBOiQ==
+  dependencies:
+    "@pubsweet/ui" "^8.7.0"
+    prop-types "^15.5.10"
+    pubsweet-component-form-group "^1.1.25"
+    react-redux "^5.0.6"
+    react-router-dom "^4.2.2"
+    redux "^3.7.2"
 
 pubsweet-theme-plugin@^0.0.3:
   version "0.0.3"
