@@ -164,6 +164,17 @@ module.exports = (
       $elem.remove()
     }
   })
+
+  $('highlighter').each((i, elem) => {
+    const $elem = $(elem)
+    $elem.replaceWith($elem.text())
+  })
+  $('ornament').each((i, elem) => {
+    const $elem = $(elem)
+    const hr = $('<hr>')
+    $elem.replaceWith(hr)
+  })
+
   const hasNotes = $('note').length > 0
 
   if (hasNotes) {

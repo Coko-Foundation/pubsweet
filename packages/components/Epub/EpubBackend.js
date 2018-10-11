@@ -148,6 +148,20 @@ const EpubBackend = app => {
       res.status(500).json({ error: error.message })
     }
   })
+  app.use('/api/pagedStyler/exportHTML/:id/', async (req, res, next) => {
+    const { id } = req.params
+    const path = `${process.cwd()}/uploads/paged/${id}/index.html`
+
+    try {
+      const file = await readFile(path)
+      res.setHeader('Content-Type', 'text/html')
+      res.setHeader('Content-Disposition', `attachment; filename=${id}.html`)
+      res.write(file, 'binary')
+      res.end()
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  })
 }
 
 const writeFile = (location, content) =>
@@ -155,6 +169,13 @@ const writeFile = (location, content) =>
     fs.writeFile(location, content, 'utf8', err => {
       if (err) return reject(err)
       return resolve()
+    })
+  })
+const readFile = location =>
+  new Promise((resolve, reject) => {
+    fs.readFile(location, 'binary', (err, data) => {
+      if (err) return reject(err)
+      return resolve(data)
     })
   })
 

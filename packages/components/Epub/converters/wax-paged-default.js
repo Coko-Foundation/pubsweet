@@ -144,6 +144,16 @@ module.exports = (
     }
   })
 
+  $('highlighter').each((i, elem) => {
+    const $elem = $(elem)
+    $elem.replaceWith($elem.text())
+  })
+  $('ornament').each((i, elem) => {
+    const $elem = $(elem)
+    const hr = $('<hr>')
+    $elem.replaceWith(hr)
+  })
+
   // replace inline notes with endnotes
   $('note').each((i, elem) => {
     const $elem = $(elem)
