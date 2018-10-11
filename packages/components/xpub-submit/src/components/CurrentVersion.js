@@ -1,14 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Button, Attachment } from '@pubsweet/ui'
+import { Attachment } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 import Metadata from './MetadataFields'
 import Declarations from './Declarations'
 import Suggestions from './Suggestions'
 import SupplementaryFiles from './SupplementaryFiles'
 
-import Confirm from './Confirm'
 import { Heading1, Section, Legend } from '../styles'
 
 const Wrapper = styled.div`
@@ -23,18 +22,6 @@ const Wrapper = styled.div`
 const Intro = styled.div`
   font-style: italic;
   line-height: 1.4;
-`
-
-const ModalWrapper = styled.div`
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
 `
 
 const filterFileManuscript = files =>
@@ -53,18 +40,7 @@ const filesToAttachment = file => ({
   url: file.url,
 })
 
-const CurrentVersion = ({
-  journal,
-  forms,
-  manuscript,
-  valid,
-  error,
-  readonly,
-  handleSubmit,
-  uploadFile,
-  confirming,
-  toggleConfirming,
-}) => (
+const CurrentVersion = ({ journal, forms, manuscript }) => (
   <Wrapper>
     <Heading1>Submission information</Heading1>
 
@@ -84,15 +60,11 @@ const CurrentVersion = ({
       <div>The answers will be automatically saved.</div>
     </Intro>
 
-    <Metadata manuscript={manuscript} readonly={readonly} />
-    <Declarations forms={forms} manuscript={manuscript} readonly={readonly} />
-    <Suggestions manuscript={manuscript} readonly={readonly} />
-    <SupplementaryFiles
-      manuscript={manuscript}
-      readonly={readonly}
-      uploadFile={uploadFile}
-    />
-    {filterFileManuscript(manuscript.files).length > 0 && (
+    <Metadata manuscript={manuscript} />
+    <Declarations forms={forms} manuscript={manuscript} />
+    <Suggestions manuscript={manuscript} />
+    <SupplementaryFiles manuscript={manuscript} />
+    {filterFileManuscript(manuscript.files || []).length > 0 && (
       <Section id="files.manuscript">
         <Legend space>Submitted Manuscript</Legend>
         <Attachment
@@ -101,19 +73,6 @@ const CurrentVersion = ({
           uploaded
         />
       </Section>
-    )}
-
-    {manuscript.status !== 'submitted' && (
-      <div>
-        <Button onClick={toggleConfirming} primary type="button">
-          Submit your manuscript
-        </Button>
-      </div>
-    )}
-    {confirming && (
-      <ModalWrapper>
-        <Confirm toggleConfirming={toggleConfirming} />
-      </ModalWrapper>
     )}
   </Wrapper>
 )

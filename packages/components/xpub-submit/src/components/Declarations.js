@@ -9,7 +9,7 @@ const DeclarationSection = Section.extend`
   margin: calc(${th('gridUnit')} * 6) 0;
 `
 
-const DeclarationsNonEditable = ({ forms, journal, readonly, manuscript }) => (
+const Declarations = ({ forms, manuscript }) => (
   <div>
     <DeclarationSection>
       <Legend>Type of article</Legend>
@@ -26,4 +26,4 @@ const DeclarationsNonEditable = ({ forms, journal, readonly, manuscript }) => (
   </div>
 )
 
-export default DeclarationsNonEditable
+export default Declarations

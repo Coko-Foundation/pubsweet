@@ -242,7 +242,6 @@ export default ({
   toggleConfirming,
   confirming,
   manuscript,
-  validateField,
   setTouched,
   setFieldValue,
   uploadFile,

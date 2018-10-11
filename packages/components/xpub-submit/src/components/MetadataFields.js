@@ -6,7 +6,7 @@ const Abstract = styled.div`
   word-wrap: break-word;
 `
 
-const MetadataFieldsNonEditable = ({ manuscript }) => [
+const MetadataFields = ({ manuscript }) => [
   <Section id="meta.title" key="meta.title">
     <Legend>Title</Legend>
     <div>{manuscript.meta.title}</div>
@@ -21,4 +21,4 @@ const MetadataFieldsNonEditable = ({ manuscript }) => [
   </Section>,
 ]
 
-export default MetadataFieldsNonEditable
+export default MetadataFields
