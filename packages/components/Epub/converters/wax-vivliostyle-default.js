@@ -2,6 +2,7 @@ const hljs = require('highlight.js')
 
 module.exports = (
   $,
+  fragmentId,
   fragmentTitle,
   bookTitle,
   fragmentDivision,
@@ -9,6 +10,10 @@ module.exports = (
   fragmentNumber,
 ) => {
   const body = $('body')
+  const container = $('<div/>')
+
+  const cont = container.append($('#main').contents())
+  $('#main').replaceWith(cont)
 
   const outerContainer = $('<div/>').attr('class', fragmentDivision)
   let innerContainer
@@ -49,10 +54,6 @@ module.exports = (
   } else {
     // if unumbered component
   }
-  $('<h1/>')
-    .attr('class', 'ct')
-    .html(fragmentTitle)
-    .appendTo(innerContainer)
 
   const replaceWithBlockquote = className => (i, elem) => {
     const $elem = $(elem)
@@ -89,6 +90,16 @@ module.exports = (
       .text($elem.text())
 
     $elem.replaceWith(p)
+  }
+
+  const replaceWithH1 = className => (i, elem) => {
+    const $elem = $(elem)
+
+    const h1 = $('<h1/>')
+      .attr('class', className)
+      .text($elem.text())
+
+    $elem.replaceWith(h1)
   }
 
   const replaceWithList = className => (i, elem) => {
@@ -128,7 +139,7 @@ module.exports = (
   $('bibliography-entry').each(replaceWithParagraph('bibliography-entry'))
   $('comment').each(replaceWithText)
   // $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
-  $('chapter-title').each(replaceWithParagraph('ct'))
+  $('chapter-title').each(replaceWithH1('ct'))
   $('chapter-subtitle').each(replaceWithParagraph('cst'))
   $('source-note').each(replaceWithParagraph('exsn'))
   $('ol[styling="qa"]').each(replaceWithList('di'))
@@ -185,7 +196,22 @@ module.exports = (
   })
   $('#notes').remove()
 
-  const bodyContent = body.contents()
+  $('p').each((i, elem) => {
+    const $elem = $(elem)
+    if ($elem.attr('data-id')) {
+      $elem.removeAttr('data-id')
+    }
+  })
+
+  let bodyContent
+
+  if ($('#main').length > 0) {
+    bodyContent = $('#main').contents()
+  } else {
+    // For the case of extracted Notes
+    bodyContent = body.contents()
+  }
+
   innerContainer.append(bodyContent)
   outerContainer.append(innerContainer)
   body.replaceWith(outerContainer)
