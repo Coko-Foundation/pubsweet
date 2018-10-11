@@ -1,15 +1,15 @@
-import { pick, throttle, defaultsDeep, cloneDeep } from 'lodash'
+import { throttle, cloneDeep, isEmpty } from 'lodash'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
-import { reduxForm, SubmissionError } from 'redux-form'
+import { withFormik } from 'formik'
 import { withLoader } from 'pubsweet-client'
-import uploadFile from 'xpub-upload/src/no-redux'
 import Submit from '../components/Submit'
 
 const fragmentFields = `
   id
   created
+  decision
   files {
     id
     created
@@ -24,6 +24,9 @@ const fragmentFields = `
     open
     recommendation
     created
+    comments {
+      content
+    }
     user {
       identities {
         ... on Local {
@@ -55,6 +58,7 @@ const fragmentFields = `
   status
   meta {
     title
+    abstract
     declarations
     articleSections
     articleType
@@ -68,20 +72,25 @@ const fragmentFields = `
       notesType
       content
     }
+    keywords
+  }
+  suggestions {
+    reviewers {
+      opposed
+      suggested
+    }
+    editors {
+      opposed
+      suggested
+    }
+  }
+  authors {
+    firstName
+    lastName
+    email
+    affiliation
   }
 `
-// declarations {
-//   openData
-//   previouslySubmitted
-//   openPeerReview
-//   streamlinedReview
-//   researchNexus
-//   preregistered
-// }
-// notes {
-//   fundingAcknowledgement
-//   specialInstructions
-// }
 
 const query = gql`
   query($id: ID!, $form: String!) {
@@ -103,47 +112,27 @@ const query = gql`
 `
 
 const updateMutation = gql`
-  mutation($id: ID, $input: String) {
-    updateFragment(id: $id, input: $input) {
+  mutation($id: ID!, $input: String) {
+    updateManuscript(id: $id, input: $input) {
       id
       ${fragmentFields}
     }
   }
 `
 
-const submitMutation = gql`
-  mutation(
-    $fragmentId: ID
-    $fragmentInput: String
-    $collectionId: ID
-    $collectionInput: String
-  ) {
-    updateFragment(id: $fragmentId, input: $fragmentInput) {
+const uploadSuplementaryFilesMutation = gql`
+  mutation($file: Upload!) {
+    upload(file: $file) {
       id
-      submitted
-    }
-
-    updateCollection(id: $collectionId, input: $collectionInput) {
-      id
-      status
+      created
+      filename
+      label
+      size
+      mimeType
+      url
     }
   }
 `
-
-// TODO: deep-clone values instead of mutating it?
-const prepareValuesForUpdate = values => {
-  values.metadata.title = stripHtml(values.metadata.title)
-  return values
-}
-
-// TODO: this is only here because prosemirror would save the title in the
-// metadata as html instead of plain text. we need to maybe find a better
-// position than here to perform this operation
-const stripHtml = htmlString => {
-  const temp = document.createElement('span')
-  temp.innerHTML = htmlString
-  return temp.textContent
-}
 
 const omitSpecialKeysDeep = object => {
   const output = {}
@@ -163,6 +152,19 @@ const omitSpecialKeysDeep = object => {
   })
 
   return output
+}
+
+const createObject = (key, value) => {
+  const obj = {}
+  const parts = key.split('.')
+  if (parts.length === 1) {
+    obj[parts[0]] = value
+  } else if (parts.length > 1) {
+    // concat all but the first part of the key
+    const remainingParts = parts.slice(1, parts.length).join('.')
+    obj[parts[0]] = createObject(remainingParts, value)
+  }
+  return obj
 }
 
 const stripNullsDeep = object => {
@@ -185,107 +187,126 @@ export default compose(
   graphql(query, {
     options: ({ match }) => ({
       variables: {
-        id: match.params.journal,
+        id: match.params.version,
         form: 'submit',
+      },
+    }),
+    props: ({ data }) => ({ data }),
+  }),
+  graphql(uploadSuplementaryFilesMutation, {
+    props: ({ mutate, ownProps }) => ({
+      uploadFile: file => {
+        mutate({
+          variables: {
+            file,
+          },
+          update: (proxy, { data: { upload } }) => {
+            const { manuscript } = cloneDeep(ownProps.data)
+            manuscript.files.push(
+              Object.assign({}, { ...upload }, { type: 'supplementary' }),
+            )
+            proxy.writeQuery({
+              query: gql`
+              query($id: ID!) {
+                manuscript(id: $id) {
+                  ${fragmentFields}
+                }
+              }
+              `,
+              variables: {
+                id: ownProps.match.params.version,
+              },
+              data: { manuscript },
+            })
+          },
+        })
       },
     }),
   }),
   graphql(updateMutation, {
     props: ({ mutate, ownProps }) => {
-      const updateFragment = rawValues => {
-        const values = prepareValuesForUpdate(rawValues)
-
+      const updateManuscript = (value, path) => {
         mutate({
           variables: {
             id: ownProps.match.params.version,
-            input: JSON.stringify(values),
+            input: JSON.stringify(createObject(path, value)),
+          },
+          update: (proxy, { data: { updateManuscript } }) => {
+            proxy.writeQuery({
+              query: gql`
+              query($id: ID!) {
+                manuscript(id: $id) {
+                  ${fragmentFields}
+                }
+              }
+              `,
+              variables: {
+                id: ownProps.match.params.version,
+              },
+              data: { manuscript: updateManuscript },
+            })
           },
         })
       }
 
       return {
         // TODO: do this on blur, rather than on every keystroke?
-        onChange: throttle(updateFragment, 3000, { trailing: false }),
+        onChange: throttle(updateManuscript, 1000, { trailing: false }),
       }
     },
   }),
-  graphql(submitMutation, {
-    props: ({ mutate }) => ({
-      onSubmit: (rawValues, dispatch, { history, project, version }) => {
-        const values = prepareValuesForUpdate({
-          ...rawValues,
-          submitted: new Date(),
-        })
-
+  graphql(updateMutation, {
+    props: ({ mutate, ownProps }) => ({
+      onSubmit: (manuscript, { history }) => {
+        const data = cloneDeep(manuscript)
+        data.status = 'submitted'
         mutate({
           variables: {
-            fragmentId: version.id,
-            fragmentInput: JSON.stringify(values),
-            collectionId: project.id,
-            collectionInput: JSON.stringify({ status: 'submitted' }),
+            id: ownProps.match.params.version,
+            input: JSON.stringify(),
           },
+          update: (proxy, { data: { updateManuscript } }) => {
+            proxy.writeQuery({
+              query: gql`
+              query($id: ID!) {
+                manuscript(id: $id) {
+                  ${fragmentFields}
+                }
+              }
+              `,
+              variables: {
+                id: ownProps.match.params.version,
+              },
+              data: { manuscript: data },
+            })
+          },
+        }).then(() => {
+          history.push('/')
         })
-          .then(() => {
-            history.push('/')
-          })
-          .catch(error => {
-            if (error.validationErrors) {
-              throw new SubmissionError()
-            }
-          })
       },
     }),
   }),
   withLoader(),
   withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
     journal: { id: journal },
-    version: manuscript,
     forms: cloneDeep(getFile),
-    uploadFile,
   })),
-  withProps(({ version }) => {
-    const paths = ['metadata', 'declarations', 'suggestions', 'notes', 'files']
-    const initialValues = defaultsDeep(
-      stripNullsDeep(omitSpecialKeysDeep(pick(version, paths))),
-      {
-        metadata: {
-          title: '',
-          abstract: '',
-          articleType: '',
-          articleSection: [],
-          authors: [],
-          keywords: [],
-        },
-        suggestions: {
-          reviewers: {
-            suggested: [],
-            opposed: [],
-          },
-          editors: {
-            suggested: [],
-            opposed: [],
-          },
-        },
-      },
-    )
-    return {
-      initialValues,
-      readonly: !!version.submitted,
-    }
-  }),
-  reduxForm({
-    // enableReinitialize: true,
-    form: 'submit',
+  withFormik({
+    initialValues: {},
+    mapPropsToValues: ({ manuscript }) => manuscript,
+    displayName: 'submit',
+    handleSubmit: (props, { props: { onSubmit, history } }) =>
+      onSubmit(props, { history }),
   }),
   withState('confirming', 'setConfirming', false),
   withHandlers({
-    toggleConfirming: ({ valid, setConfirming, handleSubmit }) => () => {
-      if (valid) {
-        setConfirming(confirming => !confirming)
-      } else {
-        // trigger dummy submit to mark all fields as touched
-        handleSubmit(() => {})()
-      }
+    toggleConfirming: ({ validateForm, setConfirming, handleSubmit }) => () => {
+      validateForm().then(
+        props =>
+          isEmpty(props)
+            ? setConfirming(confirming => !confirming)
+            : handleSubmit(),
+      )
     },
   }),
 )(Submit)

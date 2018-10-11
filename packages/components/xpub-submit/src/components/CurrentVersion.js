@@ -6,12 +6,10 @@ import { th } from '@pubsweet/ui-toolkit'
 import Metadata from './MetadataFields'
 import Declarations from './Declarations'
 import Suggestions from './Suggestions'
-import Notes from './Notes'
 import SupplementaryFiles from './SupplementaryFiles'
 
 import Confirm from './Confirm'
 import { Heading1, Section, Legend } from '../styles'
-// import Validots from './Validots'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -39,9 +37,26 @@ const ModalWrapper = styled.div`
   top: 0;
 `
 
+const filterFileManuscript = files =>
+  files.filter(
+    file =>
+      file.type === 'manuscript' &&
+      file.mimeType ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  )
+
+// Due to migration to new Data Model
+// Attachement component needs different data structure to work
+// needs to change the pubsweet ui Attachement to support the new Data Model
+const filesToAttachment = file => ({
+  name: file.filename,
+  url: file.url,
+})
+
 const CurrentVersion = ({
   journal,
-  version,
+  forms,
+  manuscript,
   valid,
   error,
   readonly,
@@ -57,7 +72,9 @@ const CurrentVersion = ({
       <div>
         We have ingested your manuscript. To access your manuscript in an
         editor, please{' '}
-        <Link to={`/journals/${journal.id}/versions/${version.id}/manuscript`}>
+        <Link
+          to={`/journals/${journal.id}/versions/${manuscript.id}/manuscript`}
+        >
           view here
         </Link>.
       </div>
@@ -67,47 +84,37 @@ const CurrentVersion = ({
       <div>The answers will be automatically saved.</div>
     </Intro>
 
-    <form onSubmit={handleSubmit}>
-      <Metadata readonly={readonly} version={version} />
-      <Declarations readonly={readonly} version={version} />
-      <Suggestions readonly={readonly} version={version} />
-      <Notes readonly={readonly} />
-      <SupplementaryFiles
-        readonly={readonly}
-        uploadFile={uploadFile}
-        version={version}
-      />
-      {version.files.manuscript.type !==
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
-        <Section id="files.manuscript">
-          <Legend space>Submitted Manuscript</Legend>
-          <Attachment
-            file={version.files.manuscript}
-            key={version.files.manuscript.url}
-            uploaded
-          />
-        </Section>
-      )}
+    <Metadata manuscript={manuscript} readonly={readonly} />
+    <Declarations forms={forms} manuscript={manuscript} readonly={readonly} />
+    <Suggestions manuscript={manuscript} readonly={readonly} />
+    <SupplementaryFiles
+      manuscript={manuscript}
+      readonly={readonly}
+      uploadFile={uploadFile}
+    />
+    {filterFileManuscript(manuscript.files).length > 0 && (
+      <Section id="files.manuscript">
+        <Legend space>Submitted Manuscript</Legend>
+        <Attachment
+          file={filesToAttachment(filterFileManuscript(manuscript.files)[0])}
+          key={filterFileManuscript(manuscript.files)[0].url}
+          uploaded
+        />
+      </Section>
+    )}
 
-      {!version.submitted && (
-        <div>
-          <Button onClick={toggleConfirming} primary type="button">
-            Submit your manuscript
-          </Button>
-        </div>
-      )}
-      {confirming && (
-        <ModalWrapper>
-          <Confirm toggleConfirming={toggleConfirming} />
-        </ModalWrapper>
-      )}
-    </form>
-
-    {/* <div className={classes.validots}>
-      <Validots
-        valid={valid}
-        handleSubmit={handleSubmit}/>
-    </div> */}
+    {manuscript.status !== 'submitted' && (
+      <div>
+        <Button onClick={toggleConfirming} primary type="button">
+          Submit your manuscript
+        </Button>
+      </div>
+    )}
+    {confirming && (
+      <ModalWrapper>
+        <Confirm toggleConfirming={toggleConfirming} />
+      </ModalWrapper>
+    )}
   </Wrapper>
 )
 

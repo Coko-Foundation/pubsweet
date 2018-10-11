@@ -42,13 +42,15 @@ const createManuscriptPromise = (file, client) => ({ fileURL, response }) => {
 
   const manuscript = {
     created: new Date(), // TODO: set on server
-    files: {
-      created: new Date(), // TODO: set on server
-      type: 'manuscript',
-      filename: file.name,
-      url: fileURL,
-      mimeType: file.type,
-    },
+    files: [
+      {
+        created: new Date(), // TODO: set on server
+        type: 'manuscript',
+        filename: file.name,
+        url: fileURL,
+        mimeType: file.type,
+      },
+    ],
     meta: {
       title,
       source,

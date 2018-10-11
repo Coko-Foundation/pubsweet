@@ -7,7 +7,7 @@ import { Supplementary, ValidatedField, Attachment } from '@pubsweet/ui'
 import { Section, Legend, SubNote } from '../styles'
 
 const FileInput = uploadFile => ({ value, ...input }) => (
-  <Supplementary files={value} uploadFile={uploadFile} {...input} />
+  <Supplementary files={value} uploadFile={uploadFile} {...input.field} />
 )
 
 const SupplementaryFiles = ({ uploadFile, readonly, journal }) => (
@@ -24,16 +24,22 @@ const SupplementaryFiles = ({ uploadFile, readonly, journal }) => (
   </FormSection>
 )
 
-const SupplementaryFilesNonEditable = ({ readonly, version }) => (
+const SupplementaryFilesNonEditable = ({ readonly, manuscript }) => (
   <Section id="files.supplementary">
-    {version.files.supplementary.length > 0 && [
-      <Legend htmlFor="supplementary">Supplementary materials uploaded</Legend>,
-      <div>
-        {version.files.supplementary.map(attachment => (
-          <Attachment key={attachment.url} value={attachment.name} />
-        ))}
-      </div>,
-    ]}
+    {manuscript.files.filter(file => file.type === 'supplementary').length > 0
+      ? [
+          <Legend htmlFor="supplementary">
+            Supplementary materials uploaded
+          </Legend>,
+          <div>
+            {manuscript.files
+              .filter(file => file.type === 'supplementary')
+              .map(attachment => (
+                <Attachment key={attachment.url} value={attachment.filename} />
+              ))}
+          </div>,
+        ]
+      : null}
   </Section>
 )
 

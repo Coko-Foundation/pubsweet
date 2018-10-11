@@ -22,9 +22,10 @@ const SubmittedVersionColumns = props => (
     <Columns>
       <SubmissionVersion>
         <CurrentVersion
+          forms={props.forms}
           journal={props.journal}
+          manuscript={props.manuscript}
           readonly
-          version={props.version}
         />,
       </SubmissionVersion>
       <DecisionReviewColumn {...props} />
@@ -32,15 +33,19 @@ const SubmittedVersionColumns = props => (
   </Wrapper>
 )
 
-const Submit = ({ journal, version, forms, ...formProps }) => {
+const Submit = ({ journal, manuscript, forms, ...formProps }) => {
   const decisionSections = []
 
-  version.manuscriptVersions.forEach(versionElem => {
+  manuscript.manuscriptVersions.forEach(versionElem => {
     const submittedMoment = moment(versionElem.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
     decisionSections.push({
       content: (
-        <SubmittedVersionColumns journal={journal} version={versionElem} />
+        <SubmittedVersionColumns
+          forms={forms}
+          journal={journal}
+          manuscript={versionElem}
+        />
       ),
       key: versionElem.id,
       label,
@@ -53,17 +58,17 @@ const Submit = ({ journal, version, forms, ...formProps }) => {
         {...formProps}
         form={forms}
         journal={journal}
-        version={version}
+        manuscript={manuscript}
       />
     ),
-    key: version.id,
+    key: manuscript.id,
     label: 'Current Version',
   })
 
   return (
     <Wrapper>
       <Tabs
-        activeKey={version.id}
+        activeKey={manuscript.id}
         sections={decisionSections}
         title="Versions"
       />

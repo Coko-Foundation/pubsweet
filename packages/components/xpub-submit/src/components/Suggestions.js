@@ -94,18 +94,18 @@ const SuggestionsEditable = ({ readonly }) => (
   </FormSection>
 )
 
-const SuggestionsNonEditable = ({ readonly, version }) => {
-  const suggestions = version.suggestions || {}
+const SuggestionsNonEditable = ({ readonly, manuscript }) => {
+  const suggestions = manuscript.suggestions || {}
 
   return [
-    <Section id="suggestions.reviewers">
+    <Section id="suggestions.reviewers" key="suggestions.reviewers">
       <Legend>Suggested or opposed reviewers</Legend>
       <SubLegend>Suggested reviewers</SubLegend>
       <div>{suggestionsText(suggestions.reviewers, 'suggested')}</div>
       <SubLegend>Opposed reviewers</SubLegend>
       <div>{suggestionsText(suggestions.reviewers, 'opposed')}</div>
     </Section>,
-    <Section id="suggestions.editors">
+    <Section id="suggestions.editors" key="suggestions.editors">
       <Legend>Suggested or opposed editors</Legend>
       <SubLegend>Suggested editors</SubLegend>
       <div>{suggestionsText(suggestions.editors, 'suggested')}</div>
@@ -117,7 +117,7 @@ const SuggestionsNonEditable = ({ readonly, version }) => {
 
 const suggestionsText = (source, property) => {
   if (source && Array.isArray(source[property]) && !!source[property].length) {
-    return source[property].join(', ')
+    return source[property]
   }
   return 'none'
 }
