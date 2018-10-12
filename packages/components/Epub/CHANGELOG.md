@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.4.0...pubsweet-component-epub@0.5.0) (2018-10-12)
+
+
+### Features
+
+* conversion of inline notes ([deb2930](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/deb2930))
+* download html for pagedJS ([cec190e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec190e))
+* paged exporter ([250510b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/250510b))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.3.5...pubsweet-component-epub@0.4.0) (2018-10-08)
 
