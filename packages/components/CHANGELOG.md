@@ -3,7 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.8.0"></a>
+      <a name="9.9.0"></a>
+# [9.9.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.8.0...pubsweet-components@9.9.0) (2018-10-12)
+
+
+### Features
+
+* conversion of inline notes ([deb2930](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/deb2930))
+* download html for pagedJS ([cec190e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec190e))
+* paged exporter ([250510b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/250510b))
+
+
+
+
+      <a name="9.8.0"></a>
 # [9.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.8...pubsweet-components@9.8.0) (2018-10-08)
 
 
@@ -15,7 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="9.7.8"></a>
+<a name="9.7.8"></a>
 ## [9.7.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.7...pubsweet-components@9.7.8) (2018-09-29)
 
 
