@@ -177,6 +177,12 @@ module.exports = (
     const hr = $('<hr>')
     $elem.replaceWith(hr)
   })
+  $('inline-note').each((i, elem) => {
+    const $elem = $(elem)
+    const number = $elem.attr('number')
+    const sanitized = `[note ${number}]`
+    $elem.replaceWith(sanitized)
+  })
 
   // replace inline notes with endnotes
   $('note').each((i, elem) => {
