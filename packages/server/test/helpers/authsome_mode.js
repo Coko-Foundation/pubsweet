@@ -219,6 +219,13 @@ async function authenticatedUser(user, operation, object, context) {
     }
   }
 
+  // filter user properties on login
+  if (operation === 'POST' && get(object, 'type') === 'user') {
+    return {
+      filter: body => omit(body, ['passwordHash']),
+    }
+  }
+
   // If no individual permissions exist (above), fallback to unauthenticated
   // user's permission
   return unauthenticatedUser(operation, object)

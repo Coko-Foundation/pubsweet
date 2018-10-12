@@ -26,14 +26,18 @@ const {
 } = require('./util')
 
 // Issue a token
-api.post('/users/authenticate', authLocal, (req, res) => {
-  delete req.user.passwordHash
+api.post('/users/authenticate', authLocal, async (req, res) => {
+  const user = Object.assign(
+    { token: authentication.token.create(req.user) },
+    req.user,
+  )
+  req.user = req.user.id
+  const properties = await applyPermissionFilter({
+    req,
+    target: user,
+  })
 
-  return res
-    .status(STATUS.CREATED)
-    .json(
-      Object.assign({ token: authentication.token.create(req.user) }, req.user),
-    )
+  return res.status(STATUS.CREATED).json(properties)
 })
 
 // Verify a token
