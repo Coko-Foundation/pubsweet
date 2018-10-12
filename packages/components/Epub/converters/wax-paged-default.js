@@ -2,6 +2,7 @@ const hljs = require('highlight.js')
 
 module.exports = (
   $,
+  fragmentId,
   fragmentTitle,
   bookTitle,
   fragmentDivision,
@@ -9,50 +10,26 @@ module.exports = (
   fragmentNumber,
 ) => {
   const body = $('body')
-
-  const outerContainer = $('<div/>').attr('class', fragmentDivision)
-  let innerContainer
+  const container = $('<section/>')
+  let hasTitles = false
+  let header
+  if ($('chapter-title').length > 0 || $('chapter-subtitle').length > 0) {
+    hasTitles = true
+  }
+  container.attr('id', `comp-${fragmentId}`)
 
   if (fragmentDivision === 'front') {
-    innerContainer = $('<section/>').attr('data-type', 'fm-body')
+    container.attr('class', 'front-component')
   } else if (fragmentDivision === 'back') {
-    innerContainer = $('<section/>').attr('data-type', 'bm-body')
+    container.attr('class', 'back-component')
   } else {
-    innerContainer = $('<section/>').attr('data-type', fragmentSubcategory)
+    container.attr('class', `body-${fragmentSubcategory}`)
   }
 
-  $('<p/>')
-    .attr('class', 'ch-start')
-    .html('beginning')
-    .appendTo(innerContainer)
-  $('<div/>')
-    .attr('class', 'folio')
-    .appendTo(innerContainer)
-  $('<div/>')
-    .attr('class', 'booktitle')
-    .html(bookTitle)
-    .appendTo(innerContainer)
-  $('<div/>')
-    .attr('class', 'dup')
-    .html(fragmentTitle)
-    .appendTo(innerContainer)
-  if (fragmentSubcategory === 'part') {
-    $('<p/>')
-      .attr('class', 'part-number')
-      .html(fragmentNumber)
-      .appendTo(innerContainer)
-  } else if (fragmentSubcategory === 'chapter') {
-    $('<p/>')
-      .attr('class', 'chapter-number')
-      .html(fragmentNumber)
-      .appendTo(innerContainer)
-  } else {
-    // if unumbered component
+  if (hasTitles) {
+    header = $('<header/>')
+    container.append(header)
   }
-  $('<h1/>')
-    .attr('class', 'ct')
-    .html(fragmentTitle)
-    .appendTo(innerContainer)
 
   const replaceWithBlockquote = className => (i, elem) => {
     const $elem = $(elem)
@@ -89,8 +66,24 @@ module.exports = (
       .text($elem.text())
 
     $elem.replaceWith(p)
+    if (className === 'cst') {
+      header.append(p)
+      $elem.remove()
+    }
   }
+  const replaceWithH1 = className => (i, elem) => {
+    const $elem = $(elem)
 
+    const h1 = $('<h1/>')
+      .attr('class', className)
+      .text($elem.text())
+
+    $elem.replaceWith(h1)
+    if (className === 'ct') {
+      header.append(h1)
+      $elem.remove()
+    }
+  }
   const replaceWithList = className => (i, elem) => {
     const $elem = $(elem)
 
@@ -113,12 +106,6 @@ module.exports = (
     $elem.replaceWith(figure)
   }
 
-  // add namespaces
-  $('html').attr({
-    xmlns: 'http://www.w3.org/1999/xhtml',
-    'xmlns:epub': 'http://www.idpf.org/2007/ops',
-  })
-
   // replace custom HTML elements
   $('extract').each(replaceWithBlockquote('ex')) // delete when xsweet is updated
   $('extract-prose').each(replaceWithBlockquote('ex'))
@@ -128,7 +115,7 @@ module.exports = (
   $('bibliography-entry').each(replaceWithParagraph('bibliography-entry'))
   $('comment').each(replaceWithText)
   // $('chapter-number').each(replaceWithParagraph('sc-chapter-number'))
-  $('chapter-title').each(replaceWithParagraph('ct'))
+  $('chapter-title').each(replaceWithH1('ct'))
   $('chapter-subtitle').each(replaceWithParagraph('cst'))
   $('source-note').each(replaceWithParagraph('exsn'))
   $('ol[styling="qa"]').each(replaceWithList('di'))
@@ -155,6 +142,22 @@ module.exports = (
     } else {
       $elem.remove()
     }
+  })
+
+  $('highlighter').each((i, elem) => {
+    const $elem = $(elem)
+    $elem.replaceWith($elem.text())
+  })
+  $('ornament').each((i, elem) => {
+    const $elem = $(elem)
+    const hr = $('<hr>')
+    $elem.replaceWith(hr)
+  })
+  $('inline-note').each((i, elem) => {
+    const $elem = $(elem)
+    const number = $elem.attr('number')
+    const sanitized = `[note ${number}]`
+    $elem.replaceWith(sanitized)
   })
 
   // replace inline notes with endnotes
@@ -185,8 +188,24 @@ module.exports = (
   })
   $('#notes').remove()
 
-  const bodyContent = body.contents()
-  innerContainer.append(bodyContent)
-  outerContainer.append(innerContainer)
-  body.replaceWith(outerContainer)
+  $('p').each((i, elem) => {
+    const $elem = $(elem)
+    if ($elem.attr('data-id')) {
+      $elem.removeAttr('data-id')
+    }
+  })
+
+  let bodyContent
+
+  if ($('#main').length > 0) {
+    bodyContent = $('#main').contents()
+    container.append(bodyContent)
+  } else {
+    // For the case of extracted Notes
+    bodyContent = $('section[data-type="notes"]').contents()
+    container.append(bodyContent)
+  }
+
+  body.empty()
+  body.append(container)
 }

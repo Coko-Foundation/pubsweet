@@ -5,9 +5,12 @@ module.exports = ({
   activeConverters,
   book,
   notesPart,
+  previewer,
 }) => fragment => {
+  let content
   const $ = cheerio.load(fragment.source)
   const fragmentTitle = fragment.title || 'Untitled'
+  const fragmentId = fragment.id
   const bookTitle = book.title
   const fragmentDivision = fragment.division
   const fragmentSubcategory = fragment.subCategory
@@ -22,6 +25,7 @@ module.exports = ({
     activeConverters.forEach(converter =>
       converter(
         $,
+        fragmentId,
         fragmentTitle,
         bookTitle,
         fragmentDivision,
@@ -33,6 +37,7 @@ module.exports = ({
     activeConverters.forEach(converter =>
       converter(
         $,
+        fragmentId,
         fragmentTitle,
         bookTitle,
         fragmentDivision,
@@ -42,15 +47,22 @@ module.exports = ({
       ),
     )
   }
-  styles.forEach(uri => {
-    $('<link rel="stylesheet"/>')
-      .attr('href', uri)
-      .appendTo('head')
-  })
+
+  if (previewer === 'vivliostyle') {
+    styles.forEach(uri => {
+      $('<link rel="stylesheet"/>')
+        .attr('href', uri)
+        .appendTo('head')
+    })
+    content = $.html()
+  } else {
+    content = $('body').html()
+  }
 
   return {
     title: fragment.title,
-    content: $.html(),
+    id: fragmentId,
+    content,
     division: fragmentDivision,
     type: fragmentSubcategory,
   }

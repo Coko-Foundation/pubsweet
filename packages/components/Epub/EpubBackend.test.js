@@ -30,14 +30,15 @@ describe('/collections/*/epub route', () => {
       getFragments: () => [
         {
           title: 'One thing',
-          source: 'In depth',
+          source: '<p>In depth</p>',
           division: 'body',
           subCategory: 'part',
+          id: 'first_',
         },
       ],
     }
     return makeApp(collection)
-      .get('/api/collections/234/epub')
+      .get('/api/collections/234/epub?converter=default')
       .expect(200)
       .expect(
         'Content-disposition',
