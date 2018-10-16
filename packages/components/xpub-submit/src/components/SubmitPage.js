@@ -9,7 +9,6 @@ import Submit from './Submit'
 const fragmentFields = `
   id
   created
-  decision
   files {
     id
     created
@@ -59,7 +58,14 @@ const fragmentFields = `
   meta {
     title
     abstract
-    declarations
+    declarations {
+      openData
+      openPeerReview
+      preregistered
+      previouslySubmitted
+      researchNexus
+      streamlinedReview
+    }
     articleSections
     articleType
     history {
@@ -167,21 +173,21 @@ const createObject = (key, value) => {
   return obj
 }
 
-const stripNullsDeep = object => {
-  const output = {}
+// const stripNullsDeep = object => {
+//   const output = {}
 
-  Object.entries(object).forEach(([key, value]) => {
-    if (value !== null) {
-      if (typeof value === 'object' && !Array.isArray(value)) {
-        output[key] = stripNullsDeep(value)
-      } else {
-        output[key] = value
-      }
-    }
-  })
+//   Object.entries(object).forEach(([key, value]) => {
+//     if (value !== null) {
+//       if (typeof value === 'object' && !Array.isArray(value)) {
+//         output[key] = stripNullsDeep(value)
+//       } else {
+//         output[key] = value
+//       }
+//     }
+//   })
 
-  return output
-}
+//   return output
+// }
 
 export default compose(
   graphql(query, {
@@ -263,7 +269,7 @@ export default compose(
         mutate({
           variables: {
             id: ownProps.match.params.version,
-            input: JSON.stringify(),
+            input: JSON.stringify(data),
           },
           update: (proxy, { data: { updateManuscript } }) => {
             proxy.writeQuery({

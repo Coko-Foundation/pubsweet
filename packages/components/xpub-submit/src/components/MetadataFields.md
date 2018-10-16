@@ -1,8 +1,6 @@
 A form for entering the submission's metadata.
 
 ```js
-const { reduxForm } = require('redux-form')
-
 const manuscript = {
   meta: {
     title: faker.lorem.sentence(25),
