@@ -1,43 +1,50 @@
-import { compose, withHandlers } from 'recompose'
-import { connect } from 'react-redux'
-import { actions } from 'pubsweet-client'
-import { ConnectPage } from 'xpub-connect'
-import {
-  selectCurrentUser,
-  selectCollection,
-  selectFragment,
-} from 'xpub-selectors'
+import { compose, withProps } from 'recompose'
+import { graphql } from 'react-apollo'
+import { gql } from 'apollo-client-preset'
+import { withLoader } from 'pubsweet-client'
+
 import Manuscript from './Manuscript'
 
+const fragmentFields = `
+  id
+  created
+  status
+  files {
+    id
+    type
+    fileType
+  }
+  meta {
+    title
+    source
+  }
+`
+
+const query = gql`
+  query($id: ID!) {
+    currentUser {
+      id
+      username
+      admin
+    }
+
+    manuscript(id: $id) {
+      ${fragmentFields}
+    }
+  }
+`
+
 export default compose(
-  ConnectPage(({ match }) => [
-    actions.getCollection({ id: match.params.project }),
-    actions.getFragment(
-      { id: match.params.project },
-      { id: match.params.version },
-    ),
-  ]),
-  connect(
-    (state, { match }) => {
-      const currentUser = selectCurrentUser(state)
-      const project = selectCollection(state, match.params.project)
-      const version = selectFragment(state, match.params.version)
-
-      const content = version.source // TODO: load from a file
-
-      return { content, currentUser, project, version }
-    },
-    {
-      fileUpload: actions.fileUpload,
-      updateVersion: actions.updateFragment,
-    },
-  ),
-  withHandlers({
-    updateManuscript: ({ updateVersion, project, version }) => data =>
-      updateVersion(project, {
-        id: version.id,
-        rev: version.rev,
-        ...data,
-      }),
+  graphql(query, {
+    options: ({ match }) => ({
+      variables: {
+        id: match.params.version,
+      },
+    }),
   }),
+  withProps(({ data }) => ({
+    content: data.manuscript.content,
+    file: data.files.filter(file => file.type === 'manuscript'),
+  })),
+  withLoader(),
 )(Manuscript)
