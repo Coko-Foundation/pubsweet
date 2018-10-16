@@ -1,16 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { withJournal } from 'xpub-journal'
 
 import { Attachment } from '@pubsweet/ui'
 
 const Root = styled.div``
 
 const Title = styled.div``
-
-const Table = styled.table`
-  border-spacing: 0;
-`
 
 const Heading = styled.span`
   font-weight: inherit;
@@ -35,22 +30,35 @@ const Cell = styled.span`
   flex-shrink: 0;
   flex-basis: 50%;
 `
-const arrayToText = text => (text.length === 0 ? ['none'] : text).join(', ')
 
-const ReviewMetadata = ({ version, handlingEditors, journal }) => (
+const getNote = (notes, type) =>
+  notes.find(note => note.notesType === type) || {}
+
+const getSupplementaryFiles = (supplementary = []) =>
+  supplementary.filter(file => file.type === 'supplementary') || []
+
+// Due to migration to new Data Model
+// Attachement component needs different data structure to work
+// needs to change the pubsweet ui Attachement to support the new Data Model
+const filesToAttachment = file => ({
+  name: file.filename,
+  url: file.url,
+})
+
+const ReviewMetadata = ({ manuscript }) => (
   <Root>
     <Title>Metadata</Title>
     <Metadata>
       <div>
         <Heading>Open Peer Review :</Heading>
         <Cell>
-          {version.declarations.openPeerReview === 'yes' ? 'Yes' : 'No'}
+          {manuscript.meta.declarations.openPeerReview === 'yes' ? 'Yes' : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Streamlined Review :</Heading>
         <Cell>
-          {version.declarations.streamlinedReview === 'yes'
+          {manuscript.meta.declarations.streamlinedReview === 'yes'
             ? 'Please view supplementary uploaded files'
             : 'No'}
         </Cell>
@@ -58,85 +66,71 @@ const ReviewMetadata = ({ version, handlingEditors, journal }) => (
       <div>
         <Heading>Part of Research Nexus :</Heading>
         <Cell>
-          {version.declarations.researchNexus === 'yes' ? 'Yes' : 'No'}
+          {manuscript.meta.declarations.researchNexus === 'yes' ? 'Yes' : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Pre-registered :</Heading>
         <Cell>
-          {version.declarations.preregistered === 'yes' ? 'Yes' : 'No'}
+          {manuscript.meta.declarations.preregistered === 'yes' ? 'Yes' : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Suggested Reviewers :</Heading>
         <Cell>
-          {arrayToText(
-            ((version.suggestions || {}).reviewers || {}).suggested || [],
-          )}
+          {((manuscript.meta.suggestions || {}).reviewers || {}).suggested ||
+            'None'}
         </Cell>
       </div>
       <div>
         <Heading>Opposed Reviewers :</Heading>
         <Cell>
-          {arrayToText(
-            ((version.suggestions || {}).reviewers || {}).opposed || [],
-          )}
+          {((manuscript.suggestions || {}).reviewers || {}).opposed || 'None'}
         </Cell>
       </div>
       <div>
         <Heading>Suggested Editors :</Heading>
         <Cell>
-          {arrayToText(
-            ((version.suggestions || {}).editors || {}).suggested || [],
-          )}
+          {((manuscript.suggestions || {}).editors || {}).suggested || 'None'}
         </Cell>
       </div>
       <div>
         <Heading>Opposed Editors :</Heading>
         <Cell>
-          {arrayToText(
-            ((version.suggestions || {}).editors || {}).opposed || [],
-          )}
+          {((manuscript.suggestions || {}).editors || {}).opposed || 'None'}
         </Cell>
       </div>
       <div>
         <Heading>Special Instructions :</Heading>
         <Cell>
-          {((version.notes || {}).specialInstructions || '') === '' && 'none'}
-          {version.notes.specialInstructions}
+          {getNote(manuscript.meta.notes || [], 'specialInstructions')
+            .content || 'None'}
         </Cell>
       </div>
-      {version.files.supplementary.length > 0 && (
+      {getSupplementaryFiles(manuscript.files).length > 0 && (
         <div>
           <Heading>
-            {version.files.supplementary.length} supplementary{' '}
-            {version.files.supplementary.length === 1 ? 'file' : 'files'} :
+            {getSupplementaryFiles(manuscript.files).length} supplementary{' '}
+            {getSupplementaryFiles(manuscript.files).length === 1
+              ? 'file'
+              : 'files'}
+            :
           </Heading>
-          {!!version.files.supplementary.length && (
+          {!!getSupplementaryFiles(manuscript.files).length && (
             <Cell>
-              {version.files.supplementary.map(file => (
-                <Attachment file={file} key={file.url} uploaded />
+              {getSupplementaryFiles(manuscript.files).map(file => (
+                <Attachment
+                  file={filesToAttachment(file)}
+                  key={file.url}
+                  uploaded
+                />
               ))}
             </Cell>
           )}
         </div>
       )}
     </Metadata>
-    <Table>
-      <tbody>
-        {!!handlingEditors && (
-          <tr>
-            <Heading>handling editor:</Heading>
-            <Cell>
-              {handlingEditors.map(user => (
-                <span key={user.username}>{user.username}</span>
-              ))}
-            </Cell>
-          </tr>
-        )}
-      </tbody>
-    </Table>
   </Root>
 )
 
-export default withJournal(ReviewMetadata)
+export default ReviewMetadata

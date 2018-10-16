@@ -1,10 +1,15 @@
-A page for a reviewer to submit a review of a version of a project.
+A drop-down menu for assigning an editor to a project.
 
 ```js
-const { withFormik } = require('formik')
+const { JournalProvider } = require('xpub-journal')
+const journal = require('@pubsweet/styleguide/config/journal')
 
-const journal = {
+const project = {
   id: faker.random.uuid(),
+}
+
+const team = {
+  members: [],
 }
 
 const manuscriptTemplate = () => ({
@@ -52,43 +57,36 @@ const manuscriptTemplate = () => ({
       comments: [{ content: 'this needs review' }],
       created: 'Thu Oct 11 2018',
       open: false,
-      recommendation: '',
-      user: { id: 1 },
+      recommendation: 'revise',
+      user: { id: 1, username: 'test user' },
     },
   ],
 })
 
-const manuscript = Object.assign({}, manuscriptTemplate(), {
-  manuscriptVersions: [manuscriptTemplate()],
-})
+const manuscript = Object.assign({}, manuscriptTemplate())
 
-const review = {
-  comments: [{ content: 'this needs review' }],
-  created: 'Thu Oct 11 2018',
-  open: false,
-  recommendation: '',
-  user: { id: 1 },
-}
-
-const currentUser = {
-  id: 1,
-}
-
-const ConnectedReviewLayout = withFormik({
-  initialValues: {},
-  mapPropsToValues: ({ manuscript, currentUser }) =>
-    manuscript.reviews.find(review => review.user.id === currentUser.id),
-  displayName: 'review',
-  handleSubmit: (props, { props: { onSubmit, history } }) =>
-    onSubmit(props, { history }),
-})(ReviewLayout)
-;<div style={{ position: 'relative', height: 600 }}>
-  <ConnectedReviewLayout
-    journal={journal}
+const options = [
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+  {
+    value: faker.random.uuid(),
+    label: faker.internet.userName(),
+  },
+]
+;<JournalProvider journal={journal}>
+  <AssignEditor
     manuscript={manuscript}
-    review={review}
-    uploadFile={() => {}}
-    currentUser={currentUser}
+    team={team}
+    teamName="Senior Editor"
+    teamTypeName="seniorEditor"
+    options={options}
+    addUserToTeam={value => console.log(value)}
   />
-</div>
+</JournalProvider>
 ```

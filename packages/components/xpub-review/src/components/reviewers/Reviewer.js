@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { map } from 'lodash'
-import Moment from 'react-moment'
-import { Avatar, Button } from '@pubsweet/ui'
+// import { map } from 'lodash'
+// import Moment from 'react-moment'
+import { Avatar } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
@@ -11,10 +11,10 @@ const Root = styled.div`
   padding: ${th('gridUnit')};
 `
 
-const Event = styled.div`
-  font-size: ${th('fontSizeBaseSmall')};
-  line-height: ${th('lineHeightBaseSmall')};
-`
+// const Event = styled.div`
+//   font-size: ${th('fontSizeBaseSmall')};
+//   line-height: ${th('lineHeightBaseSmall')};
+// `
 
 const ordinalLetter = ordinal =>
   ordinal ? String.fromCharCode(96 + ordinal) : null
@@ -23,14 +23,12 @@ const Reviewer = ({ reviewer, removeReviewer }) => (
   <Root>
     <Avatar
       height={70}
-      reviewerLetter={ordinalLetter(reviewer._reviewer.ordinal)}
+      reviewerLetter={ordinalLetter(null)}
       status={reviewer.status}
       width={100}
     />
-    <div>
-      {reviewer._user ? reviewer._user.username : reviewer._reviewer.user}
-    </div>
-    <div>
+    <div>{reviewer.user.username}</div>
+    {/* <div>
       {map(reviewer.events, (event, key) => (
         <Event key={`${key}-${event}`}>
           {key} on <Moment format="YYYY-MM-DD">{event}</Moment>
@@ -39,7 +37,7 @@ const Reviewer = ({ reviewer, removeReviewer }) => (
     </div>
     {reviewer.status === 'Pending' && (
       <Button onClick={removeReviewer}>x</Button>
-    )}
+    )} */}
   </Root>
 )
 

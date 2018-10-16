@@ -1,57 +1,104 @@
 import React from 'react'
-
-import { FormSection } from 'redux-form'
 import { NoteEditor } from 'xpub-edit'
-import { Attachments, Button, RadioGroup, ValidatedField } from '@pubsweet/ui'
-
+import { Button, RadioGroup, FileUploadList, UploadingFile } from '@pubsweet/ui'
+import { FieldArray, Field } from 'formik'
 import { withJournal } from 'xpub-journal'
 import { required } from 'xpub-validators'
 
 import AdminSection from '../atoms/AdminSection'
 
-const NoteInput = input => (
+const stripHtml = htmlString => {
+  const temp = document.createElement('span')
+  temp.innerHTML = htmlString
+  return temp.textContent
+}
+
+const createComments = (values, val) =>
+  Object.assign(
+    {
+      type: 'note',
+      content: '',
+      files: [],
+    },
+    values.decision.comments[0],
+    val,
+  )
+
+const NoteDecision = uploadFile => props => (
+  <AdminSection>
+    <Field component={NoteInput} validate={required} {...props} />
+    <Field component={AttachmentsInput} uploadFile={uploadFile} {...props} />
+  </AdminSection>
+)
+
+const NoteInput = ({ field, form: { values, handleChange }, replace }) => (
   <NoteEditor
+    {...field}
+    onChange={val => {
+      replace(0, createComments(values, { content: stripHtml(val) }))
+    }}
     placeholder="Write/paste your decision letter here, or upload it using the upload button on the right."
     title="Decision"
-    {...input}
+    value={field.value.length > 0 ? field.value[0].content : ''}
   />
 )
 
-const AttachmentsInput = uploadFile => ({ value, ...input }) => (
-  <Attachments files={value} uploadFile={uploadFile} {...input} />
+const AttachmentsInput = ({
+  field,
+  form: { values, handleChange },
+  replace,
+}) => (
+  <FileUploadList
+    buttonText="↑ Upload files"
+    FileComponent={UploadingFile}
+    files={(values.decision.comments[0] || {}).files || []}
+    uploadFile={val => {
+      const file = {
+        filename: val.name,
+        name: val.name,
+        size: val.size,
+        fileType: val.type,
+        type: 'note',
+      }
+      replace(0, createComments(values, { files: [file] }))
+    }}
+  />
 )
 
-const RecommendationInput = journal => input => (
-  <RadioGroup inline options={journal.recommendations} required {...input} />
+const RecommendationInput = journal => ({ form, field }) => (
+  <RadioGroup
+    {...field}
+    inline
+    onChange={val => {
+      form.setFieldValue(`${field.name}`, val, true)
+    }}
+    options={journal.recommendations}
+    required
+  />
 )
 
-const DecisionForm = ({ journal, valid, handleSubmit, uploadFile }) => (
+const DecisionForm = ({ journal, handleSubmit, uploadFile, ...props }) => (
   <form onSubmit={handleSubmit}>
     <AdminSection>
-      <FormSection name="note">
-        <ValidatedField
-          component={NoteInput}
-          name="content"
-          validate={[required]}
+      <div name="note">
+        <FieldArray
+          component={NoteDecision(uploadFile)}
+          name="decision.comments"
         />
-
-        <ValidatedField
-          component={AttachmentsInput(uploadFile)}
-          name="attachments"
-        />
-      </FormSection>
+      </div>
     </AdminSection>
 
     <AdminSection>
-      <ValidatedField
+      <Field
         component={RecommendationInput(journal)}
-        name="recommendation"
-        validate={[required]}
+        name="decision.status"
+        validate={required}
+        {...props}
       />
     </AdminSection>
 
     <AdminSection>
-      <Button disabled={!valid} primary type="submit">
+      <Button primary type="submit">
         Submit
       </Button>
     </AdminSection>

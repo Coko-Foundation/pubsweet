@@ -16,21 +16,24 @@ const ReviewersList = styled.div`
 const Reviewers = ({
   ReviewerForm,
   Reviewer,
-  project,
+  journal,
   version,
   reviewers,
   reviewerUsers,
+  manuscript,
+  teams,
 }) => (
   <Root>
     <Form>
       <ReviewerForm
-        project={project}
+        journal={journal}
+        manuscript={manuscript}
         reviewerUsers={reviewerUsers}
-        version={version}
+        teams={teams}
       />
       <Link
-        to={`/projects/${project.id}/versions/${version.id}/decisions/${
-          project.id
+        to={`/journals/${journal.id}/versions/${manuscript.id}/decisions/${
+          manuscript.id
         }`}
       >
         Back to Control Panel
@@ -40,7 +43,7 @@ const Reviewers = ({
     {reviewers && (
       <ReviewersList>
         {reviewers.map(reviewer => (
-          <Reviewer key={reviewer.id} project={project} reviewer={reviewer} />
+          <Reviewer journal={journal} key={reviewer.id} reviewer={reviewer} />
         ))}
       </ReviewersList>
     )}
