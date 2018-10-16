@@ -41,10 +41,11 @@ export default compose(
         id: match.params.version,
       },
     }),
+    props: data => data,
   }),
   withProps(({ data }) => ({
-    content: data.manuscript.content,
-    file: data.files.filter(file => file.type === 'manuscript'),
+    content: '',
+    file: {}, // data.files.filter(file => file.type === 'manuscript'),
   })),
   withLoader(),
 )(Manuscript)
