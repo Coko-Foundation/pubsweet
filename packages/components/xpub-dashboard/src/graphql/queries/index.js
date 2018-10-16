@@ -19,36 +19,36 @@ export default {
             recommendation
             created
             user {
-              identities {
-                ... on Local {
-                  name {
-                    surname
-                  }
-                }
-              }
+              id
+              username
             }
           }
           teams {
             role
+            name
+            object {
+              id
+            }
+            objectType
             members {
               status
               user {
                 id
                 username
-                identities {
-                  ... on Local {
-                    name {
-                      surname
-                    }
-                  }
-                }
               }
             }
           }
           status
           meta {
             title
-            declarations
+            declarations {
+              openData
+              openPeerReview
+              preregistered
+              previouslySubmitted
+              researchNexus
+              streamlinedReview
+            }
             articleSections
             articleType
             history {

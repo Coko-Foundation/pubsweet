@@ -66,6 +66,7 @@ const Dashboard = ({
               currentUser={currentUser}
               journals={journals}
               key={review.id}
+              reviewerResponse={reviewerResponse}
               version={review}
             />
           ))}

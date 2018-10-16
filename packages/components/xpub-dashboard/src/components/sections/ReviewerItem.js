@@ -13,14 +13,13 @@ import VersionTitle from './VersionTitle'
 // TODO: only return actions if not accepted or rejected
 // TODO: review id in link
 
-const ReviewerItem = ({ version, currentUser }) => {
+const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
   const { status } =
-    getUserFromTeam(version, 'reviewer').filter(
+    getUserFromTeam(version, 'reviewerEditor').filter(
       member => member.user.id === currentUser.id,
     )[0] || {}
 
-  const review = version.reviews[0] || null
-  if (!review) return null
+  const review = version.reviews[0] || {}
 
   return (
     <AuthorizeWithGraphQL
@@ -35,7 +34,12 @@ const ReviewerItem = ({ version, currentUser }) => {
           {status === 'accepted' && (
             <Links>
               <LinkContainer>
-                <JournalLink id={version.id} page="reviews" version={version}>
+                <JournalLink
+                  id={version.id}
+                  journal={journals}
+                  page="reviews"
+                  version={version}
+                >
                   {review.recommendation ? 'Completed' : 'Do Review'}
                 </JournalLink>
               </LinkContainer>
@@ -46,8 +50,9 @@ const ReviewerItem = ({ version, currentUser }) => {
             <Actions>
               <ActionContainer>
                 <Button
-                  onClick={() => {}}
-                  // reviewerResponse(project, version, reviewer, 'accepted'
+                  onClick={() => {
+                    reviewerResponse(version, 'accepted')
+                  }}
                 >
                   accept
                 </Button>
@@ -57,8 +62,9 @@ const ReviewerItem = ({ version, currentUser }) => {
 
               <ActionContainer>
                 <Button
-                  onClick={() => {}}
-                  // reviewerResponse(project, version, reviewer, 'rejected')
+                  onClick={() => {
+                    reviewerResponse(version, 'rejected')
+                  }}
                 >
                   reject
                 </Button>

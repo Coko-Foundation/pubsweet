@@ -8,6 +8,13 @@ export default {
       }
     }
   `,
+  reviewerResponseMutation: gql`
+    mutation($id: ID!, $response: String) {
+      reviewerResponse(id: $id, response: $response) {
+        id
+      }
+    }
+  `,
   uploadManuscriptMutation: gql`
     mutation($file: Upload!) {
       upload(file: $file) {
@@ -21,17 +28,15 @@ export default {
         id
         created
         teams {
+          name
+          object {
+            id
+          }
+          objectType
           members {
             user {
               id
               username
-              identities {
-                ... on Local {
-                  name {
-                    surname
-                  }
-                }
-              }
             }
             status
           }
@@ -39,27 +44,34 @@ export default {
         }
         status
         reviews {
-          id
+          open
+          recommendation
+          created
+          user {
+            id
+            username
+          }
         }
         meta {
           title
-          declarations
+          declarations {
+            openData
+            openPeerReview
+            preregistered
+            previouslySubmitted
+            researchNexus
+            streamlinedReview
+          }
           articleSections
           articleType
           history {
             type
             date
           }
-        }
-      }
-    }
-  `,
-  updateJournalMutation: gql`
-    mutation($input: JournalInput) {
-      updateJournal(input: $input) {
-        id
-        manuscripts {
-          id
+          notes {
+            notesType
+            content
+          }
         }
       }
     }

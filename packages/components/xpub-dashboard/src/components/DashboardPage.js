@@ -21,13 +21,26 @@ export default compose(
     options: { context: { online: false } },
     props: data => data,
   }),
+  graphql(mutations.reviewerResponseMutation, {
+    props: ({ mutate }) => ({
+      reviewerResponse: (manuscript, response) =>
+        mutate({ variables: { id: manuscript.id, response } }),
+    }),
+  }),
   graphql(mutations.deleteManuscriptMutation, {
     props: ({ mutate }) => ({
       deleteManuscript: manuscript =>
         mutate({ variables: { id: manuscript.id } }),
     }),
     options: {
-      update: (proxy, { data: { deleteManuscript: { id } } }) => {
+      update: (
+        proxy,
+        {
+          data: {
+            deleteManuscript: { id },
+          },
+        },
+      ) => {
         const data = proxy.readQuery({ query: queries.dashboard })
         const manuscriptIndex = data.journals.manuscripts.findIndex(
           manuscript => manuscript.id === id,
@@ -41,7 +54,7 @@ export default compose(
   }),
   withLoader(),
   withProps(({ journals, currentUser, ...rest }) => ({
-    dashboard: journals.manuscripts,
+    dashboard: (journals || {}).manuscripts || [],
     journals,
     currentUser,
     acceptFiles,
