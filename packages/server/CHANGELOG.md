@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="10.0.1"></a>
+      <a name="10.0.2"></a>
+## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.1...pubsweet-server@10.0.2) (2018-10-17)
+
+
+### Bug Fixes
+
+* **authenticate:** remove passwordHash from login response ([39e854c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/39e854c))
+* **authentication:** filter passwordHash via authsome ([8ccc747](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ccc747))
+
+
+
+
+      <a name="10.0.1"></a>
 ## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.0...pubsweet-server@10.0.1) (2018-10-08)
 
 
@@ -11,7 +23,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-server
 
-  <a name="10.0.0"></a>
+<a name="10.0.0"></a>
 # [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.2.0...pubsweet-server@10.0.0) (2018-09-29)
 
 
