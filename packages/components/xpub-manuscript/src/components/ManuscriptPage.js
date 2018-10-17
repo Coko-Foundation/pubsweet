@@ -12,7 +12,7 @@ const fragmentFields = `
   files {
     id
     type
-    fileType
+    mimeType
   }
   meta {
     title
@@ -41,11 +41,10 @@ export default compose(
         id: match.params.version,
       },
     }),
-    props: data => data,
   }),
-  withProps(({ data }) => ({
+  withProps(({ data: { manuscript = {} } }) => ({
     content: '',
-    file: {}, // data.files.filter(file => file.type === 'manuscript'),
+    file: (manuscript.files || []).filter(file => file.type === 'manuscript'),
   })),
   withLoader(),
 )(Manuscript)
