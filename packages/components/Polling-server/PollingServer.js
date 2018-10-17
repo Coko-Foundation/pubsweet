@@ -2,7 +2,7 @@ const config = require('config')
 
 const logger = require('@pubsweet/logger')
 
-const lockedFragments = {}
+let lockedFragments = {}
 const initCache = async Fragment => {
   const allFragments = await Fragment.all()
   for (let i = 0; i < allFragments.length; i += 1) {
@@ -12,6 +12,21 @@ const initCache = async Fragment => {
       lockedFragments[id] = currentFragment.lock.editor.userId
     }
   }
+  setInterval(() => cacheSync(Fragment), 8000)
+}
+
+const cacheSync = async Fragment => {
+  logger.info(`Syncing cache`)
+  const syncedLockedFragments = {}
+  const allFragments = await Fragment.all()
+  for (let i = 0; i < allFragments.length; i += 1) {
+    const currentFragment = allFragments[i]
+    if (currentFragment.lock && currentFragment.lock !== null) {
+      const { id } = currentFragment
+      syncedLockedFragments[id] = currentFragment.lock.editor.userId
+    }
+  }
+  lockedFragments = syncedLockedFragments
 }
 
 const PollingServer = app => {
@@ -119,6 +134,7 @@ const PollingServer = app => {
     async (req, res, next) => {
       const { collectionId, fragmentId } = req.params
       const { username } = req.query
+
       logger.info(
         `Initiating polling for fragment with id ${fragmentId} of the collection with id ${collectionId} for user ${username}`,
       )
@@ -208,11 +224,10 @@ const PollingServer = app => {
                 res.sendStatus(403)
               }
             }
+            logger.info(`Setting timmer for ${pollingTime} ms`)
+            setTimer(unlocker, pollingTime, opts)
+            res.sendStatus(200)
           }
-          logger.info(`Setting timmer for ${pollingTime} ms`)
-          setTimer(unlocker, pollingTime, opts)
-
-          res.sendStatus(200)
         }
       } catch (e) {
         logger.error(`In polling endpoint ${e}`)
