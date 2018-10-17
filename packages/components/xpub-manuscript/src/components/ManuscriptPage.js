@@ -43,8 +43,8 @@ export default compose(
     }),
   }),
   withProps(({ data: { manuscript = {} } }) => ({
-    content: '',
-    file: (manuscript.files || []).filter(file => file.type === 'manuscript'),
+    content: (manuscript.meta || {}).source || '',
+    file: (manuscript.files || []).find(file => file.type === 'manuscript'),
   })),
   withLoader(),
 )(Manuscript)
