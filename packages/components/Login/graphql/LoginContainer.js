@@ -12,7 +12,6 @@ const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
   props
     .loginUser({ variables: { input: values } })
     .then(({ data, errors }) => {
-      // console.log(props, '\\\n\nHello', '!!hello\n\n\n\n\n\n', 'hello')
       if (!errors) {
         localStorage.setItem('token', data.loginUser.token)
         props.history.push(redirectPath({ location: props.location }))
@@ -20,7 +19,6 @@ const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
       }
     })
     .catch(e => {
-      // console.log(e)
       if (e.graphQLErrors) {
         setSubmitting(false)
         setErrors(e.graphQLErrors[0].message)

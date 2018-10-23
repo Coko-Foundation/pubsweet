@@ -18,22 +18,19 @@ jest.mock('config', () => ({
   },
 }))
 
-jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock(
+  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
+  () => 'AuthorizeWithGraphQL',
+)
 
-jest.mock('./sections/OwnerItem', () => 'OwnerItem')
-jest.mock('./sections/ReviewerItem', () => 'ReviewerItem')
-jest.mock('./sections/EditorItem', () => 'EditorItem')
-
-jest.mock('./withVersion', () => ItemWithVersion => ItemWithVersion)
-
-const getProjects = item => item.map(c => c.props().project)
+const getProjects = item => item.map(c => c.props().version)
 
 describe('Dashboard', () => {
   const makeWrapper = (props = {}) => {
     props = Object.assign(
       {
         dashboard: {},
-        conversion: {},
+        journals: {},
       },
       props,
     )
@@ -49,38 +46,38 @@ describe('Dashboard', () => {
     expect(dashboard.find(ReviewerItem)).toHaveLength(0)
   })
 
-  it('shows a list of projects submitted by the current user', () => {
-    const project = { id: 1 }
+  it('shows a list of manuscripts submitted by the current user', () => {
     const dashboard = makeWrapper({
-      dashboard: [project],
+      dashboard: [{ id: 1 }],
+      journals: { id: 1 },
     })
     expect(dashboard.find('.empty')).toHaveLength(0)
     const section = dashboard.find(OwnerItem)
     expect(section).toHaveLength(1)
-    expect(getProjects(section)).toEqual([project])
+    expect(getProjects(section)).toEqual([{ id: 1 }])
   })
 
-  it('shows a list of projects to be reviewed', () => {
-    const project = { id: 1 }
+  it('shows a list of manuscirpts to be reviewed', () => {
     const dashboard = makeWrapper({
-      dashboard: [project],
+      dashboard: [{ id: 1 }],
+      journals: { id: 1 },
     })
 
     expect(dashboard.find(UploadContainer)).toHaveLength(1)
     const section = dashboard.find(ReviewerItem)
     expect(section).toHaveLength(1)
-    expect(getProjects(section)).toEqual([project])
+    expect(getProjects(section)).toEqual([{ id: 1 }])
   })
 
   it('shows a list of projects of which the current user is the editor', () => {
-    const project = { id: 1 }
     const dashboard = makeWrapper({
-      dashboard: [project],
+      dashboard: [{ id: 1 }],
+      journals: { id: 1 },
     })
 
     expect(dashboard.find(UploadContainer)).toHaveLength(1)
     const section = dashboard.find(EditorItem)
     expect(section).toHaveLength(1)
-    expect(getProjects(section)).toEqual([project])
+    expect(getProjects(section)).toEqual([{ id: 1 }])
   })
 })

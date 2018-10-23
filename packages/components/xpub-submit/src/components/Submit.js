@@ -22,9 +22,10 @@ const SubmittedVersionColumns = props => (
     <Columns>
       <SubmissionVersion>
         <CurrentVersion
-          project={props.project}
+          forms={props.forms}
+          journal={props.journal}
+          manuscript={props.manuscript}
           readonly
-          version={props.version}
         />,
       </SubmissionVersion>
       <DecisionReviewColumn {...props} />
@@ -32,57 +33,42 @@ const SubmittedVersionColumns = props => (
   </Wrapper>
 )
 
-const Submit = ({
-  project,
-  submittedVersion,
-  currentVersion,
-  forms,
-  ...formProps
-}) => {
+const Submit = ({ journal, manuscript, forms, ...formProps }) => {
   const decisionSections = []
 
-  submittedVersion.forEach(versionElem => {
+  manuscript.manuscriptVersions.forEach(versionElem => {
     const submittedMoment = moment(versionElem.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
     decisionSections.push({
       content: (
-        <SubmittedVersionColumns project={project} version={versionElem} />
+        <SubmittedVersionColumns
+          forms={forms}
+          journal={journal}
+          manuscript={versionElem}
+        />
       ),
       key: versionElem.id,
       label,
     })
   })
 
-  // decisionSections.push({
-  //   content: (
-  //     <CurrentVersion
-  //       {...formProps}
-  //       project={project}
-  //       readonly={false}
-  //       version={currentVersion}
-  //     />
-  //   ),
-  //   key: "pao", // currentVersion.id,
-  //   label: 'Current Version pao',
-  // })
-
   decisionSections.push({
     content: (
       <FormTemplate
         {...formProps}
         form={forms}
-        project={project}
-        version={currentVersion}
+        journal={journal}
+        manuscript={manuscript}
       />
     ),
-    key: currentVersion.id,
+    key: manuscript.id,
     label: 'Current Version',
   })
 
   return (
     <Wrapper>
       <Tabs
-        activeKey={currentVersion.id}
+        activeKey={manuscript.id}
         sections={decisionSections}
         title="Versions"
       />

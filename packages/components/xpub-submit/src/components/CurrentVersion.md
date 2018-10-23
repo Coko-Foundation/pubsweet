@@ -1,35 +1,62 @@
 A form for entering information about the submission.
 
 ```js
-const { reduxForm } = require('redux-form')
-
-const project = {
+const journal = {
   id: faker.random.uuid(),
 }
 
-const version = {
+const manuscript = {
   id: faker.random.uuid(),
-  metadata: {
+  meta: {
     title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(100),
     articleType: 'original-research',
-  },
-  declarations: {
-    openData: 'yes',
+    declarations: {
+      openData: 'yes',
+      openPeerReview: 'no',
+      preregistered: 'yes',
+      previouslySubmitted: 'yes',
+      researchNexus: 'no',
+      streamlinedReview: 'no',
+    },
   },
   suggestions: {
     reviewers: {
-      opposed: [faker.name.findName()],
+      opposed: faker.name.findName(),
     },
   },
+  reviews: [
+    {
+      comments: { content: 'this needs review' },
+      created: 'Thu Oct 11 2018',
+      open: false,
+      recommendation: '',
+      user: { identities: [] },
+    },
+  ],
 }
 
-const SubmitForm = reduxForm({
-  form: 'submit',
-  touchOnChange: true,
-  onSubmit: values => console.log(values),
-  onChange: values => console.log(values),
-})(Submit)
+const forms = {
+  children: [
+    {
+      title: faker.lorem.sentence(5),
+      name: 'meta.declarations.openData',
+    },
+    {
+      title: faker.lorem.sentence(5),
+      name: 'meta.declarations.openPeerReview',
+    },
+    {
+      title: faker.lorem.sentence(5),
+      name: 'meta.declarations.previouslySubmitted',
+    },
+    {
+      title: faker.lorem.sentence(5),
+      name: 'meta.declarations.researchNexus',
+    },
+  ],
+}
 ;<div style={{ position: 'relative', paddingRight: 100 }}>
-  <SubmitForm project={project} version={version} initialValues={version} />
+  <CurrentVersion forms={forms} manuscript={manuscript} journal={journal} />
 </div>
 ```

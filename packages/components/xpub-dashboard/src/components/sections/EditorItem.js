@@ -1,35 +1,36 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
 import { Action, ActionGroup } from '@pubsweet/ui'
-import { Item, Header, Body } from '../molecules/Item'
+import { getUserFromTeam } from 'xpub-selectors'
 
+import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import Meta from '../metadata/Meta'
 import MetadataSections from '../metadata/MetadataSections'
 import MetadataType from '../metadata/MetadataType'
 import MetadataReviewType from '../metadata/MetadataReviewType'
 import MetadataSubmittedDate from '../metadata/MetadataSubmittedDate'
-import MetadataOwners from '../metadata/MetadataOwners'
+import MetadataAuthors from '../metadata/MetadataAuthors'
 import MetadataStreamLined from '../metadata/MetadataStreamLined'
-import ProjectLink from '../ProjectLink'
+import JournalLink from '../JournalLink'
 import Reviews from '../Reviews'
 import VersionTitle from './VersionTitle'
 
-const VersionTitleLink = styled(ProjectLink)`
+const VersionTitleLink = styled(JournalLink)`
   text-decoration: none;
   color: #333;
 `
 
-const EditorItemLinks = ({ project, version }) => (
+const EditorItemLinks = ({ version, journals }) => (
   <ActionGroup>
-    <Action to={`/projects/${project.id}/versions/${version.id}/submit`}>
+    <Action to={`/journals/${journals.id}/versions/${version.id}/submit`}>
       Summary Info
     </Action>
     <Action
-      to={`/projects/${project.id}/versions/${version.id}/decisions/${
-        project.id
+      to={`/journals/${journals.id}/versions/${version.id}/decisions/${
+        version.id
       }`}
     >
       {version.decision && version.decision.status === 'submitted'
@@ -40,20 +41,30 @@ const EditorItemLinks = ({ project, version }) => (
 )
 
 const getDeclarationsObject = (version, value) => {
-  const declarations = version.declarations || {}
+  if (!version.meta) version.meta = {}
+  const declarations = version.meta.declarations || {}
+
   return declarations[value] || 'no'
 }
 
 const getMetadataObject = (version, value) => {
-  const metadata = version.metadata || {}
+  const metadata = version.meta || {}
   return metadata[value] || []
 }
 
-const EditorItem = ({ project, version }) => (
-  <Authorize object={[project]} operation="can view my manuscripts section">
+const getSubmitedDate = version =>
+  getMetadataObject(version, 'history').find(
+    history => history.type === 'submitted',
+  ) || []
+
+const EditorItem = ({ version, journals }) => (
+  <AuthorizeWithGraphQL
+    object={[version]}
+    operation="can view my manuscripts section"
+  >
     <Item>
       <Header>
-        <Status status={project.status} />
+        <Status status={version.status} />
         <Meta>
           <MetadataStreamLined
             streamlinedReview={getDeclarationsObject(
@@ -61,11 +72,13 @@ const EditorItem = ({ project, version }) => (
               'streamlinedReview',
             )}
           />
-          <MetadataOwners owners={project.owners} />
-          <MetadataSubmittedDate submitted={version.submitted} />
+          <MetadataAuthors authors={getUserFromTeam(version, 'author')} />
+          {getSubmitedDate(version) ? (
+            <MetadataSubmittedDate submitted={getSubmitedDate(version).date} />
+          ) : null}
           <MetadataType type={getMetadataObject(version, 'articleType')} />
           <MetadataSections
-            sections={getMetadataObject(version, 'articleSection')}
+            sections={getMetadataObject(version, 'articleSections')}
           />
           <MetadataReviewType
             openPeerReview={getDeclarationsObject(version, 'openPeerReview')}
@@ -73,20 +86,15 @@ const EditorItem = ({ project, version }) => (
         </Meta>
       </Header>
       <Body>
-        <VersionTitleLink
-          id={project.id}
-          page="decisions"
-          project={project}
-          version={version}
-        >
-          <VersionTitle linkUrl="true" version={version} />
+        <VersionTitleLink id={version.id} page="decisions" version={version}>
+          <VersionTitle version={version} />
         </VersionTitleLink>
-        <EditorItemLinks project={project} version={version} />
+        <EditorItemLinks journals={journals} version={version} />
       </Body>
 
-      <Reviews project={project} version={version} />
+      <Reviews version={version} />
     </Item>
-  </Authorize>
+  </AuthorizeWithGraphQL>
 )
 
 export default EditorItem

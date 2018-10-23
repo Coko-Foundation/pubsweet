@@ -2,20 +2,20 @@ import React from 'react'
 import { pickBy } from 'lodash'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
-import Authorize from 'pubsweet-client/src/helpers/Authorize'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import VersionTitle from './VersionTitle'
 
-const OwnerItem = ({ project, version, deleteProject }) => {
+const OwnerItem = ({ version, journals, deleteManuscript }) => {
   const itemHeader = (
     <Header>
-      <Status status={project.status} />
+      <Status status={version.status} />
     </Header>
   )
 
-  const baseLink = `/projects/${project.id}/versions/${version.id}`
+  const baseLink = `/journals/${journals.id}/versions/${version.id}`
   const submitLink = `${baseLink}/submit`
   const manuscriptLink = `${baseLink}/manuscript`
 
@@ -31,7 +31,7 @@ const OwnerItem = ({ project, version, deleteProject }) => {
       </Action>
     ),
     delete: (
-      <Action key="delete-action" onClick={() => deleteProject(project)}>
+      <Action key="delete-action" onClick={() => deleteManuscript(version)}>
         Delete
       </Action>
     ),
@@ -44,13 +44,13 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   const actions = (
-    <Authorize
-      object={project}
+    <AuthorizeWithGraphQL
+      object={version}
       operation="can delete collection"
       unauthorized={unauthorized}
     >
       <ActionGroup>{Object.values(actionButtons)}</ActionGroup>
-    </Authorize>
+    </AuthorizeWithGraphQL>
   )
 
   const body = (
@@ -61,12 +61,15 @@ const OwnerItem = ({ project, version, deleteProject }) => {
   )
 
   return (
-    <Authorize object={[project]} operation="can view my submission section">
+    <AuthorizeWithGraphQL
+      object={[version]}
+      operation="can view my submission section"
+    >
       <Item>
         {itemHeader}
         {body}
       </Item>
-    </Authorize>
+    </AuthorizeWithGraphQL>
   )
 }
 
