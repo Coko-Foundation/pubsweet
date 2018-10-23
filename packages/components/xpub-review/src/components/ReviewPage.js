@@ -1,126 +1,182 @@
-import { debounce } from 'lodash'
+// import { debounce } from 'lodash'
 import { compose, withProps } from 'recompose'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { reduxForm, SubmissionError } from 'redux-form'
-import { actions } from 'pubsweet-client'
-import { ConnectPage } from 'xpub-connect'
-import {
-  selectCurrentUser,
-  selectCollection,
-  selectFragments,
-  selectLastSubmittedVersion,
-  selectFragment,
-  selectUser,
-  getReviewerFromUser,
-} from 'xpub-selectors'
-import uploadFile from 'xpub-upload'
-import ReviewLayout from './review/ReviewLayout'
+import { graphql } from 'react-apollo'
+import { gql } from 'apollo-client-preset'
+import { withFormik } from 'formik'
+import { withLoader } from 'pubsweet-client'
+// import uploadFile from 'xpub-upload'
+import ReviewLayout from '../components/review/ReviewLayout'
 
-// TODO: this is only here because prosemirror would save the title in the
-// metadata as html instead of plain text. we need to maybe find a better
-// position than here to perform this operation
-const stripHtml = htmlString => {
-  const temp = document.createElement('span')
-  temp.innerHTML = htmlString
-  return temp.textContent
-}
-
-const onSubmit = (
-  values,
-  dispatch,
-  { history, project, version, reviewer },
-) => {
-  Object.assign(reviewer, {
-    ...values,
-    status: 'completed',
-    submitted: new Date(),
-  })
-
-  return dispatch(
-    actions.updateFragment(project, {
-      id: version.id,
-      rev: version.rev,
-      reviewers: version.reviewers,
-    }),
-  )
-    .then(() => {
-      // TODO: show "thanks for your review" message
-      history.push('/')
-    })
-    .catch(error => {
-      if (error.validationErrors) {
-        throw new SubmissionError()
+const fragmentFields = `
+  id
+  created
+  files {
+    id
+    created
+    label
+    filename
+    mimeType
+    type
+    size
+    url
+  }
+  reviews {
+    open
+    recommendation
+    created
+    comments {
+      type
+      content
+      files {
+        type
+        id
+        label
+        url
+        filename
       }
-    })
-}
+    }
+    user {
+      id
+      username
+    }
+  }
+  decision {
+    status
+    created
+    comments {
+      type
+      content
+      files {
+        type
+        id
+        label
+        url
+        filename
+      }
+    }
+    user {
+      id
+      username
+    }
+  }
+  teams {
+    id
+    role
+    object {
+      id
+    }
+    objectType
+    members {
+      status
+      user {
+        id
+        username
+      }
+    }
+  }
+  status
+  meta {
+    title
+    abstract
+    declarations {
+      openData
+      openPeerReview
+      preregistered
+      previouslySubmitted
+      researchNexus
+      streamlinedReview
+    }
+    articleSections
+    articleType
+    history {
+      type
+      date
+    }
+    notes {
+      id
+      created
+      notesType
+      content
+    }
+    keywords
+  }
+  suggestions {
+    reviewers {
+      opposed
+      suggested
+    }
+    editors {
+      opposed
+      suggested
+    }
+  }
+`
 
-const onChange = (values, dispatch, { project, version, reviewer }) => {
-  values.note.content = stripHtml(values.note.content) // see TODO above
-  Object.assign(reviewer, {
-    // submitted: new Date(),
-    ...values,
-  })
+const query = gql`
+  query($id: ID!) {
+    currentUser {
+      id
+      username
+      admin
+    }
 
-  return dispatch(
-    actions.updateFragment(project, {
-      id: version.id,
-      rev: version.rev,
-      reviewers: version.reviewers,
-    }),
-  )
+    manuscript(id: $id) {
+      ${fragmentFields}
+      manuscriptVersions {
+        ${fragmentFields}
+      }
+    }
+  }
+`
 
-  // TODO: display a notification when saving/saving completes/saving fails
-}
+const submitReviewMutation = gql`
+  mutation($id: ID!, $input: String) {
+    updateManuscript(id: $id, input: $input) {
+      id
+      ${fragmentFields}
+    }
+  }
+`
 
 export default compose(
-  ConnectPage(({ match }) => [
-    actions.getCollection({ id: match.params.project }),
-    actions.getFragments({ id: match.params.project }),
-    actions.getTeams(),
-    actions.getUsers(),
-  ]),
-  connect(
-    (state, { match }) => {
-      const currentUser = selectCurrentUser(state)
-      const project = selectCollection(state, match.params.project)
-      const versions = selectFragments(state, project.fragments)
-      const version = selectFragment(state, match.params.version)
-      const lastSubmitted = selectLastSubmittedVersion(state, project)[0]
-
-      let handlingEditors
-      const editors = state.teams.find(
-        team =>
-          team.object.type === 'collection' &&
-          team.object.id === match.params.project &&
-          team.teamType.name === 'handlingEditor',
-      )
-
-      if (editors) {
-        handlingEditors = editors.members.map(id => selectUser(state, id))
-      }
-      const reviewer = getReviewerFromUser(project, lastSubmitted, currentUser)
-
-      return {
-        lastSubmitted,
-        handlingEditors,
-        project,
-        reviewer,
-        version,
-        versions,
-      }
-    },
-    {
-      uploadFile,
-    },
-  ),
-  withRouter,
-  withProps(({ reviewer }) => ({
-    initialValues: reviewer,
+  graphql(query, {
+    options: ({ match }) => ({
+      variables: {
+        id: match.params.version,
+        form: 'submit',
+      },
+    }),
+  }),
+  graphql(submitReviewMutation, {
+    props: ({ mutate, ownProps: { data } }) => ({
+      onSubmit: (review, { history }) => {
+        mutate({
+          variables: {
+            id: data.manuscript.id,
+            input: JSON.stringify(review),
+          },
+        }).then(() => {
+          history.push('/')
+        })
+      },
+    }),
+  }),
+  withLoader(),
+  withProps(({ manuscript, currentUser, match: { params: { journal } } }) => ({
+    journal: { id: journal },
+    review: manuscript.reviews.find(
+      review => review.user.id === currentUser.id,
+    ),
+    status: manuscript.teams
+      .find(team => team.role === 'reviewerEditor')
+      .members.find(member => member.user.id === currentUser.id).status,
   })),
-  reduxForm({
-    form: 'review',
-    onChange: debounce(onChange, 1000, { maxWait: 5000 }),
-    onSubmit,
+  withFormik({
+    initialValues: {},
+    mapPropsToValues: ({ manuscript, currentUser }) =>
+      manuscript.reviews.find(review => review.user.id === currentUser.id),
+    displayName: 'review',
+    handleSubmit: (props, { props: { onSubmit, history } }) =>
+      onSubmit(props, { history }),
   }),
 )(ReviewLayout)

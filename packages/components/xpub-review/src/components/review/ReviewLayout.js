@@ -2,114 +2,74 @@ import React from 'react'
 
 import moment from 'moment'
 import { Tabs } from '@pubsweet/ui'
-import { Wax } from 'wax-prose-mirror'
 
 import ReviewForm from './ReviewForm'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Review from './Review'
+import EditorSection from '../decision/EditorSection'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
-import { EditorWrapper } from '../molecules/EditorWrapper'
-import { Info } from '../molecules/Info'
+
+const addEditor = (manuscript, label) => ({
+  content: <EditorSection manuscript={manuscript} />,
+  key: manuscript.id,
+  label,
+})
 
 const ReviewLayout = ({
-  project,
-  versions,
-  lastSubmitted,
-  handlingEditors,
+  currentUser,
+  manuscript,
+  review,
   reviewer,
-  valid,
   handleSubmit,
   uploadFile,
+  isValid,
+  status,
 }) => {
   const reviewSections = []
   const editorSections = []
 
-  versions.forEach(version => {
-    let review
-    if (version.reviewers) {
-      review = version.reviewers.find(
-        review => review.reviewer === reviewer._reviewer.id,
-      )
-    }
-
-    if (review && review.submitted) {
-      const submittedMoment = moment(review.submitted)
-      const key = version.id
-      const label = submittedMoment.format('YYYY-MM-DD')
-
-      reviewSections.push({
-        content: (
-          <div>
-            <ReviewMetadata
-              handlingEditors={handlingEditors}
-              version={version}
-            />
-            <Review review={review} />
-          </div>
-        ),
-        key,
-        label,
-      })
-
-      // TODO: need to include unreviewed versions?
-      editorSections.push({
-        content:
-          lastSubmitted.files.manuscript.type ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-            <EditorWrapper>
-              <Wax key={key} readonly value={lastSubmitted.source} />
-            </EditorWrapper>
-          ) : (
-            <Info>No supported view of the file</Info>
-          ),
-        key,
-        label,
-      })
-    }
-  }, [])
-
-  const review = lastSubmitted.reviewers.find(
-    review => review.id === reviewer.id,
-  )
-
-  if (lastSubmitted.submitted && (!review || !review.submitted)) {
-    const submittedMoment = moment()
-    const key = lastSubmitted.id
-    const label = submittedMoment.format('YYYY-MM-DD')
-
+  manuscript.manuscriptVersions.forEach(manuscript => {
+    const label = moment().format('YYYY-MM-DD')
     reviewSections.push({
       content: (
         <div>
-          <ReviewMetadata
-            handlingEditors={handlingEditors}
-            version={lastSubmitted}
-          />
-          <ReviewForm
-            handleSubmit={handleSubmit}
-            review={review}
-            uploadFile={uploadFile}
-            valid={valid}
+          <ReviewMetadata manuscript={manuscript} />
+          <Review
+            review={manuscript.reviews.find(
+              review => review.user.id === currentUser.id,
+            )}
           />
         </div>
       ),
-      key,
+      key: manuscript.id,
       label,
     })
 
-    editorSections.push({
-      content:
-        lastSubmitted.files.manuscript.type ===
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-          <EditorWrapper>
-            <Wax key={key} readonly value={lastSubmitted.source} />
-          </EditorWrapper>
+    editorSections.push(addEditor(manuscript, label))
+  }, [])
+
+  const label = moment().format('YYYY-MM-DD')
+
+  reviewSections.push({
+    content: (
+      <div>
+        <ReviewMetadata manuscript={manuscript} />
+        {status === 'accepted' && review.recommendation !== '' ? (
+          <Review review={review} />
         ) : (
-          <Info>No supported view of the file</Info>
-        ),
-      key,
-      label,
-    })
-  }
+          <ReviewForm
+            handleSubmit={handleSubmit}
+            isValid={isValid}
+            uploadFile={uploadFile}
+          />
+        )}
+      </div>
+    ),
+    key: manuscript.id,
+    label,
+  })
+
+  editorSections.push(addEditor(manuscript, label))
 
   return (
     <Columns>
