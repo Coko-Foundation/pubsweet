@@ -6,8 +6,12 @@ import { Login, ErrorText, Signup, ResetPassword } from './Login'
 describe('<Login/>', () => {
   const makeWrapper = (props = {}) => shallow(<Login {...props} />)
 
+  it('renders the login form', () => {
+    expect(makeWrapper()).toMatchSnapshot()
+  })
+
   it('shows error', () => {
-    const wrapper = makeWrapper({ error: 'Yikes!' })
+    const wrapper = makeWrapper({ errors: 'Yikes!' })
     expect(wrapper.find(ErrorText)).toHaveLength(1)
   })
 

@@ -1,0 +1,473 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login/> renders the login form 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Login />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <styled.h1>
+          Login
+        </styled.h1>,
+        false,
+        <form>
+          <C
+            component={[Function]}
+            name="username"
+          />
+          <C
+            component={[Function]}
+            name="password"
+          />
+          <styled.button
+            primary={true}
+            type="submit"
+          >
+            Login
+          </styled.button>
+        </form>,
+        <styled.div>
+          <span>
+            Don't have an account? 
+          </span>
+          <Styled(Link)
+            to="/signup"
+          >
+            Sign up
+          </Styled(Link)>
+        </styled.div>,
+        <styled.div>
+          <span>
+            Forgot your password? 
+          </span>
+          <Styled(Link)
+            to="/password-reset"
+          >
+            Reset password
+          </Styled(Link)>
+        </styled.div>,
+      ],
+      "small": true,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "Login",
+        },
+        "ref": null,
+        "rendered": "Login",
+        "type": [Function],
+      },
+      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <C
+              component={[Function]}
+              name="username"
+            />,
+            <C
+              component={[Function]}
+              name="password"
+            />,
+            <styled.button
+              primary={true}
+              type="submit"
+            >
+              Login
+            </styled.button>,
+          ],
+          "onSubmit": undefined,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "component": [Function],
+              "name": "username",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "component": [Function],
+              "name": "password",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Login",
+              "primary": true,
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": "Login",
+            "type": [Function],
+          },
+        ],
+        "type": "form",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <span>
+              Don't have an account? 
+            </span>,
+            <Styled(Link)
+              to="/signup"
+            >
+              Sign up
+            </Styled(Link)>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Don't have an account? ",
+            },
+            "ref": null,
+            "rendered": "Don't have an account? ",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Sign up",
+              "to": "/signup",
+            },
+            "ref": null,
+            "rendered": "Sign up",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <span>
+              Forgot your password? 
+            </span>,
+            <Styled(Link)
+              to="/password-reset"
+            >
+              Reset password
+            </Styled(Link)>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Forgot your password? ",
+            },
+            "ref": null,
+            "rendered": "Forgot your password? ",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Reset password",
+              "to": "/password-reset",
+            },
+            "ref": null,
+            "rendered": "Reset password",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <styled.h1>
+            Login
+          </styled.h1>,
+          false,
+          <form>
+            <C
+              component={[Function]}
+              name="username"
+            />
+            <C
+              component={[Function]}
+              name="password"
+            />
+            <styled.button
+              primary={true}
+              type="submit"
+            >
+              Login
+            </styled.button>
+          </form>,
+          <styled.div>
+            <span>
+              Don't have an account? 
+            </span>
+            <Styled(Link)
+              to="/signup"
+            >
+              Sign up
+            </Styled(Link)>
+          </styled.div>,
+          <styled.div>
+            <span>
+              Forgot your password? 
+            </span>
+            <Styled(Link)
+              to="/password-reset"
+            >
+              Reset password
+            </Styled(Link)>
+          </styled.div>,
+        ],
+        "small": true,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Login",
+          },
+          "ref": null,
+          "rendered": "Login",
+          "type": [Function],
+        },
+        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <C
+                component={[Function]}
+                name="username"
+              />,
+              <C
+                component={[Function]}
+                name="password"
+              />,
+              <styled.button
+                primary={true}
+                type="submit"
+              >
+                Login
+              </styled.button>,
+            ],
+            "onSubmit": undefined,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "component": [Function],
+                "name": "username",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "component": [Function],
+                "name": "password",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Login",
+                "primary": true,
+                "type": "submit",
+              },
+              "ref": null,
+              "rendered": "Login",
+              "type": [Function],
+            },
+          ],
+          "type": "form",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <span>
+                Don't have an account? 
+              </span>,
+              <Styled(Link)
+                to="/signup"
+              >
+                Sign up
+              </Styled(Link)>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Don't have an account? ",
+              },
+              "ref": null,
+              "rendered": "Don't have an account? ",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Sign up",
+                "to": "/signup",
+              },
+              "ref": null,
+              "rendered": "Sign up",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <span>
+                Forgot your password? 
+              </span>,
+              <Styled(Link)
+                to="/password-reset"
+              >
+                Reset password
+              </Styled(Link)>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Forgot your password? ",
+              },
+              "ref": null,
+              "rendered": "Forgot your password? ",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Reset password",
+                "to": "/password-reset",
+              },
+              "ref": null,
+              "rendered": "Reset password",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

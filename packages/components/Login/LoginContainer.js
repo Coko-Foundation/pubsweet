@@ -1,4 +1,4 @@
-import { reduxForm } from 'redux-form'
+import { withFormik } from 'formik'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { loginUser } from './actions'
@@ -6,16 +6,21 @@ import { loginUser } from './actions'
 import Login from './Login'
 import redirectPath from './redirect'
 
-const onSubmit = (values, dispatch, { location }) => {
-  dispatch(loginUser(values, redirectPath({ location })))
+const handleSubmit = (values, { props: { dispatch, location }, setErrors }) => {
+  dispatch(loginUser(values, redirectPath({ location }), setErrors))
 }
 
-export default compose(
-  reduxForm({
-    form: 'login',
-    onSubmit,
+const enhancedFormik = withFormik({
+  initialValues: {
+    username: '',
+    password: '',
+  },
+  mapPropsToValues: props => ({
+    username: props.username,
+    password: props.password,
   }),
-  connect(state => ({
-    error: state.error,
-  })),
-)(Login)
+  displayName: 'login',
+  handleSubmit,
+})(Login)
+
+export default compose(connect(state => state))(enhancedFormik)

@@ -2,7 +2,6 @@
 
 exports[`DateParser renders correctly 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <DateParser
     timestamp="2018-05-18T10:38:12.063Z"
