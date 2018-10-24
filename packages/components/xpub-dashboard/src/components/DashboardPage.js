@@ -46,7 +46,7 @@ export default compose(
     },
   }),
   withLoader(),
-  withProps(({ journals, currentUser, ...rest }) => ({
+  withProps(({ journals, currentUser }) => ({
     dashboard: (journals || {}).manuscripts || [],
     journals,
     currentUser,
