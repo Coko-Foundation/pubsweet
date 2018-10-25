@@ -1,4 +1,4 @@
-const jobs = require('../../src/jobs')
+const { start: jobs } = require('../../src/jobs')
 
 const someHandler = async job => {
   expect(job.data.param).toEqual('aThing')

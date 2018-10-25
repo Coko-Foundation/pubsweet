@@ -28,13 +28,26 @@ const boss = new PgBoss({ db: dbAdapter })
 boss.on('error', error => logger.error(error))
 
 let started = false
+let connected = false
 
-module.exports = async () => {
-  if (started) {
+module.exports = {
+  start: async () => {
+    if (started) {
+      return boss
+    }
+
+    await boss.start()
+    started = true
+    connected = true
     return boss
-  }
+  },
+  connect: async () => {
+    if (connected) {
+      return boss
+    }
 
-  await boss.start()
-  started = true
-  return boss
+    await boss.connect()
+    connected = true
+    return boss
+  },
 }
