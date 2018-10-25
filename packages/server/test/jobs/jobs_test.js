@@ -1,16 +1,36 @@
 const jobs = require('../../src/jobs')
 
-const someHandler = async job =>
-  // console.log('HERE I AM WITH', job)
-  'victory'
+const someHandler = async job => {
+  expect(job.data.param).toEqual('aThing')
+  return Promise.resolve({ thing: 'someOtherThing' })
+}
 
 describe('jobs', () => {
-  it('should connect', async () => {
-    const jobthing = await jobs()
+  let jobQueue
 
-    await jobthing.publish('some-queue', { param1: '1' })
-    // console.log(`created ${jobId}`)
-
-    await jobthing.subscribe('some-queue', someHandler)
+  beforeAll(async () => {
+    jobQueue = await jobs()
   })
+
+  it('submits a job, runs it, and notifies on completion', async done => {
+    const queueName = 'aJobQueue'
+
+    // Subscribe to the job queue with an async handler
+    await jobQueue.subscribe(queueName, someHandler)
+
+    // Add a job to the queue
+    await jobQueue.publish(queueName, { param: 'aThing' })
+
+    // Be notified on job completion with job result
+    await jobQueue.onComplete(queueName, job => {
+      try {
+        expect(job.data.response).toEqual({ thing: 'someOtherThing' })
+        done()
+      } catch (e) {
+        done.fail(e)
+      }
+    })
+  })
+
+  afterAll(async () => jobQueue.stop())
 })
