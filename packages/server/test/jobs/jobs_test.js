@@ -1,4 +1,4 @@
-const { start: jobs } = require('../../src/jobs')
+const { startJobQueue } = require('../../src/jobs')
 
 const someHandler = async job => {
   expect(job.data.param).toEqual('aThing')
@@ -9,7 +9,7 @@ describe('jobs', () => {
   let jobQueue
 
   beforeAll(async () => {
-    jobQueue = await jobs()
+    jobQueue = await startJobQueue()
   })
 
   it('submits a job, runs it, and notifies on completion', async done => {

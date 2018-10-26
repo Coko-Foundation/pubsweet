@@ -27,11 +27,13 @@ const boss = new PgBoss({ db: dbAdapter })
 
 boss.on('error', error => logger.error(error))
 
+// 'Start' is for queue maintainers (i.e. pubsweet-server)
 let started = false
+// 'Connect' is for queue observers (e.g. a job worker)
 let connected = false
 
 module.exports = {
-  start: async () => {
+  startJobQueue: async () => {
     if (started) {
       return boss
     }
@@ -41,7 +43,7 @@ module.exports = {
     connected = true
     return boss
   },
-  connect: async () => {
+  connectToJobQueue: async () => {
     if (connected) {
       return boss
     }

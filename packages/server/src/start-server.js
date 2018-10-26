@@ -1,4 +1,5 @@
 const express = require('express')
+const { startJobQueue } = require('./jobs')
 
 let server
 
@@ -16,6 +17,8 @@ const startServer = async (app = express()) => {
   const port = config['pubsweet-server'].port || 3000
   configuredApp.set('port', port)
   const httpServer = http.createServer(configuredApp)
+  httpServer.app = configuredApp
+
   logger.info(`Starting HTTP server`)
   const startListening = Promise.promisify(httpServer.listen, {
     context: httpServer,
@@ -23,8 +26,15 @@ const startServer = async (app = express()) => {
   await startListening(port)
   logger.info(`App is listening on port ${port}`)
 
+  // Add GraphQL subscriptions
   addSubscriptions(httpServer)
-  httpServer.app = configuredApp
+
+  // Start job queue
+  const jobQueue = await startJobQueue()
+  httpServer.on('close', () => {
+    jobQueue.stop()
+  })
+
   server = httpServer
   return httpServer
 }

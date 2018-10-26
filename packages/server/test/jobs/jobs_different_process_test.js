@@ -1,12 +1,12 @@
 const path = require('path')
-const { start: jobs } = require('../../src/jobs')
+const { startJobQueue } = require('../../src/jobs')
 const { spawn } = require('child_process')
 
 describe('job runner in a different process', () => {
   let jobQueue
 
   beforeAll(async () => {
-    jobQueue = await jobs()
+    jobQueue = await startJobQueue()
   })
 
   it('submits a job and gets notified on completion', async done => {
