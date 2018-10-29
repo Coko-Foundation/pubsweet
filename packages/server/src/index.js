@@ -8,6 +8,7 @@ module.exports.Collection = require('./models/Collection')
 module.exports.helpers = require('./helpers/authorization')
 
 module.exports.db = require('./db')
+module.exports.pubsubManager = require('./graphql/pubsub')
 module.exports.NotFoundError = require('./errors/NotFoundError')
 
 module.exports.startServer = require('./start-server')
