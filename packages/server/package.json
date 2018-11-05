@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "10.0.2",
+  "version": "10.0.3",
   "scripts": {
     "test": "jest",
     "vuln-test": "nsp check"
@@ -50,7 +50,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "@pubsweet/db-manager": "^2.0.7",
+    "@pubsweet/db-manager": "^2.0.8",
     "eventsource": "^1.0.4",
     "jest-cli": "^23.5.0",
     "jest-environment-db": "^2.0.0",
