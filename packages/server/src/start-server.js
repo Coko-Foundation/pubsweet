@@ -4,6 +4,8 @@ const { startJobQueue } = require('./jobs')
 let server
 
 const startServer = async (app = express()) => {
+  if (server) return server
+
   const http = require('http')
   const config = require('config')
   const Promise = require('bluebird')
@@ -12,7 +14,6 @@ const startServer = async (app = express()) => {
   const configureApp = require('./app')
   const { addSubscriptions } = require('./graphql/subscriptions')
 
-  if (server) return server
   const configuredApp = configureApp(app)
   const port = config['pubsweet-server'].port || 3000
   configuredApp.set('port', port)
