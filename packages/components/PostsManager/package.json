@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-component-posts-manager",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "Basic Posts manager component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^8.7.1",
+    "@pubsweet/ui": "^8.8.0",
     "prop-types": "^15.5.10",
-    "pubsweet-component-form-group": "^1.1.27",
+    "pubsweet-component-form-group": "^1.1.28",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2"

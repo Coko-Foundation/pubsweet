@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="8.7.1"></a>
+  <a name="8.8.0"></a>
+# [8.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.7.1...@pubsweet/ui@8.8.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+* GraphQL Xpub submit component ([ba07060](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba07060))
+
+
+
+
+  <a name="8.7.1"></a>
 ## [8.7.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.7.0...@pubsweet/ui@8.7.1) (2018-10-08)
 
 
@@ -14,7 +26,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="8.7.0"></a>
+<a name="8.7.0"></a>
 # [8.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.6.2...@pubsweet/ui@8.7.0) (2018-09-27)
 
 

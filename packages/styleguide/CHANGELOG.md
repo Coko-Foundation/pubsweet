@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.12...@pubsweet/styleguide@3.2.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Xpub submit component ([ba07060](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba07060))
+
+
+
+
 <a name="3.1.12"></a>
 ## [3.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.11...@pubsweet/styleguide@3.1.12) (2018-10-08)
 

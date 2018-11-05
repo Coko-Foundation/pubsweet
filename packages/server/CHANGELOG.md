@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="10.0.2"></a>
+  <a name="10.0.3"></a>
+## [10.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.2...pubsweet-server@10.0.3) (2018-11-05)
+
+
+### Bug Fixes
+
+* **server:** wait before closing pubsub database connection ([badd6e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/badd6e2))
+
+
+
+
+  <a name="10.0.2"></a>
 ## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.1...pubsweet-server@10.0.2) (2018-10-17)
 
 
@@ -15,7 +26,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="10.0.1"></a>
+<a name="10.0.1"></a>
 ## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.0...pubsweet-server@10.0.1) (2018-10-08)
 
 
