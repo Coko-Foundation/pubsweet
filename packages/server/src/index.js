@@ -13,4 +13,6 @@ module.exports.NotFoundError = require('./errors/NotFoundError')
 module.exports.startServer = require('./start-server')
 
 // Jobs queue
-module.exports.jobs = require('./jobs')
+module.exports.jobs = {
+  connectToJobQueue: require('./jobs').connectToJobQueue,
+}

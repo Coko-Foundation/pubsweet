@@ -29,10 +29,10 @@ const startServer = async (app = express()) => {
   // Add GraphQL subscriptions
   addSubscriptions(httpServer)
 
-  // Start job queue
+  // Manage job queue
   const jobQueue = await startJobQueue()
-  httpServer.on('close', () => {
-    jobQueue.stop()
+  httpServer.on('close', async () => {
+    await jobQueue.stop()
   })
 
   server = httpServer
