@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@0.1.4...pubsweet-component-xpub-teams-manager@0.2.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@0.1.3...pubsweet-component-xpub-teams-manager@0.1.4) (2018-10-08)
 

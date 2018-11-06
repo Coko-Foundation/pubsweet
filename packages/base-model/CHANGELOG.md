@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.8"></a>
+## [1.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.0.7...@pubsweet/base-model@1.0.8) (2018-11-05)
+
+
+### Bug Fixes
+
+* **base-model:** support graph inserts ([ff40287](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ff40287))
+
+
+
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.0.6...@pubsweet/base-model@1.0.7) (2018-10-17)
 
