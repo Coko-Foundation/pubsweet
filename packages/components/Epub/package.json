@@ -12,7 +12,7 @@
     "@pubsweet/logger": "^0.2.7",
     "cheerio": "^1.0.0-rc.2",
     "highlightjs": "^9.10.0",
-    "html-epub": "^0.7.0",
+    "html-epub": "git+https://git@gitlab.coko.foundation/pubsweet/html-epub#updated-libtidy",
     "mkdirp": "^0.5.1",
     "unzipper": "^0.8.9"
   },
