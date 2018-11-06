@@ -1,7 +1,7 @@
 const { startServer } = require('../src')
 
 describe('Function exported by src/index.js', () => {
-  it('starts the server and returns it with express app attached', async done => {
+  it.skip('starts the server and returns it with express app attached', async done => {
     const server = await startServer()
     expect(server.listening).toBe(true)
     expect(server).toHaveProperty('app')
