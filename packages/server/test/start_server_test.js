@@ -1,3 +1,4 @@
+process.env.NODE_CONFIG = '{"pubsweet-server":{"port":4001}}'
 const { startServer } = require('../src')
 
 describe('Function exported by src/index.js', () => {
@@ -9,7 +10,7 @@ describe('Function exported by src/index.js', () => {
   })
 
   // TODO: Debug
-  it.skip('returns the server if it is already running', async done => {
+  it('returns the server if it is already running', async done => {
     const server = await startServer()
     server.originalServer = true
     const secondAccess = await startServer()
