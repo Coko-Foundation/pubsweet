@@ -2,6 +2,7 @@ const express = require('express')
 const { startJobQueue } = require('./jobs')
 
 let server
+const wait = require('waait')
 
 const startServer = async (app = express()) => {
   if (server) return server
@@ -32,11 +33,16 @@ const startServer = async (app = express()) => {
 
   // Manage job queue
   const jobQueue = await startJobQueue()
-  httpServer.on('close', async () => {
+
+  httpServer.originalClose = httpServer.close
+  httpServer.close = async cb => {
     await jobQueue.stop()
-  })
+    await wait(500)
+    httpServer.originalClose(cb)
+  }
 
   server = httpServer
+
   return httpServer
 }
 
