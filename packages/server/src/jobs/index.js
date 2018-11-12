@@ -43,6 +43,11 @@ module.exports = {
     connected = true
     return boss
   },
+  stopJobQueue: async () => {
+    await boss.stop()
+    started = false
+    connected = false
+  },
   connectToJobQueue: async () => {
     if (connected) {
       return boss

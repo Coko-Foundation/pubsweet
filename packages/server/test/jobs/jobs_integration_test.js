@@ -29,7 +29,7 @@ describe('integrated job queue', () => {
     await jobQueue.onComplete(queueName, job => {
       try {
         expect(job.data.response).toEqual({ thing: 'theOtherThing' })
-        jobQueue.stop().then(() => done())
+        jobQueue.disconnect().then(() => done())
       } catch (e) {
         done.fail(e)
       }
