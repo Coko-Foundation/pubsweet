@@ -733,8 +733,8 @@ describe('Collections API', () => {
         name: 'bar',
         teamType: 'testType',
         object: {
-          type: 'collection',
-          id: collection.id,
+          objectType: 'collection',
+          objectId: collection.id,
         },
       }
 
@@ -754,8 +754,8 @@ describe('Collections API', () => {
         name: 'foo',
         teamType: 'fooType',
         object: {
-          type: 'collection',
-          id: otherCollection.id,
+          objectType: 'collection',
+          objectId: otherCollection.id,
         },
       }
 
@@ -803,8 +803,8 @@ describe('Collections API', () => {
         name: 'bar',
         teamType: 'testType',
         object: {
-          type: 'fragment',
-          id: fragment.id,
+          objectType: 'fragment',
+          objectId: fragment.id,
         },
       }
 
@@ -824,8 +824,8 @@ describe('Collections API', () => {
         name: 'foo',
         teamType: 'fooType',
         object: {
-          type: 'fragment',
-          id: otherFragment.id,
+          objectType: 'fragment',
+          objectId: otherFragment.id,
         },
       }
 

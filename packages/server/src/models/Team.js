@@ -21,7 +21,9 @@ class Team extends Model {
       teams
         .filter(
           team =>
-            team.object && team.object.type === type && team.object.id === id,
+            team.object &&
+            team.object.objectType === type &&
+            team.object.objectId === id,
         )
         .map(team => team.delete()),
     )
