@@ -24,6 +24,9 @@ const createComments = (values, val) =>
     val,
   )
 
+const getDecision = values =>
+  values.reviews.find(review => review.isDecision === true) || {}
+
 const NoteDecision = uploadFile => props => (
   <AdminSection>
     <Field component={NoteInput} validate={required} {...props} />
@@ -51,7 +54,7 @@ const AttachmentsInput = ({
   <FileUploadList
     buttonText="↑ Upload files"
     FileComponent={UploadingFile}
-    files={(values.decision.comments[0] || {}).files || []}
+    files={((getDecision(values).comments || [])[0] || {}).files || []}
     uploadFile={val => {
       const file = {
         filename: val.name,

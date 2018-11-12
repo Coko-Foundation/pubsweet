@@ -16,7 +16,7 @@ const fragmentFields = `
     label
     filename
     mimeType
-    type
+    fileType
     size
     url
   }
@@ -28,7 +28,7 @@ const fragmentFields = `
       type
       content
       files {
-        type
+        fileType
         id
         label
         url
@@ -40,38 +40,13 @@ const fragmentFields = `
       username
     }
   }
-  decision {
-    status
-    created
-    comments {
-      type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
-  }
+  decision
   teams {
     id
     role
-    object {
-      id
-    }
-    objectType
     members {
-      status
-      user {
-        id
-        username
-      }
+      id
+      username
     }
   }
   status
@@ -93,8 +68,6 @@ const fragmentFields = `
       date
     }
     notes {
-      id
-      created
       notesType
       content
     }

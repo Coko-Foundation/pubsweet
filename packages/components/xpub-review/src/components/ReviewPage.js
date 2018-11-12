@@ -15,8 +15,8 @@ const fragmentFields = `
     created
     label
     filename
+    fileType
     mimeType
-    type
     size
     url
   }
@@ -28,7 +28,7 @@ const fragmentFields = `
       type
       content
       files {
-        type
+        fileType
         id
         label
         url
@@ -40,38 +40,13 @@ const fragmentFields = `
       username
     }
   }
-  decision {
-    status
-    created
-    comments {
-      type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
-  }
+  decision
   teams {
     id
     role
-    object {
-      id
-    }
-    objectType
     members {
-      status
-      user {
-        id
-        username
-      }
+      id
+      username
     }
   }
   status
@@ -111,6 +86,22 @@ const fragmentFields = `
     }
   }
 `
+
+// teams {
+//   id
+//   role
+//   object {
+//     id
+//   }
+//   objectType
+//   members {
+//     status
+//     user {
+//       id
+//       username
+//     }
+//   }
+// }
 
 const query = gql`
   query($id: ID!) {

@@ -41,21 +41,18 @@ const createManuscriptPromise = (file, client) => ({ fileURL, response }) => {
   const title = extractTitle(source) || generateTitle(file.name)
 
   const manuscript = {
-    created: new Date(), // TODO: set on server
     files: [
       {
-        created: new Date(), // TODO: set on server
-        type: 'manuscript',
         filename: file.name,
         url: fileURL,
         mimeType: file.type,
+        size: file.size,
       },
     ],
     meta: {
       title,
-      source,
+      source: source ? 'true' : 'false',
     },
-    status: 'new',
   }
 
   return client.mutate({

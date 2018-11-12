@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FieldArray } from 'formik'
+import { cloneDeep, set } from 'lodash'
 import { TextField, Button, ValidatedFieldFormik } from '@pubsweet/ui'
 import { minSize, readonly } from 'xpub-validators'
 
@@ -44,7 +45,20 @@ const affiliationInput = input => (
   <TextField label="Affiliation" placeholder="Enter affiliation…" {...input} />
 )
 
-const renderAuthors = ({ form: { values }, insert, remove }) => (
+const onChangeFn = (onChange, setFieldValue, values) => value => {
+  const val = value.target ? value.target.value : value
+  setFieldValue(value.target.name, val, true)
+
+  const data = cloneDeep(values)
+  set(data, value.target.name, val)
+  onChange(data.authors, 'authors')
+}
+
+const renderAuthors = onChange => ({
+  form: { values, setFieldValue },
+  insert,
+  remove,
+}) => (
   <ul>
     <UnbulletedList>
       <li>
@@ -64,7 +78,7 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
         </Button>
       </li>
       {(values.authors || []).map((author, index) => (
-        <li key={`author.${author.email}`}>
+        <li key={`author-${author}`}>
           <Spacing>
             <Author>
               Author:&nbsp;
@@ -78,7 +92,8 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
               <Inline>
                 <ValidatedFieldFormik
                   component={firstNameInput}
-                  name={`authors.[${index}].firstName`}
+                  name={`authors.${index}.firstName`}
+                  onChange={onChangeFn(onChange, setFieldValue, values)}
                   readonly={readonly}
                   validate={minSize1}
                 />
@@ -88,6 +103,7 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
                 <ValidatedFieldFormik
                   component={lastNameInput}
                   name={`authors.[${index}].lastName`}
+                  onChange={onChangeFn(onChange, setFieldValue, values)}
                   readonly={readonly}
                   validate={minSize1}
                 />
@@ -99,6 +115,7 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
                 <ValidatedFieldFormik
                   component={emailAddressInput}
                   name={`authors.[${index}].email`}
+                  onChange={onChangeFn(onChange, setFieldValue, values)}
                   readonly={readonly}
                   validate={minSize1}
                 />
@@ -108,8 +125,8 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
                 <ValidatedFieldFormik
                   component={affiliationInput}
                   name={`authors.[${index}].affiliation`}
+                  onChange={onChangeFn(onChange, setFieldValue, values)}
                   readonly={readonly}
-                  required
                   validate={minSize1}
                 />
               </Inline>
@@ -121,8 +138,8 @@ const renderAuthors = ({ form: { values }, insert, remove }) => (
   </ul>
 )
 
-const AuthorsInput = props => (
-  <FieldArray name="authors" render={renderAuthors} />
+const AuthorsInput = ({ onChange }) => (
+  <FieldArray name="authors" render={renderAuthors(onChange)} />
 )
 
 export default AuthorsInput

@@ -16,17 +16,28 @@ const teamFields = `
   role
   name
   object {
-    id
+    objectId
+    objectType
   }
-  objectType
   members {
-    status
-    user {
-      id
-      username
-    }
+    id
+    username
   }
 `
+// id
+//   role
+//   name
+//   object {
+//     id
+//   }
+//   objectType
+//   members {
+//     status
+//     user {
+//       id
+//       username
+//     }
+//   }
 
 const query = gql`
   {
@@ -115,7 +126,7 @@ export default compose(
       teams,
       teamName: (filteredTeams || {}).name,
       options: optionUsers,
-      value: manuscript.teams.find(team => team.teamRole),
+      value: (manuscript.teams || []).find(team => team.teamRole),
     }
   }),
 )(AssignEditor)

@@ -2,10 +2,8 @@ import gql from 'graphql-tag'
 
 export default {
   deleteManuscriptMutation: gql`
-    mutation($id: ID) {
-      deleteManuscript(id: $id) {
-        id
-      }
+    mutation($id: ID!) {
+      deleteManuscript(id: $id)
     }
   `,
   reviewerResponseMutation: gql`
@@ -28,19 +26,16 @@ export default {
         id
         created
         teams {
+          role
           name
           object {
-            id
+            objectId
+            objectType
           }
-          objectType
           members {
-            user {
-              id
-              username
-            }
-            status
+            id
+            username
           }
-          role
         }
         status
         reviews {

@@ -18,7 +18,6 @@ const acceptFiles =
 export default compose(
   connectToContext(),
   graphql(queries.dashboard, {
-    options: { context: { online: false } },
     props: data => data,
   }),
   graphql(mutations.reviewerResponseMutation, {
@@ -36,7 +35,7 @@ export default compose(
       update: (proxy, { data: { deleteManuscript } }) => {
         const data = proxy.readQuery({ query: queries.dashboard })
         const manuscriptIndex = data.journals.manuscripts.findIndex(
-          manuscript => manuscript.id === deleteManuscript.id,
+          manuscript => manuscript.id === deleteManuscript,
         )
         if (manuscriptIndex > -1) {
           data.journals.manuscripts.splice(manuscriptIndex, 1)

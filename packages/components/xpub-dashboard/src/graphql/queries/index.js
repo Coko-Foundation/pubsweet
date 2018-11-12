@@ -11,7 +11,7 @@ export default {
 
       journals {
         id
-        journalTitle
+        title
         manuscripts {
           id
           reviews {
@@ -27,15 +27,12 @@ export default {
             role
             name
             object {
-              id
+              objectId
+              objectType
             }
-            objectType
             members {
-              status
-              user {
-                id
-                username
-              }
+              id
+              username
             }
           }
           status
