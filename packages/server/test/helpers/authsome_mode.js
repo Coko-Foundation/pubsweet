@@ -17,13 +17,13 @@ async function teamPermissions(user, operation, object, context) {
 
       if (
         team.teamType === 'teamContributors' &&
-        team.object.id === collection.id &&
+        team.object.objectId === collection.id &&
         operation === 'POST'
       ) {
         return true
       } else if (
         team.teamType === 'teamCoauthors' &&
-        team.object.id === object.id &&
+        team.object.objectId === object.id &&
         operation === 'PATCH'
       ) {
         return true
@@ -120,10 +120,10 @@ async function authenticatedUser(user, operation, object, context) {
   if (
     operation === 'GET' &&
     get(object, 'type') === 'team' &&
-    get(object, 'object.type') === 'collection'
+    get(object, 'object.objectType') === 'collection'
   ) {
     const collection = await context.models.Collection.find(
-      get(object, 'object.id'),
+      get(object, 'object.objectId'),
     )
     if (collection.owners.includes(user.id)) {
       return true
@@ -135,8 +135,8 @@ async function authenticatedUser(user, operation, object, context) {
   // if they are one of the owners of this collection
   if (get(object, 'path') === '/teams' && operation === 'POST') {
     if (operation === 'POST') {
-      if (get(object, 'team.object.type') === 'collection') {
-        const collectionId = get(object, 'team.object.id')
+      if (get(object, 'team.object.objectType') === 'collection') {
+        const collectionId = get(object, 'team.object.objectId')
         const collection = await context.models.Collection.find(collectionId)
         if (collection.owners.includes(user.id)) {
           return true
@@ -148,8 +148,8 @@ async function authenticatedUser(user, operation, object, context) {
   // Allow authenticated users to add/remove team members of a team based
   // around a collection if they are one of the owners of this collection
   if (get(object, 'current.type') === 'team' && operation === 'PATCH') {
-    if (get(object, 'current.object.type') === 'collection') {
-      const collectionId = get(object, 'current.object.id')
+    if (get(object, 'current.object.objectType') === 'collection') {
+      const collectionId = get(object, 'current.object.objectId')
       const collection = await context.models.Collection.find(collectionId)
       if (collection.owners.includes(user.id)) {
         // But they shouldn't be able to change the object of the Team

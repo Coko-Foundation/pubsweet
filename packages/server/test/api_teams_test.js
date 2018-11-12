@@ -12,7 +12,7 @@ describe('Teams API - admin', () => {
   beforeEach(() =>
     cleanDB()
       .then(() => new User(fixtures.adminUser).save())
-      .then(() => new User(fixtures.user).save())
+      .then(() => new User(fixtures.user).save()),
   )
 
   it('should display an initially empty list of teams if user is admin', () =>
@@ -91,8 +91,8 @@ describe('Teams API - per collection or fragment', () => {
         team.name = 'Test team'
         team.members = [otherUserId]
         team.object = {
-          id: collectionId,
-          type: 'collection',
+          objectId: collectionId,
+          objectType: 'collection',
         }
 
         return api.users.authenticate

@@ -38,8 +38,8 @@ describe('Teams model', () => {
     let team = teamFixture
     team.name = 'Test team'
     team.object = {
-      id: collectionId,
-      type: 'collection',
+      objectId: collectionId,
+      objectType: 'collection',
     }
     team = new Team(team)
 
@@ -55,8 +55,8 @@ describe('Teams model', () => {
     let team = teamFixture
     team.name = 'Test team'
     team.object = {
-      id: collectionId,
-      type: 'collection',
+      objectId: collectionId,
+      objectType: 'collection',
     }
     team.members = [userId]
     team = new Team(team)
@@ -106,8 +106,8 @@ describe('Teams model', () => {
     let team = teamFixture
     team.name = 'Test team'
     team.object = {
-      id: fragmentId,
-      type: 'fragment',
+      objectId: fragmentId,
+      objectType: 'fragment',
     }
     team.members = [userId]
     team = new Team(team)
@@ -133,8 +133,8 @@ describe('Teams model', () => {
     let team = teamFixture
     team.name = 'Test team'
     team.object = {
-      id: collectionId,
-      type: 'collection',
+      objectId: fragmentId,
+      objectType: 'fragment',
     }
     team.members = [userId]
     team = new Team(team)
@@ -171,8 +171,8 @@ describe('Teams model', () => {
     let team = teamFixture
     team.name = 'Test team'
     team.object = {
-      id: collectionId,
-      type: 'collection',
+      objectId: collectionId,
+      objectType: 'collection',
     }
     team.members = [userId]
     team = new Team(team)

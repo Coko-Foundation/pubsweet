@@ -519,7 +519,7 @@ describe('Collections API', () => {
       await api.teams.post(fixtures.readerTeam, adminToken)
       const teamFixture = {
         ...fixtures.contributorTeam,
-        object: { type: 'fragment', id: fragment.id },
+        object: { objectType: 'fragment', objectId: fragment.id },
       }
       await api.teams.post(teamFixture, adminToken)
 
@@ -533,7 +533,7 @@ describe('Collections API', () => {
       expect(teams[0]).toMatchObject({
         name: 'My contributors',
         object: {
-          type: 'fragment',
+          objectType: 'fragment',
         },
       })
     })
@@ -594,7 +594,7 @@ describe('Collections API', () => {
 
       // create the teams
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {
-        object: { type: 'collection', id: collection.id },
+        object: { objectType: 'collection', objectId: collection.id },
       })
       await api.teams.post(teamFixture, userToken)
       await api.teams.post(fixtures.readerTeam, userToken)
@@ -609,7 +609,7 @@ describe('Collections API', () => {
       expect(teams[0]).toMatchObject({
         name: 'My contributors',
         object: {
-          type: 'collection',
+          objectType: 'collection',
         },
       })
     })

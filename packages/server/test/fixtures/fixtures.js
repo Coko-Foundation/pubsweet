@@ -75,14 +75,20 @@ const contributorTeam = {
   type: 'team',
   name: 'My contributors',
   teamType: 'teamContributors',
-  object: fragment,
+  object: {
+    objectType: 'fragment',
+    objectId: '',
+  },
 }
 
 const readerTeam = {
   type: 'team',
   name: 'My readers',
   teamType: 'teamReaders',
-  object: fragment,
+  object: {
+    objectType: 'fragment',
+    objectId: '',
+  },
 }
 
 module.exports = {

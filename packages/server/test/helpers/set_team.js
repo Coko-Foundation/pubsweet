@@ -8,8 +8,8 @@ module.exports = (members, collection, team) =>
     team.name = 'Test team'
     team.members = members
     team.object = {
-      id: collection.id,
-      type: 'collection',
+      objectId: collection.id,
+      objectType: 'collection',
     }
 
     return api.teams.post(team, token).expect(STATUS.CREATED)

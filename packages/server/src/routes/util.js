@@ -46,8 +46,8 @@ Util.getTeams = async opts => {
   let teams
   try {
     teams = await opts.Team.findByField({
-      'object.id': opts.id,
-      'object.type': opts.type,
+      'object.objectId': opts.id,
+      'object.objectType': opts.type,
     })
 
     teams = await Promise.all(

@@ -163,7 +163,7 @@ describe('Fragments API', () => {
 
       // create the teams
       const teamFixture = Object.assign({}, fixtures.contributorTeam, {
-        object: { type: 'fragment', id: fragment.id },
+        object: { objectType: 'fragment', objectId: fragment.id },
       })
       await api.teams.post(teamFixture, token)
 
@@ -180,7 +180,7 @@ describe('Fragments API', () => {
       expect(teams[0]).toMatchObject({
         name: 'My contributors',
         object: {
-          type: 'fragment',
+          objectType: 'fragment',
         },
       })
     })
