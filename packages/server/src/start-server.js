@@ -39,6 +39,7 @@ const startServer = async (app = express()) => {
     server = undefined
     await stopJobQueue()
     await wait(500)
+    console.log('Killing the server!')
     // console.log(httpServer.originalClose)
     httpServer.originalClose(cb)
   }

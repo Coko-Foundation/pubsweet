@@ -1,3 +1,4 @@
+const log = require('why-is-node-running')
 const { startServer, jobs: { connectToJobQueue } } = require('../../src')
 
 const someHandler = async job => {
@@ -5,7 +6,7 @@ const someHandler = async job => {
   return Promise.resolve({ thing: 'theOtherThing' })
 }
 
-describe.skip('integrated job queue', () => {
+describe('integrated job queue', () => {
   let server
 
   beforeAll(async () => {
@@ -29,7 +30,7 @@ describe.skip('integrated job queue', () => {
     await jobQueue.onComplete(queueName, job => {
       try {
         expect(job.data.response).toEqual({ thing: 'theOtherThing' })
-        jobQueue.stop().then(() => done())
+        jobQueue.disconnect().then(() => done())
       } catch (e) {
         done.fail(e)
       }
@@ -38,3 +39,7 @@ describe.skip('integrated job queue', () => {
 
   afterAll(done => server.close(done))
 })
+
+setInterval(() => {
+  log() // logs out active handles that are keeping node running
+}, 10000)
