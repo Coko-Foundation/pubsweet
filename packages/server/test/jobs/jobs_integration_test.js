@@ -1,4 +1,3 @@
-const log = require('why-is-node-running')
 const { startServer, jobs: { connectToJobQueue } } = require('../../src')
 
 const someHandler = async job => {
@@ -39,7 +38,3 @@ describe('integrated job queue', () => {
 
   afterAll(done => server.close(done))
 })
-
-setInterval(() => {
-  log() // logs out active handles that are keeping node running
-}, 10000)
