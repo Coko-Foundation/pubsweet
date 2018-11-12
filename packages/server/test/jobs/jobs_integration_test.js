@@ -5,7 +5,7 @@ const someHandler = async job => {
   return Promise.resolve({ thing: 'theOtherThing' })
 }
 
-describe('integrated job queue', () => {
+describe.skip('integrated job queue', () => {
   let server
 
   beforeAll(async () => {
