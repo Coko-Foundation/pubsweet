@@ -107,9 +107,7 @@ describe('GraphQL subscriptions', () => {
     await wsLink.subscriptionClient.client.close()
   })
 
-  afterAll(async () => {
-    server.close()
-  })
+  afterAll(done => server.close(done))
 
   it('reports progress when fileSize is given', async () => {
     let done
