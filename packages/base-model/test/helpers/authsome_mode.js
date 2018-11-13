@@ -9,7 +9,11 @@ module.exports = async (userId, operation, object, context) => {
   }
 
   if (operation === 'publishManuscript') {
-    const isAuthor = object.current.owners.includes(user.id)
+    // Try to fetch the current Manuscript using the context
+    // to verify that you can, in fact, do it.
+    const manuscript = await context.models.Manuscript.find(object.current.id)
+    const isAuthor = manuscript.owners.includes(user.id)
+
     if (isAuthor && user.admin) {
       return true
     } else if (isAuthor) {
