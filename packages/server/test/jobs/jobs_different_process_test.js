@@ -16,7 +16,6 @@ describe('job runner in a different process', () => {
     await jobQueue.publish(queueName, { param: 'aThing' })
     await jobQueue.publish(queueName, { param: 'anotherThing' })
 
-    // console.log('global', global)
     const jobProcessorPath = path.resolve(__dirname, 'job_processor.js')
 
     let jobCount = 0
