@@ -11,11 +11,6 @@ const Root = styled.div`
   padding: ${th('gridUnit')};
 `
 
-// const Event = styled.div`
-//   font-size: ${th('fontSizeBaseSmall')};
-//   line-height: ${th('lineHeightBaseSmall')};
-// `
-
 const ordinalLetter = ordinal =>
   ordinal ? String.fromCharCode(96 + ordinal) : null
 
@@ -24,10 +19,10 @@ const Reviewer = ({ reviewer, removeReviewer }) => (
     <Avatar
       height={70}
       reviewerLetter={ordinalLetter(null)}
-      status={reviewer.status}
+      status={reviewer.status || ''}
       width={100}
     />
-    <div>{reviewer.user.username}</div>
+    <div>{reviewer.username}</div>
     {/* <div>
       {map(reviewer.events, (event, key) => (
         <Event key={`${key}-${event}`}>

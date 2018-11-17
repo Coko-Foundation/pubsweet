@@ -21,29 +21,36 @@ const ReviewerInput = loadOptions => ({
 }) => (
   <Select.AsyncCreatable
     {...field}
-    // autoload={false}
     filterOption={() => true}
     labelKey="username"
     loadOptions={loadOptions}
     onChange={user => {
       const teamIndex = (values.teams || []).findIndex(
-        team => team.role === 'reviewerEditor',
+        team => team.teamType === 'reviewerEditor',
       )
 
-      const member = {
-        status: 'invited',
-        user,
-      }
+      // const member = cloneDeep(user)
+      // const member = {
+      //   status: 'invited',
+      //   user,
+      // }
 
       if (teamIndex < 0) {
         const team = {
-          role: 'reviewerEditor',
-          members: [member],
+          object: {
+            objectId: values.id,
+            objectType: 'Manuscript',
+          },
+          status: [{ id: user.id, status: 'invited' }],
+          name: 'Reviewer Editor',
+          teamType: 'reviewerEditor',
+          members: [user.id], // member
         }
         push(team)
       } else {
         const newTeam = cloneDeep(values.teams[teamIndex])
-        newTeam.members.push(member)
+        newTeam.status.push({ id: user.id, status: 'invited' })
+        newTeam.members.push(user.id) // member
         replace(0, newTeam)
       }
     }}

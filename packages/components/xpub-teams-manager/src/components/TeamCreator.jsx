@@ -5,10 +5,10 @@ import { Button, Menu } from '@pubsweet/ui'
 
 const TeamCreator = ({
   teamTypeSelected,
-  collectionSelected,
-  collectionsOptions,
+  manuscriptSelected,
+  manuscriptsOptions,
   typesOptions,
-  onChangeCollection,
+  onChangeManuscript,
   onChangeType,
   onSave,
 }) => (
@@ -23,14 +23,14 @@ const TeamCreator = ({
       reset={teamTypeSelected}
       value={teamTypeSelected}
     />
-    <h4>Collection</h4>
+    <h4>Manuscript</h4>
     <Menu
       name="collection"
-      onChange={onChangeCollection}
-      options={collectionsOptions}
+      onChange={onChangeManuscript}
+      options={manuscriptsOptions}
       required
-      reset={collectionSelected}
-      value={collectionSelected}
+      reset={manuscriptSelected}
+      value={manuscriptSelected}
     />
     <Button primary type="submit">
       Create
@@ -39,20 +39,20 @@ const TeamCreator = ({
 )
 
 export default compose(
-  withState('collectionSelected', 'onCollectionSelect', false),
+  withState('manuscriptSelected', 'onManuscriptSelect', false),
   withState('teamTypeSelected', 'onTeamTypeSelect', false),
   withHandlers({
-    onChangeCollection: ({ onCollectionSelect }) => collectionId =>
-      onCollectionSelect(() => collectionId || false),
+    onChangeManuscript: ({ onManuscriptSelect }) => collectionId =>
+      onManuscriptSelect(() => collectionId || false),
     onChangeType: ({ onTeamTypeSelect }) => teamType =>
       onTeamTypeSelect(() => teamType || false),
     onSave: ({
       teamTypeSelected,
-      collectionSelected,
+      manuscriptSelected,
       create,
       typesOptions,
       onTeamTypeSelect,
-      onCollectionSelect,
+      onManuscriptSelect,
     }) => event => {
       event.preventDefault()
       const teamType = teamTypeSelected
@@ -60,9 +60,9 @@ export default compose(
       let objectId
       let objectType
 
-      if (collectionSelected) {
-        objectId = collectionSelected
-        objectType = 'collection'
+      if (manuscriptSelected) {
+        objectId = manuscriptSelected
+        objectType = 'Manuscript'
       }
 
       if (teamType && objectId && objectType) {
@@ -70,14 +70,14 @@ export default compose(
           name: find(typesOptions, types => types.value === teamType).label,
           teamType,
           object: {
-            id: objectId,
-            type: objectType,
+            objectId,
+            objectType,
           },
           members: [],
         })
 
         onTeamTypeSelect(() => true)
-        onCollectionSelect(() => true)
+        onManuscriptSelect(() => true)
       }
     },
   }),

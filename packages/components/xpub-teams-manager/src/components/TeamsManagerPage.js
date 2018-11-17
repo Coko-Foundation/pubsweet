@@ -1,8 +1,8 @@
 import { compose } from 'recompose'
+import { cloneDeep, omit } from 'lodash'
 import config from 'config'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
-import { withLoader } from 'pubsweet-client'
 
 import TeamsManager from './TeamsManager'
 
@@ -109,29 +109,38 @@ export default compose(
         label: user.username,
       }))
 
-      const collectionsOptions = ((data || {}).manuscripts || []).map(
-        collection => ({
-          value: collection.id,
-          label: collection.title,
-        }),
-      )
+      const manuscriptsOptions = ((data || {}).manuscripts || []).map(manu => ({
+        value: manu.id,
+        label: manu.meta.title,
+      }))
+
       const types = config.authsome.teams
       const typesOptions = Object.keys(types).map(type => ({
         value: type,
         label: `${types[type].name} ${types[type].permissions}`,
       }))
-
       return {
         teams: (data || {}).teams,
-        collectionsOptions,
+        manuscriptsOptions,
         userOptions,
         typesOptions,
       }
     },
   }),
   graphql(updateTeamMutation, {
-    props: () => {
-      const updateTeam = data => {}
+    props: ({ mutate }) => {
+      const updateTeam = (members, team) => {
+        const data = cloneDeep(team)
+        const input = omit(data, ['id', 'object.__typename', '__typename'])
+
+        input.members = members
+        mutate({
+          variables: {
+            id: team.id,
+            input,
+          },
+        })
+      }
 
       return {
         updateTeam,
@@ -139,22 +148,52 @@ export default compose(
     },
   }),
   graphql(deleteTeamMutation, {
-    props: () => {
-      const deleteTeam = data => {}
+    props: ({ mutate }) => {
+      const deleteTeam = data => {
+        mutate({
+          variables: {
+            id: data.id,
+          },
+        })
+      }
 
       return {
         deleteTeam,
       }
     },
+    options: {
+      update: (proxy, { data: { deleteTeam } }) => {
+        const data = proxy.readQuery({ query })
+        const teamsIndex = data.teams.findIndex(
+          team => team.id === deleteTeam.id,
+        )
+        if (teamsIndex > -1) {
+          data.teams.splice(teamsIndex, 1)
+          proxy.writeQuery({ query, data })
+        }
+      },
+    },
   }),
   graphql(createTeamMutation, {
-    props: () => {
-      const createTeam = data => {}
+    props: ({ mutate }) => {
+      const createTeam = input => {
+        mutate({
+          variables: {
+            input,
+          },
+        })
+      }
 
       return {
         createTeam,
       }
     },
+    options: {
+      update: (proxy, { data: { createTeam } }) => {
+        const data = proxy.readQuery({ query })
+        data.teams.push(createTeam)
+        proxy.writeQuery({ query, data })
+      },
+    },
   }),
-  withLoader(),
 )(TeamsManager)

@@ -7,8 +7,12 @@ export default {
     }
   `,
   reviewerResponseMutation: gql`
-    mutation($id: ID!, $response: String) {
-      reviewerResponse(id: $id, response: $response) {
+    mutation($currentUserId: ID!, $action: String, $teamId: ID!) {
+      reviewerResponse(
+        currentUserId: $currentUserId
+        action: $action
+        teamId: $teamId
+      ) {
         id
       }
     }

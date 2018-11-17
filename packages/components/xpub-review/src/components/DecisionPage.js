@@ -43,7 +43,8 @@ const fragmentFields = `
   decision
   teams {
     id
-    role
+    name
+    teamType
     members {
       id
       username

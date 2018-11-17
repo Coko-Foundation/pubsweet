@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash'
 import { Menu } from '@pubsweet/ui'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
-// import { addUserToTeam } from '../../redux/teams'
+import { withLoader } from 'pubsweet-client'
 
 const editorOption = user => ({
   label: user.username, // TODO: name
@@ -13,8 +13,8 @@ const editorOption = user => ({
 
 const teamFields = `
   id
-  role
   name
+  teamType
   object {
     objectId
     objectType
@@ -46,16 +46,12 @@ const query = gql`
       username
       admin
     }
-
-    teams {
-      ${teamFields}
-    }
   }
 `
 
 const updateTeam = gql`
-  mutation($id: ID!, $input: String) {
-    assignTeamEditor(id: $id, input: $input) {
+  mutation($id: ID!, $input: TeamInput) {
+    updateTeam(id: $id, input: $input) {
       ${teamFields}
     } 
   }
@@ -79,27 +75,15 @@ export default compose(
   graphql(updateTeam, {
     props: ({ mutate, ownProps }) => {
       const updateTeam = (userId, teamRole) => {
-        const teams = cloneDeep(ownProps.data.teams).find(
-          team =>
-            team.role === teamRole &&
-            team.object.id === ownProps.manuscript.id &&
-            team.objectType === 'manuscript',
+        const team = cloneDeep(ownProps.manuscript.teams).find(
+          team => team.teamType === teamRole,
         )
-
-        const member = teams.members.find(member => member.user.id === userId)
-        const team = cloneDeep(teams)
-        team.members = [member]
-
-        const { manuscript } = cloneDeep(ownProps)
-        const replacePrevious = manuscript.teams.filter(
-          team => team.role !== teamRole,
-        )
-        replacePrevious.push(team)
-
         mutate({
           variables: {
-            id: ownProps.manuscript.id,
-            input: JSON.stringify({ teams: replacePrevious }),
+            id: team.id,
+            input: {
+              members: [userId],
+            },
           },
         })
       }
@@ -109,24 +93,18 @@ export default compose(
       }
     },
   }),
-  withProps(({ teamRole, manuscript, data: { users, teams } }) => {
-    const filteredTeams = (teams || []).find(
-      team =>
-        team.role === teamRole &&
-        team.object.id === manuscript.id &&
-        team.objectType === 'manuscript',
-    )
-    const members = ((filteredTeams || {}).members || []).map(
-      members => members.user,
-    )
-    const optionUsers = members.map(user => editorOption(user))
+  withProps(({ teamRole, manuscript, data = {} }) => {
+    const optionUsers = (data.users || []).map(user => editorOption(user))
 
+    const team =
+      (manuscript.teams || []).find(team => team.teamType === teamRole) || {}
+
+    const members = team.members || []
     return {
-      filteredTeams,
-      teams,
-      teamName: (filteredTeams || {}).name,
+      teamName: team.name,
       options: optionUsers,
-      value: (manuscript.teams || []).find(team => team.teamRole),
+      value: team.members.length > 0 ? members[0].id : undefined,
     }
   }),
+  withLoader(),
 )(AssignEditor)

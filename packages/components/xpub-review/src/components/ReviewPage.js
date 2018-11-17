@@ -7,6 +7,31 @@ import { withLoader } from 'pubsweet-client'
 // import uploadFile from 'xpub-upload'
 import ReviewLayout from '../components/review/ReviewLayout'
 
+const reviewFields = `
+  id
+  created
+  updated
+  comments {
+    type
+    content
+    files {
+      id
+      created
+      label
+      filename
+      fileType
+      mimeType
+      size
+      url
+    }
+  }
+  recommendation
+  user {
+    id
+    username
+  }
+`
+
 const fragmentFields = `
   id
   created
@@ -21,32 +46,25 @@ const fragmentFields = `
     url
   }
   reviews {
-    open
-    recommendation
-    created
-    comments {
-      type
-      content
-      files {
-        fileType
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
+    ${reviewFields}
   }
   decision
   teams {
     id
-    role
+    name
+    teamType
+    object {
+      objectId
+      objectType
+    }
+    objectType
     members {
       id
       username
+    }
+    status {
+      id
+      status
     }
   }
   status
@@ -87,21 +105,13 @@ const fragmentFields = `
   }
 `
 
-// teams {
-//   id
-//   role
-//   object {
-//     id
-//   }
-//   objectType
-//   members {
-//     status
-//     user {
-//       id
-//       username
-//     }
-//   }
-// }
+const updateReviewMutation = gql`
+  mutation($id: ID!, $input: ReviewInput) {
+    updateReview(id: $id, input: $input) {
+      ${reviewFields}
+    }
+  }
+`
 
 const query = gql`
   query($id: ID!) {
@@ -120,11 +130,25 @@ const query = gql`
   }
 `
 
-const submitReviewMutation = gql`
-  mutation($id: ID!, $input: String) {
-    updateManuscript(id: $id, input: $input) {
+const uploadReviewFilesMutation = gql`
+  mutation($file: Upload!) {
+    upload(file: $file) {
+      url
+    }
+  }
+`
+
+const createFileMutation = gql`
+  mutation($file: Upload!) {
+    createFile(file: $file) {
       id
-      ${fragmentFields}
+      created
+      label
+      filename
+      fileType
+      mimeType
+      size
+      url
     }
   }
 `
@@ -138,30 +162,76 @@ export default compose(
       },
     }),
   }),
-  graphql(submitReviewMutation, {
-    props: ({ mutate, ownProps: { data } }) => ({
-      onSubmit: (review, { history }) => {
+  graphql(createFileMutation, {
+    props: ({ mutate, ownProps }) => ({
+      createFile: file => {
         mutate({
           variables: {
-            id: data.manuscript.id,
-            input: JSON.stringify(review),
+            file,
           },
-        }).then(() => {
-          history.push('/')
         })
       },
     }),
   }),
+  graphql(uploadReviewFilesMutation, {
+    props: ({ mutate, ownProps }) => ({
+      uploadFile: file =>
+        mutate({
+          variables: {
+            file,
+          },
+        }),
+    }),
+  }),
+  graphql(updateReviewMutation, { name: 'updateReviewMutation' }),
   withLoader(),
-  withProps(({ manuscript, currentUser, match: { params: { journal } } }) => ({
-    journal: { id: journal },
-    review: manuscript.reviews.find(
-      review => review.user.id === currentUser.id,
-    ),
-    status: manuscript.teams
-      .find(team => team.role === 'reviewerEditor')
-      .members.find(member => member.user.id === currentUser.id).status,
-  })),
+  withProps(
+    ({
+      manuscript,
+      currentUser,
+      match: {
+        params: { journal },
+      },
+      updateReviewMutation,
+      uploadFile,
+      createFile,
+    }) => ({
+      journal: { id: journal },
+      review:
+        manuscript.reviews.find(review => review.user.id === currentUser.id) ||
+        {},
+      status: manuscript.teams
+        .find(team => team.teamType === 'reviewerEditor')
+        .status.find(status => status.id === currentUser.id).status,
+      updateReview: (review, file) => {
+        if (review) {
+          review.manuscript_id = manuscript.id
+          review.user_id = currentUser.id
+          updateReviewMutation({
+            variables: {
+              id: this.review.id || null,
+              input: review,
+            },
+          }).then(review => {
+            if (file) {
+              uploadFile(file).then(data => {
+                const newFile = {
+                  url: data.upload.url,
+                  filename: file.name,
+                  mimeType: file.type,
+                  size: file.size,
+                  object: 'Review',
+                  object_id: review.id,
+                  fileType: file.type,
+                }
+                createFile(newFile)
+              })
+            }
+          })
+        }
+      },
+    }),
+  ),
   withFormik({
     initialValues: {},
     mapPropsToValues: ({ manuscript, currentUser }) =>

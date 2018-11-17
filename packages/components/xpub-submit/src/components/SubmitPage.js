@@ -109,12 +109,6 @@ const updateMutation = gql`
   }
 `
 
-// const uploadSubscription = gql`
-//   subscription {
-//     uploadProgress
-//   }
-// `
-
 const uploadSuplementaryFilesMutation = gql`
   mutation($file: Upload!) {
     upload(file: $file) {
@@ -209,21 +203,6 @@ export default compose(
             id: ownProps.match.params.version,
             input: JSON.stringify(updateManuscript),
           },
-          // update: (proxy, { data: { updateManuscript } }) => {
-          //   proxy.writeQuery({
-          //     query: gql`
-          //     query($id: ID!) {
-          //       manuscript(id: $id) {
-          //         ${fragmentFields}
-          //       }
-          //     }
-          //     `,
-          //     variables: {
-          //       id: ownProps.match.params.version,
-          //     },
-          //     data: { manuscript: data },
-          //   })
-          // },
         }).then(() => {
           history.push('/')
         })

@@ -2,6 +2,7 @@ import { compose, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { withLoader } from 'pubsweet-client'
+import { cloneDeep } from 'lodash'
 
 import Reviewers from '../components/reviewers/Reviewers'
 import ReviewerFormContainer from '../components/reviewers/ReviewerFormContainer'
@@ -16,7 +17,7 @@ const fragmentFields = `
     label
     filename
     mimeType
-    type
+    fileType
     size
     url
   }
@@ -28,7 +29,7 @@ const fragmentFields = `
       type
       content
       files {
-        type
+        fileType
         id
         label
         url
@@ -40,92 +41,44 @@ const fragmentFields = `
       username
     }
   }
-  decision {
-    status
-    created
-    comments {
-      type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
-  }
+  decision
   teams {
     id
-    role
+    name
+    teamType
     object {
-      id
+      objectId
+      objectType
     }
     objectType
     members {
+      id
+      username
+    }
+    status {
+      id
       status
-      user {
-        id
-        username
-      }
     }
   }
   status
-  meta {
-    title
-    abstract
-    declarations {
-      openData
-      openPeerReview
-      preregistered
-      previouslySubmitted
-      researchNexus
-      streamlinedReview
-    }
-    articleSections
-    articleType
-    history {
-      type
-      date
-    }
-    notes {
-      id
-      created
-      notesType
-      content
-    }
-    keywords
-  }
-  suggestions {
-    reviewers {
-      opposed
-      suggested
-    }
-    editors {
-      opposed
-      suggested
-    }
-  }
 `
 
 const teamFields = `
   id
   role
+  teamType
   name
   object {
-    id
+    objectId
   }
   objectType
   members {
+    id
+    username
+  }
+  status {
+    id
     status
-    user {
-      id
-      username
-    }
   }
 `
 
@@ -166,13 +119,22 @@ export default compose(
     const reviewerTeams =
       manuscript.teams.find(
         team =>
-          team.role === 'reviewerEditor' &&
-          team.object.id === manuscript.id &&
-          team.objectType === 'manuscript',
+          team.teamType === 'reviewerEditor' &&
+          team.object.objectId === manuscript.id &&
+          team.object.objectType === 'Manuscript',
       ) || {}
 
+    // Temporary solution until new Team model is back
+    const mem = cloneDeep(reviewerTeams.members)
+    mem.map(member => {
+      const status = reviewerTeams.status.find(
+        status => status.id === member.id,
+      )
+      member.status = (status || {}).status
+      return member
+    })
     return {
-      reviewers: reviewerTeams.members || [],
+      reviewers: mem || [],
       journal: { id: journal },
       reviewerUsers: users,
       Reviewer: ReviewerContainer,

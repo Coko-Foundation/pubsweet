@@ -22,8 +22,8 @@ export default compose(
   }),
   graphql(mutations.reviewerResponseMutation, {
     props: ({ mutate }) => ({
-      reviewerResponse: (manuscript, response) =>
-        mutate({ variables: { id: manuscript.id, response } }),
+      reviewerResponse: (currentUserId, action, teamId) =>
+        mutate({ variables: { currentUserId, action, teamId } }),
     }),
   }),
   graphql(mutations.deleteManuscriptMutation, {

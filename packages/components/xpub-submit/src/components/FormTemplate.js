@@ -120,19 +120,6 @@ const composeValidate = (vld = [], valueField = {}) => value => {
   return errors.length > 0 ? errors[0] : undefined
 }
 
-// const createObject = (key, value) => {
-//   const obj = {}
-//   const parts = key.split('.')
-//   if (parts.length === 1) {
-//     obj[parts[0]] = value
-//   } else if (parts.length > 1) {
-//     // concat all but the first part of the key
-//     const remainingParts = parts.slice(1, parts.length).join('.')
-//     obj[parts[0]] = createObject(remainingParts, value)
-//   }
-//   return obj
-// }
-
 const groupElements = elements => {
   const grouped = groupBy(elements, n => n.group || 'default')
 

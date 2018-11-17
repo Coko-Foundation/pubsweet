@@ -21,14 +21,14 @@ const ReviewLayout = ({
   review,
   reviewer,
   handleSubmit,
-  uploadFile,
   isValid,
   status,
+  updateReview,
 }) => {
   const reviewSections = []
   const editorSections = []
-
-  manuscript.manuscriptVersions.forEach(manuscript => {
+  const manuscriptVersions = manuscript.manuscriptVersions || []
+  manuscriptVersions.forEach(manuscript => {
     const label = moment().format('YYYY-MM-DD')
     reviewSections.push({
       content: (
@@ -54,13 +54,13 @@ const ReviewLayout = ({
     content: (
       <div>
         <ReviewMetadata manuscript={manuscript} />
-        {status === 'accepted' && review.recommendation !== '' ? (
+        {status === 'completed' ? (
           <Review review={review} />
         ) : (
           <ReviewForm
             handleSubmit={handleSubmit}
             isValid={isValid}
-            uploadFile={uploadFile}
+            updateReview={updateReview}
           />
         )}
       </div>

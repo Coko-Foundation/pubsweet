@@ -4,62 +4,61 @@ import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import ReviewerForm from './ReviewerForm'
 
-const fragmentFields = `
-  created
-  reviews {
-    open
-    recommendation
-    created
-    comments {
+const createTeamMutation = gql`
+  mutation($input: TeamInput!) {
+    createTeam(input: $input) {
+      id
       type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
+      teamType
+      name
+      object {
+        objectId
+        objectType
       }
-    }
-    user {
-      id
-      username
-    }
-  }
-  teams {
-    id
-    role
-    object {
-      id
-    }
-    objectType
-    members {
-      status
-      user {
+      members {
         id
         username
       }
     }
   }
-  status
 `
 
-const updateMutation = gql`
-  mutation($id: ID!, $input: String) {
-    updateManuscript(id: $id, input: $input) {
+const updateTeamMutation = gql`
+  mutation($id: ID, $input: TeamInput) {
+    updateTeam(id: $id, input: $input) {
       id
-      ${fragmentFields}
+      type
+      teamType
+      name
+      object {
+        objectId
+        objectType
+      }
+      members {
+        id
+        username
+      }
     }
   }
 `
 
 const handleSubmit = (manuscript, { props }) => {
-  props.updateMutation({
-    variables: {
-      id: manuscript.id,
-      input: JSON.stringify(manuscript),
-    },
-  })
+  const team = manuscript.teams.find(team => team.teamType === 'reviewerEditor')
+
+  if (team.id) {
+    props.updateTeamMutation({
+      variables: {
+        id: team.id,
+        input: team,
+      },
+    })
+  } else {
+    props.createTeamMutation({
+      variables: {
+        input: team,
+      },
+    })
+  }
 }
 
 const loadOptions = props => input => {
@@ -69,7 +68,8 @@ const loadOptions = props => input => {
 }
 
 export default compose(
-  graphql(updateMutation, { name: 'updateMutation' }),
+  graphql(createTeamMutation, { name: 'createTeamMutation' }),
+  graphql(updateTeamMutation, { name: 'updateTeamMutation' }),
   withHandlers({
     loadOptions: props => loadOptions(props),
   }),
