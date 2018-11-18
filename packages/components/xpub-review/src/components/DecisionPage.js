@@ -49,6 +49,10 @@ const fragmentFields = `
       id
       username
     }
+    status {
+      id
+      status
+    }
   }
   status
   meta {

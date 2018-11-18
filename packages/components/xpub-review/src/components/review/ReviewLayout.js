@@ -24,6 +24,7 @@ const ReviewLayout = ({
   isValid,
   status,
   updateReview,
+  uploadFile,
 }) => {
   const reviewSections = []
   const editorSections = []
@@ -34,11 +35,7 @@ const ReviewLayout = ({
       content: (
         <div>
           <ReviewMetadata manuscript={manuscript} />
-          <Review
-            review={manuscript.reviews.find(
-              review => review.user.id === currentUser.id,
-            )}
-          />
+          <Review review={review} />
         </div>
       ),
       key: manuscript.id,
@@ -60,7 +57,9 @@ const ReviewLayout = ({
           <ReviewForm
             handleSubmit={handleSubmit}
             isValid={isValid}
+            review={review}
             updateReview={updateReview}
+            uploadFile={uploadFile}
           />
         )}
       </div>

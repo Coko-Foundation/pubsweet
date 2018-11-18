@@ -3,90 +3,67 @@ import styled from 'styled-components'
 import { cloneDeep, set } from 'lodash'
 import { Field, FieldArray } from 'formik'
 import { NoteEditor } from 'xpub-edit'
-import { Button, RadioGroup, FileUploadList, UploadingFile } from '@pubsweet/ui' // Attachments
+import {
+  Button,
+  Flexbox,
+  RadioGroup,
+  UploadButton,
+  UploadingFile,
+} from '@pubsweet/ui'
 
 import { withJournal } from 'xpub-journal'
-import { required } from 'xpub-validators'
-
+import {
+  getCommentFiles,
+  getCommentContent,
+  stripHtml,
+  createComments,
+} from './util'
 import AdminSection from '../atoms/AdminSection'
-
-const stripHtml = htmlString => {
-  const temp = document.createElement('span')
-  temp.innerHTML = htmlString
-  return temp.textContent
-}
-
-const createComments = (values, val, type) => {
-  let updateIndex = (values.comments || []).findIndex(
-    comment => comment.type === type,
-  )
-  updateIndex =
-    (values.comments || []).length > 0 && updateIndex < 0 ? 1 : updateIndex
-  updateIndex = updateIndex < 0 ? 0 : updateIndex
-
-  const comment = Object.assign(
-    {
-      type,
-      content: '',
-      files: [],
-    },
-    (values.comments || [])[updateIndex],
-    val,
-  )
-
-  return { updateIndex, comment }
-}
 
 const AttachmentsInput = type => ({
   field,
-  form: { values, handleChange },
-  replace,
+  form: { values },
   updateReview,
-}) => (
-  <FileUploadList
+  uploadFile,
+  review,
+}) => [
+  <UploadButton
     buttonText="↑ Upload files"
-    FileComponent={UploadingFile}
-    files={
-      ((values.comments || []).find(comment => comment.type === type) || {})
-        .files || []
-    }
-    uploadFile={val => {
-      const file = {
-        filename: val.name,
-        name: val.name,
-        size: val.size,
-        fileType: val.type,
-        type: 'attachments',
-      }
+    onChange={event => {
+      const val = event.target.files[0]
+      const file = cloneDeep(val)
+      file.filename = val.name
+      file.type = type
+
       const { updateIndex, comment } = createComments(
-        values,
+        review,
         { files: [file] },
         type,
       )
-      replace(updateIndex, comment)
 
-      const data = cloneDeep(values)
+      const data = cloneDeep(review)
       set(data, `comments.${updateIndex}`, comment)
 
-      updateReview(data, file)
-      // uploadFile(file).then(({ data }) => {
-      //   const newFile = {
-      //     url: data.upload.url,
-      //     filename: file.name,
-      //     mimeType: file.type,
-      //     size: file.size,
-      //   }
-      //   createFile(newFile)
-      // })
+      updateReview(data).then(({ data: { updateReview } }) => {
+        uploadFile(val, updateReview, type)
+      })
     }}
-  />
-)
+  />,
+  <Flexbox>
+    {getCommentFiles(review, type).map(val => {
+      const file = cloneDeep(val)
+      file.name = file.filename
+      return <UploadingFile file={file} key={file.name} uploaded />
+    })}
+  </Flexbox>,
+]
 
 const NoteInput = ({
   field,
   form: { values },
   replace,
   push,
+  review,
   updateReview,
 }) => (
   <NoteEditor
@@ -102,69 +79,65 @@ const NoteInput = ({
         },
         'note',
       )
-      replace(updateIndex, comment)
+
+      const data = cloneDeep(review)
+      set(data, `comments.${updateIndex}`, comment)
+
+      updateReview(data)
     }}
-    value={
-      ((values.comments || []).find(value => value.type === 'note') || {})
-        .content || ''
-    }
+    value={getCommentContent(review, 'note')}
   />
 )
 
-const ConfidentialInput = ({
-  field,
-  form: { values },
-  replace,
-  push,
-  updateReview,
-}) => (
+const ConfidentialInput = ({ field, review, updateReview }) => (
   <NoteEditor
     placeholder="Enter a confidential note to the editor (optional)…"
     title="Confidential Comments to Editor (Optional)"
     {...field}
     onBlur={value => {
       const { updateIndex, comment } = createComments(
-        values,
+        review,
         {
           type: 'confidential',
           content: stripHtml(value),
         },
         'confidential',
       )
-      replace(updateIndex, comment)
+      const data = cloneDeep(review)
+      set(data, `comments.${updateIndex}`, comment)
+      updateReview(data)
     }}
-    value={
-      (
-        (values.comments || []).find(value => value.type === 'confidential') ||
-        {}
-      ).content || ''
-    }
+    value={getCommentContent(review, 'confidential')}
   />
 )
 
-const RecommendationInput = journal => ({ form, field, updateReview }) => (
+const RecommendationInput = journal => ({ field, updateReview, review }) => (
   <RadioGroup
     inline
-    options={journal.recommendations}
-    {...field}
     onChange={val => {
-      form.setFieldValue(`${field.name}`, val, true)
+      const data = cloneDeep(review)
+      set(data, 'recommendation', val)
+      updateReview(data)
     }}
+    options={journal.recommendations}
+    value={review.recommendation}
   />
 )
 
-const ReviewComment = updateReview => props => [
+const ReviewComment = (updateReview, uploadFile, review) => props => [
   <AdminSection>
     <div name="note">
       <Field
         component={NoteInput}
+        review={review}
         updateReview={updateReview}
-        validate={required}
         {...props}
       />
       <Field
         component={AttachmentsInput('note')}
+        review={review}
         updateReview={updateReview}
+        uploadFile={uploadFile}
         {...props}
       />
     </div>
@@ -173,12 +146,15 @@ const ReviewComment = updateReview => props => [
     <div name="confidential">
       <Field
         component={ConfidentialInput}
+        review={review}
         updateReview={updateReview}
         {...props}
       />
       <Field
         component={AttachmentsInput('confidential')}
+        review={review}
         updateReview={updateReview}
+        uploadFile={uploadFile}
         {...props}
       />
     </div>
@@ -187,16 +163,27 @@ const ReviewComment = updateReview => props => [
 
 const Title = styled.div``
 
-const ReviewForm = ({ journal, isValid, handleSubmit, updateReview }) => (
+const ReviewForm = ({
+  journal,
+  isValid,
+  handleSubmit,
+  updateReview,
+  uploadFile,
+  review,
+}) => (
   <form onSubmit={handleSubmit}>
-    <FieldArray component={ReviewComment(updateReview)} name="comments" />
+    <FieldArray
+      component={ReviewComment(updateReview, uploadFile, review)}
+      name="comments"
+    />
     <AdminSection>
       <div name="Recommendation">
         <Title>Recommendation</Title>
         <Field
           component={RecommendationInput(journal)}
           name="recommendation"
-          validate={required}
+          review={review}
+          updateReview={updateReview}
         />
       </div>
     </AdminSection>

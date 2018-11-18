@@ -24,20 +24,6 @@ const teamFields = `
     username
   }
 `
-// id
-//   role
-//   name
-//   object {
-//     id
-//   }
-//   objectType
-//   members {
-//     status
-//     user {
-//       id
-//       username
-//     }
-//   }
 
 const query = gql`
   {

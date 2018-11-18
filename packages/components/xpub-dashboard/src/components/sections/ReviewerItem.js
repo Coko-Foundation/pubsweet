@@ -37,20 +37,21 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
         <Body>
           <VersionTitle version={version} />
 
-          {status === 'accepted' && (
-            <Links>
-              <LinkContainer>
-                <JournalLink
-                  id={version.id}
-                  journal={journals}
-                  page="reviews"
-                  version={version}
-                >
-                  {review.recommendation ? 'Completed' : 'Do Review'}
-                </JournalLink>
-              </LinkContainer>
-            </Links>
-          )}
+          {status === 'accepted' ||
+            (status === 'completed' && (
+              <Links>
+                <LinkContainer>
+                  <JournalLink
+                    id={version.id}
+                    journal={journals}
+                    page="reviews"
+                    version={version}
+                  >
+                    {review.recommendation ? 'Completed' : 'Do Review'}
+                  </JournalLink>
+                </LinkContainer>
+              </Links>
+            ))}
 
           {status === 'invited' && (
             <Actions>
