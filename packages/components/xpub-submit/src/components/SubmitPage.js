@@ -23,6 +23,7 @@ const fragmentFields = `
     open
     recommendation
     created
+    isDecision
     comments {
       content
     }
@@ -39,6 +40,7 @@ const fragmentFields = `
       username
     }
   }
+  decision
   status
   meta {
     title

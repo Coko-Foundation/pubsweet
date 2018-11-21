@@ -58,14 +58,7 @@ const AttachmentsInput = type => ({
   </Flexbox>,
 ]
 
-const NoteInput = ({
-  field,
-  form: { values },
-  replace,
-  push,
-  review,
-  updateReview,
-}) => (
+const NoteInput = ({ field, form: { values }, review, updateReview }) => (
   <NoteEditor
     placeholder="Enter your review…"
     title="Comments to the Author"

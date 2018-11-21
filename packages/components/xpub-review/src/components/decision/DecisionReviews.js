@@ -21,7 +21,8 @@ const DecisionReviews = ({ manuscript }) => (
       manuscript.reviews
         .filter(
           review =>
-            getCompletedReviews(manuscript, review.user) === 'completed',
+            getCompletedReviews(manuscript, review.user) === 'completed' &&
+            review.isDecision === false,
         )
         .map((review, index) => (
           <div key={review.id}>

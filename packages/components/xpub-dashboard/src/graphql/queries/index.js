@@ -14,6 +14,9 @@ export default {
         title
         manuscripts {
           id
+          manuscriptVersions {
+            id
+          }
           reviews {
             open
             recommendation

@@ -313,10 +313,10 @@ export default compose(
   ),
   withFormik({
     isInitialValid: ({ review }) => {
-      let isValid = review.recommendation != null
-      isValid =
-        getCommentContent(review, 'note') === '' || !isValid ? false : isValid
-      return isValid
+      const isRecommendation = review.recommendation != null
+      const isCommented = getCommentContent(review, 'note') !== ''
+
+      return isCommented && isRecommendation
     },
     displayName: 'review',
     handleSubmit: (props, { props: { completeReview, history } }) =>

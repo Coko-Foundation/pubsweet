@@ -20,10 +20,12 @@ const addEditor = (manuscript, label) => ({
 
 const DecisionLayout = ({
   handleSubmit,
-  handleChangeFn,
+  review,
+  updateReview,
   uploadFile,
   manuscript,
   journal,
+  isValid,
 }) => {
   const decisionSections = []
   const editorSections = []
@@ -32,12 +34,15 @@ const DecisionLayout = ({
     const { decision } = manuscript
     const submittedMoment = moment(decision.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
+
     decisionSections.push({
       content: (
         <div>
           <ReviewMetadata manuscript={manuscript} />
           <DecisionReviews manuscript={manuscript} />
-          <Decision decision={manuscript.decision} />
+          <Decision
+            review={manuscript.reviews.find(review => review.isDecision)}
+          />
         </div>
       ),
       key: manuscript.id,
@@ -67,8 +72,10 @@ const DecisionLayout = ({
         </AdminSection>
         <AdminSection>
           <DecisionForm
-            handleChangeFn={handleChangeFn}
             handleSubmit={handleSubmit}
+            isValid={isValid}
+            review={review}
+            updateReview={updateReview}
             uploadFile={uploadFile}
           />
         </AdminSection>

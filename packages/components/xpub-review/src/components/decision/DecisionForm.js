@@ -1,92 +1,136 @@
 import React from 'react'
 import { NoteEditor } from 'xpub-edit'
-import { Button, RadioGroup, FileUploadList, UploadingFile } from '@pubsweet/ui'
+import { cloneDeep, set } from 'lodash'
 import { FieldArray, Field } from 'formik'
 import { withJournal } from 'xpub-journal'
 import { required } from 'xpub-validators'
+import {
+  Button,
+  Flexbox,
+  RadioGroup,
+  UploadButton,
+  UploadingFile,
+} from '@pubsweet/ui'
+
+import {
+  getCommentFiles,
+  getCommentContent,
+  stripHtml,
+  createComments,
+} from '../review/util'
 
 import AdminSection from '../atoms/AdminSection'
 
-const stripHtml = htmlString => {
-  const temp = document.createElement('span')
-  temp.innerHTML = htmlString
-  return temp.textContent
-}
-
-const createComments = (values, val) =>
-  Object.assign(
-    {
-      type: 'note',
-      content: '',
-      files: [],
-    },
-    values.decision.comments[0],
-    val,
-  )
-
-const getDecision = values =>
-  values.reviews.find(review => review.isDecision === true) || {}
-
-const NoteDecision = uploadFile => props => (
+const NoteDecision = (updateReview, uploadFile, review) => props => (
   <AdminSection>
-    <Field component={NoteInput} validate={required} {...props} />
-    <Field component={AttachmentsInput} uploadFile={uploadFile} {...props} />
+    <Field
+      component={NoteInput}
+      review={review}
+      updateReview={updateReview}
+      validate={required}
+      {...props}
+    />
+    <Field
+      component={AttachmentsInput('note')}
+      review={review}
+      updateReview={updateReview}
+      uploadFile={uploadFile}
+      {...props}
+    />
   </AdminSection>
 )
 
-const NoteInput = ({ field, form: { values, handleChange }, replace }) => (
+const NoteInput = ({ field, form: { values }, review, updateReview }) => (
   <NoteEditor
     {...field}
-    onChange={val => {
-      replace(0, createComments(values, { content: stripHtml(val) }))
+    onBlur={value => {
+      const { updateIndex, comment } = createComments(
+        values,
+        {
+          type: 'note',
+          content: stripHtml(value),
+        },
+        'note',
+      )
+
+      const data = cloneDeep(review)
+      set(data, `comments.${updateIndex}`, comment)
+
+      updateReview(data)
     }}
     placeholder="Write/paste your decision letter here, or upload it using the upload button on the right."
     title="Decision"
-    value={field.value.length > 0 ? field.value[0].content : ''}
+    value={getCommentContent(review, 'note')}
   />
 )
 
-const AttachmentsInput = ({
+const AttachmentsInput = type => ({
   field,
-  form: { values, handleChange },
-  replace,
-}) => (
-  <FileUploadList
+  form: { values },
+  updateReview,
+  uploadFile,
+  review,
+}) => [
+  <UploadButton
     buttonText="↑ Upload files"
-    FileComponent={UploadingFile}
-    files={((getDecision(values).comments || [])[0] || {}).files || []}
-    uploadFile={val => {
-      const file = {
-        filename: val.name,
-        name: val.name,
-        size: val.size,
-        fileType: val.type,
-        type: 'note',
-      }
-      replace(0, createComments(values, { files: [file] }))
-    }}
-  />
-)
+    onChange={event => {
+      const val = event.target.files[0]
+      const file = cloneDeep(val)
+      file.filename = val.name
+      file.type = type
 
-const RecommendationInput = journal => ({ form, field }) => (
+      const { updateIndex, comment } = createComments(
+        review,
+        { files: [file] },
+        type,
+      )
+
+      const data = cloneDeep(review)
+      set(data, `comments.${updateIndex}`, comment)
+
+      updateReview(data).then(({ data: { updateReview } }) => {
+        uploadFile(val, updateReview, type)
+      })
+    }}
+  />,
+  <Flexbox>
+    {getCommentFiles(review, type).map(val => {
+      const file = cloneDeep(val)
+      file.name = file.filename
+      return <UploadingFile file={file} key={file.name} uploaded />
+    })}
+  </Flexbox>,
+]
+
+const RecommendationInput = journal => ({ field, updateReview, review }) => (
   <RadioGroup
     {...field}
     inline
     onChange={val => {
-      form.setFieldValue(`${field.name}`, val, true)
+      const data = cloneDeep(review)
+      set(data, 'recommendation', val)
+      updateReview(data)
     }}
     options={journal.recommendations}
-    required
+    value={review.recommendation}
   />
 )
 
-const DecisionForm = ({ journal, handleSubmit, uploadFile, ...props }) => (
+const DecisionForm = ({
+  journal,
+  handleSubmit,
+  uploadFile,
+  updateReview,
+  review,
+  status,
+  isValid,
+}) => (
   <form onSubmit={handleSubmit}>
     <AdminSection>
       <div name="note">
         <FieldArray
-          component={NoteDecision(uploadFile)}
-          name="decision.comments"
+          component={NoteDecision(updateReview, uploadFile, review)}
+          name="comments"
         />
       </div>
     </AdminSection>
@@ -94,14 +138,14 @@ const DecisionForm = ({ journal, handleSubmit, uploadFile, ...props }) => (
     <AdminSection>
       <Field
         component={RecommendationInput(journal)}
-        name="decision.status"
-        validate={required}
-        {...props}
+        name="decision"
+        review={review}
+        updateReview={updateReview}
       />
     </AdminSection>
 
     <AdminSection>
-      <Button primary type="submit">
+      <Button disabled={!isValid} primary type="submit">
         Submit
       </Button>
     </AdminSection>

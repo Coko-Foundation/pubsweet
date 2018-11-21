@@ -15,9 +15,10 @@ import VersionTitle from './VersionTitle'
 // TODO: review id in link
 
 const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
-  const team = version.teams.find(team => team.teamType === 'reviewerEditor')
+  const team =
+    (version.teams || []).find(team => team.teamType === 'reviewerEditor') || {}
   const { status } =
-    team.status.filter(member => member.id === currentUser.id)[0] || {}
+    (team.status || []).filter(member => member.id === currentUser.id)[0] || {}
 
   // Enable that when Team Models is updated
   // const { status } =

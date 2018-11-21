@@ -89,7 +89,7 @@ export default compose(
     return {
       teamName: team.name,
       options: optionUsers,
-      value: team.members.length > 0 ? members[0].id : undefined,
+      value: members.length > 0 ? members[0].id : undefined,
     }
   }),
   withLoader(),
