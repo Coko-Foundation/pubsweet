@@ -1,5 +1,5 @@
 const dbCleaner = require('./helpers/db_cleaner')
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 const fixtures = require('./fixtures/fixtures')
 

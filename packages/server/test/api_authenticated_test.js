@@ -7,7 +7,7 @@ const setTeamForCollection = require('./helpers/set_team')
 const fixtures = require('./fixtures/fixtures')
 
 const Fragment = require('../src/models/Fragment')
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 describe('authenticated api', () => {
   let otherUser
@@ -20,7 +20,7 @@ describe('authenticated api', () => {
     ;({ user, collection } = await createBasicCollection())
     // Create another user without any roles
     otherUser = new User(fixtures.updatedUser)
-    await otherUser.save()
+    otherUser = await otherUser.save()
   })
 
   it(`fails to create a fragment in a protected

@@ -1,4 +1,4 @@
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
 const api = require('../src/app')(require('express')())

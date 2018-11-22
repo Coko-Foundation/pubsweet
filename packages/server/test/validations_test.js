@@ -6,12 +6,7 @@ const validations = require('../src/models/validations')(appValidations)
 
 describe('Validations export', () => {
   it('has validations for each type', () => {
-    expect(Object.keys(validations).sort()).toEqual([
-      'collection',
-      'fragment',
-      'team',
-      'user',
-    ])
+    expect(Object.keys(validations).sort()).toEqual(['collection', 'fragment'])
   })
 
   it('allows fragment with required fields', () => {
