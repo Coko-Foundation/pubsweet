@@ -10,23 +10,26 @@ jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
 
-jest.mock('pubsweet-server/src/models/Team', () => () => ({
-  find: jest.fn(() => ({
-    id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
-    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
-    email: 'author@example.org',
+jest.mock('@pubsweet/model-team', () => ({
+  model: () => ({
+    find: jest.fn(() => ({
+      id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+      teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+      email: 'author@example.org',
+    })),
     save: () => {},
-  })),
-  save: () => {},
+  }),
 }))
 
-jest.mock('pubsweet-server/src/models/User', () => ({
-  find: jest.fn(() => ({
-    id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
-    teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
-    email: 'author@example.org',
-    save: () => {},
-  })),
+jest.mock('@pubsweet/model-user', () => ({
+  model: {
+    find: jest.fn(() => ({
+      id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+      teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+      email: 'author@example.org',
+      save: () => {},
+    })),
+  },
 }))
 
 jest.mock('pubsweet-server/src/models/Fragment', () => ({
