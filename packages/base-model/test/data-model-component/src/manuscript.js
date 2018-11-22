@@ -1,5 +1,4 @@
 const BaseModel = require('../../../src')
-const { Team } = require('pubsweet-server')
 
 class Manuscript extends BaseModel {
   static get tableName() {
@@ -26,6 +25,8 @@ class Manuscript extends BaseModel {
   }
 
   async $beforeDelete() {
+    const { model: Team } = require('@pubsweet/model-team')
+
     await Team.deleteAssociated(this.type, this.id)
   }
 }

@@ -21,7 +21,7 @@ class BaseModel extends Model {
     super(properties)
 
     if (properties) {
-      this.updateProperties(properties)
+      this._updateProperties(properties)
     }
 
     const handler = {
@@ -51,7 +51,9 @@ class BaseModel extends Model {
     // information from models and extended models
     const getSchemasRecursively = object => {
       mergeSchema(object.schema)
-      mergeSchema(config.schema[object.name])
+      if (config.has('schema')) {
+        mergeSchema(config.schema[object.name])
+      }
 
       const proto = Object.getPrototypeOf(object)
 
@@ -125,7 +127,8 @@ class BaseModel extends Model {
     return this
   }
 
-  updateProperties(properties) {
+  // A private method that you shouldn't override
+  _updateProperties(properties) {
     Object.keys(properties).forEach(prop => {
       if (this.isSettable(prop)) {
         this[prop] = properties[prop]
@@ -133,6 +136,11 @@ class BaseModel extends Model {
         throw validationError(prop, this.constructor.name)
       }
     })
+    return this
+  }
+
+  updateProperties(properties) {
+    return this.updateProperties(properties)
   }
 
   setOwners(owners) {
@@ -149,11 +157,16 @@ class BaseModel extends Model {
     return object
   }
 
+  // `field` is a string, `value` is a primitive or
+  // `field` is an object of field, value pairs
   static async findByField(field, value) {
     logger.debug('Finding', field, value)
+    let results
+    if (value === undefined) {
+      results = await this.query().where(field)
+    }
 
-    const results = await this.query().where(field, value)
-
+    results = await this.query().where(field, value)
     return results
   }
 
