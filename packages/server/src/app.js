@@ -17,7 +17,7 @@ const models = require('./models')
 const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
-const authentication = require('./authentication')
+
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
@@ -57,9 +57,6 @@ const configureApp = app => {
 
   // Passport strategies
   app.use(passport.initialize())
-  passport.use('bearer', authentication.strategies.bearer)
-  passport.use('anonymous', authentication.strategies.anonymous)
-  passport.use('local', authentication.strategies.local)
 
   app.locals.passport = passport
   app.locals.authsome = authsome

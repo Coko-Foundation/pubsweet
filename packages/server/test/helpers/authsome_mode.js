@@ -107,7 +107,7 @@ async function authenticatedUser(user, operation, object, context) {
 
   // Allow owners of a collection to GET its teams, e.g.
   // GET /api/collections/1/teams
-  if (operation === 'GET' && get(object, 'path') === '/teams') {
+  if (operation === 'GET' && get(object, 'path') === '/api/teams') {
     const collectionId = get(object, 'params.collectionId')
     if (collectionId) {
       const collection = await context.models.Collection.find(collectionId)
@@ -133,7 +133,7 @@ async function authenticatedUser(user, operation, object, context) {
   // Advanced example
   // Allow authenticated users to create a team based around a collection
   // if they are one of the owners of this collection
-  if (get(object, 'path') === '/teams' && operation === 'POST') {
+  if (get(object, 'path') === '/api/teams' && operation === 'POST') {
     if (operation === 'POST') {
       if (get(object, 'team.object.type') === 'collection') {
         const collectionId = get(object, 'team.object.id')

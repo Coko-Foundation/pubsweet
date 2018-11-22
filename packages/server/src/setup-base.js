@@ -1,4 +1,5 @@
-const { User, Collection } = require('pubsweet-server')
+const { Collection } = require('pubsweet-server')
+const { model: User } = require('@pubsweet/model-user')
 const logger = require('@pubsweet/logger')
 
 class Setup {
@@ -14,7 +15,6 @@ class Setup {
 
     admin = await admin.save()
     logger.info('Created admin user: ', admin)
-
     collection = new Collection(collection)
     collection.setOwners([admin.id])
     collection = await collection.save()

@@ -33,4 +33,7 @@ module.exports = {
       },
     },
   },
+  pubsweet: {
+    components: ['@pubsweet/model-user', '@pubsweet/model-team'],
+  },
 }

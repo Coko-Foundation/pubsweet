@@ -1,12 +1,14 @@
 const _ = require('lodash')
 const AuthorizationError = require('../errors/AuthorizationError')
 const NotFoundError = require('../errors/NotFoundError')
-const authsome = require('../helpers/authsome')
 
 const Util = {}
 Util.authorizationError = (username, operation, object) => {
   username = username || 'public'
-  const msg = `User ${username} is not allowed to ${operation} ${object}`
+  const msg = `User ${username} is not allowed to ${operation} ${object.type} ${
+    object.id
+  }`
+
   return new AuthorizationError(msg)
 }
 
@@ -43,12 +45,17 @@ Util.fieldSelector = req => {
 }
 
 Util.getTeams = async opts => {
+  const authsome = require('../helpers/authsome')
+
   let teams
   try {
-    teams = await opts.Team.findByField({
-      'object.id': opts.id,
-      'object.type': opts.type,
-    })
+    teams = await opts.Team.query().where(
+      'object',
+      JSON.stringify({
+        id: opts.id,
+        type: opts.type,
+      }),
+    )
 
     teams = await Promise.all(
       teams.map(async team => {
@@ -112,6 +119,7 @@ Util.getFragment = async opts => {
  * @returns {Promise} The (possibly filtered) target, if permission is granted
  */
 Util.applyPermissionFilter = async opts => {
+  const authsome = require('../helpers/authsome')
   const permission = await authsome.can(
     opts.req.user,
     opts.req.method,

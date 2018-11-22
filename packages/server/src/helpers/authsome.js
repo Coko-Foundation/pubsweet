@@ -19,12 +19,6 @@ context.models.Collection = {
 context.models.Fragment = {
   find: models.Fragment.find.bind(models.Fragment),
 }
-context.models.User = {
-  find: models.User.find.bind(models.User),
-}
-context.models.Team = {
-  find: models.Team.find.bind(models.Team),
-}
 
 const authsome = new Authsome({ ...config.authsome, mode }, context)
 

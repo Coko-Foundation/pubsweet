@@ -31,37 +31,6 @@ const validations = {
     ),
     created: Joi.date(),
   },
-  user: {
-    id: Joi.string()
-      .guid()
-      .required(),
-    type: Joi.string(),
-    username: Joi.string()
-      .alphanum()
-      .required(),
-    email: Joi.string()
-      .email()
-      .required(),
-    passwordHash: Joi.string().required(),
-    admin: Joi.boolean(),
-    fragments: Joi.array().items(Joi.string().guid()),
-    collections: Joi.array().items(Joi.string().guid()),
-    teams: Joi.array().items(Joi.string().guid()),
-    passwordResetToken: Joi.string(),
-    passwordResetTimestamp: Joi.date().timestamp(),
-  },
-  team: {
-    id: Joi.string()
-      .guid()
-      .required(),
-    type: Joi.string().required(),
-    name: Joi.string().required(),
-    object: Joi.object(),
-    teamType: Joi.string().required(),
-    members: Joi.array().items(Joi.string().guid()),
-    owners: Joi.array().items(Joi.string().guid()),
-    global: Joi.boolean(),
-  },
 }
 
 const allValidations = (type, extendedValidations) => {

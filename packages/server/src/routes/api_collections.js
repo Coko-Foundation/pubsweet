@@ -160,10 +160,4 @@ api.get(
   },
 )
 
-// Teams
-// TODO: Nested teams API to be deprecated
-const teams = require('./api_teams')
-
-api.use('/collections/:collectionId/', teams)
-
 module.exports = api

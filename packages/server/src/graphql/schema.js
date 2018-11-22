@@ -4,10 +4,8 @@ const { makeExecutableSchema } = require('graphql-tools')
 
 const collection = require('./definitions/collection')
 const fragment = require('./definitions/fragment')
-const team = require('./definitions/team')
-const user = require('./definitions/user')
+// const user = require('./definitions/user')
 const upload = require('./definitions/upload')
-const authentication = require('./definitions/authentication')
 
 const requireRelative = m =>
   require(require.resolve(m, { paths: [process.cwd()] }))
@@ -17,19 +15,16 @@ const typeDefs = [
   `type Query, type Mutation, type Subscription`,
   collection.typeDefs,
   fragment.typeDefs,
-  team.typeDefs,
-  user.typeDefs,
   upload.typeDefs,
-  authentication.typeDefs,
+  // authentication.typeDefs,
 ]
 const resolvers = merge(
   {},
   collection.resolvers,
   fragment.resolvers,
-  team.resolvers,
-  user.resolvers,
+  // user.resolvers,
   upload.resolvers,
-  authentication.resolvers,
+  // authentication.resolvers,
 )
 
 // recursively merge in component types and resolvers

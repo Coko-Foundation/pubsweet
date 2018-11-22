@@ -1,5 +1,6 @@
 const STATUS = require('http-status-codes')
-const { User, Fragment, Collection } = require('../src/models')
+const { Fragment, Collection } = require('../src/models')
+const { model: User } = require('@pubsweet/model-user')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 

@@ -4,8 +4,6 @@ const config = require('config')
 const models = {
   Collection: './Collection',
   Fragment: './Fragment',
-  User: './User',
-  Team: './Team',
 }
 
 Object.keys(models).forEach((key, _) => {

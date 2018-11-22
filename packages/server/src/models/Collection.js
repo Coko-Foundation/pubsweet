@@ -1,6 +1,5 @@
 const Model = require('./Model')
 const Fragment = require('./Fragment')
-const Team = require('./Team')
 const without = require('lodash/without')
 
 class Collection extends Model {
@@ -59,6 +58,8 @@ class Collection extends Model {
   }
 
   async delete() {
+    const { model: Team } = require('@pubsweet/model-team')
+
     await Team.deleteAssociated(this.type, this.id)
     return super.delete()
   }
