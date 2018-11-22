@@ -2,7 +2,8 @@ const express = require('express')
 const STATUS = require('http-status-codes')
 const sse = require('pubsweet-sse')
 const passport = require('passport')
-const { Collection, Team, User } = require('../models')
+const { Collection, Team } = require('../models')
+const { model: User } = require('@pubsweet/model-user')
 
 const {
   createFilterFromQuery,
