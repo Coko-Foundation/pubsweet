@@ -20,4 +20,7 @@ module.exports = {
     email: 'test@example.com',
     password: 'test_password',
   },
+  pubsweet: {
+    components: ['@pubsweet/model-user', '@pubsweet/model-team'],
+  },
 }
