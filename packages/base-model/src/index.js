@@ -140,7 +140,7 @@ class BaseModel extends Model {
   }
 
   updateProperties(properties) {
-    return this.updateProperties(properties)
+    return this._updateProperties(properties)
   }
 
   setOwners(owners) {
@@ -159,15 +159,14 @@ class BaseModel extends Model {
 
   // `field` is a string, `value` is a primitive or
   // `field` is an object of field, value pairs
-  static async findByField(field, value) {
+  static findByField(field, value) {
     logger.debug('Finding', field, value)
-    let results
+
     if (value === undefined) {
-      results = await this.query().where(field)
+      return this.query().where(field)
     }
 
-    results = await this.query().where(field, value)
-    return results
+    return this.query().where(field, value)
   }
 
   static async findOneByField(field, value) {
