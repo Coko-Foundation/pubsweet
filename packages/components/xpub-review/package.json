@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-review",
-  "version": "3.2.0",
+  "version": "3.2.1-alpha.0",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^8.8.0",
+    "@pubsweet/ui": "^8.8.1-alpha.0",
     "@pubsweet/ui-toolkit": "^1.2.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
@@ -26,7 +26,7 @@
     "xpub-connect": "^1.1.4",
     "xpub-edit": "^2.5.2",
     "xpub-journal": "^0.0.6",
-    "xpub-selectors": "^0.2.0",
+    "xpub-selectors": "^0.2.1-alpha.0",
     "xpub-upload": "^0.0.7",
     "xpub-validators": "^0.0.6"
   },

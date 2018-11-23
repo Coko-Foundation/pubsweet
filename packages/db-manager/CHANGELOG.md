@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.8...@pubsweet/db-manager@2.0.9-alpha.0) (2018-11-23)
+
+
+### Features
+
+* migrate db-manager to use new User and Team models ([9bbb586](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bbb586))
+
+
+
+
+
   <a name="2.0.8"></a>
 ## [2.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.7...@pubsweet/db-manager@2.0.8) (2018-11-05)
 

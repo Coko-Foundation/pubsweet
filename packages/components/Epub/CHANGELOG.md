@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.0...pubsweet-component-epub@0.5.1-alpha.0) (2018-11-23)
+
+
+### Bug Fixes
+
+* update html-epub dependency ([5f55907](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5f55907))
+
+
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.4.0...pubsweet-component-epub@0.5.0) (2018-10-12)
 

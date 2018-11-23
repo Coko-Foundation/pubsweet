@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.2.0...pubsweet-component-xpub-submit@4.2.1-alpha.0) (2018-11-23)
+
+**Note:** Version bump only for package pubsweet-component-xpub-submit
+
+
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.1.4...pubsweet-component-xpub-submit@4.2.0) (2018-11-05)
 

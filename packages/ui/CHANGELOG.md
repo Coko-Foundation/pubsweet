@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.8.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.8.0...@pubsweet/ui@8.8.1-alpha.0) (2018-11-23)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
   <a name="8.8.0"></a>
 # [8.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.7.1...@pubsweet/ui@8.8.0) (2018-11-05)
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.2.0...@pubsweet/styleguide@3.2.1-alpha.0) (2018-11-23)
+
+
+### Features
+
+* **components:** remove FormGroup component ([507b242](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/507b242))
+
+
+### BREAKING CHANGES
+
+* **components:** FormGroup component has been removed as it is unused. It also uses the old
+model/validation system, that will shortly no longer exist.
+
+
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.12...@pubsweet/styleguide@3.2.0) (2018-11-05)
 

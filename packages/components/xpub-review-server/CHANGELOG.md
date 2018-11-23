@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.5...pubsweet-component-xpub-review-backend@0.2.6-alpha.0) (2018-11-23)
+
+
+### Bug Fixes
+
+* adjust xpub-review-server to use the new BaseModel models ([7f745f0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7f745f0))
+
+
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.4...pubsweet-component-xpub-review-backend@0.2.5) (2018-09-25)
 
