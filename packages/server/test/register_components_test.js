@@ -3,8 +3,7 @@ const path = require('path')
 const config = require('config')
 
 const mockComponentPath = path.resolve(__dirname, 'mocks', 'mock_component.js')
-const existingComponents = config.pubsweet.components
-config.pubsweet = { components: existingComponents.push(mockComponentPath) }
+config.pubsweet.components.push(mockComponentPath)
 
 const api = require('./helpers/api')
 

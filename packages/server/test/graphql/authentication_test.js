@@ -99,7 +99,7 @@ describe('GraphQL authentication', () => {
         errors: [
           {
             message:
-              'Object not found: user with id 123e4567-e89b-12d3-a456-426655440000',
+              'Object not found: User with id 123e4567-e89b-12d3-a456-426655440000',
           },
         ],
       })
