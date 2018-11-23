@@ -38,7 +38,6 @@ module.exports = {
     '**/components/**/*.config.js',
     '**/components/*-server/**',
     '**/components/MediumDraft/CustomImageSideButton.jsx',
-    '**/components/FormGroup/**',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],
