@@ -1,4 +1,4 @@
-const User = require('pubsweet-server/src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 const { addUser, createTables } = require('../../src/')
 
 const nonAdminUser = {
