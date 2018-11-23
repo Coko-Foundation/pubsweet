@@ -15,9 +15,11 @@ class User extends BaseModel {
     this.teams = this.teams || []
   }
 
-  // toJSON() {
-  //   return omit(this, ['passwordHash'])
-  // }
+  $formatJson(json) {
+    json = super.$formatJson(json)
+    delete json.passwordHash
+    return json
+  }
 
   static get tableName() {
     return 'users'
