@@ -10340,19 +10340,19 @@ object.values@^1.0.4:
     function-bind "^1.1.0"
     has "^1.0.1"
 
-objection@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/objection/-/objection-1.2.3.tgz#dc4a22fc51f00bdc6d0e4093596a32e7537bea56"
-  integrity sha512-NlAEY/ejF6HQYD++UteOxusPct/NwIhZq3q60bEyxC/jDJFb+7ZszlIYWZZWUsoPsKkzn2xjycy6TABHYpFf3g==
+objection@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-1.3.0.tgz#2b7e41d4b44a5c1abcb40e34e7ef6347e8bb683d"
+  integrity sha512-LhKd9N/tSNiFNKSozydrk7C8XmQbEbYNmnF1vC7ywgdWzMZfWhehILIE95mVpdo93f26jWDVaY6SHp/bjMvEng==
   dependencies:
     ajv "^6.1.1"
     bluebird "^3.5.1"
     lodash "^4.17.4"
 
-objection@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/objection/-/objection-1.3.0.tgz#2b7e41d4b44a5c1abcb40e34e7ef6347e8bb683d"
-  integrity sha512-LhKd9N/tSNiFNKSozydrk7C8XmQbEbYNmnF1vC7ywgdWzMZfWhehILIE95mVpdo93f26jWDVaY6SHp/bjMvEng==
+objection@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-1.4.0.tgz#18ddcdc121ae9b5d1e8e88b10fd0a6c96134f422"
+  integrity sha512-JO5M6FqnNfw7uN4WhLABX0A1d65o2p4ILSiWRfbG3X3MAv70CH5C1rfBw7S8HvyUs2EDpCekIdkgZnAuT8sbaQ==
   dependencies:
     ajv "^6.1.1"
     bluebird "^3.5.1"
@@ -11721,6 +11721,15 @@ pubsweet-component-form-group@1.1.25:
     prop-types "^15.5.10"
     pubsweet-server "^10.0.0"
 
+pubsweet-component-form-group@^1.1.25, pubsweet-component-form-group@^1.1.28:
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-1.1.29.tgz#146313d5bcba97e043133f7eb55592c17fc9101e"
+  integrity sha512-IO/OOfCn/nGNhqsdzrd7Brw8AOXUNcyoVKWuFcs1O9VNatGX2KveF/Q5bTDGXsnETwC3q4f3kHtlZF0T0D2oOw==
+  dependencies:
+    joi-browser "^13.4.0"
+    prop-types "^15.5.10"
+    pubsweet-server "^10.1.0"
+
 pubsweet-component-login@1.1.17:
   version "1.1.17"
   resolved "https://registry.yarnpkg.com/pubsweet-component-login/-/pubsweet-component-login-1.1.17.tgz#8ea00b85e73a1068fbd6e1d7a4173ba3cfc17c42"
@@ -11762,6 +11771,49 @@ pubsweet-component-posts-manager@1.0.40:
     react-redux "^5.0.6"
     react-router-dom "^4.2.2"
     redux "^3.7.2"
+
+pubsweet-server@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/pubsweet-server/-/pubsweet-server-10.1.0.tgz#c63c2f054b632af590e2d1a558b360caa7b02900"
+  integrity sha512-HckTcVRZ4Ies5Br5EdS5WsH9SWLAOc1DVlm7mvCQY12RpmPImvoQmLIN2RJkWmjEqS88NUiyKY1rYOeSRArNCA==
+  dependencies:
+    "@pubsweet/logger" "^0.2.7"
+    apollo-server-express "^1.3.2"
+    apollo-upload-server "^4.0.2"
+    authsome "^0.1.0"
+    bcrypt "^2.0.1"
+    bluebird "^3.5.1"
+    body-parser "^1.15.2"
+    colors "^1.1.2"
+    config "^2.0.1"
+    cookie-parser "^1.4.3"
+    dotenv "^4.0.0"
+    express "^4.16.1"
+    graphql "^14.0.2"
+    graphql-postgres-subscriptions "^1.0.4"
+    graphql-tools "^4.0.0"
+    helmet "^3.8.1"
+    http-status-codes "^1.0.6"
+    joi "^13.6.0"
+    jsonwebtoken "^7.1.7"
+    knex "^0.15.2"
+    lodash "^4.0.0"
+    minimist "^1.2.0"
+    morgan "^1.8.2"
+    multer "^1.1.0"
+    objection "^1.3.0"
+    passport "^0.3.2"
+    passport-anonymous "^1.0.1"
+    passport-http-bearer "^1.0.1"
+    passport-local "^1.0.0"
+    pg "^7.4.1"
+    pg-boss "^3.1.2"
+    promise-queue "^2.2.3"
+    prompt "^1.0.0"
+    pubsweet-sse "^1.0.1"
+    subscriptions-transport-ws "^0.9.12"
+    uuid "^3.0.1"
+    winston "^2.2.0"
 
 pubsweet-theme-plugin@^0.0.3:
   version "0.0.3"
