@@ -107,16 +107,20 @@ class BaseModel extends Model {
 
   async save() {
     let saved
+    // Do the validation manually here, since inserting
+    // model instances skips validation, and using toJSON() first will
+    // not save certain fields ommited in $formatJSON (e.g. passwordHash)
+    this.$validate()
+
     if (this.id) {
-      saved = await this.constructor
-        .query()
-        .patchAndFetchById(this.id, this.toJSON())
+      saved = await this.constructor.query().patchAndFetchById(this.id, this)
     }
 
     if (!saved) {
       // either model has no ID or the ID was not found in the database
-      saved = await this.constructor.query().insert(this.toJSON())
+      saved = await this.constructor.query().insertAndFetch(this)
     }
+
     logger.info(`Saved ${this.constructor.name} with UUID ${saved.id}`)
     return saved
   }
@@ -151,7 +155,7 @@ class BaseModel extends Model {
     const object = await this.query().findById(id)
 
     if (!object) {
-      throw notFoundError('id', id, this.constructor.name)
+      throw notFoundError('id', id, this.name)
     }
 
     return object
@@ -174,7 +178,7 @@ class BaseModel extends Model {
       .where(field, value)
       .limit(1)
     if (!results.length) {
-      throw notFoundError(field, value, this.constructor.name)
+      throw notFoundError(field, value, this.name)
     }
 
     return results[0]
@@ -185,5 +189,5 @@ class BaseModel extends Model {
   }
 }
 
-BaseModel.pickJsonSchemaProperties = true
+BaseModel.pickJsonSchemaProperties = false
 module.exports = BaseModel
