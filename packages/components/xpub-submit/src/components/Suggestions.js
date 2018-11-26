@@ -1,8 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Section, Legend } from '../styles'
 
-const SubLegend = Legend.extend`
+const SubLegend = styled(Legend)`
   font-weight: normal;
   margin-top: calc(${th('gridUnit')} * 3);
 `

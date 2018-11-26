@@ -20,7 +20,7 @@ const Message = styled.div`
   line-height: ${th('lineHeightBaseSmall')};
 `
 
-const ErrorMessage = Message.extend`
+const ErrorMessage = styled(Message)`
   color: ${th('colorError')};
 `
 

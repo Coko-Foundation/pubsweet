@@ -30,7 +30,7 @@ const Status = styled.div`
   display: inline-flex;
 `
 
-const StatusIdle = Status.extend.attrs({
+const StatusIdle = styled(Status).attrs({
   children: () => <StatusIcon>plus_circle</StatusIcon>,
 })``
 
