@@ -1,10 +1,5 @@
-import styled, { injectGlobal } from 'styled-components'
-import styledNormalize from 'styled-normalize'
+import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-
-const injectGlobalStyles = () => injectGlobal`
-  ${styledNormalize}
-`
 
 const StyleRoot = styled.div`
   background-color: ${th('colorBackground')};
@@ -19,4 +14,3 @@ const StyleRoot = styled.div`
 `
 
 export default StyleRoot
-export { injectGlobalStyles }
