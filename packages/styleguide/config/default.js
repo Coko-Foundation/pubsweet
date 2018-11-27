@@ -8,4 +8,7 @@ module.exports = {
   'pubsweet-server': {
     baseUrl: 'http://example.com',
   },
+  'pubsweet-client': {
+    API_ENDPOINT: 'http://example.com',
+  },
 }

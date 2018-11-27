@@ -39,6 +39,12 @@ module.exports = dir => {
       rules: [
         {
           oneOf: [
+            // Todo: revisit https://github.com/apollographql/react-apollo/issues/1737
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto',
+            },
             // ES6 modules
             {
               test: /\.jsx?$/,
