@@ -124,187 +124,34 @@ exports[`Menu is rendered correctly 1`] = `
 `;
 
 exports[`Menu is rendered correctly when open 1`] = `
-.c0 {
-  background-color: transparent;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.c2 {
-  background: transparent;
-  border: 1px solid grey;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-  width: 100%;
-  height: calc(8px * 6);
-  padding: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2:hover {
-  border-color: black;
-}
-
-.c3 {
-  border-right: 1px solid grey;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  white-space: nowrap;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  text-align: left;
-  line-height: 8px;
-  padding: 0 8px;
-  white-space: nowrap;
-}
-
-.c3:hover {
-  color: black;
-}
-
-.c4 {
-  width: calc(8px * 2);
-  height: calc(8px * 2 - 1px * 2);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding: calc(8px * 2);
-}
-
-.c5 {
-  font-size: 50%;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-  -webkit-transform: scaleX(2) scaleY(-1.2);
-  -ms-transform: scaleX(2) scaleY(-1.2);
-  transform: scaleX(2) scaleY(-1.2);
-}
-
-.c1 {
-  position: relative;
-}
-
-.c6 {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.c7 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 8px;
-  overflow-y: auto;
-  max-height: 250px;
-  z-index: 100;
-}
-
-.c8 {
-  font-weight: 600;
-  cursor: pointer;
-  padding: calc(8px - 1px * 2) calc(8px * 2);
-  border: 1px solid transparent;
-  border-width: 1px 0 1px 0;
-  white-space: nowrap;
-}
-
-.c8:hover {
-  background: grey;
-  border-color: grey;
-}
-
-.c8:first-child:hover {
-  border-top-color: grey;
-}
-
-.c8:last-child:hover {
-  border-bottom-color: grey;
-}
-
-.c9 {
-  color: #444;
-  font-weight: inherit;
-  cursor: pointer;
-  padding: calc(8px - 1px * 2) calc(8px * 2);
-  border: 1px solid transparent;
-  border-width: 1px 0 1px 0;
-  white-space: nowrap;
-}
-
-.c9:hover {
-  background: grey;
-  border-color: grey;
-}
-
-.c9:first-child:hover {
-  border-top-color: grey;
-}
-
-.c9:last-child:hover {
-  border-bottom-color: grey;
-}
-
 <div
-  className=""
+  className="fRrBax"
   open={true}
 >
   <div
-    className="c0"
+    className="cdtEcl"
     onClick={[Function]}
   />
   <div
-    className="c1"
+    className="jeQBvB"
     role="listbox"
   >
     <button
-      className="c2"
+      className="kGvxAb"
       onClick={[Function]}
       open={true}
       type="button"
     >
       <span
-        className="c3"
+        className="hGwyht"
       >
         Foo
       </span>
       <span
-        className="c4"
+        className="hGZyXg"
       >
         <span
-          className="c5"
+          className="dEwrDX"
           open={true}
         >
           ▼
@@ -312,15 +159,15 @@ exports[`Menu is rendered correctly when open 1`] = `
       </span>
     </button>
     <div
-      className="c6"
+      className="cesng"
     >
       <div
-        className="c7"
+        className="hbutZv"
         open={true}
       >
         <div
           aria-selected={true}
-          className="c8"
+          className="htSYFR"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"
@@ -330,7 +177,7 @@ exports[`Menu is rendered correctly when open 1`] = `
         </div>
         <div
           aria-selected={false}
-          className="c9"
+          className="fFWKaa"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="option"

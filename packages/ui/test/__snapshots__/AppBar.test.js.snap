@@ -340,87 +340,17 @@ exports[`AppBar With admin user 1`] = `
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
-.c4 {
-  color: black;
-  cursor: pointer;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c4:hover,
-.c4:focus,
-.c4:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(8px * 6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 > * {
-  height: calc(8px * 6);
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  margin: calc(8px * 3) 1rem calc(8px * 3) 0;
-}
-
 <nav
-  className="c0"
+  className="gmvCmZ"
 >
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c2"
+      className="kyOjWa"
     >
       <a
-        className="c3 c4"
+        className="fPOZMv hOOEYl"
         href="/home"
         onClick={[Function]}
       >
@@ -429,13 +359,13 @@ exports[`AppBar With custom brand and login links 1`] = `
     </span>
   </div>
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c5"
+      className="cJOObM"
     >
       <a
-        className="c4"
+        className="hOOEYl"
         href="/signin"
         onClick={[Function]}
       >
@@ -447,75 +377,17 @@ exports[`AppBar With custom brand and login links 1`] = `
 `;
 
 exports[`AppBar With custom right component 1`] = `
-.c4 {
-  color: black;
-  cursor: pointer;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c4:hover,
-.c4:focus,
-.c4:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(8px * 6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 > * {
-  height: calc(8px * 6);
-}
-
 <nav
-  className="c0"
+  className="gmvCmZ"
 >
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c2"
+      className="kyOjWa"
     >
       <a
-        className="c3 c4"
+        className="fPOZMv hOOEYl"
         href="/"
         onClick={[Function]}
       >
@@ -530,87 +402,17 @@ exports[`AppBar With custom right component 1`] = `
 `;
 
 exports[`AppBar With nav links 1`] = `
-.c4 {
-  color: black;
-  cursor: pointer;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c4:hover,
-.c4:focus,
-.c4:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(8px * 6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 > * {
-  height: calc(8px * 6);
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  margin: calc(8px * 3) 1rem calc(8px * 3) 0;
-}
-
 <nav
-  className="c0"
+  className="gmvCmZ"
 >
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c2"
+      className="kyOjWa"
     >
       <a
-        className="c3 c4"
+        className="fPOZMv hOOEYl"
         href="/"
         onClick={[Function]}
       >
@@ -619,13 +421,13 @@ exports[`AppBar With nav links 1`] = `
     </span>
   </div>
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c5"
+      className="cJOObM"
     >
       <a
-        className="c4"
+        className="hOOEYl"
         href="/login"
         onClick={[Function]}
       >
