@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import 'regenerator-runtime/runtime'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, Menu, GlobalStyles } from '@pubsweet/ui'
+import { Button, Menu, GlobalStyle } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 import StyleRoot from 'pubsweet-client/src/helpers/StyleRoot'
 import { Normalize } from 'styled-normalize'
@@ -189,7 +189,7 @@ class StyleGuideRenderer extends React.Component {
       <ThemeProvider theme={themes[this.state.themeName]}>
         <StyleRoot>
           <Normalize />
-          <GlobalStyles />
+          <GlobalStyle />
           <Root>
             <Sidebar>
               <Header>

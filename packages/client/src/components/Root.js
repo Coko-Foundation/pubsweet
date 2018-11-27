@@ -70,8 +70,10 @@ const Root = ({
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
-          <Normalize />
-          <StyleRoot>{routes}</StyleRoot>
+          <StyleRoot>
+            <Normalize />
+            {routes}
+          </StyleRoot>
         </ThemeProvider>
       </ConnectedRouter>
     </Provider>
