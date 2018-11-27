@@ -1,4 +1,5 @@
 import { compose, withHandlers } from 'recompose'
+import { cloneDeep } from 'lodash'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
@@ -42,21 +43,78 @@ const updateTeamMutation = gql`
   }
 `
 
-const handleSubmit = (manuscript, { props }) => {
-  const team = manuscript.teams.find(team => team.teamType === 'reviewerEditor')
+const query = gql`
+  query {
+    teams {
+      id
+      teamType
+      name
+      object {
+        objectId
+        objectType
+      }
+      members {
+        id
+      }
+      status {
+        user
+        status
+      }
+    }
+  }
+`
 
+const update = (
+  proxy,
+  { data: { updateTeamMutation, createTeamMutation, teams } },
+) => {
+  const data = proxy.readQuery({ query })
+  if (updateTeamMutation) {
+    const teamIndex = teams.findIndex(team => team.id === updateTeamMutation.id)
+    data[teamIndex] = updateTeamMutation
+  }
+
+  if (createTeamMutation) {
+    data.push(createTeamMutation)
+  }
+
+  proxy.writeQuery({ query, data })
+}
+
+const handleSubmit = (
+  { user },
+  { props: { manuscript, updateTeamMutation, createTeamMutation } },
+) => {
+  const team =
+    manuscript.teams.find(team => team.teamType === 'reviewerEditor') || {}
+
+  const teamAdd = {
+    object: {
+      objectId: manuscript.id,
+      objectType: 'Manuscript',
+    },
+    status: [{ user: user.id, status: 'invited' }],
+    name: 'Reviewer Editor',
+    teamType: 'reviewerEditor',
+    members: [user.id],
+  }
   if (team.id) {
-    props.updateTeamMutation({
+    const newTeam = cloneDeep(team)
+    newTeam.status.push({ user: user.id, status: 'invited' })
+    newTeam.members.push(user.id)
+    updateTeamMutation({
       variables: {
         id: team.id,
-        input: team,
+        input: newTeam,
       },
+      update,
     })
   } else {
-    props.createTeamMutation({
+    createTeamMutation({
       variables: {
-        input: team,
+        input: teamAdd,
       },
+      update,
     })
   }
 }
@@ -74,8 +132,7 @@ export default compose(
     loadOptions: props => loadOptions(props),
   }),
   withFormik({
-    initialValues: {},
-    mapPropsToValues: ({ manuscript }) => manuscript,
+    mapPropsToValues: () => ({ user: '' }),
     displayName: 'reviewers',
     handleSubmit,
   }),

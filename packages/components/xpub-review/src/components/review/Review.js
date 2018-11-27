@@ -57,12 +57,13 @@ const Review = ({ review }) => (
         {ReviewComments(review, 'confidential')}
       </div>
     )}
+    {review.recommendation && (
+      <div>
+        <Heading>Recommendation</Heading>
 
-    <div>
-      <Heading>Recommendation</Heading>
-
-      <Recommendation>{review.recommendation}</Recommendation>
-    </div>
+        <Recommendation>{review.recommendation}</Recommendation>
+      </div>
+    )}
   </div>
 )
 

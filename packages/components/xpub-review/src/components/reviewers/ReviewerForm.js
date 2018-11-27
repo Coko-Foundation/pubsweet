@@ -1,6 +1,5 @@
 import React from 'react'
 import Select from 'react-select'
-import { cloneDeep } from 'lodash'
 import { Field, FieldArray } from 'formik'
 import { Button } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
@@ -15,7 +14,7 @@ const OptionRenderer = option => (
 
 const ReviewerInput = loadOptions => ({
   field,
-  form: { values },
+  form: { values, setFieldValue },
   push,
   replace,
 }) => (
@@ -25,37 +24,11 @@ const ReviewerInput = loadOptions => ({
     labelKey="username"
     loadOptions={loadOptions}
     onChange={user => {
-      const teamIndex = (values.teams || []).findIndex(
-        team => team.teamType === 'reviewerEditor',
-      )
-
-      // const member = cloneDeep(user)
-      // const member = {
-      //   status: 'invited',
-      //   user,
-      // }
-
-      if (teamIndex < 0) {
-        const team = {
-          object: {
-            objectId: values.id,
-            objectType: 'Manuscript',
-          },
-          status: [{ id: user.id, status: 'invited' }],
-          name: 'Reviewer Editor',
-          teamType: 'reviewerEditor',
-          members: [user.id], // member
-        }
-        push(team)
-      } else {
-        const newTeam = cloneDeep(values.teams[teamIndex])
-        newTeam.status.push({ id: user.id, status: 'invited' })
-        newTeam.members.push(user.id) // member
-        replace(0, newTeam)
-      }
+      setFieldValue('user', user)
     }}
     optionRenderer={OptionRenderer}
     promptTextCreator={label => `Add ${label}?`}
+    value={values.user.id}
     valueKey="id"
   />
 )
@@ -77,7 +50,7 @@ const ReviewerForm = ({
   loadOptions,
 }) => (
   <form onSubmit={handleSubmit}>
-    <FieldArray component={componentFields(loadOptions)} name="teams" />
+    <FieldArray component={componentFields(loadOptions)} />
 
     <Button disabled={!isValid} primary type="submit">
       Invite reviewer

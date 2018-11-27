@@ -1,12 +1,32 @@
-import { compose, withProps } from 'recompose'
+import { compose, withProps, withHandlers } from 'recompose'
+import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { withLoader } from 'pubsweet-client'
 import { cloneDeep } from 'lodash'
 
 import Reviewers from '../components/reviewers/Reviewers'
-import ReviewerFormContainer from '../components/reviewers/ReviewerFormContainer'
 import ReviewerContainer from '../components/reviewers/ReviewerContainer'
+
+const teamFields = `
+  id
+  role
+  teamType
+  name
+  object {
+    objectId
+    objectType
+  }
+  objectType
+  members {
+    id
+    username
+  }
+  status {
+    user
+    status
+  }
+`
 
 const fragmentFields = `
   id
@@ -43,42 +63,24 @@ const fragmentFields = `
   }
   decision
   teams {
-    id
-    name
-    teamType
-    object {
-      objectId
-      objectType
-    }
-    objectType
-    members {
-      id
-      username
-    }
-    status {
-      id
-      status
-    }
+    ${teamFields}
   }
   status
 `
 
-const teamFields = `
-  id
-  role
-  teamType
-  name
-  object {
-    objectId
+const createTeamMutation = gql`
+  mutation($input: TeamInput!) {
+    createTeam(input: $input) {
+      ${teamFields}
+    }
   }
-  objectType
-  members {
-    id
-    username
-  }
-  status {
-    id
-    status
+`
+
+const updateTeamMutation = gql`
+  mutation($id: ID, $input: TeamInput) {
+    updateTeam(id: $id, input: $input) {
+      ${teamFields}
+    }
   }
 `
 
@@ -106,6 +108,78 @@ const query = gql`
   }
 `
 
+const update = match => (
+  proxy,
+  { data: { updateTeam, createTeam, teams, manuscript } },
+) => {
+  const data = proxy.readQuery({
+    query,
+    variables: {
+      id: match.params.version,
+    },
+  })
+
+  if (updateTeam) {
+    const teamIndex = teams.findIndex(team => team.id === updateTeam.id)
+    const manuscriptTeamIndex = manuscript.teams.findIndex(
+      team => team.id === updateTeam.id,
+    )
+    data.teams[teamIndex] = updateTeam
+    data.manuscript.teams[manuscriptTeamIndex] = updateTeam
+  }
+
+  if (createTeam) {
+    data.teams.push(createTeam)
+    data.manuscript.teams.push(createTeam)
+  }
+  proxy.writeQuery({ query, data })
+}
+
+const handleSubmit = (
+  { user },
+  { props: { manuscript, updateTeamMutation, createTeamMutation, match } },
+) => {
+  const team =
+    manuscript.teams.find(team => team.teamType === 'reviewerEditor') || {}
+
+  const teamAdd = {
+    object: {
+      objectId: manuscript.id,
+      objectType: 'Manuscript',
+    },
+    status: [{ user: user.id, status: 'invited' }],
+    name: 'Reviewer Editor',
+    teamType: 'reviewerEditor',
+    members: [user.id],
+  }
+  if (team.id) {
+    const newTeam = cloneDeep(team)
+    newTeam.status.push({ user: user.id, status: 'invited' })
+    newTeam.members.push(user.id)
+    delete newTeam.object.__typename
+    updateTeamMutation({
+      variables: {
+        id: team.id,
+        input: newTeam,
+      },
+      update: update(match),
+    })
+  } else {
+    createTeamMutation({
+      variables: {
+        input: teamAdd,
+      },
+      update: update(match),
+    })
+  }
+}
+
+const loadOptions = props => input => {
+  const options = props.reviewerUsers
+
+  return Promise.resolve({ options })
+}
+
 export default compose(
   graphql(query, {
     options: ({ match }) => ({
@@ -114,31 +188,49 @@ export default compose(
       },
     }),
   }),
+  graphql(createTeamMutation, { name: 'createTeamMutation' }),
+  graphql(updateTeamMutation, { name: 'updateTeamMutation' }),
   withLoader(),
-  withProps(({ manuscript, teams, users, match: { params: { journal } } }) => {
-    const reviewerTeams =
-      manuscript.teams.find(
-        team =>
-          team.teamType === 'reviewerEditor' &&
-          team.object.objectId === manuscript.id &&
-          team.object.objectType === 'Manuscript',
-      ) || {}
+  withProps(
+    ({
+      manuscript,
+      teams = [],
+      users,
+      match: {
+        params: { journal },
+      },
+    }) => {
+      const reviewerTeams =
+        teams.find(
+          team =>
+            team.teamType === 'reviewerEditor' &&
+            team.object.objectId === manuscript.id &&
+            team.object.objectType === 'Manuscript',
+        ) || {}
 
-    // Temporary solution until new Team model is back
-    const mem = cloneDeep(reviewerTeams.members)
-    mem.map(member => {
-      const status = reviewerTeams.status.find(
-        status => status.id === member.id,
-      )
-      member.status = (status || {}).status
-      return member
-    })
-    return {
-      reviewers: mem || [],
-      journal: { id: journal },
-      reviewerUsers: users,
-      Reviewer: ReviewerContainer,
-      ReviewerForm: ReviewerFormContainer,
-    }
+      // Temporary solution until new Team model is back
+      const mem = cloneDeep(reviewerTeams.members || [])
+      mem.map(member => {
+        const status = reviewerTeams.status.find(
+          status => status.user === member.id,
+        )
+        member.status = (status || {}).status
+        return member
+      })
+      return {
+        reviewers: mem || [],
+        journal: { id: journal },
+        reviewerUsers: users,
+        Reviewer: ReviewerContainer,
+      }
+    },
+  ),
+  withHandlers({
+    loadOptions: props => loadOptions(props),
+  }),
+  withFormik({
+    mapPropsToValues: () => ({ user: '' }),
+    displayName: 'reviewers',
+    handleSubmit,
   }),
 )(Reviewers)

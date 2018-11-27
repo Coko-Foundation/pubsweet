@@ -64,7 +64,7 @@ const fragmentFields = `
       username
     }
     status {
-      id
+      user
       status
     }
   }
@@ -227,14 +227,15 @@ export default compose(
       manuscript,
       createFile,
       updateReviewMutation,
+      uploadReviewFilesMutation,
       match: {
         params: { journal },
       },
     }) => ({
       review:
-        manuscript.reviews.find(
-          review => review.user.id === currentUser.id && review.isDecision,
-        ) || {},
+        (manuscript.reviews || []).filter(
+          review => review.user.id === currentUser.id,
+        ) || [],
       journal: { id: journal },
       updateReview: (review, file) => {
         ;(review.comments || []).map(comment => {
@@ -262,11 +263,14 @@ export default compose(
                 id: manuscript.id,
               },
             })
-            let reviewIndex = data.manuscript.reviews.findIndex(
+            const reviewIndex = data.manuscript.reviews.findIndex(
               review => review.id === updateReview.id,
             )
-            reviewIndex = reviewIndex < 0 ? 0 : reviewIndex
-            data.manuscript.reviews[reviewIndex] = updateReview
+            if (reviewIndex < 0) {
+              data.manuscript.reviews.push(updateReview)
+            } else {
+              data.manuscript.reviews[reviewIndex] = updateReview
+            }
             proxy.writeQuery({ query, data })
           },
         })
@@ -291,8 +295,9 @@ export default compose(
   ),
   withFormik({
     isInitialValid: ({ review }) => {
-      const isRecommendation = review.recommendation != null
-      const isCommented = getCommentContent(review, 'note') !== ''
+      const rv = review.find(review => review.isDecision) || {}
+      const isRecommendation = rv.recommendation != null
+      const isCommented = getCommentContent(rv, 'note') !== ''
 
       return isCommented && isRecommendation
     },

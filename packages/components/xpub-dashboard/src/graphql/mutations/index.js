@@ -14,6 +14,22 @@ export default {
         teamId: $teamId
       ) {
         id
+        role
+        teamType
+        name
+        object {
+          objectId
+          objectType
+        }
+        objectType
+        members {
+          id
+          username
+        }
+        status {
+          user
+          status
+        }
       }
     }
   `,
@@ -29,6 +45,9 @@ export default {
       createManuscript(input: $input) {
         id
         created
+        manuscriptVersions {
+          id
+        }
         teams {
           role
           name

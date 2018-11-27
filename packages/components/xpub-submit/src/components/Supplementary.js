@@ -4,18 +4,22 @@ import { FieldArray } from 'formik'
 import { Flexbox, UploadButton, UploadingFile } from '@pubsweet/ui'
 
 const renderFilesUpload = (onChange, uploadFile, createFile) => ({
-  form,
+  form: { values, setFieldValue },
   push,
+  insert,
 }) => [
   <UploadButton
     buttonText="↑ Upload files"
     onChange={event => {
-      Array.from(event.target.files).forEach(file => {
+      const fileArray = Array.from(event.target.files).map(file => {
         const fileUpload = {
           fileType: 'supplementary',
           filename: file.name,
         }
-        push(fileUpload)
+        return fileUpload
+      })
+      setFieldValue('files', fileArray.concat(values.files))
+      Array.from(event.target.files).forEach(file => {
         uploadFile(file).then(({ data }) => {
           const newFile = {
             url: data.upload.url,
@@ -29,7 +33,7 @@ const renderFilesUpload = (onChange, uploadFile, createFile) => ({
     }}
   />,
   <Flexbox>
-    {cloneDeep(form.values.files || [])
+    {cloneDeep(values.files || [])
       .filter(val => val.fileType === 'supplementary')
       .map(val => {
         val.name = val.filename

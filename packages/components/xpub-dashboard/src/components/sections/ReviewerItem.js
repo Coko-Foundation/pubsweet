@@ -18,7 +18,8 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
   const team =
     (version.teams || []).find(team => team.teamType === 'reviewerEditor') || {}
   const { status } =
-    (team.status || []).filter(member => member.id === currentUser.id)[0] || {}
+    (team.status || []).filter(member => member.user === currentUser.id)[0] ||
+    {}
 
   // Enable that when Team Models is updated
   // const { status } =
@@ -26,7 +27,10 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
   //     member => member.id === currentUser.id,
   //   )[0] || {}
 
-  const review = version.reviews[0] || {}
+  const review =
+    version.reviews.find(
+      review => review.user.id === currentUser.id && !review.isDecision,
+    ) || {}
 
   return (
     <AuthorizeWithGraphQL
@@ -38,21 +42,20 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
         <Body>
           <VersionTitle version={version} />
 
-          {status === 'accepted' ||
-            (status === 'completed' && (
-              <Links>
-                <LinkContainer>
-                  <JournalLink
-                    id={version.id}
-                    journal={journals}
-                    page="reviews"
-                    version={version}
-                  >
-                    {review.recommendation ? 'Completed' : 'Do Review'}
-                  </JournalLink>
-                </LinkContainer>
-              </Links>
-            ))}
+          {(status === 'accepted' || status === 'completed') && (
+            <Links>
+              <LinkContainer>
+                <JournalLink
+                  id={version.id}
+                  journal={journals}
+                  page="reviews"
+                  version={version}
+                >
+                  {status === 'completed' ? 'Completed' : 'Do Review'}
+                </JournalLink>
+              </LinkContainer>
+            </Links>
+          )}
 
           {status === 'invited' && (
             <Actions>

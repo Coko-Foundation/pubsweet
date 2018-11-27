@@ -15,6 +15,27 @@ const acceptFiles =
     ? acceptUploadFiles.join()
     : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
+const updateReviewer = (proxy, { data: { reviewerResponse } }) => {
+  const id = reviewerResponse.object.objectId
+  const data = proxy.readQuery({
+    query: queries.dashboard,
+    variables: {
+      id,
+    },
+  })
+
+  const manuscriptIndex = data.journals.manuscripts.findIndex(
+    manu => manu.id === id,
+  )
+  const teamIndex = data.journals.manuscripts[manuscriptIndex].teams.findIndex(
+    team => team.id === reviewerResponse.id,
+  )
+
+  data.journals.manuscripts[manuscriptIndex].teams[teamIndex] = reviewerResponse
+
+  proxy.writeQuery({ query: queries.dashboard, data })
+}
+
 export default compose(
   connectToContext(),
   graphql(queries.dashboard, {
@@ -23,7 +44,10 @@ export default compose(
   graphql(mutations.reviewerResponseMutation, {
     props: ({ mutate }) => ({
       reviewerResponse: (currentUserId, action, teamId) =>
-        mutate({ variables: { currentUserId, action, teamId } }),
+        mutate({
+          variables: { currentUserId, action, teamId },
+          update: updateReviewer,
+        }),
     }),
   }),
   graphql(mutations.deleteManuscriptMutation, {

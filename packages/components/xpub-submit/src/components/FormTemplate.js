@@ -1,7 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { unescape, groupBy, isArray, get, set, cloneDeep } from 'lodash'
+import {
+  unescape,
+  groupBy,
+  isArray,
+  get,
+  set,
+  cloneDeep,
+  uniqueId,
+} from 'lodash'
 import { FieldArray } from 'formik'
 import ReactHtmlParser from 'react-html-parser'
 import * as elements from '@pubsweet/ui'
@@ -169,6 +177,7 @@ const renderArray = (elementsComponentArray, onChange) => ({
             'validateValue',
             'description',
             'order',
+            'value',
           ])}
           component={elements[element.component]}
           key={`notes-validate-${element.id}`}
@@ -289,30 +298,31 @@ export default ({
           ) : (
             <ElementComponentArray
               elementsComponentArray={element}
+              key={uniqueId('element_array')}
               onChange={onChange}
             />
           ),
       )}
 
-      {filterFileManuscript(manuscript.files || []).length > 0 ? (
+      {filterFileManuscript(values.files || []).length > 0 ? (
         <Section id="files.manuscript">
           <Legend space>Submitted Manuscript</Legend>
           <Attachment
-            file={filesToAttachment(filterFileManuscript(manuscript.files)[0])}
-            key={filterFileManuscript(manuscript.files)[0].url}
+            file={filesToAttachment(filterFileManuscript(values.files)[0])}
+            key={filterFileManuscript(values.files)[0].url}
             uploaded
           />
         </Section>
       ) : null}
 
-      {manuscript.status !== 'submitted' &&
+      {values.status !== 'submitted' &&
         form.haspopup === 'false' && (
           <Button primary type="submit">
             Submit your manuscript
           </Button>
         )}
 
-      {manuscript.status !== 'submitted' &&
+      {values.status !== 'submitted' &&
         form.haspopup === 'true' && (
           <div>
             <Button onClick={toggleConfirming} primary type="button">

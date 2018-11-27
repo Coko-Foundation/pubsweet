@@ -35,7 +35,9 @@ const ReviewLayout = ({
       content: (
         <div>
           <ReviewMetadata manuscript={manuscript} />
-          <Review review={review} />
+          <Review
+            review={manuscript.reviews.find(review => !review.isDecision) || {}}
+          />
         </div>
       ),
       key: manuscript.id,
@@ -46,7 +48,6 @@ const ReviewLayout = ({
   }, [])
 
   const label = moment().format('YYYY-MM-DD')
-
   reviewSections.push({
     content: (
       <div>

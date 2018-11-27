@@ -9,9 +9,11 @@ import DecisionReview from './DecisionReview'
 //     )[0] || {}
 //   return status
 const getCompletedReviews = (manuscript, currentUser) => {
-  const team = manuscript.teams.find(team => team.teamType === 'reviewerEditor')
+  const team =
+    manuscript.teams.find(team => team.teamType === 'reviewerEditor') || {}
   const { status } =
-    team.status.filter(member => member.id === currentUser.id)[0] || {}
+    (team.status || []).filter(member => member.user === currentUser.id)[0] ||
+    {}
   return status
 }
 

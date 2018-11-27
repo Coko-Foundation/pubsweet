@@ -1,22 +1,26 @@
 import { compose } from 'recompose'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
-
 import mutations from './mutations'
 import Login from '../Login'
-import redirectPath from '../redirect'
+
+const getNextUrl = () => {
+  const url = new URL(window.location.href)
+  return `${window.location.protocol}//${
+    window.location.host
+  }${url.searchParams.get('next')}`
+}
 
 const localStorage = window.localStorage || undefined
 
-const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
+const handleSubmit = (values, { props, setSubmitting, setErrors, ...rest }) =>
   props
-    .loginUser({ variables: { input: values } })
-    .then(({ data, errors }) => {
-      if (!errors) {
-        localStorage.setItem('token', data.loginUser.token)
-        props.history.push(redirectPath({ location: props.location }))
-        setSubmitting(true)
-      }
+    .loginUser({
+      variables: { input: values },
+    })
+    .then(({ data }) => {
+      localStorage.setItem('token', data.loginUser.token)
+      window.location = getNextUrl()
     })
     .catch(e => {
       if (e.graphQLErrors) {
@@ -38,6 +42,9 @@ const enhancedFormik = withFormik({
   handleSubmit,
 })(Login)
 
-export default compose(graphql(mutations.LOGIN_USER, { name: 'loginUser' }))(
-  enhancedFormik,
-)
+export default compose(
+  // graphql(queries.currentUser),
+  graphql(mutations.LOGIN_USER, {
+    name: 'loginUser',
+  }),
+)(enhancedFormik)

@@ -25,6 +25,7 @@ const reviewFields = `
       url
     }
   }
+  isDecision
   recommendation
   user {
     id
@@ -77,7 +78,7 @@ const fragmentFields = `
       username
     }
     status {
-      id
+      user
       status
     }
   }
@@ -232,11 +233,12 @@ export default compose(
     }) => ({
       journal: { id: journal },
       review:
-        manuscript.reviews.find(review => review.user.id === currentUser.id) ||
-        {},
+        manuscript.reviews.find(
+          review => review.user.id === currentUser.id && !review.isDecision,
+        ) || {},
       status: manuscript.teams
         .find(team => team.teamType === 'reviewerEditor')
-        .status.find(status => status.id === currentUser.id).status,
+        .status.find(status => status.user === currentUser.id).status,
       updateReview: (review, file) => {
         ;(review.comments || []).map(comment => {
           delete comment.files
@@ -288,13 +290,13 @@ export default compose(
           }
           createFile(newFile)
         }),
-      completeReview: () => {
+      completeReview: history => {
         const team = cloneDeep(manuscript.teams).find(
           team => team.teamType === 'reviewerEditor',
         )
 
         team.status.map(status => {
-          if (status.id === currentUser.id) {
+          if (status.user === currentUser.id) {
             status.status = 'completed'
           }
           delete status.__typename
@@ -307,19 +309,21 @@ export default compose(
               status: team.status,
             },
           },
+        }).then(() => {
+          history.push('/')
         })
       },
     }),
   ),
   withFormik({
     isInitialValid: ({ review }) => {
-      const isRecommendation = review.recommendation != null
+      const isRecommendation = review.recommendation !== ''
       const isCommented = getCommentContent(review, 'note') !== ''
 
       return isCommented && isRecommendation
     },
     displayName: 'review',
     handleSubmit: (props, { props: { completeReview, history } }) =>
-      completeReview(),
+      completeReview(history),
   }),
 )(ReviewLayout)

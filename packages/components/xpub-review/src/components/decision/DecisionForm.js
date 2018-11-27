@@ -43,6 +43,7 @@ const NoteDecision = (updateReview, uploadFile, review) => props => (
 const NoteInput = ({ field, form: { values }, review, updateReview }) => (
   <NoteEditor
     {...field}
+    key="note-input"
     onBlur={value => {
       const { updateIndex, comment } = createComments(
         values,
@@ -73,6 +74,7 @@ const AttachmentsInput = type => ({
 }) => [
   <UploadButton
     buttonText="↑ Upload files"
+    key="note-attachment"
     onChange={event => {
       const val = event.target.files[0]
       const file = cloneDeep(val)
@@ -122,20 +124,20 @@ const DecisionForm = ({
   uploadFile,
   updateReview,
   review,
-  status,
   isValid,
 }) => (
   <form onSubmit={handleSubmit}>
-    <AdminSection>
+    <AdminSection key="note">
       <div name="note">
         <FieldArray
           component={NoteDecision(updateReview, uploadFile, review)}
+          key="comments-array"
           name="comments"
         />
       </div>
     </AdminSection>
 
-    <AdminSection>
+    <AdminSection key="recommendation">
       <Field
         component={RecommendationInput(journal)}
         name="decision"
@@ -144,7 +146,7 @@ const DecisionForm = ({
       />
     </AdminSection>
 
-    <AdminSection>
+    <AdminSection key="submit">
       <Button disabled={!isValid} primary type="submit">
         Submit
       </Button>

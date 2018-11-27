@@ -43,12 +43,31 @@ const updateTeam = gql`
   }
 `
 
+const createTeamMutation = gql`
+  mutation($input: TeamInput!) {
+    createTeam(input: $input) {
+      ${teamFields}
+    }
+  }
+`
+
 // TODO: select multiple editors
-const AssignEditor = ({ updateTeam, teamName, teamRole, value, options }) => (
+const AssignEditor = ({
+  updateTeam,
+  createTeam,
+  teamName,
+  teamRole,
+  value,
+  options,
+}) => (
   <Menu
     label={teamName}
     onChange={user => {
-      updateTeam(user, teamRole)
+      if (value) {
+        updateTeam(user, teamRole)
+      } else {
+        createTeam(user, teamRole)
+      }
     }}
     options={options}
     placeholder="Assign an editor…"
@@ -76,6 +95,32 @@ export default compose(
 
       return {
         updateTeam,
+      }
+    },
+  }),
+  graphql(createTeamMutation, {
+    props: ({ mutate, ownProps }) => {
+      const createTeam = (userId, teamRole) => {
+        const input = {
+          object: {
+            objectId: ownProps.manuscript.id,
+            objectType: 'Manuscript',
+          },
+          name:
+            teamRole === 'seniorEditor' ? 'Senior Editor' : 'Handling Editor',
+          teamType: teamRole,
+          members: [userId],
+        }
+
+        mutate({
+          variables: {
+            input,
+          },
+        })
+      }
+
+      return {
+        createTeam,
       }
     },
   }),

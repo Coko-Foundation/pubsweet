@@ -37,8 +37,8 @@ const getNote = (notes, type) =>
 const getDeclarations = (manuscript, field) =>
   ((manuscript.meta || {}).declarations || {})[field]
 
-const getSupplementaryFiles = (supplementary = []) =>
-  supplementary.filter(file => file.fileType === 'supplementary') || []
+const getSupplementaryFiles = supplementary =>
+  (supplementary || []).filter(file => file.fileType === 'supplementary') || []
 
 // Due to migration to new Data Model
 // Attachement component needs different data structure to work

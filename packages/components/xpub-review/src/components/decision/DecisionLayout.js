@@ -31,8 +31,7 @@ const DecisionLayout = ({
   const editorSections = []
   const manuscriptVersions = manuscript.manuscriptVersions || []
   manuscriptVersions.forEach(manuscript => {
-    const { decision } = manuscript
-    const submittedMoment = moment(decision.submitted)
+    const submittedMoment = moment(manuscript.updated)
     const label = submittedMoment.format('YYYY-MM-DD')
 
     decisionSections.push({
@@ -57,24 +56,24 @@ const DecisionLayout = ({
   decisionSections.push({
     content: (
       <div>
-        <AdminSection>
+        <AdminSection key="assign-editors">
           <AssignEditorsReviewers
             AssignEditor={AssignEditor}
             journal={journal}
             manuscript={manuscript}
           />
         </AdminSection>
-        <AdminSection>
+        <AdminSection key="review-metadata">
           <ReviewMetadata manuscript={manuscript} />
         </AdminSection>
-        <AdminSection>
+        <AdminSection key="decision-review">
           <DecisionReviews manuscript={manuscript} />
         </AdminSection>
-        <AdminSection>
+        <AdminSection key="decision-form">
           <DecisionForm
             handleSubmit={handleSubmit}
             isValid={isValid}
-            review={review}
+            review={review.find(review => review.isDecision) || {}}
             updateReview={updateReview}
             uploadFile={uploadFile}
           />

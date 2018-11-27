@@ -215,6 +215,7 @@ export default compose(
   withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
     journal: { id: journal },
     forms: cloneDeep(getFile),
+    manuscript,
   })),
   withFormik({
     initialValues: {},

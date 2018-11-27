@@ -21,6 +21,7 @@ export default {
             open
             recommendation
             created
+            isDecision
             user {
               id
               username
@@ -35,12 +36,13 @@ export default {
               objectId
               objectType
             }
+            objectType
             members {
               id
               username
             }
             status {
-              id
+              user
               status
             }
           }
