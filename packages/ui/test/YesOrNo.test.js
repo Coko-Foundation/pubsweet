@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 
@@ -12,15 +12,13 @@ const props = {
   value: 'Maybe',
 }
 
-const wrapper = shallow(<YesOrNo {...props} />)
-  .find('Colorized')
-  .shallow()
-  .find('YesOrNo')
-  .shallow()
+// Revisit using `shallow` once support for React's ContextConsumer is
+// further along in enzyme: https://github.com/airbnb/enzyme/issues/1908
+const wrapper = mount(<YesOrNo {...props} />).find('RadioGroup')
 const radio = wrapper.find(RadioGroup)
 
 describe('Yes or No', () => {
-  test('is rendered corrctly', () => {
+  test('is rendered correctly', () => {
     const tree = renderer
       .create(
         <TestThemeProvider>
