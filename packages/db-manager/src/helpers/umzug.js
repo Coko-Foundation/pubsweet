@@ -22,6 +22,7 @@ const getUmzug = async migrationsPaths => {
   const tempDir = await makeTempDir({
     prefix: 'migrations-',
     unsafeCleanup: true,
+    dir: process.cwd(),
   })
 
   // filter out any migration paths that do not exist
