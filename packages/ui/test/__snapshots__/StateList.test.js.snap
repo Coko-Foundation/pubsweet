@@ -1,14 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StateList is rendered correctly 1`] = `
+.c2 {
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 24px;
+}
+
+.c2:focus {
+  outline: none;
+}
+
+.c2:hover {
+  color: black;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 <div
-  className="ktygOq"
+  className="c0"
 >
   <div
-    className="dUxHSE"
+    className="c1"
   >
     <span
-      className="ftfxk"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -18,7 +69,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Clean
     </span>
     <svg
-      className="BpODf"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -35,10 +86,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="dUxHSE"
+    className="c1"
   >
     <span
-      className="ftfxk"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -48,7 +99,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Edit
     </span>
     <svg
-      className="BpODf"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -65,10 +116,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="dUxHSE"
+    className="c1"
   >
     <span
-      className="ftfxk"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -78,7 +129,7 @@ exports[`StateList is rendered correctly 1`] = `
       To Review
     </span>
     <svg
-      className="BpODf"
+      className="c3"
       fill="none"
       height={16}
       stroke="currentColor"
@@ -95,10 +146,10 @@ exports[`StateList is rendered correctly 1`] = `
     </svg>
   </div>
   <div
-    className="dUxHSE"
+    className="c1"
   >
     <span
-      className="ftfxk"
+      className="c2"
       disabled={false}
       onClick={[Function]}
       onKeyPress={[Function]}

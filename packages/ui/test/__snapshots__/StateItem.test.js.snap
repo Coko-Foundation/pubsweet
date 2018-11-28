@@ -1,8 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StateItem is rendered correctly 1`] = `
+.c0 {
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 24px;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:hover {
+  color: black;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+
 <span
-  className="ftfxk"
+  className="c0"
   disabled={false}
   onClick={[Function]}
   onKeyPress={[Function]}
