@@ -43,7 +43,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "styled-components": "^4.1.1",
-    "styled-normalize": "^3.0.1",
+    "styled-normalize": "^8.0.4",
     "subscriptions-transport-ws": "^0.9.12"
   },
   "devDependencies": {
