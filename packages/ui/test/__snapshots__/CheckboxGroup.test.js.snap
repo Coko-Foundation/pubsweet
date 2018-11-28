@@ -1,89 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox Group is rendered correctly 1`] = `
-.c1 {
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c1:not(:last-child) {
-  margin-right: 0;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: left;
-  -webkit-justify-content: left;
-  -ms-flex-pack: left;
-  justify-content: left;
-}
-
 <div
-  className="c0"
+  className="ggGKkU"
 >
   <label
     checked={false}
-    className="c1"
+    className="fcsPpP"
   >
     <input
       checked={false}
-      className=""
+      className="jGzFqE"
       onChange={[Function]}
       type="checkbox"
       value="one"
     />
     <span
       checked={false}
-      className=""
+      className="eDCunu"
     >
       One
     </span>
   </label>
   <label
     checked={false}
-    className="c1"
+    className="fcsPpP"
   >
     <input
       checked={false}
-      className=""
+      className="jGzFqE"
       onChange={[Function]}
       type="checkbox"
       value="two"
     />
     <span
       checked={false}
-      className=""
+      className="eDCunu"
     >
       Two
     </span>
   </label>
   <label
     checked={false}
-    className="c1"
+    className="fcsPpP"
   >
     <input
       checked={false}
-      className=""
+      className="jGzFqE"
       onChange={[Function]}
       type="checkbox"
       value="three"
     />
     <span
       checked={false}
-      className=""
+      className="eDCunu"
     >
       Three
     </span>

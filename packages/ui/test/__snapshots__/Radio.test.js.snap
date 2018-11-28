@@ -1,31 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio is rendered correctly 1`] = `
-.c1 {
-  margin-right: 8px;
-}
-
-.c0 {
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: calc(8px * 3);
-  color: black;
-}
-
 <label
   checked={false}
-  className="c0"
+  className="kcvOGf"
 >
   <input
     checked={false}
-    className="c1"
+    className="cpIJYa"
     name="TestName"
     required={true}
     type="radio"
@@ -33,7 +15,7 @@ exports[`Radio is rendered correctly 1`] = `
   />
   <span
     checked={false}
-    className=""
+    className="kJVaJF"
   >
     TestLabel
   </span>

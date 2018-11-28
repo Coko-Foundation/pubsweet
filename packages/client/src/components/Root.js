@@ -64,20 +64,20 @@ const Root = ({
   theme,
   connectToWebSocket = true,
 }) => (
-  <ApolloProvider
-    client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
-  >
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <ThemeProvider theme={theme}>
-          <StyleRoot>
-            <Normalize />
-            {routes}
-          </StyleRoot>
-        </ThemeProvider>
-      </ConnectedRouter>
-    </Provider>
-  </ApolloProvider>
+  <div>
+    <Normalize />
+    <ApolloProvider
+      client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
+    >
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <ThemeProvider theme={theme}>
+            <StyleRoot>{routes}</StyleRoot>
+          </ThemeProvider>
+        </ConnectedRouter>
+      </Provider>
+    </ApolloProvider>
+  </div>
 )
 
 Root.propTypes = {

@@ -1,34 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Files renders correctly 1`] = `
-.c0 {
-  background: transparent;
-  border: dashed;
-  height: calc( * 3);
-  cursor: pointer;
-  margin-bottom: calc( * 3);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: left;
-  -webkit-justify-content: left;
-  -ms-flex-pack: left;
-  justify-content: left;
-}
-
 <div
-  className=""
+  className="jtSbhi"
 >
   <div>
     <button
-      className="c0"
+      className="boCOJU"
       onClick={[Function]}
       type="button"
     >
@@ -46,7 +24,7 @@ exports[`Files renders correctly 1`] = `
     />
   </div>
   <div
-    className="c1"
+    className="ggGKkU"
   />
 </div>
 `;

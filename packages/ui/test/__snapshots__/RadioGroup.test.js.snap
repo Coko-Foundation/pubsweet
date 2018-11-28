@@ -1,48 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Radio Group is rendered correctly 1`] = `
-.c2 {
-  margin-right: 8px;
-}
-
-.c1 {
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: calc(8px * 3);
-  color: black;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: left;
-  -webkit-justify-content: left;
-  -ms-flex-pack: left;
-  justify-content: left;
-}
-
 <div
-  className="c0"
+  className="ggGKkU"
 >
   <label
     checked={false}
-    className="c1"
+    className="kcvOGf"
   >
     <input
       checked={false}
-      className="c2"
+      className="cpIJYa"
       name="TestName"
       onChange={[Function]}
       required={true}
@@ -51,18 +19,18 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
     <span
       checked={false}
-      className=""
+      className="kJVaJF"
     >
       Yes
     </span>
   </label>
   <label
     checked={false}
-    className="c1"
+    className="kcvOGf"
   >
     <input
       checked={false}
-      className="c2"
+      className="cpIJYa"
       name="TestName"
       onChange={[Function]}
       required={true}
@@ -71,18 +39,18 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
     <span
       checked={false}
-      className=""
+      className="kJVaJF"
     >
       No
     </span>
   </label>
   <label
     checked={false}
-    className="c1"
+    className="kcvOGf"
   >
     <input
       checked={false}
-      className="c2"
+      className="cpIJYa"
       name="TestName"
       onChange={[Function]}
       required={true}
@@ -91,7 +59,7 @@ exports[`Radio Group is rendered correctly 1`] = `
     />
     <span
       checked={false}
-      className=""
+      className="kJVaJF"
     >
       Maybe
     </span>

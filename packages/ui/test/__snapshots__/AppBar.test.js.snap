@@ -1,87 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
-.c4 {
-  color: black;
-  cursor: pointer;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c4:hover,
-.c4:focus,
-.c4:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(8px * 6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 > * {
-  height: calc(8px * 6);
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  margin: calc(8px * 3) 1rem calc(8px * 3) 0;
-}
-
 <nav
-  className="c0"
+  className="gmvCmZ"
 >
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c2"
+      className="kyOjWa"
     >
       <a
-        className="c3 c4"
+        className="fPOZMv hOOEYl"
         href="/"
         onClick={[Function]}
       >
@@ -90,13 +20,13 @@ exports[`AppBar Basic display 1`] = `
     </span>
   </div>
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c5"
+      className="cJOObM"
     >
       <a
-        className="c4"
+        className="hOOEYl"
         href="/login"
         onClick={[Function]}
       >
@@ -108,157 +38,17 @@ exports[`AppBar Basic display 1`] = `
 `;
 
 exports[`AppBar With admin user 1`] = `
-.c6 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: calc(8px / 2);
-}
-
-.c6 svg {
-  stroke: black;
-  width: calc(2 * 8px);
-  height: calc(2 * 8px);
-}
-
-.c7 {
-  background: grey;
-  border: 1px solid grey;
-  border-radius: 8px;
-  color: black;
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: calc(8px * 3);
-  min-width: calc(8px * 12);
-  padding: 8px;
-  background: none;
-  border: none;
-  min-width: 0;
-  padding: 0;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c7:focus,
-.c7:hover {
-  background-color: hsl(0,0%,35.1%);
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c7:active {
-  background-color: hsl(0,0%,25.1%);
-}
-
-.c7[disabled] {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.c7[disabled]:focus,
-.c7[disabled]:hover,
-.c7[disabled]:active {
-  background: grey;
-}
-
-.c7:hover,
-.c7:focus,
-.c7:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c4 {
-  color: black;
-  cursor: pointer;
-  color: black;
-  font: sans-serif;
-  font-size: 18px;
-  font-weight: normal;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-transform: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-}
-
-.c4:hover,
-.c4:focus,
-.c4:active {
-  background: none;
-  color: black;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  min-height: calc(8px * 6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
-}
-
-.c3 > * {
-  height: calc(8px * 6);
-}
-
-.c5 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  margin: calc(8px * 3) 1rem calc(8px * 3) 0;
-}
-
 <nav
-  className="c0"
+  className="gmvCmZ"
 >
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c2"
+      className="kyOjWa"
     >
       <a
-        className="c3 c4"
+        className="fPOZMv hOOEYl"
         href="/"
         onClick={[Function]}
       >
@@ -267,13 +57,13 @@ exports[`AppBar With admin user 1`] = `
     </span>
   </div>
   <div
-    className="c1"
+    className="bKnjap"
   >
     <span
-      className="c5"
+      className="cJOObM"
     >
       <span
-        className="c6"
+        className="fewLnL"
         color="black"
         role="img"
         size={2}
@@ -300,10 +90,10 @@ exports[`AppBar With admin user 1`] = `
        (admin)
     </span>
     <span
-      className="c5"
+      className="cJOObM"
     >
       <span
-        className="c6"
+        className="fewLnL"
         color="black"
         role="img"
         size={2}
@@ -328,7 +118,7 @@ exports[`AppBar With admin user 1`] = `
         </svg>
       </span>
       <button
-        className="c7"
+        className="czJsmP"
         onClick={[Function]}
         type="button"
       >
