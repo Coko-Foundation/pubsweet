@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@2.0.17...pubsweet-component-password-reset-frontend@3.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
 <a name="2.0.17"></a>
 ## [2.0.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@2.0.16...pubsweet-component-password-reset-frontend@2.0.17) (2018-11-05)
 

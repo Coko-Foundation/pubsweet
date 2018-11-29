@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.2.0...@pubsweet/styleguide@4.0.0) (2018-11-29)
+
+
+### Bug Fixes
+
+* test fixes ([651a697](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/651a697))
+* upgrade styled-normalize ([98f2e4c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98f2e4c))
+
+
+### Features
+
+* **styleguide:** upgrade styled-components ([7aa0ffc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7aa0ffc))
+
+
+### BREAKING CHANGES
+
+* **styleguide:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.1.12...@pubsweet/styleguide@3.2.0) (2018-11-05)
 

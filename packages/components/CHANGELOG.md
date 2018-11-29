@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.2...pubsweet-components@10.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
       <a name="9.10.2"></a>
 ## [9.10.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.1...pubsweet-components@9.10.2) (2018-11-16)
 
