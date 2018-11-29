@@ -15,12 +15,12 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
-        <styled.h1>
+        <ForwardRef>
           Login
-        </styled.h1>,
+        </ForwardRef>,
         false,
         <form>
           <C
@@ -31,33 +31,33 @@ ShallowWrapper {
             component={[Function]}
             name="password"
           />
-          <styled.button
+          <ForwardRef
             primary={true}
             type="submit"
           >
             Login
-          </styled.button>
+          </ForwardRef>
         </form>,
-        <styled.div>
+        <ForwardRef>
           <span>
             Don't have an account? 
           </span>
-          <Styled(Link)
+          <ForwardRef
             to="/signup"
           >
             Sign up
-          </Styled(Link)>
-        </styled.div>,
-        <styled.div>
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef>
           <span>
             Forgot your password? 
           </span>
-          <Styled(Link)
+          <ForwardRef
             to="/password-reset"
           >
             Reset password
-          </Styled(Link)>
-        </styled.div>,
+          </ForwardRef>
+        </ForwardRef>,
       ],
       "small": true,
     },
@@ -66,13 +66,57 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "children": "Login",
         },
         "ref": null,
         "rendered": "Login",
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [
+            Object {
+              "level": 1,
+            },
+          ],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-Rmtcm",
+            "isStatic": false,
+            "rules": Array [
+              "
+  ",
+              "
+  color: ",
+              [Function],
+              ";
+  font-size: ",
+              [Function],
+              ";
+  font-family: ",
+              [Function],
+              ";
+  line-height: ",
+              [Function],
+              ";
+  ",
+              [Function],
+              ";
+",
+              ";
+  ",
+              [Function],
+              ";
+",
+            ],
+          },
+          "displayName": "styled.h1",
+          "render": [Function],
+          "styledComponentId": "sc-Rmtcm",
+          "target": "h1",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
       },
       false,
       Object {
@@ -89,12 +133,12 @@ ShallowWrapper {
               component={[Function]}
               name="password"
             />,
-            <styled.button
+            <ForwardRef
               primary={true}
               type="submit"
             >
               Login
-            </styled.button>,
+            </ForwardRef>,
           ],
           "onSubmit": undefined,
         },
@@ -127,7 +171,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
               "children": "Login",
               "primary": true,
@@ -135,7 +179,98 @@ ShallowWrapper {
             },
             "ref": null,
             "rendered": "Login",
-            "type": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [
+                Object {
+                  "type": "button",
+                },
+              ],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-kgoBCf",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  background: ",
+                  [Function],
+                  ";
+  border: ",
+                  [Function],
+                  " ",
+                  [Function],
+                  " ",
+                  [Function],
+                  ";
+  border-radius: ",
+                  [Function],
+                  ";
+  color: ",
+                  [Function],
+                  ";
+  font-family: ",
+                  [Function],
+                  ";
+  font-size: ",
+                  [Function],
+                  ";
+  line-height: calc(",
+                  [Function],
+                  " * 3);
+  min-width: calc(",
+                  [Function],
+                  " * 12);
+  padding: ",
+                  [Function],
+                  ";
+
+  &:focus,
+  &:hover {
+    background-color: ",
+                  [Function],
+                  ";
+    transition: ",
+                  [Function],
+                  " ",
+                  [Function],
+                  ";
+  }
+
+  &:active {
+    background-color: ",
+                  [Function],
+                  ";
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background: ",
+                  [Function],
+                  ";
+    }
+  }
+
+  ",
+                  [Function],
+                  ";
+  ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "styled.button",
+              "render": [Function],
+              "styledComponentId": "sc-kgoBCf",
+              "target": "button",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            },
           },
         ],
         "type": "form",
@@ -143,17 +278,17 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "children": Array [
             <span>
               Don't have an account? 
             </span>,
-            <Styled(Link)
+            <ForwardRef
               to="/signup"
             >
               Sign up
-            </Styled(Link)>,
+            </ForwardRef>,
           ],
         },
         "ref": null,
@@ -172,32 +307,74 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
               "children": "Sign up",
               "to": "/signup",
             },
             "ref": null,
             "rendered": "Sign up",
-            "type": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-csuQGl",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  color: ",
+                  [Function],
+                  ";
+  cursor: pointer;
+
+  ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "Styled(Link)",
+              "render": [Function],
+              "styledComponentId": "sc-csuQGl",
+              "target": [Function],
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+              Symbol(Symbol.hasInstance): [Function],
+            },
           },
         ],
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-gwVKww",
+            "isStatic": true,
+            "rules": Array [],
+          },
+          "displayName": "styled.div",
+          "render": [Function],
+          "styledComponentId": "sc-gwVKww",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "children": Array [
             <span>
               Forgot your password? 
             </span>,
-            <Styled(Link)
+            <ForwardRef
               to="/password-reset"
             >
               Reset password
-            </Styled(Link)>,
+            </ForwardRef>,
           ],
         },
         "ref": null,
@@ -216,31 +393,99 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
               "children": "Reset password",
               "to": "/password-reset",
             },
             "ref": null,
             "rendered": "Reset password",
-            "type": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-csuQGl",
+                "isStatic": false,
+                "rules": Array [
+                  "
+  color: ",
+                  [Function],
+                  ";
+  cursor: pointer;
+
+  ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "Styled(Link)",
+              "render": [Function],
+              "styledComponentId": "sc-csuQGl",
+              "target": [Function],
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+              Symbol(Symbol.hasInstance): [Function],
+            },
           },
         ],
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-hXRMBi",
+            "isStatic": true,
+            "rules": Array [],
+          },
+          "displayName": "styled.div",
+          "render": [Function],
+          "styledComponentId": "sc-hXRMBi",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        },
       },
     ],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-eqIVtm",
+        "isStatic": false,
+        "rules": Array [
+          "
+  margin: 0 auto;
+  width: ",
+          [Function],
+          ";
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "propTypes": Object {
+        "medium": [Function],
+        "small": [Function],
+      },
+      "render": [Function],
+      "styledComponentId": "sc-eqIVtm",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
-          <styled.h1>
+          <ForwardRef>
             Login
-          </styled.h1>,
+          </ForwardRef>,
           false,
           <form>
             <C
@@ -251,33 +496,33 @@ ShallowWrapper {
               component={[Function]}
               name="password"
             />
-            <styled.button
+            <ForwardRef
               primary={true}
               type="submit"
             >
               Login
-            </styled.button>
+            </ForwardRef>
           </form>,
-          <styled.div>
+          <ForwardRef>
             <span>
               Don't have an account? 
             </span>
-            <Styled(Link)
+            <ForwardRef
               to="/signup"
             >
               Sign up
-            </Styled(Link)>
-          </styled.div>,
-          <styled.div>
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef>
             <span>
               Forgot your password? 
             </span>
-            <Styled(Link)
+            <ForwardRef
               to="/password-reset"
             >
               Reset password
-            </Styled(Link)>
-          </styled.div>,
+            </ForwardRef>
+          </ForwardRef>,
         ],
         "small": true,
       },
@@ -286,13 +531,57 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "children": "Login",
           },
           "ref": null,
           "rendered": "Login",
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [
+              Object {
+                "level": 1,
+              },
+            ],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-Rmtcm",
+              "isStatic": false,
+              "rules": Array [
+                "
+  ",
+                "
+  color: ",
+                [Function],
+                ";
+  font-size: ",
+                [Function],
+                ";
+  font-family: ",
+                [Function],
+                ";
+  line-height: ",
+                [Function],
+                ";
+  ",
+                [Function],
+                ";
+",
+                ";
+  ",
+                [Function],
+                ";
+",
+              ],
+            },
+            "displayName": "styled.h1",
+            "render": [Function],
+            "styledComponentId": "sc-Rmtcm",
+            "target": "h1",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
         },
         false,
         Object {
@@ -309,12 +598,12 @@ ShallowWrapper {
                 component={[Function]}
                 name="password"
               />,
-              <styled.button
+              <ForwardRef
                 primary={true}
                 type="submit"
               >
                 Login
-              </styled.button>,
+              </ForwardRef>,
             ],
             "onSubmit": undefined,
           },
@@ -347,7 +636,7 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
                 "children": "Login",
                 "primary": true,
@@ -355,7 +644,98 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "Login",
-              "type": [Function],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [
+                  Object {
+                    "type": "button",
+                  },
+                ],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-kgoBCf",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  background: ",
+                    [Function],
+                    ";
+  border: ",
+                    [Function],
+                    " ",
+                    [Function],
+                    " ",
+                    [Function],
+                    ";
+  border-radius: ",
+                    [Function],
+                    ";
+  color: ",
+                    [Function],
+                    ";
+  font-family: ",
+                    [Function],
+                    ";
+  font-size: ",
+                    [Function],
+                    ";
+  line-height: calc(",
+                    [Function],
+                    " * 3);
+  min-width: calc(",
+                    [Function],
+                    " * 12);
+  padding: ",
+                    [Function],
+                    ";
+
+  &:focus,
+  &:hover {
+    background-color: ",
+                    [Function],
+                    ";
+    transition: ",
+                    [Function],
+                    " ",
+                    [Function],
+                    ";
+  }
+
+  &:active {
+    background-color: ",
+                    [Function],
+                    ";
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background: ",
+                    [Function],
+                    ";
+    }
+  }
+
+  ",
+                    [Function],
+                    ";
+  ",
+                    [Function],
+                    ";
+",
+                  ],
+                },
+                "displayName": "styled.button",
+                "render": [Function],
+                "styledComponentId": "sc-kgoBCf",
+                "target": "button",
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+              },
             },
           ],
           "type": "form",
@@ -363,17 +743,17 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "children": Array [
               <span>
                 Don't have an account? 
               </span>,
-              <Styled(Link)
+              <ForwardRef
                 to="/signup"
               >
                 Sign up
-              </Styled(Link)>,
+              </ForwardRef>,
             ],
           },
           "ref": null,
@@ -392,32 +772,74 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
                 "children": "Sign up",
                 "to": "/signup",
               },
               "ref": null,
               "rendered": "Sign up",
-              "type": [Function],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-csuQGl",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  color: ",
+                    [Function],
+                    ";
+  cursor: pointer;
+
+  ",
+                    [Function],
+                    ";
+",
+                  ],
+                },
+                "displayName": "Styled(Link)",
+                "render": [Function],
+                "styledComponentId": "sc-csuQGl",
+                "target": [Function],
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+                Symbol(Symbol.hasInstance): [Function],
+              },
             },
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-gwVKww",
+              "isStatic": true,
+              "rules": Array [],
+            },
+            "displayName": "styled.div",
+            "render": [Function],
+            "styledComponentId": "sc-gwVKww",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "children": Array [
               <span>
                 Forgot your password? 
               </span>,
-              <Styled(Link)
+              <ForwardRef
                 to="/password-reset"
               >
                 Reset password
-              </Styled(Link)>,
+              </ForwardRef>,
             ],
           },
           "ref": null,
@@ -436,20 +858,88 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
                 "children": "Reset password",
                 "to": "/password-reset",
               },
               "ref": null,
               "rendered": "Reset password",
-              "type": [Function],
+              "type": Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-csuQGl",
+                  "isStatic": false,
+                  "rules": Array [
+                    "
+  color: ",
+                    [Function],
+                    ";
+  cursor: pointer;
+
+  ",
+                    [Function],
+                    ";
+",
+                  ],
+                },
+                "displayName": "Styled(Link)",
+                "render": [Function],
+                "styledComponentId": "sc-csuQGl",
+                "target": [Function],
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+                Symbol(Symbol.hasInstance): [Function],
+              },
             },
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-hXRMBi",
+              "isStatic": true,
+              "rules": Array [],
+            },
+            "displayName": "styled.div",
+            "render": [Function],
+            "styledComponentId": "sc-hXRMBi",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          },
         },
       ],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-eqIVtm",
+          "isStatic": false,
+          "rules": Array [
+            "
+  margin: 0 auto;
+  width: ",
+            [Function],
+            ";
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "propTypes": Object {
+          "medium": [Function],
+          "small": [Function],
+        },
+        "render": [Function],
+        "styledComponentId": "sc-eqIVtm",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {

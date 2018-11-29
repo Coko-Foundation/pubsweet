@@ -11,7 +11,7 @@
 */
 
 import React from 'react'
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
 import OriginalButton from '../atoms/Button'
@@ -37,7 +37,7 @@ const common = css`
   ${override('ui.Action')};
 `
 
-const Button = OriginalButton.extend`
+const Button = styled(OriginalButton)`
   background: none;
   border: none;
   min-width: 0;
@@ -46,7 +46,7 @@ const Button = OriginalButton.extend`
   ${common};
 `
 
-const Link = OriginalLink.extend`
+const Link = styled(OriginalLink)`
   ${common};
 `
 
