@@ -2,7 +2,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const { cloneDeep } = require('lodash')
-const helpers = require('../src/helpers')
+const htmlTemplateService = require('../src/HTMLTemplateService')
 
 const emailProps = {
   toUserName: 'Peter Griffin',
@@ -19,7 +19,7 @@ describe('Email template helpers', () => {
     replacements = cloneDeep(emailProps)
   })
   it('should return the notification HTML with CTA', () => {
-    const notificationBody = helpers.getCompiledNotificationBody({
+    const notificationBody = htmlTemplateService.getCompiledNotificationBody({
       replacements,
     })
 
@@ -32,7 +32,7 @@ describe('Email template helpers', () => {
 
   it('should return the notification HTML without CTA', () => {
     replacements.hasLink = false
-    const notificationBody = helpers.getCompiledNotificationBody({
+    const notificationBody = htmlTemplateService.getCompiledNotificationBody({
       replacements,
     })
     expect(notificationBody).toContain('Peter Griffin')
@@ -41,7 +41,7 @@ describe('Email template helpers', () => {
   })
   it('should return the notification HTML without intro', () => {
     replacements.hasIntro = false
-    const notificationBody = helpers.getCompiledNotificationBody({
+    const notificationBody = htmlTemplateService.getCompiledNotificationBody({
       replacements,
     })
     expect(notificationBody).not.toContain('Peter Griffin')
@@ -50,7 +50,7 @@ describe('Email template helpers', () => {
   })
   it('should return the notification HTML without signature', () => {
     replacements.hasSignature = false
-    const notificationBody = helpers.getCompiledNotificationBody({
+    const notificationBody = htmlTemplateService.getCompiledNotificationBody({
       replacements,
     })
     expect(notificationBody).toContain('Peter Griffin')

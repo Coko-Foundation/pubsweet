@@ -24,14 +24,7 @@ const getCompiledInvitationBody = ({ replacements }) => {
   return compileBody({ fileName: 'invitation', context: replacements })
 }
 
-const readFile = path =>
-  fs.readFileSync(path, { encoding: 'utf-8' }, (err, file) => {
-    if (err) {
-      throw err
-    } else {
-      return file
-    }
-  })
+const readFile = path => fs.readFileSync(path, 'utf-8')
 
 const handlePartial = (partialName, context = {}) => {
   let partial = readFile(`${__dirname}/templates/partials/${partialName}.hbs`)

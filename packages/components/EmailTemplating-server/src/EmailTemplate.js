@@ -1,6 +1,7 @@
 const config = require('config')
-const helpers = require('./helpers')
+const htmlTemplateService = require('./HTMLTemplateService')
 const SendEmail = require('@pubsweet/component-send-email')
+const logger = require('@pubsweet/logger')
 
 const configData = {
   logo: config.get('journal.logo'),
@@ -10,9 +11,10 @@ const configData = {
   logoLink: config.get('journal.logoLink'),
   publisher: config.get('journal.publisher'),
 }
-class Email {
+class EmailTemplate {
   constructor({
     type = 'system',
+    templateType = 'notification',
     fromEmail = config.get('journal.staffEmail'),
     toUser = {
       id: '',
@@ -23,15 +25,19 @@ class Email {
       subject: '',
       ctaLink: '',
       ctaText: '',
+      paragraph: '',
       signatureName: '',
       unsubscribeLink: '',
       signatureJournal: '',
     },
+    bodyProps = { hasLink: false, hasIntro: false, hasSignature: false },
   }) {
     this.type = type
     this.toUser = toUser
     this.content = content
+    this.bodyProps = bodyProps
     this.fromEmail = fromEmail
+    this.templateType = templateType
   }
 
   set _toUser(newToUser) {
@@ -46,41 +52,49 @@ class Email {
     this.content = newContent
   }
 
-  getInvitationBody({ emailBodyProps }) {
+  _getInvitationBody() {
     return {
-      html: helpers.getCompiledInvitationBody({
+      html: htmlTemplateService.getCompiledInvitationBody({
         replacements: {
           ...configData,
           ...this.content,
-          ...emailBodyProps,
+          ...this.bodyProps,
           toEmail: this.toUser.email,
           toUserName: this.toUser.name,
         },
       }),
-      text: `${emailBodyProps.resend} ${emailBodyProps.upperContent} ${
-        emailBodyProps.manuscriptText
-      } ${emailBodyProps.lowerContent} ${this.content.signatureName}`,
+      text: `${this.bodyProps.resend} ${this.bodyProps.upperContent} ${
+        this.bodyProps.manuscriptText
+      } ${this.bodyProps.lowerContent} ${this.content.signatureName}`,
     }
   }
 
-  getNotificationBody({ emailBodyProps }) {
+  _getNotificationBody() {
     return {
-      html: helpers.getCompiledNotificationBody({
+      html: htmlTemplateService.getCompiledNotificationBody({
         replacements: {
           ...configData,
           ...this.content,
-          ...emailBodyProps,
+          ...this.bodyProps,
           toEmail: this.toUser.email,
           toUserName: this.toUser.name,
         },
       }),
-      text: `${emailBodyProps.paragraph} ${this.content.ctaLink} ${
+      text: `${this.content.paragraph} ${this.content.ctaLink} ${
         this.content.ctaText
       } ${this.content.signatureName}`,
     }
   }
 
-  async sendEmail({ text, html }) {
+  _getEmailTemplate() {
+    return this.templateType === 'notification'
+      ? this._getNotificationBody()
+      : this._getInvitationBody()
+  }
+
+  async sendEmail() {
+    const { html, text } = this._getEmailTemplate()
+
     const { fromEmail: from } = this
     const { email: to } = this.toUser
     const { subject } = this.content
@@ -95,10 +109,17 @@ class Email {
 
     try {
       await SendEmail.send(mailData)
+      logger.info(
+        `Sent email from: ${from} to: ${to} with subject: "${subject}"`,
+      )
+      logger.debug(
+        `Sent email from: ${from} to: ${to} with subject: "${subject}"`,
+      )
     } catch (e) {
+      logger.error(e)
       throw new Error(e)
     }
   }
 }
 
-module.exports = Email
+module.exports = EmailTemplate

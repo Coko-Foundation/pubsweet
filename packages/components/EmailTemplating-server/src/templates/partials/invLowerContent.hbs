@@ -1,16 +1,20 @@
+{{#unless resend }}
+{{> invManuscriptData }}
+{{/unless}}
+
 <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
   <tr>
-    <td style="padding:30px 23px 0px 23px;background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff">
-      <p data-pm-slice="1 1 []">&nbsp;</p>
-
-      {{#unless resend }}
-        {{> invManuscriptData }}
-      {{/unless}}
-      <p data-pm-slice="1 1 []">{{{ lowerContent }}}</p>
-
-      <p>&nbsp;</p>
-      {{> signature }}
-      <div style="text-align: center;">&nbsp;</div>
+    <td style="padding:0px 50px 0px 50px;line-height:18px;text-align:inherit;" height="100%" valign="top" bgcolor="">
+      <div>
+        <span style="font-size:14px;">
+          <span style="color:#242424;">
+            {{{ lowerContent }}}
+            {{ lowerContentLink }}
+          </span>
+        </span>
+      </div>
+      <div>&nbsp;</div>
+      {{> signature}}
     </td>
   </tr>
 </table>

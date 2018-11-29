@@ -37,7 +37,7 @@
     }
 
     body a {
-      color: #0D78F2;
+      color: #007e92;
       text-decoration: none;
     }
 
@@ -71,30 +71,49 @@
       width: 25%;
     }
 
+    .footer-link a {
+      color: #444444;
+      text-decoration: none;
+    }
+
+    .padding-decline {
+      padding:0px 0px 0px 50px;
+    }
+
+    .padding-agree {
+      padding:0px 50px 0px 0px;
+    }
+
     @media screen and (max-width:480px) {
+
       .preheader .rightColumnContent,
       .footer .rightColumnContent {
         text-align: left !important;
       }
+
       .preheader .rightColumnContent div,
       .preheader .rightColumnContent span,
       .footer .rightColumnContent div,
       .footer .rightColumnContent span {
         text-align: left !important;
       }
+
       .preheader .rightColumnContent,
       .preheader .leftColumnContent {
         font-size: 80% !important;
         padding: 5px 0;
       }
+
       table.wrapper-mobile {
         width: 100% !important;
         table-layout: fixed;
       }
+
       img.max-width {
         height: auto !important;
         max-width: 480px !important;
       }
+
       a.bulletproof-button {
         display: block !important;
         width: auto !important;
@@ -102,9 +121,11 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
       }
+
       .columns {
         width: 100% !important;
       }
+
       .column {
         display: block !important;
         width: 100% !important;
@@ -112,6 +133,14 @@
         padding-right: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
+      }
+
+      .padding-decline {
+        padding: 0px;
+      }
+
+      .padding-agree {
+        padding: 10px 0px 0px 0px;
       }
     }
   </style>
@@ -126,7 +155,8 @@
       <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#F4F4F4">
         <tr>
           <td valign="top" bgcolor="#F4F4F4" width="100%">
-            <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
+            <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0"
+              border="0">
               <tr>
                 <td width="100%">
                   <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -136,26 +166,21 @@
                           <center>
                           <table><tr><td width="600">
                           <![endif]-->
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width:600px;" align="center">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width:600px;"
+                          align="center">
                           <tr>
-                            <td role="modules-container" style="padding: 0px 0px 0px 0px; color: #626262; text-align: left;" bgcolor="#F4F4F4" width="100%"
-                              align="left">
+                            <td role="modules-container" style="padding: 0px 0px 0px 0px; color: #626262; text-align: left;"
+                              bgcolor="#F4F4F4" width="100%" align="left">
 
-                              <table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0"
-                                width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                              <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0"
+                                cellspacing="0" width="100%" style="table-layout: fixed;">
                                 <tr>
-                                  <td role="module-content">
-                                    <p>new invitation</p>
-                                  </td>
-                                </tr>
-                              </table>
-
-                              <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
-                                <tr>
-                                  <td style="font-size:6px;line-height:10px;padding:20px 0px 20px 0px;" valign="top" align="center">
-                                    <img class="max-width" border="0" style="display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:10% !important;width:10%;height:auto !important;"
-                                      src="{{ logo }}"
-                                      alt="" width="60">
+                                  <td style="font-size:6px;line-height:10px;padding:32px 0px 24px 0px;" valign="top"
+                                    align="center">
+                                    <a href="{{ logoLink }}">
+                                      <img class="max-width" border="0" style="display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:10% !important;width:10%;height:auto !important;"
+                                        src="{{ logo }}" alt="Hindawi Logo" width="60">
+                                    </a>
                                   </td>
                                 </tr>
                               </table>

@@ -18,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "SendEmail"
+    "path": "EmailTemplating"
   },
   "jest": {
     "verbose": true,

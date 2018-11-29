@@ -2,26 +2,16 @@
 
 ## About
 
-The `email-templating` component contains an `Email` class with two main instance methods: `getNotificationBody` for retrieving the email body (html and text) and `sendEmail` for sending the email using the `send-email` component from PubSweet. There is also a third instance method called `getInvitationBody` which handles the specific case of inviting reviewers to your system.
+The `email-templating` component contains an `Email` class with two main instance methods: `getNotificationBody` for retrieving the email body (html and text) and `sendEmail` for sending the email using the `send-email` component from PubSweet.
 
 1.  `getNotificationBody({ emailBodyProps = {} )` accepts one parameter object with should contain the following properties:
-
     * `paragraph`: the main text part of the email body which informs the recipient
     * `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
     * `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
     * `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
-
-    This function returns the HTML and text parts of the email which can then be used to send it.
-
+      This function returns the HTML and text parts of the email which can then be used to send it.
 1.  `sendEmail({ text, html })`:
     * accepts the text and HTML parts of an email and then uses the `send-email` component from PubSweet to actually send the email.
-1.  `getInvitationBody({ emailBodyProps = {} )` accepts one parameter object with should contain the following properties:
-    * `upperContent`: the first text part of the email in which the Editor asks the reviewer for his help
-    * `manuscriptText`: a piece of text which offers the reviewer more details about the manuscript
-    * `lowerContent`: extra information about potential conflicts of interest
-    * `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
-    * `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
-    * `resend`: a boolean which alters the content based on wether or not the Editor chose to resend an invitation
 
 The `Email` class also provides a `constructor` whose properties will be used when sending the email:
 
@@ -30,11 +20,11 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 3.  `toUser`: an Object with two properties: `email` and `name`. The `name` property will be used when addressing the recipient in the email content - for example: "Dear Dr. Rachel Smith".
 4.  `content`: an Object which contains properties about the email:
     1.  `subject`
-    2.  `signatureName` - the name which will appear in the signature
-    3.  `ctaLink` - the URL which will be placed in the button
-    4.  `ctaText` - the text which appears on the button
-    5.  `unsubscribeLink`
-    6.  `signatureJournal` - the journal or company name which will appear in the signature
+    1.  `signatureName` - the name which will appear in the signature
+    1.  `ctaLink` - the URL which will be placed in the button
+    1.  `ctaText` - the text which appears on the button
+    1.  `unsubscribeLink`
+    1.  `signatureJournal` - the journal or company name which will appear in the signature
 
 ## Usage
 
@@ -68,13 +58,15 @@ The `Email` class also provides a `constructor` whose properties will be used wh
     ![notification](https://gitlab.coko.foundation/xpub/xpub-faraday/uploads/27cb6acc8ff4a07758f55e5ea0504d28/notification.png)
 
     ```javascript
-    const emailTemplate = require('@pubsweet/component-email-template')
+    const EmailTemplate = require('@pubsweet/component-email-template')
     const config = require('config')
 
     const { name: journalName, fromEmail: staffEmail } = config.get('journal')
 
+    const paragraph = `We are please to inform you that the manuscript has passed the technical check process and is now submitted. Please click the link below to access the manuscript.`
+
     const sendNotifications = ({ user, editor, collection, fragment }) => {
-      const email = new emailTemplate({
+      const email = new EmailTemplate({
         type: 'user',
         fromEmail,
         toUser: {
@@ -86,25 +78,20 @@ The `Email` class also provides a `constructor` whose properties will be used wh
           signatureJournal: journalName,
           signatureName: `${editor.name}`,
           subject: `${collection.customId}: Manuscript Update`,
+          paragraph,
           unsubscribeLink: `http://localhost:3000/unsubscribe/${user.id}`,
           ctaLink: `http://localhost:3000/projects/${collection.id}/versions/${
             fragment.id
           }/details`,
         },
-      })
-
-      const paragraph = `We are please to inform you that the manuscript has passed the technical check process and is now submitted. Please click the link below to access the manuscript.`
-
-      const { html, text } = email.getNotificationBody({
-        emailBodyProps: {
-          paragraph,
+        bodyProps: {
           hasLink: true,
           hasIntro: true,
           hasSignature: true,
         },
       })
 
-      email.sendEmail({ html, text })
+      return email.sendEmail()
     }
     ```
 
