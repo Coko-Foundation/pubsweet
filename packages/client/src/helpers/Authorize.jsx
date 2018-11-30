@@ -74,4 +74,7 @@ function mapState(state) {
   }
 }
 
-export default compose(withAuthsome(), connect(mapState))(Authorize)
+export default compose(
+  withAuthsome(),
+  connect(mapState),
+)(Authorize)

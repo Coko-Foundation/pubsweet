@@ -39,10 +39,8 @@ export default compose(
     type: 'form',
     properties: forms[0] || {},
   })),
-  withState(
-    'activeTab',
-    'onChangeTab',
-    ({ forms, activeTab }) => (forms.length === 0 ? 'new' : 0),
+  withState('activeTab', 'onChangeTab', ({ forms, activeTab }) =>
+    forms.length === 0 ? 'new' : 0,
   ),
   withHandlers({
     changeProperties: ({

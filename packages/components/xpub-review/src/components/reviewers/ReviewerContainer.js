@@ -10,9 +10,12 @@ const removeReviewer = props => () => {
 }
 
 export default compose(
-  connect(null, {
-    deleteFragment: actions.deleteFragment,
-  }),
+  connect(
+    null,
+    {
+      deleteFragment: actions.deleteFragment,
+    },
+  ),
   withHandlers({
     removeReviewer: props => removeReviewer(props),
   }),

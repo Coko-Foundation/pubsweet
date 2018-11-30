@@ -1,5 +1,7 @@
 const Manuscript = require('../manuscript')
-const { helpers: { filterAll, can, canKnowAbout } } = require('pubsweet-server')
+const {
+  helpers: { filterAll, can, canKnowAbout },
+} = require('pubsweet-server')
 
 const resolvers = {
   Query: {

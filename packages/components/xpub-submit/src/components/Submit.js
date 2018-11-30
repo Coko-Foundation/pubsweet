@@ -26,7 +26,8 @@ const SubmittedVersionColumns = props => (
           journal={props.journal}
           manuscript={props.manuscript}
           readonly
-        />,
+        />
+        ,
       </SubmissionVersion>
       <DecisionReviewColumn {...props} />
     </Columns>

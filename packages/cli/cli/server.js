@@ -22,7 +22,7 @@ module.exports = async argsOverride => {
 
   logger.info('Starting PubSweet app')
 
-  if (!await dbExists()) {
+  if (!(await dbExists())) {
     if (config.has('dbManager')) {
       await setupDb(config.get('dbManager'))
     } else {

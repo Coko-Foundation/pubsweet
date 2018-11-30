@@ -26,7 +26,10 @@ describe('SSE pulses', () => {
     req.on = (event, fn) => {
       closeFn = fn
     }
-    sse.connect(req, res)
+    sse.connect(
+      req,
+      res,
+    )
     expect(sse.listenerCount('data')).toBe(1)
     expect(sse.pulseInterval).not.toBe(undefined)
     closeFn()
@@ -38,7 +41,10 @@ describe('SSE pulses', () => {
     req.on = (event, fn) => {
       closeFn = fn
     }
-    sse.connect(req, res)
+    sse.connect(
+      req,
+      res,
+    )
     expect(sse.listenerCount('data')).toBe(1)
     closeFn()
     expect(sse.listenerCount('data')).toBe(0)

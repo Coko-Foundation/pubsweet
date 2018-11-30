@@ -27,7 +27,8 @@ const Summary = props => {
           <div dangerouslySetInnerHTML={{ __html: summary }} />
           <LinkContainer to={`/${fragment.id}`}>
             <a>Read more</a>
-          </LinkContainer>&nbsp;
+          </LinkContainer>
+          &nbsp;
           <div>
             <em>
               Published by {owners} on {publishDate}.

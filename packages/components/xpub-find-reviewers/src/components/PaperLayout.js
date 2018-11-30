@@ -43,17 +43,15 @@ const PaperLayout = ({ paper, project, version }) => (
           <div>
             <h2 className={classes.heading}>Cited By</h2>
 
-            {paper.citations
-              .sort(newestFirst)
-              .map(paper => (
-                <Paper
-                  id={paper.paperId}
-                  key={paper.paperId}
-                  paper={paper}
-                  project={project}
-                  version={version}
-                />
-              ))}
+            {paper.citations.sort(newestFirst).map(paper => (
+              <Paper
+                id={paper.paperId}
+                key={paper.paperId}
+                paper={paper}
+                project={project}
+                version={version}
+              />
+            ))}
           </div>
         )}
 
@@ -61,17 +59,15 @@ const PaperLayout = ({ paper, project, version }) => (
           <div>
             <h2 className={classes.heading}>References</h2>
 
-            {paper.references
-              .sort(newestFirst)
-              .map(paper => (
-                <Paper
-                  id={paper.paperId}
-                  key={paper.paperId}
-                  paper={paper}
-                  project={project}
-                  version={version}
-                />
-              ))}
+            {paper.references.sort(newestFirst).map(paper => (
+              <Paper
+                id={paper.paperId}
+                key={paper.paperId}
+                paper={paper}
+                project={project}
+                version={version}
+              />
+            ))}
           </div>
         )}
       </div>

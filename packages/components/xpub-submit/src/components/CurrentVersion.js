@@ -52,7 +52,8 @@ const CurrentVersion = ({ journal, forms, manuscript }) => (
           to={`/journals/${journal.id}/versions/${manuscript.id}/manuscript`}
         >
           view here
-        </Link>.
+        </Link>
+        .
       </div>
       <div>
         To complete your submission, please answer the following questions.

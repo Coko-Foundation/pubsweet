@@ -14,11 +14,10 @@ function makeApp(response) {
   // mock DB
   app.locals.models = {
     User: {
-      findByField: jest.fn(
-        () =>
-          response instanceof Error
-            ? Promise.reject(response)
-            : Promise.resolve(response),
+      findByField: jest.fn(() =>
+        response instanceof Error
+          ? Promise.reject(response)
+          : Promise.resolve(response),
       ),
     },
   }

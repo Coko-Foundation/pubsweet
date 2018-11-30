@@ -51,10 +51,13 @@ function mapState(state) {
 }
 
 const ConnectedAuthenticatedComponent = withRouter(
-  connect(mapState, {
-    ensureCurrentUser: actions.ensureCurrentUser,
-    pushState: push,
-  })(AuthenticatedComponent),
+  connect(
+    mapState,
+    {
+      ensureCurrentUser: actions.ensureCurrentUser,
+      pushState: push,
+    },
+  )(AuthenticatedComponent),
 )
 
 export default ConnectedAuthenticatedComponent

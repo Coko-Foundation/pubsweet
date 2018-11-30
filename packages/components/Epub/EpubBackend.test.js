@@ -8,11 +8,10 @@ function makeApp(response) {
   // mock DB
   app.locals.models = {
     Collection: {
-      find: jest.fn(
-        () =>
-          response instanceof Error
-            ? Promise.reject(response)
-            : Promise.resolve(response),
+      find: jest.fn(() =>
+        response instanceof Error
+          ? Promise.reject(response)
+          : Promise.resolve(response),
       ),
     },
   }

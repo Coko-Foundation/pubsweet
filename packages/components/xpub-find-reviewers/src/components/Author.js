@@ -70,20 +70,19 @@ const Author = ({ author, toggleAuthor, project, version }) => (
       </h3>
     )}
 
-    {author.expanded &&
-      !author.hidden && (
-        <div className={classes.papers}>
-          {author.papers.map(paper => (
-            <Paper
-              id={paper.id}
-              key={paper.id}
-              paper={paper}
-              project={project}
-              version={version}
-            />
-          ))}
-        </div>
-      )}
+    {author.expanded && !author.hidden && (
+      <div className={classes.papers}>
+        {author.papers.map(paper => (
+          <Paper
+            id={paper.id}
+            key={paper.id}
+            paper={paper}
+            project={project}
+            version={version}
+          />
+        ))}
+      </div>
+    )}
   </div>
 )
 

@@ -307,11 +307,10 @@ export default compose(
   withState('confirming', 'setConfirming', false),
   withHandlers({
     toggleConfirming: ({ validateForm, setConfirming, handleSubmit }) => () => {
-      validateForm().then(
-        props =>
-          isEmpty(props)
-            ? setConfirming(confirming => !confirming)
-            : handleSubmit(),
+      validateForm().then(props =>
+        isEmpty(props)
+          ? setConfirming(confirming => !confirming)
+          : handleSubmit(),
       )
     },
   }),
