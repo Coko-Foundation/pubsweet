@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.1...pubsweet-server@10.1.2) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
 ## [10.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.0...pubsweet-server@10.1.1) (2018-11-29)
 
 
