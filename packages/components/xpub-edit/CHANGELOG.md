@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.3...xpub-edit@2.5.4) (2018-11-30)
+
+
+### Bug Fixes
+
+* **xpub-edit:** spaces are being eaten on firefox ([8112208](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8112208)), closes [#430](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/430)
+
+
+
+
+
 ## [2.5.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.2...xpub-edit@2.5.3) (2018-11-29)
 
 **Note:** Version bump only for package xpub-edit

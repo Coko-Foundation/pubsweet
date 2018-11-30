@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.0...pubsweet-components@10.0.1) (2018-11-30)
+
+
+### Bug Fixes
+
+* **xpub-edit:** spaces are being eaten on firefox ([8112208](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8112208)), closes [#430](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/430)
+
+
+
+
+
 # [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.2...pubsweet-components@10.0.0) (2018-11-29)
 
 

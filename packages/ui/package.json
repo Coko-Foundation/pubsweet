@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "license": "MIT",
   "files": [
     "docs",
@@ -15,7 +15,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.0.0",
+    "@pubsweet/ui-toolkit": "^2.0.1",
     "babel-jest": "^21.2.0",
     "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
@@ -36,7 +36,7 @@
     "styled-components": "^4.1.1"
   },
   "devDependencies": {
-    "@pubsweet/styleguide": "^4.0.0",
+    "@pubsweet/styleguide": "^4.0.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
