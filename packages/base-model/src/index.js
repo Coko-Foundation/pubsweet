@@ -1,17 +1,11 @@
 const uuid = require('uuid')
-const { Model, ValidationError } = require('objection')
+const { Model } = require('objection')
 const logger = require('@pubsweet/logger')
 const { db, NotFoundError } = require('pubsweet-server')
 const { merge } = require('lodash')
 const config = require('config')
 
 Model.knex(db)
-
-const validationError = (prop, className) =>
-  new ValidationError({
-    type: 'ModelValidation',
-    message: `${prop} is not a property in ${className}'s schema`,
-  })
 
 const notFoundError = (property, value, className) =>
   new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
@@ -23,19 +17,6 @@ class BaseModel extends Model {
     if (properties) {
       this._updateProperties(properties)
     }
-
-    const handler = {
-      set: (obj, prop, value) => {
-        if (this.isSettable(prop)) {
-          obj[prop] = value
-          return true
-        }
-
-        throw validationError(prop, obj.constructor.name)
-      },
-    }
-
-    return new Proxy(this, handler)
   }
 
   static get jsonSchema() {
@@ -77,23 +58,12 @@ class BaseModel extends Model {
           ],
         },
       },
-      additionalProperties: false,
     }
 
     if (schema) {
       return merge(baseSchema, schema)
     }
     return baseSchema
-  }
-
-  isSettable(prop) {
-    const special = ['#id', '#ref']
-    return (
-      special.includes(prop) ||
-      this.constructor.jsonSchema.properties[prop] ||
-      (this.constructor.relationMappings &&
-        this.constructor.relationMappings[prop])
-    )
   }
 
   $beforeInsert() {
@@ -134,11 +104,7 @@ class BaseModel extends Model {
   // A private method that you shouldn't override
   _updateProperties(properties) {
     Object.keys(properties).forEach(prop => {
-      if (this.isSettable(prop)) {
-        this[prop] = properties[prop]
-      } else {
-        throw validationError(prop, this.constructor.name)
-      }
+      this[prop] = properties[prop]
     })
     return this
   }

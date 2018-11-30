@@ -1,7 +1,14 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["@pubsweet/model-user", "@pubsweet/model-team", "${pathToComponent}"]}}`
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "${pathToComponent}"
+  ]
+}}`
 
 const { model: Manuscript } = require('./data-model-component')
 const { dbCleaner } = require('pubsweet-server/test')
@@ -50,18 +57,7 @@ describe('Manuscript', () => {
     }
 
     await expect(createNonValidManuscript()).rejects.toThrow(
-      "mumbo is not a property in Manuscript's schema",
-    )
-  })
-
-  it('throws if an unknown column is assigned', async () => {
-    function createNonValidManuscript() {
-      const manuscript = new Manuscript()
-      manuscript.titldee = 'x'
-    }
-
-    expect(createNonValidManuscript).toThrow(
-      "titldee is not a property in Manuscript's schema",
+      'mumbo: is an invalid additional property',
     )
   })
 

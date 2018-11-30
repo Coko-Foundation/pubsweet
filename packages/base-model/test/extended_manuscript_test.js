@@ -1,7 +1,14 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'extended-data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["@pubsweet/model-user", "@pubsweet/model-team", "${pathToComponent}"]}}`
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "${pathToComponent}"
+  ]
+}}`
 
 const { model: Manuscript } = require('./extended-data-model-component')
 const { dbCleaner } = require('pubsweet-server/test')

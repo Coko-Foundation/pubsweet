@@ -21,6 +21,7 @@ class Manuscript extends BaseModel {
           items: { type: 'string', format: 'uuid' },
         },
       },
+      additionalProperties: false,
     }
   }
 

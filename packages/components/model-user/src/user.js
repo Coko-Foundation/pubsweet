@@ -25,13 +25,6 @@ class User extends BaseModel {
     return 'users'
   }
 
-  isSettable(prop) {
-    if (prop === 'password') {
-      return true
-    }
-    return super.isSettable(prop)
-  }
-
   static get schema() {
     return {
       properties: {
