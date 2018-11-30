@@ -34,6 +34,10 @@ module.exports = {
     },
   },
   pubsweet: {
-    components: ['@pubsweet/model-user', '@pubsweet/model-team'],
+    components: [
+      '@pubsweet/model-user',
+      '@pubsweet/model-team',
+      path.resolve(__dirname, '..', 'test', 'model-extended-fragment'),
+    ],
   },
 }

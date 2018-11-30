@@ -8,15 +8,6 @@ const { merge, flatten } = require('lodash')
 // validations later
 
 const validations = {
-  fragment: {
-    id: Joi.string()
-      .guid()
-      .required(),
-    type: Joi.string().required(),
-    fragmentType: Joi.string().required(),
-    fragments: Joi.array().items(Joi.string().guid()),
-    owners: Joi.array().items(Joi.string().guid()),
-  },
   collection: {
     id: Joi.string().guid(),
     type: Joi.string().required(),

@@ -21,6 +21,10 @@ module.exports = {
     password: 'test_password',
   },
   pubsweet: {
-    components: ['@pubsweet/model-user', '@pubsweet/model-team'],
+    components: [
+      '@pubsweet/model-user',
+      '@pubsweet/model-team',
+      '@pubsweet/model-fragment',
+    ],
   },
 }

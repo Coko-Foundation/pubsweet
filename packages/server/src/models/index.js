@@ -3,7 +3,6 @@ const config = require('config')
 // core models
 const models = {
   Collection: './Collection',
-  Fragment: './Fragment',
 }
 
 Object.keys(models).forEach((key, _) => {
