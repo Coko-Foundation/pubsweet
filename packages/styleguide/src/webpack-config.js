@@ -141,7 +141,6 @@ module.exports = dir => {
       }),
       new webpack.ContextReplacementPlugin(/./, __dirname, {
         [config.authsome.mode]: config.authsome.mode,
-        [config.validations]: config.validations,
       }),
     ],
     resolve: {

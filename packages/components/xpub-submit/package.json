@@ -35,12 +35,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "faker": "^4.1.0",
-    "file-loader": "^1.1.5",
-    "react-styleguidist": "^6.2.5",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "faker": "^4.1.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",

@@ -54,5 +54,4 @@ module.exports = {
     transforms: { dangerousTaggedTemplateString: true },
   },
   pagePerSection: true,
-  require: ['babel-polyfill'],
 }
