@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.9...@pubsweet/db-manager@2.1.0) (2018-11-29)
+
+
+### Features
+
+* **migration:** change temp dir to pubsweet migrate cwd ([1f30625](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1f30625))
+
+
+
+
+
       <a name="2.0.9"></a>
 ## [2.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.8...@pubsweet/db-manager@2.0.9) (2018-11-13)
 
