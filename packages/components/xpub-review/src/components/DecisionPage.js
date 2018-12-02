@@ -1,98 +1,175 @@
-import { debounce, isEmpty } from 'lodash'
 import { compose, withProps } from 'recompose'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { reduxForm, SubmissionError } from 'redux-form'
-import { actions } from 'pubsweet-client'
-import { ConnectPage } from 'xpub-connect'
-import {
-  selectCollection,
-  selectCurrentVersion,
-  selectFragment,
-  selectFragments,
-} from 'xpub-selectors'
+import { graphql } from 'react-apollo'
+import { gql } from 'apollo-client-preset'
+import { withFormik } from 'formik'
+import { withLoader } from 'pubsweet-client'
+
 import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
-import AssignEditorContainer from '../components/assignEditors/AssignEditorContainer'
 
-// TODO: this is only here because prosemirror would save the title in the
-// metadata as html instead of plain text. we need to maybe find a better
-// position than here to perform this operation
-const stripHtml = htmlString => {
-  const temp = document.createElement('span')
-  temp.innerHTML = htmlString
-  return temp.textContent
-}
-
-const onSubmit = (values, dispatch, { project, version, history }) => {
-  version.decision = {
-    ...version.decision,
-    ...values,
-    status: 'submitted',
-    submitted: new Date(),
+const fragmentFields = `
+  id
+  created
+  files {
+    id
+    created
+    label
+    filename
+    mimeType
+    type
+    size
+    url
   }
-
-  return dispatch(actions.makeDecision(project, version))
-    .then(() => {
-      // TODO: show "thanks for your review" message
-      history.push('/')
-    })
-    .catch(error => {
-      if (error.validationErrors) {
-        throw new SubmissionError()
+  reviews {
+    open
+    recommendation
+    created
+    comments {
+      type
+      content
+      files {
+        type
+        id
+        label
+        url
+        filename
       }
-    })
-}
-
-const onChange = (values, dispatch, { project, version }) => {
-  if (isEmpty(values)) return false
-  values.note.content = stripHtml(values.note.content) // see TODO above
-  version.decision = {
-    ...version.decision,
-    ...values,
+    }
+    user {
+      id
+      username
+    }
   }
+  decision {
+    status
+    created
+    comments {
+      type
+      content
+      files {
+        type
+        id
+        label
+        url
+        filename
+      }
+    }
+    user {
+      id
+      username
+    }
+  }
+  teams {
+    id
+    role
+    object {
+      id
+    }
+    objectType
+    members {
+      status
+      user {
+        id
+        username
+      }
+    }
+  }
+  status
+  meta {
+    title
+    abstract
+    declarations {
+      openData
+      openPeerReview
+      preregistered
+      previouslySubmitted
+      researchNexus
+      streamlinedReview
+    }
+    articleSections
+    articleType
+    history {
+      type
+      date
+    }
+    notes {
+      id
+      created
+      notesType
+      content
+    }
+    keywords
+  }
+  suggestions {
+    reviewers {
+      opposed
+      suggested
+    }
+    editors {
+      opposed
+      suggested
+    }
+  }
+`
 
-  return dispatch(
-    actions.updateFragment(project, {
-      decision: version.decision,
-      id: version.id,
-      rev: version.rev,
-    }),
-  )
+const query = gql`
+  query($id: ID!) {
+    currentUser {
+      id
+      username
+      admin
+    }
 
-  // TODO: display a notification when saving/saving completes/saving fails
-}
+    manuscript(id: $id) {
+      ${fragmentFields}
+      manuscriptVersions {
+        ${fragmentFields}
+      }
+    }
+  }
+`
+
+const submitMutation = gql`
+  mutation($id: ID!, $input: String) {
+    submitManuscript(id: $id, input: $input) {
+      id
+      ${fragmentFields}
+    }
+  }
+`
 
 export default compose(
-  ConnectPage(({ match }) => [
-    actions.getCollection({ id: match.params.project }),
-    actions.getFragments({ id: match.params.project }),
-    actions.getTeams(),
-    actions.getUsers(),
-  ]),
-  connect(
-    (state, { match }) => {
-      const project = selectCollection(state, match.params.project)
-      const versions = selectFragments(state, project.fragments)
-      const version = selectFragment(state, match.params.version)
-      const currentVersion = selectCurrentVersion(state, project)
-
-      return { currentVersion, project, version, versions }
-    },
-    {
-      uploadFile,
-    },
-  ),
-  withRouter,
-  withProps(({ currentVersion }) => ({
-    initialValues: currentVersion.decision,
-    AssignEditor: AssignEditorContainer,
+  graphql(query, {
+    options: ({ match }) => ({
+      variables: {
+        id: match.params.version,
+      },
+    }),
+  }),
+  graphql(submitMutation, {
+    props: ({ mutate, ownProps }) => ({
+      onSubmit: (manuscript, { history }) => {
+        mutate({
+          variables: {
+            id: manuscript.id,
+            input: JSON.stringify({ decision: manuscript.decision }),
+          },
+        }).then(() => {
+          history.push('/')
+        })
+      },
+    }),
+  }),
+  withLoader(),
+  withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
+    journal: { id: journal },
+    uploadFile,
   })),
-  reduxForm({
-    form: 'decision',
-    onChange: debounce(onChange, 1000, { maxWait: 5000 }),
-    onSubmit,
-    destroyOnUnmount: false,
-    enableReinitialize: true,
+  withFormik({
+    initialValues: {},
+    mapPropsToValues: ({ manuscript }) => manuscript,
+    displayName: 'decision',
+    handleSubmit: (props, { props: { onSubmit, history } }) =>
+      onSubmit(props, { history }),
   }),
 )(DecisionLayout)

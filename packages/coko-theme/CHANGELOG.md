@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.0.0...@pubsweet/coko-theme@5.0.1) (2018-11-30)
+
+**Note:** Version bump only for package @pubsweet/coko-theme
+
+
+
+
+
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@4.1.0...@pubsweet/coko-theme@5.0.0) (2018-11-29)
+
+
+### Features
+
+* **coko-theme:** upgrade styled-components ([a4d03a0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a4d03a0))
+
+
+### BREAKING CHANGES
+
+* **coko-theme:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@4.0.2...@pubsweet/coko-theme@4.1.0) (2018-09-04)
 

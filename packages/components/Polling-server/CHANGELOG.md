@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.0.9"></a>
+## [0.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-polling-server@0.0.8...@pubsweet/component-polling-server@0.0.9) (2018-10-17)
+
+
+### Bug Fixes
+
+* sync cache added ([6989dd6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6989dd6))
+
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-polling-server@0.0.7...@pubsweet/component-polling-server@0.0.8) (2018-09-25)
 

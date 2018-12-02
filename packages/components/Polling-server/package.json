@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-polling-server",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Polling server component",
   "main": "index.js",
   "scripts": {

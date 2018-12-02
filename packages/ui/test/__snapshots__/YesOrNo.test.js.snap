@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Yes or No is rendered corrctly 1`] = `
+exports[`Yes or No is rendered correctly 1`] = `
 .c2 {
   margin-right: 8px;
 }

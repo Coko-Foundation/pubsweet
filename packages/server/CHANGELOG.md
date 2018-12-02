@@ -3,7 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="10.0.1"></a>
+## [10.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.1...pubsweet-server@10.1.2) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [10.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.0...pubsweet-server@10.1.1) (2018-11-29)
+
+
+### Bug Fixes
+
+* add waait dependency ([f80dbec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f80dbec))
+
+
+
+
+
+      <a name="10.1.0"></a>
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.3...pubsweet-server@10.1.0) (2018-11-13)
+
+
+### Bug Fixes
+
+* add a custom async server.close function ([bfc78a8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bfc78a8))
+* close server and stop job queues on server close ([b20a837](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b20a837))
+* manage closing of startServer in tests ([e247261](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e247261))
+
+
+### Features
+
+* initial commit for pg-boss based job queue ([6f7a0cc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6f7a0cc))
+* start job queue when server starts ([5b363d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5b363d8))
+* support for a job runner in a different process ([f3c8b93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f3c8b93))
+* working job roundtrip and test ([188f794](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/188f794))
+* **server:** expand access to custom models in authsome ([6fde33a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6fde33a))
+
+
+
+
+      <a name="10.0.3"></a>
+## [10.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.2...pubsweet-server@10.0.3) (2018-11-05)
+
+
+### Bug Fixes
+
+* **server:** wait before closing pubsub database connection ([badd6e2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/badd6e2))
+
+
+
+
+<a name="10.0.2"></a>
+## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.1...pubsweet-server@10.0.2) (2018-10-17)
+
+
+### Bug Fixes
+
+* **authenticate:** remove passwordHash from login response ([39e854c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/39e854c))
+* **authentication:** filter passwordHash via authsome ([8ccc747](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ccc747))
+
+
+
+
+<a name="10.0.1"></a>
 ## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.0...pubsweet-server@10.0.1) (2018-10-08)
 
 
@@ -11,7 +75,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package pubsweet-server
 
-  <a name="10.0.0"></a>
+<a name="10.0.0"></a>
 # [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@9.2.0...pubsweet-server@10.0.0) (2018-09-29)
 
 

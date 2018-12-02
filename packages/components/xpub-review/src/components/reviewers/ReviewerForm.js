@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
-import { Field } from 'redux-form'
+import { cloneDeep } from 'lodash'
+import { Field, FieldArray } from 'formik'
 import { Button } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
 import 'react-select/dist/react-select.css'
@@ -12,34 +13,66 @@ const OptionRenderer = option => (
   </div>
 )
 
-const ReviewerInput = loadOptions => ({ input }) => (
+const ReviewerInput = loadOptions => ({
+  field,
+  form: { values },
+  push,
+  replace,
+}) => (
   <Select.AsyncCreatable
-    {...input}
+    {...field}
     // autoload={false}
     filterOption={() => true}
     labelKey="username"
     loadOptions={loadOptions}
+    onChange={user => {
+      const teamIndex = (values.teams || []).findIndex(
+        team => team.role === 'reviewerEditor',
+      )
+
+      const member = {
+        status: 'invited',
+        user,
+      }
+
+      if (teamIndex < 0) {
+        const team = {
+          role: 'reviewerEditor',
+          members: [member],
+        }
+        push(team)
+      } else {
+        const newTeam = cloneDeep(values.teams[teamIndex])
+        newTeam.members.push(member)
+        replace(0, newTeam)
+      }
+    }}
     optionRenderer={OptionRenderer}
     promptTextCreator={label => `Add ${label}?`}
     valueKey="id"
   />
 )
 
+const componentFields = loadOptions => props => (
+  <Field
+    component={ReviewerInput(loadOptions)}
+    name="user"
+    validate={required}
+    {...props}
+  />
+)
+
 const ReviewerForm = ({
   reset,
-  valid,
+  isValid,
   handleSubmit,
   onSubmit,
   loadOptions,
 }) => (
-  <form onSubmit={handleSubmit(onSubmit(reset))}>
-    <Field
-      component={ReviewerInput(loadOptions)}
-      name="user"
-      validate={required}
-    />
+  <form onSubmit={handleSubmit}>
+    <FieldArray component={componentFields(loadOptions)} name="teams" />
 
-    <Button disabled={!valid} primary type="submit">
+    <Button disabled={!isValid} primary type="submit">
       Invite reviewer
     </Button>
   </form>

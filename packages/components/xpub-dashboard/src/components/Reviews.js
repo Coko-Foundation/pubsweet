@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { compose, withProps } from 'recompose'
-import { groupBy } from 'lodash'
+import { compose } from 'recompose'
+import { sumBy } from 'lodash'
+import { getUserFromTeam } from 'xpub-selectors'
 import { withJournal } from 'xpub-journal'
 import { Badge } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
@@ -23,22 +24,32 @@ const BadgeContainer = styled.span`
   }
 `
 
-const Reviews = ({ reviews, journal }) => (
+const countStatus = (version, status) => {
+  const teamMember = getUserFromTeam(version, 'reviewer')
+
+  if (status === 'rejected' || status === 'invited') {
+    return sumBy(teamMember, member => (member.status === status ? 1 : 0))
+  }
+
+  if (status === 'accepted') {
+    return sumBy(version.reviews, review => (review.recommendation ? 0 : 1))
+  }
+
+  if (status === 'completed') {
+    return sumBy(version.reviews, review => (review.recommendation ? 1 : 0))
+  }
+
+  return 0
+}
+
+const Reviews = ({ version, journal }) => (
   <Root>
     {journal.reviewStatus.map(status => (
       <BadgeContainer key={status}>
-        <Badge
-          count={reviews[status] ? reviews[status].length : 0}
-          label={status}
-        />
+        <Badge count={countStatus(version, status)} label={status} />
       </BadgeContainer>
     ))}
   </Root>
 )
 
-export default compose(
-  withJournal,
-  withProps(props => ({
-    reviews: groupBy(props.version.reviewers, 'status'),
-  })),
-)(Reviews)
+export default compose(withJournal)(Reviews)

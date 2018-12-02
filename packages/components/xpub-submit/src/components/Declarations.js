@@ -1,76 +1,29 @@
 import React from 'react'
-import { branch, renderComponent } from 'recompose'
-import styled, { css } from 'styled-components'
-import { FormSection } from 'redux-form'
+import styled from 'styled-components'
 import ReactHtmlParser from 'react-html-parser'
-import { ValidatedField, RadioGroup } from '@pubsweet/ui'
+import { get } from 'lodash'
 import { th } from '@pubsweet/ui-toolkit'
-import { withJournal } from 'xpub-journal'
-import { required } from 'xpub-validators'
-import { Section, Legend, SubNote } from '../styles'
+import { Section, Legend } from '../styles'
 
-const hoverStyles = css`
-  background-image: linear-gradient(to right, #666 50%, white 0%);
-  background-position: 0 90%;
-  background-repeat: repeat-x;
-  background-size: 6px 1px;
-  position: relative;
-`
-
-const DeclarationSection = Section.extend`
+const DeclarationSection = styled(Section)`
   margin: calc(${th('gridUnit')} * 6) 0;
 `
 
-const Question = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: ${th('gridUnit')};
-
-  &:hover {
-    ${props => !props.readonly && hoverStyles};
-  }
-`
-
-const DeclarationsEditable = ({ journal, readonly }) => (
-  <FormSection name="declarations">
-    {journal.declarations.questions.map(question => (
-      <DeclarationSection id={`declarations.${question.id}`} key={question.id}>
-        <Question>
-          <Legend>{ReactHtmlParser(question.legend)}</Legend>
-          <ValidatedField
-            component={props => (
-              <RadioGroup inline options={question.options} {...props} />
-            )}
-            name={question.id}
-            readonly={readonly}
-            required
-            validate={[required]}
-          />
-        </Question>
-        <SubNote>{ReactHtmlParser(question.description)}</SubNote>
-      </DeclarationSection>
-    ))}
-  </FormSection>
-)
-
-const DeclarationsNonEditable = ({ journal, readonly, version }) => (
+const Declarations = ({ forms, manuscript }) => (
   <div>
     <DeclarationSection>
       <Legend>Type of article</Legend>
-      {version.metadata.articleType}
+      {manuscript.meta.articleType}
     </DeclarationSection>
-    {journal.declarations.questions.map(question => (
-      <DeclarationSection>
-        <Legend>{ReactHtmlParser(question.legend)}</Legend>
-        {version.declarations[question.id]}
-      </DeclarationSection>
-    ))}
+    {(forms.children || [])
+      .filter(child => child.name.includes('meta.declarations'))
+      .map(question => (
+        <DeclarationSection key={`declaration-${question.id}`}>
+          <Legend>{ReactHtmlParser(question.title)}</Legend>
+          {get(manuscript, question.name)}
+        </DeclarationSection>
+      ))}
   </div>
 )
 
-export default withJournal(
-  branch(
-    ({ readonly }) => readonly === true,
-    renderComponent(DeclarationsNonEditable),
-  )(DeclarationsEditable),
-)
+export default Declarations

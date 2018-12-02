@@ -1,20 +1,14 @@
 import React from 'react'
+import faker from 'faker'
 import { MemoryRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { combineReducers } from 'redux'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import { MockedProvider } from 'react-apollo/test-utils'
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-
 import { ThemeProvider } from 'styled-components'
-
-import { reducers } from 'pubsweet-client'
-import conversion from '../redux/conversion'
 
 import DashboardPage from './DashboardPage'
 import { Section, UploadContainer } from './molecules/Page'
-
+import queries from '../graphql/queries'
 // this should be elsewhere
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -45,42 +39,51 @@ jest.mock('pubsweet-client/src/helpers/api', () => ({
   }),
 }))
 
-jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock(
+  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
+  () => 'AuthorizeWithGraphQL',
+)
 
 global.window.localStorage = {
   getItem: jest.fn(() => 'tok123'),
 }
 
-reducers.conversion = conversion
-const reducer = combineReducers(reducers)
-
-const middlewares = [thunk]
-const mockStore = () =>
-  configureMockStore(middlewares)(actions =>
-    actions.reduce(reducer, {
-      currentUser: { isAuthenticated: true },
-      conversion: { converting: false },
-    }),
-  )
+const mocks = [
+  {
+    request: {
+      query: queries.dashboard,
+    },
+    result: {
+      data: {
+        currentUser: { id: faker.random.uuid(), username: 'test', admin: true },
+        conversion: { converting: false },
+        journals: {
+          id: faker.random.uuid(),
+          journalTitle: 'Xpub Test',
+          manuscripts: [],
+        },
+      },
+    },
+  },
+]
 
 describe('DashboardPage', () => {
   it('runs', done => {
-    const store = mockStore()
     const page = mount(
       <MemoryRouter>
         <ThemeProvider theme={{ colorPrimary: 'blue' }}>
-          <Provider store={store}>
-            <DashboardPage />
-          </Provider>
+          <MockedProvider addTypename={false} mocks={mocks}>
+            <DashboardPage conversion={{ converting: false }} />
+          </MockedProvider>
         </ThemeProvider>
       </MemoryRouter>,
     )
 
-    setImmediate(() => {
+    setTimeout(() => {
       page.update()
       expect(page.find(UploadContainer)).toHaveLength(2)
       expect(page.find(Section)).toHaveLength(0)
       done()
-    })
+    }, 1000)
   })
 })

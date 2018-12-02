@@ -7,7 +7,7 @@ import faker from 'faker'
 import { withJournal } from 'xpub-journal'
 import EditorItem from './EditorItem'
 
-import MetadataOwners from '../metadata/MetadataOwners'
+import MetadataAuthors from '../metadata/MetadataAuthors'
 import MetadataStreamLined from '../metadata/MetadataStreamLined'
 import MetadataSubmittedDate from '../metadata/MetadataSubmittedDate'
 import MetadataType from '../metadata/MetadataType'
@@ -24,7 +24,10 @@ jest.mock('config', () => ({
   },
 }))
 
-jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock(
+  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
+  () => 'AuthorizeWithGraphQL',
+)
 
 const journal = {
   reviewStatus: ['invited', 'accepted', 'rejected', 'completed'],
@@ -48,15 +51,22 @@ describe('EditorItem', () => {
       {
         version: {
           id: faker.random.uuid(),
-          submitted: '2018-06-07',
-          metadata: {},
-          declarations: {},
+          created: '2018-06-07',
+          teams: [],
+          reviews: [],
+          status: props.status,
+          meta: {
+            history: [
+              {
+                type: 'submitted',
+                date: '2018-06-07',
+              },
+            ],
+          },
         },
-        project: {
+        journals: {
           id: faker.random.uuid(),
           title: faker.lorem.sentence(15),
-          status: 'submitted',
-          owners: [],
         },
       },
       props,
@@ -76,9 +86,8 @@ describe('EditorItem', () => {
 
   it('shows empty metadata', () => {
     const EditorItem = makeWrapper()
-
     expect(EditorItem.find(MetadataStreamLined).children()).toHaveLength(0)
-    expect(EditorItem.find(MetadataOwners).children()).toHaveLength(0)
+    expect(EditorItem.find(MetadataAuthors).children()).toHaveLength(0)
     expect(
       EditorItem.find(withJournal(MetadataSections)).children(),
     ).toHaveLength(0)
@@ -103,24 +112,42 @@ describe('EditorItem', () => {
     const username = faker.name.findName()
     const EditorItem = makeWrapper({
       version: {
-        submitted: '2018-06-07',
-        metadata: {
+        teams: [
+          {
+            created: '2018-06-07',
+            members: [
+              {
+                user: {
+                  id: faker.random.uuid(),
+                  created: '2018-06-07',
+                  username,
+                  admin: true,
+                },
+              },
+            ],
+            role: 'author',
+          },
+        ],
+        meta: {
           articleType: 'original-research',
-          articleSection: ['cognitive-psychology'],
+          articleSections: ['cognitive-psychology'],
+          declarations: {
+            openPeerReview: 'yes',
+            streamlinedReview: 'yes',
+          },
+          history: [
+            {
+              type: 'submitted',
+              date: '2018-06-07',
+            },
+          ],
         },
-        declarations: {
-          openPeerReview: 'yes',
-          streamlinedReview: 'yes',
-        },
-      },
-      project: {
-        owners: [{ username }],
       },
     })
 
     expect(EditorItem.find(MetadataStreamLined).text()).toEqual('Streamlined')
     expect(
-      EditorItem.find(MetadataOwners)
+      EditorItem.find(MetadataAuthors)
         .children()
         .text(),
     ).toEqual(username)

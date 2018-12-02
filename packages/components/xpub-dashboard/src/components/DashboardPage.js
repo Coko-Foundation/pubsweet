@@ -1,15 +1,12 @@
-import { compose } from 'recompose'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { actions } from 'pubsweet-client'
-import { newestFirst, selectCurrentUser } from 'xpub-selectors'
-import { ConnectPage } from 'xpub-connect'
+import { compose, withProps } from 'recompose'
+import { graphql } from 'react-apollo'
+import { withLoader } from 'pubsweet-client'
+import { connectToContext } from 'xpub-with-context'
 import config from 'config'
-import {
-  uploadManuscript,
-  uploadManuscriptNoConversion,
-} from '../redux/conversion'
+import queries from '../graphql/queries/'
+import mutations from '../graphql/mutations/'
 import Dashboard from './Dashboard'
+import upload from '../lib/upload'
 
 const { acceptUploadFiles } = config['pubsweet-component-xpub-dashboard'] || {}
 
@@ -18,61 +15,42 @@ const acceptFiles =
     ? acceptUploadFiles.join()
     : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
-const reviewerResponse = (project, version, reviewer, status) => dispatch => {
-  reviewer.status = status
-
-  return dispatch(
-    actions.updateFragment(project, {
-      id: version.id,
-      rev: version.rev,
-      reviewers: version.reviewers,
-    }),
-  )
-}
-
 export default compose(
-  ConnectPage(() => [
-    actions.getCollections(),
-    actions.getTeams(),
-    actions.getUsers(),
-  ]),
-  connect(
-    state => {
-      const { collections } = state
-      // const { conversion, teams } = state
-      const { conversion } = state
-      const currentUser = selectCurrentUser(state)
-
-      const dashboard = newestFirst(collections)
-
-      return {
-        acceptFiles,
-        collections,
-        conversion,
-        currentUser,
-        dashboard,
-      }
-    },
-    (dispatch, { history }) => ({
-      deleteProject: collection => {
-        collection.fragments.map(fragment =>
-          dispatch(actions.deleteFragment(collection, { id: fragment })),
+  connectToContext(),
+  graphql(queries.dashboard, {
+    options: { context: { online: false } },
+    props: data => data,
+  }),
+  graphql(mutations.reviewerResponseMutation, {
+    props: ({ mutate }) => ({
+      reviewerResponse: (manuscript, response) =>
+        mutate({ variables: { id: manuscript.id, response } }),
+    }),
+  }),
+  graphql(mutations.deleteManuscriptMutation, {
+    props: ({ mutate }) => ({
+      deleteManuscript: manuscript =>
+        mutate({ variables: { id: manuscript.id } }),
+    }),
+    options: {
+      update: (proxy, { data: { deleteManuscript } }) => {
+        const data = proxy.readQuery({ query: queries.dashboard })
+        const manuscriptIndex = data.journals.manuscripts.findIndex(
+          manuscript => manuscript.id === deleteManuscript.id,
         )
-        dispatch(actions.deleteCollection(collection))
-      },
-      reviewerResponse: (project, version, reviewer, status) =>
-        dispatch(reviewerResponse(project, version, reviewer, status)),
-      uploadManuscript: acceptedFiles => {
-        if (
-          acceptedFiles[0].type ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        ) {
-          dispatch(uploadManuscript(acceptedFiles, history))
-        } else {
-          dispatch(uploadManuscriptNoConversion(acceptedFiles, history))
+        if (manuscriptIndex > -1) {
+          data.journals.manuscripts.splice(manuscriptIndex, 1)
+          proxy.writeQuery({ query: queries.dashboard, data })
         }
       },
-    }),
-  ),
-  withRouter,
+    },
+  }),
+  withLoader(),
+  withProps(({ journals, currentUser }) => ({
+    dashboard: (journals || {}).manuscripts || [],
+    journals,
+    currentUser,
+    acceptFiles,
+  })),
+  upload,
 )(Dashboard)

@@ -126,6 +126,15 @@ describe('users api', () => {
           expect(res.statusCode).toEqual(STATUS.UNAUTHORIZED)
         }))
 
+    it('can filter response with authsome', async () => {
+      const response = await api.request.post('/api/users/authenticate').send({
+        username: fixtures.otherUser.username,
+        password: fixtures.otherUser.password,
+      })
+
+      expect(Object.keys(response.body)).not.toContain('passwordHash')
+    })
+
     it('can verify its token', async () => {
       const token = await api.users.authenticate.post(fixtures.otherUser)
       const res = await api.users.authenticate.get(token).expect(STATUS.OK)

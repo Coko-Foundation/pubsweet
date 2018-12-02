@@ -26,7 +26,7 @@ class BaseModel extends Model {
 
     const handler = {
       set: (obj, prop, value) => {
-        if (this.constructor.jsonSchema.properties[prop]) {
+        if (this.isSettable(prop)) {
           obj[prop] = value
           return true
         }
@@ -84,6 +84,16 @@ class BaseModel extends Model {
     return baseSchema
   }
 
+  isSettable(prop) {
+    const special = ['#id', '#ref']
+    return (
+      special.includes(prop) ||
+      this.constructor.jsonSchema.properties[prop] ||
+      (this.constructor.relationMappings &&
+        this.constructor.relationMappings[prop])
+    )
+  }
+
   $beforeInsert() {
     this.id = this.id || uuid.v4()
     this.created = new Date().toISOString()
@@ -99,7 +109,10 @@ class BaseModel extends Model {
       saved = await this.constructor
         .query()
         .patchAndFetchById(this.id, this.toJSON())
-    } else {
+    }
+
+    if (!saved) {
+      // either model has no ID or the ID was not found in the database
       saved = await this.constructor.query().insert(this.toJSON())
     }
     logger.info(`Saved ${this.constructor.name} with UUID ${saved.id}`)
@@ -114,7 +127,7 @@ class BaseModel extends Model {
 
   updateProperties(properties) {
     Object.keys(properties).forEach(prop => {
-      if (this.constructor.jsonSchema.properties[prop]) {
+      if (this.isSettable(prop)) {
         this[prop] = properties[prop]
       } else {
         throw validationError(prop, this.constructor.name)

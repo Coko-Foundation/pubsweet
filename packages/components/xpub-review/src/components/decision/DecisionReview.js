@@ -64,7 +64,7 @@ const ReviewHeading = ({
 }
 
 const DecisionReview = ({ review, reviewer, journal, open, toggleOpen }) => {
-  const { recommendation } = review.Recommendation
+  const { recommendation } = review
   const { name, ordinal } = reviewer
 
   const Root = styled.div`

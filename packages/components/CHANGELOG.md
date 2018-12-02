@@ -3,7 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="9.8.0"></a>
+## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.0...pubsweet-components@10.0.1) (2018-11-30)
+
+
+### Bug Fixes
+
+* **xpub-edit:** spaces are being eaten on firefox ([8112208](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8112208)), closes [#430](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/430)
+
+
+
+
+
+# [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.2...pubsweet-components@10.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
+      <a name="9.10.2"></a>
+## [9.10.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.1...pubsweet-components@9.10.2) (2018-11-16)
+
+
+### Bug Fixes
+
+* highlight js dependency update ([0fb0733](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fb0733))
+
+
+
+
+      <a name="9.10.1"></a>
+## [9.10.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.0...pubsweet-components@9.10.1) (2018-11-13)
+
+
+### Bug Fixes
+
+* update html-epub dependency ([5f55907](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5f55907))
+
+
+
+
+<a name="9.10.0"></a>
+# [9.10.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.9.1...pubsweet-components@9.10.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+* GraphQL Xpub review component ([66b3e73](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/66b3e73))
+* GraphQL Xpub submit component ([ba07060](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba07060))
+
+
+
+
+<a name="9.9.1"></a>
+## [9.9.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.9.0...pubsweet-components@9.9.1) (2018-10-17)
+
+
+### Bug Fixes
+
+* sync cache added ([6989dd6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6989dd6))
+
+
+
+
+<a name="9.9.0"></a>
+# [9.9.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.8.0...pubsweet-components@9.9.0) (2018-10-12)
+
+
+### Features
+
+* conversion of inline notes ([deb2930](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/deb2930))
+* download html for pagedJS ([cec190e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cec190e))
+* paged exporter ([250510b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/250510b))
+
+
+
+
+<a name="9.8.0"></a>
 # [9.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.8...pubsweet-components@9.8.0) (2018-10-08)
 
 
@@ -15,7 +103,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="9.7.8"></a>
+<a name="9.7.8"></a>
 ## [9.7.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.7.7...pubsweet-components@9.7.8) (2018-09-29)
 
 

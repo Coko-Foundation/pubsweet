@@ -11,27 +11,27 @@ const ReviewsItem = styled.div`
   margin-left: 1em;
 `
 
-const ReviewAccordion = ({ reviewers }) => (
+const ReviewAccordion = ({ reviews }) => (
   <ReviewAccord>
-    {reviewers.length > 0 &&
-      reviewers.map((review, index) => {
-        if (!review.note) return null
-        return (
-          <Accordion
-            Component={review.note.content}
-            key={review.id}
-            ordinal={index + 1}
-            title="Review"
-            withDots="true"
-          />
-        )
-      })}
+    {reviews.length > 0 &&
+      reviews.map(
+        (review, reviewId) =>
+          review.comments.length &&
+          review.comments.map((comment, commentId) => (
+            <Accordion
+              Component={comment.content}
+              key={`accordion-review-${review.id}`}
+              ordinal={reviewId + 1}
+              title="Review"
+              withDots="true"
+            />
+          )),
+      )}
   </ReviewAccord>
 )
 
 const DecisionReviewColumn = ({
-  project,
-  version,
+  manuscript,
   handleSubmit,
   journal,
   toggleOpen,
@@ -39,16 +39,16 @@ const DecisionReviewColumn = ({
 }) => (
   <Review>
     <Accordion
-      Component={<ReviewsItem>{version.decision.note.content}</ReviewsItem>}
+      Component={<ReviewsItem>{manuscript.decision}</ReviewsItem>}
       key="decision"
       status="revise"
       title="Decision"
     />
     <ReviewsItem>
-      {version.reviewers && (
+      {manuscript.reviews && (
         <Section id="accordion.review">
           <Accordion
-            Component={<ReviewAccordion reviewers={version.reviewers} />}
+            Component={<ReviewAccordion reviews={manuscript.reviews} />}
             key="review"
             title="Reviews"
           />

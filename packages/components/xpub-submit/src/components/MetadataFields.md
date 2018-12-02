@@ -1,19 +1,13 @@
 A form for entering the submission's metadata.
 
 ```js
-const { reduxForm } = require('redux-form')
-
-const version = {
-  metadata: {
+const manuscript = {
+  meta: {
     title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(50),
     articleType: 'original-research',
+    keywords: 'test, test1',
   },
 }
-
-const MetadataForm = reduxForm({ form: 'metadata' })(MetadataFields)
-
-;<MetadataForm
-  initialValues={version}
-  onChange={values => console.log(values)}
-/>
+;<MetadataFields manuscript={manuscript} />
 ```

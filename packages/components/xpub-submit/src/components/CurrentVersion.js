@@ -1,17 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Button, Attachment } from '@pubsweet/ui'
+import { Attachment } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 import Metadata from './MetadataFields'
 import Declarations from './Declarations'
 import Suggestions from './Suggestions'
-import Notes from './Notes'
 import SupplementaryFiles from './SupplementaryFiles'
 
-import Confirm from './Confirm'
 import { Heading1, Section, Legend } from '../styles'
-// import Validots from './Validots'
 
 const Wrapper = styled.div`
   font-family: ${th('fontInterface')};
@@ -27,29 +24,23 @@ const Intro = styled.div`
   line-height: 1.4;
 `
 
-const ModalWrapper = styled.div`
-  align-items: center;
-  background: rgba(255, 255, 255, 0.95);
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-`
+const filterFileManuscript = files =>
+  files.filter(
+    file =>
+      file.type === 'manuscript' &&
+      file.mimeType ===
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  )
 
-const CurrentVersion = ({
-  project,
-  version,
-  valid,
-  error,
-  readonly,
-  handleSubmit,
-  uploadFile,
-  confirming,
-  toggleConfirming,
-}) => (
+// Due to migration to new Data Model
+// Attachement component needs different data structure to work
+// needs to change the pubsweet ui Attachement to support the new Data Model
+const filesToAttachment = file => ({
+  name: file.filename,
+  url: file.url,
+})
+
+const CurrentVersion = ({ journal, forms, manuscript }) => (
   <Wrapper>
     <Heading1>Submission information</Heading1>
 
@@ -57,7 +48,9 @@ const CurrentVersion = ({
       <div>
         We have ingested your manuscript. To access your manuscript in an
         editor, please{' '}
-        <Link to={`/projects/${project.id}/versions/${version.id}/manuscript`}>
+        <Link
+          to={`/journals/${journal.id}/versions/${manuscript.id}/manuscript`}
+        >
           view here
         </Link>.
       </div>
@@ -67,47 +60,20 @@ const CurrentVersion = ({
       <div>The answers will be automatically saved.</div>
     </Intro>
 
-    <form onSubmit={handleSubmit}>
-      <Metadata readonly={readonly} version={version} />
-      <Declarations readonly={readonly} version={version} />
-      <Suggestions readonly={readonly} version={version} />
-      <Notes readonly={readonly} />
-      <SupplementaryFiles
-        readonly={readonly}
-        uploadFile={uploadFile}
-        version={version}
-      />
-      {version.files.manuscript.type !==
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
-        <Section id="files.manuscript">
-          <Legend space>Submitted Manuscript</Legend>
-          <Attachment
-            file={version.files.manuscript}
-            key={version.files.manuscript.url}
-            uploaded
-          />
-        </Section>
-      )}
-
-      {!version.submitted && (
-        <div>
-          <Button onClick={toggleConfirming} primary type="button">
-            Submit your manuscript
-          </Button>
-        </div>
-      )}
-      {confirming && (
-        <ModalWrapper>
-          <Confirm toggleConfirming={toggleConfirming} />
-        </ModalWrapper>
-      )}
-    </form>
-
-    {/* <div className={classes.validots}>
-      <Validots
-        valid={valid}
-        handleSubmit={handleSubmit}/>
-    </div> */}
+    <Metadata manuscript={manuscript} />
+    <Declarations forms={forms} manuscript={manuscript} />
+    <Suggestions manuscript={manuscript} />
+    <SupplementaryFiles manuscript={manuscript} />
+    {filterFileManuscript(manuscript.files || []).length > 0 && (
+      <Section id="files.manuscript">
+        <Legend space>Submitted Manuscript</Legend>
+        <Attachment
+          file={filesToAttachment(filterFileManuscript(manuscript.files)[0])}
+          key={filterFileManuscript(manuscript.files)[0].url}
+          uploaded
+        />
+      </Section>
+    )}
   </Wrapper>
 )
 

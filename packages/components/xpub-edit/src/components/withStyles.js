@@ -70,6 +70,7 @@ export const withEditorStyle = Component => styled(Component).attrs({
   &:focus .placeholder {
     display: none;
   }
+  white-space: pre-wrap;
 
   ${contentStyles};
 

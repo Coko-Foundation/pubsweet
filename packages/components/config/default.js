@@ -21,4 +21,7 @@ module.exports = {
   mailer: {
     from: 'nobody@example.com',
   },
+  'pubsweet-client': {
+    'login-redirect': '/testRedirect',
+  },
 }

@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@4.0.0...pubsweet-component-xpub-dashboard@4.0.1) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-component-xpub-dashboard
+
+
+
+
+
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.1.0...pubsweet-component-xpub-dashboard@4.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
+<a name="3.1.0"></a>
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.15...pubsweet-component-xpub-dashboard@3.1.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+* GraphQL Xpub review component ([66b3e73](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/66b3e73))
+* GraphQL Xpub submit component ([ba07060](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ba07060))
+
+
+
+
 <a name="3.0.15"></a>
 ## [3.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@3.0.14...pubsweet-component-xpub-dashboard@3.0.15) (2018-10-08)
 

@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@7.0.0...pubsweet-client@7.0.1) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+# [7.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@6.1.0...pubsweet-client@7.0.0) (2018-11-29)
+
+
+### Bug Fixes
+
+* test fixes ([651a697](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/651a697))
+* upgrade styled-normalize ([98f2e4c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98f2e4c))
+
+
+### Features
+
+* **pubsweet-client:** upgrade styled-components ([04e9061](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/04e9061))
+
+
+### BREAKING CHANGES
+
+* **pubsweet-client:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
+<a name="6.1.0"></a>
+# [6.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@6.0.1...pubsweet-client@6.1.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+
+
+
+
 <a name="6.0.1"></a>
 ## [6.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@6.0.0...pubsweet-client@6.0.1) (2018-10-08)
 

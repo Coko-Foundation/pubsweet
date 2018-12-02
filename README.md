@@ -3,8 +3,8 @@
   <h2>The open toolkit for building publishing workflows</h2>
 </div>
 
-| ![PubSweet home](https://img.shields.io/badge/PubSweet-home-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 
 # Contents
@@ -29,11 +29,10 @@ It's a modular and flexible framework consisting of a **server** and **client** 
 
 | package                                                                                                                                                                                                              | description                                                           |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server)                 | an extensible RESTful API that runs on the server                     |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/client)                 | an extensible frontend app that runs in the browser                   |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server)                 | an extensible RESTful and GraphQL API that runs on the server         |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/client)                 | an extensible frontend React app that runs in the browser             |
 | [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components) | components for server and/or client                                   |
 | [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet cli](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/cli)                             | a suite of command-line tools for building and managing your platform |
-| [pubsweet-theme-plugin](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/theme-plugin)                                                                                                          | webpack plugin for theme support in PubSweet                          |
 | [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/logger)                                                                                                                     | logging utility                                                       |
 | [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/db-manager)                                                                                                             | utility for managing PubSweet databases                               |
 
@@ -50,6 +49,8 @@ The wiki answers most of the common questions around:
 * Technical terms
 * Contributing
 
+Additionally, we've collaboratively written (using Editoria, a PubSweet-based app), [a book about PubSweet](https://coko.foundation/books/).
+
 # Support
 
 * **If you have a general query about PubSweet**, or want to discuss anything with us, come and [chat to us in our Mattermost channel](https://mattermost.coko.foundation/coko/channels/pubsweet).
@@ -59,7 +60,10 @@ The wiki answers most of the common questions around:
 # Projects using PubSweet
 
 * [Editoria](https://gitlab.coko.foundation/editoria/editoria) - a book production platform built for University of California Press
-* [Xpub](https://gitlab.coko.foundation/xpub/xpub) - a journal publishing platform
+* [Xpub](https://gitlab.coko.foundation/xpub/xpub) - Collabra, a journal publishing platform
+* [elife-xpub](https://github.com/elifesciences/elife-xpub/) - A journal publishing platform in collaboration with eLife
+* [Faraday](https://gitlab.coko.foundation/xpub/xpub-faraday) - A journal publishing platform in collaboration with Hindawi
+* [Micropubs](https://gitlab.coko.foundation/micropubs/wormbase) - A micropublications platform in collaboration with Wormbase
 
 # Credits
 

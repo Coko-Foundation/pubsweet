@@ -1,143 +1,94 @@
 A page for a reviewer to submit a review of a version of a project.
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
-const project = {
+const journal = {
   id: faker.random.uuid(),
-  reviewers: [
+}
+
+const manuscriptTemplate = () => ({
+  id: faker.random.uuid(),
+  teams: [
     {
-      id: 'reviewer-invited',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-accepted',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-reviewed',
-      name: faker.name.findName(),
-      ordinal: 1,
+      id: faker.random.uuid(),
+      role: 'reviewerEditor',
+      name: 'reviewer',
+      object: {
+        id: faker.random.uuid(),
+        __typename: 'Manuscript',
+      },
+      objectType: 'manuscript',
+      members: [
+        {
+          user: { id: 1 },
+        },
+      ],
     },
   ],
+  meta: {
+    title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(100),
+    articleType: 'original-research',
+    declarations: {
+      openData: 'yes',
+      openPeerReview: 'no',
+      preregistered: 'yes',
+      previouslySubmitted: 'yes',
+      researchNexus: 'no',
+      streamlinedReview: 'no',
+    },
+  },
+  decision: {
+    id: faker.random.uuid(),
+    comments: [{ type: 'note', content: 'this needs review' }],
+    created: 'Thu Oct 11 2018',
+    open: false,
+    status: '<p>This is a decision</p>',
+    user: { id: 1 },
+  },
+  reviews: [
+    {
+      comments: [{ content: 'this needs review' }],
+      created: 'Thu Oct 11 2018',
+      open: false,
+      recommendation: '',
+      user: { id: 1 },
+    },
+  ],
+})
+
+const manuscript = Object.assign({}, manuscriptTemplate(), {
+  manuscriptVersions: [manuscriptTemplate()],
+})
+
+const review = {
+  comments: [{ content: 'this needs review' }],
+  created: 'Thu Oct 11 2018',
+  open: false,
+  recommendation: '',
+  user: { id: 1 },
 }
 
-const versions = [
-  {
-    id: faker.random.uuid(),
-    submitted: faker.date.past(2),
-    declarations: {
-      openReview: true,
-    },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    files: {
-      supplementary: [],
-    },
-    reviewers: [
-      {
-        id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'reviewed',
-        events: {
-          invited: faker.date.past(2),
-          accepted: faker.date.past(2),
-          reviewed: faker.date.past(2),
-        },
-        note: {
-          content: '<p>This is a review</p>',
-        },
-        Recommendation: { recommendation: 'accept' },
-      },
-    ],
-  },
-  {
-    id: faker.random.uuid(),
-    submitted: faker.date.past(1),
-    declarations: {
-      openReview: true,
-    },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    files: {
-      supplementary: [],
-    },
-    reviewers: [
-      {
-        id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'reviewed',
-        events: {
-          invited: faker.date.past(1),
-          accepted: faker.date.past(1),
-          reviewed: faker.date.past(1),
-        },
-        note: {
-          content: '<p>This is another review</p>',
-        },
-        Recommendation: { recommendation: 'accept' },
-      },
-    ],
-  },
-  {
-    id: faker.random.uuid(),
-    submitted: faker.date.past(1),
-    declarations: {
-      openReview: true,
-    },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    files: {
-      supplementary: [],
-    },
-    reviewers: [
-      {
-        id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'accepted',
-        events: {
-          invited: faker.date.past(1),
-          accepted: faker.date.past(1),
-        },
-      },
-    ],
-  },
-]
-
-const projectReviewer = {
-  id: 'reviewer-reviewed',
+const currentUser = {
+  id: 1,
 }
 
-const currentVersion = versions[versions.length - 1]
-const reviewer = currentVersion.reviewers.find(
-  review => review.reviewer === projectReviewer.id,
-)
-
-reviewer._reviewer = { id: reviewer.reviewer }
-
-const handlingEditors = [
-  {
-    username: faker.internet.userName(),
-  },
-]
-
-const ConnectedReviewLayout = reduxForm({
-  form: 'review-layout',
-  onSubmit: values => console.log(values),
-  onChange: values => console.log(values),
+const ConnectedReviewLayout = withFormik({
+  initialValues: {},
+  mapPropsToValues: ({ manuscript, currentUser }) =>
+    manuscript.reviews.find(review => review.user.id === currentUser.id),
+  displayName: 'review',
+  handleSubmit: (props, { props: { onSubmit, history } }) =>
+    onSubmit(props, { history }),
 })(ReviewLayout)
 ;<div style={{ position: 'relative', height: 600 }}>
   <ConnectedReviewLayout
-    project={project}
-    versions={versions}
-    currentVersion={currentVersion}
-    initialValues={reviewer}
-    reviewer={reviewer}
-    handlingEditors={handlingEditors}
+    journal={journal}
+    manuscript={manuscript}
+    review={review}
     uploadFile={() => {}}
+    currentUser={currentUser}
   />
 </div>
 ```

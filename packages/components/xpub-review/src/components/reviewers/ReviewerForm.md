@@ -1,7 +1,7 @@
 A form for inviting a reviewer to a version of a project.
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
 const reviewerUsers = [
   {
@@ -27,12 +27,14 @@ const loadOptions = input => {
   return Promise.resolve({ options: reviewerUsers })
 }
 
-const ConnectedReviewerForm = reduxForm({
-  form: 'reviewer',
-  onSubmit: reset => values => {
-    console.log(values)
-    reset()
-  },
+const ConnectedReviewerForm = withFormik({
+  initialValues: {},
+  mapPropsToValues: ({ manuscript }) => manuscript,
+  displayName: 'reviewers',
+  handleSubmit: () => {},
 })(ReviewerForm)
-;<ConnectedReviewerForm loadOptions={loadOptions} />
+;<ConnectedReviewerForm
+  loadOptions={loadOptions}
+  form={{ values: { teams: [] } }}
+/>
 ```

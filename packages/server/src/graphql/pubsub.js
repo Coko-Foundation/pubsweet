@@ -42,12 +42,18 @@ module.exports = {
     return pubsub
   },
 
-  destroy: () => {
-    if (client) {
+  /**
+   * @param drain {boolean} whether to wait for the database client to emit 'drain' before closing
+   * @returns {Promise<void>}
+   */
+  destroy: async ({ drain } = {}) => {
+    if (pubsub) {
+      if (drain) {
+        await new Promise(resolve => pubsub.client.on('drain', resolve))
+      }
+      await pubsub.client.end()
       pubsub = null
-      return client.end()
     }
-    return Promise.resolve()
   },
 
   /**

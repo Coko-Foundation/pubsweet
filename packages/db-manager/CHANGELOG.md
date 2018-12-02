@@ -3,7 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.0.6"></a>
+## [2.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.1.0...@pubsweet/db-manager@2.1.1) (2018-11-30)
+
+**Note:** Version bump only for package @pubsweet/db-manager
+
+
+
+
+
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.9...@pubsweet/db-manager@2.1.0) (2018-11-29)
+
+
+### Features
+
+* **migration:** change temp dir to pubsweet migrate cwd ([1f30625](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1f30625))
+
+
+
+
+
+      <a name="2.0.9"></a>
+## [2.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.8...@pubsweet/db-manager@2.0.9) (2018-11-13)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/db-manager
+
+      <a name="2.0.8"></a>
+## [2.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.7...@pubsweet/db-manager@2.0.8) (2018-11-05)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/db-manager
+
+<a name="2.0.7"></a>
+## [2.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.6...@pubsweet/db-manager@2.0.7) (2018-10-17)
+
+
+
+
+**Note:** Version bump only for package @pubsweet/db-manager
+
+<a name="2.0.6"></a>
 ## [2.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.5...@pubsweet/db-manager@2.0.6) (2018-10-08)
 
 
@@ -11,7 +54,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pubsweet/db-manager
 
-  <a name="2.0.5"></a>
+<a name="2.0.5"></a>
 ## [2.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.4...@pubsweet/db-manager@2.0.5) (2018-09-29)
 
 

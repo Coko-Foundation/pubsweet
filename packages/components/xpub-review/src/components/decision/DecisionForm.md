@@ -1,35 +1,55 @@
 A form for entering a decision on a version of a project.
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
-const project = {
+const journal = {
   id: faker.random.uuid(),
 }
 
-const version = {
+const manuscript = {
   id: faker.random.uuid(),
-  metadata: {
-    keywords: ['foo', 'bar'],
+  meta: {
+    title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(100),
+    articleType: 'original-research',
+    declarations: {
+      openData: 'yes',
+      openPeerReview: 'no',
+      preregistered: 'yes',
+      previouslySubmitted: 'yes',
+      researchNexus: 'no',
+      streamlinedReview: 'no',
+    },
   },
-}
-
-const decision = {
-  id: faker.random.uuid(),
-  note: {
-    content: '<p>This is a decision</p>',
+  decision: {
+    id: faker.random.uuid(),
+    comments: { type: 'note', content: 'this needs review' },
+    created: 'Thu Oct 11 2018',
+    open: false,
+    recommendation: '<p>This is a decision</p>',
+    user: { identities: [] },
   },
-  Recommendation: { recommendation: 'accept' },
+  reviews: [
+    {
+      comments: { content: 'this needs review' },
+      created: 'Thu Oct 11 2018',
+      open: false,
+      recommendation: '',
+      user: { identities: [] },
+    },
+  ],
 }
 
-const ConnectedDecisionForm = reduxForm({
-  form: 'decision',
-  onSubmit: values => console.log(values),
-  onChange: values => console.log(values),
+const ConnectedDecisionForm = withFormik({
+  initialValues: {},
+  mapPropsToValues: ({ manuscript }) => manuscript,
+  displayName: 'decision',
+  handleSubmit: (props, { props: { onSubmit, history } }) =>
+    onSubmit(props, { history }),
 })(DecisionForm)
 ;<ConnectedDecisionForm
-  version={version}
-  initialValues={decision}
+  manuscript={manuscript}
   uploadFile={() => new XMLHttpRequest()}
 />
 ```

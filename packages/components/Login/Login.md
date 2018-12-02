@@ -1,11 +1,19 @@
 A login form
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
-const LoginForm = reduxForm({
-  form: 'login',
-  onSubmit: val => console.log(val),
+const LoginForm = withFormik({
+  initialValues: {
+    username: '',
+    password: '',
+  },
+  mapPropsToValues: props => ({
+    username: props.username,
+    password: props.password,
+  }),
+  displayName: 'login',
+  handleSubmit: val => console.log(val),
 })(Login)
 ;<LoginForm />
 ```
@@ -13,14 +21,20 @@ const LoginForm = reduxForm({
 Which can have an error message:
 
 ```js
-const { reduxForm, SubmissionError } = require('redux-form')
+const { withFormik } = require('formik')
 
-const LoginForm = reduxForm({
-  form: 'login-error',
-  onSubmit: val => {
-    console.log(val)
-    return Promise.reject(new SubmissionError({ _error: 'Error message' }))
+const LoginForm = withFormik({
+  initialValues: {
+    username: '',
+    password: '',
   },
+  mapPropsToValues: props => ({
+    username: props.username,
+    password: props.password,
+  }),
+  displayName: 'login',
+  handleSubmit: (values, { setErrors }) =>
+    setErrors('Wrong username or password.'),
 })(Login)
 ;<LoginForm />
 ```

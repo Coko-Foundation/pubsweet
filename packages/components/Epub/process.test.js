@@ -2,6 +2,8 @@ const cheerio = require('cheerio')
 const converters = require('./converters')
 const processFragment = require('./process')
 
+const previewer = 'vivliostyle'
+
 test('converts source to html', () => {
   const fragment = {
     title: 'A Test',
@@ -24,7 +26,12 @@ test('converts source to html', () => {
   }
 
   const styles = ['test.css']
-  const activeConverters = [converters.wax, converters['wax-ucp']]
+  const activeConverters = [
+    converters['wax-vivliostyle-default'],
+    converters['wax-vivliostyle-ucp'],
+    converters['wax-paged-ucp'],
+    converters['wax-paged-default'],
+  ]
   const notesPart = cheerio.load(
     '<html><body><section data-type="notes"><h1 class="ct">Notes</h1></section></body></html>',
   )
@@ -34,6 +41,7 @@ test('converts source to html', () => {
     activeConverters,
     book,
     notesPart,
+    previewer,
   })(fragment)
 
   expect(title).toBe('A Test')

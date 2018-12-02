@@ -9,47 +9,59 @@ const Note = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th('lineHeightBaseSmall')};
 `
-const Recommendation = Note.extend``
+const Recommendation = styled(Note)``
 const Content = styled.div``
+
+// Due to migration to new Data Model
+// Attachement component needs different data structure to work
+// needs to change the pubsweet ui Attachement to support the new Data Model
+const filesToAttachment = file => ({
+  name: file.filename,
+  url: file.url,
+})
+
+const findComments = (review = {}, type) => {
+  const comments = review.comments || []
+  return comments.find(comment => comment.type === type)
+}
+
+const ReviewComments = (review, type) => (
+  <Note>
+    <Content>
+      <NoteViewer value={findComments(review, type).content} />
+    </Content>
+    {findComments(review, type) &&
+      findComments(review, type).files.map(attachment => (
+        <Attachment
+          file={filesToAttachment(attachment)}
+          key={attachment.url}
+          uploaded
+        />
+      ))}
+  </Note>
+)
 
 const Review = ({ review }) => (
   <div>
-    <div>
-      <Heading>Note</Heading>
+    {findComments(review, 'note') && (
+      <div>
+        <Heading>Note</Heading>
 
-      <Note>
-        <Content>
-          <NoteViewer value={review.note.content} />
-        </Content>
-
-        {review.note.attachments &&
-          review.note.attachments.map(attachment => (
-            <Attachment file={attachment} key={attachment.url} uploaded />
-          ))}
-      </Note>
-    </div>
-
-    {review.confidential && (
+        {ReviewComments(review, 'note')}
+      </div>
+    )}
+    {findComments(review, 'confidential') && (
       <div>
         <Heading>Confidential</Heading>
 
-        <Note>
-          <Content>
-            <NoteViewer value={review.confidential.content} />
-          </Content>
-
-          {review.confidential.attachments &&
-            review.confidential.attachments.map(attachment => (
-              <Attachment file={attachment} key={attachment.url} uploaded />
-            ))}
-        </Note>
+        {ReviewComments(review, 'confidential')}
       </div>
     )}
 
     <div>
       <Heading>Recommendation</Heading>
 
-      <Recommendation>{review.Recommendation.recommendation}</Recommendation>
+      <Recommendation>{review.recommendation}</Recommendation>
     </div>
   </div>
 )

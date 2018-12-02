@@ -88,7 +88,7 @@ const MultipleValue = styled.span`
   }
 `
 
-const Placeholder = Value.extend`
+const Placeholder = styled(Value)`
   color: ${th('colorTextPlaceholder')};
   font-style: italic;
   padding: calc(${th('gridUnit')} * 2);

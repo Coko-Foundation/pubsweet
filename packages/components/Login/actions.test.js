@@ -28,12 +28,13 @@ describe('Login actions', () => {
     it("doesn't get authenticated on failure", async () => {
       const store = createMockStore({})
       const credentials = { username: 'mr blobby' }
-      const error = new Error('Nope')
+      const error = { response: JSON.stringify({ message: 'Nope' }) }
+
       jest
         .spyOn(api, 'create')
         .mockImplementationOnce(jest.fn(() => Promise.reject(error)))
 
-      await store.dispatch(loginUser(credentials))
+      await store.dispatch(loginUser(credentials, '/', jest.fn(() => {})))
       const [firstAction, secondAction] = store.getActions()
 
       expect(firstAction).toMatchObject({

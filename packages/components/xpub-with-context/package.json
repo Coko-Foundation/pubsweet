@@ -1,0 +1,17 @@
+{
+  "name": "xpub-with-context",
+  "version": "0.1.2",
+  "main": "src",
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "dependencies": {
+    "recompose": "^0.26.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.3"
+  }
+}

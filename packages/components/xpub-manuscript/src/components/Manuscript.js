@@ -21,14 +21,14 @@ const Info = styled.span`
 `
 
 const Manuscript = ({
+  file,
   content,
   currentUser,
   fileUpload,
   history,
   updateManuscript,
-  version,
 }) =>
-  version.files.manuscript.type ===
+  file.fileType ===
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
     <ManuScript>
       <Wax

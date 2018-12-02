@@ -1,117 +1,83 @@
 import React from 'react'
 import moment from 'moment'
-import { Wax } from 'wax-prose-mirror'
 
 import { Tabs } from '@pubsweet/ui'
 import DecisionForm from './DecisionForm'
 import DecisionReviews from './DecisionReviews'
 import AssignEditorsReviewers from '../assignEditors/AssignEditorsReviewers'
+import AssignEditor from '../assignEditors/AssignEditor'
 import ReviewMetadata from '../metadata/ReviewMetadata'
 import Decision from './Decision'
+import EditorSection from './EditorSection'
 import { Columns, Manuscript, Admin } from '../atoms/Columns'
-import { Info } from '../molecules/Info'
-import { EditorWrapper } from '../molecules/EditorWrapper'
 import AdminSection from '../atoms/AdminSection'
 
+const addEditor = (manuscript, label) => ({
+  content: <EditorSection manuscript={manuscript} />,
+  key: manuscript.id,
+  label,
+})
+
 const DecisionLayout = ({
-  currentVersion,
   handleSubmit,
-  project,
+  handleChangeFn,
   uploadFile,
-  valid,
-  versions,
-  AssignEditor,
+  manuscript,
+  journal,
 }) => {
   const decisionSections = []
   const editorSections = []
-
-  versions.forEach(version => {
-    // TODO: allow multiple decisions, e.g. appeals
-    const { decision } = version
-    if (decision && decision.submitted) {
-      const submittedMoment = moment(decision.submitted)
-      const label = submittedMoment.format('YYYY-MM-DD')
-
-      decisionSections.push({
-        content: (
-          <div>
-            <ReviewMetadata version={version} />
-            <DecisionReviews version={version} />
-            <Decision decision={decision} />
-          </div>
-        ),
-        key: version.id,
-        label,
-      })
-
-      editorSections.push({
-        content:
-          version.files.manuscript.type ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-            <EditorWrapper>
-              <Wax key={version.id} readonly value={version.source} />
-            </EditorWrapper>
-          ) : (
-            <Info>No supported view of the file</Info>
-          ),
-        key: version.id,
-        label,
-      })
-    }
-  }, [])
-
-  const { decision } = currentVersion
-
-  if (currentVersion.submitted && (!decision || !decision.submitted)) {
-    const submittedMoment = moment()
+  manuscript.manuscriptVersions.forEach(manuscript => {
+    const { decision } = manuscript
+    const submittedMoment = moment(decision.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
     decisionSections.push({
       content: (
         <div>
-          <AdminSection>
-            <AssignEditorsReviewers
-              AssignEditor={AssignEditor}
-              project={project}
-              version={currentVersion}
-            />
-          </AdminSection>
-          <AdminSection>
-            <ReviewMetadata version={currentVersion} />
-          </AdminSection>
-          <AdminSection>
-            <DecisionReviews version={currentVersion} />
-          </AdminSection>
-          <AdminSection>
-            <DecisionForm
-              handleSubmit={handleSubmit}
-              uploadFile={uploadFile}
-              valid={valid}
-            />
-          </AdminSection>
+          <ReviewMetadata manuscript={manuscript} />
+          <DecisionReviews manuscript={manuscript} />
+          <Decision decision={manuscript.decision} />
         </div>
       ),
-      key: currentVersion.id,
+      key: manuscript.id,
       label,
     })
 
-    editorSections.push({
-      content:
-        currentVersion.files.manuscript.type ===
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
-          <EditorWrapper>
-            <Wax
-              key={currentVersion.id}
-              readonly
-              value={currentVersion.source}
-            />
-          </EditorWrapper>
-        ) : (
-          <Info>No supported view of the file</Info>
-        ),
-      key: currentVersion.id,
-      label,
-    })
-  }
+    editorSections.push(addEditor(manuscript, label))
+  }, [])
+
+  const submittedMoment = moment()
+  const label = submittedMoment.format('YYYY-MM-DD')
+  decisionSections.push({
+    content: (
+      <div>
+        <AdminSection>
+          <AssignEditorsReviewers
+            AssignEditor={AssignEditor}
+            journal={journal}
+            manuscript={manuscript}
+          />
+        </AdminSection>
+        <AdminSection>
+          <ReviewMetadata manuscript={manuscript} />
+        </AdminSection>
+        <AdminSection>
+          <DecisionReviews manuscript={manuscript} />
+        </AdminSection>
+        <AdminSection>
+          <DecisionForm
+            handleChangeFn={handleChangeFn}
+            handleSubmit={handleSubmit}
+            uploadFile={uploadFile}
+          />
+        </AdminSection>
+      </div>
+    ),
+    key: manuscript.id,
+    label,
+  })
+
+  editorSections.push(addEditor(manuscript, label))
 
   return (
     <Columns>

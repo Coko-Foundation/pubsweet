@@ -6,27 +6,14 @@ import { Roles } from '../molecules/Roles'
 const Root = styled.div``
 const Title = styled.div``
 
-const AssignEditorsReviewers = ({
-  AssignEditor,
-  version,
-  project,
-  addUserToTeam,
-}) => (
+const AssignEditorsReviewers = ({ manuscript, journal, AssignEditor }) => (
   <Root>
     <Title>Assign Editors</Title>
     <Roles>
-      <AssignEditor
-        addUserToTeam={addUserToTeam}
-        project={project}
-        teamTypeName="seniorEditor"
-      />
-      <AssignEditor
-        addUserToTeam={addUserToTeam}
-        project={project}
-        teamTypeName="handlingEditor"
-      />
+      <AssignEditor manuscript={manuscript} teamRole="seniorEditor" />
+      <AssignEditor manuscript={manuscript} teamRole="handlingEditor" />
     </Roles>
-    <Link to={`/projects/${project.id}/versions/${version.id}/reviewers`}>
+    <Link to={`/journals/${journal.id}/versions/${manuscript.id}/reviewers`}>
       Assign Reviewers
     </Link>
   </Root>

@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FieldArray } from 'redux-form'
-import { compose, lifecycle } from 'recompose'
-import { TextField, ValidatedField, Button } from '@pubsweet/ui'
+import { FieldArray } from 'formik'
+import { TextField, Button, ValidatedFieldFormik } from '@pubsweet/ui'
 import { minSize, readonly } from 'xpub-validators'
 
 const minSize1 = minSize(1)
@@ -45,68 +44,73 @@ const affiliationInput = input => (
   <TextField label="Affiliation" placeholder="Enter affiliation…" {...input} />
 )
 
-const renderAuthors = ({
-  fields = {},
-  meta: { touched, error, submitFailed },
-}) => (
+const renderAuthors = ({ form: { values }, insert, remove }) => (
   <ul>
     <UnbulletedList>
       <li>
-        <Button onClick={() => fields.push()} plain type="button">
+        <Button
+          onClick={() =>
+            insert((values.authors || []).length, {
+              firstName: '',
+              lastName: '',
+              email: '',
+              affiliation: '',
+            })
+          }
+          plain
+          type="button"
+        >
           Add another author
         </Button>
       </li>
-      {fields.map((author, index) => (
-        <li key={`${author}.email`}>
+      {(values.authors || []).map((author, index) => (
+        <li key={`author.${author.email}`}>
           <Spacing>
             <Author>
               Author:&nbsp;
-              {fields.length > 1 && (
-                <Button onClick={() => fields.remove(index)} type="button">
+              {values.authors.length > 1 && (
+                <Button onClick={() => remove(index)} type="button">
                   Remove
                 </Button>
               )}
             </Author>
             <div>
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={firstNameInput}
-                  name={`${author}.firstName`}
+                  name={`authors.[${index}].firstName`}
                   readonly={readonly}
-                  required
-                  validate={[minSize1]}
+                  validate={minSize1}
                 />
               </Inline>
 
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={lastNameInput}
-                  name={`${author}.lastName`}
+                  name={`authors.[${index}].lastName`}
                   readonly={readonly}
-                  required
-                  validate={[minSize1]}
+                  validate={minSize1}
                 />
               </Inline>
             </div>
 
             <div>
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={emailAddressInput}
-                  name={`${author}.email`}
+                  name={`authors.[${index}].email`}
                   readonly={readonly}
-                  required
-                  validate={[minSize1]}
+                  validate={minSize1}
                 />
               </Inline>
 
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={affiliationInput}
-                  name={`${author}.affiliation`}
+                  name={`authors.[${index}].affiliation`}
                   readonly={readonly}
                   required
-                  validate={[minSize1]}
+                  validate={minSize1}
                 />
               </Inline>
             </div>
@@ -117,18 +121,8 @@ const renderAuthors = ({
   </ul>
 )
 
-const renderAuthorsComp = compose(
-  lifecycle({
-    componentDidMount() {
-      if (this.props.fields.length === 0) {
-        this.props.fields.push()
-      }
-    },
-  }),
-)(renderAuthors)
-
-const AuthorsInput = () => (
-  <FieldArray component={renderAuthorsComp} name="metadata.authors" />
+const AuthorsInput = props => (
+  <FieldArray name="authors" render={renderAuthors} />
 )
 
 export default AuthorsInput

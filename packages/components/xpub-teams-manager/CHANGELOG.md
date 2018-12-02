@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@1.0.0...pubsweet-component-xpub-teams-manager@1.0.1) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-component-xpub-teams-manager
+
+
+
+
+
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@0.2.0...pubsweet-component-xpub-teams-manager@1.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@0.1.4...pubsweet-component-xpub-teams-manager@0.2.0) (2018-11-05)
+
+
+### Features
+
+* GraphQL Login component ([70df3de](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70df3de))
+
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@0.1.3...pubsweet-component-xpub-teams-manager@0.1.4) (2018-10-08)
 

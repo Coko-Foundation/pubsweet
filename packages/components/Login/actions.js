@@ -38,7 +38,7 @@ function loginFailure(message) {
 
 // Calls the API to get a token and
 // dispatches actions along the way
-export function loginUser(credentials, redirectTo) {
+export function loginUser(credentials, redirectTo, setErrors) {
   return dispatch => {
     dispatch(loginRequest(credentials))
     return api.create('/users/authenticate', credentials).then(
@@ -47,7 +47,10 @@ export function loginUser(credentials, redirectTo) {
         dispatch(loginSuccess(user))
         if (redirectTo) dispatch(push(redirectTo))
       },
-      err => dispatch(loginFailure(err)),
+      err => {
+        setErrors(JSON.parse(err.response).message)
+        dispatch(loginFailure(err))
+      },
     )
   }
 }

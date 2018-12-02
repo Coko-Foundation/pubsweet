@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.46](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.45...pubsweet-component-posts-manager@1.0.46) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+
+
+
+
+## [1.0.45](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.44...pubsweet-component-posts-manager@1.0.45) (2018-11-29)
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+
+
+
+
+<a name="1.0.44"></a>
+## [1.0.44](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.43...pubsweet-component-posts-manager@1.0.44) (2018-11-13)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+<a name="1.0.43"></a>
+## [1.0.43](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.42...pubsweet-component-posts-manager@1.0.43) (2018-11-05)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
+<a name="1.0.42"></a>
+## [1.0.42](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.41...pubsweet-component-posts-manager@1.0.42) (2018-10-17)
+
+
+
+
+**Note:** Version bump only for package pubsweet-component-posts-manager
+
 <a name="1.0.41"></a>
 ## [1.0.41](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-posts-manager@1.0.40...pubsweet-component-posts-manager@1.0.41) (2018-10-08)
 

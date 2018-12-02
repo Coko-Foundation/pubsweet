@@ -12,9 +12,8 @@ import { getMainDefinition } from 'apollo-utilities'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
-import StyleRoot, { injectGlobalStyles } from '../helpers/StyleRoot'
-
-injectGlobalStyles()
+import { Normalize } from 'styled-normalize'
+import StyleRoot from '../helpers/StyleRoot'
 
 // Construct an ApolloClient. If a function is passed as the first argument,
 // it will be called with the default client config as an argument, and should
@@ -65,17 +64,20 @@ const Root = ({
   theme,
   connectToWebSocket = true,
 }) => (
-  <ApolloProvider
-    client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
-  >
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <ThemeProvider theme={theme}>
-          <StyleRoot>{routes}</StyleRoot>
-        </ThemeProvider>
-      </ConnectedRouter>
-    </Provider>
-  </ApolloProvider>
+  <div>
+    <Normalize />
+    <ApolloProvider
+      client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
+    >
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <ThemeProvider theme={theme}>
+            <StyleRoot>{routes}</StyleRoot>
+          </ThemeProvider>
+        </ConnectedRouter>
+      </Provider>
+    </ApolloProvider>
+  </div>
 )
 
 Root.propTypes = {

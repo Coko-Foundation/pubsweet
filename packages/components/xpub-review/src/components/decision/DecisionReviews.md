@@ -1,46 +1,68 @@
 Reviews of a version of a project, as shown when making a decision.
 
 ```js
-const version = {
+const { JournalProvider } = require('xpub-journal')
+const journal = require('@pubsweet/styleguide/config/journal')
+
+const manuscriptTemplate = () => ({
   id: faker.random.uuid(),
-  submitted: faker.date.past(2),
-  declarations: {
-    openReview: true,
-  },
-  files: {
-    supplementary: [],
-  },
-  reviewers: [
+  teams: [
     {
       id: faker.random.uuid(),
-      _user: { username: 'john123' },
-      reviewer: 'reviewer-reviewed',
-      status: 'reviewed',
-      submitted: faker.date.past(2),
-      note: {
-        content: '<p>This is a review</p>',
+      role: 'reviewerEditor',
+      name: 'Reviewer',
+      object: {
+        id: faker.random.uuid(),
+        __typename: 'Manuscript',
       },
-      Recommendation: { recommendation: 'accept' },
-    },
-    {
-      id: faker.random.uuid(),
-      _user: { username: 'john123' },
-      reviewer: 'reviewer-reviewed',
-      status: 'reviewed',
-      submitted: faker.date.past(2),
-      note: {
-        content: '<p>This is another review</p>',
-      },
-      Recommendation: { recommendation: 'revise' },
+      objectType: 'manuscript',
+      members: [
+        {
+          user: {
+            id: 1,
+            username: 'test user',
+          },
+          status: 'accepted',
+        },
+      ],
     },
   ],
-  decision: {
-    submitted: faker.date.past(2),
-    note: {
-      content: '<p>This is a decision</p>',
-      recommendation: 'accept',
+  meta: {
+    title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(100),
+    articleType: 'original-research',
+    declarations: {
+      openData: 'yes',
+      openPeerReview: 'no',
+      preregistered: 'yes',
+      previouslySubmitted: 'yes',
+      researchNexus: 'no',
+      streamlinedReview: 'no',
     },
   },
-}
-;<DecisionReviews version={version} />
+  decision: {
+    id: faker.random.uuid(),
+    comments: [{ type: 'note', content: 'this needs review' }],
+    created: 'Thu Oct 11 2018',
+    open: false,
+    status: '<p>This is a decision</p>',
+    user: { id: 1 },
+  },
+  reviews: [
+    {
+      comments: [{ content: 'this needs review' }],
+      created: 'Thu Oct 11 2018',
+      open: false,
+      recommendation: 'revise',
+      user: { id: 1, username: 'test user' },
+    },
+  ],
+})
+
+const manuscript = Object.assign({}, manuscriptTemplate(), {
+  manuscriptVersions: [manuscriptTemplate()],
+})
+;<JournalProvider journal={journal}>
+  <DecisionReviews manuscript={manuscript} />
+</JournalProvider>
 ```

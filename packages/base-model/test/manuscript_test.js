@@ -65,8 +65,19 @@ describe('Manuscript', () => {
     )
   })
 
+  it('can assign to special properties', () => {
+    const manuscript = new Manuscript()
+    manuscript['#id'] = 'idref'
+  })
+
   it('takes schema specified in config into account', async () => {
     const manuscript = new Manuscript({ configField: 'hello' })
     expect(manuscript.configField).toEqual('hello')
+  })
+
+  it('can save new entity with known ID', async () => {
+    const id = '1838d074-fb9d-4ed6-9c63-39e6bc7429ce'
+    const manuscript = await new Manuscript({ id }).save()
+    expect(manuscript.id).toEqual(id)
   })
 })

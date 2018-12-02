@@ -2,94 +2,58 @@ A dashboard item showing a project that the current user is handling as editor.
 
 ```js
 const { JournalProvider } = require('xpub-journal')
+const { MockedProvider } = require('react-apollo/test-utils')
 const journal = require('@pubsweet/styleguide/config/journal')
+const queries = require('../../graphql/queries')
+const gql = require('graphql-tag')
 
-const project = {
+const mocks = [
+  {
+    request: {
+      query: gql`
+        query CurrentUser {
+          currentUser {
+            admin
+            id
+            username
+          }
+        }
+      `,
+    },
+    result: {
+      data: {
+        currentUser: { id: faker.random.uuid(), username: 'test', admin: true },
+      },
+    },
+  },
+]
+
+const journals = {
   id: faker.random.uuid(),
   title: faker.lorem.sentence(15),
-  status: 'submitted',
   fragments: [faker.random.uuid()],
-  owners: [
-    {
-      name: faker.name.findName(),
-      username: faker.name.findName(),
-    },
-  ],
-  reviewers: [
-    {
-      id: 'reviewer-invited',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-accepted',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-declined',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-removed',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-reviewed',
-      name: faker.name.findName(),
-      ordinal: 1,
-    },
-  ],
 }
 
 const version = {
   id: faker.random.uuid(),
-  submitted: faker.date.past(1),
-  metadata: {
+  status: 'submitted',
+  meta: {
+    title: faker.lorem.sentence(10),
     articleType: 'original-research',
     articleSection: ['cognitive-psychology'],
-  },
-  declarations: {
-    openReview: true,
+    declarations: {
+      streamlinedReview: 'yes',
+      openPeerReview: 'yes',
+    },
   },
   reviews: [
     {
-      reviewer: 'reviewer-invited',
-      status: 'invited',
-      events: {
-        invited: faker.date.past(1),
-      },
-    },
-    {
-      reviewer: 'reviewer-accepted',
-      status: 'accepted',
-      events: {
-        invited: faker.date.past(1),
-        accepted: faker.date.past(1),
-      },
-    },
-    {
-      reviewer: 'reviewer-declined',
-      status: 'declined',
-      events: {
-        invited: faker.date.past(1),
-        declined: faker.date.past(1),
-      },
-    },
-    {
-      reviewer: 'reviewer-reviewed',
-      status: 'reviewed',
-      events: {
-        invited: faker.date.past(1),
-        accepted: faker.date.past(1),
-        reviewed: faker.date.past(1),
-      },
+      id: faker.random.uuid(),
+      user: {},
     },
   ],
 }
 ;<JournalProvider journal={journal}>
-  <EditorItem
-    project={project}
-    version={version}
-    addUserToTeam={props => console.log(props)}
-  />
+  <EditorItem journals={journals} version={version} />
 </JournalProvider>
 ```

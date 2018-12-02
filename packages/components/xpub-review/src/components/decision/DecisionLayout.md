@@ -1,127 +1,68 @@
 A page for an editor to make a decision on a version of a project.
 
 ```js
-const { reduxForm } = require('redux-form')
+const { withFormik } = require('formik')
 
 const AssignEditor = require('../assignEditors/AssignEditor').default
 
-const project = {
+const journal = {
   id: faker.random.uuid(),
-  reviewers: [
-    {
-      id: 'reviewer-invited',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-accepted',
-      name: faker.name.findName(),
-    },
-    {
-      id: 'reviewer-reviewed',
-      name: faker.name.findName(),
-      ordinal: 1,
-    },
-  ],
 }
 
-const versions = [
-  {
-    id: faker.random.uuid(),
-    submitted: faker.date.past(2),
-    declarations: {
-      openReview: true,
-    },
-    files: {
-      supplementary: [],
-    },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    reviewers: [
-      {
+const manuscriptTemplate = () => ({
+  id: faker.random.uuid(),
+  teams: [
+    {
+      id: faker.random.uuid(),
+      role: 'author',
+      name: 'Authors',
+      object: {
         id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'reviewed',
-        events: {
-          invited: faker.date.past(2),
-          accepted: faker.date.past(2),
-          reviewed: faker.date.past(2),
-        },
-        note: {
-          content: '<p>This is a review</p>',
-        },
-        recommendation: 'accept',
+        __typename: 'Manuscript',
       },
-    ],
-    decision: {
-      submitted: faker.date.past(2),
-      note: {
-        content: '<p>This is a decision</p>',
-        recommendation: 'accept',
-      },
+      objectType: 'manuscript',
+      members: [
+        {
+          user: {},
+        },
+      ],
+    },
+  ],
+  meta: {
+    title: faker.lorem.sentence(25),
+    abstract: faker.lorem.sentence(100),
+    articleType: 'original-research',
+    declarations: {
+      openData: 'yes',
+      openPeerReview: 'no',
+      preregistered: 'yes',
+      previouslySubmitted: 'yes',
+      researchNexus: 'no',
+      streamlinedReview: 'no',
     },
   },
-  {
+  decision: {
     id: faker.random.uuid(),
-    submitted: faker.date.past(1),
-    declarations: {
-      openReview: true,
-    },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    files: {
-      supplementary: [],
-    },
-    reviewers: [
-      {
-        id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'reviewed',
-        events: {
-          invited: faker.date.past(1),
-          accepted: faker.date.past(1),
-          reviewed: faker.date.past(1),
-        },
-        note: {
-          content: '<p>This is another review</p>',
-        },
-        recommendation: 'accept',
-      },
-    ],
-    decision: {
-      submitted: faker.date.past(1),
-      note: {
-        content: '<p>This is a decision</p>',
-        recommendation: 'accept',
-      },
-    },
+    comments: [{ type: 'note', content: 'this needs review' }],
+    created: 'Thu Oct 11 2018',
+    open: false,
+    status: '<p>This is a decision</p>',
+    user: { identities: [] },
   },
-  {
-    id: faker.random.uuid(),
-    submitted: faker.date.past(1),
-    declarations: {
-      openReview: true,
+  reviews: [
+    {
+      comments: { content: 'this needs review' },
+      created: 'Thu Oct 11 2018',
+      open: false,
+      recommendation: '',
+      user: { identities: [] },
     },
-    notes: {
-      specialInstructions: 'foo'
-    },
-    files: {
-      supplementary: [],
-    },
-    reviewers: [
-      {
-        id: faker.random.uuid(),
-        reviewer: 'reviewer-reviewed',
-        status: 'accepted',
-        events: {
-          invited: faker.date.past(1),
-          accepted: faker.date.past(1),
-        },
-      },
-    ],
-  },
-]
+  ],
+})
+
+const manuscript = Object.assign({}, manuscriptTemplate(), {
+  manuscriptVersions: [manuscriptTemplate()],
+})
 
 const team = {
   members: [],
@@ -151,29 +92,25 @@ const AssignEditorContainer = ({
   <AssignEditor
     team={team}
     options={options}
-    project={project}
+    manuscript={manuscript}
     teamName={teamName}
     teamTypeName={teamTypeName}
     addUserToTeam={addUserToTeam}
   />
 )
 
-const currentVersion = versions[versions.length - 1]
-const decision = currentVersion.decision
-
-const ConnectedDecisionLayout = reduxForm({
-  form: 'decision-layout',
-  onSubmit: values => console.log(values),
-  onChange: values => console.log(values),
+const ConnectedDecisionLayout = withFormik({
+  initialValues: {},
+  mapPropsToValues: ({ manuscript }) => manuscript,
+  displayName: 'decision',
+  handleSubmit: (props, { props: { onSubmit, history } }) =>
+    onSubmit(props, { history }),
 })(DecisionLayout)
 ;<div style={{ position: 'relative', height: 600 }}>
   <ConnectedDecisionLayout
-    project={project}
-    versions={versions}
-    currentVersion={currentVersion}
-    initialValues={decision}
+    journal={journal}
+    manuscript={manuscript}
     uploadFile={() => {}}
-    AssignEditor={AssignEditorContainer}
   />
 </div>
 ```

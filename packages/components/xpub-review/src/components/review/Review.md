@@ -2,20 +2,11 @@ A review of a version of a project.
 
 ```js
 const review = {
-  id: faker.random.uuid(),
-  note: {
-    content: '<p>This is a review</p>',
-    attachments: [
-      {
-        name: faker.system.commonFileName(),
-        url: faker.internet.url(),
-      },
-    ],
-  },
-  confidential: {
-    content: '<p>This is confidential</p>',
-  },
-  Recommendation: { recommendation: 'accept' },
+  comments: [{ content: 'this needs review' }],
+  created: 'Thu Oct 11 2018',
+  open: false,
+  recommendation: 'revise',
+  user: { id: 1 },
 }
 ;<Review review={review} />
 ```
