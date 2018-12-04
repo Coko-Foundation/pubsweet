@@ -1,13 +1,13 @@
 {
   "name": "pubsweet-component-password-reset-frontend",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Password reset frontend component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^9.0.1",
-    "@pubsweet/ui-toolkit": "^2.0.1",
+    "@pubsweet/ui": "^9.0.2",
+    "@pubsweet/ui-toolkit": "^2.0.2",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react-router": "^4.2.0",
