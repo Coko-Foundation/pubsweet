@@ -1,5 +1,6 @@
 const uuid = require('uuid')
 const { Model, ValidationError } = require('objection')
+const { transaction } = require('objection')
 const logger = require('@pubsweet/logger')
 const { db, NotFoundError } = require('pubsweet-server')
 const { merge } = require('lodash')
@@ -15,6 +16,11 @@ const validationError = (prop, className) =>
 
 const notFoundError = (property, value, className) =>
   new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
+
+const integrityError = (property, value, message) =>
+  new Error(
+    `Data Integrity Error property ${property} set to ${value}: ${message}`,
+  )
 
 class BaseModel extends Model {
   constructor(properties) {
@@ -104,14 +110,54 @@ class BaseModel extends Model {
     this.updated = new Date().toISOString()
   }
 
+  async simpleSave() {
+    return this.constructor.query().patchAndFetchById(this.id, this.toJSON())
+  }
+
+  async protectedSave() {
+    let trx, saved
+    try {
+      trx = await transaction.start(BaseModel.knex())
+      const current = await this.constructor.query().findById(this.id)
+
+      const dateCurrent = new Date(current.updated)
+      const dateThis = new Date(this.updated)
+
+      if (dateThis.getTime() < dateCurrent.getTime()) {
+        throw integrityError(
+          'updated',
+          this.updated,
+          'is older than the one stored in the database!',
+        )
+      }
+
+      saved = await this.simpleSave()
+      await trx.commit()
+    } catch (err) {
+      logger.error(err)
+      await trx.rollback()
+      throw err
+    }
+    return saved
+  }
+
   async save() {
     let saved
     if (this.id) {
-      saved = await this.constructor
-        .query()
-        .patchAndFetchById(this.id, this.toJSON())
-    }
+      if (!this.updated && this.created) {
+        throw integrityError(
+          'updated',
+          this.updated,
+          'must be set when created is set!',
+        )
+      }
 
+      if (!this.updated && !this.created) {
+        saved = await this.simpleSave()
+      } else {
+        saved = await this.protectedSave()
+      }
+    }
     if (!saved) {
       // either model has no ID or the ID was not found in the database
       saved = await this.constructor.query().insert(this.toJSON())

@@ -92,7 +92,7 @@ describe('Manuscript', () => {
     // T0 - start time (A == B)
     let manuscriptA = await new Manuscript({ title: 'T0' }).save()
     expect(manuscriptA.title).toEqual('T0')
-    let manuscriptB = await Manuscript.find(manuscriptA.id)
+    const manuscriptB = await Manuscript.find(manuscriptA.id)
 
     // T1 - B is changed (not saved)
     manuscriptB.title = 'T1'
@@ -103,8 +103,8 @@ describe('Manuscript', () => {
     expect(manuscriptA.updated).not.toBe(manuscriptB.updated)
 
     // T4 - now save B, this should throw as `updated` is older than current.
-    expect(async () => {
-      manuscriptB = await manuscriptB.save()
-    }).toThrow()
+    await expect(manuscriptB.save()).rejects.toThrow(
+      'Data Integrity Error property updated',
+    )
   })
 })
