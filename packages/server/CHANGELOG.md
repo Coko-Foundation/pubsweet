@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.4-alpha.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.4-alpha.0...pubsweet-server@10.0.4-alpha.1) (2018-12-10)
+
+
+### Bug Fixes
+
+* return originalClose result ([bec775f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bec775f))
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+
+
+### Features
+
+* migrate Fragment to use BaseModel ([bd4c7f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4c7f9))
+* **server:** migrate Collection to a model component ([8380b69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8380b69))
+* **server:** recursively register extending components ([39fbb3e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/39fbb3e))
+
+
+### BREAKING CHANGES
+
+* **server:** Collections, currently stored in a NoSQL-like entities table, are now living in
+standalone collections table. Since the constraints from PostgreSQLs columns are stricter than a
+JSON data field, where the collection data currently lives, no automatic migration of data is
+possible - and migrations will have to be done on a app-by-app basis.
+
+
+
+
+
 ## [10.0.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.3...pubsweet-server@10.0.4-alpha.0) (2018-11-23)
 
 

@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.10.1-alpha.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.1-alpha.0...pubsweet-components@9.10.1-alpha.1) (2018-12-10)
+
+
+### Bug Fixes
+
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+
+
+### Features
+
+* **base-model:** remove proxy for setting model properties ([e9ad1fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e9ad1fa))
+* migrate Fragment to use BaseModel ([bd4c7f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4c7f9))
+* **server:** migrate Collection to a model component ([8380b69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8380b69))
+* remove redux ([4217850](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4217850))
+
+
+### BREAKING CHANGES
+
+* All components that rely on Redux's actions and reducers will cease to work in this
+version. Migrating to GraphQL and Apollo on the client and server is advised.
+* **server:** Collections, currently stored in a NoSQL-like entities table, are now living in
+standalone collections table. Since the constraints from PostgreSQLs columns are stricter than a
+JSON data field, where the collection data currently lives, no automatic migration of data is
+possible - and migrations will have to be done on a app-by-app basis.
+
+
+
+
+
 ## [9.10.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.0...pubsweet-components@9.10.1-alpha.0) (2018-11-23)
 
 

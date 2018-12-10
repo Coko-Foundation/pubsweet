@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9-alpha.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.9-alpha.0...@pubsweet/db-manager@2.0.9-alpha.1) (2018-12-10)
+
+
+### Bug Fixes
+
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+
+
+### Features
+
+* migrate Fragment to use BaseModel ([bd4c7f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4c7f9))
+
+
+
+
+
 ## [2.0.9-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.0.8...@pubsweet/db-manager@2.0.9-alpha.0) (2018-11-23)
 
 
