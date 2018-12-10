@@ -110,15 +110,15 @@ class BaseModel extends Model {
     this.updated = new Date().toISOString()
   }
 
-  async simpleSave() {
-    return this.constructor.query().patchAndFetchById(this.id, this.toJSON())
+  async simpleSave(trx = null) {
+    return this.constructor.query(trx).patchAndFetchById(this.id, this.toJSON())
   }
 
   async protectedSave() {
     let trx, saved
     try {
       trx = await transaction.start(BaseModel.knex())
-      const current = await this.constructor.query().findById(this.id)
+      const current = await this.constructor.query(trx).findById(this.id)
 
       const dateCurrent = new Date(current.updated)
       const dateThis = new Date(this.updated)
@@ -131,7 +131,7 @@ class BaseModel extends Model {
         )
       }
 
-      saved = await this.simpleSave()
+      saved = await this.simpleSave(trx)
       await trx.commit()
     } catch (err) {
       logger.error(err)
