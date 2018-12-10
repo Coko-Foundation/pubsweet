@@ -1,7 +1,7 @@
-const Model = require('./Model')
+const BaseModel = require('@pubsweet/base-model')
 const without = require('lodash/without')
 
-class Collection extends Model {
+class Collection extends BaseModel {
   constructor(properties) {
     super(properties)
     this.type = 'collection'
@@ -9,9 +9,34 @@ class Collection extends Model {
     this.owners = this.owners || []
   }
 
+  static get tableName() {
+    return 'collections'
+  }
+
+  static get schema() {
+    return {
+      properties: {
+        fragments: {
+          type: ['array', 'null'],
+          items: { type: 'string', format: 'uuid' },
+        },
+        owners: {
+          type: ['array', 'null'],
+          items: { type: 'string', format: 'uuid' },
+        },
+      },
+    }
+  }
+
   async save() {
     this.fragments = this.fragments.map(fragment => fragment.id || fragment)
     return super.save()
+  }
+
+  async delete() {
+    const { model: Team } = require('@pubsweet/model-team')
+    await Team.deleteAssociated(this.type, this.id)
+    return super.delete()
   }
 
   // Gets fragments in a collection, supports filtering by function e.g.
@@ -58,14 +83,10 @@ class Collection extends Model {
     this.fragments = without(this.fragments, fragment.id)
   }
 
-  async delete() {
-    const { model: Team } = require('@pubsweet/model-team')
-
-    await Team.deleteAssociated(this.type, this.id)
-    return super.delete()
+  isOwner(userId) {
+    return Array.isArray(this.owners) && this.owners.includes(userId)
   }
 }
 
 Collection.type = 'collection'
-
 module.exports = Collection

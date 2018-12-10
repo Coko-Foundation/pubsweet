@@ -13,9 +13,6 @@ module.exports.startServer = require('./start-server')
 module.exports.helpers = require('./helpers/authorization')
 module.exports.util = require('./routes/util')
 
-// Core models
-module.exports.Collection = require('./models/Collection')
-
 // Jobs queue
 module.exports.jobs = {
   connectToJobQueue: require('./jobs').connectToJobQueue,

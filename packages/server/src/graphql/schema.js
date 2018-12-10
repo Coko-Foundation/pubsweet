@@ -2,9 +2,6 @@ const config = require('config')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('graphql-tools')
 
-const collection = require('./definitions/collection')
-const fragment = require('./definitions/fragment')
-// const user = require('./definitions/user')
 const upload = require('./definitions/upload')
 
 const requireRelative = m =>
@@ -13,19 +10,10 @@ const requireRelative = m =>
 // load base types and resolvers
 const typeDefs = [
   `type Query, type Mutation, type Subscription`,
-  collection.typeDefs,
-  fragment.typeDefs,
   upload.typeDefs,
-  // authentication.typeDefs,
 ]
-const resolvers = merge(
-  {},
-  collection.resolvers,
-  fragment.resolvers,
-  // user.resolvers,
-  upload.resolvers,
-  // authentication.resolvers,
-)
+
+const resolvers = merge({}, upload.resolvers)
 
 // recursively merge in component types and resolvers
 function getSchemaRecursively(componentName) {

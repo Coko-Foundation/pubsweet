@@ -1,9 +1,6 @@
 const config = require('config')
 
-// core models
-const models = {
-  Collection: './Collection',
-}
+const models = {}
 
 Object.keys(models).forEach((key, _) => {
   module.exports[key] = require(models[key])

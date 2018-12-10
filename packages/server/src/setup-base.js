@@ -1,9 +1,9 @@
-const { Collection } = require('pubsweet-server')
-const { model: User } = require('@pubsweet/model-user')
 const logger = require('@pubsweet/logger')
 
 class Setup {
   static async setup(user, collection) {
+    const { Collection, User } = require('pubsweet-server/src/models')
+
     logger.info('Starting setup')
 
     let admin = new User({

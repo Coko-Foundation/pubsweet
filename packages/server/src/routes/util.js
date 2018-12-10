@@ -4,10 +4,12 @@ const NotFoundError = require('../errors/NotFoundError')
 
 const Util = {}
 Util.authorizationError = (username, operation, object) => {
+  const errorDetails = object.type
+    ? `${object.type} ${object.id}`
+    : JSON.stringify(object)
+
   username = username || 'public'
-  const msg = `User ${username} is not allowed to ${operation} ${object.type} ${
-    object.id
-  }`
+  const msg = `User ${username} is not allowed to ${operation} ${errorDetails}`
 
   return new AuthorizationError(msg)
 }

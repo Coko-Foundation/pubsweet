@@ -11,15 +11,6 @@ const models = require('../models')
 // as well - if you want your authsome modes to be usable on both platforms.
 const context = { models: Object.assign({}, models) }
 
-// more restrictive with core models, restrict methods passed to mode since
-// these have to be shimmed in the client (withAuthsome, AuthorizeWithGraphQL)
-context.models.Collection = {
-  find: models.Collection.find.bind(models.Collection),
-}
-context.models.Fragment = {
-  find: models.Fragment.find.bind(models.Fragment),
-}
-
 const authsome = new Authsome({ ...config.authsome, mode }, context)
 
 module.exports = authsome
