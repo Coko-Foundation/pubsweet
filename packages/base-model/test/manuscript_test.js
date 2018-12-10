@@ -11,6 +11,13 @@ describe('Manuscript', () => {
     await dbCleaner()
   })
 
+  it('has upated set when created', async () => {
+    const manuscript = await new Manuscript({ title: 'Test' }).save()
+    expect(manuscript.title).toEqual('Test')
+    const now = new Date().toISOString()
+    expect(manuscript.updated).toHaveLength(now.length)
+  })
+
   it('can be saved and found and deleted', async () => {
     const manuscript = await new Manuscript({ title: 'Test' }).save()
     expect(manuscript.title).toEqual('Test')

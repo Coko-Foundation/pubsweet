@@ -97,6 +97,7 @@ class BaseModel extends Model {
   $beforeInsert() {
     this.id = this.id || uuid.v4()
     this.created = new Date().toISOString()
+    this.updated = this.created
   }
 
   $beforeUpdate() {
