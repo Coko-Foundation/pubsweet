@@ -1,5 +1,5 @@
 const { addCollection, createTables } = require('../../src')
-const { Collection, Fragment } = require('pubsweet-server')
+const { Collection, Fragment } = require('pubsweet-server/src/models')
 const { model: User } = require('@pubsweet/model-user')
 
 describe('add-collection', () => {

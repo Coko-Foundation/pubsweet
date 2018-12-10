@@ -6,6 +6,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
     "@pubsweet/model-user",
     "@pubsweet/model-team",
     "@pubsweet/model-fragment",
+    "@pubsweet/model-collection",
     "${pathToComponent}"
   ]
 }}`

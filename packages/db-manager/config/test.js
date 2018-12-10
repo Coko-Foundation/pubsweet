@@ -25,6 +25,7 @@ module.exports = {
       '@pubsweet/model-user',
       '@pubsweet/model-team',
       '@pubsweet/model-fragment',
+      '@pubsweet/model-collection',
     ],
   },
 }

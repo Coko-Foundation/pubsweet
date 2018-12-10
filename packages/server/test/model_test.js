@@ -90,17 +90,4 @@ describe('Model', () => {
       email: 'test@example.com',
     })
   })
-
-  it.skip('turns an object selector into SQL clauses', () => {
-    expect(User.selectorToSql({ foo: 'bar', 'do.re.mi': 'fa so la' })).toEqual([
-      "data->>'foo' = ?",
-      "data->'do'->'re'->>'mi' = ?",
-    ])
-  })
-
-  it.skip('escapes naughty names', () => {
-    expect(
-      User.selectorToSql({ "Robert'); DROP TABLE Students; --": '' }),
-    ).toEqual(["data->>'Robert''); DROP TABLE Students; --' = ?"])
-  })
 })

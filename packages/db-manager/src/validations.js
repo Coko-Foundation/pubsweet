@@ -1,30 +1,14 @@
 const Joi = require('joi')
-const config = require('config')
-
-let appValidations
-try {
-  appValidations = require(config.validations)
-} catch (err) {
-  appValidations = []
-}
-const schemas = require('pubsweet-server/src/models/validations')(
-  appValidations,
-)
-const _ = require('lodash/fp')
 
 const userSchema = Joi.object({
-  username: _.get('user.username', schemas) || Joi.string().required(),
-  email:
-    _.get('user.email', schemas) ||
-    Joi.string()
-      .email()
-      .required(),
-  password:
-    _.get('user.password', schemas) ||
-    Joi.string()
-      .min(8)
-      .max(60)
-      .required(),
+  username: Joi.string().required(),
+  email: Joi.string()
+    .email()
+    .required(),
+  password: Joi.string()
+    .min(8)
+    .max(60)
+    .required(),
   admin: Joi.boolean().optional(),
 })
 

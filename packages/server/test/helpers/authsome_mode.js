@@ -36,7 +36,7 @@ async function teamPermissions(user, operation, object, context) {
 
 function unauthenticatedUser(operation, object) {
   // Public/unauthenticated users can GET /collections, filtered by 'published'
-  if (operation === 'GET' && object && object.path === '/collections') {
+  if (operation === 'GET' && object && object.path === '/api/collections') {
     return {
       filter: collections =>
         collections.filter(collection => collection.published),
@@ -47,7 +47,7 @@ function unauthenticatedUser(operation, object) {
   if (
     operation === 'GET' &&
     object &&
-    object.path === '/collections/:id/fragments'
+    object.path === '/api/collections/:id/fragments'
   ) {
     return {
       filter: fragments => fragments.filter(fragment => fragment.published),
@@ -82,7 +82,7 @@ function unauthenticatedUser(operation, object) {
 
 async function authenticatedUser(user, operation, object, context) {
   // Allow the authenticated user to POST a collection (but not with a 'filtered' property)
-  if (operation === 'POST' && object.path === '/collections') {
+  if (operation === 'POST' && object.path === '/api/collections') {
     return {
       filter: collection => omit(collection, 'filtered'),
     }

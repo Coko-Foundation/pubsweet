@@ -1,8 +1,9 @@
 const logger = require('@pubsweet/logger')
-const { Collection } = require('pubsweet-server')
 
 module.exports = async (collectionData, fragment = null) => {
   const { model: User } = require('@pubsweet/model-user')
+  const { Collection } = require('pubsweet-server/src/models')
+
   logger.info('Creating collection')
 
   const collection = await new Collection(collectionData).save()

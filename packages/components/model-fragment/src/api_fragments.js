@@ -23,11 +23,11 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
 const FragmentsAPI = app => {
   const authsome = require('pubsweet-server/src/helpers/authsome')
 
-  const { Collection, AuthorizationError } = require('pubsweet-server')
+  const { AuthorizationError } = require('pubsweet-server')
 
   const { model: Team } = require('@pubsweet/model-team')
   const { model: User } = require('@pubsweet/model-user')
-  const { Fragment } = require('pubsweet-server/src/models')
+  const { Fragment, Collection } = require('pubsweet-server/src/models')
 
   // Create a fragment and update the collection with the fragment
   app.post(

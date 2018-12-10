@@ -20,6 +20,11 @@ class BaseModel extends Model {
   }
 
   static get jsonSchema() {
+    // JSON schema validation is getting proper support for inheritance in
+    // its draft 8: https://github.com/json-schema-org/json-schema-spec/issues/556
+    // Until then, we're not using additionalProperties: false, and letting the
+    // database handle this bit of the integrity checks.
+
     let schema
 
     const mergeSchema = additionalSchema => {
@@ -58,11 +63,13 @@ class BaseModel extends Model {
           ],
         },
       },
+      additionalProperties: false,
     }
 
     if (schema) {
       return merge(baseSchema, schema)
     }
+
     return baseSchema
   }
 

@@ -14,6 +14,7 @@ class Fragment extends BaseModel {
   static get schema() {
     return {
       required: ['fragmentType'],
+      type: 'object',
       properties: {
         fragmentType: { type: 'string' },
         fragments: {
