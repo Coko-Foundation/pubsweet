@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import wait from 'waait'
 import Authsome from 'authsome'
-import AuthorizeWithGraphQL from '../../src/helpers/AuthorizeWithGraphQL'
+import AuthorizeWithGraphQL from '../../src/helpers/Authorize'
 import {
   CURRENT_USER,
   GET_USER,

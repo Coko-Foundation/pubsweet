@@ -1,14 +1,29 @@
-import { withFormik } from 'formik'
 import { compose } from 'recompose'
-import { connect } from 'react-redux'
-import { loginUser } from './actions'
+import { withFormik } from 'formik'
+import { graphql } from 'react-apollo'
 
+import mutations from './graphql/mutations'
 import Login from './Login'
 import redirectPath from './redirect'
 
-const handleSubmit = (values, { props: { dispatch, location }, setErrors }) => {
-  dispatch(loginUser(values, redirectPath({ location }), setErrors))
-}
+const localStorage = window.localStorage || undefined
+
+const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
+  props
+    .loginUser({ variables: { input: values } })
+    .then(({ data, errors }) => {
+      if (!errors) {
+        localStorage.setItem('token', data.loginUser.token)
+        props.history.push(redirectPath({ location: props.location }))
+        setSubmitting(true)
+      }
+    })
+    .catch(e => {
+      if (e.graphQLErrors) {
+        setSubmitting(false)
+        setErrors(e.graphQLErrors[0].message)
+      }
+    })
 
 const enhancedFormik = withFormik({
   initialValues: {
@@ -23,4 +38,6 @@ const enhancedFormik = withFormik({
   handleSubmit,
 })(Login)
 
-export default compose(connect(state => state))(enhancedFormik)
+export default compose(graphql(mutations.LOGIN_USER, { name: 'loginUser' }))(
+  enhancedFormik,
+)

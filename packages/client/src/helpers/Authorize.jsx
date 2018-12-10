@@ -1,36 +1,85 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { ApolloConsumer } from 'react-apollo'
+import Authsome from 'authsome'
+import config from 'config'
 
-import withAuthsome from './withAuthsome'
-import { selectCurrentUser } from '../selectors'
+import {
+  CURRENT_USER,
+  GET_USER,
+  GET_COLLECTION,
+  GET_FRAGMENT,
+  GET_TEAM,
+} from './AuthorizeGraphQLQueries'
+import { Authorize } from './BaseAuthorize'
 
-export class Authorize extends React.Component {
-  constructor(props) {
-    super(props)
+const getDataFromQuery = async (client, query, field) => {
+  const { data } = await client.query(query)
+  return data[field]
+}
 
-    this.state = {
-      authorized: undefined,
+export class AuthorizeWithGraphQL extends Authorize {
+  async checkAuth({ authsome, operation, object }) {
+    authsome.context = {
+      models: {
+        User: {
+          find: async id =>
+            getDataFromQuery(
+              this.props.client,
+              {
+                query: GET_USER,
+                variables: { id },
+              },
+              'user',
+            ),
+        },
+        Collection: {
+          find: async id =>
+            getDataFromQuery(
+              this.props.client,
+              {
+                query: GET_COLLECTION,
+                variables: { id },
+              },
+              'collection',
+            ),
+        },
+        Team: {
+          find: async id =>
+            getDataFromQuery(
+              this.props.client,
+              {
+                query: GET_TEAM,
+                variables: { id },
+              },
+              'team',
+            ),
+        },
+        Fragment: {
+          find: async id =>
+            getDataFromQuery(
+              this.props.client,
+              {
+                query: GET_FRAGMENT,
+                variables: { id },
+              },
+              'fragment',
+            ),
+        },
+      },
     }
-  }
-
-  componentWillMount() {
-    this.checkAuth(this.props)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.checkAuth(nextProps)
-  }
-
-  async checkAuth({ authsome, currentUser, operation, object }) {
     try {
+      const currentUser = await getDataFromQuery(
+        this.props.client,
+        {
+          query: CURRENT_USER,
+        },
+        'currentUser',
+      )
       const authorized = await authsome.can(
         currentUser && currentUser.id,
         operation,
         object,
       )
-
       this.setState({
         authorized,
       })
@@ -38,40 +87,24 @@ export class Authorize extends React.Component {
       console.error(err)
     }
   }
+}
 
-  renderUnauthorizedProp() {
-    return React.isValidElement(this.props.unauthorized) ||
-      this.props.unauthorized === null
-      ? this.props.unauthorized
-      : this.props.unauthorized()
+const AuthorizeWithGraphQLWrapper = props => {
+  let authsome
+  if (!props.authsome) {
+    authsome = new Authsome(
+      { ...config.authsome, mode: require(config.authsome.mode) },
+      {},
+    )
   }
 
-  render() {
-    if (this.state.authorized === undefined) return null
-
-    return this.state.authorized === true
-      ? this.props.children
-      : this.renderUnauthorizedProp()
-  }
+  return (
+    <ApolloConsumer>
+      {client => (
+        <AuthorizeWithGraphQL authsome={authsome} {...props} client={client} />
+      )}
+    </ApolloConsumer>
+  )
 }
 
-Authorize.propTypes = {
-  currentUser: PropTypes.object,
-  operation: PropTypes.string,
-  object: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  children: PropTypes.element,
-  unauthorized: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  authsome: PropTypes.object.isRequired,
-}
-
-Authorize.defaultProps = {
-  unauthorized: null,
-}
-
-function mapState(state) {
-  return {
-    currentUser: selectCurrentUser(state),
-  }
-}
-
-export default compose(withAuthsome(), connect(mapState))(Authorize)
+export default AuthorizeWithGraphQLWrapper

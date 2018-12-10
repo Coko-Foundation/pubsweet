@@ -1,7 +1,5 @@
 module.exports = {
-  frontend: {
+  client: {
     components: [() => require('./LoginContainer')],
-    actions: () => require('./actions'),
-    reducers: () => require('./reducers'),
   },
 }

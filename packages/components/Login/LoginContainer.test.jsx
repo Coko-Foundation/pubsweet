@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import { MemoryRouter, Route } from 'react-router-dom'
 
 import wait from 'waait'
-import { LOGIN_USER } from './mutations'
+import { LOGIN_USER } from './graphql/mutations'
 import LoginContainer from './LoginContainer'
 
 const user1 = {

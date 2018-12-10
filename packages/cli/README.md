@@ -179,8 +179,6 @@ environment variable or on the command line using
 [node-config](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides).
 See `config/development.js` in the starter application.
 
-`start` can also be passed `--reduxlog-off` to switch off the redux logger.
-
 `pubsweet start` is not recommended for production, where it is generally
 preferable to compile assets separately and maintain a startup script in your
 app. A sample startup script is included in the root directory of the
