@@ -1,6 +1,5 @@
 const uuid = require('uuid')
-const { Model, ValidationError } = require('objection')
-const { transaction } = require('objection')
+const { Model, ValidationError, transaction } = require('objection')
 const logger = require('@pubsweet/logger')
 const { db, NotFoundError } = require('pubsweet-server')
 const { merge } = require('lodash')
@@ -110,38 +109,39 @@ class BaseModel extends Model {
     this.updated = new Date().toISOString()
   }
 
-  async simpleSave(trx = null) {
-    return this.constructor.query(trx).patchAndFetchById(this.id, this.toJSON())
-  }
-
-  async protectedSave() {
-    let trx, saved
-    try {
-      trx = await transaction.start(BaseModel.knex())
-      const current = await this.constructor.query(trx).findById(this.id)
-
-      const dateCurrent = new Date(current.updated)
-      const dateThis = new Date(this.updated)
-
-      if (dateThis.getTime() < dateCurrent.getTime()) {
-        throw integrityError(
-          'updated',
-          this.updated,
-          'is older than the one stored in the database!',
-        )
-      }
-
-      saved = await this.simpleSave(trx)
-      await trx.commit()
-    } catch (err) {
-      logger.error(err)
-      await trx.rollback()
-      throw err
-    }
-    return saved
-  }
-
   async save() {
+    const simpleSave = async (trx = null) =>
+      this.constructor.query(trx).patchAndFetchById(this.id, this.toJSON())
+
+    const protectedSave = async () => {
+      let trx, saved
+      try {
+        trx = await transaction.start(BaseModel.knex())
+        const current = await this.constructor.query(trx).findById(this.id)
+
+        const storedUpdateTime = new Date(current.updated).getTime()
+        const instanceUpdateTime = new Date(this.updated).getTime()
+
+        if (instanceUpdateTime < storedUpdateTime) {
+          throw integrityError(
+            'updated',
+            this.updated,
+            'is older than the one stored in the database!',
+          )
+        }
+
+        saved = await simpleSave(trx)
+        await trx.commit()
+      } catch (err) {
+        logger.error(err)
+        await trx.rollback()
+        throw err
+      }
+      return saved
+    }
+
+    // start of save function...
+
     let saved
     if (this.id) {
       if (!this.updated && this.created) {
@@ -153,9 +153,9 @@ class BaseModel extends Model {
       }
 
       if (!this.updated && !this.created) {
-        saved = await this.simpleSave()
+        saved = await simpleSave()
       } else {
-        saved = await this.protectedSave()
+        saved = await protectedSave()
       }
     }
     if (!saved) {
