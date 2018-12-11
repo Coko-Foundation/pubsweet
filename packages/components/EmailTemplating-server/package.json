@@ -9,7 +9,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@pubsweet/component-send-email": "0.2.4",
+    "@pubsweet/component-send-email": "^0.2.4",
     "handlebars": "^4.0.2"
   },
   "peerDependencies": {
