@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.4-alpha.1...pubsweet-server@10.1.4-alpha.0) (2018-12-11)
+
+
+### Bug Fixes
+
+* add waait dependency ([f80dbec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f80dbec))
+
+
+
+
+
 ## [10.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.2...pubsweet-server@10.1.3) (2018-12-04)
 
 **Note:** Version bump only for package pubsweet-server

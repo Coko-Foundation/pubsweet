@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.3-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.1-alpha.1...pubsweet-components@10.0.3-alpha.0) (2018-12-11)
+
+
+### Bug Fixes
+
+* highlight js dependency update ([0fb0733](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fb0733))
+* **xpub-edit:** spaces are being eaten on firefox ([8112208](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8112208)), closes [#430](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/430)
+
+
+### Features
+
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
 ## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.1...pubsweet-components@10.0.2) (2018-12-04)
 
 **Note:** Version bump only for package pubsweet-components
