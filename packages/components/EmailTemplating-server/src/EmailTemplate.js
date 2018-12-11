@@ -108,13 +108,14 @@ class EmailTemplate {
     }
 
     try {
-      await SendEmail.send(mailData)
+      const email = await SendEmail.send(mailData)
       logger.info(
         `Sent email from: ${from} to: ${to} with subject: "${subject}"`,
       )
       logger.debug(
         `Sent email from: ${from} to: ${to} with subject: "${subject}"`,
       )
+      return email
     } catch (e) {
       logger.error(e)
       throw new Error(e)
