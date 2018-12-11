@@ -68,4 +68,16 @@ export default {
       }
     }
   `,
+  getUser: gql`
+    query GetUser($id: ID!) {
+      user(id: $id) {
+        id
+        username
+        admin
+        teams {
+          id
+        }
+      }
+    }
+  `,
 }

@@ -32,7 +32,10 @@ const inkConvertPromise = file => ({ data }) => {
   )
 }
 
-const createManuscriptPromise = (file, client) => ({ fileURL, response }) => {
+const createManuscriptPromise = (file, client, currentUser) => ({
+  fileURL,
+  response,
+}) => {
   if (!response.converted) {
     throw new Error('The file was not converted')
   }
@@ -59,9 +62,16 @@ const createManuscriptPromise = (file, client) => ({ fileURL, response }) => {
     mutation: mutations.createManuscriptMutation,
     variables: { input: manuscript },
     update: (proxy, { data: { createManuscript } }) => {
-      const data = proxy.readQuery({ query: queries.dashboard })
+      let data = proxy.readQuery({ query: queries.dashboard })
       data.journals.manuscripts.push(createManuscript)
       proxy.writeQuery({ query: queries.dashboard, data })
+
+      data = proxy.readQuery({
+        query: queries.getUser,
+        variables: { id: currentUser.id },
+      })
+      data.user.teams.push(createManuscript.teams[0])
+      proxy.writeQuery({ query: queries.getUser, data })
     },
   })
 }
@@ -88,24 +98,26 @@ const skipInkConversion = file =>
 export default compose(
   withApollo,
   withRouter,
-  withProps(({ client, setConversionState, history, journals }) => ({
-    uploadManuscript: files => {
-      const [file] = files
-      setConversionState(() => ({ converting: true }))
-      return Promise.resolve()
-        .then(uploadPromise(files, client))
-        .then(
-          skipInkConversion(file)
-            ? ({ data }) =>
-                Promise.resolve({
-                  fileURL: data.upload.url,
-                  response: { converted: true },
-                })
-            : inkConvertPromise(file),
-        )
-        .then(createManuscriptPromise(file, client))
-        .then(redirectPromise(setConversionState, journals, history))
-        .catch(error => setConversionState(() => ({ error })))
-    },
-  })),
+  withProps(
+    ({ client, setConversionState, history, journals, currentUser }) => ({
+      uploadManuscript: files => {
+        const [file] = files
+        setConversionState(() => ({ converting: true }))
+        return Promise.resolve()
+          .then(uploadPromise(files, client))
+          .then(
+            skipInkConversion(file)
+              ? ({ data }) =>
+                  Promise.resolve({
+                    fileURL: data.upload.url,
+                    response: { converted: true },
+                  })
+              : inkConvertPromise(file),
+          )
+          .then(createManuscriptPromise(file, client, currentUser))
+          .then(redirectPromise(setConversionState, journals, history))
+          .catch(error => setConversionState(() => ({ error })))
+      },
+    }),
+  ),
 )

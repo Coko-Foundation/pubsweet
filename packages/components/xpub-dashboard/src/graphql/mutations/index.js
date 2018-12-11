@@ -49,15 +49,22 @@ export default {
           id
         }
         teams {
+          id
           role
           name
+          teamType
           object {
             objectId
             objectType
           }
+          objectType
           members {
             id
             username
+          }
+          status {
+            user
+            status
           }
         }
         status

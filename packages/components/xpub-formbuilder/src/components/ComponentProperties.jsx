@@ -1,6 +1,5 @@
 import React from 'react'
 import { map, omitBy } from 'lodash'
-// import styled from 'styled-components'
 import {
   branch,
   renderComponent,
@@ -9,8 +8,8 @@ import {
   withHandlers,
   withProps,
 } from 'recompose'
-import { ValidatedField, Menu, Button } from '@pubsweet/ui'
-import { FormSection, reduxForm } from 'redux-form'
+import { ValidatedFieldFormik, Menu, Button } from '@pubsweet/ui'
+import { withFormik } from 'formik'
 
 import FormProperties from './FormProperties'
 import components from './config/Elements'
@@ -37,27 +36,25 @@ const ComponentProperties = ({
   <Page>
     <form onSubmit={handleSubmit}>
       <Heading>Component Properties</Heading>
-      <FormSection name="children">
-        <Section>
-          <Legend space>Choose Component</Legend>
-          <ValidatedField
-            component={MenuComponents}
-            name="component"
-            onChange={(value, v) => changeComponent(v)}
-          />
-        </Section>
-        {selectComponentValue &&
-          map(components[selectComponentValue], (value, key) => (
-            <Section>
-              <Legend space>{`Field ${key}`}</Legend>
-              <ValidatedField
-                component={elements[value.component].default}
-                name={key}
-                {...value.props}
-              />
-            </Section>
-          ))}
-      </FormSection>
+      <Section>
+        <Legend space>Choose Component</Legend>
+        <ValidatedFieldFormik
+          component={MenuComponents}
+          name="component"
+          onChange={(value, v) => changeComponent(v)}
+        />
+      </Section>
+      {selectComponentValue &&
+        map(components[selectComponentValue], (value, key) => (
+          <Section>
+            <Legend space>{`Field ${key}`}</Legend>
+            <ValidatedFieldFormik
+              component={elements[value.component].default}
+              name={key}
+              {...value.props}
+            />
+          </Section>
+        ))}
       <Button primary type="submit">
         Update Component
       </Button>
@@ -84,11 +81,11 @@ const ComponentForm = compose(
   withProps(({ properties }) => ({
     initialValues: { children: properties.properties },
   })),
-  reduxForm({
-    form: 'ComponentSubmit',
-    onSubmit,
-    enableReinitialize: true,
-    destroyOnUnmount: false,
+  withFormik({
+    displayName: 'ComponentSubmit',
+    mapPropsToValues: data => data.properties.properties,
+    handleSubmit: (props, { props: { history } }) =>
+      onSubmit(props, { history }),
   }),
   withState(
     'selectComponentValue',

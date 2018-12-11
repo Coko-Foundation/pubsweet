@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FieldArray } from 'redux-form'
-import { TextField, ValidatedField, Button } from '@pubsweet/ui'
+import { FieldArray } from 'formik'
+import { TextField, ValidatedFieldFormik, Button } from '@pubsweet/ui'
 
 const Inline = styled.div`
   display: inline-block;
@@ -29,41 +29,38 @@ const valueInput = input => (
   <TextField label="Value Option" placeholder="Enter value…" {...input} />
 )
 
-const renderOptions = ({
-  fields = {},
-  meta: { touched, error, submitFailed },
-}) => (
+const renderOptions = ({ form: { values }, push, remove }) => (
   <ul>
     <UnbulletedList>
       <li>
-        <Button onClick={() => fields.push()} plain type="button">
+        <Button onClick={() => push()} plain type="button">
           Add another option
         </Button>
       </li>
-      {fields.map((option, index) => (
+      {values.options.map((option, index) => (
         <li>
           <Spacing>
             <Option>
               Option:&nbsp;
-              {fields.length > 1 && (
-                <Button onClick={() => fields.remove(index)} type="button">
+              {values.options.length > 1 && (
+                <Button onClick={() => remove(index)} type="button">
                   Remove
                 </Button>
               )}
             </Option>
             <div>
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={keyInput}
-                  name={`${option}.label`}
+                  name={`options.${index}.label`}
                   required
                 />
               </Inline>
 
               <Inline>
-                <ValidatedField
+                <ValidatedFieldFormik
                   component={valueInput}
-                  name={`${option}value`}
+                  name={`options.${index}.value`}
                   required
                 />
               </Inline>
