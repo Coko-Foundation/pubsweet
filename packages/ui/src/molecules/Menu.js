@@ -88,7 +88,7 @@ const MultipleValue = styled.span`
   }
 `
 
-const Placeholder = Value.extend`
+const Placeholder = styled(Value)`
   color: ${th('colorTextPlaceholder')};
   font-style: italic;
   padding: calc(${th('gridUnit')} * 2);
@@ -245,7 +245,9 @@ class Menu extends React.Component {
   optionLabel = value => {
     const { options } = this.props
 
-    return options.find(option => option.value === value).label
+    return options.find(option => option.value === value)
+      ? options.find(option => option.value === value).label
+      : ''
   }
 
   render() {
@@ -260,6 +262,7 @@ class Menu extends React.Component {
       className,
       multi,
       reset,
+      ...rest
     } = this.props
     const { open, selected } = this.state
 
@@ -278,6 +281,7 @@ class Menu extends React.Component {
             selected={selected}
             selectOneOfMultiElement={this.selectOneOfMultiElement}
             toggleMenu={this.toggleMenu}
+            {...rest}
           />
           <OptionsContainer>
             {open && (

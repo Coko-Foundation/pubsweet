@@ -3,9 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [4.2.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.2.0...pubsweet-component-xpub-submit@4.2.1-alpha.0) (2018-11-23)
+## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.1...pubsweet-component-xpub-submit@5.0.2) (2018-12-04)
 
 **Note:** Version bump only for package pubsweet-component-xpub-submit
+
+
+
+
+
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.0...pubsweet-component-xpub-submit@5.0.1) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-component-xpub-submit
+
+
+
+
+
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@4.2.0...pubsweet-component-xpub-submit@5.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
 
 
 

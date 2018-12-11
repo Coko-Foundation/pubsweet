@@ -2,12 +2,10 @@ import React from 'react'
 import _ from 'lodash'
 import 'regenerator-runtime/runtime'
 import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, Menu } from '@pubsweet/ui'
+import { Button, Menu, GlobalStyle } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
-import StyleRoot, {
-  injectGlobalStyles,
-} from 'pubsweet-client/src/helpers/StyleRoot'
-
+import StyleRoot from 'pubsweet-client/src/helpers/StyleRoot'
+import { Normalize } from 'styled-normalize'
 import defaultTheme from '@pubsweet/default-theme'
 import cokoTheme from '@pubsweet/coko-theme'
 import elifeTheme from '@elifesciences/elife-theme'
@@ -21,8 +19,6 @@ const themes = {
   cokoTheme,
   elifeTheme,
 }
-
-injectGlobalStyles()
 
 const aDark = 'rgba(255, 0, 0, 0.2)'
 const aLight = 'rgba(255, 69, 69, 0.1)'
@@ -192,6 +188,8 @@ class StyleGuideRenderer extends React.Component {
     return (
       <ThemeProvider theme={themes[this.state.themeName]}>
         <StyleRoot>
+          <Normalize />
+          <GlobalStyle />
           <Root>
             <Sidebar>
               <Header>

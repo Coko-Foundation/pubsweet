@@ -33,7 +33,7 @@ const Bullet = styled.div`
   ${override('ui.Steps.Bullet')};
 `
 
-const Success = Bullet.extend`
+const Success = styled(Bullet)`
   align-items: center;
   color: #fff;
   display: flex;

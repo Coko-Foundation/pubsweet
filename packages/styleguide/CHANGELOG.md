@@ -3,18 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [3.2.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.2.0...@pubsweet/styleguide@3.2.1-alpha.0) (2018-11-23)
+## [4.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.1...@pubsweet/styleguide@4.0.2) (2018-12-04)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
+## [4.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.0...@pubsweet/styleguide@4.0.1) (2018-11-30)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@3.2.0...@pubsweet/styleguide@4.0.0) (2018-11-29)
+
+
+### Bug Fixes
+
+* test fixes ([651a697](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/651a697))
+* upgrade styled-normalize ([98f2e4c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98f2e4c))
 
 
 ### Features
 
-* **components:** remove FormGroup component ([507b242](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/507b242))
+* **styleguide:** upgrade styled-components ([7aa0ffc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7aa0ffc))
 
 
 ### BREAKING CHANGES
 
-* **components:** FormGroup component has been removed as it is unused. It also uses the old
-model/validation system, that will shortly no longer exist.
+* **styleguide:** Replace styled-components injectGlobal with new createGlobalStyle
 
 
 

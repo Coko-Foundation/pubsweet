@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.11...pubsweet@3.0.12) (2018-12-04)
+
+**Note:** Version bump only for package pubsweet
+
+
+## [3.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.10...pubsweet@3.0.11) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet
+
+
+## [3.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.9...pubsweet@3.0.10) (2018-11-29)
+
+**Note:** Version bump only for package pubsweet
+
 ## [3.0.9-alpha.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.9-alpha.0...pubsweet@3.0.9-alpha.1) (2018-12-10)
 
 
@@ -16,19 +30,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * All components that rely on Redux's actions and reducers will cease to work in this
 version. Migrating to GraphQL and Apollo on the client and server is advised.
 
-
-
-
-
 ## [3.0.9-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.8...pubsweet@3.0.9-alpha.0) (2018-11-23)
 
 **Note:** Version bump only for package pubsweet
 
+  <a name="3.0.9"></a>
+## [3.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.8...pubsweet@3.0.9) (2018-11-13)
 
 
 
 
-      <a name="3.0.8"></a>
+**Note:** Version bump only for package pubsweet
+
+  <a name="3.0.8"></a>
 ## [3.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.7...pubsweet@3.0.8) (2018-11-05)
 
 
@@ -36,7 +50,7 @@ version. Migrating to GraphQL and Apollo on the client and server is advised.
 
 **Note:** Version bump only for package pubsweet
 
-      <a name="3.0.7"></a>
+<a name="3.0.7"></a>
 ## [3.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.6...pubsweet@3.0.7) (2018-10-17)
 
 

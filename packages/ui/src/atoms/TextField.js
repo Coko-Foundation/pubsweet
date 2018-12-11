@@ -58,8 +58,8 @@ class TextField extends React.Component {
         {label && <Label htmlFor={this.inputId}>{label}</Label>}
         <Input
           id={this.inputId}
-          innerRef={innerRefProp}
           readOnly={readonly}
+          ref={innerRefProp}
           type={type}
           value={value}
           {...props}
