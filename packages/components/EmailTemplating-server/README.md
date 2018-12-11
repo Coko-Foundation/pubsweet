@@ -2,16 +2,10 @@
 
 ## About
 
-The `email-templating` component contains an `Email` class with two main instance methods: `getNotificationBody` for retrieving the email body (html and text) and `sendEmail` for sending the email using the `send-email` component from PubSweet.
+The `email-templating` component contains an `EmailTemplate` class with one main instance method `sendEmail` for sending the email using the `send-email` component from PubSweet.
 
-1.  `getNotificationBody({ emailBodyProps = {} )` accepts one parameter object with should contain the following properties:
-    * `paragraph`: the main text part of the email body which informs the recipient
-    * `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
-    * `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
-    * `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
-      This function returns the HTML and text parts of the email which can then be used to send it.
-1.  `sendEmail({ text, html })`:
-    * accepts the text and HTML parts of an email and then uses the `send-email` component from PubSweet to actually send the email.
+1.  `sendEmail()`:
+    * uses the `send-email` component from PubSweet to actually send the email based on the Email properties passed in the constructor
 
 The `Email` class also provides a `constructor` whose properties will be used when sending the email:
 
@@ -19,12 +13,17 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 2.  `fromEmail`: a String indicating the from name and from email address: `Coko <team@coko.foundation>`
 3.  `toUser`: an Object with two properties: `email` and `name`. The `name` property will be used when addressing the recipient in the email content - for example: "Dear Dr. Rachel Smith".
 4.  `content`: an Object which contains properties about the email:
-    1.  `subject`
-    1.  `signatureName` - the name which will appear in the signature
-    1.  `ctaLink` - the URL which will be placed in the button
-    1.  `ctaText` - the text which appears on the button
-    1.  `unsubscribeLink`
-    1.  `signatureJournal` - the journal or company name which will appear in the signature
+    * `subject`
+    * `paragraph`: the main text part of the email body which informs the recipient
+    * `signatureName` - the name which will appear in the signature
+    * `ctaLink` - the URL which will be placed in the button
+    * `ctaText` - the text which appears on the button
+    * `unsubscribeLink`
+    * `signatureJournal` - the journal or company name which will appear in the signature
+5.  `bodyProps`:
+    * `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
+    * `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
+    * `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
 
 ## Usage
 
