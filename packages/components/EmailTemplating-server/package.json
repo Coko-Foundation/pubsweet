@@ -1,0 +1,26 @@
+{
+  "name": "@pubsweet/component-email-templating",
+  "version": "0.0.1",
+  "description": "Send journal emails using templates from xPub/PubSweet",
+  "license": "MIT",
+  "author": "Collaborative Knowledge Foundation",
+  "files": [
+    "src"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "@pubsweet/component-send-email": "^0.2.4",
+    "handlebars": "^4.0.2"
+  },
+  "peerDependencies": {
+    "@pubsweet/logger": "^0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
+    "path": "EmailTemplating"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

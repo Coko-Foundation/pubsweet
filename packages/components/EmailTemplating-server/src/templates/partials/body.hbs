@@ -1,0 +1,25 @@
+<table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+  <tr>
+    <td style="padding:30px 23px 0px 23px;background-color:#ffffff;" height="100%" valign="top" bgcolor="#ffffff">
+      <div>
+        {{#if hasIntro}}
+          {{> intro}}
+        {{/if}}
+        <p>&nbsp;</p>
+        <p>
+          {{{paragraph}}}
+        </p>
+        <p>&nbsp;</p>
+        <p>
+          {{#if hasLink }}
+            {{> button }}
+          {{/if}}
+        </p>
+        {{#if hasSignature }}
+          {{> signature}}
+        {{/if}}
+        <p>&nbsp;</p>
+      </div>
+    </td>
+  </tr>
+</table>
