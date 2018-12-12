@@ -1,0 +1,706 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Email Template creates an email from the invitation template 1`] = `
+Object {
+  "from": Object {
+    "address": "test@example.com",
+    "name": "",
+  },
+  "headers": Object {},
+  "html": "<!DOCTYPE html PUBLIC \\"-//W3C//DTD XHTML 1.0 Strict//EN\\" \\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\\">
+<html data-editor-version=\\"2\\" class=\\"sg-campaigns\\" xmlns=\\"http://www.w3.org/1999/xhtml\\">
+
+<head>
+  <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\" />
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\\" />
+  <!--[if !mso]><!-->
+  <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=Edge\\" />
+  <!--<![endif]-->
+  <!--[if (gte mso 9)|(IE)]>
+    <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+  <!--[if (gte mso 9)|(IE)]>
+    <style type=\\"text/css\\">
+      body {width: 600px;margin: 0 auto;}
+      table {border-collapse: collapse;}
+      table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+      img {-ms-interpolation-mode: bicubic;}
+    </style>
+    <![endif]-->
+
+  <style type=\\"text/css\\">
+    body,
+    p,
+    div {
+      font-family: helvetica, arial, sans-serif;
+      font-size: 14px;
+    }
+
+    body {
+      color: #626262;
+    }
+
+    body a {
+      color: #007e92;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    table.wrapper {
+      width: 100% !important;
+      table-layout: fixed;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    img.max-width {
+      max-width: 100% !important;
+    }
+
+    .column.of-2 {
+      width: 50%;
+    }
+
+    .column.of-3 {
+      width: 33.333%;
+    }
+
+    .column.of-4 {
+      width: 25%;
+    }
+
+    .footer-link a {
+      color: #444444;
+      text-decoration: none;
+    }
+
+    .padding-decline {
+      padding:0px 0px 0px 50px;
+    }
+
+    .padding-agree {
+      padding:0px 50px 0px 0px;
+    }
+
+    @media screen and (max-width:480px) {
+
+      .preheader .rightColumnContent,
+      .footer .rightColumnContent {
+        text-align: left !important;
+      }
+
+      .preheader .rightColumnContent div,
+      .preheader .rightColumnContent span,
+      .footer .rightColumnContent div,
+      .footer .rightColumnContent span {
+        text-align: left !important;
+      }
+
+      .preheader .rightColumnContent,
+      .preheader .leftColumnContent {
+        font-size: 80% !important;
+        padding: 5px 0;
+      }
+
+      table.wrapper-mobile {
+        width: 100% !important;
+        table-layout: fixed;
+      }
+
+      img.max-width {
+        height: auto !important;
+        max-width: 480px !important;
+      }
+
+      a.bulletproof-button {
+        display: block !important;
+        width: auto !important;
+        font-size: 80%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .columns {
+        width: 100% !important;
+      }
+
+      .column {
+        display: block !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      .padding-decline {
+        padding: 0px;
+      }
+
+      .padding-agree {
+        padding: 10px 0px 0px 0px;
+      }
+    }
+  </style>
+  <!--user entered Head Start-->
+
+  <!--End Head user entered-->
+</head>
+
+<body>
+  <center class=\\"wrapper\\" data-link-color=\\"#0D78F2\\" data-body-style=\\"font-size: 14px; font-family: helvetica,arial,sans-serif; color: #626262; background-color: #F4F4F4;\\">
+    <div class=\\"webkit\\">
+      <table cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" width=\\"100%\\" class=\\"wrapper\\" bgcolor=\\"#F4F4F4\\">
+        <tr>
+          <td valign=\\"top\\" bgcolor=\\"#F4F4F4\\" width=\\"100%\\">
+            <table width=\\"100%\\" role=\\"content-container\\" class=\\"outer\\" align=\\"center\\" cellpadding=\\"0\\" cellspacing=\\"0\\"
+              border=\\"0\\">
+              <tr>
+                <td width=\\"100%\\">
+                  <table width=\\"100%\\" cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\">
+                    <tr>
+                      <td>
+                        <!--[if mso]>
+                          <center>
+                          <table><tr><td width=\\"600\\">
+                          <![endif]-->
+                        <table width=\\"100%\\" cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" style=\\"width: 100%; max-width:600px;\\"
+                          align=\\"center\\">
+                          <tr>
+                            <td role=\\"modules-container\\" style=\\"padding: 0px 0px 0px 0px; color: #626262; text-align: left;\\"
+                              bgcolor=\\"#F4F4F4\\" width=\\"100%\\" align=\\"left\\">
+
+                              <table class=\\"wrapper\\" role=\\"module\\" data-type=\\"image\\" border=\\"0\\" cellpadding=\\"0\\"
+                                cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+                                <tr>
+                                  <td style=\\"font-size:6px;line-height:10px;padding:32px 0px 24px 0px;\\" valign=\\"top\\"
+                                    align=\\"center\\">
+                                    <a href=\\"https://coko.foundation/\\">
+                                      <img class=\\"max-width\\" border=\\"0\\" style=\\"display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:10% !important;width:10%;height:auto !important;\\"
+                                        src=\\"https://coko.foundation/wp-content/uploads/2017/11/logo-coko.png\\" alt=\\"Hindawi Logo\\" width=\\"60\\">
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table><table class=\\"module\\" role=\\"module\\" data-type=\\"text\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+  <tr>
+    <td style=\\"padding:0px 50px 32px 50px;line-height:18px;\\" height=\\"100%\\" valign=\\"top\\" bgcolor=\\"\\">
+      <div>
+        <div data-pm-slice=\\"1 1 []\\"><span style=\\"color:#242424;\\"><span style=\\"font-size:14px;\\">
+              Dear Dr. Lastname,<br>
+
+              <div data-pm-slice=\\"1 1 []\\">&nbsp;</div>
+
+              <div data-pm-slice=\\"1 1 []\\">
+                <span style=\\"color:#242424;\\">
+                  <span style=\\"font-size:14px;\\">
+                    Content right at the top
+                    Some plain text manuscript text
+                  </span>
+                </span>
+              </div>
+        </div>
+    </td>
+  </tr>
+</table><table border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" align=\\"center\\" width=\\"100%\\" role=\\"module\\" data-type=\\"columns\\"
+  data-version=\\"2\\" style=\\"padding:0px 0px 0px 0px;box-sizing:border-box;\\" bgcolor=\\"\\">
+  <tr role='module-content'>
+    <td height=\\"100%\\" valign=\\"top\\">
+      <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" width=\\"100%\\" style=\\"border-spacing:0;border-collapse:collapse;table-layout: fixed;\\" >
+                  <tr>
+            <![endif]-->
+
+      <!--[if (gte mso 9)|(IE)]>
+      <td width=\\"300.000px\\" valign=\\"top\\" style=\\"padding: 0px 0px 0px 0px;border-collapse: collapse;\\" >
+    <![endif]-->
+
+      <table width=\\"300.000\\" style=\\"width:'50%';border-spacing:0;border-collapse:collapse;margin:0px 0px 0px 0px;\\"
+        cellpadding=\\"0\\" cellspacing=\\"0\\" align=\\"left\\" border=\\"0\\" bgcolor=\\"\\" class=\\"column column-0 of-2
+                  empty\\">
+        <tr>
+          <td style=\\"padding:0px;margin:0px;border-spacing:0;\\">
+            <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"module\\" data-role=\\"module-button\\" data-type=\\"button\\"
+              role=\\"module\\" style=\\"table-layout:fixed\\" width=\\"100%\\">
+              <tbody>
+                <tr>
+                  <td align=\\"center\\" class=\\"outer-td padding-decline\\">
+                    <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"button-css__deep-table___2OZyb wrapper-mobile\\"
+                      style=\\"text-align:center\\">
+                      <tbody>
+                        <tr>
+                          <td align=\\"center\\" bgcolor=\\"#f6f6f6\\" class=\\"inner-td\\" style=\\"border-radius:6px;font-size:16px;text-align:center;background-color:inherit\\"><a
+                              style=\\"background-color:#f6f6f6;border:1px solid #333333;border-color:#586971;border-radius:5px;border-width:2px;color:#586971;display:inline-block;font-family:arial,helvetica,sans-serif;font-size:14px;font-weight:bold;letter-spacing:0px;line-height:15px;padding:12px 18px 12px 18px;text-align:center;text-decoration:none;width:172px\\"
+                              href=\\" \\" target=\\"_blank\\">DECLINE</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+      <!--[if (gte mso 9)|(IE)]>
+      <td width=\\"300.000px\\" valign=\\"top\\" style=\\"padding: 0px 0px 0px 0px;border-collapse: collapse;\\" >
+    <![endif]-->
+
+      <table width=\\"300.000\\" style=\\"width:'50%';border-spacing:0;border-collapse:collapse;margin:0px 0px 0px 0px;\\"
+        cellpadding=\\"0\\" cellspacing=\\"0\\" align=\\"left\\" border=\\"0\\" bgcolor=\\"\\" class=\\"column column-1 of-2
+                  empty\\">
+        <tr>
+          <td style=\\"padding:0px;margin:0px;border-spacing:0;\\">
+            <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"module\\" data-role=\\"module-button\\" data-type=\\"button\\"
+              role=\\"module\\" style=\\"table-layout:fixed\\" width=\\"100%\\">
+              <tbody>
+                <tr>
+                  <td align=\\"center\\" class=\\"outer-td padding-agree\\">
+                    <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"button-css__deep-table___2OZyb wrapper-mobile\\"
+                      style=\\"text-align:center\\">
+                      <tbody>
+                        <tr>
+                          <td align=\\"center\\" bgcolor=\\"#63a945\\" class=\\"inner-td\\" style=\\"border-radius:6px;font-size:16px;text-align:center;background-color:inherit\\"><a
+                              style=\\"background-color:#63a945;border:1px solid #333333;border-color:#63A945;border-radius:5px;border-width:2px;color:#f6f6f6;display:inline-block;font-family:arial,helvetica,sans-serif;font-size:14px;font-weight:bold;letter-spacing:0px;line-height:15px;padding:12px 18px 12px 18px;text-align:center;text-decoration:none;width:172px\\"
+                              href=\\"http://localhost:3000/agree\\" target=\\"_blank\\">AGREE</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+      <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+    </td>
+  </tr>
+</table>
+
+<table class=\\"module\\" role=\\"module\\" data-type=\\"text\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+  <tr>
+    <td style=\\"padding:8px 50px 32px 50px;line-height:20px;text-align:inherit;\\" height=\\"100%\\" valign=\\"top\\" bgcolor=\\"\\">
+      <div>
+        <div>
+          <div>
+            <div style=\\"text-align: center;\\" tabindex=\\"1\\"><span style=\\"font-size:12px;\\">Some text below buttons</span></div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table><table border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" align=\\"center\\" width=\\"100%\\" role=\\"module\\" data-type=\\"columns\\"
+  data-version=\\"2\\" style=\\"padding:0px 34px 17px 34px;box-sizing:border-box;\\" bgcolor=\\"\\">
+  <tr role='module-content'>
+    <td height=\\"100%\\" valign=\\"top\\">
+      <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" width=\\"100%\\" style=\\"border-spacing:0;border-collapse:collapse;table-layout: fixed;\\" >
+                  <tr>
+            <![endif]-->
+
+      <!--[if (gte mso 9)|(IE)]>
+      <td width=\\"532.000px\\" valign=\\"top\\" style=\\"padding: 0px 0px 0px 0px;border-collapse: collapse;\\" >
+    <![endif]-->
+
+      <table width=\\"532.000\\" style=\\"width:532.000px;border-spacing:0;border-collapse:collapse;margin:0px 0px 0px 0px;\\"
+        cellpadding=\\"0\\" cellspacing=\\"0\\" align=\\"left\\" border=\\"0\\" bgcolor=\\"\\" class=\\"column column-0 of-1
+                  empty\\">
+        <tr>
+          <td style=\\"padding:0px;margin:0px;border-spacing:0;\\">
+
+            <table class=\\"module\\" role=\\"module\\" data-type=\\"text\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\"
+              style=\\"table-layout: fixed;\\">
+              <tr>
+                <td style=\\"box-shadow: 0px 1px 2px 1px #dbdbdb;background-color:#ffffff;padding:16px 16px 16px 16px;line-height:20px;text-align:inherit;border-radius:3px;\\"
+                  height=\\"100%\\" valign=\\"top\\" bgcolor=\\"#ffffff\\">
+                  <div><span style=\\"font-size:18px;font-weight:600;\\"><span style=\\"color:#007e92;\\">Manuscript Title</span></span></div>
+
+                  <div>&nbsp;</div>
+
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <p tabindex=\\"1\\"><span style=\\"color:#242424;\\"><span style=\\"font-size:14px;\\">One Author, Two Author, Three Author</span></span></p>
+
+                          <p tabindex=\\"1\\">&nbsp;</p>
+
+                          <p tabindex=\\"1\\"><span style=\\"color:#242424;\\"><span style=\\"font-size:14px;\\">Manuscript abstract</span></span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+
+      <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+      <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+    </td>
+  </tr>
+</table>
+<table class=\\"module\\" role=\\"module\\" data-type=\\"text\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+  <tr>
+    <td style=\\"padding:0px 50px 0px 50px;line-height:18px;text-align:inherit;\\" height=\\"100%\\" valign=\\"top\\" bgcolor=\\"\\">
+      <div>
+        <span style=\\"font-size:14px;\\">
+          <span style=\\"color:#242424;\\">
+            Some content at the bottom
+            http://localhost:3000/lowerLink
+          </span>
+        </span>
+      </div>
+      <div>&nbsp;</div>
+      <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Kind regards,</span></span></div>
+      
+      <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Example Editor</span></span></div>
+      
+      <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Test journal</span></span></div>    </td>
+  </tr>
+</table><div data-role=\\"module-unsubscribe\\" class=\\"module unsubscribe-css__unsubscribe___2CDlR\\" role=\\"module\\" data-type=\\"unsubscribe\\"
+  style=\\"color:#444444;font-size:12px;line-height:20px;padding:16px 16px 16px 16px;text-align:center\\">
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+    This email was sent to <span class=\\"footer-link\\">user@example.com</span>. You have received this email in regards to the account creation, submission, or
+    peer review process of a paper submitted to a journal published by Coko Foundation.
+  </p>
+  <div class=\\"Unsubscribe--addressLine\\">
+    <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+      2973 16th St., Suite 300, San Francisco, CA 94103
+    </p>
+  </div>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+  </p>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+    
+  </p>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:20px\\">
+    <a class=\\"Unsubscribe--unsubscribeLink\\" href=\\"http://localhost:3000/unsubscribe/exampleId\\">Unsubscribe</a>
+  </p>
+</div>
+</td>
+</tr>
+</table>
+<!--[if mso]>
+                          </td></tr></table>
+                          </center>
+                          <![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</center>
+</body>
+
+</html>",
+  "messageId": Any<String>,
+  "subject": "Invitation test",
+  "text": "false Content right at the top Some plain text manuscript text Some content at the bottom Example Editor",
+  "to": Array [
+    Object {
+      "address": "user@example.com",
+      "name": "",
+    },
+  ],
+}
+`;
+
+exports[`Email Template creates an email from the notification template 1`] = `
+Object {
+  "from": Object {
+    "address": "test@example.com",
+    "name": "",
+  },
+  "headers": Object {},
+  "html": "<!DOCTYPE html PUBLIC \\"-//W3C//DTD XHTML 1.0 Strict//EN\\" \\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\\">
+<html data-editor-version=\\"2\\" class=\\"sg-campaigns\\" xmlns=\\"http://www.w3.org/1999/xhtml\\">
+
+<head>
+  <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\" />
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1\\" />
+  <!--[if !mso]><!-->
+  <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=Edge\\" />
+  <!--<![endif]-->
+  <!--[if (gte mso 9)|(IE)]>
+    <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+  <!--[if (gte mso 9)|(IE)]>
+    <style type=\\"text/css\\">
+      body {width: 600px;margin: 0 auto;}
+      table {border-collapse: collapse;}
+      table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+      img {-ms-interpolation-mode: bicubic;}
+    </style>
+    <![endif]-->
+
+  <style type=\\"text/css\\">
+    body,
+    p,
+    div {
+      font-family: helvetica, arial, sans-serif;
+      font-size: 14px;
+    }
+
+    body {
+      color: #626262;
+    }
+
+    body a {
+      color: #0D78F2;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    table.wrapper {
+      width: 100% !important;
+      table-layout: fixed;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+
+    img.max-width {
+      max-width: 100% !important;
+    }
+
+    .column.of-2 {
+      width: 50%;
+    }
+
+    .column.of-3 {
+      width: 33.333%;
+    }
+
+    .column.of-4 {
+      width: 25%;
+    }
+
+    @media screen and (max-width:480px) {
+      .preheader .rightColumnContent,
+      .footer .rightColumnContent {
+        text-align: left !important;
+      }
+      .preheader .rightColumnContent div,
+      .preheader .rightColumnContent span,
+      .footer .rightColumnContent div,
+      .footer .rightColumnContent span {
+        text-align: left !important;
+      }
+      .preheader .rightColumnContent,
+      .preheader .leftColumnContent {
+        font-size: 80% !important;
+        padding: 5px 0;
+      }
+      table.wrapper-mobile {
+        width: 100% !important;
+        table-layout: fixed;
+      }
+      img.max-width {
+        height: auto !important;
+        max-width: 480px !important;
+      }
+      a.bulletproof-button {
+        display: block !important;
+        width: auto !important;
+        font-size: 80%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .columns {
+        width: 100% !important;
+      }
+      .column {
+        display: block !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+  </style>
+  <!--user entered Head Start-->
+
+  <!--End Head user entered-->
+</head>
+
+<body>
+  <center class=\\"wrapper\\" data-link-color=\\"#0D78F2\\" data-body-style=\\"font-size: 14px; font-family: helvetica,arial,sans-serif; color: #626262; background-color: #F4F4F4;\\">
+    <div class=\\"webkit\\">
+      <table cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" width=\\"100%\\" class=\\"wrapper\\" bgcolor=\\"#F4F4F4\\">
+        <tr>
+          <td valign=\\"top\\" bgcolor=\\"#F4F4F4\\" width=\\"100%\\">
+            <table width=\\"100%\\" role=\\"content-container\\" class=\\"outer\\" align=\\"center\\" cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\">
+              <tr>
+                <td width=\\"100%\\">
+                  <table width=\\"100%\\" cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\">
+                    <tr>
+                      <td>
+                        <!--[if mso]>
+                          <center>
+                          <table><tr><td width=\\"600\\">
+                          <![endif]-->
+                        <table width=\\"100%\\" cellpadding=\\"0\\" cellspacing=\\"0\\" border=\\"0\\" style=\\"width: 100%; max-width:600px;\\" align=\\"center\\">
+                          <tr>
+                            <td role=\\"modules-container\\" style=\\"padding: 0px 0px 0px 0px; color: #626262; text-align: left;\\" bgcolor=\\"#F4F4F4\\" width=\\"100%\\"
+                              align=\\"left\\">
+
+                              <table class=\\"module preheader preheader-hide\\" role=\\"module\\" data-type=\\"preheader\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"
+                                width=\\"100%\\" style=\\"display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;\\">
+                                <tr>
+                                  <td role=\\"module-content\\">
+                                    <p>you have a new notification</p>
+                                  </td>
+                                </tr>
+                              </table>
+
+                              <table class=\\"wrapper\\" role=\\"module\\" data-type=\\"image\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+                                <tr>
+                                  <td style=\\"font-size:6px;line-height:10px;padding:20px 0px 20px 0px;\\" valign=\\"top\\" align=\\"center\\">
+                                   <a href=\\"https://coko.foundation/\\">
+                                      <img class=\\"max-width\\" border=\\"0\\" style=\\"display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:10% !important;width:10%;height:auto !important;\\"
+                                        src=\\"https://coko.foundation/wp-content/uploads/2017/11/logo-coko.png\\"
+                                        alt=\\"\\" width=\\"60\\">
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table><table class=\\"module\\" role=\\"module\\" data-type=\\"text\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" width=\\"100%\\" style=\\"table-layout: fixed;\\">
+  <tr>
+    <td style=\\"padding:30px 23px 0px 23px;background-color:#ffffff;\\" height=\\"100%\\" valign=\\"top\\" bgcolor=\\"#ffffff\\">
+      <div>
+          <p data-pm-slice=\\"1 1 []\\">Dear Dr. Lastname,</p>        <p>&nbsp;</p>
+        <p>
+          We are pleased to inform you that the test passed.
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"module\\" data-role=\\"module-button\\" data-type=\\"button\\" role=\\"module\\"
+              style=\\"table-layout:fixed\\" width=\\"100%\\">
+              <tbody>
+                <tr>
+                  <td align=\\"center\\" bgcolor=\\"#FFFFFF\\" class=\\"outer-td\\" style=\\"padding:0px 0px 30px 0px;background-color:#FFFFFF\\">
+                    <table border=\\"0\\" cellPadding=\\"0\\" cellSpacing=\\"0\\" class=\\"button-css__deep-table___2OZyb wrapper-mobile\\" style=\\"text-align:center\\">
+                      <tbody>
+                        <tr>
+                          <td align=\\"center\\" bgcolor=\\"#EE2B77\\" class=\\"inner-td\\" style=\\"border-radius:6px;font-size:16px;text-align:center;background-color:inherit\\">
+                            <a href=\\"http://localhost:3000/someUrl\\" style=\\"background-color:#EE2B77;border:1px solid #333333;border-color:#EE2B77;border-radius:0px;border-width:1px;color:#ffffff;display:inline-block;font-family:arial,helvetica,sans-serif;font-size:16px;font-weight:normal;letter-spacing:0px;line-height:16px;padding:12px 18px 12px 18px;text-align:center;text-decoration:none\\"
+                              target=\\"_blank\\">MANUSCRIPT DETAILS</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>        </p>
+          <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Kind regards,</span></span></div>
+          
+          <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Example Editor</span></span></div>
+          
+          <div><span style=\\"font-size:14px;\\"><span style=\\"color:#242424;\\">Test journal</span></span></div>        <p>&nbsp;</p>
+      </div>
+    </td>
+  </tr>
+</table><div data-role=\\"module-unsubscribe\\" class=\\"module unsubscribe-css__unsubscribe___2CDlR\\" role=\\"module\\" data-type=\\"unsubscribe\\"
+  style=\\"color:#444444;font-size:12px;line-height:20px;padding:16px 16px 16px 16px;text-align:center\\">
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+    This email was sent to <span class=\\"footer-link\\">user@example.com</span>. You have received this email in regards to the account creation, submission, or
+    peer review process of a paper submitted to a journal published by Coko Foundation.
+  </p>
+  <div class=\\"Unsubscribe--addressLine\\">
+    <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+      2973 16th St., Suite 300, San Francisco, CA 94103
+    </p>
+  </div>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+  </p>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:11px;line-height:20px;text-align:left\\">
+    
+  </p>
+  <p style=\\"font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:20px\\">
+    <a class=\\"Unsubscribe--unsubscribeLink\\" href=\\"http://localhost:3000/unsubscribe/exampleId\\">Unsubscribe</a>
+  </p>
+</div>
+</td>
+</tr>
+</table>
+<!--[if mso]>
+                          </td></tr></table>
+                          </center>
+                          <![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</center>
+</body>
+
+</html>",
+  "messageId": Any<String>,
+  "subject": "Manuscript test",
+  "text": "We are pleased to inform you that the test passed. http://localhost:3000/someUrl MANUSCRIPT DETAILS Example Editor",
+  "to": Array [
+    Object {
+      "address": "user@example.com",
+      "name": "",
+    },
+  ],
+}
+`;
