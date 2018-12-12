@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@7.0.2...pubsweet-client@8.0.0) (2018-12-12)
+
+
+### Features
+
+* **client:** remove export of validations.js ([1fc94fe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1fc94fe))
+
+
+### BREAKING CHANGES
+
+* **client:** pubsweet-client no longer exports validations
+
+
+
+
+
 ## [7.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@7.0.1...pubsweet-client@7.0.2) (2018-12-04)
 
 **Note:** Version bump only for package pubsweet-client
