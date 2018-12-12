@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.0.1...@pubsweet/ui-toolkit@2.0.2) (2018-12-04)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.0.0...@pubsweet/ui-toolkit@2.0.1) (2018-11-30)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.2.0...@pubsweet/ui-toolkit@2.0.0) (2018-11-29)
+
+
+### Features
+
+* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@1.1.3...@pubsweet/ui-toolkit@1.2.0) (2018-08-02)
 

@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@9.0.1...@pubsweet/ui@9.0.2) (2018-12-04)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [9.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@9.0.0...@pubsweet/ui@9.0.1) (2018-11-30)
+
+
+### Bug Fixes
+
+* **ui:** add missing override for GlobalStyle ([e5d48eb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e5d48eb))
+
+
+
+
+
+# [9.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.8.0...@pubsweet/ui@9.0.0) (2018-11-29)
+
+
+### Features
+
+* **ui:** upgrade styled-components ([6122502](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6122502))
+* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
+
+
+### BREAKING CHANGES
+
+* **various:** Replace all styled-components .extend with styled()
+* **ui:** Replace styled-components injectGlobal with new createGlobalStyle
+
+
+
+
+
   <a name="8.8.0"></a>
 # [8.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@8.7.1...@pubsweet/ui@8.8.0) (2018-11-05)
 

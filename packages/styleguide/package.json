@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "3.2.0",
+  "version": "4.0.2",
   "license": "MIT",
   "files": [
     "src",
@@ -9,9 +9,9 @@
   "main": "src",
   "dependencies": {
     "@elifesciences/elife-theme": "^1.0.0",
-    "@pubsweet/default-theme": "^3.0.0",
-    "@pubsweet/ui": "^8.8.0",
-    "@pubsweet/ui-toolkit": "^1.2.0",
+    "@pubsweet/default-theme": "^4.0.2",
+    "@pubsweet/ui": "^9.0.2",
+    "@pubsweet/ui-toolkit": "^2.0.2",
     "faker": "^4.1.0",
     "lodash": "^4.17.5",
     "react": "^16.2.0",
@@ -22,7 +22,8 @@
     "recompose": "^0.26.0",
     "redux": "^3.6.0",
     "redux-form": "^7.0.3",
-    "styled-components": "^3.2.5",
+    "styled-components": "^4.1.1",
+    "styled-normalize": "^8.0.4",
     "xpub-journal": "^0.0.3"
   },
   "devDependencies": {

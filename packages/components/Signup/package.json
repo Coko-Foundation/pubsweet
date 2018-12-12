@@ -1,12 +1,12 @@
 {
   "name": "pubsweet-component-signup",
-  "version": "1.0.33",
+  "version": "1.0.36",
   "description": "Basic signup form component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^8.8.0",
+    "@pubsweet/ui": "^9.0.2",
     "prop-types": "^15.5.10",
     "react-bootstrap": "^0.32.0",
     "react-redux": "^5.0.6",

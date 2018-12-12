@@ -15,25 +15,81 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "children": Array [],
     },
     "ref": null,
     "rendered": Array [],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [
+        Object {
+          "data-test-id": [Function],
+        },
+      ],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-cIShpX",
+        "isStatic": false,
+        "rules": Array [
+          "
+  display: flex;
+  flex-direction: column;
+
+  ",
+          [Function],
+          ";
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "render": [Function],
+      "styledComponentId": "sc-cIShpX",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": Array [],
       },
       "ref": null,
       "rendered": Array [],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [
+          Object {
+            "data-test-id": [Function],
+          },
+        ],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-cIShpX",
+          "isStatic": false,
+          "rules": Array [
+            "
+  display: flex;
+  flex-direction: column;
+
+  ",
+            [Function],
+            ";
+",
+          ],
+        },
+        "displayName": "styled.div",
+        "render": [Function],
+        "styledComponentId": "sc-cIShpX",
+        "target": "div",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {
