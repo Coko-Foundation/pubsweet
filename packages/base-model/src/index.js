@@ -1,5 +1,5 @@
 const uuid = require('uuid')
-const { Model } = require('objection')
+const { Model, transaction } = require('objection')
 const logger = require('@pubsweet/logger')
 const { db, NotFoundError } = require('pubsweet-server')
 const { merge } = require('lodash')
@@ -9,6 +9,11 @@ Model.knex(db)
 
 const notFoundError = (property, value, className) =>
   new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
+
+const integrityError = (property, value, message) =>
+  new Error(
+    `Data Integrity Error property ${property} set to ${value}: ${message}`,
+  )
 
 class BaseModel extends Model {
   constructor(properties) {
@@ -76,6 +81,7 @@ class BaseModel extends Model {
   $beforeInsert() {
     this.id = this.id || uuid.v4()
     this.created = new Date().toISOString()
+    this.updated = this.created
   }
 
   $beforeUpdate() {
@@ -83,6 +89,38 @@ class BaseModel extends Model {
   }
 
   async save() {
+    const simpleSave = async (trx = null) =>
+      this.constructor.query(trx).patchAndFetchById(this.id, this)
+
+    const protectedSave = async () => {
+      let trx, saved
+      try {
+        trx = await transaction.start(BaseModel.knex())
+        const current = await this.constructor.query(trx).findById(this.id)
+
+        const storedUpdateTime = new Date(current.updated).getTime()
+        const instanceUpdateTime = new Date(this.updated).getTime()
+
+        if (instanceUpdateTime < storedUpdateTime) {
+          throw integrityError(
+            'updated',
+            this.updated,
+            'is older than the one stored in the database!',
+          )
+        }
+
+        saved = await simpleSave(trx)
+        await trx.commit()
+      } catch (err) {
+        logger.error(err)
+        await trx.rollback()
+        throw err
+      }
+      return saved
+    }
+
+    // start of save function...
+
     let saved
     // Do the validation manually here, since inserting
     // model instances skips validation, and using toJSON() first will
@@ -90,9 +128,20 @@ class BaseModel extends Model {
     this.$validate()
 
     if (this.id) {
-      saved = await this.constructor.query().patchAndFetchById(this.id, this)
-    }
+      if (!this.updated && this.created) {
+        throw integrityError(
+          'updated',
+          this.updated,
+          'must be set when created is set!',
+        )
+      }
 
+      if (!this.updated && !this.created) {
+        saved = await simpleSave()
+      } else {
+        saved = await protectedSave()
+      }
+    }
     if (!saved) {
       // either model has no ID or the ID was not found in the database
       saved = await this.constructor.query().insertAndFetch(this)

@@ -3,13 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.5.1-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.0...pubsweet-component-epub@0.5.1-alpha.0) (2018-11-23)
+## [0.5.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.4...pubsweet-component-epub@0.5.5) (2018-12-04)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.3...pubsweet-component-epub@0.5.4) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.2...pubsweet-component-epub@0.5.3) (2018-11-29)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+<a name="0.5.2"></a>
+## [0.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.1...pubsweet-component-epub@0.5.2) (2018-11-16)
+
+
+### Bug Fixes
+
+* highlight js dependency update ([0fb0733](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fb0733))
+
+
+
+
+<a name="0.5.1"></a>
+## [0.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.0...pubsweet-component-epub@0.5.1) (2018-11-13)
 
 
 ### Bug Fixes
 
 * update html-epub dependency ([5f55907](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5f55907))
-
 
 
 

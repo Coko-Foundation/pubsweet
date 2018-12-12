@@ -3,7 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [10.0.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.3...pubsweet-server@10.0.4-alpha.0) (2018-11-23)
+## [10.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.2...pubsweet-server@10.1.3) (2018-12-04)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [10.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.1...pubsweet-server@10.1.2) (2018-11-30)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [10.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.0...pubsweet-server@10.1.1) (2018-11-29)
+
+
+### Bug Fixes
+
+* add waait dependency ([f80dbec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f80dbec))
+
+
+
+
+
+      <a name="10.1.0"></a>
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.3...pubsweet-server@10.1.0) (2018-11-13)
 
 
 ### Bug Fixes
@@ -11,7 +39,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * add a custom async server.close function ([bfc78a8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bfc78a8))
 * close server and stop job queues on server close ([b20a837](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b20a837))
 * manage closing of startServer in tests ([e247261](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e247261))
-* **server:** migrate to use new User and Team models ([313b904](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/313b904))
 
 
 ### Features
@@ -21,19 +48,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * support for a job runner in a different process ([f3c8b93](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f3c8b93))
 * working job roundtrip and test ([188f794](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/188f794))
 * **server:** expand access to custom models in authsome ([6fde33a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6fde33a))
-* **server:** use BaseModel-based User and Team models ([8646f92](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8646f92))
-
-
-### BREAKING CHANGES
-
-* **server:** User and Team models have moved from `entities` into standalone `users` and `teams`
-tables.
 
 
 
 
-
-  <a name="10.0.3"></a>
+      <a name="10.0.3"></a>
 ## [10.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.2...pubsweet-server@10.0.3) (2018-11-05)
 
 
@@ -44,7 +63,7 @@ tables.
 
 
 
-  <a name="10.0.2"></a>
+<a name="10.0.2"></a>
 ## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.0.1...pubsweet-server@10.0.2) (2018-10-17)
 
 

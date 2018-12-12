@@ -2,28 +2,17 @@
 import 'typeface-fira-sans-condensed'
 import 'typeface-vollkorn'
 
-import { injectGlobal } from 'styled-components'
-
 import {
   Action,
   ActionGroup,
   AppBar,
   Button,
   Checkbox,
+  GlobalStyle,
   Radio,
   TextField,
   Menu,
 } from './elements'
-
-injectGlobal`
-  body {
-    height: 100vh;
-  }
-
-  #root, #root > div {
-    height: 100%;
-  }
-`
 
 const cokoTheme = {
   /* Colors */
@@ -98,6 +87,7 @@ const cokoTheme = {
       AppBar,
       Button,
       Checkbox,
+      GlobalStyle,
       Radio,
       TextField,
       Menu,
