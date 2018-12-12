@@ -4,8 +4,7 @@ const createBasicCollection = require('./helpers/basic_collection')
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
-const { model: User } = require('@pubsweet/model-user')
-const Fragment = require('../src/models/Fragment')
+const { User, Fragment } = require('../src/models')
 
 const api = require('./helpers/api')
 

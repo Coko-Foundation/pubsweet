@@ -1,5 +1,5 @@
 const fixtures = require('../fixtures/fixtures')
-const Fragment = require('../../src/models/Fragment')
+const { Fragment } = require('../../src/models')
 const assign = require('lodash/assign')
 
 module.exports = (opts, collection) => {
