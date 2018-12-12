@@ -261,57 +261,56 @@ export default ({
       </div>
     </Intro>
     <form onSubmit={handleSubmit}>
-      {groupElements(form.children || []).map(
-        element =>
-          !isArray(element) ? (
-            <Section
-              cssOverrides={JSON.parse(element.sectioncss || '{}')}
-              key={`${element.id}`}
-            >
-              <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
-              {element.component === 'AuthorsInput' && <AuthorsInput />}
-              {element.component !== 'AuthorsInput' && (
-                <ValidatedFieldFormik
-                  component={elements[element.component]}
-                  key={`validate-${element.id}`}
-                  name={element.name}
-                  onChange={value => {
-                    const val = value.target ? value.target.value : value
-                    setFieldValue(element.name, val, true)
-                    onChange(val, element.name)
-                  }}
-                  readonly={false}
-                  setTouched={setTouched}
-                  {...rejectProps(element, [
-                    'component',
-                    'title',
-                    'sectioncss',
-                    'parse',
-                    'format',
-                    'validate',
-                    'validateValue',
-                    'description',
-                    'order',
-                  ])}
-                  uploadFile={uploadFile}
-                  validate={composeValidate(
-                    element.validate,
-                    element.validateValue,
-                  )}
-                />
-              )}
-              <SubNote
-                dangerouslySetInnerHTML={createMarkup(element.description)}
+      {groupElements(form.children || []).map(element =>
+        !isArray(element) ? (
+          <Section
+            cssOverrides={JSON.parse(element.sectioncss || '{}')}
+            key={`${element.id}`}
+          >
+            <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
+            {element.component === 'AuthorsInput' && <AuthorsInput />}
+            {element.component !== 'AuthorsInput' && (
+              <ValidatedFieldFormik
+                component={elements[element.component]}
+                key={`validate-${element.id}`}
+                name={element.name}
+                onChange={value => {
+                  const val = value.target ? value.target.value : value
+                  setFieldValue(element.name, val, true)
+                  onChange(val, element.name)
+                }}
+                readonly={false}
+                setTouched={setTouched}
+                {...rejectProps(element, [
+                  'component',
+                  'title',
+                  'sectioncss',
+                  'parse',
+                  'format',
+                  'validate',
+                  'validateValue',
+                  'description',
+                  'order',
+                ])}
+                uploadFile={uploadFile}
+                validate={composeValidate(
+                  element.validate,
+                  element.validateValue,
+                )}
               />
-            </Section>
-          ) : (
-            <ElementComponentArray
-              elementsComponentArray={element}
-              onChange={onChange}
-              setFieldValue={setFieldValue}
-              setTouched={setTouched}
+            )}
+            <SubNote
+              dangerouslySetInnerHTML={createMarkup(element.description)}
             />
-          ),
+          </Section>
+        ) : (
+          <ElementComponentArray
+            elementsComponentArray={element}
+            onChange={onChange}
+            setFieldValue={setFieldValue}
+            setTouched={setTouched}
+          />
+        ),
       )}
 
       {filterFileManuscript(manuscript.files).length > 0 ? (
@@ -325,21 +324,19 @@ export default ({
         </Section>
       ) : null}
 
-      {!manuscript.status === 'submitted' &&
-        form.haspopup === 'false' && (
-          <Button primary type="submit">
+      {!manuscript.status === 'submitted' && form.haspopup === 'false' && (
+        <Button primary type="submit">
+          Submit your manuscript
+        </Button>
+      )}
+
+      {!manuscript.status !== 'submitted' && form.haspopup === 'true' && (
+        <div>
+          <Button onClick={toggleConfirming} primary type="button">
             Submit your manuscript
           </Button>
-        )}
-
-      {!manuscript.status !== 'submitted' &&
-        form.haspopup === 'true' && (
-          <div>
-            <Button onClick={toggleConfirming} primary type="button">
-              Submit your manuscript
-            </Button>
-          </div>
-        )}
+        </div>
+      )}
       {confirming && (
         <ModalWrapper>
           <Confirm form={form} toggleConfirming={toggleConfirming} />

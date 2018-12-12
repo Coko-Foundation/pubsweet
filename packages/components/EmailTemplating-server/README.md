@@ -5,7 +5,7 @@
 The `email-templating` component contains an `EmailTemplate` class with one main instance method `sendEmail` for sending the email using the `send-email` component from PubSweet.
 
 1.  `sendEmail()`:
-    * uses the `send-email` component from PubSweet to actually send the email based on the Email properties passed in the constructor
+    - uses the `send-email` component from PubSweet to actually send the email based on the Email properties passed in the constructor
 
 The `Email` class also provides a `constructor` whose properties will be used when sending the email:
 
@@ -13,17 +13,17 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 2.  `fromEmail`: a String indicating the from name and from email address: `Coko <team@coko.foundation>`
 3.  `toUser`: an Object with two properties: `email` and `name`. The `name` property will be used when addressing the recipient in the email content - for example: "Dear Dr. Rachel Smith".
 4.  `content`: an Object which contains properties about the email:
-    * `subject`
-    * `paragraph`: the main text part of the email body which informs the recipient
-    * `signatureName` - the name which will appear in the signature
-    * `ctaLink` - the URL which will be placed in the button
-    * `ctaText` - the text which appears on the button
-    * `unsubscribeLink`
-    * `signatureJournal` - the journal or company name which will appear in the signature
+    - `subject`
+    - `paragraph`: the main text part of the email body which informs the recipient
+    - `signatureName` - the name which will appear in the signature
+    - `ctaLink` - the URL which will be placed in the button
+    - `ctaText` - the text which appears on the button
+    - `unsubscribeLink`
+    - `signatureJournal` - the journal or company name which will appear in the signature
 5.  `bodyProps`:
-    * `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
-    * `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
-    * `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
+    - `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
+    - `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
+    - `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
 
 ## Usage
 
@@ -46,9 +46,9 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 
 1.  **Dependencies**
 
-    * [Pubsweet's Send Email](https://www.npmjs.com/package/@pubsweet/component-send-email)
-    * [Configure your Node.js Applications](https://www.npmjs.com/package/config)
-    * [Handlebars.js](https://www.npmjs.com/package/handlebars)
+    - [Pubsweet's Send Email](https://www.npmjs.com/package/@pubsweet/component-send-email)
+    - [Configure your Node.js Applications](https://www.npmjs.com/package/config)
+    - [Handlebars.js](https://www.npmjs.com/package/handlebars)
 
 1.  **Notifications**
 

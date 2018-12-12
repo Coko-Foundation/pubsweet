@@ -40,6 +40,7 @@ describe('API SSE disabled', () => {
     })
 
     await expect(eventPromise).rejects.toEqual({
+      message: 'Not Found',
       type: 'error',
       status: STATUS.NOT_FOUND,
     })
