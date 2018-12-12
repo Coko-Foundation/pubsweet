@@ -11,6 +11,6 @@
     "react": ">=15"
   },
   "devDependencies": {
-    "react-dnd-test-backend": "^2.5.4"
+    "react-dnd-test-backend": "^7.0.0"
   }
 }

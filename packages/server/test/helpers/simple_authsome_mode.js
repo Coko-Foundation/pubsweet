@@ -1,4 +1,4 @@
-const authsomeMode = async function(userId, operation, object, context) {
+const authsomeMode = async (userId, operation, object, context) => {
   if (!userId) {
     return false
   }

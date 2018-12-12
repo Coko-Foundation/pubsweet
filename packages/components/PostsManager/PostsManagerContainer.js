@@ -24,4 +24,7 @@ function mapDispatch(dispatch) {
   }
 }
 
-export default connect(mapState, mapDispatch)(PostsManager)
+export default connect(
+  mapState,
+  mapDispatch,
+)(PostsManager)
