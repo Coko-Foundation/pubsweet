@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-password-reset-backend",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Password reset backend component for PubSweet",
   "main": "index.js",
   "scripts": {},

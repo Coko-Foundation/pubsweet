@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-ink-backend@0.2.14...pubsweet-component-ink-backend@0.2.15) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-ink-backend
+
+
+
+
+
 <a name="0.2.14"></a>
 ## [0.2.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-ink-backend@0.2.13...pubsweet-component-ink-backend@0.2.14) (2018-09-25)
 
