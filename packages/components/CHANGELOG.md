@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.2...pubsweet-components@10.1.0) (2018-12-12)
+
+
+### Bug Fixes
+
+* **xpub-manuscript:** ensure file is present before accessing properties ([15945d4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/15945d4))
+
+
+### Features
+
+* add email templating component ([4baa6e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4baa6e0))
+
+
+
+
+
 ## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.1...pubsweet-components@10.0.2) (2018-12-04)
 
 **Note:** Version bump only for package pubsweet-components

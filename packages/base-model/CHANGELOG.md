@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.0.12...@pubsweet/base-model@1.1.0) (2018-12-12)
+
+
+### Bug Fixes
+
+* **base-model:** ensure updated is set on insert ([d04688b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d04688b))
+* **base-model:** make funcs private and rename vars ([3e64aa6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3e64aa6))
+* **base-model:** use trx within transaction ([8330615](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8330615))
+
+
+### Features
+
+* **base-model:** add test to check exception when saving stale data ([9d73525](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9d73525))
+* **base-model:** protect save from stale data ([836a9b8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/836a9b8))
+
+
+
+
+
 ## [1.0.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.0.11...@pubsweet/base-model@1.0.12) (2018-12-04)
 
 **Note:** Version bump only for package @pubsweet/base-model
