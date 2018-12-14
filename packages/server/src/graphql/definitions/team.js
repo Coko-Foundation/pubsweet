@@ -61,7 +61,6 @@ const typeDefs = `
     members: [ID!]
     rev: String
     global: Boolean
-
   }
 
   input TeamObjectInput {

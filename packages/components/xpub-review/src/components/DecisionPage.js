@@ -206,12 +206,13 @@ export default compose(
   }),
   graphql(submitMutation, {
     props: ({ mutate, ownProps }) => ({
-      completeDecision: ({ manuscript, review }, { history }) => {
+      completeDecision: ({ history, manuscript }) => {
         mutate({
           variables: {
             id: manuscript.id,
             input: JSON.stringify({
-              decision: review.recommendation,
+              decision: manuscript.reviews.find(review => review.isDecision)
+                .recommendation,
             }),
           },
         }).then(() => {
@@ -232,25 +233,23 @@ export default compose(
         params: { journal },
       },
     }) => ({
-      review:
-        (manuscript.reviews || []).filter(
-          review => review.user.id === currentUser.id,
-        ) || [],
       journal: { id: journal },
-      updateReview: (review, file) => {
-        ;(review.comments || []).map(comment => {
-          delete comment.files
-          delete comment.__typename
-          return comment
-        })
-
+      updateReview: (data, file) => {
         const reviewData = {
-          recommendation: review.recommendation,
-          comments: review.comments,
           isDecision: true,
           manuscriptId: manuscript.id,
         }
 
+        if (data.comment) {
+          reviewData.comments = [data.comment]
+        }
+
+        if (data.recommendation) {
+          reviewData.recommendation = data.recommendation
+        }
+
+        const review =
+          manuscript.reviews.find(review => review.isDecision) || {}
         return updateReviewMutation({
           variables: {
             id: review.id || undefined,
@@ -294,6 +293,11 @@ export default compose(
     }),
   ),
   withFormik({
+    mapPropsToValues: props =>
+      props.manuscript.reviews.find(review => review.isDecision) || {
+        comments: [],
+        recommendation: null,
+      },
     isInitialValid: ({ review }) => {
       const rv = review.find(review => review.isDecision) || {}
       const isRecommendation = rv.recommendation != null
@@ -301,8 +305,21 @@ export default compose(
 
       return isCommented && isRecommendation
     },
+    validate: (values, props) => {
+      const errors = {}
+      if (getCommentContent(values, 'note') === '') {
+        errors.comments = 'Required'
+      }
+
+      if (values.recommendation === null) {
+        errors.recommendation = 'Required'
+      }
+      return errors
+    },
     displayName: 'decision',
-    handleSubmit: (props, { props: { completeDecision, history } }) =>
-      completeDecision(props, { history }),
+    handleSubmit: (
+      props,
+      { props: { completeDecision, history, manuscript } },
+    ) => completeDecision({ history, manuscript }),
   }),
 )(DecisionLayout)

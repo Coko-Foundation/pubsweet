@@ -20,7 +20,6 @@ const addEditor = (manuscript, label) => ({
 
 const DecisionLayout = ({
   handleSubmit,
-  review,
   updateReview,
   uploadFile,
   manuscript,
@@ -53,38 +52,39 @@ const DecisionLayout = ({
 
   const submittedMoment = moment()
   const label = submittedMoment.format('YYYY-MM-DD')
-  decisionSections.push({
-    content: (
-      <div>
-        <AdminSection key="assign-editors">
-          <AssignEditorsReviewers
-            AssignEditor={AssignEditor}
-            journal={journal}
-            manuscript={manuscript}
-          />
-        </AdminSection>
-        <AdminSection key="review-metadata">
-          <ReviewMetadata manuscript={manuscript} />
-        </AdminSection>
-        <AdminSection key="decision-review">
-          <DecisionReviews manuscript={manuscript} />
-        </AdminSection>
-        <AdminSection key="decision-form">
-          <DecisionForm
-            handleSubmit={handleSubmit}
-            isValid={isValid}
-            review={review.find(review => review.isDecision) || {}}
-            updateReview={updateReview}
-            uploadFile={uploadFile}
-          />
-        </AdminSection>
-      </div>
-    ),
-    key: manuscript.id,
-    label,
-  })
+  if (manuscript.status !== 'revising') {
+    decisionSections.push({
+      content: (
+        <div>
+          <AdminSection key="assign-editors">
+            <AssignEditorsReviewers
+              AssignEditor={AssignEditor}
+              journal={journal}
+              manuscript={manuscript}
+            />
+          </AdminSection>
+          <AdminSection key="review-metadata">
+            <ReviewMetadata manuscript={manuscript} />
+          </AdminSection>
+          <AdminSection key="decision-review">
+            <DecisionReviews manuscript={manuscript} />
+          </AdminSection>
+          <AdminSection key="decision-form">
+            <DecisionForm
+              handleSubmit={handleSubmit}
+              isValid={isValid}
+              updateReview={updateReview}
+              uploadFile={uploadFile}
+            />
+          </AdminSection>
+        </div>
+      ),
+      key: manuscript.id,
+      label,
+    })
 
-  editorSections.push(addEditor(manuscript, label))
+    editorSections.push(addEditor(manuscript, label))
+  }
 
   return (
     <Columns>

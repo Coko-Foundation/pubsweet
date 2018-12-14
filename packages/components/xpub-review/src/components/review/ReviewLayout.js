@@ -47,30 +47,31 @@ const ReviewLayout = ({
     editorSections.push(addEditor(manuscript, label))
   }, [])
 
-  const label = moment().format('YYYY-MM-DD')
-  reviewSections.push({
-    content: (
-      <div>
-        <ReviewMetadata manuscript={manuscript} />
-        {status === 'completed' ? (
-          <Review review={review} />
-        ) : (
-          <ReviewForm
-            handleSubmit={handleSubmit}
-            isValid={isValid}
-            review={review}
-            updateReview={updateReview}
-            uploadFile={uploadFile}
-          />
-        )}
-      </div>
-    ),
-    key: manuscript.id,
-    label,
-  })
+  if (manuscript.status !== 'revising') {
+    const label = moment().format('YYYY-MM-DD')
+    reviewSections.push({
+      content: (
+        <div>
+          <ReviewMetadata manuscript={manuscript} />
+          {status === 'completed' ? (
+            <Review review={review} />
+          ) : (
+            <ReviewForm
+              handleSubmit={handleSubmit}
+              isValid={isValid}
+              review={review}
+              updateReview={updateReview}
+              uploadFile={uploadFile}
+            />
+          )}
+        </div>
+      ),
+      key: manuscript.id,
+      label,
+    })
 
-  editorSections.push(addEditor(manuscript, label))
-
+    editorSections.push(addEditor(manuscript, label))
+  }
   return (
     <Columns>
       <Manuscript>

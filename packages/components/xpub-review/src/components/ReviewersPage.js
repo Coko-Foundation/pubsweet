@@ -3,7 +3,7 @@ import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { withLoader } from 'pubsweet-client'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, omit } from 'lodash'
 
 import Reviewers from '../components/reviewers/Reviewers'
 import ReviewerContainer from '../components/reviewers/ReviewerContainer'
@@ -108,10 +108,7 @@ const query = gql`
   }
 `
 
-const update = match => (
-  proxy,
-  { data: { updateTeam, createTeam, teams, manuscript } },
-) => {
+const update = match => (proxy, { data: { updateTeam, createTeam } }) => {
   const data = proxy.readQuery({
     query,
     variables: {
@@ -120,8 +117,8 @@ const update = match => (
   })
 
   if (updateTeam) {
-    const teamIndex = teams.findIndex(team => team.id === updateTeam.id)
-    const manuscriptTeamIndex = manuscript.teams.findIndex(
+    const teamIndex = data.teams.findIndex(team => team.id === updateTeam.id)
+    const manuscriptTeamIndex = data.manuscript.teams.findIndex(
       team => team.id === updateTeam.id,
     )
     data.teams[teamIndex] = updateTeam
@@ -153,10 +150,16 @@ const handleSubmit = (
     members: [user.id],
   }
   if (team.id) {
-    const newTeam = cloneDeep(team)
-    newTeam.status.push({ user: user.id, status: 'invited' })
+    const newTeam = {
+      object: omit(team.object, ['__typename']),
+      status: team.status.map(status => omit(status, ['__typename'])),
+      name: team.name,
+      teamType: team.teamType,
+      members: cloneDeep(team.members).map(member => member.id),
+    }
+
     newTeam.members.push(user.id)
-    delete newTeam.object.__typename
+    newTeam.status.push({ user: user.id, status: 'invited' })
     updateTeamMutation({
       variables: {
         id: team.id,

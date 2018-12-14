@@ -1,6 +1,6 @@
 import React from 'react'
 import { NoteEditor } from 'xpub-edit'
-import { cloneDeep, set } from 'lodash'
+import { cloneDeep, omit } from 'lodash'
 import { FieldArray, Field } from 'formik'
 import { withJournal } from 'xpub-journal'
 import { required } from 'xpub-validators'
@@ -21,28 +21,28 @@ import {
 
 import AdminSection from '../atoms/AdminSection'
 
-const NoteDecision = (updateReview, uploadFile, review) => props => (
+const NoteDecision = (updateReview, uploadFile) => props => (
   <AdminSection>
     <Field
       component={NoteInput}
-      review={review}
+      name="comments"
       updateReview={updateReview}
       validate={required}
-      {...props}
     />
     <Field
       component={AttachmentsInput('note')}
-      review={review}
       updateReview={updateReview}
       uploadFile={uploadFile}
-      {...props}
     />
   </AdminSection>
 )
 
-const NoteInput = ({ field, form: { values }, review, updateReview }) => (
+const NoteInput = ({
+  field,
+  form: { values, setFieldValue },
+  updateReview,
+}) => (
   <NoteEditor
-    {...field}
     key="note-input"
     onBlur={value => {
       const { updateIndex, comment } = createComments(
@@ -54,23 +54,22 @@ const NoteInput = ({ field, form: { values }, review, updateReview }) => (
         'note',
       )
 
-      const data = cloneDeep(review)
-      set(data, `comments.${updateIndex}`, comment)
-
-      updateReview(data)
+      setFieldValue(`comments.${updateIndex}`, comment)
+      updateReview(
+        cloneDeep(omit({ comment }, ['comment.files', 'comment.__typename'])),
+      )
     }}
     placeholder="Write/paste your decision letter here, or upload it using the upload button on the right."
     title="Decision"
-    value={getCommentContent(review, 'note')}
+    value={getCommentContent({ comments: field.value }, 'note')}
   />
 )
 
 const AttachmentsInput = type => ({
   field,
-  form: { values },
+  form: { values, setFieldValue },
   updateReview,
   uploadFile,
-  review,
 }) => [
   <UploadButton
     buttonText="↑ Upload files"
@@ -82,21 +81,20 @@ const AttachmentsInput = type => ({
       file.type = type
 
       const { updateIndex, comment } = createComments(
-        review,
+        field.value,
         { files: [file] },
         type,
       )
 
-      const data = cloneDeep(review)
-      set(data, `comments.${updateIndex}`, comment)
+      setFieldValue(`comments.${updateIndex}.files`, comment.files)
 
-      updateReview(data).then(({ data: { updateReview } }) => {
+      updateReview({}).then(({ data: { updateReview } }) => {
         uploadFile(val, updateReview, type)
       })
     }}
   />,
   <Flexbox>
-    {getCommentFiles(review, type).map(val => {
+    {getCommentFiles(field.value, 'note').map(val => {
       const file = cloneDeep(val)
       file.name = file.filename
       return <UploadingFile file={file} key={file.name} uploaded />
@@ -104,17 +102,20 @@ const AttachmentsInput = type => ({
   </Flexbox>,
 ]
 
-const RecommendationInput = journal => ({ field, updateReview, review }) => (
+const RecommendationInput = journal => ({
+  field,
+  form: { setFieldValue },
+  updateReview,
+}) => (
   <RadioGroup
     {...field}
     inline
     onChange={val => {
-      const data = cloneDeep(review)
-      set(data, 'recommendation', val)
-      updateReview(data)
+      setFieldValue(`recommendation`, val)
+      updateReview({ recommendation: val })
     }}
     options={journal.recommendations}
-    value={review.recommendation}
+    value={field.value === '' ? null : field.value}
   />
 )
 
@@ -123,14 +124,13 @@ const DecisionForm = ({
   handleSubmit,
   uploadFile,
   updateReview,
-  review,
   isValid,
 }) => (
   <form onSubmit={handleSubmit}>
     <AdminSection key="note">
       <div name="note">
         <FieldArray
-          component={NoteDecision(updateReview, uploadFile, review)}
+          component={NoteDecision(updateReview, uploadFile)}
           key="comments-array"
           name="comments"
         />
@@ -140,9 +140,9 @@ const DecisionForm = ({
     <AdminSection key="recommendation">
       <Field
         component={RecommendationInput(journal)}
-        name="decision"
-        review={review}
+        name="recommendation"
         updateReview={updateReview}
+        validate={required}
       />
     </AdminSection>
 
