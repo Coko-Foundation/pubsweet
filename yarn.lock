@@ -439,89 +439,13 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@pubsweet/coko-theme@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@pubsweet/coko-theme/-/coko-theme-4.1.0.tgz#c163c20f50990d0aa9bf9455418fe1f368465f9a"
-  integrity sha512-7tE0ERvkgxyA/ZrXHczqoCy5JGFLcpRCfdp5vwtbQfD7dVvg8kuKP5+SPV3Dw1oF6aym+eoXLdl8IRx7gCcUWA==
-  dependencies:
-    "@pubsweet/ui-toolkit" "^1.2.0"
-    cokourier-prime-sans "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git"
-    styled-components "^3.2.5"
-    typeface-fira-sans-condensed "^0.0.54"
-    typeface-vollkorn "^0.0.54"
-
-"@pubsweet/default-theme@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@pubsweet/default-theme/-/default-theme-3.0.0.tgz#7760c88b63fba45b41ad3f6019f54dd0d06e1dfc"
-  integrity sha512-XEg3nWXs1807ZmxsSv4FJa0VYtWhjXWR0dmxhL2vp3FAPvc9t97Pl1vcseky5I7MN5icwNeF7wLeF2tABmuiPQ==
-  dependencies:
-    styled-components "^3.2.5"
-    typeface-noto-sans "^0.0.54"
-    typeface-noto-serif "^0.0.54"
-    typeface-ubuntu-mono "^0.0.54"
-
-"@pubsweet/starter@git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git":
-  version "1.0.0-alpha.1"
-  resolved "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git#aa768ddf88dceb1966e94acca34b3f3870d1b700"
-  dependencies:
-    "@pubsweet/coko-theme" "^4.1.0"
-    "@pubsweet/db-manager" "^2.0.5"
-    "@pubsweet/default-theme" "3.0.0"
-    "@pubsweet/logger" "^0.2.6"
-    "@pubsweet/ui" "^8.7.0"
-    authsome "^0.1.0"
-    pubsweet "^3.0.5"
-    pubsweet-client "^6.0.0"
-    pubsweet-component-blog "^1.0.5"
-    pubsweet-component-form-group "1.1.25"
-    pubsweet-component-html "^0.2.5"
-    pubsweet-component-login "1.1.17"
-    pubsweet-component-manage "^1.0.0"
-    pubsweet-component-medium-draft "^0.2.3"
-    pubsweet-component-navigation "^1.0.1"
-    pubsweet-component-password-reset-backend "^1.0.5"
-    pubsweet-component-password-reset-frontend "^2.0.15"
-    pubsweet-component-pepper-theme "^0.0.5"
-    pubsweet-component-posts-manager "1.0.40"
-    pubsweet-component-signup "^1.0.31"
-    pubsweet-component-teams-manager "^1.1.24"
-    pubsweet-component-users-manager "^2.0.1"
-    pubsweet-server "^10.0.0"
-    pubsweet-theme-plugin "^0.0.3"
-    react-router-redux next
-
-"@pubsweet/ui-toolkit@^1.1.2", "@pubsweet/ui-toolkit@^1.2.0":
+"@pubsweet/ui-toolkit@^1.1.2":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@pubsweet/ui-toolkit/-/ui-toolkit-1.2.0.tgz#5531149fa2229acc06e76e964b8a412bf503c4ce"
   integrity sha512-HwnFt4eES5RopLLY7ajb//UvaCLXS29XCWOOB5cs90DkwysVZaH/GM5HB/QtClQ5tuXiR3BqfjLy2mHMA0Z+PQ==
   dependencies:
     color "^3.0.0"
     lodash "^4.17.4"
-    styled-components "^3.2.5"
-
-"@pubsweet/ui@^8.7.0", "@pubsweet/ui@^8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-8.8.0.tgz#d6a845cd6d0d51c1c14956dccc11900fb87d2178"
-  integrity sha512-Ypr86pfeysF90upV7Ybk5vTr3uCnR0WWlfQZyXsmGn8jFyTlkHMJDNMw1XggfKxdmefyk5hkpcV4YiKklZ0+PA==
-  dependencies:
-    "@pubsweet/ui-toolkit" "^1.2.0"
-    babel-jest "^21.2.0"
-    classnames "^2.2.5"
-    enzyme "^3.7.0"
-    enzyme-adapter-react-16 "^1.1.1"
-    invariant "^2.2.3"
-    lodash "^4.17.4"
-    moment "^2.22.1"
-    prop-types "^15.5.10"
-    react "^16.2.0"
-    react-dom "^16.2.0"
-    react-feather "^1.0.8"
-    react-redux "^5.0.2"
-    react-router-dom "^4.2.2"
-    react-tag-autocomplete "^5.5.0"
-    recompose "^0.26.0"
-    redux "^3.6.0"
-    redux-form "^7.0.3"
     styled-components "^3.2.5"
 
 "@types/async@2.0.50":
@@ -4643,23 +4567,6 @@ dotenv@^4.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
   integrity sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
 
-draft-convert@^1.4.8:
-  version "1.4.10"
-  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-1.4.10.tgz#05007f009b18025451a2ce259aa008f4aa6a1add"
-  integrity sha1-BQB/AJsYAlRRos4lmqAI9KpqGt0=
-  dependencies:
-    immutable "~3.7.4"
-    invariant "^2.2.1"
-
-draft-js@^0.10.0:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.5.tgz#bfa9beb018fe0533dbb08d6675c371a6b08fa742"
-  integrity sha512-LE6jSCV9nkPhfVX2ggcRLA4FKs6zWq9ceuO/88BpXdNCS7mjRTgs0NsV6piUCJX9YxMsB9An33wnkMmU2sD2Zg==
-  dependencies:
-    fbjs "^0.8.15"
-    immutable "~3.7.4"
-    object-assign "^4.1.0"
-
 duplexer2@~0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
@@ -5737,7 +5644,7 @@ fbjs-css-vars@^1.0.0:
   resolved "https://registry.yarnpkg.com/fbjs-css-vars/-/fbjs-css-vars-1.0.1.tgz#836d876e887d702f45610f5ebd2fbeef649527fc"
   integrity sha512-IM+v/C40MNZWqsLErc32e0TyIk/NhkkQZL0QmjBh6zi1eXv0/GeVKmKmueQX7nn9SXQBQbTUcB8zuexIF3/88w==
 
-fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.5:
+fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.16, fbjs@^0.8.5:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -7063,16 +6970,6 @@ immutable-tuple@^0.4.9:
   version "0.4.9"
   resolved "https://registry.yarnpkg.com/immutable-tuple/-/immutable-tuple-0.4.9.tgz#473ebdd6c169c461913a454bf87ef8f601a20ff0"
   integrity sha512-LWbJPZnidF8eczu7XmcnLBsumuyRBkpwIRPCZxlojouhBo5jEBO4toj6n7hMy6IxHU/c+MqDSWkvaTpPlMQcyA==
-
-immutable@^3.7.6:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
-  integrity sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
-
-immutable@~3.7.4:
-  version "3.7.6"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
-  integrity sha1-E7TTyxK++hVIKib+Gy665kAHHks=
 
 import-local@^1.0.0:
   version "1.0.0"
@@ -9269,15 +9166,6 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
-
-medium-draft@^0.5.2:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/medium-draft/-/medium-draft-0.5.9.tgz#ae6579e893a2cb251eb53bfd7f07f9f68faf085b"
-  integrity sha512-LKxEoKgtSJl84zn0+hd8NrCIV2uBmHkYmKrVCZdwhqNer9RiwucsoN47uC33Pjq1W/c2owGQiDGhZGbeTBL1DQ==
-  dependencies:
-    draft-js "^0.10.0"
-    immutable "^3.7.6"
-    react-transition-group "^2.5.0"
 
 mem@^1.1.0:
   version "1.1.0"
@@ -11625,112 +11513,6 @@ public-encrypt@^4.0.0:
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
 
-pubsweet-client@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/pubsweet-client/-/pubsweet-client-6.1.0.tgz#79194234f591bc515bf1802689e1291c8ae8e679"
-  integrity sha512-on/uWQuzkuj0XbLh10ts9IbCL3+tAdFFlODqsVSKNnqB/2QxrcmKIkW2+RI3Oy9rBHCff3HVAjzhhfaHYmb8JQ==
-  dependencies:
-    "@pubsweet/ui" "^8.8.0"
-    "@pubsweet/ui-toolkit" "^1.2.0"
-    apollo-cache-inmemory "^1.2.4"
-    apollo-client "^2.3.4"
-    apollo-link "^1.2.1"
-    apollo-link-context "^1.0.5"
-    apollo-link-http "^1.5.4"
-    apollo-link-ws "^1.0.8"
-    apollo-upload-client "^8.0.0"
-    authsome "^0.1.0"
-    config "^2.0.1"
-    event-source-polyfill "^0.0.10"
-    global "^4.3.1"
-    graphql "^14.0.2"
-    graphql-tag "^2.7.3"
-    isomorphic-fetch "^2.1.1"
-    lint-staged "^6.0.0"
-    lodash "^4.0.0"
-    prop-types "^15.5.8"
-    react "^16.2.0"
-    react-apollo "^2.1.0"
-    react-redux "^5.0.2"
-    react-router-dom "^4.2.2"
-    react-router-redux next
-    redux "^3.6.0"
-    redux-form "^7.0.3"
-    redux-logger "^3.0.1"
-    redux-thunk "^2.2.0"
-    reselect "^3.0.1"
-    styled-components "^3.2.5"
-    styled-normalize "^3.0.1"
-    subscriptions-transport-ws "^0.9.12"
-
-pubsweet-component-form-group@1.1.25:
-  version "1.1.25"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-form-group/-/pubsweet-component-form-group-1.1.25.tgz#ba93e042483ce7097f799966322940d6b67f2b11"
-  integrity sha512-7QmaHh/DbGcOt5jEx7DfQiWwnL7+CHQWm9DLRC9yS7dZ5yFJGsyLpzerAUbFDBlUftcrufymKDbzICbBj0AaaA==
-  dependencies:
-    joi-browser "^13.4.0"
-    prop-types "^15.5.10"
-    pubsweet-server "^10.0.0"
-
-pubsweet-component-login@1.1.17:
-  version "1.1.17"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-login/-/pubsweet-component-login-1.1.17.tgz#8ea00b85e73a1068fbd6e1d7a4173ba3cfc17c42"
-  integrity sha512-1M5xBtUGi+nWoknzSYQ8C7RAo3XCPCJzgdOQaKi2Cl1iIKHZy0wsNXlK3gv/3dldJ47QLSL2E6sKnlwy2YijLQ==
-  dependencies:
-    "@pubsweet/ui" "^8.7.0"
-    prop-types "^15.5.10"
-    react-redux "^5.0.6"
-    react-router-dom "^4.2.2"
-    react-router-redux "^5.0.0-alpha.9"
-    recompose "^0.26.0"
-    redux-form "^7.0.3"
-
-pubsweet-component-medium-draft@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-medium-draft/-/pubsweet-component-medium-draft-0.2.4.tgz#9877c23538fe22915e6b6552608f905edbb70fc9"
-  integrity sha512-WwaCBdCHW7OtaxJ/Et+ke0xH6+XKjkgQ7TZqs2jv7QYXJ/psD+jVpXFVv5+RNY2wxZbhXWd0vC5ddeewORtwhA==
-  dependencies:
-    draft-convert "^1.4.8"
-    font-awesome "^4.7.0"
-    medium-draft "^0.5.2"
-    prop-types "^15.5.10"
-    react-redux "^5.0.6"
-    redux "^3.7.2"
-
-pubsweet-component-password-reset-frontend@^2.0.15:
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-password-reset-frontend/-/pubsweet-component-password-reset-frontend-2.0.17.tgz#8b1d33a66ae18704e48c29e18651288dcab98e5d"
-  integrity sha512-3fj63ih7yQiB308CrxwQZvPtq3NmahChiAb+86XtxHXYmPIHVOGvLo1RmZuogt6bY7EnRrGBnGVmEGjm/ph2Vg==
-  dependencies:
-    "@pubsweet/ui" "^8.8.0"
-    "@pubsweet/ui-toolkit" "^1.2.0"
-    prop-types "^15.5.10"
-    query-string "^5.0.0"
-    react-router "^4.2.0"
-    styled-components "^3.2.5"
-
-pubsweet-component-pepper-theme@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-pepper-theme/-/pubsweet-component-pepper-theme-0.0.5.tgz#eb39aafbab8e1a737752b6c5ed7ef057ead414cc"
-  integrity sha512-b84iM59NMjAqKWbKs2/HSNrwFgb4/siOaXHqyfzs4Z+b+/rO1WthUGjJ4h8Uq3GeuTSPSG8QmdraDyPYHPDDQg==
-
-pubsweet-component-posts-manager@1.0.40:
-  version "1.0.40"
-  resolved "https://registry.yarnpkg.com/pubsweet-component-posts-manager/-/pubsweet-component-posts-manager-1.0.40.tgz#ce757fde0ffbedafe441229b11ad4c97b0a72110"
-  integrity sha512-hqsltbexB1iw1/l7E/uHq3VlxA5hw+a1gkdpCdzZ5MBawVln/Db6Tme4zxXSkjjBC73NZh/QZ+ABgDI3aUBOiQ==
-  dependencies:
-    "@pubsweet/ui" "^8.7.0"
-    prop-types "^15.5.10"
-    pubsweet-component-form-group "^1.1.25"
-    react-redux "^5.0.6"
-    react-router-dom "^4.2.2"
-    redux "^3.7.2"
-
-pubsweet-theme-plugin@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/pubsweet-theme-plugin/-/pubsweet-theme-plugin-0.0.3.tgz#1773543a95ed9f56eb8b14f13f24496e034d140b"
-  integrity sha512-lKEbQW/pfhhhbpPyO+naDFmgyNwqE9Cj6lk7eqxJgKnVc6AL+B8YBTSpsSDy7LoVrwKjM2Q7+0TrN30llcx6Ag==
-
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pump/-/pump-2.0.1.tgz#12399add6e4cf7526d973cbc8b5ce2e2908b3909"
@@ -12287,7 +12069,7 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.5.2:
     react-is "^16.6.3"
     scheduler "^0.11.2"
 
-react-transition-group@^2.0.0, react-transition-group@^2.2.0, react-transition-group@^2.5.0:
+react-transition-group@^2.0.0, react-transition-group@^2.2.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.0.tgz#70bca0e3546102c4dc5cf3f5f57f73447cce6874"
   integrity sha512-qYB3JBF+9Y4sE4/Mg/9O6WFpdoYjeeYqx0AFb64PTazVy8RPMiE3A47CG9QmM4WJ/mzDiZYslV+Uly6O1Erlgw==
@@ -13157,6 +12939,13 @@ sax@>=0.6.0, sax@^1.2.4, sax@~1.2.1:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
+schedule@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
+  integrity sha512-20+1KVo517sR7Nt+bYBN8a+bEJDKLPEx7Ohtts1kX05E4/HY53YUNuhfkVNItmWAnBYHcpG9vsd2/CJxG+aPCQ==
+  dependencies:
+    object-assign "^4.1.1"
+
 scheduler@^0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.2.tgz#a8db5399d06eba5abac51b705b7151d2319d33d3"
@@ -13965,11 +13754,6 @@ styled-components@^4.1.1:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
-
-styled-normalize@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/styled-normalize/-/styled-normalize-3.0.1.tgz#217efb96598690addd04699ca71af0db3473fea2"
-  integrity sha512-EtTwCJDKMoJ+GU0YxklkHukltPGz7Swfq/fKyeP/WEQGF01DXGVXmuo1Rp2kMTQ9kz7o6dVBvvmT+KQyKe8Okw==
 
 styled-normalize@^8.0.4:
   version "8.0.4"
