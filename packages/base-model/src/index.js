@@ -61,12 +61,7 @@ class BaseModel extends Model {
         type: { type: 'string' },
         id: { type: 'string', format: 'uuid' },
         created: { type: ['string', 'object'], format: 'date-time' },
-        updated: {
-          anyOf: [
-            { type: ['string', 'object'], format: 'date-time' },
-            { type: 'null' },
-          ],
-        },
+        updated: { type: ['string', 'object'], format: 'date-time' },
       },
       additionalProperties: false,
     }
