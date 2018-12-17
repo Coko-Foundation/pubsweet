@@ -1,9 +1,39 @@
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, withProps } from 'recompose'
 import { graphql } from 'react-apollo'
-import { gql } from 'apollo-client-preset'
+import gql from 'graphql-tag'
 import { withLoader } from 'pubsweet-client'
 
 import FormBuilderLayout from './FormBuilderLayout'
+
+const createForm = gql`
+  mutation($form: String!) {
+    createForm(form: $form)
+  }
+`
+
+const updateForm = gql`
+  mutation($form: String!, $id: String!) {
+    updateForm(form: $form, id: $id)
+  }
+`
+
+const updateFormElements = gql`
+  mutation($form: String!, $id: ID!) {
+    deleteFormElements(form: $form, id: $id)
+  }
+`
+
+const deleteFormElements = gql`
+  mutation($formId: ID!, $elementId: ID!) {
+    deleteFormElements(formId: $formId, elementId: $elementId)
+  }
+`
+
+const deleteForms = gql`
+  mutation($formId: ID!) {
+    deleteForms(formId: $formId)
+  }
+`
 
 const query = gql`
   query {
@@ -19,24 +49,41 @@ const query = gql`
 
 export default compose(
   graphql(query),
-  // connect(
-  //   state => {
-  //     const { error } = state
-  //     const { forms } = state.forms
-
-  //     return { error, forms: forms.forms }
-  //   },
-  //   (dispatch, { history }) => ({
-  //     deleteForm: form => dispatch(deleteForms(form)),
-  //     deleteElement: (form, element) => dispatch(deleteElements(form, element)),
-  //     updateForm: (form, formProperties) =>
-  //       dispatch(updateForms(form, formProperties)),
-  //     createForm: formProperties => dispatch(createForms(formProperties)),
-  //     updateElements: (form, formElements) =>
-  //       dispatch(updateElements(form, formElements)),
-  //   }),
-  // ),
+  graphql(deleteForms, {
+    name: 'deleteForms',
+  }),
+  graphql(deleteFormElements, {
+    name: 'deleteFormElements',
+  }),
+  graphql(updateForm, {
+    name: 'updateForm',
+  }),
+  graphql(createForm, {
+    name: 'createForm',
+  }),
+  graphql(updateFormElements, {
+    name: 'updateFormElements',
+  }),
   withLoader(),
+  withProps(props => ({
+    // deleteForm: form => dispatch(deleteForms(form)),
+    // deleteElement: (form, element) => dispatch(deleteElements(form, element)),
+    updateForm: (form, formProperties) =>
+      props.updateForm({
+        variables: {
+          form: JSON.stringify(formProperties),
+          id: form.id,
+        },
+      }),
+    createForm: formProperties =>
+      props.createForm({
+        variables: {
+          form: JSON.stringify(formProperties),
+        },
+      }),
+    // updateElements: (form, formElements) =>
+    //   dispatch(updateElements(form, formElements)),
+  })),
   withState('properties', 'onChangeProperties', ({ getForms }) => ({
     type: 'form',
     properties: getForms[0] || {},

@@ -41,7 +41,7 @@ const ComponentProperties = ({
         <ValidatedFieldFormik
           component={MenuComponents}
           name="component"
-          onChange={(value, v) => changeComponent(v)}
+          onChange={value => changeComponent(value)}
         />
       </Section>
       {selectComponentValue &&
@@ -50,6 +50,7 @@ const ComponentProperties = ({
             <Legend space>{`Field ${key}`}</Legend>
             <ValidatedFieldFormik
               component={elements[value.component].default}
+              key={new Date().getTime()}
               name={key}
               {...value.props}
             />

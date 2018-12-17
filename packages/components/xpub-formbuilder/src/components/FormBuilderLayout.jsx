@@ -68,7 +68,6 @@ const FormBuilderLayout = ({
     key: 'new',
     label: '+ Add Form',
   })
-
   return (
     <Columns>
       <Tabs

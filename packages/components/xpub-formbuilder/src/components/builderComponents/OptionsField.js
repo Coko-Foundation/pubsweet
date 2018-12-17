@@ -37,7 +37,7 @@ const renderOptions = ({ form: { values }, push, remove }) => (
           Add another option
         </Button>
       </li>
-      {values.options.map((option, index) => (
+      {(values.options || []).map((option, index) => (
         <li>
           <Spacing>
             <Option>

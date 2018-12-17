@@ -22,11 +22,7 @@ export const Section = styled.div`
   margin: calc(${th('gridUnit')} * 6) 0;
 `
 
-const onSubmit = (
-  values,
-  dispatch,
-  { onSubmitFn, properties, mode, changeTabs },
-) => {
+const onSubmit = (values, { onSubmitFn, properties, mode }) => {
   if (mode === 'create') {
     onSubmitFn(Object.assign({}, values))
   } else {
@@ -40,6 +36,8 @@ const FormProperties = ({
   mode,
   selectPopup,
   showPopupValue,
+  values,
+  setFieldValue,
 }) =>
   isEmpty(properties.properties) && mode !== 'create' ? (
     <Page>
@@ -62,6 +60,9 @@ const FormProperties = ({
           <ValidatedFieldFormik
             component={AbstractField.default}
             name="description"
+            onChange={val => {
+              setFieldValue('description', val)
+            }}
           />
         </Section>
         <Section id="form.submitpopup" key="form.submitpopup">
@@ -70,7 +71,10 @@ const FormProperties = ({
             component={RadioBox.default}
             inline
             name="haspopup"
-            onChange={(input, value) => selectPopup(value)}
+            onChange={(input, value) => {
+              setFieldValue('haspopup', input)
+              selectPopup(input)
+            }}
             options={[
               {
                 label: 'Yes',
@@ -93,6 +97,9 @@ const FormProperties = ({
             <ValidatedFieldFormik
               component={AbstractField.default}
               name="popupdescription"
+              onChange={val => {
+                setFieldValue('popupdescription', val)
+              }}
             />
           </Section>,
         ]}
@@ -128,7 +135,7 @@ export default compose(
   withFormik({
     displayName: 'FormSubmit',
     mapPropsToValues: data => data.properties.properties,
-    handleSubmit: (props, { props: { history } }) =>
-      onSubmit(props, { history }),
+    handleSubmit: (props, { props: { mode, onSubmitFn, properties } }) =>
+      onSubmit(props, { mode, onSubmitFn, properties }),
   }),
 )(FormProperties)
