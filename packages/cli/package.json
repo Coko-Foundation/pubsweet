@@ -35,7 +35,6 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "devDependencies": {
-    "@pubsweet/starter": "git+https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git",
     "jest": "^23.5.0",
     "jest-environment-db": "^2.0.0",
     "nsp": "^2.8.1"

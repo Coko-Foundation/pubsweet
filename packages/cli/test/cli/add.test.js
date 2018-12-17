@@ -1,4 +1,5 @@
-jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
+const childProcess = require('child_process')
+
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')
   fs.writeJsonSync = jest.fn()
@@ -11,28 +12,21 @@ jest.mock('../../src/package-management/helpers/', () => {
   return helpers
 })
 
-const path = require('path')
+childProcess.spawnSync = jest.fn()
+const spawnSpy = require('child_process').spawnSync
+
 const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
 const runAdd = require('../../cli/add')
 
-const spawnSpy = require('child_process').spawnSync
 const readPkgSpy = require('../../src/package-management/helpers/')
   .getDepsFromPackageJson
 
 const writeSpy = fs.writeJsonSync
 
 describe('add', () => {
-  beforeAll(() => {
-    process.chdir(path.dirname(require.resolve('@pubsweet/starter')))
-  })
-
   beforeEach(() => {
     jest.clearAllMocks()
-  })
-
-  afterAll(() => {
-    process.chdir(path.join(__dirname, '..', '..'))
   })
 
   it('requires a component', async () => {
