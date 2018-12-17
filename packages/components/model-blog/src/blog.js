@@ -1,6 +1,6 @@
 const { model: Collection } = require('@pubsweet/model-collection')
 
-class ExtendedCollection extends Collection {
+class Blog extends Collection {
   static get schema() {
     return {
       properties: {
@@ -13,5 +13,5 @@ class ExtendedCollection extends Collection {
   }
 }
 
-ExtendedCollection.type = 'collection'
-module.exports = ExtendedCollection
+Blog.type = 'collection'
+module.exports = Blog

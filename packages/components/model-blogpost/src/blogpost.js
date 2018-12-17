@@ -1,6 +1,6 @@
 const { model: Fragment } = require('@pubsweet/model-fragment')
 
-class ExtendedFragment extends Fragment {
+class Blogpost extends Fragment {
   static get schema() {
     return {
       properties: {
@@ -16,5 +16,5 @@ class ExtendedFragment extends Fragment {
   }
 }
 
-ExtendedFragment.type = 'fragment'
-module.exports = ExtendedFragment
+Blogpost.type = 'fragment'
+module.exports = Blogpost

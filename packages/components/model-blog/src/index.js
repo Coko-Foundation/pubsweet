@@ -1,6 +1,6 @@
 module.exports = {
   ...require('./graphql'),
   modelName: 'Collection',
-  model: require('./extended_collection'),
+  model: require('./blog'),
   extending: '@pubsweet/model-collection',
 }
