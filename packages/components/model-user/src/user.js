@@ -33,7 +33,10 @@ class User extends BaseModel {
         username: { type: 'string', pattern: '^[a-zA-Z0-9]+' },
         passwordHash: { type: 'string' },
         passwordResetToken: { type: ['string', 'null'] },
-        passwordResetTimestamp: { type: ['integer', 'null'] },
+        passwordResetTimestamp: {
+          type: ['string', 'object'],
+          format: 'date-time',
+        },
         created: { type: ['string', 'object'], format: 'date-time' },
         fragments: {
           type: 'array',
