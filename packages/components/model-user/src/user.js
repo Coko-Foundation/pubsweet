@@ -34,10 +34,9 @@ class User extends BaseModel {
         passwordHash: { type: 'string' },
         passwordResetToken: { type: ['string', 'null'] },
         passwordResetTimestamp: {
-          type: ['string', 'object'],
+          type: ['string', 'object', 'null'],
           format: 'date-time',
         },
-        created: { type: ['string', 'object'], format: 'date-time' },
         fragments: {
           type: 'array',
           items: { type: 'string', format: 'uuid' },
