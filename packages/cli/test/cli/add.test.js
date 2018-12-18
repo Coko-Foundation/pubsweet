@@ -1,4 +1,4 @@
-const childProcess = require('child_process')
+jest.mock('child_process', () => ({ spawnSync: jest.fn() }))
 
 jest.mock('fs-extra', () => {
   const fs = require.requireActual('fs-extra')
@@ -6,13 +6,13 @@ jest.mock('fs-extra', () => {
   fs.ensureFileSync = jest.fn()
   return fs
 })
+
 jest.mock('../../src/package-management/helpers/', () => {
   const helpers = require.requireActual('../../src/package-management/helpers/')
   helpers.getDepsFromPackageJson = jest.fn()
   return helpers
 })
 
-childProcess.spawnSync = jest.fn()
 const spawnSpy = require('child_process').spawnSync
 
 const fs = require('fs-extra')
