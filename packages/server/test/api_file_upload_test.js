@@ -3,7 +3,7 @@ const path = require('path')
 const api = require('./helpers/api')
 const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 function fileName(name) {
   return path.join(__dirname, 'fixtures', name)

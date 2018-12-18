@@ -1,13 +1,21 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'extended-data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["${pathToComponent}"]}}`
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "@pubsweet/model-collection",
+    "${pathToComponent}"
+  ]
+}}`
 global.NODE_CONFIG = null
 delete require.cache[require.resolve('config')]
 const { model: Manuscript } = require('./extended-data-model-component')
-const { User } = require('pubsweet-server')
+const { model: User } = require('@pubsweet/model-user')
 const fixtures = require('pubsweet-server/test/fixtures/fixtures')
-const authentication = require('pubsweet-server/src/authentication')
+const authentication = require('@pubsweet/model-user/src/authentication')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 

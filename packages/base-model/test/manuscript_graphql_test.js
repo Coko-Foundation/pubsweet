@@ -1,13 +1,19 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["${pathToComponent}"]}}`
-
-const { User } = require('pubsweet-server')
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "${pathToComponent}"
+  ]
+}}`
+const { model: User } = require('@pubsweet/model-user')
 const { dbCleaner, api } = require('pubsweet-server/test')
 
 const fixtures = require('pubsweet-server/test/fixtures/fixtures')
-const authentication = require('pubsweet-server/src/authentication')
+const authentication = require('@pubsweet/model-user/src/authentication')
 
 const { model: Manuscript } = require('./data-model-component')
 

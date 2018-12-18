@@ -1,7 +1,14 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["${pathToComponent}"]}}`
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "${pathToComponent}"
+  ]
+}}`
 
 const { model: Manuscript } = require('./data-model-component')
 const { dbCleaner } = require('pubsweet-server/test')
@@ -11,11 +18,11 @@ describe('Manuscript', () => {
     await dbCleaner()
   })
 
-  it('has upated set when created', async () => {
+  it('has updated set when created', async () => {
     const manuscript = await new Manuscript({ title: 'Test' }).save()
     expect(manuscript.title).toEqual('Test')
     const now = new Date().toISOString()
-    expect(manuscript.updated).toHaveLength(now.length)
+    expect(manuscript.updated.toISOString()).toHaveLength(now.length)
   })
 
   it('can be saved and found and deleted', async () => {
@@ -57,18 +64,7 @@ describe('Manuscript', () => {
     }
 
     await expect(createNonValidManuscript()).rejects.toThrow(
-      "mumbo is not a property in Manuscript's schema",
-    )
-  })
-
-  it('throws if an unknown column is assigned', async () => {
-    function createNonValidManuscript() {
-      const manuscript = new Manuscript()
-      manuscript.titldee = 'x'
-    }
-
-    expect(createNonValidManuscript).toThrow(
-      "titldee is not a property in Manuscript's schema",
+      'mumbo: is an invalid additional property',
     )
   })
 

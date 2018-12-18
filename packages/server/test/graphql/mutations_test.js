@@ -1,9 +1,9 @@
-const User = require('../../src/models/User')
-const Team = require('../../src/models/Team')
+const { model: User } = require('@pubsweet/model-user')
+const { model: Team } = require('@pubsweet/model-team')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
 const api = require('../helpers/api')
-const authentication = require('../../src/authentication')
+const authentication = require('@pubsweet/model-user/src/authentication')
 
 describe('GraphQL core mutations', () => {
   let token

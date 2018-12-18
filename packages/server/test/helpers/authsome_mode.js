@@ -36,7 +36,7 @@ async function teamPermissions(user, operation, object, context) {
 
 function unauthenticatedUser(operation, object) {
   // Public/unauthenticated users can GET /collections, filtered by 'published'
-  if (operation === 'GET' && object && object.path === '/collections') {
+  if (operation === 'GET' && object && object.path === '/api/collections') {
     return {
       filter: collections =>
         collections.filter(collection => collection.published),
@@ -47,7 +47,7 @@ function unauthenticatedUser(operation, object) {
   if (
     operation === 'GET' &&
     object &&
-    object.path === '/collections/:id/fragments'
+    object.path === '/api/collections/:id/fragments'
   ) {
     return {
       filter: fragments => fragments.filter(fragment => fragment.published),
@@ -77,12 +77,16 @@ function unauthenticatedUser(operation, object) {
     }
   }
 
+  if (operation === 'POST' && object && object.path === '/api/users') {
+    return true
+  }
+
   return false
 }
 
 async function authenticatedUser(user, operation, object, context) {
   // Allow the authenticated user to POST a collection (but not with a 'filtered' property)
-  if (operation === 'POST' && object.path === '/collections') {
+  if (operation === 'POST' && object.path === '/api/collections') {
     return {
       filter: collection => omit(collection, 'filtered'),
     }
@@ -107,7 +111,7 @@ async function authenticatedUser(user, operation, object, context) {
 
   // Allow owners of a collection to GET its teams, e.g.
   // GET /api/collections/1/teams
-  if (operation === 'GET' && get(object, 'path') === '/teams') {
+  if (operation === 'GET' && get(object, 'path') === '/api/teams') {
     const collectionId = get(object, 'params.collectionId')
     if (collectionId) {
       const collection = await context.models.Collection.find(collectionId)
@@ -133,7 +137,7 @@ async function authenticatedUser(user, operation, object, context) {
   // Advanced example
   // Allow authenticated users to create a team based around a collection
   // if they are one of the owners of this collection
-  if (get(object, 'path') === '/teams' && operation === 'POST') {
+  if (get(object, 'path') === '/api/teams' && operation === 'POST') {
     if (operation === 'POST') {
       if (get(object, 'team.object.type') === 'collection') {
         const collectionId = get(object, 'team.object.id')

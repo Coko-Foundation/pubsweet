@@ -5,7 +5,7 @@ const config = require('config')
 // override config for test
 config['pubsweet-server'].sse = true
 
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')

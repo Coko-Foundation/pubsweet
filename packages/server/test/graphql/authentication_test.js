@@ -1,10 +1,10 @@
 const { omit } = require('lodash')
 const authsome = require('../../src/helpers/authsome')
-const User = require('../../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
 const api = require('../helpers/api')
-const authentication = require('../../src/authentication')
+const authentication = require('@pubsweet/model-user/src/authentication')
 
 describe('GraphQL authentication', () => {
   let token
@@ -99,7 +99,7 @@ describe('GraphQL authentication', () => {
         errors: [
           {
             message:
-              'Object not found: user with id 123e4567-e89b-12d3-a456-426655440000',
+              'Object not found: User with id 123e4567-e89b-12d3-a456-426655440000',
           },
         ],
       })

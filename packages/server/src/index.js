@@ -1,17 +1,17 @@
-// Core models
-module.exports.Fragment = require('./models/Fragment')
-module.exports.Team = require('./models/Team')
-module.exports.User = require('./models/User')
-module.exports.Collection = require('./models/Collection')
-
-// Authorization helpers
-module.exports.helpers = require('./helpers/authorization')
-
 module.exports.db = require('./db')
+
 module.exports.pubsubManager = require('./graphql/pubsub')
 module.exports.NotFoundError = require('./errors/NotFoundError')
+module.exports.ConflictError = require('./errors/ConflictError')
+module.exports.ValidationError = require('./errors/ValidationError')
+module.exports.AuthorizationError = require('./errors/AuthorizationError')
 
 module.exports.startServer = require('./start-server')
+
+// Authorization helpers
+// All models are loaded here, be careful with circular dependencies
+module.exports.helpers = require('./helpers/authorization')
+module.exports.util = require('./routes/util')
 
 // Jobs queue
 module.exports.jobs = {
