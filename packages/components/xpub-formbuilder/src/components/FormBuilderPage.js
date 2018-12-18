@@ -18,14 +18,14 @@ const updateForm = gql`
 `
 
 const updateFormElements = gql`
-  mutation($form: String!, $id: ID!) {
-    deleteFormElements(form: $form, id: $id)
+  mutation($form: String!, $formId: String!) {
+    updateFormElements(form: $form, formId: $formId)
   }
 `
 
-const deleteFormElements = gql`
+const deleteFormElement = gql`
   mutation($formId: ID!, $elementId: ID!) {
-    deleteFormElements(formId: $formId, elementId: $elementId)
+    deleteFormElement(formId: $formId, elementId: $elementId)
   }
 `
 
@@ -52,8 +52,8 @@ export default compose(
   graphql(deleteForms, {
     name: 'deleteForms',
   }),
-  graphql(deleteFormElements, {
-    name: 'deleteFormElements',
+  graphql(deleteFormElement, {
+    name: 'deleteFormElement',
   }),
   graphql(updateForm, {
     name: 'updateForm',
@@ -66,8 +66,19 @@ export default compose(
   }),
   withLoader(),
   withProps(props => ({
-    // deleteForm: form => dispatch(deleteForms(form)),
-    // deleteElement: (form, element) => dispatch(deleteElements(form, element)),
+    deleteForm: formId =>
+      props.deleteForms({
+        variables: {
+          formId,
+        },
+      }),
+    deleteElement: (formId, elementId) =>
+      props.deleteFormElement({
+        variables: {
+          formId,
+          elementId,
+        },
+      }),
     updateForm: (form, formProperties) =>
       props.updateForm({
         variables: {
@@ -81,8 +92,13 @@ export default compose(
           form: JSON.stringify(formProperties),
         },
       }),
-    // updateElements: (form, formElements) =>
-    //   dispatch(updateElements(form, formElements)),
+    updateElements: (form, formElements) =>
+      props.updateFormElements({
+        variables: {
+          form: JSON.stringify(formElements),
+          formId: form.id,
+        },
+      }),
   })),
   withState('properties', 'onChangeProperties', ({ getForms }) => ({
     type: 'form',

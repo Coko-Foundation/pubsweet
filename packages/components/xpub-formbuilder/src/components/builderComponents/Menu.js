@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, TextField, ValidatedField } from '@pubsweet/ui'
+import { Menu, TextField, ValidatedFieldFormik } from '@pubsweet/ui'
 import { compose, withState, withHandlers } from 'recompose'
 import { Legend, Section } from '../styles'
 
@@ -15,7 +15,7 @@ const ValidationMenu = input => (
       input.selectelement !== 'required' && (
         <Section>
           <Legend space>FIeld Min / Max</Legend>
-          <ValidatedField
+          <ValidatedFieldFormik
             component={TextField}
             name={`validateValue.${input.selectelement}`}
           />

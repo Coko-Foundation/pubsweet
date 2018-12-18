@@ -88,7 +88,7 @@ const BuilderElement = ({ elements, changeProperties, deleteElement, form }) =>
           value.component
         })
       </Action>
-      <Action onClick={() => deleteElement(form, value)}>x</Action>
+      <Action onClick={() => deleteElement(form.id, value.id)}>x</Action>
     </Element>
   ))
 

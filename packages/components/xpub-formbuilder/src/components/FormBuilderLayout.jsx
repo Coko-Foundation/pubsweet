@@ -47,7 +47,7 @@ const FormBuilderLayout = ({
           key={`delete-form-${key}`}
           onClick={e => {
             e.preventDefault()
-            deleteForm(form)
+            deleteForm(form.id)
           }}
         >
           x
