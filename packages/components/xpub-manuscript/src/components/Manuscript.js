@@ -28,7 +28,7 @@ const Manuscript = ({
   history,
   updateManuscript,
 }) =>
-  file.fileType ===
+  file.mimeType ===
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
     <ManuScript>
       <Wax

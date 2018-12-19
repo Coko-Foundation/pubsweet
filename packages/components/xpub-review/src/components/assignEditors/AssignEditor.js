@@ -1,6 +1,7 @@
 import React from 'react'
+import config from 'config'
 import { compose, withProps } from 'recompose'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, get } from 'lodash'
 import { Menu } from '@pubsweet/ui'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
@@ -131,8 +132,9 @@ export default compose(
       (manuscript.teams || []).find(team => team.teamType === teamRole) || {}
 
     const members = team.members || []
+    const teamName = get(config, `authsome.teams.${teamRole}.name`)
     return {
-      teamName: team.name,
+      teamName,
       options: optionUsers,
       value: members.length > 0 ? members[0].id : undefined,
     }

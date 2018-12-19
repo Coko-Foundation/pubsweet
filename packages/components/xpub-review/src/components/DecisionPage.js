@@ -71,6 +71,7 @@ const fragmentFields = `
   status
   meta {
     title
+    source
     abstract
     declarations {
       openData
@@ -298,8 +299,8 @@ export default compose(
         comments: [],
         recommendation: null,
       },
-    isInitialValid: ({ review }) => {
-      const rv = review.find(review => review.isDecision) || {}
+    isInitialValid: ({ manuscript }) => {
+      const rv = manuscript.reviews.find(review => review.isDecision) || {}
       const isRecommendation = rv.recommendation != null
       const isCommented = getCommentContent(rv, 'note') !== ''
 

@@ -85,6 +85,7 @@ const fragmentFields = `
   status
   meta {
     title
+    source
     abstract
     declarations {
       openData
@@ -236,9 +237,14 @@ export default compose(
         manuscript.reviews.find(
           review => review.user.id === currentUser.id && !review.isDecision,
         ) || {},
-      status: manuscript.teams
-        .find(team => team.teamType === 'reviewerEditor')
-        .status.find(status => status.user === currentUser.id).status,
+      status: (
+        (
+          (
+            manuscript.teams.find(team => team.teamType === 'reviewerEditor') ||
+            {}
+          ).status || []
+        ).find(status => status.user === currentUser.id) || {}
+      ).status,
       updateReview: (review, file) => {
         ;(review.comments || []).map(comment => {
           delete comment.files

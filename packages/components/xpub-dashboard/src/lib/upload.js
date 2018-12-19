@@ -41,6 +41,7 @@ const createManuscriptPromise = (file, client, currentUser) => ({
   }
 
   const source = response.converted
+
   const title = extractTitle(source) || generateTitle(file.name)
 
   const manuscript = {
@@ -54,7 +55,7 @@ const createManuscriptPromise = (file, client, currentUser) => ({
     ],
     meta: {
       title,
-      source: source ? 'true' : 'false',
+      source: source === true ? 'false' : source,
     },
   }
 
