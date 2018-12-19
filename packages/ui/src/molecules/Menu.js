@@ -342,21 +342,22 @@ const DefaultOpener = ({
     {(!selected || selected.length === 0) && (
       <Placeholder>{placeholder}</Placeholder>
     )}
-    {selected && !Array.isArray(selected) && (
-      <Value>{optionLabel(selected)}</Value>
-    )}
-    {selected && selected.length > 0 && Array.isArray(selected) && (
-      <Value>
-        {selected.map(select => (
-          <MultipleValue
-            onClick={event => selectOneOfMultiElement(event, select)}
-          >
-            {optionLabel(select)}
-            <Button onClick={event => removeSelect(event, select)}>x</Button>
-          </MultipleValue>
-        ))}
-      </Value>
-    )}
+    {selected &&
+      !Array.isArray(selected) && <Value>{optionLabel(selected)}</Value>}
+    {selected &&
+      selected.length > 0 &&
+      Array.isArray(selected) && (
+        <Value>
+          {selected.map(select => (
+            <MultipleValue
+              onClick={event => selectOneOfMultiElement(event, select)}
+            >
+              {optionLabel(select)}
+              <Button onClick={event => removeSelect(event, select)}>x</Button>
+            </MultipleValue>
+          ))}
+        </Value>
+      )}
     <ArrowContainer>
       <Arrow open={open}>▼</Arrow>
     </ArrowContainer>

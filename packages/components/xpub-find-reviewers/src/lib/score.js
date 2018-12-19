@@ -4,13 +4,13 @@ const normalizeScore = papers => {
   const maxScore = papers.reduce((output, paper) => output + paper.score, 0)
 
   return item => {
-    item.scorePercent = (item.score / maxScore) * 100
+    item.scorePercent = item.score / maxScore * 100
   }
 }
 
 const normalizeDocScore = maxScore => doc => {
   doc._source.score = doc._score
-  doc._source.scorePercent = (doc._score / maxScore) * 100
+  doc._source.scorePercent = doc._score / maxScore * 100
 }
 
 export const calculatePaperScores = data => {

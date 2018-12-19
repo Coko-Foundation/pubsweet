@@ -16,8 +16,7 @@ describe('Fragments API', () => {
         new User(fixtures.adminUser).save(),
         new User(fixtures.user).save(),
       ]),
-    ),
-  )
+    ))
 
   describe('admin', () => {
     it('should have an initially empty list of fragments', async () => {

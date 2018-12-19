@@ -42,9 +42,8 @@ const ValidatedFieldComponent = ({ component: Component }) => ({
 
       {/* live region DOM node must be initially present for changes to be announced */}
       <MessageWrapper role="alert">
-        {meta.touched && meta.error && (
-          <ErrorMessage>{meta.error}</ErrorMessage>
-        )}
+        {meta.touched &&
+          meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
       </MessageWrapper>
     </div>
   )

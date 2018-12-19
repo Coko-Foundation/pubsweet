@@ -12,8 +12,7 @@ describe('Teams API - admin', () => {
   beforeEach(() =>
     cleanDB()
       .then(() => new User(fixtures.adminUser).save())
-      .then(() => new User(fixtures.user).save()),
-  )
+      .then(() => new User(fixtures.user).save()))
 
   it('should display an initially empty list of teams if user is admin', () =>
     api.users.authenticate
@@ -77,8 +76,7 @@ describe('Teams API - per collection or fragment', () => {
           })
           .then(() => {
             team = cloneDeep(teamFixture)
-          }),
-      )
+          }))
 
       it('can display an initially empty list of teams', () =>
         api.users.authenticate
@@ -161,8 +159,7 @@ describe('Teams API - per collection or fragment', () => {
           })
           .then(collection => {
             collectionId = collection.id
-          }),
-      )
+          }))
 
       it('should not see teams in a collection', () =>
         api.users.authenticate

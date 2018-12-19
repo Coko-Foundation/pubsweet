@@ -19,7 +19,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TeamsManager)
+export default connect(mapStateToProps, mapDispatchToProps)(TeamsManager)
