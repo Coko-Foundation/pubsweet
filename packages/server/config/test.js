@@ -33,4 +33,12 @@ module.exports = {
       },
     },
   },
+  pubsweet: {
+    components: [
+      '@pubsweet/model-user',
+      '@pubsweet/model-team',
+      '@pubsweet/model-blog',
+      '@pubsweet/model-blogpost',
+    ],
+  },
 }

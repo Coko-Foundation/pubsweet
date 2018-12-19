@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui-toolkit",
-  "version": "1.2.0",
+  "version": "2.0.3",
   "description": "Helper functions and reusable blocks for use with @pubsweet/ui",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "dependencies": {
     "color": "^3.0.0",
     "lodash": "^4.17.4",
-    "styled-components": "^3.2.5"
+    "styled-components": "^4.1.1"
   },
   "author": "Adam Hyde",
   "license": "MIT",

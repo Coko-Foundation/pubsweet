@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@1.0.5...pubsweet-component-password-reset-backend@1.0.6) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-password-reset-backend
+
+
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@1.0.4...pubsweet-component-password-reset-backend@1.0.5) (2018-09-25)
 

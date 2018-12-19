@@ -1,15 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import {
-  unescape,
-  groupBy,
-  isArray,
-  get,
-  set,
-  cloneDeep,
-  uniqueId,
-} from 'lodash'
+import { unescape, groupBy, isArray, get, set, cloneDeep } from 'lodash'
 import { FieldArray } from 'formik'
 import ReactHtmlParser from 'react-html-parser'
 import * as elements from '@pubsweet/ui'
@@ -298,8 +290,9 @@ export default ({
           ) : (
             <ElementComponentArray
               elementsComponentArray={element}
-              key={uniqueId('element_array')}
               onChange={onChange}
+              setFieldValue={setFieldValue}
+              setTouched={setTouched}
             />
           ),
       )}

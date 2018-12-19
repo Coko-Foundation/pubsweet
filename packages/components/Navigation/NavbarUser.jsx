@@ -13,7 +13,8 @@ const NavbarUser = props => (
       {`${props.user.admin ? '(admin)' : ''}`}
     </NavItem>
     <NavItem className="logout" onClick={props.onLogoutClick}>
-      <i className="fa fa-power-off" />&nbsp;Logout
+      <i className="fa fa-power-off" />
+      &nbsp;Logout
     </NavItem>
   </Nav>
 )

@@ -1,7 +1,14 @@
 const path = require('path')
 
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
-process.env.NODE_CONFIG = `{"pubsweet":{"components":["${pathToComponent}"]}}`
+process.env.NODE_CONFIG = `{"pubsweet":{
+  "components":[
+    "@pubsweet/model-user",
+    "@pubsweet/model-team",
+    "@pubsweet/model-fragment",
+    "${pathToComponent}"
+  ]
+}}`
 
 const { model: Manuscript } = require('./data-model-component')
 const { dbCleaner } = require('pubsweet-server/test')
@@ -9,6 +16,13 @@ const { dbCleaner } = require('pubsweet-server/test')
 describe('Manuscript', () => {
   beforeEach(async () => {
     await dbCleaner()
+  })
+
+  it('has updated set when created', async () => {
+    const manuscript = await new Manuscript({ title: 'Test' }).save()
+    expect(manuscript.title).toEqual('Test')
+    const now = new Date().toISOString()
+    expect(manuscript.updated.toISOString()).toHaveLength(now.length)
   })
 
   it('can be saved and found and deleted', async () => {
@@ -50,18 +64,7 @@ describe('Manuscript', () => {
     }
 
     await expect(createNonValidManuscript()).rejects.toThrow(
-      "mumbo is not a property in Manuscript's schema",
-    )
-  })
-
-  it('throws if an unknown column is assigned', async () => {
-    function createNonValidManuscript() {
-      const manuscript = new Manuscript()
-      manuscript.titldee = 'x'
-    }
-
-    expect(createNonValidManuscript).toThrow(
-      "titldee is not a property in Manuscript's schema",
+      'mumbo: is an invalid additional property',
     )
   })
 
@@ -79,5 +82,25 @@ describe('Manuscript', () => {
     const id = '1838d074-fb9d-4ed6-9c63-39e6bc7429ce'
     const manuscript = await new Manuscript({ id }).save()
     expect(manuscript.id).toEqual(id)
+  })
+
+  it('old data does not overwrite new', async () => {
+    // T0 - start time (A == B)
+    let manuscriptA = await new Manuscript({ title: 'T0' }).save()
+    expect(manuscriptA.title).toEqual('T0')
+    const manuscriptB = await Manuscript.find(manuscriptA.id)
+
+    // T1 - B is changed (not saved)
+    manuscriptB.title = 'T1'
+
+    // T2 - A is changed and saved
+    manuscriptA.title = 'T2'
+    manuscriptA = await manuscriptA.save()
+    expect(manuscriptA.updated).not.toBe(manuscriptB.updated)
+
+    // T4 - now save B, this should throw as `updated` is older than current.
+    await expect(manuscriptB.save()).rejects.toThrow(
+      'Data Integrity Error property updated',
+    )
   })
 })

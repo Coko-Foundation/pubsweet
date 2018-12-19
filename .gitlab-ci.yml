@@ -6,6 +6,7 @@ variables:
 
 stages:
   - build
+  - audit
   - test
   - review
   - staging
@@ -25,6 +26,17 @@ build:
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
     - docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
 
+audit: 
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  except:
+    - tags
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - cd ${HOME}
+    - yarn audit
+  
 lint:style:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
@@ -34,7 +46,7 @@ lint:style:
     GIT_STRATEGY: none
   script:
     - cd ${HOME}
-    - npm run lint:style
+    - yarn lint:style
 
 lint:js:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
@@ -45,7 +57,7 @@ lint:js:
     GIT_STRATEGY: none
   script:
     - cd ${HOME}
-    - npm run lint:js
+    - yarn lint:js
 
 lint:json:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
@@ -56,7 +68,7 @@ lint:json:
     GIT_STRATEGY: none
   script:
     - cd ${HOME}
-    - npm run lint:json
+    - yarn lint:json
   
 lint:commits:
    image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA

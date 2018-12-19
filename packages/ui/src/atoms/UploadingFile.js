@@ -50,7 +50,7 @@ const Uploading = styled.div`
   width: calc(${th('gridUnit')} * 30);
 `
 
-const Uploaded = Uploading.extend`
+const Uploaded = styled(Uploading)`
   &::before,
   &::after {
     cursor: pointer;

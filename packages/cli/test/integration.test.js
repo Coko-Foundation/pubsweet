@@ -20,7 +20,7 @@ const nodeConfig = {
     mode: 'authsome/src/modes/blog',
   },
   pubsweet: {
-    components: [],
+    components: ['@pubsweet/model-user'],
   },
   'pubsweet-client': {
     theme: 'PepperTheme',
@@ -36,7 +36,7 @@ const setupDbOptions = {
 /* These tests run "pubsweet" commands as child processes with no mocking */
 /* They perform a full installation cycle, including multiple yarn commands */
 
-describe('CLI: integration test', () => {
+describe.skip('CLI: integration test', () => {
   afterAll(() => fs.removeSync(appPath))
 
   describe('new', () => {

@@ -31,7 +31,6 @@ describe('Teams API - admin', () => {
         expect(team.teamType).toEqual('teamContributors')
         expect(team.members).toEqual([])
       }))
-
   it('should allow retrieval of a team by id', () =>
     new Team(teamFixture)
       .save()

@@ -1,7 +1,7 @@
 const STATUS = require('http-status-codes')
 const EventSource = require('eventsource')
 
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
@@ -40,6 +40,7 @@ describe('API SSE disabled', () => {
     })
 
     await expect(eventPromise).rejects.toEqual({
+      message: 'Not Found',
       type: 'error',
       status: STATUS.NOT_FOUND,
     })

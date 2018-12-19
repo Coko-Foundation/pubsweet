@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-submit",
-  "version": "4.2.0",
+  "version": "5.0.3",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^8.8.0",
-    "@pubsweet/ui-toolkit": "^1.2.0",
+    "@pubsweet/ui": "^9.0.3",
+    "@pubsweet/ui-toolkit": "^2.0.3",
     "apollo-client-preset": "^1.0.8",
     "grid-styled": "^4.1.0",
     "react-dropzone": "^4.3.0",
@@ -21,11 +21,11 @@
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
     "striptags": "^3.1.0",
-    "styled-components": "^3.2.5",
-    "xpub-connect": "^1.1.4",
-    "xpub-edit": "^2.5.2",
+    "styled-components": "^4.1.1",
+    "xpub-connect": "^2.0.3",
+    "xpub-edit": "^2.5.6",
     "xpub-journal": "^0.0.6",
-    "xpub-selectors": "^0.2.0",
+    "xpub-selectors": "^0.2.4",
     "xpub-upload": "^0.0.7",
     "xpub-validators": "^0.0.6"
   },
@@ -35,12 +35,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "faker": "^4.1.0",
-    "file-loader": "^1.1.5",
-    "react-styleguidist": "^6.2.5",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "faker": "^4.1.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",

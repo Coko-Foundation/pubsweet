@@ -1,4 +1,7 @@
-const { startServer, jobs: { connectToJobQueue } } = require('../../src')
+const {
+  startServer,
+  jobs: { connectToJobQueue },
+} = require('../../src')
 
 const someHandler = async job => {
   expect(job.data.param).toEqual('theThing')

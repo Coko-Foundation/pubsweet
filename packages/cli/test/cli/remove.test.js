@@ -11,7 +11,6 @@ jest.mock('../../src/package-management/helpers/', () => {
   return helpers
 })
 
-const path = require('path')
 const fs = require('fs-extra')
 const { getMockArgv } = require('../helpers/')
 const runRemove = require('../../cli/remove')
@@ -22,17 +21,9 @@ const readPkgSpy = require('../../src/package-management/helpers/')
 
 const writeSpy = fs.writeJsonSync
 
-describe.skip('remove', () => {
-  beforeAll(() => {
-    process.chdir(path.dirname(require.resolve('@pubsweet/starter')))
-  })
-
+describe('remove', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-  })
-
-  afterAll(() => {
-    process.chdir(path.join(__dirname, '..', '..'))
   })
 
   it('requires a component', async () => {

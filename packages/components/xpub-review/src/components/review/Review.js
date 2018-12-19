@@ -10,7 +10,7 @@ const Note = styled.div`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th('lineHeightBaseSmall')};
 `
-const Recommendation = Note.extend``
+const Recommendation = styled(Note)``
 const Content = styled.div``
 
 // Due to migration to new Data Model

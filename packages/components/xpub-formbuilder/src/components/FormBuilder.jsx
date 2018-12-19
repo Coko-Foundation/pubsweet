@@ -30,7 +30,7 @@ const Status = styled.div`
   display: inline-flex;
 `
 
-const StatusIdle = Status.extend.attrs({
+const StatusIdle = styled(Status).attrs({
   children: () => <StatusIcon>plus_circle</StatusIcon>,
 })``
 
@@ -84,9 +84,8 @@ const BuilderElement = ({ elements, changeProperties, deleteElement, form }) =>
           })
         }
       >
-        <ElementTitle dangerouslySetInnerHTML={createMarkup(value.title)} /> ({
-          value.component
-        })
+        <ElementTitle dangerouslySetInnerHTML={createMarkup(value.title)} /> (
+        {value.component})
       </Action>
       <Action onClick={() => deleteElement(form.id, value.id)}>x</Action>
     </Element>
@@ -119,16 +118,15 @@ const FormBuilder = ({
 }) => (
   <Page>
     <AddButtonElement addElements={addElements} form={form} id="add-element" />
-    {elements &&
-      elements.length > 0 && (
-        <BuilderElement
-          changeProperties={changeProperties}
-          deleteElement={deleteElement}
-          elements={elements}
-          form={form}
-          id="builder-element"
-        />
-      )}
+    {elements && elements.length > 0 && (
+      <BuilderElement
+        changeProperties={changeProperties}
+        deleteElement={deleteElement}
+        elements={elements}
+        form={form}
+        id="builder-element"
+      />
+    )}
   </Page>
 )
 

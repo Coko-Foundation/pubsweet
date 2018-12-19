@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       name: 'Core-components',
-      components: '../components/!(xpub-*)/**/*.{jsx,js}',
+      components: '../components/!(xpub-*|model-*)/**/*.{jsx,js}',
     },
     {
       name: 'Xpub-components',
@@ -38,7 +38,6 @@ module.exports = {
     '**/components/**/*.config.js',
     '**/components/*-server/**',
     '**/components/MediumDraft/CustomImageSideButton.jsx',
-    '**/components/FormGroup/**',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],
@@ -54,5 +53,4 @@ module.exports = {
     transforms: { dangerousTaggedTemplateString: true },
   },
   pagePerSection: true,
-  require: ['babel-polyfill'],
 }

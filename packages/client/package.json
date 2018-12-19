@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "6.1.0",
+  "version": "8.0.0",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -13,8 +13,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^8.8.0",
-    "@pubsweet/ui-toolkit": "^1.2.0",
+    "@pubsweet/ui": "^9.0.3",
+    "@pubsweet/ui-toolkit": "^2.0.3",
     "apollo-cache-inmemory": "^1.2.4",
     "apollo-client": "^2.3.4",
     "apollo-link": "^1.2.1",
@@ -42,8 +42,8 @@
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "styled-components": "^3.2.5",
-    "styled-normalize": "^3.0.1",
+    "styled-components": "^4.1.1",
+    "styled-normalize": "^8.0.4",
     "subscriptions-transport-ws": "^0.9.12"
   },
   "devDependencies": {

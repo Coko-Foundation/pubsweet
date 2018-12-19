@@ -28,6 +28,6 @@ describe('<Root/>', () => {
         theme={themeObj}
       />,
     )
-    expect.assertions(1)
+    expect.assertions(2)
   })
 })

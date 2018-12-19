@@ -73,8 +73,8 @@ module.exports = app => {
         if (!forms.children) {
           forms.children = [content.children]
         } else if (forms.children.some(e => e.id === elementId)) {
-          const children = forms.children.map(
-            value => (value.id === elementId ? content.children : value),
+          const children = forms.children.map(value =>
+            value.id === elementId ? content.children : value,
           )
           forms.children = children
         } else {

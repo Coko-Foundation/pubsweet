@@ -39,7 +39,7 @@ const startServer = async (app = express()) => {
     server = undefined
     await stopJobQueue()
     await wait(500)
-    httpServer.originalClose(cb)
+    return httpServer.originalClose(cb)
   }
 
   server = httpServer

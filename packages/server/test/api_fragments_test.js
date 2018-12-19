@@ -1,6 +1,6 @@
 const STATUS = require('http-status-codes')
 
-const User = require('../src/models/User')
+const { model: User } = require('@pubsweet/model-user')
 
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')

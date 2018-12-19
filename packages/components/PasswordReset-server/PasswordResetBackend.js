@@ -69,7 +69,7 @@ const PasswordResetBackend = app => {
         user.passwordResetToken = crypto
           .randomBytes(config.get('password-reset.token-length'))
           .toString('hex')
-        user.passwordResetTimestamp = Number(moment())
+        user.passwordResetTimestamp = moment().format()
 
         await user.save()
 
