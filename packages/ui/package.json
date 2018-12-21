@@ -19,7 +19,7 @@
     "babel-jest": "^21.2.0",
     "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-adapter-react-16": "^1.6.0",
     "invariant": "^2.2.3",
     "lodash": "^4.17.4",
     "moment": "^2.22.1",

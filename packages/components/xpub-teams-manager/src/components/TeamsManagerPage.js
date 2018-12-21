@@ -4,6 +4,7 @@ import config from 'config'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 
+import queries from './graphql/queries'
 import TeamsManager from './TeamsManager'
 
 const deleteTeamMutation = gql`
@@ -63,46 +64,8 @@ const updateTeamMutation = gql`
   }
 `
 
-const fragmentFields = `
-  id
-  created
-  meta {
-    title
-  }
-`
-
-const query = gql`
-  query {
-    teams {
-      id
-      teamType
-      name
-      object {
-        objectId
-        objectType
-      }
-      members {
-        id
-      }
-    }
-
-    users {
-      id
-      username
-      admin
-    }
-
-    manuscripts {
-      ${fragmentFields}
-      manuscriptVersions {
-        ${fragmentFields}
-      }
-    }
-  }
-`
-
 export default compose(
-  graphql(query, {
+  graphql(queries.teamManager, {
     props: ({ data }) => {
       const userOptions = ((data || {}).users || []).map(user => ({
         value: user.id,
@@ -163,13 +126,13 @@ export default compose(
     },
     options: {
       update: (proxy, { data: { deleteTeam } }) => {
-        const data = proxy.readQuery({ query })
+        const data = proxy.readQuery({ query: queries.teamManager })
         const teamsIndex = data.teams.findIndex(
           team => team.id === deleteTeam.id,
         )
         if (teamsIndex > -1) {
           data.teams.splice(teamsIndex, 1)
-          proxy.writeQuery({ query, data })
+          proxy.writeQuery({ query: queries.teamManager, data })
         }
       },
     },
@@ -190,9 +153,9 @@ export default compose(
     },
     options: {
       update: (proxy, { data: { createTeam } }) => {
-        const data = proxy.readQuery({ query })
+        const data = proxy.readQuery({ query: queries.teamManager })
         data.teams.push(createTeam)
-        proxy.writeQuery({ query, data })
+        proxy.writeQuery({ query: queries.teamManager, data })
       },
     },
   }),

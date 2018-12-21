@@ -1,15 +1,13 @@
 import React from 'react'
+import faker from 'faker'
 import { MemoryRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { combineReducers } from 'redux'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import { MockedProvider } from 'react-apollo/test-utils'
+import gql from 'graphql-tag'
+
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import { ThemeProvider } from 'styled-components'
-
-import { reducers } from 'pubsweet-client'
 
 import FormBuilderPage from '../components/FormBuilderPage'
 
@@ -52,45 +50,43 @@ jest.mock('config', () => {
   }
 })
 
-// Mock out the API
-jest.mock('pubsweet-client/src/helpers/api', () => ({
-  get: jest.fn(url => {
-    // Whatever the request is, return an empty array
-    const response = []
-    return new Promise(resolve => resolve(response))
-  }),
-}))
-
-jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock(
+  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
+  () => 'AuthorizeWithGraphQL',
+)
 
 global.window.localStorage = {
   getItem: jest.fn(() => 'tok123'),
 }
 
-const reducer = combineReducers(reducers)
+const query = gql`
+  query {
+    currentUser {
+      id
+      username
+      admin
+    }
 
-const middlewares = [thunk]
-const mockStore = () =>
-  configureMockStore(middlewares)(actions =>
-    Object.assign(
-      actions.reduce(reducer, {
-        currentUser: { isAuthenticated: true },
-      }),
-      (actions.users || []).reduce(reducer, {
-        users: {
-          users: [
-            { id: '1', username: 'author' },
-            { id: '2', username: 'managing Editor' },
-          ],
-        },
-      }),
-      { forms: { forms: { forms } } },
-    ),
-  )
+    getForms
+  }
+`
+
+const mocks = [
+  {
+    request: {
+      query,
+    },
+    result: {
+      data: {
+        currentUser: { id: faker.random.uuid(), username: 'test', admin: true },
+        getForms: forms,
+      },
+    },
+  },
+]
 
 describe('FormBuilderPage', () => {
   it('runs', done => {
-    const store = mockStore()
     const page = mount(
       <MemoryRouter>
         <ThemeProvider
@@ -99,20 +95,20 @@ describe('FormBuilderPage', () => {
             colorSecondary: '#E7E7E7',
           }}
         >
-          <Provider store={store}>
+          <MockedProvider addTypename={false} mocks={mocks}>
             <FormBuilderPage />
-          </Provider>
+          </MockedProvider>
         </ThemeProvider>
       </MemoryRouter>,
     )
 
-    setImmediate(() => {
+    setTimeout(() => {
       page.update()
       expect(page.find('#builder-element').children()).toHaveLength(
         forms[0].children.length,
       )
       expect(page.find(FormProperties)).toHaveLength(1)
       done()
-    })
+    }, 1000)
   })
 })

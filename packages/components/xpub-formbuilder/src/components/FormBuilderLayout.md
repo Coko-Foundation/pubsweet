@@ -38,7 +38,7 @@ initialState = {
 }
 ;<div style={{ position: 'relative', height: '100%' }}>
   <FormBuilderLayout
-    forms={forms}
+    getForms={forms}
     activeTab={state.activeTab}
     properties={state.properties}
     changeProperties={value => {

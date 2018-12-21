@@ -1,13 +1,11 @@
 import React from 'react'
+import faker from 'faker'
 import Enzyme, { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { MockedProvider } from 'react-apollo/test-utils'
 import Adapter from 'enzyme-adapter-react-16'
 import { ThemeProvider } from 'styled-components'
-import { combineReducers } from 'redux'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import { reducers } from 'pubsweet-client'
+import gql from 'graphql-tag'
 
 import FormProperties from '../components/FormProperties'
 import FormBuilderLayout from '../components/FormBuilderLayout'
@@ -43,31 +41,35 @@ jest.mock('config', () => ({
   },
 }))
 
-const reducer = combineReducers(reducers)
+const query = gql`
+  query {
+    currentUser {
+      id
+      username
+      admin
+    }
 
-const middlewares = [thunk]
-const mockStore = () =>
-  configureMockStore(middlewares)(actions =>
-    Object.assign(
-      actions.reduce(reducer, {
-        currentUser: { isAuthenticated: true },
-      }),
-      (actions.users || []).reduce(reducer, {
-        users: {
-          users: [
-            { id: '1', username: 'author' },
-            { id: '2', username: 'managing Editor' },
-          ],
-        },
-      }),
-      { forms: { forms: { noforms } } },
-    ),
-  )
+    getForms
+  }
+`
+
+const mocks = [
+  {
+    request: {
+      query,
+    },
+    result: {
+      data: {
+        currentUser: { id: faker.random.uuid(), username: 'test', admin: true },
+        getForms: noforms,
+      },
+    },
+  },
+]
 
 describe('FormBuilder Layout', () => {
-  const makeWrapper = (props = {}) => {
-    const store = mockStore()
-    return mount(
+  const makeWrapper = (props = {}) =>
+    mount(
       <MemoryRouter>
         <ThemeProvider
           theme={{
@@ -75,13 +77,12 @@ describe('FormBuilder Layout', () => {
             colorSecondary: '#E7E7E7',
           }}
         >
-          <Provider store={store}>
+          <MockedProvider addTypename={false} mocks={mocks}>
             <FormBuilderLayout {...props} />
-          </Provider>
+          </MockedProvider>
         </ThemeProvider>
       </MemoryRouter>,
     )
-  }
 
   it('shows just the create form tab', () => {
     const formbuilder = makeWrapper({
@@ -117,7 +118,7 @@ describe('FormBuilder Layout', () => {
         properties: testforms[0],
       },
       activeTab: 0,
-      forms: testforms,
+      getForms: testforms,
     })
 
     expect(
