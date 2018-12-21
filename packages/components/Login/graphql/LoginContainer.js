@@ -13,7 +13,7 @@ const getNextUrl = () => {
 
 const localStorage = window.localStorage || undefined
 
-const handleSubmit = (values, { props, setSubmitting, setErrors, ...rest }) =>
+const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
   props
     .loginUser({
       variables: { input: values },
