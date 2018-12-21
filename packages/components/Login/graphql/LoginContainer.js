@@ -43,7 +43,6 @@ const enhancedFormik = withFormik({
 })(Login)
 
 export default compose(
-  // graphql(queries.currentUser),
   graphql(mutations.LOGIN_USER, {
     name: 'loginUser',
   }),

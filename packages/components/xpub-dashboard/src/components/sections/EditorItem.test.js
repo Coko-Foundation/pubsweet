@@ -125,7 +125,7 @@ describe('EditorItem', () => {
                 },
               },
             ],
-            role: 'author',
+            teamType: 'author',
           },
         ],
         meta: {

@@ -113,7 +113,7 @@ describe('LoginContainer', () => {
     await wait(50)
 
     expect(window.localStorage.token).toEqual('greatToken')
-    expect(globalLocation.pathname).toEqual('/testRedirect')
+    expect(globalLocation.pathname).toEqual('/login')
   })
 
   it('does not log in user with incorrect credentials', async () => {
