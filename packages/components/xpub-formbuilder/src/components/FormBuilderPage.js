@@ -104,10 +104,8 @@ export default compose(
     type: 'form',
     properties: getForms[0] || {},
   })),
-  withState(
-    'activeTab',
-    'onChangeTab',
-    ({ getForms, activeTab }) => (getForms.length === 0 ? 'new' : 0),
+  withState('activeTab', 'onChangeTab', ({ getForms, activeTab }) =>
+    getForms.length === 0 ? 'new' : 0,
   ),
   withHandlers({
     changeProperties: ({

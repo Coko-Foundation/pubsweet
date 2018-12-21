@@ -33,7 +33,8 @@ describe('admin api', () => {
           collection.addFragment(fragment)
           return collection.save()
         })
-      }))
+      }),
+  )
 
   afterEach(cleanDB)
 

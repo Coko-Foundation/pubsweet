@@ -30,13 +30,9 @@ const Navigation = ({ actions, currentUser }) => (
         </LinkContainer>
       </Authorize>
     </Nav>
-    {currentUser &&
-      currentUser.isAuthenticated && (
-        <NavbarUser
-          onLogoutClick={actions.logoutUser}
-          user={currentUser.user}
-        />
-      )}
+    {currentUser && currentUser.isAuthenticated && (
+      <NavbarUser onLogoutClick={actions.logoutUser} user={currentUser.user} />
+    )}
   </Navbar>
 )
 

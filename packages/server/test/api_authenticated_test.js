@@ -40,10 +40,12 @@ describe('authenticated api', () => {
         [otherUser.id],
         collection,
         fixtures.contributorTeam,
-      ))
+      ),
+    )
 
     afterEach(() =>
-      setTeamForCollection([], collection, fixtures.contributorTeam))
+      setTeamForCollection([], collection, fixtures.contributorTeam),
+    )
 
     it('creates a fragment in a protected collection', () =>
       api.users.authenticate
@@ -141,7 +143,8 @@ describe('authenticated api', () => {
 
   describe('a non-admin user with a reader role', () => {
     beforeEach(() =>
-      setTeamForCollection([otherUser.id], collection, fixtures.readerTeam))
+      setTeamForCollection([otherUser.id], collection, fixtures.readerTeam),
+    )
 
     afterEach(() => setTeamForCollection([], collection, fixtures.readerTeam))
 

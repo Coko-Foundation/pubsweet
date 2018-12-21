@@ -11,16 +11,15 @@ const ValidationMenu = input => (
         input.onSelectElement(value)
       }}
     />
-    {input.selectelement &&
-      input.selectelement !== 'required' && (
-        <Section>
-          <Legend space>FIeld Min / Max</Legend>
-          <ValidatedFieldFormik
-            component={TextField}
-            name={`validateValue.${input.selectelement}`}
-          />
-        </Section>
-      )}
+    {input.selectelement && input.selectelement !== 'required' && (
+      <Section>
+        <Legend space>FIeld Min / Max</Legend>
+        <ValidatedFieldFormik
+          component={TextField}
+          name={`validateValue.${input.selectelement}`}
+        />
+      </Section>
+    )}
   </div>
 )
 

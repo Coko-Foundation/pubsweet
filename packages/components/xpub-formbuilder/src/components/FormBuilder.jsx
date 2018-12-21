@@ -118,16 +118,15 @@ const FormBuilder = ({
 }) => (
   <Page>
     <AddButtonElement addElements={addElements} form={form} id="add-element" />
-    {elements &&
-      elements.length > 0 && (
-        <BuilderElement
-          changeProperties={changeProperties}
-          deleteElement={deleteElement}
-          elements={elements}
-          form={form}
-          id="builder-element"
-        />
-      )}
+    {elements && elements.length > 0 && (
+      <BuilderElement
+        changeProperties={changeProperties}
+        deleteElement={deleteElement}
+        elements={elements}
+        form={form}
+        id="builder-element"
+      />
+    )}
   </Page>
 )
 
