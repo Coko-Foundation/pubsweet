@@ -1,6 +1,5 @@
 const BaseModel = require('@pubsweet/base-model')
 const bcrypt = require('bcrypt')
-// const omit = require('lodash/omit')
 const pick = require('lodash/pick')
 const config = require('config')
 
@@ -83,7 +82,7 @@ class User extends BaseModel {
   }
 
   static async isUniq(user) {
-    const { ConflictError } = require('pubsweet-server')
+    const { ConflictError } = require('pubsweet-server/src/errors')
 
     let result
 

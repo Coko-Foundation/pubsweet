@@ -13,8 +13,6 @@ const passport = require('passport')
 const graphqlApi = require('./graphql/routes')
 const index = require('./routes/index')
 const api = require('./routes/api')
-const models = require('./models')
-const authsome = require('./helpers/authsome')
 const logger = require('@pubsweet/logger')
 const sse = require('pubsweet-sse')
 
@@ -24,6 +22,9 @@ const registerComponents = require('./register-components')
 
 const configureApp = app => {
   global.versions = {}
+
+  const models = require('@pubsweet/models')
+  const authsome = require('./helpers/authsome')
 
   app.locals.models = models
 

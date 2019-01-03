@@ -11,7 +11,7 @@ const authentication = require('./authentication')
 
 const UsersAPI = app => {
   const User = require('./user')
-  const { ValidationError } = require('pubsweet-server')
+  const { ValidationError } = require('pubsweet-server/src/errors')
 
   const {
     util: {

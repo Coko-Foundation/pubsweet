@@ -3,7 +3,7 @@ const Authsome = require('authsome')
 
 const mode = require(config.get('authsome.mode'))
 
-const models = require('../models')
+const models = require('@pubsweet/models')
 
 // be lenient with custom/extended data models based on BaseModel
 // and allow them through to authsome in their entirety. If you use this

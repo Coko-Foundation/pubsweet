@@ -19,8 +19,7 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
 })
 
 const CollectionsAPI = app => {
-  const { Collection, Team } = require('pubsweet-server/src/models')
-  const { model: User } = require('@pubsweet/model-user')
+  const { User, Collection, Team } = require('@pubsweet/models')
 
   // List collections
   app.get('/api/collections', authBearerAndPublic, async (req, res, next) => {
