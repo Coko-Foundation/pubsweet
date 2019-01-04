@@ -23,7 +23,7 @@ const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
       }, 100)
     })
     .catch(e => {
-      if (e.graphQLErrors) {
+      if (e.graphQLErrors.length > 0) {
         setSubmitting(false)
         setErrors(e.graphQLErrors[0].message)
       }
