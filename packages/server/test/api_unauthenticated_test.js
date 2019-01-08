@@ -4,7 +4,7 @@ const api = require('./helpers/api')
 const createBasicCollection = require('./helpers/basic_collection')
 const createFragment = require('./helpers/fragment')
 const cleanDB = require('./helpers/db_cleaner')
-const { Collection } = require('../src/models')
+const { Collection } = require('@pubsweet/models')
 
 describe('unauthenticated/public api', () => {
   let fragment

@@ -1,17 +1,11 @@
 const config = require('config')
 
 const connector = require('./connector')
-const models = require('../models')
 
 const requireRelative = m =>
   require(require.resolve(m, { paths: [process.cwd()] }))
 
-const connectors = {
-  Collection: connector('Collection', models.Collection),
-  Fragment: connector('Fragment', models.Fragment),
-  Team: connector('Team', models.Team),
-  User: connector('User', models.User),
-}
+const connectors = {}
 
 // merge in component connectors, recursively
 function getConnectorsRecursively(componentName) {

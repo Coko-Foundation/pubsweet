@@ -4,11 +4,8 @@ const passport = require('passport')
 const logger = require('@pubsweet/logger')
 const emailer = require('@pubsweet/component-send-email')
 const {
-  User,
-  Team,
-  Fragment,
-  Collection,
-} = require('pubsweet-server/src/models')
+  models: { User, Fragment, Team, Collection },
+} = require('@pubsweet/db-manager')
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
 

@@ -1,5 +1,5 @@
 const logger = require('@pubsweet/logger')
-const db = require('pubsweet-server/src/db')
+const db = require('../db')
 const Umzug = require('umzug')
 const fs = require('fs-extra')
 const path = require('path')

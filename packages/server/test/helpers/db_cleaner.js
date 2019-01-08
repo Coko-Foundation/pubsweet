@@ -1,6 +1,5 @@
-const db = require('../../src/db')
+const { db, migrate } = require('@pubsweet/db-manager')
 const logger = require('@pubsweet/logger')
-const { migrate } = require('@pubsweet/db-manager')
 
 const dbCleaner = async () => {
   await db.raw('DROP SCHEMA public CASCADE;')

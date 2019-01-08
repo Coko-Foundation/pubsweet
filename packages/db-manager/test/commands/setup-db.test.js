@@ -1,5 +1,5 @@
-const { model: User } = require('@pubsweet/model-user')
 const { setupDb } = require('../../src')
+const { User } = require('@pubsweet/models')
 
 describe('setup-db', () => {
   it('creates the database and an admin user', async () => {

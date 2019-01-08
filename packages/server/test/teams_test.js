@@ -1,4 +1,4 @@
-const { Fragment, User, Collection, Team } = require('../src/models')
+const { Fragment, User, Collection, Team } = require('@pubsweet/models')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 

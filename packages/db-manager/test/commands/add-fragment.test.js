@@ -1,6 +1,6 @@
 const { addFragment, createTables } = require('../../src')
-const { model: Fragment } = require('@pubsweet/model-fragment')
-const { model: User } = require('@pubsweet/model-user')
+
+const { Fragment, User } = require('@pubsweet/models')
 
 describe('add-fragment', () => {
   beforeEach(() => createTables(true))

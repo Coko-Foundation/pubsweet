@@ -1,5 +1,6 @@
-const { model: User } = require('@pubsweet/model-user')
 const { addUser, createTables } = require('../../src/')
+
+const { User } = require('@pubsweet/models')
 
 const nonAdminUser = {
   username: 'nonAdminUsername',

@@ -31,7 +31,6 @@
     "http-status-codes": "^1.0.6",
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
-    "knex": "^0.15.2",
     "lodash": "^4.0.0",
     "minimist": "^1.2.0",
     "morgan": "^1.8.2",

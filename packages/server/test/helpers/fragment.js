@@ -1,5 +1,5 @@
 const fixtures = require('../fixtures/fixtures')
-const { Fragment } = require('../../src/models')
+const { Fragment } = require('@pubsweet/models')
 const assign = require('lodash/assign')
 
 module.exports = (opts, collection) => {

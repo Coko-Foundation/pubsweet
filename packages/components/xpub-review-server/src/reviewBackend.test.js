@@ -10,47 +10,49 @@ jest.mock('@pubsweet/component-send-email', () => ({
   send: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
 
-jest.mock('pubsweet-server/src/models', () => ({
-  Team: () => ({
-    find: jest.fn(() => ({
-      id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
-      teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
-      email: 'author@example.org',
-    })),
-    save: () => {},
-  }),
-  User: {
-    find: jest.fn(() => ({
-      id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
-      teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
-      email: 'author@example.org',
+jest.mock('@pubsweet/db-manager', () => ({
+  models: {
+    Team: () => ({
+      find: jest.fn(() => ({
+        id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+        teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+        email: 'author@example.org',
+      })),
       save: () => {},
-    })),
-  },
-  Fragment: {
-    find: jest.fn(() => ({
-      version: 1,
-      owners: [{}],
-      metadata: {
-        title: 'title',
-        abstract: 'abstract',
-      },
-      updateProperties(update) {
-        Object.assign(this, update)
-      },
-      save: () => {},
-    })),
-  },
-  Collection: {
-    find: jest.fn(() => ({
-      updateProperties: () => ({}),
-      reviewers: [
-        {
-          user: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+    }),
+    User: {
+      find: jest.fn(() => ({
+        id: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+        teams: ['08888b14-8b64-420d-898f-b2bdd9fbd57c'],
+        email: 'author@example.org',
+        save: () => {},
+      })),
+    },
+    Fragment: {
+      find: jest.fn(() => ({
+        version: 1,
+        owners: [{}],
+        metadata: {
+          title: 'title',
+          abstract: 'abstract',
         },
-      ],
-      save: () => {},
-    })),
+        updateProperties(update) {
+          Object.assign(this, update)
+        },
+        save: () => {},
+      })),
+    },
+    Collection: {
+      find: jest.fn(() => ({
+        updateProperties: () => ({}),
+        reviewers: [
+          {
+            user: '9555530a-ca92-4e74-a48c-b21ccc109ca8',
+          },
+        ],
+        save: () => {},
+      })),
+    },
   },
 }))
 
