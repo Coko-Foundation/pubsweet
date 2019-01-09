@@ -1,12 +1,12 @@
 {
   "name": "pubsweet-component-xpub-review-backend",
-  "version": "0.2.6-alpha.0",
+  "version": "0.3.0",
   "main": "src",
   "keywords": [],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/component-send-email": "^0.2.4",
+    "@pubsweet/component-send-email": "^0.2.5",
     "config": "^2.0.1",
     "lodash": "^4.17.5",
     "moment": "^2.18.1"

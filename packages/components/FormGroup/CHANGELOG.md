@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.33...pubsweet-component-form-group@2.0.0) (2019-01-09)
+
+
+### Features
+
+* **components:** remove FormGroup component ([507b242](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/507b242))
+
+
+### BREAKING CHANGES
+
+* **components:** FormGroup component has been removed as it is unused. It also uses the old
+model/validation system, that will shortly no longer exist.
+
+
+
+
+
 ## [1.1.33](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-form-group@1.1.32...pubsweet-component-form-group@1.1.33) (2018-12-12)
 
 **Note:** Version bump only for package pubsweet-component-form-group

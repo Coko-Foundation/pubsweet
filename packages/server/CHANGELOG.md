@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.4...pubsweet-server@11.0.0) (2019-01-09)
+
+
+### Bug Fixes
+
+* return originalClose result ([bec775f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bec775f))
+* use correct paths ([e922534](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e922534))
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+* **server:** additionally protect /api/users ([78ae476](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/78ae476))
+* **server:** migrate to use new User and Team models ([313b904](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/313b904))
+
+
+### Code Refactoring
+
+* remove validations from client ([da74777](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/da74777))
+
+
+### Features
+
+* **server:** migrate Collection to a model component ([8380b69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8380b69))
+* **server:** recursively register extending components ([39fbb3e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/39fbb3e))
+* **server:** use BaseModel-based User and Team models ([8646f92](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8646f92))
+* introduce [@pubsweet](https://gitlab.coko.foundation/pubsweet)/models package ([7c1a364](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c1a364))
+* migrate Fragment to use BaseModel ([bd4c7f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4c7f9))
+
+
+### BREAKING CHANGES
+
+* **server:** This adds additional authorization checks for the new user creation REST endpoint.
+Your authsome modes have to be updated.
+* This removes the concept of validations from the client (shared with server).
+Validations in general were removed with the switch to BaseModel, which uses JSON Schema and not Joi
+for data validation. While the value of exposing server side validations on the client was never
+realized, we might add something similar back in the future for exposing JSON Schema on the
+client-side, if a clear use-case is presented.
+* **server:** Collections, currently stored in a NoSQL-like entities table, are now living in
+standalone collections table. Since the constraints from PostgreSQLs columns are stricter than a
+JSON data field, where the collection data currently lives, no automatic migration of data is
+possible - and migrations will have to be done on a app-by-app basis.
+* **server:** User and Team models have moved from `entities` into standalone `users` and `teams`
+tables.
+
+
+
+
+
 ## [10.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@10.1.3...pubsweet-server@10.1.4) (2018-12-12)
 
 **Note:** Version bump only for package pubsweet-server
