@@ -172,6 +172,7 @@
     "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release"
   },
   "resolutions": {
-    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release"
+    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release",
+    "webpack-dev-server": "3.1.11"
   }
 }
