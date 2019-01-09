@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@8.0.0...pubsweet-client@8.0.1) (2019-01-09)
+
+
+### Bug Fixes
+
+* **client:** cover case of no content-type ([71ffb5a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/71ffb5a))
+
+
+
+
+
 # [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@7.0.2...pubsweet-client@8.0.0) (2018-12-12)
 
 
