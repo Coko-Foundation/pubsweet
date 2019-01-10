@@ -6,7 +6,7 @@ const api = require('./helpers/api')
 const setTeamForCollection = require('./helpers/set_team')
 const fixtures = require('./fixtures/fixtures')
 
-const { Fragment, User } = require('../src/models')
+const { Fragment, User } = require('@pubsweet/models')
 
 describe('authenticated api', () => {
   let otherUser

@@ -5,7 +5,8 @@ import endpoint from './endpoint'
 import getToken from './token'
 
 const parse = response => {
-  if (response.headers.get('content-type').includes('application/json')) {
+  const contentType = response.headers.get('content-type')
+  if (contentType && contentType.includes('application/json')) {
     return response.json()
   }
 

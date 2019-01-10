@@ -1,8 +1,7 @@
 const logger = require('@pubsweet/logger')
 
 module.exports = async fragmentData => {
-  const { Fragment } = require('pubsweet-server/src/models')
-  const { model: User } = require('@pubsweet/model-user')
+  const { Fragment, User } = require('@pubsweet/models')
 
   logger.info('Creating fragment')
 

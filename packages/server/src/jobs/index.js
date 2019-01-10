@@ -2,7 +2,7 @@
 const PgBoss = require('pg-boss')
 const logger = require('@pubsweet/logger')
 
-const db = require('../db')
+const db = require('@pubsweet/db-manager/src/db')
 
 const dbAdapter = {
   executeSql: (sql, parameters = []) => {

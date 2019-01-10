@@ -1,5 +1,5 @@
 const logger = require('@pubsweet/logger')
-const db = require('pubsweet-server/src/db')
+const db = require('../db')
 const migrate = require('./migrate')
 
 const createTables = async clobber => {

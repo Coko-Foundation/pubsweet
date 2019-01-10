@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-formbuilder",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Form builder component for Xpub",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -10,8 +10,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^9.0.3",
-    "@pubsweet/ui-toolkit": "^2.0.3",
+    "@pubsweet/ui": "^9.1.0",
+    "@pubsweet/ui-toolkit": "^2.0.4",
     "prop-types": "^15.5.10",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",

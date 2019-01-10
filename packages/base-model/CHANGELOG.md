@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.1.0...@pubsweet/base-model@1.2.0) (2019-01-09)
+
+
+### Bug Fixes
+
+* fix BaseModel's updateProperties and findByField ([418a27a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/418a27a))
+* improve BaseModel's handling of schema and updateProperties ([80f7f3f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/80f7f3f))
+* **base-model:** improve BaseModel's save() ([bf8a438](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bf8a438))
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+* **base-model:** updated is always present ([c9e645d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c9e645d))
+
+
+### Features
+
+* **base-model:** remove proxy for setting model properties ([e9ad1fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e9ad1fa))
+* introduce [@pubsweet](https://gitlab.coko.foundation/pubsweet)/models package ([7c1a364](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c1a364))
+
+
+
+
+
 # [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.0.12...@pubsweet/base-model@1.1.0) (2018-12-12)
 
 

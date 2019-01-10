@@ -34,7 +34,7 @@ class Collection extends BaseModel {
   }
 
   async delete() {
-    const { model: Team } = require('@pubsweet/model-team')
+    const { Team } = require('@pubsweet/models')
     await Team.deleteAssociated(this.type, this.id)
     return super.delete()
   }
@@ -42,7 +42,8 @@ class Collection extends BaseModel {
   // Gets fragments in a collection, supports filtering by function e.g.
   // collection.getFragments({filter: fragment => {Authorize.can(req.user, 'read', fragment)})
   getFragments(options) {
-    const { Fragment } = require('pubsweet-server/src/models')
+    const { Fragment } = require('@pubsweet/models')
+
     options = options || {}
     options.filter = options.filter || (() => Promise.resolve(true))
 
@@ -63,7 +64,8 @@ class Collection extends BaseModel {
   }
 
   addFragment(fragment) {
-    const { Fragment } = require('pubsweet-server/src/models')
+    const { Fragment } = require('@pubsweet/models')
+
     this.fragments = this.fragments.map(fragment => {
       if (typeof fragment === 'object') {
         return fragment
