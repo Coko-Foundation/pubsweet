@@ -87,11 +87,12 @@ describe('users api', () => {
       otherUser = await user.save()
     })
 
-    afterEach(() =>
-      User.find(otherUser.id)
-        .then(user => user.delete())
-        .catch(() => {}),
-    ) // we might have already deleted the user
+    afterEach(
+      () =>
+        User.find(otherUser.id)
+          .then(user => user.delete())
+          .catch(() => {}), // we might have already deleted the user
+    )
 
     it('cant log in with the wrong username', () =>
       api.users.authenticate
