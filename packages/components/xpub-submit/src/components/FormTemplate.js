@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { unescape, groupBy, isArray, get, set, cloneDeep } from 'lodash'
 import { FieldArray } from 'formik'
-import ReactHtmlParser from 'react-html-parser'
 import * as elements from '@pubsweet/ui'
 import * as validators from 'xpub-validators'
 import { AbstractEditor } from 'xpub-edit'
@@ -223,77 +222,76 @@ export default ({
 }) => (
   <Wrapper>
     <Heading1>{form.name}</Heading1>
-    <Intro>
-      <div>
-        {ReactHtmlParser(
-          (form.description || '').replace(
-            '###link###',
-            link(journal, manuscript),
-          ),
-        )}
-      </div>
-    </Intro>
+    <Intro
+      dangerouslySetInnerHTML={createMarkup(
+        (form.description || '').replace(
+          '###link###',
+          link(journal, manuscript),
+        ),
+      )}
+    />
     <form onSubmit={handleSubmit}>
-      {groupElements(form.children || []).map(element =>
-        !isArray(element) ? (
-          <Section
-            cssOverrides={JSON.parse(element.sectioncss || '{}')}
-            key={`${element.id}`}
-          >
-            <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
-            {element.component === 'SupplementaryFiles' && (
-              <Supplementary
-                createFile={createFile}
-                onChange={onChange}
-                uploadFile={uploadFile}
-              />
-            )}
-            {element.component === 'AuthorsInput' && (
-              <AuthorsInput onChange={onChange} />
-            )}
-            {element.component !== 'AuthorsInput' &&
-              element.component !== 'SupplementaryFiles' && (
-                <ValidatedFieldFormik
-                  component={elements[element.component]}
-                  key={`validate-${element.id}`}
-                  name={element.name}
-                  onChange={value => {
-                    const val = value.target ? value.target.value : value
-                    setFieldValue(element.name, val, true)
-                    onChange(val, element.name)
-                  }}
-                  readonly={false}
-                  setTouched={setTouched}
-                  {...rejectProps(element, [
-                    'component',
-                    'title',
-                    'sectioncss',
-                    'parse',
-                    'format',
-                    'validate',
-                    'validateValue',
-                    'description',
-                    'order',
-                  ])}
-                  validate={composeValidate(
-                    element.validate,
-                    element.validateValue,
-                  )}
-                  values={values}
+      {groupElements(form.children || []).map(
+        element =>
+          !isArray(element) ? (
+            <Section
+              cssOverrides={JSON.parse(element.sectioncss || '{}')}
+              key={`${element.id}`}
+            >
+              <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
+              {element.component === 'SupplementaryFiles' && (
+                <Supplementary
+                  createFile={createFile}
+                  onChange={onChange}
+                  uploadFile={uploadFile}
                 />
               )}
-            <SubNote
-              dangerouslySetInnerHTML={createMarkup(element.description)}
+              {element.component === 'AuthorsInput' && (
+                <AuthorsInput onChange={onChange} />
+              )}
+              {element.component !== 'AuthorsInput' &&
+                element.component !== 'SupplementaryFiles' && (
+                  <ValidatedFieldFormik
+                    component={elements[element.component]}
+                    key={`validate-${element.id}`}
+                    name={element.name}
+                    onChange={value => {
+                      const val = value.target ? value.target.value : value
+                      setFieldValue(element.name, val, true)
+                      onChange(val, element.name)
+                    }}
+                    readonly={false}
+                    setTouched={setTouched}
+                    {...rejectProps(element, [
+                      'component',
+                      'title',
+                      'sectioncss',
+                      'parse',
+                      'format',
+                      'validate',
+                      'validateValue',
+                      'description',
+                      'order',
+                    ])}
+                    validate={composeValidate(
+                      element.validate,
+                      element.validateValue,
+                    )}
+                    values={values}
+                  />
+                )}
+              <SubNote
+                dangerouslySetInnerHTML={createMarkup(element.description)}
+              />
+            </Section>
+          ) : (
+            <ElementComponentArray
+              elementsComponentArray={element}
+              onChange={onChange}
+              setFieldValue={setFieldValue}
+              setTouched={setTouched}
             />
-          </Section>
-        ) : (
-          <ElementComponentArray
-            elementsComponentArray={element}
-            onChange={onChange}
-            setFieldValue={setFieldValue}
-            setTouched={setTouched}
-          />
-        ),
+          ),
       )}
 
       {filterFileManuscript(values.files || []).length > 0 ? (
@@ -307,19 +305,21 @@ export default ({
         </Section>
       ) : null}
 
-      {values.status !== 'submitted' && form.haspopup === 'false' && (
-        <Button primary type="submit">
-          Submit your manuscript
-        </Button>
-      )}
-
-      {values.status !== 'submitted' && form.haspopup === 'true' && (
-        <div>
-          <Button onClick={toggleConfirming} primary type="button">
+      {values.status !== 'submitted' &&
+        form.haspopup === 'false' && (
+          <Button primary type="submit">
             Submit your manuscript
           </Button>
-        </div>
-      )}
+        )}
+
+      {values.status !== 'submitted' &&
+        form.haspopup === 'true' && (
+          <div>
+            <Button onClick={toggleConfirming} primary type="button">
+              Submit your manuscript
+            </Button>
+          </div>
+        )}
       {confirming && (
         <ModalWrapper>
           <Confirm form={form} toggleConfirming={toggleConfirming} />
