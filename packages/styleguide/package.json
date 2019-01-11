@@ -13,6 +13,9 @@
     "@pubsweet/default-theme": "^4.0.4",
     "@pubsweet/ui": "^9.1.0",
     "@pubsweet/ui-toolkit": "^2.0.4",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "config": "^3.0.1",
     "faker": "^4.1.0",
     "fs-extra": "^7.0.1",
@@ -33,11 +36,8 @@
     "regenerator-runtime": "^0.13.1",
     "styled-components": "^4.1.1",
     "styled-normalize": "^8.0.4",
-    "xpub-journal": "^0.0.3",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "webpack": "^4.16.0"
+    "webpack": "^4.16.0",
+    "xpub-journal": "^0.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

@@ -12,6 +12,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
+    "@pubsweet/db-manager": "^2.2.0",
     "@pubsweet/logger": "^0.2.9",
     "@pubsweet/model-user": "^2.0.0",
     "@pubsweet/models": "^0.1.0",
@@ -51,8 +52,7 @@
     "subscriptions-transport-ws": "^0.9.12",
     "uuid": "^3.0.1",
     "waait": "^1.0.2",
-    "winston": "^2.2.0",
-    "@pubsweet/db-manager": "^2.2.0"
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "eventsource": "^1.0.4",
