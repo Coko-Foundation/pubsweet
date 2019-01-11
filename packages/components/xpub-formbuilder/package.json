@@ -12,12 +12,17 @@
   "dependencies": {
     "@pubsweet/ui": "^9.1.0",
     "@pubsweet/ui-toolkit": "^2.0.4",
+    "passport": "^0.4.0",
     "prop-types": "^15.5.10",
+    "pubsweet-component-ink-frontend": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "styled-components": "^4.1.1"
+    "redux-form": "^8.1.0",
+    "styled-components": "^4.1.1",
+    "xpub-connect": "^2.0.4",
+    "xpub-edit": "^2.5.7"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -28,6 +33,8 @@
     "faker": "^4.1.0"
   },
   "peerDependencies": {
+    "config": "^3.0.1",
+    "lodash": "^4.17.11",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16"
   }

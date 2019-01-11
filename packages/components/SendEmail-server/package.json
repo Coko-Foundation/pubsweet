@@ -13,7 +13,8 @@
     "nodemailer": "^4.4.2"
   },
   "peerDependencies": {
-    "@pubsweet/logger": "^0.0.1"
+    "@pubsweet/logger": "^0.0.1",
+    "config": "^3.0.1"
   },
   "repository": {
     "type": "git",

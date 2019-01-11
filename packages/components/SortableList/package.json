@@ -8,7 +8,9 @@
     "recompose": "^0.26.0"
   },
   "peerDependencies": {
-    "react": ">=15"
+    "lodash": "^4.17.11",
+    "react": ">=15",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "react-dnd-test-backend": "^7.0.0"

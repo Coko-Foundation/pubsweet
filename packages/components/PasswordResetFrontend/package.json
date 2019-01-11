@@ -15,7 +15,8 @@
   },
   "peerDependencies": {
     "pubsweet-client": ">=1.0.0",
-    "react": ">=16"
+    "react": ">=16",
+    "react-router-dom": "^4.3.1"
   },
   "repository": {
     "type": "git",

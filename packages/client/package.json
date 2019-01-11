@@ -22,6 +22,7 @@
     "apollo-link-http": "^1.5.4",
     "apollo-link-ws": "^1.0.8",
     "apollo-upload-client": "^8.0.0",
+    "apollo-utilities": "^1.0.27",
     "authsome": "^0.1.0",
     "config": "^2.0.1",
     "event-source-polyfill": "^0.0.10",
@@ -35,6 +36,7 @@
     "react": "^16.2.0",
     "react-apollo": "^2.1.0",
     "react-redux": "^5.0.2",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "redux": "^3.6.0",
@@ -63,7 +65,7 @@
     "waait": "^1.0.2"
   },
   "peerDependencies": {
-    "pubsweet-server": ">=1.1.0"
+    "pubsweet-server": ">=11.0.0"
   },
   "repository": {
     "type": "git",

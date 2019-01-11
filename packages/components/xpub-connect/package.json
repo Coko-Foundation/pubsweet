@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "@pubsweet/ui-toolkit": "^2.0.4",
+    "pubsweet-client": "^8.0.1",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
