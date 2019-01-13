@@ -9,9 +9,16 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/db-manager": "^2.2.0",
+    "@pubsweet/logger": "^0.2.9",
+    "pubsweet-server": "^11.0.0",
     "knex": "^0.16.3",
+    "lodash": "^4.17.11",
     "objection": "^1.2.3",
-    "pubsweet-server": "^11.0.0"
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "config": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"

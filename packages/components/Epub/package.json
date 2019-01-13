@@ -17,12 +17,8 @@
     "unzipper": "^0.8.9"
   },
   "peerDependencies": {
-    "pubsweet": "^2.2.4",
-    "pubsweet-server": "^7.1.0"
-  },
-  "devDependencies": {
-    "config": "^2.0.1",
-    "jest": "^23.5.0",
-    "lodash": "^4.17.4"
+    "pubsweet": "^3.0.0",
+    "pubsweet-server": "^11.0.0",
+    "config": "^3.0.1"
   }
 }

@@ -20,7 +20,7 @@
     }],
     "global-require": 0,
     "import/no-dynamic-require": 0,
-    "import/no-extraneous-dependencies": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": false }],
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
     "import/prefer-default-export": 0,
@@ -34,5 +34,11 @@
     "react/prop-types": 0,
     "react/require-default-props": 0,
     "sort-keys": 0
-  }
+  },
+  "overrides": [{
+    "files": ["*_test.js", "*.test.js", "*.test.jsx", "**/test/**/*.js"],
+    "rules": {
+      "import/no-extraneous-dependencies": "off"
+    }
+  }]
 }

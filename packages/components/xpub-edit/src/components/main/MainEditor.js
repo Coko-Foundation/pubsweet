@@ -3,20 +3,20 @@ import ConfigurableEditor from '../configurable/ConfigurableEditor'
 
 const MainEditor = props => (
   <ConfigurableEditor
-    undo
-    redo
     bold
-    italic
-    superscript
-    subscript
-    smallcaps
     bulletlist
-    orderedlist
+    createtable
+    insertimage
+    italic
     joinaboveblock
     liftitem
-    createtable
+    orderedlist
+    redo
+    smallcaps
+    subscript
+    superscript
     table
-    insertimage
+    undo
     {...props}
   />
 )
