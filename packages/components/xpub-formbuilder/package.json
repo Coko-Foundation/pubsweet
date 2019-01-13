@@ -19,7 +19,7 @@
     "react-redux": "^5.0.6",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "redux-form": "^8.1.0",
+    "redux-form": "^7.4.2",
     "styled-components": "^4.1.1",
     "xpub-connect": "^2.0.4",
     "xpub-edit": "^2.5.7"
