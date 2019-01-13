@@ -7,7 +7,7 @@ const {
   models: { User, Fragment, Team, Collection },
 } = require('@pubsweet/db-manager')
 const authsome = require('pubsweet-server/src/helpers/authsome')
-const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
+const { AuthorizationError } = require('@pubsweet/errors')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 

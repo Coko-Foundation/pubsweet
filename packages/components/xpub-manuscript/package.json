@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-manuscript",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "license": "MIT",
   "files": [
     "src",
@@ -11,8 +11,8 @@
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
     "wax-prose-mirror": "^0.0.8",
-    "xpub-connect": "^2.0.4",
-    "xpub-selectors": "^0.2.5"
+    "xpub-connect": "^2.0.5",
+    "xpub-selectors": "^0.2.6"
   },
   "peerDependencies": {
     "apollo-client-preset": "^1.0.8",
@@ -32,7 +32,7 @@
     "faker": "^4.1.0",
     "file-loader": "^1.1.5",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^8.0.1",
+    "pubsweet-client": "^8.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",

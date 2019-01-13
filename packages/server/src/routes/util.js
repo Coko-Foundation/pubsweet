@@ -1,6 +1,5 @@
 const _ = require('lodash')
-const AuthorizationError = require('../errors/AuthorizationError')
-const NotFoundError = require('../errors/NotFoundError')
+const { AuthorizationError, NotFoundError } = require('@pubsweet/errors')
 
 const Util = {}
 Util.authorizationError = (username, operation, object) => {
