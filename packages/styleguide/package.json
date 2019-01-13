@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "MIT",
   "files": [
     "src",
@@ -9,10 +9,10 @@
   "main": "src",
   "dependencies": {
     "@elifesciences/elife-theme": "^1.0.0",
-    "@pubsweet/coko-theme": "^5.0.4",
-    "@pubsweet/default-theme": "^4.0.4",
-    "@pubsweet/ui": "^9.1.0",
-    "@pubsweet/ui-toolkit": "^2.0.4",
+    "@pubsweet/coko-theme": "^5.0.5",
+    "@pubsweet/default-theme": "^4.0.5",
+    "@pubsweet/ui": "^9.1.1",
+    "@pubsweet/ui-toolkit": "^2.0.5",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -23,7 +23,7 @@
     "joi": "^14.3.1",
     "joi-browser": "^13.4.0",
     "lodash": "^4.17.5",
-    "pubsweet-client": "^8.0.1",
+    "pubsweet-client": "^8.0.2",
     "react": "^16.2.0",
     "react-apollo": "^2.3.3",
     "react-dom": "^16.2.0",

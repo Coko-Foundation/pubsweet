@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.0.0 (2019-01-13)
+
+
+### Features
+
+* add [@pubsweet](https://gitlab.coko.foundation/pubsweet)/errors ([2969bf6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2969bf6))
+
+
+### BREAKING CHANGES
+
+* If you required errors deeply from pubsweet-server before, i.e.
+`pubsweet-server/src/errors`, this will no longer work, and you need to change your require to
+`@pubsweet/errors`.
+
+
+
+
+
 # [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.1.0...@pubsweet/base-model@1.2.0) (2019-01-09)
 
 

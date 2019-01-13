@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-html",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "PubSweet component that displays the HTML of a fragment",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
