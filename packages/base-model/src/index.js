@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const { Model, transaction } = require('objection')
 const logger = require('@pubsweet/logger')
-const NotFoundError = require('./NotFoundError')
+const { NotFoundError } = require('@pubsweet/errors')
 const db = require('@pubsweet/db-manager/src/db')
 const { merge } = require('lodash')
 const config = require('config')

@@ -17,7 +17,8 @@
     "passport": "^0.4.0",
     "passport-anonymous": "^1.0.1",
     "passport-http-bearer": "^1.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "@pubsweet/errors": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

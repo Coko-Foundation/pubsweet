@@ -52,7 +52,8 @@
     "subscriptions-transport-ws": "^0.9.12",
     "uuid": "^3.0.1",
     "waait": "^1.0.2",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "@pubsweet/errors": "^1.0.0"
   },
   "devDependencies": {
     "eventsource": "^1.0.4",
