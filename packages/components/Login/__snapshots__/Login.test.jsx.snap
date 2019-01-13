@@ -23,11 +23,11 @@ ShallowWrapper {
         </ForwardRef>,
         false,
         <form>
-          <C
+          <FormikConnect(FieldInner)
             component={[Function]}
             name="username"
           />
-          <C
+          <FormikConnect(FieldInner)
             component={[Function]}
             name="password"
           />
@@ -126,11 +126,11 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <C
+            <FormikConnect(FieldInner)
               component={[Function]}
               name="username"
             />,
-            <C
+            <FormikConnect(FieldInner)
               component={[Function]}
               name="password"
             />,
@@ -495,11 +495,11 @@ ShallowWrapper {
           </ForwardRef>,
           false,
           <form>
-            <C
+            <FormikConnect(FieldInner)
               component={[Function]}
               name="username"
             />
-            <C
+            <FormikConnect(FieldInner)
               component={[Function]}
               name="password"
             />
@@ -598,11 +598,11 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <C
+              <FormikConnect(FieldInner)
                 component={[Function]}
                 name="username"
               />,
-              <C
+              <FormikConnect(FieldInner)
                 component={[Function]}
                 name="password"
               />,
