@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [4.0.3-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.2...@pubsweet/styleguide@4.0.3-alpha.0) (2018-12-11)
+## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.1...@pubsweet/styleguide@5.0.2) (2019-01-14)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.0...@pubsweet/styleguide@5.0.1) (2019-01-13)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.3...@pubsweet/styleguide@5.0.0) (2019-01-09)
 
 
 ### Features
@@ -15,6 +31,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **components:** FormGroup component has been removed as it is unused. It also uses the old
 model/validation system, that will shortly no longer exist.
+
+
+
+
+
+## [4.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.2...@pubsweet/styleguide@4.0.3) (2018-12-12)
+
+**Note:** Version bump only for package @pubsweet/styleguide
 
 
 

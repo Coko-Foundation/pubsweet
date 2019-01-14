@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-formbuilder",
-  "version": "1.0.3-alpha.0",
+  "version": "1.0.6",
   "description": "Form builder component for Xpub",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -10,14 +10,19 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^9.0.3-alpha.0",
-    "@pubsweet/ui-toolkit": "^2.0.3-alpha.0",
+    "@pubsweet/ui": "^9.1.2",
+    "@pubsweet/ui-toolkit": "^2.0.6",
+    "passport": "^0.4.0",
     "prop-types": "^15.5.10",
+    "pubsweet-component-ink-frontend": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "styled-components": "^4.1.1"
+    "redux-form": "^7.4.2",
+    "styled-components": "^4.1.1",
+    "xpub-connect": "^2.0.6",
+    "xpub-edit": "^2.5.9"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -25,17 +30,11 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "faker": "^4.1.0",
-    "file-loader": "^1.1.5",
-    "node-sass": "^4.5.3",
-    "react-styleguidist": "^6.2.5",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "faker": "^4.1.0"
   },
   "peerDependencies": {
+    "config": "^3.0.1",
+    "lodash": "^4.17.11",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16"
   }

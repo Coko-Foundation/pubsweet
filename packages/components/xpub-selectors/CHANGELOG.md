@@ -3,7 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.2.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.2.3...xpub-selectors@0.2.4-alpha.0) (2018-12-11)
+## [0.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.2.6...xpub-selectors@0.2.7) (2019-01-14)
+
+**Note:** Version bump only for package xpub-selectors
+
+
+
+
+
+## [0.2.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.2.5...xpub-selectors@0.2.6) (2019-01-13)
+
+**Note:** Version bump only for package xpub-selectors
+
+
+
+
+
+## [0.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.2.4...xpub-selectors@0.2.5) (2019-01-09)
+
+**Note:** Version bump only for package xpub-selectors
+
+
+
+
+
+## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-selectors@0.2.3...xpub-selectors@0.2.4) (2018-12-12)
 
 **Note:** Version bump only for package xpub-selectors
 

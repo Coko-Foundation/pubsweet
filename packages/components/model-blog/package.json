@@ -1,0 +1,17 @@
+{
+  "name": "@pubsweet/model-blog",
+  "version": "0.0.4",
+  "description": "Testing model for pubsweet-starter and pubsweet-server",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Hyde",
+  "license": "MIT",
+  "dependencies": {
+    "@pubsweet/model-collection": "^3.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

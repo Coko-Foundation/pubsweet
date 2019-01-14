@@ -2,10 +2,9 @@ const logger = require('@pubsweet/logger')
 const colors = require('colors/safe')
 const program = require('commander')
 const fs = require('fs-extra')
-const { spawnSync } = require('child_process')
+const { execSync } = require('child_process')
 const path = require('path')
 const crypto = require('crypto')
-const { STARTER_REPO_URL } = require('../src/constants')
 
 const readCommand = async argsOverride => {
   program
@@ -45,13 +44,14 @@ module.exports = async argsOverride => {
     overWrite(appPath)
   }
 
-  spawnSync('git', ['clone', STARTER_REPO_URL, appName], { stdio: 'inherit' })
+  execSync(
+    `git clone https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git --branch release ${appName}`,
+    { stdio: 'inherit' },
+  )
 
   logger.info('Installing app dependencies')
 
-  // TODO: There is an error when using local yarn. Fix it.
-  // const localYarn = path.join(__dirname, '..', 'node_modules', '.bin', 'yarn')
-  spawnSync('yarn', ['install'], {
+  execSync('yarn install', {
     cwd: appPath,
     stdio: 'inherit',
   })
@@ -61,6 +61,5 @@ module.exports = async argsOverride => {
   const secret = crypto.randomBytes(64).toString('hex')
   fs.writeJsonSync(configFilePath, { 'pubsweet-server': { secret } })
   logger.info(`Added secret to ${configFilePath} under pubsweet-server.secret`)
-
   logger.info('Finished generating initial app')
 }

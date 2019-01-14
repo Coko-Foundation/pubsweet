@@ -1,17 +1,18 @@
 {
   "name": "pubsweet-component-ink-backend",
-  "version": "0.2.14",
+  "version": "0.2.18",
   "description": "Backend INK component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "peerDependencies": {
+    "config": ">=3.0.1",
+    "joi": ">=14.3.1",
     "pubsweet-server": ">=1.0.0"
   },
   "dependencies": {
-    "@pubsweet/logger": "^0.2.7",
+    "@pubsweet/logger": "^0.2.11",
     "busboy": "^0.2.13",
-    "config": "^2.0.1",
     "pusher-js": "^4.2.1",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",

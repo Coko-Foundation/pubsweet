@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.22...pubsweet-component-xpub-find-reviewers@0.0.23) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
+
+
+
+
+## [0.0.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.21...pubsweet-component-xpub-find-reviewers@0.0.22) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
+
+
+
+
+## [0.0.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.20...pubsweet-component-xpub-find-reviewers@0.0.21) (2019-01-09)
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
+
+
+
+
+## [0.0.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.19...pubsweet-component-xpub-find-reviewers@0.0.20) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-xpub-find-reviewers
+
+
+
+
+
 <a name="0.0.19"></a>
 ## [0.0.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-find-reviewers@0.0.18...pubsweet-component-xpub-find-reviewers@0.0.19) (2018-06-28)
 

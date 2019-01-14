@@ -37,8 +37,8 @@ module.exports = {
     components: [
       '@pubsweet/model-user',
       '@pubsweet/model-team',
-      path.resolve(__dirname, '..', 'test', 'model-extended-collection'),
-      path.resolve(__dirname, '..', 'test', 'model-extended-fragment'),
+      '@pubsweet/model-blog',
+      '@pubsweet/model-blogpost',
     ],
   },
 }

@@ -3,25 +3,90 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [10.0.3-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@9.10.1-alpha.1...pubsweet-components@10.0.3-alpha.0) (2018-12-11)
+## [12.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.0...pubsweet-components@12.0.1) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-components
 
 
-### Bug Fixes
 
-* highlight js dependency update ([0fb0733](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fb0733))
-* **xpub-edit:** spaces are being eaten on firefox ([8112208](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8112208)), closes [#430](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/430)
+
+
+# [12.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@11.0.0...pubsweet-components@12.0.0) (2019-01-13)
 
 
 ### Features
 
-* **various:** update styled-components ([5c51466](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c51466))
-* **various:** upgrade styled-components ([9b886f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9b886f6))
+* add [@pubsweet](https://gitlab.coko.foundation/pubsweet)/errors ([2969bf6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2969bf6))
 
 
 ### BREAKING CHANGES
 
-* **various:** Replace all styled-components .extend with styled()
-* **various:** Replace styled-components injectGlobal with new createGlobalStyle
+* If you required errors deeply from pubsweet-server before, i.e.
+`pubsweet-server/src/errors`, this will no longer work, and you need to change your require to
+`@pubsweet/errors`.
+
+
+
+
+
+# [11.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.1.0...pubsweet-components@11.0.0) (2019-01-09)
+
+
+### Bug Fixes
+
+* adjust xpub-review-server to use the new BaseModel models ([7f745f0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7f745f0))
+* **model-team:** use correct dependencies ([21552e1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/21552e1))
+* change password reset timestamp generation ([600be3a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/600be3a))
+* various migration related fixes ([2aef24a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2aef24a))
+* **model-user:** change passwordResetTimestamp schema ([e0aafff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e0aafff))
+* **model-user:** omit passwordHash from JSON representation ([c33fbee](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c33fbee))
+* **model-user:** passwordResetTimestamp can be null ([abfc095](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/abfc095))
+* **password-reset-server:** align mailer config with send email ([d1cf251](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d1cf251)), closes [#432](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/432)
+* **server:** additionally protect /api/users ([78ae476](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/78ae476))
+* **xpub-review-server:** use correct requires ([f8fe5d7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f8fe5d7))
+
+
+### Features
+
+* add standalone user model ([240beca](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/240beca))
+* **base-model:** remove proxy for setting model properties ([e9ad1fa](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e9ad1fa))
+* **components:** remove FormGroup component ([507b242](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/507b242))
+* **server:** migrate Collection to a model component ([8380b69](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8380b69))
+* introduce [@pubsweet](https://gitlab.coko.foundation/pubsweet)/models package ([7c1a364](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c1a364))
+* migrate Fragment to use BaseModel ([bd4c7f9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4c7f9))
+* migrate team to BaseModel ([512a562](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/512a562))
+
+
+### BREAKING CHANGES
+
+* **password-reset-server:** Config for mailer is now read from mailer.path, not mailer.transport
+* **server:** This adds additional authorization checks for the new user creation REST endpoint.
+Your authsome modes have to be updated.
+* Previously, passwordResetTimestamp was generated as a number of seconds since
+epoch. In the new user data model, all dates are strings in ISO8601 format. This commit fixes the
+incosistency and makes password reset work again.
+* **server:** Collections, currently stored in a NoSQL-like entities table, are now living in
+standalone collections table. Since the constraints from PostgreSQLs columns are stricter than a
+JSON data field, where the collection data currently lives, no automatic migration of data is
+possible - and migrations will have to be done on a app-by-app basis.
+* **components:** FormGroup component has been removed as it is unused. It also uses the old
+model/validation system, that will shortly no longer exist.
+
+
+
+
+
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@10.0.2...pubsweet-components@10.1.0) (2018-12-12)
+
+
+### Bug Fixes
+
+* **xpub-manuscript:** ensure file is present before accessing properties ([15945d4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/15945d4))
+
+
+### Features
+
+* add email templating component ([4baa6e0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4baa6e0))
 
 
 

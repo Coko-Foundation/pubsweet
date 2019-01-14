@@ -3,7 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.1.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-with-context@0.1.3...xpub-with-context@0.1.4-alpha.0) (2018-12-11)
+## [0.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-with-context@0.1.6...xpub-with-context@0.1.7) (2019-01-14)
+
+**Note:** Version bump only for package xpub-with-context
+
+
+
+
+
+## [0.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-with-context@0.1.5...xpub-with-context@0.1.6) (2019-01-13)
+
+**Note:** Version bump only for package xpub-with-context
+
+
+
+
+
+## [0.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-with-context@0.1.4...xpub-with-context@0.1.5) (2019-01-09)
+
+**Note:** Version bump only for package xpub-with-context
+
+
+
+
+
+## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-with-context@0.1.3...xpub-with-context@0.1.4) (2018-12-12)
 
 **Note:** Version bump only for package xpub-with-context
 

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
-import { Button } from '@pubsweet/ui'
+import Button from '../atoms/Button'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?
@@ -342,22 +342,21 @@ const DefaultOpener = ({
     {(!selected || selected.length === 0) && (
       <Placeholder>{placeholder}</Placeholder>
     )}
-    {selected &&
-      !Array.isArray(selected) && <Value>{optionLabel(selected)}</Value>}
-    {selected &&
-      selected.length > 0 &&
-      Array.isArray(selected) && (
-        <Value>
-          {selected.map(select => (
-            <MultipleValue
-              onClick={event => selectOneOfMultiElement(event, select)}
-            >
-              {optionLabel(select)}
-              <Button onClick={event => removeSelect(event, select)}>x</Button>
-            </MultipleValue>
-          ))}
-        </Value>
-      )}
+    {selected && !Array.isArray(selected) && (
+      <Value>{optionLabel(selected)}</Value>
+    )}
+    {selected && selected.length > 0 && Array.isArray(selected) && (
+      <Value>
+        {selected.map(select => (
+          <MultipleValue
+            onClick={event => selectOneOfMultiElement(event, select)}
+          >
+            {optionLabel(select)}
+            <Button onClick={event => removeSelect(event, select)}>x</Button>
+          </MultipleValue>
+        ))}
+      </Value>
+    )}
     <ArrowContainer>
       <Arrow open={open}>▼</Arrow>
     </ArrowContainer>

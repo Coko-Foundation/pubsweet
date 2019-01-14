@@ -8,7 +8,7 @@ try {
 } catch (err) {
   logger.error(
     'Mailer: The configuration is either invalid or missing. Check here: ' +
-      'https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/packages/SendEmail-server',
+      'https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/SendEmail-server',
   )
   throw err
 }

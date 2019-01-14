@@ -3,12 +3,11 @@ const config = require('config')
 const passport = require('passport')
 const logger = require('@pubsweet/logger')
 const emailer = require('@pubsweet/component-send-email')
-const { model: User } = require('@pubsweet/model-user')
-const Fragment = require('pubsweet-server/src/models/Fragment')
-const Collection = require('pubsweet-server/src/models/Collection')
-const { model: Team } = require('@pubsweet/model-team')
+const {
+  models: { User, Fragment, Team, Collection },
+} = require('@pubsweet/db-manager')
 const authsome = require('pubsweet-server/src/helpers/authsome')
-const AuthorizationError = require('pubsweet-server/src/errors/AuthorizationError')
+const { AuthorizationError } = require('@pubsweet/errors')
 
 const authBearer = passport.authenticate('bearer', { session: false })
 

@@ -1,7 +1,8 @@
 const STATUS = require('http-status-codes')
 const cloneDeep = require('lodash/cloneDeep')
 
-const { Collection, User, Team } = require('../src/models')
+const { Collection, User, Team } = require('@pubsweet/models')
+
 const cleanDB = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 

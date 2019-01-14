@@ -3,23 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [7.0.3-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@6.1.1-alpha.1...pubsweet-client@7.0.3-alpha.0) (2018-12-11)
+## [8.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@8.0.2...pubsweet-client@8.0.3) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [8.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@8.0.1...pubsweet-client@8.0.2) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [8.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@8.0.0...pubsweet-client@8.0.1) (2019-01-09)
 
 
 ### Bug Fixes
 
-* test fixes ([651a697](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/651a697))
-* upgrade styled-normalize ([98f2e4c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/98f2e4c))
+* **client:** cover case of no content-type ([71ffb5a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/71ffb5a))
+
+
+
+
+
+# [8.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@7.0.2...pubsweet-client@8.0.0) (2018-12-12)
 
 
 ### Features
 
-* **pubsweet-client:** upgrade styled-components ([04e9061](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/04e9061))
+* **client:** remove export of validations.js ([1fc94fe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1fc94fe))
 
 
 ### BREAKING CHANGES
 
-* **pubsweet-client:** Replace styled-components injectGlobal with new createGlobalStyle
+* **client:** pubsweet-client no longer exports validations
 
 
 

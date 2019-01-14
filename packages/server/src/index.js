@@ -1,10 +1,4 @@
-module.exports.db = require('./db')
-
 module.exports.pubsubManager = require('./graphql/pubsub')
-module.exports.NotFoundError = require('./errors/NotFoundError')
-module.exports.ConflictError = require('./errors/ConflictError')
-module.exports.ValidationError = require('./errors/ValidationError')
-module.exports.AuthorizationError = require('./errors/AuthorizationError')
 
 module.exports.startServer = require('./start-server')
 

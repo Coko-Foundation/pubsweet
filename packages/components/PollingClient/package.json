@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-polling-client",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A client component that poll the server in order to release the lock of a resource",
   "main": "index.js",
   "repository": {
@@ -16,6 +16,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },

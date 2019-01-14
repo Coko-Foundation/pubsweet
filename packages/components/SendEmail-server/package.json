@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-send-email",
-  "version": "0.2.4",
+  "version": "0.2.7",
   "description": "send email configured for pubsweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
@@ -13,7 +13,8 @@
     "nodemailer": "^4.4.2"
   },
   "peerDependencies": {
-    "@pubsweet/logger": "^0.0.1"
+    "@pubsweet/logger": "^0.0.1",
+    "config": "^3.0.1"
   },
   "repository": {
     "type": "git",

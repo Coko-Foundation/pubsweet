@@ -3,9 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.6.4-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.1-alpha.1...pubsweet-component-xpub-manuscript@0.6.4-alpha.0) (2018-12-11)
+## [0.6.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.6...pubsweet-component-xpub-manuscript@0.6.7) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+
+
+
+
+## [0.6.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.5...pubsweet-component-xpub-manuscript@0.6.6) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+
+
+
+
+## [0.6.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.4...pubsweet-component-xpub-manuscript@0.6.5) (2019-01-09)
+
+**Note:** Version bump only for package pubsweet-component-xpub-manuscript
+
+
+
+
+
+## [0.6.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.3...pubsweet-component-xpub-manuscript@0.6.4) (2018-12-12)
+
+
+### Bug Fixes
+
+* **xpub-manuscript:** ensure file is present before accessing properties ([15945d4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/15945d4))
 
 
 

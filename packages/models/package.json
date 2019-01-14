@@ -1,0 +1,21 @@
+{
+  "name": "@pubsweet/models",
+  "version": "0.1.2",
+  "description": "A simple package that brings models together",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Hyde",
+  "license": "MIT",
+  "dependencies": {
+    "objection": "^1.2.3",
+    "pubsweet-server": "^12.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "config": "^3.0.1"
+  }
+}

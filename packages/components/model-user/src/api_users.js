@@ -11,7 +11,7 @@ const authentication = require('./authentication')
 
 const UsersAPI = app => {
   const User = require('./user')
-  const { ValidationError } = require('pubsweet-server')
+  const { ValidationError } = require('@pubsweet/errors')
 
   const {
     util: {
@@ -56,8 +56,16 @@ const UsersAPI = app => {
   // Create a user
   app.post('/api/users', async (req, res, next) => {
     try {
-      let user = new User(req.body)
+      // TODO: Remove this in favor of checking in authsome
       if (req.body.admin) throw new ValidationError('invalid property: admin')
+
+      const properties = await applyPermissionFilter({
+        req,
+        target: req.route,
+        filterable: req.body,
+      })
+
+      let user = new User(properties)
 
       user = await user.save()
       res.status(STATUS.CREATED).json(user)

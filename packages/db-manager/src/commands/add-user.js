@@ -1,7 +1,6 @@
 const logger = require('@pubsweet/logger')
-const { Collection } = require('pubsweet-server')
+const { Collection, User } = require('@pubsweet/models')
 const { validateUser } = require('../validations')
-const { model: User } = require('@pubsweet/model-user')
 
 const addAdminOwnerToAllCollections = async user => {
   logger.info('Adding admin owner to collections')

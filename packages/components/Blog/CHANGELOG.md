@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.8...pubsweet-component-blog@1.0.9) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-component-blog
+
+
+
+
+
+## [1.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.7...pubsweet-component-blog@1.0.8) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-component-blog
+
+
+
+
+
+## [1.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.6...pubsweet-component-blog@1.0.7) (2019-01-09)
+
+**Note:** Version bump only for package pubsweet-component-blog
+
+
+
+
+
+## [1.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.5...pubsweet-component-blog@1.0.6) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-blog
+
+
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-blog@1.0.4...pubsweet-component-blog@1.0.5) (2018-07-02)
 

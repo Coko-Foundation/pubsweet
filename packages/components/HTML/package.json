@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-html",
-  "version": "0.2.7",
+  "version": "0.2.11",
   "description": "PubSweet component that displays the HTML of a fragment",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -8,7 +8,8 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "styled-components": "^4.1.3"
   },
   "peerDependencies": {
     "pubsweet-client": ">=1.0.0",

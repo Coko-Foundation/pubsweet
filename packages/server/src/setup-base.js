@@ -2,7 +2,7 @@ const logger = require('@pubsweet/logger')
 
 class Setup {
   static async setup(user, collection) {
-    const { Collection, User } = require('pubsweet-server/src/models')
+    const { Collection, User } = require('@pubsweet/models')
 
     logger.info('Starting setup')
 

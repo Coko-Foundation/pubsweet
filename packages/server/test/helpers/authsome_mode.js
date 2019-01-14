@@ -77,6 +77,10 @@ function unauthenticatedUser(operation, object) {
     }
   }
 
+  if (operation === 'POST' && object && object.path === '/api/users') {
+    return true
+  }
+
   return false
 }
 

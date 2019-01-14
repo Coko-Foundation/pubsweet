@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@1.0.0...pubsweet-component-xpub-review-backend@1.0.1) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-component-xpub-review-backend
+
+
+
+
+
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.3.0...pubsweet-component-xpub-review-backend@1.0.0) (2019-01-13)
+
+
+### Features
+
+* add [@pubsweet](https://gitlab.coko.foundation/pubsweet)/errors ([2969bf6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2969bf6))
+
+
+### BREAKING CHANGES
+
+* If you required errors deeply from pubsweet-server before, i.e.
+`pubsweet-server/src/errors`, this will no longer work, and you need to change your require to
+`@pubsweet/errors`.
+
+
+
+
+
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.6-alpha.0...pubsweet-component-xpub-review-backend@0.3.0) (2019-01-09)
+
+
+### Bug Fixes
+
+* **xpub-review-server:** use correct requires ([f8fe5d7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f8fe5d7))
+
+
+### Features
+
+* introduce [@pubsweet](https://gitlab.coko.foundation/pubsweet)/models package ([7c1a364](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c1a364))
+
+
+
+
+
 ## [0.2.6-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@0.2.5...pubsweet-component-xpub-review-backend@0.2.6-alpha.0) (2018-11-23)
 
 

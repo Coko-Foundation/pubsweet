@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@2.0.1...pubsweet-component-password-reset-backend@2.0.2) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-component-password-reset-backend
+
+
+
+
+
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@2.0.0...pubsweet-component-password-reset-backend@2.0.1) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-component-password-reset-backend
+
+
+
+
+
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@1.0.6...pubsweet-component-password-reset-backend@2.0.0) (2019-01-09)
+
+
+### Bug Fixes
+
+* change password reset timestamp generation ([600be3a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/600be3a))
+* **password-reset-server:** align mailer config with send email ([d1cf251](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d1cf251)), closes [#432](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/432)
+
+
+### BREAKING CHANGES
+
+* **password-reset-server:** Config for mailer is now read from mailer.path, not mailer.transport
+* Previously, passwordResetTimestamp was generated as a number of seconds since
+epoch. In the new user data model, all dates are strings in ISO8601 format. This commit fixes the
+incosistency and makes password reset work again.
+
+
+
+
+
+## [1.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@1.0.5...pubsweet-component-password-reset-backend@1.0.6) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-password-reset-backend
+
+
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-backend@1.0.4...pubsweet-component-password-reset-backend@1.0.5) (2018-09-25)
 

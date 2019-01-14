@@ -6,8 +6,7 @@ const api = require('./helpers/api')
 const setTeamForCollection = require('./helpers/set_team')
 const fixtures = require('./fixtures/fixtures')
 
-const Fragment = require('../src/models/Fragment')
-const { model: User } = require('@pubsweet/model-user')
+const { Fragment, User } = require('@pubsweet/models')
 
 describe('authenticated api', () => {
   let otherUser
@@ -102,7 +101,6 @@ describe('authenticated api', () => {
       let fragment
 
       beforeEach(async () => {
-        const Fragment = require('../src/models/Fragment')
         fragment = new Fragment(fixtures.fragment)
         fragment.setOwners([user.id])
         await fragment.save()

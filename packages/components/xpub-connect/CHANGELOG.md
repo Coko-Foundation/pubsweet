@@ -3,7 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.0.3-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.2...xpub-connect@2.0.3-alpha.0) (2018-12-11)
+## [2.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.5...xpub-connect@2.0.6) (2019-01-14)
+
+**Note:** Version bump only for package xpub-connect
+
+
+
+
+
+## [2.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.4...xpub-connect@2.0.5) (2019-01-13)
+
+**Note:** Version bump only for package xpub-connect
+
+
+
+
+
+## [2.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.3...xpub-connect@2.0.4) (2019-01-09)
+
+**Note:** Version bump only for package xpub-connect
+
+
+
+
+
+## [2.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.2...xpub-connect@2.0.3) (2018-12-12)
 
 **Note:** Version bump only for package xpub-connect
 

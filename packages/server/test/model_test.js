@@ -1,5 +1,5 @@
 const STATUS = require('http-status-codes')
-const { Fragment, Collection } = require('../src/models')
+const { Fragment, Collection } = require('@pubsweet/models')
 const { model: User } = require('@pubsweet/model-user')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
@@ -57,16 +57,8 @@ describe('Model', () => {
     expect.hasAssertions()
     return fragment.save().catch(err => {
       expect(err.name).toEqual('ValidationError')
-      expect(err.message).toEqual(
-        'child "fragmentType" fails because ["fragmentType" must be one of [blogpost]], child "path" fails because ["path" is required]',
-      )
+      expect(err.message).toEqual('fragmentType: should be equal to constant')
     })
-  })
-
-  it('accepts a fragment with alternative fragmentType', () => {
-    const fragment = new Fragment({ fragmentType: 'file', path: '/one/two' })
-
-    return fragment.save()
   })
 
   // TODO re-enable test once we switch to proper uniqueness constraints

@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.6...pubsweet-component-sortable-list@0.1.7) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet-component-sortable-list
+
+
+
+
+
+## [0.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.5...pubsweet-component-sortable-list@0.1.6) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet-component-sortable-list
+
+
+
+
+
+## [0.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.4...pubsweet-component-sortable-list@0.1.5) (2019-01-09)
+
+**Note:** Version bump only for package pubsweet-component-sortable-list
+
+
+
+
+
+## [0.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.3...pubsweet-component-sortable-list@0.1.4) (2018-12-12)
+
+**Note:** Version bump only for package pubsweet-component-sortable-list
+
+
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.2...pubsweet-component-sortable-list@0.1.3) (2018-04-03)
 

@@ -1,4 +1,4 @@
-const db = require('pubsweet-server/src/db')
+const db = require('../db')
 const logger = require('@pubsweet/logger')
 
 module.exports = async () => {

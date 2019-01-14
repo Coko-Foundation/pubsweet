@@ -2,7 +2,7 @@
 const PgBoss = require('pg-boss')
 const logger = require('@pubsweet/logger')
 
-const db = require('../db')
+const db = require('@pubsweet/db-manager/src/db')
 
 const dbAdapter = {
   executeSql: (sql, parameters = []) => {
@@ -25,7 +25,26 @@ const dbAdapter = {
 
 const boss = new PgBoss({ db: dbAdapter })
 
-boss.on('error', error => logger.error(error))
+boss.on('error', async error => {
+  logger.error(error)
+
+  // We've had processes remain open in testing,
+  // because job queues kept polling the database,
+  // while the database no longer existed.
+  if (
+    process.env.NODE_ENV === 'test' &&
+    error.message.match(/database.*does not exist/)
+  ) {
+    if (started) {
+      started = false
+      await boss.stop()
+    }
+    if (connected) {
+      connected = false
+      await boss.disconnect()
+    }
+  }
+})
 
 // 'Start' is for queue maintainers (i.e. pubsweet-server)
 let started = false

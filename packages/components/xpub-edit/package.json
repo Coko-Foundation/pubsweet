@@ -1,6 +1,6 @@
 {
   "name": "xpub-edit",
-  "version": "2.5.6-alpha.0",
+  "version": "2.5.9",
   "license": "MIT",
   "files": [
     "dist",
@@ -8,7 +8,9 @@
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.0.3-alpha.0",
+    "@pubsweet/ui": "^9.1.2",
+    "@pubsweet/ui-toolkit": "^2.0.6",
+    "classnames": "^2.2.6",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-gapcursor": "^1.0.0",
@@ -28,17 +30,12 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "faker": "^4.1.0",
-    "file-loader": "^1.1.5",
-    "node-sass": "^4.5.3",
-    "react-styleguidist": "^6.2.5",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "faker": "^4.1.0"
   },
   "peerDependencies": {
-    "react": ">=16.3"
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": ">=16.3",
+    "styled-components": "^4.1.3"
   }
 }

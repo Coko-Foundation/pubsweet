@@ -1,7 +1,6 @@
 const program = require('commander')
 const properties = require('../src/schemas').db
-const { setupDb } = require('@pubsweet/db-manager')
-const db = require('pubsweet-server/src/db')
+const { db, setupDb } = require('@pubsweet/db-manager')
 const config = require('config')
 const { some, forEach } = require('lodash')
 const runPrompt = require('../src/run-prompt')

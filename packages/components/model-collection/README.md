@@ -1,1 +1,1 @@
-# Fragment model
+# Collection model

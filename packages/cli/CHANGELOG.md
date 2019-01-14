@@ -3,7 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [3.0.13-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.9-alpha.1...pubsweet@3.0.13-alpha.0) (2018-12-11)
+## [3.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.1.1...pubsweet@3.1.2) (2019-01-14)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [3.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.1.0...pubsweet@3.1.1) (2019-01-13)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.13...pubsweet@3.1.0) (2019-01-09)
+
+
+### Features
+
+* introduce [@pubsweet](https://gitlab.coko.foundation/pubsweet)/models package ([7c1a364](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c1a364))
+
+
+
+
+
+## [3.0.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.12...pubsweet@3.0.13) (2018-12-12)
 
 **Note:** Version bump only for package pubsweet
 
@@ -16,31 +43,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package pubsweet
 
 
+
+
+
 ## [3.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.10...pubsweet@3.0.11) (2018-11-30)
 
 **Note:** Version bump only for package pubsweet
+
+
+
 
 
 ## [3.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.9...pubsweet@3.0.10) (2018-11-29)
 
 **Note:** Version bump only for package pubsweet
 
-## [3.0.9-alpha.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.9-alpha.0...pubsweet@3.0.9-alpha.1) (2018-12-10)
 
 
-### Features
 
-* remove redux ([4217850](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4217850))
-
-
-### BREAKING CHANGES
-
-* All components that rely on Redux's actions and reducers will cease to work in this
-version. Migrating to GraphQL and Apollo on the client and server is advised.
-
-## [3.0.9-alpha.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.8...pubsweet@3.0.9-alpha.0) (2018-11-23)
-
-**Note:** Version bump only for package pubsweet
 
   <a name="3.0.9"></a>
 ## [3.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.0.8...pubsweet@3.0.9) (2018-11-13)

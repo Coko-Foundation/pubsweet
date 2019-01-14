@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       name: 'Core-components',
-      components: '../components/!(xpub-*)/**/*.{jsx,js}',
+      components: '../components/!(xpub-*|model-*)/**/*.{jsx,js}',
     },
     {
       name: 'Xpub-components',
@@ -53,5 +53,4 @@ module.exports = {
     transforms: { dangerousTaggedTemplateString: true },
   },
   pagePerSection: true,
-  require: ['babel-polyfill'],
 }
