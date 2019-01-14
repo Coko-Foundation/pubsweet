@@ -5,7 +5,7 @@ import query from './query'
 
 import { Layout } from './Layout'
 
-const withSimpleForm = ({ layout }) =>
+const withSimpleForm = layout =>
   compose(
     graphql(query),
     withProps(props => ({

@@ -14,6 +14,6 @@ export default class FactoryLibrary {
   static create() {
     const library = new FactoryLibrary()
     const NewInstance = library.instance
-    return new NewInstance()
+    return NewInstance
   }
 }
