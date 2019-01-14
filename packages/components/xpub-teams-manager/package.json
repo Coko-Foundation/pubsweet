@@ -29,8 +29,11 @@
     "faker": "^4.1.0"
   },
   "peerDependencies": {
+    "apollo-client-preset": "^1.0.8",
     "config": "^3.0.1",
+    "graphql-tag": "^2.10.0",
     "pubsweet-client": ">=2.1.0",
-    "react": ">=16"
+    "react": ">=16",
+    "react-apollo": "^2.3.3"
   }
 }
