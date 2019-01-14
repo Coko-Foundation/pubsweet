@@ -5,12 +5,18 @@ const MainEditor = props => (
   <ConfigurableEditor
     bold
     bulletlist
-    createtabinsertimage
     createtable
     insertimage
+    italic
     joinaboveblock
     liftitem
+    orderedlist
+    redo
+    smallcaps
+    subscript
+    superscript
     table
+    undo
     {...props}
   />
 )

@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-formbuilder",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Form builder component for Xpub",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -10,14 +10,19 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^9.1.0",
-    "@pubsweet/ui-toolkit": "^2.0.4",
+    "@pubsweet/ui": "^9.1.2",
+    "@pubsweet/ui-toolkit": "^2.0.6",
+    "passport": "^0.4.0",
     "prop-types": "^15.5.10",
+    "pubsweet-component-ink-frontend": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "styled-components": "^4.1.1"
+    "redux-form": "^7.4.2",
+    "styled-components": "^4.1.1",
+    "xpub-connect": "^2.0.6",
+    "xpub-edit": "^2.5.9"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -30,6 +35,8 @@
     "enzyme-adapter-react-16": "^1.6.0"
   },
   "peerDependencies": {
+    "config": "^3.0.1",
+    "lodash": "^4.17.11",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16"
   }

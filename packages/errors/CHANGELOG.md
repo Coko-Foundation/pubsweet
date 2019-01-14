@@ -3,20 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@2.0.0...@pubsweet/base-model@2.0.1) (2019-01-14)
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.0...@pubsweet/errors@2.0.1) (2019-01-14)
 
-**Note:** Version bump only for package @pubsweet/base-model
-
-
+**Note:** Version bump only for package @pubsweet/errors
 
 
 
-# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@1.2.0...@pubsweet/base-model@2.0.0) (2019-01-13)
 
 
-### Bug Fixes
-
-* get just the db ([9f14897](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9f14897))
+# 2.0.0 (2019-01-13)
 
 
 ### Features

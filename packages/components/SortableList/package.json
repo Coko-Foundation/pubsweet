@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-sortable-list",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "main": "src",
   "license": "MIT",
   "dependencies": {
@@ -8,7 +8,9 @@
     "recompose": "^0.26.0"
   },
   "peerDependencies": {
-    "react": ">=15"
+    "lodash": "^4.17.11",
+    "react": ">=15",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "react-dnd-test-backend": "^7.0.0"

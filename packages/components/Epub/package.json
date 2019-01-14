@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-epub",
-  "version": "0.5.7",
+  "version": "0.5.9",
   "description": "Backend EPUB export component for PubSweet",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/logger": "^0.2.9",
+    "@pubsweet/logger": "^0.2.11",
     "cheerio": "^1.0.0-rc.2",
     "highlight.js": "^9.13.1",
     "html-epub": "git+https://git@gitlab.coko.foundation/pubsweet/html-epub#updated-libtidy",
@@ -17,12 +17,8 @@
     "unzipper": "^0.8.9"
   },
   "peerDependencies": {
-    "pubsweet": "^2.2.4",
-    "pubsweet-server": "^7.1.0"
-  },
-  "devDependencies": {
-    "config": "^2.0.1",
-    "jest": "^23.5.0",
-    "lodash": "^4.17.4"
+    "config": "^3.0.1",
+    "pubsweet": "^3.0.0",
+    "pubsweet-server": "^11.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-dashboard",
-  "version": "4.0.4",
+  "version": "4.0.6",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^9.1.0",
-    "@pubsweet/ui-toolkit": "^2.0.4",
+    "@pubsweet/ui": "^9.1.2",
+    "@pubsweet/ui-toolkit": "^2.0.6",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
@@ -21,10 +21,11 @@
     "react-router-dom": "^4.2.2",
     "recompose": "^0.26.0",
     "styled-components": "^4.1.1",
-    "xpub-connect": "^2.0.4",
+    "xpub-connect": "^2.0.6",
     "xpub-journal": "^0.0.6",
-    "xpub-selectors": "^0.2.5",
-    "xpub-upload": "^0.0.7"
+    "xpub-selectors": "^0.2.7",
+    "xpub-upload": "^0.0.7",
+    "xpub-with-context": "^0.1.7"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -42,7 +43,10 @@
     "redux-mock-store": "^1.4.0"
   },
   "peerDependencies": {
+    "config": "^3.0.1",
+    "graphql-tag": "^2.10.0",
     "pubsweet-client": ">=1.0.0",
-    "react": ">=16"
+    "react": ">=16",
+    "react-apollo": "^2.3.3"
   }
 }

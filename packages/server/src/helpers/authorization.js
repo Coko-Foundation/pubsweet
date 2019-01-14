@@ -1,5 +1,4 @@
-const AuthorizationError = require('../errors/AuthorizationError')
-const NotFoundError = require('../errors/NotFoundError')
+const { AuthorizationError, NotFoundError } = require('@pubsweet/errors')
 
 // check permissions or throw authorization error
 const can = async (userId, verb, entity) => {

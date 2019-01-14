@@ -82,7 +82,7 @@ class User extends BaseModel {
   }
 
   static async isUniq(user) {
-    const { ConflictError } = require('pubsweet-server/src/errors')
+    const { ConflictError } = require('@pubsweet/errors')
 
     let result
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.1...@pubsweet/styleguide@5.0.2) (2019-01-14)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.0...@pubsweet/styleguide@5.0.1) (2019-01-13)
+
+**Note:** Version bump only for package @pubsweet/styleguide
+
+
+
+
+
 # [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@4.0.3...@pubsweet/styleguide@5.0.0) (2019-01-09)
 
 

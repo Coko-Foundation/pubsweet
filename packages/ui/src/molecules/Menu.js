@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
-import { Button } from '@pubsweet/ui'
+import Button from '../atoms/Button'
 
 // TODO: match the width of the container to the width of the widest option?
 // TODO: use a <select> element instead of divs?

@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-review",
-  "version": "4.0.4",
+  "version": "4.0.6",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^9.1.0",
-    "@pubsweet/ui-toolkit": "^2.0.4",
+    "@pubsweet/ui": "^9.1.2",
+    "@pubsweet/ui-toolkit": "^2.0.6",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
@@ -23,10 +23,10 @@
     "styled-components": "^4.1.1",
     "uuid": "^3.1.0",
     "wax-prose-mirror": "^0.0.8",
-    "xpub-connect": "^2.0.4",
-    "xpub-edit": "^2.5.7",
+    "xpub-connect": "^2.0.6",
+    "xpub-edit": "^2.5.9",
     "xpub-journal": "^0.0.6",
-    "xpub-selectors": "^0.2.5",
+    "xpub-selectors": "^0.2.7",
     "xpub-upload": "^0.0.7",
     "xpub-validators": "^0.0.6"
   },
@@ -47,8 +47,11 @@
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {
+    "apollo-client-preset": "^1.0.8",
+    "formik": "^1.4.2",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16",
+    "react-apollo": "^2.3.3",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2"
   }
