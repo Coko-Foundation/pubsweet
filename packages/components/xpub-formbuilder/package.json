@@ -12,6 +12,7 @@
   "dependencies": {
     "@pubsweet/ui": "^9.1.2",
     "@pubsweet/ui-toolkit": "^2.0.6",
+    "formik": "^1.4.2",
     "passport": "^0.4.0",
     "prop-types": "^15.5.10",
     "pubsweet-component-ink-frontend": "^1.0.2",
@@ -30,12 +31,16 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "faker": "^4.1.0"
   },
   "peerDependencies": {
     "config": "^3.0.1",
+    "graphql-tag": "^2.10.0",
     "lodash": "^4.17.11",
     "pubsweet-client": ">=2.1.0",
-    "react": ">=16"
+    "react": ">=16",
+    "react-apollo": "^2.3.3"
   }
 }

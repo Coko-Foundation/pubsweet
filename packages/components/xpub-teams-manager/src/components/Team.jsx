@@ -15,7 +15,7 @@ const Team = ({ team, number, userOptions, deleteTeam, updateTeam }) =>
           {team.name} {team.teamType.permissions}
         </TeamTableCell>,
         <TeamTableCell>
-          {team.object.type} {team.object.id}
+          {team.object.objectType} {team.object.objectId}
         </TeamTableCell>,
         <TeamTableCell width={40}>
           <StyledMenu
@@ -24,7 +24,7 @@ const Team = ({ team, number, userOptions, deleteTeam, updateTeam }) =>
             name="members"
             onChange={members => updateTeam(members, team)}
             options={userOptions}
-            value={team.members}
+            value={team.members.map(member => member.id)}
           />
         </TeamTableCell>,
         <TeamTableCell width={15}>

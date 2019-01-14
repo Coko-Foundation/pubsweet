@@ -1,15 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { unescape, groupBy, isArray, get, cloneDeep } from 'lodash'
+import { unescape, groupBy, isArray, get, set, cloneDeep } from 'lodash'
 import { FieldArray } from 'formik'
-import ReactHtmlParser from 'react-html-parser'
 import * as elements from '@pubsweet/ui'
 import * as validators from 'xpub-validators'
 import { AbstractEditor } from 'xpub-edit'
 import { Heading1, Section, Legend, SubNote } from '../styles'
 import AuthorsInput from './AuthorsInput'
-// import Notes from './Notes'
+import Supplementary from './Supplementary'
 import Confirm from './Confirm'
 
 const Wrapper = styled.div`
@@ -55,46 +54,28 @@ const stripHtml = htmlString => {
 const filterFileManuscript = files =>
   files.filter(
     file =>
-      file.type === 'manuscript' &&
+      file.fileType === 'manuscript' &&
       file.mimeType !==
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   )
 
-const {
-  ValidatedFieldFormik,
-  Button,
-  Attachment,
-  UploadingFile,
-  FileUploadList,
-} = elements
+const { ValidatedFieldFormik, Button, Attachment } = elements
+
 elements.AbstractEditor = ({
   validationStatus,
   setTouched,
   onChange,
   value,
+  values,
   ...rest
 }) => (
   <AbstractEditor
-    value={value || ''}
+    value={get(values, rest.name) || ''}
     {...rest}
     onChange={val => {
-      setTouched(createObject(rest.name, true))
+      setTouched(set({}, rest.name, true))
       onChange(stripHtml(val))
     }}
-  />
-)
-
-elements.SupplementaryFiles = props => (
-  <FileUploadList
-    {...props}
-    buttonText="↑ Upload files"
-    FileComponent={UploadingFile}
-    files={cloneDeep(props.value)
-      .map(val => {
-        val.name = val.filename
-        return val
-      })
-      .filter(val => val.type === 'supplementary')}
   />
 )
 
@@ -138,19 +119,6 @@ const composeValidate = (vld = [], valueField = {}) => value => {
   return errors.length > 0 ? errors[0] : undefined
 }
 
-const createObject = (key, value) => {
-  const obj = {}
-  const parts = key.split('.')
-  if (parts.length === 1) {
-    obj[parts[0]] = value
-  } else if (parts.length > 1) {
-    // concat all but the first part of the key
-    const remainingParts = parts.slice(1, parts.length).join('.')
-    obj[parts[0]] = createObject(remainingParts, value)
-  }
-  return obj
-}
-
 const groupElements = elements => {
   const grouped = groupBy(elements, n => n.group || 'default')
 
@@ -174,12 +142,11 @@ const groupElements = elements => {
   return startArr
 }
 
-const renderArray = (
-  elementsComponentArray,
-  setFieldValue,
-  setTouched,
-  onChange,
-) => ({ form: { values }, name }) =>
+const renderArray = (elementsComponentArray, onChange) => ({
+  form: { values, setTouched },
+  replace,
+  name,
+}) =>
   get(values, name).map((elValues, index) => {
     const element = elementsComponentArray.find(elv =>
       Object.values(elValues).includes(elv.type),
@@ -201,17 +168,25 @@ const renderArray = (
             'validateValue',
             'description',
             'order',
+            'value',
           ])}
           component={elements[element.component]}
           key={`notes-validate-${element.id}`}
-          name={`${name}.${index}.${element.name}`}
+          name={`${name}.${index}.content`}
           onChange={value => {
-            setFieldValue(`${name}.[${index}].${element.name}`, value, true)
-            onChange(value, `${name}.${index}.${element.name}`)
+            const data = {
+              notesType: element.type,
+              content: value,
+            }
+            replace(index, data, `${name}.[${index}]`, true)
+            const notes = cloneDeep(values)
+            set(notes, `${name}.[${index}]`, data)
+            onChange(notes.meta.notes, `${name}`)
           }}
           readonly={false}
           setTouched={setTouched}
           validate={composeValidate(element.validate, element.validateValue)}
+          values={values}
         />
         <SubNote dangerouslySetInnerHTML={createMarkup(element.description)} />
       </Section>
@@ -220,18 +195,12 @@ const renderArray = (
 
 const ElementComponentArray = ({
   elementsComponentArray,
-  setFieldValue,
-  setTouched,
   onChange,
+  uploadFile,
 }) => (
   <FieldArray
     name={elementsComponentArray[0].group}
-    render={renderArray(
-      elementsComponentArray,
-      setFieldValue,
-      setTouched,
-      onChange,
-    )}
+    render={renderArray(elementsComponentArray, onChange)}
   />
 )
 
@@ -243,23 +212,24 @@ export default ({
   confirming,
   manuscript,
   setTouched,
+  values,
   setFieldValue,
   uploadFile,
+  createFile,
   onChange,
   onSubmit,
+  ...props
 }) => (
   <Wrapper>
     <Heading1>{form.name}</Heading1>
-    <Intro>
-      <div>
-        {ReactHtmlParser(
-          (form.description || '').replace(
-            '###link###',
-            link(journal, manuscript),
-          ),
-        )}
-      </div>
-    </Intro>
+    <Intro
+      dangerouslySetInnerHTML={createMarkup(
+        (form.description || '').replace(
+          '###link###',
+          link(journal, manuscript),
+        ),
+      )}
+    />
     <form onSubmit={handleSubmit}>
       {groupElements(form.children || []).map(element =>
         !isArray(element) ? (
@@ -268,37 +238,47 @@ export default ({
             key={`${element.id}`}
           >
             <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
-            {element.component === 'AuthorsInput' && <AuthorsInput />}
-            {element.component !== 'AuthorsInput' && (
-              <ValidatedFieldFormik
-                component={elements[element.component]}
-                key={`validate-${element.id}`}
-                name={element.name}
-                onChange={value => {
-                  const val = value.target ? value.target.value : value
-                  setFieldValue(element.name, val, true)
-                  onChange(val, element.name)
-                }}
-                readonly={false}
-                setTouched={setTouched}
-                {...rejectProps(element, [
-                  'component',
-                  'title',
-                  'sectioncss',
-                  'parse',
-                  'format',
-                  'validate',
-                  'validateValue',
-                  'description',
-                  'order',
-                ])}
+            {element.component === 'SupplementaryFiles' && (
+              <Supplementary
+                createFile={createFile}
+                onChange={onChange}
                 uploadFile={uploadFile}
-                validate={composeValidate(
-                  element.validate,
-                  element.validateValue,
-                )}
               />
             )}
+            {element.component === 'AuthorsInput' && (
+              <AuthorsInput onChange={onChange} />
+            )}
+            {element.component !== 'AuthorsInput' &&
+              element.component !== 'SupplementaryFiles' && (
+                <ValidatedFieldFormik
+                  component={elements[element.component]}
+                  key={`validate-${element.id}`}
+                  name={element.name}
+                  onChange={value => {
+                    const val = value.target ? value.target.value : value
+                    setFieldValue(element.name, val, true)
+                    onChange(val, element.name)
+                  }}
+                  readonly={false}
+                  setTouched={setTouched}
+                  {...rejectProps(element, [
+                    'component',
+                    'title',
+                    'sectioncss',
+                    'parse',
+                    'format',
+                    'validate',
+                    'validateValue',
+                    'description',
+                    'order',
+                  ])}
+                  validate={composeValidate(
+                    element.validate,
+                    element.validateValue,
+                  )}
+                  values={values}
+                />
+              )}
             <SubNote
               dangerouslySetInnerHTML={createMarkup(element.description)}
             />
@@ -313,24 +293,24 @@ export default ({
         ),
       )}
 
-      {filterFileManuscript(manuscript.files).length > 0 ? (
+      {filterFileManuscript(values.files || []).length > 0 ? (
         <Section id="files.manuscript">
           <Legend space>Submitted Manuscript</Legend>
           <Attachment
-            file={filesToAttachment(filterFileManuscript(manuscript.files)[0])}
-            key={filterFileManuscript(manuscript.files)[0].url}
+            file={filesToAttachment(filterFileManuscript(values.files)[0])}
+            key={filterFileManuscript(values.files)[0].url}
             uploaded
           />
         </Section>
       ) : null}
 
-      {!manuscript.status === 'submitted' && form.haspopup === 'false' && (
+      {values.status !== 'submitted' && form.haspopup === 'false' && (
         <Button primary type="submit">
           Submit your manuscript
         </Button>
       )}
 
-      {!manuscript.status !== 'submitted' && form.haspopup === 'true' && (
+      {values.status !== 'submitted' && form.haspopup === 'true' && (
         <div>
           <Button onClick={toggleConfirming} primary type="button">
             Submit your manuscript

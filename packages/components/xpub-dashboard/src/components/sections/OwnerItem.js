@@ -46,7 +46,7 @@ const OwnerItem = ({ version, journals, deleteManuscript }) => {
   const actions = (
     <AuthorizeWithGraphQL
       object={version}
-      operation="can delete collection"
+      operation="can delete manuscript"
       unauthorized={unauthorized}
     >
       <ActionGroup>{Object.values(actionButtons)}</ActionGroup>

@@ -20,23 +20,27 @@ const addEditor = (manuscript, label) => ({
 
 const DecisionLayout = ({
   handleSubmit,
-  handleChangeFn,
+  updateReview,
   uploadFile,
   manuscript,
   journal,
+  isValid,
 }) => {
   const decisionSections = []
   const editorSections = []
-  manuscript.manuscriptVersions.forEach(manuscript => {
-    const { decision } = manuscript
-    const submittedMoment = moment(decision.submitted)
+  const manuscriptVersions = manuscript.manuscriptVersions || []
+  manuscriptVersions.forEach(manuscript => {
+    const submittedMoment = moment(manuscript.updated)
     const label = submittedMoment.format('YYYY-MM-DD')
+
     decisionSections.push({
       content: (
         <div>
           <ReviewMetadata manuscript={manuscript} />
           <DecisionReviews manuscript={manuscript} />
-          <Decision decision={manuscript.decision} />
+          <Decision
+            review={manuscript.reviews.find(review => review.isDecision)}
+          />
         </div>
       ),
       key: manuscript.id,
@@ -48,36 +52,39 @@ const DecisionLayout = ({
 
   const submittedMoment = moment()
   const label = submittedMoment.format('YYYY-MM-DD')
-  decisionSections.push({
-    content: (
-      <div>
-        <AdminSection>
-          <AssignEditorsReviewers
-            AssignEditor={AssignEditor}
-            journal={journal}
-            manuscript={manuscript}
-          />
-        </AdminSection>
-        <AdminSection>
-          <ReviewMetadata manuscript={manuscript} />
-        </AdminSection>
-        <AdminSection>
-          <DecisionReviews manuscript={manuscript} />
-        </AdminSection>
-        <AdminSection>
-          <DecisionForm
-            handleChangeFn={handleChangeFn}
-            handleSubmit={handleSubmit}
-            uploadFile={uploadFile}
-          />
-        </AdminSection>
-      </div>
-    ),
-    key: manuscript.id,
-    label,
-  })
+  if (manuscript.status !== 'revising') {
+    decisionSections.push({
+      content: (
+        <div>
+          <AdminSection key="assign-editors">
+            <AssignEditorsReviewers
+              AssignEditor={AssignEditor}
+              journal={journal}
+              manuscript={manuscript}
+            />
+          </AdminSection>
+          <AdminSection key="review-metadata">
+            <ReviewMetadata manuscript={manuscript} />
+          </AdminSection>
+          <AdminSection key="decision-review">
+            <DecisionReviews manuscript={manuscript} />
+          </AdminSection>
+          <AdminSection key="decision-form">
+            <DecisionForm
+              handleSubmit={handleSubmit}
+              isValid={isValid}
+              updateReview={updateReview}
+              uploadFile={uploadFile}
+            />
+          </AdminSection>
+        </div>
+      ),
+      key: manuscript.id,
+      label,
+    })
 
-  editorSections.push(addEditor(manuscript, label))
+    editorSections.push(addEditor(manuscript, label))
+  }
 
   return (
     <Columns>

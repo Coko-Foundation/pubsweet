@@ -1,65 +1,122 @@
 import { compose, withHandlers } from 'recompose'
+import { cloneDeep } from 'lodash'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import ReviewerForm from './ReviewerForm'
 
-const fragmentFields = `
-  created
-  reviews {
-    open
-    recommendation
-    created
-    comments {
+const createTeamMutation = gql`
+  mutation($input: TeamInput!) {
+    createTeam(input: $input) {
+      id
       type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
+      teamType
+      name
+      object {
+        objectId
+        objectType
       }
-    }
-    user {
-      id
-      username
-    }
-  }
-  teams {
-    id
-    role
-    object {
-      id
-    }
-    objectType
-    members {
-      status
-      user {
+      members {
         id
         username
       }
     }
   }
-  status
 `
 
-const updateMutation = gql`
-  mutation($id: ID!, $input: String) {
-    updateManuscript(id: $id, input: $input) {
+const updateTeamMutation = gql`
+  mutation($id: ID, $input: TeamInput) {
+    updateTeam(id: $id, input: $input) {
       id
-      ${fragmentFields}
+      type
+      teamType
+      name
+      object {
+        objectId
+        objectType
+      }
+      members {
+        id
+        username
+      }
     }
   }
 `
 
-const handleSubmit = (manuscript, { props }) => {
-  props.updateMutation({
-    variables: {
-      id: manuscript.id,
-      input: JSON.stringify(manuscript),
+const query = gql`
+  query {
+    teams {
+      id
+      teamType
+      name
+      object {
+        objectId
+        objectType
+      }
+      members {
+        id
+      }
+      status {
+        user
+        status
+      }
+    }
+  }
+`
+
+const update = (
+  proxy,
+  { data: { updateTeamMutation, createTeamMutation, teams } },
+) => {
+  const data = proxy.readQuery({ query })
+  if (updateTeamMutation) {
+    const teamIndex = teams.findIndex(team => team.id === updateTeamMutation.id)
+    data[teamIndex] = updateTeamMutation
+  }
+
+  if (createTeamMutation) {
+    data.push(createTeamMutation)
+  }
+
+  proxy.writeQuery({ query, data })
+}
+
+const handleSubmit = (
+  { user },
+  { props: { manuscript, updateTeamMutation, createTeamMutation } },
+) => {
+  const team =
+    manuscript.teams.find(team => team.teamType === 'reviewerEditor') || {}
+
+  const teamAdd = {
+    object: {
+      objectId: manuscript.id,
+      objectType: 'Manuscript',
     },
-  })
+    status: [{ user: user.id, status: 'invited' }],
+    name: 'Reviewer Editor',
+    teamType: 'reviewerEditor',
+    members: [user.id],
+  }
+  if (team.id) {
+    const newTeam = cloneDeep(team)
+    newTeam.status.push({ user: user.id, status: 'invited' })
+    newTeam.members.push(user.id)
+    updateTeamMutation({
+      variables: {
+        id: team.id,
+        input: newTeam,
+      },
+      update,
+    })
+  } else {
+    createTeamMutation({
+      variables: {
+        input: teamAdd,
+      },
+      update,
+    })
+  }
 }
 
 const loadOptions = props => input => {
@@ -69,13 +126,13 @@ const loadOptions = props => input => {
 }
 
 export default compose(
-  graphql(updateMutation, { name: 'updateMutation' }),
+  graphql(createTeamMutation, { name: 'createTeamMutation' }),
+  graphql(updateTeamMutation, { name: 'updateTeamMutation' }),
   withHandlers({
     loadOptions: props => loadOptions(props),
   }),
   withFormik({
-    initialValues: {},
-    mapPropsToValues: ({ manuscript }) => manuscript,
+    mapPropsToValues: () => ({ user: '' }),
     displayName: 'reviewers',
     handleSubmit,
   }),

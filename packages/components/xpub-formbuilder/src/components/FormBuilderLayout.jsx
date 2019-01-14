@@ -18,7 +18,7 @@ const AdminStyled = styled(Admin)`
 `
 
 const FormBuilderLayout = ({
-  forms,
+  getForms,
   properties,
   deleteForm,
   deleteElement,
@@ -30,7 +30,7 @@ const FormBuilderLayout = ({
   activeTab,
 }) => {
   const Sections = []
-  forEach(forms, (form, key) => {
+  forEach(getForms, (form, key) => {
     Sections.push({
       content: (
         <FormBuilder
@@ -47,7 +47,7 @@ const FormBuilderLayout = ({
           key={`delete-form-${key}`}
           onClick={e => {
             e.preventDefault()
-            deleteForm(form)
+            deleteForm(form.id)
           }}
         >
           x
@@ -68,7 +68,6 @@ const FormBuilderLayout = ({
     key: 'new',
     label: '+ Add Form',
   })
-
   return (
     <Columns>
       <Tabs
@@ -76,7 +75,7 @@ const FormBuilderLayout = ({
         onChange={tab => {
           changeProperties({
             type: 'form',
-            properties: forms[tab],
+            properties: getForms[tab],
           })
           changeTabs(tab)
         }}

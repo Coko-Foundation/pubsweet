@@ -15,16 +15,39 @@ const acceptFiles =
     ? acceptUploadFiles.join()
     : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
+const updateReviewer = (proxy, { data: { reviewerResponse } }) => {
+  const id = reviewerResponse.object.objectId
+  const data = proxy.readQuery({
+    query: queries.dashboard,
+    variables: {
+      id,
+    },
+  })
+
+  const manuscriptIndex = data.journals.manuscripts.findIndex(
+    manu => manu.id === id,
+  )
+  const teamIndex = data.journals.manuscripts[manuscriptIndex].teams.findIndex(
+    team => team.id === reviewerResponse.id,
+  )
+
+  data.journals.manuscripts[manuscriptIndex].teams[teamIndex] = reviewerResponse
+
+  proxy.writeQuery({ query: queries.dashboard, data })
+}
+
 export default compose(
   connectToContext(),
   graphql(queries.dashboard, {
-    options: { context: { online: false } },
     props: data => data,
   }),
   graphql(mutations.reviewerResponseMutation, {
     props: ({ mutate }) => ({
-      reviewerResponse: (manuscript, response) =>
-        mutate({ variables: { id: manuscript.id, response } }),
+      reviewerResponse: (currentUserId, action, teamId) =>
+        mutate({
+          variables: { currentUserId, action, teamId },
+          update: updateReviewer,
+        }),
     }),
   }),
   graphql(mutations.deleteManuscriptMutation, {
@@ -36,7 +59,7 @@ export default compose(
       update: (proxy, { data: { deleteManuscript } }) => {
         const data = proxy.readQuery({ query: queries.dashboard })
         const manuscriptIndex = data.journals.manuscripts.findIndex(
-          manuscript => manuscript.id === deleteManuscript.id,
+          manuscript => manuscript.id === deleteManuscript,
         )
         if (manuscriptIndex > -1) {
           data.journals.manuscripts.splice(manuscriptIndex, 1)

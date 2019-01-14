@@ -1,15 +1,13 @@
 import React from 'react'
+import faker from 'faker'
 import { MemoryRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { combineReducers } from 'redux'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import { MockedProvider } from 'react-apollo/test-utils'
+
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import { ThemeProvider } from 'styled-components'
-
-import { reducers } from 'pubsweet-client'
+import queries from './graphql/queries'
 
 import TeamsManagerPage from './TeamsManagerPage'
 
@@ -59,29 +57,24 @@ global.window.localStorage = {
   getItem: jest.fn(() => 'tok123'),
 }
 
-const reducer = combineReducers(reducers)
-
-const middlewares = [thunk]
-const mockStore = () =>
-  configureMockStore(middlewares)(actions =>
-    Object.assign(
-      actions.reduce(reducer, {
-        currentUser: { isAuthenticated: true },
-      }),
-      (actions.users || []).reduce(reducer, {
-        users: {
-          users: [
-            { id: '1', username: 'author' },
-            { id: '2', username: 'managing Editor' },
-          ],
-        },
-      }),
-    ),
-  )
+const mocks = [
+  {
+    request: {
+      query: queries.teamManager,
+    },
+    result: {
+      data: {
+        currentUser: { id: faker.random.uuid(), username: 'test', admin: true },
+        teams: [],
+        users: [],
+        manuscripts: [],
+      },
+    },
+  },
+]
 
 describe('TeamsManagerPage', () => {
   it('runs', done => {
-    const store = mockStore()
     const page = mount(
       <MemoryRouter>
         <ThemeProvider
@@ -90,9 +83,9 @@ describe('TeamsManagerPage', () => {
             colorSecondary: '#E7E7E7',
           }}
         >
-          <Provider store={store}>
+          <MockedProvider addTypename={false} mocks={mocks}>
             <TeamsManagerPage />
-          </Provider>
+          </MockedProvider>
         </ThemeProvider>
       </MemoryRouter>,
     )

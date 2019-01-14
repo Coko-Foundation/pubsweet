@@ -48,6 +48,7 @@
   },
   "peerDependencies": {
     "apollo-client-preset": "^1.0.8",
+    "config": "^3.0.1",
     "formik": "^1.4.2",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16",

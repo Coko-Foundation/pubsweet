@@ -36,8 +36,8 @@ const SubmittedVersionColumns = props => (
 
 const Submit = ({ journal, manuscript, forms, ...formProps }) => {
   const decisionSections = []
-
-  manuscript.manuscriptVersions.forEach(versionElem => {
+  const manuscriptVersions = manuscript.manuscriptVersions || []
+  manuscriptVersions.forEach(versionElem => {
     const submittedMoment = moment(versionElem.submitted)
     const label = submittedMoment.format('YYYY-MM-DD')
     decisionSections.push({
