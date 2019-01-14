@@ -1,6 +1,10 @@
+const resolvers = require('./server/resolvers')
+const typeDefs = require('./server/typeDefs')
+
 module.exports = {
   frontend: {
     components: [() => require('./components')],
   },
-  server: () => require('./server/formRequestBackend'),
+  resolvers,
+  typeDefs,
 }
