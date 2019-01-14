@@ -21,23 +21,22 @@ const ReviewLayout = ({
   review,
   reviewer,
   handleSubmit,
-  uploadFile,
   isValid,
   status,
+  updateReview,
+  uploadFile,
 }) => {
   const reviewSections = []
   const editorSections = []
-
-  manuscript.manuscriptVersions.forEach(manuscript => {
+  const manuscriptVersions = manuscript.manuscriptVersions || []
+  manuscriptVersions.forEach(manuscript => {
     const label = moment().format('YYYY-MM-DD')
     reviewSections.push({
       content: (
         <div>
           <ReviewMetadata manuscript={manuscript} />
           <Review
-            review={manuscript.reviews.find(
-              review => review.user.id === currentUser.id,
-            )}
+            review={manuscript.reviews.find(review => !review.isDecision) || {}}
           />
         </div>
       ),
@@ -48,29 +47,31 @@ const ReviewLayout = ({
     editorSections.push(addEditor(manuscript, label))
   }, [])
 
-  const label = moment().format('YYYY-MM-DD')
+  if (manuscript.status !== 'revising') {
+    const label = moment().format('YYYY-MM-DD')
+    reviewSections.push({
+      content: (
+        <div>
+          <ReviewMetadata manuscript={manuscript} />
+          {status === 'completed' ? (
+            <Review review={review} />
+          ) : (
+            <ReviewForm
+              handleSubmit={handleSubmit}
+              isValid={isValid}
+              review={review}
+              updateReview={updateReview}
+              uploadFile={uploadFile}
+            />
+          )}
+        </div>
+      ),
+      key: manuscript.id,
+      label,
+    })
 
-  reviewSections.push({
-    content: (
-      <div>
-        <ReviewMetadata manuscript={manuscript} />
-        {status === 'accepted' && review.recommendation !== '' ? (
-          <Review review={review} />
-        ) : (
-          <ReviewForm
-            handleSubmit={handleSubmit}
-            isValid={isValid}
-            uploadFile={uploadFile}
-          />
-        )}
-      </div>
-    ),
-    key: manuscript.id,
-    label,
-  })
-
-  editorSections.push(addEditor(manuscript, label))
-
+    editorSections.push(addEditor(manuscript, label))
+  }
   return (
     <Columns>
       <Manuscript>

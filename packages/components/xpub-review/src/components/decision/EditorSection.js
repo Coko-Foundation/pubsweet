@@ -4,8 +4,8 @@ import { EditorWrapper } from '../molecules/EditorWrapper'
 import { Info } from '../molecules/Info'
 
 export default ({ manuscript }) =>
-  ((manuscript.files || []).find(file => file.type === 'manuscript') || '')
-    .type ===
+  ((manuscript.files || []).find(file => file.fileType === 'manuscript') || '')
+    .mimeType ===
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
     <EditorWrapper>
       <Wax key={manuscript.id} readonly value={manuscript.meta.source} />

@@ -22,17 +22,17 @@ const filesToAttachment = file => ({
   url: file.url,
 })
 
-const Decision = ({ decision }) => (
+const Decision = ({ review }) => (
   <div>
     <div>
-      {findComments(decision, 'note') && [
+      {findComments(review, 'note') && [
         <Heading>Note</Heading>,
         <Note>
           <Content>
-            <NoteViewer value={findComments(decision, 'note').content} />
+            <NoteViewer value={findComments(review, 'note').content} />
           </Content>
-          {findComments(decision, 'note') &&
-            (findComments(decision, 'note').files || []).map(attachment => (
+          {findComments(review, 'note') &&
+            (findComments(review, 'note').files || []).map(attachment => (
               <Attachment
                 file={filesToAttachment(attachment)}
                 key={attachment.url}
@@ -46,7 +46,7 @@ const Decision = ({ decision }) => (
     <div>
       <Heading>Decision</Heading>
 
-      <DecisionStatus>{decision.status}</DecisionStatus>
+      <DecisionStatus>{review.recommendation}</DecisionStatus>
     </div>
   </div>
 )

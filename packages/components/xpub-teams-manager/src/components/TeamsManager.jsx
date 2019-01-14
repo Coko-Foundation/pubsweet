@@ -11,7 +11,7 @@ const TeamsManager = ({
   createTeam,
   error,
   userOptions,
-  collectionsOptions,
+  manuscriptsOptions,
   typesOptions,
 }) => (
   <Page>
@@ -37,8 +37,8 @@ const TeamsManager = ({
       </TeamTable>
     )}
     <TeamCreator
-      collectionsOptions={collectionsOptions}
       create={createTeam}
+      manuscriptsOptions={manuscriptsOptions}
       typesOptions={typesOptions}
     />
   </Page>

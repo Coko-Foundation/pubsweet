@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import { ThemeProvider } from 'styled-components'
-import { MemoryRouter, Route } from 'react-router-dom'
+import { MemoryRouter, Route, Switch } from 'react-router-dom'
 
 import wait from 'waait'
 import { LOGIN_USER } from './graphql/mutations'
@@ -66,14 +66,25 @@ function makeDeepWrapper(currentUser, props = {}) {
   return mount(
     <ThemeProvider theme={theme}>
       <MockedProvider addTypename={false} mocks={mocks(currentUser)}>
-        <MemoryRouter initialEntries={['/login']}>
-          <Route
-            {...props}
-            render={p => {
-              globalLocation = p.location
-              return <LoginContainer {...p} />
-            }}
-          />
+        <MemoryRouter initialEntries={['/login', '/']}>
+          <Switch>
+            <Route
+              {...props}
+              path="/login"
+              render={p => {
+                globalLocation = p.location
+                return <LoginContainer {...p} />
+              }}
+            />
+            <Route
+              {...props}
+              path="/"
+              render={p => {
+                globalLocation = p.location
+                return <p>dashboard</p>
+              }}
+            />
+          </Switch>
         </MemoryRouter>
       </MockedProvider>
     </ThemeProvider>,
@@ -109,11 +120,11 @@ describe('LoginContainer', () => {
     const button = wrapper.find('button')
     button.simulate('submit')
 
+    await wait(500)
     wrapper.update()
-    await wait(50)
 
     expect(window.localStorage.token).toEqual('greatToken')
-    expect(globalLocation.pathname).toEqual('/testRedirect')
+    expect(globalLocation.pathname).toEqual('/')
   })
 
   it('does not log in user with incorrect credentials', async () => {

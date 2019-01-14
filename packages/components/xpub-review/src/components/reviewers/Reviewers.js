@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
+import ReviewerForm from './ReviewerForm'
 
 const Root = styled.div`
   display: flex;
@@ -14,22 +15,25 @@ const ReviewersList = styled.div`
 `
 
 const Reviewers = ({
-  ReviewerForm,
   Reviewer,
   journal,
+  isValid,
+  loadOptions,
   version,
   reviewers,
   reviewerUsers,
   manuscript,
+  handleSubmit,
   teams,
 }) => (
   <Root>
     <Form>
       <ReviewerForm
+        handleSubmit={handleSubmit}
+        isValid={isValid}
         journal={journal}
-        manuscript={manuscript}
+        loadOptions={loadOptions}
         reviewerUsers={reviewerUsers}
-        teams={teams}
       />
       <Link
         to={`/journals/${journal.id}/versions/${manuscript.id}/decisions/${

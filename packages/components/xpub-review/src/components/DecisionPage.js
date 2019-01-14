@@ -3,9 +3,35 @@ import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
 import { withFormik } from 'formik'
 import { withLoader } from 'pubsweet-client'
+import { getCommentContent } from './review/util'
 
-import uploadFile from 'xpub-upload'
 import DecisionLayout from './decision/DecisionLayout'
+
+const reviewFields = `
+  id
+  created
+  updated
+  comments {
+    type
+    content
+    files {
+      id
+      created
+      label
+      filename
+      fileType
+      mimeType
+      size
+      url
+    }
+  }
+  isDecision
+  recommendation
+  user {
+    id
+    username
+  }
+`
 
 const fragmentFields = `
   id
@@ -15,68 +41,37 @@ const fragmentFields = `
     created
     label
     filename
+    fileType
     mimeType
-    type
     size
     url
   }
   reviews {
-    open
-    recommendation
-    created
-    comments {
-      type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
+    ${reviewFields}
   }
-  decision {
-    status
-    created
-    comments {
-      type
-      content
-      files {
-        type
-        id
-        label
-        url
-        filename
-      }
-    }
-    user {
-      id
-      username
-    }
-  }
+  decision
   teams {
     id
-    role
+    name
+    teamType
     object {
-      id
+      objectId
+      objectType
     }
     objectType
     members {
+      id
+      username
+    }
+    status {
+      user
       status
-      user {
-        id
-        username
-      }
     }
   }
   status
   meta {
     title
+    source
     abstract
     declarations {
       openData
@@ -93,8 +88,6 @@ const fragmentFields = `
       date
     }
     notes {
-      id
-      created
       notesType
       content
     }
@@ -129,6 +122,37 @@ const query = gql`
   }
 `
 
+const updateReviewMutation = gql`
+  mutation($id: ID, $input: ReviewInput) {
+    updateReview(id: $id, input: $input) {
+      ${reviewFields}
+    }
+  }
+`
+
+const uploadReviewFilesMutation = gql`
+  mutation($file: Upload!) {
+    upload(file: $file) {
+      url
+    }
+  }
+`
+
+const createFileMutation = gql`
+  mutation($file: Upload!) {
+    createFile(file: $file) {
+      id
+      created
+      label
+      filename
+      fileType
+      mimeType
+      size
+      url
+    }
+  }
+`
+
 const submitMutation = gql`
   mutation($id: ID!, $input: String) {
     submitManuscript(id: $id, input: $input) {
@@ -146,13 +170,51 @@ export default compose(
       },
     }),
   }),
+  graphql(uploadReviewFilesMutation, { name: 'uploadReviewFilesMutation' }),
+  graphql(updateReviewMutation, { name: 'updateReviewMutation' }),
+  graphql(createFileMutation, {
+    props: ({ mutate, ownProps: { match } }) => ({
+      createFile: file => {
+        mutate({
+          variables: {
+            file,
+          },
+          update: (proxy, { data: { createFile } }) => {
+            const data = proxy.readQuery({
+              query,
+              variables: {
+                id: match.params.version,
+              },
+            })
+
+            data.manuscript.reviews.map(review => {
+              if (review.id === file.objectId) {
+                review.comments.map(comment => {
+                  if (comment.type === createFile.fileType) {
+                    comment.files = [createFile]
+                  }
+                  return comment
+                })
+              }
+              return review
+            })
+
+            proxy.writeQuery({ query, data })
+          },
+        })
+      },
+    }),
+  }),
   graphql(submitMutation, {
     props: ({ mutate, ownProps }) => ({
-      onSubmit: (manuscript, { history }) => {
+      completeDecision: ({ history, manuscript }) => {
         mutate({
           variables: {
             id: manuscript.id,
-            input: JSON.stringify({ decision: manuscript.decision }),
+            input: JSON.stringify({
+              decision: manuscript.reviews.find(review => review.isDecision)
+                .recommendation,
+            }),
           },
         }).then(() => {
           history.push('/')
@@ -161,15 +223,104 @@ export default compose(
     }),
   }),
   withLoader(),
-  withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
-    journal: { id: journal },
-    uploadFile,
-  })),
+  withProps(
+    ({
+      currentUser,
+      manuscript,
+      createFile,
+      updateReviewMutation,
+      uploadReviewFilesMutation,
+      match: {
+        params: { journal },
+      },
+    }) => ({
+      journal: { id: journal },
+      updateReview: (data, file) => {
+        const reviewData = {
+          isDecision: true,
+          manuscriptId: manuscript.id,
+        }
+
+        if (data.comment) {
+          reviewData.comments = [data.comment]
+        }
+
+        if (data.recommendation) {
+          reviewData.recommendation = data.recommendation
+        }
+
+        const review =
+          manuscript.reviews.find(review => review.isDecision) || {}
+        return updateReviewMutation({
+          variables: {
+            id: review.id || undefined,
+            input: reviewData,
+          },
+          update: (proxy, { data: { updateReview } }) => {
+            const data = proxy.readQuery({
+              query,
+              variables: {
+                id: manuscript.id,
+              },
+            })
+            const reviewIndex = data.manuscript.reviews.findIndex(
+              review => review.id === updateReview.id,
+            )
+            if (reviewIndex < 0) {
+              data.manuscript.reviews.push(updateReview)
+            } else {
+              data.manuscript.reviews[reviewIndex] = updateReview
+            }
+            proxy.writeQuery({ query, data })
+          },
+        })
+      },
+      uploadFile: (file, updateReview, type) =>
+        uploadReviewFilesMutation({
+          variables: {
+            file,
+          },
+        }).then(({ data }) => {
+          const newFile = {
+            url: data.upload.url,
+            filename: file.name,
+            size: file.size,
+            object: 'Review',
+            objectId: updateReview.id,
+            fileType: type,
+          }
+          createFile(newFile)
+        }),
+    }),
+  ),
   withFormik({
-    initialValues: {},
-    mapPropsToValues: ({ manuscript }) => manuscript,
+    mapPropsToValues: props =>
+      props.manuscript.reviews.find(review => review.isDecision) || {
+        comments: [],
+        recommendation: null,
+      },
+    isInitialValid: ({ manuscript }) => {
+      const rv = manuscript.reviews.find(review => review.isDecision) || {}
+      const isRecommendation = rv.recommendation != null
+      const isCommented = getCommentContent(rv, 'note') !== ''
+
+      return isCommented && isRecommendation
+    },
+    validate: (values, props) => {
+      const errors = {}
+      if (getCommentContent(values, 'note') === '') {
+        errors.comments = 'Required'
+      }
+
+      if (values.recommendation === null) {
+        errors.recommendation = 'Required'
+      }
+      return errors
+    },
     displayName: 'decision',
-    handleSubmit: (props, { props: { onSubmit, history } }) =>
-      onSubmit(props, { history }),
+    handleSubmit: (
+      props,
+      { props: { completeDecision, history, manuscript } },
+    ) => completeDecision({ history, manuscript }),
   }),
 )(DecisionLayout)

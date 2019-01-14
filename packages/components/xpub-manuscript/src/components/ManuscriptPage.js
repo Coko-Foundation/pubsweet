@@ -11,8 +11,8 @@ const fragmentFields = `
   status
   files {
     id
-    type
     fileType
+    mimeType
   }
   meta {
     title
@@ -42,9 +42,9 @@ export default compose(
       },
     }),
   }),
-  withProps(({ data }) => ({
-    content: data.manuscript.content,
-    file: data.files.filter(file => file.type === 'manuscript'),
-  })),
   withLoader(),
+  withProps(({ manuscript }) => ({
+    content: manuscript.meta.source,
+    file: manuscript.files.find(file => file.fileType === 'manuscript') || {},
+  })),
 )(Manuscript)

@@ -15,7 +15,6 @@
     "lodash": "^4.17.11",
     "prop-types": "^15.5.10",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "styled-components": "^4.1.1",
@@ -30,8 +29,11 @@
     "faker": "^4.1.0"
   },
   "peerDependencies": {
+    "apollo-client-preset": "^1.0.8",
     "config": "^3.0.1",
+    "graphql-tag": "^2.10.0",
     "pubsweet-client": ">=2.1.0",
-    "react": ">=16"
+    "react": ">=16",
+    "react-apollo": "^2.3.3"
   }
 }

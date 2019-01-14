@@ -2,7 +2,7 @@ import React from 'react'
 import { pickBy } from 'lodash'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
@@ -46,7 +46,7 @@ const OwnerItem = ({ version, journals, deleteManuscript }) => {
   const actions = (
     <AuthorizeWithGraphQL
       object={version}
-      operation="can delete collection"
+      operation="can delete manuscript"
       unauthorized={unauthorized}
     >
       <ActionGroup>{Object.values(actionButtons)}</ActionGroup>

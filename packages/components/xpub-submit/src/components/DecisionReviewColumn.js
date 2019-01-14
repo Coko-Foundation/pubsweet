@@ -48,7 +48,13 @@ const DecisionReviewColumn = ({
       {manuscript.reviews && (
         <Section id="accordion.review">
           <Accordion
-            Component={<ReviewAccordion reviews={manuscript.reviews} />}
+            Component={
+              <ReviewAccordion
+                reviews={manuscript.reviews.filter(
+                  review => !review.isDecision,
+                )}
+              />
+            }
             key="review"
             title="Reviews"
           />

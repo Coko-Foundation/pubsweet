@@ -34,8 +34,11 @@ const Cell = styled.span`
 const getNote = (notes, type) =>
   notes.find(note => note.notesType === type) || {}
 
-const getSupplementaryFiles = (supplementary = []) =>
-  supplementary.filter(file => file.type === 'supplementary') || []
+const getDeclarations = (manuscript, field) =>
+  ((manuscript.meta || {}).declarations || {})[field]
+
+const getSupplementaryFiles = supplementary =>
+  (supplementary || []).filter(file => file.fileType === 'supplementary') || []
 
 // Due to migration to new Data Model
 // Attachement component needs different data structure to work
@@ -52,13 +55,15 @@ const ReviewMetadata = ({ manuscript }) => (
       <div>
         <Heading>Open Peer Review :</Heading>
         <Cell>
-          {manuscript.meta.declarations.openPeerReview === 'yes' ? 'Yes' : 'No'}
+          {getDeclarations(manuscript, 'openPeerReview') === 'yes'
+            ? 'Yes'
+            : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Streamlined Review :</Heading>
         <Cell>
-          {manuscript.meta.declarations.streamlinedReview === 'yes'
+          {getDeclarations(manuscript, 'streamlinedReview') === 'yes'
             ? 'Please view supplementary uploaded files'
             : 'No'}
         </Cell>
@@ -66,20 +71,23 @@ const ReviewMetadata = ({ manuscript }) => (
       <div>
         <Heading>Part of Research Nexus :</Heading>
         <Cell>
-          {manuscript.meta.declarations.researchNexus === 'yes' ? 'Yes' : 'No'}
+          {getDeclarations(manuscript, 'researchNexus') === 'yes'
+            ? 'Yes'
+            : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Pre-registered :</Heading>
         <Cell>
-          {manuscript.meta.declarations.preregistered === 'yes' ? 'Yes' : 'No'}
+          {getDeclarations(manuscript, 'preregistered') === 'yes'
+            ? 'Yes'
+            : 'No'}
         </Cell>
       </div>
       <div>
         <Heading>Suggested Reviewers :</Heading>
         <Cell>
-          {((manuscript.meta.suggestions || {}).reviewers || {}).suggested ||
-            'None'}
+          {((manuscript.suggestions || {}).reviewers || {}).suggested || 'None'}
         </Cell>
       </div>
       <div>

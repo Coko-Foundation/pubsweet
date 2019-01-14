@@ -1,4 +1,4 @@
-import { throttle, cloneDeep, isEmpty } from 'lodash'
+import { throttle, cloneDeep, isEmpty, set } from 'lodash'
 import { compose, withProps, withState, withHandlers } from 'recompose'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
@@ -14,8 +14,8 @@ const fragmentFields = `
     created
     label
     filename
+    fileType
     mimeType
-    type
     size
     url
   }
@@ -23,37 +23,24 @@ const fragmentFields = `
     open
     recommendation
     created
+    isDecision
     comments {
       content
     }
     user {
-      identities {
-        ... on Local {
-          name {
-            surname
-          }
-        }
-      }
+      id
+      username
     }
   }
   teams {
     id
     role
     members {
-      status
-      user {
-        id
-        username
-        identities {
-          ... on Local {
-            name {
-              surname
-            }
-          }
-        }
-      }
+      id
+      username
     }
   }
+  decision
   status
   meta {
     title
@@ -73,8 +60,6 @@ const fragmentFields = `
       date
     }
     notes {
-      id
-      created
       notesType
       content
     }
@@ -129,65 +114,25 @@ const updateMutation = gql`
 const uploadSuplementaryFilesMutation = gql`
   mutation($file: Upload!) {
     upload(file: $file) {
-      id
-      created
-      filename
-      label
-      size
-      mimeType
       url
     }
   }
 `
 
-const omitSpecialKeysDeep = object => {
-  const output = {}
-
-  Object.entries(object).forEach(([key, value]) => {
-    if (!key.startsWith('_')) {
-      if (
-        typeof value === 'object' &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        output[key] = omitSpecialKeysDeep(value)
-      } else {
-        output[key] = value
-      }
+const createFileMutation = gql`
+  mutation($file: Upload!) {
+    createFile(file: $file) {
+      id
+      created
+      label
+      filename
+      fileType
+      mimeType
+      size
+      url
     }
-  })
-
-  return output
-}
-
-const createObject = (key, value) => {
-  const obj = {}
-  const parts = key.split('.')
-  if (parts.length === 1) {
-    obj[parts[0]] = value
-  } else if (parts.length > 1) {
-    // concat all but the first part of the key
-    const remainingParts = parts.slice(1, parts.length).join('.')
-    obj[parts[0]] = createObject(remainingParts, value)
   }
-  return obj
-}
-
-// const stripNullsDeep = object => {
-//   const output = {}
-
-//   Object.entries(object).forEach(([key, value]) => {
-//     if (value !== null) {
-//       if (typeof value === 'object' && !Array.isArray(value)) {
-//         output[key] = stripNullsDeep(value)
-//       } else {
-//         output[key] = value
-//       }
-//     }
-//   })
-
-//   return output
-// }
+`
 
 export default compose(
   graphql(query, {
@@ -199,58 +144,46 @@ export default compose(
     }),
     props: ({ data }) => ({ data }),
   }),
-  graphql(uploadSuplementaryFilesMutation, {
+  graphql(createFileMutation, {
     props: ({ mutate, ownProps }) => ({
-      uploadFile: file => {
+      createFile: value => {
+        const file = {
+          url: value.url,
+          filename: value.filename,
+          mimeType: value.mimeType,
+          size: value.size,
+          fileType: 'supplementary',
+          object: 'Manuscript',
+          objectId: ownProps.match.params.version,
+        }
+
         mutate({
           variables: {
             file,
-          },
-          update: (proxy, { data: { upload } }) => {
-            const { manuscript } = cloneDeep(ownProps.data)
-            manuscript.files.push(
-              Object.assign({}, { ...upload }, { type: 'supplementary' }),
-            )
-            proxy.writeQuery({
-              query: gql`
-              query($id: ID!) {
-                manuscript(id: $id) {
-                  ${fragmentFields}
-                }
-              }
-              `,
-              variables: {
-                id: ownProps.match.params.version,
-              },
-              data: { manuscript },
-            })
           },
         })
       },
     }),
   }),
+  graphql(uploadSuplementaryFilesMutation, {
+    props: ({ mutate, ownProps }) => ({
+      uploadFile: file =>
+        mutate({
+          variables: {
+            file,
+          },
+        }),
+    }),
+  }),
   graphql(updateMutation, {
     props: ({ mutate, ownProps }) => {
       const updateManuscript = (value, path) => {
+        const input = {}
+        set(input, path, value)
         mutate({
           variables: {
             id: ownProps.match.params.version,
-            input: JSON.stringify(createObject(path, value)),
-          },
-          update: (proxy, { data: { updateManuscript } }) => {
-            proxy.writeQuery({
-              query: gql`
-              query($id: ID!) {
-                manuscript(id: $id) {
-                  ${fragmentFields}
-                }
-              }
-              `,
-              variables: {
-                id: ownProps.match.params.version,
-              },
-              data: { manuscript: updateManuscript },
-            })
+            input: JSON.stringify(input),
           },
         })
       }
@@ -264,27 +197,13 @@ export default compose(
   graphql(updateMutation, {
     props: ({ mutate, ownProps }) => ({
       onSubmit: (manuscript, { history }) => {
-        const data = cloneDeep(manuscript)
-        data.status = 'submitted'
+        const updateManuscript = {
+          status: 'submitted',
+        }
         mutate({
           variables: {
             id: ownProps.match.params.version,
-            input: JSON.stringify(data),
-          },
-          update: (proxy, { data: { updateManuscript } }) => {
-            proxy.writeQuery({
-              query: gql`
-              query($id: ID!) {
-                manuscript(id: $id) {
-                  ${fragmentFields}
-                }
-              }
-              `,
-              variables: {
-                id: ownProps.match.params.version,
-              },
-              data: { manuscript: data },
-            })
+            input: JSON.stringify(updateManuscript),
           },
         }).then(() => {
           history.push('/')
@@ -296,6 +215,7 @@ export default compose(
   withProps(({ getFile, manuscript, match: { params: { journal } } }) => ({
     journal: { id: journal },
     forms: cloneDeep(getFile),
+    manuscript,
   })),
   withFormik({
     initialValues: {},

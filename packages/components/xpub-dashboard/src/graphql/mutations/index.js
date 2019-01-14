@@ -2,16 +2,34 @@ import gql from 'graphql-tag'
 
 export default {
   deleteManuscriptMutation: gql`
-    mutation($id: ID) {
-      deleteManuscript(id: $id) {
-        id
-      }
+    mutation($id: ID!) {
+      deleteManuscript(id: $id)
     }
   `,
   reviewerResponseMutation: gql`
-    mutation($id: ID!, $response: String) {
-      reviewerResponse(id: $id, response: $response) {
+    mutation($currentUserId: ID!, $action: String, $teamId: ID!) {
+      reviewerResponse(
+        currentUserId: $currentUserId
+        action: $action
+        teamId: $teamId
+      ) {
         id
+        role
+        teamType
+        name
+        object {
+          objectId
+          objectType
+        }
+        objectType
+        members {
+          id
+          username
+        }
+        status {
+          user
+          status
+        }
       }
     }
   `,
@@ -27,20 +45,27 @@ export default {
       createManuscript(input: $input) {
         id
         created
+        manuscriptVersions {
+          id
+        }
         teams {
+          id
+          role
           name
+          teamType
           object {
-            id
+            objectId
+            objectType
           }
           objectType
           members {
-            user {
-              id
-              username
-            }
+            id
+            username
+          }
+          status {
+            user
             status
           }
-          role
         }
         status
         reviews {

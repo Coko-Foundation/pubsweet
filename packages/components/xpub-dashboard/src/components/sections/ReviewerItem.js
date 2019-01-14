@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button } from '@pubsweet/ui'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
-import { getUserFromTeam } from 'xpub-selectors'
+import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/Authorize'
+// Enable that when Team Models is updated
+// import { getUserFromTeam } from 'xpub-selectors'
 import { Item, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 import { Actions, ActionContainer } from '../molecules/Actions'
@@ -14,12 +15,22 @@ import VersionTitle from './VersionTitle'
 // TODO: review id in link
 
 const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
+  const team =
+    (version.teams || []).find(team => team.teamType === 'reviewerEditor') || {}
   const { status } =
-    getUserFromTeam(version, 'reviewerEditor').filter(
-      member => member.user.id === currentUser.id,
-    )[0] || {}
+    (team.status || []).filter(member => member.user === currentUser.id)[0] ||
+    {}
 
-  const review = version.reviews[0] || {}
+  // Enable that when Team Models is updated
+  // const { status } =
+  //   getUserFromTeam(version, 'reviewerEditor').filter(
+  //     member => member.id === currentUser.id,
+  //   )[0] || {}
+
+  const review =
+    (version.reviews || []).find(
+      review => review.user.id === currentUser.id && !review.isDecision,
+    ) || {}
 
   return (
     <AuthorizeWithGraphQL
@@ -31,7 +42,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
         <Body>
           <VersionTitle version={version} />
 
-          {status === 'accepted' && (
+          {(status === 'accepted' || status === 'completed') && (
             <Links>
               <LinkContainer>
                 <JournalLink
@@ -40,7 +51,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
                   page="reviews"
                   version={version}
                 >
-                  {review.recommendation ? 'Completed' : 'Do Review'}
+                  {status === 'completed' ? 'Completed' : 'Do Review'}
                 </JournalLink>
               </LinkContainer>
             </Links>
@@ -51,7 +62,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
               <ActionContainer>
                 <Button
                   onClick={() => {
-                    reviewerResponse(version, 'accepted')
+                    reviewerResponse(currentUser.id, 'accepted', team.id)
                   }}
                 >
                   accept
@@ -63,7 +74,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
               <ActionContainer>
                 <Button
                   onClick={() => {
-                    reviewerResponse(version, 'rejected')
+                    reviewerResponse(currentUser.id, 'rejected', team.id)
                   }}
                 >
                   reject
