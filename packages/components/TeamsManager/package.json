@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-component-teams-manager",
-  "version": "1.1.32",
+  "version": "1.1.33",
   "description": "Basic teams manager component for PubSweet",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^9.1.1",
+    "@pubsweet/ui": "^9.1.2",
     "prop-types": "^15.5.10",
-    "pubsweet-client": "^8.0.2",
+    "pubsweet-client": "^8.0.3",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"

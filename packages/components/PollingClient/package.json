@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-polling-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A client component that poll the server in order to release the lock of a resource",
   "main": "index.js",
   "repository": {
