@@ -42,5 +42,6 @@ module.exports = async (commandArguments = process.argv) => {
   await setupDb(finalOpts)
 
   // destroy pool to avoid delay before command exits
-  db.destroy()
+  await db.destroy()
+  process.exit(0)
 }
