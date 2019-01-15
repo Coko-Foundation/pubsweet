@@ -4,7 +4,7 @@ import FactoryLibrary from './FactoryLibrary'
 class LayoutAbstract extends React.Component {
   constructor() {
     super()
-    FactoryLibrary.create().then(Library => {
+    FactoryLibrary.create('uiAdapter').then(Library => {
       const library = new Library()
       this.setState({
         library: this.administration ? library : library.elements,
