@@ -1,71 +1,126 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CheckboxGroup } from '@pubsweet/ui'
+import config from 'config'
+import gql from 'graphql-tag'
+import { graphql, compose } from 'react-apollo'
+
+const updateTeamMutation = gql`
+  mutation($id: ID, $input: TeamInput) {
+    updateTeam(id: $id, input: $input) {
+      id
+      teamType
+      name
+      members {
+        id
+        username
+        teams {
+          id
+          teamType
+        }
+      }
+    }
+  }
+`
+
+const createTeamMutation = gql`
+  mutation($input: TeamInput) {
+    createTeam(input: $input) {
+      id
+      teamType
+      name
+      members {
+        id
+        username
+        teams {
+          id
+          teamType
+        }
+      }
+    }
+  }
+`
+
+const getTeamsQuery = gql`
+  {
+    teams {
+      id
+      teamType
+      members {
+        id
+      }
+    }
+  }
+`
+
+const configuredTeams = config.authsome.teams
+const teamsCheckboxGroupOptions = Object.entries(configuredTeams).map(
+  ([shortName, details]) => ({
+    value: shortName,
+    label: details.name,
+  }),
+)
 
 class User extends React.Component {
-  constructor(props) {
-    super(props)
-    this.props.getTeams()
-    this.state = {}
-
-    this.teamsCheckboxGroupOptions = Object.entries(props.configuredTeams).map(
-      ([shortName, details]) => ({
-        value: shortName,
-        label: details.name,
-      }),
-    )
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   findExistingTeam(teamType) {
-    const { teams } = this.props
-    return teams.find(
+    return this.props.getTeamsQuery.teams.find(
       team => team.teamType === teamType && team.object === undefined,
     )
   }
 
   addMember(teamType) {
-    const { user, createTeam, updateTeam, configuredTeams } = this.props
+    const { user } = this.props
     const existingTeam = this.findExistingTeam(teamType)
+
     if (existingTeam) {
-      if (!existingTeam.members.includes(user.id)) {
-        // console.log('found team', existingTeam, 'would add user', user)
-        existingTeam.members.push(user.id)
-        updateTeam(existingTeam)
-      } else {
-        // console.log('user already member of', existingTeam)
+      const members = existingTeam.members.map(member => member.id)
+      if (!members.includes(user.id)) {
+        members.push(user.id)
+        this.updateTeamMutation({
+          variables: {
+            id: existingTeam.id,
+            input: { members },
+          },
+        })
       }
     } else {
-      // console.log('team not found', teamType, 'would create team with', user)
-
-      createTeam({
-        teamType,
-        name: configuredTeams[teamType].name,
-        members: [user.id],
+      this.createTeamMutation({
+        variables: {
+          input: {
+            teamType,
+            name: configuredTeams[teamType].name,
+            members: [user.id],
+          },
+        },
       })
     }
   }
 
   removeMember(teamType) {
-    const { user, updateTeam } = this.props
+    const { user } = this.props
     const existingTeam = this.findExistingTeam(teamType)
     if (!existingTeam) {
       return
     }
 
     if (existingTeam) {
-      if (existingTeam.members.includes(user.id)) {
-        // console.log('found team', existingTeam, 'would remove user', user)
-        existingTeam.members = existingTeam.members.filter(
-          member => member !== user.id,
-        )
-        updateTeam(existingTeam)
+      let members = existingTeam.members.map(member => member.id)
+      if (members.includes(user.id)) {
+        members = members.filter(member => member !== user.id)
+        this.updateTeamMutation({
+          variables: {
+            id: existingTeam.id,
+            input: { members },
+          },
+        })
       }
     }
   }
 
   onTeamChange(teamTypes) {
-    const { configuredTeams } = this.props
-
     // Idempotently add member
     teamTypes.forEach(teamType => this.addMember(teamType))
 
@@ -77,19 +132,11 @@ class User extends React.Component {
   }
 
   render() {
-    const { user, teams, configuredTeams } = this.props
-    const activeTeams = Object.entries(configuredTeams).filter(
-      ([teamType, _]) =>
-        teams.find(
-          team =>
-            team.teamType === teamType &&
-            team.object === undefined &&
-            team.members.includes(user.id),
-        ),
-    )
-    const checkBoxValue = activeTeams
-      ? activeTeams.map(([teamType, _]) => teamType)
-      : []
+    this.updateTeamMutation = this.props.updateTeamMutation
+    this.createTeamMutation = this.props.createTeamMutation
+    this.getTeamsQuery = this.props.getTeamsQuery
+
+    const { user } = this.props
 
     return (
       <tr className="user">
@@ -102,8 +149,8 @@ class User extends React.Component {
             inline
             name="checkboxgroup-inline"
             onChange={value => this.onTeamChange(value)}
-            options={this.teamsCheckboxGroupOptions}
-            value={checkBoxValue}
+            options={teamsCheckboxGroupOptions}
+            value={user.teams.map(team => team.teamType)}
           />
         </td>
       </tr>
@@ -111,8 +158,8 @@ class User extends React.Component {
   }
 }
 
-User.propTypes = {
-  user: PropTypes.object.isRequired,
-}
-
-export default User
+export default compose(
+  graphql(updateTeamMutation, { name: 'updateTeamMutation' }),
+  graphql(createTeamMutation, { name: 'createTeamMutation' }),
+  graphql(getTeamsQuery, { name: 'getTeamsQuery' }),
+)(User)
