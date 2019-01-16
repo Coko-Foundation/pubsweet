@@ -87,7 +87,8 @@
         ],
         "testPathIgnorePatterns": [
           "/node_modules",
-          "config/test"
+          "config/test",
+          "model-*"
         ],
         "globals": {
           "PUBSWEET_COMPONENTS": [],
@@ -151,6 +152,13 @@
         "displayName": "sse",
         "testRegex": "/test/.*_test.js$",
         "testEnvironment": "node"
+      },
+      {
+        "rootDir": "<rootDir>/packages/components/model-team",
+        "displayName": "model-team",
+        "testRegex": "/test/.*_test.js$",
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+        "testEnvironment": "jest-environment-db"
       }
     ]
   },
