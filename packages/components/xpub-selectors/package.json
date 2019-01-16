@@ -1,6 +1,6 @@
 {
   "name": "xpub-selectors",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Redux selectors for use in xpub components",
   "main": "src",
   "license": "MIT"

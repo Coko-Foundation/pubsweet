@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.2.7...pubsweet-component-login@1.2.8) (2019-01-16)
+
+
+### Bug Fixes
+
+* **graphql:** review components fixes ([8094d9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8094d9e))
+* **login:** error on integration test failed login ([f061e58](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f061e58))
+* **login:** redirect to the dashboard ([41a7cc9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/41a7cc9))
+* **login:** unneeded vars ([7610f94](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7610f94))
+* **test:** formbuilder ([93c55fd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93c55fd))
+* **test:** login tests ([438ab2e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/438ab2e))
+* **test:** problems with eslint and test ([48f7fe2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48f7fe2))
+
+
+
+
+
 ## [1.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@1.2.6...pubsweet-component-login@1.2.7) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-login

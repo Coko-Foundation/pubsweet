@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@4.0.6...pubsweet-component-xpub-dashboard@4.0.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* **components:** change back teams model to previous model ([a5eeae0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a5eeae0))
+* **components:** fixing components after new manuscript version ([89537ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/89537ff))
+* **components:** generals fixes on the components ([4a78cfe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4a78cfe))
+* **components:** graphql data model changes ([4b61093](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4b61093))
+* **formik:** improve formik usage ([24b42ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/24b42ff))
+* **graphql:** review components fixes ([8094d9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8094d9e))
+* **manuscript:** wax did not show ([80ae8c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/80ae8c6))
+* **test:** login tests ([438ab2e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/438ab2e))
+* **xpub-review:** changes tp reviews ([5ae4240](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5ae4240))
+
+
+
+
+
 ## [4.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@4.0.5...pubsweet-component-xpub-dashboard@4.0.6) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-dashboard
