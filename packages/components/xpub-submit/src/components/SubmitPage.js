@@ -200,6 +200,7 @@ export default compose(
         const updateManuscript = {
           status: 'submitted',
         }
+
         mutate({
           variables: {
             id: ownProps.match.params.version,
@@ -216,22 +217,27 @@ export default compose(
     journal: { id: journal },
     forms: cloneDeep(getFile),
     manuscript,
+    submitSubmission: ({ validateForm, setSubmitting, handleSubmit }) =>
+      validateForm().then(
+        props => (isEmpty(props) ? setSubmitting(false) : handleSubmit()),
+      ),
   })),
   withFormik({
     initialValues: {},
     mapPropsToValues: ({ manuscript }) => manuscript,
     displayName: 'submit',
-    handleSubmit: (props, { props: { onSubmit, history } }) =>
-      onSubmit(props, { history }),
+    handleSubmit: (
+      props,
+      { validateForm, setSubmitting, props: { onSubmit, history } },
+    ) =>
+      validateForm().then(
+        props =>
+          isEmpty(props) ? onSubmit(props, { history }) : setSubmitting(false),
+      ),
   }),
   withState('confirming', 'setConfirming', false),
   withHandlers({
-    toggleConfirming: ({ validateForm, setConfirming, handleSubmit }) => () => {
-      validateForm().then(props =>
-        isEmpty(props)
-          ? setConfirming(confirming => !confirming)
-          : handleSubmit(),
-      )
-    },
+    toggleConfirming: ({ validateForm, setConfirming, handleSubmit }) => () =>
+      setConfirming(confirming => !confirming),
   }),
 )(Submit)
