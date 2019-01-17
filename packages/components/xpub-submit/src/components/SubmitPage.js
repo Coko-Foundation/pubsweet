@@ -218,8 +218,8 @@ export default compose(
     forms: cloneDeep(getFile),
     manuscript,
     submitSubmission: ({ validateForm, setSubmitting, handleSubmit }) =>
-      validateForm().then(
-        props => (isEmpty(props) ? setSubmitting(false) : handleSubmit()),
+      validateForm().then(props =>
+        isEmpty(props) ? setSubmitting(false) : handleSubmit(),
       ),
   })),
   withFormik({
@@ -230,9 +230,8 @@ export default compose(
       props,
       { validateForm, setSubmitting, props: { onSubmit, history } },
     ) =>
-      validateForm().then(
-        props =>
-          isEmpty(props) ? onSubmit(props, { history }) : setSubmitting(false),
+      validateForm().then(props =>
+        isEmpty(props) ? onSubmit(props, { history }) : setSubmitting(false),
       ),
   }),
   withState('confirming', 'setConfirming', false),
