@@ -1,5 +1,5 @@
 const { can, canKnowAbout, filterAll } = require('../helpers/authorization')
-
+const { ref, lit } = require('objection')
 // create a function which creates a new entity and performs authorization checks
 const createCreator = (entityName, EntityModel) => async (input, ctx) => {
   await can(ctx.user, 'create', entityName)
@@ -36,10 +36,45 @@ const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
 
 // create a function which fetches all entities of the
 // given model and performs authorization checks
-const fetchAllCreator = (entityName, EntityModel) => async ctx => {
+const fetchAllCreator = (entityName, EntityModel) => async (where, ctx) => {
   await can(ctx.user, 'read', entityName)
 
-  const entities = await EntityModel.all()
+  let entities
+  if (where) {
+    const { _json } = where
+    delete where._json
+    let query = EntityModel.query().where(where)
+
+    // Add appropriate JSON conditionals
+    if (_json) {
+      _json.forEach(condition => {
+        query = query.where(
+          ref(condition.ref),
+          '=',
+          lit(condition.value).castJson(),
+        )
+      })
+    }
+
+    const { _relations } = where
+    delete where._relations
+
+    // Add conditionals for related ids
+    if (_relations) {
+      _relations.forEach(condition => {
+        condition.ids.forEach((id, index) => {
+          const alias = `members_${index}`
+          query = query
+            .joinRelation(`members as ${alias}`)
+            .where(`${alias}.id`, id)
+        })
+      })
+    }
+
+    entities = await query
+  } else {
+    entities = await EntityModel.query()
+  }
   return filterAll(ctx.user, entities)
 }
 
@@ -74,5 +109,6 @@ module.exports = function connector(entityName, EntityModel) {
     fetchAll,
     fetchOne,
     fetchSome,
+    model: EntityModel,
   }
 }
