@@ -3,8 +3,38 @@ const resolvers = {
     team(_, { id }, ctx) {
       return ctx.connectors.Team.fetchOne(id, ctx)
     },
-    teams(_, vars, ctx) {
-      return ctx.connectors.Team.fetchAll(ctx)
+    teams(_, { where }, ctx) {
+      // A little bit of API sugar to provide querying with e.g.
+      // where: {
+      //   role: 'test',
+      //   object: {
+      //     objectId: fragment.id,
+      //     objectType: 'fragment',
+      //   },
+      //   members: [UUID]
+      // }
+      // which is then translated into appropriate JSON/relation queries.
+      if (
+        where &&
+        where.object &&
+        where.object.objectId &&
+        where.object.objectType
+      ) {
+        const { object } = where
+        delete where.object
+        where._json = [
+          { ref: 'teams.object:objectId', value: object.objectId },
+          { ref: 'teams.object:objectType', value: object.objectType },
+        ]
+      }
+
+      if (where.members) {
+        const { members } = where
+        delete where.members
+        where._relations = [{ relation: 'members', ids: members }]
+      }
+
+      return ctx.connectors.Team.fetchAll(where, ctx)
     },
   },
   Mutation: {
@@ -17,6 +47,51 @@ const resolvers = {
     updateTeam(_, { id, input }, ctx) {
       return ctx.connectors.Team.update(id, input, ctx)
     },
+    async addMembers(_, { id, members }, ctx) {
+      const {
+        helpers: { can, canKnowAbout },
+      } = require('pubsweet-server')
+
+      await can(ctx.user, 'addMembers', id)
+
+      let team = await ctx.connectors.Team.model.query().findById(id)
+
+      await team.$relatedQuery('members').relate(members)
+
+      team = await ctx.connectors.Team.model
+        .query()
+        .findById(id)
+        .eager('members')
+
+      team.members = team.members.map(member => member.id)
+
+      const outputFilter = await canKnowAbout(ctx.user, team)
+      return outputFilter(team)
+    },
+    async removeMembers(_, { id, members }, ctx) {
+      const {
+        helpers: { can, canKnowAbout },
+      } = require('pubsweet-server')
+
+      await can(ctx.user, 'removeMembers', id)
+
+      let team = await ctx.connectors.Team.model.query().findById(id)
+
+      await team
+        .$relatedQuery('members')
+        .unrelate()
+        .whereIn('id', members)
+
+      team = await ctx.connectors.Team.model
+        .query()
+        .findById(id)
+        .eager('members')
+
+      team.members = team.members.map(member => member.id)
+
+      const outputFilter = await canKnowAbout(ctx.user, team)
+      return outputFilter(team)
+    },
   },
   Team: {
     members(team, vars, ctx) {
@@ -28,18 +103,19 @@ const resolvers = {
 const typeDefs = `
   extend type Query {
     team(id: ID): Team
-    teams: [Team]
+    teams(where: TeamInput): [Team]
   }
 
   extend type Mutation {
     createTeam(input: TeamInput): Team
     deleteTeam(id: ID): Team
     updateTeam(id: ID, input: TeamInput): Team
+    addMembers(id: ID!, members: [ID!]!): Team
+    removeMembers(id: ID!, members: [ID!]!): Team
   }
 
   type Team {
     id: ID!
-    rev: String
     type: String!
     teamType: String!
     name: String!
@@ -55,11 +131,10 @@ const typeDefs = `
   }
 
   input TeamInput {
-    teamType: String
+    role: String
     name: String
     object: TeamObjectInput
     members: [ID!]
-    rev: String
     global: Boolean
 
   }
