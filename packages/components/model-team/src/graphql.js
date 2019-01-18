@@ -48,14 +48,9 @@ const resolvers = {
       return ctx.connectors.Team.update(id, input, ctx)
     },
     async addMembers(_, { id, members }, ctx) {
-      const {
-        helpers: { can, canKnowAbout },
-      } = require('pubsweet-server')
-
-      await can(ctx.user, 'addMembers', id)
+      await ctx.helpers.can(ctx.user, 'addMembers', id)
 
       let team = await ctx.connectors.Team.model.query().findById(id)
-
       await team.$relatedQuery('members').relate(members)
 
       team = await ctx.connectors.Team.model
@@ -65,22 +60,17 @@ const resolvers = {
 
       team.members = team.members.map(member => member.id)
 
-      const outputFilter = await canKnowAbout(ctx.user, team)
+      const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, team)
       return outputFilter(team)
     },
     async removeMembers(_, { id, members }, ctx) {
-      const {
-        helpers: { can, canKnowAbout },
-      } = require('pubsweet-server')
-
-      await can(ctx.user, 'removeMembers', id)
+      await ctx.helpers.can(ctx.user, 'removeMembers', id)
 
       let team = await ctx.connectors.Team.model.query().findById(id)
-
       await team
         .$relatedQuery('members')
         .unrelate()
-        .whereIn('id', members)
+        .whereIn('team_members.user_id', members)
 
       team = await ctx.connectors.Team.model
         .query()
@@ -89,7 +79,7 @@ const resolvers = {
 
       team.members = team.members.map(member => member.id)
 
-      const outputFilter = await canKnowAbout(ctx.user, team)
+      const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, team)
       return outputFilter(team)
     },
   },
