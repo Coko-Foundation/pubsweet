@@ -40,7 +40,7 @@ const verifyPassword = (username, password, done) => {
   const errorMessage = 'Wrong username or password.'
   logger.debug('User finding:', username)
 
-  const User = require('./user')
+  const { User } = require('@pubsweet/models')
   User.findByUsername(username)
     .then(user => {
       logger.debug('User found:', user.username)

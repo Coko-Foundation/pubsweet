@@ -159,6 +159,13 @@
         "testRegex": "/test/.*_test.js$",
         "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
         "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/packages/components/model-user",
+        "displayName": "model-user",
+        "testRegex": "/test/.*_test.js$",
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+        "testEnvironment": "jest-environment-db"
       }
     ]
   },

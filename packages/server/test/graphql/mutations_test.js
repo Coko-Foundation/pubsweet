@@ -1,19 +1,16 @@
 const { model: User } = require('@pubsweet/model-user')
-const { model: Team } = require('@pubsweet/model-team')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
 const api = require('../helpers/api')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('pubsweet-server/src/authentication')
 
 describe('GraphQL core mutations', () => {
   let token
   let user
-  let team
 
   beforeEach(async () => {
     await cleanDB()
     user = await new User(fixtures.adminUser).save()
-    team = await new Team(fixtures.readerTeam).save()
     token = authentication.token.create(user)
   })
 
@@ -74,67 +71,6 @@ describe('GraphQL core mutations', () => {
 
       expect(body).toEqual({
         data: { deleteUser: { username: 'admin' } },
-      })
-    })
-
-    it('can create a team', async () => {
-      const { body } = await api.graphql.query(
-        `mutation($input: TeamInput) {
-          createTeam(input: $input) {
-            name
-            object {
-              objectId
-              objectType
-            }
-          }
-        }`,
-        {
-          input: {
-            name: 'Awesome Team',
-            teamType: 'awesome',
-            object: {
-              objectId: user.id,
-              objectType: 'user',
-            },
-            members: [user.id],
-          },
-        },
-        token,
-      )
-
-      expect(body).toEqual({
-        data: {
-          createTeam: {
-            name: 'Awesome Team',
-            object: {
-              objectId: user.id,
-              objectType: 'user',
-            },
-          },
-        },
-      })
-    })
-
-    it('can update a team', async () => {
-      const { body } = await api.graphql.query(
-        `mutation($id: ID, $input: TeamInput) {
-          updateTeam(id: $id, input: $input) { name }
-        }`,
-        {
-          id: team.id,
-          input: {
-            name: 'Updated Team',
-          },
-        },
-        token,
-      )
-
-      expect(body).toEqual({
-        data: {
-          updateTeam: {
-            name: 'Updated Team',
-          },
-        },
       })
     })
 

@@ -1,8 +1,9 @@
-const STATUS = require('http-status-codes')
 const { Fragment, Collection } = require('@pubsweet/models')
 const { model: User } = require('@pubsweet/model-user')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
+
+const userFixtures = require('@pubsweet/model-user/test/fixtures')
 
 describe('Model', () => {
   let user
@@ -10,8 +11,8 @@ describe('Model', () => {
 
   beforeEach(async () => {
     await dbCleaner()
-    user = await new User(fixtures.user).save()
-    otherUser = await new User(fixtures.updatedUser).save()
+    user = await new User(userFixtures.user).save()
+    otherUser = await new User(userFixtures.updatedUser).save()
   })
 
   it('initially has no owners', () => {
@@ -38,7 +39,7 @@ describe('Model', () => {
 
   it('can validate an object', () => {
     const user = new User({
-      ...fixtures.user,
+      ...userFixtures.user,
       username: 'invaliduser',
       email: 'notanemail',
     })
@@ -61,13 +62,15 @@ describe('Model', () => {
     })
   })
 
-  // TODO re-enable test once we switch to proper uniqueness constraints
-  it.skip('saving the same object multiple times in parallel throws conflict error', async () => {
+  it('saving the same object multiple times in parallel throws conflict error', async () => {
     expect.hasAssertions()
+
+    const sameUser = await User.find(user.id)
+
     try {
-      await Promise.all([user.save(), user.save()])
+      await Promise.all([user.save(), sameUser.save()])
     } catch (e) {
-      expect(e).toHaveProperty('status', STATUS.CONFLICT)
+      expect(e.message).toMatch('Integrity Error')
     }
   })
 

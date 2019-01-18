@@ -28,34 +28,6 @@ const updatedFragment = {
   presentation: '<p><h1>Updated</h1></p>',
 }
 
-const user = {
-  type: 'user',
-  username: 'testuser',
-  email: 'test@example.com',
-  password: 'test',
-}
-
-const updatedUser = {
-  username: 'changeduser',
-  email: 'changed@email.com',
-  password: 'changed',
-}
-
-const otherUser = {
-  type: 'user',
-  username: 'anotheruser',
-  email: 'another@com.nz',
-  password: 'rubgy',
-}
-
-const adminUser = {
-  type: 'user',
-  username: 'admin',
-  email: 'admin@admins.example.org',
-  password: 'admin',
-  admin: true,
-}
-
 const contribTeamType = {
   name: 'Contributors',
   permissions: 'POST',
@@ -91,10 +63,6 @@ module.exports = {
   updatedCollection,
   fragment,
   updatedFragment,
-  user,
-  updatedUser,
-  otherUser,
-  adminUser,
   teams,
   contributorTeam,
   readerTeam,

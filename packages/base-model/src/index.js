@@ -92,7 +92,11 @@ class BaseModel extends Model {
       let trx, saved
       try {
         trx = await transaction.start(BaseModel.knex())
-        const current = await this.constructor.query(trx).findById(this.id)
+        // trx.forUpdate()
+        const current = await this.constructor
+          .query(trx)
+          .findById(this.id)
+          .forUpdate()
 
         const storedUpdateTime = new Date(current.updated).getTime()
         const instanceUpdateTime = new Date(this.updated).getTime()

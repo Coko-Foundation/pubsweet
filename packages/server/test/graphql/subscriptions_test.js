@@ -1,7 +1,7 @@
 const { model: User } = require('@pubsweet/model-user')
 const cleanDB = require('../helpers/db_cleaner')
 const fixtures = require('../fixtures/fixtures')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('pubsweet-server/src/authentication')
 const { startServer } = require('../../src')
 
 const WebSocket = require('ws')

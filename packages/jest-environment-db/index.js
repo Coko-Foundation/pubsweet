@@ -26,14 +26,14 @@ class DatabaseTestEnvironment extends NodeEnvironment {
 
   async teardown() {
     // terminate other connections from test before dropping db
-    await client.query(
-      `REVOKE CONNECT ON DATABASE ${this.global.__testDbName} FROM public`,
-    )
-    await client.query(`
-      SELECT pg_terminate_backend(pg_stat_activity.pid)
-      FROM pg_stat_activity
-      WHERE pg_stat_activity.datname = '${this.global.__testDbName}'`)
-    await client.query(`DROP DATABASE ${this.global.__testDbName}`)
+    // await client.query(
+    //   `REVOKE CONNECT ON DATABASE ${this.global.__testDbName} FROM public`,
+    // )
+    // await client.query(`
+    //   SELECT pg_terminate_backend(pg_stat_activity.pid)
+    //   FROM pg_stat_activity
+    //   WHERE pg_stat_activity.datname = '${this.global.__testDbName}'`)
+    // await client.query(`DROP DATABASE ${this.global.__testDbName}`)
     await client.end()
     await super.teardown()
   }

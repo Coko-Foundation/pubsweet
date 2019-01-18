@@ -1,21 +1,17 @@
-const dbCleaner = require('./helpers/db_cleaner')
-const { model: User } = require('@pubsweet/model-user')
-
-const fixtures = require('./fixtures/fixtures')
-
-const userFixture = fixtures.user
+const { dbCleaner } = require('pubsweet-server/test')
+const User = require('../src/user')
 
 describe('User', () => {
   beforeEach(dbCleaner)
 
   it('validates passwords correctly after saving to db', async () => {
-    const user = new User(userFixture)
+    const user = new User(fixtures.user)
     await user.save()
 
     const savedUser = await User.findByUsername(user.username)
     expect(typeof savedUser).toBe('object')
 
-    const shouldBeValid = await savedUser.validPassword(userFixture.password)
+    const shouldBeValid = await savedUser.validPassword(fixtures.user.password)
     expect(shouldBeValid).toEqual(true)
 
     const shouldBeInvalid = await savedUser.validPassword('wrongpassword')
@@ -23,9 +19,9 @@ describe('User', () => {
   })
 
   it('raises an error if trying to save a user with a non-unique username', async () => {
-    const user = new User(userFixture)
+    const user = new User(fixtures.user)
     const otherUserFixture = fixtures.otherUser
-    otherUserFixture.username = userFixture.username
+    otherUserFixture.username = fixtures.user.username
     const duplicateUser = new User(otherUserFixture)
 
     await user.save()
@@ -40,9 +36,9 @@ describe('User', () => {
   })
 
   it('raises an error if trying to save a user with a non-unique email', async () => {
-    const user = new User(userFixture)
+    const user = new User(fixtures.user)
     const otherUserFixture = fixtures.otherUser
-    otherUserFixture.email = userFixture.email
+    otherUserFixture.email = fixtures.user.email
     const duplicateUser = new User(otherUserFixture)
 
     await user.save()
@@ -57,7 +53,7 @@ describe('User', () => {
   })
 
   it('uses custom JSON serialization', async () => {
-    const user = new User(userFixture)
+    const user = new User(fixtures.user)
     await user.save()
 
     const savedUser = await User.findByUsername(user.username)
@@ -93,19 +89,14 @@ describe('User', () => {
 
   it('finds a list of users', async () => {
     const users = [
-      {
-        username: 'user1',
-        email: 'user-1@example.com',
-        password: 'foo1',
-        admin: true,
-      },
+      { username: 'user1', email: 'user-1@example.com', password: 'foo1' },
       { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
       { username: 'user3', email: 'user-3@example.com', password: 'foo3' },
     ]
 
     await Promise.all(users.map(user => new User(user).save()))
 
-    const items = await User.findByField('admin', true)
+    const items = await User.findByField('email', 'user-1@example.com')
 
     expect(items).toHaveLength(1)
     expect(items[0]).toBeInstanceOf(User)
@@ -113,19 +104,14 @@ describe('User', () => {
 
   it('finds a single user by field', async () => {
     const users = [
-      {
-        username: 'user1',
-        email: 'user-1@example.com',
-        password: 'foo1',
-        admin: true,
-      },
+      { username: 'user1', email: 'user-1@example.com', password: 'foo1' },
       { username: 'user2', email: 'user-2@example.com', password: 'foo2' },
       { username: 'user3', email: 'user-3@example.com', password: 'foo3' },
     ]
 
     await Promise.all(users.map(user => new User(user).save()))
 
-    const item = await User.findOneByField('admin', true)
+    const item = await User.findOneByField('email', 'user-1@example.com')
 
     expect(item).toBeInstanceOf(User)
 
@@ -133,7 +119,6 @@ describe('User', () => {
       expect.objectContaining({
         username: 'user1',
         email: 'user-1@example.com',
-        admin: true,
       }),
     )
   })

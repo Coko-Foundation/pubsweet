@@ -15,7 +15,7 @@ delete require.cache[require.resolve('config')]
 const { model: Manuscript } = require('./extended-data-model-component')
 const { model: User } = require('@pubsweet/model-user')
 const fixtures = require('pubsweet-server/test/fixtures/fixtures')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('pubsweet-server/src/authentication')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 

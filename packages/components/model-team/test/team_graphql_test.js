@@ -13,7 +13,7 @@ const { model: Fragment } = require('@pubsweet/model-fragment')
 const { dbCleaner, api } = require('pubsweet-server/test')
 
 const fixtures = require('pubsweet-server/test/fixtures/fixtures')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('pubsweet-server/src/authentication')
 
 const Team = require('../src/team')
 
@@ -56,6 +56,7 @@ describe('Team queries', () => {
         input: {
           name: 'My team',
           role: 'test',
+          members: [user.id],
         },
       },
       token,
@@ -65,7 +66,38 @@ describe('Team queries', () => {
       data: {
         createTeam: {
           name: 'My team',
-          members: [],
+          members: [{ id: user.id }],
+        },
+      },
+    })
+  })
+
+  it('can update a team', async () => {
+    const team = await new Team({ name: 'Before', role: 'test' }).save()
+    const { body } = await api.graphql.query(
+      `mutation($id: ID, $input: TeamInput) {
+          updateTeam(id: $id, input: $input) {
+            name
+            members {
+              id
+            }
+          }
+        }`,
+      {
+        id: team.id,
+        input: {
+          name: 'After',
+          members: [user.id],
+        },
+      },
+      token,
+    )
+
+    expect(body).toEqual({
+      data: {
+        updateTeam: {
+          name: 'After',
+          members: [{ id: user.id }],
         },
       },
     })
@@ -282,43 +314,6 @@ describe('Team queries', () => {
       },
     })
   })
-
-  //   it('can find manuscript by id', async () => {
-  //     const manuscript = await new Manuscript({ title: '1' }).save()
-
-  //     const { body } = await api.graphql.query(
-  //       `query($id: ID) {
-  //         manuscript(id: $id) {
-  //           title
-  //         }
-  //       }`,
-  //       { id: manuscript.id },
-  //       token,
-  //     )
-  //     expect(body.data.manuscript.title).toEqual('1')
-  //   })
-
-  //   it('can update a manuscript', async () => {
-  //     const manuscript = await new Manuscript({ title: 'Before' }).save()
-  //     const { body } = await api.graphql.query(
-  //       `mutation($id: ID, $input: ManuscriptInput) {
-  //         updateManuscript(id: $id, input: $input) { title }
-  //       }`,
-  //       {
-  //         id: manuscript.id,
-  //         input: {
-  //           title: 'After',
-  //         },
-  //       },
-  //       token,
-  //     )
-
-  //     expect(body).toEqual({
-  //       data: {
-  //         updateManuscript: { title: 'After' },
-  //       },
-  //     })
-  //   })
 
   //   it('can delete a manuscript', async () => {
   //     const manuscript = await new Manuscript({ title: 'To delete' }).save()

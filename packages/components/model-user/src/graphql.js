@@ -1,4 +1,3 @@
-const authentication = require('./authentication')
 const logger = require('@pubsweet/logger')
 const User = require('./user')
 
@@ -28,6 +27,8 @@ const resolvers = {
     },
     // Authentication
     async loginUser(_, { input }) {
+      const authentication = require('pubsweet-server/src/authentication')
+
       let isValid = false
       let user
       try {
@@ -49,9 +50,6 @@ const resolvers = {
     teams(user, vars, ctx) {
       return ctx.connectors.Team.fetchSome(user.teams, ctx)
     },
-    fragments(user, vars, ctx) {
-      return ctx.connectors.Fragment.fetchSome(user.fragments, ctx)
-    },
   },
 }
 
@@ -69,13 +67,11 @@ const typeDefs = `
 
   type User {
     id: ID!
-    rev: String
     type: String
     username: String!
     email: String!
     admin: Boolean
     teams: [Team!]!
-    fragments: [Fragment!]!
   }
 
   input UserInput {

@@ -7,7 +7,7 @@ const { SubscriptionServer } = require('subscriptions-transport-ws')
 const logger = require('@pubsweet/logger')
 
 const graphqlSchema = require('./schema')
-const { token } = require('@pubsweet/model-user/src/authentication')
+const { token } = require('../authentication')
 
 module.exports = {
   addSubscriptions: server => {
