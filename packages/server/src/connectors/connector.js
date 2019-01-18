@@ -1,33 +1,36 @@
-const { can, canKnowAbout, filterAll } = require('../helpers/authorization')
 const { ref, lit } = require('objection')
 // create a function which creates a new entity and performs authorization checks
 const createCreator = (entityName, EntityModel) => async (input, ctx) => {
-  await can(ctx.user, 'create', entityName)
+  await ctx.helpers.can(ctx.user, 'create', entityName)
   const entity = new EntityModel(input)
   entity.setOwners([ctx.user])
-  await can(ctx.user, 'create', entity)
+  await ctx.helpers.can(ctx.user, 'create', entity)
   const output = await entity.save()
-  const outputFilter = await canKnowAbout(ctx.user, output)
+  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, output)
   return outputFilter(output)
 }
 
 // create a function which deletes an entity and performs authorization checks
 const deleteCreator = (entityName, EntityModel) => async (id, ctx) => {
-  await can(ctx.user, 'delete', entityName)
+  await ctx.helpers.can(ctx.user, 'delete', entityName)
   const entity = await EntityModel.find(id)
-  const outputFilter = await canKnowAbout(ctx.user, entity)
-  await can(ctx.user, 'delete', entity)
+  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
+  await ctx.helpers.can(ctx.user, 'delete', entity)
 
   return outputFilter(await entity.delete())
 }
 
 // create a function which updates a new entity and performs authorization checks
 const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
-  await can(ctx.user, 'update', entityName)
+  await ctx.helpers.can(ctx.user, 'update', entityName)
   const entity = await EntityModel.find(id)
-  const outputFilter = await canKnowAbout(ctx.user, entity)
+  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   const currentAndUpdate = { current: entity, update }
-  const updateFilter = await can(ctx.user, 'update', currentAndUpdate)
+  const updateFilter = await ctx.helpers.can(
+    ctx.user,
+    'update',
+    currentAndUpdate,
+  )
 
   await entity.updateProperties(updateFilter(update))
 
@@ -37,7 +40,7 @@ const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
 // create a function which fetches all entities of the
 // given model and performs authorization checks
 const fetchAllCreator = (entityName, EntityModel) => async (where, ctx) => {
-  await can(ctx.user, 'read', entityName)
+  await ctx.helpers.can(ctx.user, 'read', entityName)
 
   let entities
   if (where) {
@@ -75,16 +78,16 @@ const fetchAllCreator = (entityName, EntityModel) => async (where, ctx) => {
   } else {
     entities = await EntityModel.query()
   }
-  return filterAll(ctx.user, entities)
+  return ctx.helpers.filterAll(ctx.user, entities)
 }
 
 // create a function which fetches by ID a single entity
 // of the given model and performs authorization checks
 const fetchOneCreator = (entityName, EntityModel) => async (id, ctx) => {
-  await can(ctx.user, 'read', entityName)
+  await ctx.helpers.can(ctx.user, 'read', entityName)
 
   const entity = await EntityModel.find(id)
-  const outputFilter = await canKnowAbout(ctx.user, entity)
+  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   return outputFilter(entity)
 }
 
