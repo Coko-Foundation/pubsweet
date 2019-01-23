@@ -25,12 +25,26 @@ class Manuscript extends BaseModel {
     }
   }
 
-  async $beforeDelete() {
-    const { model: Team } = require('@pubsweet/model-team')
+  static get relationMappings() {
+    return {
+      teams: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: require.resolve('@pubsweet/model-team/src/team'),
+        beforeInsert(model) {
+          model.objectType = 'Manuscript'
+        },
+        filter: { objectType: 'Manuscript' },
+        join: {
+          from: 'manuscripts.id',
+          to: 'teams.objectId',
+        },
+      },
+    }
+  }
 
-    await Team.deleteAssociated(this.type, this.id)
+  async $beforeDelete() {
+    return this.$relatedQuery('teams').delete()
   }
 }
 
-Manuscript.type = 'manuscript'
 module.exports = Manuscript

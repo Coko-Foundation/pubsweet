@@ -11,6 +11,8 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 }}`
 
 const { model: Manuscript } = require('./data-model-component')
+const { Team } = require('@pubsweet/models')
+
 const { dbCleaner } = require('pubsweet-server/test')
 
 describe('Manuscript', () => {
@@ -102,5 +104,26 @@ describe('Manuscript', () => {
     await expect(manuscriptB.save()).rejects.toThrow(
       'Data Integrity Error property updated',
     )
+  })
+
+  it('deletes the related teams when deleted', async () => {
+    const manuscript = await new Manuscript({ title: 'Test' }).save()
+
+    await new Team({
+      role: 'test',
+      name: 'Test',
+      objectId: manuscript.id,
+      objectType: 'Manuscript',
+    }).save()
+
+    await new Team({
+      role: 'test',
+      name: 'not associated',
+    }).save()
+
+    await manuscript.delete()
+
+    const teams = await Team.query()
+    expect(teams).toHaveLength(1)
   })
 })
