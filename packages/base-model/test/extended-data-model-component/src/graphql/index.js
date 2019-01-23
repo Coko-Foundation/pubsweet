@@ -1,7 +1,4 @@
 const Manuscript = require('../manuscript')
-const {
-  helpers: { filterAll, can, canKnowAbout },
-} = require('pubsweet-server')
 
 const resolvers = {
   Query: {
@@ -10,12 +7,20 @@ const resolvers = {
     },
 
     async publishedManuscripts(_, __, ctx) {
+      const {
+        helpers: { filterAll },
+      } = require('pubsweet-server')
+
       const manuscripts = await Manuscript.findByField('published', true)
       return filterAll(ctx.user, manuscripts)
     },
   },
   Mutation: {
     async publishManuscript(_, { id, input }, ctx) {
+      const {
+        helpers: { can, canKnowAbout },
+      } = require('pubsweet-server')
+
       const manuscript = await Manuscript.find(id)
 
       const outputFilter = await canKnowAbout(ctx.user, manuscript)

@@ -14,28 +14,26 @@ global.NODE_CONFIG = null
 delete require.cache[require.resolve('config')]
 const { model: Manuscript } = require('./extended-data-model-component')
 const { model: User } = require('@pubsweet/model-user')
-const fixtures = require('pubsweet-server/test/fixtures/fixtures')
+const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('pubsweet-server/src/authentication')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 
-describe('Extended Manuscript queries', () => {
+describe('Extended Manuscript GraphQL queries', () => {
   let token
   let user
-  let admin
-  let adminToken
+  let otherUser
+  let otherUserToken
 
   beforeEach(async () => {
     await dbCleaner()
     user = await new User(fixtures.user).save()
     token = authentication.token.create(user)
-    admin = await new User(fixtures.adminUser).save()
-    adminToken = authentication.token.create(admin)
+    otherUser = await new User(fixtures.otherUser).save()
+    otherUserToken = authentication.token.create(otherUser)
   })
 
-  // Skipped because extended inputs are being worked on upstream:
-  // https://github.com/apollographql/graphql-tools/pull/948
-  it.skip('can create a manuscript with more properties', async () => {
+  it('can create a manuscript with more properties', async () => {
     const { body } = await api.graphql.query(
       `mutation($input: ManuscriptInput) {
         createManuscript(input: $input) {
@@ -55,7 +53,7 @@ describe('Extended Manuscript queries', () => {
     expect(body).toEqual({
       data: {
         createManuscript: {
-          title: 'My manuscript',
+          title: 'My doiscript',
           doi: 'some-doi',
         },
       },
@@ -99,7 +97,7 @@ describe('Extended Manuscript queries', () => {
 
   it('can work with authsome to authorize things in custom resolvers', async () => {
     await new Manuscript({
-      title: 'Only admins can see this one',
+      title: 'Only user with username otherUser can see this one',
       published: true,
     }).save()
 
@@ -117,7 +115,7 @@ describe('Extended Manuscript queries', () => {
         publishedManuscripts { title, doi }
       }`,
       {},
-      adminToken,
+      otherUserToken,
     )
     expect(body2.data.publishedManuscripts).toHaveLength(1)
   })
@@ -163,7 +161,7 @@ describe('Extended Manuscript queries', () => {
           approvedByAuthor: false,
         },
       },
-      adminToken,
+      otherUserToken,
     )
 
     expect(body1.data.publishManuscript).toEqual({

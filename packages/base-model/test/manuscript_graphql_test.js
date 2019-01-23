@@ -12,12 +12,12 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 const { model: User } = require('@pubsweet/model-user')
 const { dbCleaner, api } = require('pubsweet-server/test')
 
-const fixtures = require('pubsweet-server/test/fixtures/fixtures')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const { fixtures } = require('@pubsweet/model-user/test')
+const authentication = require('pubsweet-server/src/authentication')
 
 const { model: Manuscript } = require('./data-model-component')
 
-describe('Manuscript queries', () => {
+describe('Manuscript GraphQL', () => {
   let token
   let user
 
