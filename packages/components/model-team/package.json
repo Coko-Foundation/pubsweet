@@ -19,6 +19,7 @@
   },
   "peerDependencies": {
     "@pubsweet/model-user": "^2.0.0",
+    "@pubsweet/models": "^0.1.3",
     "config": "^3.0.1",
     "lodash": "^4.17.11",
     "pubsweet-server": "^11.0.0",

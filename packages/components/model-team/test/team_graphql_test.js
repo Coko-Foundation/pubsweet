@@ -12,7 +12,7 @@ const { model: Fragment } = require('@pubsweet/model-fragment')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 
-const fixtures = require('pubsweet-server/test/fixtures/fixtures')
+const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('pubsweet-server/src/authentication')
 
 const Team = require('../src/team')
@@ -26,6 +26,10 @@ describe('Team queries', () => {
       `query($where: TeamInput) {
           teams(where: $where) {
             name
+            object {
+              objectId
+              objectType
+            }
           }
         }`,
       {
@@ -43,12 +47,18 @@ describe('Team queries', () => {
   })
 
   it('creates a team', async () => {
+    const fragment = await new Fragment({ fragmentType: 'post' }).save()
+
     const { body } = await api.graphql.query(
       `mutation($input: TeamInput) {
         createTeam(input: $input) {
           name
           members {
             id
+          }
+          object {
+            objectId
+            objectType
           }
         }
       }`,
@@ -57,6 +67,8 @@ describe('Team queries', () => {
           name: 'My team',
           role: 'test',
           members: [user.id],
+          objectId: fragment.id,
+          objectType: 'fragment',
         },
       },
       token,
@@ -67,6 +79,10 @@ describe('Team queries', () => {
         createTeam: {
           name: 'My team',
           members: [{ id: user.id }],
+          object: {
+            objectId: fragment.id,
+            objectType: 'fragment',
+          },
         },
       },
     })
@@ -137,10 +153,8 @@ describe('Team queries', () => {
       {
         role: 'test',
         name: 'Test',
-        object: {
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
+        objectId: fragment.id,
+        objectType: 'fragment',
         members: [
           {
             '#dbRef': user.id,
@@ -152,10 +166,8 @@ describe('Team queries', () => {
 
     const body = await whereQuery({
       role: 'test',
-      object: {
-        objectId: fragment.id,
-        objectType: 'fragment',
-      },
+      objectId: fragment.id,
+      objectType: 'fragment',
     })
 
     expect(body.data.teams).toHaveLength(1)
@@ -176,10 +188,8 @@ describe('Team queries', () => {
         {
           role: 'test',
           name: 'Test',
-          object: {
-            objectId: fragment.id,
-            objectType: 'fragment',
-          },
+          objectId: fragment.id,
+          objectType: 'fragment',
           members: [
             {
               '#dbRef': user.id,
@@ -196,23 +206,23 @@ describe('Team queries', () => {
     it('finds a team for 1 member', async () => {
       const body = await whereQuery({
         role: 'test',
-        object: {
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
+        objectId: fragment.id,
+        objectType: 'fragment',
         members: [user.id],
       })
 
       expect(body.data.teams).toHaveLength(1)
+      expect(body.data.teams[0].object).toEqual({
+        objectId: fragment.id,
+        objectType: 'fragment',
+      })
     })
 
     it('finds a team for both members', async () => {
       const body = await whereQuery({
         role: 'test',
-        object: {
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
+        objectId: fragment.id,
+        objectType: 'fragment',
         members: [user.id, user2.id],
       })
 
@@ -222,10 +232,8 @@ describe('Team queries', () => {
     it('does not find a team for non-existent member', async () => {
       const body = await whereQuery({
         role: 'test',
-        object: {
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
+        objectId: fragment.id,
+        objectType: 'fragment',
         members: ['54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
       })
 
@@ -235,10 +243,8 @@ describe('Team queries', () => {
     it('does not find a team if missing one of the members', async () => {
       const body = await whereQuery({
         role: 'test',
-        object: {
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
+        objectId: fragment.id,
+        objectType: 'fragment',
         members: [user.id, user2.id, '54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
       })
 

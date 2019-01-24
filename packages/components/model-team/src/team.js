@@ -34,7 +34,8 @@ class Team extends BaseModel {
   static get schema() {
     return {
       properties: {
-        object: { type: ['object', 'null'] },
+        objectId: { type: ['string', 'null'], format: 'uuid' },
+        objectType: { type: ['string', 'null'] },
         name: { type: 'string' },
         role: { type: ['string'] },
         owners: {

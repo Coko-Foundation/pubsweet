@@ -4,30 +4,6 @@ const resolvers = {
       return ctx.connectors.Team.fetchOne(id, ctx)
     },
     teams(_, { where }, ctx) {
-      // A little bit of API sugar to provide querying with e.g.
-      // where: {
-      //   role: 'test',
-      //   object: {
-      //     objectId: fragment.id,
-      //     objectType: 'fragment',
-      //   },
-      //   members: [UUID]
-      // }
-      // which is then translated into appropriate JSON/relation queries.
-      if (
-        where &&
-        where.object &&
-        where.object.objectId &&
-        where.object.objectType
-      ) {
-        const { object } = where
-        delete where.object
-        where._json = [
-          { ref: 'teams.object:objectId', value: object.objectId },
-          { ref: 'teams.object:objectType', value: object.objectType },
-        ]
-      }
-
       if (where.members) {
         const { members } = where
         delete where.members
@@ -87,6 +63,10 @@ const resolvers = {
     members(team, vars, ctx) {
       return ctx.connectors.User.fetchSome(team.members, ctx)
     },
+    object(team, vars, ctx) {
+      const { objectId, objectType } = team
+      return objectId && objectType ? { objectId, objectType } : null
+    },
   },
 }
 
@@ -123,15 +103,11 @@ const typeDefs = `
   input TeamInput {
     role: String
     name: String
-    object: TeamObjectInput
+    objectId: ID
+    objectType: String
     members: [ID!]
     global: Boolean
 
-  }
-
-  input TeamObjectInput {
-    objectId: ID!
-    objectType: String!
   }
 `
 
