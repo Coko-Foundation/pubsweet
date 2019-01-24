@@ -19,7 +19,7 @@ describe('create tables', () => {
 
   it('runs migrations', async () => {
     await createTables()
-    const umzug = await getUmzug([])
+    const { umzug } = await getUmzug([])
     const executedMigrations = await umzug.executed()
     expect(executedMigrations.map(migration => migration.file)).toEqual([
       '0001-component.js',
@@ -29,7 +29,7 @@ describe('create tables', () => {
   })
 
   it('does run them again', async () => {
-    const umzug = await getUmzug([])
+    const { umzug } = await getUmzug([])
     const pendingMigrations = await umzug.pending()
     expect(pendingMigrations).toEqual([])
   })
