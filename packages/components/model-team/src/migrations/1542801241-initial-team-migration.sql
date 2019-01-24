@@ -5,7 +5,7 @@ CREATE TABLE teams (
   object JSONB,
   name TEXT,
   role TEXT NOT NULL,
-  -- members JSONB,
+  members JSONB,
   owners JSONB,
   global BOOLEAN,
   type TEXT NOT NULL
