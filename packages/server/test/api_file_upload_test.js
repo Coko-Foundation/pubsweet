@@ -1,9 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 const api = require('./helpers/api')
-const fixtures = require('./fixtures/fixtures')
 const cleanDB = require('./helpers/db_cleaner')
 const { model: User } = require('@pubsweet/model-user')
+const { fixtures } = require('@pubsweet/model-user/test')
+const authentication = require('../src/authentication')
 
 function fileName(name) {
   return path.join(__dirname, 'fixtures', name)
@@ -17,18 +18,17 @@ function fileBuffer(name) {
   return fs.readFileSync(fileName(name))
 }
 
-const authenticateUser = () => api.users.authenticate.post(fixtures.user)
-
 describe('File upload/download', () => {
+  let token
+
   beforeEach(async () => {
     await cleanDB()
-    await new User(fixtures.user).save()
+    const user = await new User(fixtures.user).save()
+    token = authentication.token.create(user)
   })
 
   it('should upload a file and preserve the extension and serve the file (if authenticated)', async () => {
-    const userToken = await authenticateUser()
-
-    const res = await api.upload.post(file('fixture.jpg'), userToken)
+    const res = await api.upload.post(file('fixture.jpg'), token)
     expect(res.statusCode).toBe(200)
     expect(path.extname(res.text)).toBe('.jpg')
 
