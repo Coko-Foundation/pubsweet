@@ -1,8 +1,8 @@
 const { model: User } = require('@pubsweet/model-user')
+const { fixtures } = require('@pubsweet/model-user/test')
 const cleanDB = require('../helpers/db_cleaner')
-const fixtures = require('../fixtures/fixtures')
 const api = require('../helpers/api')
-const authentication = require('pubsweet-server/src/authentication')
+const authentication = require('../../src/authentication')
 
 describe('GraphQL core mutations', () => {
   let token
@@ -10,7 +10,7 @@ describe('GraphQL core mutations', () => {
 
   beforeEach(async () => {
     await cleanDB()
-    user = await new User(fixtures.adminUser).save()
+    user = await new User(fixtures.user).save()
     token = authentication.token.create(user)
   })
 
@@ -70,7 +70,7 @@ describe('GraphQL core mutations', () => {
       )
 
       expect(body).toEqual({
-        data: { deleteUser: { username: 'admin' } },
+        data: { deleteUser: { username: 'testuser' } },
       })
     })
 

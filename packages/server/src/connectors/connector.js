@@ -1,11 +1,27 @@
 const { ref, lit } = require('objection')
+
 // create a function which creates a new entity and performs authorization checks
-const createCreator = (entityName, EntityModel) => async (input, ctx) => {
+const createCreator = (entityName, EntityModel) => async (
+  input,
+  ctx,
+  options,
+) => {
   await ctx.helpers.can(ctx.user, 'create', entityName)
   const entity = new EntityModel(input)
   entity.setOwners([ctx.user])
-  await ctx.helpers.can(ctx.user, 'create', entity)
-  const output = await entity.save()
+  if (entity.owners) {
+    input.owners = entity.owners
+  }
+  // Filter input based on authorization
+  const inputFilter = await ctx.helpers.can(ctx.user, 'create', entity)
+  const filteredInput = inputFilter(input)
+
+  const output = await EntityModel.query().insertGraphAndFetch(
+    filteredInput,
+    options,
+  )
+
+  // Filter output based on authorization
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, output)
   return outputFilter(output)
 }
@@ -32,21 +48,32 @@ const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
     currentAndUpdate,
   )
 
-  await entity.updateProperties(updateFilter(update))
+  const filteredUpdate = updateFilter(update)
+  const updated = await EntityModel.query().upsertGraphAndFetch(
+    {
+      id,
+      ...filteredUpdate,
+    },
+    { relate: true, unrelate: true },
+  )
 
-  return outputFilter(await entity.save())
+  return outputFilter(updated)
 }
 
 // create a function which fetches all entities of the
 // given model and performs authorization checks
-const fetchAllCreator = (entityName, EntityModel) => async (where, ctx) => {
+const fetchAllCreator = (entityName, EntityModel) => async (
+  where,
+  ctx,
+  options,
+) => {
   await ctx.helpers.can(ctx.user, 'read', entityName)
 
-  let entities
+  let query
   if (where) {
     const { _json } = where
     delete where._json
-    let query = EntityModel.query().where(where)
+    query = EntityModel.query().where(where)
 
     // Add appropriate JSON conditionals
     if (_json) {
@@ -65,28 +92,44 @@ const fetchAllCreator = (entityName, EntityModel) => async (where, ctx) => {
     // Add conditionals for related ids
     if (_relations) {
       _relations.forEach(condition => {
-        condition.ids.forEach((id, index) => {
-          const alias = `members_${index}`
-          query = query
-            .joinRelation(`members as ${alias}`)
-            .where(`${alias}.id`, id)
-        })
+        if (condition.ids) {
+          condition.ids.forEach((id, index) => {
+            const alias = `${condition.relation}_${index}`
+            query = query
+              .joinRelation(`${condition.relation} as ${alias}`)
+              .where(`${alias}.id`, id)
+          })
+        } else if (condition.object) {
+          // eslint-disable-next-line no-restricted-syntax
+          for (const [key, value] of Object.entries(condition.object)) {
+            query = query
+              .joinRelation(condition.relation)
+              .where(`${condition.relation}.${key}`, value)
+          }
+        }
       })
     }
-
-    entities = await query
   } else {
-    entities = await EntityModel.query()
+    query = EntityModel.query()
   }
+
+  query = options && options.eager ? query.eager(options.eager) : query
+  const entities = await query
+
   return ctx.helpers.filterAll(ctx.user, entities)
 }
 
 // create a function which fetches by ID a single entity
 // of the given model and performs authorization checks
-const fetchOneCreator = (entityName, EntityModel) => async (id, ctx) => {
+const fetchOneCreator = (entityName, EntityModel) => async (
+  id,
+  ctx,
+  options,
+) => {
   await ctx.helpers.can(ctx.user, 'read', entityName)
 
-  const entity = await EntityModel.find(id)
+  const entity = await EntityModel.find(id, options)
+
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   return outputFilter(entity)
 }
@@ -96,6 +139,26 @@ const fetchOneCreator = (entityName, EntityModel) => async (id, ctx) => {
 const fetchSomeCreator = fetchOne => (ids, ctx) =>
   ids ? Promise.all(ids.map(id => fetchOne(id, ctx))) : []
 
+const fetchRelatedCreator = (entityName, EntityModel) => async (
+  id,
+  relation,
+  where,
+  ctx,
+) => {
+  let entities
+  const entity = await EntityModel.find(id)
+  if (where) {
+    entities = await entity.$relatedQuery(relation).where(where)
+  } else {
+    entities = await entity.$relatedQuery(relation)
+  }
+  if (Array.isArray(entities)) {
+    return ctx.helpers.filterAll(ctx.user, entities)
+  }
+  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entities)
+  return outputFilter(entities)
+}
+
 // create a connector object with fetchers for all, one and some
 module.exports = function connector(entityName, EntityModel) {
   const create = createCreator(entityName, EntityModel)
@@ -104,6 +167,7 @@ module.exports = function connector(entityName, EntityModel) {
   const fetchAll = fetchAllCreator(entityName, EntityModel)
   const fetchOne = fetchOneCreator(entityName, EntityModel)
   const fetchSome = fetchSomeCreator(fetchOne)
+  const fetchRelated = fetchRelatedCreator(entityName, EntityModel)
 
   return {
     create,
@@ -112,6 +176,7 @@ module.exports = function connector(entityName, EntityModel) {
     fetchAll,
     fetchOne,
     fetchSome,
+    fetchRelated,
     model: EntityModel,
   }
 }
