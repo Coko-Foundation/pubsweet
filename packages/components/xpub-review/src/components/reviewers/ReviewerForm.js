@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { Field, FieldArray } from 'formik'
+import { Field } from 'formik'
 import { Button } from '@pubsweet/ui'
 import { required } from 'xpub-validators'
 import 'react-select/dist/react-select.css'
@@ -12,33 +12,23 @@ const OptionRenderer = option => (
   </div>
 )
 
-const ReviewerInput = loadOptions => ({
+const ReviewerInput = ({
   field,
   form: { values, setFieldValue },
   push,
   replace,
+  reviewerUsers,
 }) => (
-  <Select.AsyncCreatable
+  <Select.Creatable
     {...field}
-    filterOption={() => true}
     labelKey="username"
-    loadOptions={loadOptions}
     onChange={user => {
       setFieldValue('user', user)
     }}
     optionRenderer={OptionRenderer}
+    options={reviewerUsers}
     promptTextCreator={label => `Add ${label}?`}
-    value={values.user.id}
     valueKey="id"
-  />
-)
-
-const componentFields = loadOptions => props => (
-  <Field
-    component={ReviewerInput(loadOptions)}
-    name="user"
-    validate={required}
-    {...props}
   />
 )
 
@@ -47,11 +37,15 @@ const ReviewerForm = ({
   isValid,
   handleSubmit,
   onSubmit,
-  loadOptions,
+  reviewerUsers,
 }) => (
   <form onSubmit={handleSubmit}>
-    <FieldArray component={componentFields(loadOptions)} />
-
+    <Field
+      component={ReviewerInput}
+      name="user"
+      reviewerUsers={reviewerUsers}
+      validate={required}
+    />
     <Button disabled={!isValid} primary type="submit">
       Invite reviewer
     </Button>
