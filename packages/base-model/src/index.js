@@ -173,8 +173,11 @@ class BaseModel extends Model {
     this.owners = owners
   }
 
-  static async find(id) {
-    const object = await this.query().findById(id)
+  static async find(id, options) {
+    let query = this.query().findById(id)
+    query = options && options.eager ? query.eager(options.eager) : query
+
+    const object = await query
 
     if (!object) {
       throw notFoundError('id', id, this.name)
