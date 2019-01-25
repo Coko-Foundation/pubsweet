@@ -28,8 +28,8 @@ class Team extends BaseModel {
           from: 'teams.id',
           through: {
             modelClass: require.resolve('./team_member'),
-            from: 'team_members.team_id',
-            to: 'team_members.user_id',
+            from: 'team_members.teamId',
+            to: 'team_members.userId',
           },
           to: 'users.id',
         },
@@ -41,8 +41,8 @@ class Team extends BaseModel {
           from: 'teams.id',
           through: {
             modelClass: require.resolve('./team_member'),
-            from: 'team_members.team_id',
-            to: 'team_members.alias_id',
+            from: 'team_members.teamId',
+            to: 'team_members.aliasId',
           },
           to: 'aliases.id',
         },
