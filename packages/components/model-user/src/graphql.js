@@ -6,8 +6,8 @@ const resolvers = {
     user(_, { id }, ctx) {
       return ctx.connectors.User.fetchOne(id, ctx)
     },
-    users(_, vars, ctx) {
-      return ctx.connectors.User.fetchAll(ctx)
+    users(_, { where }, ctx) {
+      return ctx.connectors.User.fetchAll(where, ctx, { eager: 'teams' })
     },
     // Authentication
     currentUser(_, vars, ctx) {
@@ -16,7 +16,14 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser(_, { input }, ctx) {
+    async createUser(_, { input }, ctx) {
+      if (input.password) {
+        input.passwordHash = await ctx.connectors.User.model.hashPassword(
+          input.password,
+        )
+        delete input.password
+      }
+
       return ctx.connectors.User.create(input, ctx)
     },
     deleteUser(_, { id }, ctx) {
@@ -46,11 +53,6 @@ const resolvers = {
       }
     },
   },
-  User: {
-    teams(user, vars, ctx) {
-      return ctx.connectors.Team.fetchSome(user.teams, ctx)
-    },
-  },
 }
 
 const typeDefs = `
@@ -68,8 +70,8 @@ const typeDefs = `
   type User {
     id: ID!
     type: String
-    username: String!
-    email: String!
+    username: String
+    email: String
     admin: Boolean
     teams: [Team!]!
   }
