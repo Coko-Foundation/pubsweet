@@ -8,14 +8,14 @@ module.exports = {
 
   updatedUser: {
     username: 'changeduser',
-    email: 'changed@email.com',
+    email: 'changed@example.com',
     password: 'changed',
   },
 
   otherUser: {
     type: 'user',
     username: 'anotheruser',
-    email: 'another@com.nz',
+    email: 'another@example.com',
     password: 'rubgy',
   },
 }

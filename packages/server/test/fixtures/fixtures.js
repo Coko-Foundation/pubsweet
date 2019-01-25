@@ -46,14 +46,14 @@ const teams = {
 const contributorTeam = {
   type: 'team',
   name: 'My contributors',
-  teamType: 'teamContributors',
+  role: 'teamContributors',
   object: fragment,
 }
 
 const readerTeam = {
   type: 'team',
   name: 'My readers',
-  teamType: 'teamReaders',
+  role: 'teamReaders',
   object: fragment,
 }
 
