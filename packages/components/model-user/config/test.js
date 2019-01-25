@@ -20,11 +20,6 @@ module.exports = {
     },
   },
   pubsweet: {
-    components: [
-      '@pubsweet/model-user',
-      '@pubsweet/model-team',
-      // '@pubsweet/model-team-member',
-      // '@pubsweet/model-fragment',
-    ],
+    components: ['@pubsweet/model-user', '@pubsweet/model-team'],
   },
 }
