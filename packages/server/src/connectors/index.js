@@ -10,6 +10,11 @@ const connectors = {}
 // merge in component connectors, recursively
 function getConnectorsRecursively(componentName) {
   const component = requireRelative(componentName)
+  // Backwards compatible for single model syntax
+  if (component.extending) {
+    getConnectorsRecursively(component.extending)
+  }
+
   if (component.modelName) {
     connectors[component.modelName] = connector(
       component.modelName,
@@ -17,8 +22,16 @@ function getConnectorsRecursively(componentName) {
     )
   }
 
-  if (component.extending) {
-    getConnectorsRecursively(component.extending)
+  // It is currently not possible to extend a component
+  // that has multiple models. But models in a multiple
+  // component model can extend other single model components.
+  if (component.models) {
+    component.models.forEach(model => {
+      if (model.extending) {
+        getConnectorsRecursively(model.extending)
+      }
+      connectors[model.modelName] = connector(model.modelName, model.model)
+    })
   }
 }
 
