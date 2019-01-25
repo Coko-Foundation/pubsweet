@@ -23,7 +23,6 @@ module.exports = {
     components: [
       '@pubsweet/model-user',
       '@pubsweet/model-team',
-      '@pubsweet/model-team-member',
       '@pubsweet/model-fragment',
     ],
   },

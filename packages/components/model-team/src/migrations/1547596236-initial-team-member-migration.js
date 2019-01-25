@@ -16,9 +16,6 @@ exports.up = knex =>
       .inTable('users')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
-    // table
-    //   .uuid('alias_id')
-    //   .references('id')
-    //   .inTable('aliases')
+
     table.index(['team_id', 'user_id'])
   })

@@ -2,8 +2,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
   "components":[
     "@pubsweet/model-user",
     "@pubsweet/model-team",
-    "@pubsweet/model-fragment",
-    "@pubsweet/model-team-member"
+    "@pubsweet/model-fragment"
   ]
 }}`
 

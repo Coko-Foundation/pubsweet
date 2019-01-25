@@ -15,9 +15,7 @@ class Team extends BaseModel {
     return {
       members: {
         relation: BaseModel.HasManyRelation,
-        modelClass: require.resolve(
-          '@pubsweet/model-team-member/src/team_member',
-        ),
+        modelClass: require.resolve('./team_member'),
         join: {
           from: 'teams.id',
           to: 'team_members.teamId',
@@ -29,9 +27,7 @@ class Team extends BaseModel {
         join: {
           from: 'teams.id',
           through: {
-            modelClass: require.resolve(
-              '@pubsweet/model-team-member/src/team_member',
-            ),
+            modelClass: require.resolve('./team_member'),
             from: 'team_members.team_id',
             to: 'team_members.user_id',
           },
@@ -40,13 +36,11 @@ class Team extends BaseModel {
       },
       aliases: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: require.resolve('@pubsweet/model-team-member/src/alias'),
+        modelClass: require.resolve('./alias'),
         join: {
           from: 'teams.id',
           through: {
-            modelClass: require.resolve(
-              '@pubsweet/model-team-member/src/team_member',
-            ),
+            modelClass: require.resolve('./team_member'),
             from: 'team_members.team_id',
             to: 'team_members.alias_id',
           },
