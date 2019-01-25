@@ -11,7 +11,6 @@ class User extends BaseModel {
     this.type = 'user'
     this.collections = this.collections || []
     this.fragments = this.fragments || []
-    this.teams = this.teams || []
   }
 
   $formatJson(json) {
@@ -32,9 +31,7 @@ class User extends BaseModel {
         join: {
           from: 'users.id',
           through: {
-            modelClass: require.resolve(
-              '@pubsweet/model-team-member/src/team_member',
-            ),
+            modelClass: require.resolve('@pubsweet/model-team/src/team_member'),
             from: 'team_members.user_id',
             to: 'team_members.team_id',
           },
