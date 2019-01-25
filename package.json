@@ -31,7 +31,7 @@
   "scripts": {
     "clean": "lerna clean",
     "styleguide": "npm run --prefix packages/styleguide styleguide",
-    "test": "jest --no-cache --coverage --detectOpenHandles",
+    "test": "jest --no-cache --coverage --detectOpenHandles --silent",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:json",
     "lint:js": "eslint 'packages/**/*.{js,jsx}'",
     "lint:style": "stylelint 'packages/**/*.{css,scss}'",
