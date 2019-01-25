@@ -1,4 +1,5 @@
 const { dbCleaner } = require('pubsweet-server/test')
+const fixtures = require('./fixtures')
 const User = require('../src/user')
 
 describe('User', () => {
