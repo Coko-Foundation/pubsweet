@@ -14,6 +14,16 @@ class Team extends BaseModel {
   static get relationMappings() {
     return {
       members: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: require.resolve(
+          '@pubsweet/model-team-member/src/team_member',
+        ),
+        join: {
+          from: 'teams.id',
+          to: 'team_members.teamId',
+        },
+      },
+      users: {
         relation: BaseModel.ManyToManyRelation,
         modelClass: require.resolve('@pubsweet/model-user/src/user'),
         join: {
@@ -26,6 +36,21 @@ class Team extends BaseModel {
             to: 'team_members.user_id',
           },
           to: 'users.id',
+        },
+      },
+      aliases: {
+        relation: BaseModel.ManyToManyRelation,
+        modelClass: require.resolve('@pubsweet/model-team-member/src/alias'),
+        join: {
+          from: 'teams.id',
+          through: {
+            modelClass: require.resolve(
+              '@pubsweet/model-team-member/src/team_member',
+            ),
+            from: 'team_members.team_id',
+            to: 'team_members.alias_id',
+          },
+          to: 'aliases.id',
         },
       },
     }

@@ -23,12 +23,17 @@ describe('Team queries', () => {
 
   const whereQuery = async where => {
     const { body } = await api.graphql.query(
-      `query($where: TeamInput) {
+      `query($where: TeamWhereInput) {
           teams(where: $where) {
             name
             object {
               objectId
               objectType
+            }
+            members {
+              user {
+                id
+              }
             }
           }
         }`,
@@ -54,7 +59,13 @@ describe('Team queries', () => {
         createTeam(input: $input) {
           name
           members {
-            id
+            user {
+              id
+            }
+            alias {
+              email
+            }
+            status
           }
           object {
             objectId
@@ -66,7 +77,13 @@ describe('Team queries', () => {
         input: {
           name: 'My team',
           role: 'test',
-          members: [user.id],
+          members: [
+            {
+              user: { id: user.id },
+              alias: { email: 'unk@example.com' },
+              status: 'invited',
+            },
+          ],
           objectId: fragment.id,
           objectType: 'fragment',
         },
@@ -78,7 +95,13 @@ describe('Team queries', () => {
       data: {
         createTeam: {
           name: 'My team',
-          members: [{ id: user.id }],
+          members: [
+            {
+              user: { id: user.id },
+              alias: { email: 'unk@example.com' },
+              status: 'invited',
+            },
+          ],
           object: {
             objectId: fragment.id,
             objectType: 'fragment',
@@ -88,14 +111,16 @@ describe('Team queries', () => {
     })
   })
 
-  it('can update a team', async () => {
+  it('can update a team and its members', async () => {
     const team = await new Team({ name: 'Before', role: 'test' }).save()
     const { body } = await api.graphql.query(
       `mutation($id: ID, $input: TeamInput) {
           updateTeam(id: $id, input: $input) {
             name
             members {
-              id
+              user {
+                id
+              }
             }
           }
         }`,
@@ -103,7 +128,7 @@ describe('Team queries', () => {
         id: team.id,
         input: {
           name: 'After',
-          members: [user.id],
+          members: [{ user: { id: user.id } }],
         },
       },
       token,
@@ -113,10 +138,56 @@ describe('Team queries', () => {
       data: {
         updateTeam: {
           name: 'After',
-          members: [{ id: user.id }],
+          members: [{ user: { id: user.id } }],
         },
       },
     })
+  })
+
+  it('can update a team and also remove members', async () => {
+    const team = await Team.query().upsertGraphAndFetch(
+      {
+        role: 'test',
+        name: 'Test',
+        members: [{ id: user.id }],
+      },
+      { relate: true, unrelate: true },
+    )
+
+    const { body } = await api.graphql.query(
+      `mutation($id: ID, $input: TeamInput) {
+          updateTeam(id: $id, input: $input) {
+            name
+            members {
+              user {
+                id
+              }
+            }
+          }
+        }`,
+      {
+        id: team.id,
+        input: {
+          name: 'After',
+          members: [],
+        },
+      },
+      token,
+    )
+
+    expect(body).toEqual({
+      data: {
+        updateTeam: {
+          name: 'After',
+          members: [],
+        },
+      },
+    })
+
+    const updatedTeam = await Team.query()
+      .findById(team.id)
+      .eager('members')
+    expect(updatedTeam.members).toHaveLength(0)
   })
 
   it('finds a team', async () => {
@@ -155,11 +226,7 @@ describe('Team queries', () => {
         name: 'Test',
         objectId: fragment.id,
         objectType: 'fragment',
-        members: [
-          {
-            '#dbRef': user.id,
-          },
-        ],
+        members: [{ id: user.id }],
       },
       { relate: true, unrelate: true },
     )
@@ -192,10 +259,13 @@ describe('Team queries', () => {
           objectType: 'fragment',
           members: [
             {
-              '#dbRef': user.id,
+              user: { id: user.id },
+              alias: {
+                email: 'alias@example.com',
+              },
             },
             {
-              '#dbRef': user2.id,
+              user: { id: user2.id },
             },
           ],
         },
@@ -203,12 +273,12 @@ describe('Team queries', () => {
       )
     })
 
-    it('finds a team for 1 member', async () => {
+    it('finds a team for 1 user (through members)', async () => {
       const body = await whereQuery({
         role: 'test',
         objectId: fragment.id,
         objectType: 'fragment',
-        members: [user.id],
+        users: [user.id],
       })
 
       expect(body.data.teams).toHaveLength(1)
@@ -216,6 +286,17 @@ describe('Team queries', () => {
         objectId: fragment.id,
         objectType: 'fragment',
       })
+      expect(body.data.teams[0].members).toHaveLength(2)
+    })
+
+    it('finds a team by alias of a member', async () => {
+      const body = await whereQuery({
+        role: 'test',
+        objectId: fragment.id,
+        objectType: 'fragment',
+        alias: { email: 'alias@example.com' },
+      })
+      expect(body.data.teams).toHaveLength(1)
     })
 
     it('finds a team for both members', async () => {
@@ -223,7 +304,7 @@ describe('Team queries', () => {
         role: 'test',
         objectId: fragment.id,
         objectType: 'fragment',
-        members: [user.id, user2.id],
+        users: [user.id, user2.id],
       })
 
       expect(body.data.teams).toHaveLength(1)
@@ -234,283 +315,21 @@ describe('Team queries', () => {
         role: 'test',
         objectId: fragment.id,
         objectType: 'fragment',
-        members: ['54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
+        users: ['54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
       })
 
       expect(body.data.teams).toHaveLength(0)
     })
 
-    it('does not find a team if missing one of the members', async () => {
+    it('does not find a team if one of the members is wrong', async () => {
       const body = await whereQuery({
         role: 'test',
         objectId: fragment.id,
         objectType: 'fragment',
-        members: [user.id, user2.id, '54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
+        users: [user.id, user2.id, '54513de6-b473-4b39-8f95-bcbb3ae58a2a'],
       })
 
       expect(body.data.teams).toHaveLength(0)
     })
   })
-
-  it('adds members to a team', async () => {
-    const team = await new Team({ role: 'test', name: 'Test' }).save()
-
-    const { body } = await api.graphql.query(
-      `mutation($id: ID!, $members: [ID!]!) {
-        addMembers(id: $id, members: $members) {
-          name
-          members {
-            id
-          }
-        }
-      }`,
-      {
-        id: team.id,
-        members: [user.id],
-      },
-      token,
-    )
-
-    expect(body).toEqual({
-      data: {
-        addMembers: {
-          name: 'Test',
-          members: [{ id: user.id }],
-        },
-      },
-    })
-  })
-
-  it('removes members from a team', async () => {
-    const team = await Team.query().upsertGraphAndFetch(
-      {
-        role: 'test',
-        name: 'Test',
-        members: [
-          {
-            '#dbRef': user.id,
-          },
-        ],
-      },
-      { relate: true, unrelate: true },
-    )
-
-    const { body } = await api.graphql.query(
-      `mutation($id: ID!, $members: [ID!]!) {
-        removeMembers(id: $id, members: $members) {
-          name
-          members {
-            id
-          }
-        }
-      }`,
-      {
-        id: team.id,
-        members: [user.id],
-      },
-      token,
-    )
-
-    expect(body).toEqual({
-      data: {
-        removeMembers: {
-          name: 'Test',
-          members: [],
-        },
-      },
-    })
-  })
-
-  //   it('can delete a manuscript', async () => {
-  //     const manuscript = await new Manuscript({ title: 'To delete' }).save()
-  //     const { body } = await api.graphql.query(
-  //       `mutation($id: ID) {
-  //         deleteManuscript(id: $id) { title }
-  //       }`,
-  //       { id: manuscript.id },
-  //       token,
-  //     )
-
-  //     expect(body).toEqual({
-  //       data: { deleteManuscript: { title: 'To delete' } },
-  //     })
-  //   })
-  // })
-
-  // const STATUS = require('http-status-codes')
-  // const cloneDeep = require('lodash/cloneDeep')
-
-  // const { Collection, User, Team } = require('@pubsweet/models')
-
-  // const cleanDB = require('./helpers/db_cleaner')
-  // const fixtures = require('./fixtures/fixtures')
-
-  // const teamFixture = fixtures.contributorTeam
-  // const api = require('./helpers/api')
-
-  // describe('Teams API - admin', () => {
-  //   beforeEach(() =>
-  //     cleanDB()
-  //       .then(() => new User(fixtures.adminUser).save())
-  //       .then(() => new User(fixtures.user).save()),
-  //   )
-
-  //   it('should display an initially empty list of teams if user is admin', () =>
-  //     api.users.authenticate
-  //       .post(fixtures.adminUser)
-  //       .then(token => api.teams.list(token).expect(STATUS.OK))
-  //       .then(res => expect(res.body).toEqual([])))
-
-  //   it('should display the existing teams if user is admin', () =>
-  //     new Team(teamFixture)
-  //       .save()
-  //       .then(() => api.users.authenticate.post(fixtures.adminUser))
-  //       .then(token => api.teams.list(token).expect(STATUS.OK))
-  //       .then(res => {
-  //         const team = res.body[0]
-  //         expect(team.teamType).toEqual('teamContributors')
-  //         expect(team.members).toEqual([])
-  //       }))
-  //   it('should allow retrieval of a team by id', () =>
-  //     new Team(teamFixture)
-  //       .save()
-  //       .then(() => api.users.authenticate.post(fixtures.adminUser))
-  //       .then(token =>
-  //         api.teams.list(token).then(res => ({ teamId: res.body[0].id, token })),
-  //       )
-  //       .then(({ teamId, token }) =>
-  //         api.teams.get(token, teamId).expect(STATUS.OK),
-  //       )
-  //       .then(res => {
-  //         const team = res.body
-  //         expect(team.teamType).toEqual('teamContributors')
-  //         expect(team.members).toEqual([])
-  //       }))
-
-  //   it('should not allow listing all teams if user is not an admin', () =>
-  //     api.users.authenticate
-  //       .post(fixtures.user)
-  //       .then(token => api.teams.list(token).expect(STATUS.FORBIDDEN)))
-  // })
-
-  // describe('Teams API - per collection or fragment', () => {
-  //   describe('Collection teams', () => {
-  //     describe('owners', () => {
-  //       let collectionId
-  //       let otherUserId
-  //       let team
-
-  //       beforeEach(() =>
-  //         cleanDB()
-  //           .then(() => new User(fixtures.user).save())
-  //           .then(user => {
-  //             const collection = new Collection(fixtures.collection)
-  //             collection.setOwners([user.id])
-  //             return collection.save()
-  //           })
-  //           .then(collection => {
-  //             collectionId = collection.id
-  //           })
-  //           .then(() => new User(fixtures.updatedUser).save())
-  //           .then(otherUser => {
-  //             otherUserId = otherUser.id
-  //           })
-  //           .then(() => {
-  //             team = cloneDeep(teamFixture)
-  //           }),
-  //       )
-
-  //       it('can display an initially empty list of teams', () =>
-  //         api.users.authenticate
-  //           .post(fixtures.user)
-  //           .then(token => api.teams.list(token, collectionId).expect(STATUS.OK))
-  //           .then(res => expect(res.body).toEqual([])))
-
-  //       it('can add a team with a team member to a collection and this team member can then create fragments', () => {
-  //         team.name = 'Test team'
-  //         team.members = [otherUserId]
-  //         team.object = {
-  //           id: collectionId,
-  //           type: 'collection',
-  //         }
-
-  //         return api.users.authenticate
-  //           .post(fixtures.user)
-  //           .then(token => api.teams.post(team, token).expect(STATUS.CREATED))
-  //           .then(res => {
-  //             expect(res.body.name).toEqual(team.name)
-  //           })
-  //           .then(() => api.users.authenticate.post(fixtures.updatedUser))
-  //           .then(token =>
-  //             api.fragments
-  //               .post({
-  //                 fragment: fixtures.fragment,
-  //                 collection: collectionId,
-  //                 token,
-  //               })
-  //               .expect(STATUS.CREATED),
-  //           )
-  //       })
-
-  //       it('can remove a team member and that removed team member can no longer create fragments', () => {
-  //         team.name = 'Test team'
-  //         team.members = [otherUserId]
-  //         team.object = {
-  //           id: collectionId,
-  //           type: 'collection',
-  //         }
-
-  //         return api.users.authenticate
-  //           .post(fixtures.user)
-  //           .then(token =>
-  //             api.teams
-  //               .post(team, token)
-  //               .expect(STATUS.CREATED)
-  //               .then(res => [res, token]),
-  //           )
-  //           .then(([res, token]) => {
-  //             const savedTeam = res.body
-  //             savedTeam.members = []
-  //             return api.teams
-  //               .patch(savedTeam, savedTeam.id, token)
-  //               .expect(STATUS.OK)
-  //           })
-  //           .then(() => api.users.authenticate.post(fixtures.updatedUser))
-  //           .then(token =>
-  //             api.fragments
-  //               .post({
-  //                 fragment: fixtures.fragment,
-  //                 collection: collectionId,
-  //                 token,
-  //               })
-  //               .expect(STATUS.FORBIDDEN),
-  //           )
-  //       })
-  //     })
-
-  //     describe('non-owners', () => {
-  //       let collectionId
-
-  //       beforeEach(() =>
-  //         cleanDB()
-  //           .then(() => new User(fixtures.user).save())
-  //           .then(user => {
-  //             const collection = new Collection(fixtures.collection)
-  //             collection.setOwners([])
-  //             return collection.save()
-  //           })
-  //           .then(collection => {
-  //             collectionId = collection.id
-  //           }),
-  //       )
-
-  //       it('should not see teams in a collection', () =>
-  //         api.users.authenticate
-  //           .post(fixtures.user)
-  //           .then(token => api.teams.list(token, collectionId).expect(STATUS.OK))
-  //           .then(res => {
-  //             expect(res.body).toEqual([])
-  //           }))
-  //     })
-  //   })
 })

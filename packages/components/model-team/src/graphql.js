@@ -4,10 +4,16 @@ const resolvers = {
       return ctx.connectors.Team.fetchOne(id, ctx)
     },
     teams(_, { where }, ctx) {
-      if (where.members) {
-        const { members } = where
-        delete where.members
-        where._relations = [{ relation: 'members', ids: members }]
+      if (where.users) {
+        const { users } = where
+        delete where.users
+        where._relations = [{ relation: 'users', ids: users }]
+      }
+
+      if (where.alias) {
+        const { alias } = where
+        delete where.alias
+        where._relations = [{ relation: 'aliases', object: alias }]
       }
 
       return ctx.connectors.Team.fetchAll(where, ctx)
@@ -18,54 +24,48 @@ const resolvers = {
       return ctx.connectors.Team.delete(id, ctx)
     },
     createTeam(_, { input }, ctx) {
-      return ctx.connectors.Team.create(input, ctx)
+      const options = {
+        relate: ['members.user'],
+        unrelate: ['members.user'],
+        allowUpsert: '[members, members.alias]',
+      }
+      return ctx.connectors.Team.create(input, ctx, options)
     },
     updateTeam(_, { id, input }, ctx) {
       return ctx.connectors.Team.update(id, input, ctx)
     },
-    async addMembers(_, { id, members }, ctx) {
-      await ctx.helpers.can(ctx.user, 'addMembers', id)
-
-      let team = await ctx.connectors.Team.model.query().findById(id)
-      await team.$relatedQuery('members').relate(members)
-
-      team = await ctx.connectors.Team.model
-        .query()
-        .findById(id)
-        .eager('members')
-
-      team.members = team.members.map(member => member.id)
-
-      const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, team)
-      return outputFilter(team)
-    },
-    async removeMembers(_, { id, members }, ctx) {
-      await ctx.helpers.can(ctx.user, 'removeMembers', id)
-
-      let team = await ctx.connectors.Team.model.query().findById(id)
-      await team
-        .$relatedQuery('members')
-        .unrelate()
-        .whereIn('team_members.user_id', members)
-
-      team = await ctx.connectors.Team.model
-        .query()
-        .findById(id)
-        .eager('members')
-
-      team.members = team.members.map(member => member.id)
-
-      const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, team)
-      return outputFilter(team)
-    },
   },
   Team: {
-    members(team, vars, ctx) {
-      return ctx.connectors.User.fetchSome(team.members, ctx)
+    async members(team, { where }, ctx) {
+      return team.members
+        ? team.members
+        : ctx.connectors.Team.fetchRelated(team.id, 'members', where, ctx)
     },
     object(team, vars, ctx) {
       const { objectId, objectType } = team
       return objectId && objectType ? { objectId, objectType } : null
+    },
+  },
+  TeamMember: {
+    async user(teamMember, vars, ctx) {
+      return teamMember.user
+        ? teamMember.user
+        : ctx.connectors.TeamMember.fetchRelated(
+            teamMember.id,
+            'user',
+            undefined,
+            ctx,
+          )
+    },
+    async alias(teamMember, vars, ctx) {
+      return teamMember.alias
+        ? teamMember.alias
+        : ctx.connectors.TeamMember.fetchRelated(
+            teamMember.id,
+            'alias',
+            undefined,
+            ctx,
+          )
     },
   },
 }
@@ -73,26 +73,55 @@ const resolvers = {
 const typeDefs = `
   extend type Query {
     team(id: ID): Team
-    teams(where: TeamInput): [Team]
+    teams(where: TeamWhereInput): [Team]
   }
 
   extend type Mutation {
     createTeam(input: TeamInput): Team
     deleteTeam(id: ID): Team
     updateTeam(id: ID, input: TeamInput): Team
-    addMembers(id: ID!, members: [ID!]!): Team
-    removeMembers(id: ID!, members: [ID!]!): Team
+    addMembers(id: ID!, members: [TeamMemberInput!]!): Team
+    removeMembers(id: ID!, members: [TeamMemberInput!]!): Team
   }
 
   type Team {
     id: ID!
     type: String!
-    teamType: String!
+    role: String!
     name: String!
     object: TeamObject
-    members: [User!]!
+    members: [TeamMember!]!
     owners: [User]
     global: Boolean
+  }
+
+  input TeamMemberInput {
+    id: ID
+    user: TeamMemberUserInput
+    alias: AliasInput
+    status: String
+  }
+
+  input TeamMemberUserInput {
+    id: ID!
+  }
+
+  type TeamMember {
+    user: User
+    status: String
+    alias: Alias
+  }
+
+  type Alias {
+    name: String
+    email: String
+    aff: String
+  }
+
+  input AliasInput {
+    name: String
+    email: String
+    aff: String
   }
 
   type TeamObject {
@@ -105,10 +134,21 @@ const typeDefs = `
     name: String
     objectId: ID
     objectType: String
-    members: [ID!]
+    members: [TeamMemberInput]
     global: Boolean
-
   }
+
+  input TeamWhereInput {
+    role: String
+    name: String
+    objectId: ID
+    objectType: String
+    members: [TeamMemberInput]
+    global: Boolean
+    users: [ID!]
+    alias: AliasInput
+  }
+
 `
 
 module.exports = { resolvers, typeDefs }

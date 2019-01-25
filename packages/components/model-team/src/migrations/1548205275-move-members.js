@@ -7,7 +7,7 @@ exports.up = async knex => {
   teams.forEach(team => {
     if (team.members) {
       team.members.forEach(member => {
-        saves.push(new TeamMember({ user_id: member, team_id: team.id }).save())
+        saves.push(new TeamMember({ userId: member, teamId: team.id }).save())
       })
     }
   })

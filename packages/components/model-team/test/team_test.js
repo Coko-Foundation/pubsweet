@@ -8,6 +8,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 }}`
 
 const { model: Team } = require('../src')
+// const { model: TeamMember } = require('@pubsweet/model-team-member')
 const { model: User } = require('@pubsweet/model-user')
 const { dbCleaner } = require('pubsweet-server/test')
 
@@ -17,10 +18,14 @@ const createTeamWithMember = async () => {
     username: 'test',
   }).save()
 
-  const newTeam = await new Team({ name: 'Test', role: 'testRole' }).save()
-
-  const team = await Team.query().findById(newTeam.id)
-  await team.$relatedQuery('members').relate(user.id)
+  const team = await Team.query().upsertGraphAndFetch(
+    {
+      name: 'Test',
+      role: 'testRole',
+      members: [{ user: { id: user.id } }],
+    },
+    { relate: true },
+  )
 
   return { user, team }
 }
@@ -80,5 +85,46 @@ describe('Team', () => {
       .eager('teams')
 
     expect(foundUser.teams).toHaveLength(0)
+  })
+
+  it('creates team and related objects with one call', async () => {
+    const user = await new User({
+      email: 'some@example.com',
+      username: 'test',
+    }).save()
+
+    const team = await Team.query().upsertGraphAndFetch(
+      {
+        role: 'test',
+        name: 'My team',
+        objectId: '5989b23c-356b-4ae9-bee5-bbd11f29028b',
+        objectType: 'fragment',
+        members: [
+          {
+            user: { id: user.id },
+            alias: {
+              email: 'someemail',
+              aff: 'someaff',
+              name: 'somename',
+            },
+            status: 'invited',
+          },
+        ],
+      },
+      {
+        relate: true,
+        unrelate: true,
+      },
+    )
+
+    expect(team.members).toHaveLength(1)
+    expect(team.members[0].id).toBeDefined()
+    expect(team.members[0].alias.id).toBeDefined()
+    expect(team.members[0].user.id).toBe(user.id)
+
+    const userWithTeams = await User.query()
+      .findById(user.id)
+      .eager('teams')
+    expect(userWithTeams.teams[0].id).toBe(team.id)
   })
 })
