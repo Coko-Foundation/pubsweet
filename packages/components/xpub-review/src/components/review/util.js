@@ -6,19 +6,19 @@ export const stripHtml = htmlString => {
 
 export const getCommentFiles = (review = {}, type) => {
   const comments =
-    (review.comments || []).find(comment => comment.type === type) || {}
+    (review.comments || []).find(comment => (comment || {}).type === type) || {}
   return comments.files || []
 }
 
 export const getCommentContent = (review = {}, type) => {
   const comments =
-    (review.comments || []).find(comment => comment.type === type) || {}
+    (review.comments || []).find(comment => (comment || {}).type === type) || {}
   return comments.content || ''
 }
 
 export const createComments = (values, val, type) => {
   let updateIndex = (values.comments || []).findIndex(
-    comment => comment.type === type,
+    comment => (comment || {}).type === type,
   )
   updateIndex =
     (values.comments || []).length > 0 && updateIndex < 0 ? 1 : updateIndex

@@ -322,11 +322,20 @@ export default compose(
     }),
   ),
   withFormik({
+    enableReinitialize: true,
+    mapPropsToValues: props =>
+      props.manuscript.reviews.find(review => !review.isDecision) || {
+        id: null,
+        comments: [],
+        recommendation: null,
+      },
     isInitialValid: ({ review }) => {
-      const isRecommendation = review.recommendation !== ''
-      const isCommented = getCommentContent(review, 'note') !== ''
+      if (!review.id) return false
+      const hasRecommendation = review.recommendation !== null
+      const comment = getCommentContent(review, 'note')
+      const isCommented = comment !== null && comment !== ''
 
-      return isCommented && isRecommendation
+      return isCommented && hasRecommendation
     },
     displayName: 'review',
     handleSubmit: (props, { props: { completeReview, history } }) =>

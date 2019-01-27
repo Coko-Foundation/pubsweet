@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { cloneDeep, set } from 'lodash'
-import { Field, FieldArray } from 'formik'
+import { Field } from 'formik'
 import { NoteEditor } from 'xpub-edit'
 import {
   Button,
@@ -12,20 +12,15 @@ import {
 } from '@pubsweet/ui'
 
 import { withJournal } from 'xpub-journal'
-import {
-  getCommentFiles,
-  getCommentContent,
-  stripHtml,
-  createComments,
-} from './util'
+import { getCommentFiles, stripHtml, createComments } from './util'
 import AdminSection from '../atoms/AdminSection'
 
-const AttachmentsInput = type => ({
+const AttachmentsInput = ({
   field,
   form: { values },
   updateReview,
   uploadFile,
-  review,
+  type,
 }) => [
   <UploadButton
     buttonText="↑ Upload files"
@@ -36,12 +31,12 @@ const AttachmentsInput = type => ({
       file.type = type
 
       const { updateIndex, comment } = createComments(
-        review,
+        values,
         { files: [file] },
         type,
       )
 
-      const data = cloneDeep(review)
+      const data = cloneDeep(values)
       set(data, `comments.${updateIndex}`, comment)
 
       updateReview(data).then(({ data: { updateReview } }) => {
@@ -50,7 +45,7 @@ const AttachmentsInput = type => ({
     }}
   />,
   <Flexbox>
-    {getCommentFiles(review, type).map(val => {
+    {getCommentFiles(values, type).map(val => {
       const file = cloneDeep(val)
       file.name = file.filename
       return <UploadingFile file={file} key={file.name} uploaded />
@@ -58,13 +53,18 @@ const AttachmentsInput = type => ({
   </Flexbox>,
 ]
 
-const NoteInput = ({ field, form: { values }, review, updateReview }) => (
+const NoteInput = ({
+  field,
+  form: { values, setFieldValue },
+  updateReview,
+}) => (
   <NoteEditor
+    key="note-comment"
     placeholder="Enter your review…"
     title="Comments to the Author"
     {...field}
-    onBlur={value => {
-      const { updateIndex, comment } = createComments(
+    onChange={value => {
+      const { comment } = createComments(
         values,
         {
           type: 'note',
@@ -73,82 +73,90 @@ const NoteInput = ({ field, form: { values }, review, updateReview }) => (
         'note',
       )
 
-      const data = cloneDeep(review)
-      set(data, `comments.${updateIndex}`, comment)
-
+      setFieldValue(`comments.0`, comment)
+      const data = cloneDeep(values)
+      set(data, `comments.0`, comment)
       updateReview(data)
     }}
-    value={getCommentContent(review, 'note')}
+    value={field.value || ''}
   />
 )
 
-const ConfidentialInput = ({ field, review, updateReview }) => (
+const ConfidentialInput = ({
+  field,
+  form: { values, setFieldValue },
+  updateReview,
+}) => (
   <NoteEditor
+    key="confidential-comment"
     placeholder="Enter a confidential note to the editor (optional)…"
     title="Confidential Comments to Editor (Optional)"
     {...field}
-    onBlur={value => {
-      const { updateIndex, comment } = createComments(
-        review,
+    onChange={value => {
+      const { comment } = createComments(
+        values,
         {
           type: 'confidential',
           content: stripHtml(value),
         },
         'confidential',
       )
-      const data = cloneDeep(review)
-      set(data, `comments.${updateIndex}`, comment)
+
+      setFieldValue(`comments.1`, comment)
+      const data = cloneDeep(values)
+      set(data, `comments.1`, comment)
       updateReview(data)
     }}
-    value={getCommentContent(review, 'confidential')}
+    value={field.value || ''}
   />
 )
 
-const RecommendationInput = journal => ({ field, updateReview, review }) => (
+const RecommendationInput = ({
+  field,
+  form: { values },
+  updateReview,
+  journal,
+}) => (
   <RadioGroup
     inline
+    {...field}
     onChange={val => {
-      const data = cloneDeep(review)
+      const data = cloneDeep(values)
       set(data, 'recommendation', val)
       updateReview(data)
     }}
     options={journal.recommendations}
-    value={review.recommendation}
   />
 )
 
-const ReviewComment = (updateReview, uploadFile, review) => props => [
+const ReviewComment = props => [
   <AdminSection>
     <div name="note">
       <Field
-        component={NoteInput}
-        review={review}
-        updateReview={updateReview}
-        {...props}
+        component={extraProps => <NoteInput {...props} {...extraProps} />}
+        key="noteField"
+        name="comments.0.content"
       />
       <Field
-        component={AttachmentsInput('note')}
-        review={review}
-        updateReview={updateReview}
-        uploadFile={uploadFile}
-        {...props}
+        component={extraProps => (
+          <AttachmentsInput type="note" {...props} {...extraProps} />
+        )}
       />
     </div>
   </AdminSection>,
   <AdminSection>
     <div name="confidential">
       <Field
-        component={ConfidentialInput}
-        review={review}
-        updateReview={updateReview}
-        {...props}
+        component={extraProps => (
+          <ConfidentialInput {...props} {...extraProps} />
+        )}
+        key="confidentialField"
+        name="comments.1.content"
       />
       <Field
-        component={AttachmentsInput('confidential')}
-        review={review}
-        updateReview={updateReview}
-        uploadFile={uploadFile}
-        {...props}
+        component={extraProps => (
+          <AttachmentsInput type="confidential" {...props} {...extraProps} />
+        )}
       />
     </div>
   </AdminSection>,
@@ -165,17 +173,19 @@ const ReviewForm = ({
   review,
 }) => (
   <form onSubmit={handleSubmit}>
-    <FieldArray
-      component={ReviewComment(updateReview, uploadFile, review)}
-      name="comments"
-    />
+    <ReviewComment updateReview={updateReview} uploadFile={uploadFile} />
     <AdminSection>
       <div name="Recommendation">
         <Title>Recommendation</Title>
         <Field
-          component={RecommendationInput(journal)}
+          component={props => (
+            <RecommendationInput
+              journal={journal}
+              updateReview={updateReview}
+              {...props}
+            />
+          )}
           name="recommendation"
-          review={review}
           updateReview={updateReview}
         />
       </div>

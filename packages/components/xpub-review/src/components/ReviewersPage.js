@@ -1,4 +1,4 @@
-import { compose, withProps, withHandlers } from 'recompose'
+import { compose, withProps } from 'recompose'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 import { gql } from 'apollo-client-preset'
@@ -177,12 +177,6 @@ const handleSubmit = (
   }
 }
 
-const loadOptions = props => input => {
-  const options = props.reviewerUsers
-
-  return Promise.resolve({ options })
-}
-
 export default compose(
   graphql(query, {
     options: ({ match }) => ({
@@ -228,9 +222,9 @@ export default compose(
       }
     },
   ),
-  withHandlers({
-    loadOptions: props => loadOptions(props),
-  }),
+  // withHandlers({
+  //   loadOptions: props => props.reviewerUsers, // loadOptions(props),
+  // }),
   withFormik({
     mapPropsToValues: () => ({ user: '' }),
     displayName: 'reviewers',
