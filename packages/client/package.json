@@ -43,15 +43,14 @@
     "subscriptions-transport-ws": "^0.9.12"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eventsourcemock": "^1.0.1",
     "isomorphic-form-data": "^1.0.0",
-    "jest": "^23.5.0",
+    "jest": "^24.0.0",
     "nock": "^9.0.14",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.5.2",
