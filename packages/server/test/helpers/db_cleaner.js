@@ -7,6 +7,7 @@ const dbCleaner = async options => {
   await db.raw('GRANT ALL ON SCHEMA public TO public;')
   await migrate(options)
   logger.info('Dropped all tables and ran all migrations')
+  return true
 }
 
 module.exports = dbCleaner
