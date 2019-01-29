@@ -12,6 +12,7 @@ import {
   Button,
   TextField,
 } from '@pubsweet/ui'
+
 import styled from 'styled-components'
 
 const Logo = styled.div`
