@@ -11,11 +11,6 @@ import {
   Button,
   TextField,
 } from '@pubsweet/ui'
-import styled from 'styled-components'
-
-// These enable tests to select components
-const Signup = styled.div``
-const ResetPassword = styled.div``
 
 const UsernameInput = props => <TextField label="Username" {...props.field} />
 const PasswordInput = props => (
@@ -45,17 +40,17 @@ const Login = ({
       </form>
 
       {signup && (
-        <Signup>
+        <>
           <span>Don&apos;t have an account? </span>
           <Link to="/signup">Sign up</Link>
-        </Signup>
+        </>
       )}
 
       {passwordReset && (
-        <ResetPassword>
+        <>
           <span>Forgot your password? </span>
           <Link to="/password-reset">Reset password</Link>
-        </ResetPassword>
+        </>
       )}
     </CenteredColumn>
   )
@@ -68,8 +63,4 @@ Login.propTypes = {
   passwordReset: PropTypes.bool,
 }
 
-// used by tests
-export { Login, ErrorText, Signup, ResetPassword }
-
-// used by consumers
 export default Login

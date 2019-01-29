@@ -1,13 +1,19 @@
 import { shallow } from 'enzyme'
 import React from 'react'
+import { Field } from 'formik'
+import { Button, Link, ErrorText } from '@pubsweet/ui'
 
-import { Login, ErrorText, Signup, ResetPassword } from './Login'
+import Login from './Login'
 
 describe('<Login/>', () => {
   const makeWrapper = (props = {}) => shallow(<Login {...props} />)
 
   it('renders the login form', () => {
-    expect(makeWrapper()).toMatchSnapshot()
+    const wrapper = makeWrapper()
+
+    expect(wrapper.find(Field)).toHaveLength(2)
+    expect(wrapper.find(Button)).toHaveLength(1)
+    expect(wrapper.find(Link)).toHaveLength(2)
   })
 
   it('shows error', () => {
@@ -18,15 +24,15 @@ describe('<Login/>', () => {
   it('can hide sign up link', () => {
     const wrapper1 = makeWrapper()
     const wrapper2 = makeWrapper({ signup: false })
-    expect(wrapper1.find(Signup)).toHaveLength(1)
-    expect(wrapper2.find(Signup)).toHaveLength(0)
+    expect(wrapper1.find({ to: '/signup' })).toHaveLength(1)
+    expect(wrapper2.find({ to: '/signup' })).toHaveLength(0)
   })
 
   it('can hide password reset link', () => {
     const wrapper1 = makeWrapper()
     const wrapper2 = makeWrapper({ passwordReset: false })
-    expect(wrapper1.find(ResetPassword)).toHaveLength(1)
-    expect(wrapper2.find(ResetPassword)).toHaveLength(0)
+    expect(wrapper1.find({ to: '/password-reset' })).toHaveLength(1)
+    expect(wrapper2.find({ to: '/password-reset' })).toHaveLength(0)
   })
 
   it('triggers submit handler', () => {
