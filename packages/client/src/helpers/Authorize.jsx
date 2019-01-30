@@ -10,14 +10,14 @@ import {
   GET_FRAGMENT,
   GET_TEAM,
 } from './AuthorizeGraphQLQueries'
-import { Authorize } from './BaseAuthorize'
+import BaseAuthorize from './BaseAuthorize'
 
 const getDataFromQuery = async (client, query, field) => {
   const { data } = await client.query(query)
   return data[field]
 }
 
-export class AuthorizeWithGraphQL extends Authorize {
+export class Authorize extends BaseAuthorize {
   async checkAuth({ authsome, operation, object }) {
     authsome.context = {
       models: {
@@ -75,6 +75,7 @@ export class AuthorizeWithGraphQL extends Authorize {
         },
         'currentUser',
       )
+
       const authorized = await authsome.can(
         currentUser && currentUser.id,
         operation,
@@ -89,7 +90,7 @@ export class AuthorizeWithGraphQL extends Authorize {
   }
 }
 
-const AuthorizeWithGraphQLWrapper = props => {
+const AuthorizeWrapper = props => {
   let authsome
   if (!props.authsome) {
     authsome = new Authsome(
@@ -100,11 +101,9 @@ const AuthorizeWithGraphQLWrapper = props => {
 
   return (
     <ApolloConsumer>
-      {client => (
-        <AuthorizeWithGraphQL authsome={authsome} {...props} client={client} />
-      )}
+      {client => <Authorize authsome={authsome} {...props} client={client} />}
     </ApolloConsumer>
   )
 }
 
-export default AuthorizeWithGraphQLWrapper
+export default AuthorizeWrapper

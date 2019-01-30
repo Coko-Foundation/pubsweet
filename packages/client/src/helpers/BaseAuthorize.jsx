@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export class Authorize extends React.Component {
+export default class BaseAuthorize extends React.Component {
   constructor(props) {
     super(props)
 
@@ -10,13 +10,38 @@ export class Authorize extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.checkAuth(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.checkAuth(nextProps)
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.authsome !== this.props.authsome ||
+      prevProps.currentUser !== this.props.currentUser ||
+      prevProps.object !== this.props.object
+    ) {
+      this.checkAuth(this.props)
+    }
   }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   // Store prevId in state so we can compare when props change.
+  //   // Clear out previously-loaded data (so we don't render stale stuff).
+  //   if (props.id !== state.prevId) {
+  //     return {
+  //       externalData: null,
+  //       prevId: props.id,
+  //     };
+  //   }
+
+  //   // No state update necessary
+  //   return null
+  // }
+
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('hello')
+  //   this.checkAuth(nextProps)
+  // }
 
   renderUnauthorizedProp() {
     return React.isValidElement(this.props.unauthorized) ||
@@ -34,7 +59,7 @@ export class Authorize extends React.Component {
   }
 }
 
-Authorize.propTypes = {
+BaseAuthorize.propTypes = {
   currentUser: PropTypes.object,
   operation: PropTypes.string,
   object: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -43,6 +68,6 @@ Authorize.propTypes = {
   authsome: PropTypes.object.isRequired,
 }
 
-Authorize.defaultProps = {
+BaseAuthorize.defaultProps = {
   unauthorized: null,
 }
