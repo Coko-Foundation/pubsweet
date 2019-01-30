@@ -24,9 +24,16 @@ const FormContainer = styled.div`
   ${override('Login.FormContainer')};
 `
 
-const UsernameInput = props => <TextField label="Username" {...props.field} />
+const UsernameInput = props => (
+  <TextField label="Username" placeholder="Username" {...props.field} />
+)
 const PasswordInput = props => (
-  <TextField label="Password" {...props.field} type="password" />
+  <TextField
+    label="Password"
+    placeholder="Password"
+    {...props.field}
+    type="password"
+  />
 )
 
 const Login = ({
