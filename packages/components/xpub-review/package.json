@@ -31,18 +31,18 @@
     "xpub-validators": "^0.0.6"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^8.0.5",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^8.0.5",
     "css-loader": "^0.28.4",
     "faker": "^4.1.0",
-    "file-loader": "^1.1.5",
+    "file-loader": "^3.0.1",
     "node-sass": "^4.5.3",
     "react-styleguidist": "^8.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "webpack": "^4.26.1",
+    "webpack": "^4.29.0",
     "webpack-node-externals": "^1.6.0"
   },
   "peerDependencies": {

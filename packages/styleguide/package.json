@@ -8,13 +8,13 @@
   ],
   "main": "src",
   "dependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@elifesciences/elife-theme": "^1.0.0",
     "@pubsweet/coko-theme": "^5.0.6",
     "@pubsweet/default-theme": "^4.0.6",
     "@pubsweet/ui": "^9.1.2",
     "@pubsweet/ui-toolkit": "^2.0.6",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
     "config": "^3.0.1",
     "faker": "^4.1.0",
     "fs-extra": "^7.0.1",
@@ -35,7 +35,7 @@
     "regenerator-runtime": "^0.13.1",
     "styled-components": "^4.1.1",
     "styled-normalize": "^8.0.4",
-    "webpack": "^4.16.0",
+    "webpack": "^4.29.0",
     "xpub-journal": "^0.0.3"
   },
   "devDependencies": {

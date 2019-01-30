@@ -149,7 +149,8 @@
         },
         "setupFilesAfterEnv": [
           "<rootDir>/test/setup/enzyme.js"
-        ]
+        ],
+        "snapshotSerializers": ["enzyme-to-json/serializer"]
       },
       {
         "rootDir": "<rootDir>/packages/base-model",
