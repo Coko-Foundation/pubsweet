@@ -6,12 +6,14 @@ module.exports = api => {
   const overrides = [
     {
       test: ['./packages/ui', './packages/client'],
-      presets: ['@babel/preset-env', '@babel/preset-react'],
-      plugins: [
-        '@babel/plugin-proposal-class-properties',
-        '@babel/plugin-transform-runtime',
-      ],
+      extends: ['./packages/ui/babel.config.js'],
+      // presets: ['@babel/preset-env', '@babel/preset-react'],
+      // plugins: [
+      //   '@babel/plugin-proposal-class-properties',
+      //   '@babel/plugin-transform-runtime',
+      // ],
     },
+
     {
       test: ['./packages/ui-toolkit'],
       presets: ['@babel/preset-env'],
