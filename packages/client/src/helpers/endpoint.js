@@ -1,3 +1,3 @@
 import config from 'config'
 
-module.exports = config['pubsweet-client'].API_ENDPOINT
+export default config['pubsweet-client'].API_ENDPOINT

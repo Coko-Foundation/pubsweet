@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const CURRENT_USER = gql`
+export const CURRENT_USER = gql`
   query CurrentUser {
     currentUser {
       admin
@@ -10,7 +10,7 @@ const CURRENT_USER = gql`
   }
 `
 
-const GET_USER = gql`
+export const GET_USER = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
       id
@@ -23,7 +23,7 @@ const GET_USER = gql`
   }
 `
 
-const GET_COLLECTION = gql`
+export const GET_COLLECTION = gql`
   query GetCollection($id: ID) {
     collection(id: $id) {
       id
@@ -37,7 +37,7 @@ const GET_COLLECTION = gql`
   }
 `
 
-const GET_FRAGMENT = gql`
+export const GET_FRAGMENT = gql`
   query GetFragment($id: ID) {
     fragment(id: $id) {
       id
@@ -49,7 +49,7 @@ const GET_FRAGMENT = gql`
   }
 `
 
-const GET_TEAM = gql`
+export const GET_TEAM = gql`
   query GetTeam($id: ID) {
     team(id: $id) {
       id
@@ -66,11 +66,3 @@ const GET_TEAM = gql`
     }
   }
 `
-
-module.exports = {
-  CURRENT_USER,
-  GET_USER,
-  GET_COLLECTION,
-  GET_FRAGMENT,
-  GET_TEAM,
-}
