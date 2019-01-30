@@ -11,13 +11,16 @@ const GET_USERS = gql`
       username
       teams {
         id
-        teamType
+        role
         name
         object {
           objectId
         }
         members {
-          id
+          user {
+            id
+            username
+          }
         }
       }
     }
@@ -54,4 +57,4 @@ const UsersManager = () => (
   </Query>
 )
 
-module.exports = UsersManager
+export default UsersManager
