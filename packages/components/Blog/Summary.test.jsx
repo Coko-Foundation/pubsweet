@@ -45,14 +45,4 @@ describe('<Summary/>', () => {
     const html = wrapper.html()
     expect(html).not.toContain('no abstract')
   })
-
-  // TODO mock DOMParser (used to extract abstract) or something
-  it.skip('shows <abstract>', () => {
-    const wrapper = makeWrapper({
-      source: '<abstract>this <b>stuff</b></abstract> but not this',
-    })
-    const html = wrapper.html()
-    expect(html).toContain('this <b>stuff</b>')
-    expect(html).not.toContain('but not this')
-  })
 })

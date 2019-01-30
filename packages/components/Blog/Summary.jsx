@@ -2,10 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-
-import './Summary.scss'
+import { Link } from '@pubsweet/ui'
 
 const Summary = props => {
   const { fragment } = props
@@ -16,26 +13,22 @@ const Summary = props => {
     const [abstract] = doc.getElementsByTagName('abstract')
     summary = abstract ? abstract.innerText : null
   }
-  const publishDate = new Date(fragment.published_at).toDateString()
+  const publishDate = new Date(fragment.created).toDateString()
   const owners = fragment.owners.map(owner => owner.username).join(', ')
 
   return (
-    <div className="blogpost bootstrap">
-      <Row>
-        <Col md={8} mdOffset={2} xs={12}>
-          <h2>{fragment.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: summary }} />
-          <LinkContainer to={`/${fragment.id}`}>
-            <a>Read more</a>
-          </LinkContainer>
-          &nbsp;
-          <div>
-            <em>
-              Published by {owners} on {publishDate}.
-            </em>
-          </div>
-        </Col>
-      </Row>
+    <div>
+      <h2>{fragment.title}</h2>
+      <div dangerouslySetInnerHTML={{ __html: summary }} />
+      <Link to={`/${fragment.id}`}>
+        <a>Read more</a>
+      </Link>
+      &nbsp;
+      <div>
+        <em>
+          Published by {owners} on {publishDate}.
+        </em>
+      </div>
     </div>
   )
 }

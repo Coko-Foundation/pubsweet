@@ -1,71 +1,56 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Grid, Row, Col } from 'react-bootstrap'
 
-import 'pubsweet-component-manage/Manage.scss'
-import styles from './Blog.local.scss'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
 import Summary from './Summary'
 
-export default class Blog extends React.Component {
-  constructor(props) {
-    super(props)
-    this.props.actions
-      .getCollections()
-      .then(result => this.props.actions.getFragments(result.collections[0]))
-  }
-
-  render() {
-    let posts = this.props.posts
-      .filter(post => post.published)
-      .map(post => <Summary fragment={post} key={post.id} />)
-
-    if (posts.length === 0 && this.props.blog) {
-      posts = (
-        <Row>
-          <Col md={8} mdOffset={2}>
-            <p>
-              No blogpost has been published on {this.props.blog.title} yet.
-            </p>
-          </Col>
-        </Row>
-      )
+const GET_POSTS = gql`
+  {
+    collections {
+      title
+      fragments {
+        id
+        title
+        source
+        published
+        created
+        owners {
+          id
+          username
+        }
+      }
     }
-
-    return (
-      <div className="bootstrap">
-        <div className={styles.heroBackground}>
-          <Grid>
-            <Row className={styles.hero}>
-              <Col md={8} mdOffset={2}>
-                <h1>Welcome to {this.props.blog && this.props.blog.title}</h1>
-                <p>Science for the Web</p>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-        <Grid>
-          <div className={styles.blogContainer}>{posts}</div>
-          <Row className={styles.blogFooter}>
-            <Col md={8} mdOffset={2}>
-              <p>
-                Powered by{' '}
-                <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
-              </p>
-            </Col>
-          </Row>
-        </Grid>
-      </div>
-    )
   }
-}
+`
 
-Blog.propTypes = {
-  // Data
-  blog: PropTypes.object,
-  posts: PropTypes.array,
-  // Injected by React Redux
-  // errorMessage: PropTypes.string,
-  // Injected by React Router
-  actions: PropTypes.object.isRequired,
-}
+const Blog = () => (
+  <Query query={GET_POSTS}>
+    {({ loading, error, data }) => {
+      // Only works in the simplest case of 1 collection
+      const collection = data.collections[0]
+
+      let posts = collection.fragments
+        .filter(post => post.published)
+        .map(post => <Summary fragment={post} key={post.id} />)
+
+      if (posts.length === 0 && this.props.blog) {
+        posts = (
+          <p>No blogpost has been published on {this.props.blog.title} yet.</p>
+        )
+      }
+
+      return (
+        <div>
+          <h1>Welcome to {collection.title}</h1>
+          <p>Science for the Web</p>
+          {posts}
+          Powered by{' '}
+          <a href="https://gitlab.coko.foundation/pubsweet">PubSweet</a>
+        </div>
+      )
+    }}
+  </Query>
+)
+
+export default Blog
