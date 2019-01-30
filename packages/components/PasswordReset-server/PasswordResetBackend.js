@@ -8,11 +8,6 @@ const bodyParser = require('body-parser')
 
 const transport = require('./transport')
 
-config.util.setModuleDefaults('password-reset', {
-  'token-length': 32,
-  pathToPage: '/password-reset',
-})
-
 // fail early if these configs are missing
 const baseUrl = config.get('pubsweet-server.baseUrl')
 const configSender = config.get('mailer.from')
@@ -20,6 +15,10 @@ const configSender = config.get('mailer.from')
 const PasswordResetBackend = app => {
   app.post('/api/password-reset', bodyParser.json(), async (req, res, next) => {
     try {
+      const pathToPage =
+        config.get('password-reset.pathToPage') || '/password-reset'
+      const tokenLength = config.get('password-reset.token-length') || 32
+
       const { token, password, username } = req.body
 
       if (!username) {
@@ -67,18 +66,17 @@ const PasswordResetBackend = app => {
         // send a password reset email
 
         user.passwordResetToken = crypto
-          .randomBytes(config.get('password-reset.token-length'))
+          .randomBytes(tokenLength)
           .toString('hex')
         user.passwordResetTimestamp = moment().format()
 
         await user.save()
 
-        const path = config.get('password-reset.pathToPage')
         const token = querystring.encode({
           username,
           token: user.passwordResetToken,
         })
-        const passwordResetURL = `${baseUrl}${path}?${token}`
+        const passwordResetURL = `${baseUrl}${pathToPage}?${token}`
 
         logger.info(`Sending password reset email to ${user.email}`)
 
