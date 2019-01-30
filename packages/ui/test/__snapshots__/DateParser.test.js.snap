@@ -1,67 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DateParser renders correctly 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <DateParser
-    timestamp="2018-05-18T10:38:12.063Z"
-  >
-    [Function]
-  </DateParser>,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "children": [Function],
-      "renderTimeAgo": [Function],
-      "renderTimestamp": [Function],
-      "timestamp": "2018-05-18T10:38:12.063Z",
-    },
-    "ref": null,
-    "rendered": [Function],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": [Function],
-        "renderTimeAgo": [Function],
-        "renderTimestamp": [Function],
-        "timestamp": "2018-05-18T10:38:12.063Z",
-      },
-      "ref": null,
-      "rendered": [Function],
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getDerivedStateFromProps": true,
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-  },
-}
+<withProps(D)
+  renderTimeAgo={[Function]}
+  renderTimestamp={[Function]}
+  timestamp="2018-05-18T10:38:12.063Z"
+>
+  <Component />
+</withProps(D)>
 `;
