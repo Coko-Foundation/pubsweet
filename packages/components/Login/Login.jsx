@@ -16,7 +16,6 @@ import {
 import styled from 'styled-components'
 
 // These enable tests to select components
-const Signup = styled.div``
 const ResetPassword = styled.div``
 const Logo = styled.div`
   ${override('Login.Logo')};
@@ -60,10 +59,10 @@ const Login = ({
         </form>
 
         {signup && (
-          <Signup>
+          <>
             <span>Don&apos;t have an account? </span>
             <Link to="/signup">Sign up</Link>
-          </Signup>
+          </>
         )}
 
         {passwordReset && (
