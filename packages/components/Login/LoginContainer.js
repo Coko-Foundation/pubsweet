@@ -2,7 +2,7 @@ import { compose } from 'recompose'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
 
-import mutations from './graphql/mutations'
+import { LOGIN_USER } from './graphql/mutations'
 import Login from './Login'
 import redirectPath from './redirect'
 
@@ -38,6 +38,6 @@ const enhancedFormik = withFormik({
   handleSubmit,
 })(Login)
 
-export default compose(graphql(mutations.LOGIN_USER, { name: 'loginUser' }))(
+export default compose(graphql(LOGIN_USER, { name: 'loginUser' }))(
   enhancedFormik,
 )
