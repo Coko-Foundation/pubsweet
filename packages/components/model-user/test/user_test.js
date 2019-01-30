@@ -3,7 +3,9 @@ const fixtures = require('./fixtures')
 const User = require('../src/user')
 
 describe('User', () => {
-  beforeEach(dbCleaner)
+  beforeEach(async () => {
+    await dbCleaner()
+  })
 
   it('validates passwords correctly after saving to db', async () => {
     const user = new User(fixtures.user)
