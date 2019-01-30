@@ -218,6 +218,7 @@ export default ({
   createFile,
   onChange,
   onSubmit,
+  submitSubmission,
   ...props
 }) => (
   <Wrapper>
@@ -305,7 +306,7 @@ export default ({
       ) : null}
 
       {values.status !== 'submitted' && form.haspopup === 'false' && (
-        <Button primary type="submit">
+        <Button onClick={handleSubmit} primary type="submit">
           Submit your manuscript
         </Button>
       )}
@@ -319,7 +320,11 @@ export default ({
       )}
       {confirming && (
         <ModalWrapper>
-          <Confirm form={form} toggleConfirming={toggleConfirming} />
+          <Confirm
+            form={form}
+            submitSubmission={handleSubmit}
+            toggleConfirming={toggleConfirming}
+          />
         </ModalWrapper>
       )}
     </form>

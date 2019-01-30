@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.6...pubsweet-component-xpub-submit@5.0.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* **components:** fixing components after new manuscript version ([89537ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/89537ff))
+* **components:** graphql data model changes ([4b61093](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4b61093))
+* **graphql:** review components fixes ([8094d9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8094d9e))
+* **merge:** merging to master ([8603808](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8603808))
+* **submit:** intro template ([6c850e1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6c850e1))
+* **submit:** intro template fix eslint ([fcc2599](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fcc2599))
+* **test:** formbuilder ([93c55fd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93c55fd))
+* **test:** problems with eslint and test ([48f7fe2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48f7fe2))
+* **xpub-review:** changes tp reviews ([5ae4240](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5ae4240))
+
+
+
+
+
 ## [5.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.5...pubsweet-component-xpub-submit@5.0.6) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-submit

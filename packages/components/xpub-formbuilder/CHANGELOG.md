@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-formbuilder@1.0.6...pubsweet-component-xpub-formbuilder@1.0.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* **components:** generals fixes on the components ([4a78cfe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4a78cfe))
+* **formbuilder:** delete forms ([17c52d0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/17c52d0))
+* **formbuilder:** save to file ([c4f4196](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4f4196))
+* **merge:** merging to master ([8603808](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8603808))
+* **test:** formbuilder ([93c55fd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93c55fd))
+* **test:** problems with eslint and test ([48f7fe2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48f7fe2))
+
+
+
+
+
 ## [1.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-formbuilder@1.0.5...pubsweet-component-xpub-formbuilder@1.0.6) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-formbuilder

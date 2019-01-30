@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@2.0.2...jest-environment-db@2.0.3) (2019-01-16)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
 ## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@2.0.1...jest-environment-db@2.0.2) (2019-01-14)
 
 **Note:** Version bump only for package jest-environment-db

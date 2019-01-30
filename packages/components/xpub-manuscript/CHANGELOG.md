@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.7...pubsweet-component-xpub-manuscript@0.6.8) (2019-01-16)
+
+
+### Bug Fixes
+
+* **graphql:** review components fixes ([8094d9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8094d9e))
+* **manuscript:** wax did not show ([80ae8c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/80ae8c6))
+
+
+
+
+
 ## [0.6.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-manuscript@0.6.6...pubsweet-component-xpub-manuscript@0.6.7) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-manuscript

@@ -52,6 +52,9 @@ const StepTitle = styled.span`
   top: 25px;
   white-space: normal;
   width: 120px;
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    left: -50px;
+  }
 
   ${override('ui.Steps.StepTitle')};
 `

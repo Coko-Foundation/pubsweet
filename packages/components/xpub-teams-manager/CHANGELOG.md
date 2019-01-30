@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@1.0.6...pubsweet-component-xpub-teams-manager@1.0.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* **components:** graphql data model changes ([4b61093](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4b61093))
+* **test:** formbuilder ([93c55fd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93c55fd))
+* **xpub-review:** changes tp reviews ([5ae4240](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5ae4240))
+
+
+
+
+
 ## [1.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@1.0.5...pubsweet-component-xpub-teams-manager@1.0.6) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-component-xpub-teams-manager

@@ -28,14 +28,14 @@ const createMarkup = encodedHtml => ({
   __html: unescape(encodedHtml),
 })
 
-const Confirm = ({ toggleConfirming, form }) => (
+const Confirm = ({ toggleConfirming, form, submitSubmission }) => (
   <Wrapper>
     <article>
       <Heading1 dangerouslySetInnerHTML={createMarkup(form.popuptitle)} />
       <Paragraph
         dangerouslySetInnerHTML={createMarkup(form.popupdescription)}
       />
-      <Button primary type="submit">
+      <Button onClick={submitSubmission} primary type="submit">
         Submit your manuscript
       </Button>
       <Divider> or </Divider>

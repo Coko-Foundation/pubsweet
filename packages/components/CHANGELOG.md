@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.1...pubsweet-components@12.0.2) (2019-01-16)
+
+
+### Bug Fixes
+
+* **components:** change back teams model to previous model ([a5eeae0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a5eeae0))
+* **components:** fixing components after new manuscript version ([89537ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/89537ff))
+* **components:** generals fixes on the components ([4a78cfe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4a78cfe))
+* **components:** graphql data model changes ([4b61093](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4b61093))
+* **formbuilder:** delete forms ([17c52d0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/17c52d0))
+* **formbuilder:** save to file ([c4f4196](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4f4196))
+* **formik:** improve formik usage ([24b42ff](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/24b42ff))
+* **graphql:** review components fixes ([8094d9e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8094d9e))
+* **login:** error on integration test failed login ([f061e58](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f061e58))
+* **login:** redirect to the dashboard ([41a7cc9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/41a7cc9))
+* **login:** unneeded vars ([7610f94](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7610f94))
+* **manuscript:** wax did not show ([80ae8c6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/80ae8c6))
+* **merge:** merging to master ([8603808](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8603808))
+* **submit:** intro template ([6c850e1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6c850e1))
+* **submit:** intro template fix eslint ([fcc2599](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fcc2599))
+* **test:** formbuilder ([93c55fd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/93c55fd))
+* **test:** login tests ([438ab2e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/438ab2e))
+* **test:** problems with eslint and test ([48f7fe2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/48f7fe2))
+* **xpub-review:** changes tp reviews ([5ae4240](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5ae4240))
+
+
+
+
+
 ## [12.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.0...pubsweet-components@12.0.1) (2019-01-14)
 
 **Note:** Version bump only for package pubsweet-components
