@@ -19,18 +19,10 @@ import styled from 'styled-components'
 const Signup = styled.div``
 const ResetPassword = styled.div``
 const Logo = styled.div`
-  width: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  img {
-    max-width: 100%;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    filter: grayscale(100%);
-  }
+  ${override('Login.Logo')};
 `
 const FormContainer = styled.div`
-  ${override('ui.FormContainer')};
+  ${override('Login.FormContainer')};
 `
 
 const UsernameInput = props => <TextField label="Username" {...props.field} />
