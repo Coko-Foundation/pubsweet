@@ -21,11 +21,11 @@ const Logo = styled.div`
 `
 
 const UsernameInput = props => (
-  <TextField label="Username" {...props.input} placeholder="Username" />
+  <TextField label="Username" {...props.field} placeholder="Username" />
 )
 
 const EmailInput = props => (
-  <TextField label="Email" {...props.input} placeholder="Email" type="email" />
+  <TextField label="Email" {...props.field} placeholder="Email" type="email" />
 )
 const PasswordInput = props => (
   <TextField
