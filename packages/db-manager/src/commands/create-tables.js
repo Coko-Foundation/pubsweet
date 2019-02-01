@@ -27,17 +27,6 @@ const createTables = async clobber => {
 
   // run migrations
   await migrate()
-
-  const { rows: countRows } = await db.raw(`
-    SELECT COUNT(*)
-    FROM pg_tables
-    WHERE schemaname = current_schema AND tablename = 'entities'
-  `)
-
-  // fallback if no entities table (which implies old version of server)
-  if (countRows[0].count === '0') {
-    await db.raw('CREATE TABLE entities (id UUID PRIMARY KEY, data JSONB)')
-  }
 }
 
 module.exports = createTables
