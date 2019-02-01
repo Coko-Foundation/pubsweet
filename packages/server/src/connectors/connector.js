@@ -37,7 +37,12 @@ const deleteCreator = (entityName, EntityModel) => async (id, ctx) => {
 }
 
 // create a function which updates a new entity and performs authorization checks
-const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
+const updateCreator = (entityName, EntityModel) => async (
+  id,
+  update,
+  ctx,
+  options,
+) => {
   await ctx.helpers.can(ctx.user, 'update', entityName)
   const entity = await EntityModel.find(id)
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
@@ -49,12 +54,15 @@ const updateCreator = (entityName, EntityModel) => async (id, update, ctx) => {
   )
 
   const filteredUpdate = updateFilter(update)
+  // The default is data consistency / data loss minimizing
+  options = { relate: true, unrelate: true, ...options }
+
   const updated = await EntityModel.query().upsertGraphAndFetch(
     {
       id,
       ...filteredUpdate,
     },
-    { relate: true, unrelate: true },
+    options,
   )
 
   return outputFilter(updated)
