@@ -1,6 +1,5 @@
 import React from 'react'
-import { ConnectedRouter } from 'react-router-redux'
-import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
@@ -58,8 +57,6 @@ const makeApolloClient = (makeConfig, connectToWebSocket) => {
 
 const Root = ({
   makeApolloConfig,
-  store,
-  history,
   routes,
   theme,
   connectToWebSocket = true,
@@ -69,21 +66,17 @@ const Root = ({
     <ApolloProvider
       client={makeApolloClient(makeApolloConfig, connectToWebSocket)}
     >
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ThemeProvider theme={theme}>
-            <StyleRoot>{routes}</StyleRoot>
-          </ThemeProvider>
-        </ConnectedRouter>
-      </Provider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <StyleRoot>{routes}</StyleRoot>
+        </ThemeProvider>
+      </BrowserRouter>
     </ApolloProvider>
   </div>
 )
 
 Root.propTypes = {
   routes: PropTypes.node.isRequired,
-  history: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 }
 

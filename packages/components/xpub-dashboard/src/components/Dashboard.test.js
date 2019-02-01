@@ -18,10 +18,7 @@ jest.mock('config', () => ({
   },
 }))
 
-jest.mock(
-  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
-  () => 'AuthorizeWithGraphQL',
-)
+jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
 
 const getProjects = item => item.map(c => c.props().version)
 

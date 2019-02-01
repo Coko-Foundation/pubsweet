@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@pubsweet/ui'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 // Enable that when Team Models is updated
 // import { getUserFromTeam } from 'xpub-selectors'
 import { Item, Body, Divider } from '../molecules/Item'
@@ -33,7 +33,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
     ) || {}
 
   return (
-    <AuthorizeWithGraphQL
+    <Authorize
       key={`${review.id}`}
       object={[version]}
       operation="can view review section"
@@ -85,7 +85,7 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
           {status === 'rejected' && 'rejected'}
         </Body>
       </Item>
-    </AuthorizeWithGraphQL>
+    </Authorize>
   )
 }
 

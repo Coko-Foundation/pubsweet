@@ -4,7 +4,7 @@ CREATE TABLE teams (
   updated TIMESTAMP WITH TIME ZONE,
   object JSONB,
   name TEXT,
-  team_type TEXT NOT NULL,
+  role TEXT NOT NULL,
   members JSONB,
   owners JSONB,
   global BOOLEAN,

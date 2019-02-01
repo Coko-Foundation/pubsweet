@@ -51,13 +51,21 @@ const configureApp = app => {
   app.use(cookieParser())
   app.use(helmet())
   app.use(express.static(path.resolve('.', '_build')))
-  app.use(
-    '/uploads',
-    express.static(path.resolve(config.get('pubsweet-server.uploads'))),
-  )
 
+  if (config.has('pubsweet-server.uploads')) {
+    app.use(
+      '/uploads',
+      express.static(path.resolve(config.get('pubsweet-server.uploads'))),
+    )
+  }
   // Passport strategies
   app.use(passport.initialize())
+  const authentication = require('./authentication')
+
+  // Register passport authentication strategies
+  passport.use('bearer', authentication.strategies.bearer)
+  passport.use('anonymous', authentication.strategies.anonymous)
+  passport.use('local', authentication.strategies.local)
 
   app.locals.passport = passport
   app.locals.authsome = authsome
@@ -68,9 +76,8 @@ const configureApp = app => {
   app.use('/api', api)
 
   // GraphQL API
-  if (config.get('pubsweet-server').enableExperimentalGraphql) {
-    app.use(graphqlApi)
-  }
+  app.use(graphqlApi)
+
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
     sse.setAuthsome(authsome)

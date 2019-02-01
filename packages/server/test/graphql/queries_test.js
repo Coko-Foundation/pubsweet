@@ -1,28 +1,30 @@
-const { model: User } = require('@pubsweet/model-user')
-const { model: Team } = require('@pubsweet/model-team')
+const { Team, User } = require('@pubsweet/models')
 const cleanDB = require('../helpers/db_cleaner')
-const fixtures = require('../fixtures/fixtures')
+const {
+  fixtures: { user: userFixture },
+} = require('@pubsweet/model-user/test')
+
 const api = require('../helpers/api')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('../../src/authentication')
 
 describe('GraphQL core queries', () => {
   let token
   let user
   beforeEach(async () => {
     await cleanDB()
-    user = await new User(fixtures.adminUser).save()
+    user = await new User(userFixture).save()
     token = authentication.token.create(user)
   })
 
   it('can resolve all users', async () => {
     const { body } = await api.graphql.query(
-      `{ users { username, admin } }`,
+      `{ users { username } }`,
       {},
       token,
     )
 
     expect(body).toEqual({
-      data: { users: [{ username: 'admin', admin: true }] },
+      data: { users: [{ username: user.username }] },
     })
   })
 
@@ -31,7 +33,6 @@ describe('GraphQL core queries', () => {
       `query($id: ID) {
           user(id: $id) {
             username
-            admin
           }
         }`,
       { id: user.id },
@@ -39,7 +40,7 @@ describe('GraphQL core queries', () => {
     )
 
     expect(body).toEqual({
-      data: { user: { username: 'admin', admin: true } },
+      data: { user: { username: user.username } },
     })
   })
 
@@ -59,7 +60,15 @@ describe('GraphQL core queries', () => {
   })
 
   it('can resolve nested query', async () => {
-    await new Team({ ...fixtures.contributorTeam, members: [user.id] }).save()
+    await Team.query().upsertGraph(
+      {
+        role: 'test',
+        name: 'Test',
+        users: [{ id: user.id }],
+      },
+      { relate: true, unrelate: true },
+    )
+
     const { body } = await api.graphql.query(
       `{ users { username, teams { name, global } } }`,
       {},
@@ -70,8 +79,8 @@ describe('GraphQL core queries', () => {
       data: {
         users: [
           {
-            username: 'admin',
-            teams: [{ name: 'My contributors', global: null }],
+            username: user.username,
+            teams: [{ name: 'Test', global: null }],
           },
         ],
       },

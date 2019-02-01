@@ -3,8 +3,8 @@ const resolvers = {
     fragment(_, { id }, ctx) {
       return ctx.connectors.Fragment.fetchOne(id, ctx)
     },
-    fragments(_, { id }, ctx) {
-      return ctx.connectors.Fragment.fetchAll(ctx)
+    fragments(_, { where }, ctx) {
+      return ctx.connectors.Fragment.fetchAll(where, ctx)
     },
   },
   Mutation: {

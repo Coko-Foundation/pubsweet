@@ -11,7 +11,6 @@ class User extends BaseModel {
     this.type = 'user'
     this.collections = this.collections || []
     this.fragments = this.fragments || []
-    this.teams = this.teams || []
   }
 
   $formatJson(json) {
@@ -22,6 +21,24 @@ class User extends BaseModel {
 
   static get tableName() {
     return 'users'
+  }
+
+  static get relationMappings() {
+    return {
+      teams: {
+        relation: BaseModel.ManyToManyRelation,
+        modelClass: require.resolve('@pubsweet/model-team/src/team'),
+        join: {
+          from: 'users.id',
+          through: {
+            modelClass: require.resolve('@pubsweet/model-team/src/team_member'),
+            from: 'team_members.user_id',
+            to: 'team_members.team_id',
+          },
+          to: 'teams.id',
+        },
+      },
+    }
   }
 
   static get schema() {

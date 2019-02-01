@@ -3,23 +3,10 @@ const _ = require('lodash')
 const config = require('config')
 const logger = require('@pubsweet/logger')
 const path = require('path')
-const program = require('commander')
 const { dbExists, setupDb } = require('@pubsweet/db-manager')
 const { ordinalize } = require('inflection')
 
-const readCommand = async argsOverride => {
-  program
-    .option('--reduxlog-off', 'Switch off Redux logger')
-    .description(
-      'Build assets and start the app with forever (not recommended for production).',
-    )
-
-  return program.parse(argsOverride || process.argv)
-}
-
 module.exports = async argsOverride => {
-  const commandOpts = await readCommand(argsOverride)
-
   logger.info('Starting PubSweet app')
 
   if (!(await dbExists())) {
@@ -46,13 +33,7 @@ module.exports = async argsOverride => {
 
   const configOpts = config.has('forever') ? config.get('forever') : {}
 
-  const overrideOpts = {
-    env: {
-      REDUXLOG_OFF: commandOpts.reduxlogOff,
-    },
-  }
-
-  const finalOpts = _.merge(defaultOpts, configOpts, overrideOpts)
+  const finalOpts = _.merge(defaultOpts, configOpts)
 
   const child = forever.start(executable, finalOpts)
 

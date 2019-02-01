@@ -1,22 +1,39 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import config from 'config'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
 import User from './User'
 
-const configuredTeams = config.authsome.teams
-
-export default class UsersManager extends React.Component {
-  componentWillMount() {
-    this.props.actions.getUsers()
+const GET_USERS = gql`
+  {
+    users {
+      id
+      username
+      teams {
+        id
+        role
+        name
+        object {
+          objectId
+        }
+        members {
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
   }
+`
 
-  render() {
-    const { users = [], actions, error, teams = [] } = this.props
+const UsersManager = () => (
+  <Query query={GET_USERS}>
+    {({ loading, error, data }) => {
+      if (loading) return 'Loading...'
+      if (error) return `Error! ${error.message}`
 
-    return (
-      <div>
-        {error ? <div>{error}</div> : null}
+      return (
         <div>
           <table>
             <thead>
@@ -29,30 +46,15 @@ export default class UsersManager extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, key) => (
-                <User
-                  configuredTeams={configuredTeams}
-                  createTeam={actions.createTeam}
-                  getTeams={actions.getTeams}
-                  key={user.id}
-                  number={key + 1}
-                  teams={teams}
-                  update={actions.updateUser}
-                  updateTeam={actions.updateTeam}
-                  user={user}
-                />
+              {data.users.map((user, key) => (
+                <User key={user.id} number={key + 1} user={user} />
               ))}
             </tbody>
           </table>
         </div>
-      </div>
-    )
-  }
-}
+      )
+    }}
+  </Query>
+)
 
-UsersManager.propTypes = {
-  users: PropTypes.array,
-  actions: PropTypes.object.isRequired,
-  teams: PropTypes.array,
-  error: PropTypes.string,
-}
+export default UsersManager

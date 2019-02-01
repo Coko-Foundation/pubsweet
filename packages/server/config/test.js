@@ -1,5 +1,4 @@
 const path = require('path')
-const winston = require('winston')
 
 module.exports = {
   'pubsweet-server': {
@@ -9,10 +8,6 @@ module.exports = {
     },
     pool: { min: 0, max: 10, idleTimeoutMillis: 1000 },
     ignoreTerminatedConnectionError: true,
-    logger: new winston.Logger({
-      level: 'warn',
-      transports: [new winston.transports.Console()],
-    }),
     enableExperimentalGraphql: true,
     port: 4000,
     secret: 'test',

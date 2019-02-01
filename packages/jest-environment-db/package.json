@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "jest-environment-node": "^22.1.4",
-    "pg": "^7.7.1"
+    "pg": "^7.8.0"
   },
   "peerDependencies": {
     "config": "^3.0.1"

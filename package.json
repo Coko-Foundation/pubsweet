@@ -6,8 +6,8 @@
   "devDependencies": {
     "@commitlint/cli": "^6.0.5",
     "@commitlint/config-conventional": "^6.0.4",
-    "babel-eslint": "^8.0.3",
-    "babel-preset-env": "^1.6.1",
+    "babel-eslint": "^10.0.1",
+    "@babel/preset-env": "^7.0.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.13.1",
@@ -56,13 +56,17 @@
         "displayName": "server",
         "testEnvironment": "jest-environment-db",
         "testRegex": "/test/.*_test.js$",
-        "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js"
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/helpers/jest-setup.js"
+        ]
       },
       {
         "rootDir": "<rootDir>/packages/client",
         "displayName": "client",
         "testRegex": "/test/.+test.jsx?$",
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
         "globals": {
           "window": {}
         }
@@ -73,7 +77,9 @@
         "testMatch": [
           "**/test/**/*.test.js"
         ],
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
         "testEnvironment": "jest-environment-db"
       },
       {
@@ -87,13 +93,16 @@
         ],
         "testPathIgnorePatterns": [
           "/node_modules",
-          "config/test"
+          "config/test",
+          "model-*"
         ],
         "globals": {
           "PUBSWEET_COMPONENTS": [],
           "fetch": true
         },
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ]
       },
       {
         "rootDir": "<rootDir>/packages/cli",
@@ -112,7 +121,9 @@
         "unmockedModulePathPatterns": [
           "/src/models"
         ],
-        "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/jest-setup.js",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/helpers/jest-setup.js"
+        ],
         "verbose": true
       },
       {
@@ -126,7 +137,9 @@
         ],
         "testEnvironment": "node",
         "verbose": true,
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js"
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ]
       },
       {
         "rootDir": "<rootDir>/packages/ui",
@@ -134,16 +147,18 @@
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
         },
-        "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
-        "transform": {
-          "\\.js$": "<rootDir>/test/config/transform.js"
-        }
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/setup/enzyme.js"
+        ],
+        "snapshotSerializers": ["enzyme-to-json/serializer"]
       },
       {
         "rootDir": "<rootDir>/packages/base-model",
         "displayName": "base-model",
         "testRegex": "/test/.*_test.js$",
-        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
         "testEnvironment": "jest-environment-db"
       },
       {
@@ -151,6 +166,24 @@
         "displayName": "sse",
         "testRegex": "/test/.*_test.js$",
         "testEnvironment": "node"
+      },
+      {
+        "rootDir": "<rootDir>/packages/components/model-team",
+        "displayName": "model-team",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/packages/components/model-user",
+        "displayName": "model-user",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "jest-environment-db"
       }
     ]
   },
@@ -168,11 +201,8 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {
-    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release"
-  },
+  "dependencies": {},
   "resolutions": {
-    "babel-plugin-istanbul": "https://github.com/jure/babel-plugin-istanbul.git#temp_release",
     "webpack-dev-server": "3.1.11"
   }
 }

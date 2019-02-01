@@ -30,7 +30,12 @@ const darkenLighten = (original, percent, props, dark) => {
   const color = get(props.theme, original) || original
   const thisMuch = normalizePercent(percent)
 
-  const converted = Color(color)
+  let converted
+  try {
+    converted = Color(color)
+  } catch {
+    converted = Color('black')
+  }
 
   if (dark) return converted.darken(thisMuch).string()
   return converted.lighten(thisMuch).string()

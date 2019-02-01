@@ -52,9 +52,8 @@ module.exports = dir => {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  [require('babel-preset-env'), { modules: false }],
-                  require('babel-preset-react'),
-                  require('babel-preset-stage-2'),
+                  [require('@babel/preset-env'), { modules: false }],
+                  require('@babel/preset-react'),
                 ],
                 cacheDirectory: true,
               },

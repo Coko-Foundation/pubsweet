@@ -2,7 +2,7 @@ describe('token management', () => {
   it('creates and verifies a token', done => {
     const {
       token: { create: createToken, verify: verifyToken },
-    } = require('@pubsweet/model-user/src/authentication')
+    } = require('../src/authentication')
 
     const token = createToken({ id: 1, username: 'test' })
 
@@ -20,7 +20,7 @@ describe('token management', () => {
   it('does not verify an expired token', done => {
     const {
       token: { create: createToken, verify: verifyToken },
-    } = require('@pubsweet/model-user/src/authentication')
+    } = require('../src/authentication')
 
     const token = createToken({ id: 1, username: 'test' })
 
@@ -48,7 +48,7 @@ describe('token management', () => {
 
     const {
       token: { create: createToken, verify: verifyToken },
-    } = require('@pubsweet/model-user/src/authentication')
+    } = require('../src/authentication')
 
     const token = createToken({ id: 1, username: 'test' })
 

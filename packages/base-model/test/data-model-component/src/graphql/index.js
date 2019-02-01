@@ -3,8 +3,8 @@ const resolvers = {
     manuscript(_, { id }, ctx) {
       return ctx.connectors.Manuscript.fetchOne(id, ctx)
     },
-    manuscripts(_, { id }, ctx) {
-      return ctx.connectors.Manuscript.fetchAll(ctx)
+    manuscripts(_, { where }, ctx) {
+      return ctx.connectors.Manuscript.fetchAll(where, ctx)
     },
   },
   Mutation: {

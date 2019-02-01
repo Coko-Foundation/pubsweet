@@ -9,7 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "objection": "^1.2.3",
+    "objection": "^1.5.3",
     "pubsweet-server": "^12.0.2"
   },
   "publishConfig": {

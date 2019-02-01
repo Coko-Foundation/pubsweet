@@ -14,6 +14,8 @@ const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
 })
 const router = new express.Router()
 
+const helpers = require('../helpers/authorization')
+
 const hostname = config.has('pubsweet-server.hostname')
   ? config.get('pubsweet-server.hostname')
   : 'localhost'
@@ -23,7 +25,7 @@ router.use(
   apolloUploadExpress(),
   graphqlExpress(req => ({
     schema: graphqlSchema,
-    context: { user: req.user, connectors },
+    context: { user: req.user, connectors, helpers },
     formatError: err => {
       logger.error(err.message, { error: err })
       return err

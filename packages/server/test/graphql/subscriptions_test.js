@@ -1,7 +1,7 @@
 const { model: User } = require('@pubsweet/model-user')
 const cleanDB = require('../helpers/db_cleaner')
-const fixtures = require('../fixtures/fixtures')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const { fixtures } = require('@pubsweet/model-user/test')
+const authentication = require('../../src/authentication')
 const { startServer } = require('../../src')
 
 const WebSocket = require('ws')
@@ -75,7 +75,7 @@ describe('GraphQL subscriptions', () => {
   })
   beforeEach(async () => {
     await cleanDB()
-    user = await new User(fixtures.adminUser).save()
+    user = await new User(fixtures.user).save()
     token = authentication.token.create(user)
     wsLink = new WebSocketLink({
       uri: `ws://localhost:4000/subscriptions`,

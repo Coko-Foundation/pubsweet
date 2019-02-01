@@ -1,9 +1,9 @@
 module.exports = async (userId, operation, object, context) => {
   const user = await context.models.User.find(userId)
   if (
-    !user.admin &&
+    !(user.username === 'anotheruser') &&
     object.type === 'manuscript' &&
-    object.title.match(/admins can see/)
+    object.title.match(/otherUser can see/)
   ) {
     return false
   }
@@ -14,13 +14,13 @@ module.exports = async (userId, operation, object, context) => {
     const manuscript = await context.models.Manuscript.find(object.current.id)
     const isAuthor = manuscript.owners.includes(user.id)
 
-    if (isAuthor && user.admin) {
+    if (isAuthor && user.username === 'anotheruser') {
       return true
     } else if (isAuthor) {
       return {
         filter: update => ({ approvedByAuthor: update.approvedByAuthor }),
       }
-    } else if (user.admin) {
+    } else if (user.username === 'anotheruser') {
       return {
         filter: update => ({ published: update.published }),
       }

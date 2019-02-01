@@ -33,19 +33,17 @@
     "xpub-validators": "^0.0.6"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "babel-loader": "^8.0.5",
     "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
+    "enzyme-adapter-react-16": "^1.8.0",
     "faker": "^4.1.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
     "react": ">=16",
-    "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2"
   }
 }

@@ -3,8 +3,8 @@ const resolvers = {
     collection(_, { id }, ctx) {
       return ctx.connectors.Collection.fetchOne(id, ctx)
     },
-    collections(_, { id }, ctx) {
-      return ctx.connectors.Collection.fetchAll(ctx)
+    collections(_, { where }, ctx) {
+      return ctx.connectors.Collection.fetchAll(where, ctx)
     },
   },
   Mutation: {

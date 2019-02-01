@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 
 import UploadManuscript from './UploadManuscript'
@@ -32,10 +32,7 @@ const Dashboard = ({
         Nothing to do at the moment. Please upload a document.
       </UploadContainer>
     )}
-    <AuthorizeWithGraphQL
-      object={dashboard}
-      operation="can view my submission section"
-    >
+    <Authorize object={dashboard} operation="can view my submission section">
       {dashboard.length > 0 ? (
         <Section>
           <Heading>My Submissions</Heading>
@@ -54,11 +51,8 @@ const Dashboard = ({
           ))}
         </Section>
       ) : null}
-    </AuthorizeWithGraphQL>
-    <AuthorizeWithGraphQL
-      object={dashboard}
-      operation="can view review section"
-    >
+    </Authorize>
+    <Authorize object={dashboard} operation="can view review section">
       {dashboard.length > 0 ? (
         <Section>
           <Heading>To review</Heading>
@@ -73,12 +67,9 @@ const Dashboard = ({
           ))}
         </Section>
       ) : null}
-    </AuthorizeWithGraphQL>
+    </Authorize>
 
-    <AuthorizeWithGraphQL
-      object={dashboard}
-      operation="can view my manuscripts section"
-    >
+    <Authorize object={dashboard} operation="can view my manuscripts section">
       {dashboard.length > 0 ? (
         <Section>
           <Heading>My Manuscripts</Heading>
@@ -91,7 +82,7 @@ const Dashboard = ({
           ))}
         </Section>
       ) : null}
-    </AuthorizeWithGraphQL>
+    </Authorize>
   </Page>
 )
 

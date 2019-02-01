@@ -1,17 +1,17 @@
 const { omit } = require('lodash')
 const authsome = require('../../src/helpers/authsome')
 const { model: User } = require('@pubsweet/model-user')
+const { fixtures } = require('@pubsweet/model-user/test')
 const cleanDB = require('../helpers/db_cleaner')
-const fixtures = require('../fixtures/fixtures')
 const api = require('../helpers/api')
-const authentication = require('@pubsweet/model-user/src/authentication')
+const authentication = require('../../src/authentication')
 
 describe('GraphQL authentication', () => {
   let token
   let user
   beforeEach(async () => {
     await cleanDB()
-    user = await new User(fixtures.adminUser).save()
+    user = await new User(fixtures.user).save()
     token = authentication.token.create(user)
   })
 
@@ -24,12 +24,15 @@ describe('GraphQL authentication', () => {
             token
           }
         }`,
-        { input: { username: 'admin', password: 'admin' } },
+        { input: { username: 'testuser', password: 'test' } },
       )
 
       expect(body).toMatchObject({
         data: {
-          loginUser: { token: expect.any(String), user: { username: 'admin' } },
+          loginUser: {
+            token: expect.any(String),
+            user: { username: 'testuser' },
+          },
         },
       })
     })
@@ -41,7 +44,7 @@ describe('GraphQL authentication', () => {
             token
           }
         }`,
-        { input: { username: 'admin', password: 'not correct' } },
+        { input: { username: 'testuser', password: 'not correct' } },
       )
 
       expect(body).toMatchObject({
@@ -74,8 +77,8 @@ describe('GraphQL authentication', () => {
       expect(body).toMatchObject({
         data: {
           currentUser: {
-            username: 'admin',
-            email: 'admin@admins.example.org',
+            username: 'testuser',
+            email: 'test@example.com',
           },
         },
       })
@@ -119,16 +122,16 @@ describe('GraphQL authentication', () => {
     it('filters the returned data', async () => {
       jest
         .spyOn(authsome, 'can')
-        .mockReturnValue({ filter: user => omit(user, 'admin') })
+        .mockReturnValue({ filter: user => omit(user, 'email') })
 
       const { body } = await api.graphql.query(
-        `{ users { username, admin } }`,
+        `{ users { username, email } }`,
         {},
         token,
       )
 
       expect(body).toEqual({
-        data: { users: [{ username: 'admin', admin: null }] },
+        data: { users: [{ username: 'testuser', email: null }] },
       })
     })
 
@@ -142,7 +145,6 @@ describe('GraphQL authentication', () => {
         `query($id: ID) {
           user(id: $id) {
             username
-            admin
           }
         }`,
         { id: user.id },

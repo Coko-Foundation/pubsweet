@@ -16,5 +16,6 @@ describe('<List>', () => {
     ]
     const wrapper = shallow(<List items={items} />)
     expect(wrapper.children()).toHaveLength(2)
+    expect(wrapper).toMatchSnapshot()
   })
 })
