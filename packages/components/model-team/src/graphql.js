@@ -6,6 +6,7 @@ const resolvers = {
       return ctx.connectors.Team.fetchOne(id, ctx, { eager })
     },
     teams(_, { where }, ctx) {
+      where = where || {}
       if (where.users) {
         const { users } = where
         delete where.users
@@ -30,11 +31,15 @@ const resolvers = {
         relate: ['members.user'],
         unrelate: ['members.user'],
         allowUpsert: '[members, members.alias]',
+        eager: '[members.[user.teams, alias]]',
       }
       return ctx.connectors.Team.create(input, ctx, options)
     },
     updateTeam(_, { id, input }, ctx) {
-      return ctx.connectors.Team.update(id, input, ctx, { unrelate: undefined })
+      return ctx.connectors.Team.update(id, input, ctx, {
+        unrelate: false,
+        eager: 'members.user.teams',
+      })
     },
   },
   Team: {

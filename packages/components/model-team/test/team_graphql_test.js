@@ -174,11 +174,12 @@ describe('Team queries', () => {
   })
 
   it('can update a team and also remove members', async () => {
+    const otherUser = await new User(fixtures.otherUser).save()
     const team = await Team.query().upsertGraphAndFetch(
       {
         role: 'test',
         name: 'Test',
-        members: [{ user: { id: user.id } }],
+        members: [{ user: { id: user.id } }, { user: { id: otherUser.id } }],
       },
       { relate: true, unrelate: true },
     )
@@ -188,6 +189,7 @@ describe('Team queries', () => {
           updateTeam(id: $id, input: $input) {
             name
             members {
+              id
               user {
                 id
               }
@@ -198,7 +200,7 @@ describe('Team queries', () => {
         id: team.id,
         input: {
           name: 'After',
-          members: [],
+          members: [{ id: team.members[0].id }],
         },
       },
       token,
@@ -208,7 +210,9 @@ describe('Team queries', () => {
       data: {
         updateTeam: {
           name: 'After',
-          members: [],
+          members: [
+            { id: team.members[0].id, user: { id: team.members[0].user.id } },
+          ],
         },
       },
     })
@@ -217,10 +221,10 @@ describe('Team queries', () => {
     const updatedTeam = await Team.query()
       .findById(team.id)
       .eager('members')
-    expect(updatedTeam.members).toHaveLength(0)
+    expect(updatedTeam.members).toHaveLength(1)
 
     // But the user should not be deleted
-    expect(await User.query()).toHaveLength(1)
+    expect(await User.query()).toHaveLength(2)
   })
 
   it('finds a team', async () => {

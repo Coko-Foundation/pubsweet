@@ -16,11 +16,10 @@ const createCreator = (entityName, EntityModel) => async (
   const inputFilter = await ctx.helpers.can(ctx.user, 'create', entity)
   const filteredInput = inputFilter(input)
 
-  const output = await EntityModel.query().insertGraphAndFetch(
-    filteredInput,
-    options,
-  )
+  let query = EntityModel.query().insertGraphAndFetch(filteredInput, options)
 
+  query = options && options.eager ? query.eager(options.eager) : query
+  const output = await query
   // Filter output based on authorization
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, output)
   return outputFilter(output)
@@ -57,13 +56,16 @@ const updateCreator = (entityName, EntityModel) => async (
   // The default is data consistency / data loss minimizing
   options = { relate: true, unrelate: true, ...options }
 
-  const updated = await EntityModel.query().upsertGraphAndFetch(
+  let query = EntityModel.query().upsertGraphAndFetch(
     {
       id,
       ...filteredUpdate,
     },
     options,
   )
+
+  query = options && options.eager ? query.eager(options.eager) : query
+  const updated = await query
 
   return outputFilter(updated)
 }

@@ -8,14 +8,17 @@ const updateTeamMutation = gql`
   mutation($id: ID, $input: TeamInput) {
     updateTeam(id: $id, input: $input) {
       id
-      teamType
+      role
       name
       members {
         id
-        username
-        teams {
+        user {
           id
-          teamType
+          username
+          teams {
+            id
+            role
+          }
         }
       }
     }
@@ -26,14 +29,17 @@ const createTeamMutation = gql`
   mutation($input: TeamInput) {
     createTeam(input: $input) {
       id
-      teamType
+      role
       name
       members {
         id
-        username
-        teams {
+        user {
           id
-          teamType
+          username
+          teams {
+            id
+            role
+          }
         }
       }
     }
@@ -44,9 +50,12 @@ const getTeamsQuery = gql`
   {
     teams {
       id
-      teamType
+      role
       members {
         id
+        user {
+          id
+        }
       }
     }
   }
@@ -61,24 +70,24 @@ const teamsCheckboxGroupOptions = Object.entries(configuredTeams).map(
 )
 
 class User extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-
-  findExistingTeam(teamType) {
+  findExistingTeam(role) {
     return this.props.getTeamsQuery.teams.find(
-      team => team.teamType === teamType && team.object === undefined,
+      team => team.role === role && team.object === undefined,
     )
   }
 
-  addMember(teamType) {
+  addMember(role) {
     const { user } = this.props
-    const existingTeam = this.findExistingTeam(teamType)
+    const existingTeam = this.findExistingTeam(role)
 
     if (existingTeam) {
-      const members = existingTeam.members.map(member => member.id)
-      if (!members.includes(user.id)) {
-        members.push(user.id)
+      const existingMember = existingTeam.members.find(
+        member => member.user.id === user.id,
+      )
+
+      if (!existingMember) {
+        const members = existingTeam.members.map(m => ({ id: m.id }))
+        members.push({ user: { id: user.id } })
         this.updateTeamMutation({
           variables: {
             id: existingTeam.id,
@@ -90,45 +99,49 @@ class User extends React.Component {
       this.createTeamMutation({
         variables: {
           input: {
-            teamType,
-            name: configuredTeams[teamType].name,
-            members: [user.id],
+            role,
+            name: configuredTeams[role].name,
+            members: { user: { id: user.id } },
           },
         },
       })
     }
   }
 
-  removeMember(teamType) {
+  removeMember(role) {
     const { user } = this.props
-    const existingTeam = this.findExistingTeam(teamType)
+    const existingTeam = this.findExistingTeam(role)
     if (!existingTeam) {
       return
     }
 
     if (existingTeam) {
-      let members = existingTeam.members.map(member => member.id)
-      if (members.includes(user.id)) {
-        members = members.filter(member => member !== user.id)
+      const existingMember = existingTeam.members.find(
+        member => member.user.id === user.id,
+      )
+      if (existingMember) {
+        const members = existingTeam.members.filter(
+          member => member.user.id !== user.id,
+        )
         this.updateTeamMutation({
           variables: {
             id: existingTeam.id,
-            input: { members },
+            input: { members: members.map(m => ({ id: m.id })) },
           },
         })
       }
     }
   }
 
-  onTeamChange(teamTypes) {
+  onTeamChange(roles) {
     // Idempotently add member
-    teamTypes.forEach(teamType => this.addMember(teamType))
+    roles.forEach(role => this.addMember(role))
 
     // Idempotently remove member
     const teamsDifference = Object.keys(configuredTeams).filter(
-      teamType => !teamTypes.includes(teamType),
+      role => !roles.includes(role),
     )
-    teamsDifference.forEach(teamType => this.removeMember(teamType))
+    teamsDifference.forEach(role => this.removeMember(role))
   }
 
   render() {
@@ -150,7 +163,7 @@ class User extends React.Component {
             name="checkboxgroup-inline"
             onChange={value => this.onTeamChange(value)}
             options={teamsCheckboxGroupOptions}
-            value={user.teams.map(team => team.teamType)}
+            value={user.teams.map(team => team.role)}
           />
         </td>
       </tr>
