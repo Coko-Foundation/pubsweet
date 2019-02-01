@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "babel-core": "^6.26.0",
+    "@babel/core": "^7.0.0",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.8.0",
