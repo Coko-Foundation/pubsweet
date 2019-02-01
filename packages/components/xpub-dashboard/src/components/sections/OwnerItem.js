@@ -2,7 +2,7 @@ import React from 'react'
 import { pickBy } from 'lodash'
 
 import { Action, ActionGroup } from '@pubsweet/ui'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/Authorize'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
@@ -44,13 +44,13 @@ const OwnerItem = ({ version, journals, deleteManuscript }) => {
   )
 
   const actions = (
-    <AuthorizeWithGraphQL
+    <Authorize
       object={version}
       operation="can delete manuscript"
       unauthorized={unauthorized}
     >
       <ActionGroup>{Object.values(actionButtons)}</ActionGroup>
-    </AuthorizeWithGraphQL>
+    </Authorize>
   )
 
   const body = (
@@ -61,15 +61,12 @@ const OwnerItem = ({ version, journals, deleteManuscript }) => {
   )
 
   return (
-    <AuthorizeWithGraphQL
-      object={[version]}
-      operation="can view my submission section"
-    >
+    <Authorize object={[version]} operation="can view my submission section">
       <Item>
         {itemHeader}
         {body}
       </Item>
-    </AuthorizeWithGraphQL>
+    </Authorize>
   )
 }
 

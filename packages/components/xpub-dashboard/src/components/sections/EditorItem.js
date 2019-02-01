@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import AuthorizeWithGraphQL from 'pubsweet-client/src/helpers/AuthorizeWithGraphQL'
+import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Action, ActionGroup } from '@pubsweet/ui'
 import { getUserFromTeam } from 'xpub-selectors'
 
@@ -58,10 +58,7 @@ const getSubmitedDate = version =>
   ) || []
 
 const EditorItem = ({ version, journals }) => (
-  <AuthorizeWithGraphQL
-    object={[version]}
-    operation="can view my manuscripts section"
-  >
+  <Authorize object={[version]} operation="can view my manuscripts section">
     <Item>
       <Header>
         <Status status={version.status} />
@@ -94,7 +91,7 @@ const EditorItem = ({ version, journals }) => (
 
       <Reviews version={version} />
     </Item>
-  </AuthorizeWithGraphQL>
+  </Authorize>
 )
 
 export default EditorItem

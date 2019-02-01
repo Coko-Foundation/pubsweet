@@ -24,10 +24,7 @@ jest.mock('config', () => ({
   },
 }))
 
-jest.mock(
-  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
-  () => 'AuthorizeWithGraphQL',
-)
+jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
 
 const journal = {
   reviewStatus: ['invited', 'accepted', 'rejected', 'completed'],

@@ -24,25 +24,6 @@ export default class BaseAuthorize extends React.Component {
     }
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   // Store prevId in state so we can compare when props change.
-  //   // Clear out previously-loaded data (so we don't render stale stuff).
-  //   if (props.id !== state.prevId) {
-  //     return {
-  //       externalData: null,
-  //       prevId: props.id,
-  //     };
-  //   }
-
-  //   // No state update necessary
-  //   return null
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('hello')
-  //   this.checkAuth(nextProps)
-  // }
-
   renderUnauthorizedProp() {
     return React.isValidElement(this.props.unauthorized) ||
       this.props.unauthorized === null

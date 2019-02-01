@@ -7,13 +7,11 @@ module.exports = api => {
     {
       test: ['./packages/ui', './packages/client'],
       extends: './packages/ui/.babelrc',
-      // presets: ['@babel/preset-env', '@babel/preset-react'],
-      // plugins: [
-      //   '@babel/plugin-proposal-class-properties',
-      //   '@babel/plugin-transform-runtime',
-      // ],
     },
-
+    {
+      test: ['./packages/client'],
+      extends: './packages/client/.babelrc',
+    },
     {
       test: ['./packages/ui-toolkit'],
       presets: ['@babel/preset-env'],

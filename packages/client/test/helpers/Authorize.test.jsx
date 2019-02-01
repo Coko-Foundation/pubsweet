@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import { MockedProvider } from 'react-apollo/test-utils'
 import wait from 'waait'
 import Authsome from 'authsome'
-import AuthorizeWithGraphQL from '../../src/helpers/Authorize'
+import Authorize from '../../src/helpers/Authorize'
 import {
   CURRENT_USER,
   GET_USER,
@@ -143,9 +143,9 @@ const mocks = currentUser => [
 function makeDeepWrapper(currentUser, props = {}) {
   return mount(
     <MockedProvider addTypename={false} mocks={mocks(currentUser)}>
-      <AuthorizeWithGraphQL {...props}>
+      <Authorize {...props}>
         <div>Only for admins</div>
-      </AuthorizeWithGraphQL>
+      </Authorize>
     </MockedProvider>,
   )
 }

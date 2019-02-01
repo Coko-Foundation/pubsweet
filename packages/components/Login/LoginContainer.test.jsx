@@ -124,7 +124,7 @@ describe('LoginContainer', () => {
     wrapper.update()
 
     expect(window.localStorage.token).toEqual('greatToken')
-    expect(globalLocation.pathname).toEqual('/')
+    expect(globalLocation.pathname).toEqual('/testRedirect')
   })
 
   it('does not log in user with incorrect credentials', async () => {
