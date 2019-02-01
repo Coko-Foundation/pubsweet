@@ -50,6 +50,36 @@ describe('Team queries', () => {
     token = authentication.token.create(user)
   })
 
+  it("lists a user's teams", async () => {
+    await Team.query().upsertGraphAndFetch(
+      {
+        role: 'test',
+        name: 'Test',
+        members: [{ user: { id: user.id } }],
+      },
+      { relate: true, unrelate: true },
+    )
+
+    const { body } = await api.graphql.query(
+      `query {
+        users {
+          id
+          teams {
+            members {
+              user {
+                id
+              }
+            }
+          }
+        }
+      }`,
+      {},
+      token,
+    )
+
+    expect(body.data.users[0].teams[0].members[0].user.id).toEqual(user.id)
+  })
+
   it('creates a team', async () => {
     const fragment = await new Fragment({ fragmentType: 'post' }).save()
 
@@ -148,7 +178,7 @@ describe('Team queries', () => {
       {
         role: 'test',
         name: 'Test',
-        members: [{ id: user.id }],
+        members: [{ user: { id: user.id } }],
       },
       { relate: true, unrelate: true },
     )
@@ -183,10 +213,14 @@ describe('Team queries', () => {
       },
     })
 
+    // The team should no longer user as a member
     const updatedTeam = await Team.query()
       .findById(team.id)
       .eager('members')
     expect(updatedTeam.members).toHaveLength(0)
+
+    // But the user should not be deleted
+    expect(await User.query()).toHaveLength(1)
   })
 
   it('finds a team', async () => {

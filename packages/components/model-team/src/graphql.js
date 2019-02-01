@@ -34,7 +34,7 @@ const resolvers = {
       return ctx.connectors.Team.create(input, ctx, options)
     },
     updateTeam(_, { id, input }, ctx) {
-      return ctx.connectors.Team.update(id, input, ctx)
+      return ctx.connectors.Team.update(id, input, ctx, { unrelate: undefined })
     },
   },
   Team: {
@@ -107,6 +107,7 @@ const typeDefs = `
   }
 
   type TeamMember {
+    id: ID
     user: User
     status: String
     alias: Alias
