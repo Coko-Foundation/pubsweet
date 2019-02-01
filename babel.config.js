@@ -6,7 +6,7 @@ module.exports = api => {
   const overrides = [
     {
       test: ['./packages/ui', './packages/client'],
-      extends: ['./packages/ui/babel.config.js'],
+      extends: './packages/ui/.babelrc',
       // presets: ['@babel/preset-env', '@babel/preset-react'],
       // plugins: [
       //   '@babel/plugin-proposal-class-properties',
