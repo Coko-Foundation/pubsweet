@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@2.0.2...@pubsweet/base-model@3.0.0) (2019-02-01)
+
+
+### Features
+
+* remove REST endpoints ([585881b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/585881b))
+* **base-model:** add support for eager loading to .find() ([c0a1ecc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c0a1ecc))
+
+
+### BREAKING CHANGES
+
+* This removes all previous /api endpoints, with the exception of file upload.
+
+
+
+
+
 ## [2.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@2.0.1...@pubsweet/base-model@2.0.2) (2019-01-16)
 
 **Note:** Version bump only for package @pubsweet/base-model

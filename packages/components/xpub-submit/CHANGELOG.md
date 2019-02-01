@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.7...pubsweet-component-xpub-submit@6.0.0) (2019-02-01)
+
+
+### Bug Fixes
+
+* **eslint:** submit form ([1462c10](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1462c10))
+* **styleguide:** temporarily disable styleguide ([e519ed1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e519ed1))
+* **submit:** fixing submit confirm button ([8aee1e5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8aee1e5))
+
+
+### Code Refactoring
+
+* temporarily remove unmigrated components ([32db6ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32db6ad))
+
+
+### BREAKING CHANGES
+
+* A lot of unmigrated (not yet moved from REST/Redux to GraphQL/Apollo system) bits
+have changed. There might be some breaking changes as a result. This is a big migration involving
+big changes - if you encounter anything weird, please contact us on GitLab or on Mattermost.
+
+
+
+
+
 ## [5.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-submit@5.0.6...pubsweet-component-xpub-submit@5.0.7) (2019-01-16)
 
 
