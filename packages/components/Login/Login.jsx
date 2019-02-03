@@ -12,14 +12,13 @@ import {
   Button,
   TextField,
 } from '@pubsweet/ui'
-
 import styled from 'styled-components'
 
-// These enable tests to select components
-const ResetPassword = styled.div``
 const Logo = styled.div`
   ${override('Login.Logo')};
 `
+Logo.displayName = 'Logo'
+
 const FormContainer = styled.div`
   ${override('Login.FormContainer')};
 `
@@ -73,10 +72,10 @@ const Login = ({
         )}
 
         {passwordReset && (
-          <ResetPassword>
+          <>
             <span>Forgot your password? </span>
             <Link to="/password-reset">Reset password</Link>
-          </ResetPassword>
+          </>
         )}
       </FormContainer>
     </CenteredColumn>
