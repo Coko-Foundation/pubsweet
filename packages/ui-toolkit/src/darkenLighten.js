@@ -33,7 +33,7 @@ const darkenLighten = (original, percent, props, dark) => {
   let converted
   try {
     converted = Color(color)
-  } catch {
+  } catch (_) {
     converted = Color('black')
   }
 
