@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@2.0.6...pubsweet-component-users-manager@3.0.0) (2019-02-01)
+
+
+### Code Refactoring
+
+* temporarily remove unmigrated components ([32db6ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32db6ad))
+
+
+### Features
+
+* **users-manager:** migrate to GraphQL ([fa54414](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fa54414))
+* very basic backend/working users manager ([b3c06b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b3c06b6))
+
+
+### BREAKING CHANGES
+
+* A lot of unmigrated (not yet moved from REST/Redux to GraphQL/Apollo system) bits
+have changed. There might be some breaking changes as a result. This is a big migration involving
+big changes - if you encounter anything weird, please contact us on GitLab or on Mattermost.
+* **users-manager:** No longer uses the REST endpoints or the Redux functinality on the client-side,
+it's purely GraphQL-based.
+
+
+
+
+
 ## [2.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@2.0.5...pubsweet-component-users-manager@2.0.6) (2019-01-16)
 
 **Note:** Version bump only for package pubsweet-component-users-manager

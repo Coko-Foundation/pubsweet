@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.2...pubsweet-components@13.0.0) (2019-02-01)
+
+
+### Bug Fixes
+
+* **eslint:** submit form ([1462c10](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1462c10))
+* **model-team:** fix membership update query ([918da4e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/918da4e))
+* **model-team:** use model (not db) identifiers ([6535ca3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6535ca3))
+* **model-user:** use correct team member reference ([9dfee12](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dfee12))
+* **review:** assign reviewers ([f10a0a4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f10a0a4))
+* **review:** improve formik usage onChange ([18faca6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/18faca6))
+* **styleguide:** temporarily disable styleguide ([e519ed1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e519ed1))
+* **submit:** fixing submit confirm button ([8aee1e5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8aee1e5))
+
+
+### Code Refactoring
+
+* temporarily remove unmigrated components ([32db6ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32db6ad))
+
+
+### Features
+
+* add team relationship to user and test it ([a10e81c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a10e81c))
+* **model-team:** migrate team members ([9dd8943](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dd8943))
+* remove redux ([4217850](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4217850))
+* remove REST endpoints ([585881b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/585881b))
+* **model-team:** use authorization helpers available from context ([6a4be16](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6a4be16))
+* very basic backend/working users manager ([b3c06b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b3c06b6))
+* **blog:** initial migration to graphql ([73e9647](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/73e9647))
+* **graphql:** add where option to connector calls where needed ([9ff779b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9ff779b))
+* **model-team:** add addMember, removeMember, improve fetching ([9c48f2c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9c48f2c))
+* **model-team:** introduce TeamMember model ([dfb2cce](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dfb2cce))
+* **model-team:** simplify objectId and objectType storage ([665cf85](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/665cf85))
+* **model-team:** simplify team and members into one component ([3cc9e8a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3cc9e8a))
+* **model-user:** improve eager loading in graphql ([2ae9640](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2ae9640))
+* **teams:** add alias and team member management ([bb2efb4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bb2efb4))
+* **users-manager:** migrate to GraphQL ([fa54414](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fa54414))
+
+
+### BREAKING CHANGES
+
+* A lot of unmigrated (not yet moved from REST/Redux to GraphQL/Apollo system) bits
+have changed. There might be some breaking changes as a result. This is a big migration involving
+big changes - if you encounter anything weird, please contact us on GitLab or on Mattermost.
+* **teams:** The GraphQL schema/API has changed to suport the Team -> TeamMembers -> User/Alias
+relationships. Take a look at `team_graphql_test.js` for examples on how you can now manage team
+memberships with a single createTeam/updateTeam mutation.
+* **model-team:** Previously objectId and objectType were stored in a JSONB column on the teams
+table. This has changed (and the migration takes care of table and data migration) in favor of
+storing objectId and objectType as flat columns on the teams table. For reasons of querying,
+indexing and ease of use, this is a better option. The read side of the API still returns a nested
+TeamObject, but the GraphQL mutations have changed (see `team_graphql_test.js` for some examples).
+* This removes all previous /api endpoints, with the exception of file upload.
+* **model-team:** Members were previously stored on the Team.members property, as a JSONB array. Now
+they're represented through the TeamMembers join table, that joins users and teams.
+* **users-manager:** No longer uses the REST endpoints or the Redux functinality on the client-side,
+it's purely GraphQL-based.
+* All components that rely on Redux's actions and reducers will cease to work in this
+version. Migrating to GraphQL and Apollo on the client and server is advised.
+
+
+
+
+
 ## [12.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.1...pubsweet-components@12.0.2) (2019-01-16)
 
 

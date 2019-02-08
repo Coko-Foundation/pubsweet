@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-upload@0.0.7...xpub-upload@1.0.0) (2019-02-01)
+
+
+### Code Refactoring
+
+* temporarily remove unmigrated components ([32db6ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32db6ad))
+
+
+### BREAKING CHANGES
+
+* A lot of unmigrated (not yet moved from REST/Redux to GraphQL/Apollo system) bits
+have changed. There might be some breaking changes as a result. This is a big migration involving
+big changes - if you encounter anything weird, please contact us on GitLab or on Mattermost.
+
+
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-upload@0.0.6...xpub-upload@0.0.7) (2018-04-24)
 

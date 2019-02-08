@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@3.0.2...@pubsweet/model-user@4.0.0) (2019-02-01)
+
+
+### Bug Fixes
+
+* **model-user:** use correct team member reference ([9dfee12](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9dfee12))
+
+
+### Features
+
+* add team relationship to user and test it ([a10e81c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a10e81c))
+* remove REST endpoints ([585881b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/585881b))
+* **graphql:** add where option to connector calls where needed ([9ff779b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9ff779b))
+* **model-user:** improve eager loading in graphql ([2ae9640](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2ae9640))
+
+
+### BREAKING CHANGES
+
+* This removes all previous /api endpoints, with the exception of file upload.
+
+
+
+
+
 ## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@3.0.1...@pubsweet/model-user@3.0.2) (2019-01-16)
 
 **Note:** Version bump only for package @pubsweet/model-user

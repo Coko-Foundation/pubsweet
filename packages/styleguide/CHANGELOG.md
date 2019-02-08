@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.3...@pubsweet/styleguide@6.0.0) (2019-02-01)
+
+
+### Bug Fixes
+
+* **styleguide:** temporarily disable styleguide ([e519ed1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e519ed1))
+
+
+### Code Refactoring
+
+* temporarily remove unmigrated components ([32db6ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32db6ad))
+
+
+### BREAKING CHANGES
+
+* A lot of unmigrated (not yet moved from REST/Redux to GraphQL/Apollo system) bits
+have changed. There might be some breaking changes as a result. This is a big migration involving
+big changes - if you encounter anything weird, please contact us on GitLab or on Mattermost.
+
+
+
+
+
 ## [5.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/styleguide@5.0.2...@pubsweet/styleguide@5.0.3) (2019-01-16)
 
 **Note:** Version bump only for package @pubsweet/styleguide

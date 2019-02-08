@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.1.3...pubsweet@4.0.0) (2019-02-01)
+
+
+### Features
+
+* remove redux ([4217850](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4217850))
+
+
+### BREAKING CHANGES
+
+* All components that rely on Redux's actions and reducers will cease to work in this
+version. Migrating to GraphQL and Apollo on the client and server is advised.
+
+
+
+
+
 ## [3.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@3.1.2...pubsweet@3.1.3) (2019-01-16)
 
 **Note:** Version bump only for package pubsweet
