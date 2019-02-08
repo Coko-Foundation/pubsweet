@@ -1,20 +1,20 @@
 {
   "name": "pubsweet-component-users-manager",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Basic navigation bar component for PubSweet",
   "main": "src/UsersManager.jsx",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^9.1.3",
+    "@pubsweet/ui": "^10.0.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "config": "^3.0.1",
+    "graphql-tag": ">=2.10.0",
     "pubsweet-client": ">=1.0.0",
     "react": ">=16",
-    "react-apollo": ">=2.3.3",
-    "graphql-tag": ">=2.10.0"
+    "react-apollo": ">=2.3.3"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@12.0.2...pubsweet-server@13.0.0) (2019-02-01)
+
+
+### Features
+
+* remove REST endpoints ([585881b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/585881b))
+* **db-manager:** allow passing options to umzug ([9876f13](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9876f13))
+* **model-team:** add addMember, removeMember, improve fetching ([9c48f2c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9c48f2c))
+* **models:** support for multiple models in a single component ([caed5be](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/caed5be))
+* **server:** allow relation/unrelation options for update resolver ([1b5f7be](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1b5f7be))
+* **server:** expose model in connector ([ede8049](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ede8049))
+* **server:** make authorization helpers available in context ([74c665b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/74c665b))
+* **server:** where clauses, graph upserts & eager loading to connector ([e9da7a9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e9da7a9))
+* very basic backend/working users manager ([b3c06b6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b3c06b6))
+
+
+### BREAKING CHANGES
+
+* This removes all previous /api endpoints, with the exception of file upload.
+
+
+
+
+
 ## [12.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@12.0.1...pubsweet-server@12.0.2) (2019-01-16)
 
 **Note:** Version bump only for package pubsweet-server

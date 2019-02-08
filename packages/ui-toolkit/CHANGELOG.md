@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.0.7...@pubsweet/ui-toolkit@2.1.0) (2019-02-01)
+
+
+### Features
+
+* **ui-toolkit:** guard against bad colors in darkenLighten ([6c6aead](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6c6aead))
+
+
+
+
+
 ## [2.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.0.6...@pubsweet/ui-toolkit@2.0.7) (2019-01-16)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit

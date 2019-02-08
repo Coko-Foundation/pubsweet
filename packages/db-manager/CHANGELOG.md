@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.2.3...@pubsweet/db-manager@2.3.0) (2019-02-01)
+
+
+### Features
+
+* **db-manager:** allow passing options to umzug ([9876f13](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9876f13))
+* **db-manager:** simplify db manager ([e32ab56](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e32ab56))
+
+
+
+
+
 ## [2.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@2.2.2...@pubsweet/db-manager@2.2.3) (2019-01-16)
 
 **Note:** Version bump only for package @pubsweet/db-manager

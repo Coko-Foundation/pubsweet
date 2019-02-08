@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@2.0.3...jest-environment-db@3.0.0) (2019-02-01)
+
+
+### Features
+
+* remove REST endpoints ([585881b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/585881b))
+* **jest-environment-db:** update pg and reenable db deletion ([f1df1d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f1df1d8))
+
+
+### BREAKING CHANGES
+
+* This removes all previous /api endpoints, with the exception of file upload.
+
+
+
+
+
 ## [2.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@2.0.2...jest-environment-db@2.0.3) (2019-01-16)
 
 **Note:** Version bump only for package jest-environment-db
