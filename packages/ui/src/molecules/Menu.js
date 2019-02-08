@@ -336,9 +336,10 @@ const DefaultOpener = ({
   placeholder,
   optionLabel,
   removeSelect,
+  validationStatus,
   selectOneOfMultiElement,
 }) => (
-  <Opener onClick={toggleMenu} open={open}>
+  <Opener onClick={toggleMenu} open={open} validationStatus={validationStatus}>
     {(!selected || selected.length === 0) && (
       <Placeholder>{placeholder}</Placeholder>
     )}
