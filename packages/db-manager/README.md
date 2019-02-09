@@ -1,10 +1,3 @@
-[![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/db-manager/raw/master/LICENSE) 
-[![npm](https://img.shields.io/npm/v/pubsweet.svg)](https://npmjs.com/package/@pubsweet/db-manager) 
-[![build status](https://gitlab.coko.foundation/pubsweet/db-manager/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/db-manager/commits/master)
-[![coverage report](https://gitlab.coko.foundation/pubsweet/db-manager/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/db-manager/commits/master) 
-[![code style standard](https://img.shields.io/badge/code%20style-standard-green.svg)](https://standardjs.com/) 
-[![mattermost chat](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet)
-
 # Db-manager
 
 Provides database management utilities to Pubsweet apps.
@@ -13,24 +6,27 @@ Provides database management utilities to Pubsweet apps.
 
 This package exports the following functions:
 
- - `setupDB`
- - `addUser`
- - `dbExists`
+- `setupDb`
+- `addUser`
+- `dbExists`
+- `migrate`
 
 ### `setupDb`
 
 This function
- - creates the database
- - adds an admin user
- - generates a secret in `config/local-<NODE_ENV>.json` under `pubsweet-server.secret`. 
+
+- creates the database
+- adds an admin user
+- generates a secret in `config/local-<NODE_ENV>.json` under `pubsweet-server.secret`.
 
 It can be called without arguments, in which case it will take its configuration from the following config keys:
 
 ```
 {
   'pubsweet-server': {
-    dbPath: 'path/where/db/will/be/created',
-    adapter: 'leveldb' // or 'memory' or 'http' (optional) 
+    db: {
+      //  takes the same configuration options as https://node-postgres.com/features/connecting#programmatic
+    }
   },
   dbManager: {
     username: 'xxxxxx',
@@ -40,6 +36,7 @@ It can be called without arguments, in which case it will take its configuration
   }
 }
 ```
+
 Alternatively it can be passed the `dbManager` object as an argument, which will override the values on config.
 
 The name of the database will be the full `dbPath`.
@@ -61,3 +58,6 @@ addUser({
 
 This function checks if any database exists at the configured path. Returns `true` or `false`
 
+### `migrate`
+
+This function performs pending migrations.
