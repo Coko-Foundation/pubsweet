@@ -1,36 +1,29 @@
-<div width="100%" align="center">
-  <h1>PubSweet CLI</h1>
-  <h2>command-line tools for managing PubSweet apps</h2>
-</div>
-
-| ![PubSweet home](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![npm](https://img.shields.io/npm/v/pubsweet.svg)](https://npmjs.com/package/pubsweet) [![build status](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/build.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master) [![coverage report](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/badges/master/coverage.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/commits/master) [![code style standard](https://img.shields.io/badge/code%20style-standard-green.svg)](https://standardjs.com/) [![mattermost chat](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-
+# PubSweet CLI (command line interface)
 
 # Contents
 
-* [Introduction](#introduction)
-  * [PubSweet overview](#pubsweet-overview)
-    * [PubSweet modules](#pubsweet-modules)
-* [Getting started with PubSweet CLI](#getting-started-with-pubsweet-cli)
-  * [Getting PubSweet CLI](#getting-pubsweet-cli)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-    * [Installation on Windows](#installation-on-windows)
-    * [Quickstart](#quickstart)
-  * [Using PubSweet CLI](#using-pubsweet-cli)
-    * [Displaying the commands (`pubsweet` or `pubsweet help`)](#displaying-the-commands-pubsweet-or-pubsweet-help)
-    * [Generating an app (`pubsweet new`)](#generating-an-app-pubsweet-new)
-  * [Running locally for development or evaluation](#running-locally-for-development-or-evaluation)
-  * [Running in production](#running-in-production)
-    * [Setting up the database (`pubsweet setupdb`)](#setting-up-the-database-pubsweet-setupdb)
-    * [Building your app (`pubsweet build`)](#building-your-app-pubsweet-build)
-    * [Running your app](#running-your-app)
-  * [Managing your app](#managing-your-app)
-    * [Adding and removing components (`pubsweet add`, `pubsweet remove`)](#adding-and-removing-components-pubsweet-add-pubsweet-remove)
-    * [Adding a user to the database (`pubsweet adduser`)](#adding-a-user-to-the-database-pubsweet-adduser)
-* [Contributing](#contributing)
-* [Credits](#credits)⏎
+- [Introduction](#introduction)
+  - [PubSweet overview](#pubsweet-overview)
+    - [PubSweet modules](#pubsweet-modules)
+- [Getting started with PubSweet CLI](#getting-started-with-pubsweet-cli)
+  - [Getting PubSweet CLI](#getting-pubsweet-cli)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Installation on Windows](#installation-on-windows)
+    - [Quickstart](#quickstart)
+  - [Using PubSweet CLI](#using-pubsweet-cli)
+    - [Displaying the commands (`pubsweet` or `pubsweet help`)](#displaying-the-commands-pubsweet-or-pubsweet-help)
+    - [Generating an app (`pubsweet new`)](#generating-an-app-pubsweet-new)
+  - [Running locally for development or evaluation](#running-locally-for-development-or-evaluation)
+  - [Running in production](#running-in-production)
+    - [Setting up the database (`pubsweet setupdb`)](#setting-up-the-database-pubsweet-setupdb)
+    - [Building your app (`pubsweet build`)](#building-your-app-pubsweet-build)
+    - [Running your app](#running-your-app)
+  - [Managing your app](#managing-your-app)
+    - [Adding and removing components (`pubsweet add`, `pubsweet remove`)](#adding-and-removing-components-pubsweet-add-pubsweet-remove)
+    - [Adding a user to the database (`pubsweet adduser`)](#adding-a-user-to-the-database-pubsweet-adduser)
+- [Contributing](#contributing)
+- [Credits](#credits)⏎
 
 # Introduction
 
@@ -45,12 +38,12 @@ PubSweet apps.
 
 ### PubSweet modules
 
-| repository                                                                                                                                                                                                        | description                                                           |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/pubsweet-server)                 | an extensible server API that runs on the server                      |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/pubsweet-client)                 | an extensible client app that runs in the browser                     |
-| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/pubsweet-components) | pluggable extensions for server and/or client                         |
-| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/pubsweet-cli)                             | a suite of command-line tools for building and managing your platform |
+| repository                                                                                                                                                                                      | description                                                           |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/server)        | an extensible server API                                              |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/client)        | an extensible client app that runs in the browser                     |
+| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) components](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/components) | pluggable extensions for server and/or client                         |
+| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/cli)                    | a suite of command-line tools for building and managing your platform |
 
 # Getting started with PubSweet CLI
 
@@ -58,8 +51,8 @@ PubSweet apps.
 
 ### Prerequisites
 
-* Node.js v8.6+
-* Docker (recommended but not essential)
+- Node.js v10.0+
+- Docker (recommended but not essential)
 
 ### Installation
 
@@ -77,14 +70,14 @@ yarn global add pubsweet
 
 ### Installation on Windows
 
-* Install Ubuntu on Windows:
+- Install Ubuntu on Windows:
   [Windows Store](https://www.microsoft.com/en-gb/store/p/ubuntu/9nblggh4msv6#system-requirements)
-* Launch the Bash on Ubuntu on Windows from the Start menu
-* Install nvm:
+- Launch the Bash on Ubuntu on Windows from the Start menu
+- Install nvm:
   [nvm install script](https://github.com/creationix/nvm#install-script)
-* Restart your terminal/bash
-* `nvm install 8`
-* `npm install -g pubsweet`
+- Restart your terminal/bash
+- `nvm install 10`
+- `npm install -g pubsweet`
 
 ### Quickstart
 
@@ -93,7 +86,7 @@ The sequence of commands for generating and running a sample app is as follows:
 ```bash
 pubsweet new my-app-name
 cd my-app-name
-pubsweet start # (or npm start)
+pubsweet start # (or yarn start)
 ```
 
 ## Using PubSweet CLI
@@ -162,10 +155,10 @@ created for you: username `admin`, password `password`.
 
 Under the hood, `pubsweet start` uses Docker Compose to:
 
-* start the backing services (database)
-* set up the database if necessary, including a default admin user (`pubsweet setupdb`)
-* build static assets with Webpack (`pubsweet build`)
-* and start the PubSweet server application (`pubsweet server`)
+- start the backing services (database)
+- set up the database if necessary, including a default admin user (`pubsweet setupdb`)
+- build static assets with Webpack (`pubsweet build`)
+- and start the PubSweet server application (`pubsweet server`)
 
 Additionally it uses Forever and Webpack watch mode to recompile and reload when
 changes are detected.
@@ -290,7 +283,7 @@ pubsweet adduser \
 # Contributing
 
 Please read our
-[CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet-cli/blob/master/CONTRIBUTING)
+[CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/blob/master/CONTRIBUTING)
 guide.
 
 # Credits

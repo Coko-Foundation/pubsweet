@@ -1,6 +1,3 @@
-## xpub-selectors
+# xpub-selectors
 
-Helper functions for common selectors used in redux compose, so that components don't need to know the unique shape of each part of the store.
-
-_Note:  
-Some of these selectors will probably move to `pubsweet-client`._
+Helper functions for common selectors used in Redux compose, so that components don't need to know the unique shape of each part of the store.
