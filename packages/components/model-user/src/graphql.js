@@ -30,7 +30,14 @@ const resolvers = {
     deleteUser(_, { id }, ctx) {
       return ctx.connectors.User.delete(id, ctx)
     },
-    updateUser(_, { id, input }, ctx) {
+    async updateUser(_, { id, input }, ctx) {
+      if (input.password) {
+        input.passwordHash = await ctx.connectors.User.model.hashPassword(
+          input.password,
+        )
+        delete input.password
+      }
+
       return ctx.connectors.User.update(id, input, ctx)
     },
     // Authentication
