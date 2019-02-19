@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.0.0...@pubsweet/ui@10.0.1) (2019-02-19)
+
+
+### Bug Fixes
+
+* **menu:** pass validation status to the Menu default opener ([8f51dbc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8f51dbc))
+* **ui:** add class name & remove redundant prop type ([f90593c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f90593c))
+
+
+
+
+
 # [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@9.1.3...@pubsweet/ui@10.0.0) (2019-02-01)
 
 
