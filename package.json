@@ -4,10 +4,10 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
     "@commitlint/cli": "^6.0.5",
     "@commitlint/config-conventional": "^6.0.4",
     "babel-eslint": "^10.0.1",
-    "@babel/preset-env": "^7.0.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.13.1",
@@ -24,8 +24,8 @@
     "lerna": "^3.4.3",
     "lint-staged": "^6.0.0",
     "prettier": "^1.8.2",
-    "stylelint": "^8.2.0",
-    "stylelint-config-prettier": "^2.0.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-pubsweet": "^0.0.3"
   },
   "scripts": {
@@ -150,7 +150,9 @@
         "setupFilesAfterEnv": [
           "<rootDir>/test/setup/enzyme.js"
         ],
-        "snapshotSerializers": ["enzyme-to-json/serializer"]
+        "snapshotSerializers": [
+          "enzyme-to-json/serializer"
+        ]
       },
       {
         "rootDir": "<rootDir>/packages/base-model",

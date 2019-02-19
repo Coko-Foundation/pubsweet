@@ -9,7 +9,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "archiver": "^2.1.1",
+    "archiver": "^3.0.0",
     "aws-sdk": "^2.185.0",
     "body-parser": "^1.17.2",
     "dotenv": "^6.2.0",
