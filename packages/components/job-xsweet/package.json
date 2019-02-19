@@ -1,0 +1,20 @@
+{
+  "name": "@pubsweet/job-xsweet",
+  "version": "1.0.0",
+  "description": "PubSweet job component for running XSweet",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Hyde",
+  "license": "MIT",
+  "dependencies": {
+    "express-fileupload": "v1.1.1-alpha.2",
+    "passport": "^0.4.0",
+    "pubsweet-server": "^13.0.1",
+    "tmp-promise": "^1.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
