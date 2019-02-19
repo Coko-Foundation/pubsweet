@@ -2,7 +2,9 @@ const knex = require('knex')
 const config = require('config')
 const { knexSnakeCaseMappers } = require('objection')
 
-const connection = config['pubsweet-server'] && config['pubsweet-server'].db
+const connection =
+  process.env.DATABASE_URL ||
+  (config['pubsweet-server'] && config['pubsweet-server'].db)
 const pool = config['pubsweet-server'] && config['pubsweet-server'].pool
 
 const db = knex({
