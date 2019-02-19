@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { override, th } from '@pubsweet/ui-toolkit'
 
-import Action from './Action'
-
 const Group = styled.div`
   ${override('ui.ActionGroup')};
 `
@@ -21,22 +19,7 @@ const ActionGroup = props => {
     child => child && <ActionWrapper>{child}</ActionWrapper>,
   )
 
-  return <Group>{children}</Group>
-}
-
-ActionGroup.propTypes = {
-  children: (props, propName, componentName) => {
-    const prop = props[propName]
-    let error = null
-
-    React.Children.forEach(prop, child => {
-      if (child.type !== Action) {
-        error = new Error('ActionGroup should only take Actions as children')
-      }
-    })
-
-    return error
-  },
+  return <Group className={props.className}>{children}</Group>
 }
 
 export default ActionGroup
