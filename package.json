@@ -24,8 +24,8 @@
     "lerna": "^3.4.3",
     "lint-staged": "^6.0.0",
     "prettier": "^1.8.2",
-    "stylelint": "^8.2.0",
-    "stylelint-config-prettier": "^2.0.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-pubsweet": "^0.0.3"
   },
   "scripts": {
