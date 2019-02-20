@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@4.0.1...@pubsweet/model-user@4.0.2) (2019-02-19)
+
+**Note:** Version bump only for package @pubsweet/model-user
+
+
+
+
+
+## [4.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@4.0.0...@pubsweet/model-user@4.0.1) (2019-02-19)
+
+
+### Bug Fixes
+
+* **model-user:** fix update user mutation's password hashing ([5c50fda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c50fda))
+
+
+
+
+
 # [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@3.0.2...@pubsweet/model-user@4.0.0) (2019-02-01)
 
 

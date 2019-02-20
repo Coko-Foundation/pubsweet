@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-aws-s3",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "description": "AWS S3 upload component for PubSweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
@@ -9,7 +9,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "archiver": "^2.1.1",
+    "archiver": "^3.0.0",
     "aws-sdk": "^2.185.0",
     "body-parser": "^1.17.2",
     "dotenv": "^6.2.0",
