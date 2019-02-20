@@ -1,13 +1,15 @@
 import { compose, withState, withHandlers } from 'recompose'
 import { withFormik } from 'formik'
 import { graphql } from 'react-apollo'
+import config from 'config'
 
 import { LOGIN_USER } from './graphql/mutations'
-import Login from '../Login'
+import Login from './Login'
 
 const getNextUrl = () => {
   const url = new URL(window.location.href)
-  return `${url.searchParams.get('next') || '/'}`
+  const redirectLink = config['pubsweet-client']['login-redirect']
+  return `${url.searchParams.get('next') || redirectLink}`
 }
 
 const localStorage = window.localStorage || undefined

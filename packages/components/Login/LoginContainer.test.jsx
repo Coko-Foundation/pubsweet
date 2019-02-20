@@ -66,7 +66,7 @@ function makeDeepWrapper(currentUser, props = {}) {
   return mount(
     <ThemeProvider theme={theme}>
       <MockedProvider addTypename={false} mocks={mocks(currentUser)}>
-        <MemoryRouter initialEntries={['/login', '/']}>
+        <MemoryRouter initialEntries={['/login', '/testRedirect']}>
           <Switch>
             <Route
               {...props}
@@ -78,7 +78,7 @@ function makeDeepWrapper(currentUser, props = {}) {
             />
             <Route
               {...props}
-              path="/"
+              path="/testRedirect"
               render={p => {
                 globalLocation = p.location
                 return <p>dashboard</p>
