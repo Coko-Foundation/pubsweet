@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.12...xpub-edit@2.5.13) (2019-02-19)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.11...xpub-edit@2.5.12) (2019-02-19)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
 ## [2.5.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.10...xpub-edit@2.5.11) (2019-02-01)
 
 

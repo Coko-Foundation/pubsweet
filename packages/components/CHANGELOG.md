@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.0.1...pubsweet-components@13.1.0) (2019-02-19)
+
+
+### Features
+
+* add job-xsweet component ([f3441b0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f3441b0))
+
+
+
+
+
+## [13.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.0.0...pubsweet-components@13.0.1) (2019-02-19)
+
+
+### Bug Fixes
+
+* **model-user:** fix update user mutation's password hashing ([5c50fda](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5c50fda))
+
+
+
+
+
 # [13.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@12.0.2...pubsweet-components@13.0.0) (2019-02-01)
 
 
