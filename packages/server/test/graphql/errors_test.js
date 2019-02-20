@@ -3,6 +3,7 @@ const { fixtures } = require('@pubsweet/model-user/test')
 const cleanDB = require('../helpers/db_cleaner')
 const api = require('../helpers/api')
 const authentication = require('../../src/authentication')
+const errors = require('@pubsweet/errors')
 
 describe('GraphQL errors', () => {
   let token
@@ -14,10 +15,10 @@ describe('GraphQL errors', () => {
     token = authentication.token.create(user)
   })
 
-  it('should pass graphql errors to clients', async () => {
+  it('should pass GraphQLError to clients', async () => {
     const { body } = await api.graphql.query(
       `mutation($input: UserInput) {
-          createUser(input: $input) { invalidProp }
+          createUser(input: $input) { invalidProperty }
         }`,
       {
         input: {
@@ -31,8 +32,27 @@ describe('GraphQL errors', () => {
 
     expect(body.errors).toHaveLength(1)
     expect(body.errors).toContainEqual({
-      message: 'Cannot query field "invalidProp" on type "User".',
+      message: 'Cannot query field "invalidProperty" on type "User".',
       name: 'GraphQLError',
     })
+  })
+
+  it('should pass AuthorizationError to clients', async () => {
+    const { body } = await api.graphql.query(
+      `mutation($input: UserInput) {
+          createUser(input: $input) { username }
+        }`,
+      {
+        input: {
+          username: 'floobs',
+          email: 'nobody@example.com',
+          password: 'password',
+        },
+      },
+      'invalid token',
+    )
+
+    expect(body.errors).toHaveLength(1)
+    expect(body.errors[0].name).toBe(errors.AuthorizationError.name)
   })
 })
