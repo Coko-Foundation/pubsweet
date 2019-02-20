@@ -12,6 +12,7 @@ import {
   Radio,
   TextField,
   Menu,
+  Logo,
 } from './elements'
 
 const cokoTheme = {
@@ -81,6 +82,9 @@ const cokoTheme = {
   transitionDelay: '0',
 
   cssOverrides: {
+    Login: {
+      Logo,
+    },
     ui: {
       Action,
       ActionGroup,

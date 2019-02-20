@@ -21,6 +21,14 @@ describe('<Login/>', () => {
     expect(wrapper.find(ErrorText)).toHaveLength(1)
   })
 
+  it('can hide logo', () => {
+    const logo = 'data:image/gif;base64,R0lGODlhDwAPAKECAAAAzMzM/////'
+    const wrapper1 = makeWrapper({ logo })
+    const wrapper2 = makeWrapper({ logo: null })
+    expect(wrapper1.find('Logo')).toHaveLength(1)
+    expect(wrapper2.find('Logo')).toHaveLength(0)
+  })
+
   it('can hide sign up link', () => {
     const wrapper1 = makeWrapper()
     const wrapper2 = makeWrapper({ signup: false })
