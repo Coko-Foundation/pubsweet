@@ -3,8 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 import { Action, ActionGroup } from '@pubsweet/ui'
-import { getUserFromTeam } from 'xpub-selectors'
-
 import { Item, Header, Body } from '../molecules/Item'
 import Status from '../Status'
 import Meta from '../metadata/Meta'
@@ -22,6 +20,13 @@ const VersionTitleLink = styled(JournalLink)`
   text-decoration: none;
   color: #333;
 `
+
+const getUserFromTeam = (version, role) => {
+  if (!version.teams) return []
+
+  const teams = version.teams.filter(team => team.teamType === role)
+  return teams.length ? teams[0].members : []
+}
 
 const EditorItemLinks = ({ version, journals }) => (
   <ActionGroup>

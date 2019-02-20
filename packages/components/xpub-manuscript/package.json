@@ -11,8 +11,7 @@
     "prop-types": "^15.5.10",
     "recompose": "^0.26.0",
     "wax-prose-mirror": "^0.0.8",
-    "xpub-connect": "^2.0.7",
-    "xpub-selectors": "^0.2.11"
+    "xpub-connect": "^2.0.7"
   },
   "peerDependencies": {
     "apollo-client-preset": "^1.0.8",
