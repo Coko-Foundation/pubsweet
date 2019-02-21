@@ -55,4 +55,23 @@ describe('GraphQL errors', () => {
     expect(body.errors).toHaveLength(1)
     expect(body.errors[0].name).toBe(errors.AuthorizationError.name)
   })
+
+  it('replaces errors that are not defined by pubsweet', async () => {
+    const { body } = await api.graphql.query(
+      `query($id: ID) {
+          user(id: $id) {
+            username
+          }
+        }`,
+      { id: 'invalid id' },
+      token,
+    )
+
+    expect(body.data).toEqual({ user: null })
+    expect(body.errors).toHaveLength(1)
+    expect(body.errors[0]).toEqual({
+      name: 'Server Error',
+      message: 'Something went wrong! Please contact your administrator',
+    })
+  })
 })
