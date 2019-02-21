@@ -3,6 +3,7 @@ const passport = require('passport')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const { apolloUploadExpress } = require('apollo-upload-server')
 const logger = require('@pubsweet/logger')
+const errors = require('@pubsweet/errors')
 
 const config = require('config')
 
@@ -27,8 +28,25 @@ router.use(
     schema: graphqlSchema,
     context: { user: req.user, connectors, helpers },
     formatError: err => {
-      logger.error(err.message, { error: err })
-      return err
+      const error = err.originalError || err
+
+      logger.error(error.message, { error })
+
+      const isPubsweetDefinedError = Object.values(errors).some(
+        pubsweetError => error instanceof pubsweetError,
+      )
+
+      // err is always a GraphQLError which should be passed to the client
+      if (err.originalError && !isPubsweetDefinedError)
+        return {
+          name: 'Server Error',
+          message: 'Something went wrong! Please contact your administrator',
+        }
+
+      return {
+        name: error.name,
+        message: error.message,
+      }
     },
   })),
 )
