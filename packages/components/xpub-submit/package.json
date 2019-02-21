@@ -28,7 +28,6 @@
     "xpub-connect": "^2.0.7",
     "xpub-edit": "^2.5.13",
     "xpub-journal": "^0.0.6",
-    "xpub-selectors": "^0.2.11",
     "xpub-upload": "^1.0.2",
     "xpub-validators": "^0.0.8"
   },

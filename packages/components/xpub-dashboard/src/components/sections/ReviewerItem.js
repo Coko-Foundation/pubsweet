@@ -1,8 +1,6 @@
 import React from 'react'
 import { Button } from '@pubsweet/ui'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
-// Enable that when Team Models is updated
-// import { getUserFromTeam } from 'xpub-selectors'
 import { Item, Body, Divider } from '../molecules/Item'
 import { Links, LinkContainer } from '../molecules/Links'
 import { Actions, ActionContainer } from '../molecules/Actions'

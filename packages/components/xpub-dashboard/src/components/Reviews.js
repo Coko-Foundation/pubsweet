@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { compose } from 'recompose'
 import { sumBy } from 'lodash'
-import { getUserFromTeam } from 'xpub-selectors'
 import { withJournal } from 'xpub-journal'
 import { Badge } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
@@ -23,6 +22,13 @@ const BadgeContainer = styled.span`
     margin-right: 10px;
   }
 `
+
+const getUserFromTeam = (version, role) => {
+  if (!version.teams) return []
+
+  const teams = version.teams.filter(team => team.teamType === role)
+  return teams.length ? teams[0].members : []
+}
 
 const countStatus = (version, status) => {
   const teamMember = getUserFromTeam(version, 'reviewer')
