@@ -30,7 +30,7 @@ const EmailInput = props => (
 const PasswordInput = props => (
   <TextField
     label="Password"
-    {...props.input}
+    {...props.field}
     placeholder="Password"
     type="password"
   />
