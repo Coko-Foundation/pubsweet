@@ -1,5 +1,3 @@
-module.exports = {
-  client: {
-    components: [() => require('./src/SignupContainer')],
-  },
-}
+import Signup from './src/SignupContainer'
+
+export default Signup
