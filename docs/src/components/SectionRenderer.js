@@ -1,24 +1,38 @@
 import React from 'react'
-import _ from 'lodash'
-import 'regenerator-runtime/runtime'
-import styled, { css, ThemeProvider } from 'styled-components'
-import { Button, Menu, GlobalStyle } from '@pubsweet/ui'
+import PropTypes from 'prop-types'
+import Styled from 'rsg-components/Styled'
+import SectionHeading from 'rsg-components/SectionHeading'
+import Markdown from 'rsg-components/Markdown'
 import { th } from '@pubsweet/ui-toolkit'
-import StyleRoot from 'pubsweet-client/src/helpers/StyleRoot'
-import { Normalize } from 'styled-normalize'
+
+import { Button, Menu } from '@pubsweet/ui'
+
+import styled, { css, ThemeProvider } from 'styled-components'
+
 import defaultTheme from '@pubsweet/default-theme'
 import cokoTheme from '@pubsweet/coko-theme'
-import elifeTheme from '@elifesciences/elife-theme'
+import elifeTheme from '../../vendor/elife-theme/src'
 
-const currentTheme = {
+import componentStore from './componentStore'
+
+export const currentTheme = {
   name: localStorage.getItem('currentTheme') || 'defaultTheme',
 }
 
-const themes = {
+export const themes = {
   defaultTheme,
   cokoTheme,
   elifeTheme,
 }
+
+const styles = ({ space }) => ({
+  root: {
+    marginBottom: space[4],
+  },
+})
+
+const NarrowButton = Button
+const NarrowMenu = Menu
 
 const aDark = 'rgba(255, 0, 0, 0.2)'
 const aLight = 'rgba(255, 69, 69, 0.1)'
@@ -50,32 +64,6 @@ const grid = css`
   }
 `
 
-const Root = styled.div`
-  display: grid;
-  grid-template-areas: 'side content';
-  grid-template-columns: 1fr 3fr;
-  height: 100vh;
-  width: 100vw;
-`
-
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  grid-area: side;
-  overflow-y: hidden;
-`
-
-const Header = styled.header`
-  padding: 0.5rem;
-`
-
-const Title = styled.h1`
-  font-family: ${th('fontInterface')};
-  font-size: ${th('fontSizeBase')};
-  margin-bottom: 0;
-  padding: 0 1rem;
-`
-
 const Content = styled.div`
   grid-area: content;
   overflow-y: auto;
@@ -86,57 +74,7 @@ const Content = styled.div`
   ${props => props.grid && grid};
 `
 
-const Nav = styled.nav`
-  flex: 1;
-  overflow-y: auto;
-  padding: 0.5rem;
-`
-
-function makeNarrow(component) {
-  return styled(component)`
-    margin: ${props => `
-        0
-        calc(${props.theme.gridUnit} * 6)
-        ${props.theme.gridUnit}
-        calc(${props.theme.gridUnit} * 4)
-        `};
-  `
-}
-
-const NarrowButton = makeNarrow(Button)
-const NarrowMenu = makeNarrow(Menu)
-
-const componentStore = {
-  /**
-   * Generic component store
-   * All the components in here will be updated whenever the
-   * theme is changed. For now just a list of components.
-   */
-  components: [],
-  addComponent(component) {
-    /**
-     * Adds react component to store
-     * @param {object} component - component to store
-     */
-    this.components.push(component)
-  },
-  removeComponent(component) {
-    /**
-     * Removes react component from store
-     * @param {object} component - component to be removed from store
-     */
-    this.components.splice(this.components.indexOf(component), 1)
-  },
-  getComponents() {
-    /**
-     * Returns list of components in store
-     * @returns {object} - list of components in store
-     */
-    return this.components
-  },
-}
-
-class StyleGuideRenderer extends React.Component {
+class SectionRenderer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -149,9 +87,8 @@ class StyleGuideRenderer extends React.Component {
   }
 
   render() {
-    const { title, children, toc } = this.props
     const GridToggle = () => (
-      <NarrowButton
+      <Button
         onClick={() => {
           const newGridState = !this.state.grid
           this.setState({ grid: newGridState })
@@ -159,15 +96,16 @@ class StyleGuideRenderer extends React.Component {
         }}
       >
         Toggle Grid
-      </NarrowButton>
+      </Button>
     )
 
     const options = Object.keys(themes).map(themeName => ({
       value: themeName,
       label: _.startCase(themeName),
     }))
+
     const ThemeSelector = () => (
-      <NarrowMenu
+      <Menu
         onChange={value => {
           // update each component listening for theme changes
           componentStore.getComponents().forEach(component => {
@@ -184,27 +122,68 @@ class StyleGuideRenderer extends React.Component {
         value={this.state.themeName}
       />
     )
+    const {
+      classes,
+      name,
+      slug,
+      content,
+      components,
+      sections,
+      depth,
+      description,
+      pagePerSection,
+      isolated,
+    } = this.props
 
+    const section = (
+      <section className={classes.root}>
+        {name && (
+          <SectionHeading
+            depth={depth}
+            id={slug}
+            pagePerSection={pagePerSection}
+            slotName="sectionToolbar"
+            slotProps={this.props}
+          >
+            {name}
+          </SectionHeading>
+        )}
+        {description && <Markdown text={description} />}
+        {content}
+        {sections}
+        {components}
+      </section>
+    )
+
+    const sectionWithTools = (
+      <Content grid={this.state.grid}>
+        <ThemeSelector />
+        {section}
+        <GridToggle />
+      </Content>
+    )
+
+    const sectionToShow = isolated ? sectionWithTools : section
     return (
       <ThemeProvider theme={themes[this.state.themeName]}>
-        <StyleRoot>
-          <Normalize />
-          <GlobalStyle />
-          <Root>
-            <Sidebar>
-              <Header>
-                <Title>{title}</Title>
-              </Header>
-              <GridToggle />
-              <ThemeSelector />
-              <Nav>{toc}</Nav>
-            </Sidebar>
-            <Content grid={this.state.grid}>{children}</Content>
-          </Root>
-        </StyleRoot>
+        {sectionToShow}
       </ThemeProvider>
     )
   }
 }
-export default StyleGuideRenderer
-export { currentTheme, themes, componentStore }
+
+SectionRenderer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  slug: PropTypes.string,
+  filepath: PropTypes.string,
+  content: PropTypes.node,
+  components: PropTypes.node,
+  sections: PropTypes.node,
+  isolated: PropTypes.bool,
+  depth: PropTypes.number.isRequired,
+  pagePerSection: PropTypes.bool,
+}
+
+export default Styled(styles)(SectionRenderer)

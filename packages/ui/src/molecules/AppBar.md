@@ -16,7 +16,8 @@ When the user is not signed in, only the login link is displayed.
 Can optionally pass navigation links.
 
 ```js
-<AppBar
+import { Action } from '@pubsweet/ui'
+;<AppBar
   brand="xpub"
   navLinkComponents={[
     <Action active to="/home">
@@ -34,7 +35,8 @@ Can optionally pass navigation links.
 Can optionally pass an image for a brand.
 
 ```js
-<AppBar
+import { Action } from '@pubsweet/ui'
+;<AppBar
   brand={
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +60,9 @@ Can use a custom component as right element.
 
 **Right component props** - the right component will be passed the following props
 
-* _user_ - the current logged in user; null if no user is logged in
-* _onLogoutClick_ - the logout function
-* _loginLink_ - link to redirect users to login
+- _user_ - the current logged in user; null if no user is logged in
+- _onLogoutClick_ - the logout function
+- _loginLink_ - link to redirect users to login
 
 ```js
 ;<div /> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886

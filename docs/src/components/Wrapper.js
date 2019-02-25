@@ -5,7 +5,9 @@ import { MockedProvider } from 'react-apollo/test-utils'
 import gql from 'graphql-tag'
 import styled, { ThemeProvider } from 'styled-components'
 import ErrorBoundary from './ErrorBoundary'
-import { currentTheme, themes, componentStore } from './StyleGuideRenderer'
+import componentStore from './componentStore'
+import { currentTheme, themes } from './SectionRenderer'
+
 import * as journal from '../../config/journal'
 
 const mocks = [
@@ -44,6 +46,7 @@ class Wrapper extends React.Component {
   componentWillUnmount() {
     componentStore.removeComponent(this)
   }
+
   render() {
     return (
       <ErrorBoundary>
