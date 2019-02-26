@@ -6,8 +6,6 @@ const path = require('path')
 const config = require('config')
 const fs = require('fs-extra')
 
-// const nodeExternals = require('webpack-node-externals')
-
 module.exports = dir => {
   // can't use node-config in webpack so save whitelisted client config into the build and alias it below
   const outputPath = path.resolve(__dirname, '_build', 'config')
@@ -127,10 +125,6 @@ module.exports = dir => {
       path: path.join(dir, 'dist'),
     },
     plugins: [
-      // mock constants
-      new webpack.DefinePlugin({
-        PUBSWEET_COMPONENTS: '[]',
-      }),
       new webpack.ContextReplacementPlugin(/./, __dirname, {
         [config.authsome.mode]: config.authsome.mode,
       }),

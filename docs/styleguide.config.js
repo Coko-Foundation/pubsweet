@@ -79,4 +79,9 @@ module.exports = {
     },
   },
   pagePerSection: true,
+  dangerouslyUpdateWebpackConfig: (webpackConfig, env) => {
+    // Due to: https://github.com/webpack/webpack/issues/8688
+    webpackConfig.optimization.concatenateModules = false
+    return webpackConfig
+  },
 }
