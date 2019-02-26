@@ -30,7 +30,8 @@
   },
   "scripts": {
     "clean": "lerna clean",
-    "styleguide": "npm run --prefix docs styleguide",
+    "styleguide": "yarn --cwd docs styleguide",
+    "styleguide:build": "yarn --cwd docs styleguide:build",
     "test": "jest --no-cache --coverage --detectOpenHandles",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:json",
     "lint:js": "eslint 'packages/**/*.{js,jsx}'",
