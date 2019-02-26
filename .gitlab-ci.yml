@@ -29,9 +29,8 @@ pages:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: production
   script:
-    - cd ${HOME}/docs
-    - yarn styleguide:build
     - cd ${HOME}
+    - yarn styleguide:build
     - cp -R docs/styleguide/ public/
   artifacts:
     paths:
@@ -43,9 +42,8 @@ pages:review:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: review
   script:
-    - cd ${HOME}/docs
-    - yarn styleguide:build
     - cd ${HOME}
+    - yarn styleguide:build
     - cp -R docs/styleguide/ review/
   artifacts:
     paths:
