@@ -6,9 +6,9 @@ variables:
 
 stages:
   - build
-  - audit
   - test
   - review
+  - audit
   - staging
   - production
 
