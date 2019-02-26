@@ -56,7 +56,7 @@ export const GET_TEAM = gql`
       members {
         id
       }
-      teamType
+      role
       object {
         objectId
         objectType
