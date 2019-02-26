@@ -44,7 +44,7 @@ pages:review:
   script:
     - cd ${HOME}
     - yarn styleguide:build
-    - cp -R docs/styleguide/ review/
+    - cp -R docs/styleguide/ /builds/pubsweet/pubsweet/review/
   artifacts:
     paths:
       - review/
