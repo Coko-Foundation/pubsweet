@@ -9,6 +9,7 @@ stages:
   - audit
   - test
   - review
+  - staging
   - production
 
 build:
