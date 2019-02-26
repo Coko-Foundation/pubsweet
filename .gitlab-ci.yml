@@ -47,7 +47,7 @@ pages:review:
     - cp -R docs/styleguide/ review/
   artifacts:
     paths:
-    - review
+      - review/
   except:
   - master
   environment:
