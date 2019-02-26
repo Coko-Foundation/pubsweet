@@ -37,6 +37,18 @@ const styles = ({ color, fontFamily, fontSize, space, mq }) => ({
   isSelected: {
     fontWeight: 'bold',
   },
+  sidebarLink: {
+    '&, &:link, &:visited': {
+      fontSize: 'inherit',
+      color: color.sidebarLink,
+      textDecoration: 'none',
+    },
+    '&:hover, &:active': {
+      isolate: false,
+      color: color.sidebarLink,
+      cursor: 'pointer',
+    },
+  },
 })
 
 export function ComponentsListRenderer({ classes, items }) {
@@ -61,7 +73,7 @@ export function ComponentsListRenderer({ classes, items }) {
             key={href}
           >
             <Link
-              className={cx(heading && classes.heading)}
+              className={cx(heading && classes.heading, classes.sidebarLink)}
               href={href}
               target={external ? '_blank' : undefined}
             >
