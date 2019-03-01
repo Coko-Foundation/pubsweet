@@ -18,6 +18,12 @@ export const GET_USER = gql`
       admin
       teams {
         id
+        role
+        global
+        object {
+          objectId
+          objectType
+        }
       }
     }
   }
