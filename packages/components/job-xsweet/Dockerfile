@@ -20,7 +20,7 @@ RUN wget https://gitlab.coko.foundation/XSweet/editoria_typescript/repository/ar
 RUN wget https://gitlab.coko.foundation/XSweet/HTMLevator/repository/archive.zip?ref=master -O htmlevator.zip; unzip htmlevator.zip; rm htmlevator.zip
 
 # Download Saxon
-RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-9-1-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
+RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.8/SaxonHE9-8-0-15J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
 
 COPY . .
 
