@@ -18,6 +18,12 @@ export const GET_USER = gql`
       admin
       teams {
         id
+        role
+        global
+        object {
+          objectId
+          objectType
+        }
       }
     }
   }
@@ -56,7 +62,7 @@ export const GET_TEAM = gql`
       members {
         id
       }
-      teamType
+      role
       object {
         objectId
         objectType
