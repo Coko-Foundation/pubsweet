@@ -6,7 +6,7 @@ Almost all scholarly monographs are written by authors in MS Word, then submitte
 
 No longer! Working with the University of California Press, the Collaborative Knowledge Foundation has created and continues to develop [Editoria](https://editoria.pub 'undefined'), an in-browser scholarly book production platform. Editors and authors upload author files into a book structure, then collaborate to style, copyedit, and review the content online, enabling fully automated export to a print-ready, paginated PDF, epub, and more.
 
-<img src="/image-4-0.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
+<img src="image-4-0.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
 
 Editoria Workspaces
 
@@ -16,7 +16,7 @@ There is strong interest in adoption from other university presses, and as of mi
 
 As a response to inflexible and expensive content and journal management systems, several PubSweet journal systems for submission, peer review, and publication are being developed by organizations including eLife, Hindawi, and Collabra: Psychology from the University of California Press. Collectively we call these PubSweet journal platforms 'xPub' (and refer to them each as xpub-Collabra, xpub-eLife etc).
 
-<img src="/image-4-1.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
+<img src="image-4-1.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
 
 Hindawi Workspaces
 
@@ -32,7 +32,7 @@ PubSweet can also be used to support micropublications - such things as data dep
 
 An example: the Collaborative Knowledge Foundation is working with WormBase, a nematode model organism gene database, to create an elegant submission, curation, and publication platform.
 
-<img src="/image-4-2.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
+<img src="image-4-2.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
 
 Micropublications Workspaces
 
@@ -42,7 +42,7 @@ Authors often misclassify their submission type. With the opportunity to build a
 
 Europe PMC is a worldwide, free, life sciences literature repository for journal articles, preprints, books, patents and clinical guidelines. Researchers funded by the Europe PMC funders are required to submit their publications to Europe PMC plus (a manuscript submission system used by researchers, administrators submitting their behalf, and publishers who bulk-submit manuscripts via FTP) to comply with the funders' open access policies.
 
-<img src="/image-4-3.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
+<img src="image-4-3.svg" style="width: 100%;max-width: 500px; display: block;margin: 1em auto;">
 
 Europe PMC Plus Workspaces
 

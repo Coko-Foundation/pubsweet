@@ -1,6 +1,6 @@
 PubSweet is both an [open source software project](https://gitlab.coko.foundation/pubsweet/pubsweet 'undefined') and an open community, part of the broader [Collaborative Knowledge Foundation](https://coko.foundation/ 'undefined') (Coko) community. We welcome people of all kinds to join the community and contribute with knowledge, skills, expertise. Everyone is welcome in [our chat room](https://mattermost.coko.foundation/coko/channels/town-square 'undefined').
 
-<img src="/image-36-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-36-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Coko Community Meeting
 

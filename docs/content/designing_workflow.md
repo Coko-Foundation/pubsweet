@@ -6,7 +6,7 @@ With PubSweet, publishers of all sizes have the opportunity to break this unheal
 
 In "PubSweet, workflow and workspaces", we go over the core concepts of designing a workflow for PubSweet. The following chapter, “Workflow Sprints”, documents a method for working out your ideal workflow and mapping it onto a PubSweet platform, designed by Coko co-founder Adam Hyde. After that, in the “case study” chapters, we describe the experience of eLife, Hindawi, and Europe PMC in redesigning their workflow for PubSweet. The teams carried out a process influenced by the Workflow Sprints, modified to suit their organizations. Finally, in “A general model”, we collate lessons learned from these case studies.
 
-<img src="/image-7-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-7-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Cindy (University of California Press) designing Editoria
 
@@ -29,7 +29,7 @@ Perhaps the easiest way to illustrate this idea of workspaces is by example. In 
 
 For example, Editoria, as it is configured for the University of California Press, has the following roles: Production Editor, Copy Editor, Author. Works come in from the acquisitions department in the form of a folder of MS Word documents. The Production Editor creates a new book from the Dashboard and uploads these documents into Editoria. The Production Editor then collaborates with the Author and Copy Editor on each book by re-arranging the structure in the Book Builder workspace and editing individual chapters using the editor (you could also call it a chapter-editing-workspace, if you wish). There is a lot of other detail, such as controlling who should have access to what and when (more on all this later) but in essence, everything is performed in three workspaces: the Dashboard, The Book Builder, and the Editor. A high-level system architecture for the Editoria platform looks like this:
 
-<img src="/image-8-0.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-8-0.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Editoria Workspaces
 
@@ -37,7 +37,7 @@ Let's contrast that with a completely different workflow. Collabra Psychology is
 
 The total number of workspaces for Collabra Psychology then is 6 - Dashboard, Submission Page, Manuscript, Decision Control, Manage Review, and the Review workspaces. The high level workspaces architecture looks like this:
 
-<img src="/image-8-1.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-8-1.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Collabra Workspaces
 
@@ -63,7 +63,7 @@ Be warned — Workflow Sprints are fun and exciting, and great team building exe
 
 The process of designing (in the case of new projects) a publishing workflow or optimizing an existing workflow is a process of open discussion. Like all good stories, you start at the beginning and ask what happens first. You want the people that are actually involved in that part of the story to tell it.
 
-<img src="/image-9-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-9-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Aperture Workflow Sprint
 
@@ -135,7 +135,7 @@ Instead, impose a few simple constraints on the team. The basic constraints are 
 
 If this is done through the entire workflow and you stay disciplined, you will end up with a very simple diagram of workspaces. For example, in mapping the _Collabra: Psychology_ journal, the following results:
 
-<img src="/image-9-1.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-9-1.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Collabra Workspaces
 

@@ -18,7 +18,7 @@ Open Source is more than just a license — open source is about participating i
 
 If these are ideas you can get behind, read on.
 
-<img src="/image-5-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-5-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Coko Community Meet, London
 

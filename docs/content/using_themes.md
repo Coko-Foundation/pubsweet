@@ -10,7 +10,7 @@ If you wish to change a style not accounted for by the theme variables, many com
 
 Despite these extension points, sometimes the theme is not enough and the component itself must be modified. In this case, instead of forking (copying and editing) the component, we recommend that you reach out to the community to see whether your proposed modification could instead be integrated into PubSweet.
 
-<img src="/image-28-0.jpg" style="width: 100%;max-width: 400px; display: block;margin: 1em auto;">
+<img src="image-28-0.jpg" style="width: 100%;max-width: 400px; display: block;margin: 1em auto;">
 
 Hindawi and eLife collaborating on component styling
 

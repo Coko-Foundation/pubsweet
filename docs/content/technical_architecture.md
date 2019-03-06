@@ -13,7 +13,7 @@ PubSweet is composed on a technical level out of the following:
 
 Below is a diagram representing the high level architecture of a PubSweet application.
 
-<img src="/image-15-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-15-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
 
 High level architecture of a PubSweet application
 

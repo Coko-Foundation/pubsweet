@@ -10,7 +10,7 @@ There was plenty of overlap in ideas between eLife and Collabora's workflow, but
 
 Once eLife approved the resulting workflow diagram, the next step was to understand how a user might navigate each space and to outline some of the controls that might be needed per page. To make this easier to understand, the workflow was broken down per role. The diagram below shows a portion of this breakdown.
 
-<img src="/image-10-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-10-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
 
 eLife Workflow by role (partial)
 
@@ -42,7 +42,7 @@ As Hindawi uses its own peer review management system, many of the flows and req
 
 The main outcome of the product design phase was a first set of wireframes from a UX/UI designer for the articulated workflows. Based on the wireframes, multiple rounds of feedback were gathered from the existing production team, internal researchers, and external partners, to ensure the manuscript's workflow was correct. That effort resulted in a definitive list of required workspaces.
 
-<img src="/image-11-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-11-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
 
 Hindawi Workflow
 
@@ -58,7 +58,7 @@ Europe PMC staff at the European Bioinformatics Institute (EMBL-EBI) are current
 
 At the start of the redevelopment project, Europe PMC team members worked together with Adam Hyde in a Workflow Sprint (see [Workflow Sprint](inline 'undefined') chapter) to define an idealised workflow and identify any overlaps with existing PubSweet components.
 
-<img src="/image-12-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-12-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
 
 Europe PMC plus submission workflow
 
@@ -78,7 +78,7 @@ At this moment, the processes diverged. Workflow Sprints went rapidly towards de
 
 Both pathways started from the same point — workflow — and ended in the same point — workflow mapped onto PubSweet workspaces. Both processes spend time understanding and optimising a publisher's workflow. Both also include UX/UI design and a way to describe their system in terms of workspaces. However the journey in between is quite different as you can see in the below diagram.
 
-<img src="/image-13-0.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-13-0.svg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Different pathways from Workflow to Workspaces
 

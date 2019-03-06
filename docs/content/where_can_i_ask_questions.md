@@ -6,6 +6,6 @@ The PubSweet community is worldwide, so there's usually someone around to field 
 
 If you already know your question relates to a bug or feature request, then you can go straight to the [PubSweet GitLab repository](https://gitlab.coko.foundation/pubsweet/pubsweet 'undefined') (it's just one repository for all packages, so no need to go looking for the right place), and create a new issue.
 
-<img src="/image-34-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
+<img src="image-34-0.jpg" style="max-width: 400px; width: 100%;display: block;margin: 1em auto;">
 
 Tamlyn (eLife) and Yannis (Coko) pondering questions about PubSweet
