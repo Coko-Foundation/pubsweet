@@ -8,37 +8,126 @@ module.exports = {
       content: './content/introduction.md',
     },
     {
-      name: 'Theme variables',
+      name: 'Examples of platforms built with PubSweet',
+      content: './content/examples_of_platforms_built_with_pubsweet.md',
+    },
+    {
+      name: 'Before you start',
+      content: './content/before_you_start.md',
+    },
+    {
+      name: 'Designing workflow',
+      content: './content/designing_workflow.md',
+    },
+    {
+      name: 'Workflow case studies',
+      content: './content/workflow_case_studies.md',
+    },
+    {
+      name: 'Technical architecture',
+      content: './content/technical_architecture.md',
+    },
+    {
+      name: 'Getting started',
+      content: './content/getting_started.md',
+    },
+    {
+      name: 'Components',
       sections: [
         {
-          content: '../packages/ui/docs/brand_colors.md',
-          name: 'Brand colors',
+          name: 'What are components?',
+          content: './content/what_are_components.md',
         },
         {
-          content: '../packages/ui/docs/state_colors.md',
-          name: 'State colors',
+          name: 'How do you create a component?',
+          content: './content/how_do_you_create_a_component.md',
         },
         {
-          content: '../packages/ui/docs/fonts.md',
-          name: 'Fonts',
+          name: 'How do you use components?',
+          content: './content/how_do_you_use_components.md',
         },
       ],
     },
     {
-      name: 'Atoms',
-      components: '../packages/ui/src/atoms/*.js',
+      name: 'Authorization and permissions',
+      sections: [
+        {
+          name: 'Why authsome?',
+          content: './content/why_authsome.md',
+        },
+        {
+          name: 'How to use authsome?',
+          content: './content/how_to_use_authsome.md',
+        },
+      ],
     },
     {
-      name: 'Molecules',
-      components: '../packages/ui/src/molecules/*.js',
+      name: 'Theming',
+      sections: [
+        {
+          name: 'Using themes',
+          content: './content/using_themes.md',
+        },
+        {
+          name: 'Advanced theming',
+          content: './content/advanced_theming.md',
+        },
+        {
+          name: 'Theme variables',
+          sections: [
+            {
+              content: '../packages/ui/docs/brand_colors.md',
+              name: 'Brand colors',
+            },
+            {
+              content: '../packages/ui/docs/state_colors.md',
+              name: 'State colors',
+            },
+            {
+              content: '../packages/ui/docs/fonts.md',
+              name: 'Fonts',
+            },
+          ],
+        },
+      ],
     },
     {
-      name: 'Core-components',
-      components: '../packages/components/!(xpub-*|model-*)/**/*.{jsx,js}',
+      name: 'Development help',
+      sections: [
+        {
+          name: 'Where can I ask questions?',
+          content: './content/where_can_i_ask_questions.md',
+        },
+        {
+          name: 'How can I debug?',
+          content: './content/how_can_i_debug.md',
+        },
+      ],
     },
     {
-      name: 'Xpub-components',
-      components: '../packages/components/xpub-*/**/*.{jsx,js}',
+      name: 'Contributing',
+      content: './content/contributing.md',
+    },
+    {
+      name: 'Component library',
+      sections: [
+        {
+          name: 'Atoms',
+          components: '../packages/ui/src/atoms/*.js',
+        },
+        {
+          name: 'Molecules',
+          components: '../packages/ui/src/molecules/*.js',
+        },
+        {
+          name: 'Core-components',
+          components: '../packages/components/!(xpub-*|model-*)/**/*.{jsx,js}',
+        },
+        {
+          name: 'Xpub-components',
+          components: '../packages/components/xpub-*/**/*.{jsx,js}',
+        },
+      ],
     },
   ],
   ignore: [

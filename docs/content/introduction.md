@@ -1,6 +1,6 @@
 ## The open toolkit for building publishing workflows
 
-![](/pubsweet-logo.svg)
+<img src="/pubsweet-logo.svg" style="width: 100%;max-width: 300px; display: block;margin: 1em auto;">
 
 **PubSweet** is a free, open source framework for building state-of-the-art publishing platforms. PubSweet enables you to easily build a publishing platform tailored to your own needs. It is designed to be modular and flexible. PubSweet consists of a **server** (“back end”) and **client** (“front end”) that work together, and both can be modified and extended with **components** to add functionality to the system. There's also a **command-line tool** that helps manage PubSweet apps.
 
@@ -30,7 +30,7 @@ PubSweet is free Open Source software, so you don't have to pay to use it. You c
 
 Thanks to the focus on modularity, you can extend PubSweet with components. You can add new components, extend existing components, or recompose a set of components on both the front end and back end as much as you like. You can leverage the existing components contributed to the community to lessen your development time and speed up your delivery.
 
-![](/pubsweet-components.svg)
+<img src="/pubsweet-components.svg" style="width: 100%;max-width: 1000px; display: block;margin: 1em auto;">
 
 # Assemble your own PubSweet platform
 
