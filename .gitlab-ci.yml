@@ -52,11 +52,12 @@ pages:review:
   - master
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: https://$CI_PROJECT_NAMESPACE.coko.foundation/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/review/index.html
+    url: http://$CI_PROJECT_NAMESPACE.coko.foundation/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/review/index.html
 
 audit:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: audit
+  allow_failure: true
   except:
     - tags
   variables:
