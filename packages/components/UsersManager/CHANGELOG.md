@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.0.3...pubsweet-component-users-manager@3.0.4) (2019-03-06)
+
+**Note:** Version bump only for package pubsweet-component-users-manager
+
+
+
+
+
 ## [3.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.0.2...pubsweet-component-users-manager@3.0.3) (2019-03-05)
 
 **Note:** Version bump only for package pubsweet-component-users-manager
