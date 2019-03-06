@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.1.0...pubsweet-server@13.2.0) (2019-03-06)
+
+
+### Features
+
+* **server:** add context and helpers to subscription context ([d755ac3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d755ac3))
+
+
+
+
+
 # [13.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.0.2...pubsweet-server@13.1.0) (2019-03-05)
 
 
