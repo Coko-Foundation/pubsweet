@@ -11,6 +11,9 @@ const { token } = require('../authentication')
 
 module.exports = {
   addSubscriptions: server => {
+    const connectors = require('../connectors')
+    const helpers = require('../helpers/authorization')
+
     SubscriptionServer.create(
       {
         schema: graphqlSchema,
@@ -26,7 +29,7 @@ module.exports = {
                 logger.info('Bad auth token')
                 reject(new Error('Bad auth token'))
               }
-              resolve({ user: id })
+              resolve({ user: id, connectors, helpers })
             })
           })
         },

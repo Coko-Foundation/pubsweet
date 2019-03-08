@@ -1,4 +1,5 @@
 const logger = require('@pubsweet/logger')
+const { AuthorizationError } = require('@pubsweet/errors')
 
 const eager = 'teams.members.[user, alias]'
 
@@ -53,7 +54,7 @@ const resolvers = {
         logger.debug(err)
       }
       if (!isValid) {
-        throw new Error('Wrong username or password.')
+        throw new AuthorizationError('Wrong username or password.')
       }
       return {
         user,

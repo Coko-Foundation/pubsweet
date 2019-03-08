@@ -36,7 +36,7 @@ const fragment1 = {
 const team1 = {
   id: 'team1',
   members: [{ id: user1.id }],
-  teamType: 'editors',
+  role: 'editors',
   object: { objectId: 'fragment1', objectType: 'fragment' },
   name: 'team',
   global: false,

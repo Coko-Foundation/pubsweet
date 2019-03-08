@@ -49,7 +49,12 @@ describe('GraphQL authentication', () => {
 
       expect(body).toMatchObject({
         data: { loginUser: null },
-        errors: [{ message: 'Wrong username or password.' }],
+        errors: [
+          {
+            name: 'AuthorizationError',
+            message: 'Wrong username or password.',
+          },
+        ],
       })
     })
   })

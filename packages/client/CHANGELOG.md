@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.0.3...pubsweet-client@9.1.0) (2019-03-06)
+
+
+### Bug Fixes
+
+* **authorize:** change teamType to role ([f1a83f2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f1a83f2))
+* **authorize:** fix test for role ([10a8aea](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/10a8aea))
+
+
+### Features
+
+* **authorize:** add more team fields on GetUser ([eab6257](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/eab6257))
+
+
+
+
+
+## [9.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.0.2...pubsweet-client@9.0.3) (2019-03-05)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
 ## [9.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.0.1...pubsweet-client@9.0.2) (2019-02-19)
 
 **Note:** Version bump only for package pubsweet-client
