@@ -1,0 +1,58 @@
+{
+  "name": "@pubsweet/styleguide",
+  "version": "6.0.4",
+  "license": "MIT",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "main": "src",
+  "dependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@pubsweet/coko-theme": "^5.0.12",
+    "@pubsweet/default-theme": "^4.0.12",
+    "@pubsweet/ui": "^10.0.4",
+    "@pubsweet/ui-toolkit": "^2.1.4",
+    "config": "^3.0.1",
+    "faker": "^4.1.0",
+    "fs-extra": "^7.0.1",
+    "graphql-tag": "^2.10.1",
+    "joi": "^14.3.1",
+    "joi-browser": "^13.4.0",
+    "lodash": "^4.17.5",
+    "pubsweet-client": "^9.1.0",
+    "react": "^16.2.0",
+    "react-apollo": "^2.3.3",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-styleguidist": "^9.0.1",
+    "recompose": "^0.26.0",
+    "regenerator-runtime": "^0.13.1",
+    "styled-components": "^4.1.1",
+    "styled-normalize": "^8.0.6",
+    "webpack": "^4.29.5",
+    "xpub-journal": "^0.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^0.28.4",
+    "node-sass": "^4.5.3",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "stylelint-config-pubsweet": "^0.0.4",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean && npm run lint",
+    "build": "webpack --progress --profile"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

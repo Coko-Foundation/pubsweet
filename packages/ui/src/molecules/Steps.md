@@ -4,7 +4,7 @@
 
 ## Examples
 
-* Usage with the Step component.
+- Usage with the Step component.
 
 ```js
 initialState = { currentStep: 0 }
@@ -35,17 +35,18 @@ initialState = { currentStep: 0 }
 </div>
 ```
 
-* Usage with a custom step component
+- Usage with a custom step component
 
 ```js
-<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
-  return <div>
-    {customProp} / {index}
-  </div>
+  return (
+    <div>
+      {customProp} / {index}
+    </div>
+  )
 }
 
-<Steps currentStep={1}>
+;<Steps currentStep={1}>
   <StepComponent customProp="Hei" />
   <StepComponent customProp="Ho" />
   <StepComponent customProp="Let's go!" />
@@ -54,31 +55,35 @@ const StepComponent = ({ index, currentStep, customProp }) => {
 
 Each child of the Steps component has access to the `currentStep` and also it's own `index`.
 
-* Usage with a custom separator
+- Usage with a custom separator
   When the default separator is not what you want you can always pass a custom separator component. This custom separator will be placed between each two adjacent children.
 
 ```js
-<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const StepComponent = ({ index, currentStep, customProp }) => {
-  return <div>
-    {customProp} / {index}
-  </div>
+  return (
+    <div>
+      {customProp} / {index}
+    </div>
+  )
 }
 
-<div/> //hacky workaround for https://github.com/styleguidist/react-styleguidist/issues/886
 const Separator = () => {
-  return <div style={{
-    alignItems: 'center',
-    backgroundColor: 'salmon',
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 1
-  }}>
-    DIVIDER OF WORLDS
-  </div>
+  return (
+    <div
+      style={{
+        alignItems: 'center',
+        backgroundColor: 'salmon',
+        display: 'flex',
+        justifyContent: 'center',
+        flex: 1,
+      }}
+    >
+      DIVIDER OF WORLDS
+    </div>
+  )
 }
 
-<Steps currentStep={1} renderSeparator={Separator}>
+;<Steps currentStep={1} renderSeparator={Separator}>
   <StepComponent customProp="Hei" />
   <StepComponent customProp="Ho" />
   <StepComponent customProp="Let's go!" />

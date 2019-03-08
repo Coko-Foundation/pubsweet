@@ -30,9 +30,10 @@
   },
   "scripts": {
     "clean": "lerna clean",
-    "styleguide": "npm run --prefix packages/styleguide styleguide",
+    "styleguide": "yarn --cwd docs styleguide",
+    "styleguide:build": "yarn --cwd docs styleguide:build",
     "test": "jest --no-cache --coverage --detectOpenHandles",
-    "lint": "npm run lint:js && npm run lint:style && npm run lint:json",
+    "lint": "yarn lint:js && yarn lint:style && yarn lint:json",
     "lint:js": "eslint 'packages/**/*.{js,jsx}'",
     "lint:style": "stylelint 'packages/**/*.{css,scss}'",
     "lint:json": "prettier --list-different '**/*.json'",
@@ -192,7 +193,8 @@
   "workspaces": [
     "packages/*",
     "packages/components/*",
-    "packages/model-components/*"
+    "packages/model-components/*",
+    "docs"
   ],
   "repository": {
     "type": "git",
@@ -205,6 +207,6 @@
   },
   "dependencies": {},
   "resolutions": {
-    "webpack-dev-server": "3.1.11"
+    "webpack-dev-server": "3.1.14"
   }
 }

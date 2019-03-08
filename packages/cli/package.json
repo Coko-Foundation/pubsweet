@@ -28,8 +28,8 @@
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
     "pubsweet-server": "^13.2.0",
     "uuid": "^3.0.1",
-    "webpack": "^4.29.0",
-    "webpack-dev-middleware": "^3.5.1",
+    "webpack": "^4.29.5",
+    "webpack-dev-middleware": "^3.6.0",
     "webpack-hot-middleware": "^2.20.0"
   },
   "repository": {

@@ -99,6 +99,4 @@ const cokoTheme = {
   },
 }
 
-// console.log(cokoTheme)
-
 export default cokoTheme

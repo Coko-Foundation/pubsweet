@@ -3,7 +3,7 @@ An interactive element which renders a text element from a given index of a prov
 If the update function is used to update the index, the component will cycle through the array on click.
 
 ```js
-const initialState = {
+initialState = {
   values: ['To Clean', 'Cleaning', 'Cleaned'],
   index: 0,
 }
@@ -17,7 +17,7 @@ const update = (currentValue, nextIndex) => {
 If the component is passed the disabled prop, the update function is not run:
 
 ```js
-const initialState = {
+initialState = {
   values: ['To Clean', 'Cleaning', 'Cleaned'],
   index: 0,
 }
