@@ -31,7 +31,7 @@ pages:
   script:
     - cd ${HOME}
     - yarn styleguide:build
-    - cp -R docs/styleguide/ public/
+    - cp -R docs/styleguide/ /builds/pubsweet/pubsweet/public/
   artifacts:
     paths:
       - public/
