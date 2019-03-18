@@ -17,8 +17,12 @@ const FormContainer = styled.div`
 `
 
 const Logo = styled.div`
+  width: 100%;
+  max-width: 100px;
+  margin: 0 auto;
   ${override('Login.Logo')};
 `
+Logo.displayName = 'Logo'
 
 const UsernameInput = props => (
   <TextField label="Username" {...props.field} placeholder="Username" />
