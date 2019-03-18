@@ -5,7 +5,7 @@ module.exports = api => {
 
   const overrides = [
     {
-      test: ['./packages/ui', './packages/client'],
+      test: ['./packages/ui', './docs', './node_modules/wax-prose-mirror'],
       extends: './packages/ui/.babelrc',
     },
     {

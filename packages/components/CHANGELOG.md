@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.2.0...pubsweet-components@13.2.1) (2019-03-06)
+
+**Note:** Version bump only for package pubsweet-components
+
+
+
+
+
+# [13.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.1.0...pubsweet-components@13.2.0) (2019-03-05)
+
+
+### Bug Fixes
+
+* **depedencies:** add styled components ([47149c2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/47149c2))
+* **job-xsweet:** improve/fix parallel processing of documents ([3233883](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3233883))
+* **job-xsweet:** use exact Saxon 9-8-0-1J ([2680539](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2680539))
+* **job-xsweet:** use Saxon 9.8 ([17fcf17](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/17fcf17))
+* **login:** add placeholder to fields ([b2431d4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b2431d4))
+* **login:** delete unneeded files ([3fb140a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3fb140a))
+* **redirect:** after login the user ([c7618da](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c7618da))
+* **test:** fix export of the Login component ([90df50a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90df50a))
+* **test:** update login snapshot. ui updated ([7518d7a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7518d7a))
+
+
+### Features
+
+* **login:** add optional logo at the login screen ([debe63a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/debe63a))
+
+
+
+
+
 # [13.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.0.1...pubsweet-components@13.1.0) (2019-02-19)
 
 

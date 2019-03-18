@@ -41,10 +41,8 @@ const handleJobs = async () => {
 
   const jobQueue = await connectToJobQueue()
 
-  const queueName = 'xsweet'
-
   // Subscribe to the job queue with an async handler
-  await jobQueue.subscribe(queueName, xsweetHandler)
+  await jobQueue.subscribe('xsweet-*', xsweetHandler)
 }
 
 handleJobs()

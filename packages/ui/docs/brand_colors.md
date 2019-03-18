@@ -1,8 +1,6 @@
-CSS variables are used to define the theme's color scheme.
+CSS variables described below are used to define the theme's brand colors.
 
-## Brand colors
-
-`colorText`
+### colorText
 
 Default font color
 
@@ -13,7 +11,7 @@ const ColorText = require('styled-components').default.div`
 ;<ColorText>{faker.lorem.sentence(5)}</ColorText>
 ```
 
-`colorTextReverse`
+### colorTextReverse
 
 Reverse font color
 
@@ -25,7 +23,7 @@ const ColorTextReverse = require('styled-components').default.div`
 ;<ColorTextReverse>{faker.lorem.sentence(5)}</ColorTextReverse>
 ```
 
-`colorPrimary`
+### colorPrimary
 
 Indicates a primary call to action
 
@@ -36,7 +34,7 @@ const ColorPrimary = require('styled-components').default.div`
 ;<ColorPrimary>{faker.lorem.sentence(5)}</ColorPrimary>
 ```
 
-`colorSecondary`
+### colorSecondary
 
 Default color for non-primary actions
 
@@ -47,7 +45,7 @@ const ColorSecondary = require('styled-components').default.div`
 ;<ColorSecondary>{faker.lorem.sentence(5)}</ColorSecondary>
 ```
 
-`colorFurniture`
+### colorFurniture
 
 Meant to be applied to elements that indicate content division
 
@@ -64,23 +62,25 @@ const Divider = require('styled-components').default.span`
 </div>
 ```
 
-`colorBorder`
+### colorBorder
 
 For borders around form elements
 
 ```js
-<TextField inline value={faker.lorem.sentence(3)} />
+import { TextField } from '@pubsweet/ui'
+;<TextField inline value={faker.lorem.sentence(3)} onChange={() => {}} />
 ```
 
-`colorTextPlaceholder`
+### colorTextPlaceholder
 
 Used for text field placeholders
 
 ```js
-<TextField inline placeholder={faker.lorem.sentence(3)} />
+import { TextField } from '@pubsweet/ui'
+;<TextField inline placeholder={faker.lorem.sentence(3)} onChange={() => {}} />
 ```
 
-`colorBackgroundHue`
+### colorBackgroundHue
 
 Used to create a discrete contrast the default background color
 
@@ -95,39 +95,4 @@ const BackgroundHue = require('styled-components').default.div`
   <BackgroundHue>{faker.lorem.sentence(5)}</BackgroundHue>
   <div>{faker.lorem.sentence(5)}</div>
 </div>
-```
-
-## Colors for interactions
-
-`colorSuccess`
-
-Used to indicate a successful validation state
-
-```js
-const ColorSuccess = require('styled-components').default.div`
-  color: ${props => props.theme.colorSuccess};
-`
-;<ColorSuccess>{faker.lorem.sentence(5)}</ColorSuccess>
-```
-
-`colorWarning`
-
-Used to indicate a validation warning
-
-```js
-const ColorWarning = require('styled-components').default.div`
-  color: ${props => props.theme.colorWarning};
-`
-;<ColorWarning>{faker.lorem.sentence(5)}</ColorWarning>
-```
-
-Used to indicate an error in validation
-
-`colorError`
-
-```js
-const ColorError = require('styled-components').default.div`
-  color: ${props => props.theme.colorError};
-`
-;<ColorError>{faker.lorem.sentence(5)}</ColorError>
 ```

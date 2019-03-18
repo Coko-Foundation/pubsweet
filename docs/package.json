@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/styleguide",
-  "version": "6.0.2",
+  "version": "6.0.4",
   "license": "MIT",
   "files": [
     "src",
@@ -10,11 +10,10 @@
   "dependencies": {
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@elifesciences/elife-theme": "^1.0.0",
-    "@pubsweet/coko-theme": "^5.0.10",
-    "@pubsweet/default-theme": "^4.0.10",
-    "@pubsweet/ui": "^10.0.2",
-    "@pubsweet/ui-toolkit": "^2.1.2",
+    "@pubsweet/coko-theme": "^5.0.12",
+    "@pubsweet/default-theme": "^4.0.12",
+    "@pubsweet/ui": "^10.0.4",
+    "@pubsweet/ui-toolkit": "^2.1.4",
     "config": "^3.0.1",
     "faker": "^4.1.0",
     "fs-extra": "^7.0.1",
@@ -22,17 +21,17 @@
     "joi": "^14.3.1",
     "joi-browser": "^13.4.0",
     "lodash": "^4.17.5",
-    "pubsweet-client": "^9.0.2",
+    "pubsweet-client": "^9.1.0",
     "react": "^16.2.0",
     "react-apollo": "^2.3.3",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-styleguidist": "^8.0.6",
+    "react-styleguidist": "^9.0.1",
     "recompose": "^0.26.0",
     "regenerator-runtime": "^0.13.1",
     "styled-components": "^4.1.1",
-    "styled-normalize": "^8.0.4",
-    "webpack": "^4.29.0",
+    "styled-normalize": "^8.0.6",
+    "webpack": "^4.29.5",
     "xpub-journal": "^0.0.3"
   },
   "devDependencies": {
@@ -41,8 +40,9 @@
     "css-loader": "^0.28.4",
     "node-sass": "^4.5.3",
     "rimraf": "^2.6.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "stylelint-config-pubsweet": "^0.0.4",
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {

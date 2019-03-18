@@ -6,8 +6,6 @@ const path = require('path')
 const config = require('config')
 const fs = require('fs-extra')
 
-// const nodeExternals = require('webpack-node-externals')
-
 module.exports = dir => {
   // can't use node-config in webpack so save whitelisted client config into the build and alias it below
   const outputPath = path.resolve(__dirname, '_build', 'config')
@@ -17,13 +15,14 @@ module.exports = dir => {
 
   const include = [
     path.join(dir, 'src'),
-    path.join(dir, '..', 'components'),
-    path.join(dir, '..', 'ui', 'src'),
+    path.join(dir, '..', 'packages', 'components'),
+    path.join(dir, '..', 'packages', 'ui', 'src'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,
     /@pubsweet\/[^/]+\/src/,
-    /styleguide\/src/,
+    /docs\/src/,
+    /docs\/vendor/,
     /ui\/src/,
     /packages\/client\/src/,
     /@elifesciences\/[^/]+\/src/,
@@ -32,14 +31,11 @@ module.exports = dir => {
   return {
     devtool: 'cheap-module-source-map',
     entry: './src/index.js',
-    // externals: [nodeExternals({
-    //   whitelist: [/\.(?!js$).{1,5}$/i]
-    // })],
     module: {
       rules: [
         {
           oneOf: [
-            // Todo: revisit https://github.com/apollographql/react-apollo/issues/1737
+            // // Todo: revisit https://github.com/apollographql/react-apollo/issues/1737
             {
               test: /\.mjs$/,
               include: /node_modules/,
@@ -51,14 +47,9 @@ module.exports = dir => {
               include,
               loader: 'babel-loader',
               options: {
-                presets: [
-                  [require('@babel/preset-env'), { modules: false }],
-                  require('@babel/preset-react'),
-                ],
-                cacheDirectory: true,
+                rootMode: 'upward',
               },
             },
-
             // CSS modules
             {
               test: /\.local\.css$/,
@@ -134,10 +125,6 @@ module.exports = dir => {
       path: path.join(dir, 'dist'),
     },
     plugins: [
-      // mock constants
-      new webpack.DefinePlugin({
-        PUBSWEET_COMPONENTS: '[]',
-      }),
       new webpack.ContextReplacementPlugin(/./, __dirname, {
         [config.authsome.mode]: config.authsome.mode,
       }),

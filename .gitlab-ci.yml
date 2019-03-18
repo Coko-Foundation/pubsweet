@@ -6,12 +6,11 @@ variables:
 
 stages:
   - build
-  - audit
   - test
   - review
+  - audit
   - staging
   - production
-  - demo
 
 build:
   image: docker:latest
@@ -26,9 +25,39 @@ build:
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
     - docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
 
-audit: 
+pages:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
-  stage: test
+  stage: production
+  script:
+    - cd ${HOME}
+    - yarn styleguide:build
+    - cp -R docs/styleguide/ /builds/pubsweet/pubsweet/public/
+  artifacts:
+    paths:
+      - public/
+  only:
+    - master # this job will affect only the 'master' branch
+
+pages:review:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: review
+  script:
+    - cd ${HOME}
+    - yarn styleguide:build
+    - cp -R docs/styleguide/ /builds/pubsweet/pubsweet/review/
+  artifacts:
+    paths:
+      - review/
+  except:
+  - master
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: http://$CI_PROJECT_NAMESPACE.coko.foundation/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/review/index.html
+
+audit:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: audit
+  allow_failure: true
   except:
     - tags
   variables:
@@ -36,7 +65,7 @@ audit:
   script:
     - cd ${HOME}
     - yarn audit
-  
+
 lint:style:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
   stage: test
@@ -69,7 +98,7 @@ lint:json:
   script:
     - cd ${HOME}
     - yarn lint:json
-  
+
 lint:commits:
    image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
    stage: test
@@ -115,89 +144,3 @@ push:latest:
     - master
   except:
     - tags
-
-# -----------------------------------------------
-# ui --------------------------------------------
-# -----------------------------------------------
-
-review:ui:
-  image: pubsweet/deployer:latest
-  stage: review
-  variables:
-    PACKAGE_NAME: ui
-  environment:
-    name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
-    # !! kube-lego will fail if domain > 63 chars
-    url: "http://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
-    on_stop: stop_review:ui
-  except:
-    - master
-    - tags
-  script:
-    - source deploy.sh
-    - create_deployment
-
-stop_review:ui:
-  image: pubsweet/deployer:latest
-  stage: review
-  variables:
-    PACKAGE_NAME: ui
-    GIT_STRATEGY: none
-  environment:
-    name: $PACKAGE_NAME/review/$CI_COMMIT_REF_NAME
-    action: stop
-  when: manual
-  except:
-    - master
-    - tags
-  script:
-    - source deploy.sh
-    - delete_deployment
-
-staging:ui:
-  image: pubsweet/deployer:latest
-  stage: staging
-  variables:
-    PACKAGE_NAME: ui
-  environment:
-    name: $PACKAGE_NAME/staging
-    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
-  only:
-    - master
-  except:
-    - tags
-  script:
-    - source deploy.sh
-    - create_deployment
-
-production:ui:
-  image: pubsweet/deployer:latest
-  stage: production
-  variables:
-    PACKAGE_NAME: ui
-  environment:
-    name: $PACKAGE_NAME/production
-    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
-  when: manual
-  only:
-    - master
-  except:
-    - tags
-  script:
-    - source deploy.sh
-    - create_deployment
-
-demo:ui:
-  image: pubsweet/deployer:latest
-  stage: demo
-  variables:
-    PACKAGE_NAME: ui
-  environment:
-    name: $PACKAGE_NAME/demo
-    url: "https://${CI_ENVIRONMENT_SLUG}.${BASE_DOMAIN}"
-  when: manual
-  except:
-    - tags
-  script:
-    - source deploy.sh
-    - create_deployment
