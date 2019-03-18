@@ -134,7 +134,6 @@ module.exports = {
     '**/components/Manage/**',
     '**/components/**/*.config.js',
     '**/components/*-server/**',
-    '**/components/MediumDraft/CustomImageSideButton.jsx',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],
