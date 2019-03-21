@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components'
 import { MemoryRouter, Route, Switch } from 'react-router-dom'
 
 import wait from 'waait'
-import { LOGIN_USER } from './graphql/mutations'
-import LoginContainer from './LoginContainer'
+import { LOGIN_USER } from '../src/graphql/mutations'
+import LoginContainer from '../src/LoginContainer'
 
 const user1 = {
   id: 'user1',

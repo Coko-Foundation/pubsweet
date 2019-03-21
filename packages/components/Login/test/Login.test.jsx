@@ -3,14 +3,14 @@ import React from 'react'
 import { Field } from 'formik'
 import { Button, Link, ErrorText } from '@pubsweet/ui'
 
-import Login from './Login'
+import Login from '../src/Login'
 
 describe('<Login/>', () => {
   const makeWrapper = (props = {}) => shallow(<Login {...props} />)
 
   it('renders the login form', () => {
     const wrapper = makeWrapper()
-
+    expect(wrapper.debug()).toMatchSnapshot()
     expect(wrapper.find(Field)).toHaveLength(2)
     expect(wrapper.find(Button)).toHaveLength(1)
     expect(wrapper.find(Link)).toHaveLength(2)
