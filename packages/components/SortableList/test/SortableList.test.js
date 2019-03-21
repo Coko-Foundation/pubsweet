@@ -4,8 +4,8 @@ import { mount, shallow } from 'enzyme'
 import { DragDropContext } from 'react-dnd'
 import TestBackend from 'react-dnd-test-backend'
 
-const SortableList = require('./SortableList').default
-const { DecoratedItem } = require('./SortableList')
+import SortableList from '../src'
+import { DecoratedItem } from '../src/SortableList'
 
 function wrapInTestContext(DecoratedComponent) {
   return DragDropContext(TestBackend)(
