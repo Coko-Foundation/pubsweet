@@ -27,7 +27,11 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
 
   const review =
     (version.reviews || []).find(
-      review => review.user.id === currentUser.id && !review.isDecision,
+      review =>
+        currentUser &&
+        review.user &&
+        review.user.id === currentUser.id &&
+        !review.isDecision,
     ) || {}
 
   return (
