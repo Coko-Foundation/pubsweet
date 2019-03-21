@@ -1,5 +1,3 @@
-module.exports = {
-  client: {
-    components: [() => require('./LoginContainer')],
-  },
-}
+import Login from './src/LoginContainer'
+
+export default Login

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login/> renders the login form 1`] = `
+"<styled.div small={true}>
+  <styled.div>
+    <styled.h1>
+      Login
+    </styled.h1>
+    <form onSubmit={[undefined]}>
+      <FormikConnect(FieldInner) component={[Function: UsernameInput]} name=\\"username\\" />
+      <FormikConnect(FieldInner) component={[Function: PasswordInput]} name=\\"password\\" />
+      <styled.button primary={true} type=\\"submit\\">
+        Login
+      </styled.button>
+    </form>
+    <span>
+      Don&#39;t have an account? 
+    </span>
+    <Styled(Link) to=\\"/signup\\">
+      Sign up
+    </Styled(Link)>
+    <span>
+      Forgot your password? 
+    </span>
+    <Styled(Link) to=\\"/password-reset\\">
+      Reset password
+    </Styled(Link)>
+  </styled.div>
+</styled.div>"
+`;
