@@ -1,5 +1,3 @@
-module.exports = {
-  client: {
-    components: [() => require('./SortableList')],
-  },
-}
+import SortableList from './src/SortableList'
+
+export default SortableList
