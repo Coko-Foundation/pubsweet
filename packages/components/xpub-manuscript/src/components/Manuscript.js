@@ -28,8 +28,9 @@ const Manuscript = ({
   history,
   updateManuscript,
 }) =>
+  file &&
   file.mimeType ===
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
     <ManuScript>
       <Wax
         fileUpload={fileUpload}
