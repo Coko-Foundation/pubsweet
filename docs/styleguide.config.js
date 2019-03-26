@@ -102,6 +102,10 @@ module.exports = {
           name: 'How can I debug?',
           content: './content/how_can_i_debug.md',
         },
+        {
+          name: 'FAQ',
+          content: './content/faq.md',
+        },
       ],
     },
     {
