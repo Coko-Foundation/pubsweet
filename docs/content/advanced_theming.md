@@ -20,15 +20,15 @@ The background color uses a theme variable, but the hover color does not as ther
 
 ```js static
 const myTheme = {
-        colorBackground: 'white';
+  colorBackground: 'white';
 
   cssOverrides: {
-                MyComp: css\`
-                        &:hover {
-                                background-color: 'magenta';
-                        }
-                \`
-        }
+    MyComp: css`
+      &:hover {
+        background-color: 'magenta';
+      }
+    `
+  }
 }
 ```
 
@@ -75,14 +75,14 @@ There are two lines here to enable writing an override in the theme, either (a) 
 
 ```js static
 const MyTheme = {
-        colorBackground: 'white',
+  colorBackground: 'white',
   colorPrimary: 'blue',
 
   cssOverrides: {
-        MyComp: css\`
-                        background: 'green'
-                \`
-  }
+    MyComp: css`
+      background: 'green';
+    `,
+  },
 }
 ```
 
@@ -90,16 +90,16 @@ In the case of (b), when part of a larger object, the theme is defined:
 
 ```js static
 const MyTheme = {
-        colorBackground: 'white',
+  colorBackground: 'white',
   colorPrimary: 'blue',
 
   cssOverrides: {
-        MyComp: {
-        Root: css\`
-                          background: 'green'
-                  \`
-    }
-  }
+    MyComp: {
+      Root: css`
+        background: 'green';
+      `,
+    },
+  },
 }
 ```
 
@@ -156,7 +156,7 @@ The `headingScale` function provides an easy way to conform to a heading scale d
 
 ```js static
 const MyTheme = {
-  fontSizeHeading4: \`${headingScale(12, 1.2, 4)}px\`   // evaluates to 17.28
+  fontSizeHeading4: `${headingScale(12, 1.2, 4)}px`, // evaluates to 17.28
 }
 ```
 
