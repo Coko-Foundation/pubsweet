@@ -103,6 +103,10 @@ module.exports = {
           content: './content/how_can_i_debug.md',
         },
         {
+          name: 'Setup',
+          content: './content/setup.md',
+        },
+        {
           name: 'FAQ',
           content: './content/faq.md',
         },
@@ -124,11 +128,11 @@ module.exports = {
           components: '../packages/ui/src/molecules/*.js',
         },
         {
-          name: 'Core-components',
-          components: '../packages/components/!(xpub-*|model-*)/**/*.{jsx,js}',
+          name: 'Core components',
+          components: '../packages/components/!(xpub-*|model-*)/**/*.{js,jsx}',
         },
         {
-          name: 'Xpub-components',
+          name: 'Xpub components',
           components: '../packages/components/xpub-*/**/*.{jsx,js}',
         },
       ],
