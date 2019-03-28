@@ -54,6 +54,56 @@ The [`login`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packa
 
 You can install the `login` component and instantly have login functionality in your app. You can also pick and choose which parts of the component you use.
 
+## Data model components
+
+A data model lives in its own database table, as defined in its migration(s). Migrations are automatically added if they exist. Such migrations should be placed in a sub-folder named `./migrations`.
+
+For a data model package, its exports are defined:
+
+```
+module.exports = {
+  typeDefs: // GraphQL type definitions
+  resolvers: // GraphQL resolvers
+  modelName: 'Collection',
+  model: require('./collection'),
+}
+
+```
+
+If you use @pubsweet/model-some-model in your application (by specifying it as a component in the configuration), typeDefs and resolvers are gathered in the server's schema.js to compose the application's entire GraphQL schema from three parts:
+
+- Pubsweet server
+- the application's components
+- the application's config
+
+# Extending a Data Model
+
+PubSweet provides support for extending data models (i.e., creating a model based on another model). From the /extended-data-model-componentyou can see an example of an extended data model used for testing purposes. It exports the following:
+
+```
+module.exports = {
+  typeDefs:
+  resolvers:
+  modelName: 'Model',
+  model: require('./model'),
+  extending: '@pubsweet/model-some-model',
+}
+```
+
+This is similar to the non-extended data model, but the one big exception, the extending property. This string contains the name of the model to be extended. In this case `@pubsweet/model-extended-some-model` extends `@pubsweet/model-some-model`. Therefore, the `@pubsweet/model-some-model` GraphQL schema, resolvers and migration paths will be added to `@pubsweet/model-extended-some-model`. This happens recursively, so if you had a `@pubsweet/model-super-extended-some-model` that extended `@pubsweet/model-extended-some-model`, it would also include @pubsweet/model-some-models's GraphQL schema, resolvers and migration paths.
+
+# Using data models
+
+To use the above models, all you need to do is to add them to the pubsweet.components configuration, e.g.:
+
+```
+ pubsweet: {
+    components: ['@pubsweet/model-some-model'],
+  },
+```
+
+The data model's migrations will be added to the list of your application's migrations, and GraphQL queries and mutations will automatically be added to your API.
+
 # Components Library
 
 As mentioned already, PubSweet components follow the naming convention of starting with `pubsweet-component-` or `@pubsweet/component-` to make them easily discoverable on the npm registry. However, this is not a requirement. In fact, components don't have to be published at all - they can live in a directory or a git repository.
