@@ -26,6 +26,10 @@ We maintain `master` of the PubSweet monorepo (a [Lerna](https://lernajs.io/ 'un
 - Clone `master` with `git clone git@gitlab.coko.foundation:pubsweet/pubsweet.git`
 - Create a new branch and work off that. Please name the branch which sensibly identifies the feature you are working on. You can push the branch to Coko Gitlab at anytime.
 
+# Contributing documentation
+
+The website you are reading, `pubsweet.coko.foundation` is our `react-styleguide` instance. You can start it up from the repository with `yarn styleguide`, and can then edit its contents either in the `ComponentName.md` files found in the components, or in the `docs/content/*.md` files. For example, the content for the FAQ is in `docs/content/faq.md`. As you edit the files, you will get a live preview of your changes. Once a MR is submitted, the styleguide is automatically built and a review deployment should be available. After the MR is merged, our pipeline will update this website.
+
 ## Use Conventional Commits
 
 An automated process will reject your commit if it doesn't follow the commit guidelines. All notable changes to the work will be automatically documented in a `CHANGELOG.md` file. See [Conventional Commits](https://conventionalcommits.org/ 'undefined') for commit guidelines.
