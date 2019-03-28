@@ -8,6 +8,10 @@ module.exports = {
       content: './content/introduction.md',
     },
     {
+      name: 'Contributing',
+      content: './content/contributing.md',
+    },
+    {
       name: 'Examples of platforms built with PubSweet',
       content: './content/examples_of_platforms_built_with_pubsweet.md',
     },
@@ -111,10 +115,6 @@ module.exports = {
           content: './content/faq.md',
         },
       ],
-    },
-    {
-      name: 'Contributing',
-      content: './content/contributing.md',
     },
     {
       name: 'Component library',
