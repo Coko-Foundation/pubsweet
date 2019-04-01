@@ -39,3 +39,7 @@ Before merging, all MRs must fulfill these three simple rules:
 1.  It must pass the tests.
 2.  It must not reduce the test coverage.
 3.  If the MR is a bug fix, it must include a regression test.
+
+# Releases
+
+Releases are done with a `lerna publish` command from the main `pubsweet/pubsweet` repository. This releases all packages (about 50 of them) with the 'latest' tag on npm. Should you wish to do a release using a different tag (e.g. a prerelease with the 'next' tag), you can use e.g. `lerna publish --dist-tag next`. Be careful with releses!

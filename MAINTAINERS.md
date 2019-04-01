@@ -1,4 +1,6 @@
-PubSweet consists of many software packages maintained by its community. Contributions are welcome and accepted from anyone, and there is additionally a group of people, that can also accept merge requests and do releases of PubSweet - we call them... :drum: :drum:... :rocket: **"THE MAINTAINERS"** :rocket:
+PubSweet consists of many software packages maintained by its community. Contributions are welcome from anyone, and discussed with the community as a whole before being accepted.
+
+Additionally, there is a group of people, that can accept merge requests and do releases of PubSweet - we call them... :drum: :drum:... :rocket: **"THE MAINTAINERS"** :rocket:
 
 Here they are in alphabetical order:
 
@@ -7,4 +9,4 @@ Here they are in alphabetical order:
 - Jure Triglav @jure (Coko)
 - Peter Hooper @diversemix (eLife)
 
-*This summer. Four keyboards, one mission. No bug is safe, no documentation outdated.*
+_This summer. Four keyboards, one mission. No bug is safe, no documentation outdated._
