@@ -1,12 +1,22 @@
 const config = require('config')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('graphql-tools')
+const logger = require('@pubsweet/logger')
 
 const upload = require('./definitions/upload')
 
-const requireRelative = m =>
-  require(require.resolve(m, { paths: [process.cwd()] }))
-
+const tryRequireRelative = m => {
+  let component
+  try {
+    component = require(require.resolve(m, { paths: [process.cwd()] }))
+  } catch (err) {
+    logger.warn(
+      `Unable to load component ${m} on the server (likely a client component).`,
+    )
+    component = {}
+  }
+  return component
+}
 // load base types and resolvers
 const typeDefs = [
   `type Query, type Mutation, type Subscription`,
@@ -17,7 +27,7 @@ const resolvers = merge({}, upload.resolvers)
 
 // recursively merge in component types and resolvers
 function getSchemaRecursively(componentName) {
-  const component = requireRelative(componentName)
+  const component = tryRequireRelative(componentName)
 
   if (component.extending) {
     getSchemaRecursively(component.extending)
