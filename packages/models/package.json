@@ -9,14 +9,13 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/logger": "^0.2.17",
-    "objection": "^1.5.3",
-    "pubsweet-server": "^13.2.0"
+    "@pubsweet/logger": "^0.2.17"
   },
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
+    "pubsweet-server": "^13.2.0",
     "config": "^3.0.1"
   }
 }
