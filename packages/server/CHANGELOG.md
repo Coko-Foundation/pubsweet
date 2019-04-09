@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.2.0...pubsweet-server@13.3.0) (2019-04-09)
+
+
+### Bug Fixes
+
+* remove some circular dependencies ([1c0cf11](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1c0cf11))
+* safeguard require ([1aab6ab](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1aab6ab))
+
+
+### Features
+
+* **server:** add tryRequireRelative helper ([c3b3f75](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c3b3f75))
+
+
+
+
+
 # [13.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.1.0...pubsweet-server@13.2.0) (2019-03-06)
 
 
