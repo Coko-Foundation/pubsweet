@@ -1,22 +1,11 @@
 const config = require('config')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('graphql-tools')
-const logger = require('@pubsweet/logger')
 
 const upload = require('./definitions/upload')
 
-const tryRequireRelative = m => {
-  let component
-  try {
-    component = require(require.resolve(m, { paths: [process.cwd()] }))
-  } catch (err) {
-    logger.warn(
-      `Unable to load component ${m} on the server (likely a client component).`,
-    )
-    component = {}
-  }
-  return component
-}
+const tryRequireRelative = require('../helpers/tryRequireRelative')
+
 // load base types and resolvers
 const typeDefs = [
   `type Query, type Mutation, type Subscription`,
