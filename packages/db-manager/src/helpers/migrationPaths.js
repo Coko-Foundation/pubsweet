@@ -1,9 +1,22 @@
 const path = require('path')
 const fs = require('fs')
 const config = require('config')
+const logger = require('@pubsweet/logger')
 
 const resolveRelative = m => require.resolve(m, { paths: [process.cwd()] })
-const requireRelative = m => require(resolveRelative(m))
+
+const tryRequireRelative = m => {
+  let component
+  try {
+    component = require(require.resolve(m, { paths: [process.cwd()] }))
+  } catch (err) {
+    logger.warn(
+      `Unable to load component ${m} on the server (likely a client component).`,
+    )
+    component = {}
+  }
+  return component
+}
 
 module.exports = () => {
   const migrationsPaths = []
@@ -23,7 +36,7 @@ module.exports = () => {
   }
 
   function getPathsRecursively(componentName) {
-    const component = requireRelative(componentName)
+    const component = tryRequireRelative(componentName)
     const migrationsPath = path.resolve(
       path.dirname(resolveRelative(componentName)),
       'migrations',
