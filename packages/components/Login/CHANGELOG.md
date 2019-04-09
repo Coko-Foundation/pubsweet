@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@2.1.1...pubsweet-component-login@3.0.0) (2019-04-09)
+
+
+### Features
+
+* **login:** move login code into src folder ([88c38fc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/88c38fc))
+
+
+### BREAKING CHANGES
+
+* **login:** If you've required the Login component directly, e.g.
+require('pubsweet-component-login/LoginContainer'), you have to change those requires to
+require('pubsweet-component-login') and get Login (LoginContainer) from the export.
+
+
+
+
+
 ## [2.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@2.1.0...pubsweet-component-login@2.1.1) (2019-03-06)
 
 **Note:** Version bump only for package pubsweet-component-login

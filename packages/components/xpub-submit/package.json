@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-submit",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^10.0.4",
-    "@pubsweet/ui-toolkit": "^2.1.4",
+    "@pubsweet/ui": "^10.1.0",
+    "@pubsweet/ui-toolkit": "^2.1.5",
     "apollo-client-preset": "^1.0.8",
     "formik": "^1.4.2",
     "grid-styled": "^4.1.0",
@@ -26,10 +26,10 @@
     "striptags": "^3.1.0",
     "styled-components": "^4.1.1",
     "xpub-connect": "^2.0.7",
-    "xpub-edit": "^2.5.15",
+    "xpub-edit": "^2.5.16",
     "xpub-journal": "^0.0.6",
-    "xpub-upload": "^1.0.4",
-    "xpub-validators": "^0.0.10"
+    "xpub-upload": "^1.0.5",
+    "xpub-validators": "^0.0.11"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.4...@pubsweet/models@0.2.5) (2019-04-09)
+
+
+### Bug Fixes
+
+* remove some circular dependencies ([1c0cf11](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1c0cf11))
+* safeguard require ([1aab6ab](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1aab6ab))
+
+
+
+
+
 ## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.3...@pubsweet/models@0.2.4) (2019-03-06)
 
 **Note:** Version bump only for package @pubsweet/models

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.2.1...pubsweet-components@14.0.0) (2019-04-09)
+
+
+### Bug Fixes
+
+* **email-tamplating:** use triple-stash in order not to escape HTML ([a1406d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a1406d8))
+* **model-collection:** move models into peer dependencies ([02ffcac](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/02ffcac))
+* **signup:** fix merge ([de9c37c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/de9c37c))
+* **signup:** use older version of recompose ([2769675](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2769675))
+* **sortable-list:** fix import/export/requires ([f7b97f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f7b97f4))
+* **xpub:** fix components in styleguide ([2db87cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2db87cd))
+
+
+### Features
+
+* **login:** add optional logo at the login screen ([2a61468](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2a61468))
+* **login:** move login code into src folder ([88c38fc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/88c38fc))
+* **signup:** add logo to signup form ([cd63d9d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cd63d9d))
+* **signup:** formik enable for signup ([96dc09f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/96dc09f))
+
+
+### BREAKING CHANGES
+
+* **login:** If you've required the Login component directly, e.g.
+require('pubsweet-component-login/LoginContainer'), you have to change those requires to
+require('pubsweet-component-login') and get Login (LoginContainer) from the export.
+
+
+
+
+
 ## [13.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-components@13.2.0...pubsweet-components@13.2.1) (2019-03-06)
 
 **Note:** Version bump only for package pubsweet-components

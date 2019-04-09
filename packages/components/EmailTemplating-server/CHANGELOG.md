@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.9...@pubsweet/component-email-templating@0.1.10) (2019-04-09)
+
+
+### Bug Fixes
+
+* **email-tamplating:** use triple-stash in order not to escape HTML ([a1406d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a1406d8))
+
+
+
+
+
 ## [0.1.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.8...@pubsweet/component-email-templating@0.1.9) (2019-03-06)
 
 **Note:** Version bump only for package @pubsweet/component-email-templating
