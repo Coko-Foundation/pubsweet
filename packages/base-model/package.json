@@ -18,11 +18,9 @@
     "objection": "^1.5.3",
     "uuid": "^3.3.2"
   },
-  "devDependencies": {
-    "pubsweet-server": "^13.2.0"
-  },
   "peerDependencies": {
-    "config": "^3.0.1"
+    "config": "^3.0.1",
+    "pubsweet-server": "^13.2.0"
   },
   "publishConfig": {
     "access": "public"

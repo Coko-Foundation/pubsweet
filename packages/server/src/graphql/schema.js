@@ -4,8 +4,7 @@ const { makeExecutableSchema } = require('graphql-tools')
 
 const upload = require('./definitions/upload')
 
-const requireRelative = m =>
-  require(require.resolve(m, { paths: [process.cwd()] }))
+const tryRequireRelative = require('../helpers/tryRequireRelative')
 
 // load base types and resolvers
 const typeDefs = [
@@ -17,7 +16,7 @@ const resolvers = merge({}, upload.resolvers)
 
 // recursively merge in component types and resolvers
 function getSchemaRecursively(componentName) {
-  const component = requireRelative(componentName)
+  const component = tryRequireRelative(componentName)
 
   if (component.extending) {
     getSchemaRecursively(component.extending)

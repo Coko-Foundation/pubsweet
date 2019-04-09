@@ -1,11 +1,10 @@
 const logger = require('@pubsweet/logger')
 const config = require('config')
 
-const requireRelative = m =>
-  require(require.resolve(m, { paths: [process.cwd()] }))
+const tryRequireRelative = require('./helpers/tryRequireRelative')
 
 const registerRecursively = (app, componentName) => {
-  const component = requireRelative(componentName)
+  const component = tryRequireRelative(componentName)
   logger.info('Registered component', componentName)
   const serverComponent = component.server || component.backend
   if (serverComponent) {

@@ -2,14 +2,13 @@ const config = require('config')
 
 const connector = require('./connector')
 
-const requireRelative = m =>
-  require(require.resolve(m, { paths: [process.cwd()] }))
+const tryRequireRelative = require('../helpers/tryRequireRelative')
 
 const connectors = {}
 
 // merge in component connectors, recursively
 function getConnectorsRecursively(componentName) {
-  const component = requireRelative(componentName)
+  const component = tryRequireRelative(componentName)
   // Backwards compatible for single model syntax
   if (component.extending) {
     getConnectorsRecursively(component.extending)
