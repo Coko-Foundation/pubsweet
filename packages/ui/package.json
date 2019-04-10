@@ -41,7 +41,7 @@
     "enzyme-to-json": "^3.3.5",
     "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^24.0.0",
+    "jest": "^24.7.1",
     "jest-styled-components": "^6.3.1",
     "react-test-renderer": "^16.5.2"
   },
