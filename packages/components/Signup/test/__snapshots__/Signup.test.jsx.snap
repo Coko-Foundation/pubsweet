@@ -18,9 +18,9 @@ exports[`<Signup /> renders the login form 1`] = `
       <span>
         Already have an account? 
       </span>
-      <Styled(Link) to=\\"/login\\">
+      <Styled(SmartUnstyledLink) to=\\"/login\\">
         Login
-      </Styled(Link)>
+      </Styled(SmartUnstyledLink)>
     </div>
   </styled.div>
 </styled.div>"

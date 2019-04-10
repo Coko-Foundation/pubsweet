@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Field } from 'formik'
 import { isEmpty } from 'lodash'

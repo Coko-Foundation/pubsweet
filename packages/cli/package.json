@@ -37,7 +37,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "devDependencies": {
-    "jest": "^24.0.0",
+    "jest": "^24.7.1",
     "jest-environment-db": "^3.0.5",
     "nsp": "^2.8.1"
   }
