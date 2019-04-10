@@ -16,15 +16,15 @@ exports[`<Login/> renders the login form 1`] = `
     <span>
       Don&#39;t have an account? 
     </span>
-    <Styled(Link) to=\\"/signup\\">
+    <Styled(SmartUnstyledLink) to=\\"/signup\\">
       Sign up
-    </Styled(Link)>
+    </Styled(SmartUnstyledLink)>
     <span>
       Forgot your password? 
     </span>
-    <Styled(Link) to=\\"/password-reset\\">
+    <Styled(SmartUnstyledLink) to=\\"/password-reset\\">
       Reset password
-    </Styled(Link)>
+    </Styled(SmartUnstyledLink)>
   </styled.div>
 </styled.div>"
 `;
