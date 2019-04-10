@@ -19,7 +19,6 @@ const SmartUnstyledLink = props => {
 const Link = styled(SmartUnstyledLink)`
   color: ${th('colorPrimary')};
   cursor: pointer;
-  text-decoration: none;
 
   ${override('ui.Link')};
 `
