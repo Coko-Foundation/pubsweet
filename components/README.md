@@ -8,7 +8,7 @@
 
 Package layout
 
-* `src/` contains ES6/JSX/SASS sources (pointed to by `main`)
+- `src/` contains ES6/JSX/SASS sources (pointed to by `main`)
 
 All modules forming part of the public API of the component should be exported from the index.js. Deep imports are discouraged (e.g. `package-name/some/file`).
 

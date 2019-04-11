@@ -1,6 +1,6 @@
 {
   "lerna": "2.5.1",
-  "packages": ["packages/*", "packages/components/!(test|config)"],
+  "packages": ["packages/*", "components/!(test|config)"],
   "command": {
     "publish": {
       "conventionalCommits": true,

@@ -84,7 +84,7 @@
         "testEnvironment": "jest-environment-db"
       },
       {
-        "rootDir": "<rootDir>/packages/components",
+        "rootDir": "<rootDir>/components",
         "displayName": "components",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
@@ -98,7 +98,6 @@
           "model-*"
         ],
         "globals": {
-          "PUBSWEET_COMPONENTS": [],
           "fetch": true
         },
         "setupFilesAfterEnv": [
@@ -171,7 +170,7 @@
         "testEnvironment": "node"
       },
       {
-        "rootDir": "<rootDir>/packages/components/model-team",
+        "rootDir": "<rootDir>/components/model-team",
         "displayName": "model-team",
         "testRegex": "/test/.*_test.js$",
         "setupFilesAfterEnv": [
@@ -180,7 +179,7 @@
         "testEnvironment": "jest-environment-db"
       },
       {
-        "rootDir": "<rootDir>/packages/components/model-user",
+        "rootDir": "<rootDir>/components/model-user",
         "displayName": "model-user",
         "testRegex": "/test/.*_test.js$",
         "setupFilesAfterEnv": [
@@ -192,8 +191,7 @@
   },
   "workspaces": [
     "packages/*",
-    "packages/components/*",
-    "packages/model-components/*",
+    "components/*",
     "docs"
   ],
   "repository": {
