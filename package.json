@@ -84,7 +84,7 @@
         "testEnvironment": "jest-environment-db"
       },
       {
-        "rootDir": "<rootDir>/components",
+        "rootDir": "<rootDir>/components/client",
         "displayName": "components",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
@@ -95,7 +95,8 @@
         "testPathIgnorePatterns": [
           "/node_modules",
           "config/test",
-          "model-*"
+          "model-*",
+          "-server"
         ],
         "globals": {
           "fetch": true
@@ -170,7 +171,7 @@
         "testEnvironment": "node"
       },
       {
-        "rootDir": "<rootDir>/components/model-team",
+        "rootDir": "<rootDir>/components/server/model-team",
         "displayName": "model-team",
         "testRegex": "/test/.*_test.js$",
         "setupFilesAfterEnv": [
@@ -179,8 +180,17 @@
         "testEnvironment": "jest-environment-db"
       },
       {
-        "rootDir": "<rootDir>/components/model-user",
+        "rootDir": "<rootDir>/components/server/model-user",
         "displayName": "model-user",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/components/server/component-password-reset-server",
+        "displayName": "component-password-reset-server",
         "testRegex": "/test/.*_test.js$",
         "setupFilesAfterEnv": [
           "<rootDir>/test/jest-setup.js"
@@ -191,7 +201,8 @@
   },
   "workspaces": [
     "packages/*",
-    "components/*",
+    "components/server/*",
+    "components/client/*",
     "docs"
   ],
   "repository": {

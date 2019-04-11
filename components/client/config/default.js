@@ -1,4 +1,5 @@
 const path = require('path')
+// eslint-disable-next-line
 const { deferConfig } = require('config/defer')
 
 module.exports = {
