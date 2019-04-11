@@ -129,11 +129,11 @@ module.exports = {
         },
         {
           name: 'Core components',
-          components: '../packages/components/!(xpub-*|model-*)/**/*.{js,jsx}',
+          components: '../components/!(xpub-*|model-*)/**/*.{js,jsx}',
         },
         {
           name: 'Xpub components',
-          components: '../packages/components/xpub-*/**/*.{jsx,js}',
+          components: '../components/xpub-*/**/*.{jsx,js}',
         },
       ],
     },
