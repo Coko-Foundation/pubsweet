@@ -1,0 +1,27 @@
+{
+  "name": "@pubsweet/component-password-reset-server",
+  "version": "2.0.3",
+  "description": "Password reset backend component for PubSweet",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "@pubsweet/errors": "^2.0.8",
+    "body-parser": "^1.17.2",
+    "config": "^3.0.1",
+    "moment": "^2.18.1",
+    "nodemailer": "^4.0.1"
+  },
+  "peerDependencies": {
+    "@pubsweet/logger": ">=0.0.1",
+    "pubsweet-server": ">=13.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  }
+}
