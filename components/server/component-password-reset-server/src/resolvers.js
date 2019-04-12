@@ -60,8 +60,8 @@ const resolvers = {
       }
 
       user.password = password
-      delete user.passwordResetToken
-      delete user.passwordResetTimestamp
+      user.passwordResetToken = null
+      user.passwordResetTimestamp = null
 
       await user.save()
 

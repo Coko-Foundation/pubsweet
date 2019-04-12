@@ -1,0 +1,26 @@
+{
+  "name": "@pubsweet/component-password-reset-client",
+  "version": "3.0.7",
+  "description": "Password reset client component for PubSweet",
+  "main": "src/index.js",
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "@pubsweet/ui": "^10.1.0",
+    "@pubsweet/ui-toolkit": "^2.1.5",
+    "prop-types": "^15.5.10",
+    "query-string": "^5.0.0",
+    "graphql-tag": "^2.10.1"
+  },
+  "peerDependencies": {
+    "react-apollo": "^2.5.4",
+    "pubsweet-client": ">=9.2.0",
+    "react": ">=16",
+    "styled-components": "^4.1.1",
+    "react-router-dom": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  }
+}

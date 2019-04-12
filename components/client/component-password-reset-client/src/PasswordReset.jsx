@@ -5,7 +5,20 @@ import queryString from 'query-string'
 import styled from 'styled-components'
 import { TextField, Button } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
-import * as api from 'pubsweet-client/src/helpers/api'
+import { ApolloConsumer } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const SEND_PASSWORD_RESET_EMAIL = gql`
+  mutation($username: String!) {
+    sendPasswordResetEmail(username: $username)
+  }
+`
+
+const RESET_PASSWORD = gql`
+  mutation($token: String!, $password: String!) {
+    resetPassword(token: $token, password: $password)
+  }
+`
 
 const Root = styled.div`
   margin: 0 auto;
@@ -42,10 +55,6 @@ class PasswordReset extends React.Component {
     this.setState(this.getInitialState())
   }
 
-  static post(data) {
-    return api.create('/password-reset', data)
-  }
-
   parsedQuery() {
     return queryString.parse(this.props.location.search)
   }
@@ -58,35 +67,35 @@ class PasswordReset extends React.Component {
     this.setState({ password: e.target.value })
   }
 
-  handleUsernameSubmit = e => {
+  handleUsernameSubmit = (client, e) => {
     e.preventDefault()
 
     const { username } = this.state
 
     if (username) {
-      this.initiatePasswordReset({ username })
+      this.initiatePasswordReset({ username }, client)
     } else {
       this.setState({ emailError: 'Please enter a username' })
     }
   }
 
-  handlePasswordSubmit = e => {
+  handlePasswordSubmit = (client, e) => {
     e.preventDefault()
 
-    const { token, username } = this.parsedQuery()
+    const { token } = this.parsedQuery()
 
     const { password } = this.state
 
     // TODO: enter twice and confirm?
 
     if (password) {
-      this.resetPassword({ password, token, username })
+      this.resetPassword({ password, token }, client)
     } else {
       this.setState({ passwordError: 'Please enter a new password' })
     }
   }
 
-  async initiatePasswordReset(data) {
+  async initiatePasswordReset(data, client) {
     this.setState({
       emailSent: false,
       emailError: false,
@@ -95,12 +104,25 @@ class PasswordReset extends React.Component {
     })
 
     try {
-      await PasswordReset.post(data)
-      this.setState({
-        emailSent: true,
-        emailError: false,
-        emailSending: false,
+      const body = await client.mutate({
+        mutation: SEND_PASSWORD_RESET_EMAIL,
+        variables: {
+          username: data.username,
+        },
       })
+      if (body.errors && body.errors[0]) {
+        this.setState({
+          emailError: true,
+          emailErrorMessage: body.errors[0].message,
+          emailSending: false,
+        })
+      } else {
+        this.setState({
+          emailSent: true,
+          emailError: false,
+          emailSending: false,
+        })
+      }
     } catch (err) {
       this.setState({
         emailError: true,
@@ -110,7 +132,7 @@ class PasswordReset extends React.Component {
     }
   }
 
-  async resetPassword(data) {
+  async resetPassword(data, client) {
     this.setState({
       passwordChanged: false,
       passwordError: false,
@@ -119,12 +141,26 @@ class PasswordReset extends React.Component {
     })
 
     try {
-      await PasswordReset.post(data)
-      this.setState({
-        passwordChanged: true,
-        passwordError: false,
-        passwordSending: false,
+      const body = await client.mutate({
+        mutation: RESET_PASSWORD,
+        variables: {
+          token: data.token,
+          password: data.password,
+        },
       })
+      if (body.errors && body.errors[0]) {
+        this.setState({
+          passwordError: true,
+          passwordErrorMessage: body.errors[0].message,
+          passwordSending: false,
+        })
+      } else {
+        this.setState({
+          passwordChanged: true,
+          passwordError: false,
+          passwordSending: false,
+        })
+      }
     } catch (err) {
       this.setState({
         passwordError: true,
@@ -148,7 +184,9 @@ class PasswordReset extends React.Component {
 
     const { token } = this.parsedQuery()
 
-    const buildForm = () => {
+    const buildForm = client => {
+      this.handlePasswordSubmit1 = this.handlePasswordSubmit.bind(this, client)
+      this.handleUsernameSubmit1 = this.handleUsernameSubmit.bind(this, client)
       if (passwordChanged) {
         return (
           <Alert>
@@ -162,7 +200,7 @@ class PasswordReset extends React.Component {
         // TODO: validate token on page load?
 
         return (
-          <form onSubmit={this.handlePasswordSubmit}>
+          <form onSubmit={this.handlePasswordSubmit1}>
             <TextField
               label="New password"
               onChange={this.handlePasswordChange}
@@ -189,7 +227,7 @@ class PasswordReset extends React.Component {
       // TODO: allow email instead of username?
 
       return (
-        <form onSubmit={this.handleUsernameSubmit}>
+        <form onSubmit={this.handleUsernameSubmit1}>
           <TextField
             label="Username"
             onChange={this.handleUsernameChange}
@@ -242,9 +280,7 @@ class PasswordReset extends React.Component {
         {buildError(passwordErrorMessage)}
 
         <h1>Password reset</h1>
-
-        {buildForm()}
-
+        <ApolloConsumer>{client => buildForm(client)}</ApolloConsumer>
         <Link to="/login">Return to login form</Link>
       </Root>
     )
