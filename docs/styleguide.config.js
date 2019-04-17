@@ -133,7 +133,7 @@ module.exports = {
         },
         {
           name: 'Xpub components',
-          components: '../components/component-xpub-*/**/*.{jsx,js}',
+          components: '../components/client/component-xpub-*/**/*.{jsx,js}',
         },
         {
           name: 'Server components',
