@@ -137,15 +137,14 @@ module.exports = {
         },
         {
           name: 'Server components',
-          components: '../components/server/*',
+          components: '../components/server/*.js',
         },
       ],
     },
   ],
   ignore: [
-    '**/components/Manage/**',
+    '**/components/client/component-manage/**',
     '**/components/**/*.config.js',
-    '**/components/*-server/**',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],
