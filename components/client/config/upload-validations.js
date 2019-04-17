@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const Joi = require('joi')
 
 module.exports = {

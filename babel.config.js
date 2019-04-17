@@ -17,7 +17,7 @@ module.exports = api => {
       presets: ['@babel/preset-env'],
     },
     {
-      test: [/\/packages\/components\/(?!model-)/],
+      test: [/\/components\/client/],
       presets: ['@babel/preset-env', '@babel/preset-react'],
       plugins: [
         '@babel/plugin-proposal-class-properties',
@@ -25,7 +25,7 @@ module.exports = api => {
       ],
     },
     {
-      test: ['./packages/components/model-*'],
+      test: ['./components/server/*'],
       presets: [['@babel/preset-env', { targets: { node: true } }]],
     },
   ]

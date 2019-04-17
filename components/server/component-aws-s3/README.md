@@ -2,10 +2,10 @@
 
 In order to use this component, the following configuration needs to be added to a PubSweet application inside a section named `pubsweet-component-aws-s3`:
 
-* `secretAccessKey`: the `AWS_S3_SECRET_KEY` value from the app's `.env` file
-* `accessKeyId`: the `AWS_S3_ACCESS_KEY` value from the app's `.env` file
-* `region`: the `AWS_S3_REGION` value from the app's `.env` file
-* `bucket`: the `AWS_S3_BUCKET` value from the app's `.env` file
+- `secretAccessKey`: the `AWS_S3_SECRET_KEY` value from the app's `.env` file
+- `accessKeyId`: the `AWS_S3_ACCESS_KEY` value from the app's `.env` file
+- `region`: the `AWS_S3_REGION` value from the app's `.env` file
+- `bucket`: the `AWS_S3_BUCKET` value from the app's `.env` file
 
 For example:
 

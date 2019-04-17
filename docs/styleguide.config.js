@@ -128,20 +128,23 @@ module.exports = {
           components: '../packages/ui/src/molecules/*.js',
         },
         {
-          name: 'Core components',
-          components: '../packages/components/!(xpub-*|model-*)/**/*.{js,jsx}',
+          name: 'Client components',
+          components: '../components/client/component-!(xpub-*)/**/*.{js,jsx}',
         },
         {
           name: 'Xpub components',
-          components: '../packages/components/xpub-*/**/*.{jsx,js}',
+          components: '../components/client/component-xpub-*/**/*.{jsx,js}',
+        },
+        {
+          name: 'Server components',
+          components: '../components/server/*.js',
         },
       ],
     },
   ],
   ignore: [
-    '**/components/Manage/**',
+    '**/components/client/component-manage/**',
     '**/components/**/*.config.js',
-    '**/components/*-server/**',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',
   ],

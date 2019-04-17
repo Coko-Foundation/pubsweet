@@ -8,19 +8,11 @@
 
 Package layout
 
-* `src/` contains ES6/JSX/SASS sources (pointed to by `main`)
+- `src/` contains ES6/JSX/SASS sources (pointed to by `main`)
 
 All modules forming part of the public API of the component should be exported from the index.js. Deep imports are discouraged (e.g. `package-name/some/file`).
 
-The component's `index.js` should export e.g.:
-
-```js
-module.exports = {
-  client: {
-    components: [() => require('./LoginContainer')],
-  },
-}
-```
+The component's `index.js` should export the React component/s.
 
 ### Server components
 
