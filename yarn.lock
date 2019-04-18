@@ -2874,15 +2874,6 @@ apollo-upload-client@^8.0.0:
     apollo-link-http-common "^0.2.4"
     extract-files "^3.1.0"
 
-apollo-upload-server@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/apollo-upload-server/-/apollo-upload-server-4.0.2.tgz#1a042e413d09d4bd5529738f9e0af45ba553cc2d"
-  integrity sha512-XbijSlkSyEOylm8vo7RxtoOxwWunGkzEf6Vczg3WjdzMEkJ+9zVzMMz/oF8jBScXqeEn+cVopcJ6y9CZACuHxQ==
-  dependencies:
-    "@babel/runtime" "^7.0.0-beta.38"
-    busboy "^0.2.14"
-    object-path "^0.11.4"
-
 apollo-utilities@1.0.26, apollo-utilities@^1.0.1:
   version "1.0.26"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.26.tgz#589c66bf4d16223531351cf667a230c787def1da"
@@ -17885,7 +17876,7 @@ webpack-dev-middleware@^3.6.0:
     range-parser "^1.0.3"
     webpack-log "^2.0.0"
 
-webpack-dev-server@^3.1.14:
+webpack-dev-server@3.1.14, webpack-dev-server@^3.1.14:
   version "3.1.14"
   resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.1.14.tgz#60fb229b997fc5a0a1fc6237421030180959d469"
   integrity sha512-mGXDgz5SlTxcF3hUpfC8hrQ11yhAttuUQWf1Wmb+6zo3x6rb7b9mIfuQvAPLdfDRCGRGvakBWHdHOa0I9p/EVQ==

@@ -17,7 +17,6 @@
     "@pubsweet/logger": "^0.2.18",
     "@pubsweet/models": "^0.2.5",
     "apollo-server-express": "^2.4.8",
-    "apollo-upload-server": "^4.0.2",
     "authsome": "^0.1.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.15.2",
