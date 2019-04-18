@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "striptags": "^3.1.0"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

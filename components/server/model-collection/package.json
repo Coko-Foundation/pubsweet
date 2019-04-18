@@ -21,5 +21,6 @@
     "@pubsweet/models": "^0.2.4",
     "lodash": "^4.17.11",
     "pubsweet-server": "^13.0.0"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

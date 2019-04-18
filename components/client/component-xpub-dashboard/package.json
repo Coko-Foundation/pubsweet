@@ -44,5 +44,6 @@
     "pubsweet-client": ">=1.0.0",
     "react": ">=16",
     "react-apollo": "^2.3.3"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

@@ -40,5 +40,6 @@
     "jest": "^24.7.1",
     "jest-environment-db": "^3.0.6",
     "nsp": "^2.8.1"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }
