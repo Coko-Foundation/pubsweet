@@ -1,4 +1,3 @@
-const { GraphQLUpload } = require('apollo-upload-server')
 const path = require('path')
 const crypto = require('crypto')
 const fs = require('fs-extra')
@@ -12,7 +11,6 @@ const randomBytes = promisify(crypto.randomBytes)
 const uploadsPath = config.get('pubsweet-server').uploads
 
 const resolvers = {
-  Upload: GraphQLUpload,
   Mutation: {
     upload: async (_, { file, fileSize }, context) => {
       const pubsub = await getPubsub()

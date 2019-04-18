@@ -10,7 +10,7 @@ const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-const graphqlApi = require('./graphql/routes')
+const gqlApi = require('./graphql/api')
 const index = require('./routes/index')
 const api = require('./routes/api')
 const logger = require('@pubsweet/logger')
@@ -76,7 +76,7 @@ const configureApp = app => {
   app.use('/api', api)
 
   // GraphQL API
-  app.use(graphqlApi)
+  gqlApi(app)
 
   // SSE update stream
   if (_.get('pubsweet-server.sse', config)) {
@@ -91,7 +91,6 @@ const configureApp = app => {
   }
 
   // Serve the index page for front end
-  app.use('/manage', index)
   app.use('/', index)
 
   app.use((err, req, res, next) => {

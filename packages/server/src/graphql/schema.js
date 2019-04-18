@@ -1,6 +1,6 @@
 const config = require('config')
 const { merge } = require('lodash')
-const { makeExecutableSchema } = require('graphql-tools')
+const { makeExecutableSchema } = require('apollo-server-express')
 
 const upload = require('./definitions/upload')
 
