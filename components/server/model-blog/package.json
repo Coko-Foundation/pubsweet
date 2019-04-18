@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-blog",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Testing model for pubsweet-starter and pubsweet-server",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/model-collection": "^4.0.5"
+    "@pubsweet/model-collection": "^4.0.6"
   },
   "publishConfig": {
     "access": "public"

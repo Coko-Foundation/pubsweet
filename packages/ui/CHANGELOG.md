@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.1.0...@pubsweet/ui@10.2.0) (2019-04-18)
+
+
+### Bug Fixes
+
+* **ui:** remove text-decoration none from Link ([3b3c660](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3b3c660))
+
+
+### Features
+
+* **ui:** improve Link to accept external URLs ([322d6a9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/322d6a9))
+
+
+
+
+
 # [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.0.4...@pubsweet/ui@10.1.0) (2019-04-09)
 
 
