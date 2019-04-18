@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.3.0...pubsweet-server@13.4.0) (2019-04-18)
+
+
+### Features
+
+* **server:** upgrade integration with apollo server 2.0 ([292720d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/292720d))
+
+
+
+
+
 # [13.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.2.0...pubsweet-server@13.3.0) (2019-04-09)
 
 

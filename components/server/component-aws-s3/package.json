@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-aws-s3",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "AWS S3 upload component for PubSweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
@@ -37,5 +37,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

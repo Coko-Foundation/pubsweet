@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-sortable-list",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "main": "src/",
   "license": "MIT",
   "dependencies": {
@@ -14,5 +14,6 @@
   },
   "devDependencies": {
     "react-dnd-test-backend": "^7.0.0"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

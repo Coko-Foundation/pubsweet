@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/errors",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -13,5 +13,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

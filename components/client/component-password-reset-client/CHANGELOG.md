@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.1.0 (2019-04-18)
+
+
+### Features
+
+* client-side password reset component using graphql ([33df495](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/33df495))
+
+
+
+
+
 ## [3.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-password-reset-frontend@3.0.6...pubsweet-component-password-reset-frontend@3.0.7) (2019-01-16)
 
 **Note:** Version bump only for package pubsweet-component-password-reset-frontend

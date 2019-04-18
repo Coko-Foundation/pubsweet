@@ -1,12 +1,12 @@
 {
   "name": "pubsweet-component-users-manager",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Basic navigation bar component for PubSweet",
   "main": "src/UsersManager.jsx",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^10.1.0",
+    "@pubsweet/ui": "^10.2.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
@@ -20,5 +20,6 @@
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
     "path": "UsersManager"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

@@ -1,6 +1,6 @@
 {
   "name": "xpub-upload",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -16,5 +16,6 @@
     "pubsweet-client": ">=2.1.0",
     "react": ">=16",
     "react-router-dom": ">=5.0.0"
-  }
+  },
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }
