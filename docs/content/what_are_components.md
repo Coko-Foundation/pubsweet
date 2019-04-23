@@ -16,7 +16,7 @@ PubSweet components export certain keys from their main file. This export makes 
 
 A server component can export the following keys:
 
-- `server`: This key allows Express.js routes and/or middleware to extend the server. The value for this key is a function that returns another function that accepts an Express.js app as its first argument. This function can do whatever it wants with the app (eg. add new routes, apply middleware functions). Take a look at the [password reset component](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/PasswordReset-server 'undefined') for a starting point.
+- `server`: This key allows Express.js routes and/or middleware to extend the server. The value for this key is a function that returns another function that accepts an Express.js app as its first argument. This function can do whatever it wants with the app (eg. add new routes, apply middleware functions). Take a look at the [password reset component](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/server/component-password-reset-server 'undefined') for a starting point.
 - `typeDefs`: GraphQL type definitions
 - `resolvers`: GraphQL resolvers
 
@@ -48,7 +48,7 @@ module.exports = {
 }
 ```
 
-The [`login`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components/Login 'null') component is a good standing example of a client component. It (predictably) provides basic user login functionality in the client. It does this by exporting:
+The [`login`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/client/component-login 'null') component is a good standing example of a client component. It (predictably) provides basic user login functionality in the client. It does this by exporting:
 
 - A React login form that provides a login interface and uses the login GraphQL Query's and mutations to authenticate users.
 
@@ -108,7 +108,7 @@ The data model's migrations will be added to the list of your application's migr
 
 As mentioned already, PubSweet components follow the naming convention of starting with `pubsweet-component-` or `@pubsweet/component-` to make them easily discoverable on the npm registry. However, this is not a requirement. In fact, components don't have to be published at all - they can live in a directory or a git repository.
 
-A number of PubSweet components are already available for developers. Some of them exist in the [PubSweet repository](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/components 'undefined') and are ready to use.
+A number of PubSweet components are already available for developers. Some of them exist in the [PubSweet repository](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components 'undefined') and are ready to use.
 
 ## PubSweet UI
 

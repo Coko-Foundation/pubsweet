@@ -17,7 +17,7 @@ curl -X POST \
   'http://localhost:3000/convertDocxToHTML?=' \
   -H 'cache-control: no-cache' \
   -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
-  -F docx=@/Users/juretriglav/src/pdk-tesms/pubsweet/packages/components/job-xsweet/src/test.docx
+  -F docx=@/home/pubsweet/components/server/job-xsweet/src/test.docx
 ```
 
 This publishes a job that the job runner (a Docker container) picks up.

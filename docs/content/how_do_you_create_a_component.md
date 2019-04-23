@@ -42,7 +42,7 @@ The goal of PubSweet UI naming is to bring the same vocabulary across the applic
 - An atom is the smallest bit of UI that you can reuse in your application (a button, an input, etc.) You could call an atom any element that it wouldn't make sense to divide into multiple parts: a radio button with a label, for instance.
 - A molecule is a reusable component made of multiple atoms. A login form, for instance, is made of two atoms of input (username and password) and an atom of a button (login).
 
-You can use any of the atoms and molecules when creating a component. To be able to choose the atoms and molecules you need, you can have a look at the [PubSweet styleguide](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/styleguide 'undefined').
+You can use any of the atoms and molecules when creating a component. To be able to choose the atoms and molecules you need, you can have a look at the available components in the menu on the left side.
 
 To be able to contribute a UI element, you need to be sure that it's usable within the starter-kit default theme without any CSS override.
 

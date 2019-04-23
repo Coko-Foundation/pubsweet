@@ -38,12 +38,12 @@ PubSweet apps.
 
 ### PubSweet modules
 
-| repository                                                                                                                                                                                      | description                                                           |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/server)        | an extensible server API                                              |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/client)        | an extensible client app that runs in the browser                     |
-| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) components](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/components) | pluggable extensions for server and/or client                         |
-| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/cli)                    | a suite of command-line tools for building and managing your platform |
+| repository                                                                                                                                                                               | description                                                           |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
+| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/server) | an extensible server API                                              |
+| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/client) | an extensible client app that runs in the browser                     |
+| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) components](https://gitlab.coko.foundation/pubsweet/pubsweet/components)   | pluggable extensions for server and/or client                         |
+| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet-cli](https://gitlab.coko.foundation/pubsweet/pubsweet/packages/cli)             | a suite of command-line tools for building and managing your platform |
 
 # Getting started with PubSweet CLI
 
