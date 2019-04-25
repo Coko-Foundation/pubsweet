@@ -18,7 +18,7 @@
     "@pubsweet/logger": "^0.2.19",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
-    "commander": "^2.9.0",
+    "commander": "^2.20.0",
     "config": "^3.0.1",
     "express": "^4.15.3",
     "forever-monitor": "^1.7.0",
