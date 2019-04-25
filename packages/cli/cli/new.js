@@ -45,9 +45,13 @@ module.exports = async argsOverride => {
   }
 
   execSync(
-    `git clone https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git --branch release ${appName}`,
+    `git clone https://gitlab.coko.foundation/pubsweet/pubsweet-starter.git --branch release ${appName} --quiet`,
     { stdio: 'inherit' },
   )
+
+  // Reinitialize the repository
+  await fs.remove(`${appName}/.git`)
+  execSync(`git init ${appName}`, { stdio: 'inherit' })
 
   logger.info('Installing app dependencies')
 
