@@ -8,16 +8,20 @@ module.exports = {
       content: './content/introduction.md',
     },
     {
+      name: 'Before you start',
+      content: './content/before_you_start.md',
+    },
+    {
+      name: 'Getting started',
+      content: './content/getting_started.md',
+    },
+    {
       name: 'Contributing',
       content: './content/contributing.md',
     },
     {
       name: 'Examples of platforms built with PubSweet',
       content: './content/examples_of_platforms_built_with_pubsweet.md',
-    },
-    {
-      name: 'Before you start',
-      content: './content/before_you_start.md',
     },
     {
       name: 'Designing workflow',
@@ -30,10 +34,6 @@ module.exports = {
     {
       name: 'Technical architecture',
       content: './content/technical_architecture.md',
-    },
-    {
-      name: 'Getting started',
-      content: './content/getting_started.md',
     },
     {
       name: 'Components',
