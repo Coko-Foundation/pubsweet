@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.1...@pubsweet/coko-theme@5.1.2) (2019-04-25)
+
+**Note:** Version bump only for package @pubsweet/coko-theme
+
+
+
+
+
 ## [5.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.0...@pubsweet/coko-theme@5.1.1) (2019-04-18)
 
 **Note:** Version bump only for package @pubsweet/coko-theme

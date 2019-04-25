@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.1...pubsweet@4.1.2) (2019-04-25)
+
+
+### Bug Fixes
+
+* **cli:** initialize new repository after cloning ([4fa9abb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4fa9abb)), closes [#444](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/444)
+* **cli:** update to latest version of commander to fix cli subcommands ([2e19beb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2e19beb))
+
+
+
+
+
 ## [4.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.0...pubsweet@4.1.1) (2019-04-18)
 
 **Note:** Version bump only for package pubsweet

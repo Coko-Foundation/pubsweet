@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.9...@pubsweet/errors@2.0.10) (2019-04-25)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
 ## [2.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.8...@pubsweet/errors@2.0.9) (2019-04-18)
 
 **Note:** Version bump only for package @pubsweet/errors
