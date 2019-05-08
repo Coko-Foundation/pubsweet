@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, media } from '@pubsweet/ui-toolkit'
 import { Box, Flex } from '@rebass/grid'
-import media from './media'
 import SelectedItem from './SelectedItem'
 
 import { peoplePropType } from './types'
