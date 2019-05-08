@@ -34,6 +34,7 @@ const PeoplePickerLayout = ({ modalTitle, ...props }) => (
               getMatchIndex={innerProps.getMatchIndex}
               onSubmit={innerProps.searchSubmit}
               options={innerProps.searchOptions}
+              placeholder={props.searchBoxPlaceholder}
             />
           </Box>
         </Flex>

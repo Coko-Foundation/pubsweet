@@ -56,6 +56,7 @@ initialState = { open: false }
   onSubmit={selection => console.log('Selected', selection)}
   onCancel={() => console.log('Cancelled')}
   people={people}
+  searchBoxPlaceholder="Search by name, etc."
 >
   {props => (
     <React.Fragment>

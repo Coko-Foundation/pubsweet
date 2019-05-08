@@ -140,7 +140,7 @@ class SearchBox extends React.Component {
         <TextField
           onChange={this.handleSearchStringChange}
           onKeyDown={this.onKeyDown}
-          placeholder="Search by name, institution or keyword"
+          placeholder={this.props.placeholder || 'Search string here...'}
           value={this.state.value}
         />
 
