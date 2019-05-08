@@ -2,8 +2,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { escapeRegExp } from 'lodash'
-
 import { peoplePropType } from './types'
+
+function stringifyObjectValues(val) {
+  if (val === undefined || val === null) {
+    return ''
+  }
+
+  if (val instanceof Object && !(val instanceof Date)) {
+    // Arrays are also object, and keys just returns the array indexes
+    // Date objects we convert to strings
+    return Object.keys(val)
+      .sort()
+      .filter(v => v !== undefined && v !== null)
+      .map(k => stringifyObjectValues(val[k]))
+      .join(' ')
+  }
+
+  return String(val)
+}
+
+function localFilterFn(people, searchValue) {
+  return people.filter(
+    person =>
+      stringifyObjectValues(person).match(new RegExp(searchValue, 'gi')) !==
+      null,
+  )
+}
 
 class PeoplePickerLogic extends React.Component {
   constructor(props) {
@@ -46,17 +71,6 @@ class PeoplePickerLogic extends React.Component {
     this.setState({ searchValue })
   }
 
-  filterPeople = (people, searchValue, field) => {
-    if (!searchValue) return people
-
-    const inputValue = searchValue.trim().toLowerCase()
-    if (!inputValue) return people
-
-    return people.filter(person =>
-      person[field].toLowerCase().includes(inputValue),
-    )
-  }
-
   getMatchIndex = (inputValue, option) => {
     const re = new RegExp(escapeRegExp(inputValue))
     const match = re.exec(option.toLowerCase())
@@ -65,30 +79,23 @@ class PeoplePickerLogic extends React.Component {
   }
 
   render() {
-    const { people, ...otherProps } = this.props
-    let extendedPeople = [...people]
+    const { people, customFilterFn, ...otherProps } = this.props
+    const filterFn = customFilterFn || localFilterFn
+    const filteredPeople =
+      typeof people === 'function'
+        ? people(this.state.searchValue)
+        : filterFn(people, this.state.searchValue)
 
-    extendedPeople = extendedPeople.map(person => ({
-      ...person,
-      searchValue: `${person.name} ${person.focuses.join(
-        ' ',
-      )} ${person.expertises.join(' ')} ${person.aff ? person.aff : ''}`,
-    }))
-
-    const searchOptions = extendedPeople.map(person => ({
+    const searchOptions = filteredPeople.map(person => ({
       value: person.name,
     }))
 
     return this.props.children({
       ...otherProps,
-      people: this.filterPeople(
-        extendedPeople,
-        this.state.searchValue,
-        'searchValue',
-      ),
+      people: filteredPeople,
       searchSubmit: this.searchSubmit,
       searchOptions,
-      filterFunction: this.filterPeople,
+      filterFunction: this.props.filterFunction,
       getMatchIndex: this.getMatchIndex,
       isSelected: person => this.select(person),
       isValid: this.isValid(),

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Box, Flex } from '@rebass/grid'
 
@@ -18,11 +17,6 @@ const PeoplePickerLayout = ({ modalTitle, ...props }) => (
   <PeoplePickerLogic {...props}>
     {innerProps => (
       <React.Fragment>
-        <Flex>
-          <MainColumn>
-            <h2>{modalTitle}</h2>
-          </MainColumn>
-        </Flex>
         <Flex mx={-2}>
           <Box
             mx={[0, 0, 0, '16.666%']}
@@ -31,7 +25,6 @@ const PeoplePickerLayout = ({ modalTitle, ...props }) => (
           >
             <SearchBox
               filterFunction={innerProps.filterFunction}
-              getMatchIndex={innerProps.getMatchIndex}
               onSubmit={innerProps.searchSubmit}
               options={innerProps.searchOptions}
               placeholder={props.searchBoxPlaceholder}
@@ -48,9 +41,5 @@ const PeoplePickerLayout = ({ modalTitle, ...props }) => (
     )}
   </PeoplePickerLogic>
 )
-
-PeoplePickerLayout.propTypes = {
-  modalTitle: PropTypes.string.isRequired,
-}
 
 export default PeoplePickerLayout

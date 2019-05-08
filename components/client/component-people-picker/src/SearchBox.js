@@ -44,8 +44,6 @@ class SearchBox extends React.Component {
     suggestions: [],
   }
 
-  getSuggestionValue = suggestion => this.state.value
-
   clearSearch = event => {
     this.setState(
       {
@@ -55,78 +53,19 @@ class SearchBox extends React.Component {
     )
   }
 
-  handleSearch = event => {
+  handleSearch = () => {
     this.props.onSubmit(this.state.value)
   }
 
-  handleSearchStringChange = e => {
+  onChange = e => {
     this.setState({ value: e.target.value })
-  }
-
-  onSuggestionsFetchRequested = ({ value }) => {
-    const inputValue = value.trim().toLowerCase()
-    const inputLength = inputValue.length
-    let suggestions = []
-    if (inputLength !== 0) {
-      suggestions = this.props.filterFunction(
-        this.props.options,
-        inputValue,
-        'value',
-      )
-    }
-    this.setState({
-      suggestions,
-    })
-  }
-
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    })
-  }
-
-  onSuggestionSelected = (_, { suggestion }) => {
-    this.setState(
-      {
-        value: suggestion.value,
-      },
-      () => this.handleSearch(),
-    )
-  }
-
-  onChange = (_, { newValue }) => {
-    this.setState({
-      value: newValue,
-    })
   }
 
   onKeyDown = event => {
     // key code for enter is 13
-    if (event.keyCode === 13) {
+    if (event.charCode === 13) {
       this.handleSearch()
     }
-  }
-
-  renderSuggestion = suggestion => {
-    const inputValue = this.state.value.trim().toLowerCase()
-    const matchIndex = this.props.getMatchIndex(inputValue, suggestion.value)
-    if (matchIndex < 0) {
-      // this shouldn't happen/error
-      return ''
-    }
-    const beforeMatch = suggestion.value.slice(0, matchIndex)
-    const matched = suggestion.value.slice(
-      matchIndex,
-      matchIndex + inputValue.length,
-    )
-    const afterMatch = suggestion.value.slice(matchIndex + inputValue.length)
-    return (
-      <div>
-        {beforeMatch}
-        <b>{matched}</b>
-        {afterMatch}
-      </div>
-    )
   }
 
   render() {
@@ -138,8 +77,9 @@ class SearchBox extends React.Component {
     return (
       <Flex>
         <TextField
-          onChange={this.handleSearchStringChange}
-          onKeyDown={this.onKeyDown}
+          label="Search"
+          onChange={this.onChange}
+          onKeyPress={this.onKeyDown}
           placeholder={this.props.placeholder || 'Search string here...'}
           value={this.state.value}
         />
@@ -154,10 +94,8 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
-  filterFunction: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.objectOf(personNamePropType)).isRequired,
   onSubmit: PropTypes.func.isRequired,
-  getMatchIndex: PropTypes.func.isRequired,
 }
 
 export default SearchBox
