@@ -2,8 +2,8 @@ import React from 'react'
 import 'jest-dom/extend-expect'
 import { cleanup, fireEvent, render } from 'react-testing-library'
 
-import ModalProvider from './ModalProvider'
-import { Modal, useModal, withModal } from './'
+import ModalProvider from '../src/molecules/modal/ModalProvider'
+import { Modal, useModal, withModal } from '../src/molecules/modal'
 
 const ExampleModal = () => <div>I am your modal</div>
 

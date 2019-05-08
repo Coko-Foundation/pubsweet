@@ -125,10 +125,7 @@ module.exports = {
         },
         {
           name: 'Molecules',
-          components: [
-            '../packages/ui/src/molecules/*.js',
-            '../packages/ui/src/molecules/modal/*.js',
-          ],
+          components: '../packages/ui/src/molecules/*.js',
         },
         {
           name: 'Client components',
