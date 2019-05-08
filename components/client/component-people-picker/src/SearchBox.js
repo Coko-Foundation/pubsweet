@@ -138,10 +138,9 @@ class SearchBox extends React.Component {
     return (
       <Flex>
         <TextField
-          label="Search"
           onChange={this.handleSearchStringChange}
           onKeyDown={this.onKeyDown}
-          placeholder="Search string here..."
+          placeholder="Search by name, institution or keyword"
           value={this.state.value}
         />
 
