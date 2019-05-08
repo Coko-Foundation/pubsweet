@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Flex } from '@rebass/grid'
 
-import { Icon } from './Icon'
+import Icon from './Icon'
 
 const AddIcon = props => (
   <Icon
