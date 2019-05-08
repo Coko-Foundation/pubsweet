@@ -28,11 +28,6 @@ const propsWithClickableFunctionality = {
   onKeywordClick: handleKeywordClick,
 }
 
-const propsWithDisabledKeywords = {
-  ...propsWithClickableFunctionality,
-  isKeywordClickable: false,
-}
-
 describe('PersonPod component', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -45,27 +40,5 @@ describe('PersonPod component', () => {
     )
     selectionButton.simulate('click')
     expect(handleSelectButtonClick.mock.calls).toHaveLength(1)
-  })
-
-  it('onKeywordClick handler - fired when selection button is clicked', () => {
-    const wrapper = makePersonPodWrapper(propsWithClickableFunctionality)
-    const keyword = wrapper
-      .find('button[data-test-id="clickable-keyword"]')
-      .at(0)
-    keyword.simulate('click')
-    expect(handleKeywordClick.mock.calls).toHaveLength(1)
-  })
-
-  it('passing in isKeywordClickable = false - should render keywords that are not clickable', () => {
-    const wrapper = makePersonPodWrapper(propsWithDisabledKeywords)
-    expect(
-      wrapper.find('button[data-test-id="clickable-keyword"]').exists(),
-    ).toBe(false)
-    const keyword = wrapper
-      .find('span[data-test-id="non-clickable-keyword"]')
-      .at(0)
-    expect(keyword.exists()).toBe(true)
-    keyword.simulate('click')
-    expect(handleKeywordClick.mock.calls).toHaveLength(0)
   })
 })
