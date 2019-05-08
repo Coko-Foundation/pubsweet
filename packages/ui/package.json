@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@pubsweet/ui-toolkit": "^2.1.6",
+    "@rebass/grid": "^6.0.0",
     "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
