@@ -4,39 +4,21 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Flex } from '@rebass/grid'
 
-import { Icon } from './Icon'
+import Icon from './Icon'
 
-const AddIcon = props => (
-  <Icon
-    iconName="Plus"
-    overrideName="@pubsweet-pending.PeoplePicker.PersonPod.Add"
-    {...props}
-  />
-)
+const AddIcon = props => <Icon iconName="Plus" {...props} />
 
 const StyledAddIcon = styled(AddIcon)`
   fill: ${th('colorTextSecondary')};
 `
 
-const TrashIcon = props => (
-  <Icon
-    iconName="Trash"
-    overrideName="@pubsweet-pending.PeoplePicker.PersonPod.Remove"
-    {...props}
-  />
-)
+const TrashIcon = props => <Icon iconName="Trash" {...props} />
 
 const StyledRemoveIcon = styled(TrashIcon)`
   fill: ${th('colorTextSecondary')};
 `
 
-const CheckCircleIcon = props => (
-  <Icon
-    iconName="CheckCircle"
-    overrideName="@pubsweet-pending.PeoplePicker.PersonPod.Selected"
-    {...props}
-  />
-)
+const CheckCircleIcon = props => <Icon iconName="CheckCircle" {...props} />
 
 const StyledSelectedIcon = styled(CheckCircleIcon)`
     circle {
