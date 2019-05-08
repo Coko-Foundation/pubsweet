@@ -1,5 +1,5 @@
 import { css, withTheme } from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th } from './themeHelper'
 
 const sizes = {
   mobileUp: th('breakpoints.0'),
