@@ -8,7 +8,9 @@ const modalPosition = () => css`
   position: fixed;
 `
 
-const ModalRoot = styled.div`
+const ModalRoot = styled.div.attrs(() => ({
+  'data-test-id': 'modal-overlay',
+}))`
   align-items: center;
   background-color: ${({ overlayColor }) =>
     overlayColor || 'rgba(0, 0, 0, 0.8)'};
