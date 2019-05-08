@@ -26,11 +26,6 @@ const TwoColumnLayout = ({
 
 TwoColumnLayout.propTypes = {
   /**
-   * Elements to render in the layout.
-   * If the items can change dynamically each element should have a `key` prop.
-   */
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  /**
    * Set to false to disable bottom spacing on items.
    */
   bottomSpacing: PropTypes.bool,
