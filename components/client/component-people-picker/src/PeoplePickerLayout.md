@@ -2,7 +2,7 @@ Please note: the PeoplePicker is a combination of the `PeoplePickerLayout` (how 
 
 The People Picker Layout is responsible for rendering the `PeoplePickerBody`, `PeoplePickerButtons` & `SearchBox` in eLife's chosen order - search at the top, then grid, then buttons below.
 
-**Search box behaviour within the People Picker**
+### Search box behaviour within the People Picker
 
 Upon opening the People Picker Modal, the search box is empty.
 
@@ -14,7 +14,16 @@ Searching for an empty string returns all person pods.
 
 Currently the input won't generate a dropdown list of suggestions (but will at some point in the future).
 
-I CHANGED!
+### Overriding the Search box:
+
+The `PeoplePicker` supports overriding the search box with an optional custom component. A working example of this can be found in the source code, assigned to the variable `InputOverride`. The injected
+component is always rendered when present, and is passed the following props:
+
+- `onClearHandler`: a function that is called to clear the search input
+- `onSearchHandler`: a function that executes the search
+- `onChange` & `onKeyDown`: Updates some autocomplete stuff, should be attached to whatever input field is in the search box.
+- `placeholder`: Placeholder text, defualts to _'Search string here...'_
+- `value`: The string value of the search box
 
 ```js
 const InputOverride = ({
@@ -80,7 +89,9 @@ const getPeople = searchValue => {
 
 initialState = { open: false }
 ;<PeoplePickerLayout
-  inputOverrideComponent={InputOverride}
+  inputOverrideComponent={
+    undefined /* InputOverride (if you want to override the input) */
+  }
   initialSelection={[people[1]]}
   minSelection={1}
   maxSelection={3}

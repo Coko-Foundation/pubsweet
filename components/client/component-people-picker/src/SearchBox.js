@@ -44,7 +44,7 @@ class SearchBox extends React.Component {
     return (
       <Flex>
         {inputOverrideComponent ? (
-          React.cloneElement(inputOverrideComponent, {
+          inputOverrideComponent({
             onClearHandler: this.clearSearch,
             onSearchHandler: this.handleSearch,
             onChange: this.onChange,
