@@ -5,7 +5,8 @@ import { Button, TextField } from '../atoms'
 
 const InputContainer = styled.div`
   display: flex;
-
+  margin-bottom: ${props =>
+    props.inline ? '0' : `calc(${props.theme.gridUnit} * 3)`};
   & > div {
     flex: 1;
   }
@@ -46,7 +47,7 @@ const InputWithAddons = ({ addons, inputProps, ...props }) => (
     </div>
     {addons.map((itemConfig, index) => (
       <AddOnButton
-        key={itemConfig.buttonProps.key || index}
+        key={(itemConfig.buttonProps && itemConfig.buttonProps.key) || index}
         {...itemConfig.buttonProps}
       >
         {' '}
