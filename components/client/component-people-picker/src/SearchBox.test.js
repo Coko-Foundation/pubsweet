@@ -50,7 +50,7 @@ describe('SearchBox component tests', () => {
   })
 
   it('has search icon', () => {
-    expect(wrapper.find('[data-test-id="search-icon"]')).toHaveLength(1)
+    expect(wrapper.find('Icon')).toHaveLength(1)
   })
 
   it.skip.each([[1, 'option'], [2, 'f'], [3, 'xyz'], [4, '']])(

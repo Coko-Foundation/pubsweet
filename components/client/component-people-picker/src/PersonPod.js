@@ -2,10 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { Action } from '@pubsweet/ui'
+import { Action, Icon } from '@pubsweet/ui'
 import { Flex, Box } from '@rebass/grid'
-import Icon from './Icon'
-import ButtonAsIconWrapper from './ButtonAsIconWrapper'
 
 import {
   personNamePropType,
@@ -16,9 +14,7 @@ import {
 import PodContainer from './PodContainer'
 import PersonInfoModal from './PersonInfoModal'
 
-const InfoIcon = props => (
-  <Icon iconName="Info" overrideName="info" {...props} />
-)
+const InfoIcon = props => <Icon {...props}>info</Icon>
 
 const StyledInfoIcon = styled(InfoIcon)`
   margin-right: 6px;
@@ -36,6 +32,14 @@ const SmallAction = styled(Action)`
 const CollapsibleBox = styled(Box)`
   width: 100%;
   min-width: 0;
+`
+const ButtonAsIconWrapper = styled.button.attrs({
+  type: 'button',
+})`
+  background-color: transparent;
+  border: none;
+  line-height: 0;
+  padding: 0;
 `
 
 class PersonPod extends React.Component {

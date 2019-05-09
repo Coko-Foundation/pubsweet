@@ -3,38 +3,38 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Flex } from '@rebass/grid'
 import { th } from '@pubsweet/ui-toolkit'
-import { Button, TextField } from '@pubsweet/ui'
-import Icon from './Icon'
-import CrossIconButton from './CrossIconButton'
+import { Button, TextField, Icon } from '@pubsweet/ui'
 import { personNamePropType } from './types'
-
-const SearchIcon = props => (
-  <Icon
-    iconName="Search"
-    overrideName="@pubsweet-pending.PeoplePicker.Search"
-    {...props}
-  />
-)
 
 const StyledSearchButton = styled(Button).attrs({
   primary: true,
 })`
   border-radius: 0 ${th('borderRadius')} ${th('borderRadius')} 0;
   fill: ${th('colorTextReverse')};
-  line-height: 0;
-  min-width: 0;
   width: ${th('space.5')};
   padding: ${th('space.1')};
   margin: 0;
 `
 
-const StyledClearButton = styled(CrossIconButton)`
+const StyledClearButton = styled(Button)`
   fill: ${th('colorTextSecondary')};
   width: ${th('space.5')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-left: ${th('colorBackground')};
+  border-right: transparent;
+  border-radius: 0px;
+  padding: 0;
   &:focus {
     border-left: ${th('colorBorder')};
+  }
+`
+
+const StyledSearchInput = styled(TextField)`
+  margin-bottom: 0;
+  input {
+    border-right: transparent;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 `
 
@@ -76,17 +76,19 @@ class SearchBox extends React.Component {
      */
     return (
       <Flex>
-        <TextField
-          label="Search"
+        <StyledSearchInput
+          aria-label="Search"
           onChange={this.onChange}
           onKeyPress={this.onKeyDown}
           placeholder={this.props.placeholder || 'Search string here...'}
           value={this.state.value}
         />
 
-        <StyledClearButton onClick={this.clearSearch} />
+        <StyledClearButton onClick={this.clearSearch}>
+          <Icon>X</Icon>
+        </StyledClearButton>
         <StyledSearchButton onClick={this.handleSearch}>
-          <SearchIcon />
+          <Icon>search</Icon>
         </StyledSearchButton>
       </Flex>
     )

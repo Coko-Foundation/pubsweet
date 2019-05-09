@@ -2,23 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
+import { Icon } from '@pubsweet/ui'
 import { Flex } from '@rebass/grid'
 
-import Icon from './Icon'
-
-const AddIcon = props => <Icon iconName="Plus" {...props} />
+const AddIcon = props => <Icon {...props}>plus</Icon>
 
 const StyledAddIcon = styled(AddIcon)`
   fill: ${th('colorTextSecondary')};
 `
 
-const TrashIcon = props => <Icon iconName="Trash" {...props} />
+const TrashIcon = props => <Icon {...props}>trash</Icon>
 
 const StyledRemoveIcon = styled(TrashIcon)`
   fill: ${th('colorTextSecondary')};
 `
 
-const CheckCircleIcon = props => <Icon iconName="CheckCircle" {...props} />
+const CheckCircleIcon = props => <Icon {...props}>check-circle</Icon>
 
 const StyledSelectedIcon = styled(CheckCircleIcon)`
     circle {

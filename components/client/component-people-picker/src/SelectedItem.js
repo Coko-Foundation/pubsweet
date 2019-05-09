@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
+import { Icon } from '@pubsweet/ui'
 
-import RemoveButton from './CrossIconButton'
+const RemoveButton = () => <Icon>X</Icon>
 
 const StyledRemoveButton = styled(RemoveButton)`
   fill: ${th('colorTextReverse')};
