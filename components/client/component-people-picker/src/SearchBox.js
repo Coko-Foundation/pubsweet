@@ -40,27 +40,39 @@ class SearchBox extends React.Component {
      * onSuggestionsFetchRequested should be reimplemented
      * once we know how the dropdown should behave
      */
+    const { inputOverrideComponent } = this.props
     return (
       <Flex>
-        <InputWithAddons
-          addons={[
-            {
-              icon: <Icon>X</Icon>,
-              buttonProps: { onClick: this.clearSearch },
-            },
-            {
-              icon: <Icon>search</Icon>,
-              buttonProps: { onClick: this.handleSearch, primary: true },
-            },
-          ]}
-          inputProps={{
-            'aria-label': 'Search',
+        {inputOverrideComponent ? (
+          React.cloneElement(inputOverrideComponent, {
+            onClearHandler: this.clearSearch,
+            onSearchHandler: this.handleSearch,
             onChange: this.onChange,
             onKeyPress: this.onKeyDown,
             placeholder: this.props.placeholder || 'Search string here...',
             value: this.state.value,
-          }}
-        />
+          })
+        ) : (
+          <InputWithAddons
+            addons={[
+              {
+                icon: <Icon>X</Icon>,
+                buttonProps: { onClick: this.clearSearch },
+              },
+              {
+                icon: <Icon>search</Icon>,
+                buttonProps: { onClick: this.handleSearch, primary: true },
+              },
+            ]}
+            inputProps={{
+              'aria-label': 'Search',
+              onChange: this.onChange,
+              onKeyPress: this.onKeyDown,
+              placeholder: this.props.placeholder || 'Search string here...',
+              value: this.state.value,
+            }}
+          />
+        )}
       </Flex>
     )
   }

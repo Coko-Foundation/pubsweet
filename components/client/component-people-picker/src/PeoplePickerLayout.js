@@ -13,7 +13,11 @@ const MainColumn = styled(Box).attrs({ mx: [0, 0, 0, '16.666%'] })`
   position: relative;
 `
 
-const PeoplePickerLayout = ({ modalTitle, ...props }) => (
+const PeoplePickerLayout = ({
+  modalTitle,
+  inputOverrideComponent,
+  ...props
+}) => (
   <PeoplePickerLogic {...props}>
     {innerProps => (
       <React.Fragment>
@@ -25,6 +29,7 @@ const PeoplePickerLayout = ({ modalTitle, ...props }) => (
           >
             <SearchBox
               filterFunction={innerProps.filterFunction}
+              inputOverrideComponent={inputOverrideComponent}
               onSubmit={innerProps.searchSubmit}
               options={innerProps.searchOptions}
               placeholder={props.searchBoxPlaceholder}

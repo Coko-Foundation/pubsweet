@@ -14,7 +14,28 @@ Searching for an empty string returns all person pods.
 
 Currently the input won't generate a dropdown list of suggestions (but will at some point in the future).
 
+I CHANGED!
+
 ```js
+const InputOverride = ({
+  onClearHandler,
+  onSearchHandler,
+  onChange,
+  onKeyPress,
+  placeholder,
+  value,
+}) => (
+  <div>
+    <input
+      onChange={onChange}
+      onKeyPress={onKeyPress}
+      placeholder={placeholder}
+      value={value}
+    />
+    <button onClick={onSearchHandler}>search</button>
+    <button onClick={onClearHandler}>clear</button>
+  </div>
+)
 const PeoplePickerBody = require('./PeoplePickerBody').default
 const PeoplePickerButtons = require('./PeoplePickerButtons').default
 const people = [
@@ -59,6 +80,7 @@ const getPeople = searchValue => {
 
 initialState = { open: false }
 ;<PeoplePickerLayout
+  inputOverrideComponent={InputOverride}
   initialSelection={[people[1]]}
   minSelection={1}
   maxSelection={3}
