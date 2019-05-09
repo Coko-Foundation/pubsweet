@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/job-xsweet",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "PubSweet job component for running XSweet",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "express-fileupload": "v1.1.1-alpha.2",
     "passport": "^0.4.0",
-    "pubsweet-server": "^13.4.0",
+    "pubsweet-server": "^13.4.1",
     "tmp-promise": "^1.0.5"
   },
   "publishConfig": {

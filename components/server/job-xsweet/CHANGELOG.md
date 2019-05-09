@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.1.4...@pubsweet/job-xsweet@1.2.0) (2019-04-25)
+
+
+### Features
+
+* **job-xsweet:** include base64 images in html ([65ceef6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/65ceef6))
+
+
+
+
+
 ## [1.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.1.3...@pubsweet/job-xsweet@1.1.4) (2019-04-18)
 
 **Note:** Version bump only for package @pubsweet/job-xsweet
