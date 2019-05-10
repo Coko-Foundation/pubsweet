@@ -61,7 +61,11 @@ class SearchBox extends React.Component {
                 buttonProps: { onClick: this.clearSearch },
               },
               {
-                icon: <Icon data-test-id="search-icon">search</Icon>,
+                icon: (
+                  <Icon data-test-id="search-icon" reverse>
+                    search
+                  </Icon>
+                ),
                 buttonProps: { onClick: this.handleSearch, primary: true },
               },
             ]}

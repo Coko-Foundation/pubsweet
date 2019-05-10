@@ -21,6 +21,7 @@ const StyledTextField = styled(TextField)`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: none;
+    font-family: 'Noto Sans';
   }
 `
 

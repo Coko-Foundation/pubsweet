@@ -6,19 +6,24 @@ import { Icon } from '@pubsweet/ui'
 const RemoveButton = ({ onClick }) => <Icon onClick={onClick}>X</Icon>
 
 const StyledRemoveButton = styled(RemoveButton)`
-  fill: ${th('colorTextReverse')};
   margin-left: ${th('space.1')};
+
+  & > svg {
+    stroke: ${th('colorTextReverse')};
+  }
 `
 
 const Root = styled.div`
   border-radius: ${th('borderRadius')};
   background-color: ${th('colorPrimary')};
   line-height: ${th('lineHeightBase')};
-  padding: ${th('space.1')} ${th('space.2')} ${th('space.1')} ${th('space.2')}
+  padding: ${th('gridUnit')} ${th('gridUnit')} ${th('gridUnit')}
+    calc(${th('gridUnit')} * 2);
   color: ${th('colorTextReverse')};
   display: inline-flex;
   align-items: center;
   margin-bottom: 12px;
+  font-family: 'Noto Sans';
 `
 
 const SelectedItem = ({ label, onCloseClick }) => (
