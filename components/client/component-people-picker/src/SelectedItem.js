@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Icon } from '@pubsweet/ui'
 
-const RemoveButton = ({ onClick }) => <Icon onClick={onClick}>X</Icon>
+const RemoveButton = props => <Icon {...props}>X</Icon>
 
 const StyledRemoveButton = styled(RemoveButton)`
   margin-left: ${th('space.1')};
