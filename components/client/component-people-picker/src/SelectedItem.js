@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Icon } from '@pubsweet/ui'
 
-const RemoveButton = () => <Icon>X</Icon>
+const RemoveButton = props => <Icon {...props}>X</Icon>
 
 const StyledRemoveButton = styled(RemoveButton)`
   fill: ${th('colorTextReverse')};
@@ -22,8 +22,8 @@ const Root = styled.div`
 `
 
 const SelectedItem = ({ label, onCloseClick }) => (
-  <Root onClick={onCloseClick}>
-    {label} <StyledRemoveButton />
+  <Root>
+    {label} <StyledRemoveButton onClick={onCloseClick} />
   </Root>
 )
 
