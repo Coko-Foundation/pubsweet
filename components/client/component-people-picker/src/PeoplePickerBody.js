@@ -29,7 +29,9 @@ const SelectedItems = ({ selection, onCloseClick }) => (
       <Box key={person.id} mr={1}>
         <SelectedItem
           label={person.name}
-          onCloseClick={() => onCloseClick(person)}
+          onCloseClick={() => {
+            onCloseClick(person)
+          }}
         />
       </Box>
     ))}

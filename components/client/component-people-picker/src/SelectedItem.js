@@ -22,8 +22,8 @@ const Root = styled.div`
 `
 
 const SelectedItem = ({ label, onCloseClick }) => (
-  <Root>
-    {label} <StyledRemoveButton onClick={onCloseClick} />
+  <Root onClick={onCloseClick}>
+    {label} <StyledRemoveButton />
   </Root>
 )
 
