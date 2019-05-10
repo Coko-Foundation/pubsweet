@@ -32,6 +32,8 @@ const StyledButton = styled.button`
     height: 100%;
     width: ${th('space.5')};
     border: none;
+    border-top-right-radius: ${th('borderRadius')};
+    border-bottom-right-radius: ${th('borderRadius')};
 
     &:hover ${StyledAddIcon}, &:hover ${StyledRemoveIcon} {
         fill: #666666;
@@ -50,7 +52,8 @@ const StyledPod = styled(Flex)`
   color: ${th('colorText')};
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
-  padding: 0 calc(${th('gridUnit')}) 0 calc(${th('gridUnit')});
+  padding: 0 0 0 calc(${th('gridUnit')});
+  height: calc(${th('gridUnit')} * 15);
 `
 
 // This is needed for legacy safari support

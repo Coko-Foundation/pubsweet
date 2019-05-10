@@ -5,6 +5,7 @@ import { Button, TextField } from '../atoms'
 
 const InputContainer = styled.div`
   display: flex;
+  flex: 1;
   margin-bottom: ${props =>
     props.inline ? '0' : `calc(${props.theme.gridUnit} * 3)`};
   & > div {
