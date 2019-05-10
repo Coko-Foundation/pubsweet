@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { Action, Icon } from '@pubsweet/ui'
-import { Flex, Box } from '@rebass/grid'
+import { Action } from '@pubsweet/ui'
 
 import {
   personNamePropType,
@@ -12,16 +11,6 @@ import {
   focusesPropType,
 } from './types'
 import PodContainer from './PodContainer'
-import PersonInfoModal from './PersonInfoModal'
-
-const InfoIcon = props => <Icon {...props}>info</Icon>
-
-const StyledInfoIcon = styled(InfoIcon)`
-  margin-right: 6px;
-  height: 18px;
-  width: 18px;
-  fill: ${th('colorPrimary')};
-`
 
 const SmallAction = styled(Action)`
   font-size: ${th('fontSizeBaseSmall')};
@@ -29,19 +18,10 @@ const SmallAction = styled(Action)`
   margin: 3px 0;
 `
 
-const CollapsibleBox = styled(Box)`
+const CollapsibleBox = styled.div`
   width: 100%;
   min-width: 0;
 `
-const ButtonAsIconWrapper = styled.button.attrs({
-  type: 'button',
-})`
-  background-color: transparent;
-  border: none;
-  line-height: 0;
-  padding: 0;
-`
-
 class PersonPod extends React.Component {
   constructor(props) {
     super(props)
@@ -69,18 +49,15 @@ class PersonPod extends React.Component {
       isSelectButtonClickable = true,
       togglePersonSelection,
       selectButtonType,
-      maxSelection,
       name,
       institution = '',
       focuses,
       expertises,
       isKeywordClickable,
-      isSelected,
       onKeywordClick = null,
-      isStatusShown = false,
-      status = '',
     } = this.props
 
+    // eslint-disable-next-line no-unused-vars
     let keywordList
     const keywords = [].concat(focuses).concat(expertises)
     if (isKeywordClickable) {
@@ -101,25 +78,8 @@ class PersonPod extends React.Component {
       ))
     }
 
-    const separatedKeywords = keywordList.reduce(
-      (accu, elem) => (accu === null ? [elem] : [...accu, ', ', elem]),
-      null,
-    )
-
     return (
       <React.Fragment>
-        <PersonInfoModal
-          expertises={expertises}
-          focuses={focuses}
-          institution={institution}
-          isSelectButtonClickable={isSelectButtonClickable}
-          isSelected={isSelected}
-          maxSelection={maxSelection}
-          name={name}
-          onAccept={this.acceptModal}
-          onCancel={this.cancelModal}
-          open={this.state.isModalOpen}
-        />
         <PodContainer
           isSelectButtonClickable={isSelectButtonClickable}
           selectButtonType={selectButtonType}
@@ -128,17 +88,6 @@ class PersonPod extends React.Component {
           <CollapsibleBox m={2}>
             <p>{name}</p>
             {institution && <p>{institution}</p>}
-            {!institution && <Box mb={3} />}
-            <Flex alignItems="center">
-              <ButtonAsIconWrapper
-                data-test-id="people-picker-info"
-                onClick={this.openModal}
-              >
-                <StyledInfoIcon />
-              </ButtonAsIconWrapper>
-              <p>{separatedKeywords}</p>
-            </Flex>
-            {isStatusShown && <p>{status}</p>}
           </CollapsibleBox>
         </PodContainer>
       </React.Fragment>

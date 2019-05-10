@@ -50,8 +50,7 @@ const StyledPod = styled(Flex)`
   color: ${th('colorText')};
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
-  min-width: 312px;
-  height: 120px;
+  padding: 0 calc(${th('gridUnit')}) 0 calc(${th('gridUnit')});
 `
 
 // This is needed for legacy safari support
