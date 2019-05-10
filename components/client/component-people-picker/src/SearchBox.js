@@ -27,9 +27,10 @@ class SearchBox extends React.Component {
     this.setState({ value: e.target.value })
   }
 
-  onKeyDown = event => {
+  onKeyDown = e => {
     // key code for enter is 13
-    if (event.charCode === 13) {
+    // @petereast - KeyboardEvent.charCode is depricated!! https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+    if (e.key === 'Enter') {
       this.handleSearch()
     }
   }
@@ -60,14 +61,15 @@ class SearchBox extends React.Component {
                 buttonProps: { onClick: this.clearSearch },
               },
               {
-                icon: <Icon>search</Icon>,
+                icon: <Icon data-test-id="search-icon">search</Icon>,
                 buttonProps: { onClick: this.handleSearch, primary: true },
               },
             ]}
             inputProps={{
               'aria-label': 'Search',
+              'data-test-id': 'search-input',
               onChange: this.onChange,
-              onKeyPress: this.onKeyDown,
+              onKeyDown: this.onKeyDown,
               placeholder: this.props.placeholder || 'Search string here...',
               value: this.state.value,
             }}

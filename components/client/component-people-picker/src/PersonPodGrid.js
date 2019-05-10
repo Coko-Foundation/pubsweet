@@ -39,6 +39,7 @@ class PersonPodGrid extends React.Component {
       <TwoColumnLayout>
         {people.map(person => (
           <PersonPod
+            data-test-id="person-pod"
             expertises={person.expertises}
             focuses={person.focuses}
             institution={person.aff}

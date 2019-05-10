@@ -3,6 +3,7 @@ import { mount } from 'enzyme'
 import TestThemeProvider from '@pubsweet/ui/test/setup/theme'
 import PeoplePickerLogic from './PeoplePickerLogic'
 import PeoplePickerBody from './PeoplePickerBody'
+import PersonPod from './PersonPod'
 import SearchBox from './SearchBox'
 
 jest.useFakeTimers()
@@ -120,6 +121,7 @@ describe('PeoplePicker', () => {
       .find('PeoplePickerLogic')
       .instance()
       .handleSubmit()
+
     expect(onSubmit).toHaveBeenCalled()
   })
 
@@ -131,8 +133,9 @@ describe('PeoplePicker', () => {
 
     wrapper
       .find('SelectedItem')
-      .find('svg')
+      .find('Icon')
       .simulate('click')
+
     expectSelectionLength(wrapper, 0)
   })
 
@@ -161,19 +164,21 @@ describe('PeoplePicker', () => {
     )
 
     function searchFor(inputValue) {
-      const input = searchWrapper.find('input')
+      const input = searchWrapper.find('input[data-test-id="search-input"]')
       input.simulate('change', { target: { value: inputValue } })
-      input.simulate('keyDown', { keyCode: 13, key: 'Enter' })
+      input.simulate('keyDown', { charCode: 13, key: 'Enter' })
+      jest.runAllTimers()
     }
 
     it('shows all people pods on empty search input', () => {
       searchFor('')
-      expect(searchWrapper.find('PersonPod')).toHaveLength(people.length)
+      expect(searchWrapper.find(PersonPod)).toHaveLength(people.length)
     })
 
     it('filters the people pods based on search input, single match', () => {
       searchFor('annie')
-      expect(searchWrapper.find('PersonPod')).toHaveLength(1)
+      expect(searchWrapper.find(PersonPod)).toHaveLength(1)
+
       expect(
         searchWrapper
           .find('PersonPod')
@@ -212,13 +217,17 @@ describe('PeoplePicker', () => {
     it('filters the people pods when you click on the search icon', () => {
       const input = searchWrapper.find('input')
       input.simulate('change', { target: { value: 'annie' } })
-      searchWrapper.find('[data-test-id="search-icon"]').simulate('click')
+      searchWrapper
+        .find('button > [data-test-id="search-icon"]')
+        .simulate('click')
       expect(searchWrapper.find('PersonPod')).toHaveLength(1)
     })
 
     it('shows all person pods again after clicking the x icon', () => {
       searchFor('annie')
-      searchWrapper.find('[data-test-id="cross-icon"]').simulate('click')
+      searchWrapper
+        .find('button > [data-test-id="cross-icon"]')
+        .simulate('click')
       expect(searchWrapper.find('PersonPod')).toHaveLength(people.length)
     })
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Box, Flex } from '@rebass/grid'
 
@@ -18,33 +18,35 @@ const PeoplePickerLayout = ({
   inputOverrideComponent,
   ...props
 }) => (
-  <PeoplePickerLogic {...props}>
-    {innerProps => (
-      <React.Fragment>
-        <Flex mx={-2}>
-          <Box
-            mx={[0, 0, 0, '16.666%']}
-            px={[2, 2, 2, 1]}
-            width={[1, 1, 1 / 2, 0.33]}
-          >
-            <SearchBox
-              filterFunction={innerProps.filterFunction}
-              inputOverrideComponent={inputOverrideComponent}
-              onSubmit={innerProps.searchSubmit}
-              options={innerProps.searchOptions}
-              placeholder={props.searchBoxPlaceholder}
-            />
-          </Box>
-        </Flex>
-        <Flex data-test-id="people-picker-body">
-          <MainColumn mb={7}>
-            <PeoplePickerBody {...innerProps} />
-          </MainColumn>
-        </Flex>
-        <PeoplePickerButtons {...innerProps} />
-      </React.Fragment>
-    )}
-  </PeoplePickerLogic>
+  <Fragment>
+    <PeoplePickerLogic {...props}>
+      {innerProps => (
+        <React.Fragment>
+          <Flex mx={-2}>
+            <Box
+              mx={[0, 0, 0, '16.666%']}
+              px={[2, 2, 2, 1]}
+              width={[1, 1, 1 / 2, 0.33]}
+            >
+              <SearchBox
+                filterFunction={innerProps.filterFunction}
+                inputOverrideComponent={inputOverrideComponent}
+                onSubmit={innerProps.searchSubmit}
+                options={innerProps.searchOptions}
+                placeholder={props.searchBoxPlaceholder}
+              />
+            </Box>
+          </Flex>
+          <Flex data-test-id="people-picker-body">
+            <MainColumn mb={7}>
+              <PeoplePickerBody {...innerProps} />
+            </MainColumn>
+          </Flex>
+          <PeoplePickerButtons {...innerProps} />
+        </React.Fragment>
+      )}
+    </PeoplePickerLogic>
+  </Fragment>
 )
 
 export default PeoplePickerLayout

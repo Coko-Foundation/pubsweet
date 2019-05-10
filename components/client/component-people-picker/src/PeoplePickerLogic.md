@@ -63,11 +63,13 @@ const people = [
 </PeoplePickerLogic>
 ```
 
-### Buttons below body
+### Buttons below body with SearchBox
 
 ```js
 const PeoplePickerBody = require('./PeoplePickerBody').default
 const PeoplePickerButtons = require('./PeoplePickerButtons').default
+const SearchBox = require('./SearchBox').default
+
 const people = [
   {
     id: 1,
@@ -112,11 +114,17 @@ const people = [
   onCancel={() => console.log('cancelled')}
   people={people}
 >
-  {props => (
+  {innerProps => (
     <React.Fragment>
-      <PeoplePickerBody {...props} />
+      <SearchBox
+        filterFunction={innerProps.filterFunction}
+        getMatchIndex={innerProps.getMatchIndex}
+        onSubmit={innerProps.searchSubmit}
+        options={innerProps.searchOptions}
+      />
+      <PeoplePickerBody {...innerProps} />
       <hr />
-      <PeoplePickerButtons {...props} />
+      <PeoplePickerButtons {...innerProps} />
     </React.Fragment>
   )}
 </PeoplePickerLogic>
