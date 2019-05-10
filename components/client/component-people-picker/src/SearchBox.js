@@ -56,7 +56,7 @@ class SearchBox extends React.Component {
           <InputWithAddons
             addons={[
               {
-                icon: <Icon>X</Icon>,
+                icon: <Icon data-test-id="cross-icon">X</Icon>,
                 buttonProps: { onClick: this.clearSearch },
               },
               {
