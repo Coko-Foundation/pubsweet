@@ -2,38 +2,42 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th, media } from '@pubsweet/ui-toolkit'
-import { Box, Flex } from '@rebass/grid'
 import SelectedItem from './SelectedItem'
 
 import { peoplePropType } from './types'
 import PersonPodGrid from './PersonPodGrid'
 
-const SelectedItemsGrid = styled(Flex)`
+const SelectedItemsGrid = styled.div`
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
 `
 
-const SelectedContainer = styled(Flex).attrs({
-  mb: [3, 3, 2, 2],
-})`
+const SelectedContainer = styled.div`
+  display: flex;
   flex-direction: column;
+  margin-bottom: ${th('gridUnit')};
   ${media.tabletPortraitUp`
     justify-content: space-between;
     flex-direction: row;
   `};
 `
 
+const StyledBox = styled.div`
+  margin-right: ${th('gridUnit')};
+`
+
 const SelectedItems = ({ selection, onCloseClick }) => (
   <SelectedItemsGrid>
     {selection.map(person => (
-      <Box key={person.id} mr={1}>
+      <StyledBox key={person.id}>
         <SelectedItem
           label={person.name}
           onCloseClick={() => {
             onCloseClick(person)
           }}
         />
-      </Box>
+      </StyledBox>
     ))}
   </SelectedItemsGrid>
 )

@@ -1,14 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Box } from '@rebass/grid'
+import styled from 'styled-components'
+import { th } from '@pubsweet/ui-toolkit'
 import { Button } from '@pubsweet/ui'
 
+const FlexWrapper = styled.div`
+  display: flex;
+`
+
+const CancelButton = styled(Button)`
+  margin-right: calc(${th('gridUnit')} * 3);
+`
+
 const PeoplePickerButtons = ({ isValid = false, onCancel, onSubmit }) => (
-  <Flex>
-    <Box mr={3}>
-      <Button onClick={onCancel}>Cancel</Button>
-    </Box>
-    <Box>
+  <FlexWrapper>
+    <CancelButton onClick={onCancel}>Cancel</CancelButton>
+    <div>
       <Button
         data-test-id="people-picker-add"
         disabled={!isValid}
@@ -17,8 +24,8 @@ const PeoplePickerButtons = ({ isValid = false, onCancel, onSubmit }) => (
       >
         Add
       </Button>
-    </Box>
-  </Flex>
+    </div>
+  </FlexWrapper>
 )
 
 PeoplePickerButtons.propTypes = {
