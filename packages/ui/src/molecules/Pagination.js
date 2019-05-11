@@ -1,20 +1,27 @@
 import React, { useState, Fragment } from 'react'
-import { th, override } from '@pubsweet/ui-toolkit'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { th, override } from '@pubsweet/ui-toolkit'
 
-import { Icon, H6 } from '../'
+import { Icon, H6 } from '..'
 
-export const usePagination = (items = []) => {
-  const [page, setPage] = useState(0)
-  const [itemsPerPage, setItemsPerPage] = useState(5)
+export const usePagination = (items = [], perPage = 10, startPage = 0) => {
+  const getLastPage = () => {
+    const floor = Math.floor(items.length / perPage)
+    return items.length % perPage ? floor : floor - 1
+  }
+
+  const [page, setPage] = useState(
+    Math.min(Math.max(0, startPage), getLastPage()),
+  )
+  const [itemsPerPage, setItemsPerPage] = useState(perPage)
 
   const toFirst = () => {
     setPage(0)
   }
 
   const toLast = () => {
-    const floor = Math.floor(items.length / itemsPerPage)
-    setPage(items.length % itemsPerPage ? floor : floor - 1)
+    setPage(getLastPage())
   }
 
   const changeItemsPerPage = e => {
@@ -47,13 +54,18 @@ export const usePagination = (items = []) => {
   }
 }
 
-const Pagination = ({ items = [], children }) => {
-  const controls = usePagination(items)
+const Pagination = ({ items = [], startPage, itemsPerPage, children }) => {
+  const { paginatedItems, ...controls } = usePagination(
+    items,
+    itemsPerPage,
+    startPage,
+  )
 
   const ui = (
     <Root>
       <StyledH6>Showing</StyledH6>
       <TextInput
+        data-test-id="pagination-input"
         onChange={controls.changeItemsPerPage}
         value={controls.itemsPerPage}
       />
@@ -68,7 +80,9 @@ const Pagination = ({ items = [], children }) => {
         </Fragment>
       )}
 
-      <StyledH6>{`${controls.page * controls.itemsPerPage + 1} to ${
+      <StyledH6 data-test-id="pagination-label">{`${controls.page *
+        controls.itemsPerPage +
+        1} to ${
         controls.hasMore
           ? controls.itemsPerPage * (controls.page + 1)
           : controls.maxItems
@@ -86,10 +100,24 @@ const Pagination = ({ items = [], children }) => {
     </Root>
   )
 
-  return children({ ui, paginatedItems: controls.paginatedItems, controls })
+  return children({ ui, paginatedItems, controls })
 }
 
 Pagination.usePagination = usePagination
+
+Pagination.defaultProps = {
+  startPage: 0,
+  itemsPerPage: 10,
+}
+
+Pagination.propTypes = {
+  /** Items to paginate. */
+  items: PropTypes.arrayOf(PropTypes.any).isRequired,
+  /** The starting page of the pagination. Will be set to first or last possible page if given out of bounds values. */
+  startPage: PropTypes.number,
+  /** How many items should a page have. */
+  itemsPerPage: PropTypes.number,
+}
 
 // @component
 export default Pagination
