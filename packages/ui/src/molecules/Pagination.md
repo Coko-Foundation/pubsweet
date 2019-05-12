@@ -1,4 +1,4 @@
-Pagination UI widget and the pagination results are not coupled.
+### Pagination UI widget and the pagination results are not coupled.
 
 ```js
 const items = Array.from({ length: 27 }, (v, i) => `item ${i + 1}`)
@@ -18,7 +18,7 @@ const items = Array.from({ length: 27 }, (v, i) => `item ${i + 1}`)
 </Pagination>
 ```
 
-Usage with your own custom pagination UI (render props method).
+### Usage with your own custom pagination UI (render props method).
 
 ```js
 const items = Array.from({ length: 27 }, (v, i) => `item ${i + 1}`)
@@ -66,7 +66,7 @@ const ShowcaseComponent = () => {
 ;<ShowcaseComponent />
 ```
 
-Exposed controls to implement custom pagination UI widget.
+### Exposed controls to implement custom pagination UI widget.
 
 ```js
 const items = Array.from({ length: 27 }, (v, i) => `item ${i + 1}`)
