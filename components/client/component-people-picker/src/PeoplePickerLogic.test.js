@@ -133,7 +133,7 @@ describe('PeoplePicker', () => {
 
     wrapper
       .find('SelectedItem')
-      .find('Icon')
+      .find('RemoveButton')
       .simulate('click')
 
     expectSelectionLength(wrapper, 0)

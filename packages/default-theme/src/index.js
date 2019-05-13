@@ -48,6 +48,7 @@ export default {
 
   /* Spacing */
   gridUnit: '8px',
+  space: ['8px', '16px', '24px', '32px', '40px'],
 
   /* Border */
   borderRadius: '5px', // changed, needs check by designers
@@ -61,4 +62,7 @@ export default {
   transitionDuration: '.2s',
   transitionTimingFunction: 'ease',
   transitionDelay: '0',
+
+  /* Breakpoints */
+  breakpoints: [480, 768, 1000, 1272],
 }

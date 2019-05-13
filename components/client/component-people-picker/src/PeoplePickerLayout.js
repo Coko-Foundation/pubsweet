@@ -1,16 +1,43 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { Box, Flex } from '@rebass/grid'
+import { th, media } from '@pubsweet/ui-toolkit'
 
 import PeoplePickerLogic from './PeoplePickerLogic'
 import PeoplePickerButtons from './PeoplePickerButtons'
 import PeoplePickerBody from './PeoplePickerBody'
 import SearchBox from './SearchBox'
 
-const MainColumn = styled(Box).attrs({ mx: [0, 0, 0, '16.666%'] })`
+const MainColumn = styled.div`
+  box-sizing: border-box;
   flex: 1 1 100%;
   min-width: 0;
   position: relative;
+  padding-left: ${th('space.2')};
+  padding-right: ${th('space.2')};
+  width: 100%;
+  ${media.tabletPortraitUp`
+    width: 50%;
+  `};
+  ${media.tabletLandscapeUp`
+    width: 33%;
+    margin-left: 16.666%;
+    margin-right: 16.666%;
+    padding-left: ${th('space.1')};
+    padding-right: ${th('space.1')};
+  `};
+`
+
+const SearchBoxContainer = styled('div')`
+  box-sizing: border-box;
+  display: flex;
+  margin-left: calc(-${th('space.2')});
+  margin-right: calc(-${th('space.2')});
+`
+
+const BodyContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  margin-bottom: ${th('space.7')};
 `
 
 const PeoplePickerLayout = ({
@@ -22,12 +49,8 @@ const PeoplePickerLayout = ({
     <PeoplePickerLogic {...props}>
       {innerProps => (
         <React.Fragment>
-          <Flex mx={-2}>
-            <Box
-              mx={[0, 0, 0, '16.666%']}
-              px={[2, 2, 2, 1]}
-              width={[1, 1, 1 / 2, 0.33]}
-            >
+          <SearchBoxContainer>
+            <MainColumn>
               <SearchBox
                 filterFunction={innerProps.filterFunction}
                 inputOverrideComponent={inputOverrideComponent}
@@ -35,13 +58,13 @@ const PeoplePickerLayout = ({
                 options={innerProps.searchOptions}
                 placeholder={props.searchBoxPlaceholder}
               />
-            </Box>
-          </Flex>
-          <Flex data-test-id="people-picker-body">
-            <MainColumn mb={7}>
+            </MainColumn>
+          </SearchBoxContainer>
+          <BodyContainer data-test-id="people-picker-body">
+            <MainColumn>
               <PeoplePickerBody {...innerProps} />
             </MainColumn>
-          </Flex>
+          </BodyContainer>
           <PeoplePickerButtons {...innerProps} />
         </React.Fragment>
       )}
