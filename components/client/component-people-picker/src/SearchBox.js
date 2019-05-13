@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Flex } from '@rebass/grid'
-import { Icon, InputWithAddons } from '@pubsweet/ui'
+import { InputWithAddons } from '@pubsweet/ui'
 import { personNamePropType } from './types'
+import Icon from './Icon'
 
 class SearchBox extends React.Component {
   state = {
