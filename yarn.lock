@@ -751,13 +751,6 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.4.2":
-  version "7.4.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
-  integrity sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
 "@babel/template@^7.0.0", "@babel/template@^7.1.0", "@babel/template@^7.1.2", "@babel/template@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.2.2.tgz#005b3fdf0ed96e88041330379e0da9a708eb2907"
@@ -1898,13 +1891,6 @@
     redux "^3.6.0"
     redux-form "^7.0.3"
     styled-components "^4.1.1"
-
-"@rebass/grid@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@rebass/grid/-/grid-6.0.0.tgz#79ad5ae7951bba41a62db5caf1ee2006a201b3b1"
-  integrity sha512-2pbkfObgbfbPUL+spk5JaYt+L4zXAayBLfdDuqnDUxBcBRe2SMqDBTOkEcq1tQvsuhmtfkZ9rB51FyjBkO92vw==
-  dependencies:
-    styled-system "^4.0.6"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -15052,11 +15038,6 @@ regenerator-runtime@^0.13.1:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.1.tgz#522ea2aafd9200a00eee143dc14219a35a0f3991"
   integrity sha512-5KzMIyPLvfdPmvsdlYsHqITrDfK9k7bmvf97HvHSN4810i254ponbxCQ1NukpRWlu6en2MBWzAlhDExEKISwAA==
 
-regenerator-runtime@^0.13.2:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
-  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
-
 regenerator-transform@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.13.3.tgz#264bd9ff38a8ce24b06e0636496b2c856b57bcbb"
@@ -16579,14 +16560,6 @@ styled-system@^2.3.1:
   dependencies:
     prop-types "^15.6.0"
 
-styled-system@^4.0.6:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-4.2.1.tgz#ae2ac256948e7b483b4f9f9ad0034ebe94e6d2f1"
-  integrity sha512-JlpZmj4QSvrurga+ea00x0u8dl7nFLJS7pLsdtTVo+/AoCepqkG4FOBTaw1ATgsSbJeLaiicVg/Mj955GJUbuA==
-  dependencies:
-    "@babel/runtime" "^7.4.2"
-    prop-types "^15.7.2"
-
 stylelint-config-prettier@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-4.0.0.tgz#8c712977be13bd25191ab8b986b5c07a3342a5dc"
@@ -17948,7 +17921,7 @@ webpack-dev-middleware@^3.6.0:
     range-parser "^1.0.3"
     webpack-log "^2.0.0"
 
-webpack-dev-server@^3.1.14:
+webpack-dev-server@3.1.14, webpack-dev-server@^3.1.14:
   version "3.1.14"
   resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.1.14.tgz#60fb229b997fc5a0a1fc6237421030180959d469"
   integrity sha512-mGXDgz5SlTxcF3hUpfC8hrQ11yhAttuUQWf1Wmb+6zo3x6rb7b9mIfuQvAPLdfDRCGRGvakBWHdHOa0I9p/EVQ==

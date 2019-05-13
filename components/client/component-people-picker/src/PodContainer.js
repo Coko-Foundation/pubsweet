@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Icon } from '@pubsweet/ui'
-import { Flex } from '@rebass/grid'
 
 const AddIcon = props => <Icon {...props}>plus</Icon>
 
@@ -45,7 +44,10 @@ const StyledButton = styled.button`
     }
 `
 
-const StyledPod = styled(Flex)`
+const StyledPod = styled('div')`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
@@ -57,7 +59,9 @@ const StyledPod = styled(Flex)`
 `
 
 // This is needed for legacy safari support
-const ButtonContainer = styled(Flex).attrs({
+const ButtonContainer = styled('div').attrs({
+  boxSizing: 'border-box',
+  display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
 })`
@@ -71,7 +75,7 @@ const PodContainer = ({
   children,
   ...props
 }) => (
-  <StyledPod justifyContent="space-between">
+  <StyledPod>
     {children}
     <ButtonContainer>
       {selectButtonType === 'remove' && (

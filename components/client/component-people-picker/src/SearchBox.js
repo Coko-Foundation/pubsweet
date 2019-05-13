@@ -1,8 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex } from '@rebass/grid'
+import styled from 'styled-components'
 import { Icon, InputWithAddons } from '@pubsweet/ui'
 import { personNamePropType } from './types'
+
+const FlexBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+`
 
 class SearchBox extends React.Component {
   state = {
@@ -43,7 +48,7 @@ class SearchBox extends React.Component {
      */
     const { inputOverrideComponent } = this.props
     return (
-      <Flex>
+      <FlexBox>
         {inputOverrideComponent ? (
           inputOverrideComponent({
             onClearHandler: this.clearSearch,
@@ -79,7 +84,7 @@ class SearchBox extends React.Component {
             }}
           />
         )}
-      </Flex>
+      </FlexBox>
     )
   }
 }
