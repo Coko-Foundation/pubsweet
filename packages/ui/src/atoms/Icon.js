@@ -17,12 +17,13 @@ const Container = styled.span`
   ${override('ui.Icon')};
 `
 
-const Icon = ({ children, color, size = 3, ...props }) => {
+const Icon = ({ children, color, size = 3, theme, ...props }) => {
   // convert `arrow_left` to `ArrowLeft`
   const name = _.upperFirst(_.camelCase(children))
 
-  // select the icon
-  const icon = icons[name]
+  // select the icon, checking for override in theme, otherwise defaulting
+  // to the react feather icon set
+  const icon = _.get(theme.icons, name, icons[name])
 
   if (!icon) {
     console.warn("Icon '%s' not found", name)
