@@ -1,11 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, media } from '@pubsweet/ui-toolkit'
 import { Button } from '@pubsweet/ui'
 
 const FlexWrapper = styled.div`
   display: flex;
+  ${media.tabletLandscapeUp`
+    margin-left: 16.666%;
+    margin-right: 16.666%;
+  `};
 `
 
 const CancelButton = styled(Button)`
