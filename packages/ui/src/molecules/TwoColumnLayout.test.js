@@ -53,7 +53,7 @@ describe('TwoColumnLayout', () => {
         <div />
       </TwoColumnLayout>,
     )
-    expect(wrapper.find('InternalBoxWrapper').prop('marginBottom')).toEqual(3)
+    expect(wrapper.find('InternalBoxWrapper').prop('marginBottom')).toEqual(4)
   })
   it('maps paddingX to the px prop of the child Box components', () => {
     const wrapper = shallow(
