@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "10.2.0",
+  "version": "10.2.1",
   "license": "MIT",
   "files": [
     "docs",
@@ -15,8 +15,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.1.6",
-    "@rebass/grid": "^6.0.0",
+    "@pubsweet/ui-toolkit": "^2.1.7",
     "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -25,8 +24,8 @@
     "lodash": "^4.17.4",
     "moment": "^2.22.1",
     "prop-types": "^15.5.10",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-feather": "^1.0.8",
     "react-router-dom": "^5.0.0",
     "react-tag-autocomplete": "^5.5.0",
@@ -43,8 +42,10 @@
     "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.7.1",
+    "jest-dom": "^3.2.1",
     "jest-styled-components": "^6.3.1",
-    "react-test-renderer": "^16.5.2"
+    "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^7.0.0"
   },
   "scripts": {
     "clean": "rimraf dist",

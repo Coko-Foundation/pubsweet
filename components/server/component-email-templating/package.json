@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-email-templating",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Send journal emails using templates from xPub/PubSweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",
@@ -9,7 +9,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@pubsweet/component-send-email": "^0.2.15",
+    "@pubsweet/component-send-email": "^0.2.16",
     "handlebars": "^4.0.2"
   },
   "peerDependencies": {
