@@ -3,6 +3,20 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th, media } from '@pubsweet/ui-toolkit'
 
+const InternalBoxWrapper = ({ marginBottom, paddingX, width, children }) => {
+  const Wrapper = styled.div`
+    box-sizing: border-box;
+    padding-bottom: ${th(`space.${marginBottom}`)};
+    padding-left: ${th(`space.${paddingX}`)};
+    padding-right: ${th(`space.${paddingX}`)};
+    ${media.tabletLandscapeUp`
+      width: 50%;
+    `};
+    width: ${width};
+  `
+  return <Wrapper>{children}</Wrapper>
+}
+
 const TwoColumnLayout = ({
   customWidth = '100%',
   paddingX = 2,
@@ -18,23 +32,15 @@ const TwoColumnLayout = ({
     margin-right: calc(0px - ${th('space.2')});
   `
 
-  const InternalBoxWrapper = styled.div`
-    box-sizing: border-box;
-    margin-bottom: ${bottomSpacing ? th('space.3') : 0};
-    padding-left: ${th(`space.${paddingX}`)};
-    padding-right: ${th(`space.${paddingX}`)};
-    ${media.tabletLandscapeUp`
-      width: 50%;
-    `};
-    width: ${customWidth};
-  `
-
   return (
     <FlexWrapper {...props}>
       {React.Children.map(children, (item, index) => (
         <InternalBoxWrapper
           // try to use the key property of the React element
           key={item.key || index}
+          marginBottom={bottomSpacing ? 3 : 0}
+          paddingX={paddingX}
+          width={customWidth}
         >
           {item}
         </InternalBoxWrapper>
@@ -48,7 +54,6 @@ TwoColumnLayout.propTypes = {
    * Set to false to disable bottom spacing on items.
    */
   bottomSpacing: PropTypes.bool,
-  customWitdh: PropTypes.arrayOf(PropTypes.number),
 }
 
 TwoColumnLayout.defaultProps = {

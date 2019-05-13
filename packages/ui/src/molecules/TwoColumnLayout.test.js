@@ -17,13 +17,19 @@ describe('TwoColumnLayout', () => {
       </TwoColumnLayout>,
     )
   it('returns no Box components when there are no children passed', () => {
-    expect(makeWrapperWithChildren(0).find('Box')).toHaveLength(0)
+    expect(makeWrapperWithChildren(0).find('InternalBoxWrapper')).toHaveLength(
+      0,
+    )
   })
-  it('returns one Box component when one child element is passed', () => {
-    expect(makeWrapperWithChildren(1).find('Box')).toHaveLength(1)
+  it('returns one InternalBoxWrapper component when one child element is passed', () => {
+    expect(makeWrapperWithChildren(1).find('InternalBoxWrapper')).toHaveLength(
+      1,
+    )
   })
-  it('returns many Box component when many childen are passed', () => {
-    expect(makeWrapperWithChildren(10).find('Box')).toHaveLength(10)
+  it('returns many InternalBoxWrapper component when many childen are passed', () => {
+    expect(makeWrapperWithChildren(10).find('InternalBoxWrapper')).toHaveLength(
+      10,
+    )
   })
   it('uses index of child as a key when no keys passed', () => {
     expect(
@@ -47,7 +53,7 @@ describe('TwoColumnLayout', () => {
         <div />
       </TwoColumnLayout>,
     )
-    expect(wrapper.find('Box').prop('mb')).toEqual(3)
+    expect(wrapper.find('InternalBoxWrapper').prop('marginBottom')).toEqual(3)
   })
   it('maps paddingX to the px prop of the child Box components', () => {
     const wrapper = shallow(
@@ -55,7 +61,7 @@ describe('TwoColumnLayout', () => {
         <div />
       </TwoColumnLayout>,
     )
-    expect(wrapper.find('Box').prop('px')).toEqual(1)
+    expect(wrapper.find('InternalBoxWrapper').prop('paddingX')).toEqual(1)
   })
   it('maps customWidth to the width prop of the child Box components', () => {
     const wrapper = shallow(
@@ -63,6 +69,6 @@ describe('TwoColumnLayout', () => {
         <div />
       </TwoColumnLayout>,
     )
-    expect(wrapper.find('Box').prop('width')).toEqual('100px')
+    expect(wrapper.find('InternalBoxWrapper').prop('width')).toEqual('100px')
   })
 })
