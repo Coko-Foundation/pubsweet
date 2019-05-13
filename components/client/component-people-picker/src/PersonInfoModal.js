@@ -28,6 +28,7 @@ const Root = styled.div`
 const Buttons = styled.div`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
 
