@@ -61,4 +61,7 @@ export default {
   transitionDuration: '.2s',
   transitionTimingFunction: 'ease',
   transitionDelay: '0',
+
+  /* Breakpoints */
+  breakpoints: [480, 768, 1000, 1272],
 }

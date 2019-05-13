@@ -1,16 +1,20 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Box, Flex } from '@rebass/grid'
-
+import { media } from '@pubsweet/ui-toolkit'
 import PeoplePickerLogic from './PeoplePickerLogic'
 import PeoplePickerButtons from './PeoplePickerButtons'
 import PeoplePickerBody from './PeoplePickerBody'
 import SearchBox from './SearchBox'
 
-const MainColumn = styled(Box).attrs({ mx: [0, 0, 0, '16.666%'] })`
+const MainColumn = styled.div`
   flex: 1 1 100%;
   min-width: 0;
   position: relative;
+  ${media.tabletLandscapeUp`
+    margin-left: 16.666%;
+    margin-right: 16.666%;
+  `};
 `
 
 const PeoplePickerLayout = ({
