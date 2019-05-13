@@ -22,6 +22,7 @@ const StyledTextField = styled(TextField)`
     border-bottom-right-radius: 0;
     border-right: none;
     font-family: 'Noto Sans';
+    height: calc(${th('gridUnit')} * 6);
   }
 `
 

@@ -55,7 +55,7 @@ const StyledPod = styled('div')`
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
   padding: 0 0 0 calc(${th('gridUnit')});
-  height: calc(${th('gridUnit')} * 15);
+  height: calc(${th('gridUnit')} * 20);
 `
 
 // This is needed for legacy safari support

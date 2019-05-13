@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { Action } from '@pubsweet/ui'
+import { Action, Modal, ModalProvider, Icon } from '@pubsweet/ui'
+import PersonInfoModal from './PersonInfoModal'
 
 import {
   personNamePropType,
@@ -11,6 +12,11 @@ import {
   focusesPropType,
 } from './types'
 import PodContainer from './PodContainer'
+
+const FlexDiv = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 const SmallAction = styled(Action)`
   font-size: ${th('fontSizeBaseSmall')};
@@ -22,6 +28,45 @@ const CollapsibleBox = styled.div`
   width: 100%;
   min-width: 0;
 `
+const ButtonAsIconWrapper = styled.button.attrs({
+  type: 'button',
+})`
+  background-color: transparent;
+  border: none;
+  line-height: 0;
+  padding: 0;
+`
+
+const InfoIcon = props => <Icon {...props}>Info</Icon>
+
+const StyledInfoIcon = styled(InfoIcon)`
+  > svg {
+    margin-right: 6px;
+    height: 18px;
+    width: 18px;
+    fill: ${th('colorPrimary')};
+    stroke: #fff;
+  }
+`
+
+const StyledSmallParagraph = styled.p`
+  font-family: ${th('fontWriting')};
+  font-size: ${th('fontSizeBaseSmall')};
+  line-height: ${th(`lineHeightBaseSmall`)};
+
+  margin-top: 0;
+  margin-bottom: ${th('space.3')};
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 3px 0;
+  color: ${th('colorTextSecondary')};
+`
+
 class PersonPod extends React.Component {
   constructor(props) {
     super(props)
@@ -31,17 +76,8 @@ class PersonPod extends React.Component {
     }
   }
 
-  openModal = () => {
-    this.setState({ isModalOpen: true })
-  }
-
   acceptModal = person => {
-    this.setState({ isModalOpen: false })
     this.props.togglePersonSelection(person)
-  }
-
-  cancelModal = () => {
-    this.setState({ isModalOpen: false })
   }
 
   render() {
@@ -49,9 +85,11 @@ class PersonPod extends React.Component {
       isSelectButtonClickable = true,
       togglePersonSelection,
       selectButtonType,
+      maxSelection,
       name,
       institution = '',
       focuses,
+      isSelected,
       expertises,
       isKeywordClickable,
       onKeywordClick = null,
@@ -78,6 +116,11 @@ class PersonPod extends React.Component {
       ))
     }
 
+    const separatedKeywords = keywordList.reduce(
+      (accu, elem) => (accu === null ? [elem] : [...accu, ', ', elem]),
+      null,
+    )
+
     return (
       <React.Fragment>
         <PodContainer
@@ -88,6 +131,32 @@ class PersonPod extends React.Component {
           <CollapsibleBox m={2}>
             <p>{name}</p>
             {institution && <p>{institution}</p>}
+            <FlexDiv>
+              <ModalProvider>
+                <Modal
+                  component={PersonInfoModal}
+                  dismissable
+                  expertises={expertises}
+                  focuses={focuses}
+                  institution={institution}
+                  isSelectButtonClickable={isSelectButtonClickable}
+                  isSelected={isSelected}
+                  maxSelection={maxSelection}
+                  name={name}
+                  onAccept={this.acceptModal}
+                >
+                  {showModal => (
+                    <ButtonAsIconWrapper
+                      data-test-id="people-picker-info"
+                      onClick={showModal}
+                    >
+                      <StyledInfoIcon />
+                    </ButtonAsIconWrapper>
+                  )}
+                </Modal>
+              </ModalProvider>
+              <StyledSmallParagraph>{separatedKeywords}</StyledSmallParagraph>
+            </FlexDiv>
           </CollapsibleBox>
         </PodContainer>
       </React.Fragment>
