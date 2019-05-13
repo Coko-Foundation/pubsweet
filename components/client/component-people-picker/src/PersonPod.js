@@ -55,7 +55,7 @@ const StyledSmallParagraph = styled.p`
   line-height: ${th(`lineHeightBaseSmall`)};
 
   margin-top: 0;
-  margin-bottom: ${th('space.3')};
+  margin-bottom: calc(${th('gridUnit')} * 4);
 
   &:last-child {
     margin-bottom: 0;

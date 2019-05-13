@@ -12,8 +12,8 @@ const MainColumn = styled.div`
   flex: 1 1 100%;
   min-width: 0;
   position: relative;
-  padding-left: ${th('space.2')};
-  padding-right: ${th('space.2')};
+  padding-left: calc(${th('gridUnit')}* 2);
+  padding-right: calc(${th('gridUnit')} * 2);
   width: 100%;
   ${media.tabletPortraitUp`
     width: 50%;
@@ -22,22 +22,24 @@ const MainColumn = styled.div`
     width: 33%;
     margin-left: 16.666%;
     margin-right: 16.666%;
-    padding-left: ${th('space.1')};
-    padding-right: ${th('space.1')};
+    padding-left: ${th('gridUnit')};
+    padding-right: ${th('gridUnit')};
   `};
 `
 
-const SearchBoxContainer = styled('div')`
+const SearchBoxContainer = styled.div`
   box-sizing: border-box;
   display: flex;
-  margin-left: calc(-${th('space.2')});
-  margin-right: calc(-${th('space.2')});
+  margin-left: calc(-${th('gridUnit')} * 2);
+  margin-right: calc(-${th('gridUnit')} * 2);
 `
 
 const BodyContainer = styled.div`
   box-sizing: border-box;
   display: flex;
-  margin-bottom: ${th('space.7')};
+  margin-bottom: calc(${th('gridUnit')} * 20);
+  margin-left: calc(-${th('gridUnit')} * 2);
+  margin-right: calc(-${th('gridUnit')} * 2);
 `
 
 const PeoplePickerLayout = ({

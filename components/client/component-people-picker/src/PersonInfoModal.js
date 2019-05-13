@@ -43,7 +43,7 @@ const BaseParagraph = styled.p`
   line-height: ${th(`lineHeightBase`)};
 
   margin-top: 0;
-  margin-bottom: ${th('space.3')};
+  margin-bottom: calc(${th('gridUnit')} * 4);
 
   &:last-child {
     margin-bottom: 0;
@@ -55,14 +55,14 @@ const SmallParagraph = styled(BaseParagraph)`
 `
 
 const StyledSmallParagraph = styled(SmallParagraph)`
-  margin-bottom: ${th('space.4')};
+  margin-bottom: calc(${th('gridUnit')} * 6);
   color: ${th('colorTextSecondary')};
 `
 
 const ErrorParagraph = styled(StyledSmallParagraph)`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th(`lineHeightBaseSmall`)};
-  margin-bottom: ${th('space.4')};
+  margin-bottom: calc(${th('gridUnit')} * 6);
   color: ${th('colorError')};
 `
 

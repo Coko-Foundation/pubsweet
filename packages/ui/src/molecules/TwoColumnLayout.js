@@ -6,9 +6,9 @@ import { th, media } from '@pubsweet/ui-toolkit'
 const InternalBoxWrapper = ({ marginBottom, paddingX, width, children }) => {
   const Wrapper = styled.div`
     box-sizing: border-box;
-    padding-bottom: ${th(`space.${marginBottom}`)};
-    padding-left: ${th(`space.${paddingX}`)};
-    padding-right: ${th(`space.${paddingX}`)};
+    padding-bottom: calc(${th('gridUnit')} * ${marginBottom});
+    padding-left: calc(${th('gridUnit')} * ${paddingX});
+    padding-right: calc(${th('gridUnit')} * ${paddingX});
     ${media.tabletLandscapeUp`
       width: 50%;
     `};
@@ -28,8 +28,8 @@ const TwoColumnLayout = ({
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
-    margin-left: calc(0px - ${th('space.2')});
-    margin-right: calc(0px - ${th('space.2')});
+    margin-left: calc(-${th('gridUnit')}* 2);
+    margin-right: calc(-${th('gridUnit')}* 2);
   `
 
   return (
@@ -38,7 +38,7 @@ const TwoColumnLayout = ({
         <InternalBoxWrapper
           // try to use the key property of the React element
           key={item.key || index}
-          marginBottom={bottomSpacing ? 3 : 0}
+          marginBottom={bottomSpacing ? 4 : 0}
           paddingX={paddingX}
           width={customWidth}
         >

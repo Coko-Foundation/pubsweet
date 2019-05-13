@@ -17,7 +17,7 @@ const stepCenter = (isCurrent, isPast) => {
 
 export const Steps = {
   Root: css`
-    margin-bottom: ${th('space.6')};
+    margin-bottom: calc(${th('gridUnit')} * 12);
     min-width: 0;
   `,
 

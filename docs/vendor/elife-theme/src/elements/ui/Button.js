@@ -4,11 +4,11 @@ import { th, darken } from '@pubsweet/ui-toolkit'
 const extraSmall = css`
   font-size: 11px;
   line-height: 12px;
-  padding: ${th('space.1')};
+  padding: ${th('gridUnit')};
 `
 
 const small = css`
-  padding: ${th('space.1')};
+  padding: ${th('gridUnit')};
 `
 
 const primary = css`

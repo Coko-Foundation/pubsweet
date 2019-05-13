@@ -19,17 +19,17 @@ const StyledRemoveIcon = styled(TrashIcon)`
 const CheckCircleIcon = props => <Icon {...props}>check-circle</Icon>
 
 const StyledSelectedIcon = styled(CheckCircleIcon)`
-    circle {
-      fill: ${th('colorPrimary')};
-    }
-    height: ${th('space.4')}
-    width: ${th('space.4')}
+  circle {
+    fill: ${th('colorPrimary')};
+  }
+  height: calc(${th('gridUnit')} * 6);
+  width: calc(${th('gridUnit')} * 6);
 `
 
 const StyledButton = styled.button`
     background-color: inherit;
     height: 100%;
-    width: ${th('space.5')};
+    width: calc(${th('gridUnit')} * 8);
     border: none;
     border-top-right-radius: ${th('borderRadius')};
     border-bottom-right-radius: ${th('borderRadius')};

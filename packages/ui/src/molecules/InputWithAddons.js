@@ -33,7 +33,7 @@ const AddOnButton = styled(Button)`
   fill: ${th('colorTextReverse')};
   line-height: 0;
   min-width: 0;
-  padding: ${th('space.1')};
+  padding: ${th('gridUnit')};
   margin: 0;
   width: calc(${th('gridUnit')} * 6);
   height: calc(${th('gridUnit')} * 6);

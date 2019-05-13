@@ -6,7 +6,7 @@ import Icon from './Icon'
 const RemoveButton = props => <Icon {...props}>X</Icon>
 
 const StyledRemoveButton = styled(RemoveButton)`
-  margin-left: ${th('space.1')};
+  margin-left: ${th('gridUnit')};
 
   & > svg {
     stroke: ${th('colorTextReverse')};
