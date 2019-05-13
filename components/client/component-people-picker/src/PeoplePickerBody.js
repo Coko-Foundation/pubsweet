@@ -45,8 +45,8 @@ const SelectedItems = ({ selection, onCloseClick }) => (
 const MessageWrapper = styled.div`
   ${media.tabletPortraitUp`
     position: absolute;
-    top: -60px;
-    right: 0;
+    top: calc(-${th('gridUnit')} * 7);
+    right: calc(${th('gridUnit')} * 2);
   `};
 `
 const SuccessMessage = styled(MessageWrapper)`

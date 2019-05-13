@@ -2,11 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Icon, InputWithAddons } from '@pubsweet/ui'
+import { media } from '@pubsweet/ui-toolkit'
 import { personNamePropType } from './types'
 
 const FlexBox = styled.div`
   box-sizing: border-box;
   display: flex;
+  ${media.tabletPortraitUp`
+      width: 50%;
+  `};
 `
 
 class SearchBox extends React.Component {
