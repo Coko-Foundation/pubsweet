@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
-import { Icon } from '@pubsweet/ui'
+import Icon from './Icon'
 
 const RemoveButton = props => <Icon {...props}>X</Icon>
 
