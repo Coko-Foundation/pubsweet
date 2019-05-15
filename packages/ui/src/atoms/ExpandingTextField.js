@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { th, override, validationColor } from '@pubsweet/ui-toolkit'
 
 const Root = styled.div`
@@ -41,6 +42,7 @@ const TextArea = styled.textarea`
 class ExpandingTextField extends React.Component {
   constructor(props) {
     super(props)
+    this.textAreaRef = React.createRef()
     this.state = {}
   }
 
@@ -51,18 +53,9 @@ class ExpandingTextField extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // TODO: Use the component ref instead of getElementById
-    // TODO: Use PropTypes
-    //  {
-    //    minRows?: number,
-    //    maxRows?: number;
-    //  }
-
-    const { lineHeight } = window.getComputedStyle(
-      document.getElementById(this.inputId),
-    )
+    const { lineHeight } = window.getComputedStyle(this.textAreaRef.current)
     const intLineHeight = parseInt(lineHeight, 10)
-    const { scrollHeight, value } = document.getElementById(this.inputId)
+    const { scrollHeight, value } = this.textAreaRef.current
     const lines = Math.round(scrollHeight / intLineHeight - 1)
 
     const constrainedLines = Math.min(lines, this.props.maxRows || lines)
@@ -82,7 +75,6 @@ class ExpandingTextField extends React.Component {
 
   render() {
     const {
-      innerRefProp,
       className,
       label,
       type = 'text',
@@ -99,7 +91,7 @@ class ExpandingTextField extends React.Component {
         <TextArea
           id={this.inputId}
           readOnly={readonly}
-          ref={innerRefProp}
+          ref={this.textAreaRef}
           rows={this.state.lines || minRows}
           type={type}
           value={value}
@@ -108,6 +100,14 @@ class ExpandingTextField extends React.Component {
       </Root>
     )
   }
+}
+
+ExpandingTextField.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  minRows: PropTypes.number,
+  maxRows: PropTypes.number,
 }
 
 export default ExpandingTextField
