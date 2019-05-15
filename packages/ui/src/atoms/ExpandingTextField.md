@@ -9,52 +9,27 @@ initialState = { value: '' }
 />
 ```
 
-The text field can have a label.
+The ExpandingTextField can have a maximum number of rows defined.
 
 ```js
 initialState = { value: '' }
 ;<ExpandingTextField
   label="Foo"
+  maxRows={3}
   value={state.value}
   placeholder="so you can write some in here"
   onChange={event => setState({ value: event.target.value })}
 />
 ```
 
-Text field with error state.
+The ExpandingTextField can have a minumum number of rows defined as well.
 
 ```js
 initialState = { value: '' }
 ;<ExpandingTextField
   label="Foo"
-  value={state.value || 'This is not valid'}
-  validationStatus="error"
-  placeholder="so you can write some in here"
-  onChange={event => setState({ value: event.target.value })}
-/>
-```
-
-Text field with warning state.
-
-```js
-initialState = { value: '' }
-;<ExpandingTextField
-  label="Foo"
-  value={state.value || 'This is could be a problem'}
-  validationStatus="warning"
-  placeholder="so you can write some in here"
-  onChange={event => setState({ value: event.target.value })}
-/>
-```
-
-Text field with success state.
-
-```js
-initialState = { value: '' }
-;<ExpandingTextField
-  label="Foo"
-  value={state.value || 'This is good'}
-  validationStatus="success"
+  minRows={5}
+  value={state.value}
   placeholder="so you can write some in here"
   onChange={event => setState({ value: event.target.value })}
 />
