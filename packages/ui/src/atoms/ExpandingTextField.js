@@ -39,22 +39,45 @@ const TextArea = styled.textarea`
 `
 
 class ExpandingTextField extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
   componentWillMount() {
     // generate a unique ID to link the label to the input
     // note this may not play well with server rendering
     this.inputId = `textfield-${Math.round(Math.random() * 1e12).toString(36)}`
   }
-  componentWillUpdate() {
+
+  componentDidUpdate(prevProps, prevState) {
     // TODO: Use the component ref instead of getElementById
+    // TODO: Use PropTypes
+    //  {
+    //    minRows?: number,
+    //    maxRows?: number;
+    //  }
 
     const { lineHeight } = window.getComputedStyle(
       document.getElementById(this.inputId),
     )
     const intLineHeight = parseInt(lineHeight, 10)
-    const { scrollHeight } = document.getElementById(this.inputId)
+    const { scrollHeight, value } = document.getElementById(this.inputId)
+    const lines = Math.round(scrollHeight / intLineHeight - 1)
 
-    this.lines = Math.round(scrollHeight / intLineHeight - 1)
-    // It'll expand, but it won't shrink
+    const constrainedLines = Math.min(lines, this.props.maxRows || lines)
+
+    if (prevProps.value.length > value.length) {
+      // This will force container size to be re-evaluated when the amount of
+      // text is reduced
+      this.setLines()
+    } else if (this.state.lines !== constrainedLines) {
+      this.setLines(constrainedLines)
+    }
+  }
+
+  setLines(lines = this.props.minRows || 1) {
+    this.setState({ lines })
   }
 
   render() {
@@ -64,12 +87,11 @@ class ExpandingTextField extends React.Component {
       label,
       type = 'text',
       value = '',
+      minRows = 1,
       readonly,
       inline,
       ...props
     } = this.props
-
-    // TODO: Calculate the line height
 
     return (
       <Root className={className} inline={inline}>
@@ -78,10 +100,9 @@ class ExpandingTextField extends React.Component {
           id={this.inputId}
           readOnly={readonly}
           ref={innerRefProp}
-          rows={this.lines || 1}
+          rows={this.state.lines || minRows}
           type={type}
           value={value}
-          wrap="hard"
           {...props}
         />
       </Root>
