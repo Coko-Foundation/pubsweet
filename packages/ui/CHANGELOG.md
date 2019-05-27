@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.2.1...@pubsweet/ui@10.3.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* **peoplepicker:** fixed styling of InputWithAddons ([b60a728](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b60a728))
+* check for correct new two column layout prop value ([b59b8a9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b59b8a9))
+* fix default theme styling of Searchbox ([34e0426](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/34e0426))
+* input with addons border thinkness, default input height ([aac9263](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aac9263))
+* remove use of space variable in peoplepicker styling ([53354df](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53354df))
+* tests for TwoColumnLayout ([8ceba26](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ceba26))
+
+
+### Features
+
+* **peoplepicker:** wip ([5564271](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5564271))
+* **ui:** add modal ([a44e5c3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a44e5c3))
+* add new input box with addons ([bd4fd81](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4fd81))
+* fix alignment of search box and person pod button ([3e5659e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3e5659e))
+* further tests of TwoColumnLayout component ([fefcf6f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fefcf6f))
+* **ui:** add pagination component ([c493203](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c493203))
+* merge commit ([7797a83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7797a83))
+* merge commit from master ([b1e1e06](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1e1e06))
+* merge commit, fix styling on icons and fonts ([33e5e80](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/33e5e80))
+* re-add the modal using new pubsweet version ([fdc7101](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fdc7101))
+
+
+
+
+
 ## [10.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.2.0...@pubsweet/ui@10.2.1) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/ui

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.0.15...@pubsweet/default-theme@4.1.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* remove use of space variable in peoplepicker styling ([53354df](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53354df))
+* removed rebass from MainColumn, added breakpoints to default theme ([c71920c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c71920c))
+
+
+### Features
+
+* merge commit ([7797a83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7797a83))
+
+
+
+
+
 ## [4.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.0.14...@pubsweet/default-theme@4.0.15) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/default-theme
