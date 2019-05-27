@@ -1,5 +1,5 @@
 {
-  "name": "pubsweet-component-people-picker",
+  "name": "@pubsweet/component-people-picker",
   "version": "0.0.1",
   "description": "People Picker component for pubsweet",
   "main": "src/index.js",
@@ -24,11 +24,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "Signup"
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
+  }
 }
