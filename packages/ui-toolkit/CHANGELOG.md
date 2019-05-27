@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.1.7...@pubsweet/ui-toolkit@2.2.0) (2019-05-27)
+
+
+### Features
+
+* merge commit from master ([b1e1e06](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1e1e06))
+* move media query mixin to ui-toolkit ([1bee71a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1bee71a))
+
+
+
+
+
 ## [2.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.1.6...@pubsweet/ui-toolkit@2.1.7) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit

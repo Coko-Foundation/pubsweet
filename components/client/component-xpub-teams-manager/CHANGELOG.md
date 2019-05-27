@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@2.0.7...pubsweet-component-xpub-teams-manager@2.0.8) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-component-xpub-teams-manager
+
+
+
+
+
 ## [2.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-teams-manager@2.0.6...pubsweet-component-xpub-teams-manager@2.0.7) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-component-xpub-teams-manager

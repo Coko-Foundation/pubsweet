@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-dashboard",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "main": "src",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^10.2.1",
-    "@pubsweet/ui-toolkit": "^2.1.7",
+    "@pubsweet/ui": "^10.3.0",
+    "@pubsweet/ui-toolkit": "^2.2.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
@@ -21,9 +21,9 @@
     "recompose": "^0.30.0",
     "styled-components": "^4.1.1",
     "xpub-connect": "^2.0.7",
-    "xpub-journal": "^0.0.8",
-    "xpub-upload": "^1.0.7",
-    "xpub-with-context": "^0.1.16"
+    "xpub-journal": "^0.0.9",
+    "xpub-upload": "^1.0.8",
+    "xpub-with-context": "^0.1.17"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
