@@ -8,11 +8,11 @@ export default {
     font-size: ${th('gridUnit')};
   `,
   Label: css`
-    margin-bottom: ${th('space.1')};
+    margin-bottom: ${th('gridUnit')};
   `,
   Opener: css`
     padding: 10px;
-    min-height: ${th('space.5')};
+    min-height: calc(${th('gridUnit')} * 8);
     &:hover {
       border-color: ${th('colorBorder')};
     }
@@ -21,8 +21,8 @@ export default {
       `border-bottom-left-radius: 0; border-bottom-right-radius: 0;`};
   `,
   Option: css`
-    height: ${th('space.5')};
-    line-height: ${th('space.5')};
+    height: calc(${th('gridUnit')} * 8);
+    line-height: calc(${th('gridUnit')} * 8);
     padding: 0 10px;
     font-weight: inherit;
 
