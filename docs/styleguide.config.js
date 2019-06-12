@@ -36,6 +36,10 @@ module.exports = {
       content: './content/technical_architecture.md',
     },
     {
+      name: 'Base model (data models)',
+      content: '../packages/base-model/README.md',
+    },
+    {
       name: 'Components',
       sections: [
         {

@@ -88,7 +88,6 @@ The client provides a helper component that make working with authorization on t
 
 ```jsx static
 import Authorize from 'pubsweet-client'
-
 ;<Authorize object={manuscript} operation="DELETE">
   <Button onClick={this.onDestroyClick} plain>
     Delete
@@ -136,7 +135,7 @@ With this approach even generally omnipotent users' permissions can be finely tu
 
 ## Example 2 : Wormbase (a good way to get started with PubSweet)
 
-In [Wormbase](https://gitlab.coko.foundation/amardesi/wormbase/tree/develop 'undefined'), there are four types of teams: Author, Editor, Reviewer, and Science Officer. Authors write the manuscript. Editors approve and assign a Reviewer for a manuscript. A Science Officer (a super admin) has the same permissions as an Editor but across all manuscripts.
+In [Wormbase](https://gitlab.coko.foundation/micropubs/wormbase 'wormbase'), there are four types of teams: Author, Editor, Reviewer, and Science Officer. Authors write the manuscript. Editors approve and assign a Reviewer for a manuscript. A Science Officer (a super admin) has the same permissions as an Editor but across all manuscripts.
 
 When you're managing teams, you create a new team with a certain type, and a certain object. In the case of Authors, you would choose the manuscript object as the object of the team. Reviewers can only review once they have accepted their invitation.
 
