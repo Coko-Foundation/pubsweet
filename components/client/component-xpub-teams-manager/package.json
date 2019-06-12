@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-xpub-teams-manager",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "Teams manager component for Xpub",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
@@ -10,8 +10,8 @@
     "dist"
   ],
   "dependencies": {
-    "@pubsweet/ui": "^10.3.0",
-    "@pubsweet/ui-toolkit": "^2.2.0",
+    "@pubsweet/ui": "^10.3.1",
+    "@pubsweet/ui-toolkit": "^2.2.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.5.10",
     "react-dom": "^16.2.0",

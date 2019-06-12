@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.0.8...@pubsweet/model-team@2.0.9) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
 ## [2.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.0.7...@pubsweet/model-team@2.0.8) (2019-05-27)
 
 **Note:** Version bump only for package @pubsweet/model-team

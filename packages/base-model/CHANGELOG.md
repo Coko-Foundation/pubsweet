@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.8...@pubsweet/base-model@3.1.0) (2019-06-12)
+
+
+### Features
+
+* **base-model:** add support for graph save ([8776ad3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8776ad3))
+
+
+
+
+
 ## [3.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.7...@pubsweet/base-model@3.0.8) (2019-05-27)
 
 **Note:** Version bump only for package @pubsweet/base-model
