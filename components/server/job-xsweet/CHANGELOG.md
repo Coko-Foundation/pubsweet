@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.2.1...@pubsweet/job-xsweet@1.2.2) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/job-xsweet
+
+
+
+
+
 ## [1.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.2.0...@pubsweet/job-xsweet@1.2.1) (2019-05-27)
 
 **Note:** Version bump only for package @pubsweet/job-xsweet
