@@ -42,6 +42,31 @@ describe('Manuscript', () => {
     await expect(tryToFind()).rejects.toThrow('Object not found')
   })
 
+  it('can save and update graphs', async () => {
+    const manuscript = await new Manuscript({
+      title: 'Test',
+      teams: [{ name: 'Test', role: 'test' }],
+    }).saveGraph()
+
+    const foundManuscript = await Manuscript.find(manuscript.id)
+    expect(foundManuscript.title).toEqual('Test')
+
+    const foundTeam = await Team.query().findOne({ objectId: manuscript.id })
+    expect(foundTeam.name).toEqual('Test')
+
+    const updateManuscript = await Manuscript.query()
+      .findById(manuscript.id)
+      .eager('teams')
+    updateManuscript.title = 'Updated'
+    updateManuscript.teams[0].name = 'Updated'
+
+    const updatedManuscript = await updateManuscript.saveGraph()
+    expect(updatedManuscript.title).toEqual('Updated')
+
+    const updatedTeam = await Team.query().findOne({ objectId: manuscript.id })
+    expect(updatedTeam.name).toEqual('Updated')
+  })
+
   it('can be found by property', async () => {
     await new Manuscript({ title: 'Test' }).save()
     const manuscript = await Manuscript.findOneByField('title', 'Test')

@@ -84,15 +84,36 @@ class BaseModel extends Model {
     this.updated = new Date().toISOString()
   }
 
-  async save() {
-    const simpleSave = async (trx = null) =>
-      this.constructor.query(trx).patchAndFetchById(this.id, this)
+  saveGraph() {
+    const updateAndFetch = (graph, trx) =>
+      this.constructor
+        .query(trx)
+        .upsertGraphAndFetch(graph, { insertMissing: true })
+
+    const insertAndFetch = graph =>
+      this.constructor.query().insertGraphAndFetch(graph)
+
+    return this._save(insertAndFetch, updateAndFetch)
+  }
+
+  save() {
+    const updateAndFetch = (instance, trx) =>
+      this.constructor.query(trx).patchAndFetchById(instance.id, instance)
+
+    const insertAndFetch = (instance, builder) =>
+      this.constructor.query().insertAndFetch(instance)
+
+    return this._save(insertAndFetch, updateAndFetch)
+  }
+
+  async _save(insertAndFetch, updateAndFetch) {
+    const simpleSave = (trx = null) => updateAndFetch(this, trx)
 
     const protectedSave = async () => {
       let trx, saved
       try {
         trx = await transaction.start(BaseModel.knex())
-        // trx.forUpdate()
+
         const current = await this.constructor
           .query(trx)
           .findById(this.id)
@@ -144,7 +165,7 @@ class BaseModel extends Model {
     }
     if (!saved) {
       // either model has no ID or the ID was not found in the database
-      saved = await this.constructor.query().insertAndFetch(this)
+      saved = await insertAndFetch(this)
     }
 
     logger.info(`Saved ${this.constructor.name} with UUID ${saved.id}`)

@@ -1,10 +1,8 @@
-# Base model (standalone data models)
-
-This package introduces a BaseModel class, which is a basic model based on [Objection.js](https://vincit.github.io/objection.js/). In its tests (`data-model-component`, `extended-data-model-component`: https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/base-model/test), you can see how that enables you to add your own data model to PubSweet. A data model that lives in its own database table, as defined in its migration(s).
+For persistence of data, PubSweet uses `@pubsweet/base-model` and its BaseModel class, which is a basic model based on [Objection.js](https://vincit.github.io/objection.js/). In its tests (`data-model-component`, `extended-data-model-component`: https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/base-model/test), you can see how that enables you to add your own data model to PubSweet. A data model that lives in its own database table, as defined in its migration(s).
 
 For a data model package, its defined exports are:
 
-```
+```js static
 module.exports = {
   typeDefs: // GraphQL type definitions
   resolvers: // GraphQL resolvers
@@ -21,7 +19,7 @@ If you use `@pubsweet/model-some-model` in your app (by specifying it as a compo
 
 Shown in (https://gitlab.coko.foundation/pubsweet/pubsweet/blob/master/packages/base-model/test/extended-data-model-component/src/index.js) is an extended data model (`extended-data-model-component`) for testing purposes. It exports the following things:
 
-```
+```js static
 module.exports = {
   typeDefs:
   resolvers:
@@ -37,7 +35,7 @@ Things are exactly the same as in the non-extended data model, but there is one 
 
 To use the above models, all you need to do is to add them to the `pubsweet.components` configuration, e.g.:
 
-```
+```js static
   pubsweet: {
     components: ['@pubsweet/model-some-model'],
   },
@@ -45,6 +43,61 @@ To use the above models, all you need to do is to add them to the `pubsweet.comp
 
 The data model's migrations will be added to the list of your app's migrations, and GraphQL queries and mutations will automatically be added to your API.
 
+# API documentation
+
+There are a few methods in the BaseModel that add utility features.
+
+## save() - Saving a single model
+
+```js static
+const manuscript = await new Manuscript({ title: 'Test' }).save()
+```
+
+## saveGraph() - Saving a graph
+
+```js static
+const manuscript = await new Manuscript({
+  title: 'Test',
+  teams: [{ role: 'reviewer' }],
+}).saveGraph()
+```
+
+## find() - Finding a single instance by id
+
+Passes parameters onwards to Objection's `findById` and supports its options:
+
+```js static
+const manuscript = await Manuscript.find(
+  'b70cd527-6b96-4612-b516-38a0e5ebfa65',
+  { eager: 'teams' },
+)
+```
+
+## findByField() - Finding instances by field value
+
+Passes parameters to Objection's `where`.
+
+```js static
+const manuscript = await Manuscript.findByField(
+  'title',
+  'Breakthrough research',
+)
+```
+
+## findOneByField() - Find a single instance by field value
+
+Uses Objections's `where().limit(1)`.
+
+```js static
+const manuscript = await Manuscript.findOneByField('content', 'Great success')
+```
+
+## all() - Returns all records
+
+```js static
+const manuscript = await Manuscript.all()
+```
+
 # Examples in the wild
 
-Take a look at the [micropubs/wormbase](https://gitlab.coko.foundation/micropubs/wormbase/tree/develop/server) application, for an example implementation of two models, `Manuscript` and `Review` using the `BaseModel` class, the supplied GraphQL connectors and Authsome.
+Take a look at the [micropubs/wormbase](https://gitlab.coko.foundation/micropubs/wormbase/tree/master/server) application, for an example implementation of two models, `Manuscript` and `Review` using the `BaseModel` class, the supplied GraphQL connectors and Authsome.
