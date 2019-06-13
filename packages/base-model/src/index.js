@@ -88,7 +88,7 @@ class BaseModel extends Model {
     const updateAndFetch = (graph, trx) =>
       this.constructor
         .query(trx)
-        .upsertGraphAndFetch(graph, { insertMissing: true })
+        .upsertGraphAndFetch(graph, { insertMissing: true, noDelete: true })
 
     const insertAndFetch = graph =>
       this.constructor.query().insertGraphAndFetch(graph)
