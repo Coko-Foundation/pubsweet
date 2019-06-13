@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.1.0...@pubsweet/base-model@3.2.0) (2019-06-13)
+
+
+### Features
+
+* **base-model:** upserts should not delete records ([9bed759](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bed759))
+
+
+
+
+
 # [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.8...@pubsweet/base-model@3.1.0) (2019-06-12)
 
 
