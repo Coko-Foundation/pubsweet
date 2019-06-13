@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/component-send-email",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "send email configured for pubsweet",
   "license": "MIT",
   "author": "Collaborative Knowledge Foundation",

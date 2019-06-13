@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui",
-  "version": "10.3.1",
+  "version": "10.3.2",
   "license": "MIT",
   "files": [
     "docs",
@@ -15,7 +15,7 @@
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.2.1",
+    "@pubsweet/ui-toolkit": "^2.2.2",
     "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
