@@ -16,6 +16,10 @@ const FormContainer = styled.div`
   ${override('Login.FormContainer')};
 `
 
+const SuccessText = styled.div`
+  color: ${props => props.theme.colorSuccess};
+`
+
 const Logo = styled.div`
   width: 100%;
   max-width: 100px;
@@ -40,7 +44,7 @@ const PasswordInput = props => (
   />
 )
 
-const Signup = ({ error, handleSubmit, logo = null }) => (
+const Signup = ({ values, handleSubmit, status, logo = null }) => (
   <CenteredColumn small>
     {logo && (
       <Logo>
@@ -50,7 +54,8 @@ const Signup = ({ error, handleSubmit, logo = null }) => (
     <FormContainer>
       <H1>Sign up</H1>
 
-      {error && <ErrorText>{error}</ErrorText>}
+      {status && status.success && <SuccessText>{status.success}</SuccessText>}
+      {status && status.error && <ErrorText>{status.error}</ErrorText>}
 
       <form onSubmit={handleSubmit}>
         <Field component={UsernameInput} name="username" />

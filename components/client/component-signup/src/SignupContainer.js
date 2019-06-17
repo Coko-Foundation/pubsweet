@@ -5,10 +5,26 @@ import { SIGNUP_USER } from './graphql/mutations'
 
 import Signup from './Signup'
 
-const handleSubmit = (values, { props, setSubmitting, setErrors }) =>
-  props.signupUser({
-    variables: { input: values },
-  })
+const handleSubmit = (
+  values,
+  { props, setSubmitting, setErrors, setValues, setStatus, resetForm },
+) =>
+  props
+    .signupUser({
+      variables: { input: values },
+    })
+    .then(({ data, errors }) => {
+      if (!errors) {
+        resetForm()
+        setStatus({ success: 'User has been created successfully!' })
+      }
+    })
+    .catch(e => {
+      if (e.graphQLErrors) {
+        setStatus({ error: e.graphQLErrors[0].message })
+        setSubmitting(false)
+      }
+    })
 
 const enhancedFormik = withFormik({
   initialValues: {
