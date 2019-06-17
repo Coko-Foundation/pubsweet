@@ -46,6 +46,53 @@ describe('User mutations', () => {
     })
   })
 
+  it('errors when duplicate username or emails are used', async () => {
+    await api.graphql.query(
+      `mutation($input: UserInput) {
+        createUser(input: $input) {
+          username
+        }
+      }`,
+      {
+        input: {
+          username: 'hi',
+          email: 'hi@example.com',
+          password: 'hello',
+        },
+      },
+    )
+
+    const { body: body2 } = await api.graphql.query(
+      `mutation($input: UserInput) {
+        createUser(input: $input) {
+          username
+        }
+      }`,
+      {
+        input: {
+          username: 'hi',
+          email: 'hi@example.com',
+          password: 'hello',
+        },
+      },
+    )
+
+    expect(body2).toEqual({
+      data: {
+        createUser: null,
+      },
+      errors: [
+        {
+          extensions: {
+            code: 'INTERNAL_SERVER_ERROR',
+          },
+          message: 'User with this username or email already exists',
+          name: 'ConflictError',
+        },
+      ],
+    })
+  })
+
   it('a user can update a password', async () => {
     const user = await new User(fixtures.user).save()
     const token = authentication.token.create(user)

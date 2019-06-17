@@ -1,5 +1,5 @@
 const logger = require('@pubsweet/logger')
-const { AuthorizationError } = require('@pubsweet/errors')
+const { AuthorizationError, ConflictError } = require('@pubsweet/errors')
 
 const eager = 'teams.members.[user, alias]'
 
@@ -26,7 +26,18 @@ const resolvers = {
         delete input.password
       }
 
-      return ctx.connectors.User.create(input, ctx)
+      try {
+        const user = await ctx.connectors.User.create(input, ctx)
+        return user
+      } catch (e) {
+        if (e.constraint) {
+          throw new ConflictError(
+            'User with this username or email already exists',
+          )
+        } else {
+          throw e
+        }
+      }
     },
     deleteUser(_, { id }, ctx) {
       return ctx.connectors.User.delete(id, ctx)
