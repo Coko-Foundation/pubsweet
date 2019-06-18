@@ -78,10 +78,6 @@ class User extends BaseModel {
   }
 
   async save() {
-    if (!this.id) {
-      await User.isUniq(this)
-    }
-
     if (this.password) {
       this.passwordHash = await User.hashPassword(this.password)
       delete this.password
@@ -96,26 +92,6 @@ class User extends BaseModel {
 
   static hashPassword(password) {
     return bcrypt.hash(password, BCRYPT_COST)
-  }
-
-  static async isUniq(user) {
-    const { ConflictError } = require('@pubsweet/errors')
-
-    let result
-
-    const swallowNotFound = e => {
-      if (e.name !== 'NotFoundError') throw e
-    }
-
-    result = await User.findByEmail(user.email).catch(swallowNotFound)
-
-    if (!result) {
-      result = await User.findByUsername(user.username).catch(swallowNotFound)
-    }
-
-    if (result) {
-      throw new ConflictError('User already exists')
-    }
   }
 
   static findByEmail(email) {

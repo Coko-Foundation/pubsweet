@@ -32,7 +32,7 @@ describe('User', () => {
     try {
       await duplicateUser.save()
     } catch (err) {
-      expect(err.name).toEqual('ConflictError')
+      expect(err.name).toEqual('error')
     }
 
     expect.hasAssertions()
@@ -49,7 +49,7 @@ describe('User', () => {
     try {
       await duplicateUser.save()
     } catch (err) {
-      expect(err.name).toEqual('ConflictError')
+      expect(err.name).toEqual('error')
     }
 
     expect.hasAssertions()
