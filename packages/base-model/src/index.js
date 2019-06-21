@@ -84,14 +84,17 @@ class BaseModel extends Model {
     this.updated = new Date().toISOString()
   }
 
-  saveGraph() {
+  saveGraph(opts = {}) {
     const updateAndFetch = (graph, trx) =>
       this.constructor
         .query(trx)
-        .upsertGraphAndFetch(graph, { insertMissing: true, noDelete: true })
+        .upsertGraphAndFetch(
+          graph,
+          Object.assign({ insertMissing: true, noDelete: true }, opts),
+        )
 
     const insertAndFetch = graph =>
-      this.constructor.query().insertGraphAndFetch(graph)
+      this.constructor.query().insertGraphAndFetch(graph, opts)
 
     return this._save(insertAndFetch, updateAndFetch)
   }
