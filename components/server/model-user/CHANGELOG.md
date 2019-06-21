@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@4.0.10...@pubsweet/model-user@5.0.0) (2019-06-21)
+
+
+### Features
+
+* **model-user:** move unique constraints verification into db ([38a941b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/38a941b))
+
+
+### BREAKING CHANGES
+
+* **model-user:** Moves unique constraints from save()/isUniq() to database-native checks.
+
+
+
+
+
 ## [4.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@4.0.9...@pubsweet/model-user@4.0.10) (2019-06-13)
 
 **Note:** Version bump only for package @pubsweet/model-user

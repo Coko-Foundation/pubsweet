@@ -1,6 +1,6 @@
 {
   "name": "xpub-theme",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "CSS for xpub apps and styleguides",
   "main": "src",
   "license": "MIT",

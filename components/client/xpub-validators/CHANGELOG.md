@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-validators@0.0.16...xpub-validators@0.0.17) (2019-06-21)
+
+**Note:** Version bump only for package xpub-validators
+
+
+
+
+
 ## [0.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-validators@0.0.15...xpub-validators@0.0.16) (2019-06-13)
 
 **Note:** Version bump only for package xpub-validators
