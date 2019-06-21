@@ -67,6 +67,22 @@ describe('Manuscript', () => {
     expect(updatedTeam.name).toEqual('Updated')
   })
 
+  it('can override graph saving options', async () => {
+    const manuscript = await new Manuscript({
+      title: 'Test',
+      teams: [{ name: 'Test', role: 'test' }],
+    }).saveGraph()
+
+    manuscript.teams[0] = Object.assign(manuscript.teams[0], {
+      role: 'dontupdate',
+    })
+
+    await manuscript.saveGraph({ noUpdate: '[teams]' })
+    const team = await Team.query().findById(manuscript.teams[0].id)
+
+    expect(team.role).toEqual('test')
+  })
+
   it('can be found by property', async () => {
     await new Manuscript({ title: 'Test' }).save()
     const manuscript = await Manuscript.findOneByField('title', 'Test')
