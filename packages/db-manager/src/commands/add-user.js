@@ -1,8 +1,9 @@
 const logger = require('@pubsweet/logger')
-const { User } = require('@pubsweet/models')
 const { validateUser } = require('../validations')
 
 module.exports = async userData => {
+  const { User } = require('@pubsweet/models')
+
   validateUser(userData)
 
   logger.info('Creating user', userData.username)
