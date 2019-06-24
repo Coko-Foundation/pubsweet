@@ -1,8 +1,8 @@
 const getUmzug = require('../helpers/umzug')
-const getMigrationPaths = require('../helpers/migrationPaths')
 const logger = require('@pubsweet/logger')
 
 const migrate = async options => {
+  const getMigrationPaths = require('../helpers/migrationPaths')
   const { umzug, cleanup } = await getUmzug(getMigrationPaths())
 
   try {
