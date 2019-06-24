@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@3.0.10...@pubsweet/db-manager@3.0.11) (2019-06-24)
+
+
+### Bug Fixes
+
+* **db-manager:** only require models/components when needed ([4ed26c3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4ed26c3))
+
+
+
+
+
 ## [3.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@3.0.9...@pubsweet/db-manager@3.0.10) (2019-06-21)
 
 **Note:** Version bump only for package @pubsweet/db-manager
