@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-upload@1.0.12...xpub-upload@1.0.13) (2019-06-28)
+
+**Note:** Version bump only for package xpub-upload
+
+
+
+
+
 ## [1.0.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-upload@1.0.11...xpub-upload@1.0.12) (2019-06-24)
 
 **Note:** Version bump only for package xpub-upload
