@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "9.2.7",
+  "version": "9.2.8",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -13,8 +13,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^10.3.4",
-    "@pubsweet/ui-toolkit": "^2.2.4",
+    "@pubsweet/ui": "^10.3.5",
+    "@pubsweet/ui-toolkit": "^2.2.5",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link": "^1.2.11",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.0.1...@pubsweet/model-user@5.0.2) (2019-06-28)
+
+
+### Bug Fixes
+
+* **model-user:** make user.teams nullable ([e3fe2da](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e3fe2da))
+
+
+
+
+
 ## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.0.0...@pubsweet/model-user@5.0.1) (2019-06-24)
 
 **Note:** Version bump only for package @pubsweet/model-user
