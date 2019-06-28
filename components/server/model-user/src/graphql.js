@@ -93,7 +93,7 @@ const typeDefs = `
     username: String
     email: String
     admin: Boolean
-    teams: [Team!]!
+    teams: [Team]
   }
 
   input UserInput {

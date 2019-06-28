@@ -77,7 +77,7 @@ describe('Manuscript', () => {
       role: 'dontupdate',
     })
 
-    await manuscript.saveGraph({ noUpdate: '[teams]' })
+    await manuscript.saveGraph({ noUpdate: ['teams'] })
     const team = await Team.query().findById(manuscript.teams[0].id)
 
     expect(team.role).toEqual('test')
