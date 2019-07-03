@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-component-xpub-review-backend",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": "src",
   "keywords": [],
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/component-send-email": "^0.2.22",
-    "@pubsweet/db-manager": "^3.0.12",
-    "@pubsweet/errors": "^2.0.16",
+    "@pubsweet/component-send-email": "^0.2.23",
+    "@pubsweet/db-manager": "^3.0.13",
+    "@pubsweet/errors": "^2.0.17",
     "lodash": "^4.17.11",
     "moment": "^2.18.1",
     "passport": "^0.4.0"

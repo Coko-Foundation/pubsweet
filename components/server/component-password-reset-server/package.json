@@ -1,13 +1,13 @@
 {
   "name": "@pubsweet/component-password-reset-server",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Password reset backend component for PubSweet",
   "main": "src/index.js",
   "scripts": {},
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/errors": "^2.0.16",
+    "@pubsweet/errors": "^2.0.17",
     "body-parser": "^1.17.2",
     "config": "^3.0.1",
     "moment": "^2.18.1",

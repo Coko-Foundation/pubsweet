@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-fragment@3.0.13...@pubsweet/model-fragment@3.0.14) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/model-fragment
+
+
+
+
+
 ## [3.0.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-fragment@3.0.12...@pubsweet/model-fragment@3.0.13) (2019-06-28)
 
 **Note:** Version bump only for package @pubsweet/model-fragment
