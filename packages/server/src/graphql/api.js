@@ -18,6 +18,10 @@ const hostname = config.has('pubsweet-server.hostname')
   ? config.get('pubsweet-server.hostname')
   : 'localhost'
 
+const extraApolloConfig = config.has('pubsweet-server.apollo')
+  ? config.get('pubsweet-server.apollo')
+  : {}
+
 const api = app => {
   app.use('/graphql', authBearerAndPublic)
   const server = new ApolloServer({
@@ -56,6 +60,7 @@ const api = app => {
     playground: {
       subscriptionEndpoint: `ws://${hostname}:3000/subscriptions`,
     },
+    ...extraApolloConfig,
   })
   server.applyMiddleware({ app })
 }
