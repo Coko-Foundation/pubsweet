@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.7...pubsweet-server@13.5.0) (2019-07-03)
+
+
+### Features
+
+* use a config object with apollo's config ([5135db6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5135db6))
+
+
+
+
+
 ## [13.4.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.6...pubsweet-server@13.4.7) (2019-06-28)
 
 **Note:** Version bump only for package pubsweet-server
