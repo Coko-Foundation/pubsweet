@@ -41,6 +41,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
         publisher: 'Coko Foundation', // this will appear in the email footer
         privacy: '', // a text containing information about the privacy policy that will appear in the email footer
         address: '2973 16th St., Suite 300, San Francisco, CA 94103', // the address in the footer
+        footerText: 'You have received this email in regards to the account creation, submission, or peer review process of a paper submitted to a journal published by Coko Foundation.'
       },
     ```
 
@@ -79,9 +80,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
           subject: `${collection.customId}: Manuscript Update`,
           paragraph,
           unsubscribeLink: `http://localhost:3000/unsubscribe/${user.id}`,
-          ctaLink: `http://localhost:3000/projects/${collection.id}/versions/${
-            fragment.id
-          }/details`,
+          ctaLink: `http://localhost:3000/projects/${collection.id}/versions/${fragment.id}/details`,
         },
         bodyProps: {
           hasLink: true,
