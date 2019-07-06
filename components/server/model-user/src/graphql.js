@@ -14,7 +14,7 @@ const resolvers = {
     // Authentication
     currentUser(_, vars, ctx) {
       if (!ctx.user) return null
-      return ctx.connectors.User.model.find(ctx.user)
+      return ctx.connectors.User.model.find(ctx.user, { eager })
     },
   },
   Mutation: {
