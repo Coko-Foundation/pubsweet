@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 import { Menu } from '@pubsweet/ui'
 
-const Opener = styled.button.attrs({
+const Opener = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background: transparent;
   border: 0;
   // border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};

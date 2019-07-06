@@ -44,9 +44,9 @@ const contentStyles = css`
   }
 `
 
-export const withEditorStyle = Component => styled(Component).attrs({
+export const withEditorStyle = Component => styled(Component).attrs(() => ({
   basePlaceholderClassName: 'placeholder',
-})`
+}))`
   font-family: ${th('fontWriting')};
   font-size: ${th('fontSizeBase')};
   line-height: 1.8;

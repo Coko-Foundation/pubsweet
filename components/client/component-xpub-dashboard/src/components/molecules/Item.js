@@ -23,9 +23,9 @@ const Body = styled.div`
   }
 `
 
-const Divider = styled.span.attrs({
-  children: props => ` ${props.separator} `,
-})`
+const Divider = styled.span.attrs(props => ({
+  children: ` ${props.separator} `,
+}))`
   color: ${th('colorFurniture')};
   white-space: pre;
 `

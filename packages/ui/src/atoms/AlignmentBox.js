@@ -10,9 +10,9 @@ const borderRule = position => props => `
     border-${position}-width: ${props.noBorder[position] ? '0' : '1px'}
   `
 
-const AlignmentBox = styled.div.attrs({
+const AlignmentBox = styled.div.attrs(() => ({
   role: 'presentation',
-})`
+}))`
   box-shadow: inset 0 0 0 2px ${whiteRGBA};
   cursor: pointer;
   height: 26px;

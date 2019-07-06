@@ -59,12 +59,12 @@ const StyledPod = styled('div')`
 `
 
 // This is needed for legacy safari support
-const ButtonContainer = styled('div').attrs({
+const ButtonContainer = styled('div').attrs(() => ({
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-})`
+}))`
   height: 100%;
 `
 

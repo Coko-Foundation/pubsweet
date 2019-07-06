@@ -23,9 +23,9 @@ const primary = css`
   }
 `
 
-const StyledButton = styled.button.attrs({
+const StyledButton = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
