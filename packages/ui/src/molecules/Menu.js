@@ -33,9 +33,9 @@ const Label = styled.label`
   ${override('ui.Menu.Label')};
 `
 
-const Opener = styled.button.attrs({
+const Opener = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background: transparent;
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
@@ -115,9 +115,9 @@ const Arrow = styled.span`
   ${override('ui.Menu.Arrow')};
 `
 
-const Main = styled.div.attrs({
+const Main = styled.div.attrs(() => ({
   role: 'listbox',
-})`
+}))`
   position: relative;
 
   ${override('ui.Menu.Main')};
@@ -147,11 +147,11 @@ const Options = styled.div`
   ${override('ui.Menu.Options')};
 `
 
-const Option = styled.div.attrs({
+const Option = styled.div.attrs(props => ({
   role: 'option',
   tabIndex: '0',
-  'aria-selected': props => props.active,
-})`
+  'aria-selected': props.active,
+}))`
   color: ${props => (props.active ? props.theme.textColor : '#444')};
   font-weight: ${props => (props.active ? '600' : 'inherit')};
   cursor: pointer;

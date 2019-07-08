@@ -23,9 +23,9 @@ const Status = styled.div`
   display: inline-flex;
 `
 
-const StatusIdle = styled(Status).attrs({
+const StatusIdle = styled(Status).attrs(() => ({
   children: () => <StatusIcon>plus_circle</StatusIcon>,
-})``
+}))``
 
 const spin = keyframes`
   0% {
@@ -39,9 +39,9 @@ const spin = keyframes`
   }
 `
 
-const StatusConverting = styled(Status).attrs({
+const StatusConverting = styled(Status).attrs(() => ({
   children: () => <StatusIcon>plus_circle</StatusIcon>,
-})`
+}))`
   &:hover {
     cursor: wait;
   }
@@ -58,9 +58,9 @@ const StatusConverting = styled(Status).attrs({
   }
 `
 
-const StatusError = styled(Status).attrs({
+const StatusError = styled(Status).attrs(() => ({
   children: () => <StatusIcon>plus_circle</StatusIcon>,
-})`
+}))`
   color: ${th('colorDanger')};
   font-size: 1.5em;
   font-style: italic;
@@ -87,9 +87,9 @@ const dash = keyframes`
   }
 `
 
-const StatusCompleted = styled(Status).attrs({
+const StatusCompleted = styled(Status).attrs(() => ({
   children: () => <StatusIcon>check_circle</StatusIcon>,
-})`
+}))`
   polyline {
     animation: ${dash} 1.35s linear;
     stroke-dasharray: 100;

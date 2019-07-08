@@ -28,9 +28,9 @@ const CollapsibleBox = styled.div`
   width: 100%;
   min-width: 0;
 `
-const ButtonAsIconWrapper = styled.button.attrs({
+const ButtonAsIconWrapper = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background-color: transparent;
   border: none;
   line-height: 0;

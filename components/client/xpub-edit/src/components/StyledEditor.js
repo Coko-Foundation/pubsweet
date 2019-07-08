@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import Editor from './Editor'
 
-const StyledEditor = styled(Editor).attrs({
+const StyledEditor = styled(Editor).attrs(() => ({
   basePlaceholderClassName: 'placeholder',
-})`
+}))`
   font-family: ${th('fontWriting')};
   font-size: ${th('fontSizeBase')};
   line-height: 1.8;

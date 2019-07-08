@@ -15,9 +15,9 @@ const Title = styled.div`
   border-bottom: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   padding: ${th('gridUnit')} 1em;
 `
-const TabContainer = styled.div.attrs({
-  'data-test-id': props => props['data-test-id'] || 'tab-container',
-})``
+const TabContainer = styled.div.attrs(props => ({
+  'data-test-id': props['data-test-id'] || 'tab-container',
+}))``
 
 const Content = styled.div``
 
