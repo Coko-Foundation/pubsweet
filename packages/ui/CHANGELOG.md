@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.3.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.6...@pubsweet/ui@10.3.7) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
 ## [10.3.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.5...@pubsweet/ui@10.3.6) (2019-07-03)
 
 **Note:** Version bump only for package @pubsweet/ui
