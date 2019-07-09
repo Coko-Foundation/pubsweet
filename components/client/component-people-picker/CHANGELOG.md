@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.6...@pubsweet/component-people-picker@0.1.7) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
 ## [0.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.5...@pubsweet/component-people-picker@0.1.6) (2019-07-03)
 
 **Note:** Version bump only for package @pubsweet/component-people-picker

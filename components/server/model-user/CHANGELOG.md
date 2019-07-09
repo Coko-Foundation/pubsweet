@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.0.3...@pubsweet/model-user@5.0.4) (2019-07-09)
+
+
+### Bug Fixes
+
+* **model-user:** make sure teams are returned with current user ([f1049d2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f1049d2))
+
+
+
+
+
 ## [5.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.0.2...@pubsweet/model-user@5.0.3) (2019-07-03)
 
 **Note:** Version bump only for package @pubsweet/model-user
