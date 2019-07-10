@@ -1,5 +1,6 @@
 const passport = require('passport')
 const { ApolloServer } = require('apollo-server-express')
+const isEmpty = require('lodash/isEmpty')
 const logger = require('@pubsweet/logger')
 const errors = require('@pubsweet/errors')
 
@@ -32,7 +33,7 @@ const api = app => {
       helpers,
     }),
     formatError: err => {
-      const error = err.originalError || err
+      const error = isEmpty(err.originalError) ? err : err.originalError
 
       logger.error(error.message, { error })
 
