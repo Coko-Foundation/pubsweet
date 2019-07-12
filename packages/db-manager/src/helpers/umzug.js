@@ -4,6 +4,9 @@ const Umzug = require('umzug')
 const fs = require('fs-extra')
 const { extname, resolve } = require('path')
 const tmp = require('tmp-promise')
+
+tmp.setGracefulCleanup()
+
 const storage = require('./umzugStorage')
 
 // Load SQL files as migrations
