@@ -19,18 +19,20 @@ describe('create tables', () => {
 
   it('runs migrations', async () => {
     await createTables()
-    const { umzug } = await getUmzug([])
+    const { umzug, cleanup } = await getUmzug([])
     const executedMigrations = await umzug.executed()
     expect(executedMigrations.map(migration => migration.file)).toEqual([
       '0001-component.js',
       '0002-app.js',
       '1524494862-entities.sql',
     ])
+    await cleanup()
   })
 
   it('does run them again', async () => {
-    const { umzug } = await getUmzug([])
+    const { umzug, cleanup } = await getUmzug([])
     const pendingMigrations = await umzug.pending()
     expect(pendingMigrations).toEqual([])
+    await cleanup()
   })
 })
