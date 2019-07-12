@@ -1,6 +1,6 @@
 {
   "name": "jest-environment-db",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "description": "",
   "main": "index.js",
   "private": true,

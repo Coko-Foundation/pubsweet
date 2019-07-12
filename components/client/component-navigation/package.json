@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-navigation",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Basic navigation bar component for PubSweet",
   "main": "index.js",
   "author": "Collaborative Knowledge Foundation",
