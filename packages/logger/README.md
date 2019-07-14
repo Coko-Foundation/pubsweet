@@ -1,12 +1,10 @@
-# @pubsweet/logger
-
 A module encapsulating standard logging features for pubsweet components and services.
 
-## Usage
+### Usage
 
 Either:
 
-```javascript
+```js static
 const myLogger = require('winston') // or something else
 const logger = require('@pubsweet/logger')
 logger.configure(myLogger)
@@ -14,7 +12,7 @@ logger.configure(myLogger)
 
 Or set the logger in config:
 
-```javascript
+```js static
 const myLogger = require('winston') // or something else
 
 {
@@ -26,7 +24,7 @@ const myLogger = require('winston') // or something else
 
 The configured logger can then be imported from anywhere:
 
-```javascript
+```js static
 const logger = require('@pubsweet/logger')
 logger.info('log')
 ```
