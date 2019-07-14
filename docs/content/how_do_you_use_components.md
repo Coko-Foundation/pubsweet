@@ -2,21 +2,11 @@ Using a component is as simple as installing it, configuring it, and then includ
 
 ## Installing
 
-Components can be installed using the PubSweet CLI:
+Components can be installed using the yarn:
 
-pubsweet add login
+`yarn add pubsweet-component-login`
 
-This installs the `pubsweet-component-login` package, and adds the component to the app config so PubSweet knows to load it.
-
-Note that the CLI adds the `pubsweet-component-` prefix automatically if it's not already present.
-
-You can also manually install components using npm or yarn:
-
-npm install \--save pubsweet-component-login
-
-yarn add pubsweet-component-login
-
-If you do that, you'll need to also add the component manually to the list in `config/components.json`.
+You can then add the component to the list in `config/components.json`.
 
 ## Configuring
 
