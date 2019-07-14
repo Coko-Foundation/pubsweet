@@ -20,7 +20,7 @@
     - [Building your app (`pubsweet build`)](#building-your-app-pubsweet-build)
     - [Running your app](#running-your-app)
   - [Managing your app](#managing-your-app)
-    - [Adding and removing components (`pubsweet add`, `pubsweet remove`)](#adding-and-removing-components-pubsweet-add-pubsweet-remove)
+    - [Adding and removing components](#adding-and-removing-components)
     - [Adding a user to the database (`pubsweet adduser`)](#adding-a-user-to-the-database-pubsweet-adduser)
 - [Contributing](#contributing)
 - [Credits](#credits)⏎
@@ -106,8 +106,6 @@ Commands:
   build       build static assets for a pubsweet app
   start       start pubsweet server and backing services
   server      build static assets and start a pubsweet app
-  add         add one or more components to a pubsweet app
-  remove      remove one or more components from a pubsweet app
   adduser     add a user to the database for a pubsweet app
   help [cmd]  display help for [cmd]
 
@@ -233,27 +231,11 @@ Ensure that the `NODE_ENV` environment variable is set to `production`.
 
 ## Managing your app
 
-### Adding and removing components (`pubsweet add`, `pubsweet remove`)
+### Adding and removing components
 
-Components add pages, actions, and behaviors to pubsweet. There are many we have
-bundled by default, and you can create your own. To learn more about components,
-[read the documentation](https://pubsweet.org/docs/components).
+Components add models, UI, APIs, jobs, and much more to PubSweet. There are a number in core (https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components), and you can create your own.
 
-Run `add` or `remove` within your app directory, followed by one or more
-components, to add and remove components. These subcommands use `yarn` to add or
-remove the components and updates the configuration for your app accordingly.
-
-```bash
-cd myappname
-pubsweet add users-manager items-manager
-pubsweet remove users-manager items-manager
-```
-
-Find all available components by typing:
-
-```bash
-pubsweet components
-```
+To add or remove a component, install it via `yarn add component-name` (or `yarn remove` to uninstall) and edit `config/components.json` in your app's directory accordingly.
 
 ### Adding a user to the database (`pubsweet adduser`)
 
@@ -283,7 +265,7 @@ pubsweet adduser \
 # Contributing
 
 Please read our
-[CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/blob/master/CONTRIBUTING)
+[CONTRIBUTING](https://gitlab.coko.foundation/pubsweet/pubsweet/blob/master/CONTRIBUTING)
 guide.
 
 # Credits
@@ -292,7 +274,6 @@ guide.
 
 <a href="https://gitlab.coko.foundation/pubsweet/pubsweet"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/rgb-medium.jpg" width="300" /></a>
 
-PubSweet is part of the
-[Collaborative Knowledge Foundation](https://coko.foundation) family.
+PubSweet is part of [Collaborative Knowledge Foundation](https://coko.foundation).
 
 <a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
