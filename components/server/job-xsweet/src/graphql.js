@@ -3,8 +3,13 @@ const {
 } = require('pubsweet-server')
 
 const { getPubsub } = require('pubsweet-server/src/graphql/pubsub')
+const { db } = require('@pubsweet/db-manager')
 
-const CONVERT_DOCX_TO_HTML = 'CONVERT_DOCX_TO_HTML'
+const logger = require('@pubsweet/logger')
+
+const DOCX_TO_HTML = 'DOCX_TO_HTML'
+const crypto = require('crypto')
+const waait = require('waait')
 
 const resolvers = {
   Mutation: {
@@ -14,10 +19,35 @@ const resolvers = {
 
       const { createReadStream, filename } = await file
       const stream = await createReadStream()
-      const pubsubChannel = `${CONVERT_DOCX_TO_HTML}.${context.user}`
+
+      const jobId = crypto.randomBytes(3).toString('hex')
+      const pubsubChannel = `${DOCX_TO_HTML}.${context.user}.${jobId}`
+
+      // A reference to actual pgboss job row
+      let queueJobId
+
+      pubsub.subscribe(pubsubChannel, async ({ docxToHTMLJob: { status } }) => {
+        logger.info(pubsubChannel, status)
+        if (status === 'Conversion complete') {
+          await waait(1000)
+          const job = await db('pgboss.job').whereRaw(
+            "data->'request'->>'id' = ?",
+            [queueJobId],
+          )
+          pubsub.publish(pubsubChannel, {
+            docxToHTMLJob: {
+              status: 'Result',
+              html: job[0].data.response.html,
+            },
+          })
+        }
+      })
 
       pubsub.publish(pubsubChannel, {
-        docxToHTMLJob: { status: `Uploading file ${filename}` },
+        docxToHTMLJob: {
+          status: `Uploading file ${filename}`,
+          id: jobId,
+        },
       })
 
       const chunks = []
@@ -26,33 +56,44 @@ const resolvers = {
         chunks.push(chunk)
       })
 
-      return new Promise((resolve, reject) => {
-        stream.on('end', () => {
-          pubsub.publish(pubsubChannel, {
-            docxToHTMLJob: { status: 'File uploaded' },
-          })
+      stream.on('end', () => {
+        pubsub.publish(pubsubChannel, {
+          docxToHTMLJob: {
+            status: 'File uploaded and conversion job created',
+            id: jobId,
+          },
+        })
 
-          const result = Buffer.concat(chunks)
+        const result = Buffer.concat(chunks)
 
-          jobQueue.publish(`xsweetGraphQL`, {
+        jobQueue
+          .publish(`xsweetGraphQL`, {
             docx: {
               name: filename,
               data: result.toString('base64'),
             },
             pubsubChannel,
           })
-
-          resolve({ status: 'Conversion job submitted' })
-        })
-        stream.on('error', reject)
+          .then(id => (queueJobId = id))
       })
+
+      stream.on('error', e => {
+        pubsub.publish(pubsubChannel, {
+          status: e,
+        })
+      })
+
+      return {
+        status: 'Uploading file',
+        id: jobId,
+      }
     },
   },
   Subscription: {
     docxToHTMLJob: {
-      subscribe: async (_, vars, context) => {
+      subscribe: async (_, { jobId }, context) => {
         const pubsub = await getPubsub()
-        return pubsub.asyncIterator(`${CONVERT_DOCX_TO_HTML}.${context.user}`)
+        return pubsub.asyncIterator(`${DOCX_TO_HTML}.${context.user}.${jobId}`)
       },
     },
   },
@@ -65,10 +106,11 @@ const typeDefs = `
   }
 
   extend type Subscription {
-    docxToHTMLJob: DocxToHTMLJob!
+    docxToHTMLJob(jobId: String!): DocxToHTMLJob!
   }
 
   type DocxToHTMLJob {
+    id: String
     status: String!
     html: String
   }

@@ -2,7 +2,7 @@ const tmp = require('tmp-promise')
 const fs = require('fs')
 const path = require('path')
 const { execSync, execFileSync } = require('child_process')
-
+const logger = require('@pubsweet/logger')
 const { pubsubManager } = require('pubsweet-server')
 
 // encode file to base64
@@ -30,9 +30,12 @@ const xsweetHandler = enablePubsub => async job => {
   try {
     let pubsub
     if (enablePubsub) {
+      logger.info(job.data.pubsubChannel, 'has started.')
       pubsub = await pubsubManager.getPubsub()
       pubsub.publish(job.data.pubsubChannel, {
-        docxToHTMLJob: { status: 'DOCX to HTML conversion started' },
+        docxToHTMLJob: {
+          status: 'DOCX to HTML conversion started',
+        },
       })
     }
 
@@ -48,7 +51,9 @@ const xsweetHandler = enablePubsub => async job => {
 
     if (enablePubsub) {
       pubsub.publish(job.data.pubsubChannel, {
-        docxToHTMLJob: { status: 'Unzipping DOCX document' },
+        docxToHTMLJob: {
+          status: 'Unzipping DOCX document',
+        },
       })
     }
 
@@ -82,15 +87,14 @@ const xsweetHandler = enablePubsub => async job => {
     await cleanup()
 
     if (enablePubsub) {
+      logger.info(job.data.pubsubChannel, 'has completed.')
       pubsub.publish(job.data.pubsubChannel, {
-        docxToHTMLJob: { status: 'Conversion complete', html: processedHtml },
+        docxToHTMLJob: { status: 'Conversion complete' },
       })
     }
 
     return { html: processedHtml }
   } catch (e) {
-    // eslint-disable-next-line
-    console.log(e, e.stack)
     if (enablePubsub) {
       const pubsub = await pubsubManager.getPubsub()
       pubsub.publish(job.data.pubsubChannel, {
