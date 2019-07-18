@@ -30,14 +30,11 @@ const resolvers = {
         logger.info(pubsubChannel, status)
         if (status === 'Conversion complete') {
           await waait(1000)
-          const job = await db('pgboss.job').whereRaw(
-            "data->'request'->>'id' = ?",
-            [queueJobId],
-          )
+          // console.log(job, queueJobId, db)
           pubsub.publish(pubsubChannel, {
             docxToHTMLJob: {
-              status: 'Result',
-              html: job[0].data.response.html,
+              status: 'Done',
+              id: queueJobId,
             },
           })
         }
@@ -89,6 +86,18 @@ const resolvers = {
       }
     },
   },
+  Query: {
+    docxToHTMLJob: async (_, { jobId }, context) => {
+      const job = await db('pgboss.job').whereRaw(
+        "data->'request'->>'id' = ?",
+        [jobId],
+      )
+      return {
+        status: 'Final',
+        html: job[0].data.response.html,
+      }
+    },
+  },
   Subscription: {
     docxToHTMLJob: {
       subscribe: async (_, { jobId }, context) => {
@@ -106,6 +115,10 @@ const typeDefs = `
   }
 
   extend type Subscription {
+    docxToHTMLJob(jobId: String!): DocxToHTMLJob!
+  }
+
+  extend type Query {
     docxToHTMLJob(jobId: String!): DocxToHTMLJob!
   }
 

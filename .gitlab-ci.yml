@@ -128,7 +128,10 @@ test:
   script:
     - cd ${HOME}
     # specify host here else it confuses the linked postgres image
+    - docker build -t pubsweet/job-xsweet components/server/job-xsweet
+    - docker run -e DATABASE_URL="postgres://test:pw@postgres/test" --name job-xsweet pubsweet/job-xsweet
     - PGHOST=postgres yarn test
+    - docker stop job-xsweet
 
 # if tests pass we will push latest, labelled with current commit hash
 push:latest:
