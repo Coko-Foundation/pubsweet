@@ -27,9 +27,10 @@ const api = app => {
   const server = new ApolloServer({
     schema,
     context: ({ req, res }) => ({
-      user: req.user,
-      connectors,
       helpers,
+      connectors,
+      user: req.user,
+      loaders: req.loaders,
     }),
     formatError: err => {
       const error = err.originalError || err
