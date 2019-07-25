@@ -73,7 +73,7 @@ const xsweetHandler = enablePubsub => async job => {
     execSync(`bash ${path.resolve(__dirname, 'execute_chain.sh')} ${tmpDir}`)
 
     const html = fs.readFileSync(
-      path.join(tmpDir, 'outputs', '16HTML5.html'),
+      path.join(tmpDir, 'outputs', 'HTML5.html'),
       'utf8',
     )
 
@@ -94,6 +94,8 @@ const xsweetHandler = enablePubsub => async job => {
     }
     return { html: processedHtml }
   } catch (e) {
+    // eslint-disable-next-line
+    console.log(e)
     if (enablePubsub) {
       const pubsub = await pubsubManager.getPubsub()
       pubsub.publish(job.data.pubsubChannel, {
