@@ -4,10 +4,7 @@ Object.assign(global, {
   WebSocket,
 })
 
-// const { model: User } = require('@pubsweet/model-user')
-// const { fixtures } = require('@pubsweet/model-user/test')
-// const cleanDB = require('pubsweet-server/test/helpers/db_cleaner')
-// const api = require('pubsweet-server/test/helpers/api')
+const { destroy } = require('pubsweet-server/src/graphql/pubsub')
 const authentication = require('pubsweet-server/src/authentication')
 
 const { startServer } = require('pubsweet-server')
@@ -18,22 +15,41 @@ const path = require('path')
 const { SubscriptionClient } = require('subscriptions-transport-ws')
 const superagent = require('superagent')
 
+const wait = require('waait')
+
 jest.setTimeout(60000)
 
 describe('XSweet job', () => {
   let token
   // let user
   let server
-  beforeEach(async () => {
+  let client
+
+  beforeAll(async () => {
     // await cleanDB()
     server = await startServer()
-    // user = await new User(fixtures.user).save()
+
     token = authentication.token.create({ id: 1, username: 'test' })
+
+    client = new SubscriptionClient(`ws://localhost:4000/subscriptions`, {
+      connectionParams: {
+        authToken: token,
+      },
+    })
   })
 
-  afterAll(done => server.close(done))
+  afterAll(async done => {
+    await destroy()
+    await server.close()
+    await wait(500)
+    done()
+  })
 
-  it('can process it', async done => {
+  afterEach(async () => {
+    await client.client.close()
+  })
+
+  it('can process it', async () => {
     const { body } = await superagent
       .post('http://localhost:4000/graphql')
       .field(
@@ -59,18 +75,6 @@ describe('XSweet job', () => {
 
     expect(body.data.createDocxToHTMLJob.status).toBe('Uploading file')
 
-    const client = new SubscriptionClient(`ws://localhost:4000/subscriptions`, {
-      connectionParams: {
-        authToken: token,
-      },
-    })
-
-    // client.onConnected(() => {
-    //   // console.log('HELLLO!!!')
-    // })
-
-    // client.onError(e => console.log(e))
-
     const subscriptionPromise = new Promise((resolve, reject) => {
       client
         .request({
@@ -88,7 +92,6 @@ describe('XSweet job', () => {
         })
         .subscribe({
           next: async res => {
-            // console.log(res)
             if (res.data.docxToHTMLJob.status === 'Done') {
               const { body } = await superagent
                 .post('http://localhost:4000/graphql')
@@ -113,10 +116,6 @@ describe('XSweet job', () => {
         })
     })
 
-    await subscriptionPromise
-
-    client.unsubscribeAll()
-
-    done()
+    expect(await subscriptionPromise).toBe(true)
   })
 })

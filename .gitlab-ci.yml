@@ -24,6 +24,9 @@ build:
     - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
     - echo "Ignore warning! Cannot perform an interactive login from a non TTY device"
     - docker push $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+    - echo "Building XSweet job runner image"
+    - docker build -t pubsweet/job-xsweet:$CI_COMMIT_SHA components/server/job-xsweet
+    - docker push pubsweet/job-xsweet:$CI_COMMIT_SHA
 
 pages:
   image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
@@ -128,10 +131,31 @@ test:
   script:
     - cd ${HOME}
     # specify host here else it confuses the linked postgres image
-    - docker build -t pubsweet/job-xsweet components/server/job-xsweet
-    - docker run -e DATABASE_URL="postgres://test:pw@postgres/test" --name job-xsweet pubsweet/job-xsweet
     - PGHOST=postgres yarn test
-    - docker stop job-xsweet
+
+
+test:job-xsweet:
+  image: $IMAGE_ORG/$IMAGE_NAME:$CI_COMMIT_SHA
+  stage: test
+  variables:
+    # don't clone repo as image already has it
+    GIT_STRATEGY: none
+    # setup data for postgres image
+    POSTGRES_USER: test
+    POSTGRES_PASSWORD: pw
+    # connection details for tests
+    PGUSER: test
+    PGPASSWORD: pw
+    NODE_ENV: test
+    DATABASE_URL: postgres://test:pw@postgres/test
+  services:
+    - postgres
+    - pubsweet/job-xsweet
+  except:
+    - tags
+  script:
+    - cd ${HOME}
+    - PGHOST=postgres cd components/server && yarn jest --testRegex test/standaloneXsweetTest.js
 
 # if tests pass we will push latest, labelled with current commit hash
 push:latest:
