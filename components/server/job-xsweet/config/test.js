@@ -6,10 +6,8 @@ module.exports = {
       database: 'test',
     },
     pool: { min: 0, max: 10, idleTimeoutMillis: 1000 },
-    ignoreTerminatedConnectionError: true,
     port: 4000,
     secret: 'test',
-    sse: false,
   },
   pubsweet: {
     components: [

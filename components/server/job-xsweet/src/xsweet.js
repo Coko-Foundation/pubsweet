@@ -92,7 +92,6 @@ const xsweetHandler = enablePubsub => async job => {
         docxToHTMLJob: { status: 'Conversion complete' },
       })
     }
-
     return { html: processedHtml }
   } catch (e) {
     if (enablePubsub) {
