@@ -196,6 +196,15 @@
           "<rootDir>/test/jest-setup.js"
         ],
         "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/components/server/job-xsweet",
+        "displayName": "job-xsweet",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "node"
       }
     ]
   },

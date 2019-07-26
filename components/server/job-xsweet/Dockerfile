@@ -20,15 +20,17 @@ RUN wget https://gitlab.coko.foundation/XSweet/editoria_typescript/repository/ar
 RUN wget https://gitlab.coko.foundation/XSweet/HTMLevator/repository/archive.zip?ref=eeef394426f7db7647d992aafdda1b677b35b7ae -O htmlevator.zip; unzip htmlevator.zip; rm htmlevator.zip
 
 # Download Saxon
-RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.8/SaxonHE9-8-0-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
+RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-9-1-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
 
 COPY . .
 
+# Put things in place
+RUN ./src/move_xslts.sh
 # Test conversion
 RUN mkdir _test
 RUN unzip src/test.docx -d _test
 RUN ./src/execute_chain.sh _test
-RUN grep -q 'Testing conversion 123' _test/outputs/16HTML5.html
+RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
 # Start job processing
