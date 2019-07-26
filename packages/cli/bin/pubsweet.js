@@ -5,15 +5,23 @@ const pkg = require('../package.json')
 
 program
   .version(pkg.version)
-  .command('new', 'create and set up a new pubsweet app')
-  .command('setupdb', 'generate a database for a pubsweet app')
+  .command(
+    'adduser',
+    'add a user to the database for a PubSweet app (deprecated)',
+  )
+  .command('build', 'build static assets for a PubSweet app')
   .command('migrate', 'run pending database migrations')
-  .command('build', 'build static assets for a pubsweet app')
-  .command('start', 'start pubsweet server and backing services')
-  .command('server', 'build static assets and start a pubsweet app')
-  .command('add', 'add one or more components to a pubsweet app')
-  .command('remove', 'remove one or more components from a pubsweet app')
-  .command('adduser', 'add a user to the database for a pubsweet app')
+  .command('new', 'create and set up a new PubSweet app')
+  .command(
+    'server',
+    'build static assets and start a PubSweet app (deprecated)',
+  )
+  .command('setupdb', 'generate a database for a PubSweet app (deprecated)')
+  .command('start', 'start PubSweet server and backing services')
+  .command('start-server', "start the app's server")
+  .alias('start:server')
+  .command('start-client', 'compile and serve the client application')
+  .alias('start:client')
   .parse(process.argv)
 
 if (!program.commands.map(cmd => cmd._name).includes(program.args[0])) {

@@ -8,6 +8,10 @@ const dbExists = require('@pubsweet/db-manager/src/helpers/db-exists')
 const logger = require('@pubsweet/logger')
 
 module.exports = async (commandArguments = process.argv) => {
+  logger.warn(
+    'Warning: This command is deprecated and will be removed in the next version of PubSweet CLI. Please use custom seed scripts instead.',
+  )
+
   program.description(
     'Setup a database for a PubSweet app. Run from your project root',
   )
