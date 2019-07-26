@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.26...xpub-edit@2.5.27) (2019-07-12)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.25...xpub-edit@2.5.26) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
 ## [2.5.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.24...xpub-edit@2.5.25) (2019-07-03)
 
 **Note:** Version bump only for package xpub-edit

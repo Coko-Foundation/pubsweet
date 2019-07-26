@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-epub-frontend",
-  "version": "0.1.15",
+  "version": "0.1.17",
   "description": "A frontend component that triggers a conversion of Editoria's Typescript to epub",
   "main": "index.js",
   "keywords": [

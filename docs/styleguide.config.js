@@ -36,8 +36,29 @@ module.exports = {
       content: './content/technical_architecture.md',
     },
     {
-      name: 'Base model (data models)',
-      content: '../packages/base-model/README.md',
+      name: 'More PubSweet Core',
+      sections: [
+        {
+          name: 'Base model (data models)',
+          content: '../packages/base-model/README.md',
+        },
+        {
+          name: 'Database manager',
+          content: '../packages/db-manager/README.md',
+        },
+        {
+          name: 'Logger',
+          content: '../packages/logger/README.md',
+        },
+        {
+          name: 'Job runner',
+          content: './content/job_runner.md',
+        },
+        {
+          name: 'Command-line interface',
+          content: '../packages/cli/README.md',
+        },
+      ],
     },
     {
       name: 'Components',

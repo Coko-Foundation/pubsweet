@@ -1,8 +1,6 @@
-# Db-manager
-
 Provides database management utilities to Pubsweet apps.
 
-## Usage
+### Usage
 
 This package exports the following functions:
 
@@ -11,7 +9,7 @@ This package exports the following functions:
 - `dbExists`
 - `migrate`
 
-### `setupDb`
+#### `setupDb`
 
 This function
 
@@ -21,7 +19,7 @@ This function
 
 It can be called without arguments, in which case it will take its configuration from the following config keys:
 
-```
+```js static
 {
   'pubsweet-server': {
     db: {
@@ -41,23 +39,23 @@ Alternatively it can be passed the `dbManager` object as an argument, which will
 
 The name of the database will be the full `dbPath`.
 
-### `addUser`
+#### `addUser`
 
 This function adds a user to an already existing database. It requires a user object as argument:
 
-```
+```js static
 addUser({
   username: 'xxxxxx',
   password: 'pppppp',
   email: 'email@example.com',
-  admin: true // (optional)
+  admin: true, // (optional)
 })
 ```
 
-### `dbExists`
+#### `dbExists`
 
 This function checks if any database exists at the configured path. Returns `true` or `false`
 
-### `migrate`
+#### `migrate`
 
 This function performs pending migrations.

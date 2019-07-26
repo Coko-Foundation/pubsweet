@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@5.0.15...pubsweet-component-xpub-dashboard@5.0.16) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-component-xpub-dashboard
+
+
+
+
+
+## [5.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@5.0.14...pubsweet-component-xpub-dashboard@5.0.15) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
 ## [5.0.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@5.0.13...pubsweet-component-xpub-dashboard@5.0.14) (2019-07-03)
 
 **Note:** Version bump only for package pubsweet-component-xpub-dashboard

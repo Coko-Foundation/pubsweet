@@ -23,8 +23,9 @@ const primary = css`
   }
 `
 
-const StyledButton = styled.button.attrs(() => ({
-  type: 'button',
+const StyledButton = styled.button.attrs(props => ({
+  'data-test-id': props['data-test-id'],
+  type: props.type || 'button',
 }))`
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};

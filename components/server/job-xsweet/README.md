@@ -24,7 +24,7 @@ This publishes a job that the job runner (a Docker container) picks up.
 
 ## Docker container
 
-Run it with: `docker run pubsweet/job-xsweet:latest -e DATABASE_URL=yourdatabaseurl` (e.g. postgres://username:password@host.docker.internal:5432/yourdb)
+Run it with: `docker run -e DATABASE_URL=yourdatabaseurl pubsweet/job-xsweet:latest` (e.g. postgres://username:password@host.docker.internal:5432/yourdb)
 
 The DATABASE_URL is needed so that the Docker container knows how to connect to your database.
 

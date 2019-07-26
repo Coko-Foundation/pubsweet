@@ -7,49 +7,15 @@
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 
-# Contents
-
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
-
-- [Overview](#overview)
-- [PubSweet packages](#pubsweet-packages)
-- [Wiki](#wiki)
-- [Support](#support)
-- [Credits](#credits)
-
-<!-- /TOC -->
-
 # Overview
 
 **PubSweet** allows you to build state-of-the-art publishing platforms.
 
 It's a modular and flexible framework consisting of a **server** and **client** that work together, **components** that can modify or extend the functionality of the server and/or client, and a **command-line tool** that helps manage PubSweet apps.
 
-## PubSweet packages (managed with Lerna)
+# Documentation
 
-| package                                                                                                                                                                                                     | description                                                                                              |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
-| [![pubsweet-server](https://img.shields.io/badge/PubSweet-server-51c1bc.svg?style=flat&colorA=84509d) pubsweet-server](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server)        | an extensible GraphQL API (+ custom REST endpoints needed for things like OAuth) that runs on the server |
-| [![pubsweet-client](https://img.shields.io/badge/PubSweet-client-51c1bc.svg?style=flat&colorA=84509d) pubsweet-client](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/client)        | an extensible frontend React app that runs in the browser                                                |
-| [![pubsweet-components](https://img.shields.io/badge/PubSweet-components-51c1bc.svg?style=flat&colorA=84509d) pubsweet-components](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components) | components for server and/or client                                                                      |
-| [![pubsweet-cli](https://img.shields.io/badge/PubSweet-CLI-51c1bc.svg?style=flat&colorA=84509d) pubsweet cli](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/cli)                    | a suite of command-line tools for building and managing your platform                                    |
-| [@pubsweet/logger](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/logger)                                                                                                            | logging utility                                                                                          |
-| [@pubsweet/db-manager](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/db-manager)                                                                                                    | utility for managing PubSweet databases                                                                  |
-
-# Wiki
-
-The [PubSweet Wiki](https://gitlab.coko.foundation/pubsweet/pubsweet/wikis/home) contains all of the documentation for the PubSweet framework.
-
-The wiki answers most of the common questions around:
-
-- Setting up your local environment
-- Documentation of PubSweet components
-- Using PubSweet components
-- The PubSweet data model
-- Technical terms
-- Contributing
-
-Additionally, we've collaboratively written (using Editoria, a PubSweet-based app), [a book about PubSweet](https://coko.foundation/books/).
+The [PubSweet website](http://pubsweet.coko.foundation) contains all of the documentation for the PubSweet framework. Please submit an issue or MR if you find a piece of information is missing!
 
 # Support
 
@@ -60,10 +26,10 @@ Additionally, we've collaboratively written (using Editoria, a PubSweet-based ap
 # Projects using PubSweet
 
 - [Editoria](https://gitlab.coko.foundation/editoria/editoria) - a book production platform built for University of California Press
-- [Xpub](https://gitlab.coko.foundation/xpub/xpub) - Collabra, a journal publishing platform
 - [elife-xpub](https://github.com/elifesciences/elife-xpub/) - A journal publishing platform in collaboration with eLife
-- [Faraday](https://gitlab.coko.foundation/xpub/xpub-faraday) - A journal publishing platform in collaboration with Hindawi
+- [Faraday](https://gitlab.com/hindawi/xpub/xpub-review) - A journal publishing platform in collaboration with Hindawi
 - [Micropubs](https://gitlab.coko.foundation/micropubs/wormbase) - A micropublications platform in collaboration with Wormbase
+- [Xpub](https://gitlab.coko.foundation/xpub/xpub) - Collabra, a journal publishing platform
 
 # Credits
 

@@ -8,9 +8,10 @@ const migrate = async options => {
   try {
     await umzug.up(options)
   } catch (e) {
-    logger.error('Error while running migrations:', e.message, e.stack)
+    logger.error('Error while running migrations:', e.message)
+    throw e
   } finally {
-    cleanup()
+    await cleanup()
   }
 }
 

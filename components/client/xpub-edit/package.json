@@ -1,6 +1,6 @@
 {
   "name": "xpub-edit",
-  "version": "2.5.25",
+  "version": "2.5.27",
   "license": "MIT",
   "files": [
     "dist",
@@ -8,8 +8,8 @@
   ],
   "main": "src",
   "dependencies": {
-    "@pubsweet/ui": "^10.3.6",
-    "@pubsweet/ui-toolkit": "^2.2.6",
+    "@pubsweet/ui": "^10.3.8",
+    "@pubsweet/ui-toolkit": "^2.2.8",
     "classnames": "^2.2.6",
     "prosemirror-commands": "^1.0.1",
     "prosemirror-dropcursor": "^1.0.0",

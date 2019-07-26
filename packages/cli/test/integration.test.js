@@ -67,42 +67,6 @@ describe('CLI: integration test', () => {
     })
   })
 
-  describe('add and remove', () => {
-    const componentsFile = path.join(appPath, 'config', 'components.json')
-    const componentName = 'ink-backend'
-
-    let oldComponents
-    beforeAll(() => {
-      oldComponents = fs.readJsonSync(componentsFile)
-    })
-
-    it('adds component', () => {
-      const { stdout, stderr } = runCommandSync({
-        args: `add ${componentName}`,
-        cwd: appPath,
-        stdio: 'pipe',
-      })
-      console.log(stdout, stderr)
-      expect(stdout).toContain('Success: 1 components installed')
-      const configPostAdd = fs.readJsonSync(componentsFile)
-      expect(configPostAdd).toEqual(
-        oldComponents.concat(`pubsweet-component-${componentName}`),
-      )
-    })
-
-    it('removes component', () => {
-      const { stdout, stderr } = runCommandSync({
-        args: `remove ${componentName}`,
-        cwd: appPath,
-        stdio: 'pipe',
-      })
-      console.log(stdout, stderr)
-      expect(stdout).toContain('Success: 1 components removed')
-      const configPostRemove = fs.readJsonSync(componentsFile)
-      expect(configPostRemove).toEqual(oldComponents)
-    })
-  })
-
   describe('setupdb', () => {
     it('creates tables', () => {
       const { stdout, stderr } = runCommandSync({
