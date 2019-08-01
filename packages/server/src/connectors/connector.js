@@ -138,7 +138,7 @@ const fetchOneCreator = (entityName, EntityModel) => async (
 ) => {
   await ctx.helpers.can(ctx.user, 'read', entityName)
 
-  const entity = await EntityModel.find(id, options)
+  const entity = await ctx.loaders[entityName].load(id)
 
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   return outputFilter(entity)
@@ -156,7 +156,7 @@ const fetchRelatedCreator = (entityName, EntityModel) => async (
   ctx,
 ) => {
   let entities
-  const entity = await EntityModel.find(id)
+  const entity = await ctx.loaders[entityName].load(id)
   if (where) {
     entities = await entity.$relatedQuery(relation).where(where)
   } else {

@@ -7,6 +7,7 @@ const config = require('config')
 
 const schema = require('./schema')
 const connectors = require('../connectors')
+const loaders = require('./loaders')
 
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
   session: false,
@@ -30,7 +31,7 @@ const api = app => {
       helpers,
       connectors,
       user: req.user,
-      loaders: req.loaders,
+      loaders: loaders(),
     }),
     formatError: err => {
       const error = err.originalError || err

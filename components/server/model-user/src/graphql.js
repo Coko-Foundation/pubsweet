@@ -1,7 +1,8 @@
 const logger = require('@pubsweet/logger')
 const { AuthorizationError, ConflictError } = require('@pubsweet/errors')
 
-const eager = 'teams.members.[user, alias]'
+// const eager = 'teams.members.[user, alias]'
+const eager = undefined
 
 const resolvers = {
   Query: {
@@ -93,7 +94,6 @@ const typeDefs = `
     username: String
     email: String
     admin: Boolean
-    teams: [Team]
   }
 
   input UserInput {

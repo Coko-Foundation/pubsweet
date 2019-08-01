@@ -18,7 +18,6 @@ const sse = require('pubsweet-sse')
 
 const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
-const registerLoaders = require('./register-loaders')
 const registerComponents = require('./register-components')
 
 const configureApp = app => {
@@ -72,7 +71,6 @@ const configureApp = app => {
   app.locals.authsome = authsome
 
   registerComponents(app)
-  registerLoaders(app)
 
   // REST API
   app.use('/api', api)

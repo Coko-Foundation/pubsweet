@@ -189,6 +189,15 @@
         "testEnvironment": "jest-environment-db"
       },
       {
+        "rootDir": "<rootDir>/components/server/model-fragment",
+        "displayName": "model-fragment",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "jest-environment-db"
+      },
+      {
         "rootDir": "<rootDir>/components/server/component-password-reset-server",
         "displayName": "component-password-reset-server",
         "testRegex": "/test/.*_test.js$",
