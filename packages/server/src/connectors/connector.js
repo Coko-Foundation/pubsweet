@@ -1,5 +1,10 @@
 const { ref, lit } = require('objection')
 
+const { NotFoundError } = require('@pubsweet/errors')
+
+const notFoundError = (property, value, className) =>
+  new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
+
 // create a function which creates a new entity and performs authorization checks
 const createCreator = (entityName, EntityModel) => async (
   input,
@@ -139,6 +144,10 @@ const fetchOneCreator = (entityName, EntityModel) => async (
   await ctx.helpers.can(ctx.user, 'read', entityName)
 
   const entity = await ctx.loaders[entityName].load(id)
+
+  if (!entity) {
+    throw notFoundError('id', id, entityName)
+  }
 
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   return outputFilter(entity)

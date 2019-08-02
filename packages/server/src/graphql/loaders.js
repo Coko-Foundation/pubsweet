@@ -16,7 +16,12 @@ if (
 }
 
 const defaultLoader = model =>
-  new DataLoader(ids => model.query().whereIn('id', ids))
+  new DataLoader(async ids => {
+    const results = await model.query().whereIn('id', ids)
+    // We map over ids so that the DataLoader API is always matched,
+    // i.e. array of keys in, array of results out (even if some records are not found)
+    return ids.map(id => results.find(result => result.id === id))
+  })
 
 module.exports = () => {
   const loaders = {}
