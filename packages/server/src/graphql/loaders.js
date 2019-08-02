@@ -22,15 +22,20 @@ module.exports = () => {
   const loaders = {}
 
   components.forEach(component => {
-    if (component.model && component.modelName && component.modelLoaders) {
+    if (component.model && component.modelName) {
       // Sets up the default loader, that gets model instances by id
       // You can use it with e.g. context.loaders.User.load(id)
       loaders[component.modelName] = defaultLoader(component.model)
-      Object.keys(component.modelLoaders).forEach(loaderName => {
-        loaders[component.modelName][loaderName] = new DataLoader(
-          component.modelLoaders[loaderName],
-        )
-      })
+
+      // Allows for custom model loaders, that can be used e.g.
+      // context.loaders.User.customLoader.load(id)
+      if (component.modelLoaders) {
+        Object.keys(component.modelLoaders).forEach(loaderName => {
+          loaders[component.modelName][loaderName] = new DataLoader(
+            component.modelLoaders[loaderName],
+          )
+        })
+      }
     } else if (component.models) {
       // If there are multiple models specified in a single component
       // each can specify its own loaders
