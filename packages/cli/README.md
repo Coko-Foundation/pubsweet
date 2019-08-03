@@ -1,23 +1,22 @@
 PubSweet CLI (using `pubsweet` or `pubsweet help`) outputs:
 
-```static
-Usage: pubsweet [options] [command]
-
+```md
+Usage: pubsweet [options][command]
 
 Commands:
 
-  new         create and set up a new pubsweet app
-  setupdb     generate a database for a pubsweet app
-  build       build static assets for a pubsweet app
-  start       start pubsweet server and backing services
-  server      build static assets and start a pubsweet app
-  adduser     add a user to the database for a pubsweet app
-  help [cmd]  display help for [cmd]
+new create and set up a new pubsweet app
+setupdb generate a database for a pubsweet app
+build build static assets for a pubsweet app
+start start pubsweet server and backing services
+server build static assets and start a pubsweet app
+adduser add a user to the database for a pubsweet app
+help [cmd] display help for [cmd]
 
 Options:
 
-  -h, --help     output usage information
-  -V, --version  output the version number
+-h, --help output usage information
+-V, --version output the version number
 ```
 
 For any command, you can see detailed usage help by running `pubsweet help cmd`,
@@ -96,7 +95,7 @@ pubsweet setupdb
 If your database already has tables, `pubsweet setupdb` will not overwrite them
 by default. You can force it to delete existing data using `--clobber`:
 
-```static
+```bash
 $ pubsweet setupdb
 error: Database tables already exist
 error: If you want to overwrite the database, use --clobber
