@@ -1,4 +1,5 @@
+// TODO: No support for job runners in the core. Must run standalone.
 module.exports = {
   server: () => app => require('./endpoint')(app),
-  // TODO: No support for job components in the core. Must run standalone.
+  ...require('./graphql'),
 }

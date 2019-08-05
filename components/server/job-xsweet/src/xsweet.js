@@ -1,7 +1,9 @@
 const tmp = require('tmp-promise')
 const fs = require('fs')
 const path = require('path')
-const { execSync } = require('child_process')
+const { execSync, execFileSync } = require('child_process')
+const logger = require('@pubsweet/logger')
+const { pubsubManager } = require('pubsweet-server')
 
 // encode file to base64
 const base64EncodeFile = path => fs.readFileSync(path).toString('base64')
@@ -24,42 +26,85 @@ const imagesToBase64 = html => {
   return html
 }
 
-const xsweetHandler = async job => {
-  // console.log('processing job', job.data.docx)
-  const buf = Buffer.from(job.data.docx.data, 'base64')
-
-  const { path: tmpDir, cleanup } = await tmp.dir({
-    prefix: '_conversion-',
-    unsafeCleanup: true,
-    dir: process.cwd(),
-  })
-
-  // console.log('Write the buffer to a temporary file')
-  fs.writeFileSync(path.join(tmpDir, job.data.docx.name), buf)
-
-  // console.log('Unzip that docx')
-  execSync(`unzip -o ${tmpDir}/${job.data.docx.name} -d ${tmpDir}`)
-
-  // console.log('Convert using a series of Saxon/XSLT steps')
-  execSync(`bash ${path.resolve(__dirname, 'execute_chain.sh')} ${tmpDir}`)
-
-  // console.log('Return the HTML5 output')
-  const html = fs.readFileSync(
-    path.join(tmpDir, 'outputs', '16HTML5.html'),
-    'utf8',
-  )
-
-  let processedHtml
+const xsweetHandler = enablePubsub => async job => {
   try {
-    processedHtml = imagesToBase64(html)
+    let pubsub
+    if (enablePubsub) {
+      logger.info(job.data.pubsubChannel, 'has started.')
+      pubsub = await pubsubManager.getPubsub()
+      pubsub.publish(job.data.pubsubChannel, {
+        docxToHTMLJob: {
+          status: 'DOCX to HTML conversion started',
+        },
+      })
+    }
+
+    const buf = Buffer.from(job.data.docx.data, 'base64')
+
+    const { path: tmpDir, cleanup } = await tmp.dir({
+      prefix: '_conversion-',
+      unsafeCleanup: true,
+      dir: process.cwd(),
+    })
+
+    fs.writeFileSync(path.join(tmpDir, job.data.docx.name), buf)
+
+    if (enablePubsub) {
+      pubsub.publish(job.data.pubsubChannel, {
+        docxToHTMLJob: {
+          status: 'Unzipping DOCX document',
+        },
+      })
+    }
+
+    execFileSync('unzip', [
+      '-o',
+      `${tmpDir}/${job.data.docx.name}`,
+      '-d',
+      tmpDir,
+    ])
+
+    if (enablePubsub) {
+      pubsub.publish(job.data.pubsubChannel, {
+        docxToHTMLJob: { status: 'Converting DOCX using XSweet' },
+      })
+    }
+
+    execSync(`bash ${path.resolve(__dirname, 'execute_chain.sh')} ${tmpDir}`)
+
+    const html = fs.readFileSync(
+      path.join(tmpDir, 'outputs', 'HTML5.html'),
+      'utf8',
+    )
+
+    let processedHtml
+    try {
+      processedHtml = imagesToBase64(html)
+    } catch (e) {
+      processedHtml = html
+    }
+
+    await cleanup()
+
+    if (enablePubsub) {
+      logger.info(job.data.pubsubChannel, 'has completed.')
+      pubsub.publish(job.data.pubsubChannel, {
+        docxToHTMLJob: { status: 'Conversion complete' },
+      })
+    }
+    return { html: processedHtml }
   } catch (e) {
-    processedHtml = html
+    // eslint-disable-next-line
+    console.log(e)
+    if (enablePubsub) {
+      const pubsub = await pubsubManager.getPubsub()
+      pubsub.publish(job.data.pubsubChannel, {
+        docxToHTMLJob: { status: 'Conversion error' },
+      })
+    }
+
+    return { html: null }
   }
-  // console.log(html)
-
-  await cleanup()
-
-  return { html: processedHtml }
 }
 
 const handleJobs = async () => {
@@ -70,7 +115,8 @@ const handleJobs = async () => {
   const jobQueue = await connectToJobQueue()
 
   // Subscribe to the job queue with an async handler
-  await jobQueue.subscribe('xsweet-*', xsweetHandler)
+  await jobQueue.subscribe('xsweet-*', xsweetHandler(false))
+  await jobQueue.subscribe('xsweetGraphQL', xsweetHandler(true))
 }
 
 handleJobs()
