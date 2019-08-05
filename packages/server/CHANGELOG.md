@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.2...pubsweet-server@13.6.0) (2019-08-05)
+
+
+### Bug Fixes
+
+* **server:** add default loaders correctly ([3d49924](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3d49924))
+* **server:** correctly address missing records ([7c26668](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c26668))
+
+
+### Features
+
+* **loaders:** add dataloaders to context by default ([c4c2255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4c2255))
+* **pubsweet-server:** add loaders object to gql context ([b1c715a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1c715a))
+* use modelLoaders for model-specific loaders ([3be6bc2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3be6bc2))
+
+
+
+
+
 ## [13.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.1...pubsweet-server@13.5.2) (2019-07-12)
 
 **Note:** Version bump only for package pubsweet-server

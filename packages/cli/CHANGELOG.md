@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.11...pubsweet@5.0.0) (2019-08-05)
+
+
+### Features
+
+* **cli:** remove adding and removing components ([88aae5f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/88aae5f)), closes [#449](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/449)
+
+
+### BREAKING CHANGES
+
+* **cli:** Removes pubsweet add and pubsweet remove
+
+
+
+
+
 ## [4.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.10...pubsweet@4.1.11) (2019-07-12)
 
 **Note:** Version bump only for package pubsweet

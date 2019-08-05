@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.0.16...@pubsweet/model-team@2.1.0) (2019-08-05)
+
+
+### Features
+
+* **loaders:** add dataloaders to context by default ([c4c2255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4c2255))
+
+
+
+
+
 ## [2.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.0.15...@pubsweet/model-team@2.0.16) (2019-07-12)
 
 **Note:** Version bump only for package @pubsweet/model-team
