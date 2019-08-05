@@ -21,7 +21,7 @@ const resolvers = {
         helpers: { can, canKnowAbout },
       } = require('pubsweet-server')
 
-      const manuscript = await Manuscript.find(id)
+      const manuscript = await ctx.loaders.Manuscript.load(id)
 
       const outputFilter = await canKnowAbout(ctx.user, manuscript)
       const currentAndUpdate = {
