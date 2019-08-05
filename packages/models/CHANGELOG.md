@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.16...@pubsweet/models@0.2.17) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/models
+
+
+
+
+
 ## [0.2.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.15...@pubsweet/models@0.2.16) (2019-07-12)
 
 **Note:** Version bump only for package @pubsweet/models

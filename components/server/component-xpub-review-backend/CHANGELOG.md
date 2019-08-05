@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@1.0.19...pubsweet-component-xpub-review-backend@1.0.20) (2019-08-05)
+
+**Note:** Version bump only for package pubsweet-component-xpub-review-backend
+
+
+
+
+
 ## [1.0.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-review-backend@1.0.18...pubsweet-component-xpub-review-backend@1.0.19) (2019-07-12)
 
 **Note:** Version bump only for package pubsweet-component-xpub-review-backend

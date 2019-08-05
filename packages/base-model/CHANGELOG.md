@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.5...@pubsweet/base-model@3.4.0) (2019-08-05)
+
+
+### Features
+
+* **loaders:** add dataloaders to context by default ([c4c2255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4c2255))
+
+
+
+
+
 ## [3.3.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.4...@pubsweet/base-model@3.3.5) (2019-07-12)
 
 **Note:** Version bump only for package @pubsweet/base-model

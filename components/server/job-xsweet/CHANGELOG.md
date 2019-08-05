@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.2.9...@pubsweet/job-xsweet@1.3.0) (2019-08-05)
+
+
+### Features
+
+* **job-xsweet:** add graphql subscriptions support ([26f2b31](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/26f2b31))
+* **job-xsweet:** use pgboss.job table to communicate result ([ef496e1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ef496e1))
+* use new pipelined version of XSweet ([a778425](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a778425))
+
+
+
+
+
 ## [1.2.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.2.8...@pubsweet/job-xsweet@1.2.9) (2019-07-12)
 
 **Note:** Version bump only for package @pubsweet/job-xsweet

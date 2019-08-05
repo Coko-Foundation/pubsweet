@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-theme@0.0.18...xpub-theme@0.0.19) (2019-08-05)
+
+**Note:** Version bump only for package xpub-theme
+
+
+
+
+
 ## [0.0.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-theme@0.0.17...xpub-theme@0.0.18) (2019-07-12)
 
 **Note:** Version bump only for package xpub-theme
