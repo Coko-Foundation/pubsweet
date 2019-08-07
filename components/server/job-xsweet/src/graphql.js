@@ -30,7 +30,6 @@ const resolvers = {
         logger.info(pubsubChannel, status)
         if (status === 'Conversion complete') {
           await waait(1000)
-          // console.log(job, queueJobId, db)
           pubsub.publish(pubsubChannel, {
             docxToHTMLJob: {
               status: 'Done',
@@ -86,20 +85,18 @@ const resolvers = {
       }
     },
   },
-  Query: {
-    docxToHTMLJob: async (_, { jobId }, context) => {
-      const job = await db('pgboss.job').whereRaw(
-        "data->'request'->>'id' = ?",
-        [jobId],
-      )
-      return {
-        status: 'Final',
-        html: job[0].data.response.html,
-      }
-    },
-  },
   Subscription: {
     docxToHTMLJob: {
+      resolve: async (payload, { jobId }, context) => {
+        if (payload.docxToHTMLJob && payload.docxToHTMLJob.status === 'Done') {
+          const job = await db('pgboss.job').whereRaw(
+            "data->'request'->>'id' = ?",
+            [payload.docxToHTMLJob.id],
+          )
+          payload.docxToHTMLJob.html = job[0].data.response.html
+        }
+        return payload.docxToHTMLJob
+      },
       subscribe: async (_, { jobId }, context) => {
         const pubsub = await getPubsub()
         return pubsub.asyncIterator(`${DOCX_TO_HTML}.${context.user}.${jobId}`)
@@ -115,10 +112,6 @@ const typeDefs = `
   }
 
   extend type Subscription {
-    docxToHTMLJob(jobId: String!): DocxToHTMLJob!
-  }
-
-  extend type Query {
     docxToHTMLJob(jobId: String!): DocxToHTMLJob!
   }
 
