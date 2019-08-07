@@ -41,10 +41,7 @@ const api = app => {
         pubsweetError => error instanceof pubsweetError,
       )
       // err is always a GraphQLError which should be passed to the client
-      if (
-        Object.keys(err.originalError).length !== 0 &&
-        !isPubsweetDefinedError
-      )
+      if (!isEmpty(err.originalError) && !isPubsweetDefinedError)
         return {
           name: 'Server Error',
           message: 'Something went wrong! Please contact your administrator',
