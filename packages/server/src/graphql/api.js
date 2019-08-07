@@ -1,5 +1,6 @@
 const passport = require('passport')
 const { ApolloServer } = require('apollo-server-express')
+const isEmpty = require('lodash/isEmpty')
 const logger = require('@pubsweet/logger')
 const errors = require('@pubsweet/errors')
 
@@ -34,7 +35,7 @@ const api = app => {
       loaders: loaders(),
     }),
     formatError: err => {
-      const error = err.originalError || err
+      const error = isEmpty(err.originalError) ? err : err.originalError
 
       logger.error(error.message, { error })
 
@@ -42,10 +43,7 @@ const api = app => {
         pubsweetError => error instanceof pubsweetError,
       )
       // err is always a GraphQLError which should be passed to the client
-      if (
-        Object.keys(err.originalError).length !== 0 &&
-        !isPubsweetDefinedError
-      )
+      if (!isEmpty(err.originalError) && !isPubsweetDefinedError)
         return {
           name: 'Server Error',
           message: 'Something went wrong! Please contact your administrator',
