@@ -108,21 +108,7 @@ describe('XSweet job', () => {
           .subscribe({
             next: async res => {
               if (res.data.docxToHTMLJob.status === 'Done') {
-                const { body } = await superagent
-                  .post('http://localhost:4000/graphql')
-                  .set('Content-Type', 'application/json')
-                  .set('Authorization', `Bearer ${token}`)
-                  .send({
-                    variables: { jobId: res.data.docxToHTMLJob.id },
-                    query: `query docxToHTMLJob($jobId: String!) {
-                      docxToHTMLJob(jobId: $jobId) {
-                        status
-                        html
-                      }
-                    }`,
-                  })
-
-                resolve(body.data.docxToHTMLJob.html)
+                resolve(res.data.docxToHTMLJob.html)
               }
               return true
             },
