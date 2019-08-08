@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.3.0...@pubsweet/job-xsweet@2.0.0) (2019-08-08)
+
+
+### Bug Fixes
+
+* **job-xsweet:** improve error and stream handling ([d9ee21f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d9ee21f))
+
+
+### Features
+
+* **job-xsweet:** improve API for GraphQL-based conversion ([a93bc6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a93bc6d)), closes [#453](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/453)
+
+
+### BREAKING CHANGES
+
+* **job-xsweet:** The query for fetching coversion jobs no longer exists, it's purely a mutation +
+subscription combo now.
+
+
+
+
+
 # [1.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@1.2.9...@pubsweet/job-xsweet@1.3.0) (2019-08-05)
 
 

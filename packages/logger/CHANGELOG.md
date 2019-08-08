@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.31](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/logger@0.2.30...@pubsweet/logger@0.2.31) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/logger
+
+
+
+
+
 ## [0.2.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/logger@0.2.29...@pubsweet/logger@0.2.30) (2019-08-05)
 
 **Note:** Version bump only for package @pubsweet/logger

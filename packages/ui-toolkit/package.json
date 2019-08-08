@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/ui-toolkit",
-  "version": "2.2.9",
+  "version": "2.2.10",
   "description": "Helper functions and reusable blocks for use with @pubsweet/ui",
   "repository": {
     "type": "git",
