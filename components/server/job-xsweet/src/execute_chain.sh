@@ -30,7 +30,22 @@ XMLTOHTML5="${XSWEET}/applications/html-polish/html5-serialize.xsl"
 
 
 $saxonHE -xsl:$PIPELINE -s:$TEMP/word/document.xml -o:$TEMP/outputs/PIPELINED.xhtml
-echo Made PIPELINED.xhtml
+
+if [ $? -eq 0 ]
+then
+  echo "Made PIPELINED.xhtml"
+else
+  echo "There was an error converting the document." >&2
+  exit 1
+fi
 
 $saxonHE -xsl:$XMLTOHTML5 -s:$TEMP/outputs/PIPELINED.xhtml -o:$TEMP/outputs/HTML5.html
-echo Made HTML5.html
+
+if [ $? -eq 0 ]
+then
+  echo "Made HTML5.html"
+  exit 0
+else
+  echo "There was an error converting the document." >&2
+  exit 1
+fi

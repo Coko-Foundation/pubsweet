@@ -18,7 +18,7 @@ const resolvers = {
       const pubsub = await getPubsub()
 
       const { createReadStream, filename } = await file
-      const stream = await createReadStream()
+      const stream = createReadStream()
 
       const jobId = crypto.randomBytes(3).toString('hex')
       const pubsubChannel = `${DOCX_TO_HTML}.${context.user}.${jobId}`
@@ -48,34 +48,38 @@ const resolvers = {
 
       const chunks = []
 
-      stream.on('data', chunk => {
-        chunks.push(chunk)
-      })
-
-      stream.on('end', () => {
-        pubsub.publish(pubsubChannel, {
-          docxToHTMLJob: {
-            status: 'File uploaded and conversion job created',
-            id: jobId,
-          },
+      await new Promise((resolve, reject) => {
+        stream.on('data', chunk => {
+          chunks.push(chunk)
         })
 
-        const result = Buffer.concat(chunks)
-
-        jobQueue
-          .publish(`xsweetGraphQL`, {
-            docx: {
-              name: filename,
-              data: result.toString('base64'),
+        stream.on('end', () => {
+          pubsub.publish(pubsubChannel, {
+            docxToHTMLJob: {
+              status: 'File uploaded and conversion job created',
+              id: jobId,
             },
-            pubsubChannel,
           })
-          .then(id => (queueJobId = id))
-      })
 
-      stream.on('error', e => {
-        pubsub.publish(pubsubChannel, {
-          status: e,
+          const result = Buffer.concat(chunks)
+
+          jobQueue
+            .publish(`xsweetGraphQL`, {
+              docx: {
+                name: filename,
+                data: result.toString('base64'),
+              },
+              pubsubChannel,
+            })
+            .then(id => (queueJobId = id))
+          resolve()
+        })
+
+        stream.on('error', e => {
+          pubsub.publish(pubsubChannel, {
+            status: e,
+          })
+          reject(e)
         })
       })
 
