@@ -9,6 +9,9 @@ const currentUser = {
 }
 
 const version = {
+  meta: {
+    title: faker.lorem.sentence(10),
+  },
   id: faker.random.uuid(),
   reviews: [
     {
@@ -20,13 +23,18 @@ const version = {
     {
       created: new Date().toDateString(),
       updated: new Date().toDateString(),
-      members: [
+      status: [
         {
-          user: currentUser,
+          user: currentUser.id,
           status: 'invited',
         },
       ],
-      role: 'reviewer',
+      members: [
+        {
+          user: currentUser,
+        },
+      ],
+      teamType: 'reviewerEditor',
     },
   ],
 }
@@ -44,6 +52,9 @@ const currentUser = {
 
 const version = {
   id: faker.random.uuid(),
+  meta: {
+    title: faker.lorem.sentence(10),
+  },
   reviews: [
     {
       id: faker.random.uuid(),
@@ -54,13 +65,19 @@ const version = {
     {
       created: new Date().toDateString(),
       updated: new Date().toDateString(),
+      status: [
+        {
+          user: currentUser.id,
+          status: 'accepted',
+        },
+      ],
       members: [
         {
           user: currentUser,
           status: 'accepted',
         },
       ],
-      role: 'reviewer',
+      teamType: 'reviewerEditor',
     },
   ],
 }
@@ -77,6 +94,9 @@ const currentUser = {
 }
 
 const version = {
+  meta: {
+    title: faker.lorem.sentence(10),
+  },
   id: faker.random.uuid(),
   reviews: [
     {
@@ -88,13 +108,19 @@ const version = {
     {
       created: new Date().toDateString(),
       updated: new Date().toDateString(),
+      status: [
+        {
+          user: currentUser.id,
+          status: 'rejected',
+        },
+      ],
       members: [
         {
           user: currentUser,
           status: 'rejected',
         },
       ],
-      role: 'reviewer',
+      teamType: 'reviewerEditor',
     },
   ],
 }
