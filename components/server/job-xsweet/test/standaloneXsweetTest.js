@@ -33,7 +33,7 @@ describe('XSweet job', () => {
     await destroy()
     await server.close()
     setImmediate(() => server.emit('close'))
-    await wait(500)
+    await wait(1000)
     done()
   })
 
@@ -107,6 +107,9 @@ describe('XSweet job', () => {
           })
           .subscribe({
             next: async res => {
+              if (res.data.docxToHTMLJob.status === 'Conversion error') {
+                reject(res.data.docxToHTMLJob.status)
+              }
               if (res.data.docxToHTMLJob.status === 'Done') {
                 resolve(res.data.docxToHTMLJob.html)
               }

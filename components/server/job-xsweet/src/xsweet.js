@@ -71,7 +71,6 @@ const xsweetHandler = enablePubsub => async job => {
     }
 
     execSync(`bash ${path.resolve(__dirname, 'execute_chain.sh')} ${tmpDir}`)
-
     const html = fs.readFileSync(
       path.join(tmpDir, 'outputs', 'HTML5.html'),
       'utf8',
@@ -103,7 +102,7 @@ const xsweetHandler = enablePubsub => async job => {
       })
     }
 
-    return { html: null }
+    throw new Error('Conversion error')
   }
 }
 
