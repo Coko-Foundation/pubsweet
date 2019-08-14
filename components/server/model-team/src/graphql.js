@@ -97,7 +97,7 @@ const typeDefs = `
     role: String!
     name: String!
     object: TeamObject
-    members: [TeamMember!]!
+    members: [TeamMember!]
     owners: [User]
     global: Boolean
   }
