@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.6.0...pubsweet-server@13.6.1) (2019-08-08)
+
+
+### Bug Fixes
+
+* **server:** log errors correctly if originalError empty ([1b5c78a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1b5c78a))
+
+
+
+
+
 # [13.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.2...pubsweet-server@13.6.0) (2019-08-05)
 
 
