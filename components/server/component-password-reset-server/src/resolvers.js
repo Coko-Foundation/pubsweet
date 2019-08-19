@@ -1,6 +1,8 @@
 const crypto = require('crypto')
 const moment = require('moment')
 const config = require('config')
+const isFunction = require('lodash/isFunction')
+const merge = require('lodash/merge')
 const logger = require('@pubsweet/logger')
 const querystring = require('querystring')
 const { ValidationError } = require('@pubsweet/errors')
@@ -36,13 +38,30 @@ const resolvers = {
 
       logger.info(`Sending password reset email to ${user.email}`)
 
-      await transport.sendMail({
+      const defaultMailOptions = {
         from: configSender,
         to: user.email,
         subject: 'Password reset',
         text: `Reset your password: ${passwordResetURL}`,
         html: `<p><a href="${passwordResetURL}">Reset your password</a></p>`,
-      })
+      }
+
+      const customOptionsConfig = config.get(
+        'password-reset-server.customEmailOptions',
+      )
+
+      let customOptions
+      if (customOptionsConfig) {
+        customOptions = isFunction(customOptionsConfig)
+          ? customOptionsConfig(passwordResetURL, defaultMailOptions)
+          : customOptionsConfig
+      }
+
+      const finalOptions = customOptions
+        ? merge(defaultMailOptions, customOptions)
+        : defaultMailOptions
+
+      await transport.sendMail(finalOptions)
       return true
     },
     async resetPassword(_, { token, password }, ctx) {
