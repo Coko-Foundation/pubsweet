@@ -31,7 +31,7 @@
     "prop-types": "^15.5.10",
     "pubsweet-client": "^9.2.13",
     "react": "^16.9.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.0",
     "recompose": "^0.26.0",
     "rimraf": "^2.6.1"

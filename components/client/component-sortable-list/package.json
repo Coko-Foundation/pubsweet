@@ -10,7 +10,7 @@
   "peerDependencies": {
     "lodash": "^4.17.11",
     "react": ">=16.9",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.9.0"
   },
   "devDependencies": {
     "react-dnd-test-backend": "^7.0.0"
