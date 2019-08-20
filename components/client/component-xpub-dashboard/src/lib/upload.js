@@ -1,6 +1,6 @@
 import { compose, withProps } from 'recompose'
 import { withRouter } from 'react-router-dom'
-import { withApollo } from 'react-apollo'
+import { withApollo } from '@apollo/react-hoc'
 import request from 'pubsweet-client/src/helpers/api'
 import queries from '../graphql/queries/'
 import mutations from '../graphql/mutations/'
@@ -81,9 +81,7 @@ const redirectPromise = (setConversionState, journals, history) => ({
   data,
 }) => {
   setConversionState(() => ({ converting: false }))
-  const route = `/journals/${journals.id}/versions/${
-    data.createManuscript.id
-  }/submit`
+  const route = `/journals/${journals.id}/versions/${data.createManuscript.id}/submit`
   // redirect after a short delay
   window.setTimeout(() => {
     history.push(route)

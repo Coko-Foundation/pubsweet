@@ -13,10 +13,10 @@
     "recompose": "^0.30.0"
   },
   "peerDependencies": {
+    "@apollo/react-hoc": "^3.0.1",
     "graphql-tag": "^2.10.0",
     "pubsweet-client": ">=1.0.0",
-    "react": ">=16",
-    "react-apollo": "^2.3.3",
+    "react": ">=16.9",
     "styled-components": "^4.1.3"
   },
   "repository": {

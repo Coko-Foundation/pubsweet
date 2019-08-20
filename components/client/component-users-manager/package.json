@@ -10,11 +10,12 @@
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
+    "@apollo/react-components": "^3.0.1",
+    "@apollo/react-hoc": "^3.0.1",
     "config": "^3.0.1",
     "graphql-tag": ">=2.10.0",
     "pubsweet-client": ">=1.0.0",
-    "react": ">=16",
-    "react-apollo": ">=2.3.3"
+    "react": ">=16.9"
   },
   "repository": {
     "type": "git",

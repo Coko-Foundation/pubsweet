@@ -1,7 +1,7 @@
 import React from 'react'
 import faker from 'faker'
 import { MemoryRouter } from 'react-router-dom'
-import { MockedProvider } from 'react-apollo/test-utils'
+import { MockedProvider } from '@apollo/react-testing'
 
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'

@@ -2,7 +2,7 @@ import React from 'react'
 import { CheckboxGroup } from '@pubsweet/ui'
 import config from 'config'
 import gql from 'graphql-tag'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose } from '@apollo/react-hoc'
 
 const updateTeamMutation = gql`
   mutation($id: ID, $input: TeamInput) {

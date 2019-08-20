@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/react-components'
 
 import { ErrorText } from '@pubsweet/ui'
 import { Redirect, withRouter } from 'react-router-dom'

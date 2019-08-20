@@ -1,5 +1,5 @@
 import { compose, withProps } from 'recompose'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
 import { gql } from 'apollo-client-preset'
 import { withLoader } from 'pubsweet-client'
 

@@ -27,12 +27,12 @@
     "faker": "^4.1.0"
   },
   "peerDependencies": {
+    "@apollo/react-hoc": "^3.0.1",
     "apollo-client-preset": "^1.0.8",
     "config": "^3.0.1",
     "graphql-tag": "^2.10.0",
     "pubsweet-client": ">=2.1.0",
-    "react": ">=16",
-    "react-apollo": "^2.3.3"
+    "react": ">=16.9"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

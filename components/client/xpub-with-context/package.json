@@ -12,7 +12,7 @@
     "recompose": "^0.30.0"
   },
   "peerDependencies": {
-    "react": ">=16.3"
+    "react": ">=16.9"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }
