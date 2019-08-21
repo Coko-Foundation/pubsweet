@@ -13,9 +13,9 @@
     "query-string": "^5.0.0"
   },
   "peerDependencies": {
+    "@apollo/react-common": "^3.0.1",
     "pubsweet-client": ">=9.2.0",
-    "react": ">=16",
-    "react-apollo": "^2.5.4",
+    "react": ">=16.9",
     "react-router-dom": "^5.0.0",
     "styled-components": "^4.1.1"
   },

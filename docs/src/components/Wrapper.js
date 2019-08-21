@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { JournalProvider } from 'xpub-journal'
-import { MockedProvider } from 'react-apollo/test-utils'
+import { MockedProvider } from '@apollo/react-testing'
 import gql from 'graphql-tag'
 import styled, { ThemeProvider } from 'styled-components'
 import ErrorBoundary from './ErrorBoundary'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ApolloConsumer } from 'react-apollo'
+import { ApolloConsumer } from '@apollo/react-components'
 import Authsome from 'authsome'
 import config from 'config'
 

@@ -1,6 +1,6 @@
 import { throttle, cloneDeep, isEmpty, set } from 'lodash'
 import { compose, withProps, withState, withHandlers } from 'recompose'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/react-hoc'
 import { gql } from 'apollo-client-preset'
 import { withFormik } from 'formik'
 import { withLoader } from 'pubsweet-client'

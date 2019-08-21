@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { MockedProvider } from 'react-apollo/test-utils'
+import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
 import Authsome from 'authsome'
 import Authorize from '../../src/helpers/Authorize'
