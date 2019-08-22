@@ -5,6 +5,6 @@ describe('unknownCmd', () => {
     const { stdout } = runCommandSync({
       args: 'nonsense',
     })
-    expect(stdout).toContain('-V, --version  output the version number')
+    expect(stdout).toContain('Usage: pubsweet [options] [command]')
   })
 })
