@@ -12,6 +12,7 @@
     "@pubsweet/base-model": "^3.4.1",
     "@pubsweet/errors": "^2.0.21",
     "@pubsweet/logger": "^0.2.31",
+    "@pubsweet/models": "^0.2.18",
     "bcrypt": "3.0.2",
     "http-status-codes": "^1.3.0",
     "jsonwebtoken": "^8.4.0",

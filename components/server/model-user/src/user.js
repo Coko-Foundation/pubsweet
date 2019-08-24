@@ -24,14 +24,16 @@ class User extends BaseModel {
   }
 
   static get relationMappings() {
+    const { Team, TeamMember } = require('@pubsweet/models')
+
     return {
       teams: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: require.resolve('@pubsweet/model-team/src/team'),
+        modelClass: Team,
         join: {
           from: 'users.id',
           through: {
-            modelClass: require.resolve('@pubsweet/model-team/src/team_member'),
+            modelClass: TeamMember,
             from: 'team_members.user_id',
             to: 'team_members.team_id',
           },
