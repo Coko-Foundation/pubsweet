@@ -1,3 +1,4 @@
+import { get } from 'lodash'
 import styled, { css } from 'styled-components'
 
 const modalPosition = () => css`
@@ -15,7 +16,7 @@ const ModalRoot = styled.div.attrs(() => ({
   background-color: ${({ overlayColor }) =>
     overlayColor || 'rgba(0, 0, 0, 0.8)'};
   display: flex;
-  justify-content: center;
+  justify-content: ${props => get(props, 'justifyContent', 'center')};
 
   ${modalPosition};
 

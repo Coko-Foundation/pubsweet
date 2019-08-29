@@ -37,6 +37,7 @@ function ModalProvider({ children }) {
       {modalState.isVisibile &&
         createPortal(
           <ModalOverlay
+            justifyContent={modalState.modalProps.justifyContent}
             onClick={modalState.dismissable ? hideModal : undefined}
           >
             {modalState.component({
