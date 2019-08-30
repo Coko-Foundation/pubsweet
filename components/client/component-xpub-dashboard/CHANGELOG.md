@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@5.0.18...pubsweet-component-xpub-dashboard@5.0.19) (2019-08-30)
+
+**Note:** Version bump only for package pubsweet-component-xpub-dashboard
+
+
+
+
+
 ## [5.0.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-dashboard@5.0.17...pubsweet-component-xpub-dashboard@5.0.18) (2019-08-08)
 
 

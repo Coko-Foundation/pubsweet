@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.27...pubsweet-component-sortable-list@1.0.0) (2019-08-30)
+
+
+### Code Refactoring
+
+* **apollo:** update react-dom version ([e001d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e001d01))
+
+
+### BREAKING CHANGES
+
+* **apollo:** The minimum supported React version by @apollo is now 16.8
+
+
+
+
+
 ## [0.1.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@0.1.26...pubsweet-component-sortable-list@0.1.27) (2019-08-08)
 
 **Note:** Version bump only for package pubsweet-component-sortable-list
