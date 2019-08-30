@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-client",
-  "version": "9.2.13",
+  "version": "10.0.0",
   "main": "src/index.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -16,8 +16,8 @@
     "@apollo/react-common": "^3.0.1",
     "@apollo/react-components": "^3.0.1",
     "@apollo/react-hoc": "^3.0.1",
-    "@pubsweet/ui": "^10.3.10",
-    "@pubsweet/ui-toolkit": "^2.2.10",
+    "@pubsweet/ui": "^11.0.0",
+    "@pubsweet/ui-toolkit": "^2.2.11",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.11",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.13...pubsweet-client@10.0.0) (2019-08-30)
+
+
+### Code Refactoring
+
+* **apollo:** update react-dom version ([e001d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e001d01))
+
+
+### BREAKING CHANGES
+
+* **apollo:** The minimum supported React version by @apollo is now 16.8
+
+
+
+
+
 ## [9.2.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.12...pubsweet-client@9.2.13) (2019-08-08)
 
 **Note:** Version bump only for package pubsweet-client
