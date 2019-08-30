@@ -1,7 +1,8 @@
 FROM node:10
 MAINTAINER PubSweet Community <jure@coko.foundation>
 
-COPY . .
+COPY yarn.lock .
+COPY package.json .
 
 RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
 
@@ -11,6 +12,8 @@ RUN [ "yarn", "install", "--frozen-lockfile" ]
 # Remove cache and offline mirror
 RUN [ "yarn", "cache", "clean"]
 RUN [ "rm", "-rf", "/npm-packages-offline-cache"]
+
+COPY . .
 
 ENV NODE_ENV "production"
 
