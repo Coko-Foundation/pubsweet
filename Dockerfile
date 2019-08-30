@@ -1,4 +1,5 @@
-FROM pubsweet/pubsweet:base
+FROM node:10
+MAINTAINER PubSweet Community <jure@coko.foundation>
 
 COPY . . 
 
