@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 
+// Deprecated! Please use Heading instead
+
 const fontSize = ({ theme, level = 1 }) =>
   ({
     1: theme.fontSizeHeading1,
