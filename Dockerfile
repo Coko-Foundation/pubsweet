@@ -14,12 +14,6 @@ COPY . .
 
 ENV NODE_ENV "production"
 
-# Temporarily disable styleguide due to Babel incompatibility
-# WORKDIR ${HOME}/packages/styleguide
-# RUN [ "npm", "run", "styleguide:build" ]
-# Create file for kubernetes health checks
-# RUN touch ./styleguide/health
-
 EXPOSE 3000
 
 WORKDIR ${HOME}
