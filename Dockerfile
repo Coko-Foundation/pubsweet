@@ -4,8 +4,6 @@ MAINTAINER PubSweet Community <jure@coko.foundation>
 COPY yarn.lock .
 COPY package.json .
 
-RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
-
 # We do a development install because react-styleguidist is a dev dependency
 RUN [ "yarn", "install", "--frozen-lockfile" ]
 
