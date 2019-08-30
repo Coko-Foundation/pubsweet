@@ -16,9 +16,8 @@ const Button = styled.button.attrs(() => ({
 const UploadButton = ({ name, buttonText, onChange }) => {
   let fileInput
   return (
-    <div>
+    <React.Fragment>
       <Button onClick={() => fileInput.click()}>{buttonText}</Button>
-
       <input
         multiple
         name={name}
@@ -27,7 +26,7 @@ const UploadButton = ({ name, buttonText, onChange }) => {
         style={{ display: 'none' }}
         type="file"
       />
-    </div>
+    </React.Fragment>
   )
 }
 
