@@ -1,7 +1,7 @@
 FROM node:10
 MAINTAINER PubSweet Community <jure@coko.foundation>
 
-COPY . . 
+COPY . .
 
 RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
 
