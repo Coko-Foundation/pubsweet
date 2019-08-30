@@ -34,26 +34,28 @@ function ModalProvider({ children }) {
         isVisibile: modalState.isVisible,
       }}
     >
-      {modalState.isVisibile &&
-        createPortal(
-          <ModalOverlay
-            justifyContent={
-              modalState.modalProps
-                ? modalState.modalProps.justifyContent
-                : undefined
-            }
-            onClick={modalState.dismissable ? hideModal : undefined}
-          >
-            {modalState.component({
-              hideModal,
-              ...modalState.modalProps,
-            })}
-          </ModalOverlay>,
-          document.body,
-        )}
+      {modalState.isVisibile && (
+        <Portal hideModal={hideModal} modalState={modalState} />
+      )}
       {children}
     </ModalContext.Provider>
   )
 }
+
+const Portal = ({ modalState, hideModal }) =>
+  createPortal(
+    <ModalOverlay
+      justifyContent={
+        modalState.modalProps ? modalState.modalProps.justifyContent : undefined
+      }
+      onClick={modalState.dismissable ? hideModal : undefined}
+    >
+      {modalState.component({
+        hideModal,
+        ...modalState.modalProps,
+      })}
+    </ModalOverlay>,
+    document.body,
+  )
 
 export default ModalProvider
