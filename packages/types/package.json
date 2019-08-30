@@ -1,0 +1,15 @@
+{
+  "name": "pubsweet-types",
+  "version": "1.0.0",
+  "description": "Abstract types for abstractions",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "author": "The PubSweet Crew",
+  "license": "MIT",
+  "dependencies": {
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.2"
+  }
+}
