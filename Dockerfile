@@ -9,9 +9,8 @@ RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
 # We do a development install because react-styleguidist is a dev dependency
 RUN [ "yarn", "install", "--frozen-lockfile" ]
 
-# Remove cache and offline mirror
+# Remove cache
 RUN [ "yarn", "cache", "clean"]
-RUN [ "rm", "-rf", "/npm-packages-offline-cache"]
 
 COPY . .
 
