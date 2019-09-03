@@ -1,7 +1,7 @@
 FROM node:10
 MAINTAINER PubSweet Community <jure@coko.foundation>
 
-WORKDIR /pubsweet
+WORKDIR /root
 
 COPY yarn.lock .
 COPY package.json .
