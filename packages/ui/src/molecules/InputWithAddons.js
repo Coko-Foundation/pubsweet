@@ -45,9 +45,7 @@ const AddOnButton = styled(Button)`
 
 const InputWithAddons = ({ addons, inputProps, ...props }) => (
   <InputContainer {...props}>
-    <div>
-      <StyledTextField {...inputProps} />
-    </div>
+    <StyledTextField {...inputProps} />
     {addons.map((itemConfig, index) => (
       <AddOnButton
         key={(itemConfig.buttonProps && itemConfig.buttonProps.key) || index}

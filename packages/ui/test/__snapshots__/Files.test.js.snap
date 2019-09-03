@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Files renders correctly 1`] = `
-.c0 {
+Array [
+  .c0 {
   background: transparent;
   border: dashed;
   height: calc( * 3);
@@ -9,7 +10,24 @@ exports[`Files renders correctly 1`] = `
   margin-bottom: calc( * 3);
 }
 
-.c1 {
+<button
+    className="c0"
+    onClick={[Function]}
+    type="button"
+  >
+    ↑ Choose a file to upload
+  </button>,
+  <input
+    multiple={true}
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />,
+  .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,29 +42,7 @@ exports[`Files renders correctly 1`] = `
 }
 
 <div
-  className=""
->
-  <div>
-    <button
-      className="c0"
-      onClick={[Function]}
-      type="button"
-    >
-      ↑ Choose a file to upload
-    </button>
-    <input
-      multiple={true}
-      onChange={[Function]}
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-      type="file"
-    />
-  </div>
-  <div
-    className="c1"
-  />
-</div>
+    className="c0"
+  />,
+]
 `;
