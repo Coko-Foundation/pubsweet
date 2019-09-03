@@ -1,6 +1,8 @@
 FROM node:10
 MAINTAINER PubSweet Community <jure@coko.foundation>
 
+WORKDIR /pubsweet
+
 COPY yarn.lock .
 COPY package.json .
 
@@ -16,5 +18,4 @@ ENV NODE_ENV "production"
 
 EXPOSE 3000
 
-WORKDIR ${HOME}
 CMD []
