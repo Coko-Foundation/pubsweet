@@ -93,8 +93,8 @@ class BaseModel extends Model {
           Object.assign({ insertMissing: true, noDelete: true }, opts),
         )
 
-    const insertAndFetch = graph =>
-      this.constructor.query().insertGraphAndFetch(graph, opts)
+    const insertAndFetch = (graph, trx) =>
+      this.constructor.query(trx).insertGraphAndFetch(graph, opts)
 
     return this._save(insertAndFetch, updateAndFetch)
   }
@@ -168,7 +168,18 @@ class BaseModel extends Model {
     }
     if (!saved) {
       // either model has no ID or the ID was not found in the database
-      saved = await insertAndFetch(this)
+      let trx
+      try {
+        trx = await transaction.start(BaseModel.knex())
+
+        saved = await insertAndFetch(this, trx)
+
+        await trx.commit()
+      } catch (err) {
+        logger.error(err)
+        await trx.rollback()
+        throw err
+      }
     }
 
     logger.info(`Saved ${this.constructor.name} with UUID ${saved.id}`)
