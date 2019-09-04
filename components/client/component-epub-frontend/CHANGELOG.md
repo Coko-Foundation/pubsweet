@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub-frontend@0.1.20...pubsweet-component-epub-frontend@0.1.21) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-component-epub-frontend
+
+
+
+
+
 ## [0.1.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub-frontend@0.1.19...pubsweet-component-epub-frontend@0.1.20) (2019-08-30)
 
 **Note:** Version bump only for package pubsweet-component-epub-frontend
