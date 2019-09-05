@@ -27,7 +27,7 @@ The [PubSweet website](http://pubsweet.coko.foundation) contains all of the docu
 
 - [Editoria](https://gitlab.coko.foundation/editoria/editoria) - a book production platform built for University of California Press
 - [elife-xpub](https://github.com/elifesciences/elife-xpub/) - A journal publishing platform in collaboration with eLife
-- [Faraday](https://gitlab.com/hindawi/xpub/xpub-review) - A journal publishing platform in collaboration with Hindawi
+- [xpub-review](https://gitlab.com/hindawi/xpub/xpub-review) - A journal publishing platform in collaboration with Hindawi
 - [Micropubs](https://gitlab.coko.foundation/micropubs/wormbase) - A micropublications platform in collaboration with Wormbase
 - [Xpub](https://gitlab.coko.foundation/xpub/xpub) - Collabra, a journal publishing platform
 

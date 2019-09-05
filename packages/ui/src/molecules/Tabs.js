@@ -5,8 +5,6 @@ import { th } from '@pubsweet/ui-toolkit'
 import { Tab } from '../atoms'
 
 // TODO: allow the tab content to be separate from the key
-
-const Root = styled.div``
 const TabsContainer = styled.div`
   display: flex;
   margin-bottom: calc(${th('gridUnit')} * 3);
@@ -48,7 +46,7 @@ class Tabs extends React.Component {
     const { activeKey } = this.state
 
     return (
-      <Root>
+      <React.Fragment>
         <TabsContainer>
           {title && <Title>{title}</Title>}
 
@@ -64,7 +62,7 @@ class Tabs extends React.Component {
             {sections.find(section => section.key === activeKey).content}
           </Content>
         )}
-      </Root>
+      </React.Fragment>
     )
   }
 }

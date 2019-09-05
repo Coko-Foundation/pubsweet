@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilePicker renders correctly 1`] = `
-<div>
+<Fragment>
   <input
     accept={Array []}
     disabled={false}
@@ -16,9 +16,10 @@ exports[`FilePicker renders correctly 1`] = `
   <div
     onClick={[Function]}
     onKeyPress={[Function]}
+    role="button"
     tabIndex={0}
   >
     Upload something
   </div>
-</div>
+</Fragment>
 `;

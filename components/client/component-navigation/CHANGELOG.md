@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-navigation@1.0.28...pubsweet-component-navigation@1.0.29) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-component-navigation
+
+
+
+
+
+## [1.0.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-navigation@1.0.27...pubsweet-component-navigation@1.0.28) (2019-08-30)
+
+**Note:** Version bump only for package pubsweet-component-navigation
+
+
+
+
+
 ## [1.0.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-navigation@1.0.26...pubsweet-component-navigation@1.0.27) (2019-08-08)
 
 **Note:** Version bump only for package pubsweet-component-navigation

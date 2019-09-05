@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@11.0.0...@pubsweet/ui@12.0.0) (2019-09-04)
+
+
+### Bug Fixes
+
+* **modal:** added unit test for modal content using hooks ([0fcdc54](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fcdc54))
+* **modal:** allow usage of hooks inside modal components ([ee71614](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ee71614))
+* **modal:** fixed type error ([30b7ae4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30b7ae4))
+
+
+### Code Refactoring
+
+* **ui:** deprecate Title ([0f0353f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0f0353f))
+
+
+### Features
+
+* **modal:** provided posibility to specify modal position ([9fdb42c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9fdb42c))
+* **ui:** remove FilePicker div, add aria role ([14b9028](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14b9028))
+* **ui:** replace div - UploadButton ([aca5c59](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aca5c59))
+
+
+### BREAKING CHANGES
+
+* **ui:** Anyone applying styles using a div css selector will have to change to using an
+h-level css selecto
+* **ui:** Those importing and styling FilePicker may be expecting the div; FilePicker is no
+longer a block element by default
+* **ui:** Div removed - anyone importing and styling the component may expect the div to be
+present
+
+
+
+
+
+# [11.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.10...@pubsweet/ui@11.0.0) (2019-08-30)
+
+
+### Code Refactoring
+
+* **apollo:** update react-dom version ([e001d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e001d01))
+
+
+### BREAKING CHANGES
+
+* **apollo:** The minimum supported React version by @apollo is now 16.8
+
+
+
+
+
 ## [10.3.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.9...@pubsweet/ui@10.3.10) (2019-08-08)
 
 **Note:** Version bump only for package @pubsweet/ui

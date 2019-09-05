@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.0...pubsweet@5.1.1) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+# [5.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.0.1...pubsweet@5.1.0) (2019-08-30)
+
+
+### Features
+
+* **cli:** introduce start:client and start:server ([29d7d44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29d7d44))
+* **cli:** split running server (express app) and client (webpack) ([f8a6a8e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f8a6a8e))
+
+
+
+
+
 ## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.0.0...pubsweet@5.0.1) (2019-08-08)
 
 **Note:** Version bump only for package pubsweet

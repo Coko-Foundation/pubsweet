@@ -1,9 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Flexbox, UploadButton } from '../atoms'
 import { Upload } from '../molecules'
-
-const Root = styled.div``
 
 class FileUploadList extends React.Component {
   constructor(props) {
@@ -48,11 +45,11 @@ class FileUploadList extends React.Component {
   }
 
   render() {
-    const { name, buttonText, className, FileComponent } = this.props
+    const { name, buttonText, FileComponent } = this.props
     const { files, uploads } = this.state
 
     return (
-      <Root className={className}>
+      <React.Fragment>
         <UploadButton
           buttonText={buttonText}
           name={name}
@@ -81,7 +78,7 @@ class FileUploadList extends React.Component {
               <FileComponent file={file} key={file.name} uploaded />
             ))}
         </Flexbox>
-      </Root>
+      </React.Fragment>
     )
   }
 }

@@ -36,7 +36,7 @@ class FilePicker extends Component {
   render() {
     const { children, disabled } = this.props
     return (
-      <div>
+      <React.Fragment>
         <input
           accept={this.getAllowedTypes()}
           disabled={disabled}
@@ -55,8 +55,9 @@ class FilePicker extends Component {
             e.preventDefault()
             this.fileInput.click()
           },
+          role: 'button',
         })}
-      </div>
+      </React.Fragment>
     )
   }
 }
