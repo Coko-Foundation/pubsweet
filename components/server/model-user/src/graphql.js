@@ -7,7 +7,7 @@ const eager = undefined
 const resolvers = {
   Query: {
     user(_, { id }, ctx) {
-      return ctx.connectors.User.model.find(id, { eager })
+      return ctx.connectors.User.fetchOne(id, ctx, { eager })
     },
     users(_, { where }, ctx) {
       return ctx.connectors.User.fetchAll(where, ctx, { eager })
