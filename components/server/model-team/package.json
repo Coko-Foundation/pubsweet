@@ -9,6 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/models": "^0.2.18",
     "@pubsweet/base-model": "^3.4.3",
     "@pubsweet/logger": "^0.2.33",
     "http-status-codes": "^1.3.0",

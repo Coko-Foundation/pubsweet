@@ -12,10 +12,12 @@ class Team extends BaseModel {
   }
 
   static get relationMappings() {
+    const { Alias, TeamMember, User } = require('@pubsweet/models')
+
     return {
       members: {
         relation: BaseModel.HasManyRelation,
-        modelClass: require.resolve('./team_member'),
+        modelClass: TeamMember,
         join: {
           from: 'teams.id',
           to: 'team_members.teamId',
@@ -23,7 +25,7 @@ class Team extends BaseModel {
       },
       users: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: require.resolve('@pubsweet/model-user/src/user'),
+        modelClass: User,
         join: {
           from: 'teams.id',
           through: {
@@ -36,11 +38,11 @@ class Team extends BaseModel {
       },
       aliases: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: require.resolve('./alias'),
+        modelClass: Alias,
         join: {
           from: 'teams.id',
           through: {
-            modelClass: require.resolve('./team_member'),
+            modelClass: TeamMember,
             from: 'team_members.teamId',
             to: 'team_members.aliasId',
           },
