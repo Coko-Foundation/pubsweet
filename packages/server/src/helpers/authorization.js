@@ -6,7 +6,9 @@ const can = async (userId, verb, entity) => {
   const permission = await authsome.can(userId, verb, entity)
   if (!permission) {
     throw new AuthorizationError(
-      `Operation not permitted: ${verb} for user ${userId}`,
+      `Operation not permitted: ${userId ||
+        'unauthenticated users'} cannot perform ${verb} operation on ${entity.type ||
+        entity}`,
     )
   }
   // return identity if no filter function
