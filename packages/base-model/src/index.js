@@ -103,8 +103,8 @@ class BaseModel extends Model {
     const updateAndFetch = (instance, trx) =>
       this.constructor.query(trx).patchAndFetchById(instance.id, instance)
 
-    const insertAndFetch = (instance, builder) =>
-      this.constructor.query().insertAndFetch(instance)
+    const insertAndFetch = (instance, trx) =>
+      this.constructor.query(trx).insertAndFetch(instance)
 
     return this._save(insertAndFetch, updateAndFetch)
   }
