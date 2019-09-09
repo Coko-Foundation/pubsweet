@@ -121,7 +121,12 @@ describe('GraphQL authentication', () => {
 
       expect(body).toMatchObject({
         data: { users: null },
-        errors: [{ message: 'Operation not permitted: read User' }],
+        errors: [
+          {
+            message:
+              'Operation not permitted: unauthenticated users cannot perform read operation on User',
+          },
+        ],
       })
     })
 
