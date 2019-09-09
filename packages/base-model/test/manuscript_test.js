@@ -1,4 +1,5 @@
 const path = require('path')
+const { transaction } = require('objection')
 
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
 process.env.NODE_CONFIG = `{"pubsweet":{
@@ -166,5 +167,24 @@ describe('Manuscript', () => {
 
     const teams = await Team.query()
     expect(teams).toHaveLength(1)
+  })
+
+  it('should execute saveGraph inside a transaction', async () => {
+    const start = jest.spyOn(transaction, 'start')
+
+    await new Manuscript({
+      title: 'Test',
+      teams: [{ name: 'Test', role: 'test' }],
+    }).saveGraph()
+
+    expect(start).toHaveBeenCalledTimes(1)
+  })
+  it('should execute save inside a transaction', async () => {
+    const start = jest.spyOn(transaction, 'start')
+
+    await new Manuscript({ title: 'Test' }).save()
+
+    // called 2 times (protected save + normal insert)
+    expect(start).toHaveBeenCalledTimes(2)
   })
 })
