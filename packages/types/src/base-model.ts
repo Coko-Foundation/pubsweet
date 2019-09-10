@@ -1,3 +1,5 @@
+import { IAssignable, IActor, IObject, IMutable, IOwnable } from './abstract';
+
 /**
  * This is for domain types.
  *
@@ -6,8 +8,6 @@
  */
 
 export interface Domain {}
-
-import { IObject, IMutable, IOwnable } from '../abstract';
 
 interface Organisation extends IMutable {
   name: string;
@@ -71,12 +71,12 @@ interface TeamMember {
   alias: Alias; //Alias;
 }
 
-interface Alias extends Identity {
+interface Alias extends PureIdentity{
   name: string;
 }
 
 export type LocalIdentifier = {
-  name: Name;
+  name: string;
 };
 
 export type ExternalIdentifier =  {
@@ -84,7 +84,10 @@ export type ExternalIdentifier =  {
   type: string;
 };
 
-export type Identity = IObject & IMutable & {
+export interface PureIdentity extends IObject, IMutable {
   email: string;
   aff: string;  // JATS <aff>
-} & (LocalIdentifier | ExternalIdentifier) ;
+};
+
+export interface LocalIdentity extends PureIdentity, LocalIdentifier {}
+export interface ExternalIdentity extends PureIdentity, ExternalIdentifier {}
