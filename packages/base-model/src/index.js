@@ -1,12 +1,12 @@
 const uuid = require('uuid')
-const { Model, transaction } = require('objection')
+const objection = require('objection')
 const logger = require('@pubsweet/logger')
 const { NotFoundError } = require('@pubsweet/errors')
 const db = require('@pubsweet/db-manager/src/db')
 const { merge } = require('lodash')
 const config = require('config')
 
-Model.knex(db)
+objection.Model.knex(db)
 
 const notFoundError = (property, value, className) =>
   new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
@@ -16,7 +16,7 @@ const integrityError = (property, value, message) =>
     `Data Integrity Error property ${property} set to ${value}: ${message}`,
   )
 
-class BaseModel extends Model {
+class BaseModel extends objection.Model {
   constructor(properties) {
     super(properties)
 
@@ -112,78 +112,63 @@ class BaseModel extends Model {
   async _save(insertAndFetch, updateAndFetch) {
     const simpleSave = (trx = null) => updateAndFetch(this, trx)
 
-    const protectedSave = async () => {
-      let trx, saved
-      try {
-        trx = await transaction.start(BaseModel.knex())
+    const protectedSave = async trx => {
+      const current = await this.constructor
+        .query(trx)
+        .findById(this.id)
+        .forUpdate()
 
-        const current = await this.constructor
-          .query(trx)
-          .findById(this.id)
-          .forUpdate()
+      const storedUpdateTime = new Date(current.updated).getTime()
+      const instanceUpdateTime = new Date(this.updated).getTime()
 
-        const storedUpdateTime = new Date(current.updated).getTime()
-        const instanceUpdateTime = new Date(this.updated).getTime()
-
-        if (instanceUpdateTime < storedUpdateTime) {
-          throw integrityError(
-            'updated',
-            this.updated,
-            'is older than the one stored in the database!',
-          )
-        }
-
-        saved = await simpleSave(trx)
-        await trx.commit()
-      } catch (err) {
-        logger.error(err)
-        await trx.rollback()
-        throw err
+      if (instanceUpdateTime < storedUpdateTime) {
+        throw integrityError(
+          'updated',
+          this.updated,
+          'is older than the one stored in the database!',
+        )
       }
-      return saved
+
+      return simpleSave(trx)
     }
 
     // start of save function...
 
-    let saved
+    let result
     // Do the validation manually here, since inserting
     // model instances skips validation, and using toJSON() first will
     // not save certain fields ommited in $formatJSON (e.g. passwordHash)
     this.$validate()
-
-    if (this.id) {
-      if (!this.updated && this.created) {
-        throw integrityError(
-          'updated',
-          this.updated,
-          'must be set when created is set!',
-        )
-      }
-
-      if (!this.updated && !this.created) {
-        saved = await simpleSave()
-      } else {
-        saved = await protectedSave()
-      }
-    }
-    if (!saved) {
-      // either model has no ID or the ID was not found in the database
-      let trx
-      try {
-        trx = await transaction.start(BaseModel.knex())
-
-        saved = await insertAndFetch(this, trx)
-
-        await trx.commit()
-      } catch (err) {
-        logger.error(err)
-        await trx.rollback()
-        throw err
-      }
+    try {
+      result = await objection.transaction(BaseModel.knex(), async trx => {
+        let savedEntity
+        if (this.id) {
+          if (!this.updated && this.created) {
+            throw integrityError(
+              'updated',
+              this.updated,
+              'must be set when created is set!',
+            )
+          }
+          if (!this.updated && !this.created) {
+            savedEntity = await simpleSave(trx)
+          } else {
+            savedEntity = await protectedSave(trx)
+          }
+        }
+        if (!savedEntity) {
+          savedEntity = await insertAndFetch(this, trx)
+        }
+        return savedEntity
+      })
+      logger.info(`Saved ${this.constructor.name} with UUID ${result.id}`)
+    } catch (err) {
+      logger.info(`Rolled back ${this.constructor.name}`)
+      logger.error(err)
+      throw err
     }
 
-    logger.info(`Saved ${this.constructor.name} with UUID ${saved.id}`)
-    return saved
+    return result
   }
 
   async delete() {
