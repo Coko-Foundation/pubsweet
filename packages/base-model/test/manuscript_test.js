@@ -1,7 +1,5 @@
 const path = require('path')
 
-const objection = require('objection')
-
 const pathToComponent = path.resolve(__dirname, 'data-model-component')
 process.env.NODE_CONFIG = `{"pubsweet":{
   "components":[
@@ -171,7 +169,7 @@ describe('Manuscript', () => {
   })
 
   it('should execute saveGraph inside a transaction', async () => {
-    const spy = jest.spyOn(objection, 'transaction')
+    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
 
     await new Manuscript({
       title: 'Test',
@@ -182,7 +180,7 @@ describe('Manuscript', () => {
     spy.mockRestore()
   })
   it('should execute save inside a transaction', async () => {
-    const spy = jest.spyOn(objection, 'transaction')
+    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
 
     await new Manuscript({ title: 'Test' }).save()
 

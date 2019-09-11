@@ -1,12 +1,12 @@
 const uuid = require('uuid')
-const objection = require('objection')
+const { Model, transaction } = require('objection')
 const logger = require('@pubsweet/logger')
 const { NotFoundError } = require('@pubsweet/errors')
 const db = require('@pubsweet/db-manager/src/db')
 const { merge } = require('lodash')
 const config = require('config')
 
-objection.Model.knex(db)
+Model.knex(db)
 
 const notFoundError = (property, value, className) =>
   new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
@@ -16,7 +16,7 @@ const integrityError = (property, value, message) =>
     `Data Integrity Error property ${property} set to ${value}: ${message}`,
   )
 
-class BaseModel extends objection.Model {
+class BaseModel extends Model {
   constructor(properties) {
     super(properties)
 
@@ -133,15 +133,17 @@ class BaseModel extends objection.Model {
     }
 
     // start of save function...
-
     let result
     // Do the validation manually here, since inserting
     // model instances skips validation, and using toJSON() first will
     // not save certain fields ommited in $formatJSON (e.g. passwordHash)
     this.$validate()
     try {
-      result = await objection.transaction(BaseModel.knex(), async trx => {
+      result = await transaction(BaseModel.knex(), async trx => {
         let savedEntity
+
+        // If an id is set on the model instance, find out if the instance
+        // already exists in the database
         if (this.id) {
           if (!this.updated && this.created) {
             throw integrityError(
@@ -153,9 +155,12 @@ class BaseModel extends objection.Model {
           if (!this.updated && !this.created) {
             savedEntity = await simpleSave(trx)
           } else {
+            // If the model instance has created/updated times set, provide
+            // protection against potentially overwriting newer data in db.
             savedEntity = await protectedSave(trx)
           }
         }
+        // If it doesn't exist, simply insert the instance in the database
         if (!savedEntity) {
           savedEntity = await insertAndFetch(this, trx)
         }
