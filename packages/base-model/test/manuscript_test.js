@@ -167,4 +167,24 @@ describe('Manuscript', () => {
     const teams = await Team.query()
     expect(teams).toHaveLength(1)
   })
+
+  it('should execute saveGraph inside a transaction', async () => {
+    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
+
+    await new Manuscript({
+      title: 'Test',
+      teams: [{ name: 'Test', role: 'test' }],
+    }).saveGraph()
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    spy.mockRestore()
+  })
+  it('should execute save inside a transaction', async () => {
+    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
+
+    await new Manuscript({ title: 'Test' }).save()
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    spy.mockRestore()
+  })
 })
