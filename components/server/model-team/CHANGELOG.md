@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.1.3...@pubsweet/model-team@2.1.4) (2019-09-11)
+
+
+### Bug Fixes
+
+* **models:** do not use hardcoded paths in relation mappings ([0cd9e3c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd9e3c))
+* **models:** make user.teams work with eager ([da5d84b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/da5d84b))
+
+
+
+
+
 ## [2.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.1.2...@pubsweet/model-team@2.1.3) (2019-09-04)
 
 **Note:** Version bump only for package @pubsweet/model-team

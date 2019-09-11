@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "13.7.1",
+  "version": "13.7.2",
   "scripts": {
     "test": "jest",
     "vuln-test": "nsp check"
@@ -12,10 +12,10 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.0.19",
-    "@pubsweet/errors": "^2.0.23",
-    "@pubsweet/logger": "^0.2.33",
-    "@pubsweet/models": "^0.2.20",
+    "@pubsweet/db-manager": "^3.0.20",
+    "@pubsweet/errors": "^2.0.24",
+    "@pubsweet/logger": "^0.2.34",
+    "@pubsweet/models": "^0.2.21",
     "apollo-server-express": "^2.4.8",
     "authsome": "^0.1.0",
     "bluebird": "^3.5.1",
@@ -47,7 +47,7 @@
     "pg-boss": "^3.1.2",
     "promise-queue": "^2.2.3",
     "prompt": "^1.0.0",
-    "pubsweet-sse": "^1.0.27",
+    "pubsweet-sse": "^1.0.28",
     "subscriptions-transport-ws": "^0.9.12",
     "uuid": "^3.0.1",
     "waait": "^1.0.2",
@@ -56,7 +56,7 @@
   "devDependencies": {
     "eventsource": "^1.0.4",
     "jest-cli": "^24.7.1",
-    "jest-environment-db": "^3.0.20",
+    "jest-environment-db": "^3.0.21",
     "nsp": "^2.7.0",
     "supertest": "^3.1.0"
   },
