@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.3...@pubsweet/base-model@3.5.0) (2019-09-11)
+
+
+### Features
+
+* **base-model:** allow transaction on graph save ([30d500e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30d500e))
+* **base-model:** execute save inside a transaction ([1252288](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1252288))
+
+
+
+
+
 ## [3.4.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.2...@pubsweet/base-model@3.4.3) (2019-09-04)
 
 **Note:** Version bump only for package @pubsweet/base-model

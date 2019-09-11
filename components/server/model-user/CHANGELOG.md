@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.1.3...@pubsweet/model-user@5.1.4) (2019-09-11)
+
+
+### Bug Fixes
+
+* **models:** do not use hardcoded paths in relation mappings ([0cd9e3c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0cd9e3c))
+
+
+
+
+
 ## [5.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.1.2...@pubsweet/model-user@5.1.3) (2019-09-04)
 
 **Note:** Version bump only for package @pubsweet/model-user
