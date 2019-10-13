@@ -32,7 +32,7 @@
     "graphql-tools": "^4.0.4",
     "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
-    "joi": "^14.3.0",
+    "@hapi/joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.0.0",
     "minimist": "^1.2.0",

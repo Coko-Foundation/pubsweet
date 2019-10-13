@@ -21,9 +21,9 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
+    "@hapi/joi": "^14.3.1",
     "@pubsweet/logger": ">=0.0.1",
     "config": "^3.0.1",
-    "joi": "^14.3.1",
     "pubsweet-server": ">=11.0.0"
   },
   "devDependencies": {
