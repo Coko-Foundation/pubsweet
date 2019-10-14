@@ -30,7 +30,7 @@
     "@pubsweet/logger": "^0.2.34",
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
-    "joi": "^14.3.0",
+    "@hapi/joi": "^14.3.0",
     "knex": "^0.16.3",
     "lodash": "^4.17.11",
     "objection": "^1.5.3",
