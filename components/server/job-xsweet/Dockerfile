@@ -13,7 +13,8 @@ RUN apt-get update \
 
 RUN add-apt-repository 'deb http://http.debian.net/debian stretch-backports main' \
     && apt-get update \
-    && apt-get install -y openjdk-11-jre-headless
+    && apt-get install -y openjdk-11-jre-headless \\
+    && apt-get install -y wait-for-it
 
 # Install JS dependencies
 
@@ -30,7 +31,6 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
-RUN chmod +x src/wait-for-it.sh
 RUN chmod +x src/service_run.sh
 
 # Put things in place
