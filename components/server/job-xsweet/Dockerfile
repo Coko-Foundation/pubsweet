@@ -13,8 +13,7 @@ RUN apt-get update \
 
 RUN add-apt-repository 'deb http://http.debian.net/debian stretch-backports main' \
     && apt-get update \
-    && apt-get install -y openjdk-11-jre-headless \\
-    && apt-get install -y wait-for-it
+    && apt-get install -y openjdk-11-jre-headless
 
 # Install JS dependencies
 
