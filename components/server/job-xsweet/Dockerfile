@@ -33,11 +33,11 @@ COPY . .
 RUN chmod +x components/server/job-xsweet/src/service_run.sh
 
 # Put things in place
-RUN ./src/move_xslts.sh
+RUN components/server/job-xsweet/src/move_xslts.sh
 # Test conversion
 RUN mkdir _test
-RUN unzip src/test.docx -d _test
-RUN ./src/execute_chain.sh _test
+RUN unzip components/server/job-xsweet/src/test.docx -d _test
+RUN components/server/job-xsweet/src/execute_chain.sh _test
 RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
