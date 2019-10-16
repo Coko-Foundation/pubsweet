@@ -30,7 +30,8 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
-RUN chmod +x src/service_run.sh
+RUN chmod +x ./src/service_run.sh
+RUN ls -l ./src/
 
 # Put things in place
 RUN ./src/move_xslts.sh
@@ -42,4 +43,4 @@ RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
 # Start job processing
-CMD ["src/service_run.sh"]
+CMD ["./src/service_run.sh"]
