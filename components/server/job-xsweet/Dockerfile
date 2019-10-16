@@ -28,18 +28,20 @@ RUN wget https://gitlab.coko.foundation/XSweet/HTMLevator/repository/archive.zip
 # Download Saxon
 RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-9-1-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
 
-COPY . .
+COPY components/server/job-xsweet .
 
-RUN chmod +x components/server/job-xsweet/src/service_run.sh
+RUN cd components/server/job-xsweet
+
+RUN chmod +x ./src/service_run.sh
 
 # Put things in place
-RUN components/server/job-xsweet/src/move_xslts.sh
+RUN ./src/move_xslts.sh
 # Test conversion
 RUN mkdir _test
-RUN unzip components/server/job-xsweet/src/test.docx -d _test
-RUN components/server/job-xsweet/src/execute_chain.sh _test
+RUN unzip src/test.docx -d _test
+RUN src/execute_chain.sh _test
 RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
 # Start job processing
-CMD ["components/server/job-xsweet/src/service_run.sh"]
+CMD ["src/service_run.sh"]
