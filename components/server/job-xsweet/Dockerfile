@@ -30,8 +30,9 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
-RUN chmod +x ./src/service_run.sh
 RUN ls -l ./src/
+
+RUN chmod +x ./src/service_run.sh
 
 # Put things in place
 RUN ./src/move_xslts.sh
