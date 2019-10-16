@@ -30,7 +30,7 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
-RUN ls -l ./src/
+RUN ls -l ./
 
 RUN chmod +x ./src/service_run.sh
 
