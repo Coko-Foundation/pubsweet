@@ -17,7 +17,7 @@ RUN add-apt-repository 'deb http://http.debian.net/debian stretch-backports main
 
 # Install JS dependencies
 
-COPY package.json .
+COPY components/server/job-xsweet/package.json .
 RUN yarn cache clean
 RUN yarn
 
