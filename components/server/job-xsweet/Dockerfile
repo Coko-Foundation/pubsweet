@@ -30,8 +30,6 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY components/server/job-xsweet .
 
-RUN cd components/server/job-xsweet
-
 RUN chmod +x ./src/service_run.sh
 
 # Put things in place
