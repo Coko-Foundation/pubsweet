@@ -124,3 +124,7 @@ sudo iptables -A INPUT -p tcp -d 0/0 -s 0/0 --dport 3000 -j ACCEPT
 ## error: database "test" does not exist
 
 If you're trying to run tests in PubSweet core (that is: this repository) and you're getting the above error: you need to create a local postgresql database with the name `test`. `psql` into your local database and `CREATE DATABASE test;` and it should work.
+
+## Error: Undefined binding(s) detected when compiling RAW query
+
+This error is thrown if you're trying to insert undefined values in Knex/Objection.js (even through the job queue). Make sure all your values, even in JSONs, are defined. More details here: https://github.com/knex/knex/issues/1563.
