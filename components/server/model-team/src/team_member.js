@@ -41,7 +41,7 @@ class TeamMember extends BaseModel {
       properties: {
         userId: { type: 'string', format: 'uuid' },
         teamId: { type: 'string', format: 'uuid' },
-        aliasId: { type: 'string', format: 'uuid' },
+        aliasId: { type: ['string', 'null'], format: 'uuid' },
         status: { type: 'string' },
         global: { type: ['boolean', 'null'] },
       },
