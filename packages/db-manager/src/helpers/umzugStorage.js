@@ -1,13 +1,16 @@
+const logger = require('@pubsweet/logger')
 const db = require('../db')
 
 // umzug storage adapter
 module.exports = {
   async logMigration(id) {
     await db.raw('INSERT INTO migrations (id) VALUES (?)', [id])
+    logger.info(`Successfully ran migration ${id}`)
   },
 
   async unlogMigration(id) {
     await db.raw('DELETE FROM migrations WHERE id = ?', [id])
+    logger.info(`Successfully removed migration ${id}`)
   },
 
   async executed() {
