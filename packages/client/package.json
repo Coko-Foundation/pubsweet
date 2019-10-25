@@ -24,7 +24,7 @@
     "apollo-link-context": "^1.0.17",
     "apollo-link-http": "^1.5.14",
     "apollo-link-ws": "^1.0.17",
-    "apollo-upload-client": "^8.0.0",
+    "apollo-upload-client": "^11.0.0",
     "apollo-utilities": "^1.2.1",
     "authsome": "^0.1.0",
     "config": "^3.0.1",

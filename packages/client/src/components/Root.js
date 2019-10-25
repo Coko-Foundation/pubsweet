@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/react-components'
 import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
-import { split } from 'apollo-link'
+import { split, ApolloLink } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -14,12 +13,24 @@ import { createUploadLink } from 'apollo-upload-client'
 import { Normalize } from 'styled-normalize'
 import StyleRoot from '../helpers/StyleRoot'
 
+// See https://github.com/apollographql/apollo-feature-requests/issues/6#issuecomment-465305186
+function stripTypenames(obj, propToDelete) {
+  Object.keys(obj).forEach(property => {
+    if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+      delete obj.property
+      const newData = stripTypenames(obj[property], propToDelete)
+      obj[property] = newData
+    } else if (property === propToDelete) {
+      delete obj[property]
+    }
+  })
+  return obj
+}
 // Construct an ApolloClient. If a function is passed as the first argument,
 // it will be called with the default client config as an argument, and should
 // return the desired config.
 const makeApolloClient = (makeConfig, connectToWebSocket) => {
   const uploadLink = createUploadLink()
-  const httpLink = createHttpLink()
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('token')
     return {
@@ -29,7 +40,16 @@ const makeApolloClient = (makeConfig, connectToWebSocket) => {
       },
     }
   })
-  let link = authLink.concat(uploadLink, httpLink)
+
+  const removeTypename = new ApolloLink((operation, forward) => {
+    if (operation.variables) {
+      operation.variables = stripTypenames(operation.variables, '__typename')
+    }
+    return forward(operation)
+  })
+
+  let link = ApolloLink.from([removeTypename, authLink, uploadLink])
+
   if (connectToWebSocket) {
     const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
     const wsLink = new WebSocketLink({
