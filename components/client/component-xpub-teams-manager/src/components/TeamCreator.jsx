@@ -55,7 +55,7 @@ export default compose(
       onManuscriptSelect,
     }) => event => {
       event.preventDefault()
-      const teamType = teamTypeSelected
+      const role = teamTypeSelected
 
       let objectId
       let objectType
@@ -65,14 +65,12 @@ export default compose(
         objectType = 'Manuscript'
       }
 
-      if (teamType && objectId && objectType) {
+      if (role && objectId && objectType) {
         create({
-          name: find(typesOptions, types => types.value === teamType).label,
-          teamType,
-          object: {
-            objectId,
-            objectType,
-          },
+          name: find(typesOptions, types => types.value === role).label,
+          role,
+          objectId,
+          objectType,
           members: [],
         })
 

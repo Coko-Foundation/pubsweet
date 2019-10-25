@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { withJournal } from 'xpub-journal'
 import { Section } from '../styles'
 import { Review } from './atoms/Columns'
 import Accordion from './molecules/Accordion'
@@ -33,7 +32,6 @@ const ReviewAccordion = ({ reviews }) => (
 const DecisionReviewColumn = ({
   manuscript,
   handleSubmit,
-  journal,
   toggleOpen,
   open,
 }) => (
@@ -64,4 +62,4 @@ const DecisionReviewColumn = ({
   </Review>
 )
 
-export default withJournal(DecisionReviewColumn)
+export default DecisionReviewColumn

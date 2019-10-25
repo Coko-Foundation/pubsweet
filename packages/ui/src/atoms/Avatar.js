@@ -10,7 +10,7 @@ const statusColor = props =>
   }[props.status] || props.theme.colorPrimary)
 
 const Container = styled.svg.attrs(() => ({
-  viewBox: props => `0 0 105 70`,
+  viewBox: '0 0 105 70',
   xmlns: 'http://www.w3.org/2000/svg',
 }))`
   width: calc(${th('gridUnit')} * 9);

@@ -94,9 +94,7 @@ const rejectProps = (obj, keys) =>
     )
 
 const link = (journal, manuscript) =>
-  String.raw`<a href=/journals/${journal.id}/versions/${
-    manuscript.id
-  }/manuscript>view here</a>`
+  String.raw`<a href=/journals/${journal.id}/versions/${manuscript.id}/manuscript>view here</a>`
 
 const createMarkup = encodedHtml => ({
   __html: unescape(encodedHtml),
@@ -157,6 +155,7 @@ const renderArray = (elementsComponentArray, onChange) => ({
         key={`${element.id}`}
       >
         <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
+        {/* <p>{JSON.stringify(values)}</p> */}
         <ValidatedFieldFormik
           {...rejectProps(element, [
             'component',
@@ -232,12 +231,13 @@ export default ({
       )}
     />
     <form onSubmit={handleSubmit}>
-      {groupElements(form.children || []).map(element =>
+      {groupElements(form.children || []).map((element, i) =>
         !isArray(element) ? (
           <Section
             cssOverrides={JSON.parse(element.sectioncss || '{}')}
             key={`${element.id}`}
           >
+            {/* <p>{JSON.stringify(element)}</p> */}
             <Legend dangerouslySetInnerHTML={createMarkup(element.title)} />
             {element.component === 'SupplementaryFiles' && (
               <Supplementary
@@ -287,6 +287,8 @@ export default ({
         ) : (
           <ElementComponentArray
             elementsComponentArray={element}
+            // eslint-disable-next-line
+            key={i}
             onChange={onChange}
             setFieldValue={setFieldValue}
             setTouched={setTouched}

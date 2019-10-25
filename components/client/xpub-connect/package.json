@@ -1,0 +1,22 @@
+{
+  "name": "xpub-connect",
+  "version": "2.0.7",
+  "main": "src",
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "dependencies": {
+    "@pubsweet/ui-toolkit": "^2.0.7",
+    "pubsweet-client": "^10.0.2",
+    "react-redux": "^5.0.2",
+    "react-router-dom": "^5.1.2",
+    "recompose": "^0.30.0",
+    "styled-components": "^4.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  }
+}

@@ -14,7 +14,6 @@
     "@pubsweet/ui-toolkit": "^2.2.13",
     "apollo-client-preset": "^1.0.8",
     "formik": "^1.4.2",
-    "grid-styled": "^4.1.0",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "prop-types": "^15.5.10",
