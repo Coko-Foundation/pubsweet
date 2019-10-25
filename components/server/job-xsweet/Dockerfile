@@ -2,6 +2,12 @@ FROM node:11
 
 WORKDIR /home/node
 
+ARG WAIT_SERVICE_PORT=postgres:5432
+ARG WAIT_TIMEOUT=300
+
+ENV WAIT_SERVICE_PORT=$WAIT_SERVICE_PORT
+ENV WAIT_TIMEOUT=$WAIT_TIMEOUT
+
 RUN apt-get update \
     && apt-get install -y software-properties-common unzip
 
@@ -24,6 +30,9 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
+RUN chmod +x src/wait-for-it.sh
+RUN chmod +x src/service_run.sh
+
 # Put things in place
 RUN ./src/move_xslts.sh
 # Test conversion
@@ -34,4 +43,4 @@ RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
 # Start job processing
-CMD node src/xsweet.js
+CMD ["src/service_run.sh"]

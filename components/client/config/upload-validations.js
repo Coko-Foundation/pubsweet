@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 module.exports = {
   manuscripts: Joi.any()

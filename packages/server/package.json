@@ -12,6 +12,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
+    "@hapi/joi": "^14.3.0",
     "@pubsweet/db-manager": "^3.0.20",
     "@pubsweet/errors": "^2.0.24",
     "@pubsweet/logger": "^0.2.34",
@@ -32,7 +33,6 @@
     "graphql-tools": "^4.0.4",
     "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
-    "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.0.0",
     "minimist": "^1.2.0",
