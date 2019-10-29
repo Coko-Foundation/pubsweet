@@ -31,7 +31,7 @@
     "@pubsweet/logger": "^0.2.34",
     "fs-extra": "^4.0.2",
     "isomorphic-fetch": "^2.2.1",
-    "knex": "^0.16.3",
+    "knex": "^0.20.0",
     "lodash": "^4.17.11",
     "objection": "^1.5.3",
     "pg": "^7.8.0",
