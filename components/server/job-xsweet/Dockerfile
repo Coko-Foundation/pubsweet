@@ -28,7 +28,7 @@ COPY . .
 RUN mkdir _test
 RUN unzip src/test.docx -d _test
 RUN ./src/execute_chain.sh _test
-RUN grep -q 'Testing conversion 123' _test/outputs/16HTML5.html
+RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
 RUN rm -rf _test
 
 # Start job processing
