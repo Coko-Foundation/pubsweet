@@ -2,12 +2,6 @@ FROM node:11
 
 WORKDIR /home/node
 
-ARG WAIT_SERVICE_PORT=postgres:5432
-ARG WAIT_TIMEOUT=300
-
-ENV WAIT_SERVICE_PORT=$WAIT_SERVICE_PORT
-ENV WAIT_TIMEOUT=$WAIT_TIMEOUT
-
 RUN apt-get update \
     && apt-get install -y software-properties-common unzip
 
@@ -23,24 +17,19 @@ RUN yarn
 # Download XSweet
 RUN wget https://gitlab.coko.foundation/XSweet/XSweet/repository/archive.zip?ref=master -O xsweet.zip; unzip xsweet.zip; rm xsweet.zip
 RUN wget https://gitlab.coko.foundation/XSweet/editoria_typescript/repository/archive.zip?ref=master -O typescript.zip; unzip typescript.zip; rm typescript.zip
-RUN wget https://gitlab.coko.foundation/XSweet/HTMLevator/repository/archive.zip?ref=master -O htmlevator.zip; unzip htmlevator.zip; rm htmlevator.zip
+RUN wget https://gitlab.coko.foundation/XSweet/HTMLevator/repository/archive.zip?ref=eeef394426f7db7647d992aafdda1b677b35b7ae -O htmlevator.zip; unzip htmlevator.zip; rm htmlevator.zip
 
 # Download Saxon
-RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-9-1-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
+RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.8/SaxonHE9-8-0-1J.zip" -O saxon.zip; unzip saxon.zip -d saxon; rm saxon.zip
 
 COPY . .
 
-RUN chmod +x src/wait-for-it.sh
-RUN chmod +x src/service_run.sh
-
-# Put things in place
-RUN ./src/move_xslts.sh
 # Test conversion
 RUN mkdir _test
 RUN unzip src/test.docx -d _test
 RUN ./src/execute_chain.sh _test
-RUN grep -q 'Testing conversion 123' _test/outputs/HTML5.html
+RUN grep -q 'Testing conversion 123' _test/outputs/16HTML5.html
 RUN rm -rf _test
 
 # Start job processing
-CMD ["src/service_run.sh"]
+CMD node src/xsweet.js
