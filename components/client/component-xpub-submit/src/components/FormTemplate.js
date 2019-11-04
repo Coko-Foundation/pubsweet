@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { unescape, groupBy, isArray, get, set, cloneDeep } from 'lodash'
 import { FieldArray } from 'formik'
-import * as elements from '@pubsweet/ui'
+import * as uiComponents from '@pubsweet/ui'
 import * as validators from 'xpub-validators'
 import { AbstractEditor } from 'xpub-edit'
 import { Heading1, Section, Legend, SubNote } from '../styles'
@@ -59,8 +59,10 @@ const filterFileManuscript = files =>
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   )
 
-const { ValidatedFieldFormik, Button, Attachment } = elements
+const { ValidatedFieldFormik, Button, Attachment } = uiComponents
 
+// Add the AbstractEditor and AuthorsInput to the list of available form elements
+const elements = uiComponents
 elements.AbstractEditor = ({
   validationStatus,
   setTouched,
