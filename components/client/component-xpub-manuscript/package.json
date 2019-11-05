@@ -10,9 +10,9 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "recompose": "^0.30.0",
-    "wax-prosemirror-core": "^0.0.1",
-    "wax-prosemirror-schema": "^0.0.1",
-    "wax-prosemirror-themes": "^0.0.1",
+    "wax-prosemirror-core": "^0.0.2",
+    "wax-prosemirror-schema": "^0.0.2",
+    "wax-prosemirror-themes": "^0.0.2",
     "xpub-connect": "^2.0.7"
   },
   "peerDependencies": {
