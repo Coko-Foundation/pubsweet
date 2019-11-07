@@ -3,6 +3,7 @@ variables:
   IMAGE_NAME: pubsweet
   BASE_DOMAIN: gateway.ps.elifesciences.yld.io
   CONFIGURATION_REPOSITORY: https://gitlab.coko.foundation/pubsweet/deployment-config.git
+  DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
   - build
