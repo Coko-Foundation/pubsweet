@@ -50,10 +50,7 @@ jest.mock('config', () => {
   }
 })
 
-jest.mock(
-  'pubsweet-client/src/helpers/AuthorizeWithGraphQL',
-  () => 'AuthorizeWithGraphQL',
-)
+jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
 
 global.window.localStorage = {
   getItem: jest.fn(() => 'tok123'),
