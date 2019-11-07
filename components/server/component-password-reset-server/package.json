@@ -7,6 +7,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
+    "@pubsweet/component-send-email": "^0.2.30",
     "@pubsweet/errors": "^2.0.24",
     "body-parser": "^1.17.2",
     "config": "^3.0.1",
