@@ -1,10 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Enzyme, { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import Adapter from 'enzyme-adapter-react-16'
 import faker from 'faker'
-import { withJournal } from 'xpub-journal'
+import { JournalProvider } from 'xpub-journal'
+import { ThemeProvider } from 'styled-components'
 import EditorItem from './EditorItem'
 
 import MetadataAuthors from '../metadata/MetadataAuthors'
@@ -24,7 +24,7 @@ jest.mock('config', () => ({
   },
 }))
 
-jest.mock('pubsweet-client/src/helpers/Authorize', () => 'Authorize')
+jest.mock('pubsweet-client/src/helpers/Authorize', () => 'div')
 
 const journal = {
   reviewStatus: ['invited', 'accepted', 'rejected', 'completed'],
@@ -70,14 +70,12 @@ describe('EditorItem', () => {
     )
     return mount(
       <MemoryRouter>
-        <EditorItem {...props} />
+        <ThemeProvider theme={{}}>
+          <JournalProvider journal={journal}>
+            <EditorItem {...props} />
+          </JournalProvider>
+        </ThemeProvider>
       </MemoryRouter>,
-      {
-        context: { journal },
-        childContextTypes: {
-          journal: PropTypes.Object,
-        },
-      },
     )
   }
 
@@ -85,9 +83,7 @@ describe('EditorItem', () => {
     const EditorItem = makeWrapper()
     expect(EditorItem.find(MetadataStreamLined).children()).toHaveLength(0)
     expect(EditorItem.find(MetadataAuthors).children()).toHaveLength(0)
-    expect(
-      EditorItem.find(withJournal(MetadataSections)).children(),
-    ).toHaveLength(0)
+    expect(EditorItem.find(MetadataSections).children()).toHaveLength(0)
     expect(
       EditorItem.find(MetadataSubmittedDate)
         .children()
