@@ -2,7 +2,7 @@ A page for an editor to make a decision on a version of a project.
 
 ```js
 const { withFormik } = require('formik')
-
+const { JournalProvider } = require('xpub-journal')
 const AssignEditor = require('../assignEditors/AssignEditor').default
 
 const journal = {
@@ -107,10 +107,8 @@ const ConnectedDecisionLayout = withFormik({
     onSubmit(props, { history }),
 })(DecisionLayout)
 ;<div style={{ position: 'relative', height: 600 }}>
-  <ConnectedDecisionLayout
-    journal={journal}
-    manuscript={manuscript}
-    uploadFile={() => {}}
-  />
+  <JournalProvider journal={journal}>
+    <ConnectedDecisionLayout manuscript={manuscript} uploadFile={() => {}} />
+  </JournalProvider>
 </div>
 ```

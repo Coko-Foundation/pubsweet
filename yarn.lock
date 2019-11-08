@@ -14267,15 +14267,10 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-moment@^0.6.1:
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.6.9.tgz#f13a0ccedaf65b5fb8b1467d9f91c5346d74c3e2"
-  integrity sha1-8ToMztr2W1+4sUZ9n5HFNG10w+I=
-
-react-moment@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.8.4.tgz#18eb59e1541c8b216353e23c21e9db50e42e2edb"
-  integrity sha512-QhI19OcfhiAn60/O6bMR0w8ApXrPFCjv6+eV0I/P9/AswzjgEAx4L7VxMBCpS/jrythLa12Q9v88req+ys4YpA==
+react-moment@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.9.6.tgz#6b359a48205a52196408303e30bc982cd46d0bee"
+  integrity sha512-GAnd5NRIpGjDqLoGahJCkiCEQS1d8+dIZbIfPuy/eQ0O5Rio43fEkj5G+qrKbZCQY55fiNafpHpuirVIHqPoSg==
 
 react-overlays@^0.8.0:
   version "0.8.3"
@@ -14466,6 +14461,11 @@ react-transition-group@^2.0.0, react-transition-group@^2.2.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react-uid@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-uid/-/react-uid-2.2.0.tgz#0f77e1e0594fbf29fc4fe528cc9aa415c5bf9159"
+  integrity sha512-z+g5+hFOQ08hCfrGcJ1PNs+cmvH8Uq2CVzCmPeWBsUi5A4W4NWXR5jouledzy3oSKGMU9HOzf8zFuGi15TXJoQ==
 
 react@^16.2.0, react@^16.8.4, react@^16.8.6:
   version "16.11.0"
@@ -17494,10 +17494,10 @@ watchpack@^1.6.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
-wax-prosemirror-core@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/wax-prosemirror-core/-/wax-prosemirror-core-0.0.1.tgz#2d4d0cfa671dda1911054c0f5da7efd26d1577a7"
-  integrity sha512-tj3Zc4rGkExFUkoG/7TZRylU7sahiIIy6pLNHoS0WNkbiS7USF+VOx0dtU3PvGv+baxYF3V/a7D4T/EVIuz0Vw==
+wax-prosemirror-core@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/wax-prosemirror-core/-/wax-prosemirror-core-0.0.2.tgz#66bca367bf62a47aa016684d52eba10d60b084be"
+  integrity sha512-SawWLUnlBxmfwg7mbUOKN4lkd3CM9oeKLn0iupZnlBhGW6ZNibOOho/VyqBOJDGaxA4iqa2F7P6dWxZ/NzGlrQ==
   dependencies:
     classnames "^2.2.6"
     lodash "^4.17.4"
@@ -17516,18 +17516,18 @@ wax-prosemirror-core@^0.0.1:
     react-dom "^16.8.4"
     styled-components "^4.2.0"
 
-wax-prosemirror-schema@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/wax-prosemirror-schema/-/wax-prosemirror-schema-0.0.1.tgz#6aa013b54bb154c89b4cfad5738f5139e688bdee"
-  integrity sha512-rjapGEdVgIWa+9yIpb27J6KFOxPOiokTo2fHQ174PbCBNcuMW9critEN/oZNaGyUFDV/vaoP6g/UlGVKCpae4g==
+wax-prosemirror-schema@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/wax-prosemirror-schema/-/wax-prosemirror-schema-0.0.2.tgz#110e06c9e833eb905f9bb419a6123ef6e1a4dc3c"
+  integrity sha512-N3khdO//AfUgDHE21U9hGLRyif/nwpDNvq7rbWNacD5+jALkCrZZq3z0WmvCneuLSSNhLApjFJh7i4UYgYJqBw==
   dependencies:
     prosemirror-schema-list "^1.0.0"
     prosemirror-tables "^0.7.10"
 
-wax-prosemirror-themes@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/wax-prosemirror-themes/-/wax-prosemirror-themes-0.0.1.tgz#0a1bbc1d2c28658f3b57ded0ab93b90414327fdd"
-  integrity sha512-XcN/7QJTzSYqP8RGsx8SlyJ7uqBxq77EBLsigEM4vKOC9h2/z7bWjZwbV/5yXI5QfYgHJFMMK9eFltoGDjD8Cw==
+wax-prosemirror-themes@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/wax-prosemirror-themes/-/wax-prosemirror-themes-0.0.2.tgz#2c1bc9dccb75ede3db494d7e73eae99880240227"
+  integrity sha512-EuDiYzNNphJd3cZP2zTwjmvvgrCJwAMZs+GO8wov+F8YHlnT821wjnBuAwXAcKI/qsa0TeVvyivLiFnTTYTFQw==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"

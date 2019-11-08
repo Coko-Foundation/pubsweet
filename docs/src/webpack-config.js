@@ -17,6 +17,7 @@ module.exports = dir => {
     path.join(dir, 'src'),
     path.join(dir, '..', 'components'),
     path.join(dir, '..', 'packages', 'ui', 'src'),
+    path.join(dir, '..', 'node_modules', 'wax-prosemirror-core', 'src'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,

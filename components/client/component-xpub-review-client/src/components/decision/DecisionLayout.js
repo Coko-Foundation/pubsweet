@@ -23,7 +23,6 @@ const DecisionLayout = ({
   updateReview,
   uploadFile,
   manuscript,
-  journal,
   isValid,
 }) => {
   const decisionSections = []
@@ -59,7 +58,6 @@ const DecisionLayout = ({
           <AdminSection key="assign-editors">
             <AssignEditorsReviewers
               AssignEditor={AssignEditor}
-              journal={journal}
               manuscript={manuscript}
             />
           </AdminSection>

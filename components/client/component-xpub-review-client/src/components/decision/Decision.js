@@ -46,7 +46,9 @@ const Decision = ({ review }) => (
     <div>
       <Heading>Decision</Heading>
 
-      <DecisionStatus>{review.recommendation}</DecisionStatus>
+      <DecisionStatus>
+        {(review && review.recommendation) || 'N/A'}
+      </DecisionStatus>
     </div>
   </div>
 )

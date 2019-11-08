@@ -3,10 +3,6 @@ A form for entering a decision on a version of a project.
 ```js
 const { withFormik } = require('formik')
 
-const journal = {
-  id: faker.random.uuid(),
-}
-
 const manuscript = {
   id: faker.random.uuid(),
   meta: {

@@ -82,9 +82,11 @@ const ConnectedReviewForm = withFormik({
   handleSubmit: (props, { props: { onSubmit, history } }) =>
     onSubmit(props, { history }),
 })(ReviewForm)
-;<ConnectedReviewForm
-  manuscript={manuscript}
-  currentUser={currentUser}
-  uploadFile={() => new XMLHttpRequest()}
-/>
+;<JournalProvider journal={journal}>
+  <ConnectedReviewForm
+    manuscript={manuscript}
+    currentUser={currentUser}
+    uploadFile={() => new XMLHttpRequest()}
+  />
+</JournalProvider>
 ```
