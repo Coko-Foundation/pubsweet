@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.0.21...pubsweet-component-users-manager@3.1.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [3.0.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.0.20...pubsweet-component-users-manager@3.0.21) (2019-09-11)
 
 **Note:** Version bump only for package pubsweet-component-users-manager

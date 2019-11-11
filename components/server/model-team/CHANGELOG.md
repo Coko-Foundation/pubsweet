@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.1.4...@pubsweet/model-team@2.2.0) (2019-11-11)
+
+
+### Features
+
+* **model-team:** allow null for aliasId ([ef93b88](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ef93b8825312991aac3451d208f5165ba6ce467e))
+
+
+
+
+
 ## [2.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.1.3...@pubsweet/model-team@2.1.4) (2019-09-11)
 
 

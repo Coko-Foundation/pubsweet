@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.7...xpub-connect@2.1.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [2.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-connect@2.0.6...xpub-connect@2.0.7) (2019-01-16)
 
 **Note:** Version bump only for package xpub-connect

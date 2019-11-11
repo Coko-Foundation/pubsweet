@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.2.30...@pubsweet/component-send-email@0.3.0) (2019-11-11)
+
+
+### Features
+
+* **send-email:** add support for test email URLs ([6b6396f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6b6396fc0724156887e2e9c92d6ecacd0958db0b))
+
+
+
+
+
 ## [0.2.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.2.29...@pubsweet/component-send-email@0.2.30) (2019-09-11)
 
 **Note:** Version bump only for package @pubsweet/component-send-email

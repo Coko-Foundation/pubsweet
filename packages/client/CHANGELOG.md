@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.0.2...pubsweet-client@10.1.0) (2019-11-11)
+
+
+### Features
+
+* **client:** automatically remove __typename from mutation inputs ([25ba9ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/25ba9ec2fae45f550f346e59a943e349f967875f))
+
+
+
+
+
 ## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.0.1...pubsweet-client@10.0.2) (2019-09-11)
 
 **Note:** Version bump only for package pubsweet-client

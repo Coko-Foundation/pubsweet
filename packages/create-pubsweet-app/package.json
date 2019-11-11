@@ -1,6 +1,6 @@
 {
   "name": "create-pubsweet-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "pubsweet"
   ],
@@ -23,7 +23,5 @@
     "prerelease": "",
     "release": "",
     "prepublish": ""
-  },
-  "devDependencies": {
   }
 }

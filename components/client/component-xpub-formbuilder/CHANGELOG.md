@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-formbuilder@1.0.7...pubsweet-component-xpub-formbuilder@1.1.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [1.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-xpub-formbuilder@1.0.6...pubsweet-component-xpub-formbuilder@1.0.7) (2019-01-16)
 
 
