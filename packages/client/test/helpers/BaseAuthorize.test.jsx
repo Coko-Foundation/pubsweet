@@ -8,8 +8,6 @@ const setImmediatePromise = promisify(setImmediate)
 
 jest.mock('fake-mode', () => false, { virtual: true })
 
-global.PUBSWEET_COMPONENTS = []
-
 function makeWrapper(props = {}) {
   return shallow(
     <Authorize currentUser={{ id: 'user1' }} {...props}>
@@ -35,8 +33,11 @@ describe('<Authorize/>', () => {
   })
 
   it('is empty when authsome throws', async () => {
-    const wrapper = makeWrapper({ authsome })
-    jest.spyOn(console, 'error').mockImplementation(jest.fn())
+    const wrapper = makeWrapper({
+      authsome,
+      client: { query: jest.fn(() => ({ data: {} })) },
+    })
+    jest.spyOn(global.console, 'error').mockImplementation(jest.fn())
 
     rejectMode(new Error('Authorize test error'))
 
@@ -45,6 +46,7 @@ describe('<Authorize/>', () => {
     } catch (err) {
       wrapper.update()
       expect(wrapper.type()).toBe(null)
+      await setImmediatePromise()
       expect(console.error).toHaveBeenCalled()
     }
 

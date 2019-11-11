@@ -6,7 +6,10 @@ import { Menu } from '../src/'
 import TestThemeProvider from './setup/theme'
 
 const props = {
-  options: [{ label: 'Foo', value: 'foo' }, { label: 'Bar', value: 'bar' }],
+  options: [
+    { label: 'Foo', value: 'foo' },
+    { label: 'Bar', value: 'bar' },
+  ],
   value: 'foo',
 }
 

@@ -12,8 +12,6 @@ import {
   GET_TEAM,
 } from '../../src/helpers/AuthorizeGraphQLQueries'
 
-global.PUBSWEET_COMPONENTS = []
-
 const user1 = {
   id: 'user1',
   username: 'admin',
