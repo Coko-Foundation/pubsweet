@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { compose } from 'recompose'
 import { sumBy } from 'lodash'
-import { withJournal } from 'xpub-journal'
+import { JournalContext } from 'xpub-journal'
 import { Badge } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 
@@ -26,12 +25,12 @@ const BadgeContainer = styled.span`
 const getUserFromTeam = (version, role) => {
   if (!version.teams) return []
 
-  const teams = version.teams.filter(team => team.teamType === role)
+  const teams = version.teams.filter(team => team.role === role)
   return teams.length ? teams[0].members : []
 }
 
 const countStatus = (version, status) => {
-  const teamMember = getUserFromTeam(version, 'reviewer')
+  const teamMember = getUserFromTeam(version, 'reviewerEditor')
 
   if (status === 'rejected' || status === 'invited') {
     return sumBy(teamMember, member => (member.status === status ? 1 : 0))
@@ -50,12 +49,16 @@ const countStatus = (version, status) => {
 
 const Reviews = ({ version, journal }) => (
   <Root>
-    {journal.reviewStatus.map(status => (
-      <BadgeContainer key={status}>
-        <Badge count={countStatus(version, status)} label={status} />
-      </BadgeContainer>
-    ))}
+    <JournalContext.Consumer>
+      {journal =>
+        journal.reviewStatus.map(status => (
+          <BadgeContainer key={status}>
+            <Badge count={countStatus(version, status)} label={status} />
+          </BadgeContainer>
+        ))
+      }
+    </JournalContext.Consumer>
   </Root>
 )
 
-export default compose(withJournal)(Reviews)
+export default Reviews

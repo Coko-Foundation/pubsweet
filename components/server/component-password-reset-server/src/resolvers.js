@@ -5,7 +5,7 @@ const logger = require('@pubsweet/logger')
 const querystring = require('querystring')
 const { ValidationError } = require('@pubsweet/errors')
 
-const transport = require('./transport')
+const { send: sendMail } = require('@pubsweet/component-send-email')
 
 const resolvers = {
   Mutation: {
@@ -36,7 +36,7 @@ const resolvers = {
 
       logger.info(`Sending password reset email to ${user.email}`)
 
-      await transport.sendMail({
+      await sendMail({
         from: configSender,
         to: user.email,
         subject: 'Password reset',

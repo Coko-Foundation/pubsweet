@@ -1,5 +1,5 @@
 import { compose } from 'recompose'
-import { cloneDeep, omit } from 'lodash'
+import { omit } from 'lodash'
 import config from 'config'
 import { graphql } from '@apollo/react-hoc'
 import { gql } from 'apollo-client-preset'
@@ -12,15 +12,17 @@ const deleteTeamMutation = gql`
     deleteTeam(id: $id) {
       id
       type
-      teamType
+      role
       name
       object {
         objectId
         objectType
       }
       members {
-        id
-        username
+        user {
+          id
+          username
+        }
       }
     }
   }
@@ -31,15 +33,17 @@ const createTeamMutation = gql`
     createTeam(input: $input) {
       id
       type
-      teamType
+      role
       name
       object {
         objectId
         objectType
       }
       members {
-        id
-        username
+        user {
+          id
+          username
+        }
       }
     }
   }
@@ -50,15 +54,17 @@ const updateTeamMutation = gql`
     updateTeam(id: $id, input: $input) {
       id
       type
-      teamType
+      role
       name
       object {
         objectId
         objectType
       }
       members {
-        id
-        username
+        user {
+          id
+          username
+        }
       }
     }
   }
@@ -93,10 +99,16 @@ export default compose(
   graphql(updateTeamMutation, {
     props: ({ mutate }) => {
       const updateTeam = (members, team) => {
-        const data = cloneDeep(team)
-        const input = omit(data, ['id', 'object.__typename', '__typename'])
+        let input = {
+          ...team,
+          objectId: team.object.objectId,
+          objectType: team.object.objectType,
+          object: undefined,
+        }
 
-        input.members = members
+        input.members = members.map(m => ({ user: { id: m } }))
+        input = omit(input, ['id', 'object.__typename', '__typename'])
+
         mutate({
           variables: {
             id: team.id,

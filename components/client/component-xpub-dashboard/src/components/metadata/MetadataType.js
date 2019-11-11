@@ -1,11 +1,15 @@
 import React from 'react'
-import { withJournal } from 'xpub-journal'
+import { JournalContext } from 'xpub-journal'
 
 const MetadataType = ({ journal, type }) => (
-  <span>
-    {(journal.articleTypes.find(item => item.value === type) || {}).label ||
-      'None'}
-  </span>
+  <JournalContext.Consumer>
+    {journal => (
+      <span>
+        {(journal.articleTypes.find(item => item.value === type) || {}).label ||
+          'None'}
+      </span>
+    )}
+  </JournalContext.Consumer>
 )
 
-export default withJournal(MetadataType)
+export default MetadataType

@@ -3,9 +3,7 @@ const config = require('config')
 const passport = require('passport')
 const logger = require('@pubsweet/logger')
 const emailer = require('@pubsweet/component-send-email')
-const {
-  models: { User, Fragment, Team, Collection },
-} = require('@pubsweet/db-manager')
+
 const authsome = require('pubsweet-server/src/helpers/authsome')
 const { AuthorizationError } = require('@pubsweet/errors')
 
@@ -13,6 +11,8 @@ const authBearer = passport.authenticate('bearer', { session: false })
 
 module.exports = app => {
   app.patch('/api/make-invitation', authBearer, async (req, res, next) => {
+    const { User, Fragment, Team, Collection } = require('@pubsweet/models')
+
     try {
       const version = await Fragment.find(req.body.versionId)
       const project = await Collection.find(req.body.projectId)
@@ -78,17 +78,16 @@ module.exports = app => {
       )
       if (!canPatchProject || !canViewProject) throw new AuthorizationError()
 
-      const team = new Team({
-        teamType: 'reviewer',
-        name: 'Reviewer',
-        object: {
-          type: 'fragment',
-          id: version.id,
+      await Team.query().upsertGraphAndFetch(
+        {
+          role: 'reviewer',
+          name: 'Reviewer',
+          objectId: version.id,
+          objectType: 'fragment',
+          members: [{ user: { id: reviewer[0].id } }],
         },
-        members: [reviewer[0].id],
-      })
-
-      await team.save()
+        { relate: true },
+      )
 
       res.send({
         version: canViewVersion.filter
@@ -105,6 +104,8 @@ module.exports = app => {
 
   app.patch('/api/make-decision', authBearer, async (req, res, next) => {
     try {
+      const { User, Fragment, Collection } = require('@pubsweet/models')
+
       const version = await Fragment.find(req.body.versionId)
       const project = await Collection.find(req.body.projectId)
       const authors = await Promise.all(version.owners.map(id => User.find(id)))

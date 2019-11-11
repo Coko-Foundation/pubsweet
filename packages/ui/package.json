@@ -29,6 +29,7 @@
     "react-feather": "^1.0.8",
     "react-router-dom": "^5.0.0",
     "react-tag-autocomplete": "^5.5.0",
+    "react-uid": "^2.2.0",
     "recompose": "^0.30.0",
     "styled-components": "^4.1.1"
   },

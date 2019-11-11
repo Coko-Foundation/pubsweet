@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { compose, withState, withHandlers } from 'recompose'
-import { withJournal } from 'xpub-journal'
+import { JournalContext } from 'xpub-journal'
 import { Button } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
 
@@ -97,7 +97,6 @@ const AccordionHeading = ({
 }
 
 const Accordion = ({
-  journal,
   open,
   ordinal,
   toggleOpen,
@@ -107,21 +106,24 @@ const Accordion = ({
   withDots,
 }) => (
   <Root>
-    <AccordionHeading
-      journal={journal}
-      name={title}
-      open={open}
-      ordinal={ordinal}
-      recommendation={status}
-      toggleOpen={toggleOpen}
-      withDots={withDots || false}
-    />
+    <JournalContext.Consumer>
+      {journal => (
+        <AccordionHeading
+          journal={journal}
+          name={title}
+          open={open}
+          ordinal={ordinal}
+          recommendation={status}
+          toggleOpen={toggleOpen}
+          withDots={withDots || false}
+        />
+      )}
+    </JournalContext.Consumer>
     {open && <AccordionBody>{Component}</AccordionBody>}
   </Root>
 )
 
 export default compose(
-  withJournal,
   withState('open', 'setOpen', ({ open }) => open || true),
   withHandlers({
     toggleOpen: props => () => {

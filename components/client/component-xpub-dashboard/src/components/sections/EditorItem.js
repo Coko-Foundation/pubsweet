@@ -34,9 +34,7 @@ const EditorItemLinks = ({ version, journals }) => (
       Summary Info
     </Action>
     <Action
-      to={`/journals/${journals.id}/versions/${version.id}/decisions/${
-        version.id
-      }`}
+      to={`/journals/${journals.id}/versions/${version.id}/decisions/${version.id}`}
     >
       {version.decision && version.decision.status === 'submitted'
         ? `Decision: ${version.decision.recommendation}`

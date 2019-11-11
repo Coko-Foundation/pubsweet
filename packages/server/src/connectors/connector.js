@@ -171,11 +171,15 @@ const fetchRelatedCreator = (entityName, EntityModel) => async (
   } else {
     entities = await entity.$relatedQuery(relation)
   }
+
   if (Array.isArray(entities)) {
     return ctx.helpers.filterAll(ctx.user, entities)
+  } else if (entities) {
+    const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entities)
+    return outputFilter(entities)
   }
-  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entities)
-  return outputFilter(entities)
+
+  return []
 }
 
 // create a connector object with fetchers for all, one and some
