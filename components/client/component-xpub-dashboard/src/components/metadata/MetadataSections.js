@@ -1,21 +1,25 @@
 import React from 'react'
-import { withJournal } from 'xpub-journal'
+import { JournalContext } from 'xpub-journal'
 
-const MetadataSections = ({ journal, sections }) =>
+const MetadataSections = ({ sections }) =>
   sections.length ? (
-    <span>
-      {sections.length &&
-        sections
-          .map(section => (
-            <span key={section}>
-              {
-                journal.articleSections.find(item => item.value === section)
-                  .label
-              }
-            </span>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])}
-    </span>
+    <JournalContext.Consumer>
+      {journal => (
+        <span>
+          {sections.length &&
+            sections
+              .map(section => (
+                <span key={section}>
+                  {
+                    journal.articleSections.find(item => item.value === section)
+                      .label
+                  }
+                </span>
+              ))
+              .reduce((prev, curr) => [prev, ', ', curr])}
+        </span>
+      )}
+    </JournalContext.Consumer>
   ) : null
 
-export default withJournal(MetadataSections)
+export default MetadataSections

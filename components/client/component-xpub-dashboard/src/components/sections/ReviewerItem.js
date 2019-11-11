@@ -12,12 +12,14 @@ import VersionTitle from './VersionTitle'
 // TODO: only return actions if not accepted or rejected
 // TODO: review id in link
 
-const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
+const ReviewerItem = ({ version, journals, currentUser, reviewerRespond }) => {
   const team =
-    (version.teams || []).find(team => team.teamType === 'reviewerEditor') || {}
-  const { status } =
-    (team.status || []).filter(member => member.user === currentUser.id)[0] ||
-    {}
+    (version.teams || []).find(team => team.role === 'reviewerEditor') || {}
+
+  const currentMember =
+    team.members &&
+    team.members.find(member => member.user.id === currentUser.id)
+  const status = currentMember && currentMember.status
 
   // Enable that when Team Models is updated
   // const { status } =
@@ -64,7 +66,13 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
               <ActionContainer>
                 <Button
                   onClick={() => {
-                    reviewerResponse(currentUser.id, 'accepted', team.id)
+                    reviewerRespond({
+                      variables: {
+                        currentUserId: currentUser.id,
+                        action: 'accepted',
+                        teamId: team.id,
+                      },
+                    })
                   }}
                 >
                   accept
@@ -76,7 +84,13 @@ const ReviewerItem = ({ version, journals, currentUser, reviewerResponse }) => {
               <ActionContainer>
                 <Button
                   onClick={() => {
-                    reviewerResponse(currentUser.id, 'rejected', team.id)
+                    reviewerRespond({
+                      variables: {
+                        currentUserId: currentUser.id,
+                        action: 'rejected',
+                        teamId: team.id,
+                      },
+                    })
                   }}
                 >
                   reject

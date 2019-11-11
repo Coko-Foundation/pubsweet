@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { th, override, validationColor } from '@pubsweet/ui-toolkit'
+import { useUID } from 'react-uid'
 
 const Root = styled.div`
   display: flex;
@@ -34,27 +35,16 @@ const Area = styled.textarea`
   ${override('ui.TextArea.Area')};
 `
 
-class TextArea extends React.Component {
-  componentWillMount() {
-    // generate a unique ID to link the label to the input
-    // note this may not play well with server rendering
-    this.inputId = `textarea-${Math.round(Math.random() * 1e12).toString(36)}`
-  }
-  render() {
-    const { label, value = '', readonly, rows = 5, ...props } = this.props
-    return (
-      <Root>
-        {label && <Label htmlFor={this.inputId}>{label}</Label>}
-        <Area
-          id={this.inputId}
-          readOnly={readonly}
-          rows={rows}
-          value={value}
-          {...props}
-        />
-      </Root>
-    )
-  }
+const TextArea = props => {
+  const uid = useUID()
+  const { label, value = '', readonly, rows = 5, ...rest } = props
+
+  return (
+    <Root>
+      {label && <Label htmlFor={uid}>{label}</Label>}
+      <Area id={uid} readOnly={readonly} rows={rows} value={value} {...rest} />
+    </Root>
+  )
 }
 
 TextArea.propTypes = {

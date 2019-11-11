@@ -1,8 +1,7 @@
 variables:
   IMAGE_ORG: pubsweet
   IMAGE_NAME: pubsweet
-  BASE_DOMAIN: gateway.ps.elifesciences.yld.io
-  CONFIGURATION_REPOSITORY: https://gitlab.coko.foundation/pubsweet/deployment-config.git
+  DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
   - build
@@ -12,7 +11,9 @@ stages:
   - production
 
 build:
-  image: docker:latest
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
   stage: build
   except:
     - tags

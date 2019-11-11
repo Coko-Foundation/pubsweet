@@ -1,7 +1,7 @@
 // mocks
-jest.mock('../src/transport', () => ({ sendMail: jest.fn() }))
+jest.mock('@pubsweet/component-send-email', () => ({ send: jest.fn() }))
 
-const transport = require('../src/transport')
+const { send: sendMail } = require('@pubsweet/component-send-email')
 
 process.env.NODE_CONFIG = `{"pubsweet":{
   "components":[
@@ -43,15 +43,13 @@ describe('Password reset', () => {
       user = await User.query().findById(user.id)
       expect(user.passwordResetToken).toBeDefined()
       expect(user.passwordResetTimestamp).toBeDefined()
-      expect(transport.sendMail).toHaveBeenCalledWith(
+      expect(sendMail).toHaveBeenCalledWith(
         expect.objectContaining({
           from: 'nobody@example.com',
           to: user.email,
           subject: 'Password reset',
           text: expect.stringContaining(
-            `http://example.com/password-reset?username=${
-              user.username
-            }&token=${user.passwordResetToken}`,
+            `http://example.com/password-reset?username=${user.username}&token=${user.passwordResetToken}`,
           ),
         }),
       )
@@ -105,7 +103,7 @@ describe('Password reset', () => {
     // This is an integration test, checking the roundtrip.
     // Including getting the token from the email.
     it('saves user if all valid', async () => {
-      transport.sendMail.mockClear()
+      sendMail.mockClear()
       // create the token
       await api.graphql.query(
         `mutation($username: String!) {
@@ -117,9 +115,7 @@ describe('Password reset', () => {
       )
 
       // get the token from the email
-      const token = transport.sendMail.mock.calls[0][0].text.match(
-        /token=([^"]*)/,
-      )[1]
+      const token = sendMail.mock.calls[0][0].text.match(/token=([^"]*)/)[1]
 
       // reset the password
       const { body } = await api.graphql.query(

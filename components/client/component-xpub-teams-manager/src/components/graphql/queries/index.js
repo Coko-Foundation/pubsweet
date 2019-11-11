@@ -13,14 +13,16 @@ export default {
   query {
     teams {
       id
-      teamType
+      role
       name
       object {
         objectId
         objectType
       }
       members {
-        id
+        user {
+          id
+        }
       }
     }
 

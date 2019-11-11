@@ -15,19 +15,17 @@ export default {
       ) {
         id
         role
-        teamType
         name
         object {
           objectId
           objectType
         }
-        objectType
         members {
           id
-          username
-        }
-        status {
-          user
+          user {
+            id
+            username
+          }
           status
         }
       }
@@ -52,18 +50,16 @@ export default {
           id
           role
           name
-          teamType
           object {
             objectId
             objectType
           }
-          objectType
           members {
             id
-            username
-          }
-          status {
-            user
+            user {
+              id
+              username
+            }
             status
           }
         }

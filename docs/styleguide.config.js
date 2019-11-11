@@ -168,6 +168,7 @@ module.exports = {
     },
   ],
   ignore: [
+    '**/components/client/component-xpub-review-client/**',
     '**/components/client/component-manage/**',
     '**/components/**/*.config.js',
     '**/node_modules/**',

@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import styled, { keyframes, withTheme } from 'styled-components'
+import { XpubContext } from 'xpub-with-context'
 import Dropzone from 'react-dropzone'
 import { Icon } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
+import upload from '../lib/upload'
 
 const StyledDropzone = styled(({ disableUpload, ...props }) => (
   <Dropzone {...props} />
@@ -23,8 +25,8 @@ const Status = styled.div`
   display: inline-flex;
 `
 
-const StatusIdle = styled(Status).attrs(() => ({
-  children: () => <StatusIcon>plus_circle</StatusIcon>,
+const StatusIdle = styled(Status).attrs(props => ({
+  children: <StatusIcon>plus_circle</StatusIcon>,
 }))``
 
 const spin = keyframes`
@@ -39,8 +41,8 @@ const spin = keyframes`
   }
 `
 
-const StatusConverting = styled(Status).attrs(() => ({
-  children: () => <StatusIcon>plus_circle</StatusIcon>,
+const StatusConverting = styled(Status).attrs(props => ({
+  children: <StatusIcon>plus_circle</StatusIcon>,
 }))`
   &:hover {
     cursor: wait;
@@ -58,8 +60,8 @@ const StatusConverting = styled(Status).attrs(() => ({
   }
 `
 
-const StatusError = styled(Status).attrs(() => ({
-  children: () => <StatusIcon>plus_circle</StatusIcon>,
+const StatusError = styled(Status).attrs(props => ({
+  children: <StatusIcon>plus_circle</StatusIcon>,
 }))`
   color: ${th('colorDanger')};
   font-size: 1.5em;
@@ -87,8 +89,8 @@ const dash = keyframes`
   }
 `
 
-const StatusCompleted = styled(Status).attrs(() => ({
-  children: () => <StatusIcon>check_circle</StatusIcon>,
+const StatusCompleted = styled(Status).attrs(props => ({
+  children: <StatusIcon>check_circle</StatusIcon>,
 }))`
   polyline {
     animation: ${dash} 1.35s linear;
@@ -149,93 +151,161 @@ const SubInfo = styled.div`
   line-height: 32px;
 `
 
-class UploadManuscript extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      completed: false,
-      error: false,
-    }
-    this.showErrorAndHide = this.showErrorAndHide.bind(this)
-  }
+const UploadManuscript = ({ acceptFiles, ...props }) => {
+  // const [error, setError] = useState(false)
+  // const [completed, setCompleted] = useState(false)
+  const [conversion, setConversion] = useContext(XpubContext)
+  const { error, completed, converting } = conversion
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.props.conversion.converting !== nextProps.conversion.converting &&
-      this.props.conversion.converting === true
-    ) {
-      this.setState({
-        completed: true,
-        error: false,
-      })
-    }
+  // const error = conversion.error
+  // const
+  // setConversion({ error: 'yes' })
 
-    if (nextProps.conversion.error !== undefined) {
-      this.showErrorAndHide()
-    }
-  }
+  const uploadManuscript = upload({
+    client: props.client,
+    history: props.history,
+    journals: props.journals,
+    currentUser: props.currentUser,
+    setConversion,
+  })
 
-  showErrorAndHide() {
-    this.setState({
-      error: true,
-      completed: false,
-    })
+  // const status = completed
+  //   ? 'completed'
+  //   : error
+  //   ? 'error'
+  //   : conversion.converting
+  //   ? 'converting'
+  //   : 'idle'
+
+  // if (!completed && !conversion.converting) {
+  //   setCompleted(true)
+  //   setError(false)
+  // }
+
+  // Show and then hide the error
+  if (error) {
     setTimeout(() => {
-      this.setState({
-        error: false,
-        completed: false,
-      })
+      setConversion({})
     }, 3000)
   }
 
-  get status() {
-    if (this.state.completed) {
-      return 'completed'
-    }
-    if (this.state.error) {
-      return 'error'
-    }
-    if (this.props.conversion.converting) {
-      return 'converting'
-    }
-    return 'idle'
-  }
-
-  render() {
-    const { acceptFiles, uploadManuscript, conversion } = this.props
-
-    return (
-      <StyledDropzone
-        accept={acceptFiles}
-        disableUpload={this.status === 'converting' ? 'disableUpload' : null}
-        onDrop={uploadManuscript}
-      >
-        <Root>
-          <Main>
-            {this.status === 'completed' && <StatusCompleted />}
-            {this.status === 'error' && <StatusError />}
-            {this.status === 'converting' && <StatusConverting />}
-            {this.status === 'idle' && <StatusIdle />}
-            {this.state.error ? (
-              <Error>{conversion.error.message}</Error>
-            ) : (
-              <Info>
-                {this.state.completed
-                  ? 'Submission created'
-                  : 'Submit Manuscript'}
-              </Info>
-            )}
-          </Main>
-          <SubInfo>
-            {this.status === 'converting' &&
-              'Your manuscript is being converted into a directly editable version. This might take a while.'}
-            {this.status !== 'converting' &&
-              'Accepted file types: pdf, epub, zip, docx, latex'}
-          </SubInfo>
-        </Root>
-      </StyledDropzone>
-    )
-  }
+  return (
+    <StyledDropzone
+      accept={acceptFiles}
+      disableUpload={converting ? 'disableUpload' : null}
+      onDrop={uploadManuscript}
+    >
+      <Root>
+        <Main>
+          {completed && <StatusCompleted />}
+          {error && <StatusError />}
+          {converting && <StatusConverting />}
+          {!converting && !error && !completed && <StatusIdle />}
+          {error ? (
+            <Error>{error.message}</Error>
+          ) : (
+            <Info>
+              {completed ? 'Submission created' : 'Submit Manuscript'}
+            </Info>
+          )}
+        </Main>
+        <SubInfo>
+          {converting &&
+            'Your manuscript is being converted into a directly editable version. This might take a few seconds.'}
+          {!converting && 'Accepted file types: pdf, epub, zip, docx, latex'}
+        </SubInfo>
+      </Root>
+    </StyledDropzone>
+  )
 }
 
 export default UploadManuscript
+
+// class UploadManuscript extends Component {
+
+// constructor(props) {
+//   super(props)
+//   this.state = {
+//     completed: false,
+//     error: false,
+//   }
+//   this.showErrorAndHide = this.showErrorAndHide.bind(this)
+// }
+
+// getDerivedPropsFromState(props, state) {
+// if (!state.completed && !props.conversion.converting) {
+//   this.setState({
+//     completed: true,
+//     error: false,
+//   })
+// }
+
+//   if (props.conversion.error) {
+//     this.showErrorAndHide()
+//   }
+// }
+
+// showErrorAndHide() {
+//   this.setState({
+//     error: true,
+//     completed: false,
+//   })
+//   setTimeout(() => {
+//     this.setState({
+//       error: false,
+//       completed: false,
+//     })
+//   }, 3000)
+// }
+
+// get status() {
+//   if (this.state.completed) {
+//     return 'completed'
+//   }
+//   if (this.state.error) {
+//     return 'error'
+//   }
+//   if (this.props.conversion.converting) {
+//     return 'converting'
+//   }
+//   return 'idle'
+// }
+
+// render() {
+// const { acceptFiles, uploadManuscript, conversion } = this.props
+
+// return (
+//   <StyledDropzone
+//     accept={acceptFiles}
+//     disableUpload={this.status === 'converting' ? 'disableUpload' : null}
+//     onDrop={uploadManuscript}
+//   >
+//     <Root>
+//       <Main>
+//         {this.status === 'completed' && <StatusCompleted />}
+//         {this.status === 'error' && <StatusError />}
+//         {this.status === 'converting' && <StatusConverting />}
+//         {this.status === 'idle' && <StatusIdle />}
+//         {this.state.error ? (
+//           <Error>{conversion.error.message}</Error>
+//         ) : (
+//           <Info>
+//             {this.state.completed
+//               ? 'Submission created'
+//               : 'Submit Manuscript'}
+//           </Info>
+//         )}
+//       </Main>
+//       <SubInfo>
+//         {this.status === 'converting' &&
+//           'Your manuscript is being converted into a directly editable version. This might take a while.'}
+//         {this.status !== 'converting' &&
+//           'Accepted file types: pdf, epub, zip, docx, latex'}
+//       </SubInfo>
+//     </Root>
+//   </StyledDropzone>
+// )
+// }
+// }
+
+// export default UploadManuscript

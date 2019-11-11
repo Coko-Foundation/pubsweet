@@ -30,19 +30,18 @@ export default {
           teams {
             id
             role
-            teamType
+            type
             name
             object {
               objectId
               objectType
             }
-            objectType
             members {
               id
-              username
-            }
-            status {
-              user
+              user {
+                id
+                username
+              }
               status
             }
           }

@@ -24,11 +24,11 @@ const TeamsManager = ({
         <TeamTableCell width={40}>Members</TeamTableCell>
         <TeamTableCell width={15}>Actions</TeamTableCell>
 
-        {teams.map((team, key) => (
+        {teams.map((team, i) => (
           <Team
             deleteTeam={deleteTeam}
             key={team.id}
-            number={key + 1}
+            number={i + 1}
             team={team}
             updateTeam={updateTeam}
             userOptions={userOptions}

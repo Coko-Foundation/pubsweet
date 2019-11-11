@@ -350,6 +350,7 @@ const DefaultOpener = ({
       <Value>
         {selected.map(select => (
           <MultipleValue
+            key={select}
             onClick={event => selectOneOfMultiElement(event, select)}
           >
             {optionLabel(select)}

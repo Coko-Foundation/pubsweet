@@ -1,7 +1,13 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { Wax } from 'wax-prose-mirror'
+import { Wax, CreateSchema } from 'wax-prosemirror-core'
+import { XpubSchema } from 'wax-prosemirror-schema'
+import 'wax-prosemirror-themes/themes/default-theme.css'
+
+const options = {
+  schema: new CreateSchema(XpubSchema),
+}
 
 const ManuScript = styled.div`
   .wax-container {
@@ -24,17 +30,20 @@ const Manuscript = ({
   file,
   content,
   currentUser,
-  fileUpload,
+  // fileUpload,
   history,
-  updateManuscript,
+  // updateManuscript,
 }) =>
   file &&
   file.mimeType ===
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ? (
     <ManuScript>
       <Wax
-        fileUpload={fileUpload}
-        onChange={source => updateManuscript({ source })}
+        key={1}
+        options={options}
+        theme="default"
+        // fileUpload={fileUpload}
+        // onChange={source => updateManuscript({ source })}
         value={content}
       />
     </ManuScript>

@@ -6,6 +6,12 @@ import { withFormik } from 'formik'
 import { withLoader } from 'pubsweet-client'
 import Submit from './Submit'
 
+const nullToEmpty = obj =>
+  JSON.parse(JSON.stringify(obj, (k, v) => (v === null ? '' : v)))
+
+const emptyToUndefined = obj =>
+  JSON.parse(JSON.stringify(obj, (k, v) => (v === '' ? undefined : v)))
+
 const fragmentFields = `
   id
   created
@@ -37,7 +43,10 @@ const fragmentFields = `
     role
     members {
       id
-      username
+      user {
+        id
+        username
+      }
     }
   }
   decision
@@ -142,7 +151,7 @@ export default compose(
         form: 'submit',
       },
     }),
-    props: ({ data }) => ({ data }),
+    props: ({ data }) => ({ data: nullToEmpty(data) }),
   }),
   graphql(createFileMutation, {
     props: ({ mutate, ownProps }) => ({
@@ -183,7 +192,7 @@ export default compose(
         mutate({
           variables: {
             id: ownProps.match.params.version,
-            input: JSON.stringify(input),
+            input: JSON.stringify(emptyToUndefined(input)),
           },
         })
       }

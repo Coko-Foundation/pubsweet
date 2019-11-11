@@ -19,7 +19,7 @@ const tryRequireRelative = m => {
   return component
 }
 
-// custom data models
+// Custom data models
 if (config.has('pubsweet.components')) {
   config.get('pubsweet.components').forEach(componentName => {
     const component = tryRequireRelative(componentName)

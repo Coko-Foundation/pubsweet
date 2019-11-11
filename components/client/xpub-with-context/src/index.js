@@ -1,20 +1,13 @@
-import React from 'react'
-import { compose } from 'recompose'
+import React, { useState } from 'react'
 
-const AppContext = React.createContext(null)
+const XpubContext = React.createContext([{ converting: false }, () => {}])
 
-export const connectToContext = () => WrappedComponent => {
-  const ConnectedContextComponent = props => (
-    <AppContext.Consumer>
-      {context => <WrappedComponent {...props} {...context} />}
-    </AppContext.Consumer>
+const XpubProvider = props => {
+  const [state, setState] = useState({ converting: false })
+  return (
+    <XpubContext.Provider value={[state, setState]}>
+      {props.children}
+    </XpubContext.Provider>
   )
-  return compose()(ConnectedContextComponent)
 }
-
-export const createContext = data => WrappedComponent =>
-  compose()(props => (
-    <AppContext.Provider value={data || props}>
-      <WrappedComponent {...props} />
-    </AppContext.Provider>
-  ))
+export { XpubContext, XpubProvider }

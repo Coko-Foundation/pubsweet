@@ -1,10 +1,13 @@
-import { compose, withProps } from 'recompose'
-import { withRouter } from 'react-router-dom'
-import { withApollo } from '@apollo/react-hoc'
+// import { compose, withProps } from 'recompose'
+// import { withRouter } from 'react-router-dom'
+// import { withApollo } from '@apollo/react-hoc'
+import config from 'config'
 import request from 'pubsweet-client/src/helpers/api'
 import queries from '../graphql/queries/'
 import mutations from '../graphql/mutations/'
 import { extractTitle, generateTitle } from './title'
+// import { XpubContext } from 'xpub-with-context'
+// import { useContext } from 'react'
 
 const uploadPromise = (files, client) => () => {
   const [file] = files
@@ -18,11 +21,11 @@ const uploadPromise = (files, client) => () => {
   })
 }
 
-const inkConvertPromise = file => ({ data }) => {
+const DocxToHTMLPromise = file => ({ data }) => {
   const body = new FormData()
-  body.append('file', file)
+  body.append('docx', file)
 
-  const url = '/ink?recipe=editoria-typescript'
+  const url = `${config['pubsweet-client'].baseUrl}convertDocxToHTML`
 
   return request(url, { method: 'POST', body }).then(response =>
     Promise.resolve({
@@ -36,13 +39,11 @@ const createManuscriptPromise = (file, client, currentUser) => ({
   fileURL,
   response,
 }) => {
-  if (!response.converted) {
+  if (!response) {
     throw new Error('The file was not converted')
   }
 
-  const source = response.converted
-
-  const title = extractTitle(source) || generateTitle(file.name)
+  const title = extractTitle(response) || generateTitle(file.name)
 
   const manuscript = {
     files: [
@@ -55,7 +56,7 @@ const createManuscriptPromise = (file, client, currentUser) => ({
     ],
     meta: {
       title,
-      source: source === true ? 'false' : source,
+      source: response || false,
     },
   }
 
@@ -80,7 +81,7 @@ const createManuscriptPromise = (file, client, currentUser) => ({
 const redirectPromise = (setConversionState, journals, history) => ({
   data,
 }) => {
-  setConversionState(() => ({ converting: false }))
+  setConversionState(() => ({ converting: false, completed: true }))
   const route = `/journals/${journals.id}/versions/${data.createManuscript.id}/submit`
   // redirect after a short delay
   window.setTimeout(() => {
@@ -88,35 +89,35 @@ const redirectPromise = (setConversionState, journals, history) => ({
   }, 2000)
 }
 
-const skipInkConversion = file =>
+const skipXSweet = file =>
   !(
     file.type ===
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   )
 
-export default compose(
-  withApollo,
-  withRouter,
-  withProps(
-    ({ client, setConversionState, history, journals, currentUser }) => ({
-      uploadManuscript: files => {
-        const [file] = files
-        setConversionState(() => ({ converting: true }))
-        return Promise.resolve()
-          .then(uploadPromise(files, client))
-          .then(
-            skipInkConversion(file)
-              ? ({ data }) =>
-                  Promise.resolve({
-                    fileURL: data.upload.url,
-                    response: { converted: true },
-                  })
-              : inkConvertPromise(file),
-          )
-          .then(createManuscriptPromise(file, client, currentUser))
-          .then(redirectPromise(setConversionState, journals, history))
-          .catch(error => setConversionState(() => ({ error })))
-      },
-    }),
-  ),
-)
+export default ({
+  client,
+  history,
+  journals,
+  currentUser,
+  setConversion,
+}) => files => {
+  const [file] = files
+  setConversion({ converting: true })
+  return Promise.resolve()
+    .then(uploadPromise(files, client))
+    .then(
+      skipXSweet(file)
+        ? ({ data }) =>
+            Promise.resolve({
+              fileURL: data.upload.url,
+              response: { converted: true },
+            })
+        : DocxToHTMLPromise(file),
+    )
+    .then(createManuscriptPromise(file, client, currentUser))
+    .then(redirectPromise(setConversion, journals, history))
+    .catch(error => {
+      setConversion({ error })
+    })
+}

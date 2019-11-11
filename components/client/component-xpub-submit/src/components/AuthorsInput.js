@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { FieldArray } from 'formik'
 import { cloneDeep, set } from 'lodash'
 import { TextField, Button, ValidatedFieldFormik } from '@pubsweet/ui'
-import { minSize, readonly } from 'xpub-validators'
+import { minSize } from 'xpub-validators'
 
 const minSize1 = minSize(1)
 
@@ -94,7 +94,6 @@ const renderAuthors = onChange => ({
                   component={firstNameInput}
                   name={`authors.${index}.firstName`}
                   onChange={onChangeFn(onChange, setFieldValue, values)}
-                  readonly={readonly}
                   validate={minSize1}
                 />
               </Inline>
@@ -104,7 +103,6 @@ const renderAuthors = onChange => ({
                   component={lastNameInput}
                   name={`authors.[${index}].lastName`}
                   onChange={onChangeFn(onChange, setFieldValue, values)}
-                  readonly={readonly}
                   validate={minSize1}
                 />
               </Inline>
@@ -116,7 +114,6 @@ const renderAuthors = onChange => ({
                   component={emailAddressInput}
                   name={`authors.[${index}].email`}
                   onChange={onChangeFn(onChange, setFieldValue, values)}
-                  readonly={readonly}
                   validate={minSize1}
                 />
               </Inline>
@@ -126,7 +123,6 @@ const renderAuthors = onChange => ({
                   component={affiliationInput}
                   name={`authors.[${index}].affiliation`}
                   onChange={onChangeFn(onChange, setFieldValue, values)}
-                  readonly={readonly}
                   validate={minSize1}
                 />
               </Inline>
