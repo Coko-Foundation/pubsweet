@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@2.0.3...@pubsweet/job-xsweet@2.1.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **jobxsweet:** add node-wait-for-it dependency ([5f7dd35](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5f7dd35f10ae860c69e5e75d9447850536cab77c))
+* **jobxsweet:** add node-wait-for-it dependency ([9a057bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9a057bce022b2af6f3da7cb76d782849d266f13e))
+* **jobxsweet:** add node-wait-for-it dependency ([c692496](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c692496bea979b0f5b6380bcf2d8d4617cee2ce6))
+
+
+### Features
+
+* **xsweet:** add wait for it file for postgres ([0478d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0478d01412b44d517fed5d72b5b0742703ad25ae))
+
+
+
+
+
 ## [2.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@2.0.2...@pubsweet/job-xsweet@2.0.3) (2019-09-11)
 
 **Note:** Version bump only for package @pubsweet/job-xsweet

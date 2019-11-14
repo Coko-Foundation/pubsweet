@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-server@2.1.15...@pubsweet/component-password-reset-server@2.2.0) (2019-11-11)
+
+
+### Features
+
+* **password-reset:** use PubSweet's send-email component ([8e07718](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8e0771881bcac71752cba29675bab4046e43e3b1))
+
+
+
+
+
 ## [2.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-server@2.1.14...@pubsweet/component-password-reset-server@2.1.15) (2019-09-11)
 
 **Note:** Version bump only for package @pubsweet/component-password-reset-server

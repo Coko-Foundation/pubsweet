@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.21...@pubsweet/models@0.3.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [0.2.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/models@0.2.20...@pubsweet/models@0.2.21) (2019-09-11)
 
 **Note:** Version bump only for package @pubsweet/models

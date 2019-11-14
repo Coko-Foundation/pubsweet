@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-journal@0.0.22...xpub-journal@0.1.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [0.0.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-journal@0.0.21...xpub-journal@0.0.22) (2019-09-11)
 
 **Note:** Version bump only for package xpub-journal

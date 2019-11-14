@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.0.1...@pubsweet/ui@12.1.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **ui:** make the deprecated Title work again ([5d58ee9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d58ee96aae2f780c108bffc5bb80f49e97abaf2))
+
+
+### Features
+
+* **ui:** set a key for Menu items ([1f6c4e7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1f6c4e724dc6dca2212fcbb50f85277baf3abae0))
+* **ui:** use SSR-friendly UID generation in TextArea ([d5c4dcf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d5c4dcfedf58c3005bcc4e6836617e211d136d62))
+* **ui:** use SSR-friendly UID generation in TextField ([471fa6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/471fa6dde1e415628d4421f6c2e1474fcf866ae3))
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
 ## [12.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.0.0...@pubsweet/ui@12.0.1) (2019-09-11)
 
 **Note:** Version bump only for package @pubsweet/ui
