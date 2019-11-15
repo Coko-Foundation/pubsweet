@@ -1,5 +1,9 @@
 FROM node:12
 
+ENV HOME "/home/pubsweet"
+RUN mkdir -p ${HOME}
+WORKDIR ${HOME}
+
 COPY . .
 
 RUN [ "yarn", "config", "set", "workspaces-experimental", "true" ]
@@ -14,5 +18,4 @@ ENV NODE_ENV "production"
 
 EXPOSE 3000
 
-WORKDIR ${HOME}
 CMD []
