@@ -6,7 +6,7 @@ const createTables = async clobber => {
   const { rows } = await db.raw(`
     SELECT tablename
     FROM pg_tables
-    WHERE schemaname = current_schema
+    WHERE schemaname = 'public' OR schemaname = 'pgboss'
   `)
 
   if (rows.length) {
@@ -21,7 +21,7 @@ const createTables = async clobber => {
       logger.error(
         'If you want to overwrite the database, set clobber option to true',
       )
-      throw new Error('Target database already exists, not clobbering')
+      throw new Error('Target database already exists.')
     }
   }
 

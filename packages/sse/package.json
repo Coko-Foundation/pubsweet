@@ -9,15 +9,9 @@
   },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "main": "lib/SSE.js",
+  "main": "src/SSE.js",
   "files": [
     "lib"
   ],
-  "engines": {
-    "node": ">= 6"
-  },
-  "devDependencies": {
-    "standard": "^11.0.1"
-  },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

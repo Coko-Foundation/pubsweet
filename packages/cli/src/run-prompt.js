@@ -1,4 +1,4 @@
-const Promise = require('bluebird')
+const { promisify } = require('util')
 const colors = require('colors/safe')
 const logger = require('@pubsweet/logger')
 const _ = require('lodash')
@@ -14,7 +14,7 @@ const logInput = result => {
 
 module.exports = async function runPrompt({ properties, override }) {
   const prompt = require('prompt')
-  const promptGet = Promise.promisify(prompt.get)
+  const promptGet = promisify(prompt.get)
   prompt.override = override
   prompt.message = colors.cyan('question:')
   prompt.delimiter = colors.green('><')
