@@ -62,7 +62,7 @@
     "precommit": "lint-staged",
     "cz": "git-cz",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "build": "yarn lint && lerna run build"
+    "build": "lerna run build"
   },
   "jest": {
     "collectCoverageFrom": [
