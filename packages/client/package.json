@@ -33,9 +33,7 @@
     "pubsweet-server": ">=13.0.0"
   },
   "scripts": {
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean",
-    "build": "babel --root-mode upward src -d dist --ignore **/*.test.js"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js"
   },
   "repository": {
     "type": "git",

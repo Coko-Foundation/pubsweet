@@ -44,7 +44,6 @@
     "prettier": "^1.8.2",
     "react-test-renderer": "^16.5.2",
     "react-testing-library": "^7.0.0",
-    "rimraf": "^2.6.1",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-pubsweet": "^0.0.3",
