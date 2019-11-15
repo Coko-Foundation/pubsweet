@@ -5,7 +5,7 @@ import { actions } from 'pubsweet-client'
 import { ink } from 'pubsweet-component-ink-frontend/actions'
 import { ConnectPage } from 'xpub-connect'
 import { selectCollection, selectFragment } from 'xpub-selectors'
-import { calculateAuthorScores, calculatePaperScores } from '../lib/score'
+import { calculateAuthorScores, calculatePaperScores } from '../shared/score'
 import FindReviewersLayout from './FindReviewersLayout'
 
 class FindReviewersPage extends React.Component {

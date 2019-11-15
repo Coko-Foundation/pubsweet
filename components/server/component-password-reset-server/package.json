@@ -9,10 +9,8 @@
   "dependencies": {
     "@pubsweet/component-send-email": "^0.3.0",
     "@pubsweet/errors": "^2.0.25",
-    "body-parser": "^1.17.2",
     "config": "^3.0.1",
-    "moment": "^2.18.1",
-    "nodemailer": "^4.0.1"
+    "moment": "^2.18.1"
   },
   "peerDependencies": {
     "@pubsweet/logger": ">=0.0.1",

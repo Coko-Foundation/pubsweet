@@ -26,7 +26,27 @@
     "prettier": "^1.8.2",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-pubsweet": "^0.0.3"
+    "stylelint-config-pubsweet": "^0.0.3",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-react": "^7.0.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
+    "jest-dom": "^4.0.0",
+    "jest-styled-components": "^6.3.1",
+    "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^7.0.0",
+    "waait": "^1.0.2",
+    "nock": "^9.0.14",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "@babel/cli": "^7.0.0",
+    "eventsourcemock": "^1.0.1",
+    "eventsource": "^1.0.4",
+    "isomorphic-form-data": "^1.0.0",
+    "supertest": "^3.1.0",
+    "faker": "^4.1.0",
+    "rimraf": "^2.6.1"
   },
   "scripts": {
     "clean": "lerna clean",
@@ -39,7 +59,8 @@
     "lint:json": "prettier --list-different '**/*.json'",
     "precommit": "lint-staged",
     "cz": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "build": "yarn lint && lerna run build"
   },
   "jest": {
     "collectCoverageFrom": [

@@ -17,31 +17,18 @@
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "prop-types": "^15.5.10",
-    "react-dropzone": "^4.3.0",
     "react-feather": "^1.1.5",
     "react-html-parser": "^2.0.2",
     "recompose": "^0.30.0",
-    "striptags": "^3.1.0",
     "styled-components": "^4.1.1",
-    "xpub-connect": "^2.1.0",
     "xpub-edit": "^2.6.0",
     "xpub-journal": "^0.1.0",
-    "xpub-upload": "^1.0.22",
     "xpub-validators": "^0.0.28"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "faker": "^4.1.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",
     "react": ">=16.9",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": ">=5.0.0"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

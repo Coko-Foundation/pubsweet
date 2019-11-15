@@ -8,9 +8,6 @@
     "src",
     "dist"
   ],
-  "dependencies": {
-    "recompose": "^0.30.0"
-  },
   "peerDependencies": {
     "react": ">=16.9"
   },

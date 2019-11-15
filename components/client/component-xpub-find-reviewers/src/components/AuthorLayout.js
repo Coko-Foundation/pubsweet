@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '@pubsweet/ui'
 import classes from './AuthorLayout.local.scss'
 import Paper from './Paper'
-import { publicationYears } from '../lib/author'
+import { publicationYears } from '../shared/author'
 
 const AuthorLayout = ({ author, assignReviewer, project, version }) => (
   <div className={classes.root}>
