@@ -34,7 +34,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "build": "babel --root-mode upward src -d dist --ignore **/*.test.js"
+    "build": "babel --root-mode upward src -d dist --ignore node_modules,test,docs"
   },
   "publishConfig": {
     "access": "public"

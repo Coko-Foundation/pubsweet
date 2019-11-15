@@ -4,12 +4,20 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^6.0.5",
     "@commitlint/config-conventional": "^6.0.4",
     "babel-eslint": "^10.0.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^4.13.1",
     "eslint-config-pubsweet": "^0.0.6",
     "eslint-plugin-import": "^2.8.0",
@@ -20,33 +28,28 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eventsource": "^1.0.4",
+    "eventsourcemock": "^1.0.1",
+    "faker": "^4.1.0",
     "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
+    "isomorphic-form-data": "^1.0.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
+    "@testing-library/jest-dom": "^4.0.0",
+    "jest-styled-components": "^6.3.1",
     "lerna": "^3.13.2",
     "lint-staged": "^8.1.5",
+    "nock": "^9.0.14",
     "prettier": "^1.8.2",
+    "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^7.0.0",
+    "rimraf": "^2.6.1",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-pubsweet": "^0.0.3",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-react": "^7.0.0",
-    "jest": "^24.7.1",
-    "jest-cli": "^24.7.1",
-    "jest-dom": "^4.0.0",
-    "jest-styled-components": "^6.3.1",
-    "react-test-renderer": "^16.5.2",
-    "react-testing-library": "^7.0.0",
-    "waait": "^1.0.2",
-    "nock": "^9.0.14",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "@babel/cli": "^7.0.0",
-    "eventsourcemock": "^1.0.1",
-    "eventsource": "^1.0.4",
-    "isomorphic-form-data": "^1.0.0",
     "supertest": "^3.1.0",
-    "faker": "^4.1.0",
-    "rimraf": "^2.6.1"
+    "waait": "^1.0.2"
   },
   "scripts": {
     "clean": "lerna clean",
@@ -165,6 +168,7 @@
       },
       {
         "rootDir": "<rootDir>/packages/ui",
+        "testRegex": "/test/.*test.js$",
         "displayName": "ui",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
@@ -252,6 +256,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {}
+  }
 }
