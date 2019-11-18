@@ -1,4 +1,5 @@
 import React from 'react'
+import { act } from 'react-dom/test-utils'
 import { mount } from 'enzyme'
 import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
@@ -148,6 +149,13 @@ function makeDeepWrapper(currentUser, props = {}) {
   )
 }
 
+export async function updateWrapper(wrapper, amount = 0) {
+  await act(async () => {
+    await wait(amount)
+    wrapper.update()
+  })
+}
+
 // This is an integration test of sorts, as the only thing mocked is the
 // GraphQL API's response. Given an authsome mode that allows everything
 // for admins and nothing for anyone else, the AuthorizeGraphQLWrapper
@@ -164,8 +172,7 @@ describe('AuthorizeGraphQLWrapper', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(100)
-    wrapper.update()
+    await updateWrapper(wrapper, 100)
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
     expect(div.text()).toBe('Only for admins')
@@ -175,8 +182,8 @@ describe('AuthorizeGraphQLWrapper', () => {
     const authsome = new Authsome({ mode: authsomeMode })
 
     const wrapper = makeDeepWrapper(nonAdminUser, { authsome })
-    await wait(2)
-    wrapper.update()
+
+    await updateWrapper(wrapper, 100)
     const div = wrapper.find('div')
     expect(div).toHaveLength(0)
   })
@@ -184,35 +191,33 @@ describe('AuthorizeGraphQLWrapper', () => {
   it('optionally shows alternative content when not authorized (unauthorized prop is a component)', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
 
-    const wrapper = makeDeepWrapper(nonAdminUser, {
+    const wrapper = await makeDeepWrapper(nonAdminUser, {
       authsome,
       unauthorized: <span />,
     })
 
-    setImmediate(() => {
-      wrapper.update()
-      const div = wrapper.find('div')
-      expect(div).toHaveLength(0)
-      const span = wrapper.find('span')
-      expect(span).toHaveLength(1)
-    })
+    await updateWrapper(wrapper, 100)
+    const div = wrapper.find('div')
+    expect(div).toHaveLength(0)
+
+    const span = wrapper.find('span')
+    expect(span).toHaveLength(1)
+    // })
   })
 
   it('optionally shows alternative content when not authorized (unauthorized prop is a fn)', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
 
-    const wrapper = makeDeepWrapper(nonAdminUser, {
+    const wrapper = await makeDeepWrapper(nonAdminUser, {
       authsome,
       unauthorized: () => <span />,
     })
 
-    setImmediate(() => {
-      wrapper.update()
-      const div = wrapper.find('div')
-      expect(div).toHaveLength(0)
-      const span = wrapper.find('span')
-      expect(span).toHaveLength(1)
-    })
+    await updateWrapper(wrapper, 100)
+    const div = wrapper.find('div')
+    expect(div).toHaveLength(0)
+    const span = wrapper.find('span')
+    expect(span).toHaveLength(1)
   })
 })
 
@@ -235,10 +240,9 @@ describe('Authsome GraphQL context', () => {
 
   it('can query all models through the context', async () => {
     const authsome = new Authsome({ mode: authsomeMode })
-    const wrapper = makeDeepWrapper(user1, { authsome })
+    const wrapper = await makeDeepWrapper(user1, { authsome })
 
-    await wait(100)
-    wrapper.update()
+    await updateWrapper(wrapper, 100)
     const div = wrapper.find('div')
     expect(div).toHaveLength(1)
     expect(div.text()).toBe('Only for admins')
@@ -262,8 +266,7 @@ describe('A query for a missing object', () => {
     const authsome = new Authsome({ mode: authsomeMode })
     const wrapper = makeDeepWrapper(user1, { authsome })
 
-    await wait(20)
-    wrapper.update()
+    await updateWrapper(wrapper, 20)
     const div = wrapper.find('div')
     expect(div).toHaveLength(0)
     expect(console.error).toHaveBeenCalledWith(error)
@@ -281,8 +284,7 @@ describe('Actual use of Authorize', () => {
   it('renders without supplying authsome in props', async () => {
     // Gets authsome mode from the config
     const wrapper = makeDeepWrapper(user1)
-    await wait(20)
-    wrapper.update()
+    await updateWrapper(wrapper, 20)
     const div = wrapper.find('div')
     expect(div.text()).toBe('Only for admins')
   })
