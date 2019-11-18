@@ -94,9 +94,9 @@ describe('CLI: integration test', () => {
       })
       console.log(stderr, stdout)
 
-      expect(fs.existsSync(path.join(buildDir, 'assets', 'bundle.js'))).toBe(
-        true,
-      )
+      expect(
+        fs.existsSync(path.join(buildDir, 'assets', 'js', 'bundle.js')),
+      ).toBe(true)
       fs.removeSync(buildDir)
     })
   })
