@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { ThemeProvider } from 'styled-components'
-import { cleanup, fireEvent, render } from 'react-testing-library'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 
 import Pagination from '../src/molecules/Pagination'
 

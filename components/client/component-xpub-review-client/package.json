@@ -32,7 +32,6 @@
     "formik": ">=1.4.2",
     "pubsweet-client": ">=2.1.0",
     "react": ">=16",
-    "react-apollo": ">=2.3.3",
     "react-redux": ">=5.0.2",
     "react-router-dom": ">=5.0.0"
   }

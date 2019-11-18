@@ -26,7 +26,6 @@
     "graphql-tag": ">=2.10.0",
     "lodash": ">=4.17.11",
     "pubsweet-client": ">=2.1.0",
-    "react": ">=16",
-    "react-apollo": ">=2.3.3"
+    "react": ">=16"
   }
 }
