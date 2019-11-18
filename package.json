@@ -167,7 +167,7 @@
       },
       {
         "rootDir": "<rootDir>/packages/ui",
-        "testRegex": "/test/.*test.js$",
+        "testPathIgnorePatterns": ["/dist"],
         "displayName": "ui",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
