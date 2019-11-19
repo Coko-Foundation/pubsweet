@@ -3,6 +3,7 @@ coverage
 *.log
 coverage/
 uploads/
+dist/
 docs/styleguide
 # Created by https://www.gitignore.io/api/osx,linux
 

@@ -7,22 +7,14 @@
   "license": "MIT",
   "dependencies": {
     "@pubsweet/component-send-email": "^0.3.0",
-    "@pubsweet/db-manager": "^3.1.0",
     "@pubsweet/errors": "^2.0.25",
     "@pubsweet/models": "^0.3.0",
     "lodash": "^4.17.11",
-    "moment": "^2.18.1",
     "passport": "^0.4.0"
-  },
-  "devDependencies": {
-    "body-parser": "^1.17.2",
-    "jest": "^24.7.1",
-    "superagent": "^3.8.2",
-    "supertest": "^3.0.0"
   },
   "peerDependencies": {
     "@pubsweet/logger": ">=0.0.1",
-    "config": "^3.0.1",
+    "config": ">=3.0.1",
     "pubsweet-server": ">=1.0.0"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"

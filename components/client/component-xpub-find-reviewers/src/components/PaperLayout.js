@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './PaperLayout.local.scss'
-import { newestFirst } from '../lib/sort'
+import { newestFirst } from '../shared/sort'
 import Paper from './Paper'
 import ProjectLink from './ProjectLink'
 

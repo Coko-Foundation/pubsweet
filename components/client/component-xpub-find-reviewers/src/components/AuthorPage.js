@@ -6,8 +6,7 @@ import { actions } from 'pubsweet-client'
 import { ConnectPage } from 'xpub-connect'
 import { selectCollection, selectFragment } from 'xpub-selectors'
 import AuthorLayout from './AuthorLayout'
-import { scholar } from '../lib/scholar'
-// import { newestFirst } from '../lib/sort'
+import { scholar } from '../shared/scholar'
 
 class AuthorPage extends React.Component {
   state = {

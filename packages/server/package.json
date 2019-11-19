@@ -1,27 +1,17 @@
 {
   "name": "pubsweet-server",
   "version": "13.8.0",
-  "scripts": {
-    "test": "jest",
-    "vuln-test": "nsp check"
-  },
-  "engines": {
-    "node": ">=7.6"
-  },
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "@hapi/joi": "^14.3.0",
     "@pubsweet/db-manager": "^3.1.0",
     "@pubsweet/errors": "^2.0.25",
     "@pubsweet/logger": "^0.2.35",
     "@pubsweet/models": "^0.3.0",
     "apollo-server-express": "^2.4.8",
     "authsome": "^0.1.0",
-    "bluebird": "^3.5.1",
     "body-parser": "^1.15.2",
-    "colors": "^1.1.2",
     "config": "^3.0.1",
     "cookie-parser": "^1.4.3",
     "dataloader": "^1.4.0",
@@ -30,12 +20,10 @@
     "fs-extra": "^7.0.1",
     "graphql": "^14.2.1",
     "graphql-postgres-subscriptions": "^1.0.4",
-    "graphql-tools": "^4.0.4",
     "helmet": "^3.8.1",
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.0.0",
-    "minimist": "^1.2.0",
     "morgan": "^1.8.2",
     "multer": "^1.1.0",
     "objection": "^1.5.3",
@@ -45,23 +33,12 @@
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-boss": "^3.1.2",
-    "promise-queue": "^2.2.3",
-    "prompt": "^1.0.0",
     "pubsweet-sse": "^1.0.29",
     "subscriptions-transport-ws": "^0.9.12",
-    "uuid": "^3.0.1",
-    "waait": "^1.0.2",
-    "winston": "^2.2.0"
-  },
-  "devDependencies": {
-    "eventsource": "^1.0.4",
-    "jest-cli": "^24.7.1",
-    "jest-environment-db": "^3.1.0",
-    "nsp": "^2.7.0",
-    "supertest": "^3.1.0"
+    "waait": "^1.0.2"
   },
   "peerDependencies": {
-    "@pubsweet/model-user": "^4.0.4"
+    "@pubsweet/model-user": ">=5.0.0"
   },
   "repository": {
     "type": "git",

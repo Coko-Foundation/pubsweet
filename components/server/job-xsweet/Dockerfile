@@ -24,6 +24,9 @@ RUN wget "https://downloads.sourceforge.net/project/saxon/Saxon-HE/9.9/SaxonHE9-
 
 COPY . .
 
+# Put things in place
+RUN ./src/move_xslts.sh
+
 # Test conversion
 RUN mkdir _test
 RUN unzip src/test.docx -d _test

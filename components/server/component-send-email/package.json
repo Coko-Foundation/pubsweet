@@ -7,19 +7,18 @@
   "files": [
     "src"
   ],
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
-    "aws-sdk": "^2.185.0",
     "nodemailer": "^4.4.2"
   },
   "peerDependencies": {
-    "@pubsweet/logger": "^0.0.1",
-    "config": "^3.0.1"
+    "@pubsweet/logger": ">=0.0.1",
+    "config": ">=3.0.1"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "SendEmail"
+    "path": "components/server/component-send-email"
   },
   "publishConfig": {
     "access": "public"

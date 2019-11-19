@@ -1,13 +1,10 @@
 import React from 'react'
 import { useQuery, useMutation, ApolloConsumer } from '@apollo/react-hooks'
-// import { XpubContext } from 'xpub-with-context'
 import Authorize from 'pubsweet-client/src/helpers/Authorize'
 
 import config from 'config'
 import queries from '../graphql/queries/'
 import mutations from '../graphql/mutations/'
-// import Dashboard from './Dashboard'
-// import upload from '../lib/upload'
 import { Page, Section, Heading, UploadContainer } from './molecules/Page'
 import UploadManuscript from './UploadManuscript'
 import EditorItem from './sections/EditorItem'

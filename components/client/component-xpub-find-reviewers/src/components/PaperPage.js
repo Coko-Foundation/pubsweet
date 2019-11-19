@@ -5,7 +5,7 @@ import { actions } from 'pubsweet-client'
 import { ConnectPage } from 'xpub-connect'
 import { selectCollection, selectFragment } from 'xpub-selectors'
 import PaperLayout from './PaperLayout'
-import { scholar } from '../lib/scholar'
+import { scholar } from '../shared/scholar'
 
 class PaperPage extends React.Component {
   state = {

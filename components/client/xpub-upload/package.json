@@ -9,8 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "react-router-dom": "^5.0.0",
-    "recompose": "^0.30.0"
+    "react-router-dom": "^5.0.0"
   },
   "peerDependencies": {
     "pubsweet-client": ">=2.1.0",

@@ -3,10 +3,6 @@
   "version": "3.1.0",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
-  "scripts": {
-    "test": "jest",
-    "vuln-test": "nsp check --output checkstyle"
-  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
@@ -15,22 +11,12 @@
     "pubsweet",
     "database"
   ],
-  "engines": {
-    "node": ">=7.9.0",
-    "npm": ">=3.0.0"
-  },
   "author": "Samuel Galson",
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^24.7.1",
-    "jest-environment-db": "^3.1.0",
-    "nsp": "^2.8.0"
-  },
   "dependencies": {
     "@hapi/joi": "^14.3.0",
     "@pubsweet/logger": "^0.2.35",
     "fs-extra": "^4.0.2",
-    "isomorphic-fetch": "^2.2.1",
     "knex": "^0.16.3",
     "lodash": "^4.17.11",
     "objection": "^1.5.3",
@@ -39,8 +25,8 @@
     "umzug": "^2.1.0"
   },
   "peerDependencies": {
-    "@pubsweet/models": "^0.2.4",
-    "config": "^3.0.1"
+    "@pubsweet/models": ">=0.3.0",
+    "config": ">=3.0.1"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

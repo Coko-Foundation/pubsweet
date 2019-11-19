@@ -5,18 +5,16 @@
   "files": [
     "docs",
     "dist",
-    "src",
-    ".babelrc"
+    "src"
   ],
-  "main": "src",
-  "jsnext:main": "src",
+  "main": "dist",
+  "module": "src",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
     "@pubsweet/ui-toolkit": "^2.2.14",
-    "classnames": "^2.2.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "formik": "^1.4.2",
@@ -33,26 +31,8 @@
     "recompose": "^0.30.0",
     "styled-components": "^4.1.1"
   },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.0",
-    "enzyme-to-json": "^3.3.5",
-    "faker": "^4.1.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^24.7.1",
-    "jest-dom": "^3.2.1",
-    "jest-styled-components": "^6.3.1",
-    "react-test-renderer": "^16.5.2",
-    "react-testing-library": "^7.0.0"
-  },
   "scripts": {
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile",
-    "test": "jest"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs"
   },
   "publishConfig": {
     "access": "public"

@@ -15,22 +15,18 @@
     "styled-components": "^4.1.3"
   },
   "peerDependencies": {
-    "@apollo/react-hoc": "^3.0.1",
-    "config": "^3.0.1",
-    "graphql-tag": "^2.10.0",
-    "lodash": "^4.17.11",
+    "@apollo/react-hoc": ">=3.0.1",
+    "config": ">=3.0.1",
+    "graphql-tag": ">=2.10.0",
+    "lodash": ">=4.17.11",
     "pubsweet-client": ">=1.0.0",
     "react": ">=16.9",
-    "styled-components": "^4.1.3"
+    "styled-components": ">=4.1.3"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet",
-    "path": "Login"
-  },
-  "devDependencies": {
-    "@apollo/react-testing": "^3.0.1",
-    "@babel/plugin-transform-runtime": "^7.2.0"
+    "path": "components/client/component-login"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

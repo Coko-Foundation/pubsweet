@@ -2,7 +2,7 @@ const requireRelative = m =>
   require(require.resolve(m, { paths: [process.cwd()] }))
 
 const webpack = requireRelative('webpack')
-const Promise = require('bluebird')
+const { promisify } = require('util')
 const path = require('path')
 const webpackDevMw = require('webpack-dev-middleware')
 const webpackHotMw = require('webpack-hot-middleware')
@@ -33,7 +33,7 @@ const buildDev = async app => {
 }
 
 const buildProd = async () => {
-  const compileForProd = Promise.promisify(compiler.run, { context: compiler })
+  const compileForProd = promisify(compiler.run).bind(compiler)
   try {
     const stats = await compileForProd()
     logger.info(

@@ -1,6 +1,6 @@
 import React from 'react'
-import 'jest-dom/extend-expect'
-import { cleanup, fireEvent, render } from 'react-testing-library'
+import '@testing-library/jest-dom/extend-expect'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 
 import ModalProvider from '../src/molecules/modal/ModalProvider'
 import { Modal, useModal, withModal } from '../src/molecules/modal'

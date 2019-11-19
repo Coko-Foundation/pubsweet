@@ -4,7 +4,7 @@ import { XpubContext } from 'xpub-with-context'
 import Dropzone from 'react-dropzone'
 import { Icon } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
-import upload from '../lib/upload'
+import upload from '../upload'
 
 const StyledDropzone = styled(({ disableUpload, ...props }) => (
   <Dropzone {...props} />
