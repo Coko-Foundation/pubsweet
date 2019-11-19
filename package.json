@@ -71,7 +71,8 @@
       "!**/test/**",
       "!**/node_modules/**",
       "!**/config/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/dist/**"
     ],
     "coverageDirectory": "<rootDir>/coverage",
     "projects": [
