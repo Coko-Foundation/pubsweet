@@ -39,9 +39,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^0.28.4",
     "file-loader": "^4.2.0",
-    "node-sass": "^4.5.3",
     "rimraf": "^2.6.1",
-    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylelint-config-pubsweet": "^0.0.4",
     "webpack-node-externals": "^1.6.0"
