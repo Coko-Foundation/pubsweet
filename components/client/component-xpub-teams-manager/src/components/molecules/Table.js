@@ -13,7 +13,6 @@ const TeamTableCell = styled.div`
   justify-content: center;
   box-sizing: border-box;
   flex-grow: 1;
-  width: 100%;
   padding: 20px 10px 0 0;
   list-style: none;
   border: solid @bw white;

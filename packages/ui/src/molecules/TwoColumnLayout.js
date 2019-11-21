@@ -28,8 +28,8 @@ const TwoColumnLayout = ({
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
-    margin-left: calc(-${th('gridUnit')}* 2);
-    margin-right: calc(-${th('gridUnit')}* 2);
+    margin-left: calc(${th('gridUnit')} * -2);
+    margin-right: calc(${th('gridUnit')} * -2);
   `
 
   return (
