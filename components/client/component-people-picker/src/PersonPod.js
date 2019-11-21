@@ -54,7 +54,7 @@ const StyledSmallParagraph = styled.p`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th(`lineHeightBaseSmall`)};
 
-  margin-top: 0;
+  margin-top: 3px;
   margin-bottom: calc(${th('gridUnit')} * 4);
 
   &:last-child {
@@ -63,7 +63,6 @@ const StyledSmallParagraph = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 3px 0;
   color: ${th('colorTextSecondary')};
 `
 

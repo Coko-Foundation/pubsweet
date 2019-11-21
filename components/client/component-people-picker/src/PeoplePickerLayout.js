@@ -30,16 +30,16 @@ const MainColumn = styled.div`
 const SearchBoxContainer = styled.div`
   box-sizing: border-box;
   display: flex;
-  margin-left: calc(-${th('gridUnit')} * 2);
-  margin-right: calc(-${th('gridUnit')} * 2);
+  margin-left: calc(${th('gridUnit')} * -2);
+  margin-right: calc(${th('gridUnit')} * -2);
 `
 
 const BodyContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   margin-bottom: calc(${th('gridUnit')} * 20);
-  margin-left: calc(-${th('gridUnit')} * 2);
-  margin-right: calc(-${th('gridUnit')} * 2);
+  margin-left: calc(${th('gridUnit')} * -2);
+  margin-right: calc(${th('gridUnit')} * -2);
 `
 
 const PeoplePickerLayout = ({

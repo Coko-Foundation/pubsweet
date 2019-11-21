@@ -185,14 +185,14 @@ const Tags = styled(TagsUnstyled)`
       color: ${th('colorTextPlaceholder')};
     }
 
+    &::-ms-clear {
+      display: none;
+    }
+
     &:focus,
     &:hover {
       border-bottom: ${th('borderWidth')} dashed ${th('colorPrimary')};
     }
-  }
-
-  .${classNames.search} input::-ms-clear {
-    display: none;
   }
 `
 

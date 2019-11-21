@@ -23,7 +23,7 @@ const Root = styled.div`
   display: inline-flex;
   align-items: center;
   margin-bottom: 12px;
-  font-family: 'Noto Sans';
+  font-family: 'Noto Sans', sans-serif;
 `
 
 const SelectedItem = ({ label, onCloseClick }) => (

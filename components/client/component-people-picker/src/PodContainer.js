@@ -27,21 +27,23 @@ const StyledSelectedIcon = styled(CheckCircleIcon)`
 `
 
 const StyledButton = styled.button`
-    background-color: inherit;
-    height: 100%;
-    width: calc(${th('gridUnit')} * 8);
-    border: none;
-    border-top-right-radius: ${th('borderRadius')};
-    border-bottom-right-radius: ${th('borderRadius')};
+  background-color: inherit;
+  height: 100%;
+  width: calc(${th('gridUnit')} * 8);
+  border: none;
+  border-top-right-radius: ${th('borderRadius')};
+  border-bottom-right-radius: ${th('borderRadius')};
 
-    &:hover ${StyledAddIcon}, &:hover ${StyledRemoveIcon} {
-        fill: #666666;
-        }
+  &:hover
+    ${/* sc-sel */ StyledAddIcon},
+    &:hover
+    ${/* sc-sel */ StyledRemoveIcon} {
+    fill: #666666;
+  }
 
-    &:hover ${StyledSelectedIcon} > circle {
-        fill: #1378bb;
-        }
-    }
+  &:hover ${/* sc-sel */ StyledSelectedIcon} > circle {
+    fill: #1378bb;
+  }
 `
 
 const StyledPod = styled('div')`

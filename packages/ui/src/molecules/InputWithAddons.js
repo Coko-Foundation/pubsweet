@@ -21,7 +21,7 @@ const StyledTextField = styled(TextField)`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: none;
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans', sans-serif;
     height: calc(${th('gridUnit')} * 6);
   }
 `
@@ -38,7 +38,7 @@ const AddOnButton = styled(Button)`
   width: calc(${th('gridUnit')} * 6);
   height: calc(${th('gridUnit')} * 6);
   &:last-child {
-    border-right-width: ${th('borderWidth')}
+    border-right-width: ${th('borderWidth')};
     border-radius: 0 ${th('borderRadius')} ${th('borderRadius')} 0;
   }
 `

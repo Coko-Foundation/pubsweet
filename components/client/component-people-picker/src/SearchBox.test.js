@@ -53,7 +53,12 @@ describe('SearchBox component tests', () => {
     expect(wrapper.find('Icon')).toHaveLength(2)
   })
 
-  it.skip.each([[1, 'option'], [2, 'f'], [3, 'xyz'], [4, '']])(
+  it.skip.each([
+    [1, 'option'],
+    [2, 'f'],
+    [3, 'xyz'],
+    [4, ''],
+  ])(
     'typing something will show suggestions based on filtering function, test %i',
     (index, searchValue) => {
       /**

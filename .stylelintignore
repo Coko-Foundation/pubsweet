@@ -1,4 +1,4 @@
 **/_build
 **/node_modules
 **/coverage
-packages/ui/styleguide
+docs/

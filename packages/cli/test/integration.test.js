@@ -27,9 +27,6 @@ const nodeConfig = {
       '@pubsweet/model-fragment',
     ],
   },
-  'pubsweet-client': {
-    theme: 'PepperTheme',
-  },
 }
 
 const setupDbOptions = {

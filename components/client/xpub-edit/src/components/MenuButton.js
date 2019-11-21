@@ -7,12 +7,17 @@ const Button = styled.button`
   border: none;
   border-bottom: 2px solid transparent;
   color: #777;
-  display: ${props => (props.select ? 'inline' : 'none')}
+  display: ${props => (props.select ? 'inline' : 'none')};
   cursor: pointer;
   height: 20px;
   margin: 0 0.4em;
   min-width: 20px;
   padding: 0;
+
+  &:hover {
+    border-bottom-color: ${th('colorPrimary')};
+    color: ${th('colorPrimary')};
+  }
 
   &:disabled {
     opacity: 0.2;
@@ -22,11 +27,6 @@ const Button = styled.button`
       border-bottom: none;
       color: #777;
     }
-  }
-
-  &:hover {
-    border-bottom-color: ${th('colorPrimary')};
-    color: ${th('colorPrimary')};
   }
 
   border-bottom-color: ${({ active }) => active && 'black'};

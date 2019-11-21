@@ -67,7 +67,6 @@ const Value = styled.span`
   text-align: left;
   line-height: ${th('gridUnit')};
   padding: 0 ${th('gridUnit')};
-  white-space: nowrap;
   &:hover {
     color: ${th('colorPrimary')};
   }

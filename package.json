@@ -13,6 +13,7 @@
     "@commitlint/cli": "^6.0.5",
     "@commitlint/config-conventional": "^6.0.4",
     "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^9.0.0",
     "babel-eslint": "^10.0.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
@@ -43,10 +44,11 @@
     "nock": "^9.0.14",
     "prettier": "^1.8.2",
     "react-test-renderer": "^16.12.0",
-    "@testing-library/react": "^9.0.0",
-    "stylelint": "^9.10.1",
-    "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-pubsweet": "^0.0.3",
+    "stylelint": "^12.0.0",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
     "supertest": "^3.1.0",
     "waait": "^1.0.2"
   },
@@ -56,8 +58,8 @@
     "styleguide:build": "yarn --cwd docs styleguide:build",
     "test": "jest --no-cache --coverage --detectOpenHandles",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:json",
-    "lint:js": "eslint 'packages/**/*.{js,jsx}'",
-    "lint:style": "stylelint 'packages/**/*.{css,scss}'",
+    "lint:js": "eslint '**/*.{js,jsx}'",
+    "lint:style": "stylelint '**/*.{js,jsx}'",
     "lint:json": "prettier --list-different '**/*.json'",
     "precommit": "lint-staged",
     "cz": "git-cz",
@@ -168,7 +170,9 @@
       },
       {
         "rootDir": "<rootDir>/packages/ui",
-        "testPathIgnorePatterns": ["/dist"],
+        "testPathIgnorePatterns": [
+          "/dist"
+        ],
         "displayName": "ui",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"

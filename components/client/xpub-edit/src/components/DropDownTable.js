@@ -9,7 +9,6 @@ const Opener = styled.button.attrs(() => ({
 }))`
   background: transparent;
   border: 0;
-  // border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
   cursor: pointer;
   font-family: inherit;
@@ -22,10 +21,10 @@ const Opener = styled.button.attrs(() => ({
   align-items: center;
 
   &:hover {
-    // border-color: ${th('colorPrimary')};
+    border-color: ${th('colorPrimary')};
   }
   &:after {
-    content:'>';
+    content: '>';
     margin-left: 10px;
     transform: rotate(90deg);
   }

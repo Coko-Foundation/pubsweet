@@ -11,7 +11,7 @@ const themeObj = { color: 'blue' }
 describe('<Root/>', () => {
   it('Adds a theme to context', async () => {
     const Box = styled.div`
-      test: ${props => expect(props.theme.color).toBe('blue')};
+      color: ${props => expect(props.theme.color).toBe('blue')};
     `
 
     mount(<Root connectToWebSocket={false} routes={<Box />} theme={themeObj} />)
