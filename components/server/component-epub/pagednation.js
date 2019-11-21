@@ -3,9 +3,7 @@ const cheerio = require('cheerio')
 const create = async (book, parts, resourceRoot, stylesRoot, fontsRoot) => {
   const output = cheerio.load(
     `<!DOCTYPE html><html><head><title>${book.title}</title>
-    <meta charset="UTF-8"></head><body class="hyphenate" lang="en-us"><section class="titlepage"><header><h1 class="booktitle">${
-      book.title
-    }</h1></header></section></body></html>`,
+    <meta charset="UTF-8"></head><body class="hyphenate" lang="en-us"><section class="titlepage"><header><h1 class="booktitle">${book.title}</h1></header></section></body></html>`,
   )
   const TOC = createTOC(parts)
   output('body').append(TOC.html())

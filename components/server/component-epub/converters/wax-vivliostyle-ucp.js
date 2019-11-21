@@ -113,9 +113,7 @@ module.exports = (
     const $elem = $(elem)
 
     const figure = $(
-      `<figure><img src="${$elem[0].attribs.src}"/><figcaption>${
-        $elem[0].attribs.figcaption
-      }</figcaption></figure>`,
+      `<figure><img src="${$elem[0].attribs.src}"/><figcaption>${$elem[0].attribs.figcaption}</figcaption></figure>`,
     )
 
     $elem.replaceWith(figure)

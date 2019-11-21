@@ -93,10 +93,9 @@ const resolvers = {
     docxToHTMLJob: {
       resolve: async (payload, { jobId }, context) => {
         if (payload.docxToHTMLJob && payload.docxToHTMLJob.status === 'Done') {
-          const job = await db('pgboss.job').whereRaw(
-            "data->'request'->>'id' = ?",
-            [payload.docxToHTMLJob.id],
-          )
+          const job = await db(
+            'pgboss.job',
+          ).whereRaw("data->'request'->>'id' = ?", [payload.docxToHTMLJob.id])
           payload.docxToHTMLJob.html = job[0].data.response.html
         }
         return payload.docxToHTMLJob
