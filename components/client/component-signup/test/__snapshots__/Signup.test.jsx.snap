@@ -14,14 +14,12 @@ exports[`<Signup /> renders the login form 1`] = `
         Sign up
       </styled.button>
     </form>
-    <div>
-      <span>
-        Already have an account? 
-      </span>
+    <p>
+      Already have an account? 
       <Styled(SmartUnstyledLink) to=\\"/login\\">
         Login
       </Styled(SmartUnstyledLink)>
-    </div>
+    </p>
   </styled.div>
 </styled.div>"
 `;
