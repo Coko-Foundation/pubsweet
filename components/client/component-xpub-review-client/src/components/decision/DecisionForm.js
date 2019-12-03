@@ -70,37 +70,39 @@ const AttachmentsInput = type => ({
   form: { values, setFieldValue },
   updateReview,
   uploadFile,
-}) => [
-  <UploadButton
-    buttonText="↑ Upload files"
-    key="note-attachment"
-    onChange={event => {
-      const val = event.target.files[0]
-      const file = cloneDeep(val)
-      file.filename = val.name
-      file.type = type
+}) => (
+  <>
+    <UploadButton
+      buttonText="↑ Upload files"
+      key="note-attachment"
+      onChange={event => {
+        const val = event.target.files[0]
+        const file = cloneDeep(val)
+        file.filename = val.name
+        file.type = type
 
-      const { updateIndex, comment } = createComments(
-        field.value,
-        { files: [file] },
-        type,
-      )
+        const { updateIndex, comment } = createComments(
+          field.value,
+          { files: [file] },
+          type,
+        )
 
-      setFieldValue(`comments.${updateIndex}.files`, comment.files)
+        setFieldValue(`comments.${updateIndex}.files`, comment.files)
 
-      updateReview({}).then(({ data: { updateReview } }) => {
-        uploadFile(val, updateReview, type)
-      })
-    }}
-  />,
-  <Flexbox>
-    {getCommentFiles(field.value, 'note').map(val => {
-      const file = cloneDeep(val)
-      file.name = file.filename
-      return <UploadingFile file={file} key={file.name} uploaded />
-    })}
-  </Flexbox>,
-]
+        updateReview({}).then(({ data: { updateReview } }) => {
+          uploadFile(val, updateReview, type)
+        })
+      }}
+    />
+    <Flexbox>
+      {getCommentFiles(field.value, 'note').map(val => {
+        const file = cloneDeep(val)
+        file.name = file.filename
+        return <UploadingFile file={file} key={file.name} uploaded />
+      })}
+    </Flexbox>
+  </>
+)
 
 const RecommendationInput = ({
   field,
