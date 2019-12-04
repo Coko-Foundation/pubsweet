@@ -66,10 +66,9 @@ const Signup = ({ values, handleSubmit, status, logo = null }) => (
         </Button>
       </form>
 
-      <div>
-        <span>Already have an account? </span>
-        <Link to="/login">Login</Link>
-      </div>
+      <p>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
     </FormContainer>
   </CenteredColumn>
 )

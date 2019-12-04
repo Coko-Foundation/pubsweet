@@ -27,8 +27,8 @@ ConfigurableEditor.propTypes = {
   heading: optionPropType,
   undo: optionPropType,
   redo: optionPropType,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   value: PropTypes.string.isRequired,
   debounceDelay: PropTypes.number,
 }

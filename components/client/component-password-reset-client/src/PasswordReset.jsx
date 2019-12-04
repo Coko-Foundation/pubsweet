@@ -29,6 +29,10 @@ const Alert = styled.div`
   color: ${th('colorError')};
 `
 
+const BlockLink = styled(Link)`
+  display: block;
+`
+
 class PasswordReset extends React.Component {
   constructor(props) {
     super(props)
@@ -49,10 +53,6 @@ class PasswordReset extends React.Component {
       passwordErrorMessage: null,
       passwordSending: false,
     }
-  }
-
-  componentWillReceiveProps() {
-    this.setState(this.getInitialState())
   }
 
   parsedQuery() {
@@ -208,8 +208,7 @@ class PasswordReset extends React.Component {
               type="password"
               value={password}
             />
-
-            <Button disabled={passwordSending} type="submit">
+            <Button disabled={passwordSending} primary type="submit">
               {passwordSending ? 'Saving…' : 'Save new password'}
             </Button>
           </form>
@@ -235,7 +234,7 @@ class PasswordReset extends React.Component {
             type="text"
             value={username}
           />
-          <Button disabled={emailSending} type="submit">
+          <Button disabled={emailSending} primary type="submit">
             {emailSending ? 'Sending…' : 'Send email'}
           </Button>
         </form>
@@ -281,7 +280,8 @@ class PasswordReset extends React.Component {
 
         <h1>Password reset</h1>
         <ApolloConsumer>{client => buildForm(client)}</ApolloConsumer>
-        <Link to="/login">Return to login form</Link>
+        <p />
+        <BlockLink to="/login">Return to login form</BlockLink>
       </Root>
     )
   }
