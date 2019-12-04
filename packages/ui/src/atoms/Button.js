@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { darken, override, th } from '@pubsweet/ui-toolkit'
+import PropTypes from 'prop-types'
 
 const primary = css`
   background: ${th('colorPrimary')};
@@ -23,7 +24,7 @@ const primary = css`
   }
 `
 
-const StyledButton = styled.button.attrs(props => ({
+const Button = styled.button.attrs(props => ({
   'data-test-id': props['data-test-id'],
   type: props.type || 'button',
 }))`
@@ -62,4 +63,14 @@ const StyledButton = styled.button.attrs(props => ({
   ${override('ui.Button')};
 `
 
-export default StyledButton
+Button.propTypes = {
+  primary: PropTypes.bool,
+  type: PropTypes.string,
+}
+
+Button.defaultProps = {
+  primary: null,
+  type: 'button',
+}
+
+export default Button
