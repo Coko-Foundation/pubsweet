@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@3.1.0...@pubsweet/db-manager@3.1.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* database reset should include pgboss features ([b4b9c95](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b4b9c951b712e363c3e977a0c8a3243c489c5aa4))
+
+
+
+
+
 # [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/db-manager@3.0.20...@pubsweet/db-manager@3.1.0) (2019-11-11)
 
 

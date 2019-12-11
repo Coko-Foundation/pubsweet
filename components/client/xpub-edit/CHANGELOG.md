@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.6.0...xpub-edit@2.6.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* onBlur and onChange are not required ([99142c5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/99142c56756a6591720b1c9cf829b426a13c6abf))
+
+
+
+
+
 # [2.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.32...xpub-edit@2.6.0) (2019-11-11)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@2.1.0...@pubsweet/job-xsweet@2.1.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* **job-xsweet:** move xslts into their required place again ([bf0667b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bf0667bd36f8d18284a9cc58c24798825f973995))
+
+
+
+
+
 # [2.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/job-xsweet@2.0.3...@pubsweet/job-xsweet@2.1.0) (2019-11-11)
 
 
