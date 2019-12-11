@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.11...pubsweet-component-signup@2.1.12) (2019-12-11)
+
+
+### Bug Fixes
+
+* small styling fixes ([3c6a11f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c6a11f0c558a9b6a433c9b122b8226133461bf0))
+
+
+
+
+
 ## [2.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.10...pubsweet-component-signup@2.1.11) (2019-11-11)
 
 **Note:** Version bump only for package pubsweet-component-signup
