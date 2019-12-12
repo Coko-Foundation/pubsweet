@@ -7,6 +7,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 }}`
 
 const Team = require('../src/team')
+const TeamMember = require('../src/team_member')
 const { model: User } = require('@pubsweet/model-user')
 const { dbCleaner } = require('pubsweet-server/test')
 
@@ -124,5 +125,32 @@ describe('Team', () => {
       .findById(user.id)
       .eager('teams')
     expect(userWithTeams.teams[0].id).toBe(team.id)
+  })
+
+  // This can be the case if you add a team member who is
+  // not yet a user of the system (we keep track using aliases)
+  it('creates a team member without a user', async () => {
+    const team = await Team.query().upsertGraphAndFetch(
+      {
+        name: 'Test',
+        role: 'testRole',
+        members: [
+          { alias: { aff: 'Test University', email: 'test@example.com' } },
+        ],
+      },
+      { relate: true },
+    )
+
+    expect(team.members[0].user).not.toBeDefined()
+  })
+
+  it('can not create a team member without a team', async () => {
+    const { user } = await createTeamWithMember()
+
+    await expect(
+      TeamMember.query().insert({
+        userId: user.id,
+      }),
+    ).rejects.toThrow('violates not-null constraint')
   })
 })
