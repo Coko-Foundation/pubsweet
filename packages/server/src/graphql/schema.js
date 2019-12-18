@@ -2,6 +2,9 @@ const config = require('config')
 const { merge } = require('lodash')
 const { makeExecutableSchema } = require('apollo-server-express')
 
+const { applyMiddleware } = require('graphql-middleware') // new dependency
+const middlewareList = require('') // config or components.json maybe
+
 const upload = require('./definitions/upload')
 
 const tryRequireRelative = require('../helpers/tryRequireRelative')
@@ -44,4 +47,7 @@ if (config.has('pubsweet-server.resolvers')) {
   merge(resolvers, config.get('pubsweet-server.resolvers'))
 }
 
-module.exports = makeExecutableSchema({ typeDefs, resolvers })
+// add middleware to schema, that is all that should be needed
+const schema = makeExecutableSchema({ typeDefs, resolvers })
+const schemaWithMiddleware = applyMiddleware(schema, ...middlewareList)
+module.exports = schemaWithMiddleware
