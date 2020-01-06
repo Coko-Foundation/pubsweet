@@ -1,6 +1,4 @@
 import React from 'react'
-import { Fragment } from 'prosemirror-model'
-import { TextSelection } from 'prosemirror-state'
 import { setBlockType, toggleMark, joinUp, lift } from 'prosemirror-commands'
 import { redo, undo } from 'prosemirror-history'
 import { wrapInList } from 'prosemirror-schema-list'
@@ -38,28 +36,24 @@ const promptForURL = () => {
   return url
 }
 
-const createTable = (row = 1, col = 1, cellAttrs = {}) => (state, dispatch) => {
-  const { tr, schema } = state
-  const tableType = schema.nodes.table
-  const rowType = schema.nodes.table_row
-  const cellType = schema.nodes.table_cell
-  const cellNode = cellType.createAndFill(cellAttrs)
+const createTable = () => (state, dispatch) => {
+  let rowCount = window && window.prompt('How many rows?', 2)
+  let colCount = window && window.prompt('How many columns?', 2)
+
   const cells = []
-  for (let i = 0; i < col; i += 1) cells.push(cellNode)
-  const rowNode = rowType.create(null, Fragment.from(cells))
-  const rows = []
-  for (let i = 0; i < row; i += 1) rows.push(rowNode)
-  const tableNode = tableType.create(null, Fragment.from(rows))
-  const newSelection = TextSelection.create(tr.doc, 1)
-  if (dispatch) {
-    dispatch(
-      tr
-        .replaceSelectionWith(tableNode)
-        .setSelection(newSelection)
-        .scrollIntoView(),
-    )
+  while (colCount) {
+    colCount -= 1
+    cells.push(state.config.schema.nodes.table_cell.createAndFill())
   }
-  return true
+
+  const rows = []
+  while (rowCount) {
+    rowCount -= 1
+    rows.push(state.config.schema.nodes.table_row.createAndFill(null, cells))
+  }
+
+  const table = state.config.schema.nodes.table.createAndFill(null, rows)
+  dispatch(state.tr.replaceSelectionWith(table))
 }
 
 export default {
