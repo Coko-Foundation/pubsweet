@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon is rendered correctly 1`] = `
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc( / 2);
+}
+
+.c0 svg {
+  width: calc(3 * );
+  height: calc(3 * );
+}
+
+<span
+  className="c0"
+  role="img"
+  size={3}
+>
+  <svg
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+    />
+  </svg>
+</span>
+`;
+
+exports[`Icon is rendered correctly with override 1`] = `
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc( / 2);
+}
+
+.c0 svg {
+  width: calc(3 * );
+  height: calc(3 * );
+}
+
+<span
+  className="c0"
+  role="img"
+  size={3}
+>
+  <circle-override />
+</span>
+`;

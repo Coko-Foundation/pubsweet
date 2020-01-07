@@ -18,3 +18,13 @@ The size can be changed.
 ```js
 <Icon size={6}>arrow_right</Icon>
 ```
+
+The icon can be overriden in your theme:
+
+```js static
+const theme = {
+  icons: {
+    arrow_right: () => <CustomArrowIcon />,
+  },
+}
+```

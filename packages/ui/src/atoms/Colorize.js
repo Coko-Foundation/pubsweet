@@ -26,7 +26,7 @@ const Colorize = Component => {
       (placeholder && theme.colorTextPlaceholder) ||
       theme.colorText
 
-    return <Component color={color} {...props} />
+    return <Component color={color} theme={theme} {...props} />
   }
 
   Colorized.propTypes = Object.assign({}, Component.propTypes)
