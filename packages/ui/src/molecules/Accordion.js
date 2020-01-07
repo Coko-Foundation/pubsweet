@@ -16,9 +16,9 @@ const Root = styled.div`
   ${override('ui.Accordion')};
 `
 
-const Header = styled.div.attrs({
-  'data-test-id': props => props['data-test-id'] || 'accordion-header',
-})`
+const Header = styled.div.attrs(props => ({
+  'data-test-id': props['data-test-id'] || 'accordion-header',
+}))`
   align-items: center;
   cursor: pointer;
   display: flex;

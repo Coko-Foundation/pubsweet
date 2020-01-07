@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.28...@pubsweet/component-aws-s3@1.2.29) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.27...@pubsweet/component-aws-s3@1.2.28) (2019-11-11)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.26...@pubsweet/component-aws-s3@1.2.27) (2019-09-11)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.25...@pubsweet/component-aws-s3@1.2.26) (2019-09-04)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.24...@pubsweet/component-aws-s3@1.2.25) (2019-08-30)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.23...@pubsweet/component-aws-s3@1.2.24) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.22...@pubsweet/component-aws-s3@1.2.23) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.21...@pubsweet/component-aws-s3@1.2.22) (2019-07-12)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.20...@pubsweet/component-aws-s3@1.2.21) (2019-07-09)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.19...@pubsweet/component-aws-s3@1.2.20) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.18...@pubsweet/component-aws-s3@1.2.19) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.17...@pubsweet/component-aws-s3@1.2.18) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.16...@pubsweet/component-aws-s3@1.2.17) (2019-06-21)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.15...@pubsweet/component-aws-s3@1.2.16) (2019-06-13)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.14...@pubsweet/component-aws-s3@1.2.15) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.13...@pubsweet/component-aws-s3@1.2.14) (2019-05-27)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
 ## [1.2.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.12...@pubsweet/component-aws-s3@1.2.13) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/component-aws-s3

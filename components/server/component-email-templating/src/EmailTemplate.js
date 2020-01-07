@@ -10,6 +10,7 @@ const configData = {
   ctaColor: config.get('journal.ctaColor'),
   logoLink: config.get('journal.logoLink'),
   publisher: config.get('journal.publisher'),
+  footerText: config.get('journal.footerText'),
 }
 class EmailTemplate {
   constructor({
@@ -63,9 +64,7 @@ class EmailTemplate {
           toUserName: this.toUser.name,
         },
       }),
-      text: `${this.bodyProps.resend} ${this.bodyProps.upperContent} ${
-        this.bodyProps.manuscriptText
-      } ${this.bodyProps.lowerContent} ${this.content.signatureName}`,
+      text: `${this.bodyProps.resend} ${this.bodyProps.upperContent} ${this.bodyProps.manuscriptText} ${this.bodyProps.lowerContent} ${this.content.signatureName}`,
     }
   }
 
@@ -80,9 +79,7 @@ class EmailTemplate {
           toUserName: this.toUser.name,
         },
       }),
-      text: `${this.content.paragraph} ${this.content.ctaLink} ${
-        this.content.ctaText
-      } ${this.content.signatureName}`,
+      text: `${this.content.paragraph} ${this.content.ctaLink} ${this.content.ctaText} ${this.content.signatureName}`,
     }
   }
 

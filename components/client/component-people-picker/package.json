@@ -1,0 +1,27 @@
+{
+  "name": "@pubsweet/component-people-picker",
+  "version": "0.1.15",
+  "description": "People Picker component for pubsweet",
+  "main": "src/index.js",
+  "author": "Collaborative Knowledge Foundation",
+  "license": "MIT",
+  "dependencies": {
+    "@pubsweet/ui": "^12.1.1",
+    "@pubsweet/ui-toolkit": "^2.2.15",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.5.10"
+  },
+  "peerDependencies": {
+    "graphql-tag": ">=2.10.0",
+    "pubsweet-client": ">=1.0.0",
+    "react": ">=16.9",
+    "styled-components": ">=4.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

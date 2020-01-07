@@ -1,12 +1,8 @@
 {
   "name": "@pubsweet/logger",
-  "version": "0.2.20",
+  "version": "0.2.36",
   "description": "A module encapsulating standard logging features for pubsweet components and services.",
   "main": "src/index.js",
-  "scripts": {
-    "test": "jest",
-    "vuln-test": "nsp check --output checkstyle"
-  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
@@ -22,14 +18,11 @@
   "author": "Antony Denyer",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.7.1",
-    "nsp": "^2.7.0",
     "winston": "^2.3.1"
   },
   "dependencies": {
-    "config": "^3.0.1",
-    "joi": "^14.3.0",
-    "lodash": "^4.17.4"
+    "@hapi/joi": "^14.5.0",
+    "config": "^3.0.1"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

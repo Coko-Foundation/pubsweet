@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar Basic display 1`] = `
-.c4 {
+.c3 {
   color: black;
   cursor: pointer;
   color: black;
@@ -15,9 +15,9 @@ exports[`AppBar Basic display 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover,
-.c4:focus,
-.c4:active {
+.c3:hover,
+.c3:focus,
+.c3:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -55,7 +55,7 @@ exports[`AppBar Basic display 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 > * {
+.c4 > * {
   height: calc(8px * 6);
 }
 
@@ -96,7 +96,7 @@ exports[`AppBar Basic display 1`] = `
       className="c5"
     >
       <a
-        className="c4"
+        className="c3"
         href="/login"
         onClick={[Function]}
       >
@@ -178,7 +178,7 @@ exports[`AppBar With admin user 1`] = `
   text-decoration: underline;
 }
 
-.c4 {
+.c3 {
   color: black;
   cursor: pointer;
   color: black;
@@ -192,9 +192,9 @@ exports[`AppBar With admin user 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover,
-.c4:focus,
-.c4:active {
+.c3:hover,
+.c3:focus,
+.c3:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -232,7 +232,7 @@ exports[`AppBar With admin user 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 > * {
+.c4 > * {
   height: calc(8px * 6);
 }
 
@@ -340,7 +340,7 @@ exports[`AppBar With admin user 1`] = `
 `;
 
 exports[`AppBar With custom brand and login links 1`] = `
-.c4 {
+.c3 {
   color: black;
   cursor: pointer;
   color: black;
@@ -354,9 +354,9 @@ exports[`AppBar With custom brand and login links 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover,
-.c4:focus,
-.c4:active {
+.c3:hover,
+.c3:focus,
+.c3:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -394,7 +394,7 @@ exports[`AppBar With custom brand and login links 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 > * {
+.c4 > * {
   height: calc(8px * 6);
 }
 
@@ -435,7 +435,7 @@ exports[`AppBar With custom brand and login links 1`] = `
       className="c5"
     >
       <a
-        className="c4"
+        className="c3"
         href="/signin"
         onClick={[Function]}
       >
@@ -447,7 +447,7 @@ exports[`AppBar With custom brand and login links 1`] = `
 `;
 
 exports[`AppBar With custom right component 1`] = `
-.c4 {
+.c3 {
   color: black;
   cursor: pointer;
   color: black;
@@ -461,9 +461,9 @@ exports[`AppBar With custom right component 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover,
-.c4:focus,
-.c4:active {
+.c3:hover,
+.c3:focus,
+.c3:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -501,7 +501,7 @@ exports[`AppBar With custom right component 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 > * {
+.c4 > * {
   height: calc(8px * 6);
 }
 
@@ -530,7 +530,7 @@ exports[`AppBar With custom right component 1`] = `
 `;
 
 exports[`AppBar With nav links 1`] = `
-.c4 {
+.c3 {
   color: black;
   cursor: pointer;
   color: black;
@@ -544,9 +544,9 @@ exports[`AppBar With nav links 1`] = `
   transition: 1s ease;
 }
 
-.c4:hover,
-.c4:focus,
-.c4:active {
+.c3:hover,
+.c3:focus,
+.c3:active {
   background: none;
   color: black;
   -webkit-text-decoration: underline;
@@ -584,7 +584,7 @@ exports[`AppBar With nav links 1`] = `
   margin: calc(8px * 2) 1rem calc(8px * 2) 1rem;
 }
 
-.c3 > * {
+.c4 > * {
   height: calc(8px * 6);
 }
 
@@ -625,7 +625,7 @@ exports[`AppBar With nav links 1`] = `
       className="c5"
     >
       <a
-        className="c4"
+        className="c3"
         href="/login"
         onClick={[Function]}
       >

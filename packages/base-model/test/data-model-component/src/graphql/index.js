@@ -1,7 +1,7 @@
 const resolvers = {
   Query: {
     manuscript(_, { id }, ctx) {
-      return ctx.connectors.Manuscript.fetchOne(id, ctx)
+      return ctx.loaders.Manuscript.load(id)
     },
     manuscripts(_, { where }, ctx) {
       return ctx.connectors.Manuscript.fetchAll(where, ctx)

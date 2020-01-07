@@ -4,12 +4,11 @@ import styled from 'styled-components'
 import { th, override } from '@pubsweet/ui-toolkit'
 import { Menu } from '@pubsweet/ui'
 
-const Opener = styled.button.attrs({
+const Opener = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background: transparent;
   border: 0;
-  // border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
   cursor: pointer;
   font-family: inherit;
@@ -22,10 +21,10 @@ const Opener = styled.button.attrs({
   align-items: center;
 
   &:hover {
-    // border-color: ${th('colorPrimary')};
+    border-color: ${th('colorPrimary')};
   }
   &:after {
-    content:'>';
+    content: '>';
     margin-left: 10px;
     transform: rotate(90deg);
   }

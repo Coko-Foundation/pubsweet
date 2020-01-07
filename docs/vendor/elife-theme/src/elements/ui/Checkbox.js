@@ -22,9 +22,9 @@ export default css`
     vertical-align: middle;
 
     box-sizing: border-box;
-    width: ${th('space.3')};
-    height: ${th('space.3')};
-    margin-right: ${th('space.1')};
+    width: calc(${th('gridUnit')} * 4);
+    height: calc(${th('gridUnit')} * 4);
+    margin-right: ${th('gridUnit')};
     margin-left: -30px;
 
     background: transparent;

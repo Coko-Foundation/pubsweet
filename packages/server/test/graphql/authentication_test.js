@@ -74,7 +74,7 @@ describe('GraphQL authentication', () => {
 
     it('fetches current user from token', async () => {
       const { body } = await api.graphql.query(
-        `{ currentUser { username, email} }`,
+        `{ currentUser { username, email, teams { role }} }`,
         {},
         token,
       )
@@ -84,6 +84,7 @@ describe('GraphQL authentication', () => {
           currentUser: {
             username: 'testuser',
             email: 'test@example.com',
+            teams: [],
           },
         },
       })
@@ -120,7 +121,12 @@ describe('GraphQL authentication', () => {
 
       expect(body).toMatchObject({
         data: { users: null },
-        errors: [{ message: 'Operation not permitted: read User' }],
+        errors: [
+          {
+            message:
+              'Operation not permitted: unauthenticated users cannot perform read operation on User',
+          },
+        ],
       })
     })
 

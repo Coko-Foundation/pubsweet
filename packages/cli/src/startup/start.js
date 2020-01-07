@@ -8,10 +8,17 @@ const requireRelative = m =>
 // this script run from global install needs to use an app's local pubsweet-server.
 const { startServer } = requireRelative('pubsweet-server')
 
-const start = async () => {
-  const rawApp = express()
-  await build(rawApp)
-  const startedServer = await startServer(rawApp)
+const start = async (webpack = true) => {
+  let startedServer
+
+  if (webpack) {
+    const rawApp = express()
+    await build(rawApp)
+    startedServer = await startServer(rawApp)
+  } else {
+    startedServer = await startServer()
+  }
+
   startedServer.on('error', onError)
   return startedServer
 }

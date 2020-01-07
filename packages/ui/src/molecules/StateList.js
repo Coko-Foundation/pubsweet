@@ -18,7 +18,7 @@ const ItemContainer = styled.div`
   flex-direction: row;
 `
 
-const Delimiter = styled(ChevronRight).attrs({ size: 16 })`
+const Delimiter = styled(ChevronRight).attrs(() => ({ size: 16 }))`
   margin-left: 5px;
   margin-right: 5px;
 `

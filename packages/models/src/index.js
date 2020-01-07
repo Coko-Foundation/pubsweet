@@ -12,15 +12,14 @@ const tryRequireRelative = m => {
   try {
     component = require(require.resolve(m, { paths: [process.cwd()] }))
   } catch (err) {
-    logger.warn(
-      `Unable to load component ${m} on the server (likely a client component).`,
-    )
+    logger.error(`Unable to load component ${m} on the server.`)
+    logger.error(err)
     component = {}
   }
   return component
 }
 
-// custom data models
+// Custom data models
 if (config.has('pubsweet.components')) {
   config.get('pubsweet.components').forEach(componentName => {
     const component = tryRequireRelative(componentName)

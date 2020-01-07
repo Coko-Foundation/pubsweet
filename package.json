@@ -4,12 +4,23 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^6.0.5",
     "@commitlint/config-conventional": "^6.0.4",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^9.0.0",
+    "apollo-link-http": "^1.5.16",
     "babel-eslint": "^10.0.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^4.13.1",
     "eslint-config-pubsweet": "^0.0.6",
     "eslint-plugin-import": "^2.8.0",
@@ -20,13 +31,27 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eventsource": "^1.0.4",
+    "eventsourcemock": "^1.0.1",
+    "faker": "^4.1.0",
     "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
+    "isomorphic-form-data": "^1.0.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
+    "jest-styled-components": "^6.3.1",
     "lerna": "^3.13.2",
     "lint-staged": "^8.1.5",
+    "nock": "^9.0.14",
     "prettier": "^1.8.2",
-    "stylelint": "^9.10.1",
-    "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-pubsweet": "^0.0.3"
+    "react-test-renderer": "^16.12.0",
+    "stylelint": "^12.0.0",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
+    "supertest": "^3.1.0",
+    "waait": "^1.0.2"
   },
   "scripts": {
     "clean": "lerna clean",
@@ -34,12 +59,13 @@
     "styleguide:build": "yarn --cwd docs styleguide:build",
     "test": "jest --no-cache --coverage --detectOpenHandles",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:json",
-    "lint:js": "eslint 'packages/**/*.{js,jsx}'",
-    "lint:style": "stylelint 'packages/**/*.{css,scss}'",
+    "lint:js": "eslint '**/*.{js,jsx}'",
+    "lint:style": "stylelint '**/*.{js,jsx}'",
     "lint:json": "prettier --list-different '**/*.json'",
     "precommit": "lint-staged",
     "cz": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "build": "lerna run build"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -48,7 +74,8 @@
       "!**/test/**",
       "!**/node_modules/**",
       "!**/config/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/dist/**"
     ],
     "coverageDirectory": "<rootDir>/coverage",
     "projects": [
@@ -144,6 +171,9 @@
       },
       {
         "rootDir": "<rootDir>/packages/ui",
+        "testPathIgnorePatterns": [
+          "/dist"
+        ],
         "displayName": "ui",
         "moduleNameMapper": {
           "\\.s?css$": "identity-obj-proxy"
@@ -189,6 +219,15 @@
         "testEnvironment": "jest-environment-db"
       },
       {
+        "rootDir": "<rootDir>/components/server/model-fragment",
+        "displayName": "model-fragment",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "jest-environment-db"
+      },
+      {
         "rootDir": "<rootDir>/components/server/component-password-reset-server",
         "displayName": "component-password-reset-server",
         "testRegex": "/test/.*_test.js$",
@@ -196,6 +235,15 @@
           "<rootDir>/test/jest-setup.js"
         ],
         "testEnvironment": "jest-environment-db"
+      },
+      {
+        "rootDir": "<rootDir>/components/server/job-xsweet",
+        "displayName": "job-xsweet",
+        "testRegex": "/test/.*_test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "node"
       }
     ]
   },
@@ -213,9 +261,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {},
-  "resolutions": {
-    "webpack-dev-server": "3.1.14"
   }
 }

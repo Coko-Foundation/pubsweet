@@ -65,17 +65,16 @@ const Login = ({
         </form>
 
         {signup && (
-          <>
-            <span>Don&apos;t have an account? </span>
-            <Link to="/signup">Sign up</Link>
-          </>
+          <p>
+            Don&apos;t have an account? <Link to="/signup">Sign up</Link>
+          </p>
         )}
 
         {passwordReset && (
-          <>
-            <span>Forgot your password? </span>
+          <p>
+            Forgot your password?{' '}
             <Link to="/password-reset">Reset password</Link>
-          </>
+          </p>
         )}
       </FormContainer>
     </CenteredColumn>

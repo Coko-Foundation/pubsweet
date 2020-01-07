@@ -3,6 +3,146 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.3...pubsweet@5.1.4) (2019-12-11)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [5.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.2...pubsweet@5.1.3) (2019-11-11)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [5.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.1...pubsweet@5.1.2) (2019-09-11)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [5.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.0...pubsweet@5.1.1) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+# [5.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.0.1...pubsweet@5.1.0) (2019-08-30)
+
+
+### Features
+
+* **cli:** introduce start:client and start:server ([29d7d44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29d7d44))
+* **cli:** split running server (express app) and client (webpack) ([f8a6a8e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f8a6a8e))
+
+
+
+
+
+## [5.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.0.0...pubsweet@5.0.1) (2019-08-08)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+# [5.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.11...pubsweet@5.0.0) (2019-08-05)
+
+
+### Features
+
+* **cli:** remove adding and removing components ([88aae5f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/88aae5f)), closes [#449](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/449)
+
+
+### BREAKING CHANGES
+
+* **cli:** Removes pubsweet add and pubsweet remove
+
+
+
+
+
+## [4.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.10...pubsweet@4.1.11) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.9...pubsweet@4.1.10) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.8...pubsweet@4.1.9) (2019-07-03)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.7...pubsweet@4.1.8) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.6...pubsweet@4.1.7) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.5...pubsweet@4.1.6) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.4...pubsweet@4.1.5) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.3...pubsweet@4.1.4) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
+## [4.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.2...pubsweet@4.1.3) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
 ## [4.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@4.1.1...pubsweet@4.1.2) (2019-04-25)
 
 

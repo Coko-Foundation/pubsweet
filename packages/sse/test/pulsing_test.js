@@ -1,4 +1,4 @@
-const sse = require('../lib/SSE')
+const sse = require('../src/SSE')
 
 function mockReqAndRes() {
   const req = jest.fn()

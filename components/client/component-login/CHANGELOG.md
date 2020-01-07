@@ -3,6 +3,137 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.17...pubsweet-component-login@3.0.18) (2019-12-11)
+
+
+### Bug Fixes
+
+* small styling fixes ([3c6a11f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3c6a11f0c558a9b6a433c9b122b8226133461bf0))
+
+
+
+
+
+## [3.0.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.16...pubsweet-component-login@3.0.17) (2019-11-11)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.15...pubsweet-component-login@3.0.16) (2019-09-11)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.14...pubsweet-component-login@3.0.15) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.13...pubsweet-component-login@3.0.14) (2019-08-30)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.12...pubsweet-component-login@3.0.13) (2019-08-08)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.11...pubsweet-component-login@3.0.12) (2019-08-05)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.10...pubsweet-component-login@3.0.11) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.9...pubsweet-component-login@3.0.10) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.8...pubsweet-component-login@3.0.9) (2019-07-03)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.7...pubsweet-component-login@3.0.8) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.6...pubsweet-component-login@3.0.7) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.5...pubsweet-component-login@3.0.6) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.4...pubsweet-component-login@3.0.5) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.3...pubsweet-component-login@3.0.4) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
+## [3.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.2...pubsweet-component-login@3.0.3) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
 ## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.1...pubsweet-component-login@3.0.2) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-component-login

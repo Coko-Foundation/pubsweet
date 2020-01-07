@@ -80,6 +80,8 @@ const cokoTheme = {
   transitionDuration: '0.2s', // TODO -- julien: not 0.05s
   transitionTimingFunction: 'ease',
   transitionDelay: '0',
+  /* Breakpoints */
+  breakpoints: [480, 768, 1000, 1272],
 
   cssOverrides: {
     Login: {

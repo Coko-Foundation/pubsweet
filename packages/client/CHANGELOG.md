@@ -3,6 +3,145 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.1.0...pubsweet-client@10.1.1) (2019-12-11)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+# [10.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.0.2...pubsweet-client@10.1.0) (2019-11-11)
+
+
+### Features
+
+* **client:** automatically remove __typename from mutation inputs ([25ba9ec](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/25ba9ec2fae45f550f346e59a943e349f967875f))
+
+
+
+
+
+## [10.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.0.1...pubsweet-client@10.0.2) (2019-09-11)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [10.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.0.0...pubsweet-client@10.0.1) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+# [10.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.13...pubsweet-client@10.0.0) (2019-08-30)
+
+
+### Code Refactoring
+
+* **apollo:** update react-dom version ([e001d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e001d01))
+
+
+### BREAKING CHANGES
+
+* **apollo:** The minimum supported React version by @apollo is now 16.8
+
+
+
+
+
+## [9.2.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.12...pubsweet-client@9.2.13) (2019-08-08)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.11...pubsweet-client@9.2.12) (2019-08-05)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.10...pubsweet-client@9.2.11) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.9...pubsweet-client@9.2.10) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.8...pubsweet-client@9.2.9) (2019-07-03)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.7...pubsweet-client@9.2.8) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.6...pubsweet-client@9.2.7) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.5...pubsweet-client@9.2.6) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.4...pubsweet-client@9.2.5) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.3...pubsweet-client@9.2.4) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
+## [9.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.2...pubsweet-client@9.2.3) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-client
+
+
+
+
+
 ## [9.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@9.2.1...pubsweet-client@9.2.2) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-client

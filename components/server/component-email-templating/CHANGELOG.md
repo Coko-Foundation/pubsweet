@@ -3,6 +3,137 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.7...@pubsweet/component-email-templating@0.2.8) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.6...@pubsweet/component-email-templating@0.2.7) (2019-11-11)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.5...@pubsweet/component-email-templating@0.2.6) (2019-09-11)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.4...@pubsweet/component-email-templating@0.2.5) (2019-09-04)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.3...@pubsweet/component-email-templating@0.2.4) (2019-08-30)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.2...@pubsweet/component-email-templating@0.2.3) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.1...@pubsweet/component-email-templating@0.2.2) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.0...@pubsweet/component-email-templating@0.2.1) (2019-07-12)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.19...@pubsweet/component-email-templating@0.2.0) (2019-07-09)
+
+
+### Features
+
+* **email-templating:** add footer text variable ([d0d6cf5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d0d6cf5))
+
+
+
+
+
+## [0.1.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.18...@pubsweet/component-email-templating@0.1.19) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.17...@pubsweet/component-email-templating@0.1.18) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.16...@pubsweet/component-email-templating@0.1.17) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.15...@pubsweet/component-email-templating@0.1.16) (2019-06-21)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.14...@pubsweet/component-email-templating@0.1.15) (2019-06-13)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.13...@pubsweet/component-email-templating@0.1.14) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.1.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.12...@pubsweet/component-email-templating@0.1.13) (2019-05-27)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
 ## [0.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.1.11...@pubsweet/component-email-templating@0.1.12) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/component-email-templating

@@ -22,10 +22,7 @@ const resolvers = {
 
       await fs.ensureDir(uploadsPath)
       const outStream = fs.createWriteStream(outPath)
-      stream.pipe(
-        outStream,
-        { encoding },
-      )
+      stream.pipe(outStream, { encoding })
       let uploadedSize = 0
 
       stream.on('data', chunk => {

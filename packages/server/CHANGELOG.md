@@ -3,6 +3,160 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.8.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.8.0...pubsweet-server@13.8.1) (2019-12-11)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+# [13.8.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.7.2...pubsweet-server@13.8.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
+## [13.7.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.7.1...pubsweet-server@13.7.2) (2019-09-11)
+
+
+### Bug Fixes
+
+* **authorization:** update the error thrown by can function ([01a005b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/01a005b))
+
+
+
+
+
+## [13.7.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.7.0...pubsweet-server@13.7.1) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+# [13.7.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.6.1...pubsweet-server@13.7.0) (2019-08-30)
+
+
+### Features
+
+* **cli:** introduce start:client and start:server ([29d7d44](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/29d7d44))
+
+
+
+
+
+## [13.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.6.0...pubsweet-server@13.6.1) (2019-08-08)
+
+
+### Bug Fixes
+
+* **server:** log errors correctly if originalError empty ([1b5c78a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1b5c78a))
+
+
+
+
+
+# [13.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.2...pubsweet-server@13.6.0) (2019-08-05)
+
+
+### Bug Fixes
+
+* **server:** add default loaders correctly ([3d49924](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3d49924))
+* **server:** correctly address missing records ([7c26668](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7c26668))
+
+
+### Features
+
+* **loaders:** add dataloaders to context by default ([c4c2255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4c2255))
+* **pubsweet-server:** add loaders object to gql context ([b1c715a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1c715a))
+* use modelLoaders for model-specific loaders ([3be6bc2](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3be6bc2))
+
+
+
+
+
+## [13.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.1...pubsweet-server@13.5.2) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.5.0...pubsweet-server@13.5.1) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+# [13.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.7...pubsweet-server@13.5.0) (2019-07-03)
+
+
+### Features
+
+* use a config object with apollo's config ([5135db6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5135db6))
+
+
+
+
+
+## [13.4.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.6...pubsweet-server@13.4.7) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.4.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.5...pubsweet-server@13.4.6) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.4.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.4...pubsweet-server@13.4.5) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.4.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.3...pubsweet-server@13.4.4) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.4.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.2...pubsweet-server@13.4.3) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.4.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.1...pubsweet-server@13.4.2) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
 ## [13.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.4.0...pubsweet-server@13.4.1) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-server

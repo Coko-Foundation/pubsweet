@@ -24,14 +24,16 @@ class User extends BaseModel {
   }
 
   static get relationMappings() {
+    const { Team, TeamMember } = require('@pubsweet/models')
+
     return {
       teams: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: require.resolve('@pubsweet/model-team/src/team'),
+        modelClass: Team,
         join: {
           from: 'users.id',
           through: {
-            modelClass: require.resolve('@pubsweet/model-team/src/team_member'),
+            modelClass: TeamMember,
             from: 'team_members.user_id',
             to: 'team_members.team_id',
           },
@@ -78,10 +80,6 @@ class User extends BaseModel {
   }
 
   async save() {
-    if (!this.id) {
-      await User.isUniq(this)
-    }
-
     if (this.password) {
       this.passwordHash = await User.hashPassword(this.password)
       delete this.password
@@ -96,26 +94,6 @@ class User extends BaseModel {
 
   static hashPassword(password) {
     return bcrypt.hash(password, BCRYPT_COST)
-  }
-
-  static async isUniq(user) {
-    const { ConflictError } = require('@pubsweet/errors')
-
-    let result
-
-    const swallowNotFound = e => {
-      if (e.name !== 'NotFoundError') throw e
-    }
-
-    result = await User.findByEmail(user.email).catch(swallowNotFound)
-
-    if (!result) {
-      result = await User.findByUsername(user.username).catch(swallowNotFound)
-    }
-
-    if (result) {
-      throw new ConflictError('User already exists')
-    }
   }
 
   static findByEmail(email) {

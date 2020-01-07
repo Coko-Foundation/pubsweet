@@ -8,10 +8,25 @@ Once these are installed, you can install `pubsweet`, our command-line tool:
 yarn global add pubsweet
 ```
 
-And use it to create a new application:
+In case you can't install yarn globally, type:
+
+```bash
+yarn add pubsweet
+```
+
+and it will install `pubsweet` in your home directory.
+
+Then use it to create a new application:
 
 ```bash
 pubsweet new yourAppName
+```
+
+You may get an error if the `pubsweet` executable is not in your `PATH`.
+You may set the `PATH` environment variable or simply replace the command `pubsweet` with `yarn pubsweet`, like this:
+
+```bash
+yarn pubsweet new yourAppName
 ```
 
 This will initialize a new PubSweet application based on [PubSweet starter](https://gitlab.coko.foundation/pubsweet/pubsweet-starter).

@@ -17,6 +17,7 @@ module.exports = dir => {
     path.join(dir, 'src'),
     path.join(dir, '..', 'components'),
     path.join(dir, '..', 'packages', 'ui', 'src'),
+    path.join(dir, '..', 'node_modules', 'wax-prosemirror-core', 'src'),
     /pubsweet-[^/]+\/src/,
     /xpub-[^/]+\/src/,
     /wax-[^/]+\/src/,
@@ -50,64 +51,6 @@ module.exports = dir => {
                 rootMode: 'upward',
               },
             },
-            // CSS modules
-            {
-              test: /\.local\.css$/,
-              include,
-              use: [
-                'style-loader',
-                {
-                  loader: 'css-loader',
-                  options: {
-                    modules: true,
-                    // sourceMap: true,
-                    localIdentName: '[name]_[local]-[hash:base64:8]',
-                  },
-                },
-              ],
-            },
-
-            // SCSS modules
-            {
-              test: /\.local\.scss$/,
-              include,
-              use: [
-                'style-loader',
-                {
-                  loader: 'css-loader',
-                  options: {
-                    modules: true,
-                    importLoaders: 1,
-                    // sourceMap: true,
-                    localIdentName: '[name]_[local]-[hash:base64:8]',
-                  },
-                },
-                'sass-loader',
-              ],
-            },
-
-            // global CSS
-            {
-              test: /\.css$/,
-              use: ['style-loader', 'css-loader'],
-            },
-
-            // global SCSS
-            {
-              test: /\.scss$/,
-              use: [
-                'style-loader',
-                'css-loader',
-                // {
-                //   loader: 'css-loader',
-                //   options: {
-                //     importLoaders: 1,
-                //   }
-                // },
-                'sass-loader',
-              ],
-            },
-
             // Files
             {
               exclude: [/\.jsx?$/, /\.html$/, /\.json$/],

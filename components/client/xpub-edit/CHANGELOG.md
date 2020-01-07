@@ -3,6 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.6.0...xpub-edit@2.6.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* onBlur and onChange are not required ([99142c5](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/99142c56756a6591720b1c9cf829b426a13c6abf))
+
+
+
+
+
+# [2.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.32...xpub-edit@2.6.0) (2019-11-11)
+
+
+### Features
+
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
+## [2.5.32](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.31...xpub-edit@2.5.32) (2019-09-11)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.31](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.30...xpub-edit@2.5.31) (2019-09-04)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.29...xpub-edit@2.5.30) (2019-08-30)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.28...xpub-edit@2.5.29) (2019-08-08)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.27...xpub-edit@2.5.28) (2019-08-05)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.26...xpub-edit@2.5.27) (2019-07-12)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.25...xpub-edit@2.5.26) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
+## [2.5.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.24...xpub-edit@2.5.25) (2019-07-03)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.23...xpub-edit@2.5.24) (2019-06-28)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.22...xpub-edit@2.5.23) (2019-06-24)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.21...xpub-edit@2.5.22) (2019-06-21)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.20...xpub-edit@2.5.21) (2019-06-13)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.19...xpub-edit@2.5.20) (2019-06-12)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
+## [2.5.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.18...xpub-edit@2.5.19) (2019-05-27)
+
+**Note:** Version bump only for package xpub-edit
+
+
+
+
+
 ## [2.5.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.5.17...xpub-edit@2.5.18) (2019-04-25)
 
 **Note:** Version bump only for package xpub-edit

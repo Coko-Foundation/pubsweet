@@ -13,18 +13,19 @@ exports[`<Login/> renders the login form 1`] = `
         Login
       </styled.button>
     </form>
-    <span>
+    <p>
       Don&#39;t have an account? 
-    </span>
-    <Styled(SmartUnstyledLink) to=\\"/signup\\">
-      Sign up
-    </Styled(SmartUnstyledLink)>
-    <span>
-      Forgot your password? 
-    </span>
-    <Styled(SmartUnstyledLink) to=\\"/password-reset\\">
-      Reset password
-    </Styled(SmartUnstyledLink)>
+      <Styled(SmartUnstyledLink) to=\\"/signup\\">
+        Sign up
+      </Styled(SmartUnstyledLink)>
+    </p>
+    <p>
+      Forgot your password?
+       
+      <Styled(SmartUnstyledLink) to=\\"/password-reset\\">
+        Reset password
+      </Styled(SmartUnstyledLink)>
+    </p>
   </styled.div>
 </styled.div>"
 `;

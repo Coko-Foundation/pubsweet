@@ -16,11 +16,11 @@ export default {
     font-family: ${th('fontInterface')};
     font-size: 16px;
     line-height: 24px;
-    padding: ${th('space.2')};
-    height: ${th('space.5')};
+    padding: calc(${th('gridUnit')} * 2);
+    height: calc(${th('gridUnit')} * 8);
   `,
   Label: css`
-    margin-bottom: ${th('space.1')};
+    margin-bottom: ${th('gridUnit')};
   `,
   Root: css`
     margin-bottom: 0px;

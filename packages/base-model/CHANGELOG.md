@@ -3,6 +3,150 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.1...@pubsweet/base-model@3.5.2) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.5.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.0...@pubsweet/base-model@3.5.1) (2019-11-11)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+# [3.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.3...@pubsweet/base-model@3.5.0) (2019-09-11)
+
+
+### Features
+
+* **base-model:** allow transaction on graph save ([30d500e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30d500e))
+* **base-model:** execute save inside a transaction ([1252288](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1252288))
+
+
+
+
+
+## [3.4.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.2...@pubsweet/base-model@3.4.3) (2019-09-04)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.4.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.1...@pubsweet/base-model@3.4.2) (2019-08-30)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.4.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.4.0...@pubsweet/base-model@3.4.1) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+# [3.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.5...@pubsweet/base-model@3.4.0) (2019-08-05)
+
+
+### Features
+
+* **loaders:** add dataloaders to context by default ([c4c2255](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c4c2255))
+
+
+
+
+
+## [3.3.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.4...@pubsweet/base-model@3.3.5) (2019-07-12)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.3...@pubsweet/base-model@3.3.4) (2019-07-09)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.2...@pubsweet/base-model@3.3.3) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.1...@pubsweet/base-model@3.3.2) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.3.0...@pubsweet/base-model@3.3.1) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+# [3.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.2.0...@pubsweet/base-model@3.3.0) (2019-06-21)
+
+
+### Features
+
+* **base-model:** allow passing options to saveGraph ([feae7fe](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/feae7fe))
+
+
+
+
+
+# [3.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.1.0...@pubsweet/base-model@3.2.0) (2019-06-13)
+
+
+### Features
+
+* **base-model:** upserts should not delete records ([9bed759](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9bed759))
+
+
+
+
+
+# [3.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.8...@pubsweet/base-model@3.1.0) (2019-06-12)
+
+
+### Features
+
+* **base-model:** add support for graph save ([8776ad3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8776ad3))
+
+
+
+
+
+## [3.0.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.7...@pubsweet/base-model@3.0.8) (2019-05-27)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
 ## [3.0.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.0.6...@pubsweet/base-model@3.0.7) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/base-model

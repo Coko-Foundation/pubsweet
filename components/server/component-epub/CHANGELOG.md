@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.34](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.33...pubsweet-component-epub@0.5.34) (2019-12-11)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.33](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.32...pubsweet-component-epub@0.5.33) (2019-11-11)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.32](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.31...pubsweet-component-epub@0.5.32) (2019-09-11)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.31](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.30...pubsweet-component-epub@0.5.31) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.29...pubsweet-component-epub@0.5.30) (2019-08-30)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.28...pubsweet-component-epub@0.5.29) (2019-08-08)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.27...pubsweet-component-epub@0.5.28) (2019-08-05)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.26...pubsweet-component-epub@0.5.27) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.25...pubsweet-component-epub@0.5.26) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.24...pubsweet-component-epub@0.5.25) (2019-07-03)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.23...pubsweet-component-epub@0.5.24) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.22...pubsweet-component-epub@0.5.23) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.21...pubsweet-component-epub@0.5.22) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.20...pubsweet-component-epub@0.5.21) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.19...pubsweet-component-epub@0.5.20) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
+## [0.5.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.18...pubsweet-component-epub@0.5.19) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-component-epub
+
+
+
+
+
 ## [0.5.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-epub@0.5.17...pubsweet-component-epub@0.5.18) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-component-epub

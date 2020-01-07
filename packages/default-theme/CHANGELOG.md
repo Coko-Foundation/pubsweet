@@ -3,6 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.14...@pubsweet/default-theme@4.1.15) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.13...@pubsweet/default-theme@4.1.14) (2019-11-11)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.12...@pubsweet/default-theme@4.1.13) (2019-09-11)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.11...@pubsweet/default-theme@4.1.12) (2019-09-04)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.10...@pubsweet/default-theme@4.1.11) (2019-08-30)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.9...@pubsweet/default-theme@4.1.10) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.8...@pubsweet/default-theme@4.1.9) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.7...@pubsweet/default-theme@4.1.8) (2019-07-12)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.6...@pubsweet/default-theme@4.1.7) (2019-07-09)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.5...@pubsweet/default-theme@4.1.6) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.4...@pubsweet/default-theme@4.1.5) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.3...@pubsweet/default-theme@4.1.4) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.2...@pubsweet/default-theme@4.1.3) (2019-06-21)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.1...@pubsweet/default-theme@4.1.2) (2019-06-13)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+## [4.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.0...@pubsweet/default-theme@4.1.1) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
+# [4.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.0.15...@pubsweet/default-theme@4.1.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* remove use of space variable in peoplepicker styling ([53354df](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53354df))
+* removed rebass from MainColumn, added breakpoints to default theme ([c71920c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c71920c))
+
+
+### Features
+
+* merge commit ([7797a83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7797a83))
+
+
+
+
+
 ## [4.0.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.0.14...@pubsweet/default-theme@4.0.15) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/default-theme

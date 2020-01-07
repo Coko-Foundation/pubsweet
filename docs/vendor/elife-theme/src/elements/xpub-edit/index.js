@@ -8,18 +8,18 @@ export const MenuBar = {
     background-color: ${th('colorBackgroundHue')};
     margin-bottom: 0;
     border-bottom: none;
-    line-height: ${th('space.2')};
-    padding: ${th('space.1')};
+    line-height: calc(${th('gridUnit')} * 2);
+    padding: ${th('gridUnit')};
   `,
 }
 
 export const MenuButton = {
   Button: css`
     background-color: transparent;
-    margin: ${th('space.1')}
-    width: ${th('space.3')};
+    margin: ${th('gridUnit')}
+    width: calc(${th('gridUnit')} * 4);
     /* subtract border width */
-    height: calc(${th('space.3')} - 2px);
+    height: calc((${th('gridUnit')} * 4) - 2px);
   `,
 }
 

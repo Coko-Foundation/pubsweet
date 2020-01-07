@@ -1,0 +1,27 @@
+{
+  "name": "create-pubsweet-app",
+  "version": "0.1.1",
+  "keywords": [
+    "pubsweet"
+  ],
+  "description": "Create PubSweet apps with one command",
+  "repository": {
+    "type": "git",
+    "url": "https://coko.gitlab.foundation/pubsweet/pubsweet",
+    "directory": "packages/create-pubsweet-app"
+  },
+  "author": "PubSweet Community <team@coko.foundation>",
+  "license": "MIT",
+  "bin": {
+    "create-pubsweet-app": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "",
+    "prerelease": "",
+    "release": "",
+    "prepublish": ""
+  }
+}

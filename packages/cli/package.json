@@ -1,12 +1,8 @@
 {
   "name": "pubsweet",
-  "version": "4.1.2",
+  "version": "5.1.4",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
-  "scripts": {
-    "test": "jest",
-    "vuln-test": "nsp check --output checkstyle"
-  },
   "keywords": [
     "pubsweet",
     "cli"
@@ -14,9 +10,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.0.6",
-    "@pubsweet/logger": "^0.2.20",
-    "bluebird": "^3.5.0",
+    "@pubsweet/db-manager": "^3.1.1",
+    "@pubsweet/logger": "^0.2.36",
     "colors": "^1.1.2",
     "commander": "^2.20.0",
     "config": "^3.0.1",
@@ -25,21 +20,17 @@
     "fs-extra": "^4.0.2",
     "inflection": "^1.12.0",
     "lodash": "^4.17.11",
+    "node-dev": "^4.0.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
-    "pubsweet-server": "^13.4.1",
-    "uuid": "^3.0.1",
+    "pubsweet-server": "^13.8.1",
     "webpack": "^4.29.5",
     "webpack-dev-middleware": "^3.6.0",
+    "webpack-dev-server": "^3.9.0",
     "webpack-hot-middleware": "^2.20.0"
   },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
-  },
-  "devDependencies": {
-    "jest": "^24.7.1",
-    "jest-environment-db": "^3.0.7",
-    "nsp": "^2.8.1"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

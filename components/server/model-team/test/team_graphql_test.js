@@ -80,63 +80,91 @@ describe('Team queries', () => {
     expect(body.data.users[0].teams[0].members[0].user.id).toEqual(user.id)
   })
 
-  it('creates a team', async () => {
+  it('creates a team with members or without', async () => {
     const fragment = await new Fragment({ fragmentType: 'post' }).save()
 
+    const noMembers = []
+    const yesMembers = [
+      {
+        user: { id: user.id },
+        alias: { email: 'unk@example.com' },
+        status: 'invited',
+      },
+    ]
+
+    const promises = [noMembers, yesMembers].map(async members => {
+      const { body } = await api.graphql.query(
+        `mutation($input: TeamInput) {
+          createTeam(input: $input) {
+            name
+            members {
+              user {
+                id
+              }
+              alias {
+                email
+              }
+              status
+            }
+            object {
+              objectId
+              objectType
+            }
+          }
+        }`,
+        {
+          input: {
+            name: 'My team',
+            role: 'test',
+            members,
+            objectId: fragment.id,
+            objectType: 'fragment',
+          },
+        },
+        token,
+      )
+
+      expect(body).toEqual({
+        data: {
+          createTeam: {
+            name: 'My team',
+            members,
+            object: {
+              objectId: fragment.id,
+              objectType: 'fragment',
+            },
+          },
+        },
+      })
+    })
+    await Promise.all(promises)
+  })
+
+  it('can query a team saved directly', async () => {
+    const team = await new Team({
+      name: 'NoMembers',
+      role: 'test',
+      members: [],
+    }).save()
+
     const { body } = await api.graphql.query(
-      `mutation($input: TeamInput) {
-        createTeam(input: $input) {
+      `query($id: ID) {
+        team(id: $id) {
           name
           members {
             user {
               id
             }
-            alias {
-              email
-            }
-            status
-          }
-          object {
-            objectId
-            objectType
           }
         }
       }`,
-      {
-        input: {
-          name: 'My team',
-          role: 'test',
-          members: [
-            {
-              user: { id: user.id },
-              alias: { email: 'unk@example.com' },
-              status: 'invited',
-            },
-          ],
-          objectId: fragment.id,
-          objectType: 'fragment',
-        },
-      },
+      { id: team.id },
       token,
     )
 
-    expect(body).toEqual({
-      data: {
-        createTeam: {
-          name: 'My team',
-          members: [
-            {
-              user: { id: user.id },
-              alias: { email: 'unk@example.com' },
-              status: 'invited',
-            },
-          ],
-          object: {
-            objectId: fragment.id,
-            objectType: 'fragment',
-          },
-        },
-      },
+    expect(body.data.team).toEqual({
+      name: 'NoMembers',
+      members: [],
     })
   })
 

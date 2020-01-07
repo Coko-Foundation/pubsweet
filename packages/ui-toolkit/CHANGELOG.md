@@ -3,6 +3,138 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.14...@pubsweet/ui-toolkit@2.2.15) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.13...@pubsweet/ui-toolkit@2.2.14) (2019-11-11)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.12...@pubsweet/ui-toolkit@2.2.13) (2019-09-11)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.11...@pubsweet/ui-toolkit@2.2.12) (2019-09-04)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.10...@pubsweet/ui-toolkit@2.2.11) (2019-08-30)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.9...@pubsweet/ui-toolkit@2.2.10) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.8...@pubsweet/ui-toolkit@2.2.9) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.7...@pubsweet/ui-toolkit@2.2.8) (2019-07-12)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.6...@pubsweet/ui-toolkit@2.2.7) (2019-07-09)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.5...@pubsweet/ui-toolkit@2.2.6) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.4...@pubsweet/ui-toolkit@2.2.5) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.3...@pubsweet/ui-toolkit@2.2.4) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.2...@pubsweet/ui-toolkit@2.2.3) (2019-06-21)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.1...@pubsweet/ui-toolkit@2.2.2) (2019-06-13)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.0...@pubsweet/ui-toolkit@2.2.1) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+# [2.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.1.7...@pubsweet/ui-toolkit@2.2.0) (2019-05-27)
+
+
+### Features
+
+* merge commit from master ([b1e1e06](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1e1e06))
+* move media query mixin to ui-toolkit ([1bee71a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1bee71a))
+
+
+
+
+
 ## [2.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.1.6...@pubsweet/ui-toolkit@2.1.7) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit

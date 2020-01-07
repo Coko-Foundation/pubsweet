@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fragment queries lists fragments 1`] = `
+Array [
+  Object {
+    "fragmentType": "testing",
+    "owners": Array [
+      Object {
+        "username": "testuser",
+      },
+    ],
+  },
+  Object {
+    "fragmentType": "testing2",
+    "owners": Array [
+      Object {
+        "username": "anotheruser",
+      },
+    ],
+  },
+]
+`;

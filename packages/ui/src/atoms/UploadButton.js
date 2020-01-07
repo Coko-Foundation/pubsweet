@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 
-const Button = styled.button.attrs({
+const Button = styled.button.attrs(() => ({
   type: 'button',
-})`
+}))`
   background: transparent;
   border: ${th('borderWidth')} dashed ${th('colorBorder')};
   height: calc(${th('gridUnit')} * 3);
@@ -16,9 +16,8 @@ const Button = styled.button.attrs({
 const UploadButton = ({ name, buttonText, onChange }) => {
   let fileInput
   return (
-    <div>
+    <React.Fragment>
       <Button onClick={() => fileInput.click()}>{buttonText}</Button>
-
       <input
         multiple
         name={name}
@@ -27,7 +26,7 @@ const UploadButton = ({ name, buttonText, onChange }) => {
         style={{ display: 'none' }}
         type="file"
       />
-    </div>
+    </React.Fragment>
   )
 }
 

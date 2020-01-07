@@ -3,6 +3,208 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.1.0...@pubsweet/ui@12.1.1) (2019-12-11)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+# [12.1.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.0.1...@pubsweet/ui@12.1.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **ui:** make the deprecated Title work again ([5d58ee9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5d58ee96aae2f780c108bffc5bb80f49e97abaf2))
+
+
+### Features
+
+* **ui:** set a key for Menu items ([1f6c4e7](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1f6c4e724dc6dca2212fcbb50f85277baf3abae0))
+* **ui:** use SSR-friendly UID generation in TextArea ([d5c4dcf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d5c4dcfedf58c3005bcc4e6836617e211d136d62))
+* **ui:** use SSR-friendly UID generation in TextField ([471fa6d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/471fa6dde1e415628d4421f6c2e1474fcf866ae3))
+* **xpub:** bring back xpub components ([fb69994](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fb69994098b4e2dbcca75b4786ebb1335af730b9))
+
+
+
+
+
+## [12.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.0.0...@pubsweet/ui@12.0.1) (2019-09-11)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+# [12.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@11.0.0...@pubsweet/ui@12.0.0) (2019-09-04)
+
+
+### Bug Fixes
+
+* **modal:** added unit test for modal content using hooks ([0fcdc54](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0fcdc54))
+* **modal:** allow usage of hooks inside modal components ([ee71614](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ee71614))
+* **modal:** fixed type error ([30b7ae4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/30b7ae4))
+
+
+### Code Refactoring
+
+* **ui:** deprecate Title ([0f0353f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0f0353f))
+
+
+### Features
+
+* **modal:** provided posibility to specify modal position ([9fdb42c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9fdb42c))
+* **ui:** remove FilePicker div, add aria role ([14b9028](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/14b9028))
+* **ui:** replace div - UploadButton ([aca5c59](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aca5c59))
+
+
+### BREAKING CHANGES
+
+* **ui:** Anyone applying styles using a div css selector will have to change to using an
+h-level css selecto
+* **ui:** Those importing and styling FilePicker may be expecting the div; FilePicker is no
+longer a block element by default
+* **ui:** Div removed - anyone importing and styling the component may expect the div to be
+present
+
+
+
+
+
+# [11.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.10...@pubsweet/ui@11.0.0) (2019-08-30)
+
+
+### Code Refactoring
+
+* **apollo:** update react-dom version ([e001d01](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e001d01))
+
+
+### BREAKING CHANGES
+
+* **apollo:** The minimum supported React version by @apollo is now 16.8
+
+
+
+
+
+## [10.3.10](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.9...@pubsweet/ui@10.3.10) (2019-08-08)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.8...@pubsweet/ui@10.3.9) (2019-08-05)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.7...@pubsweet/ui@10.3.8) (2019-07-12)
+
+
+### Bug Fixes
+
+* **ui:** un-hardcode button attrs ([70dd5dc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/70dd5dc))
+
+
+
+
+
+## [10.3.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.6...@pubsweet/ui@10.3.7) (2019-07-09)
+
+
+### Bug Fixes
+
+* **ui:** remove attrs as objects deprecation warning ([19b20bc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/19b20bc))
+
+
+
+
+
+## [10.3.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.5...@pubsweet/ui@10.3.6) (2019-07-03)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.4...@pubsweet/ui@10.3.5) (2019-06-28)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.3...@pubsweet/ui@10.3.4) (2019-06-24)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.2...@pubsweet/ui@10.3.3) (2019-06-21)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.1...@pubsweet/ui@10.3.2) (2019-06-13)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [10.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.3.0...@pubsweet/ui@10.3.1) (2019-06-12)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+# [10.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.2.1...@pubsweet/ui@10.3.0) (2019-05-27)
+
+
+### Bug Fixes
+
+* **peoplepicker:** fixed styling of InputWithAddons ([b60a728](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b60a728))
+* check for correct new two column layout prop value ([b59b8a9](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b59b8a9))
+* fix default theme styling of Searchbox ([34e0426](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/34e0426))
+* input with addons border thinkness, default input height ([aac9263](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/aac9263))
+* remove use of space variable in peoplepicker styling ([53354df](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/53354df))
+* tests for TwoColumnLayout ([8ceba26](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ceba26))
+
+
+### Features
+
+* **peoplepicker:** wip ([5564271](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5564271))
+* **ui:** add modal ([a44e5c3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a44e5c3))
+* add new input box with addons ([bd4fd81](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4fd81))
+* fix alignment of search box and person pod button ([3e5659e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/3e5659e))
+* further tests of TwoColumnLayout component ([fefcf6f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fefcf6f))
+* **ui:** add pagination component ([c493203](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c493203))
+* merge commit ([7797a83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7797a83))
+* merge commit from master ([b1e1e06](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b1e1e06))
+* merge commit, fix styling on icons and fonts ([33e5e80](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/33e5e80))
+* re-add the modal using new pubsweet version ([fdc7101](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fdc7101))
+
+
+
+
+
 ## [10.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@10.2.0...@pubsweet/ui@10.2.1) (2019-04-25)
 
 **Note:** Version bump only for package @pubsweet/ui

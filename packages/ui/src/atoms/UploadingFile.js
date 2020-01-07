@@ -63,7 +63,6 @@ const Uploaded = styled(Uploading)`
     border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorTextReverse')};
     color: ${th('colorTextReverse')};
     text-transform: uppercase;
-    cursor: pointer;
     transform: scaleX(0);
     transform-origin: 0 0;
   }

@@ -9,7 +9,7 @@ const startServer = async (app = express()) => {
 
   const http = require('http')
   const config = require('config')
-  const Promise = require('bluebird')
+  const { promisify } = require('util')
 
   const logger = require('@pubsweet/logger')
   const configureApp = require('./app')
@@ -22,9 +22,7 @@ const startServer = async (app = express()) => {
   httpServer.app = configuredApp
 
   logger.info(`Starting HTTP server`)
-  const startListening = Promise.promisify(httpServer.listen, {
-    context: httpServer,
-  })
+  const startListening = promisify(httpServer.listen).bind(httpServer)
   await startListening(port)
   logger.info(`App is listening on port ${port}`)
 

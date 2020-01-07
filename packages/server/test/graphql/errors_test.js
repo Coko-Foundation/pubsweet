@@ -33,7 +33,7 @@ describe('GraphQL errors', () => {
     expect(body.errors).toHaveLength(1)
     expect(body.errors).toContainEqual({
       message: 'Cannot query field "invalidProperty" on type "User".',
-      name: 'GraphQLError',
+      name: 'ValidationError',
       extensions: {
         code: 'GRAPHQL_VALIDATION_FAILED',
       },

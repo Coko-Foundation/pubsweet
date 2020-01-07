@@ -1,5 +1,10 @@
 const { ref, lit } = require('objection')
 
+const { NotFoundError } = require('@pubsweet/errors')
+
+const notFoundError = (property, value, className) =>
+  new NotFoundError(`Object not found: ${className} with ${property} ${value}`)
+
 // create a function which creates a new entity and performs authorization checks
 const createCreator = (entityName, EntityModel) => async (
   input,
@@ -138,7 +143,11 @@ const fetchOneCreator = (entityName, EntityModel) => async (
 ) => {
   await ctx.helpers.can(ctx.user, 'read', entityName)
 
-  const entity = await EntityModel.find(id, options)
+  const entity = await ctx.loaders[entityName].load(id)
+
+  if (!entity) {
+    throw notFoundError('id', id, entityName)
+  }
 
   const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entity)
   return outputFilter(entity)
@@ -156,17 +165,21 @@ const fetchRelatedCreator = (entityName, EntityModel) => async (
   ctx,
 ) => {
   let entities
-  const entity = await EntityModel.find(id)
+  const entity = await ctx.loaders[entityName].load(id)
   if (where) {
     entities = await entity.$relatedQuery(relation).where(where)
   } else {
     entities = await entity.$relatedQuery(relation)
   }
+
   if (Array.isArray(entities)) {
     return ctx.helpers.filterAll(ctx.user, entities)
+  } else if (entities) {
+    const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entities)
+    return outputFilter(entities)
   }
-  const outputFilter = await ctx.helpers.canKnowAbout(ctx.user, entities)
-  return outputFilter(entities)
+
+  return []
 }
 
 // create a connector object with fetchers for all, one and some

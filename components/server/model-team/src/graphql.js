@@ -42,39 +42,37 @@ const resolvers = {
       })
     },
   },
+  User: {
+    teams: (parent, _, ctx) =>
+      ctx.connectors.User.fetchRelated(parent.id, 'teams', undefined, ctx),
+  },
   Team: {
-    // async members(team, { where }, ctx) {
-    //   return team.members
-    //     ? team.members
-    //     : ctx.connectors.Team.fetchRelated(team.id, 'members', where, ctx)
-    // },
+    members(team, { where }, ctx) {
+      return ctx.connectors.Team.fetchRelated(team.id, 'members', where, ctx)
+    },
     object(team, vars, ctx) {
       const { objectId, objectType } = team
       return objectId && objectType ? { objectId, objectType } : null
     },
   },
-  // TeamMember: {
-  //   async user(teamMember, vars, ctx) {
-  //     return teamMember.user
-  //       ? teamMember.user
-  //       : ctx.connectors.TeamMember.fetchRelated(
-  //           teamMember.id,
-  //           'user',
-  //           undefined,
-  //           ctx,
-  //         )
-  //   },
-  //   async alias(teamMember, vars, ctx) {
-  //     return teamMember.alias
-  //       ? teamMember.alias
-  //       : ctx.connectors.TeamMember.fetchRelated(
-  //           teamMember.id,
-  //           'alias',
-  //           undefined,
-  //           ctx,
-  //         )
-  //   },
-  // },
+  TeamMember: {
+    user(teamMember, vars, ctx) {
+      return ctx.connectors.TeamMember.fetchRelated(
+        teamMember.id,
+        'user',
+        undefined,
+        ctx,
+      )
+    },
+    alias(teamMember, vars, ctx) {
+      return ctx.connectors.TeamMember.fetchRelated(
+        teamMember.id,
+        'alias',
+        undefined,
+        ctx,
+      )
+    },
+  },
 }
 
 const typeDefs = `
@@ -89,13 +87,17 @@ const typeDefs = `
     updateTeam(id: ID, input: TeamInput): Team
   }
 
+  extend type User {
+    teams: [Team]
+  }
+
   type Team {
     id: ID!
     type: String!
     role: String!
     name: String!
     object: TeamObject
-    members: [TeamMember!]!
+    members: [TeamMember!]
     owners: [User]
     global: Boolean
   }

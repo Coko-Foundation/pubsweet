@@ -1,7 +1,7 @@
 {
   "name": "@pubsweet/model-collection",
-  "version": "4.0.7",
-  "description": "",
+  "version": "4.0.23",
+  "description": "A basic model for Collections",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,18 +9,15 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/base-model": "^3.0.7",
-    "http-status-codes": "^1.3.0",
-    "passport": "^0.4.0",
-    "pubsweet-sse": "^1.0.14"
+    "@pubsweet/base-model": "^3.5.2"
   },
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "@pubsweet/models": "^0.2.4",
-    "lodash": "^4.17.11",
-    "pubsweet-server": "^13.0.0"
+    "@pubsweet/models": ">=0.2.4",
+    "lodash": ">=4.17.11",
+    "pubsweet-server": ">=13.0.0"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }

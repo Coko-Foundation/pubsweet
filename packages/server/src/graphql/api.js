@@ -1,5 +1,6 @@
 const passport = require('passport')
 const { ApolloServer } = require('apollo-server-express')
+const isEmpty = require('lodash/isEmpty')
 const logger = require('@pubsweet/logger')
 const errors = require('@pubsweet/errors')
 
@@ -7,6 +8,7 @@ const config = require('config')
 
 const schema = require('./schema')
 const connectors = require('../connectors')
+const loaders = require('./loaders')
 
 const authBearerAndPublic = passport.authenticate(['bearer', 'anonymous'], {
   session: false,
@@ -18,17 +20,22 @@ const hostname = config.has('pubsweet-server.hostname')
   ? config.get('pubsweet-server.hostname')
   : 'localhost'
 
+const extraApolloConfig = config.has('pubsweet-server.apollo')
+  ? config.get('pubsweet-server.apollo')
+  : {}
+
 const api = app => {
   app.use('/graphql', authBearerAndPublic)
   const server = new ApolloServer({
     schema,
     context: ({ req, res }) => ({
-      user: req.user,
-      connectors,
       helpers,
+      connectors,
+      user: req.user,
+      loaders: loaders(),
     }),
     formatError: err => {
-      const error = err.originalError || err
+      const error = isEmpty(err.originalError) ? err : err.originalError
 
       logger.error(error.message, { error })
 
@@ -36,10 +43,7 @@ const api = app => {
         pubsweetError => error instanceof pubsweetError,
       )
       // err is always a GraphQLError which should be passed to the client
-      if (
-        Object.keys(err.originalError).length !== 0 &&
-        !isPubsweetDefinedError
-      )
+      if (!isEmpty(err.originalError) && !isPubsweetDefinedError)
         return {
           name: 'Server Error',
           message: 'Something went wrong! Please contact your administrator',
@@ -56,6 +60,7 @@ const api = app => {
     playground: {
       subscriptionEndpoint: `ws://${hostname}:3000/subscriptions`,
     },
+    ...extraApolloConfig,
   })
   server.applyMiddleware({ app })
 }

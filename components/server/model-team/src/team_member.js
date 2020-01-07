@@ -6,10 +6,12 @@ class TeamMember extends BaseModel {
   }
 
   static get relationMappings() {
+    const { Alias, Team, User } = require('@pubsweet/models')
+
     return {
       user: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: require.resolve('@pubsweet/model-user/src/user'),
+        modelClass: User,
         join: {
           from: 'team_members.userId',
           to: 'users.id',
@@ -17,7 +19,7 @@ class TeamMember extends BaseModel {
       },
       team: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: require.resolve('./team'),
+        modelClass: Team,
         join: {
           from: 'team_members.teamId',
           to: 'teams.id',
@@ -25,7 +27,7 @@ class TeamMember extends BaseModel {
       },
       alias: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: require.resolve('./alias'),
+        modelClass: Alias,
         join: {
           from: 'team_members.aliasId',
           to: 'aliases.id',
@@ -39,7 +41,7 @@ class TeamMember extends BaseModel {
       properties: {
         userId: { type: 'string', format: 'uuid' },
         teamId: { type: 'string', format: 'uuid' },
-        aliasId: { type: 'string', format: 'uuid' },
+        aliasId: { type: ['string', 'null'], format: 'uuid' },
         status: { type: 'string' },
         global: { type: ['boolean', 'null'] },
       },

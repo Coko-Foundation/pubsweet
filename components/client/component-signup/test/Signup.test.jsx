@@ -17,7 +17,7 @@ describe('<Signup />', () => {
   })
 
   it('shows error', () => {
-    const wrapper = makeWrapper({ error: 'Yikes!' })
+    const wrapper = makeWrapper({ status: { error: 'Yikes!' } })
     expect(wrapper.find(ErrorText)).toHaveLength(1)
   })
 

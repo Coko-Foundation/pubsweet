@@ -1,7 +1,8 @@
 const logger = require('@pubsweet/logger')
-const { AuthorizationError } = require('@pubsweet/errors')
+const { AuthorizationError, ConflictError } = require('@pubsweet/errors')
 
-const eager = 'teams.members.[user, alias]'
+// const eager = 'teams.members.[user, alias]'
+const eager = undefined
 
 const resolvers = {
   Query: {
@@ -14,7 +15,7 @@ const resolvers = {
     // Authentication
     currentUser(_, vars, ctx) {
       if (!ctx.user) return null
-      return ctx.connectors.User.model.find(ctx.user)
+      return ctx.connectors.User.model.find(ctx.user, { eager })
     },
   },
   Mutation: {
@@ -26,7 +27,18 @@ const resolvers = {
         delete input.password
       }
 
-      return ctx.connectors.User.create(input, ctx)
+      try {
+        const user = await ctx.connectors.User.create(input, ctx)
+        return user
+      } catch (e) {
+        if (e.constraint) {
+          throw new ConflictError(
+            'User with this username or email already exists',
+          )
+        } else {
+          throw e
+        }
+      }
     },
     deleteUser(_, { id }, ctx) {
       return ctx.connectors.User.delete(id, ctx)
@@ -82,7 +94,6 @@ const typeDefs = `
     username: String
     email: String
     admin: Boolean
-    teams: [Team!]!
   }
 
   input UserInput {

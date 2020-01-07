@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.30](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.29...pubsweet-sse@1.0.30) (2019-12-11)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.29](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.28...pubsweet-sse@1.0.29) (2019-11-11)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.28](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.27...pubsweet-sse@1.0.28) (2019-09-11)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.27](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.26...pubsweet-sse@1.0.27) (2019-09-04)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.26](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.25...pubsweet-sse@1.0.26) (2019-08-30)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.25](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.24...pubsweet-sse@1.0.25) (2019-08-08)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.24](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.23...pubsweet-sse@1.0.24) (2019-08-05)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.23](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.22...pubsweet-sse@1.0.23) (2019-07-12)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.22](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.21...pubsweet-sse@1.0.22) (2019-07-09)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.21](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.20...pubsweet-sse@1.0.21) (2019-07-03)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.20](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.19...pubsweet-sse@1.0.20) (2019-06-28)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.19](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.18...pubsweet-sse@1.0.19) (2019-06-24)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.18](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.17...pubsweet-sse@1.0.18) (2019-06-21)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.17](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.16...pubsweet-sse@1.0.17) (2019-06-13)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.16](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.15...pubsweet-sse@1.0.16) (2019-06-12)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
+## [1.0.15](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.14...pubsweet-sse@1.0.15) (2019-05-27)
+
+**Note:** Version bump only for package pubsweet-sse
+
+
+
+
+
 ## [1.0.14](http://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-sse@1.0.13...pubsweet-sse@1.0.14) (2019-04-25)
 
 **Note:** Version bump only for package pubsweet-sse

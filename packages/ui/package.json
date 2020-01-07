@@ -1,22 +1,20 @@
 {
   "name": "@pubsweet/ui",
-  "version": "10.2.1",
+  "version": "12.1.1",
   "license": "MIT",
   "files": [
     "docs",
     "dist",
-    "src",
-    ".babelrc"
+    "src"
   ],
-  "main": "src",
-  "jsnext:main": "src",
+  "main": "dist",
+  "module": "src",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.1.7",
-    "classnames": "^2.2.5",
+    "@pubsweet/ui-toolkit": "^2.2.15",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "formik": "^1.4.2",
@@ -24,34 +22,17 @@
     "lodash": "^4.17.4",
     "moment": "^2.22.1",
     "prop-types": "^15.5.10",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-feather": "^1.0.8",
     "react-router-dom": "^5.0.0",
     "react-tag-autocomplete": "^5.5.0",
+    "react-uid": "^2.2.0",
     "recompose": "^0.30.0",
     "styled-components": "^4.1.1"
   },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.0",
-    "enzyme-to-json": "^3.3.5",
-    "faker": "^4.1.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^24.7.1",
-    "jest-dom": "^3.2.1",
-    "jest-styled-components": "^6.3.1",
-    "react-test-renderer": "^16.5.2",
-    "react-testing-library": "^7.0.0"
-  },
   "scripts": {
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile",
-    "test": "jest"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs"
   },
   "publishConfig": {
     "access": "public"

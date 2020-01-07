@@ -6,19 +6,19 @@ import { withHandlers } from 'recompose'
 import { override } from '@pubsweet/ui-toolkit'
 
 // #region styles
-const Root = styled.div.attrs({
-  'data-test-id': props => props['data-test-id'] || 'list-root',
-})`
+const Root = styled.div.attrs(props => ({
+  'data-test-id': props['data-test-id'] || 'list-root',
+}))`
   display: flex;
   flex-direction: column;
 
   ${override('ui.List')};
 `
 
-const Item = styled.div.attrs({
+const Item = styled.div.attrs(props => ({
   // we could make a helper for this
-  'data-test-id': props => props['data-test-id'] || 'list-item',
-})`
+  'data-test-id': props['data-test-id'] || 'list-item',
+}))`
   ${override('ui.List.Item')};
 `
 // #endregion

@@ -35,5 +35,7 @@ module.exports = {
     publisher: 'Coko Foundation',
     privacy: '',
     address: '2973 16th St., Suite 300, San Francisco, CA 94103',
+    footerText:
+      'You have received this email in regards to the account creation, submission, or peer review process of a paper submitted to a journal published by Coko Foundation.',
   },
 }
