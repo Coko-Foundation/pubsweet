@@ -12,9 +12,6 @@ const requiredProps = {
   labelText: 'Left',
 }
 
-const wrapper = shallow(<AlignmentBoxWithLabel {...requiredProps} />)
-const wrapperMounted = mount(<AlignmentBoxWithLabel {...requiredProps} />)
-
 describe('AlignmentBoxWithLabel', () => {
   test('is rendered correctly', () => {
     const tree = renderer
@@ -24,10 +21,13 @@ describe('AlignmentBoxWithLabel', () => {
   })
 
   test('should contain one Alignment Box child', () => {
+    const wrapper = shallow(<AlignmentBoxWithLabel {...requiredProps} />)
     expect(wrapper.find(AlignmentBox).exists()).toEqual(true)
   })
 
   test('gets the correct props', () => {
+    const wrapper = mount(<AlignmentBoxWithLabel {...requiredProps} />)
+
     const noBorderDefaults = {
       top: false,
       bottom: false,
@@ -35,15 +35,17 @@ describe('AlignmentBoxWithLabel', () => {
       left: false,
     }
 
-    expect(wrapperMounted.prop('active')).toEqual(requiredProps.active)
-    expect(wrapperMounted.prop('id')).toEqual(requiredProps.id)
-    expect(wrapperMounted.prop('labelText')).toEqual(requiredProps.labelText)
-    expect(wrapperMounted.prop('noBorder')).toEqual(noBorderDefaults)
-    expect(wrapperMounted.prop('labelPositionRight')).toEqual(false)
+    expect(wrapper.prop('active')).toEqual(requiredProps.active)
+    expect(wrapper.prop('id')).toEqual(requiredProps.id)
+    expect(wrapper.prop('labelText')).toEqual(requiredProps.labelText)
+    expect(wrapper.prop('noBorder')).toEqual(noBorderDefaults)
+    expect(wrapper.prop('labelPositionRight')).toEqual(false)
   })
 
   test(`with default props the label is rendered on the left`, () => {
-    const label = wrapperMounted.find('span')
+    const wrapper = mount(<AlignmentBoxWithLabel {...requiredProps} />)
+
+    const label = wrapper.find('span')
     expect(label.text()).toEqual(requiredProps.labelText)
     expect(label).toHaveStyleRule('order', '0')
   })
