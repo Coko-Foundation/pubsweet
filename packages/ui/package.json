@@ -29,7 +29,7 @@
     "react-tag-autocomplete": "^5.5.0",
     "react-uid": "^2.2.0",
     "recompose": "^0.30.0",
-    "styled-components": "^4.1.1"
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs"

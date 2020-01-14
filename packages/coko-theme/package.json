@@ -10,7 +10,7 @@
   "dependencies": {
     "@pubsweet/ui-toolkit": "^2.2.15",
     "cokourier-prime-sans": "git+https://gitlab.coko.foundation/julientaq/cokourier-sans-prime.git",
-    "styled-components": "^4.1.1",
+    "styled-components": "^5.0.0",
     "typeface-fira-sans-condensed": "^0.0.54",
     "typeface-vollkorn": "^0.0.54"
   },
