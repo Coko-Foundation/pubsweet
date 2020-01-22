@@ -21,8 +21,6 @@ const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
 
 const configureApp = app => {
-  global.versions = {}
-
   const models = require('@pubsweet/models')
   const authsome = require('./helpers/authsome')
 
