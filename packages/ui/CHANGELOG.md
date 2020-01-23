@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.1.1...@pubsweet/ui@12.2.0) (2020-01-23)
+
+
+### Features
+
+* added ability to override icon via theme ([b6195f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b6195f6a5b68c263170904034f8268bc10669394))
+
+
+
+
+
 ## [12.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.1.0...@pubsweet/ui@12.1.1) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/ui

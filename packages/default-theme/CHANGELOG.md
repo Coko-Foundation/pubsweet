@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.15...@pubsweet/default-theme@4.1.16) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/default-theme
+
+
+
+
+
 ## [4.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/default-theme@4.1.14...@pubsweet/default-theme@4.1.15) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/default-theme

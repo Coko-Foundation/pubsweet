@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.2.1...@pubsweet/model-team@3.0.0) (2020-01-23)
+
+
+### Bug Fixes
+
+* **model-team:** make team_id not nullable ([b6ce134](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b6ce13412a72597355ea93e828b909516508de39)), closes [#455](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/455)
+
+
+### BREAKING CHANGES
+
+* **model-team:** Team_id is no longer nullable. A team member can not be created without a team (but
+it can be created without a user)
+
+
+
+
+
 ## [2.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.2.0...@pubsweet/model-team@2.2.1) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/model-team
