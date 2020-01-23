@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-team",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "A basic Team model",
   "main": "src/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/base-model": "^3.5.2",
-    "@pubsweet/logger": "^0.2.36",
-    "@pubsweet/models": "^0.3.1"
+    "@pubsweet/base-model": "^3.5.3",
+    "@pubsweet/logger": "^0.2.37",
+    "@pubsweet/models": "^0.3.2"
   },
   "publishConfig": {
     "access": "public"

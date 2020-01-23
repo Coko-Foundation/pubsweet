@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.4...pubsweet@5.1.5) (2020-01-23)
+
+**Note:** Version bump only for package pubsweet
+
+
+
+
+
 ## [5.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet@5.1.3...pubsweet@5.1.4) (2019-12-11)
 
 **Note:** Version bump only for package pubsweet

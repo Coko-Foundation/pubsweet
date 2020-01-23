@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.6.1...xpub-edit@2.6.2) (2020-01-23)
+
+
+### Bug Fixes
+
+* **xpub-edit:** fix to allow tables in text editor ([675ee64](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/675ee6424520d884092154f86c2493616532e9c9))
+
+
+
+
+
 ## [2.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/xpub-edit@2.6.0...xpub-edit@2.6.1) (2019-12-11)
 
 
