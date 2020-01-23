@@ -70,13 +70,14 @@ describe('Starting the server', () => {
 
       // Change directory to test/helpers, to reflect the env of an actual app
       // so that we can load packages/server/test/helpers/server/app.js
+      const cwd = process.cwd()
       process.chdir(path.join(__dirname, 'helpers'))
       const { startServer } = require('../src')
       const server = await startServer()
       const request = supertest(server.app)
       const verify = await request.get('/verify')
       expect(verify.status).toBe(200)
-
+      process.chdir(cwd)
       server.close(done)
     })
   })
