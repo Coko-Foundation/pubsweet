@@ -112,6 +112,26 @@ const configureApp = app => {
       .json({ message: err.message })
   })
 
+  // Actions to perform when the HTTP server starts listening
+  app.onListen = async server => {
+    const { addSubscriptions } = require('./graphql/subscriptions')
+
+    // Add GraphQL subscriptions
+    addSubscriptions(server)
+
+    // Manage job queue
+    const { startJobQueue } = require('./jobs')
+    await startJobQueue()
+  }
+
+  // Actions to perform when the server closes
+  app.onClose = async () => {
+    const wait = require('waait')
+    const { stopJobQueue } = require('./jobs')
+    await stopJobQueue()
+    return wait(500)
+  }
+
   return app
 }
 
