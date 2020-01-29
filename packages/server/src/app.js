@@ -21,8 +21,6 @@ const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
 
 const configureApp = app => {
-  global.versions = {}
-
   const models = require('@pubsweet/models')
   const authsome = require('./helpers/authsome')
 
@@ -113,6 +111,26 @@ const configureApp = app => {
       .status(err.status || STATUS.INTERNAL_SERVER_ERROR)
       .json({ message: err.message })
   })
+
+  // Actions to perform when the HTTP server starts listening
+  app.onListen = async server => {
+    const { addSubscriptions } = require('./graphql/subscriptions')
+
+    // Add GraphQL subscriptions
+    addSubscriptions(server)
+
+    // Manage job queue
+    const { startJobQueue } = require('./jobs')
+    await startJobQueue()
+  }
+
+  // Actions to perform when the server closes
+  app.onClose = async () => {
+    const wait = require('waait')
+    const { stopJobQueue } = require('./jobs')
+    await stopJobQueue()
+    return wait(500)
+  }
 
   return app
 }

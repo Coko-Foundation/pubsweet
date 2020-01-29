@@ -7,7 +7,7 @@ config.pubsweet.components.push(mockComponentPath)
 
 const api = require('./helpers/api')
 
-describe('App startup', async () => {
+describe('App startup', () => {
   it('should register components on config.pubsweet.components', async () => {
     const res = await api.request.get('/mock-component')
     expect(res.status).toBe(STATUS.OK)
