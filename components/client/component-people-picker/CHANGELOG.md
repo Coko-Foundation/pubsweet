@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.16...@pubsweet/component-people-picker@0.1.17) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/component-people-picker
+
+
+
+
+
 ## [0.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.15...@pubsweet/component-people-picker@0.1.16) (2020-01-23)
 
 **Note:** Version bump only for package @pubsweet/component-people-picker
