@@ -35,4 +35,4 @@ The [PubSweet website](http://pubsweet.coko.foundation) contains all of the docu
 
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
-<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
+<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.png" width="300" /></a>
