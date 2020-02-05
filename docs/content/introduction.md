@@ -28,7 +28,7 @@ This lock-in can be avoided by giving the ownership of the tools back to publish
 
 PubSweet is free Open Source software, so you don't have to pay to use it. You can modify it as much as you like, and use it for any purpose, including commercially and for-profit. The license (a popular and permissive open source licence called the MIT license) grants a perpetual right to use PubSweet in this way forever.
 
-Thanks to the focus on modularity, you can extend PubSweet with components. You can add new components, extend existing components, or recompose a set of components on both the cleint and server as much as you like. You can leverage the existing components contributed to the community to lessen your development time and speed up your delivery.
+Thanks to the focus on modularity, you can extend PubSweet with components. You can add new components, extend existing components, or recompose a set of components on both the client and server as much as you like. You can leverage the existing components contributed to the community to lessen your development time and speed up your delivery.
 
 <img src="pubsweet-components.svg" style="width: 100%;max-width: 1000px; display: block;margin: 1em auto;">
 
