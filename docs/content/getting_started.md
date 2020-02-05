@@ -1,6 +1,12 @@
 ## Install PubSweet and set up a new app
 
-So you've decided to give PubSweet a try? Awesome! Let's get started! You'll need a couple of things installed on your development machine before you get started: `Node.js` (version 10 or higher, [installation instructions](https://nodejs.org/en/download/)) or higher and `yarn` (version 1.15.2 or higher, [installation instructions](https://yarnpkg.com/lang/en/docs/install)).
+So you've decided to give PubSweet a try? Awesome! Let's get started! You'll need a couple of things installed on your development machine before you get started:
+
+- `Node.js` (version 10 or higher, [installation instructions](https://nodejs.org/en/download/))
+- `yarn` (version 1.15.2 or higher, [installation instructions](https://yarnpkg.com/lang/en/docs/install))
+- `git`, [installation instructions](https://git-scm.com/downloads)
+- `docker`, [installation instructions](https://docs.docker.com/install/)
+- `docker-compose`, [installation instructions](https://docs.docker.com/compose/install/)
 
 Once these are installed, you can install `pubsweet`, our command-line tool:
 
