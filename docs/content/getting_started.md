@@ -41,7 +41,7 @@ yarn start:services
 This starts the required PostgreSQL database and ensures your app can connect to it. The last step is to run:
 
 ```bash
-yarn server
+yarn pubsweet server
 ```
 
 This starts your server and also compiles your client-side application and provides you with a live-reloaded environment for development.
