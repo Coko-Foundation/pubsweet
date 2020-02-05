@@ -12,7 +12,7 @@ If someone has built an entire publishing platform which you like (for example, 
 
 Join the PubSweet community and help us build a common resource of open components for publishing by contributing components back.
 
-If you would like to talk to anyone for help working with PubSweet you can find us all on the [Coko Chat](https://mattermost.coko.foundation).
+If you would like to talk to anyone for help working with PubSweet you can find us all on the [Coko Chat](https://mattermost.coko.foundation/coko/channels/pubsweet) or [Coko Forum](https://discourse.coko.foundation/c/InstallingPubSweet/5).
 
 This page was created using [React Styleguidist](https://github.com/styleguidist/react-styleguidist) and the [code that generates it can be found in our repository](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/docs).
 
