@@ -35,6 +35,12 @@ You may set the `PATH` environment variable or simply replace the command `pubsw
 yarn pubsweet new yourAppName
 ```
 
+In case that `pubseet` command throws the error command not found, then `yarn global bin` is not in the right PATH. You can edit your `.bashrc`, `.zshrc`, `.profile` or `.bash_profile` file, based on which system you are using the name of the file might be different. Edit PATH as below:
+
+```bash
+export PATH="$(yarn global bin):$PATH"
+```
+
 This will initialize a new PubSweet application based on [PubSweet starter](https://gitlab.coko.foundation/pubsweet/pubsweet-starter).
 
 Once this is complete (it will also install the needed dependencies), you can start developing with PubSweet:
