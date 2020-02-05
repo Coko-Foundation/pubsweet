@@ -24,9 +24,17 @@ class User extends BaseModel {
   }
 
   static get relationMappings() {
-    const { Team, TeamMember } = require('@pubsweet/models')
+    const { Team, TeamMember, Identity } = require('@pubsweet/models')
 
     return {
+      identities: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: Identity,
+        join: {
+          from: 'user.id',
+          to: 'identity.userId',
+        },
+      },
       teams: {
         relation: BaseModel.ManyToManyRelation,
         modelClass: Team,
@@ -48,6 +56,7 @@ class User extends BaseModel {
       properties: {
         admin: { type: ['boolean', 'null'] },
         email: { type: 'string', format: 'email' },
+        defaultIdentity: { type: 'string' },
         username: { type: 'string', pattern: '^[a-zA-Z0-9]+' },
         passwordHash: { type: 'string' },
         passwordResetToken: { type: ['string', 'null'] },
