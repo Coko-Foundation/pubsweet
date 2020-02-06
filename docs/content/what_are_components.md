@@ -33,19 +33,12 @@ module.exports = {
 
 ## Client components
 
-All client component options are exported under the `client` key. The options that can be nested under this key are as follows:
-
-- `components`: An array of functions that return React components
+You can export your main React client component from the index.js file. Example as below:
 
 ```js static
-module.exports = {
-  client: {
-    components: \[
-      () => someReactComponent,
-      () => anotherReactComponent
-    \],
-  }
-}
+import Login from './LoginContainer'
+
+export default Login
 ```
 
 The [`login`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/client/component-login 'null') component is a good standing example of a client component. It (predictably) provides basic user login functionality in the client. It does this by exporting:
