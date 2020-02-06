@@ -26,6 +26,11 @@ describe('User mutations', () => {
       `mutation($input: UserInput) {
         createUser(input: $input) {
           username
+          defaultIdentity {
+            ... on Local {
+              email
+            }
+          }
         }
       }`,
       {
@@ -41,6 +46,9 @@ describe('User mutations', () => {
       data: {
         createUser: {
           username: 'hi',
+          defaultIdentity: {
+            email: 'hi@example.com',
+          },
         },
       },
     })

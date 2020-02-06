@@ -1,9 +1,6 @@
-ALTER TABLE users
-ADD COLUMN defaultIdentity TEXT;
-
 CREATE TABLE identities (
   id UUID PRIMARY KEY,
-  user_id uuid NOT NULL REFERENCES user,
+  user_id uuid NOT NULL REFERENCES users,
   created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
   updated TIMESTAMP WITH TIME ZONE,
   type TEXT NOT NULL, -- local, orcid
@@ -12,6 +9,11 @@ CREATE TABLE identities (
   aff TEXT,
   password_hash TEXT,
   email TEXT UNIQUE,
-  oauth JSONB
+  username TEXT UNIQUE,
+  oauth JSONB,
+  is_default BOOLEAN,
+  unique(user_id, is_default)
 );
+
+
 

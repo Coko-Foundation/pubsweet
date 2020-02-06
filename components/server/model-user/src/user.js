@@ -9,8 +9,6 @@ class User extends BaseModel {
   constructor(properties) {
     super(properties)
     this.type = 'user'
-    this.collections = this.collections || []
-    this.fragments = this.fragments || []
   }
 
   $formatJson(json) {
@@ -31,8 +29,19 @@ class User extends BaseModel {
         relation: BaseModel.HasManyRelation,
         modelClass: Identity,
         join: {
-          from: 'user.id',
-          to: 'identity.userId',
+          from: 'users.id',
+          to: 'identities.userId',
+        },
+      },
+      defaultIdentity: {
+        relation: BaseModel.HasOneRelation,
+        modelClass: Identity,
+        join: {
+          from: 'users.id',
+          to: 'identities.userId',
+        },
+        filter: builder => {
+          builder.where('isDefault', true)
         },
       },
       teams: {
@@ -42,8 +51,8 @@ class User extends BaseModel {
           from: 'users.id',
           through: {
             modelClass: TeamMember,
-            from: 'team_members.user_id',
-            to: 'team_members.team_id',
+            from: 'team_members.userId',
+            to: 'team_members.teamId',
           },
           to: 'teams.id',
         },
@@ -63,18 +72,6 @@ class User extends BaseModel {
         passwordResetTimestamp: {
           type: ['string', 'object', 'null'],
           format: 'date-time',
-        },
-        fragments: {
-          type: 'array',
-          items: { type: 'string', format: 'uuid' },
-        },
-        collections: {
-          type: 'array',
-          items: { type: 'string', format: 'uuid' },
-        },
-        teams: {
-          type: 'array',
-          items: { type: 'string', format: 'uuid' },
         },
       },
     }
@@ -111,6 +108,24 @@ class User extends BaseModel {
 
   static findByUsername(username) {
     return this.findByField('username', username).then(users => users[0])
+  }
+
+  static async findOneWithIdentity(userId, identityType) {
+    const { Identity } = require('@pubsweet/models')
+    const user = (
+      await this.query()
+        .alias('u')
+        .leftJoin(
+          Identity.query()
+            .where('type', identityType)
+            .as('i'),
+          'u.id',
+          'i.userId',
+        )
+        .where('u.id', userId)
+    )[0]
+
+    return user
   }
 
   // For API display/JSON purposes only

@@ -20,16 +20,28 @@ const resolvers = {
   },
   Mutation: {
     async createUser(_, { input }, ctx) {
-      if (input.password) {
-        input.passwordHash = await ctx.connectors.User.model.hashPassword(
-          input.password,
-        )
-        delete input.password
+      const Identity = ctx.connectors.Identity.model
+
+      const user = {
+        username: input.username,
       }
 
+      const passwordHash = await Identity.hashPassword(input.password)
+      const identity = {
+        type: 'local',
+        passwordHash,
+        email: input.email,
+        aff: input.aff,
+        name: input.name,
+        isDefault: true,
+      }
+      user.identities = [identity]
+
       try {
-        const user = await ctx.connectors.User.create(input, ctx)
-        return user
+        const result = await ctx.connectors.User.create(user, ctx, {
+          eager: 'defaultIdentity',
+        })
+        return result
       } catch (e) {
         if (e.constraint) {
           throw new ConflictError(
@@ -74,9 +86,17 @@ const resolvers = {
       }
     },
   },
+  Local: {
+    __isTypeOf: (obj, context, info) => obj.type === 'local',
+  },
+  External: {
+    __isTypeOf: (obj, context, info) => obj.type === 'external',
+  },
 }
 
 const typeDefs = `
+  scalar DateTime
+
   extend type Query {
     user(id: ID): User
     users: [User]
@@ -90,10 +110,32 @@ const typeDefs = `
 
   type User {
     id: ID!
-    type: String
+    created: DateTime!
+    updated: DateTime
     username: String
+    identities: [Identity]
+    defaultIdentity: Identity
+  }
+
+  type Name {
+    surname: String
+    givenNames: String
+    title: String
+  }
+
+  union Identity = Local | External
+
+  # local identity (not from ORCID, etc.)
+  type Local {
+    name: Name
     email: String
-    admin: Boolean
+    aff: String # JATS <aff>
+  }
+
+  type External {
+    identifier: String
+    email: String
+    aff: String # JATS <aff>
   }
 
   input UserInput {
