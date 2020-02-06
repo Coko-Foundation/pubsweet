@@ -33,12 +33,12 @@ module.exports = {
 
 ## Client components
 
-You can export your main React client component from the index.js file. Example as below:
+Client components are simply React components and can be exported eg.:
 
 ```js static
-import Login from './LoginContainer'
+import Component from './Component'
 
-export default Login
+export default Component
 ```
 
 The [`login`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/client/component-login 'null') component is a good standing example of a client component. It (predictably) provides basic user login functionality in the client. It does this by exporting:
