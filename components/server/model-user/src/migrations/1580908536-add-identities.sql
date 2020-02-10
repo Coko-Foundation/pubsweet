@@ -9,7 +9,6 @@ CREATE TABLE identities (
   aff TEXT,
   password_hash TEXT,
   email TEXT UNIQUE,
-  username TEXT UNIQUE,
   oauth JSONB,
   is_default BOOLEAN,
   unique(user_id, is_default)
