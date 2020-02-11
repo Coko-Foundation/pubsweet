@@ -3,7 +3,8 @@
   "version": "13.9.0",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "src/index.js",
   "dependencies": {
     "@pubsweet/db-manager": "^3.1.3",
     "@pubsweet/errors": "^2.0.28",
@@ -40,9 +41,24 @@
   "peerDependencies": {
     "@pubsweet/model-user": ">=5.0.0"
   },
+  "scripts": {
+    "build": "yarn run tsc",
+    "prepare": "yarn run build"
+  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
-  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
+  "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "enzyme-to-json": "^3.4.3",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^7.4.0"
+  }
 }

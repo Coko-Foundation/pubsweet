@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "types": [
+      "express",
+      "connect",
+      "body-parser",
+      "cors",
+      "events",
+      "express",
+      "graphql-upload",
+      "node",
+      "node-fetch",
+      "ws"
+    ]
+  },
+  "include": ["./src"]
+}
