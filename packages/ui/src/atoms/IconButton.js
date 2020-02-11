@@ -8,7 +8,7 @@ const UIButton = styled(Button)`
   line-height: calc(${th('gridUnit')} * 2);
 `
 
-const IconButton = ({ children, icon, ...props }) => (
+const IconButton = ({ icon, ...props }) => (
   <UIButton {...props}>
     <Icon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
@@ -21,8 +21,6 @@ const IconButton = ({ children, icon, ...props }) => (
 )
 
 IconButton.propTypes = {
-  /** The contents of the button (text, icon etc.) */
-  children: PropTypes.node,
   /** Icon name (An icon name, from the Feather icon set.) */
   icon: PropTypes.string,
   /** Makes button a primary button */
