@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { th } from '@pubsweet/ui-toolkit'
+import styled from 'styled-components'
 import { Button, Icon } from '../atoms'
 
+const UIButton = styled(Button)`
+  line-height: calc(${th('gridUnit')} * 2);
+`
+
 const IconButton = ({ children, icon, ...props }) => (
-  <Button {...props}>
+  <UIButton {...props}>
     <Icon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
       data-testid="iconButton"
@@ -12,7 +17,7 @@ const IconButton = ({ children, icon, ...props }) => (
     >
       {icon}{' '}
     </Icon>
-  </Button>
+  </UIButton>
 )
 
 IconButton.propTypes = {

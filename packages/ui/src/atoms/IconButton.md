@@ -7,5 +7,5 @@ A primary IconButton
 A non-primary IconButton
 
 ```js
-<IconButton icon="plus-circle" />
+<IconButton icon="plus" />
 ```
