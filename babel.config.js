@@ -28,6 +28,13 @@ module.exports = api => {
       test: ['./components/server/*'],
       presets: [['@babel/preset-env', { targets: { node: true } }]],
     },
+    {
+      test: ['./packages/server'],
+      presets: [
+        ['@babel/preset-env', { targets: { node: 'current' } }],
+        '@babel/preset-typescript',
+      ],
+    },
   ]
 
   return {
