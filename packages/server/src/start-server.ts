@@ -1,10 +1,10 @@
 const express = require('express')
+import PubSweet from './types'
 
 let server
 
-const startServer = async (app = express()) => {
+const startServer = async (app: PubSweet.Application = express()) => {
   if (server) return server
-
   const http = require('http')
   const config = require('config')
   const fs = require('fs')
@@ -31,6 +31,7 @@ const startServer = async (app = express()) => {
   const port = config['pubsweet-server'].port || 3000
   configuredApp.set('port', port)
   const httpServer = http.createServer(configuredApp)
+
   httpServer.app = configuredApp
 
   logger.info(`Starting HTTP server`)
@@ -41,6 +42,7 @@ const startServer = async (app = express()) => {
   await configuredApp.onListen(httpServer)
 
   httpServer.originalClose = httpServer.close
+
   httpServer.close = async cb => {
     server = undefined
     await configuredApp.onClose()

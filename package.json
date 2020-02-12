@@ -14,6 +14,7 @@
     "@commitlint/config-conventional": "^6.0.4",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^9.0.0",
+    "@types/jest": "^25.1.2",
     "@types/node": "^13.7.0",
     "apollo-link-http": "^1.5.16",
     "babel-eslint": "^10.0.1",
@@ -38,7 +39,7 @@
     "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-form-data": "^1.0.0",
-    "jest": "^24.7.1",
+    "jest": "^25.1.0",
     "jest-cli": "^24.7.1",
     "jest-styled-components": "^6.3.1",
     "lerna": "^3.13.2",
@@ -52,6 +53,7 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.8.0",
     "supertest": "^3.1.0",
+    "ts-jest": "^25.2.0",
     "typescript": "^3.7.5",
     "waait": "^1.0.2"
   },
@@ -83,6 +85,7 @@
     "projects": [
       {
         "rootDir": "<rootDir>/packages/server",
+        "preset": "ts-jest",
         "displayName": "server",
         "testEnvironment": "jest-environment-db",
         "testRegex": "/test/.*_test.js$",

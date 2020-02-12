@@ -1,10 +1,12 @@
+import PubSweet from './types'
+import express from 'express'
+
 const path = require('path')
 const config = require('config')
 
 const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
 
-const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
@@ -20,7 +22,7 @@ const _ = require('lodash/fp')
 const STATUS = require('http-status-codes')
 const registerComponents = require('./register-components')
 
-const configureApp = app => {
+const configureApp = (app: PubSweet.Application) => {
   const models = require('@pubsweet/models')
   const authsome = require('./helpers/authsome')
 
