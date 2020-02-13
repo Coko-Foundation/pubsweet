@@ -9,6 +9,7 @@ describe('job runner in a different process', () => {
     jobQueue = await startJobQueue()
   })
 
+  // eslint-disable-next-line jest/no-test-callback
   it('submits a job and gets notified on completion', async done => {
     const queueName = 'aJobQueue2'
 

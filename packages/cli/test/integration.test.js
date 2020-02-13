@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000000
+jest.setTimeout(6000000)
 
 const path = require('path')
 const fs = require('fs-extra')
@@ -99,32 +99,33 @@ describe('CLI: integration test', () => {
   })
 
   describe('server', () => {
-    it('starts an app', done => {
-      const app = runCommandAsync({
-        args: 'server',
-        cwd: appPath,
-        stdio: 'pipe',
-        nodeConfig,
-      })
+    it('starts an app', () =>
+      new Promise((resolve, reject) => {
+        const app = runCommandAsync({
+          args: 'server',
+          cwd: appPath,
+          stdio: 'pipe',
+          nodeConfig,
+        })
 
-      app.stderr.on('data', data => {
-        console.log('stderr:', data.toString())
-      })
+        app.stderr.on('data', data => {
+          console.log('stderr:', data.toString())
+        })
 
-      app.stdout.on('data', async data => {
-        console.log('stdout:', data.toString())
-        if (data.toString().includes('App is listening')) {
-          const result = await fetch('http://localhost:3000')
-          expect(result.status).toBe(200)
-          console.log('Killing the app')
-          process.kill(-app.pid)
-        }
-      })
+        app.stdout.on('data', async data => {
+          console.log('stdout:', data.toString())
+          if (data.toString().includes('App is listening')) {
+            const result = await fetch('http://localhost:3000')
+            expect(result.status).toBe(200)
+            console.log('Killing the app')
+            process.kill(-app.pid)
+          }
+        })
 
-      app.on('close', (code, signal) => {
-        console.log(`App killed ${signal}`)
-        done()
-      })
-    })
+        app.on('close', (code, signal) => {
+          console.log(`App killed ${signal}`)
+          resolve()
+        })
+      }))
   })
 })

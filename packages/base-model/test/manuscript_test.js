@@ -114,6 +114,8 @@ describe('Manuscript', () => {
   it('can assign to special properties', () => {
     const manuscript = new Manuscript()
     manuscript['#id'] = 'idref'
+
+    expect(manuscript['#id']).toEqual('idref')
   })
 
   it('takes schema specified in config into account', async () => {

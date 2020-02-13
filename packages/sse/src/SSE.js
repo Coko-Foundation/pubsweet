@@ -35,7 +35,7 @@ class SSE extends EventEmitter {
     }
 
     const writeMessage = message => {
-      this.messageId = this.messageId + 1
+      this.messageId += 1
       write('id', this.messageId)
 
       if (message.event) {

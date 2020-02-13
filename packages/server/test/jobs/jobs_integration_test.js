@@ -17,6 +17,7 @@ describe('integrated job queue', () => {
 
   // This is to verify that pg-boss has been setup with pg-boss.start()
   // in the process of starting pubsweet-server
+  // eslint-disable-next-line jest/no-test-callback
   it('ready to connect and process jobs when server starts', async done => {
     const queueName = 'aJobQueue3'
 

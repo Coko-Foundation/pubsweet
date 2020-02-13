@@ -51,14 +51,8 @@ describe('Logging manager', () => {
   describe('when configure method is passed another logger', () => {
     it('throws an error if a required method is not implemented', () => {
       const logger = require('../src/')
+      expect(() => logger.configure({})).toThrow()
       expect.hasAssertions()
-
-      // https://github.com/facebook/jest/issues/2124
-      try {
-        logger.configure({})
-      } catch (e) {
-        expect(e.name).toBe('ValidationError')
-      }
     })
 
     it('works with winston', () => {
@@ -127,11 +121,7 @@ describe('Logging manager', () => {
       config['pubsweet-server'] = { logger: 'wiiiiiiiiinston' }
       expect.hasAssertions()
 
-      try {
-        require('../src/')
-      } catch (e) {
-        expect(e.name).toBe('ValidationError')
-      }
+      expect(() => require('../src')).toThrow('must be an object')
     })
 
     it('prevents configuration again', () => {

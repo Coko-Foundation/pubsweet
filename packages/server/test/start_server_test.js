@@ -6,6 +6,7 @@ describe('Starting the server', () => {
     process.env.NODE_CONFIG = '{"pubsweet-server":{"port":4001}}'
     const { startServer } = require('../src')
 
+    // eslint-disable-next-line jest/no-test-callback
     it('starts the server and returns it with express app attached', async done => {
       const server = await startServer()
       expect(server.listening).toBe(true)
@@ -13,6 +14,7 @@ describe('Starting the server', () => {
       server.close(done)
     })
 
+    // eslint-disable-next-line jest/no-test-callback
     it('returns the server if it is already running', async done => {
       const server = await startServer()
       server.originalServer = true
@@ -40,6 +42,7 @@ describe('Starting the server', () => {
       await expect(startServer()).rejects.toThrow('Cannot find module')
     })
 
+    // eslint-disable-next-line jest/no-test-callback
     it('starts the app using the custom file', async done => {
       process.env.NODE_CONFIG = JSON.stringify({
         'pubsweet-server': {
@@ -61,6 +64,7 @@ describe('Starting the server', () => {
       server.close(done)
     })
 
+    // eslint-disable-next-line jest/no-test-callback
     it('starts the app using a custom file at ./server/app.js', async done => {
       process.env.NODE_CONFIG = JSON.stringify({
         'pubsweet-server': {

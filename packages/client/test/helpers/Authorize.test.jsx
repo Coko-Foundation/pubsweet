@@ -149,7 +149,7 @@ function makeDeepWrapper(currentUser, props = {}) {
   )
 }
 
-export async function updateWrapper(wrapper, amount = 0) {
+async function updateWrapper(wrapper, amount = 0) {
   await act(async () => {
     await wait(amount)
     wrapper.update()

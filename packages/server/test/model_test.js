@@ -67,11 +67,9 @@ describe('Model', () => {
 
     const sameUser = await User.find(user.id)
 
-    try {
-      await Promise.all([user.save(), sameUser.save()])
-    } catch (e) {
-      expect(e.message).toMatch('Integrity Error')
-    }
+    await expect(Promise.all([user.save(), sameUser.save()])).rejects.toThrow(
+      'Integrity Error',
+    )
   })
 
   it('can find by multiple fields', async () => {

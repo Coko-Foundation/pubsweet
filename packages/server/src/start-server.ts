@@ -1,15 +1,19 @@
-const express = require('express')
-import PubSweet from './types'
+import express from 'express'
+import { promisify } from 'util'
+import * as PubSweet from './types'
+
+import http = require('http')
+import config = require('config')
+import fs = require('fs')
+import path = require('path')
+import logger = require('@pubsweet/logger')
 
 let server
 
-const startServer = async (app: PubSweet.Application = express()) => {
+const startServer = async (
+  app: PubSweet.Application = express(),
+): Promise<PubSweet.Server> => {
   if (server) return server
-  const http = require('http')
-  const config = require('config')
-  const fs = require('fs')
-  const path = require('path')
-  const logger = require('@pubsweet/logger')
 
   let configureApp
   // ./server/app.js in your app is used if it exist,
@@ -30,12 +34,14 @@ const startServer = async (app: PubSweet.Application = express()) => {
   const configuredApp = configureApp(app)
   const port = config['pubsweet-server'].port || 3000
   configuredApp.set('port', port)
-  const httpServer = http.createServer(configuredApp)
+  const httpServer = (http.createServer(
+    configuredApp,
+  ) as unknown) as PubSweet.Server
 
   httpServer.app = configuredApp
 
   logger.info(`Starting HTTP server`)
-  const { promisify } = require('util')
+
   const startListening = promisify(httpServer.listen).bind(httpServer)
   await startListening(port)
   logger.info(`App is listening on port ${port}`)
@@ -43,7 +49,7 @@ const startServer = async (app: PubSweet.Application = express()) => {
 
   httpServer.originalClose = httpServer.close
 
-  httpServer.close = async cb => {
+  httpServer.close = async (cb): Promise<void> => {
     server = undefined
     await configuredApp.onClose()
     return httpServer.originalClose(cb)

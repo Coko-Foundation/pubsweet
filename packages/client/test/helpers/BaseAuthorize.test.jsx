@@ -41,14 +41,11 @@ describe('<Authorize/>', () => {
 
     rejectMode(new Error('Authorize test error'))
 
-    try {
-      await modePromise
-    } catch (err) {
-      wrapper.update()
-      expect(wrapper.type()).toBe(null)
-      await setImmediatePromise()
-      expect(console.error).toHaveBeenCalled()
-    }
+    await expect(modePromise).rejects.toThrow('Authorize test error')
+    wrapper.update()
+    expect(wrapper.type()).toBe(null)
+    await setImmediatePromise()
+    expect(console.error).toHaveBeenCalled()
 
     expect.hasAssertions()
   })

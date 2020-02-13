@@ -12,7 +12,7 @@ const authBearer = passport.authenticate('bearer', { session: false })
 const storage = multer.diskStorage({
   destination: config.get('pubsweet-server').uploads,
   filename(req, file, cb) {
-    crypto.pseudoRandomBytes(16, (err, raw) => {
+    crypto.randomBytes(16, (err, raw) => {
       if (err) {
         cb(err)
         return

@@ -1,31 +1,38 @@
-import PubSweet from './types'
 import express from 'express'
+import wait from 'waait'
+import PubSweet from './types'
 
-const path = require('path')
-const config = require('config')
+import path = require('path')
+import config = require('config')
 
 const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
 
-const morgan = require('morgan')
-const helmet = require('helmet')
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const passport = require('passport')
-const gqlApi = require('./graphql/api')
-const index = require('./routes/index')
-const api = require('./routes/api')
-const logger = require('@pubsweet/logger')
-const sse = require('pubsweet-sse')
+import morgan = require('morgan')
+import helmet = require('helmet')
+import cookieParser = require('cookie-parser')
+import bodyParser = require('body-parser')
+import _ = require('lodash/fp')
+import STATUS = require('http-status-codes')
 
-const _ = require('lodash/fp')
-const STATUS = require('http-status-codes')
-const registerComponents = require('./register-components')
+import passport = require('passport')
+import logger = require('@pubsweet/logger')
+import sse = require('pubsweet-sse')
+import gqlApi = require('./graphql/api')
+import index = require('./routes/index')
+import api = require('./routes/api')
 
-const configureApp = (app: PubSweet.Application) => {
-  const models = require('@pubsweet/models')
-  const authsome = require('./helpers/authsome')
+import registerComponents = require('./register-components')
 
+import models = require('@pubsweet/models')
+import authsome = require('./helpers/authsome')
+
+import authentication = require('./authentication')
+
+import subscriptions = require('./graphql/subscriptions')
+import jobs = require('./jobs')
+
+const configureApp = (app: PubSweet.Application): PubSweet.Application => {
   app.locals.models = models
 
   app.use(bodyParser.json({ limit: '50mb' }))
@@ -60,7 +67,6 @@ const configureApp = (app: PubSweet.Application) => {
   }
   // Passport strategies
   app.use(passport.initialize())
-  const authentication = require('./authentication')
 
   // Register passport authentication strategies
   passport.use('bearer', authentication.strategies.bearer)
@@ -115,22 +121,20 @@ const configureApp = (app: PubSweet.Application) => {
   })
 
   // Actions to perform when the HTTP server starts listening
-  app.onListen = async server => {
-    const { addSubscriptions } = require('./graphql/subscriptions')
-
+  app.onListen = async (server): Promise<void> => {
     // Add GraphQL subscriptions
-    addSubscriptions(server)
+    subscriptions.addSubscriptions(server)
 
     // Manage job queue
-    const { startJobQueue } = require('./jobs')
-    await startJobQueue()
+    // const { staratJobQueue } = jobs
+    await jobs.startJobQueue()
   }
 
   // Actions to perform when the server closes
-  app.onClose = async () => {
-    const wait = require('waait')
-    const { stopJobQueue } = require('./jobs')
-    await stopJobQueue()
+  app.onClose = async (): Promise<void> => {
+    // const wait = require('waait')
+    // const { stopJobQueue } = require('./jobs')
+    await jobs.stopJobQueue()
     return wait(500)
   }
 

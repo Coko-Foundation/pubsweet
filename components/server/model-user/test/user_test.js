@@ -29,11 +29,9 @@ describe('User', () => {
 
     await user.save()
 
-    try {
-      await duplicateUser.save()
-    } catch (err) {
-      expect(err.name).toEqual('error')
-    }
+    await expect(duplicateUser.save()).rejects.toThrow(
+      'violates unique constraint',
+    )
 
     expect.hasAssertions()
   })
@@ -46,11 +44,9 @@ describe('User', () => {
 
     await user.save()
 
-    try {
-      await duplicateUser.save()
-    } catch (err) {
-      expect(err.name).toEqual('error')
-    }
+    await expect(duplicateUser.save()).rejects.toThrow(
+      'violates unique constraint',
+    )
 
     expect.hasAssertions()
   })
