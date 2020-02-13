@@ -1,12 +1,11 @@
 import express from 'express'
 import { promisify } from 'util'
+import http from 'http'
+import config from 'config'
+import fs from 'fs'
+import path from 'path'
+import logger from '@pubsweet/logger'
 import * as PubSweet from './types'
-
-import http = require('http')
-import config = require('config')
-import fs = require('fs')
-import path = require('path')
-import logger = require('@pubsweet/logger')
 
 let server
 
@@ -46,7 +45,6 @@ const startServer = async (
   await startListening(port)
   logger.info(`App is listening on port ${port}`)
   await configuredApp.onListen(httpServer)
-
   httpServer.originalClose = httpServer.close
 
   httpServer.close = async (cb): Promise<void> => {

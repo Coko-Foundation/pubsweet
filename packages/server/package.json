@@ -4,7 +4,7 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "src/index.js",
+  "types": "dist/types.d.ts",
   "dependencies": {
     "@pubsweet/db-manager": "^3.1.3",
     "@pubsweet/errors": "^2.0.28",

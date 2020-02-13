@@ -1,36 +1,31 @@
 import express from 'express'
 import wait from 'waait'
-import PubSweet from './types'
+import path from 'path'
+import config from 'config'
+import morgan from 'morgan'
+import helmet from 'helmet'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import _ from 'lodash/fp'
+import STATUS from 'http-status-codes'
+import models from '@pubsweet/models'
 
-import path = require('path')
-import config = require('config')
+import passport from 'passport'
+import logger from '@pubsweet/logger'
+import sse from 'pubsweet-sse'
+import gqlApi from './graphql/api'
+import index from './routes/index'
+import api from './routes/api'
+
+import registerComponents from './register-components'
+import * as PubSweet from './types'
+import authsome from './helpers/authsome'
+import authentication from './authentication'
+import subscriptions from './graphql/subscriptions'
+import jobs from './jobs'
 
 const dotenvPath = path.resolve(`.env.${config.util.getEnv('NODE_ENV')}`)
 require('dotenv').config({ path: dotenvPath })
-
-import morgan = require('morgan')
-import helmet = require('helmet')
-import cookieParser = require('cookie-parser')
-import bodyParser = require('body-parser')
-import _ = require('lodash/fp')
-import STATUS = require('http-status-codes')
-
-import passport = require('passport')
-import logger = require('@pubsweet/logger')
-import sse = require('pubsweet-sse')
-import gqlApi = require('./graphql/api')
-import index = require('./routes/index')
-import api = require('./routes/api')
-
-import registerComponents = require('./register-components')
-
-import models = require('@pubsweet/models')
-import authsome = require('./helpers/authsome')
-
-import authentication = require('./authentication')
-
-import subscriptions = require('./graphql/subscriptions')
-import jobs = require('./jobs')
 
 const configureApp = (app: PubSweet.Application): PubSweet.Application => {
   app.locals.models = models
