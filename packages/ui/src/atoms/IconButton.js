@@ -1,19 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { th } from '@pubsweet/ui-toolkit'
 import { Button, Icon } from '../atoms'
 
+const UIIcon = styled(Icon)`
+  vertical-align: text-bottom;
+  padding: 0;
+`
+
 const IconButton = ({ icon, children, iconPosition, ...props }) => (
   <Button {...props}>
-    {children != null && iconPosition === 'end' && <span>{children}</span>}
-    <Icon
+    {children && iconPosition === 'end' && <span>{children}</span>}
+    <UIIcon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
-      size={2}
+      size={3}
       {...props}
     >
       {icon}{' '}
-    </Icon>
-    {children != null && iconPosition === 'start' && <span>{children}</span>}
+    </UIIcon>
+    {children && iconPosition === 'start' && <span>{children}</span>}
   </Button>
 )
 
