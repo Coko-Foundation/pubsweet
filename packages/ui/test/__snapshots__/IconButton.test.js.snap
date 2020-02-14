@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton renders correctly 1`] = `
+.c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc( / 2);
+}
+
+.c1 svg {
+  width: calc(3 * );
+  height: calc(3 * );
+}
+
+.c0 {
+  line-height: calc( * 3);
+  min-width: calc( * 12);
+}
+
+.c0:focus,
+.c0:hover {
+  background-color: hsl(0,0%,0%);
+}
+
+.c0:active {
+  background-color: hsl(0,0%,0%);
+}
+
+.c0[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.c2 {
+  vertical-align: text-bottom;
+  padding: 0;
+}
+
+<button
+  className="c0"
+  type="button"
+>
+  <span
+    className="c1 c2"
+    color={[Function]}
+    role="img"
+    size={3}
+  >
+    <svg
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line
+        x1="12"
+        x2="12"
+        y1="5"
+        y2="19"
+      />
+      <line
+        x1="5"
+        x2="19"
+        y1="12"
+        y2="12"
+      />
+    </svg>
+  </span>
+  <span>
+    Add
+  </span>
+</button>
+`;

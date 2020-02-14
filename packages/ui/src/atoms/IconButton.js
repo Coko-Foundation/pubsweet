@@ -10,7 +10,7 @@ const UIIcon = styled(Icon)`
 `
 
 const IconButton = ({ icon, children, iconPosition, ...props }) => (
-  <Button data-test-id={props['data-test-id']} {...props}>
+  <Button {...props}>
     {children && iconPosition === 'end' && <span>{children}</span>}
     <UIIcon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
