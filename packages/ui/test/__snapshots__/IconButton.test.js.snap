@@ -34,8 +34,11 @@ exports[`IconButton renders correctly 1`] = `
 }
 
 .c2 {
-  vertical-align: text-bottom;
-  padding: 0;
+  vertical-align: middle;
+}
+
+.c3 {
+  vertical-align: middle;
 }
 
 <button
@@ -70,7 +73,9 @@ exports[`IconButton renders correctly 1`] = `
       />
     </svg>
   </span>
-  <span>
+  <span
+    className="c3"
+  >
     Add
   </span>
 </button>
