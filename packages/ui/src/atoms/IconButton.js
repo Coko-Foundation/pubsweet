@@ -5,13 +5,17 @@ import { th } from '@pubsweet/ui-toolkit'
 import { Button, Icon } from '../atoms'
 
 const UIIcon = styled(Icon)`
-  vertical-align: text-bottom;
-  padding: 0;
+  vertical-align: middle;
+`
+const ButtonTitle = styled.span`
+  vertical-align: middle;
 `
 
 const IconButton = ({ icon, children, iconPosition, ...props }) => (
   <Button {...props}>
-    {children && iconPosition === 'end' && <span>{children}</span>}
+    {children && iconPosition === 'end' && (
+      <ButtonTitle>{children}</ButtonTitle>
+    )}
     <UIIcon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
       size={3}
@@ -19,7 +23,9 @@ const IconButton = ({ icon, children, iconPosition, ...props }) => (
     >
       {icon}{' '}
     </UIIcon>
-    {children && iconPosition === 'start' && <span>{children}</span>}
+    {children && iconPosition === 'start' && (
+      <ButtonTitle>{children}</ButtonTitle>
+    )}
   </Button>
 )
 
