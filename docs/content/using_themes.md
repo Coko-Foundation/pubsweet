@@ -72,6 +72,7 @@ Variables are named according to a convention using camel case and two or option
 - `colorFurniture`: Meant to be applied to elements that indicate content division
 - `colorError`: Used to indicate an error in validation
 - `colorSuccess`: Used to indicate a successful validation state
+- `colorWarning`: Used to indicate a validation warning
 - `colorText`: Default font color
 - `colorTextReverse`: Reverse font color
 - `colorTextPlaceholder`: Used for text field placeholders
@@ -89,7 +90,8 @@ Variables are named according to a convention using camel case and two or option
 - `fontSizeHeading4`: Size for Heading 4
 - `fontSizeHeading5`: Size for Heading 5
 - `fontSizeHeading6`: Size for Heading 6
-- `fontLineHeight`: Default line height
+- `lineHeightBase`: Default line height
+- `lineHeightBaseSmall`: Small line height
 
 ### Spacing
 
