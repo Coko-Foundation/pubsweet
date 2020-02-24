@@ -17,7 +17,7 @@
     "dataloader": "^1.4.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.1.0",
     "graphql": "^14.2.1",
     "graphql-postgres-subscriptions": "^1.0.4",
     "helmet": "^3.8.1",

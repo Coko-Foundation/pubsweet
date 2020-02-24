@@ -16,7 +16,7 @@
   "dependencies": {
     "@hapi/joi": "^14.3.0",
     "@pubsweet/logger": "^0.2.38",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^8.1.0",
     "knex": "^0.16.3",
     "lodash": "^4.17.11",
     "objection": "^1.5.3",
