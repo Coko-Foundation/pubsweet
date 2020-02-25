@@ -33,7 +33,8 @@
     "pubsweet-server": ">=13.0.0"
   },
   "scripts": {
-    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js",
+    "prepare": "yarn run build"
   },
   "repository": {
     "type": "git",

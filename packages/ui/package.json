@@ -27,7 +27,8 @@
     "styled-components": "^4.1.1"
   },
   "scripts": {
-    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs",
+    "prepare": "yarn run build"
   },
   "publishConfig": {
     "access": "public"
