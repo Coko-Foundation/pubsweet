@@ -49,19 +49,19 @@ export default {
 
     &:focus + span:before {
       box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
-        ${th('colorPrimary')};
+        ${th('colorSecondary')};
     }
   `,
   Root: css`
     transition: all 2s;
 
     &:hover span {
-      color: ${th('colorPrimary')};
+      /* color: ${th('colorSecondary')}; */
 
       &:before {
         animation: ${checking} 0.5s;
-        background: ${th('colorPrimary')};
-        box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
+        /* background: ${th('colorPrimary')}; */
+        box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorSecondary')};
       }
     }
   `,
