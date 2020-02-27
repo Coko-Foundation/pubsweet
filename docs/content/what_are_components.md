@@ -53,7 +53,7 @@ A data model lives in its own database table, as defined in its migration(s). Mi
 
 For a data model package, its exports are defined:
 
-```
+```js static
 module.exports = {
   typeDefs: // GraphQL type definitions
   resolvers: // GraphQL resolvers
@@ -73,7 +73,7 @@ If you use @pubsweet/model-some-model in your application (by specifying it as a
 
 PubSweet provides support for extending data models (i.e., creating a model based on another model). From the /extended-data-model-componentyou can see an example of an extended data model used for testing purposes. It exports the following:
 
-```
+```js static
 module.exports = {
   typeDefs:
   resolvers:
@@ -89,7 +89,7 @@ This is similar to the non-extended data model, but the one big exception, the e
 
 To use the above models, all you need to do is to add them to the pubsweet.components configuration, e.g.:
 
-```
+```js static
  pubsweet: {
     components: ['@pubsweet/model-some-model'],
   },
@@ -109,7 +109,7 @@ Most of the components in the Components Library use a number of smaller, highly
 
 [PubSweet UI](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/ui 'undefined') (`@pubsweet/ui`) is an important PubSweet package intended to house these small components. It makes an ever-expanding list of these components available for developers, and plays a central role in the development flow of a front-end component. UI elements are categorized based on a loose adherence to the principles of [atomic design](http://bradfrost.com/blog/post/atomic-web-design/ 'undefined').
 
-PubSweet also provides a [complementary library](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/ui-toolkit 'undefined') (`@pubsweet/ui-toolkit`) that provides some helper functions (more on that in [the theming section of this book](inline 'undefined')), as well as bits of reusable CSS (eg. rotation keyframes animations, fade ins etc.).
+PubSweet also provides a [complementary library](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/ui-toolkit 'undefined') (`@pubsweet/ui-toolkit`) that provides some helper functions (more on that in [the theming section of this book](#/Theming 'undefined')), as well as bits of reusable CSS (eg. rotation keyframes animations, fade ins etc.).
 
 ## Conventional Commits
 

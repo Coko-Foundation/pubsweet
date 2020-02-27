@@ -1,4 +1,4 @@
-The philosophy of workflow design articulated in the “[Platform Design](inline 'undefined')” section places emphasis on making the same Workspaces reusable by many different kinds of users. The system for deciding how a workspace should appear for different kinds of users must therefore encapsulate a significant amount of the workflow logic, and needs to be highly flexible. PubSweet's answer to this problem is the Authsome module.
+The philosophy of workflow design articulated in the “[Platform Design](#/Designing%20workflow 'undefined')” section places emphasis on making the same Workspaces reusable by many different kinds of users. The system for deciding how a workspace should appear for different kinds of users must therefore encapsulate a significant amount of the workflow logic, and needs to be highly flexible. PubSweet's answer to this problem is the Authsome module.
 
 The publishing world has a unique combination of requirements when it comes to authorization:
 
