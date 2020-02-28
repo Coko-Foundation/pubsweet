@@ -1,13 +1,13 @@
 {
   "name": "@pubsweet/component-password-reset-client",
-  "version": "3.1.20",
+  "version": "3.1.21",
   "description": "Password reset client component for PubSweet",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^12.3.0",
-    "@pubsweet/ui-toolkit": "^2.2.18",
+    "@pubsweet/ui": "^12.3.1",
+    "@pubsweet/ui-toolkit": "^2.2.19",
     "graphql-tag": "^2.10.1",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0"
