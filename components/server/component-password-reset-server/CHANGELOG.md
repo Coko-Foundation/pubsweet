@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-server@2.2.4...@pubsweet/component-password-reset-server@2.2.5) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-server
+
+
+
+
+
+## [2.2.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-server@2.2.3...@pubsweet/component-password-reset-server@2.2.4) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-server
+
+
+
+
+
 ## [2.2.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-server@2.2.2...@pubsweet/component-password-reset-server@2.2.3) (2020-01-29)
 
 **Note:** Version bump only for package @pubsweet/component-password-reset-server

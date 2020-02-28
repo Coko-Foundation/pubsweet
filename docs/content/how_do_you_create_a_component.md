@@ -6,7 +6,7 @@ Usually components are developed with reusabilty in mind, but they also follow Y
 
 If you develop components, please add them to the library. If you use components developed by others, please consider helping maintain them by reporting issues and contributing bug fixes.
 
-The process for contributing a component, or any other code, is described in the [Contributing to PubSweet](inline 'undefined') chapter. The technical requirements and suggestions for components are outlined below:
+The process for contributing a component, or any other code, is described in the [Contributing to PubSweet](#/Contributing 'undefined') chapter. The technical requirements and suggestions for components are outlined below:
 
 # Development
 

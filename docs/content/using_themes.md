@@ -14,11 +14,11 @@ Despite these extension points, sometimes the theme is not enough and the compon
 
 Hindawi and eLife collaborating on component styling
 
-As a last resort, you always have the choice of creating your own custom components. See [Creating a component](inline 'undefined') for more information, and the chapter on [Contributing to PubSweet](inline 'undefined') to learn how and when to feed such efforts back to the community.
+As a last resort, you always have the choice of creating your own custom components. See [Creating a component](#/Components?id=section-how-do-you-create-a-component 'undefined') for more information, and the chapter on [Contributing to PubSweet](#/Contributing 'undefined') to learn how and when to feed such efforts back to the community.
 
 # Using themes
 
-To get started with the default PubSweet theme, you need to pass it as a prop to the `Root` React component from`pubsweet-client`, generally in your `app.js` file. This will make it available to all the Styled Components in the app as `props.theme`. See [Getting Started with PubSweet](inline 'undefined') for an example `app.js` file.
+To get started with the default PubSweet theme, you need to pass it as a prop to the `Root` React component from`pubsweet-client`, generally in your `app.js` file. This will make it available to all the Styled Components in the app as `props.theme`. See [Getting Started with PubSweet](#/Getting%20started 'undefined') for an example `app.js` file.
 
 ## About theme variables
 
@@ -72,6 +72,7 @@ Variables are named according to a convention using camel case and two or option
 - `colorFurniture`: Meant to be applied to elements that indicate content division
 - `colorError`: Used to indicate an error in validation
 - `colorSuccess`: Used to indicate a successful validation state
+- `colorWarning`: Used to indicate a validation warning
 - `colorText`: Default font color
 - `colorTextReverse`: Reverse font color
 - `colorTextPlaceholder`: Used for text field placeholders
@@ -89,7 +90,8 @@ Variables are named according to a convention using camel case and two or option
 - `fontSizeHeading4`: Size for Heading 4
 - `fontSizeHeading5`: Size for Heading 5
 - `fontSizeHeading6`: Size for Heading 6
-- `fontLineHeight`: Default line height
+- `lineHeightBase`: Default line height
+- `lineHeightBaseSmall`: Small line height
 
 ### Spacing
 

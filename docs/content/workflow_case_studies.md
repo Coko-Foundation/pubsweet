@@ -1,6 +1,6 @@
 # eLife case study
 
-[eLife Sciences Publications Ltd](elifesciences.org 'undefined') is an Open Access journal that publishes promising research in the life and biomedical sciences. eLife is currently in the process of building an application based on PubSweet for its manuscript submission process.
+[eLife Sciences Publications Ltd](https://elifesciences.org 'undefined') is an Open Access journal that publishes promising research in the life and biomedical sciences. eLife is currently in the process of building an application based on PubSweet for its manuscript submission process.
 
 At the start of the project, eLife's initial driver was to understand the publishing workflow from a user's perspective. To do this, eLife ran a three-day workshop with a representative group of users with the aim of understanding and recording the current pain points, goals and user's needs. The output from this activity was a rich set of highly dense information. To help feed the design process, these were turned into user stories and categorized using a Trello board.
 
@@ -34,7 +34,7 @@ This step was very useful in refining the interface designs and led to significa
 
 # Hindawi case study
 
-Hindawi is one of the world’s largest publishers of peer-reviewed, fully Open Access journals. Built on an ethos of openness, Hindawi is passionate about working with the global academic community to promote open scholarly research to the world. Hindawi's experience with PubSweet is an excellent illustration of the option to “build-only-what-you-need” approach.
+[Hindawi](https://hindawi.com/ 'undefined') is one of the world’s largest publishers of peer-reviewed, fully Open Access journals. Built on an ethos of openness, Hindawi is passionate about working with the global academic community to promote open scholarly research to the world. Hindawi's experience with PubSweet is an excellent illustration of the option to “build-only-what-you-need” approach.
 
 Hindawi currently operates its peer review process with a distributed Editorial Board model. PubSweet enabled Hindawi to experiment by adding additional oversight with a new Editor in Chief (EiC) role by building the requisite functionality into a new submission system. To start this process, Hindawi took many of the workflows and diagrams that existed for the current Hindawi system, and applied them to the a new EiC model.
 
@@ -56,7 +56,7 @@ It is also worth mentioning that the logic governing the editor's process was de
 
 Europe PMC staff at the European Bioinformatics Institute (EMBL-EBI) are currently in the process of redeveloping Europe PMC plus using PubSweet. Because Europe PMC plus only accepts articles that have already been peer reviewed and accepted for publication, and requires a full publication citation before the submission is considered complete, the Europe PMC plus workflow and data requirements are somewhat different from those of the journal publishers using PubSweet. The editorial staff and requirements are also much more circumscribed.
 
-At the start of the redevelopment project, Europe PMC team members worked together with Adam Hyde in a Workflow Sprint (see [Workflow Sprint](inline 'undefined') chapter) to define an idealised workflow and identify any overlaps with existing PubSweet components.
+At the start of the redevelopment project, Europe PMC team members worked together with Adam Hyde in a Workflow Sprint (see [Workflow Sprint](#/Designing%20workflow?id=workflow-sprints 'undefined') chapter) to define an idealised workflow and identify any overlaps with existing PubSweet components.
 
 <img src="image-12-0.svg" style="max-width: 700px; width: 100%;display: block;margin: 1em auto;">
 

@@ -1,5 +1,3 @@
-module.exports = {
-  frontend: {
-    components: [() => require('./PeoplePickerLayout')],
-  },
-}
+import PeoplePickerLayout from './PeoplePickerLayout'
+
+export default PeoplePickerLayout

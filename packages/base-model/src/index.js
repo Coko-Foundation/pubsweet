@@ -99,17 +99,17 @@ class BaseModel extends Model {
     return this._save(insertAndFetch, updateAndFetch)
   }
 
-  save() {
+  save(trx) {
     const updateAndFetch = (instance, trx) =>
       this.constructor.query(trx).patchAndFetchById(instance.id, instance)
 
     const insertAndFetch = (instance, trx) =>
       this.constructor.query(trx).insertAndFetch(instance)
 
-    return this._save(insertAndFetch, updateAndFetch)
+    return this._save(insertAndFetch, updateAndFetch, trx)
   }
 
-  async _save(insertAndFetch, updateAndFetch) {
+  async _save(insertAndFetch, updateAndFetch, trx) {
     const simpleSave = (trx = null) => updateAndFetch(this, trx)
 
     const protectedSave = async trx => {
@@ -138,34 +138,41 @@ class BaseModel extends Model {
     // model instances skips validation, and using toJSON() first will
     // not save certain fields ommited in $formatJSON (e.g. passwordHash)
     this.$validate()
-    try {
-      result = await transaction(BaseModel.knex(), async trx => {
-        let savedEntity
 
-        // If an id is set on the model instance, find out if the instance
-        // already exists in the database
-        if (this.id) {
-          if (!this.updated && this.created) {
-            throw integrityError(
-              'updated',
-              this.updated,
-              'must be set when created is set!',
-            )
-          }
-          if (!this.updated && !this.created) {
-            savedEntity = await simpleSave(trx)
-          } else {
-            // If the model instance has created/updated times set, provide
-            // protection against potentially overwriting newer data in db.
-            savedEntity = await protectedSave(trx)
-          }
+    const saveFn = async trx => {
+      let savedEntity
+
+      // If an id is set on the model instance, find out if the instance
+      // already exists in the database
+      if (this.id) {
+        if (!this.updated && this.created) {
+          throw integrityError(
+            'updated',
+            this.updated,
+            'must be set when created is set!',
+          )
         }
-        // If it doesn't exist, simply insert the instance in the database
-        if (!savedEntity) {
-          savedEntity = await insertAndFetch(this, trx)
+        if (!this.updated && !this.created) {
+          savedEntity = await simpleSave(trx)
+        } else {
+          // If the model instance has created/updated times set, provide
+          // protection against potentially overwriting newer data in db.
+          savedEntity = await protectedSave(trx)
         }
-        return savedEntity
-      })
+      }
+      // If it doesn't exist, simply insert the instance in the database
+      if (!savedEntity) {
+        savedEntity = await insertAndFetch(this, trx)
+      }
+      return savedEntity
+    }
+
+    try {
+      if (trx) {
+        result = await saveFn(trx)
+      } else {
+        result = await transaction(BaseModel.knex(), saveFn)
+      }
       logger.info(`Saved ${this.constructor.name} with UUID ${result.id}`)
     } catch (err) {
       logger.info(`Rolled back ${this.constructor.name}`)

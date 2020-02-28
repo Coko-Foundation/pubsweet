@@ -1,6 +1,6 @@
 <div width="100%" align="center">
-  <img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/rgb-medium.jpg" width="300" />
-  <h2>The open toolkit for building publishing workflows</h2>
+  <img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/logo-pubsweet.png" width="300" />
+  <h2>PubSweet: The open toolkit for building publishing workflows</h2>
 </div>
 
 | [![MIT license](https://img.shields.io/badge/license-MIT-e51879.svg)](https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/LICENSE) [![mattermost](https://img.shields.io/badge/mattermost_chat-coko%2Fpubsweet-blue.svg)](https://mattermost.coko.foundation/coko/channels/pubsweet) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) |
@@ -35,4 +35,4 @@ The [PubSweet website](http://pubsweet.coko.foundation) contains all of the docu
 
 PubSweet is part of the [Collaborative Knowledge Foundation](https://coko.foundation) family.
 
-<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.jpg" width="300" /></a>
+<a href="https://coko.foundation"><img src="https://gitlab.coko.foundation/pubsweet/pubsweet/raw/master/assets/COKO_logo.png" width="300" /></a>
