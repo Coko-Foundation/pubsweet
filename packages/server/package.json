@@ -1,14 +1,14 @@
 {
   "name": "pubsweet-server",
-  "version": "13.9.1",
+  "version": "13.9.2",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.4",
-    "@pubsweet/errors": "^2.0.29",
-    "@pubsweet/logger": "^0.2.39",
-    "@pubsweet/models": "^0.3.4",
+    "@pubsweet/db-manager": "^3.1.5",
+    "@pubsweet/errors": "^2.0.30",
+    "@pubsweet/logger": "^0.2.40",
+    "@pubsweet/models": "^0.3.5",
     "apollo-server-express": "^2.4.8",
     "authsome": "^0.1.0",
     "body-parser": "^1.15.2",
@@ -33,7 +33,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-boss": "^3.1.2",
-    "pubsweet-sse": "^1.0.33",
+    "pubsweet-sse": "^1.0.34",
     "subscriptions-transport-ws": "^0.9.12",
     "waait": "^1.0.2"
   },

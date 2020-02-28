@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.1.4...pubsweet-client@10.1.5) (2020-02-28)
+
+
+### Bug Fixes
+
+* **client:** improve stripTypenames for null variables ([eb9e42b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/eb9e42b8b4699f90e6568307f4be3032da08c7ae))
+
+
+
+
+
 ## [10.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.1.3...pubsweet-client@10.1.4) (2020-02-26)
 
 **Note:** Version bump only for package pubsweet-client
