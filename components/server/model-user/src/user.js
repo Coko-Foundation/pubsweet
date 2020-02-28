@@ -37,11 +37,8 @@ class User extends BaseModel {
         relation: BaseModel.HasOneRelation,
         modelClass: Identity,
         join: {
-          from: 'users.id',
-          to: 'identities.userId',
-        },
-        filter: builder => {
-          builder.where('isDefault', true)
+          from: 'users.defaultIdentityId',
+          to: 'identities.id',
         },
       },
       teams: {
@@ -65,7 +62,7 @@ class User extends BaseModel {
       properties: {
         admin: { type: ['boolean', 'null'] },
         email: { type: 'string', format: 'email' },
-        defaultIdentity: { type: 'string' },
+        defaultIdentityId: { type: 'string' },
         username: { type: 'string', pattern: '^[a-zA-Z0-9]+' },
         passwordHash: { type: 'string' },
         passwordResetToken: { type: ['string', 'null'] },

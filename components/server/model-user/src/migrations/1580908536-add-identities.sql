@@ -9,10 +9,10 @@ CREATE TABLE identities (
   aff TEXT,
   password_hash TEXT,
   email TEXT UNIQUE,
-  oauth JSONB,
-  is_default BOOLEAN,
-  unique(user_id, is_default)
+  oauth JSONB
 );
+
+ALTER TABLE users ADD COLUMN default_identity_id uuid REFERENCES identities;
 
 
 
