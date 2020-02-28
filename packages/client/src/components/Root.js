@@ -14,17 +14,17 @@ import { Normalize } from 'styled-normalize'
 import StyleRoot from '../helpers/StyleRoot'
 
 // See https://github.com/apollographql/apollo-feature-requests/issues/6#issuecomment-465305186
-function stripTypenames(obj, propToDelete) {
+export function stripTypenames(obj) {
   Object.keys(obj).forEach(property => {
     if (
-      obj[property] &&
+      obj[property] !== null &&
       typeof obj[property] === 'object' &&
       !(obj[property] instanceof File)
     ) {
       delete obj.property
-      const newData = stripTypenames(obj[property], propToDelete)
+      const newData = stripTypenames(obj[property], '__typename')
       obj[property] = newData
-    } else if (property === propToDelete) {
+    } else if (property === '__typename') {
       delete obj[property]
     }
   })
@@ -47,7 +47,7 @@ const makeApolloClient = (makeConfig, connectToWebSocket) => {
 
   const removeTypename = new ApolloLink((operation, forward) => {
     if (operation.variables) {
-      operation.variables = stripTypenames(operation.variables, '__typename')
+      operation.variables = stripTypenames(operation.variables)
     }
     return forward(operation)
   })
