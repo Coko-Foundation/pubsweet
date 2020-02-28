@@ -16,7 +16,11 @@ import StyleRoot from '../helpers/StyleRoot'
 // See https://github.com/apollographql/apollo-feature-requests/issues/6#issuecomment-465305186
 function stripTypenames(obj, propToDelete) {
   Object.keys(obj).forEach(property => {
-    if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+    if (
+      obj[property] &&
+      typeof obj[property] === 'object' &&
+      !(obj[property] instanceof File)
+    ) {
       delete obj.property
       const newData = stripTypenames(obj[property], propToDelete)
       obj[property] = newData
