@@ -1,7 +1,6 @@
 const logger = require('@pubsweet/logger')
 const { AuthorizationError, ConflictError } = require('@pubsweet/errors')
 
-// const eager = 'teams.members.[user, alias]'
 const eager = undefined
 
 const resolvers = {
@@ -20,27 +19,27 @@ const resolvers = {
   },
   Mutation: {
     async createUser(_, { input }, ctx) {
-      const Identity = ctx.connectors.Identity.model
-
       const user = {
         username: input.username,
+        email: input.email,
+        passwordHash: await ctx.connectors.User.model.hashPassword(
+          input.password,
+        ),
       }
 
-      const passwordHash = await Identity.hashPassword(input.password)
       const identity = {
         type: 'local',
-        passwordHash,
-        email: input.email,
         aff: input.aff,
         name: input.name,
         isDefault: true,
       }
-      user.identities = [identity]
+      user.defaultIdentity = identity
 
       try {
         const result = await ctx.connectors.User.create(user, ctx, {
           eager: 'defaultIdentity',
         })
+
         return result
       } catch (e) {
         if (e.constraint) {
@@ -88,6 +87,10 @@ const resolvers = {
   },
   Local: {
     __isTypeOf: (obj, context, info) => obj.type === 'local',
+    async email(obj, args, ctx, info) {
+      // Emails stored on user, but surfaced in local identity too
+      return (await ctx.loaders.User.load(obj.userId)).email
+    },
   },
   External: {
     __isTypeOf: (obj, context, info) => obj.type === 'external',

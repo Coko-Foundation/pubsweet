@@ -7,12 +7,10 @@ CREATE TABLE identities (
   identifier TEXT, -- e.g. orcid ID
   name TEXT,
   aff TEXT,
-  password_hash TEXT,
-  email TEXT UNIQUE,
-  oauth JSONB
+  oauth JSONB,
+  is_default BOOLEAN,
+  unique(user_id, is_default)
 );
-
-ALTER TABLE users ADD COLUMN default_identity_id uuid REFERENCES identities;
 
 
 
