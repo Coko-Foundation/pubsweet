@@ -116,6 +116,7 @@ const typeDefs = `
     created: DateTime!
     updated: DateTime
     username: String
+    email: String
     identities: [Identity]
     defaultIdentity: Identity
   }
