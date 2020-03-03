@@ -9,12 +9,12 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.0.20",
-    "@pubsweet/logger": "^0.2.34",
+    "@pubsweet/db-manager": "^3.1.15",
+    "@pubsweet/logger": "^0.2.40",
     "express-fileupload": "v1.1.1-alpha.2",
     "node-wait-for-it": "^0.2.0",
     "passport": "^0.4.0",
-    "pubsweet-server": "^13.7.2",
+    "pubsweet-server": "^13.9.2",
     "tmp-promise": "^2.0.0",
     "waait": "^1.0.5"
   },
