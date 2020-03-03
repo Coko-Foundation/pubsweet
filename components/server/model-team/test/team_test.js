@@ -8,7 +8,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 
 const Team = require('../src/team')
 const TeamMember = require('../src/team_member')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const { dbCleaner } = require('pubsweet-server/test')
 
 const createTeamWithMember = async () => {

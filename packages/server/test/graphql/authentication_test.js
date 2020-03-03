@@ -1,6 +1,6 @@
 const { omit } = require('lodash')
 const authsome = require('../../src/helpers/authsome')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const { fixtures } = require('@pubsweet/model-user/test')
 const cleanDB = require('../helpers/db_cleaner')
 const api = require('../helpers/api')
