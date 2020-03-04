@@ -1,7 +1,7 @@
 {
   "name": "pubsweet-client",
   "version": "10.1.5",
-  "main": "src/index.js",
+  "main": "dist",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
