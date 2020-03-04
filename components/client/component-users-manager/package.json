@@ -1,12 +1,12 @@
 {
   "name": "pubsweet-component-users-manager",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "description": "Basic navigation bar component for PubSweet",
   "main": "src/UsersManager.jsx",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^12.3.1",
+    "@pubsweet/ui": "^12.3.2",
     "prop-types": "^15.5.10",
     "recompose": "^0.30.0"
   },

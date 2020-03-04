@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.1.5...pubsweet-client@10.2.0) (2020-03-04)
+
+
+### Features
+
+* **client:** use dist as main ([e1da289](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e1da289f87589afd254bd8974e5513767e12b5e8))
+
+
+
+
+
 ## [10.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.1.4...pubsweet-client@10.1.5) (2020-02-28)
 
 
