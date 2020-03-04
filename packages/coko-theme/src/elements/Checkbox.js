@@ -19,10 +19,6 @@ const localBorderSize = '3px'
 
 const localBorderTwoSize = '1px'
 
-const colorSecondary = css`
-  ${th('colorSecondary')};
-`
-
 export default {
   Label: css`
     font-size: 1.1em;
@@ -53,20 +49,18 @@ export default {
 
     &:focus + span:before {
       box-shadow: 0 0 ${th('borderWidth')} calc(${th('borderWidth')} * 2)
-        ${th('colorSecondary')};
+        ${th('colorPrimary')};
     }
   `,
   Root: css`
     transition: all 2s;
 
     &:hover span {
-      /* color: ${th('colorSecondary')}; */
-      
+      color: ${th('colorPrimary')};
+
       &:before {
         animation: ${checking} 0.5s;
-        background: ${props =>
-          props.checked ? 'currentColor' : colorSecondary};
-        box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorSecondary')};
+        box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
       }
     }
   `,
