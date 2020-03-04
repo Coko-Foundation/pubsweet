@@ -3,7 +3,6 @@
   "version": "12.3.1",
   "license": "MIT",
   "main": "dist",
-  "module": "src",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
