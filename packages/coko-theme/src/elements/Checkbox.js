@@ -60,7 +60,6 @@ export default {
 
       &:before {
         animation: ${checking} 0.5s;
-        background: ${th('colorPrimary')};
         box-shadow: 0 0 0 ${localBorderTwoSize} ${th('colorPrimary')};
       }
     }

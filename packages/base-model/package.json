@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/base-model",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.5",
-    "@pubsweet/errors": "^2.0.30",
-    "@pubsweet/logger": "^0.2.40",
+    "@pubsweet/db-manager": "^3.1.6",
+    "@pubsweet/errors": "^2.0.31",
+    "@pubsweet/logger": "^0.2.41",
     "knex": "^0.16.3",
     "lodash": "^4.17.11",
     "objection": "^1.5.3",

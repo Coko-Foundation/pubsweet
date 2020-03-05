@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.22...@pubsweet/coko-theme@5.1.23) (2020-03-04)
+
+
+### Bug Fixes
+
+* **coko-theme:** do not show checbox background/state on hover ([8ef4885](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ef48854ebd3e2fdf5ad131f5b500492d6dbbcd9))
+* **ui:** changed the colors for checkbox for coko-theme ([4f444c8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4f444c8253e6848ff526dc1d0562b62cfe89a33a))
+* **ui:** updated style for the checkbox for coko-theme ([077590f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/077590f465d28b8c1b2caee6c792670f2d342c66))
+
+
+
+
+
 ## [5.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.21...@pubsweet/coko-theme@5.1.22) (2020-02-28)
 
 **Note:** Version bump only for package @pubsweet/coko-theme
