@@ -70,11 +70,6 @@ describe('Model', () => {
     await expect(Promise.all([user.save(), sameUser.save()])).rejects.toThrow(
       'Integrity Error',
     )
-    // try {
-    //   await
-    // } catch (e) {
-    //   expect(e.message).toMatch('Integrity Error')
-    // }
   })
 
   it('can find by multiple fields', async () => {

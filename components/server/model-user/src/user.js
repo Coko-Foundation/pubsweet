@@ -93,8 +93,10 @@ class User extends BaseModel {
     return super.save()
   }
 
-  validPassword(password) {
-    return bcrypt.compare(password, this.passwordHash)
+  async validPassword(password) {
+    return password && this.passwordHash
+      ? bcrypt.compare(password, this.passwordHash)
+      : false
   }
 
   static hashPassword(password) {
