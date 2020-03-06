@@ -18,4 +18,19 @@ module.exports = {
     email: 'another@example.com',
     password: 'rubgy',
   },
+
+  localIdentity: {
+    name: 'Someone',
+    aff: 'University of PubSweet',
+    type: 'local',
+  },
+
+  externalIdentity: {
+    type: 'external',
+    identifier: 'orcid',
+    oauth: {
+      accessToken: 'someAccessToken',
+      refreshToken: 'someRefreshToken',
+    },
+  },
 }

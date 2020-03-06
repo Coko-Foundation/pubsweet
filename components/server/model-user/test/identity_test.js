@@ -11,9 +11,7 @@ describe('Identity', () => {
   it('can create a user with a default local identity', async () => {
     const user = await new User(fixtures.user).save()
     const defaultIdentity = await new Identity({
-      name: 'Someone',
-      aff: 'University of PubSweet',
-      type: 'local',
+      ...fixtures.localIdentity,
       userId: user.id,
       isDefault: true,
     }).save()
@@ -26,21 +24,14 @@ describe('Identity', () => {
     let user = await new User(fixtures.user).save()
 
     const localIdentity = await new Identity({
-      name: 'Someone',
-      aff: 'University of PubSweet',
-      type: 'local',
+      ...fixtures.localIdentity,
       userId: user.id,
     }).save()
 
     const externalIdentity = await new Identity({
-      type: 'external',
-      identifier: 'orcid',
+      ...fixtures.externalIdentity,
       userId: user.id,
       isDefault: true,
-      oauth: {
-        accessToken: 'someAccessToken',
-        refreshToken: 'someRefreshToken',
-      },
     }).save()
 
     user = await User.find(user.id, { eager: '[identities, defaultIdentity]' })
@@ -48,5 +39,42 @@ describe('Identity', () => {
     expect(user.identities).toContainEqual(localIdentity)
     expect(user.identities).toContainEqual(externalIdentity)
     expect(user.defaultIdentity).toEqual(externalIdentity)
+  })
+
+  it('user can not have more than one default identities', async () => {
+    const user = await new User(fixtures.user).save()
+
+    await new Identity({
+      ...fixtures.localIdentity,
+      userId: user.id,
+      isDefault: true,
+    }).save()
+
+    const externalIdentity = new Identity({
+      ...fixtures.externalIdentity,
+      userId: user.id,
+      isDefault: true,
+    }).save()
+
+    await expect(externalIdentity).rejects.toThrow('violates unique constraint')
+  })
+
+  it('can have multiple non-default identities (isDefault = false)', async () => {
+    const user = await new User(fixtures.user).save()
+
+    await new Identity({
+      ...fixtures.localIdentity,
+      userId: user.id,
+      isDefault: false,
+    }).save()
+
+    await new Identity({
+      ...fixtures.externalIdentity,
+      userId: user.id,
+      isDefault: false,
+    }).save()
+
+    const foundUser = await User.find(user.id, { eager: 'identities' })
+    expect(foundUser.identities).toHaveLength(2)
   })
 })
