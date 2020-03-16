@@ -49,7 +49,7 @@ module.exports = () => {
         if (model.modelLoaders) {
           Object.keys(model.modelLoaders).forEach(loaderName => {
             loaders[model.modelName][loaderName] = new DataLoader(
-              model.loaders[loaderName],
+              model.modelLoaders[loaderName],
             )
           })
         }
