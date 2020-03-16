@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.9.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.3...pubsweet-server@13.9.4) (2020-03-16)
+
+
+### Bug Fixes
+
+* **server:** fix loaders for multiple models per package ([8bd0926](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8bd0926504452318a96e96e66723c17d684d57d1))
+
+
+
+
+
 ## [13.9.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.2...pubsweet-server@13.9.3) (2020-03-04)
 
 **Note:** Version bump only for package pubsweet-server

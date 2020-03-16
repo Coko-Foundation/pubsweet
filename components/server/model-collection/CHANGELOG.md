@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-collection@4.0.28...@pubsweet/model-collection@4.0.29) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/model-collection
+
+
+
+
+
 ## [4.0.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-collection@4.0.27...@pubsweet/model-collection@4.0.28) (2020-03-04)
 
 **Note:** Version bump only for package @pubsweet/model-collection

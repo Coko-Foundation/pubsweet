@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.23...pubsweet-component-login@3.0.24) (2020-03-16)
+
+**Note:** Version bump only for package pubsweet-component-login
+
+
+
+
+
 ## [3.0.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.22...pubsweet-component-login@3.0.23) (2020-03-04)
 
 **Note:** Version bump only for package pubsweet-component-login
