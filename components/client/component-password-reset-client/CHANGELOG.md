@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.22...@pubsweet/component-password-reset-client@3.1.23) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
 ## [3.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.21...@pubsweet/component-password-reset-client@3.1.22) (2020-03-04)
 
 **Note:** Version bump only for package @pubsweet/component-password-reset-client
