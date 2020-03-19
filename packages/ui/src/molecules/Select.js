@@ -47,10 +47,6 @@ const StyledSelect = props => {
       }
       return myBase
     },
-    dropdownIndicator: base => ({
-      ...base,
-      padding: 6,
-    }),
     indicatorSeparator: base => ({
       ...base,
       display: 'none',
@@ -129,6 +125,15 @@ const StyledSelect = props => {
         backgroundColor: colorBackgroundHue,
         color: colorTextReverse,
       },
+    }),
+    dropdownIndicator: (base, state) => ({
+      ...base,
+      padding: 6,
+      transition: 'all .2s ease',
+      transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
+    }),
+    menuPlacement: base => ({
+      ...base,
     }),
   }
 
