@@ -105,6 +105,10 @@ const StyledSelect = props => {
         ...myBase,
       }
     },
+    placeholder: base => ({
+      ...base,
+      margin: 0,
+    }),
     valueContainer: base => ({
       ...base,
       padding: 0,

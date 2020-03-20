@@ -48,6 +48,7 @@ const SelectDropdown = props => {
     value,
     isDisabled,
     onChange,
+    menuPlacement,
     ...rest
   } = props
 

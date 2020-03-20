@@ -1,14 +1,16 @@
-Single Selection
+Select uses [react-select](https://react-select.com) library.
+
+Single Selection dropdown
 
 ```js
 const options = [
-  { value: 'firstoption', label: 'First' },
-  { value: 'secondoption', label: 'Second' },
-  { value: 'thirdoption', label: 'Third' },
-  { value: 'thirdoption', label: 'Fourth' },
+  { value: 'first', label: 'First' },
+  { value: 'second', label: 'Second' },
+  { value: 'third', label: 'Third' },
+  { value: 'fourth', label: 'Fourth' },
 ]
 
-;<SelectDropdown options={options} />
+;<SelectDropdown options={options} placeholder="Select something" />
 ```
 
 Selection menu opens up from above
@@ -18,19 +20,23 @@ const options = [
   { value: 'firstoption', label: 'One' },
   { value: 'secondoption', label: 'Two' },
   { value: 'thirdoption', label: 'Three' },
-  { value: 'thirdoption', label: 'Four' },
+  { value: 'fourthoption', label: 'Four' },
 ]
 
-;<SelectDropdown options={options} menuPlacement="top" />
+;<SelectDropdown
+  options={options}
+  menuPlacement="top"
+  onChange={value => console.log(value)}
+/>
 ```
 
 Multiple select
 
 ```js
 const options = [
-  { value: 'firstoption', label: 'First Option' },
-  { value: 'secondoption', label: 'Second Option' },
-  { value: 'thirdoption', label: 'Third Option' },
+  { value: 'one', label: 'First Option' },
+  { value: 'two', label: 'Second Option' },
+  { value: 'three', label: 'Third Option' },
 ]
 
 ;<SelectDropdown options={options} isMulti />
