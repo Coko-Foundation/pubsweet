@@ -142,7 +142,7 @@ module.exports = {
       ],
     },
     {
-      name: 'Component library',
+      name: 'UI',
       sections: [
         {
           name: 'Atoms',
@@ -152,24 +152,54 @@ module.exports = {
           name: 'Molecules',
           components: '../packages/ui/src/molecules/*.js',
         },
+      ],
+    },
+    {
+      name: 'Component library',
+      sections: [
         {
-          name: 'Client components',
+          name: 'Client',
           components: '../components/client/component-!(xpub-*)/**/*.{js,jsx}',
         },
         {
-          name: 'Xpub components',
-          components: '../components/client/component-xpub-*/**/*.{jsx,js}',
-        },
-        {
-          name: 'Server components',
-          components: '../components/server/*.js',
+          name: 'Server',
+          sections: [
+            {
+              name: 'User model',
+              content: '../components/server/model-user/README.md',
+            },
+            // {
+            //   name: 'Team model',
+            //   content: '../components/server/model-team/README.md',
+            // },
+            // {
+            //   name: 'component-aws-s3',
+            //   content: '../components/server/component-aws-s3/README.md',
+            // },
+            // {
+            //   name: 'component-email-templating',
+            //   content:
+            //     '../components/server/component-email-templating/README.md',
+            // },
+            // {
+            //   name: 'component-password-reset-server',
+            //   content:
+            //     '../components/server/component-password-reset-server/README.md',
+            // },
+            // {
+            //   name: 'component-send-email',
+            //   content: '../components/server/component-send-email/README.md',
+            // },
+            // {
+            //   name: 'job-xsweet',
+            //   content: '../components/server/job-xsweet/README.md',
+            // },
+          ],
         },
       ],
     },
   ],
   ignore: [
-    '**/components/client/component-xpub-review-client/**',
-    '**/components/client/component-manage/**',
     '**/components/**/*.config.js',
     '**/node_modules/**',
     '**/*.test.{js,jsx}',

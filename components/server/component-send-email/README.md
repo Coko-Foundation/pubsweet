@@ -4,7 +4,7 @@
 
 In order to configure this component, simply add the path to your `mailer` configuration in your app's `config` file. For example:
 
-```js
+```js static
   mailer: {
     path: `${__dirname}/mailer`,
   },
@@ -12,7 +12,7 @@ In order to configure this component, simply add the path to your `mailer` confi
 
 In this case, `mailer.js` creates a new `AWS.SES` object which will be used to send emails:
 
-```js
+```js static
 const AWS = require('aws-sdk')
 const config = require('config')
 
@@ -43,7 +43,7 @@ If you plan on using environment variables for your AWS account, you need to cre
 
 The `send-email` component contains a `send()` function which takes a single `mailData` object which needs to contain at least the following properties: `from`, `to`, `subject`, `text`, `html`.
 
-```javascript
+```js static
 const Email = require('@pubsweet/component-send-email')
 const config = require('config')
 
