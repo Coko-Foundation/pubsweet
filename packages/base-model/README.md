@@ -1,6 +1,6 @@
-For persistence of data, PubSweet uses `@pubsweet/base-model` and its BaseModel class, which is a basic model based on [Objection.js](https://vincit.github.io/objection.js/). In its tests (`data-model-component`, `extended-data-model-component`: https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/base-model/test), you can see how that enables you to add your own data model to PubSweet. A data model that lives in its own database table, as defined in its migration(s).
+For persistence of data, PubSweet uses `@pubsweet/base-model` and its BaseModel class, which is a basic model based on [Objection.js](https://vincit.github.io/objection.js/).
 
-For a data model package, its defined exports are:
+For a data model component, its defined exports are:
 
 ```js static
 module.exports = {
@@ -11,25 +11,9 @@ module.exports = {
 }
 ```
 
-Migrations (folder `./migrations`) are automatically added if they exist.
+Migrations (folder `./migrations`) are automatically added if they exist. For example migrations, see e.g. the [User model's migrations](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/server/model-user/src/migrations).
 
 If you use `@pubsweet/model-some-model` in your app (by specifying it as a component in the configuration), `typeDefs` and `resolvers` are gathered in server's `schema.js` to compose the app's entire GraphQL schema from three parts: 1. `pubsweet-server`, 2. app's components and 3. app's config.
-
-### Support for extended data models (models based on another model)
-
-Shown in (https://gitlab.coko.foundation/pubsweet/pubsweet/blob/master/packages/base-model/test/extended-data-model-component/src/index.js) is an extended data model (`extended-data-model-component`) for testing purposes. It exports the following things:
-
-```js static
-module.exports = {
-  typeDefs:
-  resolvers:
-  modelName: 'Model',
-  model: require('./model'),
-  extending: '@pubsweet/model-some-model',
-}
-```
-
-Things are exactly the same as in the non-extended data model, but there is one big exception, the `extending` property. This is a string, the name of the model that this extended data model extends. In this case `@pubsweet/model-extended-some-model` extends `@pubsweet/model-some-model` and what this means, in practice, is that `@pubsweet/model-some-model`'s GraphQL schema, resolvers and migration paths will be added to `@pubsweet/model-extended-some-model`'s. This happens recursively, so for example if you had a `@pubsweet/model-super-extended-some-model` that extended `@pubsweet/model-extended-some-model`, it would also include `@pubsweet/model-some-models`'s GraphQL schema, resolvers and migration paths. :curly_loop:
 
 ### Using standalone data models
 
@@ -97,6 +81,22 @@ const manuscript = await Manuscript.findOneByField('content', 'Great success')
 ```js static
 const manuscript = await Manuscript.all()
 ```
+
+### Support for extended data models (models based on another model)
+
+Shown in (https://gitlab.coko.foundation/pubsweet/pubsweet/blob/master/packages/base-model/test/extended-data-model-component/src/index.js) is an extended data model (`extended-data-model-component`) for testing purposes. It exports the following things:
+
+```js static
+module.exports = {
+  typeDefs:
+  resolvers:
+  modelName: 'Model',
+  model: require('./model'),
+  extending: '@pubsweet/model-some-model',
+}
+```
+
+Things are exactly the same as in the non-extended data model, but there is one big difference, the `extending` property. This is a string, the name of the model that this extended data model extends. In this case `@pubsweet/model-extended-some-model` extends `@pubsweet/model-some-model` and what this means, in practice, is that `@pubsweet/model-some-model`'s GraphQL schema, resolvers and migration paths will be added to `@pubsweet/model-extended-some-model`'s. This happens recursively, so for example if you had a `@pubsweet/model-super-extended-some-model` that extended `@pubsweet/model-extended-some-model`, it would also include `@pubsweet/model-some-models`'s GraphQL schema, resolvers and migration paths. ∞
 
 ### Examples in the wild
 
