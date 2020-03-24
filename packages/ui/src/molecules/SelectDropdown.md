@@ -13,7 +13,7 @@ const options = [
 ;<SelectDropdown options={options} placeholder="Select something" />
 ```
 
-Selection menu opens up from above
+Selection menu opens up from above. Also has the option to add a custom icon.
 
 ```js
 const options = [
@@ -27,6 +27,7 @@ const options = [
   options={options}
   menuPlacement="top"
   onChange={value => console.log(value)}
+  icon="chevron_up"
 />
 ```
 

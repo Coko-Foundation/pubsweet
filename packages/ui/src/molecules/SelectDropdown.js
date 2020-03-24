@@ -2,9 +2,10 @@
 
 import React from 'react'
 import styled from 'styled-components'
-
 import { th } from '@pubsweet/ui-toolkit'
+import { components } from 'react-select'
 import Select from './Select'
+import { Icon } from '../atoms'
 
 const Wrapper = styled.div`
   margin-bottom: calc(${th('gridUnit')} * 2);
@@ -49,6 +50,8 @@ const SelectDropdown = props => {
     isDisabled,
     onChange,
     menuPlacement,
+    DropdownIndicator,
+    icon,
     ...rest
   } = props
 
@@ -64,7 +67,15 @@ const SelectDropdown = props => {
         </Label>
       )}
       <Select
+        components={{
+          DropdownIndicator: props => (
+            <components.DropdownIndicator {...props}>
+              <Icon>{icon}</Icon>
+            </components.DropdownIndicator>
+          ),
+        }}
         isDisabled={isDisabled}
+        menuPlacement={menuPlacement}
         onChange={onChange}
         options={options}
         value={value}
@@ -72,6 +83,9 @@ const SelectDropdown = props => {
       />
     </Wrapper>
   )
+}
+SelectDropdown.defaultProps = {
+  icon: 'chevron_down',
 }
 
 export default SelectDropdown
