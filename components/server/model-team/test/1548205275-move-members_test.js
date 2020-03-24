@@ -7,7 +7,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 }}`
 
 const Team = require('../src/team')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const { dbCleaner } = require('pubsweet-server/test')
 const migrate = require('@pubsweet/db-manager/src/commands/migrate')
 

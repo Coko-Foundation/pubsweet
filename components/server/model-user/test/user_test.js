@@ -28,12 +28,9 @@ describe('User', () => {
     const duplicateUser = new User(otherUserFixture)
 
     await user.save()
-
-    try {
-      await duplicateUser.save()
-    } catch (err) {
-      expect(err.name).toEqual('error')
-    }
+    await expect(duplicateUser.save()).rejects.toThrow(
+      'violates unique constraint',
+    )
 
     expect.hasAssertions()
   })
@@ -45,12 +42,9 @@ describe('User', () => {
     const duplicateUser = new User(otherUserFixture)
 
     await user.save()
-
-    try {
-      await duplicateUser.save()
-    } catch (err) {
-      expect(err.name).toEqual('error')
-    }
+    await expect(duplicateUser.save()).rejects.toThrow(
+      'violates unique constraint',
+    )
 
     expect.hasAssertions()
   })
@@ -124,5 +118,19 @@ describe('User', () => {
         email: 'user-1@example.com',
       }),
     )
+  })
+
+  it('fails password verification if passwordHash is not present', async () => {
+    const fixtureWithoutPassword = Object.assign({}, fixtures.user)
+    delete fixtureWithoutPassword.password
+
+    const user = await new User(fixtureWithoutPassword).save()
+
+    const validPassword1 = await user.validPassword(undefined)
+    expect(validPassword1).toEqual(false)
+    const validPassword2 = await user.validPassword(null)
+    expect(validPassword2).toEqual(false)
+    const validPassword3 = await user.validPassword('somethingfunky')
+    expect(validPassword3).toEqual(false)
   })
 })

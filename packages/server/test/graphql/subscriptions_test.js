@@ -1,4 +1,4 @@
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const cleanDB = require('../helpers/db_cleaner')
 const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('../../src/authentication')

@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const api = require('./helpers/api')
 const cleanDB = require('./helpers/db_cleaner')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('../src/authentication')
 

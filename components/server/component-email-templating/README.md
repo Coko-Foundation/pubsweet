@@ -31,7 +31,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 
     In order to use this component, you need the to add the following data in your main config file:
 
-    ```javascript
+    ```js static
       journal: {
         name: 'Coko Foundation',
         staffEmail: 'Coko <team@coko.foundation>',
@@ -57,7 +57,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 
     ![notification](https://gitlab.coko.foundation/xpub/xpub-faraday/uploads/27cb6acc8ff4a07758f55e5ea0504d28/notification.png)
 
-    ```javascript
+    ```js static
     const EmailTemplate = require('@pubsweet/component-email-template')
     const config = require('config')
 
