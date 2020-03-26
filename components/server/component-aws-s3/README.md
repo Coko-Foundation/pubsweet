@@ -30,7 +30,7 @@ AWS_S3_BUCKET = bucket-name
 
 Then, as soon as possible in your app you should add the `dotenv` package:
 
-```js
+```js static
 require('dotenv').config()
 ```
 
@@ -46,7 +46,7 @@ A list of endpoints that help you upload, download and delete S3 files.
 
 #### Request body
 
-```
+```static
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryWfPNVh4wuWBlyEyQ
 
 ------WebKitFormBoundaryWfPNVh4wuWBlyEyQ

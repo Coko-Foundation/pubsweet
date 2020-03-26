@@ -1,5 +1,8 @@
 module.exports = {
   ...require('./graphql'),
   modelName: 'User',
-  model: require('./user'),
+  models: [
+    { modelName: 'User', model: require('./user') },
+    { modelName: 'Identity', model: require('./identity') },
+  ],
 }

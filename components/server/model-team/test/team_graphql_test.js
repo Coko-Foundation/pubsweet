@@ -6,8 +6,8 @@ process.env.NODE_CONFIG = `{"pubsweet":{
   ]
 }}`
 
-const { model: User } = require('@pubsweet/model-user')
-const { model: Fragment } = require('@pubsweet/model-fragment')
+const { User } = require('@pubsweet/models')
+const { Fragment } = require('@pubsweet/models')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 

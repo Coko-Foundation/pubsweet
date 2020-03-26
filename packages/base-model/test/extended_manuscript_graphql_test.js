@@ -13,7 +13,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 global.NODE_CONFIG = null
 delete require.cache[require.resolve('config')]
 const { model: Manuscript } = require('./extended-data-model-component')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('pubsweet-server/src/authentication')
 
