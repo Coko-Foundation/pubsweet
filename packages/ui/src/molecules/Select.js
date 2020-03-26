@@ -12,6 +12,7 @@ const StyledSelect = props => {
     colorBackgroundHue,
     colorBorder,
     colorPrimary,
+    colorTextPlaceholder,
     colorText,
     colorTextReverse,
     fontInterface,
@@ -108,6 +109,7 @@ const StyledSelect = props => {
     placeholder: base => ({
       ...base,
       margin: 0,
+      color: colorTextPlaceholder,
     }),
     valueContainer: base => ({
       ...base,
@@ -116,7 +118,7 @@ const StyledSelect = props => {
     multiValue: base => ({
       ...base,
       color: colorText,
-      backgroundColor: colorBackground,
+      backgroundColor: colorBackgroundHue,
     }),
     multiValueLabel: base => ({
       ...base,
@@ -124,10 +126,10 @@ const StyledSelect = props => {
     }),
     multiValueRemove: base => ({
       ...base,
-      color: colorPrimary,
+      color: colorText,
       ':hover': {
         backgroundColor: colorBackgroundHue,
-        color: colorTextReverse,
+        color: colorPrimary,
       },
     }),
     dropdownIndicator: (base, state) => ({
@@ -138,6 +140,26 @@ const StyledSelect = props => {
     }),
     menuPlacement: base => ({
       ...base,
+    }),
+    singleValue: (base, state) => ({
+      ...base,
+      opacity: state.isDisabled ? 0.5 : 1,
+      transition: 'opacity 300ms',
+    }),
+    singleValueRemove: base => ({
+      ...base,
+    }),
+    clearIndicator: base => ({
+      ...base,
+      margin: 0,
+      color: colorText,
+      ':hover': {
+        color: colorPrimary,
+      },
+    }),
+    loadingIndicator: base => ({
+      ...base,
+      color: colorTextPlaceholder,
     }),
   }
 

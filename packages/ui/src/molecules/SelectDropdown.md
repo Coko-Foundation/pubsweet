@@ -10,7 +10,7 @@ const options = [
   { value: 'fourth', label: 'Fourth' },
 ]
 
-;<SelectDropdown options={options} placeholder="Select something" />
+;<SelectDropdown options={options} placeholder="Select something" isClearable />
 ```
 
 Selection menu opens up from above. Also has the option to add a custom icon.
