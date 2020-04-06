@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.10.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.4...pubsweet-server@13.10.0) (2020-04-06)
+
+
+### Features
+
+* **model-user:** handle password check if password hash does not exist ([55cc082](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/55cc0828de09aa223a7a4eb031341ab280c4a73d))
+
+
+
+
+
 ## [13.9.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.3...pubsweet-server@13.9.4) (2020-03-16)
 
 
