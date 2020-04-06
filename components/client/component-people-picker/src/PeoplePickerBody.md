@@ -38,7 +38,7 @@ const people = [
   },
 ]
 
-const [state, setState] = useState({
+const [state, setState] = React.useState({
   selection: people.slice(0, 2),
 })
 ;<PeoplePickerBody
