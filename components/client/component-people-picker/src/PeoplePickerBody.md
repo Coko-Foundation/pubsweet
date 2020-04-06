@@ -38,9 +38,9 @@ const people = [
   },
 ]
 
-initialState = {
+const [state, setState] = useState({
   selection: people.slice(0, 2),
-}
+})
 ;<PeoplePickerBody
   isSelected={person => state.selection.some(p => p.id === person.id)}
   maxSelection={5}

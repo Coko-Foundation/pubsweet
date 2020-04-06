@@ -36,9 +36,8 @@ const people = [
   },
 ]
 
-initialState = {
-  selection: people.slice(0, 2),
-}
+const [state, setState] = React.useState({ selection: people.slice(0, 2) })
+
 ;<PersonPodGrid
   isSelected={person => state.selection.some(p => p.id === person.id)}
   people={people}

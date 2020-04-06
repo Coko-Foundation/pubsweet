@@ -4,25 +4,26 @@ A group of checkboxes.
 const options = [
   {
     value: 'one',
-    label: 'One'
+    label: 'One',
   },
   {
     value: 'two',
-    label: 'Two'
+    label: 'Two',
   },
   {
     value: 'three',
-    label: 'Three'
-  }
-];
+    label: 'Three',
+  },
+]
 
-initialState = { value: [] };
+const [state, setState] = React.useState([])
 
-<CheckboxGroup 
+;<CheckboxGroup
   name="checkboxgroup"
-  options={options} 
+  options={options}
   value={state.value}
-  onChange={value => setState({ value })}/>
+  onChange={value => setState({ value })}
+/>
 ```
 
 The checkboxes can be displayed inline.
@@ -31,24 +32,25 @@ The checkboxes can be displayed inline.
 const options = [
   {
     value: 'one',
-    label: 'One'
+    label: 'One',
   },
   {
     value: 'two',
-    label: 'Two'
+    label: 'Two',
   },
   {
     value: 'three',
-    label: 'Three'
-  }
-];
+    label: 'Three',
+  },
+]
 
-initialState = { value: [] };
+const [state, setState] = React.useState([])
 
-<CheckboxGroup 
+;<CheckboxGroup
   name="checkboxgroup-inline"
-  options={options} 
+  options={options}
   value={state.value}
   inline={true}
-  onChange={value => setState({ value })}/>
+  onChange={value => setState({ value })}
+/>
 ```

@@ -1,7 +1,7 @@
 A form input for plain text.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextField
   value={state.value}
   placeholder="so you can write some in here"
@@ -12,7 +12,7 @@ initialState = { value: '' }
 The text field can have a label.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextField
   label="Foo"
   value={state.value}
@@ -24,7 +24,7 @@ initialState = { value: '' }
 Text field with error state.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextField
   label="Foo"
   value={state.value || 'This is not valid'}
@@ -37,7 +37,7 @@ initialState = { value: '' }
 Text field with warning state.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextField
   label="Foo"
   value={state.value || 'This is could be a problem'}
@@ -50,7 +50,7 @@ initialState = { value: '' }
 Text field with success state.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextField
   label="Foo"
   value={state.value || 'This is good'}
