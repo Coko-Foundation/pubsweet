@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.3...@pubsweet/ui@12.3.4) (2020-04-06)
+
+
+### Bug Fixes
+
+* **ui:** export Paragraph in ui's atoms ([cf371e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf371e3dfb63a95a619704440a1a28111951eb63))
+
+
+
+
+
 ## [12.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.2...@pubsweet/ui@12.3.3) (2020-03-16)
 
 **Note:** Version bump only for package @pubsweet/ui
