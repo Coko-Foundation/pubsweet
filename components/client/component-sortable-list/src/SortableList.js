@@ -2,7 +2,14 @@ import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import update from 'immutability-helper'
 
-const Item = ({ id, ListItem, index, moveItem, DragHandle, ...rest }) => {
+export const Item = ({
+  id,
+  ListItem,
+  index,
+  moveItem,
+  DragHandle,
+  ...rest
+}) => {
   const previewRef = useRef(null)
   const handleRef = useRef(null)
 
@@ -14,8 +21,11 @@ const Item = ({ id, ListItem, index, moveItem, DragHandle, ...rest }) => {
     }),
   })
 
-  const [, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: 'Item',
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    }),
     hover(item, monitor) {
       if (!previewRef.current) {
         return
@@ -57,7 +67,12 @@ const Item = ({ id, ListItem, index, moveItem, DragHandle, ...rest }) => {
     },
   })
 
-  DragHandle ? drag(handleRef) : drag(previewRef)
+  if (DragHandle) {
+    drag(handleRef)
+  } else {
+    drag(previewRef)
+  }
+
   preview(previewRef)
   drop(previewRef)
 
@@ -65,6 +80,7 @@ const Item = ({ id, ListItem, index, moveItem, DragHandle, ...rest }) => {
     <ListItem
       handle={DragHandle ? <DragHandle handleRef={handleRef} /> : null}
       isDragging={isDragging}
+      isOver={isOver}
       previewRef={previewRef}
       {...rest}
     />
