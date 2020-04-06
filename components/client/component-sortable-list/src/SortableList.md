@@ -6,40 +6,23 @@ A sortable list implemented with `react-dnd`.
 | :------------: | :------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :-----: | :-------------: |
 |     items      |                                                       The items of the sortable list.                                                        |   true   |   []    |      Array      |
 |    itemKey     |                                                 Value used for key when mapping over items.                                                  |   true   |  'id'   |     string      |
-|    listItem    | A React component that will be rendered for each item of the list. Receives `isDragging`, `isOver` and all other props from the items array. |   true   |  none   | React component |
+|    ListItem    | A React component that will be rendered for each item of the list. Receives `isDragging`, `isOver` and all other props from the items array. |   true   |  none   | React component |
 |    moveItem    |       Function to be called when moving an item through the list. SortableList will provide the dragIndex of hoverIndex of the items.        |   true   |  none   |    function     |
-|   dragHandle   |                            A React component for the drag handle. If not present, the whole item can be dragged.                             |  false   |  none   | React component |
+|   DragHandle   |                            A React component for the drag handle. If not present, the whole item can be dragged.                             |  false   |  none   | React component |
 |    dropItem    |                            Function to be called when dropping an item. The index of the dragged item is passed.                             |  false   |  none   |    function     |
 | beginDragProps |                                      Array of keys to pick from the dragged object when beginning drag.                                      |  false   |   []    |  Array(string)  |
 
 ## Usage
 
-This component should be used in a React-DnD `DragDropContext` or `DragDropContextProvider`. Make sure you have `react-dnd-html5-backend` installed and wrap the parent component with `DragDropContext` decorator or add the `DragDropContextProvider` in your root component.
+This component should be used with a React-DnD context `DndProvider` and `react-dnd-html5-backend`.
 
 ```js static
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContext } from 'react-dnd'
-
-class YourApp {
-  /* ... */
-}
-
-export default DragDropContext(HTML5Backend)(YourApp)
-```
-
-or
-
-```js static
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContextProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 export default class YourApp {
   render() {
-    return (
-      <DragDropContextProvider backend={HTML5Backend}>
-        /* ... */
-      </DragDropContextProvider>
-    )
+    return <DndProvider backend={Backend}>/* ... */</DndProvider>
   }
 }
 ```
@@ -53,7 +36,7 @@ const items = [
   {firstName: 'David', lastName: 'Blaine'},
 ]
 
-const Item = ({ isOver, isDragging, ...rest }) =>
+const Item = ({ isDragging, ...rest }) =>
   <div>`${rest.firstName} ${rest.lastName}`</div>
 
 <SortableList
@@ -63,53 +46,82 @@ const Item = ({ isOver, isDragging, ...rest }) =>
   />
 ```
 
+```jsx
+import React, { useState, useCallback } from 'react'
+const itemsInitial = [
+  { id: 0, firstName: 'John', lastName: 'Doe' },
+  { id: 1, firstName: 'Michael', lastName: 'Jackson' },
+  { id: 2, firstName: 'David', lastName: 'Blaine' },
+]
+const [items, setItems] = useState(itemsInitial)
+const Item = ({ previewRef, isDragging, ...rest }) => (
+  <div ref={previewRef} style={{ opacity: isDragging ? 0 : 1 }}>
+    {rest.firstName} {rest.lastName}
+  </div>
+)
+
+;<SortableList
+  items={items}
+  ListItem={Item}
+  moveItem={useCallback(
+    (dragIndex, hoverIndex) => {
+      setItems(SortableList.moveItem(items, dragIndex, hoverIndex))
+    },
+    [items],
+  )}
+/>
+```
+
 ### With custom drag handle
 
 ```js static
-const DragHandle = () => <div>Drag me!</div>
+const DragHandle = ({ handleRef }) => {
+  return <div ref={handleRef}>Drag me!</div>
+}
 
-const ItemWithDragHandle = ({ dragHandle, ...rest }) => <div>
-    {dragHandle}
-    <span>Rest of the content.</span>
-  </div>
+const ItemWithDragHandle = ({ previewRef, handle, isDragging, ...props }) => {
+  return (
+    <div ref={previewRef} style={{ opacity: isDragging ? 0 : 1 }}>
+      {handle} {props.firstName} {props.lastName}
+    </div>
+  )
+}
 
-<SortableList
-  ...
-  listItem={ItemWithDragHandle}
-  dragHandle={DragHandle}
-  ...
-  />
+;<SortableList items={} ListItem={ItemWithDragHandle} DragHandle={DragHandle} />
 ```
 
-### How to move items around
+Example:
 
-To move items of the parent container whenever `moveItem` function is called we can use the `SortableList.moveItem` helper. More info in the example below.
+```jsx
+import React, { useState, useCallback } from 'react'
+import Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
-```js static
-const Container = ({ moveItem, items }) => (
-  <div>
-    ...
-    <SortableList items={items} listItem={Item} moveItem={moveItem} />
-    ...
-  </div>
-)
-```
+const itemsInitial = [
+  { id: 0, firstName: 'John', lastName: 'Doe' },
+  { id: 1, firstName: 'Michael', lastName: 'Jackson' },
+  { id: 2, firstName: 'David', lastName: 'Blaine' },
+]
+const [items, setItems] = useState(itemsInitial)
 
-Enhanced using recompose
+const DragHandle = ({ handleRef }) => {
+  return <div ref={handleRef}>Drag me!</div>
+}
 
-```js static
-const MoveExample = compose(
-  withState('items', 'setItems', [
-    { name: 'John' },
-    { name: 'Nancy' },
-    { name: 'Adam' },
-  ]),
-  withHandlers({
-    moveItem: ({ setItems, items }) => (dragIndex, hoverIndex) => {
-      setItems(prevItems =>
-        SortableList.moveItem(prevItems, dragIndex, hoverIndex),
-      )
-    },
-  }),
-)(Container)
+const ItemWithDragHandle = ({ previewRef, handle, isDragging, ...props }) => {
+  return (
+    <div ref={previewRef} style={{ opacity: isDragging ? 0 : 1 }}>
+      {handle} {props.firstName} {props.lastName}
+    </div>
+  )
+}
+
+;<SortableList
+  items={items}
+  ListItem={ItemWithDragHandle}
+  DragHandle={DragHandle}
+  moveItem={(dragIndex, hoverIndex) => {
+    return setItems(SortableList.moveItem(items, dragIndex, hoverIndex))
+  }}
+/>
 ```
