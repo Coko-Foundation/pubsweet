@@ -26,6 +26,8 @@ const Example = () => {
 
   return (
     <SortableList
+      // eslint-disable-next-line no-console
+      dropItem={item => console.log(item)}
       items={items}
       ListItem={Item}
       moveItem={React.useCallback(

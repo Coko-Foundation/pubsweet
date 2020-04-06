@@ -2,11 +2,50 @@ import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import update from 'immutability-helper'
 
+const SortableList = ({
+  items,
+  itemKey = 'id',
+  moveItem,
+  ListItem,
+  DragHandle,
+  dropItem,
+  ...rest
+}) => (
+  <>
+    {items.map((item, i) => (
+      <Item
+        DragHandle={DragHandle}
+        dropItem={dropItem}
+        id={item[itemKey]}
+        index={i}
+        key={item[itemKey]}
+        ListItem={ListItem}
+        moveItem={moveItem}
+        {...item}
+        {...rest}
+      />
+    ))}
+  </>
+)
+
+// helper function for sortable lists
+SortableList.moveItem = (items, dragIndex, hoverIndex) => {
+  const item = items[dragIndex]
+  return update(items, {
+    $splice: [
+      [dragIndex, 1],
+      [hoverIndex, 0, item],
+    ],
+  })
+}
+
+export default SortableList
 export const Item = ({
   id,
   ListItem,
   index,
   moveItem,
+  dropItem,
   DragHandle,
   ...rest
 }) => {
@@ -26,6 +65,11 @@ export const Item = ({
     collect: monitor => ({
       isOver: !!monitor.isOver(),
     }),
+    drop(item, monitor) {
+      if (dropItem) {
+        dropItem(item)
+      }
+    },
     hover(item, monitor) {
       if (!previewRef.current) {
         return
@@ -86,40 +130,3 @@ export const Item = ({
     />
   )
 }
-
-const SortableList = ({
-  items,
-  itemKey = 'id',
-  moveItem,
-  ListItem,
-  DragHandle,
-  ...rest
-}) => (
-  <>
-    {items.map((item, i) => (
-      <Item
-        DragHandle={DragHandle}
-        id={item[itemKey]}
-        index={i}
-        key={item[itemKey]}
-        ListItem={ListItem}
-        moveItem={moveItem}
-        {...item}
-        {...rest}
-      />
-    ))}
-  </>
-)
-
-// helper function for sortable lists
-SortableList.moveItem = (items, dragIndex, hoverIndex) => {
-  const item = items[dragIndex]
-  return update(items, {
-    $splice: [
-      [dragIndex, 1],
-      [hoverIndex, 0, item],
-    ],
-  })
-}
-
-export default SortableList

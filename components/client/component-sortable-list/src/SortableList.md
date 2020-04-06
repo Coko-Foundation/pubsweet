@@ -9,7 +9,9 @@ A sortable list implemented with `react-dnd`.
 |  ListItem  | A React component that will be rendered for each item of the list. Receives `isDragging`, `isOver` and all other props from the items array. |   true   |  none   | React component |
 |  moveItem  |       Function to be called when moving an item through the list. SortableList will provide the dragIndex of hoverIndex of the items.        |   true   |  none   |    function     |
 | DragHandle |                            A React component for the drag handle. If not present, the whole item can be dragged.                             |  false   |  none   | React component |
-|  dropItem  |                            Function to be called when dropping an item. The index of the dragged item is passed.                             |  false   |  none   |    function     |
+|  dropItem  |                                   Function to be called when dropping an item. The dragged item is passed.                                   |  false   |  none   |    function     |
+| previewRef |                          (On the SortableList's Item, see examples) Used to pass a reference for both drag and drop                          |   true   |  none   |       ref       |
+| handleRef  |                              (On the SortableList's Item, see examples) Used to pass a reference for the handle                              |  false   |  none   |       ref       |
 
 ## Usage
 
@@ -49,7 +51,6 @@ const Item = ({ previewRef, isDragging, ...rest }) =>
 
 ```jsx
 import Example from '../examples/Example.jsx'
-
 ;<Example />
 ```
 
