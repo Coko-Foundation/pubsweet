@@ -5,10 +5,10 @@ import { th } from '@pubsweet/ui-toolkit'
 import SortableList from '../src'
 
 const Row = styled.div`
-	height: calc(${th('gridUnit')} * 4);
-	border: 1px ${th('colorPrimary')} solid;
-	line-height: calc(${th('gridUnit')} * 4);
-	padding: ${th('gridUnit')}
+  height: calc(${th('gridUnit')} * 4);
+  border: 1px ${th('colorPrimary')} solid;
+  line-height: calc(${th('gridUnit')} * 4);
+  padding: ${th('gridUnit')};
   margin-bottom: 1em;
 `
 const Item = ({ previewRef, isDragging, ...rest }) => (

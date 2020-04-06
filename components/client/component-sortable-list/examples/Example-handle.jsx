@@ -8,12 +8,12 @@ import SortableList from '../src'
 const Row = styled.div`
   display: flex;
   align-items: center;
-	height: calc(${th('gridUnit')} * 4);
-	border: 1px ${th('colorPrimary')} solid;
-	line-height: calc(${th('gridUnit')} * 2);
-	padding: ${th('gridUnit')}
+  height: calc(${th('gridUnit')} * 4);
+  border: 1px ${th('colorPrimary')} solid;
+  line-height: calc(${th('gridUnit')} * 2);
+  padding: ${th('gridUnit')};
   margin-bottom: 1em;
-  font-family: ${th('fontInterface')}
+  font-family: ${th('fontInterface')};
 `
 
 const Handle = styled.div`
