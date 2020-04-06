@@ -4,7 +4,8 @@
   "main": "src/",
   "license": "MIT",
   "dependencies": {
-    "react-dnd": "^2.5.4",
+    "immutability-helper": "^3.0.2",
+    "react-dnd": "^10.0.2",
     "recompose": "^0.30.0"
   },
   "peerDependencies": {
