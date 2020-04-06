@@ -41,7 +41,8 @@ If you plan on using environment variables for your AWS account, you need to cre
 
 ## Usage
 
-The `send-email` component contains a `send()` function which takes a single `mailData` object which needs to contain at least the following properties: `from`, `to`, `subject`, `text`, `html`.
+The `send-email` component contains a `send()` function which takes a single `mailData` object which needs to contain at least the following properties: `from`, `to`, `cc`, `bcc`, `subject`, `text`, `html`.  
+It returns the resulting information provided by nodemailer. In most cases, you can just ignore it.
 
 ```js static
 const Email = require('@pubsweet/component-send-email')
@@ -52,6 +53,8 @@ module.exports = {
     const mailData = {
       from: config.get('mailer.from'),
       to: toEmail,
+      cc: ccEmail,
+      bcc: bccEmail,
       subject: 'You have been invited!',
       text: 'This is an email',
       html: '<p>This is an email</p>',
