@@ -9,7 +9,6 @@ import { Icon } from '../atoms'
 
 const Wrapper = styled.div`
   margin-bottom: calc(${th('gridUnit')} * 2);
-  width: 400px;
 
   label {
     margin-bottom: calc(${th('gridUnit')});
@@ -27,7 +26,6 @@ const Wrapper = styled.div`
 const Label = styled.label`
   font-size: ${th('fontSizeBaseSmall')};
   line-height: ${th('lineHeightBaseSmall')};
-  /* display: block; */
 `
 
 const Error = styled.span`
@@ -41,10 +39,8 @@ const SelectDropdown = props => {
     'data-test-id': dataTestId,
     error,
     label,
-    // name,
     options,
     required,
-    // setFieldValue,
     touched,
     value,
     isDisabled,
@@ -54,8 +50,6 @@ const SelectDropdown = props => {
     icon,
     ...rest
   } = props
-
-  // const onChange = newValue => setFieldValue(name, newValue.value)
 
   return (
     <Wrapper data-test-id={dataTestId}>

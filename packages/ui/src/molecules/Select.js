@@ -164,12 +164,7 @@ const StyledSelect = props => {
   }
 
   return (
-    <Select
-      classNamePrefix="react-select"
-      {...rest}
-      /* menuIsOpen */
-      styles={stylesFromTheme}
-    />
+    <Select classNamePrefix="react-select" {...rest} styles={stylesFromTheme} />
   )
 }
 
