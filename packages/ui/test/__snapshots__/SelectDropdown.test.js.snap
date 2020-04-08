@@ -17,6 +17,7 @@ exports[`SelectDropdown With costom dropdown indicator 1`] = `
 
 .c0 {
   margin-bottom: calc(8px * 2);
+  width: 400px;
 }
 
 .c0 label {
@@ -170,6 +171,7 @@ exports[`SelectDropdown renders correctly 1`] = `
 
 .c0 {
   margin-bottom: calc(8px * 2);
+  width: 400px;
 }
 
 .c0 label {
