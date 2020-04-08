@@ -9,6 +9,7 @@ import { Icon } from '../atoms'
 
 const Wrapper = styled.div`
   margin-bottom: calc(${th('gridUnit')} * 2);
+  width: 400px;
 
   label {
     margin-bottom: calc(${th('gridUnit')});

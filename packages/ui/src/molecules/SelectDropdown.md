@@ -1,6 +1,6 @@
-Select uses [react-select](https://react-select.com) library.
+SelectDropdown is a customized version of `Select` component, where we pass also a custom component for the `DropdownIndicator` icon and label.
 
-Single Selection dropdown
+Single Selection dropdown.
 
 ```js
 const options = [
@@ -36,7 +36,7 @@ const options = [
 />
 ```
 
-Multiple select
+Multiple selection
 
 ```js
 const options = [
