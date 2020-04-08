@@ -1,0 +1,307 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectDropdown With costom dropdown indicator 1`] = `
+.c2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc(8px / 2);
+}
+
+.c2 svg {
+  stroke: black;
+  width: calc(3 * 8px);
+  height: calc(3 * 8px);
+}
+
+.c0 {
+  margin-bottom: calc(8px * 2);
+}
+
+.c0 label {
+  margin-bottom: calc(8px);
+}
+
+.c0 div[role='listbox'] div div {
+  margin-bottom: 8px;
+}
+
+.c1 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+<div
+  className="c0"
+>
+  <label
+    className="c1"
+  >
+    Select one option
+  </label>
+  <div
+    className=" css-3x5r4n-container"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="react-select__control css-44g3o0-Control"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+    >
+      <div
+        className="react-select__value-container css-tntsk8"
+      >
+        <div
+          className="react-select__placeholder css-1i2t3f2-placeholder"
+        >
+          Select...
+        </div>
+        <div
+          className="css-f7me8t-Input"
+        >
+          <div
+            className="react-select__input"
+            style={
+              Object {
+                "display": "inline-block",
+              }
+            }
+          >
+            <input
+              aria-autocomplete="list"
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={false}
+              id="react-select-3-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              spellCheck="false"
+              style={
+                Object {
+                  "background": 0,
+                  "border": 0,
+                  "boxSizing": "content-box",
+                  "color": "inherit",
+                  "fontSize": "inherit",
+                  "label": "input",
+                  "opacity": 1,
+                  "outline": 0,
+                  "padding": 0,
+                  "width": "1px",
+                }
+              }
+              tabIndex="0"
+              type="text"
+              value=""
+            />
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "left": 0,
+                  "overflow": "scroll",
+                  "position": "absolute",
+                  "top": 0,
+                  "visibility": "hidden",
+                  "whiteSpace": "pre",
+                }
+              }
+            >
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+      >
+        <span
+          className="react-select__indicator-separator css-43ykx9-indicatorSeparator"
+        />
+        <div
+          aria-hidden="true"
+          className="react-select__indicator react-select__dropdown-indicator css-19njzhr-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <span
+            className="c2"
+            color="black"
+            role="img"
+            size={3}
+          >
+            <svg
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polyline
+                points="18 15 12 9 6 15"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SelectDropdown renders correctly 1`] = `
+.c2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc(8px / 2);
+}
+
+.c2 svg {
+  stroke: black;
+  width: calc(3 * 8px);
+  height: calc(3 * 8px);
+}
+
+.c0 {
+  margin-bottom: calc(8px * 2);
+}
+
+.c0 label {
+  margin-bottom: calc(8px);
+}
+
+.c0 div[role='listbox'] div div {
+  margin-bottom: 8px;
+}
+
+.c1 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+<div
+  className="c0"
+>
+  <label
+    className="c1"
+  >
+    Select one option
+  </label>
+  <div
+    className=" css-3x5r4n-container"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="react-select__control css-44g3o0-Control"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+    >
+      <div
+        className="react-select__value-container css-tntsk8"
+      >
+        <div
+          className="react-select__placeholder css-1i2t3f2-placeholder"
+        >
+          Select...
+        </div>
+        <div
+          className="css-f7me8t-Input"
+        >
+          <div
+            className="react-select__input"
+            style={
+              Object {
+                "display": "inline-block",
+              }
+            }
+          >
+            <input
+              aria-autocomplete="list"
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={false}
+              id="react-select-2-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              spellCheck="false"
+              style={
+                Object {
+                  "background": 0,
+                  "border": 0,
+                  "boxSizing": "content-box",
+                  "color": "inherit",
+                  "fontSize": "inherit",
+                  "label": "input",
+                  "opacity": 1,
+                  "outline": 0,
+                  "padding": 0,
+                  "width": "1px",
+                }
+              }
+              tabIndex="0"
+              type="text"
+              value=""
+            />
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "left": 0,
+                  "overflow": "scroll",
+                  "position": "absolute",
+                  "top": 0,
+                  "visibility": "hidden",
+                  "whiteSpace": "pre",
+                }
+              }
+            >
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+      >
+        <span
+          className="react-select__indicator-separator css-43ykx9-indicatorSeparator"
+        />
+        <div
+          aria-hidden="true"
+          className="react-select__indicator react-select__dropdown-indicator css-19njzhr-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <span
+            className="c2"
+            color="black"
+            role="img"
+            size={3}
+          >
+            <svg
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polyline
+                points="6 9 12 15 18 9"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

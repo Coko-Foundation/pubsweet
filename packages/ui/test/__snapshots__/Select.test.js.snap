@@ -105,3 +105,78 @@ exports[`Select renders correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`Select should render my component 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "borderRadius": "8px",
+      "borderStyle": "solid",
+      "borderWidth": "1px",
+      "boxShadow": "none",
+      "colorBackground": "white",
+      "colorBackgroundHue": "grey",
+      "colorBorder": "grey",
+      "colorError": "red",
+      "colorFurniture": "grey",
+      "colorPrimary": "black",
+      "colorSecondary": "grey",
+      "colorSuccess": "green",
+      "colorText": "black",
+      "colorTextPlaceholder": "grey",
+      "colorTextReverse": "white",
+      "fontHeading": "serif",
+      "fontInterface": "sans-serif",
+      "fontReading": "serif",
+      "fontSizeBase": "18px",
+      "fontSizeBaseSmall": "16px",
+      "fontSizeHeading1": "36px",
+      "fontSizeHeading2": "32px",
+      "fontSizeHeading3": "29px",
+      "fontSizeHeading4": "26px",
+      "fontSizeHeading5": "23px",
+      "fontSizeHeading6": "20px",
+      "fontWriting": "monospace",
+      "gridUnit": "8px",
+      "lineHeightBase": "24px",
+      "lineHeightBaseSmall": "24px",
+      "lineHeightHeading1": "40px",
+      "lineHeightHeading2": "40px",
+      "lineHeightHeading3": "32px",
+      "lineHeightHeading4": "32px",
+      "lineHeightHeading5": "24px",
+      "lineHeightHeading6": "24px",
+      "transitionDelay": "500ms",
+      "transitionDuration": "1s",
+      "transitionDurationM": "0.5s",
+      "transitionDurationS": "0.2s",
+      "transitionDurationXs": "0.1s",
+      "transitionTimingFunction": "ease",
+    }
+  }
+>
+  <WithTheme(StyledSelect)
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "First",
+          "value": "first",
+        },
+        Object {
+          "label": "Second",
+          "value": "second",
+        },
+        Object {
+          "label": "Third",
+          "value": "third",
+        },
+        Object {
+          "label": "Fourth",
+          "value": "fourth",
+        },
+      ]
+    }
+  />
+</ThemeProvider>
+`;

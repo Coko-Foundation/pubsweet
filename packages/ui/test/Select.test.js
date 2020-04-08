@@ -1,4 +1,5 @@
 import React from 'react'
+import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 import 'jest-styled-components'
 import TestThemeProvider from './setup/theme'
@@ -16,10 +17,23 @@ describe('Select', () => {
     const tree = renderer
       .create(
         <TestThemeProvider>
-          <Select options={options} />
+          <Select isClearable options={options} />
         </TestThemeProvider>,
       )
       .toJSON()
     expect(tree).toMatchSnapshot()
+  })
+  test('should render my component', () => {
+    const wrapper = shallow(
+      <TestThemeProvider>
+        <Select
+          onChange={event => {
+            this.setState({ input: event.target.value })
+          }}
+          options={options}
+        />
+      </TestThemeProvider>,
+    )
+    expect(wrapper).toMatchSnapshot()
   })
 })
