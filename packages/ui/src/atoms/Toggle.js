@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { override, th } from '@pubsweet/ui-toolkit'
@@ -50,6 +50,10 @@ const Input = styled.input`
 
 const Toggle = ({ label, labelChecked, name, disabled, value, onClick }) => {
   const [ischecked, setChecked] = useState(value || false)
+
+  useEffect(() => {
+    setChecked(value)
+  }, [value])
 
   return (
     <Root>
