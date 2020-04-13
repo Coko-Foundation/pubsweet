@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle is rendered correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+
+.c2 {
+  width: 37.71px;
+  height: 6.08px;
+  border-radius: 8px;
+  background: grey;
+  border: 1px solid grey;
+  position: relative;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.c3 {
+  position: absolute;
+  top: -8px;
+  right: 50%;
+  width: 21px;
+  height: 21px;
+  background: grey;
+  border-radius: 50%;
+  -webkit-transition: right 0.3s;
+  transition: right 0.3s;
+}
+
+.c4 {
+  padding-top: 10px;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 8px;
+}
+
+.c1 {
+  visibility: hidden;
+  width: 1px;
+  position: absolute;
+}
+
+<div
+  className="c0"
+>
+  <input
+    className="c1"
+    name=""
+    type="text"
+    value="false"
+  />
+  <div
+    checked={false}
+    className="c2"
+    onClick={[Function]}
+  >
+    <div
+      checked={false}
+      className="c3"
+    />
+  </div>
+  <div
+    className="c4"
+  >
+    Not Admin
+  </div>
+</div>
+`;
