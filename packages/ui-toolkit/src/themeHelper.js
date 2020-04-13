@@ -1,6 +1,17 @@
 import { get } from 'lodash'
 
 /**
+ * Returns multiples of gridUnit.
+ *
+ * It lets you replace statements like this:
+ *    calc(${th('gridUnit')} * 4)
+ * to this:
+ *    ${grid(4)}
+ *
+ */
+const grid = value => props => `calc(${props.theme.gridUnit} * ${value})`
+
+/**
  * A bit of syntactic sugar for styled-components. Lets you replace this:
  *
  * ${props => props.theme.colorPrimary}
@@ -24,4 +35,4 @@ const validationColor = ({ theme, validationStatus = 'default' }) =>
     warning: theme.colorWarning,
   }[validationStatus])
 
-export { th, validationColor }
+export { grid, th, validationColor }
