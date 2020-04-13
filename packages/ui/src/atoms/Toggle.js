@@ -12,9 +12,8 @@ const Root = styled.div`
 `
 
 const ToggleUI = styled.div`
-  /* color: #171717; */
-  width: 37.71px;
-  height: 6.08px;
+  width: calc(5 * ${th('gridUnit')});
+  height: ${th('gridUnit')};
   border-radius: ${th('gridUnit')};
   background: ${th('colorBackgroundHue')};
   border: 1px solid ${th('colorBackgroundHue')};
@@ -27,8 +26,8 @@ const ToggleButton = styled.div`
   position: absolute;
   top: -${th('gridUnit')};
   right: ${props => (props.checked ? '-2px' : '50%')};
-  width: 21px;
-  height: 21px;
+  width: calc(3 * ${th('gridUnit')});
+  height: calc(3 * ${th('gridUnit')});
   background: ${props =>
     props.checked ? props.theme.colorPrimary : props.theme.colorSecondary};
   border-radius: 50%;

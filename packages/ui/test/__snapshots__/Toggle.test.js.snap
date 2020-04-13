@@ -10,8 +10,8 @@ exports[`Toggle is rendered correctly 1`] = `
 }
 
 .c2 {
-  width: 37.71px;
-  height: 6.08px;
+  width: calc(5 * 8px);
+  height: 8px;
   border-radius: 8px;
   background: grey;
   border: 1px solid grey;
@@ -24,8 +24,8 @@ exports[`Toggle is rendered correctly 1`] = `
   position: absolute;
   top: -8px;
   right: 50%;
-  width: 21px;
-  height: 21px;
+  width: calc(3 * 8px);
+  height: calc(3 * 8px);
   background: grey;
   border-radius: 50%;
   -webkit-transition: right 0.3s;

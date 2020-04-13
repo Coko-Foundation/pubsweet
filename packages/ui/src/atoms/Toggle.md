@@ -16,5 +16,5 @@ Toggle with label
 Toggle with LabelChecked
 
 ```js
-<Toggle label="Not Admin" labelChecked="Is admin" />
+<Toggle label="Not Checked" labelChecked="Is Checked" />
 ```
