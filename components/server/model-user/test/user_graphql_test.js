@@ -12,13 +12,8 @@ const { fixtures } = require('@pubsweet/model-user/test')
 const authentication = require('pubsweet-server/src/authentication')
 
 describe('User mutations', () => {
-  // let token
-  // let user
-
   beforeEach(async () => {
     await dbCleaner()
-    // user = await new User(fixtures.user).save()
-    // token = authentication.token.create(user)
   })
 
   it('a user can sign up', async () => {
@@ -26,6 +21,11 @@ describe('User mutations', () => {
       `mutation($input: UserInput) {
         createUser(input: $input) {
           username
+          defaultIdentity {
+            ... on Local {
+              email
+            }
+          }
         }
       }`,
       {
@@ -41,6 +41,9 @@ describe('User mutations', () => {
       data: {
         createUser: {
           username: 'hi',
+          defaultIdentity: {
+            email: 'hi@example.com',
+          },
         },
       },
     })

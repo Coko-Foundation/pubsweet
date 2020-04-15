@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.10.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.4...pubsweet-server@13.10.0) (2020-04-06)
+
+
+### Features
+
+* **model-user:** handle password check if password hash does not exist ([55cc082](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/55cc0828de09aa223a7a4eb031341ab280c4a73d))
+
+
+
+
+
+## [13.9.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.3...pubsweet-server@13.9.4) (2020-03-16)
+
+
+### Bug Fixes
+
+* **server:** fix loaders for multiple models per package ([8bd0926](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8bd0926504452318a96e96e66723c17d684d57d1))
+
+
+
+
+
+## [13.9.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.2...pubsweet-server@13.9.3) (2020-03-04)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.9.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.1...pubsweet-server@13.9.2) (2020-02-28)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+## [13.9.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.0...pubsweet-server@13.9.1) (2020-02-26)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
+# [13.9.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.8.2...pubsweet-server@13.9.0) (2020-01-29)
+
+
+### Features
+
+* **server:** enable completely custom entrypoint ([dae3175](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/dae31759cb19f9ebfac17705185daa4a5532c90a))
+
+
+
+
+
+## [13.8.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.8.1...pubsweet-server@13.8.2) (2020-01-23)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
 ## [13.8.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.8.0...pubsweet-server@13.8.1) (2019-12-11)
 
 **Note:** Version bump only for package pubsweet-server

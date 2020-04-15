@@ -1,20 +1,14 @@
 {
   "name": "@pubsweet/ui",
-  "version": "12.1.1",
+  "version": "12.3.4",
   "license": "MIT",
-  "files": [
-    "docs",
-    "dist",
-    "src"
-  ],
   "main": "dist",
-  "module": "src",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "dependencies": {
-    "@pubsweet/ui-toolkit": "^2.2.15",
+    "@pubsweet/ui-toolkit": "^2.2.22",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "formik": "^1.4.2",
@@ -26,13 +20,15 @@
     "react-dom": "^16.9.0",
     "react-feather": "^1.0.8",
     "react-router-dom": "^5.0.0",
+    "react-select": "^3.0.8",
     "react-tag-autocomplete": "^5.5.0",
     "react-uid": "^2.2.0",
     "recompose": "^0.30.0",
     "styled-components": "^5.0.0"
   },
   "scripts": {
-    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore node_modules,test,docs",
+    "prepare": "yarn run build"
   },
   "publishConfig": {
     "access": "public"

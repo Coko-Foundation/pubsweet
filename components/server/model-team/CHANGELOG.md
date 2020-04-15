@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.5...@pubsweet/model-team@4.0.0) (2020-04-06)
+
+
+### Features
+
+* **model-user:** change user model to account for identities ([8ae24e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ae24e81127abdffe217b77a3339b4a7522910ed))
+
+
+### BREAKING CHANGES
+
+* **model-user:** The user model is advancing into the next stage of its life. It no longer has
+collections or fragments arrays, and some crucial pieces of functionality are being moved into the
+Identity model. As such, this is a SEVERELY BREAKING CHANGE, you have been warned. It's still
+possible this is not a breaking change in some specific circumstances, and we will try to maximize
+those by providing sensible migrations, but it is very unlikely nonetheless. Please let us know if
+you have any questions when/if you decide to migrate.
+
+
+
+
+
+## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.4...@pubsweet/model-team@3.0.5) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+## [3.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.3...@pubsweet/model-team@3.0.4) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+## [3.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.2...@pubsweet/model-team@3.0.3) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+## [3.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.1...@pubsweet/model-team@3.0.2) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.0...@pubsweet/model-team@3.0.1) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+# [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.2.1...@pubsweet/model-team@3.0.0) (2020-01-23)
+
+
+### Bug Fixes
+
+* **model-team:** make team_id not nullable ([b6ce134](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b6ce13412a72597355ea93e828b909516508de39)), closes [#455](https://gitlab.coko.foundation/pubsweet/pubsweet/issues/455)
+
+
+### BREAKING CHANGES
+
+* **model-team:** Team_id is no longer nullable. A team member can not be created without a team (but
+it can be created without a user)
+
+
+
+
+
 ## [2.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@2.2.0...@pubsweet/model-team@2.2.1) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/model-team

@@ -156,7 +156,6 @@ const typeDefs = `
     users: [ID!]
     alias: AliasInput
   }
-
 `
 
 module.exports = { resolvers, typeDefs }

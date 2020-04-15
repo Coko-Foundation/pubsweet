@@ -1,10 +1,10 @@
 Modal containing full information about a person - for use within the PersonPod inside the PeoplePicker
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
   open: false,
   selected: false,
-}
+})
 ;<div>
   <p>Person has been selected: {state.selected ? 'true' : 'false'}</p>
   <button onClick={() => setState({ open: true })}>Full Person Info</button>

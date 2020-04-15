@@ -1,7 +1,6 @@
 const logger = require('@pubsweet/logger')
 const { AuthorizationError, ConflictError } = require('@pubsweet/errors')
 
-// const eager = 'teams.members.[user, alias]'
 const eager = undefined
 
 const resolvers = {
@@ -20,16 +19,28 @@ const resolvers = {
   },
   Mutation: {
     async createUser(_, { input }, ctx) {
-      if (input.password) {
-        input.passwordHash = await ctx.connectors.User.model.hashPassword(
+      const user = {
+        username: input.username,
+        email: input.email,
+        passwordHash: await ctx.connectors.User.model.hashPassword(
           input.password,
-        )
-        delete input.password
+        ),
       }
 
+      const identity = {
+        type: 'local',
+        aff: input.aff,
+        name: input.name,
+        isDefault: true,
+      }
+      user.defaultIdentity = identity
+
       try {
-        const user = await ctx.connectors.User.create(input, ctx)
-        return user
+        const result = await ctx.connectors.User.create(user, ctx, {
+          eager: 'defaultIdentity',
+        })
+
+        return result
       } catch (e) {
         if (e.constraint) {
           throw new ConflictError(
@@ -74,9 +85,21 @@ const resolvers = {
       }
     },
   },
+  Local: {
+    __isTypeOf: (obj, context, info) => obj.type === 'local',
+    async email(obj, args, ctx, info) {
+      // Emails stored on user, but surfaced in local identity too
+      return (await ctx.loaders.User.load(obj.userId)).email
+    },
+  },
+  External: {
+    __isTypeOf: (obj, context, info) => obj.type === 'external',
+  },
 }
 
 const typeDefs = `
+  scalar DateTime
+
   extend type Query {
     user(id: ID): User
     users: [User]
@@ -90,10 +113,34 @@ const typeDefs = `
 
   type User {
     id: ID!
-    type: String
+    created: DateTime!
+    updated: DateTime
     username: String
     email: String
     admin: Boolean
+    identities: [Identity]
+    defaultIdentity: Identity
+  }
+
+  type Name {
+    surname: String
+    givenNames: String
+    title: String
+  }
+
+  union Identity = Local | External
+
+  # local identity (not from ORCID, etc.)
+  type Local {
+    name: Name
+    email: String
+    aff: String # JATS <aff>
+  }
+
+  type External {
+    identifier: String
+    email: String
+    aff: String # JATS <aff>
   }
 
   input UserInput {

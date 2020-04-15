@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.6.2...@pubsweet/base-model@3.6.3) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.6.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.6.1...@pubsweet/base-model@3.6.2) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.6.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.6.0...@pubsweet/base-model@3.6.1) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+# [3.6.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.5...@pubsweet/base-model@3.6.0) (2020-02-28)
+
+
+### Features
+
+* **base-model:** accept existing transaction in save() ([4095293](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4095293ff02155fb395ca562b7e6a6f0899acc11))
+
+
+
+
+
+## [3.5.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.4...@pubsweet/base-model@3.5.5) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.5.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.3...@pubsweet/base-model@3.5.4) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
+## [3.5.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.2...@pubsweet/base-model@3.5.3) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/base-model
+
+
+
+
+
 ## [3.5.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.5.1...@pubsweet/base-model@3.5.2) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/base-model

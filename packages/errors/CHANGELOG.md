@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.33](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.32...@pubsweet/errors@2.0.33) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.32](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.31...@pubsweet/errors@2.0.32) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.31](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.30...@pubsweet/errors@2.0.31) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.29...@pubsweet/errors@2.0.30) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.28...@pubsweet/errors@2.0.29) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.27...@pubsweet/errors@2.0.28) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
+## [2.0.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.26...@pubsweet/errors@2.0.27) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/errors
+
+
+
+
+
 ## [2.0.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/errors@2.0.25...@pubsweet/errors@2.0.26) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/errors

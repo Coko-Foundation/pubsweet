@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.7...@pubsweet/component-send-email@0.4.0) (2020-04-06)
+
+
+### Features
+
+* **component-send-email:** send email returns info about the operation ([8163c29](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8163c297015b18c3dae6708a300e8f415ddf10ec))
+
+
+
+
+
+## [0.3.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.6...@pubsweet/component-send-email@0.3.7) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
+## [0.3.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.5...@pubsweet/component-send-email@0.3.6) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
+## [0.3.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.4...@pubsweet/component-send-email@0.3.5) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
+## [0.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.3...@pubsweet/component-send-email@0.3.4) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
+## [0.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.2...@pubsweet/component-send-email@0.3.3) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
+## [0.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.1...@pubsweet/component-send-email@0.3.2) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/component-send-email
+
+
+
+
+
 ## [0.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-send-email@0.3.0...@pubsweet/component-send-email@0.3.1) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/component-send-email

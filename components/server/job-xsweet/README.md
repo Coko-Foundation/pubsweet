@@ -12,7 +12,7 @@ Once specified in your app's components config by adding '@pubsweet/job-xsweet' 
 
 That takes a `docx` file formdata input, with e.g. something like a
 
-```
+```static
 curl -X POST \
   'http://localhost:3000/convertDocxToHTML?=' \
   -H 'cache-control: no-cache' \
@@ -34,13 +34,13 @@ After the Docker container starts up, jobs from the endpoint will start to be pr
 
 Testing has to be done semi-automatically for now, as GitLab CI does not allow for service-2-service communication yet (https://gitlab.com/gitlab-org/gitlab-runner/merge_requests/1041), by running:
 
-```
+```static
 cd components/server/job-xsweet && yarn test --testRegex test/standaloneXsweetTest.js
 ```
 
 And in a separate window, building and starting the `job-xsweet` container like so:
 
-```
+```static
 docker build -t pubsweet/job-xsweet components/server/job-xsweet
 docker run -e DATABASE_URL="postgres://yourUsername@host.docker.internal/test" pubsweet/job-xsweet
 ```

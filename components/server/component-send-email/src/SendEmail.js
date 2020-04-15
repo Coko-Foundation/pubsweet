@@ -30,6 +30,7 @@ module.exports = {
             logger.info(`Email sent.`)
           }
         }
+        return info
       })
       .catch(err => {
         logger.error(`Failed to send email ${err}`)

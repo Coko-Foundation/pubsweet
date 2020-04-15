@@ -179,6 +179,7 @@ describe('Manuscript', () => {
     expect(spy).toHaveBeenCalledTimes(1)
     spy.mockRestore()
   })
+
   it('should execute save inside a transaction', async () => {
     const spy = jest.spyOn(Manuscript.knex(), 'transaction')
 
@@ -186,5 +187,24 @@ describe('Manuscript', () => {
 
     expect(spy).toHaveBeenCalledTimes(1)
     spy.mockRestore()
+  })
+
+  it('works when a transaction passed to save()', async () => {
+    const { transaction } = require('objection')
+    const trx = await transaction.start(Manuscript.knex())
+
+    const manuscript = await new Manuscript({ title: 'Test' }).save(trx)
+
+    // First you can't find it because it hasn't been committed yet
+    await expect(Manuscript.find(manuscript.id)).rejects.toThrow(
+      'Object not found',
+    )
+
+    // Then you commit it
+    await trx.commit()
+
+    // Then you can find it
+    const foundManuscript = await Manuscript.find(manuscript.id)
+    expect(foundManuscript.title).toBe('Test')
   })
 })

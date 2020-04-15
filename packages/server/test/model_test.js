@@ -1,5 +1,5 @@
 const { Fragment, Collection } = require('@pubsweet/models')
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 const dbCleaner = require('./helpers/db_cleaner')
 const fixtures = require('./fixtures/fixtures')
 
@@ -67,11 +67,9 @@ describe('Model', () => {
 
     const sameUser = await User.find(user.id)
 
-    try {
-      await Promise.all([user.save(), sameUser.save()])
-    } catch (e) {
-      expect(e.message).toMatch('Integrity Error')
-    }
+    await expect(Promise.all([user.save(), sameUser.save()])).rejects.toThrow(
+      'Integrity Error',
+    )
   })
 
   it('can find by multiple fields', async () => {

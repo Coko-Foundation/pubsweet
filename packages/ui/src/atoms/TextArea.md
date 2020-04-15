@@ -1,7 +1,7 @@
 A form input for large amounts of plain text.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextArea
   value={state.value}
   placeholder="so you can write some in here"
@@ -12,7 +12,7 @@ initialState = { value: '' }
 The text area can have a label.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextArea
   label="Foo"
   value={state.value}
@@ -24,7 +24,7 @@ initialState = { value: '' }
 By default in most browsers, the textarea is expandable. You can increase or decrease the number of rows initially shown.
 
 ```js
-initialState = { value: '' }
+const [state, setState] = React.useState({ value: '' })
 ;<TextArea
   label="Foo"
   value={state.value}

@@ -1,15 +1,15 @@
 {
   "name": "pubsweet-client",
-  "version": "10.1.1",
-  "main": "src/index.js",
+  "version": "10.2.2",
+  "main": "dist",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
     "@apollo/react-common": "^3.1.3",
     "@apollo/react-components": "^3.1.3",
     "@apollo/react-hoc": "^3.1.3",
-    "@pubsweet/ui": "^12.1.1",
-    "@pubsweet/ui-toolkit": "^2.2.15",
+    "@pubsweet/ui": "^12.3.4",
+    "@pubsweet/ui-toolkit": "^2.2.22",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.11",
@@ -33,7 +33,8 @@
     "pubsweet-server": ">=13.0.0"
   },
   "scripts": {
-    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js"
+    "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js",
+    "prepare": "yarn run build"
   },
   "repository": {
     "type": "git",

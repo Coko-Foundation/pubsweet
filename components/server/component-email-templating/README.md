@@ -12,7 +12,9 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 1.  `type`: a String that can be either `user` or `system` which can be used in the unsubscribe process
 2.  `fromEmail`: a String indicating the from name and from email address: `Coko <team@coko.foundation>`
 3.  `toUser`: an Object with two properties: `email` and `name`. The `name` property will be used when addressing the recipient in the email content - for example: "Dear Dr. Rachel Smith".
-4.  `content`: an Object which contains properties about the email:
+4.  `cc`: can be either a `string` containing an email address, or an `array` of `string` with email addresses
+5.  `bcc`: can be either a `string` containing an email address, or an `array` of `string` with email addresses
+6.  `content`: an Object which contains properties about the email:
     - `subject`
     - `paragraph`: the main text part of the email body which informs the recipient
     - `signatureName` - the name which will appear in the signature
@@ -20,7 +22,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
     - `ctaText` - the text which appears on the button
     - `unsubscribeLink`
     - `signatureJournal` - the journal or company name which will appear in the signature
-5.  `bodyProps`:
+7.  `bodyProps`:
     - `hasLink`: a boolean which indicates if the email body contains a CTA (big button) or not
     - `hasIntro`: a boolean which indicates if the email body contains the "Dear Dr. John" introduction or not.
     - `hasSignature`: a boolean which indicates if the email body contains a typical "Kind regards," signature or not
@@ -31,7 +33,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 
     In order to use this component, you need the to add the following data in your main config file:
 
-    ```javascript
+    ```js static
       journal: {
         name: 'Coko Foundation',
         staffEmail: 'Coko <team@coko.foundation>',
@@ -57,7 +59,7 @@ The `Email` class also provides a `constructor` whose properties will be used wh
 
     ![notification](https://gitlab.coko.foundation/xpub/xpub-faraday/uploads/27cb6acc8ff4a07758f55e5ea0504d28/notification.png)
 
-    ```javascript
+    ```js static
     const EmailTemplate = require('@pubsweet/component-email-template')
     const config = require('config')
 

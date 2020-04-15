@@ -13,7 +13,7 @@ process.env.NODE_CONFIG = `{"pubsweet":{
 
 // ('@pubsweet/model-fragment')
 
-const { model: User } = require('@pubsweet/model-user')
+const { User } = require('@pubsweet/models')
 
 const { dbCleaner, api } = require('pubsweet-server/test')
 

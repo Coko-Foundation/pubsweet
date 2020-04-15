@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.36](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.35...@pubsweet/model-blogpost@0.0.36) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.35](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.34...@pubsweet/model-blogpost@0.0.35) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.34](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.33...@pubsweet/model-blogpost@0.0.34) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.33](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.32...@pubsweet/model-blogpost@0.0.33) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.32](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.31...@pubsweet/model-blogpost@0.0.32) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.31](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.30...@pubsweet/model-blogpost@0.0.31) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
+## [0.0.30](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.29...@pubsweet/model-blogpost@0.0.30) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/model-blogpost
+
+
+
+
+
 ## [0.0.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-blogpost@0.0.28...@pubsweet/model-blogpost@0.0.29) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/model-blogpost

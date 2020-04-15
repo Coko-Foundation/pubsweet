@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.7...jest-environment-db@3.1.8) (2020-04-06)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.6...jest-environment-db@3.1.7) (2020-03-16)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.5...jest-environment-db@3.1.6) (2020-03-04)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.4...jest-environment-db@3.1.5) (2020-02-28)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.3...jest-environment-db@3.1.4) (2020-02-26)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.2...jest-environment-db@3.1.3) (2020-01-29)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
+## [3.1.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.1...jest-environment-db@3.1.2) (2020-01-23)
+
+**Note:** Version bump only for package jest-environment-db
+
+
+
+
+
 ## [3.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/jest-environment-db@3.1.0...jest-environment-db@3.1.1) (2019-12-11)
 
 **Note:** Version bump only for package jest-environment-db

@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.21...@pubsweet/ui-toolkit@2.2.22) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.20...@pubsweet/ui-toolkit@2.2.21) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.19...@pubsweet/ui-toolkit@2.2.20) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.18...@pubsweet/ui-toolkit@2.2.19) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.17...@pubsweet/ui-toolkit@2.2.18) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.16...@pubsweet/ui-toolkit@2.2.17) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+## [2.2.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.15...@pubsweet/ui-toolkit@2.2.16) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
 ## [2.2.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.14...@pubsweet/ui-toolkit@2.2.15) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit

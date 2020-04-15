@@ -244,6 +244,15 @@
           "<rootDir>/test/jest-setup.js"
         ],
         "testEnvironment": "node"
+      },
+      {
+        "rootDir": "<rootDir>/components/server/component-email-templating",
+        "displayName": "component-email-templating",
+        "testRegex": "/test/.*.test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "node"
       }
     ]
   },

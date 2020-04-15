@@ -19,7 +19,7 @@ High level architecture of a PubSweet application
 
 # Server
 
-The [`pubsweet-server`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server 'undefined') package is the backbone of PubSweet applications. It is built on top of the [Express](expressjs.com 'undefined') web framework. It comes as a dependency to your project, removing the need to develop your server from scratch, while also allowing for extensibility, in order to cover different organizations' custom needs. It is responsible for:
+The [`pubsweet-server`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/packages/server 'undefined') package is the backbone of PubSweet applications. It is built on top of the [Express](https://expressjs.com 'undefined') web framework. It comes as a dependency to your project, removing the need to develop your server from scratch, while also allowing for extensibility, in order to cover different organizations' custom needs. It is responsible for:
 
 - Connecting to the database layer
 - Maintaining a job queue
@@ -54,7 +54,7 @@ Authentication can be provided in various ways:
 - Authentication token
 - External OAuth service, e.g. ORCID
 
-Access control in PubSweet is applied through Authsome (see the “[Authorization and Permissions](inline 'undefined')” chapter).
+Access control in PubSweet is applied through Authsome (see the “[Authorization and Permissions](#/Authorization%20and%20permissions 'undefined')” chapter).
 
 Authsome is a flexible team-based authorization module, which means that authorization is determined based on team membership. A team consists of a group of members and belongs to one of the team types configured at load time. A team can also be conditionally active, i.e. only active if the current state of the object matches the requirement for team activation. Setting up and usage is covered in the Authsome chapter.
 

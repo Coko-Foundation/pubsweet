@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.18...pubsweet-component-signup@2.1.19) (2020-04-06)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.17...pubsweet-component-signup@2.1.18) (2020-03-16)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.16...pubsweet-component-signup@2.1.17) (2020-03-04)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.16](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.15...pubsweet-component-signup@2.1.16) (2020-02-28)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.15](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.14...pubsweet-component-signup@2.1.15) (2020-02-26)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.13...pubsweet-component-signup@2.1.14) (2020-01-29)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
+## [2.1.13](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.12...pubsweet-component-signup@2.1.13) (2020-01-23)
+
+**Note:** Version bump only for package pubsweet-component-signup
+
+
+
+
+
 ## [2.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.11...pubsweet-component-signup@2.1.12) (2019-12-11)
 
 

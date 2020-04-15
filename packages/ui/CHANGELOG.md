@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.3...@pubsweet/ui@12.3.4) (2020-04-06)
+
+
+### Bug Fixes
+
+* **ui:** export Paragraph in ui's atoms ([cf371e3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf371e3dfb63a95a619704440a1a28111951eb63))
+
+
+
+
+
+## [12.3.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.2...@pubsweet/ui@12.3.3) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+## [12.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.1...@pubsweet/ui@12.3.2) (2020-03-04)
+
+
+### Bug Fixes
+
+* **ui:** only use main, not module ([fa2d6ab](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fa2d6ab1ebb51a09bb70f57aaf6e5502b6e87b20))
+
+
+
+
+
+## [12.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.0...@pubsweet/ui@12.3.1) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+# [12.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.2.1...@pubsweet/ui@12.3.0) (2020-02-26)
+
+
+### Bug Fixes
+
+* added more props to IconButton ([c91b964](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c91b9647015a8bf8c85705fcc6ec809e2cc53afb))
+* added styling to icon ([39bfb3e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/39bfb3e65d6947f6bde2252c0ea641d2fea93d23))
+* added tests ([a2b083e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/a2b083e7f0775610bde1ca8cd3011f5233ca0722))
+* restructured code for the component ([76cb426](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/76cb4261fd5bff4f794b5d17f1bed225046bbc45))
+* styled vertical alignment for icon and text ([7892a17](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7892a17c85f8a5a1b79e59e030fb7137236352b9))
+* updated tests ([b803e22](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b803e227e8d95014f4f8f82105dff9eb8949182c))
+
+
+### Features
+
+* **ui:** add IconButton component ([bd4162c](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bd4162c411ddf38676a4f09bbd47ded4d444ca3f))
+* **ui:** add paragraph component ([cf0d441](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/cf0d441026bf33355bb0c1ca093278f3d09b2538))
+
+
+
+
+
+## [12.2.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.2.0...@pubsweet/ui@12.2.1) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
+# [12.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.1.1...@pubsweet/ui@12.2.0) (2020-01-23)
+
+
+### Features
+
+* added ability to override icon via theme ([b6195f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/b6195f6a5b68c263170904034f8268bc10669394))
+
+
+
+
+
 ## [12.1.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.1.0...@pubsweet/ui@12.1.1) (2019-12-11)
 
 **Note:** Version bump only for package @pubsweet/ui

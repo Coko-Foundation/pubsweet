@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.24](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.23...@pubsweet/component-password-reset-client@3.1.24) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.22...@pubsweet/component-password-reset-client@3.1.23) (2020-03-16)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.21...@pubsweet/component-password-reset-client@3.1.22) (2020-03-04)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.20...@pubsweet/component-password-reset-client@3.1.21) (2020-02-28)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.20](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.19...@pubsweet/component-password-reset-client@3.1.20) (2020-02-26)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.19](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.18...@pubsweet/component-password-reset-client@3.1.19) (2020-01-29)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
+## [3.1.18](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.17...@pubsweet/component-password-reset-client@3.1.18) (2020-01-23)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
 ## [3.1.17](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.16...@pubsweet/component-password-reset-client@3.1.17) (2019-12-11)
 
 
