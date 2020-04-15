@@ -21,5 +21,7 @@ export { default as TwoColumnLayout } from './TwoColumnLayout'
 export { default as Upload } from './Upload'
 export { default as YesOrNo } from './YesOrNo'
 export { default as Tabs } from './Tabs'
+export { default as Select } from './Select'
+export { default as SelectDropdown } from './SelectDropdown'
 
 export * from './modal'
