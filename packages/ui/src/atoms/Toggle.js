@@ -1,23 +1,25 @@
 /* eslint-disable sort-keys */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { override, th } from '@pubsweet/ui-toolkit'
 
-const Root = styled.div`
+const Root = styled.label`
   display: flex;
-  padding: 10px;
+  padding: ${th('gridUnit')};
+  &:hover span {
+    color: ${th('colorPrimary')};
+  }
   ${override('ui.Toggle')};
 `
 
-const Input = styled.span`
+const Label = styled.span`
   width: calc(5 * ${th('gridUnit')});
   height: ${th('gridUnit')};
   border-radius: ${th('gridUnit')};
   background: ${th('colorBackgroundHue')};
   border: 1px solid ${th('colorBackgroundHue')};
-  position: relative;
   cursor: pointer;
   margin: ${th('gridUnit')};
 
@@ -29,50 +31,59 @@ const Input = styled.span`
     height: calc(3 * ${th('gridUnit')});
     border-radius: 50%;
     top: -${th('gridUnit')};
-    left: ${props => (props.checked ? '20px' : '0px')};
+    left: ${props => (props.checked ? '24px' : '0px')};
     background: ${props =>
       props.checked ? props.theme.colorPrimary : props.theme.colorSecondary};
     transition: left 0.3s;
   }
 `
 
-const Label = styled.div`
-  padding-top: 10px;
-  font-family: ${th('fontInterface')};
-  font-size: ${th('fontSizeBase')};
-  line-height: ${th('gridUnit')};
+const Input = styled.input`
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  margin-right: ${th('gridUnit')};
+`
+const Span = styled.span`
+  position: absolute;
+  padding-left: calc(4 * ${th('gridUnit')});
+  margin-top: -${th('gridUnit')};
 `
 
-const Toggle = ({ label, labelChecked, name, disabled, value, onClick }) => {
-  const [ischecked, setChecked] = useState(value || false)
-
-  useEffect(() => {
-    setChecked(value)
-  }, [value])
+const Toggle = ({
+  label,
+  labelChecked,
+  name,
+  disabled,
+  required,
+  value,
+  checked,
+  onChange,
+}) => {
+  checked = checked || false
 
   return (
     <Root>
       <Input
-        checked={ischecked}
+        checked={checked}
+        disabled={disabled}
         name={name}
-        onClick={() => {
-          if (!disabled) {
-            onClick(!ischecked)
-            setChecked(!ischecked)
-          }
-        }}
+        onChange={disabled ? undefined : onChange}
+        required={required}
         type="checkbox"
-        value={ischecked ? 'true' : 'false'}
+        value={value}
       />
-      {labelChecked && ischecked ? (
-        <>
-          <Label>{labelChecked}</Label>
-        </>
-      ) : (
-        <>
-          <Label>{label}</Label>
-        </>
-      )}
+      <Label checked={checked}>
+        {labelChecked && checked ? (
+          <>
+            <Span>{labelChecked}</Span>
+          </>
+        ) : (
+          <>
+            <Span>{label}</Span>
+          </>
+        )}
+      </Label>
     </Root>
   )
 }
@@ -82,7 +93,7 @@ Toggle.propTypes = {
   disabled: PropTypes.bool,
   label: PropTypes.string,
   labelChecked: PropTypes.string,
-  onClick: PropTypes.func,
+  onChange: PropTypes.func,
   name: PropTypes.string,
 }
 
@@ -92,7 +103,7 @@ Toggle.defaultProps = {
   label: '',
   labelChecked: '',
   name: '',
-  onClick: () => {},
+  onChange: () => {},
 }
 
 export default Toggle

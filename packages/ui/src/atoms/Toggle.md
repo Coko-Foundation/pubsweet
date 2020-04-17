@@ -4,17 +4,41 @@ Often useful in forms, but not limited to them.
 Basic Toggle
 
 ```js
-<Toggle />
+import { useState } from 'react'
+const [state, setState] = useState({ checked: null })
+
+;<Toggle
+  name="toggle"
+  checked={state.checked}
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```
 
 Toggle with label
 
 ```js
-<Toggle label="Admin" name="test" />
+import { useState } from 'react'
+const [state, setState] = useState({ checked: null })
+
+;<Toggle
+  name="toggle"
+  label="LabelName"
+  checked={state.checked}
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```
 
 Toggle with LabelChecked
 
 ```js
-<Toggle label="Not Checked" labelChecked="Is Checked" />
+import { useState } from 'react'
+const [state, setState] = useState({ checked: null })
+
+;<Toggle
+  name="toggle"
+  label="Not Checked"
+  labelChecked="Is Checked"
+  checked={state.checked}
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```
