@@ -11,7 +11,7 @@ const Root = styled.div`
   ${override('ui.Toggle')};
 `
 
-const ToggleUI = styled.div`
+const Input = styled.span`
   width: calc(5 * ${th('gridUnit')});
   height: ${th('gridUnit')};
   border-radius: ${th('gridUnit')};
@@ -20,18 +20,20 @@ const ToggleUI = styled.div`
   position: relative;
   cursor: pointer;
   margin: ${th('gridUnit')};
-`
 
-const ToggleButton = styled.div`
-  position: absolute;
-  top: -${th('gridUnit')};
-  right: ${props => (props.checked ? '-2px' : '50%')};
-  width: calc(3 * ${th('gridUnit')});
-  height: calc(3 * ${th('gridUnit')});
-  background: ${props =>
-    props.checked ? props.theme.colorPrimary : props.theme.colorSecondary};
-  border-radius: 50%;
-  transition: right 0.3s;
+  &:before {
+    content: ' ';
+    display: inline-block;
+    position: relative;
+    width: calc(3 * ${th('gridUnit')});
+    height: calc(3 * ${th('gridUnit')});
+    border-radius: 50%;
+    top: -${th('gridUnit')};
+    left: ${props => (props.checked ? '20px' : '0px')};
+    background: ${props =>
+      props.checked ? props.theme.colorPrimary : props.theme.colorSecondary};
+    transition: left 0.3s;
+  }
 `
 
 const Label = styled.div`
@@ -39,12 +41,6 @@ const Label = styled.div`
   font-family: ${th('fontInterface')};
   font-size: ${th('fontSizeBase')};
   line-height: ${th('gridUnit')};
-`
-
-const Input = styled.input`
-  visibility: hidden;
-  width: 1px;
-  position: absolute;
 `
 
 const Toggle = ({ label, labelChecked, name, disabled, value, onClick }) => {
@@ -56,19 +52,18 @@ const Toggle = ({ label, labelChecked, name, disabled, value, onClick }) => {
 
   return (
     <Root>
-      <Input name={name} type="text" value={ischecked ? 'true' : 'false'} />
-
-      <ToggleUI
+      <Input
         checked={ischecked}
+        name={name}
         onClick={() => {
           if (!disabled) {
             onClick(!ischecked)
             setChecked(!ischecked)
           }
         }}
-      >
-        <ToggleButton checked={ischecked} />
-      </ToggleUI>
+        type="checkbox"
+        value={ischecked ? 'true' : 'false'}
+      />
       {labelChecked && ischecked ? (
         <>
           <Label>{labelChecked}</Label>

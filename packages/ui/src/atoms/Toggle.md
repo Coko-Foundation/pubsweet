@@ -10,7 +10,7 @@ Basic Toggle
 Toggle with label
 
 ```js
-<Toggle label="Admin" />
+<Toggle label="Admin" name="test" />
 ```
 
 Toggle with LabelChecked
