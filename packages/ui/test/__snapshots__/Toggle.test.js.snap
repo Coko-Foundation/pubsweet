@@ -6,7 +6,11 @@ exports[`Toggle is rendered correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 10px;
+  padding: 8px;
+}
+
+.c0:hover span {
+  color: black;
 }
 
 .c2 {
@@ -15,59 +19,58 @@ exports[`Toggle is rendered correctly 1`] = `
   border-radius: 8px;
   background: grey;
   border: 1px solid grey;
-  position: relative;
   cursor: pointer;
   margin: 8px;
 }
 
-.c3 {
-  position: absolute;
-  top: -8px;
-  right: 50%;
+.c2:before {
+  content: ' ';
+  display: inline-block;
+  position: relative;
   width: calc(3 * 8px);
   height: calc(3 * 8px);
-  background: grey;
   border-radius: 50%;
-  -webkit-transition: right 0.3s;
-  transition: right 0.3s;
-}
-
-.c4 {
-  padding-top: 10px;
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 8px;
+  top: -8px;
+  left: 0px;
+  background: grey;
+  -webkit-transition: left 0.3s;
+  transition: left 0.3s;
 }
 
 .c1 {
-  visibility: hidden;
-  width: 1px;
   position: absolute;
+  opacity: 0;
+  z-index: -1;
+  margin-right: 8px;
 }
 
-<div
+.c3 {
+  position: absolute;
+  padding-left: calc(4 * 8px);
+  margin-top: -8px;
+}
+
+<label
   className="c0"
 >
   <input
+    checked={false}
     className="c1"
+    disabled={false}
     name=""
-    type="text"
-    value="false"
+    onChange={[Function]}
+    type="checkbox"
+    value={false}
   />
-  <div
+  <span
     checked={false}
     className="c2"
-    onClick={[Function]}
   >
-    <div
-      checked={false}
+    <span
       className="c3"
-    />
-  </div>
-  <div
-    className="c4"
-  >
-    Not Admin
-  </div>
-</div>
+    >
+      Not Admin
+    </span>
+  </span>
+</label>
 `;
