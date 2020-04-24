@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.23](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.22...@pubsweet/component-people-picker@0.1.23) (2020-04-24)
+
+
+### Bug Fixes
+
+* change use of useState ([0875b6f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/0875b6f0402d3ee255ed89d1af64df0d899abf74))
+
+
+
+
+
 ## [0.1.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.21...@pubsweet/component-people-picker@0.1.22) (2020-04-06)
 
 **Note:** Version bump only for package @pubsweet/component-people-picker
