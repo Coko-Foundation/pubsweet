@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-user",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "A basic User model",
   "main": "src/index.js",
   "scripts": {
@@ -9,10 +9,10 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/base-model": "^3.6.3",
-    "@pubsweet/errors": "^2.0.33",
-    "@pubsweet/logger": "^0.2.43",
-    "@pubsweet/models": "^0.3.8",
+    "@pubsweet/base-model": "^3.6.4",
+    "@pubsweet/errors": "^2.0.34",
+    "@pubsweet/logger": "^0.2.44",
+    "@pubsweet/models": "^0.3.9",
     "bcrypt": "^3.0.6"
   },
   "publishConfig": {

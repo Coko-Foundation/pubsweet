@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.4...@pubsweet/ui@12.4.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* **ui:** added more styles and fixed a typo ([9f93d83](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9f93d83992f1fe294f8c6b62020bcbcd4379a627))
+* **ui:** added styling and more options to Select componet ([e1d4c1d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e1d4c1d76a3ab9942a59db22d6bd9a771e44db00))
+* **ui:** added styling to Select component and custom dropdownIndicator ([4ed69fc](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/4ed69fc066a7659d8b1490052da2451976373d58))
+* **ui:** added useEffect for Toggle component ([9fc8aee](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/9fc8aeedddbf66e1ef0be34f21bcd5c718d9a428))
+* **ui:** clickable label and onChange func for Toggle ([fcba0af](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fcba0af0d7b51479b142df1b58b8e062e27df2c1))
+* **ui:** removed unnecessary content ([74d0a8b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/74d0a8b1a7c9d8bf007d26b02418a274a1946db1))
+* **ui:** styled dropdownIndicator for Select ([7196033](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/71960331bdcf4a36a2a617e8b04338318ed61c60))
+* **ui:** updated size for toggle component ([c180d88](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c180d88de7cd6699079112b3ff5482b84793dfdd))
+
+
+### Features
+
+* **ui:** add Toggle component ([1355fc0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1355fc0adabdb71acd73740c72834766109aee94))
+* **ui:** added Select component using react-select ([946060a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/946060a2fe775bd4fb7d6a10f98c62e1fbd7d74a))
+* **ui:** added SelectDropdown component build with Select ([6c39ac6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6c39ac6d3befd86ebb6b11915adc76ea3712c936))
+
+
+
+
+
 ## [12.3.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.3...@pubsweet/ui@12.3.4) (2020-04-06)
 
 
