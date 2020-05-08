@@ -1,24 +1,33 @@
 import styled, { css } from 'styled-components'
 import { darken, override, th } from '@pubsweet/ui-toolkit'
 
+const backgroundColor = props =>
+  props.background ? props.background : props.theme.colorPrimary
+
 const primary = css`
-  background: ${th('colorPrimary')};
-  color: ${th('colorTextReverse')};
+  background: ${backgroundColor};
+  color: ${props => (props.color ? props.color : props.theme.colorTextReverse)};
 
   &:focus,
   &:hover {
-    background-color: ${darken('colorPrimary', 0.3)};
+    background-color: ${props =>
+      props.background
+        ? darken(props.background, 0.3)
+        : darken(props.theme.colorPrimary, 0.3)};
   }
 
   &:active {
-    background-color: ${darken('colorPrimary', 0.5)};
+    background-color: ${props =>
+      props.background
+        ? darken(props.background, 0.5)
+        : darken(props.theme.colorPrimary, 0.5)};
   }
 
   &[disabled] {
     &:focus,
     &:hover,
     &:active {
-      background: ${th('colorPrimary')};
+      background: ${backgroundColor};
     }
   }
 `
@@ -26,16 +35,22 @@ const primary = css`
 const StyledButton = styled.button.attrs(props => ({
   'data-test-id': props['data-test-id'],
   type: props.type || 'button',
+  size: props.size || 'undefinded',
+  color: props.color,
+  background: props.background,
 }))`
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
   border-radius: ${th('borderRadius')};
-  color: ${th('colorText')};
+  color: ${props => (props.color ? props.color : props.theme.colorText)};
   font-family: ${th('fontInterface')};
-  font-size: ${th('fontSizeBase')};
+  font-size: ${props =>
+    props.size === 'small'
+      ? props.theme.fontSizeBaseSmall
+      : props.theme.fontSizeBase};
   line-height: calc(${th('gridUnit')} * 3);
   min-width: calc(${th('gridUnit')} * 12);
-  padding: ${th('gridUnit')};
+  padding: ${props => (props.size === 'small' ? '0' : props.theme.gridUnit)};
 
   &:focus,
   &:hover {

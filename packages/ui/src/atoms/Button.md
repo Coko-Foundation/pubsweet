@@ -15,11 +15,19 @@ A disabled primary button.
 A non-primary button.
 
 ```js
-<Button>Save</Button>
+<Button color="green">Save</Button>
 ```
 
 A disabled non-primary button.
 
 ```js
 <Button disabled>Save</Button>
+```
+
+A custom button
+
+```js
+<Button primary color="red" background="lightblue" size="small">
+  Save
+</Button>
 ```

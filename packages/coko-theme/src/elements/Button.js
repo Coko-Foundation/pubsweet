@@ -4,7 +4,7 @@ import { darken, th } from '@pubsweet/ui-toolkit'
 const secondary = css`
   background: none;
   border: none;
-  color: ${th('colorPrimary')};
+  color: ${props => (props.color ? props.color : props.theme.colorPrimary)};
   padding: 0;
   text-decoration: underline;
 
@@ -13,7 +13,10 @@ const secondary = css`
   &:active {
     background: none;
     border: none;
-    color: ${darken('colorPrimary', 0.3)};
+    color: ${props =>
+      props.color
+        ? darken(props.color, 0.3)
+        : darken(props.theme.colorPrimary, 0.3)};
     outline: none;
   }
 
