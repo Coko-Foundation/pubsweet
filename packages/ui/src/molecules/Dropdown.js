@@ -86,7 +86,6 @@ const Dropdown = ({
   itemsList,
   primary,
   size,
-  variant,
   dataTestId,
   color,
 }) => {
@@ -115,7 +114,6 @@ const Dropdown = ({
         onClick={() => setMenuIsOpen(!menuIsOpen)}
         primary={primary}
         size={size}
-        variant={variant}
       >
         <span data-testid="iconButton">
           {icon && iconPosition === 'start' && (
@@ -185,7 +183,6 @@ Dropdown.propTypes = {
   ),
 
   size: PropTypes.string,
-  variant: PropTypes.string,
 
   /** Primary property for the dropdown, if it is false(or not set) then the dropdown will be secondary  */
   primary: PropTypes.bool,
@@ -198,7 +195,6 @@ Dropdown.defaultProps = {
   itemsList: [],
   primary: false,
   size: '',
-  variant: '',
   dataTestId: '',
 }
 
