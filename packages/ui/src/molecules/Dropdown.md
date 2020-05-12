@@ -9,7 +9,7 @@ const itemsList = [
     onClick: () => {},
     title: 'item 1n  asfasf asfkaskfh  ',
   },
-  { id: 2, title: 'item 2' },
+  { id: 2, onClick: () => {}, title: 'item 2' },
 ]
 
 ;<Dropdown itemsList={itemsList} primary>
@@ -26,7 +26,7 @@ const itemsList = [
     onClick: () => {},
     title: 'item 1 with long text  ',
   },
-  { id: 2, title: 'item 2' },
+  { id: 2, onClick: () => {}, title: 'item 2' },
 ]
 
 ;<Dropdown itemsList={itemsList}>Open list</Dropdown>
@@ -41,7 +41,7 @@ const itemsList = [
     onClick: () => {},
     title: 'item 1',
   },
-  { id: 2, title: 'item 2' },
+  { id: 2, onClick: () => {}, title: 'item 2' },
 ]
 
 ;<Dropdown itemsList={itemsList} primary direction="up" icon="user">
@@ -58,7 +58,7 @@ const itemsList = [
     onClick: () => {},
     title: 'item 1 item 1 item 1 item 1',
   },
-  { id: 2, title: 'item 2' },
+  { id: 2, onClick: () => {}, title: 'item 2' },
 ]
 
 ;<Dropdown icon="user" iconPosition="end" itemsList={itemsList} secondary>
