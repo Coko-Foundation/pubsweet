@@ -17,4 +17,18 @@ describe('App startup', () => {
     const res = await api.graphql.query('{ test }')
     expect(res.body).toEqual({ data: { test: 'OK' } })
   })
+
+  it('should have req in resolver', async () => {
+    const { body } = await api.graphql.query('{ ctxreq }')
+    const response = body.data.ctxreq
+    expect(response).not.toBeNull()
+    expect(response).toEqual('POST')
+  })
+
+  it('should have res in resolver', async () => {
+    const { body } = await api.graphql.query('{ ctxres }')
+    const response = body.data.ctxres
+    expect(response).not.toBeNull()
+    expect(response).toEqual('POST')
+  })
 })
