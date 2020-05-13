@@ -1,6 +1,6 @@
 {
   "name": "pubsweet",
-  "version": "5.1.12",
+  "version": "5.1.13",
   "description": "Pubsweet command-line interface, app generator and manager",
   "bin": "./bin/pubsweet.js",
   "keywords": [
@@ -10,8 +10,8 @@
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.9",
-    "@pubsweet/logger": "^0.2.44",
+    "@pubsweet/db-manager": "^3.1.10",
+    "@pubsweet/logger": "^0.2.45",
     "colors": "^1.1.2",
     "commander": "^2.20.0",
     "config": "^3.0.1",
@@ -22,7 +22,7 @@
     "lodash": "^4.17.11",
     "node-dev": "^4.0.0",
     "prompt": "flatiron/prompt#1c95d1d8d333b5fbc13fa5f0619f3dcf0d514f87",
-    "pubsweet-server": "^13.10.1",
+    "pubsweet-server": "^13.11.0",
     "webpack": "^4.29.5",
     "webpack-dev-middleware": "^3.6.0",
     "webpack-dev-server": "^3.9.0",

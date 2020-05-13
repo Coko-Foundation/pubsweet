@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-collection",
-  "version": "4.0.31",
+  "version": "4.0.32",
   "description": "A basic model for Collections",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/base-model": "^3.6.4"
+    "@pubsweet/base-model": "^3.6.5"
   },
   "publishConfig": {
     "access": "public"
