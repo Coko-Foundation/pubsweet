@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.5.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.4.0...@pubsweet/ui@12.5.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ui:** added onClick function to the component ([2f2aff4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2f2aff4482c7ecc082819c60d932cba3b626d4eb))
+* **ui:** removed not used prop ([32a2402](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/32a2402b97feb39353ffddb8afea551f6bbc0955))
+
+
+### Features
+
+* **ui:** added dropdown component ([bdba410](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bdba410e66ece8e3b0913c92f9812375fd6a4880))
+
+
+
+
+
 # [12.4.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.3.4...@pubsweet/ui@12.4.0) (2020-04-24)
 
 

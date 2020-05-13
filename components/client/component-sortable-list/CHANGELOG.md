@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@2.0.0...pubsweet-component-sortable-list@2.0.1) (2020-05-13)
+
+**Note:** Version bump only for package pubsweet-component-sortable-list
+
+
+
+
+
 # [2.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-sortable-list@1.0.11...pubsweet-component-sortable-list@2.0.0) (2020-04-24)
 
 
