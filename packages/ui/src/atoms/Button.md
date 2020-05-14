@@ -15,7 +15,7 @@ A disabled primary button.
 A non-primary button.
 
 ```js
-<Button color="green">Save</Button>
+<Button>Save</Button>
 ```
 
 A disabled non-primary button.
@@ -27,7 +27,21 @@ A disabled non-primary button.
 A custom button
 
 ```js
-<Button primary color="red" background="lightblue" size="small">
+<Button primary color="black" background="lightblue" size="small">
   Save
 </Button>
+```
+
+An outline button
+
+```js
+<Button color="green" outline>
+  Save
+</Button>
+```
+
+A ghost button
+
+```js
+<Button ghost>Save</Button>
 ```

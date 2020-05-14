@@ -4,6 +4,20 @@ import { darken, override, th } from '@pubsweet/ui-toolkit'
 const backgroundColor = props =>
   props.background ? props.background : props.theme.colorPrimary
 
+const borderColor = props => (props.color ? props.color : props.colorPrimary)
+
+const outline = css`
+  border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
+  text-decoration: none;
+  padding: ${props => (props.size === 'small' ? '0' : props.theme.gridUnit)};
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: ${th('borderWidth')} ${th('borderStyle')} ${borderColor};
+  }
+`
+
 const primary = css`
   background: ${backgroundColor};
   color: ${props => (props.color ? props.color : props.theme.colorTextReverse)};
@@ -74,6 +88,7 @@ const StyledButton = styled.button.attrs(props => ({
   }
 
   ${props => props.primary && primary};
+  ${props => props.outline && outline}
   ${override('ui.Button')};
 `
 
