@@ -4,8 +4,7 @@
 const { PostgresPubSub } = require('graphql-postgres-subscriptions')
 const config = require('config')
 const pg = require('pg')
-
-const connection = config['pubsweet-server'] && config['pubsweet-server'].db
+const { dbConnectionConfig } = require('@pubsweet/db-manager')
 
 const ignoreTerminatedError =
   config.has('pubsweet-server.ignoreTerminatedConnectionError') &&
@@ -21,7 +20,7 @@ module.exports = {
    */
   getPubsub: async () => {
     if (pubsub) return pubsub
-    client = new pg.Client(connection)
+    client = new pg.Client(dbConnectionConfig)
     // ignore some errors which are thrown in integration tests
     if (ignoreTerminatedError) {
       client.on('error', async err => {
