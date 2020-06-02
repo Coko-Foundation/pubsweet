@@ -1,4 +1,4 @@
-const { ref, lit } = require('objection')
+const { ref, val } = require('objection')
 
 const { NotFoundError } = require('@pubsweet/errors')
 
@@ -96,7 +96,7 @@ const fetchAllCreator = (entityName, EntityModel) => async (
         query = query.where(
           ref(condition.ref),
           '=',
-          lit(condition.value).castJson(),
+          val(condition.value).castJson(),
         )
       })
     }
