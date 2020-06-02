@@ -22,7 +22,7 @@ describe('Migration to simplify object storage', () => {
     }).save()
 
     // Using id and type 'team' here just for testing
-    await Team.raw('UPDATE teams SET object = ?::jsonb WHERE id = ?', [
+    await Team.knex().raw(`UPDATE teams SET object = ?::jsonb WHERE id = ?`, [
       JSON.stringify({ objectId: team.id, objectType: 'team' }),
       team.id,
     ])

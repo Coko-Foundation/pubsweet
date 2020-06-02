@@ -12,10 +12,10 @@
     "@pubsweet/db-manager": "^3.1.7",
     "@pubsweet/errors": "^2.0.32",
     "@pubsweet/logger": "^0.2.42",
-    "knex": "^0.20.13",
+    "knex": "^0.21.1",
     "lodash": "^4.17.11",
     "objection": "^2.1.3",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.3"
   },
   "peerDependencies": {
     "config": ">=3.0.0",

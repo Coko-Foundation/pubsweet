@@ -32,7 +32,7 @@ describe('Members migration', () => {
       role: 'globalSeniorEditor',
     }).save()
 
-    await Team.raw('UPDATE teams SET members = ?::jsonb WHERE id = ?', [
+    await Team.knex().raw(`UPDATE teams SET members = ?::jsonb WHERE id = ?`, [
       JSON.stringify([member1.id, member2.id]),
       team.id,
     ])
@@ -43,7 +43,7 @@ describe('Members migration', () => {
     // Check that members have migrated to the relationship
     team = await Team.query()
       .findById(team.id)
-      .eager('members')
+      .withGraphFetched('members')
 
     expect(team.members).toHaveLength(2)
   })

@@ -248,7 +248,7 @@ describe('Team queries', () => {
     // The team should no longer user as a member
     const updatedTeam = await Team.query()
       .findById(team.id)
-      .eager('members')
+      .withGraphFetched('members')
     expect(updatedTeam.members).toHaveLength(1)
 
     // But the user should not be deleted
