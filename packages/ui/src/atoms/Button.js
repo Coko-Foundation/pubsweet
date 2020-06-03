@@ -49,9 +49,6 @@ const primary = css`
 const StyledButton = styled.button.attrs(props => ({
   'data-test-id': props['data-test-id'],
   type: props.type || 'button',
-  size: props.size || 'undefinded',
-  color: props.color,
-  background: props.background,
 }))`
   background: ${th('colorSecondary')};
   border: ${th('borderWidth')} ${th('borderStyle')} ${th('colorBorder')};
