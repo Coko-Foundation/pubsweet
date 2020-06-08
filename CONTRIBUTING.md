@@ -16,7 +16,8 @@ For contributions made as discussions and suggestions, you can at any time open 
 
 ## Branches
 
-We maintain master as the production branch and tag it with release names. If you wish to contribute to PubSweet then you need to make a branch and then issue a pull request following this procedure:  
+We maintain master as the production branch and tag it with release names. If you wish to contribute to PubSweet then you need to make a branch and then issue a pull request following this procedure:
+
 1. Create a user account on Coko GitLab : http://gitlab.coko.foundation
 2. Clone master with git clone git@gitlab.coko.foundation:pubsweet/pubsweet.git
 3. Create a new branch and work off that. Please name the branch which sensibly identifies the feature you are working on. You can push the branch to Coko Gitlab at anytime.
