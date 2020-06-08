@@ -6,8 +6,14 @@ const mockComponent = {
       res.status(STATUS.OK).json({ ok: '!' }),
     )
   },
-  typeDefs: `extend type Query { test: String }`,
-  resolvers: { Query: { test: () => 'OK' } },
+  typeDefs: `extend type Query { test: String, ctxreq: String, ctxres: String }`,
+  resolvers: {
+    Query: {
+      test: () => 'OK',
+      ctxreq: (_, __, ctx) => ctx.req.method,
+      ctxres: (_, __, ctx) => ctx.res.req.method,
+    },
+  },
 }
 
 module.exports = mockComponent
