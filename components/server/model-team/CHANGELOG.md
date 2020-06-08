@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@4.0.1...@pubsweet/model-team@4.0.2) (2020-05-13)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+## [4.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@4.0.0...@pubsweet/model-team@4.0.1) (2020-04-24)
+
+**Note:** Version bump only for package @pubsweet/model-team
+
+
+
+
+
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.5...@pubsweet/model-team@4.0.0) (2020-04-06)
+
+
+### Features
+
+* **model-user:** change user model to account for identities ([8ae24e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ae24e81127abdffe217b77a3339b4a7522910ed))
+
+
+### BREAKING CHANGES
+
+* **model-user:** The user model is advancing into the next stage of its life. It no longer has
+collections or fragments arrays, and some crucial pieces of functionality are being moved into the
+Identity model. As such, this is a SEVERELY BREAKING CHANGE, you have been warned. It's still
+possible this is not a breaking change in some specific circumstances, and we will try to maximize
+those by providing sensible migrations, but it is very unlikely nonetheless. Please let us know if
+you have any questions when/if you decide to migrate.
+
+
+
+
+
 ## [3.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-team@3.0.4...@pubsweet/model-team@3.0.5) (2020-03-16)
 
 **Note:** Version bump only for package @pubsweet/model-team

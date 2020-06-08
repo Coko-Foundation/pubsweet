@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.3.0...@pubsweet/ui-toolkit@2.3.1) (2020-05-13)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
+# [2.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.22...@pubsweet/ui-toolkit@2.3.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* **ui-toolkit:** export grid helper from package ([028227f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/028227fdcb0b6ea7b6cdfc9c0e91515a3a05adfd))
+
+
+### Features
+
+* **ui-toolkit:** add grid helper function ([321edd6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/321edd6b134c570f4709db2f96c310b0d46e5030))
+
+
+
+
+
+## [2.2.22](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.21...@pubsweet/ui-toolkit@2.2.22) (2020-04-06)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
 ## [2.2.21](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.2.20...@pubsweet/ui-toolkit@2.2.21) (2020-03-16)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit

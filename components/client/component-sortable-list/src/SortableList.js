@@ -1,133 +1,132 @@
-import React from 'react'
-import { pick } from 'lodash'
-import { compose } from 'recompose'
-import { findDOMNode } from 'react-dom'
-import { DragSource, DropTarget } from 'react-dnd'
-
-const itemSource = {
-  beginDrag(props) {
-    return pick(props, props.beginDragProps)
-  },
-}
-
-const itemTarget = {
-  hover({ moveItem, index, listId }, monitor, component) {
-    const { index: dragIndex, listId: toListId } = monitor.getItem()
-    const hoverIndex = index
-
-    if (listId !== toListId) {
-      return
-    }
-
-    // Don't replace items with themselves
-    if (dragIndex === hoverIndex) {
-      return
-    }
-
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect() // eslint-disable-line
-    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-    const clientOffset = monitor.getClientOffset()
-    const hoverClientY = clientOffset.y - hoverBoundingRect.top
-
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-      return
-    }
-
-    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-      return
-    }
-    if (typeof moveItem === 'function') {
-      moveItem(dragIndex, hoverIndex)
-    }
-    monitor.getItem().index = hoverIndex
-  },
-  drop({ dropItem, ...restProps }, monitor) {
-    if (dropItem && typeof dropItem === 'function')
-      dropItem(restProps, monitor.getItem())
-  },
-}
-
-const Item = ({
-  connectDragPreview,
-  connectDragSource,
-  connectDropTarget,
-  listItem,
-  dragHandle,
-  ...rest
-}) =>
-  dragHandle
-    ? connectDragPreview(
-        connectDropTarget(
-          <div style={{ flex: 1 }}>
-            {React.createElement(listItem, {
-              ...rest,
-              dragHandle: connectDragSource(
-                <div style={{ display: 'flex' }}>
-                  {React.createElement(dragHandle)}
-                </div>,
-              ),
-            })}
-          </div>,
-        ),
-      )
-    : connectDropTarget(
-        connectDragSource(
-          <div style={{ flex: 1 }}>{React.createElement(listItem, rest)}</div>,
-        ),
-      )
-
-export const DecoratedItem = compose(
-  DropTarget('item', itemTarget, (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-  })),
-  DragSource('item', itemSource, (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging(),
-  })),
-)(Item)
+import React, { useRef } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
+import update from 'immutability-helper'
 
 const SortableList = ({
   items,
   itemKey = 'id',
   moveItem,
-  listItem,
-  dragHandle,
-  editItem,
+  ListItem,
+  DragHandle,
+  dropItem,
   ...rest
 }) => (
-  <div>
+  <>
     {items.map((item, i) => (
-      <DecoratedItem
-        dragHandle={dragHandle}
+      <Item
+        DragHandle={DragHandle}
+        dropItem={dropItem}
+        id={item[itemKey]}
         index={i}
         key={item[itemKey]}
-        listItem={listItem}
+        ListItem={ListItem}
         moveItem={moveItem}
         {...item}
         {...rest}
       />
     ))}
-  </div>
+  </>
 )
 
 // helper function for sortable lists
 SortableList.moveItem = (items, dragIndex, hoverIndex) => {
-  if (dragIndex <= hoverIndex) {
-    return [
-      ...items.slice(0, dragIndex),
-      items[hoverIndex],
-      items[dragIndex],
-      ...items.slice(hoverIndex + 1),
-    ]
-  }
-  return [
-    ...items.slice(0, hoverIndex),
-    items[dragIndex],
-    items[hoverIndex],
-    ...items.slice(dragIndex + 1),
-  ]
+  const item = items[dragIndex]
+  return update(items, {
+    $splice: [
+      [dragIndex, 1],
+      [hoverIndex, 0, item],
+    ],
+  })
 }
 
 export default SortableList
+export const Item = ({
+  id,
+  ListItem,
+  index,
+  moveItem,
+  dropItem,
+  DragHandle,
+  ...rest
+}) => {
+  const previewRef = useRef(null)
+  const handleRef = useRef(null)
+
+  // console.log(id, previewRef.current, handleRef.current)
+  const [{ isDragging }, drag, preview] = useDrag({
+    item: { type: 'Item', id, index },
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+
+  const [{ isOver }, drop] = useDrop({
+    accept: 'Item',
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    }),
+    drop(item, monitor) {
+      if (dropItem) {
+        dropItem(item)
+      }
+    },
+    hover(item, monitor) {
+      if (!previewRef.current) {
+        return
+      }
+      const dragIndex = item.index
+      const hoverIndex = index
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = previewRef.current.getBoundingClientRect()
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset()
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return
+      }
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return
+      }
+      // Time to actually perform the action
+
+      moveItem(dragIndex, hoverIndex)
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex
+    },
+  })
+
+  if (DragHandle) {
+    drag(handleRef)
+  } else {
+    drag(previewRef)
+  }
+
+  preview(previewRef)
+  drop(previewRef)
+
+  return (
+    <ListItem
+      handle={DragHandle ? <DragHandle handleRef={handleRef} /> : null}
+      isDragging={isDragging}
+      isOver={isOver}
+      previewRef={previewRef}
+      {...rest}
+    />
+  )
+}

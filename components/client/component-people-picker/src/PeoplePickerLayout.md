@@ -87,7 +87,9 @@ const getPeople = searchValue => {
   return people.filter(person => person.name.toLowerCase().includes(inputValue))
 }
 
-initialState = { open: false }
+const [state, setState] = React.useState({
+  open: false,
+})
 ;<PeoplePickerLayout
   inputOverrideComponent={
     undefined /* InputOverride (if you want to override the input) */
@@ -145,7 +147,9 @@ const people = [
   },
 ]
 
-initialState = { open: false }
+const [state, setState] = React.useState({
+  open: false,
+})
 ;<PeoplePickerLayout
   initialSelection={[people[1]]}
   minSelection={1}
@@ -209,7 +213,9 @@ const getPeople = (people, searchValue) => {
   return people.filter(person => person.name.toLowerCase().includes(inputValue))
 }
 
-initialState = { open: false }
+const [state, setState] = React.useState({
+  open: false,
+})
 ;<PeoplePickerLayout
   initialSelection={[people[1]]}
   minSelection={1}

@@ -1,19 +1,16 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react'
+import React from 'react'
 import { mount, shallow } from 'enzyme'
-import { DragDropContext } from 'react-dnd'
 import TestBackend from 'react-dnd-test-backend'
-
+import { DndProvider } from 'react-dnd'
 import SortableList from '../src'
-import { DecoratedItem } from '../src/SortableList'
+import { Item } from '../src/SortableList'
 
 function wrapInTestContext(DecoratedComponent) {
-  return DragDropContext(TestBackend)(
-    class TestContextContainer extends Component {
-      render() {
-        return <DecoratedComponent {...this.props} />
-      }
-    },
+  return props => (
+    <DndProvider backend={TestBackend}>
+      <DecoratedComponent {...props} />
+    </DndProvider>
   )
 }
 
@@ -30,7 +27,7 @@ function setup(TestedComponent, props) {
   return mount(
     <WrappedModule
       items={items}
-      listItem={ListItem}
+      ListItem={ListItem}
       moveItem={SortableList.moveItem}
       {...props}
     />,
@@ -50,7 +47,7 @@ describe('SortableList', () => {
 
   it('renders all items', () => {
     const wrapper = shallow(<SortableList items={items} />)
-    expect(wrapper.find(DecoratedItem)).toHaveLength(4)
+    expect(wrapper.find(Item)).toHaveLength(4)
   })
 
   it('renders items in a DragAndDrop context', () => {
@@ -60,7 +57,7 @@ describe('SortableList', () => {
 
   it('simulate move item', () => {
     const wrapper = setup(SortableList)
-    const newItems = wrapper.instance().props.moveItem(items, 1, 2)
+    const newItems = wrapper.props().moveItem(items, 1, 2)
     expect(newItems).toEqual([
       { id: '1', name: 'John' },
       { id: '3', name: 'Bob' },

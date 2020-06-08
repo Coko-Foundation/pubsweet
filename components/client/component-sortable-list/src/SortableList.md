@@ -2,49 +2,35 @@ A sortable list implemented with `react-dnd`.
 
 ## Props
 
-|      Prop      |                                                                 Description                                                                  | Required | Default |      Type       |
-| :------------: | :------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :-----: | :-------------: |
-|     items      |                                                       The items of the sortable list.                                                        |   true   |   []    |      Array      |
-|    itemKey     |                                                 Value used for key when mapping over items.                                                  |   true   |  'id'   |     string      |
-|    listItem    | A React component that will be rendered for each item of the list. Receives `isDragging`, `isOver` and all other props from the items array. |   true   |  none   | React component |
-|    moveItem    |       Function to be called when moving an item through the list. SortableList will provide the dragIndex of hoverIndex of the items.        |   true   |  none   |    function     |
-|   dragHandle   |                            A React component for the drag handle. If not present, the whole item can be dragged.                             |  false   |  none   | React component |
-|    dropItem    |                            Function to be called when dropping an item. The index of the dragged item is passed.                             |  false   |  none   |    function     |
-| beginDragProps |                                      Array of keys to pick from the dragged object when beginning drag.                                      |  false   |   []    |  Array(string)  |
+|    Prop    |                                                                 Description                                                                  | Required | Default |      Type       |
+| :--------: | :------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :-----: | :-------------: |
+|   items    |                                                       The items of the sortable list.                                                        |   true   |   []    |      Array      |
+|  itemKey   |                                                 Value used for key when mapping over items.                                                  |   true   |  'id'   |     string      |
+|  ListItem  | A React component that will be rendered for each item of the list. Receives `isDragging`, `isOver` and all other props from the items array. |   true   |  none   | React component |
+|  moveItem  |       Function to be called when moving an item through the list. SortableList will provide the dragIndex of hoverIndex of the items.        |   true   |  none   |    function     |
+| DragHandle |                            A React component for the drag handle. If not present, the whole item can be dragged.                             |  false   |  none   | React component |
+|  dropItem  |                                   Function to be called when dropping an item. The dragged item is passed.                                   |  false   |  none   |    function     |
+| previewRef |                          (On the SortableList's Item, see examples) Used to pass a reference for both drag and drop                          |   true   |  none   |       ref       |
+| handleRef  |                              (On the SortableList's Item, see examples) Used to pass a reference for the handle                              |  false   |  none   |       ref       |
 
 ## Usage
 
-This component should be used in a React-DnD `DragDropContext` or `DragDropContextProvider`. Make sure you have `react-dnd-html5-backend` installed and wrap the parent component with `DragDropContext` decorator or add the `DragDropContextProvider` in your root component.
+This component should be used with a React-DnD context `DndProvider` and `react-dnd-html5-backend`.
 
 ```js static
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContext } from 'react-dnd'
-
-class YourApp {
-  /* ... */
-}
-
-export default DragDropContext(HTML5Backend)(YourApp)
-```
-
-or
-
-```js static
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DragDropContextProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 export default class YourApp {
   render() {
-    return (
-      <DragDropContextProvider backend={HTML5Backend}>
-        /* ... */
-      </DragDropContextProvider>
-    )
+    return <DndProvider backend={Backend}>/* ... */</DndProvider>
   }
 }
 ```
 
-### Pass in a list of users
+### Pass in a list
+
+The full code for this example is [in the `component-sortable-list`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/client/component-sortable-list/examples/Example.jsx).
 
 ```js static
 const items = [
@@ -53,8 +39,8 @@ const items = [
   {firstName: 'David', lastName: 'Blaine'},
 ]
 
-const Item = ({ isOver, isDragging, ...rest }) =>
-  <div>`${rest.firstName} ${rest.lastName}`</div>
+const Item = ({ previewRef, isDragging, ...rest }) =>
+  <div ref={previewRef}>`${rest.firstName} ${rest.lastName}`</div>
 
 <SortableList
   items={items}
@@ -63,53 +49,34 @@ const Item = ({ isOver, isDragging, ...rest }) =>
   />
 ```
 
+```jsx
+import Example from '../examples/Example.jsx'
+;<Example />
+```
+
 ### With custom drag handle
 
+The full code for this example is [in the `component-sortable-list`](https://gitlab.coko.foundation/pubsweet/pubsweet/tree/master/components/client/component-sortable-list/examples/Example-handle.jsx).
+
 ```js static
-const DragHandle = () => <div>Drag me!</div>
+const DragHandle = ({ handleRef }) => {
+  return <div ref={handleRef}>Drag me!</div>
+}
 
-const ItemWithDragHandle = ({ dragHandle, ...rest }) => <div>
-    {dragHandle}
-    <span>Rest of the content.</span>
-  </div>
+const ItemWithDragHandle = ({ previewRef, handle, isDragging, ...props }) => {
+  return (
+    <div ref={previewRef} style={{ opacity: isDragging ? 0 : 1 }}>
+      {handle} {props.firstName} {props.lastName}
+    </div>
+  )
+}
 
-<SortableList
-  ...
-  listItem={ItemWithDragHandle}
-  dragHandle={DragHandle}
-  ...
-  />
+;<SortableList items={} ListItem={ItemWithDragHandle} DragHandle={DragHandle} />
 ```
 
-### How to move items around
+Example:
 
-To move items of the parent container whenever `moveItem` function is called we can use the `SortableList.moveItem` helper. More info in the example below.
-
-```js static
-const Container = ({ moveItem, items }) => (
-  <div>
-    ...
-    <SortableList items={items} listItem={Item} moveItem={moveItem} />
-    ...
-  </div>
-)
-```
-
-Enhanced using recompose
-
-```js static
-const MoveExample = compose(
-  withState('items', 'setItems', [
-    { name: 'John' },
-    { name: 'Nancy' },
-    { name: 'Adam' },
-  ]),
-  withHandlers({
-    moveItem: ({ setItems, items }) => (dragIndex, hoverIndex) => {
-      setItems(prevItems =>
-        SortableList.moveItem(prevItems, dragIndex, hoverIndex),
-      )
-    },
-  }),
-)(Container)
+```jsx
+import Example from '../examples/Example-handle.jsx'
+;<Example />
 ```

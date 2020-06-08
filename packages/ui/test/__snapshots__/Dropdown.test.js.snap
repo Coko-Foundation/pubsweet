@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown renders correctly 1`] = `
+.c2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: calc( / 2);
+}
+
+.c2 svg {
+  stroke: #fff;
+  width: calc(3 * );
+  height: calc(3 * );
+}
+
+.c3 {
+  vertical-align: top;
+  float: right;
+}
+
+.c0 {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+}
+
+.c1 {
+  line-height: calc( * 3);
+  min-width: calc( * 12);
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 8px;
+  text-transform: capitalize;
+}
+
+.c1:focus,
+.c1:hover {
+  background-color: hsl(0,0%,0%);
+}
+
+.c1:active {
+  background-color: hsl(0,0%,0%);
+}
+
+.c1[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.c1:focus,
+.c1:hover {
+  background-color: hsl(0,0%,0%);
+}
+
+.c1:active {
+  background-color: hsl(0,0%,0%);
+}
+
+.c4 {
+  display: none;
+  list-style-type: none;
+  margin: calc( / 4) 0 0 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  bottom: -;
+  width: 100%;
+  z-index: 9;
+}
+
+.c5 {
+  cursor: pointer;
+  white-space: normal;
+  word-break: break-word;
+}
+
+<div
+  className="c0"
+  size=""
+>
+  <button
+    className="c1"
+    data-test-id=""
+    onBlur={[Function]}
+    onClick={[Function]}
+    size=""
+    type="button"
+  >
+    <span
+      data-testid="iconButton"
+    >
+      <span>
+        Click me
+      </span>
+    </span>
+    <span
+      className="c2 c3"
+      color="#fff"
+      role="img"
+      size={3}
+    >
+      <svg
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polyline
+          points="6 9 12 15 18 9"
+        />
+      </svg>
+    </span>
+  </button>
+  <ul
+    className="c4"
+    direction="down"
+  >
+    <li
+      className="c5"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+    >
+      item 1
+    </li>
+    <li
+      className="c5"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+    >
+      item 2
+    </li>
+  </ul>
+</div>
+`;

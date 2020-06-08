@@ -51,6 +51,10 @@ module.exports = dir => {
                 rootMode: 'upward',
               },
             },
+            {
+              test: /\.css$/,
+              loader: 'style-loader!css-loader?importLoaders=1',
+            },
             // Files
             {
               exclude: [/\.jsx?$/, /\.html$/, /\.json$/],

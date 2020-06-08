@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@6.0.1...@pubsweet/model-user@6.0.2) (2020-05-13)
+
+**Note:** Version bump only for package @pubsweet/model-user
+
+
+
+
+
+## [6.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@6.0.0...@pubsweet/model-user@6.0.1) (2020-04-24)
+
+**Note:** Version bump only for package @pubsweet/model-user
+
+
+
+
+
+# [6.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.1.12...@pubsweet/model-user@6.0.0) (2020-04-06)
+
+
+### Bug Fixes
+
+* **model-user:** expose email on the user type too ([f792c77](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f792c777b9b45954624feb44573ac54f5ef29e7c))
+* **model-user:** re-add admin property in schema ([91bed5b](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/91bed5b3a02902951bb3e670a0e23a1c5625edaa))
+
+
+### Code Refactoring
+
+* **model-user:** drops the framents & collections columns on user ([c8521d3](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/c8521d327c02e79a1484b03218f87673de5d1af9))
+
+
+### Features
+
+* **model-user:** add identity table and basic model ([d5347a0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/d5347a075fa89958fd31c1102efe087df75bff2f))
+* **model-user:** add user to default identity migration ([ab4e32f](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/ab4e32ff7b76c5258902755c385ae09c5480dd42))
+* **model-user:** allow multiple identities with isDefault false ([543b4cd](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/543b4cdf076df2e0826c6b553e24ea466a7d99d8))
+* **model-user:** change user model to account for identities ([8ae24e8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/8ae24e81127abdffe217b77a3339b4a7522910ed))
+* **model-user:** handle password check if password hash does not exist ([55cc082](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/55cc0828de09aa223a7a4eb031341ab280c4a73d))
+* **model-user:** use defaultIdentityId on user for default identity ([90504d8](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/90504d88b6467cababbd238b6f459c632453fb20))
+
+
+### BREAKING CHANGES
+
+* **model-user:** If you were depending on the fragments and collections array/column on the User
+model itself (vs. custom models with foreign key relationships), then this is a breaking change and
+you need to write a migration.
+* **model-user:** This migrates the users table in a destructive way (the data is transferred to the
+new table, but no longer exists on the users table). Be careful!
+* **model-user:** The user model is advancing into the next stage of its life. It no longer has
+collections or fragments arrays, and some crucial pieces of functionality are being moved into the
+Identity model. As such, this is a SEVERELY BREAKING CHANGE, you have been warned. It's still
+possible this is not a breaking change in some specific circumstances, and we will try to maximize
+those by providing sensible migrations, but it is very unlikely nonetheless. Please let us know if
+you have any questions when/if you decide to migrate.
+
+
+
+
+
 ## [5.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@5.1.11...@pubsweet/model-user@5.1.12) (2020-03-16)
 
 **Note:** Version bump only for package @pubsweet/model-user

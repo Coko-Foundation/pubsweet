@@ -22,6 +22,8 @@ class EmailTemplate {
       email: '',
       name: '',
     },
+    cc = [],
+    bcc = [],
     content = {
       subject: '',
       ctaLink: '',
@@ -39,6 +41,8 @@ class EmailTemplate {
     this.bodyProps = bodyProps
     this.fromEmail = fromEmail
     this.templateType = templateType
+    this.cc = typeof cc === 'string' ? [cc] : cc
+    this.bcc = typeof cc === 'string' ? [bcc] : bcc
   }
 
   set _toUser(newToUser) {
@@ -92,12 +96,14 @@ class EmailTemplate {
   async sendEmail() {
     const { html, text } = this._getEmailTemplate()
 
-    const { fromEmail: from } = this
+    const { fromEmail: from, cc, bcc } = this
     const { email: to } = this.toUser
     const { subject } = this.content
 
     const mailData = {
       to,
+      cc,
+      bcc,
       text,
       html,
       from,

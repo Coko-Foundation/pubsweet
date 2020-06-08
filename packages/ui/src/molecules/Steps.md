@@ -7,7 +7,11 @@
 - Usage with the Step component.
 
 ```js
-initialState = { currentStep: 0 }
+import { useState } from 'react'
+const [state, setState] = useState({
+  currentStep: 0,
+})
+
 ;<div>
   <Steps currentStep={state.currentStep} margin={'40px 50px'}>
     <Steps.Step title="First step" />

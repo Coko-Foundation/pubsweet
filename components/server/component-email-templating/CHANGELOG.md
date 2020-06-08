@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.3.1...@pubsweet/component-email-templating@0.3.2) (2020-05-13)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+## [0.3.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.3.0...@pubsweet/component-email-templating@0.3.1) (2020-04-24)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
+# [0.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.14...@pubsweet/component-email-templating@0.3.0) (2020-04-06)
+
+
+### Features
+
+* **component-email-template:** add cc and bcc email receivers ([148b09d](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/148b09db96bd2e944549c0d141c39ee12b557bb1))
+
+
+
+
+
 ## [0.2.14](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.2.13...@pubsweet/component-email-templating@0.2.14) (2020-03-16)
 
 **Note:** Version bump only for package @pubsweet/component-email-templating

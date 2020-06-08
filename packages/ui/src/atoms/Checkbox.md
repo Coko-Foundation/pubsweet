@@ -1,33 +1,39 @@
 A checkbox.
 
 ```js
-initialState = { checked: null };
+import { useState } from 'react'
+const [state, setState] = useState({ checked: null })
 
-<Checkbox 
-  name="checkbox" 
+;<Checkbox
+  name="checkbox"
   checked={state.checked}
-  onChange={event => setState({ checked: event.target.checked })}/>
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```
 
 A checked checkbox.
 
 ```js
-initialState = { checked: true };
+import { useState } from 'react'
+const [state, setState] = useState({ checked: true })
 
-<Checkbox 
-  name="checkbox-checked" 
+;<Checkbox
+  name="checkbox-checked"
   checked={state.checked}
-  onChange={event => setState({ checked: event.target.checked })}/>
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```
 
 A checkbox with a label.
 
 ```js
-initialState = { checked: false };
+import { useState } from 'react'
+const [state, setState] = useState({ checked: false })
 
-<Checkbox 
-  name="checkbox-labelled" 
+;<Checkbox
+  name="checkbox-labelled"
   checked={state.checked}
   label="Foo"
-  onChange={event => setState({ checked: event.target.checked })}/>
+  onChange={event => setState({ checked: event.target.checked })}
+/>
 ```

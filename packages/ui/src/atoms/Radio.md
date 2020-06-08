@@ -1,54 +1,54 @@
 A radio button.
 
 ```js
-initialState = {
-  value: undefined
-};
+import { useState } from 'react'
+const [state, setState] = useState({ value: undefined })
 
-<Radio 
-  name="radio" 
+;<Radio
+  name="radio"
   checked={state.value === 'on'}
-  onChange={event => setState({ value: event.target.value })}/>
+  onChange={event => setState({ value: event.target.value })}
+/>
 ```
 
 A checked radio button.
 
 ```js
-initialState = {
-  value: 'on'
-};
+import { useState } from 'react'
+const [state, setState] = useState({ value: 'on' })
 
-<Radio 
-  name="radio-checked" 
+;<Radio
+  name="radio-checked"
   checked={state.value === 'on'}
-  onChange={event => setState({ value: event.target.value })}/>
+  onChange={event => setState({ value: event.target.value })}
+/>
 ```
 
 A radio button with a label.
 
 ```js
-initialState = {
-  value: undefined
-};
+import { useState } from 'react'
+const [state, setState] = useState({ value: undefined })
 
-<Radio 
-  name="radio-checked" 
+;<Radio
+  name="radio-checked"
   label="Foo"
   checked={state.value === 'on'}
-  onChange={event => setState({ value: event.target.value })}/>
+  onChange={event => setState({ value: event.target.value })}
+/>
 ```
 
 A radio button with a color.
 
 ```js
-initialState = {
-  value: undefined
-};
+import { useState } from 'react'
+const [state, setState] = useState({ value: undefined })
 
-<Radio 
-  name="radio-color" 
+;<Radio
+  name="radio-color"
   label="Foo"
   color="red"
   checked={state.value === 'on'}
-  onChange={event => setState({ value: event.target.value })}/>
+  onChange={event => setState({ value: event.target.value })}
+/>
 ```

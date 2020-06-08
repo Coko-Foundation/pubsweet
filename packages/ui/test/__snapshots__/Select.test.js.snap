@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select renders correctly 1`] = `
+<div
+  className=" css-3x5r4n-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="react-select__control css-44g3o0-Control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="react-select__value-container css-86rg1c-ValueContainer"
+    >
+      <div
+        className="react-select__placeholder css-1i2t3f2-placeholder"
+      >
+        Select...
+      </div>
+      <div
+        className="css-f7me8t-Input"
+      >
+        <div
+          className="react-select__input"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <input
+            aria-autocomplete="list"
+            autoCapitalize="none"
+            autoComplete="off"
+            autoCorrect="off"
+            disabled={false}
+            id="react-select-2-input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            spellCheck="false"
+            style={
+              Object {
+                "background": 0,
+                "border": 0,
+                "boxSizing": "content-box",
+                "color": "inherit",
+                "fontSize": "inherit",
+                "label": "input",
+                "opacity": 1,
+                "outline": 0,
+                "padding": 0,
+                "width": "1px",
+              }
+            }
+            tabIndex="0"
+            type="text"
+            value=""
+          />
+          <div
+            style={
+              Object {
+                "height": 0,
+                "left": 0,
+                "overflow": "scroll",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "whiteSpace": "pre",
+              }
+            }
+          >
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+    >
+      <span
+        className="react-select__indicator-separator css-43ykx9-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="react-select__indicator react-select__dropdown-indicator css-19njzhr-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="css-6q0nyr-Svg"
+          focusable="false"
+          height={20}
+          viewBox="0 0 20 20"
+          width={20}
+        >
+          <path
+            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Select should render my component 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "borderRadius": "8px",
+      "borderStyle": "solid",
+      "borderWidth": "1px",
+      "boxShadow": "none",
+      "colorBackground": "white",
+      "colorBackgroundHue": "grey",
+      "colorBorder": "grey",
+      "colorError": "red",
+      "colorFurniture": "grey",
+      "colorPrimary": "black",
+      "colorSecondary": "grey",
+      "colorSuccess": "green",
+      "colorText": "black",
+      "colorTextPlaceholder": "grey",
+      "colorTextReverse": "white",
+      "fontHeading": "serif",
+      "fontInterface": "sans-serif",
+      "fontReading": "serif",
+      "fontSizeBase": "18px",
+      "fontSizeBaseSmall": "16px",
+      "fontSizeHeading1": "36px",
+      "fontSizeHeading2": "32px",
+      "fontSizeHeading3": "29px",
+      "fontSizeHeading4": "26px",
+      "fontSizeHeading5": "23px",
+      "fontSizeHeading6": "20px",
+      "fontWriting": "monospace",
+      "gridUnit": "8px",
+      "lineHeightBase": "24px",
+      "lineHeightBaseSmall": "24px",
+      "lineHeightHeading1": "40px",
+      "lineHeightHeading2": "40px",
+      "lineHeightHeading3": "32px",
+      "lineHeightHeading4": "32px",
+      "lineHeightHeading5": "24px",
+      "lineHeightHeading6": "24px",
+      "transitionDelay": "500ms",
+      "transitionDuration": "1s",
+      "transitionDurationM": "0.5s",
+      "transitionDurationS": "0.2s",
+      "transitionDurationXs": "0.1s",
+      "transitionTimingFunction": "ease",
+    }
+  }
+>
+  <WithTheme(StyledSelect)
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "First",
+          "value": "first",
+        },
+        Object {
+          "label": "Second",
+          "value": "second",
+        },
+        Object {
+          "label": "Third",
+          "value": "third",
+        },
+        Object {
+          "label": "Fourth",
+          "value": "fourth",
+        },
+      ]
+    }
+  />
+</ThemeProvider>
+`;
