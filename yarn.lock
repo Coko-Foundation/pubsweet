@@ -12265,6 +12265,14 @@ objection@^2.1.3:
     ajv "^6.10.2"
     db-errors "^0.2.3"
 
+objection@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-2.1.6.tgz#b276d075fa58c5540a00af407cd4dc7f9d539f02"
+  integrity sha512-t6dfHz5ND5QejBg9qpn0evikStFo8NhU1zKKnXsMVap15NUFWwb/nhcJ6uAyhH8Jij6qr6iC6DN8E9Sk3/mDpg==
+  dependencies:
+    ajv "^6.12.0"
+    db-errors "^0.2.3"
+
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
