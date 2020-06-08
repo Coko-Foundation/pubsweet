@@ -1,4 +1,4 @@
-const { ref, lit } = require('objection')
+const { ref, val } = require('objection')
 
 const { NotFoundError } = require('@pubsweet/errors')
 
@@ -96,7 +96,7 @@ const fetchAllCreator = (entityName, EntityModel) => async (
         query = query.where(
           ref(condition.ref),
           '=',
-          lit(condition.value).castJson(),
+          val(condition.value).castJson(),
         )
       })
     }
@@ -111,14 +111,14 @@ const fetchAllCreator = (entityName, EntityModel) => async (
           condition.ids.forEach((id, index) => {
             const alias = `${condition.relation}_${index}`
             query = query
-              .joinRelation(`${condition.relation} as ${alias}`)
+              .joinRelated(`${condition.relation} as ${alias}`)
               .where(`${alias}.id`, id)
           })
         } else if (condition.object) {
           // eslint-disable-next-line no-restricted-syntax
           for (const [key, value] of Object.entries(condition.object)) {
             query = query
-              .joinRelation(condition.relation)
+              .joinRelated(condition.relation)
               .where(`${condition.relation}.${key}`, value)
           }
         }

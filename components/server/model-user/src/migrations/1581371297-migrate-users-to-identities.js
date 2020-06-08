@@ -5,7 +5,7 @@ const logger = require('@pubsweet/logger')
 
 exports.up = async knex => {
   const { User, Identity } = require('@pubsweet/models')
-  const users = await User.query().eager('defaultIdentity')
+  const users = await User.query().withGraphFetched('defaultIdentity')
 
   for (const user of users) {
     // To make the migration idempotent

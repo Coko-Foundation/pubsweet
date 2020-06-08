@@ -56,7 +56,7 @@ describe('Manuscript', () => {
 
     const updateManuscript = await Manuscript.query()
       .findById(manuscript.id)
-      .eager('teams')
+      .withGraphFetched('teams')
     updateManuscript.title = 'Updated'
     updateManuscript.teams[0].name = 'Updated'
 
@@ -169,7 +169,7 @@ describe('Manuscript', () => {
   })
 
   it('should execute saveGraph inside a transaction', async () => {
-    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
+    const spy = jest.spyOn(Manuscript.knex().context, 'transaction')
 
     await new Manuscript({
       title: 'Test',
@@ -181,7 +181,7 @@ describe('Manuscript', () => {
   })
 
   it('should execute save inside a transaction', async () => {
-    const spy = jest.spyOn(Manuscript.knex(), 'transaction')
+    const spy = jest.spyOn(Manuscript.knex().context, 'transaction')
 
     await new Manuscript({ title: 'Test' }).save()
 

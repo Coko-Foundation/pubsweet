@@ -30,7 +30,7 @@ const resolvers = {
       const options = {
         relate: ['members.user'],
         unrelate: ['members.user'],
-        allowUpsert: '[members, members.alias]',
+        allowGraph: '[members, members.alias]',
         eager: '[members.[user.teams, alias]]',
       }
       return ctx.connectors.Team.create(input, ctx, options)

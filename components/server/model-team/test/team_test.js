@@ -63,7 +63,7 @@ describe('Team', () => {
     const newTeam = (await createTeamWithMember()).team
     const team = await Team.query()
       .findById(newTeam.id)
-      .eager('members')
+      .withGraphFetched('members')
 
     expect(team.members).toHaveLength(1)
   })
@@ -73,7 +73,7 @@ describe('Team', () => {
 
     let foundUser = await User.query()
       .findById(user.id)
-      .eager('teams')
+      .withGraphFetched('teams')
 
     expect(foundUser.teams).toHaveLength(1)
 
@@ -81,7 +81,7 @@ describe('Team', () => {
 
     foundUser = await User.query()
       .findById(user.id)
-      .eager('teams')
+      .withGraphFetched('teams')
 
     expect(foundUser.teams).toHaveLength(0)
   })
@@ -123,7 +123,7 @@ describe('Team', () => {
 
     const userWithTeams = await User.query()
       .findById(user.id)
-      .eager('teams')
+      .withGraphFetched('teams')
     expect(userWithTeams.teams[0].id).toBe(team.id)
   })
 
