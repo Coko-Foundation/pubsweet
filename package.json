@@ -253,6 +253,15 @@
           "<rootDir>/test/jest-setup.js"
         ],
         "testEnvironment": "node"
+      },
+      {
+        "rootDir": "<rootDir>/components/server/component-aws-s3",
+        "displayName": "component-aws-s3",
+        "testRegex": "/test/.*.test.js$",
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ],
+        "testEnvironment": "node"
       }
     ]
   },

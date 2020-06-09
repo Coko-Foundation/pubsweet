@@ -3,11 +3,11 @@ process.env.SUPPRESS_NO_CONFIG_WARNING = true
 
 const httpMocks = require('node-mocks-http')
 
-const zipHandler = require('./routeHandlers/zipFiles')
+const zipHandler = require('../src/routeHandlers/zipFiles')
 
 describe('ValidateFile for multer fileFilter', () => {
   it('should return TRUE when fileType is supplementary', () => {
-    const validateFile = require('./middeware/upload').validateFile(
+    const validateFile = require('../src/middeware/upload').validateFile(
       ...buildValidateFileParams('supplementary', 'image/png'),
     )
     expect(validateFile).toBe(true)
@@ -20,7 +20,7 @@ describe('ValidateFile for multer fileFilter', () => {
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     ])
 
-    const validateFile = require('./middeware/upload').validateFile(
+    const validateFile = require('../src/middeware/upload').validateFile(
       ...buildValidateFileParams(randFileType, randMimeType),
     )
     expect(validateFile).toBe(true)
@@ -34,7 +34,7 @@ describe('ValidateFile for multer fileFilter', () => {
       'image/png',
     ])
 
-    const validateFile = require('./middeware/upload').validateFile(
+    const validateFile = require('../src/middeware/upload').validateFile(
       ...buildValidateFileParams(randFileType, randMimeType),
     )
     expect(validateFile).toBe(false)
@@ -52,7 +52,7 @@ describe('Upload file route handler', () => {
       file,
     })
     const res = httpMocks.createResponse()
-    await require('./routeHandlers/postFile')(req, res)
+    await require('../src/routeHandlers/postFile')(req, res)
     expect(res.statusCode).toBe(200)
     const data = JSON.parse(res._getData())
     expect(data.id).toEqual(file.key)
@@ -64,7 +64,7 @@ describe('Upload file route handler', () => {
       fileValidationError: 'Only Word documents and PDFs are allowed',
     })
     const res = httpMocks.createResponse()
-    await require('./routeHandlers/postFile')(req, res)
+    await require('../src/routeHandlers/postFile')(req, res)
     expect(res.statusCode).toBe(400)
     const data = JSON.parse(res._getData())
     expect(data.error).toEqual(req.fileValidationError)
