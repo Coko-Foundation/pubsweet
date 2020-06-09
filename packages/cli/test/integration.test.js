@@ -29,12 +29,6 @@ const nodeConfig = {
   },
 }
 
-const setupDbOptions = {
-  username: 'someuser',
-  email: 'user@test.com',
-  password: '12345678',
-}
-
 /* These tests run "pubsweet" commands as child processes with no mocking */
 /* They perform a full installation cycle, including multiple yarn commands */
 
@@ -61,21 +55,6 @@ describe('CLI: integration test', () => {
       expect(fs.readdirSync(path.join(appPath, 'config'))).toContain(
         'local.json',
       )
-    })
-  })
-
-  describe('setupdb', () => {
-    it('creates tables', () => {
-      const { stdout, stderr } = runCommandSync({
-        args: 'setupdb',
-        options: setupDbOptions,
-        stdio: 'pipe',
-        cwd: appPath,
-        nodeConfig,
-      })
-
-      console.log(stdout, stderr)
-      expect(stdout).toContain('Finished')
     })
   })
 
