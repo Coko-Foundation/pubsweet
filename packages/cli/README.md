@@ -81,7 +81,7 @@ app. A sample startup script is included in the root directory of the
 
 #### Setting up the database
 
-`pubsweet setupdb` is now deprecated. To setup the database you can now use seeding scripts like the example [here](https://gitlab.coko.foundation/micropublication/micropublication/blob/master/scripts/setupDb.sh).
+`pubsweet setupdb` command is now removed. To setup the database you can now use seeding scripts like the example [here](https://gitlab.coko.foundation/micropublication/micropublication/blob/master/scripts/setupDb.sh).
 
 #### Building your app (`pubsweet build`)
 
@@ -107,4 +107,4 @@ To add or remove a component, install it via `yarn add component-name` (or `yarn
 
 #### Adding a user to the database
 
-`pubsweet adduser` command is now deprecated. To add users to the database you can use seeding scripts like in the example [here](https://gitlab.coko.foundation/micropublication/micropublication/blob/master/scripts/seedUsers.js).
+`pubsweet adduser` command is now removed. To add users to the database you can use seeding scripts like in the example [here](https://gitlab.coko.foundation/micropublication/micropublication/blob/master/scripts/seedUsers.js).
