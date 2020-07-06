@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/base-model",
-  "version": "3.6.3",
+  "version": "3.6.5",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -9,13 +9,13 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.8",
-    "@pubsweet/errors": "^2.0.33",
-    "@pubsweet/logger": "^0.2.43",
-    "knex": "^0.16.3",
+    "knex": "^0.21.1",
+    "@pubsweet/db-manager": "^3.1.10",
+    "@pubsweet/errors": "^2.0.35",
+    "@pubsweet/logger": "^0.2.45",
     "lodash": "^4.17.11",
-    "objection": "^1.5.3",
-    "uuid": "^3.3.2"
+    "objection": "^2.1.6",
+    "uuid": "^7.0.3"
   },
   "peerDependencies": {
     "config": ">=3.0.0",

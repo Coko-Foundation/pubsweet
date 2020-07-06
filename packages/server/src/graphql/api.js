@@ -33,6 +33,8 @@ const api = app => {
       connectors,
       user: req.user,
       loaders: loaders(),
+      req,
+      res,
     }),
     formatError: err => {
       const error = isEmpty(err.originalError) ? err : err.originalError

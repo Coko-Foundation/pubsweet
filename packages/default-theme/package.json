@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/default-theme",
-  "version": "4.1.22",
+  "version": "4.1.24",
   "description": "Default theme for PubSweet apps",
   "main": "src",
   "license": "MIT",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.38](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.37...@pubsweet/component-aws-s3@1.2.38) (2020-05-13)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
+## [1.2.37](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.36...@pubsweet/component-aws-s3@1.2.37) (2020-04-24)
+
+**Note:** Version bump only for package @pubsweet/component-aws-s3
+
+
+
+
+
 ## [1.2.36](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-aws-s3@1.2.35...@pubsweet/component-aws-s3@1.2.36) (2020-04-06)
 
 **Note:** Version bump only for package @pubsweet/component-aws-s3

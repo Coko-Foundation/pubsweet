@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.11.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.10.1...pubsweet-server@13.11.0) (2020-05-13)
+
+
+### Features
+
+* added tests for http req and res in resolver ([934919e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/934919eb5e3e6008e1946aa79aaa2473c7900c37))
+* expose req and res when creating ApolloServer ([e68c79a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/e68c79a4b0c9832f033d7d527ef3b4ab894972a4))
+
+
+
+
+
+## [13.10.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.10.0...pubsweet-server@13.10.1) (2020-04-24)
+
+**Note:** Version bump only for package pubsweet-server
+
+
+
+
+
 # [13.10.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.9.4...pubsweet-server@13.10.0) (2020-04-06)
 
 
