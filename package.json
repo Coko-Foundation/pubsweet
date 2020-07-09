@@ -39,7 +39,7 @@
     "isomorphic-form-data": "^1.0.0",
     "jest": "^24.7.1",
     "jest-cli": "^24.7.1",
-    "jest-styled-components": "ssh://git@github.com:blnoonan/jest-styled-components#bcfadef",
+    "jest-styled-components": "blnoonan/jest-styled-components#bcfadef",
     "lerna": "^3.13.2",
     "lint-staged": "^8.1.5",
     "nock": "^9.0.14",
