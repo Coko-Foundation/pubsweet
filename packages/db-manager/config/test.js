@@ -6,6 +6,7 @@ module.exports = {
     },
     pool: { min: 0, max: 10, idleTimeoutMillis: 1000 },
     ignoreTerminatedConnectionError: true,
+    acquireConnectionTimeout: 5000,
     secret: 'test',
     logger: {
       error: () => false,
