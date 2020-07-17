@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.6.5...@pubsweet/base-model@4.0.0) (2020-07-17)
+
+
+### chore
+
+* **base-model:** upgrade objection.js to a new version ([5a15671](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5a15671df7086c85e165ab0f1cc693f89ddda52b))
+
+
+### BREAKING CHANGES
+
+* **base-model:** Base-model is a thin wrapper around Objection.js, so a major version bump that
+occured in 97b3672fb7306843c3d4dbadc9b4aa57aa548179 means it's a good idea to also bump the major
+version of @pubsweet/base-model.
+
+
+
+
+
 ## [3.6.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/base-model@3.6.4...@pubsweet/base-model@3.6.5) (2020-05-13)
 
 **Note:** Version bump only for package @pubsweet/base-model

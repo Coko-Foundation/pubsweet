@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-sortable-list",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "src/",
   "license": "MIT",
   "dependencies": {
