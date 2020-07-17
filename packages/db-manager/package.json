@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/db-manager",
-  "version": "3.1.10",
+  "version": "3.1.11",
   "description": "Provides database management utilities to Pubsweet apps.",
   "main": "src/index.js",
   "repository": {
@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^14.3.0",
-    "@pubsweet/logger": "^0.2.45",
+    "@pubsweet/logger": "^0.2.46",
     "fs-extra": "^8.1.0",
     "knex": "^0.21.1",
     "lodash": "^4.17.11",

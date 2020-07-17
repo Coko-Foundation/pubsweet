@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.11.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.0...pubsweet-server@13.11.1) (2020-07-17)
+
+
+### Bug Fixes
+
+* **db-manage:** change namespace to fit other exports ([6779b1a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6779b1a92bc31fe7898a3b01d3f9a656af4164e2))
+* **db-manager:** same connection for pubsub and app db ([2887389](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/2887389aceec79fc372d339788d461064d55393a))
+
+
+
+
+
 # [13.11.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.10.1...pubsweet-server@13.11.0) (2020-05-13)
 
 

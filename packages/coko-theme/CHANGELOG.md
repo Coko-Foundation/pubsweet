@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.27...@pubsweet/coko-theme@5.2.0) (2020-07-17)
+
+
+### Bug Fixes
+
+* **ui:** added outline and ghost prop to Button ([bfad0eb](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/bfad0eb547953c258351f4d7cc8840b25c588fbd))
+
+
+### Features
+
+* **ui:** added more props to button component ([6be6d5e](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6be6d5e5d5bd78fda6f16b72092eaa5bc2870f7e))
+
+
+
+
+
 ## [5.1.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/coko-theme@5.1.26...@pubsweet/coko-theme@5.1.27) (2020-05-13)
 
 **Note:** Version bump only for package @pubsweet/coko-theme
