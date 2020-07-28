@@ -6,7 +6,7 @@ const errors = require('@pubsweet/errors')
 
 const config = require('config')
 
-const schema = require('./schema')
+const { getSchema } = require('./schema')
 const connectors = require('../connectors')
 const loaders = require('./loaders')
 
@@ -27,7 +27,7 @@ const extraApolloConfig = config.has('pubsweet-server.apollo')
 const api = app => {
   app.use('/graphql', authBearerAndPublic)
   const server = new ApolloServer({
-    schema,
+    schema: getSchema(),
     context: ({ req, res }) => ({
       helpers,
       connectors,

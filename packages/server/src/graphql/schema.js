@@ -6,13 +6,18 @@ const upload = require('./definitions/upload')
 
 const tryRequireRelative = require('../helpers/tryRequireRelative')
 
-// load base types and resolvers
-const typeDefs = [
-  `type Query, type Mutation, type Subscription`,
-  upload.typeDefs,
-]
+const enableBaseTypesAndResolvers = config.has(
+  'pubsweet-server.apollo.enableBaseTypesAndResolvers',
+)
+  ? config.get('pubsweet-server.apollo.enableBaseTypesAndResolvers')
+  : false
 
-const resolvers = merge({}, upload.resolvers)
+// load base types and resolvers
+const typeDefs = enableBaseTypesAndResolvers
+  ? [`type Query, type Mutation, type Subscription`, upload.typeDefs]
+  : []
+
+const resolvers = enableBaseTypesAndResolvers ? merge({}, upload.resolvers) : {}
 
 // recursively merge in component types and resolvers
 function getSchemaRecursively(componentName) {
@@ -44,4 +49,13 @@ if (config.has('pubsweet-server.resolvers')) {
   merge(resolvers, config.get('pubsweet-server.resolvers'))
 }
 
-module.exports = makeExecutableSchema({ typeDefs, resolvers })
+function getSchema() {
+  return config.has('pubsweet-server.apollo.schemaFactory')
+    ? config.get('pubsweet-server.apollo.schemaFactory')({
+        typeDefs,
+        resolvers,
+      })
+    : makeExecutableSchema({ typeDefs, resolvers })
+}
+
+module.exports = { getSchema }
