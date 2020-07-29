@@ -10,7 +10,7 @@ const enableBaseTypesAndResolvers = config.has(
   'pubsweet-server.apollo.enableBaseTypesAndResolvers',
 )
   ? config.get('pubsweet-server.apollo.enableBaseTypesAndResolvers')
-  : false
+  : true
 
 // load base types and resolvers
 const typeDefs = enableBaseTypesAndResolvers
