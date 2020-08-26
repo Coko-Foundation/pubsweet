@@ -6,7 +6,7 @@ const { SubscriptionServer } = require('subscriptions-transport-ws')
 
 const logger = require('@pubsweet/logger')
 
-const graphqlSchema = require('./schema')
+const { getSchema } = require('./schema')
 const { token } = require('../authentication')
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
 
     SubscriptionServer.create(
       {
-        schema: graphqlSchema,
+        schema: getSchema(),
         execute,
         subscribe,
         onConnect: (connectionParams, webSocket, context) => {
