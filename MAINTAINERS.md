@@ -6,7 +6,4 @@ Here they are in alphabetical order:
 
 - Andrei Cioromila @andrei.cioromila (Thinslices/Hindawi)
 - Audrey Hamelers @audrey (EBI)
-- Jure Triglav @jure (Coko)
-- Peter Hooper @diversemix (eLife)
-
-_This summer. Four keyboards, one mission. No bug is safe, no documentation outdated._
+- Yannis Barlas @yannis (Coko)
