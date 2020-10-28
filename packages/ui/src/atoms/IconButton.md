@@ -13,7 +13,7 @@ A non-primary IconButton
 The size of icon can be changed
 
 ```js
-<IconButton icon="plus" size={4} />
+<IconButton icon="plus" iconsize="5" />
 ```
 
 Button with Text and Icon at the end

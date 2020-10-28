@@ -1,32 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { th } from '@pubsweet/ui-toolkit'
+import { th, override } from '@pubsweet/ui-toolkit'
 import { Button, Icon } from '../atoms'
+
+const UIButton = styled(Button)`
+  ${override('ui.IconButton')};
+`
 
 const UIIcon = styled(Icon)`
   vertical-align: middle;
+  ${override('ui.IconButton.UIIcon')};
 `
 const ButtonTitle = styled.span`
   vertical-align: middle;
+  ${override('ui.IconButton.ButtonTitle')};
 `
 
-const IconButton = ({ icon, children, iconPosition, ...props }) => (
-  <Button {...props}>
+const IconButton = ({ icon, children, iconPosition, iconsize, ...props }) => (
+  <UIButton {...props}>
     {children && iconPosition === 'end' && (
       <ButtonTitle>{children}</ButtonTitle>
     )}
     <UIIcon
       color={props.primary ? th('colorTextReverse') : th('colorPrimary')}
-      size={3}
-      {...props}
+      size={iconsize}
     >
       {icon}{' '}
     </UIIcon>
     {children && iconPosition === 'start' && (
       <ButtonTitle>{children}</ButtonTitle>
     )}
-  </Button>
+  </UIButton>
 )
 
 IconButton.propTypes = {
@@ -38,6 +43,8 @@ IconButton.propTypes = {
   iconPosition: PropTypes.oneOf(['start', 'end']),
   /** Makes button a primary button */
   primary: PropTypes.bool,
+  /** */
+  iconsize: PropTypes.number,
 }
 
 IconButton.defaultProps = {

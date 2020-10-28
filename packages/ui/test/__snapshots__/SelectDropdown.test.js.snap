@@ -51,7 +51,7 @@ exports[`SelectDropdown With costom dropdown indicator 1`] = `
       onTouchEnd={[Function]}
     >
       <div
-        className="react-select__value-container css-86rg1c-ValueContainer"
+        className="react-select__value-container css-tntsk8"
       >
         <div
           className="react-select__placeholder css-1i2t3f2-placeholder"
@@ -205,7 +205,7 @@ exports[`SelectDropdown renders correctly 1`] = `
       onTouchEnd={[Function]}
     >
       <div
-        className="react-select__value-container css-86rg1c-ValueContainer"
+        className="react-select__value-container css-tntsk8"
       >
         <div
           className="react-select__placeholder css-1i2t3f2-placeholder"
