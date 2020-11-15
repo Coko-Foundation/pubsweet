@@ -11,7 +11,6 @@ import { Button, Menu } from '@pubsweet/ui'
 import styled, { css, ThemeProvider } from 'styled-components'
 
 import defaultTheme from '@pubsweet/default-theme'
-import cokoTheme from '@pubsweet/coko-theme'
 import elifeTheme from '../../vendor/elife-theme/src'
 
 import componentStore from './componentStore'
@@ -22,7 +21,6 @@ export const currentTheme = {
 
 export const themes = {
   defaultTheme,
-  cokoTheme,
   elifeTheme,
 }
 

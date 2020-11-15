@@ -12,7 +12,6 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@hapi/joi": "^14.3.1",
-    "@pubsweet/coko-theme": "^5.0.12",
     "@pubsweet/default-theme": "^4.0.12",
     "@pubsweet/ui": "^10.0.4",
     "@pubsweet/ui-toolkit": "^2.1.4",
