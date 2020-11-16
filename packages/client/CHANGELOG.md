@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.2.5...pubsweet-client@10.3.0) (2020-11-16)
+
+
+### Features
+
+* **client:** add env variable to set server url ([1daaf97](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/1daaf97ae8693595aed99f558ff9390b4ae84475))
+
+
+
+
+
 ## [10.2.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-client@10.2.4...pubsweet-client@10.2.5) (2020-07-17)
 
 **Note:** Version bump only for package pubsweet-client

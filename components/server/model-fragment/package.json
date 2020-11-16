@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-fragment",
-  "version": "3.1.16",
+  "version": "3.1.17",
   "description": "A basic Fragment model",
   "main": "src/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/base-model": "^4.0.0",
-    "@pubsweet/model-team": "^4.0.3",
-    "@pubsweet/models": "^0.3.11"
+    "@pubsweet/base-model": "^4.0.1",
+    "@pubsweet/model-team": "^4.0.4",
+    "@pubsweet/models": "^0.3.12"
   },
   "peerDependencies": {
     "pubsweet-server": ">=11.0.0"
