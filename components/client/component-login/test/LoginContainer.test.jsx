@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { MockedProvider } from '@apollo/react-testing'
+import { MockedProvider } from '@apollo/client/testing'
 import { ThemeProvider } from 'styled-components'
 import { MemoryRouter, Route, Switch } from 'react-router-dom'
 

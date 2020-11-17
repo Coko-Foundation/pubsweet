@@ -10,8 +10,8 @@
   "main": "dist",
   "scripts": {
     "build": "babel --delete-dir-on-start --root-mode upward src -d dist --ignore **/*.test.js",
-    "prepare": "yarn run build",
-    "devserver": "yarn webpack serve --config ./dev/webpack.config.js"
+    "devserver": "yarn webpack serve --config ./dev/webpack.config.js",
+    "prepare": "yarn run build"
   },
   "dependencies": {
     "@apollo/client": "^3.2.6",
