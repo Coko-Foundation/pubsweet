@@ -1,8 +1,12 @@
 {
   "name": "pubsweet-server",
   "version": "13.11.2",
-  "author": "Collaborative Knowledge Foundation",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
+  },
   "license": "MIT",
+  "author": "Collaborative Knowledge Foundation",
   "main": "src/index.js",
   "dependencies": {
     "@pubsweet/db-manager": "^3.1.12",
@@ -37,12 +41,11 @@
     "subscriptions-transport-ws": "^0.9.12",
     "waait": "^1.0.2"
   },
+  "devDependencies": {
+    "@apollo/client": "^3.2.7"
+  },
   "peerDependencies": {
     "@pubsweet/model-user": ">=5.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
   },
   "gitHead": "6b100b76f21785e5e50fca082a2743d3d0b1c88a"
 }
