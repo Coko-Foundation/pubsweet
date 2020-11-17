@@ -8,13 +8,12 @@
   "dependencies": {
     "@pubsweet/ui": "^12.6.1",
     "@pubsweet/ui-toolkit": "^2.3.3",
-    "graphql-tag": "^2.10.1",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0"
   },
   "peerDependencies": {
-    "@apollo/react-common": "^3.0.1",
-    "pubsweet-client": ">=9.2.0",
+    "@apollo/client": "^3.2.7",
+    "@pubsweet/client": ">=9.2.0",
     "react": ">=16.9",
     "react-router-dom": "^5.0.0",
     "styled-components": "^4.1.1"
