@@ -12,8 +12,7 @@
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "graphql-tag": ">=2.10.0",
-    "pubsweet-client": ">=1.0.0",
+    "@pubsweet/client": ">=1.0.0",
     "react": ">=16.9",
     "styled-components": ">=4.1.3"
   },
