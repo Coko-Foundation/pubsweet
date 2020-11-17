@@ -1,16 +1,22 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
 import { ThemeProvider } from 'styled-components'
-import { ApolloProvider } from '@apollo/react-components'
-import { ApolloClient } from 'apollo-client'
-import { WebSocketLink } from 'apollo-link-ws'
-import { split, ApolloLink } from 'apollo-link'
-import { getMainDefinition } from 'apollo-utilities'
-import { setContext } from 'apollo-link-context'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createUploadLink } from 'apollo-upload-client'
 import { Normalize } from 'styled-normalize'
+
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+  split,
+} from '@apollo/client'
+import { getMainDefinition } from '@apollo/client/utilities'
+import { setContext } from '@apollo/client/link/context'
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { createUploadLink } from 'apollo-upload-client'
+
 import StyleRoot from '../helpers/StyleRoot'
 
 const serverUrl = process.env.SERVER_URL || window.location.host
@@ -32,6 +38,7 @@ export function stripTypenames(obj) {
   })
   return obj
 }
+
 // Construct an ApolloClient. If a function is passed as the first argument,
 // it will be called with the default client config as an argument, and should
 // return the desired config.
