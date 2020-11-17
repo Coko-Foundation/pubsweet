@@ -2,26 +2,32 @@
   "name": "@pubsweet/styleguide",
   "version": "6.0.4",
   "license": "MIT",
+  "main": "src",
   "files": [
     "src",
     "dist"
   ],
-  "main": "src",
+  "scripts": {
+    "prebuild": "npm run clean && npm run lint",
+    "build": "webpack --progress --profile",
+    "clean": "rimraf dist",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
+  },
   "dependencies": {
-    "@apollo/react-testing": "^3.0.1",
+    "@apollo/client": "^3.2.7",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@hapi/joi": "^14.3.1",
+    "@pubsweet/client": "^10.3.0",
     "@pubsweet/default-theme": "^4.0.12",
     "@pubsweet/ui": "^10.0.4",
     "@pubsweet/ui-toolkit": "^2.1.4",
     "config": "^3.0.1",
     "faker": "^4.1.0",
     "fs-extra": "^8.1.0",
-    "graphql-tag": "^2.10.1",
     "joi-browser": "^13.4.0",
     "lodash": "^4.17.5",
-    "pubsweet-client": "^10.1.0",
     "react": "^16.9.0",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
@@ -44,13 +50,6 @@
     "style-loader": "^0.23.1",
     "stylelint-config-pubsweet": "^0.0.4",
     "webpack-node-externals": "^1.6.0"
-  },
-  "scripts": {
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "webpack --progress --profile"
   },
   "publishConfig": {
     "access": "public"
