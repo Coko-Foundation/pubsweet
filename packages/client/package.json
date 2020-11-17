@@ -1,5 +1,5 @@
 {
-  "name": "pubsweet-client",
+  "name": "@pubsweet/client",
   "version": "10.3.0",
   "repository": {
     "type": "git",
