@@ -11,11 +11,9 @@
     "recompose": "^0.30.0"
   },
   "peerDependencies": {
-    "@apollo/react-components": "^3.0.1",
-    "@apollo/react-hoc": "^3.0.1",
+    "@apollo/client": "^3.2.7",
+    "@pubsweet/client": ">=1.0.0",
     "config": "^3.0.1",
-    "graphql-tag": ">=2.10.0",
-    "pubsweet-client": ">=1.0.0",
     "react": ">=16.9"
   },
   "repository": {
