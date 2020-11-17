@@ -6,7 +6,10 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['./packages/client/dev/*.js'],
+        devDependencies: [
+          './packages/client/dev/*.js',
+          './packages/client/test/**/*',
+        ],
       },
     ],
   },
