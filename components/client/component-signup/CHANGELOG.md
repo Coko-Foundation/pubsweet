@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@3.0.0...pubsweet-component-signup@3.0.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* fix gql imports on login and signup ([7314b30](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/7314b30b885167aa9aec4414b3124ad3452c63f3))
+* fix pubsweet client versions in all packages ([81c202a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/81c202a431f6f5501a3a3d346063ccdaab335d27))
+
+
+
+
+
 # [3.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-signup@2.1.23...pubsweet-component-signup@3.0.0) (2020-11-18)
 
 
