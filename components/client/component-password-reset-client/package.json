@@ -13,7 +13,7 @@
   },
   "peerDependencies": {
     "@apollo/client": "^3.2.7",
-    "@pubsweet/client": ">=9.2.0",
+    "@pubsweet/client": ">=11.0.0",
     "react": ">=16.9",
     "react-router-dom": "^5.0.0",
     "styled-components": "^4.1.1"
