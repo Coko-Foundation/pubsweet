@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.11.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.2...pubsweet-server@13.11.3) (2020-11-18)
+
+
+### Bug Fixes
+
+* **server:** fix apollo test dependencies ([6a26dc1](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6a26dc13fae2b1573a804f2fd65b4d95074a2112))
+
+
+
+
+
 ## [13.11.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.1...pubsweet-server@13.11.2) (2020-11-16)
 
 **Note:** Version bump only for package pubsweet-server

@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "13.11.2",
+  "version": "13.11.3",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"

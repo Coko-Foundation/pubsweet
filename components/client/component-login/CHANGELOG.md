@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.29...pubsweet-component-login@4.0.0) (2020-11-18)
+
+
+### Features
+
+* **component-login:** upgrade to latest apollo client ([fe9abcf](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/fe9abcf7799c0ea39336c9246688b5d82ecb73b8))
+* **component-signup:** upgrade to latest apollo client ([00dd26a](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/00dd26a176491247fc157e1dec369c94a4a89315))
+
+
+### BREAKING CHANGES
+
+* **component-signup:** apollo client major version has changed
+* **component-login:** Major apollo client version changed
+
+
+
+
+
 ## [3.0.29](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-login@3.0.28...pubsweet-component-login@3.0.29) (2020-11-16)
 
 **Note:** Version bump only for package pubsweet-component-login
