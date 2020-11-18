@@ -2433,23 +2433,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@pubsweet/client@^10.3.0":
-  version "11.0.0"
-  dependencies:
-    "@apollo/client" "^3.2.6"
-    "@pubsweet/ui" "^12.6.1"
-    "@pubsweet/ui-toolkit" "^2.3.3"
-    apollo-upload-client "^11.0.0"
-    authsome "^0.1.0"
-    config "^3.0.1"
-    graphql "^14.2.1"
-    isomorphic-fetch "^2.1.1"
-    prop-types "^15.5.8"
-    react "^16.9.0"
-    react-router-dom "^5.0.0"
-    styled-components "^4.1.1"
-    styled-normalize "^8.0.6"
-
 "@pubsweet/ui@^10.0.4":
   version "10.3.10"
   resolved "https://registry.yarnpkg.com/@pubsweet/ui/-/ui-10.3.10.tgz#a59e2d4828f33971183e9c31698b1ab3ef3f0aad"
