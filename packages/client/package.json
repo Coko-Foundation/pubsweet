@@ -37,8 +37,7 @@
     "uuid": "^8.3.1",
     "waait": "^1.0.5",
     "webpack": "^5.5.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^4.2.0"
   },
   "peerDependencies": {
     "pubsweet-server": ">=13.0.0"
