@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.1.12...pubsweet-component-users-manager@4.0.0) (2020-11-18)
+
+
+### Features
+
+* **users-manager:** upgrade apollo client version ([21b5e30](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/21b5e30bce46dcb884666d71424c87d95f59d183))
+
+
+### BREAKING CHANGES
+
+* **users-manager:** apollo client major version changed
+
+
+
+
+
+## [3.1.12](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.1.11...pubsweet-component-users-manager@3.1.12) (2020-11-16)
+
+**Note:** Version bump only for package pubsweet-component-users-manager
+
+
+
+
+
 ## [3.1.11](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-component-users-manager@3.1.10...pubsweet-component-users-manager@3.1.11) (2020-07-17)
 
 **Note:** Version bump only for package pubsweet-component-users-manager

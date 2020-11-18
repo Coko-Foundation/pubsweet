@@ -1,19 +1,18 @@
 {
   "name": "@pubsweet/component-people-picker",
-  "version": "0.1.25",
+  "version": "0.2.0",
   "description": "People Picker component for pubsweet",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^12.6.0",
-    "@pubsweet/ui-toolkit": "^2.3.2",
+    "@pubsweet/ui": "^12.6.1",
+    "@pubsweet/ui-toolkit": "^2.3.3",
     "lodash": "^4.17.11",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "graphql-tag": ">=2.10.0",
-    "pubsweet-client": ">=1.0.0",
+    "@pubsweet/client": ">=1.0.0",
     "react": ">=16.9",
     "styled-components": ">=4.1.3"
   },

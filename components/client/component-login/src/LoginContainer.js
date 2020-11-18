@@ -1,6 +1,6 @@
 import { compose, withState, withHandlers } from 'recompose'
 import { withFormik } from 'formik'
-import { graphql } from '@apollo/react-hoc'
+import { graphql } from '@apollo/client/react/hoc'
 import config from 'config'
 
 import { LOGIN_USER } from './graphql/mutations'

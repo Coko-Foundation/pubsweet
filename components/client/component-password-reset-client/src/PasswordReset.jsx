@@ -5,8 +5,7 @@ import queryString from 'query-string'
 import styled from 'styled-components'
 import { TextField, Button } from '@pubsweet/ui'
 import { th } from '@pubsweet/ui-toolkit'
-import { ApolloConsumer } from '@apollo/react-common'
-import gql from 'graphql-tag'
+import { ApolloConsumer, gql } from '@apollo/client'
 
 const SEND_PASSWORD_RESET_EMAIL = gql`
   mutation($username: String!) {

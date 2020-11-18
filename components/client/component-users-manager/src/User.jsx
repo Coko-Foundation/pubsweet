@@ -1,8 +1,8 @@
 import React from 'react'
 import { CheckboxGroup } from '@pubsweet/ui'
 import config from 'config'
-import gql from 'graphql-tag'
-import { graphql } from '@apollo/react-hoc'
+import { gql } from '@apollo/client'
+import { graphql } from '@apollo/client/react/hoc'
 import { compose } from 'recompose'
 
 const updateTeamMutation = gql`

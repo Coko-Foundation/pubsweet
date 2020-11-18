@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.28...@pubsweet/component-password-reset-client@4.0.0) (2020-11-18)
+
+
+### Features
+
+* **component-password-reset-client:** upgrade to latest apollo client ([42a1927](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/42a19275c387ac4c3e7b564ea2a1e31cd6c03b07))
+
+
+### BREAKING CHANGES
+
+* **component-password-reset-client:** major apollo client version has changed
+
+
+
+
+
+## [3.1.28](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.27...@pubsweet/component-password-reset-client@3.1.28) (2020-11-16)
+
+**Note:** Version bump only for package @pubsweet/component-password-reset-client
+
+
+
+
+
 ## [3.1.27](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-password-reset-client@3.1.26...@pubsweet/component-password-reset-client@3.1.27) (2020-07-17)
 
 **Note:** Version bump only for package @pubsweet/component-password-reset-client

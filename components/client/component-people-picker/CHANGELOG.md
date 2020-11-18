@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.26...@pubsweet/component-people-picker@0.2.0) (2020-11-18)
+
+
+### Features
+
+* **people-picker:** change peer dependency to @pubsweet/client ([6e3ac40](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/6e3ac402c6735f833e4175eedd3cd853c7b59687))
+
+
+
+
+
+## [0.1.26](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.25...@pubsweet/component-people-picker@0.1.26) (2020-11-16)
+
+**Note:** Version bump only for package @pubsweet/component-people-picker
+
+
+
+
+
 ## [0.1.25](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-people-picker@0.1.24...@pubsweet/component-people-picker@0.1.25) (2020-07-17)
 
 **Note:** Version bump only for package @pubsweet/component-people-picker

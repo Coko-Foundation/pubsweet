@@ -5,13 +5,17 @@ const authentication = require('../../src/authentication')
 const { startServer } = require('../../src')
 
 const WebSocket = require('ws')
-const { ApolloClient } = require('apollo-client')
-const { createHttpLink } = require('apollo-link-http')
-const { WebSocketLink } = require('apollo-link-ws')
-const { split } = require('apollo-link')
-const { getMainDefinition } = require('apollo-utilities')
-const { InMemoryCache } = require('apollo-cache-inmemory')
-const gql = require('graphql-tag')
+
+const {
+  ApolloClient,
+  createHttpLink,
+  gql,
+  InMemoryCache,
+  split,
+} = require('@apollo/client')
+const { WebSocketLink } = require('@apollo/client/link/ws')
+const { getMainDefinition } = require('@apollo/client/utilities')
+
 const FormData = require('form-data')
 const fetch = require('node-fetch')
 const wait = require('waait')
