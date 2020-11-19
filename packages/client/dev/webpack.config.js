@@ -35,7 +35,9 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.EnvironmentPlugin({
-      SERVER_URL: 'https://48p1r2roz4.sse.codesandbox.io',
+      SERVER_PROTOCOL: 'http',
+      SERVER_HOST: '48p1r2roz4.sse.codesandbox.io',
+      SERVER_PORT: '80',
     }),
   ],
 }
