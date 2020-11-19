@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/client@11.0.1...@pubsweet/client@11.0.2) (2020-11-19)
+
+
+### Bug Fixes
+
+* **client:** allow client env variables to work for graphql and websockets ([66e5903](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/66e590371f05404c2e2839cb1ade949397d9af88))
+
+
+
+
+
 ## [11.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/client@11.0.0...@pubsweet/client@11.0.1) (2020-11-18)
 
 
