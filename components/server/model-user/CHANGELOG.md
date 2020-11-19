@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.5](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@6.0.4...@pubsweet/model-user@6.0.5) (2020-11-18)
+
+**Note:** Version bump only for package @pubsweet/model-user
+
+
+
+
+
 ## [6.0.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/model-user@6.0.3...@pubsweet/model-user@6.0.4) (2020-11-16)
 
 **Note:** Version bump only for package @pubsweet/model-user

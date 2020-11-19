@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/client@11.0.0...@pubsweet/client@11.0.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* **client:** fix gql import ([f99e2ad](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/f99e2ad4698407577d5fcd6d789d2153a0437e38))
+
+
+
+
+
 # 11.0.0 (2020-11-18)
 
 
