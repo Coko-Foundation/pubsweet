@@ -22,10 +22,20 @@ import StyleRoot from '../helpers/StyleRoot'
 const serverProtocol = process.env.SERVER_PROTOCOL
 const serverHost = process.env.SERVER_HOST
 const serverPort = process.env.SERVER_PORT
+const serverServeClient = process.env.SERVER_SERVE_CLIENT
 
-let serverUrl = `${serverHost}${serverPort ? `:${serverPort}` : ''}`
-const serverUrlWithProtocol = `${serverProtocol}://${serverUrl}`
-if (!serverUrl) serverUrl = window.location.host
+let serverUrl, serverUrlWithProtocol
+
+// can't build a valid url without these two
+if (serverProtocol && serverHost) {
+  serverUrl = `${serverHost}${serverPort ? `:${serverPort}` : ''}`
+  serverUrlWithProtocol = `${serverProtocol}://${serverUrl}`
+}
+
+if (!serverUrl || serverServeClient) {
+  serverUrl = window.location.host
+  serverUrlWithProtocol = `${window.location.protocol}//${serverUrl}`
+}
 
 // See https://github.com/apollographql/apollo-feature-requests/issues/6#issuecomment-465305186
 export function stripTypenames(obj) {
