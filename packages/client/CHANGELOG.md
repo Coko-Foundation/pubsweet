@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/client@11.0.2...@pubsweet/client@11.0.3) (2020-12-21)
+
+
+### Bug Fixes
+
+* **client:** fix building of server url out of variables on the client ([52d57d0](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/52d57d00d48b0af704dee53882f61d8765efdacf))
+
+
+
+
+
 ## [11.0.2](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/client@11.0.1...@pubsweet/client@11.0.2) (2020-11-19)
 
 

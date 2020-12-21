@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.6.4](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.6.3...@pubsweet/ui@12.6.4) (2020-12-21)
+
+**Note:** Version bump only for package @pubsweet/ui
+
+
+
+
+
 ## [12.6.3](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui@12.6.2...@pubsweet/ui@12.6.3) (2020-11-19)
 
 **Note:** Version bump only for package @pubsweet/ui
