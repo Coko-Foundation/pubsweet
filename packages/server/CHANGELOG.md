@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.12.1](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.12.0...pubsweet-server@13.12.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* **server:** remove boss.connect() and expose boss object directly ([99383f4](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/99383f415eb4c62432a68d348f3912e47c498a5e))
+
+
+
+
+
 # [13.12.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.6...pubsweet-server@13.12.0) (2021-02-23)
 
 
