@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.16](https://coko.gitlab.foundation/pubsweet/pubsweet/compare/create-pubsweet-app@0.1.15...create-pubsweet-app@0.1.16) (2021-02-23)
+
+**Note:** Version bump only for package create-pubsweet-app
+
+
+
+
+
 ## [0.1.15](https://coko.gitlab.foundation/pubsweet/pubsweet/compare/create-pubsweet-app@0.1.14...create-pubsweet-app@0.1.15) (2020-12-21)
 
 **Note:** Version bump only for package create-pubsweet-app

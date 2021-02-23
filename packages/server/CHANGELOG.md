@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.12.0](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.6...pubsweet-server@13.12.0) (2021-02-23)
+
+
+### Features
+
+* **server:** upgrade pg-boss to 5.2.0 ([5cc81f6](https://gitlab.coko.foundation/pubsweet/pubsweet/commit/5cc81f6725fafdee694dd15d18638cd0fdbbb538))
+
+
+
+
+
 ## [13.11.6](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/pubsweet-server@13.11.5...pubsweet-server@13.11.6) (2020-12-21)
 
 **Note:** Version bump only for package pubsweet-server
