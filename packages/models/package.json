@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/models",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "description": "A simple package that brings models together",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/logger": "^0.2.49"
+    "@pubsweet/logger": "^0.2.50"
   },
   "publishConfig": {
     "access": "public"
