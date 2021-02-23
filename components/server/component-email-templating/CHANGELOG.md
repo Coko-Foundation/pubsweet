@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.3.7...@pubsweet/component-email-templating@0.3.8) (2021-02-23)
+
+**Note:** Version bump only for package @pubsweet/component-email-templating
+
+
+
+
+
 ## [0.3.7](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/component-email-templating@0.3.6...@pubsweet/component-email-templating@0.3.7) (2020-12-21)
 
 **Note:** Version bump only for package @pubsweet/component-email-templating
