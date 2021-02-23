@@ -36,7 +36,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
-    "pg-boss": "^3.1.2",
+    "pg-boss": "^5.2.0",
     "pubsweet-sse": "^1.0.44",
     "subscriptions-transport-ws": "^0.9.12",
     "waait": "^1.0.2"
