@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/client",
-  "version": "11.0.4",
+  "version": "11.0.5",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.6",
-    "@pubsweet/ui": "^12.6.5",
-    "@pubsweet/ui-toolkit": "^2.3.7",
+    "@pubsweet/ui": "^12.6.6",
+    "@pubsweet/ui-toolkit": "^2.3.8",
     "apollo-upload-client": "^11.0.0",
     "authsome": "^0.1.0",
     "config": "^3.0.1",
