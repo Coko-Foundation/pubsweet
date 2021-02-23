@@ -39,41 +39,34 @@ boss.on('error', async error => {
       started = false
       await boss.stop()
     }
-    if (connected) {
-      connected = false
-      await boss.disconnect()
-    }
+    // if (connected) {
+    //   connected = false
+    //   await boss.disconnect()
+    // }
   }
 })
 
 // 'Start' is for queue maintainers (i.e. pubsweet-server)
 let started = false
 // 'Connect' is for queue observers (e.g. a job worker)
-let connected = false
+// let connected = false
+
+const start = async () => {
+  if (started) return boss
+
+  await boss.start()
+  started = true
+  // connected = true
+  return boss
+}
 
 module.exports = {
-  startJobQueue: async () => {
-    if (started) {
-      return boss
-    }
-
-    await boss.start()
-    started = true
-    connected = true
-    return boss
-  },
+  boss,
+  startJobQueue: start,
   stopJobQueue: async () => {
     await boss.stop()
     started = false
-    connected = false
+    // connected = false
   },
-  connectToJobQueue: async () => {
-    if (connected) {
-      return boss
-    }
-
-    await boss.connect()
-    connected = true
-    return boss
-  },
+  connectToJobQueue: start,
 }
