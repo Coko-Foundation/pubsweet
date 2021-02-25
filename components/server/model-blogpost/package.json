@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/model-blogpost",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/model-fragment": "^3.1.22"
+    "@pubsweet/model-fragment": "^3.1.23"
   },
   "publishConfig": {
     "access": "public"

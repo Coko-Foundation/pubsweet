@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-server",
-  "version": "13.12.1",
+  "version": "13.12.2",
   "repository": {
     "type": "git",
     "url": "https://gitlab.coko.foundation/pubsweet/pubsweet"
@@ -9,10 +9,10 @@
   "author": "Collaborative Knowledge Foundation",
   "main": "src/index.js",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.17",
-    "@pubsweet/errors": "^2.0.42",
-    "@pubsweet/logger": "^0.2.52",
-    "@pubsweet/models": "^0.3.17",
+    "@pubsweet/db-manager": "^3.1.18",
+    "@pubsweet/errors": "^2.0.43",
+    "@pubsweet/logger": "^0.2.53",
+    "@pubsweet/models": "^0.3.18",
     "apollo-server-express": "^2.4.8",
     "authsome": "^0.1.0",
     "body-parser": "^1.15.2",
@@ -37,7 +37,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-boss": "^5.2.0",
-    "pubsweet-sse": "^1.0.46",
+    "pubsweet-sse": "^1.0.47",
     "subscriptions-transport-ws": "^0.9.12",
     "waait": "^1.0.2"
   },

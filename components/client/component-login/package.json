@@ -1,6 +1,6 @@
 {
   "name": "pubsweet-component-login",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Basic login component for PubSweet",
   "repository": {
     "type": "git",
@@ -11,8 +11,8 @@
   "author": "Collaborative Knowledge Foundation",
   "main": "src/index.js",
   "dependencies": {
-    "@pubsweet/ui": "^12.6.6",
-    "@pubsweet/ui-toolkit": "^2.3.8",
+    "@pubsweet/ui": "^12.6.7",
+    "@pubsweet/ui-toolkit": "^2.3.9",
     "formik": "^1.3.0",
     "prop-types": "^15.5.10",
     "react-router-dom": "^5.0.0",

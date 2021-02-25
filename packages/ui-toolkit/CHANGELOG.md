@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.9](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.3.8...@pubsweet/ui-toolkit@2.3.9) (2021-02-25)
+
+**Note:** Version bump only for package @pubsweet/ui-toolkit
+
+
+
+
+
 ## [2.3.8](https://gitlab.coko.foundation/pubsweet/pubsweet/compare/@pubsweet/ui-toolkit@2.3.7...@pubsweet/ui-toolkit@2.3.8) (2021-02-23)
 
 **Note:** Version bump only for package @pubsweet/ui-toolkit
