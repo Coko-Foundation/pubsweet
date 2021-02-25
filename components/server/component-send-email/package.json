@@ -9,7 +9,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "nodemailer": "^4.4.2"
+    "nodemailer": "^6.4.18"
   },
   "peerDependencies": {
     "@pubsweet/logger": ">=0.0.1",
