@@ -1,13 +1,13 @@
 {
   "name": "@pubsweet/component-people-picker",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "People Picker component for pubsweet",
   "main": "src/index.js",
   "author": "Collaborative Knowledge Foundation",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/ui": "^12.6.6",
-    "@pubsweet/ui-toolkit": "^2.3.8",
+    "@pubsweet/ui": "^12.6.7",
+    "@pubsweet/ui-toolkit": "^2.3.9",
     "lodash": "^4.17.11",
     "prop-types": "^15.5.10"
   },

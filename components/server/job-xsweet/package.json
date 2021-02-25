@@ -1,6 +1,6 @@
 {
   "name": "@pubsweet/job-xsweet",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "PubSweet job component for running XSweet",
   "main": "src/index.js",
   "scripts": {
@@ -9,11 +9,11 @@
   "author": "Adam Hyde",
   "license": "MIT",
   "dependencies": {
-    "@pubsweet/db-manager": "^3.1.17",
-    "@pubsweet/logger": "^0.2.52",
+    "@pubsweet/db-manager": "^3.1.18",
+    "@pubsweet/logger": "^0.2.53",
     "express-fileupload": "v1.1.1-alpha.2",
     "node-wait-for-it": "^0.2.0",
-    "pubsweet-server": "^13.12.1",
+    "pubsweet-server": "^13.12.2",
     "tmp-promise": "^2.0.0",
     "waait": "^1.0.5"
   },
