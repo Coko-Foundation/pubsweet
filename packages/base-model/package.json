@@ -12,7 +12,7 @@
     "@pubsweet/db-manager": "^3.1.18",
     "@pubsweet/errors": "^2.0.43",
     "@pubsweet/logger": "^0.2.53",
-    "knex": "^0.21.1",
+    "knex": "^2.4.0",
     "lodash": "^4.17.11",
     "objection": "^2.1.6",
     "uuid": "^7.0.3"
