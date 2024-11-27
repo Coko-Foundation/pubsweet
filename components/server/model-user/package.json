@@ -13,7 +13,7 @@
     "@pubsweet/errors": "^2.0.43",
     "@pubsweet/logger": "^0.2.53",
     "@pubsweet/models": "^0.3.18",
-    "bcrypt": "^3.0.6"
+    "bcrypt": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"
